@@ -451,13 +451,13 @@ public:
     void  setMerits(uint8 numPoints);
 
     uint16 getSpentJobPoints();
-    uint8  getJobPointLevel(uint16 jpType);
+    auto   getJobPointLevel(uint16 jpType) const -> uint8;
     void   setJobPoints(uint16 amount);
     void   addJobPoints(uint8 jobID, uint16 amount);
     void   delJobPoints(uint8 jobID, uint16 amount);
     uint16 getJobPoints(JOBTYPE jobID);
     void   setCapacityPoints(uint16 amount);
-    void   masterJob();
+    void   masterJob() const;
 
     uint32 getGil();
     void   addGil(int32 gil);
@@ -817,7 +817,7 @@ public:
     auto  getAttachments() -> sol::table;
     void  setAttachment(uint8 attachmentItemID, uint8 slotID);
     void  updateAttachments();
-    void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    void  reduceBurden(float percentReduction, sol::object const& intReductionObj) const;
     bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;

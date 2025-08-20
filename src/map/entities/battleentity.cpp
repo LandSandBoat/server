@@ -37,6 +37,8 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
+#include "enums/job_point_type.h"
+#include "enums/merit_type.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
@@ -1067,10 +1069,9 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             ACC += this->getMod(Mod::TANDEM_STRIKE_POWER);
         }
 
-        auto* PChar = dynamic_cast<CCharEntity*>(this);
-        if (PChar)
+        if (const auto* PChar = dynamic_cast<CCharEntity*>(this))
         {
-            ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
+            ACC += PChar->PMeritPoints->GetMeritValue(MeritType::Accuracy, PChar);
         }
 
         ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
@@ -2538,9 +2539,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         float attBonus = 1.0f;
                         if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
                         {
-                            auto*  PChar        = static_cast<CCharEntity*>(PTarget);
-                            uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2;
-                            uint16 targetDex    = PTarget->DEX();
+                            const auto*  PChar        = static_cast<CCharEntity*>(PTarget);
+                            const uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JobPointType::CounterstanceEffect) * 2;
+                            const uint16 targetDex    = PTarget->DEX();
 
                             attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
@@ -2711,7 +2712,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         // if zanshin procs, add a new zanshin based attack.
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
-            uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
+            uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MeritType::ZanshinAttackRate);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
             if ((((actionTarget.reaction & REACTION::MISS) != REACTION::NONE || (actionTarget.reaction & REACTION::GUARDED) != REACTION::NONE || actionTarget.spikesEffect == SUBEFFECT_COUNTER) &&

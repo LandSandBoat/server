@@ -50,6 +50,8 @@
 #include "ai/controllers/pet_controller.h"
 #include "ai/states/ability_state.h"
 
+#include "enums/job_point_type.h"
+#include "enums/merit_type.h"
 #include "mob_modifier.h"
 #include "packets/char_abilities.h"
 #include "packets/char_status.h"
@@ -426,7 +428,7 @@ namespace petutils
         tempSkills.elemental       = amaSkill;
         tempSkills.dark            = amaSkill;
 
-        int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PMaster);
+        int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MeritType::AutomatonSkills, PMaster);
 
         // If skill rank is 0, merit bonus needs to be added to be displayed like retail does
         if (puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED, mlvl) == 0)
@@ -875,16 +877,16 @@ namespace petutils
         if (PMaster->objtype == TYPE_PC)
         {
             CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-            PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ATTACK, PChar));
-            PPet->addModifier(Mod::ATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ATTACK, PChar));
-            PPet->addModifier(Mod::MACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ACCURACY, PChar));
-            PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ACCURACY, PChar));
+            PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MeritType::AvatarMagicalAttack, PChar));
+            PPet->addModifier(Mod::ATT, PChar->PMeritPoints->GetMeritValue(MeritType::AvatarPhysicalAttack, PChar));
+            PPet->addModifier(Mod::MACC, PChar->PMeritPoints->GetMeritValue(MeritType::AvatarMagicalAccuracy, PChar));
+            PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MeritType::AvatarPhysicalAccuracy, PChar));
 
-            PPet->addModifier(Mod::ACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_ACC_BONUS));
-            PPet->addModifier(Mod::MACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_ACC_BONUS));
-            PPet->addModifier(Mod::ATT, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_PHYS_ATK_BONUS) * 2);
-            PPet->addModifier(Mod::MAGIC_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_DMG_BONUS) * 5);
-            PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
+            PPet->addModifier(Mod::ACC, PChar->PJobPoints->GetJobPointValue(JobPointType::SummonAccBonus));
+            PPet->addModifier(Mod::MACC, PChar->PJobPoints->GetJobPointValue(JobPointType::SummonMagicAccBonus));
+            PPet->addModifier(Mod::ATT, PChar->PJobPoints->GetJobPointValue(JobPointType::SummonPhysAtkBonus) * 2);
+            PPet->addModifier(Mod::MAGIC_DAMAGE, PChar->PJobPoints->GetJobPointValue(JobPointType::SummonMagicDmgBonus) * 5);
+            PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JobPointType::BloodPactDmgBonus) * 3);
         }
 
         // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
@@ -942,7 +944,7 @@ namespace petutils
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)
         {
-            uint8 jpValue = static_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JP_WYVERN_MAX_HP_BONUS);
+            uint8 jpValue = static_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JobPointType::WyvernMaxHpBonus);
             if (jpValue > 0)
             {
                 PPet->addModifier(Mod::HP, jpValue * 10);
@@ -986,7 +988,7 @@ namespace petutils
 
         // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
         CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-        highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
+        highestLvl += PChar->PMeritPoints->GetMeritValue(MeritType::BeastAffinity, PChar);
 
         // And cap it to the master's level or weapon ilvl, whichever is greater
         auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
@@ -1070,13 +1072,13 @@ namespace petutils
             {
                 if (PMaster->objtype == TYPE_PC)
                 {
-                    PPet->addModifier(Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                    PPet->addModifier(Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                    PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                    PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                    PPet->addModifier(Mod::RACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                    PPet->addModifier(Mod::EVA, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                    PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                    PPet->addModifier(Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MeritType::Optimization, PChar));
+                    PPet->addModifier(Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MeritType::Optimization, PChar));
+                    PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MeritType::Optimization, PChar));
+                    PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MeritType::FineTuning, PChar));
+                    PPet->addModifier(Mod::RACC, PChar->PMeritPoints->GetMeritValue(MeritType::FineTuning, PChar));
+                    PPet->addModifier(Mod::EVA, PChar->PMeritPoints->GetMeritValue(MeritType::FineTuning, PChar));
+                    PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MeritType::FineTuning, PChar));
                 }
 
                 FinalizePetStatistics(PMaster, PAutomaton);
@@ -1091,7 +1093,7 @@ namespace petutils
 
         if (PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_BOLSTER))
         {
-            uint8 bolsterJPVal = dynamic_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JP_BOLSTER_EFFECT);
+            uint8 bolsterJPVal = dynamic_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JobPointType::BolsterEffect);
             PPet->health.maxhp += (uint32)floor(PPet->health.maxhp * (0.03 * bolsterJPVal));
         }
 

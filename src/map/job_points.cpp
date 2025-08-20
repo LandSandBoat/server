@@ -22,7 +22,35 @@
 
 #include "map_engine.h"
 #include "packets/char_spells.h"
+#include "spell.h"
 #include "utils/charutils.h"
+
+namespace
+{
+    uint8 categoryStart = 0x020;
+    uint8 categoryCount = 22;
+
+    auto JobPointsCategoryByJobId = [](const uint8 jobId) -> uint16
+    {
+        return categoryStart * jobId;
+    };
+
+    auto JobPointsCategoryIndexByJpType = [](JobPointType jpType) -> uint16
+    {
+        return static_cast<uint16>(jpType) >> 5;
+    };
+
+    auto JobPointTypeIndex = [](JobPointType id) -> uint16
+    {
+        return static_cast<uint16>(id) & 0x1F;
+    };
+
+    auto JobPointCost = [](const uint16 value) -> uint16
+    {
+        return (value + 1) % 21;
+    };
+
+} // namespace
 
 CJobPoints::CJobPoints(CCharEntity* PChar)
 {
@@ -32,45 +60,41 @@ CJobPoints::CJobPoints(CCharEntity* PChar)
 
 void CJobPoints::LoadJobPoints()
 {
-    if (
-        _sql->Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
-                    "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
-                    "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
-                    m_PChar->id) != SQL_ERROR)
+    const auto query = "SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
+                       "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
+                       "FROM char_job_points WHERE charid = ? ORDER BY jobid ASC";
+
+    const auto rset = db::preparedStmt(query, m_PChar->id);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        for (uint64 i = 0; i < _sql->NumRows(); i++)
+        const auto   jobId       = rset->get<uint16>("jobid");
+        const uint16 jobCategory = JobPointsCategoryByJobId(jobId);
+        JobPoints_t  currentJob  = {};
+
+        currentJob.jobId          = jobId;
+        currentJob.jobCategory    = jobCategory;
+        currentJob.capacityPoints = rset->get<uint16>("capacity_points");
+        currentJob.currentJp      = rset->get<uint16>("job_points");
+        currentJob.totalJpSpent   = rset->get<uint16>("job_points_spent");
+
+        for (uint8 j = 0; j < jpTypePerCategory; j++)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
-            {
-                uint32      jobId       = _sql->GetUIntData(1);
-                uint16      jobCategory = JobPointsCategoryByJobId(jobId);
-                JobPoints_t currentJob  = {};
-
-                currentJob.jobId          = jobId;
-                currentJob.jobCategory    = jobCategory;
-                currentJob.capacityPoints = _sql->GetUIntData(2);
-                currentJob.currentJp      = _sql->GetUIntData(3);
-                currentJob.totalJpSpent   = _sql->GetUIntData(4);
-
-                for (uint8 j = 0; j < JOBPOINTS_JPTYPE_PER_CATEGORY; j++)
-                {
-                    JobPointType_t currentType = {};
-                    currentType.id             = currentJob.jobCategory + j;
-                    currentType.value          = _sql->GetUIntData(JOBPOINTS_SQL_COLUMN_OFFSET + j);
-                    std::memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
-                }
-
-                std::memcpy(&m_jobPoints[jobId], &currentJob, sizeof(JobPoints_t));
-            }
+            JobPointType_t currentType = {};
+            currentType.id             = currentJob.jobCategory + j;
+            std::string columnName     = fmt::format("jptype{}", j);
+            currentType.value          = rset->get<uint8>(columnName);
+            std::memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
         }
+
+        std::memcpy(&m_jobPoints[jobId], &currentJob, sizeof(JobPoints_t));
     }
 }
 
-bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
+auto CJobPoints::IsJobPointExist(const JobPointType jpType) const -> bool
 {
-    if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) ||
-        (JobPointsCategoryIndexByJpType(jpType) - 1 > JOBPOINTS_CATEGORY_COUNT) ||
-        (JobPointTypeIndex(jpType) > JOBPOINTS_JPTYPE_PER_CATEGORY))
+    if ((static_cast<uint16>(jpType) < categoryStart) ||
+        (JobPointsCategoryIndexByJpType(jpType) - 1 > categoryCount) ||
+        (JobPointTypeIndex(jpType) > jpTypePerCategory))
     {
         return false;
     }
@@ -78,7 +102,7 @@ bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
     return true;
 }
 
-JobPoints_t* CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointsByType(const JobPointType jpType) -> JobPoints_t*
 {
     if (IsJobPointExist(jpType))
     {
@@ -88,7 +112,7 @@ JobPoints_t* CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jpType)
     return nullptr;
 }
 
-JobPointType_t* CJobPoints::GetJobPointType(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointType(const JobPointType jpType) -> JobPointType_t*
 {
     if (IsJobPointExist(jpType))
     {
@@ -98,12 +122,12 @@ JobPointType_t* CJobPoints::GetJobPointType(JOBPOINT_TYPE jpType)
     return nullptr;
 }
 
-void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
+void CJobPoints::RaiseJobPoint(const JobPointType jpType)
 {
     JobPoints_t*    job      = GetJobPointsByType(jpType);
     JobPointType_t* jobPoint = GetJobPointType(jpType);
 
-    uint8 cost = JobPointCost(jobPoint->value);
+    const uint8 cost = JobPointCost(jobPoint->value);
 
     if (cost != 0 && job->currentJp >= cost)
     {
@@ -111,26 +135,30 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         job->totalJpSpent += cost;
         jobPoint->value++;
 
-        _sql->Query("UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
-                    JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
+        const auto updateQuery = fmt::format("UPDATE char_job_points "
+                                             "SET jptype{} = ?, job_points = ?, job_points_spent = ? "
+                                             "WHERE charid = ? AND jobid = ?",
+                                             JobPointTypeIndex(static_cast<JobPointType>(jobPoint->id)));
+        db::preparedStmt(updateQuery, jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);
     }
 }
 
-uint16 CJobPoints::GetJobPoints()
+auto CJobPoints::GetJobPoints() const -> uint16
 {
     return m_jobPoints[m_PChar->GetMJob()].currentJp;
 }
 
-uint16 CJobPoints::GetJobPointsByJob(uint8 jobID)
+auto CJobPoints::GetJobPointsByJob(uint8 jobID) const -> uint16
 {
-    const char* Query = "SELECT job_points FROM char_job_points WHERE charid='%u' AND jobid='%u'";
-    int         ret   = _sql->Query(Query, m_PChar->id, jobID);
-
-    if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
+    const auto query = "SELECT job_points "
+                       "FROM char_job_points "
+                       "WHERE charid = ? AND jobid = ?";
+    const auto rset  = db::preparedStmt(query, m_PChar->id, jobID);
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        return _sql->GetUIntData(0);
+        return rset->get<uint16>("job_points");
     }
 
     return 0;
@@ -138,11 +166,13 @@ uint16 CJobPoints::GetJobPointsByJob(uint8 jobID)
 
 void CJobPoints::SetJobPoints(int16 amount)
 {
-    uint8 currentJob = static_cast<uint8>(m_PChar->GetMJob());
+    uint8 currentJob = m_PChar->GetMJob();
     amount           = std::clamp<int16>(amount, 0, 500);
 
-    _sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
-                m_PChar->id, currentJob, amount, amount);
+    const auto insertQuery = "INSERT INTO char_job_points "
+                             "SET charid = ?, jobid = ?, job_points = ? "
+                             "ON DUPLICATE KEY UPDATE job_points = ?";
+    db::preparedStmt(insertQuery, m_PChar->id, currentJob, amount, amount);
 
     LoadJobPoints();
 }
@@ -154,9 +184,9 @@ void CJobPoints::AddJobPoints(uint8 jobID, uint16 amount)
         ShowDebug("Attempt to adjust job points for an invalid job for (%s).", m_PChar->getName());
         return;
     }
-    amount = std::clamp<int16>(amount, 0, 500);
-    _sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%d' ON DUPLICATE KEY UPDATE job_points=job_points +'%d'",
-                m_PChar->id, jobID, amount, amount);
+    amount              = std::clamp<int16>(amount, 0, 500);
+    const auto addQuery = "INSERT INTO char_job_points SET charid=?, jobid=?, job_points=? ON DUPLICATE KEY UPDATE job_points=job_points+?";
+    db::preparedStmt(addQuery, m_PChar->id, jobID, amount, amount);
 
     LoadJobPoints();
 }
@@ -171,26 +201,26 @@ void CJobPoints::DelJobPoints(uint8 jobID, int16 amount)
         return;
     }
 
-    _sql->Query("UPDATE char_job_points SET job_points='%u' WHERE charid='%u' AND jobid='%u'",
-                currentAmount - amount, m_PChar->id, jobID);
+    const auto updateQuery = "UPDATE char_job_points SET job_points=? WHERE charid=? AND jobid=?";
+    db::preparedStmt(updateQuery, currentAmount - amount, m_PChar->id, jobID);
 
     LoadJobPoints();
 }
 
-uint16 CJobPoints::GetJobPointsSpent()
+auto CJobPoints::GetJobPointsSpent() const -> uint16
 {
     return m_jobPoints[m_PChar->GetMJob()].totalJpSpent;
 }
 
-JobPoints_t* CJobPoints::GetAllJobPoints()
+auto CJobPoints::GetAllJobPoints() -> JobPoints_t*
 {
     return m_jobPoints;
 }
 
-bool CJobPoints::AddCapacityPoints(uint16 amount)
+auto CJobPoints::AddCapacityPoints(const uint16 amount) -> bool
 {
-    uint32 adjustedCapacity = m_jobPoints[m_PChar->GetMJob()].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
-    uint16 currentJobPoints = this->GetJobPoints();
+    const uint32 adjustedCapacity = m_jobPoints[m_PChar->GetMJob()].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
+    const uint16 currentJobPoints = this->GetJobPoints();
 
     if (adjustedCapacity >= 30000)
     {
@@ -201,7 +231,7 @@ bool CJobPoints::AddCapacityPoints(uint16 amount)
             return false;
         }
 
-        uint16 jobPoints = std::min((int)(currentJobPoints + adjustedCapacity / 30000), 500);
+        const uint16 jobPoints = std::min(static_cast<int>(currentJobPoints + adjustedCapacity / 30000), 500);
 
         this->SetCapacityPoints(adjustedCapacity % 30000);
 
@@ -219,7 +249,7 @@ bool CJobPoints::AddCapacityPoints(uint16 amount)
     return false;
 }
 
-uint32 CJobPoints::GetCapacityPoints()
+auto CJobPoints::GetCapacityPoints() const -> uint32
 {
     return m_jobPoints[m_PChar->GetMJob()].capacityPoints;
 }
@@ -230,11 +260,11 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
     amount                                 = std::clamp<int16>(amount, 0, 30000);
     m_jobPoints[currentJob].capacityPoints = amount;
 
-    _sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
-                m_PChar->id, currentJob, amount, amount);
+    const auto insertCapQuery = "INSERT INTO char_job_points SET charid=?, jobid=?, capacity_points=? ON DUPLICATE KEY UPDATE capacity_points=?";
+    db::preparedStmt(insertCapQuery, m_PChar->id, currentJob, amount, amount);
 }
 
-uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointValue(const JobPointType jpType) -> uint8
 {
     if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
     {
@@ -244,32 +274,41 @@ uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
     return 0;
 }
 
+auto JobPointType_t::cost() const -> uint8
+{
+    return (value + 1) % 21;
+}
+
+auto JobPointType_t::format() const -> uint8
+{
+    return (value << 2);
+}
+
 namespace jobpointutils
 {
     std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE] = {};
 
     void LoadGifts()
     {
-        if (_sql->Query("SELECT jobid, jp_needed, modid, value FROM job_point_gifts ORDER BY jp_needed ASC") != SQL_ERROR)
+        const auto query = "SELECT jobid, jp_needed, modid, value FROM job_point_gifts ORDER BY jp_needed ASC";
+        const auto rset  = db::preparedStmt(query);
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                JobPointGifts_t gift = {};
+            JobPointGifts_t gift = {};
 
-                uint8 jobId     = _sql->GetUIntData(0);
-                gift.jpRequired = _sql->GetUIntData(1);
-                gift.modId      = _sql->GetUIntData(2);
-                gift.value      = _sql->GetUIntData(3);
+            const uint8 jobId = rset->get<uint8>("jobid");
+            gift.jpRequired   = rset->get<uint32>("jp_needed");
+            gift.modId        = rset->get<uint32>("modid");
+            gift.value        = rset->get<uint32>("value");
 
-                jpGifts[jobId].emplace_back(gift);
-            }
+            jpGifts[jobId].emplace_back(gift);
         }
     }
 
     void RefreshGiftMods(CCharEntity* PChar)
     {
-        uint16 totalJpSpent = PChar->PJobPoints->GetJobPointsSpent();
-        uint8  jobId        = static_cast<uint8>(PChar->GetMJob());
+        const uint16 totalJpSpent = PChar->PJobPoints->GetJobPointsSpent();
+        const uint8  jobId        = static_cast<uint8>(PChar->GetMJob());
 
         auto* currentGifts = &PChar->PJobPoints->current_gifts;
         if (!currentGifts->empty())
@@ -295,7 +334,7 @@ namespace jobpointutils
         switch (jobId)
         {
             case JOB_BLM:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_VI))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Fire_VI)))
                 {
                     for (const SpellID elementalSpell : { SpellID::Fire_VI,
                                                           SpellID::Blizzard_VI,
@@ -304,32 +343,32 @@ namespace jobpointutils
                                                           SpellID::Thunder_VI,
                                                           SpellID::Water_VI })
                     {
-                        charutils::addSpell(PChar, (uint16)elementalSpell);
-                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                        charutils::addSpell(PChar, static_cast<uint16>(elementalSpell));
+                        charutils::SaveSpell(PChar, static_cast<uint16>(elementalSpell));
                     }
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Aspir_III))
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Aspir_III)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Aspir_III);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Aspir_III);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Aspir_III));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Aspir_III));
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Death))
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Death)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Death);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Death);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Death));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Death));
 
                     sendUpdate = true;
                 }
                 break;
 
             case JOB_BRD:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_Threnody_II))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Fire_Threnody_II)))
                 {
                     for (const SpellID threnodySpell : { SpellID::Fire_Threnody_II,
                                                          SpellID::Ice_Threnody_II,
@@ -340,8 +379,8 @@ namespace jobpointutils
                                                          SpellID::Light_Threnody_II,
                                                          SpellID::Dark_Threnody_II })
                     {
-                        charutils::addSpell(PChar, (uint16)threnodySpell);
-                        charutils::SaveSpell(PChar, (uint16)threnodySpell);
+                        charutils::addSpell(PChar, static_cast<uint16>(threnodySpell));
+                        charutils::SaveSpell(PChar, static_cast<uint16>(threnodySpell));
                     }
 
                     sendUpdate = true;
@@ -349,18 +388,18 @@ namespace jobpointutils
                 break;
 
             case JOB_DRK:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Endark_II))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Endark_II)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Endark_II);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Endark_II);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Endark_II));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Endark_II));
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Drain_III))
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Drain_III)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Drain_III);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Drain_III);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Drain_III));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Drain_III));
 
                     sendUpdate = true;
                 }
@@ -376,7 +415,7 @@ namespace jobpointutils
                                                           SpellID::Thunder_V,
                                                           SpellID::Water_V })
                     {
-                        uint16 spellIdNum = static_cast<uint16>(elementalSpell);
+                        const uint16 spellIdNum = static_cast<uint16>(elementalSpell);
 
                         if (!charutils::hasSpell(PChar, spellIdNum))
                         {
@@ -388,15 +427,15 @@ namespace jobpointutils
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Aspir_III))
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Aspir_III)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Aspir_III);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Aspir_III);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Aspir_III));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Aspir_III));
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Fira_III))
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Fira_III)))
                 {
                     for (const SpellID elementalSpell : { SpellID::Fira_III,
                                                           SpellID::Blizzara_III,
@@ -405,8 +444,8 @@ namespace jobpointutils
                                                           SpellID::Thundara_III,
                                                           SpellID::Watera_III })
                     {
-                        charutils::addSpell(PChar, (uint16)elementalSpell);
-                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                        charutils::addSpell(PChar, static_cast<uint16>(elementalSpell));
+                        charutils::SaveSpell(PChar, static_cast<uint16>(elementalSpell));
                     }
 
                     sendUpdate = true;
@@ -414,20 +453,20 @@ namespace jobpointutils
                 break;
 
             case JOB_NIN:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Utsusemi_San))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Utsusemi_San)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Utsusemi_San);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Utsusemi_San);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Utsusemi_San));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Utsusemi_San));
 
                     sendUpdate = true;
                 }
                 break;
 
             case JOB_PLD:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Enlight_II))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Enlight_II)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Enlight_II);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Enlight_II);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Enlight_II));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Enlight_II));
 
                     sendUpdate = true;
                 }
@@ -455,26 +494,26 @@ namespace jobpointutils
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Addle_II))
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Addle_II)))
                 {
                     for (const SpellID enfeeblingSpell : { SpellID::Addle_II,
                                                            SpellID::Distract_III,
                                                            SpellID::Frazzle_III })
                     {
-                        charutils::addSpell(PChar, (uint16)enfeeblingSpell);
-                        charutils::SaveSpell(PChar, (uint16)enfeeblingSpell);
+                        charutils::addSpell(PChar, static_cast<uint16>(enfeeblingSpell));
+                        charutils::SaveSpell(PChar, static_cast<uint16>(enfeeblingSpell));
                     }
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Refresh_III))
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Refresh_III)))
                 {
                     for (const SpellID enfeeblingSpell : { SpellID::Refresh_III,
                                                            SpellID::Temper_II })
                     {
-                        charutils::addSpell(PChar, (uint16)enfeeblingSpell);
-                        charutils::SaveSpell(PChar, (uint16)enfeeblingSpell);
+                        charutils::addSpell(PChar, static_cast<uint16>(enfeeblingSpell));
+                        charutils::SaveSpell(PChar, static_cast<uint16>(enfeeblingSpell));
                     }
 
                     sendUpdate = true;
@@ -482,28 +521,28 @@ namespace jobpointutils
                 break;
 
             case JOB_RUN:
-                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Temper))
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Temper)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Temper);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Temper);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Temper));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Temper));
 
                     sendUpdate = true;
                 }
                 break;
 
             case JOB_WHM:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Reraise_IV))
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Reraise_IV)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Reraise_IV);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Reraise_IV);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Reraise_IV));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Reraise_IV));
 
                     sendUpdate = true;
                 }
 
-                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Full_Cure))
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, static_cast<uint16>(SpellID::Full_Cure)))
                 {
-                    charutils::addSpell(PChar, (uint16)SpellID::Full_Cure);
-                    charutils::SaveSpell(PChar, (uint16)SpellID::Full_Cure);
+                    charutils::addSpell(PChar, static_cast<uint16>(SpellID::Full_Cure));
+                    charutils::SaveSpell(PChar, static_cast<uint16>(SpellID::Full_Cure));
 
                     sendUpdate = true;
                 }

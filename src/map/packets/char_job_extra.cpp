@@ -26,6 +26,7 @@
 
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
+#include "enums/merit_type.h"
 #include "merit.h"
 #include "monstrosity.h"
 
@@ -113,13 +114,13 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
             ref<uint16>(0x6E) = PChar->automatonInfo.automatonHealth.maxmp;
         }
 
-        int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
-        uint16 ameCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MELEE, jobLevel);
-        uint16 ameBonus   = PChar->getMod(Mod::AUTO_MELEE_SKILL);
-        uint16 araCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED, jobLevel);
-        uint16 araBonus   = PChar->getMod(Mod::AUTO_RANGED_SKILL);
-        uint16 amaCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC, jobLevel);
-        uint16 amaBonus   = PChar->getMod(Mod::AUTO_MAGIC_SKILL);
+        const int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MeritType::AutomatonSkills, PChar);
+        const uint16 ameCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MELEE, jobLevel);
+        const uint16 ameBonus   = PChar->getMod(Mod::AUTO_MELEE_SKILL);
+        const uint16 araCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED, jobLevel);
+        const uint16 araBonus   = PChar->getMod(Mod::AUTO_RANGED_SKILL);
+        const uint16 amaCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC, jobLevel);
+        const uint16 amaBonus   = PChar->getMod(Mod::AUTO_MAGIC_SKILL);
 
         ref<uint16>(0x70) = std::min(ameCap, PChar->GetSkill(SKILL_AUTOMATON_MELEE));
         ref<uint16>(0x72) = ameCap + ameBonus;

@@ -92,6 +92,7 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/job_point_type.h"
 
 #include "packets/action.h"
 #include "packets/auction_house.h"
@@ -8922,7 +8923,7 @@ int32 CLuaBaseEntity::getMerit(uint16 merit)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-        return PChar->PMeritPoints->GetMeritValue(static_cast<MERIT_TYPE>(merit), PChar);
+        return PChar->PMeritPoints->GetMeritValue(static_cast<MeritType>(merit), PChar);
     }
 
     return 0;
@@ -9000,12 +9001,12 @@ uint16 CLuaBaseEntity::getSpentJobPoints()
  *  Example : player:getJobPointLevel(JP_MIGHTY_STRIKES_EFFECT)
  *  Notes   :
  ************************************************************************/
-uint8 CLuaBaseEntity::getJobPointLevel(uint16 jpType)
+auto CLuaBaseEntity::getJobPointLevel(uint16 jpType) const -> uint8
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-        return PChar->PJobPoints->GetJobPointValue(static_cast<JOBPOINT_TYPE>(jpType));
+        const auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        return PChar->PJobPoints->GetJobPointValue(static_cast<JobPointType>(jpType));
     }
 
     return 0;
@@ -9116,7 +9117,7 @@ uint16 CLuaBaseEntity::getJobPoints(JOBTYPE jobID)
  *  Notes   : Used in GM command
  ************************************************************************/
 
-void CLuaBaseEntity::masterJob()
+void CLuaBaseEntity::masterJob() const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -9124,20 +9125,20 @@ void CLuaBaseEntity::masterJob()
         return;
     }
 
-    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto jpCategory = 0x020 * PChar->GetMJob();
+    const auto jpCategory = 0x020 * PChar->GetMJob();
     for (auto i = jpCategory; i < jpCategory + 0xA; i++)
     {
-        auto points       = PChar->PJobPoints->GetJobPointType((JOBPOINT_TYPE)i);
-        auto pointsNeeded = 20 - points->value;
-        auto currentJP    = PChar->PJobPoints->GetJobPoints();
+        const auto points       = PChar->PJobPoints->GetJobPointType(static_cast<JobPointType>(i));
+        const auto pointsNeeded = 20 - points->value;
+        const auto currentJP    = PChar->PJobPoints->GetJobPoints();
 
         for (auto x = 0; x < pointsNeeded; x++)
         {
-            auto cost = JobPointCost(points->value);
+            const auto cost = points->cost();
             PChar->PJobPoints->SetJobPoints(currentJP + cost);
-            PChar->PJobPoints->RaiseJobPoint((JOBPOINT_TYPE)i);
+            PChar->PJobPoints->RaiseJobPoint(static_cast<JobPointType>(i));
         }
     }
 
@@ -16517,7 +16518,7 @@ void CLuaBaseEntity::updateAttachments()
  *            after percentage is applied.
  ************************************************************************/
 
-void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& intReductionObj)
+void CLuaBaseEntity::reduceBurden(const float percentReduction, sol::object const& intReductionObj) const
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -16525,8 +16526,8 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
         return;
     }
 
-    auto* PEntity    = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(PEntity->PPet);
+    const auto* PEntity    = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto*       PAutomaton = dynamic_cast<CAutomatonEntity*>(PEntity->PPet);
 
     if (!PAutomaton)
     {
@@ -16536,9 +16537,9 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
     std::array<uint8, 8> burden = PAutomaton->getBurden();
     for (int i = 0; i < 8; i++)
     {
-        uint8 intReduction = (intReductionObj != sol::lua_nil) ? intReductionObj.as<uint8>() : 0;
+        const uint8 intReduction = (intReductionObj != sol::lua_nil) ? intReductionObj.as<uint8>() : 0;
 
-        burden[i] = (uint8)std::max(0.0f, burden[i] * (1 - ((percentReduction / 100) - PEntity->PJobPoints->GetJobPointValue(JP_COOLDOWN_EFFECT))) - intReduction);
+        burden[i] = static_cast<uint8>(std::max(0.0f, burden[i] * (1 - ((percentReduction / 100) - PEntity->PJobPoints->GetJobPointValue(JobPointType::CooldownEffect))) - intReduction));
     }
 
     PAutomaton->setBurdenArray(burden);

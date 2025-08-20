@@ -21,6 +21,7 @@
 
 #include "attackround.h"
 #include "ai/ai_container.h"
+#include "enums/merit_type.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "packets/inventory_finish.h"
@@ -275,24 +276,24 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Checking for merit upgrades
     if (isPC)
     {
-        CCharEntity* PChar = (CCharEntity*)m_attacker;
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_attacker);
 
         // Merit chance only applies if player has the job trait
         if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
         {
-            tripleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_TRIPLE_ATTACK_RATE, PChar);
+            tripleAttack += PChar->PMeritPoints->GetMeritValue(MeritType::TripleAttackRate, PChar);
         }
 
         // Ambush Augment adds +1% Triple Attack per merit (need to satisfy conditions for Ambush)
         if (charutils::hasTrait(PChar, TRAIT_AMBUSH) && PChar->getMod(Mod::AUGMENTS_AMBUSH) > 0 &&
             abs(m_defender->loc.p.rotation - m_attacker->loc.p.rotation) < 23)
         {
-            tripleAttack += PChar->PMeritPoints->GetMerit(MERIT_AMBUSH)->count;
+            tripleAttack += PChar->PMeritPoints->GetMerit(MeritType::Ambush)->count;
         }
 
         if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
         {
-            doubleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_DOUBLE_ATTACK_RATE, PChar);
+            doubleAttack += PChar->PMeritPoints->GetMeritValue(MeritType::DoubleAttackRate, PChar);
         }
         // TODO: Quadruple attack merits when SE release them.
 
@@ -495,7 +496,7 @@ void CAttackRound::CreateKickAttacks()
 
         if (m_attacker->GetMJob() == JOB_MNK) // MNK (Main job)
         {
-            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
+            kickAttack += static_cast<CCharEntity*>(m_attacker)->PMeritPoints->GetMeritValue(MeritType::KickAttackRate, static_cast<CCharEntity*>(m_attacker));
         }
 
         kickAttack = std::clamp<uint16>(kickAttack, 0, 100);

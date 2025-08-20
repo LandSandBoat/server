@@ -29,6 +29,7 @@
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "enums/merit_type.h"
 #include "notoriety_container.h"
 #include "packets/entity_update.h"
 #include "status_effect_container.h"
@@ -132,11 +133,11 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        enmityBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_INCREASE, PChar) - PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_DECREASE, PChar);
+        enmityBonus += PChar->PMeritPoints->GetMeritValue(MeritType::EnmityIncrease, PChar) - PChar->PMeritPoints->GetMeritValue(MeritType::EnmityDecrease, PChar);
 
         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            enmityBonus -= PChar->PMeritPoints->GetMeritValue(MERIT_MUTED_SOUL, PChar);
+            enmityBonus -= PChar->PMeritPoints->GetMeritValue(MeritType::MutedSoul, PChar);
         }
     }
 

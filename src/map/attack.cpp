@@ -23,6 +23,8 @@
 #include "ai/ai_container.h"
 #include "attackround.h"
 #include "entities/battleentity.h"
+#include "enums/job_point_type.h"
+#include "enums/merit_type.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "status_effect_container.h"
@@ -97,7 +99,7 @@ void CAttack::SetCritical(bool value)
 
             if (sangeEffect && PChar && PChar->PMeritPoints)
             {
-                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MERIT_SANGE, PChar);
+                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MeritType::Sange, PChar);
 
                 // Add N ranged attack * merit level during Sange effect
                 bonusRatt += PChar->getMod(Mod::ENHANCES_SANGE) * meritValue;
@@ -334,7 +336,7 @@ uint8 CAttack::GetHitRate()
             CCharEntity*         PChar       = dynamic_cast<CCharEntity*>(m_attacker);
             if (sangeEffect && PChar && PChar->PMeritPoints)
             {
-                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MERIT_SANGE, PChar);
+                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MeritType::Sange, PChar);
 
                 accBonus += (meritValue - 1) * 25; // add 25 acc per merit past the first (you have to merit Sange to even have the status effect, so this will never be negative acc bonus)
             }
@@ -489,7 +491,7 @@ bool CAttack::CheckCounter()
     {
         if (m_victim->GetMJob() == JOB_MNK || m_victim->GetMJob() == JOB_PUP)
         {
-            meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
+            meritCounter = static_cast<CCharEntity*>(m_victim)->PMeritPoints->GetMeritValue(MeritType::CounterRate, static_cast<CCharEntity*>(m_victim));
         }
     }
 
@@ -502,7 +504,7 @@ bool CAttack::CheckCounter()
 
     if (m_victim->objtype == TYPE_PC && hasValidSeigan)
     {
-        seiganChance = m_victim->getMod(Mod::ZANSHIN) + ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)m_victim);
+        seiganChance = m_victim->getMod(Mod::ZANSHIN) + static_cast<CCharEntity*>(m_victim)->PMeritPoints->GetMeritValue(MeritType::ZanshinAttackRate, static_cast<CCharEntity*>(m_victim));
         seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
         seiganChance /= 4;
     }
@@ -715,7 +717,7 @@ void CAttack::ProcessDamage()
 
             if (m_attacker->objtype == TYPE_PC)
             {
-                jpBonus = static_cast<CCharEntity*>(m_attacker)->PJobPoints->GetJobPointValue(JP_RESTRAINT_EFFECT) * 2;
+                jpBonus = static_cast<CCharEntity*>(m_attacker)->PJobPoints->GetJobPointValue(JobPointType::RestraintEffect) * 2;
             }
 
             // Convert weapon delay and divide

@@ -24,7 +24,7 @@ CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
     this->setType(0x8D);
     this->setSize(0x104);
 
-    JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
+    const JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 
     if (!PJobPoints)
     {
@@ -34,17 +34,17 @@ CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
     // Start 1 for WAR
     for (uint8 i = 1; i < MAX_JOBTYPE; i++)
     {
-        JobPoints_t current_job = PJobPoints[i];
+        const JobPoints_t currentJob = PJobPoints[i];
 
-        for (uint8 j = 0; j < JOBPOINTS_JPTYPE_PER_CATEGORY; j++)
+        for (uint8 j = 0; j < jpTypePerCategory; j++)
         {
-            JobPointType_t current_type = current_job.job_point_types[j];
-            if (current_type.id != 0)
+            JobPointType_t currentType = currentJob.job_point_types[j];
+            if (currentType.id != 0)
             {
-                uint16 offset          = JP_DETAIL_PACKET_DATA_OFFSET(i) + (JP_DETAIL_DATA_SIZE * j);
-                ref<uint16>(offset)    = current_type.id;
-                ref<uint8>(offset + 2) = JobPointCost(current_type.value);
-                ref<uint8>(offset + 3) = JobPointValueFormat(current_type.value);
+                const uint16 offset    = JP_DETAIL_PACKET_DATA_OFFSET(i) + (JP_DETAIL_DATA_SIZE * j);
+                ref<uint16>(offset)    = currentType.id;
+                ref<uint8>(offset + 2) = currentType.cost();
+                ref<uint8>(offset + 3) = currentType.format();
             }
         }
 

@@ -37,6 +37,8 @@
 #include "blue_spell.h"
 #include "blue_trait.h"
 #include "charutils.h"
+#include "enums/job_point_type.h"
+#include "enums/merit_type.h"
 #include "grades.h"
 #include "job_points.h"
 #include "merit.h"
@@ -324,12 +326,12 @@ namespace blueutils
             uint8 points = std::clamp(((level - 1) / 10) * 5 + 10, 0, 55);
             if (level >= 75)
             {
-                points = points + PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+                points = points + PChar->PMeritPoints->GetMeritValue(MeritType::Assimilation, PChar);
             }
 
             if (level >= 99)
             {
-                points = points + PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
+                points = points + PChar->PJobPoints->GetJobPointValue(JobPointType::BlueMagicPointBonus);
             }
 
             return points;

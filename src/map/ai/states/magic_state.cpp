@@ -28,6 +28,7 @@
 #include "enmity_container.h"
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
+#include "enums/job_point_type.h"
 #include "job_points.h"
 #include "lua/luautils.h"
 #include "packets/action.h"
@@ -449,9 +450,9 @@ void CMagicState::SpendCost()
         // RDM Job Point: Quick Magic Effect
         if (IsInstantCast() && m_PEntity->objtype == TYPE_PC)
         {
-            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            const CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
 
-            cost = (int16)(cost * (1.0f - (float)((PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100)));
+            cost = static_cast<int16>(cost * (1.0f - static_cast<float>((PChar->PJobPoints->GetJobPointValue(JobPointType::QuickMagicEffect) * 2) / 100)));
         }
 
         // conserve mp

@@ -23,7 +23,9 @@
 #include "job_points.h"
 
 #include "entities/charentity.h"
+#include "enums/job_point_type.h"
 #include "enums/key_items.h"
+#include "enums/merit_type.h"
 #include "utils/charutils.h"
 
 CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
@@ -44,12 +46,12 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 
         if (PChar->GetMLevel() >= 75)
         {
-            bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+            bluePointBonus += PChar->PMeritPoints->GetMeritValue(MeritType::Assimilation, PChar);
         }
 
         if (PChar->GetMLevel() >= 99)
         {
-            bluePointBonus += PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
+            bluePointBonus += PChar->PJobPoints->GetJobPointValue(JobPointType::BlueMagicPointBonus);
         }
 
         ref<uint16>(0x0A) |= bluePointBonus << 7;
@@ -65,5 +67,5 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     ref<uint16>(0x0A) |= ((atMaxLevelLimit && hasCappedXp) || PChar->MeritMode) << 14; // XP is capped, or player is in Merit Mode
     ref<uint16>(0x0A) |= (canUseMeritMode && PChar->MeritMode) << 15;                  // Merit Mode Enabled, and Current Job is eligible
 
-    ref<uint8>(0x0C) = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
+    ref<uint8>(0x0C) = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MeritType::MaxMerit, PChar);
 }

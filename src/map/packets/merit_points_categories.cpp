@@ -75,7 +75,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit)
+CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, MeritType merit)
 {
     this->setType(0x8C);
     this->setSize(0x10);

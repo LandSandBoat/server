@@ -54,6 +54,8 @@
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/job_point_type.h"
+#include "enums/merit_type.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
@@ -543,7 +545,7 @@ namespace battleutils
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
-                damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar);
+                damage += PChar->PMeritPoints->GetMeritValue(MeritType::EnspellDamage, PChar);
             }
         }
         else if (Tier == 2)
@@ -576,7 +578,7 @@ namespace battleutils
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
-                damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar) * 2;
+                damage += PChar->PMeritPoints->GetMeritValue(MeritType::EnspellDamage, PChar) * 2;
             }
         }
         else if (Tier == 3) // enlight or endark
@@ -1313,7 +1315,7 @@ namespace battleutils
                 if (PAttacker->objtype == TYPE_PC)
                 {
                     absorbed += (int32)floor(
-                        absorbed * 0.02f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_BLOOD_WEAPON_EFFECT));
+                        absorbed * 0.02f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JobPointType::BloodWeaponEffect));
                 }
 
                 Action->addEffectParam = PAttacker->addHP(absorbed);
@@ -1642,12 +1644,12 @@ namespace battleutils
             }
 
             // Check For Ambush Merit - Ranged
-            if ((charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
+            if ((charutils::hasTrait(static_cast<CCharEntity*>(PAttacker), TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
             {
-                acc += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
+                acc += static_cast<CCharEntity*>(PAttacker)->PMeritPoints->GetMeritValue(MeritType::Ambush, static_cast<CCharEntity*>(PAttacker));
             }
         }
-        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
+        else if (PAttacker->objtype == TYPE_PET && static_cast<CPetEntity*>(PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
         }
@@ -1807,14 +1809,14 @@ namespace battleutils
             }
 
             // Fetch player-only interruption rate reduction from merits.
-            meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
+            meritReduction = static_cast<CCharEntity*>(PDefender)->PMeritPoints->GetMeritValue(MeritType::SpellInteruptionRate, static_cast<CCharEntity*>(PDefender));
         }
 
         // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
         // Anything less than 102% interrupt results in the ability to be interrupted.
         // Note: the 102% is probably an x/256 x/1024 nonsense -- sometimes 101% works.
-        float SIRDRatio = (100.0f - meritReduction - (float)PDefender->getMod(Mod::SPELLINTERRUPT)) / 100.0f;
-        float chance    = xirand::GetRandomNumber<float>(1.0f);
+        const float SIRDRatio = (100.0f - meritReduction - static_cast<float>(PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f;
+        const float chance    = xirand::GetRandomNumber<float>(1.0f);
 
         // This are all ratios.
         // levelRatio : 0.01 to infinity.
@@ -2129,7 +2131,7 @@ namespace battleutils
             // Merit value of 1 is +5%, so 60% normal power
             if (PAttacker->objtype == TYPE_PC)
             {
-                formlessMod += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_FORMLESS_STRIKES, (CCharEntity*)PAttacker);
+                formlessMod += static_cast<CCharEntity*>(PAttacker)->PMeritPoints->GetMeritValue(MeritType::FormlessStrikes, static_cast<CCharEntity*>(PAttacker));
             }
 
             damage = damage * formlessMod / 100;
@@ -2397,7 +2399,7 @@ namespace battleutils
             {
                 if (PAttacker->objtype == TYPE_PC && physicalAttackType == PHYSICAL_ATTACK_TYPE::ZANSHIN)
                 {
-                    baseTp += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_IKISHOTEN, (CCharEntity*)PAttacker);
+                    baseTp += static_cast<CCharEntity*>(PAttacker)->PMeritPoints->GetMeritValue(MeritType::Ikishoten, static_cast<CCharEntity*>(PAttacker));
                 }
 
                 PAttacker->addTP(
@@ -2409,7 +2411,7 @@ namespace battleutils
                 uint32 sBlowMerit = 0;
                 if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
                 {
-                    sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
+                    sBlowMerit = PChar->PMeritPoints->GetMeritValue(MeritType::SubtleBlowEffect, PChar);
                 }
 
                 // Check for Tandem Blow bonus while pet+master are fighting same target
@@ -2594,7 +2596,7 @@ namespace battleutils
             uint32 sBlowMerit = 0;
             if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
             {
-                sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
+                sBlowMerit = PChar->PMeritPoints->GetMeritValue(MeritType::SubtleBlowEffect, PChar);
             }
 
             // Check for Tandem Blow bonus while pet+master are fighting same target
@@ -2739,19 +2741,19 @@ namespace battleutils
             // Check For Ambush Merit - Melee
             if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
             {
-                offsetAccuracy += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
+                offsetAccuracy += static_cast<CCharEntity*>(PAttacker)->PMeritPoints->GetMeritValue(MeritType::Ambush, static_cast<CCharEntity*>(PAttacker));
             }
             // Check for Closed Position merit on attacker for additional accuracy and that attacker and defender are facing each other
-            if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_CLOSED_POSITION)) &&
+            if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait(static_cast<CCharEntity*>(PAttacker), TRAIT_CLOSED_POSITION)) &&
                 (infront(PAttacker->loc.p, PDefender->loc.p, 64) && facing(PAttacker->loc.p, PDefender->loc.p, 64)))
             {
-                offsetAccuracy += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_CLOSED_POSITION, (CCharEntity*)PAttacker);
+                offsetAccuracy += static_cast<CCharEntity*>(PAttacker)->PMeritPoints->GetMeritValue(MeritType::ClosedPosition, static_cast<CCharEntity*>(PAttacker));
             }
             // Check for Closed Position merit on defender for additional evasion and that attacker and defender are facing each other
             if (PDefender->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_CLOSED_POSITION)) &&
                 (infront(PDefender->loc.p, PAttacker->loc.p, 64) && facing(PDefender->loc.p, PAttacker->loc.p, 64)))
             {
-                offsetAccuracy -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_CLOSED_POSITION, (CCharEntity*)PDefender);
+                offsetAccuracy -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MeritType::ClosedPosition, static_cast<CCharEntity*>(PDefender));
             }
             // Check for Innin accuracy bonus from behind target
             if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
@@ -2890,8 +2892,8 @@ namespace battleutils
             // apply merit mods and traits
             if (PAttacker->objtype == TYPE_PC)
             {
-                CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
-                critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+                auto* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
+                critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MeritType::CritHitRate, PCharAttacker);
 
                 // Add Fencer crit hit rate
                 CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
@@ -2907,7 +2909,7 @@ namespace battleutils
 
             if (PDefender->objtype == TYPE_PC)
             {
-                critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+                critHitRate -= static_cast<CCharEntity*>(PDefender)->PMeritPoints->GetMeritValue(MeritType::EnemyCritRate, static_cast<CCharEntity*>(PDefender));
             }
 
             // Check for Innin crit rate bonus from behind target
@@ -2993,12 +2995,12 @@ namespace battleutils
         if (PAttacker->objtype == TYPE_PC)
         {
             CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
-            critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+            critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MeritType::CritHitRate, PCharAttacker);
         }
 
         if (PDefender->objtype == TYPE_PC)
         {
-            critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+            critHitRate -= static_cast<CCharEntity*>(PDefender)->PMeritPoints->GetMeritValue(MeritType::EnemyCritRate, static_cast<CCharEntity*>(PDefender));
         }
 
         // Check for Innin crit rate bonus from behind target
@@ -3413,11 +3415,11 @@ namespace battleutils
             // merit chance only applies if player has the job trait
             if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
             {
-                tripleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_TRIPLE_ATTACK_RATE, (CCharEntity*)PEntity);
+                tripleAttack += PChar->PMeritPoints->GetMeritValue(MeritType::TripleAttackRate, static_cast<CCharEntity*>(PEntity));
             }
             if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
             {
-                doubleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_DOUBLE_ATTACK_RATE, (CCharEntity*)PEntity);
+                doubleAttack += PChar->PMeritPoints->GetMeritValue(MeritType::DoubleAttackRate, static_cast<CCharEntity*>(PEntity));
             }
         }
 
@@ -3446,7 +3448,7 @@ namespace battleutils
                 uint16 zanshin = PEntity->getMod(Mod::ZANSHIN);
                 if (PEntity->objtype == TYPE_PC)
                 {
-                    zanshin += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)PEntity);
+                    zanshin += static_cast<CCharEntity*>(PEntity)->PMeritPoints->GetMeritValue(MeritType::ZanshinAttackRate, static_cast<CCharEntity*>(PEntity));
                 }
 
                 if (xirand::GetRandomNumber(100) < (zanshin / 4))
@@ -4079,7 +4081,7 @@ namespace battleutils
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PChar->loc.p, PDefender->loc.p, 64))
         {
-            damage = (int32)(damage * (1.0f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar) / 100.0f));
+            damage = static_cast<int32>(damage * (1.0f + PChar->PMeritPoints->GetMeritValue(MeritType::InninEffect, PChar) / 100.0f));
         }
 
         if (PDefender->getMod(Mod::SENGIKORI_SC_DMG_DEBUFF) > 0)
@@ -4286,7 +4288,7 @@ namespace battleutils
 
                 if (charutils::hasTrait(PChar, TRAIT_NINJA_TOOL_EXPERT))
                 {
-                    meritBonus = PChar->PMeritPoints->GetMeritValue(MERIT_NINJA_TOOL_EXPERTISE, PChar);
+                    meritBonus = PChar->PMeritPoints->GetMeritValue(MeritType::NinjaToolExpertise, PChar);
                 }
 
                 uint16 chance = (PChar->getMod(Mod::NINJA_TOOL) + meritBonus);
@@ -4549,7 +4551,7 @@ namespace battleutils
         {
             if (((CCharEntity*)PEntity)->GetMJob() == JOB_SAM)
             {
-                return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
+                return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MeritType::StoreTPEffect, (CCharEntity*)PEntity);
             }
         }
         return 0;
@@ -4568,7 +4570,7 @@ namespace battleutils
             // must be in front of mob
             if (infront(PChar->loc.p, PDefender->loc.p, 64))
             {
-                uint8 meritCount = PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, PChar);
+                uint8 meritCount = PChar->PMeritPoints->GetMeritValue(MeritType::Overwhelm, PChar);
                 float tmpDamage  = static_cast<float>(damage);
 
                 switch (meritCount)
@@ -5168,7 +5170,7 @@ namespace battleutils
         {
             // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
             // JP is known to give 10 VE per point
-            uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
+            uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JobPointType::IssekiganEffect) * 10;
             static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
         }
     }
@@ -5848,7 +5850,7 @@ namespace battleutils
             return false;
         }
 
-        uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
+        uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MeritType::LoadedDeck, PChar);
         uint8 loadedDeckChance = 50 + loadedDeck;
         uint8 resetTwoChance   = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
 
@@ -5951,7 +5953,7 @@ namespace battleutils
         {
             if (charutils::hasTrait(PChar, TRAIT_SNAPSHOT))
             {
-                SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(MERIT_SNAPSHOT, PChar);
+                SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(MeritType::Snapshot, PChar);
             }
         }
 
@@ -6036,7 +6038,7 @@ namespace battleutils
                         {
                             if (PExistingTrait->getMeritID() > 0)
                             {
-                                if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                                if (PChar->PMeritPoints->GetMerit((MeritType)PExistingTrait->getMeritID())->count == 0)
                                 {
                                     PEntity->delTrait(PExistingTrait);
                                     break;
@@ -6070,7 +6072,7 @@ namespace battleutils
                 // Don't add traits that aren't merited yet
                 if (PChar)
                 {
-                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MeritType)PTrait->getMeritID())->count == 0)
                     {
                         add = false;
                     }
@@ -6166,7 +6168,7 @@ namespace battleutils
                 {
                     auto* PChar = static_cast<CCharEntity*>(PEntity);
 
-                    bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
+                    bonus += PChar->PJobPoints->GetJobPointValue(JobPointType::StrategemEffectII);
                 }
 
                 cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
@@ -6209,7 +6211,7 @@ namespace battleutils
                 {
                     auto* PChar = static_cast<CCharEntity*>(PEntity);
 
-                    bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
+                    bonus += PChar->PJobPoints->GetJobPointValue(JobPointType::StrategemEffectII);
                 }
 
                 cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
@@ -6234,8 +6236,8 @@ namespace battleutils
 
             if (PEntity->objtype == TYPE_PC)
             {
-                auto* PChar = static_cast<CCharEntity*>(PEntity);
-                amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
+                const auto* PChar = static_cast<CCharEntity*>(PEntity);
+                amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MeritType::SummoningMagicCastTime, PChar));
             }
 
             if (cast > amount)
@@ -6259,7 +6261,7 @@ namespace battleutils
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_NIGHTINGALE))
             {
                 if (PEntity->objtype == TYPE_PC &&
-                    xirand::GetRandomNumber(100) < ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_NIGHTINGALE, (CCharEntity*)PEntity) - 25)
+                    xirand::GetRandomNumber(100) < static_cast<CCharEntity*>(PEntity)->PMeritPoints->GetMeritValue(MeritType::Nightingale, static_cast<CCharEntity*>(PEntity)) - 25)
                 {
                     return 0s;
                 }
@@ -6276,7 +6278,7 @@ namespace battleutils
         {
             if (PEntity->objtype == TYPE_PC)
             {
-                uint8 jpValue = static_cast<CCharEntity*>(PEntity)->PJobPoints->GetJobPointValue(JP_NINJITSU_CAST_TIME_BONUS);
+                uint8 jpValue = static_cast<CCharEntity*>(PEntity)->PJobPoints->GetJobPointValue(JobPointType::NinjitsuCastTimeBonus);
                 cast          = std::chrono::floor<std::chrono::milliseconds>(cast * (1.0f - (0.03f * jpValue)));
             }
         }
@@ -6291,13 +6293,13 @@ namespace battleutils
             fastCast += PEntity->getMod(Mod::CURE_CAST_TIME);
             if (PEntity->objtype == TYPE_PC)
             {
-                fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_CURE_CAST_TIME, (CCharEntity*)PEntity);
+                fastCast += static_cast<CCharEntity*>(PEntity)->PMeritPoints->GetMeritValue(MeritType::CureCastTime, static_cast<CCharEntity*>(PEntity));
             }
         }
         else if (PSpell->getSkillType() == SKILLTYPE::SKILL_GEOMANCY && PEntity->objtype == TYPE_PC)
         {
             auto* PChar = static_cast<CCharEntity*>(PEntity);
-            fastCast += PChar->PJobPoints->GetJobPointValue(JP_WIDENED_COMPASS_EFFECT);
+            fastCast += PChar->PJobPoints->GetJobPointValue(JobPointType::WidenedCompassEffect);
         }
 
         fastCast                  = std::clamp<int16>(fastCast, -100, 80);
@@ -6416,13 +6418,13 @@ namespace battleutils
                 auto* PChar = static_cast<CCharEntity*>(PEntity);
                 if (PSpell->getID() == SpellID::Magic_Finale) // apply Finale recast merits
                 {
-                    recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MERIT_FINALE_RECAST, PChar));
+                    recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MeritType::FinaleRecast, PChar));
                 }
 
                 if (PSpell->getID() == SpellID::Foe_Lullaby || PSpell->getID() == SpellID::Foe_Lullaby_II || PSpell->getID() == SpellID::Horde_Lullaby ||
                     PSpell->getID() == SpellID::Horde_Lullaby_II) // apply Lullaby recast merits
                 {
-                    recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MERIT_LULLABY_RECAST, PChar));
+                    recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MeritType::LullabyRecast, PChar));
                 }
             }
             recast -= std::chrono::seconds(PEntity->getMod(Mod::SONG_RECAST_DELAY));
@@ -6638,7 +6640,7 @@ namespace battleutils
         return false;
     }
 
-    int32 GetMeritValue(CBattleEntity* PEntity, MERIT_TYPE merit)
+    int32 GetMeritValue(CBattleEntity* PEntity, MeritType merit)
     {
         if (PEntity->objtype == TYPE_PC)
         {

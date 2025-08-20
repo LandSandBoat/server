@@ -262,7 +262,7 @@ namespace battleutils
     int16           CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
     int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
     bool            RemoveAmmo(CCharEntity*, int quantity = 1);
-    int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);
+    int32           GetMeritValue(CBattleEntity*, MeritType);
 
     int32       GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
     DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);

@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
+#include "enums/merit_type.h"
 #include "items/item_weapon.h"
 #include "packets/action.h"
 #include "status_effect_container.h"
@@ -82,9 +83,9 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         {
             auto chance{ m_PEntity->getMod(Mod::RAPID_SHOT) };
 
-            if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+            if (const auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
-                chance += PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar);
+                chance += PChar->PMeritPoints->GetMeritValue(MeritType::RapidShotRate, PChar);
             }
 
             // Don't bother if we cant even proc

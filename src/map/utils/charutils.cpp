@@ -108,6 +108,7 @@
 #include "zoneutils.h"
 
 #include "enums/key_items.h"
+#include "enums/merit_type.h"
 
 /************************************************************************
  *                                                                       *
@@ -179,11 +180,11 @@ namespace charutils
 
         uint8 grade = 0;
 
-        uint8      mlvl        = PChar->GetMLevel();
-        uint8      slvl        = PChar->GetSLevel();
-        JOBTYPE    mjob        = PChar->GetMJob();
-        JOBTYPE    sjob        = PChar->GetSJob();
-        MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
+        uint8     mlvl        = PChar->GetMLevel();
+        uint8     slvl        = PChar->GetSLevel();
+        JOBTYPE   mjob        = PChar->GetMJob();
+        JOBTYPE   sjob        = PChar->GetSJob();
+        MeritType statMerit[] = { MeritType::STR, MeritType::DEX, MeritType::VIT, MeritType::AGI, MeritType::INT, MeritType::MND, MeritType::CHR };
 
         // We have to make sure we don't leave the job as JOB_MON - we CANNOT generate stats for it.
         if (mjob == JOB_MON || sjob == JOB_MON)
@@ -276,7 +277,7 @@ namespace charutils
             sJobStat = sJobStat / 2;
         }
 
-        uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
+        uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MeritType::MaxHP, PChar);
         PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
 
         // The beginning of the MP
@@ -319,8 +320,8 @@ namespace charutils
             sJobStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR");
         }
 
-        MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
-        PChar->health.maxmp = (int16)(settings::get<float>("map.PLAYER_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
+        MeritBonus          = PChar->PMeritPoints->GetMeritValue(MeritType::MaxMP, PChar);
+        PChar->health.maxmp = static_cast<int16>(settings::get<float>("map.PLAYER_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
 
         // Start calculating Stats
 
@@ -3199,7 +3200,7 @@ namespace charutils
                     auto            maxCharges = 0;
                     if (charge)
                     {
-                        chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar));
+                        chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(static_cast<MeritType>(charge->merit), PChar));
                         maxCharges = charge->maxCharges;
                     }
                     if (!PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))
@@ -3239,7 +3240,7 @@ namespace charutils
                         auto            maxCharges = 0;
                         if (charge)
                         {
-                            chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar));
+                            chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(static_cast<MeritType>(charge->merit), PChar));
                             maxCharges = charge->maxCharges;
                         }
                         if (!PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))
@@ -3342,42 +3343,42 @@ namespace charutils
     // TODO: This whole thing should eventually get a refactored to be less dependent on arbitrary ordering of modifier IDs and conditionals on skill ranges.
     void BuildingCharSkillsTable(CCharEntity* PChar)
     {
-        MERIT_TYPE skillMerit[] = { MERIT_H2H,
-                                    MERIT_DAGGER,
-                                    MERIT_SWORD,
-                                    MERIT_GSWORD,
-                                    MERIT_AXE,
-                                    MERIT_GAXE,
-                                    MERIT_SCYTHE,
-                                    MERIT_POLEARM,
-                                    MERIT_KATANA,
-                                    MERIT_GKATANA,
-                                    MERIT_CLUB,
-                                    MERIT_STAFF,
-                                    MERIT_AUTOMATON_SKILLS,
-                                    MERIT_AUTOMATON_SKILLS,
-                                    MERIT_AUTOMATON_SKILLS,
-                                    MERIT_ARCHERY,
-                                    MERIT_MARKSMANSHIP,
-                                    MERIT_THROWING,
-                                    MERIT_GUARDING,
-                                    MERIT_EVASION,
-                                    MERIT_SHIELD,
-                                    MERIT_PARRYING,
-                                    MERIT_DIVINE,
-                                    MERIT_HEALING,
-                                    MERIT_ENHANCING,
-                                    MERIT_ENFEEBLING,
-                                    MERIT_ELEMENTAL,
-                                    MERIT_DARK,
-                                    MERIT_SUMMONING,
-                                    MERIT_NINJITSU,
-                                    MERIT_SINGING,
-                                    MERIT_STRING,
-                                    MERIT_WIND,
-                                    MERIT_BLUE,
-                                    MERIT_GEO,
-                                    MERIT_HANDBELL };
+        MeritType skillMerit[] = { MeritType::HandToHand,
+                                   MeritType::Dagger,
+                                   MeritType::Sword,
+                                   MeritType::GreatSword,
+                                   MeritType::Axe,
+                                   MeritType::GreatAxe,
+                                   MeritType::Scythe,
+                                   MeritType::Polearm,
+                                   MeritType::Katana,
+                                   MeritType::GreatKatana,
+                                   MeritType::Club,
+                                   MeritType::Staff,
+                                   MeritType::AutomatonSkills,
+                                   MeritType::AutomatonSkills,
+                                   MeritType::AutomatonSkills,
+                                   MeritType::Archery,
+                                   MeritType::Marksmanship,
+                                   MeritType::Throwing,
+                                   MeritType::Guarding,
+                                   MeritType::Evasion,
+                                   MeritType::Shield,
+                                   MeritType::Parrying,
+                                   MeritType::Divine,
+                                   MeritType::Healing,
+                                   MeritType::Enhancing,
+                                   MeritType::Enfeebling,
+                                   MeritType::Elemental,
+                                   MeritType::Dark,
+                                   MeritType::Summoning,
+                                   MeritType::Ninjutsu,
+                                   MeritType::Singing,
+                                   MeritType::String,
+                                   MeritType::Wind,
+                                   MeritType::Blue,
+                                   MeritType::Geomancy,
+                                   MeritType::Handbell };
 
         uint8 meritIndex = 0;
 
@@ -6327,13 +6328,13 @@ namespace charutils
     {
         if (PAbility->getAddType() & ADDTYPE_MERIT)
         {
-            if (!PChar->PMeritPoints->GetMerit(static_cast<MERIT_TYPE>(PAbility->getMeritModID())))
+            if (!PChar->PMeritPoints->GetMerit(static_cast<MeritType>(PAbility->getMeritModID())))
             {
                 ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).", PAbility->getMeritModID());
                 return false;
             }
 
-            if (!(PChar->PMeritPoints->GetMerit(static_cast<MERIT_TYPE>(PAbility->getMeritModID()))->count > 0))
+            if (!(PChar->PMeritPoints->GetMerit(static_cast<MeritType>(PAbility->getMeritModID()))->count > 0))
             {
                 return false;
             }

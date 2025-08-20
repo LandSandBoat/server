@@ -63,7 +63,9 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "enums/job_point_type.h"
 #include "enums/key_items.h"
+#include "enums/merit_type.h"
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
@@ -1564,7 +1566,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             {
                 if (isRangedWS)
                 {
-                    uint16 recycleChance = getMod(Mod::RECYCLE) + PMeritPoints->GetMeritValue(MERIT_RECYCLE, this) + this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
+                    uint16 recycleChance = getMod(Mod::RECYCLE) + PMeritPoints->GetMeritValue(MeritType::Recycle, this) + this->PJobPoints->GetJobPointValue(JobPointType::AmmoConsumption);
 
                     if (StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
                     {
@@ -1732,7 +1734,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
         {
-            meritRecastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
+            meritRecastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MeritType)PAbility->getMeritModID(), this));
         }
 
         auto* charge = ability::GetCharge(this, PAbility->getRecastId());
@@ -2225,10 +2227,10 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 recycleChance = getMod(Mod::RECYCLE);
         if (charutils::hasTrait(this, TRAIT_RECYCLE))
         {
-            recycleChance += PMeritPoints->GetMeritValue(MERIT_RECYCLE, this);
+            recycleChance += PMeritPoints->GetMeritValue(MeritType::Recycle, this);
         }
 
-        recycleChance += this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
+        recycleChance += this->PJobPoints->GetJobPointValue(JobPointType::AmmoConsumption);
 
         if (this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
         {
