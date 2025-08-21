@@ -1,17 +1,24 @@
 -----------------------------------
 -- Vulcanian Impact
+-- Notes: This ability is used by both Big Bomb and Friar's Lanterns in the area
+--  that drop the item to spawn Big Bomb
+--
+--  Vulcanian Impact is only used when the bomb is in default state, or has
+--  grown once.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local mobSkin = mob:getModelId()
-
-    if mobSkin == 281 then
-        return 0
-    else
+    -- Growing Bomb conditions
+    if
+        mob:getModelId() == 282 and
+        mob:getAnimationSub() >= 2
+    then
         return 1
     end
+
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

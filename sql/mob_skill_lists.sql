@@ -4158,7 +4158,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,998);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,999);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
 
--- Next ID : 2060
+INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2060,593); -- Berserk
+INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2060,594); -- Vulcanian Impact
+INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2060,595); -- Heat Wave
+INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2060,596); -- Hellstorm
+INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2060,597); -- Self-destruct
+
+-- Next ID : 2061
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

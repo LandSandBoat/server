@@ -3058,7 +3058,7 @@ INSERT INTO `mob_groups` VALUES (25,4009,62,'Troll_Artilleryman',960,0,2473,0,0,
 INSERT INTO `mob_groups` VALUES (26,4012,62,'Troll_Combatant',960,0,2473,0,0,78,83,0);
 INSERT INTO `mob_groups` VALUES (27,4036,62,'Troll_Targeteer',960,0,1310,0,0,78,83,0);
 INSERT INTO `mob_groups` VALUES (28,1170,62,'Ebony_Pudding',960,0,740,0,0,77,79,0);
-INSERT INTO `mob_groups` VALUES (29,416,62,'Big_Bomb',0,128,277,30000,0,81,84,0);
+INSERT INTO `mob_groups` VALUES (29,416,62,'Big_Bomb',0,128,277,12000,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (30,4023,62,'Troll_Machinist',960,0,2484,0,0,78,83,0);
 INSERT INTO `mob_groups` VALUES (31,4028,62,'Troll_Scrimer',960,0,2476,0,0,78,83,0);
 INSERT INTO `mob_groups` VALUES (32,4018,62,'Troll_Grenadier',960,0,2479,0,0,78,83,0);
@@ -3087,6 +3087,7 @@ INSERT INTO `mob_groups` VALUES (54,35,62,'Achamothcampa',0,128,0,8000,0,73,75,0
 INSERT INTO `mob_groups` VALUES (55,36,62,'Achamoth_Nympha',0,128,0,12000,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (56,2697,62,'Moblin_Millionaire',960,0,1711,0,0,74,76,0);
 INSERT INTO `mob_groups` VALUES (57,6587,62,'Friars_Lantern',960,0,907,0,0,77,79,0);
+INSERT INTO `mob_groups` VALUES (58,6587,62,'Friars_Lantern_Grow',960,0,907,0,0,77,79,0);
 
 -- ------------------------------------------------------------
 -- Lebros_Cavern (Zone 63)

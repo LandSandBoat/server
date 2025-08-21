@@ -1,17 +1,21 @@
 -----------------------------------
 -- Hellstorm
+-- Notes: This ability is used by both Big Bomb and Friar Lanterns that posess the ability to grow
+--        Hellstorm is observed to only be used when the bomb has grown at least once.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local mobSkin = mob:getModelId()
-
-    if mobSkin == 281 then
-        return 0
-    else
+    -- Growing Bomb conditions
+    if
+        mob:getModelId() == 282 and
+        mob:getAnimationSub() == 0
+    then
         return 1
     end
+
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

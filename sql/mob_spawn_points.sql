@@ -13939,8 +13939,8 @@ INSERT INTO `mob_spawn_points` VALUES (17031394,'Ebony_Pudding','Ebony Pudding',
 INSERT INTO `mob_spawn_points` VALUES (17031395,'Friars_Lantern','Friar\'s Lantern',21,-257.600,9.582,256.154,183);
 INSERT INTO `mob_spawn_points` VALUES (17031396,'Friars_Lantern','Friar\'s Lantern',21,-257.600,9.570,256.127,179);
 INSERT INTO `mob_spawn_points` VALUES (17031397,'Friars_Lantern','Friar\'s Lantern',21,-265.500,13.397,284.446,135);
-INSERT INTO `mob_spawn_points` VALUES (17031398,'Friars_Lantern','Friar\'s Lantern',57,-192.000,1.580,296.002,11);
-INSERT INTO `mob_spawn_points` VALUES (17031399,'Friars_Lantern','Friar\'s Lantern',57,-187.200,-0.381,293.135,21);
+INSERT INTO `mob_spawn_points` VALUES (17031398,'Friars_Lantern_Grow','Friar\'s Lantern',57,-192.000,1.580,296.002,11);
+INSERT INTO `mob_spawn_points` VALUES (17031399,'Friars_Lantern_Grow','Friar\'s Lantern',57,-187.200,-0.381,293.135,21);
 INSERT INTO `mob_spawn_points` VALUES (17031400,'Fire_Elemental','Fire Elemental',20,-173.900,-6.296,287.105,5);
 INSERT INTO `mob_spawn_points` VALUES (17031401,'Big_Bomb','Big Bomb',29,-233.800,13.612,286.713,173);
 INSERT INTO `mob_spawn_points` VALUES (17031402,'Troll_Machinist','Troll Machinist',30,-143.600,-10.170,258.040,10);
@@ -13950,8 +13950,8 @@ INSERT INTO `mob_spawn_points` VALUES (17031405,'Troll_Grenadier','Troll Grenadi
 INSERT INTO `mob_spawn_points` VALUES (17031406,'Troll_Targeteer','Troll Targeteer',27,-172.900,-11.120,218.639,252);
 INSERT INTO `mob_spawn_points` VALUES (17031407,'Troll_Cuirasser','Troll Cuirasser',33,-140.400,-10.620,224.380,128);
 INSERT INTO `mob_spawn_points` VALUES (17031408,'Troll_Artilleryman','Troll Artilleryman',25,-180.400,-10.190,213.869,207);
-INSERT INTO `mob_spawn_points` VALUES (17031409,'Friars_Lantern','Friar\'s Lantern',57,-196.500,-0.476,140.214,172);
-INSERT INTO `mob_spawn_points` VALUES (17031410,'Friars_Lantern','Friar\'s Lantern',57,-176.900,-0.404,135.033,96);
+INSERT INTO `mob_spawn_points` VALUES (17031409,'Friars_Lantern_Grow','Friar\'s Lantern',57,-196.500,-0.476,140.214,172);
+INSERT INTO `mob_spawn_points` VALUES (17031410,'Friars_Lantern_Grow','Friar\'s Lantern',57,-176.900,-0.404,135.033,96);
 INSERT INTO `mob_spawn_points` VALUES (17031411,'Ebony_Pudding','Ebony Pudding',28,-286.100,8.780,377.852,227);
 INSERT INTO `mob_spawn_points` VALUES (17031412,'Ebony_Pudding','Ebony Pudding',28,-277.400,9.359,378.441,234);
 INSERT INTO `mob_spawn_points` VALUES (17031413,'Ebony_Pudding','Ebony Pudding',28,-521.600,9.993,18.121,137);
@@ -13975,8 +13975,8 @@ INSERT INTO `mob_spawn_points` VALUES (17031430,'Ebony_Pudding','Ebony Pudding',
 INSERT INTO `mob_spawn_points` VALUES (17031431,'Antares','Antares',34,-405.000,-0.465,275.250,193);
 INSERT INTO `mob_spawn_points` VALUES (17031432,'Antares','Antares',34,-395.400,-0.414,282.066,127);
 INSERT INTO `mob_spawn_points` VALUES (17031433,'Troll_Artilleryman','Troll Artilleryman',25,-316.600,9.749,207.434,168);
-INSERT INTO `mob_spawn_points` VALUES (17031434,'Friars_Lantern','Friar\'s Lantern',57,-317.900,9.712,207.089,202);
-INSERT INTO `mob_spawn_points` VALUES (17031435,'Friars_Lantern','Friar\'s Lantern',57,-316.700,9.670,204.645,114);
+INSERT INTO `mob_spawn_points` VALUES (17031434,'Friars_Lantern_Grow','Friar\'s Lantern',57,-317.900,9.712,207.089,202);
+INSERT INTO `mob_spawn_points` VALUES (17031435,'Friars_Lantern_Grow','Friar\'s Lantern',57,-316.700,9.670,204.645,114);
 INSERT INTO `mob_spawn_points` VALUES (17031436,'Troll_Combatant','Troll Combatant',26,-323.300,9.824,192.979,19);
 INSERT INTO `mob_spawn_points` VALUES (17031437,'Troll_Scrimer','Troll Scrimer',31,-329.600,9.459,194.365,154);
 INSERT INTO `mob_spawn_points` VALUES (17031438,'Troll_Machinist','Troll Machinist',30,-284.500,10.010,204.406,178);
