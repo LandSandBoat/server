@@ -8,17 +8,6 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, -462, -4, -420, -455, -1, -392) -- approach the Cutter
 end
 
-zoneObject.onPlayerDeath = function(player)
-    local ID = zones[xi.zone.ARRAPAGO_REEF]
-    local lamiaMobId = ID.mob.LAMIA_NO19
-    local x = player:getXPos()
-    local y = player:getYPos()
-    local z = player:getZPos()
-    local mob = SpawnMob(lamiaMobId)
-    if mob then
-        mob:setPos(x, y, z)
-    end
-end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
@@ -46,6 +35,18 @@ end
 zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket('1pb1')
     player:entityVisualPacket('2pb1')
+    -- Add Lamia No.19 death listener
+    player:addListener('DEATH', 'LAMIA_NO_19_PLAYERDEATH', function(playerArg)
+        local ID = zones[xi.zone.ARRAPAGO_REEF]
+        local lamiaMobId = ID.mob.LAMIA_NO19
+        local x = playerArg:getXPos()
+        local y = playerArg:getYPos()
+        local z = playerArg:getZPos()
+        local mob = SpawnMob(lamiaMobId)
+        if mob then
+            mob:setPos(x, y, z)
+        end
+    end)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
