@@ -5631,7 +5631,15 @@ INSERT INTO `mob_spell_lists` VALUES ('T3_Ga_Spells',549,201,1,255);  -- Waterga
 -- Giollemitte B Feroun (550)
 INSERT INTO `mob_spell_lists` VALUES ('Giollemitte_B_Feroun',550,112,37,255);  -- Flash (1~255)
 
--- Next Available: 551
+--- Lamia No 19 (551)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,152,1,255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,157,1,255); -- Aero IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,201,1,255); -- Waterga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,231,1,255); -- Bio II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,250,1,255); -- Ice Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lamia_No_19',551,273,1,255); -- Sleepga (1~255)
+
+-- Next Available: 552
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -8,6 +8,18 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, -462, -4, -420, -455, -1, -392) -- approach the Cutter
 end
 
+zoneObject.onPlayerDeath = function(player)
+    local ID = require('scripts.zones.Arrapago_Reef.IDs')
+    local lamiaMobId = ID.mob.LAMIA_NO19
+    local x = player:getXPos()
+    local y = player:getYPos()
+    local z = player:getZPos()
+    local mob = SpawnMob(lamiaMobId)
+    if mob then
+        mob:setPos(x, y, z)
+    end
+end
+
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 

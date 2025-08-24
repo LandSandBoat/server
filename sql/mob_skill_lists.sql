@@ -4158,7 +4158,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,998);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,999);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
 
--- Next ID : 2060
+INSERT INTO `mob_skill_lists` VALUES ('Lamia_No19',2060,1758); -- Tail Slap
+INSERT INTO `mob_skill_lists` VALUES ('Lamia_No19',2060,1759); -- Hypnotic Sway
+
+-- Next ID : 2061
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

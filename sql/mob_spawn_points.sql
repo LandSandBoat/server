@@ -12589,7 +12589,9 @@ INSERT INTO `mob_spawn_points` VALUES (16998864,'Lamia_Exon','Lamia Exon',84,-44
 INSERT INTO `mob_spawn_points` VALUES (16998865,'Lamia_Exon','Lamia Exon',84,-446.000,-18.220,450.000,114);
 INSERT INTO `mob_spawn_points` VALUES (16998866,'Lamia_Exon','Lamia Exon',84,-462.000,-20.500,458.000,7);
 INSERT INTO `mob_spawn_points` VALUES (16998867,'Ornery_Orobon','Ornery Orobon',85,0.000,0.000,0.000,0);
+--- need to verify below
 INSERT INTO `mob_spawn_points` VALUES (16998868,'Lamia_No19','Lamia No.19',86,-138.000,-7.600,132.000,161);
+--- need to verify above
 INSERT INTO `mob_spawn_points` VALUES (16998869,'Lamias_Skeleton','Lamia\'s Skeleton',87,-136.700,-7.900,132.000,254);
 INSERT INTO `mob_spawn_points` VALUES (16998870,'Lamias_Skeleton','Lamia\'s Skeleton',87,-140.000,-7.600,131.000,254);
 INSERT INTO `mob_spawn_points` VALUES (16998871,'Lil_Apkallu','Lil\' Apkallu',88,489.740,-2.742,168.490,190);
