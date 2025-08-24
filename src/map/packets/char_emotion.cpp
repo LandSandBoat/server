@@ -21,36 +21,37 @@
 
 #include "char_emotion.h"
 #include "entities/charentity.h"
+#include "entities/npcentity.h"
 #include "item_container.h"
 #include "items/item_weapon.h"
 
-CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra)
+CCharEmotionPacket::CCharEmotionPacket(const CCharEntity* PChar, const uint32 targetId, const uint16 targetIndex, Emote emoteId, EmoteMode emoteMode, const uint16 extra)
 {
     this->setType(0x5A);
     this->setSize(0x70);
 
     ref<uint32>(0x04) = PChar->id;
-    ref<uint32>(0x08) = TargetID;
+    ref<uint32>(0x08) = targetId;
     ref<uint16>(0x0C) = PChar->targid;
-    ref<uint16>(0x0E) = TargetIndex;
-    ref<uint8>(0x10)  = EmoteID == Emote::JOB ? static_cast<uint8>(EmoteID) + (extra - 0x1F) : static_cast<uint8>(EmoteID);
+    ref<uint16>(0x0E) = targetIndex;
+    ref<uint8>(0x10)  = emoteId == Emote::JOB ? static_cast<uint8>(emoteId) + (extra - 0x1F) : static_cast<uint8>(emoteId);
 
-    if (EmoteID == Emote::SALUTE)
+    if (emoteId == Emote::SALUTE)
     {
         ref<uint16>(0x12) = PChar->profile.nation;
     }
-    else if (EmoteID == Emote::HURRAY)
+    else if (emoteId == Emote::HURRAY)
     {
-        auto* PWeapon = PChar->getStorage(PChar->equipLoc[SLOT_MAIN])->GetItem(PChar->equip[SLOT_MAIN]);
+        const auto* PWeapon = PChar->getStorage(PChar->equipLoc[SLOT_MAIN])->GetItem(PChar->equip[SLOT_MAIN]);
         if (PWeapon && PWeapon->getID() != 65535)
         {
             ref<uint16>(0x12) = PWeapon->getID();
         }
     }
-    else if (EmoteID == Emote::AIM)
+    else if (emoteId == Emote::AIM)
     {
-        ref<uint16>(0x12)    = 65535;
-        CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_RANGED])->GetItem(PChar->equip[SLOT_RANGED]));
+        ref<uint16>(0x12)          = 65535;
+        const CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_RANGED])->GetItem(PChar->equip[SLOT_RANGED]));
         if (PWeapon && PWeapon->getID() != 65535)
         {
             if (PWeapon->getSkillType() == SKILL_THROWING)
@@ -59,7 +60,7 @@ CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint
             }
             else if (PWeapon->getSkillType() == SKILL_MARKSMANSHIP || PWeapon->getSkillType() == SKILL_ARCHERY)
             {
-                CItemWeapon* PAmmo = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_AMMO])->GetItem(PChar->equip[SLOT_AMMO]));
+                const CItemWeapon* PAmmo = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_AMMO])->GetItem(PChar->equip[SLOT_AMMO]));
                 if (PAmmo && PAmmo->getID() != 65535)
                 {
                     ref<uint16>(0x12) = PWeapon->getID();
@@ -67,17 +68,30 @@ CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint
             }
         }
     }
-    else if (EmoteID == Emote::BELL)
+    else if (emoteId == Emote::BELL)
     {
         // No emote text for /bell
         emoteMode = EmoteMode::MOTION;
 
         ref<uint8>(0x12) = (extra - 0x06);
     }
-    else if (EmoteID == Emote::JOB)
+    else if (emoteId == Emote::JOB)
     {
         ref<uint8>(0x12) = (extra - 0x1F);
     }
 
     ref<uint8>(0x16) = static_cast<uint8>(emoteMode);
+}
+
+CCharEmotionPacket::CCharEmotionPacket(const CNpcEntity* PEntity, const uint32 targetId, const uint16 targetIndex, Emote emoteId, EmoteMode emoteMode)
+{
+    this->setType(0x5A);
+    this->setSize(0x70);
+
+    ref<uint32>(0x04) = PEntity->id;
+    ref<uint32>(0x08) = targetId;
+    ref<uint16>(0x0C) = PEntity->targid;
+    ref<uint16>(0x0E) = targetIndex;
+    ref<uint8>(0x10)  = static_cast<uint8>(emoteId);
+    ref<uint8>(0x16)  = static_cast<uint8>(emoteMode);
 }

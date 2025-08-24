@@ -1013,18 +1013,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Spheroid',235,984);
 INSERT INTO `mob_skill_lists` VALUES ('Spider',236,810);
 INSERT INTO `mob_skill_lists` VALUES ('Spider',236,811);
 INSERT INTO `mob_skill_lists` VALUES ('Spider',236,812);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,990);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,991);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,992);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,993);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,994);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,995);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,996);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,997);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,998);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,999);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1000);
-INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1001);
+
+-- Spare ID: 237
+
 INSERT INTO `mob_skill_lists` VALUES ('Eldritch_Edge',238,397); -- Flurry of rage
 INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,378); -- thunderbolt
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,498);
@@ -2410,33 +2401,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Mob_Avatar_Ramuh',720,891);
 INSERT INTO `mob_skill_lists` VALUES ('Mob_Avatar_Carbuncle',721,909);
 INSERT INTO `mob_skill_lists` VALUES ('Mob_Avatar_Carbuncle',721,910);
 INSERT INTO `mob_skill_lists` VALUES ('Mob_Avatar_Carbuncle',721,911);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,325);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,414);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,415);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,416);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,417);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,418);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,420);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,421);
-INSERT INTO `mob_skill_lists` VALUES ('Prune',722,423);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,327);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,414);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,415);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,416);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,417);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,418);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,421);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,420);
-INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,423);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,326);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,414);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,415);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,416);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,417);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,418);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,420);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,421);
-INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,423);
+INSERT INTO `mob_skill_lists` VALUES ('Prune',722,325); -- random_kiss
+INSERT INTO `mob_skill_lists` VALUES ('Phoedme',723,327); -- absorbing_kiss
+INSERT INTO `mob_skill_lists` VALUES ('Pepper',724,326); -- deep_kiss
 INSERT INTO `mob_skill_lists` VALUES ('Medusa',725,1808);
 INSERT INTO `mob_skill_lists` VALUES ('Medusa',725,1809);
 INSERT INTO `mob_skill_lists` VALUES ('Medusa',725,1810);
@@ -2575,6 +2542,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Spider',764,777);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Spider',764,778);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,730);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,731);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,746);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,790);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,675);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,676);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,677);
@@ -4177,7 +4146,19 @@ INSERT INTO `mob_skill_lists` VALUES ('Vampyr_Jarl',2054,2112); -- Nocturnal Ser
 INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged_High',2055,1398); -- Tenzen Ranged Attack
 INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged_Low',2056,1400); -- Tenzen Ranged Attack
 
--- Next ID : 2057
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_1',2057,990);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_1',2057,991);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_1',2057,992);
+
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_2',2058,994);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_2',2058,995);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_2',2058,996);
+
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,998);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,999);
+INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
+
+-- Next ID : 2060
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

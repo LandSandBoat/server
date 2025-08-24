@@ -210,10 +210,10 @@ void CBattleEntity::UpdateHealth()
 {
     TracyZoneScoped;
 
-    float weaknessPower = (100.f + getMod(Mod::WEAKNESS_PCT)) / 100.f;
-    float cursePower    = (100.f + getMod(Mod::CURSE_PCT)) / 100.f;
-    float HPPPower      = (100.f + getMod(Mod::HPP)) / 100.f;
-    float MPPPower      = (100.f + getMod(Mod::MPP)) / 100.f;
+    float weaknessPower = (100.0f + getMod(Mod::WEAKNESS_PCT)) / 100.0f;
+    float cursePower    = (100.0f + getMod(Mod::CURSE_PCT)) / 100.0f;
+    float HPPPower      = (100.0f + getMod(Mod::HPP)) / 100.0f;
+    float MPPPower      = (100.0f + getMod(Mod::MPP)) / 100.0f;
 
     // Calculate "base" hp/mp with weakness, curse, HP mods. Raw HP/MP mods from food are post-curse.
     // Note: Afflictor was noted to use exactly 75/256 for curse power
@@ -274,7 +274,7 @@ uint8 CBattleEntity::GetHPP() const
         return 0;
     }
 
-    return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.hp) / static_cast<float>(GetMaxHP())) * 100.f)));
+    return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.hp) / static_cast<float>(GetMaxHP())) * 100.0f)));
 }
 
 int32 CBattleEntity::GetMaxHP() const
@@ -295,7 +295,7 @@ uint8 CBattleEntity::GetMPP() const
         return 0;
     }
 
-    return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.mp) / static_cast<float>(GetMaxMP())) * 100.f)));
+    return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.mp) / static_cast<float>(GetMaxMP())) * 100.0f)));
 }
 
 int32 CBattleEntity::GetMaxMP() const
@@ -503,7 +503,7 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
 
                 if (weapon->isTwoHanded())
                 {
-                    hasteAbility = hasteAbility - getMod(Mod::TWOHAND_HASTE_ABILITY) / 10000.0f;
+                    hasteAbility = hasteAbility + getMod(Mod::TWOHAND_HASTE_ABILITY) / 10000.0f;
                 }
 
                 hasteMagic   = std::clamp<float>(hasteMagic, -1.0f, 0.4375f);
@@ -923,7 +923,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
             // Smite applies (bonus ATTP) when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
-                ATTP += static_cast<int32>(this->getMod(Mod::SMITE) / 256.f * 100); // Divide Smite value by 256
+                ATTP += static_cast<int32>(this->getMod(Mod::SMITE) / 256.0f * 100); // Divide Smite value by 256
             }
         }
     }
@@ -2613,8 +2613,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         auto PEffect = PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_EVASION_DOWN);
 
                         // When Feint's evasion down effect is on, the target can get "debuffed" with TREASURE_HUNTER_PROC +25% * level above first on Feint
-                        PEffect->addMod(Mod::TREASURE_HUNTER_PROC, PFeintEffect->GetSubPower());      // Remove TREASURE_HUNTER_PROC debuff on effect wearing off. This isnt added to the mob directly.
-                        PTarget->addModifier(Mod::TREASURE_HUNTER_PROC, PFeintEffect->GetSubPower()); // Add TREASURE_HUNTER_PROC debuff immediately to mob
+                        PEffect->addMod(Mod::TREASURE_HUNTER_PROC, PFeintEffect->GetSubPower());
                     }
                     StatusEffectContainer->DelStatusEffect(EFFECT_FEINT);
                 }

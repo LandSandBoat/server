@@ -5,9 +5,12 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 32)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setRespawnTime(0)
-    mob:setMobMod(xi.mobMod.SUPERLINK, 32)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

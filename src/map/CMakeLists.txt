@@ -81,11 +81,12 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/latent_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_application.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map_engine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_networking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/map_networking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/map_server.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/map_server.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_session_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/map_session_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_session.cpp
@@ -193,8 +194,13 @@ foreach(entry ${INIT_FILE_ENTRIES})
 endforeach()
 
 add_executable(xi_map
-    ${SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${resource})
+
+set(MAP_LIB_SOURCES ${SOURCES})
+add_library(xi_map_lib
+    STATIC
+        ${MAP_LIB_SOURCES})
 
 foreach(entry ${cmakelist_include_paths})
     if (${entry} STREQUAL "")
@@ -207,7 +213,7 @@ if(WIN32)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)
 endif()
 
-target_link_libraries(xi_map
+target_link_libraries(xi_map_lib
     PUBLIC
         ${SHARED_EXTERNAL_LIBS}
         ${MAP_ONLY_EXTERNAL_LIBS}
@@ -216,7 +222,7 @@ target_link_libraries(xi_map
         project_warnings
 )
 
-target_include_directories(xi_map
+target_include_directories(xi_map_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
@@ -224,8 +230,12 @@ target_include_directories(xi_map
         ${module_include_dirs}
 )
 
+target_link_libraries(xi_map
+    PUBLIC
+        xi_map_lib)
+
 if(NOT ${ENABLE_CLANG_TIDY})
-    target_precompile_headers(xi_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
+    target_precompile_headers(xi_map_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 endif()
 
 if (APPLE)
@@ -236,7 +246,8 @@ set_target_output_directory(xi_map)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_map)
 
 if(TRACY_ENABLE)
-    target_link_libraries(xi_map PUBLIC TracyClient)
+    target_link_libraries(xi_map_lib PUBLIC TracyClient)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map_tracy)
+    target_compile_definitions(xi_map_lib PUBLIC TRACY_ENABLE)
     message(STATUS "TRACY_ENABLE: xi_map will be output as xi_map_tracy")
 endif(TRACY_ENABLE)

@@ -19,7 +19,6 @@ return {
     ['Pacomart']     = { event = 180 },
     ['Pascaut']      = { event = 26 },
     ['Pomulus']      = { event = 700 },
-    ['Ramona']       = { event = 170 },
     ['Thunder_Hawk'] = { event = 84 },
     ['Valgeir']      = { event = 140 },
     ['Velema']       = { event = 10 },

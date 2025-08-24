@@ -12,18 +12,20 @@ end
 
 itemObject.onItemUse = function(target)
     target:forMembersInRange(30, function(member)
-        local healAmount = math.random(60, 90)
+        if member:isAlive() then
+            local healAmount = math.random(60, 90)
 
-        healAmount = healAmount + (healAmount * (member:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-        healAmount = healAmount * xi.settings.main.CURE_POWER
+            healAmount = healAmount + (healAmount * (member:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
+            healAmount = healAmount * xi.settings.main.CURE_POWER
 
-        local diff = (member:getMaxHP() - member:getHP())
-        if healAmount > diff then
-            healAmount = diff
+            local diff = (member:getMaxHP() - member:getHP())
+            if healAmount > diff then
+                healAmount = diff
+            end
+
+            member:addHP(healAmount)
+            member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
         end
-
-        member:addHP(healAmount)
-        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
     end)
 end
 

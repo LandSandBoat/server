@@ -1003,6 +1003,12 @@ end
 function CBaseEntity:findItems(itemID, location)
 end
 
+---@nodiscard
+---@param location integer?
+---@return CItem[]
+function CBaseEntity:getItems(location)
+end
+
 ---@param size integer
 ---@param arg1 integer?
 ---@return nil
@@ -1089,8 +1095,9 @@ end
 
 ---@param itemID integer
 ---@param container integer?
+---@param slot integer?
 ---@return nil
-function CBaseEntity:equipItem(itemID, container)
+function CBaseEntity:equipItem(itemID, container, slot)
 end
 
 ---@param itemID integer
@@ -2833,10 +2840,11 @@ end
 ---@param subType integer?
 ---@param subPower integer?
 ---@param tier integer?
----@param SourceType integer?
----@param SourceTypeParam integer?
+---@param sourceType integer?
+---@param sourceTypeParam integer?
+---@param originID integer?
 ---@return boolean
-function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier, SourceType, SourceTypeParam)
+function CBaseEntity:addStatusEffect(effectID, power, tick, duration, subType, subPower, tier, sourceType, sourceTypeParam, originID)
 end
 
 ---@param effect CStatusEffect
@@ -3114,6 +3122,11 @@ end
 
 ---@nodiscard
 ---@return boolean
+function CBaseEntity:isCharmed()
+end
+
+---@nodiscard
+---@return boolean
 function CBaseEntity:isTandemActive()
 end
 
@@ -3253,6 +3266,11 @@ end
 function CBaseEntity:getWeaponHitCount(offhand)
 end
 
+---@nodiscard
+---@return integer
+function CBaseEntity:addDamageFromMultipliers(damage, attackType, weaponSlot, allowProc)
+end
+
 ---@return nil
 function CBaseEntity:removeAmmo()
 end
@@ -3323,6 +3341,13 @@ end
 ---@param damage integer
 ---@return integer
 function CBaseEntity:checkDamageCap(damage)
+end
+
+---@nodiscard
+---@param damage integer
+---@param isPhysical boolean
+---@return integer
+function CBaseEntity:handleSevereDamage(damage, isPhysical)
 end
 
 ---@param arg0 integer? Optional Pet ID
@@ -3849,6 +3874,11 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getBattleTime()
+end
+
+---@nodiscard
+---@return integer
+function CBaseEntity:getCrystalElement()
 end
 
 ---@nodiscard

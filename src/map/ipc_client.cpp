@@ -31,7 +31,6 @@
 #include "conquest_system.h"
 #include "linkshell.h"
 #include "map_networking.h"
-#include "map_server.h"
 #include "party.h"
 #include "status_effect_container.h"
 #include "unitychat.h"

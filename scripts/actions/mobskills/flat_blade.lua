@@ -10,7 +10,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() ~= 4006 then
+    if mob:getPool() ~= xi.mobPools.QUBIA_ARENA_TRION then
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 35)
     end
 
@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getPool() == 4006 then -- Trion@Qubia_Arena only
+    if mob:getPool() == xi.mobPools.QUBIA_ARENA_TRION then
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.FLAT_LAND)
     end
 

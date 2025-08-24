@@ -38,6 +38,7 @@ extern sol::state lua;
 
 #include "common/xi.h"
 
+#include "attack.h"
 #include "items/item_equipment.h"
 #include "spell.h"
 
@@ -211,7 +212,7 @@ namespace luautils
     void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId = std::nullopt);
 
     void SendEntityVisualPacket(uint32 npcid, const char* command);
-    void InitInteractionGlobal();
+    void InitInteractionGlobal(const std::vector<uint16>& zoneIds);
     auto GetZone(uint16 zoneId) -> CZone*;
     auto GetItemByID(uint32 itemId) -> CItem*;
     auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> CBaseEntity*;
@@ -269,6 +270,7 @@ namespace luautils
     uint8  VanadielMoonDirection();
     uint8  VanadielRSERace();
     uint8  VanadielRSELocation();
+    void   SetTimeOffset(int32 offset); // Manipulate earth time forward or backward by offset seconds. Affects Vana'Diel time.
     bool   IsMoonNew();
     bool   IsMoonFull();
     void   StartElevator(uint32 ElevatorID);
@@ -413,7 +415,7 @@ namespace luautils
 
     uint32 GetMobRespawnTime(uint32 mobid);
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);
-    void   UpdateNMSpawnPoint(uint32 mobid);
+    bool   UpdateNMSpawnPoint(uint32 mobid);
 
     std::string GetServerMessage(uint8 language);               // Get the message to be delivered to player on first zone in of a session
     auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of recently active fishers (that fished in the last specified minutes)

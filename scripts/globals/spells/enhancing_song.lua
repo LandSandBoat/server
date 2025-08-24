@@ -207,10 +207,11 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
 
     -- Additional Potency from Status Effects.
     if soulVoicePower then -- Soul Voice/Macarato affects Power.
+        local marcatoEffect = caster:getStatusEffect(xi.effect.MARCATO)
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = math.floor(power * 2)
-        elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-            power = math.floor(power * 1.5)
+        elseif marcatoEffect ~= nil then
+            power = math.floor(power * (1 + (marcatoEffect:getPower() / 100)))
         end
     end
 
@@ -246,10 +247,11 @@ xi.spells.enhancing.calculateSongDuration = function(caster, target, spell, inst
 
     -- Additional duration from Status Effects.
     if not soulVoicePower then -- Soul Voice/Macarato doesn't affect potency, so it affects Duration.
+        local marcatoEffect = caster:getStatusEffect(xi.effect.MARCATO)
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             duration = math.floor(duration * 2)
-        elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-            duration = math.floor(duration * 1.5)
+        elseif marcatoEffect ~= nil then
+            duration = math.floor(duration * (1 + (marcatoEffect:getPower() / 100)))
         end
     end
 

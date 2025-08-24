@@ -58,6 +58,7 @@
 #include "enums/key_items.h"
 #include "item_container.h"
 #include "itemutils.h"
+#include "map_engine.h"
 #include "mob_modifier.h"
 #include "packets/c2s/0x110_fishing_2.h"
 #include "status_effect_container.h"

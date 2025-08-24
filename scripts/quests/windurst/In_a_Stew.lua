@@ -84,7 +84,7 @@ quest.sections =
                 [239] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         quest:setMustZone(player)
-                        player:delKeyItem(xi.ki.RIVERNEWORT)
+                        player:delKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end
                 end,

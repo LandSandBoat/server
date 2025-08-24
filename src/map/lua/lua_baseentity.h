@@ -26,6 +26,7 @@
 #include "luautils.h"
 #include "packets/message_standard.h"
 #include "packets/position.h"
+#include "utils/battleutils.h"
 #include "utils/charutils.h"
 
 enum class ChocoboColor : uint8_t;
@@ -172,15 +173,17 @@ public:
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox() const;                                               // Opens send box (to deliver items)
     void leaveGame();
-    void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode);
+    void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const;
 
     // Location and Positioning
-    int16 getWorldAngle(sol::variadic_args va);                                 // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
-    int16 getFacingAngle(CLuaBaseEntity const* target);                         // return angle between entity rot and target pos, aligned to number of degrees of difference
-    bool  isFacing(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you are facing the target
-    bool  isInfront(CLuaBaseEntity const* target, sol::object const& angleArg); // true if you're infront of the input target
-    bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
-    bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
+    int16 getWorldAngle(sol::variadic_args va);                                                // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
+    int16 getFacingAngle(CLuaBaseEntity const* target);                                        // return angle between entity rot and target pos, aligned to number of degrees of difference
+    bool  isFacing(CLuaBaseEntity const* target, sol::object const& angleArg);                 // true if you are facing the target
+    bool  isInfront(CLuaBaseEntity const* target, sol::object const& angleArg);                // true if you're infront of the input target
+    bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);                 // true if you're behind the input target
+    bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);                 // true if you're to the side of the input target
+    auto  isToEntitysLeft(CLuaBaseEntity const* target, sol::object const& angleArg) -> bool;  // true if you're to the left side of the input target (from target's perspective)
+    auto  isToEntitysRight(CLuaBaseEntity const* target, sol::object const& angleArg) -> bool; // true if you're to the right side of the input target (from target's perspective)
 
     auto   getZone(sol::object const& arg0) -> CZone*;
     uint16 getZoneID();
@@ -246,6 +249,7 @@ public:
     uint8  incrementItemWear(uint16 itemID);                               // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
     auto   findItems(uint16 itemID, sol::object const& location) -> sol::table;
+    auto   getItems(sol::object const& location) -> sol::table;
 
     void createShop(uint8 size, sol::object const& arg1);
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3);
@@ -265,7 +269,7 @@ public:
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel);
-    void equipItem(uint16 itemID, sol::object const& container);
+    void equipItem(uint16 itemID, sol::object const& container, sol::object const& equipSlot) const;
     void unequipItem(uint8 slotID);
 
     void setEquipBlock(uint16 equipBlock);
@@ -713,6 +717,7 @@ public:
 
     void charm(CLuaBaseEntity const* target, sol::object const& p0);
     void uncharm();
+    auto isCharmed() const -> bool;
     bool isTandemActive();
 
     uint8 addBurden(uint8 element, uint8 burden);
@@ -744,6 +749,7 @@ public:
     uint16 getRangedDmgRank();              // Get ranged weapond DMG rating used for calculating rank
     uint16 getAmmoDmg();                    // Get ammo DMG rating
     uint16 getWeaponHitCount(bool offhand); // Get PC weapon hit count (Occasionally Attacks N times weapons)
+    uint32 addDamageFromMultipliers(uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc);
 
     void removeAmmo();
 
@@ -759,10 +765,12 @@ public:
     int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
     int32 takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType);
     int32 checkDamageCap(int32 damage);
+    auto  handleSevereDamage(int32 damage, bool isPhysical) -> int32;
 
     // Pets and Automations
     void spawnPet(sol::object const& arg0);
     void despawnPet();
+    void setJugRemainingTime(uint32 remainingSeconds);
 
     auto   spawnTrust(uint16 trustId) -> CBaseEntity*;
     void   clearTrusts();
@@ -829,7 +837,7 @@ public:
     uint8  getEcosystem();
     uint16 getSuperFamily();
     uint16 getFamily();
-    bool   isMobType(uint8 mobType); // True if mob is of type passed to function
+    auto   isMobType(uint8 mobType) const -> bool; // True if mob is of type passed to function
     bool   isUndead();
     bool   isNM();
 
@@ -879,6 +887,7 @@ public:
     void  delMobMod(uint16 mobModID, int16 value);
 
     uint32 getBattleTime();
+    auto   getCrystalElement() const -> ELEMENT;
 
     uint16 getBehavior();
     void   setBehavior(uint16 behavior);
@@ -900,7 +909,7 @@ public:
     void usePetAbility(uint16 skillId, sol::object const& target) const; // forces a pet to use a pet ability
     auto getAbilityDistance(uint16 skillID) -> float;                    // Returns the specified distance for mob skill
     bool hasTPMoves();
-    void drawIn(sol::variadic_args va); // Forces a mob to draw-in the specified target, or its current target with no args
+    void drawIn(const sol::variadic_args& va) const; // Forces a mob to draw-in the specified target, or its current target with no args
 
     void weaknessTrigger(uint8 level);
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);

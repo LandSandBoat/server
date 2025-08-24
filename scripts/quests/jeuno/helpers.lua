@@ -107,3 +107,242 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     setmetatable(quest, self)
     return quest
 end
+
+-- Base class for use by the Zalsuhm unlocking a myth quests to reduce redundant code.
+-- The quests differ only in job matching the weapon
+xi.jeuno.helpers.UnlockingAMyth = {}
+
+setmetatable(xi.jeuno.helpers.UnlockingAMyth, { __index = Quest })
+xi.jeuno.helpers.UnlockingAMyth.__index = xi.jeuno.helpers.UnlockingAMyth
+
+function xi.jeuno.helpers.UnlockingAMyth:new(jobId)
+    -- wsId is unused, but useful data for testing/sanity
+    local vigilWeaponsData =
+    {
+        [xi.job.WAR] =
+        {
+            itemId = xi.item.STURDY_AXE, -- (WAR)
+            wsUnlockId = xi.wsUnlock.KINGS_JUSTICE,
+            wsId = xi.weaponskill.KINGS_JUSTICE,
+        },
+        [xi.job.MNK] =
+        {
+            itemId = xi.item.BURNING_FISTS, -- (MNK)
+            wsUnlockId = xi.wsUnlock.ASCETICS_FURY,
+            wsId = xi.weaponskill.ASCETICS_FURY,
+        },
+        [xi.job.WHM] =
+        {
+            itemId = xi.item.WEREBUSTER, -- (WHM)
+            wsUnlockId = xi.wsUnlock.MYSTIC_BOON,
+            wsId = xi.weaponskill.MYSTIC_BOON,
+        },
+        [xi.job.BLM] =
+        {
+            itemId = xi.item.MAGES_STAFF, -- (BLM)
+            wsUnlockId = xi.wsUnlock.VIDOHUNIR,
+            wsId = xi.weaponskill.VIDOHUNIR,
+        },
+        [xi.job.RDM] =
+        {
+            itemId = xi.item.VORPAL_SWORD, -- (RDM)
+            wsUnlockId = xi.wsUnlock.DEATH_BLOSSOM,
+            wsId = xi.weaponskill.DEATH_BLOSSOM,
+        },
+        [xi.job.THF] =
+        {
+            itemId = xi.item.SWORDBREAKER, -- (THF)
+            wsUnlockId = xi.wsUnlock.MANDALIC_STAB,
+            wsId = xi.weaponskill.MANDALIC_STAB,
+        },
+        [xi.job.PLD] =
+        {
+            itemId = xi.item.BRAVE_BLADE, -- (PLD)
+            wsUnlockId = xi.wsUnlock.ATONEMENT,
+            wsId = xi.weaponskill.ATONEMENT,
+        },
+        [xi.job.DRK] =
+        {
+            itemId = xi.item.DEATH_SICKLE, -- (DRK)
+            wsUnlockId = xi.wsUnlock.INSURGENCY,
+            wsId = xi.weaponskill.INSURGENCY,
+        },
+        [xi.job.BST] =
+        {
+            itemId = xi.item.DOUBLE_AXE, -- (BST)
+            wsUnlockId = xi.wsUnlock.PRIMAL_REND,
+            wsId = xi.weaponskill.PRIMAL_REND,
+        },
+        [xi.job.BRD] =
+        {
+            itemId = xi.item.DANCING_DAGGER, -- (BRD)
+            wsUnlockId = xi.wsUnlock.MORDANT_RIME,
+            wsId = xi.weaponskill.MORDANT_RIME,
+        },
+        [xi.job.RNG] =
+        {
+            itemId = xi.item.KILLER_BOW, -- (RNG)
+            wsUnlockId = xi.wsUnlock.TRUEFLIGHT,
+            wsId = xi.weaponskill.TRUEFLIGHT,
+        },
+        [xi.job.SAM] =
+        {
+            itemId = xi.item.WINDSLICER, -- (SAM)
+            wsUnlockId = xi.wsUnlock.TACHI_RANA,
+            wsId = xi.weaponskill.TACHI_RANA,
+        },
+        [xi.job.NIN] =
+        {
+            itemId = xi.item.SASUKE_KATANA, -- (NIN)
+            wsUnlockId = xi.wsUnlock.BLADE_KAMU,
+            wsId = xi.weaponskill.BLADE_KAMU,
+        },
+        [xi.job.DRG] =
+        {
+            itemId = xi.item.RADIANT_LANCE, -- (DRG)
+            wsUnlockId = xi.wsUnlock.DRAKESBANE,
+            wsId = xi.weaponskill.DRAKESBANE,
+        },
+        [xi.job.SMN] =
+        {
+            itemId = xi.item.SCEPTER_STAFF, -- (SMN)
+            wsUnlockId = xi.wsUnlock.GARLAND_OF_BLISS,
+            wsId = xi.weaponskill.GARLAND_OF_BLISS,
+        },
+        [xi.job.BLU] =
+        {
+            itemId = xi.item.WIGHTSLAYER, -- (BLU)
+            wsUnlockId = xi.wsUnlock.EXPIACION,
+            wsId = xi.weaponskill.EXPIACION,
+        },
+        [xi.job.COR] =
+        {
+            itemId = xi.item.QUICKSILVER, -- (COR)
+            wsUnlockId = xi.wsUnlock.LEADEN_SALUTE,
+            wsId = xi.weaponskill.LEADEN_SALUTE,
+        },
+        [xi.job.PUP] =
+        {
+            itemId = xi.item.INFERNO_CLAWS, -- (PUP)
+            wsUnlockId = xi.wsUnlock.STRINGING_PUMMEL,
+            wsId = xi.weaponskill.STRINGING_PUMMEL,
+        },
+        [xi.job.DNC] =
+        {
+            itemId = xi.item.MAIN_GAUCHE, -- (DNC)
+            wsUnlockId = xi.wsUnlock.PYRRHIC_KLEOS,
+            wsId = xi.weaponskill.PYRRHIC_KLEOS,
+        },
+        [xi.job.SCH] =
+        {
+            itemId = xi.item.ELDER_STAFF, -- (SCH)
+            wsUnlockId = xi.wsUnlock.OMNISCIENCE,
+            wsId = xi.weaponskill.OMNISCIENCE,
+        },
+    }
+
+    local questId    = xi.quest.id.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + jobId
+    local weaponData = vigilWeaponsData[jobId]
+
+    local quest = Quest:new(xi.questLog.JEUNO, questId)
+
+    quest.sections =
+    {
+        {
+            check = function(player, status, vars)
+                -- quest can be flagged multiple times for different jobs, no need for additional check here
+                -- https://www.ffxiah.com/forum/topic/11987/cancel-unlocking-a-myth-quest
+                return player:getMainJob() == jobId and status == xi.questStatus.QUEST_AVAILABLE
+            end,
+
+            [xi.zone.LOWER_JEUNO] =
+            {
+                ['Zalsuhm'] =
+                {
+                    onTrigger = function(player, npc)
+                        -- Must be wearing one of the weapons in the primary slot to flag the quest
+                        local weaponMain      = player:getEquipID(xi.slot.MAIN)
+                        local weaponRanged    = player:getEquipID(xi.slot.RANGED)
+                        local isWearingWeapon = weaponMain == weaponData.itemId or weaponRanged == weaponData.itemId
+                        local upsetZalsuhm    = quest:getVar(player, 'Upset_Zalsuhm') > 0
+
+                        if player:needToZone() and upsetZalsuhm then
+                            return quest:progressEvent(10090)
+                        else
+                            if upsetZalsuhm then
+                                quest:setVar(player, 'Upset_Zalsuhm', 0)
+                            end
+
+                            if isWearingWeapon then
+                                return quest:progressEvent(10086, jobId)
+                            else
+                                return quest:progressEvent(10085)
+                            end
+                        end
+                    end
+                },
+
+                onEventFinish =
+                {
+                    [10086] = function(player, csid, option, npc)
+                        if option == 53 then
+                            quest:setVar(player, 'Upset_Zalsuhm', 1)
+                            player:needToZone(true)
+                        elseif option == jobId then
+                            quest:begin(player)
+                        end
+                    end,
+                },
+            },
+        },
+
+        {
+            check = function(player, status, vars)
+                return player:getMainJob() == jobId and status == xi.questStatus.QUEST_ACCEPTED
+            end,
+
+            [xi.zone.LOWER_JEUNO] =
+            {
+                ['Zalsuhm'] =
+                {
+                    onTrade = function(player, npc, trade)
+                        -- TODO is there a message for trading anything else?
+                        if npcUtil.tradeHasExactly(trade, weaponData.itemId) then
+                            local requiredWsPoints = xi.equipment.vigilWeaponRequiredWsPoints(player)
+                            local wsPoints = trade:getItem(0):getWeaponskillPoints()
+
+                            if wsPoints <= requiredWsPoints / 5 then
+                                return quest:event(10091)
+                            elseif wsPoints <= requiredWsPoints * 4 / 5 then
+                                return quest:event(10092)
+                            elseif wsPoints < requiredWsPoints then
+                                return quest:event(10093)
+                            elseif wsPoints >= requiredWsPoints then
+                                return quest:progressEvent(10088, jobId)
+                            end
+                        end
+                    end,
+
+                    onTrigger = function(player, npc)
+                        return quest:cutscene(10087)
+                    end,
+                },
+
+                onEventFinish =
+                {
+                    [10088] = function(player, csid, option, npc)
+                        if quest:complete(player) then
+                            player:messageSpecial(zones[player:getZoneID()].text.MYTHIC_LEARNED, jobId)
+                            player:addLearnedWeaponskill(weaponData.wsUnlockId)
+                            -- player keeps vigil weapon
+                        end
+                    end,
+                },
+            },
+        },
+    }
+
+    self.__index = self
+    setmetatable(quest, self)
+    return quest
+end

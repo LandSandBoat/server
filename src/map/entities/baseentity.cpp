@@ -28,7 +28,6 @@
 #include "battlefield.h"
 #include "instance.h"
 #include "los/zone_los.h"
-#include "map_server.h"
 #include "navmesh.h"
 #include "zone.h"
 
@@ -75,7 +74,6 @@ void CBaseEntity::Spawn()
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
-    PAI->EventHandler.triggerListener("SPAWN", this);
 }
 
 void CBaseEntity::FadeOut()

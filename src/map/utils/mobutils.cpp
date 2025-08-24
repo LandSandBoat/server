@@ -31,6 +31,7 @@
 #include "grades.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
+#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
@@ -1699,6 +1700,10 @@ namespace mobutils
                 luautils::OnEntityLoad(PMob);
 
                 luautils::OnMobInitialize(PMob);
+                if (CZone* PZone = zoneutils::GetZone(zoneID))
+                {
+                    PZone->FindPartyForMob(PMob);
+                }
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);
 

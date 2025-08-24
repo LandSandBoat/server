@@ -64,4 +64,6 @@ xi.latent =
     VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
     VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
     VS_SUPERFAMILY           = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
+    MAINJOB                  = 62, -- mainjob - PARAM: JOBTYPE
+    IN_ADOULIN               = 63, -- in adoulin city zone
 }

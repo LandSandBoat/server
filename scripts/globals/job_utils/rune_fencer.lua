@@ -297,8 +297,7 @@ local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, du
         local newEffect = target:getStatusEffect(effect)
 
         for _, SDT in ipairs(SDTTypes) do
-            target:addMod(SDT, -power)
-            newEffect:addMod(SDT, -power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+            newEffect:addMod(SDT, -power)
         end
     end
 end
@@ -310,8 +309,7 @@ local function applyGambitSDTMods(target, SDTTypes, power, effect, duration) -- 
         local newEffect = target:getStatusEffect(effect)
 
         for _, SDT in ipairs(SDTTypes) do
-            target:addMod(SDT, -power)
-            newEffect:addMod(SDT, -power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+            newEffect:addMod(SDT, -power)
         end
     end
 end
@@ -782,8 +780,7 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
             local element    = getRaykeElement(rune)
 
             raykeElements = raykeElements + bit.lshift(element, 4 * i) -- pack 4 bit damage type into 16 bit int
-            target:addMod(resRankMod, -1)
-            effect:addMod(resRankMod, -1) -- Status effect handles removing the mods
+            effect:addMod(resRankMod, -1)
 
             i = i + 1
         end

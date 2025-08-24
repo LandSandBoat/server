@@ -22,7 +22,6 @@
 #include "map_session_container.h"
 
 #include "map_networking.h"
-#include "map_server.h"
 #include "map_session.h"
 #include "status_effect_container.h"
 

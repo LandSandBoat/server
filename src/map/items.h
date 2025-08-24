@@ -104,5 +104,6 @@ enum ITEMID : uint16
     DREAM_BELL_P1       = 18864,
     LADY_BELL           = 18868,
     LADY_BELL_P1        = 18869,
+    MARVELOUS_CHEER     = 22283,
     GIL                 = 65535,
 };

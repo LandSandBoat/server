@@ -95,7 +95,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
                     // reduce delay by 2-50%
                     // https://www.bg-wiki.com/ffxi/Rapid_Shot
                     // https://www.ffxiah.com/forum/topic/49806/ranger-firing-range-testing/4/#3233650
-                    delay       = (int16)(delay * (1.f - xirand::GetRandomNumber<uint16>(2, 50) / 100.f));
+                    delay       = (int16)(delay * (1.0f - xirand::GetRandomNumber<uint16>(2, 50) / 100.0f));
                     m_rapidShot = true;
                 }
             }

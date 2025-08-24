@@ -494,9 +494,9 @@ void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_sess
                 // Remove entry if needs to be
                 map.erase(it);
 
-                // Remove IP from map if it's the last entry
+                // Remove IP from map if no entries remain
                 auto& sessions = loginHelpers::getAuthenticatedSessions();
-                if (sessions[self->ipAddress].size() == 1)
+                if (sessions[self->ipAddress].size() == 0)
                 {
                     sessions.erase(sessions.begin());
                 }

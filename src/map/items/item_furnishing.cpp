@@ -20,7 +20,8 @@
 */
 
 #include "item_furnishing.h"
-#include "map_server.h"
+
+#include "common/utils.h"
 
 CItemFurnishing::CItemFurnishing(uint16 id)
 : CItem(id)

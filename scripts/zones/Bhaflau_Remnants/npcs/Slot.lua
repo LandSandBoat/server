@@ -10,7 +10,7 @@ local ID = zones[xi.zone.BHAFLAU_REMNANTS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.salvage.handleSlot(player, npc, trade, xi.item.ARRAPAGO_CARD, ID.mob.DEMENTED_JALAWAA)
+    xi.salvage.handleSlot(player, npc, trade, xi.item.ARRAPAGO_CARD, ID.mob.DEMENTED_JALAAWA)
 end
 
 entity.onTrigger = function(player, npc)

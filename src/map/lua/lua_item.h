@@ -72,8 +72,10 @@ public:
     auto getAugment(uint8 slot) -> sol::table; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    uint8  getSkillType();         // get skill type
-    uint16 getWeaponskillPoints(); // get current ws points
+    uint8  getSkillType();                            // get skill type
+    uint16 getWeaponskillPoints();                    // get current ws points
+    void   setWeaponskillPointsNeeded(uint16 points); // set required ws points to unlock (used for Unlocking a Myth era module)
+    uint16 getWeaponskillPointsNeeded();              // confirm required ws points on this item object
 
     bool  isTwoHanded();             // is a two handed weapon
     bool  isHandToHand();            // is a hand to hand weapon (or unarmed H2H)

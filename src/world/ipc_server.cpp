@@ -26,7 +26,6 @@
 #include "character_cache.h"
 #include "colonization_system.h"
 #include "conquest_system.h"
-#include "world_server.h"
 
 #include <concurrentqueue.h>
 #include <memory>
@@ -42,7 +41,7 @@ namespace
     }
 } // namespace
 
-IPCServer::IPCServer(WorldServer& worldServer)
+IPCServer::IPCServer(WorldEngine& worldServer)
 : worldServer_(worldServer)
 , zmqRouterWrapper_(getZMQEndpointString())
 {

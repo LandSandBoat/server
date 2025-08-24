@@ -16,13 +16,14 @@ set(SOURCES
     http_server.h
     ipc_server.cpp
     ipc_server.h
-    main.cpp
     party_system.cpp
     party_system.h
     time_server.h
     time_server.cpp
-    world_server.cpp
-    world_server.h
+    world_application.cpp
+    world_application.h
+    world_engine.cpp
+    world_engine.h
     zone_settings.h
 )
 
@@ -33,10 +34,15 @@ else()
 endif()
 
 add_executable(xi_world
-    ${SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${resource})
 
-target_link_libraries(xi_world
+set(WORLD_LIB_SOURCES ${SOURCES})
+add_library(xi_world_lib
+    STATIC
+        ${WORLD_LIB_SOURCES})
+
+target_link_libraries(xi_world_lib
     PUBLIC
         ${SHARED_EXTERNAL_LIBS}
         ${WORLD_ONLY_EXTERNAL_LIBS}
@@ -45,7 +51,7 @@ target_link_libraries(xi_world
         project_warnings
 )
 
-target_include_directories(xi_world
+target_include_directories(xi_world_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
@@ -55,5 +61,9 @@ target_include_directories(xi_world
 if (APPLE)
     disable_lto(xi_world)
 endif()
+
+target_link_libraries(xi_world
+    PUBLIC
+        xi_world_lib)
 
 set_target_output_directory(xi_world)

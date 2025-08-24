@@ -13,9 +13,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if
-        mob:getName() == 'Cernunnos' or
-        mob:getPool() == 671 or
-        mob:getPool() == 1346
+        mob:getPool() == xi.mobPool.CERNUNNOS or
+        mob:getPool() == xi.mobPool.CEMETERY_CHERRY or
+        mob:getPool() == xi.mobPool.LEAFLESS_JIDRA
     then
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 3, 120)
 

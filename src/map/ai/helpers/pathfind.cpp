@@ -56,9 +56,9 @@ CPathFind::CPathFind(CBaseEntity* PTarget)
 , m_maxDistance(0.0f)
 , m_carefulPathing(false)
 {
-    m_originalPoint.x        = 0.f;
-    m_originalPoint.y        = 0.f;
-    m_originalPoint.z        = 0.f;
+    m_originalPoint.x        = 0.0f;
+    m_originalPoint.y        = 0.0f;
+    m_originalPoint.z        = 0.0f;
     m_originalPoint.moving   = 0;
     m_originalPoint.rotation = 0;
 
@@ -483,7 +483,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     auto m_turnLength = static_cast<uint8_t>(xirand::GetRandomNumber<uint32>(maxTurns) + 1);
 
     // Seemingly arbitrary value to pass for maxRadius, all values seem to give similar results, likely due to navmesh polygons being too dense?
-    float      maxRadiusForPolyQuery = maxRadius / 10.f;
+    float      maxRadiusForPolyQuery = maxRadius / 10.0f;
     position_t startPosition         = start;
 
     // find end points for turns, iterate potentially twice as many times to account for erroneous turnPoints

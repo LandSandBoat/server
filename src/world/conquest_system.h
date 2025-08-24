@@ -21,9 +21,8 @@
 
 #pragma once
 
-#include "world_server.h"
-
 #include "common/regional_event.h"
+#include "world_engine.h"
 
 #include "map/conquest_system.h"
 #include "map/zone.h"
@@ -35,7 +34,7 @@
 class ConquestSystem
 {
 public:
-    ConquestSystem(WorldServer& worldServer);
+    ConquestSystem(WorldEngine& worldServer);
 
     bool handleMessage(uint8 messageType, IPPMessage&& message);
 
@@ -67,5 +66,5 @@ private:
     void sendInfluencesMsg(bool shouldUpdateZones);
     void sendRegionControlsMsg(ConquestMessage msgType);
 
-    WorldServer& worldServer_;
+    WorldEngine& worldServer_;
 };

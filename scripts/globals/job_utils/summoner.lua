@@ -232,6 +232,11 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     if target:getID() == action:getPrimaryTargetID() then
         -- MP and Cooldown is only consumed if the ability goes off
         summoner:delMP(mpCost)
+
+        if target:isMob() then
+            target:addBaseEnmity(summoner)
+        end
+
         if summoner:hasStatusEffect(xi.effect.APOGEE) then
             summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
             summoner:delStatusEffect(xi.effect.APOGEE)

@@ -10,7 +10,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEP_MEVA, 100)
     mob:setMod(xi.mod.LULLABY_MEVA, 100)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1) -- lock from moving
-    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
 entity.onMobEngage = function(mob, target)

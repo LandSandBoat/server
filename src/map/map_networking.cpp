@@ -33,23 +33,16 @@
 #include "packets/server_ip.h"
 
 #include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
-#include "ability.h"
-#include "daily_system.h"
 #include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "linkshell.h"
+#include "map_engine.h"
 #include "map_statistics.h"
-#include "mob_spell_list.h"
-#include "monstrosity.h"
 #include "packet_guard.h"
 #include "packet_system.h"
 #include "roe.h"
-#include "spell.h"
 #include "status_effect_container.h"
-#include "time_server.h"
 #include "transport.h"
 #include "zone.h"
 #include "zone_entities.h"
@@ -72,32 +65,17 @@ namespace
     uint32 TotalPacketsDelayedPerTick = 0U;
 } // namespace
 
-MapNetworking::MapNetworking(MapServer& mapServer, MapStatistics& mapStatistics)
-: mapServer_(mapServer)
-, mapStatistics_(mapStatistics)
+MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapConfig, asio::io_context& io_context)
+: mapStatistics_(mapStatistics)
+, mapIPP_(mapConfig.ipp)
 {
     TracyZoneScoped;
 
-    auto ip = 0;
-    if (auto maybeIP = mapServer_.args().present("--ip"))
-    {
-        ip = str2ip(*maybeIP);
-    }
-
-    auto port = 0;
-    if (auto maybePort = mapServer_.args().present("--port"))
-    {
-        port = std::stoi(*maybePort);
-    }
-
-    // The original logic relies on these being contructed as (0, 0) if not provided
-    // TODO: Remove all of the SQL query logic that relies on these being 0.
-    mapIPP_ = IPP(ip, port);
-
+    // TODO: Remove all of the SQL query logic that relies IPP being 0.
     try
     {
         const auto udpPort = mapIPP_.getPort() == 0 ? settings::get<uint16>("network.MAP_PORT") : mapIPP_.getPort();
-        mapSocket_         = std::make_unique<MapSocket>(udpPort, std::bind(&MapNetworking::handle_incoming_packet, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+        mapSocket_         = std::make_unique<MapSocket>(io_context, udpPort, std::bind(&MapNetworking::handle_incoming_packet, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
     catch (const std::exception& e)
     {
@@ -163,7 +141,7 @@ auto MapNetworking::doSocketsBlocking(timer::duration next) -> timer::duration
     return timer::now() - start;
 }
 
-void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<uint8> buffer, IPP ipp)
+void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<uint8> buffer, const IPP& ipp)
 {
     TracyZoneScoped;
 

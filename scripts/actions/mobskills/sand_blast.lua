@@ -13,7 +13,10 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120))
 
-    if mob:getPool() == 1318 and mob:getLocalVar('SAND_BLAST') == 1 then -- Feeler Anltion
+    if
+        mob:getPool() == xi.mobPools.FEELER_ANTLION and
+        mob:getLocalVar('SAND_BLAST') == 1
+    then
         local alastorId = mob:getID() + 6
         local alastor = GetMobByID(alastorId)
         if alastor and not alastor:isSpawned() then -- Alastor Antlion

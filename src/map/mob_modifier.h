@@ -54,7 +54,7 @@ enum MOBMODIFIER : int
     MOBMOD_IMMUNITY               = 23, // immune to set status effects. This only works from the db, not scripts
     MOBMOD_GRADUAL_RAGE           = 24, // (!) TODO: NOT YET IMPLEMENTED -- gradually rages
     MOBMOD_BUILD_RESIST           = 25, // (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
-    MOBMOD_SUPERLINK              = 26, // super link group. Only use this in scripts!
+    MOBMOD_SUPERLINK              = 26, // super link group. Only use this in scripts! Must be defined in onMobInitialize if relevant mobs are different families
     MOBMOD_SPELL_LIST             = 27, // set spell list
     MOBMOD_EXP_BONUS              = 28, // bonus exp (bonus / 100) negative values reduce exp.
     MOBMOD_ASSIST                 = 29, // mobs will assist me

@@ -28,7 +28,6 @@
 
 #include "alliance.h"
 #include "baseentity.h"
-#include "map_server.h"
 #include "modifier.h"
 #include "party.h"
 #include "trait.h"

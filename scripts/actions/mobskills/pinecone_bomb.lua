@@ -14,7 +14,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod  = 1
     local ftp     = 1
-    if mob:getPool() == 671 or mob:getPool() == 1346 then -- Cemetery Cherry and leafless Jidra
+
+    if
+        mob:getPool() == xi.mobPools.CEMETERY_CHERRY or
+        mob:getPool() == xi.mobPools.LEAFLESS_JIDRA
+    then
         ftp = 3
     else
         ftp = 2.3
@@ -24,7 +28,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
-    if mob:getPool() ~= 671 and mob:getPool() ~= 1346 then
+    if
+        mob:getPool() ~= xi.mobPools.CEMETERY_CHERRY and
+        mob:getPool() ~= xi.mobPools.LEAFLESS_JIDRA
+    then
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SLEEP_I, 1, 0, 30)
     end
 

@@ -12,7 +12,7 @@ local ID = zones[xi.zone.LUFAISE_MEADOWS]
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     [ID.mob.PADFOOT[1]] =
     {
@@ -285,10 +285,9 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    local mobID = mob:getID()
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints[mobID])
+    xi.mob.updateNMSpawnPoint(mob)
 
-    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_PADFOOD', function(mobArg, loot)
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_PADFOOT', function(mobArg, loot)
         if mob:getID() == ID.mob.PADFOOT[GetServerVariable('realPadfoot')] then
             loot:addGroup(xi.drop_rate.GUARANTEED,
             {
@@ -316,7 +315,7 @@ entity.onMobDespawn = function(mob)
                 DespawnMob(v)
             end
 
-            xi.mob.updateNMSpawnPoint(GetMobByID(v), spawnPoints[v])
+            xi.mob.updateNMSpawnPoint(v)
             GetMobByID(v):setRespawnTime(respawn)
         end
 

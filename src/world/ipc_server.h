@@ -27,7 +27,7 @@
 #include "common/zmq_dealer_wrapper.h"
 
 #include "character_cache.h"
-#include "world_server.h"
+#include "world_engine.h"
 #include "zone_settings.h"
 
 #include <nonstd/jthread.hpp>
@@ -37,7 +37,7 @@
 class IPCServer final : public ipc::IPCMessageHandlerBase<IPCServer>
 {
 public:
-    IPCServer(WorldServer& worldServer);
+    IPCServer(WorldEngine& worldServer);
 
     void handleIncomingMessages();
 
@@ -120,7 +120,7 @@ public:
     void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
 
 private:
-    WorldServer& worldServer_;
+    WorldEngine& worldServer_;
 
     CharacterCache   characterCache_;
     ZoneSettings     zoneSettings_;

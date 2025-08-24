@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.RHAPSODY
+-- TODO: Identify what this effect is used for.
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

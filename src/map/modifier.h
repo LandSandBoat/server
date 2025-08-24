@@ -527,6 +527,7 @@ enum class Mod
     TANDEM_STRIKE_POWER          = 271,  // Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
     TANDEM_BLOW_POWER            = 272,  // Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
     ENHANCES_MONSTER_CORRELATION = 1155, // Grants your pet acc +X and attp +X% against a weaker opposing ecosystem. Typically applied to pet, not owner (item_mods_pet.sql)
+    ENHANCES_SPUR                = 1157, // Increases Store TP bonus by the mod amount when using job ability Spur
 
     // Bard
     MINNE_EFFECT           = 433,  //
@@ -1096,12 +1097,14 @@ enum class Mod
     // TODO: These mods are not yet implemented.
     REWARD_RECAST = 1152, // TODO: Reward recast time reduction (seconds)
 
+    MOGHANCEMENT_GIL_BONUS_P = 1158, // Kill shot gil bonus (yes, really)
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1157 and onward
+    // SPARE IDs: 1159 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

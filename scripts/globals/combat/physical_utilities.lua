@@ -80,6 +80,104 @@ local shieldSizeToBlockRateTable =
     [6] = 100, -- Ochain  https://www.bg-wiki.com/ffxi/Category:Shields
 }
 
+-- WARNING: This function is used in src/map/attack.cpp "ProcessDamage" function.
+-- If you update these parameters, update them there as well.
+---@param attacker CBaseEntity
+---@param victim CBaseEntity
+---@param slot xi.slot
+---@param physicalAttackType xi.physicalAttackType
+---@param isH2H boolean
+---@param isFirstSwing boolean
+---@param isSneakAttack boolean
+---@param isTrickAttack boolean
+---@param damageRatio number
+xi.combat.physical.calculateAttackDamage = function(attacker, victim, slot, physicalAttackType, isH2H, isFirstSwing, isSneakAttack, isTrickAttack, damageRatio)
+    local bonusBasePhysicalDamage = 0
+    local damage = 0
+
+    -- Sneak Attack
+    if isSneakAttack then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + math.floor((attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100)))
+    end
+
+    -- Trick Attack
+    if isTrickAttack then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + math.floor((attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100)))
+    end
+
+    -- Consume Mana
+    if attacker:isPC() then
+        bonusBasePhysicalDamage = bonusBasePhysicalDamage + xi.combat.effect.handleConsumeMana(attacker)
+    end
+
+    if isH2H then
+        local naturalH2hDamage = math.floor(attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
+
+        if physicalAttackType == xi.physicalAttackType.KICK then
+            local kickDamage = naturalH2hDamage + attacker:getMod(xi.mod.KICK_DMG)
+            damage = math.floor(damageRatio * (kickDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+        else
+            damage = math.floor(damageRatio * (attacker:getWeaponDmg() + naturalH2hDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+        end
+    elseif slot == xi.slot.MAIN then
+        damage = math.floor(damageRatio * (attacker:getWeaponDmg() + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    elseif slot == xi.slot.SUB then
+        damage = math.floor(damageRatio * (attacker:getOffhandDmg() + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    elseif slot == xi.slot.AMMO then
+        damage = math.floor(damageRatio * (attacker:getRangedDmg() + xi.combat.physical.calculateMeleeStatFactor(attacker, victim)))
+    end
+
+    -- Scarlet Delirium
+    damage = math.floor(damage * xi.combat.damage.scarletDeliriumMultiplier(attacker))
+
+    -- Double Attack and Triple Attack
+    if physicalAttackType == xi.physicalAttackType.DOUBLE and attacker:isPC() then
+        damage = math.floor(damage * ((100 + attacker:getMod(xi.mod.DOUBLE_ATTACK_DMG)) / 100))
+    elseif physicalAttackType == xi.physicalAttackType.TRIPLE and attacker:isPC() then
+        damage = math.floor(damage * ((100 + attacker:getMod(xi.mod.TRIPLE_ATTACK_DMG)) / 100))
+    end
+
+    -- Soul Eater
+    if attacker:isPC() then
+        damage = xi.combat.effect.handleSoulEater(attacker, damage)
+    end
+
+    -- Damage multipliers
+    damage = attacker:addDamageFromMultipliers(damage, physicalAttackType, slot, isFirstSwing)
+
+    -- Sneak Attack Augment
+    if
+        attacker:getMod(xi.mod.AUGMENTS_SA) > 0 and
+        isSneakAttack and
+        attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK)
+    then
+        damage = damage + math.floor(damage * ((100 + attacker:getMod(xi.mod.AUGMENTS_SA)) / 100))
+    end
+
+    -- Trick Attack Augment
+    if
+        attacker:getMod(xi.mod.AUGMENTS_TA) > 0 and
+        isTrickAttack and
+        attacker:hasStatusEffect(xi.effect.TRICK_ATTACK)
+    then
+        damage = damage + math.floor(damage * ((100 + attacker:getMod(xi.mod.AUGMENTS_TA)) / 100))
+    end
+
+    --- Low level mobs can get negative fSTR so low they crater their (base weapon damage + fstr) to below 0.
+    --- Absorption isn't possible at this point in the calculation, so zero it.
+    if damage < 0 then
+        damage = 0
+    end
+
+    -- Apply Restraint Weaponskill Damage
+    if isFirstSwing then
+        xi.combat.effect.handleRestraint(attacker)
+    end
+
+    -- TODO: add charutils::TrySkillUP call
+    return damage
+end
+
 -- 'fSTR' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp

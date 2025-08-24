@@ -30,17 +30,9 @@
 #include "conquest_system.h"
 #include "entities/battleentity.h"
 #include "ipc_client.h"
-#include "map_networking.h"
-#include "map_server.h"
 #include "party.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
-#include "utils/jailutils.h"
-
-#include "packets/char_sync.h"
-#include "packets/menu_config.h"
-#include "packets/party_define.h"
-#include "packets/party_member_update.h"
 
 CAlliance::CAlliance(CBattleEntity* PEntity)
 {

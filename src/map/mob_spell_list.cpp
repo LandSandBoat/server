@@ -23,7 +23,6 @@
 
 #include "lua/luautils.h"
 
-#include "map_server.h"
 #include "mob_spell_list.h"
 
 CMobSpellList::CMobSpellList(const uint16 listId)
@@ -98,7 +97,7 @@ namespace mobSpellList
             return PMobSpellList[mobSpellListId].get();
         }
 
-        ShowCriticalFmt("Mob spell list ID {} does not exist.", mobSpellListId);
+        ShowErrorFmt("Mob spell list ID {} does not exist.", mobSpellListId);
         return nullptr;
     }
 }; // namespace mobSpellList

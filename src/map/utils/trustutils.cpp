@@ -34,7 +34,6 @@
 #include "zoneutils.h"
 
 #include "grades.h"
-#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 

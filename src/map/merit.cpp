@@ -22,8 +22,9 @@
 #include <cstring>
 
 #include "entities/charentity.h"
-#include "map_server.h"
 #include "merit.h"
+
+#include "map_engine.h"
 #include "packets/char_abilities.h"
 #include "packets/char_spells.h"
 #include "utils/charutils.h"

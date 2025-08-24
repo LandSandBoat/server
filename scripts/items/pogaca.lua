@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5637
 -- Item: pogaca
--- Food Effect: 5Min, All Races
+-- Food Effect: 3Min, All Races
 -----------------------------------
 -- Lizard Killer +10
 -- Resist Paralyze +10
@@ -15,8 +15,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5637)
+itemObject.onItemUse = function(target, user, item)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)

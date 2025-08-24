@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.MADRIGAL
+-- Notes: Effect subType for enhancing songs stores IDs of the caster. Set in scripts/globals/spells/enhancing_song.lua
 -- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -----------------------------------
 ---@type TEffect

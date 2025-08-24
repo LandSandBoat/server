@@ -1294,27 +1294,27 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['DRIED_MEAT'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['SALTED_FISH'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['HARD_COOKIE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['INSTANT_NOODLES'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['DRIED_AGARICUS'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['INSTANT_RICE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['CIPHER_SAKURA'] = function()

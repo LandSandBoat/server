@@ -98,6 +98,9 @@ xi.settings.map =
     -- Disables Treasure Hunter procs (Era behavior wants this true)
     DISABLE_TREASURE_HUNTER_PROCS = false,
 
+    -- Enable auto attack damage calculations in Lua
+    ENABLE_AUTO_ATTACK_LUA = false,
+
     -- Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 5.
     WS_POINTS_BASE = 5,
 

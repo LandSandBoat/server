@@ -26,7 +26,7 @@
 #include "common/database.h"
 #include "common/ipp.h"
 
-ConquestSystem::ConquestSystem(WorldServer& worldServer)
+ConquestSystem::ConquestSystem(WorldEngine& worldServer)
 : worldServer_(worldServer)
 {
 }

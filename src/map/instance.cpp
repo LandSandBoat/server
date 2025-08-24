@@ -34,12 +34,14 @@ CInstance::CInstance(CZone* zone, uint32 instanceid)
 : CZoneEntities(zone)
 , m_instanceid(instanceid)
 , m_zone(zone)
+, m_startTime(timer::now())
 {
     TracyZoneScoped;
-    LoadInstance();
 
-    m_startTime = timer::now();
-    m_wipeTimer = m_startTime;
+    m_wipeTimer     = m_startTime;
+    m_lastTimeCheck = m_startTime;
+
+    LoadInstance();
 }
 
 CInstance::~CInstance()
@@ -170,7 +172,8 @@ timer::duration CInstance::GetWipeTime()
 
 timer::duration CInstance::GetElapsedTime(timer::time_point tick)
 {
-    return tick - m_startTime;
+    // no reason to allow returning a negative elapsed time, can happen if map server is delayed and processing a previous tick
+    return std::max(timer::duration(0s), tick - m_startTime);
 }
 
 uint64_t CInstance::GetLocalVar(std::string const& name) const
@@ -226,7 +229,15 @@ void CInstance::SetLocalVar(std::string const& name, uint64_t value)
 
 void CInstance::CheckTime(timer::time_point tick)
 {
-    if (m_lastTimeCheck + 1s <= tick && !Failed())
+    auto checkFrequency = 1s;
+    // Once someone zones in, m_lastTimeCheck will change and checkFrequency will be pinned at 1s for the remainder of the instance
+    if (CharListEmpty() && m_startTime == m_lastTimeCheck)
+    {
+        // give grace period before first instance check to allow time to register instance and zone in
+        // instance.lua lets the client run through the event for a maximum of 35s before forcing zone change with `setPos`
+        checkFrequency = 40s;
+    }
+    if (m_lastTimeCheck + checkFrequency <= tick && !Failed())
     {
         luautils::OnInstanceTimeUpdate(GetZone(), this, static_cast<uint32>(timer::count_milliseconds(GetElapsedTime(tick))));
         m_lastTimeCheck = tick;

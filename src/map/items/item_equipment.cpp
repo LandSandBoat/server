@@ -25,8 +25,6 @@
 #include "common/logging.h"
 #include "common/sql.h"
 
-#include "map_server.h"
-
 #include <cstring>
 
 namespace

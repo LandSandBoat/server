@@ -20,7 +20,8 @@
 */
 
 #include "item_fish.h"
-#include "map_server.h"
+
+#include "common/utils.h"
 
 /************************************************************************
  *                                                                       *

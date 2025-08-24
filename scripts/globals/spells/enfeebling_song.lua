@@ -92,10 +92,11 @@ xi.spells.enfeebling.calculateSongPower = function(caster, spellEffect, basePowe
     }
 
     if effectTable[spellEffect] then
+        local marcatoEffect = caster:getStatusEffect(xi.effect.MARCATO)
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = power * 2
-        elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-            power = power * 1.5
+        elseif marcatoEffect ~= nil then
+            power = power * (1 + (marcatoEffect:getPower() / 100))
         end
     end
 

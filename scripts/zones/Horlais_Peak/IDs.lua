@@ -56,7 +56,6 @@ zones[xi.zone.HORLAIS_PEAK] =
         ARMSMASTER_DEKBUK       = GetFirstID('Armsmaster_Dekbuk'),
         ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
         DAROKBOK_OF_CLAN_REAPER = GetFirstID('Darokbok_of_Clan_Reaper'),
-        DREAD_DRAGON            = GetFirstID('Dread_Dragon'),
         HELLTAIL_HARRY          = GetFirstID('Helltail_Harry'),
         MAAT                    = GetFirstID('Maat'),
     },

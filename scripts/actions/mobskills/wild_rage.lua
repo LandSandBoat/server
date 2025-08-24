@@ -10,7 +10,6 @@
 ---@type TMobSkill
 local mobskillObject = {}
 
-local platoonScorpionPoolID  = 3157
 local wildRageDamageIncrease = 0.10
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
@@ -23,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local ftp    = 2.1
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    if mob:getPool() == platoonScorpionPoolID then
+    if mob:getPool() == xi.mobPools.PLATOON_SCORPION then
         -- should not have to verify because platoon scorps only in battlefield
         local numScorpsDead = mob:getBattlefield():getLocalVar('[ODS]NumScorpsDead')
 
@@ -34,8 +33,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
-    -- king vinegrroon
-    if mob:getPool() == 2262 then
+    if mob:getPool() == xi.mobPools.KING_VINEGARROON then
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 25, 3, 60)
     end
 

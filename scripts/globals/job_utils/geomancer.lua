@@ -103,38 +103,40 @@ local indiData =
     [xi.magic.spell.INDI_GRAVITY]    = { visualEffect = indiVisualEffect.WIND.ENEMIES,    effect = xi.effect.GEO_WEIGHT,              targetType = xi.auraTarget.ENEMIES },
 }
 
+-- "minPotency" is potency as zero combined skill
+-- "maxSkill" is the combined skill where you reach maxPotency
 local potencyData =
 {
-    [xi.effect.GEO_REGEN]               = { divisor =  20.00, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_POISON]              = { divisor =  20.00, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_REFRESH]             = { divisor = 150.00, minPotency = 1.0, maxPotency =  6.0, geoModMultiplier = 1.0 },
-    [xi.effect.GEO_STR_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_DEX_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_VIT_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_AGI_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_INT_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_MND_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_CHR_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_ATTACK_BOOST]        = { divisor =  25.93, minPotency = 4.6, maxPotency = 34.7, geoModMultiplier = 2.7 },
-    [xi.effect.GEO_DEFENSE_BOOST]       = { divisor =  22.61, minPotency = 9.7, maxPotency = 39.8, geoModMultiplier = 4.6 },
-    [xi.effect.GEO_MAGIC_ATK_BOOST]     = { divisor =  60.00, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_MAGIC_DEF_BOOST]     = { divisor =  45.00, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
-    [xi.effect.GEO_ACCURACY_BOOST]      = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_EVASION_BOOST]       = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_ACC_BOOST]     = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_EVASION_BOOST] = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_ATTACK_DOWN]         = { divisor =  36.00, minPotency = 4.6, maxPotency = 25.0, geoModMultiplier = 4.6 },
-    [xi.effect.GEO_DEFENSE_DOWN]        = { divisor =  60.81, minPotency = 2.7, maxPotency = 14.8, geoModMultiplier = 2.7 },
-    [xi.effect.GEO_MAGIC_ATK_DOWN]      = { divisor =  45.00, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
-    [xi.effect.GEO_MAGIC_DEF_DOWN]      = { divisor =  60.00, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_ACCURACY_DOWN]       = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_EVASION_DOWN]        = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_ACC_DOWN]      = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_MAGIC_EVASION_DOWN]  = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_SLOW]                = { divisor =  60.4,  minPotency = 0.9, maxPotency = 14.9, geoModMultiplier = 0.5 },
-    [xi.effect.GEO_PARALYSIS]           = { divisor =  60.00, minPotency = 1.0, maxPotency = 15.0, geoModMultiplier = 1.0 },
-    [xi.effect.GEO_WEIGHT]              = { divisor =  45.22, minPotency = 3.9, maxPotency = 19.9, geoModMultiplier = 1.1 },
-    [xi.effect.GEO_HASTE]               = { divisor =  30.1,  minPotency = 2.4, maxPotency = 29.9, geoModMultiplier = 1.1 },
+    [xi.effect.GEO_REGEN]               = { maxSkill = 600, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_POISON]              = { maxSkill = 600, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_REFRESH]             = { maxSkill = 900, minPotency = 1.0, maxPotency =  6.0, geoModMultiplier = 1.0 },
+    [xi.effect.GEO_STR_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_DEX_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_VIT_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_AGI_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_INT_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_MND_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_CHR_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_ATTACK_BOOST]        = { maxSkill = 900, minPotency = 4.6, maxPotency = 34.7, geoModMultiplier = 2.7 },
+    [xi.effect.GEO_DEFENSE_BOOST]       = { maxSkill = 900, minPotency = 9.7, maxPotency = 39.8, geoModMultiplier = 4.6 },
+    [xi.effect.GEO_MAGIC_ATK_BOOST]     = { maxSkill = 900, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_MAGIC_DEF_BOOST]     = { maxSkill = 900, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
+    [xi.effect.GEO_ACCURACY_BOOST]      = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_EVASION_BOOST]       = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_ACC_BOOST]     = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_EVASION_BOOST] = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_ATTACK_DOWN]         = { maxSkill = 900, minPotency = 4.6, maxPotency = 25.0, geoModMultiplier = 4.6 },
+    [xi.effect.GEO_DEFENSE_DOWN]        = { maxSkill = 900, minPotency = 2.7, maxPotency = 14.8, geoModMultiplier = 2.7 },
+    [xi.effect.GEO_MAGIC_ATK_DOWN]      = { maxSkill = 900, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
+    [xi.effect.GEO_MAGIC_DEF_DOWN]      = { maxSkill = 900, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_ACCURACY_DOWN]       = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_EVASION_DOWN]        = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_ACC_DOWN]      = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_MAGIC_EVASION_DOWN]  = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_SLOW]                = { maxSkill = 900, minPotency = 0.9, maxPotency = 14.9, geoModMultiplier = 0.5 },
+    [xi.effect.GEO_PARALYSIS]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 15.0, geoModMultiplier = 1.0 },
+    [xi.effect.GEO_WEIGHT]              = { maxSkill = 900, minPotency = 3.9, maxPotency = 19.9, geoModMultiplier = 1.1 },
+    [xi.effect.GEO_HASTE]               = { maxSkill = 900, minPotency = 2.4, maxPotency = 29.9, geoModMultiplier = 1.1 },
 }
 
 local function getLuopan(player)
@@ -221,10 +223,13 @@ local function getEffectPotency(player, effect)
     end
 
     local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
-    local divisor            = potencyData[effect].divisor
+    local maxSkill           = potencyData[effect].maxSkill
     local minPotency         = potencyData[effect].minPotency
     local maxPotency         = potencyData[effect].maxPotency
-    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
+    -- TODO find the real scaling formula?
+    -- linear regression to find divisor based on minPotency at 0 skill and maxPotency at "maxSkill"
+    local divisor            = maxSkill / (maxPotency - minPotency)
+    local potency            = utils.clamp(minPotency + combinedSkillLevel / divisor, minPotency, maxPotency)
 
     if geomancyMod > 0 and not player:hasStatusEffect(xi.effect.ENTRUST) then
         -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect

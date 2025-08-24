@@ -417,7 +417,7 @@ float SqlConnection::GetFloatData(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
+            return (self->row[col] ? (float)atof(self->row[col]) : 0.0f);
         }
     }
     ShowCritical("Query: %s", self->buf);

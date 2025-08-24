@@ -2,7 +2,6 @@
 -- Zone: Western_Altepa_Desert (125)
 -----------------------------------
 local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
-require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
@@ -30,10 +29,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-19.901, 13.607, 440.058, 78)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 2
-    end
-
     -- AMK06/AMK07
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
@@ -50,9 +45,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 2 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
@@ -89,14 +81,14 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if dahu then
         local dahuValidWeather =
-        {
+        set{
             xi.weather.DUST_STORM,
             xi.weather.SAND_STORM,
             xi.weather.HOT_SPELL,
             xi.weather.HEAT_WAVE,
         }
 
-        if utils.contains(weather, dahuValidWeather) then
+        if dahuValidWeather[weather] then
             DisallowRespawn(ID.mob.DAHU, false) -- Allow respawn.
 
             -- Spawn if respawn is up

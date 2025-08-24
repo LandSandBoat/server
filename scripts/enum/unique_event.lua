@@ -15,4 +15,6 @@ xi.uniqueEvent =
 {
     EKOKOKO_INTRODUCTION = 0,
     RECEIVED_NEXUS_CAPE  = 1,
+    MET_MATHILDES_SON = 2,
+    RAMONA_INTRODUCTION = 3,
 }

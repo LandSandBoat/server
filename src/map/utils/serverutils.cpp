@@ -29,7 +29,7 @@
 
 #include "utils/serverutils.h"
 
-#include "map_server.h"
+#include "common/database.h"
 
 namespace serverutils
 {

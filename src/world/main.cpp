@@ -19,10 +19,13 @@
 ===========================================================================
 */
 
-#include "world_server.h"
+#include "world_application.h"
 
 int main(int argc, char** argv)
 {
-    std::make_unique<WorldServer>(argc, argv)->run();
+    const auto worldApp = std::make_unique<WorldApplication>(argc, argv);
+
+    worldApp->run();
+
     return 0;
 }

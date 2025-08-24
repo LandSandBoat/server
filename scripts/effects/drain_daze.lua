@@ -1,5 +1,8 @@
 -----------------------------------
 -- xi.effect.DRAIN_DAZE
+-- Notes:
+-- Debuff applied to an entity when hit by an another entity's party that have a corresponding Samba effect active.
+-- subType for Daze effects stores the ID of the attacker. See battleutils.cpp "HandleEnspell"
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

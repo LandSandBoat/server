@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _CALLIANCE_H
-#define _CALLIANCE_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "map_server.h"
 
 #include <vector>
 
@@ -59,5 +57,3 @@ private:
     CParty* aLeader; // alliance lead party
     uint32  loadPartyCount() const;
 };
-
-#endif

@@ -11,7 +11,10 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() == 1846 and mob:getHP() < mob:getMaxHP() / 100 * 35 then
+    if
+        mob:getPool() == xi.mobPools.GULOOL_JA_JA and
+        mob:getHP() < mob:getMaxHP() / 100 * 35
+    then
         return 0
     else
         return 1

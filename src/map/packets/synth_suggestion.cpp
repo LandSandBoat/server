@@ -21,11 +21,10 @@
 
 #include "synth_suggestion.h"
 
-#include "map_server.h"
-
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/sql.h"
+#include "map_engine.h"
 
 #include <map>
 

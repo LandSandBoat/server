@@ -82,14 +82,16 @@ namespace PacketGuard
         // NOTE: You should rate limit any packet that a player can
         //     : send at will that results in an immediate database hit
         //     : or generates logs or results in file or network io.
-        ratelimitList[0x017] = 1s; // Invalid NPC Information Response
-        ratelimitList[0x03B] = 1s; // Mannequin Equip
-        ratelimitList[0x05D] = 2s; // Emotes
-        ratelimitList[0x0B7] = 1s; // Assist Channel
-        ratelimitList[0x0F4] = 1s; // Wide Scan
-        ratelimitList[0x0F5] = 1s; // Wide Scan Track
-        ratelimitList[0x11B] = 2s; // Set Job Master Display
-        ratelimitList[0x11D] = 2s; // Jump
+        ratelimitList[0x017] = 1s;    // Invalid NPC Information Response
+        ratelimitList[0x03B] = 1s;    // Mannequin Equip
+        ratelimitList[0x05D] = 2s;    // Emotes
+        ratelimitList[0x083] = 250ms; // Vendor Shop Purchase
+        ratelimitList[0x0AA] = 250ms; // Guild Shop Purchase
+        ratelimitList[0x0B7] = 1s;    // Assist Channel
+        ratelimitList[0x0F4] = 1s;    // Wide Scan
+        ratelimitList[0x0F5] = 1s;    // Wide Scan Track
+        ratelimitList[0x11B] = 2s;    // Set Job Master Display
+        ratelimitList[0x11D] = 2s;    // Jump
     }
 
     bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)

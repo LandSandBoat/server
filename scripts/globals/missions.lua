@@ -3,6 +3,7 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.mission = xi.mission or {}
 
+---@enum xi.mission.log_id
 xi.mission.log_id =
 {
     SANDORIA    =  0,
@@ -565,7 +566,7 @@ xi.mission.id =
     {
         RHAPSODIES_OF_VANADIEL          = 0,   -- ±
         -- CREATION_AND_REBIRTH         =  -- Category
-        RESONACE                        = 2,   -- ±
+        RESONANCE                       = 2,   -- ±
         EMISSARY_FROM_THE_SEAS          = 3,   -- ±
         SET_FREE                        = 4,   -- ±
         THE_BEGINNING                   = 6,   -- ±

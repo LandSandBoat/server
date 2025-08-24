@@ -98,12 +98,14 @@ namespace charutils
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
     void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
 
-    void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
-    void BuildingCharSkillsTable(CCharEntity* PChar);
-    void BuildingCharWeaponSkills(CCharEntity* PChar);
-    void BuildingCharAbilityTable(CCharEntity* PChar);
-    void BuildingCharTraitsTable(CCharEntity* PChar);
-    void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
+    void  TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
+    bool  isArtsBonusActive(CCharEntity* PChar, SKILLTYPE SkillID);
+    int16 ArtsBonusSkill(CCharEntity* PChar, SKILLTYPE SkillID);
+    void  BuildingCharSkillsTable(CCharEntity* PChar);
+    void  BuildingCharWeaponSkills(CCharEntity* PChar);
+    void  BuildingCharAbilityTable(CCharEntity* PChar);
+    void  BuildingCharTraitsTable(CCharEntity* PChar);
+    void  BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget);
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget);

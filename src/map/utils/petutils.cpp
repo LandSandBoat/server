@@ -34,10 +34,11 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "map_server.h"
 #include "mob_spell_list.h"
 #include "notoriety_container.h"
 #include "petutils.h"
+
+#include "map_engine.h"
 #include "puppetutils.h"
 #include "status_effect_container.h"
 #include "zone_instance.h"

@@ -23,6 +23,7 @@
 
 #include "common/timer.h"
 #include "lua/luautils.h"
+#include "map_engine.h"
 #include "packets/chat_message.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"

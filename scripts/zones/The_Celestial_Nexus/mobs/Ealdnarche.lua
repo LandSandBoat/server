@@ -18,6 +18,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
+    mob:setUnkillable(true)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)

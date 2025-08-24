@@ -28,8 +28,6 @@
 #include "lua.h"
 #include "settings.h"
 #include "task_manager.h"
-#include "timer.h"
-#include "version.h"
 #include "xirand.h"
 
 #ifdef _WIN32
@@ -49,8 +47,13 @@ namespace
     // loop has begun.
     bool gIsRunning = false;
 
-    void handleSignal(int signal)
+    void handleSignal(const std::error_code& error, int signal)
     {
+        if (error)
+        {
+            return;
+        }
+
         switch (signal)
         {
 #ifdef _WIN32
@@ -60,7 +63,6 @@ namespace
             case SIGTERM:
                 gIsRunning = false;
                 std::exit(0);
-                break;
             case SIGABRT:
 #ifdef _WIN32
             case SIGABRT_COMPAT:
@@ -87,10 +89,12 @@ namespace
 #endif // _WIN32
 } // namespace
 
-Application::Application(std::string const& serverName, int argc, char** argv)
-: serverName_(serverName)
-, args_(std::make_unique<Arguments>(serverName, argc, argv))
+Application::Application(const ApplicationConfig& appConfig, int argc, char** argv)
+: signals_(io_context_)
+, serverName_(appConfig.serverName)
+, args_(std::make_unique<Arguments>(appConfig, argc, argv))
 {
+    // Common Application initialization
     prepareLogging();
     trySetConsoleTitle();
     registerSignalHandlers();
@@ -109,10 +113,7 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     //
 
     ShowInfoFmt("=======================================================================");
-    ShowInfoFmt("Begin {}-server init...", serverName);
-
-    srand(earth_time::timestamp());
-    xirand::seed();
+    ShowInfoFmt("Begin {}-server init...", serverName_);
 
 #ifdef ENV64BIT
     ShowInfo("64-bit environment detected");
@@ -125,7 +126,9 @@ Application::Application(std::string const& serverName, int argc, char** argv)
 
 Application::~Application()
 {
+    signals_.cancel();
     tryRestoreQuickEditMode();
+    logging::ShutDown();
 }
 
 void Application::trySetConsoleTitle()
@@ -137,25 +140,24 @@ void Application::trySetConsoleTitle()
 
 void Application::registerSignalHandlers()
 {
-    // TODO: Replace with asio::signal_set
-
-    std::signal(SIGTERM, &handleSignal);
-    std::signal(SIGINT, &handleSignal);
+    signals_.add(SIGINT);
+    signals_.add(SIGTERM);
 #if !defined(_DEBUG) && defined(_WIN32) // need unhandled exceptions to debug on Windows
-    std::signal(SIGBREAK, &handleSignal);
-    std::signal(SIGABRT, &handleSignal);
-    std::signal(SIGABRT_COMPAT, &handleSignal);
-    std::signal(SIGSEGV, &handleSignal);
-    std::signal(SIGFPE, &handleSignal);
-    std::signal(SIGILL, &handleSignal);
+    signals_.add(SIGBREAK);
+    signals_.add(SIGABRT);
+    signals_.add(SIGABRT_COMPAT);
+    signals_.add(SIGSEGV);
+    signals_.add(SIGFPE);
+    signals_.add(SIGILL);
 #endif
 #ifndef _WIN32
-    std::signal(SIGXFSZ, &handleSignal);
-    std::signal(SIGPIPE, &handleSignal);
+    signals_.add(SIGXFSZ);
+    signals_.add(SIGPIPE);
 #endif
+    signals_.async_wait(&handleSignal);
 }
 
-void Application::usercheck()
+void Application::usercheck() const
 {
 #ifndef TRACY_ENABLE
     // We _need_ root/admin for Tracy to be able to collect the full suite
@@ -189,22 +191,22 @@ void Application::tryIncreaseRLimits()
 #endif
 }
 
-void Application::tryDisableQuickEditMode()
+void Application::tryDisableQuickEditMode() const
 {
 #ifdef _WIN32
     // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
     // causing the server to freeze.
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    const HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
     GetConsoleMode(hInput, &prevQuickEditMode);
     SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prevQuickEditMode & ~ENABLE_QUICK_EDIT_MODE));
 #endif // _WIN32
 }
 
-void Application::tryRestoreQuickEditMode()
+void Application::tryRestoreQuickEditMode() const
 {
 #ifdef _WIN32
     // Re-enable Quick Edit Mode upon Exiting if it is still disabled
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    const HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
     SetConsoleMode(hInput, prevQuickEditMode);
 #endif // _WIN32
 }
@@ -215,27 +217,10 @@ void Application::prepareLogging()
     bool appendDate = false;
 
     //
-    // MapServer specific setup (TODO: Move this into MapServer)
-    //
-
-    if (serverName_ == "map")
-    {
-        if (auto ipArg = args_->present("--ip"))
-        {
-            logFile = *ipArg;
-        }
-
-        if (auto portArg = args_->present("--port"))
-        {
-            logFile.append(*portArg);
-        }
-    }
-
-    //
     // Regular setup
     //
 
-    if (auto logArg = args_->present("--log"))
+    if (const auto logArg = args_->present("--log"))
     {
         logFile = *logArg;
     }
@@ -250,8 +235,6 @@ void Application::prepareLogging()
 
 void Application::markLoaded()
 {
-    loadConsoleCommands();
-
     ShowInfoFmt("The {}-server is ready to work...", serverName_);
     ShowInfoFmt("Type 'help' for a list of available commands.");
     ShowInfoFmt("=======================================================================");
@@ -264,7 +247,7 @@ void Application::markLoaded()
     }
 }
 
-bool Application::isRunning()
+auto Application::isRunning() const -> bool
 {
     return gIsRunning;
 }
@@ -275,9 +258,57 @@ void Application::requestExit()
     io_context_.stop();
 }
 
-bool Application::isRunningInCI()
+auto Application::isRunningInCI() const -> bool
 {
     return args_->get<bool>("--ci");
+}
+
+void Application::run()
+{
+    ShowInfo("Creating engine");
+    engine_ = createEngine();
+
+    if (engine_)
+    {
+        ShowInfo("Initializing engine");
+        engine_->onInitialize();
+
+        // Register specialized commands
+        registerCommands(console());
+    }
+
+    markLoaded();
+
+    try
+    {
+        // NOTE: io_context_.run() takes over and blocks this thread. Anything after this point will only fire
+        // if io_context_ finishes!
+        //
+        // This busy loop looks nasty, however --
+        // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
+        //
+        // If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
+        // run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.
+        // It is then the responsibility of the application to catch the exception.
+
+        while (isRunning())
+        {
+            try
+            {
+                io_context_.run();
+                break;
+            }
+            catch (std::exception& e)
+            {
+                // TODO: make a list of "allowed exceptions", the rest can/should cause shutdown.
+                ShowErrorFmt("Inner fatal: {}", e.what());
+            }
+        }
+    }
+    catch (std::exception& e)
+    {
+        ShowErrorFmt("Outer fatal: {}", e.what());
+    }
 }
 
 auto Application::ioContext() -> asio::io_context&
@@ -285,12 +316,12 @@ auto Application::ioContext() -> asio::io_context&
     return io_context_;
 }
 
-auto Application::args() -> Arguments&
+auto Application::args() const -> Arguments&
 {
     return *args_;
 }
 
-auto Application::console() -> ConsoleService&
+auto Application::console() const -> ConsoleService&
 {
     return *consoleService_;
 }

@@ -27,18 +27,15 @@
 #include "campaign_system.h"
 #include "common/async.h"
 #include "common/logging.h"
-#include "common/timer.h"
 #include "conquest_system.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
 #include "map_networking.h"
-#include "map_server.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
-#include "packets/entity_update.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -56,11 +53,11 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void TOTDChange(vanadiel_time::TOTD TOTD)
+    void TOTDChange(const vanadiel_time::TOTD TOTD)
     {
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            PZone.second->TOTDChange(TOTD);
+            PZone->TOTDChange(TOTD);
         }
     }
 
@@ -74,21 +71,21 @@ namespace zoneutils
     void InitializeWeather()
     {
         TracyZoneScoped;
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            if (!PZone.second->IsWeatherStatic())
+            if (!PZone->IsWeatherStatic())
             {
-                PZone.second->UpdateWeather();
+                PZone->UpdateWeather();
             }
             else
             {
-                if (!PZone.second->m_WeatherVector.empty())
+                if (!PZone->m_WeatherVector.empty())
                 {
-                    PZone.second->SetWeather((WEATHER)PZone.second->m_WeatherVector.at(0).common);
+                    PZone->SetWeather(static_cast<WEATHER>(PZone->m_WeatherVector.at(0).common));
                 }
                 else
                 {
-                    PZone.second->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
+                    PZone->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
                 }
             }
         }
@@ -97,60 +94,57 @@ namespace zoneutils
 
     void SavePlayTime()
     {
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            PZone.second->SavePlayTime();
+            PZone->SavePlayTime();
         }
         ShowDebug("Player playtime saving finished");
     }
 
-    CZone* GetZone(uint16 ZoneID)
+    auto GetZone(uint16 zoneId) -> CZone*
     {
-        if (auto PZone = g_PZoneList.find(ZoneID); PZone != g_PZoneList.end())
+        if (g_PZoneList.contains(zoneId))
         {
-            return PZone->second;
+            return g_PZoneList.at(zoneId);
         }
-        ShowWarning(fmt::format("Invalid zone requested: {}", ZoneID));
+
+        ShowWarning(fmt::format("Invalid zone requested: {}", zoneId));
         return nullptr;
     }
 
-    CNpcEntity* GetTrigger(uint16 TargID, uint16 ZoneID)
+    auto GetTrigger(const uint16 targId, const uint16 zoneId) -> CNpcEntity*
     {
-        g_PTrigger->targid = TargID;
-        g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
+        g_PTrigger->targid = targId;
+        g_PTrigger->id     = ((4096 + zoneId) << 12) + targId;
         return g_PTrigger;
     }
 
-    CBaseEntity* GetEntity(uint32 ID, uint8 filter)
+    auto GetEntity(const uint32 id, const uint8 filter) -> CBaseEntity*
     {
         const uint16 DynamicEntityStart = 0x700;
-        uint16       zoneID             = (ID >> 12) & 0x0FFF;
-        CZone*       PZone              = GetZone(zoneID);
-        if (PZone)
+        const uint16 zoneID             = (id >> 12) & 0x0FFF;
+        if (CZone* PZone = GetZone(zoneID))
         {
-            return PZone->GetEntity((uint16)(ID & 0x00000800 ? (ID & 0x7FF) + DynamicEntityStart : ID & 0xFFF), filter);
+            return PZone->GetEntity(static_cast<uint16>(id & 0x00000800 ? (id & 0x7FF) + DynamicEntityStart : id & 0xFFF), filter);
         }
-        else
-        {
-            return nullptr;
-        }
+
+        return nullptr;
     }
 
-    CCharEntity* GetCharByName(std::string const& name)
+    auto GetCharByName(std::string const& name) -> CCharEntity*
     {
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            CCharEntity* PChar = PZone.second->GetCharByName(name);
-
-            if (PChar != nullptr)
+            if (CCharEntity* PChar = PZone->GetCharByName(name); PChar != nullptr)
             {
                 return PChar;
             }
         }
+
         return nullptr;
     }
 
-    auto GetCharFromWorld(const uint32 charid, const uint16 targid) -> CCharEntity*
+    auto GetCharFromWorld(const uint32 charId, const uint16 targId) -> CCharEntity*
     {
         for (auto [zoneId, PZone] : g_PZoneList)
         {
@@ -158,7 +152,8 @@ namespace zoneutils
             {
                 continue;
             }
-            if (CBaseEntity* PEntity = PZone->GetEntity(targid, TYPE_PC); PEntity != nullptr && PEntity->id == charid)
+
+            if (CBaseEntity* PEntity = PZone->GetEntity(targId, TYPE_PC); PEntity != nullptr && PEntity->id == charId)
             {
                 return static_cast<CCharEntity*>(PEntity);
             }
@@ -167,29 +162,29 @@ namespace zoneutils
         return nullptr;
     }
 
-    CCharEntity* GetChar(uint32 charid)
+    auto GetChar(const uint32 charId) -> CCharEntity*
     {
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            CBaseEntity* PEntity = PZone.second->GetCharByID(charid);
-            if (PEntity)
+            if (CCharEntity* PEntity = PZone->GetCharByID(charId))
             {
-                return (CCharEntity*)PEntity;
+                return PEntity;
             }
         }
+
         return nullptr;
     }
 
-    CCharEntity* GetCharToUpdate(uint32 primary, uint32 tertiary)
+    auto GetCharToUpdate(uint32 primary, uint32 tertiary) -> CCharEntity*
     {
         CCharEntity* PPrimary   = nullptr;
         CCharEntity* PSecondary = nullptr;
         CCharEntity* PTertiary  = nullptr;
 
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
             // clang-format off
-            PZone.second->ForEachChar([primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
+            PZone->ForEachChar([primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
             {
                 if (!PPrimary)
                 {
@@ -214,6 +209,7 @@ namespace zoneutils
                 return PPrimary;
             }
         }
+
         if (PSecondary)
         {
             return PSecondary;
@@ -222,7 +218,7 @@ namespace zoneutils
         return PTertiary;
     }
 
-    auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>
+    auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<uint16>
     {
         const auto ip    = mapIPP.getIP();
         const auto ipStr = mapIPP.getIPString();
@@ -249,10 +245,9 @@ namespace zoneutils
         return zonesOnThisProcess;
     }
 
-    bool IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId)
+    auto IsZoneAssignedToThisProcess(const IPP mapIPP, const ZONEID zoneId) -> bool
     {
-        std::vector processZones = GetZonesAssignedToThisProcess(mapIPP);
-        for (auto& zone : processZones)
+        for (const auto zone : GetZonesAssignedToThisProcess(mapIPP))
         {
             if (zone == zoneId)
             {
@@ -269,15 +264,13 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadNPCList(IPP mapIPP)
+    void LoadNPCList(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
         ShowInfo("Loading NPCs");
 
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
-
         // clang-format off
-        for (const auto zoneId : zonesOnThisProcess)
+        for (const auto zoneId : zoneIds)
         {
             Async::getInstance()->submit([zoneId]()
             {
@@ -369,7 +362,7 @@ namespace zoneutils
         ShowInfo("Loading NPC scripts");
         // handle npc spawn functions after they're all done loading
         // clang-format off
-        ForEachZone([](CZone* PZone)
+        ForEachZone(zoneIds, [](CZone* PZone)
         {
             // NOTE: We have to do this in two passes because NPCs may rely on eachother.
             //     : So load them all, then spawn them all.
@@ -393,18 +386,16 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadMOBList(IPP mapIPP)
+    void LoadMOBList(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
         ShowInfo("Loading Mobs");
-
-        const auto zonesOnThisProcess = GetZonesAssignedToThisProcess(mapIPP);
 
         const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         // clang-format off
-        for (const auto zoneId : zonesOnThisProcess)
+        for (const auto zoneId : zoneIds)
         {
             Async::getInstance()->submit([normalLevelRangeMin, normalLevelRangeMax, zoneId]()
             {
@@ -412,7 +403,7 @@ namespace zoneutils
 
                 auto* PZone = g_PZoneList[zoneId];
 
-                const auto query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, "
+                const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
                     "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
                     "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
                     "ecosystemID, mobradius, speed, "
@@ -445,6 +436,7 @@ namespace zoneutils
                             CMobEntity* PMob = new CMobEntity;
 
                             PMob->name = rset->get<std::string>("mobname");
+                            PMob->packetName = rset->get<std::string>("packet_name");
                             PMob->id   = rset->get<uint32>("mobid");
 
                             PMob->targid = static_cast<uint16>(PMob->id & 0x0FFF);
@@ -608,12 +600,12 @@ namespace zoneutils
                 {
                     while (rset2->next())
                     {
-                        uint16 ZoneID   = rset2->get<uint16>("zoneid");
-                        uint32 masterid = rset2->get<uint32>("mob_mobid");
-                        uint32 petid    = masterid + rset2->get<uint32>("pet_offset");
+                        const uint16 ZoneID  = rset2->get<uint16>("zoneid");
+                        uint32 masterid      = rset2->get<uint32>("mob_mobid");
+                        uint32 petid         = masterid + rset2->get<uint32>("pet_offset");
 
-                        CMobEntity* PMaster = (CMobEntity*)GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB);
-                        CMobEntity* PPet    = (CMobEntity*)GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB);
+                        auto*  PMaster = static_cast<CMobEntity*>(GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB));
+                        auto*  PPet    = static_cast<CMobEntity*>(GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB));
 
                         if (PMaster == nullptr)
                         {
@@ -650,7 +642,7 @@ namespace zoneutils
         ShowInfo("Loading Mob scripts");
         // handle mob Initialize functions after they're all loaded
         // clang-format off
-        ForEachZone([](CZone* PZone)
+        ForEachZone(zoneIds, [](CZone* PZone)
         {
             PZone->ForEachMob([](CMobEntity* PMob)
             {
@@ -658,11 +650,13 @@ namespace zoneutils
                 luautils::OnEntityLoad(PMob);
             });
 
-            PZone->ForEachMob([](CMobEntity* PMob)
+            PZone->ForEachMob([&PZone](CMobEntity* PMob)
             {
                 mobutils::AddSqlModifiers(PMob);
 
                 luautils::OnMobInitialize(PMob);
+                PZone->FindPartyForMob(PMob);
+
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);
 
@@ -698,7 +692,7 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    CZone* CreateZone(uint16 ZoneID)
+    auto CreateZone(uint16 ZoneID) -> CZone*
     {
         const auto query = "SELECT zonetype, restriction FROM zone_settings "
                            "WHERE zoneid = ? LIMIT 1";
@@ -711,18 +705,14 @@ namespace zoneutils
 
             if (zoneType & ZONE_TYPE::INSTANCED)
             {
-                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
+                return new CZoneInstance(static_cast<ZONEID>(ZoneID), GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
-            else
-            {
-                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
-            }
+
+            return new CZone(static_cast<ZONEID>(ZoneID), GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
         }
-        else
-        {
-            ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
-            return nullptr;
-        }
+
+        ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
+        return nullptr;
     }
 
     /************************************************************************
@@ -731,29 +721,41 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadZoneList(IPP mapIPP)
+    void LoadZones(const std::vector<uint16>& zoneIds)
     {
         TracyZoneScoped;
 
-        Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
+        std::vector<uint16> zonesToLoad;
 
-        g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
-
-        std::vector<uint16> zones = GetZonesAssignedToThisProcess(mapIPP);
-        if (zones.empty())
+        for (const auto zoneId : zoneIds)
         {
-            ShowCritical("Unable to load any zones! Check IP and port params");
-            std::exit(1);
+            if (!g_PZoneList.contains(zoneId))
+            {
+                zonesToLoad.emplace_back(zoneId);
+            }
         }
 
-        ShowInfo(fmt::format("Loading {} zones", zones.size()));
+        Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
 
-        for (auto zone : zones)
+        if (g_PTrigger == nullptr)
+        {
+            g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
+        }
+
+        if (zonesToLoad.empty())
+        {
+            // Requested zones are already loaded.
+            return;
+        }
+
+        ShowInfo(fmt::format("Loading {} zones", zonesToLoad.size()));
+
+        for (auto zone : zonesToLoad)
         {
             g_PZoneList[zone] = CreateZone(zone);
         }
 
-        if (g_PZoneList.count(0) == 0)
+        if (!g_PZoneList.contains(0))
         {
             // False positive: "performance: Searching before insertion is not necessary."
             // cppcheck-suppress stlFindInsert
@@ -765,7 +767,7 @@ namespace zoneutils
 #endif // ENV32BIT
 
         // clang-format off
-        for (const auto zoneId : zones)
+        for (const auto zoneId : zonesToLoad)
         {
             Async::getInstance()->submit([zoneId]()
             {
@@ -788,25 +790,42 @@ namespace zoneutils
         // clang-format on
 
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
-        luautils::PopulateIDLookupsByZone();
+        for (const auto zoneId : zonesToLoad)
+        {
+            luautils::PopulateIDLookupsByZone(zoneId);
+        }
 
-        LoadNPCList(mapIPP);
-        LoadMOBList(mapIPP);
+        LoadNPCList(zonesToLoad);
+        LoadMOBList(zonesToLoad);
 
         campaign::LoadState();
         campaign::LoadNations();
 
-        for (auto PZone : g_PZoneList)
+        for (auto zoneId : zonesToLoad)
         {
-            if (PZone.second->GetIP() != 0)
+            if (g_PZoneList[zoneId]->GetIP() != 0)
             {
-                luautils::OnZoneInitialize(PZone.second->GetID());
+                luautils::OnZoneInitialize(g_PZoneList[zoneId]->GetID());
             }
         }
 
-        luautils::InitInteractionGlobal();
+        luautils::InitInteractionGlobal(zonesToLoad);
 
         Async::getInstance()->setThreadpoolSize(1U);
+    }
+
+    void LoadZoneList(const IPP mapIPP)
+    {
+        TracyZoneScoped;
+
+        const auto zoneIds = GetZonesAssignedToThisProcess(mapIPP);
+        if (zoneIds.empty())
+        {
+            ShowCritical("Unable to load any zones! Check IP and port params");
+            std::exit(1);
+        }
+
+        LoadZones(zoneIds);
     }
 
     /************************************************************************
@@ -815,9 +834,9 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    REGION_TYPE GetCurrentRegion(uint16 ZoneID)
+    auto GetCurrentRegion(const uint16 zoneId) -> REGION_TYPE
     {
-        switch (ZoneID)
+        switch (zoneId)
         {
             case ZONE_BOSTAUNIEUX_OUBLIETTE:
             case ZONE_EAST_RONFAURE:
@@ -1112,12 +1131,12 @@ namespace zoneutils
         return REGION_TYPE::UNKNOWN;
     }
 
-    CONTINENT_TYPE GetCurrentContinent(uint16 ZoneID)
+    auto GetCurrentContinent(const uint16 zoneId) -> CONTINENT_TYPE
     {
-        return GetCurrentRegion(ZoneID) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
+        return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
     }
 
-    int GetWeatherElement(WEATHER weather)
+    auto GetWeatherElement(const WEATHER weather) -> int
     {
         if (weather >= MAX_WEATHER_ID)
         {
@@ -1161,9 +1180,9 @@ namespace zoneutils
 
     void FreeZoneList()
     {
-        for (auto PZone : g_PZoneList)
+        for (auto PZone : g_PZoneList | std::views::values)
         {
-            destroy(PZone.second);
+            destroy(PZone);
         }
         g_PZoneList.clear();
         destroy(g_PTrigger);
@@ -1171,19 +1190,30 @@ namespace zoneutils
 
     void ForEachZone(const std::function<void(CZone*)>& func)
     {
-        for (auto PZone : g_PZoneList)
+        for (const auto PZone : g_PZoneList | std::views::values)
         {
-            func(PZone.second);
+            func(PZone);
         }
     }
 
-    uint64 GetZoneIPP(uint16 zoneID)
+    void ForEachZone(const std::vector<uint16>& zoneIds, const std::function<void(CZone*)>& func)
+    {
+        for (auto zoneId : zoneIds)
+        {
+            if (g_PZoneList.contains(zoneId))
+            {
+                func(g_PZoneList[zoneId]);
+            }
+        }
+    }
+
+    auto GetZoneIPP(uint16 zoneId) -> uint64
     {
         uint64 ipp = 0;
 
         const auto query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = ?";
 
-        const auto rset = db::preparedStmt(query, zoneID);
+        const auto rset = db::preparedStmt(query, zoneId);
         if (rset && rset->rowsCount() && rset->next())
         {
             const auto zoneip = str2ip(rset->get<std::string>("zoneip"));
@@ -1193,7 +1223,7 @@ namespace zoneutils
         }
         else
         {
-            ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
+            ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneId);
         }
 
         return ipp;
@@ -1205,7 +1235,7 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    bool IsResidentialArea(CCharEntity* PChar)
+    auto IsResidentialArea(const CCharEntity* PChar) -> bool
     {
         return PChar->m_moghouseID != 0;
     }
@@ -1222,7 +1252,7 @@ namespace zoneutils
         luautils::AfterZoneIn(PChar);
     }
 
-    bool IsAlwaysOutOfNationControl(REGION_TYPE region)
+    auto IsAlwaysOutOfNationControl(const REGION_TYPE region) -> bool
     {
         return region >= REGION_TYPE::SANDORIA && region <= REGION_TYPE::LIMBUS;
     }

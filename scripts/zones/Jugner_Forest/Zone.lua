@@ -2,7 +2,6 @@
 -- Zone: Jugner_Forest (104)
 -----------------------------------
 local ID = zones[xi.zone.JUGNER_FOREST]
-require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
@@ -37,10 +36,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-594, -7, -442, 253)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 15
-    end
-
     -- AMK06/AMK07
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
@@ -68,9 +63,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 15 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

@@ -27,7 +27,7 @@
 #include "status_effect_container.h"
 #include <utility>
 
-CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid, uint16 subPower, uint16 tier, uint32 flags)
+CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid, uint16 subPower, uint16 tier, uint32 flags, uint16 sourceType, uint32 sourceTypeParam, uint32 originID)
 : m_StatusID(id)
 , m_SubID(subid)
 , m_Icon(icon)
@@ -35,6 +35,9 @@ CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::durati
 , m_SubPower(subPower)
 , m_Tier(tier)
 , m_Flags(flags)
+, m_OriginID(originID)
+, m_SourceType(sourceType)
+, m_SourceTypeParam(sourceTypeParam)
 , m_TickTime(tick)
 , m_Duration(duration)
 {
@@ -71,14 +74,19 @@ uint32 CStatusEffect::GetSubID() const
     return m_SubID;
 }
 
-EffectSourceType CStatusEffect::GetSourceType() const
+auto CStatusEffect::GetSourceType() const -> uint16
 {
     return m_SourceType;
 }
 
-uint16 CStatusEffect::GetSourceTypeParam() const
+auto CStatusEffect::GetSourceTypeParam() const -> uint32
 {
     return m_SourceTypeParam;
+}
+
+auto CStatusEffect::GetOriginID() const -> uint32
+{
+    return m_OriginID;
 }
 
 uint16 CStatusEffect::GetEffectType() const
@@ -172,10 +180,15 @@ void CStatusEffect::SetIcon(uint16 Icon)
     m_POwner->StatusEffectContainer->UpdateStatusIcons();
 }
 
-void CStatusEffect::SetSource(EffectSourceType sourceType, uint16 sourceTypeParam)
+auto CStatusEffect::SetSource(uint16 sourceType, uint32 sourceTypeParam) -> void
 {
     m_SourceType      = sourceType;
     m_SourceTypeParam = sourceTypeParam;
+}
+
+auto CStatusEffect::SetOriginID(uint32 originID) -> void
+{
+    m_OriginID = originID;
 }
 
 void CStatusEffect::SetEffectType(uint16 Type)
@@ -240,6 +253,13 @@ void CStatusEffect::addMod(Mod modType, int16 amount)
         }
     }
     modList.emplace_back(modType, amount);
+
+    // Since an effect's mod list is only applied to entity when adding the effect
+    // we need to add the mod to the entity manually if the effect is already applied
+    if (m_POwner)
+    {
+        m_POwner->addModifier(modType, amount);
+    }
 }
 
 void CStatusEffect::setMod(Mod modType, int16 value)
@@ -248,9 +268,23 @@ void CStatusEffect::setMod(Mod modType, int16 value)
     {
         if (i.getModID() == modType)
         {
+            // Since an effect's mod list is only applied to entity when adding the effect
+            // we need to add the mod to the entity manually if the effect is already applied
+            if (m_POwner)
+            {
+                m_POwner->addModifier(modType, value - i.getModAmount());
+            }
+
             i.setModAmount(value);
             return;
         }
     }
     modList.emplace_back(modType, value);
+
+    // Since an effect's mod list is only applied to entity when adding the effect
+    // we need to add the mod to the entity manually if the effect is already applied
+    if (m_POwner)
+    {
+        m_POwner->addModifier(modType, value);
+    }
 }

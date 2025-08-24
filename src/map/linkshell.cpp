@@ -39,7 +39,6 @@
 #include "linkshell.h"
 
 #include "items.h"
-#include "map_server.h"
 #include "packets/c2s/0x0e2_set_lsmsg.h"
 #include "packets/linkshell_message.h"
 #include "utils/charutils.h"

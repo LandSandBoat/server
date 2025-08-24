@@ -1153,7 +1153,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             break;
         case LATENT::FOOD_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD) &&
-                         m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_FOOD)->GetSubID() == latentEffect.GetConditionsValue();
+                         m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_FOOD)->GetSourceTypeParam() == latentEffect.GetConditionsValue();
             break;
         case LATENT::JOB_LEVEL_BELOW:
             expression = m_POwner->GetMLevel() < latentEffect.GetConditionsValue();

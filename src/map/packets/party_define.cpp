@@ -24,6 +24,7 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/sql.h"
+#include "map_engine.h"
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"

@@ -19,10 +19,14 @@
 ===========================================================================
 */
 
-#include "search_server.h"
+#include "search_application.h"
+#include "search_engine.h"
 
 int main(int argc, char** argv)
 {
-    std::make_unique<SearchServer>(argc, argv)->run();
+    const auto searchApp = std::make_unique<SearchApplication>(argc, argv);
+
+    searchApp->run();
+
     return 0;
 }

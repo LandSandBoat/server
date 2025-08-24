@@ -45,7 +45,7 @@ xi.job_utils.bard.useTenuto = function(player, target, ability)
 end
 
 xi.job_utils.bard.useMarcato = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MARCATO, 0, 0, 60)
+    player:addStatusEffect(xi.effect.MARCATO, 50, 0, 60)
 end
 
 xi.job_utils.bard.useClarionCall = function(player, target, ability)

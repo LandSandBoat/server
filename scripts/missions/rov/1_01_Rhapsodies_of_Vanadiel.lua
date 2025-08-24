@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE },
+    nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.RESONANCE },
 }
 
 local rovEntryZones =

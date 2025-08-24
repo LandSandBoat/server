@@ -41,7 +41,6 @@
 
 #include "item_container.h"
 #include "items.h"
-#include "map_server.h"
 #include "roe.h"
 #include "trade_container.h"
 

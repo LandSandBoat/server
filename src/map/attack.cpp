@@ -112,7 +112,7 @@ void CAttack::SetCritical(bool value)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus += (footworkEffect->GetSubPower() / 256.f); // Mod is out of 256
+                attBonus += (footworkEffect->GetSubPower() / 256.0f); // Mod is out of 256
             }
         }
 
@@ -566,6 +566,67 @@ bool CAttack::CheckCover()
  ************************************************************************/
 void CAttack::ProcessDamage()
 {
+    if (settings::get<bool>("map.ENABLE_AUTO_ATTACK_LUA"))
+    {
+        // Sneak attack.
+        if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
+            (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
+             m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
+        {
+            m_isSA = true;
+        }
+
+        // Trick attack.
+        if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
+        {
+            m_isTA = true;
+        }
+
+        // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
+        if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
+                                                             m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) ||
+                                                             m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
+        {
+            SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
+        }
+
+        auto calculateAttackDamage = lua["xi"]["combat"]["physical"]["calculateAttackDamage"];
+        auto result                = calculateAttackDamage(m_attacker, m_victim, GetWeaponSlot(), m_attackType, m_attackRound->IsH2H(), m_isFirstSwing, m_isSA, m_isTA, m_damageRatio);
+        if (result.valid())
+        {
+            m_damage = result.get<int32>(0);
+
+            // Try skill up.
+            if (m_damage > 0)
+            {
+                if (m_attacker->objtype == TYPE_PC)
+                {
+                    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+                    {
+                        charutils::TrySkillUP((CCharEntity*)m_attacker, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+                    }
+                    else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[(SLOTTYPE)GetWeaponSlot()]))
+                    {
+                        charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
+                    }
+                }
+                else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
+                         static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+                {
+                    puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
+                }
+            }
+            m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
+        }
+        else
+        {
+            sol::error err = result;
+            ShowError("attack.cpp::ProcessDamage(): %s", err.what());
+        }
+
+        return;
+    }
+
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||

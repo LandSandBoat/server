@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getName() == 'Cernunnos' then
+    if mob:getPool() == xi.mobPools.CERNUNNOS then
         local numhits = 3
         local accmod = 1
         local ftp    = 2.0
@@ -28,7 +28,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill,  xi.effect.BIND, 1, 0, 30)
 
         return dmg
-    elseif mob:getPool() == 671 or mob:getPool() == 1346 then -- Cemetery Cherry and leafless Jidra
+    elseif
+        mob:getPool() == xi.mobPools.CEMETERY_CHERRY or
+        mob:getPool() == xi.mobPools.LEAFLESS_JIDRA
+    then -- Cemetery Cherry and leafless Jidra
         local numhits = 3
         local accmod = 1
         local ftp    = 2.0

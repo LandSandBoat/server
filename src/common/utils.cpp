@@ -144,12 +144,16 @@ uint8 relativeAngle(uint8 world, int16 diff)
 
 int16 angleDifference(uint8 worldAngleA, uint8 worldAngleB)
 {
-    int16 degreeDiff   = worldAngleA - worldAngleB;
-    uint8 absoluteDiff = abs(degreeDiff);
-    if (absoluteDiff > 128)
+    int16 degreeDiff = worldAngleA - worldAngleB;
+    if (degreeDiff > 128)
     {
-        degreeDiff = 256 - absoluteDiff;
+        degreeDiff -= 256;
     }
+    else if (degreeDiff < -128)
+    {
+        degreeDiff += 256;
+    }
+
     return degreeDiff;
 }
 
@@ -183,6 +187,20 @@ bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
     return (facingDiff > 64 - halfAngle) && (facingDiff < 64 + halfAngle);
+}
+
+auto toEntitysLeft(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
+{
+    int16 diff      = facingAngle(B, A);
+    uint8 halfAngle = static_cast<uint8>(coneAngle / 2);
+    return (diff < 0) && (abs(diff) > (64 - halfAngle)) && (abs(diff) < (64 + halfAngle));
+}
+
+auto toEntitysRight(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
+{
+    int16 diff      = facingAngle(B, A);
+    uint8 halfAngle = static_cast<uint8>(coneAngle / 2);
+    return (diff > 0) && (abs(diff) > (64 - halfAngle)) && (abs(diff) < (64 + halfAngle));
 }
 
 /**

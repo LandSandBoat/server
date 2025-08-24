@@ -6325,6 +6325,8 @@ INSERT INTO `item_basic` VALUES (6609,0,'serving_of_popotoes_con_queso','popo._c
 INSERT INTO `item_basic` VALUES (6610,0,'serving_of_popotoes_con_queso_+1','popo._con_que._+1',12,1544,@VEGETABLES,0,0);
 INSERT INTO `item_basic` VALUES (6611,0,'serving_of_seafood_gratin','seafood_gratin',12,1544,@BREADS_RICE,0,0);
 INSERT INTO `item_basic` VALUES (6612,0,'serving_of_seafood_gratin_+1','sea._gratin_+1',12,1544,@BREADS_RICE,0,0);
+INSERT INTO `item_basic` VALUES (6686,0,'gyudon','gyudon',12,1544,@MEAT_EGGS,0,0);
+INSERT INTO `item_basic` VALUES (6687,0,'gyudon_+1','gyudon_+1',12,1544,@MEAT_EGGS,0,0);
 INSERT INTO `item_basic` VALUES (6690,0,'sheet_of_starlight_tunes','starlight_tunes',1,63048,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (6691,0,'sheet_of_mapitoto_tunes','mapitoto_tunes',1,63048,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (6696,0,'sheet_of_near_east_tunes','near_east_tunes',1,63048,@NONE,0,0);

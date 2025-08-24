@@ -1,28 +1,9 @@
 xi.equipment = xi.equipment or {}
 
-xi.equipment.baseNyzulWeapons =
-{
-    xi.item.STURDY_AXE,     -- (WAR)
-    xi.item.BURNING_FISTS,  -- (MNK)
-    xi.item.WEREBUSTER,     -- (WHM)
-    xi.item.MAGES_STAFF,    -- (BLM)
-    xi.item.VORPAL_SWORD,   -- (RDM)
-    xi.item.SWORDBREAKER,   -- (THF)
-    xi.item.BRAVE_BLADE,    -- (PLD)
-    xi.item.DEATH_SICKLE,   -- (DRK)
-    xi.item.DOUBLE_AXE,     -- (BST)
-    xi.item.DANCING_DAGGER, -- (BRD)
-    xi.item.KILLER_BOW,     -- (RNG)
-    xi.item.WINDSLICER,     -- (SAM)
-    xi.item.SASUKE_KATANA,  -- (NIN)
-    xi.item.RADIANT_LANCE,  -- (DRG)
-    xi.item.SCEPTER_STAFF,  -- (SMN)
-    xi.item.WIGHTSLAYER,    -- (BLU)
-    xi.item.QUICKSILVER,    -- (COR)
-    xi.item.INFERNO_CLAWS,  -- (PUP)
-    xi.item.MAIN_GAUCHE,    -- (DNC)
-    xi.item.ELDER_STAFF     -- (SCH)
-}
+-- To allow "unlocking_a_myth" module to use pre-2014 ws point scaling on Nyzul Climb progress
+xi.equipment.vigilWeaponRequiredWsPoints = function(player)
+    return 250
+end
 
 -----------------------------------
 -- Relic/Mythic/Empyrean tables
@@ -302,16 +283,6 @@ local artifactArmorRanges =
 xi.equipment.isArtifactArmor = function(itemId)
     for _, v in ipairs(artifactArmorRanges) do
         if itemId >= v[1] and itemId <= v[2] then
-            return true
-        end
-    end
-
-    return false
-end
-
-xi.equipment.isBaseNyzulWeapon = function(itemId)
-    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
-        if itemId == wepId then
             return true
         end
     end

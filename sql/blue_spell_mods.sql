@@ -272,7 +272,7 @@ INSERT INTO `blue_spell_mods` VALUES (579,11,2); -- AGI+2
 -- Healing Breeze
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES (581,2,10); -- HP+10
-INSERT INTO `blue_spell_mods` VALUES (581,14,1); -- CHR+2
+INSERT INTO `blue_spell_mods` VALUES (581,14,2); -- CHR+2
 
 -- ----------------------------
 -- Chaotic Eye

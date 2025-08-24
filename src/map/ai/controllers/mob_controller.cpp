@@ -768,7 +768,7 @@ void CMobController::Move()
                             for (auto PSpawnedMob : static_cast<CCharEntity*>(PTarget)->SpawnMOBList)
                             {
                                 if (PSpawnedMob.second != PMob && !PSpawnedMob.second->PAI->PathFind->IsFollowingPath() &&
-                                    distance(PSpawnedMob.second->loc.p, PMob->loc.p) < 1.f)
+                                    distance(PSpawnedMob.second->loc.p, PMob->loc.p) < 1.0f)
                                 {
                                     auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
 
@@ -1189,8 +1189,9 @@ auto CMobController::Disengage() -> bool
     PMob->SetCallForHelpFlag(false);
     PMob->animation = ANIMATION_NONE;
     // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
-    PMob->m_THLvl = 0;
-    m_mobHealTime = m_Tick;
+    PMob->m_THLvl          = 0;
+    PMob->m_GilfinderLevel = 0; // Assumed to work like TH
+    m_mobHealTime          = m_Tick;
     return CController::Disengage();
 }
 

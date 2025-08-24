@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CCHAREMOTIONPACKET_H
-#define _CCHAREMOTIONPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -89,11 +88,10 @@ enum class EmoteMode : uint8
 };
 
 class CCharEntity;
-
+class CNpcEntity;
 class CCharEmotionPacket : public CBasicPacket
 {
 public:
-    CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra);
+    CCharEmotionPacket(const CCharEntity* PChar, uint32 targetId, uint16 targetIndex, Emote emoteId, EmoteMode emoteMode, uint16 extra);
+    CCharEmotionPacket(const CNpcEntity* PEntity, uint32 targetId, uint16 targetIndex, Emote emoteId, EmoteMode emoteMode);
 };
-
-#endif

@@ -27,7 +27,6 @@
 #include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "map_server.h"
 #include "party.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"

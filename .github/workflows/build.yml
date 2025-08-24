@@ -48,12 +48,20 @@ jobs:
       - name: List Changed Files
         if: always()
         run: |
-          readarray -t removed_files <<<"$(jq -r '.[]' <<<'${{ steps.changed-files.outputs.all }}')"
-          echo "CHANGED_FILES=${removed_files[@]}" >> $GITHUB_ENV
+          echo '${{ steps.changed-files.outputs.all }}' > changed-files.txt
+          readarray -t changed_files <<<"$(jq -r '.[]' <<<'${{ steps.changed-files.outputs.all }}')"
+          echo "CHANGED_FILES=${changed_files[@]}" >> $GITHUB_ENV
 
-          for removed_file in $CHANGED_FILES; do
-              echo "${removed_file}"
+          for changed_file in ${changed_files[@]}; do
+              echo "${changed_file}"
           done
+      - name: Upload step output as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: changed-files
+          path: changed-files.txt
+          retention-days: 7
+        continue-on-error: true
       - name: Git Formatting Checks
         if: github.event_name == 'pull_request'
         run: |
@@ -202,10 +210,35 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-24.04
     steps:
+      - name: Download Changed Files
+        uses: actions/download-artifact@v4
+        with:
+          name: changed-files
+        # Skipping lua language server hinges on checking the changed files list, so we should require downloading the artifact
+        # continue-on-error: true
+      - name: Check For Changed Lua Files
+        id: check-changes
+        run: |
+          fileContents=$(<changed-files.txt)
+          readarray -t changed_files <<<"$(jq -r '.[]' <<< $fileContents)"
+
+          echo "Checking changed-file list for any with .lua extension"
+          LUA_CHANGES=false
+          for changed_file in ${changed_files[@]}; do
+              if [[ $changed_file == *.lua ]]; then
+                LUA_CHANGES=true
+                break
+              fi
+          done
+
+          echo "Lua files found: ${LUA_CHANGES}"
+          echo "LUA_CHANGES=$LUA_CHANGES" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
+        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
         with:
           fetch-depth: 0 # Or else we don't get full blame information
       - name: Install Dependencies
+        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
         # TODO: Properly use python venv
         run: |
           python3 -m pip config set global.break-system-packages true
@@ -213,6 +246,7 @@ jobs:
           sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
           python3 -m pip install -r tools/requirements.txt
       - name: Run Lua Language Server
+        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
         run: |
           python3 tools/ci/lua_lang_server.py
       - name: Upload Lua Language Server Output
@@ -222,6 +256,7 @@ jobs:
           name: lua_lang_errors
           path: lua_lang_errors.txt
       - name: Check Output
+        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
         run: |
           if [ -f lua_lang_errors.txt ]; then
               cat lua_lang_errors.txt
@@ -262,6 +297,7 @@ jobs:
             xi_map
             xi_search
             xi_world
+            xi_test
 
   Linux_ClangTidy18_64bit:
     needs: Sanity_Checks
@@ -354,6 +390,7 @@ jobs:
             xi_map.exe
             xi_search.exe
             xi_world.exe
+            xi_test.exe
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
@@ -398,6 +435,7 @@ jobs:
             xi_map_tracy.exe
             xi_search.exe
             xi_world.exe
+            xi_test.exe
 
   MacOS_64bit:
     needs: Sanity_Checks

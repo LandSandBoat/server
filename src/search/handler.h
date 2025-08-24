@@ -29,11 +29,18 @@
 class handler
 {
 public:
-    handler(asio::io_context& io_context, unsigned int port, std::function<void(asio::ip::tcp::socket&&)> acceptFn)
+    handler(asio::io_context& io_context, unsigned int port, SynchronizedShared<std::unordered_set<std::string>>& ipWhitelist)
     : acceptor_(io_context, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
-        do_accept(acceptFn);
+
+        // clang-format off
+        do_accept([&](asio::ip::tcp::socket socket)
+        {
+            const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, ipInFlight_, ipWhitelist);
+            handler->start();
+        });
+        // clang-format on
     }
 
 private:
@@ -41,7 +48,7 @@ private:
     {
         // clang-format off
         acceptor_.async_accept(
-        [this, acceptFn](std::error_code ec, asio::ip::tcp::socket socket)
+        [this, acceptFn](const std::error_code ec, asio::ip::tcp::socket socket)
         {
             if (!ec)
             {
@@ -59,4 +66,9 @@ private:
     }
 
     asio::ip::tcp::acceptor acceptor_;
+
+    // A single IP should only have one request in flight at a time, so we are going to
+    // be tracking the IP addresses of incoming requests and if we haven't cleared the
+    // record for it - we block until it's done
+    SynchronizedShared<std::map<std::string, uint16_t>> ipInFlight_;
 };

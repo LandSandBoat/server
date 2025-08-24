@@ -2,7 +2,6 @@
 -- Zone: Sauromugue_Champaign (120)
 -----------------------------------
 local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
-require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
@@ -26,10 +25,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(-574.647, 2.3231, 399.974, 7)
-    end
-
-    if quests.rainbow.onZoneIn(player) then
-        cs = 3
     end
 
     return cs
@@ -60,9 +55,6 @@ zoneObject.onGameDay = function()
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 3 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

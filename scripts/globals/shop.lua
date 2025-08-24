@@ -570,7 +570,7 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.DELKFUTT_CHEST_KEY,    2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.FEIYIN_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.ZVAHL_CHEST_KEY,       2500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.ELDIME_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.ELDIEME_CHEST_KEY,     2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.NEST_CHEST_KEY,        2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.GARLAIGE_CHEST_KEY,    2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.BEADEAUX_COFFER_KEY,   5000, xi.ki.RHAPSODY_IN_UMBER },
@@ -592,10 +592,10 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.GROTTO_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.GROTTO_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.VELUGANNON_COFFER_KEY, 5000, xi.ki.RHAPSODY_IN_UMBER },
-        { xi.item.SACRARIUM_COFFER_KEY,  2500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.OLDTON_COFFER_KEY,     2500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.SACRARIUM_CHEST_KEY,   2500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.OLDTON_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.NEWTON_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
-        { xi.item.PSOXJA_COFFER_KEY,     2500, xi.ki.RHAPSODY_IN_WHITE },
+        { xi.item.PSOXJA_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
     },
 }
 

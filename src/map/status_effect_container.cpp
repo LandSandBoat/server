@@ -53,9 +53,10 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/mobentity.h"
 #include "entities/trustentity.h"
 #include "latent_effect_container.h"
-#include "map_server.h"
 #include "notoriety_container.h"
 #include "status_effect_container.h"
+
+#include "map_engine.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -502,8 +503,6 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, Effec
         // remove clean up other effects
         OverwriteStatusEffect(PStatusEffect);
 
-        PStatusEffect->SetOwner(m_POwner);
-
         SetEffectParams(PStatusEffect);
 
         // remove effects with same type
@@ -517,6 +516,9 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, Effec
 
         luautils::OnEffectGain(m_POwner, PStatusEffect);
         m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", m_POwner, PStatusEffect);
+
+        // Set owner after triggering all "effect gain" lua actions, to ensure effect:addMod() doesn't double up mod powers on the entity
+        PStatusEffect->SetOwner(m_POwner);
 
         m_POwner->addModifiers(&PStatusEffect->modList);
 
@@ -1518,7 +1520,7 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
  *                                                                       *
  ************************************************************************/
 
-void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
+auto CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect) -> void
 {
     if (StatusEffect->GetStatusID() >= MAX_EFFECTID)
     {
@@ -1535,15 +1537,19 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     }
 
     std::string name;
-    EFFECT      effect = StatusEffect->GetStatusID();
+    EFFECT      effect                = StatusEffect->GetStatusID();
+    auto        effectSourceType      = StatusEffect->GetSourceType();
+    auto        effectSourceTypeParam = StatusEffect->GetSourceTypeParam();
 
     // check if status effect is special case from a usable equipped item that grants enchantment
     bool effectFromItemEnchant = false;
-    if (StatusEffect->GetSourceType() != EffectSourceType::SOURCE_NONE && StatusEffect->GetSourceTypeParam() > 0)
+    bool effectFromItemFood    = false;
+
+    if (effectSourceType != EffectSourceType::SOURCE_NONE && effectSourceTypeParam > 0)
     {
-        if (StatusEffect->GetSourceType() == EffectSourceType::EQUIPPED_ITEM)
+        if (effectSourceType == EffectSourceType::SOURCE_EQUIPPED_ITEM)
         {
-            auto PItem = itemutils::GetItemPointer(StatusEffect->GetSourceTypeParam());
+            auto PItem = itemutils::GetItemPointer(effectSourceTypeParam);
             if (PItem != nullptr)
             {
                 // get the item lua script and check if it has valid functions
@@ -1562,24 +1568,43 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
                 }
             }
         }
+        else if (effectSourceType == EffectSourceType::SOURCE_FOOD)
+        {
+            auto PItem = itemutils::GetItemPointer(StatusEffect->GetSourceTypeParam());
+            if (PItem != nullptr)
+            {
+                // get the item lua script and check if it has valid functions
+                auto itemName     = "items/" + PItem->getName();
+                auto itemFullName = fmt::format("./scripts/{}.lua", itemName);
+                auto cacheEntry   = luautils::GetCacheEntryFromFilename(itemFullName);
+                auto onEffectGain = cacheEntry["onEffectGain"].get<sol::function>();
+                auto onEffectLose = cacheEntry["onEffectLose"].get<sol::function>();
+
+                effectFromItemFood = onEffectGain.valid() && onEffectLose.valid();
+
+                // if it does have valid functions then set the status effect name as the script (similar to actual status effects)
+                if (effectFromItemFood)
+                {
+                    name = itemName;
+                }
+            }
+        }
     }
 
-    // Determine if this is a BRD Song or COR Effect.
-    if (!effectFromItemEnchant &&
-        (subType == 0 ||
-         subType > 20000 ||
-         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-         (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
-         effect == EFFECT_RUNEISTS_ROLL ||
-         effect == EFFECT_DRAIN_DAZE ||
-         effect == EFFECT_ASPIR_DAZE ||
-         effect == EFFECT_HASTE_DAZE ||
-         effect == EFFECT_ATMA ||
-         effect == EFFECT_BATTLEFIELD))
+    // Effects that use /server/scripts/effects/ as their lua file source.
+    if (!effectFromItemEnchant &&                                     // The effect is not from an item enchantment (See condition above).
+        !effectFromItemFood &&                                        // The effect is not from a usable food item.
+        effect != EFFECT_ENCHANTMENT &&                               // The effect is not an enchantment that has an effect source defined currently.
+        effectSourceType != EffectSourceType::SOURCE_EQUIPPED_ITEM && // The source is not from an equipped item
+        (effect != EFFECT_FOOD ||                                     // Exclude food effects with a sourceTypeParam > 0 (See condition below)
+        (effect == EFFECT_FOOD && effectSourceTypeParam == 0)))       // Food effects from FoV/Gov Books have a subType of 0 and are handled in the scripts/effects/food.lua
     {
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
+
+    // Is an effect from a usable item not caught above.
+    // Known use cases: Enchantments without an effect source.
     else
     {
         CItem* Ptem = itemutils::GetItemPointer(subType);
@@ -1612,16 +1637,19 @@ void CStatusEffectContainer::LoadStatusEffects()
     }
 
     const char* Query = "SELECT "
-                        "effectid,"
-                        "icon,"
-                        "power,"
-                        "tick,"
-                        "duration,"
-                        "subid,"
-                        "subpower,"
+                        "effectid, "
+                        "icon, "
+                        "power, "
+                        "tick, "
+                        "duration, "
+                        "subid, "
+                        "subpower, "
                         "tier, "
                         "flags, "
-                        "timestamp "
+                        "timestamp, "
+                        "sourcetype, "
+                        "sourcetypeparam, "
+                        "originid "
                         "FROM char_effects "
                         "WHERE charid = ?";
 
@@ -1667,7 +1695,10 @@ void CStatusEffectContainer::LoadStatusEffects()
                                   rset->get<uint16>("subid"),
                                   rset->get<uint16>("subpower"),
                                   rset->get<uint16>("tier"),
-                                  flags);
+                                  flags,
+                                  rset->get<uint16>("sourcetype"),
+                                  rset->get<uint32>("sourcetypeparam"),
+                                  rset->get<uint32>("originid"));
 
             PEffectList.emplace_back(PStatusEffect);
 
@@ -1727,8 +1758,8 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
         if (realDurationSeconds > 0 || durationSeconds == 0)
         {
-            const char* Query = "INSERT INTO char_effects (charid, effectid, icon, power, tick, duration, subid, subpower, tier, flags, timestamp) "
-                                "VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u)";
+            const char* Query = "INSERT INTO char_effects (charid, effectid, icon, power, tick, duration, subid, subpower, tier, flags, timestamp, sourcetype, sourcetypeparam, originid) "
+                                "VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u)";
 
             // save power of utsusemi and blink
             if (PStatusEffect->GetStatusID() == EFFECT_COPY_IMAGE)
@@ -1770,7 +1801,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
             _sql->Query(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
                         PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetEffectFlags(),
-                        timestamp);
+                        timestamp, PStatusEffect->GetSourceType(), PStatusEffect->GetSourceTypeParam(), PStatusEffect->GetOriginID());
         }
     }
     DeleteStatusEffects();

@@ -19,7 +19,8 @@
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "job_points.h"
-#include "map_server.h"
+
+#include "map_engine.h"
 #include "packets/char_spells.h"
 #include "utils/charutils.h"
 

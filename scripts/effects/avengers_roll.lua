@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.AVENGERS_ROLL
+-- Notes: Effect's subType stores caster's ID. See: scripts/globals/job_utils/corsair.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

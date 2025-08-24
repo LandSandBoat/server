@@ -26,7 +26,6 @@
 #include "common/utils.h"
 #include "lua/luautils.h"
 #include "map_networking.h"
-#include "map_server.h"
 
 #include <filesystem>
 #include <fstream>

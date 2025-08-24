@@ -143,7 +143,7 @@ private:
     // void ReplaceStatusEffect(EFFECT effect); //this needs to be implemented
     void RemoveStatusEffect(CStatusEffect* PEffect, EffectNotice notice = EffectNotice::ShowMessage); // We remove the effect by its number in the container
     void DeleteStatusEffects();
-    void SetEffectParams(CStatusEffect* StatusEffect); // We set the effect of the effect
+    auto SetEffectParams(CStatusEffect* StatusEffect) -> void; // We set the effect of the effect
     void HandleAura(CStatusEffect* PStatusEffect);
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);

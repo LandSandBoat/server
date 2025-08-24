@@ -1404,6 +1404,8 @@ INSERT INTO `mob_pets` VALUES (17449023,1,15,'Yagudo_Pythoness','Yagudos_Element
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_pets` VALUES (17453078,2,15,'Duke_Dantalian','Demons_Elemental');
+INSERT INTO `mob_pets` VALUES (17453085,2,15,'Duke_Dantalian','Demons_Elemental');
+INSERT INTO `mob_pets` VALUES (17453092,2,15,'Duke_Dantalian','Demons_Elemental');
 
 -- ------------------------------------------------------------
 -- Ranguemont_Pass (Zone 166)

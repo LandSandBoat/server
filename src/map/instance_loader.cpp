@@ -33,6 +33,7 @@
 #include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
+#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "zone_entities.h"
@@ -289,6 +290,7 @@ CInstance* CInstanceLoader::LoadInstance()
         m_PInstance->ForEachMob([&](CMobEntity* PMob)
         {
             luautils::OnMobInitialize(PMob);
+            m_PInstance->FindPartyForMob(PMob);
             luautils::ApplyMixins(PMob);
             ((CMobEntity*)PMob)->saveModifiers();
             ((CMobEntity*)PMob)->saveMobModifiers();

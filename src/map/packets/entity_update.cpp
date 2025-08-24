@@ -33,6 +33,7 @@
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
 #include "status_effect_container.h"
+#include "zone.h"
 
 namespace
 {

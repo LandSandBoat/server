@@ -21,7 +21,10 @@
 
 #pragma once
 
+#include "common/logging.h"
+
 #include <asio/ssl.hpp>
+#include <filesystem>
 
 namespace certificateHelpers
 {

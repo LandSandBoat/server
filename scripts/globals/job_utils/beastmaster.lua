@@ -675,3 +675,38 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
 
     return xi.msg.basic.CHARM_FAIL
 end
+
+xi.job_utils.beastmaster.onUseAbilitySpur = function(player)
+    local power = 20 + player:getMod(xi.mod.ENHANCES_SPUR)-- bonus STORETP
+    local subpower = player:getJobPointLevel(xi.jp.SPUR_EFFECT) * 3 -- bonus attack
+    local pet = player:getPet()
+    if pet then
+        pet:addStatusEffect(xi.effect.SPUR, power, 0, 90, 0, subpower)
+    end
+end
+
+xi.job_utils.beastmaster.onUseAbilityRunWild = function(player, target, ability, action)
+    -- all but regen are a 25% bonus
+    local power = 25
+    local pet = player:getPet()
+    if pet then
+        -- mods aren't tied to an effect, just applied to the pet. They leave when the pet dies or despawns
+        pet:addMod(xi.mod.ATTP, power)
+        pet:addMod(xi.mod.ACC, pet:getACC() * power / 100)
+        -- Yep, it's an MAB % addition
+        -- "If you have no sources of Magic Attack Bonus while using the slug pet, then Run Wild actually makes his innate MAB penalty even more negative, thus reducing damage."
+        pet:addMod(xi.mod.MATT, pet:getMod(xi.mod.MATT) * power / 100)
+        pet:addMod(xi.mod.EVA, pet:getEVA() * power / 100)
+        pet:addMod(xi.mod.DEFP, power)
+        -- TODO find out this potency, but appears to be consistently 1% per tick with hare familiar at lvl 99
+        pet:addMod(xi.mod.REGEN, 0.01 * pet:getMaxHP())
+
+        -- After 5 minutes, the pet just despawns
+        pet:setJugRemainingTime(300)
+    end
+
+    -- seems to display nothing in console, but this it the msg id from capture
+    ability:setMsg(154)
+
+    return ability:getID()
+end

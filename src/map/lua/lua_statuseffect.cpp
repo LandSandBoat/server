@@ -144,7 +144,7 @@ void CLuaStatusEffect::setIcon(uint16 icon)
 
 //======================================================//
 
-void CLuaStatusEffect::setSource(EffectSourceType sourceType, uint16 sourceTypeParam)
+void CLuaStatusEffect::setSource(EffectSourceType sourceType, uint32 sourceTypeParam)
 {
     m_PLuaStatusEffect->SetSource(sourceType, sourceTypeParam);
 }
@@ -162,6 +162,11 @@ void CLuaStatusEffect::setSubPower(uint16 subpower)
 void CLuaStatusEffect::setTier(uint16 tier)
 {
     m_PLuaStatusEffect->SetTier(tier);
+}
+
+auto CLuaStatusEffect::setOriginID(uint32 originid) -> void
+{
+    m_PLuaStatusEffect->SetOriginID(originid);
 }
 
 //======================================================//
@@ -231,14 +236,19 @@ uint16 CLuaStatusEffect::getIcon()
     return m_PLuaStatusEffect->GetIcon();
 }
 
-EffectSourceType CLuaStatusEffect::getSourceType()
+uint16 CLuaStatusEffect::getSourceType()
 {
     return m_PLuaStatusEffect->GetSourceType();
 }
 
-uint16 CLuaStatusEffect::getSourceTypeParam()
+uint32 CLuaStatusEffect::getSourceTypeParam()
 {
     return m_PLuaStatusEffect->GetSourceTypeParam();
+}
+
+auto CLuaStatusEffect::getOriginID() -> uint32
+{
+    return m_PLuaStatusEffect->GetOriginID();
 }
 
 //======================================================//
@@ -250,6 +260,8 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("getSubType", CLuaStatusEffect::getSubType);
     SOL_REGISTER("getSourceType", CLuaStatusEffect::getSourceType);
     SOL_REGISTER("getSourceTypeParam", CLuaStatusEffect::getSourceTypeParam);
+    SOL_REGISTER("getOriginID", CLuaStatusEffect::getOriginID);
+    SOL_REGISTER("setOriginID", CLuaStatusEffect::setOriginID);
     SOL_REGISTER("setSource", CLuaStatusEffect::setSource);
     SOL_REGISTER("setIcon", CLuaStatusEffect::setIcon);
     SOL_REGISTER("getPower", CLuaStatusEffect::getPower);

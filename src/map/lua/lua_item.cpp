@@ -26,7 +26,6 @@
 #include "items/item_equipment.h"
 #include "items/item_general.h"
 #include "items/item_weapon.h"
-#include "map_server.h"
 #include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
@@ -189,6 +188,28 @@ uint16 CLuaItem::getWeaponskillPoints()
     if (PItem)
     {
         return PItem->getCurrentUnlockPoints();
+    }
+
+    return 0;
+}
+
+void CLuaItem::setWeaponskillPointsNeeded(uint16 points)
+{
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+
+    if (PItem)
+    {
+        PItem->setTotalUnlockPointsNeeded(points);
+    }
+}
+
+uint16 CLuaItem::getWeaponskillPointsNeeded()
+{
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+
+    if (PItem)
+    {
+        return PItem->getTotalUnlockPointsNeeded();
     }
 
     return 0;
@@ -399,6 +420,8 @@ void CLuaItem::Register()
     SOL_REGISTER("getAugment", CLuaItem::getAugment);
     SOL_REGISTER("getSkillType", CLuaItem::getSkillType);
     SOL_REGISTER("getWeaponskillPoints", CLuaItem::getWeaponskillPoints);
+    SOL_REGISTER("setWeaponskillPointsNeeded", CLuaItem::setWeaponskillPointsNeeded);
+    SOL_REGISTER("getWeaponskillPointsNeeded", CLuaItem::getWeaponskillPointsNeeded);
     SOL_REGISTER("isTwoHanded", CLuaItem::isTwoHanded);
     SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
     SOL_REGISTER("isShield", CLuaItem::isShield);

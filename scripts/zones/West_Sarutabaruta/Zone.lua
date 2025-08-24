@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta (115)
 -----------------------------------
-require('scripts/quests/i_can_hear_a_rainbow')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -24,9 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(320.018, -6.684, -45.166, 189)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 48
-    elseif
+    if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
         prevZone == xi.zone.WINDURST_WATERS
     then
@@ -49,9 +45,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 48 then
-        quests.rainbow.onEventUpdate(player)
-    elseif csid == 62 or csid == 63 then
+    if csid == 62 or csid == 63 then
         player:setCharVar('ASA_Status', option)
     end
 end

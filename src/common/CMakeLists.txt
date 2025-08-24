@@ -17,6 +17,8 @@ set(COMMON_SOURCES
     $<$<PLATFORM_ID:Darwin>:${CMAKE_CURRENT_SOURCE_DIR}/debug_osx.cpp>
     $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/debug_windows.cpp>
     ${CMAKE_CURRENT_SOURCE_DIR}/earth_time.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ipp.cpp

@@ -21,6 +21,8 @@
 
 #include "itemutils.h"
 
+#include "map_engine.h"
+
 #include <array>
 #include <cstring>
 
@@ -30,7 +32,6 @@
 
 #include "entities/battleentity.h"
 #include "lua/luautils.h"
-#include "map_server.h"
 
 std::array<CItem*, MAX_ITEMID>      g_pItemList; // global array of pointers to game items
 std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster droplist items

@@ -531,7 +531,7 @@ namespace puppetutils
                 SkillUpChance = 0.5;
             }
 
-            SkillUpChance *= ((100.f + PAutomaton->getMod(Mod::COMBAT_SKILLUP_RATE)) / 100.f);
+            SkillUpChance *= ((100.0f + PAutomaton->getMod(Mod::COMBAT_SKILLUP_RATE)) / 100.0f);
 
             if (Diff > 0 && random < SkillUpChance)
             {

@@ -381,7 +381,7 @@ function DisallowRespawn(mobid, allowRespawn)
 end
 
 ---@param mobid integer
----@return nil
+---@return boolean
 function UpdateNMSpawnPoint(mobid)
 end
 

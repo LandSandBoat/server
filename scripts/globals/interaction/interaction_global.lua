@@ -14,20 +14,38 @@ InteractionGlobal.zones = InteractionGlobal.zones or {}
 -- [Lua] InteractionGlobal.initZones(zoneIds)
 -----------------------------------
 function InteractionGlobal.initZones(zoneIds)
+    local loadedZones = {}
+
     -- Add the given zones to the zones table
-    for i = 1, #zoneIds do
-        local zone = GetZone(zoneIds[i])
-        if zone then
-            InteractionGlobal.zones[zoneIds[i]] = zone:getName()
+    for _, zoneId in ipairs(zoneIds) do
+        if not InteractionGlobal.zones[zoneId] then
+            local zone = GetZone(zoneId)
+            if zone then
+                InteractionGlobal.zones[zoneId] = zone:getName()
+                InteractionGlobal.loadDefaultActionsForZone(zoneId, false)
+                table.insert(loadedZones, zoneId)
+            end
         end
     end
 
-    InteractionGlobal.loadDefaultActions(false)
-    InteractionGlobal.loadContainers(false)
+    if #loadedZones > 0 then
+        InteractionGlobal.loadContainers(loadedZones)
+    end
 end
 
 -- Add container handlers found for the added zones
-function InteractionGlobal.loadContainers(shouldReloadRequires)
+function InteractionGlobal.loadContainers(zoneIds)
+    local containerFiles = GetContainerFilenamesList()
+    local containers = {}
+    for i = 1, #containerFiles do
+        containers[i] = utils.prequire(containerFiles[i])
+        containers[i].filename = containerFiles[i]
+    end
+
+    InteractionGlobal.lookup:addContainers(containers, zoneIds)
+end
+
+function InteractionGlobal.reloadContainers()
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
@@ -35,9 +53,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
     end
 
     local interactionContainersPath = 'scripts/globals/interaction_containers'
-    if shouldReloadRequires then
-        package.loaded[interactionContainersPath] = nil
-    end
+    package.loaded[interactionContainersPath] = nil
 
     local containerFiles = GetContainerFilenamesList()
     local containers = {}
@@ -92,7 +108,7 @@ function InteractionGlobal.reload(shouldReloadData)
     if shouldReloadData then
         InteractionGlobal.lookup = InteractionLookup:new()
         InteractionGlobal.loadDefaultActions(true)
-        InteractionGlobal.loadContainers(true)
+        InteractionGlobal.reloadContainers()
 
     else
         InteractionGlobal.lookup = InteractionLookup:new(InteractionGlobal.lookup)

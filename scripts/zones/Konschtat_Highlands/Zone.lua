@@ -2,7 +2,6 @@
 -- Zone: Konschtat_Highlands (108)
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
@@ -22,10 +21,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(-193, 71, 842, 117)
-    end
-
-    if quests.rainbow.onZoneIn(player) then
-        cs = 104
     end
 
     -- AMK06/AMK07
@@ -48,9 +43,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 104 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

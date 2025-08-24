@@ -1532,11 +1532,13 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke  = doesToolBreak(player, info) and 1 or 0
         local full   = (player:getFreeSlotsCount() == 0) and 1 or 0
 
+        -- Cutscene plays the emote in all zones but Adoulin.
+        -- Adoulin uses emote packets.
         if csid then
             player:startEvent(csid, itemID, broke, full)
+        else
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
         end
-
-        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
         -- WotG : The Price of Valor; Success does not award an item, but only KI.
         if xi.wotg.helpers.helmTrade(player, helmType, broke) then

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SCHERZO
 -- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
+-- Notes: Effect subType for enhancing songs stores IDs of the caster. Set in scripts/globals/spells/enhancing_song.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

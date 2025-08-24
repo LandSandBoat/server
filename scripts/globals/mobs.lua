@@ -31,46 +31,125 @@ local function lotteryPrimed(phList)
     return false
 end
 
-xi.mob.updateNMSpawnPoint = function(mob, spawnPoints)
-    -- This function is used to replace UpdateNMSpawnPoints() inside the Zone.lua files and the NM despawn scripts
-    -- Once UpdateNMSpawnPoints() is no longer used, this note can be removed
-    -- Spawnpoints is a table of {x = , y = , z = }
-    if spawnPoints ~= nil and #spawnPoints > 0 then
+local getMobLuaPathObject = function(mob)
+    if not mob then
+        return nil
+    end
+
+    return xi.zones[mob:getZoneName()].mobs[mob:getName()]
+end
+
+-- This function is used to replace UpdateNMSpawnPoints() inside the Zone.lua files and the NM despawn scripts
+-- - mobParam can either be a mobid or a mob entity object
+-- it either accepts a table of spawn points to randomize, or looks to the mob's cached lua object for a spawnPoints entry
+---@param mobParam number|CBaseEntity?
+---@param spawnPointsOverride table?
+xi.mob.updateNMSpawnPoint = function(mobParam, spawnPointsOverride)
+    local origMobParam = mobParam
+    -- sometimes we call from Zone.lua files and only have the mob id
+    if type(mobParam) == 'number' then
+        mobParam = GetMobByID(mobParam)
+    end
+
+    if mobParam == nil then
+        print('[updateNMSpawnPoint] Invalid mob parameter:')
+        print(origMobParam)
+
+        return
+    end
+
+    -- if no spawnPoints table was sent, extract from mob lua object
+    local spawnPoints = spawnPointsOverride
+    if spawnPoints == nil then
+        local mobObject = getMobLuaPathObject(mobParam)
+        if mobObject and mobObject.spawnPoints then
+            spawnPoints = mobObject.spawnPoints
+        end
+    end
+
+    -- Special check for NMs with the same name but multiple IDs
+    if spawnPoints and spawnPoints[mobParam:getID()] then
+        spawnPoints = spawnPoints[mobParam:getID()]
+    end
+
+    if
+        spawnPoints ~= nil and
+        type(spawnPoints) == 'table' and
+        #spawnPoints > 0
+    then
         local chosenSpawn    = utils.randomEntry(spawnPoints)
         local randomRotation = math.random(0, 255) -- rotation does not matter
 
         -- Updates the mob's spawn point
-        mob:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
+        mobParam:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
     else
-        printf('No spawn points defined for mob %s (%u) in spawnPoints.', mob:getName(), mob:getID())
+        -- TODO This needs to stay here until all NMs have been updated to use entity.spawnPoints and the nm_spawn_points sql table is gone
+        if not UpdateNMSpawnPoint(mobParam:getID()) then
+            fmt('No spawn points defined for mob {} ({}) in spawnPoints.', mobParam:getName(), mobParam:getID())
+        end
     end
 end
 
 -- potential lottery placeholder was killed
-xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
+-- TODO fix phNmId definition to be integer only once all PH lua files are updated
+---@param ph CBaseEntity
+---@param phNmId integer|table
+---@param chance integer
+---@param cooldown integer
+---@param params table?
+xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
     params = params or {}
     --[[
-        params.immediate   = true    pop NM without waiting for next PH pop time
-        params.dayOnly     = true    spawn NM only at day time
-        params.nightOnly   = true    spawn NM only at night time
-        params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
-        params.spawnPoints = {x = , y = , z = } table of spawn points to choose from
+        params.immediate          = true    pop NM without waiting for next PH pop time
+        params.dayOnly            = true    spawn NM only at day time
+        params.nightOnly          = true    spawn NM only at night time
+        params.noPosUpdate        = true    do not run UpdateNMSpawnPoint()
+        params.spawnPoints        = { {x = , y = , z = } } table of spawn points to choose from, overrides NM's lua-defined table
+        params.doNotEnablePhSpawn = true    Don't enable ph respawns after NM is killed (for chained ph systems like steelfleece)
     ]]
 
-    if type(params.immediate) ~= 'boolean' then
-        params.immediate = false
+    local phId = ph:getID()
+    local nmId = nil
+    local nm = nil
+    local phList = nil
+    -- TODO temporary if-block while phLists are defined in PH lua files instead of the NM lua file
+    if type(phNmId) == 'table' then
+        phList = phNmId
+        nmId = phList[phId]
+        if nmId then
+            nm = GetMobByID(nmId)
+        end
+    elseif type(phNmId) == 'number' then
+        nmId = phNmId
+        nm = GetMobByID(nmId)
+        local mobEntityObj = getMobLuaPathObject(nm)
+        if mobEntityObj then
+            phList = mobEntityObj.phList
+        end
     end
 
-    if type(params.dayOnly) ~= 'boolean' then
-        params.dayOnly = false
+    if
+        type(nmId) ~= 'number' or
+        nm == nil or
+        phList == nil
+    then
+        return false
     end
 
-    if type(params.nightOnly) ~= 'boolean' then
-        params.nightOnly = false
-    end
+    -- ensure certain boolean params exist
+    local paramKeys =
+    {
+        'immediate',
+        'dayOnly',
+        'nightOnly',
+        'noPosUpdate',
+        'doNotEnablePhSpawn',
+    }
 
-    if type(params.noPosUpdate) ~= 'boolean' then
-        params.noPosUpdate = false
+    for _, pKey in ipairs(paramKeys) do
+        if type(params[pKey]) ~= 'boolean' then
+            params[pKey] = false
+        end
     end
 
     if xi.settings.main.NM_LOTTERY_CHANCE then
@@ -81,80 +160,64 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
         cooldown = xi.settings.main.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.main.NM_LOTTERY_COOLDOWN) or cooldown
     end
 
-    local phId = ph:getID()
-    local nmId = phList[phId]
+    local pop = nm:getLocalVar('pop')
 
-    if nmId ~= nil then
-        local nm = GetMobByID(nmId)
-        if nm ~= nil then
-            local pop = nm:getLocalVar('pop')
+    chance = math.ceil(chance * 10) -- chance / 1000.
 
-            chance = math.ceil(chance * 10) -- chance / 1000.
-
-            if
-                GetSystemTime() > pop and
-                not lotteryPrimed(phList) and
-                math.random(1, 1000) <= chance
-            then
-                local nextRepopTime = VanadielTime() + GetMobRespawnTime(phId)
-                local nextRepopHour = math.floor((nextRepopTime % xi.vanaTime.DAY) / xi.vanaTime.HOUR)
-                -- If the NM is day only and spawn would happen during the night, bail out
-                if
-                    params.dayOnly and
-                    nextRepopHour < 4 and
-                    nextRepopHour >= 20
-                then
-                    return false
-                -- If the NM is night only and spawn would happen during the day, bail out
-                elseif
-                    params.nightOnly and
-                    nextRepopHour >= 4 and
-                    nextRepopHour < 20
-                then
-                    return false
-                end
-
-                -- on PH death, replace PH repop with NM repop
-                DisallowRespawn(phId, true)
-                DisallowRespawn(nmId, false)
-
-                -- This is a temporary solution until all NMs have been updated to use params.spawnPoints and moved out of sql
-                if params.spawnPoints then
-                    if params.spawnPoints[nmId] then -- Special check for NMs with multiple IDs
-                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints[nmId])
-                    else
-                        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints)
-                    end
-
-                    params.noPosUpdate = true -- If we have a table of spawn points, we don't need to run UpdateNMSpawnPoint()
-                end
-
-                if not params.noPosUpdate then
-                    UpdateNMSpawnPoint(nmId) -- This needs to stay here until all NMs have been updated to use params.spawnPoints and moved out of sql
-                end
-
-                -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
-                nm:setRespawnTime(params.immediate and 1 or GetMobRespawnTime(phId))
-
-                nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
-                    -- on NM death, replace NM repop with PH repop
-                    DisallowRespawn(nmId, true)
-                    DisallowRespawn(phId, false)
-                    GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-
-                    if m:getLocalVar('doNotInvokeCooldown') == 0 then
-                        m:setLocalVar('pop', GetSystemTime() + cooldown)
-                    end
-
-                    m:removeListener('DESPAWN_' .. nmId)
-                end)
-
-                return true
-            end
-        end
+    if
+        GetSystemTime() <= pop or
+        lotteryPrimed(phList) or
+        math.random(1, 1000) > chance
+    then
+        return false
     end
 
-    return false
+    local nextRepopTime = VanadielTime() + GetMobRespawnTime(phId)
+    local nextRepopHour = math.floor((nextRepopTime % xi.vanaTime.DAY) / xi.vanaTime.HOUR)
+    -- If the NM is day only and spawn would happen during the night, bail out
+    if
+        params.dayOnly and
+        nextRepopHour < 4 and
+        nextRepopHour >= 20
+    then
+        return false
+    -- If the NM is night only and spawn would happen during the day, bail out
+    elseif
+        params.nightOnly and
+        nextRepopHour >= 4 and
+        nextRepopHour < 20
+    then
+        return false
+    end
+
+    -- on PH death, replace PH repop with NM repop
+    DisallowRespawn(phId, true)
+    DisallowRespawn(nmId, false)
+
+    -- Update mob's spawn position, if available
+    if not params.noPosUpdate then
+        xi.mob.updateNMSpawnPoint(nm, params.spawnPoints or nil)
+    end
+
+    -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
+    nm:setRespawnTime(params.immediate and 1 or GetMobRespawnTime(phId))
+
+    nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
+        -- on NM death, replace NM repop with PH repop
+        DisallowRespawn(nmId, true)
+        if not params.doNotEnablePhSpawn then
+            DisallowRespawn(phId, false)
+            GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
+        end
+
+        if m:getLocalVar('doNotInvokeCooldown') == 0 then
+            m:setLocalVar('pop', GetSystemTime() + cooldown)
+        end
+
+        m:removeListener('DESPAWN_' .. nmId)
+    end)
+
+    return true
 end
 
 -----------------------------------

@@ -21,7 +21,7 @@ local matches = -- [element id][resonance id]
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (13) BLU - Physical Slashing
 }
 
--- Returns a boolean if the spell's element matches the resonace given
+-- Returns a boolean if the spell's element matches the resonance given
 local function doesSpellElementMatchResonance(ele, resonance)
     local isMatch = matches[ele + 1][resonance:getPower() + 1]
     return (isMatch ~= nil and isMatch > 0)

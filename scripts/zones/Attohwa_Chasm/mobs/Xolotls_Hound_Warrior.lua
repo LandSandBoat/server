@@ -6,7 +6,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 32)
 end
 

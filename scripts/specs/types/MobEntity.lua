@@ -1,6 +1,13 @@
 ---@meta
 
+---@class SpawnPosition : table
+---@field x number
+---@field y number
+---@field z number
+
 ---@class TMobEntity
+---@field phList? table<integer, integer>
+---@field spawnPoints? table<integer, SpawnPosition|table<integer, SpawnPosition>>
 ---@field onMobInitialize? fun(mob: CBaseEntity)
 ---@field onPath? fun(mob: CBaseEntity)
 ---@field onPathPoint? fun(mob: CBaseEntity)

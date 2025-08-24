@@ -2,7 +2,6 @@
 -- Zone: Tahrongi_Canyon (117)
 -----------------------------------
 local ID = zones[xi.zone.TAHRONGI_CANYON]
-require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
@@ -25,10 +24,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(442.781, -1.641, -40.144, 160)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 35
-    end
-
     -- AMK06/AMK07
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
@@ -49,29 +44,28 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 35 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-local function isHabrokWeather(weather)
-    return weather == xi.weather.DUST_STORM or
-        weather == xi.weather.SAND_STORM or
-        weather == xi.weather.WIND or
-        weather == xi.weather.GALES
-end
+local habrokWeatherTable =
+set{
+    xi.weather.DUST_STORM,
+    xi.weather.SAND_STORM,
+    xi.weather.WIND,
+    xi.weather.GALES
+}
 
 zoneObject.onZoneWeatherChange = function(weather)
-    local habrok = GetMobByID(ID.mob.HABROK)
+    local habrok          = GetMobByID(ID.mob.HABROK)
+    local isHabrokWeather = habrokWeatherTable[weather]
     if habrok then
-        if habrok:isSpawned() and not isHabrokWeather(weather) then
+        if habrok:isSpawned() and not isHabrokWeather then
             DespawnMob(ID.mob.HABROK)
         elseif
             not habrok:isSpawned() and
-            isHabrokWeather(weather) and
+            isHabrokWeather and
             GetSystemTime() > habrok:getLocalVar('pop')
         then
             SpawnMob(ID.mob.HABROK)

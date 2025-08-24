@@ -8,11 +8,21 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- Note: Event 173 is shown once on the first time when talking to Mathilde.  Followup event
-    -- that repeats is event 174.
-    -- TODO: Implement this as a unique event
+    if player:getRank(player:getNation()) >= 6 then
+        if not player:hasCompletedUniqueEvent(xi.uniqueEvent.MET_MATHILDES_SON) then
+            player:startEvent(173)
+        else
+            player:startEvent(174)
+        end
+    else
+        player:startEvent(171)
+    end
+end
 
-    -- Former implementation defaulted to event 171, which was not observed.
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 173 then
+        player:setUniqueEvent(xi.uniqueEvent.MET_MATHILDES_SON)
+    end
 end
 
 return entity

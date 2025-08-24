@@ -462,6 +462,16 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             }
 
             PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
+            // special jug pet skills that affect pet and owner: non-aoe-skill, primary target is the pet, and targetflag includes "actor's party"
+            // If we didn't filter on pet type, skills like healing ruby would fit the condition
+            if (this->getPetType() == PET_TYPE::JUG_PET && this->PMaster != nullptr && PTarget == this && PSkill->getValidTargets() & TARGET_PLAYER_PARTY)
+            {
+                // addEntity does not handle range checking
+                if (PAI->TargetFind->isWithinRange(&this->PMaster->loc.p, PSkill->getDistance()))
+                {
+                    PAI->TargetFind->addEntity(this->PMaster, false);
+                }
+            }
         }
     }
     else // Out of range

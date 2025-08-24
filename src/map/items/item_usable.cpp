@@ -24,8 +24,6 @@
 #include "common/utils.h"
 #include "common/vana_time.h"
 
-#include "map_server.h"
-
 CItemUsable::CItemUsable(uint16 id)
 : CItem(id)
 , m_UseDelay(0s)

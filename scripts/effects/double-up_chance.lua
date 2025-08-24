@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.DOUBLE_UP_CHANCE
+-- Notes: Effect's subType stores abilityID. See: scripts/globals/job_utils/corsair.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

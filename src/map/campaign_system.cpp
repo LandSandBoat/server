@@ -25,7 +25,6 @@
 #include "common/database.h"
 #include "common/sql.h"
 #include "map/utils/zoneutils.h"
-#include "map_server.h"
 #include "packets/campaign_map.h"
 #include "utils/charutils.h"
 

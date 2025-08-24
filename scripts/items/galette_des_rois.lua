@@ -24,8 +24,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 5875)
+itemObject.onItemUse = function(target, user, item)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
     local rand = math.random(784, 815)
     npcUtil.giveItem(target, { { rand, 1 } })
 end

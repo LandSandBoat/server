@@ -667,7 +667,7 @@ INSERT INTO `mob_skills` VALUES (649,393,'voidsong',1,0.0,20.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (650,394,'thornsong',0,0.0,15.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (651,395,'lodesong',1,0.0,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (652,396,'blaster',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (653,397,'chaotic_eye',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (653,397,'chaotic_eye',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (654,980,'double_whammy',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (655,399,'scurvy',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (656,982,'gilded_torpor',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

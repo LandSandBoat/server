@@ -32,7 +32,6 @@
 
 #include "ipc_client.h"
 #include "map_networking.h"
-#include "map_server.h"
 #include "map_session.h"
 #include "packet_system.h"
 

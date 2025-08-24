@@ -1194,9 +1194,17 @@ INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,195,1,255); -- thundag
 INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,212,1,255); -- burst (1~255)
 
 -- Duke_Amduscias (73)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,156,1,255); -- aero_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,195,1,255); -- thundaga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,204,1,255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,206,1,255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,208,1,255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,210,1,255); -- quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,212,1,255); -- burst (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,214,1,255); -- flood (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,258,1,255); -- bind (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Duke_Amduscias',73,249,1,255); -- blaze_spikes (1~255)
 
 -- Beelzebub (74)
 INSERT INTO `mob_spell_lists` VALUES ('Beelzebub',74,5,1,255);   -- cure_v (1~255)

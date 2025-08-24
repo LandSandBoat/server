@@ -28,8 +28,8 @@
 #include "lua/luautils.h"
 
 #include "instance_loader.h"
+#include "map_engine.h"
 #include "map_networking.h"
-#include "map_server.h"
 #include "zoneutils.h"
 
 #include <queue>

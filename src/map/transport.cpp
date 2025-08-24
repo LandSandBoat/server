@@ -23,12 +23,12 @@
 
 #include "common/timer.h"
 #include "common/vana_time.h"
+#include "map_engine.h"
 
 #include <cstdlib>
 
 #include "entities/charentity.h"
 #include "map_networking.h"
-#include "map_server.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "utils/zoneutils.h"

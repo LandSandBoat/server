@@ -1915,7 +1915,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
                         if (xirand::GetRandomNumber(100) < bloodBoonRate)
                         {
-                            mpCost *= xirand::GetRandomNumber(8.f, 16.f) / 16.f;
+                            mpCost *= xirand::GetRandomNumber(8.0f, 16.0f) / 16.0f;
                         }
                     }
 
@@ -3132,13 +3132,13 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             }
             break;
         case MOGHANCEMENT_MONEY:
-            addModifier(Mod::GILFINDER, 10 * multiplier);
+            addModifier(Mod::MOGHANCEMENT_GIL_BONUS_P, 10 * multiplier);
             break;
         case MOGHANCEMENT_CAMPAIGN:
             addModifier(Mod::CAMPAIGN_BONUS, 5 * multiplier);
             break;
         case MOGHANCEMENT_MONEY_II:
-            addModifier(Mod::GILFINDER, 15 * multiplier);
+            addModifier(Mod::MOGHANCEMENT_GIL_BONUS_P, 15 * multiplier);
             break;
         case MOGHANCEMENT_SKILL_GAINS:
             // NOTE: Exact value is unknown but considering this only granted by a newish item it makes sense SE made it fairly strong

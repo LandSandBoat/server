@@ -288,7 +288,7 @@
         "VanadielMoonDirection",
         "VanadielRSERace",
         "VanadielRSELocation",
-        "SetVanadielTimeOffset",
+        "SetTimeOffset",
         "IsMoonNew",
         "IsMoonFull",
         "RunElevator",

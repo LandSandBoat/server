@@ -49,7 +49,6 @@ zones[xi.zone.BALGAS_DAIS] =
     mob =
     {
         ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
-        BLACK_DRAGON            = GetFirstID('Black_Dragon'),
         BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
         DVOROVOI                = GetFirstID('Dvorovoi'),
         GILAGOGE_TLUGVI         = GetFirstID('Gilagoge_Tlugvi'),

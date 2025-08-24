@@ -9,6 +9,12 @@ mixins = { require('scripts/mixins/rage') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end
@@ -22,9 +28,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DEF, 500)
     mob:setMod(xi.mod.EVA, 370)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.STUN)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
@@ -60,7 +63,7 @@ entity.onMobFight = function(mob, target)
         GetSystemTime() > delay and
         mob:canUseAbilities()
     then -- Use Meteor every 40s, based on capture
-        mob:castSpell(218, target) -- meteor
+        mob:castSpell(xi.magic.spell.METEOR, target)
         mob:setLocalVar('delay', GetSystemTime() + 40)
     end
 end
@@ -70,7 +73,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onSpellPrecast = function(mob, spell)
-    if spell:getID() == 218 then
+    if spell:getID() == xi.magic.spell.METEOR then
         spell:setAoE(xi.magic.aoe.RADIAL)
         spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)

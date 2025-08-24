@@ -30,10 +30,10 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user, item)
     target:forMembersInRange(30, function(member)
         if not member:hasStatusEffect(xi.effect.FOOD) then
-            member:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 6540)
+            member:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
         end
     end)
 end

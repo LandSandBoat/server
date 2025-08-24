@@ -43,4 +43,5 @@ return {
     ['Venika']          = { event = 110 },
     ['Yamilla']         = { event = 109 },
     ['Yatniel']         = { event = 10028 },
+    ['Zalsuhm']         = { event = 10089 },
 }
