@@ -9,7 +9,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onPlayerDeath = function(player)
-    local ID = require('scripts.zones.Arrapago_Reef.IDs')
+    local ID = zones[xi.zone.ARRAPAGO_REEF]
     local lamiaMobId = ID.mob.LAMIA_NO19
     local x = player:getXPos()
     local y = player:getYPos()
