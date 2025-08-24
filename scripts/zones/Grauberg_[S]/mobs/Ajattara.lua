@@ -8,16 +8,11 @@ local ID = zones[xi.zone.GRAUBERG_S]
 ---@type TMobEntity
 local entity = {}
 
-local scitalisPHTable =
-{
-    [ID.mob.SCITALIS - 1] = ID.mob.SCITALIS,
-}
-
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, scitalisPHTable, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.SCITALIS, 10, 3600) -- 1 hour
 end
 
 return entity

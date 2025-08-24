@@ -3,8 +3,15 @@
 --   NM: Morille Mortelle
 -- !pos 59.788 -0.939 22.316 171
 -----------------------------------
+local ID = zones[xi.zone.CRAWLERS_NEST_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.MORILLE_MORTELLE - 4] = ID.mob.MORILLE_MORTELLE, -- 61 0 -4
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

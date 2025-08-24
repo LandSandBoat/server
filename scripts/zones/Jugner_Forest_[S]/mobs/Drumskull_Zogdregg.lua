@@ -2,8 +2,15 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Drumskull Zogdregg
 -----------------------------------
+local ID = zones[xi.zone.JUGNER_FOREST_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.DRUMSKULL_ZOGDREGG - 1] = ID.mob.DRUMSKULL_ZOGDREGG, -- 195.578 -0.556 -347.699
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

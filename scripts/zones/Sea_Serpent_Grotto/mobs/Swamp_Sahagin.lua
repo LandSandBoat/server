@@ -8,11 +8,6 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 ---@type TMobEntity
 local entity = {}
 
-local pahhPHTable =
-{
-    [ID.mob.PAHH_THE_GULLCALLER - 5] = ID.mob.PAHH_THE_GULLCALLER, -- -13.532 21.301 -20.861
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 806, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 807, 1, xi.regime.type.GROUNDS)
@@ -20,7 +15,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, pahhPHTable, 10, 7200) -- 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.PAHH_THE_GULLCALLER, 10, 7200) -- 2 hours
 end
 
 return entity

@@ -2,8 +2,16 @@
 -- Area: Newton Movalpolos
 --   NM: Swashstox Beadblinker
 -----------------------------------
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.SWASHSTOX_BEADBLINKER[1] - 10] = ID.mob.SWASHSTOX_BEADBLINKER[1], -- 92.145, 15.500, 66.595
+    [ID.mob.SWASHSTOX_BEADBLINKER[2] + 4]  = ID.mob.SWASHSTOX_BEADBLINKER[2], -- 88.412, 15.421, -19.950
+}
 
 entity.onMobSpawn = function(mob)
     local mobId = mob:getID()

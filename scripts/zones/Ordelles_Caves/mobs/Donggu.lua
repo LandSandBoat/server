@@ -2,8 +2,15 @@
 -- Area: Ordelle's Caves
 --   NM: Donggu
 -----------------------------------
+local ID = zones[xi.zone.ORDELLES_CAVES]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.DONGGU - 4] = ID.mob.DONGGU,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,8 +2,15 @@
 -- Area: North Gustaberg [S]
 --   NM: Ankabut
 -----------------------------------
+local ID = zones[xi.zone.NORTH_GUSTABERG_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.ANKABUT - 4] = ID.mob.ANKABUT, -- 656.399 -11.580 507.091
+}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 500)

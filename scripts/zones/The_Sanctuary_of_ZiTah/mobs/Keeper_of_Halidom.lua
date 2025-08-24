@@ -2,8 +2,15 @@
 -- Area: The Sanctuary of ZiTah
 --   NM: Keeper of Halidom
 -----------------------------------
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.KEEPER_OF_HALIDOM - 1] = ID.mob.KEEPER_OF_HALIDOM, -- 319.939 -0.037 187.231
+}
 
 local spawnPoints =
 {

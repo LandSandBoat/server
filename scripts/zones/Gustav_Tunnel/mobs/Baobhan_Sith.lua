@@ -2,8 +2,16 @@
 -- Area: Gustav Tunnel
 --   NM: Baobhan Sith
 -----------------------------------
+local ID = zones[xi.zone.GUSTAV_TUNNEL]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.BAOBHAN_SITH - 2] = ID.mob.BAOBHAN_SITH, -- 171.000 9.194 55.000
+    [ID.mob.BAOBHAN_SITH - 1] = ID.mob.BAOBHAN_SITH, -- 187.000 9.000 105.000
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,8 +2,16 @@
 -- Area: Quicksand Caves
 --   NM: Sabotender Bailarina
 -----------------------------------
+local ID = zones[xi.zone.QUICKSAND_CAVES]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.SABOTENDER_BAILARINA - 5] = ID.mob.SABOTENDER_BAILARINA, -- -458 0 780
+    [ID.mob.SABOTENDER_BAILARINA - 1] = ID.mob.SABOTENDER_BAILARINA, -- -522 1 779
+}
 
 entity.onMobFight = function(mob, target)
     local lifePercent = mob:getHPP()

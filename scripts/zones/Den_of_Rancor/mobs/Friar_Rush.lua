@@ -2,8 +2,15 @@
 -- Area: Den of Rancor
 --   NM: Friar Rush
 -----------------------------------
+local ID = zones[xi.zone.DEN_OF_RANCOR]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.FRIAR_RUSH - 2] = ID.mob.FRIAR_RUSH,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 9000)

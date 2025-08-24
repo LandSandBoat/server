@@ -50,6 +50,8 @@ zones[xi.zone.BIBIKI_BAY] =
     },
     mob =
     {
+        INTULO     = GetFirstID('Intulo'),
+        SPLACKNUCK = GetFirstID('Splacknuck'),
     },
     npc =
     {

@@ -2,8 +2,15 @@
 -- Area: Sauromugue Champaign
 --   NM: Bashe
 -----------------------------------
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.BASHE - 6] = ID.mob.BASHE, -- 537.188 6.167 -11.067
+}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 273)

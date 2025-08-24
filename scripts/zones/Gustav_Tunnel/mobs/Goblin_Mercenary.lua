@@ -7,7 +7,6 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local wyvernpoacherSpawnPoints =
 {
     { x = -100.000, y = 1.000,  z = -44.000 },
@@ -62,18 +61,13 @@ local wyvernpoacherSpawnPoints =
     { x = -59.137,  y = 1.250,  z = -39.071 },
 }
 
-local wyvernpoacherPHTable =
-{
-    [ID.mob.WYVERNPOACHER_DRACHLOX - 7] = ID.mob.WYVERNPOACHER_DRACHLOX, -- -100.000 1.000 -44.000
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, wyvernpoacherPHTable, 10, 7200, { spawnPoints = wyvernpoacherSpawnPoints }) -- 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.WYVERNPOACHER_DRACHLOX, 10, 7200, { spawnPoints = wyvernpoacherSpawnPoints }) -- 2 hours
 end
 
 return entity

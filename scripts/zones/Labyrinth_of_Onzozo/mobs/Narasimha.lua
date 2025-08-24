@@ -2,8 +2,15 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Narasimha
 -----------------------------------
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.NARASIMHA - 1] = ID.mob.NARASIMHA, -- -119.897 0.275 127.060
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)

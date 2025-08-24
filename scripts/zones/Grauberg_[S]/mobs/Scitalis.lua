@@ -3,8 +3,15 @@
 --   NM: Scitalis
 -- https://www.bg-wiki.com/ffxi/Scitalis
 -----------------------------------
+local ID = zones[xi.zone.GRAUBERG_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.SCITALIS - 1] = ID.mob.SCITALIS,
+}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)

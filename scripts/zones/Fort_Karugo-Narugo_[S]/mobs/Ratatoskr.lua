@@ -2,8 +2,15 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Ratatoskr
 -----------------------------------
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.RATATOSKR - 3] = ID.mob.RATATOSKR,
+}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 522)

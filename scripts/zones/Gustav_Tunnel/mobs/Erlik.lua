@@ -7,7 +7,6 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local baobhanSpawnPoints =
 {
     { x = 171.000, y =  9.194, z =  55.000 },
@@ -62,18 +61,12 @@ local baobhanSpawnPoints =
     { x = 197.208, y = 10.121, z =  76.706 },
 }
 
-local baobhanPHTable =
-{
-    [ID.mob.BAOBHAN_SITH - 2] = ID.mob.BAOBHAN_SITH, -- 171.000 9.194 55.000
-    [ID.mob.BAOBHAN_SITH - 1] = ID.mob.BAOBHAN_SITH, -- 187.000 9.000 105.000
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 767, 2, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, baobhanPHTable, 5, 14400, { spawnPoints = baobhanSpawnPoints }) -- 4 hours
+    xi.mob.phOnDespawn(mob, ID.mob.BAOBHAN_SITH, 5, 14400, { spawnPoints = baobhanSpawnPoints }) -- 4 hours
 end
 
 return entity

@@ -7,7 +7,6 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local viscountSpawnPoints =
 {
     { x = -365.684, y = -52.125, z = -136.540 },
@@ -62,13 +61,8 @@ local viscountSpawnPoints =
     { x = -359.439, y = -52.000, z = -129.000 },
 }
 
-local viscountPHTable =
-{
-    [ID.mob.VISCOUNT_MORAX - 2] = ID.mob.VISCOUNT_MORAX, -- -365.684 -52.125 -136.540
-}
-
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, viscountPHTable, 10, 1, { spawnPoints = viscountSpawnPoints }) -- No respawn
+    xi.mob.phOnDespawn(mob, ID.mob.VISCOUNT_MORAX, 10, 1, { spawnPoints = viscountSpawnPoints }) -- No respawn
 end
 
 return entity

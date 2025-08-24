@@ -3,8 +3,15 @@
 --   NM: Barbaric Weapon
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
+local ID = zones[xi.zone.XARCABARD]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.BARBARIC_WEAPON - 1] = ID.mob.BARBARIC_WEAPON,
+}
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

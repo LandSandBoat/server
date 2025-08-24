@@ -7,7 +7,6 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local amikiriSpawnPoints =
 {
     { x = -206.330, y =  0.044, z = 73.926 },
@@ -62,17 +61,12 @@ local amikiriSpawnPoints =
     { x = -220.605, y = -0.686, z = 147.272 },
 }
 
-local amikiriPHTable =
-{
-    [ID.mob.AMIKIRI - 2]  = ID.mob.AMIKIRI, -- -209.552 -0.257 161.728
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 768, 2, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, amikiriPHTable, 5, 25200, { spawnPoints = amikiriSpawnPoints }) -- 7 hours
+    xi.mob.phOnDespawn(mob, ID.mob.AMIKIRI, 5, 25200, { spawnPoints = amikiriSpawnPoints }) -- 7 hours
 end
 
 return entity

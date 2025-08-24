@@ -4,8 +4,16 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+local ID = zones[xi.zone.CASTLE_OZTROJA_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.AA_XALMO_THE_SAVAGE - 16] = ID.mob.AA_XALMO_THE_SAVAGE,
+    [ID.mob.AA_XALMO_THE_SAVAGE - 5]  = ID.mob.AA_XALMO_THE_SAVAGE,
+}
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)

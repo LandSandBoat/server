@@ -8,7 +8,6 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local ungurSpawnPoints =
 {
     { x = -242.000, y = -0.577,  z = 120.000 },
@@ -63,18 +62,12 @@ local ungurSpawnPoints =
     { x = -306.271, y = -9.415,  z = -3.174  },
 }
 
-local ungurPHTable =
-{
-    [ID.mob.UNGUR - 1]  = ID.mob.UNGUR, -- -316.000 -9.000 3.000
-    [ID.mob.UNGUR + 29] = ID.mob.UNGUR, -- -123.856 0.239 223.303
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 769, 2, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ungurPHTable, 5, 7200, { spawnPoints = ungurSpawnPoints }) -- 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.UNGUR, 5, 7200, { spawnPoints = ungurSpawnPoints }) -- 2 hours
 end
 
 return entity

@@ -4,8 +4,15 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
+local ID = zones[xi.zone.GIDDEUS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.HOO_MJUU_THE_TORRENT - 2] = ID.mob.HOO_MJUU_THE_TORRENT, -- -39.073 0.597 -115.279
+}
 
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {

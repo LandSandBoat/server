@@ -2,8 +2,17 @@
 -- Area: Beaucedine Glacier [S]
 --   NM: Grand'Goule
 -----------------------------------
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.GRANDGOULE - 7] = ID.mob.GRANDGOULE,
+    [ID.mob.GRANDGOULE - 6] = ID.mob.GRANDGOULE,
+    [ID.mob.GRANDGOULE - 5] = ID.mob.GRANDGOULE,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

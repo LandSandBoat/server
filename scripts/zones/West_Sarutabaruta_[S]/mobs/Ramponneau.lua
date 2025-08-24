@@ -2,8 +2,15 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Ramponneau
 -----------------------------------
+local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.RAMPONNEAU - 4] = ID.mob.RAMPONNEAU, -- 78.836 -0.109 -199.204
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,8 +2,17 @@
 -- Area: Kuftal Tunnel
 --   NM: Pelican
 -----------------------------------
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.PELICAN - 4] = ID.mob.PELICAN, -- 178.857 20.256 -44.151
+    [ID.mob.PELICAN - 3] = ID.mob.PELICAN, -- 179.394 20.061 -34.062
+    [ID.mob.PELICAN - 1] = ID.mob.PELICAN, -- 188.610 19.245 -50.076
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

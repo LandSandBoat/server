@@ -2,8 +2,21 @@
 -- Area: Fort Karugo-Narugo [S]
 --   NM: Kirtimukha
 -----------------------------------
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.KIRTIMUKHA - 8] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 7] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 6] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 5] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 4] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 3] = ID.mob.KIRTIMUKHA,
+    [ID.mob.KIRTIMUKHA - 1] = ID.mob.KIRTIMUKHA,
+}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 523)

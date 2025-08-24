@@ -2,8 +2,15 @@
 -- Area: Xarcabard [S]
 --   NM: Graoully
 -----------------------------------
+local ID = zones[xi.zone.XARCABARD_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.GRAOULLY - 2] = ID.mob.GRAOULLY,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

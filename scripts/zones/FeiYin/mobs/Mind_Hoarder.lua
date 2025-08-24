@@ -2,8 +2,17 @@
 -- Area: Fei'Yin
 --  NM: Mind Hoarder
 -----------------------------------
+local ID = zones[xi.zone.FEIYIN]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.MIND_HOARDER - 3] = ID.mob.MIND_HOARDER,
+    [ID.mob.MIND_HOARDER - 2] = ID.mob.MIND_HOARDER,
+    [ID.mob.MIND_HOARDER - 1] = ID.mob.MIND_HOARDER,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,8 +2,16 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Cargo Crab Colin
 -----------------------------------
+local ID = zones[xi.zone.KORROLOKA_TUNNEL]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.CARGO_CRAB_COLIN + 22] = ID.mob.CARGO_CRAB_COLIN, -- -30.384 1.000 -33.277
+    [ID.mob.CARGO_CRAB_COLIN + 24] = ID.mob.CARGO_CRAB_COLIN, -- -95.359 1.000 -34.375
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,8 +2,15 @@
 -- Area: Outer Horutoto Ruins
 --   NM: Desmodont
 -----------------------------------
+local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.DESMODONT - 2] = ID.mob.DESMODONT,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

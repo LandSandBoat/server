@@ -3,8 +3,15 @@
 --   NM: Calchas
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.CALCHAS - 2] = ID.mob.CALCHAS,
+}
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

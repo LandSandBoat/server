@@ -23,11 +23,7 @@ zones[xi.zone.VUNKERL_INLET_S] =
     },
     mob =
     {
-        BIG_BANG_PH =
-        {
-            [17117347] = 17117349,
-            [17117348] = 17117349,
-        },
+        BIG_BANG = GetFirstID('Big_Bang'),
     },
     npc =
     {

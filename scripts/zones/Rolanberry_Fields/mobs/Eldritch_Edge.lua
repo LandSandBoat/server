@@ -2,8 +2,17 @@
 -- Area: Rolanberry Fields
 --   NM: Eldritch Edge
 -----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.ELDRITCH_EDGE + 2] = ID.mob.ELDRITCH_EDGE, -- 440 -28 -44
+    [ID.mob.ELDRITCH_EDGE - 2] = ID.mob.ELDRITCH_EDGE, -- 396.992 -24.01 -152.613
+    [ID.mob.ELDRITCH_EDGE - 1] = ID.mob.ELDRITCH_EDGE, -- 395 -24 -147
+}
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
