@@ -48,25 +48,25 @@ public:
     void reload();
     void unload();
 
-    auto findPath(const position_t& start, const position_t& end) -> std::vector<pathpoint_t>;
-    auto findRandomPosition(const position_t& start, float maxRadius) -> std::pair<int16, position_t>;
+    auto findPath(const position_t& start, const position_t& end) const -> std::vector<pathpoint_t>;
+    auto findRandomPosition(const position_t& start, float maxRadius) const -> std::pair<int16, position_t>;
 
     // Returns true if the point is in water (not implemented)
-    bool inWater(const position_t& point);
+    auto inWater(const position_t& point) const -> bool;
 
     // Returns true if no wall was hit
     //
     // Recast Detour Docs:
     // Casts a 'walkability' ray along the surface of the navigation mesh from the start position toward the end position.
     // Note: This is not a point-to-point in 3D space calculation, it is 2D across the navmesh!
-    bool raycast(const position_t& start, const position_t& end);
+    auto raycast(const position_t& start, const position_t& end) const -> bool;
 
-    bool validPosition(const position_t& position);
-    bool findClosestValidPoint(const position_t& position, float* validPoint);
-    bool findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validPoint);
+    auto validPosition(const position_t& position) const -> bool;
+    auto findClosestValidPoint(const position_t& position, float* validPoint) const -> bool;
+    auto findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validPoint) const -> bool;
 
     // Like validPosition(), but will also set the given position to the valid position that it finds.
-    void snapToValidPosition(position_t& position);
+    auto snapToValidPosition(position_t& position) const -> void;
 
     [[nodiscard]] static auto detourStatusString(const uint32 status) -> std::string
     {
@@ -124,18 +124,10 @@ public:
     }
 
 private:
-    bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
+    auto onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter) const -> bool;
 
     std::string    m_filename;
     uint16         m_zoneID;
     dtNavMesh*     m_navMesh;
     dtNavMeshQuery m_navMeshQuery;
-
-    std::vector<dtPolyRef>     m_navMeshQueryPolyData;
-    std::vector<float>         m_navMeshQueryStraightPathFloatData;
-    std::vector<unsigned char> m_navMeshQueryStraightPathFlagData;
-    std::vector<dtPolyRef>     m_navMeshQueryStraightPathPolyData;
-
-    std::vector<dtPolyRef> m_navMeshQueryRaycastHitPath;
-    dtRaycastHit           m_raycastHit;
 };

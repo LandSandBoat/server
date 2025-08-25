@@ -152,15 +152,6 @@ CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
 {
-    m_navMeshQueryPolyData.resize(MAX_NAV_POLYS);
-    m_navMeshQueryStraightPathFloatData.resize(MAX_NAV_POLYS * 3);
-    m_navMeshQueryStraightPathFlagData.resize(MAX_NAV_POLYS);
-    m_navMeshQueryStraightPathPolyData.resize(MAX_NAV_POLYS);
-
-    m_navMeshQueryRaycastHitPath.resize(MAX_HIT_PATH_SIZE);
-
-    m_raycastHit.path    = m_navMeshQueryRaycastHitPath.data();
-    m_raycastHit.maxPath = MAX_HIT_PATH_SIZE;
 }
 
 CNavMesh::~CNavMesh()
@@ -254,7 +245,7 @@ void CNavMesh::unload()
     m_navMesh = nullptr;
 }
 
-auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::vector<pathpoint_t>
+auto CNavMesh::findPath(const position_t& start, const position_t& end) const -> std::vector<pathpoint_t>
 {
     TracyZoneScoped;
 
@@ -318,9 +309,10 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     }
 
     // First, we're going to build up a list of polys that make up the path
-    int32 pathPolyCount = 0;
+    int32     pathPolyCount = 0;
+    dtPolyRef navMeshQueryPolyData[MAX_NAV_POLYS];
 
-    status = m_navMeshQuery.findPath(startRef, endRef, sNearestPoint, eNearestPoint, &filter, m_navMeshQueryPolyData.data(), &pathPolyCount, MAX_NAV_POLYS);
+    status = m_navMeshQuery.findPath(startRef, endRef, sNearestPoint, eNearestPoint, &filter, navMeshQueryPolyData, &pathPolyCount, MAX_NAV_POLYS);
     if (dtStatusFailed(status))
     {
         ShowError("CNavMesh::findPath findPath error (%u)", m_zoneID);
@@ -341,9 +333,13 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     // Find the best straight path possible between sNearestPoint and eNearestPoint within the bounds of all the polys in pathPolys.
     int32 straightPathCount = 0;
 
+    float         navMeshQueryStraightPathFloatData[MAX_NAV_POLYS * 3];
+    unsigned char navMeshQueryStraightPathFlagData[MAX_NAV_POLYS];
+    dtPolyRef     navMeshQueryStraightPathPolyData[MAX_NAV_POLYS];
+
     // NOTE: The DT_STRAIGHTPATH_ALL_CROSSINGS flag can exasorbate the issue of getting trapped in local minima.
-    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, m_navMeshQueryPolyData.data(), pathPolyCount,
-                                             m_navMeshQueryStraightPathFloatData.data(), m_navMeshQueryStraightPathFlagData.data(), m_navMeshQueryStraightPathPolyData.data(),
+    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, navMeshQueryPolyData, pathPolyCount,
+                                             navMeshQueryStraightPathFloatData, navMeshQueryStraightPathFlagData, navMeshQueryStraightPathPolyData,
                                              &straightPathCount, MAX_NAV_POLYS /*, DT_STRAIGHTPATH_ALL_CROSSINGS */);
 
     if (dtStatusFailed(status))
@@ -365,9 +361,9 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     };
 
     const auto pathEndPosition = position_t{
-        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 3],
-        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 2],
-        m_navMeshQueryStraightPathFloatData[straightPathCount * 3 - 1],
+        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 3],
+        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 2],
+        navMeshQueryStraightPathFloatData[straightPathCount * 3 - 1],
         0,
         0,
     };
@@ -395,9 +391,9 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     for (int i = 3; i < straightPathCount * 3;)
     {
         float pathPos[3];
-        pathPos[0] = m_navMeshQueryStraightPathFloatData[i++];
-        pathPos[1] = m_navMeshQueryStraightPathFloatData[i++];
-        pathPos[2] = m_navMeshQueryStraightPathFloatData[i++];
+        pathPos[0] = navMeshQueryStraightPathFloatData[i++];
+        pathPos[1] = navMeshQueryStraightPathFloatData[i++];
+        pathPos[2] = navMeshQueryStraightPathFloatData[i++];
 
         CNavMesh::ToFFXIPos(pathPos);
 
@@ -407,7 +403,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     return outPoints;
 }
 
-std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& start, float maxRadius)
+auto CNavMesh::findRandomPosition(const position_t& start, float maxRadius) const -> std::pair<int16, position_t>
 {
     TracyZoneScoped;
 
@@ -470,7 +466,7 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
     return std::make_pair(0, position_t{ randomPt[0], randomPt[1], randomPt[2], 0, 0 });
 }
 
-bool CNavMesh::inWater(const position_t& point)
+auto CNavMesh::inWater(const position_t& point) const -> bool
 {
     if (!m_navMesh)
     {
@@ -481,7 +477,7 @@ bool CNavMesh::inWater(const position_t& point)
     return false;
 }
 
-bool CNavMesh::validPosition(const position_t& position)
+auto CNavMesh::validPosition(const position_t& position) const -> bool
 {
     TracyZoneScoped;
 
@@ -513,7 +509,7 @@ bool CNavMesh::validPosition(const position_t& position)
     return m_navMesh->isValidPolyRef(startRef);
 }
 
-bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint)
+auto CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint) const -> bool
 {
     TracyZoneScoped;
 
@@ -544,7 +540,7 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
     return true;
 }
 
-bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint)
+auto CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint) const -> bool
 {
     TracyZoneScoped;
 
@@ -588,7 +584,7 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     return true;
 }
 
-void CNavMesh::snapToValidPosition(position_t& position)
+auto CNavMesh::snapToValidPosition(position_t& position) const -> void
 {
     TracyZoneScoped;
 
@@ -628,7 +624,7 @@ void CNavMesh::snapToValidPosition(position_t& position)
     }
 }
 
-bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter)
+auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter) const -> bool
 {
     TracyZoneScoped;
 
@@ -693,7 +689,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     return true;
 }
 
-bool CNavMesh::raycast(const position_t& start, const position_t& end)
+auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> bool
 {
     TracyZoneScoped;
 
@@ -798,7 +794,13 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
         }
     }
 
-    status = m_navMeshQuery.raycast(startRef, spos, epos, &filter, 0, &m_raycastHit);
+    dtPolyRef    navMeshQueryRaycastHitPath[MAX_HIT_PATH_SIZE];
+    dtRaycastHit raycastHit;
+
+    raycastHit.path    = navMeshQueryRaycastHitPath;
+    raycastHit.maxPath = MAX_HIT_PATH_SIZE;
+
+    status = m_navMeshQuery.raycast(startRef, spos, epos, &filter, 0, &raycastHit);
 
     if (dtStatusFailed(status))
     {
@@ -808,5 +810,5 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
     }
 
     // no wall was hit
-    return m_raycastHit.t == FLT_MAX;
+    return raycastHit.t == FLT_MAX;
 }
