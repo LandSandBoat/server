@@ -1,0 +1,152 @@
+xi = xi or {}
+
+---@enum xi.augment
+xi.augment =
+{
+    NONE                               = 0,
+    HP_P1                              = 1,
+    HP_P33                             = 2,
+    HP_P65                             = 3,
+    HP_P97                             = 4,
+    HP_M1                              = 5,
+    HP_M33                             = 6,
+    HP_M65                             = 7,
+    HP_M97                             = 8,
+    MP_P1                              = 9,
+    MP_P33                             = 10,
+    MP_P65                             = 11,
+    MP_P97                             = 12,
+    MP_M1                              = 13,
+    MP_M33                             = 14,
+    MP_M65                             = 15,
+    MP_M97                             = 16,
+    HP_P1_MP_P1                        = 17,
+    HP_P33_MP_P33                      = 18,
+    HP_P1_MP_M1                        = 19,
+    HP_P33_MP_M33                      = 20,
+    HP_M1_MP_P1                        = 21,
+    HP_M33_MP_P33                      = 22,
+    ACCURACY_P1                        = 23,
+    ACCURACY_M1                        = 24,
+    ATTACK_P1                          = 25,
+    ATTACK_M1                          = 26,
+    RNG_ACC_P1                         = 27,
+    RNG_ACC_M1                         = 28,
+    RNG_ATK_P1                         = 29,
+    RNG_ATK_M1                         = 30,
+    EVASION_P1                         = 31,
+    EVASION_M1                         = 32,
+    DEF_P1                             = 33,
+    DEF_M1                             = 34,
+    MAG_ACC_P1                         = 35,
+    MAG_ACC_M1                         = 36,
+    MAG_EVASION_P1                     = 37,
+    MAG_EVASION_M1                     = 38,
+    ENMITY_P1                          = 39,
+    ENMITY_M1                          = 40,
+    CRITICAL_HIT_RATE_P1               = 41, -- Percent
+    ENEMY_CRIT_HIT_RATE_M1             = 42, -- Percent
+    CHARM_P1                           = 43,
+    STORE_TP_P1_SUBTLE_BLOW_P1         = 44,
+    DMG_P1                             = 45,
+    DMG_M1                             = 46,
+    DELAY_P1                           = 47, -- Percent
+    DELAY_M1                           = 48,
+    HASTE_P1                           = 49,
+    SLOW_P1                            = 50,
+    HP_RECOVERED_WHILE_HEALING_P1      = 51,
+    MP_RECOVERED_WHILE_HEALING_P1      = 52,
+    SPELL_INTERRUPTION_RATE_DOWN_P1    = 53, -- Percent
+    PHYS_DMG_TAKEN_M1                  = 54, -- Percent
+    MAGIC_DMG_TAKEN_M1                 = 55, -- Percent
+    BREATH_DMG_TAKEN_M1                = 56, -- Percent
+    MAGIC_CRIT_HIT_RATE_P1             = 57, -- Percent
+    MAG_DEF_BNS_M1                     = 58,
+    LATENT_EFFECT_REGAIN_P10           = 59,
+    LATENT_EFFECT_REFRESH_P1           = 60,
+    OCC_INC_RESIST_TO_STAT_AILMENTS_P1 = 61,
+    ACCURACY_P33                       = 62,
+    RNG_ACC_P33                        = 63,
+    MAG_ACC_P33                        = 64,
+    ATTACK_P33                         = 65,
+    RNG_ATK_P33                        = 66,
+    ALL_SONGS_P1                       = 67,
+    ACCURACY_P1_ATTACK_P1              = 68,
+
+    FAST_CAST_P1                       = 140, -- Percent
+    CONSERVE_MP_P1                     = 141,
+    STORE_TP_P1                        = 142,
+    DOUBLE_ATTACK_P1                   = 143, -- Percent
+    TRIPLE_ATTACK_P1                   = 144, -- Percent
+
+    DUAL_WIELD_P1                      = 146,
+
+    RESIST_SLEEP_P1                    = 176,
+    RESIST_POISON_P1                   = 177,
+    RESIST_PARALYZE_P1                 = 178,
+    RESIST_BLIND_P1                    = 179,
+    RESIST_SILENCE_P1                  = 180,
+    RESIST_VIRUS_P1                    = 181,
+    RESIST_PETRIFY_P1                  = 182,
+    RESIST_BIND_P1                     = 183,
+    RESIST_CURSE_P1                    = 184,
+    RESIST_GRAVITY_P1                  = 185,
+    RESIST_SLOW_P1                     = 186,
+    RESIST_STUN_P1                     = 187,
+    RESIST_CHARM_P1                    = 188,
+
+    ZANSHIN_P1                         = 198,
+
+    HAND_TO_HAND_SKILL_P1              = 257,
+    DAGGER_SKILL_P1                    = 258,
+    SWORD_SKILL_P1                     = 259,
+    GREAT_SWORD_SKILL_P1               = 260,
+    AXE_SKILL_P1                       = 261,
+    GREAT_AXE_SKILL_P1                 = 262,
+    SCYTHE_SKILL_P1                    = 263,
+    POLEARM_SKILL_P1                   = 264,
+    KATANA_SKILL_P1                    = 265,
+    GREAT_KATANA_SKILL_P1              = 266,
+    CLUB_SKILL_P1                      = 267,
+    STAFF_SKILL_P1                     = 268,
+
+    ENHANCING_MAGIC_SKILL_P1           = 290,
+
+    DARK_MAGIC_SKILL_P1                = 293,
+
+    CRITICAL_HIT_DAMAGE_P1             = 328, -- Percent
+    CURE_POTENCY_P1                    = 329, -- Percent
+    MAGIC_CRIT_DMG_P1                  = 335, -- Percent
+
+    STR_P1                             = 512,
+    DEX_P1                             = 513,
+    VIT_P1                             = 514,
+    AGI_P1                             = 515,
+    INT_P1                             = 516,
+    MND_P1                             = 517,
+    CHR_P1                             = 518,
+    STR_M1                             = 519,
+    DEX_M1                             = 520,
+    VIT_M1                             = 521,
+    AGI_M1                             = 522,
+    INT_M1                             = 523,
+    MND_M1                             = 524,
+    CHR_M1                             = 525,
+
+    FIRE_RESIST_P1                     = 768,
+    ICE_RESIST_P1                      = 769,
+    WIND_RESIST_P1                     = 770,
+    EARTH_RESIST_P1                    = 771,
+    LIGHTNING_RESIST_P1                = 772,
+    WATER_RESIST_P1                    = 773,
+    LIGHT_RESIST_P1                    = 774,
+    DARK_RESIST_P1                     = 775,
+    FIRE_RESIST_M1                     = 776,
+    ICE_RESIST_M1                      = 777,
+    WIND_RESIST_M1                     = 778,
+    EARTH_RESIST_M1                    = 779,
+    LIGHTNING_RESIST_M1                = 780,
+    WATER_RESIST_M1                    = 781,
+    LIGHT_RESIST_M1                    = 782,
+    DARK_RESIST_M1                     = 783,
+}

@@ -23,6 +23,7 @@ zones[xi.zone.PROVENANCE] =
     },
     npc =
     {
+        GRUMBLIX = 17686619,
     },
 }
 
