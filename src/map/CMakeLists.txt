@@ -8,6 +8,10 @@ add_subdirectory(packets)
 add_subdirectory(packets/c2s)
 add_subdirectory(utils)
 
+set(APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+)
+
 set(SOURCES
     ${COMMON_SOURCES}
     ${AI_SOURCES}
@@ -185,16 +189,16 @@ foreach(entry ${INIT_FILE_ENTRIES})
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h")
         list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${entry}")
-        list(APPEND SOURCES ${module_files})
+        list(APPEND APP_SOURCES ${module_files})
         message(STATUS "Adding module files to build: ${module_files}")
     elseif (${entry} MATCHES "\.cpp")
-        list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
+        list(APPEND APP_SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
         message(STATUS "Adding module files to build: ${CMAKE_SOURCE_DIR}/modules/${entry}")
     endif()
 endforeach()
 
 add_executable(xi_map
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${APP_SOURCES}
     ${resource})
 
 set(MAP_LIB_SOURCES ${SOURCES})
@@ -222,12 +226,16 @@ target_link_libraries(xi_map_lib
         project_warnings
 )
 
+target_include_directories(xi_map
+    PUBLIC
+        ${module_include_dirs}
+)
+
 target_include_directories(xi_map_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${module_include_dirs}
 )
 
 target_link_libraries(xi_map
