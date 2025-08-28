@@ -318,4 +318,22 @@ xi.settings.main =
     -- SYSTEM
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.
     INACTIVITY_WATCHDOG_PERIOD  = 2000,  -- Time in milliseconds which the inactivity watchdog will wait between ticks of the main loop before potentially killing the target process.
+    
+    -- CUSTOM ERA EVENTS / CAMPAIGNS, 0 for Off, 1 for On
+    -- OR Set os.time value to set "Event End Date" if ("TIMER") Implemented
+    CHRISTMAS = 0, -- Jeuno Guide stone treats,
+    THANKSGIVING = 0,  -- Jeuno Guide stone treats,
+    HALLOWEEN = 0,  -- Jeuno Guide stone treats,
+    EASTER = 0, -- Jeuno Guide stone treats,
+    MOOGLEEXP = 0, --TIMER-- BRO Moogles give EXP buff to all.
+    DYNAMISDROP = 0, --TIMER-- Extra Dynamis & other currency drops in Dynamis Zones.
+    BCNMEXTRA = 0, --TIMER-- Extra Drops off BCNM mobs in : UO,  (Uses bcnmextra global file for item list)
+    SKYBONANZA = 0, -- Extra Sky drops... -- not yet setup
+    CRUORBOOST = 0, --TIMER-- Double Cruor for merits trade in Provenance
+    TREASUREHUNT = 0, --TIMER-- Killing mobs has a chance to drop Something Good! (mobs.lua)
+    JEUNOUNLOCKED = 0, --TIMER-- ANARCHY!! Dynamis Jeuno without a lockout! NO GM INTERVENTION!!
+    GAMBLINGGOODS = 0, -- GamblingTable can give rare loot! -- not yet setup
+    DYNAMISLORDCAMP = 0, --TIMER-- Bonus dropslot for DL gear, additional 100s
+    SALVAGEBONUS = 0, --TIMER-- Bonus dropslot for Salvage chariots
+    MOB_HUNT = 0, -- Event for hunting the super mob. Gives hints on mob deaths in valid zones.
 }

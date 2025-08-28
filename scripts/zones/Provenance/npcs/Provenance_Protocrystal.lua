@@ -1,6 +1,8 @@
 -----------------------------------
 -- Provenance Protocrystal
 -----------------------------------
+local ID = require("scripts/zones/Provenance/IDs")
+-----------------------------------
 ---@type TNpcEntity
 
 local augments =
@@ -297,9 +299,9 @@ local augments =
 local function getMeritExchangeValue(player)
     local exchangeValue = 250
 
-    -- if CRUORBOOST == 1 or CRUORBOOST >= os.time() then
-    --     exchangeValue = exchangeValue * 2
-    -- end
+    if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= os.time() then
+        exchangeValue = exchangeValue * 2
+    end
 
     if player:getVar("MentorFlag") == 1 then
         exchangeValue = exchangeValue * 4
@@ -452,9 +454,9 @@ entity.onTrigger = function(player, npc)
         player:printToPlayer("Exchange cruor with Refractive Crystals at a rate of 1000-to-1.", xi.msg.channel.SAY, "Protocrystal")
         player:printToPlayer(string.format("Gain cruor by paying merits at a rate of %i-to-1.", getMeritExchangeValue(player)), xi.msg.channel.SAY, "Protocrystal")
 
-        -- if CRUORBOOST == 1 or CRUORBOOST >= os.time() then
-        --     player:printToPlayer("Double Cruor From Merits Event Active!", xi.msg.channel.SAY, "Protocrystal")
-        -- end
+        if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= os.time() then
+            player:printToPlayer("Double Cruor From Merits Event Active!", xi.msg.channel.SAY, "Protocrystal")
+        end
 
         player:printToPlayer(string.format("You currently have %d Cruor and %i available Merits", cruor, merit), xi.msg.channel.SAY, "Protocrystal")
     end
