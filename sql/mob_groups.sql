@@ -8123,7 +8123,7 @@ INSERT INTO `mob_groups` VALUES (9,913,112,'Dark_Elemental',330,4,568,0,0,48,50,
 INSERT INTO `mob_groups` VALUES (10,991,112,'Demon_Pawn',330,0,621,0,0,48,52,0);
 INSERT INTO `mob_groups` VALUES (11,6027,112,'Barbaric_Weapon',0,32,3098,6700,0,73,74,0);
 INSERT INTO `mob_groups` VALUES (12,5851,112,'Timeworn_Warrior',0,32,3062,5000,0,57,58,0);
-INSERT INTO `mob_groups` VALUES (13,1252,112,'Ereshkigal',86400,0,788,3000,0,48,50,0);
+INSERT INTO `mob_groups` VALUES (13,1252,112,'Ereshkigal',0,128,788,6000,0,48,50,0);
 INSERT INTO `mob_groups` VALUES (14,453,112,'Blizzard_Gigas',330,0,296,0,0,45,48,0);
 INSERT INTO `mob_groups` VALUES (15,1794,112,'Graupel_Gigas',330,0,296,0,0,45,48,0);
 INSERT INTO `mob_groups` VALUES (16,1431,112,'Frost_Gigas',330,0,296,0,0,45,48,0);

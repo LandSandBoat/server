@@ -82,7 +82,7 @@ public:
     //
 
     void handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message);
-    void handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message);
+    void handleMessage_AccountLogin(const IPP& ipp, const ipc::AccountLogin& message);
     void handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& message);
     void handleMessage_CharVarUpdate(const IPP& ipp, const ipc::CharVarUpdate& message);
     void handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMessageTell& message);

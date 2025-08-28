@@ -170,6 +170,25 @@ xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
+xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck = function(player, target, ability)
+    local pet = player:getPet()
+    if not hasLuopan(player) or not pet then
+        return xi.msg.basic.REQUIRE_LUOPAN, 0
+    end
+
+    -- player out of range of luopan
+    if player:checkDistance(pet) > ability:getRange() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, 0
+    end
+
+    -- target out of range of luopan
+    if target:checkDistance(pet) > ability:getRange() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, pet:getTargID()
+    end
+
+    return 0, 0
+end
+
 xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, ability)
     if not hasLuopan(player) then
         return xi.msg.basic.REQUIRE_LUOPAN, 0

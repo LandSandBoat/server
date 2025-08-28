@@ -91,9 +91,8 @@ xi.mob.updateNMSpawnPoint = function(mobParam, spawnPointsOverride)
 end
 
 -- potential lottery placeholder was killed
--- TODO fix phNmId definition to be integer only once all PH lua files are updated
 ---@param ph CBaseEntity
----@param phNmId integer|table
+---@param phNmId integer
 ---@param chance integer
 ---@param cooldown integer
 ---@param params table?
@@ -112,22 +111,14 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
     local nmId = nil
     local nm = nil
     local phList = nil
-    -- TODO temporary if-block while phLists are defined in PH lua files instead of the NM lua file
-    if type(phNmId) == 'table' then
-        phList = phNmId
-        nmId = phList[phId]
-        if nmId then
-            nm = GetMobByID(nmId)
-        end
-    elseif type(phNmId) == 'number' then
-        nmId = phNmId
-        nm = GetMobByID(nmId)
-        local mobEntityObj = getMobLuaPathObject(nm)
-        if mobEntityObj then
-            phList = mobEntityObj.phList
-        end
+    local mobEntityObj = getMobLuaPathObject(GetMobByID(phNmId))
+    if mobEntityObj then
+        phList = mobEntityObj.phList
+        nmId   = phList and phList[phId]
+        nm     = nmId and GetMobByID(nmId)
     end
 
+    -- This was not a PH for the NM
     if
         type(nmId) ~= 'number' or
         nm == nil or

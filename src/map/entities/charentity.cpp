@@ -1930,17 +1930,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         PPetTarget = PPet->targid;
                     }
                 }
-                else if (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA)
-                {
-                    // use the animation id to get the pet version of this ability
-                    PAbility->setID(PAbility->getAnimationID());
-                    action.actionid = PAbility->getAnimationID();
-
-                    if (PAbility->getValidTarget() == TARGET_SELF)
-                    {
-                        PPetTarget = PPet->targid;
-                    }
-                }
                 else
                 {
                     auto* PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());

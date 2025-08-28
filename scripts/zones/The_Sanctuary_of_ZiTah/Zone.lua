@@ -1,15 +1,12 @@
 -----------------------------------
 -- Zone: The_Sanctuary_of_ZiTah (121)
 -----------------------------------
-local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', GetSystemTime() + math.random(43200, 57600)) -- 12 to 16 hr
-
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 end
 

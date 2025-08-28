@@ -43,6 +43,8 @@ public:
     void recvFor(timer::duration duration);
     void send(const IPP& ipp, std::span<uint8> buffer);
 
+    void requestExit();
+
 private:
     void startReceive();
 
@@ -51,6 +53,7 @@ private:
     asio::ip::udp::socket   socket_;
     NetworkBuffer           buffer_; // TODO: Pass in the global buffer, or only use this one
     asio::ip::udp::endpoint remote_endpoint_;
+    bool                    isRunning;
 
     ReceiveFn onReceiveFn_;
 };

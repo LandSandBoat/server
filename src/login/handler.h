@@ -71,7 +71,7 @@ private:
                 }
                 else if constexpr (std::is_same_v<T, data_session>)
                 {
-                    const auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                    const auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
                     data_handler->start();
                 }
             }

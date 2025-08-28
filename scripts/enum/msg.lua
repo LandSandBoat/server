@@ -126,6 +126,7 @@ xi.msg.basic =
     SKILL_ENFEEB                    = 243, -- <user> uses <skill>. <target> receives the effect of <status>.
     SELF_HEAL_SECONDARY             = 263, -- <target> recovers <amount> HP.
     DAMAGE_SECONDARY                = 264, -- <target> takes <amount> points of damage.
+    RECOVERS_MP_SECONDARY           = 276, -- <target> recovers <amount> MP.
     SKILL_GAIN_EFFECT_2             = 319, -- <user> uses <skill>. <target> gains the effect of <status>.
     RANGED_ATTACK_HIT               = 352, -- <user> ranged attack hits <target> for <amount> points of damage.
     RANGED_ATTACK_CRIT              = 353, -- <user> ranged attack scores a critical hit! \n <target> takes <amount> points of damage.
@@ -225,10 +226,11 @@ xi.msg.basic =
     ALREADY_HAVE_KEY_ITEM           = 759, -- You already have key item: <key item>.
 
     -- Distance
-    TARG_OUT_OF_RANGE               = 4,  -- <target> is out of range.
-    UNABLE_TO_SEE_TARG              = 5,  -- Unable to see <target>.
-    LOSE_SIGHT                      = 36, -- You lose sight of <target>.
-    TOO_FAR_AWAY                    = 78, -- <target> is too far away.
+    TARG_OUT_OF_RANGE               = 4,   -- <target> is out of range.
+    TARG_OUT_OF_RANGE_2             = 154, -- <target> is out of range.
+    UNABLE_TO_SEE_TARG              = 5,   -- Unable to see <target>.
+    LOSE_SIGHT                      = 36,  -- You lose sight of <target>.
+    TOO_FAR_AWAY                    = 78,  -- <target> is too far away.
 
     -- Weaponskills
     READIES_WS                      = 43,  -- <actor> readies <weapon_skill>.

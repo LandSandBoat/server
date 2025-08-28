@@ -44,6 +44,7 @@ return {
     ['Muhk_Johldy']        = { event = 339 }, -- There is at current an unknown mission/quest/status that alters their dialog. Windurst citizens get something different than other nations.
     ['Mul_Betreh']         = { event = 431 },
     ['Nalta']              = { event = 54 },
+    ['Nanaa_Mihgo']        = { event = 76 },
     ['Nine_of_Spades']     = { event = 266 },
     ['Orahi-Karapahi']     = { event = 413 },
     ['Otte_Burhiyu']       = { event = 341 },

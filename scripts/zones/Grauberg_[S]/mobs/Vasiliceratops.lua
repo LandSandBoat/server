@@ -3,8 +3,17 @@
 --   NM: Vasiliceratops
 -- https://www.bg-wiki.com/ffxi/Vasiliceratops
 -----------------------------------
+local ID = zones[xi.zone.GRAUBERG_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.VASILICERATOPS - 3] = ID.mob.VASILICERATOPS,
+    -- [ID.mob.VASILICERATOPS - 67] = ID.mob.VASILICERATOPS,
+    -- TODO: Add shared spawning for the PH. Only one PH is alive at a time. Spawns in either spot.
+}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.BIND)

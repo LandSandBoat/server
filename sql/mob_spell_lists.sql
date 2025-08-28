@@ -5676,7 +5676,14 @@ INSERT INTO `mob_spell_lists` VALUES ('Demon_Secretary',552,258,1,255); -- Bind 
 INSERT INTO `mob_spell_lists` VALUES ('Demon_Secretary',552,259,1,255); -- Sleep II (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Demon_Secretary',552,273,1,255); -- Sleepga (1~255)
 
--- Next Available: 553
+-- Xarcabard NM Ereshkigal
+INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,150,1,255); -- blizzard_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,179,1,255); -- blizzaga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,206,1,255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,231,1,255); -- bio_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,250,1,255); -- ice_spikes (1~255)
+
+-- Next Available: 554
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

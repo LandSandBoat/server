@@ -134,21 +134,58 @@ void IPCClient::handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct
     ShowWarningFmt("Received EmptyStruct message from {} - this is probably a bug", ipp.toString());
 }
 
-void IPCClient::handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message)
+void IPCClient::handleMessage_AccountLogin(const IPP& ipp, const ipc::AccountLogin& message)
 {
     TracyZoneScoped;
 
-    CCharEntity* PChar = zoneutils::GetChar(message.charId);
-    if (!PChar)
+    if (auto session = networking_.sessions().getSessionByAccountId(message.accountId))
     {
-        db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", message.charId);
-    }
-    else
-    {
-        // TODO: disconnect the client, but leave the character in the disconnecting state
-        // PChar->status = STATUS_SHUTDOWN;
-        // won't save their position but not a huge deal
-        // PChar->pushPacket<CServerIPPacket>(PChar, 1, 0);
+        // Extreme overkill but...
+        // Scramble key so server rejects input
+        for (uint32_t& i : session->blowfish.key)
+        {
+            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+        }
+
+        for (uint32_t& i : session->prev_blowfish.key)
+        {
+            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+        }
+
+        for (uint32_t& i : session->blowfish.P)
+        {
+            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+        }
+
+        for (uint32_t& i : session->prev_blowfish.P)
+        {
+            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+        }
+
+        for (uint8_t& i : session->blowfish.hash)
+        {
+            // uniform_int_distribution doesnt like uint8_t, so do some workaround
+            i = static_cast<uint8_t>(xirand::GetRandomNumber<uint16_t>(std::numeric_limits<uint16_t>::max()) % 255);
+        }
+
+        for (uint8_t& i : session->prev_blowfish.hash)
+        {
+            // uniform_int_distribution doesnt like uint8_t, so do some workaround
+            i = static_cast<uint8_t>(xirand::GetRandomNumber<uint16_t>(std::numeric_limits<uint16_t>::max()) % 255);
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (uint32_t& x : session->blowfish.S[i])
+            {
+                x = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+            }
+
+            for (uint32_t& x : session->prev_blowfish.S[i])
+            {
+                x = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+            }
+        }
     }
 }
 
@@ -156,11 +193,16 @@ void IPCClient::handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& mess
 {
     TracyZoneScoped;
 
-    // TODO: This is mainly for telling the world server that a character has zoned,
-    //     : but maybe it would be useful here too?
+    auto session = networking_.sessions().getSessionByCharId(message.charId);
 
-    std::ignore = message.charId;
-    std::ignore = message.destinationZoneId;
+    if (session) // Update in case of edge case
+    {
+        session->last_update = timer::now();
+    }
+    else
+    {
+        networking_.sessions().createPendingSession(message.charId); // Create a pending session that the character might use ahead of time
+    }
 }
 
 void IPCClient::handleMessage_CharVarUpdate(const IPP& ipp, const ipc::CharVarUpdate& message)
@@ -724,6 +766,19 @@ void IPCClient::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
         else
         {
             ShowDebugFmt("KillSession for charid {} not needed", message.victimId);
+        }
+    }
+
+    if (auto sessionToDelete = networking_.sessions().getPendingSessionByCharId(message.victimId))
+    {
+        if (sessionToDelete->blowfish.status == BLOWFISH_PENDING_ZONE)
+        {
+            ShowDebugFmt("Closing pending session of charid {} on request of other process", message.victimId);
+            networking_.sessions().destroySession(sessionToDelete);
+        }
+        else
+        {
+            // ShowDebugFmt("KillSession for charid {} not needed", message.victimId); // noisy
         }
     }
 }

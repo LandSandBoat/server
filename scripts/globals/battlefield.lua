@@ -1104,6 +1104,24 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
         end
     end
 
+    -- Handle mob initial spell casts (blaze spikes, protect, etc)
+    if player:getID() == initiatorId then
+        local mobs = battlefield:getMobs(true, true)
+        for _, mob in pairs(mobs) do
+            if mob:isSpawned() then
+                -- wait until initiator is out of cutscene
+                mob:addListener('ROAM_TICK', 'FIRST_CAST', function(mobArg)
+                    local firstPlayer = GetPlayerByID(initiatorId)
+                    if firstPlayer and not firstPlayer:isInEvent() then
+                        mobArg:castSpell()
+
+                        mobArg:removeListener('FIRST_CAST')
+                    end
+                end)
+            end
+        end
+    end
+
     local ID = zones[self.zoneId]
     player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.index)
 

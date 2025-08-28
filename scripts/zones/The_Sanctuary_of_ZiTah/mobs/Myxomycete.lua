@@ -51,9 +51,7 @@ entity.onMobSpawn = function(mob)
             nobleMoldDelay  = math.random(2, 20) * 60
         end
 
-        if
-            nobleMoldDelay > 0
-        then
+        if nobleMoldDelay > 0 then
             -- based on captures:
             -- Noble mold spawns exactly X minutes after weather change
             -- Noble mold spawns 3s after despawn of PH

@@ -5,15 +5,10 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck(player, target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local master = pet:getMaster()
-    if not master then
-        return
-    end
-
+abilityObject.onPetAbility = function(target, pet, petskill, master, action)
     local masterEquippedHead = master:getEquipID(xi.slot.HEAD)
     local dmgBoost           = master:getJobPointLevel(xi.jp.CONCENTRIC_PULSE_EFFECT)
     local dmg                = pet:getHP()
@@ -30,6 +25,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     dmg = utils.stoneskin(target, dmg)
+
+    xi.mobskills.jugPetAdjustMessage(target, pet, petskill, master, action)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 

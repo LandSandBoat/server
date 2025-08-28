@@ -30,13 +30,15 @@
 #include "login_packets.h"
 
 #include "common/ipp.h"
+#include "common/zmq_dealer_wrapper.h"
 
 // port 54230
 class data_session : public handler_session
 {
 public:
-    data_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
+    data_session(asio::ssl::stream<asio::ip::tcp::socket> socket, ZMQDealerWrapper& zmqDealerWrapper)
     : handler_session(std::move(socket))
+    , zmqDealerWrapper_(zmqDealerWrapper)
     {
         DebugSockets("data_session from IP %s", ipAddress);
     }
@@ -50,4 +52,7 @@ protected:
     }
 
     void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) override;
+
+private:
+    ZMQDealerWrapper& zmqDealerWrapper_;
 };

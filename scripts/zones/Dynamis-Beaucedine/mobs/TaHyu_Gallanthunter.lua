@@ -8,8 +8,15 @@ mixins =
     require('scripts/mixins/job_special')
 }
 -----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.TAHYU_GALLANTHUNTER - 6] = ID.mob.TAHYU_GALLANTHUNTER, -- Vanguard_Vigilante
+}
 
 entity.onMobDeath = function(mob, player, optParams)
 end

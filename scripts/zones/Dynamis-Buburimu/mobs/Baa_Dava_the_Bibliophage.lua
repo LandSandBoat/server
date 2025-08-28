@@ -9,8 +9,15 @@ mixins =
     require('scripts/mixins/remove_doom')
 }
 -----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.BAA_DAVA_THE_BIBLIOPHAGE - 3] = ID.mob.BAA_DAVA_THE_BIBLIOPHAGE, -- Vanguard_Oracle
+}
 
 entity.onMobDeath = function(mob, player, optParams)
 end

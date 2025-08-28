@@ -44,6 +44,7 @@ struct MapSession
     std::unique_ptr<CCharEntity> PChar;                   // game char
     uint8                        shuttingDown = 0;        // prevents double session closing
     uint32                       charID       = 0;
+    uint32                       accountID    = 0;
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
     // If it doesn't, and we can still successfully decrypt here, that means we need to resend 0x00B.

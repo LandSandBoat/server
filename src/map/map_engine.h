@@ -62,7 +62,7 @@ public:
     MapEngine(asio::io_context& io_context, MapConfig& config);
     ~MapEngine() override;
 
-    void gameLoop(asio::io_context& io_context);
+    void gameLoop();
 
     //
     // Init
@@ -98,7 +98,10 @@ public:
     auto zones() const -> std::map<uint16, CZone*>&; // g_PZoneList
     // gameState()
 
+    void requestExit();
+
 private:
+    asio::io_context&              ioContext_; // this is also shared with networking_
     std::unique_ptr<MapStatistics> mapStatistics_;
     std::unique_ptr<MapNetworking> networking_;
     std::unique_ptr<Watchdog>      watchdog_;

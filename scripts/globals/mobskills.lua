@@ -698,6 +698,7 @@ xi.mobskills.calculateDuration = function(tp, minimum, maximum)
     return minimum + (maximum - minimum) * ((tp - 1000) / 1000)
 end
 
+-- TODO rename to be more generic, as luopan abilities are also mobskill finish category
 -- adjusts the messages for aoe mobskills to match what secondary targets should have
 xi.mobskills.jugPetAdjustMessage = function(target, pet, petskill, owner, action)
     switch (petskill:getMsg()) : caseof
@@ -711,6 +712,12 @@ xi.mobskills.jugPetAdjustMessage = function(target, pet, petskill, owner, action
         [xi.msg.basic.SELF_HEAL] = function(x)
             if target:getID() ~= action:getPrimaryTargetID() then
                 petskill:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
+            end
+        end,
+
+        [xi.msg.basic.SKILL_RECOVERS_MP] = function(x)
+            if target:getID() ~= action:getPrimaryTargetID() then
+                petskill:setMsg(xi.msg.basic.RECOVERS_MP_SECONDARY)
             end
         end,
 

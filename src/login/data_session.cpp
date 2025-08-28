@@ -22,6 +22,7 @@
 #include "data_session.h"
 
 #include "common/database.h"
+#include "common/ipc.h"
 #include "common/utils.h"
 
 void data_session::read_func()
@@ -41,7 +42,7 @@ void data_session::read_func()
     session_t& session = loginHelpers::get_authenticated_session(ipAddress, sessionHash);
     if (!session.data_session)
     {
-        session.data_session              = std::make_shared<data_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_));
+        session.data_session              = std::make_shared<data_session>(std::forward<asio::ssl::stream<asio::ip::tcp::socket>>(socket_), zmqDealerWrapper_);
         session.data_session->sessionHash = sessionHash;
     }
 
@@ -196,10 +197,10 @@ void data_session::read_func()
                 // from logging in or creating new characters
                 if (maintMode > 0 && i == 0)
                 {
-                    if (auto dataSession = session.view_session.get())
+                    if (auto viewSession = session.view_session.get())
                     {
-                        loginHelpers::generateErrorMessage(dataSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
-                        dataSession->do_write(0x24);
+                        loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                        viewSession->do_write(0x24);
                     }
                     ShowWarning(fmt::format("char:({}) attmpted login during maintenance mode (0xA2). Sending error to client.", session.accountID));
                     return;
@@ -216,7 +217,7 @@ void data_session::read_func()
                     dataSession->do_write(0x148);
                 }
 
-                if (auto dataSession = session.view_session.get())
+                if (auto viewSession = session.view_session.get())
                 {
                     // size of packet + 1 uint32 + the actually set number of characters
                     uint32_t size                     = sizeof(packet_t) + sizeof(uint32_t) + sizeof(lpkt_chr_info_sub2) * characterInfoResponse.characters;
@@ -227,9 +228,9 @@ void data_session::read_func()
 
                     loginPackets::copyHashIntoPacket(characterInfoResponse, hash);
 
-                    std::memset(dataSession->buffer_.data(), 0, dataSession->buffer_.size());
-                    std::memcpy(dataSession->buffer_.data(), &characterInfoResponse, size);
-                    dataSession->do_write(size);
+                    std::memset(viewSession->buffer_.data(), 0, viewSession->buffer_.size());
+                    std::memcpy(viewSession->buffer_.data(), &characterInfoResponse, size);
+                    viewSession->do_write(size);
                 }
             }
         }
@@ -283,6 +284,9 @@ void data_session::read_func()
                     key3[16] += 6;
                 }
 
+                // TODO: is this and the above compatible?
+                key3[16] += session.incrementKeyValue;
+
                 ZoneIP   = str2ip(rset->get<std::string>("zoneip"));
                 ZonePort = rset->get<uint16>("zoneport");
 
@@ -318,27 +322,6 @@ void data_session::read_func()
                     sessionCount = rset0->get<uint16>("COUNT(client_addr)");
                 }
 
-                bool hasActiveSession = false;
-
-                const auto rset1 = db::preparedStmt("SELECT * "
-                                                    "FROM accounts_sessions "
-                                                    "WHERE accid = ? AND client_port != '0'",
-                                                    session.accountID);
-                if (rset1 && rset1->rowsCount() != 0 && rset1->next())
-                {
-                    hasActiveSession = true;
-                }
-
-                // If client was zoning out but was never seen at the destination, wait 30 seconds before allowing login again
-                const auto rset2 = db::preparedStmt("SELECT * "
-                                                    "FROM accounts_sessions "
-                                                    "WHERE accid = ? AND client_port = '0' AND last_zoneout_time >= SUBTIME(NOW(), \"00:00:30\")",
-                                                    session.accountID);
-                if (rset2 && rset2->rowsCount() != 0 && rset2->next())
-                {
-                    hasActiveSession = true;
-                }
-
                 auto exceptionTime = earth_time::time_point::min();
 
                 const auto rset3 = db::preparedStmt("SELECT UNIX_TIMESTAMP(exception) "
@@ -362,20 +345,6 @@ void data_session::read_func()
                     ShowWarning(fmt::format("data_session: account {} attempting to login when {} already has {} active session(s), limit is {}", session.accountID, ipAddress, sessionCount, loginLimit));
                 }
 
-                // TODO: it seems we may need to increment the key if we send this error? Client doesn't seem to ever recover.
-                if (hasActiveSession)
-                {
-                    ShowWarning(fmt::format("data_session: account {} is already logged in.", session.accountID));
-                    if (auto dataSession = session.view_session.get())
-                    {
-                        // Send error message to the client.
-                        loginHelpers::generateErrorMessage(dataSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                        dataSession->do_write(0x24);
-
-                        return;
-                    }
-                }
-
                 if ((isNotMaint && loginLimitOK) || isGM)
                 {
                     if (PrevZone == 0)
@@ -386,44 +355,61 @@ void data_session::read_func()
                     characterSelectionResponse.cache_ip   = session.serverIP; // search-server ip
                     characterSelectionResponse.cache_port = settings::get<uint16>("network.SEARCH_PORT");
 
-                    // If the session was not processed by the game server, then it must be deleted.
-                    db::preparedStmt("DELETE FROM accounts_sessions WHERE accid = ? AND client_port = 0", session.accountID);
+                    const auto rset1 = db::preparedStmt("SELECT charid "
+                                                        "FROM accounts_sessions "
+                                                        "WHERE accid = ? LIMIT 1",
+                                                        session.accountID);
+
+                    if (rset1 && rset1->rowsCount() != 0 && rset1->next())
+                    {
+                        // If character is already logged in (session still exists) kick them out
+                        // TODO: Retail has POL login time so this is more restricted.
+                        uint32 sessionCharid = rset1->get<uint32>("charid");
+
+                        if (sessionCharid == session.requestedCharacterID)
+                        {
+                            if (auto viewSession = session.view_session.get())
+                            {
+                                session.incrementKeyValue += 1;
+                                loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::CHARACTER_ALREADY_LOGGED_IN);
+                                viewSession->do_write(0x24);
+                                return;
+                            }
+                        }
+                    }
 
                     if (!db::preparedStmt("INSERT INTO accounts_sessions(accid, charid, session_key, server_addr, server_port, client_addr, version_mismatch) "
                                           "VALUES(?, ?, ?, ?, ?, ?, ?)",
                                           session.accountID, charid, key3, ZoneIP, ZonePort, accountIP,
                                           session.versionMismatch ? 1 : 0))
                     {
-                        if (auto dataSession = session.view_session.get())
+                        if (auto viewSession = session.view_session.get())
                         {
                             // Send error message to the client.
-                            loginHelpers::generateErrorMessage(dataSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                            dataSession->do_write(0x24);
+                            loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
+                            viewSession->do_write(0x24);
                             return;
                         }
                     }
-
-                    db::preparedStmt("UPDATE char_flags SET disconnecting = 0 WHERE charid = ?", charid);
-                    db::preparedStmt("UPDATE char_stats SET zoning = 2 WHERE charid = ?", charid);
                 }
                 else
                 {
-                    if (auto dataSession = session.view_session.get())
+                    if (auto viewSession = session.view_session.get())
                     {
                         // Send error message to the client.
-                        loginHelpers::generateErrorMessage(dataSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
-                        dataSession->do_write(0x24);
+                        loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::COULD_NOT_CONNECT_TO_LOBBY_SERVER);
+                        viewSession->do_write(0x24);
                         return;
                     }
                 }
             }
             else
             {
-                if (auto dataSession = session.view_session.get())
+                if (auto viewSession = session.view_session.get())
                 {
                     // Send error message to the client.
-                    loginHelpers::generateErrorMessage(dataSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
-                    dataSession->do_write(0x24);
+                    loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER); // "Unable to connect to world server. Specified operation failed"
+                    viewSession->do_write(0x24);
                     return;
                 }
             }
@@ -433,14 +419,23 @@ void data_session::read_func()
 
             loginPackets::copyHashIntoPacket(characterSelectionResponse, Hash);
 
-            if (auto dataSession = session.view_session.get())
+            if (auto viewSession = session.view_session.get())
             {
-                std::memcpy(dataSession->buffer_.data(), &characterSelectionResponse, sizeof(characterSelectionResponse));
-                dataSession->do_write(sizeof(characterSelectionResponse));
+                std::memcpy(viewSession->buffer_.data(), &characterSelectionResponse, sizeof(characterSelectionResponse));
+                viewSession->do_write(sizeof(characterSelectionResponse));
 
-                dataSession->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
-                dataSession->socket_.lowest_layer().close();
+                viewSession->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
+                viewSession->socket_.lowest_layer().close();
                 session.view_session = nullptr;
+
+                session.incrementKeyValue = 0; // Reset incremented key after inserting into db
+
+                const auto payload = ipc::toBytesWithHeader(ipc::CharZone{
+                    .charId            = charid,
+                    .destinationZoneId = ZoneID,
+                });
+
+                zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
             }
 
             if (settings::get<bool>("login.LOG_USER_IP"))

@@ -30,18 +30,24 @@ class MapSessionContainer
 {
 public:
     auto createSession(IPP ipp) -> MapSession*;
+    auto createPendingSession(uint32 charId) -> MapSession*;
 
     auto getSessionByIPP(IPP ipp) -> MapSession*;
     auto getSessionByIPP(uint64 ipp) -> MapSession*;
     auto getSessionByChar(CCharEntity* PChar) -> MapSession*;
     auto getSessionByCharId(uint32 charId) -> MapSession*;
+    auto getPendingSessionByCharId(uint32 charId) -> MapSession*;
+    auto getSessionByAccountId(uint32 accountId) -> MapSession*;
     auto getSessionByCharName(const std::string& name) -> MapSession*;
 
     void cleanupSessions(IPP mapIPP);
 
     void destroySession(IPP ipp);
     void destroySession(MapSession* map_session_data);
+    void destroyPendingSession(MapSession* map_session_data);
+    void destroyPendingSession(uint32 charId);
 
 private:
-    std::map<IPP, std::unique_ptr<MapSession>> sessions_;
+    std::map<IPP, std::unique_ptr<MapSession>>    sessions_;         // Confirmed sessions mapped by IP
+    std::map<uint32, std::unique_ptr<MapSession>> pending_sessions_; // Pending sessions notified via IPC that a character may be arriving
 };

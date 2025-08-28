@@ -2,8 +2,30 @@
 -- Area: RuAun Gardens
 --   NM: Despot
 -----------------------------------
+local ID = zones[xi.zone.RUAUN_GARDENS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.DESPOT - 16] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 15] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 14] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 13] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 12] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 11] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 10] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 9 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 8 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 7 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 6 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 5 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 4 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 3 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 2 ] = ID.mob.DESPOT,
+    [ID.mob.DESPOT - 1 ] = ID.mob.DESPOT,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)

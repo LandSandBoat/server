@@ -38,10 +38,9 @@ namespace ipc
     {
     };
 
-    struct CharLogin
+    struct AccountLogin
     {
         uint32 accountId{};
-        uint32 charId{};
     };
 
     struct CharZone

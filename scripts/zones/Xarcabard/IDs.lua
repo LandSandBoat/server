@@ -54,13 +54,14 @@ zones[xi.zone.XARCABARD] =
     mob =
     {
         BARBARIC_WEAPON  = GetFirstID('Barbaric_Weapon'),
-        TIMEWORN_WARRIOR = GetFirstID('Timeworn_Warrior'),
-        SHADOW_EYE       = GetFirstID('Shadow_Eye'),
-        CHAOS_ELEMENTAL  = GetFirstID('Chaos_Elemental'),
         BOREAL_HOUND     = GetFirstID('Boreal_Hound'),
         BOREAL_COEURL    = GetFirstID('Boreal_Coeurl'),
         BOREAL_TIGER     = GetFirstID('Boreal_Tiger'),
+        CHAOS_ELEMENTAL  = GetFirstID('Chaos_Elemental'),
+        ERESHKIGAL       = GetFirstID('Ereshkigal'),
         KOENIGSTIGER     = GetFirstID('Koenigstiger'),
+        SHADOW_EYE       = GetFirstID('Shadow_Eye'),
+        TIMEWORN_WARRIOR = GetFirstID('Timeworn_Warrior'),
         VOIDWALKER       =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =

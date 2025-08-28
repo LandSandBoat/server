@@ -25,6 +25,8 @@
 #include "common/console_service.h"
 #include "common/utils.h"
 #include "map_engine.h"
+#include "map_networking.h"
+#include "map_socket.h"
 
 #ifdef _WIN32
 #include <io.h>
@@ -89,4 +91,21 @@ void MapApplication::registerCommands(ConsoleService& console)
     console.registerCommand("reload_recipes", "Reload crafting recipes", std::bind(&MapEngine::onReloadRecipes, mapEngine, std::placeholders::_1));
     console.registerCommand("stats", "Print runtime stats", std::bind(&MapEngine::onStats, mapEngine, std::placeholders::_1));
     console.registerCommand("backtrace", "Print backtrace", std::bind(&MapEngine::onBacktrace, mapEngine, std::placeholders::_1));
+}
+
+void MapApplication::requestExit()
+{
+    Application::requestExit();
+
+    // Empty task manager
+    auto taskManager = CTaskManager::getInstance();
+    while (!taskManager->getTaskList().empty())
+    {
+        taskManager->getTaskList().pop();
+    }
+
+    if (auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get()))
+    {
+        mapEngine->requestExit();
+    }
 }

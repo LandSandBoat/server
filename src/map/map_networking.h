@@ -52,7 +52,7 @@ public:
     // TODO: Replace bool with named enum class
     void  handle_incoming_packet(const std::error_code& ec, std::span<uint8> buffer, const IPP& ipp);
     int32 map_decipher_packet(uint8*, size_t, MapSession*, blowfish_t*); // Decipher packet
-    int32 recv_parse(uint8*, size_t*, MapSession*);                      // main function to parse recv packets
+    int32 recv_parse(uint8*, size_t*, MapSession*, const IPP& ipp);      // main function to parse recv packets
     int32 parse(uint8*, size_t*, MapSession*);                           // main function parsing the packets
     int32 send_parse(uint8*, size_t*, MapSession*, bool);                // main function is building big packet
 

@@ -3457,17 +3457,15 @@ namespace luautils
             return;
         }
 
-        sol::function onMobSpawn = getEntityCachedFunction(PMob, "onMobSpawn");
-        if (!onMobSpawn.valid())
+        const sol::function onMobSpawn = getEntityCachedFunction(PMob, "onMobSpawn");
+        if (onMobSpawn.valid())
         {
-            return;
-        }
-
-        auto result = onMobSpawn(PMob);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onMobSpawn: %s", err.what());
+            const auto result = onMobSpawn(PMob);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::onMobSpawn: %s", err.what());
+            }
         }
 
         PMob->PAI->EventHandler.triggerListener("SPAWN", PMob);

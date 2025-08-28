@@ -81,8 +81,8 @@ public:
     // Runtime
     //
 
-    auto isRunning() const -> bool;
-    void requestExit();
+    auto         isRunning() const -> bool;
+    virtual void requestExit();
 
     // Is expected to block until requestExit() is called and/or isRunning() returns false
     void run();
