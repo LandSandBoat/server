@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
---  NPC: Raji
+--  NPC: Shomera
 -- Standard Info NPC
 -----------------------------------
 require("scripts/globals/era_npc")
@@ -10,14 +10,18 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc, {
-        destinationName = "Crawler's Nest - Lizard Camp",
-        destination     = {132, -40, -70, 90, xi.zone.CRAWLERS_NEST},
+        destinationName  = "Aht Urgan Whitegate",
+        destination      = { 111, 0, 21, 190, xi.zone.AHT_URHGAN_WHITEGATE },
+        checkFailureText = "You do not own the 'Boarding Permit' Key Item.",
+        check            = function()
+            return player:hasKeyItem(xi.ki.BOARDING_PERMIT)
+        end,
     })
 
     -- TODO: Just delete these old vars from the DB and remove this code.
     -- Cleanup old vars.
-    player:setVar("CNestCamp", 0)
-    player:setVar("LJNation", 0)
+    player:setVar("LJGate", 0)
+    player:setVar("RocCamp", 0)
 end
 
 return entity

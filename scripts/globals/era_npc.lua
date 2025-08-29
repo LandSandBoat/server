@@ -15,7 +15,7 @@ function xi.eraNpc.giveInstantWarpScroll(player, npc, params)
         return false
     end
 
-    player:printToPlayer("Bro, you forgot your Warp scroll, don't worry, I gotchu :D", 0, params.name)
+    player:printToPlayer("Bro, you forgot your Warp scroll, don't worry, I gotchu :D", xi.msg.channel.SAY, params.name)
     npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
 
     return true
@@ -28,13 +28,13 @@ function xi.eraNpc.tryWarp(player, npc, params)
     if player:getLocalVar("[Era]WarpNpc") ~= npc:getID() or time > player:getLocalVar("[Era]WarpTime") then
         player:setLocalVar("[Era]WarpNpc", npc:getID())
         player:setLocalVar("[Era]WarpTime", time + 30)
-        player:printToPlayer("Warning! The next time you click this NPC, you will be transported.", 0, params.name)
-        player:printToPlayer(string.format("Destination: %s", params.destinationName), 0, params.name)
+        player:printToPlayer("Warning! The next time you click this NPC, you will be transported.", xi.msg.channel.SAY, params.name)
+        player:printToPlayer(string.format("Destination: %s", params.destinationName), xi.msg.channel.SAY, params.name)
         return false
     end
 
     if params.check and not params.check() then
-        player:printToPlayer(params.checkFailureText, 0, params.name)
+        player:printToPlayer(params.checkFailureText, xi.msg.channel.SAY, params.name)
         return false
     end
 
@@ -82,7 +82,7 @@ local function getTotalExp(player)
 end
 
 function xi.eraNpc.broMoogleTrade(player, npc, trade)
-    player:printToPlayer("Hey bro, I don't know what you're expecting me to do with this. I'm good.", 0, "B.R.O. Moogle")
+    player:printToPlayer("Hey bro, I don't know what you're expecting me to do with this. I'm good.", xi.msg.channel.SAY, "B.R.O. Moogle")
 end
 
 function xi.eraNpc.broMoogleTrigger(player, npc)
@@ -92,10 +92,10 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
 
     -- B.R.O. Moogle explanation for first timers
     if player:getCharVar("BroMoogleIntro") == 0 then
-        player:printToPlayer("Hey bro, I'm one of Era's infamous buffing moogles!", 0, "B.R.O. Moogle")
-        player:printToPlayer("We'll help you out on your adventures. Just hit us up every time you see us!", 0, "B.R.O. Moogle")
-        player:printToPlayer("Talk to me again when you're ready for my Mighty Moogle Magic!", 0, "B.R.O. Moogle")
-        player:printToPlayer("What? Why didn't I say it? Bro, we're not all the same... *Sigh* ... Kupo...", 0, "B.R.O. Moogle")
+        player:printToPlayer("Hey bro, I'm one of Era's infamous buffing moogles!", xi.msg.channel.SAY, "B.R.O. Moogle")
+        player:printToPlayer("We'll help you out on your adventures. Just hit us up every time you see us!", xi.msg.channel.SAY, "B.R.O. Moogle")
+        player:printToPlayer("Talk to me again when you're ready for my Mighty Moogle Magic!", xi.msg.channel.SAY, "B.R.O. Moogle")
+        player:printToPlayer("What? Why didn't I say it? Bro, we're not all the same... *Sigh* ... Kupo...", xi.msg.channel.SAY, "B.R.O. Moogle")
         player:setCharVar("BroMoogleIntro", 1)
         return
     end
@@ -104,7 +104,7 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
 
     if time > player:getLocalVar("[Era]BroBuffTime") then
         player:setLocalVar("[Era]BroBuffTime", time + 30)
-        player:printToPlayer("Here are the buffs I'm authorized to give you, bro.", 0, "B.R.O. Moogle")
+        player:printToPlayer("Here are the buffs I'm authorized to give you, bro.", xi.msg.channel.SAY, "B.R.O. Moogle")
         player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
 
         -- Check for MOOGLEEXP event from settings
@@ -115,7 +115,7 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
         then
             player:addStatusEffect(xi.effect.DEDICATION, 100, 60, 10800, 0, 80000) -- Current EXP Buff
         elseif totalExp >= expCap and player:getCharVar("BroLockV1") == 0 then
-            player:printToPlayer("Oh, bro, you've grown so strong you don't need my magic anymore!", 0, "B.R.O. Moogle")
+            player:printToPlayer("Oh, bro, you've grown so strong you don't need my magic anymore!", xi.msg.channel.SAY, "B.R.O. Moogle")
             player:setCharVar("BroLockV1", 1)
         end
     end
