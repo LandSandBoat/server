@@ -507,6 +507,96 @@ struct zoneWeather_t
     , rare(_rare){};
 };
 
+struct spawnGroup_t
+{
+    uint8                    maxSpawns; // Maximum number of mobs that can be concurrently spawned from this group
+    std::vector<CMobEntity*> groupMobs; // The complete group of mobs that make up the set
+    std::set<CMobEntity*>    readyMobs; // The set of mobs that are allowed to spawn from the group
+
+    spawnGroup_t()
+    {
+        maxSpawns = 0;
+    };
+
+    void shuffle()
+    {
+        std::shuffle(groupMobs.begin(), groupMobs.end(), xirand::rng());
+    };
+
+    void prepareMobs()
+    {
+        if (groupMobs.size() > 0)
+        {
+            shuffle();
+            readyMobs.clear();
+            for (auto& mob : groupMobs)
+            {
+                if (readyMobs.size() < maxSpawns)
+                {
+                    readyMobs.insert(mob);
+                }
+            }
+        }
+    };
+
+    void refillMobs()
+    {
+        if (groupMobs.size() > 0)
+        {
+            shuffle();
+            for (auto& mob : groupMobs)
+            {
+                if (readyMobs.size() < maxSpawns && readyMobs.find(mob) == readyMobs.end())
+                {
+                    readyMobs.insert(mob);
+                }
+            }
+        }
+    };
+
+    CMobEntity* addMob()
+    {
+        if (readyMobs.size() < maxSpawns)
+        {
+            std::shuffle(groupMobs.begin(), groupMobs.end(), xirand::rng());
+            for (auto& mob : groupMobs)
+            {
+                if (readyMobs.size() < maxSpawns && readyMobs.find(mob) == readyMobs.end())
+                {
+                    addMobToReady(mob);
+                    return mob;
+                }
+            }
+        }
+
+        return nullptr;
+    };
+
+    void addMobToReady(CMobEntity* PMob)
+    {
+        if (readyMobs.size() < maxSpawns)
+        {
+            readyMobs.insert(PMob);
+        }
+    };
+
+    void removeMob(CMobEntity* PMob)
+    {
+        readyMobs.erase(PMob);
+    };
+
+    CMobEntity* replaceMob(CMobEntity* PMob)
+    {
+        removeMob(PMob);
+        return addMob();
+    };
+
+    bool isReady(CMobEntity* PMob)
+    {
+        return readyMobs.find(PMob) != readyMobs.end();
+    };
+};
+
 /************************************************************************
  *                                                                       *
  *  zoneLine - unique identifier of a path from one point in a zone to   *
@@ -626,6 +716,8 @@ public:
     CZoneEntities* GetZoneEntities();
 
     weatherVector_t m_WeatherVector; // The probability of each weather type
+
+    std::map<uint8, spawnGroup_t> m_SpawnGroups; // map of spawn groups for zone
 
     virtual void ZoneServer(timer::time_point tick);
     virtual void CheckTriggerAreas();

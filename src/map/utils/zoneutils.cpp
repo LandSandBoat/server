@@ -414,12 +414,14 @@ namespace zoneutils
                     "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
                     "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                     "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
-                    "mob_family_system.charmable "
+                    "mob_family_system.charmable, "
+                    "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
                     "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                     "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
                     "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
                     "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                     "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
+                    "LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) "
                     "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
                     "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
                     "AND mob_groups.zoneid = ?";
@@ -567,6 +569,16 @@ namespace zoneutils
 
                             PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
 
+                            PMob->m_spawnSet = rset->get<uint8>("spawnset"); // Which spawnSet a specific mob belongs to.
+
+                            // Add to the spawn group
+                            if (PMob->m_spawnSet > 0)
+                            {
+                                auto& spawnGroup = GetZone(zoneId)->m_SpawnGroups[PMob->m_spawnSet];
+                                spawnGroup.groupMobs.push_back(PMob);
+                                spawnGroup.maxSpawns = rset->get<uint8>("maxspawns");
+                            }
+
                             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                             // can be set in their onInitialize
                             if (PMob->m_Type & MOBTYPE_EVENT ||
@@ -644,6 +656,11 @@ namespace zoneutils
         // clang-format off
         ForEachZone(zoneIds, [](CZone* PZone)
         {
+            for (auto &spawnGroup : PZone->m_SpawnGroups)
+            {
+                spawnGroup.second.prepareMobs();
+            }
+
             PZone->ForEachMob([](CMobEntity* PMob)
             {
                 // Cache Mob Lua
@@ -668,7 +685,7 @@ namespace zoneutils
             PZone->ForEachMob([](CMobEntity* PMob)
             {
                 PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
-                if (PMob->m_AllowRespawn)
+                if ((PMob->m_AllowRespawn && !PMob->m_spawnSet) || (PMob->m_spawnSet && PMob->CanSpawnFromGroup()))
                 {
                     PMob->Spawn();
                 }

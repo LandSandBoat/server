@@ -142,6 +142,7 @@ CMobEntity::CMobEntity()
 , m_Pool(0)
 , m_flags(0)
 , m_name_prefix(0)
+, m_spawnSet(0)
 , m_unk0(0)
 , m_unk1(8)
 , m_unk2(0)
@@ -589,6 +590,16 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     }
 
     return false;
+}
+
+bool CMobEntity::CanSpawnFromGroup()
+{
+    if (!m_spawnSet || !loc.zone)
+    {
+        return true;
+    }
+
+    return loc.zone->m_SpawnGroups[this->m_spawnSet].isReady(this);
 }
 
 void CMobEntity::Spawn()
@@ -1157,6 +1168,19 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
+
+    if (m_spawnSet > 0)
+    {
+        auto& sg = loc.zone->m_SpawnGroups[m_spawnSet];
+        if (CMobEntity* nextMob = sg.replaceMob(this); nextMob)
+        {
+            if (nextMob->PAI && !nextMob->PAI->Internal_Respawn(m_RespawnTime))
+            {
+                nextMob->PAI->GetCurrentState()->ResetEntryTime();
+            }
+        }
+    }
+
     PAI->Internal_Respawn(m_RespawnTime);
     luautils::OnMobDespawn(this);
     // #event despawn

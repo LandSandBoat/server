@@ -20,7 +20,6 @@
 */
 
 #include "zone_entities.h"
-
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "instance.h"
@@ -1395,7 +1394,11 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 {
                     PMob->SetDespawnTime(0s);
                     PMob->m_AllowRespawn = true;
-                    PMob->Spawn();
+
+                    if ((PMob->m_spawnSet && PMob->CanSpawnFromGroup()) || !PMob->m_spawnSet)
+                    {
+                        PMob->Spawn();
+                    }
                 }
             }
         }
@@ -1408,7 +1411,11 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 {
                     PMob->SetDespawnTime(0s);
                     PMob->m_AllowRespawn = true;
-                    PMob->Spawn();
+
+                    if ((PMob->m_spawnSet && PMob->CanSpawnFromGroup()) || !PMob->m_spawnSet)
+                    {
+                        PMob->Spawn();
+                    }
                 }
             }
         }
