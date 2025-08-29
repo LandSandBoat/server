@@ -5,7 +5,7 @@
 -----------------------------------
 local laTheineID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
 local validWeatherTable =
 set{

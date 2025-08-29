@@ -125,10 +125,8 @@ CZoneEntities::~CZoneEntities()
         destroy(npc.second);
     }
 
-    for (auto character : m_charList)
-    {
-        destroy(character.second);
-    }
+    // destroying PChars in m_charList is handled via map_session (auto generated) destructor on cleanup.
+    m_charList.clear(); // Remove elements, do not call destructor.
 
     for (auto transport : m_TransportList)
     {

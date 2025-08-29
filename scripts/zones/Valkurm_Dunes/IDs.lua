@@ -39,7 +39,9 @@ zones[xi.zone.VALKURM_DUNES] =
         AN_EMPTY_LIGHT_SWIRLS          = 7767,  -- An empty light swirls about the cave, eating away at the surroundings...
         GARRISON_BASE                  = 7769,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         TIME_ELAPSED                   = 7816,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
-        MONSTERS_KILLED_ADVENTURERS    = 7843,  -- Long ago, monsters killed many adventurers and merchants just off the coast here. If you find any vestige of the victims and return it to the sea, perhaps it would appease the spirits of the dead.
+        TOO_MANY_IN_PARTY              = 7840,  -- Nothing happens. Your party exceeds the maximum number of <number> members.
+        ALLIANCE_NOT_ALLOWED           = 7841,  -- Nothing happens. You must dissolve your alliance.
+        RETURN_TO_SEA                  = 7844,  -- You return the <item> to the sea.
         YOU_CANNOT_ENTER_DYNAMIS       = 7881,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7883,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 8005,  -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...
@@ -67,9 +69,13 @@ zones[xi.zone.VALKURM_DUNES] =
 
     npc =
     {
-        SUNSAND_QM    = GetFirstID('qm1'),
-        OVERSEER_BASE = GetFirstID('Quanteilleron_RK'),
-        WHM_AF1_QM    = GetFirstID('qm2')
+        BARNACLED_BOX     = GetFirstID('Barnacled_Box'),
+        OVERSEER_BASE     = GetFirstID('Quanteilleron_RK'),
+        PIRATE_CHART_QM   = GetFirstID('qm4'),
+        PIRATE_CHART_TARU = GetFirstID('Pirate_Chart_Taru'),
+        SHIMMERING_POINT  = GetFirstID('Shimmering_Point'),
+        SUNSAND_QM        = GetFirstID('qm1'),
+        WHM_AF1_QM        = GetFirstID('qm2')
     },
 }
 

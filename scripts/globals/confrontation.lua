@@ -123,6 +123,11 @@ xi.confrontation.check = function(lookupKey, setupTimer)
             xi.confrontation.despawnMobs(mobs)
         end
 
+        -- Reset mobs/npcs/variables that may not be handled by win/lose
+        if lookup.cleanUp then
+            lookup.cleanUp()
+        end
+
         xi.confrontation.lookup[lookupKey] = nil
     else -- Check again soon
         if setupTimer then
@@ -184,11 +189,13 @@ xi.confrontation.start = function(player, npc, mobIds, params)
     -- Cache the lists into the global lookup
     local lookup = {}
 
-    lookup.npc = npc
+    lookup.npc                 = npc
     lookup.registeredPlayerIds = registeredPlayerIds
-    lookup.mobIds = mobIds
-    lookup.onWin = params.winFunc
-    lookup.onLose = params.loseFunc
+    lookup.mobIds              = mobIds
+    lookup.onWin               = params.onWin
+    lookup.onLose              = params.onLose
+    lookup.cleanUp             = params.cleanUp
+    lookup.distanceLimit       = params.distanceLimit
 
     if params.timeLimit then
         lookup.timeLimit = GetSystemTime() + params.timeLimit

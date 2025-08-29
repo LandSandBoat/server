@@ -63,7 +63,7 @@ local beginCardianFight = function(player, npc)
     end
 
     local params = {}
-    params.winFunc = function(wPlayer)
+    params.onWin = function(wPlayer)
         npcUtil.giveKeyItem(wPlayer, xi.keyItem.RIPE_STARFRUIT)
         npcUtil.giveKeyItem(wPlayer, xi.keyItem.PEACH_CORAL_KEY)
     end
