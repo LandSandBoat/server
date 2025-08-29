@@ -73,6 +73,7 @@ xi.augment =
     ALL_SONGS_P1                       = 67,
     ACCURACY_P1_ATTACK_P1              = 68,
 
+    RAPID_SHOT_P1                      = 139,
     FAST_CAST_P1                       = 140, -- Percent
     CONSERVE_MP_P1                     = 141,
     STORE_TP_P1                        = 142,
