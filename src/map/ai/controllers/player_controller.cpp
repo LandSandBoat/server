@@ -127,7 +127,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
             // Set recast time to the normal recast time minus any charge time.
             // Abilities without a charge will have zero chargeTime
             timer::duration currentRecast = recast->TimeStamp - timer::now() + recast->RecastTime;
-            // Abilities with a single charge (low-level scholoar stratagems) behave like abilities without a charge
+            // Abilities with a single charge (low-level scholar stratagems) behave like abilities without a charge
             if (recast->maxCharges > 1)
             {
                 currentRecast -= recast->chargeTime * (recast->maxCharges - 1);

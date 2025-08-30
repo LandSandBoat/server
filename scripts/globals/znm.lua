@@ -232,7 +232,7 @@ xi.znm.soultrapper.onItemUse = function(target, player, item)
             playerArg:messageBasic(xi.msg.basic.SOULTRAPPER_FAILED)
         end)
 
-        player:removeAmmo()
+        player:removeAmmo(1)
     else
         -- Determine Zeni starting value
         local zeni = xi.znm.soultrapper.getZeniValue(target, player)

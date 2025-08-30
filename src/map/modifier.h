@@ -733,24 +733,25 @@ enum class Mod
     STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar
-    BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
-    WHITE_MAGIC_COST         = 394, // MP cost for white magic (light/dark arts)
-    BLACK_MAGIC_CAST         = 395, // Cast time for black magic (light/dark arts)
-    WHITE_MAGIC_CAST         = 396, // Cast time for black magic (light/dark arts)
-    BLACK_MAGIC_RECAST       = 397, // Recast time for black magic (light/dark arts)
-    WHITE_MAGIC_RECAST       = 398, // Recast time for white magic (light/dark arts)
-    ALACRITY_CELERITY_EFFECT = 399, // Bonus for celerity/alacrity effect
-    LIGHT_ARTS_EFFECT        = 334, //
-    DARK_ARTS_EFFECT         = 335, //
-    LIGHT_ARTS_SKILL         = 336, //
-    DARK_ARTS_SKILL          = 337, //
-    LIGHT_ARTS_REGEN         = 338, // Regen bonus flat HP amount from Light Arts and Tabula Rasa
-    REGEN_DURATION           = 339, //
-    HELIX_EFFECT             = 478, //
-    HELIX_DURATION           = 477, //
-    STORMSURGE_EFFECT        = 400, //
-    SUBLIMATION_BONUS        = 401, //
-    GRIMOIRE_SPELLCASTING    = 489, // "Grimoire: Reduces spellcasting time" bonus
+    BLACK_MAGIC_COST         = 393,  // MP cost for black magic (light/dark arts)
+    WHITE_MAGIC_COST         = 394,  // MP cost for white magic (light/dark arts)
+    BLACK_MAGIC_CAST         = 395,  // Cast time for black magic (light/dark arts)
+    WHITE_MAGIC_CAST         = 396,  // Cast time for black magic (light/dark arts)
+    BLACK_MAGIC_RECAST       = 397,  // Recast time for black magic (light/dark arts)
+    WHITE_MAGIC_RECAST       = 398,  // Recast time for white magic (light/dark arts)
+    ALACRITY_CELERITY_EFFECT = 399,  // Bonus for celerity/alacrity effect
+    LIGHT_ARTS_EFFECT        = 334,  //
+    DARK_ARTS_EFFECT         = 335,  //
+    LIGHT_ARTS_SKILL         = 336,  //
+    DARK_ARTS_SKILL          = 337,  //
+    LIGHT_ARTS_REGEN         = 338,  // Regen bonus flat HP amount from Light Arts and Tabula Rasa
+    REGEN_DURATION           = 339,  //
+    HELIX_EFFECT             = 478,  //
+    HELIX_DURATION           = 477,  //
+    STORMSURGE_EFFECT        = 400,  //
+    SUBLIMATION_BONUS        = 401,  //
+    GRIMOIRE_SPELLCASTING    = 489,  // "Grimoire: Reduces spellcasting time" bonus
+    STRATAGEM_RECAST         = 1159, // Recast reduction in seconds
 
     // Geo
     CARDINAL_CHANT       = 959,
@@ -1104,7 +1105,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1159 and onward
+    // SPARE IDs: 1160 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

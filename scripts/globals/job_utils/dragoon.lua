@@ -508,7 +508,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     end
 
     target:updateClaim(player)
-    player:removeAmmo()
+    player:removeAmmo(1)
 
     return xi.effect.DEFENSE_DOWN
 end

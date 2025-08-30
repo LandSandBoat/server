@@ -3293,7 +3293,8 @@ function CBaseEntity:addDamageFromMultipliers(damage, attackType, weaponSlot, al
 end
 
 ---@return nil
-function CBaseEntity:removeAmmo()
+---@param ammoUsed integer
+function CBaseEntity:removeAmmo(ammoUsed)
 end
 
 ---@nodiscard

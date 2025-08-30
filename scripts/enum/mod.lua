@@ -1042,6 +1042,7 @@ xi.mod =
     BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
     QUICK_DRAW_RECAST       = 1060, -- Quick Draw Charge Reduction (seconds)
+    STRATAGEM_RECAST        = 1159, -- Recast reduction in seconds
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     DIG_RARE_ABILITY        = 1133, -- Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".

@@ -750,7 +750,7 @@ public:
     uint16 getWeaponHitCount(bool offhand); // Get PC weapon hit count (Occasionally Attacks N times weapons)
     uint32 addDamageFromMultipliers(uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc);
 
-    void removeAmmo();
+    void removeAmmo(uint8 ammoUsed);
 
     uint16 getWeaponSkillLevel(uint8 slotID);                        // Get Skill for equipped weapon
     uint16 getWeaponDamageType(uint8 slotID);                        // gets the type of weapon equipped

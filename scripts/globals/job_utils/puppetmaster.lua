@@ -184,7 +184,7 @@ xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability)
 
     pet:delStatusEffect(xi.effect.REGEN)
     pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
-    player:removeAmmo()
+    player:removeAmmo(1)
     return totalHealing
 end
 
@@ -221,7 +221,7 @@ xi.job_utils.puppetmaster.onAbilityUseMaintenance = function(player, target, abi
         numRemoved = numRemoved + 1
     until toRemove <= 0
 
-    player:removeAmmo()
+    player:removeAmmo(1)
 
     return numRemoved
 end

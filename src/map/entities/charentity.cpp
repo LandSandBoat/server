@@ -1562,22 +1562,6 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
             if (primary)
             {
-                if (isRangedWS)
-                {
-                    uint16 recycleChance = getMod(Mod::RECYCLE) + PMeritPoints->GetMeritValue(MERIT_RECYCLE, this) + this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
-
-                    if (StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
-                    {
-                        StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
-                        recycleChance = 100;
-                    }
-
-                    if (xirand::GetRandomNumber(100) > recycleChance)
-                    {
-                        battleutils::RemoveAmmo(this);
-                    }
-                }
-
                 // See battleentity.h for REACTION class
                 // On retail, weaponskills will contain 0x08, 0x10 (HIT, ABILITY) on hit and may include the following:
                 // 0x01, 0x02, 0x04 (MISS, GUARDED, BLOCK)
@@ -1727,27 +1711,37 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        // get any available merit recast reduction
-        auto meritRecastReduction = 0s;
+        // get any available recast reduction
+        auto recastReduction = 0s;
 
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
         {
-            meritRecastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
+            recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
         }
 
         auto* charge = ability::GetCharge(this, PAbility->getRecastId());
         if (charge && PAbility->getID() != ABILITY_SIC)
         {
+            //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
+            if (PAbility->getRecastId() == 102) // Sic/Ready recast ID
+            {
+                recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(MERIT_SIC_RECAST, this));
+            }
+            else if (PAbility->getRecastId() == 231) // Stratagems recast ID
+            {
+                recastReduction += std::chrono::seconds(this->getMod(Mod::STRATAGEM_RECAST));
+            }
+
             // TODO: this is bad
             // "recast" 1-4 = sic/ready
             // "recast" 1 = quickdraw, stratagems
             auto crypticRecastSecondsAsType = timer::count_seconds(PAbility->getRecastTime());
 
-            action.recast = charge->chargeTime * crypticRecastSecondsAsType - meritRecastReduction;
+            action.recast = charge->chargeTime * crypticRecastSecondsAsType - recastReduction;
         }
         else
         {
-            action.recast = PAbility->getRecastTime() - meritRecastReduction;
+            action.recast = PAbility->getRecastTime() - recastReduction;
         }
 
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems

@@ -88,7 +88,7 @@ xi.job_utils.beastmaster.onUseAbilityJug = function(player, target, ability)
     xi.pet.spawnPet(player, player:getWeaponSubSkillType(xi.slot.AMMO))
 
     if ability:getID() == xi.jobAbility.CALL_BEAST then
-        player:removeAmmo()
+        player:removeAmmo(1)
     end
 
     -- Briefly put the recastId for READY/SIC (102) into a recast state to

@@ -299,6 +299,15 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
     return math.floor(magicdmg)
 end
 
+-- returns ammo used, if any
+local function useAmmo(attacker)
+    if xi.combat.ranged.shouldUseAmmo(attacker) then
+        return 1
+    end
+
+    return 0
+end
+
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -352,10 +361,23 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local subTPGain               = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.SUB)  --
     local isJump                  = wsParams.isJump or false
     local attackerTPMult          = wsParams.attackerTPMult or 1
+    local ammoCount               = -1
+    local ammoUsed                = 0
+    local isRanged                = calcParams.attackInfo.slot == xi.slot.RANGED
     calcParams.hitsLanded         = 0
     calcParams.shadowsAbsorbed    = 0
     calcParams.mainhandHitsLanded = 0
     calcParams.offhandHitsLanded  = 0
+
+    -- Get ammo information
+    if isRanged and attacker:isPC() then
+        local ammoItem = attacker:getEquippedItem(xi.slot.AMMO)
+        if ammoItem then
+            ammoCount = ammoItem:getQuantity()
+        else
+            ammoCount = 0
+        end
+    end
 
     -- Calculate the damage from the first hit
     if
@@ -448,6 +470,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local mainhandHits     = wsParams.numHits - 1
     local mainhandHitsDone = 0
 
+    if isRanged and ammoCount ~= -1 then
+        ammoUsed = ammoUsed + useAmmo(attacker)
+
+        if ammoUsed >= ammoCount then
+            hitsDone = 8 -- Attack while loops will stop if hitsDone is 8 or higher
+        end
+    end
+
     -- Use up any remaining hits in the WS's numhits
     while hitsDone < 8 and mainhandHitsDone < mainhandHits and finaldmg < targetHp do
         calcParams.hitsLanded = 0
@@ -485,6 +515,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
             numMainHandMultis = numMainHandMultis + extraMultis
             numMultiProcs     = extraMultis > 0 and numMultiProcs + 1 or numMultiProcs
         end
+
+        if isRanged and ammoCount ~= -1 then
+            ammoUsed = ammoUsed + useAmmo(attacker)
+
+            if ammoUsed >= ammoCount then
+                hitsDone = 8 -- Attack while loops will stop if hitsDone is 8 or higher
+            end
+        end
     end
 
     -- Proc any mainhand multi attacks.
@@ -518,6 +556,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         finaldmg                  = finaldmg + hitdmg
         hitsDone                  = hitsDone + 1
         mainhandMultiHitsDone     = mainhandMultiHitsDone + 1
+
+        if isRanged and ammoCount ~= -1 then
+            ammoUsed = ammoUsed + useAmmo(attacker)
+
+            if ammoUsed >= ammoCount then
+                hitsDone = 8 -- Attack while loops will stop if hitsDone is 8 or higher
+            end
+        end
     end
 
     local originalSlot = calcParams.attackInfo.slot
@@ -616,6 +662,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Return our raw damage to then be modified by enemy reductions based off of melee/ranged
     calcParams.finalDmg = finaldmg
+    calcParams.ammoUsed = ammoUsed
 
     return calcParams
 end
@@ -773,6 +820,12 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     calcParams.finalDmg = finaldmg
 
     finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+    -- Ammo needs to be removed after xi.weaponskills.takeWeaponskillDamage for delay/tp return uses
+    if calcParams.ammoUsed and calcParams.ammoUsed > 0 then
+        print(calcParams.ammoUsed)
+        attacker:removeAmmo(calcParams.ammoUsed)
+    end
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
