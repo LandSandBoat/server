@@ -33,6 +33,36 @@ local accessoryExchange = {
     [xi.item.JALZAHNS_RING] = xi.item.BALRAHNS_RING,
 }
 
+local accessoryGilExchange = {
+    -- DM Earrings
+    {
+        [xi.item.SUPPANOMIMI] = 1,
+        [xi.item.BUSHINOMIMI] = 2,
+        [xi.item.BEASTLY_EARRING] = 3,
+        [xi.item.KNIGHTS_EARRING] = 4,
+        [xi.item.ABYSSAL_EARRING] = 5,
+    },
+    -- CoP Rings
+    {
+        [xi.item.RAJAS_RING] = 1,
+        [xi.item.TAMAS_RING] = 2,
+        [xi.item.SATTVA_RING] = 3,
+    },
+    -- Apoc Nigh Earrings
+    {
+        [xi.item.STATIC_EARRING] = 1,
+        [xi.item.MAGNETIC_EARRING] = 2,
+        [xi.item.HOLLOW_EARRING] = 3,
+        [xi.item.ETHEREAL_EARRING] = 4,
+    },
+    -- ToAU Rings
+    {
+        [xi.item.BALRAHNS_RING] = 1,
+        [xi.item.ULTHALAMS_RING] = 2,
+        [xi.item.JALZAHNS_RING] = 3,
+    },
+}
+
 local augments = {
     [xi.item.RIDILL] = {
         eggs = {
@@ -217,14 +247,71 @@ local function rollAugments(itemID, eggID)
     return slots, descriptions
 end
 
+local function findAccessoryGroup(itemId)
+    for _, group in ipairs(accessoryGilExchange) do
+        if group[itemId] then
+            return group
+        end
+    end
+    return nil
+end
+
+-- Helper to get item by position in group
+local function getItemByPosition(group, position)
+    for itemId, pos in pairs(group) do
+        if pos == position then
+            return itemId
+        end
+    end
+    return nil
+end
+
 entity.onTrade = function(player, npc, trade)
-    -- Check for ring/earring exchanges first
+    -- Check for item + gil trades for specific selection
+    local gil = trade:getGil()
+    if gil > 0 then
+        -- Check each item in trade
+        for slot = 0, 7 do
+            local itemId = trade:getItemId(slot)
+            if itemId > 0 then
+                local group = findAccessoryGroup(itemId)
+                if group then
+                    local targetItem = getItemByPosition(group, gil)
+                    if targetItem and npcUtil.tradeHasExactly(trade, {itemId, {"gil", gil}}) then
+                        -- Check if trying to get the same item back
+                        if targetItem == itemId then
+                            player:printToPlayer("You already have this item. Trade cancelled.", xi.msg.channel.SAY, "Runga-Kopunga")
+                            -- Don't confirm trade, so player gets items back
+                            return
+                        end
+                        
+                        if player:hasKeyItem(xi.ki.FAIL_BADGE) then
+                            if player:getFreeSlotsCount() > 0 then
+                                player:confirmTrade()
+                                player:addItem(targetItem, 1)
+                                player:messageSpecial(ID.text.ITEM_OBTAINED, targetItem)
+                            else
+                                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, targetItem)
+                            end
+                        else
+                            player:printToPlayer("Please complete the F.A.I.L. Badge Quest.", xi.msg.channel.SAY, "Runga-Kopunga")
+                        end
+                        return
+                    end
+                end
+            end
+        end
+    end
+
+    -- Check for regular ring/earring exchanges
     for inputItem, outputItem in pairs(accessoryExchange) do
         if npcUtil.tradeHasExactly(trade, inputItem) then
             if player:getFreeSlotsCount() > 0 and player:hasKeyItem(xi.ki.FAIL_BADGE) then
                 player:confirmTrade()
                 player:addItem(outputItem, 1)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, outputItem)
+            elseif not player:hasKeyItem(xi.ki.FAIL_BADGE) then
+                player:printToPlayer("Please complete the F.A.I.L. Badge Quest.", xi.msg.channel.SAY, "Runga-Kopunga")
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, outputItem)
             end
