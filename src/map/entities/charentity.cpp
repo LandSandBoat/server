@@ -1688,23 +1688,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        // TODO: Remove me when all pet abilities are ported to PetSkill
-        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE && !battleutils::GetPetSkill(PAbility->getID()))
-        {
-            // Blood pact MP costs are stored under animation ID
-            float mpCost = PAbility->getAnimationID();
-            if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-            {
-                mpCost *= 1.5f;
-            }
-
-            if (this->health.mp < mpCost)
-            {
-                setActionInterrupted(action, PTarget, MSGBASIC_UNABLE_TO_USE_JA, 0);
-                return;
-            }
-        }
-
         if (battleutils::IsParalyzed(this))
         {
             setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
@@ -1879,8 +1862,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
             }
-            else if (PPet) // may be a bp, fallback - don't display msg and notify pet
+            else if (PPet) // pet without an entry in pet_skills.sql, failback to inferring mobskill based on matching name of the job ability in LoadAbilitiesList()
             {
+                // TODO insert a generic "unable to use ability" when all player-pet skills are in pet_skills.sql
                 actionList_t& actionList     = action.getNewActionList();
                 actionList.ActionTargetID    = PTarget->id;
                 actionTarget_t& actionTarget = actionList.getNewActionTarget();
@@ -1890,55 +1874,20 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.param           = 0;
                 actionTarget.messageID       = 0;
 
-                auto PPetTarget = PTarget->targid;
-                if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
+                auto  PPetTarget = PTarget->targid;
+                auto* PMobSkill  = battleutils::GetMobSkill(PAbility->getMobSkillID());
+                if (PMobSkill)
                 {
-                    // Blood Pact mp cost stored in animation ID
-                    float mpCost = PAbility->getAnimationID();
-
-                    if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
+                    if (PMobSkill->getValidTargets() & TARGET_ENEMY)
                     {
-                        mpCost *= 1.5f;
-                        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
-                        this->SetLocalVar("bpRecastTime", 0);
+                        PPetTarget = PPet->GetBattleTargetID();
                     }
-
-                    // Blood Boon (does not affect Astral Flow BPs)
-                    if ((PAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
-                    {
-                        int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
-                        if (xirand::GetRandomNumber(100) < bloodBoonRate)
-                        {
-                            mpCost *= xirand::GetRandomNumber(8.0f, 16.0f) / 16.0f;
-                        }
-                    }
-
-                    addMP((int32)-mpCost);
-                    if (this->GetLocalVar("bpRecastTime") > 0) // This will go away when all smn petskills are handled via jobutils/summoner.lua
-                    {
-                        action.recast = std::chrono::seconds(this->GetLocalVar("bpRecastTime"));
-                    }
-
-                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    else
                     {
                         PPetTarget = PPet->targid;
                     }
                 }
-                else
-                {
-                    auto* PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());
-                    if (PMobSkill)
-                    {
-                        if (PMobSkill->getValidTargets() & TARGET_ENEMY)
-                        {
-                            PPetTarget = PPet->GetBattleTargetID();
-                        }
-                        else
-                        {
-                            PPetTarget = PPet->targid;
-                        }
-                    }
-                }
+
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
         }

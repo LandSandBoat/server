@@ -22,8 +22,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
 
     mpRestore = utils.clamp(mpRestore, 0, target:getMaxMP())
 
-    xi.mobskills.jugPetAdjustMessage(target, pet, petskill, master, action)
-
     if target:getID() == pet:getID() then
         mpRestore = 0
     end

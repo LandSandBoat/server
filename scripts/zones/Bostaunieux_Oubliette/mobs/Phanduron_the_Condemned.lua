@@ -9,6 +9,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:setRespawnTime(math.random(900, 10800))
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -19,7 +22,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(216000, 259200)) -- 60 to 72 hours
 end
 

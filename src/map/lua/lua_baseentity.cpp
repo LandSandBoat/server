@@ -3251,6 +3251,12 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             PChar->loc.boundary        = 0;
             PChar->m_moghouseID        = 0;
             PChar->requestedZoneChange = true;
+
+            // Edge case for !zone and cutscenes teleporting you
+            if (PChar->PPet)
+            {
+                PChar->setPetZoningInfo();
+            }
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {

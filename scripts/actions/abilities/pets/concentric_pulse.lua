@@ -26,8 +26,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
 
     dmg = utils.stoneskin(target, dmg)
 
-    xi.mobskills.jugPetAdjustMessage(target, pet, petskill, master, action)
-
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 
     pet:timer(200, function(mobArg)

@@ -41,6 +41,7 @@
 #include <algorithm>
 #include <cstring>
 #include <execution>
+#include <ranges>
 
 std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 CNpcEntity*              g_PTrigger;  // trigger to start events
@@ -667,9 +668,11 @@ namespace zoneutils
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
             PZone->ForEachMob([](CMobEntity* PMob)
             {
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
-                if (PMob->m_AllowRespawn)
+                // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
+                // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
+                if (!PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
                 {
+                    PMob->m_AllowRespawn = true;
                     PMob->Spawn();
                 }
                 else

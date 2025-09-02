@@ -1,10 +1,10 @@
 DROP PROCEDURE IF EXISTS replace_drop;
 DELIMITER $$
 CREATE PROCEDURE replace_drop(
-    IN zoneName TINYTEXT,
-    IN mobName TINYTEXT,
-    IN oldDropName TINYTEXT,
-    IN newDropName TINYTEXT
+    IN zoneName TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+    IN mobName TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+    IN oldDropName TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+    IN newDropName TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 )
 BEGIN
     SET @zoneId = (SELECT zoneid FROM zone_settings WHERE `name` = zoneName);

@@ -28,7 +28,6 @@
 #include "common/utils.h"
 #include "common/xirand.h"
 
-#include <cfloat>
 #include <cstring>
 #include <fstream>
 #include <iostream>

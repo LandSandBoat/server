@@ -543,25 +543,23 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             damage = luautils::OnPetAbility(PTargetFound, this, PSkill, PMaster, &action);
         }
 
+        // primary target will have msg == 0
         if (msg == 0)
         {
-            if (PSkill->getMsg() == 185) // TODO: remove when we rip out the original SMN implementation, this is xi.msg.basic.DAMAGE (not in .h)
-            {
-                msg = defaultMessage;
-            }
-            else
-            {
-                msg = PSkill->getMsg();
-            }
+            msg = PSkill->getMsg();
         }
         else
         {
+            // convert to aoe message
             msg = PSkill->getAoEMsg();
         }
 
+        // damage was absorbed
         if (damage < 0)
         {
-            msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            //       furthermore, this likely needs to be PSkill->setMsg(MSGBASIC_SKILL_RECOVERS_HP) and happen before the above code
+            msg          = MSGBASIC_SKILL_RECOVERS_HP;
             target.param = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp);
         }
         else
@@ -575,10 +573,6 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         {
             target.reaction   = REACTION::MISS;
             target.speceffect = SPECEFFECT::NONE;
-            if (msg == PSkill->getAoEMsg())
-            {
-                msg = 282;
-            }
         }
         else
         {

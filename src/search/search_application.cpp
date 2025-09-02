@@ -60,3 +60,9 @@ void SearchApplication::registerCommands(ConsoleService& console)
                             "Force-expire all items on the AH, returning to sender",
                             std::bind(&SearchEngine::onExpireAll, searchEngine, std::placeholders::_1));
 }
+
+void SearchApplication::requestExit()
+{
+    Application::requestExit();
+    io_context_.stop();
+}

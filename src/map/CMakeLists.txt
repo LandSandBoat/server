@@ -242,7 +242,7 @@ target_link_libraries(xi_map
     PUBLIC
         xi_map_lib)
 
-if(NOT ${ENABLE_CLANG_TIDY})
+if(PCH_ENABLE)
     target_precompile_headers(xi_map_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 endif()
 

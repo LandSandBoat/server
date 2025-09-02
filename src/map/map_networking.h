@@ -31,6 +31,7 @@
 #include "map_socket.h"
 #include "map_statistics.h"
 
+#include <map>
 #include <span>
 
 struct MapConfig;

@@ -255,7 +255,6 @@ auto Application::isRunning() const -> bool
 void Application::requestExit()
 {
     gIsRunning = false;
-    io_context_.stop();
 }
 
 auto Application::isRunningInCI() const -> bool

@@ -85,7 +85,7 @@ public:
     virtual void requestExit();
 
     // Is expected to block until requestExit() is called and/or isRunning() returns false
-    void run();
+    virtual void run();
 
     auto isRunningInCI() const -> bool;
 

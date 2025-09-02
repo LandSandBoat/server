@@ -24,16 +24,45 @@ set{
     xi.weather.THUNDERSTORMS,
 }
 
-local function handleZoneIn(player, eventId)
+local zoneEventTable =
+{
+    [xi.zone.WEST_RONFAURE         ] = {  51 },
+    [xi.zone.EAST_RONFAURE         ] = {  21 },
+    [xi.zone.NORTH_GUSTABERG       ] = { 244 },
+    [xi.zone.SOUTH_GUSTABERG       ] = { 901 },
+    [xi.zone.WEST_SARUTABARUTA     ] = {  48 },
+    [xi.zone.EAST_SARUTABARUTA     ] = {  50 },
+    [xi.zone.LA_THEINE_PLATEAU     ] = { 123 },
+    [xi.zone.KONSCHTAT_HIGHLANDS   ] = { 104 },
+    [xi.zone.TAHRONGI_CANYON       ] = {  35 },
+    [xi.zone.VALKURM_DUNES         ] = {   3 },
+    [xi.zone.BUBURIMU_PENINSULA    ] = {   3 },
+    [xi.zone.JUGNER_FOREST         ] = {  15 },
+    [xi.zone.BATALLIA_DOWNS        ] = { 901 },
+    [xi.zone.PASHHOW_MARSHLANDS    ] = {  13 },
+    [xi.zone.ROLANBERRY_FIELDS     ] = {   2 },
+    [xi.zone.MERIPHATAUD_MOUNTAINS ] = {  31 },
+    [xi.zone.SAUROMUGUE_CHAMPAIGN  ] = {   3 },
+    [xi.zone.BEAUCEDINE_GLACIER    ] = { 114 },
+    [xi.zone.XARCABARD             ] = {   9 },
+    [xi.zone.YUHTUNGA_JUNGLE       ] = {  11 },
+    [xi.zone.YHOATOR_JUNGLE        ] = {   2 },
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = {   2 },
+    [xi.zone.EASTERN_ALTEPA_DESERT ] = {   2 },
+    [xi.zone.WESTERN_ALTEPA_DESERT ] = {   2 },
+    [xi.zone.CAPE_TERIGGAN         ] = {   2 },
+}
+
+local function handleZoneIn(player, prevZone)
     if player:hasItem(xi.item.CARBUNCLES_RUBY, xi.inventoryLocation.INVENTORY) then
-        local zone    = player:getZone()
+        local zone    = player:getZone(true)
         local weather = zone:getWeather()
 
         if validWeatherTable[weather] then
-            local lightBitMask = player:getCharVar('Quest[2][75]Light')
+            local lightBitMask = quest:getVar(player, 'Light')
             local element      = xi.combat.element.getWeatherElement(weather)
             if not utils.mask.getBit(lightBitMask, element) then
-                return eventId
+                return zoneEventTable[zone:getID()][1]
             end
         end
     end
@@ -41,7 +70,7 @@ end
 
 local function handleEventUpdate(player, csid, option, npc)
     local weather      = player:getZone():getWeather()
-    local lightBitMask = player:getCharVar('Quest[2][75]Light')
+    local lightBitMask = quest:getVar(player, 'Light')
     local lightCounter = 0
 
     for bit = 0, 6 do
@@ -52,7 +81,7 @@ local function handleEventUpdate(player, csid, option, npc)
 
     -- If this is the last one.
     if lightCounter >= 6 then
-        player:setCharVar('Quest[2][75]Prog', 1)
+        quest:setVar(player, 'Prog', 1)
     end
 
     player:updateEvent(0, 1, weather, lightCounter)
@@ -60,10 +89,10 @@ end
 
 local function handleEventFinish(player, csid, option, npc)
     local weather      = player:getZone():getWeather()
-    local lightBitMask = player:getCharVar('Quest[2][75]Light')
+    local lightBitMask = quest:getVar(player, 'Light')
     local element      = xi.combat.element.getWeatherElement(weather)
 
-    player:setCharVar('Quest[2][75]Light', utils.mask.setBit(lightBitMask, element, true))
+    quest:setVar(player, 'Light', utils.mask.setBit(lightBitMask, element, true))
 end
 
 quest.reward =
@@ -112,9 +141,7 @@ quest.sections =
 
         [xi.zone.WEST_RONFAURE] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 51)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -129,9 +156,7 @@ quest.sections =
 
         [xi.zone.EAST_RONFAURE] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 21)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -146,9 +171,7 @@ quest.sections =
 
         [xi.zone.NORTH_GUSTABERG] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 244)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -163,9 +186,7 @@ quest.sections =
 
         [xi.zone.SOUTH_GUSTABERG] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 901)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -180,9 +201,7 @@ quest.sections =
 
         [xi.zone.WEST_SARUTABARUTA] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 48)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -197,9 +216,7 @@ quest.sections =
 
         [xi.zone.EAST_SARUTABARUTA] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 50)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -214,9 +231,7 @@ quest.sections =
 
         [xi.zone.LA_THEINE_PLATEAU] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 123)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -231,9 +246,7 @@ quest.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 104)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -248,9 +261,7 @@ quest.sections =
 
         [xi.zone.TAHRONGI_CANYON] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 35)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -265,9 +276,7 @@ quest.sections =
 
         [xi.zone.VALKURM_DUNES] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 3)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -282,9 +291,7 @@ quest.sections =
 
         [xi.zone.BUBURIMU_PENINSULA] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 3)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -299,9 +306,7 @@ quest.sections =
 
         [xi.zone.JUGNER_FOREST] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 15)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -316,9 +321,7 @@ quest.sections =
 
         [xi.zone.BATALLIA_DOWNS] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 901)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -333,9 +336,7 @@ quest.sections =
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 13)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -350,9 +351,7 @@ quest.sections =
 
         [xi.zone.ROLANBERRY_FIELDS] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -367,9 +366,7 @@ quest.sections =
 
         [xi.zone.MERIPHATAUD_MOUNTAINS] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 31)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -384,9 +381,7 @@ quest.sections =
 
         [xi.zone.SAUROMUGUE_CHAMPAIGN] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 3)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -401,9 +396,7 @@ quest.sections =
 
         [xi.zone.BEAUCEDINE_GLACIER] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 114)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -418,9 +411,7 @@ quest.sections =
 
         [xi.zone.XARCABARD] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 9)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -435,9 +426,7 @@ quest.sections =
 
         [xi.zone.YUHTUNGA_JUNGLE] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 11)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -452,9 +441,7 @@ quest.sections =
 
         [xi.zone.YHOATOR_JUNGLE] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -469,9 +456,7 @@ quest.sections =
 
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -486,9 +471,7 @@ quest.sections =
 
         [xi.zone.EASTERN_ALTEPA_DESERT] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -503,9 +486,7 @@ quest.sections =
 
         [xi.zone.WESTERN_ALTEPA_DESERT] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {
@@ -520,9 +501,7 @@ quest.sections =
 
         [xi.zone.CAPE_TERIGGAN] =
         {
-            onZoneIn = function(player, prevZone)
-                return handleZoneIn(player, 2)
-            end,
+            onZoneIn = handleZoneIn,
 
             onEventUpdate =
             {

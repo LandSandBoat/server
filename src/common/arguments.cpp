@@ -52,7 +52,7 @@ Arguments::Arguments(const ApplicationConfig& config, const int argc, char** arg
         .flag();
 
     // Specialized arguments
-    for (auto argument : config.arguments)
+    for (const auto& argument : config.arguments)
     {
         args_->add_argument(argument.name)
             .help(argument.description);

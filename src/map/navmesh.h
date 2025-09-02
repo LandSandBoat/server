@@ -27,6 +27,7 @@
 #include "common/logging.h"
 #include "common/mmo.h"
 
+#include <cfloat>
 #include <memory>
 #include <vector>
 

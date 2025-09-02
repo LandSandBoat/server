@@ -27,8 +27,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
 
     target:wakeUp()
 
-    xi.mobskills.jugPetAdjustMessage(target, pet, petskill, master, action)
-
     if target:getID() == pet:getID() then
         hpRestore = 0
     end

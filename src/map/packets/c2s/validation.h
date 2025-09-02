@@ -23,6 +23,8 @@
 
 #include "magic_enum/magic_enum.hpp"
 #include "zone.h"
+#include <format>
+#include <set>
 
 enum LSTYPE : std::uint8_t;
 class CCharEntity;

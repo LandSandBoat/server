@@ -12,7 +12,6 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
     local result = xi.actions.mobskills[skillName].onMobWeaponSkill(target, pet, petskill)
-    xi.mobskills.jugPetAdjustMessage(target, pet, petskill, owner, action)
 
     return result
 end

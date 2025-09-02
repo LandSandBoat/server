@@ -93,19 +93,32 @@ void MapApplication::registerCommands(ConsoleService& console)
     console.registerCommand("backtrace", "Print backtrace", std::bind(&MapEngine::onBacktrace, mapEngine, std::placeholders::_1));
 }
 
-void MapApplication::requestExit()
+void MapApplication::run()
 {
-    Application::requestExit();
+    engine_ = createEngine();
 
-    // Empty task manager
-    auto taskManager = CTaskManager::getInstance();
+    if (engine_)
+    {
+        engine_->onInitialize();
+
+        registerCommands(console());
+    }
+
+    markLoaded();
+    auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get());
+
+    while (Application::isRunning())
+    {
+        mapEngine->gameLoop();
+    }
+
+    // MapEngine destructor must occur before Application destructor
+    engine_.reset();
+    io_context_.stop();
+
+    const auto taskManager = CTaskManager::getInstance();
     while (!taskManager->getTaskList().empty())
     {
         taskManager->getTaskList().pop();
-    }
-
-    if (auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get()))
-    {
-        mapEngine->requestExit();
     }
 }

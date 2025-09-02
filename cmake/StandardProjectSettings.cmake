@@ -38,6 +38,7 @@ if(ENABLE_FAST_MATH)
     message(STATUS "ENABLE_FAST_MATH: ON")
     if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
         add_compile_options(-ffast-math)
+        add_compile_options(-fno-finite-math-only) # only GCC needs this, /fp:fast on VC++ doesnt force finite math only
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         add_compile_options(/fp:fast)
     endif()

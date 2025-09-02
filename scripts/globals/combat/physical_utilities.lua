@@ -1092,36 +1092,37 @@ end
 
 xi.combat.physical.isParried = function(defender, attacker)
     local parried = false
-    if
-        xi.combat.physical.canParry(defender, attacker) and
-        xi.combat.physical.calculateParryRate(defender, attacker) > math.random(1, 100)
-    then
-        parried = true
 
-        -- https://www.bg-wiki.com/ffxi/Turms_Mittens
-        if
-            defender:getMod(xi.mod.PARRY_HP_RECOVERY) > 0 and
-            not defender:hasStatusEffect(xi.effect.CURSE_II)
-        then
-            local recoveryValue = defender:getMod(xi.mod.PARRY_HP_RECOVERY)
-            defender:addHP(recoveryValue)
-        end
+    if xi.combat.physical.canParry(defender, attacker) then
+        local isPC = defender:isPC()
 
-        if defender:isPC() then
-            -- handle tactical parry
-            if defender:hasTrait(xi.trait.TACTICAL_PARRY) then
-                defender:addTP(defender:getMod(xi.mod.TACTICAL_PARRY))
+        if xi.combat.physical.calculateParryRate(defender, attacker) > math.random(1, 100) then
+            parried = true
+
+            -- https://www.bg-wiki.com/ffxi/Turms_Mittens
+            if
+                defender:getMod(xi.mod.PARRY_HP_RECOVERY) > 0 and
+                not defender:hasStatusEffect(xi.effect.CURSE_II)
+            then
+                local recoveryValue = defender:getMod(xi.mod.PARRY_HP_RECOVERY)
+                defender:addHP(recoveryValue)
+            end
+
+            if isPC then
+                -- handle tactical parry
+                if defender:hasTrait(xi.trait.TACTICAL_PARRY) then
+                    defender:addTP(defender:getMod(xi.mod.TACTICAL_PARRY))
+                end
             end
         end
-    end
 
-    -- Handle skill ups.
-    if defender:isPC() then
+        -- Handle skill ups.
         if
-            parried or -- We parried
-            not xi.settings.map.PARRY_OLD_SKILLUP_STYLE -- Old style skillup is not enabled
+            isPC and
+            (parried or                                  -- We parried
+            not xi.settings.map.PARRY_OLD_SKILLUP_STYLE) -- Old style skillup is not enabled
         then
-            defender:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+                defender:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
         end
     end
 

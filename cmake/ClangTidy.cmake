@@ -7,6 +7,7 @@ message(STATUS "ENABLE_CLANG_TIDY: ${ENABLE_CLANG_TIDY}")
 message(STATUS "ENABLE_CLANG_TIDY_AUTO_FIX: ${ENABLE_CLANG_TIDY_AUTO_FIX}")
 
 if(ENABLE_CLANG_TIDY)
+  set(PCH_ENABLE OFF)
   find_program(CLANG_TIDY_COMMAND NAMES clang-tidy)
   if(NOT CLANG_TIDY_COMMAND)
     message(WARNING "CMake_RUN_CLANG_TIDY is ON but clang-tidy is not found!")

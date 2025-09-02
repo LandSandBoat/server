@@ -10,6 +10,11 @@ local ID = zones[xi.zone.CASTLE_OZTROJA]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:setRespawnTime(math.random(900, 10800))
+end
+
 entity.onMobEngage = function(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
 end
@@ -38,10 +43,10 @@ entity.onMobDespawn = function(mob)
     if GetSystemTime() > timeOfDeath and popNow then
         DisallowRespawn(mobId, true)
         DisallowRespawn(hqId, false)
-        UpdateNMSpawnPoint(hqId)
+        xi.mob.updateNMSpawnPoint(hqId)
         GetMobByID(hqId):setRespawnTime(respawnTime)
     else
-        UpdateNMSpawnPoint(mobId)
+        xi.mob.updateNMSpawnPoint(mobId)
         mob:setRespawnTime(respawnTime)
         SetServerVariable('[PH]Tzee_Xicu_the_Manifest', kills)
     end

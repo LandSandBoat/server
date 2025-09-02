@@ -23,5 +23,8 @@ CREATE TABLE IF NOT EXISTS `char_effects` (
   `tier` smallint(5) unsigned NOT NULL DEFAULT '0',
   `flags` int(8) unsigned NOT NULL DEFAULT '0',
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `sourcetype` smallint(10) unsigned NOT NULL DEFAULT '0',
+  `sourcetypeparam` int(10) unsigned NOT NULL DEFAULT '0',
+  `originid` int(10) unsigned NOT NULL DEFAULT '0',
   KEY `charid` (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

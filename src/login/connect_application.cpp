@@ -67,3 +67,9 @@ void ConnectApplication::registerCommands(ConsoleService& console)
     });
     // clang-format on
 }
+
+void ConnectApplication::requestExit()
+{
+    Application::requestExit();
+    io_context_.stop();
+}

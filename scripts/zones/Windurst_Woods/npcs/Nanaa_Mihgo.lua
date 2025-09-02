@@ -49,8 +49,6 @@ end
 entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
     local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
-    local rockRacketeer = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
-    local rockRacketeerCS = player:getCharVar('rockracketeer_sold')
 
     -- LURE OF THE WILDCAT (WINDURST 2-1)
     -- Simply checks this NPC as talked to for the PC, should be highest priority
@@ -71,30 +69,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar('TrustDialogue', 1)
 
         player:startEvent(865, 0, 0, 0, trustMemory(player), 0, 0, 0, trustFlag)
-
-    -- ROCK RACKETEER (Mihgo's Amigo follow-up)
-    elseif
-        mihgosAmigo == xi.questStatus.QUEST_COMPLETED and
-        rockRacketeer == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.WINDURST) >= 3
-    then
-        if player:needToZone() then
-            player:startEvent(89) -- complete
-        else
-            player:startEvent(93) -- quest start
-        end
-    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 1 then
-        player:startEvent(98) -- advance quest talk to Varun
-    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 2 then
-        player:startEvent(95) -- not sold reminder
-    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(94) -- quest reminder
-
-    -- STANDARD DIALOG
-    elseif rockRacketeer == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(99) -- new dialog after Rock Racketeer
-    elseif mihgosAmigo == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(89) -- new dialog after Mihgo's Amigos
     end
 end
 
@@ -103,13 +77,6 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 732 then
         player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 4, true))
 
-    -- ROCK RACKETEER
-    elseif csid == 93 then
-        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
-        npcUtil.giveKeyItem(player, xi.ki.SHARP_GRAY_STONE)
-    elseif csid == 98 then
-        player:delGil(10 * xi.settings.main.GIL_RATE)
-        player:setCharVar('rockracketeer_sold', 3)
     elseif csid == 865 and option == 2 then
         player:addSpell(xi.magic.spell.NANAA_MIHGO, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NANAA_MIHGO)

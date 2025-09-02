@@ -39,6 +39,8 @@
 #include "ai/controllers/trust_controller.h"
 #include "weapon_skill.h"
 
+#include <ranges>
+
 namespace gambits
 {
     // Return a new unique identifier for a gambit

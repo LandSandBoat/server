@@ -225,6 +225,7 @@ uint16 CPetSkill::getMsgForAction() const
     return getID();
 }
 
+// Converts skill's message id to the non-primary target version
 uint16 CPetSkill::getAoEMsg() const // TODO: put this in parent class?
 {
     switch (m_Message)
@@ -235,8 +236,10 @@ uint16 CPetSkill::getAoEMsg() const // TODO: put this in parent class?
             return 266;
         case 187:
             return 281;
+        case 324: // any miss message
+        case 158:
         case 188:
-            return 282;
+            return 282; // <target> evades.
         case 189:
             return 283;
         case 225:
@@ -248,7 +251,7 @@ uint16 CPetSkill::getAoEMsg() const // TODO: put this in parent class?
         case 238:       // recover hp
         case 306:       // recover hp
         case 318:       // recover hp
-            return 24;
+            return 367;
         case 242:
             return 277;
         case 243:

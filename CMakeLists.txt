@@ -110,6 +110,9 @@ add_definitions(
 # For external libs
 set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
 
+option(PCH_ENABLE "Enable precompiled headers." ON)
+message(STATUS "PCH_ENABLE: ${PCH_ENABLE}")
+
 # Tracy flags
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY) # Also handle close flags

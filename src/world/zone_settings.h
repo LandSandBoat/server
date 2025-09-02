@@ -26,6 +26,7 @@
 #include "common/ipp.h"
 #include "common/logging.h"
 
+#include <ranges>
 #include <set>
 #include <unordered_map>
 #include <vector>

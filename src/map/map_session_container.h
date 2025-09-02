@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/ipp.h"
+#include <map>
 
 class CCharEntity;
 struct MapSession;

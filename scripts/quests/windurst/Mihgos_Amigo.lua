@@ -69,6 +69,8 @@ quest.sections =
                 end,
             },
 
+            ['Bopa_Greso'] = quest:event(84),
+
             ['Cha_Lebagta'] = quest:event(85, 0, xi.item.YAGUDO_BEAD_NECKLACE),
 
             onEventFinish =
@@ -93,7 +95,9 @@ quest.sections =
             ['Nanaa_Mihgo'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(89):replaceDefault()
+                    if quest:getMustZone(player) then
+                        return quest:event(89)
+                    end
                 end,
 
                 onTrade = function(player, npc, trade)
@@ -103,13 +107,21 @@ quest.sections =
                 end,
             },
 
-            ['Cha_Lebagta'] = quest:event(91, 0, xi.item.YAGUDO_BEAD_NECKLACE):replaceDefault(),
+            ['Cha_Lebagta'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getMustZone(player) then
+                        return quest:event(91, 0, xi.item.YAGUDO_BEAD_NECKLACE)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
                 [494] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        quest:setMustZone(player)
                         player:addGil(200) -- "Obtained X gil." Text is baked into the CS, so gil needs to be given outside of the quest rewards.
                     end
                 end,

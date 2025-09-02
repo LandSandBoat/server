@@ -102,14 +102,6 @@ MapEngine::MapEngine(asio::io_context& io_context, MapConfig& config)
 , engineConfig_(config)
 {
     do_init();
-
-    // Queue the first game loop iteration
-    // clang-format off
-    asio::post([&]()
-    {
-        gameLoop();
-    });
-    // clang-format on
 }
 
 MapEngine::~MapEngine()
@@ -205,17 +197,6 @@ void MapEngine::gameLoop()
     else if (tickDiffTime < -kMainLoopBacklogThreshold)
     {
         RATE_LIMIT(15s, ShowWarningFmt("Main loop is running {}ms behind, performance is degraded!", -timer::count_milliseconds(tickDiffTime)));
-    }
-
-    if (!ioContext_.stopped())
-    {
-        // Requeue loop
-        // clang-format off
-        asio::post([&]()
-        {
-            gameLoop();
-        });
-        // clang-format on
     }
 }
 
@@ -475,9 +456,4 @@ auto MapEngine::statistics() const -> MapStatistics&
 auto MapEngine::zones() const -> std::map<uint16, CZone*>&
 {
     return g_PZoneList;
-}
-
-void MapEngine::requestExit()
-{
-    ioContext_.stop();
 }

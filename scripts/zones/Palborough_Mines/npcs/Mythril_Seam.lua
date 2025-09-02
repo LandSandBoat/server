@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.item.PICKAXE) then -- pickaxe
         if player:getFreeSlotsCount() > 0 then
             if math.random(1, 100) <= 47 then
-                if player:getCharVar('rockracketeer_sold') == 5 then
+                if
+                    player:getCharVar('Quest[2][26]Prog') >= 2 and
+                    not player:hasItem(xi.item.SHARP_STONE) -- Allows for the player to reobtain the Sharp Stone if they drop it before finishing the quest
+                then
                     player:startEvent(51, 12, xi.item.SHARP_STONE) -- Sharp Stone
                 else
                     player:startEvent(43, 12, 0, xi.item.CHUNK_OF_MINE_GRAVEL) -- Mine Gravel
@@ -36,6 +39,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 51 and npcUtil.giveItem(player, xi.item.SHARP_STONE) then
         player:confirmTrade()
+        player:setCharVar('Quest[2][26]Prog', 3)
     elseif csid == 43 and npcUtil.giveItem(player, xi.item.CHUNK_OF_MINE_GRAVEL) then
         player:confirmTrade()
     elseif csid == 47 then
