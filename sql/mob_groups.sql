@@ -5883,7 +5883,7 @@ INSERT INTO `mob_groups` VALUES (5,418,91,'Big_Leech',0,128,0,0,0,25,29,0);
 
 INSERT INTO `mob_groups` VALUES (6,2456,91,'Lycopodium',330,0,1552,0,0,28,32,0);
 INSERT INTO `mob_groups` VALUES (7,6302,91,'Death_Wasp',330,0,584,0,0,38,42,0);
-INSERT INTO `mob_groups` VALUES (8,2369,91,'Lamina',5400,0,2991,6100,0,57,58,0);
+INSERT INTO `mob_groups` VALUES (8,2369,91,'Lamina',0,128,2991,6525,0,57,58,0);
 INSERT INTO `mob_groups` VALUES (9,1757,91,'Goobbue_Farmer',330,0,1197,0,0,59,61,0);
 INSERT INTO `mob_groups` VALUES (10,1341,91,'Fire_Elemental',330,4,831,0,0,43,43,0);
 INSERT INTO `mob_groups` VALUES (11,6312,91,'Chigoe',330,0,466,0,0,75,78,0);
