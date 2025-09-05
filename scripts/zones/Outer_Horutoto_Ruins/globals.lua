@@ -57,7 +57,7 @@ local outerHorutotoGlobal =
             if GetSystemTime() > pop then
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
-                UpdateNMSpawnPoint(nmId)
+                xi.mob.updateNMSpawnPoint(nmId)
                 nm:setRespawnTime(GetMobRespawnTime(phId))
 
                 nm:addListener('DESPAWN', 'DESPAWN_'..nmId, function(m)

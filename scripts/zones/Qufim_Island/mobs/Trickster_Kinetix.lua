@@ -7,6 +7,11 @@ local ID = zones[xi.zone.QUFIM_ISLAND]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -159.000, y = -19.000, z =  244.000 }
+}
+
 entity.phList =
 {
     [ID.mob.TRICKSTER_KINETIX - 4] = ID.mob.TRICKSTER_KINETIX, -- -138.180 -20.928 228.793

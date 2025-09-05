@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -78.000, y = -4.000, z = -15.000 },
     { x = -78.599, y = -4.000, z = -12.779 },
@@ -62,13 +62,13 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
 end
 
 entity.onMobDespawn = function(mob)
     -- Set Grand_Duke_Batym's spawnpoint and respawn time (21-24 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 end
 

@@ -7,6 +7,11 @@ local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  133.834, y =  22.199, z = -208.700 }
+}
+
 entity.phList =
 {
     [ID.mob.CENTIPEDAL_CENTRUROIDES - 1] = ID.mob.CENTIPEDAL_CENTRUROIDES,

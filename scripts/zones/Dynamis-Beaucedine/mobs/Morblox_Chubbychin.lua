@@ -13,6 +13,11 @@ local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  138.194, y = -39.909, z = -71.004 }
+}
+
 entity.phList =
 {
     [ID.mob.MORBLOX_CHUBBYCHIN - 2] = ID.mob.MORBLOX_CHUBBYCHIN, -- Vanguard_Necromancer

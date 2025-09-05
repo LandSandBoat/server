@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPointTable =
+entity.spawnPoints =
 {
     { x = 228.000, y = 7.134, z = -311.000 },
     { x = 220.463, y = 8.136, z = -302.294 },
@@ -81,7 +81,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setCarefulPathing(true)
-    xi.mob.updateNMSpawnPoint(mob, spawnPointTable)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
@@ -212,7 +212,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Vrtra's spawnpoint and respawn time (3-5 days)
-    xi.mob.updateNMSpawnPoint(mob, spawnPointTable)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 

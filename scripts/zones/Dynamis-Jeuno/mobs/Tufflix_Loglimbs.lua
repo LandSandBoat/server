@@ -13,6 +13,11 @@ local ID = zones[xi.zone.DYNAMIS_JEUNO]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  12.244, y =  1.999, z = -4.306 }
+}
+
 entity.phList =
 {
     [ID.mob.TUFFLIX_LOGLIMBS - 2] = ID.mob.TUFFLIX_LOGLIMBS, -- Vanguard_Armorer      15.499   8.384   -36.562

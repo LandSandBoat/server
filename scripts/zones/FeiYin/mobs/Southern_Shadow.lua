@@ -7,6 +7,14 @@ local ID = zones[xi.zone.FEIYIN]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -153.000, y = -16.000, z =  89.000 },
+    { x = -152.000, y = -15.000, z =  77.000 },
+    { x = -163.000, y = -15.000, z =  74.000 },
+    { x = -166.000, y = -15.000, z =  84.000 }
+}
+
 entity.phList =
 {
     [ID.mob.SOUTHERN_SHADOW - 3] = ID.mob.SOUTHERN_SHADOW, -- -159.000 -16.000 146.000

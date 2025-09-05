@@ -25,7 +25,7 @@ end
 -- TODO: implement/verify this "alternates nights with dark weather" claim on ffxiclopedia.
 -- Currently assuming it works like Xolotl where it will just spawn the next time it can (dark weather, night time)
 entity.onMobDespawn = function(mob)
-    --UpdateNMSpawnPoint(mob:getID()) -- TODO: add more spawn points
+    --xi.mob.updateNMSpawnPoint(mob) -- TODO: add more spawn points
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no dark weather and immediate despawn
 end
 

@@ -4,6 +4,7 @@
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
 local ID = zones[xi.zone.VELUGANNON_PALACE]
 
 -- Spawn points from nm_spawn_points.sql
@@ -291,7 +292,7 @@ local setZipPath = function(mob, door, currPath)
                 end
             else -- East to West
                 mob:pathThrough(pathNodes[currPath + 1], xi.path.flag.COORDS)
-                if currPath + 1 ~= paths.YELLLOW_TO_BASEMENT then
+                if currPath + 1 ~= paths.YELLOW_TO_BASEMENT then
                     currentDirection = pathingDirection.TO_EAST
                 end
             end
@@ -357,7 +358,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(10800, 14400)) -- respawn 3-4 hrs
 end
 

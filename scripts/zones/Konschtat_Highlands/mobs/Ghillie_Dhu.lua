@@ -7,7 +7,7 @@ require('scripts/quests/tutorial')
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x =  387.000, y =  -8.873, z =  -338.999 },
     { x =  403.000, y =  -9.000, z =  -362.000 },
@@ -19,7 +19,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
 
     -- For its TP drain melee.
@@ -57,7 +57,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
 end
 

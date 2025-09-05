@@ -7,6 +7,11 @@ local ID = zones[xi.zone.MAMOOK]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -209.000, y =  19.000, z = -388.000 }
+}
+
 entity.phList =
 {
     [ID.mob.FIREDANCE_MAGMAAL_JA - 6] = ID.mob.FIREDANCE_MAGMAAL_JA, -- -201.522 17.209 -363.865

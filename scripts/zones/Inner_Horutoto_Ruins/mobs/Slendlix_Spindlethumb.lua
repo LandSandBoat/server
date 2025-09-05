@@ -9,6 +9,11 @@ local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -238.000, y = -0.500, z = -167.000 }
+}
+
 entity.phList =
 {
     [ID.mob.SLENDLIX_SPINDLETHUMB - 27] = ID.mob.SLENDLIX_SPINDLETHUMB, -- -238.315 -0.002 -179.249

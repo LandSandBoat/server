@@ -297,7 +297,6 @@ namespace luautils
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
-        lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("GetRecentFishers", &luautils::GetRecentFishers);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
@@ -4790,49 +4789,6 @@ namespace luautils
         {
             ShowDebug("DisallowRespawn: mob <%u> not found", mobid);
         }
-    }
-
-    bool UpdateNMSpawnPoint(uint32 mobid)
-    {
-        TracyZoneScoped;
-
-        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-        if (PMob != nullptr)
-        {
-            int32 r = 0;
-
-            const auto rset = db::preparedStmt("SELECT COUNT(mobid) FROM `nm_spawn_points` WHERE mobid = ?", mobid);
-            if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>(0) > 0)
-            {
-                r = xirand::GetRandomNumber(rset->get<uint32>(0));
-            }
-            else
-            {
-                ShowDebug("UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.", mobid);
-                return false;
-            }
-
-            const auto rset2 = db::preparedStmt("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid = ? AND pos = ?", mobid, r);
-            if (rset2 && rset2->rowsCount() && rset2->next())
-            {
-                PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
-                PMob->m_SpawnPoint.x        = rset2->get<float>(0);
-                PMob->m_SpawnPoint.y        = rset2->get<float>(1);
-                PMob->m_SpawnPoint.z        = rset2->get<float>(2);
-
-                return true;
-            }
-            else
-            {
-                ShowDebug("UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.", mobid);
-            }
-        }
-        else
-        {
-            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
-        }
-
-        return false;
     }
 
     /************************************************************************

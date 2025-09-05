@@ -9,6 +9,11 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  869.240, y =  1.045, z = -655.214 }
+}
+
 entity.phList =
 {
     [ID.mob.ANTICAN_PRAEFECTUS - 1] = ID.mob.ANTICAN_PRAEFECTUS, -- -90.01 -0.567 -29.424

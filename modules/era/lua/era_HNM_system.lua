@@ -50,7 +50,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
     end
 
     -- Update mob spawn position.
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -83,7 +83,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
         monster = dragonsAeryID.mob.NIDHOGG
     end
 
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
     GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
@@ -97,7 +97,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Nidhogg.onMobDespawn', functio
     SetServerVariable('[HNM]Fafnir_C', 0)                       -- Save kill count.
 
     -- Mob setup.
-    UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
+    xi.mob.updateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
     GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(randomPopTime)
 end)
 
@@ -129,7 +129,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
     end
 
     -- Update mob spawn position.
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -162,7 +162,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
         monster = valleySorrowsID.mob.ASPIDOCHELONE
     end
 
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
     GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
@@ -176,7 +176,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobDespaw
     SetServerVariable('[HNM]Adamantoise_C', 0)                       -- Save kill count.
 
     -- Mob setup.
-    UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
+    xi.mob.updateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
     GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(randomPopTime)
 end)
 
@@ -208,7 +208,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
     end
 
     -- Update mob spawn position.
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -241,7 +241,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
         monster = behemothDomID.mob.KING_BEHEMOTH
     end
 
-    UpdateNMSpawnPoint(monster)
+    xi.mob.updateNMSpawnPoint(monster)
     GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
@@ -255,7 +255,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespa
     SetServerVariable('[HNM]Behemoth_C', 0)                       -- Save kill count.
 
     -- Mob setup.
-    UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
+    xi.mob.updateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
 end)
 

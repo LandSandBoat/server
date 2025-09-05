@@ -52,7 +52,7 @@ for _, entry in pairs(nmsToPersist) do
         print(string.format('Getting respawn time from server vars: %s %i', mob:getName(), respawn))
 
         if GetSystemTime() < respawn then
-            UpdateNMSpawnPoint(mob:getID())
+            xi.mob.updateNMSpawnPoint(mob)
             mob:setRespawnTime(respawn - GetSystemTime())
         else
             SpawnMob(mob:getID())

@@ -7,6 +7,11 @@ local ID = zones[xi.zone.NORTH_GUSTABERG_S]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  49.650, y =  1.692, z =  630.371 }
+}
+
 entity.phList =
 {
     [ID.mob.GLOOMANITA - 1] = ID.mob.GLOOMANITA, -- -19.961 0.5 623.989

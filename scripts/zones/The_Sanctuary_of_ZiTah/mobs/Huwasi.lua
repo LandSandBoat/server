@@ -6,7 +6,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -186.000, y = 0.000, z = -333.000 },
     { x = -12.000,  y = 0.000, z = -422.000 },
@@ -16,7 +16,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 entity.onMobSpawn = function(mob)
@@ -32,7 +32,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

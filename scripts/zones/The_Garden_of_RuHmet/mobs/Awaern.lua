@@ -3,6 +3,7 @@
 --  Mob: Aw'aern
 -- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
+mixins = { require('scripts/mixins/families/aern') }
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 ---@type TMobEntity

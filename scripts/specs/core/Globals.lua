@@ -380,11 +380,6 @@ end
 function DisallowRespawn(mobid, allowRespawn)
 end
 
----@param mobid integer
----@return boolean
-function UpdateNMSpawnPoint(mobid)
-end
-
 ---@nodiscard
 ---@param minutes integer
 ---@return table

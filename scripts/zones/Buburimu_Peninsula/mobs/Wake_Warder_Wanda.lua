@@ -5,7 +5,19 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
+{
+    { x = -113.000, y =  20.000, z = -317.000 },
+    { x =  -80.000, y =  20.000, z = -324.000 },
+    { x =  -44.000, y =  20.000, z = -314.000 },
+    { x =  -42.000, y =  16.000, z = -267.000 },
+    { x =   -4.000, y =  16.000, z = -212.000 },
+    { x =  -59.000, y =  16.000, z = -232.000 },
+    { x = -111.000, y =  16.000, z = -246.000 },
+    { x =  -73.000, y =  16.000, z = -270.000 }
+}
+
+entity.spawnPoints =
 {
     { x = -113.000, y =  20.000, z = -317.000 },
     { x =  -80.000, y =  20.000, z = -324.000 },
@@ -18,7 +30,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- When server restarts, reset timer
 
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50) -- just one spell to spam
@@ -37,7 +49,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- repop 60-70min
 end
 

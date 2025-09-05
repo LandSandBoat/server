@@ -8,6 +8,11 @@ local ID = zones[xi.zone.GRAUBERG_S]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  276.142, y =  25.332, z = -453.541 }
+}
+
 entity.phList =
 {
     [ID.mob.VASILICERATOPS - 3] = ID.mob.VASILICERATOPS,

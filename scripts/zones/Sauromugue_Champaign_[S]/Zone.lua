@@ -7,8 +7,6 @@ local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.COQUECIGRUE)
-    GetMobByID(ID.mob.COQUECIGRUE):setRespawnTime(math.random(7200, 7800))
     xi.voidwalker.zoneOnInit(zone)
 end
 

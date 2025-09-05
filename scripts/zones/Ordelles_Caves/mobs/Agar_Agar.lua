@@ -7,6 +7,11 @@ local ID = zones[xi.zone.ORDELLES_CAVES]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -71.360, y =  31.975, z =  207.479 }
+}
+
 entity.phList =
 {
     [ID.mob.AGAR_AGAR - 4] = ID.mob.AGAR_AGAR, -- -81.31 31.493 210.675

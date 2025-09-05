@@ -7,6 +7,11 @@ local ID = zones[xi.zone.IFRITS_CAULDRON]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -271.000, y =  3.700, z = -129.000 }
+}
+
 entity.phList =
 {
     [ID.mob.LINDWURM - 6]  = ID.mob.LINDWURM,

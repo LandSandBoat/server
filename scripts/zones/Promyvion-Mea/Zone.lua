@@ -27,10 +27,6 @@ zoneObject.onInitialize = function(zone)
 
     -- Select portals.
     xi.promyvion.setupInitialPortals(zone)
-
-    -- Update NM between Floor 3 islands.
-    UpdateNMSpawnPoint(ID.mob.COVETER)
-    GetMobByID(ID.mob.COVETER):setRespawnTime(math.random(3600, 21600))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

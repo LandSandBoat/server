@@ -13,6 +13,11 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  0.500, y =  36.000, z = -87.000 }
+}
+
 entity.phList =
 {
     [ID.mob.CARMINE_TAILED_JANBERRY + 2] = ID.mob.CARMINE_TAILED_JANBERRY,

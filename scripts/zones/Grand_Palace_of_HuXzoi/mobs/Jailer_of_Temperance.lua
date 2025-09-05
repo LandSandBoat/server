@@ -8,6 +8,11 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -426.739, y = -0.500, z =  687.728 }
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end

@@ -13,6 +13,11 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  51.557, y = -24.160, z = -102.157 }
+}
+
 entity.phList =
 {
     [ID.mob.DUKE_BERITH - 1] = ID.mob.DUKE_BERITH, -- Kindred_Red_Mage

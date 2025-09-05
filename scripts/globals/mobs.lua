@@ -39,7 +39,6 @@ local getMobLuaPathObject = function(mob)
     return xi.zones[mob:getZoneName()].mobs[mob:getName()]
 end
 
--- This function is used to replace UpdateNMSpawnPoints() inside the Zone.lua files and the NM despawn scripts
 -- - mobParam can either be a mobid or a mob entity object
 -- it either accepts a table of spawn points to randomize, or looks to the mob's cached lua object for a spawnPoints entry
 ---@param mobParam number|CBaseEntity?
@@ -82,11 +81,6 @@ xi.mob.updateNMSpawnPoint = function(mobParam, spawnPointsOverride)
 
         -- Updates the mob's spawn point
         mobParam:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
-    else
-        -- TODO This needs to stay here until all NMs have been updated to use entity.spawnPoints and the nm_spawn_points sql table is gone
-        if not UpdateNMSpawnPoint(mobParam:getID()) then
-            fmt('No spawn points defined for mob {} ({}) in spawnPoints.', mobParam:getName(), mobParam:getID())
-        end
     end
 end
 
@@ -102,7 +96,7 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
         params.immediate          = true    pop NM without waiting for next PH pop time
         params.dayOnly            = true    spawn NM only at day time
         params.nightOnly          = true    spawn NM only at night time
-        params.noPosUpdate        = true    do not run UpdateNMSpawnPoint()
+        params.noPosUpdate        = true    do not run xi.mob.updateNMSpawnPoint()
         params.spawnPoints        = { {x = , y = , z = } } table of spawn points to choose from, overrides NM's lua-defined table
         params.doNotEnablePhSpawn = true    Don't enable ph respawns after NM is killed (for chained ph systems like steelfleece)
     ]]

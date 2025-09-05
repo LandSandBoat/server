@@ -1,19 +1,12 @@
 -----------------------------------
 -- Zone: Meriphataud_Mountains (119)
 -----------------------------------
-local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.WARAXE_BEAK)
-    GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.COO_KEJA_THE_UNSEEN)
-    GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN):setRespawnTime(math.random(900, 10800))
-
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
 end

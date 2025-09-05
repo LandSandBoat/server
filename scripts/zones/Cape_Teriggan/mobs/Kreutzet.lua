@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = 207.000, y = 8.000, z =  1.000 },
     { x = 206.815, y = 7.997, z = 30.988 },
@@ -60,7 +60,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
@@ -110,7 +110,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(32400, 43200))
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end

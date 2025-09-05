@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x =  219.250, y =   0.500, z =  107.140 },
     { x =  246.720, y =   0.130, z = -200.300 },
@@ -14,7 +14,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- When server restarts, reset timer
 
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
@@ -49,7 +49,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
 end
 

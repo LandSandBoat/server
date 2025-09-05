@@ -7,6 +7,11 @@ local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -105.000, y = -8.000, z =  94.000 }
+}
+
 entity.phList =
 {
     [ID.mob.COOKIEDUSTER_LIPIROON - 8] = ID.mob.COOKIEDUSTER_LIPIROON,

@@ -17,7 +17,7 @@ entity.phList =
 }
 
 entity.onMobDeath = function(mob, player, optParams)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

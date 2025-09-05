@@ -9,6 +9,11 @@ local ID = zones[xi.zone.DAVOI]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  174.212, y =  2.068, z = -20.285 }
+}
+
 entity.phList =
 {
     [ID.mob.TIGERBANE_BAKDAK - 4] = ID.mob.TIGERBANE_BAKDAK, -- 158 -0.662 -18

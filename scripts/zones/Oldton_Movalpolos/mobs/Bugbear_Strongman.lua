@@ -7,6 +7,11 @@ local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  60.728, y =  15.487, z = -118.886 }
+}
+
 entity.phList =
 {
     [ID.mob.BUGBEAR_STRONGMAN[1] - 2] = ID.mob.BUGBEAR_STRONGMAN[1], -- -81.31 31.493 210.675 (west)

@@ -8,9 +8,6 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.KING_VINEGARROON)
-    GetMobByID(ID.mob.KING_VINEGARROON):setRespawnTime(math.random(900, 10800))
-
     xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 

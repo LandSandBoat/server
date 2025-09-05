@@ -8,18 +8,6 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.WOODLAND_SAGE)
-    GetMobByID(ID.mob.WOODLAND_SAGE):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.POWDERER_PENNY)
-    GetMobByID(ID.mob.POWDERER_PENNY):setRespawnTime(math.random(5400, 7200))
-
-    UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
-    GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
-    GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(900, 10800))
-
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helmType.HARVESTING)

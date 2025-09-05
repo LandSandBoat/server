@@ -10,12 +10,12 @@ zoneObject.onInitialize = function(zone)
     if math.random(1, 100) <= 50 then
         DisallowRespawn(ID.mob.LEECH_KING, true)
         DisallowRespawn(ID.mob.ARGUS, false)
-        UpdateNMSpawnPoint(ID.mob.ARGUS)
+        xi.mob.updateNMSpawnPoint(ID.mob.ARGUS)
         GetMobByID(ID.mob.ARGUS):setRespawnTime(math.random(900, 7200))
     else
         DisallowRespawn(ID.mob.ARGUS, true)
         DisallowRespawn(ID.mob.LEECH_KING, false)
-        UpdateNMSpawnPoint(ID.mob.LEECH_KING)
+        xi.mob.updateNMSpawnPoint(ID.mob.LEECH_KING)
         GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.random(900, 7200))
     end
 

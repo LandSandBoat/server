@@ -110,7 +110,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     for i = ID.mob.FRADUBIO + 1, ID.mob.FRADUBIO + 5 do
         GetMobByID(i):setHP(0)
     end

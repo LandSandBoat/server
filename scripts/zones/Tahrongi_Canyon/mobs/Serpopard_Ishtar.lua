@@ -7,6 +7,11 @@ local ID = zones[xi.zone.TAHRONGI_CANYON]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -0.048, y =  21.041, z =  266.381 }
+}
+
 entity.phList =
 {
     [ID.mob.SERPOPARD_ISHTAR[1] - 3] = ID.mob.SERPOPARD_ISHTAR[1], -- -9.176 -8.191 -64.347 (south)

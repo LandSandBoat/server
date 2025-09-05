@@ -9,6 +9,12 @@ mixins = { require('scripts/mixins/families/tonberry') }
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  24.922, y = -5.023, z = -423.784 },
+    { x =  31.930, y =  0.201, z = -407.700 }
+}
+
 entity.phList =
 {
     [ID.mob.HOAR_KNUCKLED_RIMBERRY - 2] = ID.mob.HOAR_KNUCKLED_RIMBERRY,

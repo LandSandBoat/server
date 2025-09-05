@@ -7,6 +7,17 @@ local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =   87.880, y =  16.000, z = -19.510 },
+    { x =  101.320, y =  16.000, z =  50.140 },
+    { x =   45.540, y =  16.120, z =  19.640 },
+    { x =   49.850, y =  15.850, z = -20.750 },
+    { x =  101.320, y =  16.000, z =  50.140 },
+    { x =   45.540, y =  16.120, z =  19.640 },
+    { x =   49.850, y =  15.850, z = -20.750 }
+}
+
 entity.phList =
 {
     [ID.mob.SWASHSTOX_BEADBLINKER[1] - 10] = ID.mob.SWASHSTOX_BEADBLINKER[1], -- 92.145, 15.500, 66.595
@@ -56,7 +67,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     local mobId = mob:getID()
     for i = 1, 2 do
         local guardID = mobId + i

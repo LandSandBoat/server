@@ -7,6 +7,11 @@ local ID = zones[xi.zone.TORAIMARAI_CANAL]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -138.800, y =  22.500, z =  24.550 }
+}
+
 entity.phList =
 {
     [ID.mob.CANAL_MOOCHER - 3] = ID.mob.CANAL_MOOCHER,

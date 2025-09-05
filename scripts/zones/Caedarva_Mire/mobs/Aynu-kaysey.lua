@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/families/qutrub') }
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -538.583, y = -7.218, z = 46.353 },
     { x = -534.618, y = -7.928, z = 46.110 },
@@ -62,7 +62,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
 
@@ -71,7 +71,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
 

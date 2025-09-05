@@ -9,6 +9,11 @@ local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  405.000, y = -32.000, z = -32.000 }
+}
+
 entity.phList =
 {
     [ID.mob.EURYMEDON + 4] = ID.mob.EURYMEDON, -- 397.252 -32.128 -32.807

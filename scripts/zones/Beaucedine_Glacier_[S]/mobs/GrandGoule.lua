@@ -7,6 +7,11 @@ local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -242.000, y = -80.300, z = -127.000 }
+}
+
 entity.phList =
 {
     [ID.mob.GRANDGOULE - 7] = ID.mob.GRANDGOULE,

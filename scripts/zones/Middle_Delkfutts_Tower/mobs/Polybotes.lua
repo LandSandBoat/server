@@ -9,6 +9,11 @@ local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -41.284, y = -63.636, z =  3.492 }
+}
+
 entity.phList =
 {
     [ID.mob.POLYBOTES - 1] = ID.mob.POLYBOTES, -- Giant_Gatekeeper: -48.936 -64.114 8.575

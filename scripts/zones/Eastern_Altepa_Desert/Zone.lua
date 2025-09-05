@@ -1,16 +1,12 @@
 -----------------------------------
 -- Zone: Eastern_Altepa_Desert (114)
 -----------------------------------
-local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.NANDI)
-    GetMobByID(ID.mob.NANDI):setRespawnTime(math.random(3600, 4200))
-
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
     xi.chocobo.initZone(zone)
 end

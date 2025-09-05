@@ -7,6 +7,11 @@ local ID = zones[xi.zone.IFRITS_CAULDRON]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -38.587, y =  3.815, z =  259.578 }
+}
+
 entity.phList =
 {
     [ID.mob.VOUIVRE - 13] = ID.mob.VOUIVRE,

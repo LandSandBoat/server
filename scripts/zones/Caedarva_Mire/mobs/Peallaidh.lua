@@ -7,6 +7,11 @@ local ID = zones[xi.zone.CAEDARVA_MIRE]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  279.313, y = -16.214, z = -390.119 }
+}
+
 entity.phList =
 {
     [ID.mob.PEALLAIDH_PH_OFFSET]     = ID.mob.PEALLAIDH, -- 333.885 -9.646 -447.557

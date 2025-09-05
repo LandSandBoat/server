@@ -7,6 +7,11 @@ local ID = zones[xi.zone.FEIYIN]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  40.000, y = -15.500, z = -38.000 }
+}
+
 entity.phList =
 {
     [ID.mob.MIND_HOARDER - 3] = ID.mob.MIND_HOARDER,

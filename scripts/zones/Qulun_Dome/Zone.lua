@@ -1,14 +1,10 @@
 -----------------------------------
 -- Zone: Qulun_Dome (148)
 -----------------------------------
-local ID = zones[xi.zone.QULUN_DOME]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DIAMOND_QUADAV)
-    GetMobByID(ID.mob.DIAMOND_QUADAV):setRespawnTime(math.random(900, 10800))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

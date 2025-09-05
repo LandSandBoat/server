@@ -7,7 +7,7 @@ require('scripts/quests/tutorial')
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -499.000, y = 2.901, z = -48.000 },
     { x = -499.000, y = 2.901, z = -48.000 },
@@ -17,7 +17,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(1200, 1800)) -- When server restarts, reset timer
 
     -- Higher TP Gain per melee hit than normal lizards.
@@ -37,7 +37,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
 end
 

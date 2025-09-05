@@ -11,6 +11,11 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -19.515, y =  2.988, z = -6.545 }
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

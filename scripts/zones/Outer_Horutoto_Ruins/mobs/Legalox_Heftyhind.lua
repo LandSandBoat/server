@@ -5,6 +5,11 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -259.770, y =  0.000, z =  743.650 }
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 75) -- "Has a high but not 100% Double Attack rate."

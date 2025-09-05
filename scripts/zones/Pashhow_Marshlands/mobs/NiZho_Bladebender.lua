@@ -7,6 +7,12 @@ local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -429.953, y =  24.500, z = -305.450 },
+    { x =   11.309, y =  23.904, z = -337.923 }
+}
+
 entity.phList =
 {
     [ID.mob.NI_ZHO_BLADEBENDER - 57] = ID.mob.NI_ZHO_BLADEBENDER, -- -429.953 24.5 -305.450 TODO: Audit PH

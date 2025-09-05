@@ -7,6 +7,11 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -391.184, y = -0.269, z = -159.086 }
+}
+
 entity.onMobInitialize = function(mob)
     -- TODO any immunities at all? The below were the only ones tried
     -- not immune: bind, dispel, poison, addle, silence, paralyze, slow

@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -187.611, y = -8.000, z = -35.805 },
     { x = -196.069, y = -8.000, z = -36.258 },
@@ -26,7 +26,7 @@ entity.onMobInitialize = function(mob)
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 60, 0, 0)
     mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 
@@ -57,7 +57,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 

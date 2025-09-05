@@ -13,6 +13,11 @@ local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  239.870, y = -0.098, z =  228.050 }
+}
+
 entity.phList =
 {
     [ID.mob.MITHRASLAVER_DEBHABOB - 2] = ID.mob.MITHRASLAVER_DEBHABOB, -- Vanguard_Hawker

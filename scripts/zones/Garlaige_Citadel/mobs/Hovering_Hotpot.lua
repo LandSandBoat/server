@@ -7,6 +7,11 @@ local ID = zones[xi.zone.GARLAIGE_CITADEL]
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  158.000, y =  0.000, z =  20.000 }
+}
+
 entity.phList =
 {
     [ID.mob.HOVERING_HOTPOT - 5] = ID.mob.HOVERING_HOTPOT, -- Fallen_Major: 182.157 -0.012 29.941

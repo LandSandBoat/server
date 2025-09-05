@@ -73,7 +73,7 @@ zoneObject.onGameHour = function(zone)
         GetSystemTime() > pop and
         not nm:isSpawned()
     then
-        UpdateNMSpawnPoint(ID.mob.GEYSER_LIZARD)
+        xi.mob.updateNMSpawnPoint(ID.mob.GEYSER_LIZARD)
         nm:spawn()
     end
 end

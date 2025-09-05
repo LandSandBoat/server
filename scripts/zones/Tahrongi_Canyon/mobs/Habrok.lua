@@ -7,6 +7,11 @@ require('scripts/quests/tutorial')
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -292.000, y =  15.000, z = -540.000 }
+}
+
 entity.onMobInitialize = function(mob)
     mob:setLocalVar('pop', GetSystemTime() + math.random(1200, 7200))
 end
@@ -17,7 +22,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setLocalVar('pop', GetSystemTime() + math.random(1200, 7200))
 end
 
