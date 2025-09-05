@@ -15,16 +15,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        ASSAULT_41_START              = 7472, -- Commencing <assault>! Objective: Rescue the agent
-        ASSAULT_42_START              = 7473, -- Commencing <assault>! Objective: Destroy the assassins
-        ASSAULT_43_START              = 7474, -- Commencing <assault>! Objective: Defeat Sagelord Molaal Ja
-        ASSAULT_44_START              = 7475, -- Commencing <assault>! Objective: Steal the supplies
-        ASSAULT_45_START              = 7476, -- Commencing <assault>! Objective: Apprehend the spy
-        ASSAULT_46_START              = 7477, -- Commencing <assault>! Objective: Recover the treasure
-        ASSAULT_47_START              = 7478, -- Commencing <assault>! Objective: Annihilate the enemy
-        ASSAULT_48_START              = 7479, -- Commencing <assault>! Objective: Neutralize the marids
-        ASSAULT_49_START              = 7480, -- Commencing <assault>! Objective: Gather pathological data
-        ASSAULT_50_START              = 7481, -- Commencing <assault>! Objective: Defeat Orochi
+        ASSAULT_START_OFFSET          = 7461, -- Max MP Down removed for <name>.
         TIME_TO_COMPLETE              = 7522, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED                = 7523, -- The mission has failed. Leaving area.
         RUNE_UNLOCKED_POS             = 7524, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
@@ -64,39 +55,25 @@ zones[xi.zone.ILRUSI_ATOLL] =
             CURSED_CHEST11 = 17002515,
             CURSED_CHEST12 = 17002516,
         },
-        [43] =
+
+        [xi.assault.mission.EXTERMINATION] =
         {
-            CARRION_CRAB1   = 17002521,
-            CARRION_LEECH1  = 17002522,
-            CARRION_CRAB2   = 17002523,
-            CARRION_CRAB3   = 17002524,
-            CARRION_LEECH2  = 17002525,
-            CARRION_CRAB4   = 17002526,
-            CARRION_CRAB5   = 17002527,
-            CARRION_CRAB6   = 17002528,
-            CARRION_SLIME1  = 17002529,
-            CARRION_SLIME2  = 17002530,
-            CARRION_SLIME3  = 17002531,
-            CARRION_CRAB7   = 17002532,
-            CARRION_LEECH3  = 17002533,
-            CARRION_LEECH4  = 17002534,
-            CARRION_LEECH5  = 17002535,
-            CARRION_LEECH6  = 17002536,
-            CARRION_LEECH7  = 17002537,
-            CARRION_LEECH8  = 17002538,
-            CARRION_TOAD1   = 17002539,
-            CARRION_TOAD2   = 17002540,
-            UNDEAD_CRAB     = 17002541,
-            UNDEAD_LEECH    = 17002542,
-            UNDEAD_SLIME    = 17002543,
-            UNDEAD_TOAD     = 17002544,
+            CARRION_MOBS = GetFirstID('Carrion_Crab'),
+            UNDEAD_MOBS  = GetFirstID('Undead_Crab')
         },
     },
     npc =
     {
+        ANCIENT_LOCKBOX            = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE            = GetFirstID('Rune_of_Release'),
+        _1jo                       = GetFirstID('_1jo'),
+        _1jp                       = GetFirstID('_1jp'),
+        _jj3                       = GetFirstID('_jj3'),
+        _jj5                       = GetFirstID('_jj5'),
+        _jja                       = GetFirstID('_jja'),
+        _jjb                       = GetFirstID('_jjb'),
+        _jjc                       = GetFirstID('_jjc'),
         ILRUSI_CURSED_CHEST_OFFSET = 17002505,
-        ANCIENT_LOCKBOX            = 17002654,
-        RUNE_OF_RELEASE            = 17002655,
         CURSED_CHEST1              = 17002505,
         CURSED_CHEST2              = 17002506,
         CURSED_CHEST3              = 17002507,
@@ -109,13 +86,6 @@ zones[xi.zone.ILRUSI_ATOLL] =
         CURSED_CHEST10             = 17002514,
         CURSED_CHEST11             = 17002515,
         CURSED_CHEST12             = 17002516,
-        _1jo                       = 17002731,
-        _1jp                       = 17002732,
-        _jj3                       = 17002746,
-        _jj5                       = 17002748,
-        _jja                       = 17002753,
-        _jjb                       = 17002754,
-        _jjc                       = 17002755,
     },
 }
 

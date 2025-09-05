@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Crab
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
+local ID = zones[xi.zone.ILRUSI_ATOLL].mob[xi.assault.mission.EXTERMINATION]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
+    local crabMob  = GetMobByID(ID.UNDEAD_MOBS, instance)
     local randVal  = math.random(1, 5)
 
     if
@@ -24,7 +24,7 @@ entity.onMobDespawn = function(mob)
         crabMob and
         crabMob:getLocalVar('CrabSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_CRAB, instance)
+        SpawnMob(crabMob:getID(), instance)
         crabMob:setLocalVar('CrabSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

@@ -2,70 +2,104 @@
 -- Assault: Extermination
 -----------------------------------
 local ID = zones[xi.zone.ILRUSI_ATOLL]
+local InstanceAssault = xi.assault.InstanceAssault
 -----------------------------------
-local instanceObject = {}
+local content = InstanceAssault:new({
+    assaultID        = xi.assault.mission.EXTERMINATION,
+    instanceID       = xi.assault.instanceID.EXTERMINATION,
+    requiredOrders   = xi.ki.ILRUSI_ASSAULT_ORDERS,
+    zoneID           = xi.zone.ILRUSI_ATOLL,
+    assaultArea      = xi.assault.assaultArea.ILRUSI_ATOLL,
 
-instanceObject.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
+    entranceParams   = { 5502, { 219, 43, -4, 0, 70, 4, 1 }, { 219, 4 }, { 147, 0 } },
+    runeOfReleasePos = { x = 296.000, y = -3.692, z = 132.339, rot = 148 },
+    ancientBoxPos    = { x = 294.000, y = -3.606, z = 132.000, rot = 192 },
+    releasePos       = { x = 7, z = 8 }, -- (H-8)
 
-    player:messageSpecial(ID.text.ASSAULT_43_START, 43)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
-end
+    timeLimit        = 30,
+    suggestedLevel   = 70,
+    requiredProgress = 20,
+    basePoints       = 1100,
 
-instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[43]) do
-        SpawnMob(v, instance)
-    end
+    experimental     = true,
+})
 
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(290.857, -3.424, 132.339, 148)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(293.637, -3.376, 130.364, 148)
-    GetNPCByID(ID.npc._1jo, instance):setAnimation(8)
-    GetNPCByID(ID.npc._jj3, instance):setAnimation(8)
-    GetNPCByID(ID.npc._jj5, instance):setAnimation(8)
-    GetNPCByID(ID.npc._jjc, instance):setAnimation(8)
-end
+content.mobs =
+{
+    { baseID = ID.mob[content.assaultID].CARRION_MOBS, offset = 19, }, -- Group 1
+}
 
-instanceObject.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
-    end
-end
+content.npcs = {}
 
-instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
-end
+content.wallNPCs =
+{
+    ID.npc._1jo,
+    ID.npc._jj3,
+    ID.npc._jj5,
+    ID.npc._jjc,
+}
 
-instanceObject.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
+content.loot =
+{
+    -- appraisal =
+    -- {
+    --     [xi.item.UNAPPRAISED_BOX] =
+    --     {
+    --         {
+    --             { 25, xi.item.FLASK_OF_DISTILLED_WATER },
+    --             { 25, xi.item.LITTLE_WORM              },
+    --             { 15, xi.item.RUSTY_BUCKET             },
+    --             { 10, xi.item.LAMIAN_ARMLET            },
+    --             {  5, xi.item.KING_TRUFFLE             },
+    --             {  5, xi.item.QUTRUB_GORGET            },
+    --             {  4, xi.item.BEETLE_QUIVER            },
+    --             {  4, xi.item.STONE_QUIVER             },
+    --             {  3, xi.item.BONE_QUIVER              },
+    --             {  2, xi.item.SLEEP_QUIVER             },
+    --             {  2, xi.item.SILVER_QUIVER            },
+    --         },
+    --     },
 
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
-end
+    --     [xi.item.UNAPPRAISED_FOOTWEAR] =
+    --     {
+    --         {
+    --             { 35, xi.item.ASH_CLOGS          },
+    --             { 35, xi.item.LEATHER_HIGHBOOTS  },
+    --             {  5, xi.item.STORM_CRACKOWS     },
+    --             { 25, xi.item.BRONZE_LEGGINGS_P1 },
+    --         },
+    --     },
+    --     [xi.item.UNAPPRAISED_POLEARM] =
+    --     {
+    --         {
+    --             { 35, xi.item.BRASS_ZAGHNAL     },
+    --             { 20, xi.item.SPARK_SPEAR       },
+    --             { 20, xi.item.WILLOW_WAND_P1    },
+    --             { 15, xi.item.HOLLY_STAFF_P1    },
+    --             { 10, xi.item.VOLUNTEERS_SCYTHE },
+    --         },
+    --     },
+    --     [xi.item.UNAPPRAISED_AXE] =
+    --     {
+    --         { 100, xi.item.PICKAXE },
+    --     },
+    -- },
 
-instanceObject.onInstanceProgressUpdate = function(instance, progress)
-    if progress == 20 then
-        instance:complete()
-    end
-end
+    -- items =
+    -- {
+    --     -- Regular Item drops
+    --     { item = xi.item.HI_POTION_P3,       chance = 1000, },
+    --     { item = xi.item.HI_RERAISER,        chance = 125,  },
+    --     { item = xi.item.HI_POTION_TANK,     chance = 500,  },
+    --     { item = xi.item.HI_ETHER_TANK,      chance = 10,   },
+    --     { item = xi.item.WILLOW_FISHING_ROD, chance = 10,   },
 
-instanceObject.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
+    --     -- ??? Items
+    --     { item = xi.item.UNAPPRAISED_BOX,      chance = 500, },
+    --     { item = xi.item.UNAPPRAISED_POLEARM,  chance = 250, },
+    --     { item = xi.item.UNAPPRAISED_FOOTWEAR, chance = 250, },
+    --     { item = xi.item.UNAPPRAISED_AXE,      chance =  10, },
+    -- }
+}
 
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
-    end
-
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
-end
-
-instanceObject.onEventUpdate = function(player, csid, option, npc)
-end
-
-instanceObject.onEventFinish = function(player, csid, option, npc)
-end
-
-return instanceObject
+return content:register()

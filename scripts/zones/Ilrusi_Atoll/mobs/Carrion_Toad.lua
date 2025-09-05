@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Toad
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
+local ID = zones[xi.zone.ILRUSI_ATOLL].mob[xi.assault.mission.EXTERMINATION]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local toadMob  = GetMobByID(ID.mob.UNDEAD_TOAD, instance)
+    local toadMob  = GetMobByID(ID.UNDEAD_MOBS + 3, instance)
     local randVal  = math.random(1, 5)
 
     if
@@ -24,7 +24,7 @@ entity.onMobDespawn = function(mob)
         toadMob and
         toadMob:getLocalVar('ToadSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_TOAD, instance)
+        SpawnMob(toadMob:getID(), instance)
         toadMob:setLocalVar('ToadSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

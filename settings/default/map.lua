@@ -241,7 +241,8 @@ xi.settings.map =
     LV_CAP_MISSION_BCNM = false,
 
     -- Allow players to enter BCNMs which are flagged as experimental
-    BCNM_ENABLE_EXPERIMENTAL = true,
+    BCNM_ENABLE_EXPERIMENTAL    = true,
+    ASSAULT_ENABLE_EXPERIMENTAL = true,
 
     -- Max allowed merits points players can hold
     -- 10 classic

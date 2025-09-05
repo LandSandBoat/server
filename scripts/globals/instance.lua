@@ -55,30 +55,12 @@ xi.instance.lookup =
 {
     [xi.zone.ILRUSI_ATOLL] =
     {
-        -- Assault: Golden Salvage
-        -- Assault: Lamia No.13
-        -- Assault: Extermination
-        -- Assault: Demolition Duty
-        -- Assault: Searat Salvation
-        -- Assault: Apkallu Seizure
-        -- Assault: Lost and Found
-        -- Assault: Deserter
-        -- Assault: Desperately Seeking Cephalopods
-        -- Assault: Bellerophon's Bliss
     },
 
     [xi.zone.PERIQIA] =
     {
         { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
         { 5601, { 143, 31, -4, 0, 70, 0, 1 }, { 143, 4 }, { 147, 0 } }, -- Assault: Seagull Grounded
-        -- Assault: Requiem
-        -- Assault: Saving Private Ryaaf
-        -- Assault: Shooting Down the Baron
-        -- Assault: Stop the Bloodshed
-        -- Assault: Defuse the Threat
-        -- Assault: Operation: Snake Eyes
-        -- Assault: Wake the Puppet
-        -- Assault: The Price is Right
     },
 
     [xi.zone.THE_ASHU_TALIF] =
@@ -95,43 +77,16 @@ xi.instance.lookup =
     [xi.zone.LEBROS_CAVERN] =
     {
         { 6300, { 203, 21, -4, 0, 50, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Excavation Duty
-        -- Assault: Lebros Supplies
-        -- Assault: Troll Fugitives
-        -- Assault: Evade and Escape
-        -- Assault: Siegemaster Assassination
-        -- Assault: Apkallu Breeding
-        -- Assault: Wamoura Farm Raid
-        -- Assault: Egg Conservation
-        -- Assault: Operation: Black Pearl
-        -- Assault: Better Than One
     },
 
     [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
         { 6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4 }, { 511, 0 } }, -- Assault: Imperial Agent Rescue
-        -- Assault: Preemptive Strike
-        -- Assault: Sagelord Elimination
-        -- Assault: Breaking Morale
-        -- Assault: The Double Agent
-        -- Assault: Imperial Treasure Retrieval
-        -- Assault: Blitzkrieg
-        -- Assault: Marids in the Mist
-        -- Assault: Azure Ailments
-        -- Assault: The Susanoo Shuffle
     },
 
     [xi.zone.LEUJAOAM_SANCTUM] =
     {
         { 6900, { 140, 1, -4, 0, 50, 0, 1 }, { 140, 4 }, { 147, 0 } }, -- Assault: Leujaoam Cleansing
-        -- Assault: Orichalcum Survey
-        -- Assault: Escort Professor Chanoix
-        -- Assault: Shanarha Grass Conservation
-        -- Assault: Counting Sheep
-        -- Assault: Supplies Recovery
-        -- Assault: Azure Experiments
-        -- Assault: Imperial Code
-        -- Assault: Red Versus Blue
-        -- Assault: Bloody Rondo
     },
 
     [xi.zone.ZHAYOLM_REMNANTS] =
@@ -328,18 +283,22 @@ local checkEntryReqs = function(player, instanceId)
     end
 end
 
+-- Clear up after possible failed loads
+xi.instance.clearInstance = function(player)
+    player:setLocalVar('INSTANCE_REQUESTED', 0)
+    local existingInstance = player:getInstance()
+    if existingInstance then
+        existingInstance:fail()
+    end
+end
+
 xi.instance.onTrade = function(player, npc, trade)
 end
 
 xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local zoneLookup = xi.instance.lookup[instanceZoneID]
 
-    -- Clear up after possible failed loads
-    player:setLocalVar('INSTANCE_REQUESTED', 0)
-    local existingInstance = player:getInstance()
-    if existingInstance then
-        existingInstance:fail()
-    end
+    xi.instance.clearInstance(player)
 
     -- Find the first instance you're valid for
     -- TODO: Handle being valid for multiple instances from the same entrance
@@ -427,18 +386,19 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
 end
 
 -- 'Default' behavior. It's up to each instance whether or not they want to use this logic
-xi.instance.onInstanceCreatedCallback = function(player, instance)
-    local zoneLookup = xi.instance.lookup[instance:getZone():getID()]
+-- Can pass instance cutscene information directly if accessible from container, otherwise will try and find it from the player's instance
+xi.instance.onInstanceCreatedCallback = function(player, instance, entryInfo)
     local instanceId = instance:getID()
 
-    -- Collect cs for party members
-    local lookupEntry
-    for _, entry in ipairs(zoneLookup) do
-        local entryInstanceId = entry[1]
-        if instanceId == entryInstanceId then
-            lookupEntry = entry
+    if entryInfo == nil then
+        -- Collect cs for party members
+        for _, entry in ipairs(xi.instance.lookup[instance:getZone():getID()]) do
+            local entryInstanceId = entry[1]
+            if instanceId == entryInstanceId then
+                entryInfo = entry
 
-            break
+                break
+            end
         end
     end
 
@@ -457,7 +417,7 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
                     -- player will be brought into instance either way
                     -- this makes the animation trigger reliably
                     v:release()
-                    v:startEvent(unpack(lookupEntry[4]))
+                    v:startEvent(unpack(entryInfo[4]))
 
                     v:setInstance(instance)
                     local npc = player:getEventTarget()
@@ -482,7 +442,7 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
         end
 
         -- finally, send commander in
-        player:startEvent(unpack(lookupEntry[4])) -- will fail if previous event is working as it should, otherwise catches secondary event to enter
+        player:startEvent(unpack(entryInfo[4])) -- will fail if previous event is working as it should, otherwise catches secondary event to enter
         local npc = player:getEventTarget()
         if npc ~= nil then
             player:instanceEntry(npc, 4)
@@ -495,13 +455,18 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
     end
 end
 
-xi.instance.onEventFinish = function(player, csid, option, npc)
+-- Default instance behavior. Unpacks the csid and option from the lookup table.
+-- Can pass instance custcene information directly if accessible from container,
+-- otherwise will try and find it from the player's instance and a table lookup.
+xi.instance.onEventFinish = function(player, csid, option, npc, instanceInfo)
     local instance = player:getInstance()
 
     if instance then
-        local instanceZoneId         = instance:getZone():getID()
-        local zoneLookup             = xi.instance.lookup[instanceZoneId]
-        local csidEntry, optionEntry = unpack(zoneLookup[1][3])
+        if instanceInfo == nil then
+            instanceInfo = xi.instance.lookup[instance:getZoneID()][1][3]
+        end
+
+        local csidEntry, optionEntry = unpack(instanceInfo)
 
         if csid == csidEntry and option == optionEntry then
             for _, v in ipairs(player:getParty()) do

@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Leech
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
+local ID = zones[xi.zone.ILRUSI_ATOLL].mob[xi.assault.mission.EXTERMINATION]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local leechMob = GetMobByID(ID.mob.UNDEAD_LEECH, instance)
+    local leechMob = GetMobByID(ID.UNDEAD_MOBS + 1, instance)
     local randVal  = math.random(1, 5)
 
     if
@@ -24,7 +24,7 @@ entity.onMobDespawn = function(mob)
         leechMob and
         leechMob:getLocalVar('LeechSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_LEECH, instance)
+        SpawnMob(leechMob:getID(), instance)
         leechMob:setLocalVar('LeechSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

@@ -2,7 +2,7 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Slime
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
+local ID = zones[xi.zone.ILRUSI_ATOLL].mob[xi.assault.mission.EXTERMINATION]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local slimeMob = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
+    local slimeMob = GetMobByID(ID.UNDEAD_MOBS + 2, instance)
     local randVal  = math.random(1, 5)
 
     if
@@ -24,7 +24,7 @@ entity.onMobDespawn = function(mob)
         slimeMob and
         slimeMob:getLocalVar('SlimeSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_SLIME, instance)
+        SpawnMob(slimeMob:getID(), instance)
         slimeMob:setLocalVar('SlimeSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)
