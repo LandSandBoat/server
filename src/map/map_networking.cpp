@@ -126,8 +126,6 @@ void MapNetworking::tapStatistics()
 
 auto MapNetworking::doSocketsBlocking(timer::duration next) -> timer::duration
 {
-    TracyZoneScoped;
-
     const auto start = timer::now();
 
     message::handle_incoming();

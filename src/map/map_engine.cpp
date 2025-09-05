@@ -166,11 +166,17 @@ void MapEngine::gameLoop()
 
     const auto tickStart = timer::now();
     {
-        tasksDuration = gScheduler.runExpiredTasks(tickStart);
+        {
+            TracyZoneScoped;
+            tasksDuration = gScheduler.runExpiredTasks(tickStart);
+        }
 
-        // Use tick remainder for networking with a maximum to ensure that the network phase
-        // doesn't starve and a minimum to prevent bumping up against the time limit.
-        networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
+        {
+            TracyZoneScoped;
+            // Use tick remainder for networking with a maximum to ensure that the network phase
+            // doesn't starve and a minimum to prevent bumping up against the time limit.
+            networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
+        }
     }
     tickDuration = timer::now() - tickStart;
 

@@ -38,6 +38,8 @@ namespace serverutils
 
     uint32 GetServerVar(std::string const& name)
     {
+        TracyZoneScoped;
+
         const auto rset = db::preparedStmt("SELECT value, expiry FROM server_variables WHERE name = ? LIMIT 1", name);
 
         int32  value  = 0;
@@ -60,17 +62,23 @@ namespace serverutils
 
     void SetServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
+        TracyZoneScoped;
+
         PersistServerVar(name, value, expiry);
     }
 
     void SetVolatileServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
+        TracyZoneScoped;
+
         serverVarCache[name] = { value, expiry };
         serverVarChanges.insert(name);
     }
 
     int32 GetVolatileServerVar(std::string const& name)
     {
+        TracyZoneScoped;
+
         if (auto var = serverVarCache.find(name); var != serverVarCache.end())
         {
             std::pair cachedVarData = var->second;
@@ -88,6 +96,8 @@ namespace serverutils
 
     auto PersistVolatileServerVars() -> AsyncTask<void>
     {
+        TracyZoneScoped;
+
         if (serverVarChanges.empty())
         {
             co_return;
@@ -116,6 +126,8 @@ namespace serverutils
 
     void PersistServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
+        TracyZoneScoped;
+
         int32 tries  = 0;
         int32 verify = INT_MIN;
 
