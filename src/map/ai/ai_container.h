@@ -81,8 +81,10 @@ public:
     bool Internal_Respawn(timer::duration _duration);
     bool Internal_Synth(SKILLTYPE synthSkill);
 
-    void    Reset();
-    void    Tick(timer::time_point _tick);
+    void Reset();
+
+    auto Tick(timer::time_point _tick) -> Task<void>;
+
     CState* GetCurrentState();
     bool    IsStateStackEmpty();
     void    ClearStateStack();

@@ -95,6 +95,8 @@
 std::unique_ptr<SqlConnection>  _sql;
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
+extern Scheduler gScheduler;
+
 MapEngine::MapEngine(asio::io_context& io_context, MapConfig& config)
 : ioContext_(io_context)
 , mapStatistics_(std::make_unique<MapStatistics>())
@@ -164,7 +166,8 @@ void MapEngine::gameLoop()
 
     const auto tickStart = timer::now();
     {
-        tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+        tasksDuration = gScheduler.runExpiredTasks(tickStart);
+
         // Use tick remainder for networking with a maximum to ensure that the network phase
         // doesn't starve and a minimum to prevent bumping up against the time limit.
         networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
@@ -299,8 +302,8 @@ void MapEngine::do_init()
     {
         ShowInfo("do_init: loading zones");
         zoneutils::LoadZoneList(mapIPP);
-        instanceutils::LoadInstanceList(mapIPP);
-        CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+        // instanceutils::LoadInstanceList(mapIPP);
+        // CTransportHandler::getInstance()->InitializeTransport(mapIPP);
     }
 
     fishingutils::InitializeFishingSystem();
@@ -314,12 +317,13 @@ void MapEngine::do_init()
 
     if (!engineConfig_.isTestServer)
     {
-        CTaskManager::getInstance()->AddTask("map_cleanup", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 5s, std::bind(&MapEngine::map_cleanup, this, std::placeholders::_1, std::placeholders::_2));
-        CTaskManager::getInstance()->AddTask("garbage_collect", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 15min, std::bind(&MapEngine::map_garbage_collect, this, std::placeholders::_1, std::placeholders::_2));
+        gScheduler.scheduleInterval(std::chrono::seconds(5), std::bind(&MapEngine::map_cleanup, this));
+        gScheduler.scheduleInterval(std::chrono::minutes(15), std::bind(&MapEngine::map_garbage_collect, this));
     }
 
-    CTaskManager::getInstance()->AddTask("time_server", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, kTimeServerTickInterval, time_server);
-    CTaskManager::getInstance()->AddTask("persist_server_vars", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 1min, serverutils::PersistVolatileServerVars);
+    // TODO: Fix this hack
+    gScheduler.scheduleInterval(kTimeServerTickInterval, []() -> Task<void> { time_server(timer::now(), nullptr); co_return; });
+    gScheduler.scheduleInterval(1min,  []() -> Task<void> { co_await serverutils::PersistVolatileServerVars(); });
 
     zoneutils::TOTDChange(vanadiel_time::get_totd()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
 
@@ -371,7 +375,7 @@ void MapEngine::do_final() const
     luautils::cleanup();
 }
 
-auto MapEngine::map_cleanup(timer::time_point tick, CTaskManager::CTask* PTask) const -> int32
+auto MapEngine::map_cleanup() const -> Task<void>
 {
     TracyZoneScoped;
 
@@ -384,17 +388,18 @@ auto MapEngine::map_cleanup(timer::time_point tick, CTaskManager::CTask* PTask) 
     });
     // clang-format on
 
-    return 0;
+    co_return;
 }
 
-auto MapEngine::map_garbage_collect(timer::time_point tick, CTaskManager::CTask* PTask) const -> int32
+auto MapEngine::map_garbage_collect() const -> Task<void>
 {
     TracyZoneScoped;
 
     ShowInfo("CTaskManager Active Tasks: %i", CTaskManager::getInstance()->getTaskList().size());
 
     luautils::garbageCollectFull();
-    return 0;
+
+    co_return;
 }
 
 void MapEngine::onStats(std::vector<std::string>& inputs) const

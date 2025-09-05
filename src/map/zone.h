@@ -37,6 +37,8 @@
 #include "packets/weather.h"
 #include "trigger_area.h"
 
+extern Scheduler gScheduler;
+
 //
 // Forward Declarations
 //
@@ -627,8 +629,8 @@ public:
 
     weatherVector_t m_WeatherVector; // The probability of each weather type
 
-    virtual void ZoneServer(timer::time_point tick);
-    virtual void CheckTriggerAreas();
+    virtual auto ZoneServer(timer::time_point tick) -> Task<void>;
+    virtual auto CheckTriggerAreas() -> Task<void>;
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> const& func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
@@ -693,8 +695,9 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskManager::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
-    CTaskManager::CTask* ZoneTimerTriggerAreas;
+    CancellationToken zoneTimerCancellationToken_;
+    CancellationToken zoneTimerTriggerAreasCancellationToken_;
+    CancellationToken zoneTimerWeatherCancellationToken_;
 
     triggerAreaList_t m_triggerAreaList;
 

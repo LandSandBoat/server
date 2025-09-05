@@ -28,7 +28,7 @@
 #include <string>
 #include <vector>
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 #include <efsw/efsw.hpp>
 
 class Filewatcher final : public efsw::FileWatchListener

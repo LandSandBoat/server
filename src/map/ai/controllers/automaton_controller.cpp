@@ -175,12 +175,12 @@ CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
              statuses->GetEffectsCount(EFFECT_LIGHT_MANEUVER), statuses->GetEffectsCount(EFFECT_DARK_MANEUVER) };
 }
 
-void CAutomatonController::DoCombatTick(timer::time_point tick)
+auto CAutomatonController::DoCombatTick(timer::time_point tick) -> Task<void>
 {
     if ((PAutomaton->PMaster == nullptr || PAutomaton->PMaster->isDead()) && PAutomaton->isAlive())
     {
         PAutomaton->Die();
-        return;
+        co_return;
     }
 
     PTarget = static_cast<CBattleEntity*>(PAutomaton->GetEntity(PAutomaton->GetBattleTargetID()));
@@ -188,7 +188,7 @@ void CAutomatonController::DoCombatTick(timer::time_point tick)
     if (TryDeaggro())
     {
         Disengage();
-        return;
+        co_return;
     }
 
     // Automatons only attempt actions in 3 second intervals (Reduced by the Tactical Processor)
@@ -199,31 +199,31 @@ void CAutomatonController::DoCombatTick(timer::time_point tick)
         if (TryShieldBash())
         {
             m_LastShieldBashTime = m_Tick;
-            return;
+            co_return;
         }
         else if (TrySpellcast(maneuvers))
         {
             m_LastMagicTime = m_Tick;
-            return;
+            co_return;
         }
         else if (TryTPMove())
         {
-            return;
+            co_return;
         }
         else if (TryRangedAttack())
         {
             m_LastRangedTime = m_Tick;
-            return;
+            co_return;
         }
         else if (TryAttachment())
         {
-            return;
+            co_return;
         }
     }
-    Move();
+    co_await Move();
 }
 
-void CAutomatonController::Move()
+auto CAutomatonController::Move() -> Task<void>
 {
     if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
         (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
@@ -231,7 +231,7 @@ void CAutomatonController::Move()
         PAutomaton->m_Behavior &= ~BEHAVIOR_STANDBACK;
     }
 
-    CPetController::Move();
+    co_await CPetController::Move();
 }
 
 bool CAutomatonController::TryAction()

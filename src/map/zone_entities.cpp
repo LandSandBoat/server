@@ -1668,7 +1668,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     PChar->pushPacket<CWideScanPacket>(WIDESCAN_END);
 }
 
-void CZoneEntities::ZoneServer(timer::time_point tick)
+auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
     TracyZoneString(m_zone->getName());
@@ -1679,14 +1679,14 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
     // Mob tick logic
     //
 
+    size_t mobTickCount = 0;
+
     FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PMob, m_mobList)
     {
         if (!PMob)
         {
             continue;
         }
-
-        ShowTrace(fmt::format("CZoneEntities::ZoneServer: Mob: {} ({})", PMob->getName(), PMob->id).c_str());
 
         if (PMob->PBattlefield && PMob->PBattlefield->CanCleanup())
         {
@@ -1701,7 +1701,8 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
             PMob->StatusEffectContainer->TickEffects(tick);
         }
 
-        PMob->PAI->Tick(tick);
+        co_await PMob->PAI->Tick(tick);
+        mobTickCount++;
 
         // This is only valid for dynamic entities
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
@@ -1781,7 +1782,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
     {
         ShowTrace(fmt::format("CZoneEntities::ZoneServer: NPC: {} ({})", PNpc->getName(), PNpc->id).c_str());
 
-        PNpc->PAI->Tick(tick);
+        co_await PNpc->PAI->Tick(tick);
 
         // This is only valid for dynamic entities
         if (PNpc->status == STATUS_TYPE::DISAPPEAR && PNpc->m_bReleaseTargIDOnDisappear)
@@ -1832,7 +1833,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
             PPet->StatusEffectContainer->TickEffects(tick);
         }
 
-        PPet->PAI->Tick(tick);
+        co_await PPet->PAI->Tick(tick);
     }
 
     //
@@ -1851,7 +1852,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
             PTrust->StatusEffectContainer->TickEffects(tick);
         }
 
-        PTrust->PAI->Tick(tick);
+        co_await PTrust->PAI->Tick(tick);
 
         if (PTrust->status == STATUS_TYPE::DISAPPEAR)
         {
@@ -1891,7 +1892,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
                 PChar->StatusEffectContainer->TickEffects(tick);
             }
 
-            PChar->PAI->Tick(tick);
+            co_await PChar->PAI->Tick(tick);
 
             if (PChar->PTreasurePool)
             {
@@ -2069,6 +2070,8 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
     m_charsToLogout.clear();
     m_charsToWarp.clear();
     m_charsToChangeZone.clear();
+
+    co_return;
 }
 
 CZone* CZoneEntities::GetZone()

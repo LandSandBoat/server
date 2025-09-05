@@ -27,7 +27,7 @@
 #include <atomic>
 #include <memory>
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 #include <nonstd/jthread.hpp>
 #include <zmq.hpp>
 #include <zmq_addon.hpp>

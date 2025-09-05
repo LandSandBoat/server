@@ -41,8 +41,9 @@ CPlayerController::CPlayerController(CCharEntity* _PChar)
 {
 }
 
-void CPlayerController::Tick(timer::time_point /*tick*/)
+auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
 {
+    co_return;
 }
 
 bool CPlayerController::Cast(uint16 targid, SpellID spellid)

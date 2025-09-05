@@ -4973,11 +4973,13 @@ namespace luautils
         position_t   pos    = nearPosition(entity->loc.p, distance, theta);
 
         float validPos[3];
-        bool  success = entity->loc.zone->m_navMesh->findFurthestValidPoint(entity->loc.p, pos, validPos);
-        if (!success)
-        {
-            return sol::lua_nil;
-        }
+
+        // TODO: runCoroutineInline needs to support AsyncTask and forcing it inline
+        // bool success = runCoroutineInline(entity->loc.zone->m_navMesh->findFurthestValidPoint(entity->loc.p, pos, validPos));
+        // if (!success)
+        // {
+        //     return sol::lua_nil;
+        // }
 
         sol::table outPos = lua.create_table();
         outPos["x"]       = validPos[0];

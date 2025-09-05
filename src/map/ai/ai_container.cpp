@@ -412,7 +412,7 @@ void CAIContainer::Reset()
     }
 }
 
-void CAIContainer::Tick(timer::time_point _tick)
+auto CAIContainer::Tick(timer::time_point _tick) -> Task<void>
 {
     TracyZoneScoped;
     m_PrevTick = m_Tick;
@@ -429,7 +429,7 @@ void CAIContainer::Tick(timer::time_point _tick)
     bool isPathingPaused = PEntity->GetLocalVar("pauseNPCPathing");
     if (!Controller && CanFollowPath() && !isPathingPaused)
     {
-        PathFind->FollowPath(_tick);
+        co_await PathFind->FollowPath(_tick);
         if (PathFind->OnPoint())
         {
             EventHandler.triggerListener("PATH", PEntity);
@@ -439,7 +439,7 @@ void CAIContainer::Tick(timer::time_point _tick)
 
     if (Controller && Controller->canUpdate)
     {
-        Controller->Tick(_tick);
+        co_await Controller->Tick(_tick);
     }
     CState* top = nullptr;
     while (!m_stateStack.empty() && (top = m_stateStack.top().get())->DoUpdate(_tick))
@@ -453,6 +453,8 @@ void CAIContainer::Tick(timer::time_point _tick)
     }
 
     PEntity->PostTick();
+
+    co_return;
 }
 
 bool CAIContainer::IsStateStackEmpty()

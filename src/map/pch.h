@@ -84,7 +84,7 @@
 
 #include <argparse/argparse.hpp>
 #include <asio.hpp>
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 #include <nonstd/jthread.hpp>
 
 #include <fmt/chrono.h>

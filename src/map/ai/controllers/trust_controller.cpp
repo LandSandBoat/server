@@ -83,7 +83,7 @@ void CTrustController::Despawn()
     CMobController::Despawn();
 }
 
-void CTrustController::Tick(timer::time_point tick)
+auto CTrustController::Tick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
     TracyZoneString(POwner->getName());
@@ -92,7 +92,7 @@ void CTrustController::Tick(timer::time_point tick)
 
     if (!POwner->PMaster)
     {
-        return;
+        co_return;
     }
 
     if (POwner->PMaster->isCharmed)
@@ -102,15 +102,15 @@ void CTrustController::Tick(timer::time_point tick)
 
     if (POwner->PAI->IsEngaged())
     {
-        DoCombatTick(tick);
+        co_await DoCombatTick(tick);
     }
     else if (!POwner->isDead())
     {
-        DoRoamTick(tick);
+        co_await DoRoamTick(tick);
     }
 }
 
-void CTrustController::DoCombatTick(timer::time_point tick)
+auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -130,7 +130,7 @@ void CTrustController::DoCombatTick(timer::time_point tick)
     // If busy, don't run around!
     if (POwner->PAI->IsCurrentState<CMagicState>() || POwner->PAI->IsCurrentState<CRangeState>())
     {
-        return;
+        co_return;
     }
 
     CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
@@ -159,11 +159,11 @@ void CTrustController::DoCombatTick(timer::time_point tick)
                 {
                     if (currentDistanceToMaster > CastingDistance)
                     {
-                        PathOutToDistance(PTarget, 9.0f);
+                        co_await PathOutToDistance(PTarget, 9.0f);
                     }
                     else if (currentDistanceToTarget > CastingDistance)
                     {
-                        PathOutToDistance(PTarget, 9.0f);
+                        co_await PathOutToDistance(PTarget, 9.0f);
                     }
                     break;
                 }
@@ -175,9 +175,9 @@ void CTrustController::DoCombatTick(timer::time_point tick)
                         if (currentDistanceToTarget > RoamDistance)
                         {
                             if (currentDistanceToTarget < RoamDistance * 3.0f &&
-                                POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                                co_await POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                             {
-                                POwner->PAI->PathFind->FollowPath(m_Tick);
+                                co_await POwner->PAI->PathFind->FollowPath(m_Tick);
                             }
                             else if (POwner->GetSpeed() > 0)
                             {
@@ -193,29 +193,31 @@ void CTrustController::DoCombatTick(timer::time_point tick)
                     [[fallthrough]];
                 default: // Using the positive-non-zero movementDistance mobMod value
                 {
-                    PathOutToDistance(PTarget, static_cast<float>(movementDistance));
+                    co_await PathOutToDistance(PTarget, static_cast<float>(movementDistance));
                     break;
                 }
             }
 
             if (!POwner->PAI->PathFind->IsFollowingPath())
             {
-                Declump(PMaster, PTarget);
+                co_await Declump(PMaster, PTarget);
             }
         }
 
         if (!m_InTransit)
         {
-            POwner->PAI->PathFind->FollowPath(m_Tick);
+            co_await POwner->PAI->PathFind->FollowPath(m_Tick);
         }
 
         m_GambitsContainer->Tick(tick);
 
         POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
+
+    co_return;
 }
 
-void CTrustController::DoRoamTick(timer::time_point tick)
+auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -269,9 +271,9 @@ void CTrustController::DoRoamTick(timer::time_point tick)
             };
             // clang-format on
 
-            if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            if (POwner->PAI->PathFind->ValidPosition(new_pos) && co_await POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
-                POwner->PAI->PathFind->FollowPath(m_Tick);
+                co_await POwner->PAI->PathFind->FollowPath(m_Tick);
             }
             break;
         }
@@ -283,9 +285,9 @@ void CTrustController::DoRoamTick(timer::time_point tick)
     }
     else if (currentDistance > RoamDistance)
     {
-        if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        if (currentDistance < RoamDistance * 3.0f && co_await POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
-            POwner->PAI->PathFind->FollowPath(m_Tick);
+            co_await POwner->PAI->PathFind->FollowPath(m_Tick);
         }
         else if (POwner->GetSpeed() > 0)
         {
@@ -308,9 +310,11 @@ void CTrustController::DoRoamTick(timer::time_point tick)
             m_NumHealingTicks = std::clamp(m_NumHealingTicks + 1, static_cast<std::size_t>(0U), m_tickDelays.size() - 1U);
         }
     }
+
+    co_return;
 }
 
-void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
+auto CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -335,14 +339,16 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 
             if (POwner->PAI->PathFind->ValidPosition(newPos))
             {
-                POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                co_await POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
             }
             break;
         }
     }
+
+    co_return;
 }
 
-void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
+auto CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -394,13 +400,15 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     // Get somewhat close to the target destination
     if (distance(POwner->loc.p, target_position) > 2.0f && m_failedRepositionAttempts < 3)
     {
-        POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+        co_await POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN | PATHFLAG_WALLHACK);
     }
     else
     {
         FaceTarget(PTarget->targid);
         m_InTransit = false;
     }
+
+    co_return;
 }
 
 bool CTrustController::Ability(uint16 targid, uint16 abilityid)

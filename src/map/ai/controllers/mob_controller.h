@@ -35,7 +35,8 @@ class CMobController : public CController
 public:
     CMobController(CMobEntity* PEntity);
 
-    virtual void Tick(timer::time_point tick) override;
+    auto Tick(timer::time_point tick) -> Task<void> override;
+
     virtual auto Disengage() -> bool override;
     virtual auto Engage(uint16 targid) -> bool override;
     virtual void Despawn() override;
@@ -72,18 +73,21 @@ protected:
     auto         CheckDetection(CBattleEntity* PTarget) -> bool;
     virtual auto CanCastSpells() -> bool;
     void         CastSpell(SpellID spellid);
-    virtual void Move();
 
-    virtual void DoCombatTick(timer::time_point tick);
+    virtual auto Move() -> Task<void>;
+
+    virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
+
     void         FaceTarget(uint16 targid = 0) const;
     virtual void HandleEnmity();
 
-    virtual void DoRoamTick(timer::time_point tick);
-    void         Wait(timer::duration _duration);
-    void         FollowRoamPath();
-    auto         CanMoveForward(float currentDistance) -> bool;
-    auto         IsSpecialSkillReady(float currentDistance) const -> bool;
-    auto         IsSpellReady(float currentDistance) const -> bool;
+    virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
+
+    void Wait(timer::duration _duration);
+    auto FollowRoamPath() -> Task<void>;
+    auto CanMoveForward(float currentDistance) -> bool;
+    auto IsSpecialSkillReady(float currentDistance) const -> bool;
+    auto IsSpellReady(float currentDistance) const -> bool;
 
     CBattleEntity* PTarget{ nullptr };
 

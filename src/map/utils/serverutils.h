@@ -37,7 +37,7 @@ namespace serverutils
     int32 GetVolatileServerVar(std::string const& var);
     void  SetVolatileServerVar(std::string const& var, int32 value, uint32 expiry = 0);
 
-    int32 PersistVolatileServerVars(timer::time_point tick, CTaskManager::CTask* PTask);
+    auto PersistVolatileServerVars() -> AsyncTask<void>;
 } // namespace serverutils
 
 #endif // _SERVERUTILS_H

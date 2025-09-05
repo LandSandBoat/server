@@ -23,7 +23,7 @@
 
 #include "common/ipp.h"
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 #include <queue>
 
 #include "alliance.h"

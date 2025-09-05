@@ -42,26 +42,26 @@ CPlayerCharmController::~CPlayerCharmController()
     POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
 }
 
-void CPlayerCharmController::Tick(timer::time_point tick)
+auto CPlayerCharmController::Tick(timer::time_point tick) -> Task<void>
 {
     m_Tick = tick;
     if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
     {
         POwner->StatusEffectContainer->DelStatusEffect(EFFECT_CHARM);
-        return;
+        co_return;
     }
 
     if (POwner->PAI->IsEngaged())
     {
-        DoCombatTick(tick);
+        co_await DoCombatTick(tick);
     }
     else
     {
-        DoRoamTick(tick);
+        co_await DoRoamTick(tick);
     }
 }
 
-void CPlayerCharmController::DoCombatTick(timer::time_point tick)
+auto CPlayerCharmController::DoCombatTick(timer::time_point tick) -> Task<void>
 {
     if (!POwner->PMaster->PAI->IsEngaged())
     {
@@ -82,15 +82,17 @@ void CPlayerCharmController::DoCombatTick(timer::time_point tick)
             {
                 if (POwner->GetSpeed() > 0)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 2.0f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
-                    POwner->PAI->PathFind->FollowPath(m_Tick);
+                    co_await POwner->PAI->PathFind->PathAround(PTarget->loc.p, 2.0f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    co_await POwner->PAI->PathFind->FollowPath(m_Tick);
                 }
             }
         }
     }
+
+    co_return;
 }
 
-void CPlayerCharmController::DoRoamTick(timer::time_point tick)
+auto CPlayerCharmController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     if (POwner->PMaster->PAI->IsEngaged())
     {
@@ -103,9 +105,9 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick)
     {
         if (POwner->PAI->PathFind)
         {
-            if (currentDistance < 35.0f && POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            if (currentDistance < 35.0f && (co_await POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK)))
             {
-                POwner->PAI->PathFind->FollowPath(m_Tick);
+                co_await POwner->PAI->PathFind->FollowPath(m_Tick);
             }
             else if (POwner->GetSpeed() > 0)
             {
@@ -113,4 +115,6 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick)
             }
         }
     }
+
+    co_return;
 }

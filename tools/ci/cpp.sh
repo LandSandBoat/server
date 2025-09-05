@@ -21,7 +21,7 @@ target=${1:-src}
 # passByConstRef here, so we can silence this warning.
 # https://quick-bench.com/q/13EX97WSfj9-rY_98opaAwgDOQc
 
-cppcheck -v -j 4 --force --quiet --inconclusive --std=c++17 \
+cppcheck -v -j 4 --force --quiet --inconclusive --std=c++20 \
 --suppress=passedByValue:src/map/packet_system.cpp \
 --suppress=unmatchedSuppression \
 --suppress=missingIncludeSystem \

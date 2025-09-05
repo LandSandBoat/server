@@ -77,8 +77,8 @@ public:
     // Maintenance
     //
 
-    int32 map_cleanup(timer::time_point tick, CTaskManager::CTask* PTask) const; // Clean up timed out players
-    int32 map_garbage_collect(timer::time_point tick, CTaskManager::CTask* PTask) const;
+    auto map_cleanup() const -> Task<void>; // Clean up timed out players
+    auto map_garbage_collect() const -> Task<void>;
 
     //
     // Commands callbacks

@@ -198,7 +198,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->PInstance)
     {
-        if (!ZoneTimer)
+        if (!zoneTimerCancellationToken_.valid())
         {
             createZoneTimers();
         }
@@ -382,14 +382,15 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
     }
 }
 
-void CZoneInstance::ZoneServer(timer::time_point tick)
+auto CZoneInstance::ZoneServer(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
 
     std::vector<CInstance*> instancesToRemove;
     for (const auto& PInstance : m_InstanceList)
     {
-        PInstance->ZoneServer(tick);
+        co_await PInstance->ZoneServer(tick);
+
         PInstance->CheckTime(tick);
 
         if ((PInstance->Failed() || PInstance->Completed()) && PInstance->CharListEmpty())
@@ -411,7 +412,7 @@ void CZoneInstance::ZoneServer(timer::time_point tick)
     }
 }
 
-void CZoneInstance::CheckTriggerAreas()
+auto CZoneInstance::CheckTriggerAreas() -> Task<void>
 {
     TracyZoneScoped;
 
@@ -451,6 +452,8 @@ void CZoneInstance::CheckTriggerAreas()
         });
         // clang-format on
     }
+
+    co_return;
 }
 
 void CZoneInstance::ForEachChar(const std::function<void(CCharEntity*)>& func)

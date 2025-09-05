@@ -65,8 +65,8 @@ public:
     virtual bool Disengage() override;
 
 protected:
-    virtual void DoCombatTick(timer::time_point tick) override;
-    virtual void Move() override;
+    auto DoCombatTick(timer::time_point tick) -> Task<void> override;
+    auto Move() -> Task<void> override;
 
     void         setCooldowns();
     void         setMagicCooldowns();

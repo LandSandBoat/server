@@ -24,6 +24,7 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/sql.h"
+#include "common/task_manager.h"
 #include "common/timer.h"
 #include "common/utils.h"
 

@@ -113,7 +113,7 @@ void MapNetworking::tapStatistics()
     mapStatistics_.set(MapStatistics::Key::ActiveZones, activeZoneCount);
     mapStatistics_.set(MapStatistics::Key::ConnectedPlayers, playerCount);
     mapStatistics_.set(MapStatistics::Key::ActiveMobs, mobCount);
-    mapStatistics_.set(MapStatistics::Key::TaskManagerTasks, CTaskManager::getInstance()->getTaskList().size());
+    // mapStatistics_.set(MapStatistics::Key::TaskManagerTasks, CTaskManager::getInstance()->getTaskList().size());
 
     const auto percent = (static_cast<double>(dynamicTargIdCount) / static_cast<double>(dynamicTargIdCapacity)) * 100.0;
     mapStatistics_.set(MapStatistics::Key::DynamicTargIdUsagePercent, static_cast<int64>(percent));

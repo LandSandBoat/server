@@ -30,6 +30,9 @@
 #include <queue>
 #include <string>
 
+#include <corororo/corororo.h>
+using namespace CoroRoro;
+
 class CTaskManager : public Singleton<CTaskManager>
 {
 public:
@@ -97,7 +100,9 @@ public:
     void RemoveTask(std::string const& TaskName);
 
 protected:
-    CTaskManager() = default;
+    CTaskManager()
+    {
+    }
 
 private:
     TaskList_t m_TaskList;

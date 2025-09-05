@@ -154,12 +154,6 @@ void ConsoleService::registerDefaultCommands()
         fmt::print("> Application branch: {}\n", version::GetVersionString());
     });
 
-    registerCommand("tasks", "Show the current amount of tasks registered to the application task manager",
-    [](std::vector<std::string>& inputs)
-    {
-        fmt::print("> tasks registered to the application task manager: {}\n", CTaskManager::getInstance()->getTaskList().size());
-    });
-
     registerCommand("reload_settings", "Reload settings files",
     [](std::vector<std::string>& inputs)
     {

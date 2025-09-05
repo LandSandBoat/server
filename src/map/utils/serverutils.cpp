@@ -86,11 +86,11 @@ namespace serverutils
         return GetServerVar(name);
     }
 
-    int32 PersistVolatileServerVars(timer::time_point tick, CTaskManager::CTask* PTask)
+    auto PersistVolatileServerVars() -> AsyncTask<void>
     {
         if (serverVarChanges.empty())
         {
-            return 0;
+            co_return;
         }
 
         for (const auto& name : serverVarChanges)
@@ -111,7 +111,7 @@ namespace serverutils
 
         serverVarChanges.clear();
 
-        return 0;
+        co_return;
     }
 
     void PersistServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)

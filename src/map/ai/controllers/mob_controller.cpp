@@ -46,7 +46,7 @@ CMobController::CMobController(CMobEntity* PEntity)
 {
 }
 
-void CMobController::Tick(const timer::time_point tick)
+auto CMobController::Tick(const timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
     TracyZoneString(PMob->getName());
@@ -57,11 +57,11 @@ void CMobController::Tick(const timer::time_point tick)
     {
         if (PMob->PAI->IsEngaged())
         {
-            DoCombatTick(tick);
+            co_await DoCombatTick(tick);
         }
         else if (!PMob->isDead())
         {
-            DoRoamTick(tick);
+            co_await DoRoamTick(tick);
         }
     }
 }
@@ -108,11 +108,12 @@ auto CMobController::CanPursueTarget(const CBattleEntity* PTarget) const -> bool
     if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
-        if (!PMob->PAI->PathFind->InWater() && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
-        {
-            // certain weather / deodorize will turn on time deaggro
-            return !PMob->m_disableScent;
-        }
+        // const bool inWater = runCoroutineInline(PMob->PAI->PathFind->InWater());
+        // if (!inWater && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
+        // {
+        //     // certain weather / deodorize will turn on time deaggro
+        //     return !PMob->m_disableScent;
+        // }
     }
     return false;
 }
@@ -583,7 +584,7 @@ void CMobController::CastSpell(SpellID spellid)
     }
 }
 
-void CMobController::DoCombatTick(timer::time_point tick)
+auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScopedC(0xFF0000);
     if (PMob->m_OwnerID.targid != 0 && static_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid))->PClaimedMob != static_cast<CBattleEntity*>(PMob))
@@ -601,7 +602,7 @@ void CMobController::DoCombatTick(timer::time_point tick)
     if (TryDeaggro())
     {
         Disengage();
-        return;
+        co_return;
     }
 
     TryLink();
@@ -611,7 +612,7 @@ void CMobController::DoCombatTick(timer::time_point tick)
 
     if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
     {
-        return;
+        co_return;
     }
 
     if (PFollowTarget != nullptr && m_followType == FollowType::RunAway)
@@ -619,15 +620,17 @@ void CMobController::DoCombatTick(timer::time_point tick)
         if (distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRunAwayDistance)
         {
             if (!PMob->PAI->PathFind->IsFollowingPath())
-                PMob->PAI->PathFind->PathTo(PFollowTarget->loc.p);
-            PMob->PAI->PathFind->FollowPath(m_Tick);
+            {
+                co_await PMob->PAI->PathFind->PathTo(PFollowTarget->loc.p);
+            }
+            co_await PMob->PAI->PathFind->FollowPath(m_Tick);
         }
         else
         {
             PMob->PAI->EventHandler.triggerListener("RUN_AWAY", PMob, PFollowTarget);
             ClearFollowTarget();
         }
-        return;
+        co_return;
     }
 
     if (PTarget)
@@ -636,21 +639,21 @@ void CMobController::DoCombatTick(timer::time_point tick)
 
         if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
         {
-            return;
+            co_return;
         }
 
         if (IsSpellReady(currentDistance) && TryCastSpell()) // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
         {
-            return;
+            co_return;
         }
 
         if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
         {
-            return;
+            co_return;
         }
     }
 
-    Move();
+    co_await Move();
 }
 
 void CMobController::FaceTarget(const uint16 targid) const
@@ -668,17 +671,18 @@ void CMobController::FaceTarget(const uint16 targid) const
     PMob->UpdateSpeed();
 }
 
-void CMobController::Move()
+auto CMobController::Move() -> Task<void>
 {
     TracyZoneScoped;
     if (!PMob->PAI->CanFollowPath())
     {
-        return;
+        co_return;
     }
+
     if (PMob->PAI->PathFind->IsFollowingScriptedPath() && PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath(m_Tick);
-        return;
+        co_await PMob->PAI->PathFind->FollowPath(m_Tick);
+        co_return;
     }
 
     // attempt to teleport
@@ -749,7 +753,7 @@ void CMobController::Move()
                     {
                         MobSkill(PMob->targid, teleportBegin->getID());
                         m_LastSpecialTime = m_Tick;
-                        return;
+                        co_return;
                     }
                 }
                 else if (CanMoveForward(currentDistance))
@@ -760,16 +764,16 @@ void CMobController::Move()
                         if (currentDistance > (offsetMod == 0 ? PMob->GetMeleeRange() : closeDistance))
                         {
                             // try to find path towards target
-                            PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                            co_await PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                         }
                     }
                     else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 2.5f))
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        co_await PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     }
 
-                    PMob->PAI->PathFind->FollowPath(m_Tick);
+                    co_await PMob->PAI->PathFind->FollowPath(m_Tick);
 
                     if (!PMob->PAI->PathFind->IsFollowingPath())
                     {
@@ -798,7 +802,7 @@ void CMobController::Move()
 
                                     if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                     {
-                                        PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                                        co_await PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                                         needToMove = true;
                                     }
                                     break;
@@ -829,6 +833,8 @@ void CMobController::Move()
     {
         FaceTarget();
     }
+
+    co_return;
 }
 
 void CMobController::HandleEnmity()
@@ -904,14 +910,14 @@ void CMobController::HandleEnmity()
     }
 }
 
-void CMobController::DoRoamTick(timer::time_point tick)
+auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScopedC(0x00FF00);
     // If there's someone on our enmity list, go from roaming -> engaging
     if (PMob->PEnmityContainer->GetHighestEnmity() != nullptr && !(PMob->m_roamFlags & ROAMFLAG_IGNORE))
     {
         Engage(PMob->PEnmityContainer->GetHighestEnmity()->targid);
-        return;
+        co_return;
     }
     else if (PMob->m_OwnerID.id != 0 && !(PMob->m_roamFlags & ROAMFLAG_IGNORE))
     {
@@ -923,13 +929,13 @@ void CMobController::DoRoamTick(timer::time_point tick)
             Engage(PTarget->targid);
         }
 
-        return;
+        co_return;
     }
     // TODO
     else if (PMob->GetDespawnTime() > timer::time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
-        return;
+        co_return;
     }
 
     if (PMob->m_roamFlags & ROAMFLAG_IGNORE)
@@ -940,8 +946,8 @@ void CMobController::DoRoamTick(timer::time_point tick)
 
     if (PFollowTarget != nullptr && m_followType == FollowType::Roam && distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRoamDistance)
     {
-        PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
-        PMob->PAI->PathFind->FollowPath(m_Tick);
+        co_await PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+        co_await PMob->PAI->PathFind->FollowPath(m_Tick);
     }
 
     if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(MOBMOD_NO_REST) == 0 && PMob->CanRest())
@@ -972,12 +978,12 @@ void CMobController::DoRoamTick(timer::time_point tick)
 
         if (PMob->PAI->PathFind->IsFollowingPath())
         {
-            FollowRoamPath();
+            co_await FollowRoamPath();
         }
         else if (PMob->PAI->PathFind->IsPatrolling())
         {
             PMob->PAI->PathFind->ResumePatrol();
-            FollowRoamPath();
+            co_await FollowRoamPath();
         }
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
         {
@@ -995,16 +1001,16 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 {
                     PMob->m_IsPathingHome = true;
                     // walk back to spawn if too far away
-                    if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                    if (!PMob->PAI->PathFind->IsFollowingPath() && !(co_await PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint)))
                     {
-                        PMob->PAI->PathFind->PathInRange(PMob->m_SpawnPoint, PMob->m_maxRoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                        co_await PMob->PAI->PathFind->PathInRange(PMob->m_SpawnPoint, PMob->m_maxRoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                     }
 
                     // limit total path to just 10 or
                     // else we'll move straight back to spawn
                     PMob->PAI->PathFind->LimitDistance(10.0f);
 
-                    FollowRoamPath();
+                    co_await FollowRoamPath();
 
                     // move back every 5 seconds
                     m_LastActionTime = m_Tick - (std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)) + 10s);
@@ -1012,7 +1018,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !settings::get<bool>("map.MOB_NO_DESPAWN"))
                 {
                     PMob->PAI->Despawn();
-                    return;
+                    co_return;
                 }
             }
             else
@@ -1045,7 +1051,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
-                else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
+                else if (PMob->CanRoam() && co_await PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
                 {
                     // TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
@@ -1068,7 +1074,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                     }
                     else
                     {
-                        FollowRoamPath();
+                        co_await FollowRoamPath();
                     }
                 }
                 else
@@ -1084,6 +1090,8 @@ void CMobController::DoRoamTick(timer::time_point tick)
         luautils::OnMobRoam(PMob);
         m_LastRoamScript = m_Tick;
     }
+
+    co_return;
 }
 
 void CMobController::Wait(timer::duration _duration)
@@ -1098,12 +1106,12 @@ void CMobController::Wait(timer::duration _duration)
     }
 }
 
-void CMobController::FollowRoamPath()
+auto CMobController::FollowRoamPath() -> Task<void>
 {
     TracyZoneScoped;
     if (PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath(m_Tick);
+        co_await PMob->PAI->PathFind->FollowPath(m_Tick);
 
         CBattleEntity* PPet = PMob->PPet;
         if (PPet != nullptr && PPet->PAI->IsSpawned() && !PPet->PAI->IsEngaged())
@@ -1111,7 +1119,7 @@ void CMobController::FollowRoamPath()
             // pet should follow me if roaming
             position_t targetPoint = nearPosition(PMob->loc.p, 2.1f, (float)M_PI);
 
-            PPet->PAI->PathFind->PathTo(targetPoint);
+            co_await PPet->PAI->PathFind->PathTo(targetPoint);
         }
 
         // if I just finished reset my last action time
@@ -1142,6 +1150,8 @@ void CMobController::FollowRoamPath()
             luautils::OnPath(PMob);
         }
     }
+
+    co_return;
 }
 
 void CMobController::Despawn()

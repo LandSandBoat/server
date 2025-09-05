@@ -24,6 +24,7 @@
 
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/task_manager.h"
 #include "common/timer.h"
 
 #include <vector>
@@ -54,15 +55,16 @@ public:
     ~CPathFind();
 
     // move to a random point around given point
-    bool RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags = 0);
+    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags = 0) -> Task<bool>;
 
     // find and walk to the given point
-    bool PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true);
+    auto PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true) -> Task<bool>;
+
     // walk to the given point until in range
-    bool PathInRange(const position_t& point, float range, uint8 pathFlags = 0, bool clear = true);
+    auto PathInRange(const position_t& point, float range, uint8 pathFlags = 0, bool clear = true) -> Task<bool>;
 
     // move some where around the point
-    bool PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags = 0);
+    auto PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags = 0) -> Task<bool>;
 
     // walk through the given points. No new points made.
     bool PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags = 0);
@@ -74,7 +76,7 @@ public:
     void ResumePatrol();
 
     // moves mob to next point
-    void FollowPath(timer::time_point tick);
+    auto FollowPath(timer::time_point tick) -> Task<void>;
 
     // returns true if entity is on a way point
     bool OnPoint() const;
@@ -108,7 +110,7 @@ public:
     bool AtPoint(const position_t& pos);
 
     // returns true if i'm in water
-    bool InWater();
+    auto InWater() -> Task<bool>;
 
     // returns the final destination of the current path
     const position_t& GetDestination() const;
@@ -121,18 +123,18 @@ public:
 
 private:
     // find a valid path using polys
-    bool FindPath(const position_t& start, const position_t& end);
+    auto FindPath(const position_t& start, const position_t& end) -> Task<bool>;
 
     // cut some corners and find the fastest path
     // this will make the mob run down cliffs
-    bool FindClosestPath(const position_t& start, const position_t& end);
+    auto FindClosestPath(const position_t& start, const position_t& end) -> Task<bool>;
 
     // finds a random path around the given point
-    bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags);
+    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> Task<bool>;
 
     void AddPoints(std::vector<pathpoint_t>&& points, bool reverse = false);
 
-    void FinishedPath();
+    auto FinishedPath() -> Task<void>;
 
     CBaseEntity*             m_POwner;
     std::vector<pathpoint_t> m_points;

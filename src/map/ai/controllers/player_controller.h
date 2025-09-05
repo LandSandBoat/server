@@ -35,7 +35,7 @@ public:
     {
     }
 
-    virtual void Tick(timer::time_point) override;
+    virtual auto Tick(timer::time_point) -> Task<void> override;
 
     virtual bool Cast(uint16 targid, SpellID spellid) override;
     virtual bool Engage(uint16 targid) override;

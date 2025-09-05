@@ -3,7 +3,7 @@
 # add_subdirectory(mariadbcpp) # Handled globally
 # add_subdirectory(zmq) # Handled globally
 # add_subdirectory(openssl) # Handled globally
-add_subdirectory(concurrentqueue)
+# add_subdirectory(concurrentqueue)
 add_subdirectory(sol)
 
 # CPM Modules
@@ -236,10 +236,18 @@ CPMAddPackage(
     GIT_TAG 1a1824df7ac798177a521eed952720681b0bf482
 ) # defines: magic_enum
 
+CPMAddPackage(
+    NAME Coro-Roro
+    GITHUB_REPOSITORY zach2good/Coro-Roro
+    GIT_TAG fc988944dd384a731adb38bc45bf228fa4aefc9f
+    OPTIONS
+        "ENABLE_TESTS OFF"
+) # defines: Coro-Roro and concurrentqueue
+
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
-    concurrentqueue
+    # concurrentqueue
     mariadbclient
     mariadbcpp
     sol2_single
@@ -251,6 +259,7 @@ set(SHARED_EXTERNAL_LIBS
     asio
     alpaca
     magic_enum
+    Coro-Roro
 )
 
 if(WIN32)

@@ -32,16 +32,18 @@ public:
     CPlayerCharmController(CCharEntity*);
     virtual ~CPlayerCharmController();
 
-    virtual void Tick(timer::time_point) override;
+    auto Tick(timer::time_point) -> Task<void> override;
 
     virtual bool Cast(uint16 targid, SpellID spellid) override
     {
         return false;
     }
+
     virtual bool ChangeTarget(uint16 targid) override
     {
         return false;
     }
+
     virtual bool WeaponSkill(uint16 targid, uint16 wsid) override
     {
         return false;
@@ -51,6 +53,7 @@ public:
     {
         return false;
     }
+
     virtual bool RangedAttack(uint16 targid) override
     {
         return false;
@@ -58,8 +61,9 @@ public:
 
 private:
     static constexpr float RoamDistance{ 2.1f };
-    void                   DoCombatTick(timer::time_point tick);
-    void                   DoRoamTick(timer::time_point tick);
+
+    auto DoCombatTick(timer::time_point tick) -> Task<void>;
+    auto DoRoamTick(timer::time_point tick) -> Task<void>;
 };
 
 #endif // _PLAYERCONTROLLER

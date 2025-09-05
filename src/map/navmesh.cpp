@@ -245,14 +245,14 @@ void CNavMesh::unload()
     m_navMesh = nullptr;
 }
 
-auto CNavMesh::findPath(const position_t& start, const position_t& end) const -> std::vector<pathpoint_t>
+auto CNavMesh::findPath(position_t start, position_t end) const -> AsyncTask<std::vector<pathpoint_t>>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
         DebugNavmesh("CNavMesh::findPath No navmesh loaded (%u)", m_zoneID);
-        return {};
+        co_return {};
     }
 
     DebugNavmesh("CNavMesh::findPath (%f, %f, %f) -> (%f, %f, %f) (zone: %u) (MAX_NAV_POLYS: %u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID, MAX_NAV_POLYS);
@@ -280,7 +280,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     {
         DebugNavmesh("CNavMesh::findPath start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return {};
+        co_return {};
     }
 
     // Validate epos into endRef and eNearestPoint
@@ -289,7 +289,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     {
         ShowError("CNavMesh::findPath end point invalid (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return {};
+        co_return {};
     }
 
     // TODO: Do we need these isValidPolyRef checks? We've just found the nearest polys and checked them with dtStatusFailed.
@@ -298,14 +298,14 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     if (!m_navMesh->isValidPolyRef(startRef))
     {
         DebugNavmesh("CNavMesh::findPath Start poly invalid: (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
-        return {};
+        co_return {};
     }
 
     // Make sure the end poly is valid
     if (!m_navMesh->isValidPolyRef(endRef))
     {
         DebugNavmesh("CNavMesh::findPath End poly invalid: (%f, %f, %f) (%u)", end.x, end.y, end.z, m_zoneID);
-        return {};
+        co_return {};
     }
 
     // First, we're going to build up a list of polys that make up the path
@@ -317,7 +317,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     {
         ShowError("CNavMesh::findPath findPath error (%u)", m_zoneID);
         ShowError(detourStatusString(status));
-        return {};
+        co_return {};
     }
 
     // At this point, findPath() has generated a list of polys that make up a path, but these polys aren't guaranteed to contain a complete path
@@ -327,7 +327,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     if (pathPolyCount <= 0)
     {
         ShowError("CNavMesh::findPath Unable to generate polys for path (%f, %f, %f)->(%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
-        return {};
+        co_return {};
     }
 
     // Find the best straight path possible between sNearestPoint and eNearestPoint within the bounds of all the polys in pathPolys.
@@ -346,7 +346,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     {
         ShowError("CNavMesh::findPath findStraightPath error (%u)", m_zoneID);
         ShowError(detourStatusString(status));
-        return {};
+        co_return {};
     }
 
     // Now that we have list of sequential positions in straightPath, we need to check to see if eNearestPoint is the final point. If it isn't we've been given a partial path.
@@ -380,7 +380,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
     // We have now exhausted our path, return empty results.
     if (straightPathCount <= 1)
     {
-        return {};
+        co_return {};
     }
 
     // TODO: Detect local minima and re-try pathing with a larger buffer.
@@ -400,19 +400,22 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) const ->
         outPoints.emplace_back(pathpoint_t{ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0s, false });
     }
 
-    return outPoints;
+    co_return outPoints;
 }
 
-auto CNavMesh::findRandomPosition(const position_t& start, float maxRadius) const -> std::pair<int16, position_t>
+auto CNavMesh::findRandomPosition(position_t start, float maxRadius) const -> AsyncTask<std::pair<int16, position_t>>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
-        return {};
+        co_return {};
     }
 
     DebugNavmesh("CNavMesh::findRandomPosition (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
+
+    dtNavMeshQuery navMeshQuery;
+    navMeshQuery.init(m_navMesh, MAX_NAV_POLYS);
 
     dtStatus status = 0;
 
@@ -429,23 +432,23 @@ auto CNavMesh::findRandomPosition(const position_t& start, float maxRadius) cons
     dtPolyRef startRef  = 0;
     dtPolyRef randomRef = 0;
 
-    status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
+    status = navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 
     if (dtStatusFailed(status))
     {
         ShowError("CNavMesh::findRandomPosition start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return std::make_pair(ERROR_NEARESTPOLY, position_t{});
+        co_return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
     if (!m_navMesh->isValidPolyRef(startRef))
     {
         DebugNavmesh("CNavMesh::findRandomPosition startRef is invalid (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
-        return std::make_pair(ERROR_NEARESTPOLY, position_t{});
+        co_return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
     // clang-format off
-    status = m_navMeshQuery.findRandomPointAroundCircle(
+    status = navMeshQuery.findRandomPointAroundCircle(
         startRef, spos, maxRadius, &filter,
         []() -> float
         {
@@ -458,23 +461,23 @@ auto CNavMesh::findRandomPosition(const position_t& start, float maxRadius) cons
     {
         ShowError("CNavMesh::findRandomPosition Error (%u)", m_zoneID);
         ShowError(detourStatusString(status));
-        return std::make_pair(ERROR_NEARESTPOLY, position_t{});
+        co_return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
     CNavMesh::ToFFXIPos(randomPt);
 
-    return std::make_pair(0, position_t{ randomPt[0], randomPt[1], randomPt[2], 0, 0 });
+    co_return std::make_pair(0, position_t{ randomPt[0], randomPt[1], randomPt[2], 0, 0 });
 }
 
-auto CNavMesh::inWater(const position_t& point) const -> bool
+auto CNavMesh::inWater(const position_t& point) const -> Task<bool>
 {
     if (!m_navMesh)
     {
-        return false;
+        co_return false;
     }
 
     // TODO:
-    return false;
+    co_return false;
 }
 
 auto CNavMesh::validPosition(const position_t& position) const -> bool
@@ -509,13 +512,13 @@ auto CNavMesh::validPosition(const position_t& position) const -> bool
     return m_navMesh->isValidPolyRef(startRef);
 }
 
-auto CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint) const -> bool
+auto CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint) const -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
-        return true;
+        co_return true;
     }
 
     DebugNavmesh("CNavMesh::findClosestValidPoint (%f, %f, %f) (%u)", position.x, position.y, position.z, m_zoneID);
@@ -533,20 +536,20 @@ auto CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
 
     if (dtStatusFailed(status))
     {
-        return false;
+        co_return false;
     }
 
     CNavMesh::ToFFXIPos(validPoint);
-    return true;
+    co_return true;
 }
 
-auto CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint) const -> bool
+auto CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint) const -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
-        return true;
+        co_return true;
     }
 
     DebugNavmesh("CNavMesh::findFurthestValidPoint (%f, %f, %f) -> (%f, %f, %f) (%u)", startPosition.x, startPosition.y, startPosition.z, endPosition.x, endPosition.y, endPosition.z, m_zoneID);
@@ -564,7 +567,7 @@ auto CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, largePolyPickExt, &filter, &startRef, validStartPoint);
     if (dtStatusFailed(status))
     {
-        return false;
+        co_return false;
     }
 
     dtPolyRef visited[MAX_QUERY_POLYS];
@@ -577,11 +580,11 @@ auto CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
 
     if (dtStatusFailed(status))
     {
-        return false;
+        co_return false;
     }
 
     CNavMesh::ToFFXIPos(validEndPoint);
-    return true;
+    co_return true;
 }
 
 auto CNavMesh::snapToValidPosition(position_t& position) const -> void
@@ -624,13 +627,13 @@ auto CNavMesh::snapToValidPosition(position_t& position) const -> void
     }
 }
 
-auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter) const -> bool
+auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter) const -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
     if (!m_navMesh)
     {
-        return true;
+        co_return true;
     }
 
     DebugNavmesh("CNavMesh::onSameFloor (%f, %f, %f) -> (%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
@@ -639,7 +642,7 @@ auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     if (verticalDistance > 2 * verticalLimit)
     {
         // Too far away, abort check
-        return false;
+        co_return false;
     }
     else if (verticalDistance > verticalLimit)
     {
@@ -653,7 +656,7 @@ auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         {
             ShowError("CNavMesh::Bad vertical polygon query (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
             ShowError(detourStatusString(status));
-            return false;
+            co_return false;
         }
 
         // Collect the heights of queried polygons
@@ -681,26 +684,26 @@ auto CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
             // if we are within verticalLimitTrunc of a point, that's our closest.
             if (startHeight != endHeight)
             {
-                return false;
+                co_return false;
             }
         }
     }
 
-    return true;
+    co_return true;
 }
 
-auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> bool
+auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
     if (start.x == end.x && start.y == end.y && start.z == end.z)
     {
-        return true;
+        co_return true;
     }
 
     if (!m_navMesh)
     {
-        return true;
+        co_return true;
     }
 
     DebugNavmesh("CNavMesh::raycast (%f, %f, %f) -> (%f, %f, %f) (%u)", start.x, start.y, start.z, end.x, end.y, end.z, m_zoneID);
@@ -722,9 +725,9 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
     // you from above/below and then wallhack their way to you. To get around this, we're
     // going to query in a small column for polys above and below and then test against
     // the results.
-    if (!onSameFloor(start, spos, end, epos, filter))
+    if (!co_await onSameFloor(start, spos, end, epos, filter))
     {
-        return false;
+        co_return false;
     }
 
     dtPolyRef startRef = 0;
@@ -736,13 +739,13 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
     {
         ShowError("CNavMesh::raycast start point invalid (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return true;
+        co_return true;
     }
 
     if (!m_navMesh->isValidPolyRef(startRef))
     {
         DebugNavmesh("CNavMesh::raycast startRef is invalid (%f, %f, %f) (%u)", start.x, start.y, start.z, m_zoneID);
-        return true;
+        co_return true;
     }
 
     dtPolyRef endRef = 0;
@@ -754,13 +757,13 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
     {
         ShowError("CNavMesh::raycast end point invalid (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return true;
+        co_return true;
     }
 
     if (!m_navMesh->isValidPolyRef(endRef))
     {
         DebugNavmesh("CNavMesh::raycast endRef is invalid (%f, %f, %f) (%u)", end.x, end.y, end.z, m_zoneID);
-        return true;
+        co_return true;
     }
 
     float distanceToWall = 0.0f;
@@ -773,7 +776,7 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
     {
         ShowError("CNavMesh::raycast findDistanceToWall failed (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return true;
+        co_return true;
     }
 
     // There is a tiny strip of walkable map at the very edge of walls that
@@ -790,7 +793,7 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
         {
             ShowError("CNavMesh::raycast closestPointOnPolyBoundary failed (%u)", m_zoneID);
             ShowError(detourStatusString(status));
-            return true;
+            co_return true;
         }
     }
 
@@ -806,9 +809,9 @@ auto CNavMesh::raycast(const position_t& start, const position_t& end) const -> 
     {
         ShowError("CNavMesh::raycast raycast failed (%f, %f, %f)->(%f, %f, %f) (%u)", spos[0], spos[1], spos[2], epos[0], epos[1], epos[2], m_zoneID);
         ShowError(detourStatusString(status));
-        return true;
+        co_return true;
     }
 
     // no wall was hit
-    return raycastHit.t == FLT_MAX;
+    co_return raycastHit.t == FLT_MAX;
 }
