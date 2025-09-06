@@ -5046,7 +5046,15 @@ namespace charutils
         {
             // Apply retention percent
             exploss = (uint16)(exploss * (1 - retainPercent));
-            exploss = (uint16)(exploss * settings::get<float>("map.EXP_LOSS_RATE"));
+
+            if (PChar->getCharVar("MentorFlag") == 1)
+            {
+                exploss = (uint16)(exploss * settings::get<float>("map.MENTOR_EXP_LOSS_RATE"));
+            }
+            else
+            {
+                exploss = (uint16)(exploss * settings::get<float>("map.EXP_LOSS_RATE"));
+            }
         }
 
         // Save exp lost.
@@ -5139,7 +5147,14 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
+            if (PChar->getCharVar("MentorFlag") == 1)
+            {
+                exp = (uint16)(exp * settings::get<float>("map.MENTOR_EXP_RATE"));
+            }
+            else
+            {
+                exp = (uint16)(exp * settings::get<float>("map.EXP_RATE"));
+            }
         }
         uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
         bool   onLimitMode = false;

@@ -44,7 +44,7 @@ xi.settings.map =
     AH_BASE_FEE_STACKS = 4,
     AH_TAX_RATE_SINGLE = 1.0,
     AH_TAX_RATE_STACKS = 0.5,
-    AH_MAX_FEE         = 10000,
+    AH_MAX_FEE         = 40000,
 
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
@@ -58,9 +58,13 @@ xi.settings.map =
     ENMITY_CAP = 30000,
 
     -- Misc EXP related settings
-    EXP_RATE                = 1.0,
-    EXP_LOSS_RATE           = 1.0,
+    EXP_RATE                = 4.0,
+    EXP_LOSS_RATE           = 3.0,
     EXP_PARTY_GAP_PENALTIES = true,
+
+    -- Era custom Mentor EXP settings
+    MENTOR_EXP_RATE         = 1.0,
+    MENTOR_EXP_LOSS_RATE    = 1.0,
 
     -- A party member's experience points are nullified if the level difference with the highest-level party member exceeds this value.
     -- When set to 0, there is no nullification of EXP regardless of how wide the gap is between party members.
@@ -111,7 +115,7 @@ xi.settings.map =
     ALL_JOBS_WIDESCAN = true,
 
     -- Base player movement speed
-    BASE_SPEED = 50,
+    BASE_SPEED = 60,
 
     -- Player movement speed limit
     SPEED_LIMIT = 80,
