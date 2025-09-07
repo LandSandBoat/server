@@ -160,6 +160,8 @@ void MapEngine::prepareWatchdog()
 
 void MapEngine::gameLoop()
 {
+    TracyZoneScoped;
+
     timer::duration tasksDuration;
     timer::duration networkDuration;
     timer::duration tickDuration;
@@ -168,7 +170,7 @@ void MapEngine::gameLoop()
     {
         {
             TracyZoneScoped;
-            tasksDuration = gScheduler.runExpiredTasks(tickStart);
+            tasksDuration = gScheduler.runExpiredTasks();
         }
 
         {
@@ -323,13 +325,24 @@ void MapEngine::do_init()
 
     if (!engineConfig_.isTestServer)
     {
-        gScheduler.scheduleInterval(std::chrono::seconds(5), std::bind(&MapEngine::map_cleanup, this));
-        gScheduler.scheduleInterval(std::chrono::minutes(15), std::bind(&MapEngine::map_garbage_collect, this));
+        mapCleanupCancellationToken_        = gScheduler.scheduleInterval(std::chrono::seconds(5), std::bind(&MapEngine::map_cleanup, this));
+        mapGarbageCollectCancellationToken_ = gScheduler.scheduleInterval(std::chrono::minutes(15), std::bind(&MapEngine::map_garbage_collect, this));
     }
 
-    // TODO: Fix this hack
-    gScheduler.scheduleInterval(kTimeServerTickInterval, []() -> Task<void> { time_server(timer::now(), nullptr); co_return; });
-    gScheduler.scheduleInterval(1min,  []() -> Task<void> { co_await serverutils::PersistVolatileServerVars(); });
+    timeServerCancellationToken_ = gScheduler.scheduleInterval(
+        kTimeServerTickInterval,
+        []() -> Task<void>
+        {
+            time_server(timer::now(), nullptr);
+            co_return;
+        });
+
+    persistVolatileServerVarsCancellationToken_ = gScheduler.scheduleInterval(
+        1min,
+        []() -> Task<void>
+        {
+            co_await serverutils::PersistVolatileServerVars();
+        });
 
     zoneutils::TOTDChange(vanadiel_time::get_totd()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
 

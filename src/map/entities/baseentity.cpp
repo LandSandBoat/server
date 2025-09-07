@@ -182,10 +182,10 @@ bool CBaseEntity::CanSeeTarget(const position_t& targetPointBase, bool fallbackN
     {
         return loc.zone->lineOfSight->CanEntitySee(this, targetPointBase);
     }
-    // else if (fallbackNavMesh && loc.zone->m_navMesh)
-    // {   // TODO: runCoroutineInline needs to support AsyncTask and forcing it inline
-    //     return runCoroutineInline(loc.zone->m_navMesh->raycast(loc.p, targetPointBase));
-    // }
+    else if (fallbackNavMesh && loc.zone->m_navMesh)
+    {
+        return runTaskInline(loc.zone->m_navMesh->raycast(loc.p, targetPointBase));
+    }
 
     return true;
 }

@@ -591,7 +591,7 @@ public:
     bool IsWeatherStatic() const;
     bool CanUseMisc(uint16 misc) const;
     void SetWeather(WEATHER weatherCondition);
-    void UpdateWeather();
+    auto UpdateWeather() -> Task<void>;
     bool CheckMobsPathedBack();
 
     virtual void SpawnPCs(CCharEntity* PChar);

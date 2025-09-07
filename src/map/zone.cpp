@@ -32,6 +32,7 @@
 #include "common/vana_time.h"
 
 #include <cstring>
+#include <thread>
 
 #include "battlefield.h"
 #include "common/vana_time.h"
@@ -60,7 +61,7 @@
 #include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
 
-Scheduler gScheduler = Scheduler(4);
+Scheduler gScheduler = Scheduler(static_cast<size_t>(std::thread::hardware_concurrency()) - 1U);
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
@@ -556,7 +557,7 @@ void CZone::SetWeather(WEATHER weather)
     m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<CWeatherPacket>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
 }
 
-void CZone::UpdateWeather()
+auto CZone::UpdateWeather() -> Task<void>
 {
     TracyZoneScoped;
 
@@ -623,19 +624,13 @@ void CZone::UpdateWeather()
     SetWeather((WEATHER)Weather);
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
-    timer::duration   timeToNextWeatherTick = std::chrono::duration_cast<earth_time::duration>(WeatherNextUpdate);
-    timer::time_point nextWeatherTick       = timer::now() + timeToNextWeatherTick;
-
+    // Cue up next weather change
+    const auto timeToNextWeatherTick   = std::chrono::duration_cast<earth_time::duration>(WeatherNextUpdate);
+    const auto nextWeatherTick         = timer::now() + timeToNextWeatherTick;
     zoneTimerWeatherCancellationToken_ = gScheduler.scheduleAt(
-        nextWeatherTick,
-        [this]() -> Task<void>
-        {
-            if (!IsWeatherStatic())
-            {
-                UpdateWeather();
-            }
-            co_return;
-        });
+        nextWeatherTick, std::bind(&CZone::UpdateWeather, this));
+
+    co_return;
 }
 
 bool CZone::CheckMobsPathedBack()

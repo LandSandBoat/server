@@ -75,7 +75,7 @@ namespace zoneutils
         {
             if (!PZone->IsWeatherStatic())
             {
-                PZone->UpdateWeather();
+                gScheduler.schedule(PZone->UpdateWeather());
             }
             else
             {

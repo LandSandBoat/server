@@ -1912,8 +1912,8 @@ void CLuaBaseEntity::pathTo(float x, float y, float z, sol::object const& flags)
 
     if (m_PBaseEntity->PAI->PathFind)
     {
-        // uint8 pathFlags = (flags != sol::lua_nil) ? flags.as<uint8>() : (PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SCRIPT);
-        // runCoroutineInline(m_PBaseEntity->PAI->PathFind->PathTo(point, pathFlags));
+        uint8 pathFlags = (flags != sol::lua_nil) ? flags.as<uint8>() : (PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SCRIPT);
+        runTaskInline(m_PBaseEntity->PAI->PathFind->PathTo(point, pathFlags));
     }
 }
 

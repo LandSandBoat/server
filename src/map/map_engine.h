@@ -106,4 +106,9 @@ private:
     std::unique_ptr<MapNetworking> networking_;
     std::unique_ptr<Watchdog>      watchdog_;
     MapConfig&                     engineConfig_;
+
+    CancellationToken mapCleanupCancellationToken_;
+    CancellationToken mapGarbageCollectCancellationToken_;
+    CancellationToken timeServerCancellationToken_;
+    CancellationToken persistVolatileServerVarsCancellationToken_;
 };

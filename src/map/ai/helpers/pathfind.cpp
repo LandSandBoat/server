@@ -71,7 +71,7 @@ CPathFind::~CPathFind()
     Clear();
 }
 
-auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> Task<bool>
+auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> AsyncTask<bool>
 {
     TracyZoneScoped;
     Clear();
@@ -105,7 +105,7 @@ auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
     co_return true;
 }
 
-auto CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear) -> Task<bool>
+auto CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear) -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
@@ -155,7 +155,7 @@ auto CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear) -> 
     co_return true;
 }
 
-auto CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlags /*= 0*/, bool clear /*= true*/) -> Task<bool>
+auto CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlags /*= 0*/, bool clear /*= true*/) -> AsyncTask<bool>
 {
     TracyZoneScoped;
     if (clear)
@@ -172,7 +172,7 @@ auto CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     co_return result;
 }
 
-auto CPathFind::PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags) -> Task<bool>
+auto CPathFind::PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags) -> AsyncTask<bool>
 {
     TracyZoneScoped;
     Clear();
@@ -282,7 +282,7 @@ void CPathFind::PrunePathWithin(float within)
     }
 }
 
-auto CPathFind::FollowPath(timer::time_point tick) -> Task<void>
+auto CPathFind::FollowPath(timer::time_point tick) -> AsyncTask<void>
 {
     TracyZoneScoped;
     if (!IsFollowingPath())
@@ -455,7 +455,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
     m_POwner->updatemask |= UPDATE_POS;
 }
 
-auto CPathFind::FindPath(const position_t& start, const position_t& end) -> Task<bool>
+auto CPathFind::FindPath(const position_t& start, const position_t& end) -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
@@ -481,7 +481,7 @@ auto CPathFind::FindPath(const position_t& start, const position_t& end) -> Task
     co_return true;
 }
 
-auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> Task<bool>
+auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
@@ -532,7 +532,7 @@ auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     co_return !m_points.empty();
 }
 
-auto CPathFind::FindClosestPath(const position_t& start, const position_t& end) -> Task<bool>
+auto CPathFind::FindClosestPath(const position_t& start, const position_t& end) -> AsyncTask<bool>
 {
     TracyZoneScoped;
 
@@ -668,7 +668,7 @@ void CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse)
     }
 }
 
-auto CPathFind::FinishedPath() -> Task<void>
+auto CPathFind::FinishedPath() -> AsyncTask<void>
 {
     m_currentTurn++;
 

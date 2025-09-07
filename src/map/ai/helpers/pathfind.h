@@ -55,16 +55,16 @@ public:
     ~CPathFind();
 
     // move to a random point around given point
-    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags = 0) -> Task<bool>;
+    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags = 0) -> AsyncTask<bool>;
 
     // find and walk to the given point
-    auto PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true) -> Task<bool>;
+    auto PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true) -> AsyncTask<bool>;
 
     // walk to the given point until in range
-    auto PathInRange(const position_t& point, float range, uint8 pathFlags = 0, bool clear = true) -> Task<bool>;
+    auto PathInRange(const position_t& point, float range, uint8 pathFlags = 0, bool clear = true) -> AsyncTask<bool>;
 
     // move some where around the point
-    auto PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags = 0) -> Task<bool>;
+    auto PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags = 0) -> AsyncTask<bool>;
 
     // walk through the given points. No new points made.
     bool PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags = 0);
@@ -76,7 +76,7 @@ public:
     void ResumePatrol();
 
     // moves mob to next point
-    auto FollowPath(timer::time_point tick) -> Task<void>;
+    auto FollowPath(timer::time_point tick) -> AsyncTask<void>;
 
     // returns true if entity is on a way point
     bool OnPoint() const;
@@ -123,18 +123,18 @@ public:
 
 private:
     // find a valid path using polys
-    auto FindPath(const position_t& start, const position_t& end) -> Task<bool>;
+    auto FindPath(const position_t& start, const position_t& end) -> AsyncTask<bool>;
 
     // cut some corners and find the fastest path
     // this will make the mob run down cliffs
-    auto FindClosestPath(const position_t& start, const position_t& end) -> Task<bool>;
+    auto FindClosestPath(const position_t& start, const position_t& end) -> AsyncTask<bool>;
 
     // finds a random path around the given point
-    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> Task<bool>;
+    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags) -> AsyncTask<bool>;
 
     void AddPoints(std::vector<pathpoint_t>&& points, bool reverse = false);
 
-    auto FinishedPath() -> Task<void>;
+    auto FinishedPath() -> AsyncTask<void>;
 
     CBaseEntity*             m_POwner;
     std::vector<pathpoint_t> m_points;

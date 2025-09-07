@@ -17,16 +17,17 @@ if(TRACY_ENABLE)
         GITHUB_REPOSITORY wolfpld/tracy
         GIT_TAG v${TRACY_VERSION}
         OPTIONS
-            "TRACY_ENABLE ON"
-            "TRACY_ON_DEMAND ON"
-            "TRACY_NO_BROADCAST ON"
-            "TRACY_NO_CONTEXT_SWITCH ON"
-            "TRACY_NO_EXIT ON"
-            "TRACY_NO_VSYNC_CAPTURE ON"
-            "TRACY_NO_FRAME_IMAGE ON"
-            # "TRACY_NO_SYSTEM_TRACING ON" # This is incredibly heavy, add this line back if you need to speed up profiling
-            # "TRACY_TIMER_FALLBACK OFF" # Maybe useful to set ON for Linux VMs?
-            "TRACY_LIBBACKTRACE_ELF_DYNLOAD_SUPPORT ON"
+        "TRACY_ENABLE ON"
+        "TRACY_ON_DEMAND ON"
+        "TRACY_NO_BROADCAST ON"
+        "TRACY_NO_CONTEXT_SWITCH ON"
+        "TRACY_NO_EXIT ON"
+        "TRACY_NO_VSYNC_CAPTURE ON"
+        "TRACY_NO_FRAME_IMAGE ON"
+
+        # "TRACY_NO_SYSTEM_TRACING ON" # This is incredibly heavy, add this line back if you need to speed up profiling
+        # "TRACY_TIMER_FALLBACK OFF" # Maybe useful to set ON for Linux VMs?
+        "TRACY_LIBBACKTRACE_ELF_DYNLOAD_SUPPORT ON"
     )
 
     # Download Win32 server executables
@@ -38,19 +39,19 @@ if(TRACY_ENABLE)
             TIMEOUT 60
         )
         execute_process(COMMAND "${CMAKE_COMMAND}" -E
-                tar xvf "${CMAKE_SOURCE_DIR}/tracy.tar.gz"
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/
+            tar xvf "${CMAKE_SOURCE_DIR}/tracy.tar.gz"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/
         )
     else() # UNIX
         # TODO: Auto-build Tracy and capture executables on Linux
         # sudo apt-get -y install libglfw3-dev libdbus-1-dev libcapstone-dev libtbb-dev libdebuginfod-dev libfreetype-dev
 
         # execute_process(COMMAND "make"
-        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/profiler/build/unix
+        # WORKING_DIRECTORY ${tracy_SOURCE_DIR}/profiler/build/unix
         # )
 
         # execute_process(COMMAND "make"
-        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/capture/build/unix
+        # WORKING_DIRECTORY ${tracy_SOURCE_DIR}/capture/build/unix
         # )
     endif()
 endif(TRACY_ENABLE)
@@ -66,8 +67,8 @@ CPMAddPackage(
     GITHUB_REPOSITORY gabime/spdlog
     GIT_TAG v1.15.0
     OPTIONS
-        "SPDLOG_ENABLE_PCH ON"
-        "SPDLOG_FMT_EXTERNAL ON"
+    "SPDLOG_ENABLE_PCH ON"
+    "SPDLOG_FMT_EXTERNAL ON"
 ) # defines: spdlog
 
 CPMAddPackage(
@@ -75,14 +76,15 @@ CPMAddPackage(
     GITHUB_REPOSITORY recastnavigation/recastnavigation
     GIT_TAG bd98d84c274ee06842bf51a4088ca82ac71f8c2d
     OPTIONS
-        # TODO: Remove this once recast is updated to use CMake 3.5+, it's currently set to what we use in the root CMakeLists.txt
-        "CMAKE_POLICY_VERSION_MINIMUM 3.20"
-        "RECASTNAVIGATION_DEMO OFF"
-        "RECASTNAVIGATION_TESTS OFF"
-        "RECASTNAVIGATION_EXAMPLES OFF"
-        "RECASTNAVIGATION_DT_POLYREF64 OFF"
-        "RECASTNAVIGATION_DT_VIRTUAL_QUERYFILTER OFF"
-        "RECASTNAVIGATION_ENABLE_ASSERTS OFF"
+
+    # TODO: Remove this once recast is updated to use CMake 3.5+, it's currently set to what we use in the root CMakeLists.txt
+    "CMAKE_POLICY_VERSION_MINIMUM 3.20"
+    "RECASTNAVIGATION_DEMO OFF"
+    "RECASTNAVIGATION_TESTS OFF"
+    "RECASTNAVIGATION_EXAMPLES OFF"
+    "RECASTNAVIGATION_DT_POLYREF64 OFF"
+    "RECASTNAVIGATION_DT_VIRTUAL_QUERYFILTER OFF"
+    "RECASTNAVIGATION_ENABLE_ASSERTS OFF"
 ) # defines: RecastNavigation::Recast, RecastNavigation::Detour
 
 CPMAddPackage(
@@ -102,11 +104,11 @@ CPMAddPackage(
     GITHUB_REPOSITORY SpartanJ/efsw
     GIT_TAG 62f785c56b7a34f035193d4cb831921347b586b8 # 1.4.1
     OPTIONS
-        "VERBOSE OFF"
-        "NO_ATOMICS OFF"
-        "BUILD_SHARED_LIBS OFF"
-        "BUILD_TEST_APP OFF"
-        "EFSW_INSTALL OFF"
+    "VERBOSE OFF"
+    "NO_ATOMICS OFF"
+    "BUILD_SHARED_LIBS OFF"
+    "BUILD_TEST_APP OFF"
+    "EFSW_INSTALL OFF"
 ) # defines: efsw
 
 # TODO: std::jthread lands in C++20. Remove this once all compilers for all platforms implement.
@@ -128,8 +130,8 @@ CPMAddPackage(
     GITHUB_REPOSITORY yhirose/cpp-httplib
     GIT_TAG v0.18.3
     OPTIONS
-        "HTTPLIB_REQUIRE_ZLIB OFF"
-        "HTTPLIB_USE_ZLIB_IF_AVAILABLE OFF"
+    "HTTPLIB_REQUIRE_ZLIB OFF"
+    "HTTPLIB_USE_ZLIB_IF_AVAILABLE OFF"
 ) # defines: httplib::httplib
 
 CPMAddPackage(
@@ -143,6 +145,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY imneme/pcg-cpp
     GIT_TAG 428802d1a5634f96bcd0705fab379ff0113bcf13
 ) # defines: pcg-cpp
+
 if(pcg-cpp_ADDED) # pcg-cpp does not include cmake
     add_library(pcg-cpp INTERFACE)
     target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
@@ -153,7 +156,7 @@ CPMAddPackage(
     VERSION 1.32.0
     GITHUB_REPOSITORY chriskohlhoff/asio
     GIT_TAG asio-1-32-0 # asio uses non-standard version tag, we must specify GIT_TAG
-) #defines asio
+) # defines asio
 
 # ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
 #
@@ -208,19 +211,20 @@ CPMAddPackage(
     GIT_TAG fb50b847ae760f16ab84a367452027b246df13e1
     DOWNLOAD_ONLY ON
 ) # defines: bcrypt
+
 if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
     add_library(bcrypt
         STATIC
-            ${bcrypt_SOURCE_DIR}/src/bcrypt.c
-            ${bcrypt_SOURCE_DIR}/src/crypt_blowfish.c
-            ${bcrypt_SOURCE_DIR}/src/crypt_gensalt.c
-            ${bcrypt_SOURCE_DIR}/src/wrapper.c
-            ${bcrypt_SOURCE_DIR}/src/x86.S
+        ${bcrypt_SOURCE_DIR}/src/bcrypt.c
+        ${bcrypt_SOURCE_DIR}/src/crypt_blowfish.c
+        ${bcrypt_SOURCE_DIR}/src/crypt_gensalt.c
+        ${bcrypt_SOURCE_DIR}/src/wrapper.c
+        ${bcrypt_SOURCE_DIR}/src/x86.S
     )
     target_include_directories(bcrypt
         SYSTEM INTERFACE
-            ${bcrypt_SOURCE_DIR}/include/
-            $<$<PLATFORM_ID:Linux>:${bcrypt_SOURCE_DIR}/include/bcrypt/>
+        ${bcrypt_SOURCE_DIR}/include/
+        $<$<PLATFORM_ID:Linux>:${bcrypt_SOURCE_DIR}/include/bcrypt/>
     )
 endif()
 
@@ -239,14 +243,15 @@ CPMAddPackage(
 CPMAddPackage(
     NAME Coro-Roro
     GITHUB_REPOSITORY zach2good/Coro-Roro
-    GIT_TAG fc988944dd384a731adb38bc45bf228fa4aefc9f
+    GIT_TAG 581d5b2ae3430d2731664f765f64be5012337c19
     OPTIONS
-        "ENABLE_TESTS OFF"
+    "ENABLE_TESTS OFF"
 ) # defines: Coro-Roro and concurrentqueue
 
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
+
     # concurrentqueue
     mariadbclient
     mariadbcpp
@@ -309,7 +314,6 @@ set(TEST_ONLY_EXTERNAL_LIBS
 #
 # copy external lib lists to parent scope
 #
-
 set(SHARED_EXTERNAL_LIBS
     ${SHARED_EXTERNAL_LIBS}
     PARENT_SCOPE

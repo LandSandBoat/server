@@ -108,12 +108,12 @@ auto CMobController::CanPursueTarget(const CBattleEntity* PTarget) const -> bool
     if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
-        // const bool inWater = runCoroutineInline(PMob->PAI->PathFind->InWater());
-        // if (!inWater && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
-        // {
-        //     // certain weather / deodorize will turn on time deaggro
-        //     return !PMob->m_disableScent;
-        // }
+        const bool inWater = runTaskInline(PMob->PAI->PathFind->InWater());
+        if (!inWater && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
+        {
+            // certain weather / deodorize will turn on time deaggro
+            return !PMob->m_disableScent;
+        }
     }
     return false;
 }
