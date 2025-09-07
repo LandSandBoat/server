@@ -76,7 +76,7 @@ public:
     void ResumePatrol();
 
     // moves mob to next point
-    auto FollowPath(timer::time_point tick) -> AsyncTask<void>;
+    auto FollowPath(timer::time_point tick) -> Task<void>;
 
     // returns true if entity is on a way point
     bool OnPoint() const;

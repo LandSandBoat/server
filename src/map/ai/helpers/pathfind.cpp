@@ -282,7 +282,7 @@ void CPathFind::PrunePathWithin(float within)
     }
 }
 
-auto CPathFind::FollowPath(timer::time_point tick) -> AsyncTask<void>
+auto CPathFind::FollowPath(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
     if (!IsFollowingPath())
