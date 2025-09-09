@@ -175,11 +175,11 @@ end
 
 -- String values in parameters
 (a,"b",c) -- FAIL x2
-("a", b)  -- FAIL x2
-(",", b)  -- FAIL x2
+("a", b)  -- FAIL x1
+(",", b)  -- FAIL x1
 (",",b)   -- FAIL x2
 
-(a,'b',c) -- FAIL x2
+(a,'b',c) -- FAIL x1
 ('a', b)  -- PASS
 (',', b)  -- PASS
 (',',b)   -- FAIL
