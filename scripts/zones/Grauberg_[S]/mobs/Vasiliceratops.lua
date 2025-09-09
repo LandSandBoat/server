@@ -16,8 +16,7 @@ entity.spawnPoints =
 entity.phList =
 {
     [ID.mob.VASILICERATOPS - 3] = ID.mob.VASILICERATOPS,
-    -- [ID.mob.VASILICERATOPS - 67] = ID.mob.VASILICERATOPS,
-    -- TODO: Add shared spawning for the PH. Only one PH is alive at a time. Spawns in either spot.
+    [ID.mob.VASILICERATOPS - 67] = ID.mob.VASILICERATOPS,
 }
 
 entity.onMobInitialize = function(mob)

@@ -75,7 +75,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit)
+CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(const CCharEntity* PChar, const MERIT_TYPE merit)
 {
     this->setType(0x8C);
     this->setSize(0x10);
@@ -84,7 +84,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, M
     ref<uint32>(0x08) = PChar->PMeritPoints->GetMerit(merit)->data;
 }
 
-void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset)
+void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(const CCharEntity* PChar, const uint8 offset)
 {
     for (uint8 i = 0; i < MAX_MERITS_IN_PACKET; ++i)
     {

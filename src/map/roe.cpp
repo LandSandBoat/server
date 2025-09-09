@@ -30,7 +30,6 @@
 
 #include "packets/char_spells.h"
 #include "packets/roe_questlog.h"
-#include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
 
 #define ROE_CACHETIME 15s
@@ -670,8 +669,8 @@ namespace roeutils
             return;
         }
 
-        const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0";
-        _sql->Query(rankingQuery);
+        db::preparedStmt("UPDATE unity_system "
+                         "SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0");
     }
 
     void UpdateUnityRankings()
@@ -683,36 +682,37 @@ namespace roeutils
             return;
         }
 
-        const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members";
-        _sql->Query(memberQuery);
+        db::preparedStmt("UPDATE unity_system "
+                         "JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) "
+                         "TMP ON unity_system.leader = unity_leader "
+                         "SET unity_system.members_current = members");
 
-        const char* unityQuery = "SELECT leader, CASE WHEN members_prev = 0 THEN 0 ELSE FLOOR(points_prev/members_prev) END AS eval FROM unity_system ORDER BY eval DESC";
-        int32       ret        = _sql->Query(unityQuery);
+        const auto rset = db::preparedStmt("SELECT leader, "
+                                           "CASE WHEN members_prev = 0 THEN 0 ELSE FLOOR(points_prev/members_prev) END AS eval "
+                                           "FROM unity_system "
+                                           "ORDER BY eval DESC");
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        uint8 currentRank = 1;
+        uint8 rankGap     = 0;
+        int32 prev_eval   = 0;
+
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            uint8 currentRank = 1;
-            uint8 rankGap     = 0;
-            int32 prev_eval   = 0;
+            auto new_eval = rset->get<int32>("eval");
 
-            while (_sql->NextRow() == SQL_SUCCESS)
+            if (new_eval < prev_eval)
             {
-                int32 new_eval = _sql->GetIntData(1);
-
-                if (new_eval < prev_eval)
-                {
-                    currentRank = currentRank + rankGap;
-                    rankGap     = 1;
-                }
-                else
-                {
-                    rankGap++;
-                }
-
-                prev_eval = new_eval;
-
-                roeutils::RoeSystem.unityLeaderRank[_sql->GetIntData(0) - 1] = currentRank;
+                currentRank = currentRank + rankGap;
+                rankGap     = 1;
             }
+            else
+            {
+                rankGap++;
+            }
+
+            prev_eval = new_eval;
+
+            roeutils::RoeSystem.unityLeaderRank[rset->get<int>("leader") - 1] = currentRank;
         }
     }
 } // namespace roeutils

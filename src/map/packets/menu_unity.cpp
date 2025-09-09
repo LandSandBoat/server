@@ -23,7 +23,6 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "map_engine.h"
 
 #include "entities/charentity.h"
@@ -31,25 +30,21 @@
 
 CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
 {
-    const char* Query = "SELECT leader, members_current, points_current, members_prev, points_prev FROM unity_system";
-    int32       ret   = _sql->Query(Query);
+    const auto rset = db::preparedStmt("SELECT leader, members_current, points_current, members_prev, points_prev "
+                                       "FROM unity_system");
 
     std::pair<int32, double> unity_current[11];
     std::pair<int32, double> unity_previous[11];
 
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
+        auto unity_leader = rset->get<int>("leader") - 1;
+        if (unity_leader >= 0 && unity_leader < 11)
         {
-            int unity_leader = _sql->GetIntData(0) - 1;
-
-            if (unity_leader >= 0 && unity_leader < 11)
-            {
-                unity_current[unity_leader].first   = _sql->GetIntData(1);
-                unity_current[unity_leader].second  = _sql->GetIntData(2);
-                unity_previous[unity_leader].first  = _sql->GetIntData(3);
-                unity_previous[unity_leader].second = _sql->GetIntData(4);
-            }
+            unity_current[unity_leader].first   = rset->get<int32>("members_current");
+            unity_current[unity_leader].second  = rset->get<double>("points_current");
+            unity_previous[unity_leader].first  = rset->get<int32>("members_prev");
+            unity_previous[unity_leader].second = rset->get<double>("points_prev");
         }
     }
 

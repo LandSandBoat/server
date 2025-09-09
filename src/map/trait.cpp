@@ -34,7 +34,7 @@
  *                                                                       *
  *                                                                       *
  ************************************************************************/
-CTrait::CTrait(uint16 id)
+CTrait::CTrait(const uint16 id)
 : m_id(id)
 {
 }
@@ -55,58 +55,46 @@ namespace traits
      ************************************************************************/
     void LoadTraitsList()
     {
-        const char* Query = "SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
-                            "FROM traits "
-                            "WHERE traitid < %u "
-                            "ORDER BY job, traitid ASC, rank DESC";
-
-        int32 ret = _sql->Query(Query, MAX_TRAIT_ID);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        auto rset = db::preparedStmt("SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
+                                     "FROM traits "
+                                     "WHERE traitid < ? "
+                                     "ORDER BY job, traitid ASC, rank DESC",
+                                     MAX_TRAIT_ID);
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
             {
-                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
-                const auto contentTag = _sql->GetStringData(6);
-                if (!luautils::IsContentEnabled(contentTag))
-                {
-                    continue;
-                }
-
-                CTrait* PTrait = new CTrait(_sql->GetIntData(0));
-
-                PTrait->setJob(_sql->GetIntData(1));
-                PTrait->setLevel(_sql->GetIntData(2));
-                PTrait->setRank(_sql->GetIntData(3));
-                PTrait->setMod(static_cast<Mod>(_sql->GetIntData(4)));
-                PTrait->setValue(_sql->GetIntData(5));
-                PTrait->setMeritId(_sql->GetIntData(7));
-
-                PTraitsList[PTrait->getJob()].emplace_back(PTrait);
+                continue;
             }
+
+            auto* PTrait = new CTrait(rset->get<uint16>("traitid"));
+
+            PTrait->setJob(rset->get<int8>("job"));
+            PTrait->setLevel(rset->get<uint8>("level"));
+            PTrait->setRank(rset->get<uint8>("rank"));
+            PTrait->setMod(static_cast<Mod>(rset->get<uint32>("modifier")));
+            PTrait->setValue(rset->get<int16>("value"));
+            PTrait->setMeritId(rset->get<uint32>("meritid"));
+
+            PTraitsList[PTrait->getJob()].emplace_back(PTrait);
         }
 
-        Query = "SELECT trait_category, trait_points_needed, traitid, modifier, value "
-                "FROM blue_traits "
-                "WHERE traitid < %u "
-                "ORDER BY trait_category ASC, trait_points_needed DESC";
-
-        ret = _sql->Query(Query, MAX_TRAIT_ID);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value "
+                                "FROM blue_traits "
+                                "WHERE traitid < ? "
+                                "ORDER BY trait_category ASC, trait_points_needed DESC",
+                                MAX_TRAIT_ID);
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                CBlueTrait* PTrait = new CBlueTrait(_sql->GetIntData(0), _sql->GetIntData(2));
+            auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"));
 
-                PTrait->setJob(JOB_BLU);
-                PTrait->setRank(1);
-                PTrait->setPoints(_sql->GetIntData(1));
-                PTrait->setMod(static_cast<Mod>(_sql->GetIntData(3)));
-                PTrait->setValue(_sql->GetIntData(4));
+            PTrait->setJob(JOB_BLU);
+            PTrait->setRank(1);
+            PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
+            PTrait->setMod(static_cast<Mod>(rset->get<uint32>("modifier")));
+            PTrait->setValue(rset->get<int16>("value"));
 
-                PTraitsList[JOB_BLU].emplace_back(PTrait);
-            }
+            PTraitsList[JOB_BLU].emplace_back(PTrait);
         }
     }
 

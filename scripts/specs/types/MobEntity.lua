@@ -20,6 +20,7 @@
 ---@field onMobFight? fun(mob: CBaseEntity, target: CBaseEntity)
 ---@field onCriticalHit? fun(mob: CBaseEntity, attacker: CBaseEntity?)
 ---@field onMobDeath? fun(mob: CBaseEntity, killer: CBaseEntity?, optParams: { isKiller: boolean, noKiller: boolean, isWeaponSkillKill: boolean, weaponskillUsed: xi.weaponskill, weaponskillDamage: integer })
+---@field onMobSpawnCheck? fun(mob: CBaseEntity): integer
 ---@field onMobSpawn? fun(mob: CBaseEntity)
 ---@field onMobRoamAction? fun(mob: CBaseEntity)
 ---@field onMobRoam? fun(mob: CBaseEntity)

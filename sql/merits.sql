@@ -181,7 +181,7 @@ INSERT INTO `merits` VALUES (1676,'entropy',5,3,385,8,25);
 INSERT INTO `merits` VALUES (1678,'stardiver',5,3,10241,8,25);
 INSERT INTO `merits` VALUES (1680,'blade_shun',5,3,4096,8,25);
 INSERT INTO `merits` VALUES (1682,'tachi_shoha',5,3,2048,8,25);
-INSERT INTO `merits` VALUES (1684,'realmrazor',5,3,573519,8,25);
+INSERT INTO `merits` VALUES (1684,'realmrazer',5,3,573519,8,25);
 INSERT INTO `merits` VALUES (1686,'shattersoul',5,3,549455,8,25);
 INSERT INTO `merits` VALUES (1688,'apex_arrow',5,3,3072,8,25);
 INSERT INTO `merits` VALUES (1690,'last_stand',5,3,66592,8,25);

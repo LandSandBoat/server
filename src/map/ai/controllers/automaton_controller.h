@@ -72,7 +72,7 @@ protected:
     void         setMagicCooldowns();
     virtual bool CanCastSpells() override;
     virtual bool Cast(uint16 targid, SpellID spellid) override;
-    virtual bool MobSkill(uint16 targid, uint16 wsid) override;
+    virtual bool MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride) override;
 
 private:
     bool TryAction();

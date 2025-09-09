@@ -158,13 +158,19 @@ void MapEngine::prepareWatchdog()
 
 void MapEngine::gameLoop()
 {
+    TracyZoneNamed(_tasks, "MapEngine Main Loop");
+
     timer::duration tasksDuration;
     timer::duration networkDuration;
     timer::duration tickDuration;
 
     const auto tickStart = timer::now();
     {
+        TracyZoneNamed(_tasks, "MapEngine Tasks");
         tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+    }
+    {
+        TracyZoneNamed(_networking, "MapEngine Networking");
         // Use tick remainder for networking with a maximum to ensure that the network phase
         // doesn't starve and a minimum to prevent bumping up against the time limit.
         networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
@@ -192,6 +198,7 @@ void MapEngine::gameLoop()
 
     if (tickDiffTime > 0ms)
     {
+        TracyZoneNamed(_sleep, "MapEngine Sleep");
         std::this_thread::sleep_for(tickDiffTime);
     }
     else if (tickDiffTime < -kMainLoopBacklogThreshold)

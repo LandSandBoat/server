@@ -34,8 +34,6 @@
 #include <cstring>
 
 #include "battlefield.h"
-#include "common/vana_time.h"
-#include "enmity_container.h"
 #include "ipc_client.h"
 #include "latent_effect_container.h"
 #include "los/zone_los.h"
@@ -51,9 +49,6 @@
 #include "entities/petentity.h"
 
 #include "lua/luautils.h"
-
-#include "packets/action.h"
-#include "packets/server_ip.h"
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -296,25 +291,22 @@ void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
 
-    static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
-
-    int32 ret = _sql->Query(fmtQuery, m_zoneID);
-
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt("SELECT zoneline, tozone, tox, toy, toz, rotation "
+                                       "FROM zonelines "
+                                       "WHERE fromzone = ?",
+                                       m_zoneID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
-        {
-            zoneLine_t* zl = new zoneLine_t;
+        auto* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)_sql->GetIntData(0);
-            zl->m_toZone         = (uint16)_sql->GetIntData(1);
-            zl->m_toPos.x        = _sql->GetFloatData(2);
-            zl->m_toPos.y        = _sql->GetFloatData(3);
-            zl->m_toPos.z        = _sql->GetFloatData(4);
-            zl->m_toPos.rotation = (uint8)_sql->GetIntData(5);
+        zl->m_zoneLineID     = rset->get<uint32>("zoneline");
+        zl->m_toZone         = rset->get<uint16>("tozone");
+        zl->m_toPos.x        = rset->get<float>("tox");
+        zl->m_toPos.y        = rset->get<float>("toy");
+        zl->m_toPos.z        = rset->get<float>("toz");
+        zl->m_toPos.rotation = rset->get<uint8>("rotation");
 
-            m_zoneLineList.emplace_back(zl);
-        }
+        m_zoneLineList.emplace_back(zl);
     }
 }
 
@@ -336,27 +328,25 @@ void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
-
-    int32 ret = _sql->Query(Query, m_zoneID);
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt("SELECT weather "
+                                       "FROM zone_weather "
+                                       "WHERE zone = ?",
+                                       m_zoneID);
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        _sql->NextRow();
-        auto* weatherBlob = reinterpret_cast<uint16*>(_sql->GetData(0));
+        uint16_t weatherBlob[WEATHER_CYCLE]{};
+
+        db::extractFromBlob(rset, "weather", weatherBlob);
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
             {
-                uint8 w_normal = static_cast<uint8>(weatherBlob[i] >> 10);
-                uint8 w_common = static_cast<uint8>((weatherBlob[i] >> 5) & 0x1F);
-                uint8 w_rare   = static_cast<uint8>(weatherBlob[i] & 0x1F);
+                const auto w_normal = static_cast<uint8>(weatherBlob[i] >> 10);
+                const auto w_common = static_cast<uint8>((weatherBlob[i] >> 5) & 0x1F);
+                const auto w_rare   = static_cast<uint8>(weatherBlob[i] & 0x1F);
                 m_WeatherVector.insert(std::make_pair(i, zoneWeather_t(w_normal, w_common, w_rare)));
             }
         }
-    }
-    else
-    {
-        ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -364,55 +354,52 @@ void CZone::LoadZoneSettings()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT "
-                               "zone.name,"
-                               "zone.zoneip,"
-                               "zone.zoneport,"
-                               "zone.music_day,"
-                               "zone.music_night,"
-                               "zone.battlesolo,"
-                               "zone.battlemulti,"
-                               "zone.tax,"
-                               "zone.misc,"
-                               "zone.zonetype,"
-                               "bcnm.name "
-                               "FROM zone_settings AS zone "
-                               "LEFT JOIN bcnm_records AS bcnm "
-                               "USING (zoneid) "
-                               "WHERE zoneid = %u "
-                               "LIMIT 1";
-
-    if (_sql->Query(Query, m_zoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    const auto rset = db::preparedStmt("SELECT "
+                                       "zone.name,"
+                                       "zone.zoneip,"
+                                       "zone.zoneport,"
+                                       "zone.music_day,"
+                                       "zone.music_night,"
+                                       "zone.battlesolo,"
+                                       "zone.battlemulti,"
+                                       "zone.tax,"
+                                       "zone.misc,"
+                                       "zone.zonetype,"
+                                       "bcnm.name AS bcnmname "
+                                       "FROM zone_settings AS zone "
+                                       "LEFT JOIN bcnm_records AS bcnm "
+                                       "USING (zoneid) "
+                                       "WHERE zoneid = ? "
+                                       "LIMIT 1",
+                                       m_zoneID);
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        m_zoneName.insert(0, (const char*)_sql->GetData(0));
-        m_zoneIP = str2ip((const char*)_sql->GetData(1));
+        m_zoneName.insert(0, rset->get<std::string>("name"));
+        m_zoneIP   = str2ip(rset->get<std::string>("zoneip"));
+        m_zonePort = rset->get<uint16>("zoneport");
 
-        m_zonePort              = (uint16)_sql->GetUIntData(2);
-        m_zoneMusic.m_songDay   = (uint8)_sql->GetUIntData(3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)_sql->GetUIntData(4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)_sql->GetUIntData(5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)_sql->GetUIntData(6);           // party battle music
-        m_tax                   = (uint16)(_sql->GetFloatData(7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)_sql->GetUIntData(8);
+        m_zoneMusic.m_songDay   = rset->get<uint8>("music_day");
+        m_zoneMusic.m_songNight = rset->get<uint8>("music_night");
+        m_zoneMusic.m_bSongS    = rset->get<uint8>("battlesolo");
+        m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
+        m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
+        m_miscMask              = rset->get<uint16>("misc");
+        m_zoneType              = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
 
-        m_zoneType = static_cast<ZONE_TYPE>(_sql->GetUIntData(9));
-
-        if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
+        if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
+
         if (m_miscMask & MISC_TREASURE)
         {
             m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
         }
+
         if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
             destroy(m_CampaignHandler);
         }
-    }
-    else
-    {
-        ShowCritical("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 

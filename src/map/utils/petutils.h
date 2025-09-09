@@ -20,8 +20,7 @@
 ===========================================================================
 */
 
-#ifndef _IPETUTILS_H
-#define _IPETUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -218,5 +217,3 @@ namespace petutils
 
     Pet_t* GetPetInfo(uint32 PetID);
 }; // namespace petutils
-
-#endif

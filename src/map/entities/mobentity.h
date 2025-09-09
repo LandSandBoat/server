@@ -29,6 +29,7 @@
 class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
+class spawnGroup;
 
 enum SPAWNTYPE
 {
@@ -181,6 +182,7 @@ public:
 
     virtual void OnDespawn(CDespawnState&) override;
 
+    bool         CanSpawnFromGroup();
     virtual void Spawn() override;
     virtual void FadeOut() override;
     virtual bool isWideScannable() override;
@@ -254,6 +256,8 @@ public:
 
     uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8  m_name_prefix; // The ding bats VS Ding bats
+
+    spawnGroup* m_spawnGroup; // spawn group this mob Belongs to
 
     uint8 m_unk0; // possibly campaign related (entity 0x24)
     uint8 m_unk1; // (entity_update 0x25)

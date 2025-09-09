@@ -1888,7 +1888,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     }
                 }
 
-                PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
+                PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID(), std::nullopt);
             }
         }
         // TODO: make this generic enough to not require an if

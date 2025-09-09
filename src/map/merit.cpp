@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include <cstring>
-
-#include "entities/charentity.h"
 #include "merit.h"
+#include "entities/charentity.h"
 
 #include "map_engine.h"
 #include "packets/char_abilities.h"
@@ -158,8 +156,8 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 
 void CMeritPoints::LoadMeritPoints(uint32 charid)
 {
-    uint8 catNumber   = 0;
-    uint8 maxCatCount = 54;
+    uint8       catNumber   = 0;
+    const uint8 maxCatCount = 54;
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
@@ -181,39 +179,39 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
     }
 
-    if (_sql->Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
+    const auto rset = db::preparedStmt("SELECT meritid, upgrades FROM char_merit WHERE charid = ?", charid);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        for (uint64 j = 0; j < _sql->NumRows(); j++)
+        const auto meritID  = rset->get<uint32>("meritid");
+        const auto upgrades = rset->get<uint32>("upgrades");
+        for (auto& merit : merits)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
+            if (merit.id == meritID)
             {
-                uint32 meritID  = _sql->GetUIntData(0);
-                uint32 upgrades = _sql->GetUIntData(1);
-                for (auto& merit : merits)
-                {
-                    if (merit.id == meritID)
-                    {
-                        merit.count = upgrades;
-                        merit.next  = upgrade[merit.upgradeid][merit.count];
-                    }
-                }
+                merit.count = upgrades;
+                merit.next  = upgrade[merit.upgradeid][merit.count];
             }
         }
     }
 }
 
-void CMeritPoints::SaveMeritPoints(uint32 charid)
+void CMeritPoints::SaveMeritPoints(const uint32 charid)
 {
-    for (auto& merit : merits)
+    for (const auto& merit : merits)
     {
         if (merit.count > 0)
         {
-            _sql->Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
-                        merit.id, merit.count, merit.count);
+            db::preparedStmt("INSERT INTO char_merit (charid, meritid, upgrades) "
+                             "VALUES(?, ?, ?) "
+                             "ON DUPLICATE KEY UPDATE upgrades = ?",
+                             charid, merit.id, merit.count, merit.count);
         }
         else
         {
-            _sql->Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            db::preparedStmt("DELETE FROM char_merit "
+                             "WHERE charid = ? "
+                             "AND meritid = ?",
+                             charid, merit.id);
         }
     }
 }
@@ -430,59 +428,54 @@ namespace meritNameSpace
 
     void LoadMeritsList()
     {
-        int32 ret = _sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id FROM merits m LEFT JOIN "
-                                "spell_list sl ON m.name = sl.name LEFT JOIN weapon_skills ws ON m.name = ws.name ORDER BY m.meritid ASC LIMIT %u",
-                                MERITS_COUNT);
+        const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id "
+                                           "FROM merits m "
+                                           "LEFT JOIN spell_list sl ON m.name = sl.name "
+                                           "LEFT JOIN weapon_skills ws ON m.name = ws.name "
+                                           "ORDER BY m.meritid ASC LIMIT ?",
+                                           MERITS_COUNT);
 
-        if (ret != SQL_ERROR && _sql->NumRows() != MERITS_COUNT)
+        // issue with unknown catagories causing massive confusion
+
+        uint16 index            = 0; // global merit template count (to 255)
+        uint8  catIndex         = 0; // global merit category count (to 51)
+        int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
+        int8   catMeritIndex    = 0; // counts number of merits in a category
+
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            // issue with unknown catagories causing massive confusion
+            Merit_t Merit = {}; // creat a new merit template.
 
-            uint16 index            = 0; // global merit template count (to 255)
-            uint8  catIndex         = 0; // global merit category count (to 51)
-            int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
-            int8   catMeritIndex    = 0; // counts number of merits in a category
+            Merit.id         = rset->get<uint16>("meritid"); // set data from db.
+            Merit.value      = rset->get<uint32>("value");
+            Merit.jobs       = rset->get<uint32>("jobs");
+            Merit.upgrade    = rset->get<uint32>("upgrade");
+            Merit.upgradeid  = rset->get<uint8>("upgradeid");
+            Merit.catid      = rset->get<uint8>("catagoryid");
+            Merit.next       = upgrade[Merit.upgradeid][0];
+            Merit.spellid    = rset->getOrDefault<uint16>("spellid", 0);
+            Merit.wsunlockid = rset->getOrDefault<uint16>("unlock_id", 0);
 
-            while (_sql->NextRow() == SQL_SUCCESS)
+            GMeritsTemplate[index] = Merit; // add the merit to the array
+
+            previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
+
+            if (previousCatIndex != catIndex) // check for category change.
             {
-                Merit_t Merit = {}; // creat a new merit template.
+                groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
+                catIndex++;                                    // now on next category.
+                catMeritIndex = 0;                             // reset the merit category count to 0.
 
-                Merit.id         = _sql->GetUIntData(0); // set data from db.
-                Merit.value      = _sql->GetUIntData(1);
-                Merit.jobs       = _sql->GetUIntData(2);
-                Merit.upgrade    = _sql->GetUIntData(3);
-                Merit.upgradeid  = _sql->GetUIntData(4);
-                Merit.catid      = _sql->GetUIntData(5);
-                Merit.next       = upgrade[Merit.upgradeid][0];
-                Merit.spellid    = _sql->GetUIntData(6);
-                Merit.wsunlockid = _sql->GetUIntData(7);
-
-                GMeritsTemplate[index] = Merit; // add the merit to the array
-
-                previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
-
-                if (previousCatIndex != catIndex) // check for category change.
-                {
-                    groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
-                    catIndex++;                                    // now on next category.
-                    catMeritIndex = 0;                             // reset the merit category count to 0.
-
-                    if (previousCatIndex != catIndex)
-                    { // this deals with the problem with unknown catagories.
-                        catIndex = previousCatIndex;
-                    }
+                if (previousCatIndex != catIndex)
+                { // this deals with the problem with unknown catagories.
+                    catIndex = previousCatIndex;
                 }
-
-                catMeritIndex++; // next index within category.
-                index++;         // next global template index.
             }
 
-            groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+            catMeritIndex++; // next index within category.
+            index++;         // next global template index.
         }
-        else
-        {
-            ShowError("The merits table is damaged");
-        }
-    }
 
+        groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+    }
 }; // namespace meritNameSpace

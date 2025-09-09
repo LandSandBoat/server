@@ -399,7 +399,7 @@ void monstrosity::HandleMonsterSkillActionPacket(const CCharEntity* PChar, const
     // TODO: Validate that this move is available at this level, for this species, and that
     // we're capable of using it (state, TP, etc.).
 
-    PChar->PAI->Internal_MobSkill(data.ActIndex, data.MonsterSkill.SkillId);
+    PChar->PAI->Internal_MobSkill(data.ActIndex, data.MonsterSkill.SkillId, std::nullopt);
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)

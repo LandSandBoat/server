@@ -30,7 +30,7 @@ class CBattleEntity;
 class CMobSkillState : public CState
 {
 public:
-    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride);
 
     CMobSkill* GetSkill();
 

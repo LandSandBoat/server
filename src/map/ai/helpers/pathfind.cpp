@@ -74,6 +74,8 @@ CPathFind::~CPathFind()
 bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     Clear();
 
     m_roamFlags = roamFlags;
@@ -108,6 +110,8 @@ bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
 bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     // don't follow a new path if the current path has script flag and new path doesn't
     if (IsFollowingPath() && (m_pathFlags & PATHFLAG_SCRIPT) && !(pathFlags & PATHFLAG_SCRIPT))
     {
@@ -157,6 +161,8 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
 bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlags /*= 0*/, bool clear /*= true*/)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     if (clear)
     {
         Clear();
@@ -173,6 +179,8 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
 bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     Clear();
 
     // save for sliding logic
@@ -187,6 +195,8 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
 bool CPathFind::PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     Clear();
 
     m_pathFlags = pathFlags;
@@ -199,6 +209,8 @@ bool CPathFind::PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags)
 bool CPathFind::WarpTo(const position_t& point, float maxDistance)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     Clear();
 
     position_t newPoint = nearPosition(point, maxDistance, (float)M_PI);
@@ -242,6 +254,8 @@ bool CPathFind::isNavMeshEnabled()
 bool CPathFind::ValidPosition(const position_t& pos)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     if (isNavMeshEnabled())
     {
         return m_POwner->loc.zone->m_navMesh->validPosition(pos);
@@ -260,6 +274,7 @@ void CPathFind::LimitDistance(float maxLength)
 void CPathFind::PrunePathWithin(float within)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (!IsFollowingPath())
     {
@@ -283,6 +298,8 @@ void CPathFind::PrunePathWithin(float within)
 void CPathFind::FollowPath(timer::time_point tick)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     if (!IsFollowingPath())
     {
         return;
@@ -364,6 +381,8 @@ void CPathFind::FollowPath(timer::time_point tick)
 void CPathFind::StepTo(const position_t& pos, bool run)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     bool  speedChange = m_POwner->GetSpeed() != m_POwner->UpdateSpeed(run);
     float speed       = m_POwner->GetSpeed();
 
@@ -448,6 +467,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
 bool CPathFind::FindPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (arePositionsClose(start, end))
     {
@@ -474,6 +494,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (!isNavMeshEnabled())
     {
@@ -525,6 +546,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
 bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (arePositionsClose(start, end))
     {

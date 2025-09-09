@@ -254,7 +254,7 @@ bool CAutomatonController::TryShieldBash()
     if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
         m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
     {
-        return MobSkill(PTarget->targid, m_ShieldBashAbility);
+        return MobSkill(PTarget->targid, m_ShieldBashAbility, std::nullopt);
     }
 
     return false;
@@ -1567,7 +1567,7 @@ bool CAutomatonController::TryTPMove()
 
         if (PWSkill)
         {
-            return MobSkill(PTarget->targid, PWSkill->getID());
+            return MobSkill(PTarget->targid, PWSkill->getID(), std::nullopt);
         }
     }
     return false;
@@ -1582,7 +1582,7 @@ bool CAutomatonController::TryRangedAttack() // TODO: Find the animation for its
 
         if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + std::max(attackTime, minDelay))
         {
-            return MobSkill(PTarget->targid, m_RangedAbility);
+            return MobSkill(PTarget->targid, m_RangedAbility, std::nullopt);
         }
     }
 
@@ -1623,13 +1623,13 @@ bool CAutomatonController::Cast(uint16 targid, SpellID spellid)
     return CPetController::Cast(targid, spellid);
 }
 
-bool CAutomatonController::MobSkill(uint16 targid, uint16 wsid)
+bool CAutomatonController::MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride)
 {
     if (PAutomaton->PRecastContainer->HasRecast(RECAST_ABILITY, wsid, 0s))
     {
         return false;
     }
-    return CPetController::MobSkill(targid, wsid);
+    return CPetController::MobSkill(targid, wsid, castTimeOverride);
 }
 
 bool CAutomatonController::Disengage()

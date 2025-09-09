@@ -41,7 +41,7 @@ public:
     virtual void Despawn() override;
     virtual void Reset() override;
 
-    virtual auto MobSkill(uint16 targid, uint16 wsid) -> bool;
+    virtual auto MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride) -> bool;
     virtual auto Ability(uint16 targid, uint16 abilityid) -> bool override
     {
         return false;

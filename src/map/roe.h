@@ -19,18 +19,14 @@
 ===========================================================================
 */
 
-#ifndef SRC_MAP_ROE_H_
-#define SRC_MAP_ROE_H_
+#pragma once
 
 #include <array>
-#include <bitset>
-#include <utility>
 #include <variant>
 #include <vector>
 
 #include "ai/helpers/event_handler.h"
 #include "common/cbasetypes.h"
-#include "packets/weather.h"
 
 class CItemContainer;
 
@@ -168,5 +164,3 @@ namespace roeutils
     void   CycleTimedRecords();
 
 } // namespace roeutils
-
-#endif /* SRC_MAP_ROE_H_ */

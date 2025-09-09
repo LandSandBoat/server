@@ -80,6 +80,8 @@ protected:
     uint16            GetTargetID() const;
     void              Complete();
     timer::time_point GetEntryTime() const;
+    bool              WasExitDelayed();
+    void              DelayExitTime(std::chrono::milliseconds delayMilliseconds);
 
     std::unique_ptr<CBasicPacket> m_errorMsg;
 
@@ -89,6 +91,7 @@ protected:
 private:
     CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
+    bool              m_wasDelayed{ false };
     timer::time_point m_entryTime{ timer::now() };
 };
 

@@ -29,7 +29,7 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 , m_spentTP(0)
@@ -61,7 +61,14 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
 
     m_PSkill = std::make_unique<CMobSkill>(*skill);
 
-    m_castTime = m_PSkill->getActivationTime();
+    if (castTimeOverride.has_value())
+    {
+        m_castTime = castTimeOverride.value();
+    }
+    else
+    {
+        m_castTime = m_PSkill->getActivationTime();
+    }
 
     if (m_castTime > 0s)
     {

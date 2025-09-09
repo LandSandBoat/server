@@ -3962,8 +3962,9 @@ end
 
 ---@param skillID integer
 ---@param PLuaBaseEntity CBaseEntity?
+---@param castTimeOverride number?
 ---@return nil
-function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity)
+function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity, castTimeOverride)
 end
 
 ---@return nil

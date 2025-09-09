@@ -34,11 +34,11 @@ class CMeritPointsCategoriesPacket : public CBasicPacket
 {
 public:
     CMeritPointsCategoriesPacket(CCharEntity* PChar);
-    CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit);
+    CMeritPointsCategoriesPacket(const CCharEntity* PChar, MERIT_TYPE merit);
 
 private:
     // offset should be a uint16!!! Why assert fail?!
-    void MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset);
+    void MeritPointsCategoriesPacket(const CCharEntity* PChar, uint8 offset);
 };
 
 #endif

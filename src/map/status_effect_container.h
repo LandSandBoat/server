@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _STATUSEFFECTCONTAINER_H
-#define _STATUSEFFECTCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "common/task_manager.h"
 
 #include <set>
 
@@ -163,5 +161,3 @@ namespace effects
     uint16      GetEffectElement(uint16 effect);
     std::string GetEffectName(uint16 effect);
 }; // namespace effects
-
-#endif

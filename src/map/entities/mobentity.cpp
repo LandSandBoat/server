@@ -27,6 +27,7 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/mobskill_state.h"
+#include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
 #include "common/timer.h"
@@ -142,6 +143,7 @@ CMobEntity::CMobEntity()
 , m_Pool(0)
 , m_flags(0)
 , m_name_prefix(0)
+, m_spawnGroup(nullptr)
 , m_unk0(0)
 , m_unk1(8)
 , m_unk2(0)
@@ -589,6 +591,16 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     }
 
     return false;
+}
+
+bool CMobEntity::CanSpawnFromGroup()
+{
+    if (!m_spawnGroup)
+    {
+        return true;
+    }
+
+    return m_spawnGroup->isInSpawnPool(this->targid);
 }
 
 void CMobEntity::Spawn()
@@ -1157,6 +1169,29 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
+
+    if (m_spawnGroup)
+    {
+        auto replacementTargID = m_spawnGroup->removeAndReplaceWithRandomMember(this->targid);
+        if (replacementTargID != this->targid) // Respawn normally if we got selected again, otherwise poke the replacement to do so
+        {
+            auto PMob = this->loc.zone->GetEntity(replacementTargID);
+            if (PMob && PMob->PAI)
+            {
+                // Check if replacement can switch into respawn state with our current respawn time
+                // if Internal_Respawn returns true, the mob will switch into respawn state with m_RespawnTime (should it be the target mob's respawn time?)
+                if (!PMob->PAI->Internal_Respawn(m_RespawnTime))
+                {
+                    // If they're already in the respawn state...
+                    if (PMob->PAI->IsCurrentState<CRespawnState>())
+                    {
+                        PMob->PAI->GetCurrentState()->ResetEntryTime(); // Reset their despawn time
+                    }
+                }
+            }
+        }
+    }
+
     PAI->Internal_Respawn(m_RespawnTime);
     luautils::OnMobDespawn(this);
     // #event despawn

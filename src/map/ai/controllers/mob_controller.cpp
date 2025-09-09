@@ -386,7 +386,7 @@ auto CMobController::MobSkill(int listId) -> bool
 
                 if (currentDistance <= PMobSkill->getDistance())
                 {
-                    return MobSkill(PActionTarget->targid, PMobSkill->getID());
+                    return MobSkill(PActionTarget->targid, PMobSkill->getID(), std::nullopt);
                 }
             }
         }
@@ -444,7 +444,7 @@ auto CMobController::TrySpecialSkill() -> bool
 
     if (luautils::OnMobSkillCheck(PAbilityTarget, PMob, PSpecialSkill) == 0)
     {
-        return MobSkill(PAbilityTarget->targid, PSpecialSkill->getID());
+        return MobSkill(PAbilityTarget->targid, PSpecialSkill->getID(), std::nullopt);
     }
 
     return false;
@@ -689,7 +689,7 @@ void CMobController::Move()
             if (const CMobSkill* teleportBegin = battleutils::GetMobSkill(PMob->getMobMod(MOBMOD_TELEPORT_START)))
             {
                 m_LastSpecialTime = m_Tick;
-                MobSkill(PMob->targid, teleportBegin->getID());
+                MobSkill(PMob->targid, teleportBegin->getID(), std::nullopt);
             }
         }
     }
@@ -747,7 +747,7 @@ void CMobController::Move()
 
                     if (teleportBegin && currentDistance <= teleportBegin->getDistance())
                     {
-                        MobSkill(PMob->targid, teleportBegin->getID());
+                        MobSkill(PMob->targid, teleportBegin->getID(), std::nullopt);
                         m_LastSpecialTime = m_Tick;
                         return;
                     }
@@ -1167,14 +1167,14 @@ void CMobController::Reset()
     ClearFollowTarget();
 }
 
-auto CMobController::MobSkill(const uint16 targid, uint16 wsid) -> bool
+auto CMobController::MobSkill(const uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride) -> bool
 {
     TracyZoneScoped;
     if (POwner)
     {
         FaceTarget(targid);
         PMob->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PMob, wsid);
-        return POwner->PAI->Internal_MobSkill(targid, wsid);
+        return POwner->PAI->Internal_MobSkill(targid, wsid, castTimeOverride);
     }
 
     return false;

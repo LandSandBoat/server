@@ -36,6 +36,7 @@
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
+#include "navmesh.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -415,12 +416,14 @@ namespace zoneutils
                     "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
                     "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                     "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
-                    "mob_family_system.charmable "
+                    "mob_family_system.charmable, "
+                    "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
                     "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                     "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
                     "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
                     "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                     "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
+                    "LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) "
                     "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
                     "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
                     "AND mob_groups.zoneid = ?";
@@ -568,6 +571,39 @@ namespace zoneutils
 
                             PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
 
+                            auto spawnGroupID = rset->get<uint32_t>("spawnset");
+
+                            // Add to the spawn group
+                            if (spawnGroupID > 0)
+                            {
+                                if (!GetZone(zoneId)->m_spawnGroups.contains(spawnGroupID))
+                                {
+                                    GetZone(zoneId)->m_spawnGroups.insert(std::make_pair(spawnGroupID, new spawnGroup(rset->get<uint32>("maxspawns"), zoneId, spawnGroupID)));
+                                }
+                                auto* spawnGroup = GetZone(zoneId)->m_spawnGroups.at(spawnGroupID).get();
+                                if (spawnGroup)
+                                {
+                                    PMob->m_spawnGroup = spawnGroup;
+                                    spawnGroup->addMember(PMob->targid);
+
+                                    if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED)
+                                    {
+                                        ShowError(fmt::format("Mob {} ID {} in zone {} is set to SPAWNTYPE_SCRIPTED AND is in a group. This is not compatible!", PMob->packetName, PMob->id, zoneId));
+                                        PMob->m_SpawnType = SPAWNTYPE_NORMAL;
+                                    }
+
+                                    if (PMob->m_RespawnTime <= 0s)
+                                    {
+                                        ShowError(fmt::format("Mob {} ID {} in zone {} has a respawn time of 0s AND is in a group. This is not compatible!", PMob->packetName, PMob->id, zoneId));
+                                        PMob->m_RespawnTime = 5min;
+                                    }
+                                }
+                                else
+                                {
+                                    ShowError(fmt::format("Could not get Spawn Group!"));
+                                }
+                            }
+
                             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                             // can be set in their onInitialize
                             if (PMob->m_Type & MOBTYPE_EVENT ||
@@ -645,6 +681,15 @@ namespace zoneutils
         // clang-format off
         ForEachZone(zoneIds, [](CZone* PZone)
         {
+            for (auto &spawnGroup : PZone->m_spawnGroups)
+            {
+                spawnGroup.second->fillSpawnPool();
+                if (!spawnGroup.second->isValid(PZone))
+                {
+                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_groups.sql.", spawnGroup.first));
+                }
+            }
+
             PZone->ForEachMob([](CMobEntity* PMob)
             {
                 // Cache Mob Lua
@@ -673,7 +718,10 @@ namespace zoneutils
                 if (!PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
                 {
                     PMob->m_AllowRespawn = true;
-                    PMob->Spawn();
+                    if (!PMob->m_spawnGroup || PMob->CanSpawnFromGroup())
+                    {
+                        PMob->Spawn();
+                    }
                 }
                 else
                 {

@@ -55,16 +55,16 @@ inline std::string hex32ToString(std::uint32_t hex)
 #include <fmt/format.h>
 #include <string>
 
-#define TracyFrameMark          FrameMark
-#define TracyZoneScoped         ZoneScoped
-#define TracyZoneScopedN(n)     ZoneScopedN(n)
-#define TracyZoneNamed(var)     ZoneNamedN(var, #var, true)
-#define TracyZoneText(n, l)     ZoneText(n, l)
-#define TracyZoneScopedC(c)     ZoneScopedC(c)
-#define TracyZoneString(str)    ZoneText(str.c_str(), str.size())
-#define TracyZoneCString(cstr)  ZoneText(cstr, std::strlen(cstr))
-#define TracyMessageStr(str)    TracyMessage(str.c_str(), str.size())
-#define TracySetThreadName(str) tracy::SetThreadName(str)
+#define TracyFrameMark            FrameMark
+#define TracyZoneScoped           ZoneScoped
+#define TracyZoneScopedN(n)       ZoneScopedN(n)
+#define TracyZoneNamed(var, name) ZoneNamedN(var, name, true)
+#define TracyZoneText(n, l)       ZoneText(n, l)
+#define TracyZoneScopedC(c)       ZoneScopedC(c)
+#define TracyZoneString(str)      ZoneText(str.c_str(), str.size())
+#define TracyZoneCString(cstr)    ZoneText(cstr, std::strlen(cstr))
+#define TracyMessageStr(str)      TracyMessage(str.c_str(), str.size())
+#define TracySetThreadName(str)   tracy::SetThreadName(str)
 
 #define TracyZoneHex8(num) \
     auto str = hex8ToString(num); \
@@ -97,7 +97,7 @@ inline std::string hex32ToString(std::uint32_t hex)
 #define TracyFrameMark                     std::ignore = 0
 #define TracyZoneScoped                    std::ignore = 0
 #define TracyZoneScopedN(n)                std::ignore = n
-#define TracyZoneNamed(var)                std::ignore = #var
+#define TracyZoneNamed(var, name)          std::ignore = #var; std::ignore = name
 #define TracyZoneText(n, l)                std::ignore = n; std::ignore = l
 #define TracyZoneScopedC(c)                std::ignore = c
 #define TracyZoneString(str)               std::ignore = str
