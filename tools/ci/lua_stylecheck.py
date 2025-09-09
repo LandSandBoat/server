@@ -83,6 +83,12 @@ disallowed_numeric_parameters = {
     "showText"                : [ 0 ],
 }
 
+# Disallowed keys for reward tables
+disallowed_keys = [
+    "ki", 
+    "xp",
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -368,6 +374,9 @@ class LuaStyleCheck:
             full_condition      = ""
             uses_id             = False
             has_id_ref          = False
+            pending_reward_table = False
+            in_reward_table     = False
+            brace_count         = 0
 
             for line in self.lines:
                 self.counter = self.counter + 1
@@ -381,6 +390,39 @@ class LuaStyleCheck:
 
                 if in_block_comment:
                     continue
+
+                if not in_reward_table:
+                    # Detect assignment to quest.reward or mission.reward (brace may be on next line)
+                    if re.search(r'(quest|mission)\.reward\s*=\s*$', line.strip()):
+                        pending_reward_table = True
+                        continue
+                    if re.search(r'(quest|mission)\.reward\s*=\s*\{', line):
+                        in_reward_table = True
+                        brace_count = line.count('{') - line.count('}')
+                        # Check for disallowed keys on same line as opening brace
+                        for key in disallowed_keys:
+                            if re.search(rf'\b{key}\s*=', line):
+                                self.error(f"Found disallowed key '{key}' in reward table", suppress_line_ref=False)
+                        continue
+                if pending_reward_table:
+                    if '{' in line:
+                        in_reward_table = True
+                        brace_count = line.count('{') - line.count('}')
+                        pending_reward_table = False
+                        # Check for disallowed keys on same line as opening brace
+                        for key in disallowed_keys:
+                            if re.search(rf'\b{key}\s*=', line):
+                                self.error(f"Found disallowed key '{key}' in reward table", suppress_line_ref=False)
+                        continue
+                if in_reward_table:
+                    brace_count += line.count('{') - line.count('}')
+                    for key in disallowed_keys:
+                        if re.search(rf'\b{key}\s*=', line):
+                            self.error(f"Found disallowed key '{key}' in reward table", suppress_line_ref=False)
+                    if brace_count <= 0:
+                        in_reward_table = False
+                        brace_count = 0
+                        continue
 
                 comment_header = line.rstrip("\n")
                 if re.search(r"^-+$", comment_header) and len(comment_header) > 2 and len(comment_header) != 35:
@@ -520,7 +562,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 83
+    expected_errors = 93
 else:
     total_errors = LuaStyleCheck(target).errcount
 

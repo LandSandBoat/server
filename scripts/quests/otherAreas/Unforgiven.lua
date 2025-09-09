@@ -11,8 +11,8 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIV
 
 quest.reward =
 {
-    exp = 2000,
-    ki  = xi.ki.MAP_OF_TAVNAZIA,
+    exp     = 2000,
+    keyItem = xi.ki.MAP_OF_TAVNAZIA,
 }
 
 quest.sections =

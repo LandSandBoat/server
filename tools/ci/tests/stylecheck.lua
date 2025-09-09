@@ -249,3 +249,37 @@ math.random(1, 2, 3) -- FAIL
 
 os.time() -- FAIL
 GetSystemTime() -- PASS
+
+-- quest/mission reward table
+quest.reward =
+{
+    xp = 5000, -- FAIL
+    ki = xi.ki.SOME_KEYITEM, -- FAIL
+}
+
+mission.reward =
+{
+    xp = 5000, -- FAIL
+    ki = xi.ki.SOME_KEYITEM, -- FAIL
+}
+
+-- quest/mission reward table
+quest.reward =
+{
+    exp = 5000, -- PASS
+    keyItem = xi.ki.SOME_KEYITEM, -- PASS
+}
+
+mission.reward =
+{
+    exp = 5000, -- PASS
+    keyItem = xi.ki.SOME_KEYITEM, -- PASS
+}
+
+-- getPool magic numbers
+something:getPool() == 1 -- FAIL
+something:getPool() ~= 2 -- FAIL
+something:getPool() < 3 -- FAIL
+something:getPool() > 4 -- FAIL
+something:getPool() <= 5 -- FAIL
+something:getPool() >= 6 -- FAIL
