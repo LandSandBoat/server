@@ -30,8 +30,7 @@ entity.onTrigger = function(player, npc)
         (
             player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
             wakingDreams == xi.questStatus.QUEST_AVAILABLE
-        )
-        or
+        ) or
         (
             wakingDreams == xi.questStatus.QUEST_COMPLETED and
             GetSystemTime() > player:getCharVar('Darkness_Named_date')

@@ -2,7 +2,8 @@
 -- Area: Pashhow Marshlands [S]
 --   NM: Kinepikwa
 -----------------------------------
-mixins = {
+mixins =
+{
     require('scripts/mixins/job_special'),
     require('scripts/mixins/families/peiste'),
 }

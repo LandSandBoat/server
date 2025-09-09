@@ -324,7 +324,8 @@ end
 
 xi.beastmenTreasure.getTableOfIDs = function(digsiteids)
     -- Creates the table of IDs from the BEASTMEN_TREASURE_OFFSET in each three zone IDs.lua
-    local IDs = {
+    local IDs =
+    {
         digsiteids,
         digsiteids + 1,
         digsiteids + 2,

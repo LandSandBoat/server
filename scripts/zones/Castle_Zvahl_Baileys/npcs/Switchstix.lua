@@ -805,11 +805,17 @@ local function tradeHasRequiredCurrency(trade, currentRelic)
             return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 1) and
                 trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 1) and
                 trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 1)
-        elseif currentRelic == xi.item.BULWARK_SHIELD and trade:getItemCount() == 12 then
+        elseif
+            currentRelic == xi.item.BULWARK_SHIELD and
+            trade:getItemCount() == 12
+        then
             return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 4) and
                 trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 4) and
                 trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 4)
-        elseif currentRelic == xi.item.DYNAMIS_SHIELD and trade:getItemCount() == 60 then
+        elseif
+            currentRelic == xi.item.DYNAMIS_SHIELD and
+            trade:getItemCount() == 60
+        then
             return trade:hasItemQty(xi.item.ONE_HUNDRED_BYNE_BILL, 20) and
                 trade:hasItemQty(xi.item.MONTIONT_SILVERPIECE, 20) and
                 trade:hasItemQty(xi.item.LUNGO_NANGO_JADESHELL, 20)

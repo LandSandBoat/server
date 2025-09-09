@@ -216,8 +216,7 @@ xi.nyzul.handleProgress = function(instance, progress)
         stage == xi.nyzul.objective.ELIMINATE_ENEMY_LEADER or
         stage == xi.nyzul.objective.ACTIVATE_ALL_LAMPS or
         stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY) and
-        progress == 15)
-        or
+        progress == 15) or
         ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
         progress >= instance:getLocalVar('Eliminate'))
     then

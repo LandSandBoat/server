@@ -76,7 +76,12 @@ entity.onMobFight = function(mob, target)
                 target:showText(mob, ID.text.BAHAMUT_TAUNT)
                 mob:setLocalVar('FlareWait', mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
                 mob:setLocalVar('tauntShown', 1)
-            elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
+            elseif
+                flareWait < mob:getBattleTime() and
+                flareWait ~= 0 and
+                tauntShown >= 0
+            then
+                -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
                 if tauntShown == 1 then
                     mob:setLocalVar('tauntShown', 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)

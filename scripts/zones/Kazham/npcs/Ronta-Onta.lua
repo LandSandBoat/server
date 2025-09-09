@@ -24,7 +24,10 @@ entity.onTrigger = function(player, npc)
         not hasWhisperOfFlames
     then
         player:startEvent(285, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
-    elseif trialByFire == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfFlames then
+    elseif
+        trialByFire == xi.questStatus.QUEST_ACCEPTED and
+        not hasWhisperOfFlames
+    then
         player:startEvent(271, 0, xi.ki.TUNING_FORK_OF_FIRE, 0)
     elseif trialByFire == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfFlames then
         local numitem = 0

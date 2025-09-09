@@ -7,7 +7,8 @@
 ---@type TMobEntity
 local entity = {}
 
-local removables = {
+local removables =
+{
     xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.ELEGY, xi.effect.REQUIEM,
     xi.effect.PARALYSIS, xi.effect.POISON, xi.effect.DISEASE, xi.effect.PLAGUE,
     xi.effect.WEIGHT, xi.effect.BIND, xi.effect.BIO, xi.effect.DIA, xi.effect.BURN,

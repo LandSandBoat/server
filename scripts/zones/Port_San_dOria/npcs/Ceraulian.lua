@@ -47,7 +47,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(18) -- Long version of quest start
     elseif quotasNo == 1 then
         player:startEvent(14) -- Short version for those that said no.
-    elseif quotasStatus == xi.questStatus.QUEST_ACCEPTED and quotasProgress == 0 then
+    elseif
+        quotasStatus == xi.questStatus.QUEST_ACCEPTED and
+        quotasProgress == 0
+    then
         player:startEvent(13) -- Reminder to bring Gold Hairpin
     elseif quotasProgress == 1 then
         if player:getCharVar('ChasingQuotas_date') > GetSystemTime() then
@@ -71,7 +74,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(16) -- Fluff text until DRG AF3
 
     -- Knight Stalker (DRG AF3)
-    elseif stalkerStatus == xi.questStatus.QUEST_ACCEPTED and stalkerProgress == 0 then
+    elseif
+        stalkerStatus == xi.questStatus.QUEST_ACCEPTED and
+        stalkerProgress == 0
+    then
         player:startEvent(19) -- Fetch the last Dragoon's helmet
     elseif stalkerProgress == 1 then
         if not player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then

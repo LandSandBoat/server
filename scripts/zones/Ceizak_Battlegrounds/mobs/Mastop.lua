@@ -41,7 +41,8 @@ local function getNextStage(currentResist, isIncreasing)
 end
 
 local function adjustResistance(mob)
-    local dmgTypes = {
+    local dmgTypes =
+    {
         { key = 'physDmg', mod = xi.mod.UDMGPHYS },
         { key = 'magDmg', mod = xi.mod.UDMGMAGIC },
         { key = 'rangedDmg', mod = xi.mod.UDMGRANGE }

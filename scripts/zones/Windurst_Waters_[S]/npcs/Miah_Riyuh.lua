@@ -53,7 +53,10 @@ entity.onTrigger = function(player, npc)
         end
 
         player:startEvent(104, 0, 0, 0, 0, 0, 0, 0, puttyUsed)
-    elseif snakeOnThePlains == xi.questStatus.QUEST_COMPLETED and allegiance == 3 then
+    elseif
+        snakeOnThePlains == xi.questStatus.QUEST_COMPLETED and
+        allegiance == 3
+    then
         player:startEvent(107)
     else
         player:startEvent(121)

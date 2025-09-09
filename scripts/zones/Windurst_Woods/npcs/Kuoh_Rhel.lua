@@ -18,7 +18,10 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.fameArea.WINDURST) >= 2
     then
         player:startEvent(224) -- Start quest
-    elseif chocobilious == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
+    elseif
+        chocobilious == xi.questStatus.QUEST_COMPLETED and
+        player:needToZone()
+    then
         player:startEvent(232) -- Quest complete
     elseif
         chocobilious == xi.questStatus.QUEST_ACCEPTED and

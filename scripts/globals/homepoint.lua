@@ -235,7 +235,7 @@ xi.homepoint.onEventUpdate = function(player, csid, option, npc)
             local hpSet = math.floor(index / 32)
 
             if not player:hasTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet) then
-                print(string.format("Player %s tried to teleport to an HP without it's destination being unlocked", player:getName()))
+                print(string.format('Player %s tried to teleport to an HP without it\'s destination being unlocked', player:getName()))
                 player:release()
             end
         end

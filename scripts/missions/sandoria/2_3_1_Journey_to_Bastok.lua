@@ -30,7 +30,10 @@ mission.sections =
                         return mission:progressEvent(425)
                     elseif missionStatus == 4 then
                         return mission:progressEvent(423)
-                    elseif missionStatus == 5 and not player:hasItem(xi.item.ONZ_OF_MYTHRIL_SAND) then
+                    elseif
+                        missionStatus == 5 and
+                        not player:hasItem(xi.item.ONZ_OF_MYTHRIL_SAND)
+                    then
                         return mission:progressEvent(424)
                     else
                         return mission:progressEvent(422)

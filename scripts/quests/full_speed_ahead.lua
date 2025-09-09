@@ -82,14 +82,19 @@ xi.full_speed_ahead.tick = function(player, effect)
     then
         player:delStatusEffectSilent(xi.effect.FULL_SPEED_AHEAD)
     else
-        local objective = {
+        local objective =
+        {
             countdown = timeLeft,
-            bars = {
-                [1] = {
+            bars =
+            {
+                [1] =
+                {
                     title = 'Motivation',
                     value = motivation
                 },
-                [2] = {
+
+                [2] =
+                {
                     title = 'Pep',
                     value = pep
                 }
@@ -134,14 +139,19 @@ xi.full_speed_ahead.onCheer = function(player)
 
     local newMotivation = utils.clamp(motivation + (pep / 2), 0, 100)
 
-    local objective = {
+    local objective =
+    {
         countdown = timeLeft,
-        bars = {
-            [1] = {
+        bars =
+        {
+            [1] =
+            {
                 title = 'Motivation',
                 value = newMotivation
             },
-            [2] = {
+
+            [2] =
+            {
                 title = 'Pep',
                 value = 0
             }

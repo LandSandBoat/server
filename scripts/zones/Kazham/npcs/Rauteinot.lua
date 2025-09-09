@@ -26,14 +26,20 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.fameArea.WINDURST) >= 3
     then
         player:startEvent(137, 0, xi.item.SLAB_OF_ELSHIMO_MARBLE) -- Start quest "Missionary Man"
-    elseif missionaryMan == xi.questStatus.QUEST_ACCEPTED and missionaryManVar == 1 then
+    elseif
+        missionaryMan == xi.questStatus.QUEST_ACCEPTED and
+        missionaryManVar == 1
+    then
         player:startEvent(138, 0, xi.item.SLAB_OF_ELSHIMO_MARBLE) -- During quest (before trade marble) "Missionary Man"
     elseif
         missionaryMan == xi.questStatus.QUEST_ACCEPTED and
         (missionaryManVar == 2 or missionaryManVar == 3)
     then
         player:startEvent(140) -- During quest (after trade marble) "Missionary Man"
-    elseif missionaryMan == xi.questStatus.QUEST_ACCEPTED and missionaryManVar == 4 then
+    elseif
+        missionaryMan == xi.questStatus.QUEST_ACCEPTED and
+        missionaryManVar == 4
+    then
         player:startEvent(141) -- Finish quest "Missionary Man"
     elseif missionaryMan == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(142) -- New standard dialog

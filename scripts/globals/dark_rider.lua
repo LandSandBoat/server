@@ -11,31 +11,41 @@ xi = xi or {}
 xi.darkRider = {}
 xi.darkRider.MAX_HOOFPRINTS_PER_DAY = 2
 
-local hoofprintIds = {
-    [xi.zone.WAJAOM_WOODLANDS] = {
+local hoofprintIds =
+{
+    [xi.zone.WAJAOM_WOODLANDS] =
+    {
         wajaomID.npc.HOOFPRINT,
         wajaomID.npc.HOOFPRINT + 1,
         wajaomID.npc.HOOFPRINT + 2,
     },
-    [xi.zone.BHAFLAU_THICKETS] = {
+
+    [xi.zone.BHAFLAU_THICKETS] =
+    {
         bhaflauID.npc.HOOFPRINT,
         bhaflauID.npc.HOOFPRINT + 1,
         bhaflauID.npc.HOOFPRINT + 2,
     },
-    [xi.zone.MOUNT_ZHAYOLM] = {
+
+    [xi.zone.MOUNT_ZHAYOLM] =
+    {
         mountID.npc.HOOFPRINT,
         mountID.npc.HOOFPRINT + 1,
         mountID.npc.HOOFPRINT + 2,
     },
-    [xi.zone.CAEDARVA_MIRE] = {
+
+    [xi.zone.CAEDARVA_MIRE] =
+    {
         caedarvaID.npc.HOOFPRINT,
         caedarvaID.npc.HOOFPRINT + 1,
         caedarvaID.npc.HOOFPRINT + 2,
     },
 }
 
-local hoofprintPositions = {
-    [xi.zone.WAJAOM_WOODLANDS] = {
+local hoofprintPositions =
+{
+    [xi.zone.WAJAOM_WOODLANDS] =
+    {
         { 400, -24, 2 }, -- K-9
         { 345, -18, -41 }, -- J-9 E edge
         { 221, -18, -63 }, -- J-9 W edge
@@ -58,7 +68,9 @@ local hoofprintPositions = {
         { -360, -32, 680 }, -- F-5 behind tower
         { 105, -26, 320 },  -- I-7
     },
-    [xi.zone.BHAFLAU_THICKETS] = {
+
+    [xi.zone.BHAFLAU_THICKETS] =
+    {
         { 447, -18, 266 }, -- I-8
         { 425, -20.25, 239 }, -- I-9
         { 298, -8.5, 211 }, -- H-8 center of open area
@@ -72,7 +84,9 @@ local hoofprintPositions = {
         { 336, -18, 380 }, -- H-7 SE corner
         { 379, -17, 380 }, -- I-7 in tunnel
     },
-    [xi.zone.MOUNT_ZHAYOLM] = {
+
+    [xi.zone.MOUNT_ZHAYOLM] =
+    {
         { -401, -14.5, 374 }, -- D/E-6
         { -458, -13, 357 }, -- D-6
         { -350, -14, 330 }, -- E-6 near manhole cover
@@ -82,7 +96,9 @@ local hoofprintPositions = {
         { 598, -14, -4 }, -- K-8
         { 762, -14.5, -55 }, -- L-8
     },
-    [xi.zone.CAEDARVA_MIRE] = {
+
+    [xi.zone.CAEDARVA_MIRE] =
+    {
         { -600, 4.5, -100 }, -- G-9 (2nd map)
         { 212, 0, -533 }, -- I-9
         { 280, -16, -357 }, -- J-8

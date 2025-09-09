@@ -18,7 +18,8 @@ local content = Battlefield:new({
     requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, message = ID.text.IMPERIAL_ORDER_BREAKS },
 })
 
-content.groups = {
+content.groups =
+{
     {
         mobs      = { 'Phantom_Puk' },
         allDeath  = utils.bind(content.handleAllMonstersDefeated, content),

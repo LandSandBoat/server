@@ -63,8 +63,7 @@ class LuaStyleContext:
     def preprocess_line(self, line):
         self.line_raw = line
         self.line_no_comments = line.split('--')[0].rstrip()
-        self.line_no_comments_or_strings = re.sub(r'\"([^\"]*?)\"', "strVal", self.line_no_comments)
-        self.line_no_comments_or_strings = re.sub(r"\'([^\"]*?)\'", "strVal", self.line_no_comments_or_strings)
+        self.line_no_comments_or_strings = re.sub(r"(\"([^\"\\]|\\.)*\"|\'([^\'\\]|\\.)*\')", 'strVal', self.line_no_comments)
 
     def error(self, error_string, suppress_line_ref=False):
         """Report an error and optionally print it."""
@@ -168,8 +167,8 @@ elif target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
-    total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = True).errcount
-    expected_errors = 96
+    total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
+    expected_errors = 99
 else:
     total_errors = LuaStyleCheck(target).errcount
 

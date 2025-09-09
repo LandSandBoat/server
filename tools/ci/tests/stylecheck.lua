@@ -170,16 +170,16 @@ end
 local reallyLongVariableNameOne = 1
 local reallyLongVariableNameTwo = 2
 
-if reallyLongVariableNameOne == reallyLongVariableNameTwo and reallyLongVariableNameTwo - reallyLongVariableNameOne == 0 then -- FAIL
+if reallyLongVariableNameOne == reallyLongVariableNameTwo and reallyLongVariableNameTwo - reallyLongVariableNameOne == 0 then -- FAIL x2
 end
 
 -- String values in parameters
-(a,"b",c) -- FAIL x2
+(a,"b",c) -- FAIL x3
 ("a", b)  -- FAIL x1
 (",", b)  -- FAIL x1
 (",",b)   -- FAIL x2
 
-(a,'b',c) -- FAIL x1
+(a,'b',c) -- FAIL x2
 ('a', b)  -- PASS
 (',', b)  -- PASS
 (',',b)   -- FAIL

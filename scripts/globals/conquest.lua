@@ -1197,7 +1197,10 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         -- do nothing else
 
     -- JEUNO OVERSEERS
-    elseif guardType == xi.conquest.guard.CITY and guardNation == xi.nation.OTHER then
+    elseif
+        guardType == xi.conquest.guard.CITY and
+        guardNation == xi.nation.OTHER
+    then
         local a1 = getArg1(player, guardNation, guardType)
         local a3 = conquestRanking()
         local a6 = getArg6(player)

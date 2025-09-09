@@ -10,7 +10,8 @@ xi.combat.ranged.maxInnerPenalty = 25
 xi.combat.ranged.maxOuterPenalty = 20
 
 -- This table provides the default sweet spot ranges for various weapon types, assuming a mob size of 1
-xi.combat.ranged.sweetSpotDefaults = {
+xi.combat.ranged.sweetSpotDefaults =
+{
     ['throwing'] = { 0.0, 3.5  },
     ['cannon'  ] = { 5.0, 6.0  },
     ['gun'     ] = { 5.0, 6.0  },
@@ -20,7 +21,8 @@ xi.combat.ranged.sweetSpotDefaults = {
 }
 
 -- This table provides the sweet spot ranges for weapons, assuming a mob size of 1
-xi.combat.ranged.sweetSpots = {
+xi.combat.ranged.sweetSpots =
+{
     [xi.item.YOICHINOYUMI_75               ] = { 7.5, 11 },
     [xi.item.YOICHINOYUMI_80               ] = { 7.5, 11 },
     [xi.item.YOICHINOYUMI_85               ] = { 7.5, 11 },

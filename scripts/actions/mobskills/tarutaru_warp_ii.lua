@@ -11,7 +11,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local t = mob:getSpawnPos()
-    local angle = math.random() * 2 * math.pi
+    local angle = math.pi * math.random(0, 100) / 100
     local pos = NearLocation(t, 18.0, angle)
     mob:teleport(pos, target)
     skill:setMsg(xi.msg.basic.NONE)

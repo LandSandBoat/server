@@ -131,7 +131,8 @@ quest.sections =
 
                 [28] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    local cookMobs = {
+                    local cookMobs =
+                    {
                         templeID.mob.COOK_OFFSET,
                         templeID.mob.COOK_OFFSET + 1,
                         templeID.mob.COOK_OFFSET + 2,

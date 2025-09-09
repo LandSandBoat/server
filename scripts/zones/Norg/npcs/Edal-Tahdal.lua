@@ -24,7 +24,10 @@ entity.onTrigger = function(player, npc)
         not hasWhisperOfTides
     then
         player:startEvent(190, 0, xi.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
-    elseif trialByWater == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfTides then
+    elseif
+        trialByWater == xi.questStatus.QUEST_ACCEPTED and
+        not hasWhisperOfTides
+    then
         player:startEvent(110, 0, xi.ki.TUNING_FORK_OF_WATER, 2)
     elseif trialByWater == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfTides then
         local numitem = 0

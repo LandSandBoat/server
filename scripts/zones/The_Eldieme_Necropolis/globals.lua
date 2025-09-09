@@ -58,7 +58,8 @@ local lightBrazier = function(player, npc)
     end
 end
 
-local eldiemeGlobal = {
+local eldiemeGlobal =
+{
     -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
         if npc:getAnimation() == xi.anim.CLOSE_DOOR then

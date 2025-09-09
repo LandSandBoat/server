@@ -18,7 +18,8 @@ local content = Battlefield:new({
     requiredKeyItems = { xi.ki.CONFIDENTIAL_IMPERIAL_ORDER, message = ID.text.IMPERIAL_ORDER_BREAKS },
 })
 
-content.groups = {
+content.groups =
+{
     {
         mobs = { 'Imp_Bandsman' },
     },

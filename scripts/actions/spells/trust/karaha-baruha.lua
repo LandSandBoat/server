@@ -40,7 +40,8 @@ spellObject.onMobSpawn = function(mob)
 
     -- Handle his Barelementra tracking --
     mob:addListener('TAKE_DAMAGE', 'KARAHA-BARUHA_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
-        local elemTable = {
+        local elemTable =
+        {
             [xi.damageType.FIRE] = { effect = xi.effect.BARFIRE, spell = 66 },
             [xi.damageType.ICE] = { effect = xi.effect.BARBLIZZARD, spell = 67 },
             [xi.damageType.WIND] = { effect = xi.effect.BARAERO, spell = 68 },

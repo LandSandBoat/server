@@ -211,7 +211,10 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         end
 
     -- Bar-Element
-    elseif spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
+    elseif
+        spellEffect >= xi.effect.BARFIRE and
+        spellEffect <= xi.effect.BARWATER
+    then
         if skillLevel > 300 then
             basePower = 25 + math.floor(skillLevel / 4) -- 150 at 500
         else
@@ -325,7 +328,10 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
         finalPower = finalPower + caster:getMod(xi.mod.AQUAVEIL_COUNT) -- Aquaveil+ from gear applies during accession (https://www.bg-wiki.com/ffxi/Aquaveil)
 
     -- Bar-Element
-    elseif spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
+    elseif
+        spellEffect >= xi.effect.BARFIRE and
+        spellEffect <= xi.effect.BARWATER
+    then
         finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Bar-Status

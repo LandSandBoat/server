@@ -760,8 +760,7 @@ xi.mission.getMissionMask = function(player)
                     rank == getRequiredRank(missionId) and
                     xi.mission.getMissionRankPoints(player, missionId)
                 )
-            )
-            and
+            ) and
             (
                 lastRequiredMission < 0 or
                 player:hasCompletedMission(nation, lastRequiredMission)

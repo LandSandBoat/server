@@ -69,9 +69,9 @@ class DeprecatedFunctionVisitor(LuaStyleVisitor):
 
 class DeprecatedRequireVisitor(LuaStyleVisitor):
     def visit(self, line, context):
-        if "require(" in context.line_no_comments_or_strings:
+        if "require(" in context.line_no_comments:
             for deprecated_str in deprecated_requires:
-                if deprecated_str in context.line_no_comments_or_strings:
+                if deprecated_str in context.line_no_comments:
                     if deprecated_str == "IDs":
                         context.error("IDs requires should be replaced with references to zones[xi.zone.ZONE_ENUM]")
                     else:

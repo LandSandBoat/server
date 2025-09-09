@@ -3,7 +3,8 @@
 -----------------------------------
 local ID = zones[xi.zone.HAZHALM_TESTING_GROUNDS]
 
-local bossDrops = {
+local bossDrops =
+{
     -- Wing 1
     [ID.mob.HAKENMANN] =
     {

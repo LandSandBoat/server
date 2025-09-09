@@ -92,7 +92,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
         if not chamberEntry or bit.band(mask, chamberEntry.menu) ~= 0 then
             releaseLamp(player)
-            print(string.format("Einherjar: %s attempted to reserve a chamber they don't have access to.", player:getName()))
+            print(string.format('Einherjar: %s attempted to reserve a chamber they don\'t have access to.', player:getName()))
             player:messageSpecial(ID.text.COULD_NOT_GATHER_DATA)
             player:instanceEntry(npc, 3)
             return

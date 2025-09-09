@@ -12,7 +12,10 @@ entity.onTrigger = function(player, npc)
 
     if sayItWithAHandbag == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(175)
-    elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
+    elseif
+        player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and
+        sayItWithAHandbagCS == 4
+    then
         player:startEvent(174)
     elseif
         player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) or

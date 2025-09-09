@@ -78,7 +78,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         if npcUtil.giveItem(player, xi.item.SMOLDERING_LAMP) then
             player:confirmTrade()
         end
-    elseif csid == 24 and option ~= utils.EVENT_CANCELLED_OPTION and option ~= 0 then
+    elseif
+        csid == 24 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
+        option ~= 0
+    then
         local kilushaItems =
         {
             [1] =  { item = xi.item.ANIMATOR_P1,          cost =  15000 },

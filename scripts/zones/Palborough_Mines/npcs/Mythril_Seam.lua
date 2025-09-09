@@ -40,7 +40,10 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 51 and npcUtil.giveItem(player, xi.item.SHARP_STONE) then
         player:confirmTrade()
         player:setCharVar('Quest[2][26]Prog', 3)
-    elseif csid == 43 and npcUtil.giveItem(player, xi.item.CHUNK_OF_MINE_GRAVEL) then
+    elseif
+        csid == 43 and
+        npcUtil.giveItem(player, xi.item.CHUNK_OF_MINE_GRAVEL)
+    then
         player:confirmTrade()
     elseif csid == 47 then
         player:confirmTrade()

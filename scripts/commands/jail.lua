@@ -71,7 +71,7 @@ commandObj.onTrigger = function(player, target, cellId, reason)
             -- next check if the target has a valid session (and thus online in a different map process (cluster))
             if PlayerHasValidSession(targetID) then
                 -- Target online in different map process (cluster) than GM so inform the GM and exit
-                player:printToPlayer(string.format("Player '%s' is online but in a different zone group (cluster). Go to that zone group to use !jail", target))
+                player:printToPlayer(string.format('Player \'%s\' is online but in a different map server instance. Go to that zone group to use !jail', target))
                 return
             end
 

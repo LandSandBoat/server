@@ -150,20 +150,27 @@ quest.sections =
             ['Honoi-Gomoi'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
+                    local questProgress = quest:getVar(player, 'Prog')
+
+                    if questProgress == 0 then
                         return quest:progressEvent(774, 0, xi.item.STAR_SPINEL)
-                    elseif quest:getVar(player, 'Prog') == 1 or quest:getVar(player, 'Prog') == 2 then
+                    elseif
+                        questProgress == 1 or
+                        questProgress == 2
+                    then
                         return quest:event(777) -- Reminder text before trade.
-                    elseif quest:getVar(player, 'Prog') == 3 then
+                    elseif questProgress == 3 then
                         return quest:event(778) -- Reminder text after trade
-                    elseif quest:getVar(player, 'Prog') == 4 then
+                    elseif questProgress == 4 then
                         return quest:progressEvent(776) -- Quest Complete.
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
+                    local questProgress = quest:getVar(player, 'Prog')
+
                     if
-                        (quest:getVar(player, 'Prog') == 1 or quest:getVar(player, 'Prog') == 2) and
+                        (questProgress == 1 or questProgress == 2) and
                         npcUtil.tradeHasExactly(trade, xi.item.STAR_SPINEL)
                     then
                         return quest:progressEvent(775, 0, xi.item.STAR_SPINEL)

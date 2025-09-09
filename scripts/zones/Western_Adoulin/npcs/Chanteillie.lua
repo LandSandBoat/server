@@ -42,7 +42,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5077)
 
     -- VEGETABLE VEGETABLE CRISIS
-    elseif vvc == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('VVC_Status') == 1 then
+    elseif
+        vvc == xi.questStatus.QUEST_ACCEPTED and
+        player:getCharVar('VVC_Status') == 1
+    then
         player:startEvent(5088)
     end
 end

@@ -32,9 +32,15 @@ entity.onTrigger = function(player, npc)
     local payingLipService = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE)
 
     -- CHOCOBILIOUS
-    if chocobilious == xi.questStatus.QUEST_ACCEPTED and chocobiliousCS == 2 then
+    if
+        chocobilious == xi.questStatus.QUEST_ACCEPTED and
+        chocobiliousCS == 2
+    then
         player:startEvent(230) -- after trading
-    elseif chocobilious == xi.questStatus.QUEST_ACCEPTED and chocobiliousCS == 1 then
+    elseif
+        chocobilious == xi.questStatus.QUEST_ACCEPTED and
+        chocobiliousCS == 1
+    then
         player:startEvent(228, 0, xi.item.PAPAKA_GRASS) -- after first talk
     elseif chocobilious == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(227, 0, xi.item.PAPAKA_GRASS) -- first talk

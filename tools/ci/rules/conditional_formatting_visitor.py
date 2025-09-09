@@ -20,5 +20,4 @@ class ConditionalFormattingVisitor(LuaStyleVisitor):
         for line in lines:
             compare_line = context.line_no_comments_or_strings.rstrip().lstrip()
             if (" and " in compare_line or " or " in compare_line) and len(compare_line) > 80:
-                print(line)
                 context.error("Multiline conditional line too long (>80 chars with logical operator)")
