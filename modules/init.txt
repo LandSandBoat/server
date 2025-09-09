@@ -38,3 +38,6 @@
 
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
+custom/lua/Fail_Badge_Quest.lua
+custom/sql/Fail_Badge_NPCs.sql
+era/sql/2007_exp_tables.sql

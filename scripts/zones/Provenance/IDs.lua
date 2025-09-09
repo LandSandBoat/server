@@ -20,6 +20,7 @@ zones[xi.zone.PROVENANCE] =
     },
     mob =
     {
+        PROVENANCE_WATCHER = 17686529,
     },
     npc =
     {
