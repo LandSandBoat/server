@@ -173,7 +173,7 @@ xi.failBadge.handleChestTrigger = function(player, npc, currentProgress, nextPro
         -- Player is at correct stage, give hint
         sendLocationHint(player, prog)
     else
-        -- Generic message for wrong stage
+        -- Generic message
         player:printToPlayer("A mysterious chest. It seems to be waiting for something.", xi.msg.channel.SYSTEM_3)
     end
 end
