@@ -77,7 +77,7 @@ commandObj.onTrigger = function(player, target, cellId, reason)
 
         -- No such target name in the database so inform the GM and exit
         else
-            player:printToPlayer(string.format("Invalid player '%s' given.", target))
+            player:printToPlayer(string.format('Invalid player "%s" given.', target))
             return
         end
 
