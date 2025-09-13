@@ -30,19 +30,17 @@ local function surface(mob)
     end
 end
 
+-- Hpemde take 100% increased damage and deal 2x base damage in open mouth form
 local function openMouth(mob)
-    mob:addMod(xi.mod.ATTP, 100)
-    mob:addMod(xi.mod.DEFP, -50)
-    mob:addMod(xi.mod.DMGMAGIC, -5000)
-    mob:setLocalVar('[hpemde]closeMouthHP', mob:getHP() - math.ceil(mob:getMaxHP() / 3))
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getMainLvl() + 2)
+    mob:setMod(xi.mod.DMG, 10000)
     mob:setAnimationSub(3)
     mob:wait(2000)
 end
 
 local function closeMouth(mob)
-    mob:delMod(xi.mod.ATTP, 100)
-    mob:delMod(xi.mod.DEFP, -50)
-    mob:delMod(xi.mod.DMGMAGIC, -5000)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0)
+    mob:setMod(xi.mod.DMG, 0)
     mob:setLocalVar('[hpemde]changeTime', mob:getBattleTime() + 30)
     mob:setAnimationSub(6)
     mob:wait(2000)
@@ -59,7 +57,10 @@ g_mixins.families.hpemde = function(hpemdeMob)
             mob:setLocalVar('[hpemde]damaged', 0)
         end
 
-        if mob:getAnimationSub() ~= 5 then
+        if
+            mob:getPool() ~= xi.mobPools.HPEMDE_NO_DIVING and
+            mob:getAnimationSub() ~= 5
+        then
             dive(mob)
         end
     end)
@@ -101,8 +102,11 @@ g_mixins.families.hpemde = function(hpemdeMob)
         end
     end)
 
-    hpemdeMob:addListener('CRITICAL_TAKE', 'HPEMDE_CRITICAL_TAKE', function(mob)
-        if mob:getAnimationSub() == 3 then
+    hpemdeMob:addListener('TAKE_DAMAGE', 'HPEMDE_TAKE_DAMAGE', function(mob, damage, attacker, attackType, damageType)
+        if
+            mob:getAnimationSub() == 3 and
+            damage >= 250
+        then
             closeMouth(mob)
         end
     end)

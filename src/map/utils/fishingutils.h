@@ -19,14 +19,12 @@
 ===========================================================================
 */
 
-#ifndef _FISHINGUTILS_H
-#define _FISHINGUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "enums/key_items.h"
 #include "items/item_fish.h"
 
-#include <list>
 #include <map>
 #include <vector>
 
@@ -1003,5 +1001,3 @@ namespace fishingutils
     void InitializeFishingSystem();
     void CleanupFishing();
 }; // namespace fishingutils
-
-#endif // _FISHINGUTILS_H

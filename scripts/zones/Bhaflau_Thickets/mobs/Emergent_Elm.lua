@@ -39,33 +39,27 @@ entity.spawnPoints =
     { x = 103.465, y = -35.500, z = 627.737 },
     { x = 97.686,  y = -35.500, z = 625.171 },
     { x = 96.366,  y = -35.500, z = 628.378 },
-    { x = 218.379, y = -32.000, z = 494.295 },
-    { x = 226.635, y = -32.000, z = 493.369 },
-    { x = 237.906, y = -31.672, z = 493.271 },
-    { x = 240.145, y = -31.872, z = 486.061 },
-    { x = 231.722, y = -31.750, z = 477.321 },
-    { x = 240.660, y = -31.643, z = 466.261 },
-    { x = 249.036, y = -31.028, z = 475.045 },
-    { x = 250.165, y = -30.641, z = 476.495 },
-    { x = 252.978, y = -29.226, z = 485.429 },
-    { x = 260.457, y = -28.077, z = 491.169 },
-    { x = 267.708, y = -27.500, z = 495.789 },
-    { x = 269.285, y = -27.873, z = 505.912 },
-    { x = 280.133, y = -28.250, z = 506.127 },
-    { x = 288.895, y = -28.250, z = 506.365 },
-    { x = 289.209, y = -27.574, z = 500.306 },
-    { x = 280.457, y = -24.614, z = 488.201 },
-    { x = 283.762, y = -24.000, z = 477.425 },
-    { x = 275.782, y = -23.849, z = 472.681 },
-    { x = 275.456, y = -23.574, z = 463.209 },
-    { x = 283.533, y = -23.847, z = 446.466 },
-    { x = 281.791, y = -24.000, z = 436.993 },
-    { x = 274.826, y = -24.621, z = 432.283 },
-    { x = 266.687, y = -26.000, z = 434.387 },
-    { x = 257.881, y = -27.064, z = 453.281 },
-    { x = 257.705, y = -27.640, z = 470.692 },
-    { x = 246.619, y = -31.446, z = 473.172 },
 }
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.BIND, { chance = 10, duration = 90 })
+end
+
+entity.onMobFight = function(mob, target)
+    -- mob has a regen and regain effect during the day
+    local totd = VanadielTOTD()
+    if totd == xi.time.NIGHT or totd == xi.time.MIDNIGHT then
+        mob:setMod(xi.mod.REGEN, 0)
+        mob:setMod(xi.mod.REGAIN, 0)
+    else
+        mob:setMod(xi.mod.REGEN, 100)
+        mob:setMod(xi.mod.REGAIN, 150)
+    end
+end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 452)

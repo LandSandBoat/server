@@ -62,6 +62,8 @@
 #include "battlefield.h"
 #include "char_recast_container.h"
 #include "charentity.h"
+
+#include "blue_spell.h"
 #include "conquest_system.h"
 #include "enums/key_items.h"
 #include "ipc_client.h"

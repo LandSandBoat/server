@@ -52,7 +52,8 @@ zones[xi.zone.CAEDARVA_MIRE] =
         CHIGOES =
         {
             ['Wild_Karakul'] = utils.slice(GetTableOfIDs('Chigoe'), 1, 5), -- Entries 1-5 of the table (1-indexed, inclusive)
-            ['Mosshorn']     = utils.slice(GetTableOfIDs('Chigoe'), 6, 10), -- Entries 6-10 of the table (1-indexed, inclusive)
+            ['Mosshorn']     = utils.slice(GetTableOfIDs('Chigoe'), 1, 5), -- Shared Chigoes with Karakul
+            ['Peallaidh']    = utils.slice(GetTableOfIDs('Chigoe'), 6, 10), -- Peallaidh's own pool, ids xxx11-15
         },
         EXPERIMENTAL_LAMIA    = GetFirstID('Experimental_Lamia'),
         JAZARAAT              = GetFirstID('Jazaraat'),

@@ -12,7 +12,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMobMod(xi.mobMod.VAR) == 0 then
+    if mob:getAnimationSub() == 0 then
         return 0
     end
 
@@ -21,7 +21,7 @@ end
 
 -- TODO: can crit
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:setMobMod(xi.mobMod.VAR, 1)
+    skill:setFinalAnimationSub(1)
     local numhits = 1
     local accmod = 1
     local ftp    = 1.5

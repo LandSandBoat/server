@@ -40,6 +40,8 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         IXGHRAH                 = GetFirstID('Ixghrah'),
         JAILER_OF_TEMPERANCE    = GetFirstID('Jailer_of_Temperance'),
         IXAERN_MNK              = GetFirstID('Ixaern_MNK'),
+        EOGHRAH_BIRD            = utils.slice(GetTableOfIDs('Eoghrah'), 1, 38),
+        EOGHRAH_SPIDER          = utils.slice(GetTableOfIDs('Eoghrah'), 39),
     },
     npc =
     {

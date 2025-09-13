@@ -11,7 +11,9 @@ xi.magic.spellFlag =
     NONE           = 0x00,
     HIT_ALL        = 0x01, -- Hit all targets in range regardless of party
     WIPE_SHADOWS   = 0x02, -- Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    IGNORE_SHADOWS = 0x04  -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    IGNORE_SHADOWS = 0x04, -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    NO_START_MSG   = 0x08, -- Doesn't emit "<caster> starts casting <spell>"
+    NO_FINISH_MSG  = 0x10, -- Doesn't emit finish message when magic state completes
 }
 
 -----------------------------------

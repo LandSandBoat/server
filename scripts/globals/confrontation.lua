@@ -37,6 +37,58 @@ xi.confrontation.despawnMobs = function(mobs)
     end
 end
 
+local msgIfExists = function(player, msgID, offset)
+    if
+        not player or
+        not msgID
+    then
+        return
+    end
+
+    player:messageSpecial(msgID + (offset or 0))
+end
+
+-- will early exit with false return if confrontation doesn't define a distanceLimit
+-- will default to warn 5 times before failing confrontation
+-- messages are in the zone's IDs.lua text table offset from CONFRONTATION_DISENGAGED:
+-- -1: warning you have left the area
+-- +1: returned to area
+--  0: confrontation has ended
+local confrontationDistCheck = function(player, npc, distanceLimit, distanceWarnLimit)
+    if
+        not (player and
+        npc and
+        distanceLimit and
+        distanceLimit > 0)
+    then
+        return false
+    end
+
+    local endMsg = zones[player:getZoneID()].text.CONFRONTATION_DISENGAGED
+    local prevOutOfRange = player:getLocalVar('Confrontation_Dist')
+    if player:checkDistance(npc) < distanceLimit then
+        player:setLocalVar('Confrontation_Dist', 0)
+        if prevOutOfRange > 0 then
+            -- you have returned to the area
+            msgIfExists(player, endMsg, 1)
+        end
+    else
+        -- running out of range
+        player:setLocalVar('Confrontation_Dist', prevOutOfRange + 1)
+        if prevOutOfRange >= (distanceWarnLimit or 5) then
+            -- the confrontation has ended
+            msgIfExists(player, endMsg)
+
+            return true
+        else
+            -- you have ventured too far
+            msgIfExists(player, endMsg, -1)
+        end
+    end
+
+    return false
+end
+
 ---@param lookupKey integer
 ---@param setupTimer boolean
 ---@return nil
@@ -75,6 +127,11 @@ xi.confrontation.check = function(lookupKey, setupTimer)
             member:getStatusEffect(xi.effect.CONFRONTATION):getPower() == lookupKey
         then
             validPlayerCount = validPlayerCount + 1
+
+            -- send out-of-range messages multiple times in a row then fail the confrontation if any member stays out of range long enough
+            if confrontationDistCheck(member, lookup.npc, lookup.distanceLimit, lookup.distanceWarnLimit) then
+                didLose = true
+            end
         end
     end
 
@@ -196,6 +253,7 @@ xi.confrontation.start = function(player, npc, mobIds, params)
     lookup.onLose              = params.onLose
     lookup.cleanUp             = params.cleanUp
     lookup.distanceLimit       = params.distanceLimit
+    lookup.distanceWarnLimit   = params.distanceWarnLimit
 
     if params.timeLimit then
         lookup.timeLimit = GetSystemTime() + params.timeLimit

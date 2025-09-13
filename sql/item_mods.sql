@@ -47018,9 +47018,9 @@ INSERT INTO `item_mods` VALUES (22300,160,-300); -- DMG: -300
 -- TODO: Physical damage limit +3%
 
 -- Sroda Tathlum
-INSERT INTO `item_mods` VALUES (22301,30,-10); -- MACC: -10
-INSERT INTO `item_mods` VALUES (22301,31,-10); -- MEVA: -10
--- INSERT INTO `item_mods` VALUES (22301,??,10); -- TODO: MAGIC_CRITHITRATE_II: 10
+INSERT INTO `item_mods` VALUES (22301,30,-10);  -- MACC: -10
+INSERT INTO `item_mods` VALUES (22301,31,-10);  -- MEVA: -10
+INSERT INTO `item_mods` VALUES (22301,1168,10); -- MAGIC_CRITHITRATE_II: 10
 
 -- Pummelers Mask +2
 INSERT INTO `item_mods` VALUES (23040,1,123);    -- DEF: 123

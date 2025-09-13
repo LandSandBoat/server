@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTRANSPORT_H
-#define _CTRANSPORT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
@@ -143,5 +142,3 @@ private:
     std::vector<TransportZone_Town>   townZoneList;
     std::vector<TransportZone_Voyage> voyageZoneList;
 };
-
-#endif

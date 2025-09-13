@@ -9,7 +9,7 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

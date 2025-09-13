@@ -19,10 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYDEFINEPACKET_H
-#define _CPARTYDEFINEPACKET_H
-
-#include "common/cbasetypes.h"
+#pragma once
 
 #include "basic.h"
 
@@ -33,5 +30,3 @@ class CPartyDefinePacket : public CBasicPacket
 public:
     CPartyDefinePacket(CParty* PParty, bool loadTrust = false);
 };
-
-#endif

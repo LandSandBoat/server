@@ -68,3 +68,8 @@ end
 ---@return integer
 function CMobSkill:getPrimaryTargetID()
 end
+
+---@param newAnimationSub integer
+---@return nil
+function CMobSkill:setFinalAnimationSub(newAnimationSub)
+end

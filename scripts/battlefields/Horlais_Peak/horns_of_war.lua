@@ -24,6 +24,10 @@ content:addEssentialMobs({ 'Chlevnik' })
 content.loot =
 {
     {
+        { item = xi.item.GIL, weight = 1000, amount = 32000 }, -- Gil
+    },
+
+    {
         { item = xi.item.LIBATION_ABJURATION, weight = 169 }, -- Libation Abjuration
         { item = xi.item.KRIEGSBEIL,          weight = 268 }, -- Kriegsbeil
         { item = xi.item.SHINSOKU,            weight =  99 }, -- Shinsoku
@@ -108,26 +112,6 @@ content.loot =
         { item = xi.item.HI_POTION_P3,   weight = 225 }, -- Hi-potion +3
         { item = xi.item.HI_RERAISER,    weight = 197 }, -- Hi-reraiser
         { item = xi.item.VILE_ELIXIR_P1, weight = 282 }, -- Vile Elixir +1
-    },
-
-    {
-        { item = xi.item.CORAL_FRAGMENT,           weight = 141 }, -- Coral Fragment
-        { item = xi.item.SQUARE_OF_RAXA,           weight =  14 }, -- Square Of Raxa
-        { item = xi.item.DEMON_HORN,               weight = 113 }, -- Demon Horn
-        { item = xi.item.CHUNK_OF_GOLD_ORE,        weight =  28 }, -- Chunk Of Gold Ore
-        { item = xi.item.CHUNK_OF_MYTHRIL_ORE,     weight =  85 }, -- Chunk Of Mythril Ore
-        { item = xi.item.VILE_ELIXIR,              weight =  56 }, -- Vile Elixir
-        { item = xi.item.RAM_HORN,                 weight =  28 }, -- Ram Horn
-        { item = xi.item.PETRIFIED_LOG,            weight = 296 }, -- Petrified Log
-        { item = xi.item.CHUNK_OF_PLATINUM_ORE,    weight =  14 }, -- Chunk Of Platinum Ore
-        { item = xi.item.MAHOGANY_LOG,             weight =  56 }, -- Mahogany Log
-        { item = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =  70 }, -- Handful Of Wyvern Scales
-        { item = xi.item.SLAB_OF_GRANITE,          weight =  42 }, -- Slab Of Granite
-        { item = xi.item.CHUNK_OF_DARKSTEEL_ORE,   weight =  42 }, -- Chunk Of Darksteel Ore
-        { item = xi.item.EBONY_LOG,                weight =  42 }, -- Ebony Log
-        { item = xi.item.HI_RERAISER,              weight =  42 }, -- Hi-reraiser
-        { item = xi.item.SPOOL_OF_GOLD_THREAD,     weight = 113 }, -- Spool Of Gold Thread
-        { item = xi.item.SQUARE_OF_RAINBOW_CLOTH,  weight =  28 }, -- Square Of Rainbow Cloth
     },
 
     {

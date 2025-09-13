@@ -23,16 +23,11 @@
 
 #include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "map_engine.h"
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
 #include "utils/zoneutils.h"
-
-const char* partyQuery = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties "
-                         "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
-                         "IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp";
 
 CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 {
@@ -47,35 +42,35 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
             allianceid = PParty->m_PAlliance->m_AllianceID;
         }
 
-        uint8 i = 0;
-
-        int ret = _sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
-
-        if (ret != SQL_ERROR && _sql->NumRows() > 0)
+        uint8      i    = 0;
+        const auto rset = db::preparedStmt("SELECT chars.charid, partyflag, pos_zone, pos_prevzone "
+                                           "FROM accounts_parties "
+                                           "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
+                                           "IF (allianceid <> 0, allianceid = ?, partyid = ?) "
+                                           "ORDER BY partyflag & ?, timestamp",
+                                           allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            uint16 targid = 0;
+            if (const auto* PChar = zoneutils::GetChar(rset->get<uint32>("charid")))
             {
-                uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(_sql->GetUIntData(0));
-                if (PChar)
-                {
-                    targid = PChar->targid;
-                }
-                ref<uint32>(12 * i + 0x08) = _sql->GetUIntData(0);
-                ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = _sql->GetUIntData(1);
-                ref<uint16>(12 * i + 0x10) = _sql->GetUIntData(2) ? _sql->GetUIntData(2) : _sql->GetUIntData(3);
-                i++;
+                targid = PChar->targid;
             }
+
+            const auto pos_zone        = rset->getOrDefault<uint16>("pos_zone", 0);
+            ref<uint32>(12 * i + 0x08) = rset->get<uint32>("charid");
+            ref<uint16>(12 * i + 0x0C) = targid;
+            ref<uint16>(12 * i + 0x0E) = rset->get<uint32>("partyflag");
+            ref<uint16>(12 * i + 0x10) = pos_zone ? pos_zone : rset->get<uint16>("pos_prevzone");
+            i++;
         }
 
         if (loadTrust)
         {
-            CCharEntity* PLeader = (CCharEntity*)PParty->GetLeader();
-
+            const auto* PLeader = static_cast<CCharEntity*>(PParty->GetLeader());
             if (PLeader != nullptr)
             {
-                for (auto* PTrust : PLeader->PTrusts)
+                for (const auto* PTrust : PLeader->PTrusts)
                 {
                     ref<uint32>(12 * i + (0x08)) = PTrust->id;
                     ref<uint16>(12 * i + (0x0C)) = PTrust->targid;

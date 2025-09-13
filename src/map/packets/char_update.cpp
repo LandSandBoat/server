@@ -24,6 +24,7 @@
 #include "char_update.h"
 
 #include "entities/charentity.h"
+#include "items/item_linkshell.h"
 #include "status_effect_container.h"
 #include "utils/itemutils.h"
 #include "utils/mountutils.h"

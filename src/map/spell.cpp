@@ -69,9 +69,9 @@ uint8 CSpell::getJob(JOBTYPE JobID)
     return (m_job[JobID] == CANNOT_USE_SPELL ? 255 : m_job[JobID]);
 }
 
-void CSpell::setJob(int8* jobs)
+void CSpell::setJob(const std::array<uint8, MAX_JOBTYPE>& jobs)
 {
-    std::memcpy(&m_job[1], jobs, 22);
+    m_job = jobs;
 }
 
 timer::duration CSpell::getCastTime() const
@@ -452,192 +452,178 @@ namespace spell
     // Load a list of spells
     void LoadSpellList()
     {
-        const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
-                            "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
-                            "FROM spell_list";
-
-        int32 ret = _sql->Query(Query);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        auto rset = db::preparedStmt("SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
+                                     "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
+                                     "FROM spell_list");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            CSpell* PSpell = nullptr;
+
+            const auto id = static_cast<SpellID>(rset->get<uint16>("spellid"));
+            if (static_cast<SPELLGROUP>(rset->get<uint8>("group")) == SPELLGROUP_BLUE)
             {
-                CSpell* PSpell = nullptr;
-                SpellID id     = (SpellID)_sql->GetUIntData(0);
-
-                if ((SPELLGROUP)_sql->GetIntData(3) == SPELLGROUP_BLUE)
-                {
-                    PSpell = new CBlueSpell(id);
-                }
-                else
-                {
-                    PSpell = new CSpell(id);
-                }
-
-                PSpell->setName(_sql->GetStringData(1));
-                PSpell->setJob(_sql->GetData(2));
-                PSpell->setSpellGroup((SPELLGROUP)_sql->GetIntData(3));
-                PSpell->setSpellFamily((SPELLFAMILY)_sql->GetIntData(4));
-                PSpell->setValidTarget(_sql->GetIntData(5));
-                PSpell->setSkillType(_sql->GetIntData(6));
-                PSpell->setCastTime(std::chrono::milliseconds(_sql->GetIntData(7)));
-                PSpell->setRecastTime(std::chrono::milliseconds(_sql->GetIntData(8)));
-                PSpell->setAnimationID(_sql->GetIntData(9));
-                PSpell->setAnimationTime(std::chrono::milliseconds(_sql->GetIntData(10)));
-                PSpell->setMPCost(_sql->GetIntData(11));
-                PSpell->setAOE(_sql->GetIntData(12));
-                PSpell->setBase(_sql->GetIntData(13));
-                PSpell->setElement(_sql->GetIntData(14));
-                PSpell->setZoneMisc(_sql->GetIntData(15));
-                PSpell->setMultiplier((float)_sql->GetIntData(16));
-                PSpell->setMessage(_sql->GetIntData(17));
-                PSpell->setMagicBurstMessage(_sql->GetIntData(18));
-                PSpell->setCE(_sql->GetIntData(19));
-                PSpell->setVE(_sql->GetIntData(20));
-                PSpell->setRequirements(_sql->GetIntData(21));
-                PSpell->setContentTag(_sql->GetStringData(22));
-
-                PSpell->setRange(static_cast<float>(_sql->GetIntData(23)) / 10);
-
-                if (PSpell->getAOE())
-                {
-                    // default radius
-                    PSpell->setRadius(10);
-                }
-
-                PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
-
-                auto filename = fmt::format("./scripts/actions/spells/{}.lua", PSpell->getName());
-
-                std::string switchKey = "";
-                switch (PSpell->getSpellGroup())
-                {
-                    case SPELLGROUP_WHITE:
-                    {
-                        switchKey = "white";
-                    }
-                    break;
-                    case SPELLGROUP_BLACK:
-                    {
-                        switchKey = "black";
-                    }
-                    break;
-                    case SPELLGROUP_SONG:
-                    {
-                        switchKey = "songs";
-                    }
-                    break;
-                    case SPELLGROUP_NINJUTSU:
-                    {
-                        switchKey = "ninjutsu";
-                    }
-                    break;
-                    case SPELLGROUP_SUMMONING:
-                    {
-                        switchKey = "summoning";
-                    }
-                    break;
-                    case SPELLGROUP_BLUE:
-                    {
-                        switchKey = "blue";
-                    }
-                    break;
-                    case SPELLGROUP_GEOMANCY:
-                    {
-                        switchKey = "geomancy";
-                    }
-                    break;
-                    case SPELLGROUP_TRUST:
-                    {
-                        switchKey = "trust";
-                    }
-                    break;
-                    default:
-                    {
-                        ShowError("spell::LoadSpellList: Spell %s doesnt have a SpellGroup", PSpell->getName());
-                    }
-                    break;
-                }
-                filename = fmt::format("./scripts/actions/spells/{}/{}.lua", switchKey, PSpell->getName());
-
-                luautils::CacheLuaObjectFromFile(filename);
+                PSpell = new CBlueSpell(id);
             }
+            else
+            {
+                PSpell = new CSpell(id);
+            }
+
+            PSpell->setName(rset->get<std::string>("name"));
+
+            // Jobs are stored in DB as 22 entries.
+            // Index 0 is reserved for NON, index 23 for MON (both left as 0).
+            std::array<uint8, MAX_JOBTYPE> jobs{};
+            std::array<uint8, 22>          tempJobs{};
+            db::extractFromBlob(rset, "jobs", tempJobs);
+            std::memcpy(&jobs[1], tempJobs.data(), 22);
+            PSpell->setJob(jobs);
+
+            PSpell->setSpellGroup(static_cast<SPELLGROUP>(rset->get<uint8>("group")));
+            PSpell->setSpellFamily(static_cast<SPELLFAMILY>(rset->get<uint8>("family")));
+            PSpell->setValidTarget(rset->get<uint16>("validTargets"));
+            PSpell->setSkillType(rset->get<uint8>("skill"));
+            PSpell->setCastTime(std::chrono::milliseconds(rset->get<uint32>("castTime")));
+            PSpell->setRecastTime(std::chrono::milliseconds(rset->get<uint32>("recastTime")));
+            PSpell->setAnimationID(rset->get<uint16>("animation"));
+            PSpell->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
+            PSpell->setMPCost(rset->get<uint16>("mpCost"));
+            PSpell->setAOE(rset->get<uint8>("AOE"));
+            PSpell->setBase(rset->get<uint16>("base"));
+            PSpell->setElement(rset->get<uint16>("element"));
+            PSpell->setZoneMisc(rset->get<uint16>("zonemisc"));
+            PSpell->setMultiplier(rset->get<float>("multiplier"));
+            PSpell->setMessage(rset->get<uint16>("message"));
+            PSpell->setMagicBurstMessage(rset->get<uint16>("magicBurstMessage"));
+            PSpell->setCE(rset->get<int32>("CE"));
+            PSpell->setVE(rset->get<int32>("VE"));
+            PSpell->setRequirements(rset->get<uint8>("requirements"));
+            PSpell->setContentTag(rset->getOrDefault<std::string>("content_tag", ""));
+
+            PSpell->setRange(rset->get<float>("spell_range") / 10);
+
+            if (PSpell->getAOE())
+            {
+                // default radius
+                PSpell->setRadius(10);
+            }
+
+            PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
+
+            auto filename = fmt::format("./scripts/actions/spells/{}.lua", PSpell->getName());
+
+            std::string switchKey = "";
+            switch (PSpell->getSpellGroup())
+            {
+                case SPELLGROUP_WHITE:
+                {
+                    switchKey = "white";
+                }
+                break;
+                case SPELLGROUP_BLACK:
+                {
+                    switchKey = "black";
+                }
+                break;
+                case SPELLGROUP_SONG:
+                {
+                    switchKey = "songs";
+                }
+                break;
+                case SPELLGROUP_NINJUTSU:
+                {
+                    switchKey = "ninjutsu";
+                }
+                break;
+                case SPELLGROUP_SUMMONING:
+                {
+                    switchKey = "summoning";
+                }
+                break;
+                case SPELLGROUP_BLUE:
+                {
+                    switchKey = "blue";
+                }
+                break;
+                case SPELLGROUP_GEOMANCY:
+                {
+                    switchKey = "geomancy";
+                }
+                break;
+                case SPELLGROUP_TRUST:
+                {
+                    switchKey = "trust";
+                }
+                break;
+                default:
+                {
+                    ShowError("spell::LoadSpellList: Spell %s doesnt have a SpellGroup", PSpell->getName());
+                }
+                break;
+            }
+
+            filename = fmt::format("./scripts/actions/spells/{}/{}.lua", switchKey, PSpell->getName());
+            luautils::CacheLuaObjectFromFile(filename);
         }
 
-        const char* blueQuery = "SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, "
+        rset = db::preparedStmt("SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, "
                                 "blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, "
                                 "blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag "
-                                "FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid";
-
-        ret = _sql->Query(blueQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+                                "FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
             {
-                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
-                const auto contentTag = _sql->GetStringData(8);
-                if (!luautils::IsContentEnabled(contentTag))
-                {
-                    continue;
-                }
-
-                // Sanity check the spell ID
-                uint16 spellId = _sql->GetIntData(0);
-
-                if (PSpellList[spellId] == nullptr)
-                {
-                    ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
-                    continue;
-                }
-
-                ((CBlueSpell*)PSpellList[spellId])->setMonsterSkillId(_sql->GetIntData(1));
-                ((CBlueSpell*)PSpellList[spellId])->setSetPoints(_sql->GetIntData(2));
-                ((CBlueSpell*)PSpellList[spellId])->setTraitCategory(_sql->GetIntData(3));
-                ((CBlueSpell*)PSpellList[spellId])->setTraitWeight(_sql->GetIntData(4));
-                ((CBlueSpell*)PSpellList[spellId])->setPrimarySkillchain(_sql->GetIntData(5));
-                ((CBlueSpell*)PSpellList[spellId])->setSecondarySkillchain(_sql->GetIntData(6));
-                ((CBlueSpell*)PSpellList[spellId])->setTertiarySkillchain(_sql->GetIntData(7));
-                PMobSkillToBlueSpell.insert(std::make_pair(_sql->GetIntData(1), spellId));
+                continue;
             }
-        }
-        ret = _sql->Query(
-            "SELECT spellId, modId, value FROM blue_spell_mods WHERE spellId IN (SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
 
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            // Sanity check the spell ID
+            auto spellId = rset->get<uint16>("spellid");
+            if (PSpellList[spellId] == nullptr)
             {
-                uint16 spellId = (uint16)_sql->GetUIntData(0);
-                Mod    modID   = static_cast<Mod>(_sql->GetUIntData(1));
-                int16  value   = (int16)_sql->GetIntData(2);
+                ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
+                continue;
+            }
 
-                if (PSpellList[spellId])
-                {
-                    ((CBlueSpell*)PSpellList[spellId])->addModifier(CModifier(modID, value));
-                }
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setMonsterSkillId(rset->get<uint16>("mob_skill_id"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setSetPoints(rset->get<uint16>("set_points"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitCategory(rset->get<uint16>("trait_category"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitWeight(rset->get<uint16>("trait_category_weight"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setPrimarySkillchain(rset->get<uint16>("primary_sc"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setSecondarySkillchain(rset->get<uint16>("secondary_sc"));
+            static_cast<CBlueSpell*>(PSpellList[spellId])->setTertiarySkillchain(rset->get<uint16>("tertiary_sc"));
+            PMobSkillToBlueSpell.insert(std::make_pair(rset->get<uint16>("mob_skill_id"), spellId));
+        }
+
+        rset = db::preparedStmt("SELECT spellId, modId, value "
+                                "FROM blue_spell_mods "
+                                "WHERE spellId IN "
+                                "(SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
+        FOR_DB_MULTIPLE_RESULTS(rset)
+        {
+            const auto spellId = rset->get<uint16>("spellId");
+            const auto modID   = static_cast<Mod>(rset->get<uint16>("modId"));
+            const auto value   = rset->get<int16>("value");
+
+            if (PSpellList[spellId])
+            {
+                static_cast<CBlueSpell*>(PSpellList[spellId])->addModifier(CModifier(modID, value));
             }
         }
 
-        ret = _sql->Query("SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt("SELECT spellId, meritId, content_tag "
+                                "FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
             {
-                // const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
-                const auto contentTag = _sql->GetStringData(2);
-                if (!luautils::IsContentEnabled(contentTag))
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                uint16 spellId = (uint16)_sql->GetUIntData(0);
-
-                if (PSpellList[spellId])
-                {
-                    PSpellList[spellId]->setMeritId(_sql->GetUIntData(1));
-                }
+            const auto spellId = rset->get<uint16>("spellId");
+            if (PSpellList[spellId])
+            {
+                PSpellList[spellId]->setMeritId(rset->get<uint16>("meritId"));
             }
         }
     }

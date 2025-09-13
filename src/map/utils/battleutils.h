@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#ifndef _BATTLEUTILS_H
-#define _BATTLEUTILS_H
+#pragma once
 
-#include "blue_spell.h"
 #include "common/cbasetypes.h"
 #include "merit.h"
 #include "packets/weather.h"
@@ -32,6 +30,7 @@
 
 #include "entities/battleentity.h"
 
+class CMobEntity;
 class CAbility;
 class CAttack;
 class CItemWeapon;
@@ -275,5 +274,3 @@ namespace battleutils
     void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
     float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
 }; // namespace battleutils
-
-#endif

@@ -390,20 +390,22 @@ xi.summon.avatarPhysicalHit = function(skill, dmg)
     return skill:getMsg() == xi.msg.basic.DAMAGE
 end
 
--- Checks if the summoner is in a Trial Size Avatar Mini Fight (used to restrict summoning while in bcnm)
-xi.summon.avatarMiniFightCheck = function(caster)
+local trialSizeBattles = set{
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_WIND,
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_LIGHTNING,
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_ICE,
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_FIRE,
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_EARTH,
+    xi.battlefield.id.TRIAL_SIZE_TRIAL_BY_WATER,
+}
+
+-- Checks if the summoner is in a Trial Size Avatar Mini Fight (only carbuncle is allowed)
+xi.summon.avatarMiniFightCheck = function(caster, spellID)
     local result = 0
-    local bcnmid
-    if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        bcnmid = caster:getStatusEffect(xi.effect.BATTLEFIELD):getPower()
-        if
-            bcnmid == 418 or
-            bcnmid == 609 or
-            bcnmid == 450 or
-            bcnmid == 482 or
-            bcnmid == 545 or
-            bcnmid == 578
-        then -- Mini Avatar Fights
+    local effect = caster:getStatusEffect(xi.effect.BATTLEFIELD)
+    if spellID ~= xi.magic.spell.CARBUNCLE and effect then
+        local bcnmid = effect:getPower()
+        if trialSizeBattles[bcnmid] then -- Mini Avatar Fights
             result = 40 -- Cannot use <spell> in this area.
         end
     end

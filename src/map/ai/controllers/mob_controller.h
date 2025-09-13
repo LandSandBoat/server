@@ -30,6 +30,7 @@ enum class FollowType : uint8
     RunAway,
 };
 
+class CMobEntity;
 class CMobController : public CController
 {
 public:

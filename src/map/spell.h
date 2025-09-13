@@ -19,14 +19,10 @@
 ===========================================================================
 */
 
-#ifndef _CSPELL_H
-#define _CSPELL_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
-
 #include "entities/battleentity.h"
-#include "entities/charentity.h"
 
 #define CANNOT_USE_SPELL 0
 
@@ -231,7 +227,9 @@ enum SPELLFLAG
     SPELLFLAG_NONE           = 0x00,
     SPELLFLAG_HIT_ALL        = 0x01, // Hit all targets in range regardless of party
     SPELLFLAG_WIPE_SHADOWS   = 0x02, // Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    SPELLFLAG_IGNORE_SHADOWS = 0x04  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    SPELLFLAG_IGNORE_SHADOWS = 0x04, // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    SPELLFLAG_NO_START_MSG   = 0x08, // Doesn't emit "<caster> starts casting <spell>"
+    SPELLFLAG_NO_FINISH_MSG  = 0x10, // Doesn't emit finish message when magic state completes
 };
 
 // clang-format off
@@ -1095,7 +1093,7 @@ public:
     void setRadius(float radius);
     void setTotalTargets(uint16 total);
     void setID(SpellID id);
-    void setJob(int8* jobs);
+    void setJob(const std::array<uint8, MAX_JOBTYPE>& jobs);
     void setMPCost(uint16 MP);
     void setCastTime(timer::duration CastTime);
     void setRecastTime(timer::duration RecastTime);
@@ -1133,37 +1131,37 @@ protected:
     CSpell& operator=(const CSpell&) = default;
 
 private:
-    SpellID         m_ID;                // spell id
-    uint32          m_primaryTargetID{}; // primary target ID
-    timer::duration m_castTime{};        // time to cast spell
-    timer::duration m_recastTime{};      // recast time
-    uint16          m_animation{};       // animation for spell
-    timer::duration m_animationTime{};
-    uint8           m_skillType{};
-    float           m_range{};
-    float           m_radius{};
-    uint16          m_totalTargets{};
-    uint16          m_mpCost{};                        // mpCost/itemId for ninjitsu tool
-    uint8           m_job[MAX_JOBTYPE]{};              // job
-    uint16          m_ValidTarget{};                   // target pc/npc/both
-    SPELLGROUP      m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
-    SPELLFAMILY     m_spellFamily{ SPELLFAMILY_NONE }; // spell family
-    uint16          m_zoneMisc{};                      // spellcasting conditions
-    uint8           m_AOE{};                           // aoe or single target spell
-    uint16          m_base{};                          // spell base damage
-    float           m_multiplier{};                    // multiplier for upper tier spells
-    uint16          m_element{};                       // element of spell
-    uint16          m_message{};                       // message id
-    uint16          m_MagicBurstMessage{};             // Message used for magic bursts.
-    MODIFIER        m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
-    int32           m_CE{};                            // cumulative enmity of spell
-    int32           m_VE{};                            // volatile enmity of spell
-    std::string     m_name;                            // spell name
-    timer::duration m_modifiedRecastTime{};            // recast time after modifications
-    uint8           m_requirements{};                  // requirements before being able to cast spell
-    uint16          m_meritId{};                       // associated merit (if applicable)
-    uint8           m_flag{};
-    std::string     m_contentTag{};
+    SpellID                        m_ID;                // spell id
+    uint32                         m_primaryTargetID{}; // primary target ID
+    timer::duration                m_castTime{};        // time to cast spell
+    timer::duration                m_recastTime{};      // recast time
+    uint16                         m_animation{};       // animation for spell
+    timer::duration                m_animationTime{};
+    uint8                          m_skillType{};
+    float                          m_range{};
+    float                          m_radius{};
+    uint16                         m_totalTargets{};
+    uint16                         m_mpCost{};                        // mpCost/itemId for ninjitsu tool
+    std::array<uint8, MAX_JOBTYPE> m_job{};                           // job
+    uint16                         m_ValidTarget{};                   // target pc/npc/both
+    SPELLGROUP                     m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
+    SPELLFAMILY                    m_spellFamily{ SPELLFAMILY_NONE }; // spell family
+    uint16                         m_zoneMisc{};                      // spellcasting conditions
+    uint8                          m_AOE{};                           // aoe or single target spell
+    uint16                         m_base{};                          // spell base damage
+    float                          m_multiplier{};                    // multiplier for upper tier spells
+    uint16                         m_element{};                       // element of spell
+    uint16                         m_message{};                       // message id
+    uint16                         m_MagicBurstMessage{};             // Message used for magic bursts.
+    MODIFIER                       m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
+    int32                          m_CE{};                            // cumulative enmity of spell
+    int32                          m_VE{};                            // volatile enmity of spell
+    std::string                    m_name;                            // spell name
+    timer::duration                m_modifiedRecastTime{};            // recast time after modifications
+    uint8                          m_requirements{};                  // requirements before being able to cast spell
+    uint16                         m_meritId{};                       // associated merit (if applicable)
+    uint8                          m_flag{};
+    std::string                    m_contentTag{};
 };
 
 // Namespace to work with spells
@@ -1178,5 +1176,3 @@ namespace spell
     bool    CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level);
     float   GetSpellRadius(CSpell* spellId, CBattleEntity* PCaster);
 }; // namespace spell
-
-#endif

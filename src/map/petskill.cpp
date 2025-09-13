@@ -210,6 +210,15 @@ uint32 CPetSkill::getPrimaryTargetID() const
     return m_PrimaryTargetID;
 }
 
+void CPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    m_FinalAnimationSub = newAnimationSub;
+}
+
+std::optional<uint8> CPetSkill::getFinalAnimationSub()
+{
+    return m_FinalAnimationSub;
+}
 uint16 CPetSkill::getMsg() const
 {
     return m_Message;

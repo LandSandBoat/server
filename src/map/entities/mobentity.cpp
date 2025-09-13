@@ -392,6 +392,29 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     return true;
 }
 
+bool CMobEntity::ShouldForceLink()
+{
+    // There are certain cases where mobs should always be able
+    // to link with other mobs, even if their families or sublinks
+    // do not align
+    if (loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS)
+    {
+        return true;
+    }
+
+    if (m_Type & MOBTYPE_BATTLEFIELD)
+    {
+        return true;
+    }
+
+    if (getMobMod(MOBMOD_SUPERLINK))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool CMobEntity::CanDeaggro() const
 {
     return !(m_Type & MOBTYPE_NOTORIOUS || m_Type & MOBTYPE_BATTLEFIELD);

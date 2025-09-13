@@ -53,6 +53,7 @@ public:
     uint16 getMsg();
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();
+    void   setFinalAnimationSub(uint8 newAnimationSub);
 
     bool operator==(const CLuaPetSkill& other) const
     {

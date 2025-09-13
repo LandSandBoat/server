@@ -14,8 +14,12 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getBattleTime() > 10 then
-        mob:useMobAbility(511)
+    if
+        mob:getLocalVar('usedDestruct') == 0 and
+        mob:getBattleTime() > 10
+    then
+        mob:setLocalVar('usedDestruct', 1)
+        mob:useMobAbility(xi.mobSkill.SELF_DESTRUCT)
     end
 end
 

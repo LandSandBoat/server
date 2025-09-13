@@ -2,7 +2,7 @@
 -- Area: Mamook
 --  Mob: Mamool Ja Pikeman
 -----------------------------------
-mixins = { require('scripts/mixins/families/mamool_ja'), require('scripts/mixins/weapon_break') }
+mixins = { require('scripts/mixins/weapon_break') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

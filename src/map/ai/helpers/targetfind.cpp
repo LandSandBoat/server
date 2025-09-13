@@ -614,7 +614,7 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return nullptr;
     }
 
-    if (validTargetFlags & TARGET_PET)
+    if (validTargetFlags & TARGET_PET && m_PBattleEntity->PPet)
     {
         return m_PBattleEntity->PPet;
     }

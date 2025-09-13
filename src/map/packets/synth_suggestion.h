@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CSYNTH_SUGGESTION_H
-#define _CSYNTH_SUGGESTION_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -48,5 +47,3 @@ class CSynthSuggestionRecipePacket : public CBasicPacket
 public:
     CSynthSuggestionRecipePacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 selectedRecipeOffset);
 };
-
-#endif

@@ -162,6 +162,7 @@ quest.sections =
                 end,
 
                 [143] = function(player, csid, option, npc)
+                    player:setCampaignAllegiance(2)
                     quest:complete(player)
                 end,
             },

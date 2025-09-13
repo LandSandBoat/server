@@ -20,6 +20,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    skill:setFinalAnimationSub(1)
     local numhits = 1
     local accmod = 1
     local ftp    = 3.3

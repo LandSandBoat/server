@@ -37,15 +37,8 @@ entity.onMobFight = function(mob, target)
         mob:getLocalVar('spawnedAssassins') == 0 and
         mob:getCE(target) > 0
     then
-        mob:setLocalVar('spawnedAssassins', 1)
-
-        -- inject packet for 2hr animation when spawning
-        mob:injectActionPacket(mob:getID(), 11, 439, 0, 0x18, 0, 0, 307)
-        for _, assassinID in ipairs(assassins) do
-            local assassin = SpawnMob(assassinID)
-            if assassin then
-                assassin:updateEnmity(target)
-            end
+        if xi.mob.callPets(mob, assassins, { inactiveTime = 0 }) then
+            mob:setLocalVar('spawnedAssassins', 1)
         end
     end
 
@@ -55,7 +48,7 @@ entity.onMobFight = function(mob, target)
         mob:getLocalVar('assassinsKilled') > 0 and
         mob:getLocalVar('usedTwoHour') == 0
     then
-    -- have executor use 2hr and unlock the 2hrs of other assassins
+        -- have executor use 2hr and unlock the 2hrs of other assassins
         mob:setLocalVar('usedTwoHour', 1)
         mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_2HR)
         -- Use Mijin Gakure

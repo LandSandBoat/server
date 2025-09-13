@@ -21,10 +21,10 @@ xi.msg.channel =
     EMOTION       = 8,
     -- 9 / 10 / 11 = Does not work / nothing
     GM_PROMPT     = 12, -- Menu prompt from GM
-    NS_SAY        = 13, -- Same as MESSAGE_SAY but has no speaker object displayed
-    NS_SHOUT      = 14, -- Same as MESSAGE_SHOUT but has no speaker object displayed
-    NS_PARTY      = 15, -- Same as MESSAGE_PARTY but has no speaker object displayed
-    NS_LINKSHELL  = 16, -- Same as MESSAGE_LINKSHELL but has no speaker object displayed
+    NS_SAY        = 13, -- NS = "No speaker object displayed", otherwise same as SAY
+    NS_SHOUT      = 14, -- NS = "No speaker object displayed", otherwise same as SHOUT
+    NS_PARTY      = 15, -- NS = "No speaker object displayed", otherwise same as PARTY
+    NS_LINKSHELL  = 16, -- NS = "No speaker object displayed", otherwise same as LINKSHELL
     UNKNOWN_17    = 17, -- 17 through 25 appear to repeat the effects of other values
     UNKNOWN_18    = 18,
     UNKNOWN_19    = 19,
@@ -36,7 +36,7 @@ xi.msg.channel =
     UNKNOWN_25    = 25,
     YELL          = 26,
     LINKSHELL2    = 27, -- Second LS color. Default is Green
-    NS_LINKSHELL2 = 28, -- Same as LINKSHELL_2 but has but has no speaker object displayed
+    NS_LINKSHELL2 = 28, -- NS = "No speaker object displayed", otherwise same as LINKSHELL2
     SYSTEM_3      = 29, -- "Basic system messages" in config menu. Yellow by default.
     LINKSHELL3    = 30, -- Yes really it looks like a 3rd LS may have been planned at some point.
     NS_LINKSHELL3 = 31, -- (assumed as it follows pattern and color)

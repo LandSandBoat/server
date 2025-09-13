@@ -3,6 +3,7 @@
 --  Mob: Aw'euvhi
 -----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
+mixins = { require('scripts/mixins/families/euvhi') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

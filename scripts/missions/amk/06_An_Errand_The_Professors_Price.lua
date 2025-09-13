@@ -62,11 +62,21 @@ local beginCardianFight = function(player, npc)
         table.insert(cardianIds, cardianId)
     end
 
-    local params = {}
-    params.onWin = function(wPlayer)
-        npcUtil.giveKeyItem(wPlayer, xi.keyItem.RIPE_STARFRUIT)
-        npcUtil.giveKeyItem(wPlayer, xi.keyItem.PEACH_CORAL_KEY)
-    end
+    local params = {
+        onWin = function(wPlayer)
+            local messageMob = GetMobByID(cardianIds[1])
+            if messageMob then
+                -- send individually to each confrontation member
+                wPlayer:messageText(messageMob, horutotoID.text.INITIATING_TRANSMISSION)
+            end
+
+            npcUtil.giveKeyItem(wPlayer, xi.keyItem.RIPE_STARFRUIT)
+            npcUtil.giveKeyItem(wPlayer, xi.keyItem.PEACH_CORAL_KEY)
+        end,
+
+        -- confrontation gives warning down the stairs, 35 yalms away from starting npc
+        distanceLimit = 35,
+    }
 
     -- Spawn mobs and start battle
     xi.confrontation.start(player, npc, cardianIds, params)

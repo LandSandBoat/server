@@ -43,9 +43,7 @@
 #include "ai/ai_container.h"
 #include "ai/controllers/pet_controller.h"
 #include "ai/controllers/player_charm_controller.h"
-#include "ai/controllers/player_controller.h"
 #include "ai/states/magic_state.h"
-#include "alliance.h"
 #include "attack.h"
 #include "attackutils.h"
 #include "charutils.h"
@@ -67,7 +65,6 @@
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
 #include "packets/char_recast.h"
-#include "packets/char_sync.h"
 #include "packets/lock_on.h"
 #include "packets/pet_sync.h"
 #include "packets/position.h"
@@ -106,40 +103,51 @@ namespace battleutils
 
     void LoadSkillTable()
     {
-        const char* fmtQuery = "SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 "
-                               "FROM skill_caps "
-                               "ORDER BY level "
-                               "LIMIT 100";
+        uint32 x    = 0;
+        auto   rset = db::preparedStmt("SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 "
+                                         "FROM skill_caps "
+                                         "ORDER BY level "
+                                         "LIMIT 100");
 
-        int32 ret = _sql->Query(fmtQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            for (uint32 x = 0; x < 100 && _sql->NextRow() == SQL_SUCCESS; ++x)
+            for (uint32 y = 0; y < 14; ++y)
             {
-                for (uint32 y = 0; y < 14; ++y)
-                {
-                    g_SkillTable[x][y] = (uint16)_sql->GetIntData(y);
-                }
+                g_SkillTable[x][y] = rset->get<uint16>(std::format("r{}", y));
             }
+
+            ++x;
         }
 
-        fmtQuery = "SELECT skillid,war,mnk,whm,blm,rdm,thf,pld,drk,bst,brd,rng,sam,nin,drg,smn,blu,cor,pup,dnc,sch,geo,run FROM skill_ranks LIMIT 64";
-
-        ret = _sql->Query(fmtQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt("SELECT skillid,war,mnk,whm,blm,rdm,thf,pld,drk,bst,brd,rng,sam,nin,drg,smn,blu,cor,pup,dnc,sch,geo,run "
+                                "FROM skill_ranks LIMIT 64");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            for (uint32 x = 0; x < MAX_SKILLTYPE && _sql->NextRow() == SQL_SUCCESS; ++x)
-            {
-                auto SkillID = std::clamp<uint8>(_sql->GetIntData(0), 0, MAX_SKILLTYPE - 1);
+            const auto SkillID = std::clamp<uint8>(rset->get<uint8>("skillid"), 0, MAX_SKILLTYPE - 1);
 
-                // NOTE: Skip over Monstrosity, they re-use other jobs ranks
-                for (uint32 y = 1; y < JOB_MON; ++y)
-                {
-                    g_SkillRanks[SkillID][y] = std::clamp<uint8>(_sql->GetIntData(y), 0, 11);
-                }
-            }
+            // NOTE: Skip over Monstrosity, they re-use other jobs ranks
+            g_SkillRanks[SkillID][JOB_WAR] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
+            g_SkillRanks[SkillID][JOB_MNK] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
+            g_SkillRanks[SkillID][JOB_WHM] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
+            g_SkillRanks[SkillID][JOB_BLM] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
+            g_SkillRanks[SkillID][JOB_RDM] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
+            g_SkillRanks[SkillID][JOB_THF] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
+            g_SkillRanks[SkillID][JOB_PLD] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
+            g_SkillRanks[SkillID][JOB_DRK] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
+            g_SkillRanks[SkillID][JOB_BST] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
+            g_SkillRanks[SkillID][JOB_BRD] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
+            g_SkillRanks[SkillID][JOB_RNG] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
+            g_SkillRanks[SkillID][JOB_SAM] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
+            g_SkillRanks[SkillID][JOB_NIN] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
+            g_SkillRanks[SkillID][JOB_DRG] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
+            g_SkillRanks[SkillID][JOB_SMN] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
+            g_SkillRanks[SkillID][JOB_BLU] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
+            g_SkillRanks[SkillID][JOB_COR] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
+            g_SkillRanks[SkillID][JOB_PUP] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
+            g_SkillRanks[SkillID][JOB_DNC] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
+            g_SkillRanks[SkillID][JOB_SCH] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
+            g_SkillRanks[SkillID][JOB_GEO] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
+            g_SkillRanks[SkillID][JOB_RUN] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
         }
     }
 
@@ -151,154 +159,135 @@ namespace battleutils
 
     void LoadWeaponSkillsList()
     {
-        const char* fmtQuery = "SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
-                               "animationTime, `range`, aoe, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
-                               "FROM weapon_skills "
-                               "WHERE weaponskillid < %u "
-                               "ORDER BY type, skilllevel ASC";
-
-        int32 ret = _sql->Query(fmtQuery, MAX_WEAPONSKILL_ID);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt("SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
+                                           "animationTime, `range`, aoe, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
+                                           "FROM weapon_skills "
+                                           "WHERE weaponskillid < ? "
+                                           "ORDER BY type, skilllevel ASC",
+                                           MAX_WEAPONSKILL_ID);
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                CWeaponSkill* PWeaponSkill = new CWeaponSkill(_sql->GetIntData(0));
+            auto* PWeaponSkill = new CWeaponSkill(rset->get<uint16>("weaponskillid"));
 
-                PWeaponSkill->setName(_sql->GetStringData(1));
-                PWeaponSkill->setJob(_sql->GetData(2));
-                PWeaponSkill->setType(_sql->GetIntData(3));
-                PWeaponSkill->setSkillLevel(_sql->GetIntData(4));
-                PWeaponSkill->setElement(_sql->GetIntData(5));
-                PWeaponSkill->setAnimationId(_sql->GetIntData(6));
-                PWeaponSkill->setAnimationTime(std::chrono::milliseconds(_sql->GetUIntData(7)));
-                PWeaponSkill->setRange(_sql->GetIntData(8));
-                PWeaponSkill->setAoe(_sql->GetIntData(9));
-                PWeaponSkill->setPrimarySkillchain(_sql->GetIntData(10));
-                PWeaponSkill->setSecondarySkillchain(_sql->GetIntData(11));
-                PWeaponSkill->setTertiarySkillchain(_sql->GetIntData(12));
-                PWeaponSkill->setMainOnly(_sql->GetIntData(13));
-                PWeaponSkill->setUnlockId(_sql->GetIntData(14));
+            PWeaponSkill->setName(rset->get<std::string>("name"));
 
-                g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
-                g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
+            // Jobs are stored in DB as 22 entries.
+            // Index 0 is reserved for NON, index 23 for MON (both left as 0).
+            std::array<uint8, MAX_JOBTYPE> jobs{};
+            std::array<uint8, 22>          tempJobs{};
+            db::extractFromBlob(rset, "jobs", tempJobs);
+            std::memcpy(&jobs[1], tempJobs.data(), 22);
+            PWeaponSkill->setJob(jobs);
 
-                auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
-                luautils::CacheLuaObjectFromFile(filename);
-            }
+            PWeaponSkill->setType(rset->get<uint8>("type"));
+            PWeaponSkill->setSkillLevel(rset->get<uint16>("skilllevel"));
+            PWeaponSkill->setElement(rset->get<uint8>("element"));
+            PWeaponSkill->setAnimationId(rset->get<uint8>("animation"));
+            PWeaponSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
+            PWeaponSkill->setRange(rset->get<uint8>("range"));
+            PWeaponSkill->setAoe(rset->get<uint8>("aoe"));
+            PWeaponSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
+            PWeaponSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
+            PWeaponSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
+            PWeaponSkill->setMainOnly(rset->get<uint8>("main_only"));
+            PWeaponSkill->setUnlockId(rset->get<uint8>("unlock_id"));
+
+            g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
+            g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
+
+            auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
+            luautils::CacheLuaObjectFromFile(filename);
         }
     }
 
     void LoadMobSkillsList()
     {
         // Load all mob skills
-        const char* specialQuery = "SELECT mob_skill_id, mob_anim_id, mob_skill_name, "
-                                   "mob_skill_aoe, mob_skill_aoe_radius, mob_skill_distance, mob_anim_time, mob_prepare_time, "
-                                   "mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc "
-                                   "FROM mob_skills";
-
-        int32 ret = _sql->Query(specialQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        auto rset = db::preparedStmt("SELECT mob_skill_id, mob_anim_id, mob_skill_name, "
+                                     "mob_skill_aoe, mob_skill_aoe_radius, mob_skill_distance, mob_anim_time, mob_prepare_time, "
+                                     "mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc "
+                                     "FROM mob_skills");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                CMobSkill* PMobSkill = new CMobSkill(_sql->GetIntData(0));
-                PMobSkill->setAnimationID(_sql->GetIntData(1));
-                PMobSkill->setName(_sql->GetStringData(2));
-                PMobSkill->setAoe(_sql->GetIntData(3));
-                PMobSkill->setAoeRadius(_sql->GetIntData(4));
-                PMobSkill->setDistance(_sql->GetFloatData(5));
-                PMobSkill->setAnimationTime(std::chrono::milliseconds(_sql->GetIntData(6)));
-                PMobSkill->setActivationTime(std::chrono::milliseconds(_sql->GetIntData(7)));
-                PMobSkill->setValidTargets(_sql->GetIntData(8));
-                PMobSkill->setFlag(_sql->GetIntData(9));
-                PMobSkill->setParam(_sql->GetIntData(10));
-                PMobSkill->setKnockback(_sql->GetUIntData(11));
-                PMobSkill->setPrimarySkillchain(_sql->GetUIntData(12));
-                PMobSkill->setSecondarySkillchain(_sql->GetUIntData(13));
-                PMobSkill->setTertiarySkillchain(_sql->GetUIntData(14));
-                PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
-                g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
+            auto* PMobSkill = new CMobSkill(rset->get<uint16>("mob_skill_id"));
 
-                auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
-                luautils::CacheLuaObjectFromFile(filename);
-            }
+            PMobSkill->setAnimationID(rset->get<uint16>("mob_anim_id"));
+            PMobSkill->setName(rset->get<std::string>("mob_skill_name"));
+            PMobSkill->setAoe(rset->get<uint8>("mob_skill_aoe"));
+            PMobSkill->setAoeRadius(rset->get<float>("mob_skill_aoe_radius"));
+            PMobSkill->setDistance(rset->get<float>("mob_skill_distance"));
+            PMobSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("mob_anim_time")));
+            PMobSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("mob_prepare_time")));
+            PMobSkill->setValidTargets(rset->get<uint16>("mob_valid_targets"));
+            PMobSkill->setFlag(rset->get<uint8>("mob_skill_flag"));
+            PMobSkill->setParam(rset->get<int16>("mob_skill_param"));
+            PMobSkill->setKnockback(rset->get<uint8>("knockback"));
+            PMobSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
+            PMobSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
+            PMobSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
+            PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
+            g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
+
+            auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
+            luautils::CacheLuaObjectFromFile(filename);
         }
 
-        const char* fmtQuery = "SELECT skill_list_id, mob_skill_id FROM mob_skill_lists";
-
-        ret = _sql->Query(fmtQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt("SELECT skill_list_id, mob_skill_id FROM mob_skill_lists");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                int16 skillListId = _sql->GetIntData(0);
+            const auto skillListId = rset->get<uint16>("skill_list_id");
+            auto       skillId     = rset->get<uint16>("mob_skill_id");
 
-                uint16 skillId = _sql->GetIntData(1);
-
-                g_PMobSkillLists[skillListId].emplace_back(skillId);
-            }
+            g_PMobSkillLists[skillListId].emplace_back(skillId);
         }
     }
 
     void LoadPetSkillsList()
     {
         // Load all pet skills
-        const char* specialQuery = "SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
-                                   "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
-                                   "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc, mob_skill_id "
-                                   "FROM pet_skills";
-
-        int32 ret = _sql->Query(specialQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt("SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
+                                           "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
+                                           "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc, mob_skill_id "
+                                           "FROM pet_skills");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                CPetSkill* PPetSkill = new CPetSkill(_sql->GetIntData(0));
-                PPetSkill->setAnimationID(_sql->GetIntData(1));
-                PPetSkill->setName(_sql->GetStringData(2));
-                PPetSkill->setAoe(_sql->GetIntData(3));
-                PPetSkill->setDistance(_sql->GetFloatData(4));
-                PPetSkill->setAnimationTime(std::chrono::milliseconds(_sql->GetIntData(5)));
-                PPetSkill->setActivationTime(std::chrono::milliseconds(_sql->GetIntData(6)));
-                PPetSkill->setValidTargets(_sql->GetIntData(7));
-                PPetSkill->setMsg(_sql->GetIntData(8));
-                PPetSkill->setFlag(_sql->GetIntData(9));
-                PPetSkill->setParam(_sql->GetIntData(10));
-                PPetSkill->setSkillFinishCategory(_sql->GetIntData(11));
-                PPetSkill->setKnockback(_sql->GetUIntData(12));
-                PPetSkill->setPrimarySkillchain(_sql->GetUIntData(13));
-                PPetSkill->setSecondarySkillchain(_sql->GetUIntData(14));
-                PPetSkill->setTertiarySkillchain(_sql->GetUIntData(15));
-                PPetSkill->setMobSkillID(_sql->GetUIntData(16));
-                g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
+            auto* PPetSkill = new CPetSkill(rset->get<uint16>("pet_skill_id"));
 
-                auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
-                luautils::CacheLuaObjectFromFile(filename);
-            }
+            PPetSkill->setAnimationID(rset->get<uint16>("pet_anim_id"));
+            PPetSkill->setName(rset->get<std::string>("pet_skill_name"));
+            PPetSkill->setAoe(rset->get<uint8>("pet_skill_aoe"));
+            PPetSkill->setDistance(rset->get<float>("pet_skill_distance"));
+            PPetSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("pet_anim_time")));
+            PPetSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("pet_prepare_time")));
+            PPetSkill->setValidTargets(rset->get<uint16>("pet_valid_targets"));
+            PPetSkill->setMsg(rset->get<uint16>("pet_message"));
+            PPetSkill->setFlag(rset->get<uint8>("pet_skill_flag"));
+            PPetSkill->setParam(rset->get<int16>("pet_skill_param"));
+            PPetSkill->setSkillFinishCategory(rset->get<uint8>("pet_skill_finish_category"));
+            PPetSkill->setKnockback(rset->get<uint8>("knockback"));
+            PPetSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
+            PPetSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
+            PPetSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
+            PPetSkill->setMobSkillID(rset->get<uint16>("mob_skill_id"));
+            g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
+
+            auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
+            luautils::CacheLuaObjectFromFile(filename);
         }
     }
 
     void LoadSkillChainDamageModifiers()
     {
-        const char* fmtQuery = "SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier "
-                               "FROM skillchain_damage_modifiers "
-                               "ORDER BY chain_level, chain_count";
-
-        int32 ret = _sql->Query(fmtQuery);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        const auto rset = db::preparedStmt("SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier "
+                                           "FROM skillchain_damage_modifiers "
+                                           "ORDER BY chain_level, chain_count");
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                uint16 level                              = (uint16)_sql->GetIntData(0);
-                uint16 count                              = (uint16)_sql->GetIntData(1);
-                uint16 value                              = (uint16)_sql->GetIntData(2);
-                g_SkillChainDamageModifiers[level][count] = value;
-            }
+            const auto level = rset->get<uint16>("chain_level");
+            const auto count = rset->get<uint16>("chain_count");
+            const auto value = rset->get<uint16>("initial_modifier");
+
+            g_SkillChainDamageModifiers[level][count] = value;
         }
     }
 

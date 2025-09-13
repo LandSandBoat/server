@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CINSTANCELOADER_H
-#define _CINSTANCELOADER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -34,12 +33,10 @@ public:
     CInstanceLoader(uint32 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
 
-    CInstance* LoadInstance();
+    CInstance* LoadInstance() const;
 
 private:
     CInstance*   m_PInstance;
     CZone*       m_PZone;
     CCharEntity* m_PRequester;
 };
-
-#endif

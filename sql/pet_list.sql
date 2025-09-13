@@ -100,7 +100,7 @@ INSERT INTO `pet_list` VALUES (64,'Faithful Falcor',4636,86,99,7200,0,2);
 INSERT INTO `pet_list` VALUES (65,'Crude Raphie',4637,96,99,5400,0,2);
 INSERT INTO `pet_list` VALUES (66,'Dapper Mac',4638,76,99,7200,0,3);
 INSERT INTO `pet_list` VALUES (67,'Slippery Silas',4639,23,99,1800,0,2);
-INSERT INTO `pet_list` VALUES (68,'Turbid Toloi',4640,23,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (68,'Turbid Toloi',4640,75,99,7200,0,2);
 INSERT INTO `pet_list` VALUES (69,'HarlequinFrame',5124,1,99,0,0,3);
 INSERT INTO `pet_list` VALUES (70,'ValoredgeFrame',5125,1,99,0,0,2);
 INSERT INTO `pet_list` VALUES (71,'SharpshotFrame',5126,1,99,0,0,3);
@@ -109,3 +109,4 @@ INSERT INTO `pet_list` VALUES (72,'StormwakerFrame',5127,1,99,0,0,3);
 -- 74 is Chocobo in the enum..
 INSERT INTO `pet_list` VALUES (75,'Luopan',6040,1,99,0,0,0);
 INSERT INTO `pet_list` VALUES (76,'Siren',7047,1,99,0,0,2);
+INSERT INTO `pet_list` VALUES (77,'SweetCaroline',7500,99,119,7200,0,3);

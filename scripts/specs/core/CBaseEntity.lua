@@ -3426,11 +3426,6 @@ end
 
 ---@nodiscard
 ---@return boolean
-function CBaseEntity:hasValidJugPetItem()
-end
-
----@nodiscard
----@return boolean
 function CBaseEntity:hasPet()
 end
 

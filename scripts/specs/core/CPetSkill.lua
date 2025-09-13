@@ -63,3 +63,8 @@ end
 ---@return integer
 function CPetSkill:getPrimaryTargetID()
 end
+
+---@param newAnimationSub integer
+---@return nil
+function CPetSkill:setFinalAnimationSub(newAnimationSub)
+end

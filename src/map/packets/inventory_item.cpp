@@ -23,6 +23,7 @@
 
 #include "common/utils.h"
 #include "common/vana_time.h"
+#include "items/item_linkshell.h"
 
 #include <cstring>
 

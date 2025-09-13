@@ -50,6 +50,8 @@ xi.mobSkill =
 
     SONIC_BLADE              =  422, -- Mammet-800
 
+    SANDSPIN                 =  426,
+
     MICROQUAKE               =  441, -- Mammet-800
 
     PERCUSSIVE_FOIN          =  447, -- Mammet-800
@@ -61,6 +63,8 @@ xi.mobSkill =
     MIND_WALL                =  471, -- Mammet-800
 
     TRANSMOGRIFICATION       =  487, -- Mammet-800
+
+    SELF_DESTRUCT            =  511,
 
     DANSE_MACABRE            =  533,
 
@@ -75,6 +79,8 @@ xi.mobSkill =
 
     MEIKYO_SHISUI_1          =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1           =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
+
+    CALL_WYVERN              =  732,
 
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
@@ -229,11 +235,15 @@ xi.mobSkill =
     VOID_OF_REPENTANCE       = 2146,
     DIVINE_JUDGMENT          = 2147,
 
+    GRIM_GLOWER              = 2156,
+
     PEDAL_PIROUETTE          = 2210,
 
     HELL_SCISSORS            = 2221,
 
     QUEASYSHROOM_2           = 2232,
+
+    OPPRESSIVE_GLARE         = 2392,
 
     ROAR_3                   = 2406,
 

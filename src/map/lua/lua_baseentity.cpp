@@ -92,6 +92,8 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "items/item_furnishing.h"
+#include "items/item_linkshell.h"
 
 #include "packets/action.h"
 #include "packets/auction_house.h"
@@ -5837,7 +5839,7 @@ void CLuaBaseEntity::setAnimation(uint8 animation)
 
 /************************************************************************
  *  Function: getAnimationSub()
- *  Purpose : Returns animation sub for an entity or updates if var supplied
+ *  Purpose : Returns animation sub for an entity
  *  Example :
  *  Notes   :
  ************************************************************************/
@@ -5849,7 +5851,7 @@ uint8 CLuaBaseEntity::getAnimationSub()
 
 /************************************************************************
  *  Function: setAnimationSub()
- *  Purpose : Returns animation sub for an entity or updates if var supplied
+ *  Purpose : Updates the animationsub for an entity and sends an update packet immediately if specified
  *  Example :
  *  Notes   : sendUpdate is true by default (false is the edge case.)
  ************************************************************************/
@@ -13241,7 +13243,7 @@ void CLuaBaseEntity::resetEnmity(CLuaBaseEntity* PEntity)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
-        ShowWarning("Attempting to reset enmnity for invalid entity type (%s).", m_PBaseEntity->getName());
+        ShowWarning("Attempting to reset enmity for invalid entity type (%s).", m_PBaseEntity->getName());
         return;
     }
 
@@ -15292,16 +15294,17 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
 
 uint8 CLuaBaseEntity::getWeaponSubSkillType(uint8 slotID)
 {
-    if (m_PBaseEntity->objtype == TYPE_NPC)
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar)
     {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        ShowWarning("Invalid Entity (%s) calling function.", m_PBaseEntity->getName());
         return 0;
     }
 
     if (slotID <= 3)
     {
         auto  slot    = static_cast<SLOTTYPE>(slotID);
-        auto* PChar   = static_cast<CCharEntity*>(m_PBaseEntity);
         auto* PWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(slot));
 
         if (PWeapon)
@@ -15848,31 +15851,6 @@ void CLuaBaseEntity::setJugRemainingTime(uint32 remainingSeconds)
     auto previousJugLifetime = timer::now() - PPetEntity->getJugSpawnTime();
 
     PPetEntity->setJugDuration(previousJugLifetime + std::chrono::seconds(remainingSeconds));
-}
-
-/************************************************************************
- *  Function: hasValidJugPetItem()
- *  Purpose : Returns true if subSkill Type is of sufficient value
- *  Example : if player:hasValidJugPetItem() then
- *  Notes   : Solely used for determining Call Beast activation
- ************************************************************************/
-
-bool CLuaBaseEntity::hasValidJugPetItem()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return false;
-    }
-
-    CItemWeapon* PItem = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(m_PBaseEntity)->getEquip(SLOT_AMMO));
-
-    if (PItem != nullptr && PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI)
-    {
-        return true;
-    }
-
-    return false;
 }
 
 /************************************************************************
@@ -20055,8 +20033,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
     SOL_REGISTER("despawnPet", CLuaBaseEntity::despawnPet);
     SOL_REGISTER("setJugRemainingTime", CLuaBaseEntity::setJugRemainingTime);
-
-    SOL_REGISTER("hasValidJugPetItem", CLuaBaseEntity::hasValidJugPetItem);
 
     SOL_REGISTER("hasPet", CLuaBaseEntity::hasPet);
     SOL_REGISTER("hasJugPet", CLuaBaseEntity::hasJugPet);

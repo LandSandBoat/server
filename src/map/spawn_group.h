@@ -33,6 +33,8 @@ public:
     uint16_t removeAndReplaceWithRandomMember(uint16_t targid); // called on despawn to remove self from current queue
     uint16_t fillSpawnPool();                                   // fill queue back up to size of maxSpawns, return targid of last mob inserted
     bool     isInSpawnPool(uint16_t targid) const;              // returns true if targid is in queue, used in respawn state to check if this mob should spawn
+    uint32_t getGroupID();                                      // returns the group id for this spawn group
+    void     resetPool();                                       // purges spawn group queue and refills it with fresh randomness
 
     bool isValid(CZone* zone); // returns false if group is not valid
 private:

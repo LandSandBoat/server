@@ -108,6 +108,8 @@
 #include "zoneutils.h"
 
 #include "enums/key_items.h"
+#include "items/item_furnishing.h"
+#include "items/item_linkshell.h"
 
 /************************************************************************
  *                                                                       *

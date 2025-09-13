@@ -1408,7 +1408,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     -- PURCHASE CP ITEM
     elseif option >= 32768 and option <= 32944 then
         local stock = getStock(player, guardNation, option)
-        local price = canPurchaseItem(player, stock, pRank, guardNation, mOffset, option)
+        local price = canPurchaseItem(player, stock, pRank, guardNation, mOffset, option) -- Validation included.
 
         if price < 0 then
             return

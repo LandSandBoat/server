@@ -78,11 +78,24 @@ uint16_t spawnGroup::fillSpawnPool()
     return lastTargId; // return the last targid inserted
 }
 
+void spawnGroup::resetPool()
+{
+    mobsInPoolAllowedToSpawn.clear();
+
+    // return is ignored
+    fillSpawnPool();
+}
+
 // Check if targid is in spawn pool.
 // CMobEntity will use this to check if it can respawn, or the zone time/day change for night/day only mobs.
 bool spawnGroup::isInSpawnPool(uint16_t targid) const
 {
     return mobsInPoolAllowedToSpawn.contains(targid);
+}
+
+uint32_t spawnGroup::getGroupID()
+{
+    return groupId;
 }
 
 // If there's less total spawns than members then this group is not valid

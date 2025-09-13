@@ -95,6 +95,7 @@ namespace petutils
                            "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                           "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
                            "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType "
                            "FROM pet_list, mob_pools, mob_resistances, mob_family_system "
                            "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
@@ -164,6 +165,15 @@ namespace petutils
             Pet->water_res_rank   = rset->get<int8>("water_res_rank");
             Pet->light_res_rank   = rset->get<int8>("light_res_rank");
             Pet->dark_res_rank    = rset->get<int8>("dark_res_rank");
+
+            Pet->paralyze_res_rank    = rset->get<int8>("paralyze_res_rank");
+            Pet->bind_res_rank        = rset->get<int8>("bind_res_rank");
+            Pet->silence_res_rank     = rset->get<int8>("silence_res_rank");
+            Pet->slow_res_rank        = rset->get<int8>("slow_res_rank");
+            Pet->poison_res_rank      = rset->get<int8>("poison_res_rank");
+            Pet->light_sleep_res_rank = rset->get<int8>("light_sleep_res_rank");
+            Pet->dark_sleep_res_rank  = rset->get<int8>("dark_sleep_res_rank");
+            Pet->blind_res_rank       = rset->get<int8>("blind_res_rank");
 
             Pet->cmbDelay       = rset->get<uint16>("cmbDelay");
             Pet->name_prefix    = rset->get<uint8>("name_prefix");
@@ -1284,6 +1294,15 @@ namespace petutils
             PPet->setModifier(Mod::WATER_RES_RANK, petData->water_res_rank);
             PPet->setModifier(Mod::LIGHT_RES_RANK, petData->light_res_rank);
             PPet->setModifier(Mod::DARK_RES_RANK, petData->dark_res_rank);
+
+            PPet->setModifier(Mod::PARALYZE_RES_RANK, petData->paralyze_res_rank);
+            PPet->setModifier(Mod::BIND_RES_RANK, petData->bind_res_rank);
+            PPet->setModifier(Mod::SILENCE_RES_RANK, petData->silence_res_rank);
+            PPet->setModifier(Mod::SLOW_RES_RANK, petData->slow_res_rank);
+            PPet->setModifier(Mod::POISON_RES_RANK, petData->poison_res_rank);
+            PPet->setModifier(Mod::LIGHT_SLEEP_RES_RANK, petData->light_sleep_res_rank);
+            PPet->setModifier(Mod::DARK_SLEEP_RES_RANK, petData->dark_sleep_res_rank);
+            PPet->setModifier(Mod::BLIND_RES_RANK, petData->blind_res_rank);
         }
     }
 

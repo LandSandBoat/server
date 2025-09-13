@@ -422,27 +422,17 @@ local resistRankMultiplier =
     [11] = 2.35,  -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
 }
 
-xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, actionElement, magicEvasionModifier, rankModifier)
-    local magicEva   = target:getMod(xi.mod.MEVA) -- Base MACC.
-    local resistRank = 0 -- Elemental specific Resistance rank. Acts as multiplier to base MACC.
-    local resMod     = 0 -- Elemental specific magic evasion. Acts as a additive bonus to base MACC after affected by resistance rank.
+xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, actionElement, effectId, resistanceRank)
+    local magicEva = target:getMod(xi.mod.MEVA) -- Base MACC.
 
-    -- Elemental magic evasion.
+    -- Elemental magic evasion. All actions and effects have an associated element.
     if actionElement ~= xi.element.NONE then
-        -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
-        resMod     = target:getMod(xi.combat.element.getElementalMEVAModifier(actionElement))
-        resistRank = utils.clamp(target:getMod(xi.combat.element.getElementalResistanceRankModifier(actionElement)), -3, 11)
-
-        if resistRank > 4 then
-            resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
-        end
-
-        magicEva = math.floor(magicEva * resistRankMultiplier[resistRank]) + resMod
+        magicEva = magicEva + target:getMod(xi.combat.element.getElementalMEVAModifier(actionElement))
     end
 
     -- Magic evasion against specific status effects.
-    if magicEvasionModifier > 0 then
-        magicEva = magicEva + target:getMod(magicEvasionModifier) + target:getMod(xi.mod.STATUS_MEVA)
+    if effectId > 0 then
+        magicEva = magicEva + target:getMod(xi.combat.statusEffect.getAssociatedMagicEvasionModifier(effectId)) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
     -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
@@ -452,6 +442,9 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, act
     then
         magicEva = magicEva + utils.clamp(target:getMainLvl() - actor:getMainLvl(), 0, 100) * 4
     end
+
+    -- Apply resistance rank multiplier.
+    magicEva = math.floor(magicEva * resistRankMultiplier[resistanceRank])
 
     return magicEva
 end
@@ -476,7 +469,7 @@ end
 -- Calculate resist tier.
 -----------------------------------
 
-xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actionElement, magicHitRate, rankModifier)
+xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actionElement, magicHitRate, resistanceRank)
     local targetResistRate = 1 -- The variable we return.
 
     ----------------------------------------
@@ -498,25 +491,16 @@ xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actio
     end
 
     ----------------------------------------
-    -- Handle target resistance rank.
-    ----------------------------------------
-    local targetResistRank = target:getMod(xi.combat.element.getElementalResistanceRankModifier(actionElement)) or 0
-
-    if targetResistRank > 4 then
-        targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
-    end
-
-    ----------------------------------------
     -- Force 1/8 if target has max resistance rank.
     ----------------------------------------
-    if targetResistRank >= 11 then
+    if resistanceRank >= 11 then
         return 0.0625
     end
 
     ----------------------------------------
     -- Handle magic hit rate.
     ----------------------------------------
-    if targetResistRank >= 10 then
+    if resistanceRank >= 10 then
         magicHitRate = 0.05
     end
 
@@ -539,7 +523,7 @@ xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actio
 
     -- Non-players: Affected by resistance rank.
     else
-        if targetResistRank <= -3 then
+        if resistanceRank <= -3 then
             maxResistTier = 1
         end
     end
@@ -568,20 +552,53 @@ end
 -----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
-    local magicEvasionModifier = 0
-    local rankModifier         = 0
+    -- Early return: Something went really wrong.
+    if
+        not actor or
+        not target
+    then
+        return 0
+    end
 
-    -- Prepare parameters
-    if effectId and effectId > 0 then
-        magicEvasionModifier = xi.combat.statusEffect.getAssociatedMagicEvasionModifier(effectId)
-        rankModifier         = target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(effectId))
+    -- Parameter validation.
+    spellGroup    = utils.defaultIfNil(spellGroup, 0)
+    skillType     = utils.defaultIfNil(skillType, 0)
+    skillRank     = utils.defaultIfNil(skillRank, 0)
+    actionElement = utils.defaultIfNil(actionElement, 0)
+    statUsed      = utils.defaultIfNil(statUsed, 0)
+    effectId      = utils.defaultIfNil(effectId, 0)
+    bonusMacc     = utils.defaultIfNil(bonusMacc, 0)
+
+    -- Decide which resistance rank modifier to use:
+    -- 1: If an effect exists, check if said effect has a specialized resistance rank.
+    -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
+    local resistanceRank    = 0 -- Specific Resistance rank value.
+    local resistanceRankMod = 0 -- Modifier ID of the resistance rank to use.
+
+    if not target:isPC() then
+        if effectId > 0 then -- Check if it's an effect.
+            resistanceRankMod = xi.combat.statusEffect.getAssociatedResistanceRankModifier(effectId, actionElement)
+        end
+
+        if resistanceRankMod == 0 then -- If it's an effect and this is 0, try with element.
+            resistanceRankMod = xi.combat.element.getElementalResistanceRankModifier(actionElement)
+        end
+
+        -- Fetch resistance rank and apply possible modifiers to it.
+        resistanceRank = target:getMod(resistanceRankMod)
+
+        if effectId > 0 then
+            resistanceRank = resistanceRank - target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(effectId)) -- Apply immunobreak modification.
+        end
+
+        resistanceRank = utils.clamp(resistanceRank, -3, 11)
     end
 
     -- Get Actor Magic Accuracy and target Magic Evasion
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, actionElement, magicEvasionModifier, rankModifier)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, actionElement, effectId, resistanceRank)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistanceFactor(actor, target, actionElement, magicHitRate, rankModifier)
+    local resistRate   = xi.combat.magicHitRate.calculateResistanceFactor(actor, target, actionElement, magicHitRate, resistanceRank)
 
     return resistRate
 end

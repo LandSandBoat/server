@@ -22,48 +22,43 @@
 #include "synth_suggestion.h"
 
 #include "common/database.h"
-#include "common/logging.h"
-#include "common/sql.h"
 #include "map_engine.h"
 
 #include <map>
 
-CSynthSuggestionListPacket::CSynthSuggestionListPacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 resultOffset)
+CSynthSuggestionListPacket::CSynthSuggestionListPacket(const uint16 skillID, const uint16 skillLevel, const uint8 skillRank, const uint16 resultOffset)
 {
     this->setType(0x31);
     this->setSize(0x34);
 
     ref<uint8>(0x0A) = skillLevel;
 
-    const char* craftName = craftSkillDbNames[skillID - 1].c_str();
-    uint8       minSkill  = skillRank * 10;
-    uint8       maxSkill  = (skillRank + 1) * 10;
+    const char* craftName    = craftSkillDbNames[skillID - 1].c_str();
+    const uint8 minSkill     = skillRank * 10;
+    uint8       maxSkill     = (skillRank + 1) * 10;
+    uint8       itemIdOffset = 0x10;
 
     if (skillLevel < maxSkill)
     {
         maxSkill = skillLevel;
     }
 
-    const char* fmtQuery = "SELECT Result FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
-                           "WHERE `%s` >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
-                           "`%s` BETWEEN %u AND %u AND Desynth = 0 ORDER BY `%s`, item_basic.name LIMIT %d, 17";
-
-    int32 ret = _sql->Query(fmtQuery, craftName, craftName, minSkill, maxSkill, craftName, resultOffset);
-
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto query = std::format("SELECT Result FROM synth_recipes "
+                                   "INNER JOIN item_basic ON Result = item_basic.itemid "
+                                   "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
+                                   "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 17",
+                                   craftName, craftName, craftName);
+    const auto rset  = db::preparedStmt(query, minSkill, maxSkill, resultOffset);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        uint8 itemIdOffset = 0x10;
-        while (_sql->NextRow() == SQL_SUCCESS)
-        {
-            ref<uint16>(itemIdOffset) = _sql->GetUIntData(0);
+        ref<uint16>(itemIdOffset) = rset->get<uint16>("Result");
 
+        itemIdOffset += 2;
+        if (itemIdOffset == 0x30)
+        {
+            // The 17th result of a query is not displayed in the menu, but instead is used to signal
+            // to the client that another page is available.  This item ID is stored at 0x32.
             itemIdOffset += 2;
-            if (itemIdOffset == 0x30)
-            {
-                // The 17th result of a query is not displayed in the menu, but instead is used to signal
-                // to the client that another page is available.  This item ID is stored at 0x32.
-                itemIdOffset += 2;
-            }
         }
     }
 
@@ -84,15 +79,14 @@ CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint1
         maxSkill = skillLevel;
     }
 
-    const char* fmtQuery = "SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result,  "
-                           "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
-                           "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
-                           "WHERE `%s` >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
-                           "`%s` BETWEEN %u AND %u AND Desynth = 0 ORDER BY `%s`, item_basic.name LIMIT %d, 1";
-
-    int32 ret = _sql->Query(fmtQuery, craftName, craftName, minSkill, maxSkill, craftName, selectedRecipeOffset);
-
-    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    const auto query = std::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
+                                   "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
+                                   "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
+                                   "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
+                                   "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 1",
+                                   craftName, craftName, craftName);
+    const auto rset  = db::preparedStmt(query, minSkill, maxSkill, selectedRecipeOffset);
+    FOR_DB_SINGLE_RESULT(rset)
     {
         std::map<uint16, uint16> ingredients;
         uint16                   subcraftIDs[3] = { 0u, 0u, 0u };
@@ -105,7 +99,7 @@ CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint1
             uint16 this_skill = 0u;
             if (i != skillID && subidx < 3)
             {
-                this_skill = _sql->GetUIntData(i);
+                this_skill = rset->get<uint16>(i);
             }
 
             if (this_skill > 0u)
@@ -115,12 +109,12 @@ CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint1
             }
         }
 
-        ref<uint16>(0x04) = _sql->GetUIntData(10);
+        ref<uint16>(0x04) = rset->get<uint16>("Result");
         ref<uint16>(0x06) = subcraftIDs[0];
         ref<uint16>(0x08) = subcraftIDs[1];
         ref<uint16>(0x0A) = subcraftIDs[2];
-        ref<uint16>(0x0C) = _sql->GetUIntData(9);
-        ref<uint16>(0x0E) = _sql->GetUIntData(0);
+        ref<uint16>(0x0C) = rset->get<uint16>("Crystal");
+        ref<uint16>(0x0E) = rset->get<uint16>("KeyItem");
 
         // So this loop is a little weird. What we store in the db
         //     is a list of 8 individual ingredients which may or
@@ -134,7 +128,7 @@ CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint1
         {
             uint16 this_ingredient = 0;
 
-            this_ingredient = _sql->GetUIntData(11 + i);
+            this_ingredient = rset->get<uint16>(11 + i);
             if (this_ingredient != 0)
             {
                 if (ingredients[this_ingredient])

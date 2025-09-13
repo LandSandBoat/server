@@ -22,21 +22,20 @@
 #include "weapon_skill.h"
 #include <cstring>
 
-CWeaponSkill::CWeaponSkill(uint16 id)
+CWeaponSkill::CWeaponSkill(const uint16 id)
 : m_ID(id)
 , m_TypeID(0)
+, m_Skilllevel(0)
+, m_AnimationId(0)
+, m_Element(0)
+, m_PrimarySkillchain(SC_NONE)
+, m_SecondarySkillchain(SC_NONE)
+, m_TertiarySkillchain(SC_NONE)
+, m_Range(0)
+, m_AOE(0)
+, m_mainOnly(0)
+, m_unlockId(0)
 {
-    std::memset(m_Job, 0, sizeof(m_Job));
-    m_Skilllevel          = 0;
-    m_AnimationId         = 0;
-    m_Element             = 0;
-    m_PrimarySkillchain   = SC_NONE;
-    m_SecondarySkillchain = SC_NONE;
-    m_TertiarySkillchain  = SC_NONE;
-    m_Range               = 0;
-    m_AOE                 = 0;
-    m_mainOnly            = 0;
-    m_unlockId            = 0;
 }
 
 void CWeaponSkill::setID(uint16 id)
@@ -69,9 +68,9 @@ void CWeaponSkill::setUnlockId(uint8 id)
     m_unlockId = id;
 }
 
-void CWeaponSkill::setJob(int8* jobs)
+void CWeaponSkill::setJob(const std::array<uint8, MAX_JOBTYPE>& jobs)
 {
-    std::memcpy(&m_Job[1], jobs, 22);
+    m_Job = jobs;
 }
 
 void CWeaponSkill::setSkillLevel(uint16 level)
@@ -109,7 +108,7 @@ void CWeaponSkill::setName(const std::string& name)
     m_name = name;
 }
 
-void CWeaponSkill::setAnimationId(int8 id)
+void CWeaponSkill::setAnimationId(const uint8 id)
 {
     m_AnimationId = id;
 }

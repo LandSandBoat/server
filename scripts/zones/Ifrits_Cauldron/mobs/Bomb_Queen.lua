@@ -8,6 +8,25 @@ mixins = { require('scripts/mixins/draw_in') }
 ---@type TMobEntity
 local entity = {}
 
+local ID = zones[xi.zone.IFRITS_CAULDRON]
+
+local basicPets =
+{
+    ID.mob.BOMB_QUEEN + 1,
+    ID.mob.BOMB_QUEEN + 2,
+    ID.mob.BOMB_QUEEN + 3,
+    ID.mob.BOMB_QUEEN + 4,
+}
+
+local bombBastard = ID.mob.BOMB_QUEEN + 5
+
+local callPetParams =
+{
+    inactiveTime = 5000,
+    dieWithOwner = true,
+    maxSpawns = 1,
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
@@ -25,74 +44,20 @@ end
 entity.onMobFight = function(mob, target)
     -- Every 30 seconds spawn a random Prince or Princess. If none remain then summon the Bastard.
     -- Retail confirmed
-    if GetSystemTime() >= mob:getLocalVar('spawn_time') then
+    if
+        not xi.combat.behavior.isEntityBusy(mob) and
+        GetSystemTime() >= mob:getLocalVar('spawn_time')
+    then
         mob:setLocalVar('spawn_time', GetSystemTime() + 30)
-        local mobId = mob:getID()
-        local canSpawnPet = false
-        for id = mobId + 1, mobId + 5 do
-            if GetMobByID(id):getCurrentAction() == xi.action.NONE then
-                canSpawnPet = true
-                break
-            end
-        end
 
-        if canSpawnPet then
-            mob:entityAnimationPacket(xi.animationString.CAST_SUMMONER_START)
-            mob:timer(5000, function(bombQueen)
-                if bombQueen:isDead() then
-                    return
-                end
-
-                bombQueen:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
-                local bombQueenId = mob:getID()
-
-                -- Pick a random Prince or Princess
-                local petId = 0
-                local offset = math.random(1, 4)
-                for i = 0, 3 do
-                    local id = bombQueenId + 1 + (offset + i) % 4
-                    if GetMobByID(id):getCurrentAction() == xi.action.NONE then
-                        petId = id
-                        break
-                    end
-                end
-
-                -- If no Princes or Princesses remain then try the Bastard
-                if petId == 0 then
-                    petId = bombQueenId + 5
-                    if GetMobByID(petId):getCurrentAction() ~= xi.action.NONE then
-                        return
-                    end
-                end
-
-                local pet = GetMobByID(petId)
-                if not pet then
-                    return
-                end
-
-                local pos = mob:getPos()
-                pet:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
-                pet:spawn()
-                local newtarget = mob:getTarget()
-                if newtarget then
-                    pet:updateEnmity(newtarget)
-                end
-            end)
+        -- will call the first that is not spawned
+        if not xi.mob.callPets(mob, utils.shuffle(basicPets), callPetParams) then
+            xi.mob.callPets(mob, bombBastard, callPetParams)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    -- pets die with queen
-    if optParams.isKiller then
-        local mobId = mob:getID()
-        for i = mobId + 1, mobId + 5 do
-            local pet = GetMobByID(i)
-            if pet and pet:isAlive() then
-                pet:setHP(0)
-            end
-        end
-    end
 end
 
 return entity
