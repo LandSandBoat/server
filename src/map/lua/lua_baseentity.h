@@ -42,6 +42,7 @@ class CLuaZone;
 
 class CLuaBaseEntity
 {
+protected:
     CBaseEntity* m_PBaseEntity;
 
 public:

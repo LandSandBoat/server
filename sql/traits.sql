@@ -229,7 +229,8 @@ INSERT INTO `traits` VALUES (18,'dual wield',19,40,2,259,15,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (18,'dual wield',19,60,3,259,25,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (18,'dual wield',19,80,4,259,30,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (19,'treasure hunter',6,15,1,303,1,NULL,0);
-INSERT INTO `traits` VALUES (20,'gilfinder',6,5,1,897,50,NULL,0);
+INSERT INTO `traits` VALUES (20,'gilfinder',6,5,1,897,1,NULL,0);
+INSERT INTO `traits` VALUES (20,'gilfinder',6,90,2,897,2,NULL,0); -- https://wiki.ffo.jp/html/1677.html
 INSERT INTO `traits` VALUES (21,'alertness',11,5,1,0,0,NULL,0);
 INSERT INTO `traits` VALUES (22,'stealth',13,5,1,358,3,NULL,0);
 INSERT INTO `traits` VALUES (23,'martial arts',2,1,1,173,80,NULL,0);

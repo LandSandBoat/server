@@ -16,6 +16,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         potency = 12
     end
 
+    -- TODO do this cleaner
+    if mob:getName() == 'Beelzebub' or mob:getName() == 'Hell_Fly' then
+        potency = 24 -- Double Potency for Infernal Swarm Mobs
+    end
+
     potency = potency - math.random(0, potency / 4)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)

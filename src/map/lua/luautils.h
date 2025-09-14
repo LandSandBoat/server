@@ -212,7 +212,7 @@ namespace luautils
     void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId = std::nullopt);
 
     void SendEntityVisualPacket(uint32 npcid, const char* command);
-    void InitInteractionGlobal(const std::vector<uint16>& zoneIds);
+    void InitInteractionGlobal();
     auto GetZone(uint16 zoneId) -> CZone*;
     auto GetItemByID(uint32 itemId) -> CItem*;
     auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> CBaseEntity*;

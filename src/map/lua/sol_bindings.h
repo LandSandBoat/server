@@ -29,10 +29,18 @@
 #define lua_tointeger(L, n) static_cast<lua_Integer>(std::floor(lua_tonumber(L, n)))
 
 #define SOL_USERTYPE(TypeName, BindingTypeName) \
-    std::string className = TypeName;           \
-    lua.new_usertype<BindingTypeName>(className)
+    std::string className   = TypeName;         \
+    auto        typeBuilder = lua.new_usertype<BindingTypeName>(className)
+
+#define SOL_USERTYPE_INHERIT(TypeName, BindingTypeName, ...)                         \
+    std::string className   = TypeName;                                              \
+    auto        typeBuilder = lua.new_usertype<BindingTypeName>(className,           \
+                                                                sol::no_constructor, \
+                                                                sol::base_classes, sol::bases<__VA_ARGS__>())
 
 #define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
+
+#define SOL_READONLY(PropName, Func) typeBuilder[PropName] = sol::readonly_property(&Func)
 
 #define SOL_BIND_DEC(LuaType, CppType) \
     int sol_lua_push(sol::types<CppType*>, lua_State* L, CppType* obj);

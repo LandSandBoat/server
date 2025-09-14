@@ -92,7 +92,6 @@
 
 // TODO: These are all hacks and shouldn't be globally exposed like this!
 
-std::unique_ptr<SqlConnection>  _sql;
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 MapEngine::MapEngine(asio::io_context& io_context, MapConfig& config)
@@ -230,10 +229,7 @@ void MapEngine::do_init()
     ShowInfo(fmt::format("Random samples (integer): {}", utils::getRandomSampleString(0, 255)));
     ShowInfo(fmt::format("Random samples (float): {}", utils::getRandomSampleString(0.0f, 1.0f)));
 
-    // TODO: Get rid of legacy _sql and SqlConnection
     ShowInfo("do_init: connecting to database");
-    _sql = std::make_unique<SqlConnection>();
-
     ShowInfo(fmt::format("database name: {}", db::getDatabaseSchema()).c_str());
     ShowInfo(fmt::format("database server version: {}", db::getDatabaseVersion()).c_str());
     ShowInfo(fmt::format("database client version: {}", db::getDriverVersion()).c_str());
@@ -343,7 +339,6 @@ void MapEngine::do_init()
 
     moduleutils::ReportLuaModuleUsage();
 
-    _sql->EnableTimers();
     db::enableTimers();
 
     if (!engineConfig_.isTestServer)

@@ -2,6 +2,8 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -10,15 +12,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('hpTrigger', math.random(10, 75))
-end
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.BIND)
 
-entity.onMobFight = function(mob, target)
-    local hpTrigger = mob:getLocalVar('hpTrigger')
-    if mob:getLocalVar('SoulVoice') == 0 and mob:getHPP() <= hpTrigger then
-        mob:setLocalVar('SoulVoice', 1)
-        mob:useMobAbility(696) -- Soul Voice
-    end
+    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.jsa.SOUL_VOICE, hpp = math.random(10, 75) } } })
 end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)
@@ -45,7 +43,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar('repop', mob:getBattleTime()) -- This get erased on respawn automatic.
+    mob:setLocalVar('repop', GetSystemTime() + 10)
 end
 
 return entity

@@ -26,11 +26,19 @@
 
 #include <argparse/argparse.hpp>
 
+enum class ArgumentType : uint8_t
+{
+    Simple,
+    Flag,
+    Multiple,
+};
+
 struct ApplicationConfig;
 struct ArgumentDefinition
 {
-    std::string name;
-    std::string description;
+    std::string  name;
+    std::string  description;
+    ArgumentType type{ ArgumentType::Simple };
 };
 
 //

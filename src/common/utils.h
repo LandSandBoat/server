@@ -25,7 +25,6 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/mmo.h"
-#include "common/sql.h"
 #include "common/stdext.h"
 #include "common/synchronized.h"
 #include "common/timer.h"

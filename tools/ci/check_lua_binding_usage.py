@@ -11,13 +11,16 @@ function_names = []
 
 
 def extract_function_names():
-    for filename in os.listdir("src/map/lua/"):
-        full_filename = os.path.join("src/map/lua/", filename)
-        if os.path.isfile(full_filename):
-            with open(full_filename, mode="r", encoding="utf-8") as file:
-                for line in file.readlines():
-                    if 'SOL_REGISTER("' in line:
-                        function_names.append(line.strip().split('"')[1])
+    # Search in both src/map/lua/ and src/test/lua/ (including nested directories)
+    search_dirs = ["src/map/lua/", "src/test/lua/"]
+    
+    for base_dir in search_dirs:
+        for filename in glob.glob(os.path.join(base_dir, "**/*.[ch]*"), recursive=True):
+            if os.path.isfile(filename):
+                with open(filename, mode="r", encoding="utf-8") as file:
+                    for line in file.readlines():
+                        if 'SOL_REGISTER("' in line:
+                            function_names.append(line.strip().split('"')[1])
 
 
 def main():

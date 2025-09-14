@@ -425,7 +425,8 @@ namespace luautils
 
                 // Spec meta files should not be cached, and are only used
                 // for Lua Language Server parsing
-                if (!parts.empty() && parts[2] == "specs")
+                // Test files are handled by xi_test exclusively
+                if (!parts.empty() && (parts[2] == "specs" || parts[2] == "tests"))
                 {
                     continue;
                 }
@@ -1227,16 +1228,23 @@ namespace luautils
         return PNpc;
     }
 
-    void InitInteractionGlobal(const std::vector<uint16>& zoneIds)
+    void InitInteractionGlobal()
     {
         auto initZones = lua["InteractionGlobal"]["initZones"];
-        auto table     = sol::as_table(zoneIds);
 
-        auto result = initZones(table);
+        std::vector<uint16> zoneIds;
+        // clang-format off
+        zoneutils::ForEachZone([&zoneIds](const CZone* PZone)
+        {
+            zoneIds.emplace_back(PZone->GetID());
+        });
+        // clang-format on
+
+        const auto result = initZones(zoneIds);
 
         if (!result.valid())
         {
-            sol::error err = result;
+            const sol::error err = result;
             ShowError("luautils::InitInteractionGlobal: %s", err.what());
         }
     }

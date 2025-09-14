@@ -54,8 +54,23 @@ Arguments::Arguments(const ApplicationConfig& config, const int argc, char** arg
     // Specialized arguments
     for (const auto& argument : config.arguments)
     {
-        args_->add_argument(argument.name)
-            .help(argument.description);
+        switch (argument.type)
+        {
+            case ArgumentType::Simple:
+                args_->add_argument(argument.name)
+                    .help(argument.description);
+                break;
+            case ArgumentType::Flag:
+                args_->add_argument(argument.name)
+                    .flag()
+                    .help(argument.description);
+                break;
+            case ArgumentType::Multiple:
+                args_->add_argument(argument.name)
+                    .append()
+                    .help(argument.description);
+                break;
+        }
     }
 
     args_->add_epilog("This is free and open-source software. You may use, modify, and distribute it under the terms of the GNU GPL v3.");

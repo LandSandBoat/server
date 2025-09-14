@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CHARUTILS_H
-#define _CHARUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -178,11 +177,11 @@ namespace charutils
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
     bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
-    void SaveCharEquip(CCharEntity* PChar);            // preserve the character’s equipment and appearance
-    void SaveCharLook(CCharEntity* PChar);             // saves a character's appearance based on style locking
-    void SaveCharPosition(CCharEntity* PChar);         // save the character's position (x/y/z)
+    void SaveCharJob(const CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
+    void SaveCharExp(const CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
+    void SaveCharEquip(CCharEntity* PChar);                  // preserve the character’s equipment and appearance
+    void SaveCharLook(CCharEntity* PChar);                   // saves a character's appearance based on style locking
+    void SaveCharPosition(CCharEntity* PChar);               // save the character's position (x/y/z)
     // void SaveCharLinkshells(CCharEntity* PChar);     // TODO: save the character's linkshells
     void SaveMissionsList(CCharEntity* PChar);          // save the missions list
     void SaveEminenceData(CCharEntity* PChar);          // save Eminence Record (RoE) data
@@ -193,24 +192,24 @@ namespace charutils
     void SaveCharInventoryCapacity(CCharEntity* PChar); // save Character inventory capacity
     void SaveSpell(CCharEntity* PChar, uint16 spellID); // save learned spells
     void DeleteSpell(CCharEntity* PChar, uint16 spellID);
-    void SaveLearnedAbilities(CCharEntity* PChar);             // save learned abilities (e.g., corsair rolls)
-    void SaveTitles(CCharEntity* PChar);                       // save character's titles
-    void SaveCharStats(CCharEntity* PChar);                    // save flags, current values of character stats (jobs/HP/MP/etc.)
-    void SaveCharGMLevel(CCharEntity* PChar);                  // save the character's gm level
-    void SaveMentorFlag(CCharEntity* PChar);                   // save the character's mentor flag
-    void SaveJobMasterDisplay(CCharEntity* PChar);             // Save the character's job master display status
-    void SavePlayerSettings(CCharEntity* PChar);               // save the character's settings
-    void SaveChatFilterFlags(CCharEntity* PChar);              // save the character's chat filters
-    void SaveLanguages(CCharEntity* PChar);                    // save the character's language preference
-    void SaveCharNation(CCharEntity* PChar);                   // save the character's nation of allegiance
-    void SaveCampaignAllegiance(CCharEntity* PChar);           // save the character's campaign allegiance
-    void SaveCharMoghancement(CCharEntity* PChar);             // save the character's current moghancement
-    void SaveCharSkills(CCharEntity* PChar, uint8 skillID);    // save the character's skills
-    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type); // save the character's teleports (homepoints, outposts, maws, etc)
-    void SaveDeathTime(CCharEntity* PChar);                    // save when this character last died
-    void SavePlayTime(CCharEntity* PChar);                     // save this character's total play time
-    void SaveLastLogout(const CCharEntity* PChar);             // save the last logout time of this character
-    bool hasMogLockerAccess(const CCharEntity* PChar);         // true if have access, false otherwise
+    void SaveLearnedAbilities(CCharEntity* PChar);                // save learned abilities (e.g., corsair rolls)
+    void SaveTitles(CCharEntity* PChar);                          // save character's titles
+    void SaveCharStats(CCharEntity* PChar);                       // save flags, current values of character stats (jobs/HP/MP/etc.)
+    void SaveCharGMLevel(CCharEntity* PChar);                     // save the character's gm level
+    void SaveMentorFlag(CCharEntity* PChar);                      // save the character's mentor flag
+    void SaveJobMasterDisplay(CCharEntity* PChar);                // Save the character's job master display status
+    void SavePlayerSettings(CCharEntity* PChar);                  // save the character's settings
+    void SaveChatFilterFlags(CCharEntity* PChar);                 // save the character's chat filters
+    void SaveLanguages(CCharEntity* PChar);                       // save the character's language preference
+    void SaveCharNation(CCharEntity* PChar);                      // save the character's nation of allegiance
+    void SaveCampaignAllegiance(const CCharEntity* PChar);        // save the character's campaign allegiance
+    void SaveCharMoghancement(const CCharEntity* PChar);          // save the character's current moghancement
+    void SaveCharSkills(const CCharEntity* PChar, uint8 skillID); // save the character's skills
+    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type);    // save the character's teleports (homepoints, outposts, maws, etc)
+    void SaveDeathTime(CCharEntity* PChar);                       // save when this character last died
+    void SavePlayTime(CCharEntity* PChar);                        // save this character's total play time
+    void SaveLastLogout(const CCharEntity* PChar);                // save the last logout time of this character
+    bool hasMogLockerAccess(const CCharEntity* PChar);            // true if have access, false otherwise
 
     uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
 
@@ -276,7 +275,7 @@ namespace charutils
     uint32                 getAvailableTraverserStones(CCharEntity* PChar);
 
     void ReadHistory(CCharEntity* PChar);
-    void WriteHistory(CCharEntity* PChar);
+    void WriteHistory(const CCharEntity* PChar);
 
     uint8 getMaxItemLevel(CCharEntity* PChar);
     uint8 getItemLevelDifference(CCharEntity* PChar);
@@ -302,5 +301,3 @@ namespace charutils
 
     bool raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize);
 }; // namespace charutils
-
-#endif // _CHARUTILS_H

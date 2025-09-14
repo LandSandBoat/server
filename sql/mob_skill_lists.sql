@@ -4163,7 +4163,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,998);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,999);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
 
--- Next ID : 2060
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,334);
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,335);
+
+-- Next ID : 2061
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

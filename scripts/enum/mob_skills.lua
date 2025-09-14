@@ -112,6 +112,13 @@ xi.mobSkill =
 
     JUDGMENT_BOLT_1          =  893, -- Confirmed usage: "Trial by Lightning" bcnm. Regular avatar-type mobs (Ramuh).
 
+    PET_FLAME_BREATH         =  900,
+    PET_FROST_BREATH         =  901,
+    PET_GUST_BREATH          =  902,
+    PET_SAND_BREATH          =  903,
+    PET_LIGHTNING_BREATH     =  904,
+    PET_HYDRO_BREATH         =  905,
+
     SEARING_LIGHT_1          =  912, -- Confirmed usage: Regular avatar-type mobs (Carbuncle).
     INFERNO_2                =  913, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ifrit model avatar)
     EARTHEN_FURY_2           =  914, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Titan model avatar)
@@ -160,6 +167,13 @@ xi.mobSkill =
     AERIAL_COLLISION         = 1353,
 
     SINUATE_RUSH             = 1367,
+
+    WING_THRUST              = 1378,
+    AURORAL_WIND             = 1379,
+    IMPACT_STREAM            = 1380,
+    DEPURATION               = 1381,
+    CRYSTALINE_COCOON        = 1382,
+    MEDUSA_JAVELIN           = 1386,
 
     AMATSU_TORIMAI           = 1390,
     AMATSU_KAZAKIRI          = 1391,
