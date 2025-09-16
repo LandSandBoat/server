@@ -35,14 +35,16 @@ zones[xi.zone.RIVERNE_SITE_A01] =
     },
     mob =
     {
-        HELIODROMOS_OFFSET       = GetFirstID('Heliodromos'),
-        CARMINE_DOBSONFLY_OFFSET = GetFirstID('Carmine_Dobsonfly'),
         AIATAR                   = GetFirstID('Aiatar'),
+        ARCANE_PHANTASM          = GetFirstID('Arcane_Phantasm'),
+        CARMINE_DOBSONFLY_OFFSET = GetFirstID('Carmine_Dobsonfly'),
+        HELIODROMOS_OFFSET       = GetFirstID('Heliodromos'),
         ZIRYU                    = GetTableOfIDs('Ziryu'),
     },
     npc =
     {
         DISPLACEMENT_OFFSET = GetFirstID('Spatial_Displacement'),
+        STONE_MONUMENT      = GetFirstID('Stone_Monument'),
     },
 }
 

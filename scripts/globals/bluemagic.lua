@@ -352,7 +352,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(spell))
 
     -- Resistance
-    finaldmg = math.floor(finaldmg * applyResistanceEffect(caster, target, spell, params))
+    finaldmg = math.floor(finaldmg * xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), params.attribute, 0, 0))
 
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
@@ -382,7 +382,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     end
 
     -- Multipliers
-    finalDamage = math.floor(finalDamage * applyResistanceEffect(caster, target, spell, params))
+    finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), params.attribute, 0, 0))
     finalDamage = math.floor(addBonuses(caster, spell, target, finalDamage))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateTMDA(target, spell:getElement()))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)

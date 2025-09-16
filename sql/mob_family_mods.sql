@@ -559,7 +559,6 @@ INSERT INTO `mob_family_mods` VALUES (174,51,4,1);  -- ROAM_TURNS: 4
 INSERT INTO `mob_family_mods` VALUES (174,52,30,1); -- ROAM_RATE: 30
 
 -- Magic Pot: https://www.bg-wiki.com/ffxi/Category:Magic_Pot
-INSERT INTO `mob_family_mods` VALUES (175,29,50,0);     -- MDEF: 50
 INSERT INTO `mob_family_mods` VALUES (175,31,5,1);      -- ROAM_DISTANCE: 5
 INSERT INTO `mob_family_mods` VALUES (175,36,55,1);     -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (175,52,30,1);     -- ROAM_RATE: 30

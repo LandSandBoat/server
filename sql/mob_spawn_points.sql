@@ -6919,7 +6919,7 @@ INSERT INTO `mob_spawn_points` VALUES (16912834,0,'Ruaern','Ru\'aern',45,-678.03
 INSERT INTO `mob_spawn_points` VALUES (16912835,0,'Ruaern','Ru\'aern',48,679.019,-4.256,-220.189,29); -- pld
 INSERT INTO `mob_spawn_points` VALUES (16912836,0,'Ruaern','Ru\'aern',47,681.873,-4.506,-218.466,94); -- blm
 INSERT INTO `mob_spawn_points` VALUES (16912837,0,'Ruaern','Ru\'aern',46,679.534,-4.173,-223.813,180); -- mnk
-INSERT INTO `mob_spawn_points` VALUES (16912838,0,'Jailer_of_Hope','Jailer of Hope',49,-688.591,-0.500,-69.345,159);
+INSERT INTO `mob_spawn_points` VALUES (16912838,0,'Jailer_of_Hope','Jailer of Hope',49,-681.683,-0.500,-77.066,157);
 INSERT INTO `mob_spawn_points` VALUES (16912839,0,'Jailer_of_Justice','Jailer of Justice',50,-279.194,-0.500,-465.362,246);
 INSERT INTO `mob_spawn_points` VALUES (16912840,0,'Qnxzomit','Qn\'xzomit',51,-286.000,-0.500,-465.000,0);
 INSERT INTO `mob_spawn_points` VALUES (16912841,0,'Qnxzomit','Qn\'xzomit',51,-295.663,-0.060,-448.272,149);

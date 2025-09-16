@@ -24,6 +24,10 @@ content:addEssentialMobs({ 'Wyrm' })
 content.loot =
 {
     {
+        { item = xi.item.GIL, weight = 1000, amount = 32000 }, -- Gil
+    },
+
+    {
         { item = xi.item.JUG_OF_HONEY_WINE, weight = 1000 }, -- Jug Of Honey Wine
     },
 
@@ -100,28 +104,6 @@ content.loot =
         { item = xi.item.HI_POTION_P3,   weight = 225 }, -- Hi-potion +3
         { item = xi.item.HI_RERAISER,    weight = 210 }, -- Hi-reraiser
         { item = xi.item.VILE_ELIXIR_P1, weight = 217 }, -- Vile Elixir +1
-    },
-
-    {
-        { item = xi.item.CORAL_FRAGMENT,           weight =  87 }, -- Coral Fragment
-        { item = xi.item.CHUNK_OF_DARKSTEEL_ORE,   weight =  80 }, -- Chunk Of Darksteel Ore
-        { item = xi.item.DEMON_HORN,               weight =  58 }, -- Demon Horn
-        { item = xi.item.EBONY_LOG,                weight =  72 }, -- Ebony Log
-        { item = xi.item.CHUNK_OF_GOLD_ORE,        weight =  87 }, -- Chunk Of Gold Ore
-        { item = xi.item.SPOOL_OF_GOLD_THREAD,     weight =  14 }, -- Spool Of Gold Thread
-        { item = xi.item.HI_RERAISER,              weight =  22 }, -- Hi-reraiser
-        { item = xi.item.MAHOGANY_LOG,             weight =  80 }, -- Mahogany Log
-        { item = xi.item.CHUNK_OF_MYTHRIL_ORE,     weight =  36 }, -- Chunk Of Mythril Ore
-        { item = xi.item.PETRIFIED_LOG,            weight = 145 }, -- Petrified Log
-        { item = xi.item.PHOENIX_FEATHER,          weight =   7 }, -- Phoenix Feather
-        { item = xi.item.CHUNK_OF_PLATINUM_ORE,    weight =  51 }, -- Chunk Of Platinum Ore
-        { item = xi.item.SQUARE_OF_RAINBOW_CLOTH,  weight =  29 }, -- Square Of Rainbow Cloth
-        { item = xi.item.RAM_HORN,                 weight =  36 }, -- Ram Horn
-        { item = xi.item.SQUARE_OF_RAXA,           weight =  72 }, -- Square Of Raxa
-        { item = xi.item.RERAISER,                 weight =  29 }, -- Reraiser
-        { item = xi.item.VILE_ELIXIR,              weight =  29 }, -- Vile Elixir
-        { item = xi.item.VILE_ELIXIR_P1,           weight =   7 }, -- Vile Elixir +1
-        { item = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =  22 }, -- Handful Of Wyvern Scales
     },
 
     {

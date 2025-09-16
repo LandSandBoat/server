@@ -9,10 +9,27 @@ local ID = zones[xi.zone.ALTAIEU]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    if mob:getID() < ID.mob.JAILER_OF_LOVE then
+        mob:addImmunity(xi.immunity.BIND)
+        mob:addImmunity(xi.immunity.BLIND)
+        mob:addImmunity(xi.immunity.DARK_SLEEP)
+        mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+        mob:addImmunity(xi.immunity.PETRIFY)
+        mob:addImmunity(xi.immunity.STUN)
+    end
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.GIL_BONUS, -100)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+
+    -- only JoJ pops
+    if mob:getID() < ID.mob.JAILER_OF_LOVE then
+        xi.mix.jobSpecial.config(mob, { specials = { { id = xi.jsa.MIJIN_GAKURE, hpp = 20 }, }, })
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -23,20 +40,6 @@ entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
     mob:setMobMod(xi.mobMod.SPECIAL_COOL, 0)
-
-    -- only JoJ pops
-    if mob:getID() < ID.mob.JAILER_OF_LOVE then
-        mob:timer(30000, function(mobArg)
-            if mobArg:isAlive() then
-                mobArg:useMobAbility(xi.jsa.MIJIN_GAKURE)
-                mobArg:timer(2000, function(mobArg2)
-                    mobArg2:setHP(0)
-                end)
-            end
-        end)
-
-        mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60) -- TODO: is this real (aura stealable) or is this supposed to be movement speed?
-    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -221,7 +221,13 @@ xi.confrontation.start = function(player, npc, mobIds, params)
     mobIds = mobs
 
     -- Tag alliance members with the confrontation effect
-    local alliance = player:getAlliance()
+    local alliance = {}
+    if type(params.playerList) == 'table' then
+        alliance = params.playerList
+    else
+        alliance = player:getAlliance()
+    end
+
     local registeredPlayerIds = {}
 
     for _, member in ipairs(alliance) do

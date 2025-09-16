@@ -160,6 +160,19 @@ local helmInfo =
                 },
             },
 
+            [xi.zone.PASHHOW_MARSHLANDS] =
+            {
+                drops =
+                {
+                    { 1, xi.item.BLAZING_PEPPERS },
+                },
+
+                points =
+                {
+                    { -430.974, 25.187, 471.377 },
+                },
+            },
+
             [xi.zone.WEST_SARUTABARUTA] =
             {
                 drops =

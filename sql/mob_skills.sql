@@ -724,7 +724,7 @@ INSERT INTO `mob_skills` VALUES (696,438,'soul_voice',0,0.0,7.0,2000,0,1,2,0,0,0
 INSERT INTO `mob_skills` VALUES (707,451,'sentinel',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (708,452,'last_resort',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (709,439,'souleater',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (710,438,'charm',0,0.0,18.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (710,438,'charm',0,0.0,18.0,2000,0,4,4,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (711,455,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (712,456,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (713,457,'sharpshot',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

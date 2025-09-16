@@ -194,27 +194,6 @@ function isValidHealTarget(caster, target)
             target:getObjType() == xi.objType.FELLOW)
 end
 
--- TODO: This must be destroyed
-function applyResistanceEffect(actor, target, spell, params)
-    local spellFamily = spell:getSpellFamily() or 0
-    local skillType   = params.skillType or 0
-    local element     = spell:getElement() or 0
-    local statUsed    = params.attribute or 0
-    local effectId    = params.effect or 0
-    local bonusMacc   = params.bonus or 0
-
-    -- GUESS stat if it isnt fed with params.
-    if statUsed == 0 then
-        if skillType == xi.skill.SINGING then
-            statUsed = xi.mod.CHR
-        else
-            statUsed = xi.mod.INT
-        end
-    end
-
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, spellFamily, skillType, 0, element, statUsed, effectId, bonusMacc)
-end
-
 -- Applies resistance for things that may not be spells - ie. Quick Draw
 function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
     return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, 0, element, 0, 0, bonusMacc)

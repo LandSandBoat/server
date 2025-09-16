@@ -20,15 +20,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.BEASTMEN
-    params.effect = xi.effect.BLINDNESS
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    local duration = 30
+    local duration     = 30
     local returnEffect = xi.effect.BLINDNESS
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.BLINDNESS, 0)
     if resist >= 0.5 then
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much

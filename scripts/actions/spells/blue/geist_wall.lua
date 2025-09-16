@@ -20,15 +20,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.LIZARD
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.effect = xi.effect.NONE
     local resistThreshold = 0.25
-    local effect = xi.effect.NONE
+    local effect          = xi.effect.NONE
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.NONE, 0)
     if resist >= resistThreshold then
         effect = target:dispelStatusEffect()
         spell:setMsg(xi.msg.basic.MAGIC_ERASE)

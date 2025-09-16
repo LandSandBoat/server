@@ -41,6 +41,14 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
 
     mob:addListener('ITEM_DROPS', 'ITEM_DROPS_IXAERN_MNK', function(mobArg, loot)
         local rate = mob:getLocalVar('[SEA]IxAern_DropRate')
@@ -56,21 +64,13 @@ entity.onMobSpawn = function(mob)
     -- reset the subanim otherwise it will respawn with bracers on
     -- note that Aerns are never actually supposed to be in subanim 0
     mob:setAnimationSub(1)
-    mob:addImmunity(xi.immunity.GRAVITY)
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.STUN)
-    mob:addImmunity(xi.immunity.PARALYZE)
-    mob:addImmunity(xi.immunity.BLIND)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobFight = function(mob, target)
     if mob:getLocalVar('BracerMode') == 0 then
-        local IxaernID = mob:getID()
-        local qnAern1 = GetMobByID(IxaernID + 1)
-        local qnAern2 = GetMobByID(IxaernID + 2)
+        local ixaernID = mob:getID()
+        local qnAern1 = GetMobByID(ixaernID + 1)
+        local qnAern2 = GetMobByID(ixaernID + 2)
 
         -- if any of the three mobs gets below 60% then all three go to bracer mode
         if

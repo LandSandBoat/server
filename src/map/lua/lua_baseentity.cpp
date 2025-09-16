@@ -15244,6 +15244,10 @@ uint16 CLuaBaseEntity::getWeaponDamageType(uint8 slotID)
         {
             return static_cast<uint16>(PWeapon->getDmgType());
         }
+        else
+        {
+            return 0;
+        }
     }
 
     ShowError("lua::getWeaponDamageType :: Invalid slot specified!");
@@ -15310,6 +15314,10 @@ uint8 CLuaBaseEntity::getWeaponSubSkillType(uint8 slotID)
         if (PWeapon)
         {
             return PWeapon->getSubSkillType();
+        }
+        else
+        {
+            return 0;
         }
     }
 

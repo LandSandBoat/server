@@ -22,21 +22,21 @@ end
 entity.onMobMagicPrepare = function(mob, target, spellId)
     local spellList =
     {
-        [1] = 382,
-        [2] = 376,
-        [3] = 372,
-        [4] = 392,
-        [5] = 397,
-        [6] = 400,
-        [7] = 422,
-        [8] = 462,
-        [9] = 466 -- Virelai (charm)
+        xi.magic.spell.ARMYS_PAEON_V,
+        xi.magic.spell.HORDE_LULLABY,
+        xi.magic.spell.FOE_REQUIEM_V,
+        xi.magic.spell.KNIGHTS_MINNE_IV,
+        xi.magic.spell.VALOR_MINUET_IV,
+        xi.magic.spell.BLADE_MADRIGAL,
+        xi.magic.spell.CARNAGE_ELEGY,
+        xi.magic.spell.MAGIC_FINALE,
     }
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
-        return spellList[math.random(1, 9)] -- Virelai possible.
-    else
-        return spellList[math.random(1, 8)] -- No Virelai!
+        -- Virelai possible.
+        table.insert(spellList, xi.magic.spell.MAIDENS_VIRELAI)
     end
+
+    return utils.randomEntry(spellList)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

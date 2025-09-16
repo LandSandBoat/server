@@ -26,6 +26,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         FIND_NOTHING                  = 7264,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7330,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7339,  -- It appears your chocobo found this item with ease.
+        HARVESTING_IS_POSSIBLE_HERE   = 7922,  -- Harvesting is possible here if you have <item>.
         CONQUEST                      = 7938,  -- You've earned conquest points!
         GARRISON_BASE                 = 8306,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GATE_IS_LOCKED                = 8388,  -- The gate is locked.
