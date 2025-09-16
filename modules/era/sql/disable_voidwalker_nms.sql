@@ -1,337 +1,181 @@
 -- Prevent Voidwalker NMs from being loaded
 -- https://ffxiclopedia.fandom.com/wiki/Category:Voidwalker_Notorious_Monsters
-UPDATE `mob_spawn_points`
-SET
-    pos_x = 0,
-    pos_y = 0,
-    pos_z = 0
-WHERE
-    mobid IN
-    (
-        -- Batallia Downs
-        17207711,   -- Yilbegan
-        17207712,   -- Verthandi
-        17207713,   -- Urd
-        17207714,   -- Skuld
-        17207715,   -- Aither
-        17207716,   -- Deorc
-        17207717,   -- Eorthe
-        17207718,   -- Puretos
-        17207719,   -- Pruina
-        17207720,   -- Beorht
-        17207721,   -- Thunor
-        17207722,   -- Lacus
-        -- Beaucedine Glacier
-        17232148,   -- Yilbegan
-        17232149,   -- Lord_Ruthven
-        17232150,   -- Feuerunke
-        17232151,   -- Erebus
-        17232152,   -- Gjenganger
-        17232153,   -- Gjenganger
-        17232154,   -- Gjenganger
-        17232155,   -- Gjenganger
-        17232156,   -- Gorehound
-        17232157,   -- Gorehound
-        17232158,   -- Gorehound
-        17232159,   -- Gorehound
-        -- East Ronfaure
-        17191323,   -- Yilbegan
-        17191324,   -- Krabkatoa
-        17191325,   -- Yacumama
-        17191326,   -- Capricornus
-        17191327,   -- Quagmire_Pugil
-        17191328,   -- Quagmire_Pugil
-        17191329,   -- Quagmire_Pugil
-        17191330,   -- Quagmire_Pugil
-        17191331,   -- Sunderclaw
-        17191332,   -- Sunderclaw
-        17191333,   -- Sunderclaw
-        17191334,   -- Sunderclaw
-        -- Jugner Forest
-        17203684,   -- Yilbegan
-        17203685,   -- Krabkatoa
-        17203686,   -- Yacumama
-        17203687,   -- Capricornus
-        17203688,   -- Quagmire_Pugil
-        17203689,   -- Quagmire_Pugil
-        17203690,   -- Quagmire_Pugil
-        17203691,   -- Quagmire_Pugil
-        17203692,   -- Sunderclaw
-        17203693,   -- Sunderclaw
-        17203694,   -- Sunderclaw
-        17203695,   -- Sunderclaw
-        -- Konschtat Highlands
-        17220008,   -- Yilbegan
-        17220009,   -- Dawon
-        17220010,   -- Tammuz
-        17220011,   -- Chesma
-        17220012,   -- Void_Hare
-        17220013,   -- Void_Hare
-        17220014,   -- Void_Hare
-        17220015,   -- Void_Hare
-        17220016,   -- Prickly_Sheep
-        17220017,   -- Prickly_Sheep
-        17220018,   -- Prickly_Sheep
-        17220019,   -- Prickly_Sheep
-        -- La Theine Plateau
-        17195482,   -- Yilbegan
-        17195483,   -- Dawon
-        17195484,   -- Tammuz
-        17195485,   -- Chesma
-        17195486,   -- Void_Hare
-        17195487,   -- Void_Hare
-        17195488,   -- Void_Hare
-        17195489,   -- Void_Hare
-        17195490,   -- Prickly_Sheep
-        17195491,   -- Prickly_Sheep
-        17195492,   -- Prickly_Sheep
-        17195493,   -- Prickly_Sheep
-        -- Meriphataud Mountains
-        17265118,   -- Yilbegan
-        17265119,   -- Orcus
-        17265120,   -- Farruca_Fly
-        17265121,   -- Jyeshtha
-        17265122,   -- Rummager_Beetle
-        17265123,   -- Rummager_Beetle
-        17265124,   -- Rummager_Beetle
-        17265125,   -- Rummager_Beetle
-        17265126,   -- Raker_Bee
-        17265127,   -- Raker_Bee
-        17265128,   -- Raker_Bee
-        17265129,   -- Raker_Bee
-        -- North Gustaberg
-        17211864,   -- Yilbegan
-        17211865,   -- Blobdingnag
-        17211872,   -- Shoggoth
-        17211873,   -- Lamprey_Lord
-        17211874,   -- Ground_Guzzler
-        17211875,   -- Ground_Guzzler
-        17211876,   -- Ground_Guzzler
-        17211877,   -- Ground_Guzzler
-        17211878,   -- Globster
-        17211879,   -- Globster
-        17211880,   -- Globster
-        17211881,   -- Globster
-        -- Pashhow Marshlands
-        17224167,   -- Yilbegan
-        17224168,   -- Blobdingnag
-        17224175,   -- Shoggoth
-        17224176,   -- Lamprey_Lord
-        17224177,   -- Ground_Guzzler
-        17224178,   -- Ground_Guzzler
-        17224179,   -- Ground_Guzzler
-        17224180,   -- Ground_Guzzler
-        17224181,   -- Globster
-        17224182,   -- Globster
-        17224183,   -- Globster
-        17224184,   -- Globster
-        -- Rolanberry Fields
-        17228250,   -- Yilbegan
-        17228251,   -- Verthandi
-        17228252,   -- Urd
-        17228253,   -- Skuld
-        17228254,   -- Aither
-        17228255,   -- Deorc
-        17228256,   -- Eorthe
-        17228257,   -- Puretos
-        17228258,   -- Pruina
-        17228259,   -- Beorht
-        17228260,   -- Thunor
-        17228261,   -- Lacus
-        -- Sauromugue Champaign
-        17269115,   -- Yilbegan
-        17269116,   -- Verthandi
-        17269117,   -- Urd
-        17269118,   -- Skuld
-        17269119,   -- Aither
-        17269120,   -- Deorc
-        17269121,   -- Eorthe
-        17269122,   -- Puretos
-        17269123,   -- Pruina
-        17269124,   -- Beorht
-        17269125,   -- Thunor
-        17269126,   -- Lacus
-        -- Tahrongi Canyon
-        17256907,   -- Yilbegan
-        17256908,   -- Dawon
-        17256909,   -- Tammuz
-        17256910,   -- Chesma
-        17256911,   -- Void_Hare
-        17256912,   -- Void_Hare
-        17256913,   -- Void_Hare
-        17256914,   -- Void_Hare
-        17256915,   -- Prickly_Sheep
-        17256916,   -- Prickly_Sheep
-        17256917,   -- Prickly_Sheep
-        17256918,   -- Prickly_Sheep
-        -- West Sarutabaruta
-        17248613,   -- Yilbegan
-        17248614,   -- Orcus
-        17248615,   -- Farruca_Fly
-        17248616,   -- Jyeshtha
-        17248617,   -- Rummager_Beetle
-        17248618,   -- Rummager_Beetle
-        17248619,   -- Rummager_Beetle
-        17248620,   -- Rummager_Beetle
-        17248621,   -- Raker_Bee
-        17248622,   -- Raker_Bee
-        17248623,   -- Raker_Bee
-        17248624,   -- Raker_Bee
-        -- Xarcabard
-        17236230,   -- Yilbegan
-        17236231,   -- Lord_Ruthven
-        17236232,   -- Feuerunke
-        17236233,   -- Erebus
-        17236234,   -- Gjenganger
-        17236235,   -- Gjenganger
-        17236236,   -- Gjenganger
-        17236237,   -- Gjenganger
-        17236238,   -- Gorehound
-        17236239,   -- Gorehound
-        17236240,   -- Gorehound
-        17236241,   -- Gorehound
-        -- Batallia Downs [S]
-        17121711,   -- Yilbegan
-        17121712,   -- Verthandi
-        17121713,   -- Urd
-        17121714,   -- Skuld
-        17121715,   -- Aither
-        17121716,   -- Deorc
-        17121717,   -- Eorthe
-        17121718,   -- Puretos
-        17121719,   -- Pruina
-        17121720,   -- Beorht
-        17121721,   -- Thunor
-        17121722,   -- Lacus
-        -- Beaucedine Glacier [S]
-        17334550,   -- Yilbegan
-        17334551,   -- Lord_Ruthven
-        17334552,   -- Feuerunke
-        17334553,   -- Erebus
-        17334554,   -- Gjenganger
-        17334555,   -- Gjenganger
-        17334556,   -- Gjenganger
-        17334557,   -- Gjenganger
-        17334558,   -- Gorehound
-        17334559,   -- Gorehound
-        17334560,   -- Gorehound
-        17334561,   -- Gorehound
-        -- East Ronfaure [S]
-        17109382,   -- Yilbegan
-        17109383,   -- Krabkatoa
-        17109384,   -- Yacumama
-        17109385,   -- Capricornus
-        17109386,   -- Quagmire_Pugil
-        17109387,   -- Quagmire_Pugil
-        17109388,   -- Quagmire_Pugil
-        17109389,   -- Quagmire_Pugil
-        17109390,   -- Sunderclaw
-        17109391,   -- Sunderclaw
-        17109392,   -- Sunderclaw
-        17109393,   -- Sunderclaw
-        -- Jugner Forest [S]
-        17113489,   -- Yilbegan
-        17113490,   -- Krabkatoa
-        17113491,   -- Yacumama
-        17113492,   -- Capricornus
-        17113493,   -- Quagmire_Pugil
-        17113494,   -- Quagmire_Pugil
-        17113495,   -- Quagmire_Pugil
-        17113496,   -- Quagmire_Pugil
-        17113497,   -- Sunderclaw
-        17113498,   -- Sunderclaw
-        17113499,   -- Sunderclaw
-        17113500,   -- Sunderclaw
-        -- Meriphataud Mountains [S]
-        17174906,   -- Yilbegan
-        17174907,   -- Orcus
-        17174908,   -- Farruca_Fly
-        17174909,   -- Jyeshtha
-        17174910,   -- Rummager_Beetle
-        17174911,   -- Rummager_Beetle
-        17174912,   -- Rummager_Beetle
-        17174913,   -- Rummager_Beetle
-        17174914,   -- Raker_Bee
-        17174915,   -- Raker_Bee
-        17174916,   -- Raker_Bee
-        17174917,   -- Raker_Bee
-        -- North Gustaberg [S]
-        17138069,   -- Yilbegan
-        17138070,   -- Blobdingnag
-        17138077,   -- Shoggoth
-        17138078,   -- Lamprey_Lord
-        17138079,   -- Ground_Guzzler
-        17138080,   -- Ground_Guzzler
-        17138081,   -- Ground_Guzzler
-        17138082,   -- Ground_Guzzler
-        17138083,   -- Globster
-        17138084,   -- Globster
-        17138085,   -- Globster
-        17138086,   -- Globster
-        -- Pashhow Marshlands [S]
-        17146169,   -- Yilbegan
-        17146170,   -- Blobdingnag
-        17146177,   -- Shoggoth
-        17146178,   -- Lamprey_Lord
-        17146179,   -- Ground_Guzzler
-        17146180,   -- Ground_Guzzler
-        17146181,   -- Ground_Guzzler
-        17146182,   -- Ground_Guzzler
-        17146183,   -- Globster
-        17146184,   -- Globster
-        17146185,   -- Globster
-        17146186,   -- Globster
-        -- Rolanberry Fields [S]
-        17150335,   -- Yilbegan
-        17150336,   -- Verthandi
-        17150337,   -- Urd
-        17150338,   -- Skuld
-        17150339,   -- Aither
-        17150340,   -- Deorc
-        17150341,   -- Eorthe
-        17150342,   -- Puretos
-        17150343,   -- Pruina
-        17150344,   -- Beorht
-        17150345,   -- Thunor
-        17150346,   -- Lacus
-        -- Sauromugue Champaign [S]
-        17178921,   -- Yilbegan
-        17178922,   -- Verthandi
-        17178923,   -- Urd
-        17178924,   -- Skuld
-        17178925,   -- Aither
-        17178926,   -- Deorc
-        17178927,   -- Eorthe
-        17178928,   -- Puretos
-        17178929,   -- Pruina
-        17178930,   -- Beorht
-        17178931,   -- Thunor
-        17178932,   -- Lacus
-        -- West Sarutabaruta [S]
-        17166767,   -- Yilbegan
-        17166768,   -- Orcus
-        17166769,   -- Farruca_Fly
-        17166770,   -- Jyeshtha
-        17166771,   -- Rummager_Beetle
-        17166772,   -- Rummager_Beetle
-        17166773,   -- Rummager_Beetle
-        17166774,   -- Rummager_Beetle
-        17166775,   -- Raker_Bee
-        17166776,   -- Raker_Bee
-        17166777,   -- Raker_Bee
-        17166778,   -- Raker_Bee
-        -- Xarcabard [S]
-        17338596,   -- Yilbegan
-        17338597,   -- Lord_Ruthven
-        17338598,   -- Feuerunke
-        17338599,   -- Erebus
-        17338600,   -- Gjenganger
-        17338601,   -- Gjenganger
-        17338602,   -- Gjenganger
-        17338603,   -- Gjenganger
-        17338604,   -- Gorehound
-        17338605,   -- Gorehound
-        17338606,   -- Gorehound
-        17338607    -- Gorehound
-    )
-;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 58;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 59;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 60;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 61;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lord_Ruthven' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Feuerunke' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Erebus' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gjenganger' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gorehound' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 45;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Krabkatoa' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yacumama' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Capricornus' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Quagmire_Pugil' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sunderclaw' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 73;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Krabkatoa' AND groupid = 74;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yacumama' AND groupid = 75;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Capricornus' AND groupid = 76;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Quagmire_Pugil' AND groupid = 77;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sunderclaw' AND groupid = 78;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Dawon' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tammuz' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chesma' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Void_Hare' AND groupid = 42;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Prickly_Sheep' AND groupid = 43;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Dawon' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tammuz' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chesma' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Void_Hare' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Prickly_Sheep' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 64;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Orcus' AND groupid = 65;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Farruca_Fly' AND groupid = 66;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Jyeshtha' AND groupid = 67;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rummager_Beetle' AND groupid = 68;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Raker_Bee' AND groupid = 69;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 42;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blobdingnag' AND groupid = 43;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Shoggoth' AND groupid = 45;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lamprey_Lord' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ground_Guzzler' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Globster' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 65;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blobdingnag' AND groupid = 66;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Shoggoth' AND groupid = 68;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lamprey_Lord' AND groupid = 69;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ground_Guzzler' AND groupid = 70;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Globster' AND groupid = 71;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Dawon' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tammuz' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chesma' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Void_Hare' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Prickly_Sheep' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Orcus' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Farruca_Fly' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Jyeshtha' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rummager_Beetle' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Raker_Bee' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lord_Ruthven' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Feuerunke' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Erebus' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gjenganger' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gorehound' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lord_Ruthven' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Feuerunke' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Erebus' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gjenganger' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gorehound' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Krabkatoa' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yacumama' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Capricornus' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Quagmire_Pugil' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sunderclaw' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Krabkatoa' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yacumama' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Capricornus' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Quagmire_Pugil' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sunderclaw' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 43;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 44;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 45;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blobdingnag' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Shoggoth' AND groupid = 58;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lamprey_Lord' AND groupid = 59;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ground_Guzzler' AND groupid = 60;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Globster' AND groupid = 61;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 58;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 59;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 60;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 61;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 62;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 63;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 64;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 65;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 66;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 67;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 68;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 69;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Orcus' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Farruca_Fly' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Jyeshtha' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rummager_Beetle' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Raker_Bee' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lord_Ruthven' AND groupid = 33;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Feuerunke' AND groupid = 34;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Erebus' AND groupid = 35;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gjenganger' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gorehound' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blobdingnag' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Shoggoth' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lamprey_Lord' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ground_Guzzler' AND groupid = 57;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Globster' AND groupid = 58;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Verthandi' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Urd' AND groupid = 42;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skuld' AND groupid = 43;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aither' AND groupid = 44;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Deorc' AND groupid = 45;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eorthe' AND groupid = 46;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Puretos' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pruina' AND groupid = 48;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Beorht' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunor' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lacus' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yilbegan' AND groupid = 50;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Orcus' AND groupid = 51;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Farruca_Fly' AND groupid = 52;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Jyeshtha' AND groupid = 53;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rummager_Beetle' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Raker_Bee' AND groupid = 55;

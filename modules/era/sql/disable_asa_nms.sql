@@ -1,163 +1,141 @@
 -- Prevent ASA era NMs from being loaded
-UPDATE `mob_spawn_points`
-SET
-    pos_x = 0,
-    pos_y = 0,
-    pos_z = 0
-WHERE
-    mobid IN
-    (
-        17477675,   -- Abatwa
-        17285341,   -- Acolnahuacatl
-        17567901,   -- Agar_Agar
-        17571903,   -- Ah_Puch
-        17186927,   -- Amanita
-        17555709,   -- Ankou
-        17584416,   -- Aqrabuamelu
-        17293485,   -- Atkorkamuy
-        17424488,   -- Autarch
-        17260613,   -- Backoo
-        17236027,   -- Barbaric_Weapon
-        17555721,   -- Barbastelle
-        17268788,   -- Bashe
-        17273190,   -- Bastet
-        17281388,   -- Bayawak
-        17334356,   -- Becut
-        17211666,   -- Bedrock_Barry
-        17363258,   -- BeHya_Hundredwall
-        17117349,   -- Big_Bang
-        17273309,   -- Blest_Bones
-        17273310,   -- Blest_Bones
-        17273311,   -- Blest_Bones
-        17269016,   -- Blighting_Brand
-        17568132,   -- Bombast
-        17469747,   -- Brazen_Bones
-        16822322,   -- Bugbear_Muscleman
-        17232117,   -- Calcabrina
-        17289547,   -- Calchas
-        17334523,   -- Came-cruse
-        17469578,   -- Canal_Moocher
-        17027228,   -- Chary_Apkallu
-        16986188,   -- Chelicerata
-        17264722,   -- Chonchon
-        17448990,   -- Citadel_Pipistrelles
-        17289323,   -- Dahu
-        17170569,   -- Demoiselle_Desolee
-        17571870,   -- Desmodont
-        17567801,   -- Donggu
-        17244268,   -- Donnergugi
-        17113381,   -- Drumskull_Zogdregg
-        17252725,   -- Duke_Decapod
-        17236146,   -- Duke_Focalor
-        17584312,   -- Dynast_Beetle
-        17228150,   -- Eldritch_Edge
-        17272915,   -- Elusive_Edwin
-        17207608,   -- Eyegouger
-        17277135,   -- Fired_Urn
-        17277136,   -- Fired_Urn
-        17277137,   -- Fired_Urn
-        16875638,   -- Flockbock
-        17596599,   -- Frogamander
-        16797738,   -- Frost_Flambeau
-        17219619,   -- Ghillie_Dhu
-        17588469,   -- Gloombound_Lurker
-        17457204,   -- Gloom_Eye
-        16879665,   -- Goaftrap
-        17555664,   -- Gwyllgi
-        17256493,   -- Habrok
-        16990252,   -- Harvestman
-        17596520,   -- Hazmat
-        17256836,   -- Herbage_Hunter
-        17219787,   -- Highlander_Lizard
-        17199351,   -- Hippomaritimus
-        17285394,   -- Hoar-knuckled_Rimberry
-        17273312,   -- Holey_Horror
-        17273313,   -- Holey_Horror
-        17273314,   -- Holey_Horror
-        17596628,   -- Hovering_Hotpot
-        17232094,   -- Humbaba
-        17272958,   -- Huwasi
-        17457236,   -- Hyakume
-        17612840,   -- Jenglot
-        17354922,   -- Kegpaunch_Doshgnosh
-        17240180,   -- Killer_Jonny
-        17469632,   -- Konjac
-        17281061,   -- Koropokkur
-        17494135,   -- Laelaps
-        17571873,   -- Legalox_Heftyhind
-        17588589,   -- Lesath
-        17395896,   -- Lii_Jixa_the_Somnolist
-        17436714,   -- Likho
-        17277132,   -- Lode_Golem
-        17277133,   -- Lode_Golem
-        17277134,   -- Lode_Golem
-        16797968,   -- Magnotaur
-        17436876,   -- Marquis_Naberius
-        17436881,   -- Marquis_Sabnock
-        17277011,   -- Martinet
-        17109147,   -- Melusine
-        17199161,   -- Metal_Shears
-        17612859,   -- Mind_Hoarder
-        17457245,   -- Mucoid_Mass
-        17174561,   -- Muq_Shabeel
-        17264768,   -- Naa_Zeku_the_Unwaiting
-        17244471,   -- Nandi
-        17277103,   -- Nargun
-        17223797,   -- NiZho_Bladebender
-        17563801,   -- Nocuous_Weapon
-        17248588,   -- Numbing_Norman
-        16879847,   -- Okyupete
-        17072170,   -- Oupire
-        17264972,   -- Patripatan
-        17137976,   -- Peaseblossom
-        17289638,   -- Picolaton
-        17285248,   -- Powderer_Penny
-        17207640,   -- Prankster_Maverix
-        17281296,   -- Pyuu_the_Spatemaker
-        17293597,   -- Qoofim
-        17371399,   -- Quu_Xijo_the_Illusory
-        17363080,   -- QuVho_Deathhurler
-        17191044,   -- Rambukk
-        17228086,   -- Ravenous_Crawler
-        17277079,   -- Rogue_Receptacle
-        17395731,   -- Saa_Doyi_the_Fervid
-        17244350,   -- Sabotender_Corrido
-        17203547,   -- Sappy_Sycamore
-        16806117,   -- Sargas
-        17334336,   -- Scylla
-        16805962,   -- Sekhmet
-        16875690,   -- Sengann
-        16793698,   -- Shankha
-        17273306,   -- Skeleton_Scuffler
-        17273307,   -- Skeleton_Scuffler
-        17273308,   -- Skeleton_Scuffler
-        17207410,   -- Skirling_Liger
-        16797770,   -- Skvader
-        17563785,   -- Slendlix_Spindlethumb
-        17293389,   -- Slippery_Sucker
-        17612811,   -- Sluagh
-        17195221,   -- Slumbering_Samwell
-        16793776,   -- Splacknuck
-        17277129,   -- Steely_Weapon
-        17277130,   -- Steely_Weapon
-        17277131,   -- Steely_Weapon
-        17203475,   -- Supplespine_Mujwuj
-        16826474,   -- Sword_Sorcerer_Solisoq
-        17240232,   -- Tegmine
-        16785593,   -- Tempest_Tigon
-        17559584,   -- Teporingo
-        17486171,   -- Thoon
-        17268816,   -- Thunderclaw_Thuban
-        17166669,   -- Tiffenotte
-        17236045,   -- Timeworn_Warrior
-        17215778,   -- Tococo
-        17223982,   -- Toxic_Tamlyn
-        17588278,   -- Trembler_Tabitha
-        17530932,   -- Tyrant
-        17260732,   -- Wake_Warder_Wanda
-        17117295,   -- Warabouc
-        16875600,   -- Yal-un_Eke
-        17338585,   -- Zirnitra
-        17240315    -- Zmey_Gorynych
-    )
-;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tempest_Tigon' AND groupid = 31;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Shankha' AND groupid = 17;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Splacknuck' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Frost_Flambeau' AND groupid = 49;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skvader' AND groupid = 11;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Magnotaur' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sekhmet' AND groupid = 12;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sargas' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bugbear_Muscleman' AND groupid = 18;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sword_Sorcerer_Solisoq' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Yal-un_Eke' AND groupid = 82;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Flockbock' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sengann' AND groupid = 79;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Goaftrap' AND groupid = 9;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Okyupete' AND groupid = 47;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chelicerata' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Harvestman' AND groupid = 16;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chary_Apkallu' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Oupire' AND groupid = 7;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Melusine' AND groupid = 24;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Drumskull_Zogdregg' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Warabouc' AND groupid = 26;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Big_Bang' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Peaseblossom' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tiffenotte' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Demoiselle_Desolee' AND groupid = 11;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Muq_Shabeel' AND groupid = 10;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Amanita' AND groupid = 16;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rambukk' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Slumbering_Samwell' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Metal_Shears' AND groupid = 17;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Hippomaritimus' AND groupid = 29;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Supplespine_Mujwuj' AND groupid = 41;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sappy_Sycamore' AND groupid = 43;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skirling_Liger' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eyegouger' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Prankster_Maverix' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bedrock_Barry' AND groupid = 26;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tococo' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ghillie_Dhu' AND groupid = 8;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Highlander_Lizard' AND groupid = 26;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'NiZho_Bladebender' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Toxic_Tamlyn' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ravenous_Crawler' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Eldritch_Edge' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Humbaba' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Calcabrina' AND groupid = 33;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Barbaric_Weapon' AND groupid = 11;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Timeworn_Warrior' AND groupid = 12;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Duke_Focalor' AND groupid = 21;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Killer_Jonny' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tegmine' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Zmey_Gorynych' AND groupid = 24;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Donnergugi' AND groupid = 16;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sabotender_Corrido' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Nandi' AND groupid = 34;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Numbing_Norman' AND groupid = 27;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Duke_Decapod' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Habrok' AND groupid = 8;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Herbage_Hunter' AND groupid = 30;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Backoo' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Wake_Warder_Wanda' AND groupid = 22;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Chonchon' AND groupid = 19;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Naa_Zeku_the_Unwaiting' AND groupid = 29;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Patripatan' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bashe' AND groupid = 68;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thunderclaw_Thuban' AND groupid = 33;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blighting_Brand' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Elusive_Edwin' AND groupid = 15;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Huwasi' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bastet' AND groupid = 34;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Skeleton_Scuffler' AND groupid = 54;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Blest_Bones' AND groupid = 55;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Holey_Horror' AND groupid = 56;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Martinet' AND groupid = 12;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Rogue_Receptacle' AND groupid = 15;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Nargun' AND groupid = 16;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Steely_Weapon' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lode_Golem' AND groupid = 24;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Fired_Urn' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Koropokkur' AND groupid = 9;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Pyuu_the_Spatemaker' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bayawak' AND groupid = 30;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Powderer_Penny' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Acolnahuacatl' AND groupid = 27;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Hoar-knuckled_Rimberry' AND groupid = 32;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Dahu' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Calchas' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Picolaton' AND groupid = 38;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Slippery_Sucker' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Atkorkamuy' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Qoofim' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Scylla' AND groupid = 28;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Becut' AND groupid = 30;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Came-cruse' AND groupid = 29;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Zirnitra' AND groupid = 29;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Kegpaunch_Doshgnosh' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'QuVho_Deathhurler' AND groupid = 10;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'BeHya_Hundredwall' AND groupid = 22;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Quu_Xijo_the_Illusory' AND groupid = 20;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Saa_Doyi_the_Fervid' AND groupid = 5;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lii_Jixa_the_Somnolist' AND groupid = 21;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Autarch' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Likho' AND groupid = 7;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Marquis_Naberius' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Marquis_Sabnock' AND groupid = 37;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Citadel_Pipistrelles' AND groupid = 14;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gloom_Eye' AND groupid = 13;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Hyakume' AND groupid = 31;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Mucoid_Mass' AND groupid = 19;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Canal_Moocher' AND groupid = 21;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Konjac' AND groupid = 27;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Brazen_Bones' AND groupid = 40;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Abatwa' AND groupid = 12;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Thoon' AND groupid = 27;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Laelaps' AND groupid = 22;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Tyrant' AND groupid = 14;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gwyllgi' AND groupid = 17;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ankou' AND groupid = 21;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Barbastelle' AND groupid = 22;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Teporingo' AND groupid = 10;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Slendlix_Spindlethumb' AND groupid = 22;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Nocuous_Weapon' AND groupid = 25;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Donggu' AND groupid = 14;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Agar_Agar' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Bombast' AND groupid = 44;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Desmodont' AND groupid = 5;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Legalox_Heftyhind' AND groupid = 7;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Ah_Puch' AND groupid = 13;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Dynast_Beetle' AND groupid = 23;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Aqrabuamelu' AND groupid = 36;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Trembler_Tabitha' AND groupid = 9;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Gloombound_Lurker' AND groupid = 26;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Lesath' AND groupid = 31;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Hazmat' AND groupid = 17;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Frogamander' AND groupid = 39;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Hovering_Hotpot' AND groupid = 34;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Sluagh' AND groupid = 5;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Jenglot' AND groupid = 7;
+UPDATE `mob_spawn_points` SET pos_x = 0, pos_y = 0, pos_z = 0 WHERE mobname = 'Mind_Hoarder' AND groupid = 11;
