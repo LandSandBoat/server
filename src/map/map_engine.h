@@ -35,7 +35,6 @@
 //
 
 class IPP;
-class SqlConnection;
 class MapNetworking;
 class MapStatistics;
 class CZone;
@@ -53,8 +52,7 @@ struct MapConfig final
 // Exposed globals
 //
 
-extern std::unique_ptr<SqlConnection> _sql;
-extern std::map<uint16, CZone*>       g_PZoneList; // Global array of pointers for zones
+extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 class MapEngine final : public Engine
 {

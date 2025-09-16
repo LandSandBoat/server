@@ -42,6 +42,7 @@ class CLuaZone;
 
 class CLuaBaseEntity
 {
+protected:
     CBaseEntity* m_PBaseEntity;
 
 public:
@@ -779,8 +780,6 @@ public:
     void   removeGambit(std::string const& id);
     void   removeAllGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
-
-    bool hasValidJugPetItem();
 
     bool   hasPet();
     bool   hasJugPet();

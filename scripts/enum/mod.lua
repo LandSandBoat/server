@@ -271,6 +271,7 @@ xi.mod =
     CRITICAL_HIT_EVASION            = 166,
     CRIT_DEF_BONUS                  = 908, -- Reduces crit hit damage
     MAGIC_CRITHITRATE               = 562,
+    MAGIC_CRITHITRATE_II            = 1168, -- Raises chance to add a critical 1.25 magic damage multiplier.
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,

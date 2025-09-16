@@ -21,6 +21,8 @@
 
 #include "test_application.h"
 
+#include <memory>
+
 int main(int argc, char** argv)
 {
     const auto testApp = std::make_unique<TestApplication>(argc, argv);

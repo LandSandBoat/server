@@ -13,68 +13,38 @@ xi.job_utils.beastmaster = xi.job_utils.beastmaster or {}
 -----------------------------------
 xi = xi or {}
 
-local jugLevelTable =
-{
-    [xi.petId.SHEEP_FAMILIAR  ] = 23,
-    [xi.petId.HARE_FAMILIAR   ] = 23,
-    [xi.petId.CRAB_FAMILIAR   ] = 23,
-    [xi.petId.COURIER_CARRIE  ] = 23,
-    [xi.petId.HOMUNCULUS      ] = 23,
-    [xi.petId.FLYTRAP_FAMILIAR] = 28,
-    [xi.petId.TIGER_FAMILIAR  ] = 28,
-    [xi.petId.FLOWERPOT_BILL  ] = 28,
-    [xi.petId.EFT_FAMILIAR    ] = 33,
-    [xi.petId.LIZARD_FAMILIAR ] = 33,
-    [xi.petId.MAYFLY_FAMILIAR ] = 33,
-    [xi.petId.FUNGUAR_FAMILIAR] = 33,
-    [xi.petId.BEETLE_FAMILIAR ] = 38,
-    [xi.petId.ANTLION_FAMILIAR] = 38,
-    [xi.petId.MITE_FAMILIAR   ] = 43,
-    [xi.petId.LULLABY_MELODIA ] = 43,
-    [xi.petId.KEENEARED_STEFFI] = 43,
-    [xi.petId.FLOWERPOT_BEN   ] = 51,
-    [xi.petId.SABER_SIRAVARDE ] = 51,
-    [xi.petId.COLDBLOOD_COMO  ] = 53,
-    [xi.petId.SHELLBUSTER_OROB] = 53,
-    [xi.petId.VORACIOUS_AUDREY] = 53,
-    [xi.petId.AMBUSHER_ALLIE  ] = 58,
-    [xi.petId.LIFEDRINKER_LARS] = 63,
-    [xi.petId.PANZER_GALAHAD  ] = 63,
-    [xi.petId.CHOPSUEY_CHUCKY ] = 63,
-    [xi.petId.AMIGO_SABOTENDER] = 75,
-    [xi.petId.CRAFTY_CLYVONNE]  = 76,
-    [xi.petId.BLOODCLAW_SHASRA] = 90,
-    [xi.petId.LUCKY_LULUSH]     = 76,
-    [xi.petId.FATSO_FARGANN]    = 81,
-    [xi.petId.DISCREET_LOUISE]  = 79,
-    [xi.petId.SWIFT_SIEGHARD]   = 86,
-    [xi.petId.DIPPER_YULY]      = 76,
-    [xi.petId.FLOWERPOT_MERLE]  = 76,
-    [xi.petId.NURSERY_NAZUNA]   = 76,
-    [xi.petId.MAILBUSTER_CETAS] = 85,
-    [xi.petId.AUDACIOUS_ANNA]   = 85,
-    [xi.petId.PRESTO_JULIO]     = 83,
-    [xi.petId.BUGEYED_BRONCHA]  = 90,
-    [xi.petId.GOOEY_GERARD]     = 95,
-    [xi.petId.GOREFANG_HOBS]    = 94,
-    [xi.petId.FAITHFUL_FALCOR]  = 86,
-    [xi.petId.CRUDE_RAPHIE]     = 96,
-    [xi.petId.DAPPER_MAC]       = 76,
-    [xi.petId.SLIPPERY_SILAS]   = 23,
-    [xi.petId.TURBID_TOLOI]     = 75,
+local getValidJugPetID = function(player)
+    -- jug pet reagents are
+    -- - equipped in the ammo slot
+    -- - have skillid 0
+    -- - the subskill maps to the jug petid
+    local petId        = player:getWeaponSubSkillType(xi.slot.AMMO)
+    local ammoEquip    = player:getEquippedItem(xi.slot.AMMO)
+    local ammoSkill    = player:getWeaponSkillType(xi.slot.AMMO)
+    local minimumLevel = ammoEquip and ammoEquip:getReqLvl() or nil
+    if
+        ammoSkill ~= 0 or
+        minimumLevel == nil or
+        player:getMainLvl() < minimumLevel
+    then
+        petId = nil
+    end
 
-}
+    -- there are certain ammo items that have subskill < 20, double check we exclude that
+    if petId and petId >= xi.petId.SHEEP_FAMILIAR then
+        return petId
+    end
+
+    return nil
+end
 
 -- On Ability Check Jug (Call Beast and Bestial Loyalty)
 xi.job_utils.beastmaster.onAbilityCheckJug = function(player, target, ability)
-    local petId = player:getWeaponSubSkillType(xi.slot.AMMO)
+    local petId = getValidJugPetID(player)
 
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif
-        not player:hasValidJugPetItem() or
-        player:getMainLvl() < jugLevelTable[petId]
-    then
+    elseif not petId then
         return xi.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
@@ -85,7 +55,13 @@ end
 
 -- On Ability Use Jug (Call Beast and Bestial Loyalty)
 xi.job_utils.beastmaster.onUseAbilityJug = function(player, target, ability)
-    xi.pet.spawnPet(player, player:getWeaponSubSkillType(xi.slot.AMMO))
+    local petId = getValidJugPetID(player)
+    if not petId then
+        -- should not be possible but just in case
+        return
+    end
+
+    xi.pet.spawnPet(player, petId)
 
     if ability:getID() == xi.jobAbility.CALL_BEAST then
         player:removeAmmo(1)

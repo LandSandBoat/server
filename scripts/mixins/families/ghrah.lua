@@ -1,126 +1,245 @@
-require('scripts/globals/mixins')
 -----------------------------------
-
+--- Ghrah Family Mixin
+--  https://ffxiclopedia.fandom.com/wiki/Category:Ghrah
+--  https://www.bg-wiki.com/ffxi/Category:Ghrah
+--  Ghrahs change form to spider (WAR), bird (THF), or human (PLD) and back to ball (BLM) every 60 seconds.
+--  Each form has different stats and a unique skill.
+-----------------------------------
+require('scripts/globals/mixins')
+local palaceID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
+local gardenID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+-----------------------------------
 g_mixins = g_mixins or {}
 
+local mobFormLookup = {}
+
+-- Initialize lookup tables
+local function initializeLookupTables()
+    -- Already initialized
+    if next(mobFormLookup) then
+        return
+    end
+
+    -- Palace bird forms
+    if palaceID and palaceID.mob.EOGHRAH_BIRD then
+        for _, mobId in pairs(palaceID.mob.EOGHRAH_BIRD) do
+            mobFormLookup[mobId] = 3 -- Bird form
+        end
+    end
+
+    -- Palace spider forms
+    if palaceID and palaceID.mob.EOGHRAH_SPIDER then
+        for _, mobId in pairs(palaceID.mob.EOGHRAH_SPIDER) do
+            mobFormLookup[mobId] = 2 -- Spider form
+        end
+    end
+
+    -- Garden bird forms
+    if gardenID and gardenID.mob.AWGHRAH_BIRD then
+        for _, mobId in pairs(gardenID.mob.AWGHRAH_BIRD) do
+            mobFormLookup[mobId] = 3 -- Bird form
+        end
+    end
+
+    -- Garden spider forms
+    if gardenID and gardenID.mob.AWGHRAH_SPIDER then
+        for _, mobId in pairs(gardenID.mob.AWGHRAH_SPIDER) do
+            mobFormLookup[mobId] = 2 -- Spider form
+        end
+    end
+
+    -- Garden human forms
+    if gardenID and gardenID.mob.AWGHRAH_HUMAN then
+        for _, mobId in pairs(gardenID.mob.AWGHRAH_HUMAN) do
+            mobFormLookup[mobId] = 1 -- Human form
+        end
+    end
+end
+
+local skinConfig = {
+    [1161] = { -- Fire
+        spellList = 484,
+        mods = {
+            { xi.mod.FIRE_RES_RANK,     11 },
+            { xi.mod.ICE_RES_RANK,      11 },
+            { xi.mod.WATER_RES_RANK,    -3 },
+            { xi.mod.PARALYZE_RES_RANK, 11 },
+            { xi.mod.BIND_RES_RANK,     11 },
+            { xi.mod.POISON_RES_RANK,   -3 }
+        }
+    },
+    [1162] = { -- Ice
+        spellList = 479,
+        mods = {
+            { xi.mod.ICE_RES_RANK,      11 },
+            { xi.mod.WIND_RES_RANK,     11 },
+            { xi.mod.FIRE_RES_RANK,     -3 },
+            { xi.mod.SILENCE_RES_RANK,  11 },
+            { xi.mod.PARALYZE_RES_RANK, 11 },
+            { xi.mod.BIND_RES_RANK,     11 }
+        }
+    },
+    [1163] = { -- Wind
+        spellList = 480,
+        mods = {
+            { xi.mod.WIND_RES_RANK,     11 },
+            { xi.mod.EARTH_RES_RANK,    11 },
+            { xi.mod.ICE_RES_RANK,      -3 },
+            { xi.mod.SLOW_RES_RANK,     11 },
+            { xi.mod.SILENCE_RES_RANK,  11 },
+            { xi.mod.PARALYZE_RES_RANK, -3 },
+            { xi.mod.BIND_RES_RANK,     -3 }
+        }
+    },
+    [1164] = { -- Earth
+        spellList = 481,
+        mods = {
+            { xi.mod.EARTH_RES_RANK,   11 },
+            { xi.mod.THUNDER_RES_RANK, 11 },
+            { xi.mod.WIND_RES_RANK,    -3 },
+            { xi.mod.SLOW_RES_RANK,    11 },
+            { xi.mod.SILENCE_RES_RANK, -3 }
+        }
+    },
+    [1165] = { -- Lightning
+        spellList = 482,
+        mods = {
+            { xi.mod.THUNDER_RES_RANK, 11 },
+            { xi.mod.WATER_RES_RANK,   11 },
+            { xi.mod.EARTH_RES_RANK,   -3 },
+            { xi.mod.POISON_RES_RANK,  11 },
+            { xi.mod.SLOW_RES_RANK,    -3 }
+        }
+    },
+    [1166] = { -- Water
+        spellList = 483,
+        mods = {
+            { xi.mod.WATER_RES_RANK,   11 },
+            { xi.mod.FIRE_RES_RANK,    11 },
+            { xi.mod.THUNDER_RES_RANK, -3 },
+            { xi.mod.POISON_RES_RANK,  11 }
+        }
+    },
+    [1167] = { -- Light
+        spellList = 478,
+        mods = {
+            { xi.mod.LIGHT_RES_RANK,       11 },
+            { xi.mod.DARK_RES_RANK,        -3 },
+            { xi.mod.LIGHT_SLEEP_RES_RANK, 11 },
+            { xi.mod.DARK_SLEEP_RES_RANK,  -3 },
+            { xi.mod.BLIND_RES_RANK,       -3 }
+        }
+    },
+    [1168] = { -- Dark
+        spellList = 477,
+        mods = {
+            { xi.mod.DARK_RES_RANK,        11 },
+            { xi.mod.LIGHT_RES_RANK,       -3 },
+            { xi.mod.DARK_SLEEP_RES_RANK,  11 },
+            { xi.mod.BLIND_RES_RANK,       11 },
+            { xi.mod.LIGHT_SLEEP_RES_RANK, -3 },
+        }
+    }
+}
+
+-- Ghrah form determination using lookup table
+-- Ball form (0) is default, Human (1), Spider (2), Bird (3)
+local function getTargetForm(mob)
+    return mobFormLookup[mob:getID()] or 0 -- Default to ball form if not found
+end
+
+local function initializeOriginalMods(mob)
+    if mob:getLocalVar('originalATT') == 0 then
+        mob:setLocalVar('originalATT', mob:getMod(xi.mod.ATT))
+        mob:setLocalVar('originalDEF', mob:getMod(xi.mod.DEF))
+        mob:setLocalVar('originalEVA', mob:getMod(xi.mod.EVA))
+    end
+end
+
+local function switchMobForm(mob, form, aggressive)
+    local originalAtt = mob:getLocalVar('originalATT')
+    local originalDef = mob:getLocalVar('originalDEF')
+    local originalEva = mob:getLocalVar('originalEVA')
+
+    -- Reset to base stats first
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0)
+    mob:setMod(xi.mod.ATT, originalAtt)
+    mob:setMod(xi.mod.DEF, originalDef)
+    mob:setMod(xi.mod.EVA, originalEva)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
+
+    -- Apply form-specific modifications
+    if form == 1 then
+        -- Human form
+        -- Has a 100% increase to DEF plus equivalent PLD defense bonus
+        mob:setMod(xi.mod.DEF, originalDef * 2 + 60)
+    elseif form == 2 then
+        -- Spider form
+        -- ATT and DEF traits equivalent to 75 WAR
+        mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getMainLvl() + 2)
+        mob:setMod(xi.mod.ATT, originalAtt + 11)
+        mob:setMod(xi.mod.DEF, originalDef + 11)
+    elseif form == 3 then
+        -- Bird form
+        -- EVA and Triple Attack equivalent to 75 THF
+        mob:setMod(xi.mod.EVA, originalEva + 48)
+        mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+    end
+
+    mob:setAggressive(aggressive)
+    mob:setAnimationSub(form)
+end
+
+-- Consolidated form change logic
+local function handleFormChange(mob)
+    local changeTime = mob:getLocalVar('changeTime')
+    local currentTime = GetSystemTime()
+    local currentForm = mob:getAnimationSub()
+
+    if currentTime > changeTime then
+        local targetForm = mob:getLocalVar('targetForm') or 0 -- Use cached target form
+        if currentForm == 0 then
+            switchMobForm(mob, targetForm, true)
+        else
+            switchMobForm(mob, 0, false)
+        end
+
+        mob:setLocalVar('changeTime', currentTime + 60)
+    end
+end
+
 g_mixins.families.ghrah = function(ghrahMob)
+    initializeLookupTables() -- Initialize lookup tables once
+
     ghrahMob:addListener('SPAWN', 'GHRAH_SPAWN', function(mob)
-        mob:setAnimationSub(0)
-        mob:setAggressive(false)
-        mob:setLocalVar('roamTime', GetSystemTime())
-        mob:setLocalVar('form2', math.random(1, 3))
         local skin = math.random(1161, 1168)
         mob:setModelId(skin)
+        mob:setAnimationSub(0)
+        mob:setAggressive(false)
+        mob:setLocalVar('changeTime', GetSystemTime() + math.random(40, 60)) -- Stagger first change
+        mob:setLocalVar('targetForm', getTargetForm(mob))
+        mob:addMod(xi.mod.MATT, 20) -- Ghrah have innate +20 MATT on top of BLM bonuses
+        mob:addMod(xi.mod.DMGMAGIC, -1250)
+        mob:addMod(xi.mod.MDEF, 20)
+        mob:setMobMod(xi.mobMod.NO_SPELL_COST, 1)
+        initializeOriginalMods(mob)
 
-        if skin == 1161 then -- Fire
-            mob:setSpellList(484)
-            mob:setMod(xi.mod.ICE_MEVA, 80)
-            mob:setMod(xi.mod.PARALYZERES, 99)
-            mob:setMod(xi.mod.BINDRES, 99)
-            mob:setMod(xi.mod.FIRE_MEVA, 100)
-            mob:setMod(xi.mod.WATER_MEVA, -27)
-        elseif skin == 1162 then -- Ice
-            mob:setSpellList(479)
-            mob:setMod(xi.mod.WIND_MEVA, 80)
-            mob:setMod(xi.mod.GRAVITYRES, 99)
-            mob:setMod(xi.mod.SILENCERES, 99)
-            mob:setMod(xi.mod.ICE_MEVA, 100)
-            mob:setMod(xi.mod.PARALYZERES, 100)
-            mob:setMod(xi.mod.BINDRES, 100)
-            mob:setMod(xi.mod.FIRE_MEVA, -27)
-        elseif skin == 1163 then -- Wind
-            mob:setSpellList(480)
-            mob:setMod(xi.mod.EARTH_MEVA, 80)
-            mob:setMod(xi.mod.SLOWRES, 99)
-            mob:setMod(xi.mod.WIND_MEVA, 100)
-            mob:setMod(xi.mod.GRAVITYRES, 100)
-            mob:setMod(xi.mod.SILENCERES, 100)
-            mob:setMod(xi.mod.ICE_MEVA, -27)
-        elseif skin == 1164 then -- Earth
-            mob:setSpellList(481)
-            mob:setMod(xi.mod.THUNDER_MEVA, 80)
-            mob:setMod(xi.mod.STUNRES, 99)
-            mob:setMod(xi.mod.EARTH_MEVA, 100)
-            mob:setMod(xi.mod.SLOWRES, 100)
-            mob:setMod(xi.mod.WIND_MEVA, -27)
-        elseif skin == 1165 then -- Lightning
-            mob:setSpellList(482)
-            mob:setMod(xi.mod.WATER_MEVA, 80)
-            mob:setMod(xi.mod.POISONRES, 99)
-            mob:setMod(xi.mod.THUNDER_MEVA, 100)
-            mob:setMod(xi.mod.STUNRES, 100)
-            mob:setMod(xi.mod.EARTH_MEVA, -27)
-        elseif skin == 1166 then -- Water
-            mob:setSpellList(483)
-            mob:setMod(xi.mod.FIRE_MEVA, 80)
-            mob:setMod(xi.mod.WATER_MEVA, 100)
-            mob:setMod(xi.mod.POISONRES, 100)
-            mob:setMod(xi.mod.THUNDER_MEVA, -27)
-        elseif skin == 1167 then -- Light
-            mob:setSpellList(478)
-            mob:setMod(xi.mod.LIGHT_MEVA, 100)
-            mob:setMod(xi.mod.LULLABYRES, 100)
-            mob:setMod(xi.mod.DARK_MEVA, -27)
-        elseif skin == 1168 then -- Dark
-            mob:setSpellList(477)
-            mob:setMod(xi.mod.DARK_MEVA, 100)
-            mob:setMod(xi.mod.SLEEPRES, 100)
-            mob:setMod(xi.mod.LIGHT_MEVA, -27)
+        local config = skinConfig[skin]
+        if config then
+            mob:setSpellList(config.spellList)
+            for _, modData in ipairs(config.mods) do
+                mob:setMod(modData[1], modData[2])
+            end
         end
     end)
 
     ghrahMob:addListener('ROAM_TICK', 'GHRAH_TICK', function(mob)
-        local roamTime = mob:getLocalVar('roamTime')
-        if
-            mob:getAnimationSub() == 0 and
-            GetSystemTime() - roamTime > 60
-        then
-            mob:setAnimationSub(mob:getLocalVar('form2'))
-            mob:setLocalVar('roamTime', GetSystemTime())
-            mob:setAggressive(true)
-
-            if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
-            end
-        elseif
-            mob:getAnimationSub() == mob:getLocalVar('form2') and
-            GetSystemTime() - roamTime > 60
-        then
-            mob:setAnimationSub(0)
-            mob:setAggressive(false)
-            mob:setLocalVar('roamTime', GetSystemTime())
-            mob:delMod(xi.mod.ATTP, 50)
-        end
+        handleFormChange(mob)
     end)
 
     ghrahMob:addListener('COMBAT_TICK', 'GHRAH_COMBAT', function(mob)
-        local changeTime = mob:getLocalVar('changeTime')
-
-        if mob:getXPos() > 0 then
-            mob:setLocalVar('form2', 2)
-        else
-            mob:setLocalVar('form2', 3)
-        end
-
-        if
-            mob:getAnimationSub() == 0 and
-            mob:getBattleTime() - changeTime > 60
-        then
-            mob:setAnimationSub(mob:getLocalVar('form2'))
-            mob:setAggressive(true)
-            mob:setLocalVar('changeTime', mob:getBattleTime())
-
-            if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
-            end
-        elseif
-            mob:getAnimationSub() == mob:getLocalVar('form2') and
-            mob:getBattleTime() - changeTime > 60
-        then
-            mob:setAnimationSub(0)
-            mob:setAggressive(false)
-            mob:setLocalVar('changeTime', mob:getBattleTime())
-            mob:delMod(xi.mod.ATTP, 50)
+        if not xi.combat.behavior.isEntityBusy(mob) then
+            handleFormChange(mob)
         end
     end)
 end

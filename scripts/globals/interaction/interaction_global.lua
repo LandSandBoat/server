@@ -9,43 +9,42 @@ InteractionGlobal.zones = InteractionGlobal.zones or {}
 -----------------------------------
 -- Called during server init:
 -- [C++] do_init()
--- [C++] zoneutils::LoadZoneList()
+-- [C++] zoneutils::LoadZones()
 -- [C++] luautils::InitInteractionGlobal()
 -- [Lua] InteractionGlobal.initZones(zoneIds)
 -----------------------------------
 function InteractionGlobal.initZones(zoneIds)
-    local loadedZones = {}
-
     -- Add the given zones to the zones table
-    for _, zoneId in ipairs(zoneIds) do
-        if not InteractionGlobal.zones[zoneId] then
-            local zone = GetZone(zoneId)
-            if zone then
-                InteractionGlobal.zones[zoneId] = zone:getName()
-                InteractionGlobal.loadDefaultActionsForZone(zoneId, false)
-                table.insert(loadedZones, zoneId)
-            end
+    for i = 1, #zoneIds do
+        local zone = GetZone(zoneIds[i])
+        if zone then
+            InteractionGlobal.zones[zoneIds[i]] = zone:getName()
         end
     end
 
-    if #loadedZones > 0 then
-        InteractionGlobal.loadContainers(loadedZones)
+    InteractionGlobal.loadDefaultActions(false)
+    InteractionGlobal.loadContainers(false)
+end
+
+-----------------------------------
+-- Alternative entrypoint not relying on loaded zones.
+-- Called during xi_test init:
+-- [C++] TestLuaEnvironment()
+-- [C++] TestLuaEnvironment::initInteractionGlobal()
+-- [Lua] InteractionGlobal.initZonesTest(zoneMapping)
+-----------------------------------
+function InteractionGlobal.initZonesTest(zoneMapping)
+    -- Add the given zones to the zones table
+    for zoneId, zoneName in pairs(zoneMapping) do
+        InteractionGlobal.zones[zoneId] = zoneName
     end
+
+    InteractionGlobal.loadDefaultActions(false)
+    InteractionGlobal.loadContainers(false)
 end
 
 -- Add container handlers found for the added zones
-function InteractionGlobal.loadContainers(zoneIds)
-    local containerFiles = GetContainerFilenamesList()
-    local containers = {}
-    for i = 1, #containerFiles do
-        containers[i] = utils.prequire(containerFiles[i])
-        containers[i].filename = containerFiles[i]
-    end
-
-    InteractionGlobal.lookup:addContainers(containers, zoneIds)
-end
-
-function InteractionGlobal.reloadContainers()
+function InteractionGlobal.loadContainers(shouldReloadRequires)
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
@@ -53,7 +52,9 @@ function InteractionGlobal.reloadContainers()
     end
 
     local interactionContainersPath = 'scripts/globals/interaction_containers'
-    package.loaded[interactionContainersPath] = nil
+    if shouldReloadRequires then
+        package.loaded[interactionContainersPath] = nil
+    end
 
     local containerFiles = GetContainerFilenamesList()
     local containers = {}
@@ -108,8 +109,7 @@ function InteractionGlobal.reload(shouldReloadData)
     if shouldReloadData then
         InteractionGlobal.lookup = InteractionLookup:new()
         InteractionGlobal.loadDefaultActions(true)
-        InteractionGlobal.reloadContainers()
-
+        InteractionGlobal.loadContainers(true)
     else
         InteractionGlobal.lookup = InteractionLookup:new(InteractionGlobal.lookup)
     end

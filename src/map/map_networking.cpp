@@ -71,6 +71,12 @@ MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapC
 {
     TracyZoneScoped;
 
+    // Embedded map server for testing does not actually need to open a socket
+    if (mapConfig.isTestServer)
+    {
+        return;
+    }
+
     // TODO: Remove all of the SQL query logic that relies IPP being 0.
     try
     {
@@ -133,8 +139,6 @@ auto MapNetworking::doSocketsBlocking(timer::duration next) -> timer::duration
     message::handle_incoming();
 
     mapSocket_->recvFor(next);
-
-    _sql->TryPing();
 
     tapStatistics();
 

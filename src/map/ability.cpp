@@ -22,7 +22,6 @@
 #include "ability.h"
 
 #include "common/database.h"
-#include "common/sql.h"
 
 #include "lua/luautils.h"
 

@@ -7,13 +7,18 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.PLAGUE)
 end
 
 entity.onMobSpawn = function(mob)
     -- Set core Skin and mob elemental bonus
     mob:setAnimationSub(0)
     mob:setLocalVar('roamTime', GetSystemTime())
-    mob:setModelId(1167) -- light
+    mob:setModelId(1169)
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
     mob:addMod(xi.mod.LIGHT_MEVA, 100)
@@ -21,31 +26,34 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local roamTime = mob:getLocalVar('roamTime')
-    local roamForm
-    if GetSystemTime() - roamTime > 60 then
-        roamForm = math.random(1, 3) -- forms 2 and 3 are spider and bird; can change forms at will
-        if roamForm == 1 then
-            roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
+    local changeTime = mob:getLocalVar('changeTime')
+    local roamForm = 0
+    if GetSystemTime() - changeTime > 90 then
+        local currentForm = mob:getAnimationSub()
+        if currentForm == 0 then
+            roamForm = math.random(2, 3) -- Switch from form 0 to form 2 or 3
+        else
+            roamForm = 0 -- Switch back to form 0
         end
 
         mob:setAnimationSub(roamForm)
-        mob:setLocalVar('roamTime', GetSystemTime())
+        mob:setLocalVar('changeTime', GetSystemTime())
     end
 end
 
 entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar('changeTime')
-    local battleForm
-
-    if mob:getBattleTime() - changeTime > 60 then
-        battleForm = math.random(1, 3) -- same deal as above
-        if battleForm == 1 then
-            battleForm = 0
+    local roamForm = 0
+    if GetSystemTime() - changeTime > 90 then
+        local currentForm = mob:getAnimationSub()
+        if currentForm == 0 then
+            roamForm = math.random(2, 3) -- Switch from form 0 to form 2 or 3
+        else
+            roamForm = 0 -- Switch back to form 0
         end
 
-        mob:setAnimationSub(battleForm)
-        mob:setLocalVar('changeTime', mob:getBattleTime())
+        mob:setAnimationSub(roamForm)
+        mob:setLocalVar('changeTime', GetSystemTime())
     end
 end
 

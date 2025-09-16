@@ -264,14 +264,15 @@ enum class Mod
     DARK_ABSORB       = 466, // Occasionally absorbs dark elemental damage.
 
     // Crit Damage / Delay
-    CRITHITRATE              = 165, // Raises chance to crit
-    CRITHITRATE_ONLY_WEP     = 141, // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
-    CRIT_DMG_INCREASE        = 421, // Raises the damage of critical hit by percent %
-    RANGED_CRIT_DMG_INCREASE = 964, // Increases ranged critical damage by a percent
-    CRITICAL_HIT_EVASION     = 166, // Modifies chance enemy will crit
-    CRIT_DEF_BONUS           = 908, // Reduces crit hit damage
-    MAGIC_CRITHITRATE        = 562, // Raises chance to magic crit
-    MAGIC_CRIT_DMG_INCREASE  = 563, // Raises damage done when criting with magic
+    CRITHITRATE              = 165,  // Raises chance to crit
+    CRITHITRATE_ONLY_WEP     = 141,  // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
+    CRIT_DMG_INCREASE        = 421,  // Raises the damage of critical hit by percent %
+    RANGED_CRIT_DMG_INCREASE = 964,  // Increases ranged critical damage by a percent
+    CRITICAL_HIT_EVASION     = 166,  // Modifies chance enemy will crit
+    CRIT_DEF_BONUS           = 908,  // Reduces crit hit damage
+    MAGIC_CRITHITRATE        = 562,  // Raises chance to magic crit
+    MAGIC_CRITHITRATE_II     = 1168, // Raises chance to add a critical 1.25 magic damage multiplier.
+    MAGIC_CRIT_DMG_INCREASE  = 563,  // Raises damage done when criting with magic
 
     FENCER_TP_BONUS    = 903, // TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE = 904, // Increased Crit chance from Fencer Trait
@@ -1115,7 +1116,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1168 and onward
+    // SPARE IDs: 1169 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

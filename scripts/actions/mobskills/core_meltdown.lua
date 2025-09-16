@@ -11,6 +11,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     elseif mob:getAnimationSub() ~= 0 then -- form check
         return 1
+    elseif mob:getHPP() > 30 then -- 30% HP threshold
+        return 1
     elseif math.random(1, 100) >= 5 then -- here's the 95% chance to not blow up
         return 1
     else
@@ -19,13 +21,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * math.random(7, 15)
+    local damage = math.floor(mob:getHP() * 0.5)
 
-    -- TODO: The damage type should be based off of the Ghrah's element
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     mob:setHP(0)
 
     return damage

@@ -27,6 +27,7 @@
 #include <cstring>
 
 #include "entities/charentity.h"
+#include "items/item_linkshell.h"
 #include "utils/itemutils.h"
 
 CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)

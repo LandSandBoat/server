@@ -85,6 +85,7 @@ public:
 
     CZone* GetZone();
 
+    auto         GetEffectCheckTime() const -> timer::time_point;
     EntityList_t GetCharList() const;
     EntityList_t GetMobList() const;
     bool         CharListEmpty() const;

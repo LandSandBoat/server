@@ -569,8 +569,9 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup,
     effectId      = utils.defaultIfNil(effectId, 0)
     bonusMacc     = utils.defaultIfNil(bonusMacc, 0)
 
-    -- Calculate resistance rank.
-    -- Some status effects have their own resistance ranks, because they are special. The rest, use regular elemental resistance ranks.
+    -- Decide which resistance rank modifier to use:
+    -- 1: If an effect exists, check if said effect has a specialized resistance rank.
+    -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
     local resistanceRank    = 0 -- Specific Resistance rank value.
     local resistanceRankMod = 0 -- Modifier ID of the resistance rank to use.
 
@@ -583,14 +584,14 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup,
             resistanceRankMod = xi.combat.element.getElementalResistanceRankModifier(actionElement)
         end
 
-        resistanceRank = utils.clamp(target:getMod(resistanceRankMod), -3, 11)
+        -- Fetch resistance rank and apply possible modifiers to it.
+        resistanceRank = target:getMod(resistanceRankMod)
 
-        if
-            effectId > 0 and
-            resistanceRank > 4
-        then
-            resistanceRank = utils.clamp(resistanceRank - target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(effectId)), 4, 11) -- Apply immunobreak modification.
+        if effectId > 0 then
+            resistanceRank = resistanceRank - target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(effectId)) -- Apply immunobreak modification.
         end
+
+        resistanceRank = utils.clamp(resistanceRank, -3, 11)
     end
 
     -- Get Actor Magic Accuracy and target Magic Evasion

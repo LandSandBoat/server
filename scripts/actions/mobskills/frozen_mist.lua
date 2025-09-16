@@ -11,6 +11,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    -- ice aura that provides special stoneskin that absorbs only physical damage
+    skill:setFinalAnimationSub(1)
+    mob:delStatusEffectSilent(xi.effect.STONESKIN)
+    mob:addStatusEffect(xi.effect.STONESKIN, 0, 0, 180, 1, 1500)
+
     local damage   = mob:getWeaponDmg()
     local duration = math.floor(30 * xi.mobskills.applyPlayerResistance(mob, xi.effect.TERROR, target, mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0, 0))
 

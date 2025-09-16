@@ -5,23 +5,17 @@
 xi = xi or {}
 xi.dealerMoogle = xi.dealerMoogle or {}
 
-local debug =
-{
-    ENABLED     = false,    -- will disable ki consumption and print instead
-    SHOWITEM    = false,    -- will display acquisition message to player if debug.ENABLED
-    TO_PLAYER   = false,    -- will print debug info to player if debug.ENABLED
-}
-
 local csidLookup =
 {
-    [xi.zone.CHOCOBO_CIRCUIT] = { 416, 417 },
-    [xi.zone.PORT_SAN_DORIA]  = { 790, 791 },
-    [xi.zone.PORT_BASTOK]     = { 398, 399 },
-    [xi.zone.PORT_WINDURST]   = { 856, 857 },
+    [xi.zone.CHOCOBO_CIRCUIT] = { 416 },
+    [xi.zone.PORT_SAN_DORIA ] = { 790 },
+    [xi.zone.PORT_BASTOK    ] = { 398 },
+    [xi.zone.PORT_WINDURST  ] = { 856 },
 }
 
 -- WARNING!!! These items cannot be customised!
 -- Everything is dictacted by the client!
+
 local kuponLookup =
 {
     -- [coupon item id] = { related key item id, index of items in itemList (table below) }
@@ -93,7 +87,7 @@ local kuponLookup =
 
 -- WARNING!!! These items cannot be customised, and must be in the order
 -- they appear in the in-game menus! Everything is dictated by the client!
-local itemList =
+local itemListTable =
 {
     -- Kupon A-DBcd: Dynamis - Beaucedine (MOG_KUPON_A_DBCD = 2745)
     [1] =
@@ -295,26 +289,26 @@ local itemList =
     -- Kupon A-E+2: Empyrean Armor +2 (MOG_KUPON_A_E2 = 3441)
     [11] =
     {
-        { xi.item.RAVAGERS_MASK_P2,        xi.item.RAVAGERS_LORICA_P2,    xi.item.RAVAGERS_MUFFLERS_P2,      xi.item.RAVAGERS_CUISSES_P2,   xi.item.RAVAGERS_CALLIGAE_P2   },
-        { xi.item.TANTRA_CROWN_P2,         xi.item.TANTRA_CYCLAS_P2,      xi.item.TANTRA_GLOVES_P2,          xi.item.TANTRA_HOSE_P2,        xi.item.TANTRA_GAITERS_P2      },
-        { xi.item.ORISON_CAP_P2,           xi.item.ORISON_BLIAUD_P2,      xi.item.ORISON_MITTS_P2,           xi.item.ORISON_PANTALOONS_P2,  xi.item.ORISON_DUCKBILLS_P2    },
-        { xi.item.GOETIA_PETASOS_P2,       xi.item.GOETIA_COAT_P2,        xi.item.GOETIA_GLOVES_P2,          xi.item.GOETIA_CHAUSSES_P2,    xi.item.GOETIA_SABOTS_P2       },
-        { xi.item.ESTOQUEURS_CHAPPEL_P2,   xi.item.ESTOQUEURS_SAYON_P2,   xi.item.ESTOQUEURS_GANTHEROTS_P2,  xi.item.ESTOQUEURS_FUSEAU_P2,  xi.item.ESTOQUEURS_HOUSEAUX_P2 },
-        { xi.item.RAIDERS_BONNET_P2,       xi.item.RAIDERS_VEST_P2,       xi.item.RAIDERS_ARMLETS_P2,        xi.item.RAIDERS_CULOTTES_P2,   xi.item.RAIDERS_POULAINES_P2   },
-        { xi.item.CREED_ARMET_P2,          xi.item.CREED_CUIRASS_P2,      xi.item.CREED_GAUNTLETS_P2,        xi.item.CREED_CUISSES_P2,      xi.item.CREED_SABATONS_P2      },
-        { xi.item.BALE_BURGEONET_P2,       xi.item.BALE_CUIRASS_P2,       xi.item.BALE_GAUNTLETS_P2,         xi.item.BALE_FLANCHARD_P2,     xi.item.BALE_SOLLERETS_P2      },
-        { xi.item.FERINE_CABASSET_P2,      xi.item.FERINE_GAUSAPE_P2,     xi.item.FERINE_MANOPLAS_P2,        xi.item.FERINE_QUIJOTES_P2,    xi.item.FERINE_OCREAE_P2       },
-        { xi.item.AOIDOS_CALOT_P2,         xi.item.AOIDOS_HONGRELINE_P2,  xi.item.AOIDOS_MANCHETTES_P2,      xi.item.AOIDOS_RHINGRAVE_P2,   xi.item.AOIDOS_COTHURNES_P2    },
-        { xi.item.SYLVAN_GAPETTE_P2,       xi.item.SYLVAN_CABAN_P2,       xi.item.SYLVAN_GLOVELETTES_P2,     xi.item.SYLVAN_BRAGUES_P2,     xi.item.SYLVAN_BOTTILLONS_P2   },
-        { xi.item.UNKAI_KABUTO_P2,         xi.item.UNKAI_DOMARU_P2,       xi.item.UNKAI_KOTE_P2,             xi.item.UNKAI_HAIDATE_P2,      xi.item.UNKAI_SUNE_ATE_P2      },
-        { xi.item.IGA_ZUKIN_P2,            xi.item.IGA_NINGI_P2,          xi.item.IGA_TEKKO_P2,              xi.item.IGA_HAKAMA_P2,         xi.item.IGA_KYAHAN_P2          },
-        { xi.item.LANCERS_MEZAIL_P2,       xi.item.LANCERS_PLACKART_P2,   xi.item.LANCERS_VAMBRACES_P2,      xi.item.LANCERS_CUISSOTS_P2,   xi.item.LANCERS_SCHYNBALDS_P2  },
-        { xi.item.CALLERS_HORN_P2,         xi.item.CALLERS_DOUBLET_P2,    xi.item.CALLERS_BRACERS_P2,        xi.item.CALLERS_SPATS_P2,      xi.item.CALLERS_PIGACHES_P2    },
-        { xi.item.MAVI_KAVUK_P2,           xi.item.MAVI_MINTAN_P2,        xi.item.MAVI_BAZUBANDS_P2,         xi.item.MAVI_TAYT_P2,          xi.item.MAVI_BASMAK_P2         },
-        { xi.item.NAVARCHS_TRICORNE_P2,    xi.item.NAVARCHS_FRAC_P2,      xi.item.NAVARCHS_GANTS_P2,         xi.item.NAVARCHS_CULOTTES_P2,  xi.item.NAVARCHS_BOTTES_P2     },
-        { xi.item.CIRQUE_CAPPELLO_P2,      xi.item.CIRQUE_FARSETTO_P2,    xi.item.CIRQUE_GUANTI_P2,          xi.item.CIRQUE_PANTALONI_P2,   xi.item.CIRQUE_SCARPE_P2       },
-        { xi.item.CHARIS_TIARA_P2,         xi.item.CHARIS_CASAQUE_P2,     xi.item.CHARIS_BANGLES_P2,         xi.item.CHARIS_TIGHTS_P2,      xi.item.CHARIS_TOE_SHOES_P2    },
-        { xi.item.SAVANTS_BONNET_P2,       xi.item.SAVANTS_GOWN_P2,       xi.item.SAVANTS_BRACERS_P2,        xi.item.SAVANTS_PANTS_P2,      xi.item.SAVANTS_LOAFERS_P2     },
+        { xi.item.RAVAGERS_MASK_P2,      xi.item.RAVAGERS_LORICA_P2,   xi.item.RAVAGERS_MUFFLERS_P2,     xi.item.RAVAGERS_CUISSES_P2,  xi.item.RAVAGERS_CALLIGAE_P2   },
+        { xi.item.TANTRA_CROWN_P2,       xi.item.TANTRA_CYCLAS_P2,     xi.item.TANTRA_GLOVES_P2,         xi.item.TANTRA_HOSE_P2,       xi.item.TANTRA_GAITERS_P2      },
+        { xi.item.ORISON_CAP_P2,         xi.item.ORISON_BLIAUD_P2,     xi.item.ORISON_MITTS_P2,          xi.item.ORISON_PANTALOONS_P2, xi.item.ORISON_DUCKBILLS_P2    },
+        { xi.item.GOETIA_PETASOS_P2,     xi.item.GOETIA_COAT_P2,       xi.item.GOETIA_GLOVES_P2,         xi.item.GOETIA_CHAUSSES_P2,   xi.item.GOETIA_SABOTS_P2       },
+        { xi.item.ESTOQUEURS_CHAPPEL_P2, xi.item.ESTOQUEURS_SAYON_P2,  xi.item.ESTOQUEURS_GANTHEROTS_P2, xi.item.ESTOQUEURS_FUSEAU_P2, xi.item.ESTOQUEURS_HOUSEAUX_P2 },
+        { xi.item.RAIDERS_BONNET_P2,     xi.item.RAIDERS_VEST_P2,      xi.item.RAIDERS_ARMLETS_P2,       xi.item.RAIDERS_CULOTTES_P2,  xi.item.RAIDERS_POULAINES_P2   },
+        { xi.item.CREED_ARMET_P2,        xi.item.CREED_CUIRASS_P2,     xi.item.CREED_GAUNTLETS_P2,       xi.item.CREED_CUISSES_P2,     xi.item.CREED_SABATONS_P2      },
+        { xi.item.BALE_BURGEONET_P2,     xi.item.BALE_CUIRASS_P2,      xi.item.BALE_GAUNTLETS_P2,        xi.item.BALE_FLANCHARD_P2,    xi.item.BALE_SOLLERETS_P2      },
+        { xi.item.FERINE_CABASSET_P2,    xi.item.FERINE_GAUSAPE_P2,    xi.item.FERINE_MANOPLAS_P2,       xi.item.FERINE_QUIJOTES_P2,   xi.item.FERINE_OCREAE_P2       },
+        { xi.item.AOIDOS_CALOT_P2,       xi.item.AOIDOS_HONGRELINE_P2, xi.item.AOIDOS_MANCHETTES_P2,     xi.item.AOIDOS_RHINGRAVE_P2,  xi.item.AOIDOS_COTHURNES_P2    },
+        { xi.item.SYLVAN_GAPETTE_P2,     xi.item.SYLVAN_CABAN_P2,      xi.item.SYLVAN_GLOVELETTES_P2,    xi.item.SYLVAN_BRAGUES_P2,    xi.item.SYLVAN_BOTTILLONS_P2   },
+        { xi.item.UNKAI_KABUTO_P2,       xi.item.UNKAI_DOMARU_P2,      xi.item.UNKAI_KOTE_P2,            xi.item.UNKAI_HAIDATE_P2,     xi.item.UNKAI_SUNE_ATE_P2      },
+        { xi.item.IGA_ZUKIN_P2,          xi.item.IGA_NINGI_P2,         xi.item.IGA_TEKKO_P2,             xi.item.IGA_HAKAMA_P2,        xi.item.IGA_KYAHAN_P2          },
+        { xi.item.LANCERS_MEZAIL_P2,     xi.item.LANCERS_PLACKART_P2,  xi.item.LANCERS_VAMBRACES_P2,     xi.item.LANCERS_CUISSOTS_P2,  xi.item.LANCERS_SCHYNBALDS_P2  },
+        { xi.item.CALLERS_HORN_P2,       xi.item.CALLERS_DOUBLET_P2,   xi.item.CALLERS_BRACERS_P2,       xi.item.CALLERS_SPATS_P2,     xi.item.CALLERS_PIGACHES_P2    },
+        { xi.item.MAVI_KAVUK_P2,         xi.item.MAVI_MINTAN_P2,       xi.item.MAVI_BAZUBANDS_P2,        xi.item.MAVI_TAYT_P2,         xi.item.MAVI_BASMAK_P2         },
+        { xi.item.NAVARCHS_TRICORNE_P2,  xi.item.NAVARCHS_FRAC_P2,     xi.item.NAVARCHS_GANTS_P2,        xi.item.NAVARCHS_CULOTTES_P2, xi.item.NAVARCHS_BOTTES_P2     },
+        { xi.item.CIRQUE_CAPPELLO_P2,    xi.item.CIRQUE_FARSETTO_P2,   xi.item.CIRQUE_GUANTI_P2,         xi.item.CIRQUE_PANTALONI_P2,  xi.item.CIRQUE_SCARPE_P2       },
+        { xi.item.CHARIS_TIARA_P2,       xi.item.CHARIS_CASAQUE_P2,    xi.item.CHARIS_BANGLES_P2,        xi.item.CHARIS_TIGHTS_P2,     xi.item.CHARIS_TOE_SHOES_P2    },
+        { xi.item.SAVANTS_BONNET_P2,     xi.item.SAVANTS_GOWN_P2,      xi.item.SAVANTS_BRACERS_P2,       xi.item.SAVANTS_PANTS_P2,     xi.item.SAVANTS_LOAFERS_P2     },
     },
     -- Kupon I-Seal: 10 (Body) or 8 (other) of any One Empyrean Armor upgrade seals (MOG_KUPON_I_SEAL = 3442)
     [12] =
@@ -360,21 +354,21 @@ local itemList =
     -- Kupon A-De: Delve field armor pieces (MOG_KUPON_A_DE = 3968)
     [14] =
     {
-        { xi.item.MIKINAAK_HELM,           { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MIKINAAK_BREASTPLATE,    { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MIKINAAK_GAUNTLETS,      { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MIKINAAK_CUISSES,        { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MIKINAAK_GREAVES,        { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MANIBOZHO_BERET,         { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MANIBOZHO_JERKIN,        { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MANIBOZHO_GLOVES,        { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MANIBOZHO_BRAIS,         { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.MANIBOZHO_BOOTS,         { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.BOKWUS_CIRCLET,          { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.BOKWUS_ROBE,             { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.BOKWUS_GLOVES,           { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.BOKWUS_SLOPS,            { xi.item.AIRLIXIR_P2, 3 } },
-        { xi.item.BOKWUS_BOOTS,            { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MIKINAAK_HELM,        { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MIKINAAK_BREASTPLATE, { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MIKINAAK_GAUNTLETS,   { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MIKINAAK_CUISSES,     { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MIKINAAK_GREAVES,     { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MANIBOZHO_BERET,      { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MANIBOZHO_JERKIN,     { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MANIBOZHO_GLOVES,     { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MANIBOZHO_BRAIS,      { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.MANIBOZHO_BOOTS,      { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.BOKWUS_CIRCLET,       { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.BOKWUS_ROBE,          { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.BOKWUS_GLOVES,        { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.BOKWUS_SLOPS,         { xi.item.AIRLIXIR_P2, 3 } },
+        { xi.item.BOKWUS_BOOTS,         { xi.item.AIRLIXIR_P2, 3 } },
     },
 
     -- Kupon A-Sal: Salvage II (MOG_KUPON_A_SAL = 3969)
@@ -660,9 +654,9 @@ local itemList =
     -- Kupon I-RME: RME Upgrade Materials x300 (MOG_KUPON_I_RME = 8738)
     [27] =
     {
-        { { xi.item.PLUTON,            300 } },
-        { { xi.item.BEITETSU,          300 } },
-        { { xi.item.RIFTBORN_BOULDER,  300 } },
+        { { xi.item.PLUTON,           300 } },
+        { { xi.item.BEITETSU,         300 } },
+        { { xi.item.RIFTBORN_BOULDER, 300 } },
     },
 
     -- 28: blank menu
@@ -958,20 +952,8 @@ local itemList =
     -- Kupon AW-Vgr: Equipment from Vagary Notorious Monsters Perfiden and Plouton (MOG_KUPON_AW_VGR = 9087)
     [33] =
     {
-            -- Perfidien
-        {
-            xi.item.COUNTS_GARB,
-            xi.item.COUNTS_CUFFS,
-            xi.item.ETIOLATION_EARRING,
-            xi.item.ENERVATING_EARRING,
-        },
-            -- Plouton
-        {
-            xi.item.TARTARUS_PLATEMAIL,
-            xi.item.BEFOULED_CROWN,
-            xi.item.ODIUM,
-            xi.item.INCARNATION_SASH,
-        }
+        { xi.item.COUNTS_GARB,        xi.item.COUNTS_CUFFS,   xi.item.ETIOLATION_EARRING, xi.item.ENERVATING_EARRING }, -- Perfidien
+        { xi.item.TARTARUS_PLATEMAIL, xi.item.BEFOULED_CROWN, xi.item.ODIUM,              xi.item.INCARNATION_SASH   }, -- Plouton
     },
 
     -- Kupon AW-VgrII: Equipment from Vagary NMs Palloritus, Putraxia and Rancibus (MOG_KUPON_AW_VGRII = 9088)
@@ -3251,53 +3233,7 @@ local itemList =
     }
 }
 
-local countKeyItems = function(player)
-    local count = 0
-    for _, v in pairs (kuponLookup) do
-        local ki = v[1]
-        if player:hasKeyItem(ki) then
-            count = count + 1
-        end
-    end
-
-    return count
-end
-
-local listToKeyItem = function(listID)
-    for k, v in pairs (kuponLookup) do
-        if v[2] == listID then
-            return v[1]
-        end
-    end
-
-    return nil
-end
-
-local buildMask = function(player, shift)
-    local mask = 0
-    local kiID = 0
-    for k, v in pairs (kuponLookup) do
-        if shift == 2 then
-            if v[2] >= 32 and v[2] <= 62 then -- Mask 1 contains index 32 -> 62
-                if player:hasKeyItem(v[1]) then
-                    mask = mask + bit.lshift(shift, v[2])
-                    kiID = v[2] -- Store the Key Item Index ID, used if there is only one KI found
-                end
-            end
-        else
-            if v[2] >= 1 and v[2] <= 31 then -- Mask 2 contains index 1 -> 31
-                if player:hasKeyItem(v[1]) then
-                    mask = mask + bit.lshift(shift, v[2])
-                    kiID = v[2]
-                end
-            end
-        end
-    end
-
-    return { mask, kiID } -- return both the completed mask and the kiID
-end
-
-local getIndexParams = function(list, option)
+local function getIndexParams(list, option)
     local idxAlt1  = 0
     local idxAlt2  = 0
     local keyItems = 0
@@ -3330,7 +3266,7 @@ local getIndexParams = function(list, option)
     return { idxAlt1, idxAlt2, keyItems }
 end
 
-local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
+local function getItemSelection(player, list, idx, idxAlt1, idxAlt2)
     local item = 0
 
     if
@@ -3345,167 +3281,193 @@ local getItemSelection = function(player, list, idx, idxAlt1, idxAlt2)
         list == 58 or                   -- AW-GeIV
         list == 62                      -- W-RMEA
     then
-        if debug.ENABLED and not debug.SHOWITEM then
-            item = 0
-        else
-            --- TODO: Find better way to determine behavior based on list type.
-            ---@diagnostic disable-next-line: cast-local-type
-            item = itemList[list][idxAlt1][idxAlt2]
-        end
+        --- TODO: Find better way to determine behavior based on list type.
+        ---@diagnostic disable-next-line: cast-local-type
+        item = itemListTable[list][idxAlt1][idxAlt2]
 
         if list == 12 then  -- Item, Quantity
             --- TODO: Find better way to determine behavior based on list type.
             ---@diagnostic disable-next-line: cast-local-type
             item = item
         end
-    elseif
-        list == 44 -- AW-Cos (Index Defaults to Female itemID, CS will automatically swap items based on gender)
-    then
-        local gender    = player:getGender()                        -- Female: 0, Male: 1
-        local itemID    = itemList[list][idxAlt1][idxAlt2][1]       -- Extract the base itemID (F) from the index
-        local modifier  = itemList[list][idxAlt1][idxAlt2][2] or 0  -- Extract the base shift value from the index (typically 1 or 2)
 
-        item = itemID - (gender * modifier) -- Generate the actual itemID by subtracting the shift value from the base itemID
+    elseif list == 44 then -- AW-Cos (Index Defaults to Female itemID, CS will automatically swap items based on gender)
+        local gender   = player:getGender()                       -- Female: 0, Male: 1
+        local itemID   = itemListTable[list][idxAlt1][idxAlt2][1]      -- Extract the base itemID (F) from the index
+        local modifier = itemListTable[list][idxAlt1][idxAlt2][2] or 0 -- Extract the base shift value from the index (typically 1 or 2)
+
+        item = itemID - gender * modifier -- Generate the actual itemID by subtracting the shift value from the base itemID
+
     else
         --- TODO: Find better way to determine behavior based on list type.
         ---@diagnostic disable-next-line: cast-local-type
-        item = itemList[list][idx]
+        item = itemListTable[list][idx]
     end
 
     return { item }
 end
 
-local debugInfo = function(player, items, list, option, altIDs, idx)
-    local ID        = zones[player:getZoneID()]
-    local idxAlt1   = altIDs[1]
-    local idxAlt2   = altIDs[2]
-    local keyitem   = altIDs[3]
+xi.dealerMoogle.onTrade = function(player, npc, trade)
+    -- Notes:
+    -- You can trade stacks of items and multiple coupons.
+    -- Game will choose the first valid coupon of which you DO NOT have the corresponding KI.
+    -- If not, it will just ignore you.
 
-    if debug.SHOWITEM then
-        if keyitem == 0 then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, items[1])
-        else
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, items[1])
+    local itemId = 0
+
+    -- Validate traded items.
+    for slotId = 0, 7 do
+        local item = trade:getItem(slotId)
+        if item then
+            if kuponLookup[item:getID()] then
+                itemId = item:getID()
+                break
+            end
         end
     end
 
-    if debug.TO_PLAYER then
-        player:printToPlayer(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
-    else
-        print(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2))
-    end
-end
-
-xi.dealerMoogle.onTrade = function(player, npc, trade)
-    local itemID = trade:getItemId()
-    if trade:getItemCount() > 1 then
-        return -- Prevent accidental trade of stacks (first vana'diel problems, kupo!)
-    end
-
-    if not kuponLookup[itemID] then
+    -- Early return: No valid item in trade container.
+    if itemId == 0 then
         return
     end
 
-    local zoneID = player:getZoneID()
-    local csid   = csidLookup[zoneID][2]
-    local kiID   = kuponLookup[itemID][1]
-    local listID = kuponLookup[itemID][2]
+    local csid   = csidLookup[player:getZoneID()][1] + 1
+    local kiId   = kuponLookup[itemId][1]
+    local listId = kuponLookup[itemId][2]
 
-    -- Trade Item (itemID) will only be consumed if the player does not yet have the corresponding KI. It will be replaced with a
-    -- key item version! No need to tell the player, the CS handles all of the messaging. If the Player already has the Key Item,
-    -- the itemID will not be consumed, but the Key Item will only be consumed upon completing a successful transaction.
-
-    -- Scenario 1:  Player trades the item, but does NOT already have the corresponding Key Item. The trade is consumed. Player will
-    --              either receive the item(s) of their choice or they will receive the corresponding Key Item if they back out of
-    --              the menu without completing a transaction. In actuality, the Key Item is added silently as soon as the trade
-    --              occurs, and deleted only if the player completes the transaction. This is to prevent the player from losing
-    --              access to the reward in the event of a disconnect mid-transaction.
-
-    -- Scenario 2:  Player trades the item and DOES already have the corresponding Key Item. The CS menu will present as if the player
-    --              triggered the dealer while in posession of the Key Item. If the player completes the transaction, they will receive
-    --              the item(s) of their choice, the Key Item will be consumed, the traded item will not be consumed. If the player does
-    --              not complete the transaction, they will retain both the traded Item and Key Item.
-
-    if player:hasItem(itemID) then
-        if player:hasKeyItem(kiID) then -- Player already has the KI for the traded item. Present the KI version of the CS, consume the KI only if transaction completes.
-            player:startEvent(csid, itemID, kiID, listID, 1)
-        else -- Player doesn't have the KI corresponding to the item. Consume the item on trade and convert to Key Item immediately.
-            trade:confirmItem(itemID, 1)
+    if player:hasItem(itemId) then
+        if not player:hasKeyItem(kiId) then
+            trade:confirmItem(itemId, 1)
             player:confirmTrade()
-            player:addKeyItem(kiID)
+            player:addKeyItem(kiId)
+            player:setLocalVar('[Dealer]event', 2) -- Mark event as trade.
+            player:setLocalVar('[Dealer]GetKeyItem', kiId)
 
-            player:startEvent(csid, itemID, kiID, listID)
+            player:startEvent(csid, itemId, kiId, listId, 0, 0, 0, 0)
         end
     end
 end
 
 xi.dealerMoogle.onTrigger = function(player, npc)
-    local zoneID = player:getZoneID()
-    local cs     = csidLookup[zoneID][2]
-    local numKIs = countKeyItems(player)
-    local mask1  = buildMask(player, 2)[1]
-    local mask2  = buildMask(player, 1)[1]
-    local kiID   = buildMask(player, 2)[2] + buildMask(player, 1)[2]
+    local cs              = csidLookup[player:getZoneID()][1]
+    local itemList        = 0 -- Param 3: Only returns the index of a single KI. The one with the highest index.
+    local keyItemAmount   = 0 -- Param 4: Amount of "coupon" KIs.
+    local keyItemBitmask1 = 0 -- Param 7
+    local keyItemBitmask2 = 0 -- Param 8
 
-    if numKIs < 1 then -- play default CS if no KIs found
-        cs = csidLookup[zoneID][1]
+    -- Calculate parameters.
+    for _, v in pairs (kuponLookup) do
+        local index = v[2]
+        if player:hasKeyItem(v[1]) then
+            itemList      = index
+            keyItemAmount = keyItemAmount + 1
+            if index >= 32 then
+                keyItemBitmask1 = keyItemBitmask1 + bit.lshift(2, index)
+            else
+                keyItemBitmask2 = keyItemBitmask2 + bit.lshift(1, index)
+            end
+        end
     end
 
-    -- Capture of multiple stored KIs: CS2: 0, 0, 51, 4, 0, 0, 1843200, 0
+    if keyItemAmount > 0 then
+        cs = cs + 1
+        player:setLocalVar('[Dealer]event', 1) -- Mark event as trigger.
+    end
 
-    player:startEvent(cs, 0, 0, kiID, numKIs, 0, 0, mask1, mask2)
+    player:startEvent(cs, 0, 0, itemList, keyItemAmount, 0, 0, keyItemBitmask1, keyItemBitmask2)
 end
 
 xi.dealerMoogle.onEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
 end
 
 xi.dealerMoogle.onEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
+    local cs = csidLookup[player:getZoneID()][1] + 1
+
+    -- Handle local vars.
+    local eventType     = player:getLocalVar('[Dealer]event')
+    local obtainKeyItem = player:getLocalVar('[Dealer]GetKeyItem')
+
+    player:setLocalVar('[Dealer]event', 0)
+    player:setLocalVar('[Dealer]GetKeyItem', 0)
+
+    -- Early returns.
+    if cs ~= csid then
+        return
+    end
+
     if option == 0 then
         return
     end
 
-    local zoneID = player:getZoneID()
-    local itemCsid = csidLookup[zoneID][2]
+    -- Fetch info.
+    local itemList = bit.band(option, 0xFF)
+    local idx      = bit.rshift(option, 8)
+    local altIDs   = getIndexParams(itemList, option)
+    local idxAlt1  = altIDs[1]
+    local idxAlt2  = altIDs[2]
+    local keyItems = altIDs[3] -- List 19
 
-    if csid == itemCsid then
-        local list      = bit.band(option, 0xFF)
-        local idx       = bit.rshift(option, 8)
-        local altIDs    = getIndexParams(list, option)
-        local idxAlt1   = altIDs[1]
-        local idxAlt2   = altIDs[2]
-        local keyItems  = altIDs[3]
+    -- All item lists require a KI.
+    local keyItemRequired = 0
+    for _, v in pairs (kuponLookup) do
+        if v[2] == itemList then
+            keyItemRequired = v[1]
+            break
+        end
+    end
 
-        if list > 0 and idx == 0 then
-            player:addKeyItem(listToKeyItem(list))
-        elseif list > 0 and idx > 0 then
-            local items = getItemSelection(player, list, idx, idxAlt1, idxAlt2)
+    if keyItemRequired == 0 then
+        return
+    end
 
-            if
-                debug.ENABLED and
-                #items > 0
-            then
-                debugInfo(player, items, list, option, altIDs, idx)
-            else
-                if keyItems == 0 then
-                    if npcUtil.giveItem(player, items) then
-                        player:delKeyItem(listToKeyItem(list))
-                    else
-                        -- TODO: CS Messaging that getting the item has failed
-                    end
-                else
-                    if not player:hasKeyItem(items) then
-                        -- TODO: Refactor this so that we can more clearly define KI vs Item
-                        ---@diagnostic disable-next-line: param-type-mismatch
-                        npcUtil.giveKeyItem(player, items)
-                        player:delKeyItem(listToKeyItem(list))
-                    elseif #items > 0 then
-                        player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, items[1])
-                        -- TODO: CS Messaging that getting the item has failed
-                    end
-                end
-            end
+    -- Options 1 to 255: Give key item version of the coupon.
+    if
+        option <= 255 and
+        eventType == 2 and
+        obtainKeyItem == keyItemRequired
+    then
+        return
+    end
+
+    -- Other options give items. Ensure we have the required KI (trigger) or local variable (trade).
+    if
+        (eventType == 1 and not player:hasKeyItem(keyItemRequired)) or
+        (eventType == 2 and obtainKeyItem ~= keyItemRequired)
+    then
+        return
+    end
+
+    -- Handle list 19 (Gives Key Items)
+    if
+        itemList == 19 and
+        idx > 0 and
+        keyItems > 0
+    then
+        local items = getItemSelection(player, itemList, idx, idxAlt1, idxAlt2)
+
+        if not player:hasKeyItem(items) then
+            -- TODO: Refactor this so that we can more clearly define KI vs Item
+            ---@diagnostic disable-next-line: param-type-mismatch
+            npcUtil.giveKeyItem(player, items)
+            player:delKeyItem(keyItemRequired)
+        elseif #items > 0 then
+            player:messageBasic(xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, items[1])
+            -- TODO: CS Messaging that getting the item has failed
+        end
+    end
+
+    -- Handle all other lists.
+    if
+        itemList > 0 and
+        idx > 0 and
+        keyItems == 0
+    then
+        local items = getItemSelection(player, itemList, idx, idxAlt1, idxAlt2)
+
+        if npcUtil.giveItem(player, items) then
+            player:delKeyItem(keyItemRequired)
+        else
+            -- TODO: CS Messaging that getting the item has failed
         end
     end
 end

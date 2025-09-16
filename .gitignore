@@ -136,6 +136,7 @@ UpgradeLog*.XML
 /xi_connect*
 /xi_map*
 /xi_search*
+/xi_test*
 /xi_world*
 
 # Generated files, mostly autotools-related
@@ -256,3 +257,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Test artifacts
+*.ctrf.json

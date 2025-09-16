@@ -20,14 +20,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.BIRD
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    local power = 1500
+    local power           = 1500
     local resistThreshold = 0.5
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
     if resist >= resistThreshold then
         if target:getTP() == 0 then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

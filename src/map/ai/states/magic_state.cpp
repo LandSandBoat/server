@@ -30,6 +30,7 @@
 #include "entities/mobentity.h"
 #include "job_points.h"
 #include "lua/luautils.h"
+#include "mob_modifier.h"
 #include "packets/action.h"
 #include "packets/message_basic.h"
 #include "spell.h"
@@ -42,6 +43,14 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 , m_PSpell(nullptr)
 , m_flags(flags)
 {
+    if (auto PMob = dynamic_cast<CMobEntity*>(m_PEntity))
+    {
+        if (PMob->getMobMod(MOBMOD_NO_SPELL_COST) > 0)
+        {
+            m_flags |= MAGICFLAGS_IGNORE_MP;
+        }
+    }
+
     auto* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
     {
@@ -109,7 +118,11 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     // TODO: weaponskill lua object
     m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", m_PEntity, m_PSpell.get(), &action);
 
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+    // if spell:setFlag(xi.magic.spellFlag.NO_START_MSG) is called, don't give spell start packet
+    if (!(GetSpell()->getFlag() & SPELLFLAG_NO_START_MSG))
+    {
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+    }
 }
 
 bool CMagicState::Update(timer::time_point tick)
@@ -289,7 +302,10 @@ bool CMagicState::Update(timer::time_point tick)
             PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
         }
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        if (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG))
+        {
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        }
 
         Complete();
     }

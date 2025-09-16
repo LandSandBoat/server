@@ -92,6 +92,11 @@ uint32 CLuaMobSkill::getPrimaryTargetID()
     return m_PLuaMobSkill->getPrimaryTargetID();
 }
 
+void CLuaMobSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    return m_PLuaMobSkill->setFinalAnimationSub(newAnimationSub);
+}
+
 uint16 CLuaMobSkill::getMsg()
 {
     return m_PLuaMobSkill->getMsg();
@@ -146,6 +151,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTargets", CLuaMobSkill::getTargets);
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
+    SOL_REGISTER("setFinalAnimationSub", CLuaMobSkill::setFinalAnimationSub);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHP", CLuaMobSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);

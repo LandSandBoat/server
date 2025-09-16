@@ -100,6 +100,19 @@ global_objects=(
     GetFirstID
 
     ReloadSynthRecipes
+
+    after_each
+    assert
+    before_each
+    DebugTest
+    describe
+    InfoTest
+    it
+    mock
+    setup
+    spy
+    stub
+    teardown
 )
 
 ignores=(

@@ -44,7 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 1.0
 
     local damage = 1000
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, xi.element.LIGHT, xi.mod.INT, 0, -50)
     if resist == 1 then
         local targets = spell:getTotalTargets()
         damage = damage / targets

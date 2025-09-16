@@ -764,31 +764,37 @@ xi.mob.diff = xi.mob.difficulty
 -- Centralized function for calling one or more mob "pets"
 -- It may be helpful to think of mobs with multiple as having "helpers" rather than explicitly pets
 -- Since this is a looser definition than an explicit `->PMaster` and `->PPet` relationship that exists:
--- - some of these "pets" can have real pets of their own
--- - some mobs can have multiple "pets"
--- TODO make this function better handle real pets vs "helpers that spawn while the owner is fighting, but only exist in the context of the owner"
---      doing so will reduce the number of listeners required to behave as we need
+-- - these "pets" can have real pets of their own
+-- - mobs can have multiple "pets"
+-- - if the petId maps to the mob's actual pet (or petIds is nil and the mob has a pet mapped),
+--      then no ROAM listener is installed on the pet, but the animations can still be consistently managed in one place
 -----------------------------------
 
 xi.mob.callPets = function(mob, petIds, params)
     params = params or {}
     -- params table:
-    --      params.dieWithOwner: will kill pets if owner dies
+    --      params.dieWithOwner: will kill pets immediately if owner dies
+    --      params.superLink:    mob will assist pet (pet will always assist mob)
+    --      params.maxSpawns:    stop if this many pets get spawned
+    --      params.ignoreBusy:   allow pets to get summoned even if owner is busy, interupting any action it was performing
     --      params.noAnimation:  no animation packet from owner when calling pet
     --      params.inactiveTime: how long for the call pet to take (owner will be inactive during period)
     --          this implies using summoner start/stop entity animation packet (which most mobs use when calling either pets or additional helpers)
     -- if inactiveTime is zero, the following will determine an action packet to signal the mob is calling a pet
     --      params.callPetJob will map to a particular mobskill action packet
-    --      will use a generic 2-hour action packet if callPetJob isn't specified
-    --          optionally you can override particular action packet params with params.action.X (see below)
+    --      if not, the function will use a generic 2-hour action packet
+    --          optionally you can override particular action packet params with params.action.X (see that code below)
     -- NOTE these are not arbitrary choices, but multiple options to emulate retail behavior for any particular owner of pets/helpers
-    if xi.combat.behavior.isEntityBusy(mob) then
+    if xi.combat.behavior.isEntityBusy(mob) and not params.ignoreBusy then
         return false
     end
 
     -- make sure at least one pet is available to summon
     if type(petIds) == 'number' then
         petIds = { petIds }
+    elseif petIds == nil then
+        -- ensure petIds is always a table so ipairs doesn't fail below
+        petIds = mob:getPet() and { mob:getPet():getID() } or {}
     end
 
     local canSummonPets = false
@@ -820,10 +826,11 @@ xi.mob.callPets = function(mob, petIds, params)
                 -- inject "<mob> uses Call Beast"
                 actionParams =
                 {
-                    finishCategory = 11,
+                    finishCategory = xi.action.MOBABILITY_FINISH,
                     animationID = 718,
                     actionID = xi.mobSkill.CALL_BEAST,
-                    messageID = 101,
+                    messageID = xi.msg.basic.USES,
+                    param = 0,
                 }
             end,
 
@@ -831,10 +838,24 @@ xi.mob.callPets = function(mob, petIds, params)
                 -- inject "<mob> uses Call Wyvern"
                 actionParams =
                 {
-                    finishCategory = 11,
+                    finishCategory = xi.action.MOBABILITY_FINISH,
                     animationID = 438,
                     actionID = xi.mobSkill.CALL_WYVERN,
-                    messageID = 101,
+                    messageID = xi.msg.basic.USES,
+                    param = 0,
+                }
+            end,
+
+            [xi.job.PUP] = function(x)
+                -- inject "<mob> uses Activate"
+                -- The mobskill has no action message, so we use the job ability
+                actionParams =
+                {
+                    finishCategory = xi.action.JOBABILITY_FINISH,
+                    animationID = 83,
+                    actionID = xi.jobAbility.ACTIVATE,
+                    messageID = xi.msg.basic.USES_JA,
+                    param = 0,
                 }
             end,
         }
@@ -866,25 +887,42 @@ xi.mob.callPets = function(mob, petIds, params)
             else
                 if actionParams then
                     -- Generic 2-hour animation with no message
-                    mobArg:injectActionPacket(mobArg:getID(), actionParams.finishCategory, actionParams.animationID, 0, 0x18, actionParams.messageID, 0, actionParams.actionID, actionParams.param)
+                    mobArg:injectActionPacket(mobArg:getID(), actionParams.finishCategory, actionParams.animationID, 0, 0x18, actionParams.messageID, actionParams.actionID, actionParams.param)
                 end
             end
         end
 
         local spawnPos = mobArg:getSpawnPos()
         local pos = mobArg:getPos()
+        params.maxSpawns = params.maxSpawns or #petIds
+        local spawnedCount = 0
         for _, petId in ipairs(petIds) do
             local petToSummon = GetMobByID(petId)
             if
+                spawnedCount < params.maxSpawns and
                 petToSummon and
                 not petToSummon:isSpawned()
             then
+                spawnedCount = spawnedCount + 1
                 -- spawn pet around owner
                 petToSummon:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
                 petToSummon:spawn()
                 -- set home to be the owner's home position
                 petToSummon:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
 
+                local ownerRoamListenerName = fmt('OWNER_ASSIST_{}', petId)
+                if params.superLink then
+                    mobArg:addListener('ROAM_TICK', ownerRoamListenerName, function(owner)
+                        local petToAssist = GetMobByID(petId)
+                        local assistTarg  = petToAssist and petToAssist:getTarget() or nil
+                        if assistTarg then
+                            owner:updateEnmity(assistTarg)
+                        end
+                    end)
+                end
+
+                -- so they die at the same time
+                -- even without this parameter, if the owner is dead and the pet is roaming, it will die
                 if params.dieWithOwner then
                     local listenerName = fmt('OWNER_DEATH_{}', petId)
                     mobArg:addListener('DEATH', listenerName, function(owner)
@@ -900,14 +938,30 @@ xi.mob.callPets = function(mob, petIds, params)
                 -- make pet assist with a slight delay to allow spawn to complete so animations don't get bugged
                 local ownerID = mobArg:getID()
                 petToSummon:stun(500)
-                petToSummon:addListener('ROAM_TICK', 'ASSIST_OWNER', function(petArg)
+                if petToSummon ~= mobArg:getPet() then
+                    petToSummon:addListener('ROAM_TICK', 'ASSIST_OWNER', function(petArg)
+                        local owner = GetMobByID(ownerID)
+                        local newtarget = owner and owner:getTarget() or nil
+                        if newtarget then
+                            petArg:updateEnmity(newtarget)
+                        elseif owner and owner:isDead() then
+                            petArg:setHP(0)
+                        elseif not petArg:hasFollowTarget() then
+                            petArg:follow(owner, xi.followType.ROAM)
+                        end
+                    end)
+                end
+
+                -- cleanup any listeners related to this pet when it dies
+                -- (:removeListener quietly exits if the listener doesn't exist)
+                petToSummon:addListener('DESPAWN', 'PET_LISTENER_CLEANUP', function(petArg)
                     local owner = GetMobByID(ownerID)
-                    local newtarget = owner and owner:getTarget() or nil
-                    if newtarget then
-                        petArg:updateEnmity(newtarget)
-                    elseif not petArg:hasFollowTarget() then
-                        petArg:follow(owner, xi.followType.ROAM)
+                    if owner then
+                        owner:removeListener(ownerRoamListenerName)
                     end
+
+                    petArg:removeListener('ASSIST_OWNER')
+                    petArg:removeListener('PET_LISTENER_CLEANUP')
                 end)
             end
         end

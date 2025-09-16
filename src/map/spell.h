@@ -227,7 +227,9 @@ enum SPELLFLAG
     SPELLFLAG_NONE           = 0x00,
     SPELLFLAG_HIT_ALL        = 0x01, // Hit all targets in range regardless of party
     SPELLFLAG_WIPE_SHADOWS   = 0x02, // Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    SPELLFLAG_IGNORE_SHADOWS = 0x04  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    SPELLFLAG_IGNORE_SHADOWS = 0x04, // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    SPELLFLAG_NO_START_MSG   = 0x08, // Doesn't emit "<caster> starts casting <spell>"
+    SPELLFLAG_NO_FINISH_MSG  = 0x10, // Doesn't emit finish message when magic state completes
 };
 
 // clang-format off

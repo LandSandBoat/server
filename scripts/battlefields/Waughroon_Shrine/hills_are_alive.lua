@@ -14,15 +14,17 @@ local content = Battlefield:new({
     index            = 12,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.THEMIS_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
-
-    experimental = true,
+    requiredItems    = { xi.item.THEMIS_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED }
 })
 
 content:addEssentialMobs({ 'Tartaruga_Gigante' })
 
 content.loot =
 {
+    {
+        { item = xi.item.GIL, weight = 1000, amount = 32000 }, -- Gil
+    },
+
     {
         { item = xi.item.CLUMP_OF_BLUE_PONDWEED, weight = 1000 }, -- Blue Pondweed
     },
@@ -101,27 +103,6 @@ content.loot =
         { item = xi.item.HI_POTION_P3,   weight = 250 },  -- Hi-potion +3
         { item = xi.item.HI_RERAISER,    weight = 196 },  -- Hi-reraiser
         { item = xi.item.VILE_ELIXIR_P1, weight = 214 },  -- Vile Elixir +1
-    },
-
-    {
-        { item = xi.item.CORAL_FRAGMENT,           weight = 139 }, -- Coral Fragment
-        { item = xi.item.CHUNK_OF_DARKSTEEL_ORE,   weight =  59 }, -- Chunk Of Darksteel Ore
-        { item = xi.item.DEMON_HORN,               weight =  50 }, -- Demon Horn
-        { item = xi.item.EBONY_LOG,                weight = 109 }, -- Ebony Log
-        { item = xi.item.CHUNK_OF_GOLD_ORE,        weight =  69 }, -- Chunk Of Gold Ore
-        { item = xi.item.SLAB_OF_GRANITE,          weight =  99 }, -- Slab Of Granite
-        { item = xi.item.HI_RERAISER,              weight =  79 }, -- Hi-reraiser
-        { item = xi.item.MAHOGANY_LOG,             weight = 129 }, -- Mahogany Log
-        { item = xi.item.CHUNK_OF_MYTHRIL_ORE,     weight = 119 }, -- Chunk Of Mythril Ore
-        { item = xi.item.PHOENIX_FEATHER,          weight =  69 }, -- Phoenix Feather
-        { item = xi.item.PETRIFIED_LOG,            weight = 168 }, -- Petrified Log
-        { item = xi.item.CHUNK_OF_PLATINUM_ORE,    weight = 129 }, -- Chunk Of Platinum Ore
-        { item = xi.item.RAM_HORN,                 weight = 109 }, -- Ram Horn
-        { item = xi.item.SQUARE_OF_RAXA,           weight =  79 }, -- Square Of Raxa
-        { item = xi.item.VILE_ELIXIR,              weight =  69 }, -- Vile Elixir
-        { item = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =  79 }, -- Handful Of Wyvern Scales
-        { item = xi.item.RERAISER,                 weight =  50 }, -- Reraiser
-        { item = xi.item.SPOOL_OF_GOLD_THREAD,     weight =  89 }, -- Spool Of Gold Thread
     },
 
     {

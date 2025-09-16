@@ -36,6 +36,7 @@ zones[xi.zone.ATTOHWA_CHASM] =
         AMBUSHER_ANTLION    = GetFirstID('Ambusher_Antlion'),
         ALASTOR_ANTLION     = GetFirstID('Alastor_Antlion'),
         EXECUTIONER_ANTLION = GetTableOfIDs('Executioner_Antlion'),
+        XOLOTL              = GetFirstID('Xolotl'),
     },
     npc =
     {

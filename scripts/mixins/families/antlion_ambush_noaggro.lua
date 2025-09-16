@@ -10,8 +10,6 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.antlion_ambush_noaggro = function(antlionAmbushNoaggroMob)
-    local pitAmbush = 278
-
     antlionAmbushNoaggroMob:addListener('SPAWN', 'ANTLION_AMBUSH_NOAGGRO_SPAWN', function(mob)
         mob:hideName(true)
         mob:setUntargetable(true)
@@ -19,14 +17,13 @@ g_mixins.families.antlion_ambush_noaggro = function(antlionAmbushNoaggroMob)
     end)
 
     antlionAmbushNoaggroMob:addListener('ENGAGE', 'ANTLION_AMBUSH_NOAGGRO_ENGAGE', function(mob, target)
-        mob:useMobAbility(pitAmbush)
+        mob:useMobAbility(xi.mobSkill.PIT_AMBUSH_1)
     end)
 
     -- Ensures an interupted pit ambush doesn't let the mob stay hidden underground
     antlionAmbushNoaggroMob:addListener('WEAPONSKILL_STATE_EXIT', 'ANTLION_AMBUSH_FINISH', function(mob, skillID)
-        if skillID == pitAmbush then
+        if skillID == xi.mobSkill.PIT_AMBUSH_1 then
             -- ensure name doesn't show up until mobskill completes
-            mob:setAnimationSub(1)
             mob:hideName(false)
             mob:setUntargetable(false)
         end

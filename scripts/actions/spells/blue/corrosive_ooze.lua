@@ -25,6 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
     params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.multiplier = 2.125
     params.azureBonus = 0.5
     params.tMultiplier = 2.0
@@ -38,10 +39,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
 
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
-
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
 
     if resist >= 0.5 then
         target:addStatusEffect(xi.effect.DEFENSE_DOWN, 5, 0, 90 * resist)

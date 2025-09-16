@@ -2474,7 +2474,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Funguar',740,703);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Funguar',740,704);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Funguar',740,705);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Funguar',740,706);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Beetle',741,707); -- check id
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Beetle',741,707);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Beetle',741,708);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Beetle',741,709);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Beetle',741,710);
@@ -2522,6 +2522,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,751);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,752);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,797);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,798);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Adamantoise',754,753);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Adamantoise',754,754);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Adamantoise',754,755);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Apkallu',755,756);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Apkallu',755,757);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Pugil',756,758);
@@ -2550,11 +2553,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,730);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,731);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,746);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lynx',765,790);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,675);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,676);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,677);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,678);
-INSERT INTO `mob_skill_lists` VALUES ('Jug_Lycopodium',766,679);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Citrullus',766,675);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Citrullus',766,677);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Citrullus',766,678);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Citrullus',766,679);
 
 INSERT INTO `mob_skill_lists` VALUES ('Lamina-Hyakinthos',767,2210);
 INSERT INTO `mob_skill_lists` VALUES ('Corse_NM_staff',768,530);
@@ -4161,7 +4163,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,998);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,999);
 INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
 
--- Next ID : 2060
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,334);
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,335);
+
+-- Next ID : 2061
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -30,6 +30,7 @@ g_mixins.families.zdei = function(zdeiMob)
 
     zdeiMob:addListener('SPAWN', 'ZDEI_SPAWN', function(mob)
         mob:setAnimationSub(0)
+        mob:addMod(xi.mod.MDEF, 20) -- Zdei have innate +20 MDEF
 
         -- Store the rotation offset for use in onPath
         local poolId = mob:getPool()

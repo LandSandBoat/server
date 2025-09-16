@@ -80,6 +80,11 @@ uint32 CLuaPetSkill::getPrimaryTargetID()
     return m_PLuaPetSkill->getPrimaryTargetID();
 }
 
+void CLuaPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    return m_PLuaPetSkill->setFinalAnimationSub(newAnimationSub);
+}
+
 uint16 CLuaPetSkill::getMsg()
 {
     return m_PLuaPetSkill->getMsg();
@@ -127,6 +132,7 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("getID", CLuaPetSkill::getID);
     SOL_REGISTER("getTotalTargets", CLuaPetSkill::getTotalTargets);
     SOL_REGISTER("getPrimaryTargetID", CLuaPetSkill::getPrimaryTargetID);
+    SOL_REGISTER("setFinalAnimationSub", CLuaPetSkill::setFinalAnimationSub);
     SOL_REGISTER("getTP", CLuaPetSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaPetSkill::getMobHPP);
 }

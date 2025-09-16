@@ -36,6 +36,7 @@ zones[xi.zone.BIBIKI_BAY] =
         FIND_NOTHING                  = 7298, -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7373, -- It appears your chocobo found this item with ease.
         CLUNK_CLUNK_WHIRL_WHIZZ       = 7388, -- <Clunk-clunk>... <Whirl-whizz>...!
+        IT_WAS_A_TRAP                 = 7457, -- It was a trap!
         YOU_ARE_NOT_ALONE             = 7458, -- You are not alone!
         NO_BILLET                     = 7500, -- You were refused passage for failing to present <item>!
         HAVE_BILLET                   = 7505, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
@@ -51,6 +52,7 @@ zones[xi.zone.BIBIKI_BAY] =
     mob =
     {
         INTULO     = GetFirstID('Intulo'),
+        PEERIFOOL  = GetFirstID('Peerifool'),
         SERRA      = GetFirstID('Serra'),
         SPLACKNUCK = GetFirstID('Splacknuck'),
     },

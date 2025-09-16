@@ -57,7 +57,8 @@ enum PETID
     PETID_CHOCOBO            = 74,
     PETID_LUOPAN             = 75,
     PETID_SIREN              = 76,
-    MAX_PETID                = 77,
+    // BST Jug pets exist in the gaps of this enum
+    MAX_PETID = 78,
 };
 
 struct Pet_t

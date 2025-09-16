@@ -11,20 +11,13 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 4
-    local params = {}
-    params.dmg = basedmg
-    params.multiplier = 5
-    params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.hasMultipleTargetReduction = false
-    params.diff = 0
-    params.bonus = 1.0
 
     -- Calculate raw damage
     local dmg = basedmg
     -- Softcaps at 32, should always do at least 1
     dmg = utils.clamp(dmg, 1, 32)
     -- Get resist multiplier (1x if no resist)
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.ENFEEBLING_MAGIC, 0, xi.element.LIGHT, xi.mod.INT, 0, 0)
     -- Get the resisted damage
     dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)

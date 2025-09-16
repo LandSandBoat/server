@@ -369,29 +369,27 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         math.random() <= xi.weaponskills.getHitRate(player, target, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
-        local spell  = GetSpell(xi.magic.spell.GRAVITY)
-        local params =
-        {
-            diff      = 0,
-            skillType = player:getWeaponSkillType(xi.slot.MAIN),
-            bonus     = 50 - target:getMod(xi.mod.GRAVITYRES),
-        }
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.WIND, xi.mod.INT, xi.effect.WEIGHT, 0)
 
-        local resistRate = applyResistanceEffect(player, target, spell, params)
-        if resistRate > 0.25 then
-            target:delStatusEffectSilent(xi.effect.WEIGHT)
-            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)
+        if
+            not xi.combat.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and -- Check immunity.
+            not xi.combat.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
+            not xi.combat.statusEffect.isEffectNullified(target, xi.effect.WEIGHT) and               -- Check conflicting effect.
+            resistRate > 0.25 and                                                                    -- Check actual resistance.
+            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)                         -- Check effect power.
+        then
+            ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
 
-        ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
         action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
         action:speceffect(target:getID(), 2)
 
         return xi.effect.WEIGHT
     else
         ability:setMsg(xi.msg.basic.JA_MISS)
+
         return 0
     end
 end
@@ -406,15 +404,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         math.random() <= xi.weaponskills.getHitRate(player, target, 100) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
-        local hitType = 3
-        local spell   = GetSpell(xi.magic.spell.STUN)
-        local params  =
-        {
-            diff      = 0,
-            skillType = player:getWeaponSkillType(xi.slot.MAIN),
-            bonus     = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT),
-        }
-
+        local hitType      = 3
         local weaponDamage = player:getWeaponDmg()
         local weaponType   = player:getWeaponSkillType(xi.slot.MAIN)
         if player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
@@ -428,22 +418,32 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
         local dmg                  = baseDmg * pdif
 
-        if applyResistanceEffect(player, target, spell, params) > 0.25 then
+        dmg = utils.stoneskin(target, dmg)
+        target:takeDamage(dmg, player, xi.attackType.PHYSICAL, player:getWeaponDamageType(xi.slot.MAIN))
+        target:updateEnmityFromDamage(player, dmg)
+
+        -- Effect
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
+
+        if
+            not xi.combat.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.
+            not xi.combat.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and          -- check resistance trigger.
+            not xi.combat.statusEffect.isEffectNullified(target, xi.effect.STUN) and                  -- check conflicting effect.
+            resistRate > 0.25                                                                         -- Check actual resistance.
+        then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
 
-        dmg = utils.stoneskin(target, dmg)
-        target:takeDamage(dmg, player, xi.attackType.PHYSICAL, player:getWeaponDamageType(xi.slot.MAIN))
-        target:updateEnmityFromDamage(player, dmg)
-
+        -- Animations.
         action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
         action:speceffect(target:getID(), hitType)
 
         return dmg
     else
         ability:setMsg(xi.msg.basic.JA_MISS)
+
         return 0
     end
 end
@@ -451,8 +451,7 @@ end
 xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, ability)
     local flourishMerits = player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT)
     local availableMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
-
-    local power = utils.clamp(availableMoves, 0, 3)
+    local power          = utils.clamp(availableMoves, 0, 3)
 
     player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
     setFinishingMoves(player, availableMoves - power)

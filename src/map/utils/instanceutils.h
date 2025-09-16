@@ -19,36 +19,33 @@
 ===========================================================================
 */
 
-#ifndef _INSTANCEUTILS_H
-#define _INSTANCEUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/database.h"
 #include "common/ipp.h"
-#include "common/logging.h"
-#include "common/sql.h"
 
 class CInstanceLoader;
 class CCharEntity;
 
 struct InstanceData_t
 {
-    uint16      id;
-    std::string instance_name;
-    uint16      instance_zone;
-    std::string instance_zone_name;
-    uint16      entrance_zone;
-    std::string entrance_zone_name;
-    uint16      time_limit;
-    float       start_x;
-    float       start_y;
-    float       start_z;
-    uint16      start_rot;
-    uint16      music_day;
-    uint16      music_night;
-    uint16      battlesolo;
-    uint16      battlemulti;
-    std::string filename;
+    uint16                id;
+    std::string           instance_name;
+    uint16                instance_zone;
+    std::string           instance_zone_name;
+    uint16                entrance_zone;
+    std::string           entrance_zone_name;
+    uint16                time_limit;
+    float                 start_x;
+    float                 start_y;
+    float                 start_z;
+    uint16                start_rot;
+    std::optional<uint16> music_day{ std::nullopt };
+    std::optional<uint16> music_night{ std::nullopt };
+    std::optional<uint16> battlesolo{ std::nullopt };
+    std::optional<uint16> battlemulti{ std::nullopt };
+    std::string           filename;
 
     InstanceData_t()
     : id(0)
@@ -75,5 +72,3 @@ namespace instanceutils
     auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
     bool IsValidInstanceID(uint32 instanceid);
 }; // namespace instanceutils
-
-#endif

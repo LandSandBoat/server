@@ -24,7 +24,6 @@
 #include "common/logging.h"
 #include "common/mmo.h"
 #include "common/settings.h"
-#include "common/sql.h"
 
 #include <algorithm>
 

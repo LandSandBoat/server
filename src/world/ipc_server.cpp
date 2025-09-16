@@ -426,7 +426,17 @@ void IPCServer::handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMes
 {
     TracyZoneScoped;
 
-    rerouteMessageToCharName(message.recipientName, message);
+    const auto charIPP = getIPPForCharName(message.recipientName);
+    if (!charIPP)
+    {
+        sendMessage(ipp, ipc::MessageStandard{
+                             .recipientId = message.senderId,
+                             .message     = MsgStd::TellNotReceivedOffline,
+                         });
+        return;
+    }
+
+    sendMessage(charIPP.value(), message);
 }
 
 void IPCServer::handleMessage_ChatMessageParty(const IPP& ipp, const ipc::ChatMessageParty& message)

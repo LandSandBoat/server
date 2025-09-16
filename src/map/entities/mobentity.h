@@ -135,6 +135,7 @@ public:
     void              TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
+    bool ShouldForceLink();
 
     bool CanDropGil();    // mob has gil to drop
     bool CanStealGil();   // can steal gil from mob

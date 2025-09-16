@@ -12,7 +12,7 @@ g_mixins.families.gear = function(gearMob)
     end)
 
     gearMob:addListener('COMBAT_TICK', 'GEARS_CTICK', function(mob)
-        -- Tripple Gears only
+        -- Triple Gears only
         if mob:getFamily() == 120 or mob:getFamily() == 304 then
             local mobHPP = mob:getHPP()
             local tripleGear = 0

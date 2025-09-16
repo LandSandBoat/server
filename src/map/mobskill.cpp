@@ -228,6 +228,16 @@ uint32 CMobSkill::getPrimaryTargetID() const
     return m_primaryTargetID;
 }
 
+void CMobSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    m_FinalAnimationSub = newAnimationSub;
+}
+
+std::optional<uint8> CMobSkill::getFinalAnimationSub()
+{
+    return m_FinalAnimationSub;
+}
+
 uint16 CMobSkill::getMsg() const
 {
     return m_Message;

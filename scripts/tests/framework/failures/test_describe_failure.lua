@@ -1,0 +1,18 @@
+-- This file is used to test framework error handling behavior
+-- It is commented out by default to avoid running during normal test execution
+-- Uncomment to verify that the test framework properly handles describe block failures
+
+-- describe('Test Describe Failure', function()
+--     -- This will cause an error during describe block execution
+--     local result = nil + 5 -- Intentional runtime error: attempt to perform arithmetic on nil
+--
+--     it('should never run', function()
+--         assert(false, 'This test should never be reached')
+--     end)
+-- end)
+--
+-- describe('Another Suite', function()
+--     it('should also not run', function()
+--         assert(false, "This shouldn't run either due to previous describe failure")
+--     end)
+-- end)

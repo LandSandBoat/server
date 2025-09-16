@@ -44,10 +44,10 @@ enum CHAT_MESSAGE_TYPE : uint8
     MESSAGE_EMOTION   = 8,
     // 9 / 10 / 11 = Does not work / nothing
     MESSAGE_GMPROMPT      = 12, // Menu prompt from GM
-    MESSAGE_NS_SAY        = 13, // Same as MESSAGESAY but has no speaker object displayed
-    MESSAGE_NS_SHOUT      = 14, // Same as MESSAGESHOUT but has no speaker object displayed
-    MESSAGE_NS_PARTY      = 15, // Same as MESSAGEPARTY but has no speaker object displayed
-    MESSAGE_NS_LINKSHELL  = 16, // Same as MESSAGELINKSHELL but has no speaker object displayed
+    MESSAGE_NS_SAY        = 13, // NS = "No speaker object displayed", otherwise same as MESSAGE_SAY
+    MESSAGE_NS_SHOUT      = 14, // NS = "No speaker object displayed", otherwise same as MESSAGE_SHOUT
+    MESSAGE_NS_PARTY      = 15, // NS = "No speaker object displayed", otherwise same as MESSAGE_PARTY
+    MESSAGE_NS_LINKSHELL  = 16, // NS = "No speaker object displayed", otherwise same as MESSAGE_LINKSHELL
     MESSAGE_UNKNOWN_17    = 17, // 17 through 25 appear to repeat the effects of other values
     MESSAGE_UNKNOWN_18    = 18,
     MESSAGE_UNKNOWN_19    = 19,
@@ -59,7 +59,7 @@ enum CHAT_MESSAGE_TYPE : uint8
     MESSAGE_UNKNOWN_25    = 25,
     MESSAGE_YELL          = 26,
     MESSAGE_LINKSHELL2    = 27, // Second LS color...Default is Green
-    MESSAGE_NS_LINKSHELL2 = 28, // Same as LINKSHELL2 but has but has no speaker object displayed
+    MESSAGE_NS_LINKSHELL2 = 28, // NS = "No speaker object displayed", otherwise same as MESSAGE_LINKSHELL2
     MESSAGE_SYSTEM_3      = 29, // "Basic system messages" in config menu. Yellow by default.
     MESSAGE_LINKSHELL3    = 30, // Yes really, it looks like a 3rd LS may have been planned at some point.
     MESSAGE_NS_LINKSHELL3 = 31, // (assumed, as it follows pattern and color)

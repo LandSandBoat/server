@@ -41,27 +41,13 @@ g_mixins.families.aern = function(aernMob)
                 mob:setLocalVar('aernElementalCount', eleCount + 1)
 
                 -- Add death listener to elemental when it spawns
-                mob:timer(1000, function(mobArg)
-                    petDeath(mobArg)
-                end)
+                petDeath(mob)
             end
         elseif mainJob == xi.job.BST or mainJob == xi.job.DRG then
-            mob:entityAnimationPacket(xi.animationString.CAST_SUMMONER_START)
-            mob:setAutoAttackEnabled(false)
-            mob:setMobAbilityEnabled(false)
-            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:timer(3000, function(mobArg)
-                mobArg:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
-                mobArg:setAutoAttackEnabled(true)
-                mobArg:setMobAbilityEnabled(true)
-                mobArg:setMobMod(xi.mobMod.NO_MOVE, 0)
-                xi.pet.spawnPet(mobArg)
+            xi.mob.callPets(mob, nil, { inactiveTime = 3000, ignoreBusy = true })
 
-                -- Add death listener to pet when it spawns
-                mobArg:timer(1000, function(masterMob)
-                    petDeath(masterMob)
-                end)
-            end)
+            -- Add death listener to pet when it spawns
+            petDeath(mob)
         end
     end
 

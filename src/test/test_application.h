@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "in_memory_sink.h"
 
 #ifndef _WIN32
 #include <sys/resource.h>
@@ -34,4 +35,9 @@ public:
     ~TestApplication() override;
 
     auto createEngine() -> std::unique_ptr<Engine> override;
+    void run() override;
+    void captureLogger() const;
+
+private:
+    std::shared_ptr<InMemorySink> sink_;
 };

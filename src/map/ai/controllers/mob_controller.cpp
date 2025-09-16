@@ -227,6 +227,14 @@ void CMobController::TryLink()
                 continue;
             }
 
+            // Handle the case where a mob doesn't link with its own family but has a sublink
+            // This is needed because the sublink will cause like family members to be in the same
+            // party so that they are linked with sublinked families.
+            if (!PMob->ShouldForceLink() && !PMob->m_Link && PMob->m_Family == PPartyMember->m_Family)
+            {
+                continue;
+            }
+
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
             {
                 PPartyMember->PAI->Engage(PTarget->targid);

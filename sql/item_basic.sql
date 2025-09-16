@@ -4874,7 +4874,7 @@ INSERT INTO `item_basic` VALUES (5102,840,'scroll_of_foil','foil',1,1676,@WHITE_
 INSERT INTO `item_basic` VALUES (5103,476,'scroll_of_crusade','crusade',1,1676,@WHITE_MAGIC,0,0);
 INSERT INTO `item_basic` VALUES (5104,845,'scroll_of_flurry','flurry',1,1676,@WHITE_MAGIC,0,3300); -- DAT missing SCROLL flag
 INSERT INTO `item_basic` VALUES (5105,846,'scroll_of_flurry_ii','flurry_ii',1,34444,@WHITE_MAGIC,0,43); -- DAT missing SCROLL flag
-INSERT INTO `item_basic` VALUES (5106,0,'scroll_of_inundation','inundation',1,34444,@WHITE_MAGIC,0,0);
+INSERT INTO `item_basic` VALUES (5106,879,'scroll_of_inundation','inundation',1,34444,@WHITE_MAGIC,0,0);
 INSERT INTO `item_basic` VALUES (5109,0,'frayed_sack_of_abundance_+1','frayed_sack_(a1)',99,30296,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (5110,0,'frayed_sack_of_abundance_+2','frayed_sack_(a2)',99,30296,@NONE,0,0);
 INSERT INTO `item_basic` VALUES (5111,0,'frayed_sack_of_mortality_+1','frayed_sack_(m1)',99,30296,@NONE,1,0);

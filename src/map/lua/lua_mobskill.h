@@ -55,6 +55,7 @@ public:
     auto   getTargets() -> sol::table;
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();
+    void   setFinalAnimationSub(uint8 newAnimationSub);
 
     bool operator==(const CLuaMobSkill& other) const
     {
