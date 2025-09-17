@@ -24,6 +24,7 @@
 // clang-format off
 #include "ability.h"
 #include "lua_ability.h"
+#include "entities/lua_char_entity.h"
 SOL_BIND_DEF(CLuaAbility, CAbility);
 
 #include "packets/action.h"
@@ -48,7 +49,7 @@ SOL_BIND_DEF(CLuaBaseEntity, CBaseEntity);
 #include "entities/trustentity.h"
 SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CBattleEntity);
 SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CNpcEntity);
-SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CCharEntity);
+SOL_BIND_DEF(CLuaCharEntity, CCharEntity);
 SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CMobEntity);
 SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CAutomatonEntity);
 SOL_BIND_DEF_SUB(CLuaBaseEntity, CBaseEntity, CFellowEntity);

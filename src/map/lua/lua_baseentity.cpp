@@ -8906,26 +8906,6 @@ void CLuaBaseEntity::unseenKeyItem(const KeyItem keyItemID) const
 }
 
 /************************************************************************
- *  Function: addExp()
- *  Purpose : Adds a set amount of XP to the player
- *  Example : player:addExp(math.random(500,1000))
- *  Notes   : Used in Dynamis Pages, etc
- ************************************************************************/
-
-void CLuaBaseEntity::addExp(uint32 exp)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    charutils::AddExperiencePoints(false, PChar, m_PBaseEntity, exp);
-}
-
-/************************************************************************
  *  Function: addCapacityPoints()
  *  Purpose : Adds a set amount of Capacity Points to the player
  *  Example : player:addCapacity(1000)
@@ -8942,64 +8922,6 @@ void CLuaBaseEntity::addCapacityPoints(uint32 capacity)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     charutils::AddCapacityPoints(PChar, m_PBaseEntity, capacity);
-}
-
-/************************************************************************
- *  Function: delExp()
- *  Purpose : Takes XP from a player
- *  Example : player:delExp(amount)
- *  Notes   : Used only in GM command takexp.lua
- ************************************************************************/
-
-void CLuaBaseEntity::delExp(uint32 exp)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    charutils::DelExperiencePoints(PChar, 0, std::clamp<uint16>(exp, 0, 65535));
-}
-
-/************************************************************************
- *  Function: getMerit()
- *  Purpose : Checks for the existence of a merit and returns the value
- *  Example : caster:getMerit(xi.merit.DOTON_EFFECT)
- *  Notes   :
- ************************************************************************/
-
-int32 CLuaBaseEntity::getMerit(uint16 merit)
-{
-    if (m_PBaseEntity->objtype == TYPE_PC)
-    {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-        return PChar->PMeritPoints->GetMeritValue(static_cast<MERIT_TYPE>(merit), PChar);
-    }
-
-    return 0;
-}
-
-/************************************************************************
- *  Function: getMeritCount()
- *  Purpose : Returns the current value of merits a player has
- *  Example : player:getMeritCount()
- *  Notes   :
- ************************************************************************/
-
-uint8 CLuaBaseEntity::getMeritCount()
-{
-    if (m_PBaseEntity->objtype == TYPE_PC)
-    {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-        return PChar->PMeritPoints->GetMeritPoints();
-    }
-
-    return 0;
 }
 
 /************************************************************************
@@ -19330,12 +19252,19 @@ void CLuaBaseEntity::clearPacketMods()
     }
 }
 
+// This only works when being passed a player!
+void CLuaBaseEntity::doesSomething(CLuaCharEntity* PChar) const
+{
+    ShowInfo("Hello world.");
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
 {
     SOL_USERTYPE("CBaseEntity", CLuaBaseEntity);
 
+    SOL_REGISTER("doesSomething", CLuaBaseEntity::doesSomething);
     // Messaging System
     SOL_REGISTER("showText", CLuaBaseEntity::showText);
     SOL_REGISTER("messageText", CLuaBaseEntity::messageText);
@@ -19703,10 +19632,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("unseenKeyItem", CLuaBaseEntity::unseenKeyItem);
 
     // Player Points
-    SOL_REGISTER("addExp", CLuaBaseEntity::addExp);
-    SOL_REGISTER("delExp", CLuaBaseEntity::delExp);
-    SOL_REGISTER("getMerit", CLuaBaseEntity::getMerit);
-    SOL_REGISTER("getMeritCount", CLuaBaseEntity::getMeritCount);
     SOL_REGISTER("setMerits", CLuaBaseEntity::setMerits);
 
     SOL_REGISTER("getSpentJobPoints", CLuaBaseEntity::getSpentJobPoints);

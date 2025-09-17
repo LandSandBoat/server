@@ -1,4 +1,6 @@
 set(LUA_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/entities/lua_char_entity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/entities/lua_char_entity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.cpp

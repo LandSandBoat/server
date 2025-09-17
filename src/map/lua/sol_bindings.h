@@ -72,6 +72,10 @@ class CLuaAction;
 struct action_t;
 SOL_BIND_DEC(CLuaAction, action_t);
 
+class CLuaCharEntity;
+class CCharEntity;
+SOL_BIND_DEC(CLuaCharEntity, CCharEntity);
+
 class CLuaAttack;
 class CAttack;
 SOL_BIND_DEC(CLuaAttack, CAttack);
@@ -82,7 +86,6 @@ SOL_BIND_DEC(CLuaBaseEntity, CBaseEntity);
 
 class CBattleEntity;
 class CNpcEntity;
-class CCharEntity;
 class CMobEntity;
 class CAutomatonEntity;
 class CFellowEntity;
@@ -90,7 +93,6 @@ class CPetEntity;
 class CTrustEntity;
 SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CBattleEntity);
 SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CNpcEntity);
-SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CCharEntity);
 SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CMobEntity);
 SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CAutomatonEntity);
 SOL_BIND_DEC_SUB(CLuaBaseEntity, CBaseEntity, CFellowEntity);

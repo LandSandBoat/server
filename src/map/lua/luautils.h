@@ -237,7 +237,7 @@ namespace luautils
 
     auto SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> CBaseEntity*; // Spawn Mob By Mob Id - NMs, BCNM...
     void DespawnMob(uint32 mobid, sol::object const& arg2);                                        // Despawn (Fade Out) Mob By Id
-    auto GetPlayerByName(std::string const& name) -> CBaseEntity*;
+    auto GetPlayerByName(std::string const& name) -> CCharEntity*;
     auto GetPlayerByID(uint32 pid) -> CBaseEntity*;
     bool PlayerHasValidSession(uint32 playerId);
     void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot);

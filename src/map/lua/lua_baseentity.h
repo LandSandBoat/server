@@ -446,11 +446,7 @@ public:
     void unseenKeyItem(KeyItem keyItemID) const; // Attempt to remove the keyitem from the seen key item collection, only works on logout
 
     // Player Points
-    void  addExp(uint32 exp);
     void  addCapacityPoints(uint32 capacity);
-    void  delExp(uint32 exp);
-    int32 getMerit(uint16 merit);
-    uint8 getMeritCount();
     void  setMerits(uint8 numPoints);
 
     uint16 getSpentJobPoints();
@@ -958,6 +954,7 @@ public:
 
     void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
     void clearPacketMods();
+    void doesSomething(CLuaCharEntity* PChar) const;
 
     bool operator==(const CLuaBaseEntity& other) const
     {

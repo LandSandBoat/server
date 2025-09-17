@@ -74,6 +74,7 @@
 #include "battlefield.h"
 #include "conquest_system.h"
 #include "daily_system.h"
+#include "entities/lua_char_entity.h"
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"
@@ -356,6 +357,7 @@ namespace luautils
         CLuaTreasurePool::Register();
         CLuaZone::Register();
         CLuaItem::Register();
+        CLuaCharEntity::Register();
 
         // Load globals
         // Truly global files first
@@ -1805,7 +1807,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    CBaseEntity* GetPlayerByName(std::string const& name)
+    CCharEntity* GetPlayerByName(std::string const& name)
     {
         TracyZoneScoped;
 
