@@ -13,6 +13,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)
+
+    mob:setMod(xi.mobMod.CURE_POTENCY_RCVD, 100) -- Double healing recieved.
 end
 
 entity.onMobSpawn = function(mob)
