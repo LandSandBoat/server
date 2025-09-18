@@ -5,7 +5,6 @@ add_subdirectory(items)
 add_subdirectory(los)
 add_subdirectory(lua)
 add_subdirectory(packets)
-add_subdirectory(packets/c2s)
 add_subdirectory(utils)
 
 set(APP_SOURCES
@@ -21,7 +20,6 @@ set(SOURCES
     ${LOS_SOURCES}
     ${LUA_SOURCES}
     ${PACKET_SOURCES}
-    ${PACKET_C2S_SOURCES}
     ${UTIL_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.h

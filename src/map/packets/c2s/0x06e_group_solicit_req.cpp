@@ -28,6 +28,7 @@
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/party_invite.h"
+#include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "status_effect_container.h"
 #include "utils/blacklistutils.h"
 #include "utils/jailutils.h"
@@ -119,7 +120,13 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     PInvitee->InvitePending.id     = PInviter->id;
                     PInvitee->InvitePending.targid = PInviter->targid;
 
-                    PInvitee->pushPacket<CPartyInvitePacket>(inviteeCharId, inviteeTargId, PInviter->getName(), INVITE_PARTY);
+                    PInvitee->queuePacket(GP_SERV_COMMAND_GROUP_SOLICIT_REQ{
+                        .UniqueNo = inviteeCharId,
+                        .ActIndex = inviteeTargId,
+                        .AnonFlag = PInviter->isAnon() ? static_cast<uint8_t>(1) : static_cast<uint8_t>(0),
+                        .Kind     = INVITE_PARTY,
+                        .sName    = {},
+                    });
 
                     ShowDebug("Sent party invite packet to %s", PInvitee->getName());
 
@@ -205,8 +212,13 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     PInvitee->InvitePending.id     = PInviter->id;
                     PInvitee->InvitePending.targid = PInviter->targid;
 
-                    PInvitee->pushPacket<CPartyInvitePacket>(inviteeCharId, inviteeTargId, PInviter->getName(), INVITE_ALLIANCE);
-
+                    PInvitee->queuePacket(GP_SERV_COMMAND_GROUP_SOLICIT_REQ{
+                        .UniqueNo = inviteeCharId,
+                        .ActIndex = inviteeTargId,
+                        .AnonFlag = PInviter->isAnon() ? static_cast<uint8_t>(1) : static_cast<uint8_t>(0),
+                        .Kind     = INVITE_ALLIANCE,
+                        .sName    = {},
+                    });
                     ShowDebug("Sent party invite packet to %s", PInvitee->getName());
                 }
                 else

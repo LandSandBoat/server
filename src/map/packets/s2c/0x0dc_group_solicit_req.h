@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,17 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYINVITEPACKET_H
-#define _CPARTYINVITEPACKET_H
+#pragma once
+#include "base.h"
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-
-enum INVITETYPE
-{
-    INVITE_PARTY    = 0,
-    INVITE_ALLIANCE = 5,
-};
-
-#endif
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DC
+// This packet is sent by the server when the client is being invited to a party or alliance.
+GP_SERV_PACKET(GP_SERV_COMMAND_GROUP_SOLICIT_REQ, 0x0DC,
+               uint32_t UniqueNo;
+               uint16_t ActIndex;
+               uint8_t  AnonFlag;  // Flag set if the inviter is anon. (/anon)
+               uint8_t  Kind;      // The type of invite.
+               uint8_t  sName[16]; // The name of the player who invited the client
+               uint16_t RaceNo;    // The race id of the player who invited the client.
+);

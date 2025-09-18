@@ -48,6 +48,7 @@
 
 #include "items/item_linkshell.h"
 #include "packets/c2s/0x0b7_assist_channel.h"
+#include "packets/s2c/0x0dc_group_solicit_req.h"
 
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
@@ -474,7 +475,11 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
         PInvitee->InvitePending.id     = message.inviterId;
         PInvitee->InvitePending.targid = message.inviterTargId;
 
-        PInvitee->pushPacket(std::make_unique<CPartyInvitePacket>(message.inviterId, message.inviterTargId, message.inviterName, message.inviteType));
+        PInvitee->queuePacket(GP_SERV_COMMAND_GROUP_SOLICIT_REQ{
+            .UniqueNo = message.inviterId,
+            .ActIndex = message.inviterTargId,
+            .Kind     = static_cast<uint8>(message.inviteType),
+        });
     }
 }
 

@@ -40,6 +40,7 @@
 
 #include "automatonentity.h"
 #include "battleentity.h"
+#include "packets/s2c/base.h"
 #include "petentity.h"
 
 #include "utils/fishingutils.h"
@@ -436,6 +437,20 @@ public:
     auto getPacketList() const -> const std::deque<std::unique_ptr<CBasicPacket>>&;
     auto getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>; // Return a COPY of packet list
     void clearPacketList();
+
+    template <typename T>
+    void queuePacket(T pkt)
+    {
+        auto basicPacket = std::make_unique<CBasicPacket>();
+
+        basicPacket->setType(pkt.getId());
+        basicPacket->setSize(pkt.getSize());
+
+        // Add the packet data after the header
+        basicPacket->ref<uint8_t*>(sizeof(GP_SERV_HEADER)) = reinterpret_cast<uint8_t*>(&pkt);
+
+        pushPacket(std::move(basicPacket));
+    }
 
     template <typename T, typename... Args>
     void pushPacket(Args&&... args)

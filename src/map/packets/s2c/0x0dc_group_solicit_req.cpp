@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,11 @@
 ===========================================================================
 */
 
-#include <cstring>
+#include "0x0dc_group_solicit_req.h"
 
-#include "party_invite.h"
-
-#include "entities/charentity.h"
-
-CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, const std::string& inviterName, INVITETYPE InviteType)
+auto GP_SERV_COMMAND_GROUP_SOLICIT_REQ::getSize() const -> uint16_t
 {
-    this->setType(0xDC);
-    this->setSize(0x20);
-
-    ref<uint32>(0x04) = id;
-    ref<uint16>(0x08) = targid;
-
-    ref<uint8>(0x0B) = InviteType;
-
-    std::memcpy(buffer_.data() + 0x0C, inviterName.c_str(), inviterName.size());
+    // Note: XiPackets claim 32 bytes, but the struct is only 30 bytes.
+    // Might be missing 2 bytes of padding at the end or just relying on FFXI usual 4 bytes alignment?
+    return sizeof(*this);
 }
