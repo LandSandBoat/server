@@ -55,6 +55,10 @@ public:
     virtual void OnCharZoneIn(CCharEntity* PChar) {};
     virtual void OnCharZoneOut(CCharEntity* PChar) {};
     virtual void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet) {};
+    virtual auto OnIncomingPacket(MapSession* session, CCharEntity* PChar, CBasicPacket& packet) -> bool
+    {
+        return false;
+    };
 
     template <typename T>
     static T* Register()
@@ -80,6 +84,7 @@ namespace moduleutils
     void OnCharZoneIn(CCharEntity* PChar);
     void OnCharZoneOut(CCharEntity* PChar);
     void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet);
+    auto OnIncomingPacket(MapSession* PSession, CCharEntity* PChar, CBasicPacket& packet) -> bool;
 
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd

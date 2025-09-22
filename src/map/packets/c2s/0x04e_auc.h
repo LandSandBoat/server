@@ -100,6 +100,7 @@ struct GP_AUC_PARAM
 
 enum class GP_CLI_COMMAND_AUC_COMMAND : uint8_t
 {
+    Open      = 0x02, // Only in S2C responses
     AskCommit = 0x04, // Used when placing an item up for sale; before confirmation.
     Info      = 0x05, // Used when opening the 'Sales Status' window.
     WorkCheck = 0x0A, // Used when opening the auction house.
@@ -112,10 +113,10 @@ enum class GP_CLI_COMMAND_AUC_COMMAND : uint8_t
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x004E
 // This packet is sent by the client when interacting with the auction house system.
 GP_CLI_PACKET(GP_CLI_COMMAND_AUC,
-              uint8_t      Command;      // PS2: Command
-              int8_t       AucWorkIndex; // PS2: AucWorkIndex
-              int8_t       Result;       // PS2: Result
-              int8_t       ResultStatus; // PS2: ResultStatus
-              GP_AUC_PARAM Param;        // PS2: Param
-              GP_AUC_BOX   Parcel;       // PS2: Parcel
+              GP_CLI_COMMAND_AUC_COMMAND Command;      // PS2: Command
+              int8_t                     AucWorkIndex; // PS2: AucWorkIndex
+              int8_t                     Result;       // PS2: Result
+              int8_t                     ResultStatus; // PS2: ResultStatus
+              GP_AUC_PARAM               Param;        // PS2: Param
+              GP_AUC_BOX                 Parcel;       // PS2: Parcel
 );

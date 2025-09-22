@@ -34,7 +34,7 @@ class CCharEntity;
 class CAuctionHousePacket : public CBasicPacket
 {
 public:
-    CAuctionHousePacket(uint8 action);                                                      // Send the auction menu
+    CAuctionHousePacket(GP_CLI_COMMAND_AUC_COMMAND action);                                 // Send the auction menu
     CAuctionHousePacket(GP_CLI_COMMAND_AUC_COMMAND action, uint8 slot, CCharEntity* PChar); // Send the list of items sold by a character
     CAuctionHousePacket(GP_CLI_COMMAND_AUC_COMMAND action, uint8 message, uint16 itemid, uint32 price, uint8 quantity, uint8 stacksize);
     CAuctionHousePacket(GP_CLI_COMMAND_AUC_COMMAND action, uint8 message, CCharEntity* PChar, uint8 slot, bool keepItem);

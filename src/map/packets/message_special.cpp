@@ -57,7 +57,6 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
     packet->num[3] = param3;
 
     packet->ActIndex = PEntity->targid;
-    packet->MesNum   = messageID;
 
     packet->Type = 0; // Old behavior is hardcoded to zero
     packet->Flag = 0; // Old behavior is hardcoded to zero
@@ -73,4 +72,6 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
     {
         messageID += 0x8000;
     }
+
+    packet->MesNum = messageID;
 }

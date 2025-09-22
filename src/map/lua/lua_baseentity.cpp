@@ -2500,7 +2500,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
             PChar->pushPacket<CShopItemsPacket>(PChar);
             break;
         case 3:
-            PChar->pushPacket<CAuctionHousePacket>(2);
+            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Open);
             break;
         default:
             ShowDebug("Menu %i not implemented, yet.", menu);

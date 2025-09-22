@@ -106,6 +106,21 @@ namespace moduleutils
         }
     }
 
+    auto OnIncomingPacket(MapSession* PSession, CCharEntity* PChar, CBasicPacket& packet) -> bool
+    {
+        TracyZoneScoped;
+
+        for (auto* module : cppModules())
+        {
+            if (module->OnIncomingPacket(PSession, PChar, packet))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     struct Override
     {
         std::string              filename;
