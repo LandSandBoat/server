@@ -9,6 +9,26 @@ local ID = zones[xi.zone.RABAO]
 ---@type TNpcEntity
 local entity = {}
 
+local rewards =
+{
+    xi.item.RED_ROCK,
+    xi.item.BLUE_ROCK,
+    xi.item.YELLOW_ROCK,
+    xi.item.GREEN_ROCK,
+    xi.item.TRANSLUCENT_ROCK,
+    xi.item.PURPLE_ROCK,
+    xi.item.BLACK_ROCK,
+    xi.item.WHITE_ROCK,
+    xi.item.FIRE_CLUSTER,
+    xi.item.ICE_CLUSTER,
+    xi.item.WIND_CLUSTER,
+    xi.item.EARTH_CLUSTER,
+    xi.item.LIGHTNING_CLUSTER,
+    xi.item.WATER_CLUSTER,
+    xi.item.LIGHT_CLUSTER,
+    xi.item.DARK_CLUSTER
+}
+
 entity.onSpawn = function(npc)
     npc:setLocalVar('[LuckyRoll]Rabao', math.random (150, 250)) -- ~observed range from retail
 end
@@ -23,7 +43,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.LUCKY_ROLL_GAMEOVER)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
@@ -50,10 +69,10 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             if newTotal == 400 then
                 player:showText(npc, ID.text.LUCKY_ROLL_EXACT)
-                npcUtil.giveItem(player, math.random(4104, 4111))
-            elseif (newTotal == 401 or newTotal == 402) then
+                npcUtil.giveItem(player, rewards[math.random(10, 16)])
+            elseif newTotal <= 402 then
                 player:showText(npc, ID.text.LUCKY_ROLL_CLOSE)
-                npcUtil.giveItem(player, math.random(769, 776))
+                npcUtil.giveItem(player, rewards[math.random(1, 9)])
             end
 
             npc:setLocalVar('[LuckyRoll]Rabao', math.random(150, 250))
