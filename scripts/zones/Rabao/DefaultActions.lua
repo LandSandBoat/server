@@ -14,7 +14,6 @@ return {
     ['Iron_Muscles']    = { event = 54 },
     ['Kedhareshvar']    = { event = 51 },
     ['Maryoh_Comyujah'] = { event = 43 },
-    ['Mileon']          = { event = 100 },
     ['Rahi_Fohlatti']   = { event = 71 },
     ['Rudolfo']         = { event = 125 },
     ['Skeea']           = { event = 48 },
