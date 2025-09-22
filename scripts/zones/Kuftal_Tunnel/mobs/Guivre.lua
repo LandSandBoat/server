@@ -202,7 +202,7 @@ local pathFind =
 entity.onMobInitialize = function(mob)
     -- Guivre has increased movespeed, sight range with
     -- Natural double/triple attack.
-    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 150)
+    mob:setMod(xi.mobMod.RUN_SPEED_MULT, 300)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
