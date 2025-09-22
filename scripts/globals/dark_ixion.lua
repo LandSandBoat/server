@@ -19,7 +19,8 @@
     - If Dark Ixion is due to spawn or is already spawned during maintenance, he will spawn shortly after server comes back online.
     - If he was not due to spawn during this time frame, his spawn window will reset to 21 hours after servers come online.
 
-    Roaming: runs very fast and can be spooked via normal aggro/claim actions. If spooked, it does the same thing as attempting a claim but missing with a Stygian Ash
+    Roaming: runs fast and can be spooked via normal aggro/claim actions. If spooked, it does the same thing as attempting a claim but missing with a Stygian Ash
+    Missed Claim: pauses for a few, then runs away very fast
     Claim: can only be claimed by landing a hit with Stygian Ash
     Targetting: Can damage and kill players riding Chocobo with Area of Effect attacks even if player is not in the Alliance fighting him.
 
@@ -27,7 +28,7 @@
     - has a normal set of TP moves, but telegraphs most/all of them
     - if he has an aura then his TP moves are doubled up back to back
     - has a special move that isn't listed in the combat log, that many have called 'Trample'
-        - Trample: Charges forward, dealing high damage to,(400-1000) and lowering the MP (10-30%) of, anyone in his path. No message is displayed in the chat log.
+        - Trample: Charges forward, dealing high damage to,(400-1000) and lowering the MP (10-30%) of _ANYONE_ in his path. No message is displayed in the chat log, other than basic "<target> takes X damage."
         - When Dark Ixion's HP is low, he can do up to 3 Tramples in succession.
         - Can be avoided easily by moving out of its path.
         - May charge in the opposite, or an entirely random, direction from the one he is currently facing.
@@ -44,6 +45,44 @@ xi.darkixion = xi.darkixion or {}
 
 -- mob:AnimationSub() -- 0 is normal || Charging is animation sub 1  || 2 is broken horn || 3 is glowing and causes horn to repair
 -- TODO: dmg taken from front/rear (if we can)
+
+xi.darkixion.hpValue = GetServerVariable('DarkIxion_HP')
+xi.darkixion.hornState = GetServerVariable('DarkIxion_HornState')
+xi.darkixion.hornStates =
+{
+    -- not broken
+    [1] =
+    {
+        animationSub = 0,
+        hideHP = true,
+    },
+
+    -- broken
+    [2] =
+    {
+        animationSub = 2,
+        hideHP = false,
+    },
+}
+
+local changeHornState = function(mob, state)
+    xi.darkixion.hornState = state
+    local hornStateData = xi.darkixion.hornStates[xi.darkixion.hornState]
+    if not hornStateData then
+        xi.darkixion.hornState = GetServerVariable('DarkIxion_HornState')
+        if not xi.darkixion.hornStates[xi.darkixion.hornState] then
+            xi.darkixion.hornState = 1
+        end
+
+        hornStateData = xi.darkixion.hornStates[xi.darkixion.hornState]
+    end
+
+    SetServerVariable('DarkIxion_HornState', xi.darkixion.hornState)
+    if hornStateData.animationSub ~= mob:getAnimationSub() then
+        mob:setAnimationSub(hornStateData.animationSub)
+        mob:hideHP(hornStateData.hideHP)
+    end
+end
 
 xi.darkixion.zoneinfo =
 {
@@ -239,35 +278,9 @@ xi.darkixion.zoneinfo =
             { x = 318.2, y =  000.0, z = -437.6 },
             { x = 271.5, y =  004.3, z = -461.6 },
             { x = 219.7, y = -017.0, z = -334.0 },
-        }
+        },
     },
 }
-
-xi.darkixion.setupEntity = function(entity)
-    entity.onMobDeath = function(mob, player, optParams)
-        xi.darkixion.onMobDeath(mob, player, optParams)
-    end
-
-    entity.onMobDespawn = function(mob)
-        xi.darkixion.onMobDespawn(mob)
-    end
-
-    entity.onMobSpawn = function(mob)
-        xi.darkixion.onMobSpawn(mob)
-    end
-
-    entity.onMobRoam = function(mob)
-        xi.darkixion.onMobRoam(mob)
-    end
-
-    entity.onMobEngage = function(mob, target)
-        xi.darkixion.onMobEngage(mob, target)
-    end
-
-    entity.onMobDisengage = function(mob)
-        xi.darkixion.onMobDisengage(mob)
-    end
-end
 
 xi.darkixion.repop = function(mob)
     DespawnMob(mob:getID())
@@ -284,6 +297,12 @@ end
 
 -- Adjustments made once to Dark Ixion when he begins roaming
 xi.darkixion.roamingMods = function(mob)
+    if mob:getLocalVar('RunAway') ~= 0 then
+        mob:setBaseSpeed(70)
+    else
+        mob:setBaseSpeed(40)
+    end
+
     -- don't take damage until the fight officially starts
     mob:setMod(xi.mod.UDMGPHYS, -10000)
     mob:setMod(xi.mod.UDMGRANGE, -10000)
@@ -291,26 +310,22 @@ xi.darkixion.roamingMods = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -10000)
 
     -- restore hp just in case something caused him to regen while roaming
-    local diHP = GetServerVariable('DarkIxion_HP')
-    if diHP == 0 then
-        diHP = mob:getHP()
-        SetServerVariable('DarkIxion_HP', diHP)
+    if xi.darkixion.hpValue == 0 then
+        xi.darkixion.hpValue = mob:getHP()
+        SetServerVariable('DarkIxion_HP', xi.darkixion.hpValue)
     end
 
-    mob:setHP(diHP)
+    mob:setHP(xi.darkixion.hpValue)
 
     -- restore horn status
-    if GetServerVariable('DarkIxion_HornStatus') == 1 then
-        mob:setAnimationSub(2)
-        mob:hideHP(false)
-    else
-        mob:setAnimationSub(0)
-        mob:hideHP(true)
-    end
+    changeHornState(mob, xi.darkixion.hornState)
 
+    -- ensure he's in initial state for beginning of fight
     mob:setMobSkillAttack(39)
-    mob:setLocalVar('charging', 0)
-    mob:setLocalVar('double', 0)
+    mob:setLocalVar('trampling', 0)
+    mob:setLocalVar('doubleUpWS', 0)
+    mob:setLocalVar('trampleCount', 0)
+    mob:setLocalVar('PhaseChange', GetSystemTime() + math.random(60, 240))
     mob:setLocalVar('lastHit', 0)
     mob:setBehavior(0)
     mob:setAutoAttackEnabled(true)
@@ -319,6 +334,10 @@ end
 
 xi.darkixion.zoneOnInit = function(zone)
     local ixion = zone:queryEntitiesByName('Dark_Ixion')[1]
+    if not ixion then
+        return
+    end
+
     local ixionZoneID = GetServerVariable('DarkIxion_ZoneID')
     -- check this on only one zone to catch when ixion has no zone assignment
     if
@@ -344,37 +363,51 @@ end
 
 xi.darkixion.zoneOnGameHour = function(zone)
     local ixion = zone:queryEntitiesByName('Dark_Ixion')[1]
+    if not ixion then
+        return
+    end
+
+    local ixionZoneID = GetServerVariable('DarkIxion_ZoneID')
+    local ixionPopTime = GetServerVariable('DarkIxion_PopTime')
     if
-        GetServerVariable('DarkIxion_ZoneID') == zone:getID() and
-        GetServerVariable('DarkIxion_PopTime') < GetSystemTime() - 24 * 60 * 60
+        ixionZoneID == zone:getID() and
+        ixionPopTime < GetSystemTime() - 24 * 60 * 60
     then
         -- wander logic in onGameHour so even sleeping zones with no players can hold DI and cycle him out
         xi.darkixion.repop(ixion)
     elseif
         not ixion:isSpawned() and
-        GetServerVariable('DarkIxion_ZoneID') == zone:getID() and
-        GetServerVariable('DarkIxion_PopTime') < GetSystemTime() - 45
+        ixionZoneID == zone:getID() and
+        ixionPopTime < GetSystemTime() - 45
     then
         -- if gamehour flip is within 45s, randomly spawn within next twice that
         ixion:setRespawnTime(math.random(0, 90))
     elseif
         ixion:isSpawned() and
-        GetServerVariable('DarkIxion_ZoneID') ~= zone:getID()
+        ixionZoneID ~= zone:getID()
     then
         -- really shouldn't be possible, but catch just in case a GM manually spawned him somewhere else
         if ixion:isEngaged() then
+            -- cleanly handle run away mechanic
             ixion:disengage()
         else
+            -- just go away
             DespawnMob(ixion:getID())
         end
     end
 end
 
-xi.darkixion.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(xi.title.IXION_HORNBREAKER)
-    -- only reset hp after being killed
-    SetServerVariable('DarkIxion_HP', 0)
-    SetServerVariable('DarkIxion_HornStatus', 0)
+xi.darkixion.onMobDeath = function(mob, player, optParams)
+    if player then
+        player:addTitle(xi.title.IXION_HORNBREAKER)
+    end
+
+    if optParams.isKiller or optParams.noKiller then
+        -- only reset hp after dying (hp and horn status persist through zones when he runs away and despawns)
+        xi.darkixion.hpValue = 0
+        SetServerVariable('DarkIxion_HP', xi.darkixion.hpValue)
+        changeHornState(mob, 1)
+    end
 end
 
 xi.darkixion.onMobDespawn = function(mob)
@@ -385,15 +418,63 @@ xi.darkixion.onMobDespawn = function(mob)
     end
 end
 
-xi.darkixion.onMobSpawn = function(mob)
-    mob:setBaseSpeed(70)
-    xi.darkixion.roamingMods(mob)
-    SetServerVariable('DarkIxion_PopTime', GetSystemTime())
-    mob:setLocalVar('wasKilled', 0)
-    mob:setMod(xi.mod.SLEEPRES, 100)
-    mob:setMod(xi.mod.STUNRES, 100)
+local checkHornBreak = function(mob, attacker)
+    if
+        not xi.combat.behavior.isEntityBusy(mob) and
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 3) and
+        (attacker ~= nil and attacker:isInfront(mob)) and
+        math.random(1, 100) <= 5
+    then
+        changeHornState(mob, 2)
+        mob:setLocalVar('doubleUpWS', 0)
+    end
+end
+
+xi.darkixion.onCriticalHit = function(mob, attacker)
+    checkHornBreak(mob, attacker)
+end
+
+xi.darkixion.onWeaponskillHit = function(mob, attacker, weaponskill)
+    checkHornBreak(mob, attacker)
+end
+
+xi.darkixion.onMobWeaponSkill = function(target, mob, skill)
+    local skillID = skill:getID()
+    if skillID == xi.mobSkill.DAMSEL_MEMENTO then -- sometimes after healing, fix horn
+        if
+            mob:getAnimationSub() == 2 and
+            math.random(1, 100) <= 25
+        then
+            mob:setAnimationSub(3)
+            mob:setLocalVar('doubleUpWS', 0)
+
+            -- reset phasechange timer
+            mob:setLocalVar('phaseChange', GetSystemTime() + math.random(60, 240))
+
+            -- If horn is restored by heal, glow and allow animation to finish, then restore horn
+            mob:queue(0, function(mobArg)
+                mobArg:stun(500)
+                changeHornState(mobArg, 1)
+            end)
+        end
+    end
+end
+
+xi.darkixion.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
 
     mob:setMobMod(xi.mobMod.NO_REST, 10)
+end
+
+xi.darkixion.onMobSpawn = function(mob)
+    xi.darkixion.roamingMods(mob)
+    SetServerVariable('DarkIxion_PopTime', GetSystemTime())
+
     mob:setAggressive(true)
 end
 
@@ -420,31 +501,26 @@ end
 xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.REGAIN, 20) -- 'has tp regen': https://www.bluegartr.com/threads/59044-Ixion-discussion-thread/page8
     xi.darkixion.roamingMods(mob)
-    -- if stygian ash missed or aggro via any other means, immediately disengage (even if hearing aggro 'If you get too close, DI runs away')
+    -- if stygian ash missed or aggro via any other means, immediately disengage (even if hearing/sight aggro 'If you get too close, DI runs away')
     if mob:getLocalVar('StygianLanded') ~= 1 then
         mob:disengage()
+        return
     end
 
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGBREATH, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
-
-    mob:setLocalVar('run', 0)
-    mob:setLocalVar('PhaseChange', GetSystemTime() + math.random(60, 240))
 end
 
 xi.darkixion.onMobDisengage = function(mob)
-    SetServerVariable('DarkIxion_HP', mob:getHP())
-    if mob:getAnimationSub() == 2 then
-        SetServerVariable('DarkIxion_HornStatus', 1)
-    else
-        SetServerVariable('DarkIxion_HornStatus', 0)
-    end
+    xi.darkixion.hpValue = mob:getHP()
+    SetServerVariable('DarkIxion_HP', xi.darkixion.hpValue)
 
     xi.darkixion.roamingMods(mob)
     if mob:getLocalVar('RunAway') == 0 then
-        -- disengage, give one window of him standing still unclaimed before 'Running away'
+        mob:setBaseSpeed(70)
+        -- disengage, standing still unclaimed before 'Running away'
         local waitTime = 15
         mob:stun(waitTime * 1000)
         mob:setLocalVar('RunAway', GetSystemTime() + waitTime)
@@ -456,4 +532,7 @@ xi.darkixion.onMobDisengage = function(mob)
     -- no chance of him staying in this zone unless an ash is landed before he runs away and despawns
     mob:setAggressive(false)
     mob:setLocalVar('StygianLanded', 0)
+end
+
+xi.darkixion.onMobFight = function(mob, target)
 end

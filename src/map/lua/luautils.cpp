@@ -380,6 +380,24 @@ namespace luautils
             }
         }
 
+        // Load global data
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/data"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                auto relative_path_string = entry.relative_path().generic_string();
+
+                ShowTrace("Loading data script %s", relative_path_string);
+
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
+
         PopulateIDLookupsByFilename();
 
         // Then the rest...
@@ -3509,6 +3527,8 @@ namespace luautils
         {
             return;
         }
+
+        PMob->PAI->EventHandler.triggerListener("PRESPAWN", PMob);
 
         const sol::function onMobSpawn = getEntityCachedFunction(PMob, "onMobSpawn");
         if (onMobSpawn.valid())

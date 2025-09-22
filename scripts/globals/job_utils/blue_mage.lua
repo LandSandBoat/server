@@ -1,8 +1,6 @@
 -----------------------------------
 -- Blue Mage Job Utilities
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.blue_mage = xi.job_utils.blue_mage or {}

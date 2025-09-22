@@ -4,7 +4,6 @@
 -----------------------------------
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/spells/damage_spell')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}

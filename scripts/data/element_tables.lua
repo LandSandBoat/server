@@ -2,11 +2,9 @@
 -- Tables defining diferent elemental caracteristics.
 -- Ordered by element ID.
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
-xi.combat = xi.combat or {}
-xi.combat.element = xi.combat.element or {}
+xi.data = xi.data or {}
+xi.data.element = xi.data.element or {}
 -----------------------------------
 
 local column =
@@ -30,7 +28,7 @@ local column =
     MERIT_ELEMENT_MACC    = 17,
 }
 
-xi.combat.element.dataTable =
+xi.data.element.dataTable =
 {
     [xi.element.FIRE   ] = { xi.element.WATER,   xi.day.FIRESDAY,     xi.weather.HOT_SPELL,  xi.weather.HEAT_WAVE,     xi.mod.FIRE_SDT,    xi.mod.FIRE_RES_RANK,    xi.mod.FIRE_NULL,  xi.mod.FIRE_ABSORB,  xi.mod.FIRE_MAB,    xi.mod.FIRE_MACC,    xi.mod.FIRE_MEVA,    xi.mod.FIRE_FTP_BONUS,    xi.mod.FIRE_STAFF_BONUS,    xi.mod.FORCE_FIRE_DWBONUS,      xi.effect.BARFIRE,     xi.merit.FIRE_MAGIC_POTENCY,      xi.merit.FIRE_MAGIC_ACCURACY      },
     [xi.element.ICE    ] = { xi.element.FIRE,    xi.day.ICEDAY,       xi.weather.SNOW,       xi.weather.BLIZZARDS,     xi.mod.ICE_SDT,     xi.mod.ICE_RES_RANK,     xi.mod.ICE_NULL,   xi.mod.ICE_ABSORB,   xi.mod.ICE_MAB,     xi.mod.ICE_MACC,     xi.mod.ICE_MEVA,     xi.mod.ICE_FTP_BONUS,     xi.mod.ICE_STAFF_BONUS,     xi.mod.FORCE_ICE_DWBONUS,       xi.effect.BARBLIZZARD, xi.merit.ICE_MAGIC_POTENCY,       xi.merit.ICE_MAGIC_ACCURACY       },
@@ -43,7 +41,7 @@ xi.combat.element.dataTable =
 }
 
 -- Get element to which the element being checked is weak against.
-xi.combat.element.getElementWeakness = function(element)
+xi.data.element.getElementWeakness = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -51,11 +49,11 @@ xi.combat.element.getElementWeakness = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
+    return xi.data.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
 end
 
 -- Get element to which the element being checked is strong against.
-xi.combat.element.getElementStrength = function(element)
+xi.data.element.getElementStrength = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -65,7 +63,7 @@ xi.combat.element.getElementStrength = function(element)
 
     -- Get element.
     for i = xi.element.FIRE, xi.element.DARK do
-        local opositeElement = xi.combat.element.dataTable[i][column.ELEMENT_OPPOSED]
+        local opositeElement = xi.data.element.dataTable[i][column.ELEMENT_OPPOSED]
         if opositeElement == elementToCheck then
             return i
         end
@@ -75,7 +73,7 @@ end
 -----------------------------------
 -- Day-related functions
 -----------------------------------
-xi.combat.element.getAssociatedDay = function(element)
+xi.data.element.getAssociatedDay = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -83,10 +81,10 @@ xi.combat.element.getAssociatedDay = function(element)
         return -1
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.DAY_ASSOCIATED]
+    return xi.data.element.dataTable[elementToCheck][column.DAY_ASSOCIATED]
 end
 
-xi.combat.element.getOppositeDay = function(element)
+xi.data.element.getOppositeDay = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -95,17 +93,17 @@ xi.combat.element.getOppositeDay = function(element)
     end
 
     -- Fetch opposite element.
-    elementToCheck = xi.combat.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
+    elementToCheck = xi.data.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
 
-    return xi.combat.element.dataTable[elementToCheck][column.DAY_ASSOCIATED]
+    return xi.data.element.dataTable[elementToCheck][column.DAY_ASSOCIATED]
 end
 
-xi.combat.element.getDayElement = function(day)
+xi.data.element.getDayElement = function(day)
     -- Validate fed value.
     local dayToCheck = utils.defaultIfNil(day, -1)
 
     for elementToCheck = xi.element.FIRE, xi.element.DARK do
-        if dayToCheck == xi.combat.element.dataTable[elementToCheck][column.DAY_ASSOCIATED] then
+        if dayToCheck == xi.data.element.dataTable[elementToCheck][column.DAY_ASSOCIATED] then
             return elementToCheck
         end
     end
@@ -116,7 +114,7 @@ end
 -----------------------------------
 -- Weather-related functions
 -----------------------------------
-xi.combat.element.getAssociatedSingleWeather = function(element)
+xi.data.element.getAssociatedSingleWeather = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -124,35 +122,10 @@ xi.combat.element.getAssociatedSingleWeather = function(element)
         return -1
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.WEATHER_SINGLE]
+    return xi.data.element.dataTable[elementToCheck][column.WEATHER_SINGLE]
 end
 
-xi.combat.element.getOppositeSingleWeather = function(element)
-    -- Validate fed value.
-    local elementToCheck = utils.defaultIfNil(element, 0)
-
-    if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
-        return -1
-    end
-
-    -- Fetch opposite element.
-    elementToCheck = xi.combat.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
-
-    return xi.combat.element.dataTable[elementToCheck][column.WEATHER_SINGLE]
-end
-
-xi.combat.element.getAssociatedDoubleWeather = function(element)
-    -- Validate fed value.
-    local elementToCheck = utils.defaultIfNil(element, 0)
-
-    if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
-        return -1
-    end
-
-    return xi.combat.element.dataTable[elementToCheck][column.WEATHER_DOUBLE]
-end
-
-xi.combat.element.getOppositeDoubleWeather = function(element)
+xi.data.element.getOppositeSingleWeather = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -161,18 +134,43 @@ xi.combat.element.getOppositeDoubleWeather = function(element)
     end
 
     -- Fetch opposite element.
-    elementToCheck = xi.combat.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
+    elementToCheck = xi.data.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
 
-    return xi.combat.element.dataTable[elementToCheck][column.WEATHER_DOUBLE]
+    return xi.data.element.dataTable[elementToCheck][column.WEATHER_SINGLE]
 end
 
-xi.combat.element.getWeatherElement = function(weather)
+xi.data.element.getAssociatedDoubleWeather = function(element)
+    -- Validate fed value.
+    local elementToCheck = utils.defaultIfNil(element, 0)
+
+    if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
+        return -1
+    end
+
+    return xi.data.element.dataTable[elementToCheck][column.WEATHER_DOUBLE]
+end
+
+xi.data.element.getOppositeDoubleWeather = function(element)
+    -- Validate fed value.
+    local elementToCheck = utils.defaultIfNil(element, 0)
+
+    if elementToCheck < xi.element.FIRE or elementToCheck > xi.element.DARK then
+        return -1
+    end
+
+    -- Fetch opposite element.
+    elementToCheck = xi.data.element.dataTable[elementToCheck][column.ELEMENT_OPPOSED]
+
+    return xi.data.element.dataTable[elementToCheck][column.WEATHER_DOUBLE]
+end
+
+xi.data.element.getWeatherElement = function(weather)
     -- Validate fed value.
     local weatherToCheck = utils.defaultIfNil(weather, 0)
 
     for elementChecked = xi.element.FIRE, xi.element.DARK do
-        local elementalSingle = xi.combat.element.dataTable[elementChecked][column.WEATHER_SINGLE]
-        local elementalDouble = xi.combat.element.dataTable[elementChecked][column.WEATHER_DOUBLE]
+        local elementalSingle = xi.data.element.dataTable[elementChecked][column.WEATHER_SINGLE]
+        local elementalDouble = xi.data.element.dataTable[elementChecked][column.WEATHER_DOUBLE]
 
         if weatherToCheck == elementalSingle or weatherToCheck == elementalDouble then
             return elementChecked
@@ -185,7 +183,7 @@ end
 -----------------------------------
 -- Modifier-related functions
 -----------------------------------
-xi.combat.element.getElementalSDTModifier = function(element)
+xi.data.element.getElementalSDTModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -193,10 +191,10 @@ xi.combat.element.getElementalSDTModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_SDT]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_SDT]
 end
 
-xi.combat.element.getElementalResistanceRankModifier = function(element)
+xi.data.element.getElementalResistanceRankModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -204,10 +202,10 @@ xi.combat.element.getElementalResistanceRankModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_RES_RANK]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_RES_RANK]
 end
 
-xi.combat.element.getElementalNullificationModifier = function(element)
+xi.data.element.getElementalNullificationModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -215,10 +213,10 @@ xi.combat.element.getElementalNullificationModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_NULL]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_NULL]
 end
 
-xi.combat.element.getElementalAbsorptionModifier = function(element)
+xi.data.element.getElementalAbsorptionModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -226,10 +224,10 @@ xi.combat.element.getElementalAbsorptionModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_ABSORB]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_ABSORB]
 end
 
-xi.combat.element.getElementalMABModifier = function(element)
+xi.data.element.getElementalMABModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -237,10 +235,10 @@ xi.combat.element.getElementalMABModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_MAB]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_MAB]
 end
 
-xi.combat.element.getElementalMACCModifier = function(element)
+xi.data.element.getElementalMACCModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -248,10 +246,10 @@ xi.combat.element.getElementalMACCModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_MACC]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_MACC]
 end
 
-xi.combat.element.getElementalMEVAModifier = function(element)
+xi.data.element.getElementalMEVAModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -259,10 +257,10 @@ xi.combat.element.getElementalMEVAModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_MEVA]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_MEVA]
 end
 
-xi.combat.element.getElementalFTPModifier = function(element)
+xi.data.element.getElementalFTPModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -270,10 +268,10 @@ xi.combat.element.getElementalFTPModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_ELEMENT_FTP_BONUS]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_ELEMENT_FTP_BONUS]
 end
 
-xi.combat.element.getElementalStaffModifier = function(element)
+xi.data.element.getElementalStaffModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -281,10 +279,10 @@ xi.combat.element.getElementalStaffModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_STAFF_BONUS]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_STAFF_BONUS]
 end
 
-xi.combat.element.getForcedDayOrWeatherBonusModifier = function(element)
+xi.data.element.getForcedDayOrWeatherBonusModifier = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -292,13 +290,13 @@ xi.combat.element.getForcedDayOrWeatherBonusModifier = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MOD_FORCE_DW_BONUS]
+    return xi.data.element.dataTable[elementToCheck][column.MOD_FORCE_DW_BONUS]
 end
 
 -----------------------------------
 -- Effect-related functions
 -----------------------------------
-xi.combat.element.getAssociatedBarspellEffect = function(element)
+xi.data.element.getAssociatedBarspellEffect = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -306,13 +304,13 @@ xi.combat.element.getAssociatedBarspellEffect = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.EFFECT_BARSPELL]
+    return xi.data.element.dataTable[elementToCheck][column.EFFECT_BARSPELL]
 end
 
 -----------------------------------
 -- Merit-related functions
 -----------------------------------
-xi.combat.element.getElementalPotencyMerit = function(element)
+xi.data.element.getElementalPotencyMerit = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -320,10 +318,10 @@ xi.combat.element.getElementalPotencyMerit = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MERIT_ELEMENT_POTENCY]
+    return xi.data.element.dataTable[elementToCheck][column.MERIT_ELEMENT_POTENCY]
 end
 
-xi.combat.element.getElementalAccuracyMerit = function(element)
+xi.data.element.getElementalAccuracyMerit = function(element)
     -- Validate fed value.
     local elementToCheck = utils.defaultIfNil(element, 0)
 
@@ -331,5 +329,5 @@ xi.combat.element.getElementalAccuracyMerit = function(element)
         return 0
     end
 
-    return xi.combat.element.dataTable[elementToCheck][column.MERIT_ELEMENT_MACC]
+    return xi.data.element.dataTable[elementToCheck][column.MERIT_ELEMENT_MACC]
 end

@@ -2,14 +2,9 @@ require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
 require('scripts/globals/spells/damage_spell')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.magic = xi.magic or {}
-
--- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
-local softCap = 60 --guesstimated
-local hardCap = 120 --guesstimated
 
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
@@ -81,49 +76,6 @@ local function calculateMagicBurst(caster, spell, target, params)
     return burst
 end
 
-function calculateMagicDamage(caster, target, spell, params)
-    local dINT = caster:getStat(params.attribute) - target:getStat(params.attribute)
-    local dmg = params.dmg
-
-    if dINT <= 0 then --if dINT penalises, it's always M=1
-        dmg = dmg + dINT
-        if dmg <= 0 then --dINT penalty cannot result in negative damage (target absorption)
-            return 0
-        end
-    elseif dINT > 0 and dINT <= softCap then --The standard calc, most spells hit this
-        dmg = dmg + (dINT * params.multiplier)
-    elseif dINT > 0 and dINT > softCap and dINT < hardCap then --After softCap, INT is only half effective
-        dmg = dmg + softCap * params.multiplier + ((dINT - softCap) * params.multiplier) / 2
-    elseif dINT > 0 and dINT > softCap and dINT >= hardCap then --After hardCap, INT has no xi.effect.
-        dmg = dmg + hardCap * params.multiplier
-    end
-
-    if params.skillType == xi.skill.DIVINE_MAGIC and target:isUndead() then
-        -- 150% bonus damage
-        dmg = dmg * 1.5
-    end
-
-    return dmg
-end
-
-function doEnspell(caster, target, spell, effect)
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-    --calculate potency
-    local magicskill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
-
-    local potency = 3 + math.floor(6 * magicskill / 100)
-    if magicskill > 200 then
-        potency = 5 + math.floor(5 * magicskill / 100)
-    end
-
-    if target:addStatusEffect(effect, potency, 0, duration) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-end
-
 -----------------------------------
 --   getCurePower returns the caster's cure power
 --   getCureFinal returns the final cure amount
@@ -192,11 +144,6 @@ function isValidHealTarget(caster, target)
             target:getObjType() == xi.objType.MOB or
             target:getObjType() == xi.objType.TRUST or
             target:getObjType() == xi.objType.FELLOW)
-end
-
--- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, 0, element, 0, 0, bonusMacc)
 end
 
 -- Applies resistance for additional effects
@@ -346,9 +293,9 @@ function addBonuses(caster, spell, target, dmg, params)
 
         local mdefBarBonus = 0
         if ele >= xi.element.FIRE and ele <= xi.element.WATER then
-            mab = mab + caster:getMerit(xi.combat.element.getElementalPotencyMerit(ele))
-            if target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)) then -- bar- spell magic defense bonus
-                mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
+            mab = mab + caster:getMerit(xi.data.element.getElementalPotencyMerit(ele))
+            if target:hasStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)) then -- bar- spell magic defense bonus
+                mdefBarBonus = target:getStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)):getSubPower()
             end
         end
 
@@ -389,9 +336,9 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     if
         ele >= xi.element.FIRE and
         ele <= xi.element.WATER and
-        target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele))
+        target:hasStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele))
     then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
+        mdefBarBonus = target:getStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)):getSubPower()
     end
 
     if params ~= nil and params.bonusmab ~= nil and params.includemab then

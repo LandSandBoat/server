@@ -25,30 +25,30 @@ content:addEssentialMobs({ 'Orcish_Onager' })
 content.loot =
 {
     {
-        { item = xi.item.GOLD_BEASTCOIN,    weight = 500 }, -- gold_beastcoin
-        { item = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
+        { itemId = xi.item.GOLD_BEASTCOIN,    weight = 500 }, -- gold_beastcoin
+        { itemId = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
     },
 
     {
-        { item = xi.item.STEEL_INGOT, weight = 500 }, -- steel_ingot
-        { item = xi.item.AQUAMARINE,  weight = 500 }, -- aquamarine
+        { itemId = xi.item.STEEL_INGOT, weight = 500 }, -- steel_ingot
+        { itemId = xi.item.AQUAMARINE,  weight = 500 }, -- aquamarine
     },
 
     {
-        { item = xi.item.NONE,         weight = 500 }, -- nothing
-        { item = xi.item.DEMON_QUIVER, weight = 500 }, -- demon_quiver
+        { itemId = xi.item.NONE,         weight = 500 }, -- nothing
+        { itemId = xi.item.DEMON_QUIVER, weight = 500 }, -- demon_quiver
     },
 
     {
-        { item = xi.item.NONE,                weight = 600 }, -- nothing
-        { item = xi.item.TELEPORT_RING_HOLLA, weight = 200 }, -- teleport_ring_holla
-        { item = xi.item.TELEPORT_RING_VAHZL, weight = 200 }, -- teleport_ring_vahzl
+        { itemId = xi.item.NONE,                weight = 600 }, -- nothing
+        { itemId = xi.item.TELEPORT_RING_HOLLA, weight = 200 }, -- teleport_ring_holla
+        { itemId = xi.item.TELEPORT_RING_VAHZL, weight = 200 }, -- teleport_ring_vahzl
     },
 
     {
-        { item = xi.item.NONE,                weight = 600 }, -- nothing
-        { item = xi.item.SAPIENT_CAPE,        weight = 200 }, -- sapient_cape
-        { item = xi.item.TRAINERS_WRISTBANDS, weight = 200 }, -- trainers_wristbands
+        { itemId = xi.item.NONE,                weight = 600 }, -- nothing
+        { itemId = xi.item.SAPIENT_CAPE,        weight = 200 }, -- sapient_cape
+        { itemId = xi.item.TRAINERS_WRISTBANDS, weight = 200 }, -- trainers_wristbands
     },
 }
 

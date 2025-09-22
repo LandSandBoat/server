@@ -53,7 +53,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instanceObject.onInstanceComplete = function(instance)
-    xi.assault.onInstanceComplete(instance, 8, 8)
+    xi.assault.onInstanceComplete(instance, 5, 11)
 end
 
 instanceObject.onEventFinish = function(player, csid, option, npc)

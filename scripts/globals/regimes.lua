@@ -8,11 +8,10 @@
 -- http://ffxiclopedia.wikia.com/wiki/Field_Manual
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
 -----------------------------------
-require('scripts/globals/teleports')
-require('scripts/globals/utils')
-require('scripts/globals/roe')
-require('scripts/globals/npc_util')
 require('scripts/globals/extravaganza')
+require('scripts/globals/npc_util')
+require('scripts/globals/roe')
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.regime = xi.regime or {}

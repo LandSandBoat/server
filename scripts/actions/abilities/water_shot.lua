@@ -36,7 +36,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     dmg       = addBonusesAbility(player, xi.element.WATER, target, dmg, params)
 
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
-    dmg            = dmg * applyResistanceAbility(player, target, xi.element.WATER, xi.skill.NONE, bonusAcc)
+    dmg            = dmg * xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.WATER, 0, 0, bonusAcc)
     dmg            = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.WATER)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP

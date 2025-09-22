@@ -10,52 +10,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local basedmg = caster:getSkillLevel(xi.skill.DARK_MAGIC) / 4
-    local params = {}
-    params.dmg = basedmg
-    params.multiplier = 3
-    params.skillType = xi.skill.DARK_MAGIC
-    params.attribute = xi.mod.INT
-    params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.bonus = 1.0
-
-    -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
-    -- Softcaps at 80, should always do at least 1
-    dmg = utils.clamp(dmg, 1, 80)
-    -- Get resist multiplier (1x if no resist)
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, 0, 0)
-    -- get the resisted damage
-    dmg = dmg * resist
-    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    -- Add in target adjustment
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-    -- Add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster, target, spell, dmg)
-
-    -- Calculate duration
-    local duration = 180
+    local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
-
-    -- Calculate DoT effect (rough, though fairly accurate)
-    local dotdmg = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
-
-    -- Do it!
-    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 25, 4)
-    spell:setMsg(xi.msg.basic.MAGIC_DMG)
-
-    -- Try to kill same tier Dia (default behavior)
-    if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then
-        if dia:getPower() <= 4 then
-            target:delStatusEffect(xi.effect.DIA)
-        end
+    if dia and dia:getPower() > 4 then
+        return damage
+    else
+        target:delStatusEffect(xi.effect.DIA)
     end
 
-    return final
+    -- Calculate DoT effect (rough, though fairly accurate)
+    local power = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
+
+    target:addStatusEffect(xi.effect.BIO, power, 3, 180, 0, 25, 4)
+
+    return damage
 end
 
 return spellObject

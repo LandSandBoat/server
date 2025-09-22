@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/teleports')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.escha = xi.escha or {}

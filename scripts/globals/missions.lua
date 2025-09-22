@@ -1,5 +1,3 @@
-require('scripts/globals/utils')
-
 xi = xi or {}
 xi.mission = xi.mission or {}
 

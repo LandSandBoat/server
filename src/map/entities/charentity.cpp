@@ -1862,35 +1862,22 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     }
                 }
 
+                // OnAbilityCheck succeeded and petskill is found, tell pet to perform it
                 PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
             }
-            else if (PPet) // pet without an entry in pet_skills.sql, failback to inferring mobskill based on matching name of the job ability in LoadAbilitiesList()
+            // next two checks are to ensure misconfigurations don't consume cooldowns for unimplemented petskills
+            // properly-implemented skills will not get to this OnAbility function by nature of returning non-zero in OnAbilityCheck
+            else if (PPet)
             {
-                // TODO insert a generic "unable to use ability" when all player-pet skills are in pet_skills.sql
-                actionList_t& actionList     = action.getNewActionList();
-                actionList.ActionTargetID    = PTarget->id;
-                actionTarget_t& actionTarget = actionList.getNewActionTarget();
-                actionTarget.animation       = 94; // assault anim
-                actionTarget.reaction        = REACTION::NONE;
-                actionTarget.speceffect      = SPECEFFECT::RECOIL;
-                actionTarget.param           = 0;
-                actionTarget.messageID       = 0;
-
-                auto  PPetTarget = PTarget->targid;
-                auto* PMobSkill  = battleutils::GetMobSkill(PAbility->getMobSkillID());
-                if (PMobSkill)
-                {
-                    if (PMobSkill->getValidTargets() & TARGET_ENEMY)
-                    {
-                        PPetTarget = PPet->GetBattleTargetID();
-                    }
-                    else
-                    {
-                        PPetTarget = PPet->targid;
-                    }
-                }
-
-                PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID(), std::nullopt);
+                // possible if a player triggers a pet skill that isn't implemented
+                setActionInterrupted(action, PTarget, MSGBASIC_UNABLE_TO_USE_JA, 0);
+                return;
+            }
+            else
+            {
+                // possible if a player triggers a pet skill that isn't implemented
+                setActionInterrupted(action, PTarget, MSGBASIC_REQUIRES_A_PET, 0);
+                return;
             }
         }
         // TODO: make this generic enough to not require an if

@@ -77,12 +77,8 @@ global_objects=(
 
     addBonuses
     addBonusesAbility
-    applyResistanceAbility
     applyResistanceEffect
-    adjustForTarget
     calculateDuration
-    calculateMagicDamage
-    doEnspell
     finalMagicAdjustments
     finalMagicNonSpellAdjustments
     getBaseCure
@@ -90,8 +86,6 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
-    getElementalDamageReduction
-    handleThrenody
     isValidHealTarget
 
     ForceCrash

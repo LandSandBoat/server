@@ -25,47 +25,47 @@ content:addEssentialMobs({ 'Heavy_Metal_Crab', 'Metal_Crab' })
 content.loot =
 {
     {
-        { item = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 1000 }, -- slice_of_land_crab_meat
+        { itemId = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 1000 }, -- slice_of_land_crab_meat
     },
 
     {
-        { item = xi.item.MANNEQUIN_BODY, weight = 1000 }, -- mannequin_body
+        { itemId = xi.item.MANNEQUIN_BODY, weight = 1000 }, -- mannequin_body
     },
 
     {
-        { item = xi.item.NONE,       weight = 334 }, -- nothing
-        { item = xi.item.CRAB_SHELL, weight = 666 }, -- crab_shell
+        { itemId = xi.item.NONE,       weight = 334 }, -- nothing
+        { itemId = xi.item.CRAB_SHELL, weight = 666 }, -- crab_shell
     },
 
     {
-        { item = xi.item.BEETLE_QUIVER,         weight = 444 }, -- beetle_quiver
-        { item = xi.item.JUG_OF_FISH_OIL_BROTH, weight = 556 }, -- jug_of_fish_oil_broth
+        { itemId = xi.item.BEETLE_QUIVER,         weight = 444 }, -- beetle_quiver
+        { itemId = xi.item.JUG_OF_FISH_OIL_BROTH, weight = 556 }, -- jug_of_fish_oil_broth
     },
 
     {
-        { item = xi.item.NONE,         weight = 450 }, -- nothing
-        { item = xi.item.BRASS_INGOT,  weight = 100 }, -- brass_ingot
-        { item = xi.item.BRONZE_SHEET, weight = 150 }, -- bronze_sheet
-        { item = xi.item.BRONZE_INGOT, weight = 300 }, -- bronze_ingot
+        { itemId = xi.item.NONE,         weight = 450 }, -- nothing
+        { itemId = xi.item.BRASS_INGOT,  weight = 100 }, -- brass_ingot
+        { itemId = xi.item.BRONZE_SHEET, weight = 150 }, -- bronze_sheet
+        { itemId = xi.item.BRONZE_INGOT, weight = 300 }, -- bronze_ingot
     },
 
     {
-        { item = xi.item.NONE,              weight = 300 }, -- nothing
-        { item = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
-        { item = xi.item.MANNEQUIN_HANDS,   weight = 100 }, -- mannequin_hands
-        { item = xi.item.MANNEQUIN_HEAD,    weight = 100 }, -- mannequin_head
+        { itemId = xi.item.NONE,              weight = 300 }, -- nothing
+        { itemId = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
+        { itemId = xi.item.MANNEQUIN_HANDS,   weight = 100 }, -- mannequin_hands
+        { itemId = xi.item.MANNEQUIN_HEAD,    weight = 100 }, -- mannequin_head
     },
 
     {
-        { item = xi.item.NONE,            weight = 200 }, -- nothing
-        { item = xi.item.PLATOON_CESTI,   weight = 100 }, -- platoon_cesti
-        { item = xi.item.PLATOON_DAGGER,  weight = 100 }, -- platoon_dagger
-        { item = xi.item.PLATOON_AXE,     weight = 100 }, -- platoon_axe
-        { item = xi.item.PLATOON_BOW,     weight = 100 }, -- platoon_bow
-        { item = xi.item.PLATOON_LANCE,   weight = 100 }, -- platoon_lance
-        { item = xi.item.PLATOON_SWORD,   weight = 100 }, -- platoon_sword
-        { item = xi.item.PLATOON_MACE,    weight = 100 }, -- platoon_mace
-        { item = xi.item.PLATOON_ZAGHNAL, weight = 100 }, -- platoon_zaghnal
+        { itemId = xi.item.NONE,            weight = 200 }, -- nothing
+        { itemId = xi.item.PLATOON_CESTI,   weight = 100 }, -- platoon_cesti
+        { itemId = xi.item.PLATOON_DAGGER,  weight = 100 }, -- platoon_dagger
+        { itemId = xi.item.PLATOON_AXE,     weight = 100 }, -- platoon_axe
+        { itemId = xi.item.PLATOON_BOW,     weight = 100 }, -- platoon_bow
+        { itemId = xi.item.PLATOON_LANCE,   weight = 100 }, -- platoon_lance
+        { itemId = xi.item.PLATOON_SWORD,   weight = 100 }, -- platoon_sword
+        { itemId = xi.item.PLATOON_MACE,    weight = 100 }, -- platoon_mace
+        { itemId = xi.item.PLATOON_ZAGHNAL, weight = 100 }, -- platoon_zaghnal
     },
 }
 

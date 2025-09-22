@@ -17,7 +17,7 @@ xi.mix.clear_doom.config = function(mob, params)
 end
 
 g_mixins.clear_doom = function(doomMob)
-    doomMob:addListener('SPAWN', 'REMOVE_DOOM_SPAWN', function(mob)
+    doomMob:addListener('PRESPAWN', 'REMOVE_DOOM_SPAWN', function(mob)
         mob:setLocalVar('[remove_doom]removalChance', 100)
     end)
 

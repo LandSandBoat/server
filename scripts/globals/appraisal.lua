@@ -1600,27 +1600,9 @@ end
 
 xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
     if npc:getLocalVar('UnappraisedItem') == 0 then
-        for i = 1, #qItemTable, 1 do
-            local lootGroup = qItemTable[i]
-            if lootGroup then
-                local max = 0
-                for _, entry in pairs(lootGroup) do
-                    max = max + entry.droprate
-                end
-
-                local roll = math.random(1, max)
-
-                for _, entry in pairs(lootGroup) do
-                    max = max - entry.droprate
-                    if roll > max then
-                        if entry.itemid > 0 then
-                            npc:setLocalVar('UnappraisedItem', entry.itemid)
-                        end
-
-                        break
-                    end
-                end
-            end
+        local selectedLoot = utils.selectFromLootGroups(player, qItemTable)
+        if #selectedLoot > 0 then
+            npc:setLocalVar('UnappraisedItem', selectedLoot[1].itemId)
         end
     end
 end
@@ -1656,26 +1638,10 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
             npcArg:setStatus(xi.status.DISAPPEAR)
         end)
 
-        for i = 1, #regItemTable, 1 do
-            local lootGroup = regItemTable[i]
-            if lootGroup then
-                local max = 0
-                for _, entry in pairs(lootGroup) do
-                    max = max + entry.droprate
-                end
-
-                local roll = math.random(1, max)
-                for _, entry in pairs(lootGroup) do
-                    max = max - entry.droprate
-                    if roll > max then
-                        if entry.itemid ~= 0 then
-                            player:addTreasure(entry.itemid, npc)
-                        end
-
-                        break
-                    end
-                end
-            end
+        local selectedLoot = utils.selectFromLootGroups(player, regItemTable)
+        for _, entry in ipairs(selectedLoot) do
+            -- regItemTable is guaranteed to not have xi.item.GIL in the table
+            player:addTreasure(entry.itemId, npc)
         end
     end
 end

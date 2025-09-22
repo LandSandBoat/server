@@ -41,9 +41,10 @@ quest.sections =
             },
         },
     },
+
     {
         check = function(player, status, vars)
-            return status ~= xi.questStatus.QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 player:hasKeyItem(xi.ki.WEAPONS_ORDER)
         end,
 
@@ -66,15 +67,16 @@ quest.sections =
             },
         },
     },
+
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 not player:hasKeyItem(xi.ki.WEAPONS_ORDER)
         end,
 
         [xi.zone.JUGNER_FOREST] =
         {
-            ['Alexius'] = quest:message(forestID.text.ALEXIUS_ORDERS, xi.ki.WEAPONS_RECEIPT),
+            ['Alexius'] = quest:messageName(forestID.text.ALEXIUS_ORDERS, xi.ki.WEAPONS_RECEIPT, 0, 0, 0, true, false),
         },
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -91,6 +93,7 @@ quest.sections =
             },
         },
     },
+
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED

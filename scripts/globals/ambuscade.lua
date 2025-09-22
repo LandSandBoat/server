@@ -4,7 +4,6 @@
 -- Ambuscade_Tome : !pos -28.030 -15.500 52.279 249
 -- Gorpa-Masorpa  : !pos -27.584 -15.990 52.565 249
 -----------------------------------
-require('scripts/globals/utils')
 -- local mhauraID = require('scripts/zones/Mhaura/IDs')
 -- local maquetteID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
 -----------------------------------

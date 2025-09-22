@@ -107,6 +107,4 @@ namespace itemutils
     CItemWeapon* GetUnarmedH2HItem();
 
     DropList_t* GetDropList(uint16 DropID);
-
-    auto IsGrip(const uint16 itemId) -> bool;
 }; // namespace itemutils

@@ -611,20 +611,20 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     end
 
     -- Early return: Target is immune.
-    if xi.combat.statusEffect.isTargetImmune(target, params.effect, spellElement) then
+    if xi.data.statusEffect.isTargetImmune(target, params.effect, spellElement) then
         spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
         return params.effect
     end
 
     -- Early return: Trait nullification trigger.
-    if xi.combat.statusEffect.isTargetResistant(caster, target, params.effect) then
+    if xi.data.statusEffect.isTargetResistant(caster, target, params.effect) then
         spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return params.effect
     end
 
     -- Early return: Target already has an status effect that nullifies current.
-    if xi.combat.statusEffect.isEffectNullified(target, params.effect) then
+    if xi.data.statusEffect.isEffectNullified(target, params.effect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return params.effect
     end
@@ -707,9 +707,9 @@ xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effe
         local duration = effectTable[entry][4]
 
         if
-            not xi.combat.statusEffect.isTargetImmune(target, effect, element) and   -- Target isn't immune.
-            not xi.combat.statusEffect.isTargetResistant(caster, target, effect) and -- Target didn't trigger a job trait resistance.
-            not xi.combat.statusEffect.isEffectNullified(target, effect)             -- Target doesn't have an status effect that nullifies current.
+            not xi.data.statusEffect.isTargetImmune(target, effect, element) and   -- Target isn't immune.
+            not xi.data.statusEffect.isTargetResistant(caster, target, effect) and -- Target didn't trigger a job trait resistance.
+            not xi.data.statusEffect.isEffectNullified(target, effect)             -- Target doesn't have an status effect that nullifies current.
         then
             target:addStatusEffect(effect, power, tick, math.floor(duration * resist))
         end

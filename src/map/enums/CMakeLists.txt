@@ -1,4 +1,7 @@
 set(ENUMS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/key_items.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/packet_c2s.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/packet_s2c.h
     PARENT_SCOPE
 )

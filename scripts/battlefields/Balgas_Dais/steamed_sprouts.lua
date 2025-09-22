@@ -70,58 +70,58 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.GOLD_BEASTCOIN,    weight = 500 }, -- gold_beastcoin
-        { item = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
+        { itemId = xi.item.GOLD_BEASTCOIN,    weight = 500 }, -- gold_beastcoin
+        { itemId = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
     },
 
     {
-        { item = xi.item.NONE,        weight = 750 }, -- nothing
-        { item = xi.item.VILE_ELIXIR, weight = 250 }, -- vile_elixir
+        { itemId = xi.item.NONE,        weight = 750 }, -- nothing
+        { itemId = xi.item.VILE_ELIXIR, weight = 250 }, -- vile_elixir
     },
 
     {
-        { item = xi.item.NONE,              weight = 600 }, -- nothing
-        { item = xi.item.SURVIVAL_BELT,     weight = 100 }, -- survival_belt
-        { item = xi.item.GUARDING_GORGET,   weight = 100 }, -- guarding_gorget
-        { item = xi.item.ENHANCING_EARRING, weight = 100 }, -- enhancing_earring
-        { item = xi.item.BALANCE_BUCKLER,   weight = 100 }, -- balance_buckler
+        { itemId = xi.item.NONE,              weight = 600 }, -- nothing
+        { itemId = xi.item.SURVIVAL_BELT,     weight = 100 }, -- survival_belt
+        { itemId = xi.item.GUARDING_GORGET,   weight = 100 }, -- guarding_gorget
+        { itemId = xi.item.ENHANCING_EARRING, weight = 100 }, -- enhancing_earring
+        { itemId = xi.item.BALANCE_BUCKLER,   weight = 100 }, -- balance_buckler
     },
 
     {
-        { item = xi.item.WHITE_ROCK,       weight = 125 }, -- white_rock
-        { item = xi.item.TRANSLUCENT_ROCK, weight = 125 }, -- translucent_rock
-        { item = xi.item.PURPLE_ROCK,      weight = 125 }, -- purple_rock
-        { item = xi.item.RED_ROCK,         weight = 125 }, -- red_rock
-        { item = xi.item.BLUE_ROCK,        weight = 125 }, -- blue_rock
-        { item = xi.item.YELLOW_ROCK,      weight = 125 }, -- yellow_rock
-        { item = xi.item.GREEN_ROCK,       weight = 125 }, -- green_rock
-        { item = xi.item.BLACK_ROCK,       weight = 125 }, -- black_rock
+        { itemId = xi.item.WHITE_ROCK,       weight = 125 }, -- white_rock
+        { itemId = xi.item.TRANSLUCENT_ROCK, weight = 125 }, -- translucent_rock
+        { itemId = xi.item.PURPLE_ROCK,      weight = 125 }, -- purple_rock
+        { itemId = xi.item.RED_ROCK,         weight = 125 }, -- red_rock
+        { itemId = xi.item.BLUE_ROCK,        weight = 125 }, -- blue_rock
+        { itemId = xi.item.YELLOW_ROCK,      weight = 125 }, -- yellow_rock
+        { itemId = xi.item.GREEN_ROCK,       weight = 125 }, -- green_rock
+        { itemId = xi.item.BLACK_ROCK,       weight = 125 }, -- black_rock
     },
 
     {
-        { item = xi.item.GARNET,       weight =  50 }, -- garnet
-        { item = xi.item.BLACK_PEARL,  weight =  50 }, -- black_pearl
-        { item = xi.item.AMETRINE,     weight =  50 }, -- ametrine
-        { item = xi.item.PAINITE,      weight =  50 }, -- painite
-        { item = xi.item.PEARL,        weight =  50 }, -- pearl
-        { item = xi.item.OAK_LOG,      weight = 100 }, -- oak_log
-        { item = xi.item.GOSHENITE,    weight = 100 }, -- goshenite
-        { item = xi.item.SPHENE,       weight = 100 }, -- sphene
-        { item = xi.item.ROSEWOOD_LOG, weight = 100 }, -- rosewood_log
-        { item = xi.item.TURQUOISE,    weight = 100 }, -- turquoise
-        { item = xi.item.SAPPHIRE,     weight = 100 }, -- sapphire
-        { item = xi.item.PERIDOT,      weight = 150 }, -- peridot
+        { itemId = xi.item.GARNET,       weight =  50 }, -- garnet
+        { itemId = xi.item.BLACK_PEARL,  weight =  50 }, -- black_pearl
+        { itemId = xi.item.AMETRINE,     weight =  50 }, -- ametrine
+        { itemId = xi.item.PAINITE,      weight =  50 }, -- painite
+        { itemId = xi.item.PEARL,        weight =  50 }, -- pearl
+        { itemId = xi.item.OAK_LOG,      weight = 100 }, -- oak_log
+        { itemId = xi.item.GOSHENITE,    weight = 100 }, -- goshenite
+        { itemId = xi.item.SPHENE,       weight = 100 }, -- sphene
+        { itemId = xi.item.ROSEWOOD_LOG, weight = 100 }, -- rosewood_log
+        { itemId = xi.item.TURQUOISE,    weight = 100 }, -- turquoise
+        { itemId = xi.item.SAPPHIRE,     weight = 100 }, -- sapphire
+        { itemId = xi.item.PERIDOT,      weight = 150 }, -- peridot
     },
 
     {
-        { item = xi.item.NONE,                  weight = 125 }, -- nothing
-        { item = xi.item.SCROLL_OF_REFRESH,     weight = 125 }, -- scroll_of_refresh
-        { item = xi.item.FIRE_SPIRIT_PACT,      weight = 125 }, -- fire_spirit_pact
-        { item = xi.item.SCROLL_OF_ERASE,       weight = 125 }, -- scroll_of_erase
-        { item = xi.item.SCROLL_OF_ABSORB_STR,  weight = 125 }, -- scroll_of_absorb-str
-        { item = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
-        { item = xi.item.SCROLL_OF_ICE_SPIKES,  weight = 125 }, -- scroll_of_ice_spikes
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
+        { itemId = xi.item.NONE,                  weight = 125 }, -- nothing
+        { itemId = xi.item.SCROLL_OF_REFRESH,     weight = 125 }, -- scroll_of_refresh
+        { itemId = xi.item.FIRE_SPIRIT_PACT,      weight = 125 }, -- fire_spirit_pact
+        { itemId = xi.item.SCROLL_OF_ERASE,       weight = 125 }, -- scroll_of_erase
+        { itemId = xi.item.SCROLL_OF_ABSORB_STR,  weight = 125 }, -- scroll_of_absorb-str
+        { itemId = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
+        { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight = 125 }, -- scroll_of_ice_spikes
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
     },
 }
 

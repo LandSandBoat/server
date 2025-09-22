@@ -1,7 +1,6 @@
 -- Uses a mixture of mob and player WS formulas
 require('scripts/globals/weaponskills')
 require('scripts/globals/magicburst')
-require('scripts/globals/utils')
 require('scripts/globals/magic')
 
 -- TODO: Consolidate this with weaponskills

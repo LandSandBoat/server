@@ -20733,7 +20733,7 @@ INSERT INTO `mob_spawn_points` VALUES (17101140,0,'Dark_Esquire','Dark Esquire',
 INSERT INTO `mob_spawn_points` VALUES (17101141,0,'Dark_Esquire','Dark Esquire',50,484.556,-8.619,-275.598,215);
 INSERT INTO `mob_spawn_points` VALUES (17101142,0,'Dark_Esquire','Dark Esquire',50,332.531,-15.760,-404.727,84);
 INSERT INTO `mob_spawn_points` VALUES (17101143,0,'Peallaidh','Peallaidh',51,279.313,-16.214,-390.119,69);
-INSERT INTO `mob_spawn_points` VALUES (17101144,0,'Zikko','Zikko',52,-608.491,11.279,-186.516,205);
+INSERT INTO `mob_spawn_points` VALUES (17101144,0,'Zikko','Zikko',52,-613.174,13.337,-180.725,205);
 INSERT INTO `mob_spawn_points` VALUES (17101145,0,'Caedarva_Toad','Caedarva Toad',53,136.189,-0.100,-626.997,240);
 INSERT INTO `mob_spawn_points` VALUES (17101146,0,'Jazaraat','Jazaraat',54,-388.900,7.191,-570.690,227);
 INSERT INTO `mob_spawn_points` VALUES (17101147,0,'Ravin_Raven','Ravin Raven',55,0.000,0.000,0.000,0);
@@ -59277,9 +59277,9 @@ INSERT INTO `mob_spawn_points` VALUES (17465405,0,'Lightning_Wyvern','Lightning 
 INSERT INTO `mob_spawn_points` VALUES (17465406,0,'Chaos_Wyvern','Chaos Wyvern',17,-6.000,-100.182,240.000,64);
 
 -- The Scarlet King (KS30)
-INSERT INTO `mob_spawn_points` VALUES (17465408,0,'Purson','Purson',18,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17465410,0,'Purson','Purson',18,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17465412,0,'Purson','Purson',18,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17465408,0,'Purson','Purson',18,-0.100,100.000,-238.000,68);
+INSERT INTO `mob_spawn_points` VALUES (17465410,0,'Purson','Purson',18,0.125,0.000,2.081,68);
+INSERT INTO `mob_spawn_points` VALUES (17465412,0,'Purson','Purson',18,0.155,-100.000,242.335,68);
 
 -- Roar! A Cat Burglar Bares Her Fangs (MKD10)
 INSERT INTO `mob_spawn_points` VALUES (17465414,0,'Nanaa_Mihgo','Nanaa Mihgo',19,0.0,100.325,-240.0,64);

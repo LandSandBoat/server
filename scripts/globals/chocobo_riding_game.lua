@@ -4,7 +4,6 @@
 -- https://ffxiclopedia.fandom.com/wiki/A_Chocobo_Riding_Game
 -----------------------------------
 require('scripts/globals/packet')
-require('scripts/globals/utils')
 -----------------------------------
 local bastokID   = zones[xi.zone.BASTOK_MINES]
 local sandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]

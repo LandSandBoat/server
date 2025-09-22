@@ -4166,7 +4166,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Exoplate_Phase_3',2059,1000);
 INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,334);
 INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',2060,335);
 
--- Next ID : 2061
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2334);
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2335);
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2336);
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2337);
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2338);
+
+-- Next ID : 2062
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

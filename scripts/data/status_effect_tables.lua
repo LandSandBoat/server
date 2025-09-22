@@ -11,11 +11,9 @@
 -- Example: Siren's elegy is wind while spell elegies are earth. Same effect, diferent elements.
 -- Unlike sleep, elegy effect doesnt have an associated "effect resistance rank" and uses "element resistance rank" instead.
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
-xi.combat = xi.combat or {}
-xi.combat.statusEffect = xi.combat.statusEffect or {}
+xi.data = xi.data or {}
+xi.data.statusEffect = xi.data.statusEffect or {}
 -----------------------------------
 
 -- Table column names.
@@ -32,7 +30,7 @@ local column =
 }
 
 -- Table associating an status effect with their corresponding immunobreak, MEVA and resistance modifiers and immunities.
-xi.combat.statusEffect.dataTable =
+xi.data.statusEffect.dataTable =
 {
     [xi.effect.ADDLE        ] = { 0,               xi.effect.NOCTURNE, xi.element.FIRE,    xi.immunity.ADDLE,      xi.mod.SLOWRES,     0,                          0,                    xi.mod.ADDLE_IMMUNOBREAK    }, -- Addle cant be immunobroken?
     [xi.effect.AMNESIA      ] = { 0,               0,                  xi.element.FIRE,    0,                      xi.mod.AMNESIARES,  0,                          xi.mod.AMNESIA_MEVA,  0                           },
@@ -63,31 +61,31 @@ xi.combat.statusEffect.dataTable =
 -----------------------------------
 -- Helper functions to easily fetch table data.
 -----------------------------------
-xi.combat.statusEffect.getNullificatingEffect = function(effectId)
+xi.data.statusEffect.getNullificatingEffect = function(effectId)
     -- Sanitize fed value
     local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.EFFECT_NULLIFIED_BY]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.EFFECT_NULLIFIED_BY]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getEffectToRemove = function(effectId)
+xi.data.statusEffect.getEffectToRemove = function(effectId)
     -- Sanitize fed value
     local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch effect ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.EFFECT_NULLIFIES]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.EFFECT_NULLIFIES]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getAssociatedElement = function(effectId, actionElement)
+xi.data.statusEffect.getAssociatedElement = function(effectId, actionElement)
     -- Sanitize fed values
     local effectToCheck  = utils.defaultIfNil(effectId, 0)
     local elementToCheck = utils.defaultIfNil(actionElement, 0)
@@ -98,15 +96,15 @@ xi.combat.statusEffect.getAssociatedElement = function(effectId, actionElement)
     end
 
     -- Fetch element from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.EFFECT_ELEMENT]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.EFFECT_ELEMENT]
     end
 
     -- Assume the effect "element" is the same as the action element.
     return elementToCheck
 end
 
-xi.combat.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
+xi.data.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
     -- Sanitize fed values
     local effectToCheck  = utils.defaultIfNil(effectId, 0)
     local elementToCheck = utils.defaultIfNil(actionElement, 0)
@@ -120,26 +118,26 @@ xi.combat.statusEffect.getAssociatedImmunity = function(effectId, actionElement)
     end
 
     -- Fetch immunity from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.EFFECT_IMMUNITY]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.EFFECT_IMMUNITY]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getAssociatedResistTraitModifier = function(effectId)
+xi.data.statusEffect.getAssociatedResistTraitModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.MOD_RESIST_TRAIT]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.MOD_RESIST_TRAIT]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getAssociatedResistanceRankModifier = function(effectId, actionElement)
+xi.data.statusEffect.getAssociatedResistanceRankModifier = function(effectId, actionElement)
     -- Sanitize fed value
     local effectToCheck  = utils.defaultIfNil(effectId, 0)
     local elementToCheck = utils.defaultIfNil(actionElement, 0)
@@ -153,32 +151,32 @@ xi.combat.statusEffect.getAssociatedResistanceRankModifier = function(effectId, 
     end
 
     -- Fetch modifier ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.MOD_RESIST_RANK]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.MOD_RESIST_RANK]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getAssociatedMagicEvasionModifier = function(effectId)
+xi.data.statusEffect.getAssociatedMagicEvasionModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.MOD_MAGIC_EVASION]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.MOD_MAGIC_EVASION]
     end
 
     return 0
 end
 
-xi.combat.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
+xi.data.statusEffect.getAssociatedImmunobreakModifier = function(effectId)
     -- Sanitize fed value
     local effectToCheck = utils.defaultIfNil(effectId, 0)
 
     -- Fetch modifier ID from table if entry exists.
-    if xi.combat.statusEffect.dataTable[effectToCheck] then
-        return xi.combat.statusEffect.dataTable[effectToCheck][column.MOD_IMMUNOBREAK]
+    if xi.data.statusEffect.dataTable[effectToCheck] then
+        return xi.data.statusEffect.dataTable[effectToCheck][column.MOD_IMMUNOBREAK]
     end
 
     return 0
@@ -187,12 +185,12 @@ end
 -----------------------------------
 -- Helper functions to check target effect nullification.
 -----------------------------------
-xi.combat.statusEffect.isTargetImmune = function(target, effectId, actionElement)
+xi.data.statusEffect.isTargetImmune = function(target, effectId, actionElement)
     if not target:isMob() then
         return false
     end
 
-    local immunityId = xi.combat.statusEffect.getAssociatedImmunity(effectId, actionElement)
+    local immunityId = xi.data.statusEffect.getAssociatedImmunity(effectId, actionElement)
     if
         immunityId > 0 and
         target:hasImmunity(immunityId)
@@ -203,8 +201,8 @@ xi.combat.statusEffect.isTargetImmune = function(target, effectId, actionElement
     return false
 end
 
-xi.combat.statusEffect.isTargetResistant = function(actor, target, effectId)
-    local modifierId = xi.combat.statusEffect.getAssociatedResistTraitModifier(effectId)
+xi.data.statusEffect.isTargetResistant = function(actor, target, effectId)
+    local modifierId = xi.data.statusEffect.getAssociatedResistTraitModifier(effectId)
     if modifierId == 0 then
         return false
     end
@@ -226,8 +224,8 @@ xi.combat.statusEffect.isTargetResistant = function(actor, target, effectId)
     return false
 end
 
-xi.combat.statusEffect.isEffectNullified = function(target, effectId)
-    local nullificatingEffect = xi.combat.statusEffect.getNullificatingEffect(effectId)
+xi.data.statusEffect.isEffectNullified = function(target, effectId)
+    local nullificatingEffect = xi.data.statusEffect.getNullificatingEffect(effectId)
     if
         nullificatingEffect > 0 and
         target:hasStatusEffect(nullificatingEffect)

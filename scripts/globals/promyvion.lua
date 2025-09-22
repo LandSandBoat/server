@@ -1,8 +1,6 @@
 -----------------------------------
 -- Promyvion global file
 -----------------------------------
-require('scripts/globals/combat/element_tables')
------------------------------------
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 -----------------------------------
@@ -226,12 +224,12 @@ end
 -----------------------------------
 xi.promyvion.emptyOnMobSpawn = function(mob, mobType)
     local element    = math.random(xi.element.FIRE, xi.element.DARK)
-    local opposite   = xi.combat.element.getElementWeakness(element)
-    local complement = xi.combat.element.getElementStrength(element)
+    local opposite   = xi.data.element.getElementWeakness(element)
+    local complement = xi.data.element.getElementStrength(element)
 
     -- Setup resistances.
     for i = xi.element.FIRE, xi.element.DARK do
-        local resRankModId = xi.combat.element.getElementalResistanceRankModifier(i)
+        local resRankModId = xi.data.element.getElementalResistanceRankModifier(i)
         local value        = 0
 
         if

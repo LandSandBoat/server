@@ -1,8 +1,6 @@
 -----------------------------------
 --  Area/Content Identifiers
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 
 -- NOTE: This should only be used to support GM commands, and is deprecated
 -- by explicitly defining fame area, mission, and quest log IDs from their

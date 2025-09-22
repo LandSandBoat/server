@@ -1,6 +1,3 @@
------------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.gobbieMysteryBox = xi.gobbieMysteryBox or {}
 

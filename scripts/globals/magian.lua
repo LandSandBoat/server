@@ -1,7 +1,6 @@
 -----------------------------------
 -- Magian Trial Global
 -----------------------------------
-require('scripts/globals/combat/element_tables')
 require('scripts/globals/magian_data')
 require('scripts/globals/npc_util')
 -----------------------------------
@@ -832,12 +831,12 @@ local trialConditions =
             -- For each element in that table (may not be all elements)
             for _, elementId in ipairs(dayWeatherTable) do
                 -- Check current day element against element checked.
-                if xi.combat.element.getDayElement(currentDay) == elementId then
+                if xi.data.element.getDayElement(currentDay) == elementId then
                     dayWeatherResult = dayWeatherResult + 1
                 end
 
                 -- Check current weather element against element checked.
-                if xi.combat.element.getWeatherElement(currentWeather) == elementId then
+                if xi.data.element.getWeatherElement(currentWeather) == elementId then
                     dayWeatherResult = dayWeatherResult + 5
                 end
             end

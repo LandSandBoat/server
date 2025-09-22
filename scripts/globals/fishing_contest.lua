@@ -1,8 +1,6 @@
 -----------------------------------
 -- Fish Ranking Contest Functions
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.fishingContest = xi.fishingContest or {}
 

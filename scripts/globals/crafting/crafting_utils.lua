@@ -1,8 +1,6 @@
 -----------------------------------
 -- Crafting utility functions
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.crafting = xi.crafting or {}
 -----------------------------------

@@ -8,6 +8,7 @@ return {
     ['Anieuvansand']      = { event = 665 },
     ['Arienh']            = { text = ID.text.ARIENH_DIALOG },
     ['Arnau']             = { event =  20 }, -- TODO: CS 520 default while RoV M1-3 active?
+    ['Bacherume']         = { text = ID.text.YOU_STAND_BEFORE },
     ['Belgidiveau']       = { event = 585 },
     ['Calovour']          = { event = 633 },
     ['Capiria']           = { text = ID.text.CAPIRIA_DIALOG },
@@ -51,7 +52,7 @@ return {
     ['Pellimie']          = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']          = { text = ID.text.PEPIGORT_DIALOG },
     ['Phaviane']          = { text = ID.text.PHAVIANE_DIALOG },
-    ['Pikiki']            = { evert = 553 },
+    ['Pikiki']            = { event = 553 },
     ['Pontaudarme']       = { event = 717 },
     ['Prerivon']          = { text = ID.text.PRERIVON_DIALOG },
     ['Pursuivant']        = { event = 760 },

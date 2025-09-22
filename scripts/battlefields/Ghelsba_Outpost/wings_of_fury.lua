@@ -27,45 +27,45 @@ content:addEssentialMobs({ 'Colo-colo', 'Furies' })
 content.loot =
 {
     {
-        { item = xi.item.BAT_FANG, weight = 1000 }, -- Bat Fang
+        { itemId = xi.item.BAT_FANG, weight = 1000 }, -- Bat Fang
     },
 
     {
-        { item = xi.item.THUNDER_SPIRIT_PACT, weight = 306 }, -- Thunder Spirit Pact
-        { item = xi.item.SCROLL_OF_INVISIBLE, weight = 319 }, -- Scroll Of Invisible
-        { item = xi.item.SCROLL_OF_SNEAK,     weight = 125 }, -- Scroll Of Sneak
-        { item = xi.item.SCROLL_OF_DEODORIZE, weight = 222 }, -- Scroll Of Deodorize
+        { itemId = xi.item.THUNDER_SPIRIT_PACT, weight = 306 }, -- Thunder Spirit Pact
+        { itemId = xi.item.SCROLL_OF_INVISIBLE, weight = 319 }, -- Scroll Of Invisible
+        { itemId = xi.item.SCROLL_OF_SNEAK,     weight = 125 }, -- Scroll Of Sneak
+        { itemId = xi.item.SCROLL_OF_DEODORIZE, weight = 222 }, -- Scroll Of Deodorize
     },
 
     {
-        { item = xi.item.GANKO,             weight = 153 }, -- Ganko
-        { item = xi.item.PLATOON_EDGE,      weight = 139 }, -- Platoon Edge
-        { item = xi.item.PLATOON_AXE,       weight =  83 }, -- Platoon Axe
-        { item = xi.item.PLATOON_POLE,      weight =  97 }, -- Platoon Pole
-        { item = xi.item.PLATOON_DAGGER,    weight = 125 }, -- Platoon Dagger
-        { item = xi.item.MYTHRIL_BEASTCOIN, weight = 444 }, -- Mythril Beastcoin
-        { item = xi.item.TRANSLUCENT_ROCK,  weight =  56 }, -- Translucent Rock
+        { itemId = xi.item.GANKO,             weight = 153 }, -- Ganko
+        { itemId = xi.item.PLATOON_EDGE,      weight = 139 }, -- Platoon Edge
+        { itemId = xi.item.PLATOON_AXE,       weight =  83 }, -- Platoon Axe
+        { itemId = xi.item.PLATOON_POLE,      weight =  97 }, -- Platoon Pole
+        { itemId = xi.item.PLATOON_DAGGER,    weight = 125 }, -- Platoon Dagger
+        { itemId = xi.item.MYTHRIL_BEASTCOIN, weight = 444 }, -- Mythril Beastcoin
+        { itemId = xi.item.TRANSLUCENT_ROCK,  weight =  56 }, -- Translucent Rock
     },
 
     {
-        { item = xi.item.GUNROMARU,      weight = 111 }, -- Gunromaru
-        { item = xi.item.PLATOON_DAGGER, weight = 139 }, -- Platoon Dagger
-        { item = xi.item.PLATOON_EDGE,   weight = 139 }, -- Platoon Edge
-        { item = xi.item.PLATOON_LANCE,  weight =  42 }, -- Platoon Lance
-        { item = xi.item.PLATOON_SWORD,  weight = 181 }, -- Platoon Sword
-        { item = xi.item.PURPLE_ROCK,    weight =  97 }, -- Purple Rock
-        { item = xi.item.RED_ROCK,       weight =  69 }, -- Red Rock
-        { item = xi.item.WHITE_ROCK,     weight =  14 }, -- White Rock
-        { item = xi.item.BLACK_ROCK,     weight =  28 }, -- Black Rock
-        { item = xi.item.GREEN_ROCK,     weight =  28 }, -- Green Rock
-        { item = xi.item.YELLOW_ROCK,    weight =  14 }, -- Yellow Rock
-        { item = xi.item.BLUE_ROCK,      weight =  69 }, -- Blue Rock
+        { itemId = xi.item.GUNROMARU,      weight = 111 }, -- Gunromaru
+        { itemId = xi.item.PLATOON_DAGGER, weight = 139 }, -- Platoon Dagger
+        { itemId = xi.item.PLATOON_EDGE,   weight = 139 }, -- Platoon Edge
+        { itemId = xi.item.PLATOON_LANCE,  weight =  42 }, -- Platoon Lance
+        { itemId = xi.item.PLATOON_SWORD,  weight = 181 }, -- Platoon Sword
+        { itemId = xi.item.PURPLE_ROCK,    weight =  97 }, -- Purple Rock
+        { itemId = xi.item.RED_ROCK,       weight =  69 }, -- Red Rock
+        { itemId = xi.item.WHITE_ROCK,     weight =  14 }, -- White Rock
+        { itemId = xi.item.BLACK_ROCK,     weight =  28 }, -- Black Rock
+        { itemId = xi.item.GREEN_ROCK,     weight =  28 }, -- Green Rock
+        { itemId = xi.item.YELLOW_ROCK,    weight =  14 }, -- Yellow Rock
+        { itemId = xi.item.BLUE_ROCK,      weight =  69 }, -- Blue Rock
     },
 
     {
-        { item = xi.item.NONE,        weight = 389 }, -- nothing
-        { item = xi.item.ASTRAL_RING, weight = 167 }, -- astral_ring
-        { item = xi.item.BAT_WING,    weight = 444 }, -- bat_wing
+        { itemId = xi.item.NONE,        weight = 389 }, -- nothing
+        { itemId = xi.item.ASTRAL_RING, weight = 167 }, -- astral_ring
+        { itemId = xi.item.BAT_WING,    weight = 444 }, -- bat_wing
     },
 }
 

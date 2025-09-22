@@ -28,6 +28,8 @@ zones[xi.zone.CAEDARVA_MIRE] =
         RESPONSE                      = 7344, -- There is no response...
         YOU_HAVE_A_BADGE              = 7357, -- You have a %? Let me have a closer look at that...
         LOGGING_IS_POSSIBLE_HERE      = 7358, -- Logging is possible here if you have <item>.
+        LEG_STUCK                     = 7365, -- Your leg is stuck in the swampy ground!
+        MYSTERIOUS_EFFECT             = 7366, -- You gain some mysterious effect from the swamp!
         HAND_OVER_TO_IMMORTAL         = 7439, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7440, -- Your Imperial Standing has increased!
         CANNOT_ENTER                  = 7478, -- You cannot enter at this time. Please wait a while before trying again.
@@ -65,6 +67,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         PEALLAIDH_PH_OFFSET   = GetFirstID('Wild_Karakul'), -- These are 270IDs away. Use offset in case of weird shift.
         TYGER                 = GetFirstID('Tyger'),
         VERDELET              = GetFirstID('Verdelet'),
+        ZIKKO                 = GetFirstID('Zikko'),
     },
     npc =
     {

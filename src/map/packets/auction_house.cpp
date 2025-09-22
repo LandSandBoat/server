@@ -30,16 +30,16 @@
 
 bool IsAuctionOpen = true; // Trading is allowed at the auction
 
-CAuctionHousePacket::CAuctionHousePacket(uint8 action)
+CAuctionHousePacket::CAuctionHousePacket(const GP_CLI_COMMAND_AUC_COMMAND action)
 {
     this->setType(0x4C);
     this->setSize(0x3C);
 
-    ref<uint8>(0x04) = action;
-    ref<uint8>(0x05) = 0xFF;
-    ref<uint8>(0x06) = IsAuctionOpen;
+    ref<GP_CLI_COMMAND_AUC_COMMAND>(0x04) = action;
+    ref<uint8>(0x05)                      = 0xFF;
+    ref<uint8>(0x06)                      = IsAuctionOpen;
 
-    if (action == 2)
+    if (action == GP_CLI_COMMAND_AUC_COMMAND::Open)
     {
         ref<uint8>(0x0A) = AUCTION_ID;
     }

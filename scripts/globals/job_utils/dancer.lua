@@ -372,9 +372,9 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.WIND, xi.mod.INT, xi.effect.WEIGHT, 0)
 
         if
-            not xi.combat.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and -- Check immunity.
-            not xi.combat.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
-            not xi.combat.statusEffect.isEffectNullified(target, xi.effect.WEIGHT) and               -- Check conflicting effect.
+            not xi.data.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and -- Check immunity.
+            not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
+            not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT) and               -- Check conflicting effect.
             resistRate > 0.25 and                                                                    -- Check actual resistance.
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)                         -- Check effect power.
         then
@@ -413,7 +413,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             weaponDamage = weaponDamage - 3 + h2hSkill
         end
 
-        local applyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(player)
+        local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(player)
         local baseDmg              = weaponDamage + xi.combat.physical.calculateMeleeStatFactor(player, target)
         local pdif                 = xi.combat.physical.calculateMeleePDIF(player, target, weaponType, 1.0, false, applyLevelCorrection, false, 0.0, false, xi.slot.MAIN, false)
         local dmg                  = baseDmg * pdif
@@ -426,9 +426,9 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
 
         if
-            not xi.combat.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.
-            not xi.combat.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and          -- check resistance trigger.
-            not xi.combat.statusEffect.isEffectNullified(target, xi.effect.STUN) and                  -- check conflicting effect.
+            not xi.data.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.
+            not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and          -- check resistance trigger.
+            not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN) and                  -- check conflicting effect.
             resistRate > 0.25                                                                         -- Check actual resistance.
         then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)

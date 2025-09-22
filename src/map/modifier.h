@@ -529,6 +529,7 @@ enum class Mod
     // Beastmaster
     TAME                         = 304,  // Additional percent chance to charm
     CHARM_TIME                   = 360,  // extends the charm time only, no effect of charm chance
+    FAMILIAR_BONUS               = 1169, // Bonus minutes of charm and haste when using familiar
     REWARD_HP_BONUS              = 364,  // Percent to add to reward HP healed. (364)
     CHARM_CHANCE                 = 391,  // extra chance to charm (light+apollo staff ect)
     FERAL_HOWL_DURATION          = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
@@ -1116,7 +1117,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1169 and onward
+    // SPARE IDs: 1170 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

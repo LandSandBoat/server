@@ -27,11 +27,11 @@ entity.onMobFight = function(mob, target)
         end
 
         if element ~= 0 then
-            mob:delMod(xi.combat.element.getElementalAbsorptionModifier(element), 100)
+            mob:delMod(xi.data.element.getElementalAbsorptionModifier(element), 100)
         end
 
         mob:useMobAbility(624)
-        mob:addMod(xi.combat.element.getElementalAbsorptionModifier(newElement), 100)
+        mob:addMod(xi.data.element.getElementalAbsorptionModifier(newElement), 100)
         mob:setLocalVar('changeTime', mob:getBattleTime() + math.random(2, 3) * 15)
         mob:setLocalVar('element', newElement)
     end

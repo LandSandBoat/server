@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: East_Ronfaure_[S] (81)
 -----------------------------------
-require('scripts/globals/dark_ixion')
------------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
 ---@type TZone

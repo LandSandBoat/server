@@ -23,38 +23,38 @@ content:addEssentialMobs({ 'Capelthwaite', 'Freybug', 'Rongeur_Dos', 'Guytrash' 
 content.loot =
 {
     {
-        { item = xi.item.WOLF_HIDE, weight = 1000 },
+        { itemId = xi.item.WOLF_HIDE, weight = 1000 },
     },
 
     {
-        { item = xi.item.REVIVAL_TREE_ROOT, weight = 1000 },
+        { itemId = xi.item.REVIVAL_TREE_ROOT, weight = 1000 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 100 },
-        { item = xi.item.MANNEQUIN_HEAD,  weight = 300 },
-        { item = xi.item.MANNEQUIN_BODY,  weight = 300 },
-        { item = xi.item.MANNEQUIN_HANDS, weight = 300 },
+        { itemId = xi.item.NONE,            weight = 100 },
+        { itemId = xi.item.MANNEQUIN_HEAD,  weight = 300 },
+        { itemId = xi.item.MANNEQUIN_BODY,  weight = 300 },
+        { itemId = xi.item.MANNEQUIN_HANDS, weight = 300 },
     },
 
     {
-        { item = xi.item.NONE,                  weight = 250 },
-        { item = xi.item.SCROLL_OF_ABSORB_AGI,  weight = 125 },
-        { item = xi.item.SCROLL_OF_ABSORB_INT,  weight = 125 },
-        { item = xi.item.SCROLL_OF_ABSORB_VIT,  weight = 125 },
-        { item = xi.item.SCROLL_OF_ERASE,       weight = 125 },
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 },
-        { item = xi.item.SCROLL_OF_DISPEL,      weight = 125 },
+        { itemId = xi.item.NONE,                  weight = 250 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,  weight = 125 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_INT,  weight = 125 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_VIT,  weight = 125 },
+        { itemId = xi.item.SCROLL_OF_ERASE,       weight = 125 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,      weight = 125 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 100 },
-        { item = xi.item.SINGERS_SHIELD,   weight = 150 },
-        { item = xi.item.WARLOCKS_SHIELD,  weight = 150 },
-        { item = xi.item.MAGICIANS_SHIELD, weight = 150 },
-        { item = xi.item.ASHIGARU_MANTLE,  weight = 150 },
-        { item = xi.item.WIZARDS_MANTLE,   weight = 150 },
-        { item = xi.item.KILLER_MANTLE,    weight = 150 },
+        { itemId = xi.item.NONE,             weight = 100 },
+        { itemId = xi.item.SINGERS_SHIELD,   weight = 150 },
+        { itemId = xi.item.WARLOCKS_SHIELD,  weight = 150 },
+        { itemId = xi.item.MAGICIANS_SHIELD, weight = 150 },
+        { itemId = xi.item.ASHIGARU_MANTLE,  weight = 150 },
+        { itemId = xi.item.WIZARDS_MANTLE,   weight = 150 },
+        { itemId = xi.item.KILLER_MANTLE,    weight = 150 },
     },
 }
 

@@ -192,8 +192,14 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
  *  Notes   : Mainly used for showing retail text specific to an NPC
  ************************************************************************/
 
-void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3)
+void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3, sol::object const& p4, sol::object const& p5)
 {
+    if (!entity)
+    {
+        ShowError("null entity used on showText() function. Message ID (%i)", messageID);
+        return;
+    }
+
     CBaseEntity* PBaseEntity = entity->GetBaseEntity();
 
     if (PBaseEntity == nullptr)
@@ -202,7 +208,14 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::obj
         return;
     }
 
-    if (PBaseEntity->objtype == TYPE_NPC)
+    uint32 param0   = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
+    uint32 param1   = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
+    uint32 param2   = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+    uint32 param3   = (p3 != sol::lua_nil) ? p3.as<uint32>() : 0;
+    bool   showName = (p4 != sol::lua_nil) ? p4.as<bool>() : false; // ShowName is false in CMessageSpecialPacket Constructor, so mimic the same default.
+    bool   turn     = (p5 != sol::lua_nil) ? p5.as<bool>() : true;  // Turn to player, default behavior is true
+
+    if (turn && PBaseEntity->objtype == TYPE_NPC)
     {
         PBaseEntity->m_TargID       = m_PBaseEntity->targid;
         PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
@@ -210,18 +223,13 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::obj
         PBaseEntity->loc.zone->UpdateEntityPacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
     }
 
-    uint32 param0 = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
-    uint32 param1 = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
-    uint32 param2 = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
-    uint32 param3 = (p3 != sol::lua_nil) ? p3.as<uint32>() : 0;
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param2, param3);
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param2, param3, showName);
     }
     else
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param3));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param3, showName));
     }
 }
 
@@ -2492,7 +2500,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
             PChar->pushPacket<CShopItemsPacket>(PChar);
             break;
         case 3:
-            PChar->pushPacket<CAuctionHousePacket>(2);
+            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Open);
             break;
         default:
             ShowDebug("Menu %i not implemented, yet.", menu);
@@ -14982,22 +14990,7 @@ uint16 CLuaBaseEntity::getWeaponDmg()
         return 0;
     }
 
-    uint16 weaponDamage = 0;
-
-    // TODO: Determine if trusts and player fellows use mob or player damage formula
-    if (m_PBaseEntity->objtype == TYPE_MOB ||
-        (m_PBaseEntity->objtype == TYPE_PET &&
-         static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON))
-    {
-        auto* PMob   = static_cast<CMobEntity*>(m_PBaseEntity);
-        weaponDamage = mobutils::GetWeaponDamage(PMob, SLOT_MAIN);
-    }
-    else
-    {
-        weaponDamage = static_cast<CBattleEntity*>(m_PBaseEntity)->GetMainWeaponDmg();
-    }
-
-    return weaponDamage;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMainWeaponDmg();
 }
 
 /************************************************************************
@@ -15172,9 +15165,10 @@ uint32 CLuaBaseEntity::addDamageFromMultipliers(uint32 damage, PHYSICAL_ATTACK_T
  *  Purpose : Expends one item in the ammo slot (arrow,bullet, etc)
  *  Example : player:removeAmmo()
  *  Notes   : Ammo consumed is calculated in charentity.cpp and passed to battleutils
+ *            Defaults to 1 if no argument is given
  ************************************************************************/
 
-void CLuaBaseEntity::removeAmmo(uint8 ammoUsed)
+void CLuaBaseEntity::removeAmmo(sol::object const& ammoUsed) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -15182,7 +15176,7 @@ void CLuaBaseEntity::removeAmmo(uint8 ammoUsed)
         return;
     }
 
-    battleutils::RemoveAmmo(static_cast<CCharEntity*>(m_PBaseEntity), ammoUsed);
+    battleutils::RemoveAmmo(static_cast<CCharEntity*>(m_PBaseEntity), ammoUsed.is<uint8>() ? ammoUsed.as<uint8>() : 1);
 }
 
 /************************************************************************
@@ -15898,9 +15892,9 @@ bool CLuaBaseEntity::hasJugPet()
 
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    if (hasPet())
+    if (auto* PPet = dynamic_cast<CPetEntity*>(PBattle->PPet); PPet && PPet->status != STATUS_TYPE::DISAPPEAR)
     {
-        return static_cast<CPetEntity*>(PBattle->PPet)->getPetType() == PET_TYPE::JUG_PET;
+        return PPet->getPetType() == PET_TYPE::JUG_PET;
     }
 
     return false;
@@ -16243,13 +16237,13 @@ void CLuaBaseEntity::petRetreat()
 }
 
 /************************************************************************
- *  Function: familiar()
- *  Purpose : Increases the power of the entities pet
- *  Example : mob:familiar()
- *  Notes   :
+ *  Function: extendCharm()
+ *  Purpose : Increases the charm duration of the entity by a random number of seconds
+ *  Example : player:getPet():extendCharm(15, 30)
+ *  Notes   : Set min and max to the same value to remove rng
  ************************************************************************/
 
-void CLuaBaseEntity::familiar()
+void CLuaBaseEntity::extendCharm(uint16 minSeconds, uint16 maxSeconds)
 {
     auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattle)
@@ -16258,10 +16252,7 @@ void CLuaBaseEntity::familiar()
         return;
     }
 
-    if (PBattle->PPet != nullptr)
-    {
-        petutils::Familiar(PBattle->PPet);
-    }
+    petutils::ExtendCharm(PBattle, minSeconds, maxSeconds);
 }
 
 /************************************************************************
@@ -20060,7 +20051,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("petAttack", CLuaBaseEntity::petAttack);
     SOL_REGISTER("petAbility", CLuaBaseEntity::petAbility);
     SOL_REGISTER("petRetreat", CLuaBaseEntity::petRetreat);
-    SOL_REGISTER("familiar", CLuaBaseEntity::familiar);
+    SOL_REGISTER("extendCharm", CLuaBaseEntity::extendCharm);
 
     SOL_REGISTER("addPetMod", CLuaBaseEntity::addPetMod);
     SOL_REGISTER("setPetMod", CLuaBaseEntity::setPetMod);

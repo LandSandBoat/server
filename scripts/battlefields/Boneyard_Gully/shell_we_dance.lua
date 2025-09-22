@@ -36,23 +36,23 @@ content:addEssentialMobs({ 'Parata', 'Bladmall' })
 content.loot =
 {
     {
-        { item = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = 375 },
-        { item = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = 328 },
-        { item = xi.item.DRAGON_BONE,              weight = 263 },
+        { itemId = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = 375 },
+        { itemId = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = 328 },
+        { itemId = xi.item.DRAGON_BONE,              weight = 263 },
     },
 
     {
-        { item = xi.item.NONE,         weight = 812 },
-        { item = xi.item.CLOUD_EVOKER, weight = 188 },
+        { itemId = xi.item.NONE,         weight = 812 },
+        { itemId = xi.item.CLOUD_EVOKER, weight = 188 },
     },
 
     {
         quantity = 2,
-        { item = xi.item.NONE,                    weight = 199 },
-        { item = xi.item.STONE_SPLITTER,          weight = 150 },
-        { item = xi.item.FRENZY_FIFE,             weight = 175 },
-        { item = xi.item.BLAU_DOLCH,              weight = 238 },
-        { item = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 238 },
+        { itemId = xi.item.NONE,                    weight = 199 },
+        { itemId = xi.item.STONE_SPLITTER,          weight = 150 },
+        { itemId = xi.item.FRENZY_FIFE,             weight = 175 },
+        { itemId = xi.item.BLAU_DOLCH,              weight = 238 },
+        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 238 },
     },
 }
 

@@ -13964,7 +13964,7 @@ INSERT INTO `item_equipment` VALUES (27730,'iuitl_headgear_+1',99,119,2458912,25
 INSERT INTO `item_equipment` VALUES (27731,'gende._caubeen_+1',99,119,524820,265,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (27732,'hagondes_hat_+1',99,119,1622040,262,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (27733,'straw_hat',1,0,4194303,366,0,0,16,0,0,0);
-INSERT INTO `item_equipment` VALUES (27734,'straw_hat',1,0,4194303,366,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (27734,'straw_hat',1,0,4194303,367,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (27735,'enedron_glasses',99,107,4194303,125,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (27736,'quiahuiz_helm',99,115,8641,333,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (27737,'kaabnax_hat',99,115,1589788,346,0,0,16,0,0,0);
@@ -14109,7 +14109,7 @@ INSERT INTO `item_equipment` VALUES (27876,'iuitl_vest_+1',99,119,2458912,256,0,
 INSERT INTO `item_equipment` VALUES (27877,'gende._bilaut_+1',99,119,524820,265,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27878,'hagondes_coat_+1',99,119,1622040,262,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27879,'overalls',1,0,4194303,366,0,0,32,128,0,0);
-INSERT INTO `item_equipment` VALUES (27880,'overalls',1,0,4194303,366,0,0,32,128,0,0);
+INSERT INTO `item_equipment` VALUES (27880,'overalls',1,0,4194303,367,0,0,32,128,0,0);
 INSERT INTO `item_equipment` VALUES (27881,'outrider_mail',99,117,6593,5,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27882,'espial_gambison',99,117,3662710,23,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (27883,'wayfarer_robe',99,117,4179646,20,0,0,32,0,0,0);

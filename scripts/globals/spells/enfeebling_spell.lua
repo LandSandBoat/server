@@ -2,12 +2,9 @@
 -- Enfeebling Spell Utilities
 -- Used for spells that deal negative status effects upon targets.
 -----------------------------------
-require('scripts/globals/combat/element_tables')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/combat/status_effect_tables')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -341,20 +338,20 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- STEP 1: Check spell nullification.
     ------------------------------
-    if xi.combat.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
+    if xi.data.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
         spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
         return spellEffect
     end
 
     -- Check trait nullification trigger.
-    if xi.combat.statusEffect.isTargetResistant(caster, target, spellEffect) then
+    if xi.data.statusEffect.isTargetResistant(caster, target, spellEffect) then
         spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return spellEffect
     end
 
     -- Target already has an status effect that nullifies current.
-    if xi.combat.statusEffect.isEffectNullified(target, spellEffect) then
+    if xi.data.statusEffect.isEffectNullified(target, spellEffect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end
@@ -391,17 +388,17 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         -- Decide which resistance rank modifier to use:
         -- 1: If an effect exists, check if said effect has a specialized resistance rank.
         -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
-        local resistanceRankMod = xi.combat.statusEffect.getAssociatedResistanceRankModifier(spellEffect, spellElement)
+        local resistanceRankMod = xi.data.statusEffect.getAssociatedResistanceRankModifier(spellEffect, spellElement)
 
         if resistanceRankMod == 0 then -- If it's an effect and this is 0, try with element.
-            resistanceRankMod = xi.combat.element.getElementalResistanceRankModifier(spellElement)
+            resistanceRankMod = xi.data.element.getElementalResistanceRankModifier(spellElement)
         end
 
         -- Fetch resistance rank and apply possible modifiers to it.
         local resistanceRank = target:getMod(resistanceRankMod)
 
         -- Attempt immunobreak. Fetch resistance rank modifier.
-        local immunobreakModifier = xi.combat.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
+        local immunobreakModifier = xi.data.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
         local immunobreakValue    = target:getMod(immunobreakModifier)
 
         if

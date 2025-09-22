@@ -1,5 +1,6 @@
-require('scripts/globals/utils')
+-----------------------------------
 require('scripts/globals/interaction/interaction_lookup')
+-----------------------------------
 
 -- Used by core to call into the loaded interaction handlers
 InteractionGlobal = InteractionGlobal or {}

@@ -2,8 +2,6 @@
 -- ID: 17615
 -- Chicken Knife
 -----------------------------------
-require('scripts/globals/utils') -- For clamping function
------------------------------------
 local itemObject = {}
 
 itemObject.onItemEquip = function(player, item)

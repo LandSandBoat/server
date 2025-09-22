@@ -73,3 +73,8 @@ end
 ---@return nil
 function CMobSkill:setFinalAnimationSub(newAnimationSub)
 end
+
+---@param newAnimationTime integer
+---@return nil
+function CMobSkill:setAnimationTime(newAnimationTime)
+end

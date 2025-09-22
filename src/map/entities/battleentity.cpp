@@ -46,6 +46,7 @@
 #include "roe.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/mobutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
 #include "utils/zoneutils.h"
@@ -585,6 +586,15 @@ int16 CBattleEntity::GetAmmoDelay()
 uint16 CBattleEntity::GetMainWeaponDmg()
 {
     TracyZoneScoped;
+
+    if (objtype == TYPE_MOB ||
+        (objtype == TYPE_PET &&
+         static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON))
+    {
+        auto* PMob = static_cast<CMobEntity*>(this);
+        return mobutils::GetWeaponDamage(PMob, SLOT_MAIN);
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
@@ -608,6 +618,15 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 uint16 CBattleEntity::GetSubWeaponDmg()
 {
     TracyZoneScoped;
+
+    if (objtype == TYPE_MOB ||
+        (objtype == TYPE_PET &&
+         static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON))
+    {
+        auto* PMob = static_cast<CMobEntity*>(this);
+        return mobutils::GetWeaponDamage(PMob, SLOT_MAIN); // So help me duke if mob offhand isn't identical to mainhand somewhere
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
@@ -630,6 +649,15 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 {
     TracyZoneScoped;
     uint16 dmg = 0;
+
+    if (objtype == TYPE_MOB ||
+        (objtype == TYPE_PET &&
+         static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON))
+    {
+        auto* PMob = static_cast<CMobEntity*>(this);
+        return mobutils::GetWeaponDamage(PMob, SLOT_RANGED);
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
@@ -663,13 +691,15 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     return dmg + getMod(Mod::RANGED_DMG_RATING);
 }
 
+// https://www.bg-wiki.com/ffxi/Weapon_Rank
 uint16 CBattleEntity::GetMainWeaponRank()
 {
-    uint16 wDamage = 0;
+    uint16 wDamage = GetMainWeaponDmg();
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        wDamage = weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK);
-
+        wDamage += weapon->getModifier(Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
+        wDamage -= weapon->getModifier(Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
         // apply the H2H formula adjustment only to players
         // as mobs use H2H for dual wield and thus further research is needed
         if (objtype == TYPE_PC && weapon->getSkillType() == SKILL_HAND_TO_HAND)
@@ -682,24 +712,30 @@ uint16 CBattleEntity::GetMainWeaponRank()
 
 uint16 CBattleEntity::GetSubWeaponRank()
 {
+    uint16 wDamage = GetSubWeaponDmg();
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
-        return (weapon->getDamage() + getMod(Mod::SUB_DMG_RANK)) / 9;
+        wDamage += weapon->getModifier(Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
+        wDamage -= weapon->getModifier(Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
     }
-    return 0;
+
+    return wDamage / 9;
 }
 
 uint16 CBattleEntity::GetRangedWeaponRank()
 {
+    uint16 wDamage = GetRangedWeaponDmg();
     // Check ranged slot first, otherwise use ammo if it's null
     CItemEquipment* item = m_Weapons[SLOT_RANGED] ? m_Weapons[SLOT_RANGED] : m_Weapons[SLOT_AMMO];
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(item))
     {
-        return (weapon->getDamage() + getMod(Mod::RANGED_DMG_RANK)) / 9;
+        wDamage += weapon->getModifier(Mod::RANGED_DMG_RANK);
+        wDamage -= weapon->getModifier(Mod::DMG_RATING); // Company sword, Maneater, etc don't boost weapon rank
     }
 
-    return 0;
+    return wDamage / 9;
 }
 
 /************************************************************************

@@ -409,7 +409,7 @@ xi.combat.physical.calculateFTPBonus = function(actor)
             wsElementalProperties[scProp2][elementChecked] == 1 or
             wsElementalProperties[scProp3][elementChecked] == 1
         then
-            fTPBonus = fTPBonus + actor:getMod(xi.combat.element.getElementalFTPModifier(elementChecked)) / 256
+            fTPBonus = fTPBonus + actor:getMod(xi.data.element.getElementalFTPModifier(elementChecked)) / 256
 
             if dayElement == elementChecked then
                 fTPBonus = fTPBonus + actor:getMod(xi.mod.DAY_FTP_BONUS) / 256

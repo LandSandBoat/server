@@ -1329,3 +1329,76 @@ function utils.timeIsBefore(current, target)
 
     return current.hour < target.hour
 end
+
+-- Selects loot from a structured table of loot groups
+-- loot is chosen by randomly assigning based on weights from loot groups within lootTable. Example:
+--[[
+lootTable =
+{
+    {
+        { itemId = xi.item.GIL, amount = 10000, weight = 1000 },
+    },
+
+    {
+        quantity = 2,
+        { itemId = xi.item.REMEDY, weight = 900 },
+        { itemId = 0,              weight = 100 },
+    },
+
+    {
+        { itemId = xi.item.REMEDY, weight = 200 },
+        { itemId = 0,              weight = 800 },
+    },
+
+--]]
+
+---@param actor CBaseEntity
+---@param lootTable table<table>
+---@return table
+function utils.selectFromLootGroups(actor, lootTable)
+    local selectedLoot = {}
+    if not actor or not actor:getName() then
+        return selectedLoot
+    end
+
+    for i, lootGroup in ipairs(lootTable) do
+        local max = 0
+
+        -- not ipairs because we might have string keys alongside the individual items in each lootGroup
+        for j, entry in pairs(lootGroup) do
+            if type(entry) == 'table' then
+                max = max + entry.weight
+
+                if entry.itemId == nil then
+                    print(fmt('[ERROR] Player ({}) has encountered nil item at index {} of lootGroup with index {}', actor:getName(), j, i))
+                end
+            end
+        end
+
+        local quantity = lootGroup.quantity or 1
+
+        for j = 1, quantity do
+            local roll    = math.random(max)
+            local current = 0
+
+            for _, entry in pairs(lootGroup) do
+                if type(entry) == 'table' then
+                    current = current + entry.weight
+
+                    if current >= roll then
+                        -- xi.item.NONE gives a chance to drop nothing from a group
+                        if entry.itemId == 0 or entry.itemId == nil then
+                            break
+                        end
+
+                        table.insert(selectedLoot, entry)
+
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    return selectedLoot
+end

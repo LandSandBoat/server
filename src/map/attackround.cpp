@@ -175,7 +175,7 @@ CBattleEntity* CAttackRound::GetCoverAbilityUserEntity()
  ************************************************************************/
 bool CAttackRound::IsH2H()
 {
-    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_MAIN]); m_attacker->objtype == TYPE_PC)
     {
         return weapon->getSkillType() == SKILL_HAND_TO_HAND;
     }

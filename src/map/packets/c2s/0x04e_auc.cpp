@@ -34,7 +34,7 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
                   .mustEqual(Result, 0, "Result not 0")
                   .mustEqual(ResultStatus, 0, "Result status");
 
-    switch (static_cast<GP_CLI_COMMAND_AUC_COMMAND>(Command))
+    switch (Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
@@ -79,6 +79,8 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
             pv.range("AucWorkIndex", AucWorkIndex, 0, 6);
         }
         break;
+        default:
+            break;
     }
 
     return pv;
@@ -88,7 +90,7 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
 {
     const auto playerName = PChar->getName();
 
-    switch (static_cast<GP_CLI_COMMAND_AUC_COMMAND>(Command))
+    switch (Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
@@ -126,5 +128,7 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
             auctionutils::UpdateSaleListByPlayer(PChar, AucWorkIndex);
         }
         break;
+        default:
+            break;
     }
 }

@@ -8,7 +8,6 @@ require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magicburst')
 require('scripts/globals/magic')
 require('scripts/globals/spells/damage_spell')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
@@ -176,7 +175,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         attMod = fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
 
-    local applyLevelCorrection  = xi.combat.levelCorrection.isLevelCorrectedZone(mob)
+    local applyLevelCorrection  = xi.data.levelCorrection.isLevelCorrectedZone(mob)
     local weaponType            = xi.skill.NONE -- use NONE for mobs
     local canCrit               = false         -- TODO: implement which skills can crit
     local useDefInPlaceOfAttack = isCannonball or false
@@ -282,13 +281,13 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
 
     -- Multipliers.
     local sdt                         = xi.spells.damage.calculateSDT(target, actionElement)
-    local resist                      = xi.mobskills.applyPlayerResistance(actor, nil, target, actor:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), petAccBonus, actionElement)
+    local resistRate                  = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, 0, actionElement, xi.mod.INT, 0, petAccBonus)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
 
     -- Calculate final damage.
     finalDamage = math.floor(finalDamage * sdt)
-    finalDamage = math.floor(finalDamage * resist)
+    finalDamage = math.floor(finalDamage * resistRate)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * damageModifier)
@@ -301,23 +300,6 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
     end
 
     return finalDamage
-end
-
--- effect = xi.effect.WHATEVER if enfeeble
--- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
--- This determines how much the monsters ability resists on the player.
-xi.mobskills.applyPlayerResistance = function(actor, effectId, target, diff, bonusMacc, element)
-    if not bonusMacc then
-        bonusMacc = 0
-    end
-
-    if diff > 10 then
-        bonusMacc = bonusMacc + 10 + (diff - 10) / 2
-    else
-        bonusMacc = bonusMacc + diff
-    end
-
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, 0, element, 0, effectId, bonusMacc)
 end
 
 xi.mobskills.mobAddBonuses = function(actor, target, damage, element, skill) -- used for SMN magical bloodpacts, despite the name.
@@ -351,19 +333,14 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
     end
 
     -- Deal bonus damage vs mob ecosystem
-    local systemBonus = utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem())
-    damage            = damage + damage * systemBonus * 0.25
+    local systemBonus  = 1 + utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem()) / 4
+    local resistRate   = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, 0, 0)
+    local elementalSDT = xi.spells.damage.calculateSDT(target, element)
 
-    -- elemental resistence
-    if element and element > 0 then
-        -- no skill available, pass nil
-        local resistRate   = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0, element)
-        local elementalSDT = xi.spells.damage.calculateSDT(target, element)
-
-        damage = damage * resistRate * elementalSDT
-    end
-
-    damage = utils.clamp(damage, 1, cap)
+    damage = math.floor(damage * systemBonus)
+    damage = math.floor(damage * resistRate)
+    damage = math.floor(damage * elementalSDT)
+    damage = utils.clamp(damage, 0, cap)
 
     local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
@@ -375,11 +352,11 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
 
-    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000                             -- Mod is base 10000
-    local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000                       -- Mod is base 10000
-    local uBreathDamageTaken  = target:getMod(xi.mod.UDMGBREATH) / 10000                      -- Mod is base 10000
-    local combinedDamageTaken = utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
-    combinedDamageTaken       = utils.clamp(1 + combinedDamageTaken + uBreathDamageTaken, 0, 2)                     -- Uncapped breath damage modifier. Cap is 100% both ways.
+    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000                               -- Mod is base 10000
+    local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000                         -- Mod is base 10000
+    local uBreathDamageTaken  = target:getMod(xi.mod.UDMGBREATH) / 10000                        -- Mod is base 10000
+    local combinedDamageTaken = utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5)   -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
+    combinedDamageTaken       = utils.clamp(1 + combinedDamageTaken + uBreathDamageTaken, 0, 2) -- Uncapped breath damage modifier. Cap is 100% both ways.
 
     -- Apply "Damage taken" mods to damage.
     damage = math.floor(damage * combinedDamageTaken)
@@ -630,17 +607,15 @@ end
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subType, subPower, tier)
     if target:canGainStatusEffect(typeEffect, power) then
-        local statmod    = xi.mod.INT
-        local element    = mob:getStatusEffectElement(typeEffect)
-        local fullResist = xi.combat.statusEffect.isTargetResistant(mob, target, typeEffect)
-        local resist     = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
-
+        local fullResist = xi.data.statusEffect.isTargetResistant(mob, target, typeEffect)
         if fullResist then
             return xi.msg.basic.SKILL_MISS -- resist !
         end
 
-        if resist >= 0.25 then
-            local totalDuration = utils.clamp(duration * resist, 1)
+        local element    = mob:getStatusEffectElement(typeEffect) -- TODO: Do something.
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, typeEffect, 0)
+        if resistRate >= 0.25 then
+            local totalDuration = math.floor(duration * resistRate)
             target:addStatusEffect(typeEffect, power, tick, totalDuration, subType, subPower, tier)
 
             return xi.msg.basic.SKILL_ENFEEB_IS
@@ -695,5 +670,5 @@ xi.mobskills.calculateDuration = function(tp, minimum, maximum)
         return minimum
     end
 
-    return minimum + (maximum - minimum) * ((tp - 1000) / 1000)
+    return minimum + (maximum - minimum) * (tp - 1000) / 1000
 end

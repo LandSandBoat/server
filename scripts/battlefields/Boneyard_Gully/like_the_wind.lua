@@ -28,31 +28,31 @@ content:addEssentialMobs({ 'Race_Runner' })
 content.loot =
 {
     {
-        { item = xi.item.NONE,                   weight = 140 }, -- nothing
-        { item = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 310 }, -- Viridian Urushi
-        { item = xi.item.SQUARE_OF_GALATEIA,     weight = 241 }, -- Square of Galateia
-        { item = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 310 }, -- Kejusu Satin
+        { itemId = xi.item.NONE,                   weight = 140 }, -- nothing
+        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 310 }, -- Viridian Urushi
+        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 241 }, -- Square of Galateia
+        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 310 }, -- Kejusu Satin
     },
 
     {
-        { item = xi.item.NONE,         weight = 862 }, -- nothing
-        { item = xi.item.CLOUD_EVOKER, weight = 138 }, -- Cloud Evoker
+        { itemId = xi.item.NONE,         weight = 862 }, -- nothing
+        { itemId = xi.item.CLOUD_EVOKER, weight = 138 }, -- Cloud Evoker
     },
 
     {
-        { item = xi.item.NONE,                    weight = 380 }, -- nothing
-        { item = xi.item.MANEATER,                weight = 138 }, -- Maneater
-        { item = xi.item.WAGH_BAGHNAKHS,          weight = 172 }, -- Wagh Baghnakhs
-        { item = xi.item.ONIMARU,                 weight = 138 }, -- Onimaru
-        { item = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 172 }, -- Army's Paeon V
+        { itemId = xi.item.NONE,                    weight = 380 }, -- nothing
+        { itemId = xi.item.MANEATER,                weight = 138 }, -- Maneater
+        { itemId = xi.item.WAGH_BAGHNAKHS,          weight = 172 }, -- Wagh Baghnakhs
+        { itemId = xi.item.ONIMARU,                 weight = 138 }, -- Onimaru
+        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 172 }, -- Army's Paeon V
     },
 
     {
-        { item = xi.item.NONE,                    weight = 380 }, -- nothing
-        { item = xi.item.MANEATER,                weight = 138 }, -- Maneater
-        { item = xi.item.WAGH_BAGHNAKHS,          weight = 172 }, -- Wagh Baghnakhs
-        { item = xi.item.ONIMARU,                 weight = 138 }, -- Onimaru
-        { item = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 172 }, -- Army's Paeon V
+        { itemId = xi.item.NONE,                    weight = 380 }, -- nothing
+        { itemId = xi.item.MANEATER,                weight = 138 }, -- Maneater
+        { itemId = xi.item.WAGH_BAGHNAKHS,          weight = 172 }, -- Wagh Baghnakhs
+        { itemId = xi.item.ONIMARU,                 weight = 138 }, -- Onimaru
+        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 172 }, -- Army's Paeon V
     },
 }
 

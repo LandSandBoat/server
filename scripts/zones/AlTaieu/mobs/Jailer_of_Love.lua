@@ -140,7 +140,7 @@ entity.onMobInitialize = function(mob)
 end
 
 local function getAbsorbMod(element)
-    local absorbMod = xi.combat.element.getElementalAbsorptionModifier(element)
+    local absorbMod = xi.data.element.getElementalAbsorptionModifier(element)
 
     return absorbMod
 end

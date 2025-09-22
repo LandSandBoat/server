@@ -1,8 +1,6 @@
 -----------------------------------
 -- Dark Knight Job Utilities
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.dark_knight = xi.job_utils.dark_knight or {}

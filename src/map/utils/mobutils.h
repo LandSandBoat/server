@@ -62,7 +62,7 @@ namespace mobutils
     void SetupDungeonInstanceMob(CMobEntity* PMob);
     void SetupPetSkills(CMobEntity* PMob);
 
-    uint8 JobSkillRankToBaseEvaRank(JOBTYPE job);
+    uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob);
 
     uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot);
     uint16 GetMagicEvasion(CMobEntity* PMob);

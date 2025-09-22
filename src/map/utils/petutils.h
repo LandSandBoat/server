@@ -218,7 +218,7 @@ namespace petutils
     void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
     void  RetreatToMaster(CBattleEntity* PMaster);
     int16 PerpetuationCost(uint32 id, uint8 level);
-    void  Familiar(CBattleEntity* PPet);
+    void  ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
     void  LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);

@@ -1,7 +1,6 @@
 -----------------------------------
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
-require('scripts/globals/utils')
 
 xi = xi or {}
 xi.teleport = xi.teleport or {}

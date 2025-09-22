@@ -30,6 +30,7 @@
 #include "common/logging.h"
 
 #include "entities/battleentity.h"
+#include "enums/item_types.h"
 #include "items/item_furnishing.h"
 #include "items/item_general.h"
 #include "items/item_linkshell.h"
@@ -116,64 +117,32 @@ namespace itemutils
      *                                                                       *
      ************************************************************************/
 
-    CItem* CreateItem(const uint16 ItemID)
+    CItem* CreateItem(const uint16 itemId, const ItemType itemType)
     {
-        // Furnishing items:
-        // [1, 471], [3584, 3839]
-        if ((ItemID >= 1 && ItemID <= 471) ||
-            (ItemID >= 3584 && ItemID <= 3839))
+        switch (itemType)
         {
-            return new CItemFurnishing(ItemID);
-        }
-
-        // General items
-        // [472, 3583], [3840, 4095], [8704, 10239], [28672, 30719], [61440, 61951]
-        // Misc, Misc, Misc, (MMM, Slips, Mangled Mess etc..), (MON instincts), (MON mobs)
-        // [512, 518] are linkshells
-        if ((ItemID >= 472 && ItemID <= 3583) ||
-            (ItemID >= 3840 && ItemID <= 4095) ||
-            (ItemID >= 8704 && ItemID <= 10239) ||
-            (ItemID >= 28672 && ItemID <= 30719) ||
-            (ItemID >= 61440 && ItemID <= 61951))
-        {
-            if (ItemID >= 512 && ItemID <= 518)
+            case ItemType::General:
+                return new CItemGeneral(itemId);
+            case ItemType::Linkshell:
+                return new CItemLinkshell(itemId);
+            case ItemType::Furnishing:
+                return new CItemFurnishing(itemId);
+            case ItemType::Puppet:
+                return new CItemPuppet(itemId);
+            case ItemType::Usable:
+                return new CItemUsable(itemId);
+            case ItemType::Equipment:
+                return new CItemEquipment(itemId);
+            case ItemType::Weapon:
+                return new CItemWeapon(itemId);
+            case ItemType::Currency:
+                return new CItemCurrency(itemId);
+            default:
             {
-                return new CItemLinkshell(ItemID);
+                ShowErrorFmt("CreateItem({}): Unknown item type {}", itemId, static_cast<uint8>(itemType));
+                return new CItemGeneral(itemId);
             }
-
-            return new CItemGeneral(ItemID);
         }
-
-        // Usable items
-        // [4096, 8191]
-        if (ItemID >= 4096 && ItemID <= 8191)
-        {
-            return new CItemUsable(ItemID);
-        }
-
-        // Puppet items
-        // [8192, 8703]
-        if (ItemID >= 8192 && ItemID <= 8703)
-        {
-            return new CItemPuppet(ItemID);
-        }
-
-        // Equipment
-        // [10240, 16383], [23040, 28671]
-        if ((ItemID >= 10240 && ItemID <= 16383) ||
-            (ItemID >= 23040 && ItemID <= 28671))
-        {
-            return new CItemEquipment(ItemID);
-        }
-
-        // Weapons
-        // [16384, 23039]
-        if (ItemID >= 16384 && ItemID <= 23039)
-        {
-            return new CItemWeapon(ItemID);
-        }
-
-        return nullptr;
     }
 
     /************************************************************************
@@ -320,7 +289,7 @@ namespace itemutils
     void LoadItemList()
     {
         auto rset = db::preparedStmt("SELECT "
-                                     "b.itemId,b.name,b.stackSize,b.flags,"
+                                     "b.itemId,b.name,b.type,b.stackSize,b.flags,"
                                      "b.aH,b.BaseSell,b.subid,"
                                      "u.validTargets,u.activation,u.animation,u.animationTime,"
                                      "u.maxCharges,u.useDelay,u.reuseDelay,u.aoe,"
@@ -342,7 +311,7 @@ namespace itemutils
                                      MAX_ITEMID);
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            CItem* PItem = CreateItem(rset->get<uint16>("itemId"));
+            CItem* PItem = CreateItem(rset->get<uint16>("itemId"), static_cast<ItemType>(rset->get<uint8>("type")));
 
             if (PItem != nullptr)
             {
@@ -404,8 +373,7 @@ namespace itemutils
                     }
                 }
 
-                // Grips are treated as weapons but don't have entries in the DB
-                if (PItem->isType(ITEM_WEAPON) && !IsGrip(PItem->getID()))
+                if (PItem->isType(ITEM_WEAPON))
                 {
                     static_cast<CItemWeapon*>(PItem)->setSkillType(rset->get<uint8>("skill"));
                     static_cast<CItemWeapon*>(PItem)->setSubSkillType(rset->get<uint8>("subskill"));
@@ -615,16 +583,5 @@ namespace itemutils
             destroy(g_pDropList[DropID]);
             g_pDropList[DropID] = nullptr;
         }
-    }
-
-    auto IsGrip(const uint16 itemId) -> bool
-    {
-        // Grips item IDs ranges:
-        // [18801, 18826], [19009, 19059], [21364, 21365], [21410, 21429], [22195, 22219]
-        return (itemId >= 18801 && itemId <= 18826) ||
-               (itemId >= 19009 && itemId <= 19059) ||
-               (itemId >= 21364 && itemId <= 21365) ||
-               (itemId >= 21410 && itemId <= 21429) ||
-               (itemId >= 22195 && itemId <= 22219);
     }
 }; // namespace itemutils

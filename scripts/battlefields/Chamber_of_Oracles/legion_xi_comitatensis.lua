@@ -58,65 +58,65 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.NONE,             weight = 100 }, -- nothing
-        { item = xi.item.EVASION_TORQUE,   weight = 150 }, -- evasion_torque
-        { item = xi.item.PARRYING_TORQUE,  weight = 150 }, -- parrying_torque
-        { item = xi.item.GUARDING_TORQUE,  weight = 150 }, -- guarding_torque
-        { item = xi.item.NINJUTSU_TORQUE,  weight = 150 }, -- ninjutsu_torque
-        { item = xi.item.WIND_TORQUE,      weight = 150 }, -- wind_torque
-        { item = xi.item.SUMMONING_TORQUE, weight = 150 }, -- summoning_torque
+        { itemId = xi.item.NONE,             weight = 100 }, -- nothing
+        { itemId = xi.item.EVASION_TORQUE,   weight = 150 }, -- evasion_torque
+        { itemId = xi.item.PARRYING_TORQUE,  weight = 150 }, -- parrying_torque
+        { itemId = xi.item.GUARDING_TORQUE,  weight = 150 }, -- guarding_torque
+        { itemId = xi.item.NINJUTSU_TORQUE,  weight = 150 }, -- ninjutsu_torque
+        { itemId = xi.item.WIND_TORQUE,      weight = 150 }, -- wind_torque
+        { itemId = xi.item.SUMMONING_TORQUE, weight = 150 }, -- summoning_torque
     },
 
     {
-        { item = xi.item.NONE,              weight = 100 }, -- nothing
-        { item = xi.item.DIVINE_TORQUE,     weight = 150 }, -- divine_torque
-        { item = xi.item.DARK_TORQUE,       weight = 150 }, -- dark_torque
-        { item = xi.item.ENHANCING_TORQUE,  weight = 150 }, -- enhancing_torque
-        { item = xi.item.ENFEEBLING_TORQUE, weight = 150 }, -- enfeebling_torque
-        { item = xi.item.ELEMENTAL_TORQUE,  weight = 150 }, -- elemental_torque
-        { item = xi.item.HEALING_TORQUE,    weight = 150 }, -- healing_torque
+        { itemId = xi.item.NONE,              weight = 100 }, -- nothing
+        { itemId = xi.item.DIVINE_TORQUE,     weight = 150 }, -- divine_torque
+        { itemId = xi.item.DARK_TORQUE,       weight = 150 }, -- dark_torque
+        { itemId = xi.item.ENHANCING_TORQUE,  weight = 150 }, -- enhancing_torque
+        { itemId = xi.item.ENFEEBLING_TORQUE, weight = 150 }, -- enfeebling_torque
+        { itemId = xi.item.ELEMENTAL_TORQUE,  weight = 150 }, -- elemental_torque
+        { itemId = xi.item.HEALING_TORQUE,    weight = 150 }, -- healing_torque
     },
 
     {
-        { item = xi.item.SUNSTONE,          weight = 100 }, -- sunstone
-        { item = xi.item.CHUNK_OF_GOLD_ORE, weight = 100 }, -- chunk_of_gold_ore
-        { item = xi.item.JADEITE,           weight = 100 }, -- jadeite
-        { item = xi.item.FLUORITE,          weight = 100 }, -- fluorite
-        { item = xi.item.DARKSTEEL_INGOT,   weight = 100 }, -- darksteel_ingot
-        { item = xi.item.ZIRCON,            weight = 100 }, -- zircon
-        { item = xi.item.CHRYSOBERYL,       weight = 100 }, -- chrysoberyl
-        { item = xi.item.MOONSTONE,         weight = 100 }, -- moonstone
-        { item = xi.item.PAINITE,           weight = 100 }, -- painite
-        { item = xi.item.STEEL_INGOT,       weight = 100 }, -- steel_ingot
+        { itemId = xi.item.SUNSTONE,          weight = 100 }, -- sunstone
+        { itemId = xi.item.CHUNK_OF_GOLD_ORE, weight = 100 }, -- chunk_of_gold_ore
+        { itemId = xi.item.JADEITE,           weight = 100 }, -- jadeite
+        { itemId = xi.item.FLUORITE,          weight = 100 }, -- fluorite
+        { itemId = xi.item.DARKSTEEL_INGOT,   weight = 100 }, -- darksteel_ingot
+        { itemId = xi.item.ZIRCON,            weight = 100 }, -- zircon
+        { itemId = xi.item.CHRYSOBERYL,       weight = 100 }, -- chrysoberyl
+        { itemId = xi.item.MOONSTONE,         weight = 100 }, -- moonstone
+        { itemId = xi.item.PAINITE,           weight = 100 }, -- painite
+        { itemId = xi.item.STEEL_INGOT,       weight = 100 }, -- steel_ingot
     },
 
     {
-        { item = xi.item.NONE,               weight = 500 }, -- nothing
-        { item = xi.item.SCROLL_OF_RAISE_II, weight = 500 }, -- scroll_of_raise_ii
+        { itemId = xi.item.NONE,               weight = 500 }, -- nothing
+        { itemId = xi.item.SCROLL_OF_RAISE_II, weight = 500 }, -- scroll_of_raise_ii
     },
 
     {
-        { item = xi.item.NONE,           weight = 950 }, -- nothing
-        { item = xi.item.VILE_ELIXIR_P1, weight =  50 }, -- vile_elixir_+1
+        { itemId = xi.item.NONE,           weight = 950 }, -- nothing
+        { itemId = xi.item.VILE_ELIXIR_P1, weight =  50 }, -- vile_elixir_+1
     },
 
     {
-        { item = xi.item.YELLOW_ROCK,        weight =  50 }, -- yellow_rock
-        { item = xi.item.WHITE_ROCK,         weight =  50 }, -- white_rock
-        { item = xi.item.EBONY_LOG,          weight = 125 }, -- ebony_log
-        { item = xi.item.PLATINUM_BEASTCOIN, weight = 775 }, -- platinum_beastcoin
+        { itemId = xi.item.YELLOW_ROCK,        weight =  50 }, -- yellow_rock
+        { itemId = xi.item.WHITE_ROCK,         weight =  50 }, -- white_rock
+        { itemId = xi.item.EBONY_LOG,          weight = 125 }, -- ebony_log
+        { itemId = xi.item.PLATINUM_BEASTCOIN, weight = 775 }, -- platinum_beastcoin
     },
 
     {
-        { item = xi.item.NONE,                   weight = 600 }, -- nothing
-        { item = xi.item.CHUNK_OF_WATER_ORE,     weight =  50 }, -- chunk_of_water_ore
-        { item = xi.item.CHUNK_OF_ICE_ORE,       weight =  50 }, -- chunk_of_ice_ore
-        { item = xi.item.CHUNK_OF_LIGHTNING_ORE, weight =  50 }, -- chunk_of_lightning_ore
-        { item = xi.item.CHUNK_OF_EARTH_ORE,     weight =  50 }, -- chunk_of_earth_ore
-        { item = xi.item.CHUNK_OF_FIRE_ORE,      weight =  50 }, -- chunk_of_fire_ore
-        { item = xi.item.CHUNK_OF_LIGHT_ORE,     weight =  50 }, -- chunk_of_light_ore
-        { item = xi.item.CHUNK_OF_DARK_ORE,      weight =  50 }, -- chunk_of_dark_ore
-        { item = xi.item.CHUNK_OF_WIND_ORE,      weight =  50 }, -- chunk_of_wind_ore
+        { itemId = xi.item.NONE,                   weight = 600 }, -- nothing
+        { itemId = xi.item.CHUNK_OF_WATER_ORE,     weight =  50 }, -- chunk_of_water_ore
+        { itemId = xi.item.CHUNK_OF_ICE_ORE,       weight =  50 }, -- chunk_of_ice_ore
+        { itemId = xi.item.CHUNK_OF_LIGHTNING_ORE, weight =  50 }, -- chunk_of_lightning_ore
+        { itemId = xi.item.CHUNK_OF_EARTH_ORE,     weight =  50 }, -- chunk_of_earth_ore
+        { itemId = xi.item.CHUNK_OF_FIRE_ORE,      weight =  50 }, -- chunk_of_fire_ore
+        { itemId = xi.item.CHUNK_OF_LIGHT_ORE,     weight =  50 }, -- chunk_of_light_ore
+        { itemId = xi.item.CHUNK_OF_DARK_ORE,      weight =  50 }, -- chunk_of_dark_ore
+        { itemId = xi.item.CHUNK_OF_WIND_ORE,      weight =  50 }, -- chunk_of_wind_ore
     },
 }
 

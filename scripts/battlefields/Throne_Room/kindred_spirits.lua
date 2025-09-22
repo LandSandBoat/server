@@ -87,43 +87,43 @@ content.loot =
 {
     -- TODO: Loot pool items and weight require more data to extrapolate correct values and placement.
     {
-        { item = xi.item.DEMON_HORN, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.DEMON_HORN, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.item.SUNSTONE, weight = xi.loot.weight.LOW },
-        { item = xi.item.CHRYSOBERYL, weight = xi.loot.weight.LOW },
-        { item = xi.item.MYTHRIL_INGOT, weight = xi.loot.weight.VERY_HIGH },
-        { item = xi.item.DEMON_QUIVER, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.SUNSTONE, weight = xi.loot.weight.LOW },
+        { itemId = xi.item.CHRYSOBERYL, weight = xi.loot.weight.LOW },
+        { itemId = xi.item.MYTHRIL_INGOT, weight = xi.loot.weight.VERY_HIGH },
+        { itemId = xi.item.DEMON_QUIVER, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.item.FORSETIS_AXE, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.ARAMISS_RAPIER, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.SPARTAN_CESTI, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.SAIREN, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.ARCHALAUSS_POLE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.FORSETIS_AXE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.ARAMISS_RAPIER, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.SPARTAN_CESTI, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.SAIREN, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.ARCHALAUSS_POLE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.item.LIGHT_BOOMERANG, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.ARMBRUST, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.SCHWARZ_LANCE, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.OMOKAGE, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.ARCHALAUSS_POLE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.LIGHT_BOOMERANG, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.ARMBRUST, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.SCHWARZ_LANCE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.OMOKAGE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.ARCHALAUSS_POLE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.item.VASSAGOS_SCYTHE, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.KABRAKANS_AXE, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.DRAGVANDIL, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.HAMELIN_FLUTE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.VASSAGOS_SCYTHE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.KABRAKANS_AXE, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.DRAGVANDIL, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.HAMELIN_FLUTE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.item.NONE, weight = xi.loot.weight.HIGH },
-        { item = xi.item.SCROLL_OF_CARNAGE_ELEGY, weight = xi.loot.weight.NORMAL },
-        { item = xi.item.ICE_SPIRIT_PACT, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.NONE, weight = xi.loot.weight.HIGH },
+        { itemId = xi.item.SCROLL_OF_CARNAGE_ELEGY, weight = xi.loot.weight.NORMAL },
+        { itemId = xi.item.ICE_SPIRIT_PACT, weight = xi.loot.weight.NORMAL },
     },
 }
 

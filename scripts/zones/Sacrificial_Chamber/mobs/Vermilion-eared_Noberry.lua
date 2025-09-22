@@ -6,11 +6,15 @@
 mixins =
 {
     require('scripts/mixins/families/tonberry'),
-    require('scripts/mixins/job_special')
+    require('scripts/mixins/job_special'),
 }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 3)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
     local elementalId = mob:getID() + 2

@@ -30,9 +30,11 @@ return {
     ['Guilboire']            = { event = 657 },
     ['Hae_Jakhya']           = { event = 610 },
     ['Helbort']              = { text = ID.text.HELBORT_DIALOG },
+    ['Hinaree']              = { event = 507 },
     ['Katharina']            = { event = 887 },
     ['Lotte']                = { event = 564 },
     ['Luthiaque']            = { event = 658 },
+    ['Malecharisant']        = { text = ID.text.WEST_GATE },
     ['Maugie']               = { event =  46 },
     ['Melledanne']           = { event = 943 },
     ['Ophelia']              = { event = 751 },
@@ -48,4 +50,5 @@ return {
     ['Taumila']              = { text = ID.text.TAUMILA_DIALOG },
     ['Valderotaux']          = { event = 58 },
     ['Varchet']              = { event = 525 },
+    ['Well']                 = { text = ID.text.YOU_FIND_A_WELL },
 }

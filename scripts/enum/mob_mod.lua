@@ -93,4 +93,5 @@ xi.mobMod =
     RUN_SPEED_MULT         = 82, -- Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
     CLAIM_TYPE             = 83, -- Changes the claim behavior of the mob. See xi.claimType enum.
     NO_SPELL_COST          = 84, -- Mob does not use MP when casting spells
+    ASTRAL_PET_OFFSET      = 85, -- If non-zero, defines the offset from main mob's ID for astral flow (if zero, will assume offset of 2)
 }

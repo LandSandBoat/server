@@ -8,9 +8,13 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 3)
+end
+
 entity.onMobSpawn = function(mob)
     local mobID = mob:getID()
-    local avatarID = mobID + 3
+    local avatarID = mobID + mob:getMobMod(xi.mobMod.ASTRAL_PET_OFFSET)
     local avatarMob = GetMobByID(avatarID)
     if avatarMob then
         -- Remove the original listener set from mixins/families/avatar

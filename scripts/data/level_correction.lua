@@ -5,8 +5,8 @@
 -- Adoulin zones, zones with Apex or Locus mobs, etc...
 -----------------------------------
 xi = xi or {}
-xi.combat = xi.combat or {}
-xi.combat.levelCorrection = xi.combat.levelCorrection or {}
+xi.data = xi.data or {}
+xi.data.levelCorrection = xi.data.levelCorrection or {}
 -----------------------------------
 -- List of zones in which level correction still happens.
 local levelCorrectionZoneList =
@@ -232,7 +232,7 @@ set{
 
 -- Meant to be called from a master function and fed to corresponding calculation.
 -- Example: pDIF functions, Actor magic accuracy, etc...
-xi.combat.levelCorrection.isLevelCorrectedZone = function(actor)
+xi.data.levelCorrection.isLevelCorrectedZone = function(actor)
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         local actorZone = actor:getZoneID()
 

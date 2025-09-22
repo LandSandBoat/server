@@ -1,7 +1,6 @@
 -----------------------------------
 -- Avatar Global Functions
 -----------------------------------
-require('scripts/globals/combat/level_correction')
 require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}
@@ -122,7 +121,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
     -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
-    local shouldApplyLevelCorrection = xi.combat.levelCorrection.isLevelCorrectedZone(avatar)
+    local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(avatar)
 
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
     -- https://www.bg-wiki.com/bg/Hit_Rate

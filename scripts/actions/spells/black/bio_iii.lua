@@ -10,81 +10,34 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local skillLvl = caster:getSkillLevel(xi.skill.DARK_MAGIC)
-    local basedmg = skillLvl / 4
-    local params = {}
-    params.dmg = basedmg
-    params.multiplier = 3
-    params.skillType = xi.skill.DARK_MAGIC
-    params.attribute = xi.mod.INT
-    params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.bonus = 1.0
-
-    -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
-    -- Softcaps at 62, should always do at least 1
-    dmg = utils.clamp(dmg, 1, 62)
-    -- Get resist multiplier (1x if no resist)
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, 0, 0)
-    -- Get the resisted damage
-    dmg = dmg * resist
-    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    -- Add in target adjustment
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-    -- Add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster, target, spell, dmg)
-
-    -- Calculate duration
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
+    if dia and dia:getPower() > 3 then
+        return damage
+    else
+        target:delStatusEffect(xi.effect.DIA)
+    end
 
     -- Calculate DoT effect
     -- http://wiki.ffo.jp/html/1954.html
-    -- this is a tiered calculation that has at least three tiers,
-    -- so I'll use breakpoints for human readability
-    local dotdmg = 5
-    if skillLvl > 400 then
-        dotdmg = 17
-    elseif skillLvl > 373 then
-        dotdmg = 16
-    elseif skillLvl > 346 then
-        dotdmg = 15
-    elseif skillLvl > 319 then
-        dotdmg = 14
-    elseif skillLvl > 291 then
-        dotdmg = 13
-    elseif skillLvl > 280 then
-        dotdmg = 12
-    elseif skillLvl > 269 then
-        dotdmg = 11
-    elseif skillLvl > 258 then
-        dotdmg = 10
-    elseif skillLvl > 246 then
-        dotdmg = 9
-    elseif skillLvl > 211 then
-        dotdmg = 8
-    elseif skillLvl > 171 then
-        dotdmg = 7
-    elseif skillLvl > 131 then
-        dotdmg = 6
+    local skillLevel = caster:getSkillLevel(xi.skill.DARK_MAGIC)
+    local power      = 0
+
+    if skillLevel > 291 then
+        power = 13 + math.floor((skillLevel - 291) / 27) -- 13 + 1 every 27 skill levels.
+    elseif skillLevel > 246 then
+        power = 9 + math.floor((skillLevel - 246) / 11) -- 9 + 1 every 11 skill levels.
+    else
+        power = 5 + math.floor((skillLevel - 106) / 35) -- 5 + 1 every 35 skill levels.
     end
 
-    -- Do it!
-    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 20, 3)
-    spell:setMsg(xi.msg.basic.MAGIC_DMG)
+    power = utils.clamp(power, 5, 17)
 
-    -- Try to kill same tier Dia (default behavior)
-    if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then
-        if dia:getPower() <= 3 then
-            target:delStatusEffect(xi.effect.DIA)
-        end
-    end
+    target:addStatusEffect(xi.effect.BIO, power, 3, 180, 0, 20, 3)
 
-    return final
+    return damage
 end
 
 return spellObject

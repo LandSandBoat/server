@@ -68,6 +68,8 @@ xi.mobSkill =
 
     DANSE_MACABRE            =  533,
 
+    PANZERFAUST              =  536,
+
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
     VULTURE_3                =  626,
@@ -85,6 +87,8 @@ xi.mobSkill =
     CALL_WYVERN              =  732,
 
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
+
+    GREAT_WHIRLWIND_1        =  803,
 
     DISPELLING_WIND          =  813,
     DEADLY_DRIVE             =  814,
@@ -261,6 +265,8 @@ xi.mobSkill =
     HELL_SCISSORS            = 2221,
 
     QUEASYSHROOM_2           = 2232,
+
+    DAMSEL_MEMENTO           = 2337,
 
     OPPRESSIVE_GLARE         = 2392,
 

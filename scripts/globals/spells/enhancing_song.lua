@@ -2,7 +2,6 @@
 -- Song Utilities
 -----------------------------------
 require('scripts/globals/jobpoints')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}

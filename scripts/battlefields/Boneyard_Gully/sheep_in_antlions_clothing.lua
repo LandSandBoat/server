@@ -131,22 +131,22 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.SQUARE_OF_GALATEIA,     weight = 268 },  -- Square of Galateia (26.8% Drop Rate)
-        { item = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 266 },  -- Kejusu Satin
-        { item = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 342 },  -- Viridian Urushi
+        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 268 },  -- Square of Galateia (26.8% Drop Rate)
+        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 266 },  -- Kejusu Satin
+        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 342 },  -- Viridian Urushi
     },
 
     {
-        { item = xi.item.NONE,         weight = 944 }, -- nothing
-        { item = xi.item.CLOUD_EVOKER, weight =  56 }, -- Cloud Evoker
+        { itemId = xi.item.NONE,         weight = 944 }, -- nothing
+        { itemId = xi.item.CLOUD_EVOKER, weight =  56 }, -- Cloud Evoker
     },
 
     {
-        { item = xi.item.HAGUN,            weight =  82 }, -- Hagun
-        { item = xi.item.MARTIAL_AXE,      weight =  92 }, -- Martial Axe
-        { item = xi.item.MARTIAL_WAND,     weight =  63 }, -- Martial Wand
-        { item = xi.item.FORAGERS_MANTLE,  weight = 105 }, -- Forager's Mantle
-        { item = xi.item.HARMONIAS_TORQUE, weight = 121 }, -- Harmonia's Torque
+        { itemId = xi.item.HAGUN,            weight =  82 }, -- Hagun
+        { itemId = xi.item.MARTIAL_AXE,      weight =  92 }, -- Martial Axe
+        { itemId = xi.item.MARTIAL_WAND,     weight =  63 }, -- Martial Wand
+        { itemId = xi.item.FORAGERS_MANTLE,  weight = 105 }, -- Forager's Mantle
+        { itemId = xi.item.HARMONIAS_TORQUE, weight = 121 }, -- Harmonia's Torque
     },
 }
 

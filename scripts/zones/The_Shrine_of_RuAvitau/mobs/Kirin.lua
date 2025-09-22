@@ -9,6 +9,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 5)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
@@ -29,7 +30,7 @@ entity.onMobFight = function(mob, target)
     if mob:getBattleTime() / 180 == numAdds then
         local godsRemaining = {}
         for i = 1, 4 do
-            if mob:getLocalVar('add'..i) == 0 then
+            if mob:getLocalVar('add' .. i) == 0 then
                 table.insert(godsRemaining, i)
             end
         end
@@ -41,7 +42,7 @@ entity.onMobFight = function(mob, target)
             if god then
                 god:updateEnmity(target)
                 god:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
-                mob:setLocalVar('add'..g, 1)
+                mob:setLocalVar('add' .. g, 1)
                 mob:setLocalVar('numAdds', numAdds + 1)
             end
         end

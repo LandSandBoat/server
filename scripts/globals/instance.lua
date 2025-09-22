@@ -34,8 +34,6 @@
 -- - DYNAMIS_WINDURST_D              = 296,
 -- - DYNAMIS_JEUNO_D                 = 297,
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.instance = {}
 

@@ -20,10 +20,10 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     -- Effect
     if not target:hasStatusEffect(xi.effect.WEIGHT) then
-        local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, 0, xi.skill.ELEMENTAL_MAGIC, xi.element.DARK)
+        local resist = xi.combat.magicHitRate.calculateResistRate(pet, target, 0, 0, 0, xi.element.DARK, xi.mod.INT, xi.effect.WEIGHT, 0)
 
-        if resist >= 0.15 then
-            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 120 * resist)
+        if resist >= 0.25 then
+            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, math.floor(120 * resist))
         end
     end
 

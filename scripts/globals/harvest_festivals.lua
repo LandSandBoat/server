@@ -1,8 +1,6 @@
 -----------------------------------
 -- Harvest Festivals
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.harvestFestival = xi.events.harvestFestival or {}

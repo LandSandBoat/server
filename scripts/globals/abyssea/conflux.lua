@@ -2,8 +2,6 @@
 -- Veridical Conflux Global
 -----------------------------------
 require('scripts/globals/teleports')
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.conflux = {}
 

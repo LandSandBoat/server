@@ -67,30 +67,16 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    -- Don't lose TP from charm 2hr
-    if skill:getID() == xi.mobSkill.FAMILIAR_1 then -- Manually apply Familiar to all pets except first one
-        local mobId = mob:getID()
-        for i = 2, 6 do
-            local pet = GetMobByID(mobId + i)
-            if pet then
-                local hasFamiliar = pet:getLocalVar('hasFamiliar')
-                if
-                    pet:isSpawned() and
-                    hasFamiliar == 0
-                then
-                    -- Boost pet HP and stats by 10%
-                    local boost = math.floor(pet:getMaxHP() * 0.10)
-                    pet:setLocalVar('hasFamiliar', 1)
-                    pet:setMaxHP(pet:getMaxHP() + boost)
-                    pet:setHP(pet:getHP() + boost)
-                    pet:updateHealth()
-
-                    -- Boost stats by 10%
-                    pet:addMod(xi.mod.ATTP, 10)
-                    pet:addMod(xi.mod.ACC, mob:getMod(xi.mod.ACC) * 0.10)
-                    pet:addMod(xi.mod.EVA, mob:getMod(xi.mod.EVA) * 0.10)
-                    pet:addMod(xi.mod.DEFP, 10)
-                end
+    -- Manually apply Familiar to all pets except first one
+    if skill:getID() == xi.mobSkill.FAMILIAR_1 then
+        for _, petId in ipairs(pets) do
+            local pet = GetMobByID(petId)
+            if
+                pet and
+                pet ~= mob:getPet() and -- base familiar mobskill buffs this one
+                pet:isAlive()
+            then
+                xi.pet.applyFamiliarBuffs(mob, pet)
             end
         end
     end

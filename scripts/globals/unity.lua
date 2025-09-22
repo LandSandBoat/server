@@ -1,8 +1,6 @@
 -----------------------------------
 -- Unity Concord NPC Global
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.unity = xi.unity or {}
 

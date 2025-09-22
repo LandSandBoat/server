@@ -14,6 +14,7 @@ return {
     ['Bricorsant']   = { event = 570 },
     ['Brifalien']    = { event = 589 },
     ['Callort']      = { event = 557 },
+    ['Chocobo']      = { event = 714 },
     ['Coribalgeant'] = { event = 599 },
     ['Crilde']       = { event = 569 },
     ['Dabbio']       = { event = 722 },

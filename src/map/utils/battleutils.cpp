@@ -1689,7 +1689,7 @@ namespace battleutils
 
         uint8 weaponType = targ_weapon->getSkillType();
 
-        auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
+        auto levelCorrectionFunc = lua["xi"]["data"]["levelCorrection"]["isLevelCorrectedZone"];
         auto rangedPDIFFunc      = lua["xi"]["combat"]["physical"]["calculateRangedPDIF"];
 
         if (rangedPDIFFunc.valid() && levelCorrectionFunc.valid())
@@ -3032,7 +3032,7 @@ namespace battleutils
     {
         float pDIF = 1.0f;
 
-        auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
+        auto levelCorrectionFunc = lua["xi"]["data"]["levelCorrection"]["isLevelCorrectedZone"];
         auto meleePDIFFunc       = lua["xi"]["combat"]["physical"]["calculateMeleePDIF"];
 
         if (meleePDIFFunc.valid() && levelCorrectionFunc.valid())

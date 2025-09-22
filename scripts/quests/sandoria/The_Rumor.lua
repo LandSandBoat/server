@@ -41,6 +41,7 @@ quest.sections =
             },
         }
     },
+
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED
@@ -69,9 +70,10 @@ quest.sections =
             },
         },
     },
+
     {
-        check = function(player, status)
-            return status == xi.quest.status.COMPLETED
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.BOSTAUNIEUX_OUBLIETTE] =

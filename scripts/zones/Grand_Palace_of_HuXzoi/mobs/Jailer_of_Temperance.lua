@@ -66,8 +66,8 @@ entity.onMobSpawn = function(mob)
 
     -- Set the magic resists. It always takes no damage from direct magic
     for element = xi.element.FIRE, xi.element.DARK do
-        mob:setMod(xi.combat.element.getElementalMEVAModifier(element), 0)
-        mob:setMod(xi.combat.element.getElementalSDTModifier(element), -10000)
+        mob:setMod(xi.data.element.getElementalMEVAModifier(element), 0)
+        mob:setMod(xi.data.element.getElementalSDTModifier(element), -10000)
     end
 
     mob:setLocalVar('changeTime', GetSystemTime() + math.random(30, 180))

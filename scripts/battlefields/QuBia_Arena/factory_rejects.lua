@@ -71,35 +71,35 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.DOLL_SHARD, weight = 1000 }, -- doll_shard
+        { itemId = xi.item.DOLL_SHARD, weight = 1000 }, -- doll_shard
     },
 
     {
-        { item = xi.item.VIAL_OF_MERCURY, weight = 1000 }, -- vial_of_mercury
+        { itemId = xi.item.VIAL_OF_MERCURY, weight = 1000 }, -- vial_of_mercury
     },
 
     {
-        { item = xi.item.NONE,           weight = 500 }, -- nothing
-        { item = xi.item.GOLD_BEASTCOIN, weight = 500 }, -- gold_beastcoin
+        { itemId = xi.item.NONE,           weight = 500 }, -- nothing
+        { itemId = xi.item.GOLD_BEASTCOIN, weight = 500 }, -- gold_beastcoin
     },
 
     {
-        { item = xi.item.NONE,             weight = 250 }, -- nothing
-        { item = xi.item.RAIFU,            weight = 250 }, -- raifu
-        { item = xi.item.BUZZARD_TUCK,     weight = 250 }, -- buzzard_tuck
-        { item = xi.item.JONGLEURS_DAGGER, weight = 250 }, -- jongleurs_dagger
+        { itemId = xi.item.NONE,             weight = 250 }, -- nothing
+        { itemId = xi.item.RAIFU,            weight = 250 }, -- raifu
+        { itemId = xi.item.BUZZARD_TUCK,     weight = 250 }, -- buzzard_tuck
+        { itemId = xi.item.JONGLEURS_DAGGER, weight = 250 }, -- jongleurs_dagger
     },
 
     {
-        { item = xi.item.NONE,             weight = 200 }, -- nothing
-        { item = xi.item.REARGUARD_MANTLE, weight = 400 }, -- rearguard_mantle
-        { item = xi.item.AGILE_MANTLE,     weight = 400 }, -- agile_mantle
+        { itemId = xi.item.NONE,             weight = 200 }, -- nothing
+        { itemId = xi.item.REARGUARD_MANTLE, weight = 400 }, -- rearguard_mantle
+        { itemId = xi.item.AGILE_MANTLE,     weight = 400 }, -- agile_mantle
     },
 
     {
-        { item = xi.item.NONE,                  weight = 750 }, -- nothing
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
-        { item = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
+        { itemId = xi.item.NONE,                  weight = 750 }, -- nothing
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
+        { itemId = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
     },
 }
 

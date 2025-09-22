@@ -2,14 +2,12 @@
 -- Table defining the skill level max value based on actor level and the skill rank.
 -- Skill caps per rank: https://wiki-ffo-jp.translate.goog/html/2570.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
-xi.combat = xi.combat or {}
-xi.combat.skillLevel = xi.combat.skillLevel or {}
+xi.data = xi.data or {}
+xi.data.skillLevel = xi.data.skillLevel or {}
 -----------------------------------
 
-xi.combat.skillLevel.dataTable =
+xi.data.skillLevel.dataTable =
 {
 -- [Level] = { A+,  A,  B+,   B,  B-,  C+,   C,  C-,   D,   E,   F,   G },
     [ 0] = {   3,   3,   2,   2,   2,   2,   2,   2,   2,   2,   2,   1 },
@@ -114,11 +112,11 @@ xi.combat.skillLevel.dataTable =
     [99] = { 424, 417, 404, 398, 388, 378, 373, 368, 334, 300, 265, 228 },
 }
 
-xi.combat.skillLevel.getSkillCap = function(actorLevel, skillRank)
+xi.data.skillLevel.getSkillCap = function(actorLevel, skillRank)
     -- Sanitize fed values
     local levelToCheck = utils.defaultIfNil(actorLevel, 0)             -- Assume level 0
     local rankToCheck  = utils.defaultIfNil(skillRank, xi.skillRank.G) -- Assume rank G
 
     -- Going to assume levels over 99 give 1 skill level, just like master levels.
-    return xi.combat.skillLevel.dataTable[utils.clamp(levelToCheck, 0, 99)][utils.clamp(rankToCheck, 1, 12)] + utils.clamp(levelToCheck - 99, 0, 156)
+    return xi.data.skillLevel.dataTable[utils.clamp(levelToCheck, 0, 99)][utils.clamp(rankToCheck, 1, 12)] + utils.clamp(levelToCheck - 99, 0, 156)
 end

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Ninja Job Utilities
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.ninja = xi.job_utils.ninja or {}
@@ -46,12 +44,14 @@ end
 -----------------------------------
 
 xi.job_utils.ninja.useMijinGakure = function(player, target, ability, action)
-    local dmg    = player:getHP() * 0.8 + player:getMainLvl() / 0.5
-    local resist = xi.mobskills.applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.element.NONE)
+    local dmg        = math.floor(player:getHP() * 0.8)
+    local resist     = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, 0, 0)
+    local tmdaFactor = xi.spells.damage.calculateTMDA(target, xi.element.NONE)
+    local jpFactor   = 1 + player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03
 
-    -- Job Point Bonus (3% per Level)
-    dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
-    dmg = dmg * resist
+    dmg = math.floor(dmg * resist)
+    dmg = math.floor(dmg * tmdaFactor)
+    dmg = math.floor(dmg * jpFactor)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)

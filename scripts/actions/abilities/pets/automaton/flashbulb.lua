@@ -10,18 +10,19 @@ end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 45)
-    local highest = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
-    local highestskill = 22
+    local highest        = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
+    local highestSkillId = xi.skill.AUTOMATON_MELEE
+
     if automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED) > highest then
-        highestskill = 23
-        highest = automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED)
+        highest        = automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED)
+        highestSkillId = xi.skill.AUTOMATON_RANGED
     end
 
     if automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC) > highest then
-        highestskill = 24
+        highestSkillId = xi.skill.AUTOMATON_MAGIC
     end
 
-    local resist = applyResistanceAbility(automaton, target, 7, highestskill, 150)
+    local resist   = xi.combat.magicHitRate.calculateResistRate(automaton, target, 0, highestSkillId, 0, xi.element.LIGHT, 0, 0, 150)
     local duration = 12 * resist
 
     if resist > 0.0625 then

@@ -6,7 +6,8 @@ require('scripts/globals/nyzul/pathos')
 xi = xi or {}
 xi.pet = xi.pet or {}
 
-local avatarPetIDs = set{
+local avatarPetIDs = set
+{
     xi.petId.CARBUNCLE,
     xi.petId.FENRIR,
     xi.petId.IFRIT,
@@ -32,7 +33,8 @@ local onMasterDeath = function(mob)
     end
 end
 
-local astralOnlySpellIDs = set{
+local astralOnlySpellIDs = set
+{
     xi.magic.spell.ODIN,
     xi.magic.spell.ALEXANDER,
 }
@@ -124,4 +126,53 @@ xi.pet.spawnPet = function(caster, petID, state, target)
     if caster:getZoneID() == xi.zone.NYZUL_ISLE then
         xi.nyzul.addPetSpawnPathos(caster)
     end
+end
+
+-- TODO should charmed entities lose their buffs when they become uncharmed?
+xi.pet.applyFamiliarBuffs = function(owner, pet)
+    if
+        not owner or
+        not pet or
+        not pet:isAlive() or
+        pet:getLocalVar('hasFamiliarBuffs') ~= 0
+    then
+        return
+    end
+
+    pet:setLocalVar('hasFamiliarBuffs', 1)
+
+    local familiarBonus = owner:getMod(xi.mod.FAMILIAR_BONUS)
+    if
+        owner:isPC() and
+        pet:isCharmed()
+    then
+        -- extends duration by 25m-30m
+        local minSeconds = 25 * 60
+        local maxSeconds = 30 * 60
+        local bonusSeconds = familiarBonus * 60
+        pet:extendCharm(minSeconds + bonusSeconds, maxSeconds + bonusSeconds)
+    end
+
+    if familiarBonus > 0 then
+        pet:addMod(xi.mod.HASTE_ABILITY, familiarBonus * 100)
+    end
+
+    local familiarBoost = 10
+    local familiarBoostPerc = familiarBoost / 100
+    local addedHP = pet:getMaxHP() * familiarBoostPerc
+    pet:setMaxHP(pet:getMaxHP() + addedHP) -- technically BASE_HP mod is added back to generate modhp, but close enough
+    -- wakes up pets
+    pet:addHP(addedHP)
+
+    -- adds % bonuses to the following stats
+    -- TODO are these the only stats boosted?
+    pet:addMod(xi.mod.ATTP, familiarBoost)
+    pet:addMod(xi.mod.RATTP, familiarBoost)
+    pet:addMod(xi.mod.DEFP, familiarBoost)
+    pet:addMod(xi.mod.ACC, pet:getMod(xi.mod.ACC) * familiarBoostPerc)
+    pet:addMod(xi.mod.RACC, pet:getMod(xi.mod.RACC) * familiarBoostPerc)
+    pet:addMod(xi.mod.EVA, pet:getMod(xi.mod.EVA) * familiarBoostPerc)
+
+    -- TODO does familiar give some bonus resistance to crowd control? Is it only for mob pets?
+    -- Lots of reports of mobs using Familiar and the pet having higher chance to resist bind/sleep/etc
 end

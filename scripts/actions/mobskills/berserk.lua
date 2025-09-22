@@ -1,6 +1,6 @@
 -----------------------------------
 -- Berserk
--- Berserk Ability.
+-- Berserk Ability
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
