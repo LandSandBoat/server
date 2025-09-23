@@ -18,7 +18,6 @@ return {
     ['Kedhareshvar']     = { event = 51 },
     ['Leodarion']        = { event = 89 },
     ['Maryoh_Comyujah']  = { event = 43 },
-    ['Mileon']           = { event = 100 },
     ['Quwi_Orihbhe']     = { event = 143 },
     ['Rahi_Fohlatti']    = { event = 71 },
     ['Rudolfo']          = { event = 125 },
