@@ -80,7 +80,7 @@ xi.nmHunt.targets = {
     [28] = { zone = xi.zone.CASTLE_ZVAHL_KEEP, mob = 'COUNT_BIFRONS', clue = 'My 66 Legions and I will mark the graves of our enemies.' },
     [29] = { zone = xi.zone.CARPENTERS_LANDING, mob = 'ORCTRAP', clue = 'This plant\'s strong enough to catch beastmen in its jaws.' },
     [30] = { zone = xi.zone.BIBIKI_BAY, mob = 'SERRA', clue = 'I strike fear into dragons. I destroy seafaring ships. Look to the southern sky to see me.' },
-    [31] = { zone = xi.zone.BUBURIMU_PENINSULA, mob = 'WAKE_WARDER_WANDA', clue = 'I wade in the water while wondering when the water will wash me away.'},
+    [31] = { zone = xi.zone.BUBURIMU_PENINSULA, mob = 'WAKE_WARDER_WANDA', clue = 'I wade in the water while wondering when the water will wash me away.' },
     [32] = { zone = xi.zone.GARLAIGE_CITADEL, mob = 'HAZMAT', clue = 'A roaming disaster. It will be prompt to end you, quickly.' },
     [33] = { zone = xi.zone.UPPER_DELKFUTTS_TOWER, mob = 'PORPHYRION', clue = 'I\'m not going to brag about coming in second.' },
     [34] = { zone = xi.zone.VALKURM_DUNES, mob = 'METAL_SHEARS', clue = 'Just a few quick snips and I\'ll be done.' },

@@ -320,30 +320,38 @@ local function getPurchaseRefractiveFunc(quantity, name)
                 title = 'Confirm Purchase (pay ' .. cost .. ' cruor)',
                 options =
                 {
-                    { 'Purchase ' .. name .. '.', function(playerConfirm)
-                        local cruor       = playerConfirm:getCurrency('cruor')
-                        local neededSlots = math.ceil(quantity / 12)
+                    {
+                        'Purchase ' .. name .. '.',
+                        function(playerConfirm)
+                            local cruor       = playerConfirm:getCurrency('cruor')
+                            local neededSlots = math.ceil(quantity / 12)
 
-                        if cruor < cost then
-                            playerConfirm:printToPlayer(string.format('You do not have enough cruor. It costs %i cruor but you possess %i.', cost, cruor))
+                            if cruor < cost then
+                                playerConfirm:printToPlayer(string.format('You do not have enough cruor. It costs %i cruor but you possess %i.', cost, cruor))
+                                return
+                            end
+
+                            if playerConfirm:getFreeSlotsCount() < neededSlots then
+                                playerConfirm:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.REFRACTIVE_CRYSTAL)
+                                return
+                            end
+
+                            playerConfirm:delCurrency('cruor', cost)
+
+                            local remainingQuantity = quantity
+
+                            while remainingQuantity > 0 do
+                                npcUtil.giveItem(playerConfirm, { { xi.item.REFRACTIVE_CRYSTAL, math.min(12, remainingQuantity) } })
+                                remainingQuantity = remainingQuantity - 12
+                            end
+                        end
+                    },
+                    {
+                        'I changed my mind.',
+                        function(playerCancel)
                             return
                         end
-
-                        if playerConfirm:getFreeSlotsCount() < neededSlots then
-                            playerConfirm:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.REFRACTIVE_CRYSTAL)
-                            return
-                        end
-
-                        playerConfirm:delCurrency('cruor', cost)
-
-                        local remainingQuantity = quantity
-
-                        while remainingQuantity > 0 do
-                            npcUtil.giveItem(playerConfirm, {{ xi.item.REFRACTIVE_CRYSTAL, math.min(12, remainingQuantity) }})
-                            remainingQuantity = remainingQuantity - 12
-                        end
-                    end },
-                    { 'I changed my mind.', function(playerCancel) return end },
+                    },
                 }
             }
 
@@ -361,20 +369,28 @@ local function getMeritExchangeFunc(quantity, name)
                 title = 'Confirm Purchase (pay ' .. name .. ')',
                 options =
                 {
-                    { 'Purchase ' .. cruor .. ' cruor.', function(playerConfirm)
-                        local merits = playerConfirm:getMeritCount()
+                    {
+                        'Purchase ' .. cruor .. ' cruor.',
+                        function(playerConfirm)
+                            local merits = playerConfirm:getMeritCount()
 
-                        if merits < quantity then
-                            playerConfirm:printToPlayer(string.format('You do not have enough merits. It costs %i merits but you possess %i merits.', quantity, merits))
+                            if merits < quantity then
+                                playerConfirm:printToPlayer(string.format('You do not have enough merits. It costs %i merits but you possess %i merits.', quantity, merits))
+                                return
+                            end
+
+                            playerConfirm:addCurrency('cruor', cruor)
+                            playerConfirm:setMerits(merits - quantity)
+
+                            playerConfirm:printToPlayer(string.format('Awarded %i Cruor. New Total: %i', cruor, playerConfirm:getCurrency('cruor')), xi.msg.channel.SAY, 'Protocrystal')
+                        end
+                    },
+                    {
+                        'I changed my mind.',
+                        function(playerCancel)
                             return
                         end
-
-                        playerConfirm:addCurrency('cruor', cruor)
-                        playerConfirm:setMerits(merits - quantity)
-
-                        playerConfirm:printToPlayer(string.format('Awarded %i Cruor. New Total: %i', cruor, playerConfirm:getCurrency('cruor')), xi.msg.channel.SAY, 'Protocrystal')
-                    end },
-                    { 'I changed my mind.', function(playerCancel) return end },
+                    },
                 }
             }
 
@@ -409,7 +425,12 @@ protocrystalMenus =
         {
             { 'Refractive Crystals', getOpenMenuFunc('Refractive Crystals') },
             { 'Merit Exchange',      getOpenMenuFunc('Merit Exchange') },
-            { 'Exit', function(player) return end },
+            {
+                'Exit',
+                function(player)
+                    return
+                end
+            },
         }
     },
     ['Refractive Crystals'] =
@@ -454,7 +475,10 @@ entity.onTrigger = function(player, npc)
         player:printToPlayer('Exchange cruor with Refractive Crystals at a rate of 1000-to-1.', xi.msg.channel.SAY, 'Protocrystal')
         player:printToPlayer(string.format('Gain cruor by paying merits at a rate of %i-to-1.', getMeritExchangeValue(player)), xi.msg.channel.SAY, 'Protocrystal')
 
-        if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= GetSystemTime() then
+        if
+            xi.settings.main.CRUORBOOST == 1 or
+            xi.settings.main.CRUORBOOST >= GetSystemTime()
+        then
             player:printToPlayer('Double Cruor From Merits Event Active!', xi.msg.channel.SAY, 'Protocrystal')
         end
 
@@ -469,7 +493,7 @@ entity.onTrade = function(player, npc, trade)
     local refractiveCrystals = trade:getItemQty(xi.item.REFRACTIVE_CRYSTAL)
 
     -- Trade Refractive Crystals for Cruor
-    if npcUtil.tradeHasExactly(trade, {{xi.item.REFRACTIVE_CRYSTAL, refractiveCrystals}}) then
+    if npcUtil.tradeHasExactly(trade, { { xi.item.REFRACTIVE_CRYSTAL, refractiveCrystals } }) then
         player:confirmTrade()
         player:addCurrency('cruor', refractiveCrystals * 1000)
         player:printToPlayer(string.format('Awarded %i Cruor. New total: %i.', refractiveCrystals * 1000, refractiveCrystals * 1000 + cruor), xi.msg.channel.SAY, 'Protocrystal')

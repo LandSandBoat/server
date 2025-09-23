@@ -26,7 +26,10 @@ function xi.eraNpc.tryWarp(player, npc, params)
     local time = GetSystemTime()
     params.name = params.name or npc:getName()
 
-    if player:getLocalVar('[Era]WarpNpc') ~= npc:getID() or time > player:getLocalVar('[Era]WarpTime') then
+    if
+        player:getLocalVar('[Era]WarpNpc') ~= npc:getID() or
+        time > player:getLocalVar('[Era]WarpTime')
+    then
         player:setLocalVar('[Era]WarpNpc', npc:getID())
         player:setLocalVar('[Era]WarpTime', time + 30)
         player:printToPlayer('Warning! The next time you click this NPC, you will be transported.', xi.msg.channel.SAY, params.name)
@@ -125,7 +128,10 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
         return
     end
 
-    if player:getZone():getRegionID() == xi.region.JEUNO or zoneid == xi.zone.AHT_URHGAN_WHITEGATE then
+    if
+        player:getZone():getRegionID() == xi.region.JEUNO or
+        zoneid == xi.zone.AHT_URHGAN_WHITEGATE
+    then
         xi.eraNpc.tryWarp(player, npc, {
             destinationName = 'Your Home Nation',
             destination     = 'nation',

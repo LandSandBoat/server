@@ -9,9 +9,10 @@ require('modules/custom/lua/era_npc')
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc, {
+    xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc,
+    {
         destinationName = 'Crawler\'s Nest - Lizard Camp',
-        destination     = 
+        destination     =
         {
             132, -40, -70, 90, xi.zone.CRAWLERS_NEST
         },

@@ -50,16 +50,6 @@ xi.failBadge.crystalNames = {
     [xi.item.AURORA_CRYSTAL]   = 'Aurora Crystal',
 }
 
-xi.failBadge.crystalNames = {
-    [xi.item.FADED_CRYSTAL]    = 'Faded Crystal',
-    [xi.item.TERRA_CRYSTAL]    = 'Terra Crystal',
-    [xi.item.GLACIER_CRYSTAL]  = 'Glacier Crystal',
-    [xi.item.PLASMA_CRYSTAL]   = 'Plasma Crystal',
-    [xi.item.INFERNO_CRYSTAL]  = 'Inferno Crystal',
-    [xi.item.TWILIGHT_CRYSTAL] = 'Twilight Crystal',
-    [xi.item.AURORA_CRYSTAL]   = 'Aurora Crystal',
-}
-
 local function getCrystalName(itemId)
     return xi.failBadge.crystalNames[itemId] or 'Unknown Crystal'
 end
@@ -72,7 +62,7 @@ local function sendLocationHint(player, progress)
         player:printToPlayer('Return to Achieve Master in Ru\'Lude Gardens.', xi.msg.channel.SYSTEM_3)
         return
     end
-    
+
     if location and crystal and crystal.item then
         local crystalName = getCrystalName(crystal.item)
         player:printToPlayer('The next chest is in ' .. location .. '.', xi.msg.channel.SYSTEM_3)
@@ -87,7 +77,7 @@ end
 xi.failBadge.onTriggerRulude = function(player, npc)
     local prog = player:getVar('FailBadge')
     local p = xi.failBadge.progress
-    
+
     if prog == p.QUEST_AVAILABLE then
         -- Start the quest
         player:printToPlayer('A new challenger arrises!', xi.msg.channel.SYSTEM_3)
@@ -98,11 +88,13 @@ xi.failBadge.onTriggerRulude = function(player, npc)
         player:printToPlayer('If you succeed, you will win 1 billion gil!', xi.msg.channel.SYSTEM_3)
         player:setVar('FailBadge', p.FADED_CRYSTAL_OBTAINED)
         npcUtil.giveItem(player, xi.item.FADED_CRYSTAL)
-    elseif prog == p.FADED_CRYSTAL_OBTAINED or
-           prog == p.TERRA_CRYSTAL_OBTAINED or
-           prog == p.GLACIER_CRYSTAL_OBTAINED or
-           prog == p.PLASMA_CRYSTAL_OBTAINED or
-           prog == p.INFERNO_CRYSTAL_OBTAINED then
+    elseif
+        prog == p.FADED_CRYSTAL_OBTAINED or
+        prog == p.TERRA_CRYSTAL_OBTAINED or
+        prog == p.GLACIER_CRYSTAL_OBTAINED or
+        prog == p.PLASMA_CRYSTAL_OBTAINED or
+        prog == p.INFERNO_CRYSTAL_OBTAINED
+    then
         -- Give location hint for current crystal
         sendLocationHint(player, prog)
     elseif prog == p.TWILIGHT_CRYSTAL_OBTAINED then
@@ -137,10 +129,13 @@ end
 
 xi.failBadge.handleChestTrade = function(player, npc, trade, expectedProgress, requiredCrystal, nextProgress)
     local prog = player:getVar('FailBadge')
-    
-    if prog == expectedProgress and npcUtil.tradeHasExactly(trade, requiredCrystal) then
+
+    if
+        prog == expectedProgress and
+        npcUtil.tradeHasExactly(trade, requiredCrystal)
+    then
         player:confirmTrade()
-        
+
         -- Special case for Castle Zvahl Keep (return to Ru'Lude)
         if expectedProgress == xi.failBadge.progress.INFERNO_CRYSTAL_OBTAINED then
             player:printToPlayer('Go back to Achieve Master in Ru\'Lude Gardens.', xi.msg.channel.SYSTEM_3)
@@ -148,21 +143,23 @@ xi.failBadge.handleChestTrade = function(player, npc, trade, expectedProgress, r
             npcUtil.giveItem(player, xi.item.TWILIGHT_CRYSTAL)
             return true
         end
-        
+
         -- Normal chest progression
         local crystalData = xi.failBadge.crystals[expectedProgress]
         if crystalData and crystalData.next then
             -- Give next crystal and hint
             local nextLocation = xi.failBadge.locations[nextProgress]
             local nextCrystalName = getCrystalName(crystalData.next)
-            
+
             player:printToPlayer('The next chest is in ' .. nextLocation .. '.', xi.msg.channel.SYSTEM_3)
             player:printToPlayer('Place the \'' .. nextCrystalName .. '\' inside of it.', xi.msg.channel.SYSTEM_3)
             player:setVar('FailBadge', nextProgress)
             npcUtil.giveItem(player, crystalData.next)
         end
+
         return true
     end
+
     return false
 end
 
@@ -192,78 +189,79 @@ end
 
 xi.failBadge.onTriggerAltepa = function(player, npc)
     local p = xi.failBadge.progress
-    xi.failBadge.handleChestTrigger(player, npc, 
-        p.FADED_CRYSTAL_OBTAINED, 
+    xi.failBadge.handleChestTrigger(player, npc,
+        p.FADED_CRYSTAL_OBTAINED,
         p.TERRA_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTradeUleguerand = function(player, npc, trade)
     local p = xi.failBadge.progress
-    return xi.failBadge.handleChestTrade(player, npc, trade, 
-        p.TERRA_CRYSTAL_OBTAINED, 
-        xi.item.TERRA_CRYSTAL, 
+    return xi.failBadge.handleChestTrade(player, npc, trade,
+        p.TERRA_CRYSTAL_OBTAINED,
+        xi.item.TERRA_CRYSTAL,
         p.GLACIER_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTriggerUleguerand = function(player, npc)
     local p = xi.failBadge.progress
-    xi.failBadge.handleChestTrigger(player, npc, 
-        p.TERRA_CRYSTAL_OBTAINED, 
+    xi.failBadge.handleChestTrigger(player, npc,
+        p.TERRA_CRYSTAL_OBTAINED,
         p.GLACIER_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTradeZitah = function(player, npc, trade)
     local p = xi.failBadge.progress
-    return xi.failBadge.handleChestTrade(player, npc, trade, 
-        p.GLACIER_CRYSTAL_OBTAINED, 
-        xi.item.GLACIER_CRYSTAL, 
+    return xi.failBadge.handleChestTrade(player, npc, trade,
+        p.GLACIER_CRYSTAL_OBTAINED,
+        xi.item.GLACIER_CRYSTAL,
         p.PLASMA_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTriggerZitah = function(player, npc)
     local p = xi.failBadge.progress
-    xi.failBadge.handleChestTrigger(player, npc, 
-        p.GLACIER_CRYSTAL_OBTAINED, 
+    xi.failBadge.handleChestTrigger(player, npc,
+        p.GLACIER_CRYSTAL_OBTAINED,
         p.PLASMA_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTradeIfrits = function(player, npc, trade)
     local p = xi.failBadge.progress
-    return xi.failBadge.handleChestTrade(player, npc, trade, 
-        p.PLASMA_CRYSTAL_OBTAINED, 
-        xi.item.PLASMA_CRYSTAL, 
+    return xi.failBadge.handleChestTrade(player, npc, trade,
+        p.PLASMA_CRYSTAL_OBTAINED,
+        xi.item.PLASMA_CRYSTAL,
         p.INFERNO_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTriggerIfrits = function(player, npc)
     local p = xi.failBadge.progress
-    xi.failBadge.handleChestTrigger(player, npc, 
-        p.PLASMA_CRYSTAL_OBTAINED, 
+    xi.failBadge.handleChestTrigger(player, npc,
+        p.PLASMA_CRYSTAL_OBTAINED,
         p.INFERNO_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTradeZvahl = function(player, npc, trade)
     local p = xi.failBadge.progress
-    return xi.failBadge.handleChestTrade(player, npc, trade, 
-        p.INFERNO_CRYSTAL_OBTAINED, 
-        xi.item.INFERNO_CRYSTAL, 
+    return xi.failBadge.handleChestTrade(player, npc, trade,
+        p.INFERNO_CRYSTAL_OBTAINED,
+        xi.item.INFERNO_CRYSTAL,
         p.TWILIGHT_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTriggerZvahl = function(player, npc)
     local p = xi.failBadge.progress
-    local prog = player:getVar('FailBadge')
-
-    xi.failBadge.handleChestTrigger(player, npc, 
-        p.INFERNO_CRYSTAL_OBTAINED, 
+    xi.failBadge.handleChestTrigger(player, npc,
+        p.INFERNO_CRYSTAL_OBTAINED,
         p.TWILIGHT_CRYSTAL_OBTAINED)
 end
 
 xi.failBadge.onTradeProvenance = function(player, npc, trade)
     local prog = player:getVar('FailBadge')
     local p = xi.failBadge.progress
-    
-    if prog == p.READY_FOR_PROVENANCE and npcUtil.tradeHasExactly(trade, xi.item.TWILIGHT_CRYSTAL) then
+
+    if
+        prog == p.READY_FOR_PROVENANCE and
+        npcUtil.tradeHasExactly(trade, xi.item.TWILIGHT_CRYSTAL)
+    then
         local mobId = zones[xi.zone.PROVENANCE].mob.PROVENANCE_WATCHER
         local mob = GetMobByID(mobId)
 
@@ -272,14 +270,17 @@ xi.failBadge.onTradeProvenance = function(player, npc, trade)
         player:setPos(-582, -228, 507, 194)
         player:printToPlayer('Defeat the Provenance Watcher to obtain what you seek.', xi.msg.channel.SYSTEM_3)
         player:confirmTrade()
-        
+
         if mob and not mob:isSpawned() then
             mob:setSpawn(-580.000, -228.500, 540.000, 64)
             mob:spawn()
         end
-        
+
         return true
-    elseif prog == p.AURORA_CRYSTAL_OBTAINED and npcUtil.tradeHasExactly(trade, xi.item.AURORA_CRYSTAL) then
+    elseif
+        prog == p.AURORA_CRYSTAL_OBTAINED and
+        npcUtil.tradeHasExactly(trade, xi.item.AURORA_CRYSTAL)
+    then
         -- Quest completion
         npcUtil.giveKeyItem(player, xi.ki.FAIL_BADGE)
         player:printToPlayer('You have failed...', xi.msg.channel.SYSTEM_3)
@@ -287,6 +288,7 @@ xi.failBadge.onTradeProvenance = function(player, npc, trade)
         player:setVar('FailBadge', p.QUEST_FAILED)
         return true
     end
+
     return false
 end
 

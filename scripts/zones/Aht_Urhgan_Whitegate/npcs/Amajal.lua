@@ -9,9 +9,10 @@ require('modules/custom/lua/era_npc')
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc, {
+    xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc,
+    {
         destinationName = 'Caedarva Mire - Undead ZNM Camp',
-        destination     = 
+        destination     =
         {
             -691, -24, 357, 132, xi.zone.CAEDARVA_MIRE
         },
