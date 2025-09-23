@@ -1,7 +1,7 @@
 -----------------------------------
 -- Provenance Protocrystal
 -----------------------------------
-local ID = require('scripts/zones/Provenance/IDs')
+local ID = zones[xi.zone.PROVENANCE]
 -----------------------------------
 ---@type TNpcEntity
 
@@ -299,11 +299,11 @@ local augments =
 local function getMeritExchangeValue(player)
     local exchangeValue = 250
 
-    if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= os.time() then
+    if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= GetSystemTime() then
         exchangeValue = exchangeValue * 2
     end
 
-    if player:getVar("MentorFlag") == 1 then
+    if player:getVar('MentorFlag') == 1 then
         exchangeValue = exchangeValue * 4
     end
 
@@ -312,73 +312,73 @@ end
 
 local function getPurchaseRefractiveFunc(quantity, name)
     return function(player)
-        player:queue(0, function(player)
+        player:queue(0, function(playerQueued)
             local cost = quantity * 1000
 
             local confirmationMenu =
             {
-                title = "Confirm Purchase (pay " .. cost .. " cruor)",
+                title = 'Confirm Purchase (pay ' .. cost .. ' cruor)',
                 options =
                 {
-                    { "Purchase " .. name .. ".", function(player)
-                        local cruor       = player:getCurrency("cruor")
+                    { 'Purchase ' .. name .. '.', function(playerConfirm)
+                        local cruor       = playerConfirm:getCurrency('cruor')
                         local neededSlots = math.ceil(quantity / 12)
 
                         if cruor < cost then
-                            player:printToPlayer(string.format("You do not have enough cruor. It costs %i cruor but you possess %i.", cost, cruor))
+                            playerConfirm:printToPlayer(string.format('You do not have enough cruor. It costs %i cruor but you possess %i.', cost, cruor))
                             return
                         end
 
-                        if player:getFreeSlotsCount() < neededSlots then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.REFRACTIVE_CRYSTAL)
+                        if playerConfirm:getFreeSlotsCount() < neededSlots then
+                            playerConfirm:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.REFRACTIVE_CRYSTAL)
                             return
                         end
 
-                        player:delCurrency("cruor", cost)
+                        playerConfirm:delCurrency('cruor', cost)
 
                         local remainingQuantity = quantity
 
                         while remainingQuantity > 0 do
-                            npcUtil.giveItem(player, {{ xi.item.REFRACTIVE_CRYSTAL, math.min(12, remainingQuantity) }})
+                            npcUtil.giveItem(playerConfirm, {{ xi.item.REFRACTIVE_CRYSTAL, math.min(12, remainingQuantity) }})
                             remainingQuantity = remainingQuantity - 12
                         end
                     end },
-                    { "I changed my mind.", function(player) return end },
+                    { 'I changed my mind.', function(playerCancel) return end },
                 }
             }
 
-            player:customMenu(confirmationMenu)
+            playerQueued:customMenu(confirmationMenu)
         end)
     end
 end
 
 local function getMeritExchangeFunc(quantity, name)
     return function(player)
-        player:queue(0, function(player)
-            local cruor = getMeritExchangeValue(player) * quantity
+        player:queue(0, function(playerQueued)
+            local cruor = getMeritExchangeValue(playerQueued) * quantity
             local confirmationMenu =
             {
-                title = "Confirm Purchase (pay " .. name .. ")",
+                title = 'Confirm Purchase (pay ' .. name .. ')',
                 options =
                 {
-                    { "Purchase " .. cruor .. " cruor.", function(player)
-                        local merits = player:getMeritCount()
+                    { 'Purchase ' .. cruor .. ' cruor.', function(playerConfirm)
+                        local merits = playerConfirm:getMeritCount()
 
                         if merits < quantity then
-                            player:printToPlayer(string.format("You do not have enough merits. It costs %i merits but you possess %i merits.", quantity, merits))
+                            playerConfirm:printToPlayer(string.format('You do not have enough merits. It costs %i merits but you possess %i merits.', quantity, merits))
                             return
                         end
 
-                        player:addCurrency("cruor", cruor)
-                        player:setMerits(merits - quantity)
+                        playerConfirm:addCurrency('cruor', cruor)
+                        playerConfirm:setMerits(merits - quantity)
 
-                        player:printToPlayer(string.format("Awarded %i Cruor. New Total: %i", cruor, player:getCurrency("cruor")), xi.msg.channel.SAY, "Protocrystal")
+                        playerConfirm:printToPlayer(string.format('Awarded %i Cruor. New Total: %i', cruor, playerConfirm:getCurrency('cruor')), xi.msg.channel.SAY, 'Protocrystal')
                     end },
-                    { "I changed my mind.", function(player) return end },
+                    { 'I changed my mind.', function(playerCancel) return end },
                 }
             }
 
-            player:customMenu(confirmationMenu)
+            playerQueued:customMenu(confirmationMenu)
         end)
     end
 end
@@ -387,53 +387,53 @@ local protocrystalMenus
 
 local function getOpenMenuFunc(menuName)
     return function(player)
-        player:queue(0, function(player)
+        player:queue(0, function(playerQueued)
             local menu = protocrystalMenus[menuName]
 
-            if menuName == "Merit Exchange" then
-                menu = {title = menu.title, options = menu.options}
-                menu.title = string.format(menu.title, getMeritExchangeValue(player))
+            if menuName == 'Merit Exchange' then
+                menu = { title = menu.title, options = menu.options }
+                menu.title = string.format(menu.title, getMeritExchangeValue(playerQueued))
             end
 
-            player:customMenu(menu)
+            playerQueued:customMenu(menu)
         end)
     end
 end
 
 protocrystalMenus =
 {
-    ["Main Menu"] =
+    ['Main Menu'] =
     {
-        title = "Choose a category.",
+        title = 'Choose a category.',
         options =
         {
-            { "Refractive Crystals", getOpenMenuFunc("Refractive Crystals") },
-            { "Merit Exchange",      getOpenMenuFunc("Merit Exchange") },
-            { "Exit", function(player) return end },
+            { 'Refractive Crystals', getOpenMenuFunc('Refractive Crystals') },
+            { 'Merit Exchange',      getOpenMenuFunc('Merit Exchange') },
+            { 'Exit', function(player) return end },
         }
     },
-    ["Refractive Crystals"] =
+    ['Refractive Crystals'] =
     {
-        title = "Each refractive crystal costs 1000 cruor.",
+        title = 'Each refractive crystal costs 1000 cruor.',
         options =
         {
-            { "1x Refractive Crystal",   getPurchaseRefractiveFunc( 1, "1x Refractive Crystal") },
-            { "5x Refractive Crystals",  getPurchaseRefractiveFunc( 5, "5x Refractive Crystals") },
-            { "10x Refractive Crystals", getPurchaseRefractiveFunc(10, "10x Refractive Crystals") },
-            { "50x Refractive Crystals", getPurchaseRefractiveFunc(50, "50x Refractive Crystals") },
-            { "Back", getOpenMenuFunc("Main Menu") },
+            { '1x Refractive Crystal',   getPurchaseRefractiveFunc(1, '1x Refractive Crystal') },
+            { '5x Refractive Crystals',  getPurchaseRefractiveFunc(5, '5x Refractive Crystals') },
+            { '10x Refractive Crystals', getPurchaseRefractiveFunc(10, '10x Refractive Crystals') },
+            { '50x Refractive Crystals', getPurchaseRefractiveFunc(50, '50x Refractive Crystals') },
+            { 'Back', getOpenMenuFunc('Main Menu') },
         }
     },
-    ["Merit Exchange"] =
+    ['Merit Exchange'] =
     {
-        title = "Each merit paid gives %i cruor.",
+        title = 'Each merit paid gives %i cruor.',
         options =
         {
-            { "Pay 1x Merit",   getMeritExchangeFunc( 1, "1x Merit") },
-            { "Pay 5x Merits",  getMeritExchangeFunc( 5, "5x Merits") },
-            { "Pay 10x Merits", getMeritExchangeFunc(10, "10x Merits") },
-            { "Pay 25x Merits", getMeritExchangeFunc(25, "25x Merits") },
-            { "Back", getOpenMenuFunc("Main Menu") },
+            { 'Pay 1x Merit',   getMeritExchangeFunc(1, '1x Merit') },
+            { 'Pay 5x Merits',  getMeritExchangeFunc(5, '5x Merits') },
+            { 'Pay 10x Merits', getMeritExchangeFunc(10, '10x Merits') },
+            { 'Pay 25x Merits', getMeritExchangeFunc(25, '25x Merits') },
+            { 'Back', getOpenMenuFunc('Main Menu') },
         }
     },
 }
@@ -441,43 +441,43 @@ protocrystalMenus =
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-	local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local merit = player:getMeritCount()
 
-    local debounce = player:getLocalVar("ThrottleTime")
+    local debounce = player:getLocalVar('ThrottleTime')
 
-    if debounce < os.time() then
-        player:setLocalVar("ThrottleTime", os.time() + 30)
+    if debounce < GetSystemTime() then
+        player:setLocalVar('ThrottleTime', GetSystemTime() + 30)
 
-        player:printToPlayer("Use cruor to augment a variety of items!", xi.msg.channel.SAY, "Protocrystal")
-        player:printToPlayer("Visit https://ffera.fandom.com/wiki/Augments for more details.", xi.msg.channel.SAY, "Protocrystal")
-        player:printToPlayer("Exchange cruor with Refractive Crystals at a rate of 1000-to-1.", xi.msg.channel.SAY, "Protocrystal")
-        player:printToPlayer(string.format("Gain cruor by paying merits at a rate of %i-to-1.", getMeritExchangeValue(player)), xi.msg.channel.SAY, "Protocrystal")
+        player:printToPlayer('Use cruor to augment a variety of items!', xi.msg.channel.SAY, 'Protocrystal')
+        player:printToPlayer('Visit https://ffera.fandom.com/wiki/Augments for more details.', xi.msg.channel.SAY, 'Protocrystal')
+        player:printToPlayer('Exchange cruor with Refractive Crystals at a rate of 1000-to-1.', xi.msg.channel.SAY, 'Protocrystal')
+        player:printToPlayer(string.format('Gain cruor by paying merits at a rate of %i-to-1.', getMeritExchangeValue(player)), xi.msg.channel.SAY, 'Protocrystal')
 
-        if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= os.time() then
-            player:printToPlayer("Double Cruor From Merits Event Active!", xi.msg.channel.SAY, "Protocrystal")
+        if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= GetSystemTime() then
+            player:printToPlayer('Double Cruor From Merits Event Active!', xi.msg.channel.SAY, 'Protocrystal')
         end
 
-        player:printToPlayer(string.format("You currently have %d Cruor and %i available Merits", cruor, merit), xi.msg.channel.SAY, "Protocrystal")
+        player:printToPlayer(string.format('You currently have %d Cruor and %i available Merits', cruor, merit), xi.msg.channel.SAY, 'Protocrystal')
     end
 
-    player:customMenu(protocrystalMenus["Main Menu"])
+    player:customMenu(protocrystalMenus['Main Menu'])
 end
 
 entity.onTrade = function(player, npc, trade)
-    local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local refractiveCrystals = trade:getItemQty(xi.item.REFRACTIVE_CRYSTAL)
 
     -- Trade Refractive Crystals for Cruor
     if npcUtil.tradeHasExactly(trade, {{xi.item.REFRACTIVE_CRYSTAL, refractiveCrystals}}) then
         player:confirmTrade()
-        player:addCurrency("cruor", refractiveCrystals * 1000)
-        player:printToPlayer(string.format("Awarded %i Cruor. New total: %i.", refractiveCrystals * 1000, refractiveCrystals * 1000 + cruor), xi.msg.channel.SAY, "Protocrystal")
+        player:addCurrency('cruor', refractiveCrystals * 1000)
+        player:printToPlayer(string.format('Awarded %i Cruor. New total: %i.', refractiveCrystals * 1000, refractiveCrystals * 1000 + cruor), xi.msg.channel.SAY, 'Protocrystal')
         return
     end
 
     if cruor < 1000 then
-        player:printToPlayer("Insufficient cruor.", xi.msg.channel.SAY, "Protocrystal")
+        player:printToPlayer('Insufficient cruor.', xi.msg.channel.SAY, 'Protocrystal')
         return
     end
 
@@ -490,7 +490,7 @@ entity.onTrade = function(player, npc, trade)
     for _, k in pairs(rings) do
         if npcUtil.tradeHasExactly(trade, k) then
             player:confirmTrade()
-            player:delCurrency("cruor", 1000)
+            player:delCurrency('cruor', 1000)
             npcUtil.giveItem(player, k)
             break
         end
@@ -499,7 +499,7 @@ entity.onTrade = function(player, npc, trade)
     for itemID, entry in pairs(augments) do
         if npcUtil.tradeHasExactly(trade, itemID) then
             player:confirmTrade()
-            player:delCurrency("cruor", 1000)
+            player:delCurrency('cruor', 1000)
 
             local slots = {}
 

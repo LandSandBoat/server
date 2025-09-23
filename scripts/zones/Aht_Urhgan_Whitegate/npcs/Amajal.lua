@@ -10,8 +10,11 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc, {
-        destinationName = "Caedarva Mire - Undead ZNM Camp",
-        destination     = {-691, -24, 357, 132, xi.zone.CAEDARVA_MIRE},
+        destinationName = 'Caedarva Mire - Undead ZNM Camp',
+        destination     = 
+        {
+            -691, -24, 357, 132, xi.zone.CAEDARVA_MIRE
+        },
     })
 end
 

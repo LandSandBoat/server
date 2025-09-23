@@ -31,37 +31,37 @@ xi.failBadge.crystals = {
 }
 
 xi.failBadge.locations = {
-    [5]  = "Western Altepa Desert",
-    [7]  = "Uleguerand Range",
-    [9]  = "The Sanctuary of Zi'Tah",
-    [11] = "Ifrit's Cauldron",
-    [13] = "Castle Zvahl Keep",
-    [15] = "Ru'Lude Gardens",
-    [16] = "Provenance",
+    [5]  = 'Western Altepa Desert',
+    [7]  = 'Uleguerand Range',
+    [9]  = 'The Sanctuary of Zi\'Tah',
+    [11] = 'Ifrit\'s Cauldron',
+    [13] = 'Castle Zvahl Keep',
+    [15] = 'Ru\'Lude Gardens',
+    [16] = 'Provenance',
 }
 
 xi.failBadge.crystalNames = {
-    [xi.item.FADED_CRYSTAL]    = "Faded Crystal",
-    [xi.item.TERRA_CRYSTAL]    = "Terra Crystal",
-    [xi.item.GLACIER_CRYSTAL]  = "Glacier Crystal",
-    [xi.item.PLASMA_CRYSTAL]   = "Plasma Crystal",
-    [xi.item.INFERNO_CRYSTAL]  = "Inferno Crystal",
-    [xi.item.TWILIGHT_CRYSTAL] = "Twilight Crystal",
-    [xi.item.AURORA_CRYSTAL]   = "Aurora Crystal",
+    [xi.item.FADED_CRYSTAL]    = 'Faded Crystal',
+    [xi.item.TERRA_CRYSTAL]    = 'Terra Crystal',
+    [xi.item.GLACIER_CRYSTAL]  = 'Glacier Crystal',
+    [xi.item.PLASMA_CRYSTAL]   = 'Plasma Crystal',
+    [xi.item.INFERNO_CRYSTAL]  = 'Inferno Crystal',
+    [xi.item.TWILIGHT_CRYSTAL] = 'Twilight Crystal',
+    [xi.item.AURORA_CRYSTAL]   = 'Aurora Crystal',
 }
 
 xi.failBadge.crystalNames = {
-    [xi.item.FADED_CRYSTAL]    = "Faded Crystal",
-    [xi.item.TERRA_CRYSTAL]    = "Terra Crystal",
-    [xi.item.GLACIER_CRYSTAL]  = "Glacier Crystal",
-    [xi.item.PLASMA_CRYSTAL]   = "Plasma Crystal",
-    [xi.item.INFERNO_CRYSTAL]  = "Inferno Crystal",
-    [xi.item.TWILIGHT_CRYSTAL] = "Twilight Crystal",
-    [xi.item.AURORA_CRYSTAL]   = "Aurora Crystal",
+    [xi.item.FADED_CRYSTAL]    = 'Faded Crystal',
+    [xi.item.TERRA_CRYSTAL]    = 'Terra Crystal',
+    [xi.item.GLACIER_CRYSTAL]  = 'Glacier Crystal',
+    [xi.item.PLASMA_CRYSTAL]   = 'Plasma Crystal',
+    [xi.item.INFERNO_CRYSTAL]  = 'Inferno Crystal',
+    [xi.item.TWILIGHT_CRYSTAL] = 'Twilight Crystal',
+    [xi.item.AURORA_CRYSTAL]   = 'Aurora Crystal',
 }
 
 local function getCrystalName(itemId)
-    return xi.failBadge.crystalNames[itemId] or "Unknown Crystal"
+    return xi.failBadge.crystalNames[itemId] or 'Unknown Crystal'
 end
 
 local function sendLocationHint(player, progress)
@@ -69,14 +69,14 @@ local function sendLocationHint(player, progress)
     local crystal = xi.failBadge.crystals[progress]
 
     if progress == xi.failBadge.progress.TWILIGHT_CRYSTAL_OBTAINED then
-        player:printToPlayer("Return to Achieve Master in Ru'Lude Gardens.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Return to Achieve Master in Ru\'Lude Gardens.', xi.msg.channel.SYSTEM_3)
         return
     end
     
     if location and crystal and crystal.item then
         local crystalName = getCrystalName(crystal.item)
-        player:printToPlayer("The next chest is in " .. location .. ".", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("Place the '" .. crystalName .. "' inside of it.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('The next chest is in ' .. location .. '.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Place the \'' .. crystalName .. '\' inside of it.', xi.msg.channel.SYSTEM_3)
     end
 end
 
@@ -90,13 +90,13 @@ xi.failBadge.onTriggerRulude = function(player, npc)
     
     if prog == p.QUEST_AVAILABLE then
         -- Start the quest
-        player:printToPlayer("A new challenger arrises!", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("There are several magical chests hidden across Vana'diel.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("The first chest is somewhere in Western Altepa Desert.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("Take the 'Faded Crystal' to the chest there to reveal the next step.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("At the end of your journey you will face a tremendous challenge.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("If you succeed, you will win 1 billion gil!", xi.msg.channel.SYSTEM_3)
-        player:setVar("FailBadge", p.FADED_CRYSTAL_OBTAINED)
+        player:printToPlayer('A new challenger arrises!', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('There are several magical chests hidden across Vana\'diel.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('The first chest is somewhere in Western Altepa Desert.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Take the \'Faded Crystal\' to the chest there to reveal the next step.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('At the end of your journey you will face a tremendous challenge.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('If you succeed, you will win 1 billion gil!', xi.msg.channel.SYSTEM_3)
+        player:setVar('FailBadge', p.FADED_CRYSTAL_OBTAINED)
         npcUtil.giveItem(player, xi.item.FADED_CRYSTAL)
     elseif prog == p.FADED_CRYSTAL_OBTAINED or
            prog == p.TERRA_CRYSTAL_OBTAINED or
@@ -107,27 +107,27 @@ xi.failBadge.onTriggerRulude = function(player, npc)
         sendLocationHint(player, prog)
     elseif prog == p.TWILIGHT_CRYSTAL_OBTAINED then
         -- Ready for final challenge
-        player:printToPlayer("You've done it! The challenge isn't over yet though.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("Take the Twilight Crystal to a final chest in Provenance to see the true challenge.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("Return to me once you have faced your final trial, win or lose.", xi.msg.channel.SYSTEM_3)
-        player:setVar("FailBadge", p.READY_FOR_PROVENANCE)
+        player:printToPlayer('You\'ve done it! The challenge isn\'t over yet though.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Take the Twilight Crystal to a final chest in Provenance to see the true challenge.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Return to me once you have faced your final trial, win or lose.', xi.msg.channel.SYSTEM_3)
+        player:setVar('FailBadge', p.READY_FOR_PROVENANCE)
     elseif prog == p.READY_FOR_PROVENANCE then
         -- Remind about Provenance
-        player:printToPlayer("Take the Twilight Crystal to the chest in Provenance.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("There you will find your final challenge.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Take the Twilight Crystal to the chest in Provenance.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('There you will find your final challenge.', xi.msg.channel.SYSTEM_3)
     elseif prog == p.BOSS_FIGHT then
         -- Give Aurora Crystal after boss
-        player:printToPlayer("So you have faced the final challenge?", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("Place this crystal in the chest in Provenance for your reward.", xi.msg.channel.SYSTEM_3)
-        player:printToPlayer("If you were successful, 1,000,000,000 gil will appear in the chest!", xi.msg.channel.SYSTEM_3)
-        player:setVar("FailBadge", p.AURORA_CRYSTAL_OBTAINED)
+        player:printToPlayer('So you have faced the final challenge?', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Place this crystal in the chest in Provenance for your reward.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('If you were successful, 1,000,000,000 gil will appear in the chest!', xi.msg.channel.SYSTEM_3)
+        player:setVar('FailBadge', p.AURORA_CRYSTAL_OBTAINED)
         npcUtil.giveItem(player, xi.item.AURORA_CRYSTAL)
     elseif prog == p.AURORA_CRYSTAL_OBTAINED then
         -- Remind to return to Provenance
-        player:printToPlayer("Take the Aurora Crystal to the chest in Provenance to receive your reward.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Take the Aurora Crystal to the chest in Provenance to receive your reward.', xi.msg.channel.SYSTEM_3)
     elseif prog == p.QUEST_FAILED then
         -- Quest failed message
-        player:printToPlayer("You failed! No second chances!", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('You failed! No second chances!', xi.msg.channel.SYSTEM_3)
     end
 end
 
@@ -143,8 +143,8 @@ xi.failBadge.handleChestTrade = function(player, npc, trade, expectedProgress, r
         
         -- Special case for Castle Zvahl Keep (return to Ru'Lude)
         if expectedProgress == xi.failBadge.progress.INFERNO_CRYSTAL_OBTAINED then
-            player:printToPlayer("Go back to Achieve Master in Ru'Lude Gardens.", xi.msg.channel.SYSTEM_3)
-            player:setVar("FailBadge", nextProgress)
+            player:printToPlayer('Go back to Achieve Master in Ru\'Lude Gardens.', xi.msg.channel.SYSTEM_3)
+            player:setVar('FailBadge', nextProgress)
             npcUtil.giveItem(player, xi.item.TWILIGHT_CRYSTAL)
             return true
         end
@@ -156,9 +156,9 @@ xi.failBadge.handleChestTrade = function(player, npc, trade, expectedProgress, r
             local nextLocation = xi.failBadge.locations[nextProgress]
             local nextCrystalName = getCrystalName(crystalData.next)
             
-            player:printToPlayer("The next chest is in " .. nextLocation .. ".", xi.msg.channel.SYSTEM_3)
-            player:printToPlayer("Place the '" .. nextCrystalName .. "' inside of it.", xi.msg.channel.SYSTEM_3)
-            player:setVar("FailBadge", nextProgress)
+            player:printToPlayer('The next chest is in ' .. nextLocation .. '.', xi.msg.channel.SYSTEM_3)
+            player:printToPlayer('Place the \'' .. nextCrystalName .. '\' inside of it.', xi.msg.channel.SYSTEM_3)
+            player:setVar('FailBadge', nextProgress)
             npcUtil.giveItem(player, crystalData.next)
         end
         return true
@@ -174,7 +174,7 @@ xi.failBadge.handleChestTrigger = function(player, npc, currentProgress, nextPro
         sendLocationHint(player, prog)
     else
         -- Generic message
-        player:printToPlayer("A mysterious chest. It seems to be waiting for something.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('A mysterious chest. It seems to be waiting for something.', xi.msg.channel.SYSTEM_3)
     end
 end
 
@@ -268,9 +268,9 @@ xi.failBadge.onTradeProvenance = function(player, npc, trade)
         local mob = GetMobByID(mobId)
 
         -- Teleport to boss area
-        player:setVar("FailBadge", p.BOSS_FIGHT)
+        player:setVar('FailBadge', p.BOSS_FIGHT)
         player:setPos(-582, -228, 507, 194)
-        player:printToPlayer("Defeat the Provenance Watcher to obtain what you seek.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Defeat the Provenance Watcher to obtain what you seek.', xi.msg.channel.SYSTEM_3)
         player:confirmTrade()
         
         if mob and not mob:isSpawned() then
@@ -282,9 +282,9 @@ xi.failBadge.onTradeProvenance = function(player, npc, trade)
     elseif prog == p.AURORA_CRYSTAL_OBTAINED and npcUtil.tradeHasExactly(trade, xi.item.AURORA_CRYSTAL) then
         -- Quest completion
         npcUtil.giveKeyItem(player, xi.ki.FAIL_BADGE)
-        player:printToPlayer("You have failed...", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('You have failed...', xi.msg.channel.SYSTEM_3)
         player:confirmTrade()
-        player:setVar("FailBadge", p.QUEST_FAILED)
+        player:setVar('FailBadge', p.QUEST_FAILED)
         return true
     end
     return false
@@ -295,13 +295,13 @@ xi.failBadge.onTriggerProvenance = function(player, npc)
     local p = xi.failBadge.progress
 
     if prog == p.READY_FOR_PROVENANCE then
-        player:printToPlayer("Trade me the Twilight Crystal to begin your final challenge.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Trade me the Twilight Crystal to begin your final challenge.', xi.msg.channel.SYSTEM_3)
     elseif prog == p.BOSS_FIGHT then
-        player:printToPlayer("Return to Achieve Master in Ru'Lude Gardens.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Return to Achieve Master in Ru\'Lude Gardens.', xi.msg.channel.SYSTEM_3)
     elseif prog == p.AURORA_CRYSTAL_OBTAINED then
-        player:printToPlayer("Trade me the Aurora Crystal to receive your reward.", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Trade me the Aurora Crystal to receive your reward.', xi.msg.channel.SYSTEM_3)
     elseif prog == p.QUEST_FAILED then
-        player:printToPlayer("You're a failure!", xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('You\'re a failure!', xi.msg.channel.SYSTEM_3)
     end
 end
 

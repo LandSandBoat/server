@@ -10,9 +10,9 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     xi.eraNpc.tryWarp(player, npc, {
-        destinationName = "Your Home Point",
-        destination     = "warp",
-        name            = "GlimmeringTrove",
+        destinationName = 'Your Home Point',
+        destination     = 'warp',
+        name            = 'GlimmeringTrove',
     })
 end
 

@@ -10,8 +10,11 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     xi.eraNpc.giveInstantWarpScrollThenTryWarp(player, npc, {
-        destinationName = "Crawler's Nest - Lizard Camp",
-        destination     = {132, -40, -70, 90, xi.zone.CRAWLERS_NEST},
+        destinationName = 'Crawler\'s Nest - Lizard Camp',
+        destination     = 
+        {
+            132, -40, -70, 90, xi.zone.CRAWLERS_NEST
+        },
     })
 end
 

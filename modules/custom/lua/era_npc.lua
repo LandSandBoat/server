@@ -16,21 +16,21 @@ function xi.eraNpc.giveInstantWarpScroll(player, npc, params)
         return false
     end
 
-    player:printToPlayer("Bro, you forgot your Warp scroll, don't worry, I gotchu :D", xi.msg.channel.SAY, params.name)
+    player:printToPlayer('Bro, you forgot your Warp scroll, don\'t worry, I gotchu :D', xi.msg.channel.SAY, params.name)
     npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
 
     return true
 end
 
 function xi.eraNpc.tryWarp(player, npc, params)
-    local time = os.time()
+    local time = GetSystemTime()
     params.name = params.name or npc:getName()
 
-    if player:getLocalVar("[Era]WarpNpc") ~= npc:getID() or time > player:getLocalVar("[Era]WarpTime") then
-        player:setLocalVar("[Era]WarpNpc", npc:getID())
-        player:setLocalVar("[Era]WarpTime", time + 30)
-        player:printToPlayer("Warning! The next time you click this NPC, you will be transported.", xi.msg.channel.SAY, params.name)
-        player:printToPlayer(string.format("Destination: %s", params.destinationName), xi.msg.channel.SAY, params.name)
+    if player:getLocalVar('[Era]WarpNpc') ~= npc:getID() or time > player:getLocalVar('[Era]WarpTime') then
+        player:setLocalVar('[Era]WarpNpc', npc:getID())
+        player:setLocalVar('[Era]WarpTime', time + 30)
+        player:printToPlayer('Warning! The next time you click this NPC, you will be transported.', xi.msg.channel.SAY, params.name)
+        player:printToPlayer(string.format('Destination: %s', params.destinationName), xi.msg.channel.SAY, params.name)
         return false
     end
 
@@ -39,9 +39,9 @@ function xi.eraNpc.tryWarp(player, npc, params)
         return false
     end
 
-    if params.destination == "nation" then
+    if params.destination == 'nation' then
         xi.teleport.toHomeNation(player)
-    elseif params.destination == "warp" then
+    elseif params.destination == 'warp' then
         player:warp()
     else
         player:setPos(unpack(params.destination))
@@ -83,7 +83,7 @@ local function getTotalExp(player)
 end
 
 function xi.eraNpc.broMoogleTrade(player, npc, trade)
-    player:printToPlayer("Hey bro, I don't know what you're expecting me to do with this. I'm good.", xi.msg.channel.SAY, "B.R.O. Moogle")
+    player:printToPlayer('Hey bro, I don\'t know what you\'re expecting me to do with this. I\'m good.', xi.msg.channel.SAY, 'B.R.O. Moogle')
 end
 
 function xi.eraNpc.broMoogleTrigger(player, npc)
@@ -92,48 +92,48 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
     local expCap = 1087850 -- Enough exp for reaching level 75 and leveling two subjobs to 37
 
     -- B.R.O. Moogle explanation for first timers
-    if player:getCharVar("BroMoogleIntro") == 0 then
-        player:printToPlayer("Hey bro, I'm one of Era's infamous buffing moogles!", xi.msg.channel.SAY, "B.R.O. Moogle")
-        player:printToPlayer("We'll help you out on your adventures. Just hit us up every time you see us!", xi.msg.channel.SAY, "B.R.O. Moogle")
-        player:printToPlayer("Talk to me again when you're ready for my Mighty Moogle Magic!", xi.msg.channel.SAY, "B.R.O. Moogle")
-        player:printToPlayer("What? Why didn't I say it? Bro, we're not all the same... *Sigh* ... Kupo...", xi.msg.channel.SAY, "B.R.O. Moogle")
-        player:setCharVar("BroMoogleIntro", 1)
+    if player:getCharVar('BroMoogleIntro') == 0 then
+        player:printToPlayer('Hey bro, I\'m one of Era\'s infamous buffing moogles!', xi.msg.channel.SAY, 'B.R.O. Moogle')
+        player:printToPlayer('We\'ll help you out on your adventures. Just hit us up every time you see us!', xi.msg.channel.SAY, 'B.R.O. Moogle')
+        player:printToPlayer('Talk to me again when you\'re ready for my Mighty Moogle Magic!', xi.msg.channel.SAY, 'B.R.O. Moogle')
+        player:printToPlayer('What? Why didn\'t I say it? Bro, we\'re not all the same... *Sigh* ... Kupo...', xi.msg.channel.SAY, 'B.R.O. Moogle')
+        player:setCharVar('BroMoogleIntro', 1)
         return
     end
 
-    local time = os.time()
+    local time = GetSystemTime()
 
-    if time > player:getLocalVar("[Era]BroBuffTime") then
-        player:setLocalVar("[Era]BroBuffTime", time + 30)
-        player:printToPlayer("Here are the buffs I'm authorized to give you, bro.", xi.msg.channel.SAY, "B.R.O. Moogle")
+    if time > player:getLocalVar('[Era]BroBuffTime') then
+        player:setLocalVar('[Era]BroBuffTime', time + 30)
+        player:printToPlayer('Here are the buffs I\'m authorized to give you, bro.', xi.msg.channel.SAY, 'B.R.O. Moogle')
         player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
 
         -- Check for MOOGLEEXP event from settings
         if
             xi.settings.main.MOOGLEEXP == 1 or
-            (xi.settings.main.MOOGLEEXP > 1 and xi.settings.main.MOOGLEEXP < os.time()) or
+            (xi.settings.main.MOOGLEEXP > 1 and xi.settings.main.MOOGLEEXP < GetSystemTime()) or
             (player:getMainLvl() < 75 and totalExp < expCap)
         then
             player:addStatusEffect(xi.effect.DEDICATION, 100, 60, 10800, 0, 80000) -- Current EXP Buff
-        elseif totalExp >= expCap and player:getCharVar("BroLockV1") == 0 then
-            player:printToPlayer("Oh, bro, you've grown so strong you don't need my magic anymore!", xi.msg.channel.SAY, "B.R.O. Moogle")
-            player:setCharVar("BroLockV1", 1)
+        elseif totalExp >= expCap and player:getCharVar('BroLockV1') == 0 then
+            player:printToPlayer('Oh, bro, you\'ve grown so strong you don\'t need my magic anymore!', xi.msg.channel.SAY, 'B.R.O. Moogle')
+            player:setCharVar('BroLockV1', 1)
         end
     end
 
-    if xi.eraNpc.giveInstantWarpScroll(player, npc, { name = "B.R.O. Moogle" }) then
+    if xi.eraNpc.giveInstantWarpScroll(player, npc, { name = 'B.R.O. Moogle' }) then
         return
     end
 
     if player:getZone():getRegionID() == xi.region.JEUNO or zoneid == xi.zone.AHT_URHGAN_WHITEGATE then
         xi.eraNpc.tryWarp(player, npc, {
-            destinationName = "Your Home Nation",
-            destination     = "nation",
-            name            = "B.R.O. Moogle",
+            destinationName = 'Your Home Nation',
+            destination     = 'nation',
+            name            = 'B.R.O. Moogle',
         })
 
         -- Cleanup old vars
-        player:setCharVar("letswarp", 0)
+        player:setCharVar('letswarp', 0)
     end
 end
 

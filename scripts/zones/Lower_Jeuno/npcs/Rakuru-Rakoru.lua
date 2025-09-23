@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
 -- NPC: Rakuru-Rakoru
--------------------------------------
+-----------------------------------
 require('scripts/globals/conquest')
 require('modules/custom/lua/era_npc')
 -----------------------------------
@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if xi.eraNpc.giveInstantWarpScroll(player, npc, { name = "Rakuru-Rakoru" }) then
+    if xi.eraNpc.giveInstantWarpScroll(player, npc, { name = 'Rakuru-Rakoru' }) then
         return
     end
 
