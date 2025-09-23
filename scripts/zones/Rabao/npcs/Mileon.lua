@@ -9,7 +9,7 @@ local ID = zones[xi.zone.RABAO]
 ---@type TNpcEntity
 local entity = {}
 
-local rewards =
+local exactRewards =
 {
     xi.item.RED_ROCK,
     xi.item.BLUE_ROCK,
@@ -19,6 +19,10 @@ local rewards =
     xi.item.PURPLE_ROCK,
     xi.item.BLACK_ROCK,
     xi.item.WHITE_ROCK,
+}
+
+local closeRewards =
+{
     xi.item.FIRE_CLUSTER,
     xi.item.ICE_CLUSTER,
     xi.item.WIND_CLUSTER,
@@ -47,41 +51,48 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     local gil = player:getGil()
+    local playCheck = player:getCharVar('[LuckyRoll]Played')
+    local winCheck = npc:getLocalVar('[LuckyRoll]RabaoLastWon')
 
-    if csid == 100 and option == 0 and gil >= 100 then
+    if playCheck ~= VanadielUniqueDay() and winCheck ~= VanadielUniqueDay() then
+        if csid == 100 and option == 0 and gil >= 100 then
 
-        local currentTotal = npc:getLocalVar('[LuckyRoll]Rabao')
-        local roll = math.random(1, 6)
-        local newTotal = currentTotal + roll
+            local currentTotal = npc:getLocalVar('[LuckyRoll]Rabao')
+            local roll = math.random(1, 6)
+            local newTotal = currentTotal + roll
 
-        player:updateEvent(4, roll, 0, newTotal)
-        npc:setLocalVar('[LuckyRoll]Rabao', newTotal)
+            player:updateEvent(4, roll, 0, newTotal)
+            npc:setLocalVar('[LuckyRoll]Rabao', newTotal)
+        end
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local gil = player:getGil()
+    local playCheck = player:getCharVar('[LuckyRoll]Played')
+    local winCheck = npc:getLocalVar('[LuckyRoll]RabaoLastWon')
 
-    if csid == 100 and option == 0 and gil >= 100 then
-        local newTotal = npc:getLocalVar('[LuckyRoll]Rabao')
+    if playCheck ~= VanadielUniqueDay() and winCheck ~= VanadielUniqueDay() then
+        if csid == 100 and option == 0 and gil >= 100 then
+            local newTotal = npc:getLocalVar('[LuckyRoll]Rabao')
 
-        if newTotal >= 400 then
+            if newTotal >= 400 then
+                if newTotal == 400 then
+                    player:showText(npc, ID.text.LUCKY_ROLL_EXACT)
+                    npcUtil.giveItem(player, utils.randomEntry(exactRewards))
+                elseif newTotal <= 402 then
+                    player:showText(npc, ID.text.LUCKY_ROLL_CLOSE)
+                    npcUtil.giveItem(player, utils.randomEntry(closeRewards))
+                end
 
-            if newTotal == 400 then
-                player:showText(npc, ID.text.LUCKY_ROLL_EXACT)
-                npcUtil.giveItem(player, rewards[math.random(10, 16)])
-            elseif newTotal <= 402 then
-                player:showText(npc, ID.text.LUCKY_ROLL_CLOSE)
-                npcUtil.giveItem(player, rewards[math.random(1, 9)])
+                npc:setLocalVar('[LuckyRoll]Rabao', math.random(150, 250))
+                npc:setLocalVar('[LuckyRoll]RabaoLastWon', VanadielUniqueDay())
+                player:addGil(10000)
             end
 
-            npc:setLocalVar('[LuckyRoll]Rabao', math.random(150, 250))
-            npc:setLocalVar('[LuckyRoll]RabaoLastWon', VanadielUniqueDay())
-            player:addGil(10000)
+            player:delGil(100)
+            player:setCharVar('[LuckyRoll]Played', VanadielUniqueDay())
         end
-
-        player:delGil(100)
-        player:setCharVar('[LuckyRoll]Played', VanadielUniqueDay())
     end
 end
 
