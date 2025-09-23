@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) > 1
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 2
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

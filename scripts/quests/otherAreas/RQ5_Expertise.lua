@@ -35,7 +35,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                         player:getCharVar('Quest[4][3]DayCompleted') + 8 < VanadielUniqueDay()
                     then
                         return quest:progressEvent(61) -- Quest starting event.
