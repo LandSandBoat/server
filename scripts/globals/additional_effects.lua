@@ -126,6 +126,7 @@ xi.additionalEffect.procType =
     ABSORB_STATUS = 11,
     SELF_BUFF     = 12,
     DEATH         = 13,
+    NM_SPECIFIC   = 14,
 }
 
 -- TODO: add resistance check for params.element
@@ -397,6 +398,41 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.HPMPTP_DRAIN] = f
     }
 
     return xi.additionalEffect.procFunctions[drainFuncs[drainRoll]](attacker, defender, item, params)
+end
+
+xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = function(attacker, defender, item, params)
+    local subEffect = params.subEffect
+    local msgID     = 0
+    local msgParam  = 0
+    local defenderName = defender:getName()
+
+    switch(defenderName): caseof
+    {
+        ['Brigandish_Blade'] = function()
+            -- Calculate damage
+            local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
+            msgID = xi.msg.basic.ADD_EFFECT_DMG
+            msgParam = damage
+
+            -- If Brigandish Blade has damage immunity (at 1% HP), remove it
+            if defender:getMod(xi.mod.UDMGPHYS) == -10000 then
+                -- Remove all damage immunities
+                defender:setMod(xi.mod.UDMGPHYS, 0)
+                defender:setMod(xi.mod.UDMGRANGE, 0)
+                defender:setMod(xi.mod.UDMGMAGIC, 0)
+                defender:setMod(xi.mod.UDMGBREATH, 0)
+
+                defender:setLocalVar('killable', 1)
+                defender:setUnkillable(false)
+            end
+        end,
+
+        ['default'] = function()
+            return 0, 0, 0
+        end,
+    }
+
+    return subEffect, msgID, msgParam
 end
 
 -- paralyze on hit, fire damage on hit, etc.

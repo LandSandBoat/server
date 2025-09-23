@@ -302,6 +302,8 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REGAIN, 200)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
@@ -324,10 +326,16 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobFight = function(mob, target)
-end
+entity.onMobWeaponSkillPrepare = function(mob, target)
+    -- Zipacna heavily prefers using Crystal Rain and Crystal Weapon
+    local roll = math.random(1, 100)
 
-entity.onMobDeath = function(mob, player, optParams)
+    if roll <= 30 then
+        return xi.mobSkill.CRYSTAL_RAIN
+    elseif roll <= 60 then
+        local weaponEle = math.random(xi.mobSkill.CRYSTAL_WEAPON_FIRE, xi.mobSkill.CRYSTAL_WEAPON_WATER)
+        return weaponEle
+    end
 end
 
 entity.onMobRoam = function(mob)
