@@ -3,6 +3,7 @@
 -- Utilities for custom Era NPC interactions
 -----------------------------------
 require("scripts/globals/npc_util")
+-----------------------------------
 
 xi = xi or {}
 xi.eraNpc = xi.eraNpc or {}
@@ -135,3 +136,5 @@ function xi.eraNpc.broMoogleTrigger(player, npc)
         player:setCharVar("letswarp", 0)
     end
 end
+
+return xi.eraNpc

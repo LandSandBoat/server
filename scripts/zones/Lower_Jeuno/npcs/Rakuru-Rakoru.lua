@@ -3,9 +3,9 @@
 -- NPC: Rakuru-Rakoru
 -------------------------------------
 require("scripts/globals/conquest")
-require("scripts/globals/era_npc")
+require("modules/custom/lua/era_npc")
 -----------------------------------
-
+---@type TNpcEntity
 local guardNation = xi.nation.OTHER
 local guardType   = xi.conquest.guard.CITY
 local guardEvent  = 32763

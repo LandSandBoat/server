@@ -3,7 +3,7 @@
 --  NPC: Amajal
 -- Standard Info NPC
 -----------------------------------
-require("scripts/globals/era_npc")
+require("modules/custom/lua/era_npc")
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

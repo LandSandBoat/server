@@ -3,7 +3,7 @@
 --  NPC: Nantoto
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/era_npc")
+require("modules/custom/lua/era_npc")
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

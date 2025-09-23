@@ -4460,6 +4460,22 @@ namespace charutils
                 return;
             }
 
+            // Custom Era Code
+            if (PMob->m_Type & MOBTYPE_NOTORIOUS)
+            {
+                uint32 nmHuntCheck    = charutils::GetCharVar(PMember, "NMHuntTarget");
+
+                if (PMob->id == nmHuntCheck)
+                {
+                    charutils::SetCharVar(PMember, "NMHuntClear", 1);
+                    PMember->pushPacket<CChatMessagePacket>(
+                        PMember,
+                        MESSAGE_SYSTEM_3,
+                        "You've killed your NM hunt target! Now return to the Explorer Moogle for your reward!",
+                        "");
+                }
+            }
+
             bool chainactive = false;
 
             const uint8 moblevel    = PMob->GetMLevel();
