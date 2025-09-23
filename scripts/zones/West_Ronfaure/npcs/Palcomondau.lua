@@ -51,7 +51,7 @@ entity.onSpawn = function(npc)
 end
 
 entity.onPath = function(npc)
-     if not npc:isFollowingPath() then
+    if not npc:isFollowingPath() then
         if npc:atPoint(xi.path.last(pathNodes)) then
             npc:setLocalVar('scouted', 1)
             npc:pathThrough(pathNodes, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
