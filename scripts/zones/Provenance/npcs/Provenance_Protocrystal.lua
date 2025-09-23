@@ -1,7 +1,7 @@
 -----------------------------------
 -- Provenance Protocrystal
 -----------------------------------
-local ID = require("scripts/zones/Provenance/IDs")
+local ID = require('scripts/zones/Provenance/IDs')
 -----------------------------------
 ---@type TNpcEntity
 

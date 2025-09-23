@@ -3,7 +3,7 @@
 -- NPC: Achieve Master
 -- !pos -212.2397 -14.8012 -15.2794
 -----------------------------------
-require("modules/custom/lua/Fail_Badge_Quest")
+require('modules/custom/lua/Fail_Badge_Quest')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

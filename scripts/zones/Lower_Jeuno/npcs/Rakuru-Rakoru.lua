@@ -2,8 +2,8 @@
 -- Area: Lower Jeuno
 -- NPC: Rakuru-Rakoru
 -------------------------------------
-require("scripts/globals/conquest")
-require("modules/custom/lua/era_npc")
+require('scripts/globals/conquest')
+require('modules/custom/lua/era_npc')
 -----------------------------------
 ---@type TNpcEntity
 local guardNation = xi.nation.OTHER

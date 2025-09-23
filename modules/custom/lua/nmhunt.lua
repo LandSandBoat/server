@@ -2,9 +2,10 @@
 -- NM Hunt System Configuration
 -----------------------------------
 
-nmHunt = nmHunt or {}
+xi = xi or {}
+xi.nmHunt = xi.nmHunt or {}
 
-nmHunt.config = {
+xi.nmHunt.config = {
     huntDuration = 1209600, -- 14 days
     cooldownTime = 259200,  -- 3 days
 
@@ -14,7 +15,7 @@ nmHunt.config = {
     gilMax = 100000,
 }
 
-nmHunt.milestoneRewards = {
+xi.nmHunt.milestoneRewards = {
     [5]   = xi.item.LOTUS_KATANA,
     [10]  = xi.item.ANNIVERSARY_RING,
     [15]  = xi.item.NOMAD_MOOGLE_ROD,
@@ -43,12 +44,12 @@ nmHunt.milestoneRewards = {
     [130] = xi.item.APHELION_KNUCKLES,
 }
 
-nmHunt.standardRewards = {
+xi.nmHunt.standardRewards = {
     xi.item.COTTON_COIN_PURSE,
     xi.item.LINEN_COIN_PURSE,
 }
 
-nmHunt.targets = {
+xi.nmHunt.targets = {
     [1] = { zone = xi.zone.JUGNER_FOREST, mob = "METEORMAULER_ZHAGTEGG", clue = "I am the sentinel to the ruins of their sanctuary. My allies and I defend our stronghold." },
     [2] = { zone = xi.zone.ATTOHWA_CHASM, mob = "CITIPATI", clue = "Come join our dance in the graveyard." },
     [3] = { zone = xi.zone.CASTLE_OZTROJA, mob = "MOO_OUZI_THE_SWIFTBLADE", clue = "I'm certainly not the king of this old castle." },
@@ -154,7 +155,7 @@ nmHunt.targets = {
     [103] = { zone = xi.zone.PHANAUET_CHANNEL, mob = "VODYANOI", clue = "This old man likes to drown people in the muck." },
 }
 
-nmHunt.vars = {
+xi.nmHunt.vars = {
     COMPLETE_BY    = "NM_Completeby",
     NEXT_HUNT      = "NMHuntNextHunt",
     HUNT_TARGET    = "NMHuntTarget",
@@ -164,32 +165,32 @@ nmHunt.vars = {
 }
 
 -- Helper functions
-nmHunt.getMobId = function(huntData)
+xi.nmHunt.getMobId = function(huntData)
     local zoneId = huntData.zone
     local mobName = huntData.mob
     return zones[zoneId].mob[mobName]
 end
 
-nmHunt.getRandomTarget = function()
-    local index = math.random(1, #nmHunt.targets)
-    return index, nmHunt.targets[index]
+xi.nmHunt.getRandomTarget = function()
+    local index = math.random(1, #xi.nmHunt.targets)
+    return index, xi.nmHunt.targets[index]
 end
 
-nmHunt.isHuntActive = function(player)
-    local completeBy = player:getVar(nmHunt.vars.COMPLETE_BY)
+xi.nmHunt.isHuntActive = function(player)
+    local completeBy = player:getVar(xi.nmHunt.vars.COMPLETE_BY)
     return completeBy > 0 and completeBy >= os.time()
 end
 
-nmHunt.isOnCooldown = function(player)
-    local nextHunt = player:getVar(nmHunt.vars.NEXT_HUNT)
+xi.nmHunt.isOnCooldown = function(player)
+    local nextHunt = player:getVar(xi.nmHunt.vars.NEXT_HUNT)
     return nextHunt > os.time()
 end
 
-nmHunt.clearHunt = function(player)
-    player:setVar(nmHunt.vars.COMPLETE_BY, 0)
-    player:setVar(nmHunt.vars.HUNT_TARGET, 0)
-    player:setVar(nmHunt.vars.HUNT_PATTERN, 0)
-    player:setVar(nmHunt.vars.HUNT_CLEARED, 0)
+xi.nmHunt.clearHunt = function(player)
+    player:setVar(xi.nmHunt.vars.COMPLETE_BY, 0)
+    player:setVar(xi.nmHunt.vars.HUNT_TARGET, 0)
+    player:setVar(xi.nmHunt.vars.HUNT_PATTERN, 0)
+    player:setVar(xi.nmHunt.vars.HUNT_CLEARED, 0)
 end
 
-return nmHunt
+return xi.nmHunt

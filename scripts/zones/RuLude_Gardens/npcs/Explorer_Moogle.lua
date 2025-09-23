@@ -5,31 +5,31 @@
 -- !pos -61 6 -6 243
 -----------------------------------
 local ID = zones[xi.zone.RULUDE_GARDENS]
-require("scripts/globals/npc_util")
-require("modules/custom/lua/nmhunt")
+require('scripts/globals/npc_util')
+require('modules/custom/lua/nmhunt')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local COMPLETEBY = player:getVar(nmHunt.vars.COMPLETE_BY)
-    local NEXTNM = player:getVar(nmHunt.vars.NEXT_HUNT)
-    local huntScore = player:getVar(nmHunt.vars.HUNT_SCORE)
-    local huntCleared = player:getVar(nmHunt.vars.HUNT_CLEARED)
-    local PATTERN = player:getVar(nmHunt.vars.HUNT_PATTERN)
+    local COMPLETEBY = player:getVar(xi.nmHunt.vars.COMPLETE_BY)
+    local NEXTNM = player:getVar(xi.nmHunt.vars.NEXT_HUNT)
+    local huntScore = player:getVar(xi.nmHunt.vars.HUNT_SCORE)
+    local huntCleared = player:getVar(xi.nmHunt.vars.HUNT_CLEARED)
+    local PATTERN = player:getVar(xi.nmHunt.vars.HUNT_PATTERN)
     local currentTime = os.time()
     
     -- Check if eligible for new hunt
     if NEXTNM <= currentTime and COMPLETEBY == 0 then
         -- Pick a random hunt target
-        local huntIndex, huntData = nmHunt.getRandomTarget()
-        local targetMobId = nmHunt.getMobId(huntData)
+        local huntIndex, huntData = xi.nmHunt.getRandomTarget()
+        local targetMobId = xi.nmHunt.getMobId(huntData)
         
         -- Set the hunt variables
-        player:setVar(nmHunt.vars.HUNT_TARGET, targetMobId)
-        player:setVar(nmHunt.vars.HUNT_PATTERN, huntIndex)
-        player:setVar(nmHunt.vars.NEXT_HUNT, 0)
-        player:setVar(nmHunt.vars.COMPLETE_BY, currentTime + nmHunt.config.huntDuration)
+        player:setVar(xi.nmHunt.vars.HUNT_TARGET, targetMobId)
+        player:setVar(xi.nmHunt.vars.HUNT_PATTERN, huntIndex)
+        player:setVar(xi.nmHunt.vars.NEXT_HUNT, 0)
+        player:setVar(xi.nmHunt.vars.COMPLETE_BY, currentTime + xi.nmHunt.config.huntDuration)
         
         if huntScore == 0 then
             player:printToPlayer("Welcome to Era's NM Hunt. I'll give you 2 weeks to find this being. Your clue is:", xi.msg.channel.SAY, "NM Hunt")
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     -- Check if hunt expired
     elseif COMPLETEBY <= currentTime and COMPLETEBY ~= 0 then
         player:printToPlayer("Your current hunt seems to have expired, check again to sign up for another.", xi.msg.channel.SAY, "NM Hunt")
-        nmHunt.clearHunt(player)
+        xi.nmHunt.clearHunt(player)
         
     -- Check if player has an active hunt
     elseif PATTERN ~= 0 then
@@ -52,27 +52,27 @@ entity.onTrigger = function(player, npc)
             if player:getFreeSlotsCount() > 1 then
                 local rewardRoll = math.random(1, 100)
                 
-                if rewardRoll >= (100 - nmHunt.config.itemRewardChance) then
+                if rewardRoll >= (100 - xi.nmHunt.config.itemRewardChance) then
                     -- Item reward
-                    npcUtil.giveItem(player, nmHunt.standardRewards[math.random(1, #nmHunt.standardRewards)])
+                    npcUtil.giveItem(player, xi.nmHunt.standardRewards[math.random(1, #xi.nmHunt.standardRewards)])
                 else
                     -- Gil reward
-                    local gilAmount = math.random(nmHunt.config.gilMin, nmHunt.config.gilMax)
+                    local gilAmount = math.random(xi.nmHunt.config.gilMin, xi.nmHunt.config.gilMax)
                     player:addGil(gilAmount)
                     player:messageSpecial(ID.text.GIL_OBTAINED, gilAmount)
                 end
                 
                 -- Update hunt stats
-                nmHunt.clearHunt(player)
-                player:setVar(nmHunt.vars.NEXT_HUNT, currentTime + nmHunt.config.cooldownTime)
-                player:setVar(nmHunt.vars.HUNT_SCORE, huntScore + 1)
+                xi.nmHunt.clearHunt(player)
+                player:setVar(xi.nmHunt.vars.NEXT_HUNT, currentTime + xi.nmHunt.config.cooldownTime)
+                player:setVar(xi.nmHunt.vars.HUNT_SCORE, huntScore + 1)
                 
                 player:printToPlayer(string.format("Congrats, you solved the riddle and killed it! You have now completed %d hunts.", huntScore + 1), xi.msg.channel.SAY, "NM Hunt")
                 
                 -- Check for milestone reward
                 local newScore = huntScore + 1
-                if newScore % 5 == 0 and nmHunt.milestoneRewards[newScore] then
-                    npcUtil.giveItem(player, nmHunt.milestoneRewards[newScore])
+                if newScore % 5 == 0 and xi.nmHunt.milestoneRewards[newScore] then
+                    npcUtil.giveItem(player, xi.nmHunt.milestoneRewards[newScore])
                 end
             else
                 player:printToPlayer("Why don't you free up 2 inventory slots and talk to me again.", xi.msg.channel.SAY, "NM Hunt")
@@ -83,7 +83,7 @@ entity.onTrigger = function(player, npc)
             player:printToPlayer("They are still out there, keep looking!", xi.msg.channel.SAY, "NM Hunt")
             player:printToPlayer(string.format("You still have %d hours to find the one I seek.", math.floor((COMPLETEBY - currentTime) / 3600)), xi.msg.channel.SAY, "NM Hunt")
             player:printToPlayer("Here's the clue again to help you out:", xi.msg.channel.SAY, "NM Hunt")
-            player:printToPlayer(nmHunt.targets[PATTERN].clue, xi.msg.channel.SAY, "NM Hunt")
+            player:printToPlayer(xi.nmHunt.targets[PATTERN].clue, xi.msg.channel.SAY, "NM Hunt")
         end
         
     -- On cooldown

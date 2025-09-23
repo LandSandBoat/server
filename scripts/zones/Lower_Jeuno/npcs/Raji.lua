@@ -3,7 +3,7 @@
 --  NPC: Raji
 -- Standard Info NPC
 -----------------------------------
-require("modules/custom/lua/era_npc")
+require('modules/custom/lua/era_npc')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

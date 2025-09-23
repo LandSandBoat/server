@@ -2,7 +2,7 @@
 -- Era NPC
 -- Utilities for custom Era NPC interactions
 -----------------------------------
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 -----------------------------------
 
 xi = xi or {}

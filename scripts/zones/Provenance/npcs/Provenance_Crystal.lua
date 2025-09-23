@@ -2,7 +2,7 @@
 --  Area: Provenance
 --  NPC: Provenance_Crystal
 -----------------------------------
-local ID = require("scripts/zones/Provenance/IDs")
+local ID = require('scripts/zones/Provenance/IDs')
 require('scripts/globals/npc_util')
 -----------------------------------
 ---@type TNpcEntity

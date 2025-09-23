@@ -2,9 +2,9 @@
 -- Area: Provenance
 --  HNM: Provenance Watcher
 -----------------------------------
+require('scripts/globals/magic')
+-----------------------------------
 ---@type TMobEntity
-require("scripts/globals/magic")
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)
