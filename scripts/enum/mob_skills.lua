@@ -74,6 +74,10 @@ xi.mobSkill =
 
     VULTURE_3                =  626,
 
+    CRYSTAL_RAIN             =  678,
+    CRYSTAL_WEAPON_FIRE      =  679, -- Zipacna Weapon Start
+    CRYSTAL_WEAPON_WATER     =  682, -- Zipacna Weapon End
+
     BENEDICTION_1            =  689, -- Season's Greetings KSNM 30 (Gilagoge Tlugvi)
     HUNDRED_FISTS_1          =  690, -- Season's Greetings KSNM 30 (Goga Tlugvi)
 

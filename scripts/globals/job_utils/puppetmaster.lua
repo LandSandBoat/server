@@ -85,11 +85,16 @@ xi.job_utils.puppetmaster.onAbilityUseActivate = function(player, target, abilit
         local jpValue = player:getJobPointLevel(xi.jp.AUTOMATON_HP_MP_BONUS)
         pet:addMod(xi.mod.HP, jpValue * 10)
         pet:addMod(xi.mod.MP, jpValue * 5)
+        pet:updateHealth()
+
+        -- ensure it spawns at full hp
+        pet:addHP(pet:getMod(xi.mod.HP))
+        pet:addMP(pet:getMod(xi.mod.MP))
     end
 end
 
--- On Ability Check Deux Ex Automata
-xi.job_utils.puppetmaster.onAbilityCheckDeuxExAutomata = function(player, target, ability)
+-- On Ability Check Deus Ex Automata
+xi.job_utils.puppetmaster.onAbilityCheckDeusExAutomata = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
@@ -103,15 +108,21 @@ xi.job_utils.puppetmaster.onAbilityCheckDeuxExAutomata = function(player, target
     end
 end
 
--- On Ability Use Deux Ex Automata
-xi.job_utils.puppetmaster.onAbilityUseDeuxExAutomata = function(player, target, ability)
+-- On Ability Use Deus Ex Automata
+xi.job_utils.puppetmaster.onAbilityUseDeusExAutomata = function(player, target, ability)
     xi.pet.spawnPet(player, xi.petId.AUTOMATON)
     local pet = player:getPet()
 
     if pet then
+        local jpValue = player:getJobPointLevel(xi.jp.AUTOMATON_HP_MP_BONUS)
+        pet:addMod(xi.mod.HP, jpValue * 10)
+        pet:addMod(xi.mod.MP, jpValue * 5)
+        pet:updateHealth()
+
+        -- ensure it spawns at specific HPP/MPP based on level
         local percent = math.floor((player:getMainLvl() / 3)) / 100
-        pet:setHP(math.max(pet:getHP() * percent, 1))
-        pet:setMP(pet:getMP() * percent)
+        pet:setHP(math.max(pet:getMaxHP() * percent, 1))
+        pet:setMP(pet:getMaxMP() * percent)
     end
 end
 

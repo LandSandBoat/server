@@ -32,7 +32,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][1]DayCompleted') + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 3
                     then
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(82, xi.item.PUFFBALL) -- Unending Chase starting event.

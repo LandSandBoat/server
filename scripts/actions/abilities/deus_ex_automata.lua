@@ -9,11 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.puppetmaster.onAbilityCheckDeuxExAutomata(player, target, ability)
+    return xi.job_utils.puppetmaster.onAbilityCheckDeusExAutomata(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    return xi.job_utils.puppetmaster.onAbilityUseDeuxExAutomata(player, target, ability)
+    return xi.job_utils.puppetmaster.onAbilityUseDeusExAutomata(player, target, ability)
 end
 
 return abilityObject

@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local fame = player:getFameLevel(2)
+    local fame = player:getFameLevel(xi.fameArea.WINDURST)
     if fame == 9 then
         player:startEvent(784)
     else
