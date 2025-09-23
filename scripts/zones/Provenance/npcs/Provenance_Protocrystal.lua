@@ -299,7 +299,10 @@ local augments =
 local function getMeritExchangeValue(player)
     local exchangeValue = 250
 
-    if xi.settings.main.CRUORBOOST == 1 or xi.settings.main.CRUORBOOST >= GetSystemTime() then
+    if
+        xi.settings.main.CRUORBOOST == 1 or
+        xi.settings.main.CRUORBOOST >= GetSystemTime()
+    then
         exchangeValue = exchangeValue * 2
     end
 
