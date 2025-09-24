@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <magic_enum/magic_enum.hpp>
+
 // Client-to-Server packet IDs
 // https://github.com/atom0s/XiPackets/tree/main/world/client
 // Note: Some packets are not explicitly named in XiPackets and have been given tentative names.
@@ -155,4 +157,11 @@ enum class PacketC2S : uint16_t
     GP_CLI_COMMAND_MASTERY_DISPLAY      = 0x11B,
     GP_CLI_COMMAND_PARTY_REQUEST        = 0x11C,
     GP_CLI_COMMAND_JUMP                 = 0x11D,
+};
+
+template <>
+struct magic_enum::customize::enum_range<PacketC2S>
+{
+    static constexpr int min = 0;
+    static constexpr int max = 300;
 };

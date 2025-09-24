@@ -82,8 +82,10 @@ zoneObject.onGameHour = function(zone)
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()
-            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
-            npc:pathThrough(lowerJeunoGlobal.lampPath, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
+            npc:setLocalVar('path', 1)
+            npc:setLocalVar('keepPathingOnTrigger', 1)
+            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath[1]))
+            npc:pathThrough(lowerJeunoGlobal.lampPath[1], bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
         end
     end
 end

@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, zones[xi.zone.MHAURA].text.TYAPADOLIH_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end
 
 return entity

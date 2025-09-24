@@ -23,6 +23,7 @@
 
 #include "common/logging.h"
 #include "common/lua.h"
+#include "enums/packet_c2s.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
 #include "lua/sol_bindings.h"
@@ -56,7 +57,7 @@ auto CLuaClientEntityPairPackets::createPacket(uint16 packetType) -> std::unique
 void CLuaClientEntityPairPackets::sendBasicPacket(CBasicPacket& packet) const
 {
     const auto testChar = parent_->testChar();
-    DebugTestFmt("Sending C2S Packet 0x{:03X}", packet.ref<uint8>(0x00));
+    DebugTestFmt("C2S 0x{:03X} {}", packet.getType(), magic_enum::enum_name(static_cast<PacketC2S>(packet.getType())));
     PacketParser[packet.ref<uint8>(0x00)](testChar->session(), testChar->entity(), packet);
 }
 

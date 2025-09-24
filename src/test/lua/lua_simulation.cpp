@@ -89,9 +89,24 @@ void CLuaSimulation::loadZone(sol::variadic_args va) const
     zoneutils::LoadZones(zoneIds);
 }
 
-void CLuaSimulation::cleanClients()
+void CLuaSimulation::cleanClients(std::optional<ClientScope> scope)
 {
-    clients_.clear();
+    if (!scope.has_value())
+    {
+        // No scope specified - clean all clients
+        clients_.clear();
+    }
+    else
+    {
+        // Clean only clients with matching scope
+        // clang-format off
+        auto [first, last] = std::ranges::remove_if(clients_, [scope](const ClientInfo& info)
+        {
+             return info.scope == scope.value();
+        });
+        // clang-format on
+        clients_.erase(first, last);
+    }
 }
 
 /************************************************************************
@@ -246,9 +261,9 @@ void CLuaSimulation::seed() const
 // Moves all clients session clock and process pending packets
 void CLuaSimulation::processClientUpdates() const
 {
-    for (auto&& client : clients_)
+    for (auto&& info : clients_)
     {
-        client->tick();
+        info.client->tick();
     }
 }
 
@@ -283,7 +298,7 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
             const auto timePoint = timer::now() + 1ms;
             for (auto* PZone : g_PZoneList | std::views::values)
             {
-                if (PZone->GetEntity(1024)) // Only tick zones with players
+                if (!PZone->GetZoneEntities()->CharListEmpty()) // Only tick zones with players
                 {
                     PZone->ZoneServer(timePoint);
                 }
@@ -297,7 +312,7 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
             const auto timePoint = timer::now() + 1ms;
             for (auto* PZone : g_PZoneList | std::views::values)
             {
-                if (PZone->GetEntity(1024))
+                if (!PZone->GetZoneEntities()->CharListEmpty())
                 {
                     // CheckTriggerAreas _only_ adds a trigger area to the player list.
                     // ZoneServer processes the actual events.
@@ -333,7 +348,10 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
             const auto timePoint = timer::now();
             for (auto* PZone : g_PZoneList | std::views::values)
             {
-                PZone->GetZoneEntities()->ZoneServer(timePoint);
+                if (!PZone->GetZoneEntities()->CharListEmpty())
+                {
+                    PZone->GetZoneEntities()->ZoneServer(timePoint);
+                }
             }
         }
         break;
@@ -436,7 +454,15 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     }
 
     testChar->setEntity(charutils::LoadChar(testChar->charId()));
-    auto* player = clients_.emplace_back(std::make_unique<CLuaClientEntityPair>(std::move(testChar), this, engine_)).get();
+
+    // Create client wrapper and track setup context
+    ClientInfo info{
+        .client = std::make_unique<CLuaClientEntityPair>(std::move(testChar), this, engine_),
+        .scope  = inSetupContext_ ? ClientScope::Suite : ClientScope::TestCase
+    };
+    clients_.push_back(std::move(info));
+
+    auto* player = clients_.back().client.get();
 
     // Send login packet
     const auto packet = player->packets().createPacket(0x0A);
@@ -456,6 +482,11 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     }
 
     return player;
+}
+
+void CLuaSimulation::setSetupContext(const bool inSetup)
+{
+    inSetupContext_ = inSetup;
 }
 
 void CLuaSimulation::Register()

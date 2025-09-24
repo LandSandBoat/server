@@ -23,6 +23,7 @@
 #include "common/logging.h"
 #include "common/lua.h"
 #include "reporters/reporter_container.h"
+#include <algorithm>
 #include <chrono>
 #include <format>
 
@@ -87,6 +88,8 @@ auto TestCollector::collectTestFiles() const -> std::vector<std::filesystem::pat
             }
         }
     }
+
+    std::ranges::sort(luaFiles);
 
     return luaFiles;
 }

@@ -105,6 +105,7 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
 
     // SendToZone _only_ prepares the character for zoning.
     testChar_->entity()->loc.destination = zoneId;
+    testChar_->entity()->status          = STATUS_TYPE::DISAPPEAR;
     charutils::SendToZone(testChar_->entity(), zoneId);
     packets().sendZonePackets(); // Send zone in packets, reload PChar
 

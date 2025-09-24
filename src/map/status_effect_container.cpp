@@ -2193,9 +2193,12 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
             m_POwner->addTP(regain);
         }
 
-        if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
+        if (m_POwner->PPet)
         {
-            ((CAutomatonEntity*)(m_POwner->PPet))->burdenTick();
+            if (auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_POwner->PPet))
+            {
+                PAutomaton->burdenTick();
+            }
         }
     }
 }

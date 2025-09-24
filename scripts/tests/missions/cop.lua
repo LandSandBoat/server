@@ -55,17 +55,17 @@ describe('Chains of Promathia', function()
         it('should complete Promyvion Holla and Spire battles to advance to The Mothercrystals', function()
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
 
-            -- trigger Pherimociel to goto next Prog
             player:gotoZone(xi.zone.UPPER_JEUNO)
             player.entities:gotoAndTrigger('Monberaux', { eventId = 9 })
 
+            -- Ru'Lude Gardens: Trigger Pherimociel to goto next Prog
             player:gotoZone(xi.zone.RULUDE_GARDENS)
-            player.entities:gotoAndTrigger('High_Wind', { eventId = 33 })
-            player.entities:gotoAndTrigger('Rainhard', { eventId = 34 })
             player.entities:gotoAndTrigger('Pherimociel', { eventId = 24 })
 
-            -- optional dialog
+            -- Ru'Lude Gardens: Optional dialog
             player.entities:gotoAndTrigger('Pherimociel', { eventId = 25 })
+            player.entities:gotoAndTrigger('High_Wind', { eventId = 33 })
+            player.entities:gotoAndTrigger('Rainhard', { eventId = 34 })
 
             -- entering hall of transference -> Promy Holla
             player:gotoZone(xi.zone.HALL_OF_TRANSFERENCE)

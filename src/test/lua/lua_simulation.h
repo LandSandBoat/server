@@ -35,6 +35,18 @@ class CLuaBaseEntity;
 enum class REGION_TYPE : uint8;
 enum NATION_TYPE : uint8;
 
+enum class ClientScope : uint8_t
+{
+    Suite,   // Created during setup() - persists for duration of suite
+    TestCase // Created during before_each() or test - cleaned up after each test case
+};
+
+struct ClientInfo
+{
+    std::unique_ptr<CLuaClientEntityPair> client;
+    ClientScope                           scope{ ClientScope::TestCase };
+};
+
 class CLuaSimulation
 {
 public:
@@ -46,7 +58,7 @@ public:
     CLuaSimulation& operator=(CLuaSimulation&&)      = default;
 
     void loadZone(sol::variadic_args va) const;
-    void cleanClients();
+    void cleanClients(std::optional<ClientScope> scope = std::nullopt);
     void tick(std::optional<TickType> boundary = std::nullopt) const;
     void processClientUpdates() const;
     void tickEntity(CLuaBaseEntity& entity) const;
@@ -57,12 +69,14 @@ public:
     void setRegionOwner(REGION_TYPE region, NATION_TYPE nation) const;
     void setSeed(uint64 seed) const;
     void seed() const;
+    void setSetupContext(bool inSetup);
     auto spawnPlayer(sol::optional<sol::table> params) -> CLuaClientEntityPair*;
 
     static void Register();
 
 private:
-    std::vector<std::unique_ptr<CLuaClientEntityPair>> clients_;
-    MapEngine*                                         engine_{ nullptr };
-    std::shared_ptr<InMemorySink>                      sink_{ nullptr };
+    std::vector<ClientInfo>       clients_;
+    bool                          inSetupContext_{ false };
+    MapEngine*                    engine_{ nullptr };
+    std::shared_ptr<InMemorySink> sink_{ nullptr };
 };

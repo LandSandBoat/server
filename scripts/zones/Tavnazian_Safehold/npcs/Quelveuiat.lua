@@ -1,14 +1,15 @@
 -----------------------------------
--- Area: Windurst Waters
---  NPC: Shataru-Potaru
+-- Area: Tavnazian Safehold
+--  NPC: Quelveuiat
+-- !pos -3.177 -22.750 -25.970 26
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 local pathNodes =
 {
-    { x = 150.716, y = -2.500, z = 130.594 },
-    { x = 149.1266, z = 131.9665 },
+    { x = -3.177, y = -22.750, z = -25.970, rotation = 132, wait = 35000 },
+    { x = 3.177, y = -22.750, z = -25.970, rotation = 0, wait = 35000 },
 }
 
 entity.onSpawn = function(npc)

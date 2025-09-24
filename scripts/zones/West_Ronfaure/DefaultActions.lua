@@ -10,7 +10,6 @@ return {
     ['Gachemage']      = { text = ID.text.GACHEMAGE_DIALOG },
     ['Laette']         = { text = ID.text.LAETTE_DIALOG },
     ['Laillera']       = { text = ID.text.LAILLERA_DIALOG },
-    ['Palcomondau']    = { text = ID.text.PALCOMONDAU_DIALOG },
     ['Phairet']        = { event = 117 },
     ['qm1']            = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['qm2']            = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
@@ -19,5 +18,4 @@ return {
     ['Saradorial']     = { event = 139 },
     ['Vilatroire']     = { event = 136 },
     ['Stone_Monument'] = { event = 900 },
-    ['Zovriace']       = { text = ID.text.ZOVRIACE_DIALOG },
 }

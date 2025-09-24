@@ -146,10 +146,15 @@ auto TestEngine::executeSuite(const TestSuite& suite, HookContext context) -> Te
     // Run setup once for the suite
     if (suite.setupFunc().valid())
     {
+        // Players created in setup() should persist across tests
+        simulation_->setSetupContext(true);
+
         if (auto result = suite.setupFunc()(); !result.valid())
         {
             sol::error err = result;
             ShowErrorFmt("Setup failed for {}: {}", suite.name(), err.what());
+
+            simulation_->setSetupContext(false);
 
             // Report the setup failure
             reportSetupTeardownFailure(suite, "setup()",
@@ -160,6 +165,8 @@ auto TestEngine::executeSuite(const TestSuite& suite, HookContext context) -> Te
 
             return results; // Skip this suite if setup fails
         }
+
+        simulation_->setSetupContext(false);
     }
 
     // Execute all test cases in this suite with accumulated hooks
@@ -336,6 +343,9 @@ auto TestEngine::runBeforeHooks(const HookContext& context, const std::string& t
 
     DebugTest("========= SETUP =========");
     DebugTestFmt("  Executing {} before_each hooks for test: {}", context.beforeEachHooks.size(), testName);
+
+    // Clean up any players from previous tests (but keep setup() players)
+    simulation_->cleanClients(ClientScope::TestCase);
 
     for (size_t i = 0; i < context.beforeEachHooks.size(); ++i)
     {

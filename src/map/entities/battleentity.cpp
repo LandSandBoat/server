@@ -2393,7 +2393,12 @@ bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPack
     {
         return false;
     }
-    return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
+
+    bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
+    float distanceFromTarget = distance(loc.p, PTarget->loc.p);
+    bool  tooFar             = (distanceFromTarget - PTarget->m_ModelRadius) > GetMeleeRange();
+
+    return !tooFar && autoAttackEnabled;
 }
 
 void CBattleEntity::OnDisengage(CAttackState& s)

@@ -4916,7 +4916,7 @@ uint8 CLuaBaseEntity::getFreeSlotsCount(sol::object const& locID)
  *  Notes   : Must use trade:confirmItem(slotID) first
  ************************************************************************/
 
-void CLuaBaseEntity::confirmTrade()
+void CLuaBaseEntity::confirmTrade() const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4940,6 +4940,12 @@ void CLuaBaseEntity::confirmTrade()
                 if (confirmedItems > 0)
                 {
                     uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
+                    if (static_cast<uint32>(quantity) >= PChar->TradeContainer->getItem(slotID)->getQuantity())
+                    {
+                        // Set the trade slot to nullptr as the underlying item is about to be destroyed by UpdateItem
+                        PChar->TradeContainer->setItem(slotID, nullptr);
+                    }
+
                     charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
                 }
             }
@@ -4955,7 +4961,7 @@ void CLuaBaseEntity::confirmTrade()
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete()
+void CLuaBaseEntity::tradeComplete() const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4975,6 +4981,12 @@ void CLuaBaseEntity::tradeComplete()
             if (PItem)
             {
                 PItem->setReserve(0);
+                if (static_cast<uint32>(quantity) >= PItem->getQuantity())
+                {
+                    // Set the trade slot to nullptr as the underlying item is about to be destroyed by UpdateItem
+                    PChar->TradeContainer->setItem(slotID, nullptr);
+                }
+
                 charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
             }
         }
