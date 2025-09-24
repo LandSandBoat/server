@@ -3,7 +3,7 @@
 --  NPC: Honorine
 -- Standard Info NPC
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 ---@type TNpcEntity
 
@@ -33,7 +33,7 @@ entity.onTrade = function(player, npc, trade)
     for itemID = xi.item.FIRE_CRYSTAL, xi.item.DARK_CRYSTAL do
         local clusters = math.floor(trade:getItemQty(itemID) / 12)
 
-        if clusters > 0 and npcUtil.tradeHas(trade, {{ itemID, clusters * 12 }}) then
+        if clusters > 0 and npcUtil.tradeHas(trade, { { itemID, clusters * 12 } }) then
             clustersToGive[#clustersToGive + 1] = { itemID + clusterShift, clusters }
         end
     end
@@ -45,14 +45,14 @@ entity.onTrade = function(player, npc, trade)
     elseif npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_WHISTLE) then
         player:confirmTrade()
         npcUtil.giveItem(player, xi.item.CHOCOBO_WHISTLE)
-        player:printToPlayer("Your Chocobo Whistle has been re-charged!", xi.msg.channel.SAY, "Honorine")
+        player:printToPlayer('Your Chocobo Whistle has been re-charged!', xi.msg.channel.SAY, 'Honorine')
         return
     end
 
     -- QoL trades for dynamis 100s
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         for inputCurrency, outputCurrency in pairs(currencyExchange) do
-            if npcUtil.tradeHasExactly(trade, {{ inputCurrency, xi.settings.main.CURRENCY_EXCHANGE_RATE }}) then
+            if npcUtil.tradeHasExactly(trade, { { inputCurrency, xi.settings.main.CURRENCY_EXCHANGE_RATE } }) then
                 player:confirmTrade()
                 npcUtil.giveItem(player, outputCurrency)
                 return
@@ -84,20 +84,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local time = os.time()
+    local time = GetSystemTime()
 
-    if time > player:getLocalVar("HonorineMessageTime") then
-        player:printToPlayer("Did you know I can exchange crystals/clusters, dynamis currency, and refill your chocobo whistle?", xi.msg.channel.SAY, "Honorine")
-        player:printToPlayer("Anyway, abra cadabra, have a costume! ^_^", xi.msg.channel.SAY, "Honorine")
-        player:setLocalVar("HonorineMessageTime", time + 60)
+    if time > player:getLocalVar('HonorineMessageTime') then
+        player:printToPlayer('Did you know I can exchange crystals/clusters, dynamis currency, and refill your chocobo whistle?', xi.msg.channel.SAY, 'Honorine')
+        player:printToPlayer('Anyway, abra cadabra, have a costume! ^_^', xi.msg.channel.SAY, 'Honorine')
+        player:setLocalVar('HonorineMessageTime', time + 60)
     end
 
-    if player:getCharVar("Sausaged") == 1 then
-        player:printToPlayer("That Galka finally came back after picking up all of that meat. I think...", xi.msg.channel.SAY, "Honorine")
-        player:printToPlayer("I think he actually ate all of that. He says you weren't the special one and to take this.", xi.msg.channel.SAY, "Honorine")
-        player:printToPlayer("Whatever that means. I think he had the meat sweats...", xi.msg.channel.SAY, "Honorine")
-        if npcUtil.giveItem(player, 4396) then
-            player:setCharVar("Sausaged", 0)
+    if player:getCharVar('Sausaged') == 1 then
+        player:printToPlayer('That Galka finally came back after picking up all of that meat. I think...', xi.msg.channel.SAY, 'Honorine')
+        player:printToPlayer('I think he actually ate all of that. He says you weren\'t the special one and to take this.', xi.msg.channel.SAY, 'Honorine')
+        player:printToPlayer('Whatever that means. I think he had the meat sweats...', xi.msg.channel.SAY, 'Honorine')
+        if npcUtil.giveItem(player, xi.item.SAUSAGE_ROLL) then
+            player:setCharVar('Sausaged', 0)
         end
     else
         player:addStatusEffect(xi.effect.COSTUME, math.random(1, 2417), 0, 3600)
