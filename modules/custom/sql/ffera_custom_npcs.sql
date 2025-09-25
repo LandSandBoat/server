@@ -1,7 +1,7 @@
 -- Moves around NPCs that ERA uses
 
 -- Lower Jeuno
---Runga-Kuponga
+-- Runga-Kuponga
 UPDATE npc_list SET pos_rot = 91, pos_x = 13.000, pos_y = 0.000, pos_z = 7.000, status = 0, look = 0x0000580800000000000000000000000000000000 WHERE npcid = 17780772;
 
 -- Raji
