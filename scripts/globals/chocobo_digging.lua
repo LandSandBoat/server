@@ -2263,14 +2263,22 @@ local function handleFatigue(player, text, todayDigCount)
     if math.random(1, 100) <= player:getMod(xi.mod.DIG_BYPASS_FATIGUE) then
         player:messageSpecial(text.FOUND_ITEM_WITH_EASE)
     else
-        player:setVar('[DIG]DigCount', todayDigCount + 1, NextJstDay())
+        xi.chocoboDig.updateFatigue(player, todayDigCount + 1)
     end
+end
+
+xi.chocoboDig.fetchFatigue = function(player)
+    return player:getCharVar('[DIG]DigCount')
+end
+
+xi.chocoboDig.updateFatigue = function(player, newValue)
+    player:setVar('[DIG]DigCount', newValue, NextJstDay())
 end
 
 xi.chocoboDig.start = function(player)
     local zoneId        = player:getZoneID()
     local text          = zones[zoneId].text
-    local todayDigCount = player:getCharVar('[DIG]DigCount')
+    local todayDigCount = xi.chocoboDig.fetchFatigue(player)
     local currentX      = player:getXPos()
     local currentZ      = player:getZPos()
     local currentXSign  = 0
