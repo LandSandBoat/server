@@ -2647,7 +2647,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 TakeSpellDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
+    void TakeSpellDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
@@ -2673,8 +2673,6 @@ namespace battleutils
                 PDefender->addTP(tpGainFunc(damage, PAttacker, PDefender));
             }
         }
-
-        return damage;
     }
 
     /************************************************************************

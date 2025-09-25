@@ -23,9 +23,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     --Spell Base Damage = MAB/MDB*floor(Int + Elemental Magic Skill/6)*3.5
     --NOT AFFECTED BY DARK BONUSES (bonus ETC)
     --I'll just point this out again. It can't resist, there's no dINT, and the damage is non-elemental. The only terms that affect it for monsters (that we know of) are MDB and MDT. If a --normal monster would take 50k damage from your group, Botulus would take 40k damage. Every. Time.
-    local dmg = 0
+    local damage = 0
     if caster:isPC() then
-        dmg = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + caster:getSkillLevel(xi.skill.ELEMENTAL_MAGIC) / 6) * 3.5
+        damage = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + caster:getSkillLevel(xi.skill.ELEMENTAL_MAGIC) / 6) * 3.5
     elseif -- Behemoth family
         caster:getFamily() == 51 or
         caster:getFamily() == 479
@@ -34,16 +34,34 @@ spellObject.onSpellCast = function(caster, target, spell)
         -- TODO: + dINT *2 until dINT +13. When dINT is negative, dINT / 2 until unknown floor.
         -- TODO: Account for all mitigation sources.
         -- TODO: Account for rage.
-        dmg = caster:getMainLvl() * 15.5
+        damage = caster:getMainLvl() * 15.5
     else
-        dmg = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + (caster:getMaxSkillLevel(caster:getMainLvl(), xi.job.BLM, xi.skill.ELEMENTAL_MAGIC)) / 6) * 9.4
+        damage = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + (caster:getMaxSkillLevel(caster:getMainLvl(), xi.job.BLM, xi.skill.ELEMENTAL_MAGIC)) / 6) * 9.4
     end
 
-    --add in target adjustment
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-    --add in final adjustments
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
-    return dmg
+    damage = math.floor(damage * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.NONE))
+    damage = math.floor(damage * xi.spells.damage.calculateMTDR(spell))
+    damage = math.floor(damage * xi.spells.damage.calculateTMDA(target, xi.element.NONE))
+
+    -- Handle Phalanx, One for All, Stoneskin.
+    damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
+    damage = utils.clamp(utils.oneforall(target, damage), 0, 99999)
+    damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+
+    -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
+    -- Check if the mob has a damage cap
+    damage = target:checkDamageCap(damage)
+
+    -- Handle Bind break and TP?
+    target:takeSpellDamage(caster, spell, damage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+
+    -- Handle Afflatus Misery.
+    target:handleAfflatusMiseryDamage(damage)
+
+    -- Handle Enmity.
+    target:updateEnmityFromDamage(caster, damage)
+
+    return damage
 end
 
 return spellObject

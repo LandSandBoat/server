@@ -99,11 +99,15 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DODGE, 0, 0, 30)
+    local jpLevel  = target:getJobPointLevel(xi.jp.DODGE_EFFECT)
+    local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
+    player:addStatusEffect(xi.effect.DODGE, jpLevel + dodgeMod, 0, 30)
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.FOCUS, 0, 0, 30)
+    local jpLevel  = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+    local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
+    player:addStatusEffect(xi.effect.FOCUS, jpLevel + focusMod, 0, 30)
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)

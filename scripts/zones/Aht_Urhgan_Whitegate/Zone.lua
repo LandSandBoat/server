@@ -80,9 +80,12 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     -- Boat to Mhaura.
-    if transport == 46 or transport == 47 then
+    if
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA
+    then
         if player:hasKeyItem(xi.ki.FERRY_TICKET) then
             player:startEvent(200)
         else
@@ -90,7 +93,10 @@ zoneObject.onTransportEvent = function(player, transport)
         end
 
     -- Boat to Nashmau.
-    elseif transport == 58 or transport == 59 then
+    elseif
+        prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU or
+        prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI
+    then
         if player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) then
             player:startEvent(203)
         else

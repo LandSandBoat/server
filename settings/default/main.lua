@@ -225,8 +225,6 @@ xi.settings.main =
     ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS
-    DIA_OVERWRITE                   = 1,     -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
-    BIO_OVERWRITE                   = 0,     -- Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
     STONESKIN_CAP                   = 350,   -- Soft cap for hp absorbed by stoneskin
     BLINK_SHADOWS                   = 2,     -- Number of shadows supplied by Blink spell
     SPIKE_EFFECT_DURATION           = 180,   -- the duration of RDM, BLM spikes effects (not Reprisal)

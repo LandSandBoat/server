@@ -24,32 +24,37 @@ entity.onTrade = function(player, npc, trade)
         minimumGil = 10000
     end
 
-    -- Check trade for elixir/hi-elixir
-    -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
+    -- Trust Interaction
     if
-        (trade:hasItemQty(xi.item.ELIXIR, 1) or
+        xi.settings.main.ENABLE_SOA == 1 and
+        player:hasSpell(xi.magic.spell.MONBERAUX)
+    then
+        -- Check trade for elixir/hi-elixir
+        -- TODO: add logic to trade more than 1 at a time, or more than 1 type at a time.
+        if
+            finalElixir < elixirTotal and
+            (trade:hasItemQty(xi.item.ELIXIR, 1) or trade:hasItemQty(xi.item.HI_ELIXIR, 1))
+        then
+            player:startEvent(10243, elixirType, 1, 2, 0, 59615134, 7271819, 4095, 128)
+        elseif
+            (trade:hasItemQty(xi.item.ELIXIR, 1) or
             trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
-        finalElixir < elixirTotal
-    then
-        player:startEvent(10243, elixirType, 1, 2, 0, 59615134, 7271819, 4095, 128)
-    elseif
-        (trade:hasItemQty(xi.item.ELIXIR, 1) or
-        trade:hasItemQty(xi.item.HI_ELIXIR, 1)) and
-        finalElixir >= elixirTotal
-    then
-        player:startEvent(10246, elixirType)
-    end
+            finalElixir >= elixirTotal
+        then
+            player:startEvent(10246, elixirType)
+        end
 
-    if
-        gilAmount >= minimumGil and
-        monbAoe == 0
-    then
-        player:startEvent(10238)
-    elseif
-        gilAmount >= minimumGil and
-        monbAoe == 1
-    then
-        player:startEvent(10240)
+        if
+            gilAmount >= minimumGil and
+            monbAoe == 0
+        then
+            player:startEvent(10238)
+        elseif
+            gilAmount >= minimumGil and
+            monbAoe == 1
+        then
+            player:startEvent(10240)
+        end
     end
 end
 
@@ -63,6 +68,10 @@ entity.onTrigger = function(player, npc)
         minimumGil = 100000
     elseif minimumGil < 10000 then
         minimumGil = 10000
+    end
+
+    if not player:hasCompletedUniqueEvent(xi.uniqueEvent.MONBERAUX_INTRODUCTION) then
+        player:startEvent(109)
     end
 
     if
@@ -86,25 +95,31 @@ entity.onTrigger = function(player, npc)
         player:startEvent(32)
     end
 
+    -- Trust Interaction
     if
-        player:getCharVar('monbAoe') == 0
+        xi.settings.main.ENABLE_SOA == 1 and
+        player:hasSpell(xi.magic.spell.MONBERAUX)
     then
-        player:startEvent(10237, minimumGil, 1, 2964, 3300, 58195966, 3881063, 4480, 128)
-    else
-        player:startEvent(10239)
+        if player:getCharVar('monbAoe') == 0 then
+            player:startEvent(10237, minimumGil, 1, 2964, 3300, 58195966, 3881063, 4480, 128)
+        else
+            player:startEvent(10239)
+        end
+
+        if player:getCharVar('finalElixir') <= elixirTotal then
+            player:startEvent(10241)
+        else
+            player:startEvent(10244)
+        end
     end
 
-    if
-        player:getCharVar('finalElixir') <= elixirTotal
-    then
-        player:startEvent(10241)
-    else
-        player:startEvent(10244)
-    end
+    -- Intentionally split up to not lock the player out of the above interactions while still forcing your introduction to Monberaux to happen.
+    player:startEvent(28)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local finalElixir = player:getCharVar('finalElixir')
+
     if
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)
@@ -120,18 +135,18 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('theLostCardianVar', 3)
     end
 
-    if
-        csid == 10238
-    then
+    if csid == 10238 then
         player:setCharVar('monbAoe', 1, NextJstWeek())
         player:tradeComplete()
     end
 
-    if
-        csid == 10243
-    then
+    if csid == 10243 then
         player:setCharVar('finalElixir', finalElixir + 1)
         player:tradeComplete()
+    end
+
+    if csid == 109 then
+        player:setUniqueEvent(xi.uniqueEvent.MONBERAUX_INTRODUCTION)
     end
 end
 

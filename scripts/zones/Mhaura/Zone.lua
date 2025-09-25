@@ -52,8 +52,11 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    if transport == 47 or transport == 46 then
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    if
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA
+    then
         if
             xi.settings.main.ENABLE_TOAU == 1 and
             player:hasKeyItem(xi.ki.BOARDING_PERMIT) and

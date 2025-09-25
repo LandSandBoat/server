@@ -43,21 +43,21 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
+-- TODO: Event 106 needs confirmation if/when it happens
 entity.onTrigger = function(player, npc)
     local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDOS_ANTIQUES)
 
-    if player:getFameLevel(xi.fameArea.WINDURST) >= 2 then
-        if player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) then
-            if questStatus ~= xi.questStatus.QUEST_AVAILABLE then
-                player:startEvent(103)
-            elseif questStatus == xi.questStatus.QUEST_AVAILABLE then
-                player:startEvent(101)
-            end
-        else
-            player:startEvent(100)
+    if
+        player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
+        player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)
+    then
+        if questStatus ~= xi.questStatus.QUEST_AVAILABLE then
+            player:startEvent(103)
+        elseif questStatus == xi.questStatus.QUEST_AVAILABLE then
+            player:startEvent(101)
         end
     else
-        player:startEvent(106)
+        player:startEvent(100)
     end
 end
 

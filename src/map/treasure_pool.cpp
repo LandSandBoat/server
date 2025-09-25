@@ -324,7 +324,7 @@ void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
         return;
     }
 
-    CItem* PItem = itemutils::GetItem(m_PoolItems[SlotID].ID);
+    CItem* PItem = itemutils::GetItemPointer(m_PoolItems[SlotID].ID);
     if (PItem == nullptr)
     {
         ShowWarning(fmt::format("Player {} is trying to lot on an item that doesn't exist (PItem was nullptr) (Packet injection?)!", PChar->getName()).c_str());
@@ -536,7 +536,7 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
             std::vector<CCharEntity*> candidates;
             for (auto& member : m_Members)
             {
-                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
+                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItemPointer(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
                 {
                     continue;
                 }

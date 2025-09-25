@@ -762,7 +762,7 @@ public:
     int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
                                 float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
 
-    int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
+    void  takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
     int32 takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType);
     int32 checkDamageCap(int32 damage);
     auto  handleSevereDamage(int32 damage, bool isPhysical) -> int32;

@@ -2246,9 +2246,9 @@ INSERT INTO `mob_spawn_points` VALUES (16818196,0,'Diremite','Diremite',2,280.50
 INSERT INTO `mob_spawn_points` VALUES (16818197,0,'Diremite','Diremite',2,285.878,62.759,-273.872,56);
 
 -- Test Your Mite
-INSERT INTO `mob_spawn_points` VALUES (16818198,0,'Pasuk','Pasuk',3,-249.257,-16.252,235.102,99);
-INSERT INTO `mob_spawn_points` VALUES (16818200,0,'Pasuk','Pasuk',3,-9.267,23.750,-44.946,99);
-INSERT INTO `mob_spawn_points` VALUES (16818202,0,'Pasuk','Pasuk',3,270.910,63.755,-324.962,99);
+INSERT INTO `mob_spawn_points` VALUES (16818198,0,'Pasuk','Pasuk',3,-240,-16,283,64);
+INSERT INTO `mob_spawn_points` VALUES (16818200,0,'Pasuk','Pasuk',3,0,24,0,64);
+INSERT INTO `mob_spawn_points` VALUES (16818202,0,'Pasuk','Pasuk',3,280,64,-275,64);
 
 -- Waking Dreams
 INSERT INTO `mob_spawn_points` VALUES (16818204,0,'Diabolos','Diabolos',4,-239.679,-32.500,289.431,68);

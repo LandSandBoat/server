@@ -134,8 +134,7 @@ bool CMagicState::Update(timer::time_point tick)
     auto isTargetValid = [&]()
     {
         // m_PEntity->IsValidTarget checks if the target is dead and returns nullptr if so, so we don't need to duplicate it here.
-        if (!PTarget || m_errorMsg ||
-            (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
+        if (!PTarget || m_errorMsg)
         {
             return false;
         }
@@ -171,7 +170,7 @@ bool CMagicState::Update(timer::time_point tick)
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
     {
         // CanCastSpell also does a range check which we don't want to check during midcast - mobs don't cancel spells during casting for being out of range
-        if (!isTargetValid() || !CanCastSpell(PTarget, true))
+        if (!isTargetValid() || !CanCastSpell(PTarget, true) || HasMoved())
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
@@ -302,7 +301,7 @@ bool CMagicState::Update(timer::time_point tick)
             PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
         }
 
-        if (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG))
+        if (m_interrupted || (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG)))
         {
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         }
@@ -596,6 +595,12 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
 
 bool CMagicState::HasMoved()
 {
+    // non-players can't get interrupted via movement due to edge case shenanigans seen from SE
+    if (m_PEntity->objtype != TYPE_PC)
+    {
+        return false;
+    }
+
     return floorf(m_startPos.x * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.x * 10 + 0.5f) / 10 ||
            floorf(m_startPos.z * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.z * 10 + 0.5f) / 10;
 }

@@ -82,6 +82,11 @@ void lua_init()
     }
 }
 
+void lua_cleanup()
+{
+    lua = sol::state();
+}
+
 /**
  * @brief
  */

@@ -55,7 +55,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     if player:hasKeyItem(xi.ki.FERRY_TICKET) then
         player:startEvent(200)
     else

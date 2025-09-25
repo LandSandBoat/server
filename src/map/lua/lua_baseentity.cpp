@@ -4378,6 +4378,7 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
             else
             {
                 ShowWarning("addUsedItem: tried to setLastUseTime but itemID <%i> is not type ITEM_CHARGED", itemID);
+                destroy(PItem);
             }
         }
         else
@@ -4802,6 +4803,11 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
                 return true;
             }
         }
+        else
+        {
+            // Linkshell not found, clean up
+            destroy(PItemLinkPearl);
+        }
     }
     return false;
 }
@@ -5029,7 +5035,7 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
 
     bool checkLevel = (chkLevel != sol::lua_nil) ? chkLevel.as<bool>() : false;
 
-    auto* PItem = static_cast<CItemEquipment*>(itemutils::GetItem(itemID));
+    auto* PItem = static_cast<CItemEquipment*>(itemutils::GetItemPointer(itemID));
     auto* PChar = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     if (PItem == nullptr)
@@ -15393,33 +15399,33 @@ int32 CLuaBaseEntity::takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 dama
 }
 
 /************************************************************************
- *  Function: int32 TakeSpellDamage()
+ *  Function: void TakeSpellDamage()
  *  Purpose : Calls Battle Utils to calculate final spell damage against a foe
  *  Example : target:takeSpellDamage(caster, spell, finaldmg, attackType, damageType)
  *  Notes   : Global function of same name in bluemagic.lua, calls this member function from within
  ************************************************************************/
 
-int32 CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType)
+void CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType)
 {
     auto* PBattleDefender = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleDefender)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return 0;
+        return;
     }
 
     auto* PBattleAttacker = dynamic_cast<CBattleEntity*>(caster->m_PBaseEntity);
     if (!PBattleAttacker)
     {
         ShowWarning("Invalid entity type passed as Attacker (%s).", m_PBaseEntity->getName());
-        return 0;
+        return;
     }
 
     auto*       PSpell     = spell->GetSpell();
     ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
     DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
 
-    return battleutils::TakeSpellDamage(PBattleDefender, PBattleAttacker, PSpell, damage, attackType, damageType);
+    battleutils::TakeSpellDamage(PBattleDefender, PBattleAttacker, PSpell, damage, attackType, damageType);
 }
 
 /************************************************************************
@@ -16336,7 +16342,7 @@ bool CLuaBaseEntity::hasAttachment(uint16 itemID)
         return false;
     }
 
-    CItem* PItem = itemutils::GetItem(itemID);
+    CItem* PItem = itemutils::GetItemPointer(itemID);
     return puppetutils::HasAttachment(static_cast<CCharEntity*>(m_PBaseEntity), PItem);
 }
 
@@ -16467,7 +16473,7 @@ bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
         return false;
     }
 
-    CItem* PItem = itemutils::GetItem(itemID);
+    CItem* PItem = itemutils::GetItemPointer(itemID);
     return puppetutils::UnlockAttachment(static_cast<CCharEntity*>(m_PBaseEntity), PItem);
 }
 

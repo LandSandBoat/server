@@ -76,6 +76,7 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 
 CBattlefield::~CBattlefield()
 {
+    m_groups.clear();
     luautils::OnBattlefieldDestroy(this);
 }
 

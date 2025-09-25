@@ -1,7 +1,9 @@
 local ID = zones[xi.zone.LOWER_JEUNO]
 
 return {
-    ['_6t2']            = { event = 64 },
+    ['_6t2']            = { event = 64 }, -- Door:Merchant's House
+    ['_6tc']            = { messageSpecial = ID.text.ITS_LOCKED }, -- Door:"Neptune's Spire"
+    ['_6td']            = { messageSpecial = ID.text.DO_NOT_DISTURB }, -- Door:"Neptune's Spire"
     ['Amhu_Sabaroleka'] = { event = 14 },
     ['Biora']           = { event = 205 },
     ['Bluffnix']        = { event = 43, options = 81 },
@@ -9,10 +11,12 @@ return {
     ['Chimh_Dlesbah']   = { event = 10096 },
     ['Crazy_Wolf']      = { event = 165 },
     ['Danzhor']         = { event = 185 },
+    ['Duplidoc']        = { event = 20008 },
     ['Faursel']         = { event = 10065 },
     ['Garnev']          = { event = 207 },
     ['Geuhbe']          = { event = 10033 },
     ['Ghebi_Damomohe']  = { event = 106, 4 },
+    ['Greyson']         = { event = 20082 },
     ['Guide_Stone']     = { messageSpecial = ID.text.GUIDE_STONE },
     ['Gurdern']         = { event = 112 },
     ['Harnek']          = { event = 217 },
@@ -29,20 +33,23 @@ return {
     ['Navisse']         = { event = 153 },
     ['Odasel']          = { event = 162 },
     ['Omer']            = { event = 206 },
-    ['Parike-Poranke']  = { messageSpecial = ID.text.PARIKE_PORANKE_DIALOG },
+    ['Parike-Poranke']  = { text = ID.text.PARIKE_PORANKE_DIALOG },
     -- ['Raji']            = { event = 195 },
+    ['Rakuru-Rakoru']   = { event = 10078 },
     ['Saprut']          = { event = 224 },
     ['Sattal-Mansal']   = { event = 96 },
     ['Seyaya']          = { event = 18 },
     -- ['Shomera']         = { event = 195 },
+    ['Sniggnix']        = { event = 10023 },
     ['Sutarara']        = { event = 208 },
     ['Tawfeeq']         = { event = 225 },
     ['Taza']            = { text = ID.text.WAAG_DEEG_SHOP_DIALOG },
     ['Teigero-Bangero'] = { event = 34 },
-    ['Tovrutaux']       = { event = 58 },
+    ['Tuh_Almodankha']  = { event = 10013 },
     ['Vhana_Ekgaklywha'] = { text = ID.text.VHANA_DEFAULT },
     ['Venika']          = { event = 110 },
     ['Yamilla']         = { event = 109 },
     ['Yatniel']         = { event = 10028 },
-    ['Zalsuhm']         = { event = 10089 },
+    ['Zalsuhm']         = { event = 10085 },
+    ['Zauko']           = { event = 118 },
 }

@@ -378,7 +378,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
+void CZoneEntities::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transport)
 {
     TracyZoneScoped;
 
@@ -403,7 +403,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
                 }
             }
 
-            luautils::OnTransportEvent(PCurrentChar, zone);
+            luautils::OnTransportEvent(PCurrentChar, prevZoneId, transport);
         }
     }
 }

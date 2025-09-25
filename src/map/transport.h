@@ -67,9 +67,10 @@ struct Transport_Time
 
 struct Transport_Ship : Transport_Time
 {
-    uint8 animationArrive;
-    uint8 animationDepart;
-    uint8 state;
+    uint16 transportId;
+    uint8  animationArrive;
+    uint8  animationDepart;
+    uint8  state;
 
     CBaseEntity* npc;
     location_t   dock;

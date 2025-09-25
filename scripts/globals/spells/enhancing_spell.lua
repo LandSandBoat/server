@@ -155,6 +155,9 @@ local pTable =
     [xi.magic.spell.REGEN_IV     ] = { 4, xi.effect.REGEN,         86,   30,   60, true,  false, 0 },
     [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,   60, true,  false, 0 },
 
+    -- Reprisal
+    [xi.magic.spell.REPRISAL     ] = { 1, xi.effect.REPRISAL,       1,   33,   60, true,  false, 0 },
+
     -- Shell / Shellra
     [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false, 0 },
     [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         37, 1641, 1800, false, false, 0 },
@@ -172,6 +175,7 @@ local pTable =
 
     -- -Spikes
     [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false, 0 },
+    [xi.magic.spell.DREAD_SPIKES ] = { 1, xi.effect.DREAD_SPIKES,   1,    0,  180, true,  false, 0 },
     [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.effect.ICE_SPIKES,     1,    0,  180, true,  false, 0 },
     [xi.magic.spell.SHOCK_SPIKES ] = { 1, xi.effect.SHOCK_SPIKES,   1,    0,  180, true,  false, 0 },
 
@@ -468,9 +472,9 @@ end
 
 -- Main function for Enhancing Spells.
 xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
-    local spellId           = spell:getID()
-    local spellGroup        = spell:getSpellGroup()
-    local magicDefenseBonus = 0
+    local spellId    = spell:getID()
+    local spellGroup = spell:getSpellGroup()
+    local subPower   = 0
 
     -- Get Variables from Parameters Table.
     local tier            = pTable[spellId][column.EFFECT_TIER]
@@ -481,9 +485,16 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions and weird behavior here, before calculating anything.
     ------------------------------------------------------------
+    -- TODO: Consider moving subpower calculations to a different function.
+
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
-        magicDefenseBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+        subPower = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+
+    -- Dread spikes
+    elseif spellEffect == xi.effect.DREAD_SPIKES then
+        subPower = math.floor(target:getMaxHP() / 2)
+        subPower = math.floor(subPower * (1 + caster:getMod(xi.mod.DREAD_SPIKES_EFFECT) / 100))
 
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
@@ -574,9 +585,9 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, magicDefenseBonus, tier)
+        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, subPower, tier)
     else
-        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, magicDefenseBonus, tier) then
+        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, subPower, tier) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

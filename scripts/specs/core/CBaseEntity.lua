@@ -3342,13 +3342,12 @@ end
 function CBaseEntity:takeWeaponskillDamage(attacker, damage, atkType, dmgType, slot, primary, tpMultiplier, bonusTP, targetTPMultiplier)
 end
 
----@nodiscard
 ---@param caster CBaseEntity
 ---@param spell CSpell
 ---@param damage integer
 ---@param atkType integer
 ---@param dmgType integer
----@return integer
+---@return nil
 function CBaseEntity:takeSpellDamage(caster, spell, damage, atkType, dmgType)
 end
 

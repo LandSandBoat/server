@@ -141,7 +141,7 @@ xi.manaclipper.onZoneIn = function(player)
     end
 end
 
-xi.manaclipper.onTransportEvent = function(player, transport)
+xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
     local ID = zones[player:getZoneID()]
     local aboard = player:getCharVar('[manaclipper]aboard')
 

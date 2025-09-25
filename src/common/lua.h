@@ -27,6 +27,7 @@
 extern sol::state lua;
 
 void lua_init();
+void lua_cleanup();
 auto lua_to_string_depth(const sol::object& obj, std::size_t depth) -> std::string;
 auto lua_to_string(sol::variadic_args va) -> std::string;
 void lua_print(sol::variadic_args va);

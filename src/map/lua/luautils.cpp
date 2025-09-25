@@ -357,11 +357,6 @@ namespace luautils
         CLuaZone::Register();
         CLuaItem::Register();
 
-        // Load globals
-        // Truly global files first
-        lua.safe_script_file("./scripts/globals/common.lua");
-        lua.safe_script_file("./scripts/globals/utils.lua");
-
         // Load global enums
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/enum"))
         {
@@ -379,6 +374,12 @@ namespace luautils
                 }
             }
         }
+
+        // Load globals
+        // Truly global files first
+        // TODO: Audit utilities and properly organize them outside of globals folder
+        lua.safe_script_file("./scripts/globals/common.lua");
+        lua.safe_script_file("./scripts/globals/utils.lua");
 
         // Load global data
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/data"))
@@ -4692,7 +4693,7 @@ namespace luautils
         charutils::ClearCharVarFromAll(varName);
     }
 
-    void OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
+    void OnTransportEvent(CCharEntity* PChar, uint16 prevZoneId, uint16 transportId)
     {
         TracyZoneScoped;
 
@@ -4704,7 +4705,7 @@ namespace luautils
             return;
         }
 
-        auto result = onTransportEvent(PChar, TransportID);
+        auto result = onTransportEvent(PChar, prevZoneId, transportId);
         if (!result.valid())
         {
             sol::error err = result;

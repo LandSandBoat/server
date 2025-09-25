@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
 
     -- DEFAULT DIALOG
     else
-        player:startEvent(180)
+        player:startEvent(181)
     end
 end
 

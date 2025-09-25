@@ -10,6 +10,8 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
+    xi.barge.onZoneIn(player)
+
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -20,6 +22,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     return cs
+end
+
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    player:startEvent(100)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -33,6 +39,9 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 100 then
+        player:setPos(0, 0, 0, 0, xi.zone.CARPENTERS_LANDING)
+    end
 end
 
 return zoneObject

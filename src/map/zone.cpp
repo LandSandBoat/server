@@ -484,9 +484,9 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
     m_zoneEntities->FindPartyForMob(PEntity);
 }
 
-void CZone::TransportDepart(uint16 boundary, uint16 zone)
+void CZone::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
 {
-    m_zoneEntities->TransportDepart(boundary, zone);
+    m_zoneEntities->TransportDepart(boundary, prevZoneId, transportId);
 }
 
 void CZone::updateCharLevelRestriction(CCharEntity* PChar)

@@ -91,11 +91,25 @@ local pTable =
     [xi.magic.spell.COMET         ] = { xi.mod.INT,    0,  964,  2.3, 1000, 850,    4, 3.75,  3.5,    3,    2,    1,    1 }, -- I value unknown. Guesstimate used.
     [xi.magic.spell.DEATH         ] = {          0,    0,   32,    0,   32,   0,    0,    0,    0,    0,    0,    0,    0 },
 
-    -- Bio as nuke
+    -- Dia as nuke.
+    [xi.magic.spell.DIA           ] = { xi.mod.MND,    0,    1,    1,    1,   1,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIA_II        ] = { xi.mod.MND,    0,    4,    1,    4,   2,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIA_III       ] = { xi.mod.MND,    0,   16,    1,   16,   4,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIA_IV        ] = { xi.mod.MND,    0,   64,    1,   64,   8,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIA_V         ] = { xi.mod.MND,    0,  256,    1,  256,  16,    0,    0,    0,    0,    0,    0,    0 },
+
+    [xi.magic.spell.DIAGA         ] = { xi.mod.MND,    0,    2,    1,    2,   2,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIAGA_II      ] = { xi.mod.MND,    0,    8,    1,    8,   4,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIAGA_III     ] = { xi.mod.MND,    0,   32,    1,   32,   8,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIAGA_IV      ] = { xi.mod.MND,    0,  128,    1,  128,  16,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.DIAGA_V       ] = { xi.mod.MND,    0,  512,    1,  512,  32,    0,    0,    0,    0,    0,    0,    0 },
+
+    -- Bio as nuke.
     [xi.magic.spell.BIO           ] = { xi.mod.INT,    0,   10,    1,   10,   5,    0,    0,    0,    0,    0,    0,    0 },
     [xi.magic.spell.BIO_II        ] = { xi.mod.INT,    0,   50,    1,   50,  10,    0,    0,    0,    0,    0,    0,    0 },
     [xi.magic.spell.BIO_III       ] = { xi.mod.INT,    0,  100,  1.5,  100,  21,    0,    0,    0,    0,    0,    0,    0 },
     [xi.magic.spell.BIO_IV        ] = { xi.mod.INT,    0,  125,  1.5,  125,  27,    0,    0,    0,    0,    0,    0,    0 },
+    [xi.magic.spell.BIO_V         ] = { xi.mod.INT,    0,  150,    2,  150,  32,    0,    0,    0,    0,    0,    0,    0 },
 
     -- Helixes (Initial damage) https://www.bluegartr.com/threads/108196-Random-Facts-Thread-Magic?p=6817880&viewfull=1#post6817880
     [xi.magic.spell.GEOHELIX      ] = { xi.mod.INT,    0,   35,    1,   31, 100,    1,    1,  0.5,    0,    0,    0,    0 },

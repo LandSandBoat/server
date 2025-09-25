@@ -39,8 +39,8 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     xi.manaclipper.aboard(player, triggerArea:getTriggerAreaID(), false)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    xi.manaclipper.onTransportEvent(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    xi.manaclipper.onTransportEvent(player, prevZoneId, transportId)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

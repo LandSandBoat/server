@@ -1,7 +1,11 @@
 local ID = zones[xi.zone.RULUDE_GARDENS]
 
 return {
-    ['Adolie']               = { event = 30 },
+    ['_6r2']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:Bastokan Emb.
+    ['_6r5']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:San d'Orian Emb.
+    ['_6r8']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:Windurstian Emb.
+    ['_6r9']                 = { event = 138 }, -- Door:Audience Chamber
+    ['Adolie']               = { event = 158 },
     ['Ajahkeem']             = { event = 10106 },
     ['Akta']                 = { event = 116 },
     ['Albiona']              = { event = 146 },
@@ -13,17 +17,20 @@ return {
     ['Chapi_Galepilai']      = { event = 148 },
     ['Colti']                = { event = 153 },
     ['Crooked_Arrow']        = { event = 149 },
-    ['Delivery_Crate']       = { messageSpecial = ID.text.DELIVERY_CRATE_TEXT },
+    ['Delivery_Crate']       = { messageSpecial = ID.text.STURDY_WOODEN_CRATE },
     ['Diradour']             = { event = 10000 },
     ['Elevator_Button']      = { event = 75 },
     ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
+    ['Fabien']               = { text = ID.text.NOT_ACQUAINTED },
     ['Falreze']              = { event = 121 },
     ['Harith']               = { event = 111 },
-    ['High_Wind']            = { event = 33 },
+    ['High_Wind']            = { event = 164 },
+    ['Jamal']                = { event = 10237 },
     ['Kayle']                = { event = 125 },
     ['Leis']                 = { event = 119 },
-    ['Maat']                 = { messageSpecial = ID.text.MAAT_DIALOG },
+    ['Maat']                 = { text = ID.text.MAAT_DIALOG },
     ['Main-Harmain']         = { event = 147 },
+    ['Marjory']              = { event = 10282 },
     ['Marshal']              = { event = 44 },
     ['Muhoho']               = { event = 152 },
     ['Neraf-Najiruf']        = { event = 156 },
@@ -36,11 +43,14 @@ return {
     ['Pursuivant']           = { event = 69 },
     ['qm1']                  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Radeivepart']          = { event = 159 },
-    ['Rainhard']             = { event = 34 },
+    ['Rainhard']             = { event = 165 },
+    ['relic']                = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY }, -- Blank QM at base of the fountain next to Radeivepart
     ['Sitting_Ram']          = { event = 115 },
+    ['Splintery_Chest']      = { messageSpecial = ID.text.SIGNIFICANTLY_SHOPWORN },
     ['Taillegeas']           = { event = 10061 },
     ['Tillecoe']             = { event = 70 },
     ['Tsugumi']              = { event = 163 },
     ['Venessa']              = { event = 10064 },
+    ['Vincent']              = { event = 10185 },
     ['Yavoraile']            = { event = 118 },
 }

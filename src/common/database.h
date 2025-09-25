@@ -429,7 +429,8 @@ namespace db
                     return T{};
                 }
 
-                const auto columnName = resultSet_->getMetaData()->getColumnLabel(index + 1);
+                const std::unique_ptr<sql::ResultSetMetaData> metadata(resultSet_->getMetaData());
+                const auto                                    columnName = metadata->getColumnLabel(index + 1);
                 return get<T>(columnName.c_str());
             }
 
@@ -463,7 +464,8 @@ namespace db
                     return defaultValue;
                 }
 
-                const auto columnName = resultSet_->getMetaData()->getColumnLabel(index + 1);
+                const std::unique_ptr<sql::ResultSetMetaData> metadata(resultSet_->getMetaData());
+                const auto                                    columnName = metadata->getColumnLabel(index + 1);
                 return getOrDefault<T>(columnName.c_str(), defaultValue);
             }
 

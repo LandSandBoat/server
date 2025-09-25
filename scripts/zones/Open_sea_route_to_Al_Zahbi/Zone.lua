@@ -24,7 +24,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(1028)
     player:messageSpecial(ID.text.DOCKING_IN_AL_ZAHBI)
 end

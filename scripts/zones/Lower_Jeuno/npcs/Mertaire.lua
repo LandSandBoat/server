@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(135) -- Standard dialog after completed "Painful Memory"
 
     else
-        player:messageSpecial(ID.text.MERTAIRE_DEFAULT)
+        player:messageSpecial(ID.text.LOVE_ROMANCE)
     end
 end
 

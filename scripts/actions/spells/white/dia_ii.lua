@@ -10,42 +10,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 4
+    local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
 
-    -- Calculate raw damage
-    local dmg = basedmg
-    -- Softcaps at 8, should always do at least 1
-    dmg = utils.clamp(dmg, 1, 8)
-    -- Get resist multiplier (1x if no resist)
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.ENFEEBLING_MAGIC, 0, xi.element.LIGHT, xi.mod.INT, 0, 0)
-    -- Get the resisted damage
-    dmg = dmg * resist
-    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    -- Add in target adjustment
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-    -- Add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster, target, spell, dmg)
-
-    -- Calculate duration and bonus
-    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
-
-    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
-
-    if  bio == nil then -- if no bio, add dia dot
-        target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
-    elseif
-        bio:getSubPower() == 10 or
-        (xi.settings.main.BIO_OVERWRITE == 1 and bio:getSubPower() <= 15) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
-    then -- erase lower tier bio and add dia dot
+    if bio and bio:getTier() >= 2 then
+        return damage
+    else
         target:delStatusEffect(xi.effect.BIO)
-        target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
     end
 
-    return final
+    -- Apply effect.
+    local power = 2 + caster:getMod(xi.mod.DIA_DOT)
+
+    target:addStatusEffect(xi.effect.DIA, power, 3, 120, 0, 15, 2)
+
+    return damage
 end
 
 return spellObject

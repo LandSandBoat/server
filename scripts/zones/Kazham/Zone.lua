@@ -31,7 +31,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(10000)
 end
 

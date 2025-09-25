@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
 
     -- DEFAULT RESPONSE
     else
-        player:startEvent(144) -- have you heard of lewenhart?
+        player:startEvent(141)
     end
 end
 

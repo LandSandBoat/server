@@ -35,7 +35,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(71)
 end
 

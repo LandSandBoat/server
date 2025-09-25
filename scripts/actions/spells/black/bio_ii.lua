@@ -14,7 +14,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
-    if dia and dia:getPower() > 2 then
+    if dia and dia:getTier() >= 3 then
         return damage
     else
         target:delStatusEffect(xi.effect.DIA)

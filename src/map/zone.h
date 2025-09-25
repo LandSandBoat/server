@@ -612,7 +612,9 @@ public:
     virtual void InsertTRUST(CBaseEntity* PTrust);
 
     virtual void FindPartyForMob(CBaseEntity* PEntity);
-    virtual void TransportDepart(uint16 boundary, uint16 zone);  // Collect passengers if ship/boat is departing
+
+    virtual void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // Collect passengers if ship/boat is departing
+
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction, it is applied after it is removed.
 
     void InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea); // Add an active area to the zone

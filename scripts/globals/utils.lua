@@ -1182,6 +1182,28 @@ function utils.vanadielClockTime()
     return clockTime
 end
 
+-- Returns an integer number of minutes since midnight from a time string like "HH:MM"
+---@nodiscard
+---@param timeString string
+---@return integer
+function utils.timeStringToMinutes(timeString)
+    local hours, minutes = timeString:match('^(%d%d?):(%d%d)$')
+    hours   = tonumber(hours)
+    minutes = tonumber(minutes)
+
+    -- Validate time.
+    local validHours   = hours and hours >= 0 and hours < 24
+    local validMinutes = minutes and minutes >= 0 and minutes < 60
+
+    if not validHours or not validMinutes then
+        print(fmt('[ERROR] Invalid time string: ({}). Expected HH:MM', timeString))
+
+        return -1
+    end
+
+    return hours * 60 + minutes
+end
+
 -- Converts a number to a binary string
 ---@nodiscard
 ---@param x integer

@@ -303,7 +303,7 @@ namespace luautils
     void OnTriggerAreaEnter(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea); // when player enters a trigger area in a zone
     void OnTriggerAreaLeave(CCharEntity* PChar, std::unique_ptr<ITriggerArea> const& PTriggerArea); // when player leaves a trigger area in a zone
 
-    void OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
+    void OnTransportEvent(CCharEntity* PChar, uint16 prevZoneId, uint16 transportId);
     void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     void OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // conquest update (hourly or tally)
 

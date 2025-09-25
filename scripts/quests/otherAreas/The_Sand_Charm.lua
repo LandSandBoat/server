@@ -23,7 +23,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
                 xi.settings.map.FISHING_ENABLE == true
         end,
 

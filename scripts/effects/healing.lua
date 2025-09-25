@@ -58,13 +58,13 @@ effectObject.onEffectTick = function(target, effect)
     local healtime = effect:getTickCount()
 
     if healtime > 1 then
-        -- Avatars cancel healing on first healing tick if summoned
+        -- Summoned avatars and spirits cancel healing on first healing tick if summoned
         local pet = target:getPet()
         if pet ~= nil then
             local petId = pet:getPetID()
             if
                 pet:isAvatar() or
-                petId >= xi.petId.FIRE_SPIRIT and petId <= xi.petId.DARK_SPIRIT
+                (not pet:isCharmed() and petId >= xi.petId.FIRE_SPIRIT and petId <= xi.petId.DARK_SPIRIT)
             then
                 target:messageBasic(xi.msg.basic.CANT_HEAL_WITH_AVATAR)
                 target:delStatusEffect(xi.effect.HEALING)

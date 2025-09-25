@@ -54,6 +54,15 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 {
 }
 
+CBattlefieldHandler::~CBattlefieldHandler()
+{
+    for (auto& [area, PBattlefield] : m_Battlefields)
+    {
+        destroy(PBattlefield);
+    }
+    m_Battlefields.clear();
+}
+
 void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
 {
     TracyZoneScoped;
