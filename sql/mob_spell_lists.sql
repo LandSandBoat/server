@@ -5029,7 +5029,12 @@ INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,239,1,255); -- Shock (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,251,1,255); -- Shock Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,252,1,255); -- Stun (1~255)
 
--- IDs 494-496 free for use
+-- Ullikummi (494)
+INSERT INTO `mob_spell_lists` VALUES ('Ullikummi',494,34,1,255);  -- Diaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ullikummi',494,40,1,255);  -- Banishga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ullikummi',494,112,1,255); -- Flash (1~255)
+
+-- IDs 495-496 free for use
 
 -- Cemetery Cherry
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,274,1,255); -- Sleepga II

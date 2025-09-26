@@ -217,7 +217,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
             // clang-format off
             Async::getInstance()->submit([name, cmdname, cmdlinestr]()
             {
-                const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(current_timestamp(), ?, ?, ?)";
+                const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
                 if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmdname), db::escapeString(cmdlinestr)))
                 {
                     ShowError("cmdhandler::call: Failed to log GM command.");

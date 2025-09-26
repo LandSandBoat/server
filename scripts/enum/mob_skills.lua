@@ -69,6 +69,7 @@ xi.mobSkill =
     DANSE_MACABRE            =  533,
 
     PANZERFAUST              =  536,
+    TYPHOON                  =  539,
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
 

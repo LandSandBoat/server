@@ -20,59 +20,82 @@ local detectorPHTable =
     ID.mob.STEAM_CLEANER - 12, -- NW Lower Chamber
 }
 
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar('petCount', 1)
-end
-
 local getMobToSpawn = function(detector)
-    local detectorID              = detector:getID()
-    local canSpawnSteamCleaner    = GetServerVariable('[POP]SteamCleaner') < GetSystemTime() and utils.contains(detectorID, detectorPHTable)
-    local steamCleanerSpawnChance = 10 -- percent
-    local steamCleaner            = GetMobByID(ID.mob.STEAM_CLEANER)
+    local detectorID   = detector:getID()
+    local caretaker    = GetMobByID(detectorID + 1)
+    local steamCleaner = GetMobByID(ID.mob.STEAM_CLEANER)
 
-    if steamCleaner then
-        if steamCleaner:isSpawned() then
-            -- If this is the Detector that spawned SC, then he should continue to return SC
-            if detector:getLocalVar('SpawnedSC') == 1 then
-                return steamCleaner
-            end
-
-            -- else fall through to the last return at the bottom that returns Caretaker
-        elseif canSpawnSteamCleaner and math.random(1, 100) <= steamCleanerSpawnChance then
-            -- Set this as the Detector that spawned SC
-            detector:setLocalVar('SpawnedSC', 1)
-            return steamCleaner
-        end
+    -- Early return: Detector isn't able to spawn Steam Cleaner.
+    if not utils.contains(detectorID, detectorPHTable) then
+        return caretaker
     end
 
-    return GetMobByID(detectorID + 1) -- return this detector's caretaker
+    -- Early return: Steam cleaner can't spawn.
+    if
+        not steamCleaner or
+        steamCleaner:isSpawned()
+    then
+        return caretaker
+    end
+
+    -- Early return: Luck check failed.
+    if math.random(1, 100) <= 90 then
+        return caretaker
+    end
+
+    -- Early return: Too soon to spawn Steam Cleaner.
+    if GetSystemTime() < GetServerVariable('[POP]SteamCleaner') then
+        return caretaker
+    end
+
+    -- Early return: Steam Cleaner is already being summoned.
+    if steamCleaner:getLocalVar('midSummon') == 1 then
+        return caretaker
+    end
+
+    -- From this point on, this detector can pop Steam Cleaner.
+    steamCleaner:setLocalVar('midSummon', 1)
+
+    return steamCleaner
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('petRespawn', GetSystemTime() + 10)
 end
 
 entity.onMobFight = function(mob, target)
-    local mobToSpawn = getMobToSpawn(mob)
-    local petCount   = mob:getLocalVar('petCount')
-
-    -- Summons a mob (Caretaker or Steam Cleaner) every 15 seconds.
-    -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
-    --       Should be ~10s to start cast, and another ~5 to finish.
+    -- Summons a mob (Caretaker or Steam Cleaner) every 10 seconds.
     -- Detectors can also still spawn the mobToSpawns while sleeping, moving, etc.
     -- Maximum number of pets Detector can spawn is 5
+    local petCount     = mob:getLocalVar('petCount')
+    local petTimer     = mob:getLocalVar('petRespawn')
+    local currentPetID = mob:getLocalVar('currentPet')
+    local summoningPet = mob:getLocalVar('summoningPet')
+    local currentPet   = nil
 
-    if
-        petCount <= 5 and
-        mob:getBattleTime() % 15 < 3 and
-        mob:getBattleTime() > 3 and
-        not mobToSpawn:isSpawned()
-    then
-        mobToSpawn:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
-        mobToSpawn:spawn()
-        mobToSpawn:updateEnmity(target)
-        mob:setLocalVar('petCount', petCount + 1)
+    -- Only get current pet if we have a valid ID stored
+    if currentPetID > 0 then
+        currentPet = GetMobByID(currentPetID)
     end
 
-    -- make sure pet has a target
-    if mobToSpawn:getCurrentAction() == xi.act.ROAMING then
-        mobToSpawn:updateEnmity(target)
+    -- Check if we should spawn a new pet
+    local shouldSpawnPet = petCount < 5 and
+                        GetSystemTime() > petTimer and
+                        (not currentPet or not currentPet:isSpawned()) and
+                        summoningPet == 0
+
+    if shouldSpawnPet then
+        local mobToSpawn = getMobToSpawn(mob)
+        if xi.mob.callPets(mob, mobToSpawn:getID(), { inactiveTime = 5000, ignoreBusy = true }) then
+            mob:setLocalVar('petCount', petCount + 1)
+            mob:setLocalVar('currentPet', mobToSpawn:getID())
+            mob:setLocalVar('summoningPet', 1)
+            mob:timer(5000, function(mobArg)
+                if mobArg then
+                    mobArg:setLocalVar('summoningPet', 0)
+                end
+            end)
+        end
     end
 end
 
@@ -92,8 +115,13 @@ end
 
 entity.onMobDespawn = function(mob)
     local caretakerId = mob:getID() + 1
+    local steamCleaner = GetMobByID(ID.mob.STEAM_CLEANER)
 
     mob:resetLocalVars()
+    -- Ensure Steam Cleaner can be summoned again
+    if steamCleaner then
+        steamCleaner:setLocalVar('midSummon', 0)
+    end
 
     if GetMobByID(caretakerId):isSpawned() then
         DespawnMob(caretakerId)

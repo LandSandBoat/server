@@ -5,37 +5,35 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar('petCount', 1)
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('petRespawn', GetSystemTime() + 10)
 end
 
 entity.onMobFight = function(mob, target)
-    local auraGear = GetMobByID(mob:getID() + 1)
-    if not auraGear then
-        return
-    end
-
+    -- Summons an Aura Gear every 10 seconds.
     local petCount = mob:getLocalVar('petCount')
+    local petTimer = mob:getLocalVar('petRespawn')
+    local auraGear = GetMobByID(mob:getID() + 1)
+    local summoningPet = mob:getLocalVar('summoningPet')
 
-    -- Summons an Aura Gear every 15 seconds.
-    -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
-    -- Defenders can also still spawn the Aura Gears while sleeping, etc.
-    -- Maximum number of pets Defender can spawn is 5
+    -- Check if we should spawn a new pet
+    local shouldSpawnPet = petCount < 5 and
+                        GetSystemTime() > petTimer and
+                        summoningPet == 0 and
+                        (not auraGear or not auraGear:isSpawned())
+
     if
-        petCount <= 5 and
-        mob:getBattleTime() % 15 < 3 and
-        mob:getBattleTime() > 3 and
-        not auraGear:isSpawned()
+        shouldSpawnPet and
+        auraGear and
+        xi.mob.callPets(mob, auraGear:getID(), { inactiveTime = 5000, ignoreBusy = true })
     then
-        auraGear:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
-        auraGear:spawn()
-        auraGear:updateEnmity(target)
         mob:setLocalVar('petCount', petCount + 1)
-    end
-
-    -- make sure pet has a target
-    if auraGear:getCurrentAction() == xi.act.ROAMING then
-        auraGear:updateEnmity(target)
+        mob:setLocalVar('summoningPet', 1)
+        mob:timer(5000, function(mobArg)
+            if mobArg then
+                mobArg:setLocalVar('summoningPet', 0)
+            end
+        end)
     end
 end
 

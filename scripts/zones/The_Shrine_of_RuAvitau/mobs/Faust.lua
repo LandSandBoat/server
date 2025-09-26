@@ -40,8 +40,15 @@ local handleFaustFacingDirectionMechanics = function(faust)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 17986)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 27482)
+    mob:setMod(xi.mod.REGAIN, 500)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.SLOW)
 end
 
 entity.onMobSpawn = function(mob)
@@ -54,6 +61,27 @@ entity.onMobRoam = function(mob)
         handleFaustFacingDirectionMechanics(mob)
     else
         mob:pathThrough(home, xi.pathflag.NONE)
+    end
+end
+
+entity.onMobFight = function(mob, target)
+    -- Nearly always uses Typhoon below 50% HP
+    if mob:getHPP() <= 50 and mob:getLocalVar('RegainBoosted') == 0 then
+        mob:setMod(xi.mod.REGAIN, 1000)
+        mob:setLocalVar('RegainBoosted', 1)
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    -- Typhoons twice above 50%, three times below 50%
+    local typhoonCount = mob:getLocalVar('TyphoonCount')
+    local maxTyphoons = mob:getHPP() < 50 and 2 or 1
+
+    if typhoonCount < maxTyphoons then
+        mob:useMobAbility(xi.mobSkill.TYPHOON)
+        mob:setLocalVar('TyphoonCount', typhoonCount + 1)
+    else
+        mob:setLocalVar('TyphoonCount', 0)
     end
 end
 

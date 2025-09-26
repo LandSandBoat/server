@@ -20,15 +20,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
-    if mob:getName() == 'Faust' then
-        if mob:getLocalVar('Typhoon') == 0 then
-            mob:useMobAbility(539)
-            mob:setLocalVar('Typhoon', 1)
-        else
-            mob:setLocalVar('Typhoon', 0)
-        end
-    end
-
     return dmg
 end
 
