@@ -70076,14 +70076,14 @@ INSERT INTO `mob_spawn_points` VALUES (17621064,0,'Maat','Maat',14,401.028,199.0
 
 -- Die by the Sword (BS30)
 INSERT INTO `mob_spawn_points` VALUES (17621065,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-393.000,-201.000,399.000,185);
-INSERT INTO `mob_spawn_points` VALUES (17621066,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-399.000,-201.000,399.000,190);
+INSERT INTO `mob_spawn_points` VALUES (17621066,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-399.000,-201.000,395.000,190);
 INSERT INTO `mob_spawn_points` VALUES (17621067,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-404.000,-201.000,399.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621069,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,7.073,-1.000,-0.901,185);
-INSERT INTO `mob_spawn_points` VALUES (17621070,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,1.073,-1.000,-0.901,190);
-INSERT INTO `mob_spawn_points` VALUES (17621071,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-3.927,-1.000,-0.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621073,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,407.028,199.000,-400.677,185);
-INSERT INTO `mob_spawn_points` VALUES (17621074,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,401.028,199.000,-400.677,190);
-INSERT INTO `mob_spawn_points` VALUES (17621075,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,396.028,199.000,-400.677,195);
+INSERT INTO `mob_spawn_points` VALUES (17621069,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-393.000,-201.000,-0.901,185);
+INSERT INTO `mob_spawn_points` VALUES (17621070,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-399.000,-201.000,-0.901,190);
+INSERT INTO `mob_spawn_points` VALUES (17621071,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-404.000,-201.000,-0.901,195);
+INSERT INTO `mob_spawn_points` VALUES (17621073,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-393.000,-201.000,399.000,185);
+INSERT INTO `mob_spawn_points` VALUES (17621074,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-399.000,-201.000,395.000,190);
+INSERT INTO `mob_spawn_points` VALUES (17621075,0,'Gladiatorial_Weapon','Gladiatorial Weapon',15,-404.000,-201.000,399.000,195);
 
 -- Let Sleeping Dogs Die (BS30)
 INSERT INTO `mob_spawn_points` VALUES (17621077,0,'Capelthwaite','Capelthwaite',16,-393.000,-201.000,399.000,185);

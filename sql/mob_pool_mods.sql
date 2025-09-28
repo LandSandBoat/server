@@ -162,6 +162,10 @@ INSERT INTO `mob_pool_mods` VALUES (1461,4,4,1); -- SIGHT_RANGE: 4
 -- Genbu
 INSERT INTO `mob_pool_mods` VALUES (1491,3,100,1); -- MP_BASE: 100
 
+-- Gladiatorial Weapon
+INSERT INTO `mob_pool_mods` VALUES (1620,5,18,1);   -- SOUND_RANGE: 18
+INSERT INTO `mob_pool_mods` VALUES (1620,72,22,1);  -- MAGIC_RANGE: 22
+
 -- Goblin Digger Near
 INSERT INTO `mob_pool_mods` VALUES (1648,17,1,1);  -- NO_DESPAWN: 1
 INSERT INTO `mob_pool_mods` VALUES (1648,224,5,0); -- VERMIN_KILLER: 5
