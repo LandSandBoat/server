@@ -85,8 +85,6 @@ entity.onTrigger = function(player, npc)
         elseif progress >= 3 or failed >= 4 then
             player:startEvent(244) -- happy with ten of coins
         end
-    else
-        player:startEvent(199)
     end
 end
 

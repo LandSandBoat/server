@@ -143,6 +143,13 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     charutils::LoadJobChangeGear(PChar);
     PChar->RequestPersist(CHAR_PERSIST::EQUIP);
 
+    // If the player has a teleport effect and they change jobs, cancel the teleport/warps you
+    // Retail does cancel your teleport/warp if you change subs if someone else ports/warps
+    if (auto PTeleportEffect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT::EFFECT_TELEPORT))
+    {
+        PTeleportEffect->SetPower(0);
+    }
+
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
     // clang-format off

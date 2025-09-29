@@ -56,7 +56,6 @@
 #include "packets/action.h"
 #include "packets/char_emotion.h"
 #include "packets/chat_message.h"
-#include "packets/entity_visual.h"
 #include "packets/menu_raisetractor.h"
 
 #include "utils/battleutils.h"
@@ -83,6 +82,7 @@
 #include "mobskill.h"
 #include "monstrosity.h"
 #include "navmesh.h"
+#include "packets/s2c/0x039_mapschedulor.h"
 #include "petskill.h"
 #include "roe.h"
 #include "spell.h"
@@ -1201,13 +1201,13 @@ namespace luautils
     }
 
     // temporary solution for geysers in Dangruf_Wadi
-    void SendEntityVisualPacket(uint32 npcid, const char* command)
+    void SendEntityVisualPacket(const uint32 npcId, const char* command)
     {
         TracyZoneScoped;
 
-        if (CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC))
+        if (CBaseEntity* PNpc = zoneutils::GetEntity(npcId, TYPE_NPC))
         {
-            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, std::make_unique<CEntityVisualPacket>(PNpc, command));
+            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_MAPSCHEDULOR>(PNpc, command));
         }
     }
 

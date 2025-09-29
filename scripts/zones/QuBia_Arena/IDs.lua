@@ -60,6 +60,7 @@ zones[xi.zone.QUBIA_ARENA] =
         CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
         DOLL_FACTORY             = GetFirstID('Doll_Factory'),
         GHUL_I_BEABAN            = GetFirstID('Ghul-I-Beaban'),
+        GLADIATORIAL_WEAPON      = GetFirstID('Gladiatorial_Weapon'),
         MAAT                     = GetFirstID('Maat'),
         NEPHIYL_RAMPARTBREACHER  = GetFirstID('Nephiyl_Rampartbreacher'),
         SEED_ORC                 = GetFirstID('Seed_Orc'),

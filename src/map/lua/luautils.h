@@ -211,7 +211,7 @@ namespace luautils
     void PopulateIDLookupsByFilename(std::optional<std::string> maybeFilename = std::nullopt);
     void PopulateIDLookupsByZone(std::optional<uint16> maybeZoneId = std::nullopt);
 
-    void SendEntityVisualPacket(uint32 npcid, const char* command);
+    void SendEntityVisualPacket(uint32 npcId, const char* command);
     void InitInteractionGlobal();
     auto GetZone(uint16 zoneId) -> CZone*;
     auto GetItemByID(uint32 itemId) -> CItem*;

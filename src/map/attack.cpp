@@ -654,13 +654,37 @@ void CAttack::ProcessDamage()
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
+        int32 kickDamage   = 0;
 
-        if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+        if (m_attacker->objtype == TYPE_MOB)
         {
-            int32 kickDamage = m_naturalH2hDamage + m_attacker->getMod(Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
-            m_damage         = (uint32)(((kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+            // Mobs use a different base damage formula than players.
+            // H2H attacks from mobs have a base damage penalty applied based on what zone they are in.
+            float       mobH2HPenalty = 1.0f;
+            REGION_TYPE regionID      = m_attacker->loc.zone->GetRegionID();
+
+            if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+            {
+                mobH2HPenalty = 0.425f; // Vanilla - COP
+            }
+            else
+            {
+                mobH2HPenalty = 0.650f; // TOAU onward
+            }
+
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+            {
+                kickDamage = m_attacker->getMod(Mod::KICK_DMG);
+            }
+
+            m_damage = (uint32)(((((m_baseDamage + kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot))) * mobH2HPenalty) * m_damageRatio));
         }
-        else
+        else if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Players use this calculation.
+        {
+            kickDamage = m_naturalH2hDamage + m_attacker->getMod(Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
+            m_damage   = (uint32)(((kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        }
+        else // Players use this calculation.
         {
             m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
         }

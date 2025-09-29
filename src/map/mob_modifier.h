@@ -114,6 +114,9 @@ enum MOBMODIFIER : int
     MOBMOD_CLAIM_TYPE             = 83, // Changes the claim behavior of the mob. See ClaimType enum.
     MOBMOD_NO_SPELL_COST          = 84, // Mob does not use MP when casting spells
     MOBMOD_ASTRAL_PET_OFFSET      = 85, // If non-zero, defines the offset from main mob's ID for astral flow (if zero, will assume offset of 2)
+    MOBMOD_BASE_DAMAGE_MULTIPLIER = 86, // Multiplies the mob's base damage. Example: 150 = x1.5
+    MOBMOD_DAMAGE_OFFSET          = 87, // Adds or subtracts the mob's base damage offset.
+    MOBMOD_RANGED_DAMAGE_OFFSET   = 88, // Adds or subtracts the mob's ranged base damage offset.
 };
 
 #endif

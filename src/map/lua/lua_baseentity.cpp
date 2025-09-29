@@ -117,7 +117,6 @@
 #include "packets/entity_animation.h"
 #include "packets/entity_enable_list.h"
 #include "packets/entity_update.h"
-#include "packets/entity_visual.h"
 #include "packets/event.h"
 #include "packets/event_string.h"
 #include "packets/event_update.h"
@@ -150,6 +149,7 @@
 #include "packets/quest_mission_log.h"
 #include "packets/release.h"
 #include "packets/roe_questlog.h"
+#include "packets/s2c/0x039_mapschedulor.h"
 #include "packets/server_ip.h"
 #include "packets/shop_items.h"
 #include "packets/shop_menu.h"
@@ -945,7 +945,7 @@ void CLuaBaseEntity::injectActionPacket(uint32 inTargetID, uint16 inCategory, ui
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::entityVisualPacket(std::string const& command, sol::object const& entity)
+void CLuaBaseEntity::entityVisualPacket(std::string const& command, sol::object const& entity) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -956,11 +956,11 @@ void CLuaBaseEntity::entityVisualPacket(std::string const& command, sol::object 
     CBaseEntity* PNpc = nullptr;
     if (entity != sol::lua_nil)
     {
-        CLuaBaseEntity* PLuaBaseEntity = entity.as<CLuaBaseEntity*>();
-        PNpc                           = PLuaBaseEntity->m_PBaseEntity;
+        const auto* PLuaBaseEntity = entity.as<CLuaBaseEntity*>();
+        PNpc                       = PLuaBaseEntity->m_PBaseEntity;
     }
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CEntityVisualPacket>(PNpc, command.c_str());
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_MAPSCHEDULOR>(PNpc, command.c_str());
 }
 
 /************************************************************************

@@ -44,6 +44,10 @@ xi.mobSkill =
 
     VELOCIOUS_BLADE          =  347, -- Mammet-800
 
+    SMITE_OF_FURY            =  396,
+    FLURRY_OF_RAGE           =  397,
+    WHISPERS_OF_IRE          =  398,
+
     RANGED_ATTACK_2          =  412,
 
     SCISSION_THRUST          =  419, -- Mammet-800
@@ -65,6 +69,8 @@ xi.mobSkill =
     TRANSMOGRIFICATION       =  487, -- Mammet-800
 
     SELF_DESTRUCT            =  511,
+    SMITE_OF_RAGE            =  513,
+    WHIRL_OF_RAGE            =  514,
 
     DANSE_MACABRE            =  533,
 

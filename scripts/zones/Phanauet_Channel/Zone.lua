@@ -25,7 +25,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    player:startEvent(100)
+    -- TODO: Only seen event 0 in captures but used to be 100 here. Both events have the exact same code.
+    -- This might be used by SE to differentiate where to send the player?
+    player:startEvent(0)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -39,7 +41,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 100 then
+    if csid == 0 then
         player:setPos(0, 0, 0, 0, xi.zone.CARPENTERS_LANDING)
     end
 end

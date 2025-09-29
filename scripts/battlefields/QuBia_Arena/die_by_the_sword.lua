@@ -16,8 +16,6 @@ local content = Battlefield:new({
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.SKY_ORB, wearMessage = qubiaID.text.A_CRACK_HAS_FORMED, wornMessage = qubiaID.text.ORB_IS_CRACKED },
-
-    experimental = true,
 })
 
 content:addEssentialMobs({ 'Gladiatorial_Weapon' })

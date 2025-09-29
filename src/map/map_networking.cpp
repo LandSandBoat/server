@@ -168,13 +168,20 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
         if (decryptCount != -1)
         {
             // DecryptCount of 0 means the main key decrypted the packet
-            if (decryptCount == 0)
+            if (decryptCount == 0 && map_session_data->PChar)
             {
                 // If the previous package was lost, then we do not collect a new one,
                 // and send the previous packet again
                 if (!parse(PBuff.data(), &size, map_session_data))
                 {
                     send_parse(PBuff.data(), &size, map_session_data, false);
+                }
+
+                // Kludge, please clean up...
+                // BLOWFISH_PENDING_ZONE is only set after ZoneOut and zoneout packets have been sent (if they are dropped, decryptCount == 1 will catch this case.)
+                if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_session_data->PChar->status == STATUS_TYPE::DISAPPEAR && map_session_data->zone_ipp.getRawIPP() == 0)
+                {
+                    map_session_data->PChar.reset(); // destroy PChar sooner rather than later
                 }
             }
             else if (decryptCount == 1 && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
@@ -184,13 +191,8 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
                 // It could be beneficial to parse 0x00D here anyway.
 
                 // Client failed to receive 0x00B, resend it
-                if (auto* PChar = map_session_data->PChar.get())
-                {
-                    PChar->clearPacketList();
-                    PChar->pushPacket<CServerIPPacket>(PChar, map_session_data->zone_type, map_session_data->zone_ipp);
-                }
-
-                send_parse(PBuff.data(), &size, map_session_data, true);
+                CServerIPPacket zonePacket(nullptr, map_session_data->zone_type, map_session_data->zone_ipp); // nullptr is OK here because its not used in the class.
+                sendSinglePacketNoPchar(PBuff.data(), &size, map_session_data, true, &zonePacket);
 
                 // Increment sync count with every packet
                 // TODO: match incoming with a new parse that only cares about sync count
@@ -769,6 +771,114 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
                                     PChar->name, PChar->loc.zone->getName(), remainingPackets, kMaxPacketBacklogSize));
         }
     }
+
+    return 0;
+}
+
+int32 MapNetworking::sendSinglePacketNoPchar(uint8* buff, size_t* buffsize, MapSession* map_session_data, bool usePreviousKey, CBasicPacket* packet)
+{
+    TracyZoneScoped;
+
+    // Modify the header of the outgoing packet
+    // The essence of the transformations:
+    // - send the client the number of the last packet received from him
+    // - assign the outgoing packet the number of the last packet sent to the client +1
+    // - write down the current time of sending the packet
+
+    ref<uint16>(buff, 0) = map_session_data->server_packet_id;
+    ref<uint16>(buff, 2) = map_session_data->client_packet_id;
+
+    // save the current time (32 BIT!)
+    ref<uint32>(buff, 8) = earth_time::timestamp();
+
+    uint32 PacketSize = UINT32_MAX;
+    uint8  packets    = 0;
+
+    TotalPacketsToSendPerTick += static_cast<size_t>(1);
+
+    *buffsize = FFXI_HEADER_SIZE;
+    auto type = packet->getType();
+    packets   = 0;
+
+    packet->setSequence(map_session_data->server_packet_id);
+
+    // Apply packet mods if available
+    if (!PacketMods[map_session_data->charID].empty())
+    {
+        if (PacketMods[map_session_data->charID].find(type) != PacketMods[map_session_data->charID].end())
+        {
+            for (auto& entry : PacketMods[map_session_data->charID][type])
+            {
+                auto offset = entry.first;
+                auto value  = entry.second;
+                ShowInfo(fmt::format("Packet Mod (char ID {}): {}: {}: {}",
+                                     map_session_data->charID, hex16ToString(type), hex16ToString(offset), hex8ToString(value)));
+                packet->ref<uint8>(offset) = value;
+            }
+        }
+    }
+
+    std::memcpy(buff + *buffsize, *packet, packet->getSize());
+    *buffsize += packet->getSize();
+    packets++;
+
+    // Compress the data without regard to the header
+    // The returned size is 8 times the real data
+    PacketSize = zlib_compress((int8*)(buff + FFXI_HEADER_SIZE), (uint32)(*buffsize - FFXI_HEADER_SIZE), (int8*)PScratchBuffer.data(), kMaxBufferSize);
+
+    // handle compression error
+    if (PacketSize == static_cast<uint32>(-1))
+    {
+        ShowError("zlib compression error");
+        return -1;
+    }
+
+    ref<uint32>(PScratchBuffer.data(), zlib_compressed_size(PacketSize)) = PacketSize;
+
+    PacketSize = (uint32)zlib_compressed_size(PacketSize) + 4;
+
+    if (PacketSize == static_cast<uint32>(-1))
+    {
+        *buffsize = 0;
+        return -1;
+    }
+
+    TotalPacketsSentPerTick += packets;
+    TracyZoneString(fmt::format("Sending {} packets", packets));
+
+    // Record data size excluding header
+    uint8 hash[16];
+    md5(PScratchBuffer.data(), hash, PacketSize);
+    std::memcpy(PScratchBuffer.data() + PacketSize, hash, 16);
+    PacketSize += 16;
+
+    if (PacketSize > kMaxBufferSize)
+    {
+        ShowCritical("Network: PScratchBuffer is overflowed (%u) by char id %s", PacketSize, map_session_data->charID);
+    }
+
+    // Making total outgoing packet
+    std::memcpy(buff + FFXI_HEADER_SIZE, PScratchBuffer.data(), PacketSize);
+
+    uint32 CypherSize = (PacketSize / 4) & -2;
+
+    blowfish_t* pbfkey = nullptr;
+
+    if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && usePreviousKey)
+    {
+        pbfkey = &map_session_data->prev_blowfish;
+    }
+    else
+    {
+        pbfkey = &map_session_data->blowfish;
+    }
+
+    for (uint32 j = 0; j < CypherSize; j += 2)
+    {
+        blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
+    }
+
+    *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
     return 0;
 }

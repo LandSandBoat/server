@@ -8724,7 +8724,7 @@ INSERT INTO `mob_groups` VALUES (37,1267,120,'Evil_Weapon',330,0,0,0,0,36,38,0);
 INSERT INTO `mob_groups` VALUES (38,5730,120,'Blighting_Brand',0,32,2994,4900,4900,54,55,0);
 INSERT INTO `mob_groups` VALUES (39,1266,120,'Evil_Spirit',330,1,264,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (40,6658,120,'Goblin_Digger',330,0,1040,0,0,28,32,0);
-INSERT INTO `mob_groups` VALUES (41,3376,120,'Roc',0,128,2112,30000,0,55,55,0);
+INSERT INTO `mob_groups` VALUES (41,3376,120,'Roc',0,128,2112,42000,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (42,741,120,'Climbpix_Highrise',0,128,478,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (43,3745,120,'Sprite',0,128,2001,0,0,61,63,0);
 INSERT INTO `mob_groups` VALUES (44,328,120,'Balam-Agab',0,128,0,0,0,30,36,0);
@@ -9130,8 +9130,8 @@ INSERT INTO `mob_groups` VALUES (5,980,127,'Demonic_Weapon',330,0,0,0,0,45,46,0)
 INSERT INTO `mob_groups` VALUES (6,2442,127,'Lost_Soul_blm',330,1,1541,0,0,45,47,0);
 INSERT INTO `mob_groups` VALUES (7,2585,127,'Master_Coeurl',330,0,1640,0,0,45,50,0);
 INSERT INTO `mob_groups` VALUES (8,407,127,'Bhuta',330,1,264,0,0,46,48,0);
-INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,50000,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (10,2255,127,'King_Behemoth',0,128,1450,90000,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,60000,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (10,2255,127,'King_Behemoth',0,128,1450,75000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (11,3135,127,'Picklix_Longindex',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (12,2767,127,'Moxnix_Nightgoggle',0,128,0,0,0,58,58,0);
 INSERT INTO `mob_groups` VALUES (13,1074,127,'Doglix_Muttsnout',0,128,0,0,0,58,58,0);
@@ -9247,7 +9247,7 @@ INSERT INTO `mob_groups` VALUES (12,5128,130,'Groundskeeper',300,0,1242,0,0,75,7
 INSERT INTO `mob_groups` VALUES (13,1012,130,'Despot',0,32,638,13500,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (14,2664,130,'Mimic',0,128,1676,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (15,1491,130,'Genbu',0,128,946,19000,0,88,90,0);
-INSERT INTO `mob_groups` VALUES (16,3540,130,'Seiryu',0,128,2196,22000,0,88,90,0);
+INSERT INTO `mob_groups` VALUES (16,3540,130,'Seiryu',0,128,2196,22000,22000,88,90,0);
 INSERT INTO `mob_groups` VALUES (17,592,130,'Byakko',0,128,394,21500,0,88,90,0);
 INSERT INTO `mob_groups` VALUES (18,3816,130,'Suzaku',0,128,2362,21000,0,88,90,0);
 INSERT INTO `mob_groups` VALUES (19,1249,130,'Eraser',0,128,0,0,0,1,1,0);
@@ -10746,8 +10746,8 @@ INSERT INTO `mob_groups` VALUES (1,6783,154,'Demonic_Pugil_fished',0,128,147,0,0
 INSERT INTO `mob_groups` VALUES (2,344,154,'Bark_Tarantula',960,0,228,0,0,77,80,0);
 INSERT INTO `mob_groups` VALUES (3,920,154,'Darter',960,0,571,0,0,76,79,0);
 INSERT INTO `mob_groups` VALUES (4,978,154,'Demonic_Rose',960,0,2925,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
-INSERT INTO `mob_groups` VALUES (6,2840,154,'Nidhogg',0,128,1781,70000,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,62000,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (6,2840,154,'Nidhogg',0,128,1781,62000,0,90,90,0);
 
 -- ------------------------------------------------------------
 -- Castle_Zvahl_Keep_[S] (Zone 155)
@@ -13213,7 +13213,7 @@ INSERT INTO `mob_groups` VALUES (35,2907,204,'Northern_Shadow',0,32,1823,0,0,63,
 INSERT INTO `mob_groups` VALUES (36,1164,204,'Eastern_Shadow',0,32,738,0,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (37,3709,204,'Southern_Shadow',0,32,2296,0,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (38,888,204,'Dabotzs_Ghost',0,128,0,0,0,53,53,0);
-INSERT INTO `mob_groups` VALUES (39,630,204,'Capricious_Cassie',0,128,411,25000,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (39,630,204,'Capricious_Cassie',0,128,411,43000,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (40,6892,204,'Orientalis_Shadow',0,128,0,0,0,128,128,0);
 INSERT INTO `mob_groups` VALUES (41,6893,204,'Borealis_Shadow',0,128,0,0,0,128,128,0);
 INSERT INTO `mob_groups` VALUES (42,6894,204,'Australis_Shadow',0,128,0,0,0,128,128,0);

@@ -679,6 +679,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Genbu',24,227,1,255); -- poisonga_iii (1~
 INSERT INTO `mob_spell_lists` VALUES ('Genbu',24,240,1,255); -- drown (1~255)
 
 -- Seiryu (25)
+INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,53,1,255);  -- blink (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,157,1,255); -- aero_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,186,1,255); -- aeroga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,208,1,255); -- tornado (1~255)

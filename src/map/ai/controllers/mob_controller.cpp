@@ -504,6 +504,38 @@ auto CMobController::TryCastSpell() -> bool
 
     if (chosenSpellId.has_value())
     {
+        // Check if we can actually cast this spell before committing to it
+        CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
+        if (!PSpell)
+        {
+            ShowWarning("CMobController::TryCastSpell: SpellId <%i> is not found", static_cast<uint16>(chosenSpellId.value()));
+            return false;
+        }
+        else
+        {
+            CBattleEntity* PCastTarget = nullptr;
+            if (PSpell->getValidTarget() & TARGET_SELF)
+            {
+                PCastTarget = PMob;
+            }
+            else
+            {
+                PCastTarget = PTarget;
+            }
+
+            // Check if target is in range before attempting to cast
+            if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange())
+            {
+                return false;
+            }
+
+            // Check if mob can afford to cast this spell
+            if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+            {
+                return false;
+            }
+        }
+
         CastSpell(chosenSpellId.value());
         return true;
     }

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,22 +19,21 @@
 ===========================================================================
 */
 
+#include "0x039_mapschedulor.h"
+
 #include "entities/baseentity.h"
 
-#include "entity_visual.h"
-
-CEntityVisualPacket::CEntityVisualPacket(CBaseEntity* PEntity, const char type[4])
+GP_SERV_COMMAND_MAPSCHEDULOR::GP_SERV_COMMAND_MAPSCHEDULOR(const CBaseEntity* PEntity, const char type[4])
 {
-    this->setType(0x39);
-    this->setSize(0x14);
+    auto& packet = this->data();
 
     if (PEntity)
     {
-        ref<uint32>(0x04) = PEntity->id;
-        ref<uint32>(0x08) = PEntity->id;
-
-        ref<uint16>(0x10) = PEntity->targid;
-        ref<uint16>(0x12) = PEntity->targid;
+        packet.UniqueNoCas  = PEntity->id;
+        packet.UniqueNoTar  = PEntity->id;
+        packet.ActIndexCast = PEntity->targid;
+        packet.ActIndexTar  = PEntity->targid;
     }
-    std::memcpy(buffer_.data() + 0x0C, type, 4);
+
+    std::memcpy(&packet.id, type, 4);
 }

@@ -1224,6 +1224,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,806);
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,807);
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,808);
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,809);
+INSERT INTO `mob_skill_lists` VALUES ('Seiryu',278,813);
 INSERT INTO `mob_skill_lists` VALUES ('Seiryu',278,814);
 INSERT INTO `mob_skill_lists` VALUES ('Seiryu',278,815);
 INSERT INTO `mob_skill_lists` VALUES ('Seiryu',278,816);
@@ -4173,7 +4174,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2336);
 INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2337);
 INSERT INTO `mob_skill_lists` VALUES ('Dark_Ixion',2061,2338);
 
--- Next ID : 2062
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,396);
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,397);
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,398);
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,513);
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,514);
+
+-- Next ID : 2063
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

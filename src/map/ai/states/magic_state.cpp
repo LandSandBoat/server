@@ -119,10 +119,12 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", m_PEntity, m_PSpell.get(), &action);
 
     // if spell:setFlag(xi.magic.spellFlag.NO_START_MSG) is called, don't give spell start packet
-    if (!(GetSpell()->getFlag() & SPELLFLAG_NO_START_MSG))
+    if (GetSpell()->getFlag() & SPELLFLAG_NO_START_MSG)
     {
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        actionTarget.messageID = 0; // Client will not emit a message if messageID is 0
     }
+
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 }
 
 bool CMagicState::Update(timer::time_point tick)
@@ -301,10 +303,19 @@ bool CMagicState::Update(timer::time_point tick)
             PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
         }
 
-        if (m_interrupted || (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG)))
+        // Zero messageID so spells dont emit messages
+        if (GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG)
         {
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            for (auto&& act : action.actionLists)
+            {
+                for (auto&& targ : act.actionTargets)
+                {
+                    targ.messageID = 0;
+                }
+            }
         }
+
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
         Complete();
     }
@@ -435,8 +446,7 @@ bool CMagicState::HasCost()
         }
     }
     // check has mp available
-    else if (!m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT) && !(m_flags & MAGICFLAGS_IGNORE_MP) &&
-             battleutils::CalculateSpellCost(m_PEntity, GetSpell()) > m_PEntity->health.mp)
+    else if (!battleutils::CanAffordSpell(m_PEntity, GetSpell(), m_flags))
     {
         if (m_PEntity->objtype == TYPE_MOB && m_PEntity->health.maxmp == 0)
         {

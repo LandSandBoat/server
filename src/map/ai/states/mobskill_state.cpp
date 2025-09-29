@@ -70,7 +70,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         m_castTime = m_PSkill->getActivationTime();
     }
 
-    if (m_castTime > 0s && !(m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG))
+    if (m_castTime > 0s)
     {
         action_t action;
         action.id         = m_PEntity->id;
@@ -93,6 +93,13 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
             action.actiontype         = ACTION_WEAPONSKILL_START;
             actionList.ActionTargetID = action.id;
         }
+
+        // Don't emit message
+        if (m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG)
+        {
+            actionTarget.messageID = 0;
+        }
+
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
         // face toward target // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
@@ -147,10 +154,21 @@ bool CMobSkillState::Update(timer::time_point tick)
     {
         action_t action;
         m_PEntity->OnMobSkillFinished(*this, action);
-        if (!(m_PSkill->getFlag() & SKILLFLAG_NO_FINISH_MSG))
+
+        // Zero message ID
+        if (m_PSkill->getFlag() & SKILLFLAG_NO_FINISH_MSG)
         {
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            for (auto&& act : action.actionLists)
+            {
+                for (auto&& targ : act.actionTargets)
+                {
+                    targ.messageID = 0;
+                }
+            }
         }
+
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }

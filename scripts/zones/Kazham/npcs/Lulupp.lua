@@ -108,8 +108,6 @@ entity.onTrigger = function(player, npc)
         elseif progress >= 1 or failed >= 2 then
             player:startEvent(242) -- happy with rod
         end
-    else
-        player:startEvent(197)  -- not sure why but this cs has no text
     end
 end
 

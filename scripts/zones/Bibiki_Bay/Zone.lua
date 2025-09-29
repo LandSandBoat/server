@@ -17,9 +17,9 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        if prevZone == xi.zone.MANACLIPPER then
-            cs = xi.manaclipper.onZoneIn(player)
-        else
+        cs = xi.manaclipper.onZoneIn(player, prevZone)
+
+        if cs == -1 then
             player:setPos(669.917, -23.138, 911.655, 111)
         end
     end
@@ -32,11 +32,14 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    xi.manaclipper.aboard(player, triggerArea:getTriggerAreaID(), true)
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+    if triggerAreaID <= 2 then
+        player:setLocalVar('[manaclipper]aboard', triggerAreaID)
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    xi.manaclipper.aboard(player, triggerArea:getTriggerAreaID(), false)
+    player:setLocalVar('[manaclipper]aboard', 0)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)

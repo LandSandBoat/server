@@ -665,7 +665,7 @@ INSERT INTO `status_effects` VALUES (793,'ninjutsu_ele_debuff',544,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (794,'healing',1048948,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (795,'leavegame',1048948,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (796,'haste_samba_haste',320,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (797,'teleport',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (797,'teleport',0x00400020,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (798,'chainbound',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (799,'skillchain',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (800,'dynamis',33554432,0,0,0,0,0,0,0,0);

@@ -1,4 +1,9 @@
+add_subdirectory(c2s)
+add_subdirectory(s2c)
+
 set(PACKET_SOURCES
+    ${PACKET_C2S_SOURCES}
+    ${PACKET_S2C_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/action.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/action.h
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
@@ -86,8 +91,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_visual.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_visual.h
     ${CMAKE_CURRENT_SOURCE_DIR}/event.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/event.h
     ${CMAKE_CURRENT_SOURCE_DIR}/event_string.cpp

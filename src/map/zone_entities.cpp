@@ -40,9 +40,7 @@
 
 #include "packets/change_music.h"
 #include "packets/char_sync.h"
-#include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
-#include "packets/entity_visual.h"
 #include "packets/wide_scan.h"
 
 #include "lua/luautils.h"
@@ -54,8 +52,6 @@
 #include "utils/petutils.h"
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
-
-#include <unordered_set>
 
 namespace
 {

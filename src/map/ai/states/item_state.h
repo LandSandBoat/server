@@ -19,8 +19,7 @@
  ===========================================================================
  */
 
-#ifndef _CITEM_STATE_H
-#define _CITEM_STATE_H
+#pragma once
 
 #include "state.h"
 
@@ -36,28 +35,28 @@ public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
     void UpdateTarget(CBaseEntity* target) override;
     void UpdateTarget(uint16 targid) override;
-    bool Update(timer::time_point tick) override;
+    auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
-    bool CanChangeState() override;
-    bool CanFollowPath() override
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override
     {
         return false;
     }
 
-    bool CanInterrupt() override
+    auto CanInterrupt() -> bool override
     {
         return m_interruptable;
     }
 
-    void TryInterrupt(CBattleEntity* PAttacker) override;
+    void TryInterrupt(CBattleEntity* PTarget) override;
 
-    CItemUsable* GetItem();
+    CItemUsable* GetItem() const;
 
     void InterruptItem(action_t& action);
     void FinishItem(action_t& action);
 
 protected:
-    bool HasMoved();
+    bool HasMoved() const;
 
     CCharEntity*    m_PEntity;
     CItemUsable*    m_PItem;
@@ -69,5 +68,3 @@ protected:
     bool            m_interrupted{ false };
     bool            m_interruptable{ true };
 };
-
-#endif

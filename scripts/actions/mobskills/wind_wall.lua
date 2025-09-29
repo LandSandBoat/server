@@ -15,7 +15,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, 50, 0, 60))
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 15, 60)
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, 200, 0, duration))
 
     return xi.effect.EVASION_BOOST
 end

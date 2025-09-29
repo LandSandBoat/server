@@ -113,7 +113,24 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
 
     if isH2H then
         local naturalH2hDamage = math.floor(actor:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
-        if physicalAttackType == xi.physicalAttackType.KICK then
+        local kickDamage = 0
+
+        if actor:isMob() then
+            local mobH2HPenalty = 1.0
+            local regionID      = actor:getCurrentRegion()
+
+            if regionID <= xi.region.LIMBUS then
+                mobH2HPenalty = 0.425 -- Vanilla - COP
+            else
+                mobH2HPenalty = 0.650
+            end
+
+            if physicalAttackType == xi.physicalAttackType.KICK then
+                kickDamage = actor:getMod(xi.mod.KICK_DMG)
+            end
+
+            baseDamage = (actor:getWeaponDmg() + kickDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(actor, target)) * mobH2HPenalty
+        elseif physicalAttackType == xi.physicalAttackType.KICK then
             baseDamage = naturalH2hDamage + actor:getMod(xi.mod.KICK_DMG) + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(actor, target)
         else
             baseDamage = naturalH2hDamage + actor:getWeaponDmg() + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(actor, target)

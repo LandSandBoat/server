@@ -258,6 +258,7 @@ namespace battleutils
     timer::duration CalculateSpellCastTime(CBattleEntity*, CMagicState*);
     uint16          CalculateSpellCost(CBattleEntity*, CSpell*);
     timer::duration CalculateSpellRecastTime(CBattleEntity*, CSpell*);
+    bool            CanAffordSpell(CBattleEntity* PEntity, CSpell* PSpell, uint8 flags = 0);
     int16           CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
     int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
     bool            RemoveAmmo(CCharEntity*, int quantity = 1);

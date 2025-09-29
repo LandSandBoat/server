@@ -46,7 +46,7 @@ return {
     ['Taza']            = { text = ID.text.WAAG_DEEG_SHOP_DIALOG },
     ['Teigero-Bangero'] = { event = 34 },
     ['Tuh_Almodankha']  = { event = 10013 },
-    ['Vhana_Ekgaklywha'] = { text = ID.text.VHANA_DEFAULT },
+    ['Vhana_Ehgaklywha'] = { text = ID.text.VHANA_DEFAULT },
     ['Venika']          = { event = 110 },
     ['Yamilla']         = { event = 109 },
     ['Yatniel']         = { event = 10028 },

@@ -138,6 +138,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_NO_ELIGIBLE_ROLL           = 428, // There are no rolls eligible for Double-Up. Unable to use ability.
     MSGBASIC_ROLL_ALREADY_ACTIVE        = 429, // The same roll is already active on the <player>.
     MSGBASIC_MAGIC_STEAL                = 430, // <caster> casts <spell>. <number> of <target>'s effects is drained.
+    MSGBASIC_CANNOT_USE_ITEMS           = 445, // You cannot use items at this time.
     MSGBASIC_CANNOT_ATTACK_TARGET       = 446, // You cannot attack that target
     MSGBASIC_NO_FINISHINGMOVES          = 524,
     MSGBASIC_PET_CANNOT_DO_ACTION       = 574, // <player>'s pet is currently unable to perform that action.

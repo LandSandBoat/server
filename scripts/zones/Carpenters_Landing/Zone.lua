@@ -19,21 +19,19 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        cs = xi.barge.onZoneIn(player, prevZone)
-
-        if cs == -1 then
-            player:setPos(6.509, -9.163, -819.333, 239)
+        if prevZone == xi.zone.PHANAUET_CHANNEL then
+            return xi.barge.onZoneIn(player, prevZone)
         end
+
+        player:setPos(6.509, -9.163, -819.333, 239)
     end
 
-    return cs
+    return -1
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

@@ -14,8 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getMainLvl() - 2) -- Base damage is level * 2
     mob:setMod(xi.mod.AGI, 76 - mob:getStat(xi.mod.AGI))        -- Jimmy indicates AGI for Omyovra should be 76 or so
-    -- Yovra have a +40% bonus to evasion and a 50% bonus to defense
-    mob:addMod(xi.mod.EVA, mob:getStat(xi.mod.EVA) * 0.4) -- TODO: need better evasion mod
+    -- Yovra have a +50% bonus to defense
     mob:addMod(xi.mod.DEF, mob:getStat(xi.mod.DEF) * 0.5)
     mob:hideName(true)
     mob:setUntargetable(true)

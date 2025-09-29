@@ -55,30 +55,155 @@ namespace mobutils
 
     uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
-        uint16 lvl    = PMob->GetMLevel();
-        int8   bonus  = 2;
-        uint16 damage = 0;
+        // https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit?pli=1&gid=1743955268#gid=1743955268
+        // Basic base damage formulas for reference:
+        // Normal Mobs(Non H2H): (Level * Multiplier) + Offset
+        // Normal MNK mobs     : (Level * Multiplier(Default: 1.0000)) + Offset (Auto attacks get a penalty multiplier)
+        // "Special" MNK mobs  : (Level + Offset) * Multiplier(1.6667) (Auto attacks get a penalty multiplier)
+
+        auto   mobZoneId      = PMob->getZone();
+        uint16 mobLvl         = PMob->GetMLevel();
+        int8   offset         = 0;
+        int8   rangedOffset   = 0;
+        float  multiplier     = PMob->m_dmgMult / 100.0f;
+        int32  damage         = mobLvl;
+        int16  damageModifers = 0;
+
+        // Zones from base game/expansions have different base offsets, multipliers, etc.
+        REGION_TYPE regionID = PMob->loc.zone->GetRegionID();
+
+        switch (regionID)
+        {
+            // Vanilla, ROTZ, COP Regions
+            case REGION_TYPE::RONFAURE:
+            case REGION_TYPE::ZULKHEIM:
+            case REGION_TYPE::NORVALLEN:
+            case REGION_TYPE::GUSTABERG:
+            case REGION_TYPE::DERFLAND:
+            case REGION_TYPE::SARUTABARUTA:
+            case REGION_TYPE::KOLSHUSHU:
+            case REGION_TYPE::ARAGONEU:
+            case REGION_TYPE::FAUREGANDI:
+            case REGION_TYPE::VALDEAUNIA:
+            case REGION_TYPE::QUFIMISLAND:
+            case REGION_TYPE::LITELOR:
+            case REGION_TYPE::KUZOTZ:
+            case REGION_TYPE::VOLLBOW:
+            case REGION_TYPE::ELSHIMO_LOWLANDS:
+            case REGION_TYPE::ELSHIMO_UPLANDS:
+            case REGION_TYPE::TULIA:
+            case REGION_TYPE::MOVALPOLOS:
+            case REGION_TYPE::TAVNAZIA:
+            case REGION_TYPE::SANDORIA:
+            case REGION_TYPE::BASTOK:
+            case REGION_TYPE::WINDURST:
+            case REGION_TYPE::JEUNO:
+            case REGION_TYPE::DYNAMIS:
+            case REGION_TYPE::TAVNAZIAN_MARQ:
+            case REGION_TYPE::PROMYVION:
+            case REGION_TYPE::LUMORIA:
+            case REGION_TYPE::LIMBUS:
+                offset       = 2;
+                rangedOffset = 5;
+                break;
+            // TOAU Regions
+            case REGION_TYPE::WEST_AHT_URHGAN:
+            case REGION_TYPE::MAMOOL_JA_SAVAGE:
+            case REGION_TYPE::HALVUNG:
+            case REGION_TYPE::ARRAPAGO:
+            case REGION_TYPE::ALZADAAL:
+                offset       = 10;
+                rangedOffset = 12;
+                break;
+
+            // WOTG Regions
+            case REGION_TYPE::RONFAURE_FRONT:
+            case REGION_TYPE::NORVALLEN_FRONT:
+            case REGION_TYPE::GUSTABERG_FRONT:
+            case REGION_TYPE::DERFLAND_FRONT:
+            case REGION_TYPE::SARUTA_FRONT:
+            case REGION_TYPE::ARAGONEAU_FRONT:
+            case REGION_TYPE::FAUREGANDI_FRONT:
+            case REGION_TYPE::VALDEAUNIA_FRONT:
+                offset       = 11;
+                rangedOffset = 13;
+                break;
+
+            // Other
+            case REGION_TYPE::ABYSSEA:
+            case REGION_TYPE::THE_THRESHOLD:
+            case REGION_TYPE::ABDHALJS: // TODO: Need data for ABDHALJS zones.
+                offset       = 11;
+                rangedOffset = 13;
+                break;
+
+            // SOA Regions
+            case REGION_TYPE::ADOULIN_ISLANDS:
+            case REGION_TYPE::EAST_ULBUKA:
+                offset       = 11; // TODO: Need more data for Lvl 100+ mobs.
+                rangedOffset = 13;
+                break;
+
+            // Default Fallback
+            default:
+                offset       = 2;
+                rangedOffset = 5;
+                break;
+        }
+
+        offset += PMob->getMobMod(MOBMOD_DAMAGE_OFFSET);
 
         if (slot == SLOT_RANGED)
         {
-            bonus = 5;
+            offset = rangedOffset;
+            offset += PMob->getMobMod(MOBMOD_RANGED_DAMAGE_OFFSET);
         }
 
-        if (lvl == 1)
+        // Normal mobs in beginner zones have the offset lowered by 1.
+        // Excluded NMs for now for things like Voidwatch Mobs.
+        if (mobZoneId != 0 && PMob->m_Type != MOBTYPE_NOTORIOUS && (mobZoneId == ZONE_WEST_RONFAURE || mobZoneId == ZONE_EAST_RONFAURE || mobZoneId == ZONE_NORTH_GUSTABERG || mobZoneId == ZONE_SOUTH_GUSTABERG || mobZoneId == ZONE_WEST_SARUTABARUTA || mobZoneId == ZONE_EAST_SARUTABARUTA))
         {
-            bonus = 0;
+            offset -= 1;
         }
 
-        damage = lvl + bonus;
+        // Clamp to 0 for edge cases that might cause the offset go negative.
+        if (offset < 0)
+        {
+            offset = 0;
+        }
 
-        damage = (uint16)(damage * PMob->m_dmgMult / 100.0f);
-
+        // Add this mod to increase a mobs damage by a base amount
         if (PMob->getMobMod(MOBMOD_WEAPON_BONUS) != 0)
         {
-            damage = (uint16)(damage + PMob->getMobMod(MOBMOD_WEAPON_BONUS)); // Add this mod to increase a mobs damage by a base amount
+            damageModifers = PMob->getMobMod(MOBMOD_WEAPON_BONUS);
         }
 
-        return damage;
+        // Add damage mods to the appropriate slot's base damage if the mob has them.
+        if (slot == SLOT_MAIN)
+        {
+            damageModifers += PMob->getMod(Mod::MAIN_DMG_RATING);
+        }
+        else if (slot == SLOT_SUB)
+        {
+            damageModifers += PMob->getMod(Mod::SUB_DMG_RATING);
+        }
+        else if (slot == SLOT_RANGED)
+        {
+            damageModifers += PMob->getMod(Mod::RANGED_DMG_RATING);
+        }
+
+        damage += damageModifers;
+
+        if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) != 0)
+        {
+            multiplier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) / 100.0f;
+        }
+
+        damage = damage * multiplier + offset;
+
+        damage = std::clamp<int32>(damage, 1, 65535);
+
+        return static_cast<uint16>(damage);
     }
 
     // Gest base skill rankings for ACC/ATT/EVA/MEVA

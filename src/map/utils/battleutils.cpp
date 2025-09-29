@@ -6370,6 +6370,39 @@ namespace battleutils
         return std::clamp<int16>(cost, 0, 9999);
     }
 
+    bool CanAffordSpell(CBattleEntity* PEntity, CSpell* PSpell, uint8 flags)
+    {
+        if (PEntity == nullptr)
+        {
+            return false;
+        }
+
+        // Check if entity bypasses MP costs
+        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT) ||
+            (flags & MAGICFLAGS_IGNORE_MP))
+        {
+            return true;
+        }
+
+        // Special handling for mobs with NO_SPELL_COST modifier
+        if (auto PMob = dynamic_cast<CMobEntity*>(PEntity))
+        {
+            if (PMob->getMobMod(MOBMOD_NO_SPELL_COST) > 0)
+            {
+                return true;
+            }
+        }
+
+        // Check if spell has MP cost and if entity has enough MP
+        if (PSpell->hasMPCost())
+        {
+            uint16 spellCost = CalculateSpellCost(PEntity, PSpell);
+            return PEntity->health.mp >= spellCost;
+        }
+
+        return true; // No MP cost required
+    }
+
     timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
     {
         if (PSpell == nullptr)

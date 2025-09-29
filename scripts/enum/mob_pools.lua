@@ -32,8 +32,8 @@ xi.mobPools =
     AMNAF_PSYCHEFLAYER     = 5310, -- Reset enmity on sleepga
     FAHRAFAHR_THE_BLOODIED = 6750, -- Reset Enmity on Drop Hammer
     HPEMDE_NO_DIVING       = 7033, -- Hpemde that don't dive, such as those in the north end of Al'Taieu
-    EOZDEI_LEFT            = 7092, -- Eo'zdei left rotation
-    AWZDEI_LEFT            = 7093, -- Aw'zdei left rotation
-    AWZDEI_FAST_R          = 7094, -- Aw'zdei fast right rotation
-    AWZDEI_FAST_L          = 7095, -- Aw'zdei fast left rotation
+    EOZDEI_LEFT            = 7095, -- Eo'zdei left rotation
+    AWZDEI_LEFT            = 7096, -- Aw'zdei left rotation
+    AWZDEI_FAST_R          = 7097, -- Aw'zdei fast right rotation
+    AWZDEI_FAST_L          = 7098, -- Aw'zdei fast left rotation
 }

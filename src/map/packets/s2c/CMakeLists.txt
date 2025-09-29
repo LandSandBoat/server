@@ -1,0 +1,6 @@
+set(PACKET_S2C_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/base.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
+    PARENT_SCOPE
+)

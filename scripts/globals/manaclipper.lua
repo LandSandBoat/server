@@ -1,6 +1,9 @@
 -----------------------------------
 -- Manaclipper
--- https://ffxiclopedia.fandom.com/wiki/Manaclipper
+-- https://www.bg-wiki.com/ffxi/Manaclipper
+-- TODO timed npc messages:
+--      - When a barge arrives (not onTransportEvent, earlier than that)
+--      - various chats while the barge goes up/down the river
 -----------------------------------
 xi = xi or {}
 xi.manaclipper = xi.manaclipper or {}
@@ -28,98 +31,115 @@ xi.manaclipper.location =
     MANACLIPPER     = 2,
 }
 
+-- times are minutes past midnight, and aligns with the transports.sql entries.
+-- Since the cycle is every 720 minutes, 2 cycles are listed for simpler logic
+-- time for arrivalStart: time_offset
+-- time for arrivalEnd:   time_offset + time_anim_arrive
+-- time for departStart:  time_offset + time_anim_arrive + time_waiting
+-- time for departEnd:    time_offset + time_anim_arrive + time_waiting + time_anim_depart
+-- time for ride on the manaclipper to end: time_offset + time_anim_arrive - 10
 local manaclipperSchedule =
 {
     [xi.manaclipper.location.SUNSET_DOCKS] =
     {
-        { time =   10, act = act.ARRIVE, dest = dest.DHALMEL_ROCK },      -- 00:10
-        { time =   50, act = act.DEPART, dest = dest.DHALMEL_ROCK },      -- 00:50
-        { time =  290, act = act.ARRIVE, dest = dest.PURGONORGO_ISLE },   -- 04:50
-        { time =  330, act = act.DEPART, dest = dest.PURGONORGO_ISLE },   -- 05:30
-        { time =  730, act = act.ARRIVE, dest = dest.MALIYAKALEYA_REEF }, -- 12:10
-        { time =  770, act = act.DEPART, dest = dest.MALIYAKALEYA_REEF }, -- 12:50
-        { time = 1010, act = act.ARRIVE, dest = dest.PURGONORGO_ISLE },   -- 16:50
-        { time = 1050, act = act.DEPART, dest = dest.PURGONORGO_ISLE },   -- 17:30
-        { time = 1450, act = act.ARRIVE, dest = dest.DHALMEL_ROCK },      -- 24:10
+        { endTime = utils.timeStringToMinutes('00:10'), act = act.ARRIVE, dest = dest.DHALMEL_ROCK },
+        { endTime = utils.timeStringToMinutes('00:50'), act = act.DEPART, dest = dest.DHALMEL_ROCK },
+        { endTime = utils.timeStringToMinutes('04:50'), act = act.ARRIVE, dest = dest.PURGONORGO_ISLE },
+        { endTime = utils.timeStringToMinutes('05:30'), act = act.DEPART, dest = dest.PURGONORGO_ISLE },
+        { endTime = utils.timeStringToMinutes('12:10'), act = act.ARRIVE, dest = dest.MALIYAKALEYA_REEF },
+        { endTime = utils.timeStringToMinutes('12:50'), act = act.DEPART, dest = dest.MALIYAKALEYA_REEF },
+        { endTime = utils.timeStringToMinutes('16:50'), act = act.ARRIVE, dest = dest.PURGONORGO_ISLE },
+        { endTime = utils.timeStringToMinutes('17:30'), act = act.DEPART, dest = dest.PURGONORGO_ISLE },
     },
 
     [xi.manaclipper.location.PURGONORGO_ISLE] =
     {
-        { time =  510, act = act.ARRIVE, dest = dest.SUNSET_DOCKS }, -- 08:30
-        { time =  555, act = act.DEPART, dest = dest.SUNSET_DOCKS }, -- 09:15
-        { time = 1230, act = act.ARRIVE, dest = dest.SUNSET_DOCKS }, -- 20:30
-        { time = 1275, act = act.DEPART, dest = dest.SUNSET_DOCKS }, -- 21:15
-        { time = 1950, act = act.ARRIVE, dest = dest.SUNSET_DOCKS }, -- 32:30
+        { endTime = utils.timeStringToMinutes('08:40'), act = act.ARRIVE, dest = dest.SUNSET_DOCKS },
+        { endTime = utils.timeStringToMinutes('09:15'), act = act.DEPART, dest = dest.SUNSET_DOCKS },
+        { endTime = utils.timeStringToMinutes('20:40'), act = act.ARRIVE, dest = dest.SUNSET_DOCKS },
+        { endTime = utils.timeStringToMinutes('21:15'), act = act.DEPART, dest = dest.SUNSET_DOCKS },
     },
 
     [xi.manaclipper.location.MANACLIPPER] =
     {
-        { time =   10, act = act.ARRIVE, route = dest.SUNSET_DOCKS },      -- 00:10
-        { time =  290, act = act.ARRIVE, route = dest.DHALMEL_ROCK },      -- 04:50
-        { time =  510, act = act.ARRIVE, route = dest.PURGONORGO_ISLE },   -- 08:30
-        { time =  730, act = act.ARRIVE, route = dest.SUNSET_DOCKS },      -- 12:10
-        { time = 1010, act = act.ARRIVE, route = dest.MALIYAKALEYA_REEF }, -- 16:50
-        { time = 1230, act = act.ARRIVE, route = dest.PURGONORGO_ISLE },   -- 20:30
-        { time = 1450, act = act.ARRIVE, route = dest.SUNSET_DOCKS },      -- 24:10
+        { endTime = utils.timeStringToMinutes('00:10'), route = dest.SUNSET_DOCKS },
+        { endTime = utils.timeStringToMinutes('04:50'), route = dest.DHALMEL_ROCK },
+        { endTime = utils.timeStringToMinutes('08:40'), route = dest.PURGONORGO_ISLE },
+        { endTime = utils.timeStringToMinutes('12:10'), route = dest.SUNSET_DOCKS },
+        { endTime = utils.timeStringToMinutes('16:50'), route = dest.MALIYAKALEYA_REEF },
+        { endTime = utils.timeStringToMinutes('20:40'), route = dest.PURGONORGO_ISLE },
     },
 }
+
+local getNextEvent = function(currentTime, schedule)
+    local nextEvent = schedule[1]
+    if
+        schedule[#schedule].endTime <= currentTime or -- currentTime after the last event
+        schedule[1].endTime > currentTime             -- currentTime before first event
+    then
+        -- next event is first of the day
+        return schedule[1]
+    end
+
+    local prevEventEndTime = 0
+    for i, currEvent in ipairs(schedule) do
+        if
+            prevEventEndTime <= currentTime and
+            currEvent.endTime > currentTime
+        then
+            nextEvent = currEvent
+
+            break
+        end
+
+        prevEventEndTime = currEvent.endTime
+    end
+
+    return nextEvent
+end
 
 xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
     local schedule = manaclipperSchedule[location]
 
-    if schedule then
-        local currentTime = VanadielHour() * 60 + VanadielMinute()
-        local nextEvent = nil
+    if not schedule then
+        printf('[warning] bad location %i in xi.manaclipper.timekeeperOnTrigger', location)
+    end
 
-        for i = 1, #schedule do
-            if schedule[i].time > currentTime then
-                nextEvent = schedule[i]
-                break
-            end
-        end
+    local currentTime = VanadielHour() * 60 + VanadielMinute()
+    local nextEvent = getNextEvent(currentTime, schedule)
 
-        if not nextEvent then
-            return
-        end
+    local gameMins = nextEvent.endTime - currentTime
+    if nextEvent.endTime < currentTime then
+        -- next event is before current time because it's near the end of the day, add a cycle
+        -- nextEvent.endTime - currentTime underflows so add 1440 first
+        gameMins = 1440 + nextEvent.endTime - currentTime
+    end
 
-        local gameMins = nextEvent.time - currentTime
-        local earthSecs = gameMins * 60 / 25 -- one earth second is 25 game seconds
+    local earthSecs = gameMins * 60 / 25 -- one earth second is 25 game seconds
 
-        if location == xi.manaclipper.location.MANACLIPPER then
-            local earthMins = math.ceil(earthSecs / 60)
-            local gameHours = math.floor(gameMins / 60)
+    if location == xi.manaclipper.location.MANACLIPPER then
+    -- earthSecs is passed to dock timekeepers and they floor to report minutes, do the same here
+        local earthMins = math.floor(earthSecs / 60)
+        local gameHours = math.floor(gameMins / 60)
+        if earthMins ~= 0 then
             player:startEvent(eventId, earthMins, gameHours, nextEvent.route)
         else
-            player:startEvent(eventId, earthSecs, nextEvent.act, 0, nextEvent.dest)
+            -- arriving shortly
+            player:startEvent(eventId - 1, 0, 0, nextEvent.route)
         end
     else
-        printf('[warning] bad location %i in xi.manaclipper.timekeeperOnTrigger', location)
+        player:startEvent(eventId, earthSecs, nextEvent.act, 0, nextEvent.dest)
     end
 end
 
-xi.manaclipper.aboard = function(player, triggerArea, isAboard)
-    player:setCharVar('[manaclipper]aboard', isAboard and triggerArea or 0)
-end
-
-xi.manaclipper.onZoneIn = function(player)
+xi.manaclipper.onZoneIn = function(player, prevZone)
     local zoneId = player:getZoneID()
 
     -- zoning onto manaclipper. set [manaclipper]arrivalEventId based on schedule.
     if zoneId == xi.zone.MANACLIPPER then
         local schedule = manaclipperSchedule[xi.manaclipper.location.MANACLIPPER]
         local currentTime = VanadielHour() * 60 + VanadielMinute()
-        local nextEvent = nil
-
-        for i = 1, #schedule do
-            if schedule[i].time > currentTime then
-                nextEvent = schedule[i]
-                break
-            end
-        end
-
-        if not nextEvent then
-            return -1
-        end
+        local nextEvent = getNextEvent(currentTime, schedule)
 
         if nextEvent.route == dest.PURGONORGO_ISLE then
             player:setCharVar('[manaclipper]arrivalEventId', 13) -- Bibiki event 13 sets pos then chains to 11: arrive at Purgonorgo Isle
@@ -127,23 +147,28 @@ xi.manaclipper.onZoneIn = function(player)
             player:setCharVar('[manaclipper]arrivalEventId', 12) -- Bibiki event 12 sets pos then chains to 10: arrive at Sunset Docks
         end
 
-    -- zoning into bibiki bay. play the eventId stored in [manaclipper]arrivalEventId.
-    elseif zoneId == xi.zone.BIBIKI_BAY then
+    -- zoning into bibiki bay from the manaclipper. play the eventId stored in [manaclipper]arrivalEventId.
+    elseif
+        zoneId == xi.zone.BIBIKI_BAY and
+        prevZone == xi.zone.MANACLIPPER
+    then
         local eventId = player:getCharVar('[manaclipper]arrivalEventId')
         player:setCharVar('[manaclipper]arrivalEventId', 0)
 
-        if eventId > 0 then
-            return eventId
+        -- game client updates player's position
+        if eventId == 13 then
+            return 13
         else
-            player:setPos(669.917, -23.138, 911.655, 111)
-            return -1
+            return 12
         end
     end
+
+    return -1
 end
 
 xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
     local ID = zones[player:getZoneID()]
-    local aboard = player:getCharVar('[manaclipper]aboard')
+    local aboard = player:getLocalVar('[manaclipper]aboard')
 
     -- leaving Sunset Docks. must be standing in trigger area 1. must have a ticket.
     if aboard == 1 then
@@ -151,16 +176,17 @@ xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
             player:delKeyItem(xi.ki.MANACLIPPER_TICKET)
             player:startEvent(14)
         elseif player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) then
-            local uses = player:getCharVar('Manaclipper_Ticket')
+            local uses = player:getCharVar('Manaclipper_Ticket') - 1
 
-            if uses == 1 then
+            if uses <= 0 then
+                uses = 0
                 player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET)
                 player:delKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET)
             else
-                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET, uses - 1)
+                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET, uses)
             end
 
-            player:setCharVar('Manaclipper_Ticket', uses - 1)
+            player:setCharVar('Manaclipper_Ticket', uses)
             player:startEvent(14)
         else
             player:messageSpecial(ID.text.NO_BILLET, xi.ki.MANACLIPPER_TICKET)

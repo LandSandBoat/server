@@ -62,7 +62,6 @@ local pathNodes =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setLocalVar('keepPathingOnTrigger', 1)
     npc:setLocalVar('path', 1)
     npc:setPos(xi.path.first(pathNodes))
     npc:pathThrough(pathNodes, xi.path.flag.COORDS)

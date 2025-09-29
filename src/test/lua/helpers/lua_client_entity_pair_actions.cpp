@@ -183,7 +183,7 @@ void CLuaClientEntityPairActions::useItem(CLuaBaseEntity* target, const uint8 sl
     const auto packet             = parent_->packets().createPacket(0x37);
     auto*      itemPacket         = packet->as<GP_CLI_COMMAND_ITEM_USE>();
     itemPacket->UniqueNo          = target->getID();
-    itemPacket->ItemNum           = 1;
+    itemPacket->ItemNum           = 0;
     itemPacket->ActIndex          = target->getTargID();
     itemPacket->PropertyItemIndex = slotId;
     itemPacket->Category          = storageId.value_or(0);
