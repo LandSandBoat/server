@@ -188,14 +188,14 @@ local npcToDoorMap = {
     [zones[xi.zone.PORT_BASTOK].npc.AIRSHIP_DOOR_OFFSET + 3]           = { zones[xi.zone.PORT_BASTOK].npc.AIRSHIP_DOOR_OFFSET + 3, check = isGM },
     [zones[xi.zone.PORT_WINDURST].npc.AIRSHIP_DOOR_OFFSET + 0]         = { zones[xi.zone.PORT_WINDURST].npc.AIRSHIP_DOOR_OFFSET + 0, check = isGM },
     [zones[xi.zone.PORT_WINDURST].npc.AIRSHIP_DOOR_OFFSET + 1]         = { zones[xi.zone.PORT_WINDURST].npc.AIRSHIP_DOOR_OFFSET + 1, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 1]            = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 1, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 3]            = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 3, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 5]            = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 5, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 7]            = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 7, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 9]            = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 9, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 11]           = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 11, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 13]           = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 13, check = isGM },
-    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 15]           = {zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 15, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 1]            = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 1, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 3]            = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 3, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 5]            = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 5, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 7]            = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 7, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 9]            = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 9, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 11]           = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 11, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 13]           = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 13, check = isGM },
+    [zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 15]           = { zones[xi.zone.PORT_JEUNO].npc.AIRSHIP_DOOR_OFFSET + 15, check = isGM },
     -- Adjusting value for Pincerstones and Portals. Used for mount purposes
     [zones[xi.zone.RUAUN_GARDENS].npc.PINCERSTONE_OFFSET + 0]  = { zones[xi.zone.RUAUN_GARDENS].npc.PORTAL_OFFSET + 0, closeSeconds = 120, }, -- Main to Seriyu
     [zones[xi.zone.RUAUN_GARDENS].npc.PINCERSTONE_OFFSET + 2]  = { zones[xi.zone.RUAUN_GARDENS].npc.PORTAL_OFFSET + 1, closeSeconds = 120, }, -- Seriyu to Main
