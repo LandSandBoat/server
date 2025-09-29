@@ -75,6 +75,10 @@ zones[xi.zone.CAEDARVA_MIRE] =
         LOGGING             = GetTableOfIDs('Logging_Point'),
         RUNIC_PORTAL_AZOUPH = GetFirstID('Runic_Portal_Azouph'),
         RUNIC_PORTAL_DVUCCA = GetFirstID('Runic_Portal_Dvucca'),
+        TYAMAH              = GetFirstID('Tyamah'),
+        NASHEEFA            = GetFirstID('Nasheefa'),
+        NUIMAHN             = GetFirstID('Nuimahn'),
+        KWADAAF             = GetFirstID('Kwadaaf'),
     },
 }
 

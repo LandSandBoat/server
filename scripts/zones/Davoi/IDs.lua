@@ -57,10 +57,12 @@ zones[xi.zone.DAVOI] =
     },
     npc =
     {
-        JAR              = GetFirstID('Jar'),
-        HIDE_FLAP_OFFSET = GetFirstID('Hide_Flap_1'),
-        STORAGE_HOLE     = GetFirstID('Storage_Hole'),
-        TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
+        JAR               = GetFirstID('Jar'),
+        HIDE_FLAP_OFFSET  = GetFirstID('Hide_Flap_1'),
+        STORAGE_HOLE      = GetFirstID('Storage_Hole'),
+        TREASURE_CHEST    = GetFirstID('Treasure_Chest'),
+        WALL_OF_DARK_ARTS = GetFirstID('_459'),
+        WALL_OF_BANISHING = GetFirstID('_45c'),
     },
 }
 

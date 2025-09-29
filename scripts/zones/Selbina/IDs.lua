@@ -45,6 +45,8 @@ zones[xi.zone.SELBINA] =
     npc =
     {
         EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
+        FERRY_GUARD_OFFSET = GetFirstID('Raging_Tiger'),
+        FERRY_BLOCKER_OFFSET = GetFirstID('_6wy'),
     },
 }
 

@@ -44,6 +44,8 @@ zones[xi.zone.MHAURA] =
     {
         LAUGHING_BISON  = GetFirstID('Laughing_Bison'),
         EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
+        FERRY_GUARD_OFFSET = GetFirstID('Condor_Eye'),
+        FERRY_BLOCKER_OFFSET = GetFirstID('_6xu'),
     },
 }
 

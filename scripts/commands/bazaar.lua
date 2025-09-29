@@ -13,7 +13,7 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
-    if player:getAnimation() == 44 then
+    if player:getAnimation() == xi.animation.SYNTH then
         player:printToPlayer('You cannot do that while crafting. Cheater.')
         return
     end
@@ -22,15 +22,15 @@ commandObj.onTrigger = function(player)
     local prevZone = player:getPreviousZone()
 
     if
-        zone == 230 or zone == 50 or zone == 53 or zone == 231 or
-        zone == 232 or zone == 233 or zone == 234 or zone == 235 or
-        zone == 236 or zone == 237 or zone == 238 or zone == 239 or
-        zone == 240 or zone == 241 or zone == 242 or zone == 243 or
-        zone == 244 or zone == 245 or zone == 246 or zone == 247 or
-        zone == 48
+        zone == xi.zone.NORTHERN_SAN_DORIA or zone == xi.zone.AHT_URHGAN_WHITEGATE or zone == xi.zone.NASHMAU or zone == xi.zone.SOUTHERN_SAN_DORIA or
+        zone == xi.zone.PORT_SAN_DORIA or zone == xi.zone.CHATEAU_DORAGUILLE or zone == xi.zone.BASTOK_MINES or zone == xi.zone.BASTOK_MARKETS or
+        zone == xi.zone.PORT_BASTOK or zone == xi.zone.METALWORKS or zone == xi.zone.WINDURST_WATERS or zone == xi.zone.WINDURST_WALLS or
+        zone == xi.zone.PORT_WINDURST or zone == xi.zone.WINDURST_WOODS or zone == xi.zone.HEAVENS_TOWER or zone == xi.zone.RULUDE_GARDENS or
+        zone == xi.zone.UPPER_JEUNO or zone == xi.zone.LOWER_JEUNO or zone == xi.zone.PORT_JEUNO or zone == xi.zone.RABAO or
+        zone == xi.zone.AL_ZAHBI
     then
-        player:setPos(0, 0, 0, 0, 222)
-    elseif zone == 222 and prevZone ~= nil then
+        player:setPos(0, 0, 0, 0, xi.zone.PROVENANCE)
+    elseif zone == xi.zone.PROVENANCE and prevZone ~= nil then
         player:setPos(0, 0, 0, 0, prevZone)
     else
         player:printToPlayer('I\'m sorry, Dave. I\'m afraid I can\'t do that.')

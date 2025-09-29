@@ -46,6 +46,8 @@ zones[xi.zone.NASHMAU] =
     },
     npc =
     {
+        FERRY_GUARD_OFFSET = GetFirstID('Bellowing_Scout'),
+        FERRY_BLOCKER_OFFSET = GetFirstID('_1h0'),
     },
 }
 

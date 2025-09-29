@@ -93,6 +93,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
     },
     npc =
     {
+        AIRSHIP_DOOR_OFFSET = GetFirstID('_6g6'),
     },
 }
 

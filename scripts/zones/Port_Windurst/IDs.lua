@@ -81,6 +81,7 @@ zones[xi.zone.PORT_WINDURST] =
     npc =
     {
         EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
+        AIRSHIP_DOOR_OFFSET = GetFirstID('_6o6'),
     },
 }
 

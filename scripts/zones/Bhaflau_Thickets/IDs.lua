@@ -58,8 +58,10 @@ zones[xi.zone.BHAFLAU_THICKETS] =
     },
     npc =
     {
-        HARVESTING = GetTableOfIDs('Harvesting_Point'),
-        HOOFPRINT  = GetFirstID('Warhorse_Hoofprint'),
+        HARVESTING       = GetTableOfIDs('Harvesting_Point'),
+        HOOFPRINT        = GetFirstID('Warhorse_Hoofprint'),
+        KAMIH_MAPOKHALAM = GetFirstID('Kamih_Mapokhalam'),
+        HAMTAIRAMTA      = GetFirstID('Hamta-Iramta'),
     },
 }
 

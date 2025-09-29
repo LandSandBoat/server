@@ -33,6 +33,7 @@ zones[xi.zone.QULUN_DOME] =
     },
     npc =
     {
+        LOCKED_DOOR_OFFSET = GetFirstID('_440'),
     },
 }
 

@@ -38,10 +38,12 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
     },
     npc =
     {
-        SCRAWLED_WRITING = GetFirstID('Scrawled_Writing'),
-        OVERSEER_BASE    = GetFirstID('Conquest_Banner'),
-        TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
-        MINING           = GetTableOfIDs('Mining_Point'),
+        SCRAWLED_WRITING   = GetFirstID('Scrawled_Writing'),
+        OVERSEER_BASE      = GetFirstID('Conquest_Banner'),
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
+        MINING             = GetTableOfIDs('Mining_Point'),
+        RUSTY_LEVER_OFFSET = GetFirstID('_0b0'),
+        DROP_FLOOR_OFFSET  = GetFirstID('_0b3'),
     },
 }
 

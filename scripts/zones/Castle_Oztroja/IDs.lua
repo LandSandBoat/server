@@ -59,6 +59,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         FIRST_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[1],
         SECOND_PASSWORD_STATUE = GetTableOfIDs('Brass_Statue')[2],
         THIRD_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[3],
+        LOCKED_DOOR            = GetFirstID('_475'),
         FINAL_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[4],
         BRASS_DOOR_FLOOR_4_H7  = GetFirstID('_477'),
         TRAP_DOOR_FLOOR_4      = GetFirstID('_478'),
