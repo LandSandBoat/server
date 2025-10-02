@@ -77,7 +77,7 @@ end
 local function handleEventUpdate(player, csid, option, npc)
     local weather      = player:getZone():getWeather()
     local lightBitMask = quest:getVar(player, 'Light')
-    local lightCounter = 0
+    local lightCounter = -1
 
     for bit = 0, 6 do
         if utils.mask.getBit(lightBitMask, bit) then
