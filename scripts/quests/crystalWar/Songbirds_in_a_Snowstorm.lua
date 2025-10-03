@@ -198,6 +198,7 @@ quest.sections =
                 end,
 
                 [4] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     quest:setVar(player, 'Prog', 5)
                 end,
 

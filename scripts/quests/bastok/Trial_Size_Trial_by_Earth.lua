@@ -78,6 +78,7 @@ quest.sections =
             {
                 [298] = function(player, csid, option, npc)
                     if option == 1 then
+                        -- Note: do not confirm trade here, as the mini tuning fork isn't used until entry
                         xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_TREMORS)
                     end
                 end,

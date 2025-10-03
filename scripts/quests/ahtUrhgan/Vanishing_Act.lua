@@ -144,6 +144,8 @@ quest.sections =
             ['Harvesting_Point'] =
             {
                 onTrade = function(player, npc, trade)
+                    -- Note: do not confirm trade here, as this is regular HELM
+                    -- TODO: this should be a chance for a berry and not guaranteed
                     if
                         npcUtil.tradeHasExactly(trade, xi.item.SICKLE) and
                         quest:getVar(player, 'Prog') == 2 and

@@ -174,6 +174,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     -- No CS for HELM in Adoulin
+                    -- Note: do not confirm trade here, as this is regular HELM
                     xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil)
                     return quest:keyItem(xi.ki.BLIGHTBERRY)
                 end,

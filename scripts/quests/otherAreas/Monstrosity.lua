@@ -58,6 +58,7 @@ local suspiciousCityNpc =
 }
 
 local tradeEventFinish = function(player, csid, option, npc)
+    player:confirmTrade()
     npcUtil.giveKeyItem(player, xi.ki.RING_OF_SUPERNAL_DISJUNCTION)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
     if species > 0 then

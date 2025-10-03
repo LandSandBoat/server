@@ -150,6 +150,7 @@ quest.sections =
             onEventFinish =
             {
                 [67] = function(player, csid, option, npc)
+                    -- Note: do not confirm trade here, as you need to take the item elsewhere.
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
