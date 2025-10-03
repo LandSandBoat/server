@@ -719,16 +719,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             elseif effect == xi.mob.ae.DISPEL and target then
                 return addEffectDispel(target, ae)
 
-            -- DISPEL
-            elseif effect == xi.mob.ae.DISPEL and target then
-                local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
-
-                if dispelledEffect == xi.effect.NONE then
-                    return 0, 0, 0
-                end
-
-                return ae.sub, ae.msg, dispelledEffect
-
             -- IMMEDIATE EFFECT
             else
                 return addEffectImmediate(mob, target, damage, ae, params)

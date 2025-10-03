@@ -58,7 +58,7 @@ public:
     REGION_TYPE getRegionID();
     ZONE_TYPE   getTypeMask();
     auto        getBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
-    WEATHER     getWeather();
+    auto        getWeather() const -> Weather;
     uint32      getUptime();
     void        reloadNavmesh();
     bool        isNavigablePoint(const sol::table& position);

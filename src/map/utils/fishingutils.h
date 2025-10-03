@@ -919,7 +919,7 @@ namespace fishingutils
     float               GetHourlyModifier(fish_t* fish);
     float               GetMoonModifier(fish_t* fish);
     uint8               GetLuckyMoonModifier();
-    float               GetWeatherModifier(CCharEntity* PChar);
+    float               GetWeatherModifier(const CCharEntity* PChar);
     uint16              CalculateStamina(int skill, uint8 count);
     uint16              CalculateAttack(bool legendary, uint8 difficulty, rod_t* rod);
     uint16              CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod);

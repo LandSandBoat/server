@@ -17,7 +17,7 @@ if(${CACHE_OPTION_INDEX} EQUAL -1)
     )
 endif()
 
-find_program(CACHE_BINARY NAMES ${CACHE_OPTION_VALUES})
+find_program(CACHE_BINARY NAMES ${CACHE_OPTION})
 if(CACHE_BINARY)
     message(STATUS "${CACHE_BINARY} found and enabled")
     set(CMAKE_CXX_COMPILER_LAUNCHER

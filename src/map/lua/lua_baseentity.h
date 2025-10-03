@@ -29,6 +29,7 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
+enum class MusicSlot : uint16_t;
 enum class ChocoboColor : uint8_t;
 class CBaseEntity;
 class CCharEntity;
@@ -165,11 +166,11 @@ public:
     void hideNPC(sol::object const& seconds);
     void updateNPCHideTime(sol::object const& seconds); // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
-    uint8 getWeather(sol::object const& ignoreScholar);
-    void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
+    auto getWeather(sol::object const& ignoreScholar) const -> uint8;
+    void setWeather(Weather weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    void changeMusic(uint16 blockID, uint16 musicTrackID);                  // Sets the specified music Track for specified music block.
+    void changeMusic(MusicSlot slotId, uint16 trackId) const;               // Sets the specified music Track for specified music block.
     void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox() const;                                               // Opens send box (to deliver items)

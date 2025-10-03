@@ -27,7 +27,7 @@
 #include "entities/charentity.h"
 #include "items/item_shop.h"
 #include "packets/guild_menu_sell_update.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 
 namespace
@@ -98,7 +98,7 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
             PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() + quantity);
             PChar->pushPacket<CGuildMenuSellUpdatePacket>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(),
                                                           ItemNo, quantity);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }
     // TODO: error messages!

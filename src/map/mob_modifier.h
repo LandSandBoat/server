@@ -38,7 +38,7 @@ enum MOBMODIFIER : int
     MOBMOD_GA_CHANCE              = 7,  // % chance to use -ga spell
     MOBMOD_HEAL_CHANCE            = 8,  // % chance to use heal
     MOBMOD_HP_HEAL_CHANCE         = 9,  // can cast cures below this HP %
-    MOBMOD_SUBLINK                = 10, // sub link group
+    MOBMOD_SUBLINK                = 10, // Sub link group. Enables mobs from different families to link if they share a SUBLINK value.
     MOBMOD_LINK_RADIUS            = 11, // link radius
     MOBMOD_SEES_THROUGH_ILLUSION  = 12, // Mob can see through the Illusion effect that grants effects similar to Sneak & Invisible without this mod and allows aggro (see Viscious Liquid in mamook)
     MOBMOD_SEVERE_SPELL_CHANCE    = 13, // % chance to use a severe spell like death or impact

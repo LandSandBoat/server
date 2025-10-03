@@ -671,9 +671,9 @@ namespace fishingcontest
 
         if (rset && rset->rowsCount() > 0 && rset->next())
         {
-            CurrentFishingContest.status     = static_cast<FISHING_CONTEST_STATUS>(rset->get<uint8>("status"));
-            CurrentFishingContest.criteria   = static_cast<FISHING_CONTEST_CRITERIA>(rset->get<uint8>("criteria"));
-            CurrentFishingContest.measure    = static_cast<FISHING_CONTEST_MEASURE>(rset->get<uint8>("measure"));
+            CurrentFishingContest.status     = rset->get<FISHING_CONTEST_STATUS>("status");
+            CurrentFishingContest.criteria   = rset->get<FISHING_CONTEST_CRITERIA>("criteria");
+            CurrentFishingContest.measure    = rset->get<FISHING_CONTEST_MEASURE>("measure");
             CurrentFishingContest.fishId     = rset->get<uint16>("fishid");
             CurrentFishingContest.startTime  = rset->get<uint32>("starttime");
             CurrentFishingContest.changeTime = rset->get<uint32>("nextstagetime");

@@ -267,7 +267,7 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& getName();       // Internal name of entity
+    virtual const std::string& getName() const; // Internal name of entity
     virtual const std::string& getPacketName(); // Name of entity sent to the client
 
     uint16        getZone() const; // Current zone

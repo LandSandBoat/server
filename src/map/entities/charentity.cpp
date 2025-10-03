@@ -35,15 +35,15 @@
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/event_string.h"
-#include "packets/inventory_finish.h"
 #include "packets/key_items.h"
-#include "packets/lock_on.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
-#include "packets/release.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x033_eventstr.h"
+#include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x058_assist.h"
 
 #include "ai/ai_container.h"
 #include "ai/controllers/player_controller.h"
@@ -1068,13 +1068,13 @@ void CCharEntity::PostTick()
         // Note: Retail sends this in the same chunk as the inventory equip packets, but it doesnt seem to matter as long as it arrives
         for (const auto& [container, dirty] : dirtyInventoryContainers)
         {
-            pushPacket<CInventoryFinishPacket>(container);
+            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(container);
         }
 
         dirtyInventoryContainers.clear();
 
         // Notify client containers are now ok
-        pushPacket<CInventoryFinishPacket>();
+        pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
 
     if (ReloadParty())
@@ -1211,7 +1211,7 @@ void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
     TracyZoneScoped;
     battleutils::RelinquishClaim(this);
-    pushPacket<CLockOnPacket>(this, PNewTarget);
+    pushPacket<GP_SERV_COMMAND_ASSIST>(this, PNewTarget);
     PLatentEffectContainer->CheckLatentsTargetChange();
 }
 
@@ -3241,7 +3241,7 @@ void CCharEntity::tryStartNextEvent()
     }
     else
     {
-        pushPacket<CEventStringPacket>(this, currentEvent);
+        pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
     }
 }
 
@@ -3251,7 +3251,7 @@ void CCharEntity::skipEvent()
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
         pushPacket<CMessageSystemPacket>(0, 0, MsgStd::EventSkipped);
-        pushPacket<CReleasePacket>(this, RELEASE_TYPE::SKIPPING);
+        pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(this, GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent);
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
         if (currentEvent->interruptText != 0)

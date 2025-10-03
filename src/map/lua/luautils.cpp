@@ -375,11 +375,23 @@ namespace luautils
             }
         }
 
-        // Load globals
-        // Truly global files first
-        // TODO: Audit utilities and properly organize them outside of globals folder
-        lua.safe_script_file("./scripts/globals/common.lua");
-        lua.safe_script_file("./scripts/globals/utils.lua");
+        // Load global utilities
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/utils"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                auto relative_path_string = entry.relative_path().generic_string();
+
+                ShowTrace("Loading utility script %s", relative_path_string);
+
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
 
         // Load global data
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/data"))
@@ -975,7 +987,7 @@ namespace luautils
             break;
             case TYPE_TRUST:
             {
-                const auto name = PEntity->getName();
+                const auto& name = PEntity->getName();
                 CacheLuaObjectFromFile(fmt::format("./scripts/actions/spells/trust/{}.lua", name));
             }
             break;
@@ -3297,7 +3309,7 @@ namespace luautils
             return;
         }
 
-        uint8 weather = PMob->loc.zone->GetWeather();
+        auto weather = PMob->loc.zone->GetWeather();
 
         auto result = onMobDisengage(PMob, weather);
         if (!result.valid())
@@ -3695,14 +3707,14 @@ namespace luautils
         }
     }
 
-    void OnZoneWeatherChange(uint16 ZoneID, uint8 weather)
+    void OnZoneWeatherChange(const uint16 zoneId, Weather weather)
     {
         TracyZoneScoped;
 
-        CZone* PZone = zoneutils::GetZone(ZoneID);
+        CZone* PZone = zoneutils::GetZone(zoneId);
         if (PZone == nullptr)
         {
-            ShowWarning("Invalid ZoneID passed to function (%d).", ZoneID);
+            ShowWarning("Invalid ZoneID passed to function (%d).", zoneId);
             return;
         }
 

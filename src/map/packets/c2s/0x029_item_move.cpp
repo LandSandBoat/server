@@ -23,8 +23,8 @@
 
 #include "entities/charentity.h"
 #include "items.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
 
 namespace
@@ -227,8 +227,8 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             {
                 PChar->getStorage(Category1)->InsertItem(nullptr, ItemIndex1);
 
-                PChar->pushPacket<CInventoryItemPacket>(nullptr, Category1, ItemIndex1);
-                PChar->pushPacket<CInventoryItemPacket>(PItem, Category2, newSlotId);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(Category1), ItemIndex1);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(Category2), newSlotId);
             }
             else
             {
@@ -245,16 +245,16 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             {
                 if (CItem* PSlotItem = PChar->getStorage(Category2)->GetItem(slotID); PSlotItem != nullptr)
                 {
-                    PChar->pushPacket<CInventoryItemPacket>(PSlotItem, Category2, slotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PSlotItem, static_cast<CONTAINER_ID>(Category2), slotID);
                 }
             }
 
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
             ShowError("GP_CLI_COMMAND_ITEM_MOVE: Location %u Slot %u is full", Category2, ItemIndex2);
             return;
         }
     }
 
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }

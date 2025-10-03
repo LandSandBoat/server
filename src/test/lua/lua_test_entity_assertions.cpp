@@ -31,6 +31,7 @@
 #include "test_common.h"
 
 #include <algorithm>
+#include <format>
 #include <sol/sol.hpp>
 #include <unordered_map>
 

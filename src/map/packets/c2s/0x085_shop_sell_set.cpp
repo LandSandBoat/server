@@ -24,8 +24,8 @@
 #include "common/async.h"
 #include "common/settings.h"
 #include "entities/charentity.h"
-#include "packets/inventory_finish.h"
 #include "packets/message_standard.h"
+#include "packets/s2c/0x01d_item_same.h"
 #include "trade_container.h"
 #include "utils/charutils.h"
 
@@ -116,6 +116,6 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
     charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -static_cast<int32>(quantity));
     ShowInfo("GP_CLI_COMMAND_SHOP_SELL_SET: Player '%s' sold %u of itemID %u (Total: %u gil) [to VENDOR] ", PChar->getName(), quantity, itemId, cost);
     PChar->pushPacket<CMessageStandardPacket>(nullptr, itemId, quantity, MsgStd::Sell);
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     PChar->Container->setItem(PChar->Container->getSize() - 1, 0, -1, 0);
 }

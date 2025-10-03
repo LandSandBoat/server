@@ -116,6 +116,8 @@ auto TestApplication::createEngine() -> std::unique_ptr<Engine>
 
 void TestApplication::run()
 {
+    TracyZoneScoped;
+
     engine_ = createEngine();
     markLoaded();
     //  From this point, every logging statements end up in the in-memory sink

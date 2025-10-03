@@ -74,6 +74,8 @@ CLuaClientEntityPair::~CLuaClientEntityPair()
 
 void CLuaClientEntityPair::tick()
 {
+    TracyZoneScoped;
+
     testChar_->session()->last_update = timer::now();
     packets().parseIncoming();
 }
@@ -107,6 +109,7 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
     testChar_->entity()->loc.destination = zoneId;
     testChar_->entity()->status          = STATUS_TYPE::DISAPPEAR;
     charutils::SendToZone(testChar_->entity(), zoneId);
+    charutils::removeCharFromZone(testChar_->entity());
     packets().sendZonePackets(); // Send zone in packets, reload PChar
 
     // If position provided, set it and tick

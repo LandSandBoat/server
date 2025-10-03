@@ -402,17 +402,18 @@ end
 
 xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = function(attacker, defender, item, params)
     local subEffect = params.subEffect
-    local msgID     = 0
-    local msgParam  = 0
     local defenderName = defender:getName()
 
-    switch(defenderName): caseof
+    return switch(defenderName): caseof
     {
         ['Brigandish_Blade'] = function()
+            -- so other items with this AE type don't activate BB's killable logic
+            if not item or item:getID() ~= xi.item.BUCCANEERS_KNIFE then
+                return 0, 0, 0
+            end
+
             -- Calculate damage
             local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
-            msgID = xi.msg.basic.ADD_EFFECT_DMG
-            msgParam = damage
 
             -- If Brigandish Blade has damage immunity (at 1% HP), remove it
             if defender:getMod(xi.mod.UDMGPHYS) == -10000 then
@@ -425,14 +426,20 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = fu
                 defender:setLocalVar('killable', 1)
                 defender:setUnkillable(false)
             end
+
+            return subEffect, xi.msg.basic.ADD_EFFECT_DMG, damage
         end,
 
         ['default'] = function()
-            return 0, 0, 0
+            -- default behavior can be handled by the NM lua, signal which item landed an AE
+            -- Note that there's no mechanism to cleanup this localvar, but most if not all instances of this will be a "check if the weapon ever successfully landed a hit this fight"
+            if defender and item then
+                defender:setLocalVar('aeFromItemId', item:getID())
+            end
+
+            return subEffect, 0, 0
         end,
     }
-
-    return subEffect, msgID, msgParam
 end
 
 -- paralyze on hit, fire damage on hit, etc.

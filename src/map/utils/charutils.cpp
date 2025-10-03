@@ -47,11 +47,6 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_count.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_modify.h"
 #include "packets/key_items.h"
 #include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
@@ -66,6 +61,11 @@
 #include "packets/roe_questlog.h"
 #include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01e_item_num.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x026_item_subcontainer.h"
 #include "packets/server_ip.h"
 
 #include "ability.h"
@@ -98,6 +98,7 @@
 #include "battleutils.h"
 #include "blueutils.h"
 #include "charutils.h"
+#include "enums/item_lockflg.h"
 #include "itemutils.h"
 #include "map_engine.h"
 #include "petutils.h"
@@ -744,7 +745,7 @@ namespace charutils
                 PChar->petZoningInfo.petHP        = petHP;
                 PChar->petZoningInfo.petID        = rset->get<uint8>("pet_id");
                 PChar->petZoningInfo.petMP        = rset->get<int16>("pet_mp");
-                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(rset->get<uint8>("pet_type"));
+                PChar->petZoningInfo.petType      = rset->get<PET_TYPE>("pet_type");
                 PChar->petZoningInfo.petLevel     = rset->get<uint8>("pet_level");
                 PChar->petZoningInfo.respawnPet   = true;
                 auto jugTimestamp                 = static_cast<uint32>(PChar->getCharVar("jugpet-spawn-time"));
@@ -1282,7 +1283,7 @@ namespace charutils
                 CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
                 if (PItem != nullptr)
                 {
-                    PChar->pushPacket<CInventoryItemPacket>(PItem, LocationID, slotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LocationID, slotID);
                 }
             }
         };
@@ -1305,7 +1306,7 @@ namespace charutils
             if (PItem != nullptr)
             {
                 PItem->setSubType(ITEM_LOCKED);
-                PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NODROP);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
             }
         }
 
@@ -1314,8 +1315,8 @@ namespace charutils
         {
             PItem->setSubType(ITEM_LOCKED);
 
-            PChar->pushPacket<CInventoryItemPacket>(PItem, PChar->equipLoc[SLOT_LINK1], PChar->equip[SLOT_LINK1]);
-            PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_LINKSHELL);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK1]), PChar->equip[SLOT_LINK1]);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
             PChar->pushPacket<CLinkshellEquipPacket>(PChar, 1);
         }
 
@@ -1324,12 +1325,12 @@ namespace charutils
         {
             PItem->setSubType(ITEM_LOCKED);
 
-            PChar->pushPacket<CInventoryItemPacket>(PItem, PChar->equipLoc[SLOT_LINK2], PChar->equip[SLOT_LINK2]);
-            PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_LINKSHELL);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK2]), PChar->equip[SLOT_LINK2]);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
             PChar->pushPacket<CLinkshellEquipPacket>(PChar, 2);
         }
 
-        PChar->pushPacket<CInventoryFinishPacket>(); // "Finish" type
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(); // "Finish" type
     }
 
     /************************************************************************
@@ -1417,8 +1418,8 @@ namespace charutils
                 return ERROR_SLOTID;
             }
 
-            PChar->pushPacket<CInventoryItemPacket>(PItem, LocationID, SlotID);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(LocationID), SlotID);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
         else
         {
@@ -1540,8 +1541,8 @@ namespace charutils
                 {
                     PItemContainer->InsertItem(nullptr, SlotID);
 
-                    PChar->pushPacket<CInventoryItemPacket>(nullptr, LocationID, SlotID);
-                    PChar->pushPacket<CInventoryItemPacket>(PItemContainer->GetItem(NewSlotID), LocationID, NewSlotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), SlotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemContainer->GetItem(NewSlotID), static_cast<CONTAINER_ID>(LocationID), NewSlotID);
                     return NewSlotID;
                 }
                 PItemContainer->InsertItem(nullptr, NewSlotID); // We cancel all changes in the container
@@ -1564,7 +1565,7 @@ namespace charutils
         if (PItem == nullptr)
         {
             ShowDebug("UpdateItem: No item in slot %u", slotID);
-            PChar->pushPacket<CInventoryItemPacket>(nullptr, LocationID, slotID);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
             return 0;
         }
 
@@ -1601,7 +1602,7 @@ namespace charutils
                              "WHERE charid = ? AND location = ? AND slot = ?",
                              newQuantity, PChar->id, LocationID, slotID);
             PItem->setQuantity(newQuantity);
-            PChar->pushPacket<CInventoryModifyPacket>(LocationID, slotID, newQuantity);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(static_cast<CONTAINER_ID>(LocationID), slotID, newQuantity);
         }
         else if (newQuantity == 0)
         {
@@ -1609,7 +1610,7 @@ namespace charutils
                              "WHERE charid = ? AND location = ? AND slot = ?",
                              PChar->id, LocationID, slotID);
             PChar->getStorage(LocationID)->InsertItem(nullptr, slotID);
-            PChar->pushPacket<CInventoryItemPacket>(nullptr, LocationID, slotID);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
 
             if (PChar->getStyleLocked() && !HasItem(PChar, ItemID))
             {
@@ -1655,7 +1656,7 @@ namespace charutils
         {
             ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket<CMessageStandardPacket>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }
 
@@ -1841,7 +1842,7 @@ namespace charutils
             PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
             PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
-            PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NORMAL); // ???
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal); // ???
             PChar->pushPacket<CEquipPacket>(0, equipSlotID, LOC_INVENTORY);
 
             switch (equipSlotID)
@@ -2586,8 +2587,8 @@ namespace charutils
                 OtherContainer->InsertItem(nullptr, slotID);
 
                 // Send update packets
-                PChar->pushPacket<CInventoryItemPacket>(nullptr, container, slotID);
-                PChar->pushPacket<CInventoryItemPacket>(PItem, LOC_RECYCLEBIN, NewSlotID);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_RECYCLEBIN, NewSlotID);
                 PChar->pushPacket<CMessageStandardPacket>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
             }
             else
@@ -2632,15 +2633,15 @@ namespace charutils
             }
 
             // Send update packets
-            PChar->pushPacket<CInventoryItemPacket>(nullptr, container, slotID);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
             for (int i = 1; i <= 10; ++i)
             {
                 CItem* PUpdatedItem = RecycleBin->GetItem(i);
-                PChar->pushPacket<CInventoryItemPacket>(PUpdatedItem, LOC_RECYCLEBIN, i);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PUpdatedItem, LOC_RECYCLEBIN, i);
             }
             PChar->pushPacket<CMessageStandardPacket>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
         }
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
 
     void EmptyRecycleBin(CCharEntity* PChar)
@@ -2703,7 +2704,7 @@ namespace charutils
 
         const auto rset = db::preparedStmt("SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back "
                                            "FROM char_equip_saved AS equip "
-                                           "WHERE charid = ? AND jobid = ?",
+                                           "WHERE charid = ? AND jobid = ? LIMIT 1",
                                            PChar->id, PChar->GetMJob());
         FOR_DB_SINGLE_RESULT(rset)
         {
@@ -2837,7 +2838,7 @@ namespace charutils
 
                         // Do not forget to update the timer when equipping the subject
 
-                        PChar->pushPacket<CInventoryItemPacket>(PItem, containerID, slotID);
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
                     }
                     PItem->setSubType(ITEM_LOCKED);
 
@@ -2859,7 +2860,7 @@ namespace charutils
                     luautils::OnItemEquip(PChar, PItem);
 
                     PChar->pushPacket<CEquipPacket>(slotID, equipSlotID, containerID);
-                    PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NODROP);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
                 }
             }
         }
@@ -6226,7 +6227,7 @@ namespace charutils
         ELEMENT petElement       = static_cast<ELEMENT>(PPet->m_Element);
         uint8   petElementIdx    = static_cast<uint8>(petElement) - 1;
         ELEMENT dayElement       = battleutils::GetDayElement();
-        WEATHER weather          = battleutils::GetWeather(PChar, false);
+        auto    weather          = battleutils::GetWeather(PChar, false);
         int16   perpReduction    = PChar->getMod(Mod::PERPETUATION_REDUCTION);
         int16   dayReduction     = PChar->getMod(Mod::DAY_REDUCTION);     // As seen on Summoner's Doublet (Depending On Day: Avatar perpetuation cost -3) etc.
         int16   weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION); // As seen on Summoner's Horn (Weather: Avatar perpetuation cost -3) etc.
@@ -6234,8 +6235,8 @@ namespace charutils
         static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
 
-        static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
-                                                  WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
+        static const Weather weatherStrong[8] = { Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm,
+                                                  Weather::Thunder, Weather::Rain, Weather::Auroras, Weather::Gloom };
 
         // If you wear a fire staff, you have +2 perp affinity reduction for fire, but -2 for ice as mods.
         perpReduction += PChar->getMod(strong[petElementIdx]);
@@ -6246,8 +6247,8 @@ namespace charutils
             perpReduction += dayReduction;
         }
 
-        // TODO: Whats the deal with the +1 to weather result here?
-        if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
+        // Match against both tier of weather for element
+        if (weather == weatherStrong[petElementIdx] || weather == static_cast<Weather>(static_cast<uint16_t>(weatherStrong[petElementIdx]) + 1))
         {
             perpReduction += weatherReduction;
         }
@@ -6489,7 +6490,7 @@ namespace charutils
         const auto rset = db::preparedStmt("SELECT partyid, allianceid, partyflag & ? AS partyflag "
                                            "FROM accounts_sessions s JOIN accounts_parties p ON "
                                            "s.charid = p.charid "
-                                           "WHERE p.charid = ?",
+                                           "WHERE p.charid = ? LIMIT 1",
                                            (PARTY_SECOND | PARTY_THIRD), PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
@@ -6738,6 +6739,11 @@ namespace charutils
     {
         TracyZoneScoped;
 
+        if (PChar->PSession->blowfish.status == BLOWFISH_PENDING_ZONE)
+        {
+            return;
+        }
+
         auto ipp = IPP(zoneutils::GetZoneIPP(zoneId));
         if (ipp.getIP() == 0)
         {
@@ -6762,11 +6768,6 @@ namespace charutils
                          PChar->m_moghouseID, PChar->loc.boundary,
                          PChar->id);
 
-        message::send(ipc::CharZone{
-            .charId            = PChar->id,
-            .destinationZoneId = PChar->loc.destination,
-        });
-
         if (PChar->shouldPetPersistThroughZoning())
         {
             PChar->setPetZoningInfo();
@@ -6782,9 +6783,13 @@ namespace charutils
             charutils::forceSynthCritFail("SendToZone", PChar);
         }
 
+        PChar->requestedZoneChange = true;
+        PChar->requestedWarp       = false; // a previous warp can get us here, which could infinitely loop. So un-request warp.
+
+        PChar->PSession->zone_ipp = {};
         PChar->pushPacket<CServerIPPacket>(PChar, 2, IPP(ipp));
 
-        removeCharFromZone(PChar);
+        PChar->status = STATUS_TYPE::DISAPPEAR;
     }
 
     void SendDisconnect(CCharEntity* PChar)
@@ -6792,20 +6797,18 @@ namespace charutils
         TracyZoneScoped;
 
         SaveCharPosition(PChar);
+        PChar->clearPacketList();
 
-        message::send(ipc::CharZone{
-            .charId            = PChar->id,
-            .destinationZoneId = 0xFFFF, // Clear cache
-        });
+        PChar->loc.destination     = 0xFFFF;
+        PChar->status              = STATUS_TYPE::SHUTDOWN;
+        PChar->requestedZoneChange = true;
 
         PChar->pushPacket<CServerIPPacket>(PChar, 1, IPP());
-
-        removeCharFromZone(PChar);
     }
 
+    // This is just an alias for SendDisconnect?
     void ForceLogout(CCharEntity* PChar)
     {
-        PChar->status = STATUS_TYPE::SHUTDOWN;
         charutils::SendDisconnect(PChar);
     }
 
@@ -7085,7 +7088,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             return earth_time::time_point(std::chrono::seconds(rset->get<uint32>("start")));
@@ -7106,7 +7109,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const auto rset = db::preparedStmt("SELECT traverser_claimed FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT traverser_claimed FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             return rset->get<uint32>("traverser_claimed");
@@ -7136,7 +7139,7 @@ namespace charutils
         earth_time::time_point traverserEpoch   = earth_time::time_point::min();
         uint32                 traverserClaimed = 0;
 
-        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start, traverser_claimed FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start, traverser_claimed FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             traverserEpoch   = earth_time::time_point(std::chrono::seconds(rset->get<uint32>("start")));
@@ -7181,7 +7184,7 @@ namespace charutils
                                            "chats_sent, npc_interactions, battles_fought, "
                                            "gm_calls, distance_travelled "
                                            "FROM char_history "
-                                           "WHERE charid = ?",
+                                           "WHERE charid = ? LIMIT 1",
                                            PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
@@ -7611,7 +7614,7 @@ namespace charutils
                             ShowWarning("Invalid Mannequin placed (race of 0 in exdata, when races start at 1). It will be unusable.");
                         }
 
-                        PChar->pushPacket<CInventoryCountPacket>(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
                     }
                 }
             }

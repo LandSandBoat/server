@@ -35,7 +35,7 @@ return {
     ['Merol']                   = { event = 340 },
     ['Morangeart']              = { event = 523 },
     ['Nery']                    = { event = 372 },
-    ['Nivorajean']              = { event = 382 }, -- TODO: Default cycles between 221 and 382, 382 in Default.  382 from one cap
+    ['Nivorajean']              = { event = 321 }, -- TODO: Default cycles between 221 and 382, 382 in Default.  382 from one cap
     ['Noam']                    = { event = 363 },
     ['Odeya']                   = { event = 150 },
     ['Ondieulix']               = { event = 285 },

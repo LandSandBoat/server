@@ -122,6 +122,7 @@ xi.msg.basic =
     SKILL_DRAIN_MP                  = 225, -- <user> uses <skill>. <amount> MP drained from <target>
     SKILL_DRAIN_TP                  = 226, -- <user> uses <skill>. <amount> TP drained from <target>
     SELF_HEAL                       = 238, -- <user> uses <skill>. <user> recovers <amount> HP.
+    SELF_HEAL_NOHP                  = 539, -- <user> uses <skill>. <user> regains HP.
     SKILL_ENFEEB_IS                 = 242, -- <user> uses <skill>. <target> is <status>.
     SKILL_ENFEEB                    = 243, -- <user> uses <skill>. <target> receives the effect of <status>.
     SELF_HEAL_SECONDARY             = 263, -- <target> recovers <amount> HP.

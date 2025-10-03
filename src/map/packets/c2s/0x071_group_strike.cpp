@@ -200,7 +200,7 @@ void GP_CLI_COMMAND_GROUP_STRIKE::process(MapSession* PSession, CCharEntity* PCh
                 if (const auto victimId = charutils::getCharIdFromName(victimName))
                 {
                     const auto rset = db::preparedStmt(
-                        "SELECT partyid FROM accounts_parties WHERE charid = ? AND allianceid = ? AND partyflag & ?",
+                        "SELECT partyid FROM accounts_parties WHERE charid = ? AND allianceid = ? AND partyflag & ? LIMIT 1",
                         victimId, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
 
                     FOR_DB_SINGLE_RESULT(rset)

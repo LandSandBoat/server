@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 #include "packets/bazaar_check.h"
-#include "packets/bazaar_close.h"
+#include "packets/s2c/0x107_bazaar_close.h"
 
 auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -43,7 +43,7 @@ void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PCh
 
         if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PChar->BazaarCustomers[i].id)
         {
-            PCustomer->pushPacket<CBazaarClosePacket>(PChar);
+            PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_CLOSE>(PChar);
 
             DebugBazaarsFmt("Bazaar Interaction [Leave Bazaar] - Buyer: {}, Seller: {}", PCustomer->name, PChar->name);
         }

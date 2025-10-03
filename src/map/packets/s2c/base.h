@@ -42,18 +42,31 @@ protected:
     {
         std::memset(buffer_.data(), 0, PACKET_SIZE);
         setType(static_cast<uint16_t>(PacketId));
+        // Auto-set size based on PacketData
+        if constexpr (std::is_empty_v<typename Derived::PacketData>)
+        {
+            // Handle as header-only packet
+            setSize(sizeof(GP_SERV_HEADER));
+        }
+        else
+        {
+            // Set default size based on PacketData structure + header
+            // Override as needed in constructors.
+            // Note: Derived do not declare the header, it must be added to the size of PacketData.
+            setSize(sizeof(GP_SERV_HEADER) + sizeof(typename Derived::PacketData));
+        }
     }
 
     // Access shifted by header size so individual packets do not need to declare it
     template <typename T = Derived>
-    auto data() -> T::PacketData&
+    auto data() -> typename T::PacketData&
     {
-        return *reinterpret_cast<T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
+        return *reinterpret_cast<typename T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
     }
 
     template <typename T = Derived>
-    auto data() const -> const T::PacketData&
+    auto data() const -> const typename T::PacketData&
     {
-        return *reinterpret_cast<const T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
+        return *reinterpret_cast<const typename T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
     }
 };

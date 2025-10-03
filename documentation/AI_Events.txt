@@ -21,6 +21,7 @@ ITEM_STATE_EXIT - Entity, Item
 
 WEATHER_CHANGE - Entity, weather, weather element
 
+PRESPAWN - Mob
 SPAWN - Entity
 ENGAGE - Entity, Target
 DISENGAGE - Entity

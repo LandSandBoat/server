@@ -349,7 +349,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     std::size_t            weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
     std::optional<SpellID> choice           = std::nullopt;
     auto                   Weakness_Element = weakestIndex + 1;
-    if (spell::GetSpell(spellId) != 0)
+    if (spell::GetSpell(spellId) != nullptr)
     {
         auto Spell_Element = spell::GetSpell(spellId)->getElement();
         if (Spell_Element == Weakness_Element)

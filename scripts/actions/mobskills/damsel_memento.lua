@@ -1,7 +1,7 @@
 -----------------------------------
 -- Damsel Memento
 -- Recovers 5% (5,000) of his HP and removes all debuffs.
--- If Dark Ixion's horn has been broken in battle, there's a chance that it will regenerate. This is handled in xi.darkixion.onMobWeaponSkill since it involves an animation
+-- If Dark Ixion's horn has been broken in battle, there's a chance that it will regenerate. This is handled in xi.darkixion.onMobWeaponSkill since it involves an animation sequence
 -----------------------------------
 local mobskillObject = {}
 
@@ -17,7 +17,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:delStatusEffectsByFlag(xi.effectFlag.WALTZABLE, false)
     mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE, false)
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL_NOHP)
 
     return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * 5 / 100)
 end

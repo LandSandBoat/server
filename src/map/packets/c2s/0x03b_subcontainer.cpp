@@ -22,15 +22,16 @@
 #include "0x03b_subcontainer.h"
 
 #include "entities/charentity.h"
+#include "enums/item_lockflg.h"
 #include "items/item_equipment.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_count.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x026_item_subcontainer.h"
 
 namespace
 {
-    const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slot, uint8 status) -> void
+    const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slot, ItemLockFlg status) -> void
     {
         if (PChar == nullptr || slot == 0)
         {
@@ -43,7 +44,7 @@ namespace
             return;
         }
 
-        PChar->pushPacket<CInventoryAssignPacket>(PItem, status);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, status);
     };
 
     // Build Mannequin model id list
@@ -117,19 +118,19 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
             // Action 1 Unequip Hack: Does this need to exist?
             if (PMannequin->m_extra[10 + ContainerIndex] == ItemIndex2)
             {
-                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_NORMAL);
+                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Normal);
                 PMannequin->m_extra[10 + ContainerIndex] = 0;
             }
             else // Regular Logic
             {
-                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_MANNEQUIN);
+                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Mannequin);
                 PMannequin->m_extra[10 + ContainerIndex] = ItemIndex2;
             }
         }
         break;
         case GP_CLI_COMMAND_SUBCONTAINER_KIND::Unequip:
         {
-            setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_NORMAL);
+            setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Normal);
             PMannequin->m_extra[10 + ContainerIndex] = 0;
         }
         break;
@@ -139,7 +140,7 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
             {
                 if (PMannequin->m_extra[10 + i] > 0)
                 {
-                    setStatusOfStorageItemAtSlot(PChar, PMannequin->m_extra[10 + i], INV_NORMAL);
+                    setStatusOfStorageItemAtSlot(PChar, PMannequin->m_extra[10 + i], ItemLockFlg::Normal);
                 }
                 PMannequin->m_extra[10 + i] = 0;
             }
@@ -167,9 +168,9 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
                                        PMannequin->m_extra, Category1, ItemIndex1, PChar->id);
     if (rset)
     {
-        PChar->pushPacket<CInventoryItemPacket>(PMannequin, Category1, ItemIndex1);
-        PChar->pushPacket<CInventoryCountPacket>(Category1, ItemIndex1, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PMannequin, static_cast<CONTAINER_ID>(Category1), ItemIndex1);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(Category1), ItemIndex1, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
     else
     {

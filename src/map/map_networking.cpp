@@ -176,13 +176,6 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
                 {
                     send_parse(PBuff.data(), &size, map_session_data, false);
                 }
-
-                // Kludge, please clean up...
-                // BLOWFISH_PENDING_ZONE is only set after ZoneOut and zoneout packets have been sent (if they are dropped, decryptCount == 1 will catch this case.)
-                if (map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE && map_session_data->PChar->status == STATUS_TYPE::DISAPPEAR && map_session_data->zone_ipp.getRawIPP() == 0)
-                {
-                    map_session_data->PChar.reset(); // destroy PChar sooner rather than later
-                }
             }
             else if (decryptCount == 1 && map_session_data->blowfish.status == BLOWFISH_PENDING_ZONE)
             {
@@ -736,15 +729,6 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
         blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
     }
 
-    // Increment the key after 0x00B was sent (otherwise the client would never get it!)
-    if (incrementKeyAfterEncrypt)
-    {
-        map_session_data->incrementBlowfish();
-
-        db::preparedStmt("UPDATE accounts_sessions SET session_key = ? WHERE charid = ? LIMIT 1",
-                         map_session_data->blowfish.key, PChar->id);
-    }
-
     // Control the size of the sent packet.
     // if its size exceeds 1400 bytes (data size + 42 bytes IP header),
     // then the client ignores the packet and returns a message about its loss
@@ -770,6 +754,27 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
             ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
                                     PChar->name, PChar->loc.zone->getName(), remainingPackets, kMaxPacketBacklogSize));
         }
+    }
+
+    // Increment the key after 0x00B was sent (otherwise the client would never get it!)
+    if (incrementKeyAfterEncrypt)
+    {
+        map_session_data->incrementBlowfish();
+
+        db::preparedStmt("UPDATE accounts_sessions SET session_key = ? WHERE charid = ? LIMIT 1",
+                         map_session_data->blowfish.key, PChar->id);
+
+        // see https://github.com/atom0s/XiPackets/blob/main/world/server/0x000B/README.md
+        // GP_GAME_LOGOUT_STATE::GP_GAME_LOGOUT_STATE_LOGOUT = disconnect/logout/shutdown
+        if (map_session_data->zone_type != 1)
+        {
+            message::send(ipc::CharZone{
+                .charId            = PChar->id,
+                .destinationZoneId = PChar->loc.destination,
+            });
+        }
+
+        PChar->PSession->PChar.reset(); // destroy PChar
     }
 
     return 0;

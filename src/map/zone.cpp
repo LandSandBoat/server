@@ -19,6 +19,12 @@
 ===========================================================================
 */
 
+#include "packets/s2c/0x057_weather.h"
+namespace
+{
+    constexpr std::uint16_t WeatherCycle = 2160;
+}
+
 // TODO:
 // It is necessary to divide the CZone class into basic and heirs. Already painted: Standard, Resident, Instance and Dynamis
 // Each of these zones has special behavior
@@ -72,7 +78,7 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
-    m_Weather            = WEATHER_NONE;
+    m_Weather            = Weather::None;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
@@ -147,12 +153,12 @@ uint16 CZone::GetTax() const
     return m_tax;
 }
 
-WEATHER CZone::GetWeather()
+auto CZone::GetWeather() const -> Weather
 {
     return m_Weather;
 }
 
-uint32 CZone::GetWeatherChangeTime() const
+auto CZone::GetWeatherChangeTime() const -> uint32
 {
     return m_WeatherChangeTime;
 }
@@ -330,14 +336,14 @@ void CZone::LoadZoneWeather()
 
     const auto rset = db::preparedStmt("SELECT weather "
                                        "FROM zone_weather "
-                                       "WHERE zone = ?",
+                                       "WHERE zone = ? LIMIT 1",
                                        m_zoneID);
     FOR_DB_SINGLE_RESULT(rset)
     {
-        uint16_t weatherBlob[WEATHER_CYCLE]{};
+        uint16_t weatherBlob[WeatherCycle]{};
 
         db::extractFromBlob(rset, "weather", weatherBlob);
-        for (uint16 i = 0; i < WEATHER_CYCLE; i++)
+        for (uint16 i = 0; i < WeatherCycle; i++)
         {
             if (weatherBlob[i])
             {
@@ -384,7 +390,7 @@ void CZone::LoadZoneSettings()
         m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
         m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
         m_miscMask              = rset->get<uint16>("misc");
-        m_zoneType              = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
+        m_zoneType              = rset->get<ZONE_TYPE>("zonetype");
 
         if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
         {
@@ -520,13 +526,13 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
     }
 }
 
-void CZone::SetWeather(WEATHER weather)
+void CZone::SetWeather(const Weather weather)
 {
     TracyZoneScoped;
 
-    if (weather >= MAX_WEATHER_ID)
+    if (!magic_enum::enum_contains<Weather>(weather))
     {
-        ShowWarning("Weather value (%d) exceeds MAX_WEATHER_ID.", weather);
+        ShowWarningFmt("Weather value ({}) invalid.", static_cast<uint16_t>(weather));
         return;
     }
 
@@ -540,7 +546,7 @@ void CZone::SetWeather(WEATHER weather)
     m_Weather           = weather;
     m_WeatherChangeTime = earth_time::vanadiel_timestamp();
 
-    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<CWeatherPacket>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
+    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<GP_SERV_COMMAND_WEATHER>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
 }
 
 void CZone::UpdateWeather()
@@ -562,7 +568,7 @@ void CZone::UpdateWeather()
     WeatherDay = vanadiel_time::count_days(CurrentVanaDate.time_since_epoch());
 
     // The weather starts over again every 2160 days
-    WeatherDay = WeatherDay % WEATHER_CYCLE;
+    WeatherDay = WeatherDay % WeatherCycle;
 
     // Get a random number to determine which weather effect we will use
     WeatherChance = xirand::GetRandomNumber(100);
@@ -578,37 +584,37 @@ void CZone::UpdateWeather()
         weatherType = weather.second;
     }
 
-    uint8 Weather = 0;
+    auto selectedWeather = Weather::None;
 
     // 15% chance for rare weather, 35% chance for common weather, 50% chance for normal weather
     // * Percentages were generated from a 6 hour sample and rounded down to closest multiple of 5*
     if (WeatherChance < 15) // 15% chance to have the weather_rare
     {
-        Weather = weatherType.rare;
+        selectedWeather = static_cast<Weather>(weatherType.rare);
     }
     else if (WeatherChance < 50) // 35% chance to have weather_common
     {
-        Weather = weatherType.common;
+        selectedWeather = static_cast<Weather>(weatherType.common);
     }
     else
     {
-        Weather = weatherType.normal;
+        selectedWeather = static_cast<Weather>(weatherType.normal);
     }
 
     // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
     // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
     if ((CurrentVanaDate >= StartFogVanaDate) &&
         (CurrentVanaDate < EndFogVanaDate) &&
-        (Weather < WEATHER_HOT_SPELL) &&
+        (selectedWeather < Weather::HotSpell) &&
         !(GetTypeMask() & ZONE_TYPE::CITY))
     {
-        Weather = WEATHER_FOG;
+        selectedWeather = Weather::Fog;
         // Force the weather to change by 7 am
         WeatherNextUpdate = EndFogVanaDate - CurrentVanaDate;
     }
 
-    SetWeather((WEATHER)Weather);
-    luautils::OnZoneWeatherChange(GetID(), Weather);
+    SetWeather(selectedWeather);
+    luautils::OnZoneWeatherChange(GetID(), selectedWeather);
 
     // clang-format off
     timer::time_point nextWeatherTick = timer::now() + std::chrono::duration_cast<earth_time::duration>(WeatherNextUpdate);

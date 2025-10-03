@@ -72,7 +72,7 @@ namespace traits
             PTrait->setJob(rset->get<int8>("job"));
             PTrait->setLevel(rset->get<uint8>("level"));
             PTrait->setRank(rset->get<uint8>("rank"));
-            PTrait->setMod(static_cast<Mod>(rset->get<uint32>("modifier")));
+            PTrait->setMod(rset->get<Mod>("modifier"));
             PTrait->setValue(rset->get<int16>("value"));
             PTrait->setMeritId(rset->get<uint32>("meritid"));
 
@@ -91,7 +91,7 @@ namespace traits
             PTrait->setJob(JOB_BLU);
             PTrait->setRank(1);
             PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
-            PTrait->setMod(static_cast<Mod>(rset->get<uint32>("modifier")));
+            PTrait->setMod(rset->get<Mod>("modifier"));
             PTrait->setValue(rset->get<int16>("value"));
 
             PTraitsList[JOB_BLU].emplace_back(PTrait);

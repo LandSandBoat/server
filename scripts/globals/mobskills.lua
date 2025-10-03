@@ -36,16 +36,15 @@ xi.mobskills.physicalTpBonus =
     ACC_VARIES  = 1, -- Not implemented
     ATK_VARIES  = 2,
     DMG_VARIES  = 3, -- Damage formula incorrect
-    CRIT_VARIES = 4, -- Not implemented
-    RANGED      = 5, -- Needs varification
+    CRIT_VARIES = 4, -- Deprecated, pending removal from mob skills
 }
 
 xi.mobskills.magicalTpBonus =
 {
-    NO_EFFECT   = 0,
-    MACC_BONUS  = 1, -- Not implemented
-    MAB_BONUS   = 2, -- Not implemented
-    DMG_BONUS   = 3, -- Damage formula incorrect
+    NO_EFFECT  = 0,
+    MACC_BONUS = 1, -- Not implemented
+    MAB_BONUS  = 2, -- Not implemented
+    DMG_BONUS  = 3, -- Damage formula incorrect
 }
 
 local burstMultipliersByTier =
@@ -94,16 +93,39 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, ftp, tpeffect)
+xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, ftp, tpEffect, mtp000, mtp150, mtp300, params)
     -- TODO: Replace this with ranged attack code
-    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, ftp, xi.mobskills.physicalTpBonus.RANGED)
+    params = params or {}
+    params.isRanged = true
+    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, ftp, tpEffect, mtp000, mtp150, mtp300, params)
 end
 
 -- helper function to handle a single hit and check for parrying, guarding, and blocking
-local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
-    -- if a non-ranged physical mobskill then can parry or guard
+local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, params)
+    -- Determine if this hit is critical
+    -- TODO: Remove CRIT_VARIES from existing mob skills and replace with params.canCrit
+    local isCritical = false
     if
-        tpEffect == xi.mobskills.physicalTpBonus.RANGED or
+        params.canCrit or
+        params.tpEffect == xi.mobskills.physicalTpBonus.CRIT_VARIES
+    then
+        local critRate = xi.combat.physical.calculateSwingCriticalRate(mob, target, mob:getTP(), nil)
+        isCritical = math.random(1, 1000) <= critRate * 1000
+    end
+
+    -- Calculate PDIF with critical flag for this specific hit
+    local pDif = 0
+    if params.isRanged then
+        pDif = xi.combat.physical.calculateRangedPDIF(mob, target, params.weaponType, params.attMod, isCritical, params.applyLevelCorrection, false, 0, false, 0)
+    else
+        pDif = xi.combat.physical.calculateMeleePDIF(mob, target, params.weaponType, params.attMod, isCritical, params.applyLevelCorrection, false, 0, false, xi.slot.MAIN, params.isCannonball)
+    end
+
+    hitdamage = hitdamage * pDif
+
+    -- if a ranged physical mobskill then cannot be parried or guarded
+    if
+        params.isRanged or
         (not xi.combat.physical.isParried(target, mob) and
         not xi.combat.physical.isGuarded(target, mob))
     then
@@ -131,16 +153,18 @@ end
 
 -----------------------------------
 -- Mob Physical Abilities
--- accMod   : linear multiplier for accuracy (1 default)
--- ftp   : linear multiplier for damage (1 default)
--- tpEffect : Defined in xi.mobskills.physicalTpBonus
+-- accMod     : linear multiplier for accuracy (1 default)
+-- ftp        : linear multiplier for damage (1 default)
+-- tpEffect   : Defined in xi.mobskills.physicalTpBonus
+-- params     : optional table for additional parameters { canCrit = true, isCannonball = true, isRanged = true }
 -----------------------------------
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp, tpEffect, mtp000, mtp150, mtp300, isCannonball)
-    local returninfo    = {}
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp, tpEffect, mtp000, mtp150, mtp300, params)
+    local returninfo = {}
+    params           = params or {}
 
     -- mobs use fSTR (but with special calculation in the called function)
     local fSTR = xi.combat.physical.calculateMeleeStatFactor(mob, target)
-    if tpEffect == xi.mobskills.physicalTpBonus.RANGED then
+    if params.isRanged then
         fSTR = xi.combat.physical.calculateRangedStatFactor(mob, target)
     end
 
@@ -175,13 +199,21 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         attMod = fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
 
-    local applyLevelCorrection  = xi.data.levelCorrection.isLevelCorrectedZone(mob)
-    local weaponType            = xi.skill.NONE -- use NONE for mobs
-    local canCrit               = false         -- TODO: implement which skills can crit
-    local useDefInPlaceOfAttack = isCannonball or false
-    local pDif                  = xi.combat.physical.calculateMeleePDIF(mob, target, weaponType, attMod, canCrit, applyLevelCorrection, false, 0, false, xi.slot.MAIN, useDefInPlaceOfAttack)
-
-    hitdamage = hitdamage * pDif
+    -- Get base hit damage calculation setup
+    local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(mob)
+    local canCrit              = params.canCrit or false
+    local isCannonball         = params.isCannonball or false
+    local isRanged             = params.isRanged or false
+    local hitParams            =
+    {
+        canCrit = canCrit,
+        tpEffect = tpEffect,
+        weaponType = xi.skill.NONE, -- use NONE for mobs
+        attMod = attMod,
+        applyLevelCorrection = applyLevelCorrection,
+        isCannonball = isCannonball,
+        isRanged = isRanged,
+    }
 
     -- start the hits
     local finaldmg   = 0
@@ -191,7 +223,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     -- first hit has a higher chance to land
     local firstHitChance = hitrate * 1.5
 
-    if tpEffect == xi.mobskills.physicalTpBonus.RANGED then
+    if params.isRanged then
         firstHitChance = hitrate * 1.2
     end
 
@@ -199,12 +231,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
 
     if (math.random(1, 100)) <= firstHitChance then
         -- use helper function check for parry guard and blocking and handle the hit
-        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
+        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
     end
 
     while hitsdone < numHits do
         if (math.random(1, 100)) <= hitrate then --it hit
-            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, tpEffect)
+            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
         end
 
         hitsdone = hitsdone + 1
@@ -280,10 +312,10 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
     end
 
     -- Multipliers.
-    local sdt                         = xi.spells.damage.calculateSDT(target, actionElement)
-    local resistRate                  = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, 0, actionElement, xi.mod.INT, 0, petAccBonus)
-    local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
-    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
+    local sdt            = xi.spells.damage.calculateSDT(target, actionElement)
+    local resistRate     = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, 0, actionElement, xi.mod.INT, 0, petAccBonus)
+    local dayAndWeather  = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
+    local magicBonusDiff = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
 
     -- Calculate final damage.
     finalDamage = math.floor(finalDamage * sdt)
@@ -413,7 +445,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
         shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     then --remove 'shadowbehav' shadows.
-
         if skill:isAoE() or skill:isConal() then
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
         end
@@ -425,7 +456,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end
-
     elseif shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then --take em all!
         target:delStatusEffect(xi.effect.COPY_IMAGE)
         target:delStatusEffect(xi.effect.BLINK)

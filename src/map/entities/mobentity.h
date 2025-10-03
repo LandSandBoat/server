@@ -141,7 +141,7 @@ public:
     bool CanStealGil();   // can steal gil from mob
     void ResetGilPurse(); // reset total gil held
     auto GetEligibleSeals() -> std::vector<uint16>;
-    auto GetEligibleGeodes() -> std::vector<uint16>;
+    auto GetEligibleGeodes() const -> std::vector<uint16>;
 
     void  setMobMod(uint16 type, int16 value);
     int16 getMobMod(uint16 type);

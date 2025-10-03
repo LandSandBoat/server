@@ -22,8 +22,8 @@
 #include "0x083_shop_buy.h"
 
 #include "entities/charentity.h"
-#include "packets/inventory_finish.h"
-#include "packets/shop_buy.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x03f_shop_buy.h"
 #include "trade_container.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -75,8 +75,8 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
         {
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity));
             ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
-            PChar->pushPacket<CShopBuyPacket>(ShopItemIndex, quantity);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(ShopItemIndex, quantity);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }
 }

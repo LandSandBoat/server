@@ -297,10 +297,10 @@ void auth_session::read_func()
                 // creating new account_id
                 uint32 accid = 0;
 
-                const auto rset1 = db::preparedStmt("SELECT max(accounts.id) FROM accounts");
+                const auto rset1 = db::preparedStmt("SELECT COALESCE(MAX(accounts.id), 0) AS max_id FROM accounts");
                 if (rset1 && rset1->rowsCount() != 0 && rset1->next())
                 {
-                    accid = rset1->get<uint32>("max(accounts.id)") + 1;
+                    accid = rset1->get<uint32>("max_id") + 1;
                 }
                 else
                 {

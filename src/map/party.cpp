@@ -597,9 +597,15 @@ void CParty::AddMember(CBattleEntity* PEntity)
         return;
     }
 
-    if (PEntity->objtype == TYPE_PC && m_PartyType == PARTY_PCS && members.size() > 5)
+    if (PEntity->objtype == TYPE_PC && m_PartyType == PARTY_PCS && IsFull())
     {
         ShowWarning("CParty::AddMember() - Party was full when trying to add a member.");
+        return;
+    }
+
+    if (PEntity->objtype == TYPE_PC && m_PartyType == PARTY_PCS && HasTrusts())
+    {
+        ShowWarning("CParty::AddMember() - Party had summoned trusts when trying to add a member.");
         return;
     }
 
@@ -688,9 +694,15 @@ void CParty::AddMember(uint32 id)
 {
     if (m_PartyType == PARTY_PCS)
     {
-        if (members.size() > 5)
+        if (IsFull())
         {
             ShowWarning("CParty::AddMember() - Party was full when trying to add a member from out of zone.");
+            return;
+        }
+
+        if (HasTrusts())
+        {
+            ShowWarning("CParty::AddMember() - Party had summoned trusts when trying to add a member.");
             return;
         }
 

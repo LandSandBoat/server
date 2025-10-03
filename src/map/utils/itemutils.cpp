@@ -311,7 +311,7 @@ namespace itemutils
                                      MAX_ITEMID);
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            CItem* PItem = CreateItem(rset->get<uint16>("itemId"), static_cast<ItemType>(rset->get<uint8>("type")));
+            CItem* PItem = CreateItem(rset->get<uint16>("itemId"), rset->get<ItemType>("type"));
 
             if (PItem != nullptr)
             {
@@ -383,7 +383,7 @@ namespace itemutils
                     static_cast<CItemWeapon*>(PItem)->setBaseDelay(rset->get<uint16>("delay"));
                     static_cast<CItemWeapon*>(PItem)->setDelay((rset->get<uint16>("delay") * 1000) / 60);
                     static_cast<CItemWeapon*>(PItem)->setDamage(rset->get<uint16>("dmg"));
-                    static_cast<CItemWeapon*>(PItem)->setDmgType(static_cast<DAMAGE_TYPE>(rset->get<uint16>("dmgType")));
+                    static_cast<CItemWeapon*>(PItem)->setDmgType(rset->get<DAMAGE_TYPE>("dmgType"));
                     static_cast<CItemWeapon*>(PItem)->setMaxHit(rset->get<uint8>("hit"));
                     static_cast<CItemWeapon*>(PItem)->setTotalUnlockPointsNeeded(rset->get<uint16>("unlock_points"));
 
@@ -435,7 +435,7 @@ namespace itemutils
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             const auto ItemID = rset->get<uint16>("itemId");
-            const auto modID  = static_cast<Mod>(rset->get<uint16>("modId"));
+            const auto modID  = rset->get<Mod>("modId");
             const auto value  = rset->get<int16>("value");
 
             if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
@@ -451,9 +451,9 @@ namespace itemutils
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             const auto ItemID  = rset->get<uint16>("itemId");
-            const auto modID   = static_cast<Mod>(rset->get<uint16>("modId"));
+            const auto modID   = rset->get<Mod>("modId");
             const auto value   = rset->get<int16>("value");
-            const auto petType = static_cast<PetModType>(rset->get<uint8>("petType"));
+            const auto petType = rset->get<PetModType>("petType");
 
             if ((g_pItemList[ItemID]) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
             {
@@ -468,9 +468,9 @@ namespace itemutils
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             const auto ItemID      = rset->get<uint16>("itemId");
-            const auto modID       = static_cast<Mod>(rset->get<uint16>("modId"));
+            const auto modID       = rset->get<Mod>("modId");
             const auto value       = rset->get<int16>("value");
-            const auto latentId    = static_cast<LATENT>(rset->get<uint16>("latentId"));
+            const auto latentId    = rset->get<LATENT>("latentId");
             const auto latentParam = rset->get<uint16>("latentParam");
 
             if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))

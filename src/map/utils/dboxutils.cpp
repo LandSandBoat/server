@@ -32,7 +32,7 @@
 #include "entities/charentity.h"
 
 #include "packets/delivery_box.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -166,7 +166,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             {
                 PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
                 PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
             else
             {
@@ -633,7 +633,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                 PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
 
             PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             PChar->UContainer->SetItem(PostWorkNo, nullptr);
             destroy(PItem);
         }

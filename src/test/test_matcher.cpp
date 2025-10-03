@@ -24,8 +24,8 @@
 #include <format>
 #include <regex>
 
-TestMatcher::TestMatcher(const FilterConfig& config)
-: config_(config)
+TestMatcher::TestMatcher(FilterConfig config)
+: config_(std::move(config))
 {
 }
 

@@ -21,6 +21,7 @@
 
 #include "test_suite.h"
 #include "common/logging.h"
+#include <format>
 #include <utility>
 
 // Collection of test cases and child suites.

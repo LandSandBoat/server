@@ -37,8 +37,8 @@ namespace
     {
         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
         {
-            const auto name   = PChar->getName();
-            const auto zoneId = PChar->getZone();
+            const auto& name   = PChar->getName();
+            const auto  zoneId = PChar->getZone();
 
             // clang-format off
             Async::getInstance()->submit([name, zoneId, recipientName, rawMessage]()

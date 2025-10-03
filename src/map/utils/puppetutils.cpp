@@ -57,7 +57,7 @@ namespace puppetutils
                     PChar->automatonInfo.m_automatonName = "Automaton";
                 }
 
-                automaton_equip_t tempEquip;
+                automaton_equip_t tempEquip{};
                 db::extractFromBlob(rset, "equipped_attachments", tempEquip);
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is

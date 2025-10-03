@@ -427,8 +427,8 @@ void MapEngine::onGM(const std::vector<std::string>& inputs) const
         return;
     }
 
-    const auto name  = inputs[1];
-    auto*      PChar = zoneutils::GetCharByName(name);
+    const auto& name  = inputs[1];
+    auto*       PChar = zoneutils::GetCharByName(name);
     if (!PChar)
     {
         fmt::print("Couldnt find character: {}\n", name);

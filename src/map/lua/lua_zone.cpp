@@ -173,7 +173,7 @@ auto CLuaZone::getBattlefieldByInitiator(uint32 charID) -> CBattlefield*
     return nullptr;
 }
 
-WEATHER CLuaZone::getWeather()
+auto CLuaZone::getWeather() const -> Weather
 {
     return m_pLuaZone->GetWeather();
 }

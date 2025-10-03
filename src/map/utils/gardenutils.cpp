@@ -30,7 +30,7 @@
 #include "entities/charentity.h"
 #include "item_container.h"
 #include "items/item_flowerpot.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x020_item_attr.h"
 
 #define MAX_RESULTID 2500
 
@@ -120,7 +120,7 @@ namespace gardenutils
 
                         if (sendPacket)
                         {
-                            PChar->pushPacket<CInventoryItemPacket>(PPotItem, containerID, slotID);
+                            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, containerID, slotID);
                         }
                     }
                 }

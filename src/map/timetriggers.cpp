@@ -37,7 +37,7 @@ void CTriggerHandler::triggerTimer()
     Trigger_t*              trigger  = nullptr;
     vanadiel_time::duration vanaTime = vanadiel_time::now().time_since_epoch();
     vanadiel_time::duration alignedTime;
-    uint32                  timeCount;
+    uint32                  timeCount = 0;
 
     for (auto& i : triggerList)
     {

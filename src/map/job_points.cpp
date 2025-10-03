@@ -124,7 +124,7 @@ uint16 CJobPoints::GetJobPoints()
 
 uint16 CJobPoints::GetJobPointsByJob(uint8 jobID) const
 {
-    const auto rset = db::preparedStmt("SELECT job_points FROM char_job_points WHERE charid=? AND jobid=?", m_PChar->id, jobID);
+    const auto rset = db::preparedStmt("SELECT job_points FROM char_job_points WHERE charid=? AND jobid=? LIMIT 1", m_PChar->id, jobID);
     FOR_DB_SINGLE_RESULT(rset)
     {
         return rset->get<uint16>("job_points");

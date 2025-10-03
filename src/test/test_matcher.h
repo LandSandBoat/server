@@ -43,7 +43,7 @@ struct FilterConfig
 class TestMatcher
 {
 public:
-    explicit TestMatcher(const FilterConfig& config);
+    explicit TestMatcher(FilterConfig config);
 
     auto shouldSkipFile(const std::filesystem::path& filePath) const -> bool;
     auto shouldSkipTest(const std::string& fullTestName) const -> bool;

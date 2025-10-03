@@ -361,16 +361,25 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+
+    if
+        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
+        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+    then
+        if skillchainCount > 0 then
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+
+            spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+
+            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+        end
+
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+    end
+
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
-
-    if skillchainCount > 1 then
-        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
-
-        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-    end
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finalDamage, params, nil)
 end
@@ -409,17 +418,26 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+
+    if
+        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
+        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+    then
+        if skillchainCount > 0 then
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+
+            spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+
+            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+        end
+
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+    end
+
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateTMDA(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
-
-    if skillchainCount > 1 then
-        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
-
-        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-    end
 
     -- MP drain
     if mpDrain then

@@ -113,8 +113,8 @@ void monstrosity::LoadStaticData()
                     .monstrosityId          = rset->get<uint8>("monstrosity_id"),
                     .monstrositySpeciesCode = monstrositySpeciesCode,
                     .name                   = rset->get<std::string>("name"),
-                    .mjob                   = static_cast<JOBTYPE>(rset->get<uint8>("mjob")),
-                    .sjob                   = static_cast<JOBTYPE>(rset->get<uint8>("sjob")),
+                    .mjob                   = rset->get<JOBTYPE>("mjob"),
+                    .sjob                   = rset->get<JOBTYPE>("sjob"),
                     .size                   = rset->get<uint8>("size"),
                     .look                   = rset->get<uint16>("look"),
                 };
@@ -145,7 +145,7 @@ void monstrosity::LoadStaticData()
         {
             while (rset->next())
             {
-                const auto mod = static_cast<Mod>(rset->get<uint16>("modId"));
+                const auto mod = rset->get<Mod>("modId");
                 const auto val = rset->get<int16>("value");
                 entry.mods.emplace_back(mod, val);
             }

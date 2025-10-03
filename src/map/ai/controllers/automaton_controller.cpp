@@ -1655,13 +1655,13 @@ namespace automaton
         {
             while (rset->next())
             {
-                SpellID id = static_cast<SpellID>(rset->get<uint16>("spellid"));
+                SpellID id = rset->get<SpellID>("spellid");
 
                 AutomatonSpell PSpell{
                     .skilllevel = rset->get<uint16>("skilllevel"),
                     .heads      = rset->get<uint8>("heads"),
-                    .enfeeble   = static_cast<EFFECT>(rset->get<uint16>("enfeeble")),
-                    .immunity   = static_cast<IMMUNITY>(rset->get<uint32>("immunity")),
+                    .enfeeble   = rset->get<EFFECT>("enfeeble"),
+                    .immunity   = rset->get<IMMUNITY>("immunity"),
                     .removes    = {}, // Will handle in a moment
                 };
 

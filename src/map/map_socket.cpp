@@ -23,12 +23,13 @@
 
 #include "common/logging.h"
 
-MapSocket::MapSocket(asio::io_context& io_context, const uint16 port, const ReceiveFn& onReceiveFn)
+MapSocket::MapSocket(asio::io_context& io_context, const uint16 port, ReceiveFn onReceiveFn)
 : port_(port)
 , io_context_(io_context)
 , socket_(io_context)
+, buffer_{}
 , isRunning(true)
-, onReceiveFn_(onReceiveFn)
+, onReceiveFn_(std::move(onReceiveFn))
 {
     TracyZoneScoped;
 

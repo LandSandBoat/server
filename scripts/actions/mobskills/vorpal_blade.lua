@@ -10,16 +10,19 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- Check for Grah Family id 122, 123, 124
-    -- if not in Paladin form, then ignore.
+    -- Handle Ghrah family humanoid form.
+    -- If not in Paladin form, then ignore.
     if
-        (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and
+        mob:getFamily() == 122 and
         mob:getAnimationSub() ~= 1
     then
         return 1
     elseif mob:getFamily() == 176 then
         -- Handle Mamool Ja BLU
-        if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.BLU then
+        if
+            mob:getAnimationSub() == 0 and
+            mob:getMainJob() == xi.job.BLU
+        then
             return 0
         else
             return 1

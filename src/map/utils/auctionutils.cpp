@@ -31,7 +31,7 @@
 
 #include "packets/auction_house.h"
 #include "packets/c2s/0x04e_auc.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -245,7 +245,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
 
                         PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
-                        PChar->pushPacket<CInventoryFinishPacket>();
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
                         return true;
                     }
@@ -300,7 +300,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
         if (success)
         {
             PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             return;
         }
         // clang-format on

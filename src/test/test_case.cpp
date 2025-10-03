@@ -22,6 +22,8 @@
 #include "test_case.h"
 #include <utility>
 
+#include <format>
+
 TestCase::TestCase(std::string name, std::optional<sol::protected_function> func, std::string parentPath)
 : name_(std::move(name))
 , testFunc_(std::move(func))

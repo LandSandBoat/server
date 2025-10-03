@@ -22,7 +22,7 @@
 #include "0x00a_login.h"
 
 #include "entities/charentity.h"
-#include "packets/downloading_data.h"
+#include "packets/s2c/0x04f_equip_clear.h"
 #include "packets/zone_in.h"
 #include "packets/zone_visited.h"
 #include "utils/charutils.h"
@@ -116,7 +116,7 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
     if (PChar->loc.zone != nullptr)
     {
-        PChar->pushPacket<CDownloadingDataPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
         PChar->pushPacket<CZoneInPacket>(PChar, PChar->currentEvent);
         PChar->pushPacket<CZoneVisitedPacket>(PChar);
     }

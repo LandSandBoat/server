@@ -17,16 +17,16 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local duration   = math.random(3, 15)
 
     -- perform physical attack
-    local numhits    = 1
-    local accmod     = 1
-    local ftp        = 1
-    local info       = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg        = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local numhits = 1
+    local accmod  = 1
+    local ftp     = 1
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     -- if skill hit, apply dmg and AE
     if not skill:hasMissMsg() then
         skill:setMsg(xi.msg.basic.HIT_DMG)
-        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 0, duration)
     elseif dmg == 0 then

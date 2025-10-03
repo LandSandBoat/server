@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CZONEENTITIES_H
-#define _CZONEENTITIES_H
+#pragma once
 
 #include "zone.h"
 
@@ -32,6 +31,7 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/music_slot.h"
 
 #include <set>
 #include <vector>
@@ -77,8 +77,8 @@ public:
     void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
 
     void TOTDChange(vanadiel_time::TOTD TOTD); // process the world's reactions to changing time of day
-    void WeatherChange(WEATHER weather);
-    void MusicChange(uint16 BlockID, uint16 MusicTrackID);
+    void WeatherChange(Weather weather);
+    void MusicChange(MusicSlot slotId, uint16 trackId);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&); // send a global package within the zone
 
@@ -138,9 +138,5 @@ private:
     std::vector<CPetEntity*>   m_petsToDelete;
     std::vector<CTrustEntity*> m_trustsToDelete;
     std::vector<CMobEntity*>   m_aggroableMobs;
-    std::vector<CCharEntity*>  m_charsToLogout;
-    std::vector<CCharEntity*>  m_charsToWarp;
     std::vector<CCharEntity*>  m_charsToChangeZone;
 };
-
-#endif

@@ -22,6 +22,7 @@
 #include "test_collector.h"
 #include "common/logging.h"
 #include "common/lua.h"
+#include "common/tracy.h"
 #include "reporters/reporter_container.h"
 #include <algorithm>
 #include <chrono>
@@ -40,6 +41,8 @@ TestCollector::TestCollector(const FilterConfig& filters, ReporterContainer& rep
 , matcher_(filters)
 , reporters_(reporters)
 {
+    TracyZoneScoped;
+
     registerTestFramework();
 
     auto testFiles = collectTestFiles();
@@ -96,6 +99,9 @@ auto TestCollector::collectTestFiles() const -> std::vector<std::filesystem::pat
 
 void TestCollector::loadTestFile(const std::filesystem::path& filePath)
 {
+    TracyZoneScoped;
+    TracyZoneString(filePath.generic_string());
+
     // Normalize path to forward slashes and build hierarchical suite name from path
     currentFile_                             = filePath.generic_string();
     const std::filesystem::path relativePath = std::filesystem::relative(filePath, SUITES_PATH);

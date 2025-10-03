@@ -459,8 +459,8 @@ namespace spell
         {
             CSpell* PSpell = nullptr;
 
-            const auto id = static_cast<SpellID>(rset->get<uint16>("spellid"));
-            if (static_cast<SPELLGROUP>(rset->get<uint8>("group")) == SPELLGROUP_BLUE)
+            const auto id = rset->get<SpellID>("spellid");
+            if (rset->get<SPELLGROUP>("group") == SPELLGROUP_BLUE)
             {
                 PSpell = new CBlueSpell(id);
             }
@@ -479,8 +479,8 @@ namespace spell
             std::memcpy(&jobs[1], tempJobs.data(), 22);
             PSpell->setJob(jobs);
 
-            PSpell->setSpellGroup(static_cast<SPELLGROUP>(rset->get<uint8>("group")));
-            PSpell->setSpellFamily(static_cast<SPELLFAMILY>(rset->get<uint8>("family")));
+            PSpell->setSpellGroup(rset->get<SPELLGROUP>("group"));
+            PSpell->setSpellFamily(rset->get<SPELLFAMILY>("family"));
             PSpell->setValidTarget(rset->get<uint16>("validTargets"));
             PSpell->setSkillType(rset->get<uint8>("skill"));
             PSpell->setCastTime(std::chrono::milliseconds(rset->get<uint32>("castTime")));
@@ -602,7 +602,7 @@ namespace spell
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             const auto spellId = rset->get<uint16>("spellId");
-            const auto modID   = static_cast<Mod>(rset->get<uint16>("modId"));
+            const auto modID   = rset->get<Mod>("modId");
             const auto value   = rset->get<int16>("value");
 
             if (PSpellList[spellId])

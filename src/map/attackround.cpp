@@ -23,7 +23,7 @@
 #include "ai/ai_container.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 #include "status_effect_container.h"
 
 /************************************************************************
@@ -441,7 +441,7 @@ void CAttackRound::ProcFollowUpAttacks()
                                 }
 
                                 charutils::UpdateItem(PChar, loc, slot, -1);
-                                PChar->pushPacket<CInventoryFinishPacket>();
+                                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                             }
                         }
                     }

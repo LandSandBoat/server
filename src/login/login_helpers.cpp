@@ -279,7 +279,7 @@ namespace loginHelpers
             }
         }
 
-        const auto rset = db::preparedStmt("SELECT max(charid) FROM chars");
+        const auto rset = db::preparedStmt("SELECT COALESCE(MAX(charid), 0) AS max_id FROM chars");
         if (!rset)
         {
             return -1;
@@ -288,7 +288,7 @@ namespace loginHelpers
         uint32 charID = 0;
         if (rset->rowsCount() != 0 && rset->next())
         {
-            charID = rset->get<uint32>("max(charid)") + 1;
+            charID = rset->get<uint32>("max_id") + 1;
         }
 
         if (saveCharacter(session.accountID, charID, &createchar) == -1)

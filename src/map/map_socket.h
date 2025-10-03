@@ -37,7 +37,7 @@ class MapSocket
 public:
     using ReceiveFn = std::function<void(const std::error_code&, std::span<uint8>, IPP)>;
 
-    MapSocket(asio::io_context& io_context, uint16 port, const ReceiveFn& onReceiveFn); // TODO: Move passing in onReceiveFn to recvFor
+    MapSocket(asio::io_context& io_context, uint16 port, ReceiveFn onReceiveFn); // TODO: Move passing in onReceiveFn to recvFor
     ~MapSocket();
 
     void recvFor(timer::duration duration);

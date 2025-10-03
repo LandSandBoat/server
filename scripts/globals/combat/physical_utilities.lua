@@ -686,7 +686,11 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     local targetDefense   = math.max(1, target:getStat(xi.mod.DEF))
     local flourishBonus   = 1
     local firstCap        = xi.combat.physical.pDifWeaponCapTable[weaponType][1]
-    local distancePenalty = xi.combat.ranged.attackDistancePenalty(actor, target)
+    local distancePenalty = 0
+
+    if not actor:isMob() then
+        distancePenalty = xi.combat.ranged.attackDistancePenalty(actor, target)
+    end
 
     -- Actor Weaponskill Specific Attack modifiers.
     -- TODO: verify this actually works on ranged WS

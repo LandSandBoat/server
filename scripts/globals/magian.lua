@@ -674,13 +674,14 @@ end
 
 xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     local trialId    = 0
+    local trialSlotId = nil
     local tradeItems = {}
 
+    -- Find the trial item in any slot and set trialId
     for tradeSlot = 0, 7 do
         local itemObj = trade:getItem(tradeSlot)
 
         if itemObj then
-            local itemId      = itemObj:getID()
             local itemTrialId = itemObj:getTrialNumber()
 
             if
@@ -691,8 +692,33 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
             then
                 -- NOTE: First in Wins, and we ignore any other item with a trial
                 trialId = itemTrialId
-            elseif not tradeItems[itemId] then
-                tradeItems[itemId] = trade:getItemQty(itemId)
+                trialSlotId = tradeSlot
+            end
+        end
+    end
+
+    -- With trialId known sum only the required trade item across all other slots
+    if trialId ~= 0 then
+        local requiredItemId = xi.magian.trials[trialId].tradeItem
+
+        for tradeSlot = 0, 7 do
+            -- Skip the slot that contained the trial weapon/armor
+            if tradeSlot ~= trialSlotId then
+                local itemObj = trade:getItem(tradeSlot)
+
+                if itemObj then
+                    local itemId      = itemObj:getID()
+                    local itemTrialId = itemObj:getTrialNumber()
+
+                    -- Only sum the required trade items never count items with a trial number
+                    if itemTrialId == 0 and itemId == requiredItemId then
+                        local qty = trade:getSlotQty(tradeSlot)
+
+                        if qty > 0 then
+                            tradeItems[requiredItemId] = (tradeItems[requiredItemId] or 0) + qty
+                        end
+                    end
+                end
             end
         end
     end
@@ -716,7 +742,6 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
         player:setLocalVar('tradedItemId', trialInfo.tradeItem)
         player:setLocalVar('tradedItemQty', numItemsTraded)
 
-        player:confirmTrade()
         player:startEvent(10134, trialInfo.tradeItem, numItemsTraded, numRelevantTrials, trialId, 0, 0, 0, 0)
     end
 end
@@ -761,8 +786,13 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
 
     if csid == 10134 then
         if optionMod == 0 then
-            player:messageSpecial(ruludeID.text.RETURN_ITEM, tradedItemId)
+            if tradedItemQty > 1 then
+                player:messageSpecial(ruludeID.text.RETURN_ITEMS, tradedItemId, tradedItemQty)
+            else
+                player:messageSpecial(ruludeID.text.RETURN_ITEM, tradedItemId)
+            end
         elseif optionMod == 102 then
+            player:confirmTrade()
             progressPlayerTrial(player, trialId, tradedItemQty)
         end
 

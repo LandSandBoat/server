@@ -25,14 +25,15 @@
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 
+#include "enums/item_lockflg.h"
 #include "item_container.h"
 #include "status_effect_container.h"
 #include "universal_container.h"
 
 #include "packets/action.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -139,8 +140,8 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
 
     m_PItem->setSubType(ITEM_LOCKED);
 
-    m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NOSELECT);
-    m_PEntity->pushPacket<CInventoryFinishPacket>();
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::NoSelect);
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }
 
 void CItemState::UpdateTarget(CBaseEntity* target)
@@ -220,15 +221,15 @@ void CItemState::Cleanup(timer::time_point tick)
 
     if (PItem && PItem == m_PItem)
     {
-        m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NORMAL);
+        m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::Normal);
     }
     else
     {
         m_PItem = nullptr;
     }
 
-    m_PEntity->pushPacket<CInventoryItemPacket>(m_PItem, m_location, m_slot);
-    m_PEntity->pushPacket<CInventoryFinishPacket>();
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(m_PItem, static_cast<CONTAINER_ID>(m_location), m_slot);
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }
 
 auto CItemState::CanChangeState() -> bool

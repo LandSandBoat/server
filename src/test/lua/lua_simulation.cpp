@@ -118,6 +118,8 @@ void CLuaSimulation::cleanClients(std::optional<ClientScope> scope)
 
 void CLuaSimulation::tickEntity(CLuaBaseEntity& entity) const
 {
+    TracyZoneScoped;
+
     DebugTestFmt("Ticking entity: {} (ID: {})", entity.getName(), entity.GetBaseEntity()->id);
     entity.GetBaseEntity()->PAI->Tick(timer::now());
 }
@@ -132,6 +134,8 @@ void CLuaSimulation::tickEntity(CLuaBaseEntity& entity) const
 
 void CLuaSimulation::skipTime(uint32 seconds) const
 {
+    TracyZoneScoped;
+
     ShowInfoFmt("Skipping {} seconds", seconds);
 
     // Advance time by the requested amount
@@ -261,6 +265,8 @@ void CLuaSimulation::seed() const
 // Moves all clients session clock and process pending packets
 void CLuaSimulation::processClientUpdates() const
 {
+    TracyZoneScoped;
+
     for (auto&& info : clients_)
     {
         info.client->tick();
@@ -278,6 +284,43 @@ void CLuaSimulation::processClientUpdates() const
 
 void CLuaSimulation::tick(const std::optional<TickType> boundary) const
 {
+    TracyZoneScoped;
+
+    if (boundary)
+    {
+        switch (*boundary)
+        {
+            case TickType::ZoneTick:
+                TracyZoneCString("Zone Tick");
+                break;
+            case TickType::TimeServer:
+                TracyZoneCString("Time Server Tick");
+                break;
+            case TickType::EffectTick:
+                TracyZoneCString("Effect Tick");
+                break;
+            case TickType::TriggerAreas:
+                TracyZoneCString("Trigger Areas Tick");
+                break;
+            case TickType::JSTHourly:
+                TracyZoneCString("JST Hourly Tick");
+                break;
+            case TickType::JSTDaily:
+                TracyZoneCString("JST Daily Tick");
+                break;
+            case TickType::VanadielHourly:
+                TracyZoneCString("Vanadiel Hourly Tick");
+                break;
+            case TickType::VanadielDaily:
+                TracyZoneCString("Vanadiel Daily Tick");
+                break;
+        }
+    }
+    else
+    {
+        TracyZoneCString("Zone Tick");
+    }
+
     // Timer clock may be offset, so calculate Earth/Vana time instead of directly using those clocks.
     const auto timerAdjustedUtcTime = timer::to_utc();
     const auto adjustedVanaTime     = vanadiel_time::from_earth_time(timerAdjustedUtcTime);
@@ -401,6 +444,8 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
 
 auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClientEntityPair*
 {
+    TracyZoneScoped;
+
     uint16               zoneId = ZONE_GM_HOME;
     sol::optional<uint8> job;
     sol::optional<uint8> level;

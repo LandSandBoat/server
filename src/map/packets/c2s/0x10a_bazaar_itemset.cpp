@@ -23,8 +23,8 @@
 
 #include "entities/charentity.h"
 #include "packets/bazaar_check.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x020_item_attr.h"
 
 auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -61,8 +61,8 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         PItem->setCharPrice(Price);
         PItem->setSubType((Price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));
 
-        PChar->pushPacket<CInventoryItemPacket>(PItem, LOC_INVENTORY, ItemIndex);
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, ItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
         DebugBazaarsFmt("Bazaar Interaction [Price Set] - Character: {}, Item: {}, Price: {}", PChar->name, PItem->getName(), Price);
     }

@@ -104,7 +104,7 @@ CInstance* CInstanceLoader::LoadInstance() const
             PMob->loc.p                 = PMob->m_SpawnPoint;
 
             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-            PMob->m_SpawnType   = static_cast<SPAWNTYPE>(rset->get<uint8>("spawntype"));
+            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
             PMob->m_DropID      = rset->get<uint32>("dropid");
 
             PMob->HPmodifier = rset->get<uint32>("HP");
@@ -129,8 +129,8 @@ CInstance* CInstanceLoader::LoadInstance() const
             PMob->m_Behavior    = rset->get<uint16>("behavior");
             PMob->m_Link        = rset->get<uint8>("links");
             PMob->m_Type        = rset->get<uint8>("mobType");
-            PMob->m_Immunity    = static_cast<IMMUNITY>(rset->get<uint32>("immunity"));
-            PMob->m_EcoSystem   = static_cast<ECOSYSTEM>(rset->get<uint8>("ecosystemID"));
+            PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
+            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -201,7 +201,7 @@ CInstance* CInstanceLoader::LoadInstance() const
 
             PMob->m_Pool = rset->get<uint32>("poolid");
 
-            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(rset->get<uint8>("allegiance"));
+            PMob->allegiance = rset->get<ALLEGIANCE_TYPE>("allegiance");
             PMob->namevis    = rset->get<uint8>("namevis");
             const auto aggro = rset->get<uint32>("aggro");
             PMob->m_Aggro    = aggro;
@@ -263,7 +263,7 @@ CInstance* CInstanceLoader::LoadInstance() const
             PNpc->animationsub = rset->get<uint8>("animationsub");
 
             PNpc->namevis = rset->get<uint8>("namevis");
-            PNpc->status  = static_cast<STATUS_TYPE>(rset->get<uint8>("status"));
+            PNpc->status  = rset->get<STATUS_TYPE>("status");
             PNpc->m_flags = rset->get<uint32>("entityFlags");
 
             uint16 sqlModelID[10];

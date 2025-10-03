@@ -25,6 +25,7 @@
 CPetSkill::CPetSkill(uint16 id)
 : m_ID(id)
 , m_AnimID(0)
+, m_MobSkillID(0)
 , m_Aoe(0)
 , m_Distance(0)
 , m_AnimationTime(0s)

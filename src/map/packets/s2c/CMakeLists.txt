@@ -1,6 +1,64 @@
 set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_item_max.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_item_max.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01d_item_same.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01d_item_same.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01e_item_num.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01e_item_num.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01f_item_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x01f_item_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x020_item_attr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x020_item_attr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x02e_openmogmenu.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x057_weather.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x057_weather.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x058_assist.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x058_assist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x059_friendpass.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x059_friendpass.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_trophy_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_trophy_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
     PARENT_SCOPE
 )

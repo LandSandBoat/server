@@ -380,7 +380,7 @@ namespace ability
                 const auto& PAbility    = PAbilityList[abilityId];
 
                 PAbility->setName(rset->get<std::string>("name"));
-                PAbility->setJob(static_cast<JOBTYPE>(rset->get<uint8>("job")));
+                PAbility->setJob(rset->get<JOBTYPE>("job"));
                 PAbility->setLevel(rset->get<uint8>("level"));
                 PAbility->setValidTarget(rset->get<uint16>("validTarget"));
                 PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
@@ -389,7 +389,7 @@ namespace ability
                 PAbility->setAnimationID(rset->get<uint16>("animation"));
                 PAbility->setAnimationTime(std::chrono::milliseconds(rset->get<uint16>("animationTime")));
                 PAbility->setCastTime(std::chrono::milliseconds(rset->get<uint16>("castTime")));
-                PAbility->setActionType(static_cast<ACTIONTYPE>(rset->get<uint8>("actionType")));
+                PAbility->setActionType(rset->get<ACTIONTYPE>("actionType"));
                 PAbility->setRange(rset->get<float>("range"));
                 PAbility->setAOE(rset->get<uint8>("isAOE"));
                 PAbility->setRecastId(rset->get<uint16>("recastId"));

@@ -22,7 +22,7 @@
 #include "0x11d_jump.h"
 
 #include "entities/charentity.h"
-#include "packets/char_emotion_jump.h"
+#include "packets/s2c/0x11e_jump.h"
 #include "utils/jailutils.h"
 
 auto GP_CLI_COMMAND_JUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -40,5 +40,5 @@ void GP_CLI_COMMAND_JUMP::process(MapSession* PSession, CCharEntity* PChar) cons
         return;
     }
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCharEmotionJumpPacket>(PChar, ActIndex));
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_JUMP>(PChar, ActIndex));
 }

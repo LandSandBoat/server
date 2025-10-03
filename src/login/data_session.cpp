@@ -310,6 +310,17 @@ void data_session::read_func()
                 ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}",
                                      ZoneID, ip2str(ZoneIP), ZonePort, ip2str(characterSelectionResponse.cache_ip), characterSelectionResponse.cache_port, charid));
 
+                // If client was zoning out but was never seen at the destination past 2 minutes, remove old session
+                const auto rset2 = db::preparedStmt("SELECT * "
+                                                    "FROM accounts_sessions "
+                                                    "WHERE accid = ? AND charid = ? AND client_port = '0' AND last_zoneout_time <= SUBTIME(NOW(), \"00:02:00\")",
+                                                    session.accountID, charid);
+                if (rset2 && rset2->rowsCount() != 0 && rset2->next())
+                {
+                    // KillSession? Seems overkill with current knowledge. client_port of 0 indicates the other map server never saw a packet and decrypted it correctly.
+                    db::preparedStmt("DELETE FROM accounts_sessions WHERE accid = ? AND charid = ?", session.accountID, charid);
+                }
+
                 // Check the number of sessions
                 uint16 sessionCount = 0;
 
@@ -435,6 +446,9 @@ void data_session::read_func()
                     .destinationZoneId = ZoneID,
                 });
 
+                db::preparedStmt("UPDATE char_flags SET disconnecting = 0 WHERE charid = ?", charid);
+                db::preparedStmt("UPDATE char_stats SET zoning = 2 WHERE charid = ?", charid);
+
                 zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
             }
 
@@ -491,9 +505,9 @@ void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_sess
 
                 // Remove IP from map if no entries remain
                 auto& sessions = loginHelpers::getAuthenticatedSessions();
-                if (sessions[self->ipAddress].size() == 0)
+                if (auto outerIt = sessions.find(self->ipAddress); outerIt != sessions.end() && outerIt->second.empty())
                 {
-                    sessions.erase(sessions.begin());
+                    sessions.erase(outerIt);
                 }
             }
         }

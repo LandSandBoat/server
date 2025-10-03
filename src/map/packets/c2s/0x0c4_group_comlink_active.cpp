@@ -22,15 +22,16 @@
 #include "0x0c4_group_comlink_active.h"
 
 #include "entities/charentity.h"
+#include "enums/item_lockflg.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 #include "packets/char_status.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
 #include "packets/linkshell_equip.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -72,7 +73,7 @@ namespace
                                                safeName, PItemLinkshell->m_extra, PChar->id, data.Category, data.ItemIndex);
             if (rset && rset->rowsAffected())
             {
-                PChar->pushPacket<CInventoryItemPacket>(PItemLinkshell, data.Category, data.ItemIndex);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
             }
         }
         else
@@ -101,8 +102,8 @@ namespace
             db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
                              PItemLinkshell->m_extra, PChar->id, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
 
-            PChar->pushPacket<CInventoryItemPacket>(PItemLinkshell, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
 
             return;
@@ -125,7 +126,7 @@ namespace
                 linkshell::DelOnlineMember(PChar, POldItemLinkshell);
 
                 POldItemLinkshell->setSubType(ITEM_UNLOCKED);
-                PChar->pushPacket<CInventoryAssignPacket>(POldItemLinkshell, INV_NORMAL);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(POldItemLinkshell, ItemLockFlg::Normal);
             }
         }
 
@@ -139,12 +140,12 @@ namespace
             PChar->updatemask |= UPDATE_HP;
         }
 
-        PChar->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_LINKSHELL);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
         charutils::SaveCharStats(PChar);
         charutils::SaveCharEquip(PChar);
 
         PChar->pushPacket<CLinkshellEquipPacket>(PChar, data.LinkshellId);
-        PChar->pushPacket<CInventoryItemPacket>(PItemLinkshell, data.Category, data.ItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
     };
 
     const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
@@ -158,12 +159,12 @@ namespace
             PChar->updatemask |= UPDATE_HP;
         }
 
-        PChar->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
         charutils::SaveCharStats(PChar);
         charutils::SaveCharEquip(PChar);
 
         PChar->pushPacket<CLinkshellEquipPacket>(PChar, data.LinkshellId);
-        PChar->pushPacket<CInventoryItemPacket>(PItemLinkshell, data.Category, data.ItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
     };
 } // namespace
 
@@ -210,6 +211,6 @@ void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEnt
         break;
     }
 
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     PChar->pushPacket<CCharStatusPacket>(PChar);
 }

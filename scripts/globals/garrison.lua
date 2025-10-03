@@ -1,7 +1,6 @@
 -----------------------------------
 -- Garrison
 -----------------------------------
-require('scripts/globals/common')
 require('scripts/globals/garrison_data')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')

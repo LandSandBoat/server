@@ -82,7 +82,7 @@ void CBaseEntity::FadeOut()
     updatemask |= UPDATE_HP;
 }
 
-const std::string& CBaseEntity::getName()
+const std::string& CBaseEntity::getName() const
 {
     return name;
 }

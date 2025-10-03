@@ -277,7 +277,16 @@ xi.mobSkill =
 
     QUEASYSHROOM_2           = 2232,
 
+    DI_HORN_ATTACK           = 2329,
+    DI_BITE_ATTACK           = 2330,
+    DI_KICK_ATTACK           = 2331,
+    DI_TRAMPLE               = 2332,
+    DI_GLOW                  = 2333,
+    WRATH_OF_ZEUS            = 2334,
+    LIGHTNING_SPEAR          = 2335,
+    ACHERON_KICK             = 2336,
     DAMSEL_MEMENTO           = 2337,
+    RAMPANT_STANCE           = 2338,
 
     OPPRESSIVE_GLARE         = 2392,
 

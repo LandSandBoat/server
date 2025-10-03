@@ -23,6 +23,7 @@
 #include "common/logging.h"
 #include "common/lua.h"
 #include "common/settings.h"
+#include "common/tracy.h"
 #include "enums/test_status.h"
 #include "in_memory_sink.h"
 #include "lua/lua_simulation.h"
@@ -32,6 +33,7 @@
 #include "test_suite.h"
 
 #include <chrono>
+#include <format>
 #include <sol/sol.hpp>
 #include <spdlog/spdlog.h>
 #include <utility>
@@ -83,6 +85,8 @@ TestEngine::~TestEngine() = default;
 
 auto TestEngine::executeTests() -> bool
 {
+    TracyZoneScoped;
+
     TestResults results;
     const auto  runStartTime = std::chrono::steady_clock::now();
 
@@ -123,6 +127,9 @@ auto TestEngine::executeTests() -> bool
 
 auto TestEngine::executeSuite(const TestSuite& suite, HookContext context) -> TestResults
 {
+    TracyZoneScoped;
+    TracyZoneString(suite.fullName());
+
     TestResults results;
     auto        suiteStartTime = std::chrono::steady_clock::now();
 
@@ -264,6 +271,9 @@ void TestEngine::reportSetupTeardownFailure(const TestSuite& suite, const std::s
 
 auto TestEngine::executeTestCase(const TestCase& testCase, const HookContext& context, const TestSuite& suite) const -> bool
 {
+    TracyZoneScoped;
+    TracyZoneString(fmt::format("{} :: {}", suite.fullName(), testCase.name()));
+
     // Notify reporters of test start
     reporters_.onTestStart(suite, testCase);
 
@@ -336,6 +346,8 @@ auto TestEngine::executeTestCase(const TestCase& testCase, const HookContext& co
 
 auto TestEngine::runBeforeHooks(const HookContext& context, const std::string& testName) const -> std::optional<std::string>
 {
+    TracyZoneScoped;
+
     if (context.beforeEachHooks.empty())
     {
         return std::nullopt;
@@ -369,6 +381,8 @@ auto TestEngine::runBeforeHooks(const HookContext& context, const std::string& t
 
 void TestEngine::runAfterHooks(const HookContext& context, const std::string& testName) const
 {
+    TracyZoneScoped;
+
     if (context.afterEachHooks.empty())
     {
         return;

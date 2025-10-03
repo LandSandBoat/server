@@ -31,10 +31,10 @@
 
 #include "packets/char_skills.h"
 #include "packets/char_status.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
 #include "packets/message_basic.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
 #include "packets/synth_animation.h"
 #include "packets/synth_message.h"
 #include "packets/synth_result.h"
@@ -45,6 +45,7 @@
 #include "trade_container.h"
 
 #include "charutils.h"
+#include "enums/item_lockflg.h"
 #include "enums/key_items.h"
 #include "itemutils.h"
 #include "zone.h"
@@ -54,35 +55,35 @@ namespace synthutils
 {
     struct SynthRecipe
     {
-        uint32  ID;
-        uint8   Desynth;
-        KeyItem RequiredKeyItem;
-        uint8   Wood;
-        uint8   Smith;
-        uint8   Gold;
-        uint8   Cloth;
-        uint8   Leather;
-        uint8   Bone;
-        uint8   Alchemy;
-        uint8   Cook;
-        uint16  Crystal;
-        uint16  HQCrystal;
-        uint16  Ingredient1;
-        uint16  Ingredient2;
-        uint16  Ingredient3;
-        uint16  Ingredient4;
-        uint16  Ingredient5;
-        uint16  Ingredient6;
-        uint16  Ingredient7;
-        uint16  Ingredient8;
-        uint16  Result;
-        uint16  ResultHQ1;
-        uint16  ResultHQ2;
-        uint16  ResultHQ3;
-        uint8   ResultQty;
-        uint8   ResultHQ1Qty;
-        uint8   ResultHQ2Qty;
-        uint8   ResultHQ3Qty;
+        uint32  ID{};
+        uint8   Desynth{};
+        KeyItem RequiredKeyItem{};
+        uint8   Wood{};
+        uint8   Smith{};
+        uint8   Gold{};
+        uint8   Cloth{};
+        uint8   Leather{};
+        uint8   Bone{};
+        uint8   Alchemy{};
+        uint8   Cook{};
+        uint16  Crystal{};
+        uint16  HQCrystal{};
+        uint16  Ingredient1{};
+        uint16  Ingredient2{};
+        uint16  Ingredient3{};
+        uint16  Ingredient4{};
+        uint16  Ingredient5{};
+        uint16  Ingredient6{};
+        uint16  Ingredient7{};
+        uint16  Ingredient8{};
+        uint16  Result{};
+        uint16  ResultHQ1{};
+        uint16  ResultHQ2{};
+        uint16  ResultHQ3{};
+        uint8   ResultQty{};
+        uint8   ResultHQ1Qty{};
+        uint8   ResultHQ2Qty{};
+        uint8   ResultHQ3Qty{};
 
         std::string ResultName;
         std::string ContentTag;
@@ -247,7 +248,7 @@ namespace synthutils
             const auto recipe = SynthRecipe{
                 .ID              = rset->get<uint32>("ID"),
                 .Desynth         = rset->get<uint8>("Desynth"),
-                .RequiredKeyItem = static_cast<KeyItem>(rset->get<uint16>("KeyItem")),
+                .RequiredKeyItem = rset->get<KeyItem>("KeyItem"),
                 .Wood            = rset->get<uint8>("Wood"),
                 .Smith           = rset->get<uint8>("Smith"),
                 .Gold            = rset->get<uint8>("Gold"),
@@ -946,7 +947,7 @@ namespace synthutils
                     }
                     else
                     {
-                        PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NORMAL);
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
                     }
                 }
                 invSlotID = nextSlotID;
@@ -1034,7 +1035,7 @@ namespace synthutils
                     }
                     else
                     {
-                        PChar->pushPacket<CInventoryAssignPacket>(PItem, INV_NORMAL);
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
                     }
                 }
                 invSlotID = nextSlotID;
@@ -1181,7 +1182,7 @@ namespace synthutils
                 if (CItem* PCraftItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID); PCraftItem != nullptr)
                 {
                     PCraftItem->setSubType(ITEM_LOCKED);
-                    PChar->pushPacket<CInventoryAssignPacket>(PCraftItem, INV_NOSELECT);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PCraftItem, ItemLockFlg::NoSelect);
                 }
             }
         }
@@ -1274,10 +1275,10 @@ namespace synthutils
                     db::preparedStmt("UPDATE char_inventory SET signature = ? WHERE charid = ? AND location = 0 AND slot = ? LIMIT 1",
                                      PChar->name, PChar->id, invSlotID);
                 }
-                PChar->pushPacket<CInventoryItemPacket>(PItem, LOC_INVENTORY, invSlotID);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, invSlotID);
             }
 
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
             // Use appropiate message (Regular or desynthesis)
             const auto message = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? SYNTH_SUCCESS_DESYNTH : SYNTH_SUCCESS;

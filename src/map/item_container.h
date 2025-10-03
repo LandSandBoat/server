@@ -26,6 +26,7 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
+// TODO: Enum class
 enum CONTAINER_ID : uint8
 {
     LOC_INVENTORY    = 0,

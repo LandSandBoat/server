@@ -237,5 +237,5 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
         return;
     }
 
-    charutils::SendToZone(PChar, destination);
+    PChar->requestedZoneChange = true;
 }

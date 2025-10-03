@@ -25,12 +25,12 @@
 
 #include "packets/char_status.h"
 #include "packets/chat_message.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
 #include "packets/linkshell_equip.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
 
 #include "conquest_system.h"
 #include "ipc_client.h"
@@ -38,6 +38,7 @@
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 
+#include "enums/item_lockflg.h"
 #include "items.h"
 #include "packets/c2s/0x0e2_set_lsmsg.h"
 #include "packets/linkshell_message.h"
@@ -230,15 +231,15 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                                          m_id, static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
-                    PMember->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
+                    PMember->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Normal);
                     PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsID);
-                    PMember->pushPacket<CInventoryItemPacket>(PItemLinkshell, LocationID, SlotID);
+                    PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(LocationID), SlotID);
                 }
 
                 charutils::SaveCharStats(PMember);
                 charutils::SaveCharEquip(PMember);
 
-                PMember->pushPacket<CInventoryFinishPacket>();
+                PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                 PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
@@ -280,7 +281,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
                     PMember->updatemask |= UPDATE_HP;
                 }
 
-                PMember->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
+                PMember->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Normal);
                 PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsNum);
             }
 
@@ -301,7 +302,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
                                 db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
                                                  newPItemLinkshell->m_extra, PMember->id, LocationID, SlotID);
 
-                                PMember->pushPacket<CInventoryItemPacket>(newPItemLinkshell, LocationID, SlotID);
+                                PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(newPItemLinkshell, static_cast<CONTAINER_ID>(LocationID), SlotID);
                             }
                         }
                     }
@@ -311,7 +312,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
             charutils::SaveCharStats(PMember);
             charutils::SaveCharEquip(PMember);
 
-            PMember->pushPacket<CInventoryFinishPacket>();
+            PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
@@ -393,7 +394,7 @@ namespace linkshell
             const auto linkshellid = rset->get<uint32>("linkshellid");
             const auto color       = rset->get<uint16>("color");
             const auto name        = rset->get<std::string>("name");
-            const auto postrights  = static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(rset->get<uint8>("postrights"));
+            const auto postrights  = rset->get<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>("postrights");
 
             auto PLinkshell = std::make_unique<CLinkshell>(linkshellid);
 

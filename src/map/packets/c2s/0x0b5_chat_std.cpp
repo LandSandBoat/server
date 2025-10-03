@@ -44,8 +44,8 @@ namespace
         const std::string auditConfigKey = std::format("map.AUDIT_{}", chatType);
         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>(auditConfigKey))
         {
-            const auto name   = PChar->getName();
-            const auto zoneId = PChar->getZone();
+            const auto& name   = PChar->getName();
+            const auto  zoneId = PChar->getZone();
 
             // clang-format off
             Async::getInstance()->submit([name, chatType, zoneId, rawMessage]()
@@ -85,9 +85,9 @@ namespace
     {
         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
         {
-            const auto name   = PChar->getName();
-            const auto zoneId = PChar->getZone();
-            char       decodedLinkshellName[DecodeStringLength];
+            const auto& name   = PChar->getName();
+            const auto  zoneId = PChar->getZone();
+            char        decodedLinkshellName[DecodeStringLength];
             DecodeStringLinkshell(PLinkshell->getName(), decodedLinkshellName);
 
             // clang-format off

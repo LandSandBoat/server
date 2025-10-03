@@ -25,9 +25,9 @@
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
 #include "packets/furniture_interact.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_size.h"
+#include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -180,13 +180,14 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
                 PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
             }
 
-            PChar->pushPacket<CInventorySizePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
 
             luautils::OnFurniturePlaced(PChar, PItem);
 
             PChar->loc.zone->SpawnConditionalNPCs(PChar);
         }
-        PChar->pushPacket<CInventoryItemPacket>(PItem, MyroomCategory, MyroomItemIndex);
-        PChar->pushPacket<CInventoryFinishPacket>();
+
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
 }

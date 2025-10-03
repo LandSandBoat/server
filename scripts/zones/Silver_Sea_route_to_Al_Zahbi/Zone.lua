@@ -25,7 +25,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 1025 then
-        player:setPos(0, 0, 0, 0, 50)
+        player:setPos(0, 0, 0, 0, xi.zone.AHT_URHGAN_WHITEGATE)
     end
 end
 

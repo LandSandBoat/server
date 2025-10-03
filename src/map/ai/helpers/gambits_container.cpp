@@ -256,7 +256,7 @@ namespace gambits
                 {
                     if (isValidMember(target, PMember))
                     {
-                        auto name = PMember->getName();
+                        const auto& name = PMember->getName();
                         if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             potentialTargets.push_back(PMember);

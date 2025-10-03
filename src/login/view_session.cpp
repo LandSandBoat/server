@@ -466,9 +466,9 @@ void view_session::handle_error(std::error_code ec, std::shared_ptr<handler_sess
 
                 // Remove IP from map if no entries remain
                 auto& sessions = loginHelpers::getAuthenticatedSessions();
-                if (sessions[self->ipAddress].size() == 0)
+                if (auto outerIt = sessions.find(self->ipAddress); outerIt != sessions.end() && outerIt->second.empty())
                 {
-                    sessions.erase(sessions.begin());
+                    sessions.erase(outerIt);
                 }
             }
         }

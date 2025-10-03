@@ -303,9 +303,8 @@ namespace db
                     return T{};
                 }
 
-                // TODO: First-class support for enum types
+                // Enum support: use underlying type to select database accessor
                 using UnderlyingT = enum_decay_t<T>;
-
                 UnderlyingT value{};
 
                 if (!is_blob_v<UnderlyingT>)
@@ -314,7 +313,14 @@ namespace db
                     {
                         ShowErrorFmt("ResultSetWrapper::get: key {} is null", key.c_str());
                         ShowErrorFmt("Query: {}", query_.c_str());
-                        return value;
+                        if constexpr (std::is_enum_v<T>)
+                        {
+                            return static_cast<T>(value);
+                        }
+                        else
+                        {
+                            return value;
+                        }
                     }
                 }
 
@@ -327,49 +333,49 @@ namespace db
                 {
                     if constexpr (std::is_same_v<UnderlyingT, int64>)
                     {
-                        value = static_cast<T>(resultSet_->getInt64(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getInt64(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, uint64>)
                     {
-                        value = static_cast<T>(resultSet_->getUInt64(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getUInt64(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, int32>)
                     {
-                        value = static_cast<T>(resultSet_->getInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getInt(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, uint32>)
                     {
-                        value = static_cast<T>(resultSet_->getUInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getUInt(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, int16>)
                     {
-                        value = static_cast<T>(resultSet_->getInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getInt(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, uint16>)
                     {
-                        value = static_cast<T>(resultSet_->getUInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getUInt(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, int8>)
                     {
                         // There is only a signed byte accessor
-                        value = static_cast<T>(resultSet_->getByte(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getByte(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, uint8>)
                     {
                         // There isn't an unsigned byte accessor, so we'll just use getUInt
-                        value = static_cast<T>(resultSet_->getUInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getUInt(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, bool>)
                     {
-                        value = static_cast<T>(resultSet_->getBoolean(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getBoolean(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, double>)
                     {
-                        value = static_cast<T>(resultSet_->getDouble(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getDouble(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, float>)
                     {
-                        value = static_cast<T>(resultSet_->getFloat(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getFloat(key.c_str()));
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, std::string>)
                     {
@@ -381,7 +387,7 @@ namespace db
                     }
                     else if constexpr (std::is_same_v<UnderlyingT, size_t>)
                     {
-                        value = static_cast<T>(resultSet_->getUInt(key.c_str()));
+                        value = static_cast<UnderlyingT>(resultSet_->getUInt(key.c_str()));
                     }
                     else if constexpr (is_blob_v<UnderlyingT>)
                     {
@@ -414,7 +420,14 @@ namespace db
                     return T{};
                 }
 
-                return value;
+                if constexpr (std::is_enum_v<T>)
+                {
+                    return static_cast<T>(value);
+                }
+                else
+                {
+                    return value;
+                }
             }
 
             // Get the value of the 0-indexed column. Behind the scenes this is automatically converted to be 1-indexed for
@@ -508,7 +521,7 @@ namespace db
         {
             TracyZoneScoped;
 
-            // TODO: First-class support for enum types
+            // Enums: convert to underlying type for database storage
             using UnderlyingT = enum_decay_t<T>;
 
             if constexpr (!is_blob_v<UnderlyingT>)

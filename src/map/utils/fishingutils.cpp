@@ -27,19 +27,19 @@
 #include "common/vana_time.h"
 
 #include "packets/caught_fish.h"
-#include "packets/caught_monster.h"
 #include "packets/char_skills.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
 #include "packets/entity_animation.h"
 #include "packets/fishing.h"
-#include "packets/inventory_finish.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
-#include "packets/release.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x043_talknumname.h"
+#include "packets/s2c/0x052_eventucoff.h"
 
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -50,6 +50,7 @@
 #include "battleutils.h"
 #include "charutils.h"
 #include "enums/key_items.h"
+#include "enums/weather.h"
 #include "item_container.h"
 #include "itemutils.h"
 #include "map_engine.h"
@@ -324,16 +325,16 @@ namespace fishingutils
         return modifier;
     }
 
-    float GetWeatherModifier(CCharEntity* PChar)
+    auto GetWeatherModifier(const CCharEntity* PChar) -> float
     {
-        WEATHER weather    = zoneutils::GetZone(PChar->getZone())->GetWeather();
-        float   weatherMod = 1.0f;
+        const auto weather    = zoneutils::GetZone(PChar->getZone())->GetWeather();
+        float      weatherMod = 1.0f;
 
-        if (weather == WEATHER_RAIN)
+        if (weather == Weather::Rain)
         {
             weatherMod = 1.1f;
         }
-        else if (weather == WEATHER_SQUALL)
+        else if (weather == Weather::Squall)
         {
             weatherMod = 1.2f;
         }
@@ -1357,7 +1358,7 @@ namespace fishingutils
 
                     if (SendUpdate)
                     {
-                        PChar->pushPacket<CInventoryFinishPacket>();
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                     }
                 }
             }
@@ -1392,7 +1393,7 @@ namespace fishingutils
                 uint8 location = PRanged->getLocationID();
                 charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
                 charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
         }
     }
@@ -1588,7 +1589,7 @@ namespace fishingutils
 
         PChar->animation = ANIMATION_FISHING_MONSTER;
         PChar->updatemask |= UPDATE_HP;
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtMonsterPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_MONSTER));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_MONSTER));
 
         position_t p = PChar->loc.p;
         position_t m;
@@ -1644,7 +1645,7 @@ namespace fishingutils
 
         PChar->animation = ANIMATION_FISHING_CAUGHT;
         PChar->updatemask |= UPDATE_HP;
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtMonsterPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CATCH_CHEST));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_CATCH_CHEST));
 
         position_t p = PChar->loc.p;
         position_t m;
@@ -1920,7 +1921,7 @@ namespace fishingutils
             PChar->hookedFish = nullptr;
         }
 
-        PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+        PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
     }
 
     void StartFishing(CCharEntity* PChar)
@@ -1931,14 +1932,14 @@ namespace fishingutils
         {
             ShowWarning("Fishing is currently disabled");
             PChar->pushPacket<CChatMessagePacket>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled");
-            PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+            PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             return;
         }
 
         if (PChar->GetMLevel() < settings::get<uint8>("map.FISHING_MIN_LEVEL"))
         {
             PChar->pushPacket<CChatMessagePacket>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Your level is too low to fish.");
-            PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+            PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             return;
         }
 
@@ -1954,7 +1955,7 @@ namespace fishingutils
         if (PChar->nextFishTime > vanaTime)
         {
             PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
-            PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+            PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             return;
         }
         else
@@ -1985,7 +1986,7 @@ namespace fishingutils
             {
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
                 PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
-                PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+                PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
             }
@@ -1997,7 +1998,7 @@ namespace fishingutils
             if ((Rod == nullptr) || !(Rod->isType(ITEM_WEAPON)) || (Rod->getSkillType() != SKILL_FISHING))
             {
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD);
-                PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+                PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
             }
@@ -2006,7 +2007,7 @@ namespace fishingutils
             if ((Bait == nullptr) || !(Bait->isType(ITEM_WEAPON)) || (Bait->getSkillType() != SKILL_FISHING))
             {
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT);
-                PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+                PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
             }
@@ -2023,13 +2024,13 @@ namespace fishingutils
             else
             {
                 PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
-                PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+                PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             }
         }
         else
         {
             PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
-            PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::FISHING);
+            PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
             return;
         }
@@ -3010,7 +3011,7 @@ namespace fishingutils
             fish->item            = rset->get<bool>("item");
             fish->maxhook         = rset->get<uint8>("max_hook");
             fish->rarity          = rset->get<uint16>("rarity");
-            fish->reqKeyItem      = static_cast<KeyItem>(rset->get<uint32>("required_keyitem"));
+            fish->reqKeyItem      = rset->get<KeyItem>("required_keyitem");
 
             fish->reqFish = new std::vector<uint16>();
 

@@ -45,9 +45,6 @@ entity.onTrigger = function(player, npc)
     -- DEFAULT DIALOG
     elseif painfulMemory == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(135) -- Standard dialog after completed "Painful Memory"
-
-    else
-        player:messageSpecial(ID.text.LOVE_ROMANCE)
     end
 end
 

@@ -77,3 +77,11 @@ target_link_libraries(xi_test
         xi_test_lib)
 
 set_target_output_directory(xi_test)
+
+if(TRACY_ENABLE)
+    target_link_libraries(xi_test_lib PUBLIC TracyClient)
+    set_target_properties(xi_test PROPERTIES OUTPUT_NAME xi_test_tracy)
+    target_compile_definitions(xi_test_lib PUBLIC TRACY_ENABLE)
+    target_compile_definitions(xi_test_lib PUBLIC TRACY_NO_EXIT=1)
+    message(STATUS "TRACY_ENABLE: xi_test will be output as xi_test_tracy")
+endif(TRACY_ENABLE)

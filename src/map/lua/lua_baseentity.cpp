@@ -92,12 +92,12 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/item_lockflg.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 
 #include "packets/action.h"
 #include "packets/auction_house.h"
-#include "packets/change_music.h"
 #include "packets/char_abilities.h"
 #include "packets/char_appearance.h"
 #include "packets/char_emotion.h"
@@ -118,23 +118,14 @@
 #include "packets/entity_enable_list.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/event_string.h"
-#include "packets/event_update.h"
-#include "packets/event_update_string.h"
 #include "packets/guild_menu.h"
 #include "packets/guild_menu_buy.h"
 #include "packets/independent_animation.h"
 #include "packets/instance_entry.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_modify.h"
-#include "packets/inventory_size.h"
 #include "packets/key_items.h"
 #include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
-#include "packets/menu_mog.h"
 #include "packets/menu_raisetractor.h"
 #include "packets/message_basic.h"
 #include "packets/message_combat.h"
@@ -147,13 +138,20 @@
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
-#include "packets/release.h"
 #include "packets/roe_questlog.h"
+#include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x02e_openmogmenu.h"
 #include "packets/s2c/0x039_mapschedulor.h"
+#include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x05c_pendingnum.h"
+#include "packets/s2c/0x05d_pendingstr.h"
+#include "packets/s2c/0x05f_music.h"
 #include "packets/server_ip.h"
 #include "packets/shop_items.h"
 #include "packets/shop_menu.h"
-#include "packets/weather.h"
 
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
@@ -1239,7 +1237,7 @@ void CLuaBaseEntity::updateEvent(sol::variadic_args va)
         }
     }
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CEventUpdatePacket>(params);
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_PENDINGNUM>(params);
 }
 
 /************************************************************************
@@ -1274,7 +1272,7 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
     uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
     uint32 param8 = va.get_type(12) == sol::type::number ? va.get<uint32>(12) : 0;
 
-    PChar->pushPacket<CEventUpdateStringPacket>(string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
+    PChar->pushPacket<GP_SERV_COMMAND_PENDINGSTR>(string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
 }
 
 /************************************************************************
@@ -1336,18 +1334,18 @@ void CLuaBaseEntity::release()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
+    GP_SERV_COMMAND_EVENTUCOFF_MODE releaseType = GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard;
 
     if (PChar->isInEvent())
     {
         // Message: Event skipped
-        releaseType = RELEASE_TYPE::SKIPPING;
+        releaseType = GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent;
         PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::EventSkipped);
     }
 
     PChar->inSequence = false;
-    PChar->pushPacket<CReleasePacket>(PChar, releaseType);
-    PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::EVENT);
+    PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, releaseType);
+    PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::EventRecvPending);
     PChar->endCurrentEvent();
 }
 
@@ -2422,9 +2420,9 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
  *  Example : if player:getWeather() == xi.weather.WIND then
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getWeather(sol::object const& ignoreScholar)
+auto CLuaBaseEntity::getWeather(sol::object const& ignoreScholar) const -> uint8
 {
-    WEATHER weather = WEATHER_NONE;
+    auto weather = Weather::None;
 
     if (m_PBaseEntity->objtype & TYPE_PC || m_PBaseEntity->objtype & TYPE_MOB)
     {
@@ -2446,11 +2444,11 @@ uint8 CLuaBaseEntity::getWeather(sol::object const& ignoreScholar)
  *  Notes   : Only used for GM command: scripts/commands/setweather.lua
  ************************************************************************/
 
-void CLuaBaseEntity::setWeather(uint8 weatherType)
+void CLuaBaseEntity::setWeather(Weather weatherType)
 {
-    if (weatherType < MAX_WEATHER_ID)
+    if (magic_enum::enum_contains<Weather>(weatherType))
     {
-        zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather(static_cast<WEATHER>(weatherType));
+        zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather(weatherType);
         luautils::OnZoneWeatherChange(m_PBaseEntity->getZone(), weatherType);
     }
 }
@@ -2462,7 +2460,7 @@ void CLuaBaseEntity::setWeather(uint8 weatherType)
  *  Notes   : Used for mounting Chocobo and changing Jeuno music in Winter
  ************************************************************************/
 
-void CLuaBaseEntity::changeMusic(uint16 blockID, uint16 musicTrackID)
+void CLuaBaseEntity::changeMusic(MusicSlot slotId, uint16 trackId) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -2471,7 +2469,7 @@ void CLuaBaseEntity::changeMusic(uint16 blockID, uint16 musicTrackID)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    PChar->pushPacket<CChangeMusicPacket>(blockID, musicTrackID);
+    PChar->pushPacket<GP_SERV_COMMAND_MUSIC>(slotId, trackId);
 }
 
 /************************************************************************
@@ -2493,7 +2491,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
     switch (menu)
     {
         case 1:
-            PChar->pushPacket<CMenuMogPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_OPENMOGMENU>();
             break;
         case 2:
             PChar->pushPacket<CShopMenuPacket>(PChar);
@@ -4251,7 +4249,7 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& c
     if (SlotID != ERROR_SLOTID)
     {
         charutils::UpdateItem(PChar, location, SlotID, -quantity);
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
         return true;
     }
@@ -4283,7 +4281,7 @@ bool CLuaBaseEntity::delItemAt(const uint16 itemID, const int32 quantity, uint8 
     if (const auto* PItem = PChar->getStorage(containerId)->GetItem(slotId); PItem && PItem->getID() == itemID)
     {
         charutils::UpdateItem(PChar, containerId, slotId, -quantity);
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
         return true;
     }
@@ -4341,7 +4339,7 @@ bool CLuaBaseEntity::delContainerItems(sol::object const& containerID)
         }
     }
 
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     return true;
 }
 
@@ -4793,11 +4791,11 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
                     PItemLinkPearl->setSubType(ITEM_LOCKED);
                     PChar->equip[SLOT_LINK2]    = PItemLinkPearl->getSlotID();
                     PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
-                    PChar->pushPacket<CInventoryAssignPacket>(PItemLinkPearl, INV_LINKSHELL);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkPearl, ItemLockFlg::Linkshell);
                     charutils::SaveCharEquip(PChar);
                     PChar->pushPacket<CLinkshellEquipPacket>(PChar, PItemLinkPearl->GetLSID());
-                    PChar->pushPacket<CInventoryItemPacket>(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID());
-                    PChar->pushPacket<CInventoryFinishPacket>();
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID());
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                     charutils::LoadInventory(PChar);
                 }
                 return true;
@@ -4825,7 +4823,7 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint32 interestData, 
         // Deduct Blank Plate
         battleutils::RemoveAmmo(PChar);
 
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
         // Used Soul Plate
         CItem* PItem = itemutils::GetItem(ITEMID::SOUL_PLATE);
@@ -4887,7 +4885,7 @@ void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
         PChar->getStorage(locationID)->AddBuff(newSize);
-        PChar->pushPacket<CInventorySizePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
         charutils::SaveCharInventoryCapacity(PChar);
     }
     else
@@ -4958,7 +4956,7 @@ void CLuaBaseEntity::confirmTrade() const
         }
     }
     PChar->TradeContainer->Clean();
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }
 
 /************************************************************************
@@ -4998,7 +4996,7 @@ void CLuaBaseEntity::tradeComplete() const
         }
     }
     PChar->TradeContainer->Clean();
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }
 
 auto CLuaBaseEntity::getTrade() -> CTradeContainer*

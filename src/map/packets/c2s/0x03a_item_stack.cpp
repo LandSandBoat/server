@@ -22,7 +22,7 @@
 #include "0x03a_item_stack.h"
 
 #include "entities/charentity.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_ITEM_STACK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -96,5 +96,5 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
         }
     }
 
-    PChar->pushPacket<CInventoryFinishPacket>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 }

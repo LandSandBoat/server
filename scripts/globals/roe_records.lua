@@ -7603,6 +7603,7 @@ xi.roe.records =
 
     [3505] =
     { -- Vanquish Bombs (UC)
+      -- TODO: Does this include Clusters, Djinn, Snolls?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 56 }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
@@ -7699,6 +7700,7 @@ xi.roe.records =
 
     [3515] =
     { -- Vanquish Cockatrices (UC)
+      -- TODO: Does this include Ziz?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 70 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
@@ -7738,6 +7740,7 @@ xi.roe.records =
 
     [3520] =
     { -- Vanquish Lizards (UC)
+      -- TODO: Does this include Ice Lizards?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 174 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
@@ -7788,7 +7791,7 @@ xi.roe.records =
     { -- Vanquish Crabs (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { 75, 76, 77, 372 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
+        reqs = { mobFamily = set { 77 }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7923,7 +7926,7 @@ xi.roe.records =
     { -- Vanquish Flies (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { 113, 374 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
+        reqs = { mobFamily = set { 113 }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8433,7 +8436,7 @@ xi.roe.records =
     { -- Vanquish Dolls (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { 83, 84, 85, 498 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobFamily = set { 84, 85 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8470,9 +8473,10 @@ xi.roe.records =
 
     [3600] =
     { -- Vanquish Slimes (UC)
+      -- TODO: Does this include clots?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { 228, 229, 230 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobFamily = set { 228, 229 }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8836,6 +8840,7 @@ xi.roe.records =
 
     [3640] =
     { -- Vanquish Elementals (UC)
+      -- TODO: Does this include hybrid elementals?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 99, 100, 101, 102, 103, 104, 105, 106 }, mobXP = true,
@@ -9068,6 +9073,7 @@ xi.roe.records =
 
     [3665] =
     { -- Vanquish Skeletons (UC)
+      -- TODO: Does this include Draugr?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 227 }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
@@ -9436,6 +9442,7 @@ xi.roe.records =
 
     [3705] =
     { -- Vanquish Twitherym (UC)
+      -- TODO: Does this include Fluturini?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
         reqs = { mobFamily = set { 338 }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },

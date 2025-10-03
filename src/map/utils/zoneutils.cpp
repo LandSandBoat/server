@@ -30,6 +30,7 @@
 #include "conquest_system.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
+#include "enums/weather.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
 #include "map_networking.h"
@@ -83,11 +84,11 @@ namespace zoneutils
             {
                 if (!PZone->m_WeatherVector.empty())
                 {
-                    PZone->SetWeather(static_cast<WEATHER>(PZone->m_WeatherVector.at(0).common));
+                    PZone->SetWeather(static_cast<Weather>(PZone->m_WeatherVector.at(0).common));
                 }
                 else
                 {
-                    PZone->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
+                    PZone->SetWeather(Weather::None); // If not weather data found, initialize with WEATHER_NONE
                 }
             }
         }
@@ -342,7 +343,7 @@ namespace zoneutils
                             PNpc->animationsub = rset->get<uint8>("animationsub");
 
                             PNpc->namevis = rset->get<uint8>("namevis");
-                            PNpc->status  = static_cast<STATUS_TYPE>(rset->get<uint8>("status"));
+                            PNpc->status  = rset->get<STATUS_TYPE>("status");
                             PNpc->m_flags = rset->get<uint32>("entityFlags");
 
                             db::extractFromBlob(rset, "look", PNpc->look);
@@ -452,7 +453,7 @@ namespace zoneutils
                             PMob->loc.p                 = PMob->m_SpawnPoint;
 
                             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-                            PMob->m_SpawnType   = static_cast<SPAWNTYPE>(rset->get<uint8>("spawntype"));
+                            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
                             PMob->m_DropID      = rset->get<uint32>("dropid");
 
                             PMob->HPmodifier = rset->get<uint32>("HP");
@@ -478,9 +479,9 @@ namespace zoneutils
 
                             PMob->m_Behavior    = rset->get<uint16>("behavior");
                             PMob->m_Link        = rset->get<uint32>("links");
-                            PMob->m_Type        = static_cast<MOBTYPE>(rset->get<uint32>("mobType"));
+                            PMob->m_Type        = rset->get<MOBTYPE>("mobType");
                             PMob->m_Immunity    = rset->get<uint32>("immunity");
-                            PMob->m_EcoSystem   = static_cast<ECOSYSTEM>(rset->get<uint32>("ecosystemID"));
+                            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
                             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
                             PMob->baseSpeed      = rset->get<uint8>("speed");
@@ -568,7 +569,7 @@ namespace zoneutils
 
                             PMob->m_Pool = rset->get<uint32>("poolid");
 
-                            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(rset->get<uint8>("allegiance"));
+                            PMob->allegiance = rset->get<ALLEGIANCE_TYPE>("allegiance");
                             PMob->namevis    = rset->get<uint8>("namevis");
                             PMob->m_Aggro    = rset->get<bool>("aggro");
 
@@ -760,7 +761,7 @@ namespace zoneutils
         const auto rset = db::preparedStmt(query, ZoneID);
         if (rset && rset->rowsCount() && rset->next())
         {
-            const auto zoneType    = static_cast<ZONE_TYPE>(rset->get<uint16>("zonetype"));
+            const auto zoneType    = rset->get<ZONE_TYPE>("zonetype");
             const auto restriction = rset->get<uint8>("restriction");
 
             if (zoneType & ZONE_TYPE::INSTANCED)
@@ -1195,9 +1196,9 @@ namespace zoneutils
         return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
     }
 
-    auto GetWeatherElement(const WEATHER weather) -> int
+    auto GetWeatherElement(const Weather weather) -> int
     {
-        if (weather >= MAX_WEATHER_ID)
+        if (!magic_enum::enum_contains<Weather>(weather))
         {
             ShowWarning("zoneutils::GetWeatherElement() - Invalid weather passed to function.");
             return 0;
@@ -1228,7 +1229,7 @@ namespace zoneutils
             8, // WEATHER_GLOOM
             8, // WEATHER_DARKNESS
         };
-        return Element[weather];
+        return Element[static_cast<uint16_t>(weather)];
     }
 
     /************************************************************************

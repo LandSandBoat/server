@@ -29,10 +29,12 @@
 #include <cstdlib>
 
 spawnGroup::spawnGroup(uint32_t _maxSpawns, uint16_t _zoneId, uint32_t _groupId)
+: maxSpawns(_maxSpawns)
+, zoneId(_zoneId)
+, groupId(_groupId)
 {
-    maxSpawns = _maxSpawns;
-    zoneId    = _zoneId;
-    groupId   = _groupId;
+    members.reserve(_maxSpawns);
+    mobsInPoolAllowedToSpawn.reserve(_maxSpawns);
 }
 
 // Add member, used on db load

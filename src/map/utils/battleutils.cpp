@@ -33,8 +33,8 @@
 
 #include "packets/char_health.h"
 #include "packets/char_status.h"
-#include "packets/inventory_finish.h"
 #include "packets/message_basic.h"
+#include "packets/s2c/0x01d_item_same.h"
 
 #include "lua/luautils.h"
 
@@ -51,6 +51,7 @@
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
@@ -64,9 +65,9 @@
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
 #include "packets/char_recast.h"
-#include "packets/lock_on.h"
 #include "packets/pet_sync.h"
 #include "packets/position.h"
+#include "packets/s2c/0x058_assist.h"
 #include "party.h"
 #include "petskill.h"
 #include "recast_container.h"
@@ -647,21 +648,21 @@ namespace battleutils
         }
 
         // matching day 10% bonus, matching weather 10% or 25% for double weather
-        float   dBonus  = 1.0;
-        float   resist  = 1.0;
-        uint32  WeekDay = static_cast<uint8>(vanadiel_time::get_weekday());
-        WEATHER weather = GetWeather(PAttacker, false);
+        float  dBonus  = 1.0;
+        float  resist  = 1.0;
+        uint32 WeekDay = static_cast<uint8>(vanadiel_time::get_weekday());
+        auto   weather = GetWeather(PAttacker, false);
 
         DAYTYPE strongDay[8]           = { FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, WATERSDAY, LIGHTSDAY, DARKSDAY };
         DAYTYPE weakDay[8]             = { WATERSDAY, FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, DARKSDAY, LIGHTSDAY };
-        WEATHER strongWeatherSingle[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
-                                           WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
-        WEATHER strongWeatherDouble[8] = { WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES, WEATHER_SAND_STORM,
-                                           WEATHER_THUNDERSTORMS, WEATHER_SQUALL, WEATHER_STELLAR_GLARE, WEATHER_DARKNESS };
-        WEATHER weakWeatherSingle[8]   = { WEATHER_RAIN, WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND,
-                                           WEATHER_DUST_STORM, WEATHER_THUNDER, WEATHER_GLOOM, WEATHER_AURORAS };
-        WEATHER weakWeatherDouble[8]   = { WEATHER_SQUALL, WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES,
-                                           WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
+        Weather strongWeatherSingle[8] = { Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm,
+                                           Weather::Thunder, Weather::Rain, Weather::Auroras, Weather::Gloom };
+        Weather strongWeatherDouble[8] = { Weather::HeatWave, Weather::Blizzards, Weather::Gales, Weather::SandStorm,
+                                           Weather::Thunderstorms, Weather::Squall, Weather::StellarGlare, Weather::Darkness };
+        Weather weakWeatherSingle[8]   = { Weather::Rain, Weather::HotSpell, Weather::Snow, Weather::Wind,
+                                           Weather::DustStorm, Weather::Thunder, Weather::Gloom, Weather::Auroras };
+        Weather weakWeatherDouble[8]   = { Weather::Squall, Weather::HeatWave, Weather::Blizzards, Weather::Gales,
+                                           Weather::SandStorm, Weather::Thunderstorms, Weather::Darkness, Weather::StellarGlare };
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
         Mod     resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA,
                                            Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
@@ -4264,7 +4265,7 @@ namespace battleutils
             {
                 // Futae Takes 2 of Your Tools
                 charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
             else
             {
@@ -4280,7 +4281,7 @@ namespace battleutils
                 if (ConsumeTool && xirand::GetRandomNumber(100) > chance)
                 {
                     charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
-                    PChar->pushPacket<CInventoryFinishPacket>();
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                 }
             }
         }
@@ -5384,13 +5385,13 @@ namespace battleutils
                 if (EntityToLockon != nullptr)
                 {
                     // lock on to the new target!
-                    PChar->pushPacket<CLockOnPacket>(PChar, EntityToLockon);
+                    PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToLockon);
                 }
             }
             else if (EntityToAssist->GetBattleTargetID() != 0)
             {
                 // lock on to the new target!
-                PChar->pushPacket<CLockOnPacket>(PChar, EntityToAssist->GetBattleTarget());
+                PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToAssist->GetBattleTarget());
             }
         }
     }
@@ -5484,68 +5485,68 @@ namespace battleutils
         }
     }
 
-    WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
+    auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> Weather
     {
         if (PEntity == nullptr || zoneutils::GetZone(PEntity->getZone()) == nullptr)
         {
-            return WEATHER_NONE;
+            return Weather::None;
         }
 
         return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
     }
 
-    WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather)
+    auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar, Weather zoneWeather) -> Weather
     {
         if (PEntity == nullptr)
         {
-            return WEATHER_NONE;
+            return Weather::None;
         }
 
-        WEATHER scholarSpell = WEATHER_NONE;
+        auto scholarSpell = Weather::None;
 
         if (!ignoreScholar) // Do not need to check for status effects if we're ignoring scholar spells
         {
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_FIRESTORM))
             {
-                scholarSpell = WEATHER_HOT_SPELL;
+                scholarSpell = Weather::HotSpell;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RAINSTORM))
             {
-                scholarSpell = WEATHER_RAIN;
+                scholarSpell = Weather::Rain;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SANDSTORM))
             {
-                scholarSpell = WEATHER_DUST_STORM;
+                scholarSpell = Weather::DustStorm;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_WINDSTORM))
             {
-                scholarSpell = WEATHER_WIND;
+                scholarSpell = Weather::Wind;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HAILSTORM))
             {
-                scholarSpell = WEATHER_SNOW;
+                scholarSpell = Weather::Snow;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_THUNDERSTORM))
             {
-                scholarSpell = WEATHER_THUNDER;
+                scholarSpell = Weather::Thunder;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AURORASTORM))
             {
-                scholarSpell = WEATHER_AURORAS;
+                scholarSpell = Weather::Auroras;
             }
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VOIDSTORM))
             {
-                scholarSpell = WEATHER_GLOOM;
+                scholarSpell = Weather::Gloom;
             }
         }
 
-        if (ignoreScholar || scholarSpell == WEATHER_NONE || zoneWeather == (scholarSpell + 1))
+        if (ignoreScholar || scholarSpell == Weather::None || static_cast<uint16_t>(zoneWeather) == (static_cast<uint16_t>(scholarSpell) + 1))
         { // Strong weather overwrites scholar spell weak weather
-            return (WEATHER)zoneWeather;
+            return zoneWeather;
         }
         else if (scholarSpell == zoneWeather)
         {
-            return (WEATHER)(zoneWeather + 1); // Storm spells stack with weather
+            return static_cast<Weather>(static_cast<uint16_t>(zoneWeather) + 1); // Storm spells stack with weather
         }
         else
         {
@@ -5553,7 +5554,7 @@ namespace battleutils
         }
     }
 
-    bool WeatherMatchesElement(WEATHER weather, uint8 element)
+    auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
     {
         switch (element)
         {
@@ -5563,8 +5564,8 @@ namespace battleutils
             case ELEMENT_FIRE:
                 switch (weather)
                 {
-                    case WEATHER_HOT_SPELL:
-                    case WEATHER_HEAT_WAVE:
+                    case Weather::HotSpell:
+                    case Weather::HeatWave:
                         return true;
                         break;
                     default:
@@ -5574,8 +5575,8 @@ namespace battleutils
             case ELEMENT_ICE:
                 switch (weather)
                 {
-                    case WEATHER_SNOW:
-                    case WEATHER_BLIZZARDS:
+                    case Weather::Snow:
+                    case Weather::Blizzards:
                         return true;
                         break;
                     default:
@@ -5585,8 +5586,8 @@ namespace battleutils
             case ELEMENT_WIND:
                 switch (weather)
                 {
-                    case WEATHER_WIND:
-                    case WEATHER_GALES:
+                    case Weather::Wind:
+                    case Weather::Gales:
                         return true;
                         break;
                     default:
@@ -5596,8 +5597,8 @@ namespace battleutils
             case ELEMENT_EARTH:
                 switch (weather)
                 {
-                    case WEATHER_DUST_STORM:
-                    case WEATHER_SAND_STORM:
+                    case Weather::DustStorm:
+                    case Weather::SandStorm:
                         return true;
                         break;
                     default:
@@ -5607,8 +5608,8 @@ namespace battleutils
             case ELEMENT_THUNDER:
                 switch (weather)
                 {
-                    case WEATHER_THUNDER:
-                    case WEATHER_THUNDERSTORMS:
+                    case Weather::Thunder:
+                    case Weather::Thunderstorms:
                         return true;
                         break;
                     default:
@@ -5618,8 +5619,8 @@ namespace battleutils
             case ELEMENT_WATER:
                 switch (weather)
                 {
-                    case WEATHER_RAIN:
-                    case WEATHER_SQUALL:
+                    case Weather::Rain:
+                    case Weather::Squall:
                         return true;
                         break;
                     default:
@@ -5629,8 +5630,8 @@ namespace battleutils
             case ELEMENT_LIGHT:
                 switch (weather)
                 {
-                    case WEATHER_AURORAS:
-                    case WEATHER_STELLAR_GLARE:
+                    case Weather::Auroras:
+                    case Weather::StellarGlare:
                         return true;
                         break;
                     default:
@@ -5640,8 +5641,8 @@ namespace battleutils
             case ELEMENT_DARK:
                 switch (weather)
                 {
-                    case WEATHER_GLOOM:
-                    case WEATHER_DARKNESS:
+                    case Weather::Gloom:
+                    case Weather::Darkness:
                         return true;
                         break;
                     default:
@@ -6649,13 +6650,13 @@ namespace battleutils
                 charutils::UnequipItem(PChar, SLOT_AMMO);
                 PChar->RequestPersist(CHAR_PERSIST::EQUIP);
                 charutils::UpdateItem(PChar, loc, slot, -quantity);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                 return true;
             }
             else
             {
                 charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -quantity);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                 return false;
             }
         }

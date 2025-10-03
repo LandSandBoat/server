@@ -443,17 +443,6 @@ public:
     {
         // TODO: This could hook into pooling of packet objects, etc.
         auto packet = std::make_unique<T>(std::forward<Args>(args)...);
-
-        // Auto-set default size for newer-style packets, but only if the constructor did not set it.
-        if constexpr (requires { typename T::PacketData; })
-        {
-            if (packet->getSize() == 0)
-            {
-                // PacketData does not declare the header, so add it now.
-                packet->setSize(sizeof(typename T::PacketData) + sizeof(GP_SERV_HEADER));
-            }
-        }
-
         pushPacket(std::move(packet));
     }
 

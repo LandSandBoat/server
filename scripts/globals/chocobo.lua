@@ -163,7 +163,7 @@ xi.chocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
 end
 
 xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
-    local chocoGame = player:getLocalVar('tempDestCity')
+    local chocoGame = player:getLocalVar('[ChocoGame]DestCity')
 
     if csid == eventSucceed and option == 0 then
         local mLvl     = player:getMainLvl()

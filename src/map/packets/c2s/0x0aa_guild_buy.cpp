@@ -25,7 +25,7 @@
 #include "items/item.h"
 #include "items/item_shop.h"
 #include "packets/guild_menu_buy_update.h"
-#include "packets/inventory_finish.h"
+#include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -80,7 +80,7 @@ void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar)
                 ShowInfo("GP_CLI_COMMAND_GUILD_BUY: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->getName(), quantity, ItemNo);
                 PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() - quantity);
                 PChar->pushPacket<CGuildMenuBuyUpdatePacket>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(), ItemNo, quantity);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
         }
     }

@@ -107,6 +107,13 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", m_PEntity, m_PSkill->getID());
     SpendCost();
+
+    // Probably ok to do this for all skills, but there's no need
+    // This allows instant mobskills to actually be instant by processing the first tick immediately
+    if (m_castTime == 0s)
+    {
+        DoUpdate(GetEntryTime());
+    }
 }
 
 CMobSkill* CMobSkillState::GetSkill()
@@ -150,7 +157,7 @@ bool CMobSkillState::Update(timer::time_point tick)
         }
     }
 
-    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
+    if (m_PEntity && m_PEntity->isAlive() && (tick >= GetEntryTime() + m_castTime && !IsCompleted()))
     {
         action_t action;
         m_PEntity->OnMobSkillFinished(*this, action);

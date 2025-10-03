@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore strengh of 1 every 3 ticks.
+    -- The effect restores 1 STR every 3 ticks. (1 Tick = 3 seconds).
     local downSTREffectSize = effect:getPower()
     if downSTREffectSize > 0 then
         effect:setPower(downSTREffectSize - 1)
         target:delMod(xi.mod.STR, -1)
+    else
+        target:delStatusEffect(xi.effect.STR_DOWN)
     end
 end
 

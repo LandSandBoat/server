@@ -290,7 +290,7 @@ namespace luautils
 
     void OnGameDay(CZone* PZone);
     void OnGameHour(CZone* PZone);
-    void OnZoneWeatherChange(uint16 ZoneID, uint8 weather);
+    void OnZoneWeatherChange(uint16 zoneId, Weather weather);
     void OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
     void OnGameIn(CCharEntity* PChar, bool zoning);

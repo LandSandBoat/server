@@ -25,7 +25,7 @@
 
 #include "ai/ai_container.h"
 #include "packets/action.h"
-#include "packets/lock_on.h"
+#include "packets/s2c/0x058_assist.h"
 #include "utils/battleutils.h"
 
 CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
@@ -141,7 +141,7 @@ void CAttackState::UpdateTarget(uint16 targid)
                         if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
                         {
                             newTargid = PPotentialTarget.second->targid;
-                            PChar->pushPacket<CLockOnPacket>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));
+                            PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));
                             break;
                         }
                     }

@@ -25,8 +25,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(10008) -- Standard Conversation
         end
-    else
-        player:startEvent(10008) -- Standard Conversation
     end
 end
 

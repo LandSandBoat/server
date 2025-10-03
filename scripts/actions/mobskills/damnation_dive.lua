@@ -12,12 +12,12 @@ local mobskillObject = {}
 
 -----------------------------------
 -- onMobSkillCheck
--- Check for Grah Family id 122, 123, 124
--- if not in Bird form, then ignore.
+-- Check for Ghrah family bird form.
+-- If not in Bird form, then ignore.
 -----------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and
+        mob:getFamily() == 122 and
         mob:getAnimationSub() ~= 3
     then
         return 1

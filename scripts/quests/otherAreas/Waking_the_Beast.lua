@@ -4,7 +4,6 @@
 -- Log ID: 4, Quest ID: 32
 -- ???: !pos -179 8 254
 -----------------------------------
-require('scripts/globals/common')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

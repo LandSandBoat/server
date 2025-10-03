@@ -30,6 +30,8 @@
 #include "map/entities/charentity.h"
 #include "test_common.h"
 
+#include <format>
+
 #include <bcrypt/BCrypt.hpp>
 
 namespace

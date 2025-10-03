@@ -41,7 +41,7 @@ namespace
     static const int  NAVMESHSET_VERSION = 1;
 
     // Flags are defined in a "Sample.h" file in the RecastDemo project of recastnavigation.
-    enum SamplePolyFlags
+    enum SamplePolyFlags : uint16_t
     {
         SAMPLE_POLYFLAGS_WALK     = 0x0001, // Ability to walk (ground, grass, road)
         SAMPLE_POLYFLAGS_SWIM     = 0x0002, // Ability to swim (water).
@@ -150,6 +150,7 @@ void CNavMesh::ToDetourPos(const position_t* pos, float* out)
 CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
+, m_raycastHit{}
 {
     m_navMeshQueryPolyData.resize(MAX_NAV_POLYS);
     m_navMeshQueryStraightPathFloatData.resize(MAX_NAV_POLYS * 3);

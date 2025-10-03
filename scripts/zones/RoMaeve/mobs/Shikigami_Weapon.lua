@@ -43,6 +43,7 @@ local pathNodes =
 }
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.MAGIC))
     mob:addImmunity(xi.immunity.SILENCE)
     mob:setMod(xi.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
 end

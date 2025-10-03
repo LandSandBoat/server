@@ -47,6 +47,7 @@ xi.znm.ZNM_POP_COSTS =
 -----------------------------------
 xi.znm.SANRAKUS_INTEREST =
 { -- [interest ID] = {superFamily ID, ecoSystem, optional Name},
+  -- TODO: Verify superFamily IDs. Note: "ecoSystem" is the superFamily IDs of secondary interest targets.
     [1]  = { superFamily = 113, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Pugil, Aquans
     [2]  = { superFamily = 130, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Sea Monk
     [3]  = { superFamily = 108, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Verified Orobon

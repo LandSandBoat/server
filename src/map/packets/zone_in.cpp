@@ -287,7 +287,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint8>(0x5E)  = PChar->animation == ANIMATION_MOUNT ? 0x54 : 0xD4;
 
     ref<uint16>(0x60) = PChar->loc.boundary;
-    ref<uint16>(0x68) = PChar->loc.zone->GetWeather();
+    ref<uint16>(0x68) = static_cast<uint16>(PChar->loc.zone->GetWeather());
     ref<uint32>(0x6A) = PChar->loc.zone->GetWeatherChangeTime();
 
     // TODO: Could this be previous weather, for weather transitions?

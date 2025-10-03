@@ -1449,7 +1449,7 @@ namespace mobutils
         {
             ModsList_t* familyMods = GetMobFamilyMods(rset->get<uint16>("familyid"), true);
 
-            auto* mod = new CModifier(static_cast<Mod>(rset->get<uint16>("modid")));
+            auto* mod = new CModifier(rset->get<Mod>("modid"));
             mod->setModAmount(rset->get<int16>("value"));
 
             if (rset->get<bool>("is_mob_mod"))
@@ -1470,7 +1470,7 @@ namespace mobutils
             const auto  pool     = rset->get<uint16>("poolid");
             ModsList_t* poolMods = GetMobPoolMods(pool, true);
 
-            const auto id = static_cast<Mod>(rset->get<uint16>("modid"));
+            const auto id = rset->get<Mod>("modid");
 
             auto* mod = new CModifier(id);
             mod->setModAmount(rset->get<int16>("value"));
@@ -1698,7 +1698,7 @@ namespace mobutils
             PMob->packetName.insert(0, rset->get<std::string>("packet_name"));
 
             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-            PMob->m_SpawnType   = static_cast<SPAWNTYPE>(rset->get<uint8>("spawntype"));
+            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
             PMob->m_DropID      = rset->get<uint32>("dropid");
 
             PMob->HPmodifier = rset->get<uint32>("HP");
@@ -1723,8 +1723,8 @@ namespace mobutils
             PMob->m_Behavior    = rset->get<uint16>("behavior");
             PMob->m_Link        = rset->get<uint8>("links");
             PMob->m_Type        = rset->get<uint8>("mobType");
-            PMob->m_Immunity    = static_cast<IMMUNITY>(rset->get<uint32>("immunity"));
-            PMob->m_EcoSystem   = static_cast<ECOSYSTEM>(rset->get<uint8>("ecosystemID"));
+            PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
+            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -1795,7 +1795,7 @@ namespace mobutils
 
             PMob->m_Pool = rset->get<uint32>("poolid");
 
-            PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(rset->get<uint8>("allegiance"));
+            PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
             PMob->namevis         = rset->get<uint8>("namevis");
             PMob->m_Aggro         = rset->get<bool>("aggro");
             PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
@@ -1868,7 +1868,7 @@ namespace mobutils
             PMob->packetName.insert(0, rset->get<std::string>("packet_name"));
 
             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-            PMob->m_SpawnType   = static_cast<SPAWNTYPE>(rset->get<uint8>("spawntype"));
+            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
             PMob->m_DropID      = rset->get<uint32>("dropid");
 
             PMob->HPmodifier = rset->get<uint32>("HP");
@@ -1893,8 +1893,8 @@ namespace mobutils
             PMob->m_Behavior    = rset->get<uint16>("behavior");
             PMob->m_Link        = rset->get<uint8>("links");
             PMob->m_Type        = rset->get<uint8>("mobType");
-            PMob->m_Immunity    = static_cast<IMMUNITY>(rset->get<uint32>("immunity"));
-            PMob->m_EcoSystem   = static_cast<ECOSYSTEM>(rset->get<uint8>("ecosystemID"));
+            PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
+            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
             PMob->m_ModelRadius = rset->get<float>("mobradius");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -1953,7 +1953,7 @@ namespace mobutils
 
             PMob->m_Pool = rset->get<uint32>("poolid");
 
-            PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(rset->get<uint8>("allegiance"));
+            PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
             PMob->namevis         = rset->get<uint8>("namevis");
             PMob->m_Aggro         = rset->get<bool>("aggro");
             PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");

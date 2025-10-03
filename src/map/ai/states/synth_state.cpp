@@ -25,8 +25,6 @@
 
 #include "ai/ai_container.h"
 #include "packets/action.h"
-#include "packets/lock_on.h"
-#include "utils/battleutils.h"
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)

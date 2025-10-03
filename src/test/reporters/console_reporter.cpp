@@ -74,7 +74,7 @@ void ConsoleReporter::onSuiteEnd(const TestSuite& suite, std::chrono::millisecon
 
 void ConsoleReporter::onTestStart(const TestSuite& suite, const TestCase& testCase)
 {
-    std::cout << termcolor::green << "[ RUN      ]" << termcolor::reset << " " << suite.fullName() << "::" << testCase.name() << std::endl;
+    std::cout << termcolor::green << "[ RUN      ]" << termcolor::reset << " " << suite.fullName() << "::" << testCase.name() << "\n";
 }
 
 void ConsoleReporter::onTestSkipped(const TestSuite& suite, const TestCase& testCase)
@@ -120,12 +120,12 @@ void ConsoleReporter::onTestEnd(const TestResult& result)
     // Status line
     std::cout << color << "[" << label << "]" << termcolor::reset << " "
               << result.suiteName << "::" << result.testName
-              << " (" << formatDuration(result.duration) << ")" << std::endl;
+              << " (" << formatDuration(result.duration) << ")\n";
 
     // Error message
     if (result.status == TestStatus::Failed && !result.errorMessage.empty())
     {
-        std::cout << termcolor::red << "  Error: " << result.errorMessage << termcolor::reset << std::endl;
+        std::cout << termcolor::red << "  Error: " << result.errorMessage << termcolor::reset << "\n";
     }
 
     // Logs (on failure or verbose)

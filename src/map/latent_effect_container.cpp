@@ -656,7 +656,7 @@ void CLatentEffectContainer::CheckLatentsWeather()
     CheckLatentsWeather(PZone->GetWeather());
 }
 
-void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
+void CLatentEffectContainer::CheckLatentsWeather(Weather weather)
 {
     ProcessLatentEffects([this, weather](CLatentEffect& latent) {
         if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
@@ -667,7 +667,7 @@ void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
         else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
         {
             auto element = battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather);
-            return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+            return ApplyLatentEffect(latent, latent.GetConditionsValue() == static_cast<uint16_t>(element));
         }
         return false;
     });
@@ -1162,7 +1162,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             expression = m_POwner->GetMLevel() >= latentEffect.GetConditionsValue();
             break;
         case LATENT::WEATHER_CONDITION:
-            expression = latentEffect.GetConditionsValue() == battleutils::GetWeather((CBattleEntity*)m_POwner, false);
+            expression = latentEffect.GetConditionsValue() == static_cast<uint16_t>(battleutils::GetWeather((CBattleEntity*)m_POwner, false));
             break;
         case LATENT::WEATHER_ELEMENT:
             expression = latentEffect.GetConditionsValue() == zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false));

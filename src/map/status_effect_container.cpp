@@ -125,10 +125,10 @@ namespace effects
             EffectsParams[EffectID].Name       = rset->get<std::string>("name");
             EffectsParams[EffectID].Flag       = rset->get<uint32>("flags");
             EffectsParams[EffectID].Type       = rset->get<uint16>("type");
-            EffectsParams[EffectID].NegativeId = static_cast<EFFECT>(rset->get<uint16>("negative_id"));
-            EffectsParams[EffectID].Overwrite  = static_cast<EFFECTOVERWRITE>(rset->get<uint8>("overwrite"));
-            EffectsParams[EffectID].BlockId    = static_cast<EFFECT>(rset->get<uint16>("block_id"));
-            EffectsParams[EffectID].RemoveId   = static_cast<EFFECT>(rset->get<uint16>("remove_id"));
+            EffectsParams[EffectID].NegativeId = rset->get<EFFECT>("negative_id");
+            EffectsParams[EffectID].Overwrite  = rset->get<EFFECTOVERWRITE>("overwrite");
+            EffectsParams[EffectID].BlockId    = rset->get<EFFECT>("block_id");
+            EffectsParams[EffectID].RemoveId   = rset->get<EFFECT>("remove_id");
 
             EffectsParams[EffectID].Element     = rset->get<uint16>("element");
             EffectsParams[EffectID].MinDuration = std::chrono::seconds(rset->get<uint32>("min_duration"));
@@ -1679,7 +1679,7 @@ void CStatusEffectContainer::LoadStatusEffects()
     {
         const auto      flags    = rset->get<uint32>("flags");
         timer::duration duration = std::chrono::seconds(rset->get<uint32>("duration"));
-        const auto      effectID = static_cast<EFFECT>(rset->get<uint32>("effectid"));
+        const auto      effectID = rset->get<EFFECT>("effectid");
 
         if (flags & EFFECTFLAG_OFFLINE_TICK)
         {

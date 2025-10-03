@@ -35,6 +35,7 @@
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
+#include "enums/weather.h"
 #include "items.h"
 #include "lua/lua_loot.h"
 #include "lua/luautils.h"
@@ -792,7 +793,7 @@ auto CMobEntity::GetEligibleSeals() -> std::vector<uint16>
 // Rules:
 // - Mob >= 50: Geodes of matching weather/day can drop. Weather takes priority.
 // - Mob >= 80: Avatarites of matching weather/day can also drop. Weather takes priority.
-auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
+auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
 {
     if (!luautils::IsContentEnabled("ABYSSEA"))
     {
@@ -802,7 +803,7 @@ auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
     uint8 element = 0;
 
     // Set element by weather
-    if (const WEATHER weather = loc.zone->GetWeather(); weather >= WEATHER_HOT_SPELL && weather <= WEATHER_DARKNESS)
+    if (const Weather weather = loc.zone->GetWeather(); weather >= Weather::HotSpell && weather <= Weather::Darkness)
     {
         /*
         element = zoneutils::GetWeatherElement(weather);
@@ -811,36 +812,36 @@ auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
         */
         switch (weather)
         {
-            case WEATHER_HOT_SPELL:
-            case WEATHER_HEAT_WAVE:
+            case Weather::HotSpell:
+            case Weather::HeatWave:
                 element = ELEMENT_FIRE;
                 break;
-            case WEATHER_RAIN:
-            case WEATHER_SQUALL:
+            case Weather::Rain:
+            case Weather::Squall:
                 element = ELEMENT_WATER;
                 break;
-            case WEATHER_DUST_STORM:
-            case WEATHER_SAND_STORM:
+            case Weather::DustStorm:
+            case Weather::SandStorm:
                 element = ELEMENT_EARTH;
                 break;
-            case WEATHER_WIND:
-            case WEATHER_GALES:
+            case Weather::Wind:
+            case Weather::Gales:
                 element = ELEMENT_WIND;
                 break;
-            case WEATHER_SNOW:
-            case WEATHER_BLIZZARDS:
+            case Weather::Snow:
+            case Weather::Blizzards:
                 element = ELEMENT_ICE;
                 break;
-            case WEATHER_THUNDER:
-            case WEATHER_THUNDERSTORMS:
+            case Weather::Thunder:
+            case Weather::Thunderstorms:
                 element = ELEMENT_THUNDER;
                 break;
-            case WEATHER_AURORAS:
-            case WEATHER_STELLAR_GLARE:
+            case Weather::Auroras:
+            case Weather::StellarGlare:
                 element = ELEMENT_LIGHT;
                 break;
-            case WEATHER_GLOOM:
-            case WEATHER_DARKNESS:
+            case Weather::Gloom:
+            case Weather::Darkness:
                 element = ELEMENT_DARK;
                 break;
             default:

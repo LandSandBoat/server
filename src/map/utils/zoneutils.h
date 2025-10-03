@@ -42,7 +42,7 @@ namespace zoneutils
     auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
     auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
 
-    auto GetWeatherElement(WEATHER weather) -> int;
+    auto GetWeatherElement(Weather weather) -> int;
 
     auto GetZone(uint16 zoneId) -> CZone*;
     auto GetTrigger(uint16 targId, uint16 zoneId) -> CNpcEntity*;

@@ -39,6 +39,7 @@
 
 search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist)
 : socket_(std::move(socket))
+, buffer_{}
 , IPAddressesInUse_(IPAddressesInUseList)
 , IPAddressWhitelist_(IPAddressWhitelist)
 , deadline_(io_context)
@@ -906,7 +907,7 @@ void search_handler::addToUsedIPAddresses(std::string const& ipAddressStr)
     // clang-format on
 }
 
-void search_handler::checkDeadline(std::shared_ptr<search_handler> self) // self to keep the object alive
+void search_handler::checkDeadline(const std::shared_ptr<search_handler>& self) // self to keep the object alive
 {
     if (timer::now() > deadline_.expiry())
     {
