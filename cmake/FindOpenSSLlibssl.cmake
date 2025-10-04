@@ -1,3 +1,9 @@
+#
+# OpenSSL SSL library detection
+#
+# This module locates OpenSSL SSL libraries for secure socket functionality.
+#
+
 find_library(OpenSSLlibssl_LIBRARY
     NAMES
         ssl ssl_64 libssl libssl_64

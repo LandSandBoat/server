@@ -1,24 +1,32 @@
-message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
-if(${CMAKE_SOURCE_DIR} MATCHES " +")
-	set(STRIPPED_PATH "")
-	STRING(REGEX REPLACE  " +" "_" STRIPPED_PATH "${CMAKE_SOURCE_DIR}")
+#
+# Platform-specific configuration and validation
+#
+# This module handles platform-specific settings and performs
+# build environment validation (e.g., path space detection).
+#
 
-	message(STATUS
-		"Current path: ${CMAKE_SOURCE_DIR}\n"
-		"Suggested path: ${STRIPPED_PATH}\n"
-		"Your path contains spaces, this is not recommended.")
+if(${CMAKE_SOURCE_DIR} MATCHES " +")
+    set(STRIPPED_PATH "")
+    string(REGEX REPLACE " +" "_" STRIPPED_PATH "${CMAKE_SOURCE_DIR}")
+
+    message(STATUS
+        "Current path: ${CMAKE_SOURCE_DIR}\n"
+        "Suggested path: ${STRIPPED_PATH}\n"
+        "Your path contains spaces, this is not recommended.")
 endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    message(STATUS "CMAKE_SIZEOF_VOID_P == 8: 64-bit build")
+    set(PLATFORM_ARCH "64-bit")
     set(platform_suffix "64")
     set(lib_dir lib64)
     add_compile_definitions(ENV64BIT)
 elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    message(STATUS "CMAKE_SIZEOF_VOID_P == 4: 32-bit build")
+    set(PLATFORM_ARCH "32-bit")
+
     if(WIN32)
         message(FATAL_ERROR "32-bit Windows builds are not supported")
     endif()
+
     add_compile_definitions(ENV32BIT)
 endif()
 

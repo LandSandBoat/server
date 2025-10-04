@@ -1,3 +1,9 @@
+#
+# OpenSSL crypto library detection
+#
+# This module locates OpenSSL crypto libraries for cryptographic functions.
+#
+
 find_library(OpenSSLlibcrypto_LIBRARY
     NAMES
         crypto crypto_64 libcrypto libcrypto_64

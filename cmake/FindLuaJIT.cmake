@@ -1,3 +1,8 @@
+#
+# LuaJIT library detection
+#
+# This module locates LuaJIT libraries and headers for Lua scripting support.
+#
 # How to build LuaJIT Libs:
 # NOTE: LuaJIT doesn't have CMake support, so we have to build it by hand, sorry!
 #
@@ -77,9 +82,11 @@ message(STATUS "LuaJIT_FOUND: ${LuaJIT_FOUND}")
 message(STATUS "LuaJIT_LIBRARY: ${LuaJIT_LIBRARY}")
 message(STATUS "LuaJIT_INCLUDE_DIR: ${LuaJIT_INCLUDE_DIR}")
 
-# TODO: Don't do this globally
+# Create a proper target for LuaJIT instead of global linking
 if (${LuaJIT_FOUND})
-    link_libraries(${LuaJIT_LIBRARY})
-    include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR})
-    include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR}/../)
+    add_library(LuaJIT::LuaJIT UNKNOWN IMPORTED)
+    set_target_properties(LuaJIT::LuaJIT PROPERTIES
+        IMPORTED_LOCATION ${LuaJIT_LIBRARY}
+        INTERFACE_INCLUDE_DIRECTORIES "${LuaJIT_INCLUDE_DIR};${LuaJIT_INCLUDE_DIR}/../"
+    )
 endif()

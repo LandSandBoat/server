@@ -1,4 +1,9 @@
+#
+# Address/Memory/Thread sanitizer configuration
+#
+# This module configures various sanitizers for debugging and testing.
 # Set your build to use these sanitizers by configuring with 'cmake -DCMAKE_BUILD_TYPE=UBSAN ..' etc.
+#
 
 # Build Types
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}

@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include "pch.h"
-
 #include "common/application.h"
 #include "common/timer.h"
 #include "common/watchdog.h"

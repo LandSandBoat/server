@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "Default",
             "includePath": [
                 "${workspaceFolder}/ext/**",
                 "${workspaceFolder}/src/**",
@@ -9,35 +9,8 @@
                 "${workspaceFolder}/build/generated/**"
             ],
             "defines": [],
-            "cStandard":"c23",
-            "cppStandard": "c++23",
-            "intelliSenseMode": "${default}"
-        },
-        {
-            "name": "OSX",
-            "includePath": [
-                "${workspaceFolder}/ext/**",
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/build/_deps/**",
-                "${workspaceFolder}/build/generated/**"
-            ],
-            "defines": [],
-            "cStandard":"c23",
-            "cppStandard": "c++23",
-            "intelliSenseMode": "${default}",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
-        },
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/ext/**",
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/build/_deps/**",
-                "${workspaceFolder}/build/generated/**"
-            ],
-            "defines": [],
-            "cStandard":"c23",
-            "cppStandard": "c++23",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "${default}",
             "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }

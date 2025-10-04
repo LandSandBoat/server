@@ -1,8 +1,11 @@
+#
+# Valgrind memory debugging configuration
+#
+# This module configures Valgrind targets for memory debugging and profiling.
 # Enable these jobs on command-line by configuring with 'cmake -S . -B build -DENABLE_VALGRIND=ON'
-# Launch with `cmake --build <your build folder> --target valgrind_memcheck_xi_search`, or whichever target you need below
-
-option(ENABLE_VALGRIND "Run the server with Valgrind." OFF)
-message(STATUS "ENABLE_VALGRIND: ${ENABLE_VALGRIND}")
+# Launch with `cmake --build <your build folder> --target valgrind_memcheck_xi_search`,
+# or whichever target you need below.
+#
 
 if(ENABLE_VALGRIND)
     find_program(VALGRIND_COMMAND NAMES valgrind)

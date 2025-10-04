@@ -1,3 +1,9 @@
+#
+# Git repo information
+#
+# This module extracts git commit information for build versioning
+# for embedding into the compiled binaries and general logging.
+#
 
 find_package(Git)
 
@@ -25,11 +31,17 @@ execute_process(COMMAND
     OUTPUT_VARIABLE GIT_COMMIT_SUBJECT
     ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-message(STATUS "GIT_SHA1: ${GIT_SHA1}")
-message(STATUS "GIT_BRANCH: ${GIT_BRANCH}")
-message(STATUS "GIT_DATE: ${GIT_DATE}")
-message(STATUS "GIT_COMMIT_SUBJECT: ${GIT_COMMIT_SUBJECT}")
-
-if (GIT_COMMIT_SUBJECT)
+if(GIT_COMMIT_SUBJECT)
     string(REGEX REPLACE "\"" "'" GIT_COMMIT_SUBJECT ${GIT_COMMIT_SUBJECT})
 endif()
+
+# TODO: Publish this information to PARENT_SCOPE or turn into a function that returns it
+function(report_git_information)
+    message(STATUS "")
+    message(STATUS "=== Git Information ===")
+    message(STATUS "")
+    message(STATUS "  GIT_SHA1:             ${GIT_SHA1}")
+    message(STATUS "  GIT_BRANCH:           ${GIT_BRANCH}")
+    message(STATUS "  GIT_DATE:             ${GIT_DATE}")
+    message(STATUS "  GIT_COMMIT_SUBJECT:   ${GIT_COMMIT_SUBJECT}")
+endfunction()

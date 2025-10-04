@@ -45,6 +45,7 @@
 
 #include <algorithm>
 #include <array>
+#include <ranges>
 
 namespace
 {

@@ -18,6 +18,13 @@ lbuild/
 build_mariadb_32/
 build_mariadb_64/
 out/
+
+# CPM package cache
+.cpm-cache/
+
+# Compiler cache (sccache/ccache)
+.cache/
+
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -126,6 +133,8 @@ UpgradeLog*.XML
 *.slo
 *.lo
 *.o
+*.lib
+*.exp
 
 # Executables
 *.exe

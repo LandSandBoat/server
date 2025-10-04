@@ -1,0 +1,608 @@
+#
+# Centralized source file lists for all targets
+#
+# This file contains manually maintained lists of all source files
+# organized by target and functionality.
+#
+
+set(COMMON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/arguments.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/async.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/blowfish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/console_service.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/database.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/$<$<PLATFORM_ID:Linux>:src/common/debug_linux.cpp>
+    ${CMAKE_CURRENT_SOURCE_DIR}/$<$<PLATFORM_ID:Darwin>:src/common/debug_osx.cpp>
+    ${CMAKE_CURRENT_SOURCE_DIR}/$<$<PLATFORM_ID:Windows>:src/common/debug_windows.cpp>
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/filewatcher.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/ipp.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/logging.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/lua.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/md52.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/settings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/task_manager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/tracy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/xirand.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/utils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/uuid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/version.cpp # auto-generated
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/watchdog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/$<$<PLATFORM_ID:Windows>:src/common/WheatyExceptionReport.cpp>
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common/zlib.cpp
+)
+
+set(LOGIN_SOURCES
+    ${COMMON_SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/auth_session.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/connect_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/connect_engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/data_session.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/handler_session.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/login_helpers.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/view_session.cpp
+)
+
+set(LOGIN_APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/login/main.cpp
+)
+
+set(MAP_AI_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/ai_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/automaton_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/mob_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/pet_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/player_charm_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/player_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/controllers/trust_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/helpers/action_queue.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/helpers/event_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/helpers/gambits_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/helpers/pathfind.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/helpers/targetfind.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/ability_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/attack_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/death_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/despawn_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/inactive_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/item_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/magic_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/mobskill_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/petskill_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/raise_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/range_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/respawn_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/synth_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/trigger_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ai/states/weaponskill_state.cpp
+)
+
+set(MAP_ENTITY_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/automatonentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/baseentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/battleentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/charentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/fellowentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/mobentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/npcentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/petentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/entities/trustentity.cpp
+)
+
+set(MAP_PACKETS_C2S_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x00a_login.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x00c_gameok.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x00d_netend.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x00f_clstat.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x011_zone_transition.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x015_pos.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x016_charreq.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x017_charreq2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x01a_action.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x01b_friendpass.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x01c_unknown.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x01e_gm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x01f_gmcommand.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x028_item_dump.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x029_item_move.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x02b_translate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x02c_itemsearch.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x032_trade_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x033_trade_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x034_trade_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x036_item_transfer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x037_item_use.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x03a_item_stack.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x03b_subcontainer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x03c_black_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x03d_black_edit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x041_trophy_entry.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x042_trophy_absence.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x04b_fragments.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x04d_pbx.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x04e_auc.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x050_equip_set.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x051_equipset_set.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x052_equipset_check.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x053_lockstyle.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x058_recipe.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x059_effectend.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x05a_reqconquest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x05b_eventend.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x05c_eventendxzy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x05d_motion.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x05e_maprect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x060_passwards.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x061_clistatus.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x063_dig.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x064_scenarioitem.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x06e_group_solicit_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x06f_group_leave.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x070_group_breakup.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x071_group_strike.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x074_group_solicit_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x076_group_list_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x077_group_change2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x078_group_checkid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x083_shop_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x084_shop_sell_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x085_shop_sell_set.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x096_combine_ask.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x09b_chocobo_race_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0a0_switch_proposal.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0a1_switch_vote.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0a2_dice.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0aa_guild_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0ab_guild_buylist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0ac_guild_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0ad_guild_selllist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0b5_chat_std.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0b6_chat_name.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0b7_assist_channel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0be_merits.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0bf_job_points_spend.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0c0_job_points_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0c3_group_comlink_make.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0c4_group_comlink_active.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0cb_myroom_is.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0d2_map_group.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0d3_faq_gmcall.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0d4_faq_gmparam.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0d5_ack_gmmsg.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0d8_dungeon_param.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0db_config_language.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0dc_config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0dd_equip_inspect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0de_inspect_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e0_set_usermsg.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e1_get_lsmsg.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e2_set_lsmsg.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e4_get_lspriv.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e7_reqlogout.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0e8_camp.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0ea_sit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0eb_reqsubmapnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f0_rescue.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f1_buffcancel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f2_submapchange.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f4_tracking_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f5_tracking_start.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0f6_tracking_end.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0fa_myroom_layout.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0fb_myroom_bankin.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0fc_myroom_plant_add.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0fd_myroom_plant_check.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0fe_myroom_plant_crop.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x0ff_myroom_plant_stop.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x100_myroom_job.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x102_extended_job.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x104_bazaar_exit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x105_bazaar_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x106_bazaar_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x109_bazaar_open.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10a_bazaar_itemset.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10b_bazaar_close.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10c_roe_start.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10d_roe_remove.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10e_roe_claim.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x10f_currencies_1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x110_fishing_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x112_battlefield_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x113_sitchair.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x114_map_markers.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x115_currencies_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x116_unity_menu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x117_unity_quest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x118_unity_toggle.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x119_emote_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x11b_mastery_display.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x11c_party_request.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/0x11d_jump.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/c2s/validation.cpp
+)
+
+set(MAP_PACKETS_S2C_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x008_enterzone.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x01c_item_max.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x01d_item_same.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x01e_item_num.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x01f_item_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x020_item_attr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x021_item_trade_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x022_item_trade_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x023_item_trade_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x025_item_trade_mylist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x026_item_subcontainer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x02f_dig.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x033_eventstr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x038_schedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x039_mapschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x03a_magicschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x03d_shop_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x03f_shop_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x041_black_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x042_black_edit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x043_talknumname.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x051_grap_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x052_eventucoff.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x055_scenarioitem.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x057_weather.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x058_assist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x059_friendpass.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05a_motionmes.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05c_pendingnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05d_pendingstr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05f_music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0b4_config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0ca_inspect_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0d2_trophy_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0d3_trophy_solution.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0f4_tracking_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0f5_tracking_pos.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0f6_tracking_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0f9_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0fa_myroom_operation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x105_bazaar_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x106_bazaar_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x107_bazaar_close.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x108_bazaar_shopping.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x109_bazaar_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x10a_bazaar_sale.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x10e_reqsubmapnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x113_currencies_1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x118_currencies_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x11a_emote_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x11e_jump.cpp
+)
+
+set(MAP_PACKET_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/action.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/auction_house.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/campaign_map.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/caught_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_abilities.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_check.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_equip.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_health.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_job_extra.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_jobs.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_mounts.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_recast.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_skills.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_spells.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_stats.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_status.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_sync.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/char_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/chat_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/conquest_map.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/cs_position.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/delivery_box.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/entity_enable_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/entity_set_name.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/entity_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/event.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/fish_ranking.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/fishing.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_buy_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_sell_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/instance_entry.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/jobpoint_details.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/jobpoint_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/linkshell_equip.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/linkshell_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/macroequipset.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/map_marker.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/menu_jobpoints.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/menu_merit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/menu_unity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/merit_points_categories.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_basic.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_combat.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_name.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_special.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_standard.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/message_text.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/monipulator1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/monipulator2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/objective_utility.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_define.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_effects.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_invite.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_map.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_member_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/party_search.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/pet_sync.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/position.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/quest_mission_log.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/roe_questlog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/roe_sparkupdate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/roe_update.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/server_ip.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/server_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/shop_items.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/shop_menu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/status_effects.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_animation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_result.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_suggestion.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/zone_in.cpp
+)
+
+set(MAP_LUA_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_ability.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_action.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_attack.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_baseentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_battlefield.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_instance.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_item.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_loot.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_mobskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_petskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_spell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_statuseffect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_trade_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_treasure_pool.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_trigger_area.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/lua_zone.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/luautils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/lua/sol_bindings.cpp
+)
+
+set(MAP_ITEMS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_currency.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_equipment.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_flowerpot.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_furnishing.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_general.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_linkshell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_puppet.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_shop.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_usable.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item_weapon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/items/item.cpp
+)
+
+set(MAP_UTILS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/attackutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/auctionutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/battleutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/blacklistutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/blueutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/charutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/dboxutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/fellowutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/fishingutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/gardenutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/guildutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/instanceutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/itemutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/jailutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/mobutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/moduleutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/mountutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/petutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/puppetutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/serverutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/synthutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/synergyutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/trustutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/utils/zoneutils.cpp
+)
+
+set(MAP_LOS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/los/los_tree.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/los/los_tree_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/los/zone_los.cpp
+)
+
+set(MAP_LIB_SOURCES
+    ${COMMON_SOURCES}
+    ${MAP_AI_SOURCES}
+    ${MAP_ENTITY_SOURCES}
+    ${MAP_ITEMS_SOURCES}
+    ${MAP_LOS_SOURCES}
+    ${MAP_LUA_SOURCES}
+    ${MAP_PACKETS_C2S_SOURCES}
+    ${MAP_PACKETS_S2C_SOURCES}
+    ${MAP_PACKET_SOURCES}
+    ${MAP_UTILS_SOURCES}
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ability.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/alliance.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/aman.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/attack.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/attackround.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/autotranslate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/battlefield_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/battlefield.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/besieged_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/blue_spell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/blue_trait.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/campaign_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/campaign_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/char_recast_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/command_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/conquest_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/conquest_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/daily_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/enmity_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/fishingcontest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/grades.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/guild.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/instance_loader.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/instance.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/ipc_client.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/item_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/job_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/latent_effect_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/latent_effect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/linkshell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_networking.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_session_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_session.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_socket.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/map_statistics.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/merit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/mob_spell_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/mob_spell_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/mobskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/modifier.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/monstrosity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/navmesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/notoriety_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packet_guard.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packet_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/party.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/petskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/recast_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/roe.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/spawn_group.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/spell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/status_effect_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/status_effect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/time_server.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/timetriggers.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/trade_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/trait.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/transport.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/treasure_pool.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/trigger_area.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/unitychat.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/universal_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/weapon_skill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/zone_entities.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/zone_instance.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/zone.cpp
+)
+
+set(MAP_APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/main.cpp
+)
+
+set(SEARCH_LIB_SOURCES
+    ${COMMON_SOURCES}
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/data_loader.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/auction_history.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/auction_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/linkshell_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/party_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/search_comment.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/packets/search_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/search_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/search_engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/search_handler.cpp
+)
+
+set(SEARCH_APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/search/main.cpp
+)
+
+set(WORLD_LIB_SOURCES
+    ${COMMON_SOURCES}
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/besieged_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/campaign_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/character_cache.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/colonization_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/conquest_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/daily_tally.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/http_server.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/ipc_server.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/party_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/time_server.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/world_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/world_engine.cpp
+)
+
+set(WORLD_APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/world/main.cpp
+)
+
+set(TEST_SOURCES
+    ${COMMON_SOURCES}
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/helpers/lua_client_entity_pair_actions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/helpers/lua_client_entity_pair_bcnm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/helpers/lua_client_entity_pair_entities.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/helpers/lua_client_entity_pair_events.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/helpers/lua_client_entity_pair_packets.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_client_entity_pair.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_simulation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_spy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_stub.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_test_entity_assertions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/lua/lua_test_entity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/mock_manager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/reporters/console_reporter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/reporters/ctrf_reporter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/reporters/reporter_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_case.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_char.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_collector.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_engine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_lua_environment.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_matcher.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/test_suite.cpp
+)
+
+set(TEST_APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/test/main.cpp
+)
+
+# Function to get all sources for a specific target
+function(get_target_sources target_name output_var)
+    process_modules()
+
+    get_target_resource_file(${target_name} resource_file)
+
+    if(${target_name} STREQUAL "xi_map_lib")
+        set(${output_var} ${MAP_LIB_SOURCES} ${module_sources} PARENT_SCOPE)
+    elseif(${target_name} STREQUAL "xi_map")
+        set(${output_var} ${MAP_SOURCES} ${MAP_APP_SOURCES} ${resource_file} PARENT_SCOPE)
+    elseif(${target_name} STREQUAL "xi_world")
+        set(${output_var} ${COMMON_SOURCES} ${WORLD_SOURCES} ${WORLD_APP_SOURCES} ${resource_file} PARENT_SCOPE)
+    elseif(${target_name} STREQUAL "xi_search")
+        set(${output_var} ${COMMON_SOURCES} ${SEARCH_SOURCES} ${SEARCH_APP_SOURCES} ${resource_file} PARENT_SCOPE)
+    elseif(${target_name} STREQUAL "xi_connect")
+        set(${output_var} ${COMMON_SOURCES} ${LOGIN_SOURCES} ${LOGIN_APP_SOURCES} ${resource_file} PARENT_SCOPE)
+    elseif(${target_name} STREQUAL "xi_test")
+        set(${output_var} ${TEST_SOURCES} ${TEST_APP_SOURCES} ${module_sources} ${resource_file} PARENT_SCOPE)
+    else()
+        message(FATAL_ERROR "Unknown target: ${target_name}")
+    endif()
+endfunction()

@@ -156,7 +156,7 @@ There are 3 'types' when concerned with deriving these complete 32bit values.
 #include "common/cbasetypes.h"
 
 // NOTE: This is the complete table from client version 30230204_0
-const std::map<unsigned int, const char*> values = {
+const std::map<std::uint64_t, const char*> values = {
     { 66050, "Greetings" },
     { 16843266, "Nice to meet you." },
     { 33620482, "See you again!" },

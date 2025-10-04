@@ -30,6 +30,10 @@
 #error "Neither ENV64BIT nor ENV32BIT is defined"
 #endif
 
+// TODO: CMake seems to do a poor job of setting up compiler defines
+// for Debug/Release: We get this for Release build from compiler:
+// /DNDEBUG
+
 // Debug mode
 #if defined(_DEBUG) && !defined(DEBUG)
 #define DEBUG
@@ -106,4 +110,11 @@
 // MSVC doesn't have __PRETTY_FUNCTION__ so we use an equivalent
 #if defined(_MSC_VER)
 #define __PRETTY_FUNCTION__ __FUNCSIG__
+#endif
+
+// https://github.com/LandSandBoat/server/pull/7956
+#if defined(__GNUC__) || defined(__clang__)
+#if defined(__FINITE_MATH_ONLY__) && (__FINITE_MATH_ONLY__ != 0)
+#error "Detected -ffinite-math-only! Please compile with -fno-finite-math-only."
+#endif
 #endif

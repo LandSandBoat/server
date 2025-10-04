@@ -1819,8 +1819,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 else if (PAbility->getID() == ABILITY_HEALING_WALTZ && StatusEffectContainer->HasStatusEffect(EFFECT_CONTRADANCE))
                 {
                     // 10.1 = 10' in game. Unsure why 10' means 9.9' works but 10' doesn't... Epsilon check gone wrong?
-                    PAbility->setRange(10.1); // This is playing double duty as both target range and AoE range --
-                                              // by the time this lambda is called the target range has already been checked and can be used normally
+                    PAbility->setRange(10.1f); // This is playing double duty as both target range and AoE range --
+                                               // by the time this lambda is called the target range has already been checked and can be used normally
                     return true;
                 }
             }

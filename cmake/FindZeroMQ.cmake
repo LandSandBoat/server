@@ -1,3 +1,8 @@
+#
+# ZeroMQ library detection
+#
+# This module locates ZeroMQ libraries for message queue functionality.
+#
 # How to build ZMQ Libs:
 # libzmq.lib, libzmq-d.lib, libzmq_64.lib, libzmq-d_64.lib, etc.
 #

@@ -1,3 +1,10 @@
+#
+# MariaDB client library detection
+#
+# This module locates MariaDB client libraries and headers
+# for database connectivity.
+#
+
 if(WIN32)
     # How to build MariaDB Libs:
     #

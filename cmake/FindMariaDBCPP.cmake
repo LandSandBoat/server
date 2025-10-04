@@ -1,3 +1,10 @@
+#
+# MariaDB C++ Connector library detection
+#
+# This module locates or builds MariaDB C++ Connector libraries
+# for C++ database connectivity.
+#
+
 if(NOT WIN32)
     message(STATUS "Building MariaDB Connector/C++ from source")
     CPMAddPackage(

@@ -1,5 +1,10 @@
-# Target is automatically added if you're using clang
-# AppleClang doesn't ship with libFuzzer
+#
+# Fuzzing target configuration
+#
+# This module sets up fuzzing targets for packet testing using libFuzzer.
+# Target is automatically added if you're using clang (AppleClang doesn't ship with libFuzzer).
+#
+
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Apple")
     add_executable(packet_fuzzer ${CMAKE_SOURCE_DIR}/tools/fuzzer.cpp)
     target_compile_options(packet_fuzzer
