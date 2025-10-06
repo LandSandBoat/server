@@ -12,6 +12,7 @@ include(Platform)
 include(CompilerMinimumVersions)
 include(Tracy)
 include(Files)
+include(PCH)
 
 include(CodeGeneration)
 include(LinkerFlags)

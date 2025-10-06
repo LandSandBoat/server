@@ -22,6 +22,9 @@ function(create_connect_library)
         ${CMAKE_SOURCE_DIR}/src/login
     )
 
+    # Configure PCH (conditional on Windows without caching)
+    configure_pch(xi_connect_lib)
+
     set_target_output_directory(xi_connect_lib)
 endfunction()
 
@@ -61,6 +64,9 @@ function(create_map_library)
     if(module_include_dirs)
         target_include_directories(xi_map_lib PUBLIC ${module_include_dirs})
     endif()
+
+    # Configure PCH (conditional on Windows without caching)
+    configure_pch(xi_map_lib)
 
     include_module_cmakelists("${cmakelist_include_paths}")
 endfunction()
@@ -106,6 +112,9 @@ function(create_search_library)
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/src/search
     )
+
+    # Configure PCH (conditional on Windows without caching)
+    configure_pch(xi_search_lib)
 endfunction()
 
 function(create_search_executable)
@@ -139,6 +148,9 @@ function(create_world_library)
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/src/world
     )
+
+    # Configure PCH (conditional on Windows without caching)
+    configure_pch(xi_world_lib)
 endfunction()
 
 function(create_world_executable)
@@ -173,6 +185,9 @@ function(create_test_library)
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/src/test
     )
+
+    # Configure PCH (conditional on Windows without caching)
+    configure_pch(xi_test_lib)
 endfunction()
 
 function(create_test_executable)

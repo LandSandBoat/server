@@ -237,6 +237,7 @@ set(MAP_PACKETS_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x025_item_trade_mylist.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x026_item_subcontainer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x02f_dig.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x030_effect.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x033_eventstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x038_schedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x039_mapschedulor.cpp
@@ -256,6 +257,13 @@ set(MAP_PACKETS_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05c_pendingnum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05d_pendingstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x05f_music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x06f_combine_ans.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x070_combine_inf.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x082_guild_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x083_guild_buylist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x084_guild_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x085_guild_selllist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x086_guild_open.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0b4_config.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0ca_inspect_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/s2c/0x0d2_trophy_list.cpp
@@ -307,11 +315,6 @@ set(MAP_PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/event.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/fishing.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_buy_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_buy.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_sell_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu_sell.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/guild_menu.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/instance_entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/jobpoint_details.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/jobpoint_update.cpp
@@ -350,9 +353,6 @@ set(MAP_PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/shop_items.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/shop_menu.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/status_effects.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_result.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/synth_suggestion.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/map/packets/zone_in.cpp
 )
