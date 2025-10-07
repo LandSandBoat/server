@@ -22,7 +22,7 @@
 #include "0x03d_black_edit.h"
 
 #include "common/database.h"
-#include "packets/blacklist_edit_response.h"
+#include "packets/s2c/0x042_black_edit.h"
 #include "utils/blacklistutils.h"
 #include "utils/charutils.h"
 
@@ -30,7 +30,7 @@ namespace
 {
     const auto sendFailPacket = [](CCharEntity* PChar)
     {
-        PChar->pushPacket<CBlacklistEditResponsePacket>(0, "", 0x02);
+        PChar->pushPacket<GP_SERV_COMMAND_BLACK_EDIT>(0, "", GP_SERV_COMMAND_BLACK_EDIT_MODE::Error);
     };
 } // namespace
 
@@ -57,7 +57,7 @@ void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar
         {
             if (blacklistutils::AddBlacklisted(PChar->id, charid))
             {
-                PChar->pushPacket<CBlacklistEditResponsePacket>(accid, name, Mode);
+                PChar->pushPacket<GP_SERV_COMMAND_BLACK_EDIT>(accid, name, GP_SERV_COMMAND_BLACK_EDIT_MODE::Add);
             }
             else
             {
@@ -69,7 +69,7 @@ void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar
         {
             if (blacklistutils::DeleteBlacklisted(PChar->id, charid))
             {
-                PChar->pushPacket<CBlacklistEditResponsePacket>(accid, name, Mode);
+                PChar->pushPacket<GP_SERV_COMMAND_BLACK_EDIT>(accid, name, GP_SERV_COMMAND_BLACK_EDIT_MODE::Delete);
             }
             else
             {

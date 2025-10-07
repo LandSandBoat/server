@@ -24,9 +24,9 @@
 #include "entities/charentity.h"
 #include "items/item_flowerpot.h"
 #include "packets/char_status.h"
-#include "packets/furniture_interact.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 
 namespace
@@ -49,7 +49,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
     if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
         PChar->pushPacket<CMessageStandardPacket>(MyroomPlantItemNo, MsgStd::MoogleDriesPlant);
-        PChar->pushPacket<CFurnitureInteractPacket>(PItem, MyroomPlantCategory, MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
         PItem->setDried(true);
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",

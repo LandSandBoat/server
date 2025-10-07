@@ -7884,10 +7884,10 @@ INSERT INTO `item_equipment` VALUES (18157,'poison_arrow',19,0,7665,0,0,0,8,0,0,
 INSERT INTO `item_equipment` VALUES (18158,'sleep_arrow',35,0,7665,0,0,0,8,0,0,0);
 INSERT INTO `item_equipment` VALUES (18159,'demon_arrow',60,0,7665,0,0,0,8,0,0,0);
 INSERT INTO `item_equipment` VALUES (18160,'spartan_bullet',30,0,1024,0,0,0,8,0,0,0);
-INSERT INTO `item_equipment` VALUES (18161,'arctic_wind',72,0,4194303,0,0,0,8,4,0,0);
-INSERT INTO `item_equipment` VALUES (18162,'east_wind',72,0,4194303,0,0,0,8,4,0,0);
-INSERT INTO `item_equipment` VALUES (18163,'zephyr',72,0,4194303,0,0,0,8,4,0,0);
-INSERT INTO `item_equipment` VALUES (18164,'antarctic_wind',72,0,4194303,0,0,0,8,4,0,0);
+INSERT INTO `item_equipment` VALUES (18161,'arctic_wind',72,0,4194303,23,0,0,8,4,0,0);
+INSERT INTO `item_equipment` VALUES (18162,'east_wind',72,0,4194303,23,0,0,8,4,0,0);
+INSERT INTO `item_equipment` VALUES (18163,'zephyr',72,0,4194303,23,0,0,8,4,0,0);
+INSERT INTO `item_equipment` VALUES (18164,'antarctic_wind',72,0,4194303,23,0,0,8,4,0,0);
 INSERT INTO `item_equipment` VALUES (18165,'fenrirs_stone',70,0,4194303,0,0,0,8,4,0,0);
 INSERT INTO `item_equipment` VALUES (18166,'happy_egg',1,0,4194303,0,0,0,8,4,0,0);
 INSERT INTO `item_equipment` VALUES (18167,'fortune_egg',1,0,4194303,0,0,0,8,4,0,0);

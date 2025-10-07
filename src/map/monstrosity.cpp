@@ -35,12 +35,12 @@
 #include "lua/luautils.h"
 
 #include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
 #include "packets/char_stats.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
+#include "packets/s2c/0x051_grap_list.h"
 
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
@@ -377,7 +377,7 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket<CCharJobsPacket>(PChar);
     PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
     PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-    PChar->pushPacket<CCharAppearancePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
     PChar->pushPacket<CCharStatsPacket>(PChar);
     PChar->pushPacket<CCharAbilitiesPacket>(PChar);
 

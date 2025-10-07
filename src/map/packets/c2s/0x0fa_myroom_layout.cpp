@@ -24,10 +24,10 @@
 #include "entities/charentity.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
-#include "packets/furniture_interact.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -164,7 +164,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
 
         PItem->setSubType(ITEM_LOCKED);
 
-        PChar->pushPacket<CFurnitureInteractPacket>(PItem, MyroomCategory, MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory "
                                            "SET "

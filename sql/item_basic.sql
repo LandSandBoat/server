@@ -15563,10 +15563,10 @@ INSERT INTO `item_basic` VALUES (18157,0,'poison_arrow','poison_arrow',@WEAPON_T
 INSERT INTO `item_basic` VALUES (18158,0,'sleep_arrow','sleep_arrow',@WEAPON_TYPE,99,2052,@AMMUNITION,7);
 INSERT INTO `item_basic` VALUES (18159,0,'demon_arrow','demon_arrow',@WEAPON_TYPE,99,2052,@AMMUNITION,7);
 INSERT INTO `item_basic` VALUES (18160,0,'spartan_bullet','spartan_bullet',@WEAPON_TYPE,99,2052,@AMMUNITION,15);
-INSERT INTO `item_basic` VALUES (18161,0,'arctic_wind','arctic_wind',@WEAPON_TYPE,1,47172,@NONE,0);
-INSERT INTO `item_basic` VALUES (18162,0,'east_wind','east_wind',@WEAPON_TYPE,1,47172,@NONE,0);
-INSERT INTO `item_basic` VALUES (18163,0,'zephyr','zephyr',@WEAPON_TYPE,1,47172,@NONE,0);
-INSERT INTO `item_basic` VALUES (18164,0,'antarctic_wind','antarctic_wind',@WEAPON_TYPE,1,47172,@NONE,0);
+INSERT INTO `item_basic` VALUES (18161,0,'arctic_wind','arctic_wind',@WEAPON_TYPE,1,47172,@AMMUNITION,0);
+INSERT INTO `item_basic` VALUES (18162,0,'east_wind','east_wind',@WEAPON_TYPE,1,47172,@AMMUNITION,0);
+INSERT INTO `item_basic` VALUES (18163,0,'zephyr','zephyr',@WEAPON_TYPE,1,47172,@AMMUNITION,0);
+INSERT INTO `item_basic` VALUES (18164,0,'antarctic_wind','antarctic_wind',@WEAPON_TYPE,1,47172,@AMMUNITION,0);
 INSERT INTO `item_basic` VALUES (18165,0,'fenrirs_stone','fenrirs_stone',@WEAPON_TYPE,1,63552,@NONE,0);
 INSERT INTO `item_basic` VALUES (18166,0,'happy_egg','happy_egg',@WEAPON_TYPE,1,63568,@NONE,0);
 INSERT INTO `item_basic` VALUES (18167,0,'fortune_egg','fortune_egg',@WEAPON_TYPE,1,63568,@NONE,0);

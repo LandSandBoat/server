@@ -24,7 +24,7 @@
 #include "entities/charentity.h"
 #include "items.h"
 #include "lua/luautils.h"
-#include "packets/char_emotion.h"
+#include "packets/s2c/0x05a_motionmes.h"
 #include "utils/jailutils.h"
 
 namespace
@@ -41,7 +41,7 @@ auto GP_CLI_COMMAND_MOTION::validate(MapSession* PSession, const CCharEntity* PC
 {
     return PacketValidator()
         .oneOf<EmoteMode>(Mode)
-        .range("Number", Number, Emote::POINT, Emote::AIM);
+        .range("Number", Number, Emote::Point, Emote::Aim);
 }
 
 void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) const
@@ -53,7 +53,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
     }
 
     // Attempting to use bell emote without a bell.
-    if (static_cast<Emote>(Number) == Emote::BELL)
+    if (static_cast<Emote>(Number) == Emote::Bell)
     {
         // This is the actual observed behavior. Even with a different weapon type equipped,
         // having a bell in the lockstyle is sufficient. On the other hand, if any other
@@ -82,12 +82,12 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
         }
     }
     // Attempting to use locked job emote.
-    else if (static_cast<Emote>(Number) == Emote::JOB && Param && !(PChar->jobs.unlocked & (1 << (Param - 0x1E))))
+    else if (static_cast<Emote>(Number) == Emote::Job && Param && !(PChar->jobs.unlocked & (1 << (Param - 0x1E))))
     {
         return;
     }
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCharEmotionPacket>(PChar, UniqueNo, ActIndex, static_cast<Emote>(Number), static_cast<EmoteMode>(Mode), Param));
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, UniqueNo, ActIndex, static_cast<Emote>(Number), static_cast<EmoteMode>(Mode), Param));
 
     luautils::OnPlayerEmote(PChar, static_cast<Emote>(Number));
 }

@@ -400,21 +400,13 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.HPMPTP_DRAIN] = f
     return xi.additionalEffect.procFunctions[drainFuncs[drainRoll]](attacker, defender, item, params)
 end
 
-xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = function(attacker, defender, item, params)
-    local subEffect = params.subEffect
-    local defenderName = defender:getName()
-
-    return switch(defenderName): caseof
-    {
-        ['Brigandish_Blade'] = function()
-            -- so other items with this AE type don't activate BB's killable logic
-            if not item or item:getID() ~= xi.item.BUCCANEERS_KNIFE then
-                return 0, 0, 0
-            end
-
-            -- Calculate damage
-            local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
-
+-- NM-specific additional effects configuration table
+-- Options: requiredItem, specialAction, customSubEffect, customMsgID, customMsgParam
+-- Add new entries here: ['NM_Name'] = { requiredItem = xi.item.ITEM_ID, specialAction = function() }
+xi.additionalEffect.nmSpecificConfigs = {
+    ['Brigandish_Blade'] = {
+        requiredItem = xi.item.BUCCANEERS_KNIFE,
+        specialAction = function(defender)
             -- If Brigandish Blade has damage immunity (at 1% HP), remove it
             if defender:getMod(xi.mod.UDMGPHYS) == -10000 then
                 -- Remove all damage immunities
@@ -426,20 +418,69 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = fu
                 defender:setLocalVar('killable', 1)
                 defender:setUnkillable(false)
             end
-
-            return subEffect, xi.msg.basic.ADD_EFFECT_DMG, damage
         end,
-
-        ['default'] = function()
-            -- default behavior can be handled by the NM lua, signal which item landed an AE
-            -- Note that there's no mechanism to cleanup this localvar, but most if not all instances of this will be a "check if the weapon ever successfully landed a hit this fight"
-            if defender and item then
-                defender:setLocalVar('aeFromItemId', item:getID())
-            end
-
-            return subEffect, 0, 0
+    },
+    ['Seiryu'] = {
+        requiredItem = xi.item.ZEPHYR,
+        specialAction = function(defender)
+            defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
         end,
-    }
+    },
+    ['Genbu'] = {
+        requiredItem = xi.item.ANTARCTIC_WIND,
+        specialAction = function(defender)
+            defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        end,
+    },
+    ['Suzaku'] = {
+        requiredItem = xi.item.ARCTIC_WIND,
+        specialAction = function(defender)
+            defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        end,
+    },
+    ['Byakko'] = {
+        requiredItem = xi.item.EAST_WIND,
+        specialAction = function(defender)
+            defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        end,
+    },
+}
+
+-- NM_SPECIFIC additional effect trigger
+xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = function(attacker, defender, item, params)
+    local subEffect = params.subEffect
+    local msgID     = 0
+    local msgParam  = 0
+    local defenderName = defender:getName()
+
+    local config = xi.additionalEffect.nmSpecificConfigs[defenderName]
+    if
+        config and
+        (config.requiredItem == item:getID() or
+        config.requiredItem == xi.item.NONE)
+    then
+        -- Calculate damage
+        local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
+        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        msgParam = damage
+
+        -- Execute special action if configured
+        if config.specialAction then
+            config.specialAction(defender)
+        end
+
+        subEffect = config.customSubEffect or subEffect
+        msgID = config.customMsgID or msgID
+        msgParam = config.customMsgParam or msgParam
+    else
+        if defender and item then
+            defender:setLocalVar('aeFromItemId', item:getID())
+        end
+
+        return 0, 0, 0
+    end
+
+    return subEffect, msgID, msgParam
 end
 
 -- paralyze on hit, fire damage on hit, etc.

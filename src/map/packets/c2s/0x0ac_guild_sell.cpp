@@ -26,8 +26,8 @@
 #include "common/settings.h"
 #include "entities/charentity.h"
 #include "items/item_shop.h"
-#include "packets/guild_menu_sell_update.h"
 #include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x084_guild_sell.h"
 #include "utils/charutils.h"
 
 namespace
@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, shopItem->getSellPrice() * quantity);
             ShowInfo("GP_CLI_COMMAND_GUILD_SELL: Player '%s' sold %u of ItemNo %u [to GUILD] ", PChar->getName(), quantity, ItemNo);
             PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() + quantity);
-            PChar->pushPacket<CGuildMenuSellUpdatePacket>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(),
+            PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(),
                                                           ItemNo, quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }

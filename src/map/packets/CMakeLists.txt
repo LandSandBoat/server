@@ -9,30 +9,14 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_check.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_confirmation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_confirmation.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_item.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_item.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.h
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_appearance.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_appearance.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emotion.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emotion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.cpp
@@ -59,16 +43,12 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/chocobo_digging.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/chocobo_digging.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/cs_position.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cs_position.h
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.cpp
@@ -81,28 +61,12 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/fishing.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/furniture_interact.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/furniture_interact.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/independent_animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/independent_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.h
     ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_details.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_details.h
     ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/key_items.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/key_items.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_equip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.cpp
@@ -111,14 +75,10 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_config.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_config.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_raisetractor.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_raisetractor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/merit_points_categories.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/merit_points_categories.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
@@ -165,8 +125,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/send_blacklist.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/send_blacklist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
@@ -177,27 +135,11 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/shop_menu.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_animation.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_result.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_result.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_action.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_action.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_item.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_item.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_request.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_request.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/zone_visited.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/zone_visited.h
     PARENT_SCOPE
 )

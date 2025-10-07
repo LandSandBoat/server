@@ -615,14 +615,14 @@ namespace mobutils
                 sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
 
                 // Orcs 5% more hp
-                if ((PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407))
+                if ((PMob->m_Family == 189) || (PMob->m_Family == 190))
                 {
                     mobHP = (baseMobHP + sjHP) * 1.05;
                 }
                 // Quadavs 5% less hp
-                else if ((PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397) || (PMob->m_Family == 408))
+                else if (PMob->m_Family == 202)
                 {
-                    mobHP = (baseMobHP + sjHP) * .95;
+                    mobHP = (baseMobHP + sjHP) * 0.95;
                 }
                 // Manticore family has 50% more HP
                 else if (PMob->m_Family == 179)

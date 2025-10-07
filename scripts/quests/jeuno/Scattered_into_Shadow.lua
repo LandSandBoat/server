@@ -152,6 +152,21 @@ quest.sections =
                     end
                 end,
             },
+
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Prog') == 4 and
+                        quest:getVar(player, 'Stage') == 7 and
+                        not player:hasItem(xi.item.BEAST_COLLAR)
+                    then
+                        xi.treasure.onTrade(player, npc, trade, 1, xi.item.BEAST_COLLAR)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
         },
 
         [xi.zone.UPPER_JEUNO] =

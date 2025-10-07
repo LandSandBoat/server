@@ -23,9 +23,9 @@
 
 #include "entities/charentity.h"
 #include "items/item_flowerpot.h"
-#include "packets/furniture_interact.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 #include "utils/gardenutils.h"
 #include "utils/itemutils.h"
@@ -88,7 +88,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             PChar->pushPacket<CMessageStandardPacket>(resultID, totalQuantity, 134); // Your moogle <quantity> <item> from the plant!
         }
 
-        PChar->pushPacket<CFurnitureInteractPacket>(PItem, MyroomPlantCategory, MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
         PItem->cleanPot();
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",

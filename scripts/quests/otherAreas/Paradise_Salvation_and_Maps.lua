@@ -40,6 +40,42 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
+        [xi.zone.SACRARIUM] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Option') == 0 and
+                        not player:hasKeyItem(xi.keyItem.PIECE_OF_RIPPED_FLOORPLANS)
+                    then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.PIECE_OF_RIPPED_FLOORPLANS)
+
+                        local chestTable =
+                        {
+                            [1] = {  31.021, -2.000,   99.013 }, -- (F-5)
+                            [2] = {  89.034, -2.000,   99.248 }, -- (H-5)
+                            [3] = {  88.223, -2.000,  -36.017 }, -- (H-9)
+                            [4] = { 177.600,  8.310,  100.000 }, -- (J-6)
+                            [5] = { 179.709, -7.693,  -97.007 }, -- (J-10)
+                            [6] = { 260.391,  0.000,   21.487 }, -- (L-8)
+                            [7] = { 111.451, -2.000, -100.159 }, -- (H-11)
+                            [8] = {   8.974, -2.179, -133.075 }, -- (F-11)
+                        }
+
+                        for i = 1, #chestTable do
+                            if player:checkDistance(chestTable[i][1], chestTable[i][2], chestTable[i][3]) < 2 then
+                                quest:setVar(player, 'Option', i)
+                                break
+                            end
+                        end
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
             ['Nivorajean'] =

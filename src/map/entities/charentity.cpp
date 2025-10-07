@@ -27,7 +27,6 @@
 
 #include "packets/action.h"
 #include "packets/basic.h"
-#include "packets/char_appearance.h"
 #include "packets/char_health.h"
 #include "packets/char_recast.h"
 #include "packets/char_status.h"
@@ -35,14 +34,15 @@
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/key_items.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x033_eventstr.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/s2c/0x058_assist.h"
 
 #include "ai/ai_container.h"
@@ -1058,7 +1058,7 @@ void CCharEntity::PostTick()
     {
         updatemask |= UPDATE_HP;
         m_EquipSwap = false;
-        pushPacket<CCharAppearancePacket>(this);
+        pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
     }
 
     // notify client containers are dirty and then no longer dirty
@@ -2522,33 +2522,67 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         return;
     }
 
-    // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
-    if (PItem->getAoE())
+    uint8 findFlags = 0;
+
+    // Raise Rod, Raise Rod II, Shobuhouou Kabuto at time of writing
+    if ((PItem->getValidTarget() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
     {
-        // clang-format off
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
-        {
-            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
-            {
-                luautils::OnItemUse(this, PMember, PItem);
-            }
-        });
-        // clang-format on
+        findFlags |= FINDFLAGS_DEAD;
     }
-    else
+
+    PAI->TargetFind->reset();
+    PAI->TargetFind->findSingleTarget(PTarget, findFlags, PItem->getValidTarget());
+
+    // Check if target is untargetable
+    if (PAI->TargetFind->m_targets.size() == 0)
     {
-        luautils::OnItemUse(this, PTarget, PItem);
+        // TODO: interrupt action packet?
+        return;
     }
 
     action.id         = this->id;
     action.actiontype = ACTION_ITEM_FINISH;
     action.actionid   = PItem->getID();
 
-    actionList_t& actionList  = action.getNewActionList();
-    actionList.ActionTargetID = PTarget->id;
+    auto processAction = [&](CBaseEntity* PTargetFound) -> void
+    {
+        actionList_t& actionList     = action.getNewActionList();
+        actionList.ActionTargetID    = PTargetFound->id;
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.reaction        = REACTION::NONE;
+        actionTarget.speceffect      = SPECEFFECT::NONE;
+        actionTarget.animation       = PItem->getAnimationID();
+        actionTarget.messageID       = 0; // Items can override this in OnItemUse. Most items give 0, but buff/healing items sometimes do not.
+        actionTarget.param           = 0;
 
-    actionTarget_t& actionTarget = actionList.getNewActionTarget();
-    actionTarget.animation       = PItem->getAnimationID();
+        int32 value = luautils::OnItemUse(this, PTargetFound, PItem, action);
+
+        actionTarget.param = value;
+        // TODO: how to detect if item does damage?
+        /*if (value < 0)
+        {
+            actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+            actionTarget.param     = -actionTarget.param;
+        }*/
+    };
+
+    if (PItem->getAoE())
+    {
+        PAI->TargetFind->reset();
+
+        float distance = 10; // TODO: ask the item for its range
+
+        PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags, PItem->getValidTarget());
+
+        for (auto&& PTargetFound : PAI->TargetFind->m_targets)
+        {
+            processAction(PTargetFound);
+        }
+    }
+    else
+    {
+        processAction(PTarget);
+    }
 
     if (PItem->isType(ITEM_EQUIPMENT))
     {
@@ -2857,17 +2891,17 @@ void CCharEntity::UpdateMoghancement()
         uint8 currentTable = m_moghancementID >> 9;
         if (newTable == currentTable)
         {
-            pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(newTable));
+            pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, static_cast<KEYS_TABLE>(newTable));
         }
         else
         {
             if (newTable != 0)
             {
-                pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(newTable));
+                pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, static_cast<KEYS_TABLE>(newTable));
             }
             if (currentTable != 0)
             {
-                pushPacket<CKeyItemsPacket>(this, static_cast<KEYS_TABLE>(currentTable));
+                pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, static_cast<KEYS_TABLE>(currentTable));
             }
         }
         charutils::SaveKeyItems(this);

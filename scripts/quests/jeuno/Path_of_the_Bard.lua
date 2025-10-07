@@ -66,7 +66,14 @@ quest.sections =
 
             ['Mataligeat'] = quest:event(143),
 
-            ['Mertaire'] = quest:event(103),
+            ['Mertaire'] =
+            {
+            onTrigger = function(player, npc)
+                    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_AVAILABLE then
+                        return quest:event(103) -- Plays after this quest is complete and before the player meets the requirements to start "Painful Memory"
+                    end
+                end,
+            },
         },
     },
 }

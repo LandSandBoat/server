@@ -824,9 +824,6 @@ INSERT INTO `mob_family_mods` VALUES (328,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (328,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (328,54,180,1); -- GIL_BONUS: 180
 
--- Orc-Nm
-INSERT INTO `mob_family_mods` VALUES (334,10,2,1); -- SUBLINK: 2 (Orc, Orc Warmachine)
-
 -- Antlion-Ambush
 INSERT INTO `mob_family_mods` VALUES (357,63,20,0); -- DEFP: 20
 

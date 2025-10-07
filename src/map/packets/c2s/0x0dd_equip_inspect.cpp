@@ -1,16 +1,21 @@
 /*
 ===========================================================================
+
   Copyright (c) 2025 LandSandBoat Dev Teams
+
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
+
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
+
 ===========================================================================
 */
 
@@ -20,10 +25,10 @@
 #include "entities/mobentity.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
-#include "packets/bazaar_message.h"
 #include "packets/char_check.h"
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
+#include "packets/s2c/0x0ca_inspect_message.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
 
@@ -123,7 +128,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                     PCharTarget->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::Examine);
                 }
 
-                PChar->pushPacket<CBazaarMessagePacket>(PCharTarget);
+                PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PCharTarget);
                 PChar->pushPacket<CCheckPacket>(PChar, PCharTarget);
             }
         }

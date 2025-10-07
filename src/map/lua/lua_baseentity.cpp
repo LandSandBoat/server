@@ -99,8 +99,6 @@
 #include "packets/action.h"
 #include "packets/auction_house.h"
 #include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
-#include "packets/char_emotion.h"
 #include "packets/char_equip.h"
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
@@ -114,19 +112,13 @@
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
 #include "packets/conquest_map.h"
-#include "packets/entity_animation.h"
 #include "packets/entity_enable_list.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/guild_menu.h"
-#include "packets/guild_menu_buy.h"
-#include "packets/independent_animation.h"
 #include "packets/instance_entry.h"
-#include "packets/key_items.h"
 #include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
-#include "packets/menu_raisetractor.h"
 #include "packets/message_basic.h"
 #include "packets/message_combat.h"
 #include "packets/message_name.h"
@@ -144,11 +136,18 @@
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x02e_openmogmenu.h"
+#include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x039_mapschedulor.h"
+#include "packets/s2c/0x03a_magicschedulor.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x055_scenarioitem.h"
+#include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x05c_pendingnum.h"
 #include "packets/s2c/0x05d_pendingstr.h"
 #include "packets/s2c/0x05f_music.h"
+#include "packets/s2c/0x086_guild_open.h"
+#include "packets/s2c/0x0f9_res.h"
 #include "packets/server_ip.h"
 #include "packets/shop_items.h"
 #include "packets/shop_menu.h"
@@ -985,11 +984,11 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command, sol::object cons
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CEntityAnimationPacket>(m_PBaseEntity, PTarget, command);
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_SCHEDULOR>(m_PBaseEntity, PTarget, command);
     }
     else
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(m_PBaseEntity, PTarget, command));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(m_PBaseEntity, PTarget, command));
     }
 }
 
@@ -2513,24 +2512,24 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
  *  Notes   : L2 and L3 only need simplified 24-hour time format (1,2,etc)
  ************************************************************************/
 
-bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday)
+auto CLuaBaseEntity::sendGuild(const uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return GUILD_OPEN;
+        return false;
     }
 
     if (open > close)
     {
         ShowWarning("Open Time (%d) exceeds Close Time (%d)", open, close);
-        return GUILD_OPEN;
+        return false;
     }
 
-    vanadiel_time::time_point vanaTime     = vanadiel_time::now();
-    uint8                     VanadielHour = static_cast<uint8>(vanadiel_time::get_hour(vanaTime));
+    const vanadiel_time::time_point vanaTime     = vanadiel_time::now();
+    const uint8                     VanadielHour = static_cast<uint8>(vanadiel_time::get_hour(vanaTime));
 
-    GUILDSTATUS status = GUILD_OPEN;
+    auto status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Open;
 
     // Guild holiday - Removed in 2014
     // uint8 vanadielDay = static_cast<uint8>(vanadiel_time::get_weekday(vanaTime));
@@ -2542,16 +2541,16 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
 
     if ((VanadielHour < open) || (VanadielHour >= close))
     {
-        status = GUILD_CLOSE;
+        status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Close;
     }
 
-    CItemContainer* PGuildShop = guildutils::GetGuildShop(guildID);
+    CItemContainer* PGuildShop = guildutils::GetGuildShop(guildId);
     auto*           PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PGuildShop = PGuildShop;
-    PChar->pushPacket<CGuildMenuPacket>(status, open, close, holiday);
+    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday);
 
-    return status == GUILD_OPEN;
+    return status == GP_SERV_COMMAND_GUILD_OPEN_STAT::Open;
 }
 
 /************************************************************************
@@ -2610,7 +2609,7 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
         auto targetTargId = PTarget ? PTarget->targid : PEntity->targid;
         PEntity->loc.zone->PushPacket(PEntity,
                                       CHAR_INRANGE,
-                                      std::make_unique<CCharEmotionPacket>(PEntity, targetId, targetTargId, emoteID, emoteMode));
+                                      std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PEntity, targetId, targetTargId, emoteID, emoteMode));
 
         return;
     }
@@ -2621,7 +2620,7 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
         auto targetTargId = PTarget ? PTarget->targid : PChar->targid;
         PChar->loc.zone->PushPacket(PChar,
                                     CHAR_INRANGE_SELF,
-                                    std::make_unique<CCharEmotionPacket>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
+                                    std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
 
         return;
     }
@@ -5157,7 +5156,7 @@ void CLuaBaseEntity::lockEquipSlot(uint8 slot)
     charutils::EquipItem(PChar, 0, slot, LOC_INVENTORY);
 
     PChar->m_EquipBlock |= 1 << slot;
-    PChar->pushPacket<CCharAppearancePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
     PChar->pushPacket<CEquipPacket>(0, slot, LOC_INVENTORY);
     PChar->pushPacket<CCharJobsPacket>(PChar);
     PChar->updatemask |= UPDATE_LOOK;
@@ -5720,7 +5719,7 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
         if (m_PBaseEntity->objtype == TYPE_PC)
         {
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-            PChar->pushPacket<CCharAppearancePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         }
     }
     else
@@ -5831,7 +5830,7 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
     {
         PChar->m_Costume2 = costume;
         PChar->updatemask |= UPDATE_LOOK;
-        PChar->pushPacket<CCharAppearancePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
     }
 }
 /************************************************************************
@@ -8821,7 +8820,7 @@ void CLuaBaseEntity::addKeyItem(const KeyItem keyItemID) const
     }
 
     charutils::addKeyItem(PChar, keyItemID);
-    PChar->pushPacket<CKeyItemsPacket>(PChar, static_cast<KEYS_TABLE>(table));
+    PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<KEYS_TABLE>(table));
 
     if (table == 6)
     {
@@ -8875,7 +8874,7 @@ void CLuaBaseEntity::delKeyItem(const KeyItem keyItemID) const
     }
 
     charutils::delKeyItem(PChar, keyItemID);
-    PChar->pushPacket<CKeyItemsPacket>(PChar, static_cast<KEYS_TABLE>(table));
+    PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<KEYS_TABLE>(table));
 
     charutils::SaveKeyItems(PChar);
 }
@@ -8924,7 +8923,7 @@ void CLuaBaseEntity::unseenKeyItem(const KeyItem keyItemID) const
     }
 
     charutils::unseenKeyItem(PChar, keyItemID);
-    PChar->pushPacket<CKeyItemsPacket>(PChar, static_cast<KEYS_TABLE>(table));
+    PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<KEYS_TABLE>(table));
 
     charutils::SaveKeyItems(PChar);
 }
@@ -12105,7 +12104,8 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
         {
             PChar->m_hasArise = true;
         }
-        PChar->pushPacket<CRaiseTractorMenuPacket>(PChar, TYPE_RAISE);
+
+        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Raise);
     }
 }
 
@@ -12162,7 +12162,7 @@ void CLuaBaseEntity::sendTractor(float xPos, float yPos, float zPos, uint8 rotat
         PChar->m_StartActionPos.z        = zPos;
         PChar->m_StartActionPos.rotation = rotation;
 
-        PChar->pushPacket<CRaiseTractorMenuPacket>(PChar, TYPE_TRACTOR);
+        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Tractor);
     }
 }
 
@@ -12381,7 +12381,7 @@ void CLuaBaseEntity::enableEntities(sol::object const& obj)
  ************************************************************************/
 void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<CIndependentAnimationPacket>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, mode));
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MAGICSCHEDULOR>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, static_cast<GP_SERV_COMMAND_MAGICSCHEDULOR_TYPE>(mode)));
 }
 
 /************************************************************************

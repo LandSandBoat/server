@@ -27,9 +27,9 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
     local familyCurrency =
     {
-        [334] = 1452, -- OrcNM (bronzepiece)
-        [337] = 1455, -- QuadavNM (1 byne bill)
-        [360] = 1449, -- YagudoNM (whiteshell)
+        [189] = xi.item.ORDELLE_BRONZEPIECE, -- Orc
+        [202] = xi.item.ONE_BYNE_BILL,       -- Quadav
+        [270] = xi.item.TUKUKU_WHITESHELL,   -- Yagudo
     }
 
     -- With Treasure Hunter on every procced monster, you can expect approximately 1.7 coins per kill on average.

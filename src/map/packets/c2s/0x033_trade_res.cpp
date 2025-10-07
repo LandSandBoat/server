@@ -22,7 +22,7 @@
 #include "0x033_trade_res.h"
 
 #include "entities/charentity.h"
-#include "packets/trade_action.h"
+#include "packets/s2c/0x022_item_trade_res.h"
 #include "universal_container.h"
 #include "utils/charutils.h"
 
@@ -80,10 +80,10 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
             }
 
             PChar->UContainer->SetType(UCONTAINER_TRADE);
-            PChar->pushPacket<CTradeActionPacket>(PTarget, Kind);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
 
             PTarget->UContainer->SetType(UCONTAINER_TRADE);
-            PTarget->pushPacket<CTradeActionPacket>(PChar, Kind);
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
         }
         break;
         case GP_CLI_COMMAND_TRADE_RES_KIND::Cancell: // trade cancelled
@@ -102,7 +102,7 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
 
             cleanTradeTargets(PChar, PTarget);
             // TODO: Verify exact sequence of packets sent here.
-            PTarget->pushPacket<CTradeActionPacket>(PChar, Kind);
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
         }
         break;
         case GP_CLI_COMMAND_TRADE_RES_KIND::Make: // trade accepted
@@ -110,25 +110,25 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
             ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s accepted trade with %s", PTarget->getName(), PChar->getName());
 
             PChar->UContainer->SetLock();
-            PTarget->pushPacket<CTradeActionPacket>(PChar, Kind);
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
 
             if (PTarget->UContainer->IsLocked())
             {
                 if (charutils::CanTrade(PChar, PTarget) && charutils::CanTrade(PTarget, PChar))
                 {
                     charutils::DoTrade(PChar, PTarget);
-                    PTarget->pushPacket<CTradeActionPacket>(PTarget, 9);
+                    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::End);
 
                     charutils::DoTrade(PTarget, PChar);
-                    PChar->pushPacket<CTradeActionPacket>(PChar, 9);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::End);
                 }
                 else
                 {
                     // Failed to trade
                     // Either players containers are full or illegal item trade attempted
                     ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s->%s trade failed (full inventory or illegal items)", PChar->getName(), PTarget->getName());
-                    PChar->pushPacket<CTradeActionPacket>(PTarget, 1);
-                    PTarget->pushPacket<CTradeActionPacket>(PChar, 1);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Cancell);
+                    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Cancell);
                 }
 
                 PChar->UContainer->Clean();

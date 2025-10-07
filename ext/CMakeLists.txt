@@ -205,7 +205,7 @@ endif()
 CPMAddPackage(
     NAME bcrypt
     GITHUB_REPOSITORY zach2good/libbcrypt
-    GIT_TAG fb50b847ae760f16ab84a367452027b246df13e1
+    GIT_TAG ac197c7b0bd26b6a90ee2ed9be7b12eb5a9e7455
     DOWNLOAD_ONLY ON
 ) # defines: bcrypt
 if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us

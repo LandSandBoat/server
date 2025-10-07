@@ -22,7 +22,6 @@
 #include "0x10a_bazaar_itemset.h"
 
 #include "entities/charentity.h"
-#include "packets/bazaar_check.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 

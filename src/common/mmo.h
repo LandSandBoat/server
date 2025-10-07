@@ -107,6 +107,7 @@ struct filters2_t
     uint32_t unused31 : 1;
 };
 
+#pragma pack(push, 1)
 struct SAVE_CONF
 {
     uint8_t InviteFlg : 1;
@@ -138,6 +139,7 @@ struct SAVE_CONF
     uint16_t   PvpFlg;
     uint8_t    AreaCode;
 };
+#pragma pack(pop)
 
 struct languages_t
 {

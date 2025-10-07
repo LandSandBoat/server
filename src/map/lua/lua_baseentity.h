@@ -170,10 +170,10 @@ public:
     void setWeather(Weather weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    void changeMusic(MusicSlot slotId, uint16 trackId) const;               // Sets the specified music Track for specified music block.
-    void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
-    bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
-    void openSendBox() const;                                               // Opens send box (to deliver items)
+    void changeMusic(MusicSlot slotId, uint16 trackId) const;                             // Sets the specified music Track for specified music block.
+    void sendMenu(uint32 menu);                                                           // Displays a menu (AH,Raise,Tractor,MH etc)
+    auto sendGuild(uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool; // Sends guild shop menu
+    void openSendBox() const;                                                             // Opens send box (to deliver items)
     void leaveGame();
     void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const;
 

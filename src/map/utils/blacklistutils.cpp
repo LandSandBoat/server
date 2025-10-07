@@ -26,7 +26,7 @@
 
 #include "entities/charentity.h"
 
-#include "packets/send_blacklist.h"
+#include "packets/s2c/0x041_black_list.h"
 
 namespace blacklistutils
 {
@@ -66,7 +66,7 @@ namespace blacklistutils
         const auto rset = db::preparedStmt("SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = ?", PChar->id);
         if (!rset || !rset->rowsCount())
         {
-            PChar->pushPacket<CSendBlacklist>(PChar, blacklist, true, true);
+            PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, true, true);
             return;
         }
 
@@ -88,7 +88,7 @@ namespace blacklistutils
             {
                 // reset the client blist if it's the first 12 (or less)
                 // this is the last blist packet if total count equals row count
-                PChar->pushPacket<CSendBlacklist>(PChar, blacklist, totalCount <= 12, totalCount == rowCount);
+                PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, totalCount <= 12, totalCount == rowCount);
                 blacklist.clear();
                 currentCount = 0;
             }
@@ -97,7 +97,7 @@ namespace blacklistutils
         // Push remaining entries..
         if (!blacklist.empty())
         {
-            PChar->pushPacket<CSendBlacklist>(PChar, blacklist, false, true);
+            PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, false, true);
         }
     }
 

@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 #include "items.h"
-#include "packets/trade_action.h"
+#include "packets/s2c/0x022_item_trade_res.h"
 #include "trade_container.h"
 #include "universal_container.h"
 #include "utils/jailutils.h"
@@ -112,8 +112,8 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
 
             PTarget->TradePending.clean();
             PTarget->UContainer->Clean();
-            PTarget->pushPacket<CTradeActionPacket>(PChar, 0x01);
-            PChar->pushPacket<CTradeActionPacket>(PTarget, 0x01);
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Cancell);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Cancell);
         }
 
         PChar->pushPacket<CMessageStandardPacket>(MsgStd::CannotBeProcessed);

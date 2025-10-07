@@ -38,19 +38,21 @@
 
 #include "lua/luautils.h"
 
-#include "packets/entity_animation.h"
 #include "packets/entity_update.h"
 #include "packets/message_basic.h"
 #include "packets/position.h"
+#include "packets/s2c/0x038_schedulor.h"
 
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 
+#include "enums/four_cc.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
+
 #include <chrono>
 
 CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
@@ -666,7 +668,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PMob->PEnmityContainer->Clear();
             }
         }
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(PEntity, PEntity, FourCC::FadeOut));
     }
 
     PEntity->PBattlefield = nullptr;

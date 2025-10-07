@@ -22,7 +22,6 @@
 #include "0x10b_bazaar_close.h"
 
 #include "entities/charentity.h"
-#include "packets/bazaar_check.h"
 #include "packets/s2c/0x107_bazaar_close.h"
 
 auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

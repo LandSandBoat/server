@@ -41,12 +41,12 @@
 #include "packets/char_abilities.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/menu_config.h"
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
 #include "packets/party_define.h"
 #include "packets/party_effects.h"
 #include "packets/party_member_update.h"
+#include "packets/s2c/0x0b4_config.h"
 
 // should have brace-or-equal initializers when MSVC supports it
 struct CParty::partyInfo_t
@@ -664,7 +664,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
             charutils::SaveCharStats(PChar);
             charutils::SavePlayerSettings(PChar);
 
-            PChar->pushPacket<CMenuConfigPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
             PChar->pushPacket<CCharStatusPacket>(PChar);
             PChar->pushPacket<CCharSyncPacket>(PChar);
         }
@@ -745,7 +745,7 @@ void CParty::AddMember(uint32 id)
             charutils::SaveCharStats(PChar);
 
             PChar->status = STATUS_UPDATE;
-            PChar->pushPacket<CMenuConfigPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
             PChar->pushPacket<CCharStatusPacket>(PChar);
             PChar->pushPacket<CCharSyncPacket>(PChar);
         }

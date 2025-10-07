@@ -81,6 +81,8 @@ xi.mobSkill =
 
     VULTURE_3                =  626,
 
+    FINAL_METEOR             =  634, -- Final Meteor Chlevnik
+
     CRYSTAL_RAIN             =  678,
     CRYSTAL_WEAPON_FIRE      =  679, -- Zipacna Weapon Start
     CRYSTAL_WEAPON_WATER     =  682, -- Zipacna Weapon End

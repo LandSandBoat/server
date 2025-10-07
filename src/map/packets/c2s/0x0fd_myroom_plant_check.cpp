@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 #include "items/item_flowerpot.h"
-#include "packets/furniture_interact.h"
+#include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 
 namespace
@@ -87,5 +87,5 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         }
     }
 
-    PChar->pushPacket<CFurnitureInteractPacket>(PItem, MyroomPlantCategory, MyroomPlantItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
 }

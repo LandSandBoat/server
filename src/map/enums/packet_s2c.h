@@ -173,7 +173,7 @@ enum class PacketS2C : uint16_t
     GP_SERV_COMMAND_EQUIPSET_RES      = 0x117,
     GP_SERV_COMMAND_CURRENCIES_2      = 0x118,
     GP_SERV_COMMAND_ABIL_RECAST       = 0x119,
-    GP_SERV_COMMAND_EMOTELIST         = 0x11A,
+    GP_SERV_COMMAND_EMOTE_LIST        = 0x11A,
     GP_SERV_COMMAND_PARTYREQ          = 0x11D,
     GP_SERV_COMMAND_JUMP              = 0x11E,
 };

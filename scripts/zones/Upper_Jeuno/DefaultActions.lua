@@ -22,6 +22,7 @@ return {
     ['Garadaut']        = { event = 93 },
     ['Geebeh']          = { text = ID.text.WASTING_YOUR_TIME },
     ['Guide_Stone']     = { messageSpecial = ID.text.GUIDE_STONE },
+    ['Guslam']          = { event = 154 },
     ['Ilumida']         = { event = 189 },
     ['Kortso-Paratso']  = { event = 89 },
     ['Laila']           = { event = 10120 },

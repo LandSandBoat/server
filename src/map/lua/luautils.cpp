@@ -54,9 +54,9 @@
 #include "items/item_puppet.h"
 
 #include "packets/action.h"
-#include "packets/char_emotion.h"
 #include "packets/chat_message.h"
-#include "packets/menu_raisetractor.h"
+#include "packets/s2c/0x05a_motionmes.h"
+#include "packets/s2c/0x0f9_res.h"
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -2333,7 +2333,7 @@ namespace luautils
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards
             PChar->animation = ANIMATION_DEATH;
-            PChar->pushPacket<CRaiseTractorMenuPacket>(PChar, TYPE_HOMEPOINT);
+            PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Homepoint);
             PChar->updatemask |= UPDATE_HP;
         }
 
@@ -2699,7 +2699,7 @@ namespace luautils
     // We use the subject. The return value is the message number or 0.
     // It is also necessary to somehow pass the message parameter (for example,
     // number of recovered MP)
-    void OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem)
+    int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t& action)
     {
         TracyZoneScoped;
 
@@ -2708,7 +2708,7 @@ namespace luautils
         sol::function onItemUse = GetCacheEntryFromFilename(filename)["onItemUse"].get<sol::function>();
         if (!onItemUse.valid())
         {
-            return;
+            return 0;
         }
 
         // using an item removes invisible status effect
@@ -2720,13 +2720,15 @@ namespace luautils
             }
         }
 
-        auto result = onItemUse(PTarget, PUser, PItem);
+        auto result = onItemUse(PTarget, PUser, PItem, action);
         if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onItemUse: %s", err.what());
             ReportErrorToPlayer(PUser, err.what());
         }
+
+        return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
     // Trigger Code on an item when it has been dropped

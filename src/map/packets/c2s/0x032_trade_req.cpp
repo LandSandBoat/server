@@ -23,8 +23,8 @@
 
 #include "entities/charentity.h"
 #include "packets/message_system.h"
-#include "packets/trade_action.h"
-#include "packets/trade_request.h"
+#include "packets/s2c/0x021_item_trade_req.h"
+#include "packets/s2c/0x022_item_trade_res.h"
 #include "trade_container.h"
 #include "universal_container.h"
 #include "utils/charutils.h"
@@ -51,7 +51,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     if (jailutils::InPrison(PChar) || jailutils::InPrison(PTarget))
     {
         ShowError("%s trade request with %s was blocked. They are in prison!", PChar->getName(), PTarget->getName());
-        PChar->pushPacket<CTradeActionPacket>(PTarget, 0x07);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
         return;
     }
 
@@ -61,7 +61,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
         PTarget->animation == ANIMATION_SYNTH || (PTarget->CraftContainer && PTarget->CraftContainer->getItemsCount() > 0))
     {
         ShowError("%s trade request with %s was blocked. They are synthing!", PChar->getName(), PTarget->getName());
-        PChar->pushPacket<CTradeActionPacket>(PTarget, 0x07);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
 
         return;
     }
@@ -74,7 +74,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
         PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
         // Interaction was blocked
         PTarget->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
-        PChar->pushPacket<CTradeActionPacket>(PTarget, 0x07);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
         return;
     }
 
@@ -86,7 +86,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
 
     if (!PTarget->UContainer->IsContainerEmpty())
     {
-        PChar->pushPacket<CTradeActionPacket>(PTarget, 0x07);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
         ShowDebug("%s's UContainer is not empty. %s cannot trade with them at this time", PTarget->getName(), PChar->getName());
         return;
     }
@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     if ((PTarget->TradePending.targid != 0 && lastTargetTrade < 60s) || PTarget->UContainer->GetType() == UCONTAINER_TRADE)
     {
         // Can't trade with someone who's already got a pending trade before timeout
-        PChar->pushPacket<CTradeActionPacket>(PTarget, 0x07);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
         return;
     }
 
@@ -112,8 +112,8 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
             POldTradeTarget->TradePending.clean();
             PChar->TradePending.clean();
 
-            POldTradeTarget->pushPacket<CTradeActionPacket>(PChar, 0x07);
-            PChar->pushPacket<CTradeActionPacket>(POldTradeTarget, 0x07);
+            POldTradeTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(POldTradeTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
             return;
         }
     }
@@ -125,5 +125,5 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     PTarget->lastTradeInvite     = currentTime;
     PTarget->TradePending.id     = PChar->id;
     PTarget->TradePending.targid = PChar->targid;
-    PTarget->pushPacket<CTradeRequestPacket>(PChar);
+    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_REQ>(PChar);
 }

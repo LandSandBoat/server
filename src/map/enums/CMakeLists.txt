@@ -1,9 +1,13 @@
 set(ENUMS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/emote.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/four_cc.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_lockflg.h
     ${CMAKE_CURRENT_SOURCE_DIR}/key_items.h
     ${CMAKE_CURRENT_SOURCE_DIR}/music_slot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_c2s.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_s2c.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_effect.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_result.h
     PARENT_SCOPE
 )

@@ -6219,13 +6219,12 @@ INSERT INTO `mob_spawn_points` VALUES (16904213,0,'Razon','Razon',4,-1.1,0.7,0.9
 INSERT INTO `mob_spawn_points` VALUES (16904215,0,'Razon','Razon',4,596.1,-78.9,-1.5,0);
 
 -- Beloved of the Atlantes
-INSERT INTO `mob_spawn_points` VALUES (16904217,0,'Watch_Hippogryph','Watch Hippogryph',5,-580.226,81.500,4.074,188);
-INSERT INTO `mob_spawn_points` VALUES (16904218,0,'Guard_Hippogryph','Guard Hippogryph',6,-578.245,81.500,3.045,101);
-INSERT INTO `mob_spawn_points` VALUES (16904220,0,'Watch_Hippogryph','Watch Hippogryph',5,79.964,-0.836,3.686,81);
-INSERT INTO `mob_spawn_points` VALUES (16904221,0,'Guard_Hippogryph','Guard Hippogryph',6,59.134,-0.216,0.040,100);
-INSERT INTO `mob_spawn_points` VALUES (16904223,0,'Watch_Hippogryph','Watch Hippogryph',5,616.280,-78.699,-9.550,120);
-INSERT INTO `mob_spawn_points` VALUES (16904224,0,'Guard_Hippogryph','Guard Hippogryph',6,612.415,-78.416,-8.278,96);
-
+INSERT INTO `mob_spawn_points` VALUES (16904217,0,'Watch_Hippogryph','Watch Hippogryph',5,-605.000,81.699,0,0);
+INSERT INTO `mob_spawn_points` VALUES (16904218,0,'Guard_Hippogryph','Guard Hippogryph',6,-608.174,81.699,-2.483,244);
+INSERT INTO `mob_spawn_points` VALUES (16904220,0,'Watch_Hippogryph','Watch Hippogryph',5,-5.000,1.700,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (16904221,0,'Guard_Hippogryph','Guard Hippogryph',6,-8.174,1.700,-2.483,244);
+INSERT INTO `mob_spawn_points` VALUES (16904223,0,'Watch_Hippogryph','Watch Hippogryph',5,595.750,-78.254,0,0);
+INSERT INTO `mob_spawn_points` VALUES (16904224,0,'Guard_Hippogryph','Guard Hippogryph',6,592.576,-78.254,-2.483,244);
 -- Bugard in the Clouds
 INSERT INTO `mob_spawn_points` VALUES (16904226,0,'Hotupuku','Hotupuku',7,-593.932,81.900,0.009,75);
 INSERT INTO `mob_spawn_points` VALUES (16904228,0,'Hotupuku','Hotupuku',7,8.718,1.500,-8.058,72);
@@ -46148,10 +46147,10 @@ INSERT INTO `mob_spawn_points` VALUES (17309976,0,'Groundskeeper','Groundskeeper
 INSERT INTO `mob_spawn_points` VALUES (17309977,0,'Groundskeeper','Groundskeeper',12,-313.394,-25.489,-212.184,107);
 INSERT INTO `mob_spawn_points` VALUES (17309978,0,'Groundskeeper','Groundskeeper',12,-320.503,-25.489,-200.977,105);
 INSERT INTO `mob_spawn_points` VALUES (17309979,0,'Mimic','Mimic',14,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17309980,0,'Genbu','Genbu',15,257.000,-70.000,517.000,118);
+INSERT INTO `mob_spawn_points` VALUES (17309980,0,'Genbu','Genbu',15,261.868,-70.219,526.413,90);
 INSERT INTO `mob_spawn_points` VALUES (17309981,0,'Seiryu','Seiryu',16,580.835,-70.220,-84.529,134);
-INSERT INTO `mob_spawn_points` VALUES (17309982,0,'Byakko','Byakko',17,-410.488,-70.520,394.720,214);
-INSERT INTO `mob_spawn_points` VALUES (17309983,0,'Suzaku','Suzaku',18,-514.533,-70.520,-264.736,72);
+INSERT INTO `mob_spawn_points` VALUES (17309982,0,'Byakko','Byakko',17,-419.403,-70.200,410.956,30);
+INSERT INTO `mob_spawn_points` VALUES (17309983,0,'Suzaku','Suzaku',18,-520.836,-70.220,-271.516,242);
 INSERT INTO `mob_spawn_points` VALUES (17309984,0,'Eraser','Eraser',19,-77.860,-40.700,-147.750,54);
 INSERT INTO `mob_spawn_points` VALUES (17309985,0,'Aello','Aello',20,375.583,-39.958,230.956,50);
 INSERT INTO `mob_spawn_points` VALUES (17309986,0,'Aellos_Handmaiden','Aello\'s Handmaiden',21,369.646,-39.983,230.282,11);

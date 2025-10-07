@@ -37,7 +37,6 @@
 #include "ai/states/range_state.h"
 
 #include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
 #include "packets/char_equip.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
@@ -47,7 +46,6 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
-#include "packets/key_items.h"
 #include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
@@ -66,6 +64,8 @@
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x026_item_subcontainer.h"
+#include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/server_ip.h"
 
 #include "ability.h"
@@ -1257,7 +1257,7 @@ namespace charutils
     {
         for (uint8 table = 0; table < MAX_KEYS_TABLE; table++)
         {
-            PChar->pushPacket<CKeyItemsPacket>(PChar, (KEYS_TABLE)table);
+            PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<KEYS_TABLE>(table));
         }
     }
 
@@ -2949,7 +2949,7 @@ namespace charutils
             CheckUnarmedWeapon(PChar);
         }
 
-        PChar->pushPacket<CCharAppearancePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
 
         BuildingCharWeaponSkills(PChar);
         PChar->RequestPersist(CHAR_PERSIST::EQUIP);

@@ -678,8 +678,8 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
-    if mob:addStatusEffect(typeEffect, power, tick, duration) then
+xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration, subType, subPower)
+    if mob:addStatusEffect(typeEffect, power, tick, duration, subType, subPower) then
         return xi.msg.basic.SKILL_GAIN_EFFECT
     end
 

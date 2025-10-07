@@ -562,16 +562,16 @@ INSERT INTO `mob_skill_lists` VALUES ('Hecteyes',139,437);
 INSERT INTO `mob_skill_lists` VALUES ('Hecteyes',139,438);
 INSERT INTO `mob_skill_lists` VALUES ('Hecteyes',139,440);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,576);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,577);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,578);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,579);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,580);
-INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,2828);
-INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,576);
-INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,578);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,579);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,580);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,1330);
-INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,2828);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,579);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,580);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,576);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,577);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,578);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,579);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,580);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph_NM',141,1330);
 INSERT INTO `mob_skill_lists` VALUES ('Hound',142,465);
 INSERT INTO `mob_skill_lists` VALUES ('Hound',142,466);
 INSERT INTO `mob_skill_lists` VALUES ('Hound',142,467);
@@ -2654,8 +2654,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Alexander_LowHP',785,2146); -- Void of Re
 INSERT INTO `mob_skill_lists` VALUES ('Alexander_LowHP',785,2147); -- Divine Judgment    "Accept thy destruction..."
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,576); -- back heel
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,578); -- nihlity song
--- INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,579); -- choke breath
--- INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,580); -- fantod
+INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,579); -- choke breath
+INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,580); -- fantod
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
 -- 787: free
@@ -4073,11 +4073,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Himinrjot',2042,497); -- Lowing
 -- Himinrjot auto-attacks
 INSERT INTO `mob_skill_lists` VALUES ('Himinrjot_aa',2043,2127); -- Snort (2127)
 
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,316);  -- Impale
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,317);  -- Vampiric Lash
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,319);  -- Bad Breath
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,320);  -- Sweet Breath
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,1793); -- Vampiric Root
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,316);  -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,317);  -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,319);  -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,320);  -- Sweet Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,1793); -- Vampiric Root
 
 INSERT INTO `mob_skill_lists` VALUES ('Nihhus',2045,2099); -- Batterhorn
 INSERT INTO `mob_skill_lists` VALUES ('Nihhus',2045,2100); -- Clobber

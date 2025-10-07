@@ -136,20 +136,15 @@ local familyEES =
     [182] = xi.jsa.EES_MERROW,  -- Merrow
     [184] = xi.jsa.EES_GOBLIN,  -- Moblin
     [189] = xi.jsa.EES_ORC,     -- Orc
-    [200] = xi.jsa.EES_QUADAV,  -- Quadav
-    [201] = xi.jsa.EES_QUADAV,  -- Quadav
     [202] = xi.jsa.EES_QUADAV,  -- Quadav
     [221] = xi.jsa.EES_SHADE,   -- Shadow
     [246] = xi.jsa.EES_TROLL,   -- Troll
     [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
     [327] = xi.jsa.EES_GOBLIN,  -- Goblin
     [328] = xi.jsa.EES_GIGA,    -- Gigas
-    [334] = xi.jsa.EES_ORC,     -- OrcNM
     [335] = xi.jsa.EES_MAAT,    -- Maat
-    [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
     [358] = xi.jsa.EES_KINDRED, -- Kindred
     [359] = xi.jsa.EES_SHADE,   -- Fomor
-    [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
     [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
 }
 

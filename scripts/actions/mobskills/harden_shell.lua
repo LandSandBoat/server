@@ -7,6 +7,10 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:hasStatusEffect(xi.effect.DEFENSE_BOOST) then
+        return 1
+    end
+
     return 0
 end
 

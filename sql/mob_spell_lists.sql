@@ -683,6 +683,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,53,1,255);  -- blink (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,157,1,255); -- aero_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,186,1,255); -- aeroga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,208,1,255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,216,1,255); -- gravity (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,237,1,255); -- choke (1~255)
 
 -- Byakko (26)
@@ -5704,7 +5705,14 @@ INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,206,1,255); -- freeze (1~
 INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,231,1,255); -- bio_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ereshkigal',553,250,1,255); -- ice_spikes (1~255)
 
--- Next Available: 554
+-- Beloved of the Atlantes
+INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,372,1,255); -- Foe Requiem V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,381,1,255); -- Army's Paeon IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,419,1,255); -- Advancing March (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,422,1,255); -- Carnage Elegy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,463,1,255); -- Foe Lullaby (1~255)
+
+-- Next Available: 555
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -3,6 +3,7 @@
 --  Mob: Great Ameretat
 -- Note: PH for Jaded Jody
 -----------------------------------
+mixins = { require('scripts.mixins.families.morbol_toau') }
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 ---@type TMobEntity

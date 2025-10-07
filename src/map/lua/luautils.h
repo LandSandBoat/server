@@ -329,7 +329,7 @@ namespace luautils
     void OnManeuverLose(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
     void OnUpdateAttachment(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
 
-    void OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);
+    int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t& action);
     auto OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
     void OnItemDrop(CBaseEntity* PUser, CItem* PItem);
     void OnItemEquip(CBaseEntity* PUser, CItem* PItem);

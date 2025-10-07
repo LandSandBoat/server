@@ -22,9 +22,9 @@
 #include "0x053_lockstyle.h"
 
 #include "items/item_equipment.h"
-#include "packets/char_appearance.h"
 #include "packets/char_sync.h"
 #include "packets/message_standard.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -32,7 +32,7 @@ namespace
 {
     const auto updateClientAppearance = [](CCharEntity* PChar)
     {
-        PChar->pushPacket<CCharAppearancePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
     };
 } // namespace

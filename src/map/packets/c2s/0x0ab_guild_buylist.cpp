@@ -22,7 +22,7 @@
 #include "0x0ab_guild_buylist.h"
 
 #include "entities/charentity.h"
-#include "packets/guild_menu_buy.h"
+#include "packets/s2c/0x083_guild_buylist.h"
 
 auto GP_CLI_COMMAND_GUILD_BUYLIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -32,5 +32,5 @@ auto GP_CLI_COMMAND_GUILD_BUYLIST::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GUILD_BUYLIST::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<CGuildMenuBuyPacket>(PChar, PChar->PGuildShop);
+    PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUYLIST>(PChar, PChar->PGuildShop);
 }
