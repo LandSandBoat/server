@@ -1,5 +1,5 @@
 -----------------------------------
---  Tyrranic Blare
+--  Tyrannic Blare
 --
 --  Description: Emits an overwhelming scream that damages nearby targets.
 --  Type: Magical?

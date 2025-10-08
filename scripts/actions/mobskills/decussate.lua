@@ -5,20 +5,17 @@
 --  Type: Magical
 --  Utsusemi/Blink absorb: 2-3 shadows?
 --  Range: Less than or equal to 10.0
---  Notes: Only used by Gulool Ja Ja when below 35% health.
+--  Notes: Unlocked at 20% hp
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if
-        mob:getPool() == xi.mobPools.GULOOL_JA_JA and
-        mob:getHP() < mob:getMaxHP() / 100 * 35
-    then
-        return 0
-    else
+    if mob:getHPP() > 20 then
         return 1
     end
+
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

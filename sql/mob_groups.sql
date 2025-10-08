@@ -1005,7 +1005,7 @@ INSERT INTO `mob_groups` VALUES (51,1396,25,'Fomors_Wyvern',0,128,0,0,0,42,44,0)
 INSERT INTO `mob_groups` VALUES (52,4291,25,'Warder_Aglaia',0,128,0,5000,0,62,63,0);
 INSERT INTO `mob_groups` VALUES (53,4292,25,'Warder_Euphrosyne',0,128,0,5000,0,62,63,0);
 INSERT INTO `mob_groups` VALUES (54,4293,25,'Warder_Thalia',0,128,0,5000,0,62,63,0);
-INSERT INTO `mob_groups` VALUES (55,466,25,'Bloody_Coffin',0,128,0,0,0,50,52,0);
+INSERT INTO `mob_groups` VALUES (55,466,25,'Bloody_Coffin',0,128,0,3500,0,50,52,0);
 INSERT INTO `mob_groups` VALUES (56,484,25,'Boggelmann',0,128,0,7600,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (57,98,25,'Alsha',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (58,1792,25,'Gration',0,128,0,30000,0,79,79,0);
@@ -10320,7 +10320,7 @@ INSERT INTO `mob_groups` VALUES (30,426,144,'BiFho_Jestergrin',0,128,0,0,0,62,64
 INSERT INTO `mob_groups` VALUES (31,2305,144,'KuTya_Hotblood',0,128,0,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (32,1167,144,'EaTho_Cruelheart',0,128,0,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (33,3847,144,'Tartaruga_Gigante',0,128,0,35000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (34,3894,144,'The_Waughroon_Kid',0,128,0,0,0,50,50,0);
+INSERT INTO `mob_groups` VALUES (34,3894,144,'The_Waughroon_Kid',0,128,0,3200,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (35,1330,144,'Fee',0,128,0,7500,0,62,62,0);
 INSERT INTO `mob_groups` VALUES (36,3064,144,'Osschaart',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (37,3067,144,'Osschaarts_Bat',0,128,0,0,0,60,60,0);
@@ -13836,7 +13836,7 @@ INSERT INTO `mob_groups` VALUES (8,3523,220,'Sea_Monk',300,0,2188,0,0,21,29,0);
 INSERT INTO `mob_groups` VALUES (9,3127,220,'Phantom',300,1,1993,0,0,22,25,0);
 INSERT INTO `mob_groups` VALUES (10,3912,220,'Thunder_Elemental',300,4,2410,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (11,4309,220,'Water_Elemental',300,4,2629,0,0,27,29,0);
-INSERT INTO `mob_groups` VALUES (12,3522,220,'Sea_Horror',900,0,2186,0,0,60,62,0);
+INSERT INTO `mob_groups` VALUES (12,3522,220,'Sea_Horror',0,128,2186,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (13,1213,220,'Enagakure',0,128,0,0,0,55,55,0);
 
 -- ------------------------------------------------------------
@@ -13857,7 +13857,7 @@ INSERT INTO `mob_groups` VALUES (8,3523,221,'Sea_Monk',300,0,2188,0,0,21,29,0);
 INSERT INTO `mob_groups` VALUES (9,3127,221,'Phantom',300,1,1993,0,0,22,25,0);
 INSERT INTO `mob_groups` VALUES (10,3912,221,'Thunder_Elemental',300,4,2410,0,0,27,29,0);
 INSERT INTO `mob_groups` VALUES (11,4309,221,'Water_Elemental',300,4,2629,0,0,27,29,0);
-INSERT INTO `mob_groups` VALUES (12,3522,221,'Sea_Horror',900,0,2186,0,0,60,62,0);
+INSERT INTO `mob_groups` VALUES (12,3522,221,'Sea_Horror',0,128,2186,0,0,60,62,0);
 
 -- ------------------------------------------------------------
 -- Provenance (Zone 222)

@@ -6345,6 +6345,25 @@ void CLuaBaseEntity::setWallhack(bool enabled)
 }
 
 /************************************************************************
+ *  Function: setFreezeFlag()
+ *  Purpose : Locks (or releases) a player, disallowing them from moving.
+ *  Example : player:setFreezeFlag(true)
+ ************************************************************************/
+
+void CLuaBaseEntity::setFreezeFlag(bool isFrozen)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar            = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->isFrozenFlagged = isFrozen;
+    PChar->updatemask |= UPDATE_HP;
+}
+
+/************************************************************************
  *  Function: isJailed()
  *  Purpose : Returns true if a player is a violent felon
  *  Example : if player:isJailed() then
@@ -18194,14 +18213,14 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         return;
     }
 
-    if (va.size() == 2)
+    if (va.size() >= 2)
     {
         CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(1);
         PTarget                        = PLuaBaseEntity ? (CBattleEntity*)PLuaBaseEntity->m_PBaseEntity : nullptr;
     }
 
     std::optional<timer::duration> castTimeOverride = std::nullopt;
-    if (va.size() == 3)
+    if (va.size() >= 3)
     {
         if (va.get_type(2) == sol::type::number)
         {
@@ -18209,8 +18228,17 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         }
     }
 
+    bool ignoreDistance = false;
+    if (va.size() >= 4)
+    {
+        if (va.get_type(3) == sol::type::boolean)
+        {
+            ignoreDistance = va.get<bool>(3);
+        }
+    }
+
     // clang-format off
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PMobSkill, castTimeOverride](auto PEntity)
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PMobSkill, castTimeOverride, ignoreDistance](auto PEntity)
     {
         auto mobObj = dynamic_cast<CMobEntity*>(PEntity);
 
@@ -18218,7 +18246,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         if (PTarget && mobObj)
         {
             float currentDistance = distance(mobObj->loc.p, PTarget->loc.p);
-            if (currentDistance <= PMobSkill->getDistance())
+            if (ignoreDistance || currentDistance <= PMobSkill->getDistance())
             {
                 PEntity->PAI->MobSkill(PTarget->targid, skillid, castTimeOverride);
             }
@@ -18233,7 +18261,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
                 {
                     // check distance from player or mob will use TP move and 'lock' itself
                     float currentDistance = distance(mobObj->loc.p, defaultTarget->loc.p);
-                    if (currentDistance <= PMobSkill->getDistance())
+                    if (ignoreDistance || currentDistance <= PMobSkill->getDistance())
                     {
                         PEntity->PAI->MobSkill(defaultTarget->targid, skillid, castTimeOverride);
                     }
@@ -19621,6 +19649,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setGMHidden", CLuaBaseEntity::setGMHidden);
     SOL_REGISTER("getWallhack", CLuaBaseEntity::getWallhack);
     SOL_REGISTER("setWallhack", CLuaBaseEntity::setWallhack);
+    SOL_REGISTER("setFreezeFlag", CLuaBaseEntity::setFreezeFlag);
 
     SOL_REGISTER("isJailed", CLuaBaseEntity::isJailed);
     SOL_REGISTER("jail", CLuaBaseEntity::jail);

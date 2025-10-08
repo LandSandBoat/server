@@ -11,6 +11,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Lamias_Avatar')
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(208800, 216000)) -- 58-60 hours
 end

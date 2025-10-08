@@ -459,6 +459,7 @@ xi.msg.system =
 {
     GLOBAL_TRUST_OFFSET          = 0,
     EXECUTING_LOGOUT             = 7,   -- Executing logout in <seconds> seconds. Cancel healing to remain logged in.
+    OBTAINS_GIL                  = 19,  -- Treasure pool message ala 0x0D2 `Gold` value of non- zero "<Name> obtains <value> gil."
     EXECUTING_SHUTDOWN           = 35,  -- Executing shutdown in <seconds> seconds. Cancel healing to remain logged in.
     TRUST_NO_SEEKING_PARTY       = 296, -- You cannot use Trust magic while seeking a party.
     TRUST_DELAY_NEW_PARTY_MEMBER = 297, -- While inviting a party member, you must wait a while before using Trust magic.

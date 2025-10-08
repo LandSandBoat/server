@@ -48,13 +48,6 @@ function set(list)
 end
 
 -----------------------------------
---  getMidnight
---  Returns the next upcoming JST midnight
------------------------------------
-
-getMidnight = JstMidnight
-
------------------------------------
 --  getVanaMidnight(day)
 --  Returns earth time value for midnight for current (or supplied day) in epoch format
 -----------------------------------

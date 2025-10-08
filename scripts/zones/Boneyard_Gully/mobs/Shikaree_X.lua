@@ -150,6 +150,7 @@ end
 -- Zero the skill list to prevent solo weaponskilling while another Shikaree is able to skillchain.
 -----------------------------------
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 2, 'Shikaree_Xs_Rabbit')
     -- Regain from mob_pool_mods.sql
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)

@@ -155,7 +155,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.giveItem(player, { { card, 5 } }) then
             player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
-            player:setCharVar('AllInTheCards_date', getMidnight())
+            player:setCharVar('AllInTheCards_date', JstMidnight())
             player:setLocalVar('Cardstemp', 1)
         end
 

@@ -120,7 +120,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('AgainstAllOdds', 1)                                          -- Set For Corsair BCNM
         player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
-        player:setCharVar('AgainstAllOddsTimer', getMidnight())
+        player:setCharVar('AgainstAllOddsTimer', JstMidnight())
     end
 end
 

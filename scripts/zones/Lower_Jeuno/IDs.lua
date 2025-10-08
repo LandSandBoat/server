@@ -49,6 +49,7 @@ zones[xi.zone.LOWER_JEUNO] =
         DO_NOT_DISTURB                = 7761,  -- "Do Not Disturb"
         INVENTORY_INCREASED           = 7803,  -- Your inventory capacity has increased.
         ITEM_DELIVERY_DIALOG          = 7804,  -- Now offering quick and easy delivery of packages to residences everywhere!
+        YIN_POCANAKHU_GET_LOST        = 8017,  -- Hey, what are you tryin' to pull? Get lost!
         MERTAIRE_RING                 = 8065,  -- So, what did you do with that ring? Maybe it's valuable. I'd ask a collector if I were you. Of course, he might just say it's worthless...
         CONQUEST                      = 8077,  -- You've earned conquest points!
         PARIKE_PORANKE_DIALOG         = 8975,  -- All these people running back and forth... There have to be a few that have munched down more mithkabobs than they can manage. (And if I don't hand in this report to the Orastery soon... Ulp!)

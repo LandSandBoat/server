@@ -5,7 +5,7 @@ g_mixins.families = g_mixins.families or {}
 g_mixins.families.gear = function(gearMob)
     gearMob:addListener('SPAWN', 'TRIPLE_GEAR_DROP', function(mob)
         -- Setup Triple Gears losing gears
-        if mob:getFamily() == 120 or mob:getFamily() == 304 then
+        if mob:getFamily() == 120 then
             mob:setLocalVar('gearDrop1', math.random(45, 60))
             mob:setLocalVar('gearDrop2', math.random(35, 20))
         end
@@ -13,13 +13,13 @@ g_mixins.families.gear = function(gearMob)
 
     gearMob:addListener('COMBAT_TICK', 'GEARS_CTICK', function(mob)
         -- Triple Gears only
-        if mob:getFamily() == 120 or mob:getFamily() == 304 then
-            local mobHPP = mob:getHPP()
+        if mob:getFamily() == 120 then
+            local mobHPP     = mob:getHPP()
             local tripleGear = 0
             local doubleGear = 1
             local singleGear = 2
-            local skillList = 150
-            local dropFirst = mob:getLocalVar('gearDrop1')
+            local skillList  = 150
+            local dropFirst  = mob:getLocalVar('gearDrop1')
             local dropSecond = mob:getLocalVar('gearDrop2')
 
             if mobHPP >= dropSecond and mobHPP <= dropFirst then

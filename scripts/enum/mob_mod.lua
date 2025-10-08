@@ -97,4 +97,6 @@ xi.mobMod =
     BASE_DAMAGE_MULTIPLIER = 86, -- Multiplies the mob's base damage. Example: 150 = x1.5
     DAMAGE_OFFSET          = 87, -- Adds or subtracts the mob's base damage offset.
     RANGED_DAMAGE_OFFSET   = 88, -- Adds or subtracts the mob's ranged base damage offset.
+    AVATAR_PETID           = 89, -- A value from xi.petId to select model/ability from when owner uses astral flow
+    AVATAR_ASTRAL_DELAY    = 90, -- Number of milliseconds to delay AF after avatar spawn
 }

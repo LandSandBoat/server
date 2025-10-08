@@ -23,7 +23,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 604 then
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
-        player:setCharVar('AgainstTimer', getMidnight())
+        player:setCharVar('AgainstTimer', JstMidnight())
     end
 end
 

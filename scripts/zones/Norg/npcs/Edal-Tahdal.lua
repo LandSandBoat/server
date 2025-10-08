@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WATER)
             player:delKeyItem(xi.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
-            player:setCharVar('TrialByWater_date', getMidnight())
+            player:setCharVar('TrialByWater_date', JstMidnight())
             player:addFame(xi.fameArea.NORG, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end

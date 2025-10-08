@@ -119,11 +119,11 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         local prevZone = player:getPreviousZone()
 
         if prevZone == xi.zone.LA_THEINE_PLATEAU then
-            player:setCharVar('LastSkyWarpHolla', getMidnight())
+            player:setCharVar('LastSkyWarpHolla', JstMidnight())
         elseif prevZone == xi.zone.KONSCHTAT_HIGHLANDS then
-            player:setCharVar('LastSkyWarpDem', getMidnight())
+            player:setCharVar('LastSkyWarpDem', JstMidnight())
         elseif prevZone == xi.zone.TAHRONGI_CANYON then
-            player:setCharVar('LastSkyWarpMea', getMidnight())
+            player:setCharVar('LastSkyWarpMea', JstMidnight())
         end
 
         xi.teleport.to(player, xi.teleport.id.SKY)

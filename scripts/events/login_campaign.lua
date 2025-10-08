@@ -64,7 +64,7 @@ xi.events.loginCampaign.onGameIn = function(player)
     end
 
     -- Show Info about campaign (month, year, login time)
-    if nextMidnight ~= getMidnight() then
+    if nextMidnight ~= JstMidnight() then
         player:messageSpecial(ID.text.LOGIN_CAMPAIGN_UNDERWAY, loginCampaignStart.year, loginCampaignStart.month)
 
         if loginCount == 0 then
@@ -73,7 +73,7 @@ xi.events.loginCampaign.onGameIn = function(player)
             loginCount = loginCount + 1
         end
 
-        player:setCharVar('LoginCampaignNextMidnight', getMidnight())
+        player:setCharVar('LoginCampaignNextMidnight', JstMidnight())
 
         -- adds currency
         if loginCount == 1 then

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.ELVAANSTICKER_BXAFRAFF - 3] = ID.mob.ELVAANSTICKER_BXAFRAFF, -- Vanguard_Impaler
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Bxafraffs_Wyvern')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -25,10 +25,8 @@ local keyType =
 
 local respawnType =
 {
-    IMMEDIATE =    5,
-    TRAP      =  180,
-    SPECIAL   =  900,
-    REGULAR   = 1800,
+    IMMEDIATE =   5,
+    REGULAR   = 180,
 }
 -----------------------------------
 -- Tables
@@ -1593,9 +1591,18 @@ local function moveTreasure(npc, respawnTime)
     local chosenPosition = positions[math.random(1, #positions)]
     local hideTime       = respawnTime or 1800
 
-    npc:hideNPC(hideTime)
+    npc:setLocalVar('opened', 1)
 
-    npc:queue(3000, function(npcEntity)
+    npc:queue(5000, function(npcEntity)
+        npcEntity:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+        npcEntity:setLocalVar('opened', 0)
+    end)
+
+    npc:queue(7000, function(npcEntity)
+        npcEntity:hideNPC(hideTime)
+    end)
+
+    npc:queue(10000, function(npcEntity)
         npcEntity:setPos(chosenPosition[1], chosenPosition[2], chosenPosition[3], chosenPosition[4])
         npcEntity:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
         npcEntity:setLocalVar('traded', 0)
@@ -1604,30 +1611,12 @@ end
 
 local function openAndMoveTreasure(npc, respawnTime)
     npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
-    npc:setLocalVar('opened', 1)
-
-    npc:queue(5000, function(npcEntity)
-        npcEntity:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
-    end)
-
-    npc:queue(7000, function(npcEntity)
-        npcEntity:setLocalVar('opened', 0)
-        moveTreasure(npcEntity, respawnTime)
-    end)
+    moveTreasure(npc, respawnTime)
 end
 
 local function trapAndMoveTreasure(npc, respawnTime)
     npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_SMOKE)
-    npc:setLocalVar('opened', 1)
-
-    npc:queue(5000, function(npcEntity)
-        npcEntity:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
-    end)
-
-    npc:queue(7000, function(npcEntity)
-        npcEntity:setLocalVar('opened', 0)
-        moveTreasure(npcEntity, respawnTime)
-    end)
+    moveTreasure(npc, respawnTime)
 end
 
 local function handleGilDistribution(player, treasureLevel)
@@ -1665,7 +1654,7 @@ local function handleGilDistribution(player, treasureLevel)
 
     -- Distribute gil.
     for i = 1, #playersInZoneTable do
-        npcUtil.giveCurrency(playersInZoneTable[i], 'gil', gilPerEntity)
+        npcUtil.giveCurrency(playersInZoneTable[i], 'gil', gilPerEntity, true)
     end
 end
 
@@ -1730,12 +1719,12 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         return
     end
 
-    -- Early return: Treasure is doing treasure things.
+    -- Early return: Treasure is already open.
     if
         npc:getLocalVar('opened') ~= 0 or
         npc:getLocalVar('traded') ~= 0
     then
-        player:messageSpecial(ID.text.CHEST_UNLOCKED + 7, treasureKey)
+        player:messageSpecial(ID.text.CHEST_UNLOCKED - 7)
         return
     end
 
@@ -1788,6 +1777,8 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Attempt to open treasure.
     -----------------------------------
     -- Player animations.
+    player:setFreezeFlag(true)
+    player:setRotation(player:getFacingAngle(npc))
     player:sendEmote(npc, xi.emote.KNEEL, xi.emoteMode.MOTION)
     player:delStatusEffect(xi.effect.SNEAK)
     player:delStatusEffect(xi.effect.DEODORIZE)
@@ -1805,8 +1796,12 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
             -- Nothing happens
             if outcome == 1 then
                 player:timer(2000, function(playerEntity)
-                    playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 1, playerEntity:getID())
+                    playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
                     npc:setLocalVar('traded', 0)
+                end)
+
+                player:timer(4000, function(playerEntity)
+                    playerEntity:setFreezeFlag(false)
                 end)
 
                 return
@@ -1816,7 +1811,11 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
                 player:timer(2000, function(playerEntity)
                     playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
                     playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 2)
-                    trapAndMoveTreasure(npc, respawnType.TRAP)
+                    trapAndMoveTreasure(npc, respawnType.REGULAR)
+                end)
+
+                player:timer(4000, function(playerEntity)
+                    playerEntity:setFreezeFlag(false)
                 end)
 
                 return
@@ -1828,15 +1827,16 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
                     local mimic   = GetMobByID(mimicId)
 
                     if not mimic then
-                        player:messageSpecial(ID.text.CHEST_UNLOCKED + 1, player:getID())
+                        playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
                         npc:setLocalVar('traded', 0)
                         return
                     end
 
                     mimic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
-                    npcUtil.popFromQM(player, npc, mimicId, { claim = true, hide = 5 })
+                    npcUtil.popFromQM(playerEntity, npc, mimicId, { claim = true, hide = 5 })
+                    playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 4)
                     moveTreasure(npc, respawnType.IMMEDIATE)
-                    player:messageSpecial(ID.text.CHEST_UNLOCKED + 4)
+                    playerEntity:setFreezeFlag(false)
                 end)
 
                 return
@@ -1848,12 +1848,16 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Handle quest item reward.
     -----------------------------------
     if bypassType == 1 then
+        player:tradeComplete()
         player:timer(2000, function(playerEntity)
-            if npcUtil.giveItem(player, bypassReward) then
-                playerEntity:tradeComplete()
-                openAndMoveTreasure(npc, respawnType.SPECIAL)
+            if npcUtil.giveItem(playerEntity, bypassReward) then
                 playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+                openAndMoveTreasure(npc, respawnType.REGULAR)
             end
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
 
         npc:setLocalVar('traded', 0)
@@ -1863,11 +1867,15 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Handle quest Key Item reward.
     -----------------------------------
     elseif bypassType == 2 then
+        player:tradeComplete()
         player:timer(2000, function(playerEntity)
-            npcUtil.giveKeyItem(playerEntity, bypassReward)
-            playerEntity:tradeComplete()
-            openAndMoveTreasure(npc, respawnType.SPECIAL)
-            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED - 1, bypassReward) -- TODO: message -2 seems to be for other party members?
+            playerEntity:addKeyItem(bypassReward)
+            openAndMoveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
 
         return
@@ -1880,11 +1888,15 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         treasureMap > 0 and
         not player:hasKeyItem(treasureMap)
     then
+        player:tradeComplete()
         player:timer(2000, function(playerEntity)
-            npcUtil.giveKeyItem(playerEntity, treasureMap)
-            playerEntity:tradeComplete()
-            openAndMoveTreasure(npc, respawnType.SPECIAL)
-            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED - 1, treasureMap) -- TODO: message -2 seems to be for other party members?
+            playerEntity:addKeyItem(treasureMap)
+            openAndMoveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
 
         return
@@ -1895,8 +1907,12 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -----------------------------------
     if GetSystemTime() < npc:getLocalVar('illusionCooldown') then
         player:timer(2000, function(playerEntity)
-            moveTreasure(npc, respawnType.SPECIAL)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 6)
+            moveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
 
         return
@@ -1920,19 +1936,27 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     if itemId == xi.item.NONE then
         -- Distribute gil.
         player:timer(2000, function(playerEntity)
-            handleGilDistribution(playerEntity, treasureLevel)
             playerEntity:tradeComplete()
-            openAndMoveTreasure(npc, respawnType.REGULAR)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+            handleGilDistribution(playerEntity, treasureLevel)
+            openAndMoveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
 
     -- Items (Gems or others)
     else
         player:timer(2000, function(playerEntity)
-            playerEntity:addTreasure(itemId, npc)
             playerEntity:tradeComplete()
-            openAndMoveTreasure(npc, respawnType.REGULAR)
+            playerEntity:addTreasure(itemId, npc)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+            openAndMoveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
         end)
     end
 
@@ -1949,7 +1973,7 @@ xi.treasure.onTrigger = function(player, npc)
     local ID     = zones[zoneId]
 
     if npc:getLocalVar('opened') == 0 then
-        player:messageSpecial(ID.text.CHEST_UNLOCKED + 7, keyTable[zoneId][npcTable[npc:getName()]])
+        player:messageSpecial(ID.text.CHEST_UNLOCKED - 8, keyTable[zoneId][npcTable[npc:getName()]])
     else
         player:messageSpecial(ID.text.CHEST_UNLOCKED - 7)
     end

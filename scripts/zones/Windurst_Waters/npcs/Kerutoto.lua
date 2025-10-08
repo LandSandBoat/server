@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
-            player:setCharVar('Darkness_Named_date', getMidnight())
+            player:setCharVar('Darkness_Named_date', JstMidnight())
         end
     end
 end

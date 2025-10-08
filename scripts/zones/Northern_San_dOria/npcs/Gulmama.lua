@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
-            player:setCharVar('TrialByIce_date', getMidnight())
+            player:setCharVar('TrialByIce_date', JstMidnight())
             player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end

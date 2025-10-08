@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.WOODNIX_SHRILLWHISTLE - 6] = ID.mob.WOODNIX_SHRILLWHISTLE, -- Vanguard_Pathfinder
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Woodnixs_Slime')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

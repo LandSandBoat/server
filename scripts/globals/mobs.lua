@@ -939,6 +939,11 @@ xi.mob.callPets = function(mob, petIds, params)
                             petArg:follow(owner, xi.followType.ROAM)
                         end
                     end)
+
+                    -- so we don't wait for the next roam tick (pet assists as soon as :stun is complete)
+                    petToSummon:queue(0, function(petArg)
+                        petArg:triggerListener('ROAM_TICK', petArg)
+                    end)
                 end
 
                 -- cleanup any listeners related to this pet when it dies

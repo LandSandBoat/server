@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.BAA_DAVA_THE_BIBLIOPHAGE - 3] = ID.mob.BAA_DAVA_THE_BIBLIOPHAGE, -- Vanguard_Oracle
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Baas_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

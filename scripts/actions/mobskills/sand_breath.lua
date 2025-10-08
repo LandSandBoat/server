@@ -1,6 +1,7 @@
 -----------------------------------
 -- Sand Breath
--- Deals Earth damage to enemies within a fan-shaped area. Additional effect: Blind
+-- Family: Leech
+-- Description: Deals Earth damage to enemies within a fan-shaped area. Additional Effect: Blind
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,13 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    local params = {}
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.2, 0.75, xi.element.EARTH, 800)
+    params.percentMultipier  = 0.083
+    params.element           = xi.element.EARTH
+    params.damageCap         = 333
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
-    return dmg
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.EARTH)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120) -- TODO: Capture power.
+    end
+
+    return damage
 end
 
 return mobskillObject

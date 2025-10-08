@@ -16,6 +16,8 @@ local cryptonberrySpecials =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Tonberrys_Elemental')
+
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 

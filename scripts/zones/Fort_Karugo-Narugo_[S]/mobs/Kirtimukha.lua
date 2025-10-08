@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.KIRTIMUKHA - 1] = ID.mob.KIRTIMUKHA,
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Death_Jacket')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 523)
 end

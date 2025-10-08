@@ -1,6 +1,7 @@
 -----------------------------------
 -- Magnetite Cloud
--- Deals earth damage to enemies within a fan-shaped area originating from the caster. Additional effect: Weight.
+-- Family: Antica
+-- Description: Deals Earth damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Weight.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,13 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 120)
+    local params = {}
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.167, 1.875, xi.element.EARTH, 509)
+    params.percentMultipier  = 0.15
+    params.element           = xi.element.EARTH
+    params.damageCap         = 509 -- TODO: Capture Cap
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
-    return dmg
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.EARTH)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 75, 0, math.random(30, 60))
+    end
+
+    return damage
 end
 
 return mobskillObject

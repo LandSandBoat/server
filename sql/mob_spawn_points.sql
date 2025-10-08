@@ -10843,14 +10843,14 @@ INSERT INTO `mob_spawn_points` VALUES (16969733,0,'Blanched_Kraken','Blanched Kr
 INSERT INTO `mob_spawn_points` VALUES (16969734,0,'Gugru_Orobon','Gugru Orobon',4,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (16969735,0,'Southern_Piranu','Southern Piranu',5,1.000,1.000,1.000,0);
 
-INSERT INTO `mob_spawn_points` VALUES (16969736,0,'Gugru_Crab','Gugru Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969737,0,'Gugru_Crab','Gugru Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969738,0,'Ocean_Jagil','Ocean Jagil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969739,0,'Ocean_Jagil','Ocean Jagil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969740,0,'Ocean_Kraken','Ocean Kraken',8,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969741,0,'Revenant','Revenant',9,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969742,0,'Thunder_Elemental','Thunder Elemental',10,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16969743,0,'Water_Elemental','Water Elemental',11,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (16969736,0,'Gugru_Crab','Gugru Crab',6,-5.470,-7.160,14.980,188);
+INSERT INTO `mob_spawn_points` VALUES (16969737,0,'Gugru_Crab','Gugru Crab',6,-0.820,-7.230,19.420,157);
+INSERT INTO `mob_spawn_points` VALUES (16969738,0,'Ocean_Jagil','Ocean Jagil',7,1.960,-7.170,13.120,65);
+INSERT INTO `mob_spawn_points` VALUES (16969739,0,'Ocean_Jagil','Ocean Jagil',7,-0.700,-7.160,16.410,122);
+INSERT INTO `mob_spawn_points` VALUES (16969740,0,'Ocean_Kraken','Ocean Kraken',8,1.210,-7.240,23.490,250);
+INSERT INTO `mob_spawn_points` VALUES (16969741,0,'Revenant','Revenant',9,-3.080,-7.160,4.920,31);
+INSERT INTO `mob_spawn_points` VALUES (16969742,0,'Thunder_Elemental','Thunder Elemental',10,9.160,-7.640,8.570,154);
+INSERT INTO `mob_spawn_points` VALUES (16969743,0,'Water_Elemental','Water Elemental',11,9.160,-7.640,8.570,154);
 
 -- ------------------------------------------------------------
 -- Al Zahbi (Zone 48)
@@ -12499,7 +12499,7 @@ INSERT INTO `mob_spawn_points` VALUES (16998777,0,'Draugar_Servant','Draugar Ser
 INSERT INTO `mob_spawn_points` VALUES (16998778,0,'Draugar_Servant','Draugar Servant',42,-56.681,-5.865,-178.079,54);
 INSERT INTO `mob_spawn_points` VALUES (16998779,0,'Draugar_Servant','Draugar Servant',42,-12.875,-5.043,-183.565,224);
 INSERT INTO `mob_spawn_points` VALUES (16998780,0,'Draugar_Servant','Draugar Servant',42,-8.203,-5.554,-180.136,114);
-INSERT INTO `mob_spawn_points` VALUES (16998781,0,'Ice_Elemental','Ice Elemental',51,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (16998781,0,'Ice_Elemental','Ice Elemental',51,-49.301,-4.160,-205.069,33);
 INSERT INTO `mob_spawn_points` VALUES (16998782,0,'Dark_Elemental','Dark Elemental',62,-49.301,-4.160,-205.069,33);
 INSERT INTO `mob_spawn_points` VALUES (16998783,0,'Lamia_Idolater','Lamia Idolater',54,-105.143,-4.337,-286.469,112);
 INSERT INTO `mob_spawn_points` VALUES (16998784,0,'Lamia_Idolater','Lamia Idolater',54,-102.079,-4.372,-277.244,200);
@@ -12538,7 +12538,7 @@ INSERT INTO `mob_spawn_points` VALUES (16998816,0,'Lamie_Bellydancer','Lamie Bel
 INSERT INTO `mob_spawn_points` VALUES (16998817,0,'Lamias_Elemental','Lamia\'s Elemental',16,1.000,1.000,1.000,11);
 INSERT INTO `mob_spawn_points` VALUES (16998818,0,'Lamia_Idolater','Lamia Idolater',54,-103.234,-4.023,-415.711,236);
 INSERT INTO `mob_spawn_points` VALUES (16998819,0,'Lamia_Idolater','Lamia Idolater',54,-103.561,-4.833,-408.813,133);
-INSERT INTO `mob_spawn_points` VALUES (16998820,0,'Ice_Elemental','Ice Elemental',51,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (16998820,0,'Ice_Elemental','Ice Elemental',51,-58.725,-5.003,-421.843,231);
 INSERT INTO `mob_spawn_points` VALUES (16998821,0,'Dark_Elemental','Dark Elemental',62,-58.725,-5.003,-421.843,231);
 INSERT INTO `mob_spawn_points` VALUES (16998822,0,'Jnun','Jnun',19,-78.375,-4.854,-483.804,96);
 INSERT INTO `mob_spawn_points` VALUES (16998823,0,'Jnun','Jnun',19,-89.975,-1.096,-496.171,42);
@@ -13189,17 +13189,17 @@ INSERT INTO `mob_spawn_points` VALUES (17018884,0,'Abyssal_Pugil','Abyssal Pugil
 INSERT INTO `mob_spawn_points` VALUES (17018885,0,'Bathybic_Kulshedra','Bathybic Kulshedra',5,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17018886,0,'Orobon','Orobon',6,1.000,1.000,1.000,0);
 
-INSERT INTO `mob_spawn_points` VALUES (17018887,0,'Apkallu','Apkallu',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018888,0,'Apkallu','Apkallu',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018889,0,'Bigclaw','Bigclaw',8,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018890,0,'Bigclaw','Bigclaw',8,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018891,0,'Cyan_Deep_Pugil','Cyan Deep Pugil',9,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018892,0,'Kulshedra','Kulshedra',10,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018893,0,'Utukku','Utukku',11,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018894,0,'Imp','Imp',12,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018895,0,'Air_Elemental','Air Elemental',13,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018896,0,'Thunder_Elemental','Thunder Elemental',14,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17018897,0,'Almighty_Apkallu','Almighty Apkallu',15,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17018887,0,'Apkallu','Apkallu',7,-0.309,-7.163,5.317,106);
+INSERT INTO `mob_spawn_points` VALUES (17018888,0,'Apkallu','Apkallu',7,-0.460,-7.240,23.490,141);
+INSERT INTO `mob_spawn_points` VALUES (17018889,0,'Bigclaw','Bigclaw',8,-1.700,-7.170,13.730,64);
+INSERT INTO `mob_spawn_points` VALUES (17018890,0,'Bigclaw','Bigclaw',8,-5.450,-7.160,11.580,163);
+INSERT INTO `mob_spawn_points` VALUES (17018891,0,'Cyan_Deep_Pugil','Cyan Deep Pugil',9,5.890,-7.190,13.580,67);
+INSERT INTO `mob_spawn_points` VALUES (17018892,0,'Kulshedra','Kulshedra',10,5.110,-7.160,15.370,214);
+INSERT INTO `mob_spawn_points` VALUES (17018893,0,'Utukku','Utukku',11,-1.530,-7.160,11.080,157);
+INSERT INTO `mob_spawn_points` VALUES (17018894,0,'Imp','Imp',12,-2.010,-7.160,15.230,161);
+INSERT INTO `mob_spawn_points` VALUES (17018895,0,'Air_Elemental','Air Elemental',13,-1.900,-7.240,22.360,155);
+INSERT INTO `mob_spawn_points` VALUES (17018896,0,'Thunder_Elemental','Thunder Elemental',14,-2.320,-7.160,4.040,89);
+INSERT INTO `mob_spawn_points` VALUES (17018897,0,'Almighty_Apkallu','Almighty Apkallu',15,-1.720,-7.160,10.480,152);
 
 -- ------------------------------------------------------------
 -- The Ashu Talif (Zone 60)
@@ -45726,7 +45726,7 @@ INSERT INTO `mob_spawn_points` VALUES (17297411,0,'Lesser_Gaylas','Lesser Gaylas
 INSERT INTO `mob_spawn_points` VALUES (17297412,0,'Greater_Gayla','Greater Gayla',2,119.409,3.860,-126.084,127);
 INSERT INTO `mob_spawn_points` VALUES (17297413,0,'Greater_Gayla','Greater Gayla',2,175.632,3.077,-98.700,127);
 INSERT INTO `mob_spawn_points` VALUES (17297414,0,'Thunder_Elemental','Thunder Elemental',3,138.615,3.400,-101.378,125);
-INSERT INTO `mob_spawn_points` VALUES (17297415,0,'Light_Elemental','Light Elemental',4,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17297415,0,'Light_Elemental','Light Elemental',4,138.615,3.400,-101.378,125);
 INSERT INTO `mob_spawn_points` VALUES (17297416,0,'Demonic_Weapon','Demonic Weapon',5,159.000,4.000,-82.000,127);
 INSERT INTO `mob_spawn_points` VALUES (17297417,0,'Demonic_Weapon','Demonic Weapon',5,192.178,3.851,-86.399,82);
 INSERT INTO `mob_spawn_points` VALUES (17297418,0,'Lost_Soul','Lost Soul',18,124.000,4.000,-117.000,127);
@@ -45750,7 +45750,7 @@ INSERT INTO `mob_spawn_points` VALUES (17297435,0,'Light_Elemental','Light Eleme
 INSERT INTO `mob_spawn_points` VALUES (17297436,0,'Master_Coeurl','Master Coeurl',7,-36.000,-3.000,-6.000,127);
 INSERT INTO `mob_spawn_points` VALUES (17297437,0,'Bhuta','Bhuta',8,-24.568,-3.857,4.811,13);
 INSERT INTO `mob_spawn_points` VALUES (17297438,0,'Thunder_Elemental','Thunder Elemental',3,-44.195,-4.390,-8.444,45);
-INSERT INTO `mob_spawn_points` VALUES (17297439,0,'Light_Elemental','Light Elemental',4,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17297439,0,'Light_Elemental','Light Elemental',4,-44.195,-4.390,-8.444,45);
 INSERT INTO `mob_spawn_points` VALUES (17297440,0,'Behemoth','Behemoth',9,-277.763,-20.309,72.189,127);
 INSERT INTO `mob_spawn_points` VALUES (17297441,0,'King_Behemoth','King Behemoth',10,-267.469,-19.831,73.674,127);
 INSERT INTO `mob_spawn_points` VALUES (17297442,0,'Thunder_Elemental','Thunder Elemental',3,-226.728,-20.524,21.987,79);
@@ -51796,9 +51796,9 @@ INSERT INTO `mob_spawn_points` VALUES (17367232,0,'Tartaruga_Gigante','Tartaruga
 INSERT INTO `mob_spawn_points` VALUES (17367234,0,'Tartaruga_Gigante','Tartaruga Gigante',33,222.866,-59.812,137.969,124);
 
 -- The Final Bout
-INSERT INTO `mob_spawn_points` VALUES (17367236,0,'The_Waughroon_Kid','The Waughroon Kid',34,-177.000,60.000,-141.000,125);
-INSERT INTO `mob_spawn_points` VALUES (17367238,0,'The_Waughroon_Kid','The Waughroon Kid',34,23.274,0.000,18.964,125);
-INSERT INTO `mob_spawn_points` VALUES (17367240,0,'The_Waughroon_Kid','The Waughroon Kid',34,223.224,-60.000,138.946,125);
+INSERT INTO `mob_spawn_points` VALUES (17367236,0,'The_Waughroon_Kid','The Waughroon Kid',34,-177.354,59.696,-142,128);
+INSERT INTO `mob_spawn_points` VALUES (17367238,0,'The_Waughroon_Kid','The Waughroon Kid',34,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367240,0,'The_Waughroon_Kid','The Waughroon Kid',34,222.5,-60.000,137.946,128);
 
 -- Up in Arms
 INSERT INTO `mob_spawn_points` VALUES (17367242,0,'Fee','Fe\'e',35,-175.000,60.000,-142.000,124);
@@ -73768,15 +73768,15 @@ INSERT INTO `mob_spawn_points` VALUES (17678339,0,'Ocean_Pugil','Ocean Pugil',3,
 INSERT INTO `mob_spawn_points` VALUES (17678340,0,'Pirate_Pugil','Pirate Pugil',4,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17678341,0,'Sea_Monk','Sea Monk',5,1.000,1.000,1.000,0);
 
-INSERT INTO `mob_spawn_points` VALUES (17678342,0,'Sea_Crab','Sea Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678343,0,'Sea_Crab','Sea Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678344,0,'Sea_Pugil','Sea Pugil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678345,0,'Sea_Pugil','Sea Pugil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678346,0,'Sea_Monk','Sea Monk',8,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678347,0,'Phantom','Phantom',9,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678348,0,'Thunder_Elemental','Thunder Elemental',10,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678349,0,'Water_Elemental','Water Elemental',11,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17678350,0,'Sea_Horror','Sea Horror',12,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17678342,0,'Sea_Crab','Sea Crab',6,1.320,-7.270,21.040,164);
+INSERT INTO `mob_spawn_points` VALUES (17678343,0,'Sea_Crab','Sea Crab',6,2.930,-7.270,3.840,32);
+INSERT INTO `mob_spawn_points` VALUES (17678344,0,'Sea_Pugil','Sea Pugil',7,-7.450,-7.270,5.170,61);
+INSERT INTO `mob_spawn_points` VALUES (17678345,0,'Sea_Pugil','Sea Pugil',7,-7.650,-7.660,11.550,0);
+INSERT INTO `mob_spawn_points` VALUES (17678346,0,'Sea_Monk','Sea Monk',8,-7.550,-7.270,5.160,70);
+INSERT INTO `mob_spawn_points` VALUES (17678347,0,'Phantom','Phantom',9,-7.550,-7.270,5.160,28);
+INSERT INTO `mob_spawn_points` VALUES (17678348,0,'Thunder_Elemental','Thunder Elemental',10,-8.090,-7.270,16.010,152);
+INSERT INTO `mob_spawn_points` VALUES (17678349,0,'Water_Elemental','Water Elemental',11,4.930,-7.270,16.550,148);
+INSERT INTO `mob_spawn_points` VALUES (17678350,0,'Sea_Horror','Sea Horror',12,-0.230,-7.660,2.860,7);
 INSERT INTO `mob_spawn_points` VALUES (17678351,0,'Enagakure','Enagakure',13,1.000,-7.000,13.000,60);
 
 -- ------------------------------------------------------------
@@ -73865,10 +73865,10 @@ INSERT INTO `mob_spawn_points` VALUES (17707012,0,'Pirate_Pugil','Pirate Pugil',
 INSERT INTO `mob_spawn_points` VALUES (17707013,0,'Sea_Monk','Sea Monk',5,1.000,1.000,1.000,0);
 
 INSERT INTO `mob_spawn_points` VALUES (17707014,0,'Sea_Crab','Sea Crab',6,1.698,-7.268,21.497,139);
-INSERT INTO `mob_spawn_points` VALUES (17707015,0,'Sea_Crab','Sea Crab',6,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17707015,0,'Sea_Crab','Sea Crab',6,-1.870,-7.270,3.210,130);
 INSERT INTO `mob_spawn_points` VALUES (17707016,0,'Sea_Pugil','Sea Pugil',7,-7.699,-7.663,7.549,0);
-INSERT INTO `mob_spawn_points` VALUES (17707017,0,'Sea_Pugil','Sea Pugil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17707018,0,'Sea_Monk','Sea Monk',8,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17707017,0,'Sea_Pugil','Sea Pugil',7,0.200,-7.270,6.870,60);
+INSERT INTO `mob_spawn_points` VALUES (17707018,0,'Sea_Monk','Sea Monk',8,-4.000,-7.270,8.900,69);
 INSERT INTO `mob_spawn_points` VALUES (17707019,0,'Phantom','Phantom',9,-7.629,-7.663,3.749,0);
 INSERT INTO `mob_spawn_points` VALUES (17707020,0,'Crossbones','Crossbones',10,-1.093,-7.288,20.947,228);
 INSERT INTO `mob_spawn_points` VALUES (17707021,0,'Crossbones','Crossbones',10,0.492,-7.268,14.328,108);
@@ -73889,18 +73889,18 @@ INSERT INTO `mob_spawn_points` VALUES (17711107,0,'Ocean_Pugil','Ocean Pugil',3,
 INSERT INTO `mob_spawn_points` VALUES (17711108,0,'Pirate_Pugil','Pirate Pugil',4,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17711109,0,'Sea_Monk','Sea Monk',5,1.000,1.000,1.000,0);
 
-INSERT INTO `mob_spawn_points` VALUES (17711110,0,'Sea_Crab','Sea Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17711111,0,'Sea_Crab','Sea Crab',6,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17711112,0,'Sea_Pugil','Sea Pugil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17711113,0,'Sea_Pugil','Sea Pugil',7,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17711114,0,'Sea_Monk','Sea Monk',8,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17711115,0,'Phantom','Phantom',9,0.069,-7.163,15.823,0);
-INSERT INTO `mob_spawn_points` VALUES (17711116,0,'Crossbones','Crossbones',10,4.560,-7.160,17.430,90);
-INSERT INTO `mob_spawn_points` VALUES (17711117,0,'Crossbones','Crossbones',10,-7.201,-7.160,17.600,0);
-INSERT INTO `mob_spawn_points` VALUES (17711118,0,'Crossbones','Crossbones',11,-6.320,-7.160,12.470,85);
-INSERT INTO `mob_spawn_points` VALUES (17711119,0,'Crossbones','Crossbones',11,2.880,-7.160,9.580,250);
-INSERT INTO `mob_spawn_points` VALUES (17711120,0,'Ship_Wight','Ship Wight',12,-0.700,-7.160,23.512,83);
-INSERT INTO `mob_spawn_points` VALUES (17711121,0,'Silverhook','Silverhook',13,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17711110,0,'Sea_Crab','Sea Crab',6,1.570,-7.270,10.230,127);
+INSERT INTO `mob_spawn_points` VALUES (17711111,0,'Sea_Crab','Sea Crab',6,8.560,-7.640,3.380,191);
+INSERT INTO `mob_spawn_points` VALUES (17711112,0,'Sea_Pugil','Sea Pugil',7,-3.390,-7.270,13.780,129);
+INSERT INTO `mob_spawn_points` VALUES (17711113,0,'Sea_Pugil','Sea Pugil',7,4.620,-7.270,10.200,54);
+INSERT INTO `mob_spawn_points` VALUES (17711114,0,'Sea_Monk','Sea Monk',8,-7.310,-7.660,7.280,0);
+INSERT INTO `mob_spawn_points` VALUES (17711115,0,'Phantom','Phantom',9,-3.740,-7.270,17.710,101);
+INSERT INTO `mob_spawn_points` VALUES (17711116,0,'Crossbones','Crossbones',10,-0.080,-7.270,3.690,63);
+INSERT INTO `mob_spawn_points` VALUES (17711117,0,'Crossbones','Crossbones',10,8.070,-7.660,19.320,0);
+INSERT INTO `mob_spawn_points` VALUES (17711118,0,'Crossbones','Crossbones',11,8.710,-7.560,13.220,176);
+INSERT INTO `mob_spawn_points` VALUES (17711119,0,'Crossbones','Crossbones',11,7.040,-7.510,11.060,107);
+INSERT INTO `mob_spawn_points` VALUES (17711120,0,'Ship_Wight','Ship Wight',12,7.770,-7.450,17.190,188);
+INSERT INTO `mob_spawn_points` VALUES (17711121,0,'Silverhook','Silverhook',13,-3.560,-7.290,2.430,13);
 
 -- ------------------------------------------------------------
 -- Abyssea - Uleguerand (Zone 253)

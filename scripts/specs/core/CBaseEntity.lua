@@ -1405,6 +1405,11 @@ end
 function CBaseEntity:setWallhack(enable)
 end
 
+---@param isFrozen boolean
+---@return nil
+function CBaseEntity:setFreezeFlag(isFrozen)
+end
+
 ---@nodiscard
 ---@return boolean
 function CBaseEntity:isJailed()
@@ -3959,8 +3964,9 @@ end
 ---@param skillID integer
 ---@param PLuaBaseEntity CBaseEntity?
 ---@param castTimeOverride number?
+---@param ignoreDistance boolean?
 ---@return nil
-function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity, castTimeOverride)
+function CBaseEntity:useMobAbility(skillID, PLuaBaseEntity, castTimeOverride, ignoreDistance)
 end
 
 ---@return nil

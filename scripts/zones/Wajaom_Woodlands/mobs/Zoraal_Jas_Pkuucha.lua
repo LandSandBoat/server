@@ -26,6 +26,10 @@ entity.spawnPoints =
     { x = 170.000, y = -18.000, z = -21.000 },
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Percipient_Zoraal_Ja')
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('whenToPopZoraal', math.random(20, 50))
     mob:setLocalVar('hasPoppedZoraal', 0)

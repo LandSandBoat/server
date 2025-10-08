@@ -1425,7 +1425,7 @@ function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
 
     -- Only grant mission XP once per JP midnight
     if self.grantXP and self:getVar(player, 'XP') <= GetSystemTime() then
-        self:setVar(player, 'XP', getMidnight())
+        self:setVar(player, 'XP', JstMidnight())
         player:addExp(self.grantXP)
     end
 end

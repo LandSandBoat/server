@@ -422,8 +422,9 @@ end
 ---@param player CBaseEntity
 ---@param currency string
 ---@param amount integer
+---@param useTreasurePoolMsg boolean?
 ---@return boolean
-function npcUtil.giveCurrency(player, currency, amount)
+function npcUtil.giveCurrency(player, currency, amount, useTreasurePoolMsg)
     local ID = zones[player:getZoneID()]
 
     if type(currency) ~= 'string' or type(amount) ~= 'number' then
@@ -460,7 +461,11 @@ function npcUtil.giveCurrency(player, currency, amount)
         player:addCurrency(currency, amount)
     end
 
-    player:messageSpecial(messageId, amount)
+    if useTreasurePoolMsg then
+        player:messageSystem(xi.msg.system.OBTAINS_GIL, amount)
+    else
+        player:messageSpecial(messageId, amount)
+    end
 
     return true
 end

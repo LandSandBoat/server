@@ -1256,11 +1256,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Grav_iton',282,920);
 INSERT INTO `mob_skill_lists` VALUES ('Grav_iton',282,921);
 INSERT INTO `mob_skill_lists` VALUES ('Melusine',283,2198); -- winter_breeze
 -- 284: Oupire
-INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1731);
-INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1732);
-INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1733);
-INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1734);
-INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1738);
 INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1797);
 INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1798);
 INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1799);
@@ -4178,7 +4173,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,398);
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,513);
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',2062,514);
 
--- Next ID : 2063
+INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,581);
+INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,583);
+INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,584);
+INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,586);
+
+-- Next ID : 2064
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -133,7 +133,7 @@ quest.sections =
                         player:needToZone(true)
                         player:delKeyItem(xi.ki.RAINBOW_BERRY)
                         -- Set variable for 'A taste of Honey' ToAU quest.
-                        player:setVar('Quest[6][12]Stage', getMidnight())
+                        player:setVar('Quest[6][12]Stage', JstMidnight())
                     end
                 end,
             },

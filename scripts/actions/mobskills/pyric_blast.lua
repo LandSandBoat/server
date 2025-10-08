@@ -1,16 +1,13 @@
 -----------------------------------
---  Pyric Blast
---
---  Description: Deals Fire damage to enemies within a fan-shaped area. Additional effect: Plague
---  Type: Breath
---  Ignores Shadows
---  Range: Unknown Cone
+-- Pyric Blast
+-- Family: Hydra
+-- Description: Deals Fire damage to enemies within a fan-shaped area. Additional Effect: Plague
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
+    if mob:getFamily() == 316 then -- TODO: Pandemonium Warden. Set skill lists/clean up.
         local mobSkin = mob:getModelId()
 
         if mobSkin == 1796 then
@@ -20,7 +17,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         end
     end
 
+    -- Only used when all 3 heads are alive.
     if mob:getAnimationSub() == 0 then
+        -- TODO: Does this need an inFront() check?
         return 0
     else
         return 1
@@ -28,12 +27,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.01, 0.1, xi.element.FIRE, 700)
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60)
+    params.percentMultipier  = 0.01 -- TODO: Capture breath values.
+    params.element           = xi.element.FIRE
+    params.damageCap         = 700 -- TODO: Capture cap
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.FIRE)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60) -- TODO: Capture power/duration
+    end
 
     if
         mob:getFamily() == 313 and
@@ -43,7 +53,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     end
 
-    return dmg
+    return damage
 end
 
 return mobskillObject

@@ -5712,7 +5712,16 @@ INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,419,1,255); 
 INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,422,1,255); -- Carnage Elegy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beloved_of_the_Atlantes',554,463,1,255); -- Foe Lullaby (1~255)
 
--- Next Available: 555
+-- Bloody Coffin (RDM) (555)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,34,45,255); -- Diaga_II (45~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,56,1,255);  -- Slow (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,57,1,255);  -- Haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,105,1,255); -- Enwater (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,108,1,255); -- Regen (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,250,1,255); -- ice_spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,254,1,255); -- Blind (1~255)
+
+-- Next Available: 556
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

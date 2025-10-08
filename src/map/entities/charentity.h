@@ -293,6 +293,7 @@ public:
 
     uint8 visibleGmLevel;        // See GmLevel of flags0_t
     bool  wallhackEnabled;       // GM walk through walls
+    bool  isFrozenFlagged;       // Player Freeze flag.
     bool  isSettingBazaarPrices; // Is setting bazaar prices (temporarily hide bazaar)
     bool  isLinkDead;            // Player is d/cing
 

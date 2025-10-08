@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:confirmTrade()
     elseif csid == 195 then
         player:confirmTrade()
-        player:setCharVar('MamaMia_date', getMidnight())
+        player:setCharVar('MamaMia_date', JstMidnight())
     elseif csid == 197 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14625) -- Evokers Ring

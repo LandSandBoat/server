@@ -5,6 +5,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 3, 'Shikaree_Zs_Wyvern')
+end
+
 entity.onMobEngage = function(mob, target)
     -- TODO: Need capture to see if this should actually be using 2HR ability as opposed to a direct
     -- spawn.

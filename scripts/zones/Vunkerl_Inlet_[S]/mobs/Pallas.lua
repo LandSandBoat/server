@@ -30,6 +30,10 @@ entity.phList =
     [ID.mob.PALLAS - 4] = ID.mob.PALLAS,
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Pallass_Tiger')
+end
+
 entity.onMobSpawn = function(mob)
     -- Do not use call_beast
     mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)

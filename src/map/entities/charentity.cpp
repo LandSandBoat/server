@@ -265,6 +265,7 @@ CCharEntity::CCharEntity()
 
     visibleGmLevel        = 0;
     wallhackEnabled       = false;
+    isFrozenFlagged       = false;
     isSettingBazaarPrices = false;
     isLinkDead            = false;
     pendingPositionUpdate = false;

@@ -341,6 +341,7 @@ public:
     void  setGMHidden(bool isHidden);
     bool  getWallhack();
     void  setWallhack(bool enable);
+    void  setFreezeFlag(bool isFrozen);
 
     bool isJailed();
     void jail();

@@ -44,53 +44,8 @@ INSERT INTO `mob_family_mods` VALUES (4,51,5,1);   -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (4,56,-1,1);  -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (4,244,20,0); -- SILENCERES: 20
 
--- Animatedweapon-Archery
+-- Animated Weapon
 INSERT INTO `mob_family_mods` VALUES (7,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Axe
-INSERT INTO `mob_family_mods` VALUES (8,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Club
-INSERT INTO `mob_family_mods` VALUES (9,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Dagger
-INSERT INTO `mob_family_mods` VALUES (11,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Greataxe
-INSERT INTO `mob_family_mods` VALUES (12,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Greatkatana
-INSERT INTO `mob_family_mods` VALUES (13,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Greatsword
-INSERT INTO `mob_family_mods` VALUES (14,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Handtohand
-INSERT INTO `mob_family_mods` VALUES (15,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Instrument
-INSERT INTO `mob_family_mods` VALUES (16,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Katana
-INSERT INTO `mob_family_mods` VALUES (17,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Marksmanship
-INSERT INTO `mob_family_mods` VALUES (18,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Polearm
-INSERT INTO `mob_family_mods` VALUES (19,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Scythe
-INSERT INTO `mob_family_mods` VALUES (20,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Shield
-INSERT INTO `mob_family_mods` VALUES (21,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Staff
-INSERT INTO `mob_family_mods` VALUES (23,3,50,1); -- MP_BASE: 50
-
--- Animatedweapon-Sword
-INSERT INTO `mob_family_mods` VALUES (24,3,50,1); -- MP_BASE: 50
 
 -- Antlion
 INSERT INTO `mob_family_mods` VALUES (26,36,50,1); -- ROAM_COOL: 50
@@ -847,16 +802,6 @@ INSERT INTO `mob_family_mods` VALUES (362,10,7,1); -- SUBLINK: 7 (Sabotender)
 
 -- Leech
 INSERT INTO `mob_family_mods` VALUES (369,31,15,1); -- ROAM_DISTANCE: 15
-
--- Raptor
-INSERT INTO `mob_family_mods` VALUES (376,31,30,1); -- ROAM_DISTANCE: 30
-INSERT INTO `mob_family_mods` VALUES (376,36,40,1); -- ROAM_COOL: 40
-INSERT INTO `mob_family_mods` VALUES (376,51,3,1);  -- ROAM_TURNS: 3
-
--- Raptor
-INSERT INTO `mob_family_mods` VALUES (377,31,30,1); -- ROAM_DISTANCE: 30
-INSERT INTO `mob_family_mods` VALUES (377,36,40,1); -- ROAM_COOL: 40
-INSERT INTO `mob_family_mods` VALUES (377,51,3,1);  -- ROAM_TURNS: 3
 
 -- Humanoid-Hume
 INSERT INTO `mob_family_mods` VALUES (394,4,30,1);   -- SIGHT_RANGE: 30

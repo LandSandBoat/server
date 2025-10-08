@@ -119,7 +119,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
-            player:setCharVar('TrialByWind_date', getMidnight())
+            player:setCharVar('TrialByWind_date', JstMidnight())
             player:addFame(xi.fameArea.SELBINA_RABAO, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end

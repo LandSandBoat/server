@@ -145,7 +145,7 @@ quest.sections =
 
                 [527] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 7)
-                    quest:setVar(player, 'Stage', getMidnight())
+                    quest:setVar(player, 'Stage', JstMidnight())
                     player:needToZone(true)
                 end,
 

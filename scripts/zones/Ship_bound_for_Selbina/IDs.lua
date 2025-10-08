@@ -23,7 +23,8 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     },
     mob =
     {
-        ENAGAKURE = GetFirstID('Enagakure'),
+        ENAGAKURE  = GetFirstID('Enagakure'),
+        SEA_HORROR = GetFirstID('Sea_Horror'),
     },
     npc =
     {

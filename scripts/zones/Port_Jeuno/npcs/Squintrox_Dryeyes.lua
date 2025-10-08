@@ -257,7 +257,7 @@ local function tradeForKeyItem(player, trade, ki)
         GetSystemTime() >= player:getCharVar(charVar)
     then
         player:tradeComplete()
-        player:setCharVar(charVar, getMidnight())
+        player:setCharVar(charVar, JstMidnight())
         player:messageSpecial(ID.text.DRYEYES_2)
         npcUtil.giveKeyItem(player, ki)
         return true
@@ -314,7 +314,7 @@ local function takeReqKeyItems(player, ki)
         end
     end
 
-    player:setCharVar(entry.charVar, getMidnight())
+    player:setCharVar(entry.charVar, JstMidnight())
     player:showText(player, ID.text.DRYEYES_2)
     npcUtil.giveKeyItem(player, ki)
 end

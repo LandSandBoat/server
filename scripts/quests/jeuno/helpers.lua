@@ -487,8 +487,11 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                 ['Yin_Pocanakhu'] =
                 {
                     onTrigger = function(player, npc)
-                        if quest:getVar(player, 'Prog') == 2 then
+                        local questProgress = quest:getVar(player, 'Prog')
+                        if questProgress == 2 then
                             return quest:progressEvent(220)
+                        elseif questProgress == 3 or questProgress == 4 then
+                            return quest:event(221)
                         end
                     end,
                 },
@@ -499,7 +502,10 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                         if player:getGil() >= 1000 then
                             player:delGil(1000)
                             quest:setVar(player, 'Prog', 3) -- Spoken with Yin Pocanakhu.
-                            player:updateEvent(1)
+                            player:updateEvent(1, 1, 0, 0)
+                        else
+                            player:messageText(npc, zones[xi.zone.LOWER_JEUNO].text.YIN_POCANAKHU_GET_LOST)
+                            player:updateEvent(0, 1, 0, 0)
                         end
                     end,
                 },
@@ -570,7 +576,7 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                     [26] = function(player, csid, option, npc)
                         if quest:getVar(player, 'Prog') == 0 then
                             if isFirstBorghertzQuest(player) then
-                                quest:setVar(player, 'Prog', 1) -- Speak with Deadly Minnow and Yin Pocanakhu.
+                                quest:setVar(player, 'Prog', 1) -- Need to speak with Deadly Minnow and Yin Pocanakhu.
                             else
                                 quest:setVar(player, 'Prog', 3) -- Skip intermediaries.
                             end

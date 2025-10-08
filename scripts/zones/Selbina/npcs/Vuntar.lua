@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)
     elseif csid == 52 then
-        player:setCharVar('VuntarCanBuyItem_date', getMidnight())
+        player:setCharVar('VuntarCanBuyItem_date', JstMidnight())
 
         if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)

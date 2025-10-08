@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
             -- Spawn Seed mandragora's with xi.effect.CONFRONTATION for 30 min
         -- elseif SR and SC and SV and missionACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I and player:getCharVar('SEED_MANDY') == 1 then
             -- npcUtil.giveKeyItem(player, xi.ki.AMBER_KEY)
-            -- player:setCharVar('LastAmberKey', getMidnight())
+            -- player:setCharVar('LastAmberKey', JstMidnight())
             -- player:setCharVar('SEED_MANDY', 0)
             -- player:delKeyItem(xi.ki.SEEDSPALL_ROSEUM)
             -- player:delKeyItem(xi.ki.SEEDSPALL_CAERULUM)

@@ -1,14 +1,14 @@
 -----------------------------------
---  Frost Breath
---  Description: Deals ice damage to enemies within a fan-shaped area originating from the caster. Additional effect: Paralysis.
---  Type: Magical (Ice)
+-- Frost Breath
+-- Family: Raptors
+-- Description: Deals Ice damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Paralysis.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- only used in Uleguerand_Range
-    if mob:getZoneID() == 5 then
+    -- Only used in Uleguerand_Range
+    if mob:getZoneID() == 5 then -- TODO: Use a skill list.
         return 0
     end
 
@@ -16,13 +16,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 25, 0, 120)
+    local params = {}
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.333, 0.625, xi.element.ICE, 500)
+    params.percentMultipier  = 0.083
+    params.element           = xi.element.ICE
+    params.damageCap         = 500
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.ICE)
-    return dmg
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.ICE)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 50, 0, 180)
+    end
+
+    return damage
 end
 
 return mobskillObject

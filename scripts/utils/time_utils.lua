@@ -82,7 +82,7 @@ end
 ---@nodiscard
 ---@param timeString string
 ---@return integer
-function utils.timeStringToMinutes(timeString)
+utils.timeStringToMinutes = function(timeString)
     local convertedTime  = -1
     local hours, minutes = timeString:match('^(%d%d?):(%d%d)$')
     hours   = tonumber(hours)

@@ -292,7 +292,7 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         local newStatus = player:getStatusEffect(effectID)
 
         if newStatus then
-            newStatus:setDuration((newStatus:getDuration() + jpValue) * 1000)
+            newStatus:setDuration(newStatus:getDuration() + jpValue * 1000)
         end
     -- Copy an SP Ability if found
     else

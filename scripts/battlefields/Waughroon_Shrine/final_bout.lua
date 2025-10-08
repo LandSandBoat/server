@@ -16,54 +16,69 @@ local content = Battlefield:new({
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.COMET_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
-
-    experimental = true,
 })
 
 content:addEssentialMobs({ 'The_Waughroon_Kid' })
 
 content.loot =
 {
+
+    {
+        { itemId = xi.item.GIL,                      weight = 1000, amount = 8000 }, -- Gil
+    },
+
     {
         quantity = 2,
-        { itemId = xi.item.BAG_OF_TREE_CUTTINGS, weight = 1000 }, -- bag_of_tree_cuttings
+        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight = 1000 }, -- Bag of Tree Cuttings
     },
 
     {
-        { itemId = xi.item.CLUMP_OF_BOYAHDA_MOSS, weight = 1000 }, -- clump_of_boyahda_moss
+        { itemId = xi.item.NONE,                     weight = 500 }, -- Nothing
+        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight = 500 }, -- Bag of Tree Cuttings
     },
 
     {
-        { itemId = xi.item.SCROLL_OF_QUAKE,          weight = 100 }, -- scroll_of_quake
-        { itemId = xi.item.PIECE_OF_WISTERIA_LUMBER, weight = 100 }, -- piece_of_wisteria_lumber
-        { itemId = xi.item.MAHOGANY_LOG,             weight = 100 }, -- mahogany_log
-        { itemId = xi.item.EBONY_LOG,                weight = 100 }, -- ebony_log
-        { itemId = xi.item.SCROLL_OF_FREEZE,         weight = 100 }, -- scroll_of_freeze
-        { itemId = xi.item.DARKSTEEL_INGOT,          weight = 100 }, -- darksteel_ingot
-        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight = 100 }, -- scroll_of_raise_ii
-        { itemId = xi.item.PETRIFIED_LOG,            weight = 100 }, -- petrified_log
-        { itemId = xi.item.GOLD_INGOT,               weight = 100 }, -- gold_ingot
-        { itemId = xi.item.CORAL_FRAGMENT,           weight = 100 }, -- coral_fragment
+        { itemId = xi.item.CLUMP_OF_BOYAHDA_MOSS,    weight = 1000 }, -- Clump of Boyahda Moss
     },
 
     {
-        { itemId = xi.item.SHOCK_MASK,              weight = 62 }, -- shock_mask
-        { itemId = xi.item.SUPER_RIBBON,            weight = 62 }, -- super_ribbon
-        { itemId = xi.item.RIVAL_RIBBON,            weight = 62 }, -- rival_ribbon
-        { itemId = xi.item.IVORY_MITTS,             weight = 62 }, -- ivory_mitts
-        { itemId = xi.item.SPIKED_FINGER_GAUNTLETS, weight = 70 }, -- spiked_finger_gauntlets
-        { itemId = xi.item.SLY_GAUNTLETS,           weight = 62 }, -- sly_gauntlets
-        { itemId = xi.item.RUSH_GLOVES,             weight = 62 }, -- rush_gloves
-        { itemId = xi.item.MANA_CIRCLET,            weight = 62 }, -- mana_circlet
-        { itemId = xi.item.HATEFUL_COLLAR,          weight = 62 }, -- hateful_collar
-        { itemId = xi.item.ESOTERIC_MANTLE,         weight = 62 }, -- esoteric_mantle
-        { itemId = xi.item.TEMPLARS_MANTLE,         weight = 62 }, -- templars_mantle
-        { itemId = xi.item.HEAVY_MANTLE,            weight = 62 }, -- heavy_mantle
-        { itemId = xi.item.INTELLECT_TORQUE,        weight = 62 }, -- intellect_torque
-        { itemId = xi.item.STORM_GORGET,            weight = 62 }, -- storm_gorget
-        { itemId = xi.item.BENIGN_NECKLACE,         weight = 62 }, -- benign_necklace
-        { itemId = xi.item.SNIPERS_MANTLE,          weight = 62 }, -- snipers_mantle
+        quantity = 2,
+        { itemId = xi.item.MANA_CIRCLET,             weight = 62 }, -- Mana Circlet
+        { itemId = xi.item.RIVAL_RIBBON,             weight = 62 }, -- Rival Ribbon
+        { itemId = xi.item.SHOCK_MASK,               weight = 62 }, -- Shock Mask
+        { itemId = xi.item.SUPER_RIBBON,             weight = 62 }, -- Super Ribbon
+        { itemId = xi.item.IVORY_MITTS,              weight = 62 }, -- Ivory Mitts
+        { itemId = xi.item.RUSH_GLOVES,              weight = 62 }, -- Rush
+        { itemId = xi.item.SLY_GAUNTLETS,            weight = 62 }, -- Sly Gauntlets
+        { itemId = xi.item.SPIKED_FINGER_GAUNTLETS,  weight = 62 }, -- Spiked Finger Gauntlets
+        { itemId = xi.item.ESOTERIC_MANTLE,          weight = 62 }, -- Esoteric Mantle
+        { itemId = xi.item.HEAVY_MANTLE,             weight = 62 }, -- Heavy Mantle
+        { itemId = xi.item.SNIPERS_MANTLE,           weight = 62 }, -- Snipers Mantle
+        { itemId = xi.item.TEMPLARS_MANTLE,          weight = 62 }, -- Templars Mantle
+        { itemId = xi.item.BENIGN_NECKLACE,          weight = 62 }, -- Benign Necklace
+        { itemId = xi.item.HATEFUL_COLLAR,           weight = 62 }, -- Hateful Collar
+        { itemId = xi.item.INTELLECT_TORQUE,         weight = 62 }, -- Intellect Torque
+        { itemId = xi.item.STORM_GORGET,             weight = 62 }, -- Storm Gorget
     },
+
+    {
+        { itemId = xi.item.SCROLL_OF_QUAKE,          weight = 62 }, -- Scroll of Quake
+        { itemId = xi.item.SCROLL_OF_FREEZE,         weight = 62 }, -- Scroll of Freeze
+        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight = 62 }, -- Scroll of Raise II
+        { itemId = xi.item.SCROLL_OF_REGEN_III,      weight = 62 }, -- Scroll of Regen III
+        { itemId = xi.item.PIECE_OF_WISTERIA_LUMBER, weight = 62 }, -- Piece of Wisteria Lumber
+        { itemId = xi.item.MAHOGANY_LOG,             weight = 62 }, -- Mahogany Log
+        { itemId = xi.item.EBONY_LOG,                weight = 62 }, -- Ebony Log
+        { itemId = xi.item.PETRIFIED_LOG,            weight = 62 }, -- Petrified Log
+        { itemId = xi.item.DARKSTEEL_INGOT,          weight = 62 }, -- Darksteel Ingot
+        { itemId = xi.item.GOLD_INGOT,               weight = 62 }, -- Gold Ingot
+        { itemId = xi.item.MYTHRIL_INGOT,            weight = 62 }, -- Mythril Ingot
+        { itemId = xi.item.HANDFUL_OF_WYVERN_SCALES, weight = 62 }, -- Handful of Wyvern Scales
+        { itemId = xi.item.RAM_HORN,                 weight = 62 }, -- Ram Horn
+        { itemId = xi.item.WYVERN_SKIN,              weight = 62 }, -- Wyvern Skin
+        { itemId = xi.item.RAM_SKIN,                 weight = 62 }, -- Ram Skin
+        { itemId = xi.item.CORAL_FRAGMENT,           weight = 62 }, -- Coral Fragment
+    }
 }
 
 return content:register()
