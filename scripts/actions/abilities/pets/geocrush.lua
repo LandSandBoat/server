@@ -25,7 +25,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
     local damage = math.floor(512 + 0.172 * tp + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
 
-    damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.summon.avatarMagicalMove(pet, target, petskill, damage, xi.element.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage, xi.element.EARTH, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
 

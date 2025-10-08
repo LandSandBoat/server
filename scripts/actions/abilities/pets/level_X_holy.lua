@@ -31,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if target:getMainLvl() % power == 0 then
         damage = math.floor(pet:getMainLvl() * power + (pet:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)) * 1.5)
 
-        damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
+        damage = xi.summon.avatarMagicalMove(pet, target, petskill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
         damage = xi.mobskills.mobAddBonuses(pet, target, damage, xi.element.LIGHT, petskill)
         damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
 

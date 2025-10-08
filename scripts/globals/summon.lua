@@ -262,6 +262,54 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     return returninfo
 end
 
+xi.summon.avatarMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
+    local finalDamage = baseDamage
+
+    -- Base damage
+    if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
+        finalDamage = math.floor(finalDamage * action:getTP() * tpMultiplier / 1000)
+    end
+
+    -- Get bonus macc.
+    local petAccBonus = 0
+    if actor:isPet() and actor:getMaster() ~= nil then
+        local master = actor:getMaster()
+        if actor:isAvatar() then
+            petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(actor:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+        end
+
+        local skillchainTier, _ = xi.magicburst.formMagicBurst(actionElement, target)
+        if
+            actor:getPetID() > 0 and
+            skillchainTier > 0
+        then
+            petAccBonus = petAccBonus + 25
+        end
+    end
+
+    -- Multipliers.
+    local sdt            = xi.spells.damage.calculateSDT(target, actionElement)
+    local resistRate     = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, 0, actionElement, xi.mod.INT, 0, petAccBonus)
+    local dayAndWeather  = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
+    local magicBonusDiff = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
+
+    -- Calculate final damage.
+    finalDamage = math.floor(finalDamage * sdt)
+    finalDamage = math.floor(finalDamage * resistRate)
+    finalDamage = math.floor(finalDamage * dayAndWeather)
+    finalDamage = math.floor(finalDamage * magicBonusDiff)
+    finalDamage = math.floor(finalDamage * damageModifier)
+
+    -- magical mob skills are single hit so provide single Melee hit TP return if primary target
+    -- TODO: This should probably be moved to AFTER all damage is calculated, since this is not the final step.
+    if finalDamage > 0 and action:getPrimaryTargetID() == target:getID() then
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(actor, target)
+        actor:addTP(tpReturn)
+    end
+
+    return finalDamage
+end
+
 local attackTypeShields =
 {
     [xi.attackType.PHYSICAL] = xi.effect.PHYSICAL_SHIELD,
