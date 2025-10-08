@@ -127,17 +127,6 @@ quest.sections =
             },
         },
     },
-
-    {
-        check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED
-        end,
-
-        [xi.zone.TAVNAZIAN_SAFEHOLD] =
-        {
-            ['Nivorajean'] = quest:event(382), -- Cycles with whatever his current default action is
-        },
-    },
 }
 
 return quest
