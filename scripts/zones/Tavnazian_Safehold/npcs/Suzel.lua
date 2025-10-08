@@ -10,9 +10,12 @@ local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- TODO: if not completed darkness named, 10921 (One thing Tav has is a lot of storage space)
-    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
-    player:openSendBox()
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DARKNESS_NAMED then
+        player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+        player:openSendBox()
+    else
+        player:showText(npc, ID.text.LOTS_OF_STORAGE)
+    end
 end
 
 return entity

@@ -1,24 +1,24 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
---  NPC: Havillione
+--  NPC: Nivorajean
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     -- Dialgoue cycles
-    if player:getLocalVar('spokenHavillione') == 0 then
-        player:startEvent(383)
+    if player:getLocalVar('spokenNivorajean') == 0 then
+        player:startEvent(382)
     else
-        player:startEvent(320)
+        player:startEvent(221)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 383 then
-        player:setLocalVar('spokenHavillione', 1)
+    if csid == 382 then
+        player:setLocalVar('spokenNivorajean', 1)
     else
-        player:setLocalVar('spokenHavillione', 0)
+        player:setLocalVar('spokenNivorajean', 0)
     end
 end
 
