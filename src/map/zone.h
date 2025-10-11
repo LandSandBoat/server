@@ -659,7 +659,8 @@ public:
     std::unique_ptr<ZoneLos>                        lineOfSight;
     std::map<uint32_t, std::unique_ptr<spawnGroup>> m_spawnGroups;
 
-    timer::time_point m_LoadedAt; // The time the zone was loaded
+    timer::time_point m_LoadedAt;  // The time the zone was loaded
+    bool              loadingMobs; // Zone is doing initial mob load
 
     void LoadNavMesh();
     void LoadZoneLos();

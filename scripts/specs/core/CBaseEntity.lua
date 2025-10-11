@@ -3758,6 +3758,11 @@ end
 function CBaseEntity:setSpawn(x, y, z, rot)
 end
 
+---@param isFixed boolean
+---return nil
+function CBaseEntity:setFixedSpawnPosition(isFixed)
+end
+
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getRespawnTime()

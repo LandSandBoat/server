@@ -662,6 +662,8 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
     // clang-format off
         ForEachZone(zoneIds, [](CZone* PZone)
         {
+            PZone->loadingMobs = true;
+
             for (auto &spawnGroup : PZone->m_spawnGroups)
             {
                 spawnGroup.second->fillSpawnPool();
@@ -714,6 +716,8 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                     }
                 }
             });
+
+            PZone->loadingMobs = false;
         });
     // clang-format on
 }

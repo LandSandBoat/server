@@ -852,6 +852,7 @@ public:
     bool   isSpawned();
     auto   getSpawnPos() -> sol::table;
     void   setSpawn(float x, float y, float z, const sol::object& rot);
+    void   setFixedSpawnPosition(bool isFixed);
     uint32 getRespawnTime();
     void   setRespawnTime(uint32 seconds);
 

@@ -17344,6 +17344,27 @@ void CLuaBaseEntity::setSpawn(float x, float y, float z, const sol::object& rot)
     PMob->m_SpawnPoint.y        = y;
     PMob->m_SpawnPoint.z        = z;
     PMob->m_SpawnPoint.rotation = (rot != sol::lua_nil) ? rot.as<uint8>() : 0;
+    PMob->fixedSpawnPoint       = true; // TODO: add more functionality around this. setSpawn is primarily used for very precise spawns.
+}
+
+/************************************************************************
+ *  Function: setFixedSpawnPosition()
+ *  Purpose : Set whether or not the mob will spawn only at their spawn points in the db
+ *  Example : mob:setFixedSpawnPosition(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setFixedSpawnPosition(bool isFixed)
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Attempting to set spawn for invalid entity type (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    PMob->fixedSpawnPoint = isFixed; // TODO: add more functionality around this.
 }
 
 /************************************************************************
@@ -20223,6 +20244,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isSpawned", CLuaBaseEntity::isSpawned);
     SOL_REGISTER("getSpawnPos", CLuaBaseEntity::getSpawnPos);
     SOL_REGISTER("setSpawn", CLuaBaseEntity::setSpawn);
+    SOL_REGISTER("setFixedSpawnPosition", CLuaBaseEntity::setFixedSpawnPosition);
     SOL_REGISTER("getRespawnTime", CLuaBaseEntity::getRespawnTime);
     SOL_REGISTER("setRespawnTime", CLuaBaseEntity::setRespawnTime);
 

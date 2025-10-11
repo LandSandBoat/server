@@ -232,6 +232,9 @@ xi.settings.map =
     -- Allow mobs to walk back home instead of despawning
     MOB_NO_DESPAWN = false,
 
+    -- Enable randomized spawn position for non-popped mobs (experimental)
+    MOB_RANDOMIZE_SPAWN_LOCATION = false,
+
     -- Adds extra time to mob despawn in seconds. Base time is 25s, so a setting of 5 here would be a total of 30 seconds.
     MOB_ADDITIONAL_TIME_TO_DEAGGRO = 0,
 

@@ -391,6 +391,8 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                     m_AdditionalEnemyList.emplace_back(mob);
                 }
 
+                mob.PMob->fixedSpawnPoint = true; // mobs spawn at fixed positions in battlefields
+
                 // todo: this can be greatly improved
                 if (mob.PMob->isAlive())
                 {

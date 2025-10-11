@@ -239,7 +239,8 @@ public:
     bool   m_giveExp;       // prevent exp gain
     bool   m_neutral;       // stop linking / aggroing
 
-    position_t m_SpawnPoint; // spawn point of mob
+    position_t m_SpawnPoint;    // spawn point of mob
+    bool       fixedSpawnPoint; // popped from QM or otherwise has a fixed position
 
     uint8  m_Element;
     uint8  m_HiPCLvl;        // Highest Level of Player Character that hit the Monster

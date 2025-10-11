@@ -43,6 +43,7 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
+#include "navmesh.h"
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
@@ -134,6 +135,8 @@ CMobEntity::CMobEntity()
 , m_bcnmID(0)
 , m_giveExp(false)
 , m_neutral(false)
+, m_SpawnPoint()
+, fixedSpawnPoint(false)
 , m_Element(0)
 , m_HiPCLvl(0)
 , m_HiPartySize(0)
@@ -661,6 +664,24 @@ void CMobEntity::Spawn()
 
     // spawn somewhere around my point
     loc.p = m_SpawnPoint;
+
+    if (loc.zone && loc.zone->m_navMesh && !loc.zone->loadingMobs && // If we have a navmesh and the zone isn't doing initialization (don't randomize spawns on map load)
+        settings::get<bool>("map.MOB_RANDOMIZE_SPAWN_LOCATION") &&   // check settings
+        !fixedSpawnPoint)                                            // Does not have a fixed spawn position
+    {
+        float spawnRadius = 10.f; // TODO: mobmods?
+
+        if ((loc.zone->GetTypeMask() & ZONE_TYPE::DUNGEON) == ZONE_TYPE::DUNGEON)
+        {
+            spawnRadius = 5.f;
+        }
+
+        auto status = loc.zone->m_navMesh->findRandomPosition(m_SpawnPoint, spawnRadius);
+        if (status.first == 0) // Only try once
+        {
+            loc.p = status.second;
+        }
+    }
 
     if (m_roamFlags & ROAMFLAG_STEALTH)
     {
