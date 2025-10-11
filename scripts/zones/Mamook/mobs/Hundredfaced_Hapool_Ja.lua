@@ -40,7 +40,7 @@ entity.onMobSpawn = function(mob)
         for i = hundredfacedHapoolJa + 1, hundredfacedHapoolJa + 4 do
             local pet = GetMobByID(i)
 
-            if pet and pet:getCurrentAction() == xi.act.ROAMING then
+            if pet and pet:getCurrentAction() == xi.action.ROAMING then
                 pet:updateEnmity(target)
             end
         end

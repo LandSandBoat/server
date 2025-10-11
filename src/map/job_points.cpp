@@ -21,7 +21,7 @@
 #include "job_points.h"
 
 #include "map_engine.h"
-#include "packets/char_spells.h"
+#include "packets/s2c/0x0aa_magic_data.h"
 #include "spell.h"
 #include "utils/charutils.h"
 
@@ -516,7 +516,7 @@ namespace jobpointutils
 
         if (sendUpdate)
         {
-            PChar->pushPacket<CCharSpellsPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
         }
     }
 } // namespace jobpointutils

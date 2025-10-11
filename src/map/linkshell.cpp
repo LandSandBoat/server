@@ -25,12 +25,12 @@
 
 #include "packets/char_status.h"
 #include "packets/chat_message.h"
-#include "packets/linkshell_equip.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0e0_group_comlink.h"
 
 #include "conquest_system.h"
 #include "ipc_client.h"
@@ -232,7 +232,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                     }
 
                     PMember->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Normal);
-                    PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsID);
+                    PMember->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PMember, lsID);
                     PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(LocationID), SlotID);
                 }
 
@@ -282,7 +282,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
                 }
 
                 PMember->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Normal);
-                PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsNum);
+                PMember->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PMember, lsNum);
             }
 
             for (uint8 LocationID = 0; LocationID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocationID)

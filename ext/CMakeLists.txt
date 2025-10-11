@@ -99,8 +99,8 @@ CPMAddPackage(
 
 CPMAddPackage(
     NAME efsw
-    GITHUB_REPOSITORY SpartanJ/efsw
-    GIT_TAG 62f785c56b7a34f035193d4cb831921347b586b8 # 1.4.1
+    GITHUB_REPOSITORY zach2good/efsw
+    GIT_TAG c37c7e0fc6bbd63659edeba458273c35a51513da # master
     OPTIONS
         "VERBOSE OFF"
         "NO_ATOMICS OFF"

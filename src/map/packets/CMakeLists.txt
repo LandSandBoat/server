@@ -13,26 +13,16 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_jobs.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_jobs.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_mounts.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_mounts.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_skills.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_skills.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_spells.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_spells.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_stats.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_stats.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
@@ -63,12 +53,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_details.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_details.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_equip.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
@@ -79,8 +63,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/merit_points_categories.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/merit_points_categories.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.cpp
@@ -119,20 +101,10 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/position.h
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_questlog.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_questlog.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/shop_items.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/shop_items.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/shop_menu.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/shop_menu.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.cpp

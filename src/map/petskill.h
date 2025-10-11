@@ -52,6 +52,7 @@ public:
     uint16          getAoEMsg() const;
     uint16          getValidTargets() const;
     int16           getTP() const;
+    auto            getHP() const -> int32;
     uint8           getHPP() const;
     uint16          getTotalTargets() const;
     uint32          getPrimaryTargetID() const;
@@ -78,6 +79,7 @@ public:
     void setSkillFinishCategory(uint8 category);
     void setValidTargets(uint16 targ);
     void setTP(int16 tp);
+    void setHP(int32 hp);
     void setHPP(uint8 hpp);
     void setTotalTargets(uint16 targets);
     void setPrimaryTargetID(uint32 targid);
@@ -111,6 +113,7 @@ private:
     uint8           m_tertiarySkillchain;
 
     int16  m_TP;  // the tp at the time of finish readying (for scripts)
+    int32  m_HP;  // HP at the time of using mob skill (for scripts)
     uint8  m_HPP; // HPP at the time of using mob skill (for scripts)
     uint16 m_TotalTargets;
     uint32 m_PrimaryTargetID; // primary target ID

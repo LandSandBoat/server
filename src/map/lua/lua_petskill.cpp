@@ -111,6 +111,11 @@ float CLuaPetSkill::getTP()
     return static_cast<float>(m_PLuaPetSkill->getTP());
 }
 
+auto CLuaPetSkill::getMobHP() const -> uint8
+{
+    return m_PLuaPetSkill->getHP();
+}
+
 // Retrieves the Monsters HP% as it was at the start of mobskill
 uint8 CLuaPetSkill::getMobHPP()
 {
@@ -134,6 +139,7 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("getPrimaryTargetID", CLuaPetSkill::getPrimaryTargetID);
     SOL_REGISTER("setFinalAnimationSub", CLuaPetSkill::setFinalAnimationSub);
     SOL_REGISTER("getTP", CLuaPetSkill::getTP);
+    SOL_REGISTER("getMobHP", CLuaPetSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaPetSkill::getMobHPP);
 }
 

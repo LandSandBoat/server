@@ -1698,6 +1698,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // get any available recast reduction
+        // TODO: this is DIFFERENT than gear reduction mod which is a static reduction for the entire ability!
         auto recastReduction = 0s;
 
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
@@ -1705,9 +1706,13 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
         }
 
-        auto* charge = ability::GetCharge(this, PAbility->getRecastId());
+        auto* charge         = ability::GetCharge(this, PAbility->getRecastId());
+        auto  baseChargeTime = 0ns; // this can be reduced with merits/job point gifts. NOT the same as Recast- gear (so far...)
+
         if (charge && PAbility->getID() != ABILITY_SIC)
         {
+            auto chargesUsed = timer::count_seconds(PAbility->getRecastTime()); // charge cost is stored in the recast...
+
             //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
             if (PAbility->getRecastId() == 102) // Sic/Ready recast ID
             {
@@ -1718,12 +1723,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 recastReduction += std::chrono::seconds(this->getMod(Mod::STRATAGEM_RECAST));
             }
 
-            // TODO: this is bad
-            // "recast" 1-4 = sic/ready
-            // "recast" 1 = quickdraw, stratagems
-            auto crypticRecastSecondsAsType = timer::count_seconds(PAbility->getRecastTime());
+            baseChargeTime = charge->chargeTime - recastReduction;
 
-            action.recast = charge->chargeTime * crypticRecastSecondsAsType - recastReduction;
+            action.recast = baseChargeTime * chargesUsed;
         }
         else
         {
@@ -1734,7 +1736,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
             {
-                action.recast = 0s;
+                action.recast  = 0s;
+                baseChargeTime = 0s;
             }
         }
         else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
@@ -1984,7 +1987,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (charge)
         {
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast, charge->chargeTime, charge->maxCharges);
+            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast, baseChargeTime, charge->maxCharges);
         }
         else
         {

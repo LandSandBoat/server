@@ -298,6 +298,7 @@ xi.piratesChart.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 60)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 100)
 end
 
 xi.piratesChart.onMobFight = function(mob, target)
@@ -307,6 +308,10 @@ xi.piratesChart.onMobFight = function(mob, target)
     then
         mob:useMobAbility(xi.mobSkill.HUNDRED_FISTS_1)
         mob:setLocalVar('usedTwoHour', 1)
+    end
+
+    if GetSystemTime() > mob:getLocalVar('snareTimeLimit') then
+        mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 100)
     end
 end
 

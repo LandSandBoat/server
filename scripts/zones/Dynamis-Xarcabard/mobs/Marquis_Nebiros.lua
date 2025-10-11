@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.MARQUIS_NEBIROS - 2] = ID.mob.MARQUIS_NEBIROS, -- Kindred_Summoner
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Nebiross_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

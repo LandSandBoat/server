@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.MAA_ZAUA_THE_WYRMKEEPER - 2] = ID.mob.MAA_ZAUA_THE_WYRMKEEPER, -- Vanguard_Partisan
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Wyvern')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

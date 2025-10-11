@@ -15,9 +15,9 @@ local entity = {}
 local function notBusy(mob)
     local action = mob:getCurrentAction()
     if
-        action == xi.act.MOBABILITY_START or
-        action == xi.act.MOBABILITY_USING or
-        action == xi.act.MOBABILITY_FINISH
+        action == xi.action.MOBABILITY_START or
+        action == xi.action.MOBABILITY_USING or
+        action == xi.action.MOBABILITY_FINISH
     then
         return false
     end

@@ -12,6 +12,10 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Kindreds_Vouivre')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

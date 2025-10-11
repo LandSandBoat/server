@@ -26,7 +26,7 @@
 #include "common/utils.h"
 
 #include "packets/char_job_extra.h"
-#include "packets/char_spells.h"
+#include "packets/s2c/0x0aa_magic_data.h"
 
 #include "packets/char_stats.h"
 #include "packets/message_basic.h"
@@ -168,7 +168,7 @@ namespace blueutils
                         {
                             PBlueMage->pushPacket<CMessageBasicPacket>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
                             charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
-                            PBlueMage->pushPacket<CCharSpellsPacket>(PBlueMage);
+                            PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
                         }
                     }
                     break; // only one attempt at learning a spell, regardless of learn or not.

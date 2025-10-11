@@ -22,8 +22,8 @@
 #include "0x0bf_job_points_spend.h"
 
 #include "entities/charentity.h"
-#include "packets/jobpoint_update.h"
 #include "packets/menu_jobpoints.h"
+#include "packets/s2c/0x08d_job_points.h"
 
 auto GP_CLI_COMMAND_JOB_POINTS_SPEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -39,6 +39,6 @@ void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(MapSession* PSession, CCharEntity*
     auto newLevel = PChar->PJobPoints->GetJobPointType(jpType)->value;
 
     PChar->pushPacket<CMenuJobPointsPacket>(PChar);
-    PChar->pushPacket<CJobPointUpdatePacket>(PChar, jpType);
+    PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar, jpType);
     PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Index, newLevel, MSGBASIC_JOB_POINTS_INCREASE);
 }

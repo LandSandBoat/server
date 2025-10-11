@@ -21,6 +21,10 @@ entity.phList =
     [ID.mob.OPHION - 2]  = ID.mob.OPHION, -- -384 -95.529 14
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Gigass_Bats')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 337)
 end

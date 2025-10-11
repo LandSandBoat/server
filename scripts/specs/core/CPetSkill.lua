@@ -11,6 +11,11 @@ end
 
 ---@nodiscard
 ---@return integer
+function CPetSkill:getMobHP()
+end
+
+---@nodiscard
+---@return integer
 function CPetSkill:getMobHPP()
 end
 

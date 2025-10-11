@@ -29,9 +29,15 @@ zones[xi.zone.ALTAIEU] =
     },
     mob =
     {
+        AERNS_ELEMENTAL    = GetTableOfIDs('Aerns_Elemental'),
+        AERNS_WYNAV        = GetTableOfIDs('Aerns_Wynav'),
+        AERNS_XZOMIT       = GetTableOfIDs('Aerns_Xzomit'),
         EUVHIS_OFFSET      = GetFirstID('Aweuvhi'),
         ULXZOMIT_OFFSET    = GetTableOfIDs('Ulxzomit'),
         OMXZOMIT_OFFSET    = GetTableOfIDs('Omxzomit'),
+        OMAERN_BST         = GetTableOfIDs('Omaern_BST'),
+        OMAERN_DRG         = GetTableOfIDs('Omaern_DRG'),
+        OMAERN_SMN         = GetTableOfIDs('Omaern_SMN'),
         RUAERN             = GetFirstID('Ruaern'),
         JAILER_OF_HOPE     = GetFirstID('Jailer_of_Hope'),
         JAILER_OF_JUSTICE  = GetFirstID('Jailer_of_Justice'),

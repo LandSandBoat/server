@@ -69,7 +69,7 @@ entity.onMobFight = function(mob, target)
     if mob:getLocalVar('final') == 1 then
         if
             now >= mob:getLocalVar('gunpodTime') and
-            mob:getCurrentAction() == xi.act.ATTACK and
+            mob:getCurrentAction() == xi.action.ATTACK and
             GetMobByID(mob:getID() + 1):getStatus() == xi.status.DISAPPEAR
         then
             mob:setLocalVar('gunpodTime', now + utils.minutes(5))
@@ -87,7 +87,7 @@ entity.onMobFight = function(mob, target)
 
     -- Swap between forms every 2 minutes
     local form = mob:getLocalVar('formTime')
-    if now >= form and mob:getCurrentAction() == xi.act.ATTACK then
+    if now >= form and mob:getCurrentAction() == xi.action.ATTACK then
         mob:setLocalVar('formTime', now + utils.minutes(2))
         if mob:getAnimationSub() == 1 then
             bipedForm(mob)

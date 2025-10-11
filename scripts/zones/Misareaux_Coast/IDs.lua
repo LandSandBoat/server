@@ -26,7 +26,6 @@ zones[xi.zone.MISAREAUX_COAST] =
         BEEP_CLICK_WHIR               = 7592, -- Beeeep. Click, whirrr...
         BUZZ_BEEP_BEEP                = 7593, -- Buzz... Beep beep!
         FOUL_STENCH_OF_DEATH          = 7594, -- You sense the foul stench of death...
-        OUT_OF_THE_ORDINARY           = 7595, -- There is nothing out of the ordinary here.
         CREATURE_HAS_APPEARED         = 7618, -- A creature has appeared out of nowhere!
         NOTHING_ELSE_OF_INTEREST      = 7619, -- There is nothing else of interest here.
         LOGGING_IS_POSSIBLE_HERE      = 7620, -- Logging is possible here if you have <item>.

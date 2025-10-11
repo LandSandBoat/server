@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     // Flag set if the client has disabled the 'New Adventurer' status. (Red question mark.)
     if (NewAdventurerOffFlg && PChar->playerConfig.NewAdventurerOffFlg != value)
     {
-        if (PChar->playerConfig.NewAdventurerOffFlg) // Can only turn it off, not on.
+        if (!PChar->playerConfig.NewAdventurerOffFlg) // Can only turn it off, not on.
         {
             updated                                 = true;
             PChar->playerConfig.NewAdventurerOffFlg = value;

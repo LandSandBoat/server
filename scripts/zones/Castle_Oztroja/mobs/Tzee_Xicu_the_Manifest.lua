@@ -64,6 +64,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 

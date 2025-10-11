@@ -61,6 +61,10 @@ local viscountSpawnPoints =
     { x = -359.439, y = -52.000, z = -129.000 },
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Demons_Elemental')
+end
+
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.VISCOUNT_MORAX, 10, 1, { spawnPoints = viscountSpawnPoints }) -- No respawn
 end

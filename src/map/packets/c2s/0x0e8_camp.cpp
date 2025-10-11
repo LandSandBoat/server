@@ -31,6 +31,7 @@ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PCha
     return PacketValidator()
         .isNormalStatus(PChar)
         .isNotPreventedAction(PChar)
+        .isNotCrafting(PChar)
         .mustNotEqual(PChar->PAI->IsEngaged(), true, "Cannot heal while engaged in combat")
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(Mode)
         .mustNotEqual(

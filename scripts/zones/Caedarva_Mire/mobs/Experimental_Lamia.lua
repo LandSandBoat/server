@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
         local minion = GetMobByID(i)
         if
             minion and
-            minion:getCurrentAction() == xi.act.ROAMING
+            minion:getCurrentAction() == xi.action.ROAMING
         then
             minion:updateEnmity(target)
         end

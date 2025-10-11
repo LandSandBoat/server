@@ -264,6 +264,8 @@ uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
 
     for (const auto& member : m_Members)
     {
+        // Issue RoE event for loot item and issue treasure pool packet
+        roeutils::event(ROE_EVENT::ROE_LOOTITEM, member, RoeDatagram("itemid", m_PoolItems[FreeSlotID].ID));
         member->pushPacket<GP_SERV_COMMAND_TROPHY_LIST>(&m_PoolItems[FreeSlotID], PEntity, false);
     }
 
@@ -577,8 +579,6 @@ void CTreasurePool::treasureWon(CCharEntity* winner, uint8 SlotID)
     }
 
     m_PoolItems[SlotID].TimeStamp = timer::start_time;
-
-    roeutils::event(ROE_EVENT::ROE_LOOTITEM, winner, RoeDatagram("itemid", m_PoolItems[SlotID].ID));
 
     for (const auto& member : m_Members)
     {

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.RUTRIX_HAMGAMS - 2] = ID.mob.RUTRIX_HAMGAMS, -- Vanguard_Dragontamer  0.144    1.756   43.922
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Slime')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

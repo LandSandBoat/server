@@ -29,12 +29,12 @@
 
 #include "entities/battleentity.h"
 
-#include "packets/char_skills.h"
 #include "packets/char_status.h"
 #include "packets/message_basic.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x062_clistatus2.h"
 
 #include "item_container.h"
 #include "items.h"
@@ -864,7 +864,7 @@ namespace synthutils
                     PChar->WorkingSkills.skill[skillID] |= 0x8000; // blue capped text
                 }
 
-                PChar->pushPacket<CCharSkillsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53);
             }
 
@@ -879,7 +879,7 @@ namespace synthutils
                 if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
                 {
                     PChar->WorkingSkills.skill[skillHighest] -= 0x20;
-                    PChar->pushPacket<CCharSkillsPacket>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                     PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53);
                 }
 

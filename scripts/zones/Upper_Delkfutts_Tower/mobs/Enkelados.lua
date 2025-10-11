@@ -20,6 +20,10 @@ entity.phList =
     [ID.mob.ENKELADOS[2] + 3] = ID.mob.ENKELADOS[2], -- -215.194 -144.099 19.528
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Gigass_Bats')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 331)
 end

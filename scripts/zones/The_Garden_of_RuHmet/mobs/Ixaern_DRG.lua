@@ -71,7 +71,7 @@ entity.onMobEngage = function(mob, target)
         if wynav then
             if not wynav:isSpawned() then
                 wynav:setLocalVar('repop', GetSystemTime() + 20)
-            elseif wynav:getCurrentAction() == xi.act.ROAMING then
+            elseif wynav:getCurrentAction() == xi.action.ROAMING then
                 wynav:updateEnmity(target)
             end
         end

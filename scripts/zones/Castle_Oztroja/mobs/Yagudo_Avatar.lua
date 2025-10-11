@@ -65,6 +65,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
 end

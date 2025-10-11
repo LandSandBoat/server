@@ -52,7 +52,7 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Don't process if the mob is busy
-    if mob:getCurrentAction() ~= xi.act.ATTACK then
+    if mob:getCurrentAction() ~= xi.action.ATTACK then
         return
     end
 

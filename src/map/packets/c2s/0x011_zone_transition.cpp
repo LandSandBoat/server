@@ -24,7 +24,7 @@
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "map_session.h"
-#include "packets/char_equip.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "utils/zoneutils.h"
 
 auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -44,7 +44,7 @@ void GP_CLI_COMMAND_ZONE_TRANSITION::process(MapSession* PSession, CCharEntity* 
     {
         if (PChar->equip[i] != 0)
         {
-            PChar->pushPacket<CEquipPacket>(PChar->equip[i], i, PChar->equipLoc[i]);
+            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(PChar->equip[i], static_cast<SLOTTYPE>(i), static_cast<CONTAINER_ID>(PChar->equipLoc[i]));
         }
     }
 

@@ -8,6 +8,10 @@ local ID = zones[xi.zone.TEMENOS]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
+end
+
 entity.onMobEngage = function(mob, target)
     if
         GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 18):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 19):isDead() and

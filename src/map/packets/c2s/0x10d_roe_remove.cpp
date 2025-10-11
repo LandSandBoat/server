@@ -22,7 +22,7 @@
 #include "0x10d_roe_remove.h"
 
 #include "entities/charentity.h"
-#include "packets/roe_sparkupdate.h"
+#include "packets/s2c/0x110_unity.h"
 #include "roe.h"
 
 auto GP_CLI_COMMAND_ROE_REMOVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -35,5 +35,5 @@ auto GP_CLI_COMMAND_ROE_REMOVE::validate(MapSession* PSession, const CCharEntity
 void GP_CLI_COMMAND_ROE_REMOVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
     roeutils::DelEminenceRecord(PChar, ObjectiveId);
-    PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
 }

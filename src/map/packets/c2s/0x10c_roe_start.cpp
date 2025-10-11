@@ -22,7 +22,7 @@
 #include "0x10c_roe_start.h"
 
 #include "entities/charentity.h"
-#include "packets/roe_sparkupdate.h"
+#include "packets/s2c/0x110_unity.h"
 #include "roe.h"
 
 auto GP_CLI_COMMAND_ROE_START::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -38,6 +38,6 @@ auto GP_CLI_COMMAND_ROE_START::validate(MapSession* PSession, const CCharEntity*
 void GP_CLI_COMMAND_ROE_START::process(MapSession* PSession, CCharEntity* PChar) const
 {
     roeutils::AddEminenceRecord(PChar, ObjectiveId);
-    PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
     roeutils::onRecordTake(PChar, ObjectiveId);
 }

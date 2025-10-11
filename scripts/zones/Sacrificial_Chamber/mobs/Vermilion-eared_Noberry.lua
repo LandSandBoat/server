@@ -13,6 +13,7 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 2, 'Tonberrys_Elemental')
     mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 3)
 end
 

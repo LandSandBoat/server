@@ -28,10 +28,10 @@
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 #include "packets/char_status.h"
-#include "packets/linkshell_equip.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0e0_group_comlink.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -144,7 +144,7 @@ namespace
         charutils::SaveCharStats(PChar);
         charutils::SaveCharEquip(PChar);
 
-        PChar->pushPacket<CLinkshellEquipPacket>(PChar, data.LinkshellId);
+        PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
     };
 
@@ -163,7 +163,7 @@ namespace
         charutils::SaveCharStats(PChar);
         charutils::SaveCharEquip(PChar);
 
-        PChar->pushPacket<CLinkshellEquipPacket>(PChar, data.LinkshellId);
+        PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
     };
 } // namespace

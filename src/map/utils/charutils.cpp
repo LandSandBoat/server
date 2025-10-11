@@ -36,17 +36,13 @@
 #include "ai/states/item_state.h"
 #include "ai/states/range_state.h"
 
-#include "packets/char_abilities.h"
-#include "packets/char_equip.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
 #include "packets/char_recast.h"
-#include "packets/char_skills.h"
 #include "packets/char_stats.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
-#include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
@@ -56,16 +52,17 @@
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
-#include "packets/roe_questlog.h"
-#include "packets/roe_sparkupdate.h"
-#include "packets/roe_update.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x026_item_subcontainer.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x055_scenarioitem.h"
+#include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x0ac_command_data.h"
+#include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/server_ip.h"
 
 #include "ability.h"
@@ -109,6 +106,9 @@
 #include "enums/key_items.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
+#include "packets/s2c/0x110_unity.h"
+#include "packets/s2c/0x111_roe_activelog.h"
+#include "packets/s2c/0x112_roe_log.h"
 
 /************************************************************************
  *                                                                       *
@@ -1225,12 +1225,12 @@ namespace charutils
     void SendRecordsOfEminenceLog(CCharEntity* PChar)
     {
         // Send spark updates
-        PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
 
         if (settings::get<bool>("main.ENABLE_ROE"))
         {
             // Current RoE quests
-            PChar->pushPacket<CRoeUpdatePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
 
             // Players logging in to a new timed record get one-time message
             if (PChar->m_eminenceCache.notifyTimedRecord)
@@ -1242,7 +1242,7 @@ namespace charutils
             // 4-part Eminence Completion bitmap
             for (int i = 0; i < 4; i++)
             {
-                PChar->pushPacket<CRoeQuestLogPacket>(PChar, i);
+                PChar->pushPacket<GP_SERV_COMMAND_ROE_LOG>(PChar, i);
             }
         }
     }
@@ -1317,7 +1317,7 @@ namespace charutils
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK1]), PChar->equip[SLOT_LINK1]);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
-            PChar->pushPacket<CLinkshellEquipPacket>(PChar, 1);
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 1);
         }
 
         PItem = PChar->getEquip(SLOT_LINK2);
@@ -1327,7 +1327,7 @@ namespace charutils
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK2]), PChar->equip[SLOT_LINK2]);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
-            PChar->pushPacket<CLinkshellEquipPacket>(PChar, 2);
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 2);
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(); // "Finish" type
@@ -1497,9 +1497,9 @@ namespace charutils
 
         PChar->pushPacket<CCharJobsPacket>(PChar);
         PChar->pushPacket<CCharStatsPacket>(PChar);
-        PChar->pushPacket<CCharSkillsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -1843,7 +1843,7 @@ namespace charutils
             PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal); // ???
-            PChar->pushPacket<CEquipPacket>(0, equipSlotID, LOC_INVENTORY);
+            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, static_cast<SLOTTYPE>(equipSlotID), LOC_INVENTORY);
 
             switch (equipSlotID)
             {
@@ -2817,7 +2817,7 @@ namespace charutils
                 RemoveSub(PChar);
             }
 
-            PChar->pushPacket<CEquipPacket>(slotID, equipSlotID, containerID);
+            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
         }
         else
         {
@@ -2859,7 +2859,7 @@ namespace charutils
                     // Only call the lua onEquip if its a valid equip - e.g. has passed EquipArmor and other checks above
                     luautils::OnItemEquip(PChar, PItem);
 
-                    PChar->pushPacket<CEquipPacket>(slotID, equipSlotID, containerID);
+                    PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
                 }
             }
@@ -2881,7 +2881,7 @@ namespace charutils
             }
 
             BuildingCharWeaponSkills(PChar);
-            PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
@@ -3081,7 +3081,7 @@ namespace charutils
 
         if (PetID == 0)
         { // technically Fire Spirit but we're using this to null the abilities shown
-            PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             return;
         }
 
@@ -3145,7 +3145,7 @@ namespace charutils
                 addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
             }
         }
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     }
 
     /************************************************************************
@@ -3727,7 +3727,7 @@ namespace charutils
                     {
                         PChar->WorkingSkills.skill[SkillID] += 1;
                     }
-                    PChar->pushPacket<CCharSkillsPacket>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                     PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, SkillID, (CurSkill + SkillAmount) / 10, 53);
 
                     CheckWeaponSkill(PChar, SkillID);
@@ -3772,7 +3772,7 @@ namespace charutils
             {
                 addWeaponSkill(PChar, PSkill->getID());
                 PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, PSkill->getID(), PSkill->getID(), 45);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
         }
     }
@@ -5080,9 +5080,9 @@ namespace charutils
 
                 PChar->pushPacket<CCharJobsPacket>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
-                PChar->pushPacket<CCharSkillsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
@@ -5323,9 +5323,9 @@ namespace charutils
 
                 PChar->pushPacket<CCharJobsPacket>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
-                PChar->pushPacket<CCharSkillsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
@@ -6683,7 +6683,7 @@ namespace charutils
 
         if (strcmp(type, "spark_of_eminence") == 0)
         {
-            PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
         }
     }
 
@@ -6866,7 +6866,7 @@ namespace charutils
                 charutils::BuildingCharWeaponSkills(PChar);
                 PChar->PLatentEffectContainer->CheckLatentsWeaponBreak(slotid);
                 PChar->pushPacket<CCharStatsPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
 
             db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",

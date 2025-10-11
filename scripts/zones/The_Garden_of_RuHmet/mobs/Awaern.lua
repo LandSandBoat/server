@@ -9,6 +9,12 @@ local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Aerns_Euvhi')
+    xi.pet.setMobPet(mob, 1, 'Aerns_Wynav')
+    xi.pet.setMobPet(mob, 1, 'Aerns_Elemental')
+end
+
 entity.onMobSpawn = function(mob)
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
     if

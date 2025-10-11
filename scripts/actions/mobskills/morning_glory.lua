@@ -4,12 +4,15 @@
 --  Description: Hits nearby targets with a petal bloom.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
+--
+--  Only used in "closed" flower state
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() ~= 1 then
+    -- animation sub 0b010 = open
+    if bit.band(mob:getAnimationSub(), 0x02) == 0x02 then
         return 1
     end
 

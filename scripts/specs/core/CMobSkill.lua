@@ -11,6 +11,11 @@ end
 
 ---@nodiscard
 ---@return integer
+function CMobSkill:getMobHP()
+end
+
+---@nodiscard
+---@return integer
 function CMobSkill:getMobHPP()
 end
 

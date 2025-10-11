@@ -405,6 +405,19 @@ namespace zoneutils
 
                 auto* PZone = g_PZoneList[zoneId];
 
+                // Load spawnsets
+                const auto spawnSetQuery = "SELECT spawnsetid, maxspawns FROM mob_spawn_sets WHERE zoneid = ?";
+                const auto spawnSetResult = db::preparedStmt(spawnSetQuery, zoneId);
+                if (spawnSetResult && spawnSetResult->rowsCount())
+                {
+                    while (spawnSetResult->next())
+                    {
+                        auto maxSpawns    = spawnSetResult->get<uint32>("maxspawns");
+                        auto spawnGroupID = spawnSetResult->get<uint32>("spawnsetid");
+                        GetZone(zoneId)->m_spawnGroups.insert(std::make_pair(spawnGroupID, new spawnGroup(maxSpawns, zoneId, spawnGroupID)));
+                    }
+                }
+
                 const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
                     "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
                     "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
@@ -588,6 +601,7 @@ namespace zoneutils
                             {
                                 if (!GetZone(zoneId)->m_spawnGroups.contains(spawnGroupID))
                                 {
+                                    ShowErrorFmt("Error: Spawn group {} doesn't exist in zone ID {}", spawnGroupID, zoneId);
                                     GetZone(zoneId)->m_spawnGroups.insert(std::make_pair(spawnGroupID, new spawnGroup(rset->get<uint32>("maxspawns"), zoneId, spawnGroupID)));
                                 }
                                 auto* spawnGroup = GetZone(zoneId)->m_spawnGroups.at(spawnGroupID).get();

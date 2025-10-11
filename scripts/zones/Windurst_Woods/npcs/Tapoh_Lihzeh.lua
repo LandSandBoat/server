@@ -68,10 +68,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.fameArea.WINDURST, 8)
         end
 
-        if option == 1 then
-            npcUtil.giveCurrency(player, 'gil', 150)
-        else
+        if option == 1 then -- remi_shell
             npcUtil.giveCurrency(player, 'gil', 200)
+        else -- beehive_chip
+            npcUtil.giveCurrency(player, 'gil', 150)
         end
 
         player:confirmTrade()

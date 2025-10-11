@@ -9,6 +9,10 @@ mixins = { require('scripts/mixins/families/tonberry') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Tonberrys_Elemental')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 790, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 791, 1, xi.regime.type.GROUNDS)

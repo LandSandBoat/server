@@ -206,7 +206,7 @@ namespace mobutils
         return static_cast<uint16>(damage);
     }
 
-    // Gest base skill rankings for ACC/ATT/EVA/MEVA
+    // Get base skill rankings for ACC/ATT/EVA/MEVA
     uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
     {
         int8 mlvl = PMob->GetMLevel();
@@ -1039,9 +1039,9 @@ namespace mobutils
                 }
                 break;
             case JOB_RNG:
-                if ((PMob->m_Family >= 126 && PMob->m_Family <= 130) || PMob->m_Family == 328) // Gigas
+                if (PMob->m_Family == 126) // Gigas
                 {
-                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 658); // catapult only used while at range
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 658); // Catapult only used while at range
                 }
                 else if (PMob->m_Family == 246) // Trolls
                 {

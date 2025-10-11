@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.DRAKLIX_SCALECRUST - 2] = ID.mob.DRAKLIX_SCALECRUST, -- Vanguard_Dragontamer
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Wyvern')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

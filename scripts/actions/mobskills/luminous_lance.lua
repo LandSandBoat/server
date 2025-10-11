@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         not (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) and
         lanceTime + 60 < mob:getBattleTime() and
-        target:getCurrentAction() ~= xi.act.MOBABILITY_USING and
+        target:getCurrentAction() ~= xi.action.MOBABILITY_USING and
         lanceOut == 1
     then
         return 0

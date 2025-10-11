@@ -45,6 +45,7 @@
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
+#include "trustentity.h"
 #include "utils/battleutils.h"
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
@@ -2012,23 +2013,34 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             luautils::OnMagicHit(this, PTarget, PSpell);
         }
 
-        if (this == PTarget || // Casting on self or ally
-            (this->PParty && PTarget->PParty &&
-             ((this->PParty == PTarget->PParty) || (this->PParty->m_PAlliance && this->PParty->m_PAlliance == PTarget->PParty->m_PAlliance))))
+        // The entity under consideration for RoE objective credit
+        // Trusts credit their master
+        auto* PEminenceTarget = this;
+        if (const auto* PTrust = dynamic_cast<CTrustEntity*>(this))
+        {
+            if (PTrust->PMaster)
+            {
+                PEminenceTarget = static_cast<CBattleEntity*>(PTrust->PMaster);
+            }
+        }
+
+        if (PEminenceTarget == PTarget || // Casting on self or ally
+            (PEminenceTarget->PParty && PTarget->PParty &&
+             ((PEminenceTarget->PParty == PTarget->PParty) || (PEminenceTarget->PParty->m_PAlliance && PEminenceTarget->PParty->m_PAlliance == PTarget->PParty->m_PAlliance))))
         {
             if (PSpell->isHeal())
             {
-                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
+                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionTarget.param));
 
                 // We know its an ally or self, if not self and leader matches, credit the RoE Objective
-                if (this != PTarget && this->objtype == TYPE_PC && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(this)->profile.unity_leader == static_cast<CCharEntity*>(PTarget)->profile.unity_leader)
+                if (PEminenceTarget != PTarget && PEminenceTarget->objtype == TYPE_PC && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(PEminenceTarget)->profile.unity_leader == static_cast<CCharEntity*>(PTarget)->profile.unity_leader)
                 {
-                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
+                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionTarget.param));
                 }
             }
-            else if (this != PTarget && PSpell->isBuff() && actionTarget.param)
+            else if (PEminenceTarget != PTarget && PSpell->isBuff() && actionTarget.param)
             {
-                roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(this), RoeDatagramList{});
+                roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagramList{});
             }
         }
     }

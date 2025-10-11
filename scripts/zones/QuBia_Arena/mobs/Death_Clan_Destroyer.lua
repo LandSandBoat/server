@@ -18,7 +18,7 @@ entity.onMobFight = function(mob, target)
 
     -- queue curaga II on any sleeping ally
     for i = instOffset + 3, instOffset + 12 do
-        if GetMobByID(i):getCurrentAction() == xi.act.SLEEP then
+        if GetMobByID(i):getCurrentAction() == xi.action.SLEEP then
             if not xi.combat.behavior.isEntityBusy(mob) then
                 if mob:getLocalVar('cooldown') == 0 then
                     mob:castSpell(8, GetMobByID(i))

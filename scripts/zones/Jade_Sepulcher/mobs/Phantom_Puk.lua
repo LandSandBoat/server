@@ -37,7 +37,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local clone = GetMobByID(cloneID)
         if clone then
             local action = clone:getCurrentAction()
-            if action ~= xi.act.NONE and action ~= xi.act.DEATH then
+            if action ~= xi.action.NONE and action ~= xi.action.DEATH then
                 DespawnMob(cloneID)
             end
         end

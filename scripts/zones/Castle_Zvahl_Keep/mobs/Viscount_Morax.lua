@@ -14,6 +14,10 @@ entity.phList =
     [ID.mob.VISCOUNT_MORAX - 2] = ID.mob.VISCOUNT_MORAX, -- -365.684 -52.125 -136.540
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Demons_Elemental')
+end
+
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

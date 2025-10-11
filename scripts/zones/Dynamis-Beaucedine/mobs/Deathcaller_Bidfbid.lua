@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.DEATHCALLER_BIDFBID - 2] = ID.mob.DEATHCALLER_BIDFBID, -- Vanguard_Dollmaster
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

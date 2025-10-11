@@ -9,6 +9,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 2, 'Demons_Elemental')
     mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 3)
 end
 

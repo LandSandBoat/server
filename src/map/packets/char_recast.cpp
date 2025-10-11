@@ -25,15 +25,37 @@
 
 #include "entities/charentity.h"
 
+#include "ability.h"
 #include "char_recast.h"
 #include "recast_container.h"
 
+// https://github.com/atom0s/XiPackets/blob/main/world/server/0x0119/README.md
+struct recasttimer_t
+{
+    uint16_t Timer;
+    uint8_t  Calc1;
+    uint8_t  TimerId;
+    uint16_t Calc2;
+    uint16_t padding00;
+};
+
+struct packet_t
+{
+    uint16_t      id : 9;
+    uint16_t      size : 7;
+    uint16_t      sync;
+    recasttimer_t Timers[31];
+    uint32_t      MountRecast;
+    uint32_t      MountRecastId;
+};
+
 CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 {
-    this->setType(0x119);
-    this->setSize(0x104);
+    auto packet = this->as<packet_t>();
 
-    uint8 count = 0;
+    packet->id   = 0x119;
+    packet->size = roundUpToNearestFour(sizeof(packet_t)) / 4;
+    uint8 count  = 0;
 
     RecastList_t* RecastList = PChar->PRecastContainer->GetRecastList(RECAST_ABILITY);
 
@@ -44,18 +66,33 @@ CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 
         if (recast.ID == 256) // borrowing this id for mount recast
         {
-            ref<uint32>(0xFC) = recastSeconds;
-            ref<uint16>(0xFE) = recast.ID;
+            packet->MountRecast   = recastSeconds;
+            packet->MountRecastId = recast.ID;
         }
         else if (recast.ID != 0)
         {
-            ref<uint32>(0x0C + count * 8) = recastSeconds;
-            ref<uint8>(0x0F + count * 8)  = (uint8)recast.ID;
+            packet->Timers[count].Timer   = recastSeconds;
+            packet->Timers[count].TimerId = static_cast<uint8_t>(recast.ID);
+
+            if (recast.maxCharges != 0)
+            {
+                auto* charge = ability::GetCharge(PChar, recast.ID);
+
+                uint16_t actualChargeTime = timer::count_seconds(recast.chargeTime);
+                uint16_t baseChargeTime   = timer::count_seconds(charge->chargeTime);
+
+                if (baseChargeTime > actualChargeTime)
+                {
+                    packet->Timers[count].Calc1 = 0; // Not used in Ready, QD, Stratagems... Is this never used?
+                    packet->Timers[count].Calc2 = 65536 - (baseChargeTime - actualChargeTime) * recast.maxCharges;
+                }
+            }
             count++;
         }
-        else
+        else // 2hr edge case // TODO: retail uses Calc2 on 2hr for some reason...
         {
-            ref<uint32>(0x04) = recastSeconds; // 2h ability (recast id is 0)
+            packet->Timers[count].Timer   = recastSeconds;
+            packet->Timers[count].TimerId = 0;
         }
 
         // Retail currently only allows 31 distinct recasts to be sent in the packet

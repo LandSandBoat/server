@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.KING_ZAGAN - 12] = ID.mob.KING_ZAGAN, -- Kindred_Dragoon
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Zagans_Wyvern')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

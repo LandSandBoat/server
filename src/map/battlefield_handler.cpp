@@ -36,8 +36,8 @@
 #include "lua/luautils.h"
 
 #include "packets/char_recast.h"
-#include "packets/char_skills.h"
 #include "packets/message_basic.h"
+#include "packets/s2c/0x062_clistatus2.h"
 
 #include "recast_container.h"
 #include "status_effect.h"

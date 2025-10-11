@@ -1960,7 +1960,9 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
         auto ipp = zoneutils::GetZoneIPP(PChar->loc.destination);
 
         // This is already checked in CLueBaseEntity::setPos, but better to have a check...
-        if (ipp == 0)
+        // Don't care about IPP if player is logging out
+        // TODO: loc.destination should be optional since 0 is a legitimate zone.
+        if (ipp == 0 && PChar->status != STATUS_TYPE::SHUTDOWN)
         {
             ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, PChar->loc.destination));
             continue;

@@ -63,11 +63,11 @@
 #include "modifier.h"
 #include "navmesh.h"
 #include "notoriety_container.h"
-#include "packets/char_abilities.h"
 #include "packets/char_recast.h"
 #include "packets/pet_sync.h"
 #include "packets/position.h"
 #include "packets/s2c/0x058_assist.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "party.h"
 #include "petskill.h"
 #include "recast_container.h"
@@ -4694,7 +4694,7 @@ namespace battleutils
             {
                 charutils::BuildingCharAbilityTable(PChar);
                 std::memset(&PChar->m_PetCommands, 0, sizeof(PChar->m_PetCommands));
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<CPetSyncPacket>(PChar);
             }
@@ -5327,13 +5327,14 @@ namespace battleutils
         if (effectScarDel && effectScarDel->GetPower() == 0)
         {
             // Damage to Max HP Ratio
-            int8 bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
-            int8 jpValue  = effectScarDel->GetSubPower();
-            auto duration = 90s + std::chrono::seconds(jpValue);
+            float  hppRatio = std::clamp<float>(static_cast<float>(damage) / static_cast<float>(PDefender->GetMaxHP()) / 2.0f, 0.0f, 0.5f);
+            uint16 power    = std::floor(hppRatio * 1000);
+            uint16 jpValue  = effectScarDel->GetSubPower();
+            auto   duration = 90s + std::chrono::seconds(jpValue);
 
             // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
             PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
-            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0s, duration), EffectNotice::Silent);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, power, 0s, duration), EffectNotice::Silent);
         }
     }
 

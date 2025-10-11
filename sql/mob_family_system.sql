@@ -57,7 +57,7 @@ INSERT INTO `mob_family_system` VALUES (1,'Acrolith',1,'Acrolith',3,'Arcana',1.0
 INSERT INTO `mob_family_system` VALUES (2,'Adamantoise',2,'Adamantoise',14,'Lizard',3.00,30,120,90,2,4,1,4,1,1,1,1,2,1,3,4.0,2,0);
 INSERT INTO `mob_family_system` VALUES (3,'Aern',3,'Aern',15,'Luminian',0.00,40,120,140,2,2,3,3,1,1,1,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (4,'Ahriman',4,'Ahriman',9,'Demon',0.00,40,87,140,2,3,4,4,1,2,2,1,3,1,3,8.0,3,0);
-INSERT INTO `mob_family_system` VALUES (5,'Amoeban',5,'Amoeban',21,'Voragean',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,32,0);
+INSERT INTO `mob_family_system` VALUES (5,'Amoeban',192,'Amoeban',21,'Voragean',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,32,0);
 INSERT INTO `mob_family_system` VALUES (6,'Amphiptere',5,'Amphiptere',8,'Bird',4.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (7,'Animated_Weapon',6,'Evil_Weapon',0,'Unclassified',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,2,0);
 -- 8 Free
@@ -103,7 +103,7 @@ INSERT INTO `mob_family_system` VALUES (47,'Bat_Trio',24,'Bat_Trio',8,'Bird',0.0
 INSERT INTO `mob_family_system` VALUES (48,'Bee',25,'Bee',20,'Vermin',0.00,40,87,120,5,4,4,3,4,4,4,1,3,1,3,3.0,257,1);
 INSERT INTO `mob_family_system` VALUES (49,'Beetle',26,'Beetle',20,'Vermin',1.00,40,117,110,3,3,2,5,5,5,5,1,2,1,3,4.0,257,1);
 INSERT INTO `mob_family_system` VALUES (51,'Behemoth',27,'Behemoth',6,'Beast',4.00,40,110,90,3,3,3,3,3,3,3,1,3,1,3,6.0,1,0);
-INSERT INTO `mob_family_system` VALUES (52,'Bhoot',28,'Ghost',19,'Undead',1.00,40,70,140,6,3,6,3,1,5,4,1,3,1,3,2.0,6,0);
+INSERT INTO `mob_family_system` VALUES (52,'Ghost-Bhoot',28,'Ghost',19,'Undead',1.00,40,70,140,6,3,6,3,1,5,4,1,3,1,3,2.0,6,0);
 INSERT INTO `mob_family_system` VALUES (53,'Grimoire',29,'Grimoire',3,'Arcana',1.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0.0,2,0);
 INSERT INTO `mob_family_system` VALUES (54,'Biotechnological',30,'Biotech',0,'Unclassified',2.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (55,'Bird',31,'Bird',8,'Bird',0.00,40,106,120,4,4,5,3,4,4,4,1,4,1,3,1.0,2,1);
@@ -178,14 +178,14 @@ INSERT INTO `mob_family_system` VALUES (122,'Ghrah',72,'Ghrah',16,'Luminion',0.0
 -- 124 Free
 INSERT INTO `mob_family_system` VALUES (125,'Greater_Bird',73,'Greater_Bird',8,'Bird',1.00,40,130,120,3,3,3,3,3,3,3,1,2,1,3,7.0,1,0);
 INSERT INTO `mob_family_system` VALUES (126,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
-INSERT INTO `mob_family_system` VALUES (127,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
-INSERT INTO `mob_family_system` VALUES (128,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
-INSERT INTO `mob_family_system` VALUES (129,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
-INSERT INTO `mob_family_system` VALUES (130,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
+-- 127 Free
+-- 128 Free
+-- 129 Free
+-- 130 Free
 INSERT INTO `mob_family_system` VALUES (131,'Gnat',75,'Gnat',20,'Vermin',0.00,40,90,120,4,1,4,2,3,6,6,1,3,1,3,8.0,1,0);
 INSERT INTO `mob_family_system` VALUES (132,'Gnole',76,'Gnole',6,'Beast',1.00,40,120,90,3,2,1,6,6,4,5,1,3,1,3,8.0,257,0);
 INSERT INTO `mob_family_system` VALUES (133,'Goblin',77,'Goblin',7,'Beastmen',0.00,40,91,120,1,3,5,3,4,4,4,1,3,1,3,1.0,1,0);
-INSERT INTO `mob_family_system` VALUES (134,'God',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0.0,3,0);
+INSERT INTO `mob_family_system` VALUES (134,'Promathia',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (135,'Golem',79,'Golem',3,'Arcana',1.00,40,130,130,2,3,3,5,3,6,5,1,2,1,3,7.0,33,0);
 INSERT INTO `mob_family_system` VALUES (136,'Goobbue',80,'Goobbue',17,'Plantoid',1.00,40,112,90,3,4,2,4,4,4,4,1,3,1,3,6.0,2,0);
 INSERT INTO `mob_family_system` VALUES (137,'Gorger',81,'Gorger',12,'Empty',0.00,40,112,90,1,3,2,3,6,6,5,1,3,1,3,0.0,280,0);
@@ -257,9 +257,9 @@ INSERT INTO `mob_family_system` VALUES (199,'Qiqirn',115,'Qiqirn',7,'Beastmen',0
 -- 200 Free
 -- 201 Free
 INSERT INTO `mob_family_system` VALUES (202,'Quadav',116,'Quadav',7,'Beastmen',1.00,40,112,110,2,3,4,4,4,5,3,1,3,1,3,6.0,258,0);
-INSERT INTO `mob_family_system` VALUES (203,'Qutrub',117,'Qutrub',19,'Undead',0.00,40,100,140,1,3,3,5,1,5,4,1,3,1,3,8.0,6,0);
-INSERT INTO `mob_family_system` VALUES (204,'Qutrub',117,'Qutrub',19,'Undead',0.00,40,100,140,1,3,3,5,1,5,4,1,3,1,3,8.0,6,0);
-INSERT INTO `mob_family_system` VALUES (205,'Qutrub',117,'Qutrub',19,'Undead',0.00,40,100,140,1,3,3,5,1,5,4,1,3,1,3,8.0,6,0);
+INSERT INTO `mob_family_system` VALUES (203,'Qutrub',117,'Qutrub',19,'Undead',1.00,40,100,140,1,3,3,5,1,5,4,1,3,1,3,8.0,7,0);
+-- 204 Free
+-- 205 Free
 INSERT INTO `mob_family_system` VALUES (206,'Rabbit',118,'Rabbit',6,'Beast',0.00,40,96,120,4,3,4,4,4,4,4,1,3,1,3,4.0,257,1);
 INSERT INTO `mob_family_system` VALUES (207,'Rafflesia',119,'Rafflesia',17,'Plantoid',0.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,4.0,2,0);
 INSERT INTO `mob_family_system` VALUES (208,'Ram',120,'Ram',6,'Beast',3.00,40,120,100,3,4,3,4,4,4,4,1,3,1,3,4.0,257,0);
@@ -306,7 +306,7 @@ INSERT INTO `mob_family_system` VALUES (248,'Turret-Orc',141,'Siege_Engine',0,'U
 INSERT INTO `mob_family_system` VALUES (249,'Turret-Quadav',141,'Siege_Engine',0,'Unclassified',4.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (250,'Turret-Yagudo',141,'Siege_Engine',0,'Unclassified',4.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (251,'Uragnite',142,'Uragnite',2,'Aquan',1.00,40,120,90,4,4,4,4,4,4,4,1,3,1,3,6.0,2,1);
-INSERT INTO `mob_family_system` VALUES (252,'Vampyr',143,'Vampyr',19,'Undead',1.00,40,100,120,1,3,2,4,3,6,6,1,1,1,3,8.0,6,0);
+-- 252 Free
 INSERT INTO `mob_family_system` VALUES (253,'Wamoura',144,'Wamoura',20,'Vermin',1.00,40,90,90,5,5,1,5,5,5,5,1,3,1,3,1.0,34,0);
 INSERT INTO `mob_family_system` VALUES (254,'Wamouracampa',144,'Wamoura',20,'Vermin',1.00,45,90,90,5,5,1,5,5,5,5,1,3,1,3,1.0,2,0);
 INSERT INTO `mob_family_system` VALUES (255,'Wanderer',145,'Wanderer',12,'Empty',0.00,40,110,90,1,3,5,5,6,6,5,1,3,1,3,0.0,2,0);
@@ -337,7 +337,7 @@ INSERT INTO `mob_family_system` VALUES (279,'Tiger-Byakko',137,'Tiger',6,'Beast'
 INSERT INTO `mob_family_system` VALUES (280,'Greater_Bird-Suzaku',73,'Greater_Bird',8,'Bird',3.00,60,130,120,3,3,3,3,3,3,3,1,2,1,3,7.0,1,0);
 INSERT INTO `mob_family_system` VALUES (281,'Manticore-Kirin',100,'Manticore',6,'Beast',3.00,60,140,130,2,5,2,5,4,4,5,1,3,1,3,3.0,272,0);
 INSERT INTO `mob_family_system` VALUES (282,'Kuluu-Grav_iton',138,'Tonberry',7,'Beastmen',1.00,40,91,140,3,1,3,2,1,5,4,1,3,1,2,7.0,1,0);
-INSERT INTO `mob_family_system` VALUES (284,'Vampyr',143,'Vampyr',19,'Undead',3.00,40,100,120,1,3,2,4,3,6,6,1,3,1,3,8.0,6,0);
+-- 284 Free
 INSERT INTO `mob_family_system` VALUES (285,'Mamool_Ja',98,'Mamool_Ja',7,'Beastmen',4.00,40,112,120,2,4,3,3,4,4,3,1,3,1,3,3.0,1,0);
 INSERT INTO `mob_family_system` VALUES (286,'Puk-Vulpangue',114,'Puk',10,'Dragon',1.00,40,100,90,6,4,5,3,6,6,5,1,2,1,4,3.0,3,0);
 INSERT INTO `mob_family_system` VALUES (287,'Colibri-Chamrosh',45,'Colibri',8,'Bird',3.00,60,80,140,5,5,5,5,1,1,1,1,3,1,4,3.0,2,0);
@@ -356,13 +356,13 @@ INSERT INTO `mob_family_system` VALUES (299,'Botuli',153,'Botuli',1,'Amorph',1.0
 INSERT INTO `mob_family_system` VALUES (300,'Bomb-Reacton',32,'Bomb',3,'Arcana',2.00,40,70,140,6,3,4,3,1,5,4,1,3,1,3,1.0,33,0);
 INSERT INTO `mob_family_system` VALUES (301,'Imp-Verdelet',89,'Imp',9,'Demon',1.00,70,65,140,6,3,3,3,1,5,4,1,3,1,3,8.0,1,0);
 INSERT INTO `mob_family_system` VALUES (302,'Acrolith-Wulgaru',1,'Acrolith',3,'Arcana',2.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0.0,2,0);
-INSERT INTO `mob_family_system` VALUES (303,'ZareehklTheJu',117,'Qutrub',19,'Undead',1.00,40,100,140,1,3,3,3,1,5,4,1,3,1,3,8.0,7,0);
+-- 303 Free
 -- 304 Free
 INSERT INTO `mob_family_system` VALUES (305,'Mamool_Ja-GotohZhaTheRe',98,'Mamool_Ja',7,'Beastmen',2.00,40,100,120,2,4,3,3,3,3,3,1,3,1,3,3.0,272,0);
 INSERT INTO `mob_family_system` VALUES (306,'Wivre-Dea',147,'Wivre',14,'Lizard',4.00,43,120,90,2,5,1,6,6,3,3,1,3,1,3,4.0,4,0);
 INSERT INTO `mob_family_system` VALUES (307,'Wamoura-Achamoth',144,'Wamoura',20,'Vermin',2.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,1.0,34,0);
 INSERT INTO `mob_family_system` VALUES (308,'Troll-Khromasoul',140,'Troll',7,'Beastmen',2.00,40,120,120,1,2,2,5,3,3,3,1,3,1,3,1.0,48,0);
-INSERT INTO `mob_family_system` VALUES (309,'Nosferatu',143,'Vampyr',19,'Undead',2.00,40,100,120,1,3,3,4,3,6,6,1,3,1,3,8.0,2,0);
+INSERT INTO `mob_family_system` VALUES (309,'Vampyr',143,'Vampyr',19,'Undead',2.00,40,100,120,1,3,3,4,3,6,6,1,3,1,3,8.0,7,0);
 INSERT INTO `mob_family_system` VALUES (310,'ExperimentalLa',94,'Lamiae',7,'Beastmen',1.00,40,100,140,3,3,3,1,1,2,2,1,3,1,3,8.0,1,0);
 INSERT INTO `mob_family_system` VALUES (311,'Soulflayer-MahjlaefThePai',132,'Psychodemon',9,'Demon',1.00,40,100,140,6,3,5,6,1,5,4,1,3,1,3,6.0,168,0);
 INSERT INTO `mob_family_system` VALUES (312,'Orobon-Nuhn',107,'Orobon',2,'Aquan',4.00,40,90,90,1,4,2,4,4,4,4,1,3,1,3,6.0,2,0);
@@ -379,7 +379,7 @@ INSERT INTO `mob_family_system` VALUES (324,'Avatar-Garuda',16,'Garuda',5,'Avata
 INSERT INTO `mob_family_system` VALUES (325,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',1.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (326,'Troll-Gurfurlur',140,'Troll',7,'Beastmen',2.00,40,120,120,1,2,2,5,3,3,3,1,2,1,3,1.0,272,0);
 INSERT INTO `mob_family_system` VALUES (327,'Goblin',77,'Goblin',7,'Beastmen',0.00,40,91,120,2,3,5,3,3,3,1,1,3,1,3,1.0,1,0);
-INSERT INTO `mob_family_system` VALUES (328,'Gigas',74,'Gigas',7,'Beastmen',1.00,40,125,100,1,2,1,5,6,4,3,1,3,1,3,2.0,1,0);
+-- 328 Free
 INSERT INTO `mob_family_system` VALUES (329,'AbsoluteVirtue',3,'Aern',15,'Luminian',0.00,40,120,140,4,2,3,2,4,1,1,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (330,'Adamantoise-PetGenbu',2,'Adamantoise',14,'Lizard',5.00,30,120,90,2,4,1,4,1,1,1,1,2,1,3,6.0,2,0);
 INSERT INTO `mob_family_system` VALUES (331,'Wyvern-PetSeiryu',109,'Wyvern',10,'Dragon',3.00,60,109,90,1,2,1,3,6,3,3,1,3,1,3,7.0,1,0);
@@ -455,7 +455,7 @@ INSERT INTO `mob_family_system` VALUES (398,'Sheep-Slumbering_Samwell',90,'Sheep
 INSERT INTO `mob_family_system` VALUES (402,'Scorpion-Aqrabuamelu',128,'Scorpion',20,'Vermin',3.00,40,90,120,3,5,4,4,4,4,4,1,3,1,3,4.0,258,0);
 -- 403 Free
 INSERT INTO `mob_family_system` VALUES (404,'Rabbit-Cure',118,'Rabbit',6,'Beast',0.00,40,96,120,4,3,4,4,4,4,4,1,3,1,3,4.0,257,1);
-INSERT INTO `mob_family_system` VALUES (406,'Mandragora-Seed_Mandra',99,'Mandragora',17,'Plantoid',0.00,40,107,120,5,3,4,4,4,4,4,1,3,1,2,4.0,257,0);
+-- 406 Free
 -- 407 Free
 -- 408 Free
 -- 409 Free
@@ -476,23 +476,23 @@ INSERT INTO `mob_family_system` VALUES (449,'Bahamut',149,'Wyrm',5,'Avatar',4.00
 INSERT INTO `mob_family_system` VALUES (450,'Caturae',167,'Caturae',3,'Arcana',1.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (451,'Pteraketos',168,'Pteraketos',2,'Aquan',4.00,40,120,140,6,5,4,5,3,3,4,1,4,1,2,6.0,2,0);
 INSERT INTO `mob_family_system` VALUES (452,'Rockfin',169,'Rockfin',2,'Aquan',2.00,40,120,140,6,5,4,5,3,3,4,1,4,1,2,6.0,2,0);
-INSERT INTO `mob_family_system` VALUES (453,'Rafflesia-Belladona',119,'Rafflesia',17,'Plantoid',1.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,4.0,2,0);
+INSERT INTO `mob_family_system` VALUES (453,'Belladonna',193,'Belladonna',17,'Plantoid',1.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,4.0,2,0);
 INSERT INTO `mob_family_system` VALUES (454,'Tulfaire',170,'Tulfaire',8,'Bird',1.00,40,106,120,1,3,5,3,3,3,5,1,3,1,3,1.0,3,0);
 INSERT INTO `mob_family_system` VALUES (455,'Leafkin',171,'Leafkin',17,'Plantoid',0.00,40,90,90,1,3,4,3,6,6,2,1,3,1,3,3.0,1,0);
-INSERT INTO `mob_family_system` VALUES (456,'Bztavian-Colkhab',172,'Bztavian',20,'Vermin',2.00,40,87,120,1,3,3,2,3,3,5,1,3,1,3,3.0,2,0);
-INSERT INTO `mob_family_system` VALUES (457,'Cehuetzi-Kumhau',173,'Cehuetzi',6,'Beast',3.00,60,111,120,1,1,4,2,3,6,5,1,3,1,3,5.0,2,0);
+INSERT INTO `mob_family_system` VALUES (456,'Bztavian',172,'Bztavian',20,'Vermin',2.00,40,87,120,1,3,3,2,3,3,5,1,3,1,3,3.0,2,0);
+INSERT INTO `mob_family_system` VALUES (457,'Cehuetzi',173,'Cehuetzi',6,'Beast',3.00,60,111,120,1,1,4,2,3,6,5,1,3,1,3,5.0,2,0);
 INSERT INTO `mob_family_system` VALUES (458,'Raaz',174,'Raaz',6,'Beast',1.00,60,111,120,1,1,4,2,3,6,5,1,3,1,3,5.0,2,0);
 INSERT INTO `mob_family_system` VALUES (459,'Yztarg',175,'Yztarg',6,'Beast',2.00,40,110,90,1,3,4,3,6,6,1,1,3,1,3,5.0,269,0);
 INSERT INTO `mob_family_system` VALUES (460,'Waktza',176,'Waktza',8,'Bird',2.00,40,106,120,1,3,5,3,3,3,5,1,3,1,3,1.0,256,0);
 INSERT INTO `mob_family_system` VALUES (461,'Gabbrath',177,'Gabbrath',14,'Lizard',2.00,30,120,90,2,5,1,6,6,4,3,1,3,1,4,4.0,256,0);
-INSERT INTO `mob_family_system` VALUES (462,'Wrong-Provenance_watcher',78,'Supreme_Being',10,'Dragon',6.00,40,120,90,1,3,1,3,6,3,1,1,3,1,3,1.0,2,0);
+INSERT INTO `mob_family_system` VALUES (462,'Provenance_Watcher',78,'Supreme_Being',10,'Dragon',6.00,40,120,90,1,3,1,3,6,3,1,1,3,1,3,1.0,2,0);
 INSERT INTO `mob_family_system` VALUES (463,'Panopt',178,'Panopt',17,'Plantoid',0.00,40,90,90,1,3,4,3,6,6,2,1,3,1,3,3.0,3,0);
 INSERT INTO `mob_family_system` VALUES (464,'Snapweed',179,'Snapweed',17,'Plantoid',0.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,4.0,258,0);
-INSERT INTO `mob_family_system` VALUES (465,'Yumcax',180,'Yggdreant',17,'Plantoid',3.00,40,120,120,1,2,1,2,3,1,3,1,3,1,3,4.0,2,0);
+INSERT INTO `mob_family_system` VALUES (465,'Yggdreant',180,'Yggdreant',17,'Plantoid',3.00,40,120,120,1,2,1,2,3,1,3,1,3,1,3,4.0,2,0);
 INSERT INTO `mob_family_system` VALUES (467,'Gallu',181,'Gallu',9,'Demon',2.00,70,110,140,1,2,4,4,1,2,4,1,3,1,3,8.0,2,0);
 INSERT INTO `mob_family_system` VALUES (468,'Umbril',182,'Umbril',11,'Elemental',1.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0.0,33,0);
 INSERT INTO `mob_family_system` VALUES (469,'Lamiae-Medusa',94,'Lamiae',7,'Beastmen',1.00,40,100,140,3,3,2,4,1,2,2,1,3,1,3,8.0,1,0);
-INSERT INTO `mob_family_system` VALUES (470,'Zilant-Yilbegan',183,'Zilant',10,'Dragon',4.00,40,120,90,1,3,1,3,6,3,1,1,3,1,3,3.0,2,0);
+INSERT INTO `mob_family_system` VALUES (470,'Zilant',183,'Zilant',10,'Dragon',4.00,40,120,90,1,3,1,3,6,3,1,1,3,1,3,3.0,2,0);
 INSERT INTO `mob_family_system` VALUES (471,'Harpeia',184,'Harpeia',8,'Bird',3.00,60,130,120,1,3,4,3,4,4,5,1,3,1,2,7.0,2,0);
 INSERT INTO `mob_family_system` VALUES (472,'Naraka',185,'Naraka',19,'Undead',2.00,40,70,140,6,3,6,3,1,5,4,1,3,1,3,2.0,6,0);
 INSERT INTO `mob_family_system` VALUES (473,'Lady_Lilith',86,'Humanoid',13,'Humanoid',0.00,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0.0,1,0);
@@ -502,7 +502,7 @@ INSERT INTO `mob_family_system` VALUES (474,'Lilith_Ascendant',78,'Supreme_Being
 INSERT INTO `mob_family_system` VALUES (475,'Shinryu',78,'Supreme_Being',10,'Demon',4.00,50,115,90,1,2,1,3,6,3,3,1,3,1,3,7.0,1,0);
 INSERT INTO `mob_family_system` VALUES (476,'Prishe',86,'Humanoid',13,'Humanoid',0.00,40,100,90,2,5,3,6,6,2,4,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (477,'Selh\'teus',186,'Kuluu',13,'Humanoid',0.00,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0.0,1,0);
-INSERT INTO `mob_family_system` VALUES (478,'God',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0.0,3,0);
+INSERT INTO `mob_family_system` VALUES (478,'Promathia-Metus',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0.0,3,0);
 -- 479 Free
 INSERT INTO `mob_family_system` VALUES (480,'Zeid',86,'Humanoid',13,'Humanoid',0.00,40,120,100,3,4,1,5,5,4,6,1,3,1,3,0.0,6,0);
 INSERT INTO `mob_family_system` VALUES (481,'Ajido-Marujido',86,'Humanoid',13,'Humanoid',0.00,40,70,140,6,4,5,3,1,5,4,1,3,1,3,0.0,3,0);
@@ -517,10 +517,10 @@ INSERT INTO `mob_family_system` VALUES (489,'Darrcuiln',0,'undefined',6,'Beast',
 INSERT INTO `mob_family_system` VALUES (490,'Plovid',187,'Plovid',1,'Amorph',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (491,'Morimar',86,'Humanoid',13,'Humanoid',0.00,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (492,'Defiant-Balamor',188,'Defiant',9,'Demon',1.00,40,90,140,6,3,3,3,1,5,4,1,3,1,3,0.0,6,0);
-INSERT INTO `mob_family_system` VALUES (493,'Macuil-Ashrakk',189,'Macuil',9,'Demon',1.00,40,90,140,6,3,3,3,1,5,4,1,3,1,3,0.0,3,0);
+INSERT INTO `mob_family_system` VALUES (493,'Macuil',189,'Macuil',11,'Elemental',1.00,40,90,140,6,3,3,3,1,5,4,1,3,1,3,0.0,3,0);
 -- 494 Free
 INSERT INTO `mob_family_system` VALUES (495,'Astral_Flow_Pet',0,'Astral_Flow_Pet',5,'Avatar',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,2,0);
-INSERT INTO `mob_family_system` VALUES (496,'Mandragora-Chaneque',99,'Mandragora',17,'Plantoid',0.00,40,107,120,5,3,4,4,4,4,4,1,3,1,2,4.0,6,0);
+-- 496 Free
 INSERT INTO `mob_family_system` VALUES (497,'Cloud_of_Darkness',78,'Supreme_Being',0,'Unclassified',3.00,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0.0,3,0);
 -- 498 Free
 INSERT INTO `mob_family_system` VALUES (499,'Wanderer-Stray',145,'Wanderer',12,'Empty',0.00,40,20,90,1,3,5,5,6,6,5,1,3,1,3,0.0,2,0);

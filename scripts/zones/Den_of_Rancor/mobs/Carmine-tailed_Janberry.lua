@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.CARMINE_TAILED_JANBERRY + 3] = ID.mob.CARMINE_TAILED_JANBERRY,
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Tonberrys_Elemental')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

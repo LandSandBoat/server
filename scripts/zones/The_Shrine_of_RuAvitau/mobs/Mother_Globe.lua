@@ -154,7 +154,7 @@ local setupTrainFollowing = function(mob)
         local currentSlave = GetMobByID(slaveGlobeID)
         if currentSlave and currentSlave:isAlive() then
             local action = currentSlave:getCurrentAction()
-            if action ~= xi.act.NONE and action ~= xi.act.DEATH then
+            if action ~= xi.action.NONE and action ~= xi.action.DEATH then
                 currentSlave:follow(followTarget, xi.followType.ROAM)
                 followTarget = currentSlave
             end
@@ -243,7 +243,7 @@ entity.onMobFight = function(mob, target)
     -- Keep pets linked
     for _, slaveGlobeID in ipairs(slaveGlobes) do
         local pet = GetMobByID(slaveGlobeID)
-        if pet and pet:getCurrentAction() == xi.act.ROAMING then
+        if pet and pet:getCurrentAction() == xi.action.ROAMING then
             pet:updateEnmity(target)
         end
     end

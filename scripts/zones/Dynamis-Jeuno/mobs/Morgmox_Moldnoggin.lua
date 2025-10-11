@@ -16,6 +16,10 @@ entity.spawnPoints =
     { x = -19.515, y =  2.988, z = -6.545 }
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -46,5 +46,3 @@ xi.action =
     RAISE_MENU_SELECTION  = 37,
     JOBABILITY_INTERRUPT  = 38,
 }
-
-xi.act = xi.action

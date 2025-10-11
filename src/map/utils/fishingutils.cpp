@@ -27,7 +27,6 @@
 #include "common/vana_time.h"
 
 #include "packets/caught_fish.h"
-#include "packets/char_skills.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
@@ -40,6 +39,7 @@
 #include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x043_talknumname.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x062_clistatus2.h"
 
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -1891,7 +1891,7 @@ namespace fishingutils
                         PChar->WorkingSkills.skill[SKILL_FISHING] |= 0x8000; // blue capped text
                     }
 
-                    PChar->pushPacket<CCharSkillsPacket>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                     PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, 53);
                 }
 

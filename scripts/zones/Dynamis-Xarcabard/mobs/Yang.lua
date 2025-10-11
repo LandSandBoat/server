@@ -34,7 +34,7 @@ entity.onMobFight = function(mob, target)
 
     if
         ying and
-        ying:getCurrentAction() == xi.act.NONE and
+        ying:getCurrentAction() == xi.action.NONE and
         GetSystemTime() > yingToD + 30
     then
         ying:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())

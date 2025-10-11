@@ -40,6 +40,7 @@ CPetSkill::CPetSkill(uint16 id)
 , m_secondarySkillchain(0)
 , m_tertiarySkillchain(0)
 , m_TP(0)
+, m_HP(0)
 , m_HPP(0)
 , m_TotalTargets(1)
 , m_PrimaryTargetID(0)
@@ -154,6 +155,11 @@ void CPetSkill::setTP(int16 tp)
     m_TP = tp;
 }
 
+void CPetSkill::setHP(const int32 hp)
+{
+    m_HP = hp;
+}
+
 // Stores the Monsters HP% as it was at the start of mobskill
 void CPetSkill::setHPP(uint8 hpp)
 {
@@ -193,6 +199,11 @@ uint16 CPetSkill::getMobSkillID() const
 int16 CPetSkill::getTP() const
 {
     return m_TP;
+}
+
+auto CPetSkill::getHP() const -> int32
+{
+    return m_HP;
 }
 
 // Retrieves the Pet's HP% as it was at the start of mobskill

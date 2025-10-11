@@ -5,7 +5,7 @@ return {
     ['_0p2']             = { messageSpecial = ID.text.DOOR_CLOSED },
     ['_0p3']             = { event = 553 },
     ['_0p4']             = { messageSpecial = ID.text.NOTHING_ELSE_OF_INTEREST },
-    ['qm_bloody_coffin'] = { messageSpecial = ID.text.OUT_OF_THE_ORDINARY },
+    ['qm_bloody_coffin'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm_gration']       = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm_rov2_20']       = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
 }

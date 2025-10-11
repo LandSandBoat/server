@@ -34,20 +34,21 @@ zones[xi.zone.LUFAISE_MEADOWS] =
     },
     mob =
     {
-        PADFOOT               = GetTableOfIDs('Padfoot'),
-        FLOCKBOCK             = GetFirstID('Flockbock'),
-        MEGALOBUGARD          = GetFirstID('Megalobugard'),
-        LESHY_OFFSET          = GetFirstID('Leshy'),
-        COLORFUL_LESHY        = GetFirstID('Colorful_Leshy'),
-        SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
-        KURREA                = GetFirstID('Kurrea'),
         AMALTHEIA             = GetFirstID('Amaltheia'),
+        BAUMESEL              = GetFirstID('Baumesel'),
         BLACKBONE_FRAZDIZ     = GetFirstID('Blackbone_Frazdiz'),
+        COLORFUL_LESHY        = GetFirstID('Colorful_Leshy'),
+        FLOCKBOCK             = GetFirstID('Flockbock'),
+        KURREA                = GetFirstID('Kurrea'),
+        LESHY_OFFSET          = GetFirstID('Leshy'),
+        MEGALOBUGARD          = GetFirstID('Megalobugard'),
+        PADFOOT               = GetTableOfIDs('Padfoot'),
+        SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
     },
     npc =
     {
-        OVERSEER_BASE = GetFirstID('Jemmoquel_RK'),
         LOGGING       = GetTableOfIDs('Logging_Point'),
+        OVERSEER_BASE = GetFirstID('Jemmoquel_RK'),
     },
 }
 

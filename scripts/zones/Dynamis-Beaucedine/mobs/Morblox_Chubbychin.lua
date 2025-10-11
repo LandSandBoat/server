@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.MORBLOX_CHUBBYCHIN - 2] = ID.mob.MORBLOX_CHUBBYCHIN, -- Vanguard_Necromancer
 }
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

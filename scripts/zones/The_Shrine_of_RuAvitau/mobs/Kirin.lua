@@ -9,6 +9,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 5, 'Kirins_Avatar')
     mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 5)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -51,7 +52,7 @@ entity.onMobFight = function(mob, target)
     -- ensure all spawned pets are doing stuff
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         local god = GetMobByID(i)
-        if god and god:getCurrentAction() == xi.act.ROAMING then
+        if god and god:getCurrentAction() == xi.action.ROAMING then
             god:updateEnmity(target)
         end
     end

@@ -23,8 +23,8 @@
 
 #include "entities/charentity.h"
 #include "packets/char_jobs.h"
-#include "packets/jobpoint_details.h"
 #include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x08d_job_points.h"
 #include "packets/s2c/0x0b4_config.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
@@ -46,7 +46,7 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
     {
         // Only send Job Points Packet if the player has unlocked them
-        PChar->pushPacket<CJobPointDetailsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar);
     }
 
     // TODO: While in mog house; treasure pool is not created.

@@ -26,6 +26,7 @@ local callPetParams =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Qnxzomit')
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.BLIND)
