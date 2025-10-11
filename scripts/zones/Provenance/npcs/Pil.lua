@@ -143,17 +143,17 @@ local augments = {
     [xi.item.BRUTAL_EARRING] =
     {
         egg = xi.item.V_EGG,
-        slot =
+        slots =
         {
             {
                 { weight = 1, id = xi.augment.DOUBLE_ATTACK_P1, minValue = 0, maxValue = 2, desc = 'Double Attack+%d%%' },
                 { weight = 2, id = xi.augment.DUAL_WIELD_P1, minValue = 0, maxValue = 2, desc = 'Dual Wield+%d' },
-                { weight = 1, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%%' },
+                { weight = 1, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%' },
             },
             {
                 { weight = 1, id = xi.augment.DOUBLE_ATTACK_P1, minValue = 0, maxValue = 2, desc = 'Double Attack+%d%%' },
                 { weight = 1, id = xi.augment.DUAL_WIELD_P1, minValue = 0, maxValue = 2, desc = 'Dual Wield+%d' },
-                { weight = 2, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%%' },
+                { weight = 2, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%' },
             },
         }
     },
@@ -177,7 +177,7 @@ local augments = {
         {
             {
                 { weight = 1, id = xi.augment.STORE_TP_P1, minValue = 2, maxValue = 9, desc = 'Store TP+%d' },
-                { weight = 1, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%%' },
+                { weight = 1, id = xi.augment.HASTE_P1, minValue = 0, maxValue = 0, desc = 'Haste+1%' },
                 { weight = 1, id = xi.augment.EVASION_P1, minValue = 7, maxValue = 9, desc = 'Evasion+%d' },
                 { weight = 1, id = xi.augment.ENHANCING_MAGIC_SKILL_P1, minValue = 2, maxValue = 9, desc = 'Enhancing Magic+%d' },
             },
@@ -229,7 +229,7 @@ local augments = {
 local function rollAugments(itemID)
     local entry = augments[itemID]
     if not entry then
-        return nil
+        return nil, nil
     end
 
     local slots = {}
@@ -308,7 +308,7 @@ entity.onTrade = function(player, npc, trade)
         -- Check if trade matches egg requirements
         if type(egg) == 'table' then
             -- Check for quantity requirement (e.g., {xi.item.G_EGG, 3})
-            if type(egg[1]) == 'number' and type(egg[2]) == 'number' then
+            if type(egg[1]) == 'number' and type(egg[2]) == 'number' and egg[2] < 10 then
                 if npcUtil.tradeHasExactly(trade, { itemID, { egg[1], egg[2] } }) then
                     tradeMatches = true
                 end
@@ -331,7 +331,7 @@ entity.onTrade = function(player, npc, trade)
         if tradeMatches then
             local slots, descriptions = rollAugments(itemID)
 
-            if slots then
+            if slots and descriptions then
                 player:tradeComplete()
 
                 -- Add item with augments based on number of slots
@@ -366,7 +366,11 @@ entity.onTrade = function(player, npc, trade)
                     itemName = 'your Bibiki Seashell'
                 end
 
-                local descMessage = table.concat(descriptions, ' and ')
+                local descMessage = 'an augment'
+                if #descriptions > 0 then
+                    descMessage = table.concat(descriptions, ' and ')
+                end
+
                 player:printToPlayer(string.format('You have successfully augmented %s with %s', itemName, descMessage), xi.msg.channel.SYSTEM_3)
                 player:printToPlayer('To examine the augment, highlight item and press minus key on numpad', xi.msg.channel.SYSTEM_3)
             end

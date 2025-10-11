@@ -2,15 +2,14 @@
 -- Area: Lower Jeuno
 -- NPC: Rakuru-Rakoru
 -----------------------------------
-require('scripts/globals/conquest')
 require('modules/custom/lua/era_npc')
 -----------------------------------
 ---@type TNpcEntity
+local entity = {}
+
 local guardNation = xi.nation.OTHER
 local guardType   = xi.conquest.guard.CITY
 local guardEvent  = 32763
-
-local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     xi.conquest.overseerOnTrade(player, npc, trade, guardNation, guardType)

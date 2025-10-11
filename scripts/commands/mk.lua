@@ -97,7 +97,7 @@ local npcToDoorMap = {
     [zones[xi.zone.DAVOI].npc.WALL_OF_DARK_ARTS] = {
         zones[xi.zone.DAVOI].npc.WALL_OF_DARK_ARTS,
         closeSeconds = 1,
-        check = hasKeyItemsOrIsGM(xi.ki.CREST_OF_DAVOI_KI),
+        check = hasKeyItemsOrIsGM(xi.ki.CREST_OF_DAVOI),
         failureMessage = 'You must have the Crest of Davoi to use this command here.',
     },
     -- Requiring Crimson Orb for the Wall of Banishing in Davoi

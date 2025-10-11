@@ -195,7 +195,7 @@ local augments = {
 local function rollAugments(itemID, eggID)
     local itemEntry = augments[itemID]
     if not itemEntry then
-        return nil
+        return nil, nil
     end
 
     -- Find the right egg
@@ -208,7 +208,7 @@ local function rollAugments(itemID, eggID)
     end
 
     if not eggConfig then
-        return nil
+        return nil, nil
     end
 
     local slots = {}
@@ -339,7 +339,7 @@ entity.onTrade = function(player, npc, trade)
             if npcUtil.tradeHasExactly(trade, { itemID, eggID }) then
                 local slots, descriptions = rollAugments(itemID, eggID)
 
-                if slots then
+                if slots and descriptions then
                     player:confirmTrade()
 
                     -- Add item with augments
@@ -364,7 +364,11 @@ entity.onTrade = function(player, npc, trade)
                         itemName = 'your Scorpion Harness'
                     end
 
-                    local descMessage = table.concat(descriptions, ' and ')
+                    local descMessage = 'an augment'
+                    if #descriptions > 0 then
+                        descMessage = table.concat(descriptions, ' and ')
+                    end
+
                     player:printToPlayer(string.format('You have successfully augmented %s with %s', itemName, descMessage), xi.msg.channel.SYSTEM_3)
                     player:printToPlayer('To examine the augment, highlight item and press minus key on numpad', xi.msg.channel.SYSTEM_3)
                 end
