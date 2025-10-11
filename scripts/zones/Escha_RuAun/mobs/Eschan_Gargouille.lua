@@ -5,6 +5,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setFixedSpawnPosition(true)
+end
+
 entity.onMobSpawn = function(mob)
     mob:hideName(true)
     mob:setUntargetable(true)

@@ -8,6 +8,10 @@ local ID = zones[xi.zone.RUAUN_GARDENS]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setFixedSpawnPosition(true) -- TODO: change this to only apply to "wall" groundskeepers
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 143, 2, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 144, 1, xi.regime.type.FIELDS)
