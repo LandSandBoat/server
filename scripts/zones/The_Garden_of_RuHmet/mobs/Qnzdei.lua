@@ -34,6 +34,8 @@ entity.onMobInitialize = function(mob)
     if subLinkValue then
         mob:setMobMod(xi.mobMod.SUBLINK, subLinkValue)
     end
+
+    mob:setFixedSpawnPosition(true)
 end
 
 local changeState = function(mob, idle)

@@ -7,6 +7,10 @@ mixins = { require('scripts/mixins/families/zdei') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setFixedSpawnPosition(true)
+end
+
 entity.onPath = function(mob)
     local spawnPos = mob:getSpawnPos()
     mob:pathThrough({ spawnPos.x, spawnPos.y, spawnPos.z })

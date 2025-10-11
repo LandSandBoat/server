@@ -25,6 +25,10 @@ local chargeOptic = function(mob)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setFixedSpawnPosition(true)
+end
+
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =

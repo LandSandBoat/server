@@ -9,6 +9,10 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setFixedSpawnPosition(true)
+end
+
 local chargeOptic = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setMobAbilityEnabled(false)
