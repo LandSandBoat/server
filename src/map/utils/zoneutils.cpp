@@ -646,54 +646,6 @@ namespace zoneutils
                         }
                     }
                 }
-
-                // attach pets to mobs
-                const auto petQuery = "SELECT mob_groups.zoneid, mob_mobid, pet_offset "
-                    "FROM mob_pets "
-                    "LEFT JOIN mob_spawn_points ON mob_pets.mob_mobid = mob_spawn_points.mobid "
-                    "LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid "
-                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
-                    "WHERE mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
-                    "AND mob_groups.zoneid = ?";
-
-                const auto rset2 = db::preparedStmt(petQuery, zoneId);
-                if (rset2 && rset2->rowsCount())
-                {
-                    while (rset2->next())
-                    {
-                        const uint16 ZoneID  = rset2->get<uint16>("zoneid");
-                        uint32 masterid      = rset2->get<uint32>("mob_mobid");
-                        uint32 petid         = masterid + rset2->get<uint32>("pet_offset");
-
-                        auto*  PMaster = static_cast<CMobEntity*>(GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB));
-                        auto*  PPet    = static_cast<CMobEntity*>(GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB));
-
-                        if (PMaster == nullptr)
-                        {
-                            ShowError("zoneutils::loadMOBList PMaster is nullptr. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
-                                    "database!",
-                                    masterid);
-                        }
-                        else if (PPet == nullptr)
-                        {
-                            ShowError("zoneutils::loadMOBList PPet is nullptr. petid: %d. Make sure x,y,z are not zeros!", petid);
-                        }
-                        else if (masterid == petid)
-                        {
-                            ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d", masterid);
-                        }
-                        else
-                        {
-                            // pet is always spawned by master
-                            PPet->m_AllowRespawn = false;
-                            PPet->m_SpawnType    = SPAWNTYPE_SCRIPTED;
-                            PPet->SetDespawnTime(0s);
-
-                            PMaster->PPet = PPet;
-                            PPet->PMaster = PMaster;
-                        }
-                    }
-                }
             });
         }
         // clang-format on

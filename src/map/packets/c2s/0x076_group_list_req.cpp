@@ -22,7 +22,7 @@
 #include "0x076_group_list_req.h"
 
 #include "entities/charentity.h"
-#include "packets/party_define.h"
+#include "packets/s2c/0x0c8_group_tbl.h"
 
 auto GP_CLI_COMMAND_GROUP_LIST_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -39,6 +39,6 @@ void GP_CLI_COMMAND_GROUP_LIST_REQ::process(MapSession* PSession, CCharEntity* P
     else
     {
         // previous CPartyDefine was dropped or otherwise didn't work?
-        PChar->pushPacket<CPartyDefinePacket>(nullptr, false);
+        PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(nullptr, false);
     }
 }

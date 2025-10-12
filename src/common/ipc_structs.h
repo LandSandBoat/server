@@ -25,9 +25,9 @@
 
 #include "common/regional_event.h"
 
+#include "map/enums/party_kind.h"
 #include "map/packets/chat_message.h"
 #include "map/packets/message_standard.h"
-#include "map/packets/party_invite.h"
 
 #include <string>
 #include <vector>
@@ -157,7 +157,7 @@ namespace ipc
         uint32      inviterId{};
         uint16      inviterTargId{};
         std::string inviterName{};
-        INVITETYPE  inviteType{};
+        PartyKind   inviteType{};
     };
 
     struct PartyInviteResponse

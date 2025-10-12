@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,36 +19,28 @@
 ===========================================================================
 */
 
-#include "party_effects.h"
+#include "0x076_group_effects.h"
+
 #include "entities/battleentity.h"
-#include "party.h"
+#include "entities/charentity.h"
 #include "status_effect_container.h"
 
-void CPartyEffectsPacket::AddMemberEffects(std::size_t partyIndex, CCharEntity* PMember)
+GP_SERV_COMMAND_GROUP_EFFECTS::GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CCharEntity*>& membersList)
 {
+    auto& packet = this->data();
+
     // Check for valid party size to prevent buffer being overrun (244 bytes).
-    // When using multiple map processess across different IPs, the latency
+    // When using multiple map processes across different IPs, the latency
     // in communication combined with players joining/leaving at the same time
     // can cause the party size to be larger than the packet size.
-    if (partyIndex >= 5)
+    for (std::size_t idx = 0; idx < membersList.size() && idx < 5; ++idx)
     {
-        ShowWarning("Member count exceeds packet maximum.");
-        return;
-    }
+        const CCharEntity* PMember = membersList[idx];
 
-    ref<uint32>(partyIndex * 0x30 + 0x04) = PMember->id;
-    ref<uint16>(partyIndex * 0x30 + 0x08) = PMember->targid;
-    ref<uint64>(partyIndex * 0x30 + 0x0C) = PMember->StatusEffectContainer->m_Flags;
-    std::memcpy(buffer_.data() + (partyIndex * 0x30 + 0x14), PMember->StatusEffectContainer->m_StatusIcons, 32);
-}
+        packet.Members[idx].UniqueNo = PMember->id;
+        packet.Members[idx].ActIndex = PMember->targid;
+        packet.Members[idx].Bits     = PMember->StatusEffectContainer->m_Flags;
 
-CPartyEffectsPacket::CPartyEffectsPacket(const std::vector<CCharEntity*>& membersList)
-{
-    this->setType(0x76);
-    this->setSize(0xF4);
-
-    for (std::size_t idx = 0; idx < membersList.size(); ++idx)
-    {
-        AddMemberEffects(idx, membersList[idx]);
+        std::memcpy(packet.Members[idx].Buffs, PMember->StatusEffectContainer->m_StatusIcons, sizeof(packet.Members[idx].Buffs));
     }
 }

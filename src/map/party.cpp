@@ -42,11 +42,11 @@
 #include "packets/char_sync.h"
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
-#include "packets/party_define.h"
-#include "packets/party_effects.h"
-#include "packets/party_member_update.h"
+#include "packets/s2c/0x076_group_effects.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0b4_config.h"
+#include "packets/s2c/0x0c8_group_tbl.h"
+#include "packets/s2c/0x0dd_group_list.h"
 
 // should have brace-or-equal initializers when MSVC supports it
 struct CParty::partyInfo_t
@@ -125,7 +125,7 @@ void CParty::DisbandParty(bool playerInitiated)
     {
         SetQuarterMaster("");
 
-        this->PushPacket(0, 0, std::make_unique<CPartyDefinePacket>(nullptr));
+        this->PushPacket(0, 0, std::make_unique<GP_SERV_COMMAND_GROUP_TBL>(nullptr));
 
         for (auto& member : members)
         {
@@ -136,7 +136,7 @@ void CParty::DisbandParty(bool playerInitiated)
             PChar->PLatentEffectContainer->CheckLatentsPartyJobs();
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), 0);
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
-            PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PChar, 0, 0, PChar->getZone());
 
             // TODO: TreasurePool should stay with the last character, but now it is not critical
 
@@ -348,8 +348,8 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
                 PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), trustCount);
 
-                PChar->pushPacket<CPartyDefinePacket>(nullptr);
-                PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
+                PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(nullptr);
+                PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PChar, 0, 0, PChar->getZone());
                 PChar->pushPacket<CCharStatusPacket>(PChar);
 
                 db::preparedStmt("DELETE FROM accounts_parties WHERE charid = ?", PChar->id);
@@ -438,8 +438,8 @@ void CParty::DelMember(CBattleEntity* PEntity)
                 }
                 PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), 0);
 
-                PChar->pushPacket<CPartyDefinePacket>(nullptr);
-                PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
+                PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(nullptr);
+                PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PChar, 0, 0, PChar->getZone());
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->PParty = nullptr;
 
@@ -877,8 +877,8 @@ void CParty::ReloadParty()
                 CCharEntity* PChar = (CCharEntity*)member;
                 PChar->ReloadPartyDec();
                 uint16 alliance = 0;
-                PChar->pushPacket<CPartyDefinePacket>(party);
-                // auto effects = std::make_unique<CPartyEffectsPacket>();
+                PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(party);
+                // auto effects = std::make_unique<GP_SERV_COMMAND_GROUP_EFFECTS>();
                 uint8 j = 0;
                 for (auto&& memberinfo : info)
                 {
@@ -890,14 +890,14 @@ void CParty::ReloadParty()
                     auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                     if (PPartyMember)
                     {
-                        PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
+                        PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PPartyMember, j, memberinfo.flags, PChar->getZone());
                         // if (memberinfo.partyid == party->GetPartyID() && PPartyMember != PChar)
                         //    effects->AddMemberEffects(PChar);
                     }
                     else
                     {
                         uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-                        PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
+                        PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
                     }
                     j++;
                 }
@@ -925,17 +925,15 @@ void CParty::ReloadParty()
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), trustCount);
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
             PChar->ReloadPartyDec();
-            PChar->pushPacket<CPartyDefinePacket>(this, PLeader && PChar->getZone() == PLeader->getZone());
-            // auto effects = std::make_unique<CPartyEffectsPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(this, PLeader && PChar->getZone() == PLeader->getZone());
+            // auto effects = std::make_unique<GP_SERV_COMMAND_GROUP_EFFECTS>();
             uint8 j = 0;
             for (auto&& memberinfo : info)
             {
                 auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                 if (PPartyMember)
                 {
-                    PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
-                    // if (PPartyMember != PChar)
-                    //    effects->AddMemberEffects(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PPartyMember, j, memberinfo.flags, PChar->getZone());
 
                     // Inject the party leader's trusts into the party list
                     CBattleEntity* PLeader = GetLeader();
@@ -945,14 +943,14 @@ void CParty::ReloadParty()
                         {
                             j++;
                             // trusts don't persist over zonelines, so we know their zone has be the same as the leader.
-                            PChar->pushPacket<CPartyMemberUpdatePacket>(PTrust, j);
+                            PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PTrust, j);
                         }
                     }
                 }
                 else
                 {
                     uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-                    PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
+                    PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
                 }
                 j++;
             }
@@ -970,7 +968,7 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
     }
 
     PChar->ReloadPartyDec();
-    PChar->pushPacket<CPartyDefinePacket>(this);
+    PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(this);
 
     int alliance = 0;
 
@@ -987,12 +985,12 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
         CCharEntity* PPartyMember = zoneutils::GetChar(memberinfo.id);
         if (PPartyMember)
         {
-            PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(PPartyMember, j, memberinfo.flags, PChar->getZone());
         }
         else
         {
             uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-            PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_LIST>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
         }
         j++;
     }
@@ -1259,7 +1257,7 @@ void CParty::PushEffectsPacket()
             }
 
             // Make and send packet for PMemberChar
-            PMemberChar->pushPacket<CPartyEffectsPacket>(sameZoneMembers);
+            PMemberChar->pushPacket<GP_SERV_COMMAND_GROUP_EFFECTS>(sameZoneMembers);
         }
         m_EffectsChanged = false;
     }

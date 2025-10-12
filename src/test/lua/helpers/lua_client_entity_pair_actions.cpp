@@ -27,6 +27,7 @@
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_spy.h"
 #include "map/ability.h"
+#include "map/enums/party_kind.h"
 #include "map/lua/lua_baseentity.h"
 #include "map/packets/c2s/0x01a_action.h"
 #include "map/packets/c2s/0x036_item_transfer.h"
@@ -238,7 +239,7 @@ void CLuaClientEntityPairActions::inviteToParty(CLuaBaseEntity* player) const
     auto*      invitePacket = packet->as<GP_CLI_COMMAND_GROUP_SOLICIT_REQ>();
     invitePacket->UniqueNo  = player->getID();
     invitePacket->ActIndex  = player->getTargID();
-    invitePacket->Kind      = static_cast<uint8>(GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND::Party);
+    invitePacket->Kind      = PartyKind::Party;
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -262,7 +263,7 @@ void CLuaClientEntityPairActions::formAlliance(CLuaBaseEntity* player) const
     auto*      invitePacket = packet->as<GP_CLI_COMMAND_GROUP_SOLICIT_REQ>();
     invitePacket->UniqueNo  = player->getID();
     invitePacket->ActIndex  = player->getTargID();
-    invitePacket->Kind      = static_cast<uint8>(GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND::Alliance);
+    invitePacket->Kind      = PartyKind::Alliance;
 
     parent_->packets().sendBasicPacket(*packet);
 }

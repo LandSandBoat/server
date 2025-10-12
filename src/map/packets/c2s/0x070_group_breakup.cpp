@@ -23,22 +23,23 @@
 
 #include "alliance.h"
 #include "entities/charentity.h"
+#include "enums/party_kind.h"
 #include "party.h"
 
 auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_GROUP_BREAKUP_KIND>(Kind)
+                  .oneOf<PartyKind>(Kind)
                   .isPartyLeader(PChar);
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_BREAKUP_KIND>(Kind))
+    switch (Kind)
     {
-        case GP_CLI_COMMAND_GROUP_BREAKUP_KIND::Party:
+        case PartyKind::Party:
         {
             pv.mustEqual(PChar->PParty && !PChar->PParty->m_PAlliance, true, "Cant break party while in alliance");
         }
         break;
-        case GP_CLI_COMMAND_GROUP_BREAKUP_KIND::Alliance:
+        case PartyKind::Alliance:
         {
             pv.isAllianceLeader(PChar);
         }
@@ -50,16 +51,16 @@ auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GROUP_BREAKUP::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<GP_CLI_COMMAND_GROUP_BREAKUP_KIND>(Kind))
+    switch (Kind)
     {
-        case GP_CLI_COMMAND_GROUP_BREAKUP_KIND::Party:
+        case PartyKind::Party:
         {
             ShowDebug("%s is disbanding the party (pcmd breakup)", PChar->getName());
             PChar->PParty->DisbandParty();
             ShowDebug("%s party has been disbanded (pcmd breakup)", PChar->getName());
         }
         break;
-        case GP_CLI_COMMAND_GROUP_BREAKUP_KIND::Alliance:
+        case PartyKind::Alliance:
         {
             ShowDebug("%s is disbanding the alliance (acmd breakup)", PChar->getName());
             PChar->PParty->m_PAlliance->dissolveAlliance();

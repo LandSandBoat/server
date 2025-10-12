@@ -27,7 +27,7 @@
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
-#include "packets/party_invite.h"
+#include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "status_effect_container.h"
 #include "utils/blacklistutils.h"
 #include "utils/jailutils.h"
@@ -36,7 +36,7 @@
 auto GP_CLI_COMMAND_GROUP_SOLICIT_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND>(Kind)
+                  .oneOf<PartyKind>(Kind)
                   .mustNotEqual(PChar->id, UniqueNo, "Cannot invite yourself")
                   .mustEqual(blacklistutils::IsBlacklisted(UniqueNo, PChar->id), false, "Character has inviter blacklisted");
 
@@ -57,9 +57,9 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
         return;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND>(Kind))
+    switch (Kind)
     {
-        case GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND::Party:
+        case PartyKind::Party:
         {
             if (PInviter->PParty == nullptr || PInviter->PParty->GetLeader() == PInviter)
             {
@@ -119,7 +119,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     PInvitee->InvitePending.id     = PInviter->id;
                     PInvitee->InvitePending.targid = PInviter->targid;
 
-                    PInvitee->pushPacket<CPartyInvitePacket>(inviteeCharId, inviteeTargId, PInviter->getName(), INVITE_PARTY);
+                    PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Party);
 
                     ShowDebug("Sent party invite packet to %s", PInvitee->getName());
 
@@ -137,7 +137,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                         .inviterId     = PInviter->id,
                         .inviterTargId = PInviter->targid,
                         .inviterName   = PInviter->getName(),
-                        .inviteType    = INVITE_PARTY,
+                        .inviteType    = PartyKind::Party,
                     });
                 }
             }
@@ -148,7 +148,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
             }
         }
         break;
-        case GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND::Alliance:
+        case PartyKind::Alliance:
         {
             if (PInviter->PParty && PInviter->PParty->GetLeader() == PInviter &&
                 (PInviter->PParty->m_PAlliance == nullptr ||
@@ -205,7 +205,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     PInvitee->InvitePending.id     = PInviter->id;
                     PInvitee->InvitePending.targid = PInviter->targid;
 
-                    PInvitee->pushPacket<CPartyInvitePacket>(inviteeCharId, inviteeTargId, PInviter->getName(), INVITE_ALLIANCE);
+                    PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Alliance);
 
                     ShowDebug("Sent party invite packet to %s", PInvitee->getName());
                 }
@@ -218,7 +218,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                         .inviterId     = PInviter->id,
                         .inviterTargId = PInviter->targid,
                         .inviterName   = PInviter->getName(),
-                        .inviteType    = INVITE_ALLIANCE,
+                        .inviteType    = PartyKind::Alliance,
                     });
                 }
             }

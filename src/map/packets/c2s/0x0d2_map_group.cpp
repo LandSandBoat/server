@@ -22,7 +22,7 @@
 #include "0x0d2_map_group.h"
 
 #include "entities/charentity.h"
-#include "packets/party_map.h"
+#include "packets/s2c/0x0a0_map_group.h"
 
 auto GP_CLI_COMMAND_MAP_GROUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -40,7 +40,7 @@ void GP_CLI_COMMAND_MAP_GROUP::process(MapSession* PSession, CCharEntity* PChar)
             auto* partyMember = static_cast<CCharEntity*>(PPartyMember);
             if (partyMember->getZone() == PChar->getZone() && partyMember->m_moghouseID == PChar->m_moghouseID)
             {
-                PChar->pushPacket<CPartyMapPacket>(partyMember);
+                PChar->pushPacket<GP_SERV_COMMAND_MAP_GROUP>(partyMember);
             }
         }
     });

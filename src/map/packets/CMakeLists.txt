@@ -83,18 +83,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_define.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_define.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_effects.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_invite.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_invite.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_map.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_map.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_search.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_search.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/position.cpp

@@ -7,6 +7,7 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/music_slot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_c2s.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_s2c.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/party_kind.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_result.h
     PARENT_SCOPE

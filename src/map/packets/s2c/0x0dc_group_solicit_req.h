@@ -24,8 +24,22 @@
 #include "base.h"
 
 enum class PartyKind : uint8_t;
-// https://github.com/atom0s/XiPackets/tree/main/world/client/0x006F
-// This packet is sent by the client when leaving a party or alliance.
-GP_CLI_PACKET(GP_CLI_COMMAND_GROUP_LEAVE,
-              PartyKind Kind; // PS2: Kind
-);
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DC
+// This packet is sent by the server when the client is being invited to a party or alliance.
+class GP_SERV_COMMAND_GROUP_SOLICIT_REQ final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_SOLICIT_REQ, GP_SERV_COMMAND_GROUP_SOLICIT_REQ>
+{
+public:
+    struct PacketData
+    {
+        uint32_t  UniqueNo;     // PS2: UniqueNo
+        uint16_t  ActIndex;     // PS2: ActIndex
+        uint8_t   AnonFlag;     // PS2: AnonFlag
+        PartyKind Kind;         // PS2: Kind
+        uint8_t   sName[16];    // PS2: sName
+        uint16_t  RaceNo;       // PS2: RaceNo
+        uint8_t   padding1E[2]; // PS2: (New; did not exist.)
+    };
+
+    GP_SERV_COMMAND_GROUP_SOLICIT_REQ(uint32_t id, uint16_t targid, const std::string& inviterName, PartyKind partyKind);
+};

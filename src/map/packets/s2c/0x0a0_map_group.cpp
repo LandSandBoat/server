@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,24 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYMAPPACKET_H
-#define _CPARTYMAPPACKET_H
+#include "0x0a0_map_group.h"
 
-#include "common/cbasetypes.h"
+#include "common/logging.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-
-class CPartyMapPacket : public CBasicPacket
+GP_SERV_COMMAND_MAP_GROUP::GP_SERV_COMMAND_MAP_GROUP(const CCharEntity* PChar)
 {
-public:
-    CPartyMapPacket(CCharEntity* PChar);
-};
+    if (PChar == nullptr)
+    {
+        ShowError("GP_SERV_COMMAND_MAP_GROUP::GP_SERV_COMMAND_MAP_GROUP() - PChar was null.");
+        return;
+    }
 
-#endif
+    auto& packet = this->data();
+
+    packet.UniqueID = PChar->id;
+    packet.zone     = PChar->getZone();
+    packet.x        = PChar->loc.p.x;
+    packet.y        = PChar->loc.p.y;
+    packet.z        = PChar->loc.p.z;
+}

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,23 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYMEMBERUPDATEPACKET_H
-#define _CPARTYMEMBERUPDATEPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
-class CTrustEntity;
-class CAlliance;
 
-class CPartyMemberUpdatePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00E1
+// This packet is sent by the server to inform the client of their parties GroupID.
+class GP_SERV_COMMAND_GROUP_CHECKID final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_CHECKID, GP_SERV_COMMAND_GROUP_CHECKID>
 {
 public:
-    CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 zoneid);
-    CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber);
-    CPartyMemberUpdatePacket(uint32 id, const std::string& name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID);
-};
+    struct PacketData
+    {
+        uint32_t GroupID; // PS2: GroupID
+    };
 
-#endif
+    GP_SERV_COMMAND_GROUP_CHECKID(const CCharEntity* PChar);
+};

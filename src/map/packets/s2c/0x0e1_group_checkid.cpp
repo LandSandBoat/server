@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,26 +19,17 @@
 ===========================================================================
 */
 
-#include "party_map.h"
+#include "0x0e1_group_checkid.h"
 
 #include "entities/charentity.h"
+#include "party.h"
 
-CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
+GP_SERV_COMMAND_GROUP_CHECKID::GP_SERV_COMMAND_GROUP_CHECKID(const CCharEntity* PChar)
 {
-    this->setType(0xA0);
-    this->setSize(0x18);
+    auto& packet = this->data();
 
-    if (PChar == nullptr)
+    if (PChar != nullptr && PChar->PParty != nullptr)
     {
-        ShowError("CPartyMapPacket::CPartyMapPacket() - PChar was null.");
-        return;
+        packet.GroupID = PChar->PParty->GetPartyID();
     }
-
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint16>(0x08) = PChar->getZone();
-    ref<uint16>(0x0A) = PChar->targid;
-
-    ref<float>(0x0C) = PChar->loc.p.x;
-    ref<float>(0x10) = PChar->loc.p.y;
-    ref<float>(0x14) = PChar->loc.p.z;
 }

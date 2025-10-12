@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,23 +19,27 @@
 ===========================================================================
 */
 
-#include "party_define.h"
+#include "0x0c8_group_tbl.h"
 
+#include "alliance.h"
 #include "common/database.h"
 #include "common/logging.h"
 #include "map_engine.h"
+#include "party.h"
 
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
+#include "enums/party_kind.h"
 #include "utils/zoneutils.h"
 
-CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
+GP_SERV_COMMAND_GROUP_TBL::GP_SERV_COMMAND_GROUP_TBL(CParty* PParty, const bool loadTrust)
 {
-    this->setType(0xC8);
-    this->setSize(0xF8);
+    auto& packet = this->data();
 
     if (PParty)
     {
+        packet.Kind = PParty->m_PAlliance ? PartyKind::Alliance : PartyKind::Party;
+
         uint32 allianceid = 0;
         if (PParty->m_PAlliance)
         {
@@ -57,11 +61,19 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
                 targid = PChar->targid;
             }
 
-            const auto pos_zone        = rset->getOrDefault<uint16>("pos_zone", 0);
-            ref<uint32>(12 * i + 0x08) = rset->get<uint32>("charid");
-            ref<uint16>(12 * i + 0x0C) = targid;
-            ref<uint16>(12 * i + 0x0E) = rset->get<uint32>("partyflag");
-            ref<uint16>(12 * i + 0x10) = pos_zone ? pos_zone : rset->get<uint16>("pos_prevzone");
+            const auto pos_zone   = rset->getOrDefault<uint16>("pos_zone", 0);
+            const auto partyFlags = rset->get<uint32>("partyflag");
+
+            packet.GroupTbl[i].UniqueNo          = rset->get<uint32>("charid");
+            packet.GroupTbl[i].ActIndex          = targid;
+            packet.GroupTbl[i].PartyNo           = (partyFlags >> 0) & 0x03; // Bits 0-1
+            packet.GroupTbl[i].PartyLeaderFlg    = (partyFlags >> 2) & 0x01; // Bit 2
+            packet.GroupTbl[i].AllianceLeaderFlg = (partyFlags >> 3) & 0x01; // Bit 3
+            packet.GroupTbl[i].PartyRFlg         = (partyFlags >> 4) & 0x01; // Bit 4
+            packet.GroupTbl[i].AllianceRFlg      = (partyFlags >> 5) & 0x01; // Bit 5
+            packet.GroupTbl[i].unknown06         = (partyFlags >> 6) & 0x01; // Bit 6
+            packet.GroupTbl[i].unknown07         = (partyFlags >> 7) & 0x01; // Bit 7
+            packet.GroupTbl[i].ZoneNo            = pos_zone ? pos_zone : rset->get<uint16>("pos_prevzone");
             i++;
         }
 
@@ -72,10 +84,16 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
             {
                 for (const auto* PTrust : PLeader->PTrusts)
                 {
-                    ref<uint32>(12 * i + (0x08)) = PTrust->id;
-                    ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
-                    ref<uint16>(12 * i + (0x0E)) = 0;
-                    ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
+                    packet.GroupTbl[i].UniqueNo          = PTrust->id;
+                    packet.GroupTbl[i].ActIndex          = PTrust->targid;
+                    packet.GroupTbl[i].PartyNo           = 0; // Trusts are in main party
+                    packet.GroupTbl[i].PartyLeaderFlg    = 0;
+                    packet.GroupTbl[i].AllianceLeaderFlg = 0;
+                    packet.GroupTbl[i].PartyRFlg         = 0;
+                    packet.GroupTbl[i].AllianceRFlg      = 0;
+                    packet.GroupTbl[i].unknown06         = 0;
+                    packet.GroupTbl[i].unknown07         = 0;
+                    packet.GroupTbl[i].ZoneNo            = PTrust->getZone();
                     i++;
                 }
             }

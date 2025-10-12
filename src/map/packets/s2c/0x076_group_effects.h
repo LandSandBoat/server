@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,30 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYINVITEPACKET_H
-#define _CPARTYINVITEPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-
-enum INVITETYPE
-{
-    INVITE_PARTY    = 0,
-    INVITE_ALLIANCE = 5,
-};
+#include "base.h"
+#include <vector>
 
 class CCharEntity;
-
-class CPartyInvitePacket : public CBasicPacket
+struct partymemberbuffs_t
 {
-public:
-    CPartyInvitePacket(uint32 id, uint16 targid, const std::string& inviterName, INVITETYPE InviteType);
+    uint32_t UniqueNo;
+    uint16_t ActIndex;
+    uint16_t padding06;
+    uint64_t Bits;
+    uint8_t  Buffs[32];
 };
 
-#endif
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0076
+// This packet is sent by the server to update party members' buff information
+class GP_SERV_COMMAND_GROUP_EFFECTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_EFFECTS, GP_SERV_COMMAND_GROUP_EFFECTS>
+{
+public:
+    struct PacketData
+    {
+        partymemberbuffs_t Members[5]; // PS2: (New; did not exist.)
+    };
+
+    explicit GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CCharEntity*>& membersList);
+};
