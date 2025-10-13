@@ -1103,14 +1103,26 @@ void CMobController::DoRoamTick(timer::time_point tick)
                         // don't reset m_LastActionTime until the roaming commences
                         if (!PMob->PAI->IsCurrentState<CMagicState>())
                         {
-                            // move down
-                            PMob->animationsub = 1;
-                            PMob->HideName(true);
-                            PMob->SetUntargetable(true);
-
                             // don't move around until i'm fully in the ground
                             // Transition underground takes 2s, allow extra time for any magic effect to finish
-                            Wait(3s);
+                            Wait(4s);
+
+                            // clang-format off
+                            PMob->PAI->QueueAction(queueAction_t(2s, false, [](CBaseEntity* MobEntity)
+                            {
+                                if (auto PMob = dynamic_cast<CMobEntity*>(MobEntity))
+                                {
+                                    // move down
+                                    PMob->animationsub = 1;
+                                    PMob->HideName(true);
+                                    PMob->SetUntargetable(true);
+                                }
+
+                                MobEntity->loc.zone->UpdateEntityPacket(MobEntity, ENTITY_UPDATE, UPDATE_POS | UPDATE_HP);
+                            }));
+                            // clang-format on
+
+                            PMob->loc.zone->UpdateEntityPacket(PMob, ENTITY_UPDATE, UPDATE_POS | UPDATE_HP);
                         }
                     }
                     else if (PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
@@ -1191,10 +1203,15 @@ void CMobController::FollowRoamPath()
                 // don't re-enter this block, but don't roam until emerging
                 PMob->SetUntargetable(false);
                 Wait(2s);
+
+                // clang-format off
                 PMob->PAI->QueueAction(queueAction_t(2s, false, [](CBaseEntity* MobEntity)
-                                                     {
+                {
                     MobEntity->animationsub = 0;
-                    MobEntity->HideName(false); }));
+                    MobEntity->HideName(false);
+                    MobEntity->loc.zone->UpdateEntityPacket(MobEntity, ENTITY_UPDATE, UPDATE_POS | UPDATE_HP);
+                }));
+                // clang-format on
             }
 
             // face spawn rotation if I just moved back to spawn
