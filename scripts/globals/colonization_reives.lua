@@ -145,6 +145,8 @@ xi.reives.enableReive = function(zoneID, reiveNum)
     for _, entryId in pairs(reiveData.mob) do
         local mob = GetMobByID(entryId)
         if mob then
+            mob:setFixedSpawnPosition(true)
+
             if not mob:isAlive() then
                 SpawnMob(entryId)  -- Spawn the reive defenders
                 -- TODO: Set name flags (sword)

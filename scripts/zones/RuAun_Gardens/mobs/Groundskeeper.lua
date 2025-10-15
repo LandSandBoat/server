@@ -24,10 +24,14 @@ entity.onMobDespawn = function(mob)
     local params = {}
     params.immediate = true
     if xi.mob.phOnDespawn(mob, ID.mob.DESPOT, 5, 7200, params) then -- 2 hours
-        local phId = mob:getID()
-        GetMobByID(ID.mob.DESPOT):addListener('SPAWN', 'PH_VAR', function(m)
-            m:setLocalVar('ph', phId)
-        end)
+        local phId   = mob:getID()
+        local despot = GetMobByID(ID.mob.DESPOT)
+
+        if despot then
+            despot:addListener('SPAWN', 'PH_VAR', function(m)
+                m:setLocalVar('ph', phId)
+            end)
+        end
     end
 end
 
