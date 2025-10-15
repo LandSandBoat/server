@@ -23,8 +23,9 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "lua/luautils.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
 
@@ -66,7 +67,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
     // If PChar is invisible don't allow the trade
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
-        PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotWhileInvisible);
+        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotWhileInvisible);
         return;
     }
 

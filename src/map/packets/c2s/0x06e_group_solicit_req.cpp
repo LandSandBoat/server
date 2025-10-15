@@ -25,8 +25,8 @@
 #include "entities/charentity.h"
 #include "ipc_client.h"
 #include "packets/message_basic.h"
-#include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "status_effect_container.h"
 #include "utils/blacklistutils.h"
@@ -65,7 +65,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
             {
                 if (PInviter->PParty && PInviter->PParty->IsFull())
                 {
-                    PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotInvite);
+                    PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInvite);
                     break;
                 }
 
@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
                     {
                         ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party", PInvitee->getName());
-                        PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInvite);
                         break;
                     }
 
@@ -101,18 +101,18 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     {
                         ShowDebug("%s is blocking party invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
                         // Interaction was blocked
-                        PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+                        PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
                         // You cannot invite that person at this time.
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotInvite);
                         break;
                     }
 
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
                         ShowDebug("%s has level sync, unable to send invite", PInvitee->getName());
-                        PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotInviteLevelSync);
+                        PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInviteLevelSync);
                         break;
                     }
 
@@ -125,7 +125,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
 
                     if (PInviter->PParty && PInviter->PParty->GetSyncTarget())
                     {
-                        PInvitee->pushPacket<CMessageStandardPacket>(PInvitee, 0, 0, MsgStd::LevelSyncWarning);
+                        PInvitee->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInvitee, 0, 0, MsgStd::LevelSyncWarning);
                     }
                 }
                 else
@@ -144,7 +144,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
             else // in party but not leader, cannot invite
             {
                 ShowDebug("%s is not party leader, cannot send invite", PInviter->getName());
-                PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::NotPartyLeader);
+                PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::NotPartyLeader);
             }
         }
         break;
@@ -178,11 +178,11 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     {
                         ShowDebug("%s is blocking alliance invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
                         // Interaction was blocked
-                        PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+                        PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
                         // You cannot invite that person at this time.
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotInvite);
                         break;
                     }
 
@@ -191,14 +191,14 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                         PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)
                     {
                         ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party/alliance", PInvitee->getName());
-                        PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInvite);
                         break;
                     }
 
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
                         ShowDebug("%s has level sync, unable to send invite", PInvitee->getName());
-                        PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::CannotInviteLevelSync);
+                        PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInviteLevelSync);
                         break;
                     }
 

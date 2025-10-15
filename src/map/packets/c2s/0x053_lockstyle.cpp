@@ -21,9 +21,10 @@
 
 #include "0x053_lockstyle.h"
 
+#include "enums/msg_std.h"
 #include "items/item_equipment.h"
 #include "packets/char_sync.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -65,7 +66,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
         break;
         case GP_CLI_COMMAND_LOCKSTYLE_MODE::Query:
         {
-            PChar->pushPacket<CMessageStandardPacket>(PChar->getStyleLocked() ? MsgStd::StyleLockIsOn : MsgStd::StyleLockIsOff);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar->getStyleLocked() ? MsgStd::StyleLockIsOn : MsgStd::StyleLockIsOff);
         }
         break;
         case GP_CLI_COMMAND_LOCKSTYLE_MODE::Set:

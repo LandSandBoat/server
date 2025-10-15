@@ -22,7 +22,7 @@
 #include "0x00c_gameok.h"
 
 #include "entities/charentity.h"
-#include "packets/char_jobs.h"
+#include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x08d_job_points.h"
 #include "packets/s2c/0x0b4_config.h"
@@ -41,7 +41,7 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
 {
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
-    PChar->pushPacket<CCharJobsPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
 
     if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
     {

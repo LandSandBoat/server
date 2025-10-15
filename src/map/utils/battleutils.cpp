@@ -31,7 +31,6 @@
 #include <cstring>
 #include <unordered_map>
 
-#include "packets/char_health.h"
 #include "packets/char_status.h"
 #include "packets/message_basic.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -51,6 +50,7 @@
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"
@@ -65,8 +65,8 @@
 #include "notoriety_container.h"
 #include "packets/char_recast.h"
 #include "packets/pet_sync.h"
-#include "packets/position.h"
 #include "packets/s2c/0x058_assist.h"
+#include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "party.h"
 #include "petskill.h"
@@ -5699,7 +5699,7 @@ namespace battleutils
             else
             {
                 // draw in!
-                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CPositionPacket>(PTarget, nearEntity));
+                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(PTarget, nearEntity));
                 PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, 0, 232));
             }
         }

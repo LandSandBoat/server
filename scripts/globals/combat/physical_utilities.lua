@@ -471,7 +471,7 @@ xi.combat.physical.wRatioCapPC = function(wRatio, pDifFinalCap)
         pDifLowerCap = wRatio - 0.375
     end
 
-    return pDifUpperCap, pDifLowerCap
+    return pDifLowerCap, pDifUpperCap
 end
 
 -- wRatio cap for non-PCs
@@ -506,7 +506,7 @@ xi.combat.physical.wRatioCapOthers = function(wRatio, pDifFinalCap)
         pDifLowerCap = 1 + (1120 / 1024) * (wRatio - 1.59)
     end
 
-    return pDifUpperCap, pDifLowerCap
+    return pDifLowerCap, pDifUpperCap
 end
 
 -- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
@@ -551,7 +551,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     if tpIgnoresDefense then
         local ignoreDefenseFactor = 1 - tpFactor
 
-        targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+        targetDefense = math.max(1, math.floor(targetDefense * ignoreDefenseFactor))
     end
 
     if isCannonball then
@@ -620,7 +620,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         -- This is also known as "pDIF spike"
         local sRatio = 0
 
-        if wRatio > 0.0 and wRatio < 1.75 then
+        if wRatio > 0.0 and wRatio < 0.75 then
             sRatio = -5 / 9 + (10 / 9) * wRatio
         elseif wRatio <= 1.3 then
             sRatio = 0.3

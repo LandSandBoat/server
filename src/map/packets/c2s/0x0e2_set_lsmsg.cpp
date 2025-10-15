@@ -22,6 +22,7 @@
 #include "0x0e2_set_lsmsg.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 
@@ -67,7 +68,7 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
                 return;
             }
 
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoAccess);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoAccess);
         }
         else if (unknown03)
         {
@@ -79,7 +80,7 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
                 return;
             }
 
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoAccess);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoAccess);
         }
     }
 }

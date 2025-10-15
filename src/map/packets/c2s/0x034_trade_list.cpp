@@ -23,6 +23,7 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_linkshell.h"
 #include "packets/s2c/0x023_item_trade_list.h"
 #include "packets/s2c/0x025_item_trade_mylist.h"
@@ -118,7 +119,7 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         if ((!PItemLinkshell1 && !PItemLinkshell2) || ((!PItemLinkshell1 || PItemLinkshell1->GetLSID() != PItemLinkshell->GetLSID()) &&
                                                        (!PItemLinkshell2 || PItemLinkshell2->GetLSID() != PItemLinkshell->GetLSID())))
         {
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellEquipBeforeUsing);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellEquipBeforeUsing);
             PItem->setReserve(0);
             PChar->UContainer->SetItem(TradeIndex, nullptr);
         }

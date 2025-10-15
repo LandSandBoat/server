@@ -39,12 +39,9 @@
 #include "lua/luautils.h"
 
 #include "packets/entity_update.h"
-#include "packets/message_basic.h"
-#include "packets/position.h"
 #include "packets/s2c/0x038_schedulor.h"
 
 #include "status_effect_container.h"
-#include "treasure_pool.h"
 
 #include "enums/four_cc.h"
 #include "utils/charutils.h"

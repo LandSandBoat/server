@@ -28,8 +28,8 @@
 #include "packets/char_job_extra.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 
-#include "packets/char_stats.h"
 #include "packets/message_basic.h"
+#include "packets/s2c/0x061_clistatus.h"
 
 #include "battleutils.h"
 #include "blue_spell.h"
@@ -209,7 +209,7 @@ namespace blueutils
         charutils::BuildingCharTraitsTable(PChar);
         PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
         PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);

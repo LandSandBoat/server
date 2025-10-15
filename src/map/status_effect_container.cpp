@@ -52,6 +52,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "notoriety_container.h"
 #include "status_effect_container.h"
 
+#include "enums/msg_std.h"
 #include "map_engine.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"

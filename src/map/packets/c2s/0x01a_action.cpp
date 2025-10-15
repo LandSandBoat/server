@@ -26,13 +26,14 @@
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "latent_effect_container.h"
 #include "packets/char_recast.h"
-#include "packets/message_system.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x02f_dig.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "recast_container.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
@@ -319,7 +320,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             const uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(GYSAHL_GREENS);
             if (slotID == ERROR_SLOTID)
             {
-                PChar->pushPacket<CMessageSystemPacket>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
                 return;
             }
 
@@ -384,23 +385,23 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             {
                 if (BlockAid.StatusId == GP_CLI_COMMAND_ACTION_BLOCKAID::Disable && PChar->getBlockingAid())
                 {
-                    PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockaidCanceled);
+                    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockaidCanceled);
                     PChar->setBlockingAid(false);
                 }
                 else if (BlockAid.StatusId == GP_CLI_COMMAND_ACTION_BLOCKAID::Enable && !PChar->getBlockingAid())
                 {
-                    PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockaidActivated);
+                    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockaidActivated);
                     PChar->setBlockingAid(true);
                 }
                 else if (BlockAid.StatusId == GP_CLI_COMMAND_ACTION_BLOCKAID::Toggle)
                 {
                     PChar->setBlockingAid(!PChar->getBlockingAid());
-                    PChar->pushPacket<CMessageSystemPacket>(0, 0, PChar->getBlockingAid() ? MsgStd::BlockaidCurrentlyActive : MsgStd::BlockaidCurrentlyInactive);
+                    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, PChar->getBlockingAid() ? MsgStd::BlockaidCurrentlyActive : MsgStd::BlockaidCurrentlyInactive);
                 }
             }
             else
             {
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
             }
         }
         break;

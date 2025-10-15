@@ -121,34 +121,37 @@ xi.itemUtils.skillBookUse = function(target, skillID)
     target:trySkillUp(skillID, target:getMainLvl(), true, true)
 end
 
+-- selects an item from a weighted loot table
 ---@nodiscard
----@param target CBaseEntity
----@param itemgroup table
+---@param lootGroup table
 ---@return integer
-xi.itemUtils.pickItemRandom = function(target, itemgroup) -- selects an item from a weighted result table
-    -- possible results
-    local items = itemgroup
-
+xi.itemUtils.pickItemRandom = function(lootGroup)
+    local itemId = 0
     -- sum weights
-    local sum = 0
-    for i = 1, #items do
-        sum = sum + items[i][1]
+    local max = 0
+    for i, entry in pairs(lootGroup) do
+        max = max + entry.weight
+
+        if entry.itemId == nil then
+            print(fmt('[ERROR] xi.itemUtils.pickItemRandom has encountered nil item at index {} of lootGroup', i))
+        end
     end
 
-    -- pick the weighted result
-    local item = 0
-    local pick = math.random(1, sum)
-    sum = 0
+    local roll    = math.random(max)
+    local current = 0
 
-    for i = 1, #items do
-        sum = sum + items[i][1]
-        if sum >= pick then
-            item = items[i][2]
+    for _, entry in pairs(lootGroup) do
+        current = current + entry.weight
+
+        if current >= roll then
+            -- xi.item.NONE gives a chance to drop nothing from a group, don't return nil if the itemId is invalid
+            itemId = entry.itemId or 0
+
             break
         end
     end
 
-    return item
+    return itemId
 end
 
 xi.itemUtils.removeShield = function(effect, target)

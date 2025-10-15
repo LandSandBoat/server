@@ -22,6 +22,7 @@
 #include "0x0fc_myroom_plant_add.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_flowerpot.h"
 #include "packets/char_status.h"
@@ -73,7 +74,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     if (CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)
     {
         // Planting a seed in the flowerpot
-        PChar->pushPacket<CMessageStandardPacket>(MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
         PPotItem->cleanPot();
         PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo));
         PPotItem->setPlantTimestamp(earth_time::vanadiel_timestamp());
@@ -84,7 +85,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     else if (MyroomAddItemNo >= FIRE_CRYSTAL && MyroomAddItemNo <= DARK_CLUSTER)
     {
         // Feeding the plant a crystal
-        PChar->pushPacket<CMessageStandardPacket>(MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
         if (PPotItem->getStage() == FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL)
         {
             PPotItem->setFirstCrystalFeed(CItemFlowerpot::getElementFromItem(MyroomAddItemNo));

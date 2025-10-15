@@ -94,6 +94,7 @@ xi.mobSkill =
     HUNDRED_FISTS_1          =  690, -- Season's Greetings KSNM 30 (Goga Tlugvi)
 
     BLOOD_WEAPON_1           =  695,
+    SOUL_VOICE_1             =  696,
 
     CHARM                    =  710,
 

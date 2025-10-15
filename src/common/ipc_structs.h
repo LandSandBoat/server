@@ -25,9 +25,9 @@
 
 #include "common/regional_event.h"
 
+#include "map/enums/msg_std.h"
 #include "map/enums/party_kind.h"
 #include "map/packets/chat_message.h"
-#include "map/packets/message_standard.h"
 
 #include <string>
 #include <vector>

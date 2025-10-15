@@ -23,11 +23,12 @@
 
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "enums/msg_std.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "packets/char_check.h"
 #include "packets/message_basic.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x0ca_inspect_message.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
@@ -125,7 +126,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 // /check on a player
                 if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PCharTarget->m_GMlevel >= PChar->m_GMlevel))
                 {
-                    PCharTarget->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::Examine);
+                    PCharTarget->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::Examine);
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PCharTarget);
@@ -137,8 +138,8 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
         {
             if (PCharTarget && PCharTarget->m_PMonstrosity)
             {
-                PChar->pushPacket<CMessageStandardPacket>(PCharTarget, 0, 0, MsgStd::MonstrosityCheckOut);
-                PCharTarget->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::MonstrosityCheckIn);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PCharTarget, 0, 0, MsgStd::MonstrosityCheckOut);
+                PCharTarget->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::MonstrosityCheckIn);
             }
         }
         break;

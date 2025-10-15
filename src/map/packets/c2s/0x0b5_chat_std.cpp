@@ -32,7 +32,7 @@
 #include "linkshell.h"
 #include "packets/chat_message.h"
 #include "packets/message_basic.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "roe.h"
 #include "unitychat.h"
 #include "utils/jailutils.h"
@@ -274,12 +274,12 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                 }
                 else
                 {
-                    PChar->pushPacket<CMessageStandardPacket>(PChar, 0, MsgStd::WaitLonger);
+                    PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, MsgStd::WaitLonger);
                 }
             }
             else
             {
-                PChar->pushPacket<CMessageStandardPacket>(PChar, 0, MsgStd::CannotHere);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, MsgStd::CannotHere);
             }
         }
         break;

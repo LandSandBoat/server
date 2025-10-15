@@ -25,11 +25,11 @@
 
 #include "packets/char_status.h"
 #include "packets/chat_message.h"
-#include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 
 #include "conquest_system.h"
@@ -41,7 +41,7 @@
 #include "enums/item_lockflg.h"
 #include "items.h"
 #include "packets/c2s/0x0e2_set_lsmsg.h"
-#include "packets/linkshell_message.h"
+#include "packets/s2c/0x0cc_linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/jailutils.h"
@@ -316,11 +316,11 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
             PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {
-                PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
+                PMember->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
             }
             else
             {
-                PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellKicked);
+                PMember->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellKicked);
             }
 
             return;
@@ -356,7 +356,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
                 {
                     newPacket->ref<uint8>(0x04) = MESSAGE_LINKSHELL2;
                 }
-                else if (newPacket->getType() == CLinkshellMessagePacket::id)
+                else if (newPacket->getType() == static_cast<uint16_t>(PacketS2C::GP_SERV_COMMAND_LINKSHELL_MESSAGE))
                 {
                     newPacket->ref<uint8>(0x05) |= 0x40;
                 }
@@ -376,7 +376,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
         const auto messageTime = rset->getOrDefault<uint32>("messagetime", 0);
         if (!message.empty())
         {
-            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, slot);
+            PChar->pushPacket<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(poster, message, m_name, messageTime, slot);
         }
         // TODO: No message sends a 0xCC packet that prints "No linkshell message set."
     }

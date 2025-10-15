@@ -37,29 +37,29 @@
 #include "ai/states/range_state.h"
 
 #include "packets/char_job_extra.h"
-#include "packets/char_jobs.h"
 #include "packets/char_recast.h"
-#include "packets/char_stats.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
-#include "packets/message_combat.h"
-#include "packets/message_standard.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
+#include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x026_item_subcontainer.h"
+#include "packets/s2c/0x02d_battle_message2.h"
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x055_scenarioitem.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
@@ -1378,7 +1378,7 @@ namespace charutils
             {
                 if (!silence)
                 {
-                    PChar->pushPacket<CMessageStandardPacket>(PChar, PItem->getID(), 0, MsgStd::ItemEx);
+                    PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, PItem->getID(), 0, MsgStd::ItemEx);
                 }
                 destroy(PItem);
                 return ERROR_SLOTID;
@@ -1495,8 +1495,8 @@ namespace charutils
         charutils::SaveCharExp(PChar, PChar->GetMJob());
         PChar->updatemask |= UPDATE_HP;
 
-        PChar->pushPacket<CCharJobsPacket>(PChar);
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
@@ -1655,7 +1655,7 @@ namespace charutils
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
             ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
-            PChar->pushPacket<CMessageStandardPacket>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }
@@ -2330,7 +2330,7 @@ namespace charutils
 
         if (PChar->getStyleLocked() != isStyleLocked)
         {
-            PChar->pushPacket<CMessageStandardPacket>(isStyleLocked ? MsgStd::StyleLockOn : MsgStd::StyleLockOff);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(isStyleLocked ? MsgStd::StyleLockOn : MsgStd::StyleLockOff);
         }
         PChar->setStyleLocked(isStyleLocked);
     }
@@ -2589,7 +2589,7 @@ namespace charutils
                 // Send update packets
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_RECYCLEBIN, NewSlotID);
-                PChar->pushPacket<CMessageStandardPacket>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
             }
             else
             {
@@ -2639,7 +2639,7 @@ namespace charutils
                 CItem* PUpdatedItem = RecycleBin->GetItem(i);
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PUpdatedItem, LOC_RECYCLEBIN, i);
             }
-            PChar->pushPacket<CMessageStandardPacket>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway);
         }
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
@@ -4001,7 +4001,7 @@ namespace charutils
     void setTitle(CCharEntity* PChar, uint16 Title)
     {
         PChar->profile.title = Title;
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
 
         addTitle(PChar, Title);
         SaveTitles(PChar);
@@ -4964,23 +4964,23 @@ namespace charutils
             {
                 if (PChar->capacityChain.chainNumber != 0)
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735);
                 }
                 else
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, 0, 718);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, 718);
                 }
                 PChar->capacityChain.chainNumber++;
             }
             else
             {
-                PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, 0, 718);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, 718);
             }
 
             // Add capacity points
             if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
             }
             PChar->pushPacket<CMenuJobPointsPacket>(PChar);
 
@@ -5078,7 +5078,7 @@ namespace charutils
                 BuildingCharTraitsTable(PChar);
                 BuildingCharWeaponSkills(PChar);
 
-                PChar->pushPacket<CCharJobsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
@@ -5104,7 +5104,7 @@ namespace charutils
                     PChar->PParty->ReloadParty();
                 }
 
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
                 luautils::OnPlayerLevelDown(PChar);
                 PChar->updatemask |= UPDATE_HP;
             }
@@ -5119,7 +5119,7 @@ namespace charutils
         }
 
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
     }
 
     /************************************************************************
@@ -5173,22 +5173,22 @@ namespace charutils
                 {
                     if (onLimitMode)
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, PChar->expChain.chainNumber, 372);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, 372);
                     }
                     else
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, PChar->expChain.chainNumber, 253);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, 253);
                     }
                 }
                 else
                 {
                     if (onLimitMode)
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 371);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 371);
                     }
                     else
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 8);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 8);
                     }
                 }
                 PChar->expChain.chainNumber++;
@@ -5197,11 +5197,11 @@ namespace charutils
             {
                 if (onLimitMode)
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 371);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 371);
                 }
                 else
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 8);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 8);
                 }
             }
         }
@@ -5211,7 +5211,7 @@ namespace charutils
             // add limit points
             if (PChar->PMeritPoints->AddLimitPoints(exp))
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
             }
         }
         else
@@ -5311,7 +5311,7 @@ namespace charutils
                 if (!expFromRaise)
                 {
                     // Level up animation and message
-                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
                     // Set HP and MP to max range
                     PChar->health.hp = PChar->GetMaxHP();
                     PChar->health.mp = PChar->GetMaxMP();
@@ -5321,7 +5321,7 @@ namespace charutils
                 SaveCharJob(PChar, PChar->GetMJob());
                 SaveCharExp(PChar, PChar->GetMJob());
 
-                PChar->pushPacket<CCharJobsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
@@ -5332,7 +5332,7 @@ namespace charutils
                 PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
                 PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
                 PChar->pushPacket<CCharSyncPacket>(PChar);
-                PChar->pushPacket<CCharStatsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
 
                 luautils::OnPlayerLevelUp(PChar);
                 roeutils::event(ROE_EVENT::ROE_LEVELUP, PChar, RoeDatagramList{});
@@ -5344,7 +5344,7 @@ namespace charutils
         SaveCharStats(PChar);
         SaveCharJob(PChar, PChar->GetMJob());
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket<CCharStatsPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
 
         if (onLimitMode)
         {
@@ -6649,7 +6649,7 @@ namespace charutils
 
             roeutils::UpdateUnityTrust(PChar, true);
 
-            PChar->pushPacket<CCharStatsPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         }
     }
 
@@ -6865,7 +6865,7 @@ namespace charutils
                 // weapon is now broken
                 charutils::BuildingCharWeaponSkills(PChar);
                 PChar->PLatentEffectContainer->CheckLatentsWeaponBreak(slotid);
-                PChar->pushPacket<CCharStatsPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
 

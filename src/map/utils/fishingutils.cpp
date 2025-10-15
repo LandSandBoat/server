@@ -26,20 +26,20 @@
 #include "common/utils.h"
 #include "common/vana_time.h"
 
-#include "packets/caught_fish.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
-#include "packets/fishing.h"
-#include "packets/message_special.h"
-#include "packets/message_standard.h"
-#include "packets/message_system.h"
-#include "packets/message_text.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x027_talknumwork2.h"
+#include "packets/s2c/0x02a_talknumwork.h"
+#include "packets/s2c/0x036_talknum.h"
 #include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x043_talknumname.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x115_fish.h"
 
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -51,6 +51,7 @@
 #include "charutils.h"
 #include "enums/four_cc.h"
 #include "enums/key_items.h"
+#include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
 #include "itemutils.h"
@@ -1433,37 +1434,37 @@ namespace fishingutils
         {
             case FISHINGFAILTYPE_LINESNAP:
                 PChar->animation = ANIMATION_FISHING_LINE_BREAK;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
                 break;
             case FISHINGFAILTYPE_RODBREAK:
                 PChar->animation = ANIMATION_FISHING_ROD_BREAK;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK);
                 break;
             case FISHINGFAILTYPE_RODBREAK_TOOBIG:
                 PChar->animation = ANIMATION_FISHING_ROD_BREAK;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOBIG);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOBIG);
                 break;
             case FISHINGFAILTYPE_RODBREAK_TOOHEAVY:
                 PChar->animation = ANIMATION_FISHING_ROD_BREAK;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOHEAVY);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOHEAVY);
                 break;
             case FISHINGFAILTYPE_LOST_TOOSMALL:
                 PChar->animation = ANIMATION_FISHING_STOP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOSMALL);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOSMALL);
                 break;
             case FISHINGFAILTYPE_LOST_LOWSKILL:
                 PChar->animation = ANIMATION_FISHING_STOP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
                 break;
             case FISHINGFAILTYPE_LOST_TOOBIG:
                 PChar->animation = ANIMATION_FISHING_STOP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOBIG);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOBIG);
                 break;
             case FISHINGFAILTYPE_LOST:
             case FISHINGFAILTYPE_NONE:
             default:
                 PChar->animation = ANIMATION_FISHING_STOP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
                 break;
         }
 
@@ -1476,7 +1477,7 @@ namespace fishingutils
         PChar->animation     = ANIMATION_FISHING_STOP;
         PChar->updatemask |= UPDATE_HP;
 
-        PChar->pushPacket<CMessageTextPacket>(PChar, messageOffset + FISHMESSAGEOFFSET_NOCATCH);
+        PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, messageOffset + FISHMESSAGEOFFSET_NOCATCH);
 
         return 1;
     }
@@ -1496,7 +1497,7 @@ namespace fishingutils
                 ShowError("Invalid ItemID %i for fished item", FishID);
                 PChar->animation = ANIMATION_FISHING_STOP;
                 PChar->updatemask |= UPDATE_HP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
                 return 0;
             }
 
@@ -1511,18 +1512,18 @@ namespace fishingutils
 
             if (Count > 1)
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH_MULTI, Count));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH_MULTI, Count));
             }
             else
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
 
             return 1;
         }
         else
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH_INV_FULL, Count));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH_INV_FULL, Count));
         }
 
         return 0;
@@ -1543,7 +1544,7 @@ namespace fishingutils
                 ShowError("Invalid ItemID %i for fished item", ItemID);
                 PChar->animation = ANIMATION_FISHING_STOP;
                 PChar->updatemask |= UPDATE_HP;
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
                 return 0;
             }
 
@@ -1551,18 +1552,18 @@ namespace fishingutils
 
             if (Count > 1)
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH_MULTI, Count));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH_MULTI, Count));
             }
             else
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
 
             return 1;
         }
         else
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtFishPacket>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH_INV_FULL, Count));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, ItemID, MessageOffset + FISHMESSAGEOFFSET_CATCH_INV_FULL, Count));
         }
 
         return 0;
@@ -1583,7 +1584,7 @@ namespace fishingutils
 
             PChar->animation = ANIMATION_FISHING_STOP;
             PChar->updatemask |= UPDATE_HP;
-            PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+            PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
 
             return 0;
         }
@@ -1640,7 +1641,7 @@ namespace fishingutils
             ShowError("Invalid NpcID %i for fished chest", NpcID);
             PChar->animation = ANIMATION_FISHING_STOP;
             PChar->updatemask |= UPDATE_HP;
-            PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+            PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
             return 0;
         }
 
@@ -1678,28 +1679,28 @@ namespace fishingutils
         switch (response->sense)
         {
             case FISHINGSENSETYPE_GOOD:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_GOOD_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_GOOD_FEELING);
                 break;
             case FISHINGSENSETYPE_BAD:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_BAD_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_BAD_FEELING);
                 break;
             case FISHINGSENSETYPE_TERRIBLE:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_TERRIBLE_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_TERRIBLE_FEELING);
                 break;
             case FISHINGSENSETYPE_NOSKILL_FEELING:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_FEELING);
                 break;
             case FISHINGSENSETYPE_NOSKILL_SURE_FEELING:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_SURE_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_SURE_FEELING);
                 break;
             case FISHINGSENSETYPE_NOSKILL_POSITIVEFEELING:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_POSITIVE_FEELING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_POSITIVE_FEELING);
                 break;
             case FISHINGSENSETYPE_KEEN_ANGLERS_SENSE:
-                PChar->pushPacket<CMessageSpecialPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_KEEN_ANGLERS_SENSE, response->catchid, 3, 3, 3);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PChar, MessageOffset + FISHMESSAGEOFFSET_KEEN_ANGLERS_SENSE, response->catchid, 3, 3, 3);
                 break;
             case FISHINGSENSETYPE_EPIC_CATCH:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_EPIC_CATCH);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_EPIC_CATCH);
                 break;
         }
     }
@@ -1711,13 +1712,13 @@ namespace fishingutils
         switch (response->catchtype)
         {
             case FISHINGCATCHTYPE_SMALLFISH:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_SMALL_FISH);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_SMALL_FISH);
                 break;
             case FISHINGCATCHTYPE_BIGFISH:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_LARGE_FISH);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_LARGE_FISH);
                 break;
             case FISHINGCATCHTYPE_ITEM:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_ITEM);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_ITEM);
                 break;
             case FISHINGCATCHTYPE_MOB:
             {
@@ -1725,7 +1726,7 @@ namespace fishingutils
 
                 if (CanFishMob(PMob))
                 {
-                    PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_MONSTER);
+                    PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_MONSTER);
                 }
                 else
                 {
@@ -1738,7 +1739,7 @@ namespace fishingutils
             }
             break;
             case FISHINGCATCHTYPE_CHEST:
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_ITEM);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_HOOKED_ITEM);
                 break;
         }
         return true;
@@ -1955,7 +1956,7 @@ namespace fishingutils
 
         if (PChar->nextFishTime > vanaTime)
         {
-            PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
+            PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
             PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             return;
         }
@@ -1985,8 +1986,8 @@ namespace fishingutils
             // If in the middle of something else, can't fish
             if (PChar->animation != ANIMATION_NONE)
             {
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
@@ -1998,7 +1999,7 @@ namespace fishingutils
             // If no rod, then can't fish
             if ((Rod == nullptr) || !(Rod->isType(ITEM_WEAPON)) || (Rod->getSkillType() != SKILL_FISHING))
             {
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
@@ -2007,7 +2008,7 @@ namespace fishingutils
             // If no bait, then can't fish
             if ((Bait == nullptr) || !(Bait->isType(ITEM_WEAPON)) || (Bait->getSkillType() != SKILL_FISHING))
             {
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
@@ -2024,13 +2025,13 @@ namespace fishingutils
             }
             else
             {
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             }
         }
         else
         {
-            PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+            PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
             PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
             return;
@@ -2735,7 +2736,7 @@ namespace fishingutils
                     PChar->updatemask |= UPDATE_HP;
                     // send the fishing packet
                     PChar->animation = ANIMATION_FISHING_FISH;
-                    PChar->pushPacket<CFishingPacket>(response->stamina, response->regen, response->response, response->attackdmg, response->delay, response->heal, response->timelimit, response->hooksense, response->special);
+                    PChar->pushPacket<GP_SERV_COMMAND_FISH>(response->stamina, response->regen, response->response, response->attackdmg, response->delay, response->heal, response->timelimit, response->hooksense, response->special);
                 }
                 else
                 {
@@ -2805,7 +2806,7 @@ namespace fishingutils
                     PChar->animation = ANIMATION_FISHING_LINE_BREAK;
                     PChar->updatemask |= UPDATE_HP;
                     BaitLoss(PChar, false, true);
-                    PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
+                    PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
 
                     if (PChar->hookedFish)
                     {
@@ -2818,7 +2819,7 @@ namespace fishingutils
                     PChar->animation = ANIMATION_FISHING_LINE_BREAK;
                     PChar->updatemask |= UPDATE_HP;
                     BaitLoss(PChar, true, true);
-                    PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
+                    PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
 
                     if (PChar->hookedFish)
                     {
@@ -2834,12 +2835,12 @@ namespace fishingutils
 
                     if (PChar->hookedFish && PChar->hookedFish->hooked && BaitLoss(PChar, false, true))
                     {
-                        PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP_BAITLOSS);
+                        PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP_BAITLOSS);
                         PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
                     }
                     else if (PChar->hookedFish && !PChar->hookedFish->hooked)
                     {
-                        PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP);
+                        PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP);
                         PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
                     }
                 }
@@ -2849,7 +2850,7 @@ namespace fishingutils
                     PChar->animation = ANIMATION_FISHING_STOP;
                     PChar->updatemask |= UPDATE_HP;
                     BaitLoss(PChar, false, true);
-                    PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+                    PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
 
                     if (PChar->hookedFish)
                     {
@@ -2862,7 +2863,7 @@ namespace fishingutils
             case GP_CLI_COMMAND_FISHING_2_MODE::RequestPotentialTimeout:
             {
                 // message: "You don't know how much longer you can keep this one on the line..."
-                PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_WARNING);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_WARNING);
                 return;
             }
             break;

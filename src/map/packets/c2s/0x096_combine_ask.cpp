@@ -22,6 +22,7 @@
 #include "0x096_combine_ask.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "trade_container.h"
@@ -116,7 +117,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Cancell);
         }
 
-        PChar->pushPacket<CMessageStandardPacket>(MsgStd::CannotBeProcessed);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::CannotBeProcessed);
         PChar->TradePending.clean();
         PChar->UContainer->Clean();
         return;

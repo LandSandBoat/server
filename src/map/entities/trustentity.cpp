@@ -34,9 +34,9 @@
 #include "enmity_container.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
-#include "packets/char_health.h"
 #include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
+#include "packets/s2c/0x0df_group_attr.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
@@ -80,7 +80,7 @@ void CTrustEntity::PostTick()
             // clang-format off
             PMaster->ForParty([this](auto PMember)
             {
-                static_cast<CCharEntity*>(PMember)->pushPacket<CCharHealthPacket>(this);
+                static_cast<CCharEntity*>(PMember)->pushPacket<GP_SERV_COMMAND_GROUP_ATTR>(this);
             });
             // clang-format on
         }

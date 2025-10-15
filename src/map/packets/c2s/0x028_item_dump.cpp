@@ -22,6 +22,7 @@
 #include "0x028_item_dump.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
@@ -63,7 +64,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
     // Gil cannot be dropped.
     if (Category == LOC_INVENTORY && ItemIndex == 0)
     {
-        PChar->pushPacket<CMessageStandardPacket>(ITEMID::GIL, MsgStd::UnableToThrowAway);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(ITEMID::GIL, MsgStd::UnableToThrowAway);
         return;
     }
 
@@ -92,7 +93,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
         if (slipData != 0)
         {
-            PChar->pushPacket<CMessageStandardPacket>(PItem->getID(), MsgStd::UnableToThrowAway);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PItem->getID(), MsgStd::UnableToThrowAway);
             return;
         }
     }

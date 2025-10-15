@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "enums/item_lockflg.h"
+#include "enums/msg_std.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_linkshell.h"
@@ -78,7 +79,7 @@ namespace
         }
         else
         {
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellUnavailable);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellUnavailable);
         }
     };
 
@@ -104,14 +105,14 @@ namespace
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
 
             return;
         }
 
         if (PItemLinkshell->GetLSID() == 0)
         {
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
 
             return;
         }

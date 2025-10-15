@@ -20,7 +20,7 @@
 */
 
 #include "message_basic.h"
-#include "message_standard.h"
+#include "s2c/0x009_message.h"
 
 #include "entities/baseentity.h"
 

@@ -46,7 +46,7 @@
 #include "mobskill.h"
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
 #include "zone_instance.h"

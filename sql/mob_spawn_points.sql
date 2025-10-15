@@ -51843,18 +51843,18 @@ INSERT INTO `mob_spawn_points` VALUES (17367284,0,'Platoon_Scorpion','Platoon Sc
 INSERT INTO `mob_spawn_points` VALUES (17367285,0,'Platoon_Scorpion','Platoon Scorpion',41,229.224,-61.000,140.946,124);
 
 -- Prehistoric Pigeons
-INSERT INTO `mob_spawn_points` VALUES (17367287,0,'Titanis_Max','Titanis Max',42,-176.000,60.000,-139.000,126);
-INSERT INTO `mob_spawn_points` VALUES (17367288,0,'Titanis_Jax','Titanis Jax',43,-177.000,60.000,-144.000,126);
-INSERT INTO `mob_spawn_points` VALUES (17367289,0,'Titanis_Xax','Titanis Xax',44,-173.000,60.000,-144.000,126);
-INSERT INTO `mob_spawn_points` VALUES (17367290,0,'Titanis_Dax','Titanis Dax',45,-173.000,60.000,-138.000,126);
-INSERT INTO `mob_spawn_points` VALUES (17367292,0,'Titanis_Max','Titanis Max',42,24.274,0.000,20.964,126);
-INSERT INTO `mob_spawn_points` VALUES (17367293,0,'Titanis_Jax','Titanis Jax',43,23.274,0.000,15.964,126);
-INSERT INTO `mob_spawn_points` VALUES (17367294,0,'Titanis_Xax','Titanis Xax',44,27.274,0.000,15.964,126);
-INSERT INTO `mob_spawn_points` VALUES (17367295,0,'Titanis_Dax','Titanis Dax',45,27.274,0.000,21.964,126);
-INSERT INTO `mob_spawn_points` VALUES (17367297,0,'Titanis_Max','Titanis Max',42,224.224,-60.000,140.946,126);
-INSERT INTO `mob_spawn_points` VALUES (17367298,0,'Titanis_Jax','Titanis Jax',43,223.224,-60.000,135.946,126);
-INSERT INTO `mob_spawn_points` VALUES (17367299,0,'Titanis_Xax','Titanis Xax',44,227.224,-60.000,135.946,126);
-INSERT INTO `mob_spawn_points` VALUES (17367300,0,'Titanis_Dax','Titanis Dax',45,227.224,-60.000,141.946,126);
+INSERT INTO `mob_spawn_points` VALUES (17367287,0,'Titanis_Max','Titanis Max',42,-179.358,59.778,-140.518,128);
+INSERT INTO `mob_spawn_points` VALUES (17367288,0,'Titanis_Jax','Titanis Jax',43,-175.358,59.776,-140.518,128);
+INSERT INTO `mob_spawn_points` VALUES (17367289,0,'Titanis_Xax','Titanis Xax',44,-175.358,59.775,-143.518,128);
+INSERT INTO `mob_spawn_points` VALUES (17367290,0,'Titanis_Dax','Titanis Dax',45,-179.358,59.778,-143.518,128);
+INSERT INTO `mob_spawn_points` VALUES (17367292,0,'Titanis_Max','Titanis Max',42,20.5,-0.223,19.4,128);
+INSERT INTO `mob_spawn_points` VALUES (17367293,0,'Titanis_Jax','Titanis Jax',43,24.5,-0.223,19.4,128);
+INSERT INTO `mob_spawn_points` VALUES (17367294,0,'Titanis_Xax','Titanis Xax',44,24.5,-0.223,16.4,128);
+INSERT INTO `mob_spawn_points` VALUES (17367295,0,'Titanis_Dax','Titanis Dax',45,20.5,-0.223,16.4,128);
+INSERT INTO `mob_spawn_points` VALUES (17367297,0,'Titanis_Max','Titanis Max',42,220.65,-60.223,139.5,128);
+INSERT INTO `mob_spawn_points` VALUES (17367298,0,'Titanis_Jax','Titanis Jax',43,224.65,-60.223,139.5,128);
+INSERT INTO `mob_spawn_points` VALUES (17367299,0,'Titanis_Xax','Titanis Xax',44,224.65,-60.223,136.5,128);
+INSERT INTO `mob_spawn_points` VALUES (17367300,0,'Titanis_Dax','Titanis Dax',45,220.65,-60.223,136.5,128);
 
 -- The Palborough Project (KC30)
 INSERT INTO `mob_spawn_points` VALUES (17367302,0,'Mahuika','Mahuika',46,0.000,0.000,0.000,0);

@@ -41,7 +41,7 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/message_basic.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x076_group_effects.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0b4_config.h"
@@ -1148,7 +1148,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
 
                     if (member->status != STATUS_TYPE::DISAPPEAR && member->getZone() == PChar->getZone())
                     {
-                        member->pushPacket<CMessageStandardPacket>(PChar->GetMLevel(), 0, 0, 0, message);
+                        member->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar->GetMLevel(), 0, 0, 0, message);
                         member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0s, 0s), EffectNotice::Silent);
                         member->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(member));

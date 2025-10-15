@@ -10328,10 +10328,10 @@ INSERT INTO `mob_groups` VALUES (38,3068,144,'Osschaarts_Wyvern',0,128,0,0,0,60,
 INSERT INTO `mob_groups` VALUES (39,3066,144,'Osschaarts_Avatar',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (40,3065,144,'Osschaarts_Automaton',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (41,3157,144,'Platoon_Scorpion',0,128,0,4500,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (42,3929,144,'Titanis_Max',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (43,3928,144,'Titanis_Jax',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (44,3930,144,'Titanis_Xax',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (45,3927,144,'Titanis_Dax',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (42,3929,144,'Titanis_Max',0,128,0,6000,0,76,76,0);
+INSERT INTO `mob_groups` VALUES (43,3928,144,'Titanis_Jax',0,128,0,6000,0,76,76,0);
+INSERT INTO `mob_groups` VALUES (44,3930,144,'Titanis_Xax',0,128,0,6000,0,76,76,0);
+INSERT INTO `mob_groups` VALUES (45,3927,144,'Titanis_Dax',0,128,0,6000,0,76,76,0);
 INSERT INTO `mob_groups` VALUES (46,0,144,'Mahuika',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (47,0,144,'Nga_Manawa',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (48,0,144,'VuDhe_Impervious',0,128,0,0,0,0,0,0);

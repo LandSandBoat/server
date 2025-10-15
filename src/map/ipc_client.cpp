@@ -40,9 +40,9 @@
 #include "lua/luautils.h"
 
 #include "packets/chat_message.h"
-#include "packets/linkshell_message.h"
-#include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x053_systemmes.h"
+#include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "packets/server_ip.h"
 
@@ -450,7 +450,7 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
             });
 
             // Interaction was blocked
-            PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+            PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
 
             // You cannot invite that person at this time.
             message::send(ipc::MessageStandard{
@@ -487,7 +487,7 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
     {
         if (message.inviteAnswer == 0)
         {
-            PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::InvitationDeclined);
+            PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::InvitationDeclined);
         }
         else
         {
@@ -675,11 +675,11 @@ void IPCClient::handleMessage_MessageStandard(const IPP& ipp, const ipc::Message
         // This matches messages with just a string parameter.
         if (message.string2.size() > 0 && message.param0 == 0 && message.param1 == 0)
         {
-            PChar->pushPacket(std::make_unique<CMessageStandardPacket>(message.string2, message.message));
+            PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_MESSAGE>(message.string2, message.message));
         }
         else
         {
-            PChar->pushPacket(std::make_unique<CMessageStandardPacket>(PChar, message.param0, message.param1, message.message));
+            PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_MESSAGE>(PChar, message.param0, message.param1, message.message));
         }
     }
 }
@@ -690,7 +690,7 @@ void IPCClient::handleMessage_MessageSystem(const IPP& ipp, const ipc::MessageSy
 
     if (CCharEntity* PChar = zoneutils::GetChar(message.recipientId))
     {
-        PChar->pushPacket(std::make_unique<CMessageStandardPacket>(PChar, message.param0, message.param1, message.message));
+        PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_MESSAGE>(PChar, message.param0, message.param1, message.message));
     }
 }
 
@@ -734,7 +734,7 @@ void IPCClient::handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::Lin
 
     if (CLinkshell* PLinkshell = linkshell::GetLinkshell(message.linkshellId))
     {
-        PLinkshell->PushPacket(0, std::make_unique<CLinkshellMessagePacket>(message.poster, message.message, message.linkshellName, message.postTime, LinkshellSlot::LS1));
+        PLinkshell->PushPacket(0, std::make_unique<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(message.poster, message.message, message.linkshellName, message.postTime, LinkshellSlot::LS1));
     }
 }
 

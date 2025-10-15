@@ -4178,7 +4178,14 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,583);
 INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,584);
 INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,586);
 
--- Next ID : 2064
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,400); -- Triple Attack
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,402); -- Feather Barrier
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,403); -- Stormwind
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,922); -- Blind Vortex
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,923); -- Giga Scream
+INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,924); -- Dread Dive
+
+-- Next ID : 2065
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

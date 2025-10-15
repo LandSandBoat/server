@@ -22,6 +22,7 @@
 #include "0x0ff_myroom_plant_stop.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_flowerpot.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -48,7 +49,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
 
     if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
-        PChar->pushPacket<CMessageStandardPacket>(MyroomPlantItemNo, MsgStd::MoogleDriesPlant);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomPlantItemNo, MsgStd::MoogleDriesPlant);
         PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
         PItem->setDried(true);
 

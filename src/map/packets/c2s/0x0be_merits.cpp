@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_recast.h"
-#include "packets/char_stats.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include "packets/s2c/0x08c_merit.h"
 #include "packets/s2c/0x0ac_command_data.h"
@@ -99,7 +99,7 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     PChar->addHP(PChar->GetMaxHP());
                     PChar->addMP(PChar->GetMaxMP());
                     PChar->pushPacket<CCharStatusPacket>(PChar);
-                    PChar->pushPacket<CCharStatsPacket>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                     PChar->pushPacket<CCharRecastPacket>(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
