@@ -28,7 +28,7 @@
 #include "entities/charentity.h"
 #include "ipc_client.h"
 #include "lua/luautils.h"
-#include "packets/message_basic.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "utils/jailutils.h"
 
 namespace
@@ -65,7 +65,7 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
         return;
     }
 

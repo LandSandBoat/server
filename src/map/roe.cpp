@@ -25,6 +25,7 @@
 #include "lua/luautils.h"
 #include "map_engine.h"
 #include "packets/chat_message.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
@@ -314,7 +315,7 @@ namespace roeutils
                 PChar->m_eminenceCache.activemap.set(recordID);
 
                 PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, recordID, 0, MSGBASIC_ROE_START);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MSGBASIC_ROE_START);
                 charutils::SaveEminenceData(PChar);
                 return true;
             }
@@ -519,7 +520,7 @@ namespace roeutils
 
         if (timedRecordID)
         {
-            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED);
             SetEminenceRecordCompletion(PChar, timedRecordID, false);
         }
     }

@@ -50,6 +50,8 @@ CNpcEntity*              g_PTrigger;  // trigger to start events
 
 namespace zoneutils
 {
+    detail::LazyLoadState lazyLoad;
+
     /************************************************************************
      *                                                                       *
      *  Reaction zones to change the time of day                             *
@@ -852,6 +854,97 @@ namespace zoneutils
 
         LoadZones(zoneIds);
         luautils::InitInteractionGlobal();
+    }
+
+    // Initialize zone loading: immediate (load all now) or lazy (load on-demand)
+    void Initialize(const IPP mapIPP, bool lazyLoading, bool asyncMode)
+    {
+        if (!lazyLoading)
+        {
+            LoadZoneList(mapIPP);
+            return;
+        }
+
+        lazyLoad.enabled   = true;
+        lazyLoad.asyncMode = asyncMode;
+
+        auto zones            = GetZonesAssignedToThisProcess(mapIPP);
+        lazyLoad.managedZones = std::set(zones.begin(), zones.end());
+
+        luautils::InitInteractionGlobal();
+    }
+
+    void ProcessLoadQueue()
+    {
+        TracyZoneScoped;
+
+        if (!lazyLoad.loadQueue.empty())
+        {
+            auto zoneId = lazyLoad.loadQueue.front();
+            lazyLoad.loadQueue.pop();
+            LoadZones({ zoneId });
+        }
+    }
+
+    auto IsLazyLoadingEnabled() -> bool
+    {
+        return lazyLoad.enabled;
+    }
+
+    // Returns all zones managed by this process (ID and name)
+    // - Lazy mode: queries database for zone names
+    // - Immediate mode: uses already-loaded zone objects
+    auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>
+    {
+        std::vector<std::pair<uint16, std::string>> result;
+
+        // Lazy loading enabled: fetch from database
+        if (!lazyLoad.managedZones.empty())
+        {
+            const auto query = fmt::format("SELECT zoneid, name FROM zone_settings WHERE zoneid IN ({})",
+                                           fmt::join(lazyLoad.managedZones, ","));
+            const auto rset  = db::query(query);
+            FOR_DB_MULTIPLE_RESULTS(rset)
+            {
+                result.emplace_back(rset->get<uint16>("zoneid"), rset->get<std::string>("name"));
+            }
+        }
+        // Lazy loading disabled: use loaded zone objects
+        else
+        {
+            for (const auto& [zoneId, zone] : g_PZoneList)
+            {
+                result.emplace_back(zoneId, zone->getName());
+            }
+        }
+
+        return result;
+    }
+
+    auto IsZoneReady(uint16 zoneId) -> bool
+    {
+        // Zone already loaded, or lazy loading disabled (all zones loaded at startup)
+        if (GetZone(zoneId) || !lazyLoad.enabled)
+        {
+            return true;
+        }
+
+        // Zone not managed by this process - caller will handle cross-process
+        if (!lazyLoad.managedZones.contains(zoneId))
+        {
+            return true;
+        }
+
+        // Sync mode: load now
+        if (!lazyLoad.asyncMode)
+        {
+            LoadZones({ zoneId });
+            return true;
+        }
+
+        // Async mode: queue and tell caller to wait
+        lazyLoad.loadQueue.push(zoneId);
+        return false;
     }
 
     /************************************************************************

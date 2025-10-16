@@ -29,7 +29,6 @@
 
 #include "entities/charentity.h"
 #include "packets/entity_update.h"
-#include "packets/event.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
 

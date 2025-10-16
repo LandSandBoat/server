@@ -40,8 +40,6 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "ai/ai_container.h"
 #include "ai/states/inactive_state.h"
 
-#include "packets/message_basic.h"
-
 #include "enmity_container.h"
 #include "entities/automatonentity.h"
 #include "entities/battleentity.h"
@@ -54,6 +52,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 #include "enums/msg_std.h"
 #include "map_engine.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -626,7 +625,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, Ef
             {
                 if (notice != EffectNotice::Silent && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
                 {
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
                 }
             }
 
@@ -639,7 +638,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, Ef
         {
             if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && (!(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE))) && !m_POwner->isDead())
             {
-                m_POwner->loc.zone->PushPacket(m_POwner, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff));
+                m_POwner->loc.zone->PushPacket(m_POwner, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff));
             }
         }
     }

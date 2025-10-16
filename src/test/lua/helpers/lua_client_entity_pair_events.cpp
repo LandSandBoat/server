@@ -23,6 +23,7 @@
 
 #include "common/logging.h"
 #include "common/lua.h"
+#include "enums/packet_c2s.h"
 #include "lua/helpers/lua_client_entity_pair_packets.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
@@ -63,7 +64,7 @@ void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, 
         return;
     }
 
-    const auto packet      = parent_->packets().createPacket(0x5B);
+    const auto packet      = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_EVENTEND);
     auto*      eventPacket = packet->as<GP_CLI_COMMAND_EVENTEND>();
 
     eventPacket->EndPara   = option.value_or(0);
@@ -150,7 +151,6 @@ void CLuaClientEntityPairEvents::expect(sol::table expectedEvent) const
     {
         if (const CLuaSimulation* simulation = parent_->simulation())
         {
-            simulation->skipTime(1);
             simulation->tick();
         }
 

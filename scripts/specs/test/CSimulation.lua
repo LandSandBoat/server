@@ -18,11 +18,6 @@ local CSimulation = {}
 function CSimulation:spawnPlayer(params)
 end
 
----@param zoneIds ...integer?
----@return nil
-function CSimulation:loadZone(zoneIds)
-end
-
 ---@param ... xi.tick? Task boundary types to advance to. Defaults to xi.tick.ZONE if none provided.
 ---@return nil
 function CSimulation:tick(...)

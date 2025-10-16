@@ -21,6 +21,7 @@
 
 #include "lua_simulation.h"
 #include "common/vana_time.h"
+#include "enums/packet_c2s.h"
 #include "enums/tick_type.h"
 #include "helpers/lua_client_entity_pair_packets.h"
 #include "in_memory_sink.h"
@@ -67,26 +68,6 @@ CLuaSimulation::CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMe
 : engine_{ _mapServer }
 , sink_{ _sink }
 {
-}
-
-/************************************************************************
- *  Function: loadZone()
- *  Purpose : Force load of zones.
- *  Example : sim:loadZone(xi.zone.RABAO, xi.zone.MHAURA)
- *  Notes   : Only required when events teleport to zones that are not currently loaded.
- ************************************************************************/
-
-void CLuaSimulation::loadZone(sol::variadic_args va) const
-{
-    std::vector<uint16> zoneIds;
-    for (auto&& zoneId : va)
-    {
-        auto zoneIdNum = zoneId.as<uint16>();
-        ShowInfoFmt("Loading zone ID: {}", zoneIdNum);
-        zoneIds.push_back(zoneIdNum);
-    }
-
-    zoneutils::LoadZones(zoneIds);
 }
 
 void CLuaSimulation::cleanClients(std::optional<ClientScope> scope)
@@ -463,8 +444,6 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
 
     ShowInfoFmt("Spawning player in zone: {}", zoneId);
 
-    // Load the zone
-    zoneutils::LoadZones({ zoneId });
     auto testChar = TestChar::create(zoneId);
 
     if (!testChar)
@@ -498,8 +477,6 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
         db::preparedStmt("UPDATE chars SET playtime = 60 WHERE charid = ?", testChar->charId());
     }
 
-    testChar->setEntity(charutils::LoadChar(testChar->charId()));
-
     // Create client wrapper and track setup context
     ClientInfo info{
         .client = std::make_unique<CLuaClientEntityPair>(std::move(testChar), this, engine_),
@@ -509,12 +486,8 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
 
     auto* player = clients_.back().client.get();
 
-    // Send login packet
-    const auto packet = player->packets().createPacket(0x0A);
-    auto*      login  = packet->as<GP_CLI_COMMAND_LOGIN>();
-    login->UniqueNo   = player->getID();
-    player->packets().sendBasicPacket(*packet);
-    skipTime(3); // ZoningIn localvar is cleared up after 2500ms
+    // Complete zone-in sequence
+    player->packets().sendZonePackets();
 
     if (job.has_value())
     {
@@ -544,7 +517,6 @@ void CLuaSimulation::Register()
     SOL_REGISTER("setVanaDay", CLuaSimulation::setVanaDay);
     SOL_REGISTER("skipToNextVanaDay", CLuaSimulation::skipToNextVanaDay);
     SOL_REGISTER("setRegionOwner", CLuaSimulation::setRegionOwner);
-    SOL_REGISTER("loadZone", CLuaSimulation::loadZone);
     SOL_REGISTER("setSeed", CLuaSimulation::setSeed);
     SOL_REGISTER("seed", CLuaSimulation::seed);
     SOL_REGISTER("spawnPlayer", CLuaSimulation::spawnPlayer);

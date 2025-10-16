@@ -4,6 +4,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x008_enterzone.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_item_max.h
@@ -25,6 +27,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x025_item_trade_mylist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02d_battle_message2.h
@@ -37,8 +41,12 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x030_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x030_effect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x032_event.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x032_event.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x034_eventnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x034_eventnum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x036_talknum.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x036_talknum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x038_schedulor.h
@@ -182,6 +190,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h

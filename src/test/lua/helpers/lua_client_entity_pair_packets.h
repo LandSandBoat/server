@@ -25,6 +25,7 @@
 #include <memory>
 #include <sol/sol.hpp>
 
+enum class PacketC2S : uint16_t;
 class CBasicPacket;
 class CLuaClientEntityPair;
 class CLuaClientEntityPairPackets
@@ -33,9 +34,9 @@ public:
     CLuaClientEntityPairPackets(CLuaClientEntityPair* parent);
     ~CLuaClientEntityPairPackets() = default;
 
-    auto createPacket(uint16 packetType) -> std::unique_ptr<CBasicPacket>;
+    auto createPacket(PacketC2S packetType) -> std::unique_ptr<CBasicPacket>;
     void sendBasicPacket(CBasicPacket& packet) const;
-    void send(uint16 packetId, const sol::object& ffiData, size_t ffiSize);
+    void send(PacketC2S packetId, const sol::object& ffiData, size_t ffiSize);
     void sendZonePackets();
 
     void parseIncoming();

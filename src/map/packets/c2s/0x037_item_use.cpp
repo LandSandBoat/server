@@ -23,7 +23,7 @@
 
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
-#include "packets/message_basic.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "universal_container.h"
 
 namespace
@@ -63,7 +63,7 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     // TODO: Test more items
     if (distance(PChar->loc.p, PEntity->loc.p) > 12.0f)
     {
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PEntity, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PEntity, 0, 0, MSGBASIC_TOO_FAR_AWAY);
         return;
     }
 
@@ -74,6 +74,6 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     }
     else
     {
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_ITEM);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_ITEM);
     }
 }

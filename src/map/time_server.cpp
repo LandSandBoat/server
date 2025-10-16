@@ -169,6 +169,7 @@ int32 time_server(timer::time_point tick, CTaskManager::CTask* PTask)
     CTriggerHandler::getInstance()->triggerTimer();
     CTransportHandler::getInstance()->TransportTimer();
     instanceutils::CheckInstance();
+    zoneutils::ProcessLoadQueue();
     luautils::OnTimeServerTick();
     luautils::TryReloadFilewatchList();
     moduleutils::OnTimeServerTick();

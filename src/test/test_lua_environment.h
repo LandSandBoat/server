@@ -28,7 +28,6 @@ public:
     explicit TestLuaEnvironment(MockManager* mockManager);
 
 private:
-    void         initInteractionGlobal() const;
     void         registerCoreLuaBindings() const;
     void         registerTestSpecificFunctions() const;
     MockManager* mockManager_;

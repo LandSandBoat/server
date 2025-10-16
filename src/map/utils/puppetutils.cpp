@@ -28,7 +28,7 @@
 #include "job_points.h"
 #include "lua/luautils.h"
 #include "packets/char_job_extra.h"
-#include "packets/message_basic.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "petutils.h"
 #include "status_effect_container.h"
 #include "zoneutils.h"
@@ -592,7 +592,7 @@ namespace puppetutils
                 }
 
                 PChar->RealSkills.skill[SkillID] += SkillAmount;
-                PChar->pushPacket<CMessageBasicPacket>(PAutomaton, PAutomaton, SkillID, SkillAmount, 38);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, SkillAmount, static_cast<MSGBASIC_ID>(38));
 
                 if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
                 {
@@ -609,7 +609,7 @@ namespace puppetutils
                         PAutomaton->WorkingSkills.dark            = amaSkill;
                     }
                     PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
-                    PChar->pushPacket<CMessageBasicPacket>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, 53);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, static_cast<MSGBASIC_ID>(53));
                 }
                 charutils::SaveCharSkills(PChar, SkillID);
             }

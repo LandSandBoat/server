@@ -31,7 +31,6 @@
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
-#include "packets/message_basic.h"
 #include "states/state.h"
 
 class CBaseEntity;

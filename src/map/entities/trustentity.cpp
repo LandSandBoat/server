@@ -36,6 +36,7 @@
 #include "mob_spell_list.h"
 #include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x0df_group_attr.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
@@ -413,7 +414,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // shadows took damage
         actionTarget.messageID = 0;
         actionTarget.reaction  = REACTION::EVADE;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
+        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)

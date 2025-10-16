@@ -298,10 +298,10 @@ void MapEngine::do_init()
         ShowInfo("./losmeshes/ directory isn't present or is empty");
     }
 
+    zoneutils::Initialize(mapIPP, engineConfig_.lazyZones, !engineConfig_.isTestServer);
+
     if (!engineConfig_.lazyZones)
     {
-        ShowInfo("do_init: loading zones");
-        zoneutils::LoadZoneList(mapIPP);
         instanceutils::LoadInstanceList(mapIPP);
         CTransportHandler::getInstance()->InitializeTransport(mapIPP);
     }

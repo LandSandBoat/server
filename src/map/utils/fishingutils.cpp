@@ -58,6 +58,7 @@
 #include "map_engine.h"
 #include "mob_modifier.h"
 #include "packets/c2s/0x110_fishing_2.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "status_effect_container.h"
 #include "zoneutils.h"
 
@@ -1881,7 +1882,7 @@ namespace fishingutils
             if (skillAmount > 0)
             {
                 PChar->RealSkills.skill[SKILL_FISHING] += skillAmount;
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, SKILL_FISHING, skillAmount, 38);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, static_cast<MSGBASIC_ID>(38));
 
                 if ((charSkill / 10) < (charSkill + skillAmount) / 10)
                 {
@@ -1893,7 +1894,7 @@ namespace fishingutils
                     }
 
                     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, 53);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, static_cast<MSGBASIC_ID>(53));
                 }
 
                 charutils::SaveCharSkills(PChar, SKILL_FISHING);

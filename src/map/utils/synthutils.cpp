@@ -30,7 +30,6 @@
 #include "entities/battleentity.h"
 
 #include "packets/char_status.h"
-#include "packets/message_basic.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
@@ -47,6 +46,7 @@
 #include "enums/synthesis_effect.h"
 #include "enums/synthesis_result.h"
 #include "itemutils.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x030_effect.h"
 #include "packets/s2c/0x06f_combine_ans.h"
 #include "packets/s2c/0x070_combine_inf.h"
@@ -589,11 +589,11 @@ namespace synthutils
                 case 3: // 1 in 4
                     chanceHQ = 25.0f;
                     break;
-                case 2: // 1 in 20
-                    chanceHQ = 5.0f;
+                case 2: // 1 in 16
+                    chanceHQ = 6.25f;
                     break;
-                case 1: // 1 in 100
-                    chanceHQ = 1.0f;
+                case 1: // 1 in 64
+                    chanceHQ = 1.5625f;
                     break;
                 default: // No chance
                     chanceHQ = 0.0f;
@@ -853,7 +853,7 @@ namespace synthutils
 
             // Skill Up addition:
             PChar->RealSkills.skill[skillID] += skillUpAmount;
-            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, skillUpAmount, 38);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, skillUpAmount, static_cast<MSGBASIC_ID>(38));
 
             if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
             {
@@ -865,7 +865,7 @@ namespace synthutils
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, static_cast<MSGBASIC_ID>(53));
             }
 
             charutils::SaveCharSkills(PChar, skillID);
@@ -874,13 +874,13 @@ namespace synthutils
             if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
             {
                 PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, skillUpAmount, 310);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, skillUpAmount, static_cast<MSGBASIC_ID>(310));
 
                 if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
                 {
                     PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, static_cast<MSGBASIC_ID>(53));
                 }
 
                 charutils::SaveCharSkills(PChar, skillHighest);

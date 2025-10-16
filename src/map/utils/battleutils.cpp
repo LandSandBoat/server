@@ -32,7 +32,6 @@
 #include <unordered_map>
 
 #include "packets/char_status.h"
-#include "packets/message_basic.h"
 #include "packets/s2c/0x01d_item_same.h"
 
 #include "lua/luautils.h"
@@ -63,11 +62,12 @@
 #include "modifier.h"
 #include "navmesh.h"
 #include "notoriety_container.h"
-#include "packets/char_recast.h"
 #include "packets/pet_sync.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x058_assist.h"
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x0ac_command_data.h"
+#include "packets/s2c/0x119_abil_recast.h"
 #include "party.h"
 #include "petskill.h"
 #include "recast_container.h"
@@ -5700,7 +5700,7 @@ namespace battleutils
             {
                 // draw in!
                 PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(PTarget, nearEntity));
-                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(PTarget, PTarget, 0, 0, 232));
+                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, 0, static_cast<MSGBASIC_ID>(232)));
             }
         }
     }
@@ -5868,7 +5868,7 @@ namespace battleutils
                     if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                     {
                         // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
-                        PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
+                        PCharTarget->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PCharTarget);
                     }
                 }
                 return true;
@@ -5899,7 +5899,7 @@ namespace battleutils
                 if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                 {
                     // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
-                    PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
+                    PCharTarget->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PCharTarget);
                 }
             }
 
@@ -6936,5 +6936,54 @@ namespace battleutils
             }
         }
         return 1.0;
+    }
+
+    void addEcosystemKillerEffects(CBattleEntity* PBattleEntity)
+    {
+        // Killer Effect
+        switch (PBattleEntity->m_EcoSystem)
+        {
+            case ECOSYSTEM::AMORPH:
+                PBattleEntity->addModifier(Mod::BIRD_KILLER, 5);
+                break;
+            case ECOSYSTEM::AQUAN:
+                PBattleEntity->addModifier(Mod::AMORPH_KILLER, 5);
+                break;
+            case ECOSYSTEM::ARCANA:
+                PBattleEntity->addModifier(Mod::UNDEAD_KILLER, 5);
+                break;
+            case ECOSYSTEM::BEAST:
+                PBattleEntity->addModifier(Mod::LIZARD_KILLER, 5);
+                break;
+            case ECOSYSTEM::BIRD:
+                PBattleEntity->addModifier(Mod::AQUAN_KILLER, 5);
+                break;
+            case ECOSYSTEM::DEMON:
+                PBattleEntity->addModifier(Mod::DRAGON_KILLER, 5);
+                break;
+            case ECOSYSTEM::DRAGON:
+                PBattleEntity->addModifier(Mod::DEMON_KILLER, 5);
+                break;
+            case ECOSYSTEM::LIZARD:
+                PBattleEntity->addModifier(Mod::VERMIN_KILLER, 5);
+                break;
+            case ECOSYSTEM::LUMINION:
+                PBattleEntity->addModifier(Mod::LUMINIAN_KILLER, 5);
+                break;
+            case ECOSYSTEM::LUMINIAN:
+                PBattleEntity->addModifier(Mod::LUMINION_KILLER, 5);
+                break;
+            case ECOSYSTEM::PLANTOID:
+                PBattleEntity->addModifier(Mod::BEAST_KILLER, 5);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                PBattleEntity->addModifier(Mod::ARCANA_KILLER, 5);
+                break;
+            case ECOSYSTEM::VERMIN:
+                PBattleEntity->addModifier(Mod::PLANTOID_KILLER, 5);
+                break;
+            default:
+                break;
+        }
     }
 }; // namespace battleutils

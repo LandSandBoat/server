@@ -59,6 +59,7 @@ zones[xi.zone.QUBIA_ARENA] =
         ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
         CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
         DOLL_FACTORY             = GetFirstID('Doll_Factory'),
+        FIRE_POT                 = GetFirstID('Fire_Pot'),
         GHUL_I_BEABAN            = GetFirstID('Ghul-I-Beaban'),
         GLADIATORIAL_WEAPON      = GetFirstID('Gladiatorial_Weapon'),
         MAAT                     = GetFirstID('Maat'),

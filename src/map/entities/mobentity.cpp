@@ -46,6 +46,7 @@
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -1253,11 +1254,11 @@ void CMobEntity::Die()
         {
             if (PLastAttacker)
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
             }
 
             DistributeRewards();

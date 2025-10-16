@@ -45,28 +45,6 @@ TestLuaEnvironment::TestLuaEnvironment(MockManager* mockManager)
 
     registerCoreLuaBindings();
     registerTestSpecificFunctions();
-    initInteractionGlobal();
-}
-
-// Load IF handlers through the alternative entrypoint
-void TestLuaEnvironment::initInteractionGlobal() const
-{
-    auto       initZones   = lua["InteractionGlobal"]["initZonesTest"];
-    sol::table zoneMapping = lua.create_table();
-
-    const auto rset = db::preparedStmt("SELECT zoneid, name FROM zone_settings");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        auto zoneId         = rset->get<uint16>("zoneid");
-        auto zoneName       = rset->get<std::string>("name");
-        zoneMapping[zoneId] = zoneName;
-    }
-
-    if (const auto result = initZones(zoneMapping); !result.valid())
-    {
-        const sol::error err = result;
-        ShowErrorFmt("luautils::InitInteractionGlobal: {}", err.what());
-    }
 }
 
 // Register core Lua bindings needed for tests

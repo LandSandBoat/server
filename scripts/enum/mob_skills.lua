@@ -44,6 +44,12 @@ xi.mobSkill =
 
     VELOCIOUS_BLADE          =  347, -- Mammet-800
 
+    HEAVY_BLOW               =  357,
+    HEAVY_WHISK              =  358,
+    BIONIC_BOOST             =  359,
+    FLYING_HIP_PRESS         =  360,
+    EARTH_SHOCK              =  361,
+
     SMITE_OF_FURY            =  396,
     FLURRY_OF_RAGE           =  397,
     WHISPERS_OF_IRE          =  398,
@@ -90,6 +96,7 @@ xi.mobSkill =
     CRYSTAL_WEAPON_FIRE      =  679, -- Zipacna Weapon Start
     CRYSTAL_WEAPON_WATER     =  682, -- Zipacna Weapon End
 
+    MIGHTY_STRIKES_1         =  688,
     BENEDICTION_1            =  689, -- Season's Greetings KSNM 30 (Gilagoge Tlugvi)
     HUNDRED_FISTS_1          =  690, -- Season's Greetings KSNM 30 (Goga Tlugvi)
 
@@ -238,6 +245,8 @@ xi.mobSkill =
 
     LAVA_SPIT                = 1785,
     GATES_OF_HADES           = 1790,
+
+    VAMPIRIC_ROOT            = 1793,
 
     XENOGLOSSIA              = 1823, -- Unique entry.
 

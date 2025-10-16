@@ -31,8 +31,8 @@
 #include "ipc_client.h"
 #include "linkshell.h"
 #include "packets/chat_message.h"
-#include "packets/message_basic.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
 #include "unitychat.h"
 #include "utils/jailutils.h"
@@ -154,7 +154,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         }
         else
         {
-            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_IN_THIS_AREA);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_IN_THIS_AREA);
         }
 
         return;
@@ -255,7 +255,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
             {
                 if (isYellBanned)
                 {
-                    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
                 }
                 else if (!isInYellCooldown)
                 {

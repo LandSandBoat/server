@@ -100,11 +100,6 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
 
     ShowInfoFmt("Player {} zoning to zone ID: {}", testChar_->entity()->getName(), zoneId);
 
-    if (zoneutils::GetZone(zoneId) == nullptr)
-    {
-        zoneutils::LoadZones({ zoneId });
-    }
-
     // SendToZone _only_ prepares the character for zoning.
     testChar_->entity()->loc.destination = zoneId;
     testChar_->entity()->status          = STATUS_TYPE::DISAPPEAR;

@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "entities/battleentity.h"
 #include "packets/action.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
@@ -36,7 +37,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     auto* skill = battleutils::GetWeaponSkill(wsid);
     if (!skill)
     {
-        throw CStateInitException(std::make_unique<CMessageBasicPacket>(PEntity, PEntity, 0, 0, MSGBASIC_CANNOT_USE_WS));
+        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PEntity, PEntity, 0, 0, MSGBASIC_CANNOT_USE_WS));
     }
 
     auto  target_flags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
@@ -56,7 +57,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
 
     if (!m_PEntity->CanSeeTarget(PTarget, false))
     {
-        throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION));
+        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION));
     }
 
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);

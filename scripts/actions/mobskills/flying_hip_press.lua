@@ -5,7 +5,6 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 15' radial
 -----------------------------------
-
 ---@type TMobSkill
 local mobskillObject = {}
 
@@ -14,25 +13,20 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local params = {}
+    local fTP = 2.0
 
-    params.percentMultipier  = 0.333
-    params.element           = xi.element.WIND
-    params.damageCap         = 300
-    params.bonusDamage       = 0
-    params.mAccuracyBonus    = { 0, 0, 0 }
-    params.resistStat        = xi.mod.INT
+    if mob:getPool() == xi.mobPools.BUGBOY then
+        fTP = 7.0
+    end
 
     if mob:getPool() == xi.mobPools.BUGBEAR_MATMAN then
-        params.damageCap = math.random(300, 700)
+        fTP = 10.0
     end
 
-    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.WIND, fTP, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
-        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WIND)
-    end
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
 
     return damage
 end

@@ -27,9 +27,11 @@
 #include "common/timer.h"
 
 #include "map_constants.h"
+#include "packets/s2c/0x00b_logout.h"
 
 #include <array>
 
+enum class GP_GAME_LOGOUT_STATE : uint8_t;
 class CCharEntity;
 
 struct MapSession
@@ -51,8 +53,8 @@ struct MapSession
     blowfish_t prev_blowfish = {};
 
     // Used to resend 0x00B zoneout packet in case the client needs it
-    uint8 zone_type = 0;
-    IPP   zone_ipp  = {};
+    GP_GAME_LOGOUT_STATE zone_type = GP_GAME_LOGOUT_STATE::NONE;
+    IPP                  zone_ipp  = {};
 
     void incrementBlowfish();
     void initBlowfish();

@@ -30,9 +30,6 @@ m:addOverride('xi.server.onServerStart', function()
         { xi.battlefield.id.FLAMES_FOR_THE_DEAD,                  60 },
         { xi.battlefield.id.CENTURY_OF_HARDSHIP,                  60 },
 
-        -- Level 65 Battlefields
-        { xi.battlefield.id.CELESTIAL_NEXUS,                      65 },
-
         -- Level 75 Battlefields
         { xi.battlefield.id.WARRIORS_PATH,                        75 },
         { xi.battlefield.id.WHEN_ANGELS_FALL,                     75 },

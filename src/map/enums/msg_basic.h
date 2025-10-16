@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMESSAGEBASICPACKET_H
-#define _CMESSAGEBASICPACKET_H
-
-#include "common/cbasetypes.h"
-
-#include "s2c/0x009_message.h"
-
-#include "basic.h"
+#pragma once
 
 /*
  * This contains a list of message IDs for this type of packet. They should be used
@@ -35,7 +28,7 @@
  */
 
 // Todo: move to enum class
-enum MSGBASIC_ID : uint16
+enum MSGBASIC_ID : uint16_t
 {
     MSGBASIC_NONE                       = 0,   // Display nothing
     MSGBASIC_TARG_OUT_OF_RANGE          = 4,   // <target> is out of range.
@@ -178,16 +171,3 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_AUTO_EXCEEDS_CAPACITY      = 745, // Your automaton exceeds one or more elemental capacity values and cannot be activated.
     MSGBASIC_MOUNT_REQUIRED_LEVEL       = 773, // You are unable to call forth your mount because your main job level is not at least <level>.
 };
-
-class CBaseEntity;
-
-class CMessageBasicPacket : public CBasicPacket
-{
-public:
-    // TODO: Replace uint16 with MsgStd version
-    CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, uint16 messageID);
-    CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, MsgStd messageID);
-    uint16 getMessageID();
-};
-
-#endif

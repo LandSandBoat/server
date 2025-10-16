@@ -1904,7 +1904,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
 
         if (PChar->requestedZoneChange || PChar->requestedWarp || PChar->status == STATUS_TYPE::SHUTDOWN)
         {
-            m_charsToChangeZone.emplace_back(PChar);
+            m_charsToChangeZone.insert(PChar);
         }
     }
 
@@ -1952,11 +1952,11 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
         }
     }
 
-    // Change player's zone (teleports, etc)
-    for (auto* PChar : m_charsToChangeZone)
+    // Process players waiting to zone.
+    // If lazy loading a zone, the players may get processed on the next tick.
+    // clang-format off
+    std::erase_if(m_charsToChangeZone, [](auto* PChar)
     {
-        PChar->clearPacketList();
-
         auto ipp = zoneutils::GetZoneIPP(PChar->loc.destination);
 
         // This is already checked in CLueBaseEntity::setPos, but better to have a check...
@@ -1965,24 +1965,39 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
         if (ipp == 0 && PChar->status != STATUS_TYPE::SHUTDOWN)
         {
             ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, PChar->loc.destination));
-            continue;
+            return true;
         }
 
         if (PChar->status == STATUS_TYPE::SHUTDOWN)
         {
+            PChar->clearPacketList();
             charutils::ForceLogout(PChar);
         }
         else if (PChar->requestedWarp)
         {
-            charutils::HomePoint(PChar, false);
+            if (!zoneutils::IsZoneReady(PChar->profile.home_point.destination))
+            {
+                return false;
+            }
+
+            PChar->clearPacketList();
+            charutils::HomePoint(PChar, PChar->isDead());
         }
         else if (PChar->loc.destination != 0xFFFF)
         {
+            if (!zoneutils::IsZoneReady(PChar->loc.destination))
+            {
+                return false;
+            }
+
+            PChar->clearPacketList();
             charutils::SendToZone(PChar, PChar->loc.destination);
         }
 
         charutils::removeCharFromZone(PChar);
-    }
+        return true;
+    });
+    // clang-format on
 
     if (tick > m_EffectCheckTime)
     {
@@ -2060,7 +2075,6 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
     m_petsToDelete.clear();
     m_trustsToDelete.clear();
     m_aggroableMobs.clear();
-    m_charsToChangeZone.clear();
 }
 
 CZone* CZoneEntities::GetZone()

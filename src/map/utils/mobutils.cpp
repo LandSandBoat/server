@@ -1376,51 +1376,7 @@ namespace mobutils
         PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
         PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
 
-        // Killer Effect
-        switch (PMob->m_EcoSystem)
-        {
-            case ECOSYSTEM::AMORPH:
-                PMob->addModifier(Mod::BIRD_KILLER, 5);
-                break;
-            case ECOSYSTEM::AQUAN:
-                PMob->addModifier(Mod::AMORPH_KILLER, 5);
-                break;
-            case ECOSYSTEM::ARCANA:
-                PMob->addModifier(Mod::UNDEAD_KILLER, 5);
-                break;
-            case ECOSYSTEM::BEAST:
-                PMob->addModifier(Mod::LIZARD_KILLER, 5);
-                break;
-            case ECOSYSTEM::BIRD:
-                PMob->addModifier(Mod::AQUAN_KILLER, 5);
-                break;
-            case ECOSYSTEM::DEMON:
-                PMob->addModifier(Mod::DRAGON_KILLER, 5);
-                break;
-            case ECOSYSTEM::DRAGON:
-                PMob->addModifier(Mod::DEMON_KILLER, 5);
-                break;
-            case ECOSYSTEM::LIZARD:
-                PMob->addModifier(Mod::VERMIN_KILLER, 5);
-                break;
-            case ECOSYSTEM::LUMINION:
-                PMob->addModifier(Mod::LUMINIAN_KILLER, 5);
-                break;
-            case ECOSYSTEM::LUMINIAN:
-                PMob->addModifier(Mod::LUMINION_KILLER, 5);
-                break;
-            case ECOSYSTEM::PLANTOID:
-                PMob->addModifier(Mod::BEAST_KILLER, 5);
-                break;
-            case ECOSYSTEM::UNDEAD:
-                PMob->addModifier(Mod::ARCANA_KILLER, 5);
-                break;
-            case ECOSYSTEM::VERMIN:
-                PMob->addModifier(Mod::PLANTOID_KILLER, 5);
-                break;
-            default:
-                break;
-        }
+        battleutils::addEcosystemKillerEffects(PMob);
 
         if (PMob->m_maxLevel == 0 && PMob->m_minLevel == 0)
         {

@@ -124,7 +124,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
                 PChar->status          = STATUS_TYPE::DISAPPEAR;
 
                 PChar->clearPacketList();
-                charutils::SendToZone(PChar, zoneid);
+                PChar->requestedZoneChange = true;
             }
         }
         break;

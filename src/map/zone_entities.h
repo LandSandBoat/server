@@ -133,10 +133,10 @@ private:
     // Intermediate collections for use inside ZoneServer
     //
 
-    std::vector<CMobEntity*>   m_mobsToDelete;
-    std::vector<CNpcEntity*>   m_npcsToDelete;
-    std::vector<CPetEntity*>   m_petsToDelete;
-    std::vector<CTrustEntity*> m_trustsToDelete;
-    std::vector<CMobEntity*>   m_aggroableMobs;
-    std::vector<CCharEntity*>  m_charsToChangeZone;
+    std::vector<CMobEntity*>         m_mobsToDelete;
+    std::vector<CNpcEntity*>         m_npcsToDelete;
+    std::vector<CPetEntity*>         m_petsToDelete;
+    std::vector<CTrustEntity*>       m_trustsToDelete;
+    std::vector<CMobEntity*>         m_aggroableMobs;
+    std::unordered_set<CCharEntity*> m_charsToChangeZone;
 };

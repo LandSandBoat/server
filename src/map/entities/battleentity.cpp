@@ -42,6 +42,7 @@
 #include "mob_modifier.h"
 #include "notoriety_container.h"
 #include "packets/action.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -2094,7 +2095,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         {
             actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
 
         luautils::OnSpellInterrupted(this, PSpell);

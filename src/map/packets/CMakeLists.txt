@@ -15,8 +15,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.cpp
@@ -33,8 +31,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/event.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/event.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
@@ -47,8 +43,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.cpp
@@ -57,8 +51,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp

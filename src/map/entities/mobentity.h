@@ -25,6 +25,7 @@
 #include "battleentity.h"
 #include <unordered_map>
 
+enum MSGBASIC_ID : uint16_t;
 // forward declaration
 class CMobSpellContainer;
 class CMobSpellList;

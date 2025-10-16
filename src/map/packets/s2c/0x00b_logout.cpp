@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,22 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _CEVENTPACKET_H
-#define _CEVENTPACKET_H
+#include "0x00b_logout.h"
 
-#include "common/cbasetypes.h"
-#include "event_info.h"
+#include "entities/charentity.h"
 
-#include <string>
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CEventPacket : public CBasicPacket
+GP_SERV_COMMAND_LOGOUT::GP_SERV_COMMAND_LOGOUT(const GP_GAME_LOGOUT_STATE zoneType, const IPP zoneIpp)
 {
-public:
-    CEventPacket(CCharEntity* PChar, EventInfo* eventInfo);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.LogoutState  = zoneType;
+    packet.Iwasaki.ip   = zoneIpp.getIP();
+    packet.Iwasaki.port = zoneIpp.getPort();
+    packet.cliErrCode   = GP_GAME_ECODE::NOERR;
+}

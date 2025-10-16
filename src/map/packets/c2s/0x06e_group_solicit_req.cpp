@@ -24,8 +24,8 @@
 #include "common/ipc_structs.h"
 #include "entities/charentity.h"
 #include "ipc_client.h"
-#include "packets/message_basic.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "status_effect_container.h"
@@ -53,7 +53,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
     if (jailutils::InPrison(PInviter))
     {
         // Initiator is in prison.  Send error message.
-        PInviter->pushPacket<CMessageBasicPacket>(PInviter, PInviter, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
+        PInviter->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PInviter, PInviter, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
         return;
     }
 

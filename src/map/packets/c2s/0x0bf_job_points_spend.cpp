@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "packets/menu_jobpoints.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x08d_job_points.h"
 
 auto GP_CLI_COMMAND_JOB_POINTS_SPEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -40,5 +41,5 @@ void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(MapSession* PSession, CCharEntity*
 
     PChar->pushPacket<CMenuJobPointsPacket>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar, jpType);
-    PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Index, newLevel, MSGBASIC_JOB_POINTS_INCREASE);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Index, newLevel, MSGBASIC_JOB_POINTS_INCREASE);
 }

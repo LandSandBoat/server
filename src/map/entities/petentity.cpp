@@ -41,6 +41,8 @@
 #include "common/utils.h"
 #include "petentity.h"
 
+#include "packets/s2c/0x029_battle_message.h"
+
 CPetEntity::CPetEntity(PET_TYPE petType)
 : CMobEntity()
 , m_PetID(0)
@@ -373,7 +375,7 @@ bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
         auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
         if (PChar && !PChar->IsMobOwner(PTarget))
         {
-            errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
             PAI->Disengage();
             return false;
         }

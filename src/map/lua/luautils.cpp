@@ -1261,17 +1261,16 @@ namespace luautils
 
     void InitInteractionGlobal()
     {
-        auto initZones = lua["InteractionGlobal"]["initZones"];
+        auto       initZones   = lua["InteractionGlobal"]["initZones"];
+        sol::table zoneMapping = lua.create_table();
 
-        std::vector<uint16> zoneIds;
-        // clang-format off
-        zoneutils::ForEachZone([&zoneIds](const CZone* PZone)
+        // Build zoneId -> zoneName map
+        for (const auto& [zoneId, zoneName] : zoneutils::GetManagedZones())
         {
-            zoneIds.emplace_back(PZone->GetID());
-        });
-        // clang-format on
+            zoneMapping[zoneId] = zoneName;
+        }
 
-        const auto result = initZones(zoneIds);
+        const auto result = initZones(zoneMapping);
 
         if (!result.valid())
         {

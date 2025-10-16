@@ -28,6 +28,7 @@
 
 #include "alliance.h"
 #include "baseentity.h"
+#include "enums/msg_basic.h"
 #include "modifier.h"
 #include "party.h"
 #include "trait.h"

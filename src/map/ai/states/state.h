@@ -23,9 +23,9 @@
 #ifndef _CSTATE_H
 #define _CSTATE_H
 
-#include "common/mmo.h"
 #include "common/timer.h"
-#include "packets/message_basic.h"
+#include "entities/baseentity.h"
+#include "packets/basic.h"
 #include <memory>
 
 class CBattleEntity;
