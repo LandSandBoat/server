@@ -275,6 +275,12 @@ xi.mobSkill =
 
     BOREAS_MANTLE            = 1980, -- Unique entry.
 
+    DISMEMBERMENT            = 2070,
+    DIRE_STRAIGHT            = 2071,
+    EARTH_SHATTER            = 2072,
+    SINKER_DRILL             = 2073,
+    DETONATING_GRIP          = 2074,
+
     NOCTURNAL_SERVITUDE      = 2112,
 
     HELLSNAP                 = 2113,
