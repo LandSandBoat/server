@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CCHARJOBEXTRA_H_
-#define _CCHARJOBEXTRA_H_
+#include "0x044_extended_job_blu.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-
-class CCharJobExtraPacket : public CBasicPacket
+GP_SERV_COMMAND_EXTENDED_JOB::BLU::BLU(const CCharEntity* PChar, const bool mjob)
 {
-public:
-    CCharJobExtraPacket(CCharEntity* PChar, bool mjob);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.Job      = JOB_BLU;
+    packet.IsSubJob = !mjob;
+    std::memcpy(packet.SetSpells, &PChar->m_SetBlueSpells, 20);
+}

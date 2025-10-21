@@ -1,5 +1,7 @@
 -----------------------------------
--- Ability: Berserk-ruf
+-- Berserk
+-- Berserk Ability used by Volker. Maybe other humanoids?
+-- Gives Warcry effect instead of Berserk. No defence penalty.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

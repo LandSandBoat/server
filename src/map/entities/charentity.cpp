@@ -77,7 +77,6 @@
 #include "mob_modifier.h"
 #include "modifier.h"
 #include "notoriety_container.h"
-#include "packets/char_job_extra.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_status_icons.h"
 #include "petskill.h"
@@ -1087,8 +1086,7 @@ void CCharEntity::PostTick()
     {
         pushPacket<CCharStatusPacket>(this);
         pushPacket<CCharSyncPacket>(this);
-        pushPacket<CCharJobExtraPacket>(this, true);
-        pushPacket<CCharJobExtraPacket>(this, false);
+        charutils::SendExtendedJobPackets(this);
         pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(this);
         if (PParty)
         {

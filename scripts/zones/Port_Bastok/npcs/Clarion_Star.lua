@@ -17,7 +17,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 437 or csid == 458 then
         local spellID = player:getLocalVar('TradingTrustCipher')
         player:setLocalVar('TradingTrustCipher', 0)
-        player:addSpell(spellID, true, true)
+        player:addSpell(spellID, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, spellID)
         player:tradeComplete()
     end

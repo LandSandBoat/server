@@ -30,11 +30,7 @@ local handleDeath = function(battlefield, mob)
     for mobId = mobIdOffset, mobIdOffset + 2 do
         local mobObj = GetMobByID(mobId)
 
-        if
-            mobObj and
-            mobObj:isSpawned() and
-            not mobObj:isDead()
-        then
+        if mobObj and mobObj:isAlive() then
             return
         end
     end
@@ -47,9 +43,9 @@ content.groups =
     {
         mobIds =
         {
-            { qubiaID.mob.CHAHNAMEEDS_STOMACH     },
-            { qubiaID.mob.CHAHNAMEEDS_STOMACH + 4 },
-            { qubiaID.mob.CHAHNAMEEDS_STOMACH + 8 },
+            { qubiaID.mob.CHAHNAMEEDS_STOMACH      },
+            { qubiaID.mob.CHAHNAMEEDS_STOMACH +  5 },
+            { qubiaID.mob.CHAHNAMEEDS_STOMACH + 10 },
         },
 
         death = handleDeath,
@@ -64,13 +60,13 @@ content.groups =
             },
 
             {
-                qubiaID.mob.CHAHNAMEEDS_STOMACH + 5,
-                qubiaID.mob.CHAHNAMEEDS_STOMACH + 6,
+                qubiaID.mob.CHAHNAMEEDS_STOMACH + 7,
+                qubiaID.mob.CHAHNAMEEDS_STOMACH + 8,
             },
 
             {
-                qubiaID.mob.CHAHNAMEEDS_STOMACH + 9,
-                qubiaID.mob.CHAHNAMEEDS_STOMACH + 10,
+                qubiaID.mob.CHAHNAMEEDS_STOMACH + 11,
+                qubiaID.mob.CHAHNAMEEDS_STOMACH + 12,
             },
         },
 

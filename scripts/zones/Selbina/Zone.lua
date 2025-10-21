@@ -6,13 +6,15 @@ local ID = zones[xi.zone.SELBINA]
 ---@type TZone
 local zoneObject = {}
 
+local piratesChance = 10 -- 10% chance to zone from mhaura/selbina into pirates encounter
+
 zoneObject.onInitialize = function(zone)
     xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
     InitializeFishingContestSystem()
 end
 
 zoneObject.onGameHour = function(zone)
-    SetServerVariable('Selbina_Destination', math.random(1, 100))
+    zone:setLocalVar('piratesVoyageRng', math.random(1, 100))
 end
 
 zoneObject.onZoneTick = function(zone)
@@ -56,10 +58,14 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    if player:hasKeyItem(xi.ki.FERRY_TICKET) then
-        player:startEvent(200)
-    else
-        player:setPos(32.500, -2.500, -45.500, 192)
+    -- TODO don't double fire transport events (a ship "arrives" from normal and pirates zones at the same time and triggers a transport event)
+    if not player:isInEvent() then
+        if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+            player:startEvent(200)
+        else
+            -- TODO find rejection event, as this method doesn't cleanly boot from the boat and if you were inside the ship, the game client keeps it rendered
+            player:setPos(32.500, -2.500, -45.500, 192)
+        end
     end
 end
 
@@ -68,7 +74,8 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 200 then
-        if GetServerVariable('Selbina_Destination') > 89 then
+        local currZone = player:getZone()
+        if currZone and currZone:getLocalVar('piratesVoyageRng') <= piratesChance then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)

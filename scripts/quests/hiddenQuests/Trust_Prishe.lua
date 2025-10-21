@@ -70,7 +70,7 @@ quest.sections =
             {
                 [633] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
-                        player:addSpell(xi.magic.spell.PRISHE, true, true)
+                        player:addSpell(xi.magic.spell.PRISHE, { silentLog = true })
                         player:messageSpecial(tavnaziaID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.PRISHE)
                     end
                 end,

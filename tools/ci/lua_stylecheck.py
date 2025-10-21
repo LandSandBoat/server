@@ -362,6 +362,13 @@ class LuaStyleCheck:
         if match:
             self.error(":getPool() compared to integer literal (magic number) using a conditional operator is not allowed.")
 
+    def check_getentity_nilsafety(self, line):
+        """Detect direct GetMobByID() or GetNPCByID() calls with method chaining (unsafe)."""
+        # TODO: Add multi-line context aware checks to ensure nil checks
+        match = re.search(r"Get(?:Mob|NPC)ByID\s*\([^)]*\)\s*:", line)
+        if match:
+            self.error("Get(NPC|Mob)ByID():<method>() call without nil check")
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -465,6 +472,7 @@ class LuaStyleCheck:
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
                 self.check_invalid_enum(code_line)
+                self.check_getentity_nilsafety(code_line)
 
                 # TODO: Disabled until a solution for float parameters to math.random() is found
                 # self.check_random_bounds(code_line)

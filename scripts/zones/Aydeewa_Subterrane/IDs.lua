@@ -21,6 +21,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         FISHING_MESSAGE_OFFSET        = 7064, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7335, -- Mining is possible here if you have <item>.
         NO_MORE_SPROUTS               = 7721, -- However, you cannot carry any more sprouts.
+        PW_WHO_DARES                  = 7979, -- Who dares disturb these gates? Pathetic mortal, what foolishness has brought you here? No matter, your fate is now irrevocably sealed. Come now, do not fear. Embrace your death!
         SENSE_OMINOUS_PRESENCE        = 8022, -- You sense an ominous presence...
         BLOOD_STAINS                  = 8028, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 8053, -- Something draws near!
@@ -32,7 +33,9 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         BLUESTREAK_GYUGYUROON = GetFirstID('Bluestreak_Gyugyuroon'),
         CHIGRE                = GetFirstID('Chigre'),
         NOSFERATU             = GetFirstID('Nosferatu'),
-        PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'), -- 2 Copies: +0, +1
+        PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'),
+        PANDEMONIUM_LAMPS     = GetTableOfIDs('Pandemonium_Lamp'),
+        -- PANDEMONIUM_AVATARS   = GetTableOfIDs('Pandemonium_Lamp_Avatar'), -- For use when main PW lua gets converted
     },
     npc =
     {

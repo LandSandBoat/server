@@ -76,6 +76,7 @@ namespace charutils
     void SendKeyItems(CCharEntity* PChar);
     void SendInventory(CCharEntity* PChar);
     void SendUnityPackets(CCharEntity* PChar);
+    void SendExtendedJobPackets(CCharEntity* PChar);
 
     void CalculateStats(CCharEntity* PChar);
     void UpdateSubJob(CCharEntity* PChar);

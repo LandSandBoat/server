@@ -101,7 +101,7 @@ end
 
 xi.geomanticReservoir.onEventFinish = function(player, csid, geoSpell)
     if csid == 15000 then
-        player:addSpell(geoSpell, true, true) -- Quiesce the baked in message from addSpell(), we prefer the one below.
+        player:addSpell(geoSpell, { silentLog = true })
         player:messageSpecial(zones[player:getZoneID()].text.LEARNS_SPELL, geoSpellTable[geoSpell][1])
     end
 end

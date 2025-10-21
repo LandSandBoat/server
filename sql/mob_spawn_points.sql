@@ -15703,7 +15703,7 @@ INSERT INTO `mob_spawn_points` VALUES (17056164,0,'Nosferatu_Murk','Nosferatu Mu
 INSERT INTO `mob_spawn_points` VALUES (17056165,0,'Nosferatu_Murk','Nosferatu Murk',31,-198.800,8.447,-55.136,54);
 INSERT INTO `mob_spawn_points` VALUES (17056166,0,'Nosferatu_Murk','Nosferatu Murk',31,-196.100,8.046,-62.217,180);
 INSERT INTO `mob_spawn_points` VALUES (17056167,0,'Pandemonium_Warden','Pandemonium Warden',32,208.160,33.750,-138.610,90);
-INSERT INTO `mob_spawn_points` VALUES (17056168,0,'Pandemonium_Warden','Pandemonium Warden',32,208.160,33.750,-138.610,90);
+INSERT INTO `mob_spawn_points` VALUES (17056168,0,'Pandemonium_Warden_HNM','Pandemonium Warden',32,208.160,33.750,-138.610,90);
 INSERT INTO `mob_spawn_points` VALUES (17056169,0,'Pandemonium_Lamp','Pandemonium Lamp',33,208.150,33.751,-138.610,90);
 INSERT INTO `mob_spawn_points` VALUES (17056170,0,'Pandemonium_Lamp','Pandemonium Lamp',33,208.150,33.751,-138.610,90);
 INSERT INTO `mob_spawn_points` VALUES (17056171,0,'Pandemonium_Lamp','Pandemonium Lamp',33,208.150,33.751,-138.610,90);
@@ -15712,15 +15712,15 @@ INSERT INTO `mob_spawn_points` VALUES (17056173,0,'Pandemonium_Lamp','Pandemoniu
 INSERT INTO `mob_spawn_points` VALUES (17056174,0,'Pandemonium_Lamp','Pandemonium Lamp',33,208.160,33.750,-138.610,90);
 INSERT INTO `mob_spawn_points` VALUES (17056175,0,'Pandemonium_Lamp','Pandemonium Lamp',33,208.160,33.750,-138.610,90);
 INSERT INTO `mob_spawn_points` VALUES (17056176,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.510,33.861,-140.040,53);
-INSERT INTO `mob_spawn_points` VALUES (17056177,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.510,33.861,-140.040,53);
-INSERT INTO `mob_spawn_points` VALUES (17056178,0,'Pandemonium_Lamp','Pandemonium Lamp',33,207.740,33.382,-140.300,116);
-INSERT INTO `mob_spawn_points` VALUES (17056179,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.640,33.812,-141.140,193);
-INSERT INTO `mob_spawn_points` VALUES (17056180,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.110,33.936,-140.470,10);
-INSERT INTO `mob_spawn_points` VALUES (17056181,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.610,33.840,-140.080,60);
-INSERT INTO `mob_spawn_points` VALUES (17056182,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.500,33.842,-141.130,203);
-INSERT INTO `mob_spawn_points` VALUES (17056183,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.110,33.936,-140.640,254);
-INSERT INTO `mob_spawn_points` VALUES (17056184,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.930,33.776,-140.150,85);
-INSERT INTO `mob_spawn_points` VALUES (17056185,0,'Pandemonium_Lamp','Pandemonium Lamp',33,207.170,33.707,-140.460,115);
+INSERT INTO `mob_spawn_points` VALUES (17056177,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.510,33.861,-140.040,53);  -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056178,0,'Pandemonium_Lamp','Pandemonium Lamp',33,207.740,33.382,-140.300,116); -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056179,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.640,33.812,-141.140,193); -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056180,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.110,33.936,-140.470,10);  -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056181,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.610,33.840,-140.080,60);  -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056182,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.500,33.842,-141.130,203); -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056183,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.110,33.936,-140.640,254); -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056184,0,'Pandemonium_Lamp','Pandemonium Lamp',33,206.930,33.776,-140.150,85);  -- Pandemonium_Lamp_Avatar
+INSERT INTO `mob_spawn_points` VALUES (17056185,0,'Pandemonium_Lamp','Pandemonium Lamp',33,207.170,33.707,-140.460,115); -- Pandemonium_Lamp_Avatar
 INSERT INTO `mob_spawn_points` VALUES (17056186,0,'Chigre','Chigre',34,-217.500,34.866,13.689,122);
 INSERT INTO `mob_spawn_points` VALUES (17056187,0,'Morta','Morta',35,276.400,1.529,407.785,64);
 INSERT INTO `mob_spawn_points` VALUES (17056188,0,'Ravishing_Rafflesia','Ravishing Rafflesia',36,259.040,0.760,375.058,205);

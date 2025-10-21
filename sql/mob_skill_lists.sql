@@ -1933,7 +1933,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Dahu',419,802); -- Great Sandstorm
 INSERT INTO `mob_skill_lists` VALUES ('Huwasi',420,678); -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',421,520); -- Double Ray
 INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',422,1035); -- Heavy Strike
--- 423 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,605);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,606);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,608);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,766);
+-- 424 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);

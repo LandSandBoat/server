@@ -13,17 +13,26 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod  = 1
     local dmgmod  = 1.5
-    local info    = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    local params  = { canCrit = true }
+
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 0, params)
+    local dmg  = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
     if
         skill:getMsg() ~= xi.msg.basic.SHADOW_ABSORB and
         skill:getMsg() ~= xi.msg.basic.ANTICIPATE
     then
-        if dmg > 0 then
-            skill:setMsg(xi.msg.basic.RANGED_ATTACK_HIT)
-            target:addTP(20)
-            mob:addTP(80)
+        if info.hitslanded > 0 then
+            if info.isCritical then
+                skill:setMsg(xi.msg.basic.RANGED_ATTACK_CRIT)
+            else
+                skill:setMsg(xi.msg.basic.RANGED_ATTACK_HIT)
+            end
+
+            if dmg > 0 then
+                target:addTP(20)
+                mob:addTP(80)
+            end
         else
             skill:setMsg(xi.msg.basic.RANGED_ATTACK_MISS)
         end

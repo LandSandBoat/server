@@ -14,9 +14,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if target:getMainLvl() % 5 == 0 then
-        local power = math.random(2, 30)
+        local duration = xi.mobskills.calculateDuration(mob:getTP(), 15, 60)
 
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, power))
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, duration))
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     end

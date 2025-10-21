@@ -27,28 +27,45 @@ local centers =
     {  222.5, -60,  138 },
 }
 
-local mevaList =
-{
-    { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
-    { xi.mod.THUNDER_MEVA, xi.mod.WATER_ABSORB },
-    { xi.mod.EARTH_MEVA,   xi.mod.LTNG_ABSORB },
-    { xi.mod.WIND_MEVA,    xi.mod.EARTH_ABSORB },
-    { xi.mod.ICE_MEVA,     xi.mod.WIND_ABSORB },
-    { xi.mod.FIRE_MEVA,    xi.mod.ICE_ABSORB },
-    { xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB },
-    { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 40)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(xi.settings.map.BASE_SPEED * 0.05) -- ~5% of normal movementspeed
+    mob:setBaseSpeed(xi.settings.map.BASE_SPEED * 0.05) -- ~5% of normal movement speed
     mob:setMod(xi.mod.REGEN, 3)
-    mob:setLocalVar('mobElement', math.random(1, 8))
-    mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)
-    mob:addMod(mevaList[mob:getLocalVar('mobElement')][2], 1000)
+
+    -- All Princess Jellies pick a different element on spawn
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local elementBitmask = battlefield:getLocalVar('elementChosen')
+
+    -- Build table with available elements.
+    local elementTable = {}
+    for i = xi.element.FIRE, xi.element.DARK do
+        if not utils.mask.getBit(elementBitmask, i) then
+            table.insert(elementTable, i)
+        end
+    end
+
+    -- Pick one random available element.
+    local chosenElement   = elementTable[math.random(1, #elementTable)]
+    local oppositeElement = xi.data.element.getElementWeakness(chosenElement)
+
+    -- Mark element as picked and save it to battlefield.
+    elementBitmask = utils.mask.setBit(elementBitmask, chosenElement, true)
+    battlefield:setLocalVar('elementChosen', elementBitmask)
+
+    -- Apply element-specific resistances/weaknesses
+    mob:setLocalVar('mobElement', chosenElement)
+    mob:addMod(xi.data.element.getElementalMEVAModifier(chosenElement), 250)
+    mob:addMod(xi.data.element.getElementalMEVAModifier(oppositeElement), -250)
+    mob:addMod(xi.data.element.getElementalAbsorptionModifier(chosenElement), 1000)
 end
 
 local function getQueenJellyID(bfNum)
@@ -105,6 +122,7 @@ local function spawnQueenJelly(bfNum, target, zone)
 
     if queen and not queen:isSpawned() then
         SpawnMob(queen:getID())
+        queen:setMaxHP(princessesTotalHP(bfNum, zone))
         queen:setHP(princessesTotalHP(bfNum, zone))
         queen:setPos(centers[bfNum][1], centers[bfNum][2], centers[bfNum][3], 0)
         queen:setLocalVar('target', target:getID())
@@ -142,7 +160,14 @@ entity.onMobFight = function(mob, target)
 
     mob:pathThrough(center, xi.path.flag.SCRIPT)
 
-    if getDistanceFromCenter(bfNum, mob) <= 0.5 then
+    -- Jellies become invulnerable in the center
+    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
+        mob:setMod(xi.mod.UDMGPHYS, -10000)
+        mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    end
+
+    -- When all the jellies are in the center, spawn the queen
+    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
         if
             queen and
             not queen:isSpawned() and

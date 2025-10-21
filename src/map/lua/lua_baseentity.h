@@ -547,10 +547,10 @@ public:
     uint32 canLearnAbility(uint16 abilityID);
     void   delLearnedAbility(uint16 abilityID);
 
-    void   addSpell(uint16 spellID, sol::variadic_args va);
+    void   addSpell(uint16 spellID, sol::object const& arg0);
     bool   hasSpell(uint16 spellID);
     uint32 canLearnSpell(uint16 spellID);
-    void   delSpell(uint16 spellID);
+    void   delSpell(uint16 spellID, sol::object const& arg0);
 
     void recalculateSkillsTable();
     void recalculateAbilitiesTable();
@@ -817,9 +817,9 @@ public:
     uint8 getActiveManeuverCount();
     void  removeOldestManeuver();
     void  removeAllManeuvers();
-    auto  getAttachment(uint8 slotId) -> CItem*;
+    auto  getAttachment(uint8 slotId) const -> CItem*;
     auto  getAttachments() -> sol::table;
-    void  setAttachment(uint8 attachmentItemID, uint8 slotID);
+    void  setAttachment(uint8 attachmentItemID, uint8 slotID) const;
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
     bool  isExceedingElementalCapacity();

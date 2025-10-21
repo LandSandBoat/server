@@ -33,7 +33,7 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, {power = math.random(25, 125)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { power = math.random(25, 125) })
 end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)

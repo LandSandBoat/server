@@ -6,18 +6,23 @@ local ID = zones[xi.zone.MHAURA]
 ---@type TZone
 local zoneObject = {}
 
-zoneObject.onGameHour = function(zone)
-    -- Script for Laughing Bison sign flip animations
-    local timer = 1152 - ((GetSystemTime() - 1009810802)%1152)
+local piratesChance = 10 -- 10% chance to zone from mhaura/selbina into pirates encounter
 
-    -- Next ferry is Al Zhabi for higher values.
-    if timer >= 576 then
-        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(1)
-    else
-        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
+zoneObject.onGameHour = function(zone)
+    local laughingBison = GetNPCByID(ID.npc.LAUGHING_BISON)
+    if laughingBison then
+        -- Script for Laughing Bison sign flip animations
+        local timer = 1152 - ((GetSystemTime() - 1009810802)%1152)
+
+        -- Next ferry is Al Zhabi for higher values.
+        if timer >= 576 then
+            laughingBison:setAnimationSub(1)
+        else
+            laughingBison:setAnimationSub(0)
+        end
     end
 
-    SetServerVariable('Mhaura_Destination', math.random(1, 100))
+    zone:setLocalVar('piratesVoyageRng', math.random(1, 100))
 end
 
 zoneObject.onInitialize = function(zone)
@@ -64,14 +69,19 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
         then
             player:startEvent(200)
         else
+            -- TODO find rejection event, as this method doesn't cleanly boot from the boat and if you were inside the ship, the game client keeps it rendered
             player:setPos(8.200, -1.363, 3.445, 192)
             player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
         end
     else
-        if player:hasKeyItem(xi.ki.FERRY_TICKET) then
-            player:startEvent(200)
-        else
-            player:setPos(8.200, -1.363, 3.445, 192)
+        -- TODO don't double fire transport events (a ship "arrives" from normal and pirates zones at the same time and triggers a transport event)
+        if not player:isInEvent() then
+            if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+                player:startEvent(200)
+            else
+                -- TODO find rejection event, as this method doesn't cleanly boot from the boat and if you were inside the ship, the game client keeps it rendered
+                player:setPos(8.200, -1.363, 3.445, 192)
+            end
         end
     end
 end
@@ -84,7 +94,8 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         local DepartureTime = VanadielHour()
 
         if DepartureTime % 8 == 0 then
-            if GetServerVariable('Mhaura_Destination') > 89 then
+            local currZone = player:getZone()
+            if currZone and currZone:getLocalVar('piratesVoyageRng') <= piratesChance then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)

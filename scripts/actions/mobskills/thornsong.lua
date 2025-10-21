@@ -21,10 +21,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = mob:getMainLvl() * 2
-    local duration = 180
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, power, 0, duration))
-    return xi.effect.BLAZE_SPIKES
+    local power = 10
+    local duration = 30
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DAMAGE_SPIKES, power, 0, duration))
+    return xi.effect.DAMAGE_SPIKES
 end
 
 return mobskillObject

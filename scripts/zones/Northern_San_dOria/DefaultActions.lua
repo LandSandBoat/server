@@ -1,6 +1,7 @@
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 
 return {
+    ['_6fc']              = { messageSpecial = ID.text.ITS_LOCKED }, -- Door Papal Chambers
     ['Abeaule']           = { text = ID.text.ABEAULE_DIALOG_THANKS },
     ['Abioleget']         = { text = ID.text.ABIOLEGET_DIALOG },
     ['Ailbeche']          = { event = 868 },

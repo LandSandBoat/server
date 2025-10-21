@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,12 @@
 ===========================================================================
 */
 
-#ifndef _CCONQUESTPACKET_H
-#define _CCONQUESTPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include "basic.h"
-
-class CCharEntity;
-
-class CConquestPacket : public CBasicPacket
+enum class GP_SERV_COMMAND_INFLUENCE_MODE : uint8_t
 {
-public:
-    CConquestPacket(CCharEntity* PChar);
+    Campaign     = 2,
+    Colonization = 3,
 };
-
-#endif

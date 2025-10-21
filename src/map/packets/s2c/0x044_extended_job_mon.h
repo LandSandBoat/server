@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,24 +19,32 @@
 ===========================================================================
 */
 
-#ifndef _CCAMPAIGNPACKET_H
-#define _CCAMPAIGNPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include "basic.h"
-#include "campaign_system.h"
+#include "base.h"
 
 class CCharEntity;
 
-class CCampaignPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0044
+// This packet is sent by the server to populate the clients extended job information.
+namespace GP_SERV_COMMAND_EXTENDED_JOB
 {
-public:
-    CCampaignPacket(CCharEntity* PChar, CampaignState const& state, uint8 number);
+    class MON final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EXTENDED_JOB, MON>
+    {
+    public:
+        struct PacketData
+        {
+            uint8_t  Job;      // PS2: Job
+            uint8_t  IsSubJob; // PS2: IsSubJob
+            uint8_t  padding01[2];
+            uint16_t Species;
+            uint8_t  padding02[2];
+            uint16_t EquippedInstincts[12];
+            uint8_t  padding03[124];
+        };
 
-private:
-    void SetRegions(const std::vector<CampaignRegion>& areas, int start = 0);
-    void SetNations(const std::vector<CampaignNation>& nations);
-};
-
-#endif
+        MON(const CCharEntity* PChar);
+    };
+} // namespace GP_SERV_COMMAND_EXTENDED_JOB

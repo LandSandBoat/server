@@ -73,6 +73,12 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x042_black_edit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_blu.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_blu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_mon.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_mon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.cpp
@@ -98,6 +104,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05a_motionmes.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05e_conquest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05e_conquest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x061_clistatus.h
@@ -124,6 +132,11 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x06f_combine_ans.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x06f_combine_ans.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_campaign.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_campaign.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.cpp

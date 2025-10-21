@@ -48,7 +48,7 @@ quest.sections =
             {
                 [560] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
-                        player:addSpell(xi.magic.spell.ULMIA, true, true)
+                        player:addSpell(xi.magic.spell.ULMIA, { silentLog = true })
                         player:messageSpecial(misareauxID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.ULMIA)
                     end
                 end,

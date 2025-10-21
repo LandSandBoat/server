@@ -22,7 +22,6 @@
 #include "0x061_clistatus.h"
 
 #include "entities/charentity.h"
-#include "packets/char_job_extra.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
@@ -61,8 +60,7 @@ void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar)
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+    charutils::SendExtendedJobPackets(PChar);
     charutils::SendUnityPackets(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(PChar);
 }

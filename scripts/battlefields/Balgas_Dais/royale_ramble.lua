@@ -24,13 +24,11 @@ local content = Battlefield:new({
 })
 
 local function handleDeath(battlefield, mob)
-    local baseId = balgasID.mob.KING_OF_CUPS + ((battlefield:getArea() - 1) * 7)
+    local baseId = balgasID.mob.KING_OF_CUPS + (battlefield:getArea() - 1) * 7
 
     for mobId = baseId, baseId + 5 do
         local cardian = GetMobByID(mobId)
-        if
-            cardian and
-            cardian:isAlive() then
+        if cardian and cardian:isAlive() then
             return
         end
     end
