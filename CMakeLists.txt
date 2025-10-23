@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
+#test
+
 # https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_DEBUG_INFORMATION_FORMAT.html
 cmake_policy(SET CMP0141 NEW)
 set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
