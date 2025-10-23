@@ -10,7 +10,9 @@ from .packets import packets
 
 
 class HXIClient:
-    def __init__(self, username, password, server, slot=0, client_str="", debug_packets=False):
+    def __init__(
+        self, username, password, server, slot=0, client_str="", debug_packets=False
+    ):
         # Args
         self.username = username
         self.password = password
@@ -49,8 +51,8 @@ class HXIClient:
         self.login_connect(self.ssl_context)
 
         data = bytearray(102)
-        data[0x00] = 0xFF # magic for new xiloader
-        data[0x01] = 0    # unused feature flags
+        data[0x00] = 0xFF  # magic for new xiloader
+        data[0x01] = 0  # unused feature flags
         data[0x02] = 0
         data[0x03] = 0
         data[0x04] = 0
@@ -112,7 +114,10 @@ class HXIClient:
     def login_connect(self, ssl_context):
         server_address = (self.server, 54231)
         print("Starting up login connection over TLS on %s port %s" % server_address)
-        self.login_sock = ssl_context.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM), server_hostname=self.server)
+        self.login_sock = ssl_context.wrap_socket(
+            socket.socket(socket.AF_INET, socket.SOCK_STREAM),
+            server_hostname=self.server,
+        )
         self.login_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.login_sock.connect(server_address)
 
@@ -145,7 +150,9 @@ class HXIClient:
             data = bytearray(28)
             data[0] = 0xA1
             util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
-            util.memcpy(socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4)
+            util.memcpy(
+                socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4
+            )
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
 
             self.lobbydata_sock.sendall(data)
@@ -211,7 +218,9 @@ class HXIClient:
             data[0] = 0xA1
 
             util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
-            util.memcpy(socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4)
+            util.memcpy(
+                socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4
+            )
             self.lobbydata_sock.sendall(data)
 
             if self.debug_packets:

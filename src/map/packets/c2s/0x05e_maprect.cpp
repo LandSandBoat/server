@@ -239,4 +239,10 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
     }
 
     PChar->requestedZoneChange = true;
+
+    // Save pet if any
+    if (PChar->shouldPetPersistThroughZoning())
+    {
+        PChar->setPetZoningInfo();
+    }
 }

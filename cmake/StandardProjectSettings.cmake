@@ -68,7 +68,6 @@ if(MSVC)
         # /EDITANDCONTINUE isn't supported, it messes with Tracy
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
         list(APPEND FLAGS_AND_DEFINES
-            /Zi # The /Zi option produces a separate PDB file that contains all the symbolic debugging information for use with the debugger.
             /GR # Enable RTTI
         )
     else()

@@ -36,9 +36,10 @@ zones[xi.zone.RIVERNE_SITE_B01] =
     },
     mob =
     {
-        BAHAMUT          = GetFirstID('Bahamut'),
-        IMDUGUD          = GetFirstID('Imdugud'),
-        UNSTABLE_CLUSTER = GetFirstID('Unstable_Cluster'),
+        BAHAMUT                 = GetFirstID('Bahamut'),
+        IMDUGUD                 = GetFirstID('Imdugud'),
+        SPELL_SPITTER_SPILUSPOK = GetFirstID('Spell_Spitter_Spilospok'),
+        UNSTABLE_CLUSTER        = GetFirstID('Unstable_Cluster'),
     },
     npc =
     {

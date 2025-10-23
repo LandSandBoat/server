@@ -39,8 +39,8 @@
 
 #include "lua/luautils.h"
 
-#include "packets/chat_message.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
@@ -239,7 +239,7 @@ void IPCClient::handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMes
         }
         else
         {
-            PChar->pushPacket(std::make_unique<CChatMessagePacket>(PChar, MESSAGE_TELL, message.message, message.senderName));
+            PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_TELL, message.message, message.senderName));
         }
     }
     else
@@ -279,7 +279,7 @@ void IPCClient::handleMessage_ChatMessageParty(const IPP& ipp, const ipc::ChatMe
     });
     if (PParty)
     {
-        PParty->PushPacket(message.senderId, 0, std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
+        PParty->PushPacket(message.senderId, 0, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
     }
     // clang-format on
 }
@@ -314,7 +314,7 @@ void IPCClient::handleMessage_ChatMessageAlliance(const IPP& ipp, const ipc::Cha
     {
         for (const auto& currentParty : PAlliance->partyList)
         {
-            currentParty->PushPacket(message.senderId, 0, std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
+            currentParty->PushPacket(message.senderId, 0, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
         }
     }
     // clang-format on
@@ -327,7 +327,7 @@ void IPCClient::handleMessage_ChatMessageLinkshell(const IPP& ipp, const ipc::Ch
     if (CLinkshell* PLinkshell = linkshell::GetLinkshell(message.linkshellId))
     {
         // TODO: Linkshell 1 vs 2?
-        PLinkshell->PushPacket(message.senderId, std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, MESSAGE_LINKSHELL, message.message, message.gmLevel));
+        PLinkshell->PushPacket(message.senderId, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, MESSAGE_LINKSHELL, message.message, message.gmLevel));
     }
 }
 
@@ -337,7 +337,7 @@ void IPCClient::handleMessage_ChatMessageUnity(const IPP& ipp, const ipc::ChatMe
 
     if (CUnityChat* PUnityChat = unitychat::GetUnityChat(message.unityLeaderId))
     {
-        PUnityChat->PushPacket(message.senderId, std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
+        PUnityChat->PushPacket(message.senderId, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
     }
 }
 
@@ -355,7 +355,7 @@ void IPCClient::handleMessage_ChatMessageYell(const IPP& ipp, const ipc::ChatMes
                 // Don't push to sender
                 if (PChar->id != message.senderId)
                 {
-                    PChar->pushPacket(std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
+                    PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
                 }
             });
         }
@@ -379,7 +379,7 @@ void IPCClient::handleMessage_ChatMessageAssist(const IPP& ipp, const ipc::ChatM
                 {
                     if (PChar->aman().isAssistChannelEligible())
                     {
-                        PChar->pushPacket(std::make_unique<CChatMessagePacket>(message));
+                        PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message));
                     }
                 }
             });
@@ -402,7 +402,7 @@ void IPCClient::handleMessage_ChatMessageServerMessage(const IPP& ipp, const ipc
                 return;
             }
 
-            PChar->pushPacket(std::make_unique<CChatMessagePacket>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
+            PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(message.senderName, message.zoneId, message.messageType, message.message, message.gmLevel));
         });
     });
     // clang-format on
@@ -415,7 +415,7 @@ void IPCClient::handleMessage_ChatMessageCustom(const IPP& ipp, const ipc::ChatM
     CCharEntity* PChar = zoneutils::GetChar(message.recipientId);
     if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
     {
-        PChar->pushPacket(std::make_unique<CChatMessagePacket>(PChar, message.messageType, message.message, message.senderName));
+        PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, message.messageType, message.message, message.senderName));
     }
 }
 
@@ -898,6 +898,12 @@ void IPCClient::handleMessage_EntityInformationResponse(const IPP& ipp, const ip
             PChar->clearPacketList();
 
             PChar->requestedZoneChange = true;
+
+            // Save pet if any
+            if (PChar->shouldPetPersistThroughZoning())
+            {
+                PChar->setPetZoningInfo();
+            }
         }
     }
 }
@@ -925,6 +931,12 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
         PChar->clearPacketList();
 
         PChar->requestedWarp = true;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
     }
 }
 

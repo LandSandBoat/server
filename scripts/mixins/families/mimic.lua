@@ -1,8 +1,9 @@
 require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
-g_mixins.mimic = function(mimicMob)
+g_mixins.families.mimic = function(mimicMob)
     mimicMob:addListener('COMBAT_TICK', 'DRAW_IN_CHECK', function(mob)
         local target = mob:getTarget()
         if target then
@@ -20,4 +21,4 @@ g_mixins.mimic = function(mimicMob)
     end)
 end
 
-return g_mixins.mimic
+return g_mixins.families.mimic

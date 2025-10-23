@@ -40,8 +40,9 @@ GP_SERV_COMMAND_JOB_INFO::GP_SERV_COMMAND_JOB_INFO(CCharEntity* PChar)
     std::memcpy(packet.dancer.bp_base, &PChar->stats, sizeof(packet.dancer.bp_base));
     std::memcpy(packet.dancer.job_lev2, &PChar->jobs.job, sizeof(packet.dancer.job_lev2));
 
-    packet.dancer.hpmax = PChar->health.maxhp;
-    packet.dancer.mpmax = PChar->health.maxmp;
+    packet.dancer.hpmax   = PChar->health.maxhp;
+    packet.dancer.mpmax   = PChar->health.maxmp;
+    packet.dancer.sjobflg = PChar->jobs.unlocked & 1;
 
     packet.encumbrance          = (PChar->m_EquipBlock) | (PChar->m_StatsDebilitation << 16);
     packet.can_thumbs_up_mentor = PChar->aman().canThumbsUp();

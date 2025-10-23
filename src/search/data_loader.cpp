@@ -239,7 +239,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     }
 
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
         "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
@@ -303,8 +303,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->disconnecting = rset->get<bool>("disconnecting");
             PPlayer->gmHidden      = rset->get<bool>("gmHiddenEnabled");
             PPlayer->muted         = rset->get<bool>("muted");
-
-            const auto partyid = rset->getOrDefault<uint32>("partyid", 0);
+            PPlayer->unityLeader   = rset->get<uint8>("unity_leader");
+            const auto partyid     = rset->getOrDefault<uint32>("partyid", 0);
 
             if (PPlayer->mentor)
             {
@@ -411,9 +411,21 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
 
             // filter by flag (away, seek party etc.)
-            if (sr.flags != 0 && !(PPlayer->flags2 & sr.flags))
+            if (sr.flags != 0)
             {
-                continue;
+                // Check if unity ID is set (bits 22+)
+                if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
+                {
+                    if (PPlayer->unityLeader != searchUnityId)
+                    {
+                        continue;
+                    }
+                }
+                else if (!(PPlayer->flags2 & sr.flags))
+                {
+                    // Normal bitwise check for other flags (bits 0-21)
+                    continue;
+                }
             }
 
             // filter by level

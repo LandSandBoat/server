@@ -971,7 +971,6 @@ INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,668);
 INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,671);
 INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,672);
 INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,673);
-INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',225,669);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,260);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,261);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,262);
@@ -1933,7 +1932,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Dahu',419,802); -- Great Sandstorm
 INSERT INTO `mob_skill_lists` VALUES ('Huwasi',420,678); -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',421,520); -- Double Ray
 INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',422,1035); -- Heavy Strike
--- 423 to 435: free
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,605);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,606);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,608);
+INSERT INTO `mob_skill_lists` VALUES ('OrcCaster',423,766);
+-- 424 to 435: free
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);
@@ -2203,6 +2206,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,980); -- Freeze Bite
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,981); -- GroundStrike
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,982); -- Abyssal Drain
 INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,983); -- Abyssal strike
+INSERT INTO `mob_skill_lists` VALUES ('Zeid',480,987); -- Shockwave
 INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,988); -- Warp In (Works the same as Ealdnarche's)
 INSERT INTO `mob_skill_lists` VALUES ('Ajido-Marujido',481,989); -- Warp Out (Works the same as Ealdnarche's)
 INSERT INTO `mob_skill_lists` VALUES ('Volker',482,973); -- Red Lotus Blade
@@ -4185,7 +4189,24 @@ INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,922); -- Blind 
 INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,923); -- Giga Scream
 INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,924); -- Dread Dive
 
--- Next ID : 2065
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,472);  -- Grave Reel
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,473);  -- Ectosmash
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,474);  -- Fear Touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,475);  -- Terror Touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,1339); -- Bane
+INSERT INTO `mob_skill_lists` VALUES ('Celery',2065,477);  -- Dark Sphere
+
+INSERT INTO `mob_skill_lists` VALUES ('Spell_Spitter_Spilospok',2066,1082); -- Smokebomb
+INSERT INTO `mob_skill_lists` VALUES ('Spell_Spitter_Spilospok',2066,1084); -- Crispy Candle
+INSERT INTO `mob_skill_lists` VALUES ('Spell_Spitter_Spilospok',2066,1086); -- Paralysis Shower
+
+INSERT INTO `mob_skill_lists` VALUES ('Book_Browser_Bokabraq',2067,1084); -- Crispy Candle
+INSERT INTO `mob_skill_lists` VALUES ('Book_Browser_Bokabraq',2067,1088); -- Goblin Rush
+
+INSERT INTO `mob_skill_lists` VALUES ('Chemical_Cook_Chemachiq',2068,1084); -- Crispy Candle
+INSERT INTO `mob_skill_lists` VALUES ('Chemical_Cook_Chemachiq',2068,1088); -- Goblin Rush
+
+-- Next ID : 2069
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -1,8 +1,9 @@
 require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
-g_mixins.maat = function(maatMob)
+g_mixins.families.maat = function(maatMob)
     maatMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
         if mob:getMainJob() == xi.job.NIN then
             mob:setLocalVar('specialThreshold', 40)
@@ -112,4 +113,4 @@ g_mixins.maat = function(maatMob)
     end)
 end
 
-return g_mixins.maat
+return g_mixins.families.maat

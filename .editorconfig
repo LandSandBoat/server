@@ -79,3 +79,7 @@ indent_brace_style = allman # This is unfortunately ignored in Visual Studio
 # Makefiles actually require the tabs.
 [Makefile]
 indent_style = tab
+
+[*.yml]
+indent_style = space
+indent_size = 2

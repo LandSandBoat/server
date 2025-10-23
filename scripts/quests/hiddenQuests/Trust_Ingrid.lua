@@ -33,7 +33,7 @@ quest.sections =
             {
                 [5062] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.INGRID, true, true)
+                        player:addSpell(xi.magic.spell.INGRID, { silentLog = true })
 
                         player:messageSpecial(easternAdoulinID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.INGRID)
                     end

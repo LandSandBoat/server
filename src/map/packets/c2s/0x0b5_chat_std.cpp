@@ -30,8 +30,8 @@
 #include "entities/charentity.h"
 #include "ipc_client.h"
 #include "linkshell.h"
-#include "packets/chat_message.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
 #include "unitychat.h"
@@ -150,7 +150,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         if (Kind == static_cast<uint8_t>(GP_CLI_COMMAND_CHAT_STD_KIND::Say))
         {
             auditChat(PChar, "SAY", rawMessage);
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SAY, rawMessage));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SAY, rawMessage));
         }
         else
         {
@@ -166,18 +166,18 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         case GP_CLI_COMMAND_CHAT_STD_KIND::Say:
         {
             auditChat(PChar, "SAY", rawMessage);
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SAY, rawMessage));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SAY, rawMessage));
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Emote:
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_EMOTION, rawMessage));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_EMOTION, rawMessage));
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Shout:
         {
             auditChat(PChar, "SHOUT", rawMessage);
-            PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, std::make_unique<CChatMessagePacket>(PChar, MESSAGE_SHOUT, rawMessage));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SHOUT, rawMessage));
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Linkshell1:

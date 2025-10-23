@@ -10,7 +10,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 15, 0, 300))
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 600, 1020)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 25, 0, duration))
 
     return xi.effect.DEFENSE_BOOST
 end

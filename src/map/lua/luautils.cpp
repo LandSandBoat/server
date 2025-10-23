@@ -54,7 +54,7 @@
 #include "items/item_puppet.h"
 
 #include "packets/action.h"
-#include "packets/chat_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x0f9_res.h"
 
@@ -113,14 +113,14 @@ void ReportErrorToPlayer(CBaseEntity* PEntity, std::string const& message = "") 
                 {
                     auto        channel = MESSAGE_NS_SHOUT;
                     std::string breaker = "================";
-                    PChar->pushPacket<CChatMessagePacket>(PChar, channel, breaker.c_str());
-                    PChar->pushPacket<CChatMessagePacket>(PChar, channel, "!!! Lua error !!!");
+                    PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, channel, breaker.c_str());
+                    PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, channel, "!!! Lua error !!!");
                     for (auto const& part : split(message, "\n"))
                     {
                         auto str = replace(part, "\t", "    ");
-                        PChar->pushPacket<CChatMessagePacket>(PChar, channel, str.c_str());
+                        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, channel, str.c_str());
                     }
-                    PChar->pushPacket<CChatMessagePacket>(PChar, channel, breaker.c_str());
+                    PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, channel, breaker.c_str());
                 }
             }
         }

@@ -13,7 +13,7 @@
 #include "map/packet_system.h"
 #include "map/packets/auction_house.h"
 #include "map/packets/basic.h"
-#include "map/packets/chat_message.h"
+#include "map/packets/s2c/0x017_chat_std.h"
 #include "map/utils/itemutils.h"
 
 #include "map/ipc_client.h"

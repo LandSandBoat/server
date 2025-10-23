@@ -22,9 +22,10 @@
 #include "roe.h"
 
 #include "common/timer.h"
+#include "enums/chat_message_type.h"
 #include "lua/luautils.h"
 #include "map_engine.h"
-#include "packets/chat_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
@@ -301,7 +302,7 @@ namespace roeutils
         if (!roeutils::RoeSystem.ImplementedRecords.test(recordID))
         {
             std::string message = "The record #" + std::to_string(recordID) + " is not implemented at this time.";
-            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_NS_SAY, message, "RoE System");
+            PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_NS_SAY, message, "RoE System");
             return false;
         }
 

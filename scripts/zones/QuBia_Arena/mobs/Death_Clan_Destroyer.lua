@@ -8,6 +8,8 @@ local ID = zones[xi.zone.QUBIA_ARENA]
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addMod(xi.mod.REGAIN, 100)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 60)
 end
 

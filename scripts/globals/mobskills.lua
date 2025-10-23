@@ -148,7 +148,7 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
         finaldmg = finaldmg + hitdamage
     end
 
-    return hitslanded, finaldmg
+    return hitslanded, finaldmg, isCritical
 end
 
 -----------------------------------
@@ -219,6 +219,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     local finaldmg   = 0
     local hitsdone   = 1
     local hitslanded = 0
+    local hitCrit    = false
 
     -- first hit has a higher chance to land
     local firstHitChance = hitrate * 1.5
@@ -230,15 +231,20 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
     if (math.random(1, 100)) <= firstHitChance then
+        local isCritical = false
         -- use helper function check for parry guard and blocking and handle the hit
-        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+        hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+
+        hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
     end
 
     while hitsdone < numHits do
+        local isCritical = false
         if (math.random(1, 100)) <= hitrate then --it hit
-            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+            hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
         end
 
+        hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
         hitsdone = hitsdone + 1
     end
 
@@ -261,6 +267,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
 
     returninfo.dmg        = finaldmg
     returninfo.hitslanded = hitslanded
+    returninfo.isCritical = hitCrit
 
     return returninfo
 end

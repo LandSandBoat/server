@@ -1,0 +1,88 @@
+name: publish_latest
+
+on:
+  push:
+    branches:
+      - base
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  Build:
+    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build_type: Release
+            runner: windows-2025
+            compiler: msvc19
+            tracy: true
+            build_modules: false
+            save_cache: false
+          - build_type: Debug
+            runner: windows-2025
+            compiler: msvc19
+            tracy: false
+            build_modules: true
+            save_cache: true
+          - build_type: Debug
+            runner: macos-15
+            compiler: appleClang16
+            tracy: false
+            build_modules: true
+            save_cache: true
+          - build_type: Debug
+            runner: ubuntu-24.04
+            compiler: gcc14
+            tracy: false
+            build_modules: true
+            save_cache: true
+          - build_type: Debug
+            runner: ubuntu-24.04
+            compiler: clang18
+            tracy: false
+            build_modules: true
+            save_cache: true
+    uses: ./.github/workflows/build.yml
+    with:
+      runner: ${{ matrix.runner }}
+      compiler: ${{ matrix.compiler }}
+      build_type: ${{ matrix.build_type }}
+      build_modules: ${{ matrix.build_modules }}
+      tracy: ${{ matrix.tracy }}
+      save_cache: ${{ matrix.save_cache }}
+      upload_artifact: ${{ matrix.build_type == 'Release' }}
+      clang_tidy: ${{ startsWith(matrix.runner, 'ubuntu') && startsWith(matrix.compiler, 'clang') }}
+
+  Docker:
+    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu
+            compiler: gcc14
+            build_type: Release
+            save_cache: false
+          # - os: ubuntu
+          #   compiler: gcc14
+          #   build_type: Debug
+          #   save_cache: true
+          - os: alpine
+            compiler: clang20
+            build_type: Release
+            save_cache: false
+    uses: ./.github/workflows/build_docker.yml
+    with:
+      os: ${{ matrix.os }}
+      compiler: ${{ matrix.compiler }}
+      build_type: ${{ matrix.build_type }}
+      save_cache: ${{ matrix.save_cache }}
+      build_modules: ${{ matrix.build_type == 'Debug' }}
+      tracy: ${{ matrix.build_type == 'Debug' }}
+      upload_artifact: false
+      publish: ${{ matrix.build_type == 'Release' }}

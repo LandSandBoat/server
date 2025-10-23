@@ -24,7 +24,7 @@
 #include "campaign_system.h"
 #include "common/database.h"
 #include "map/utils/zoneutils.h"
-#include "packets/campaign_map.h"
+#include "packets/s2c/0x071_influence_campaign.h"
 #include "utils/charutils.h"
 
 CampaignState CState;
@@ -186,7 +186,7 @@ namespace campaign
 
     void SendUpdate(CCharEntity* PChar)
     {
-        PChar->pushPacket<CCampaignPacket>(PChar, CState, 0);
-        PChar->pushPacket<CCampaignPacket>(PChar, CState, 1);
+        PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 0);
+        PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 1);
     }
 }; // namespace campaign

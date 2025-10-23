@@ -22,7 +22,7 @@
 #include "0x052_equipset_check.h"
 
 #include "entities/charentity.h"
-#include "packets/macroequipset.h"
+#include "packets/s2c/0x116_equipset_valid.h"
 
 auto GP_CLI_COMMAND_EQUIPSET_CHECK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -40,6 +40,5 @@ void GP_CLI_COMMAND_EQUIPSET_CHECK::process(MapSession* PSession, CCharEntity* P
     // in this list the slot of whats being updated is old value, replace with new in 116
     // Should Push 0x116 (size 68) in responce
     // 0x04 is start, contains 16 4 byte parts repersently each slot in order
-    // PChar->pushPacket<CAddtoEquipSet>(PChar, this);
-    PChar->pushPacket<CAddtoEquipSet>(PChar, *this);
+    PChar->pushPacket<GP_SERV_COMMAND_EQUIPSET_VALID>(PChar, *this);
 }

@@ -2,7 +2,6 @@
 -- Royale Ramble
 -- Balga's Dais KSNM, Lachesis Orb
 -- !additem 1178
--- TODO Code Queen of Cups / Batons spawning when any King engaged. Add mechanics & spell lists. (the other kings despawn) - Check functionality of Trump Crown. Fix spawn points.
 -----------------------------------
 local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------
@@ -22,20 +21,73 @@ local content = Battlefield:new({
         balgasID.mob.KING_OF_CUPS + 13,
         balgasID.mob.KING_OF_CUPS + 20,
     },
-
-    experimental     = true,
 })
+
+local function handleDeath(battlefield, mob)
+    local baseId = balgasID.mob.KING_OF_CUPS + (battlefield:getArea() - 1) * 7
+
+    for mobId = baseId, baseId + 5 do
+        local cardian = GetMobByID(mobId)
+        if cardian and cardian:isAlive() then
+            return
+        end
+    end
+
+    content:handleAllMonstersDefeated(battlefield, mob)
+end
 
 content.groups =
 {
     {
-        mobs      = { 'King_of_Cups', 'King_of_Batons', 'King_of_Swords', 'King_of_Coins' },
-        allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
+        mobIds =
+        {
+            {
+                balgasID.mob.KING_OF_CUPS,
+                balgasID.mob.KING_OF_CUPS + 1,
+                balgasID.mob.KING_OF_CUPS + 2,
+                balgasID.mob.KING_OF_CUPS + 3,
+            },
+
+            {
+                balgasID.mob.KING_OF_CUPS + 7,
+                balgasID.mob.KING_OF_CUPS + 8,
+                balgasID.mob.KING_OF_CUPS + 9,
+                balgasID.mob.KING_OF_CUPS + 10,
+            },
+
+            {
+                balgasID.mob.KING_OF_CUPS + 14,
+                balgasID.mob.KING_OF_CUPS + 15,
+                balgasID.mob.KING_OF_CUPS + 16,
+                balgasID.mob.KING_OF_CUPS + 17,
+            },
+
+        },
+
+        death = handleDeath,
     },
 
     {
-        mobs      = { 'Queens_of_Cups', 'Queen_of_Batons' },
-        spawned  = false,
+        mobIds =
+        {
+            {
+                balgasID.mob.KING_OF_CUPS + 4,
+                balgasID.mob.KING_OF_CUPS + 5,
+            },
+
+            {
+                balgasID.mob.KING_OF_CUPS + 11,
+                balgasID.mob.KING_OF_CUPS + 12,
+            },
+
+            {
+                balgasID.mob.KING_OF_CUPS + 18,
+                balgasID.mob.KING_OF_CUPS + 19,
+            },
+        },
+
+        spawned = false,
+        death = handleDeath,
     },
 }
 

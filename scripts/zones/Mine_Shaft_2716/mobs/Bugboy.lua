@@ -3,8 +3,6 @@
 -- Mob: Bugboy
 -- ENM : Bionic Bug
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -18,21 +16,29 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Use Mighty Strikes at 75%, 50%, and 25% HP.
-    local hPP = mob:getHPP()
-    local mightyStrikes = mob:getLocalVar('mightyStrikes')
-    if hPP <= 75 and mightyStrikes == 0 then
-        mob:setLocalVar('mightyStrikes', 1)
+    local mobHPP = mob:getHPP()
+    local mightyStrikesCount = mob:getLocalVar('mightyStrikesCount')
+    if mobHPP <= 75 and mightyStrikesCount == 0 then
+        mob:setLocalVar('mightyStrikesCount', 1)
         mob:useMobAbility(xi.mobSkill.MIGHTY_STRIKES_1)
-    elseif hPP <= 50 and mightyStrikes == 1 then
-        mob:setLocalVar('mightyStrikes', 2)
+    elseif mobHPP <= 50 and mightyStrikesCount == 1 then
+        mob:setLocalVar('mightyStrikesCount', 2)
         mob:useMobAbility(xi.mobSkill.MIGHTY_STRIKES_1)
-    elseif hPP <= 25 and mightyStrikes == 2 then
-        mob:setLocalVar('mightyStrikes', 3)
+    elseif mobHPP <= 25 and mightyStrikesCount == 2 then
+        mob:setLocalVar('mightyStrikesCount', 3)
         mob:useMobAbility(xi.mobSkill.MIGHTY_STRIKES_1)
     end
 
-    -- Takes double magic damage while under the effects of Mighty Strikes.
-    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
+    -- Takes 50% increased magic damage after using the 2nd Mighty Strikes and 100% after using the 3rd.
+    if
+        mightyStrikesCount == 2 and
+        mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
+    then
+        mob:setMod(xi.mod.UDMGMAGIC, 5000)
+    elseif
+        mightyStrikesCount == 3 and
+        mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
+    then
         mob:setMod(xi.mod.UDMGMAGIC, 10000)
     else
         mob:setMod(xi.mod.UDMGMAGIC, 0)
@@ -58,6 +64,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
+    -- Bugboy always follows up Mighty Strikes with Heavy Blow.
+    if skill:getID() == xi.mobSkill.MIGHTY_STRIKES_1 then
+        mob:useMobAbility(xi.mobSkill.HEAVY_BLOW)
+    end
+
     if mob:getLocalVar('skillUsed') ~= 0 then
         mob:setLocalVar('skillUsed', 0)
     else

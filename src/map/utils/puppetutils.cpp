@@ -27,7 +27,6 @@
 #include "itemutils.h"
 #include "job_points.h"
 #include "lua/luautils.h"
-#include "packets/char_job_extra.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "petutils.h"
 #include "status_effect_container.h"
@@ -154,7 +153,7 @@ namespace puppetutils
             if (addBit(id & 0xFF, (uint8*)PChar->m_unlockedAttachments.attachments, sizeof(PChar->m_unlockedAttachments.attachments)))
             {
                 SaveAttachments(PChar);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+                charutils::SendExtendedJobPackets(PChar);
                 return true;
             }
             return false;
@@ -164,7 +163,7 @@ namespace puppetutils
             if (addBit(id & 0x0F, &PChar->m_unlockedAttachments.frames, sizeof(PChar->m_unlockedAttachments.frames)))
             {
                 SaveAttachments(PChar);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+                charutils::SendExtendedJobPackets(PChar);
                 return true;
             }
             return false;
@@ -174,7 +173,7 @@ namespace puppetutils
             if (addBit(id & 0x0F, &PChar->m_unlockedAttachments.heads, sizeof(PChar->m_unlockedAttachments.heads)))
             {
                 SaveAttachments(PChar);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+                charutils::SendExtendedJobPackets(PChar);
                 return true;
             }
             return false;
@@ -608,7 +607,8 @@ namespace puppetutils
                         PAutomaton->WorkingSkills.elemental       = amaSkill;
                         PAutomaton->WorkingSkills.dark            = amaSkill;
                     }
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+
+                    charutils::SendExtendedJobPackets(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, static_cast<MSGBASIC_ID>(53));
                 }
                 charutils::SaveCharSkills(PChar, SkillID);

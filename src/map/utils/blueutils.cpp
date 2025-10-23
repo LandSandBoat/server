@@ -25,7 +25,6 @@
 #include "common/logging.h"
 #include "common/utils.h"
 
-#include "packets/char_job_extra.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 
 #include "packets/s2c/0x061_clistatus.h"
@@ -207,8 +206,7 @@ namespace blueutils
             }
         }
         charutils::BuildingCharTraitsTable(PChar);
-        PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-        PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+        charutils::SendExtendedJobPackets(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();

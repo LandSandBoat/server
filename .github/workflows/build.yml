@@ -1,901 +1,216 @@
-name: "build"
-
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-  push:
-    branches:
-      - base
-      - everything
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
-  cancel-in-progress: true
-
-# Available machines:
-# https://github.com/actions/runner-images/tree/main
+  workflow_call:
+    inputs:
+      runner:
+        description: 'Runner to run the build on.'
+        required: true
+        type: string
+      compiler:
+        description: 'Compiler to build with.'
+        required: true
+        type: string
+      build_type:
+        description: 'CMake build type.'
+        required: true
+        type: string
+      save_cache:
+        description: 'Cache build and Python virtual environment.'
+        required: false
+        type: boolean
+        default: false
+      build_modules:
+        description: 'Build with modules enabled.'
+        required: false
+        type: boolean
+        default: false
+      tracy:
+        description: 'Build with tracy enabled.'
+        required: false
+        type: boolean
+        default: false
+      upload_artifact:
+        description: 'Upload built executables.'
+        required: false
+        type: boolean
+        default: false
+      clang_tidy:
+        description: 'Build with Clang Tidy and output build summary.'
+        required: false
+        type: boolean
+        default: false
+      optional_build:
+        description: 'Skip build if no relevant files changed (requires changed-files artifact).'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
-  Sanity_Checks:
-    runs-on: ubuntu-24.04
+  Build:
+    name: ${{ format('{0} ({1}, {2}, {3})', inputs.clang_tidy && 'Clang Tidy' || 'Build', inputs.runner, inputs.compiler, inputs.build_type) }}
+    runs-on: ${{ inputs.runner }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SCCACHE_DIR: ${{ format('{0}/sccache', github.workspace) }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Install Dependencies
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
-          python3 -m pip install -r tools/requirements.txt
-          luarocks install luacheck --local
-          npm install -g diff-so-fancy
-      - id: changed-files
-        name: Get Changed Files
-        uses: Ana06/get-changed-files@v2.3.0
-        with:
-          format: "json"
-          filter: |
-            modules/**
-            src/**
-            scripts/**
-            sql/**
-        continue-on-error: true
-      - name: List Changed Files
-        if: always()
-        run: |
-          echo '${{ steps.changed-files.outputs.all }}' > changed-files.txt
-          readarray -t changed_files <<<"$(jq -r '.[]' <<<'${{ steps.changed-files.outputs.all }}')"
-          echo "CHANGED_FILES=${changed_files[@]}" >> $GITHUB_ENV
-
-          for changed_file in ${changed_files[@]}; do
-              echo "${changed_file}"
-          done
-      - name: Upload step output as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: changed-files
-          path: changed-files.txt
-          retention-days: 7
-        continue-on-error: true
-      - name: Git Formatting Checks
-        if: github.event_name == 'pull_request'
-        run: |
-          touch git_checks.txt
-          bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
-          cat git_checks.txt
-          if [ -s git_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: General File Checks
-        if: always()
-        run: |
-          touch general_checks.txt
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
-            fi
-          done
-          cat general_checks.txt
-          if [ -s general_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: CPP Checks
-        if: always()
-        run: |
-          touch cpp_checks.txt
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.cpp ]]; then
-                bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
-              fi
-            fi
-          done
-          cat cpp_checks.txt
-          if [ -s cpp_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: Run CPP Formatting Checks (clang-format-18)
-        if: always()
-        run: |
-          clang-format-18 -version
-          touch cpp_formatting_checks.txt
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-                clang-format-18 -style=file -i ${changed_file}
-              fi
-            fi
-          done
-          git diff >> cpp_formatting_checks.txt
-          git diff --color >> cpp_formatting_checks_color.txt
-      - name: Upload CPP Formatting Diff (clang-format-18)
-        if: hashFiles('cpp_formatting_checks.txt') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: clang_format_diff
-          path: |
-            cpp_formatting_checks.txt
-      - name: Report CPP Formatting Checks (clang-format-18)
-        if: always()
-        run: |
-          if [ -s cpp_formatting_checks_color.txt ]
-          then
-            echo ""
-            echo "You have errors in your C++ code formatting."
-            echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
-            echo "You can either fix the formatting by hand or use clang-format."
-            echo "(You can safely ignore warnings about \$TERM and tput)"
-            echo ""
-            cat cpp_formatting_checks_color.txt | diff-so-fancy || true
-            exit 1
-          fi
-          git reset --hard
-          exit 0
-      - name: Lua Checks
-        if: always()
-        run: |
-          touch lua_checks.txt
-          python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
-
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.lua ]]; then
-                bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
-              fi
-            fi
-          done
-
-          python3 tools/ci/check_lua_binding_usage.py >> lua_checks.txt
-
-          cat lua_checks.txt
-          if [ -s lua_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: SQL Checks
-        if: always()
-        run: |
-          touch sql_checks.txt
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.sql ]]; then
-                bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
-              fi
-            fi
-          done
-
-          python3 tools/price_checker.py >> sql_checks.txt
-
-          cat sql_checks.txt
-          if [ -s sql_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: Python Checks
-        if: always()
-        run: |
-          touch python_checks.txt
-          for changed_file in $CHANGED_FILES; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.py ]]; then
-                bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
-              fi
-            fi
-          done
-          cat python_checks.txt
-          if [ -s python_checks.txt ]
-          then
-            exit 1
-          fi
-          exit 0
-      - name: License Header Checks
-        if: always()
-        run: |
-          python3 tools/ci/detect_license_headers.py
-
-  Linux_LuaLanguageServer:
-    needs: Sanity_Checks
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Download Changed Files
+      - name: Download changed files artifact
+        if: ${{ inputs.optional_build }}
         uses: actions/download-artifact@v4
         with:
           name: changed-files
-        # Skipping lua language server hinges on checking the changed files list, so we should require downloading the artifact
         # continue-on-error: true
-      - name: Check For Changed Lua Files
+
+      - name: Check for changed source files
         id: check-changes
+        if: ${{ inputs.optional_build }}
         run: |
-          fileContents=$(<changed-files.txt)
-          readarray -t changed_files <<<"$(jq -r '.[]' <<< $fileContents)"
-
-          echo "Checking changed-file list for any with .lua extension"
-          LUA_CHANGES=false
-          for changed_file in ${changed_files[@]}; do
-              if [[ $changed_file == *.lua ]]; then
-                LUA_CHANGES=true
-                break
-              fi
+          mapfile -t changed_files < changed-files.txt
+          source_changes=false
+          for changed_file in "${changed_files[@]}"; do
+          if [[ $changed_file == *.cpp || \
+                $changed_file == *.cc  || \
+                $changed_file == *.cxx || \
+                $changed_file == *.h   || \
+                $changed_file == *.hpp || \
+                $changed_file == *.hxx || \
+                $changed_file == CMakeLists.txt || \
+                $changed_file == *.cmake ]]; then
+              cpp_changes=true
+              break
+            fi
           done
+          echo "source_changes=$source_changes" >> $GITHUB_OUTPUT
 
-          echo "Lua files found: ${LUA_CHANGES}"
-          echo "LUA_CHANGES=$LUA_CHANGES" >> $GITHUB_OUTPUT
-      - uses: actions/checkout@v4
-        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
-        with:
-          fetch-depth: 0 # Or else we don't get full blame information
-      - name: Install Dependencies
-        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-          python3 -m pip install -r tools/requirements.txt
-      - name: Run Lua Language Server
-        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
-        run: |
-          python3 tools/ci/lua_lang_server.py
-      - name: Upload Lua Language Server Output
-        if: hashFiles('lua_lang_errors.txt') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: lua_lang_errors
-          path: lua_lang_errors.txt
-      - name: Check Output
-        if: steps.check-changes.outputs.LUA_CHANGES == 'true'
-        run: |
-          if [ -f lua_lang_errors.txt ]; then
-              cat lua_lang_errors.txt
-              exit 1
-          fi
-
-  Linux_Clang18_64bit:
-    needs: Sanity_Checks
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-clang
-      - name: Configure CMake
-        run: |
-          export CC=/usr/bin/clang-18
-          export CXX=/usr/bin/clang++-18
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux_executables
-          path: |
-            xi_connect
-            xi_map
-            xi_search
-            xi_world
-            xi_test
 
-  Linux_ClangTidy18_64bit:
-    needs: Sanity_Checks
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev coreutils
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-clang-tidy
-      - name: Configure CMake
-        run: |
-          export CC=/usr/bin/clang-18
-          export CXX=/usr/bin/clang++-18
-          mkdir -p build
-          cmake -S . -B build -DENABLE_CLANG_TIDY=ON
-      - name: Build
-        run: |
-          touch clang-tidy.txt
-          # Redirect stderr (2) to stdout (1) so that `tee` picks it up and writes to disk
-          cmake --build build -j4 2>&1 | tee clang-tidy.txt || true
-          cat clang-tidy.txt
-          if grep -q warning\|error clang-tidy.txt; then
-              exit 1
-          fi
+      - name: Install dependencies (Brew)
+        if: ${{ runner.os == 'macOS' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: brew install mariadb zeromq zmq luajit
 
-  Linux_GCC14_64bit:
-    needs: Sanity_Checks
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
+      - name: Install dependencies (APT)
+        if: ${{ runner.os == 'Linux' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: nick-fields/retry@v3
         with:
-          fetch-depth: 1
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev gcc-14 g++-14
+          timeout_minutes: 5
+          max_attempts: 3
+          command: |
+            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+              binutils-dev \
+              g++-14 \
+              libluajit-5.1-dev \
+              libmariadb-dev-compat \
+              libssl-dev \
+              libzmq3-dev \
+              luajit \
+              mariadb-client \
+              tzdata \
+              zlib1g-dev
+            echo "CC=/usr/bin/gcc-14" >> $GITHUB_ENV
+            echo "CXX=/usr/bin/g++-14" >> $GITHUB_ENV
 
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
+      - name: Install Clang
+        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: nick-fields/retry@v3
         with:
-          path: build
-          key: ${{ runner.os }}-gcc
-      - name: Configure CMake
-        run: |
-          export CC=/usr/bin/gcc-14
-          export CXX=/usr/bin/g++-14
-          mkdir -p build
-          CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
+          timeout_minutes: 5
+          max_attempts: 3
+          command: |
+            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+              clang-18 \
+              clang-tidy \
+              libclang-rt-dev \
+              lld \
+              llvm-dev
+            echo "CC=/usr/bin/clang-18" >> $GITHUB_ENV
+            echo "CXX=/usr/bin/clang++-18" >> $GITHUB_ENV
+            echo "CXXFLAGS=-stdlib=libstdc++" >> $GITHUB_ENV
+            echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
 
-  Windows_64bit_Debug:
-    needs: Sanity_Checks
-    runs-on: windows-2025
-    steps:
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup MSVC
+        if: ${{ runner.os == 'Windows' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: TheMrMilchmann/setup-msvc-dev@v3
         with:
-          msbuild-architecture: x64
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64d
-      - name: Configure CMake
-        shell: bash
-        run: |
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        shell: bash
-        run: |
-          cmake --build build -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows_executables
-          path: |
-            xi_connect.exe
-            xi_map.exe
-            xi_search.exe
-            xi_world.exe
-            xi_test.exe
+          arch: x64
 
-  Windows_64bit_Release_Tracy_Modules:
-    needs: Sanity_Checks
-    runs-on: windows-2025
-    steps:
-      - uses: microsoft/setup-msbuild@v2
+      - name: Setup sccache
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: mozilla-actions/sccache-action@v0.0.9
         with:
-          msbuild-architecture: x64
-      - uses: actions/checkout@v4
+          disable_annotations: ${{ !inputs.save_cache }}
+
+      - name: Setup Python
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: actions/setup-python@v5
         with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v4
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64-t
-      - name: Enable Modules
-        shell: bash
+          python-version: '3.12'
+
+      - name: Enable modules
+        if: ${{ inputs.build_modules && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
         run: |
-          python3 << EOF
+          python3 <<EOF
           with open("modules/init.txt", "w") as f:
               f.write("custom\n")
               f.write("era\n")
               f.write("example\n")
               f.write("renamer\n")
           EOF
+
+      - name: Restore build cache
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        id: restore_build
+        uses: actions/cache/restore@v4
+        env:
+          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
+        with:
+          path: |
+            build
+            ${{ env.SCCACHE_DIR }}
+          key: ${{ format('buildcache-{0}-{1}-{2}-{3}-{4}', runner.os, inputs.compiler, inputs.build_type, env.cmake_hash, env.source_hash) }}
+          restore-keys: |
+            ${{ format('buildcache-{0}-{1}-{2}-{3}-', runner.os, inputs.compiler, inputs.build_type, env.cmake_hash) }}
+
       - name: Configure CMake
-        shell: bash
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
         run: |
-          mkdir -p build
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
+          cmake -G Ninja -S . -B build \
+            -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
+            -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
+            -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
+            -DPCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }} \
+            -DCACHE_OPTION=sccache
+
       - name: Build
-        shell: bash
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        run: cmake --build build | tee build.log
+
+      - name: Summarize Clang Tidy Build
+        if: ${{ inputs.clang_tidy && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
         run: |
-          cmake --build build --config Release -j4
-      - name: Archive Executables
+          echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
+          if [[ -f "build.log" && -s "build.log" ]]; then
+              python tools/ci/summarize_clang_tidy.py build.log >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload artifact
+        if: ${{ inputs.upload_artifact && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
         uses: actions/upload-artifact@v4
         with:
-          name: windows_modules_executables
+          name: ${{ format('LSB_{0}_{1}_{2}', runner.os, inputs.build_type, github.sha) }}
           path: |
-            xi_connect.exe
-            xi_map_tracy.exe
-            xi_search.exe
-            xi_world.exe
-            xi_test.exe
+            xi_*
+            tracy.tar.gz
 
-  MacOS_64bit:
-    needs: Sanity_Checks
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
-    runs-on: macos-15
-    steps:
-      - uses: actions/checkout@v4
+      - name: Cache build
+        if: ${{ inputs.save_cache && !steps.restore_build.outputs.cache-hit && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: actions/cache/save@v4
         with:
-          fetch-depth: 1
-      - name: Install Dependencies (Brew)
-        run: |
-          brew install mariadb zeromq zmq luajit
-      - name: Configure CMake
-        run: |
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
-
-  Full_Startup_Checks_Linux:
-    runs-on: ubuntu-24.04
-    needs: Linux_Clang18_64bit
-    services:
-      mysql:
-        image: mariadb:10.6
-        env:
-          MYSQL_DATABASE: xidb
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-          submodules: recursive # For navmeshes
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux_executables
-          path: .
-      - name: Install Dependencies
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-          python3 -m pip install -r tools/requirements.txt
-      - name: Verify MySQL connection from container
-        run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Copy settings
-        run: |
-          cp settings/default/* settings/
-      - name: Startup and character login checks
-        run: |
-          chmod +x xi_connect
-          chmod +x xi_map
-          chmod +x xi_search
-          chmod +x xi_world
-          ls -l
-
-          printf "\nStart server processes\n"
-          screen -d -m -S xi_connect ./xi_connect --log login-server.log
-          screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_map ./xi_map --log map-server.log
-          screen -d -m -S xi_world ./xi_world --log world-server.log
-
-          printf "\nWaiting 5m for servers to fully start up\n"
-          sleep 300s
-
-          # define bash helper function to help diagnose any sql errors
-          function mysqlcmd() { mysql xidb -h 127.0.0.1 -uroot -proot --verbose -e "$@"; }
-          printf "\nPopulating database\n"
-
-          # Clean out anything already there (just in case)
-          mysqlcmd "DELETE FROM accounts;"
-          mysqlcmd "DELETE FROM chars;"
-          mysqlcmd "DELETE FROM char_look;"
-          mysqlcmd "DELETE FROM char_stats;"
-
-          # Clean tables that are made from triggers on insert to char table
-          mysqlcmd "DELETE FROM char_equip;"
-          mysqlcmd "DELETE FROM char_exp;"
-          mysqlcmd "DELETE FROM char_history;"
-          mysqlcmd "DELETE FROM char_inventory;"
-          mysqlcmd "DELETE FROM char_jobs;"
-          mysqlcmd "DELETE FROM char_pet;"
-          mysqlcmd "DELETE FROM char_points;"
-          mysqlcmd "DELETE FROM char_profile;"
-          mysqlcmd "DELETE FROM char_storage;"
-          mysqlcmd "DELETE FROM char_unlocks;"
-
-          # Create an account
-          PASSWORD_HASH=\$2a\$12\$piFoDKvu80KK68xLgQFpt.ZCqVPTjPmhSUfA31.Yw9n404dTsrR6q
-          mysqlcmd "INSERT INTO accounts (id, login, password, timecreate, timelastmodify, status, priv)
-          VALUES(1000, 'admin1', '$PASSWORD_HASH', NOW(), NOW(), 1, 1);
-          SELECT id, login, content_ids FROM accounts;"
-
-          # Create a character
-          mysqlcmd "INSERT INTO chars (charid, accid, charname, pos_zone, nation, gmlevel)
-          VALUES(1, 1000, 'Test', 0, 0, 5);
-          SELECT charid, accid, charname, pos_zone FROM chars;"
-
-          # Set char_look (default is 0 and trips up scripting)
-          mysqlcmd "INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
-          VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-          SELECT charid, face, race FROM char_look;"
-
-          # Populate more char tables with defaults
-          mysqlcmd "INSERT INTO char_stats (charid, mjob)
-          VALUES(1, 1);
-          SELECT charid, mjob FROM char_stats;"
-
-          # Update character information
-          # Place near some Robber Crabs in Kuftal Tunnel
-          mysqlcmd "UPDATE chars
-          SET
-              pos_zone = 174,
-              pos_prevzone = 174,
-              pos_x = 55,
-              pos_y = -9,
-              pos_z = -140
-          WHERE charid = 1;"
-
-          mysqlcmd "SELECT charid, accid, charname, pos_zone, pos_x, pos_y, pos_z FROM chars;"
-          # Set GodMode CharVar = 1
-          mysqlcmd "INSERT INTO char_vars(charid, varname, value)
-          VALUES(1, 'GodMode', 1);"
-
-          printf "\nRunning HeadlessXI for 60 seconds\n"
-          python3 << EOF
-          import time
-          try:
-              from tools.headlessxi.hxiclient import HXIClient
-              hxi_client = HXIClient('admin1', 'admin1', 'localhost')
-              hxi_client.login()
-              print('Sleeping 60s')
-              time.sleep(60)
-              hxi_client.logout()
-              exit(0)
-          except Exception as e:
-              exit(-1)
-          EOF
-          hxi_result=$?
-
-          pkill -SIGINT xi_map
-          pkill -SIGINT xi_search
-          pkill -SIGINT xi_connect
-          pkill -SIGINT xi_world
-
-          # fail if hxi had a non-zero exit code
-          if [[ "$hxi_result" -ne "0" ]]; then
-              echo "hxi exited with code $hxi_result"
-              exit $hxi_result
-          fi
-      - name: Check for errors and warnings
-        if: ${{ success() || failure() }}
-        run: |
-          cat login-server*.log
-          cat map-server*.log
-          cat search-server*.log
-          cat world-server*.log
-
-          if grep -qi "warning\|error\|crash" login-server*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" map-server*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" search-server*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" world-server*.log; then
-              exit -1
-          fi
-
-  xi_test_Linux:
-    runs-on: ubuntu-24.04
-    needs: Linux_Clang18_64bit
-    permissions:
-      contents: read         # Read repository contents
-      checks: write          # Create check runs with test results
-      pull-requests: write   # Post PR comments with test summaries
-      actions: read          # Browse workflow runs and artifacts
-      statuses: write        # Update commit statuses
-    services:
-      mysql:
-        image: mariadb:10.6
-        env:
-          MYSQL_DATABASE: xidb
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-          submodules: recursive # For navmeshes
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux_executables
-          path: .
-      - name: Install Dependencies
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-          python3 -m pip install -r tools/requirements.txt
-      - name: Verify MySQL connection from container
-        run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Run xi_test
-        run: |
-          chmod +x xi_test
-          ./xi_test --keep-going --output tests.ctrf.json
-      - name: Publish Test Report
-        uses: ctrf-io/github-test-reporter@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          report-path: './tests.ctrf.json'
-          github-report: true
-          summary: true
-          pull-request: false
-          status-check: true
-          status-check-name: 'xi_test (Linux)'
-          annotate: true
-          upload-artifact: true
-          artifact-name: 'xi_test-ctrf-linux'
-        if: always()
-
-  MultiInstance_Startup_Checks_Linux:
-    runs-on: ubuntu-24.04
-    needs: Linux_Clang18_64bit
-    services:
-      mysql:
-        image: mariadb:10.6
-        env:
-          MYSQL_DATABASE: xidb
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux_executables
-          path: .
-      - name: Install Dependencies
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-          python3 -m pip install -r tools/requirements.txt
-      - name: Verify MySQL connection from container
-        run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Assign odd zones a different port
-        run: |
-          mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
-      - name: Copy settings
-        run: |
-          cp settings/default/* settings/
-      - name: Startup checks
-        env:
-          MYSQL_HOST: mysql
-        run: |
-          chmod +x xi_connect
-          chmod +x xi_map
-          chmod +x xi_search
-          chmod +x xi_world
-          ls -l
-
-          printf "\nStart server processes\n"
-          screen -d -m -S xi_connect ./xi_connect --log login-server.log
-          screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
-          screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
-          screen -d -m -S xi_world ./xi_world --log world-server.log
-          sleep 300s
-          killall screen
-      - name: Check for errors and warnings
-        if: ${{ success() || failure() }}
-        run: |
-          cat login-server*.log
-          cat search-server*.log
-          cat map-server-0*.log
-          cat map-server-1*.log
-          cat world-server*.log
-
-          if grep -qi "warning\|error\|crash" login-server*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" search-server*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" map-server-0*.log; then
-              exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" map-server-1*.log; then
-            exit -1
-          fi
-
-          if grep -qi "warning\|error\|crash" world-server*.log; then
-            exit -1
-          fi
-
-  xi_test_Windows:
-    runs-on: windows-2025
-    needs: Windows_64bit_Debug
-    permissions:
-      contents: read         # Read repository contents
-      checks: write          # Create check runs with test results
-      pull-requests: write   # Post PR comments with test summaries
-      actions: read          # Browse workflow runs and artifacts
-      statuses: write        # Update commit statuses
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-          submodules: recursive # For navmeshes
-      - uses: actions/download-artifact@v4
-        with:
-          name: windows_executables
-          path: .
-      - uses: zach2good/setup-mariadb@v1
-        with:
-          database: xidb
-      - name: Install Python Dependencies
-        shell: bash
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          python3 -m pip install -r tools/requirements.txt
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Run xi_test
-        shell: bash
-        run: |
-          ./xi_test.exe --keep-going --output tests.ctrf.json
-      - name: Publish Test Report
-        uses: ctrf-io/github-test-reporter@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          report-path: './tests.ctrf.json'
-          github-report: true
-          summary: true
-          pull-request: false
-          status-check: true
-          status-check-name: 'xi_test (Windows)'
-          annotate: true
-          upload-artifact: true
-          artifact-name: 'xi_test-ctrf-windows'
-        if: always()
-
-  Full_Startup_Checks_Windows:
-    runs-on: windows-2025
-    needs: Windows_64bit_Debug
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - uses: actions/download-artifact@v4
-        with:
-          name: windows_executables
-          path: .
-      - uses: zach2good/setup-mariadb@v1
-        with:
-          database: xidb
-      - name: Copy settings
-        shell: bash
-        run: |
-          cp settings/default/* settings/
-      - name: Install Python Dependencies
-        shell: bash
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          python3 -m pip install -r tools/requirements.txt
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Startup checks
-        shell: bash
-        run: |
-          python3 ./tools/ci/startup_checks.py
-
-  Full_Startup_Checks_Windows_Tracy_Modules:
-    runs-on: windows-2025
-    needs: Windows_64bit_Release_Tracy_Modules
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-          submodules: recursive # For navmeshes
-      - uses: actions/download-artifact@v4
-        with:
-          name: windows_modules_executables
-          path: .
-      - uses: zach2good/setup-mariadb@v1
-        with:
-          database: xidb
-      - name: Rename exe
-        run: |
-          mv xi_map_tracy.exe xi_map.exe
-      - name: Copy settings
-        shell: bash
-        run: |
-          cp settings/default/* settings/
-      - name: Enable Modules
-        shell: bash
-        run: |
-          python3 << EOF
-          with open("modules/init.txt", "w") as f:
-              f.write("custom\n")
-              f.write("era\n")
-              f.write("example\n")
-              f.write("renamer\n")
-          EOF
-      - name: Install Python Dependencies
-        shell: bash
-        # TODO: Properly use python venv
-        run: |
-          python3 -m pip config set global.break-system-packages true
-          python3 -m pip install -r tools/requirements.txt
-      - name: Import SQL files
-        shell: bash
-        run: |
-          python3 ./tools/dbtool.py setup
-      - name: Startup checks
-        shell: bash
-        run: |
-          python3 ./tools/ci/startup_checks.py
+          path: |
+            build
+            ${{ env.SCCACHE_DIR }}
+          key: ${{ steps.restore_build.outputs.cache-primary-key }}

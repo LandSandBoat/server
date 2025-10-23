@@ -1638,10 +1638,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,186,1,255); -- aeroga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,216,1,255); -- gravity (1~255)
 
 -- Ajido_Marujido (134)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,166,1,255); -- thunder_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,167,1,255); -- thunder_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,171,1,255); -- water_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,172,1,255); -- water_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,212,1,255); -- burst (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,214,1,255); -- flood (1~255)
 
@@ -5834,7 +5830,49 @@ INSERT INTO `mob_spell_lists` VALUES ('PandemoniumLamp_NIN',563,346,1,255); -- h
 INSERT INTO `mob_spell_lists` VALUES ('PandemoniumLamp_NIN',563,349,1,255); -- kurayami_san (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('PandemoniumLamp_NIN',563,352,1,255); -- dokumori_san (1~255)
 
--- Next Available: 564
+-- Book Browser Bokabraq (BLM) Go! Go! Gobmuffin! (564)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,145,1,255); -- Fire II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,161,1,255); -- Stone III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,165,1,255); -- Thunder II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,170,1,255); -- Water II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,185,1,255); -- Aeroga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,190,1,255); -- Stonega II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,208,1,255); -- Tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,221,1,255); -- Poison II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,235,1,255); -- Burn (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,236,1,255); -- Frost (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,237,1,255); -- Choke (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,240,1,255); -- Drown (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,245,1,255); -- Drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,247,1,255); -- Aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,249,1,255); -- Blaze Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,252,1,255); -- Stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,253,1,255); -- Sleep (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,254,1,255); -- Blind (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,258,1,255); -- Bind (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,259,1,255); -- Sleep II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Book_Browser_Bokabraq',564,273,1,255); -- Sleepga (1~255)
+
+-- Chemical Cook Chemachiq (WHM) Go! Go! Gobmuffin! (565)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,4,1,255);   -- Cure IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,14,1,255);  -- Poisona (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,17,1,255);  -- Silena (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,21,1,255);  -- Holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,24,1,255);  -- Dia II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,29,1,255);  -- Banish II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,34,1,255);  -- Diaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,39,1,255);  -- Banishga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,45,1,255);  -- Protect III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,49,1,255);  -- Shell II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,53,1,255);  -- Blink (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,54,1,255);  -- Stoneskin (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,55,1,255);  -- Aquaveil (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,56,1,255);  -- Slow (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,57,1,255);  -- Haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,59,1,255);  -- Silence (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Chemical_Cook_Chemachiq',565,112,1,255); -- Flash (1~255)
+
+-- Next Available: 566
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

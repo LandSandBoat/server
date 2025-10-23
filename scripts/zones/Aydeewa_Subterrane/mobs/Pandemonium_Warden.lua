@@ -1,6 +1,37 @@
 -----------------------------------
 -- Area: Aydeewa Subterrane
 --  ZNM: Pandemonium Warden
+--
+-- !pos 200 33 -140 68
+-- Spawn by trading Pandemonium key: !additem 2572
+-- Wiki: https://ffxiclopedia.fandom.com/wiki/Pandemonium_Warden
+--       https://www.bg-wiki.com/ffxi/Pandemonium_Warden
+-- Videos: https://youtu.be/oOCCjH8isiA
+--         https://youtu.be/T_Us2Tmlm-E
+--         https://youtu.be/fvgG8zfqr2o
+--         https://youtu.be/BPbsHhbi4LE
+--
+-- Notes: See Pandemonium_Warden_HNM.lua for details on intermediate phases. This file will refer specifically to the behavior of this mob's short sequences between phases and the final form
+--        spawns and immedaitely performs his sequence:
+--          Cannot be damaged, doesn't autoattack/cast
+--          calls 6 corpselight pets, which do nothing but follow their target
+--          uses cackle
+--          uses hellsnap
+--          disappears himself and Lamps (pets)
+--          Other mobId spawns in the particular phase, with fresh enmity table
+--          when mob is defeated, does the same thing as before
+--
+--        When final intermediate phase is defeated, PW appears in final form
+--          calls all 8 base pets in Dverger form
+--          can be damaged/killed
+--          pets and himself have access to BLM spells and Dverger mobskills
+--          performs an astral flow sequence every 25% hp
+--            calls secondary pet group: amount based on living Lamps + himself (i.e if he has 4 lamps up, he will call 5 avatars)
+--            12s later PW will AF and his avatars will use their respective abilities and die
+--              Everyone except tank should be prepared to get away when this happens, though there's plenty of time to run away unless you get stun locked by pet spells
+--              "All avatars are summoned at once, and with them plus the lamps up, its hard to move your character."
+--              "You will probably get locked in place and die from game mechanics alone."
+-- TODO pet groups are: first 8 for all phase pets, final 9 are specifically for astral flow avatars
 -----------------------------------
 local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
@@ -62,6 +93,8 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('PWDespawnTime', GetSystemTime() + 7200)
     mob:setLocalVar('phase', 1)
     mob:setLocalVar('astralFlow', 1)
+
+    mob:showText(mob, ID.text.PW_WHO_DARES)
 end
 
 entity.onMobDisengage = function(mob)
@@ -204,12 +237,18 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        DespawnMob(ID.mob.PANDEMONIUM_WARDEN + 1)
+        DespawnMob(mob:getID())
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.PANDEMONIUM_QUELLER)
+    if player then
+        player:addTitle(xi.title.PANDEMONIUM_QUELLER)
+    end
+
+    if optParams.isKiller or optParams.noKiller then
+        mob:showText(mob, ID.text.PW_WHO_DARES + 1)
+    end
 
     -- Despawn pets
     for i = 0, 1 do

@@ -23,11 +23,13 @@
 #define _CLUABASEENTITY_H
 
 #include "common/cbasetypes.h"
+#include "enums/mission_log.h"
 #include "luautils.h"
 #include "packets/s2c/0x009_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
+enum class QuestLog : uint8_t;
 enum class POSMODE : uint8;
 enum class MusicSlot : uint16_t;
 enum class ChocoboColor : uint8_t;
@@ -400,21 +402,21 @@ public:
     void   addRankPoints(uint16 rankpoints);
     void   setRankPoints(uint16 rankpoints);
 
-    void  addQuest(uint8 questLogID, uint16 questID);
-    void  delCurrentQuest(uint8 questLogID, uint16 questID);
-    void  delQuest(uint8 questLogID, uint16 questID);
-    uint8 getQuestStatus(uint8 questLogID, uint16 questID);
-    bool  hasCompletedQuest(uint8 questLogID, uint16 questID);
-    void  completeQuest(uint8 questLogID, uint16 questID);
+    void  addQuest(QuestLog logId, uint16 questId) const;
+    void  delCurrentQuest(QuestLog logId, uint16 questID) const;
+    void  delQuest(QuestLog logId, uint16 questID) const;
+    uint8 getQuestStatus(QuestLog logId, uint16 questID) const;
+    bool  hasCompletedQuest(QuestLog logId, uint16 questID) const;
+    void  completeQuest(QuestLog logId, uint16 questID) const;
 
-    void   addMission(uint8 missionLogID, uint16 missionID);
-    void   delMission(uint8 missionLogID, uint16 missionID);
-    uint16 getCurrentMission(sol::object const& missionLogObj);
-    bool   hasCompletedMission(uint8 missionLogID, uint16 missionID);
-    void   completeMission(uint8 missionLogID, uint16 missionID);
+    void   addMission(MissionLog logId, uint16 missionID) const;
+    void   delMission(MissionLog logId, uint16 missionID) const;
+    uint16 getCurrentMission(sol::object const& missionLogObj) const;
+    bool   hasCompletedMission(MissionLog logId, uint16 missionID) const;
+    void   completeMission(MissionLog logId, uint16 missionID) const;
 
-    void   setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj);
-    uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);
+    void   setMissionStatus(MissionLog logId, sol::object const& arg2Obj, sol::object const& arg3Obj) const;
+    uint32 getMissionStatus(MissionLog logId, sol::object const& missionStatusPosObj) const;
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2);
     bool   getEminenceCompleted(uint16 recordID);
@@ -435,11 +437,11 @@ public:
     void delUniqueEvent(uint16 uniqueEventId);
     bool hasCompletedUniqueEvent(uint16 uniqueEventId);
 
-    void  addAssault(uint8 missionID);
+    void  addAssault(uint8 missionID) const;
     void  delAssault(uint8 missionID);
     uint8 getCurrentAssault();
     bool  hasCompletedAssault(uint8 missionID);
-    void  completeAssault(uint8 missionID);
+    void  completeAssault(uint8 missionID) const;
 
     void addKeyItem(KeyItem keyItemID) const;
     auto hasKeyItem(KeyItem keyItemID) const -> bool;
@@ -547,10 +549,10 @@ public:
     uint32 canLearnAbility(uint16 abilityID);
     void   delLearnedAbility(uint16 abilityID);
 
-    void   addSpell(uint16 spellID, sol::variadic_args va);
+    void   addSpell(uint16 spellID, const sol::optional<sol::table>& paramTable);
     bool   hasSpell(uint16 spellID);
     uint32 canLearnSpell(uint16 spellID);
-    void   delSpell(uint16 spellID);
+    void   delSpell(uint16 spellID, const sol::optional<sol::table>& paramTable);
 
     void recalculateSkillsTable();
     void recalculateAbilitiesTable();
@@ -817,9 +819,9 @@ public:
     uint8 getActiveManeuverCount();
     void  removeOldestManeuver();
     void  removeAllManeuvers();
-    auto  getAttachment(uint8 slotId) -> CItem*;
+    auto  getAttachment(uint8 slotId) const -> CItem*;
     auto  getAttachments() -> sol::table;
-    void  setAttachment(uint8 attachmentItemID, uint8 slotID);
+    void  setAttachment(uint8 attachmentItemID, uint8 slotID) const;
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
     bool  isExceedingElementalCapacity();

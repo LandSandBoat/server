@@ -50,7 +50,7 @@ quest.sections =
             {
                 [10235] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
-                        player:addSpell(xi.magic.spell.CHERUKIKI, true, true)
+                        player:addSpell(xi.magic.spell.CHERUKIKI, { silentLog = true })
                         player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.CHERUKIKI)
                     end
                 end,

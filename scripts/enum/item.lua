@@ -9282,6 +9282,7 @@ xi.item =
     MAXENTIUS                           = 22031,
     THUNDER_HAMMER                      = 22032,
     FLORAL_HAGOITA                      = 22039,
+    DAYBREAK                            = 22040,
     WIZARDS_ROD                         = 22042,
     APKALLU_SCEPTER                     = 22043,
     TENGU_WAR_FAN                       = 22044,

@@ -29,23 +29,25 @@ addSpellsInBatches = function(player, targetName, validSpells, batchSize, learne
 
     local startTime = GetSystemTime()
     local remainingSpells = {}
-    local save = true
-    local silent = true
-    local sendUpdate = false
+    local addSpellConfig =
+    {
+        silentLog = true,
+        saveToDB = true,
+        sendUpdate = false,
+    }
 
     for i = 1, #validSpells do
         if i > batchSize then
             remainingSpells[i - batchSize] = validSpells[i]
         else
-            targ:addSpell(validSpells[i], silent, save, sendUpdate)
+            targ:addSpell(validSpells[i], addSpellConfig)
         end
     end
 
     learned = learned + batchSize
     if learned >= total then
-        -- send player update by deleting then re-adding a spell now that all spells are added
-        targ:delSpell(validSpells[1])
-        targ:addSpell(validSpells[1], true, true, true)
+        -- send player update "<player> learns a new spell"
+        player:messageBasic(xi.msg.basic.PLAYER_LEARNS_NEW_SPELL)
         player:printToPlayer(fmt('{} now has all spells.', targ:getName()), xi.msg.channel.SYSTEM_3)
     else
         player:printToPlayer(fmt('{} now has learned {} of {} spells.', targ:getName(), learned, total), xi.msg.channel.SYSTEM_3)

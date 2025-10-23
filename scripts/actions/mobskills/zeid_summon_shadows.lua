@@ -25,8 +25,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
         shadowOne:spawn()
         shadowTwo:spawn()
-        shadowOne:setPos(xPos, yPos, zPos)
-        shadowTwo:setPos(xPos, yPos, zPos)
+        shadowOne:setPos(xPos + math.random(-2, 2), yPos, zPos + math.random(-2, 2))
+        shadowTwo:setPos(xPos + math.random(-2, 2), yPos, zPos + math.random(-2, 2))
         shadowOne:updateEnmity(target)
         shadowTwo:updateEnmity(target)
     end

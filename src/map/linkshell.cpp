@@ -24,8 +24,8 @@
 #include <cstring>
 
 #include "packets/char_status.h"
-#include "packets/chat_message.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
@@ -352,7 +352,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
             auto newPacket = packet->copy();
             if (member->PLinkshell2 == this)
             {
-                if (newPacket->getType() == CChatMessagePacket::id)
+                if (newPacket->getType() == static_cast<uint16_t>(PacketS2C::GP_SERV_COMMAND_CHAT_STD))
                 {
                     newPacket->ref<uint8>(0x04) = MESSAGE_LINKSHELL2;
                 }

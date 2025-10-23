@@ -10,10 +10,11 @@
 
 #include "common/timer.h"
 
+#include "map/enums/chat_message_type.h"
 #include "map/packet_system.h"
 #include "map/packets/auction_house.h"
 #include "map/packets/basic.h"
-#include "map/packets/chat_message.h"
+#include "map/packets/s2c/0x017_chat_std.h"
 
 #include "map/map_session.h"
 #include "map/zone.h"
@@ -90,7 +91,7 @@ class AHPaginationModule : public CPPModule
 
                 return 0;
             }();
-            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have {} items listed for sale.", ahListings).c_str(), "");
+            PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have {} items listed for sale.", ahListings));
         }
 
         PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % totalPages_);
@@ -110,7 +111,7 @@ class AHPaginationModule : public CPPModule
         // If we get back 0 results, we're at the end of the list. We should redo the query and reset to page 1 (OFFSET 0)
         if (rset && rset->rowsCount() == 0)
         {
-            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, totalPages_).c_str(), "");
+            PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, totalPages_));
 
             // Reset to Page 1
             // Overwrite the original rset here
@@ -131,7 +132,7 @@ class AHPaginationModule : public CPPModule
         // TODO: Don't use totalPages_ here, use the actual number of pages of results.
         // Current (10 items): Current page: 2 of 99. Showing 4 items.
         // Desired (10 items): Current page: 2 of 2. Showing 4 items.
-        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, totalPages_, rset->rowsCount()).c_str(), "");
+        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, totalPages_, rset->rowsCount()));
 
         FOR_DB_MULTIPLE_RESULTS(rset)
         {

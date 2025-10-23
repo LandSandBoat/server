@@ -4892,7 +4892,7 @@ INSERT INTO `item_weapon` VALUES (22036,'bagua_wand',11,0,228,228,242,0,1,288,19
 INSERT INTO `item_weapon` VALUES (22037,'sifang_wand',11,0,242,242,255,0,1,280,193,0);       -- DMG:193 Delay:280
 INSERT INTO `item_weapon` VALUES (22038,'bhima',11,0,255,255,269,0,1,280,194,0);             -- DMG:194 Delay:280
 INSERT INTO `item_weapon` VALUES (22039,'floral_hagoita',11,0,0,0,0,0,1,264,2,0);            -- DMG:2 Delay:264
-INSERT INTO `item_weapon` VALUES (22040,'daybreak',1,0,0,0,0,1,1,999,1,0);                   -- TODO: Not implemented
+INSERT INTO `item_weapon` VALUES (22040,'daybreak',11,0,228,228,40,3,1,216,150,0);
 INSERT INTO `item_weapon` VALUES (22041,'bunzis_rod',1,0,0,0,0,1,1,999,1,0);                 -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22042,'wizards_rod',11,0,250,250,250,0,1,216,200,0);
 INSERT INTO `item_weapon` VALUES (22043,'apkallu_scepter',1,0,0,0,0,1,1,999,1,0);   -- TODO: Not implemented

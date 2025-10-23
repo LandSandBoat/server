@@ -29,7 +29,6 @@
 #include "entities/charentity.h"
 
 #include "packets/basic.h"
-#include "packets/chat_message.h"
 #include "packets/s2c/0x00b_logout.h"
 
 #include "utils/charutils.h"

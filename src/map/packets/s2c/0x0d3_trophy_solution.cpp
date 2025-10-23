@@ -62,9 +62,7 @@ GP_SERV_COMMAND_TROPHY_SOLUTION::GP_SERV_COMMAND_TROPHY_SOLUTION(const CBaseEnti
     packet.EntryUniqueNo   = PLotter->id;
     packet.EntryActIndex   = PLotter->targid;
     packet.TrophyItemIndex = slotId;
-
-    // Use packBitsBE to handle lot number - this fixes an offset problem with lot numbers
-    packBitsBE(reinterpret_cast<uint8_t*>(&packet), lot, 144, 16);
+    packet.EntryPoint      = lot;
 
     std::memcpy(packet.sLootName2, PLotter->getName().c_str(), std::min(PLotter->getName().size(), sizeof(packet.sLootName2)));
 }

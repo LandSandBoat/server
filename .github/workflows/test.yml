@@ -1,0 +1,189 @@
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: 'Linux/Windows platform to test.'
+        required: true
+        type: string
+      test_modules:
+        description: 'Test with modules enabled.'
+        required: false
+        type: boolean
+        default: false
+      multi_process:
+        description: 'Test with multiple map processes.'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  Test:
+    name: ${{ format('{0}Test ({1})', inputs.multi_process && 'Multi-Process ' || '', inputs.runner) }}
+    runs-on: ${{ inputs.runner }}
+    permissions:
+      contents: read         # Read repository contents
+      checks: write          # Create check runs with test results
+      pull-requests: write   # Post PR comments with test summaries
+      actions: read          # Browse workflow runs and artifacts
+      statuses: write        # Update commit statuses
+    defaults:
+      run:
+        shell: bash
+    env:
+      XI_NETWORK_SQL_HOST: 127.0.0.1
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_SQL_DATABASE: xidb
+      XI_NETWORK_SQL_LOGIN: xiadmin
+      XI_NETWORK_SQL_PASSWORD: 'password'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: recursive # For navmeshes
+
+      - name: Install dependencies (APT)
+        if: ${{ runner.os == 'Linux' }}
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          command: |
+            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+              binutils \
+              git \
+              libmariadb-dev-compat \
+              libzmq5 \
+              lua5.1 \
+              luajit \
+              mariadb-client \
+              mariadb-server \
+              openssl \
+              tzdata \
+              zlib1g
+
+      - name: Setup MariaDB (Windows)
+        if: ${{ runner.os == 'Windows' }}
+        uses: zach2good/setup-mariadb@v1
+
+      - name: Setup database
+        run: |
+          ${{ runner.os == 'Windows' && 'mysql -u root -proot' || 'sudo mysql' }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.XI_NETWORK_SQL_DATABASE }} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+          ${{ runner.os == 'Windows' && 'mysql -u root -proot' || 'sudo mysql' }} -e "CREATE USER IF NOT EXISTS '${{ env.XI_NETWORK_SQL_LOGIN }}'@'%' IDENTIFIED BY '${{ env.XI_NETWORK_SQL_PASSWORD }}';"
+          ${{ runner.os == 'Windows' && 'mysql -u root -proot' || 'sudo mysql' }} -e "GRANT ALL PRIVILEGES ON ${{ env.XI_NETWORK_SQL_DATABASE }}.* TO '${{ env.XI_NETWORK_SQL_LOGIN }}'@'%';"
+          ${{ runner.os == 'Windows' && 'mysql -u root -proot' || 'sudo mysql' }} -e "FLUSH PRIVILEGES;"
+
+      - uses: actions/setup-python@v5
+        id: setup_python
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m venv .venv
+          source ${{ runner.os == 'Windows' && '.venv/Scripts/activate' || '.venv/bin/activate' }}
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
+
+      - name: Activate Python virtual environment
+        run: |
+          echo "${{ runner.os == 'Windows' && '.venv/Scripts' || '.venv/bin' }}" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$(pwd)/.venv" >> $GITHUB_ENV
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ format('LSB_{0}_Debug_{1}', runner.os, github.sha) }}
+          path: .
+
+      - name: Prepare executables
+        run: |
+          mv xi_map_tracy xi_map 2> /dev/null || true
+          chmod +x xi_*
+
+      - name: Enable modules
+        if: ${{ inputs.test_modules }}
+        run: |
+          python <<EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("example\n")
+              f.write("renamer\n")
+          EOF
+
+      - name: Import SQL files
+        run: python ./tools/dbtool.py update
+
+      - name: Run xi_test
+        id: xi_test
+        run: ./xi_test --keep-going --output tests.ctrf.json
+
+      - name: Publish Test Report
+        if: ${{ !cancelled() }}
+        uses: ctrf-io/github-test-reporter@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          report-path: './tests.ctrf.json'
+          github-report: true
+          summary: true
+          pull-request: false
+          status-check: true
+          status-check-name: 'xi_test (${{ runner.os }})'
+          annotate: true
+          upload-artifact: true
+          artifact-name: 'xi_test-ctrf-${{ runner.os }}'
+
+      - name: Startup checks
+        id: tests
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: python -m tools.ci.startup_checks ${{ inputs.multi_process && 'multi' || '' }}
+
+      - name: Summarize checks
+        id: summarize_checks
+        if: ${{ always() }}
+        run: |
+          echo "## Startup Results" >> $GITHUB_STEP_SUMMARY
+          found_issues=false
+          for log_file in ./log/*.log; do
+              if [[ -f "$log_file" && -s "$log_file" ]]; then
+                  if grep -qi "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:"; then
+                      found_issues=true
+                      log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
+                      echo "### :x: ${log_name} Tests Failed" >> $GITHUB_STEP_SUMMARY
+                      echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                      grep -i "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:" >> $GITHUB_STEP_SUMMARY
+                      echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                      echo "" >> $GITHUB_STEP_SUMMARY
+                  fi
+              fi
+          done
+          if [[ "$found_issues" == "false" ]]; then
+              if [[ "${{ steps.tests.outcome }}" == "success" ]]; then
+                  echo "### :heavy_check_mark: All tests passed." >> $GITHUB_STEP_SUMMARY
+              else
+                  echo "### :x: Startup tests failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
+                  echo "Check the logs for details." >> $GITHUB_STEP_SUMMARY
+                  found_issues=true
+              fi
+          fi
+          for log_file in ./log/*.log; do
+              if [[ -f "$log_file" && -s "$log_file" ]]; then
+                  log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
+                  echo "### :sailboat: ${log_name}" >> $GITHUB_STEP_SUMMARY
+                  echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                  cat "$log_file" >> $GITHUB_STEP_SUMMARY
+                  echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+              fi
+          done
+          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
+
+      - name: Fail Workflow if Checks Failed
+        if: ${{ steps.xi_test.outcome == 'failure' || steps.tests.outcome == 'failure' || steps.summarize_checks.outputs.issues_found == 'true' }}
+        run: |
+          echo "Startup checks failed. See summary for details."
+          exit 1

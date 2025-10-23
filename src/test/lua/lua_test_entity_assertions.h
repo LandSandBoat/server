@@ -25,6 +25,8 @@
 #include "common/lua.h"
 #include <string>
 
+enum class QuestLog : uint8_t;
+enum class MissionLog : uint8_t;
 enum class KeyItem : uint16_t;
 enum ZONEID : uint16;
 enum EFFECT : uint16;
@@ -42,14 +44,14 @@ public:
     auto hasEffect(EFFECT effectId) -> CLuaTestEntityAssertions&;
     auto hasNationRank(uint8 expectedRank) -> CLuaTestEntityAssertions&;
     auto hasKI(KeyItem keyItemId) -> CLuaTestEntityAssertions&;
-    auto hasMission(uint8 logId, uint16 expectedMission) -> CLuaTestEntityAssertions&;
-    auto hasCompletedMission(uint8 logId, uint16 missionId) -> CLuaTestEntityAssertions&;
+    auto hasMission(MissionLog logId, uint16 expectedMission) -> CLuaTestEntityAssertions&;
+    auto hasCompletedMission(MissionLog logId, uint16 missionId) -> CLuaTestEntityAssertions&;
     auto hasItem(uint16 itemId) -> CLuaTestEntityAssertions&;
     auto hasModifier(Mod modifierId, int32 expectedValue) -> CLuaTestEntityAssertions&;
     auto isSpawned() -> CLuaTestEntityAssertions&;
     auto isAlive() -> CLuaTestEntityAssertions&;
-    auto hasQuest(uint8 logId, uint16 questId) -> CLuaTestEntityAssertions&;
-    auto hasCompletedQuest(uint8 logId, uint16 questId) -> CLuaTestEntityAssertions&;
+    auto hasQuest(QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
+    auto hasCompletedQuest(QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
     auto hasGil(uint32 amount) -> CLuaTestEntityAssertions&;
 
     auto no() -> CLuaTestEntityAssertions&;

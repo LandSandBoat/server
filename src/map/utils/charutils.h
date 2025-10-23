@@ -27,6 +27,8 @@
 #include "items/item_equipment.h"
 #include "zone.h"
 
+enum class MissionLog : uint8_t;
+enum class QuestLog : uint8_t;
 enum class KeyItem : uint16_t;
 class CPetEntity;
 class CMobEntity;
@@ -72,9 +74,13 @@ namespace charutils
     void LoadEquip(CCharEntity* PChar);
 
     void SendQuestMissionLog(CCharEntity* PChar);
+    void SendPartialMissionLog(CCharEntity* PChar, MissionLog log, bool completed);
+    void SendPartialQuestLog(CCharEntity* PChar, QuestLog log, bool completed);
     void SendRecordsOfEminenceLog(CCharEntity* PChar);
     void SendKeyItems(CCharEntity* PChar);
     void SendInventory(CCharEntity* PChar);
+    void SendUnityPackets(CCharEntity* PChar);
+    void SendExtendedJobPackets(CCharEntity* PChar);
 
     void CalculateStats(CCharEntity* PChar);
     void UpdateSubJob(CCharEntity* PChar);

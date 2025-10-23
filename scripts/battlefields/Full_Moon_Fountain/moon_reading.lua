@@ -54,7 +54,7 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
         SpawnMob(phaseTwoMobId)
     end
 
-    -- Spawn Trion (Ally)
+    -- Spawn Ajido (Ally)
     local ajido = player:getBattlefield():insertEntity(33, true, true)
     player:setPos(unpack(playerCoords[battlefieldArea]))
     ajido:setSpawn(unpack(ajidoCoords[battlefieldArea]))

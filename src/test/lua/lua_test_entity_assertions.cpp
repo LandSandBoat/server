@@ -266,7 +266,7 @@ auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAsserti
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expectedMission) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasMission(const MissionLog logId, const uint16 expectedMission) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -276,8 +276,8 @@ auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expect
 
     const auto currentMission     = entity_->getCurrentMission(sol::make_object(lua.lua_state(), logId));
     const auto logIdValue         = logId;
-    const auto logIdStr           = getEnumKey("xi.mission.log_id", logIdValue);
-    const auto missionArea        = missionLogIdMap.contains(logIdValue) ? missionLogIdMap.at(logIdValue) : std::to_string(logIdValue);
+    const auto logIdStr           = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logIdValue));
+    const auto missionArea        = missionLogIdMap.contains(static_cast<uint8_t>(logIdValue)) ? missionLogIdMap.at(static_cast<uint8_t>(logIdValue)) : std::to_string(static_cast<uint8_t>(logIdValue));
     const auto expectedMissionStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), expectedMission);
     const auto currentMissionStr  = getEnumKey(std::format("xi.mission.id.{}", missionArea), currentMission);
 
@@ -294,7 +294,7 @@ auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expect
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasCompletedMission(const uint8 logId, const uint16 missionId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasCompletedMission(const MissionLog logId, const uint16 missionId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -302,8 +302,8 @@ auto CLuaTestEntityAssertions::hasCompletedMission(const uint8 logId, const uint
         return *this;
     }
 
-    const auto logIdStr     = getEnumKey("xi.mission.log_id", logId);
-    const auto missionArea  = missionLogIdMap.contains(logId) ? missionLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr     = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logId));
+    const auto missionArea  = missionLogIdMap.contains(static_cast<uint8_t>(logId)) ? missionLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto missionIdStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), missionId);
 
     assertCondition(entity_->hasCompletedMission(logId, missionId),
@@ -391,7 +391,7 @@ auto CLuaTestEntityAssertions::isAlive() -> CLuaTestEntityAssertions&
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -399,8 +399,8 @@ auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId)
         return *this;
     }
 
-    const auto logIdStr   = getEnumKey("xi.questLog", logId);
-    const auto questArea  = questLogIdMap.contains(logId) ? questLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
+    const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->getQuestStatus(logId, questId) != 0,
@@ -416,7 +416,7 @@ auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasCompletedQuest(const uint8 logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasCompletedQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -424,8 +424,8 @@ auto CLuaTestEntityAssertions::hasCompletedQuest(const uint8 logId, const uint16
         return *this;
     }
 
-    const auto logIdStr   = getEnumKey("xi.questLog", logId);
-    const auto questArea  = questLogIdMap.contains(logId) ? questLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
+    const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->hasCompletedQuest(logId, questId),

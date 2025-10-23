@@ -30,10 +30,9 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
-#include "packets/conquest_map.h"
-
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
+#include "packets/s2c/0x05e_conquest.h"
 
 namespace conquest
 {
@@ -420,7 +419,7 @@ namespace conquest
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
-                    PChar->pushPacket<CConquestPacket>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
             }

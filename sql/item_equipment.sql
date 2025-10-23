@@ -10980,7 +10980,7 @@ INSERT INTO `item_equipment` VALUES (22036,'bagua_wand',99,119,1048576,218,0,0,3
 INSERT INTO `item_equipment` VALUES (22037,'sifang_wand',99,119,1048576,218,0,0,3,0,0,4);
 INSERT INTO `item_equipment` VALUES (22038,'bhima',99,119,1048576,818,0,0,3,0,0,5);
 INSERT INTO `item_equipment` VALUES (22039,'floral_hagoita',1,0,4194303,835,0,0,3,0,0,0);
-INSERT INTO `item_equipment` VALUES (22040,'daybreak',99,0,1589788,532,0,0,3,0,0,0);
+INSERT INTO `item_equipment` VALUES (22040,'daybreak',99,0,1589788,532,0,1,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (22041,'bunzis_rod',99,119,1622044,884,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (22042,'wizards_rod',99,119,1605656,845,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (22043,'apkallu_scepter',1,0,4194303,897,0,0,3,0,0,0);
