@@ -57,6 +57,10 @@ local burstMultipliersByTier =
     [5] = 1.5,
 }
 
+local function test()
+    local string = "this should fail CI"
+end
+
 local function calculateMobMagicBurst(caster, ele, target)
     local burstMultiplier = 1.0
     local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
