@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base"><img src="https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg"/></a>
+<a href="https://github.com/LandSandBoat/server/actions/workflows/publish_latest.yml?query=base"><img src="https://github.com/LandSandBoat/server/actions/workflows/publish_latest.yml/badge.svg"/></a>
 <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"/></a>
 <a href="https://github.com/LandSandBoat/server/pulls"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"/></a>
 </p>
