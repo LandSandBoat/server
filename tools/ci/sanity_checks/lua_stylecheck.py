@@ -105,8 +105,8 @@ class LuaStyleCheck:
         """Displays error_string along with filename and line.  Increments errcount for the class."""
 
         if self.show_errors:
-            print(f"#### {error_string}:\n")
-            print(f"> {self.filename}:{self.counter}\n")
+            print(f"#### {error_string}:")
+            print(f"> {self.filename}:{self.counter}")
             if not suppress_line_ref:
                 print(f"```lua\n{self.lines[self.counter - 1].strip()}\n```\n")
 
@@ -652,9 +652,7 @@ else:
     total_errors = LuaStyleCheck(target).errcount
 
 if total_errors != expected_errors:
-    if target != "test":
-        print(f"#### Lua styling errors: {total_errors}\n")
-    else:
+    if target == "test":
         print(
             f"### Stylecheck Unit tests failed! Expected {expected_errors} errors and found {total_errors}.\n"
         )

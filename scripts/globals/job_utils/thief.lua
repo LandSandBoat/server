@@ -147,6 +147,8 @@ xi.job_utils.thief.useAssassinsCharge = function(player, target, ability)
     end
 
     player:addStatusEffect(xi.effect.ASSASSINS_CHARGE, merits - 5, 0, 60, 0, crit)
+
+    return xi.effect.ASSASSINS_CHARGE
 end
 
 xi.job_utils.thief.useBully = function(player, target, ability)
@@ -190,6 +192,8 @@ xi.job_utils.thief.useConspirator = function(player, target, ability)
     end
 
     target:addStatusEffect(xi.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
+
+    return xi.effect.CONSPIRATOR
 end
 
 xi.job_utils.thief.useDespoil = function(player, target, ability, action)
@@ -262,6 +266,8 @@ xi.job_utils.thief.useFlee = function(player, target, ability)
     end
 
     player:addStatusEffect(xi.effect.FLEE, 10000, 0, duration)
+
+    return xi.effect.FLEE
 end
 
 xi.job_utils.thief.useHide = function(player, target, ability)
@@ -270,6 +276,8 @@ xi.job_utils.thief.useHide = function(player, target, ability)
     duration = duration * (1 + player:getMod(xi.mod.HIDE_DURATION) / 100)
 
     player:addStatusEffect(xi.effect.HIDE, 1, 0, math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
+
+    return xi.effect.HIDE
 end
 
 xi.job_utils.thief.useLarceny = function(player, target, ability, action)
@@ -385,10 +393,14 @@ xi.job_utils.thief.usePerfectDodge = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
 
     player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
+
+    return xi.effect.PERFECT_DODGE
 end
 
 xi.job_utils.thief.useSneakAttack = function(player, target, ability)
     player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
+
+    return xi.effect.SNEAK_ATTACK
 end
 
 xi.job_utils.thief.useSteal = function(player, target, ability, action)
@@ -461,4 +473,6 @@ end
 
 xi.job_utils.thief.useTrickAttack = function(player, target, ability)
     player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
+
+    return xi.effect.TRICK_ATTACK
 end

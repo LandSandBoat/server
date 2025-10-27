@@ -1,7 +1,12 @@
 #!/bin/bash
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find tools -name '*.py')
+fi
 
 for file in "${targets[@]}"; do
     [[ -f $file && $file == *.py ]] || continue
@@ -17,14 +22,17 @@ for file in "${targets[@]}"; do
             any_issues=true
         fi
 
-        echo "### \`$file\`"
         if [[ -n "$pylint_output" ]]; then
+            echo "#### Pylint Errors:"
+            echo "> $file"
             echo '```'
             echo "$pylint_output"
             echo '```'
             echo
         fi
         if [[ -n "$black_output" ]]; then
+            echo "#### Formatting Errors:"
+            echo "> $file"
             echo '```diff'
             echo "$black_output"
             echo '```'

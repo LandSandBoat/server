@@ -29,9 +29,9 @@
 
 #include "entities/charentity.h"
 
-#include "packets/auction_house.h"
 #include "packets/c2s/0x04e_auc.h"
 #include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x04c_auc.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -68,11 +68,11 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
     {
         if (isPartiallyUsed(PItem))
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, 197, 0, 0, 0, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, 197, 0, 0, 0, 0);
             return;
         }
 
-        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, PItem, param.ItemStacks, param.Commission);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, PItem, param.ItemStacks, param.Commission);
     }
 }
 
@@ -86,7 +86,7 @@ void auctionutils::OpenListOfSales(CCharEntity* PChar)
     {
         PChar->m_ah_history.clear();
         PChar->m_AHHistoryTimestamp = curTick;
-        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Info);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Info);
 
         // A single SQL query for the player's AH history which is stored in a Char Entity struct + vector.
         const auto rset = db::preparedStmt("SELECT itemid, price, stack FROM auction_house WHERE seller = ? AND sale=0 ORDER BY id ASC LIMIT 7", PChar->id);
@@ -107,7 +107,7 @@ void auctionutils::OpenListOfSales(CCharEntity* PChar)
     }
     else
     {
-        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Info, 246, 0, 0, 0, 0); // try again in a little while msg
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Info, 246, 0, 0, 0, 0); // try again in a little while msg
     }
 }
 
@@ -121,7 +121,7 @@ void auctionutils::RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar)
 
     for (size_t auctionSlot = 0; auctionSlot < totalItemsOnAh; auctionSlot++)
     {
-        PChar->pushPacket<CAuctionHousePacket>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(auctionSlot), PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(auctionSlot), PChar);
     }
 }
 
@@ -138,7 +138,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
     {
         if (isPartiallyUsed(PItem))
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0);
             return;
         }
 
@@ -148,7 +148,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
             if (PItem->getStackSize() == 1 || PItem->getStackSize() != PItem->getQuantity())
             {
                 ShowErrorFmt("AH: Incorrect quantity of item {}", PItem->getName());
-                PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
+                PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
                 return;
             }
             auctionFee = static_cast<uint32>(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (param.LimitPrice * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
@@ -163,7 +163,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         const auto PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
         if (PGil->getQuantity() < auctionFee || PGil->getReserve() > 0)
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Not enough gil to pay fee
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Not enough gil to pay fee
             return;
         }
 
@@ -183,7 +183,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         if (ahListLimit && ahListings >= ahListLimit)
         {
             DebugAuctionsFmt("AH: Player {} has reached the AH listing limit of {}", PChar->getName(), ahListLimit);
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
             return;
         }
 
@@ -191,15 +191,15 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
                               PItem->getID(), param.ItemStacks == 0, PChar->id, PChar->getName(), earth_time::timestamp(), param.LimitPrice))
         {
             ShowErrorFmt("AH: Cannot insert item {} to database", PItem->getName());
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
             return;
         }
 
         charutils::UpdateItem(PChar, LOC_INVENTORY, param.ItemWorkIndex, -static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize()));
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(auctionFee)); // Deduct AH fee
 
-        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
-        PChar->pushPacket<CAuctionHousePacket>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
     }
 }
 
@@ -212,7 +212,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
     {
-        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
     }
     else
     {
@@ -226,7 +226,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                 {
                     if (PChar->getStorage(LocID)->SearchItem(param.ItemNo) != ERROR_SLOTID)
                     {
-                        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
+                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
                         return false;
                     }
                 }
@@ -244,7 +244,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                     {
                         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
 
-                        PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
+                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
                         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
                         return true;
@@ -256,11 +256,11 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
         // You were unable to buy the {qty} {item}
         if (PItem)
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
         }
         else
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, 0);
         }
     }
 
@@ -299,7 +299,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
         });
         if (success)
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             return;
         }
@@ -307,7 +307,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
     }
 
     // Let client know something went wrong
-    PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0xE5, PChar, static_cast<uint8_t>(AucWorkIndex), true); // Inventory full, unable to remove msg
+    PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0xE5, PChar, static_cast<uint8_t>(AucWorkIndex), true); // Inventory full, unable to remove msg
 }
 
 void auctionutils::UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkIndex)
@@ -316,5 +316,5 @@ void auctionutils::UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkInde
 
     // AucWorkIndex can technically be -1 but this is checked at the packet handler level.
     DebugAuctionsFmt("AH: UpdateSaleListByPlayer: player: {}, AucWorkIndex: {}", PChar->getName(), AucWorkIndex);
-    PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCheck, AucWorkIndex, PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCheck, AucWorkIndex, PChar);
 }

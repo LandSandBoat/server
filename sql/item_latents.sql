@@ -1894,6 +1894,9 @@ INSERT INTO `item_latents` VALUES (16911,287,1,0,92);    -- DMG 29~40, increases
 -- Kitsutsuki
 INSERT INTO `item_latents` VALUES (16912,165,5,59,17);   -- Vs. plantoids: Critical hit rate +5%
 
+-- Hocho
+INSERT INTO `item_latents` VALUES (16924,135,3,40,0);    -- Cooking +3 in Main hand
+
 -- Royal Swordsman's Blade +1/+2
 INSERT INTO `item_latents` VALUES (16948,10,2,53,1);     -- VIT +2 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (16949,10,3,53,1);     -- VIT +3 in areas outside own nation's control
@@ -3145,6 +3148,12 @@ INSERT INTO `item_latents` VALUES (21817,369,-3,56,0);   -- Drains 3 MP/tic from
 
 -- Gokotai
 -- INSERT INTO `item_latents` VALUES (21922,368,1,??,??); -- Regain based on Dual Wield,1 TP/tic for every 1 Dual Wield
+
+-- Debahocho
+INSERT INTO `item_latents` VALUES (21923,135,2,40,0); -- Cooking +2 in Main hand
+
+-- Debahocho +1
+INSERT INTO `item_latents` VALUES (21924,135,3,40,0); -- Cooking +3 in Main hand
 
 -- Saotome-no-Tachi
 -- INSERT INTO `item_latents` VALUES (21968,25,10,??,0); -- Dynamis (D): Accuracy+10

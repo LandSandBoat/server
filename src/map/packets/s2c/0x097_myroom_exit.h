@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2024 LandSandBoat Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CFISHRANKINGPACKET_H
-#define _CFISHRANKINGPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
+#include "base.h"
 
-#include "basic.h"
-
-struct FishingContestEntry;
-
-class CFishRankingPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0097
+// This packet is sent by the server when the client is exiting the mog house of another player.
+class GP_SERV_COMMAND_MYROOM_EXIT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MYROOM_EXIT, GP_SERV_COMMAND_MYROOM_EXIT>
 {
 public:
-    CFishRankingPacket(const std::vector<FishingContestEntry>& entries, int8 language, int32 timestamp, int32 message_offset, uint32 numEntries, uint8 msg_chunk);
-};
+    struct PacketData
+    {
+        uint8_t Result;       // PS2: Result
+        uint8_t padding05[3]; // PS2: (New; did not exist.)
+    };
 
-#endif
+    // TODO: Unimplemented
+    GP_SERV_COMMAND_MYROOM_EXIT() = default;
+};

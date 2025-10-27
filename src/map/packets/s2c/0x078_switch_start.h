@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -21,29 +21,23 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
+#include "base.h"
 
-#include "basic.h"
-
-#include <string>
-
-enum OBJECTIVEUTILITY_TYPE : uint8
-{
-    OBJECTIVEUTILITY_COUNTDOWN = 0x01,
-    OBJECTIVEUTILITY_PROGRESS  = 0x02,
-    OBJECTIVEUTILITY_HELP      = 0x04,
-    OBJECTIVEUTILITY_FENCE     = 0x08
-};
-
-class CObjectiveUtilityPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0078
+// This packet is sent by the server to inform the client when a player has made a proposal. (via /nominate or /propose)
+class GP_SERV_COMMAND_SWITCH_START final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_SWITCH_START, GP_SERV_COMMAND_SWITCH_START>
 {
 public:
-    CObjectiveUtilityPacket();
-    CObjectiveUtilityPacket(uint32 duration, uint32 warning = 0);
+    struct PacketData
+    {
+        uint32_t UniqueNo;  // PS2: UniqueNo
+        uint32_t AllNum;    // PS2: AllNum
+        uint16_t ActIndex;  // PS2: ActIndex
+        uint8_t  sName[15]; // PS2: sName
+        uint8_t  Kind;      // PS2: Kind
+        uint8_t  Str[224];  // PS2: Str (variable length)
+    };
 
-    void addCountdown(uint32 duration, uint32 warning = 0);
-    void addBars(std::vector<std::pair<std::string, uint32>>&& bars);
-    void addScoreboard(const std::pair<int32, int32>& score, const std::vector<uint32>& data);
-    void addFence(float x, float z, float radius, float render, bool blue = false);
-    void addHelpText(uint16 title, uint16 description);
+    // TODO: Unimplemented
+    GP_SERV_COMMAND_SWITCH_START() = default;
 };

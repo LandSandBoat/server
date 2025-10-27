@@ -3,7 +3,7 @@
 ########
 # Base #
 ########
-FROM alpine:3.22 AS base
+FROM --platform=$BUILDPLATFORM alpine:3.22 AS base
 
 # Install runtime dependencies.
 RUN <<EOF

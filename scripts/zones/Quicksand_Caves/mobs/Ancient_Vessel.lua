@@ -7,13 +7,16 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    -- Mob always resists Silence. But it isnt an immunity, its a resistance rank of 11, and as such, it could potentially be immunobroken.
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addMod(xi.mod.SILENCE_RES_RANK, 11)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 27)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
 end
 
 return entity

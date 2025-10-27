@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade -r ./tools/requirements.txt
 
       - name: Run checks
-        run: ./tools/ci/sanity_checks.sh
+        run: ./tools/ci/sanity_checks.sh origin/base
 
       - name: Add sanity checks report to summary
         if: always()
@@ -50,7 +50,6 @@ jobs:
         with:
           name: changed-files
           path: changed-files.txt
-          retention-days: 7
         continue-on-error: true
 
   Lua_Language_server:

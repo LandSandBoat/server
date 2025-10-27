@@ -33,9 +33,7 @@ services:
       target: devtools
       context: .
     user: "1000:1000"
-    command: ["/server/tools/ci/sanity_checks.sh"]
-    environment:
-      GIT_REF: origin/base
+    command: ["/server/tools/ci/sanity_checks.sh", "origin/base"]
     volumes:
       - ./:/server
 

@@ -7,49 +7,53 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
--- TODO: Create listener for SCing with other AAs during DM
+local callPetParams =
+{
+    callPetJob = xi.job.DRG,
+}
 
-local function spawnArkAngelPet(mob, target)
+local function spawnArkAngelPet(mob)
     local battlefield = mob:getBattlefield()
-    if battlefield then
-        local battlefieldId   = battlefield:getID()
-        local battlefieldArea = battlefield:getArea()
-        local content         = xi.battlefield.contents[battlefieldId]
-        local selectedPet     = battlefieldId == xi.battlefield.id.DIVINE_MIGHT and 4 or 2
+    if not battlefield then
+        return
+    end
 
-        mob:setAutoAttackEnabled(false)
-        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        mob:injectActionPacket(mob:getID(), 11, 438, 0, 0x18, 101, 732, 55)
+    local battlefieldId   = battlefield:getID()
+    local battlefieldArea = battlefield:getArea()
+    local content         = xi.battlefield.contents[battlefieldId]
+    local petGroupIndex   = battlefieldId == xi.battlefield.id.DIVINE_MIGHT and 4 or 2
+    local petId           = content.groups[petGroupIndex]['mobIds'][battlefieldArea][1]
 
-        local pet = SpawnMob(content.groups[selectedPet]['mobIds'][battlefieldArea][1])
+    if xi.mob.callPets(mob, petId, callPetParams) then
+        local pet = GetMobByID(petId)
         if pet then
             battlefield:insertEntity(pet:getTargID(), false, true)
 
             pet:addListener('DEATH', 'AAGK_PET_DEATH', function(petArg)
                 local petBattlefield = petArg:getBattlefield()
-
                 petBattlefield:setLocalVar('petRespawnGK', GetSystemTime() + 30)
             end)
-
-            pet:updateEnmity(target)
         end
-
-        mob:setAutoAttackEnabled(true)
-        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     end
 end
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
+    mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 732)
+    mob:setMobMod(xi.mobMod.SPECIAL_COOL, 60)
+    mob:addMod(xi.mod.REGAIN, 90)
+    mob:addMod(xi.mod.REGEN, 12)
 end
 
 entity.onMobSpawn = function(mob)
-    xi.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob,
+    {
         specials =
         {
             -- "Meikyo Shisui is used very frequently."
@@ -58,7 +62,7 @@ entity.onMobSpawn = function(mob)
                 hpp      = math.random(90, 95),
                 cooldown = 90,
 
-                begCode = function(mobArg)
+                begCode  = function(mobArg)
                     mobArg:setLocalVar('order', 0)
                 end,
             },
@@ -67,36 +71,33 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    spawnArkAngelPet(mob, target)
+    spawnArkAngelPet(mob)
 end
 
 entity.onMobFight = function(mob, target)
     local order = mob:getLocalVar('order')
     if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
         if order == 0 then
-            mob:useMobAbility(946) -- Tachi - Yukikaze
+            mob:useMobAbility(xi.mobSkill.TACHI_YUKIKAZE)
             mob:setLocalVar('order', 1)
-            mob:setTP(2000)
         elseif order == 1 then
-            mob:useMobAbility(947) -- Tachi - Gekko
+            mob:useMobAbility(xi.mobSkill.TACHI_GEKKO)
             mob:setLocalVar('order', 2)
-            mob:setTP(1000)
         elseif order == 2 then
-            mob:useMobAbility(948) -- Tachi - Kasha
+            mob:useMobAbility(xi.mobSkill.TACHI_KASHA)
             mob:setLocalVar('order', 3)
-            mob:setTP(0)
         end
     end
 
-    local respawnTime = mob:getBattlefield():getLocalVar('petRespawnGK')
-    if
-        respawnTime ~= 0 and
-        respawnTime <= GetSystemTime()
-    then
-        local battlefield = mob:getBattlefield()
-        if battlefield then
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        local respawnTime = battlefield:getLocalVar('petRespawnGK')
+        if
+            respawnTime ~= 0 and
+            respawnTime <= GetSystemTime()
+        then
             battlefield:setLocalVar('petRespawnGK', 0)
-            spawnArkAngelPet(mob, target)
+            spawnArkAngelPet(mob)
         end
     end
 end

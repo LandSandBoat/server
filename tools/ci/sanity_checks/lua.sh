@@ -5,8 +5,13 @@
 # luarocks install luacheck --local
 # luarocks install lanes --local
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find scripts -name '*.lua')
+fi
 
 global_funcs=`python << EOF
 import re
@@ -124,10 +129,7 @@ if [[ -n "$binding_usage_output" ]]; then
     any_issues=true
     echo "## :x: Lua Checks Failed"
     echo "### Lua Binding Usage:"
-    echo '```'
     echo "$binding_usage_output"
-    echo '```'
-    echo
 fi
 
 for file in "${targets[@]}"; do
@@ -151,9 +153,9 @@ for file in "${targets[@]}"; do
             any_issues=true
         fi
 
-        echo "### \`$file\`"
         if [[ -n "$luacheck_output" ]]; then
-            echo "#### Luacheck:"
+            echo "#### Luacheck Errors:"
+            echo "> $file"
             echo '```'
             echo "$luacheck_output" | sed \
                 -e '/^Checking /d' \

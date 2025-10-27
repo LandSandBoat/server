@@ -283,6 +283,8 @@ end
 xi.job_utils.geomancer.bolster = function(player, target, ability)
     local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
     player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+
+    return xi.effect.BOLSTER
 end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
@@ -344,6 +346,8 @@ end
 
 xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
     target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, 0, 0, 60)
+
+    return xi.effect.COLLIMATED_FERVOR
 end
 
 xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
@@ -361,6 +365,8 @@ end
 
 xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
     player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
+
+    return xi.effect.BLAZE_OF_GLORY
 end
 
 xi.job_utils.geomancer.dematerialize = function(player, target, ability)
@@ -377,6 +383,8 @@ end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
     player:addStatusEffect(xi.effect.WIDENED_COMPASS, 0, 3, 60)
+
+    return xi.effect.WIDENED_COMPASS
 end
 
 -----------------------------------

@@ -28,6 +28,10 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    -- immediately despawn after death
+    if optParams.isKiller or optParams.noKiller then
+        DespawnMob(mob:getID())
+    end
 end
 
 return entity

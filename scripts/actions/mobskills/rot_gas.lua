@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 360))
 
     return xi.effect.DISEASE
 end

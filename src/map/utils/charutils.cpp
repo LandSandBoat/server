@@ -38,7 +38,6 @@
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/objective_utility.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x00b_logout.h"
 #include "packets/s2c/0x01b_job_info.h"
@@ -112,6 +111,7 @@
 #include "packets/s2c/0x063_miscdata_merits.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "packets/s2c/0x063_miscdata_unity.h"
+#include "packets/s2c/0x075_battlefield.h"
 #include "packets/s2c/0x110_unity.h"
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
@@ -7343,7 +7343,7 @@ namespace charutils
 
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
     {
-        PChar->pushPacket<CObjectiveUtilityPacket>(seconds);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLEFIELD>(seconds);
     }
 
     void SendTimerPacket(CCharEntity* PChar, timer::duration dur)
@@ -7354,7 +7354,7 @@ namespace charutils
 
     void SendClearTimerPacket(CCharEntity* PChar)
     {
-        PChar->pushPacket<CObjectiveUtilityPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLEFIELD>();
     }
 
     earth_time::time_point getTraverserEpoch(CCharEntity* PChar)

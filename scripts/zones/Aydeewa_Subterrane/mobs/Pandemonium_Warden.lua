@@ -12,7 +12,7 @@
 --         https://youtu.be/BPbsHhbi4LE
 --
 -- Notes: See Pandemonium_Warden_HNM.lua for details on intermediate phases. This file will refer specifically to the behavior of this mob's short sequences between phases and the final form
---        spawns and immedaitely performs his sequence:
+--        spawns and immediately performs his sequence:
 --          Cannot be damaged, doesn't autoattack/cast
 --          calls 6 corpselight pets, which do nothing but follow their target
 --          uses cackle
@@ -38,206 +38,352 @@ local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 ---@type TMobEntity
 local entity = {}
 
--- Pet Arrays, we'll alternate between phases
-local petIDs = {}
-petIDs[0] =
-{
-    ID.mob.PANDEMONIUM_WARDEN + 2,
-    ID.mob.PANDEMONIUM_WARDEN + 3,
-    ID.mob.PANDEMONIUM_WARDEN + 4,
-    ID.mob.PANDEMONIUM_WARDEN + 5,
-    ID.mob.PANDEMONIUM_WARDEN + 6,
-    ID.mob.PANDEMONIUM_WARDEN + 7,
-    ID.mob.PANDEMONIUM_WARDEN + 8,
-    ID.mob.PANDEMONIUM_WARDEN + 9
-}
-petIDs[1] =
-{
-    ID.mob.PANDEMONIUM_WARDEN + 10,
-    ID.mob.PANDEMONIUM_WARDEN + 11,
-    ID.mob.PANDEMONIUM_WARDEN + 12,
-    ID.mob.PANDEMONIUM_WARDEN + 13,
-    ID.mob.PANDEMONIUM_WARDEN + 14,
-    ID.mob.PANDEMONIUM_WARDEN + 15,
-    ID.mob.PANDEMONIUM_WARDEN + 16,
-    ID.mob.PANDEMONIUM_WARDEN + 17
-}
+local despawnPL = function()
+    for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
+        DespawnMob(petId)
+        local pet = GetMobByID(petId)
+        if pet then
+            -- spawn listener will be added when next phase starts
+            pet:removeListener('SET_PET_PROPERTIES')
 
--- Phase Arrays      Dverg,  Char1, Dverg,  Char2, Dverg,  Char3, Dverg,  Char4,  Dverg,   Mamo,  Dverg,  Lamia,  Dverg,  Troll,  Dverg,   Cerb,  Dverg,  Hydra,  Dverg,   Khim,  Dverg
---                       1       2      3       4      5       6      7       8       9      10      11      12      13      14      15      16      17      18      19      20
-local triggerHPP = {    95,      1,    95,      1,    95,      1,    95,      1,     95,      1,     95,      1,     95,      1,     95,      1,     95,      1,     95,      1 }
-local mobHP =      { 10000, 147000, 10000, 147000, 10000, 147000, 10000, 147000,  15000, 147000,  15000, 147000,  15000, 147000,  20000, 147000,  20000, 147000,  20000, 147000 }
-local mobModelID = {  1825,   1840,  1825,   1840,  1825,   1840,  1825,   1840,   1863,   1840,   1865,   1840,   1867,   1840,   1793,   1840,   1796,   1840,   1805,   1840 }
-local petModelID = {  1823,   1841,  1821,   1841,  1825,   1841,  1824,   1841,   1639,   1841,   1643,   1841,   1680,   1841,    281,   1841,    421,   1841,   1746,   1839 }
-local skillID =    {  1000,    316,  1001,    316,  1002,    316,  1003,    316,    285,    316,    725,    316,    326,    316,     62,    316,    164,    316,    168,    316 }
+            pet:setAutoAttackEnabled(false)
+            pet:setMobAbilityEnabled(false)
+            pet:setMagicCastingEnabled(false)
+        end
+    end
+end
 
--- Avatar Arrays         Shiva, Ramuh, Titan, Ifrit, Levia, Garud, Fenri, Carby
-local avatarAbilities = {  917,   918,   914,   913,   915,   916,   839,   919 }
-local avatarSkins =     {   22,    23,    19,    18,    20,    21,    17,    16 }
+local despawnPW = function(mob)
+    if mob and mob:isSpawned() then
+        DespawnMob(mob:getID())
+    end
+
+    local pwHNM = mob and GetMobByID(mob:getID() + 1)
+    if pwHNM and pwHNM:isSpawned() then
+        DespawnMob(pwHNM:getID())
+    end
+
+    despawnPL()
+end
+
+-- used when determining if a phase has enough pets out (dead but still spawned pets count towards total)
+local spawnedLamps = function()
+    local petCount = 0
+    for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
+        local pet = GetMobByID(petId)
+        if pet and pet:isSpawned() then
+            petCount = petCount + 1
+        end
+    end
+
+    return petCount
+end
+
+-- used when performing astral flow, living pets count towards avatar total
+local livingLamps = function()
+    local petCount = 0
+    for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
+        local pet = GetMobByID(petId)
+        if pet and pet:isAlive() then
+            petCount = petCount + 1
+        end
+    end
+
+    return petCount
+end
+
+local resetFight = function(mob)
+    -- Prevent death and hide HP until final phase
+    mob:hideHP(true)
+    mob:setUnkillable(true)
+    mob:setMod(xi.mod.UDMGPHYS, -10000)
+    mob:setMod(xi.mod.UDMGRANGE, -10000)
+    mob:setMod(xi.mod.UDMGBREATH, -10000)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
+
+    -- only uses the sequence moves, otherwise just follows around looking at you menacingly
+    mob:setMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+
+    mob:setLocalVar('phase', 1)
+    mob:setLocalVar('astralFlowsUsed', 0)
+
+    -- Update pet properties based on phase
+    mob:triggerListener('UNHIDE', mob)
+end
+
+-- skill sequence: cackle, hellsnap, disappear for HNM phase
+-- doesn't perform on final phase
+-- guard clauses in case PWDespawnTime is hit during phase change
+local phaseSequence = function(mob)
+    if mob:getLocalVar('phase') > 10 then
+        return
+    end
+
+    -- incrementing phase is handled by Pandemonium_Warden_HNM.lua only if it is brought to 1% hp
+    local timerDelay = 1000
+    mob:timer(timerDelay, function(mobArg)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        mobArg:useMobAbility(xi.mobSkill.CACKLE)
+    end)
+
+    -- 8 seconds after cackle
+    timerDelay = timerDelay + 8000
+    mob:timer(timerDelay, function(mobArg)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        mobArg:useMobAbility(xi.mobSkill.HELLSNAP)
+    end)
+
+    -- 5 seconds after hellsnap
+    timerDelay = timerDelay + 5000
+    mob:timer(timerDelay, function(mobArg)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        mobArg:setStatus(xi.status.INVISIBLE)
+
+        despawnPL()
+    end)
+
+    -- 3s later, HNM spawns
+    timerDelay = timerDelay + 3000
+    mob:timer(timerDelay, function(mobArg)
+        local pwHNM = GetMobByID(mob:getID() + 1)
+        if not mobArg:isSpawned() or not pwHNM then
+            return
+        end
+
+        pwHNM:spawn()
+    end)
+end
 
 entity.onMobInitialize = function(mob)
+    -- "If all individuals who have developed enmity die, Pandemonium Warden will return to his spawn point, with his train of lamps, and will not be aggressive to any non-combat action"
+    mob:setAggressive(false)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
+    mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
+
+    -- Custom listener to trigger when spawning and unhiding from Pandemonium_Warden_HNM.lua
+    mob:addListener('UNHIDE', 'PW_STATUS_CHANGE', function(mobArg)
+        mobArg:setStatus(xi.status.UPDATE)
+        local target = mobArg:getTarget()
+        if target then
+            mob:updateClaim(target)
+        end
+
+        -- Update pet parameters for PW dverger phases
+        local lampModel  = 1839
+        local skillList  = 361
+        local spellList  = 560
+        local petsNeeded = 8
+        if mobArg:getLocalVar('phase') <= 10 then
+            lampModel  = 1841
+            skillList  = 0
+            spellList  = 0
+            petsNeeded = 6
+        else
+            -- final phase
+            mob:hideHP(false)
+            mob:setUnkillable(false)
+            mob:setMod(xi.mod.UDMGPHYS, 0)
+            mob:setMod(xi.mod.UDMGRANGE, 0)
+            mob:setMod(xi.mod.UDMGBREATH, 0)
+            mob:setMod(xi.mod.UDMGMAGIC, 0)
+
+            mob:setMobAbilityEnabled(true)
+            mob:setAutoAttackEnabled(true)
+            mob:setMagicCastingEnabled(true)
+        end
+
+        for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
+            local pet = GetMobByID(petId)
+            if pet then
+                -- skill/spell list has to be set after spawn
+                pet:addListener('SPAWN', 'SET_PET_PROPERTIES', function(petArg)
+                    petArg:setModelId(lampModel)
+                    if skillList > 0 then
+                        petArg:setMobMod(xi.mobMod.SKILL_LIST, skillList)
+                        petArg:setMobAbilityEnabled(true)
+                        petArg:setAutoAttackEnabled(true)
+                    else
+                        -- before final phase, they just follow around looking at you menacingly
+                        petArg:setMobAbilityEnabled(false)
+                        petArg:setAutoAttackEnabled(false)
+                    end
+
+                    if spellList == 0 then
+                        petArg:setMagicCastingEnabled(false)
+                    else
+                        petArg:setSpellList(spellList)
+                        petArg:setMagicCastingEnabled(true)
+                    end
+                end)
+            end
+        end
+
+        -- call initial pets immediately
+        -- they will be resummoned as needed in onMobFight
+        -- - intermediate phases: as soon as they despawn
+        -- - final phase: 60s between
+        local callPetParams =
+        {
+            noAnimation = true,
+            maxSpawns = petsNeeded - spawnedLamps(),
+            ignoreBusy = true,
+            dieWithOwner = true,
+        }
+        xi.mob.callPets(mobArg, ID.mob.PANDEMONIUM_LAMPS, callPetParams)
+        -- small time gate to avoid calling xi.mob.callPets in onMobFight on the same tick
+        mobArg:setLocalVar('petTimer', GetSystemTime() + 1)
+
+        if mobArg:isEngaged() then
+            phaseSequence(mobArg)
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DEF, 450)
     mob:setMod(xi.mod.MEVA, 380)
     mob:setMod(xi.mod.MDEF, 50)
-    -- Make sure model is reset back to start
-    mob:setModelId(1840)
-    -- Prevent death and hide HP until final phase
-    mob:setUnkillable(true)
-    mob:hideHP(true)
 
-    -- Two hours to forced depop
+    -- small delay to not interfere with "something draws near"
+    mob:timer(1000, function(mobArg)
+        mobArg:showText(mobArg, ID.text.PW_WHO_DARES)
+    end)
+
+    -- Two hours to forced depop from spawn
     mob:setLocalVar('PWDespawnTime', GetSystemTime() + 7200)
-    mob:setLocalVar('phase', 1)
-    mob:setLocalVar('astralFlow', 1)
-
-    mob:showText(mob, ID.text.PW_WHO_DARES)
+    -- reset all properties (including the listener we created above)
+    resetFight(mob)
 end
 
 entity.onMobDisengage = function(mob)
-    -- Make sure model is reset back to start
-    mob:setModelId(1840)
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 316)
-
-    -- Prevent death and hide HP until final phase
-    mob:setUnkillable(true)
-    mob:hideHP(true)
-
-    -- Reset phases (but not despawn timer)
-    mob:setLocalVar('phase', 1)
-    mob:setLocalVar('astralFlow', 1)
-
-    -- Despawn pets
-    for i = 0, 1 do
-        for j = 1, 8 do
-            if GetMobByID(petIDs[i][j]):isSpawned() then
-                DespawnMob(petIDs[i][j])
-            end
-        end
-    end
+    resetFight(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    -- pop pets
-    for i = 1, 8 do
-        local pet = GetMobByID(petIDs[1][i])
-
-        if pet then
-            pet:setModelId(1841)
-            pet:spawn()
-            pet:updateEnmity(target)
-        end
-    end
-end
-
-local function handlePet(mob, newPet, oldPet, target, modelId)
-    if oldPet:isSpawned() then
-        DespawnMob(oldPet:getID())
-    end
-
-    newPet:setModelId(modelId)
-    newPet:spawn()
-    newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
-    newPet:updateEnmity(target)
+    phaseSequence(mob)
 end
 
 entity.onMobFight = function(mob, target)
+    -- Check for time limit. This will despawn both PW mobs and all pets
+    if GetSystemTime() > mob:getLocalVar('PWDespawnTime') then
+        despawnPW(mob)
+        return
+    end
+
+    -- stays engaged but invisible during HNM phases
+    if mob:getStatus() > xi.status.UPDATE then
+        return
+    end
+
+    if target then
+        local drawInTable =
+        {
+            conditions =
+            {
+                mob:checkDistance(target) >= 10,
+            },
+            position = mob:getPos(),
+        }
+        utils.drawIn(target, drawInTable)
+    end
+
     -- Init Vars
-    local mobHPP    = mob:getHPP()
-    local depopTime = mob:getLocalVar('PWDespawnTime')
-    local phase     = mob:getLocalVar('phase')
-    local astral    = mob:getLocalVar('astralFlow')
-    local pets      = {}
+    local mobHPP = mob:getHPP()
+    local phase  = mob:getLocalVar('phase')
 
-    for i = 0, 1 do
-        pets[i] = {}
-        for j = 1, 8 do
-            pets[i][j] = GetMobByID(petIDs[i][j])
-        end
-    end
+    -- Intermediate phase sequence
+    if phase <= 10 then
+        -- PW brings out lamps as they despawn from previous phase
+        local petsOut = spawnedLamps()
+        if
+            petsOut < 6 and
+            mob:getLocalVar('petTimer') < GetSystemTime()
+        then
+            local callPetParams =
+            {
+                noAnimation = true,
+                maxSpawns = 6 - petsOut,
+                ignoreBusy = true,
+                dieWithOwner = true,
+            }
 
-    -- Check for phase change
-    if
-        phase < 21 and
-        mobHPP <= triggerHPP[phase]
-    then
-        if phase == 20 then -- Prepare for death
-            mob:hideHP(false)
-            mob:setUnkillable(false)
-        end
-
-        -- Change phase
-        mob:setTP(0)
-        mob:setModelId(mobModelID[phase])
-        mob:setHP(mobHP[phase])
-        mob:setMobMod(xi.mobMod.SKILL_LIST, skillID[phase])
-
-        -- Handle pets
-        for i = 1, 8 do
-            local oldPet = pets[phase % 2][i]
-            local newPet = pets[(phase - 1) % 2][i]
-            newPet:updateEnmity(target)
-            newPet:setMobMod(xi.mobMod.MAGIC_DELAY, 4)
-            handlePet(mob, newPet, oldPet, target, petModelID[phase])
-        end
-
-        -- Increment phase
-        mob:setLocalVar('phase', phase + 1)
-
-    -- Or, check for Astral Flow
-    elseif
-        phase == 21 and
-        astral < 9 and
-        mobHPP <= (100 - 25 * astral)
-    then
-        for i = 1, 8 do
-            local oldPet = pets[astral % 2][i]
-            local newPet = pets[(astral - 1) % 2][i]
-
-            if i == 1 then
-                newPet:updateEnmity(target)
-                local astralRand = math.random(1, 8)
-                handlePet(mob, newPet, oldPet, target, avatarSkins[astralRand])
-                newPet:useMobAbility(avatarAbilities[astralRand])
-            else
-                handlePet(mob, newPet, oldPet, target, 1839)
+            -- small time gate to avoid calling this at the same time as the UNHIDE listener
+            if xi.mob.callPets(mob, ID.mob.PANDEMONIUM_LAMPS, callPetParams) then
+                mob:setLocalVar('petTimer', GetSystemTime() + 1)
             end
         end
 
-        -- Increment astral
-        mob:setLocalVar('astralFlow', astral + 1)
+        return
+    end
 
-    -- Or, at least make sure pets weren't drug off
+    -- after intermediate phase logic because isEntityBusy considers timers as busy
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    -- final phase
+    local astrals = mob:getLocalVar('astralFlowsUsed')
+    if
+        mobHPP < 100 - 25 * (1 + astrals) and
+        GetSystemTime() > mob:getLocalVar('nextAstralFlow')
+    then
+        -- Calls X avatars (up to 9 with all lamps alive)
+        local petsNeeded = 1 + livingLamps()
+        local callPetParams =
+        {
+            inactiveTime = 5000,
+            maxSpawns = petsNeeded,
+            ignoreBusy = true,
+            dieWithOwner = true,
+        }
+
+        if xi.mob.callPets(mob, utils.shuffle(ID.mob.PANDEMONIUM_AVATARS), callPetParams) then
+            -- the avatar AF abilities are used by the mixin within Pandemonium_Lamp_Avatar.lua
+            local actionTimer = callPetParams.inactiveTime + 11000
+            mob:timer(actionTimer, function(mobArg)
+                -- injects a fake action of "PW readies astral flow" before avatars use their respective abilities
+                mobArg:injectActionPacket(mob:getID(), xi.action.MOBABILITY_START, 438, 0, 0x18, xi.msg.basic.READIES_WS, 0, xi.mobSkill.ASTRAL_FLOW_1)
+                -- injects the packet to end the animation
+                mobArg:injectActionPacket(mob:getID(), xi.action.MOBABILITY_FINISH, 438, 0, 0x18, xi.msg.basic.NONE, 0, xi.mobSkill.ASTRAL_FLOW_1)
+            end)
+
+            -- Increment astral
+            mob:setLocalVar('astralFlowsUsed', astrals + 1)
+            -- PW won't use another AF immediately even if HP is chunked into next quarter
+            mob:setLocalVar('nextAstralFlow', GetSystemTime() + 30)
+        end
     else
-        --[[ Unused
-        for i = 1, 8 do
-            local pet = nil
-            if phase == 21 then
-                pet = pets[astral % 2][i]
-            else
-                pet = pets[phase % 2][i]
-            end
-        end
-        ]]--
-    end
+        -- normal final phase combat ticks
+        local petsOut = spawnedLamps()
+        local callPetParams =
+        {
+            noAnimation = true,
+            maxSpawns = 1,
+            dieWithOwner = true,
+        }
 
-    -- Check for time limit, too
-    if
-        GetSystemTime() > depopTime and
-        not xi.combat.behavior.isEntityBusy(mob)
-    then
-        for i = 0, 1 do
-            for j = 1, 8 do
-                if pets[i][j]:isSpawned() then
-                    DespawnMob(petIDs[i][j])
-                end
-            end
+        -- TODO what is the actual pet resummon timer?
+        if
+            petsOut == #ID.mob.PANDEMONIUM_LAMPS or
+            (mob:getLocalVar('petTimer') < GetSystemTime() and
+            xi.mob.callPets(mob, ID.mob.PANDEMONIUM_LAMPS, callPetParams))
+        then
+            -- tap pet summon timer so he resummons 60s after
+            -- - last pet death when full on pets
+            -- - last pet summon when pets aren't all out
+            mob:setLocalVar('petTimer', GetSystemTime() + 60)
         end
-
-        DespawnMob(mob:getID())
     end
 end
 
@@ -249,26 +395,10 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.PW_WHO_DARES + 1)
     end
-
-    -- Despawn pets
-    for i = 0, 1 do
-        for j = 1, 8 do
-            if GetMobByID(petIDs[i][j]):isSpawned() then
-                DespawnMob(petIDs[i][j])
-            end
-        end
-    end
 end
 
 entity.onMobDespawn = function(mob)
-    -- Despawn pets
-    for i = 0, 1 do
-        for j = 1, 8 do
-            if GetMobByID(petIDs[i][j]):isSpawned() then
-                DespawnMob(petIDs[i][j])
-            end
-        end
-    end
+    despawnPW(mob)
 end
 
 return entity

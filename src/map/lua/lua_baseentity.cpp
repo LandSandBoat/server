@@ -99,11 +99,9 @@
 #include "items/item_linkshell.h"
 
 #include "packets/action.h"
-#include "packets/auction_house.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
-#include "packets/objective_utility.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01b_job_info.h"
@@ -122,6 +120,7 @@
 #include "packets/s2c/0x03a_magicschedulor.h"
 #include "packets/s2c/0x03c_shop_list.h"
 #include "packets/s2c/0x03e_shop_open.h"
+#include "packets/s2c/0x04c_auc.h"
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
@@ -139,6 +138,7 @@
 #include "packets/s2c/0x063_miscdata_job_points.h"
 #include "packets/s2c/0x063_miscdata_merits.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
+#include "packets/s2c/0x075_battlefield.h"
 #include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
@@ -2494,7 +2494,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
             PChar->pushPacket<GP_SERV_COMMAND_SHOP_LIST>(PChar);
             break;
         case 3:
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Open);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Open);
             break;
         default:
             ShowDebug("Menu %i not implemented, yet.", menu);
@@ -12251,7 +12251,7 @@ void CLuaBaseEntity::allowSendRaisePrompt()
  *  Example : player:countdown(60)
  *  Notes   : Using 0 or no argument removes the countdown bar from the player
  ************************************************************************/
-void CLuaBaseEntity::countdown(sol::object const& secondsObj)
+void CLuaBaseEntity::countdown(sol::object const& secondsObj) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -12259,12 +12259,12 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj)
         return;
     }
 
-    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
-    auto         packet = std::make_unique<CObjectiveUtilityPacket>();
+    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto         packet = std::make_unique<GP_SERV_COMMAND_BATTLEFIELD>();
 
     if (secondsObj.is<uint32>())
     {
-        packet->addCountdown(secondsObj.as<uint32>());
+        packet->addCountdown(secondsObj.as<uint32>(), 0);
     }
 
     PChar->pushPacket(std::move(packet));
@@ -12311,7 +12311,7 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj)
         Can have up to 6 bars. Many of these items are optional.
         Calling without arguments will clear everything.
  ************************************************************************/
-void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
+void CLuaBaseEntity::objectiveUtility(sol::object const& obj) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -12319,8 +12319,8 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         return;
     }
 
-    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
-    auto         packet = std::make_unique<CObjectiveUtilityPacket>();
+    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto         packet = std::make_unique<GP_SERV_COMMAND_BATTLEFIELD>();
 
     if (obj.is<sol::table>())
     {
@@ -12329,17 +12329,17 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         {
             if (countdownObj.is<sol::table>())
             {
-                uint32 duration = countdownObj.as<sol::table>().get<uint32>("duration");
-                uint32 warning  = countdownObj.as<sol::table>().get_or<uint32>("warning", 0);
+                const uint32 duration = countdownObj.as<sol::table>().get<uint32>("duration");
+                const uint32 warning  = countdownObj.as<sol::table>().get_or<uint32>("warning", 0);
                 packet->addCountdown(duration, warning);
             }
             else if (countdownObj.is<uint32>())
             {
-                packet->addCountdown(countdownObj.as<uint32>());
+                packet->addCountdown(countdownObj.as<uint32>(), 0);
             }
         }
 
-        sol::object barsObj = obj.as<sol::table>()["bars"];
+        const sol::object barsObj = obj.as<sol::table>()["bars"];
         if (barsObj.valid() && barsObj.is<sol::table>())
         {
             std::vector<std::pair<std::string, uint32>> bars;
@@ -12348,8 +12348,8 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
                 sol::object barObj = barsObj.as<sol::table>()[i];
                 if (barObj.valid() && barObj.is<sol::table>())
                 {
-                    std::string barTitle = barObj.as<sol::table>().get<std::string>("title");
-                    uint32      barValue = barObj.as<sol::table>().get<uint32>("value");
+                    auto   barTitle = barObj.as<sol::table>().get<std::string>("title");
+                    uint32 barValue = barObj.as<sol::table>().get<uint32>("value");
                     bars.emplace_back(barTitle, barValue);
                 }
                 else
@@ -12363,11 +12363,11 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         sol::object scoreboardObj = obj.as<sol::table>()["scoreboard"];
         if (scoreboardObj.valid() && scoreboardObj.is<sol::table>())
         {
-            std::pair<int32, int32> score = {
+            const std::pair<int32, int32> score = {
                 static_cast<int32>(scoreboardObj.as<sol::table>().get_or<uint32>("marchlandScore", 0)),
                 static_cast<int32>(scoreboardObj.as<sol::table>().get_or<uint32>("strongholdScore", 0))
             };
-            std::vector<uint32> data = {
+            const std::vector<uint32> data = {
                 scoreboardObj.as<sol::table>().get_or<uint32>("marchlandProgress", 0),
                 scoreboardObj.as<sol::table>().get_or<uint32>("marchlandProgressMax", 0),
                 scoreboardObj.as<sol::table>().get_or<uint32>("strongholdProgress", 0),
@@ -12378,30 +12378,30 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
             packet->addScoreboard(score, data);
         }
 
-        sol::object fenceObj = obj.as<sol::table>()["fence"];
+        const sol::object fenceObj = obj.as<sol::table>()["fence"];
         if (fenceObj.valid() && fenceObj.is<sol::table>())
         {
-            sol::object fencePosObj = fenceObj.as<sol::table>()["pos"];
-            float       posX        = 0.000;
-            float       posZ        = 0.000;
+            const sol::object fencePosObj = fenceObj.as<sol::table>()["pos"];
+            float             posX        = 0.000;
+            float             posZ        = 0.000;
             if (fencePosObj.valid() && fencePosObj.is<sol::table>())
             {
                 posX = fencePosObj.as<sol::table>().get<float>("x");
                 posZ = fencePosObj.as<sol::table>().get<float>("z");
             }
 
-            float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
-            float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
-            bool  blue   = fenceObj.as<sol::table>().get_or<bool, std::string, bool>("blue", false);
+            const float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
+            const float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
+            const bool  blue   = fenceObj.as<sol::table>().get_or<bool, std::string, bool>("blue", false);
 
             packet->addFence(posX, posZ, radius, render, blue);
         }
 
-        sol::object helpObj = obj.as<sol::table>()["help"];
+        const sol::object helpObj = obj.as<sol::table>()["help"];
         if (helpObj.valid() && helpObj.is<sol::table>())
         {
-            uint16 title       = helpObj.as<sol::table>().get<uint16>("title");
-            uint16 description = helpObj.as<sol::table>().get<uint16>("description");
+            const uint16 title       = helpObj.as<sol::table>().get<uint16>("title");
+            const uint16 description = helpObj.as<sol::table>().get<uint16>("description");
             packet->addHelpText(title, description);
         }
     }

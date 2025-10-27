@@ -617,8 +617,8 @@ public:
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
     void allowSendRaisePrompt();
 
-    void countdown(sol::object const& secondsObj);
-    void objectiveUtility(sol::object const& obj);
+    void countdown(sol::object const& secondsObj) const;
+    void objectiveUtility(sol::object const& obj) const;
     void enableEntities(sol::object const& obj);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 

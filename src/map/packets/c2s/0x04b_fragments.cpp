@@ -26,9 +26,9 @@
 #include "fishingcontest.h"
 #include "lua/luautils.h"
 #include "packets/char_sync.h"
-#include "packets/fish_ranking.h"
 #include "packets/s2c/0x017_chat_std.h"
-#include "packets/server_message.h"
+#include "packets/s2c/0x04d_fragments_fishranking.h"
+#include "packets/s2c/0x04d_fragments_servmes.h"
 
 auto GP_CLI_COMMAND_FRAGMENTS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -47,7 +47,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
     {
         std::string loginMessage = luautils::GetServerMessage(msgLanguage);
 
-        PChar->pushPacket<CServerMessagePacket>(loginMessage, msgLanguage, timestamp, offset);
+        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::SERVMES>(loginMessage, msgLanguage, timestamp, offset);
         PChar->pushPacket<CCharSyncPacket>(PChar);
 
         // TODO: kill player til theyre dead and bsod
@@ -146,7 +146,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
             }
         }
 
-        PChar->pushPacket<CFishRankingPacket>(entries, msgLanguage, timestamp, offset, totalEntries, msgChunk);
+        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::FISHRANKING>(entries, msgLanguage, timestamp, offset, totalEntries, msgChunk);
         entries.clear();
     }
 }

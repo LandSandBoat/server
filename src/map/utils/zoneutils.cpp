@@ -903,7 +903,7 @@ namespace zoneutils
         {
             const auto query = fmt::format("SELECT zoneid, name FROM zone_settings WHERE zoneid IN ({})",
                                            fmt::join(lazyLoad.managedZones, ","));
-            const auto rset  = db::query(query);
+            const auto rset  = db::preparedStmt(query);
             FOR_DB_MULTIPLE_RESULTS(rset)
             {
                 result.emplace_back(rset->get<uint16>("zoneid"), rset->get<std::string>("name"));

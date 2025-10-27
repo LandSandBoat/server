@@ -110,6 +110,8 @@ xi.mobSkill =
 
     CALL_WYVERN              =  732,
 
+    ASTRAL_FLOW_1            =  734,
+
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
     GREAT_WHIRLWIND_1        =  803,
@@ -157,6 +159,16 @@ xi.mobSkill =
     DIAMOND_DUST_2           =  917, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Shiva model avatar)
     JUDGMENT_BOLT_2          =  918, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ramuh model avatar)
     SEARING_LIGHT_2          =  919, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin, Crimson-toothed Pawberry) (Carbuncle model avatar)
+
+    SHIELD_STRIKE            =  934, -- Ark Angel EV
+
+    ARKANGEL_TT_WARP_OUT     =  936, -- Ark Angel TT Warp Out
+
+    TACHI_YUKIKAZE           =  946, -- Ark Angel GK
+    TACHI_GEKKO              =  947, -- Ark Angel GK
+    TACHI_KASHA              =  948, -- Ark Angel GK
+
+    ARKANGEL_TT_WARP_IN      =  962, -- Ark Angel TT Warp In
 
     TRION_RED_LOTUS_BLADE    =  968, -- Trion Red Lotus Blade
     TRION_FLAT_BLADE         =  969, -- Trion Flat Blade

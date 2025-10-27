@@ -632,37 +632,6 @@ namespace db
         auto isConnectionIssue(const std::exception& e) -> bool;
     } // namespace detail
 
-    // @brief Execute a query with the given query string.
-    // @param query The query string to execute.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    auto queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>;
-
-    // @brief Execute a query with the given query string and sprintf-style arguments.
-    // @param query The query string to execute.
-    // @param args The arguments to bind to the query string.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    template <typename... Args>
-    auto query(std::string const& query, Args&&... args) -> std::unique_ptr<db::detail::ResultSetWrapper>
-    {
-        TracyZoneScoped;
-        // TODO: Collect up bound args and report to tracy here
-
-        try
-        {
-            const auto formattedQuery = fmt::sprintf(query, std::forward<Args>(args)...);
-            return queryStr(formattedQuery);
-        }
-        catch (const std::exception& e)
-        {
-            ShowErrorFmt("Query Failed: {}", query);
-            ShowErrorFmt("{}", e.what());
-        }
-
-        return nullptr;
-    }
-
     // @brief Execute a prepared statement with the given query string and arguments.
     // @param query The query string to execute.
     // @param args The arguments to bind to the prepared statement.

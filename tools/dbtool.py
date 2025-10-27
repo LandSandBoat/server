@@ -90,7 +90,7 @@ def populate_migrations():
     for file in sorted(
         os.scandir(from_dbtool_path("migrations")), key=lambda e: e.name
     ):
-        if file.name.endswith(".py") and file.name != "utils.py":
+        if file.name.endswith(".py"):
             name = file.name.replace(".py", "")
             module = importlib.import_module("migrations." + name)
             migration_list.append(module)

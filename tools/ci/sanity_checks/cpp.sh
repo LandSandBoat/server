@@ -3,8 +3,13 @@
 # Requires the following packages:
 # cppcheck
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find src -name '*.cpp' -o -name '*.h')
+fi
 
 for file in "${targets[@]}"; do
     [[ -f $file && $file == *.cpp || $file == *.h ]] || continue
@@ -47,16 +52,15 @@ for file in "${targets[@]}"; do
                 any_issues=true
             fi
 
-            echo "### $file"
             if [[ -n "$cppcheck_output" ]]; then
+                echo "#### Cppcheck Errors:"
+                echo "> $file"
                 echo '```'
                 echo "$cppcheck_output"
                 echo '```'
             fi
             if [[ -n "$cpppy_output" ]]; then
-                echo '```'
                 echo "$cpppy_output"
-                echo '```'
             fi
             echo
         fi
@@ -64,29 +68,23 @@ for file in "${targets[@]}"; do
     clang-format -style=file -i "$file"
 done
 
-# If no section was written, emit a success summary
-if ! $any_issues; then
-    echo "## :heavy_check_mark: C++ Checks Passed"
-    echo
-fi
-
 git_diff_output=$(git diff --no-color 2>&1 || true)
 
 if [[ -n "$git_diff_output" ]]; then
-    any_issues=true
-    echo "## :x: C++ Formatting Checks Failed"
+    if ! $any_issues; then
+        echo "## :x: C++ Checks Failed"
+        any_issues=true
+    fi
+    echo "#### Formatting Errors:"
     echo "> $(clang-format -version)"
-    echo
-    echo "You have errors in your C++ code formatting."
-    echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
-    echo "You can either fix the formatting by hand or use clang-format."
-    echo
     echo '```diff'
     echo "$git_diff_output"
     echo '```'
     echo
-else
-    echo "## :heavy_check_mark: C++ Formatting Checks Passed"
+fi
+
+if ! $any_issues; then
+    echo "## :heavy_check_mark: C++ Checks Passed"
     echo
 fi
 

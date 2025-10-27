@@ -6,18 +6,15 @@
  * It will only send this message if the seller is online.
  ************************************************************************/
 
-#include "map/utils/moduleutils.h"
-
 #include "common/database.h"
-
-#include "map/packet_system.h"
-#include "map/packets/auction_house.h"
-#include "map/packets/basic.h"
-#include "map/packets/s2c/0x017_chat_std.h"
-#include "map/utils/itemutils.h"
 
 #include "map/ipc_client.h"
 #include "map/map_session.h"
+#include "map/packet_system.h"
+#include "map/packets/basic.h"
+#include "map/utils/itemutils.h"
+#include "map/utils/moduleutils.h"
+#include "packets/c2s/0x04e_auc.h"
 #include "utils/auctionutils.h"
 
 #include <functional>

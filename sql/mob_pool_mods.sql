@@ -48,20 +48,6 @@ INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
 INSERT INTO `mob_pool_mods` VALUES (181,2,9234,1); -- GIL_MAX: 9234
 
--- Ark Angel Gk
-INSERT INTO `mob_pool_mods` VALUES (236,30,732,1); -- SPECIAL_SKILL: 732
-INSERT INTO `mob_pool_mods` VALUES (236,33,60,1);  -- SPECIAL_COOL: 60
-
--- Ark Angel Hm
-INSERT INTO `mob_pool_mods` VALUES (237,44,1,1); -- DUAL_WIELD: 1
-
--- Ark Angel Tt
-INSERT INTO `mob_pool_mods` VALUES (242,40,30,1);  -- TELEPORT_CD: 30
-INSERT INTO `mob_pool_mods` VALUES (242,41,936,1); -- TELEPORT_START: 936
-INSERT INTO `mob_pool_mods` VALUES (242,42,962,1); -- TELEPORT_END: 962
-INSERT INTO `mob_pool_mods` VALUES (242,43,1,1);   -- TELEPORT_TYPE: 1
-INSERT INTO `mob_pool_mods` VALUES (242,47,22,1);  -- SPAWN_LEASH: 22
-
 -- Aspidochelone
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (268,370,50,0);  -- REGEN: 50

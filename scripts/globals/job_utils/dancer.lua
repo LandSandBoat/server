@@ -318,6 +318,8 @@ end
 
 xi.job_utils.dancer.usePrestoAbility = function(player, target, ability, action)
     target:addStatusEffect(xi.effect.PRESTO, 19, 3, 30)
+
+    return xi.effect.PRESTO
 end
 
 xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability, action)
@@ -478,6 +480,8 @@ end
 
 xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
     player:addStatusEffect(xi.effect.CONTRADANCE, 0, 0, 60)
+
+    return xi.effect.CONTRADANCE
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)

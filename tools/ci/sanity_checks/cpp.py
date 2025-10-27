@@ -55,19 +55,19 @@ def check(name):
                 counter = counter + 1
                 if contains_delete(line):
                     print(
-                        f"{name}:{counter}: Found naked delete. Please use destroy(ptr) or destroy_arr(ptr)."
+                        f"#### Found naked delete. Please use destroy(ptr) or destroy_arr(ptr).\n> {name}:{counter}"
                     )
-                    print(line)
+                    print(f"```cpp\n{line}\n```\n")
                 if contains_relative_include(line):
                     print(
-                        f"{name}:{counter}: Found relative include. Please use non-relative paths."
+                        f"#### Found relative include. Please use non-relative paths.\n> {name}:{counter}"
                     )
-                    print(line)
+                    print(f"```cpp\n{line}\n```\n")
                 if contains_undocumented_listener(line):
                     print(
-                        f"{name}:{counter}: Found undocumented listener. Please document this in AI_Events.txt."
+                        f"#### Found undocumented listener. Please document this in AI_Events.txt.\n> {name}:{counter}"
                     )
-                    print(line)
+                    print(f"```cpp\n{line}\n```\n")
 
 
 if target == "src":

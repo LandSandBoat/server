@@ -13,11 +13,11 @@ def check(name):
         for data in lines:
             counter = counter + 1
             if not data.endswith("\n"):
-                print(f"{name}: No newline at end of file, please add one.")
+                print(f"#### No newline at end of file, please add one.\n> {name}\n")
 
             if "\t" in data:
                 print(
-                    f"{name}:{counter}: Found tab character(s) in file, please replace these with 4x spaces."
+                    f"#### Found tab character(s) in file, please replace these with 4x spaces.\n> {name}:{counter}\n"
                 )
 
             if data == "\n":
@@ -27,7 +27,7 @@ def check(name):
 
             if newline_counter > 1 or (counter == len(lines) and newline_counter == 1):
                 print(
-                    f"{name}:{counter}: Found multiple newline characters next to each other, please replace these with single newlines."
+                    f"#### Found multiple newline characters next to each other, please replace these with single newlines.\n> {name}:{counter}\n"
                 )
 
 

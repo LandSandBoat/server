@@ -3,7 +3,7 @@
 ########
 # Base #
 ########
-FROM ubuntu:24.04 AS base
+FROM --platform=$BUILDPLATFORM ubuntu:24.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN rm -f /etc/apt/apt.conf.d/docker-clean && \

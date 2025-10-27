@@ -11,13 +11,12 @@
 #include "common/timer.h"
 
 #include "map/enums/chat_message_type.h"
+#include "map/map_session.h"
 #include "map/packet_system.h"
-#include "map/packets/auction_house.h"
 #include "map/packets/basic.h"
 #include "map/packets/s2c/0x017_chat_std.h"
-
-#include "map/map_session.h"
 #include "map/zone.h"
+#include "packets/s2c/0x04c_auc.h"
 
 #include <functional>
 #include <numeric>
@@ -64,7 +63,7 @@ class AHPaginationModule : public CPPModule
         const timer::time_point curTick = timer::now();
         if (curTick < PChar->m_AHHistoryTimestamp + 1500ms)
         {
-            PChar->pushPacket<CAuctionHousePacket>(typedPacket->Command, 246, 0, 0, 0, 0); // try again in a little while msg
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(typedPacket->Command, 246, 0, 0, 0, 0); // try again in a little while msg
             return true;
         }
 
@@ -98,7 +97,7 @@ class AHPaginationModule : public CPPModule
 
         PChar->m_ah_history.clear();
         PChar->m_AHHistoryTimestamp = curTick;
-        PChar->pushPacket<CAuctionHousePacket>(typedPacket->Command);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(typedPacket->Command);
 
         // Not const, because we're possibly going to overwrite it later
         auto rset = db::preparedStmt("SELECT itemid, price, stack "
@@ -147,7 +146,7 @@ class AHPaginationModule : public CPPModule
         const auto totalItemsOnAh = PChar->m_ah_history.size();
         for (size_t slot = 0; slot < totalItemsOnAh; slot++)
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, static_cast<uint8>(slot), PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, static_cast<uint8>(slot), PChar);
         }
 
         return true;

@@ -35,7 +35,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         NOSFERATU             = GetFirstID('Nosferatu'),
         PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'),
         PANDEMONIUM_LAMPS     = GetTableOfIDs('Pandemonium_Lamp'),
-        -- PANDEMONIUM_AVATARS   = GetTableOfIDs('Pandemonium_Lamp_Avatar'), -- For use when main PW lua gets converted
+        PANDEMONIUM_AVATARS   = GetTableOfIDs('Pandemonium_Lamp_Avatar'),
     },
     npc =
     {

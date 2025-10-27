@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,18 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CSERVERMESSAGEPACKET_H
-#define _CSERVERMESSAGEPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
+#include "base.h"
 
-#include "basic.h"
-
-class CServerMessagePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0005
+// This packet is sent by the server to configure the clients rate limiting.
+class GP_SERV_COMMAND_PACKETCONTROL final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_PACKETCONTROL, GP_SERV_COMMAND_PACKETCONTROL>
 {
 public:
-    CServerMessagePacket(const std::string& message, int8 language, int32 timestamp, int32 message_offset);
-};
+    struct PacketData
+    {
+        uint32_t PacketCnt;    // PS2: PacketCnt
+        uint32_t padding08[5]; // PS2: (New; did not exist.)
+    };
 
-#endif
+    // TODO: Unimplemented
+    GP_SERV_COMMAND_PACKETCONTROL() = default;
+};

@@ -31,14 +31,13 @@
 
 #include "entities/charentity.h"
 
-#include "packets/delivery_box.h"
-#include "packets/s2c/0x01d_item_same.h"
-
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/zoneutils.h"
 
 #include "packets/c2s/0x04d_pbx.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x04b_pbx_result.h"
 #include "universal_container.h"
 
 void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
@@ -95,7 +94,7 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 
         for (uint8 i = 0; i < 8; ++i)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Work, BoxNo, PChar->UContainer->GetItem(i), i, items, 1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Work, BoxNo, PChar->UContainer->GetItem(i), i, items, 1);
         }
     }
 }
@@ -165,7 +164,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             if (rset && rset->rowsAffected() && charutils::UpdateItem(PChar, LOC_INVENTORY, ItemWorkNo, -static_cast<int32>(ItemStacks)))
             {
                 PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
-                PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
             else
@@ -219,8 +218,8 @@ void dboxutils::SendConfirmation(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                     if (rset2 && rset2->rowsAffected())
                     {
                         PItem->setSent(true);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x01);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x01);
                         return;
                     }
                 }
@@ -272,8 +271,8 @@ void dboxutils::CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO B
                     if (rset2 && rset->rowsAffected())
                     {
                         PChar->UContainer->GetItem(PostWorkNo)->setSent(false);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x01);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x01);
 
                         return;
                     }
@@ -293,11 +292,11 @@ void dboxutils::CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO B
             {
                 ShowErrorFmt("DBOX: Deleting orphaned outbox record (player: {} ({}), target: {}, PostWorkNo: {})",
                                 PChar->getName(), PChar->id, PItem->getReceiver(), PostWorkNo);
-                PChar->pushPacket<CDeliveryBoxPacket>(static_cast<GP_CLI_COMMAND_PBX_COMMAND>(0x0F), BoxNo, 0, 1);
+                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(static_cast<GP_CLI_COMMAND_PBX_COMMAND>(0x0F), BoxNo, 0, 1);
             }
 
             // error message: "Delivery orders are currently backlogged."
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, 0, -1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, 0, -1);
         }
         // clang-format on
     }
@@ -345,8 +344,8 @@ void dboxutils::SendClientNewItemCount(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BO
         return 0;
     }();
 
-    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, 0xFF, 0x02);
-    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, received_items, 0x01);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, 0xFF, 0x02);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, received_items, 0x01);
 }
 
 void dboxutils::SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
@@ -420,8 +419,8 @@ void dboxutils::SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo,
                                     PChar->UContainer->SetItem(PostWorkNo, PItem);
 
                                     // TODO: increment "count" for every new item, if needed
-                                    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, nullptr, PostWorkNo, 1, 2);
-                                    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, PItem, PostWorkNo, 1, 1);
+                                    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, nullptr, PostWorkNo, 1, 2);
+                                    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, PItem, PostWorkNo, 1, 1);
                                     return;
                                 }
                             }
@@ -439,7 +438,7 @@ void dboxutils::SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo,
         });
         if (!success)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, 0, 0xEB);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, 0, 0xEB);
         }
         // clang-format on
     }
@@ -476,8 +475,8 @@ void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COM
                         DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox: player: {} ({}) removed item: {} ({})",
                                             PChar->getName(), PChar->id, PItem->getName(), PItem->getID());
 
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, 0, 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, PItem, deliverySlotID, receivedItems, 0x01);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, 0, 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, PItem, deliverySlotID, receivedItems, 0x01);
                         PChar->UContainer->SetItem(deliverySlotID, nullptr);
                         destroy(PItem);
                     }
@@ -499,7 +498,7 @@ void dboxutils::UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, GP_CLI_COMM
 
     if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Accept, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, 1, 1);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Accept, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, 1, 1);
     }
 }
 
@@ -552,7 +551,7 @@ void dboxutils::ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxN
                     if (rset2 && rset2->rowsAffected())
                     {
                         PChar->UContainer->SetItem(PostWorkNo, nullptr);
-                        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
 
                         DebugDeliveryBoxFmt("DBOX: ReturnToSender: player: {} ({}) returned item: {} ({}) to sender: {} ({})",
                                             PChar->getName(), PChar->id, PItem->getName(), itemId, senderName, senderID);
@@ -569,7 +568,7 @@ void dboxutils::ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxN
         });
         if (!success)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xEB);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xEB);
         }
         // clang-format on
     }
@@ -591,7 +590,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
 
         if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xB9);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xB9);
             return;
         }
 
@@ -632,14 +631,14 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             DebugDeliveryBoxFmt("DBOX: TakeItemFromCell: player: {} ({}) received item: {} ({}) from slot {}",
                                 PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
 
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             PChar->UContainer->SetItem(PostWorkNo, nullptr);
             destroy(PItem);
         }
         else
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xBA);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xBA);
         }
         // clang-format on
     }
@@ -666,7 +665,7 @@ void dboxutils::RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO 
             DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell: player: {} ({}) removed item {} ({}) from slot {}",
                                 PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
 
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Clear, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Clear, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
             destroy(PItem);
         }
     }
@@ -688,19 +687,19 @@ void dboxutils::ConfirmNameBeforeSending(CCharEntity* PChar, GP_CLI_COMMAND_PBX_
         const auto rset = db::preparedStmt("SELECT COUNT(*) FROM chars WHERE charid = ? AND accid = ? LIMIT 1", PChar->id, accid);
         if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("COUNT(*)"))
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x01, 0x01);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x01, 0x01);
         }
         else
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
-            PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0x01);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0x01);
         }
     }
     else
     {
-        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
-        PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0xFB);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0xFB);
     }
 }
 
@@ -714,7 +713,7 @@ void dboxutils::CloseMailWindow(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Box
     }
 
     // Open mail, close mail
-    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::PostClose, BoxNo, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::PostClose, BoxNo, 0, 1);
 }
 
 void dboxutils::OpenSendBox(CCharEntity* PChar)
@@ -723,7 +722,7 @@ void dboxutils::OpenSendBox(CCharEntity* PChar)
 
     PChar->UContainer->Clean();
     PChar->UContainer->SetType(UCONTAINER_SEND_DELIVERYBOX);
-    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::DeliOpen, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::DeliOpen, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, 0, 1);
 }
 
 void dboxutils::OpenRecvBox(CCharEntity* PChar)
@@ -732,7 +731,7 @@ void dboxutils::OpenRecvBox(CCharEntity* PChar)
 
     PChar->UContainer->Clean();
     PChar->UContainer->SetType(UCONTAINER_RECV_DELIVERYBOX);
-    PChar->pushPacket<CDeliveryBoxPacket>(GP_CLI_COMMAND_PBX_COMMAND::PostOpen, GP_CLI_COMMAND_PBX_BOXNO::Incoming, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::PostOpen, GP_CLI_COMMAND_PBX_BOXNO::Incoming, 0, 1);
 }
 
 auto dboxutils::IsSendBoxOpen(const CCharEntity* PChar) -> bool

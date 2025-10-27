@@ -5,8 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.
-
 entity.onMobEngage = function(mob, target)
     local mobid = mob:getID()
 

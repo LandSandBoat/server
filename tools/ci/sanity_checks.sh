@@ -2,56 +2,40 @@
 set -uo pipefail
 
 checks_failed=false
-GIT_REF="${GIT_REF:-origin/base}"
+
 OUTPUT="sanity_checks_summary.md"
 echo "# Sanity Check Results" > "$OUTPUT"
 
-echo "Changed files:"
-git diff --name-status "$GIT_REF.."
-git diff --name-only "$GIT_REF.." > changed-files.txt
-readarray -t CHANGED_FILES < changed-files.txt
-CHANGED_FILES="${CHANGED_FILES[@]}"
-
 run_check() {
     echo "Running $1..."
-    bash "$1" "${@:2}" >> "$OUTPUT"
+    bash "$1" "${@:2}" | tee -a "$OUTPUT"
     [[ $? -ne 0 ]] && checks_failed=true
 }
 
-# Git
-echo "Checking commit formatting..."
-gitcheck_output=$(python tools/ci/sanity_checks/git.py $GIT_REF 2>&1 || true)
-if [[ -n "$gitcheck_output" ]]; then
-    checks_failed=true
-    {
-        echo "## :x: Git Checks Failed"
-        echo "$gitcheck_output"
-        echo
-    } >> "$OUTPUT"
-else
-    {
-        echo "## :heavy_check_mark: Git Checks Passed"
-        echo
-    } >> "$OUTPUT"
-fi
+if [[ $# -gt 0 ]]; then
+    GIT_REF="$1"
+    echo "Changed files:"
+    git diff --name-status "$GIT_REF.."
+    git diff --name-only "$GIT_REF.." > changed-files.txt
+    readarray -t CHANGED_FILES < changed-files.txt
+    CHANGED_FILES="${CHANGED_FILES[@]}"
 
-# License Headers
-echo "Checking license headers..."
-license_headers_output=$(python tools/ci/sanity_checks/detect_license_headers.py 2>&1 || true)
-if [[ -n "$license_headers_output" ]]; then
-    checks_failed=true
-    {
-        echo "## :x: License Headers Checks Failed"
-        echo '```'
-        echo "$license_headers_output"
-        echo '```'
-        echo
-    } >> "$OUTPUT"
-else
-    {
-        echo "## :heavy_check_mark: License Headers Checks Passed"
-        echo
-    } >> "$OUTPUT"
+    # Git
+    echo "Checking commit formatting..."
+    gitcheck_output=$(python tools/ci/sanity_checks/git.py $GIT_REF 2>&1 || true)
+    if [[ -n "$gitcheck_output" ]]; then
+        checks_failed=true
+        {
+            echo "## :x: Git Checks Failed"
+            echo "$gitcheck_output"
+            echo
+        } | tee -a "$OUTPUT"
+    else
+        {
+            echo "## :heavy_check_mark: Git Checks Passed"
+            echo
+        } | tee -a "$OUTPUT"
+    fi
 fi
 
 # General
@@ -64,7 +48,7 @@ run_check tools/ci/sanity_checks/python.sh "${CHANGED_FILES[@]}"
 run_check tools/ci/sanity_checks/sql.sh "${CHANGED_FILES[@]}"
 
 # Lua
-python tools/ci/sanity_checks/lua_stylecheck.py test >> "$OUTPUT"
+python tools/ci/sanity_checks/lua_stylecheck.py test | tee -a "$OUTPUT"
 run_check tools/ci/sanity_checks/lua.sh "${CHANGED_FILES[@]}"
 
 # C++

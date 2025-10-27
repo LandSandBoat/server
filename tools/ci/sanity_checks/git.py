@@ -49,10 +49,10 @@ def get_commit_messages():
 def print_error(hash, lines, line, message):
     lines_text = "\n".join(lines)
 
-    print(f"#### Found formatting issue in commit {hash}\n")
-    print(f"> ###### Issue \n> {message}\n")
-    print(f"> ###### Line with issue \n> {line}\n")
-    print(f"> ###### Commit message \n> {lines_text}\n\n")
+    print(f"#### Error in commit {hash}")
+    print(f"```\n{message}\n```")
+    print(f"**Line with issue:**\n```\n{line}\n```")
+    print(f"**Commit message:**\n```\n{lines_text}\n```\n")
 
 
 # Main Logic

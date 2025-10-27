@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,22 @@
 ===========================================================================
 */
 
-#ifndef _CDELIVERYBOXPACKET_H
-#define _CDELIVERYBOXPACKET_H
+#pragma once
 
-#include "common/cbasetypes.h"
+#include "base.h"
 
-#include "basic.h"
-
-#define AH_SANDORIA "AH-SandOria"
-#define AH_JEUNO    "AH-Jeuno"
-#define AH_WINDURST "AH-Windurst"
-#define AH_BASTOK   "AH-Bastok"
-
-enum class GP_CLI_COMMAND_PBX_BOXNO : int8_t;
-enum class GP_CLI_COMMAND_PBX_COMMAND : uint8_t;
-class CDeliveryBoxPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DE
+// This packet is sent by the server to update the local clients party mode.
+// This packet also resets the clients pending party invite status.
+class GP_SERV_COMMAND_GROUP_SOLICIT_NO final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_SOLICIT_NO, GP_SERV_COMMAND_GROUP_SOLICIT_NO>
 {
 public:
-    CDeliveryBoxPacket(GP_CLI_COMMAND_PBX_COMMAND action, GP_CLI_COMMAND_PBX_BOXNO boxid, uint8 count, uint8 param);
-    CDeliveryBoxPacket(GP_CLI_COMMAND_PBX_COMMAND action, GP_CLI_COMMAND_PBX_BOXNO boxid, CItem* PItem, uint8 slotid, uint8 count, uint8 message);
-};
+    struct PacketData
+    {
+        uint8_t Reason;       // PS2: Reason
+        uint8_t padding05[3]; // PS2: (New; did not exist.)
+    };
 
-#endif
+    // TODO: Unimplemented
+    GP_SERV_COMMAND_GROUP_SOLICIT_NO() = default;
+};

@@ -153,6 +153,7 @@ jobs:
           context: .
           file: ${{ format('./docker/{0}.Dockerfile', inputs.os) }}
           target: devtools
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ format('ghcr.io/{0}/devtools:{1}', env.REPO_OWNER, inputs.os) }}
 
@@ -165,7 +166,7 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
           annotations: ${{ steps.docker-meta.outputs.annotations }}
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           build-args: |
             COMPILER=${{ inputs.compiler }}
             CMAKE_BUILD_TYPE=${{ inputs.build_type }}

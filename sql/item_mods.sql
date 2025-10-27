@@ -33291,9 +33291,6 @@ INSERT INTO `item_mods` VALUES (16911,25,-1); -- ACC: -1
 -- Shinogi
 INSERT INTO `item_mods` VALUES (16913,9,3); -- DEX: 3
 
--- Hocho
-INSERT INTO `item_mods` VALUES (16924,135,3); -- COOK: 3
-
 -- Mokuto +1
 INSERT INTO `item_mods` VALUES (16925,431,2);  -- ITEM_ADDEFFECT_TYPE: DEBUFF
 INSERT INTO `item_mods` VALUES (16925,499,13); -- ITEM_SUBEFFECT: 13
@@ -46010,12 +46007,6 @@ INSERT INTO `item_mods` VALUES (21922,30,40);   -- MACC: 40
 INSERT INTO `item_mods` VALUES (21922,311,217); -- MAGIC_DAMAGE: 217
 INSERT INTO `item_mods` VALUES (21922,355,136); -- ADDS_WEAPONSKILL: 136
 INSERT INTO `item_mods` VALUES (21922,706,60);  -- WSD+% (Blade Ku): 60
-
--- Debahocho
-INSERT INTO `item_mods` VALUES (21923,135,2); -- COOK: 2
-
--- Debahocho +1
-INSERT INTO `item_mods` VALUES (21924,135,3); -- COOK: 3
 
 -- Tsuru
 INSERT INTO `item_mods` VALUES (21926,2,114);    -- HP: 114

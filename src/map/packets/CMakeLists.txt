@@ -6,8 +6,6 @@ set(PACKET_SOURCES
     ${PACKET_S2C_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/action.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/action.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h
@@ -15,19 +13,11 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.h
     PARENT_SCOPE
 )

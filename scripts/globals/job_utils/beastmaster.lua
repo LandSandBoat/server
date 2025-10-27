@@ -394,6 +394,8 @@ end
 -- On Ability Use Unleash
 xi.job_utils.beastmaster.onUseAbilityUnleash = function(player, target, ability)
     player:addStatusEffect(xi.effect.UNLEASH, 9, 0, 60)
+
+    return xi.effect.UNLEASH
 end
 
 -- On Ability Check For Leave, Heel and Stay.
@@ -522,6 +524,8 @@ xi.job_utils.beastmaster.onUseAbilityKillerInstinct = function(player, target, a
     -- TODO: Is there gear/mods that enhance power/duration?
 
     target:addStatusEffect(xi.effect.KILLER_INSTINCT, power, 0, duration, 0, petEcosystem)
+
+    return xi.effect.KILLER_INSTINCT
 end
 
 local function getCharmDuration(charmer, target)

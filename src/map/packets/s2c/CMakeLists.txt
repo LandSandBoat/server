@@ -1,5 +1,7 @@
 set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x005_packetcontrol.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x006_naraku.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x008_enterzone.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x008_enterzone.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.h
@@ -8,6 +10,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00a_login.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x012_gm.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x013_gmcommand.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.h
@@ -29,6 +33,9 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x023_item_trade_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x023_item_trade_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x025_item_trade_mylist.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x025_item_trade_mylist.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.h
@@ -37,9 +44,6 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02d_battle_message2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02d_battle_message2.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x025_item_trade_mylist.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02e_openmogmenu.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.cpp
@@ -61,6 +65,7 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03b_eventmes.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03c_shop_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03c_shop_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.h
@@ -81,6 +86,17 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_mon.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x047_translate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x048_link_concierge.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x049_itemsearch.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04b_pbx_result.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04b_pbx_result.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04c_auc.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04c_auc.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_fishranking.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_fishranking.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_servmes.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_servmes.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.cpp
@@ -102,20 +118,21 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x057_weather.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x058_assist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x058_assist.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x05b_wpos.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x05b_wpos.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x059_friendpass.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x059_friendpass.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05a_motionmes.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05a_motionmes.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05b_wpos.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05b_wpos.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x05c_pendingnum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05e_conquest.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05e_conquest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x060_musicvolume.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x061_clistatus.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x061_clistatus.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x062_clistatus2.h
@@ -137,19 +154,24 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x063_miscdata_unknown.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x065_wpos2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x065_wpos2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x069_chocobo_racing.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x06f_combine_ans.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x06f_combine_ans.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_campaign.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_campaign.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x070_combine_inf.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x075_battlefield.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x075_battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x076_group_effects.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x076_group_effects.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x077_entity_vis.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x078_switch_start.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x079_switch_proc.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x083_guild_buylist.h
@@ -164,22 +186,27 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08c_merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x096_myroom_enter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x097_myroom_exit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0aa_magic_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0aa_magic_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0ab_feat_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ac_command_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ac_command_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0ad_dungeon.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ae_mount_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ae_mount_data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0b5_faq_gmparam.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0b6_set_gmmsg.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0b7_gmscitem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0bf_registration.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0bf_registration.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c9_equip_inspect_equipment.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c9_equip_inspect_equipment.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c9_equip_inspect_general.h
@@ -188,40 +215,45 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0cc_linkshell_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0cc_linkshell_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0df_group_attr.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0df_group_attr.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_trophy_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_trophy_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0de_group_solicit_no.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0df_group_attr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0df_group_attr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0e0_group_comlink.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0e0_group_comlink.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e2_group_list2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e6_ballista.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f9_res.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f9_res.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x105_bazaar_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x105_bazaar_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x108_bazaar_shopping.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x108_bazaar_shopping.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x109_bazaar_sell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x109_bazaar_sell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10a_bazaar_sale.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10a_bazaar_sale.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x110_unity.h
@@ -232,17 +264,19 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x112_roe_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x117_equipset_res.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_partyreq.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.cpp
     PARENT_SCOPE
 )

@@ -71,6 +71,9 @@ local phaseTable = {
 }
 
 entity.onMobInitialize = function(mob)
+    -- "If all individuals who have developed enmity die, Pandemonium Warden will return to his spawn point, with his train of lamps, and will not be aggressive to any non-combat action"
+    mob:setAggressive(false)
+
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMod(xi.mod.STATUSRES, 50)
 
@@ -79,10 +82,6 @@ entity.onMobInitialize = function(mob)
 
     -- this mob is always unkillable, simply despawns when "defeated"
     mob:setUnkillable(true)
-    mob:hideHP(true)
-
-    -- "If all individuals who have developed enmity die, Pandemonium Warden will return to his spawn point, with his train of lamps, and will not be aggressive to any non-combat action"
-    mob:setAggressive(false)
 end
 
 local despawnPW = function(mob)
@@ -91,12 +90,18 @@ local despawnPW = function(mob)
     end
 
     for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
-        DespawnMob(petId)
         local pet = GetMobByID(petId)
+        -- dead pets stay grey, living pets despawn immediately
         if pet then
-            pet:setAutoAttackEnabled(false)
-            pet:setMobAbilityEnabled(false)
-            pet:setMagicCastingEnabled(false)
+            -- spawn listener will be added when next phase starts
+            pet:removeListener('SET_PET_PROPERTIES')
+
+            if pet:isAlive() then
+                DespawnMob(petId)
+                pet:setAutoAttackEnabled(false)
+                pet:setMobAbilityEnabled(false)
+                pet:setMagicCastingEnabled(false)
+            end
         end
     end
 end
@@ -153,14 +158,14 @@ entity.onMobSpawn = function(mob)
     for _, petId in ipairs(ID.mob.PANDEMONIUM_LAMPS) do
         local pet = GetMobByID(petId)
         if pet then
-            pet:setAggressive(false)
-            pet:setModelId(phaseData.petModelId)
+            local petModel = phaseData.petModelId
             local skillList = phaseData.petSkillList
             -- not all pets each phase use spells. Spell List 0 is included in each pet's SpellLists table to account for this
             local spellList = utils.randomEntry(phaseData.petSpellLists)
 
             -- skill/spell list has to be set after spawn
-            pet:addListener('SPAWN', 'SET_ABILITY_LISTS', function(petArg)
+            pet:addListener('SPAWN', 'SET_PET_PROPERTIES', function(petArg)
+                petArg:setModelId(petModel)
                 petArg:setMobMod(xi.mobMod.SKILL_LIST, skillList)
                 petArg:setMobMod(xi.mobMod.HP_STANDBACK, 0)
                 if spellList == 0 then
@@ -260,8 +265,9 @@ entity.onMobDespawn = function(mob)
 
         if pw:isAlive() then
             -- reappear
+            pw:setPos(mob:getPos())
             pw:timer(3000, function(mobArg)
-                mobArg:setStatus(xi.status.UPDATE)
+                mobArg:triggerListener('UNHIDE', mobArg)
             end)
         end
     end

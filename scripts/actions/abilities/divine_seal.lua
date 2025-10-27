@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    xi.job_utils.white_mage.useDivineSeal(player, target, ability)
+    return xi.job_utils.white_mage.useDivineSeal(player, target, ability)
 end
 
 return abilityObject
