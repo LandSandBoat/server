@@ -36,6 +36,7 @@ return {
     ['Popopp']            = { text = ID.text.OPO_OPO },
     ['Pula_Rhatti']       = { event = 92 },
     ['Qhio_Plittibhi']    = { event = 154 },
+    ['Romaa_Mihgo']       = { event = 263 },
     ['Roropp']            = { text = ID.text.OPO_OPO },
     ['Soun_Abralah']      = { event = 101 },
     ['Swift']             = { event = 10018 },

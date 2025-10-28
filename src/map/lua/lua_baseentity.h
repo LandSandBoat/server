@@ -194,6 +194,7 @@ public:
     auto   getZoneName() -> std::string;
     bool   hasVisitedZone(uint16 zone);
     uint16 getPreviousZone();
+    uint32 getPreviousZoneLineID();
     uint8  getCurrentRegion();
     uint8  getContinentID();
     bool   isInMogHouse();

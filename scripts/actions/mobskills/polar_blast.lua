@@ -7,16 +7,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then -- TODO: Pandemonium Warden, Set skill lists
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1796 then
-            return 0
-        else
-            return 1
-        end
-    end
-
     if mob:getAnimationSub() <= 1 then
         -- TODO: Does this need an inFront() check?
         return 0

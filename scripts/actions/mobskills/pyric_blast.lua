@@ -7,16 +7,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then -- TODO: Pandemonium Warden. Set skill lists/clean up.
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1796 then
-            return 0
-        else
-            return 1
-        end
-    end
-
     -- Only used when all 3 heads are alive.
     if mob:getAnimationSub() == 0 then
         -- TODO: Does this need an inFront() check?

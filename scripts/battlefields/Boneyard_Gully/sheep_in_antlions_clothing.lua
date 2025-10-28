@@ -1,7 +1,6 @@
 -----------------------------------
 -- Sheep in Antlion's Clothing
--- Boneyard Gully ENM, Miasma Filter
--- !addkeyitem MIASMA_FILTER
+-- Boneyard Gully ENM (Miasma Filter)
 -----------------------------------
 local boneyardGullyID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
@@ -19,85 +18,21 @@ local content = Battlefield:new({
     armouryCrates    =
     {
         boneyardGullyID.mob.TUCHULCHA + 4,
-        boneyardGullyID.mob.TUCHULCHA + 9,
-        boneyardGullyID.mob.TUCHULCHA + 14,
+        boneyardGullyID.mob.TUCHULCHA + 10,
+        boneyardGullyID.mob.TUCHULCHA + 16,
     },
-
     grantXP = 2500,
 })
-
--- TODO: Tuchulcha mob script needs refactoring, and a common method
--- to store these IDs without duplicated code (and _not_ in IDs.lua) is
--- needed.
-
-local antlionPositions =
-{
-    [1] =
-    {
-        { -517,    0, -521, 171 },
-        { -534,    0, -460, 171 },
-        { -552,  2.2, -440, 171 },
-        { -572, -3.6, -464, 171 },
-        { -573,  2.2, -427, 171 },
-        { -562,    0, -484, 171 },
-        { -593,    0, -480, 171 },
-        { -610, -1.5, -490, 171 },
-    },
-
-    [2] =
-    {
-        {   43,    0,  40, 7 },
-        {   26,    0, 100, 7 },
-        {    7,  2.2, 118, 7 },
-        {  -13, -3.6,  95, 7 },
-        {  -13,  2.2, 133, 7 },
-        { -2.3,    0,  76, 7 },
-        {  -33,    0,  79, 7 },
-        {  -54, -1.5,  67, 7 },
-    },
-
-    [3] =
-    {
-        { 522,    0, 521, 240 },
-        { 506,    0, 580, 240 },
-        { 466,  2.2, 614, 240 },
-        { 467, -3.6,  57, 240 },
-        { 488,  2.2, 598, 240 },
-        { 478,    0, 557, 240 },
-        { 446,    0, 558, 240 },
-        { 430, -1.5, 550, 240 },
-    },
-}
-
-function content:setupBattlefield(battlefield)
-    local battlefieldArea   = battlefield:getArea()
-    local selectedPositions = utils.permgen(#antlionPositions[battlefieldArea])
-
-    -- Set the Hunter Spawn locations
-    for mobNum = 1, 3 do
-        GetMobByID(content.groups[2].mobIds[battlefieldArea][mobNum]):setPos(antlionPositions[battlefieldArea][selectedPositions[mobNum]])
-    end
-
-    -- Select Tuchulcha's sandpit positions
-    local tuchulcha = GetMobByID(content.groups[1].mobIds[battlefieldArea][1])
-    if tuchulcha then
-        tuchulcha:setLocalVar('sand_pit1', selectedPositions[4])
-        tuchulcha:setLocalVar('sand_pit2', selectedPositions[5])
-        tuchulcha:setLocalVar('sand_pit3', selectedPositions[6])
-        tuchulcha:setPos(antlionPositions[battlefieldArea][selectedPositions[7]])
-    end
-end
 
 content.groups =
 {
     {
         mobIds =
         {
-            { boneyardGullyID.mob.TUCHULCHA     },
-            { boneyardGullyID.mob.TUCHULCHA + 4 },
-            { boneyardGullyID.mob.TUCHULCHA + 8 },
+            { boneyardGullyID.mob.TUCHULCHA      },
+            { boneyardGullyID.mob.TUCHULCHA + 6  },
+            { boneyardGullyID.mob.TUCHULCHA + 12 },
         },
-
         superlink = false,
         allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
     },
@@ -110,43 +45,117 @@ content.groups =
                 boneyardGullyID.mob.TUCHULCHA + 2,
                 boneyardGullyID.mob.TUCHULCHA + 3,
             },
-
             {
-                boneyardGullyID.mob.TUCHULCHA + 5,
-                boneyardGullyID.mob.TUCHULCHA + 6,
                 boneyardGullyID.mob.TUCHULCHA + 7,
-            },
-
-            {
+                boneyardGullyID.mob.TUCHULCHA + 8,
                 boneyardGullyID.mob.TUCHULCHA + 9,
-                boneyardGullyID.mob.TUCHULCHA + 10,
-                boneyardGullyID.mob.TUCHULCHA + 11,
+            },
+            {
+                boneyardGullyID.mob.TUCHULCHA + 13,
+                boneyardGullyID.mob.TUCHULCHA + 14,
+                boneyardGullyID.mob.TUCHULCHA + 15,
             },
         },
-
         superlink = false,
     },
 }
 
+-- Possible Swift, Armored, and Shrewd Hunter Antlion spawn positions as well as possible Sandpit locations for Tuchulcha.
+local antlionPositions =
+{
+    [1] =
+    {
+        { -516,  0.0, -517, 171 },
+        { -533,  0.2, -460, 171 },
+        { -552,  2.2, -440, 171 },
+        { -570, -3.6, -464, 171 },
+        { -589,  0.2, -484, 171 },
+        { -527,  0.2, -471, 171 },
+        { -530,  0.3, -478, 171 },
+        { -574,  0.6, -478, 171 },
+        { -560,  0.0, -476, 171 },
+        { -596,  0.2, -478, 171 },
+        { -570,  3.0, -433, 171 },
+    },
+
+    [2] =
+    {
+        { 43,  0.0,  40, 7 },
+        { 27,  0.2,  99, 7 },
+        { 7,   2.2, 117, 7 },
+        { -11, 3.4,  96, 7 },
+        { -30, 0.2,  76, 7 },
+        { 32,  0.2,  89, 7 },
+        { 29,  0.3,  82, 7 },
+        { -15, 0.6,  82, 7 },
+        { -1,  0.0,  84, 7 },
+        { -37, 0.2,  82, 7 },
+        { -11, 3.0, 127, 7 },
+    },
+
+    [3] =
+    {
+        { 522,  0.0, 528, 240 },
+        { 505,  0.2, 585, 240 },
+        { 486,  2.2, 605, 240 },
+        { 468,  3.4, 575, 240 },
+        { 449,  0.2, 555, 240 },
+        { 511,  0.2, 568, 240 },
+        { 508,  0.3, 561, 240 },
+        { 464,  0.6, 561, 240 },
+        { 478,  0.0, 563, 240 },
+        { 442,  0.2, 561, 240 },
+        { 468,  3.0, 606, 240 },
+    },
+}
+
+function content:setupBattlefield(battlefield)
+    local area = battlefield:getArea()
+    local positions = antlionPositions[area]
+    if not positions then
+        return
+    end
+
+    -- Using the permgen utility to generate a random order of unique indices.
+    local order = utils.permgen(#positions)
+
+    -- Assign positions to the Swift, Armored, and Shrewd Antlions
+    for i = 1, 3 do
+        local mob = GetMobByID(content.groups[2].mobIds[area][i])
+        if mob then
+            mob:setPos(unpack(positions[order[i]]))
+        end
+    end
+
+    -- Assign 3 unique sandpit destinations for Tuchulcha
+    local tuchulcha = GetMobByID(content.groups[1].mobIds[area][1])
+    if tuchulcha then
+        tuchulcha:setLocalVar('sand_pit1', order[4])
+        tuchulcha:setLocalVar('sand_pit2', order[5])
+        tuchulcha:setLocalVar('sand_pit3', order[6])
+    end
+end
+
 content.loot =
 {
     {
-        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 268 },  -- Square of Galateia (26.8% Drop Rate)
-        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 266 },  -- Kejusu Satin
-        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 342 },  -- Viridian Urushi
+        { itemId = xi.item.NONE,                   weight = 950 },
+        { itemId = xi.item.CLOUD_EVOKER,           weight =  50 },
     },
-
     {
-        { itemId = xi.item.NONE,         weight = 944 }, -- nothing
-        { itemId = xi.item.CLOUD_EVOKER, weight =  56 }, -- Cloud Evoker
+        { itemId = xi.item.NONE,                   weight = 150 },
+        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 250 },
+        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 250 },
+        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 350 },
     },
-
     {
-        { itemId = xi.item.HAGUN,            weight =  82 }, -- Hagun
-        { itemId = xi.item.MARTIAL_AXE,      weight =  92 }, -- Martial Axe
-        { itemId = xi.item.MARTIAL_WAND,     weight =  63 }, -- Martial Wand
-        { itemId = xi.item.FORAGERS_MANTLE,  weight = 105 }, -- Forager's Mantle
-        { itemId = xi.item.HARMONIAS_TORQUE, weight = 121 }, -- Harmonia's Torque
+        quantity = 2,
+        { itemId = xi.item.NONE,                   weight = 735 },
+        { itemId = xi.item.HAGUN,                  weight =  45 },
+        { itemId = xi.item.MARTIAL_AXE,            weight =  45 },
+        { itemId = xi.item.MARTIAL_WAND,           weight =  45 },
+        { itemId = xi.item.FORAGERS_MANTLE,        weight =  65 },
+        { itemId = xi.item.HARMONIAS_TORQUE,       weight =  65 },
     },
 }
 

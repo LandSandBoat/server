@@ -2857,6 +2857,25 @@ uint16 CLuaBaseEntity::getPreviousZone()
 }
 
 /************************************************************************
+ *  Function: getPreviousZoneLineID()
+ *  Purpose : Returns the integer ID of the last zoneline the PC visited
+ *  Example : local prevZonelineID = player:getPreviousZoneLineID()
+ *  Notes   : Mainly used for moghouse exits
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getPreviousZoneLineID()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->m_PrevZonelineID;
+}
+
+/************************************************************************
  *  Function: getCurrentRegion()
  *  Purpose : Returns the integer value of the PC's region
  *  Example : local region = target:getCurrentRegion()
@@ -19550,6 +19569,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getZoneName", CLuaBaseEntity::getZoneName);
     SOL_REGISTER("hasVisitedZone", CLuaBaseEntity::hasVisitedZone);
     SOL_REGISTER("getPreviousZone", CLuaBaseEntity::getPreviousZone);
+    SOL_REGISTER("getPreviousZoneLineID", CLuaBaseEntity::getPreviousZoneLineID);
     SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
     SOL_REGISTER("isInMogHouse", CLuaBaseEntity::isInMogHouse);

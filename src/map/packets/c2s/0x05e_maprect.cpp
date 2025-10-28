@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -206,11 +206,15 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                     PChar->m_moghouseID    = PChar->id;
                     PChar->loc.p           = PZoneLine->m_toPos;
                     PChar->loc.destination = PChar->getZone();
+
+                    charutils::SavePrevZoneLineID(PChar, PZoneLine->m_zoneLineID);
                 }
                 else
                 {
                     PChar->loc.destination = PZoneLine->m_toZone;
                     PChar->loc.p           = PZoneLine->m_toPos;
+
+                    charutils::SavePrevZoneLineID(PChar, PZoneLine->m_zoneLineID);
                 }
             }
         }

@@ -357,16 +357,16 @@ INSERT INTO `mob_skill_lists` VALUES ('Doomed',86,489);
 INSERT INTO `mob_skill_lists` VALUES ('Doomed',86,490);
 INSERT INTO `mob_skill_lists` VALUES ('Doomed',86,491);
 INSERT INTO `mob_skill_lists` VALUES ('Doomed',86,492);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,642);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,643);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,644);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,645);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,646);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,647);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,648);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,649);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,650);
-INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,651);
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,644); -- Wind Breath
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,651); -- Lodesong
 -- 88: Bloody Bones
 -- 89: Draugar
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2113);
@@ -3892,14 +3892,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Snaggletooth_Peapuk',2006,1724);
 
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,642); -- flame_breath
-INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,643); -- poison_breath
-INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,644); -- wind_breath
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,645); -- body_slam
-INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,646); -- heavy_stomp
-INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,647); -- chaos_blade
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,648); -- petro_eyes
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,650); -- thornsong
-INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,651); -- lodesong
 INSERT INTO `mob_skill_lists` VALUES ('Dahak',2007,1792); -- nullsong
 
 INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring_Attack',2008,1620); -- mephitic_spore
@@ -4206,7 +4201,94 @@ INSERT INTO `mob_skill_lists` VALUES ('Book_Browser_Bokabraq',2067,1088); -- Gob
 INSERT INTO `mob_skill_lists` VALUES ('Chemical_Cook_Chemachiq',2068,1084); -- Crispy Candle
 INSERT INTO `mob_skill_lists` VALUES ('Chemical_Cook_Chemachiq',2068,1088); -- Goblin Rush
 
--- Next ID : 2069
+INSERT INTO `mob_skill_lists` VALUES ('Flame_Dragon',2069,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Flame_Dragon',2069,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Flame_Dragon',2069,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Flame_Dragon',2069,649); -- Voidsong
+
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Dragon',2070,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Dragon',2070,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Dragon',2070,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Dragon',2070,651); -- Lodesong
+
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Dragon',2071,644); -- Wind Breath
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Dragon',2071,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Dragon',2071,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Dragon',2071,650); -- Thornsong
+
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Berzerker',2072,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Berzerker',2072,646); -- Heavy Stomp
+
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',2073,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',2073,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',2073,651); -- Lodesong
+
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Pukis',2074,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Pukis',2074,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Pukis',2074,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Pukis',2074,647); -- Chaos Blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Pukis',2075,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Pukis',2075,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Pukis',2075,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Poison_Pukis',2075,647); -- Chaos Blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Pukis',2076,644); -- Wind Breath
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Pukis',2076,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Pukis',2076,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Pukis',2076,647); -- Chaos Blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Petro_Pukis',2077,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Petro_Pukis',2077,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Petro_Pukis',2077,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Petro_Pukis',2077,651); -- Lodesong
+
+INSERT INTO `mob_skill_lists` VALUES ('Vanguard_Dragon',2078,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Vanguard_Dragon',2078,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Vanguard_Dragon',2078,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Vanguard_Dragon',2078,648); -- Petro Eyes
+
+INSERT INTO `mob_skill_lists` VALUES ('Yang',2079,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Yang',2079,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Yang',2079,644); -- Wind Breath
+INSERT INTO `mob_skill_lists` VALUES ('Yang',2079,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Yang',2079,647); -- Chaos Blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Ying',2080,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Ying',2080,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Ying',2080,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Ying',2080,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Ying',2080,651); -- Lodesong
+
+INSERT INTO `mob_skill_lists` VALUES ('Alklha',2081,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Alklha',2081,648); -- Petro Eyes
+
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',2082,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',2082,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',2082,651); -- Lodesong
+
+INSERT INTO `mob_skill_lists` VALUES ('Barong',2083,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Barong',2083,646); -- Heavy Stomp
+
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',2084,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',2084,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',2084,644); -- Wind Breath
+
+INSERT INTO `mob_skill_lists` VALUES ('Graoully',2085,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Graoully',2085,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Graoully',2085,1792); -- Nullsong
+
+INSERT INTO `mob_skill_lists` VALUES ('Shadowsoul_Devourer',2086,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Shadowsoul_Devourer',2086,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Shadowsoul_Devourer',2086,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Shadowsoul_Devourer',2086,1792); -- Nullsong
+
+INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,649); -- Voidsong
+
+-- Next ID : 2088
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

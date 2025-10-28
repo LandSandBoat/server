@@ -67,32 +67,71 @@ local offsetAxis =
 {
     X = 1,
     Z = 3,
+    R = 4,
 }
 
---  [zoneId]                       = {      x,      y,      z, rot, offsetAxis  , max }
+--  [zoneId]                       = { [Entrance] ={x,      y,     z,   rot, offsetAxis,   max } }
 xi.moghouse.exits =
 {
-    [xi.zone.AL_ZAHBI]             = {     37,      0,    -62, 192, offsetAxis.X, 5.0 },
-    [xi.zone.AHT_URHGAN_WHITEGATE] = {   -100,      0,    -83,   0, offsetAxis.Z, 5.0 },
-    [xi.zone.SOUTHERN_SAN_DORIA_S] = {    147,     -2,    116,  95, offsetAxis.X, 5.0 },
-    [xi.zone.BASTOK_MARKETS_S]     = {   -177,     -8,    -33, 128, offsetAxis.Z, 5.0 },
-    [xi.zone.WINDURST_WATERS_S]    = {    157,      0,     -8, 191, offsetAxis.X, 5.0 },
-    [xi.zone.SOUTHERN_SAN_DORIA]   = {    161,     -2,  162.1,  95, offsetAxis.Z, 3.0 },
-    [xi.zone.NORTHERN_SAN_DORIA]   = {    130,   -0.2,     -3, 160, offsetAxis.X, 3.0 },
-    [xi.zone.PORT_SAN_DORIA]       = {     78,    -16, -135.9, 165, offsetAxis.X, 2.0 },
-    [xi.zone.BASTOK_MINES]         = {    116,   0.99,    -75, 127, offsetAxis.Z, 5.0 },
-    [xi.zone.BASTOK_MARKETS]       = {   -177,     -8,    -33, 127, offsetAxis.Z, 5.0 },
-    [xi.zone.PORT_BASTOK]          = {     57,    8.5,   -239, 192, offsetAxis.X, 5.0 },
-    [xi.zone.WINDURST_WATERS]      = {    157,     -5,    -62, 192, offsetAxis.X, 5.0 },
-    [xi.zone.WINDURST_WALLS]       = { -257.5,  -5.05,   -123,   0, offsetAxis.Z, 5.0 },
-    [xi.zone.PORT_WINDURST]        = {    195, -15.56,    258,  65, offsetAxis.X, 5.0 },
-    [xi.zone.WINDURST_WOODS]       = {   -138,    -10,     37,   0, offsetAxis.Z, 5.0 },
-    [xi.zone.RULUDE_GARDENS]       = {     45,     10,    -73, 192, offsetAxis.X, 5.0 },
-    [xi.zone.UPPER_JEUNO]          = {     45,     -5,    -78, 172, offsetAxis.X, 2.5 },
-    [xi.zone.LOWER_JEUNO]          = {   41.2,     -5,     84,  85, offsetAxis.X, 2.5 },
-    [xi.zone.PORT_JEUNO]           = { -192.5,     -5,   -1.3,   0, offsetAxis.Z, 2.5 },
-    [xi.zone.WESTERN_ADOULIN]      = {     -0,     -0,   -144, 223, offsetAxis.Z, 5.0 },
-    [xi.zone.EASTERN_ADOULIN]      = {  -59.3,      0, -128.5, 191, offsetAxis.X, 5.0 },
+    -- Single Exit Zones -------------------------------------------------------------------------
+    [xi.zone.BASTOK_MINES]         = { [1] = {    117,   0.99,    -72,  127, offsetAxis.Z, 5.0 } },
+    [xi.zone.PORT_BASTOK]          = { [1] = {     60,    8.5,   -239,  192, offsetAxis.X, 5.0 } },
+    [xi.zone.AL_ZAHBI]             = { [1] = {     40,      0,    -61,  191, offsetAxis.X, 2.0 } },
+    [xi.zone.AHT_URHGAN_WHITEGATE] = { [1] = {   -101,      0,    -80,  255, offsetAxis.Z, 2.0 } },
+    [xi.zone.SOUTHERN_SAN_DORIA_S] = { [1] = {  148.5,     -2,    116,   95, offsetAxis.X, 2.0 } },
+    [xi.zone.WINDURST_WATERS_S]    = { [1] = {    160,   0.99,    -11,  191, offsetAxis.X, 2.0 } },
+    [xi.zone.SOUTHERN_SAN_DORIA]   = { [1] = {  159.5,     -2,    160,   95, offsetAxis.Z, 2.0 } },
+    [xi.zone.NORTHERN_SAN_DORIA]   = { [1] = {    130,   -0.2,     -3,  160, offsetAxis.X, 2.0 } },
+    [xi.zone.PORT_SAN_DORIA]       = { [1] = {   79.4,    -16, -135.5,  165, offsetAxis.R, 1.8 } },
+    [xi.zone.WINDURST_WATERS]      = { [1] = {    160,  -2.65,  -53.7,  192, offsetAxis.X, 2.5 } },
+    [xi.zone.WINDURST_WALLS]       = { [1] = {   -249,  -2.65,   -120,    0, offsetAxis.Z, 2.5 } },
+    [xi.zone.PORT_WINDURST]        = { [1] = {    198, -15.65,    258,   65, offsetAxis.X, 2.5 } },
+    [xi.zone.WINDURST_WOODS]       = { [1] = {   -130,  -7.65,     40,    0, offsetAxis.Z, 2.5 } },
+    [xi.zone.RULUDE_GARDENS]       = { [1] = {   46.5,     10,    -73,  192, offsetAxis.X, 1.8 } },
+    [xi.zone.UPPER_JEUNO]          = { [1] = {     47,     -5,  -79.3,  172, offsetAxis.R, 1.0 } },
+    [xi.zone.LOWER_JEUNO]          = { [1] = {     42,     -5,     85,   85, offsetAxis.R, 1.0 } },
+    [xi.zone.PORT_JEUNO]           = { [1] = {   -193,     -5,     -0,    0, offsetAxis.Z, 1.0 } },
+    [xi.zone.WESTERN_ADOULIN]      = { [1] = {      0,   0.75,   -142,  223, offsetAxis.R, 4.0 } },
+    [xi.zone.EASTERN_ADOULIN]      = { [1] = {    -56,  -0.15,   -127,  191, offsetAxis.X, 4.0 } },
+
+    --- Multiple Exit Zones ----------------------------------------------------------------------
+    [xi.zone.BASTOK_MARKETS_S]     = {
+        [1] = { -177,  -8,  -30, 128, offsetAxis.Z, 2.0 },
+        [2] = { -177,  -8,   30, 128, offsetAxis.Z, 2.0 }
+    },
+
+    [xi.zone.BASTOK_MARKETS]       = {
+        [1] = { -177,  -8,  -30, 128, offsetAxis.Z, 2.0 },
+        [2] = { -177,  -8,   30, 128, offsetAxis.Z, 2.0 }
+    },
+}
+
+local moghouseZoneLines =
+{
+--  [Zoneline ID] = entrance no.
+    [ 812805498] = 1, -- (230) SOUTHERN_SANDORIA
+    [ 812871034] = 1, -- ( 80) SOUTHERN_SANDORIA_S
+    [ 846359930] = 1, -- (231) NORTHERN_SANDORIA
+    [ 879979898] = 1, -- ( 87) BASTOK_MARKETS_S [Entrance 1]
+    [ 846425466] = 2, -- ( 87) BASTOK_MARKETS_S [Entrance 2]
+    [ 879914362] = 1, -- (232) PORT_SANDORIA
+    [ 913468794] = 1, -- (238) WINDURST_WATERS
+    [ 913534330] = 1, -- ( 94) WINDURST_WATERS_S
+    [ 947023226] = 1, -- (238) WINDURST_WALLS
+    [1668443514] = 1, -- (235) BASTOK_MARKETS [Entrance 1]
+    [1634889082] = 2, -- (235) BASTOK_MARKETS [Entrance 2]
+    [1701997946] = 1, -- (240) PORT_WINDURST
+    [1735552378] = 1, -- (234) BASTOK_MINES
+    [1769106810] = 1, -- (236) PORT_BASTOK
+    [1802661242] = 1, -- (241) WINDURST_WOODS
+    [1836215674] = 1, -- (243) RULUDE_GARDENS
+    [1869770106] = 1, -- (244) UPPER_JEUNO
+    [1936878970] = 1, -- (246) PORT_JEUNO
+    [1970433402] = 1, -- (245) LOWER_JEUNO
+    [2003987834] = 1, -- ( 48) AL_ZAHBI
+    [2037542266] = 1, -- ( 50) AHT_URHGAN_WHITEGATE
+    [ 947088762] = 1, -- (256) WESTERN_ADOULIN
+    [1634954618] = 1, -- (257) EASTERN_ADOULIN
 }
 
 xi.moghouse.isInMogHouseInHomeNation = function(player)
@@ -212,14 +251,24 @@ xi.moghouse.onMoghouseZoneEvent = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        local x, y, z, r, randomizedAxis, randomMax = unpack(xi.moghouse.exits[player:getZoneID()])
-        local randomOffset                          = math.random(randomMax * 1000)
 
-        -- 0.000 - N.N00 variance
-        if randomizedAxis == offsetAxis.X then
-            x = x + (randomOffset / 1000)
+        local zoneId = player:getZoneID()
+        local prevZoneLineID = player:getPreviousZoneLineID()
+        local moghouseEntrance = moghouseZoneLines[prevZoneLineID] or 1
+        local x, y, z, r, randomizedAxis, randomMax = unpack(xi.moghouse.exits[zoneId][moghouseEntrance])
+        local randomOffset                          = math.random(-randomMax * 1000, randomMax * 1000) -- offset -/+ from center point
+        local offsetValue                           = randomOffset / 1000 -- 0.000 - N.N00 variance
+
+        -- A few moghouses are rotated so we handle them first.
+        if randomizedAxis == offsetAxis.R then
+            local lineRot = (r + 64) % 256 -- Calculate the perpendicular angle (90 degrees / 64 units offset) from the rotaion of r.
+            local lineRadians = lineRot * (math.pi * 2 / 256) -- Convert to radians.
+            x = x + (offsetValue * math.cos(lineRadians))
+            z = z - (offsetValue * math.sin(lineRadians))
+        elseif randomizedAxis == offsetAxis.X then
+            x = x + offsetValue
         elseif randomizedAxis == offsetAxis.Z then
-            z = z + (randomOffset / 1000)
+            z = z + offsetValue
         end
 
         player:setPos(x, y, z, r)

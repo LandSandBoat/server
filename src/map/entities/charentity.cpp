@@ -258,6 +258,7 @@ CCharEntity::CCharEntity()
     m_StartActionPos   = {};
     m_ActionOffsetPos  = {};
     m_previousLocation = {};
+    m_PrevZonelineID   = 0;
 
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;

@@ -17,8 +17,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(297, 0, 1695, 4297, 4506) -- After fight with the Nasus. Mentions guard needs Habaneros, Black Curry, Mutton Tortilla
     elseif tuningOutProgress == 6 then
         player:startEvent(298, 0, 1695, 4297, 4506) -- Repeats guard need for Habaneros, Black Curry, Mutton Tortilla
-    else
-        player:startEvent(263)
     end
 end
 

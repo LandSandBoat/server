@@ -102,7 +102,7 @@ quest.sections =
                             return quest:messageSpecial(templeID.text.STILL_HANGS_ON_THE_WALL, xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
                         elseif not questNM then
                             return
-                        elseif not GetMobByID(templeID.mob.TROMPE_LOEIL):isSpawned() then
+                        elseif not questNM:isSpawned() then
                             return quest:progressEvent(50, xi.ki.FINAL_FANTASY)
                         end
                     elseif progress == 3 then
@@ -180,15 +180,24 @@ quest.sections =
 
                     if quest:getMustZone(player) then
                         return quest:event(51)
-                    elseif progress == 3 then
-                        return quest:progressEvent(57)
-                    elseif progress >= 1 then
-                        return quest:event(55)
+                    elseif
+                        -- The player cannot do the repeat if they meet the requirements for "Everyone's Grudging"
+                        player:getCharVar('rancorCurse') == 1 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 7 and
+                        not player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGING)
+                    then
+                        return -- Sends to default action as seen in captures
                     else
-                        if quest:getVar(player, 'Option') == 0 then
-                            return quest:progressEvent(53)
+                        if progress == 3 then
+                            return quest:progressEvent(57)
+                        elseif progress >= 1 then
+                            return quest:event(55)
                         else
-                            return quest:progressEvent(54)
+                            if quest:getVar(player, 'Option') == 0 then
+                                return quest:progressEvent(53)
+                            else
+                                return quest:progressEvent(54)
+                            end
                         end
                     end
                 end,
@@ -199,7 +208,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getMustZone(player) then
                         return quest:event(52)
-                    elseif quest:getVar(player, 'Prog') >= 0 then
+                    elseif quest:getVar(player, 'Prog') >= 1 then
                         return quest:event(56)
                     end
                 end,

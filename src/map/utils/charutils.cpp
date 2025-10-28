@@ -409,6 +409,7 @@ namespace charutils
                                "nation, "
                                "pos_zone, "
                                "pos_prevzone, "
+                               "pos_prevzonelineid, "
                                "pos_rot, "
                                "pos_x, "
                                "pos_y, "
@@ -451,15 +452,17 @@ namespace charutils
             PChar->targid = 0x400;
             PChar->SetName(rset->get<std::string>("charname").c_str());
 
-            PChar->loc.destination = rset->get<uint16>("pos_zone");
-            PChar->loc.prevzone    = rset->get<uint16>("pos_prevzone");
-            PChar->loc.p.rotation  = rset->get<uint8>("pos_rot");
-            PChar->loc.p.x         = rset->get<float>("pos_x");
-            PChar->loc.p.y         = rset->get<float>("pos_y");
-            PChar->loc.p.z         = rset->get<float>("pos_z");
-            PChar->m_moghouseID    = rset->get<uint32>("moghouse");
-            PChar->loc.boundary    = rset->get<uint16>("boundary");
-            PChar->accid           = rset->get<uint32>("accid");
+            PChar->loc.destination  = rset->get<uint16>("pos_zone");
+            PChar->loc.prevzone     = rset->get<uint16>("pos_prevzone");
+            PChar->m_PrevZonelineID = rset->get<uint32>("pos_prevzonelineid");
+
+            PChar->loc.p.rotation = rset->get<uint8>("pos_rot");
+            PChar->loc.p.x        = rset->get<float>("pos_x");
+            PChar->loc.p.y        = rset->get<float>("pos_y");
+            PChar->loc.p.z        = rset->get<float>("pos_z");
+            PChar->m_moghouseID   = rset->get<uint32>("moghouse");
+            PChar->loc.boundary   = rset->get<uint16>("boundary");
+            PChar->accid          = rset->get<uint32>("accid");
 
             PChar->profile.home_point.destination = rset->get<uint16>("home_zone");
             PChar->profile.home_point.p.rotation  = rset->get<uint8>("home_rot");
@@ -5863,6 +5866,17 @@ namespace charutils
                          "WHERE charid = ? "
                          "LIMIT 1",
                          PChar->m_ZonesVisitedList, PChar->id);
+    }
+
+    void SavePrevZoneLineID(CCharEntity* PChar, uint32 ZoneLineID)
+    {
+        TracyZoneScoped;
+
+        db::preparedStmt("UPDATE chars "
+                         "SET pos_prevzonelineid = ? "
+                         "WHERE charid = ? "
+                         "LIMIT 1",
+                         ZoneLineID, PChar->id);
     }
 
     void SaveCharEquip(CCharEntity* PChar)

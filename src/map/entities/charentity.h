@@ -517,6 +517,8 @@ public:
 
     location_t m_previousLocation{};
 
+    uint32 m_PrevZonelineID; // The ID of the previous zoneline the player went through.
+
     timer::duration   m_PlayTime;
     timer::time_point m_SaveTime;
 
