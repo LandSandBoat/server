@@ -35,25 +35,18 @@ if [[ $# -gt 0 ]]; then
         [[ -f $file && $file != *.py ]] || continue
 
         general_output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
-        if [[ -n "$general_output" ]]; then
-            if ! $any_issues; then
-                echo "## :x: General Checks Failed"
-                any_issues=true
-            fi
-            echo "$general_output"
-            echo
-        fi
     done
 else
     general_output=$(python tools/ci/sanity_checks/general.py . 2>&1 || true)
-    if [[ -n "$general_output" ]]; then
-        if ! $any_issues; then
-            echo "## :x: General Checks Failed"
-            any_issues=true
-        fi
-        echo "$general_output"
-        echo
+fi
+
+if [[ -n "$general_output" ]]; then
+    if ! $any_issues; then
+        echo "## :x: General Checks Failed"
+        any_issues=true
     fi
+    echo "$general_output"
+    echo
 fi
 
 # If no section was written, emit a success summary

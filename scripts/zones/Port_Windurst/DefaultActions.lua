@@ -56,7 +56,7 @@ return {
     ['Pherchabalet']        = { event = 553 },
     ['Pichichi']            = { event = 364 },
     ['Puo_Rhen']            = { event = 72 },
-    ['Pygmalion']           = { event = 10019 },
+    ['Pygmalion']           = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
     ['Pyo_Nzon']            = { event = 366 },
     ['Rachuchu']            = { event = 234 },
     ['Reiso-Haroiso']       = { event = 334 },

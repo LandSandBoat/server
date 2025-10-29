@@ -725,19 +725,6 @@ void CMobController::Move()
         return;
     }
 
-    // attempt to teleport
-    if (PMob->getMobMod(MOBMOD_TELEPORT_TYPE) == 1)
-    {
-        if (m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_TELEPORT_CD)))
-        {
-            if (const CMobSkill* teleportBegin = battleutils::GetMobSkill(PMob->getMobMod(MOBMOD_TELEPORT_START)))
-            {
-                m_LastSpecialTime = m_Tick;
-                MobSkill(PMob->targid, teleportBegin->getID(), std::nullopt);
-            }
-        }
-    }
-
     const bool  move          = PMob->PAI->PathFind->IsFollowingPath();
     float       attack_range  = PMob->GetMeleeRange();
     const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
@@ -779,6 +766,19 @@ void CMobController::Move()
     else if (PTarget)
     {
         float currentDistance = distance(PMob->loc.p, PTarget->loc.p);
+
+        // attempt to teleport (type 1) if target is out of melee range but within 30 distance
+        if (PMob->getMobMod(MOBMOD_TELEPORT_TYPE) == 1 && currentDistance > attack_range && currentDistance <= 30.0f)
+        {
+            if (m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_TELEPORT_CD)))
+            {
+                if (const CMobSkill* teleportBegin = battleutils::GetMobSkill(PMob->getMobMod(MOBMOD_TELEPORT_START)))
+                {
+                    m_LastSpecialTime = m_Tick;
+                    MobSkill(PMob->targid, teleportBegin->getID(), std::nullopt);
+                }
+            }
+        }
 
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {

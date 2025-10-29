@@ -769,8 +769,8 @@ INSERT INTO `mob_groups` VALUES (23,4527,20,'Livid_Seether',960,0,1350,0,0,83,84
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,966,21,'Delver',0,128,0,3600,0,37,38,0);
-INSERT INTO `mob_groups` VALUES (2,1237,21,'Envier',0,128,0,2250,0,36,36,0);
-INSERT INTO `mob_groups` VALUES (3,3539,21,'Seether',0,128,0,750,0,30,30,0);        -- TODO: This is placeholder HP and level.
+INSERT INTO `mob_groups` VALUES (2,1237,21,'Envier',0,128,0,2200,0,36,36,0);
+INSERT INTO `mob_groups` VALUES (3,3539,21,'Seether',0,128,0,200,0,28,28,0);
 INSERT INTO `mob_groups` VALUES (4,0,21,'Recollector',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5,0,21,'Quenchless_Craver',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6,0,21,'Forsaken_Baelfyr',0,128,0,0,0,0,0,0);
@@ -12183,7 +12183,7 @@ INSERT INTO `mob_groups` VALUES (16,241,180,'Ark_Angels_Wyvern',0,128,0,0,0,99,9
 
 INSERT INTO `mob_groups` VALUES (1,1158,181,'Ealdnarche',0,128,0,2000,5000,78,78,0);
 INSERT INTO `mob_groups` VALUES (2,1270,181,'Exoplates',0,128,0,10000,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (3,4676,181,'Ealdnarche_2',0,128,0,2600,5000,78,78,0);
+INSERT INTO `mob_groups` VALUES (3,4676,181,'Ealdnarche_2',0,128,0,3000,5000,78,78,0);
 INSERT INTO `mob_groups` VALUES (4,2993,181,'Orbital',0,128,0,145,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (5,1158,181,'Ealdnarche',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6,1270,181,'Exoplates',0,128,0,0,0,0,0,0);

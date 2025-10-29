@@ -35,6 +35,7 @@ public:
     CLuaClientEntityPairActions(CLuaClientEntityPair* parent);
     ~CLuaClientEntityPairActions() = default;
 
+    void move(float x, float y, float z) const;
     void useSpell(CLuaBaseEntity* target, SpellID spellId) const;
     void useWeaponskill(CLuaBaseEntity* target, uint16 wsId) const;
     void useAbility(CLuaBaseEntity* target, ABILITY abilityId) const;

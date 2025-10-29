@@ -8,11 +8,11 @@ any_issues=false
 if [[ $# -gt 0 ]]; then
     targets=("$@")
 else
-    mapfile -t targets < <(find src -name '*.cpp' -o -name '*.h')
+    mapfile -t targets < <(find src modules -name '*.cpp' -o -name '*.h')
 fi
 
 for file in "${targets[@]}"; do
-    [[ -f $file && $file == *.cpp || $file == *.h ]] || continue
+    [[ -f $file && ($file == *.cpp || $file == *.h) && ($file == src/**/* || $file == modules/**/*) ]] || continue
 
     # Run tools and capture output
     if [[ $file == *.cpp ]]; then

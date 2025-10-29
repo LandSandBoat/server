@@ -502,7 +502,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         end
 
         -- Handle Third Eye using shadowbehav as a guide.
-        if utils.thirdeye(target) then
+        if xi.combat.physicalHitRate.checkAnticipated(mob, target) then
             skill:setMsg(xi.msg.basic.ANTICIPATE)
 
             return 0

@@ -24,7 +24,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.REGAIN, 50)
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

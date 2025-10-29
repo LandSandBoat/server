@@ -69,14 +69,11 @@ jobs:
           mapfile -t changed_files < changed-files.txt
           source_changes=false
           for changed_file in "${changed_files[@]}"; do
-          if [[ $changed_file == *.cpp || \
-                $changed_file == *.cc  || \
-                $changed_file == *.cxx || \
-                $changed_file == *.h   || \
-                $changed_file == *.hpp || \
-                $changed_file == *.hxx || \
+          if [[ $changed_file == src/**/*.cpp || $changed_file == modules/**/*.cpp || \
+                $changed_file == src/**/*.h   || $changed_file == modules/**/*.h   || \
+                $changed_file == src/**/CMakeLists.txt || $changed_file == modules/**/CMakeLists.txt || \
                 $changed_file == CMakeLists.txt || \
-                $changed_file == *.cmake ]]; then
+                $changed_file == cmake/*.cmake ]]; then
               source_changes=true
               break
             fi

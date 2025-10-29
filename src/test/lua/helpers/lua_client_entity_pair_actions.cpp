@@ -36,11 +36,30 @@
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
 #include "map/spell.h"
+#include "packets/c2s/0x015_pos.h"
 #include "test_common.h"
 
 CLuaClientEntityPairActions::CLuaClientEntityPairActions(CLuaClientEntityPair* parent)
 : parent_(parent)
 {
+}
+
+/************************************************************************
+ *  Function: move()
+ *  Purpose : Emits packet to move the character.
+ *  Example : player.actions:move(10, 10, 10)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::move(const float x, const float y, const float z) const
+{
+    const auto packet    = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_POS);
+    auto*      posPacket = packet->as<GP_CLI_COMMAND_POS>();
+    posPacket->x         = x;
+    posPacket->z         = y;
+    posPacket->y         = z;
+
+    parent_->packets().sendBasicPacket(*packet);
 }
 
 /************************************************************************
@@ -367,6 +386,7 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
 void CLuaClientEntityPairActions::Register()
 {
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
+    SOL_REGISTER("move", CLuaClientEntityPairActions::move);
     SOL_REGISTER("useSpell", CLuaClientEntityPairActions::useSpell);
     SOL_REGISTER("useWeaponskill", CLuaClientEntityPairActions::useWeaponskill);
     SOL_REGISTER("useAbility", CLuaClientEntityPairActions::useAbility);

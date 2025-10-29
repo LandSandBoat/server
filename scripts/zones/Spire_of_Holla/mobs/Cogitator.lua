@@ -10,7 +10,8 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:setMod(xi.mod.REGAIN, 50)
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

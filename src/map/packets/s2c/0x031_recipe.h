@@ -26,9 +26,9 @@
 class CCharEntity;
 enum class GP_SERV_COMMAND_RECIPE_TYPE : uint16_t
 {
-    RecipeDetail1 = 1,
-    RecipeList    = 2,
-    RecipeDetail2 = 3,
+    RecipeDetail1 = 1, // A random recipe of appropriate level
+    RecipeList    = 2, // List of recipe available at specified rank
+    RecipeDetail2 = 3, // A specific recipe at offset
     Unknown       = 4,
 };
 

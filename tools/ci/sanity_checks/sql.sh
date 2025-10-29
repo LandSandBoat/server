@@ -5,11 +5,11 @@ any_issues=false
 if [[ $# -gt 0 ]]; then
     targets=("$@")
 else
-    mapfile -t targets < <(find sql -name '*.sql')
+    mapfile -t targets < <(find sql modules -name '*.sql')
 fi
 
 for file in "${targets[@]}"; do
-    [[ -f $file && $file == *.sql ]] || continue
+    [[ -f $file && ($file == sql/**/*.sql || $file == modules/**/*.sql) ]] || continue
 
     # Run tools and capture output
     bogus_comments=$(grep -En '(--\w)|^(---\s)' "$file" 2>&1 || true)

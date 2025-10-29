@@ -216,7 +216,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     std::memcpy(&packet->BufStatusBits, &PChar->StatusEffectContainer->m_Flags, sizeof(status_bits_t));
 
     packet->UniqueNo      = PChar->id;
-    packet->server_status = PChar->isInEvent() ? static_cast<uint8>(ANIMATION_EVENT) : PChar->animation;
+    packet->server_status = PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 

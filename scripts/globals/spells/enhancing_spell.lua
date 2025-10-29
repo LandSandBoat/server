@@ -591,6 +591,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
+            return xi.effect.NONE
         end
     end
 

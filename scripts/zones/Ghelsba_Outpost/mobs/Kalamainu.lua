@@ -17,7 +17,7 @@ entity.onMobEngage = function(mob, target)
     mob:useMobAbility(373) -- use secretion
 end
 
-entity.onMobWeaponSkill = function(mob, target, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if math.random(1, 100) <= 50 then
         return 370 -- favor baleful gaze
     end

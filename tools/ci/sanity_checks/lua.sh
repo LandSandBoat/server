@@ -10,7 +10,7 @@ any_issues=false
 if [[ $# -gt 0 ]]; then
     targets=("$@")
 else
-    mapfile -t targets < <(find scripts -name '*.lua')
+    mapfile -t targets < <(find scripts modules -name '*.lua')
 fi
 
 global_funcs=`python << EOF
@@ -133,7 +133,7 @@ if [[ -n "$binding_usage_output" ]]; then
 fi
 
 for file in "${targets[@]}"; do
-    [[ -f $file && $file == *.lua && $file != 'tools/ci/sanity_checks/lua_stylecheck.lua' ]] || continue
+    [[ -f $file && ($file == scripts/**/*.lua || $file == modules/**/*.lua) ]] || continue
 
     # Run tools and capture output
     luacheck_output=$(luacheck "$file" \

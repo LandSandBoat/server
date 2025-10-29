@@ -33,7 +33,7 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
 {
     auto& packet = this->data();
 
-    uint8               count      = 0;
+    uint8               count      = 1;
     const RecastList_t* RecastList = PChar->PRecastContainer->GetRecastList(RECAST_ABILITY);
     for (auto&& recast : *RecastList)
     {
@@ -67,8 +67,8 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
         }
         else // 2hr edge case // TODO: retail uses Calc2 on 2hr for some reason...
         {
-            packet.Timers[count].Timer   = recastSeconds;
-            packet.Timers[count].TimerId = 0;
+            packet.Timers[0].Timer   = recastSeconds;
+            packet.Timers[0].TimerId = 0;
         }
 
         // Retail currently only allows 31 distinct recasts to be sent in the packet

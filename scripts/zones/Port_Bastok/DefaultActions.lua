@@ -16,7 +16,7 @@ return {
     ['Ensetsu']          = { event = 27 },
     ['Evi']              = { event = 21 },
     ['Ferrol']           = { event = 254 },
-    ['Grin']             = { event = 295 },
+    ['Grin']             = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
     ['Gudav']            = { event = 31 },
     ['Gwinar']           = { event = 365 },
     ['Hilda']            = { event = 48 },
@@ -56,7 +56,6 @@ return {
     ['Tiger_Tooth']      = { event = 12 },
     ['Tilian']           = { event = 100 },
     ['Trilok']           = { event = 44 },
-    ['Varden']           = { event = 141 },
     ['Wurteh']           = { event = 95 },
     ['Yazan']            = { event = 190 },
     ['Zeldaff']          = { event = 30 },

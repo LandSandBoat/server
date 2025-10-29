@@ -4,6 +4,14 @@
 ---@class CClientEntityPairActions
 local CClientEntityPairActions = {}
 
+---Move character
+---@param x number
+---@param y number
+---@param z number
+---@return nil
+function CClientEntityPairActions:move(x, y, z)
+end
+
 ---Cast a spell on a target
 ---@param target CBaseEntity Target entity
 ---@param spellId xi.magic.spell Spell ID constant (e.g., xi.magic.spell.CURE)

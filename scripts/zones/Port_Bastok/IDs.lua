@@ -68,6 +68,7 @@ zones[xi.zone.PORT_BASTOK] =
         NOKKHI_GOOD_TRADE             = 8835,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM               = 8836,  -- I'm real sorry, but there's nothing I can do with those.
         ASURAN_FISTS_LEARNED          = 8852,  -- You have learned the weapon skill Asuran Fists!
+        SUSPICIOUS_CHARACTERS         = 8881,  -- It's my job to look out for suspicious characters coming in on the airships.
         BAGNOBROK_CLOSED_DIALOG       = 9164,  -- Kbastok sis kweak! Smoblins yonly twant gstrong sfriends! Non sgoods mfrom Smovalpolos ytoday!
         BAGNOBROK_OPEN_DIALOG         = 9165,  -- Kbastok! Crepublic sis gstrong! Smoblins lsell sgoods oto gstrong sfriends!
         CLOUD_BAD_COUNT               = 9260,  -- Well, don't just stand there like an idiot! I can't do any bundlin' until you fork over a set of 99 tools and <item>! And I ain't doin' no more than seven sets at one time, so don't even try it!

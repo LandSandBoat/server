@@ -1,6 +1,6 @@
 -----------------------------------
 -- Truth, Justice, and the Onion Way
---
+-- Log ID: 2, Quest ID: 36
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
@@ -19,8 +19,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainLvl() >= 5 -- To be confirmed, but only way to see default interaction.
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

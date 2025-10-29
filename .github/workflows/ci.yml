@@ -66,8 +66,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: changed-files
-        # Skipping lua language server hinges on checking the changed files list, so we should require downloading the artifact
-        # continue-on-error: true
 
       - name: Check For Changed Lua Files
         id: check-changes
@@ -75,7 +73,7 @@ jobs:
           mapfile -t changed_files < changed-files.txt
           lua_changes=false
           for changed_file in ${changed_files[@]}; do
-              if [[ $changed_file == *.lua ]]; then
+              if [[ $changed_file == scripts/**/*.lua || $changed_file == modules/**/*.lua ]]; then
                 lua_changes=true
                 break
               fi

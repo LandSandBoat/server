@@ -456,6 +456,7 @@ public:
     bool   isPacketFiltered(std::unique_ptr<CBasicPacket>& packet);
 
     bool pendingPositionUpdate;
+    bool sendServerStatus_ = false;
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 

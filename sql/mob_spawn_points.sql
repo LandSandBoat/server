@@ -4210,11 +4210,11 @@ INSERT INTO `mob_spawn_points` VALUES (16863236,0,'Envier','Envier',2,-240.000,6
 INSERT INTO `mob_spawn_points` VALUES (16863237,0,'Seether','Seether',3,-242.555,60.726,0.361,243);
 INSERT INTO `mob_spawn_points` VALUES (16863238,0,'Seether','Seether',3,-236.362,60.258,4.628,0);
 INSERT INTO `mob_spawn_points` VALUES (16863239,0,'Seether','Seether',3,-240.037,59.650,18.111,193);
-INSERT INTO `mob_spawn_points` VALUES (16863241,0,'Envier','Envier',2,0.100,0.000,0.000,200);             -- TODO: Approximation. Get confirmed capture.
+INSERT INTO `mob_spawn_points` VALUES (16863241,0,'Envier','Envier',2,0.100,0.000,0.000,200);
 INSERT INTO `mob_spawn_points` VALUES (16863242,0,'Seether','Seether',3,-4.754,-0.345,17.500,243);
 INSERT INTO `mob_spawn_points` VALUES (16863243,0,'Seether','Seether',3,1.792,0.562,7.711,0);
 INSERT INTO `mob_spawn_points` VALUES (16863244,0,'Seether','Seether',3,-8.912,0.266,2.025,193);
-INSERT INTO `mob_spawn_points` VALUES (16863246,0,'Envier','Envier',2,240.000,-59.250,0.000,200);         -- TODO: Approximation. Get confirmed capture.
+INSERT INTO `mob_spawn_points` VALUES (16863246,0,'Envier','Envier',2,240.000,-59.250,0.000,200);
 INSERT INTO `mob_spawn_points` VALUES (16863247,0,'Seether','Seether',3,238.268,-59.418,2.370,243);
 INSERT INTO `mob_spawn_points` VALUES (16863248,0,'Seether','Seether',3,238.623,-59.520,3.705,0);
 INSERT INTO `mob_spawn_points` VALUES (16863249,0,'Seether','Seether',3,236.561,-59.470,3.377,193);

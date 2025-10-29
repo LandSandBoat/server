@@ -1122,10 +1122,14 @@ void CCharEntity::PostTick()
             // clang-format on
         }
         // Do not send an update packet when only the position has change
-        if (updatemask ^ UPDATE_POS)
+        // Send one if the m_SendServerStatus flag is set (cutscenes will ALWAYS send one, and may also send an 0x00D!)
+        // sendServerStatus_ is essentially like a separate update mask, and acts like an "extension" of updatemask
+        if (updatemask ^ UPDATE_POS || sendServerStatus_)
         {
             pushPacket<CCharStatusPacket>(this);
         }
+
+        sendServerStatus_ = false;
         updatemask = 0;
     }
 }
@@ -3242,8 +3246,18 @@ void CCharEntity::queueEvent(EventInfo* eventToQueue)
 void CCharEntity::tryStartNextEvent()
 {
     TracyZoneScoped;
-    if (isInEvent() || eventQueue.empty())
+    if (isInEvent())
+    {
         return;
+    }
+
+    if (eventQueue.empty())
+    {
+        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
+        animation = ANIMATION_NONE; // sendServerStatus_ is somewhat like an update mask on its own
+        sendServerStatus_ = true;
+        return;
+    }
 
     EventInfo* oldEvent = currentEvent;
     currentEvent        = eventQueue.front();
@@ -3287,6 +3301,10 @@ void CCharEntity::tryStartNextEvent()
     {
         pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
     }
+
+    animation = ANIMATION_EVENT;
+    updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
+    sendServerStatus_ = true; // sendServerStatus_ is somewhat like an update mask on its own
 }
 
 void CCharEntity::skipEvent()

@@ -1047,61 +1047,8 @@ xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
 end
 
 xi.weaponskills.getHitRate = function(attacker, target, bonus)
-    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
-
-    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
-        attacker:addMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
-    end
-
-    local acc = attacker:getACC()
-    local eva = target:getEVA()
-
-    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
-        attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
-    end
-
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if
-        attacker:hasStatusEffect(xi.effect.INNIN) and
-        attacker:isBehind(target, 23)
-    then
-        -- Innin acc boost if attacker is behind target
-        bonus = bonus + attacker:getStatusEffect(xi.effect.INNIN):getPower()
-    end
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        attacker:isFacing(target, 23)
-    then
-        -- Yonin evasion boost if attacker is facing target
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    -- Accuracy Bonus
-    if attacker:getMainLvl() > target:getMainLvl() then
-        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
-
-    -- Accuracy Penalty
-    elseif attacker:getMainLvl() < target:getMainLvl() then
-        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
-    end
-
-    local hitdiff = (acc - eva) / 2
-    local hitrate = (75 + hitdiff) / 100
-
-    -- Applying hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    -- TODO: need input for slot
+    return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonus, 0, false)
 end
 
 -- TODO: Use a common function with optional multiplier on return, or multiply outside of this.

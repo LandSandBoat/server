@@ -794,7 +794,7 @@ xi.mod =
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-    THIRD_EYE_ANTICIPATE_RATE       = 839, -- Adds anticipate rate in percents
+    THIRD_EYE_RETENTION_RATE        = 839, -- Increases retention rate of third eye with Seigan. 50 = 50%
 
     CLAMMING_IMPROVED_RESULTS       = 509, --
     CLAMMING_REDUCED_INCIDENTS      = 510, --

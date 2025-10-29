@@ -587,16 +587,16 @@ enum class Mod
     BOUNTY_SHOT_TH_BONUS    = 826,  // Boosts base TH level of bounty shot
 
     // Samurai
-    WARDING_CIRCLE_DURATION   = 95,   // Warding Circle extended duration in seconds
-    WARDING_CIRCLE_POTENCY    = 1143, // Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
-    MEDITATE_DURATION         = 94,   // Meditate duration in seconds
-    ZANSHIN                   = 306,  // Zanshin percent chance
-    THIRD_EYE_COUNTER_RATE    = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-    THIRD_EYE_ANTICIPATE_RATE = 839,  // Adds anticipate rate in percents
-    THIRD_EYE_BONUS           = 1055, // TODO: Bonus Third Eye Evasion (count)
-    SENGIKORI_SC_DMG_DEBUFF   = 1088, // % Increase to closing skillchain damage. Applied to defender.
-    SENGIKORI_MB_DMG_DEBUFF   = 1089, // % Increase to magic burst damage. Applied to defender.
-    SENGIKORI_BONUS           = 1090, // additive % increase to Sengikori
+    WARDING_CIRCLE_DURATION  = 95,   // Warding Circle extended duration in seconds
+    WARDING_CIRCLE_POTENCY   = 1143, // Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
+    MEDITATE_DURATION        = 94,   // Meditate duration in seconds
+    ZANSHIN                  = 306,  // Zanshin percent chance
+    THIRD_EYE_COUNTER_RATE   = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
+    THIRD_EYE_RETENTION_RATE = 839,  // Increases retention rate of third eye with Seigan. 50 = 50%
+    THIRD_EYE_BONUS          = 1055, // TODO: Bonus Third Eye Evasion (count)
+    SENGIKORI_SC_DMG_DEBUFF  = 1088, // % Increase to closing skillchain damage. Applied to defender.
+    SENGIKORI_MB_DMG_DEBUFF  = 1089, // % Increase to magic burst damage. Applied to defender.
+    SENGIKORI_BONUS          = 1090, // additive % increase to Sengikori
 
     // Ninja
     UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.

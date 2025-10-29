@@ -10,7 +10,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 20, 0, 120))
+    -- Overwrites existing defense boost effect
+    if mob:hasStatusEffect(xi.effect.DEFENSE_BOOST) then
+        mob:delStatusEffect(xi.effect.DEFENSE_BOOST)
+    end
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 21, 0, 180))
 
     return xi.effect.DEFENSE_BOOST
 end
