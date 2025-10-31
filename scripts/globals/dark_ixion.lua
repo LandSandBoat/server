@@ -666,7 +666,6 @@ xi.darkixion.onMobFight = function(mob, target)
         mob:setTP(0)
         xi.darkixion.beginTramplePath(mob)
     end
-
     if animationSub == animationSubs.TRAMPLE then
         -- cleanly exit trample when reaching the point (TODO check explicitly for a scripted path?)
         -- runPathTime timestamp hard exit in case of navmesh abuse

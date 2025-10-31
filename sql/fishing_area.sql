@@ -46,6 +46,7 @@ LOCK TABLES `fishing_area` WRITE;
 -- Phanauet Channel
 INSERT INTO `fishing_area` VALUES (1,1,'Whole Zone',0,0,0,NULL,0.000,0.000,0.000);
 -- Carpenters' Landing
+--- bad comment
 INSERT INTO `fishing_area` VALUES (2,1,'South Landing',1,20,150,'',172.250,-2.000,-475.286);
 INSERT INTO `fishing_area` VALUES (2,2,'Other Waterside South',1,20,60,'',-101.576,0.000,-484.401);
 INSERT INTO `fishing_area` VALUES (2,3,'Other Waterside Center',1,20,60,'',-221.249,0.000,-283.157);
