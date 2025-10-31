@@ -4,12 +4,26 @@ set -uo pipefail
 checks_failed=false
 
 OUTPUT="sanity_checks_summary.md"
-echo "# Sanity Check Results" > "$OUTPUT"
+echo "## Sanity Check Results" > "$OUTPUT"
+OUTPUT_TEMP="sanity_checks_temp.md"
+OUTPUT_FAILED="sanity_checks_failed.md"
+echo "### Failed Sanity Checks" > "$OUTPUT_FAILED"
+# https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
+# create collapsed success section
+echo "<details><summary>Passed tests (click to expand)</summary>" >> "$OUTPUT"
+# blank line is necessary for first line to have markdown
+echo >> "$OUTPUT"
 
 run_check() {
     echo "Running $1..."
-    bash "$1" "${@:2}" | tee -a "$OUTPUT"
-    [[ $? -ne 0 ]] && checks_failed=true
+    echo > "$OUTPUT_TEMP"
+    bash "$1" "${@:2}" | tee -a "$OUTPUT_TEMP"
+    if [[ $? -ne 0 ]]; then
+        checks_failed=true
+        cat "$OUTPUT_TEMP" >> "$OUTPUT_FAILED"
+    else
+        cat "$OUTPUT_TEMP" >> "$OUTPUT"
+    fi
 }
 
 if [[ $# -gt 0 ]]; then
@@ -29,7 +43,7 @@ if [[ $# -gt 0 ]]; then
             echo "## :x: Git Checks Failed"
             echo "$gitcheck_output"
             echo
-        } | tee -a "$OUTPUT"
+        } | tee -a "$OUTPUT_FAILED"
     else
         {
             echo "## :heavy_check_mark: Git Checks Passed"
@@ -54,10 +68,17 @@ run_check tools/ci/sanity_checks/lua.sh "${CHANGED_FILES[@]}"
 # C++
 run_check tools/ci/sanity_checks/cpp.sh "${CHANGED_FILES[@]}"
 
+# end collapsed "passed tests" section
+echo "</details>" >> "$OUTPUT"
+# blank line is necessary for collapsing to work properly
+echo >> "$OUTPUT"
+
 if [[ "$checks_failed" == "true" ]]; then
     echo "One or more checks failed."
+
+    cat "$OUTPUT_FAILED" >> "$OUTPUT"
     exit 1
 else
-    echo "All checks passed."
+    echo "## :heavy_check_mark: All checks passed." | tee -a "$OUTPUT"
     exit 0
 fi
