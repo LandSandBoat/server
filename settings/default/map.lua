@@ -36,6 +36,10 @@ xi.settings.map =
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 
+    -- Enable or disable leaking item extdata to client when moving items out of an inventory container into another one
+    -- Retail leaks extdata on move, which is useful for edge cases such as weapon skill points
+    LEAK_EXT_DATA_ON_ITEM_MOVE = true,
+
     -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
     ENABLE_ITEM_RECYCLE_BIN = true,
 

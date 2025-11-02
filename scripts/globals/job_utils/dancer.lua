@@ -246,13 +246,13 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
     local stepDurationGift = player:getJobPointLevel(xi.jp.STEP_DURATION)
     local debuffStacks     = 1
     local debuffDuration   = 60 + stepDurationGift
-
+    local hitRate          = xi.combat.physicalHitRate.getPhysicalHitRate(player, target, 10 + player:getMod(xi.mod.STEP_ACCURACY), xi.attackAnimation.RIGHT_ATTACK, false)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
-    if math.random() <= xi.weaponskills.getHitRate(player, target, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= hitRate then
         local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
         local debuffEffect     = target:getStatusEffect(stepEffect)
         local origDebuffStacks = 0
@@ -399,11 +399,11 @@ end
 -- TODO: This ability needs verification
 xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability, action)
     local numMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
-
+    local hitRate  = xi.combat.physicalHitRate.getPhysicalHitRate(player, target, 100, xi.attackAnimation.RIGHT_ATTACK, false)
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= xi.weaponskills.getHitRate(player, target, 100) or
+        math.random() <= hitRate or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local hitType      = 3

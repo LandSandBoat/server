@@ -33,6 +33,7 @@ return {
     ['Ki_Volep']           = { event = 260 },
     ['Kohpe_Takhabio']     = { event = 423 },
     ['Kototo']             = { event = 410 },
+    ['Kuoh_Rhel']          = { event = 222 },
     ['Kuu_Lohro']          = { event = 430 },
     ['Mahoh_Mahborogho']   = { event = 257 },
     ['Matata']             = { event = 223 },

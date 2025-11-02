@@ -9,7 +9,11 @@ local entity = {}
 
 entity.onMobRoam = function(mob)
     local hour = VanadielHour()
-    if hour >= 5 and hour < 17 then
+    local phase = VanadielMoonPhase()
+    if
+        (hour >= 5 and hour < 17) or
+        phase < 90
+    then
         DespawnMob(mob:getID())
     end
 end

@@ -168,6 +168,11 @@ bool CRangeState::Update(timer::time_point tick)
         {
             m_errorMsg.reset();
 
+            if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+            {
+                m_isOutOfRange = true;
+            }
+
             m_PEntity->OnRangedAttack(*this, action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
             m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, PTarget, &action);

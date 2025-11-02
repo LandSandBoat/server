@@ -32,7 +32,7 @@ xi.combat.counter.checkSeiganCounter = function(attacker, defender)
 
     -- Calculate counter chance.
     local baseCounterRate = 25 + defender:getMod(xi.mod.THIRD_EYE_COUNTER_RATE)
-    local hitRateFactor   = xi.combat.physicalHitRate.getPhysicalHitRate(defender, attacker, 0, 0, false)
+    local hitRateFactor   = xi.combat.physicalHitRate.getPhysicalHitRate(defender, attacker, 0, xi.attackAnimation.RIGHT_ATTACK, false)
 
     if math.random(1, 100) > baseCounterRate * hitRateFactor then
         return false

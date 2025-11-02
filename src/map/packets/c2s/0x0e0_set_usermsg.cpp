@@ -22,6 +22,7 @@
 #include "0x0e0_set_usermsg.h"
 
 #include "entities/charentity.h"
+#include "packets/char_status.h"
 
 auto GP_CLI_COMMAND_SET_USERMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -49,4 +50,6 @@ void GP_CLI_COMMAND_SET_USERMSG::process(MapSession* PSession, CCharEntity* PCha
         PChar->search.message     = message;
         PChar->search.messagetype = static_cast<uint8_t>(type);
     }
+
+    PChar->pushPacket<CCharStatusPacket>(PChar);
 }

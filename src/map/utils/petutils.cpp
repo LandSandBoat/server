@@ -1303,6 +1303,8 @@ namespace petutils
             PPet->setModifier(Mod::LIGHT_SLEEP_RES_RANK, petData->light_sleep_res_rank);
             PPet->setModifier(Mod::DARK_SLEEP_RES_RANK, petData->dark_sleep_res_rank);
             PPet->setModifier(Mod::BLIND_RES_RANK, petData->blind_res_rank);
+
+            PPet->savePetModifiers();
         }
     }
 

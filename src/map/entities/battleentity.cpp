@@ -1477,6 +1477,59 @@ void CBattleEntity::restoreModifiers()
     m_modStat = m_modStatSave;
 }
 
+void CBattleEntity::savePetModifiers()
+{
+    // these mods are set dynamically based on pet type
+    const std::vector<Mod> petModsToUpdate = {
+        // Physical SDT
+        Mod::SLASH_SDT,
+        Mod::PIERCE_SDT,
+        Mod::HTH_SDT,
+        Mod::IMPACT_SDT,
+        // Uncapped Magic
+        Mod::UDMGMAGIC,
+        // Element SDT
+        Mod::FIRE_SDT,
+        Mod::ICE_SDT,
+        Mod::WIND_SDT,
+        Mod::EARTH_SDT,
+        Mod::THUNDER_SDT,
+        Mod::WATER_SDT,
+        Mod::LIGHT_SDT,
+        Mod::DARK_SDT,
+        // Element RES_RANK
+        Mod::FIRE_RES_RANK,
+        Mod::ICE_RES_RANK,
+        Mod::WIND_RES_RANK,
+        Mod::EARTH_RES_RANK,
+        Mod::THUNDER_RES_RANK,
+        Mod::WATER_RES_RANK,
+        Mod::LIGHT_RES_RANK,
+        Mod::DARK_RES_RANK,
+        // Status RES_RANK
+        Mod::PARALYZE_RES_RANK,
+        Mod::BIND_RES_RANK,
+        Mod::SILENCE_RES_RANK,
+        Mod::SLOW_RES_RANK,
+        Mod::POISON_RES_RANK,
+        Mod::LIGHT_SLEEP_RES_RANK,
+        Mod::DARK_SLEEP_RES_RANK,
+        Mod::BLIND_RES_RANK,
+    };
+
+    // update the template mods so the dynamic mods are not overwritten
+    for (auto mod : petModsToUpdate)
+    {
+        // Only update the saved map if it exists and is different
+        int16 currentVal = m_modStat[mod];
+        auto  it         = m_modStatSave.find(mod);
+        if (it == m_modStatSave.end() || it->second != currentVal)
+        {
+            m_modStatSave[mod] = currentVal;
+        }
+    }
+}
+
 void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
 {
     TracyZoneScoped;

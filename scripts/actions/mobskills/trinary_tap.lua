@@ -21,32 +21,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- try to drain buff
-    local effect1 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local effect2 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local effect3 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
+    local dispel = nil
+    local count = 0
+    local msg -- to be set later
 
-    if effect1 ~= 0 then
-        local count = 1
-        if effect2 ~= 0 then
+    for i = 1, 3 do
+        dispel = mob:stealStatusEffect(target, bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
+
+        if dispel ~= 0 then
             count = count + 1
         end
-
-        if effect3 ~= 0 then
-            count = count + 1
-        end
-
-        skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
-
-        return count
-    else
-        -- time to drain HP. 150-300
-        local power = math.random(0, 151) + 150
-        local dmg = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-        skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
-        return dmg
     end
+
+    if count == 0 then
+        msg = xi.msg.basic.SKILL_NO_EFFECT -- no effect
+    else
+        msg = xi.msg.basic.DISAPPEAR_NUM
+    end
+
+    skill:setMsg(msg)
+
+    return count
 end
 
 return mobskillObject

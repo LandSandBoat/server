@@ -88,4 +88,9 @@ void GP_CLI_COMMAND_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar)
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
     PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
+    // TODO: Sort out above logic and ensure the following packets are emitted synchronously as a response
+    // EQUIP_LIST
+    // GRAP_LIST
+    // MAGIC_DATA
+    // COMMAND_DATA
 }

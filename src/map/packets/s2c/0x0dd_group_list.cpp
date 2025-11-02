@@ -44,6 +44,7 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar,
     packet.GAttr.AllianceRFlg      = (memberflags >> 5) & 0x01; // Bit 5: Alliance recruiter flag
     packet.GAttr.unknown06         = (memberflags >> 6) & 0x01; // Bit 6: MasterComFlg
     packet.GAttr.unknown07         = (memberflags >> 7) & 0x01; // Bit 7: SubMasterComFlg
+    packet.GAttr.LevelSyncFlg      = (memberflags >> 8) & 0x01; // Bit 8: LevelSyncFlg
 
     if (PChar->getZone() != ZoneID)
     {
@@ -109,6 +110,7 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const uint32_t id, const 
     packet.GAttr.AllianceRFlg      = (memberFlags >> 5) & 0x01; // Bit 5: Alliance recruiter flag
     packet.GAttr.unknown06         = (memberFlags >> 6) & 0x01; // Bit 6: MasterComFlg
     packet.GAttr.unknown07         = (memberFlags >> 7) & 0x01; // Bit 7: SubMasterComFlg
+    packet.GAttr.LevelSyncFlg      = (memberFlags >> 8) & 0x01; // Bit 8: LevelSyncFlg
     packet.ZoneNo                  = ZoneID;
 
     std::memcpy(packet.Name, name.c_str(), std::min<size_t>(name.size(), sizeof(packet.Name)));

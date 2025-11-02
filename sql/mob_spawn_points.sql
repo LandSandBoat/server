@@ -50491,9 +50491,9 @@ INSERT INTO `mob_spawn_points` VALUES (17350660,0,'Giant_Pugil','Giant Pugil',3,
 INSERT INTO `mob_spawn_points` VALUES (17350661,0,'Puffer_Pugil','Puffer Pugil',4,1.000,1.000,1.000,0);
 
 -- Save the Children
-INSERT INTO `mob_spawn_points` VALUES (17350662,0,'Fodderchief_Vokdek','Fodderchief Vokdek',5,-189.000,-10.000,44.000,104);
-INSERT INTO `mob_spawn_points` VALUES (17350663,0,'Sureshot_Snatgat','Sureshot Snatgat',6,-189.000,-10.000,46.000,104);
-INSERT INTO `mob_spawn_points` VALUES (17350664,0,'Strongarm_Zodvad','Strongarm Zodvad',7,-189.000,-10.000,42.000,104);
+INSERT INTO `mob_spawn_points` VALUES (17350662,0,'Fodderchief_Vokdek','Fodderchief Vokdek',5,-188.703,-10.048,45.326,112);
+INSERT INTO `mob_spawn_points` VALUES (17350663,0,'Sureshot_Snatgat','Sureshot Snatgat',6,-188.164,-10.554,55.693,076);
+INSERT INTO `mob_spawn_points` VALUES (17350664,0,'Strongarm_Zodvad','Strongarm Zodvad',7,-177.171,-10.006,50.070,112);
 
 INSERT INTO `mob_spawn_points` VALUES (17350665,0,'Warchief_Vatgit','Warchief Vatgit',8,-74.960,-34.692,256.968,90);
 INSERT INTO `mob_spawn_points` VALUES (17350666,0,'Fogweaver_Mozzfuzz','Fogweaver Mozzfuzz',9,-84.454,-33.723,265.104,50);

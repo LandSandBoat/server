@@ -731,7 +731,7 @@ public:
 
     // Damage Calculation
     uint16 getStat(uint16 statId, sol::variadic_args va); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
-    uint16 getACC();
+    uint16 getACC(sol::object const& maybeAttackNumber);
     uint16 getEVA();
     int    getRACC();
     uint16 getRATT();

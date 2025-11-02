@@ -25,7 +25,7 @@ class HXIClient:
         if client_str == "":
             with open("settings/default/login.lua") as f:
                 settings_file = f.read()
-                client_str = re.search(r'CLIENT_VER = "(.*?)"', settings_file)[1]
+                client_str = re.search(r"CLIENT_VER = '(.*?)'", settings_file)[1]
 
         print("Client version:", client_str)
         self.client_str = client_str

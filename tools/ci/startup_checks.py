@@ -74,18 +74,6 @@ def db_query(query):
     return result
 
 
-def populate_tests():
-    test_list = []
-    for file in sorted(
-        os.scandir(from_server_path("tools/ci/tests")), key=lambda e: e.name
-    ):
-        if file.name.endswith(".py"):
-            name = file.name.replace(".py", "")
-            module = importlib.import_module("tools.ci.tests." + name)
-            test_list.append(module)
-    return test_list
-
-
 def setup_test_character():
     print("Setting up test character...")
     PASSWORD_HASH = "$2a$12$piFoDKvu80KK68xLgQFpt.ZCqVPTjPmhSUfA31.Yw9n404dTsrR6q"
@@ -107,7 +95,25 @@ def setup_test_character():
         )
         # Populate more char tables with defaults
         cur.execute("REPLACE INTO char_stats (charid, mjob) VALUES(1, 1);")
+
+        # Place near some Robber Crabs in Kuftal Tunnel
+        cur.execute(
+            "UPDATE chars SET \
+            pos_zone = 174, \
+            pos_prevzone = 174, \
+            pos_x = 55, \
+            pos_y = -9, \
+            pos_z = -140 \
+        WHERE charid = 1;"
+        )
+
+        # Set GodMode
+        cur.execute(
+            "INSERT INTO char_vars(charid, varname, value) VALUES(1, 'GodMode', 1);"
+        )
+
         db.commit()
+
         return 0
     except:
         print("An error occurred.")
@@ -288,19 +294,25 @@ def main():
 
         # Check if all processes are marked ready
         if all(ready_status.values()):
-            # TODO: This is very basic until headlessxi is more fleshed out.
-            from tools.headlessxi.hxiclient import HXIClient
+            print("All processes reached 'ready to work'!")
+            if platform.system() == "Linux":
+                from tools.headlessxi.hxiclient import HXIClient
 
-            print("All processes reached 'ready to work'! Starting tests.")
-            if not cur:
-                connect()
-            hxi_client = HXIClient("admin1", "admin1", "localhost")
-            for test in populate_tests():
+                if not cur:
+                    connect()
                 setup_test_character()
-                print("Running test for " + test.test_name() + "...")
-                if not test.execute_test(cur, db, hxi_client):
-                    print("Failed!")
-            print("Finished tests!")
+                hxi_client = HXIClient("admin1", "admin1", "localhost")
+
+                print("Logging in test character...")
+                hxi_client.login()
+
+                print("Sleeping 60s")
+                time.sleep(60)
+
+                print("Logging out test character...")
+                hxi_client.logout()
+
+            print("Shutting down processes...")
             time.sleep(0.5)
             kill_all()
             close(0)

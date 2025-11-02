@@ -17,7 +17,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
-            player:setPos(-1.000, 0.000, 44.000, 0)
+            player:setPos(-1.000, 0.000, 44.000, 128)
             return 702
         end
     end

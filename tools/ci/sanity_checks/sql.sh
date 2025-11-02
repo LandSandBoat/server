@@ -9,7 +9,7 @@ else
 fi
 
 for file in "${targets[@]}"; do
-    [[ -f $file && ($file == sql/**/*.sql || $file == modules/**/*.sql) ]] || continue
+    [[ -f $file && ($file == sql/*.sql || $file == modules/**/*.sql) ]] || continue
 
     # Run tools and capture output
     bogus_comments=$(grep -En '(--\w)|^(---\s)' "$file" 2>&1 || true)

@@ -227,7 +227,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             {
                 PChar->getStorage(Category1)->InsertItem(nullptr, ItemIndex1);
 
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(Category1), ItemIndex1);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(Category1), ItemIndex1, PItem);
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(Category2), newSlotId);
             }
             else
