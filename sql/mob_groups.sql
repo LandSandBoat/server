@@ -10322,11 +10322,11 @@ INSERT INTO `mob_groups` VALUES (32,1167,144,'EaTho_Cruelheart',0,128,0,0,0,62,6
 INSERT INTO `mob_groups` VALUES (33,3847,144,'Tartaruga_Gigante',0,128,0,35000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (34,3894,144,'The_Waughroon_Kid',0,128,0,3200,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (35,1330,144,'Fee',0,128,0,7500,0,62,62,0);
-INSERT INTO `mob_groups` VALUES (36,3064,144,'Osschaart',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (37,3067,144,'Osschaarts_Bat',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (38,3068,144,'Osschaarts_Wyvern',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (39,3066,144,'Osschaarts_Avatar',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (40,3065,144,'Osschaarts_Automaton',0,128,0,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (36,3064,144,'Osschaart',0,128,0,14000,14000,79,79,0);
+INSERT INTO `mob_groups` VALUES (37,3067,144,'Osschaarts_Bat',0,128,0,1400,0,71,71,0);
+INSERT INTO `mob_groups` VALUES (38,3068,144,'Osschaarts_Wyvern',0,128,0,1400,0,71,71,0);
+INSERT INTO `mob_groups` VALUES (39,3066,144,'Osschaarts_Avatar',0,128,0,1400,0,71,71,0);
+INSERT INTO `mob_groups` VALUES (40,3065,144,'Osschaarts_Automaton',0,128,0,1400,0,71,71,0);
 INSERT INTO `mob_groups` VALUES (41,3157,144,'Platoon_Scorpion',0,128,0,4500,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (42,3929,144,'Titanis_Max',0,128,0,6000,0,76,76,0);
 INSERT INTO `mob_groups` VALUES (43,3928,144,'Titanis_Jax',0,128,0,6000,0,76,76,0);

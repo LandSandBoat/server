@@ -24,6 +24,7 @@ xi.mobPools =
     INGESTER               = 2080, -- Fission (Number of Adds)
     KING_VINEGARROON       = 2262, -- KV poison on Wild Rage
     NIDHOGG                = 2840, -- Nidhogg's stronger hurricane wing
+    OSSCHAART              = 3064, -- Osschaart's charm duration.
     PEALLAIDH              = 3109, -- Peallaidh's chigoe pets
     PEPPER                 = 3116, -- BCNM20 Charming Trio, Absorbing Kiss
     PHOEDME                = 3132, -- BCNM20 Charming Trio, Deep Kiss

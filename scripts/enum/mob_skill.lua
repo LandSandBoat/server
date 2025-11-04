@@ -233,6 +233,8 @@ xi.mobSkill =
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
 
+    CHARM_2                  = 1337,
+
     MANTLE_PIERCE            = 1349,
 
     AERIAL_COLLISION         = 1353,
