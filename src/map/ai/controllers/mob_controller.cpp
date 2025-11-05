@@ -320,9 +320,22 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return false;
     }
 
-    if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
+    if (detects & DETECT_LOWHP)
     {
-        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
+        const uint8 targetHPP = PTarget->GetHPP();
+        float aggroRange = 0.0f;
+
+        if (targetHPP < 25)         // Red HP
+            aggroRange = 20.0f;
+        else if (targetHPP < 50)    // Orange HP
+            aggroRange = 18.0f;
+        else if (targetHPP < 75)    // Yellow HP
+            aggroRange = 8.0f;
+
+        if (aggroRange > 0.0f && currentDistance <= aggroRange)
+        {
+            return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
+        }
     }
 
     if ((detects & DETECT_WEAPONSKILL) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
