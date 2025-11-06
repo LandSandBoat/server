@@ -152,7 +152,10 @@ xi.roe.initialize = function()
     RoeParseRecords(xi.roe.records)
 
     -- Load timetable for timed records
-    if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
+    if
+        xi.settings.main.ENABLE_ROE == 1 and
+        xi.settings.main.ENABLE_ROE_TIMED == 1
+    then
         RoeParseTimed(timedSchedule)
     end
 end
