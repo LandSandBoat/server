@@ -411,10 +411,10 @@ auto LoadLinkshell(uint32 id) -> CLinkshell*
         auto PLinkshell = std::make_unique<CLinkshell>(linkshellid);
 
         PLinkshell->setColor(color);
-        char EncodedName[LinkshellStringLength] = {};
+        char encodedName[kLinkshellStringLength] = {};
 
-        EncodeStringLinkshell(name.c_str(), EncodedName);
-        PLinkshell->setName(EncodedName);
+        EncodeStringLinkshell(name.c_str(), encodedName);
+        PLinkshell->setName(encodedName);
         PLinkshell->setPostRights(postrights);
 
         LinkshellList[id] = std::move(PLinkshell);

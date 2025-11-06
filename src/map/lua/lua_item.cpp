@@ -302,7 +302,7 @@ uint8 CLuaItem::getShieldAbsorptionRate()
 
 auto CLuaItem::getSignature() -> std::string
 {
-    char signature[DecodeStringLength] = {};
+    char signature[kDecodeStringLength] = {};
 
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {

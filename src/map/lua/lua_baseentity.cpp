@@ -1798,7 +1798,7 @@ void CLuaBaseEntity::lookAt(const sol::object& arg0, const sol::object& arg1, co
     }
 
     // Avoid unpredictable results if we're too close.
-    if (!isWithinDistance(m_PBaseEntity->loc.p, point, 0.1f, true))
+    if (!isWithinDistance(m_PBaseEntity->loc.p, point, 0.1f, IgnoreVertical::Yes))
     {
         m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
         m_PBaseEntity->updatemask |= UPDATE_POS;
@@ -4092,7 +4092,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
 
                 if (!signature.empty())
                 {
-                    char encoded[SignatureStringLength];
+                    char encoded[kSignatureStringLength];
 
                     std::memset(&encoded, 0, sizeof(encoded));
                     PItem->setSignature(EncodeStringSignature(signature, encoded));
@@ -4797,7 +4797,7 @@ bool CLuaBaseEntity::addLinkpearl(const std::string& lsname, bool equip)
         if (rset && rset->rowsCount() && rset->next())
         {
             // build linkpearl
-            char EncodedString[LinkshellStringLength];
+            char EncodedString[kLinkshellStringLength];
 
             std::memset(&EncodedString, 0, sizeof(EncodedString));
             EncodeStringLinkshell(lsname, EncodedString);

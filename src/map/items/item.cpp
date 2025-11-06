@@ -302,7 +302,7 @@ void CItem::setReceiver(const std::string& receiver)
 
 const std::string CItem::getSignature()
 {
-    char signature[SignatureStringLength] = {};
+    char signature[kSignatureStringLength] = {};
     std::memcpy(&signature, m_extra + 0x0C, sizeof(signature));
 
     return signature; // return string copy

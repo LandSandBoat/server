@@ -1024,15 +1024,15 @@ void LoadInventory(CCharEntity* PChar)
                     {
                         static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                     }
-                    char EncodedString[LinkshellStringLength] = {};
-                    EncodeStringLinkshell(rset->get<std::string>("signature").c_str(), EncodedString);
-                    PItem->setSignature(EncodedString);
+                    char encodedString[kLinkshellStringLength] = {};
+                    EncodeStringLinkshell(rset->get<std::string>("signature").c_str(), encodedString);
+                    PItem->setSignature(encodedString);
                 }
                 else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                 {
-                    char EncodedString[SignatureStringLength] = {};
-                    EncodeStringSignature(rset->get<std::string>("signature").c_str(), EncodedString);
-                    PItem->setSignature(EncodedString);
+                    char encodedString[kSignatureStringLength] = {};
+                    EncodeStringSignature(rset->get<std::string>("signature").c_str(), encodedString);
+                    PItem->setSignature(encodedString);
                 }
 
                 if (auto PItemUsable = dynamic_cast<CItemUsable*>(PItem))
@@ -1676,7 +1676,7 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence)
                             "VALUES(?, ?, ?, ?, ?, ?, ?) "
                             "LIMIT 1";
 
-        char signature[DecodeStringLength];
+        char signature[kDecodeStringLength];
         if (PItem->isType(ITEM_LINKSHELL))
         {
             DecodeStringLinkshell(PItem->getSignature().c_str(), signature);

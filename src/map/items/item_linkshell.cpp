@@ -65,7 +65,7 @@ void CItemLinkshell::SetLSColor(uint16 color)
 
 const std::string CItemLinkshell::getSignature()
 {
-    char signature[LinkshellStringLength] = {};
+    char signature[kLinkshellStringLength] = {};
     std::memcpy(&signature, m_extra + 0x09, sizeof(signature));
 
     return signature; // return string copy

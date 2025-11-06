@@ -88,7 +88,7 @@ const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const
     {
         const auto& name   = PChar->getName();
         const auto  zoneId = PChar->getZone();
-        char        decodedLinkshellName[DecodeStringLength];
+        char        decodedLinkshellName[kDecodeStringLength];
         DecodeStringLinkshell(PLinkshell->getName(), decodedLinkshellName);
 
         // clang-format off

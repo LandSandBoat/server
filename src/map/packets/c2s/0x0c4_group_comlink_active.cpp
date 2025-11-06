@@ -44,15 +44,15 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
     uint32_t       linkshellId    = 0;
     const uint16_t linkshellColor = (data.a << 12) | (data.b << 8) | (data.g << 4) | data.r;
 
-    char DecodedName[DecodeStringLength]    = {};
-    char EncodedName[LinkshellStringLength] = {};
+    char decodedName[kDecodeStringLength]    = {};
+    char encodedName[kLinkshellStringLength] = {};
 
     const auto encodedRawName = asStringFromUntrustedSource(data.sComLinkName, sizeof(data.sComLinkName));
 
-    DecodeStringLinkshell(encodedRawName, DecodedName);
-    EncodeStringLinkshell(DecodedName, EncodedName);
+    DecodeStringLinkshell(encodedRawName, decodedName);
+    EncodeStringLinkshell(decodedName, encodedName);
 
-    const auto safeName = db::escapeString(DecodedName);
+    const auto safeName = db::escapeString(decodedName);
     linkshellId         = linkshell::RegisterNewLinkshell(safeName, linkshellColor);
 
     if (linkshellId != 0)
@@ -68,7 +68,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
         PChar->getStorage(data.Category)->InsertItem(PItemLinkshell, data.ItemIndex);
         PItemLinkshell->SetLSID(linkshellId);
         PItemLinkshell->SetLSType(LSTYPE_LINKSHELL);
-        PItemLinkshell->setSignature(EncodedName); // because apparently the format from the packet isn't right, and is missing terminators
+        PItemLinkshell->setSignature(encodedName); // because apparently the format from the packet isn't right, and is missing terminators
         PItemLinkshell->SetLSColor(linkshellColor);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory SET signature = ?, extra = ?, itemId = 513 WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",

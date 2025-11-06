@@ -131,7 +131,7 @@ uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
 
-    return isWithinDistance(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
+    return isWithinDistance(A, B, 0.1f, IgnoreVertical::Yes) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
@@ -493,10 +493,10 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
 
 void EncodeStringLinkshell(const std::string& signature, char* target)
 {
-    uint8 encodedSignature[LinkshellStringLength] = {};
-    uint8 chars                                   = 0;
-    uint8 leftover                                = 0;
-    auto  length                                  = std::min<size_t>(20u, signature.size());
+    uint8 encodedSignature[kLinkshellStringLength] = {};
+    uint8 chars                                    = 0;
+    uint8 leftover                                 = 0;
+    auto  length                                   = std::min<size_t>(20u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -521,7 +521,7 @@ void EncodeStringLinkshell(const std::string& signature, char* target)
     leftover = (leftover == 8 || leftover == 2 ? 6 : leftover);
     packBitsLE(encodedSignature, 0xFF, 6 * chars, leftover);
 
-    strncpy(target, reinterpret_cast<const char*>(encodedSignature), LinkshellStringLength);
+    strncpy(target, reinterpret_cast<const char*>(encodedSignature), kLinkshellStringLength);
 }
 
 void DecodeStringLinkshell(const std::string& signature, char* target)
@@ -562,13 +562,13 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
         }
     }
 
-    strncpy(target, decodedSignature, LinkshellStringLength);
+    strncpy(target, decodedSignature, kLinkshellStringLength);
 }
 
 std::string EncodeStringSignature(const std::string& signature, char* target)
 {
-    uint8 encodedSignature[SignatureStringLength] = {};
-    auto  length                                  = std::min<size_t>(15u, signature.size());
+    uint8 encodedSignature[kSignatureStringLength] = {};
+    auto  length                                   = std::min<size_t>(15u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -588,13 +588,13 @@ std::string EncodeStringSignature(const std::string& signature, char* target)
         packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
     }
 
-    return strncpy(target, reinterpret_cast<const char*>(encodedSignature), SignatureStringLength);
+    return strncpy(target, reinterpret_cast<const char*>(encodedSignature), kSignatureStringLength);
 }
 
 void DecodeStringSignature(const std::string& signature, char* target)
 {
-    char decodedSignature[PacketNameLength + 1] = {};
-    for (uint8 currChar = 0; currChar < PacketNameLength; ++currChar)
+    char decodedSignature[kPacketNameLength + 1] = {};
+    for (uint8 currChar = 0; currChar < kPacketNameLength; ++currChar)
     {
         char tempChar = unpackBitsLE((uint8*)signature.c_str(), currChar * 6, 6);
         if (tempChar >= 1 && tempChar <= 10)
@@ -612,7 +612,7 @@ void DecodeStringSignature(const std::string& signature, char* target)
 
         decodedSignature[currChar] = tempChar;
     }
-    strncpy(target, decodedSignature, SignatureStringLength);
+    strncpy(target, decodedSignature, kSignatureStringLength);
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an
@@ -901,26 +901,22 @@ look_t stringToLook(std::string str)
 
 bool approximatelyEqual(float a, float b)
 {
-    constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return fabs(a - b) <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return fabs(a - b) <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * kEpsilon);
 }
 
 bool essentiallyEqual(float a, float b)
 {
-    constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return fabs(a - b) <= ((fabs(a) > fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return fabs(a - b) <= ((fabs(a) > fabs(b) ? fabs(b) : fabs(a)) * kEpsilon);
 }
 
 bool definitelyGreaterThan(float a, float b)
 {
-    constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return (a - b) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return (a - b) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * kEpsilon);
 }
 
 bool definitelyLessThan(float a, float b)
 {
-    constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * kEpsilon);
 }
 
 void crash()

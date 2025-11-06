@@ -299,11 +299,11 @@ void data_session::read_func()
                 characterSelectionResponse.cache_ip   = session.serverIP; // search-server ip
                 characterSelectionResponse.cache_port = settings::get<uint16>("network.SEARCH_PORT");
 
-                char strCharName[PacketNameLength] = {}; // 15 characters + null terminator
+                char strCharName[kPacketNameLength] = {}; // 15 characters + null terminator
                 std::memset(strCharName, 0, sizeof(strCharName));
 
                 std::string dbCharName = rset->get<std::string>("charname");
-                std::memcpy(strCharName, dbCharName.c_str(), std::clamp<size_t>(dbCharName.length(), 3, PacketNameLength - 1));
+                std::memcpy(strCharName, dbCharName.c_str(), std::clamp<size_t>(dbCharName.length(), 3, kPacketNameLength - 1));
                 std::memcpy(characterSelectionResponse.character_name, &strCharName, 16);
 
                 characterSelectionResponse.ffxi_id       = charid;

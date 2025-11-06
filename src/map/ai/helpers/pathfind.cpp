@@ -422,9 +422,10 @@ void CPathFind::StepTo(const position_t& pos, bool run)
             if (abs(diff_y) > .5f)
             {
                 // Don't step too far vertically by simply utilizing the slope
-                float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, true);
+                float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, IgnoreVertical::Yes);
                 float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
                 float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
+
                 // clamp new_y between start and end vertical position
                 new_y             = new_y < min_y ? min_y : new_y;
                 m_POwner->loc.p.y = new_y > max_y ? max_y : new_y;
@@ -446,7 +447,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         if (abs(diff_y) > .5f)
         {
             // Don't step too far vertically by simply utilizing the slope
-            float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, true);
+            float new_y = m_POwner->loc.p.y + stepDistance * (pos.y - m_POwner->loc.p.y) / distance(m_POwner->loc.p, pos, IgnoreVertical::Yes);
             float min_y = (pos.y + m_POwner->loc.p.y - abs(pos.y - m_POwner->loc.p.y)) / 2;
             float max_y = (pos.y + m_POwner->loc.p.y + abs(pos.y - m_POwner->loc.p.y)) / 2;
             // clamp new_y between start and end vertical position
@@ -522,7 +523,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         }
 
         // only add the roam point if it's _actually_ within range of the spawn point...
-        if (isWithinDistance(startPosition, status.second, maxRadius, true))
+        if (isWithinDistance(startPosition, status.second, maxRadius, IgnoreVertical::Yes))
         {
             m_turnPoints.emplace_back(status.second);
         }
@@ -578,7 +579,7 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 void CPathFind::LookAt(const position_t& point)
 {
     // Avoid unpredictable results if we're too close.
-    if (!isWithinDistance(m_POwner->loc.p, point, 0.1f, true))
+    if (!isWithinDistance(m_POwner->loc.p, point, 0.1f, IgnoreVertical::Yes))
     {
         m_POwner->loc.p.rotation = worldAngle(m_POwner->loc.p, point);
         m_POwner->updatemask |= UPDATE_POS;

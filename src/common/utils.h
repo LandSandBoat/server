@@ -42,6 +42,20 @@
 #include <iostream>
 #include <set>
 
+//
+// Constants
+//
+
+constexpr size_t kPacketNameLength      = 16; // 15 + null terminator
+constexpr size_t kDecodeStringLength    = 21; // used for size of decoded strings of signature/linkshells
+constexpr size_t kSignatureStringLength = 16; // encoded signature string size // 15 characters + null terminator
+constexpr size_t kLinkshellStringLength = 20; // encoded linkshell string size // 19 characters + null terminator
+constexpr float  kEpsilon               = std::numeric_limits<float>::epsilon();
+
+//
+// ref, indexing, and reinterpretation utilities
+//
+
 template <typename T, typename U>
 auto ref(U* buf, std::size_t index) -> T&
 {
@@ -68,21 +82,21 @@ auto as(const U& object) -> const T*
     return reinterpret_cast<const T*>(&object);
 }
 
-constexpr size_t PacketNameLength = 16; // 15 + null terminator
-
-constexpr size_t DecodeStringLength    = 21; // used for size of decoded strings of signature/linkshells
-constexpr size_t SignatureStringLength = 16; // encoded signature string size // 15 characters + null terminator
-constexpr size_t LinkshellStringLength = 20; // encoded linkshell string size // 19 characters + null terminator
-
 int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
 bool  bin2hex(char* output, unsigned char* input, size_t count);
+
+//
+// Position and distance utilities
+//
+
+using IgnoreVertical = xi::Flag<struct IgnoreVerticalTag>;
 
 constexpr float square(auto distance) // constexpr square (used with distanceSquared)
 {
     return distance * distance;
 }
 
-inline float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false)
+inline float distanceSquared(const position_t& A, const position_t& B, IgnoreVertical ignoreVertical = IgnoreVertical::No)
 {
     float dX = A.x - B.x;
     float dY = ignoreVertical ? 0 : A.y - B.y;
@@ -90,12 +104,12 @@ inline float distanceSquared(const position_t& A, const position_t& B, bool igno
     return dX * dX + dY * dY + dZ * dZ;
 }
 
-inline float distance(const position_t& A, const position_t& B, bool ignoreVertical = false)
+inline float distance(const position_t& A, const position_t& B, IgnoreVertical ignoreVertical = IgnoreVertical::No)
 {
     return std::sqrt(distanceSquared(A, B, ignoreVertical));
 }
 
-inline bool isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false)
+inline bool isWithinDistance(const position_t& A, const position_t& B, float within, IgnoreVertical ignoreVertical = IgnoreVertical::No)
 {
     return distanceSquared(A, B, ignoreVertical) <= square(within);
 }
@@ -112,8 +126,13 @@ constexpr auto roundUpToNearestFour(uint32 input) -> uint32
     return input + 4U - remainder;
 }
 
-int32      intpow32(int32 base, int32 exponent); // Exponential power of integers
-void       getMSB(uint32* result, uint32 value); // fast Most Significant Byte search under GCC or MSVC. Fallback included.
+int32 intpow32(int32 base, int32 exponent); // Exponential power of integers
+void  getMSB(uint32* result, uint32 value); // fast Most Significant Byte search under GCC or MSVC. Fallback included.
+
+//
+// Angle and rotation utilities
+//
+
 float      rotationToRadian(uint8 rotation);
 uint8      radianToRotation(float radian);
 uint8      worldAngle(const position_t& A, const position_t& B);                              // А - the main entity, B - target entity (vector projection onto the X-axis)
@@ -127,6 +146,10 @@ bool       beside(const position_t& A, const position_t& B, uint8 coneAngle);   
 auto       toEntitysLeft(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;  // true if A is to the left side of B within coneAngle degrees (from perspective of B)
 auto       toEntitysRight(const position_t& A, const position_t& B, uint8 coneAngle) -> bool; // true if A is to the right side of B within coneAngle degrees (from perspective of B)
 position_t nearPosition(const position_t& A, float offset, float radian);                     // Returns a position near the given position
+
+//
+// Bit utilities
+//
 
 int32 hasBit(uint16 value, const uint8* BitArray, uint32 size); // Check for the presence of a bit in the array
 int32 addBit(uint16 value, uint8* BitArray, uint32 size);       // Adds a bit to the array
@@ -144,13 +167,20 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBi
 uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 
+//
 // Encode/Decode Strings to/from FFXI 6-bit format
+//
+
 void        EncodeStringLinkshell(const std::string& signature, char* target);
 void        DecodeStringLinkshell(const std::string& signature, char* target);
 std::string EncodeStringSignature(const std::string& signature, char* target);
 void        DecodeStringSignature(const std::string& signature, char* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
+
+//
+// String utilities
+//
 
 auto escape(const std::string& s) -> std::string;
 auto split(const std::string& s, const std::string& delimiter = " ") -> std::vector<std::string>;
@@ -164,8 +194,11 @@ auto replace(const std::string& target, const std::string& search, const std::st
 
 look_t stringToLook(std::string str);
 
+//
 // Float tools
 // https://stackoverflow.com/a/253874
+//
+
 bool approximatelyEqual(float a, float b);
 bool essentiallyEqual(float a, float b);
 bool definitelyGreaterThan(float a, float b);
@@ -189,7 +222,7 @@ namespace utils
 
 auto openFile(const std::string& path, const std::string& mode) -> std::unique_ptr<FILE>;
 
-enum class ASCIIMode
+enum class ASCIIMode : uint8
 {
     IncludeSpace,
     ExcludeSpace,

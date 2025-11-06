@@ -368,7 +368,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);
-                std::memcpy(buffer_.data() + 0x34, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
+                std::memcpy(buffer_.data() + 0x34, name.c_str(), std::min<size_t>(name.size(), kPacketNameLength));
             }
         }
         break;
@@ -426,11 +426,11 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
-                    std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+                    std::memcpy(buffer_.data() + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), kPacketNameLength));
                 }
                 else
                 {
-                    std::memcpy(buffer_.data() + 0x34, PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
+                    std::memcpy(buffer_.data() + 0x34, PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), kPacketNameLength));
                 }
             }
         }
@@ -548,7 +548,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
         auto name       = PEntity->packetName;
         auto nameOffset = 0x44;
-        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
+        auto maxLength  = std::min<size_t>(name.size(), kPacketNameLength);
 
         // Make sure to zero-out the existing name area of the packet
         auto start = buffer_.data() + nameOffset;
@@ -569,7 +569,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
         auto name       = PEntity->packetName;
         auto nameOffset = 0x34;
-        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
+        auto maxLength  = std::min<size_t>(name.size(), kPacketNameLength);
 
         // Mobs and NPC's targid's live in the range 0-1023
         if (PEntity->targid < 1024)

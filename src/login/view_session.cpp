@@ -51,9 +51,9 @@ void view_session::read_func()
     {
         case 0x07: // 07: "Notifying lobby server of current selections."
         {
-            const auto requestedCharacterID                 = ref<uint32>(buffer_.data(), 28);
-            char       requestedCharacter[PacketNameLength] = {};
-            std::memcpy(&requestedCharacter, buffer_.data() + 36, PacketNameLength - 1);
+            const auto requestedCharacterID                  = ref<uint32>(buffer_.data(), 28);
+            char       requestedCharacter[kPacketNameLength] = {};
+            std::memcpy(&requestedCharacter, buffer_.data() + 36, kPacketNameLength - 1);
 
             uint32 accountID = 0;
 
@@ -189,8 +189,8 @@ void view_session::read_func()
             else
             {
                 // creating new char
-                char CharName[PacketNameLength] = {};
-                std::memcpy(CharName, buffer_.data() + 32, PacketNameLength - 1);
+                char CharName[kPacketNameLength] = {};
+                std::memcpy(CharName, buffer_.data() + 32, kPacketNameLength - 1);
 
                 std::optional<std::string> invalidNameReason = std::nullopt;
 

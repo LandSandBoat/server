@@ -830,9 +830,9 @@ void CCharEntity::SetName(const std::string& name)
 {
     this->name = name;
 
-    if (this->name.size() > PacketNameLength)
+    if (this->name.size() > kPacketNameLength)
     {
-        this->name.resize(PacketNameLength); // Enforce max name limit
+        this->name.resize(kPacketNameLength); // Enforce max name limit
     }
 }
 
