@@ -639,6 +639,7 @@ void CAttack::ProcessDamage()
             // Mobs use a different base damage formula than players.
             // H2H attacks from mobs have a base damage penalty applied based on what zone they are in.
             float       mobH2HPenalty = 1.0f;
+            int32       fSTR          = battleutils::GetFSTR(m_attacker, m_victim, slot);
             REGION_TYPE regionID      = m_attacker->loc.zone->GetRegionID();
 
             if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
@@ -650,12 +651,21 @@ void CAttack::ProcessDamage()
                 mobH2HPenalty = 0.650f; // TOAU onward
             }
 
-            if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+            m_damage = m_baseDamage + m_bonusBasePhysicalDamage;
+
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Per Jimmy Kick damage adds in fSTR after the two penalties
             {
-                kickDamage = m_attacker->getMod(Mod::KICK_DMG);
+                float kickPenalty = 2.0f / 3.0f; // per Jimmy, 2/3rds penalty for kicks
+                kickDamage        = m_attacker->getMod(Mod::KICK_DMG);
+
+                m_damage = (m_damage + kickDamage) * mobH2HPenalty * kickPenalty + fSTR;
+            }
+            else // Non-kick mob h2h adds fSTR in before the penalty
+            {
+                m_damage = (m_damage + fSTR) * mobH2HPenalty;
             }
 
-            m_damage = (uint32)(((((m_baseDamage + kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot))) * mobH2HPenalty) * m_damageRatio));
+            m_damage = std::floor<uint32>(m_damage * m_damageRatio);
         }
         else if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Players use this calculation.
         {

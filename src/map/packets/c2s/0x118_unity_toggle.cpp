@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "unitychat.h"
+#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_UNITY_TOGGLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -41,4 +42,6 @@ void GP_CLI_COMMAND_UNITY_TOGGLE::process(MapSession* PSession, CCharEntity* PCh
     {
         unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
     }
+
+    charutils::SendLocalPlayerPackets(PChar);
 }

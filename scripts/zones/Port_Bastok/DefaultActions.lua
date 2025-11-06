@@ -32,7 +32,7 @@ return {
     ['Lone_Horn']        = { event = 39 },
     ['Mathurin']         = { event = 101 },
     ['Mine_Konte']       = { event = 42 },
-    ['Mustafa']          = { messageSpecial = ID.text.ARRIVING_PASSENGER_DIALOG },
+    ['Mustafa']          = { text = ID.text.ARRIVING_PASSENGER_DIALOG },
     ['Nicadio']          = { event = 32 },
     ['Odyssean_Passage'] = { messageSpecial = ID.text.NOTHING_HAPPENS },
     ['Oggbi']            = { event = 230 },

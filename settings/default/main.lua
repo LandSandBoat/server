@@ -12,11 +12,11 @@ xi.settings = xi.settings or {}
 xi.settings.main =
 {
     -- Server name (not longer than 15 characters)
-    SERVER_NAME = "Nameless",
+    SERVER_NAME = 'Nameless',
 
     SERVER_MESSAGE =
-        "Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n" ..
-        "Thank you, and we hope you enjoy sailing the sands!",
+        'Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n' ..
+        'Thank you, and we hope you enjoy sailing the sands!',
 
     -- Setting to lock content more accurately to the expansions defined below.
     -- This generally results in a more accurate presentation of your selected expansions,
@@ -158,14 +158,14 @@ xi.settings.main =
     ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE         = 0, -- 0 = disabled, 1 = add announcement to player login
 
     TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
-        "\n \n" .. -- The space between these newlines is intentional
-        "\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n" ..
-        "This is an excellent time to fill out your roster of Trusts!",
+        '\n \n' .. -- The space between these newlines is intentional
+        '\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n' ..
+        'This is an excellent time to fill out your roster of Trusts!',
 
     TRUST_ALTER_EGO_EXPO_MESSAGE =
-        "\n \n" .. -- The space between these newlines is intentional
-        "\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n" ..
-        "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
+        '\n \n' .. -- The space between these newlines is intentional
+        '\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n' ..
+        'Trusts gain the benefits of Increased HP, MP, and Status Resistances!',
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
     EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
@@ -220,8 +220,8 @@ xi.settings.main =
     AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest
     AF3_QUEST_LEVEL = 50,    -- Minimum level to start AF3 quest
     OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-    OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+    OLDSCHOOL_G2    = false, -- Set true to require the NMs for 'Atop the Highest Mountains' be dead to get KI like before SE changed it.
+    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the '???' target.
     ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS

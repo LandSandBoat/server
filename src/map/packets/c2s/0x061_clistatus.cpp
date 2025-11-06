@@ -22,17 +22,7 @@
 #include "0x061_clistatus.h"
 
 #include "entities/charentity.h"
-#include "packets/char_status.h"
 #include "packets/s2c/0x061_clistatus.h"
-#include "packets/s2c/0x062_clistatus2.h"
-#include "packets/s2c/0x063_miscdata_homepoints.h"
-#include "packets/s2c/0x063_miscdata_job_points.h"
-#include "packets/s2c/0x063_miscdata_merits.h"
-#include "packets/s2c/0x063_miscdata_monstrosity.h"
-#include "packets/s2c/0x063_miscdata_status_icons.h"
-#include "packets/s2c/0x08d_job_points.h"
-#include "packets/s2c/0x0df_group_attr.h"
-#include "packets/s2c/0x119_abil_recast.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -43,24 +33,5 @@ auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_GROUP_ATTR>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
-
-    if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
-    {
-        // Only send Job Points Packet if the player has unlocked them
-        PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar);
-    }
-
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
-    charutils::SendExtendedJobPackets(PChar);
-    charutils::SendUnityPackets(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(PChar);
+    charutils::SendLocalPlayerPackets(PChar);
 }

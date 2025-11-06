@@ -296,7 +296,7 @@ namespace loginHelpers
             return -1;
         }
 
-        ShowDebug(fmt::format("char<{}> successfully saved", charName));
+        ShowDebug(fmt::format("char <{}> successfully saved", charName));
         return 0;
     }
 
@@ -308,5 +308,16 @@ namespace loginHelpers
             return "";
         }
         return hash;
+    }
+
+    uint32 getAccountId(std::string accountName)
+    {
+        const auto rset = db::preparedStmt("SELECT id FROM accounts WHERE accounts.login = ? LIMIT 1", accountName);
+        if (rset && rset->next())
+        {
+            return rset->get<uint32>("id");
+        }
+
+        return 0;
     }
 } // namespace loginHelpers

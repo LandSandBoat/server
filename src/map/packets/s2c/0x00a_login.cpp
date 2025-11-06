@@ -185,6 +185,9 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
         packet.EventNum  = PChar->getZone();
         packet.EventPara = currentEvent->eventId;
         packet.EventMode = currentEvent->eventFlags & 0xFFFF;
+
+        PChar->animation             = ANIMATION_EVENT;
+        packet.PosHead.server_status = ANIMATION_EVENT;
     }
 
     if (PChar->m_moghouseID != 0)

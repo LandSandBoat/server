@@ -273,6 +273,7 @@ end
 ---@return boolean
 function npcUtil.giveItem(player, items, params)
     params = params or {}
+    params.silent = params.silent or false
     local ID = zones[player:getZoneID()]
 
     -- create table of items, with key/val of itemId/itemQty
@@ -281,19 +282,29 @@ function npcUtil.giveItem(player, items, params)
         table.insert(givenItems, { items, 1 })
     elseif type(items) == 'table' then
         for _, v in pairs(items) do
+            local itemId = nil
+            local quantity = 1
             if type(v) == 'number' then
-                table.insert(givenItems, { v, 1 })
+                itemId = v
             elseif
                 type(v) == 'table' and
                 #v == 2 and
                 type(v[1]) == 'number' and
                 type(v[2]) == 'number'
             then
-                table.insert(givenItems, { v[1], v[2] })
-            else
+                itemId = v[1]
+                quantity = v[2]
+            end
+
+            if
+                not itemId or
+                itemId == 0
+            then
                 print(string.format('ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.', player:getZoneName()))
                 return false
             end
+
+            table.insert(givenItems, { itemId, quantity })
         end
     end
 
@@ -310,8 +321,11 @@ function npcUtil.giveItem(player, items, params)
     -- give items to player
     local messagedItems = {}
     for _, v in pairs(givenItems) do
-        if player:addItem(v[1], v[2], true) then
-            if not params.silent and not messagedItems[v[1]] then
+        if player:addItem({ id = v[1], quantity = v[2], silent = true }) then
+            if
+                not params.silent and
+                not messagedItems[v[1]]
+            then
                 if
                     v[2] > 1 or
                     params.multiple
@@ -320,12 +334,15 @@ function npcUtil.giveItem(player, items, params)
                 else
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
                 end
-            end
 
-            messagedItems[v[1]] = true
-        elseif #givenItems == 1 then
-            if not params.silent then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
+                messagedItems[v[1]] = true
+            end
+        else
+            if
+                not params.silent and
+                #givenItems == 1
+            then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, v[1])
             end
 
             return false

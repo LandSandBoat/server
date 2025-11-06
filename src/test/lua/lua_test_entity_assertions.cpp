@@ -216,6 +216,21 @@ auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntit
 }
 
 /************************************************************************
+ *  Function: hasAnimation()
+ *  Purpose : Assert entity has specified animation
+ *  Example : player.assert:hasAnimation(xi.animation.CHOCOBO)
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaTestEntityAssertions::hasAnimation(const uint8 animation) -> CLuaTestEntityAssertions&
+{
+    assertCondition(entity_->getAnimation() == animation,
+                    std::format("Does not have animation {} set", getEnumKey("xi.animation", animation)),
+                    std::format("Does have animation {} set", getEnumKey("xi.animation", animation)));
+    return *this;
+}
+
+/************************************************************************
  *  Function: hasNationRank()
  *  Purpose : Assert player has expected nation rank
  *  Example : player.assert:hasNationRank(5)
@@ -476,6 +491,7 @@ void CLuaTestEntityAssertions::Register()
     SOL_REGISTER("inZone", CLuaTestEntityAssertions::inZone);
     SOL_REGISTER("hasLocalVar", CLuaTestEntityAssertions::hasLocalVar);
     SOL_REGISTER("hasEffect", CLuaTestEntityAssertions::hasEffect);
+    SOL_REGISTER("hasAnimation", CLuaTestEntityAssertions::hasAnimation);
     SOL_REGISTER("hasNationRank", CLuaTestEntityAssertions::hasNationRank);
     SOL_REGISTER("hasKI", CLuaTestEntityAssertions::hasKI);
     SOL_REGISTER("hasMission", CLuaTestEntityAssertions::hasMission);

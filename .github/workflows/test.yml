@@ -43,23 +43,19 @@ jobs:
 
       - name: Install dependencies (APT)
         if: ${{ runner.os == 'Linux' }}
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          command: |
-            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
-              binutils \
-              git \
-              libmariadb-dev-compat \
-              libzmq5 \
-              lua5.1 \
-              luajit \
-              mariadb-client \
-              mariadb-server \
-              openssl \
-              tzdata \
-              zlib1g
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+            binutils \
+            git \
+            libmariadb-dev-compat \
+            libzmq5 \
+            lua5.1 \
+            luajit \
+            mariadb-client \
+            mariadb-server \
+            openssl \
+            tzdata \
+            zlib1g
 
       - name: Setup MariaDB (Windows)
         if: ${{ runner.os == 'Windows' }}
@@ -111,7 +107,7 @@ jobs:
               f.write("renamer\n")
           EOF
 
-      - name: Import SQL files
+      - name: Initialize database
         run: python ./tools/dbtool.py update
 
       - name: Run xi_test
@@ -135,7 +131,7 @@ jobs:
           artifact-name: 'xi_test-ctrf-${{ runner.os }}'
 
       - name: Startup checks
-        id: tests
+        id: startup_checks
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
@@ -153,7 +149,7 @@ jobs:
                   if grep -qi "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:"; then
                       found_issues=true
                       log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
-                      echo "### :x: ${log_name} Tests Failed" >> $GITHUB_STEP_SUMMARY
+                      echo "### :x: ${log_name} Checks Failed" >> $GITHUB_STEP_SUMMARY
                       echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
                       grep -i "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:" >> $GITHUB_STEP_SUMMARY
                       echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
@@ -162,10 +158,10 @@ jobs:
               fi
           done
           if [[ "$found_issues" == "false" ]]; then
-              if [[ "${{ steps.tests.outcome }}" == "success" ]]; then
-                  echo "### :heavy_check_mark: All tests passed." >> $GITHUB_STEP_SUMMARY
+              if [[ "${{ steps.startup_checks.outcome }}" == "success" ]]; then
+                  echo "### :heavy_check_mark: Startup checks passed." >> $GITHUB_STEP_SUMMARY
               else
-                  echo "### :x: Startup tests failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
+                  echo "### :x: Startup checks failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
                   echo "Check the logs for details." >> $GITHUB_STEP_SUMMARY
                   found_issues=true
               fi
@@ -183,7 +179,7 @@ jobs:
           echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
 
       - name: Fail Workflow if Checks Failed
-        if: ${{ steps.xi_test.outcome == 'failure' || steps.tests.outcome == 'failure' || steps.summarize_checks.outputs.issues_found == 'true' }}
+        if: ${{ steps.xi_test.outcome == 'failure' || steps.startup_checks.outcome == 'failure' || steps.summarize_checks.outputs.issues_found == 'true' }}
         run: |
           echo "Startup checks failed. See summary for details."
           exit 1

@@ -119,6 +119,7 @@ enum class MsgStd : uint16_t
     StyleLockOff                 = 268, // Style lock mode disabled.
     StyleLockIsOn                = 269, // Style lock mode is enabled.
     StyleLockIsOff               = 270, // Style lock mode is disabled.
+    UnityNotParticipating        = 286, // You are not participating in Unity chat.
     UnityChatFull                = 287, // The maximum number of people are already participating in Unity chat. Please try again later.
     PollProposalLinkshell2       = 289, // Player Name's proposal to the linkshell group (cast vote with command: "/vote ?"):
     CurrentPollResultsLinkshell2 = 290, // Player Name's proposal - Current poll results:

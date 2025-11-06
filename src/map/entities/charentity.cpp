@@ -1130,7 +1130,7 @@ void CCharEntity::PostTick()
         }
 
         sendServerStatus_ = false;
-        updatemask = 0;
+        updatemask        = 0;
     }
 }
 
@@ -2101,7 +2101,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     for (uint8 i = 1; i <= hitCount; ++i)
     {
         // TODO: add Barrage mod racc bonus
-        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage, 0)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage, 0) && !state.IsOutOfRange()) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget, this))
@@ -2145,7 +2145,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
-            actionTarget.messageID  = 354;
+            actionTarget.messageID  = MSGBASIC_RANGED_ATTACK_MISS;
             hitCount                = i; // end barrage, shot missed
         }
 
@@ -3253,8 +3253,27 @@ void CCharEntity::tryStartNextEvent()
 
     if (eventQueue.empty())
     {
-        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
-        animation = ANIMATION_NONE; // sendServerStatus_ is somewhat like an update mask on its own
+        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing
+
+        // Chocobo NPC (outside, gives you a mount) edge case
+        if (auto PStatusEffect = StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED))
+        {
+            switch (PStatusEffect->GetPower())
+            {
+                case MOUNT_CHOCOBO:
+                case MOUNT_NOBLE_CHOCOBO:
+                    animation = ANIMATION_CHOCOBO;
+                    break;
+                default:
+                    animation = ANIMATION_MOUNT;
+                    break;
+            }
+        }
+        else
+        {
+            animation = ANIMATION_NONE;
+        }
+
         sendServerStatus_ = true;
         return;
     }

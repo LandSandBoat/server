@@ -242,6 +242,15 @@ CPMAddPackage(
     GIT_TAG 89f20096bef51de347ec6f99345f65147359bd7c
 ) # defines: termcolor::termcolor
 
+CPMAddPackage(
+    NAME cotp
+    GITHUB_REPOSITORY paolostivanin/libcotp
+    GIT_TAG v3.1.0
+    OPTIONS
+        "HMAC_WRAPPER openssl"
+        "BUILD_SHARED_LIBS OFF"
+) # defines: cotp
+
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -283,6 +292,8 @@ endif()
 
 set(CONNECT_ONLY_EXTERNAL_LIBS
     bcrypt
+    nlohmann_json::nlohmann_json
+    cotp
 )
 
 set(MAP_ONLY_EXTERNAL_LIBS

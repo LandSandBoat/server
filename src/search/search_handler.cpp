@@ -87,6 +87,8 @@ void search_handler::start()
 
 void search_handler::do_read()
 {
+    std::memset(buffer_.data(), 0, buffer_.size());
+
     // clang-format off
     socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
     [this, self = shared_from_this()](std::error_code ec, std::size_t length)
@@ -114,6 +116,7 @@ void search_handler::do_write()
     auto packet = searchPackets.front();
     auto length = packet.getSize();
 
+    std::memset(buffer_.data(), 0, buffer_.size());
     std::memcpy(buffer_.data(), packet.getData(), packet.getSize());
 
     searchPackets.pop_front();

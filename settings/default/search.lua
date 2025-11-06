@@ -26,8 +26,8 @@ xi.settings.search =
     -- IP address strings in this list won't be subject to 'IPAddressesInUse' rate limiting
     ACCESS_WHITELIST =
     {
-        "127.0.0.1",   -- Example, not actually needed
-        "192.168.0.1", -- Example, not actually needed
+        '127.0.0.1',   -- Example, not actually needed
+        '192.168.0.1', -- Example, not actually needed
     },
 
     -- true/false: Enable/disable logging the content of packets being sent to the client (required Debug mode)

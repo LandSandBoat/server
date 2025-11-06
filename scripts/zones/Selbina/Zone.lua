@@ -58,7 +58,7 @@ end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     -- TODO don't double fire transport events (a ship "arrives" from normal and pirates zones at the same time and triggers a transport event)
-    if not player:isInEvent() then
+    if player:isInEvent() then
         return
     end
 

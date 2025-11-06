@@ -35,7 +35,8 @@ struct GP_GROUP_ATTR
     uint32_t AllianceRFlg : 1;      // PS2: AllianceRFlg
     uint32_t unknown06 : 1;         // PS2: MasterComFlg
     uint32_t unknown07 : 1;         // PS2: SubMasterComFlg
-    uint32_t unused : 24;           // PS2: dammy
+    uint32_t LevelSyncFlg : 1;      // PS2: LevelSyncFlg
+    uint32_t unused : 23;           // PS2: dammy
 };
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x00DD

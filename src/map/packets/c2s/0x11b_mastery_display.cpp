@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "packets/char_status.h"
+#include "packets/char_sync.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_MASTERY_DISPLAY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -33,8 +34,13 @@ auto GP_CLI_COMMAND_MASTERY_DISPLAY::validate(MapSession* PSession, const CCharE
 
 void GP_CLI_COMMAND_MASTERY_DISPLAY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->m_jobMasterDisplay = Mode;
+    if (PChar->m_jobMasterDisplay != static_cast<bool>(Mode))
+    {
+        PChar->m_jobMasterDisplay = Mode;
 
-    charutils::SaveJobMasterDisplay(PChar);
-    PChar->pushPacket<CCharStatusPacket>(PChar);
+        charutils::SaveJobMasterDisplay(PChar);
+        PChar->pushPacket<CCharStatusPacket>(PChar);
+        // TODO: This might be broadcast to other players as well
+        PChar->pushPacket<CCharSyncPacket>(PChar);
+    }
 }

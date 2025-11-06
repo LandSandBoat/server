@@ -43,6 +43,12 @@ xi.combat.physicalHitRate.checkAnticipated = function(attacker, defender)
     return true
 end
 
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@param slot xi.attackAnimation
+---@param isWeaponskill boolean
+---@return number
 xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus, slot, isWeaponskill)
     local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
@@ -54,9 +60,8 @@ xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus,
         attacker:addMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
     end
 
-    -- TODO: check mainhand vs offhand
     -- TODO: realtime flash penalty
-    local acc = attacker:getACC()
+    local acc = attacker:getACC(slot) -- TODO: clamp slot for 0, 1, 2 (mainhand, offhand, kick)
     local eva = target:getEVA()
 
     if

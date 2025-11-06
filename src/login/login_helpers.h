@@ -29,7 +29,12 @@
 #include <common/xirand.h>
 
 #include "login_errors.h"
+#include "nlohmann/json.hpp"
 #include "session.h"
+
+#include <iterator>
+
+using json = nlohmann::json;
 
 namespace loginHelpers
 {
@@ -93,4 +98,111 @@ namespace loginHelpers
     int32 createCharacter(session_t& session, uint8* buf);
 
     std::string getHashFromPacket(std::string const& ip_str, uint8* data);
+
+    uint32 getAccountId(std::string accountName);
+
+    template <typename T>
+    struct always_false : std::false_type
+    {
+    };
+
+    template <typename T>
+    inline constexpr bool always_false_v = always_false<T>::value;
+
+    template <typename T>
+    inline std::optional<T> jsonGet(const json& jsonInput, std::string key)
+    {
+        if (!jsonInput.contains(key))
+        {
+            return std::nullopt;
+        }
+
+        // Check types first, boolean can match a number
+        if constexpr (std::is_same_v<T, std::string>)
+        {
+            if (!jsonInput[key].is_string())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_same_v<T, bool>)
+        {
+            if (!jsonInput[key].is_boolean())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_floating_point<T>::value)
+        {
+            if (!jsonInput[key].is_number_float())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_signed<T>::value)
+        {
+            if (!jsonInput[key].is_number_unsigned())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_unsigned<T>::value)
+        {
+            if (!jsonInput[key].is_number_unsigned())
+            {
+                return std::nullopt;
+            }
+        }
+        else
+        {
+            static_assert(always_false_v<T>, "Trying to extract unsupported type from jsonGet");
+        }
+
+        return jsonInput[key].get<T>();
+    }
+
+    // Supposedly, there is template magic to do this inside the template above, but VC++ doesn't support it yet?
+    template <typename T, uint32_t size>
+    inline typename std::optional<std::array<T, size>> jsonGet(const json& jsonInput, std::string key)
+    {
+        if (!jsonInput.contains(key))
+        {
+            return std::nullopt;
+        }
+
+        if (!jsonInput[key].is_array())
+        {
+            return std::nullopt;
+        }
+
+        if (jsonInput[key].size() != size)
+        {
+            return std::nullopt;
+        }
+
+        for (uint32_t i = 0; i < size; i++)
+        {
+            // JSON arrays can support mixed types, so make sure EVERY index is correct.
+            if constexpr (std::is_signed<T>::value)
+            {
+                if (!jsonInput[key][i].is_number())
+                {
+                    return std::nullopt;
+                }
+            }
+            else if constexpr (std::is_unsigned<T>::value)
+            {
+                if (!jsonInput[key][i].is_number_unsigned())
+                {
+                    return std::nullopt;
+                }
+            }
+            else
+            {
+                static_assert(always_false_v<T>, "Trying to extract unsupported type from jsonGetArray");
+            }
+        }
+
+        return jsonInput[key].get<std::array<T, size>>();
+    }
 } // namespace loginHelpers

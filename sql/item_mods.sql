@@ -46120,6 +46120,10 @@ INSERT INTO `item_mods` VALUES (21975,30,40);   -- MACC: 40
 INSERT INTO `item_mods` VALUES (21975,355,152); -- ADDS_WEAPONSKILL: 152
 INSERT INTO `item_mods` VALUES (21975,722,25);  -- WSD+% (Tachi Kasha): 25
 
+-- Erudite's Staff +1
+INSERT INTO `item_mods` VALUES (21994,170,5);   -- FASTCAST: 5
+INSERT INTO `item_mods` VALUES (21994,374,5);   -- CURE_POTENCY: 5
+
 -- Arasy Rod
 INSERT INTO `item_mods` VALUES (22015,12,6);    -- INT: 6
 INSERT INTO `item_mods` VALUES (22015,13,6);    -- MND: 6
@@ -58241,6 +58245,78 @@ INSERT INTO `item_mods` VALUES (23808,1,1); -- DEF: 1
 -- Esthete's Hose
 INSERT INTO `item_mods` VALUES (23809,1,1); -- DEF: 1
 
+-- Arrogance Crown
+INSERT INTO `item_mods` VALUES (23837,1,1); -- DEF: 1
+
+-- Arrogance Platemail
+INSERT INTO `item_mods` VALUES (23838,1,1); -- DEF: 1
+
+-- Arrogance Gauntlets
+INSERT INTO `item_mods` VALUES (23839,1,1); -- DEF: 1
+
+-- Arrogance Brais
+INSERT INTO `item_mods` VALUES (23840,1,1); -- DEF: 1
+
+-- Arrogance Sabatons
+INSERT INTO `item_mods` VALUES (23841,1,1); -- DEF: 1
+
+-- Rage Platemail
+INSERT INTO `item_mods` VALUES (23842,1,1); -- DEF: 1
+
+-- Rage Gauntlets
+INSERT INTO `item_mods` VALUES (23843,1,1); -- DEF: 1
+
+-- Rage Brais
+INSERT INTO `item_mods` VALUES (23844,1,1); -- DEF: 1
+
+-- Rage Sabatons
+INSERT INTO `item_mods` VALUES (23845,1,1); -- DEF: 1
+
+-- Cowardice Petasos
+INSERT INTO `item_mods` VALUES (23846,1,1); -- DEF: 1
+
+-- Cowardice Coat
+INSERT INTO `item_mods` VALUES (23847,1,1); -- DEF: 1
+
+-- Cowardice Gloves
+INSERT INTO `item_mods` VALUES (23848,1,1); -- DEF: 1
+
+-- Cowardice Tonban
+INSERT INTO `item_mods` VALUES (23849,1,1); -- DEF: 1
+
+-- Cowardice Sabots
+INSERT INTO `item_mods` VALUES (23850,1,1); -- DEF: 1
+
+-- Envy Crown
+INSERT INTO `item_mods` VALUES (23851,1,1); -- DEF: 1
+
+-- Envy Cyclas
+INSERT INTO `item_mods` VALUES (23852,1,1); -- DEF: 1
+
+-- Envy Gauntlets
+INSERT INTO `item_mods` VALUES (23853,1,1); -- DEF: 1
+
+-- Envy Flanchard
+INSERT INTO `item_mods` VALUES (23854,1,1); -- DEF: 1
+
+-- Envy Sollerets
+INSERT INTO `item_mods` VALUES (23855,1,1); -- DEF: 1
+
+-- Apathy Mask
+INSERT INTO `item_mods` VALUES (23856,1,1); -- DEF: 1
+
+-- Apathy Platemail
+INSERT INTO `item_mods` VALUES (23857,1,1); -- DEF: 1
+
+-- Apathy Gauntlets
+INSERT INTO `item_mods` VALUES (23858,1,1); -- DEF: 1
+
+-- Apathy Brais
+INSERT INTO `item_mods` VALUES (23859,1,1); -- DEF: 1
+
+-- Apathy Sabatons
+INSERT INTO `item_mods` VALUES (23860,1,1); -- DEF: 1
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30
@@ -59730,6 +59806,9 @@ INSERT INTO `item_mods` VALUES (25668,384,300); -- HASTE_GEAR: 300
 -- Crab Cap +1
 INSERT INTO `item_mods` VALUES (25669,1,2); -- DEF: 2
 
+-- Ilm Tiara
+INSERT INTO `item_mods` VALUES (25674,1,1); -- DEF: 1
+
 -- White Rarab Cap
 INSERT INTO `item_mods` VALUES (25675,1,1); -- DEF: 1
 
@@ -60740,6 +60819,9 @@ INSERT INTO `item_mods` VALUES (25813,68,19);   -- EVA: 19
 INSERT INTO `item_mods` VALUES (25813,165,7);   -- CRITHITRATE: 7
 INSERT INTO `item_mods` VALUES (25813,384,500); -- HASTE_GEAR: 500
 
+-- Ilm Manopolas
+INSERT INTO `item_mods` VALUES (25814,1,1); -- DEF: 1
+
 -- Delegates Cuffs
 INSERT INTO `item_mods` VALUES (25817,1,1); -- DEF: 1
 
@@ -60935,6 +61017,9 @@ INSERT INTO `item_mods` VALUES (25853,168,15);  -- SPELLINTERRUPT: 15
 INSERT INTO `item_mods` VALUES (25853,302,2);   -- TRIPLE_ATTACK: 2
 INSERT INTO `item_mods` VALUES (25853,384,500); -- HASTE_GEAR: 500
 INSERT INTO `item_mods` VALUES (25853,455,10);  -- SONG_SPELLCASTING_TIME: 10
+
+-- Ilm Lappas
+INSERT INTO `item_mods` VALUES (25857,1,1); -- DEF: 1
 
 -- Meghanada Chausses
 INSERT INTO `item_mods` VALUES (25860,1,105);    -- DEF: 105
@@ -61496,6 +61581,9 @@ INSERT INTO `item_mods` VALUES (25938,30,36);   -- MACC: 36
 INSERT INTO `item_mods` VALUES (25938,31,69);   -- MEVA: 69
 INSERT INTO `item_mods` VALUES (25938,68,60);   -- EVA: 60
 INSERT INTO `item_mods` VALUES (25938,384,400); -- HASTE_GEAR: 400
+
+-- Ilm Hauranches
+INSERT INTO `item_mods` VALUES (25939,1,1); -- DEF: 1
 
 -- Flamma Gambieras
 INSERT INTO `item_mods` VALUES (25940,1,83);    -- DEF: 83
@@ -62380,11 +62468,23 @@ INSERT INTO `item_mods` VALUES (26490,1,1); -- DEF: 1
 -- Ageist
 INSERT INTO `item_mods` VALUES (26496,1,1); -- DEF: 1
 
+-- Poroggo Fleece
+INSERT INTO `item_mods` VALUES (26514,1,1); -- DEF: 1
+
+-- Poroggo Fleece +1
+INSERT INTO `item_mods` VALUES (26515,1,2);   -- DEF: 2
+INSERT INTO `item_mods` VALUES (26515,20,30); -- WATER_MEVA: 30
+INSERT INTO `item_mods` VALUES (26515,37,30); -- WATER_MAB: 30
+INSERT INTO `item_mods` VALUES (26515,45,30); -- WATER_MACC: 30
+
 -- Shadow Lord Shirt
 INSERT INTO `item_mods` VALUES (26517,1,1); -- DEF: 1
 
 -- Akitu Shirt
 INSERT INTO `item_mods` VALUES (26520,1,1); -- DEF: 1
+
+-- Ilm Weskit
+INSERT INTO `item_mods` VALUES (26521,1,1); -- DEF: 1
 
 -- Gil Nabber Shirt
 INSERT INTO `item_mods` VALUES (26524,1,1); -- DEF: 1

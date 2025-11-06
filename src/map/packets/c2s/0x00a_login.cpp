@@ -22,9 +22,14 @@
 #include "0x00a_login.h"
 #include "packets/s2c/0x00a_login.h"
 
+#include "ai/ai_container.h"
+#include "ai/helpers/action_queue.h"
 #include "entities/charentity.h"
 #include "packets/s2c/0x008_enterzone.h"
+#include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x04f_equip_clear.h"
+#include "packets/s2c/0x050_equip_list.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "utils/charutils.h"
 #include "utils/gardenutils.h"
 #include "utils/zoneutils.h"
@@ -123,7 +128,17 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     if (PChar->loc.zone != nullptr)
     {
         PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_LOGIN>(PChar, PChar->currentEvent);
-        PChar->pushPacket<GP_SERV_COMMAND_ENTERZONE>(PChar);
+        for (uint8 i = 0; i < 16; ++i)
+        {
+            if (PChar->equip[i] != 0)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(PChar->equip[i], static_cast<SLOTTYPE>(i), static_cast<CONTAINER_ID>(PChar->equipLoc[i]));
+            }
+        }
+        PChar->status = STATUS_TYPE::NORMAL;
+        PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
 }

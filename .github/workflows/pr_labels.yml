@@ -26,7 +26,7 @@ jobs:
             for (const idx in response.data)
             {
                 const entry = response.data[idx];
-                if (entry.name === "hold" || entry.name === "squash")
+                if (entry.name === "hold" || entry.name === "squash" || entry.name === "audit" || entry.name === "invalid")
                 {
                     console.log("Found PR-blocking label: " + entry.name)
                     core.setFailed("Found PR-blocking label: " + entry.name)

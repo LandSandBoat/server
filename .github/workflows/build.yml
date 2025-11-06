@@ -92,42 +92,34 @@ jobs:
 
       - name: Install dependencies (APT)
         if: ${{ runner.os == 'Linux' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          command: |
-            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
-              binutils-dev \
-              g++-14 \
-              libluajit-5.1-dev \
-              libmariadb-dev-compat \
-              libssl-dev \
-              libzmq3-dev \
-              luajit \
-              mariadb-client \
-              tzdata \
-              zlib1g-dev
-            echo "CC=/usr/bin/gcc-14" >> $GITHUB_ENV
-            echo "CXX=/usr/bin/g++-14" >> $GITHUB_ENV
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+            binutils-dev \
+            g++-14 \
+            libluajit-5.1-dev \
+            libmariadb-dev-compat \
+            libssl-dev \
+            libzmq3-dev \
+            luajit \
+            mariadb-client \
+            tzdata \
+            zlib1g-dev
+          echo "CC=/usr/bin/gcc-14" >> $GITHUB_ENV
+          echo "CXX=/usr/bin/g++-14" >> $GITHUB_ENV
 
       - name: Install Clang
         if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          command: |
-            sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
-              clang-18 \
-              clang-tidy \
-              libclang-rt-dev \
-              lld \
-              llvm-dev
-            echo "CC=/usr/bin/clang-18" >> $GITHUB_ENV
-            echo "CXX=/usr/bin/clang++-18" >> $GITHUB_ENV
-            echo "CXXFLAGS=-stdlib=libstdc++" >> $GITHUB_ENV
-            echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+            clang-18 \
+            clang-tidy \
+            libclang-rt-dev \
+            lld \
+            llvm-dev
+          echo "CC=/usr/bin/clang-18" >> $GITHUB_ENV
+          echo "CXX=/usr/bin/clang++-18" >> $GITHUB_ENV
+          echo "CXXFLAGS=-stdlib=libstdc++" >> $GITHUB_ENV
+          echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
 
       - name: Setup MSVC
         if: ${{ runner.os == 'Windows' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
@@ -203,7 +195,7 @@ jobs:
             tracy.tar.gz
 
       - name: Cache build
-        if: ${{ inputs.save_cache && !steps.restore_build.outputs.cache-hit && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ inputs.save_cache && steps.restore_build.outputs.cache-hit != 'true' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
         uses: actions/cache/save@v4
         with:
           path: build

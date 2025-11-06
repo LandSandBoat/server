@@ -7189,18 +7189,23 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
 }
 
 /************************************************************************
- *  Function: addJobTraits
- *  Purpose : Add job traits
- *  Example : player:addJobTraits(xi.job.WHM, 75)
+ *  Function: addWyvernJobTraits
+ *  Purpose : Add job traits to dragoon wyvern pet
+ *  Example : wyvern:addWyvernJobTraits(xi.job.SAM, 49)
  ************************************************************************/
 
-void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
+void CLuaBaseEntity::addWyvernJobTraits(uint8 jobID, uint8 level)
 {
-    auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PPet = dynamic_cast<CPetEntity*>(m_PBaseEntity);
 
-    if (PEntity != nullptr)
+    // Under no circumstances should this be called for anything but a dragoon pet wyvern
+    if (PPet && PPet->getPetType() == PET_TYPE::WYVERN)
     {
-        battleutils::AddTraits(PEntity, traits::GetTraits(jobID), level);
+        battleutils::AddTraits(PPet, traits::GetTraits(jobID), level);
+    }
+    else
+    {
+        ShowWarning("Invalid entity type calling addWyvernJobTraits (%s).", m_PBaseEntity->getName());
     }
 }
 
@@ -14772,7 +14777,7 @@ uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
  *  Notes   : Uses the ACC member of CBattleEntity for calculation
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getACC()
+uint16 CLuaBaseEntity::getACC(sol::object const& maybeAttackNumber)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -14780,8 +14785,10 @@ uint16 CLuaBaseEntity::getACC()
         return 0;
     }
 
+    uint8_t attackNumber = maybeAttackNumber.is<uint8_t>() ? maybeAttackNumber.as<uint8_t>() : 0;
+
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
-    return PEntity->ACC(0, 0); // (attackNumber = 0, offsetAcc = 0)
+    return PEntity->ACC(attackNumber, 0); // (attackNumber = 0, offsetAcc = 0)
 }
 
 /************************************************************************
@@ -19735,7 +19742,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getLevelCap", CLuaBaseEntity::getLevelCap);
     SOL_REGISTER("setLevelCap", CLuaBaseEntity::setLevelCap);
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);
-    SOL_REGISTER("addJobTraits", CLuaBaseEntity::addJobTraits);
+    SOL_REGISTER("addWyvernJobTraits", CLuaBaseEntity::addWyvernJobTraits);
 
     // Monstrosity
     SOL_REGISTER("getMonstrosityData", CLuaBaseEntity::getMonstrosityData);

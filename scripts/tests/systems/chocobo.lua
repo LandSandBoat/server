@@ -33,12 +33,14 @@ describe('Chocobo Rental', function()
         -- This returns the correct event but it should NOT mount the PC
         player.entities:gotoAndTrigger('Coumaine', { eventId = 120 })
         player.assert.no:hasEffect(xi.effect.MOUNTED)
+        player.assert.no:hasAnimation(xi.animation.CHOCOBO)
     end)
 
     it('players meeting all qualifications can ride', function()
         player:setGil(140) -- First sale is always 140g for a level 20 PC
         player.entities:gotoAndTrigger('Coumaine', { eventId = 120 })
         player.assert:hasEffect(xi.effect.MOUNTED)
+        player.assert:hasAnimation(xi.animation.CHOCOBO)
     end)
 
     it('price increases after each sale', function()

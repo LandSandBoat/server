@@ -141,6 +141,8 @@ def populate_settings():
                             # pop off leading quote
                             if val.startswith('"'):
                                 val = val[1:]
+                            elif val.startswith("'"):
+                                val = val[1:]
 
                             # pop off trailing comma
                             if val.endswith(","):
@@ -148,6 +150,8 @@ def populate_settings():
 
                             # pop off trailing quote
                             if val.endswith('"'):
+                                val = val[:-1]
+                            elif val.endswith("'"):
                                 val = val[:-1]
 
                             current_settings[key] = val
@@ -184,6 +188,7 @@ settings, default_settings = populate_settings()
 player_data = [
     "accounts.sql",
     "accounts_banned.sql",
+    "accounts_totp.sql",
     "auction_house_items.sql",
     "auction_house.sql",
     "audit_bazaar.sql",

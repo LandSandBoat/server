@@ -199,7 +199,7 @@ namespace mobutils
             multiplier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) / 100.0f;
         }
 
-        damage = damage * multiplier + offset;
+        damage = (damage + offset) * multiplier;
 
         damage = std::clamp<int32>(damage, 1, 65535);
 

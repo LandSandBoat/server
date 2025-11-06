@@ -576,6 +576,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         calcParams.attackInfo.weaponType = offhandSkill
     end
 
+    -- Recalculate hitRate with offhand acc
+    -- No more damage is being processed with mainhand acc, so this is ok
+    calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc, xi.attackAnimation.LEFT_ATTACK)
+
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and hitsDone < 8 and finaldmg < targetHp then
         calcParams.hitsLanded = 0
@@ -671,7 +675,7 @@ end
 xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local gearFTP = xi.combat.physical.calculateFTPBonus(attacker)
-    local gearAcc = math.floor(gearFTP * 10)
+    local gearAcc = math.ceil(gearFTP * 100) -- TODO: Separate gear fTP and acc bonuses
     local attack =
     {
         ['type']       = xi.attackType.PHYSICAL,
@@ -719,8 +723,8 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
         calcParams.bonusAcc = calcParams.bonusAcc - accLost
     end
 
-    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100)
-    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc)
+    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100, xi.attackAnimation.RIGHT_ATTACK)
+    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc, xi.attackAnimation.RIGHT_ATTACK)
     calcParams.skillType    = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
@@ -750,7 +754,7 @@ end
 xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
     -- Set up conditions and params used for calculating weaponskill damage
     local gearFTP = xi.combat.physical.calculateFTPBonus(attacker)
-    local gearAcc = math.floor(gearFTP * 10)
+    local gearAcc = math.ceil(gearFTP * 100) -- TODO: Separate gear fTP and acc bonuses
 
     local attack =
     {
@@ -822,7 +826,6 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Ammo needs to be removed after xi.weaponskills.takeWeaponskillDamage for delay/tp return uses
     if calcParams.ammoUsed and calcParams.ammoUsed > 0 then
-        print(calcParams.ammoUsed)
         attacker:removeAmmo(calcParams.ammoUsed)
     end
 
@@ -852,7 +855,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     }
 
     local gearFTP = xi.combat.physical.calculateFTPBonus(attacker)
-    local gearAcc = math.floor(gearFTP * 10) + attacker:getMod(xi.mod.WSACC)
+    local gearAcc = math.ceil(gearFTP * 100) + attacker:getMod(xi.mod.WSACC) -- TODO: Separate gear fTP and acc bonuses
     local fint    = utils.clamp(8 + attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), -32, 32)
     local dmg     = 0
 
@@ -1046,9 +1049,13 @@ xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     return { mainhandDamage, offhandDamage }
 end
 
-xi.weaponskills.getHitRate = function(attacker, target, bonus)
-    -- TODO: need input for slot
-    return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonus, 0, false)
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@param slot xi.attackAnimation
+---@return number
+xi.weaponskills.getHitRate = function(attacker, target, bonus, slot)
+    return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonus, slot, true)
 end
 
 -- TODO: Use a common function with optional multiplier on return, or multiply outside of this.

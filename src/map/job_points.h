@@ -338,7 +338,6 @@ enum JOBPOINT_TYPE : uint16
 #define JobPointsCategoryIndexByJpType(jp_type) (jp_type >> 5)
 #define JobPointTypeIndex(id)                   (id & 0x1F)
 #define JobPointCost(value)                     ((value + 1) % 21)
-#define JobPointValueFormat(value)              (value << 2)
 
 /************************************************************************
  *                                                                       *

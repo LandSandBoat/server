@@ -44,7 +44,7 @@ public:
         uint8_t           Attr;      // PS2: Attr
         uint16_t          Data;      // PS2: (New; did not exist.)
         uint8_t           sName[15]; // PS2: sName
-        uint8_t           Mes[128];  // PS2: Mes - Variable sized array
+        uint8_t           Mes[150];  // PS2: Mes - Variable sized array
     };
 
     // Standard constructor

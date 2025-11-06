@@ -591,6 +591,7 @@ public:
     void delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid);
     void saveModifiers();    // save current state of modifiers
     void restoreModifiers(); // restore to saved state
+    void savePetModifiers(); // saves dynamic pet modifiers
 
     void addPetModifier(Mod type, PetModType, int16 amount);
     void setPetModifier(Mod type, PetModType, int16 amount);

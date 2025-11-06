@@ -1,7 +1,7 @@
 xi = xi or {}
 
 ---@enum xi.jobName
-xi.jobNames =
+xi.jobName =
 {
     [ 0] = { 'NONE', 'None' },
     [ 1] = { 'WAR', 'Warrior' },

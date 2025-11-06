@@ -34,7 +34,9 @@ def connect():
             line = f.readline()
             if not line:
                 break
-            match = re.findall(r"(SQL_\w+)\s*=\s*(?:\"(.*?)\"|([^\"\s,]+)),", line)
+            match = re.findall(
+                r"(SQL_\w+)\s*=\s*(?:[\'\"](.*?)[\'\"]|([^\'\s,]+)),", line
+            )
             if match:
                 credentials[match[0][0]] = match[0][2] if match[0][2] else match[0][1]
 

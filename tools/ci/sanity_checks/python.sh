@@ -9,7 +9,7 @@ else
 fi
 
 for file in "${targets[@]}"; do
-    [[ -f $file && $file == tools/**/*.py ]] || continue
+    [[ -f $file && $file == *.py ]] || continue
 
     # Run tools and capture output
     pylint_output=$(pylint --errors-only "$file" 2>&1 || true)

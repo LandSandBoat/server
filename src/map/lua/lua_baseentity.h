@@ -375,7 +375,7 @@ public:
     uint8 getLevelCap();            // genkai
     void  setLevelCap(uint8 cap);
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
-    void  addJobTraits(uint8 jobID, uint8 level);
+    void  addWyvernJobTraits(uint8 jobID, uint8 level);
 
     // Monstrosity
     auto getMonstrosityData() -> sol::table;
@@ -731,7 +731,7 @@ public:
 
     // Damage Calculation
     uint16 getStat(uint16 statId, sol::variadic_args va); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
-    uint16 getACC();
+    uint16 getACC(sol::object const& maybeAttackNumber);
     uint16 getEVA();
     int    getRACC();
     uint16 getRATT();

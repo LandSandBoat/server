@@ -8,6 +8,8 @@ import errno
 from .util import util
 from .packets import packets
 
+import json
+
 
 class HXIClient:
     def __init__(
@@ -25,7 +27,7 @@ class HXIClient:
         if client_str == "":
             with open("settings/default/login.lua") as f:
                 settings_file = f.read()
-                client_str = re.search(r'CLIENT_VER = "(.*?)"', settings_file)[1]
+                client_str = re.search(r"CLIENT_VER = '(.*?)'", settings_file)[1]
 
         print("Client version:", client_str)
         self.client_str = client_str
@@ -50,37 +52,52 @@ class HXIClient:
 
         self.login_connect(self.ssl_context)
 
-        data = bytearray(102)
-        data[0x00] = 0xFF  # magic for new xiloader
-        data[0x01] = 0  # unused feature flags
-        data[0x02] = 0
-        data[0x03] = 0
-        data[0x04] = 0
-        data[0x05] = 0
-        data[0x06] = 0
-        data[0x07] = 0
-        data[0x08] = 0
-        util.memcpy(self.username, 0, data, 0x09, len(self.username))
-        util.memcpy(self.password, 0, data, 0x19, len(self.password))
+        LOGIN_ATTEMPT = 0x10 # from src/login/auth_session.h
 
-        data[0x39] = 0x10  # Auto-login
+        json_data = {}
+        json_data.update({"username": self.username})
+        json_data.update({"password": self.password})
+        json_data.update({"otp": 0})
+        json_data.update({"new_password": ""})
+        json_data.update({"version": [2, 0, 0]})
+        json_data.update({"command": LOGIN_ATTEMPT})
 
-        # 17 bytes of reserved space starting at 0x50
-        util.memcpy(self.password, 0, data, 0x30, len(self.password))
+        json_string = json.dumps(json_data)
+        json_len    = len(json_string)
 
-        util.memcpy(self.xiloaderVersionNumber, 0, data, 0x61, 5)
+        data = bytearray(json_len)
+
+        util.memcpy(json_string, 0, data, 0x0, json_len)
 
         self.login_sock.sendall(data)
 
-        in_data = self.login_sock.recv(21)
+        in_data = self.login_sock.recv(8192)
         self.login_sock.close()
 
-        if in_data[0] == 0x01:
+        # https://stackoverflow.com/a/40060181
+        maybe_json_reply = in_data.decode('utf8').replace("'", '"')
+
+        loaded_json = json.loads(maybe_json_reply) # this can throw JSONDecodeError or UnicodeDecodeError. Should we handle this? do we care?
+
+        result       = 0x00
+        session_hash = []
+        account_id   = 0
+
+        if "result" in loaded_json and type(loaded_json["result"]) == int:
+            result = loaded_json["result"]
+
+        if "account_id" in loaded_json and type(loaded_json["account_id"]) == int:
+            account_id = loaded_json["account_id"]
+
+        if "session_hash" in loaded_json and type(loaded_json["session_hash"]) == list:
+            session_hash = loaded_json["session_hash"]
+
+        if result == 0x01:
             print("Login successful")
-            self.account_id = util.unpack_uint16(in_data, 1)
+            self.account_id = account_id
             print("Account ID: " + str(self.account_id))
 
-            self.sessionHash = util.unpack_string(in_data, 0x05, 16)
+            self.sessionHash = ''.join(map(chr, session_hash))
 
             # Connect
             self.lobby_data_connect()
@@ -97,12 +114,12 @@ class HXIClient:
             # Map
             self.map_login_to_zone()
             self.connected = True
-        elif in_data[0] == 0x02:
+        elif result == 0x02:
             print("Failed to login. Invalid username or password.")
             exit(-1)
         else:
             print(
-                f"Failed to login. Code: {in_data[0]})",
+                f"Failed to login. Code: {result})",
             )
             exit(-1)
 

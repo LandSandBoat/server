@@ -57,6 +57,8 @@ void handler_session::start()
 
 void handler_session::do_read()
 {
+    std::memset(buffer_.data(), 0, buffer_.size());
+
     // clang-format off
     socket_.next_layer().async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
     [this, self = shared_from_this()](std::error_code ec, std::size_t length)

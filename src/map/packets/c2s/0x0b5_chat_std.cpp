@@ -285,21 +285,24 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Unity:
         {
-            if (PChar->PUnityChat != nullptr)
+            if (!PChar->PUnityChat)
             {
-                message::send(ipc::ChatMessageUnity{
-                    .unityLeaderId = PChar->PUnityChat->getLeader(),
-                    .senderId      = PChar->id,
-                    .senderName    = PChar->getName(),
-                    .message       = rawMessage,
-                    .zoneId        = PChar->getZone(),
-                    .gmLevel       = PChar->m_GMlevel,
-                });
-
-                roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", rawMessage));
-
-                auditUnity(PChar, rawMessage);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::UnityNotParticipating);
+                return;
             }
+
+            message::send(ipc::ChatMessageUnity{
+                .unityLeaderId = PChar->PUnityChat->getLeader(),
+                .senderId      = PChar->id,
+                .senderName    = PChar->getName(),
+                .message       = rawMessage,
+                .zoneId        = PChar->getZone(),
+                .gmLevel       = PChar->m_GMlevel,
+            });
+
+            roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", rawMessage));
+
+            auditUnity(PChar, rawMessage);
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::LinkshellPvp:

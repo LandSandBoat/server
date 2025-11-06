@@ -66,8 +66,8 @@ m:addOverride('xi.player.onPlayerLevelUp', function(player)
     for _, level in pairs(levelMilestones) do
         if player:getMainLvl() == level then
             checkWorldFirstServerVar(player,
-                string.format('JOB_%u_%s', level, xi.jobNames[player:getMainJob()][1]),
-                string.format('%s has been the first player to reach level %u on %s!', player:getName(), level, xi.jobNames[player:getMainJob()][2]))
+                string.format('JOB_%u_%s', level, xi.jobName[player:getMainJob()][1]),
+                string.format('%s has been the first player to reach level %u on %s!', player:getName(), level, xi.jobName[player:getMainJob()][2]))
         end
     end
 end)

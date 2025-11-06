@@ -168,7 +168,7 @@ auto CMobController::CheckDetection(CBattleEntity* PTarget) -> bool
         TapDeaggroTime();
     }
 
-    const auto additionalDeaggroTime = std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
+    const auto additionalDeaggroTime = PMob->m_roamFlags & ROAMFLAG_WORM ? std::chrono::seconds(0) : std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
     return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s + additionalDeaggroTime);
 }
 
@@ -1111,6 +1111,8 @@ void CMobController::DoRoamTick(timer::time_point tick)
                             // don't move around until i'm fully in the ground
                             // Transition underground takes 2s, allow extra time for any magic effect to finish
                             Wait(3s);
+                            PMob->PAI->QueueAction(queueAction_t(3s, false, [](CBaseEntity* MobEntity)
+                                                                 { MobEntity->status = STATUS_TYPE::INVISIBLE; }));
                         }
                     }
                     else if (PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
@@ -1189,6 +1191,7 @@ void CMobController::FollowRoamPath()
                 PMob->loc.zone->UpdateEntityPacket(PMob, ENTITY_UPDATE, UPDATE_POS);
 
                 // don't re-enter this block, but don't roam until emerging
+                PMob->status = STATUS_TYPE::UPDATE;
                 PMob->SetUntargetable(false);
                 Wait(2s);
                 PMob->PAI->QueueAction(queueAction_t(2s, false, [](CBaseEntity* MobEntity)
