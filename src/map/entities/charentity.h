@@ -483,7 +483,7 @@ public:
     //     : instead of checking for entityId.id != 0, etc.
     // TODO: We don't want to replace this with just an ID, because in the future EntityID_t will be able to
     //     : disambiguate between entities who have been rebuilt (players, dynamic entities) and have the same ID.
-    xi::optional<EntityID_t> WideScanTarget;
+    xi::Maybe<EntityID_t> wideScanTarget_ = xi::null;
 
     // NOTE: These are all keyed by id
     SpawnIDList_t SpawnPCList;    // list of visible characters
@@ -671,7 +671,7 @@ protected:
 
 private:
     // Lazily initialized AMAN data
-    xi::optional<CAMANContainer> m_AMAN;
+    xi::Maybe<CAMANContainer> aman_;
 
     std::unique_ptr<CItemContainer> m_Inventory;
     std::unique_ptr<CItemContainer> m_Mogsafe;

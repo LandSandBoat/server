@@ -149,6 +149,15 @@ if(pcg-cpp_ADDED) # pcg-cpp does not include cmake
 endif()
 
 CPMAddPackage(
+    NAME optional
+    GITHUB_REPOSITORY TartanLlama/optional
+    GIT_TAG v1.1.0
+    OPTIONS
+        "OPTIONAL_BUILD_TESTS OFF"
+        "OPTIONAL_BUILD_PACKAGES OFF"
+) # defines: tl::optional
+
+CPMAddPackage(
     NAME asio
     VERSION 1.32.0
     GITHUB_REPOSITORY chriskohlhoff/asio
@@ -266,6 +275,7 @@ set(SHARED_EXTERNAL_LIBS
     asio
     alpaca
     magic_enum
+    tl::optional
 )
 
 if(WIN32)

@@ -209,8 +209,6 @@ CCharEntity::CCharEntity()
 
     BazaarID.clean();
 
-    WideScanTarget = std::nullopt;
-
     lastTradeInvite = {};
     TradePending.clean();
     InvitePending.clean();
@@ -767,11 +765,11 @@ auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 
 auto CCharEntity::aman() -> CAMANContainer&
 {
-    if (!m_AMAN)
+    if (!aman_)
     {
-        m_AMAN = CAMANContainer(this);
+        aman_ = CAMANContainer(this);
     }
-    return *m_AMAN;
+    return *aman_;
 }
 
 int8 CCharEntity::getShieldSize()

@@ -19,17 +19,19 @@
 ===========================================================================
 */
 
-#include "0x0f6_tracking_end.h"
+#pragma once
 
-#include "entities/charentity.h"
+#include <optional>
 
-auto GP_CLI_COMMAND_TRACKING_END::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+namespace xi
 {
-    // No parameter to validate.
-    return PacketValidator();
-}
 
-void GP_CLI_COMMAND_TRACKING_END::process(MapSession* PSession, CCharEntity* PChar) const
-{
-    PChar->wideScanTarget_ = xi::null;
-}
+//
+// null
+//
+// An alias for std::nullopt for brevity.
+//
+
+constexpr std::nullopt_t null = std::nullopt;
+
+} // namespace xi

@@ -33,7 +33,7 @@
 namespace settings
 {
 
-using SettingsVariant = std::variant<bool, double, std::string>;
+using SettingsVariant = xi::Variant<bool, double, std::string>;
 extern std::unordered_map<std::string, SettingsVariant> settingsMap;
 
 void init();
@@ -63,82 +63,80 @@ T get(std::string name)
         auto& variant = (*maybeResult).second;
 
         // arg = type held inside the variant
-        std::visit(
-            xi::overload{
-                [&](const bool& arg)
+        variant.visit(xi::overload{
+            [&](const bool& arg)
+            {
+                if constexpr (std::is_same_v<T, bool>)
                 {
-                    if constexpr (std::is_same_v<T, bool>)
-                    {
-                        out = arg;
-                    }
-                    else if constexpr (std::is_floating_point_v<T>)
-                    {
-                        out = static_cast<double>(arg);
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
-                    {
-                        out = static_cast<int>(arg);
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
-                    {
-                        out = static_cast<unsigned int>(arg);
-                    }
-                    else if constexpr (std::is_same_v<T, std::string>)
-                    {
-                        out = std::string(arg ? "true" : "false");
-                    }
-                },
-                [&](const double& arg)
+                    out = arg;
+                }
+                else if constexpr (std::is_floating_point_v<T>)
                 {
-                    if constexpr (std::is_same_v<T, bool>)
-                    {
-                        out = static_cast<bool>(arg);
-                    }
-                    else if constexpr (std::is_floating_point_v<T>)
-                    {
-                        out = arg;
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
-                    {
-                        out = static_cast<int>(arg);
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
-                    {
-                        out = static_cast<unsigned int>(arg);
-                    }
-                    else if constexpr (std::is_same_v<T, std::string>)
-                    {
-                        out = fmt::format("{}", arg);
-                    }
-                },
-                [&](const std::string& arg)
+                    out = static_cast<double>(arg);
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
                 {
-                    bool isTruthy = !arg.empty() && arg != "false" && arg != "0";
-                    std::ignore   = isTruthy;
-
-                    if constexpr (std::is_same_v<T, bool>)
-                    {
-                        out = isTruthy;
-                    }
-                    else if constexpr (std::is_floating_point_v<T>)
-                    {
-                        out = static_cast<double>(isTruthy);
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
-                    {
-                        out = static_cast<int>(isTruthy);
-                    }
-                    else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
-                    {
-                        out = static_cast<unsigned int>(isTruthy);
-                    }
-                    else if constexpr (std::is_same_v<T, std::string>)
-                    {
-                        out = arg;
-                    }
-                },
+                    out = static_cast<int>(arg);
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
+                {
+                    out = static_cast<unsigned int>(arg);
+                }
+                else if constexpr (std::is_same_v<T, std::string>)
+                {
+                    out = std::string(arg ? "true" : "false");
+                }
             },
-            variant);
+            [&](const double& arg)
+            {
+                if constexpr (std::is_same_v<T, bool>)
+                {
+                    out = static_cast<bool>(arg);
+                }
+                else if constexpr (std::is_floating_point_v<T>)
+                {
+                    out = arg;
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
+                {
+                    out = static_cast<int>(arg);
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
+                {
+                    out = static_cast<unsigned int>(arg);
+                }
+                else if constexpr (std::is_same_v<T, std::string>)
+                {
+                    out = fmt::format("{}", arg);
+                }
+            },
+            [&](const std::string& arg)
+            {
+                bool isTruthy = !arg.empty() && arg != "false" && arg != "0";
+                std::ignore   = isTruthy;
+
+                if constexpr (std::is_same_v<T, bool>)
+                {
+                    out = isTruthy;
+                }
+                else if constexpr (std::is_floating_point_v<T>)
+                {
+                    out = static_cast<double>(isTruthy);
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_signed_v<T>)
+                {
+                    out = static_cast<int>(isTruthy);
+                }
+                else if constexpr (std::is_integral_v<T> && std::is_unsigned_v<T>)
+                {
+                    out = static_cast<unsigned int>(isTruthy);
+                }
+                else if constexpr (std::is_same_v<T, std::string>)
+                {
+                    out = arg;
+                }
+            },
+        });
         return out;
     }
 

@@ -147,23 +147,21 @@ HTTPServer::HTTPServer()
                                 }
                             }
 
-                            std::visit(
-                                xi::overload{
-                                    [&](const bool& arg)
-                                    {
-                                        j[key] = arg;
-                                    },
-                                    [&](const double& arg)
-                                    {
-                                        j[key] = arg;
-                                    },
-                                    [&](const std::string& arg)
-                                    {
-                                        // JSON can't handle non-ASCII characters, so strip them out
-                                        j[key] = utils::toASCII(arg, '?');
-                                    },
+                            variant.visit(xi::overload{
+                                [&](const bool& arg)
+                                {
+                                    j[key] = arg;
                                 },
-                                variant);
+                                [&](const double& arg)
+                                {
+                                    j[key] = arg;
+                                },
+                                [&](const std::string& arg)
+                                {
+                                    // JSON can't handle non-ASCII characters, so strip them out
+                                    j[key] = utils::toASCII(arg, '?');
+                                },
+                            });
                         });
 
                     res.set_content(j.dump(), "application/json");

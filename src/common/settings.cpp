@@ -108,15 +108,15 @@ void init()
 
             if (innerValObj.is<bool>())
             {
-                settingsMap[key] = innerValObj.as<bool>();
+                settingsMap.insert_or_assign(key, innerValObj.as<bool>());
             }
             else if (innerValObj.is<double>())
             {
-                settingsMap[key] = innerValObj.as<double>();
+                settingsMap.insert_or_assign(key, innerValObj.as<double>());
             }
             else if (innerValObj.is<std::string>())
             {
-                settingsMap[key] = innerValObj.as<std::string>();
+                settingsMap.insert_or_assign(key, innerValObj.as<std::string>());
             }
         }
     }
@@ -173,15 +173,15 @@ void init()
 
             if (innerValObj.is<bool>())
             {
-                settingsMap[key] = innerValObj.as<bool>();
+                settingsMap.insert_or_assign(key, innerValObj.as<bool>());
             }
             else if (innerValObj.is<double>())
             {
-                settingsMap[key] = innerValObj.as<double>();
+                settingsMap.insert_or_assign(key, innerValObj.as<double>());
             }
             else if (innerValObj.is<std::string>())
             {
-                settingsMap[key] = innerValObj.as<std::string>();
+                settingsMap.insert_or_assign(key, innerValObj.as<std::string>());
             }
 
             // Apply any environment variables over the default/user settings.
@@ -200,11 +200,11 @@ void init()
                 // Therefor we need to check if the value is a number.
                 if (isNumber(value))
                 {
-                    settingsMap[key] = std::stod(value);
+                    settingsMap.insert_or_assign(key, std::stod(value));
                 }
                 else
                 {
-                    settingsMap[key] = value;
+                    settingsMap.insert_or_assign(key, value);
                 }
             }
         }

@@ -7815,7 +7815,7 @@ void removeCharFromZone(CCharEntity* PChar)
     PChar->TradePending.clean();
     PChar->InvitePending.clean();
 
-    PChar->WideScanTarget = std::nullopt;
+    PChar->wideScanTarget_ = xi::null;
 
     if (PChar->animation == ANIMATION_ATTACK)
     {

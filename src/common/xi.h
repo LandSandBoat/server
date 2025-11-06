@@ -40,6 +40,8 @@
 #include "helpers/overload.h"
 
 #include "types/fn.h"
+#include "types/maybe.h"
+#include "types/variant.h"
 
 namespace xi
 {
@@ -53,121 +55,6 @@ namespace xi
 // - Forwarding all of the expected and useful functions from the underlying standard library type
 // - Not forwarding/hiding the ones that are not useful
 // - Adding new functions that are useful and convenient
-
-// A wrapper around std::optional to allow usage of object.apply([](auto& obj) { ... });
-// https://en.cppreference.com/w/cpp/utility/optional
-template <typename T>
-class optional
-{
-public:
-    constexpr optional() = default;
-
-    constexpr optional(std::nullopt_t) noexcept
-    : m_value(std::nullopt)
-    {
-    }
-
-    constexpr optional(T&& value)
-    : m_value(std::forward<T>(value))
-    {
-    }
-
-    constexpr optional(const T& value)
-    : m_value(value)
-    {
-    }
-
-    constexpr optional(const optional& other)                = default;
-    constexpr optional(optional&& other) noexcept            = default;
-    constexpr optional& operator=(const optional& other)     = default;
-    constexpr optional& operator=(optional&& other) noexcept = default;
-    ~optional()                                              = default;
-
-    constexpr optional& operator=(std::nullopt_t) noexcept
-    {
-        m_value = std::nullopt;
-        return *this;
-    }
-
-    constexpr optional& operator=(T&& value)
-    {
-        m_value = std::move(value);
-        return *this;
-    }
-
-    template <typename F>
-    constexpr bool apply(F&& f) &
-    {
-        if (m_value)
-        {
-            f(*m_value);
-        }
-        return m_value.has_value();
-    }
-
-    template <typename F>
-    constexpr bool apply(F&& f) const&
-    {
-        if (m_value)
-        {
-            f(*m_value);
-        }
-        return m_value.has_value();
-    }
-
-    constexpr explicit operator bool() const noexcept
-    {
-        return m_value.has_value();
-    }
-
-    constexpr T& operator*() &
-    {
-        return *m_value;
-    }
-
-    constexpr const T& operator*() const&
-    {
-        return *m_value;
-    }
-
-    constexpr T* operator->() noexcept
-    {
-        return m_value.operator->();
-    }
-
-    constexpr const T* operator->() const noexcept
-    {
-        return m_value.operator->();
-    }
-
-    constexpr void reset() noexcept
-    {
-        m_value.reset();
-    }
-
-    template <typename... Args>
-    constexpr T& emplace(Args&&... args)
-    {
-        return m_value.emplace(std::forward<Args>(args)...);
-    }
-
-    constexpr bool operator==(const optional& other) const
-    {
-        return m_value == other.m_value;
-    }
-
-    constexpr bool operator!=(const optional& other) const
-    {
-        return m_value != other.m_value;
-    }
-
-private:
-    std::optional<T> m_value = std::nullopt;
-};
-
-// TODO: A wrapper around std::variant to allow usage of:
-//     :   object.visit(overload{...});
-//     :   object.get<T>() -> xi::optional<T>;
 
 // https://github.com/microsoft/GSL/blob/main/include/gsl/util
 // final_action allows you to ensure something gets run at the end of a scope

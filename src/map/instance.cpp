@@ -95,16 +95,29 @@ void CInstance::LoadInstance()
     {
         m_instanceName = rset->get<std::string>("instance_name");
 
-        m_timeLimit                       = std::chrono::minutes(rset->get<uint32>("time_limit"));
-        m_entrance                        = rset->get<uint16>("entrance_zone");
-        m_entryloc.x                      = rset->get<float>("start_x");
-        m_entryloc.y                      = rset->get<float>("start_y");
-        m_entryloc.z                      = rset->get<float>("start_z");
-        m_entryloc.rotation               = rset->get<uint8>("start_rot");
-        m_zone_music_override.m_songDay   = !rset->isNull("music_day") ? xi::optional(rset->get<uint16>("music_day")) : std::nullopt;
-        m_zone_music_override.m_songNight = !rset->isNull("music_night") ? xi::optional(rset->get<uint16>("music_night")) : std::nullopt;
-        m_zone_music_override.m_bSongS    = !rset->isNull("battlesolo") ? xi::optional(rset->get<uint16>("battlesolo")) : std::nullopt;
-        m_zone_music_override.m_bSongM    = !rset->isNull("battlemulti") ? xi::optional(rset->get<uint16>("battlemulti")) : std::nullopt;
+        m_timeLimit         = std::chrono::minutes(rset->get<uint32>("time_limit"));
+        m_entrance          = rset->get<uint16>("entrance_zone");
+        m_entryloc.x        = rset->get<float>("start_x");
+        m_entryloc.y        = rset->get<float>("start_y");
+        m_entryloc.z        = rset->get<float>("start_z");
+        m_entryloc.rotation = rset->get<uint8>("start_rot");
+
+        if (!rset->isNull("music_day"))
+        {
+            m_zone_music_override.m_songDay = rset->get<uint16>("music_day");
+        }
+        if (!rset->isNull("music_night"))
+        {
+            m_zone_music_override.m_songNight = rset->get<uint16>("music_night");
+        }
+        if (!rset->isNull("battlesolo"))
+        {
+            m_zone_music_override.m_bSongS = rset->get<uint16>("battlesolo");
+        }
+        if (!rset->isNull("battlemulti"))
+        {
+            m_zone_music_override.m_bSongM = rset->get<uint16>("battlemulti");
+        }
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern

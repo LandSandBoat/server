@@ -39,7 +39,7 @@ namespace conquest
 
 // Lazily initialized conquest data
 // TODO: This should be a member of _something_
-xi::optional<ConquestData> conquestData;
+xi::Maybe<ConquestData> conquestData;
 
 ConquestData& GetConquestData()
 {
