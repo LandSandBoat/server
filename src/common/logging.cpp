@@ -130,7 +130,7 @@ const std::vector<std::string> logNames = {
     "trace",
 };
 
-void logging::InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate)
+void logging::InitializeLog(const std::string& serverName, const std::string& logFile, AppendDate appendDate)
 {
     ServerName = serverName;
 

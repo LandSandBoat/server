@@ -39,6 +39,7 @@
 #include "helpers/eraseif.h"
 #include "helpers/overload.h"
 
+#include "types/flag.h"
 #include "types/fn.h"
 #include "types/maybe.h"
 #include "types/variant.h"

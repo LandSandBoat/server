@@ -204,7 +204,7 @@ void Application::tryRestoreQuickEditMode() const
 void Application::prepareLogging()
 {
     auto logFile    = fmt::format("log/{}-server.log", serverName_);
-    bool appendDate = false;
+    auto appendDate = logging::AppendDate::No;
 
     //
     // Regular setup
@@ -217,7 +217,7 @@ void Application::prepareLogging()
 
     if (args_->get<bool>("--append-date"))
     {
-        appendDate = true;
+        appendDate = logging::AppendDate::Yes;
     }
 
     logging::InitializeLog(serverName_, logFile, appendDate);

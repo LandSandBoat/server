@@ -24,6 +24,7 @@
 #include "cbasetypes.h"
 #include "macros.h"
 #include "tracy.h"
+#include "xi.h"
 
 #include <string>
 #include <string_view>
@@ -49,7 +50,9 @@ T get(std::string);
 namespace logging
 {
 
-void InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate);
+using AppendDate = xi::Flag<struct AppendDateTag>;
+
+void InitializeLog(const std::string& serverName, const std::string& logFile, AppendDate appendDate);
 void ShutDown();
 
 void SetPattern(const std::string& str);
@@ -61,10 +64,8 @@ void tapWarningOrError();
 
 } // namespace logging
 
-// clang-format off
-
 template <typename T>
-std::string asStringFromUntrustedSource(const T* ptr)
+auto asStringFromUntrustedSource(const T* ptr) -> std::string
 {
     if (!ptr)
     {
@@ -78,7 +79,7 @@ std::string asStringFromUntrustedSource(const T* ptr)
 }
 
 template <typename T>
-std::string asStringFromUntrustedSource(const T* ptr, size_t max_size)
+auto asStringFromUntrustedSource(const T* ptr, size_t max_size) -> std::string
 {
     if (!ptr)
     {
@@ -89,6 +90,8 @@ std::string asStringFromUntrustedSource(const T* ptr, size_t max_size)
     const auto len = strnlen(str, max_size);
     return std::string(str, len);
 }
+
+// clang-format off
 
 // Helper for allowing `enum` and `enum class` types to be formatted
 // as their underlying numeric type.
