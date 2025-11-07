@@ -58,8 +58,14 @@ INSERT INTO `mob_pool_mods` VALUES (289,4,4,1); -- SIGHT_RANGE: 4
 -- Battle Bugard
 INSERT INTO `mob_pool_mods` VALUES (370,28,5,1); -- EXP_BONUS: 5
 
+-- Battue Bats
+INSERT INTO `mob_pool_mods` VALUES (372,69,1,1); -- NO_LINK: 1
+
 -- Biast
 INSERT INTO `mob_pool_mods` VALUES (410,236,20,0); -- HUMANOID_KILLER: 20
+
+-- Blade Bat
+INSERT INTO `mob_pool_mods` VALUES (443,69,1,1); -- NO_LINK: 1
 
 -- Bladmall
 INSERT INTO `mob_pool_mods` VALUES (444,23,23,1); -- IMMUNITY: 23
@@ -83,6 +89,9 @@ INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
 INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
 INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200
 INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
+
+-- Cheiroptera (Ghelsba Outpost)
+INSERT INTO `mob_pool_mods` VALUES (706,69,1,1); -- NO_LINK: 1
 
 -- Cerebrator
 INSERT INTO `mob_pool_mods` VALUES (681,368,10,0); -- REGAIN: 10
@@ -266,6 +275,9 @@ INSERT INTO `mob_pool_mods` VALUES (2834,574,100,0); -- WSD+% (Backhand Blow): 1
 INSERT INTO `mob_pool_mods` VALUES (2840,368,70,0); -- REGAIN: 70
 INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50
 
+-- Night Bats
+INSERT INTO `mob_pool_mods` VALUES(2877,69,1,1); -- NO_LINK: 1
+
 -- Nunyunuwi
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0); -- REGEN: 100
 
@@ -339,6 +351,12 @@ INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
 
 -- Snoll Tzar
 INSERT INTO `mob_pool_mods` VALUES (3684,3,30,1); -- MP_BASE: 30
+
+-- Spectacled Bats (Ghelsba Outpost)
+INSERT INTO `mob_pool_mods` VALUEs(3721,69,1,1); -- NO_LINK: 1
+
+-- Star Bat
+INSERT INTO `mob_pool_mods` VALUES(3756,69,1,1); -- NO_LINK: 1
 
 -- Statue Prototype
 INSERT INTO `mob_pool_mods` VALUES (3759,163,-1000,0); -- DMGMAGIC: -1000
