@@ -139,10 +139,31 @@ with open(from_server_path("sql/item_basic.sql"), mode="r", errors="ignore") as 
         split = process_matches(sql_line, line)
 
         # if the item can be sold to the shop and the sell price isn't 0
-        if len(split) != 0 and split[-2] == "0" and split[-1] != "0":
+        if len(split) != 0 and not int(split[-3]) & 0x1000 and split[-1] != "0":
             sql_items[split[0]] = split[-1]
 
             log(f"Added item {split[0]} with base sell price {split[-1]}")
+
+# process modules containing vendor npcs
+module_sql_line = "UPDATE `item_basic` SET "
+with os.scandir(from_server_path("modules")) as module_iterator:
+    for module_entry in module_iterator:
+        for root, dirs, files in os.walk(module_entry.path):
+            for file in files:
+                if file.endswith(".sql"):
+                    file_path = os.path.join(root, file)
+                    with open(file_path, mode="r", errors="ignore") as f:
+                        content = f.read()
+                        if "item_basic" in content:
+                            for line in content.splitlines():
+                                match = re.search(r"(`sell_price`\s?=\s?\d+).*(`item_id`\s?=\s?\d+)", line, re.IGNORECASE)
+                                if match:
+                                    sell_price_part = match.group(1)
+                                    item_id_part = match.group(2)
+                                    sell_price = re.search(r"\d+", sell_price_part).group(0)
+                                    item_id = re.search(r"\d+", item_id_part).group(0)
+                                    log(f"Added item {item_id} with base sell price {sell_price} from module {module_entry.name}")
+                                    sql_items[item_id] = sell_price
 
 # iterate over npcs in ../scripts/zones/.../npcs/*.lua
 with os.scandir(from_server_path("scripts/zones")) as iterator:
@@ -155,6 +176,18 @@ with os.scandir(from_server_path("scripts/zones")) as iterator:
                     for npc in npc_iterator:
                         if npc.is_file():
                             process_npc(npc.path)
+
+# process modules containing vendor npcs
+with os.scandir(from_server_path("modules")) as module_iterator:
+    for module_entry in module_iterator:
+        for root, dirs, files in os.walk(module_entry.path):
+            for file in files:
+                if file.endswith(".lua"):
+                    file_path = os.path.join(root, file)
+                    with open(file_path, mode="r", errors="ignore") as f:
+                        content = f.read()
+                        if "xi.shop" in content:
+                            process_npc(file_path)
 
 # process guild_shops.sql for item ids and min_price
 sql_line = "INSERT INTO `guild_shops` VALUES"
