@@ -88,14 +88,12 @@ GP_SERV_COMMAND_PBX_RESULT::GP_SERV_COMMAND_PBX_RESULT(GP_CLI_COMMAND_PBX_COMMAN
             if (boxid == GP_CLI_COMMAND_PBX_BOXNO::Incoming)
             {
                 packet.State.Stat = 0x07;
-                std::memcpy(packet.State.box_state.pbox.Recv.From, PItem->getSender().c_str(),
-                            std::min(PItem->getSender().size(), sizeof(packet.State.box_state.pbox.Recv.From))); // Sender's name.  Client disables "Return" if it starts with "AH"
+                std::memcpy(packet.State.box_state.pbox.Recv.From, PItem->getSender().c_str(), std::min(PItem->getSender().size(), sizeof(packet.State.box_state.pbox.Recv.From))); // Sender's name.  Client disables "Return" if it starts with "AH"
             }
             else
             {
-                packet.State.Stat = PItem->isSent() ? 0x03 : 0x05; // 0x05 in send: canceled. other values are unknown
-                std::memcpy(packet.State.box_state.pbox.Send.To, PItem->getReceiver().c_str(),
-                            std::min(PItem->getReceiver().size(), sizeof(packet.State.box_state.pbox.Send.To))); // Receiver's name.  Client disables "Return" if it starts with "AH"
+                packet.State.Stat = PItem->isSent() ? 0x03 : 0x05;                                                                                                                  // 0x05 in send: canceled. other values are unknown
+                std::memcpy(packet.State.box_state.pbox.Send.To, PItem->getReceiver().c_str(), std::min(PItem->getReceiver().size(), sizeof(packet.State.box_state.pbox.Send.To))); // Receiver's name.  Client disables "Return" if it starts with "AH"
             }
         }
         if (action == GP_CLI_COMMAND_PBX_COMMAND::Set)

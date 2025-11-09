@@ -25,7 +25,7 @@
 #include "common/utils.h"
 #include "entities/charentity.h"
 
-GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, const CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender)
+GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, const CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender)
 {
     auto& packet = this->data();
 
@@ -33,7 +33,7 @@ GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, con
     const auto packetSize  = sizeof(GP_SERV_HEADER) + sizeof(packet.Kind) + sizeof(packet.Attr) + sizeof(packet.Data) + sizeof(packet.sName) + messageSize;
     this->setSize(roundUpToNearestFour(packetSize));
 
-    std::string const& name = sender.empty() ? PChar->getName() : sender;
+    const std::string& name = sender.empty() ? PChar->getName() : sender;
     packet.Kind             = MessageType;
     packet.Data             = PChar->getZone();
     if (PChar->visibleGmLevel >= 3 && sender.empty())

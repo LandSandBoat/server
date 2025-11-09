@@ -3,7 +3,7 @@
 
     npcUtil.popFromQM(player, qm, mobId, params)
     npcUtil.pickNewPosition(npc, positionTable, allowCurrentPosition)
-    npcUtil.giveCurrency(player, currency, amount)
+    npcUtil.giveCurrency(player, currency, amount, useTreasurePoolMsg)
     npcUtil.giveItem(player, items, params)
     npcUtil.giveKeyItem(player, keyitems)
     npcUtil.completeMission(player, logId, missionId, params)

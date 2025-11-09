@@ -7,7 +7,7 @@ extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)>
 
 class RenamerModule : public CPPModule
 {
-    void SendListPacket(CCharEntity* PChar, std::string const& data)
+    void SendListPacket(CCharEntity* PChar, const std::string& data)
     {
         if (data.empty())
         {

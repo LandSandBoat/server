@@ -1,33 +1,142 @@
 ﻿---
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 # We base things of WebKit + Allman braces
-# BasedOnStyle: WebKit
+# Compatible with clang-format-20
+Language: Cpp
+
+# Access modifiers
 AccessModifierOffset: -4
-AlignConsecutiveMacros: true
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: LogicalBlock
+IndentAccessModifiers: false
+
+# Alignment settings
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: None
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Right
+AlignOperands: Align
 AlignTrailingComments: true
+
+# Short constructs
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
-AlwaysBreakTemplateDeclarations: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+
+# Note: LambdaBodyIndentation not available in clang-format-20
+
+# Template declarations
+AlwaysBreakTemplateDeclarations: Yes
+
+# Braces - Allman style
 BreakBeforeBraces: Allman
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: true
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+  AfterExternBlock: true
+
+# Constructor and inheritance
 BreakConstructorInitializers: BeforeComma
-# This is just to make clang-format chill out! Use your best judgement!
-ColumnLimit: 0
-CompactNamespaces: 'false'
+BreakInheritanceList: BeforeColon
 ConstructorInitializerIndentWidth: 0
-Cpp11BracedListStyle: 'false'
-IndentCaseLabels: 'true'
+PackConstructorInitializers: BinPack
+
+# Line limits and wrapping
+ColumnLimit: 0 # Use your best judgement
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+BinPackArguments: false
+BinPackParameters: false
+
+# Namespaces
+CompactNamespaces: false
+NamespaceIndentation: None
+
+# Braced lists and initializers
+Cpp11BracedListStyle: false
+
+# Indentation
 IndentWidth: 4
-KeepEmptyLinesAtTheStartOfBlocks: 'false'
-Language: Cpp
-NamespaceIndentation: All
+IndentCaseLabels: true
+IndentPPDirectives: None
+IndentWrappedFunctionNames: false
+ContinuationIndentWidth: 4
+
+# Empty lines
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+
+# Pointer and reference alignment
 PointerAlignment: Left
-ReflowComments: true
-SortIncludes: 'true'
-SortUsingDeclarations: 'true'
-SpaceBeforeParens: ControlStatements
+ReferenceAlignment: Pointer
+
+# Note: QualifierAlignment not available in clang-format-20, use manual const placement
+
+# Comments
+ReflowComments: Always
 SpacesBeforeTrailingComments: 1
-Standard: Cpp11
+
+# Include sorting
+SortIncludes: true
+SortUsingDeclarations: LexicographicNumeric
+
+# Spacing
+SpaceBeforeParens: ControlStatements
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDefinitionName: false
+  AfterFunctionDeclarationName: false
+  AfterIfMacros: true
+  BeforeNonEmptyParentheses: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpacesInAngles: Never
+SpacesInContainerLiterals: true
+SpacesInParens: Never
+SpacesInSquareBrackets: false
+
+# C++ standard
+Standard: Latest
+
+# Tabs
 UseTab: Never
+TabWidth: 4
+
+# Binary operators
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+
+# String handling
+BreakStringLiterals: true
+
+# Other formatting options
+FixNamespaceComments: true
 
 ...

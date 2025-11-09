@@ -37,109 +37,111 @@
 
 namespace
 {
-    // Mission log IDs - used for xi.mission.id.*
-    const std::unordered_map<uint8, std::string> missionLogIdMap = {
-        { 0, "sandoria" },
-        { 1, "bastok" },
-        { 2, "windurst" },
-        { 3, "zilart" },
-        { 4, "toau" },
-        { 5, "wotg" },
-        { 6, "cop" },
-        { 7, "assault" },
-        { 8, "campaign" },
-        { 9, "anov" },
-        { 10, "amk" },
-        { 11, "asa" },
-        { 12, "roe" },
-        { 13, "voidwatch" },
-        { 14, "abyssea" },
-        { 15, "soa" },
-        { 16, "rov" }
-    };
 
-    // Quest log IDs - used for xi.quest.id.*
-    const std::unordered_map<uint8, std::string> questLogIdMap = {
-        { 0, "sandoria" },
-        { 1, "bastok" },
-        { 2, "windurst" },
-        { 3, "jeuno" },
-        { 4, "otherAreas" },
-        { 5, "outlands" },
-        { 6, "ahtUrhgan" },
-        { 7, "crystalWar" },
-        { 8, "abyssea" },
-        { 9, "adoulin" },
-        { 10, "coalition" }
-    };
+// Mission log IDs - used for xi.mission.id.*
+const std::unordered_map<uint8, std::string> missionLogIdMap = {
+    { 0, "sandoria" },
+    { 1, "bastok" },
+    { 2, "windurst" },
+    { 3, "zilart" },
+    { 4, "toau" },
+    { 5, "wotg" },
+    { 6, "cop" },
+    { 7, "assault" },
+    { 8, "campaign" },
+    { 9, "anov" },
+    { 10, "amk" },
+    { 11, "asa" },
+    { 12, "roe" },
+    { 13, "voidwatch" },
+    { 14, "abyssea" },
+    { 15, "soa" },
+    { 16, "rov" }
+};
 
-    auto getEnumKey = [](const std::string& enumPath, const uint32 value) -> std::string
+// Quest log IDs - used for xi.quest.id.*
+const std::unordered_map<uint8, std::string> questLogIdMap = {
+    { 0, "sandoria" },
+    { 1, "bastok" },
+    { 2, "windurst" },
+    { 3, "jeuno" },
+    { 4, "otherAreas" },
+    { 5, "outlands" },
+    { 6, "ahtUrhgan" },
+    { 7, "crystalWar" },
+    { 8, "abyssea" },
+    { 9, "adoulin" },
+    { 10, "coalition" }
+};
+
+auto getEnumKey = [](const std::string& enumPath, const uint32 value) -> std::string
+{
+    // Split the path by '.' and navigate to the enum table
+    sol::table current = lua.globals();
+
+    size_t start = 0;
+    size_t end   = enumPath.find('.');
+
+    while (end != std::string::npos)
     {
-        // Split the path by '.' and navigate to the enum table
-        sol::table current = lua.globals();
+        std::string part = enumPath.substr(start, end - start);
 
-        size_t start = 0;
-        size_t end   = enumPath.find('.');
-
-        while (end != std::string::npos)
+        // Check if this part is a number (for indexed tables)
+        sol::object next;
+        if (std::ranges::all_of(part, ::isdigit))
         {
-            std::string part = enumPath.substr(start, end - start);
-
-            // Check if this part is a number (for indexed tables)
-            sol::object next;
-            if (std::ranges::all_of(part, ::isdigit))
-            {
-                next = current[std::stoi(part)];
-            }
-            else
-            {
-                next = current[part];
-            }
-
-            if (!next.valid() || !next.is<sol::table>())
-            {
-                return std::to_string(value); // Path invalid
-            }
-
-            current = next.as<sol::table>();
-            start   = end + 1;
-            end     = enumPath.find('.', start);
+            next = current[std::stoi(part)];
+        }
+        else
+        {
+            next = current[part];
         }
 
-        if (start < enumPath.length())
+        if (!next.valid() || !next.is<sol::table>())
         {
-            std::string lastPart = enumPath.substr(start);
-            sol::object finalTable;
-
-            if (std::ranges::all_of(lastPart, ::isdigit))
-            {
-                finalTable = current[std::stoi(lastPart)];
-            }
-            else
-            {
-                finalTable = current[lastPart];
-            }
-
-            if (!finalTable.valid() || !finalTable.is<sol::table>())
-            {
-                return std::to_string(value);
-            }
-
-            current = finalTable.as<sol::table>();
+            return std::to_string(value); // Path invalid
         }
 
-        // Iterate through the table to find the matching value
-        for (const auto& [key, val] : current)
+        current = next.as<sol::table>();
+        start   = end + 1;
+        end     = enumPath.find('.', start);
+    }
+
+    if (start < enumPath.length())
+    {
+        std::string lastPart = enumPath.substr(start);
+        sol::object finalTable;
+
+        if (std::ranges::all_of(lastPart, ::isdigit))
         {
-            if (val.is<uint32>() && val.as<uint32>() == value)
-            {
-                return key.as<std::string>();
-            }
+            finalTable = current[std::stoi(lastPart)];
+        }
+        else
+        {
+            finalTable = current[lastPart];
         }
 
-        // Default to provided value if not found
-        return std::to_string(value);
-    };
+        if (!finalTable.valid() || !finalTable.is<sol::table>())
+        {
+            return std::to_string(value);
+        }
+
+        current = finalTable.as<sol::table>();
+    }
+
+    // Iterate through the table to find the matching value
+    for (const auto& [key, val] : current)
+    {
+        if (val.is<uint32>() && val.as<uint32>() == value)
+        {
+            return key.as<std::string>();
+        }
+    }
+
+    // Default to provided value if not found
+    return std::to_string(value);
+};
+
 } // namespace
 
 // Common assertions for a TestEntity/TestClientEntityPair

@@ -77,24 +77,26 @@ struct campaignzone_t
 // This packet is sent by the server to inform the client of the campaign and colonization map information.
 namespace GP_SERV_COMMAND_INFLUENCE
 {
-    // Mode=2 Campaign Information
-    class CAMPAIGN final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_INFLUENCE, CAMPAIGN>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_INFLUENCE_MODE Mode;            // PS2: (New; did not exist.)
-            uint8_t                        padding05;       // PS2: (New; did not exist.)
-            uint16_t                       Length;          // PS2: (New; did not exist.)
-            uint8_t                        padding07;       // PS2: (New; did not exist.)
-            uint8_t                        ZoneOffset;      // PS2: (New; did not exist.)
-            uint8_t                        padding0A[2];    // PS2: (New; did not exist.)
-            int32_t                        AlliedNotes;     // PS2: (New; did not exist.)
-            campaigncontrolledareas_t      ControlledAreas; // PS2: (New; did not exist.)
-            campaignnations_t              Nations;         // PS2: (New; did not exist.)
-            campaignzone_t                 Zones[13];       // PS2: (New; did not exist.)
-        };
 
-        CAMPAIGN(CCharEntity* PChar, CampaignState const& state, uint8 number);
+// Mode=2 Campaign Information
+class CAMPAIGN final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_INFLUENCE, CAMPAIGN>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_INFLUENCE_MODE Mode;            // PS2: (New; did not exist.)
+        uint8_t                        padding05;       // PS2: (New; did not exist.)
+        uint16_t                       Length;          // PS2: (New; did not exist.)
+        uint8_t                        padding07;       // PS2: (New; did not exist.)
+        uint8_t                        ZoneOffset;      // PS2: (New; did not exist.)
+        uint8_t                        padding0A[2];    // PS2: (New; did not exist.)
+        int32_t                        AlliedNotes;     // PS2: (New; did not exist.)
+        campaigncontrolledareas_t      ControlledAreas; // PS2: (New; did not exist.)
+        campaignnations_t              Nations;         // PS2: (New; did not exist.)
+        campaignzone_t                 Zones[13];       // PS2: (New; did not exist.)
     };
+
+    CAMPAIGN(CCharEntity* PChar, const CampaignState& state, uint8 number);
+};
+
 } // namespace GP_SERV_COMMAND_INFLUENCE

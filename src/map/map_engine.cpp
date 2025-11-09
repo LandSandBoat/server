@@ -247,7 +247,10 @@ void MapEngine::do_init()
 
     // Delete sessions that are associated with this map process, but leave others alone
     db::preparedStmt("DELETE FROM accounts_sessions WHERE IF(? = 0 AND ? = 0, true, server_addr = ? AND server_port = ?)",
-                     mapIPP.getIP(), mapIPP.getPort(), mapIPP.getIP(), mapIPP.getPort());
+                     mapIPP.getIP(),
+                     mapIPP.getPort(),
+                     mapIPP.getIP(),
+                     mapIPP.getPort());
 
     ShowInfo("do_init: zlib is reading");
     zlib_init();

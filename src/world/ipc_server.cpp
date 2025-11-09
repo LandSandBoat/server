@@ -35,10 +35,12 @@
 
 namespace
 {
-    auto getZMQEndpointString() -> std::string
-    {
-        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
-    }
+
+auto getZMQEndpointString() -> std::string
+{
+    return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+}
+
 } // namespace
 
 IPCServer::IPCServer(WorldEngine& worldServer)

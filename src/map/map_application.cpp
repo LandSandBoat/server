@@ -34,29 +34,31 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        const std::vector arguments = {
-            ArgumentDefinition{
-                .name        = "--ip",
-                .description = "Specify the IP address to bind to",
-            },
-            ArgumentDefinition{
-                .name        = "--port",
-                .description = "Specify the port to bind to",
-            },
-            ArgumentDefinition{
-                .name        = "--lazy",
-                .description = "Load zones on demand. For development only.",
-                .type        = ArgumentType::Flag,
-            },
-        };
 
-        return ApplicationConfig{
-            .serverName = "map",
-            .arguments  = arguments,
-        };
-    }
+auto appConfig() -> ApplicationConfig
+{
+    const std::vector arguments = {
+        ArgumentDefinition{
+            .name        = "--ip",
+            .description = "Specify the IP address to bind to",
+        },
+        ArgumentDefinition{
+            .name        = "--port",
+            .description = "Specify the port to bind to",
+        },
+        ArgumentDefinition{
+            .name        = "--lazy",
+            .description = "Load zones on demand. For development only.",
+            .type        = ArgumentType::Flag,
+        },
+    };
+
+    return ApplicationConfig{
+        .serverName = "map",
+        .arguments  = arguments,
+    };
+}
+
 } // namespace
 
 MapApplication::MapApplication(const int argc, char** argv)

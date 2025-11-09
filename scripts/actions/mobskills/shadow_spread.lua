@@ -13,10 +13,18 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = 0
     local currentMsg = nil
 
+    local sleepDuration = 60
+    if
+        mob:getPool() == xi.mobPools.WREAKER or
+        mob:getPool() == xi.mobPools.AGONIZER
+    then
+        sleepDuration = 120
+    end
+
     local effects =
     {
         { effect = xi.effect.CURSE_I,   power = 20,  duration = 180 },
-        { effect = xi.effect.SLEEP_I,   power = 1,   duration = 60 },
+        { effect = xi.effect.SLEEP_I,   power = 1,   duration = sleepDuration },
         { effect = xi.effect.BLINDNESS, power = 100, duration = 180 },
     }
 

@@ -10,13 +10,18 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 0
+    local duration = 180
 
     if not target:isPC() then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return xi.effect.CHARM_I
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, power, 3, 180)
+    if mob:getPool() == xi.mobPools.OSSCHAART then
+        duration = 30
+    end
+
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, power, 3, duration)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
         mob:resetEnmity(target)

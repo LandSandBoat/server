@@ -24,7 +24,7 @@
 #include "common/logging.h"
 #include "common/utils.h"
 
-SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string const& comment)
+SearchCommentPacket::SearchCommentPacket(uint32 playerId, const std::string& comment)
 {
     ref<uint8>(data, 0x08) = 154;  // Search comment packet size
     ref<uint8>(data, 0x0A) = 0x80; // Search server packet

@@ -41,16 +41,16 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CTradeContainer& trade);
 
     uint32 getGil();
-    auto   getItem(sol::object const& SlotIDObj) -> CItem*;
-    uint16 getItemId(sol::object const& SlotIDObj);
-    uint16 getItemSubId(sol::object const& SlotIDObj);
+    auto   getItem(const sol::object& SlotIDObj) -> CItem*;
+    uint16 getItemId(const sol::object& SlotIDObj);
+    uint16 getItemSubId(const sol::object& SlotIDObj);
     uint32 getItemQty(uint16 itemID);
     bool   hasItemQty(uint16 itemID, uint32 quantity);
     uint32 getSlotQty(uint8 slotID); // number of items in the specified slot
     uint32 getItemCount();           // total number of items
     uint8  getSlotCount();
-    bool   confirmItem(uint16 itemID, sol::object const& amountObj);
-    bool   confirmSlot(uint8 slotID, sol::object const& amountObj);
+    bool   confirmItem(uint16 itemID, const sol::object& amountObj);
+    bool   confirmSlot(uint8 slotID, const sol::object& amountObj);
     void   clean();
 
     bool operator==(const CLuaTradeContainer& other) const

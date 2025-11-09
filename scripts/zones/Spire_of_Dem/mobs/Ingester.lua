@@ -2,22 +2,14 @@
 -- Area: Spire of Dem
 --  Mob: Ingester
 -----------------------------------
-mixins = { require('scripts/mixins/families/empty_terroanima') }
+mixins =
+{
+    require('scripts/mixins/families/empty_terroanima'),
+    require('scripts/mixins/families/gorger_nm'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-local function canUseFission(mob) -- Checks to see how many pets Ingester has currently to determine if it can use Fission.
-    local mobId = mob:getID()
-    for petId = mobId + 1, mobId + 4 do
-        local pet = GetMobByID(petId)
-        if pet and not pet:isSpawned() then
-            return true
-        end
-    end
-
-    return false
-end
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -29,23 +21,25 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
+    -- 20% chance to prefer Fission
+    if
+        math.random(1, 100) <= 20 and
+        xi.mix.gorger.canUseFission(mob)
+    then
+        return xi.mobSkill.FISSION
+    end
+
+    -- Otherwise use a random skill from the normal list
     local skillList =
     {
         xi.mobSkill.QUADRATIC_CONTINUUM_2,
-        xi.mobSkill.SPIRIT_ABSOPTION_2,
+        xi.mobSkill.SPIRIT_ABSORPTION_2,
         xi.mobSkill.VANITY_DRIVE_2,
         xi.mobSkill.STYGIAN_FLATUS_1,
         xi.mobSkill.PROMYVION_BARRIER_2,
     }
 
-    if
-        math.random(1, 100) <= 20 and
-        canUseFission(mob)
-    then
-        return xi.mobSkill.FISSION
-    else
-        return skillList[math.random(1, #skillList)]
-    end
+    return skillList[math.random(1, #skillList)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

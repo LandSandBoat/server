@@ -416,6 +416,15 @@ end
 
 -- On Ability Use Leave
 xi.job_utils.beastmaster.onUseAbilityLeave = function(player, target, ability)
+    local pet = target:getPet()
+
+    if
+        pet and
+        pet:hasStatusEffect(xi.effect.HEALING)
+    then
+        pet:delStatusEffect(xi.effect.HEALING)
+    end
+
     target:despawnPet()
 end
 

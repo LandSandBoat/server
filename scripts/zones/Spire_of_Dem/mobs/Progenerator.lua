@@ -1,30 +1,46 @@
 -----------------------------------
 -- Area: Spire of Dem
 --  Mob: Progenerator
--- TODO: Verify cmbDelay
 -----------------------------------
-mixins = { require('scripts/mixins/families/empty_terroanima') }
+mixins =
+{
+    require('scripts/mixins/families/empty_terroanima'),
+    require('scripts/mixins/families/gorger_nm'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+end
+
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('maxBabies', 4)
-    mob:addMod(xi.mod.TRIPLE_ATTACK, 10)
-    mob:addMod(xi.mod.DEFP, 35)
+    mob:setMod(xi.mod.DEFP, 35)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 10)
+    mob:setMod(xi.mod.STORETP, 62)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 15)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    local fission = 755
-    local random = math.random(1, 100)
+    local tpMoves =
+    {
+        xi.mobSkill.SPIRIT_ABSORPTION_2,
+        xi.mobSkill.VANITY_DRIVE_2,
+    }
 
-    if mob:getHPP() <= 50 then
-        if random <= 60 then
-            return fission
-        else
-            return 0
-        end
+    if mob:getHPP() > 35 then
+        table.insert(tpMoves, xi.mobSkill.QUADRATIC_CONTINUUM_2)
+        table.insert(tpMoves, xi.mobSkill.STYGIAN_FLATUS_1)
+        table.insert(tpMoves, xi.mobSkill.PROMYVION_BARRIER_2)
     end
+
+    if xi.mix.gorger.canUseFission(mob) then
+        table.insert(tpMoves, xi.mobSkill.FISSION)
+    end
+
+    return tpMoves[math.random(1, #tpMoves)]
 end
 
 entity.onMobFight = function(mob, target)
@@ -32,18 +48,10 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility()
     end
 
-    if mob:getHPP() <= 35 then
-        mob:setMod(xi.mod.STORETP, 250)
-    end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    local momma = mob:getID()
-    for i = momma + 1, momma + mob:getLocalVar('maxBabies') do
-        local baby = GetMobByID(i)
-        if baby and baby:isSpawned() then
-            baby:setHP(0)
-        end
+    if mob:getHPP() > 35 then
+        mob:setMod(xi.mod.REGAIN, 0)
+    else
+        mob:setMod(xi.mod.REGAIN, 100)
     end
 end
 

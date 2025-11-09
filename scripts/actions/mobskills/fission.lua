@@ -1,18 +1,10 @@
 -----------------------------------
 -- Mob Skill: Fission
 -- Description : Summons an empty to assist its user.
--- To expand this list, define the mob in mob_pools.lua and extend the table below.
+-- Note: Requires gorger_nm mixin for mobs to set fissionAdds local var
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
-
-local fissionAdds =
-{
-    [xi.mobPools.HADAL_SATIATOR]  = 3,
-    [xi.mobPools.INGESTER]        = 4,
-    [xi.mobPools.PROGENERATOR]    = 4,
-    [xi.mobPools.DEPTHS_DIGESTER] = 6,
-}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
@@ -20,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local mobID = mob:getID()
-    local numAdds = fissionAdds[mob:getPool()]
+    local numAdds = mob:getLocalVar('fissionAdds')
     local pets = {}
     for i = 1, numAdds do
         table.insert(pets, mobID + i)

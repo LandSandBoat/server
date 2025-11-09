@@ -55,7 +55,9 @@ private:
 
 namespace mobSpellList
 {
-    void LoadMobSpellList();
 
-    auto GetMobSpellList(uint16 mobSpellListId) -> CMobSpellList*;
+void LoadMobSpellList();
+
+auto GetMobSpellList(uint16 mobSpellListId) -> CMobSpellList*;
+
 }; // namespace mobSpellList

@@ -28,21 +28,22 @@
 
 namespace
 {
-    // Returns the Model ID of the mog house to be used
-    // This is not the same as the actual Zone ID!
-    // (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
-    auto GetMogHouseModelID(const CCharEntity* PChar) -> uint16
-    {
-        // Shift right 7 places, mask the bottom two bits.
-        // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
-        // 0x0100: ^ As above
-        const uint16 moghouse2FModel = 0x0267 + ((PChar->profile.mhflag >> 7) & 0x03);
-        if (PChar->profile.mhflag & 0x40)
-        {
-            return moghouse2FModel;
-        }
 
-        // clang-format off
+// Returns the Model ID of the mog house to be used
+// This is not the same as the actual Zone ID!
+// (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
+auto GetMogHouseModelID(const CCharEntity* PChar) -> uint16
+{
+    // Shift right 7 places, mask the bottom two bits.
+    // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    // 0x0100: ^ As above
+    const uint16 moghouse2FModel = 0x0267 + ((PChar->profile.mhflag >> 7) & 0x03);
+    if (PChar->profile.mhflag & 0x40)
+    {
+        return moghouse2FModel;
+    }
+
+    // clang-format off
         switch (zoneutils::GetCurrentRegion(PChar->getZone()))
         {
             case REGION_TYPE::WEST_AHT_URHGAN:
@@ -67,51 +68,52 @@ namespace
                 ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->getName(), PChar->getZone());
                 return 0x0100;
         }
-        // clang-format on
-    }
+    // clang-format on
+}
 
-    auto GetMogHouseLeavingFlag(const CCharEntity* PChar) -> uint8
+auto GetMogHouseLeavingFlag(const CCharEntity* PChar) -> uint8
+{
+    switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
-        switch (zoneutils::GetCurrentRegion(PChar->getZone()))
-        {
-            case REGION_TYPE::ADOULIN_ISLANDS:
-                return 9; // Adoulin MH exit is always enabled
-            case REGION_TYPE::WEST_AHT_URHGAN:
-                if (PChar->profile.mhflag & 0x10)
-                {
-                    return 5;
-                }
-                break;
-            case REGION_TYPE::SANDORIA:
-                if (PChar->profile.mhflag & 0x01)
-                {
-                    return 1;
-                }
-                break;
-            case REGION_TYPE::BASTOK:
-                if (PChar->profile.mhflag & 0x02)
-                {
-                    return 2;
-                }
-                break;
-            case REGION_TYPE::WINDURST:
-                if (PChar->profile.mhflag & 0x04)
-                {
-                    return 3;
-                }
-                break;
-            case REGION_TYPE::JEUNO:
-                if (PChar->profile.mhflag & 0x08)
-                {
-                    return 4;
-                }
-                break;
-            default:
-                break;
-        }
-
-        return 0;
+        case REGION_TYPE::ADOULIN_ISLANDS:
+            return 9; // Adoulin MH exit is always enabled
+        case REGION_TYPE::WEST_AHT_URHGAN:
+            if (PChar->profile.mhflag & 0x10)
+            {
+                return 5;
+            }
+            break;
+        case REGION_TYPE::SANDORIA:
+            if (PChar->profile.mhflag & 0x01)
+            {
+                return 1;
+            }
+            break;
+        case REGION_TYPE::BASTOK:
+            if (PChar->profile.mhflag & 0x02)
+            {
+                return 2;
+            }
+            break;
+        case REGION_TYPE::WINDURST:
+            if (PChar->profile.mhflag & 0x04)
+            {
+                return 3;
+            }
+            break;
+        case REGION_TYPE::JEUNO:
+            if (PChar->profile.mhflag & 0x08)
+            {
+                return 4;
+            }
+            break;
+        default:
+            break;
     }
+
+    return 0;
+}
+
 } // namespace
 
 GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo* currentEvent)
@@ -210,7 +212,7 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
         packet.MogZoneFlag     = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
-    auto const& nameStr = PChar->getName();
+    const auto& nameStr = PChar->getName();
     std::memcpy(packet.name, nameStr.data(), std::min(nameStr.size(), sizeof(packet.name)));
 
     packet.Dancer = {

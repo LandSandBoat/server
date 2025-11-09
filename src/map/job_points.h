@@ -414,7 +414,9 @@ private:
 
 namespace jobpointutils
 {
-    void                                LoadGifts();
-    void                                RefreshGiftMods(CCharEntity* PChar);
-    extern std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE];
+
+void                                LoadGifts();
+void                                RefreshGiftMods(CCharEntity* PChar);
+extern std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE];
+
 } // namespace jobpointutils

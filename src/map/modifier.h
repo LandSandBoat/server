@@ -635,6 +635,8 @@ enum class Mod
     AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
     WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
     DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
+    DAY_PERPETUATION_HALF     = 1170, // if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
+    WEATHER_PERPETUATION_HALF = 1171, // if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
     PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
     BP_DELAY                  = 357,  // stores blood pact delay reduction
     ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
@@ -836,8 +838,7 @@ enum class Mod
     DARK_AFFINITY_PERP    = 560,
 
     // Special Modifier+
-    ADDS_WEAPONSKILL     = 355, //
-    ADDS_WEAPONSKILL_DYN = 356, // In Dynamis
+    ADDS_WEAPONSKILL = 355, //
 
     STEALTH            = 358, //
     SNEAK_DURATION     = 946, // Additional duration in seconds
@@ -1117,7 +1118,9 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1170 and onward
+    // SPARE IDs:
+    //   356
+    //   1172 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

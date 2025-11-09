@@ -30,14 +30,16 @@
 
 namespace serverutils
 {
-    uint32 GetServerVar(std::string const& var);
-    void   SetServerVar(std::string const& var, int32 value, uint32 expiry = 0);
-    void   PersistServerVar(std::string const& var, int32 value, uint32 expiry = 0);
 
-    int32 GetVolatileServerVar(std::string const& var);
-    void  SetVolatileServerVar(std::string const& var, int32 value, uint32 expiry = 0);
+uint32 GetServerVar(const std::string& var);
+void   SetServerVar(const std::string& var, int32 value, uint32 expiry = 0);
+void   PersistServerVar(const std::string& var, int32 value, uint32 expiry = 0);
 
-    int32 PersistVolatileServerVars(timer::time_point tick, CTaskManager::CTask* PTask);
+int32 GetVolatileServerVar(const std::string& var);
+void  SetVolatileServerVar(const std::string& var, int32 value, uint32 expiry = 0);
+
+int32 PersistVolatileServerVars(timer::time_point tick, CTaskManager::CTask* PTask);
+
 } // namespace serverutils
 
 #endif // _SERVERUTILS_H

@@ -52,7 +52,8 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 
     const auto rset = db::preparedStmt("SELECT itemid, itemsubid, slot, quantity, sent, extra, sender, charname FROM delivery_box WHERE charid = ? AND box = ? "
                                        "AND slot < 8 ORDER BY slot",
-                                       PChar->id, BoxNo);
+                                       PChar->id,
+                                       BoxNo);
     if (rset)
     {
         uint8 items = 0;
@@ -102,7 +103,13 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo, int8_t ItemWorkNo, uint32_t ItemStacks, const std::string& receiverName)
 {
     DebugDeliveryBoxFmt("DBOX: AddItemsToBeSent: player: {} ({}), BoxNo: {}, PostWorkNo: {}, ItemWorkNo: {}, ItemStacks: {}, receiverName: {}",
-                        PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo, ItemWorkNo, ItemStacks, receiverName);
+                        PChar->name,
+                        PChar->id,
+                        static_cast<int8_t>(BoxNo),
+                        PostWorkNo,
+                        ItemWorkNo,
+                        ItemStacks,
+                        receiverName);
 
     if (!IsSendBoxOpen(PChar))
     {
@@ -159,7 +166,16 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             const auto rset = db::preparedStmt(
                 "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) "
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                PChar->id, PChar->getName(), 2, PostWorkNo, PItem->getID(), PItem->getSubID(), ItemStacks, PItem->m_extra, recvCharid, receiverName);
+                PChar->id,
+                PChar->getName(),
+                2,
+                PostWorkNo,
+                PItem->getID(),
+                PItem->getSubID(),
+                ItemStacks,
+                PItem->m_extra,
+                recvCharid,
+                receiverName);
 
             if (rset && rset->rowsAffected() && charutils::UpdateItem(PChar, LOC_INVENTORY, ItemWorkNo, -static_cast<int32>(ItemStacks)))
             {
@@ -473,7 +489,10 @@ void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COM
                     if (rset2 && rset2->rowsAffected())
                     {
                         DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox: player: {} ({}) removed item: {} ({})",
-                                            PChar->getName(), PChar->id, PItem->getName(), PItem->getID());
+                                            PChar->getName(),
+                                            PChar->id,
+                                            PItem->getName(),
+                                            PItem->getID());
 
                         PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, 0, 0x02);
                         PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, PItem, deliverySlotID, receivedItems, 0x01);
@@ -663,7 +682,11 @@ void dboxutils::RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO 
             PChar->UContainer->SetItem(PostWorkNo, nullptr);
 
             DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell: player: {} ({}) removed item {} ({}) from slot {}",
-                                PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
+                                PChar->getName(),
+                                PChar->id,
+                                PItem->getName(),
+                                PItem->getID(),
+                                PostWorkNo);
 
             PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Clear, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
             destroy(PItem);

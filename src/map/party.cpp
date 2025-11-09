@@ -515,7 +515,8 @@ bool CParty::RemovePartyLeader(CBattleEntity* PEntity)
         const auto rset = db::preparedStmt("SELECT charname FROM accounts_sessions JOIN chars ON accounts_sessions.charid = chars.charid "
                                            "JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE partyid = ? AND NOT partyflag & ? "
                                            "ORDER BY timestamp ASC LIMIT 1",
-                                           m_PartyID, PARTY_LEADER);
+                                           m_PartyID,
+                                           PARTY_LEADER);
         if (rset && rset->rowsCount() && rset->next())
         {
             std::string newLeader = rset->get<std::string>("charname");
@@ -563,7 +564,9 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
     const auto rset = db::preparedStmt("SELECT chars.charid, partyid, allianceid, charname, partyflag, pos_zone, pos_prevzone FROM accounts_parties "
                                        "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
                                        "(allianceid <> 0 AND allianceid = ?) OR partyid = ? ORDER BY partyflag & ?, timestamp",
-                                       m_PAlliance ? m_PAlliance->m_AllianceID : 0, m_PartyID, PARTY_SECOND | PARTY_THIRD);
+                                       m_PAlliance ? m_PAlliance->m_AllianceID : 0,
+                                       m_PartyID,
+                                       PARTY_SECOND | PARTY_THIRD);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -639,7 +642,10 @@ void CParty::AddMember(CBattleEntity* PEntity)
         }
 
         db::preparedStmt("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (?, ?, ?, ?)",
-                         PChar->id, m_PartyID, allianceid, GetMemberFlags(PChar));
+                         PChar->id,
+                         m_PartyID,
+                         allianceid,
+                         GetMemberFlags(PChar));
 
         if (m_PAlliance)
         {
@@ -722,7 +728,10 @@ void CParty::AddMember(uint32 id)
         }
 
         db::preparedStmt("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (?, ?, ?, ?)",
-                         id, m_PartyID, allianceid, Flags);
+                         id,
+                         m_PartyID,
+                         allianceid,
+                         Flags);
 
         if (m_PAlliance)
         {
@@ -1155,9 +1164,13 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
                     }
                 }
                 db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag & ~? WHERE partyid = ? AND partyflag & ?",
-                                 PARTY_SYNC, m_PartyID, PARTY_SYNC);
+                                 PARTY_SYNC,
+                                 m_PartyID,
+                                 PARTY_SYNC);
                 db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag | ? WHERE partyid = ? AND charid = ?",
-                                 PARTY_SYNC, m_PartyID, PChar->id);
+                                 PARTY_SYNC,
+                                 m_PartyID,
+                                 PChar->id);
             }
         }
         else
@@ -1188,7 +1201,9 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
             }
             m_PSyncTarget = nullptr;
             db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag & ~? WHERE partyid = ? AND partyflag & ?",
-                             PARTY_SYNC, m_PartyID, PARTY_SYNC);
+                             PARTY_SYNC,
+                             m_PartyID,
+                             PARTY_SYNC);
         }
     }
 }
@@ -1205,7 +1220,9 @@ void CParty::SetQuarterMaster(const std::string& MemberName)
     {
         db::preparedStmt("UPDATE accounts_parties JOIN chars ON accounts_parties.charid = chars.charid "
                          "SET partyflag = partyflag | ? WHERE partyid = ? AND charname = ?",
-                         PARTY_QM, m_PartyID, MemberName);
+                         PARTY_QM,
+                         m_PartyID,
+                         MemberName);
     }
 }
 

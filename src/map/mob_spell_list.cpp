@@ -26,7 +26,9 @@
 #include "mob_spell_list.h"
 
 CMobSpellList::CMobSpellList(const uint16 listId)
-: m_listId(listId){};
+: m_listId(listId)
+{
+}
 
 auto CMobSpellList::getId() const -> uint16
 {
@@ -42,7 +44,7 @@ void CMobSpellList::AddSpell(const SpellID spellId, const uint16 minLvl, const u
 
 auto CMobSpellList::GetSpellMinLevel(const SpellID spellId) const -> uint16
 {
-    for (auto const& mobSpell : m_spellList)
+    for (const auto& mobSpell : m_spellList)
     {
         if (spellId == mobSpell.spellId)
         {
@@ -56,48 +58,50 @@ auto CMobSpellList::GetSpellMinLevel(const SpellID spellId) const -> uint16
 // Implement namespace to work with spells
 namespace mobSpellList
 {
-    std::unordered_map<uint16, std::unique_ptr<CMobSpellList>> PMobSpellList;
 
-    // Load list of spells
-    void LoadMobSpellList()
+std::unordered_map<uint16, std::unique_ptr<CMobSpellList>> PMobSpellList;
+
+// Load list of spells
+void LoadMobSpellList()
+{
+    PMobSpellList[0] = std::make_unique<CMobSpellList>(0); // Add empty spell list for mobSpellListId 0
+
+    const auto query = "SELECT mob_spell_lists.spell_list_id, "
+                       "mob_spell_lists.spell_id, "
+                       "mob_spell_lists.min_level, "
+                       "mob_spell_lists.max_level, "
+                       "spell_list.content_tag "
+                       "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
+                       "WHERE spell_list_id < ? "
+                       "ORDER BY min_level ASC";
+
+    const auto rset = db::preparedStmt(query, MAX_MOBSPELLLIST_ID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        PMobSpellList[0] = std::make_unique<CMobSpellList>(0); // Add empty spell list for mobSpellListId 0
+        const auto spellListId = rset->get<uint16>("spell_list_id");
+        const auto spellId     = rset->get<uint16>("spell_id");
+        const auto minLvl      = rset->get<uint16>("min_level");
+        const auto maxLvl      = rset->get<uint16>("max_level");
 
-        const auto query = "SELECT mob_spell_lists.spell_list_id, "
-                           "mob_spell_lists.spell_id, "
-                           "mob_spell_lists.min_level, "
-                           "mob_spell_lists.max_level, "
-                           "spell_list.content_tag "
-                           "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
-                           "WHERE spell_list_id < ? "
-                           "ORDER BY min_level ASC";
-
-        const auto rset = db::preparedStmt(query, MAX_MOBSPELLLIST_ID);
-        FOR_DB_MULTIPLE_RESULTS(rset)
+        if (!PMobSpellList.contains(spellListId))
         {
-            const auto spellListId = rset->get<uint16>("spell_list_id");
-            const auto spellId     = rset->get<uint16>("spell_id");
-            const auto minLvl      = rset->get<uint16>("min_level");
-            const auto maxLvl      = rset->get<uint16>("max_level");
-
-            if (!PMobSpellList.contains(spellListId))
-            {
-                PMobSpellList.emplace(spellListId, std::make_unique<CMobSpellList>(spellListId));
-            }
-
-            PMobSpellList[spellListId]->AddSpell(static_cast<SpellID>(spellId), minLvl, maxLvl);
-        }
-    }
-
-    // Get Spell By ID
-    auto GetMobSpellList(const uint16 mobSpellListId) -> CMobSpellList*
-    {
-        if (PMobSpellList.contains(mobSpellListId))
-        {
-            return PMobSpellList[mobSpellListId].get();
+            PMobSpellList.emplace(spellListId, std::make_unique<CMobSpellList>(spellListId));
         }
 
-        ShowErrorFmt("Mob spell list ID {} does not exist.", mobSpellListId);
-        return nullptr;
+        PMobSpellList[spellListId]->AddSpell(static_cast<SpellID>(spellId), minLvl, maxLvl);
     }
+}
+
+// Get Spell By ID
+auto GetMobSpellList(const uint16 mobSpellListId) -> CMobSpellList*
+{
+    if (PMobSpellList.contains(mobSpellListId))
+    {
+        return PMobSpellList[mobSpellListId].get();
+    }
+
+    ShowErrorFmt("Mob spell list ID {} does not exist.", mobSpellListId);
+    return nullptr;
+}
+
 }; // namespace mobSpellList

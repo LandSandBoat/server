@@ -60,19 +60,21 @@ struct checkitem_t
 // This packet is used to populate the other players information. (Jobs, level, equipment, etc.)
 namespace GP_SERV_COMMAND_EQUIP_INSPECT
 {
-    // Mode 3: Equipment information (sent in batches of up to 8 items)
-    class EQUIPMENT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EQUIP_INSPECT, EQUIPMENT>
-    {
-    public:
-        struct PacketData
-        {
-            uint32_t    UniqNo;     // PS2: UniqNo
-            uint16_t    ActIndex;   // PS2: ActIndex
-            uint8_t     OptionFlag; // PS2: OptionFlag
-            uint8_t     EquipCount; // PS2: (New; did not exist.)
-            checkitem_t Equip[8];   // PS2: (New; did not exist.)
-        };
 
-        EQUIPMENT(CCharEntity* PChar, CCharEntity* PTarget);
+// Mode 3: Equipment information (sent in batches of up to 8 items)
+class EQUIPMENT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EQUIP_INSPECT, EQUIPMENT>
+{
+public:
+    struct PacketData
+    {
+        uint32_t    UniqNo;     // PS2: UniqNo
+        uint16_t    ActIndex;   // PS2: ActIndex
+        uint8_t     OptionFlag; // PS2: OptionFlag
+        uint8_t     EquipCount; // PS2: (New; did not exist.)
+        checkitem_t Equip[8];   // PS2: (New; did not exist.)
     };
+
+    EQUIPMENT(CCharEntity* PChar, CCharEntity* PTarget);
+};
+
 } // namespace GP_SERV_COMMAND_EQUIP_INSPECT

@@ -1167,12 +1167,14 @@ private:
 // Namespace to work with spells
 namespace spell
 {
-    void LoadSpellList();
 
-    CSpell* GetSpellByMonsterSkillId(uint16 SkillID);
-    CSpell* GetSpell(SpellID SpellID);
-    bool    CanUseSpell(CBattleEntity* PCaster, SpellID SpellID);
-    bool    CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell);
-    bool    CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level);
-    float   GetSpellRadius(CSpell* spellId, CBattleEntity* PCaster);
+void LoadSpellList();
+
+CSpell* GetSpellByMonsterSkillId(uint16 SkillID);
+CSpell* GetSpell(SpellID SpellID);
+bool    CanUseSpell(CBattleEntity* PCaster, SpellID SpellID);
+bool    CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell);
+bool    CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level);
+float   GetSpellRadius(CSpell* spellId, CBattleEntity* PCaster);
+
 }; // namespace spell

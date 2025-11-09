@@ -51,7 +51,9 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
     addParty(PEntity->PParty);
     this->aLeader = PEntity->PParty;
     db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag | ? WHERE partyid = ? AND partyflag & ?",
-                     ALLIANCE_LEADER, m_AllianceID, PARTY_LEADER);
+                     ALLIANCE_LEADER,
+                     m_AllianceID,
+                     PARTY_LEADER);
 }
 
 CAlliance::CAlliance(uint32 id)
@@ -98,7 +100,12 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
         db::preparedStmt("UPDATE accounts_parties JOIN accounts_sessions USING (charid) "
                          "SET allianceid = 0, partyflag = partyflag & ~? "
                          "WHERE allianceid = ? AND IF(? = 0 AND ? = 0, true, server_addr = ? AND server_port = ?)",
-                         ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, ip, port, ip, port);
+                         ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD,
+                         m_AllianceID,
+                         ip,
+                         port,
+                         ip,
+                         port);
 
         // Remove all parties. The `delParty` call removes a party from `partyList`.
         while (partyList.size() > 0)
@@ -164,7 +171,9 @@ void CAlliance::removeParty(CParty* party)
         const auto rset = db::preparedStmt("SELECT charname FROM accounts_sessions JOIN chars ON accounts_sessions.charid = chars.charid "
                                            "JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE allianceid = ? AND partyflag & ? "
                                            "AND partyid != ? ORDER BY timestamp ASC LIMIT 1",
-                                           m_AllianceID, PARTY_LEADER, party->GetPartyID());
+                                           m_AllianceID,
+                                           PARTY_LEADER,
+                                           party->GetPartyID());
         if (rset && rset->rowsCount() && rset->next())
         {
             const auto newLeader = rset->get<std::string>("charname");
@@ -181,7 +190,8 @@ void CAlliance::removeParty(CParty* party)
     delParty(party);
 
     db::preparedStmt("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~? WHERE partyid = ?",
-                     ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, party->GetPartyID());
+                     ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD,
+                     party->GetPartyID());
 
     // notify alliance
     message::send(ipc::AllianceReload{
@@ -272,7 +282,9 @@ void CAlliance::addParty(CParty* party)
     uint8 newparty = 0;
 
     const auto rset = db::preparedStmt("SELECT partyflag & ? FROM accounts_parties WHERE allianceid = ? ORDER BY partyflag & ? ASC",
-                                       PARTY_SECOND | PARTY_THIRD, m_AllianceID, PARTY_SECOND | PARTY_THIRD);
+                                       PARTY_SECOND | PARTY_THIRD,
+                                       m_AllianceID,
+                                       PARTY_SECOND | PARTY_THIRD);
 
     if (rset && rset->rowsCount())
     {
@@ -294,7 +306,9 @@ void CAlliance::addParty(CParty* party)
     }
 
     db::preparedStmt("UPDATE accounts_parties SET allianceid = ?, partyflag = partyflag | ? WHERE partyid = ?",
-                     m_AllianceID, newparty, party->GetPartyID());
+                     m_AllianceID,
+                     newparty,
+                     party->GetPartyID());
 
     party->SetPartyNumber(newparty);
 
@@ -308,7 +322,8 @@ void CAlliance::addParty(uint32 partyid) const
     int newparty = 0;
 
     const auto rset = db::preparedStmt("SELECT partyflag FROM accounts_parties WHERE allianceid = ? ORDER BY partyflag & ? ASC",
-                                       m_AllianceID, PARTY_SECOND | PARTY_THIRD);
+                                       m_AllianceID,
+                                       PARTY_SECOND | PARTY_THIRD);
 
     if (rset && rset->rowsCount())
     {
@@ -364,7 +379,9 @@ void CAlliance::assignAllianceLeader(const std::string& name)
 {
     const auto rset = db::preparedStmt("SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
                                        "WHERE charname = ? AND allianceid = ? AND partyflag & ?",
-                                       name, m_AllianceID, PARTY_LEADER);
+                                       name,
+                                       m_AllianceID,
+                                       PARTY_LEADER);
 
     if (rset && rset->rowsCount() && rset->next())
     {

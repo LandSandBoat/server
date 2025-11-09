@@ -69,8 +69,10 @@ struct MonstrosityInstinctRow
 
 namespace
 {
-    std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
-    std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+
+std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
+std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
@@ -296,7 +298,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         if (maybeInstinct != gMonstrosityInstinctMap.end())
         {
             auto instinct = (*maybeInstinct).second;
-            for (auto const& mod : instinct.mods)
+            for (const auto& mod : instinct.mods)
             {
                 PChar->addModifier(mod.getModID(), mod.getModAmount());
             }
@@ -499,7 +501,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
                 {
                     PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
 
-                    for (auto const& mod : gMonstrosityInstinctMap[previousEquipped[idx]].mods)
+                    for (const auto& mod : gMonstrosityInstinctMap[previousEquipped[idx]].mods)
                     {
                         PChar->delModifier(mod.getModID(), mod.getModAmount());
                     }
@@ -526,7 +528,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
                         else
                         {
                             auto instinct = (*maybeInstinct).second;
-                            for (auto const& mod : instinct.mods)
+                            for (const auto& mod : instinct.mods)
                             {
                                 PChar->addModifier(mod.getModID(), mod.getModAmount());
                             }
@@ -667,7 +669,7 @@ void monstrosity::MaxAllLevels(CCharEntity* PChar)
         return;
     }
 
-    for (auto const& [_, entry] : gMonstrositySpeciesMap)
+    for (const auto& [_, entry] : gMonstrositySpeciesMap)
     {
         SetLevel(PChar, entry.monstrosityId, 99);
     }
@@ -681,7 +683,7 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
     }
 
     // Level based
-    for (auto const& [_, entry] : gMonstrositySpeciesMap)
+    for (const auto& [_, entry] : gMonstrositySpeciesMap)
     {
         uint8 level        = 99;
         uint8 byteOffset   = entry.monstrosityId / 4;

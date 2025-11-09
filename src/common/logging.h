@@ -40,21 +40,25 @@
 // Forward declaration
 namespace settings
 {
-    template <typename T>
-    T get(std::string);
+
+template <typename T>
+T get(std::string);
+
 } // namespace settings
 
 namespace logging
 {
-    void InitializeLog(std::string const& serverName, std::string const& logFile, bool appendDate);
-    void ShutDown();
 
-    void SetPattern(std::string const& str);
+void InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate);
+void ShutDown();
 
-    void AddBacktrace(std::string const& str);
-    auto GetBacktrace() -> std::vector<std::string>;
+void SetPattern(const std::string& str);
 
-    void tapWarningOrError();
+void AddBacktrace(const std::string& str);
+auto GetBacktrace() -> std::vector<std::string>;
+
+void tapWarningOrError();
+
 } // namespace logging
 
 // clang-format off

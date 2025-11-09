@@ -39,16 +39,18 @@
 
 namespace
 {
-    const auto isPartiallyUsed = [](CItem* PItem) -> bool
-    {
-        if (PItem->isSubType(ITEM_CHARGED))
-        {
-            const auto PChargedItem = static_cast<CItemUsable*>(PItem);
-            return PChargedItem->getCurrentCharges() < PChargedItem->getMaxCharges();
-        }
 
-        return false;
-    };
+const auto isPartiallyUsed = [](CItem* PItem) -> bool
+{
+    if (PItem->isSubType(ITEM_CHARGED))
+    {
+        const auto PChargedItem = static_cast<CItemUsable*>(PItem);
+        return PChargedItem->getCurrentCharges() < PChargedItem->getMaxCharges();
+    }
+
+    return false;
+};
+
 } // namespace
 
 void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param)
@@ -56,7 +58,11 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
     TracyZoneScoped;
 
     DebugAuctionsFmt("AH: SellingItems: player: {}, Commission: {}, ItemWorkIndex: {}, ItemNo: {}, ItemStacks: {}",
-                     PChar->getName(), param.Commission, param.ItemWorkIndex, param.ItemNo, param.ItemStacks);
+                     PChar->getName(),
+                     param.Commission,
+                     param.ItemWorkIndex,
+                     param.ItemNo,
+                     param.ItemStacks);
 
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
     if (!PItem)
@@ -130,7 +136,10 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
     TracyZoneScoped;
 
     DebugAuctionsFmt("AH: ProofOfPurchase: player: {}, LimitPrice: {}, ItemWorkIndex: {}, ItemStacks: {}",
-                     PChar->getName(), param.LimitPrice, param.ItemWorkIndex, param.ItemStacks);
+                     PChar->getName(),
+                     param.LimitPrice,
+                     param.ItemWorkIndex,
+                     param.ItemStacks);
 
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
 
@@ -188,7 +197,12 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         }
 
         if (!db::preparedStmt("INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(?, ?, ?, ?, ?, ?)",
-                              PItem->getID(), param.ItemStacks == 0, PChar->id, PChar->getName(), earth_time::timestamp(), param.LimitPrice))
+                              PItem->getID(),
+                              param.ItemStacks == 0,
+                              PChar->id,
+                              PChar->getName(),
+                              earth_time::timestamp(),
+                              param.LimitPrice))
         {
             ShowErrorFmt("AH: Cannot insert item {} to database", PItem->getName());
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
@@ -208,7 +222,10 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
     TracyZoneScoped;
 
     DebugAuctionsFmt("AH: PurchasingItems: player: {}, BidPrice: {}, ItemNo: {}, ItemStacks: {}",
-                     PChar->getName(), param.BidPrice, param.ItemNo, param.ItemStacks);
+                     PChar->getName(),
+                     param.BidPrice,
+                     param.ItemNo,
+                     param.ItemStacks);
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
     {
@@ -237,7 +254,12 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
             {
                 const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
                                                    "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
-                                                   PChar->getName(), param.BidPrice, earth_time::timestamp(), param.ItemNo, param.ItemStacks == 0, param.BidPrice);
+                                                   PChar->getName(),
+                                                   param.BidPrice,
+                                                   earth_time::timestamp(),
+                                                   param.ItemNo,
+                                                   param.ItemStacks == 0,
+                                                   param.BidPrice);
                 if (rset && rset->rowsAffected())
                 {
                     if (charutils::AddItem(PChar, LOC_INVENTORY, param.ItemNo, (param.ItemStacks == 0 ? PItem->getStackSize() : 1)) != ERROR_SLOTID)

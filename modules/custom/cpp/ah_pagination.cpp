@@ -105,7 +105,9 @@ class AHPaginationModule : public CPPModule
                                      "WHERE seller = ? and sale = 0 "
                                      "ORDER BY id ASC "
                                      "LIMIT ? OFFSET ?",
-                                     PChar->id, static_cast<uint32>(itemsPerPage_), static_cast<uint32>(currentAHPage * itemsPerPage_));
+                                     PChar->id,
+                                     static_cast<uint32>(itemsPerPage_),
+                                     static_cast<uint32>(currentAHPage * itemsPerPage_));
 
         // If we get back 0 results, we're at the end of the list. We should redo the query and reset to page 1 (OFFSET 0)
         if (rset && rset->rowsCount() == 0)
@@ -119,7 +121,8 @@ class AHPaginationModule : public CPPModule
                                     "WHERE seller = ? and sale = 0 "
                                     "ORDER BY id ASC "
                                     "LIMIT ? OFFSET 0",
-                                    PChar->id, static_cast<uint32>(itemsPerPage_));
+                                    PChar->id,
+                                    static_cast<uint32>(itemsPerPage_));
 
             // Show Page 1 this time
             currentAHPage = 0;

@@ -78,6 +78,9 @@ INSERT INTO `item_latents` VALUES (11312,8,5,7,100);     -- STR+5 while TP >=100
 INSERT INTO `item_latents` VALUES (11355,14,1,26,1);     -- CHR+1 during Nighttime
 INSERT INTO `item_latents` VALUES (11355,27,-1,0,75);    -- Enmity-1 when HP <75%
 
+-- Karasutengu
+INSERT INTO `item_latents` VALUES (11365,369,1,13,267); -- Allied Tags: Refresh +1
+
 -- Nobushi Kyahan
 INSERT INTO `item_latents` VALUES (11367,1,30,49,4277);  -- def+30 Tonosama Rice Ball
 INSERT INTO `item_latents` VALUES (11367,1,30,49,4278);  -- def+30 Shogun Rice Ball
@@ -100,11 +103,21 @@ INSERT INTO `item_latents` VALUES (11367,288,5,49,4278); -- double attack 5% Sho
 INSERT INTO `item_latents` VALUES (11367,302,1,49,5928); -- triple attack 1% Hinesama Rice Ball
 INSERT INTO `item_latents` VALUES (11367,302,2,49,5929); -- triple attack 2% Ojo Rice Ball
 
+-- Llwyds Clogs
+INSERT INTO `item_latents` VALUES (11390,3,4,13,267); -- Allied Tags: HP +4%
+INSERT INTO `item_latents` VALUES (11390,6,4,13,267); -- Allied Tags: MP +4%
+
+-- Emissary Boots
+INSERT INTO `item_latents` VALUES (11391,68,6,13,267); -- Allied Tags: Evasion +6 (not evasion skill)
+
 -- Kyoshu Kyahan
 INSERT INTO `item_latents` VALUES(11405,23,20,13,406); -- +20 attack during Footwork
 INSERT INTO `item_latents` VALUES(11405,25,20,13,406); -- +20 accuracy during Footwork
 
 -- Morana Pigaches (11408) (pet latent via item lua)
+
+-- Mirror Tiara
+INSERT INTO `item_latents` VALUES (11473,163,-1000,13,267); -- Allied Tags: MDT -10%
 
 -- Louhi's Mask
 INSERT INTO `item_latents` VALUES (11474,161,-300,26,0);   -- Daytime: Physical damage taken -3%
@@ -119,6 +132,9 @@ INSERT INTO `item_latents` VALUES (11486,28,4,37,4);     -- Full moon magic atta
 -- Trainee's Spectacles
 INSERT INTO `item_latents` VALUES (11499,127,1,24,48); -- Fishing +1 if skill level < 40
 
+-- Fourth Division Mantle
+INSERT INTO `item_latents` VALUES (11545,368,10,13,267); -- Allied Tags: Regain +10
+
 -- Aesir Mantle
 INSERT INTO `item_latents` VALUES (11546,288,1,32,0);    -- Double Attack +2% On Darksdays
 
@@ -130,6 +146,9 @@ INSERT INTO `item_latents` VALUES (11585,27,-3,0,100);   -- Boosts enmity decrea
 
 -- Nyx Gorget
 INSERT INTO `item_latents` VALUES (11587,25,12,13,75);   -- accuracy+12 under status arcane circle
+
+-- Mercenary Major Charm
+INSERT INTO `item_latents` VALUES (11588,369,1,13,267); -- Allied Tags: Refresh +1
 
 -- Aesir Torque
 INSERT INTO `item_latents` VALUES (11589,115,3,32,0);    -- Elemental magic skill +7 On Darksdays
@@ -158,6 +177,9 @@ INSERT INTO `item_latents` VALUES (11607,30,6,37,7);  -- MOON_PHASE: Waning Cres
 -- Chrys. Torque
 INSERT INTO `item_latents` VALUES (11621,368,-1,7,0);    -- Drains 1 TP/tick and gives 1 MP/tick
 INSERT INTO `item_latents` VALUES (11621,369,1,7,0);     -- Latent Effect is active when you have TP.
+
+-- Royal Knight Sigil Ring
+INSERT INTO `item_latents` VALUES (11636,370,3,13,267); -- Allied Tags: Regen +3
 
 -- Miseria Ring
 INSERT INTO `item_latents` VALUES (11652,13,6,4,51); -- MP_UNDER_PERCENT: 51 - MND:  6
@@ -1247,9 +1269,16 @@ INSERT INTO `item_latents` VALUES (14954,168,-5,14,0);
 -- Trainee Gloves
 INSERT INTO `item_latents` VALUES (15008,133,1,24,54); -- Bonecraft +1 if skill level < 40
 
+-- Orcish Gauntlets
+INSERT INTO `item_latents` VALUES (15016,370,2,13,267); -- Allied Tags: Regen +2
+
 -- Serpentes Cuffs
 INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Regen" effect
 INSERT INTO `item_latents` VALUES (15019,370,1,26,0);    -- Daytime: Adds "Refresh" effect
+
+-- Danzo Tekko
+INSERT INTO `item_latents` VALUES (15033,291,2,13,267); -- Allied Tags: Counter +2
+INSERT INTO `item_latents` VALUES (15033,73,5,13,267);  -- Allied Tags: Store TP +5
 
 -- Bulwark Shield
 INSERT INTO `item_latents` VALUES (15067,1,21,48,0);     -- DEF:22
@@ -1586,8 +1615,18 @@ INSERT INTO `item_latents` VALUES (15815,5,20,26,0);     -- MP+20 during Daytime
 INSERT INTO `item_latents` VALUES (15816,2,22,26,0);     -- HP+22 during Daytime
 INSERT INTO `item_latents` VALUES (15816,5,22,26,0);     -- MP+22 during Daytime
 
+-- Skirmishers Ring
+INSERT INTO `item_latents` VALUES (15829,3,3,13,267); -- Allied Tags: HP +3%
+
+-- Patriots Ring
+INSERT INTO `item_latents` VALUES (15830,6,3,13,267); -- Allied Tags: MP +3%
+
 -- Desperado Ring
 INSERT INTO `item_latents` VALUES (15835,23,5,4,5);      -- Attack+5 while MP <=5%
+
+-- Patronus Ring
+INSERT INTO `item_latents` VALUES (15844,161,-800,13,267); -- Allied Tags: PDT -8%
+INSERT INTO `item_latents` VALUES (15844,164,-800,13,267); -- Allied Tags: Ranged DT -8%
 
 INSERT INTO `item_latents` VALUES (15882,25,15,58,0);    -- storm belt acc +15
 INSERT INTO `item_latents` VALUES (15883,12,6,58,0);     -- storm sash int +6
@@ -1598,8 +1637,27 @@ INSERT INTO `item_latents` VALUES (15915,5,20,37,4);     -- Full Moon: MP+20
 INSERT INTO `item_latents` VALUES (15915,12,6,37,4);     -- Full Moon: INT+6
 INSERT INTO `item_latents` VALUES (15915,13,6,37,4);     -- Full Moon: MND+6
 
+-- Grenadier Belt
+INSERT INTO `item_latents` VALUES (15923,8,5,13,267);  -- Allied Tags: STR +5
+INSERT INTO `item_latents` VALUES (15923,9,5,13,267);  -- Allied Tags: DEX +5
+INSERT INTO `item_latents` VALUES (15923,11,5,13,267); -- Allied Tags: AGI +5
+
+-- Demagogues Sash
+INSERT INTO `item_latents` VALUES (15924,12,5,13,267); -- Allied Tags: INT +5
+INSERT INTO `item_latents` VALUES (15924,13,5,13,267); -- Allied Tags: MND +5
+INSERT INTO `item_latents` VALUES (15924,14,5,13,267); -- Allied Tags: CHR +5
+
 -- Lycopodium Sash
 INSERT INTO `item_latents` VALUES (15928,370,3,26,0);    -- Daytime: Regen +3HP/tick
+
+-- Crimson Belt
+INSERT INTO `item_latents` VALUES (15934,116,18,13,267); -- Allied Tags: Dark Magic Skill +18
+
+-- Capricornian Rope
+INSERT INTO `item_latents` VALUES (15935,519,14,13,267); -- Allied Tags: Cure spellcasting time -14%
+
+-- Earthy Belt
+INSERT INTO `item_latents` VALUES (15936,43,12,13,267); -- Allied Tags: Earth Magic Acc +12
 
 -- Tempest Belt
 INSERT INTO `item_latents` VALUES (15946,384,600,52,3);  -- Haste +6% in Wind weather
@@ -1619,6 +1677,12 @@ INSERT INTO `item_latents` VALUES (15955,421,2,13,376);  -- critical hit damage 
 -- NEED STATUS # INSERT INTO `item_latents` VALUES (15955,421,2,13,??); -- critical hit damage 2% under status familiar (bst)
 -- NEED STATUS # INSERT INTO `item_latents` VALUES (15955,421,2,13,??); -- critical hit damage 2% under status mijin gakure (nin)
 -- NEED STATUS # INSERT INTO `item_latents` VALUES (15955,421,2,13,??); -- critical hit damage 2% under status wild card (cor)
+
+-- Fox Earring
+INSERT INTO `item_latents` VALUES (15966,24,18,13,267); -- Allied Tags: Ranged Attack +18
+
+-- Temple Earring
+INSERT INTO `item_latents` VALUES (15967,46,14,13,267); -- Allied Tags: Light Magic Acc +14
 
 -- Storm Loop
 INSERT INTO `item_latents` VALUES (15968,23,10,58,0);
@@ -1733,6 +1797,13 @@ INSERT INTO `item_latents` VALUES (16133,25,-30,26,1);   -- Nighttime: ACC -30
 INSERT INTO `item_latents` VALUES (16154,346,2,9,13);
 
 INSERT INTO `item_latents` VALUES (16165,109,5,58,0);    -- storm shield shiel skill +5
+
+-- Harpy Shield
+INSERT INTO `item_latents` VALUES (16180,28,9,13,267); -- Allied Tags: MATT +9
+
+-- Terror Shield
+INSERT INTO `item_latents` VALUES (16181,160,-1000,13,267); -- Allied Tags: DT -10%
+
 INSERT INTO `item_latents` VALUES (16217,240,5,8,16);
 INSERT INTO `item_latents` VALUES (16218,242,5,8,17);
 INSERT INTO `item_latents` VALUES (16219,27,-2,8,18);
@@ -1742,11 +1813,39 @@ INSERT INTO `item_latents` VALUES (16220,10,10,13,114);  -- VIT+10
 
 INSERT INTO `item_latents` VALUES (16238,369,1,13,3);
 
+-- Viator Cape
+-- These are confirmed retail-accurate as of Nov 2025.
+INSERT INTO `item_latents` VALUES (16246,3,5,13,267);  -- Allied Tags: HPP +5%
+INSERT INTO `item_latents` VALUES (16246,6,5,13,267);  -- Allied Tags: MPP +5%
+INSERT INTO `item_latents` VALUES (16246,71,2,13,267); -- Allied Tags: hMP +2
+INSERT INTO `item_latents` VALUES (16246,72,2,13,267); -- Allied Tags: hHP +2
+
+-- Caloyer Cape
+INSERT INTO `item_latents` VALUES (16247,28,5,13,267); -- Allied Tags: MATT +5
+
 -- Casaba Melon Tank
 INSERT INTO `item_latents` VALUES (16251,71,3,52,1);     -- Healing MP +3 in Fire weather
 
+-- Arrestor Mantle
+INSERT INTO `item_latents` VALUES (16258,114,18,13,267); -- Allied Tags: Enfeebling magic +18
+
+-- Pipers Torque
+INSERT INTO `item_latents` VALUES (16278,121,5,13,267); -- Allied Tags: Wind instrument skill +5
+
 -- Haraldr's Muffler
 INSERT INTO `item_latents` VALUES (16280,73,4,52,2);     -- cumulative Store TP +5 in Ice weather
+
+-- Shield Collar
+INSERT INTO `item_latents` VALUES (16291,10,21,13,267); -- Allied Tags: VIT +21
+
+-- Bull Necklace
+INSERT INTO `item_latents` VALUES (16292,8,21,13,267); -- Allied Tags: STR +21
+
+-- Cougar Pendant
+INSERT INTO `item_latents` VALUES (16293,2,170,13,267); -- Allied Tags: HP +170
+
+-- Crocodile Collar
+INSERT INTO `item_latents` VALUES (16294,11,21,13,267); -- Allied Tags: AGI +21
 
 -- Halting Stole
 INSERT INTO `item_latents` VALUES (16306,25,20,13,4);    -- accuracy+20 while under status paralysis
@@ -1754,6 +1853,10 @@ INSERT INTO `item_latents` VALUES (16306,25,20,13,4);    -- accuracy+20 while un
 -- Armadillo Cuisses
 INSERT INTO `item_latents` VALUES (16340,23,15,13,16);   -- Amnesia: Attack+15
 INSERT INTO `item_latents` VALUES (16340,25,15,13,16);   -- Amnesia: Accuracy+15
+
+-- Malagigis Trousers
+INSERT INTO `item_latents` VALUES (16354,170,10,13,267); -- Allied Tags: Fast cast +10
+INSERT INTO `item_latents` VALUES (16354,73,5,13,267);   -- Allied Tags: Store TP +5
 
 -- Bedivere's Hose
 INSERT INTO `item_latents` VALUES (16355,23,25,0,25);    -- Attack+25 when HP <=25%
@@ -2143,6 +2246,14 @@ INSERT INTO `item_latents` VALUES (17677,2,20,53,1);     -- HP +20 in areas outs
 INSERT INTO `item_latents` VALUES (17680,5,18,53,1);     -- MP +18 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17681,5,20,53,1);     -- MP +20 in areas outside own nation's control
 
+-- Griffinclaw
+INSERT INTO `item_latents` VALUES (17684,25,20,13,267);   -- Allied Tags: Accuracy +20
+INSERT INTO `item_latents` VALUES (17684,355,238,13,267); -- Allied Tags: Adds Weaponskill 238 (Uriel Blade)
+
+-- Lex Talionis
+INSERT INTO `item_latents` VALUES (17685,25,20,13,267);   -- Allied Tags: Accuracy +20
+INSERT INTO `item_latents` VALUES (17685,355,239,13,267); -- Allied Tags: Adds Weaponskill 239 (Glory Slash)
+
 -- Mighty Talwar
 INSERT INTO `item_latents` VALUES (17697,17,15,31,0);    -- [Element: Wind]+15 on Windsday
 INSERT INTO `item_latents` VALUES (17697,287,8,31,0);    -- DMG+8 on Windsday
@@ -2284,6 +2395,9 @@ INSERT INTO `item_latents` VALUES (17952,287,2,16,3);    -- DMG: 43~51, increase
 INSERT INTO `item_latents` VALUES (17952,287,2,16,4);    -- DMG: 43~51, increases by 2 for every person above 2 in party
 INSERT INTO `item_latents` VALUES (17952,287,2,16,5);    -- DMG: 43~51, increases by 2 for every person above 2 in party
 INSERT INTO `item_latents` VALUES (17952,287,2,16,6);    -- DMG: 43~51, increases by 2 for every person above 2 in party
+
+-- Rainmaker
+INSERT INTO `item_latents` VALUES (17963,8,5,13,267); -- Allied Tags: STR +5
 
 -- Barkborer
 INSERT INTO `item_latents` VALUES (17964,165,7,59,17);   -- Vs. plantoid: Critical hit rate +7%
@@ -2460,6 +2574,9 @@ INSERT INTO `item_latents` VALUES (18261,287,15,48,0);   -- DMG:+16 in Dynamis
 INSERT INTO `item_latents` VALUES (18262,20,9,48,0);     -- [Element: Water]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18262,287,2,48,0);    -- DMG:+18 in Dynamis
 
+-- Caestus
+INSERT INTO `item_latents` VALUES (18263,355,10,48,0);   -- ADDS_WEAPONSKILL: 10 in Dynamis
+
 -- Malefic Dagger
 INSERT INTO `item_latents` VALUES (18267,22,7,48,0);     -- [Element: Dark]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18267,287,22,48,0);   -- DMG:23 in Dynamis
@@ -2467,6 +2584,9 @@ INSERT INTO `item_latents` VALUES (18267,287,22,48,0);   -- DMG:23 in Dynamis
 -- Dynamis Dagger
 INSERT INTO `item_latents` VALUES (18268,22,9,48,0);     -- [Element: Dark]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18268,287,3,48,0);    -- DMG:26 in Dynamis
+
+-- Batardeau
+INSERT INTO `item_latents` VALUES (18269,355,26,48,0);   -- ADDS_WEAPONSKILL: 26 in Dynamis
 
 -- Glyptic Sword
 INSERT INTO `item_latents` VALUES (18273,19,7,48,0);     -- [Element: Thunder]+7 in Dynamis
@@ -2476,6 +2596,9 @@ INSERT INTO `item_latents` VALUES (18273,287,39,48,0);   -- DMG:40 in Dynamis
 INSERT INTO `item_latents` VALUES (18274,19,9,48,0);     -- [Element: Thunder]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18274,287,8,48,0);    -- DMG:48 in Dynamis
 
+-- Caliburn
+INSERT INTO `item_latents` VALUES (18275,355,43,48,0);   -- ADDS_WEAPONSKILL: 43 in Dynamis
+
 -- Gilded Blade
 INSERT INTO `item_latents` VALUES (18279,17,7,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18279,287,79,48,0);   -- DMG:80 in Dynamis
@@ -2483,6 +2606,9 @@ INSERT INTO `item_latents` VALUES (18279,287,79,48,0);   -- DMG:80 in Dynamis
 -- Dynamis Blade
 INSERT INTO `item_latents` VALUES (18280,17,9,48,0);     -- [Element: Air]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18280,287,5,48,0);    -- DMG:85 in Dynamis
+
+-- Valhalla
+INSERT INTO `item_latents` VALUES (18281,355,57,48,0);   -- ADDS_WEAPONSKILL: 57 in Dynamis
 
 -- Leonine Axe
 INSERT INTO `item_latents` VALUES (18285,21,7,48,0);     -- [Element: Light]+7 in Dynamis
@@ -2492,6 +2618,9 @@ INSERT INTO `item_latents` VALUES (18285,287,45,48,0);   -- DMG:46 in Dynamis
 INSERT INTO `item_latents` VALUES (18286,21,9,48,0);     -- [Element: Light]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18286,287,4,48,0);    -- DMG:50 in Dynamis
 
+-- Ogre Killer
+INSERT INTO `item_latents` VALUES (18287,355,73,48,0);   -- ADDS_WEAPONSKILL: 73 in Dynamis
+
 -- Agonal Bhuj
 INSERT INTO `item_latents` VALUES (18291,21,7,48,0);     -- [Element: Light]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18291,287,86,48,0);   -- DMG:87 in Dynamis
@@ -2499,6 +2628,9 @@ INSERT INTO `item_latents` VALUES (18291,287,86,48,0);   -- DMG:87 in Dynamis
 -- Dynamis Bhuj
 INSERT INTO `item_latents` VALUES (18292,21,9,48,0);     -- [Element: Light]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18292,287,4,48,0);    -- DMG:93 in Dynamis
+
+-- Abaddon Killer
+INSERT INTO `item_latents` VALUES (18293,355,89,48,0);   -- ADDS_WEAPONSKILL: 89 in Dynamis
 
 -- Hotspur Lance
 INSERT INTO `item_latents` VALUES (18297,18,7,48,0);     -- [Element: Earth]+7 in Dynamis
@@ -2508,6 +2640,9 @@ INSERT INTO `item_latents` VALUES (18297,287,81,48,0);   -- DMG:82 in Dynamis
 INSERT INTO `item_latents` VALUES (18298,18,9,48,0);     -- [Element: Earth]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18298,287,2,48,0);    -- DMG:84 in Dynamis
 
+-- Gae Assail
+INSERT INTO `item_latents` VALUES (18299,355,121,48,0);  -- ADDS_WEAPONSKILL: 121 in Dynamis
+
 -- Memento Scythe
 INSERT INTO `item_latents` VALUES (18303,16,7,48,0);     -- [Element: Ice]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18303,287,81,48,0);   -- DMG:82 in Dynamis
@@ -2515,6 +2650,9 @@ INSERT INTO `item_latents` VALUES (18303,287,81,48,0);   -- DMG:82 in Dynamis
 -- Dynamis Scythe
 INSERT INTO `item_latents` VALUES (18304,16,9,48,0);     -- [Element: Ice]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18304,287,3,48,0);    -- DMG:85 in Dynamis
+
+-- Bec De Faucon
+INSERT INTO `item_latents` VALUES (18305,355,105,48,0);  -- ADDS_WEAPONSKILL: 105 in Dynamis
 
 -- Mimizuku
 INSERT INTO `item_latents` VALUES (18309,22,7,48,0);     -- [Element: Dark]+7 in Dynamis
@@ -2524,6 +2662,9 @@ INSERT INTO `item_latents` VALUES (18309,287,32,48,0);   -- DMG:33 in Dynamis
 INSERT INTO `item_latents` VALUES (18310,22,9,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18310,287,7,48,0);    -- DMG:40 in Dynamis
 
+-- Yoshimitsu
+INSERT INTO `item_latents` VALUES (18311,355,137,48,0);  -- ADDS_WEAPONSKILL: 137 in Dynamis
+
 -- Hayatemaru
 INSERT INTO `item_latents` VALUES (18315,17,7,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18315,287,75,48,0);   -- DMG:76 in Dynamis
@@ -2531,6 +2672,9 @@ INSERT INTO `item_latents` VALUES (18315,287,75,48,0);   -- DMG:76 in Dynamis
 -- Oboromaru
 INSERT INTO `item_latents` VALUES (18316,17,9,48,0);     -- [Element: Air]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18316,287,3,48,0);    -- DMG:79 in Dynamis
+
+-- Totsukanotsurugi
+INSERT INTO `item_latents` VALUES (18317,355,153,48,0);  -- ADDS_WEAPONSKILL: 153 in Dynamis
 
 -- Battering Maul
 INSERT INTO `item_latents` VALUES (18321,19,7,48,0);     -- [Element: Thunder]+9 in Dynamis
@@ -2540,6 +2684,9 @@ INSERT INTO `item_latents` VALUES (18321,287,28,48,0);   -- DMG:29 in Dynamis
 INSERT INTO `item_latents` VALUES (18322,19,9,48,0);     -- [Element: Thunder]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18322,287,5,48,0);    -- DMG:35 in Dynamis
 
+-- Gullintani
+INSERT INTO `item_latents` VALUES (18323,355,170,48,0);  -- ADDS_WEAPONSKILL: 170 in Dynamis
+
 -- Sage's Staff
 INSERT INTO `item_latents` VALUES (18327,15,7,48,0);     -- [Element: Fire]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18327,287,54,48,0);   -- DMG:55 in Dynamis
@@ -2548,6 +2695,9 @@ INSERT INTO `item_latents` VALUES (18327,287,54,48,0);   -- DMG:55 in Dynamis
 INSERT INTO `item_latents` VALUES (18328,15,9,48,0);     -- [Element: Fire]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18328,287,3,48,0);    -- DMG:58 in Dynamis
 
+-- Thyrus
+INSERT INTO `item_latents` VALUES (18329,355,185,48,0);  -- ADDS_WEAPONSKILL: 185 in Dynamis
+
 -- Marksman Gun
 INSERT INTO `item_latents` VALUES (18333,15,7,48,0);     -- [Element: Fire]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18333,287,38,48,0);   -- DMG:39 in Dynamis
@@ -2555,6 +2705,9 @@ INSERT INTO `item_latents` VALUES (18333,287,38,48,0);   -- DMG:39 in Dynamis
 -- Dynamis Gun
 INSERT INTO `item_latents` VALUES (18334,15,9,48,0);     -- [Element: Fire]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18334,287,3,48,0);    -- DMG:42 in Dynamis
+
+-- Ferdinand
+INSERT INTO `item_latents` VALUES (18335,355,216,48,0);  -- ADDS_WEAPONSKILL: 216 in Dynamis
 
 -- Pyrrhic Horn
 INSERT INTO `item_latents` VALUES (18339,14,1,48,0);     -- CHR+1 in Dynamis
@@ -2576,8 +2729,12 @@ INSERT INTO `item_latents` VALUES (18345,287,67,48,0);   -- DMG:68 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,20,9,48,0);     -- [Element: Water]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,287,3,48,0);    -- DMG:71 in Dynamis
 
-INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- Mighty Patas [Element: Fire]+15
-INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- Mighty Patas DMG+10 on Firesday
+-- Futatokoroto
+INSERT INTO `item_latents` VALUES (18347,355,200,48,0);  -- ADDS_WEAPONSKILL: 200 in Dynamis
+
+-- Mighty Patas
+INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- [Element: Fire]+15
+INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- DMG+10 on Firesday
 
 -- Wagh Baghnakhs
 INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- Attack+14 while TP <100%
@@ -2651,6 +2808,9 @@ INSERT INTO `item_latents` VALUES (18491,23,10,6,1000);  -- Attack+10 while TP <
 INSERT INTO `item_latents` VALUES (18491,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18491,287,5,6,1000);  -- DMG+5 while TP <100%
 
+-- Balestarius
+INSERT INTO `item_latents` VALUES (18498,978,2,13,267); -- Allied Tags: Occasionally attacks twice
+
 -- Trainee Axe
 INSERT INTO `item_latents` VALUES (18502,128,1,24,49);   -- Woodworking +1 if skill level < 40
 
@@ -2682,6 +2842,10 @@ INSERT INTO `item_latents` VALUES (18588,23,10,6,1000);  -- Attack+10 while TP <
 INSERT INTO `item_latents` VALUES (18588,25,6,6,1000);   -- Accuracy+6 while TP <100%
 INSERT INTO `item_latents` VALUES (18588,287,6,6,1000);  -- DMG+6 while TP <100%
 
+-- Samudra
+INSERT INTO `item_latents` VALUES (18618,25,30,13,267);   -- Allied Tags: Accuracy +30
+INSERT INTO `item_latents` VALUES (18618,355,240,13,267); -- Allied Tags: Adds Weaponskill 240 (Tartarus Torpor)
+
 -- Imperial Bow
 INSERT INTO `item_latents` VALUES (18683,26,10,58,0);    -- Ranged Accuracy +10 in Assault
 INSERT INTO `item_latents` VALUES (18683,287,2,58,0);    -- DMG+2 in Assault
@@ -2699,6 +2863,12 @@ INSERT INTO `item_latents` VALUES (18717,287,4,6,1000);  -- DMG+4 while TP <100%
 INSERT INTO `item_latents` VALUES (18718,24,10,6,1000);  -- Ranged Attack+10 while TP <100%
 INSERT INTO `item_latents` VALUES (18718,26,5,6,1000);   -- Ranged Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18718,287,4,6,1000);  -- DMG+4 while TP <100%
+
+-- Sturms Report
+INSERT INTO `item_latents` VALUES (18734,30,13,13,267);  -- Allied Tags: Magic Accuracy +13
+
+-- Sonias Plectrum
+INSERT INTO `item_latents` VALUES (18735,491,9,13,267);  -- Allied Tags: Waltz Potency +9%
 
 -- Scogan's Knuckles
 INSERT INTO `item_latents` VALUES (18741,25,10,9,4);     -- With puppet: ACC +10
@@ -2794,6 +2964,12 @@ INSERT INTO `item_latents` VALUES (18992,68,5,13,60);    -- EVA +5 if Dodge Acti
 INSERT INTO `item_latents` VALUES (18992,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (18992,976,5,13,60);   -- Guard +5% if Dodge Active
 
+-- Rose Strap
+INSERT INTO `item_latents` VALUES (19041,73,16,13,267);  -- Allied Tags: Store TP +16
+
+-- Ariesian Grip
+INSERT INTO `item_latents` VALUES (19042,71,19,13,267); -- Allied Tags: hMP +19
+
 -- Conqueror 80
 INSERT INTO `item_latents` VALUES (19060,165,7,13,56);   -- Crit Rate +7% if Berserk Active
 INSERT INTO `item_latents` VALUES (19060,288,3,13,56);   -- Double Attack +3% if Berserk Active
@@ -2853,6 +3029,10 @@ INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- ATT+14 TP<1000
 INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- ACC+5  TP<1000
 INSERT INTO `item_latents` VALUES (19126,287,6,6,1000);      -- DMG+6  TP<1000
 
+-- Cruadin
+INSERT INTO `item_latents` VALUES (19155,165,15,13,267); -- Allied Tags: Critical Hit Rate +15%
+INSERT INTO `item_latents` VALUES (19155,421,5,13,267);  -- TODO: Verification needed. Allied Tags: Critical Hit Damage +5
+
 -- Scheherazade
 INSERT INTO `item_latents` VALUES (19158,165,7,59,14);   -- Vs. lizards: Critical hit rate +7%
 
@@ -2861,6 +3041,10 @@ INSERT INTO `item_latents` VALUES (19161,8,1,16,3);      -- STR +1~4,party size 
 INSERT INTO `item_latents` VALUES (19161,8,1,16,4);      -- STR +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (19161,8,1,16,5);      -- STR +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (19161,8,1,16,6);      -- STR +1~4,party size 3+. Effect strengthens with more members
+
+-- Fullmetal Bullet
+INSERT INTO `item_latents` VALUES (19214,8,2,13,267);  -- Allied Tags: STR +2
+INSERT INTO `item_latents` VALUES (19214,9,2,13,267);  -- Allied Tags: DEX +2
 
 -- Wurger
 INSERT INTO `item_latents` VALUES (19222,24,3,52,6);     -- Ranged attack +3 in Water weather

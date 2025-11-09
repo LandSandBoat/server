@@ -29,19 +29,21 @@ class CCharEntity;
 // This packet is sent by the server to populate the clients mission and quest information.
 namespace GP_SERV_COMMAND_MISSION
 {
-    // Port 0xFFFE: The Voracious Resurgence Information
-    // Contains both in-progress and complete missions for TVR.
-    class TVR final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, TVR>
-    {
-    public:
-        struct PacketData
-        {
-            uint32_t Expansion_TVR; // PS2: data
-            uint32_t padding08[7];  // PS2: (New; did not exist.)
-            uint16_t Port;          // PS2: Port
-            uint16_t padding26;     // PS2: (New; did not exist.)
-        };
 
-        TVR(CCharEntity* PChar);
+// Port 0xFFFE: The Voracious Resurgence Information
+// Contains both in-progress and complete missions for TVR.
+class TVR final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, TVR>
+{
+public:
+    struct PacketData
+    {
+        uint32_t Expansion_TVR; // PS2: data
+        uint32_t padding08[7];  // PS2: (New; did not exist.)
+        uint16_t Port;          // PS2: Port
+        uint16_t padding26;     // PS2: (New; did not exist.)
     };
+
+    TVR(CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISSION

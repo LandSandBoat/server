@@ -31,20 +31,22 @@
 
 namespace
 {
-    std::string formatDuration(const std::chrono::milliseconds ms)
-    {
-        if (ms.count() < 1000)
-        {
-            return fmt::format("{} ms", ms.count());
-        }
 
-        return fmt::format("{:.3f} s", ms.count() / 1000.0);
+std::string formatDuration(const std::chrono::milliseconds ms)
+{
+    if (ms.count() < 1000)
+    {
+        return fmt::format("{} ms", ms.count());
     }
 
-    std::string pluralize(size_t count, const std::string& word)
-    {
-        return fmt::format("{} {}{}", count, word, count != 1 ? "s" : "");
-    }
+    return fmt::format("{:.3f} s", ms.count() / 1000.0);
+}
+
+std::string pluralize(size_t count, const std::string& word)
+{
+    return fmt::format("{} {}{}", count, word, count != 1 ? "s" : "");
+}
+
 } // namespace
 
 ConsoleReporter::ConsoleReporter(const bool verbose)

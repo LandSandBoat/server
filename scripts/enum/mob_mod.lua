@@ -99,4 +99,5 @@ xi.mobMod =
     RANGED_DAMAGE_OFFSET   = 88, -- Adds or subtracts the mob's ranged base damage offset.
     AVATAR_PETID           = 89, -- A value from xi.petId to select model/ability from when owner uses astral flow
     AVATAR_ASTRAL_DELAY    = 90, -- Number of milliseconds to delay AF after avatar spawn
+    H2H_SINGLE_SWING       = 91, -- Mob will have only one swing per attack even as MNK with H2H skill
 }

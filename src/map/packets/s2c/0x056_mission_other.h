@@ -32,20 +32,22 @@ class CCharEntity;
 // This packet is sent by the server to populate the clients mission and quest information.
 namespace GP_SERV_COMMAND_MISSION
 {
-    // Other Port: ToAU, WoTG missions (in-progress + completed).
-    // All quests in progress/completed including Abyssea, Campaign and Coalition.
-    class OTHER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, OTHER>
-    {
-    public:
-        struct PacketData
-        {
-            uint32_t Data[8];   // PS2: data
-            uint16_t Port;      // PS2: Port
-            uint16_t padding26; // PS2: (New; did not exist.)
-        };
 
-        OTHER(const CCharEntity* PChar, MissionComplete log);
-        OTHER(const CCharEntity* PChar, QuestOffer log);
-        OTHER(const CCharEntity* PChar, QuestComplete log);
+// Other Port: ToAU, WoTG missions (in-progress + completed).
+// All quests in progress/completed including Abyssea, Campaign and Coalition.
+class OTHER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, OTHER>
+{
+public:
+    struct PacketData
+    {
+        uint32_t Data[8];   // PS2: data
+        uint16_t Port;      // PS2: Port
+        uint16_t padding26; // PS2: (New; did not exist.)
     };
+
+    OTHER(const CCharEntity* PChar, MissionComplete log);
+    OTHER(const CCharEntity* PChar, QuestOffer log);
+    OTHER(const CCharEntity* PChar, QuestComplete log);
+};
+
 } // namespace GP_SERV_COMMAND_MISSION

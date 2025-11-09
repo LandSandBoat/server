@@ -58,9 +58,10 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         GAKI              = GetFirstID('Gaki'),
         KUJHU_GRANITESKIN = GetFirstID('KuJhu_Graniteskin'),
         MAAT              = GetFirstID('Maat'),
+        OSSCHAART         = GetFirstID('Osschaart'),
         PLATOON_SCORPION  = GetFirstID('Platoon_Scorpion'),
-        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
         QUEEN_JELLY       = GetFirstID('Queen_Jelly'),
+        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
     },
 
     npc =

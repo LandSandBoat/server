@@ -31,20 +31,22 @@ class CCharEntity;
 // This packet is sent by the server to populate the clients extended job information.
 namespace GP_SERV_COMMAND_EXTENDED_JOB
 {
-    class MON final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EXTENDED_JOB, MON>
-    {
-    public:
-        struct PacketData
-        {
-            uint8_t  Job;      // PS2: Job
-            uint8_t  IsSubJob; // PS2: IsSubJob
-            uint8_t  padding01[2];
-            uint16_t Species;
-            uint8_t  padding02[2];
-            uint16_t EquippedInstincts[12];
-            uint8_t  padding03[124];
-        };
 
-        MON(const CCharEntity* PChar);
+class MON final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EXTENDED_JOB, MON>
+{
+public:
+    struct PacketData
+    {
+        uint8_t  Job;      // PS2: Job
+        uint8_t  IsSubJob; // PS2: IsSubJob
+        uint8_t  padding01[2];
+        uint16_t Species;
+        uint8_t  padding02[2];
+        uint16_t EquippedInstincts[12];
+        uint8_t  padding03[124];
     };
+
+    MON(const CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_EXTENDED_JOB

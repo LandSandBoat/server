@@ -65,13 +65,13 @@ void lua_init()
     // THIS IS A FULLY MAIN THREAD BLOCKING SLEEP
     // DO NOT USE THIS IN REGULAR CODE
     // THIS IS ONLY FOR TESTING
-    // clang-format off
-    lua.set_function("sleep", [](float sec)
-    {
-        std::cout << "Blocking main thread for " << sec << " seconds!\n";
-        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(sec * 1000)));
-    });
-    // clang-format on
+    lua.set_function(
+        "sleep",
+        [](float sec)
+        {
+            std::cout << "Blocking main thread for " << sec << " seconds!\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(sec * 1000)));
+        });
 
     // Attempt to startup lldebugger
     auto result = lua["require"]("lldebugger");
@@ -154,7 +154,7 @@ std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
 
             // Stringify everything first
             std::vector<std::string> stringVec;
-            for (auto const& [keyObj, valObj] : table)
+            for (const auto& [keyObj, valObj] : table)
             {
                 if (keyObj.get_type() == sol::type::string)
                 {
@@ -167,14 +167,16 @@ std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
             }
 
             // Accumulate into a pretty string
-            // clang-format off
+
             std::string outStr = "\n" + unindent + "{" + (stringVec.empty() ? "" : "\n");
-            outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
-            [](std::string const& ss, std::string const& s)
-            {
-                return ss.empty() ? s : (ss + ",\n" + s);
-            });
-            // clang-format on
+            outStr += std::accumulate(
+                std::begin(stringVec),
+                std::end(stringVec),
+                std::string(),
+                [](const std::string& ss, const std::string& s)
+                {
+                    return ss.empty() ? s : (ss + ",\n" + s);
+                });
 
             return outStr + (stringVec.empty() ? "" : "\n") + unindent + "}";
         }
@@ -225,7 +227,7 @@ void lua_print(sol::variadic_args va)
 std::string lua_fmt(const std::string& fmtStr, sol::variadic_args va)
 {
     fmt::dynamic_format_arg_store<fmt::format_context> store;
-    for (auto const& arg : va)
+    for (const auto& arg : va)
     {
         switch (arg.get_type())
         {

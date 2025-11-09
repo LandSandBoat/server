@@ -165,9 +165,15 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
     }
     else
     {
-        PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-                                          { return recast.ID == id; }),
-                           PRecastList->end());
+        PRecastList->erase(
+            std::remove_if(
+                PRecastList->begin(),
+                PRecastList->end(),
+                [&id](auto& recast)
+                {
+                    return recast.ID == id;
+                }),
+            PRecastList->end());
     }
 }
 

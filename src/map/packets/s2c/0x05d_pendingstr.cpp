@@ -24,10 +24,20 @@
 #include <cstring>
 
 // TODO: std::array
-GP_SERV_COMMAND_PENDINGSTR::GP_SERV_COMMAND_PENDINGSTR(const std::string& string0, const std::string& string1, const std::string& string2,
-                                                       const std::string& string3, const uint32_t param0, const uint32_t param1, const uint32_t param2,
-                                                       const uint32_t param3, const uint32_t param4, const uint32_t param5, const uint32_t param6,
-                                                       const uint32_t param7, const uint32_t param8)
+GP_SERV_COMMAND_PENDINGSTR::GP_SERV_COMMAND_PENDINGSTR(
+    const std::string& string0,
+    const std::string& string1,
+    const std::string& string2,
+    const std::string& string3,
+    const uint32_t     param0,
+    const uint32_t     param1,
+    const uint32_t     param2,
+    const uint32_t     param3,
+    const uint32_t     param4,
+    const uint32_t     param5,
+    const uint32_t     param6,
+    const uint32_t     param7,
+    const uint32_t     param8)
 {
     auto& packet = this->data();
 

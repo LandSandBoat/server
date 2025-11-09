@@ -30,18 +30,20 @@ class CCharEntity;
 // This packet is sent by the server to inform the client of multiple different kinds of information.
 namespace GP_SERV_COMMAND_MISCDATA
 {
-    // Type 0x09: Status Effect Icons (data: 196 bytes, total: 200 bytes)
-    class STATUS_ICONS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, STATUS_ICONS>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_MISCDATA_TYPE type;           // PS2: type
-            uint16_t                      unknown06;      // PS2: (New; did not exist.)
-            uint16_t                      icons[32];      // Status effect icon IDs (64 bytes)
-            uint32_t                      timestamps[32]; // Status effect expiration timestamps (Vanadiel time) (128 bytes)
-        };
 
-        STATUS_ICONS(const CCharEntity* PChar);
+// Type 0x09: Status Effect Icons (data: 196 bytes, total: 200 bytes)
+class STATUS_ICONS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, STATUS_ICONS>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;           // PS2: type
+        uint16_t                      unknown06;      // PS2: (New; did not exist.)
+        uint16_t                      icons[32];      // Status effect icon IDs (64 bytes)
+        uint32_t                      timestamps[32]; // Status effect expiration timestamps (Vanadiel time) (128 bytes)
     };
+
+    STATUS_ICONS(const CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISCDATA

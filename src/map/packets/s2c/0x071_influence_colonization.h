@@ -61,23 +61,25 @@ struct colonizationzones_t
 // This packet is sent by the server to inform the client of the campaign and colonization map information.
 namespace GP_SERV_COMMAND_INFLUENCE
 {
-    // Mode=3 Colonization Information
-    class COLONIZATION final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_INFLUENCE, COLONIZATION>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_INFLUENCE_MODE Mode;      // PS2: (New; did not exist.)
-            uint8_t                        padding05; // PS2: (New; did not exist.)
-            uint16_t                       Length;    // PS2: (New; did not exist.)
-            uint32_t                       unknown00; // PS2: (New; did not exist.)
-            uint32_t                       unknown01; // PS2: (New; did not exist.)
-            coalitionranks_t               Ranks;     // PS2: (New; did not exist.)
-            colonizationzones_t            Zones;     // PS2: (New; did not exist.)
-            int32_t                        Bayld;     // PS2: (New; did not exist.)
-            uint8_t                        padding00[144];
-        };
 
-        COLONIZATION(CCharEntity* PChar);
+// Mode=3 Colonization Information
+class COLONIZATION final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_INFLUENCE, COLONIZATION>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_INFLUENCE_MODE Mode;      // PS2: (New; did not exist.)
+        uint8_t                        padding05; // PS2: (New; did not exist.)
+        uint16_t                       Length;    // PS2: (New; did not exist.)
+        uint32_t                       unknown00; // PS2: (New; did not exist.)
+        uint32_t                       unknown01; // PS2: (New; did not exist.)
+        coalitionranks_t               Ranks;     // PS2: (New; did not exist.)
+        colonizationzones_t            Zones;     // PS2: (New; did not exist.)
+        int32_t                        Bayld;     // PS2: (New; did not exist.)
+        uint8_t                        padding00[144];
     };
+
+    COLONIZATION(CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_INFLUENCE

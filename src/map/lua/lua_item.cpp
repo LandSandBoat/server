@@ -346,7 +346,7 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     m_PLuaItem->setSoulPlateData(name, interestData, zeni, skillIndex, fp);
 }
@@ -375,9 +375,9 @@ auto CLuaItem::getExData() -> sol::table
     return table;
 }
 
-void CLuaItem::setExData(sol::table const& newData)
+void CLuaItem::setExData(const sol::table& newData)
 {
-    for (auto const& [keyObj, valObj] : newData)
+    for (const auto& [keyObj, valObj] : newData)
     {
         uint8 key = keyObj.as<uint8>();
         uint8 val = valObj.as<uint8>();

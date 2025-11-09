@@ -25,21 +25,23 @@
 
 namespace
 {
-    auto getZMQEndpointString() -> std::string
-    {
-        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
-    }
 
-    auto getZMQRoutingId() -> uint64
-    {
-        // We will only ever have a single login server, so we can use different logic for the routing id
+auto getZMQEndpointString() -> std::string
+{
+    return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+}
 
-        const auto ip   = str2ip(settings::get<std::string>("network.LOGIN_AUTH_IP"));
-        const auto port = settings::get<uint16>("network.LOGIN_AUTH_PORT");
+auto getZMQRoutingId() -> uint64
+{
+    // We will only ever have a single login server, so we can use different logic for the routing id
 
-        return IPP(ip, port).getRawIPP();
-    }
-    constexpr auto kSessionCleanTime = 15min;
+    const auto ip   = str2ip(settings::get<std::string>("network.LOGIN_AUTH_IP"));
+    const auto port = settings::get<uint16>("network.LOGIN_AUTH_PORT");
+
+    return IPP(ip, port).getRawIPP();
+}
+constexpr auto kSessionCleanTime = 15min;
+
 } // namespace
 
 ConnectEngine::ConnectEngine(asio::io_context& io_context)

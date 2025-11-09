@@ -28507,7 +28507,7 @@ const std::map<unsigned int, const char*> values = {
     { 168624659, "Raebrimm's memento" },
 };
 
-std::string doLookup(std::string const& str, std::vector<uint16>& data)
+std::string doLookup(const std::string& str, std::vector<uint16>& data)
 {
     if (data.size() != 4)
     {
@@ -28562,7 +28562,7 @@ std::string doLookup(std::string const& str, std::vector<uint16>& data)
     return values.at(key);
 }
 
-std::string autotranslate::replaceBytes(std::string const& str)
+std::string autotranslate::replaceBytes(const std::string& str)
 {
     bool                inATBlock = false;
     std::string         outStr    = "";

@@ -27,44 +27,46 @@
 // This packet is sent by the server to inform the client of information related to PvP content. (ie. Ballista)
 namespace GP_SERV_COMMAND_BALLISTA
 {
-    // Mode=2 General Scoreboard / Information Update
-    class SCOREBOARD final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BALLISTA, SCOREBOARD>
-    {
-    public:
-        struct PacketData
-        {
-            uint16_t Flags : 6;      // PS2: Flags
-            uint16_t Mode : 10;      // PS2: Mode
-            uint16_t padding06;      // PS2: (New; did not exist.)
-            int32_t  PetraCount;     // PS2: (New; did not exist.)
-            int32_t  Score[3];       // PS2: (New; did not exist.)
-            int16_t  Scoreboard[2];  // PS2: (New; did not exist.)
-            uint8_t  MatchPoints[3]; // PS2: (New; did not exist.)
-            uint8_t  MatchSet;       // PS2: (New; did not exist.)
-            uint32_t Flammes;        // PS2: (New; did not exist.)
-            int32_t  FlammeFlg;      // PS2: (New; did not exist.)
-        };
 
-        // TODO: Unimplemented
-        SCOREBOARD() = default;
+// Mode=2 General Scoreboard / Information Update
+class SCOREBOARD final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BALLISTA, SCOREBOARD>
+{
+public:
+    struct PacketData
+    {
+        uint16_t Flags : 6;      // PS2: Flags
+        uint16_t Mode : 10;      // PS2: Mode
+        uint16_t padding06;      // PS2: (New; did not exist.)
+        int32_t  PetraCount;     // PS2: (New; did not exist.)
+        int32_t  Score[3];       // PS2: (New; did not exist.)
+        int16_t  Scoreboard[2];  // PS2: (New; did not exist.)
+        uint8_t  MatchPoints[3]; // PS2: (New; did not exist.)
+        uint8_t  MatchSet;       // PS2: (New; did not exist.)
+        uint32_t Flammes;        // PS2: (New; did not exist.)
+        int32_t  FlammeFlg;      // PS2: (New; did not exist.)
     };
 
-    // Mode=3 Scout Response
-    class SCOUT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BALLISTA, SCOUT>
-    {
-    public:
-        struct PacketData
-        {
-            uint16_t Flags : 6;       // PS2: Flags
-            uint16_t Mode : 10;       // PS2: Mode
-            uint16_t padding06;       // PS2: (New; did not exist.)
-            uint32_t RookUniqueNo;    // PS2: (New; did not exist.)
-            uint32_t padding0C;       // PS2: (New; did not exist.)
-            float    RookPosition[4]; // PS2: (New; did not exist.)
-            float    RookDistance;    // PS2: (New; did not exist.)
-        };
+    // TODO: Unimplemented
+    SCOREBOARD() = default;
+};
 
-        // TODO: Unimplemented
-        SCOUT() = default;
+// Mode=3 Scout Response
+class SCOUT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BALLISTA, SCOUT>
+{
+public:
+    struct PacketData
+    {
+        uint16_t Flags : 6;       // PS2: Flags
+        uint16_t Mode : 10;       // PS2: Mode
+        uint16_t padding06;       // PS2: (New; did not exist.)
+        uint32_t RookUniqueNo;    // PS2: (New; did not exist.)
+        uint32_t padding0C;       // PS2: (New; did not exist.)
+        float    RookPosition[4]; // PS2: (New; did not exist.)
+        float    RookDistance;    // PS2: (New; did not exist.)
     };
+
+    // TODO: Unimplemented
+    SCOUT() = default;
+};
+
 } // namespace GP_SERV_COMMAND_BALLISTA

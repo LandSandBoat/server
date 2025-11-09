@@ -44,12 +44,14 @@ typedef std::vector<GardenResult_t> GardenResultList_t;
 
 namespace gardenutils
 {
-    void Initialize();
 
-    void                      UpdateGardening(CCharEntity* PChar, bool sendPacket);
-    std::tuple<uint16, uint8> CalculateResults(CCharEntity* PChar, CItemFlowerpot* PItem);
-    void                      GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed = false);
-    uint8                     GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
+void Initialize();
+
+void                      UpdateGardening(CCharEntity* PChar, bool sendPacket);
+std::tuple<uint16, uint8> CalculateResults(CCharEntity* PChar, CItemFlowerpot* PItem);
+void                      GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed = false);
+uint8                     GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
+
 } // namespace gardenutils
 
 #endif // _GARDENUTILS_H

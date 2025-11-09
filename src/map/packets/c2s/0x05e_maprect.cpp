@@ -30,17 +30,19 @@
 
 namespace
 {
-    constexpr auto mogHouseZoneLine = 1903324538;
 
-    const auto denyZone = [](CCharEntity* PChar)
-    {
-        PChar->loc.p.rotation += 128;
+constexpr auto mogHouseZoneLine = 1903324538;
 
-        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
-        PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, PChar->loc.p, POSMODE::RESET);
+const auto denyZone = [](CCharEntity* PChar)
+{
+    PChar->loc.p.rotation += 128;
 
-        PChar->status = STATUS_TYPE::NORMAL;
-    };
+    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
+    PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, PChar->loc.p, POSMODE::RESET);
+
+    PChar->status = STATUS_TYPE::NORMAL;
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_MAPRECT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -120,10 +122,14 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
             auto moghouseExitRegions          = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN, REGION_TYPE::ADOULIN_ISLANDS };
-            auto moghouseSameRegion           = std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
-                                                            [&destinationRegion](const REGION_TYPE acceptedReg)
-                                                            { return destinationRegion == acceptedReg; });
-            auto moghouseQuestComplete        = PChar->profile.mhflag & (MyRoomExitBit ? 0x01 << (MyRoomExitBit - 1) : 0);
+            auto moghouseSameRegion           = std::any_of(
+                moghouseExitRegions.begin(),
+                moghouseExitRegions.end(),
+                [&destinationRegion](const REGION_TYPE acceptedReg)
+                {
+                    return destinationRegion == acceptedReg;
+                });
+            auto moghouseQuestComplete = PChar->profile.mhflag & (MyRoomExitBit ? 0x01 << (MyRoomExitBit - 1) : 0);
 
             if (startingRegion == REGION_TYPE::ADOULIN_ISLANDS)
             {

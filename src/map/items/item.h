@@ -110,19 +110,19 @@ public:
     void setSent(bool sent);
 
     const std::string& getName();
-    void               setName(std::string const& name);
+    void               setName(const std::string& name);
 
     const std::string& getSender();
-    void               setSender(std::string const& sender);
+    void               setSender(const std::string& sender);
 
     const std::string& getReceiver();
-    void               setReceiver(std::string const& receiver);
+    void               setReceiver(const std::string& receiver);
 
     virtual const std::string getSignature();
-    virtual void              setSignature(std::string const& signature);
+    virtual void              setSignature(const std::string& signature);
 
     bool isSoultrapper() const;
-    void setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> std::tuple<std::string, uint32, uint8, uint16, uint8>;
 
     bool isMannequin() const;

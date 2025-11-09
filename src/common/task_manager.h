@@ -60,7 +60,7 @@ public:
     {
     public:
         template <typename F>
-        CTask(std::string const& name, timer::time_point tick, std::any data, TASKTYPE type, timer::duration interval, F&& func)
+        CTask(const std::string& name, timer::time_point tick, std::any data, TASKTYPE type, timer::duration interval, F&& func)
         : m_name(name)
         , m_type(type)
         , m_tick(tick)
@@ -88,13 +88,13 @@ public:
     CTask* AddTask(CTask*);
 
     template <typename F>
-    CTask* AddTask(std::string const& InitName, timer::time_point InitTick, std::any InitData, TASKTYPE InitType, timer::duration InitInterval, F&& InitFunc)
+    CTask* AddTask(const std::string& InitName, timer::time_point InitTick, std::any InitData, TASKTYPE InitType, timer::duration InitInterval, F&& InitFunc)
     {
         return AddTask(new CTask(InitName, InitTick, InitData, InitType, InitInterval, std::forward<F>(InitFunc)));
     }
 
     auto doExpiredTasks(timer::time_point tick) -> timer::duration;
-    void RemoveTask(std::string const& TaskName);
+    void RemoveTask(const std::string& TaskName);
 
 protected:
     CTaskManager() = default;

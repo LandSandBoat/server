@@ -93,11 +93,12 @@ FROM staging AS devtools
 
 # Install misc dev/ci tools on top of build tools.
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-    clang-format \
+    clang-format-20 \
     cppcheck \
     gdb \
     luarocks \
     && rm -rf /var/lib/apt/lists/*
+RUN ln -s /usr/bin/clang-format-20 /usr/bin/clang-format
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
 ENV PATH="/xiadmin/.luarocks/bin:$PATH"
 

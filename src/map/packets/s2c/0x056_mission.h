@@ -48,30 +48,32 @@ struct tales_beginning_t
 // This packet is sent by the server to populate the clients mission and quest information.
 namespace GP_SERV_COMMAND_MISSION
 {
-    // Port 0xFFFF: Main Mission Information
-    // This contains either missions in progress for certain expansions, or a combination of current missions and completed missions.
-    // In-progress only: RoTZ, Nation
-    // Both: ACP, AMK, ASA, CoP, SoA, RoV
-    // Tales Beginning indicates which expansions the player has declined starting.
-    // Note: ToAU and WoTG are NOT included in this packet.
-    class MISSION final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, MISSION>
-    {
-    public:
-        struct PacketData
-        {
-            uint32_t          Nation;           // PS2: data
-            uint32_t          NationMission;    // PS2: data
-            uint32_t          Expansion_RotZ;   // PS2: data
-            uint32_t          Expansion_CoP;    // PS2: data
-            uint32_t          Expansion_CoP2;   // PS2: data
-            expansion_addon_t Expansion_Addons; // PS2: data - This is represented as a single uint32 on XiPackets
-            tales_beginning_t TalesBeginning;   // PS2: data - This is represented as a single uint32 on XiPackets
-            uint32_t          Expansion_SoA;    // PS2: data
-            uint32_t          Expansion_RoV;    // PS2: data
-            uint16_t          Port;             // PS2: Port
-            uint16_t          padding26;        // PS2: (New; did not exist.)
-        };
 
-        MISSION(const CCharEntity* PChar);
+// Port 0xFFFF: Main Mission Information
+// This contains either missions in progress for certain expansions, or a combination of current missions and completed missions.
+// In-progress only: RoTZ, Nation
+// Both: ACP, AMK, ASA, CoP, SoA, RoV
+// Tales Beginning indicates which expansions the player has declined starting.
+// Note: ToAU and WoTG are NOT included in this packet.
+class MISSION final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, MISSION>
+{
+public:
+    struct PacketData
+    {
+        uint32_t          Nation;           // PS2: data
+        uint32_t          NationMission;    // PS2: data
+        uint32_t          Expansion_RotZ;   // PS2: data
+        uint32_t          Expansion_CoP;    // PS2: data
+        uint32_t          Expansion_CoP2;   // PS2: data
+        expansion_addon_t Expansion_Addons; // PS2: data - This is represented as a single uint32 on XiPackets
+        tales_beginning_t TalesBeginning;   // PS2: data - This is represented as a single uint32 on XiPackets
+        uint32_t          Expansion_SoA;    // PS2: data
+        uint32_t          Expansion_RoV;    // PS2: data
+        uint16_t          Port;             // PS2: Port
+        uint16_t          padding26;        // PS2: (New; did not exist.)
     };
+
+    MISSION(const CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISSION

@@ -58,6 +58,10 @@ content.groups =
 content.loot =
 {
     {
+        { itemId = xi.item.GIL, weight = 1000, amount = 18000 },
+    },
+
+    {
         { itemId = xi.item.NONE,             weight = 100 }, -- nothing
         { itemId = xi.item.EVASION_TORQUE,   weight = 150 }, -- evasion_torque
         { itemId = xi.item.PARRYING_TORQUE,  weight = 150 }, -- parrying_torque

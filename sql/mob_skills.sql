@@ -327,7 +327,7 @@ INSERT INTO `mob_skills` VALUES (309,53,'spore',0,0.0,7.0,2000,1500,4,0,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (310,54,'queasyshroom',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (311,55,'numbshroom',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (312,56,'shakeshroom',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (313,57,'counterspore',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (313,201,'counterspore',0,0.0,15.0,2000,0,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (314,58,'silence_gas',4,0.0,13.5,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (315,59,'dark_spore',4,0.0,13.5,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (316,60,'impale',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1266,7 +1266,7 @@ INSERT INTO `mob_skills` VALUES (1248,939,'trinary_absorption',0,0.0,7.0,2000,15
 INSERT INTO `mob_skills` VALUES (1249,940,'spirit_tap',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1250,941,'binary_tap',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1251,942,'trinary_tap',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1252,943,'shadow_spread',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1252,943,'shadow_spread',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1253,956,'vanity_strike',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1254,957,'wanion',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1255,958,'occultation',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
@@ -1351,12 +1351,12 @@ INSERT INTO `mob_skills` VALUES (1332,63,'extremely_bad_breath',4,0.0,10.0,2000,
 -- INSERT INTO `mob_skills` VALUES (1334,154,'contamination',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1335,151,'toxic_pick',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1336,289,'frenzied_rage',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1337,1081,'charm',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1337,438,'charm',0,0.0,18.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1338,234,'infernal_pestilence',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1339,220,'bane',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1340,17,'crossthrash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1341,1085,'knife_edge_circle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1342,1086,'train_fall',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1341,993,'knife_edge_circle',4,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1342,992,'train_fall',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1343,1087,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1344,1088,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1345,1089,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1374,7 +1374,7 @@ INSERT INTO `mob_skills` VALUES (1356,1007,'voiceless_storm',1,0.0,15.0,2000,100
 INSERT INTO `mob_skills` VALUES (1357,1008,'tidal_dive',1,0.0,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1358,1009,'plasma_charge',0,0.0,7.0,2000,1000,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1359,855,'chthonian_ray',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1360,855,'apocalyptic_ray',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1360,855,'apocalyptic_ray',4,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1361,1105,'viscid_secretion',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1362,1106,'wild_ginseng',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1363,1107,'hungry_crunch',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1948,8 +1948,8 @@ INSERT INTO `mob_skills` VALUES (1930,1279,'tidal_slash',4,0.0,10.0,2000,1500,4,
 INSERT INTO `mob_skills` VALUES (1931,1280,'eagle_eye_shot',0,0.0,25.0,2000,0,4,2,0,0,0,0,0); -- lamiae
 INSERT INTO `mob_skills` VALUES (1932,16,'eagle_eye_shot',0,0.0,25.0,2000,0,4,2,0,0,0,0,0); -- swift shot ??
 INSERT INTO `mob_skills` VALUES (1933,432,'azure_lore',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1934,432,'wild_card',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1935,1679,'overdrive',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1934,432,'wild_card',0,0.0,7.0,2000,0,1,0,30,0,0,0,0); -- TODO : Verify animation and mechanics, current animation is a working placeholder
+INSERT INTO `mob_skills` VALUES (1935,432,'overdrive',0,0.0,18.0,2000,0,1,0,30,0,0,0,0); -- TODO : Verify animation and mechanics, current animation is a working placeholder
 INSERT INTO `mob_skills` VALUES (1936,1299,'shibaraku',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);  -- need correct animation & timings
 -- INSERT INTO `mob_skills` VALUES (1937,1681,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- gessho's teleport is probably here, one skill in one out.
 -- INSERT INTO `mob_skills` VALUES (1938,1301,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- gessho's teleport is probably here, one skill in one out.
@@ -2273,8 +2273,8 @@ INSERT INTO `mob_skills` VALUES (2256,432,'astral_flow_pet',0,0.0,7.0,2000,0,1,2
 INSERT INTO `mob_skills` VALUES (2257,432,'azure_lore',0,0.0,18.0,2000,0,1,0,30,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2258,2002,'wild_card',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2259,2003,'overdrive',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2260,2004,'trance',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2261,2005,'tabula_rasa',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2260,432,'trance',0,0.0,7.0,2000,0,1,0,30,0,0,0,0); -- TODO : Verify animation and mechanics, current animation is a working placeholder
+INSERT INTO `mob_skills` VALUES (2261,432,'tabula_rasa',0,0.0,7.0,2000,0,1,0,30,0,0,0,0); -- TODO : Verify animation and mechanics, current animation is a working placeholder
 -- INSERT INTO `mob_skills` VALUES (2262,1617,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2263,2007,'tornado_edge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2264,2008,'shoulder_charge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

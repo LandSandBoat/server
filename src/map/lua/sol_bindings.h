@@ -25,6 +25,7 @@
 
 // sol changes this behavior to return 0 rather than truncating
 // we rely on that, so change it back
+// clang-format off
 #undef lua_tointeger
 #define lua_tointeger(L, n) static_cast<lua_Integer>(std::floor(lua_tonumber(L, n)))
 
@@ -59,6 +60,7 @@
     {                                                                                                     \
         return obj ? sol::stack::push<LuaType>(L, (BaseCppType*)obj) : sol::stack::push(L, sol::lua_nil); \
     }
+// clang-format on
 
 //
 // Class bindings

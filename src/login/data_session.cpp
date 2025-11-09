@@ -268,10 +268,13 @@ void data_session::read_func()
             uint16 PrevZone = 0;
             uint16 gmlevel  = 0;
 
-            const auto rset = db::preparedStmt("SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname "
-                                               "FROM zone_settings, chars "
-                                               "WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = ? AND accid = ?",
-                                               charid, session.accountID);
+            const auto rset = db::preparedStmt(
+                "SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname "
+                "FROM zone_settings, chars "
+                "WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = ? AND accid = ?",
+                charid,
+                session.accountID);
+
             if (rset && rset->rowsCount() && rset->next())
             {
                 ZoneID   = rset->get<uint16>("zoneid");
@@ -308,13 +311,19 @@ void data_session::read_func()
                 characterSelectionResponse.server_id     = (charid >> 16) & 0xFF; // TODO: Looks wrong? shouldn't this be a server index?
 
                 ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}",
-                                     ZoneID, ip2str(ZoneIP), ZonePort, ip2str(characterSelectionResponse.cache_ip), characterSelectionResponse.cache_port, charid));
+                                     ZoneID,
+                                     ip2str(ZoneIP),
+                                     ZonePort,
+                                     ip2str(characterSelectionResponse.cache_ip),
+                                     characterSelectionResponse.cache_port,
+                                     charid));
 
                 // If client was zoning out but was never seen at the destination past 2 minutes, remove old session
                 const auto rset2 = db::preparedStmt("SELECT * "
                                                     "FROM accounts_sessions "
                                                     "WHERE accid = ? AND charid = ? AND client_port = '0' AND last_zoneout_time <= SUBTIME(NOW(), \"00:02:00\")",
-                                                    session.accountID, charid);
+                                                    session.accountID,
+                                                    charid);
                 if (rset2 && rset2->rowsCount() != 0 && rset2->next())
                 {
                     // KillSession? Seems overkill with current knowledge. client_port of 0 indicates the other map server never saw a packet and decrypted it correctly.
@@ -391,7 +400,12 @@ void data_session::read_func()
 
                     if (!db::preparedStmt("INSERT INTO accounts_sessions(accid, charid, session_key, server_addr, server_port, client_addr, version_mismatch) "
                                           "VALUES(?, ?, ?, ?, ?, ?, ?)",
-                                          session.accountID, charid, key3, ZoneIP, ZonePort, accountIP,
+                                          session.accountID,
+                                          charid,
+                                          key3,
+                                          ZoneIP,
+                                          ZonePort,
+                                          accountIP,
                                           session.versionMismatch ? 1 : 0))
                     {
                         if (auto viewSession = session.view_session.get())
@@ -462,7 +476,10 @@ void data_session::read_func()
 
                 if (!db::preparedStmt("INSERT INTO account_ip_record(login_time,accid,charid,client_ip) "
                                       "VALUES (?, ?, ?, ?)",
-                                      timeAndDate, session.accountID, charid, ip2str(accountIP)))
+                                      timeAndDate,
+                                      session.accountID,
+                                      charid,
+                                      ip2str(accountIP)))
                 {
                     ShowError("data_session: Could not write info to account_ip_record.");
                 }

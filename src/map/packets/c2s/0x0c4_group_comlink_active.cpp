@@ -38,135 +38,144 @@
 
 namespace
 {
-    const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
+
+const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
+{
+    uint32_t       linkshellId    = 0;
+    const uint16_t linkshellColor = (data.a << 12) | (data.b << 8) | (data.g << 4) | data.r;
+
+    char DecodedName[DecodeStringLength]    = {};
+    char EncodedName[LinkshellStringLength] = {};
+
+    const auto encodedRawName = asStringFromUntrustedSource(data.sComLinkName, sizeof(data.sComLinkName));
+
+    DecodeStringLinkshell(encodedRawName, DecodedName);
+    EncodeStringLinkshell(DecodedName, EncodedName);
+
+    const auto safeName = db::escapeString(DecodedName);
+    linkshellId         = linkshell::RegisterNewLinkshell(safeName, linkshellColor);
+
+    if (linkshellId != 0)
     {
-        uint32_t       linkshellId    = 0;
-        const uint16_t linkshellColor = (data.a << 12) | (data.b << 8) | (data.g << 4) | data.r;
-
-        char DecodedName[DecodeStringLength]    = {};
-        char EncodedName[LinkshellStringLength] = {};
-
-        const auto encodedRawName = asStringFromUntrustedSource(data.sComLinkName, sizeof(data.sComLinkName));
-
-        DecodeStringLinkshell(encodedRawName, DecodedName);
-        EncodeStringLinkshell(DecodedName, EncodedName);
-
-        const auto safeName = db::escapeString(DecodedName);
-        linkshellId         = linkshell::RegisterNewLinkshell(safeName, linkshellColor);
-
-        if (linkshellId != 0)
+        destroy(PItemLinkshell);
+        PItemLinkshell = static_cast<CItemLinkshell*>(itemutils::GetItem(ITEMID::LINKSHELL));
+        if (PItemLinkshell == nullptr)
         {
-            destroy(PItemLinkshell);
-            PItemLinkshell = static_cast<CItemLinkshell*>(itemutils::GetItem(ITEMID::LINKSHELL));
-            if (PItemLinkshell == nullptr)
-            {
-                return;
-            }
-
-            PItemLinkshell->setQuantity(1);
-            PChar->getStorage(data.Category)->InsertItem(PItemLinkshell, data.ItemIndex);
-            PItemLinkshell->SetLSID(linkshellId);
-            PItemLinkshell->SetLSType(LSTYPE_LINKSHELL);
-            PItemLinkshell->setSignature(EncodedName); // because apparently the format from the packet isn't right, and is missing terminators
-            PItemLinkshell->SetLSColor(linkshellColor);
-
-            const auto rset = db::preparedStmt("UPDATE char_inventory SET signature = ?, extra = ?, itemId = 513 WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                               safeName, PItemLinkshell->m_extra, PChar->id, data.Category, data.ItemIndex);
-            if (rset && rset->rowsAffected())
-            {
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
-            }
-        }
-        else
-        {
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellUnavailable);
-        }
-    };
-
-    const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
-    {
-        // Capture existing LS so we can unequip it
-        SLOTTYPE          slot         = SLOT_LINK1;
-        const CLinkshell* oldLinkshell = PChar->PLinkshell1;
-        if (data.LinkshellId == 2)
-        {
-            slot         = SLOT_LINK2;
-            oldLinkshell = PChar->PLinkshell2;
-        }
-
-        // If the linkshell has been broken, break the item
-        const auto rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PItemLinkshell->GetLSID());
-        if (rset && rset->rowsCount() && rset->next() && rset->get<uint8>("broken") == 1)
-        {
-            PItemLinkshell->SetLSType(LSTYPE_BROKEN);
-
-            db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                             PItemLinkshell->m_extra, PChar->id, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
-
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
-
             return;
         }
 
-        if (PItemLinkshell->GetLSID() == 0)
+        PItemLinkshell->setQuantity(1);
+        PChar->getStorage(data.Category)->InsertItem(PItemLinkshell, data.ItemIndex);
+        PItemLinkshell->SetLSID(linkshellId);
+        PItemLinkshell->SetLSType(LSTYPE_LINKSHELL);
+        PItemLinkshell->setSignature(EncodedName); // because apparently the format from the packet isn't right, and is missing terminators
+        PItemLinkshell->SetLSColor(linkshellColor);
+
+        const auto rset = db::preparedStmt("UPDATE char_inventory SET signature = ?, extra = ?, itemId = 513 WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                           safeName,
+                                           PItemLinkshell->m_extra,
+                                           PChar->id,
+                                           data.Category,
+                                           data.ItemIndex);
+        if (rset && rset->rowsAffected())
         {
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
-
-            return;
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
         }
-
-        // Unequip old linkshell
-        if (oldLinkshell)
-        {
-            auto* POldItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(slot));
-
-            if (POldItemLinkshell && POldItemLinkshell->isType(ITEM_LINKSHELL))
-            {
-                linkshell::DelOnlineMember(PChar, POldItemLinkshell);
-
-                POldItemLinkshell->setSubType(ITEM_UNLOCKED);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(POldItemLinkshell, ItemLockFlg::Normal);
-            }
-        }
-
-        // Now equip the new linkshell
-        linkshell::AddOnlineMember(PChar, PItemLinkshell, data.LinkshellId);
-        PItemLinkshell->setSubType(ITEM_LOCKED);
-        PChar->equip[SLOT_BACK + data.LinkshellId]    = data.ItemIndex;
-        PChar->equipLoc[SLOT_BACK + data.LinkshellId] = data.Category;
-        if (data.LinkshellId == 1)
-        {
-            PChar->updatemask |= UPDATE_HP;
-        }
-
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
-        charutils::SaveCharStats(PChar);
-        charutils::SaveCharEquip(PChar);
-
-        PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
-    };
-
-    const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
+    }
+    else
     {
-        linkshell::DelOnlineMember(PChar, PItemLinkshell);
-        PItemLinkshell->setSubType(ITEM_UNLOCKED);
-        PChar->equip[SLOT_BACK + data.LinkshellId]    = 0;
-        PChar->equipLoc[SLOT_BACK + data.LinkshellId] = 0;
-        if (data.LinkshellId == 1)
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellUnavailable);
+    }
+};
+
+const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
+{
+    // Capture existing LS so we can unequip it
+    SLOTTYPE          slot         = SLOT_LINK1;
+    const CLinkshell* oldLinkshell = PChar->PLinkshell1;
+    if (data.LinkshellId == 2)
+    {
+        slot         = SLOT_LINK2;
+        oldLinkshell = PChar->PLinkshell2;
+    }
+
+    // If the linkshell has been broken, break the item
+    const auto rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PItemLinkshell->GetLSID());
+    if (rset && rset->rowsCount() && rset->next() && rset->get<uint8>("broken") == 1)
+    {
+        PItemLinkshell->SetLSType(LSTYPE_BROKEN);
+
+        db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                         PItemLinkshell->m_extra,
+                         PChar->id,
+                         PItemLinkshell->getLocationID(),
+                         PItemLinkshell->getSlotID());
+
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
+
+        return;
+    }
+
+    if (PItemLinkshell->GetLSID() == 0)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
+
+        return;
+    }
+
+    // Unequip old linkshell
+    if (oldLinkshell)
+    {
+        auto* POldItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(slot));
+
+        if (POldItemLinkshell && POldItemLinkshell->isType(ITEM_LINKSHELL))
         {
-            PChar->updatemask |= UPDATE_HP;
+            linkshell::DelOnlineMember(PChar, POldItemLinkshell);
+
+            POldItemLinkshell->setSubType(ITEM_UNLOCKED);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(POldItemLinkshell, ItemLockFlg::Normal);
         }
+    }
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
-        charutils::SaveCharStats(PChar);
-        charutils::SaveCharEquip(PChar);
+    // Now equip the new linkshell
+    linkshell::AddOnlineMember(PChar, PItemLinkshell, data.LinkshellId);
+    PItemLinkshell->setSubType(ITEM_LOCKED);
+    PChar->equip[SLOT_BACK + data.LinkshellId]    = data.ItemIndex;
+    PChar->equipLoc[SLOT_BACK + data.LinkshellId] = data.Category;
+    if (data.LinkshellId == 1)
+    {
+        PChar->updatemask |= UPDATE_HP;
+    }
 
-        PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
-    };
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
+    charutils::SaveCharStats(PChar);
+    charutils::SaveCharEquip(PChar);
+
+    PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
+};
+
+const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
+{
+    linkshell::DelOnlineMember(PChar, PItemLinkshell);
+    PItemLinkshell->setSubType(ITEM_UNLOCKED);
+    PChar->equip[SLOT_BACK + data.LinkshellId]    = 0;
+    PChar->equipLoc[SLOT_BACK + data.LinkshellId] = 0;
+    if (data.LinkshellId == 1)
+    {
+        PChar->updatemask |= UPDATE_HP;
+    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Linkshell);
+    charutils::SaveCharStats(PChar);
+    charutils::SaveCharEquip(PChar);
+
+    PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

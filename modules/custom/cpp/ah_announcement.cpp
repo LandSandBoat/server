@@ -55,7 +55,6 @@ class AHAnnouncementModule : public CPPModule
 
                     if (auctionutils::PurchasingItems(PChar, payload))
                     {
-                        // clang-format off
                         const auto sellerId = [&]() -> uint32
                         {
                             uint32 sellerId = 0;
@@ -67,7 +66,10 @@ class AHAnnouncementModule : public CPPModule
                                                                "itemid = ? AND "
                                                                "stack = ? "
                                                                "ORDER BY sell_date DESC LIMIT 1",
-                                                               PChar->getName(), price, itemid, quantity == 0);
+                                                               PChar->getName(),
+                                                               price,
+                                                               itemid,
+                                                               quantity == 0);
 
                             FOR_DB_SINGLE_RESULT(rset)
                             {
@@ -83,11 +85,16 @@ class AHAnnouncementModule : public CPPModule
                             std::string name  = PItem->getName();
                             auto        parts = split(name, "_");
                             name              = "";
-                            name += std::accumulate(std::begin(parts), std::end(parts), std::string(),
-                            [](std::string const& ss, std::string const& s)
-                            {
-                                return ss.empty() ? s : ss + " " + s;
-                            });
+                            name += std::accumulate(
+                                std::begin(parts),
+                                std::end(parts),
+                                std::string(),
+                                [](const std::string& ss, const std::string& s)
+                                {
+                                    return ss.empty() ? s : ss + " " + s;
+                                });
+
+                            // Capitalize first letter
                             name[0] = std::toupper(name[0]);
 
                             // Send message to seller!
@@ -97,7 +104,6 @@ class AHAnnouncementModule : public CPPModule
                                 .message     = fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->getName(), price),
                                 .messageType = MESSAGE_SYSTEM_3,
                             });
-                            // clang-format on
                         }
                     }
                 }

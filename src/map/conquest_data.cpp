@@ -167,7 +167,7 @@ void ConquestData::addInfluencePoints(int points, NATION_TYPE nation, REGION_TYP
     }
 }
 
-void ConquestData::updateInfluencePoints(std::vector<influence_t> const& influencePoints)
+void ConquestData::updateInfluencePoints(const std::vector<influence_t>& influencePoints)
 {
     influences.clear();
     for (const auto& influence : influencePoints)
@@ -176,7 +176,7 @@ void ConquestData::updateInfluencePoints(std::vector<influence_t> const& influen
     }
 }
 
-void ConquestData::updateRegionControls(std::vector<region_control_t> const& updatedRegionControls)
+void ConquestData::updateRegionControls(const std::vector<region_control_t>& updatedRegionControls)
 {
     regionControls.clear();
     for (const auto& regionControl : updatedRegionControls)

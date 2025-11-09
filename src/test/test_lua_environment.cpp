@@ -66,31 +66,39 @@ void TestLuaEnvironment::registerCoreLuaBindings() const
 // Register global functions used to define tests and suites, and for mocking/spying
 void TestLuaEnvironment::registerTestSpecificFunctions() const
 {
-    // clang-format off
-    lua.set_function("DebugTest", [](const std::string& message)
-    {
-        DebugTest(message);
-    });
+    lua.set_function(
+        "DebugTest",
+        [](const std::string& message)
+        {
+            DebugTest(message);
+        });
 
-    lua.set_function("InfoTest", [](const std::string& message)
-    {
-        ShowInfo(message);
-    });
+    lua.set_function(
+        "InfoTest",
+        [](const std::string& message)
+        {
+            ShowInfo(message);
+        });
 
-    lua.set_function("stub", [this](const std::string& path, const sol::optional<sol::object>& impl)
-    {
-        return mockManager_->stub(path, impl.value_or(sol::lua_nil));
-    });
+    lua.set_function(
+        "stub",
+        [this](const std::string& path, const sol::optional<sol::object>& impl)
+        {
+            return mockManager_->stub(path, impl.value_or(sol::lua_nil));
+        });
 
     // alias mock() to stub() for now
-    lua.set_function("mock", [this](const std::string& path, const sol::optional<sol::object>& impl)
-    {
-        return mockManager_->stub(path, impl.value_or(sol::lua_nil));
-    });
+    lua.set_function(
+        "mock",
+        [this](const std::string& path, const sol::optional<sol::object>& impl)
+        {
+            return mockManager_->stub(path, impl.value_or(sol::lua_nil));
+        });
 
-    lua.set_function("spy", [this](const std::string& path)
-    {
-        return mockManager_->spy(path);
-    });
-    // clang-format on
+    lua.set_function(
+        "spy",
+        [this](const std::string& path)
+        {
+            return mockManager_->spy(path);
+        });
 }

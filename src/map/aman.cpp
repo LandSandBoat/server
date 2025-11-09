@@ -32,34 +32,36 @@
 
 namespace
 {
-    const std::string warningCooldownVar                  = "[ASSIST][Warnings]Cooldown";
-    const std::string thumbsUpCooldownVar                 = "[ASSIST][ThumbsUp]Cooldown";
-    const std::string assistChannelInteractionEligibleVar = "[ASSIST][Evaluations]Eligible";
-    const std::string evaluationsDailyVar                 = "[ASSIST][Evaluations]Today";
-    const std::string evaluationsCountVar                 = "[ASSIST][Evaluations]Count";
-    const std::string assistChannelEligibleVar            = "[ASSIST]Eligible";
-    const std::string mutedExpiryVar                      = "[ASSIST]Muted";
 
-    const auto calculateAssistExpiry = [](CCharEntity* PChar, const uint32 playtimeExpiry) -> std::pair<uint32, uint32>
-    {
-        // Important: The message reported by the client states the time is JST, but it appears to be converted by the client to the local timezone.
-        // The origin is Jan 01, 2002 00:00 JST
-        // The delta observed between the two values in the pair should be about 240 hours converted to seconds, for newly obtained access.
-        constexpr std::time_t origin    = 1009810800;
-        const auto            timepoint = std::chrono::system_clock::from_time_t(origin);
+const std::string warningCooldownVar                  = "[ASSIST][Warnings]Cooldown";
+const std::string thumbsUpCooldownVar                 = "[ASSIST][ThumbsUp]Cooldown";
+const std::string assistChannelInteractionEligibleVar = "[ASSIST][Evaluations]Eligible";
+const std::string evaluationsDailyVar                 = "[ASSIST][Evaluations]Today";
+const std::string evaluationsCountVar                 = "[ASSIST][Evaluations]Count";
+const std::string assistChannelEligibleVar            = "[ASSIST]Eligible";
+const std::string mutedExpiryVar                      = "[ASSIST]Muted";
 
-        // Calculate seconds since origin
-        const auto now                = earth_time::now() - timepoint;
-        uint32     secondsSinceOrigin = std::chrono::duration_cast<std::chrono::seconds>(now).count();
+const auto calculateAssistExpiry = [](CCharEntity* PChar, const uint32 playtimeExpiry) -> std::pair<uint32, uint32>
+{
+    // Important: The message reported by the client states the time is JST, but it appears to be converted by the client to the local timezone.
+    // The origin is Jan 01, 2002 00:00 JST
+    // The delta observed between the two values in the pair should be about 240 hours converted to seconds, for newly obtained access.
+    constexpr std::time_t origin    = 1009810800;
+    const auto            timepoint = std::chrono::system_clock::from_time_t(origin);
 
-        // Now calculate the difference between the current playtime and the expiry time.
-        // Final value represents the future expiry time as the number of seconds since Jan 01, 2002 00:00 JST
-        const auto currentPlaytime   = static_cast<uint32>(timer::count_seconds(PChar->GetPlayTime()));
-        const auto remainingPlaytime = playtimeExpiry - currentPlaytime;       // Time left until expiry
-        const auto tentativeExpiry   = secondsSinceOrigin + remainingPlaytime; // Future expiry time
+    // Calculate seconds since origin
+    const auto now                = earth_time::now() - timepoint;
+    uint32     secondsSinceOrigin = std::chrono::duration_cast<std::chrono::seconds>(now).count();
 
-        return std::make_pair(tentativeExpiry, secondsSinceOrigin);
-    };
+    // Now calculate the difference between the current playtime and the expiry time.
+    // Final value represents the future expiry time as the number of seconds since Jan 01, 2002 00:00 JST
+    const auto currentPlaytime   = static_cast<uint32>(timer::count_seconds(PChar->GetPlayTime()));
+    const auto remainingPlaytime = playtimeExpiry - currentPlaytime;       // Time left until expiry
+    const auto tentativeExpiry   = secondsSinceOrigin + remainingPlaytime; // Future expiry time
+
+    return std::make_pair(tentativeExpiry, secondsSinceOrigin);
+};
+
 } // namespace
 
 CAMANContainer::CAMANContainer(CCharEntity* PChar)
@@ -215,7 +217,8 @@ void CAMANContainer::setMentorUnlocked(bool val)
     db::preparedStmt("UPDATE chars "
                      "SET mentor = ? "
                      "WHERE charid = ?",
-                     val, m_player->id);
+                     val,
+                     m_player->id);
 }
 
 auto CAMANContainer::isMentor() const -> bool

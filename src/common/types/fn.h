@@ -21,23 +21,20 @@
 
 #pragma once
 
-#include <optional>
+#include <functional>
 
-template <typename T>
-class Lazy
+namespace xi
 {
-public:
-    Lazy() = default;
 
-    auto operator()() -> T&
-    {
-        if (!value_)
-        {
-            value_ = T();
-        }
-        return *value_;
-    }
+//
+// Fn<Signature>
+//
+// An alias for std::function for brevity.
+//
+// TODO: Once we have C++23, we want to use std::move_only_function.
+//
 
-private:
-    std::optional<T> value_;
-};
+template <typename Signature>
+using Fn = std::function<Signature>;
+
+} // namespace xi

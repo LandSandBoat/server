@@ -26,7 +26,9 @@
 
 namespace
 {
-    constexpr uint8_t AuctionHouseId = 4; // Jeuno linked AH
+
+constexpr uint8_t AuctionHouseId = 4; // Jeuno linked AH
+
 }
 
 GP_SERV_COMMAND_AUC::GP_SERV_COMMAND_AUC(const GP_CLI_COMMAND_AUC_COMMAND action)

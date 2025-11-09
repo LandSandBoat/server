@@ -493,7 +493,9 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
             // both party leaders?
             const auto rset = db::preparedStmt("SELECT * FROM accounts_parties WHERE partyid <> 0 AND "
                                                "((charid = ? OR charid = ?) AND partyflag & ?)",
-                                               message.inviterId, message.inviteeId, PARTY_LEADER);
+                                               message.inviterId,
+                                               message.inviteeId,
+                                               PARTY_LEADER);
             if (rset && rset->rowsCount() == 2)
             {
                 if (PInviter->PParty)

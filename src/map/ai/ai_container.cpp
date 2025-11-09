@@ -51,7 +51,9 @@ CAIContainer::CAIContainer(CBaseEntity* _PEntity)
 {
 }
 
-CAIContainer::CAIContainer(CBaseEntity* _PEntity, std::unique_ptr<CPathFind>&& _pathfind, std::unique_ptr<CController>&& _controller,
+CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
+                           std::unique_ptr<CPathFind>&&   _pathfind,
+                           std::unique_ptr<CController>&& _controller,
                            std::unique_ptr<CTargetFind>&& _targetfind)
 : TargetFind(std::move(_targetfind))
 , PathFind(std::move(_pathfind))

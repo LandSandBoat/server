@@ -97,7 +97,6 @@
 
 CCharEntity::CCharEntity()
 : m_PlayTime(0s)
-, m_AMAN(xi::lazy<CAMANContainer>::with_args(this))
 {
     TracyZoneScoped;
     objtype     = TYPE_PC;
@@ -768,7 +767,11 @@ auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 
 auto CCharEntity::aman() -> CAMANContainer&
 {
-    return m_AMAN;
+    if (!m_AMAN)
+    {
+        m_AMAN = CAMANContainer(this);
+    }
+    return *m_AMAN;
 }
 
 int8 CCharEntity::getShieldSize()
@@ -1581,8 +1584,11 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
-                        SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
-                                                                            PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                            PBattleTarget,
+                            PWeaponSkill->getPrimarySkillchain(),
+                            PWeaponSkill->getSecondarySkillchain(),
+                            PWeaponSkill->getTertiarySkillchain());
                         // See SUBEFFECT enum in battleentity.h
                         if (effect != SUBEFFECT_NONE)
                         {
@@ -2246,7 +2252,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             // TODO
         }
-        luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
+        // Handle additional effects only if target is not already dead
+        if (PTarget->GetHPP() > 0)
+        {
+            luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
+        }
     }
     else if (shadowsTaken > 0)
     {
@@ -2602,7 +2612,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         db::preparedStmt("UPDATE char_inventory "
                          "SET extra = ? "
                          "WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PItem->m_extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+                         PItem->m_extra,
+                         this->id,
+                         PItem->getLocationID(),
+                         PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
@@ -3361,7 +3374,7 @@ void CCharEntity::setLocked(bool locked)
     }
 }
 
-auto CCharEntity::getCharVar(std::string const& varName) const -> int32
+auto CCharEntity::getCharVar(const std::string& varName) const -> int32
 {
     if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
     {
@@ -3381,14 +3394,15 @@ auto CCharEntity::getCharVar(std::string const& varName) const -> int32
     return value.first;
 }
 
-auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>
+auto CCharEntity::getCharVarsWithPrefix(const std::string& prefix) -> std::vector<std::pair<std::string, int32>>
 {
     const auto currentTimestamp = earth_time::timestamp();
 
     std::vector<std::pair<std::string, int32>> charVars;
 
     const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
-                                       this->id, fmt::format("{}%", prefix));
+                                       this->id,
+                                       fmt::format("{}%", prefix));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -3409,29 +3423,29 @@ auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vecto
     return charVars;
 }
 
-void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::setCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
     charutils::PersistCharVar(this->id, charVarName, value, expiry);
 }
 
-void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::setVolatileCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
     charVarChanges.insert(charVarName);
 }
 
-void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::updateCharVarCache(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
 }
 
-void CCharEntity::removeFromCharVarCache(std::string const& varName)
+void CCharEntity::removeFromCharVarCache(const std::string& varName)
 {
     charVarCache.erase(varName);
 }
 
-void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
+void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
 {
     if (prefix.size() < 5)
     {

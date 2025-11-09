@@ -30,23 +30,25 @@ class CCharEntity;
 // This packet is sent by the server to inform the client of multiple different kinds of information.
 namespace GP_SERV_COMMAND_MISCDATA
 {
-    // Type 0x06: Homepoint Masks (data: 68 bytes, total: 72 bytes)
-    class HOMEPOINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, HOMEPOINTS>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_MISCDATA_TYPE type;             // PS2: type
-            uint16_t                      unknown06;        // PS2: (New; did not exist.)
-            uint32_t                      homePoint[4];     // Homepoint teleport access masks (16 bytes)
-            uint32_t                      survivalGuide[4]; // Survival guide access masks (16 bytes)
-            uint32_t                      waypoint[4];      // Waypoint/Abyssea Maw access masks (16 bytes)
-            uint32_t                      telepoint;        // Telepoint access mask (4 bytes)
-            uint32_t                      atmos;            // Atmacite teleport mask (4 bytes)
-            uint32_t                      eschanPortal;     // Eschan portal mask (4 bytes)
-            uint32_t                      unknown00;        // Unknown mask (4 bytes)
-        };
 
-        HOMEPOINTS(const CCharEntity* PChar);
+// Type 0x06: Homepoint Masks (data: 68 bytes, total: 72 bytes)
+class HOMEPOINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, HOMEPOINTS>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;             // PS2: type
+        uint16_t                      unknown06;        // PS2: (New; did not exist.)
+        uint32_t                      homePoint[4];     // Homepoint teleport access masks (16 bytes)
+        uint32_t                      survivalGuide[4]; // Survival guide access masks (16 bytes)
+        uint32_t                      waypoint[4];      // Waypoint/Abyssea Maw access masks (16 bytes)
+        uint32_t                      telepoint;        // Telepoint access mask (4 bytes)
+        uint32_t                      atmos;            // Atmacite teleport mask (4 bytes)
+        uint32_t                      eschanPortal;     // Eschan portal mask (4 bytes)
+        uint32_t                      unknown00;        // Unknown mask (4 bytes)
     };
+
+    HOMEPOINTS(const CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISCDATA

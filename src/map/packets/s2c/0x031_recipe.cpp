@@ -23,81 +23,83 @@
 
 namespace
 {
-    const std::vector<std::string> craftSkillDbNames = {
-        "Wood",
-        "Smith",
-        "Gold",
-        "Cloth",
-        "Leather",
-        "Bone",
-        "Alchemy",
-        "Cook",
-    };
 
-    auto processRecipeDetails = [](auto& rset, GP_SERV_COMMAND_RECIPE_TYPE1_3& details, uint16 skillID)
+const std::vector<std::string> craftSkillDbNames = {
+    "Wood",
+    "Smith",
+    "Gold",
+    "Cloth",
+    "Leather",
+    "Bone",
+    "Alchemy",
+    "Cook",
+};
+
+auto processRecipeDetails = [](auto& rset, GP_SERV_COMMAND_RECIPE_TYPE1_3& details, uint16 skillID)
+{
+    std::map<uint16, uint16> ingredients;
+    uint16                   subcraftIDs[3] = { 0u, 0u, 0u };
+    size_t                   subidx         = 0;
+
+    // So, each craft can have up to 3 subcrafts. This loop is
+    //     to pack the subcraft requirements to be sent
+    for (auto i = 1; i < 9; ++i)
     {
-        std::map<uint16, uint16> ingredients;
-        uint16                   subcraftIDs[3] = { 0u, 0u, 0u };
-        size_t                   subidx         = 0;
-
-        // So, each craft can have up to 3 subcrafts. This loop is
-        //     to pack the subcraft requirements to be sent
-        for (auto i = 1; i < 9; ++i)
+        uint16 this_skill = 0u;
+        if (i != skillID && subidx < 3)
         {
-            uint16 this_skill = 0u;
-            if (i != skillID && subidx < 3)
-            {
-                this_skill = rset->template get<uint16>(i);
-            }
-
-            if (this_skill > 0u)
-            {
-                subcraftIDs[subidx] = i;
-                subidx++;
-            }
+            this_skill = rset->template get<uint16>(i);
         }
 
-        details.productitem   = rset->template get<uint16>("Result");
-        details.need_skill_1  = subcraftIDs[0];
-        details.need_skill_2  = subcraftIDs[1];
-        details.need_skill_3  = subcraftIDs[2];
-        details.need_item     = rset->template get<uint16>("Crystal");
-        details.need_key_item = rset->template get<uint16>("KeyItem");
-
-        // So this loop is a little weird. What we store in the db
-        //     is a list of 8 individual ingredients which may or
-        //     may not contain duplicates. What we need for the
-        //     packet is a set of ingredient and quantity. In order
-        //     to achieve that, we're pushing the first instance of
-        //     an ingredient into a std::map with a qty 1 and then
-        //     any duplicate instances will increase the quantity
-        //     without creating new duplicate entries
-        for (auto i = 0; i < 8; ++i)
+        if (this_skill > 0u)
         {
-            uint16 this_ingredient = 0;
+            subcraftIDs[subidx] = i;
+            subidx++;
+        }
+    }
 
-            this_ingredient = rset->template get<uint16>(11 + i);
-            if (this_ingredient != 0)
+    details.productitem   = rset->template get<uint16>("Result");
+    details.need_skill_1  = subcraftIDs[0];
+    details.need_skill_2  = subcraftIDs[1];
+    details.need_skill_3  = subcraftIDs[2];
+    details.need_item     = rset->template get<uint16>("Crystal");
+    details.need_key_item = rset->template get<uint16>("KeyItem");
+
+    // So this loop is a little weird. What we store in the db
+    //     is a list of 8 individual ingredients which may or
+    //     may not contain duplicates. What we need for the
+    //     packet is a set of ingredient and quantity. In order
+    //     to achieve that, we're pushing the first instance of
+    //     an ingredient into a std::map with a qty 1 and then
+    //     any duplicate instances will increase the quantity
+    //     without creating new duplicate entries
+    for (auto i = 0; i < 8; ++i)
+    {
+        uint16 this_ingredient = 0;
+
+        this_ingredient = rset->template get<uint16>(11 + i);
+        if (this_ingredient != 0)
+        {
+            if (ingredients[this_ingredient])
             {
-                if (ingredients[this_ingredient])
-                {
-                    ingredients[this_ingredient] = ingredients[this_ingredient] + 1;
-                }
-                else
-                {
-                    ingredients[this_ingredient] = 1;
-                }
+                ingredients[this_ingredient] = ingredients[this_ingredient] + 1;
+            }
+            else
+            {
+                ingredients[this_ingredient] = 1;
             }
         }
+    }
 
-        auto idx = 0;
-        for (auto& [itemId, itemCount] : ingredients)
-        {
-            details.itemnum[idx]   = itemId;
-            details.itemcount[idx] = itemCount;
-            idx++;
-        }
-    };
+    auto idx = 0;
+    for (auto& [itemId, itemCount] : ingredients)
+    {
+        details.itemnum[idx]   = itemId;
+        details.itemcount[idx] = itemCount;
+        idx++;
+    }
+};
+
 } // namespace
 
 GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type, const uint16 skillID, const uint16 skillLevel, const uint8 skillRank, const uint16 offset)
@@ -120,7 +122,8 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                                            "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
                                            "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY RAND() LIMIT 1",
-                                           craftName, craftName);
+                                           craftName,
+                                           craftName);
             const auto rset  = db::preparedStmt(query, minSkill, maxSkill);
             FOR_DB_SINGLE_RESULT(rset)
             {
@@ -146,7 +149,9 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                                            "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
                                            "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 1",
-                                           craftName, craftName, craftName);
+                                           craftName,
+                                           craftName,
+                                           craftName);
             const auto rset  = db::preparedStmt(query, minSkill, maxSkill, offset);
             FOR_DB_SINGLE_RESULT(rset)
             {
@@ -172,7 +177,9 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                                            "INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
                                            "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 17",
-                                           craftName, craftName, craftName);
+                                           craftName,
+                                           craftName,
+                                           craftName);
             const auto rset  = db::preparedStmt(query, minSkill, maxSkill, offset);
             FOR_DB_MULTIPLE_RESULTS(rset)
             {

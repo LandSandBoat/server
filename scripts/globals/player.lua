@@ -118,7 +118,7 @@ xi.player.charCreate = function(player)
     -- increase starting inventory
     if xi.settings.main.START_INVENTORY > 30 then
         player:changeContainerSize(xi.inv.INVENTORY, xi.settings.main.START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY - 30)
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY) -- Default satchel size is zero, so just set it to the setting size.
     end
 
     --[[

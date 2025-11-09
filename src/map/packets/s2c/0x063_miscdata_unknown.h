@@ -30,17 +30,19 @@ class CCharEntity;
 // This packet is sent by the server to inform the client of multiple different kinds of information.
 namespace GP_SERV_COMMAND_MISCDATA
 {
-    // Type 0x0A: Unknown (data: 32 bytes, total: 40 bytes)
-    class UNKNOWN final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, UNKNOWN>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-            uint16_t                      unknown06; // PS2: (New; did not exist.)
-            uint8_t                       data[32];
-        };
 
-        UNKNOWN(CCharEntity* PChar);
+// Type 0x0A: Unknown (data: 32 bytes, total: 40 bytes)
+class UNKNOWN final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, UNKNOWN>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        uint8_t                       data[32];
     };
+
+    UNKNOWN(CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISCDATA

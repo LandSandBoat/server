@@ -33,14 +33,15 @@
 
 namespace
 {
-    const auto auditTell = [](CCharEntity* PChar, const std::string& recipientName, const std::string& rawMessage)
-    {
-        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
-        {
-            const auto& name   = PChar->getName();
-            const auto  zoneId = PChar->getZone();
 
-            // clang-format off
+const auto auditTell = [](CCharEntity* PChar, const std::string& recipientName, const std::string& rawMessage)
+{
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
+    {
+        const auto& name   = PChar->getName();
+        const auto  zoneId = PChar->getZone();
+
+        // clang-format off
             Async::getInstance()->submit([name, zoneId, recipientName, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())";
@@ -49,9 +50,10 @@ namespace
                     ShowError("Failed to insert TELL audit_chat record for player '%s'", name);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_CHAT_NAME::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

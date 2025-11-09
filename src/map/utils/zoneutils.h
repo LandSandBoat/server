@@ -32,49 +32,51 @@ class CNpcEntity;
 
 namespace zoneutils
 {
-    namespace detail
-    {
-        struct LazyLoadState
-        {
-            bool               enabled{ false };
-            bool               asyncMode{ false };
-            std::set<uint16>   managedZones{};
-            std::queue<uint16> loadQueue{};
-        };
-    } // namespace detail
+namespace detail
+{
 
-    void LoadZones(const std::vector<uint16>& zoneIds);
-    void LoadZoneList(IPP mapIPP);
-    void Initialize(IPP mapIPP, bool lazyLoading, bool asyncMode);
-    void ProcessLoadQueue();
-    auto IsLazyLoadingEnabled() -> bool;
-    auto IsZoneReady(uint16 zoneId) -> bool;
-    auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>;
-    void FreeZoneList();
-    void InitializeWeather();
-    void TOTDChange(vanadiel_time::TOTD TOTD);
-    void SavePlayTime();
+struct LazyLoadState
+{
+    bool               enabled{ false };
+    bool               asyncMode{ false };
+    std::set<uint16>   managedZones{};
+    std::queue<uint16> loadQueue{};
+};
 
-    auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
-    auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
+} // namespace detail
 
-    auto GetWeatherElement(Weather weather) -> int;
+void LoadZones(const std::vector<uint16>& zoneIds);
+void LoadZoneList(IPP mapIPP);
+void Initialize(IPP mapIPP, bool lazyLoading, bool asyncMode);
+void ProcessLoadQueue();
+auto IsLazyLoadingEnabled() -> bool;
+auto IsZoneReady(uint16 zoneId) -> bool;
+auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>;
+void FreeZoneList();
+void InitializeWeather();
+void TOTDChange(vanadiel_time::TOTD TOTD);
+void SavePlayTime();
 
-    auto GetZone(uint16 zoneId) -> CZone*;
-    auto GetTrigger(uint16 targId, uint16 zoneId) -> CNpcEntity*;
-    auto GetEntity(uint32 id, uint8 filter = -1) -> CBaseEntity*;
-    auto GetCharByName(std::string const& name) -> CCharEntity*;
-    auto GetCharFromWorld(uint32 charId, uint16 targId) -> CCharEntity*;  // returns pointer to character by id and target id
-    auto GetChar(uint32 charId) -> CCharEntity*;                          // returns pointer to character by id
-    auto GetCharToUpdate(uint32 primary, uint32 ternary) -> CCharEntity*; // returns pointer to preferred char to update for party changes
-    auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>;
-    auto IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId) -> bool;
-    void ForEachZone(const std::function<void(CZone*)>& func);
-    void ForEachZone(const std::vector<uint16>& zoneIds, const std::function<void(CZone*)>& func);
-    auto GetZoneIPP(uint16 zoneId) -> uint64;                    // returns IPP for zone ID
-    auto IsResidentialArea(const CCharEntity* PChar) -> bool;    // returns whether or not the area is a residential zone
-    auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool; // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
+auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
 
-    void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
+auto GetWeatherElement(Weather weather) -> int;
+
+auto GetZone(uint16 zoneId) -> CZone*;
+auto GetTrigger(uint16 targId, uint16 zoneId) -> CNpcEntity*;
+auto GetEntity(uint32 id, uint8 filter = -1) -> CBaseEntity*;
+auto GetCharByName(const std::string& name) -> CCharEntity*;
+auto GetCharFromWorld(uint32 charId, uint16 targId) -> CCharEntity*;  // returns pointer to character by id and target id
+auto GetChar(uint32 charId) -> CCharEntity*;                          // returns pointer to character by id
+auto GetCharToUpdate(uint32 primary, uint32 ternary) -> CCharEntity*; // returns pointer to preferred char to update for party changes
+auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>;
+auto IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId) -> bool;
+void ForEachZone(const std::function<void(CZone*)>& func);
+void ForEachZone(const std::vector<uint16>& zoneIds, const std::function<void(CZone*)>& func);
+auto GetZoneIPP(uint16 zoneId) -> uint64;                    // returns IPP for zone ID
+auto IsResidentialArea(const CCharEntity* PChar) -> bool;    // returns whether or not the area is a residential zone
+auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool; // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+
+void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 
 }; // namespace zoneutils

@@ -446,417 +446,419 @@ void CSpell::setRange(float range)
 // Implement namespace to work with spells
 namespace spell
 {
-    std::array<CSpell*, MAX_SPELL_ID> PSpellList;           // spell list
-    std::map<uint16, uint16>          PMobSkillToBlueSpell; // maps the skill id (key) to spell id (value).
 
-    // Load a list of spells
-    void LoadSpellList()
+std::array<CSpell*, MAX_SPELL_ID> PSpellList;           // spell list
+std::map<uint16, uint16>          PMobSkillToBlueSpell; // maps the skill id (key) to spell id (value).
+
+// Load a list of spells
+void LoadSpellList()
+{
+    auto rset = db::preparedStmt("SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
+                                 "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
+                                 "FROM spell_list");
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto rset = db::preparedStmt("SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
-                                     "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
-                                     "FROM spell_list");
-        FOR_DB_MULTIPLE_RESULTS(rset)
+        CSpell* PSpell = nullptr;
+
+        const auto id = rset->get<SpellID>("spellid");
+        if (rset->get<SPELLGROUP>("group") == SPELLGROUP_BLUE)
         {
-            CSpell* PSpell = nullptr;
-
-            const auto id = rset->get<SpellID>("spellid");
-            if (rset->get<SPELLGROUP>("group") == SPELLGROUP_BLUE)
-            {
-                PSpell = new CBlueSpell(id);
-            }
-            else
-            {
-                PSpell = new CSpell(id);
-            }
-
-            PSpell->setName(rset->get<std::string>("name"));
-
-            // Jobs are stored in DB as 22 entries.
-            // Index 0 is reserved for NON, index 23 for MON (both left as 0).
-            std::array<uint8, MAX_JOBTYPE> jobs{};
-            std::array<uint8, 22>          tempJobs{};
-            db::extractFromBlob(rset, "jobs", tempJobs);
-            std::memcpy(&jobs[1], tempJobs.data(), 22);
-            PSpell->setJob(jobs);
-
-            PSpell->setSpellGroup(rset->get<SPELLGROUP>("group"));
-            PSpell->setSpellFamily(rset->get<SPELLFAMILY>("family"));
-            PSpell->setValidTarget(rset->get<uint16>("validTargets"));
-            PSpell->setSkillType(rset->get<uint8>("skill"));
-            PSpell->setCastTime(std::chrono::milliseconds(rset->get<uint32>("castTime")));
-            PSpell->setRecastTime(std::chrono::milliseconds(rset->get<uint32>("recastTime")));
-            PSpell->setAnimationID(rset->get<uint16>("animation"));
-            PSpell->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
-            PSpell->setMPCost(rset->get<uint16>("mpCost"));
-            PSpell->setAOE(rset->get<uint8>("AOE"));
-            PSpell->setBase(rset->get<uint16>("base"));
-            PSpell->setElement(rset->get<uint16>("element"));
-            PSpell->setZoneMisc(rset->get<uint16>("zonemisc"));
-            PSpell->setMultiplier(rset->get<float>("multiplier"));
-            PSpell->setMessage(rset->get<uint16>("message"));
-            PSpell->setMagicBurstMessage(rset->get<uint16>("magicBurstMessage"));
-            PSpell->setCE(rset->get<int32>("CE"));
-            PSpell->setVE(rset->get<int32>("VE"));
-            PSpell->setRequirements(rset->get<uint8>("requirements"));
-            PSpell->setContentTag(rset->getOrDefault<std::string>("content_tag", ""));
-
-            PSpell->setRange(rset->get<float>("spell_range") / 10);
-
-            if (PSpell->getAOE())
-            {
-                // default radius
-                PSpell->setRadius(10);
-            }
-
-            PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
-
-            auto filename = fmt::format("./scripts/actions/spells/{}.lua", PSpell->getName());
-
-            std::string switchKey = "";
-            switch (PSpell->getSpellGroup())
-            {
-                case SPELLGROUP_WHITE:
-                {
-                    switchKey = "white";
-                }
-                break;
-                case SPELLGROUP_BLACK:
-                {
-                    switchKey = "black";
-                }
-                break;
-                case SPELLGROUP_SONG:
-                {
-                    switchKey = "songs";
-                }
-                break;
-                case SPELLGROUP_NINJUTSU:
-                {
-                    switchKey = "ninjutsu";
-                }
-                break;
-                case SPELLGROUP_SUMMONING:
-                {
-                    switchKey = "summoning";
-                }
-                break;
-                case SPELLGROUP_BLUE:
-                {
-                    switchKey = "blue";
-                }
-                break;
-                case SPELLGROUP_GEOMANCY:
-                {
-                    switchKey = "geomancy";
-                }
-                break;
-                case SPELLGROUP_TRUST:
-                {
-                    switchKey = "trust";
-                }
-                break;
-                default:
-                {
-                    ShowError("spell::LoadSpellList: Spell %s doesnt have a SpellGroup", PSpell->getName());
-                }
-                break;
-            }
-
-            filename = fmt::format("./scripts/actions/spells/{}/{}.lua", switchKey, PSpell->getName());
-            luautils::CacheLuaObjectFromFile(filename);
-        }
-
-        rset = db::preparedStmt("SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, "
-                                "blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, "
-                                "blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag "
-                                "FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid");
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
-            {
-                continue;
-            }
-
-            // Sanity check the spell ID
-            auto spellId = rset->get<uint16>("spellid");
-            if (PSpellList[spellId] == nullptr)
-            {
-                ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
-                continue;
-            }
-
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setMonsterSkillId(rset->get<uint16>("mob_skill_id"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setSetPoints(rset->get<uint16>("set_points"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitCategory(rset->get<uint16>("trait_category"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitWeight(rset->get<uint16>("trait_category_weight"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setPrimarySkillchain(rset->get<uint16>("primary_sc"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setSecondarySkillchain(rset->get<uint16>("secondary_sc"));
-            static_cast<CBlueSpell*>(PSpellList[spellId])->setTertiarySkillchain(rset->get<uint16>("tertiary_sc"));
-            PMobSkillToBlueSpell.insert(std::make_pair(rset->get<uint16>("mob_skill_id"), spellId));
-        }
-
-        rset = db::preparedStmt("SELECT spellId, modId, value "
-                                "FROM blue_spell_mods "
-                                "WHERE spellId IN "
-                                "(SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            const auto spellId = rset->get<uint16>("spellId");
-            const auto modID   = rset->get<Mod>("modId");
-            const auto value   = rset->get<int16>("value");
-
-            if (PSpellList[spellId])
-            {
-                static_cast<CBlueSpell*>(PSpellList[spellId])->addModifier(CModifier(modID, value));
-            }
-        }
-
-        rset = db::preparedStmt("SELECT spellId, meritId, content_tag "
-                                "FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
-            {
-                continue;
-            }
-
-            const auto spellId = rset->get<uint16>("spellId");
-            if (PSpellList[spellId])
-            {
-                PSpellList[spellId]->setMeritId(rset->get<uint16>("meritId"));
-            }
-        }
-    }
-
-    CSpell* GetSpellByMonsterSkillId(uint16 SkillID)
-    {
-        std::map<uint16, uint16>::iterator it = PMobSkillToBlueSpell.find(SkillID);
-        if (it == PMobSkillToBlueSpell.end())
-        {
-            return nullptr;
+            PSpell = new CBlueSpell(id);
         }
         else
         {
-            uint16 spellId = it->second;
+            PSpell = new CSpell(id);
+        }
 
-            // False positive: this is CSpell*, so it's OK
-            // cppcheck-suppress CastIntegerToAddressAtReturn
-            return PSpellList[spellId];
+        PSpell->setName(rset->get<std::string>("name"));
+
+        // Jobs are stored in DB as 22 entries.
+        // Index 0 is reserved for NON, index 23 for MON (both left as 0).
+        std::array<uint8, MAX_JOBTYPE> jobs{};
+        std::array<uint8, 22>          tempJobs{};
+        db::extractFromBlob(rset, "jobs", tempJobs);
+        std::memcpy(&jobs[1], tempJobs.data(), 22);
+        PSpell->setJob(jobs);
+
+        PSpell->setSpellGroup(rset->get<SPELLGROUP>("group"));
+        PSpell->setSpellFamily(rset->get<SPELLFAMILY>("family"));
+        PSpell->setValidTarget(rset->get<uint16>("validTargets"));
+        PSpell->setSkillType(rset->get<uint8>("skill"));
+        PSpell->setCastTime(std::chrono::milliseconds(rset->get<uint32>("castTime")));
+        PSpell->setRecastTime(std::chrono::milliseconds(rset->get<uint32>("recastTime")));
+        PSpell->setAnimationID(rset->get<uint16>("animation"));
+        PSpell->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
+        PSpell->setMPCost(rset->get<uint16>("mpCost"));
+        PSpell->setAOE(rset->get<uint8>("AOE"));
+        PSpell->setBase(rset->get<uint16>("base"));
+        PSpell->setElement(rset->get<uint16>("element"));
+        PSpell->setZoneMisc(rset->get<uint16>("zonemisc"));
+        PSpell->setMultiplier(rset->get<float>("multiplier"));
+        PSpell->setMessage(rset->get<uint16>("message"));
+        PSpell->setMagicBurstMessage(rset->get<uint16>("magicBurstMessage"));
+        PSpell->setCE(rset->get<int32>("CE"));
+        PSpell->setVE(rset->get<int32>("VE"));
+        PSpell->setRequirements(rset->get<uint8>("requirements"));
+        PSpell->setContentTag(rset->getOrDefault<std::string>("content_tag", ""));
+
+        PSpell->setRange(rset->get<float>("spell_range") / 10);
+
+        if (PSpell->getAOE())
+        {
+            // default radius
+            PSpell->setRadius(10);
+        }
+
+        PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
+
+        auto filename = fmt::format("./scripts/actions/spells/{}.lua", PSpell->getName());
+
+        std::string switchKey = "";
+        switch (PSpell->getSpellGroup())
+        {
+            case SPELLGROUP_WHITE:
+            {
+                switchKey = "white";
+            }
+            break;
+            case SPELLGROUP_BLACK:
+            {
+                switchKey = "black";
+            }
+            break;
+            case SPELLGROUP_SONG:
+            {
+                switchKey = "songs";
+            }
+            break;
+            case SPELLGROUP_NINJUTSU:
+            {
+                switchKey = "ninjutsu";
+            }
+            break;
+            case SPELLGROUP_SUMMONING:
+            {
+                switchKey = "summoning";
+            }
+            break;
+            case SPELLGROUP_BLUE:
+            {
+                switchKey = "blue";
+            }
+            break;
+            case SPELLGROUP_GEOMANCY:
+            {
+                switchKey = "geomancy";
+            }
+            break;
+            case SPELLGROUP_TRUST:
+            {
+                switchKey = "trust";
+            }
+            break;
+            default:
+            {
+                ShowError("spell::LoadSpellList: Spell %s doesnt have a SpellGroup", PSpell->getName());
+            }
+            break;
+        }
+
+        filename = fmt::format("./scripts/actions/spells/{}/{}.lua", switchKey, PSpell->getName());
+        luautils::CacheLuaObjectFromFile(filename);
+    }
+
+    rset = db::preparedStmt("SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, "
+                            "blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, "
+                            "blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag "
+                            "FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid");
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
+        {
+            continue;
+        }
+
+        // Sanity check the spell ID
+        auto spellId = rset->get<uint16>("spellid");
+        if (PSpellList[spellId] == nullptr)
+        {
+            ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
+            continue;
+        }
+
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setMonsterSkillId(rset->get<uint16>("mob_skill_id"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setSetPoints(rset->get<uint16>("set_points"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitCategory(rset->get<uint16>("trait_category"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setTraitWeight(rset->get<uint16>("trait_category_weight"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setPrimarySkillchain(rset->get<uint16>("primary_sc"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setSecondarySkillchain(rset->get<uint16>("secondary_sc"));
+        static_cast<CBlueSpell*>(PSpellList[spellId])->setTertiarySkillchain(rset->get<uint16>("tertiary_sc"));
+        PMobSkillToBlueSpell.insert(std::make_pair(rset->get<uint16>("mob_skill_id"), spellId));
+    }
+
+    rset = db::preparedStmt("SELECT spellId, modId, value "
+                            "FROM blue_spell_mods "
+                            "WHERE spellId IN "
+                            "(SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        const auto spellId = rset->get<uint16>("spellId");
+        const auto modID   = rset->get<Mod>("modId");
+        const auto value   = rset->get<int16>("value");
+
+        if (PSpellList[spellId])
+        {
+            static_cast<CBlueSpell*>(PSpellList[spellId])->addModifier(CModifier(modID, value));
         }
     }
 
-    // Get Spell By ID
-    CSpell* GetSpell(SpellID SpellID)
+    rset = db::preparedStmt("SELECT spellId, meritId, content_tag "
+                            "FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto id = static_cast<uint16>(SpellID);
-        if (id >= MAX_SPELL_ID)
+        if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
         {
-            ShowWarning("Spell ID (%d) exceeds MAX_SPELL_ID.", static_cast<uint16>(SpellID));
-            return nullptr;
+            continue;
         }
+
+        const auto spellId = rset->get<uint16>("spellId");
+        if (PSpellList[spellId])
+        {
+            PSpellList[spellId]->setMeritId(rset->get<uint16>("meritId"));
+        }
+    }
+}
+
+CSpell* GetSpellByMonsterSkillId(uint16 SkillID)
+{
+    std::map<uint16, uint16>::iterator it = PMobSkillToBlueSpell.find(SkillID);
+    if (it == PMobSkillToBlueSpell.end())
+    {
+        return nullptr;
+    }
+    else
+    {
+        uint16 spellId = it->second;
+
         // False positive: this is CSpell*, so it's OK
         // cppcheck-suppress CastIntegerToAddressAtReturn
-        return PSpellList[id];
+        return PSpellList[spellId];
+    }
+}
+
+// Get Spell By ID
+CSpell* GetSpell(SpellID SpellID)
+{
+    auto id = static_cast<uint16>(SpellID);
+    if (id >= MAX_SPELL_ID)
+    {
+        ShowWarning("Spell ID (%d) exceeds MAX_SPELL_ID.", static_cast<uint16>(SpellID));
+        return nullptr;
+    }
+    // False positive: this is CSpell*, so it's OK
+    // cppcheck-suppress CastIntegerToAddressAtReturn
+    return PSpellList[id];
+}
+
+bool CanUseSpell(CBattleEntity* PCaster, SpellID SpellID)
+{
+    CSpell* spell = GetSpell(SpellID);
+    return CanUseSpell(PCaster, spell);
+}
+
+// Check If user can cast spell
+bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
+{
+    if (spell == nullptr)
+    {
+        return false;
     }
 
-    bool CanUseSpell(CBattleEntity* PCaster, SpellID SpellID)
+    bool  usable       = false;
+    uint8 requirements = 0;
+
+    switch (PCaster->objtype)
     {
-        CSpell* spell = GetSpell(SpellID);
-        return CanUseSpell(PCaster, spell);
-    }
+        case TYPE_MOB:
+            // Unable to cast because caster is hidden or untargetable
+            if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
+            {
+                return false;
+            }
+            // Mobs can cast any non-given char spell
+            return true;
 
-    // Check If user can cast spell
-    bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
-    {
-        if (spell == nullptr)
-        {
-            return false;
-        }
-
-        bool  usable       = false;
-        uint8 requirements = 0;
-
-        switch (PCaster->objtype)
-        {
-            case TYPE_MOB:
-                // Unable to cast because caster is hidden or untargetable
-                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
-                {
-                    return false;
-                }
-                // Mobs can cast any non-given char spell
+        case TYPE_PC:
+            if (spell->getSpellGroup() == SPELLGROUP_TRUST)
+            {
+                return true; // every PC can use trusts
+            }
+            else if (luautils::OnCanUseSpell(PCaster, spell))
+            {
                 return true;
+            }
+            [[fallthrough]];
+        case TYPE_FELLOW:
+        case TYPE_NPC:
+            requirements = spell->getRequirements();
 
-            case TYPE_PC:
-                if (spell->getSpellGroup() == SPELLGROUP_TRUST)
+            // Make sure caster has the right main job and level
+            if (PCaster->GetMLevel() >= spell->getJob(PCaster->GetMJob()))
+            {
+                usable = true;
+                if (requirements & SPELLREQ_TABULA_RASA)
                 {
-                    return true; // every PC can use trusts
-                }
-                else if (luautils::OnCanUseSpell(PCaster, spell))
-                {
-                    return true;
-                }
-                [[fallthrough]];
-            case TYPE_FELLOW:
-            case TYPE_NPC:
-                requirements = spell->getRequirements();
-
-                // Make sure caster has the right main job and level
-                if (PCaster->GetMLevel() >= spell->getJob(PCaster->GetMJob()))
-                {
-                    usable = true;
-                    if (requirements & SPELLREQ_TABULA_RASA)
+                    if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
                     {
-                        if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
+                        usable = false;
+                    }
+                }
+                if (PCaster->GetMJob() == JOB_SCH)
+                {
+                    if (requirements & SPELLREQ_ADDENDUM_BLACK)
+                    {
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
                         {
                             usable = false;
                         }
                     }
-                    if (PCaster->GetMJob() == JOB_SCH)
+                    else if (requirements & SPELLREQ_ADDENDUM_WHITE)
                     {
-                        if (requirements & SPELLREQ_ADDENDUM_BLACK)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
-                            {
-                                usable = false;
-                            }
-                        }
-                        else if (requirements & SPELLREQ_ADDENDUM_WHITE)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
-                            {
-                                usable = false;
-                            }
-                        }
-                    }
-                    if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
-                    {
-                        if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
-                            {
-                                usable = false;
-                            }
-                        }
-                        else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
-                        {
-                            usable = false;
-                        }
-                    }
-                    if (usable)
-                    {
-                        return true;
-                    }
-                }
-
-                // Make sure caster has the right sub job and level
-                if (PCaster->GetSLevel() >= spell->getJob(PCaster->GetSJob()) && !(requirements & SPELLREQ_MAIN_JOB_ONLY))
-                {
-                    usable = true;
-                    if (requirements & SPELLREQ_TABULA_RASA)
-                    {
-                        if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
-                        {
-                            usable = false;
-                        }
-                    }
-                    if (PCaster->GetSJob() == JOB_SCH)
-                    {
-                        if (requirements & SPELLREQ_ADDENDUM_BLACK)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
-                            {
-                                usable = false;
-                            }
-                        }
-                        else if (requirements & SPELLREQ_ADDENDUM_WHITE)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
-                            {
-                                usable = false;
-                            }
-                        }
-                    }
-                    if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
-                    {
-                        if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
-                        {
-                            if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
-                            {
-                                usable = false;
-                            }
-                        }
-                        else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
                         {
                             usable = false;
                         }
                     }
                 }
-                return usable;
-
-            case TYPE_PET:
-                if (static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON)
+                if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
                 {
-                    usable = true;
+                    if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
+                    {
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
+                        {
+                            usable = false;
+                        }
+                    }
+                    else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                    {
+                        usable = false;
+                    }
                 }
-                [[fallthrough]];
-            case TYPE_TRUST:
-                // Unable to cast because caster is hidden or untargetable
-                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
-                {
-                    return false;
-                }
-
                 if (usable)
                 {
                     return true;
                 }
+            }
 
-                // Ensure pet or trust is level appropriate
-                if (PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
+            // Make sure caster has the right sub job and level
+            if (PCaster->GetSLevel() >= spell->getJob(PCaster->GetSJob()) && !(requirements & SPELLREQ_MAIN_JOB_ONLY))
+            {
+                usable = true;
+                if (requirements & SPELLREQ_TABULA_RASA)
                 {
-                    return false;
+                    if (!PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
+                    {
+                        usable = false;
+                    }
                 }
+                if (PCaster->GetSJob() == JOB_SCH)
+                {
+                    if (requirements & SPELLREQ_ADDENDUM_BLACK)
+                    {
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_BLACK, EFFECT_ENLIGHTENMENT }))
+                        {
+                            usable = false;
+                        }
+                    }
+                    else if (requirements & SPELLREQ_ADDENDUM_WHITE)
+                    {
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_ADDENDUM_WHITE, EFFECT_ENLIGHTENMENT }))
+                        {
+                            usable = false;
+                        }
+                    }
+                }
+                if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
+                {
+                    if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
+                    {
+                        if (!PCaster->StatusEffectContainer->HasStatusEffect({ EFFECT_UNBRIDLED_LEARNING, EFFECT_UNBRIDLED_WISDOM }))
+                        {
+                            usable = false;
+                        }
+                    }
+                    else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                    {
+                        usable = false;
+                    }
+                }
+            }
+            return usable;
+
+        case TYPE_PET:
+            if (static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON)
+            {
+                usable = true;
+            }
+            [[fallthrough]];
+        case TYPE_TRUST:
+            // Unable to cast because caster is hidden or untargetable
+            if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
+            {
+                return false;
+            }
+
+            if (usable)
+            {
                 return true;
-
-            default:
-                break;
-        }
-        return false;
-    }
-
-    // This is a utility method for mobutils, when we want to work out if we can give monsters a spell
-    // but they are on an odd job (e.g. PLDs getting -ga3)
-    bool CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level)
-    {
-        if (GetSpell(spellId) != nullptr)
-        {
-            uint8 jobMLevel = PSpellList[static_cast<size_t>(spellId)]->getJob(job);
-
-            return level > jobMLevel;
-        }
-        return false;
-    }
-
-    float GetSpellRadius(CSpell* spell, CBattleEntity* entity)
-    {
-        float total = spell->getRadius();
-
-        // brd gets bonus radius from string skill
-        if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
-        {
-            if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
-                                                ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
-            {
-                total += ((float)entity->GetSkill(SKILL_STRING_INSTRUMENT) / 276) * 10;
             }
 
-            if (total > 20)
+            // Ensure pet or trust is level appropriate
+            if (PCaster->GetMLevel() < static_cast<CMobEntity*>(PCaster)->m_SpellListContainer->GetSpellMinLevel(spell->getID()))
             {
-                total = 20;
+                return false;
             }
+            return true;
+
+        default:
+            break;
+    }
+    return false;
+}
+
+// This is a utility method for mobutils, when we want to work out if we can give monsters a spell
+// but they are on an odd job (e.g. PLDs getting -ga3)
+bool CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level)
+{
+    if (GetSpell(spellId) != nullptr)
+    {
+        uint8 jobMLevel = PSpellList[static_cast<size_t>(spellId)]->getJob(job);
+
+        return level > jobMLevel;
+    }
+    return false;
+}
+
+float GetSpellRadius(CSpell* spell, CBattleEntity* entity)
+{
+    float total = spell->getRadius();
+
+    // brd gets bonus radius from string skill
+    if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
+    {
+        if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
+                                            ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
+        {
+            total += ((float)entity->GetSkill(SKILL_STRING_INSTRUMENT) / 276) * 10;
         }
 
-        return total;
+        if (total > 20)
+        {
+            total = 20;
+        }
     }
+
+    return total;
+}
+
 }; // namespace spell

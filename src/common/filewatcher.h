@@ -34,13 +34,13 @@
 class Filewatcher final : public efsw::FileWatchListener
 {
 public:
-    Filewatcher(std::vector<std::string> const& paths);
+    Filewatcher(const std::vector<std::string>& paths);
     ~Filewatcher() override;
 
     DISALLOW_COPY_AND_MOVE(Filewatcher);
 
     // efsw::FileWatchListener
-    void handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename) override;
+    void handleFileAction(efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename) override;
 
     enum class Action
     {

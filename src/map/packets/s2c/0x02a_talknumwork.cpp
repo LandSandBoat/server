@@ -24,9 +24,14 @@
 #include "common/utils.h"
 #include "entities/baseentity.h"
 
-GP_SERV_COMMAND_TALKNUMWORK::GP_SERV_COMMAND_TALKNUMWORK(const CBaseEntity* PEntity, uint16 messageID, const uint32 param0,
-                                                         const uint32 param1, const uint32 param2, const uint32 param3,
-                                                         const bool ShowName)
+GP_SERV_COMMAND_TALKNUMWORK::GP_SERV_COMMAND_TALKNUMWORK(
+    const CBaseEntity* PEntity,
+    uint16             messageID,
+    const uint32       param0,
+    const uint32       param1,
+    const uint32       param2,
+    const uint32       param3,
+    const bool         ShowName)
 {
     auto& packet = this->data();
 

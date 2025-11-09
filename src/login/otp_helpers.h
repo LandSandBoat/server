@@ -41,166 +41,169 @@
 
 namespace otpHelpers
 {
-    // Base32 used for OTP standard. Doesn't use repeat alike characters such as both O and 0, and opts to use letters over similar numbers.
-    static const char BASE32_CHARS[32] = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-        'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-        'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5',
-        '6', '7'
-    };
 
-    inline uint64_t getCurrentTime()
+// Base32 used for OTP standard. Doesn't use repeat alike characters such as both O and 0, and opts to use letters over similar numbers.
+// clang-format off
+static const char BASE32_CHARS[32] = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+    'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5',
+    '6', '7'
+};
+// clang-format on
+
+inline uint64_t getCurrentTime()
+{
+    auto now = std::chrono::system_clock::now();
+    auto dur = now.time_since_epoch();
+
+    return std::chrono::duration_cast<std::chrono::seconds>(dur).count();
+}
+
+inline bool validateTOTP(const std::string& totpCode, const std::string& secret)
+{
+    bool         valid   = false;
+    cotp_error_t cotpErr = {};
+
+    auto res = get_totp_at(secret.c_str(), getCurrentTime(), 6, 30, SHA1, &cotpErr);
+
+    // TODO: do we care about errors?
+    if (res)
     {
-        auto now = std::chrono::system_clock::now();
-        auto dur = now.time_since_epoch();
-
-        return std::chrono::duration_cast<std::chrono::seconds>(dur).count();
+        if (strcmpi(totpCode.c_str(), res) == 0) // Need to use c_str for null terminator
+        {
+            valid = true;
+        }
+        destroy(res); // per docs, this string needs to be freed upon non-null return
     }
 
-    inline bool validateTOTP(const std::string& totpCode, const std::string& secret)
+    return valid;
+}
+
+inline std::string getNewBase32Secret()
+{
+    constexpr size_t base32Len = 32; // must be % 8 == 0
+
+    char newSecret[base32Len + 1] = {};
+
+    for (size_t i = 0; i < base32Len; i++)
     {
-        bool         valid   = false;
-        cotp_error_t cotpErr = {};
+        newSecret[i] = BASE32_CHARS[xirand::GetRandomNumber<uint64_t>(0, std::numeric_limits<uint64_t>::max()) % 32];
+    }
 
-        auto res = get_totp_at(secret.c_str(), getCurrentTime(), 6, 30, SHA1, &cotpErr);
+    return newSecret;
+}
 
-        // TODO: do we care about errors?
-        if (res)
+inline bool doesAccountNeedOTP(const std::string& account, const std::string& secretType)
+{
+    if (secretType == "TOTP")
+    {
+        const auto accid = loginHelpers::getAccountId(account);
+        if (accid != 0)
         {
-            if (strcmpi(totpCode.c_str(), res) == 0) // Need to use c_str for null terminator
+            const auto rset = db::preparedStmt("SELECT validated FROM accounts_totp where accid = ?", accid);
+            if (!rset)
             {
-                valid = true;
+                return false;
             }
-            destroy(res); // per docs, this string needs to be freed upon non-null return
-        }
 
-        return valid;
-    }
+            bool hasExistingOTP = false;
 
-    inline std::string getNewBase32Secret()
-    {
-        constexpr size_t base32Len = 32; // must be % 8 == 0
-
-        char newSecret[base32Len + 1] = {};
-
-        for (size_t i = 0; i < base32Len; i++)
-        {
-            newSecret[i] = BASE32_CHARS[xirand::GetRandomNumber<uint64_t>(0, std::numeric_limits<uint64_t>::max()) % 32];
-        }
-
-        return newSecret;
-    }
-
-    inline bool doesAccountNeedOTP(const std::string& account, const std::string& secretType)
-    {
-        if (secretType == "TOTP")
-        {
-            const auto accid = loginHelpers::getAccountId(account);
-            if (accid != 0)
+            if (rset->rowsCount() != 0 && rset->next())
             {
-                const auto rset = db::preparedStmt("SELECT validated FROM accounts_totp where accid = ?", accid);
-                if (!rset)
-                {
-                    return false;
-                }
-
-                bool hasExistingOTP = false;
-
-                if (rset->rowsCount() != 0 && rset->next())
-                {
-                    hasExistingOTP = rset->get<bool>("validated");
-                }
-
-                return hasExistingOTP;
+                hasExistingOTP = rset->get<bool>("validated");
             }
+
+            return hasExistingOTP;
         }
-        return false;
     }
+    return false;
+}
 
-    inline std::string createAccountSecret(const std::string& account, const std::string& secretType)
+inline std::string createAccountSecret(const std::string& account, const std::string& secretType)
+{
+    if (secretType == "TOTP")
     {
-        if (secretType == "TOTP")
+        const auto hasExistingOTP = otpHelpers::doesAccountNeedOTP(account, "TOTP");
+
+        if (!hasExistingOTP)
         {
-            const auto hasExistingOTP = otpHelpers::doesAccountNeedOTP(account, "TOTP");
-
-            if (!hasExistingOTP)
+            uint32 accid = loginHelpers::getAccountId(account);
+            if (accid == 0)
             {
-                uint32 accid = loginHelpers::getAccountId(account);
-                if (accid == 0)
-                {
-                    return "";
-                }
-
-                const auto newSecret       = getNewBase32Secret();
-                const auto newRecoveryCode = getNewBase32Secret();
-
-                const auto rset = db::preparedStmt("INSERT INTO accounts_totp(accid, secret, recovery_code, validated) VALUES(?, ?, ?, 0) ON DUPLICATE KEY UPDATE secret = values(secret), recovery_code = values(recovery_code)", accid, newSecret, newRecoveryCode);
-                if (rset)
-                {
-                    return newSecret;
-                }
+                return "";
             }
-        }
-        return "";
-    }
 
-    inline std::string regenerateAccountRecoveryCode(const std::string& account, const std::string& secretType)
-    {
-        if (secretType == "TOTP")
-        {
-            const auto hasExistingOTP = otpHelpers::doesAccountNeedOTP(account, "TOTP");
+            const auto newSecret       = getNewBase32Secret();
+            const auto newRecoveryCode = getNewBase32Secret();
 
-            if (hasExistingOTP)
+            const auto rset = db::preparedStmt("INSERT INTO accounts_totp(accid, secret, recovery_code, validated) VALUES(?, ?, ?, 0) ON DUPLICATE KEY UPDATE secret = values(secret), recovery_code = values(recovery_code)", accid, newSecret, newRecoveryCode);
+            if (rset)
             {
-                uint32 accid = loginHelpers::getAccountId(account);
-                if (accid == 0)
-                {
-                    return "";
-                }
-
-                std::string newRecoveryCode = getNewBase32Secret();
-                const auto  rset            = db::preparedStmt("UPDATE accounts_totp SET accounts_totp.recovery_code = ? WHERE accounts_totp.accid = ?", newRecoveryCode, accid);
-                if (rset)
-                {
-                    return newRecoveryCode;
-                }
+                return newSecret;
             }
         }
-        return "";
     }
+    return "";
+}
 
-    inline std::string getAccountSecret(const std::string& account, const std::string& secretType)
+inline std::string regenerateAccountRecoveryCode(const std::string& account, const std::string& secretType)
+{
+    if (secretType == "TOTP")
     {
-        if (secretType == "TOTP")
+        const auto hasExistingOTP = otpHelpers::doesAccountNeedOTP(account, "TOTP");
+
+        if (hasExistingOTP)
         {
-            const auto accid = loginHelpers::getAccountId(account);
-            if (accid != 0)
+            uint32 accid = loginHelpers::getAccountId(account);
+            if (accid == 0)
             {
-                const auto rset = db::preparedStmt("SELECT secret FROM accounts_totp where accid = ? LIMIT 1", accid);
-                if (rset && rset->next())
-                {
-                    return rset->get<std::string>("secret");
-                }
+                return "";
+            }
+
+            std::string newRecoveryCode = getNewBase32Secret();
+            const auto  rset            = db::preparedStmt("UPDATE accounts_totp SET accounts_totp.recovery_code = ? WHERE accounts_totp.accid = ?", newRecoveryCode, accid);
+            if (rset)
+            {
+                return newRecoveryCode;
             }
         }
-        return "";
     }
+    return "";
+}
 
-    inline std::string getAccountRecoveryCode(const std::string& account, const std::string& secretType)
+inline std::string getAccountSecret(const std::string& account, const std::string& secretType)
+{
+    if (secretType == "TOTP")
     {
-        if (secretType == "TOTP")
+        const auto accid = loginHelpers::getAccountId(account);
+        if (accid != 0)
         {
-            const auto accid = loginHelpers::getAccountId(account);
-            if (accid != 0)
+            const auto rset = db::preparedStmt("SELECT secret FROM accounts_totp where accid = ? LIMIT 1", accid);
+            if (rset && rset->next())
             {
-                const auto rset = db::preparedStmt("SELECT recovery_code FROM accounts_totp where accid = ? LIMIT 1", accid);
-                if (rset && rset->next())
-                {
-                    return rset->get<std::string>("recovery_code");
-                }
+                return rset->get<std::string>("secret");
             }
         }
-        return "";
     }
+    return "";
+}
+
+inline std::string getAccountRecoveryCode(const std::string& account, const std::string& secretType)
+{
+    if (secretType == "TOTP")
+    {
+        const auto accid = loginHelpers::getAccountId(account);
+        if (accid != 0)
+        {
+            const auto rset = db::preparedStmt("SELECT recovery_code FROM accounts_totp where accid = ? LIMIT 1", accid);
+            if (rset && rset->next())
+            {
+                return rset->get<std::string>("recovery_code");
+            }
+        }
+    }
+    return "";
+}
 
 } // namespace otpHelpers

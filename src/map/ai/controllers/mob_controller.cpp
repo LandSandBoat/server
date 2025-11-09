@@ -663,7 +663,9 @@ void CMobController::DoCombatTick(timer::time_point tick)
         if (distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRunAwayDistance)
         {
             if (!PMob->PAI->PathFind->IsFollowingPath())
+            {
                 PMob->PAI->PathFind->PathTo(PFollowTarget->loc.p);
+            }
             PMob->PAI->PathFind->FollowPath(m_Tick);
         }
         else
@@ -1111,8 +1113,14 @@ void CMobController::DoRoamTick(timer::time_point tick)
                             // don't move around until i'm fully in the ground
                             // Transition underground takes 2s, allow extra time for any magic effect to finish
                             Wait(3s);
-                            PMob->PAI->QueueAction(queueAction_t(3s, false, [](CBaseEntity* MobEntity)
-                                                                 { MobEntity->status = STATUS_TYPE::INVISIBLE; }));
+                            PMob->PAI->QueueAction(
+                                queueAction_t(
+                                    3s,
+                                    false,
+                                    [](CBaseEntity* MobEntity)
+                                    {
+                                        MobEntity->status = STATUS_TYPE::INVISIBLE;
+                                    }));
                         }
                     }
                     else if (PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
@@ -1194,10 +1202,15 @@ void CMobController::FollowRoamPath()
                 PMob->status = STATUS_TYPE::UPDATE;
                 PMob->SetUntargetable(false);
                 Wait(2s);
-                PMob->PAI->QueueAction(queueAction_t(2s, false, [](CBaseEntity* MobEntity)
-                                                     {
-                    MobEntity->animationsub = 0;
-                    MobEntity->HideName(false); }));
+                PMob->PAI->QueueAction(
+                    queueAction_t(
+                        2s,
+                        false,
+                        [](CBaseEntity* MobEntity)
+                        {
+                            MobEntity->animationsub = 0;
+                            MobEntity->HideName(false);
+                        }));
             }
 
             // face spawn rotation if I just moved back to spawn

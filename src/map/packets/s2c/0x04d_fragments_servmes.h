@@ -30,23 +30,25 @@ class CBaseEntity;
 // The main usage of this packet is for sending the client fragments of the server message as the client requests them.
 namespace GP_SERV_COMMAND_FRAGMENTS
 {
-    // Command=1 Server message
-    class SERVMES final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_FRAGMENTS, SERVMES>
-    {
-    public:
-        struct PacketData
-        {
-            uint8_t Command;    // PS2: Command
-            int8_t  Result;     // PS2: Result
-            uint8_t value1;     // PS2: fragmentsNo
-            uint8_t value2;     // PS2: fragmentsTotal
-            int32_t timestamp;  // PS2: signature
-            int32_t size_total; // PS2: timestamp
-            int32_t offset;     // PS2: offset
-            int32_t data_size;  // PS2: size
-            uint8_t data[236];  // PS2: (unnamed)
-        };
 
-        SERVMES(const std::string& message, int8 language, int32 timestamp, int32 message_offset);
+// Command=1 Server message
+class SERVMES final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_FRAGMENTS, SERVMES>
+{
+public:
+    struct PacketData
+    {
+        uint8_t Command;    // PS2: Command
+        int8_t  Result;     // PS2: Result
+        uint8_t value1;     // PS2: fragmentsNo
+        uint8_t value2;     // PS2: fragmentsTotal
+        int32_t timestamp;  // PS2: signature
+        int32_t size_total; // PS2: timestamp
+        int32_t offset;     // PS2: offset
+        int32_t data_size;  // PS2: size
+        uint8_t data[236];  // PS2: (unnamed)
     };
+
+    SERVMES(const std::string& message, int8 language, int32 timestamp, int32 message_offset);
+};
+
 } // namespace GP_SERV_COMMAND_FRAGMENTS

@@ -51,39 +51,41 @@ typedef std::unordered_map<uint32, ModsList_t*> ModsMap_t;
 
 namespace mobutils
 {
-    void CalculateMobStats(CMobEntity* PMob, bool recover = true);
-    void SetupJob(CMobEntity* PMob);
-    void SetupRoaming(CMobEntity* PMob);
-    void SetupDynamisMob(CMobEntity* PMob);
-    void SetupBattlefieldMob(CMobEntity* PMob);
-    void SetupDungeonMob(CMobEntity* PMob);
-    void SetupEventMob(CMobEntity* PMob);
-    void SetupNMMob(CMobEntity* PMob);
-    void SetupDungeonInstanceMob(CMobEntity* PMob);
-    void SetupPetSkills(CMobEntity* PMob);
 
-    uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob);
+void CalculateMobStats(CMobEntity* PMob, bool recover = true);
+void SetupJob(CMobEntity* PMob);
+void SetupRoaming(CMobEntity* PMob);
+void SetupDynamisMob(CMobEntity* PMob);
+void SetupBattlefieldMob(CMobEntity* PMob);
+void SetupDungeonMob(CMobEntity* PMob);
+void SetupEventMob(CMobEntity* PMob);
+void SetupNMMob(CMobEntity* PMob);
+void SetupDungeonInstanceMob(CMobEntity* PMob);
+void SetupPetSkills(CMobEntity* PMob);
 
-    uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot);
-    uint16 GetMagicEvasion(CMobEntity* PMob);
-    uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank);
-    uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank);
-    uint16 GetBaseToRank(uint8 rank, uint16 level);
-    uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat);
-    void   GetAvailableSpells(CMobEntity* PMob);
-    void   InitializeMob(CMobEntity* PMob);
-    void   LoadSqlModifiers();
-    void   Cleanup();
+uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob);
 
-    // get modifiers for pool / family / spawn
-    ModsList_t* GetMobFamilyMods(uint16 familyId, bool create = false);
-    ModsList_t* GetMobPoolMods(uint32 poolId, bool create = false);
-    ModsList_t* GetMobSpawnMods(uint32 mobId, bool create = false);
+uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot);
+uint16 GetMagicEvasion(CMobEntity* PMob);
+uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank);
+uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank);
+uint16 GetBaseToRank(uint8 rank, uint16 level);
+uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat);
+void   GetAvailableSpells(CMobEntity* PMob);
+void   InitializeMob(CMobEntity* PMob);
+void   LoadSqlModifiers();
+void   Cleanup();
 
-    void AddSqlModifiers(CMobEntity* PMob);
+// get modifiers for pool / family / spawn
+ModsList_t* GetMobFamilyMods(uint16 familyId, bool create = false);
+ModsList_t* GetMobPoolMods(uint32 poolId, bool create = false);
+ModsList_t* GetMobSpawnMods(uint32 mobId, bool create = false);
 
-    void SetSpellList(CMobEntity*, uint16);
-    auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr) -> CMobEntity*;
-    auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId) -> CMobEntity*;
-    void WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level);
+void AddSqlModifiers(CMobEntity* PMob);
+
+void SetSpellList(CMobEntity*, uint16);
+auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr) -> CMobEntity*;
+auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId) -> CMobEntity*;
+void WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level);
+
 }; // namespace mobutils

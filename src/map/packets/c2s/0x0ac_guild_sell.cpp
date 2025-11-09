@@ -32,11 +32,12 @@
 
 namespace
 {
-    const auto auditSale = [](CCharEntity* PChar, uint32_t itemId, uint32_t basePrice, uint8_t quantity)
+
+const auto auditSale = [](CCharEntity* PChar, uint32_t itemId, uint32_t basePrice, uint8_t quantity)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
     {
-        if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
-        {
-            // clang-format off
+        // clang-format off
             Async::getInstance()->submit([itemId, quantity, seller = PChar->id, sellerName = PChar->getName(), basePrice]()
             {
                 auto totalPrice = basePrice * quantity;
@@ -48,9 +49,10 @@ namespace
                                  itemId, quantity, seller, basePrice, totalPrice);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_GUILD_SELL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -96,8 +98,8 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, shopItem->getSellPrice() * quantity);
             ShowInfo("GP_CLI_COMMAND_GUILD_SELL: Player '%s' sold %u of ItemNo %u [to GUILD] ", PChar->getName(), quantity, ItemNo);
             PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() + quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(),
-                                                          ItemNo, quantity);
+            PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(
+                PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(), ItemNo, quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }

@@ -48,6 +48,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         DRUMSKULL_ZOGDREGG    = GetFirstID('Drumskull_Zogdregg'),
         FINGERFILCHER_DRADZAD = GetFirstID('Fingerfilcher_Dradzad'),
         COBRACLAW_BUCHZVOTCH  = GetFirstID('Cobraclaw_Buchzvotch'),
+        VULKODLAC             = GetFirstID('Vulkodlac'),
 
         VOIDWALKER =
         {

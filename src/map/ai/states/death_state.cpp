@@ -30,7 +30,9 @@
 
 namespace
 {
-    static const timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
+
+static const timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
+
 }
 
 CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)

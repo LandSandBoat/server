@@ -87,8 +87,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     auto errorMsg = luautils::OnMagicCastingCheck(m_PEntity, PTarget, GetSpell());
     if (errorMsg)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0,
-                                                                                   errorMsg == 1 ? MSGBASIC_CANNOT_CAST_SPELL : static_cast<MSGBASIC_ID>(errorMsg)));
+        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, errorMsg == 1 ? MSGBASIC_CANNOT_CAST_SPELL : static_cast<MSGBASIC_ID>(errorMsg)));
     }
 
     m_castTime = battleutils::CalculateSpellCastTime(m_PEntity, this);

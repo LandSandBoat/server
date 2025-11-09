@@ -61,7 +61,9 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
 
         const auto rset = db::preparedStmt("SELECT itemid, points, max_points FROM guild_item_points WHERE "
                                            "guildid = ? AND pattern = ? AND rank = ?",
-                                           m_id, pattern, m_GPItemsRank[i]);
+                                           m_id,
+                                           pattern,
+                                           m_GPItemsRank[i]);
 
         if (rset && rset->rowsCount())
         {

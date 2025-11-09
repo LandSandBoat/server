@@ -58,7 +58,7 @@ public:
     void              SetLSID(uint32 lsid);
     void              SetLSColor(uint16 color);
     const std::string getSignature() override;
-    void              setSignature(std::string const& signature) override;
+    void              setSignature(const std::string& signature) override;
     void              SetLSType(LSTYPE value);
 
 private:

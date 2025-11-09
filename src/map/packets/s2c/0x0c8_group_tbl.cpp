@@ -52,7 +52,9 @@ GP_SERV_COMMAND_GROUP_TBL::GP_SERV_COMMAND_GROUP_TBL(CParty* PParty, const bool 
                                            "LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE "
                                            "IF (allianceid <> 0, allianceid = ?, partyid = ?) "
                                            "ORDER BY partyflag & ?, timestamp",
-                                           allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+                                           allianceid,
+                                           PParty->GetPartyID(),
+                                           PARTY_SECOND | PARTY_THIRD);
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             uint16 targid = 0;

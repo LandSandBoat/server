@@ -27,6 +27,7 @@
 #include "packets/s2c/0x0ac_command_data.h"
 #include "utils/charutils.h"
 
+// clang-format off
 static uint8 upgrade[10][45] = {
     { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
     { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
@@ -42,11 +43,13 @@ static uint8 upgrade[10][45] = {
       48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51,
       51, 51 } // Max merits
 };
+// clang-format on
 
 #define MAX_LIMIT_POINTS 10000
 
 // TODO: Transfer all this to the database
 
+// clang-format off
 static uint8 cap[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           // 00-09  0
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           // 10-19  1
@@ -62,6 +65,7 @@ static uint8 cap[100] = {
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
 };
+// clang-format on
 
 struct MeritCategoryInfo_t
 {
@@ -70,6 +74,7 @@ struct MeritCategoryInfo_t
     uint8 UpgradeID;   // group index in upgrade array
 };
 
+// clang-format off
 static const MeritCategoryInfo_t meritCatInfo[] = {
     { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
     { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
@@ -133,6 +138,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 }, // MCATEGORY_GEO_2       catNumber 52
     { 4, 10, 7 }, // MCATEGORY_RUN_2       catNumber 53
 };
+// clang-format on
 
 #define GetMeritCategory(merit) (((merit) >> 6) - 1)    // get category from merit
 #define GetMeritID(merit)       (((merit) & 0x3F) >> 1) // get the offset in the category from merit
@@ -204,14 +210,18 @@ void CMeritPoints::SaveMeritPoints(const uint32 charid)
             db::preparedStmt("INSERT INTO char_merit (charid, meritid, upgrades) "
                              "VALUES(?, ?, ?) "
                              "ON DUPLICATE KEY UPDATE upgrades = ?",
-                             charid, merit.id, merit.count, merit.count);
+                             charid,
+                             merit.id,
+                             merit.count,
+                             merit.count);
         }
         else
         {
             db::preparedStmt("DELETE FROM char_merit "
                              "WHERE charid = ? "
                              "AND meritid = ?",
-                             charid, merit.id);
+                             charid,
+                             merit.id);
         }
     }
 }
@@ -423,59 +433,61 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
 
 namespace meritNameSpace
 {
-    Merit_t GMeritsTemplate[MERITS_COUNT]         = {};    // global list of merits and their properties
-    int16   groupOffset[MCATEGORY_COUNT / 64 - 1] = { 0 }; // the first merit offset of each category
 
-    void LoadMeritsList()
+Merit_t GMeritsTemplate[MERITS_COUNT]         = {};    // global list of merits and their properties
+int16   groupOffset[MCATEGORY_COUNT / 64 - 1] = { 0 }; // the first merit offset of each category
+
+void LoadMeritsList()
+{
+    const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id "
+                                       "FROM merits m "
+                                       "LEFT JOIN spell_list sl ON m.name = sl.name "
+                                       "LEFT JOIN weapon_skills ws ON m.name = ws.name "
+                                       "ORDER BY m.meritid ASC LIMIT ?",
+                                       MERITS_COUNT);
+
+    // issue with unknown catagories causing massive confusion
+
+    uint16 index            = 0; // global merit template count (to 255)
+    uint8  catIndex         = 0; // global merit category count (to 51)
+    int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
+    int8   catMeritIndex    = 0; // counts number of merits in a category
+
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id "
-                                           "FROM merits m "
-                                           "LEFT JOIN spell_list sl ON m.name = sl.name "
-                                           "LEFT JOIN weapon_skills ws ON m.name = ws.name "
-                                           "ORDER BY m.meritid ASC LIMIT ?",
-                                           MERITS_COUNT);
+        Merit_t Merit = {}; // creat a new merit template.
 
-        // issue with unknown catagories causing massive confusion
+        Merit.id         = rset->get<uint16>("meritid"); // set data from db.
+        Merit.value      = rset->get<uint32>("value");
+        Merit.jobs       = rset->get<uint32>("jobs");
+        Merit.upgrade    = rset->get<uint32>("upgrade");
+        Merit.upgradeid  = rset->get<uint8>("upgradeid");
+        Merit.catid      = rset->get<uint8>("catagoryid");
+        Merit.next       = upgrade[Merit.upgradeid][0];
+        Merit.spellid    = rset->getOrDefault<uint16>("spellid", 0);
+        Merit.wsunlockid = rset->getOrDefault<uint16>("unlock_id", 0);
 
-        uint16 index            = 0; // global merit template count (to 255)
-        uint8  catIndex         = 0; // global merit category count (to 51)
-        int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
-        int8   catMeritIndex    = 0; // counts number of merits in a category
+        GMeritsTemplate[index] = Merit; // add the merit to the array
 
-        FOR_DB_MULTIPLE_RESULTS(rset)
+        previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
+
+        if (previousCatIndex != catIndex) // check for category change.
         {
-            Merit_t Merit = {}; // creat a new merit template.
+            groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
+            catIndex++;                                    // now on next category.
+            catMeritIndex = 0;                             // reset the merit category count to 0.
 
-            Merit.id         = rset->get<uint16>("meritid"); // set data from db.
-            Merit.value      = rset->get<uint32>("value");
-            Merit.jobs       = rset->get<uint32>("jobs");
-            Merit.upgrade    = rset->get<uint32>("upgrade");
-            Merit.upgradeid  = rset->get<uint8>("upgradeid");
-            Merit.catid      = rset->get<uint8>("catagoryid");
-            Merit.next       = upgrade[Merit.upgradeid][0];
-            Merit.spellid    = rset->getOrDefault<uint16>("spellid", 0);
-            Merit.wsunlockid = rset->getOrDefault<uint16>("unlock_id", 0);
-
-            GMeritsTemplate[index] = Merit; // add the merit to the array
-
-            previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
-
-            if (previousCatIndex != catIndex) // check for category change.
-            {
-                groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
-                catIndex++;                                    // now on next category.
-                catMeritIndex = 0;                             // reset the merit category count to 0.
-
-                if (previousCatIndex != catIndex)
-                { // this deals with the problem with unknown catagories.
-                    catIndex = previousCatIndex;
-                }
+            if (previousCatIndex != catIndex)
+            { // this deals with the problem with unknown catagories.
+                catIndex = previousCatIndex;
             }
-
-            catMeritIndex++; // next index within category.
-            index++;         // next global template index.
         }
 
-        groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+        catMeritIndex++; // next index within category.
+        index++;         // next global template index.
     }
+
+    groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+}
+
 }; // namespace meritNameSpace

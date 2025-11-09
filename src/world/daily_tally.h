@@ -23,5 +23,7 @@
 
 namespace dailytally
 {
-    void UpdateDailyTallyPoints();
+
+void UpdateDailyTallyPoints();
+
 }

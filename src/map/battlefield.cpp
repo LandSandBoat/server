@@ -94,7 +94,7 @@ uint16 CBattlefield::GetZoneID() const
     return m_Zone->GetID();
 }
 
-std::string const& CBattlefield::GetName() const
+const std::string& CBattlefield::GetName() const
 {
     return m_Name;
 }
@@ -164,7 +164,7 @@ timer::duration CBattlefield::GetLastTimeUpdate() const
     return m_LastPromptTime;
 }
 
-uint64_t CBattlefield::GetLocalVar(std::string const& name) const
+uint64_t CBattlefield::GetLocalVar(const std::string& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -190,12 +190,12 @@ uint32 CBattlefield::GetArmouryCrate() const
     return m_armouryCrate;
 }
 
-void CBattlefield::SetName(std::string const& name)
+void CBattlefield::SetName(const std::string& name)
 {
     m_Name = name;
 }
 
-void CBattlefield::SetInitiator(std::string const& name)
+void CBattlefield::SetInitiator(const std::string& name)
 {
     m_Initiator.name = name;
 }
@@ -224,7 +224,7 @@ void CBattlefield::SetArea(uint8 area)
     m_Area = area;
 }
 
-void CBattlefield::SetRecord(std::string const& name, timer::duration time, size_t partySize)
+void CBattlefield::SetRecord(const std::string& name, timer::duration time, size_t partySize)
 {
     m_Record.name      = !name.empty() ? name : m_Initiator.name;
     m_Record.time      = time;
@@ -252,7 +252,7 @@ void CBattlefield::SetLevelCap(uint8 cap)
     m_LevelCap = cap;
 }
 
-void CBattlefield::SetLocalVar(std::string const& name, uint64_t value)
+void CBattlefield::SetLocalVar(const std::string& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -823,7 +823,11 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
             const uint32 timeThing = timer::count_seconds(m_Record.time);
 
             db::preparedStmt("UPDATE bcnm_records SET fastestName = ?, fastestTime = ?, fastestPartySize = ? WHERE bcnmId = ? AND zoneid = ?",
-                             m_Record.name, timeThing, static_cast<uint32>(m_Record.partySize), this->GetID(), GetZoneID());
+                             m_Record.name,
+                             timeThing,
+                             static_cast<uint32>(m_Record.partySize),
+                             this->GetID(),
+                             GetZoneID());
         }
     }
 

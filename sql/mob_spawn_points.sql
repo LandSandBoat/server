@@ -3480,9 +3480,9 @@ INSERT INTO `mob_spawn_points` VALUES (16843043,0,'Cerebrator','Cerebrator',21,1
 -- ------------------------------------------------------------
 
 -- Ancient Flames Beckon
-INSERT INTO `mob_spawn_points` VALUES (16846849,0,'Wreaker','Wreaker',1,-240.000,-59.000,0.100,190);
-INSERT INTO `mob_spawn_points` VALUES (16846850,0,'Wreaker','Wreaker',1,0.058,1.000,-0.035,190);
-INSERT INTO `mob_spawn_points` VALUES (16846851,0,'Wreaker','Wreaker',1,240.061,61.000,-0.003,190);
+INSERT INTO `mob_spawn_points` VALUES (16846849,0,'Wreaker','Wreaker',1,-240.000,-59.000,0.100,60);
+INSERT INTO `mob_spawn_points` VALUES (16846850,0,'Wreaker','Wreaker',1,0.058,1.000,-0.035,60);
+INSERT INTO `mob_spawn_points` VALUES (16846851,0,'Wreaker','Wreaker',1,240.061,61.000,-0.003,60);
 
 -- Simulant
 INSERT INTO `mob_spawn_points` VALUES (16846852,0,'Cogitator','Cogitator',2,-240,-60,0,66.6);
@@ -22299,7 +22299,7 @@ INSERT INTO `mob_spawn_points` VALUES (17113459,0,'Sprite','Sprite',39,275.380,-
 INSERT INTO `mob_spawn_points` VALUES (17113460,0,'Sprite','Sprite',39,154.709,0.853,88.945,190);
 INSERT INTO `mob_spawn_points` VALUES (17113461,0,'Sprite','Sprite',39,267.806,-0.178,250.970,209);
 INSERT INTO `mob_spawn_points` VALUES (17113462,0,'Fingerfilcher_Dradzad','Fingerfilcher Dradzad',40,63.775,0.263,324.493,7);
-INSERT INTO `mob_spawn_points` VALUES (17113463,0,'Vulkodlac','Vulkodlac',41,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17113463,0,'Vulkodlac','Vulkodlac',41,10.949,-12.659,-510.149,99);
 INSERT INTO `mob_spawn_points` VALUES (17113464,0,'Cobraclaw_Buchzvotch','Cobraclaw Buchzvotch',42,2.195,-0.066,-293.161,250);
 INSERT INTO `mob_spawn_points` VALUES (17113465,0,'Orcish_Transporter','Orcish Transporter',43,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17113466,0,'Orcish_Guard','Orcish Guard',44,0.000,0.000,0.000,0);
@@ -42821,7 +42821,7 @@ INSERT INTO `mob_spawn_points` VALUES (17268804,0,'Goblin_Shaman','Goblin Shaman
 INSERT INTO `mob_spawn_points` VALUES (17268805,0,'Sabertooth_Tiger','Sabertooth Tiger',30,600.326,-0.677,-314.895,9);
 INSERT INTO `mob_spawn_points` VALUES (17268806,0,'Sabertooth_Tiger','Sabertooth Tiger',30,605.422,-1.016,-315.751,127);
 INSERT INTO `mob_spawn_points` VALUES (17268807,0,'Sabertooth_Tiger','Sabertooth Tiger',30,599.802,-0.675,-314.299,11);
-INSERT INTO `mob_spawn_points` VALUES (17268808,0,'Old_Sabertooth','Old Sabertooth',31,676.000,-10.000,-366.000,86);
+INSERT INTO `mob_spawn_points` VALUES (17268808,0,'Old_Sabertooth','Old Sabertooth',31,661.354,-009.812,-332.498,162);
 INSERT INTO `mob_spawn_points` VALUES (17268809,0,'Sauromugue_Skink','Sauromugue Skink',32,415.662,24.789,41.282,11);
 INSERT INTO `mob_spawn_points` VALUES (17268810,0,'Sauromugue_Skink','Sauromugue Skink',32,354.703,23.893,-45.118,127);
 INSERT INTO `mob_spawn_points` VALUES (17268811,0,'Sauromugue_Skink','Sauromugue Skink',32,382.669,25.316,-34.913,109);
@@ -51807,20 +51807,20 @@ INSERT INTO `mob_spawn_points` VALUES (17367246,0,'Fee','Fe\'e',35,225.224,-60.0
 
 -- Copycat
 INSERT INTO `mob_spawn_points` VALUES (17367248,0,'Osschaart','Osschaart',36,-177.358,60.188,-141.977,124);
-INSERT INTO `mob_spawn_points` VALUES (17367250,0,'Osschaarts_Bat','Osschaart\'s Bat',37,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367251,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,63.799,5.592,19.995,103);
-INSERT INTO `mob_spawn_points` VALUES (17367252,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,0.000,0.000,0.000,1);
-INSERT INTO `mob_spawn_points` VALUES (17367253,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,0.000,0.000,0.000,1);
+INSERT INTO `mob_spawn_points` VALUES (17367250,0,'Osschaarts_Bat','Osschaart\'s Bat',37,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367251,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367252,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367253,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,-177.358,60.188,-141.977,124);
 INSERT INTO `mob_spawn_points` VALUES (17367254,0,'Osschaart','Osschaart',36,22.916,0.188,17.987,124);
-INSERT INTO `mob_spawn_points` VALUES (17367256,0,'Osschaarts_Bat','Osschaart\'s Bat',37,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367257,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367258,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367259,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17367256,0,'Osschaarts_Bat','Osschaart\'s Bat',37,22.916,0.188,17.987,124);
+INSERT INTO `mob_spawn_points` VALUES (17367257,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,22.916,0.188,17.987,124);
+INSERT INTO `mob_spawn_points` VALUES (17367258,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,22.916,0.188,17.987,124);
+INSERT INTO `mob_spawn_points` VALUES (17367259,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,22.916,0.188,17.987,124);
 INSERT INTO `mob_spawn_points` VALUES (17367260,0,'Osschaart','Osschaart',36,222.866,-59.812,137.969,124);
-INSERT INTO `mob_spawn_points` VALUES (17367262,0,'Osschaarts_Bat','Osschaart\'s Bat',37,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367263,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367264,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17367265,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17367262,0,'Osschaarts_Bat','Osschaart\'s Bat',37,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367263,0,'Osschaarts_Wyvern','Osschaart\'s Wyvern',38,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367264,0,'Osschaarts_Avatar','Osschaart\'s Avatar',39,-177.358,60.188,-141.977,124);
+INSERT INTO `mob_spawn_points` VALUES (17367265,0,'Osschaarts_Automaton','Osschaart\'s Automaton',40,-177.358,60.188,-141.977,124);
 
 -- Operation Desert Swarm
 INSERT INTO `mob_spawn_points` VALUES (17367266,0,'Platoon_Scorpion','Platoon Scorpion',41,-175.000,60.000,-142.000,124);
@@ -68034,8 +68034,8 @@ INSERT INTO `mob_spawn_points` VALUES (17580334,0,'Wight','Wight',22,-100.000,-2
 INSERT INTO `mob_spawn_points` VALUES (17580335,0,'Ghast','Ghast',37,-100.749,-27.874,384.046,204);
 INSERT INTO `mob_spawn_points` VALUES (17580336,0,'Banshee','Banshee',36,60.000,-11.000,407.000,127);
 INSERT INTO `mob_spawn_points` VALUES (17580337,0,'Wandering_Ghost','Wandering Ghost',39,-177.000,-1.000,371.000,13);
-INSERT INTO `mob_spawn_points` VALUES (17580338,0,'Pudding','Pudding',40,23.000,-60.000,21.000,63);
-INSERT INTO `mob_spawn_points` VALUES (17580339,0,'Pudding','Pudding',40,23.000,-60.000,20.500,63);
+INSERT INTO `mob_spawn_points` VALUES (17580338,0,'Pudding','Pudding',40,21.181,-60.100,-20.081,63);
+INSERT INTO `mob_spawn_points` VALUES (17580339,0,'Pudding','Pudding',40,21.013,-61.157,-19.505,63);
 INSERT INTO `mob_spawn_points` VALUES (17580340,0,'Earth_Elemental','Earth Elemental',41,220.001,-41.172,257.302,0);
 INSERT INTO `mob_spawn_points` VALUES (17580341,0,'Aroma_Fly','Aroma Fly',42,1.000,1.000,1.000,20);
 INSERT INTO `mob_spawn_points` VALUES (17580342,0,'Lorbulcrud','Lorbulcrud',43,0.000,0.000,0.000,0);

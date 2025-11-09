@@ -30,13 +30,13 @@ class CBaseEntity;
 class ZoneLos
 {
 public:
-    static auto Load(uint16 zoneId, std::string const& pathToObj) -> std::unique_ptr<ZoneLos>;
+    static auto Load(uint16 zoneId, const std::string& pathToObj) -> std::unique_ptr<ZoneLos>;
 
     bool CanEntitySee(CBaseEntity* source, CBaseEntity* target) const;
-    bool CanEntitySee(CBaseEntity* source, position_t const& targetPointBase) const;
+    bool CanEntitySee(CBaseEntity* source, const position_t& targetPointBase) const;
 
     std::optional<Vector3D> Raycast(CBaseEntity* source, CBaseEntity* target) const;
-    std::optional<Vector3D> Raycast(position_t const& source, position_t const& target) const;
+    std::optional<Vector3D> Raycast(const position_t& source, const position_t& target) const;
 
 private:
     ZoneLos(Triangle* elements, int elementCount);

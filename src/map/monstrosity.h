@@ -38,61 +38,63 @@ class CCharEntity;
 // ===
 namespace monstrosity
 {
-    struct MonstrosityData_t
-    {
-    public:
-        MonstrosityData_t();
 
-        uint8  MonstrosityId;
-        uint16 Species;
-        uint16 Flags;
-        uint16 Look;
-        uint8  Size;
+struct MonstrosityData_t
+{
+public:
+    MonstrosityData_t();
 
-        uint8 NamePrefix1;
-        uint8 NamePrefix2;
+    uint8  MonstrosityId;
+    uint16 Species;
+    uint16 Flags;
+    uint16 Look;
+    uint8  Size;
 
-        JOBTYPE MainJob;
-        JOBTYPE SubJob;
-        uint32  CurrentExp;
+    uint8 NamePrefix1;
+    uint8 NamePrefix2;
 
-        std::array<uint16, 12> EquippedInstincts{ 0 };
-        std::array<uint8, 128> levels{ 0 };
-        std::array<uint8, 64>  instincts{ 0 };
-        std::array<uint8, 32>  variants{ 0 };
+    JOBTYPE MainJob;
+    JOBTYPE SubJob;
+    uint32  CurrentExp;
 
-        bool Belligerency;
+    std::array<uint16, 12> EquippedInstincts{ 0 };
+    std::array<uint8, 128> levels{ 0 };
+    std::array<uint8, 64>  instincts{ 0 };
+    std::array<uint8, 32>  variants{ 0 };
 
-        position_t EntryPos{};
-        uint16     EntryZoneId;
-        uint8      EntryMainJob;
-        uint8      EntrySubJob;
-    };
+    bool Belligerency;
 
-    void LoadStaticData();
+    position_t EntryPos{};
+    uint16     EntryZoneId;
+    uint8      EntryMainJob;
+    uint8      EntrySubJob;
+};
 
-    void ReadMonstrosityData(CCharEntity* PChar);
-    void WriteMonstrosityData(CCharEntity* PChar);
+void LoadStaticData();
 
-    void   TryPopulateMonstrosityData(CCharEntity* PChar);
-    void   HandleZoneIn(CCharEntity* PChar);
-    uint32 GetPackedMonstrosityName(CCharEntity* PChar);
-    void   SendFullMonstrosityUpdate(CCharEntity* PChar);
+void ReadMonstrosityData(CCharEntity* PChar);
+void WriteMonstrosityData(CCharEntity* PChar);
 
-    void HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
-    void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
+void   TryPopulateMonstrosityData(CCharEntity* PChar);
+void   HandleZoneIn(CCharEntity* PChar);
+uint32 GetPackedMonstrosityName(CCharEntity* PChar);
+void   SendFullMonstrosityUpdate(CCharEntity* PChar);
 
-    void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
+void HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
+void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
 
-    void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
+void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 
-    bool IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct);
-    bool IsVariantUnlocked(CCharEntity* PChar, uint8 variant);
+void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
 
-    void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
+bool IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct);
+bool IsVariantUnlocked(CCharEntity* PChar, uint8 variant);
 
-    // Debug
-    void MaxAllLevels(CCharEntity* PChar);
-    void UnlockAllInstincts(CCharEntity* PChar);
-    void UnlockAllVariants(CCharEntity* PChar);
+void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
+
+// Debug
+void MaxAllLevels(CCharEntity* PChar);
+void UnlockAllInstincts(CCharEntity* PChar);
+void UnlockAllVariants(CCharEntity* PChar);
+
 } // namespace monstrosity

@@ -2340,12 +2340,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1234);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1274);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1275);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1276);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,741); -- Replaced with list 138
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,744);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,747);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,750);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,752);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,755);
+-- 708: free
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,449);
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,450);
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,451);
@@ -3921,10 +3916,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,394); -- blood_drain
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1155); -- subsonics
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1156); -- marrow_drain
 
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,395); -- jetstream
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,393); -- sonic_boom
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,1157); -- slipstream
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,1158); -- turbulence
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,395); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,393); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1158); -- turbulence
 
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',2016,524); -- mind_drain
 
@@ -4284,7 +4279,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,645); -- Body Slam
 INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,648); -- Petro Eyes
 INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,649); -- Voidsong
 
--- Next ID : 2088
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',2088,313); -- Counterspore
+
+-- Next ID : 2089
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

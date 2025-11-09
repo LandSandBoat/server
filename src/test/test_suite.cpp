@@ -54,7 +54,9 @@ void TestSuite::setHookFunction(sol::protected_function& target, sol::protected_
     if (target.valid())
     {
         ShowErrorFmt("Test suite '{}' already has a {} function defined. Only one {} function is allowed per suite.",
-                     fullPath_, hookName, hookName);
+                     fullPath_,
+                     hookName,
+                     hookName);
         return;
     }
     target = std::move(func);

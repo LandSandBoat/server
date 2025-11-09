@@ -32,7 +32,8 @@ auto GP_CLI_COMMAND_ROE_START::validate(MapSession* PSession, const CCharEntity*
         .range("ObjectiveId", ObjectiveId, 0, 4096)
         .mustEqual(roeutils::RoeSystem.TimedRecords.test(ObjectiveId), false, "Cannot start a timed record")
         .mustEqual(roeutils::GetEminenceRecordCompletion(PChar, ObjectiveId) && !roeutils::RoeSystem.RepeatableRecords.test(ObjectiveId),
-                   false, "Cannot start a completed record that is not repeatable");
+                   false,
+                   "Cannot start a completed record that is not repeatable");
 }
 
 void GP_CLI_COMMAND_ROE_START::process(MapSession* PSession, CCharEntity* PChar) const

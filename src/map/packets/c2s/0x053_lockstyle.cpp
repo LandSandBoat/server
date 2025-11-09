@@ -31,11 +31,13 @@
 
 namespace
 {
-    const auto updateClientAppearance = [](CCharEntity* PChar)
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
-        PChar->pushPacket<CCharSyncPacket>(PChar);
-    };
+
+const auto updateClientAppearance = [](CCharEntity* PChar)
+{
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+    PChar->pushPacket<CCharSyncPacket>(PChar);
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_LOCKSTYLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

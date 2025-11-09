@@ -31,16 +31,17 @@
 
 namespace
 {
-    const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
-    {
-        if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-        {
-            const auto sender       = PChar->id;
-            const auto senderName   = PChar->getName();
-            const auto receiver     = PNpc->id;
-            const auto receiverName = PNpc->getName();
 
-            // clang-format off
+const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
+    {
+        const auto sender       = PChar->id;
+        const auto senderName   = PChar->getName();
+        const auto receiver     = PNpc->id;
+        const auto receiverName = PNpc->getName();
+
+        // clang-format off
             Async::getInstance()->submit([itemId, quantity, sender, senderName, receiver, receiverName]()
             {
                 const auto tradeDate    = earth_time::timestamp();
@@ -50,9 +51,10 @@ namespace
                     ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, tradeDate);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

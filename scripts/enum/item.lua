@@ -1668,6 +1668,7 @@ xi.item =
     ONE_HUNDRED_EIGHT_KNOT_QUIPU        = 2562,
     LUMP_OF_KARUGO_NARUGO_CLAY          = 2563,
     JAR_OF_PEISTE_PELLETS               = 2564,
+    JAR_OF_GNOLE_PELLETS                = 2565,
     JAR_OF_GNAT_PELLETS                 = 2566,
     LETHE_CONSOMME                      = 2568,
     LETHE_POTAGE                        = 2569,

@@ -33,7 +33,9 @@
 
 namespace
 {
-    const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -56,7 +58,9 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
     if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
     {
         ShowWarning(fmt::format("{} has tried to uproot gardening pot {} ({}) on 2nd floor",
-                                PChar->getName(), PItem->getID(), PItem->getName()));
+                                PChar->getName(),
+                                PItem->getID(),
+                                PItem->getName()));
         return;
     }
 
@@ -93,7 +97,10 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
         PItem->cleanPot();
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PItem->m_extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+                         PItem->m_extra,
+                         PChar->id,
+                         PItem->getLocationID(),
+                         PItem->getSlotID());
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();

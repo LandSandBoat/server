@@ -43,32 +43,36 @@ class CCharEntity;
  */
 namespace conquest
 {
-    ConquestData& GetConquestData(); // Cached data with influences / region controls
 
-    void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
+ConquestData& GetConquestData(); // Cached data with influences / region controls
 
-    void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
-    void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
-    void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence
+void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
 
-    uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf); // Get number for graphics in conquest menu (arrows)
-    uint8 GetInfluenceGraphics(REGION_TYPE RegionID);                                       // Get number for graphics in conquest menu (arrows)
-    uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);
-    uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf);
+void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
+void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
+void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence
 
-    void HandleInfluenceUpdate(std::vector<influence_t> const& influences, bool shouldUpdateZones); // Triggered periodically when world server sends updates of the latest influence data.
-    void HandleWeeklyTallyStart();                                                                  // Triggered on update conquest system every sunday (by world server msg)
-    void HandleWeeklyTallyEnd(std::vector<region_control_t> const& regionControls);                 // Triggered when conquest update ends (by world server msg)
+uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf); // Get number for graphics in conquest menu (arrows)
+uint8 GetInfluenceGraphics(REGION_TYPE RegionID);                                       // Get number for graphics in conquest menu (arrows)
+uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);
+uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf);
 
-    uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, // Ranking for 3 nations
-                     uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
-    uint8 GetBalance();
-    uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst); // Determine if losing nations are allied
-    uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst,  // Determine if losing nations are allied
-                      uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
-    bool  IsAlliance();                         // Determine if losing nations are allied
-    uint8 GetNextTally();                       // Vana'diel days until next weekly conquest tally
-    uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
+void HandleInfluenceUpdate(const std::vector<influence_t>& influences, bool shouldUpdateZones); // Triggered periodically when world server sends updates of the latest influence data.
+void HandleWeeklyTallyStart();                                                                  // Triggered on update conquest system every sunday (by world server msg)
+void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls);                 // Triggered when conquest update ends (by world server msg)
 
-    uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
+// Ranking for 3 nations
+uint8 GetBalance();
+uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
+
+// Determine if losing nations are allied
+uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst);
+uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
+
+bool  IsAlliance();                         // Determine if losing nations are allied
+uint8 GetNextTally();                       // Vana'diel days until next weekly conquest tally
+uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
+
+uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
+
 }; // namespace conquest

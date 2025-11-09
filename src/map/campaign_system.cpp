@@ -31,37 +31,38 @@ CampaignState CState;
 
 namespace campaign
 {
-    void LoadNations()
+
+void LoadNations()
+{
+    const auto rset = db::preparedStmt("SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC");
+    if (rset && rset->rowsCount())
     {
-        const auto rset = db::preparedStmt("SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC");
-        if (rset && rset->rowsCount())
+        while (rset->next())
         {
-            while (rset->next())
-            {
-                CampaignNation nation;
-                nation.reconnaissance = rset->get<uint8>("reconnaissance");
-                nation.morale         = rset->get<uint8>("morale");
-                nation.prosperity     = rset->get<uint8>("prosperity");
-                CState.nations.emplace_back(nation);
-            }
+            CampaignNation nation;
+            nation.reconnaissance = rset->get<uint8>("reconnaissance");
+            nation.morale         = rset->get<uint8>("morale");
+            nation.prosperity     = rset->get<uint8>("prosperity");
+            CState.nations.emplace_back(nation);
         }
     }
+}
 
-    void LoadState()
+void LoadState()
+{
+    CampaignState state;
+
+    if (CState.regions.empty() == false)
     {
-        CampaignState state;
+        CState.regions.clear();
+        CState.controlSandoria = 0;
+        CState.controlBastok   = 0;
+        CState.controlBeastman = 0;
+        CState.controlWindurst = 0;
+        state                  = CState;
+    }
 
-        if (CState.regions.empty() == false)
-        {
-            CState.regions.clear();
-            CState.controlSandoria = 0;
-            CState.controlBastok   = 0;
-            CState.controlBeastman = 0;
-            CState.controlWindurst = 0;
-            state                  = CState;
-        }
-
-        // clang-format off
+    // clang-format off
         zoneutils::ForEachZone([&state](CZone* PZone)
         {
             if (PZone->m_CampaignHandler != nullptr)
@@ -109,84 +110,85 @@ namespace campaign
                 return false;
             return false;
         });
-        // clang-format on
+    // clang-format on
 
-        CState = state;
-    }
+    CState = state;
+}
 
-    CampaignState GetCampaignState()
+CampaignState GetCampaignState()
+{
+    LoadState();
+    return CState;
+}
+
+uint8 GetReconnaissance(CampaignArmy army)
+{
+    return CState.nations[army].reconnaissance;
+}
+
+uint8 GetMorale(CampaignArmy army)
+{
+    return CState.nations[army].morale;
+}
+
+uint8 GetProsperity(CampaignArmy army)
+{
+    return CState.nations[army].prosperity;
+}
+
+int32 GetAlliedNotes(CCharEntity* chr)
+{
+    return charutils::GetPoints(chr, "allied_notes");
+}
+
+void SetReconnaissance(CampaignArmy army, int8 amount)
+{
+    const auto current = std::min(std::max((int32)amount, 0), 10);
+
+    const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `reconnaissance` = ? WHERE `id` = ?", current, (int32)army);
+    if (!rset)
     {
-        LoadState();
-        return CState;
+        ShowError("Unable to update nation reconnaissance.");
+        return;
     }
+    CState.nations[army].reconnaissance = current;
+}
 
-    uint8 GetReconnaissance(CampaignArmy army)
+void SetMorale(CampaignArmy army, int8 amount)
+{
+    const auto current = std::min(std::max((int32)amount, 0), 100);
+
+    const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `morale` = ? WHERE `id` = ?", current, (int32)army);
+    if (!rset)
     {
-        return CState.nations[army].reconnaissance;
+        ShowError("Unable to update nation morale.");
+        return;
     }
+    CState.nations[army].morale = current;
+}
 
-    uint8 GetMorale(CampaignArmy army)
+void SetProsperity(CampaignArmy army, int8 amount)
+{
+    const auto current = std::min(std::max((int32)amount, 0), 100);
+
+    const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `prosperity` = ? WHERE `id` = ?", current, (int32)army);
+    if (!rset)
     {
-        return CState.nations[army].morale;
+        ShowError("Unable to update nation prosperity.");
+        return;
     }
+    CState.nations[army].prosperity = current;
+}
 
-    uint8 GetProsperity(CampaignArmy army)
-    {
-        return CState.nations[army].prosperity;
-    }
+void SetAlliedNotes(CCharEntity* chr, int32 amount)
+{
+    charutils::SetPoints(chr, "allied_notes", amount);
+}
 
-    int32 GetAlliedNotes(CCharEntity* chr)
-    {
-        return charutils::GetPoints(chr, "allied_notes");
-    }
+void SendUpdate(CCharEntity* PChar)
+{
+    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 0);
+    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 1);
+}
 
-    void SetReconnaissance(CampaignArmy army, int8 amount)
-    {
-        const auto current = std::min(std::max((int32)amount, 0), 10);
-
-        const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `reconnaissance` = ? WHERE `id` = ?", current, (int32)army);
-        if (!rset)
-        {
-            ShowError("Unable to update nation reconnaissance.");
-            return;
-        }
-        CState.nations[army].reconnaissance = current;
-    }
-
-    void SetMorale(CampaignArmy army, int8 amount)
-    {
-        const auto current = std::min(std::max((int32)amount, 0), 100);
-
-        const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `morale` = ? WHERE `id` = ?", current, (int32)army);
-        if (!rset)
-        {
-            ShowError("Unable to update nation morale.");
-            return;
-        }
-        CState.nations[army].morale = current;
-    }
-
-    void SetProsperity(CampaignArmy army, int8 amount)
-    {
-        const auto current = std::min(std::max((int32)amount, 0), 100);
-
-        const auto rset = db::preparedStmt("UPDATE `campaign_nation` SET `prosperity` = ? WHERE `id` = ?", current, (int32)army);
-        if (!rset)
-        {
-            ShowError("Unable to update nation prosperity.");
-            return;
-        }
-        CState.nations[army].prosperity = current;
-    }
-
-    void SetAlliedNotes(CCharEntity* chr, int32 amount)
-    {
-        charutils::SetPoints(chr, "allied_notes", amount);
-    }
-
-    void SendUpdate(CCharEntity* PChar)
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 0);
-        PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 1);
-    }
 }; // namespace campaign

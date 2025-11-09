@@ -752,6 +752,12 @@ INSERT INTO `mob_family_mods` VALUES (359,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (359,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (359,54,100,1);  -- GIL_BONUS: 100
 
+-- Fomor-ToAU
+INSERT INTO `mob_family_mods` VALUES (360,36,50,1);   -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (360,51,2,1);    -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (360,52,30,1);   -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (360,54,100,1);  -- GIL_BONUS: 100
+
 -- Sabotender-Florido
 INSERT INTO `mob_family_mods` VALUES (362,10,7,1); -- SUBLINK: 7 (Sabotender)
 

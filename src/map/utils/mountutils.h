@@ -71,5 +71,7 @@ struct ChocoboCustomProperties
 
 namespace mountutils
 {
-    auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition;
+
+auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition;
+
 }; // namespace mountutils

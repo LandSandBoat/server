@@ -28,21 +28,23 @@
 
 namespace puppetutils
 {
-    void   LoadAutomaton(CCharEntity* PChar);
-    void   SaveAttachments(CCharEntity* PChar);
-    void   SaveAutomaton(CCharEntity* PChar);
-    bool   UnlockAttachment(CCharEntity* PChar, CItem* PItem);
-    bool   HasAttachment(CCharEntity* PChar, CItem* PItem);
-    void   setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
-    void   setFrame(CCharEntity* PChar, uint8 frame);
-    void   setHead(CCharEntity* PChar, uint8 head);
-    uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level);
-    void   TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
-    void   CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
-    void   EquipAttachments(CAutomatonEntity* PAutomaton);
-    void   UpdateAttachments(CCharEntity* PChar);
-    void   PreLevelRestriction(CCharEntity* PChar);
-    void   PostLevelRestriction(CCharEntity* PChar);
+
+void   LoadAutomaton(CCharEntity* PChar);
+void   SaveAttachments(CCharEntity* PChar);
+void   SaveAutomaton(CCharEntity* PChar);
+bool   UnlockAttachment(CCharEntity* PChar, CItem* PItem);
+bool   HasAttachment(CCharEntity* PChar, CItem* PItem);
+void   setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
+void   setFrame(CCharEntity* PChar, uint8 frame);
+void   setHead(CCharEntity* PChar, uint8 head);
+uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level);
+void   TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
+void   CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
+void   EquipAttachments(CAutomatonEntity* PAutomaton);
+void   UpdateAttachments(CCharEntity* PChar);
+void   PreLevelRestriction(CCharEntity* PChar);
+void   PostLevelRestriction(CCharEntity* PChar);
+
 }; // namespace puppetutils
 
 #endif

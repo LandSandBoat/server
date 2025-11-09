@@ -53,15 +53,17 @@ std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint
 
 namespace
 {
-    NetworkBuffer PBuff;          // Global packet clipboard
-    NetworkBuffer PBuffCopy;      // Copy of above, used to decrypt a second time if necessary.
-    NetworkBuffer PScratchBuffer; // Temporary packet clipboard
 
-    // Runtime statistics
-    // TODO: Move these to MapStatistics
-    uint32 TotalPacketsToSendPerTick  = 0U;
-    uint32 TotalPacketsSentPerTick    = 0U;
-    uint32 TotalPacketsDelayedPerTick = 0U;
+NetworkBuffer PBuff;          // Global packet clipboard
+NetworkBuffer PBuffCopy;      // Copy of above, used to decrypt a second time if necessary.
+NetworkBuffer PScratchBuffer; // Temporary packet clipboard
+
+// Runtime statistics
+// TODO: Move these to MapStatistics
+uint32 TotalPacketsToSendPerTick  = 0U;
+uint32 TotalPacketsSentPerTick    = 0U;
+uint32 TotalPacketsDelayedPerTick = 0U;
+
 } // namespace
 
 MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapConfig, asio::io_context& io_context)
@@ -481,7 +483,11 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
             if (SmallPD_Type != 0x15)
             {
                 DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
-                             SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
+                             SmallPD_Type,
+                             ref<uint16>(SmallPD_ptr, 2),
+                             ref<uint16>(buff, 2),
+                             SmallPD_Size,
+                             PChar->getName());
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
@@ -493,7 +499,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
                 ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
-                            PChar->getName(), SmallPD_Type);
+                            PChar->getName(),
+                            SmallPD_Type);
                 continue; // skip this packet
             }
 
@@ -522,8 +529,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
         }
         else
         {
-            ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2),
-                        SmallPD_Size, PChar->getName());
+            ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
         }
     }
 
@@ -631,7 +637,10 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
                             auto offset = entry.first;
                             auto value  = entry.second;
                             ShowInfo(fmt::format("Packet Mod ({}): {}: {}: {}",
-                                                 PChar->name, hex16ToString(type), hex16ToString(offset), hex8ToString(value)));
+                                                 PChar->name,
+                                                 hex16ToString(type),
+                                                 hex16ToString(offset),
+                                                 hex8ToString(value)));
                             PSmallPacket->ref<uint8>(offset) = value;
                         }
                     }
@@ -751,7 +760,10 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
                 return 0;
             }
             ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-                                    PChar->name, PChar->loc.zone->getName(), remainingPackets, kMaxPacketBacklogSize));
+                                    PChar->name,
+                                    PChar->loc.zone->getName(),
+                                    remainingPackets,
+                                    kMaxPacketBacklogSize));
         }
     }
 
@@ -761,7 +773,8 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
         map_session_data->incrementBlowfish();
 
         db::preparedStmt("UPDATE accounts_sessions SET session_key = ? WHERE charid = ? LIMIT 1",
-                         map_session_data->blowfish.key, PChar->id);
+                         map_session_data->blowfish.key,
+                         PChar->id);
 
         // see https://github.com/atom0s/XiPackets/blob/main/world/server/0x000B/README.md
         // GP_GAME_LOGOUT_STATE::GP_GAME_LOGOUT_STATE_LOGOUT = disconnect/logout/shutdown
@@ -817,7 +830,10 @@ int32 MapNetworking::sendSinglePacketNoPchar(uint8* buff, size_t* buffsize, MapS
                 auto offset = entry.first;
                 auto value  = entry.second;
                 ShowInfo(fmt::format("Packet Mod (char ID {}): {}: {}: {}",
-                                     map_session_data->charID, hex16ToString(type), hex16ToString(offset), hex8ToString(value)));
+                                     map_session_data->charID,
+                                     hex16ToString(type),
+                                     hex16ToString(offset),
+                                     hex8ToString(value)));
                 packet->ref<uint8>(offset) = value;
             }
         }

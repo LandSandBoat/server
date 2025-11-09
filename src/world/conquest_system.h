@@ -59,8 +59,8 @@ public:
 private:
     bool updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region);
 
-    auto getRegionalInfluences() -> std::vector<influence_t> const;
-    auto getRegionControls() -> std::vector<region_control_t> const;
+    auto getRegionalInfluences() -> const std::vector<influence_t>;
+    auto getRegionControls() -> const std::vector<region_control_t>;
 
     void sendTallyStartMsg();
     void sendInfluencesMsg(bool shouldUpdateZones);

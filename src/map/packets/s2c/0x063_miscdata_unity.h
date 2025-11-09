@@ -43,104 +43,107 @@ enum class UNITY_DATATYPE : uint8_t
 
 namespace GP_SERV_COMMAND_MISCDATA
 {
-    // Type 0x07: Unity Info (data: 136 bytes, total: 140 bytes)
-    // Multiple subtypes
-    namespace UNITY
+
+// Type 0x07: Unity Info (data: 136 bytes, total: 140 bytes)
+// Multiple subtypes
+namespace UNITY
+{
+
+// Base/Empty packets (dataType 0x00, 0x03-0x0F)
+class BASE final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, BASE>
+{
+public:
+    struct PacketData
     {
-        // Base/Empty packets (dataType 0x00, 0x03-0x0F)
-        class BASE final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, BASE>
-        {
-        public:
-            struct PacketData
-            {
-                GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-                uint16_t                      unknown06; // PS2: (New; did not exist.)
-                UNITY_RESULTSET               resultSet; // Previous week or current week
-                UNITY_DATATYPE                dataType;  // Type of Unity data
-                uint8_t                       padding[6];
-                // For dataType 0x00 (BASE) only:
-                uint32_t timestamp; // Earth seconds since Vana'diel epoch (Jan 1, 2002 00:00:00 UTC)
-                                    // PreviousWeek: When the Unity week ended/rankings finalized
-                                    // CurrentWeek: 0 (week still ongoing)
-                // For dataType 0x03-0x0F: This field is unused (part of padding)
-                uint8_t padding2[128];
-            };
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        UNITY_RESULTSET               resultSet; // Previous week or current week
+        UNITY_DATATYPE                dataType;  // Type of Unity data
+        uint8_t                       padding[6];
+        // For dataType 0x00 (BASE) only:
+        uint32_t timestamp; // Earth seconds since Vana'diel epoch (Jan 1, 2002 00:00:00 UTC)
+                            // PreviousWeek: When the Unity week ended/rankings finalized
+                            // CurrentWeek: 0 (week still ongoing)
+        // For dataType 0x03-0x0F: This field is unused (part of padding)
+        uint8_t padding2[128];
+    };
 
-            BASE(UNITY_RESULTSET resultSet, UNITY_DATATYPE dataType);
-        };
+    BASE(UNITY_RESULTSET resultSet, UNITY_DATATYPE dataType);
+};
 
-        // Member count packets (dataType 0x01)
-        class MEMBERS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, MEMBERS>
-        {
-        public:
-            struct PacketData
-            {
-                GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-                uint16_t                      unknown06; // PS2: (New; did not exist.)
-                UNITY_RESULTSET               resultSet; // Previous week or current week
-                UNITY_DATATYPE                dataType;  // Always MEMBERS
-                uint8_t                       padding[6];
-                uint16_t                      statusFlag;  // Data readiness: 0x0000 (zone-in), 0x0108 (menu)
-                uint32_t                      members[11]; // Total contributing members per unity
-                uint8_t                       padding2[86];
-            };
+// Member count packets (dataType 0x01)
+class MEMBERS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, MEMBERS>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        UNITY_RESULTSET               resultSet; // Previous week or current week
+        UNITY_DATATYPE                dataType;  // Always MEMBERS
+        uint8_t                       padding[6];
+        uint16_t                      statusFlag;  // Data readiness: 0x0000 (zone-in), 0x0108 (menu)
+        uint32_t                      members[11]; // Total contributing members per unity
+        uint8_t                       padding2[86];
+    };
 
-            MEMBERS(UNITY_RESULTSET resultSet, const std::pair<int32, double> unityData[11]);
-        };
+    MEMBERS(UNITY_RESULTSET resultSet, const std::pair<int32, double> unityData[11]);
+};
 
-        // Point count packets (dataType 0x02)
-        class POINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, POINTS>
-        {
-        public:
-            struct PacketData
-            {
-                GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-                uint16_t                      unknown06; // PS2: (New; did not exist.)
-                UNITY_RESULTSET               resultSet; // Previous week or current week
-                UNITY_DATATYPE                dataType;  // Always POINTS
-                uint8_t                       padding[6];
-                uint16_t                      statusFlag; // Data readiness: 0x0000 (zone-in), 0x0207 (PreviousWeek menu), 0x0208 (CurrentWeek menu)
-                uint32_t                      points[11]; // Total points per unity
-                uint8_t                       padding2[86];
-            };
+// Point count packets (dataType 0x02)
+class POINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, POINTS>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        UNITY_RESULTSET               resultSet; // Previous week or current week
+        UNITY_DATATYPE                dataType;  // Always POINTS
+        uint8_t                       padding[6];
+        uint16_t                      statusFlag; // Data readiness: 0x0000 (zone-in), 0x0207 (PreviousWeek menu), 0x0208 (CurrentWeek menu)
+        uint32_t                      points[11]; // Total points per unity
+        uint8_t                       padding2[86];
+    };
 
-            POINTS(UNITY_RESULTSET resultSet, const std::pair<int32, double> unityData[11]);
-        };
+    POINTS(UNITY_RESULTSET resultSet, const std::pair<int32, double> unityData[11]);
+};
 
-        // Personal ranking points (dataType 0x14)
-        class PERSONAL final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, PERSONAL>
-        {
-        public:
-            struct PacketData
-            {
-                GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-                uint16_t                      unknown06; // PS2: (New; did not exist.)
-                UNITY_RESULTSET               resultSet; // Previous week or current week
-                UNITY_DATATYPE                dataType;  // Always PERSONAL
-                uint8_t                       padding[6];
-                uint16_t                      rankingPoints; // Player's personal Unity ranking points
-                uint8_t                       padding2[130];
-            };
+// Personal ranking points (dataType 0x14)
+class PERSONAL final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, PERSONAL>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        UNITY_RESULTSET               resultSet; // Previous week or current week
+        UNITY_DATATYPE                dataType;  // Always PERSONAL
+        uint8_t                       padding[6];
+        uint16_t                      rankingPoints; // Player's personal Unity ranking points
+        uint8_t                       padding2[130];
+    };
 
-            PERSONAL(UNITY_RESULTSET resultSet, uint16_t rankingPoints);
-        };
+    PERSONAL(UNITY_RESULTSET resultSet, uint16_t rankingPoints);
+};
 
-        // Generic 2-byte data packets (dataTypes 0x10-0x13, 0x15-0x1F)
-        class DATA final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, DATA>
-        {
-        public:
-            struct PacketData
-            {
-                GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-                uint16_t                      unknown06; // PS2: (New; did not exist.)
-                UNITY_RESULTSET               resultSet; // Previous week or current week
-                uint8_t                       dataType;  // Raw value for types 0x10-0x13, 0x15-0x1F
-                uint8_t                       padding[6];
-                uint16_t                      value; // Can be ASCII, flags, or numeric data
-                uint8_t                       padding2[130];
-            };
+// Generic 2-byte data packets (dataTypes 0x10-0x13, 0x15-0x1F)
+class DATA final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, DATA>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        UNITY_RESULTSET               resultSet; // Previous week or current week
+        uint8_t                       dataType;  // Raw value for types 0x10-0x13, 0x15-0x1F
+        uint8_t                       padding[6];
+        uint16_t                      value; // Can be ASCII, flags, or numeric data
+        uint8_t                       padding2[130];
+    };
 
-            DATA(UNITY_RESULTSET resultSet, uint8_t dataType, uint16_t value);
-        };
-    } // namespace UNITY
+    DATA(UNITY_RESULTSET resultSet, uint8_t dataType, uint16_t value);
+};
+
+} // namespace UNITY
 } // namespace GP_SERV_COMMAND_MISCDATA

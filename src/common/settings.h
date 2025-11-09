@@ -23,6 +23,7 @@
 
 #include "logging.h"
 #include "utils.h"
+#include "xi.h"
 
 #include <string>
 #include <type_traits>
@@ -31,52 +32,40 @@
 
 namespace settings
 {
-    // https://en.cppreference.com/w/cpp/utility/variant/visit
-    // helper type for the visitor
-    template <class... Ts>
-    struct overloaded : Ts...
+
+using SettingsVariant = std::variant<bool, double, std::string>;
+extern std::unordered_map<std::string, SettingsVariant> settingsMap;
+
+void init();
+
+/**
+ * @brief
+ * Get the value of a setting, based on a string key.
+ *
+ * @tparam T
+ * The value type being requested. If not the original type, it will be gracefully converted.
+ *
+ * @param name
+ * The name of the key being requested. It must be prefixed with the filename the setting is from.
+ * For example: "settings/main.lua" contains "ENABLE_COP". You would request: "main.ENABLE_COP".
+ * Therefore: bool val = settings::get<bool>("map.ENABLE_COP");
+ * NOTE: These names are NOT case-sensitive.
+ */
+template <typename T>
+T get(std::string name)
+{
+    // out = type being requested
+    T out{};
+
+    auto key = to_upper(name);
+    if (auto maybeResult = settingsMap.find(key); maybeResult != settingsMap.end())
     {
-        // cppcheck-suppress syntaxError
-        using Ts::operator()...;
-    };
-    // explicit deduction guide (not needed as of C++20)
-    template <class... Ts>
-    overloaded(Ts...) -> overloaded<Ts...>;
+        auto& variant = (*maybeResult).second;
 
-    using SettingsVariant_t = std::variant<bool, double, std::string>;
-    extern std::unordered_map<std::string, SettingsVariant_t> settingsMap;
-
-    void init();
-
-    /**
-     * @brief
-     * Get the value of a setting, based on a string key.
-     *
-     * @tparam T
-     * The value type being requested. If not the original type, it will be gracefully converted.
-     *
-     * @param name
-     * The name of the key being requested. It must be prefixed with the filename the setting is from.
-     * For example: "settings/main.lua" contains "ENABLE_COP". You would request: "main.ENABLE_COP".
-     * Therefore: bool val = settings::get<bool>("map.ENABLE_COP");
-     * NOTE: These names are NOT case-sensitive.
-     */
-    template <typename T>
-    T get(std::string name)
-    {
-        // out = type being requested
-        T out{};
-
-        auto key = to_upper(name);
-        if (auto maybeResult = settingsMap.find(key); maybeResult != settingsMap.end())
-        {
-            // clang-format off
-            auto& variant = (*maybeResult).second;
-
-            // arg = type held inside the variant
-            std::visit(
-            overloaded{
-                [&](bool const& arg)
+        // arg = type held inside the variant
+        std::visit(
+            xi::overload{
+                [&](const bool& arg)
                 {
                     if constexpr (std::is_same_v<T, bool>)
                     {
@@ -99,7 +88,7 @@ namespace settings
                         out = std::string(arg ? "true" : "false");
                     }
                 },
-                [&](double const& arg)
+                [&](const double& arg)
                 {
                     if constexpr (std::is_same_v<T, bool>)
                     {
@@ -122,10 +111,10 @@ namespace settings
                         out = fmt::format("{}", arg);
                     }
                 },
-                [&](std::string const& arg)
+                [&](const std::string& arg)
                 {
                     bool isTruthy = !arg.empty() && arg != "false" && arg != "0";
-                    std::ignore = isTruthy;
+                    std::ignore   = isTruthy;
 
                     if constexpr (std::is_same_v<T, bool>)
                     {
@@ -148,25 +137,26 @@ namespace settings
                         out = arg;
                     }
                 },
-            }, variant);
-            return out;
-            // clang-format on
-        }
-
-        ShowError(fmt::format("Settings: Failed to look up key: {}, using default value: \"{}\"", name, out));
-        return T();
+            },
+            variant);
+        return out;
     }
 
-    // A partial, core-only way to set settings.
-    // Not suitable for regular use.
-    //
-    // TODO: Gracefully convert like-types into types for the variant
-    // TODO: Publish back up into Lua
-    void set(const auto& name, const auto& value)
-    {
-        const auto key   = to_upper(name);
-        settingsMap[key] = SettingsVariant_t(value);
-    }
+    ShowError(fmt::format("Settings: Failed to look up key: {}, using default value: \"{}\"", name, out));
+    return T();
+}
 
-    void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor);
+// A partial, core-only way to set settings.
+// Not suitable for regular use.
+//
+// TODO: Gracefully convert like-types into types for the variant
+// TODO: Publish back up into Lua
+void set(const auto& name, const auto& value)
+{
+    const auto key   = to_upper(name);
+    settingsMap[key] = SettingsVariant(value);
+}
+
+void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor);
+
 } // namespace settings

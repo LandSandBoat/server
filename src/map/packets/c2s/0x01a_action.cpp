@@ -43,10 +43,12 @@
 
 namespace
 {
-    const auto actionToStr = [](const GP_CLI_COMMAND_ACTION_ACTIONID actionIn)
-    {
-        return magic_enum::enum_name(actionIn);
-    };
+
+const auto actionToStr = [](const GP_CLI_COMMAND_ACTION_ACTIONID actionIn)
+{
+    return magic_enum::enum_name(actionIn);
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

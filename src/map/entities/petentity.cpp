@@ -590,8 +590,11 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             target.knockback  = PSkill->getKnockback();
             if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
-                                                                    PSkill->getTertiarySkillchain());
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                    PTargetFound,
+                    PSkill->getPrimarySkillchain(),
+                    PSkill->getSecondarySkillchain(),
+                    PSkill->getTertiarySkillchain());
                 if (effect != SUBEFFECT_NONE)
                 {
                     int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);
