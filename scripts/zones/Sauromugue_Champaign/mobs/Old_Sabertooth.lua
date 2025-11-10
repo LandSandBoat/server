@@ -9,17 +9,18 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = 675, y = -10, z = -362 },
-    { x = 674, y = -10, z = -368 },
-    { x = 672, y = -9.1, z = -372 },
-    { x = 668, y = -8.3, z = -376 },
-    { x = 674, y = -10, z = -366 },
-    { x = 675, y = -9.9, z = -361 },
-    { x = 674, y = -9.5, z = -357 },
-    { x = 673, y = -9.0, z = -352 },
-    { x = 671, y = -8.9, z = -347 },
-    { x = 668, y = -9.5, z = -341 },
-
+    { x = 666.868, y = -9.506, z = -338.416, rotation = 162, wait = 10000 },
+    { x = 671.028, y = -9.169, z = -345.759, rotation = 043 }, -- Turns around and runs to the next spot
+    { x = 667.912, y = -9.512, z = -339.858, rotation = 172, wait = 10000 },
+    { x = 661.358, y = -9.812, z = -332.499, rotation = 162, wait = 10000 },
+    { x = 666.870, y = -9.506, z = -338.418, rotation = 033, wait = 10000 },
+    { x = 671.745, y = -8.992, z = -347.048, rotation = 043, wait = 10000 },
+    { x = 667.945, y = -9.513, z = -339.920, rotation = 172, wait = 10000 },
+    { x = 662.475, y = -9.715, z = -333.734, rotation = 162 }, -- Turns around and runs to the next spot
+    { x = 666.871, y = -9.506, z = -338.418, rotation = 033, wait = 10000 },
+    { x = 671.712, y = -9.001, z = -346.989, rotation = 043, wait = 10000 },
+    { x = 677.547, y = -10.064, z = -361.535, rotation = 075 }, -- Gateway waypoint so it doesn't path through the wall
+    { x = 667.128, y = -8.359, z = -378.015, rotation = 086, wait = 100000 }, -- Final resting place
 }
 
 entity.onMobSpawn = function(mob)
@@ -27,9 +28,7 @@ entity.onMobSpawn = function(mob)
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
-    mob:setRoamFlags(bit.bor(xi.roamFlag.IGNORE, xi.roamFlag.SCRIPTED))
-    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
-
+    mob:addStatusEffect(xi.effect.POISON, 7, 10, 240)
     mob:addListener('TAKE_DAMAGE', 'PRIME_TAKE_DAMAGE', function(tiger, amount, attacker)
         if attacker then
             tiger:setLocalVar('tookDamage', 1)
@@ -38,6 +37,13 @@ entity.onMobSpawn = function(mob)
             tiger:setBehavior(0)
         end
     end)
+
+    mob:pathThrough(pathNodes, xi.path.flag.COORDS)
+end
+
+-- Breaks the pathing script if the mob enters the engage state
+entity.onMobEngage = function(mob)
+    mob:clearPath()
 end
 
 entity.onMobFight = function(mob)
@@ -59,9 +65,9 @@ entity.onMobDeath = function(mob, player, optParams)-- TODO: We currently can't 
                 person:checkDistance(mob) < 32
         then
             if mob:getLocalVar('tookDamage') == 0 then
-                person:setCharVar('Quest[2][31]Prog', 1)
+                person:setCharVar('Quest[2][31]Timer', GetSystemTime() + 180) -- Player has about 3 minutes to get the KI before they have to watch the tiger die again.
             else
-                person:setCharVar('Quest[2][31]Timer', GetSystemTime() + 300)
+                person:setCharVar('Quest[2][31]Wait', GetSystemTime() + 300)
             end
         end
     end

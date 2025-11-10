@@ -225,7 +225,7 @@ float AddExpBonus(CCharEntity* PChar, float exp);
 
 void RemoveAllEquipment(CCharEntity* PChar);
 
-uint16 AvatarPerpetuationReduction(CCharEntity* PChar);
+uint16 AvatarPerpetuationReduction(CCharEntity* PChar, int16 perpetuation);
 
 void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
 void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype);

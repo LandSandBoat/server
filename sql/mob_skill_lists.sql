@@ -4279,7 +4279,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,645); -- Body Slam
 INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,648); -- Petro Eyes
 INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,649); -- Voidsong
 
--- Next ID : 2088
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',2088,313); -- Counterspore
+
+-- Next ID : 2089
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
