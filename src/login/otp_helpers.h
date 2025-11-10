@@ -20,27 +20,97 @@
 */
 #pragma once
 
+#include <cctype>
+#include <chrono>
+#include <openssl/hmac.h>
+#include <openssl/sha.h>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
 #include "common/xirand.h"
 #include "login_helpers.h"
 
-// This ugly nonsense is because winerror.h defines NO_ERROR and an enum definition inside cotp uses NO_ERROR,
-// if NO_ERROR is defined as 0 (from winerror.h) then the compiler thinks you're trying to define `0` as an enum, which you can't.
-#ifdef NO_ERROR
-
-#define TEMP_DEFINITION_HACK NO_ERROR
-#undef NO_ERROR
-#include "cotp.h"
-#define NO_ERROR TEMP_DEFINITION_HACK
-#undef TEMP_DEFINITION_HACK
-
-#else
-
-#include "cotp.h"
-
-#endif
-
 namespace otpHelpers
 {
+
+std::vector<uint8_t> base32Decode(const std::string& base32)
+{
+    static const std::array<int8_t, 256> lookup = []
+    {
+        std::array<int8_t, 256> table{};
+        table.fill(-1);
+        for (char c = 'A'; c <= 'Z'; ++c)
+        {
+            table[(unsigned char)c] = c - 'A';
+        }
+
+        for (char c = '2'; c <= '7'; ++c)
+        {
+            table[(unsigned char)c] = 26 + (c - '2');
+        }
+
+        return table;
+    }();
+
+    std::vector<uint8_t> bytes;
+    int                  buffer   = 0;
+    int                  bitsLeft = 0;
+
+    for (char ch : base32)
+    {
+        if (ch == '=' || ch == ' ' || ch == '-' || ch == '_')
+        {
+            continue;
+        }
+
+        ch         = std::toupper(static_cast<unsigned char>(ch));
+        int8_t val = lookup[(unsigned char)ch];
+        if (val == -1)
+        {
+            throw std::runtime_error("Invalid Base32 character");
+        }
+
+        buffer <<= 5;
+        buffer |= val;
+        bitsLeft += 5;
+        if (bitsLeft >= 8)
+        {
+            bitsLeft -= 8;
+            bytes.push_back((buffer >> bitsLeft) & 0xFF);
+        }
+    }
+
+    return bytes;
+}
+
+std::string generateTOTP(const std::string& base32Secret, uint64_t epochSeconds, int digits = 6, int period = 30)
+{
+    std::vector<uint8_t> key     = base32Decode(base32Secret);
+    uint64_t             counter = epochSeconds / period;
+
+    uint8_t counterBytes[8];
+    for (int i = 7; i >= 0; --i)
+    {
+        counterBytes[i] = counter & 0xFF;
+        counter >>= 8;
+    }
+
+    unsigned char hash[SHA_DIGEST_LENGTH];
+    HMAC(EVP_sha1(), key.data(), (int)key.size(), counterBytes, 8, hash, nullptr);
+
+    int      offset     = hash[SHA_DIGEST_LENGTH - 1] & 0x0F;
+    uint32_t binaryCode = (hash[offset] & 0x7F) << 24 |
+                          (hash[offset + 1] & 0xFF) << 16 |
+                          (hash[offset + 2] & 0xFF) << 8 |
+                          (hash[offset + 3] & 0xFF);
+
+    uint32_t otp = binaryCode % 1000000;
+
+    char result[10];
+    snprintf(result, sizeof(result), "%0*u", digits, otp);
+    return std::string(result);
+}
 
 // Base32 used for OTP standard. Doesn't use repeat alike characters such as both O and 0, and opts to use letters over similar numbers.
 // clang-format off
@@ -62,19 +132,13 @@ inline uint64_t getCurrentTime()
 
 inline bool validateTOTP(const std::string& totpCode, const std::string& secret)
 {
-    bool         valid   = false;
-    cotp_error_t cotpErr = {};
+    bool valid = false;
 
-    auto res = get_totp_at(secret.c_str(), getCurrentTime(), 6, 30, SHA1, &cotpErr);
+    auto res = generateTOTP(secret, getCurrentTime());
 
-    // TODO: do we care about errors?
-    if (res)
+    if (totpCode == res)
     {
-        if (strcmpi(totpCode.c_str(), res) == 0) // Need to use c_str for null terminator
-        {
-            valid = true;
-        }
-        destroy(res); // per docs, this string needs to be freed upon non-null return
+        valid = true;
     }
 
     return valid;
