@@ -2276,6 +2276,18 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         return false;
     }
 
+    // Early validation for SLOT_SUB: prevent unequipping shield if dual wield will fail
+    if (equipSlotID == SLOT_SUB && PItem->isType(ITEM_WEAPON))
+    {
+        const auto* mainWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+        const auto* newWeapon  = dynamic_cast<CItemWeapon*>(PItem);
+
+        if (mainWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || (newWeapon && newWeapon->getSkillType() == SKILL_NONE)))
+        {
+            return false;
+        }
+    }
+
     if (equipSlotID == SLOT_MAIN)
     {
         if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) &&
@@ -3113,7 +3125,8 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         }
     }
 
-    if (slotID == 0)
+    bool equipSuccess = false;
+    if (slotID == SLOT_MAIN)
     {
         CItemEquipment* PSubItem = PChar->getEquip(SLOT_SUB);
 
@@ -3132,6 +3145,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         {
             if (!PItem->isSubType(ITEM_LOCKED) && EquipArmor(PChar, slotID, equipSlotID, containerID))
             {
+                equipSuccess = true;
                 if (PItem->getScriptType() & SCRIPT_EQUIP)
                 {
                     luautils::OnItemCheck(PChar, PItem, ITEMCHECK::EQUIP, nullptr);
@@ -3171,7 +3185,12 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
             }
         }
     }
-    if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
+
+    // Reset TP (and remove aftermath etc..) if the equipment change was successful
+    // and any of the relevant slots are changed (main, ranged, sub)
+    // Note that the unequip logic earlier (with slotID == 0) already handled this inside
+    // UnequipItem(), so it's fine to only do this on equipSuccess
+    if (equipSuccess && (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB))
     {
         if (!PItem || !PItem->isType(ITEM_EQUIPMENT) ||
             (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT))
