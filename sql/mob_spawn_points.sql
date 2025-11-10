@@ -42821,7 +42821,7 @@ INSERT INTO `mob_spawn_points` VALUES (17268804,0,'Goblin_Shaman','Goblin Shaman
 INSERT INTO `mob_spawn_points` VALUES (17268805,0,'Sabertooth_Tiger','Sabertooth Tiger',30,600.326,-0.677,-314.895,9);
 INSERT INTO `mob_spawn_points` VALUES (17268806,0,'Sabertooth_Tiger','Sabertooth Tiger',30,605.422,-1.016,-315.751,127);
 INSERT INTO `mob_spawn_points` VALUES (17268807,0,'Sabertooth_Tiger','Sabertooth Tiger',30,599.802,-0.675,-314.299,11);
-INSERT INTO `mob_spawn_points` VALUES (17268808,0,'Old_Sabertooth','Old Sabertooth',31,676.000,-10.000,-366.000,86);
+INSERT INTO `mob_spawn_points` VALUES (17268808,0,'Old_Sabertooth','Old Sabertooth',31,661.354,-009.812,-332.498,162);
 INSERT INTO `mob_spawn_points` VALUES (17268809,0,'Sauromugue_Skink','Sauromugue Skink',32,415.662,24.789,41.282,11);
 INSERT INTO `mob_spawn_points` VALUES (17268810,0,'Sauromugue_Skink','Sauromugue Skink',32,354.703,23.893,-45.118,127);
 INSERT INTO `mob_spawn_points` VALUES (17268811,0,'Sauromugue_Skink','Sauromugue Skink',32,382.669,25.316,-34.913,109);

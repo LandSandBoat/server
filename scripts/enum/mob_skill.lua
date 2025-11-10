@@ -26,13 +26,14 @@ xi.mobSkill =
     VENOM_SPRAY_1            =  277,
     PIT_AMBUSH_1             =  278,
     MANDIBULAR_BITE_1        =  279,
+
     SUBSTITUTE               =  307,
     FROGKICK_1               =  308,
     SPORE_1                  =  309,
     QUEASYSHROOM_1           =  310,
     NUMBSHROOM_1             =  311,
     SHAKESHROOM_1            =  312,
-
+    COUNTERSPORE_1           =  313,
     SILENCE_GAS_1            =  314,
     DARK_SPORE_1             =  315,
 

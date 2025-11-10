@@ -26,6 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.agi_wsc = 0.4
     params.overrideCE = 80
     params.overrideVE = 240
+    params.rangedAccuracyBonus = 100
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 

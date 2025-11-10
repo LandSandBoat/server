@@ -415,7 +415,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.mainHitsLanded = calcParams.tpHitsLanded
     -- Finish first/mainhand hit
 
-    local numMainHandMultis = getMultiAttacks(attacker, target, wsParams, true, false)
+    local numMainHandMultis = isRanged and 0 or getMultiAttacks(attacker, target, wsParams, true, false)
     local numOffhandMultis  = 0
     local numMultiProcs     = numMainHandMultis > 0 and 1 or 0
 
@@ -510,7 +510,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         -- Check each hit for multis, but stop after we get 2 multi procs
         if numMultiProcs < 2 then
-            local extraMultis = getMultiAttacks(attacker, target, wsParams, false, false)
+            local extraMultis = isRanged and 0 or getMultiAttacks(attacker, target, wsParams, false, false)
             numMainHandMultis = numMainHandMultis + extraMultis
             numMultiProcs     = extraMultis > 0 and numMultiProcs + 1 or numMultiProcs
         end

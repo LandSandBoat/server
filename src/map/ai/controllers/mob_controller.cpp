@@ -731,7 +731,7 @@ void CMobController::Move()
     float       attack_range  = PMob->GetMeleeRange();
     const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
     const float offset        = static_cast<float>(offsetMod) / 10.0f;
-    float       closeDistance = attack_range - (offsetMod == 0 ? 0.2f : offset);
+    float       closeDistance = (attack_range - (offsetMod == 0 ? 0.2f : offset)) / 2;
 
     // No going negative on the final value.
     if (closeDistance < 0.0f)
@@ -803,7 +803,7 @@ void CMobController::Move()
                     if (!PMob->PAI->PathFind->IsFollowingPath())
                     {
                         // out of melee range, try to path towards
-                        if (currentDistance > (offsetMod == 0 ? PMob->GetMeleeRange() : closeDistance))
+                        if (currentDistance > closeDistance)
                         {
                             // try to find path towards target
                             PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);

@@ -9,26 +9,34 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, master, action)
-    local power = 10000 * (master:getMP() / master:getMaxMP())
-    local duration = 60
+    if master == nil then
+        return 0
+    end
 
-    if master ~= nil then
-        local summoningSkill = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-        if summoningSkill > 600 then
-            summoningSkill = 600
-        end
+    local power    = master:getLocalVar('perfectDefPower')
 
-        duration = 30 + summoningSkill / 20
+    if power == 0 then
+        power = 9000 * (master:getMP() / master:getMaxMP())
+        master:setLocalVar('perfectDefPower', power)
         master:setMP(0)
         master:delStatusEffect(xi.effect.ASTRAL_FLOW)
     end
 
+    local summoningSkill = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
+    if summoningSkill > 600 then
+        summoningSkill = 600
+    end
+
+    local duration = 30 + summoningSkill / 20
+    local subPower = math.floor(98 * power / 9000)
+
     target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
-    target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration)
+    target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration, 0, subPower)
 
     -- Despawn Alexander after 6 seconds.
     pet:timer(6000, function()
         if master then
+            master:setLocalVar('perfectDefPower', 0)
             master:despawnPet()
         end
     end)
