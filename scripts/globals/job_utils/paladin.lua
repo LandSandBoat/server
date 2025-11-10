@@ -86,6 +86,8 @@ xi.job_utils.paladin.useDivineEmblem = function(player, target, ability)
     local power = 50 + player:getMod(xi.mod.ENHANCES_DIVINE_EMBLEM) -- 50% increase to enmity
 
     player:addStatusEffect(xi.effect.DIVINE_EMBLEM, power, 0, 60)
+
+    return xi.effect.DIVINE_EMBLEM
 end
 
 xi.job_utils.paladin.useFealty = function(player, target, ability)
@@ -94,6 +96,8 @@ xi.job_utils.paladin.useFealty = function(player, target, ability)
     local duration  = 60 + merits + enhFealty
 
     player:addStatusEffect(xi.effect.FEALTY, 1, 0, duration)
+
+    return xi.effect.FEALTY
 end
 
 xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
@@ -112,6 +116,8 @@ xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
     power = power + player:getMod(xi.mod.HOLY_CIRCLE_POTENCY)
 
     target:addStatusEffect(xi.effect.HOLY_CIRCLE, power, 0, duration)
+
+    return xi.effect.HOLY_CIRCLE
 end
 
 xi.job_utils.paladin.useIntervene = function(player, target, ability)
@@ -137,10 +143,14 @@ end
 
 xi.job_utils.paladin.useInvincible = function(player, target, ability)
     player:addStatusEffect(xi.effect.INVINCIBLE, 1, 0, 30)
+
+    return xi.effect.INVINCIBLE
 end
 
 xi.job_utils.paladin.useMajesty = function(player, target, ability)
     player:addStatusEffect(xi.effect.MAJESTY, 25, 0, 180)
+
+    return xi.effect.MAJESTY
 end
 
 xi.job_utils.paladin.usePalisade = function(player, target, ability)
@@ -148,12 +158,16 @@ xi.job_utils.paladin.usePalisade = function(player, target, ability)
     local power   = 30 + jpValue
 
     player:addStatusEffect(xi.effect.PALISADE, power, 0, 60)
+
+    return xi.effect.PALISADE
 end
 
 xi.job_utils.paladin.useRampart = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
 
     target:addStatusEffect(xi.effect.RAMPART, 2500, 0, duration)
+
+    return xi.effect.RAMPART
 end
 
 xi.job_utils.paladin.useSentinel = function(player, target, ability)
@@ -167,6 +181,8 @@ xi.job_utils.paladin.useSentinel = function(player, target, ability)
 
     -- Sent as positive power because UINTs, man.
     player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
+
+    return xi.effect.SENTINEL
 end
 
 xi.job_utils.paladin.useSepulcher = function(player, target, ability)

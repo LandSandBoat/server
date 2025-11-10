@@ -23,14 +23,9 @@
 
 #include "base.h"
 
-enum class GP_CLI_COMMAND_GROUP_BREAKUP_KIND : uint8_t
-{
-    Party    = 0,
-    Alliance = 5
-};
-
+enum class PartyKind : uint8_t;
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0070
 // This packet is sent by the client when dissolving a party or alliance.
 GP_CLI_PACKET(GP_CLI_COMMAND_GROUP_BREAKUP,
-              uint8_t Kind; // PS2: Kind
+              PartyKind Kind; // PS2: Kind
 );

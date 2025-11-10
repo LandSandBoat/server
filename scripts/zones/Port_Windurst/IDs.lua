@@ -67,6 +67,7 @@ zones[xi.zone.PORT_WINDURST] =
         SATTSUHAHKANPARI_CLOSED_DIALOG  = 12587, -- You've heard of the Elshimo Uplands, haven't you? Well, if you'll hold on a minute, I'll have a shipment of goods coming in any time now.
         BLACK_HALO_LEARNED              = 12683, -- You have learned the weapon skill Black Halo!
         KUCHAMALKOBHI_SHOP_DIALOG       = 12732, -- How about a nice suit of adventurer-issue armorrr? Be careful though. We offer no rrrefunds!
+        SUSPICIOUS_CHARACTERS           = 12814, -- It's my job to look out for suspicious characters coming in on the airships.
         ALIZABE_OPEN_DIALOG             = 12912, -- Don't tell anybody, but I've managed to get my hands on some items from Tavnazia! Take a look!
         ALIZABE_CLOSED_DIALOG           = 12913, -- Pssst! Have you heard of Tavnazia? Boy, do they have some sweet items on those islands...
         ALIZABE_COP_NOT_COMPLETED       = 12914, -- It won't be long before I set up shop right here in this very place. And once I start, there won't be no stoppin' me!

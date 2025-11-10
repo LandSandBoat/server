@@ -41,5 +41,8 @@ void GP_CLI_COMMAND_GET_LSPRIV::process(MapSession* PSession, CCharEntity* PChar
     // - seqId:The linkshell message sequence id.
     // This sends a 0xCC response that prints "The linkshell message can be set by pearlsack owners"
     ShowDebugFmt("GP_CLI_COMMAND_GET_LSPRIV: Not implemented. unknown01 {}, unknown02 {}, unknown04 {}, seqId {}",
-                 unknown01, unknown02, unknown04, seqId);
+                 unknown01,
+                 unknown02,
+                 unknown04,
+                 seqId);
 }

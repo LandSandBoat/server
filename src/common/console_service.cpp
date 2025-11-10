@@ -128,7 +128,7 @@ ConsoleService::~ConsoleService()
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-void ConsoleService::registerCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>&)> func)
+void ConsoleService::registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func)
 {
     std::lock_guard<std::mutex> lock(m_consoleInputBottleneck);
 
@@ -137,146 +137,146 @@ void ConsoleService::registerCommand(std::string const& name, std::string const&
 
 void ConsoleService::registerDefaultCommands()
 {
-    // clang-format off
-    registerCommand("help", "Print a list of available console commands",
-    [this](std::vector<std::string>& inputs)
-    {
-        fmt::print("> Available commands:\n");
-        for (auto& [name, command] : m_commands)
+    registerCommand(
+        "help", "Print a list of available console commands", [this](std::vector<std::string>& inputs)
         {
-            fmt::print("> {} : {}\n", command.name, command.description);
-        }
-    });
+            fmt::print("> Available commands:\n");
+            for (auto& [name, command] : m_commands)
+            {
+                fmt::print("> {} : {}\n", command.name, command.description);
+            }
+        });
 
-    registerCommand("version", "Print the application version",
-    [](std::vector<std::string>& inputs)
-    {
-        fmt::print("> Application branch: {}\n", version::GetVersionString());
-    });
-
-    registerCommand("tasks", "Show the current amount of tasks registered to the application task manager",
-    [](std::vector<std::string>& inputs)
-    {
-        fmt::print("> tasks registered to the application task manager: {}\n", CTaskManager::getInstance()->getTaskList().size());
-    });
-
-    registerCommand("reload_settings", "Reload settings files",
-    [](std::vector<std::string>& inputs)
-    {
-        fmt::print("Reloading settings files\n");
-        settings::init();
-    });
-
-    registerCommand("log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)",
-    [](std::vector<std::string>& inputs)
-    {
-        if (inputs.size() >= 2)
+    registerCommand(
+        "version", "Print the application version", [](std::vector<std::string>& inputs)
         {
-            std::vector<std::string> names = { "trace", "debug", "info", "warn" };
-            auto level = std::clamp<uint8>(stoi(inputs[1]), 0, 3);
-            spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
-            fmt::print("> Log level set to: {} ({})\n", level, names[level]);
-        }
-        else
+            fmt::print("> Application branch: {}\n", version::GetVersionString());
+        });
+
+    registerCommand(
+        "tasks", "Show the current amount of tasks registered to the application task manager", [](std::vector<std::string>& inputs)
         {
-            fmt::print("> Invalid inputs.\n");
-        }
-    });
+            fmt::print("> tasks registered to the application task manager: {}\n", CTaskManager::getInstance()->getTaskList().size());
+        });
 
-    registerCommand("lua", "Provides a Lua REPL",
-    [](std::vector<std::string>& inputs)
-    {
-        if (inputs.size() >= 2)
+    registerCommand(
+        "reload_settings", "Reload settings files", [](std::vector<std::string>& inputs)
         {
-            // Remove "lua" from the front of the inputs
-            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+            fmt::print("Reloading settings files\n");
+            settings::init();
+        });
 
-            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+    registerCommand(
+        "log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)", [](std::vector<std::string>& inputs)
+        {
+            if (inputs.size() >= 2)
+            {
+                std::vector<std::string> names = { "trace", "debug", "info", "warn" };
+                auto                     level = std::clamp<uint8>(stoi(inputs[1]), 0, 3);
+                spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
+                fmt::print("> Log level set to: {} ({})\n", level, names[level]);
+            }
+            else
+            {
+                fmt::print("> Invalid inputs.\n");
+            }
+        });
 
+    registerCommand(
+        "lua", "Provides a Lua REPL", [](std::vector<std::string>& inputs)
+        {
+            if (inputs.size() >= 2)
+            {
+                // Remove "lua" from the front of the inputs
+                inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+
+                auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+
+                // TODO: Make sure to execute on the main thread
+                lua.safe_script(input);
+            }
+        });
+
+    registerCommand(
+        "crash", "Crash the process", [](std::vector<std::string>& inputs)
+        {
             // TODO: Make sure to execute on the main thread
-            lua.safe_script(input);
-        }
-    });
+            crash();
+        });
 
-    registerCommand("crash", "Crash the process",
-    [](std::vector<std::string>& inputs)
-    {
-        // TODO: Make sure to execute on the main thread
-        crash();
-    });
+    registerCommand(
+        "throw", "Throw an exception", [](std::vector<std::string>& inputs)
+        {
+            // TODO: Make sure to execute on the main thread
+            throw std::runtime_error("Exception thrown from console command");
+        });
 
-    registerCommand("throw", "Throw an exception",
-    [](std::vector<std::string>& inputs)
-    {
-        // TODO: Make sure to execute on the main thread
-        throw std::runtime_error("Exception thrown from console command");
-    });
-
-    registerCommand("exit", "Request application exit",
-    [&](std::vector<std::string>& inputs)
-    {
-        application_.requestExit();
-        fmt::print("> Goodbye!");
-    });
-    // clang-format on
+    registerCommand(
+        "exit", "Request application exit", [&](std::vector<std::string>& inputs)
+        {
+            application_.requestExit();
+            fmt::print("> Goodbye!");
+        });
 }
 
 void ConsoleService::run()
 {
-    // clang-format off
     bool attached = isatty(0);
     if (attached)
     {
-        m_consoleInputThread = nonstd::jthread([&]()
-        {
-            std::string line;
-
-            const auto predicate = [&]{ return !m_consoleThreadRun; };
-
-            while (!predicate())
+        m_consoleInputThread = nonstd::jthread(
+            [&]()
             {
-                std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
+                std::string line;
 
-                // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
-                if (!m_consoleStopCondition.wait_for(lock, 50ms, predicate))
+                const auto predicate = [&]
                 {
-                    if (!getLine(line))
+                    return !m_consoleThreadRun;
+                };
+
+                while (!predicate())
+                {
+                    std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
+
+                    // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
+                    if (!m_consoleStopCondition.wait_for(lock, 50ms, predicate))
                     {
-                        continue;
-                    }
-
-                    std::istringstream stream(line);
-                    std::string        input;
-
-                    std::vector<std::string> inputs;
-                    while (stream >> input)
-                    {
-                        for (auto& part : split(input))
+                        if (!getLine(line))
                         {
-                            inputs.emplace_back(part);
+                            continue;
                         }
-                    }
 
-                    if (!inputs.empty())
-                    {
-                        TracyZoneScoped;
+                        std::istringstream stream(line);
+                        std::string        input;
 
-                        auto entry = m_commands.find(inputs[0]);
-                        if (entry != m_commands.end())
+                        std::vector<std::string> inputs;
+                        while (stream >> input)
                         {
-                            // TODO: Execute this on the main thread, not the worker thread
-                            entry->second.func(inputs);
+                            for (auto& part : split(input))
+                            {
+                                inputs.emplace_back(part);
+                            }
                         }
-                        else
-                        {
-                            fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
-                        }
-                    }
 
-                    line = std::string();
+                        if (!inputs.empty())
+                        {
+                            TracyZoneScoped;
+
+                            auto entry = m_commands.find(inputs[0]);
+                            if (entry != m_commands.end())
+                            {
+                                // TODO: Execute this on the main thread, not the worker thread
+                                entry->second.func(inputs);
+                            }
+                            else
+                            {
+                                fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
+                            }
+                        }
+
+                        line = std::string();
+                    }
                 }
-            }
-        });
+            });
     }
-    // clang-format on
 }

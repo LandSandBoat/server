@@ -28,15 +28,14 @@ SearchEngine::SearchEngine(asio::io_context& io_context)
 , m_periodicCleanupTimer(io_context, std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")))
 {
     const auto accessWhitelist = lua["xi"]["settings"]["search"]["ACCESS_WHITELIST"].get_or_create<sol::table>();
-    for (auto const& [_, value] : accessWhitelist)
+    for (const auto& [_, value] : accessWhitelist)
     {
-        // clang-format off
         auto str = value.as<std::string>();
-        m_ipWhitelist.write([str](auto& ipWhitelist)
-        {
-            ipWhitelist.insert(str);
-        });
-        // clang-format on
+        m_ipWhitelist.write(
+            [str](auto& ipWhitelist)
+            {
+                ipWhitelist.insert(str);
+            });
     }
 
     if (settings::get<bool>("search.EXPIRE_AUCTIONS"))

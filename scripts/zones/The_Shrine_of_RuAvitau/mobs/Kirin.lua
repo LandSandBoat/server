@@ -8,72 +8,85 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+-- God mob IDs (offset from Kirin)
+local gods = { ID.mob.KIRIN + 1, ID.mob.KIRIN + 2, ID.mob.KIRIN + 3, ID.mob.KIRIN + 4 }
+
+local callPetParams =
+{
+    dieWithOwner = true,
+    superLink = true,
+    inactiveTime = 9000, -- 9 second cast time
+    maxSpawns = 1,
+}
+
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 5, 'Kirins_Avatar')
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
     mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 5)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 30)
+    mob:setMod(xi.mod.DEFP, 30)
+    mob:setMod(xi.mod.REGEN, 50)
+    mob:setMod(xi.mod.REGAIN, 1000) -- Kirin never stops using TP moves unless casting
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.WIND_MEVA, -64) -- Todo: Move to mob_resists.sql
-    mob:setMod(xi.mod.SILENCE_MEVA, 35)
-    mob:setMod(xi.mod.STUN_MEVA, 35)
-    mob:setMod(xi.mod.BIND_MEVA, 35)
-    mob:setMod(xi.mod.GRAVITY_MEVA, 35)
-    mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
-    mob:setLocalVar('numAdds', 1)
+    mob:setLocalVar('godSpawnTime', GetSystemTime() + math.random(180, 300)) -- 3-5 minutes
+
+    -- Wait 5 seconds after spawn to cast
+    mob:setMagicCastingEnabled(false)
+    mob:timer(5000, function(mobArg)
+        if mobArg then
+            mobArg:setMagicCastingEnabled(true)
+        end
+    end)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:messageText(mob, ID.text.KIRIN_OFFSET)
 end
 
 entity.onMobFight = function(mob, target)
-    -- spawn gods
+    -- Check if it's time to spawn a god
     local numAdds = mob:getLocalVar('numAdds')
-    if mob:getBattleTime() / 180 == numAdds then
-        local godsRemaining = {}
+    if GetSystemTime() >= mob:getLocalVar('godSpawnTime') and numAdds < 4 then
+        -- Find which gods have never been spawned
+        local availableGods = {}
         for i = 1, 4 do
             if mob:getLocalVar('add' .. i) == 0 then
-                table.insert(godsRemaining, i)
+                table.insert(availableGods, gods[i])
             end
         end
 
-        if #godsRemaining > 0 then
-            local g   = godsRemaining[math.random(1, #godsRemaining)]
-            local god = SpawnMob(ID.mob.KIRIN + g)
+        -- Spawn one random god if any are available
+        if #availableGods > 0 then
+            local selectedGod = availableGods[math.random(1, #availableGods)]
 
-            if god then
-                god:updateEnmity(target)
-                god:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
-                mob:setLocalVar('add' .. g, 1)
+            -- Use callPets to spawn exactly one god
+            if xi.mob.callPets(mob, selectedGod, callPetParams) then
+                -- Mark this god as spawned and update counter
+                for i = 1, 4 do
+                    if gods[i] == selectedGod then
+                        mob:setLocalVar('add' .. i, 1)
+                        break
+                    end
+                end
+
                 mob:setLocalVar('numAdds', numAdds + 1)
+
+                -- Set next god spawn time (3-5 minutes later)
+                mob:setLocalVar('godSpawnTime', GetSystemTime() + math.random(180, 300))
             end
         end
     end
-
-    -- ensure all spawned pets are doing stuff
-    for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
-        local god = GetMobByID(i)
-        if god and god:getCurrentAction() == xi.action.ROAMING then
-            god:updateEnmity(target)
-        end
-    end
-end
-
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.KIRIN_CAPTIVATOR)
     player:showText(mob, ID.text.KIRIN_OFFSET + 1)
-    for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
-        DespawnMob(i)
-    end
-end
-
-entity.onMobDespawn = function(mob)
-    for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
-        DespawnMob(i)
-    end
 end
 
 return entity

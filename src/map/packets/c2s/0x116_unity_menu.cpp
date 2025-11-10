@@ -22,8 +22,8 @@
 #include "0x116_unity_menu.h"
 
 #include "entities/charentity.h"
-#include "packets/menu_unity.h"
 #include "packets/s2c/0x110_unity.h"
+#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_UNITY_MENU::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -36,5 +36,5 @@ void GP_CLI_COMMAND_UNITY_MENU::process(MapSession* PSession, CCharEntity* PChar
     // TODO: Incomplete implementation.
     // This stub only handles the needed RoE updates.
     PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
-    PChar->pushPacket<CMenuUnityPacket>(PChar);
+    charutils::SendUnityPackets(PChar);
 }

@@ -23,17 +23,13 @@
 
 #include "base.h"
 
-enum class GP_CLI_COMMAND_GROUP_SOLICIT_REQ_KIND : uint8_t
-{
-    Party    = 0,
-    Alliance = 5,
-};
+enum class PartyKind : uint8_t;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x006E
 // This packet is sent by the client when sending party or alliance invites to other players.
 GP_CLI_PACKET(GP_CLI_COMMAND_GROUP_SOLICIT_REQ,
-              uint32_t UniqueNo;  // PS2: UniqueNo
-              uint16_t ActIndex;  // PS2: ActIndex
-              uint8_t  Kind;      // PS2: Kind
-              uint8_t  padding00; // PS2: dammy2
+              uint32_t  UniqueNo;  // PS2: UniqueNo
+              uint16_t  ActIndex;  // PS2: ActIndex
+              PartyKind Kind;      // PS2: Kind
+              uint8_t   padding00; // PS2: dammy2
 );

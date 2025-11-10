@@ -9,12 +9,15 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
-    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.REGAIN, 90)
+    mob:addMod(xi.mod.REGEN, 12)
 end
 
 entity.onMobSpawn = function(mob)
@@ -35,6 +38,20 @@ entity.onMobEngage = function(mob, target)
         if m and m:getCurrentAction() == xi.action.ROAMING then
             m:updateEnmity(target)
         end
+    end
+
+    mob:setLocalVar('shieldStrikeTime', GetSystemTime() + 17)
+end
+
+entity.onMobFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    local currentTime = GetSystemTime()
+    if currentTime >= mob:getLocalVar('shieldStrikeTime') then
+        mob:useMobAbility(xi.mobSkill.SHIELD_STRIKE)
+        mob:setLocalVar('shieldStrikeTime', currentTime + 17)
     end
 end
 

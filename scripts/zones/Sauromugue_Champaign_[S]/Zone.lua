@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Sauromugue_Champaign_[S] (98)
 -----------------------------------
-local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 

@@ -32,7 +32,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/mmo.h
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/string.h
     ${CMAKE_CURRENT_SOURCE_DIR}/task_manager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/task_manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/timer.h

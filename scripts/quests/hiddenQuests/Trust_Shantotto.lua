@@ -104,7 +104,7 @@ quest.sections =
             {
                 [529] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.SHANTOTTO, true, true)
+                        player:addSpell(xi.magic.spell.SHANTOTTO, { silentLog = true })
                         player:messageSpecial(wallsID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.SHANTOTTO)
                     end
                 end,

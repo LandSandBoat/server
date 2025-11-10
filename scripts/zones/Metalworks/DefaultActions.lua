@@ -18,7 +18,7 @@ return {
     ['Folzen']            = { event = 411 },
     ['Franziska']         = { event = 620 },
     ['Galina']            = { event = 600 },
-    ['Grohm']             = { event = 427 }, -- NOTE: 422 commented in previous code, 427 might be specific to > 9 missionStatus for M2-3
+    ['Grohm']             = { event = 422 },
     ['Elayne']            = { event = 704 },
     ['Hadelind']          = { event = 302 },
     ['Hans']              = { event = 321 },

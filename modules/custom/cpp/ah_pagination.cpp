@@ -10,13 +10,13 @@
 
 #include "common/timer.h"
 
-#include "map/packet_system.h"
-#include "map/packets/auction_house.h"
-#include "map/packets/basic.h"
-#include "map/packets/chat_message.h"
-
+#include "map/enums/chat_message_type.h"
 #include "map/map_session.h"
+#include "map/packet_system.h"
+#include "map/packets/basic.h"
+#include "map/packets/s2c/0x017_chat_std.h"
 #include "map/zone.h"
+#include "packets/s2c/0x04c_auc.h"
 
 #include <functional>
 #include <numeric>
@@ -63,7 +63,7 @@ class AHPaginationModule : public CPPModule
         const timer::time_point curTick = timer::now();
         if (curTick < PChar->m_AHHistoryTimestamp + 1500ms)
         {
-            PChar->pushPacket<CAuctionHousePacket>(typedPacket->Command, 246, 0, 0, 0, 0); // try again in a little while msg
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(typedPacket->Command, 246, 0, 0, 0, 0); // try again in a little while msg
             return true;
         }
 
@@ -90,14 +90,14 @@ class AHPaginationModule : public CPPModule
 
                 return 0;
             }();
-            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have {} items listed for sale.", ahListings).c_str(), "");
+            PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have {} items listed for sale.", ahListings));
         }
 
         PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % totalPages_);
 
         PChar->m_ah_history.clear();
         PChar->m_AHHistoryTimestamp = curTick;
-        PChar->pushPacket<CAuctionHousePacket>(typedPacket->Command);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(typedPacket->Command);
 
         // Not const, because we're possibly going to overwrite it later
         auto rset = db::preparedStmt("SELECT itemid, price, stack "
@@ -105,12 +105,14 @@ class AHPaginationModule : public CPPModule
                                      "WHERE seller = ? and sale = 0 "
                                      "ORDER BY id ASC "
                                      "LIMIT ? OFFSET ?",
-                                     PChar->id, static_cast<uint32>(itemsPerPage_), static_cast<uint32>(currentAHPage * itemsPerPage_));
+                                     PChar->id,
+                                     static_cast<uint32>(itemsPerPage_),
+                                     static_cast<uint32>(currentAHPage * itemsPerPage_));
 
         // If we get back 0 results, we're at the end of the list. We should redo the query and reset to page 1 (OFFSET 0)
         if (rset && rset->rowsCount() == 0)
         {
-            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, totalPages_).c_str(), "");
+            PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("No results for page: {} of {}.", currentAHPage + 1, totalPages_));
 
             // Reset to Page 1
             // Overwrite the original rset here
@@ -119,7 +121,8 @@ class AHPaginationModule : public CPPModule
                                     "WHERE seller = ? and sale = 0 "
                                     "ORDER BY id ASC "
                                     "LIMIT ? OFFSET 0",
-                                    PChar->id, static_cast<uint32>(itemsPerPage_));
+                                    PChar->id,
+                                    static_cast<uint32>(itemsPerPage_));
 
             // Show Page 1 this time
             currentAHPage = 0;
@@ -131,7 +134,7 @@ class AHPaginationModule : public CPPModule
         // TODO: Don't use totalPages_ here, use the actual number of pages of results.
         // Current (10 items): Current page: 2 of 99. Showing 4 items.
         // Desired (10 items): Current page: 2 of 2. Showing 4 items.
-        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, totalPages_, rset->rowsCount()).c_str(), "");
+        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("Current page: {} of {}. Showing {} items.", currentAHPage + 1, totalPages_, rset->rowsCount()));
 
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
@@ -146,7 +149,7 @@ class AHPaginationModule : public CPPModule
         const auto totalItemsOnAh = PChar->m_ah_history.size();
         for (size_t slot = 0; slot < totalItemsOnAh; slot++)
         {
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, static_cast<uint8>(slot), PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, static_cast<uint8>(slot), PChar);
         }
 
         return true;

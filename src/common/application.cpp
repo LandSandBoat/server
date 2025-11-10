@@ -42,51 +42,45 @@
 
 namespace
 {
-    // Marked as true by markLoaded() when the
-    // application is fully loaded and the main
-    // loop has begun.
-    bool gIsRunning = false;
 
-    void handleSignal(const std::error_code& error, int signal)
+// Marked as true by markLoaded() when the
+// application is fully loaded and the main
+// loop has begun.
+bool gIsRunning = false;
+
+void handleSignal(const std::error_code& error, int signal)
+{
+    if (error)
     {
-        if (error)
-        {
-            return;
-        }
-
-        switch (signal)
-        {
-#ifdef _WIN32
-            case SIGBREAK:
-#endif // _WIN32
-            case SIGINT:
-            case SIGTERM:
-                gIsRunning = false;
-                std::exit(0);
-            case SIGABRT:
-#ifdef _WIN32
-            case SIGABRT_COMPAT:
-#endif // _WIN32
-            case SIGSEGV:
-            case SIGFPE:
-            case SIGILL:
-#ifdef _WIN32
-#ifdef _DEBUG
-                // Pass the signal to the system's default handler
-                std::signal(signal, SIG_DFL);
-                std::raise(signal);
-#endif // _DEBUG
-#endif // _WIN32
-                break;
-            default:
-                std::cerr << fmt::format("Unhandled signal: {}\n", signal);
-                break;
-        }
+        return;
     }
 
+    switch (signal)
+    {
 #ifdef _WIN32
-    unsigned long prevQuickEditMode;
+        case SIGBREAK:
 #endif // _WIN32
+        case SIGINT:
+        case SIGTERM:
+            gIsRunning = false;
+            std::exit(0);
+#ifndef _WIN32
+        case SIGABRT:
+        case SIGSEGV:
+        case SIGFPE:
+        case SIGILL:
+            break;
+#endif
+        default:
+            std::cerr << fmt::format("Unhandled signal: {}\n", signal);
+            break;
+    }
+}
+
+#ifdef _WIN32
+unsigned long prevQuickEditMode;
+#endif // _WIN32
+
 } // namespace
 
 Application::Application(const ApplicationConfig& appConfig, int argc, char** argv)
@@ -102,7 +96,6 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
     usercheck();
     tryIncreaseRLimits();
 
-    // TODO: How much of this interferes with the signal handler in here?
     debug::init();
 
     lua_init();
@@ -142,13 +135,10 @@ void Application::registerSignalHandlers()
 {
     signals_.add(SIGINT);
     signals_.add(SIGTERM);
-#if !defined(_DEBUG) && defined(_WIN32) // need unhandled exceptions to debug on Windows
+#ifdef _WIN32
     signals_.add(SIGBREAK);
-    signals_.add(SIGABRT);
-    signals_.add(SIGABRT_COMPAT);
-    signals_.add(SIGSEGV);
-    signals_.add(SIGFPE);
-    signals_.add(SIGILL);
+    // Don't register crash signals with ASIO on Windows - they need to reach SEH
+    // for WheatyExceptionReport to generate crash dumps
 #endif
 #ifndef _WIN32
     signals_.add(SIGXFSZ);

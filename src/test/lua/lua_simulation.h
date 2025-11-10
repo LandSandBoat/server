@@ -57,7 +57,6 @@ public:
     CLuaSimulation(CLuaSimulation&&)                 = default;
     CLuaSimulation& operator=(CLuaSimulation&&)      = default;
 
-    void loadZone(sol::variadic_args va) const;
     void cleanClients(std::optional<ClientScope> scope = std::nullopt);
     void tick(std::optional<TickType> boundary = std::nullopt) const;
     void processClientUpdates() const;

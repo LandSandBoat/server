@@ -48,8 +48,8 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.bonusTP = wsParams.bonusTP or 0
     calcParams.bonusfTP = flameHolderFTP or 0
     calcParams.bonusAcc = 0 + attacker:getMod(xi.mod.WSACC)
-    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100) -- TODO: do automatons get first hit acc bonus?
-    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc)
+    calcParams.firstHitRate = xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, calcParams.bonusAcc + 100, xi.attackAnimation.RIGHT_ATTACK, true) -- TODO: do automatons get first hit acc bonus?
+    calcParams.hitRate      = xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, calcParams.bonusAcc, xi.attackAnimation.RIGHT_ATTACK, true)
     calcParams.skillType = attack.weaponType
     calcParams.tpUsed = tp
 

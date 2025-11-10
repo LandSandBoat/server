@@ -75,6 +75,7 @@ xi.msg.basic =
     MAGIC_RECOVERS_HP               = 7,   -- <caster> casts <spell>. <target> recovers <amount> HP.
     MAGIC_UNABLE_TO_CAST            = 17,  -- Unable to cast spells at this time.
     MAGIC_UNABLE_TO_CAST_2          = 18,  -- Unable to cast spells at this time.
+    PLAYER_LEARNS_NEW_SPELL         = 23,  -- <player> learns a new spell!
     MAGIC_CANNOT_CAST               = 47,  -- <caster> cannot cast <spell>.
     MAGIC_CANNOT_BE_CAST            = 48,  -- <spell> cannot be cast on <target>. (example: tractor)
     MAGIC_NO_EFFECT                 = 75,  -- <caster>'s <spell> has no effect on <target>.

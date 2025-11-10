@@ -594,29 +594,6 @@ function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimum
     return finalDamage
 end
 
--- returns true if taken by third eye
----@param target CBaseEntity
----@return boolean
-function utils.thirdeye(target)
-    --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
-    --chance of anticipate based on previous successful anticipates.
-    local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
-
-    if teye == nil then
-        return false
-    end
-
-    local prevAnt = teye:getPower()
-
-    if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
-        --anticipated!
-        target:delStatusEffect(xi.effect.THIRD_EYE)
-        return true
-    end
-
-    return false
-end
-
 ---@nodiscard
 ---@param actor CBaseEntity
 ---@param job xi.job

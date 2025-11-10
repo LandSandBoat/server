@@ -36,59 +36,61 @@
 
 namespace
 {
-    static const int8 ERROR_NEARESTPOLY  = -2;
-    static const int  NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
-    static const int  NAVMESHSET_VERSION = 1;
 
-    // Flags are defined in a "Sample.h" file in the RecastDemo project of recastnavigation.
-    enum SamplePolyFlags : uint16_t
-    {
-        SAMPLE_POLYFLAGS_WALK     = 0x0001, // Ability to walk (ground, grass, road)
-        SAMPLE_POLYFLAGS_SWIM     = 0x0002, // Ability to swim (water).
-        SAMPLE_POLYFLAGS_DOOR     = 0x0004, // Ability to move through doors.
-        SAMPLE_POLYFLAGS_JUMP     = 0x0008, // Ability to jump.
-        SAMPLE_POLYFLAGS_DISABLED = 0x0010, // Disabled polygon
-        SAMPLE_POLYFLAGS_ALL      = 0xFFFF, // All abilities.
-    };
+static const int8 ERROR_NEARESTPOLY  = -2;
+static const int  NAVMESHSET_MAGIC   = 'M' << 24 | 'S' << 16 | 'E' << 8 | 'T'; // 'MSET'
+static const int  NAVMESHSET_VERSION = 1;
 
-    // If a flag is defined in both, then exclude will take priority, and it will be excluded.
-    // Therefore we can just include all and exclude the ones we don't want.
-    constexpr unsigned short INCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_ALL;
-    constexpr unsigned short EXCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_DISABLED;
+// Flags are defined in a "Sample.h" file in the RecastDemo project of recastnavigation.
+enum SamplePolyFlags : uint16_t
+{
+    SAMPLE_POLYFLAGS_WALK     = 0x0001, // Ability to walk (ground, grass, road)
+    SAMPLE_POLYFLAGS_SWIM     = 0x0002, // Ability to swim (water).
+    SAMPLE_POLYFLAGS_DOOR     = 0x0004, // Ability to move through doors.
+    SAMPLE_POLYFLAGS_JUMP     = 0x0008, // Ability to jump.
+    SAMPLE_POLYFLAGS_DISABLED = 0x0010, // Disabled polygon
+    SAMPLE_POLYFLAGS_ALL      = 0xFFFF, // All abilities.
+};
 
-    // These constants define how large the result buffers for detour are.
-    // Larger buffers will allow for longer and higher quality paths to be
-    // found, but will take longer to calculate. Since we use detour in a
-    // blocking manner, we want to keep these values as low as possible
-    // while balancing the need for quality paths.
-    static const size_t MAX_NAV_POLYS     = 512;
-    static const size_t MAX_HIT_PATH_SIZE = 16;
-    static const size_t MAX_QUERY_POLYS   = 16;
+// If a flag is defined in both, then exclude will take priority, and it will be excluded.
+// Therefore we can just include all and exclude the ones we don't want.
+constexpr unsigned short INCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_ALL;
+constexpr unsigned short EXCLUDE_FLAGS = SamplePolyFlags::SAMPLE_POLYFLAGS_DISABLED;
 
-    // These constants define the size of the search extents for
-    // detour. The larger the extents, the more polys will be searched
-    // when looking for a path or point. Since we use detour in a blocking
-    // manner, we want to keep these values as low as possible while
-    // balancing the need for quality paths.
-    constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
-    constexpr float polyPickExt[3]       = { 2.5f, 5.0f, 2.5f };
-    constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
-    constexpr float largePolyPickExt[3]  = { 30.0f, 60.0f, 30.0f };
-    constexpr float verticalLimit        = 5.0f;
+// These constants define how large the result buffers for detour are.
+// Larger buffers will allow for longer and higher quality paths to be
+// found, but will take longer to calculate. Since we use detour in a
+// blocking manner, we want to keep these values as low as possible
+// while balancing the need for quality paths.
+static const size_t MAX_NAV_POLYS     = 512;
+static const size_t MAX_HIT_PATH_SIZE = 16;
+static const size_t MAX_QUERY_POLYS   = 16;
 
-    struct NavMeshSetHeader
-    {
-        int             magic;
-        int             version;
-        int             numTiles;
-        dtNavMeshParams params;
-    };
+// These constants define the size of the search extents for
+// detour. The larger the extents, the more polys will be searched
+// when looking for a path or point. Since we use detour in a blocking
+// manner, we want to keep these values as low as possible while
+// balancing the need for quality paths.
+constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
+constexpr float polyPickExt[3]       = { 2.5f, 5.0f, 2.5f };
+constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
+constexpr float largePolyPickExt[3]  = { 30.0f, 60.0f, 30.0f };
+constexpr float verticalLimit        = 5.0f;
 
-    struct NavMeshTileHeader
-    {
-        dtTileRef tileRef;
-        int       dataSize;
-    };
+struct NavMeshSetHeader
+{
+    int             magic;
+    int             version;
+    int             numTiles;
+    dtNavMeshParams params;
+};
+
+struct NavMeshTileHeader
+{
+    dtTileRef tileRef;
+    int       dataSize;
+};
+
 } // namespace
 
 void CNavMesh::ToFFXIPos(const position_t* pos, float* out)
@@ -171,7 +173,7 @@ CNavMesh::~CNavMesh()
     }
 }
 
-bool CNavMesh::load(std::string const& filename)
+bool CNavMesh::load(const std::string& filename)
 {
     this->m_filename = filename;
 
@@ -342,9 +344,7 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     int32 straightPathCount = 0;
 
     // NOTE: The DT_STRAIGHTPATH_ALL_CROSSINGS flag can exasorbate the issue of getting trapped in local minima.
-    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, m_navMeshQueryPolyData.data(), pathPolyCount,
-                                             m_navMeshQueryStraightPathFloatData.data(), m_navMeshQueryStraightPathFlagData.data(), m_navMeshQueryStraightPathPolyData.data(),
-                                             &straightPathCount, MAX_NAV_POLYS /*, DT_STRAIGHTPATH_ALL_CROSSINGS */);
+    status = m_navMeshQuery.findStraightPath(sNearestPoint, eNearestPoint, m_navMeshQueryPolyData.data(), pathPolyCount, m_navMeshQueryStraightPathFloatData.data(), m_navMeshQueryStraightPathFlagData.data(), m_navMeshQueryStraightPathPolyData.data(), &straightPathCount, MAX_NAV_POLYS /*, DT_STRAIGHTPATH_ALL_CROSSINGS */);
 
     if (dtStatusFailed(status))
     {

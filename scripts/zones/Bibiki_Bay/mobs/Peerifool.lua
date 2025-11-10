@@ -6,6 +6,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
     mob:addStatusEffectEx(xi.effect.STUN, xi.effect.STUN, 0, 0, 3, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true) -- Holds the mobs for a few seconds until they move to attack the player

@@ -10,6 +10,7 @@ local palaceID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 local gardenID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
 local mobFormLookup = {}
 

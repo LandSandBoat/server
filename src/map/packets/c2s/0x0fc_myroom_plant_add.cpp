@@ -22,6 +22,7 @@
 #include "0x0fc_myroom_plant_add.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_flowerpot.h"
 #include "packets/char_status.h"
@@ -33,7 +34,9 @@
 
 namespace
 {
-    const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -57,7 +60,9 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     if (!PPotItem->isGardeningPot())
     {
         ShowWarning(fmt::format("{} has tried to invalid gardening pot {} ({})",
-                                PChar->getName(), PPotItem->getID(), PPotItem->getName()));
+                                PChar->getName(),
+                                PPotItem->getID(),
+                                PPotItem->getName()));
         return;
     }
 
@@ -73,7 +78,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     if (CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)
     {
         // Planting a seed in the flowerpot
-        PChar->pushPacket<CMessageStandardPacket>(MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
         PPotItem->cleanPot();
         PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo));
         PPotItem->setPlantTimestamp(earth_time::vanadiel_timestamp());
@@ -84,7 +89,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     else if (MyroomAddItemNo >= FIRE_CRYSTAL && MyroomAddItemNo <= DARK_CLUSTER)
     {
         // Feeding the plant a crystal
-        PChar->pushPacket<CMessageStandardPacket>(MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
         if (PPotItem->getStage() == FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL)
         {
             PPotItem->setFirstCrystalFeed(CItemFlowerpot::getElementFromItem(MyroomAddItemNo));
@@ -105,7 +110,10 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     if (updatedPot)
     {
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PPotItem->m_extra, PChar->id, PPotItem->getLocationID(), PPotItem->getSlotID());
+                         PPotItem->m_extra,
+                         PChar->id,
+                         PPotItem->getLocationID(),
+                         PPotItem->getSlotID());
 
         PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
 

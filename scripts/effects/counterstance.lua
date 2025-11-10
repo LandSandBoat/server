@@ -6,6 +6,10 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
+    if target:isMob() and target:getFamily() == 59 then -- Bugbear Family
+        effect:addMod(xi.mod.ATTP, 15)
+    end
+
     target:addMod(xi.mod.COUNTER, effect:getPower())
 end
 

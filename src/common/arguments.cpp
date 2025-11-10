@@ -34,8 +34,10 @@ Arguments::Arguments(const ApplicationConfig& config, const int argc, char** arg
     // Defaults
     //
 
-    const auto description = fmt::format("xi_{}: part of LandSandBoat - a server emulator for Final Fantasy XI\n\nBranch: {}",
-                                         config.serverName, version::GetVersionString());
+    const auto description = fmt::format(
+        "xi_{}: part of LandSandBoat - a server emulator for Final Fantasy XI\n\nBranch: {}",
+        config.serverName,
+        version::GetVersionString());
 
     args_->add_description(description);
 

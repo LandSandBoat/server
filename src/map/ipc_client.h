@@ -119,13 +119,15 @@ extern std::unique_ptr<IPCClient> ipcClient_;
 
 namespace message
 {
-    void init(MapNetworking& networking);
 
-    template <typename T>
-    void send(const T& message)
-    {
-        ipcClient_->sendMessage(message);
-    }
+void init(MapNetworking& networking);
 
-    void handle_incoming();
+template <typename T>
+void send(const T& message)
+{
+    ipcClient_->sendMessage(message);
+}
+
+void handle_incoming();
+
 } // namespace message

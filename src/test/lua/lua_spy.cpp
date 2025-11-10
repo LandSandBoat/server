@@ -132,7 +132,9 @@ void CLuaSpy::called(sol::optional<size_t> times)
         if (count != times.value())
         {
             TestError("Spy '{}' was called {} time(s), expected {}",
-                      path_, count, times.value());
+                      path_,
+                      count,
+                      times.value());
         }
     }
     else

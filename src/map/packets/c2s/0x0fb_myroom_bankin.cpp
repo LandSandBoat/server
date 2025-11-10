@@ -34,7 +34,9 @@
 #include "utils/charutils.h"
 namespace
 {
-    const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -88,7 +90,10 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
                                                "SET "
                                                "extra = ? "
                                                "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
-                                               PItem->m_extra, MyroomCategory, MyroomItemIndex, PChar->id);
+                                               PItem->m_extra,
+                                               MyroomCategory,
+                                               MyroomItemIndex,
+                                               PChar->id);
 
             if (rset && rset->rowsAffected())
             {

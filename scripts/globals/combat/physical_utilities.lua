@@ -113,11 +113,11 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
 
     if isH2H then
         local naturalH2hDamage = math.floor(actor:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
-        local kickDamage = 0
 
         if actor:isMob() then
             local mobH2HPenalty = 1.0
             local regionID      = actor:getCurrentRegion()
+            local fSTR          = xi.combat.physical.calculateMeleeStatFactor(actor, target)
 
             if regionID <= xi.region.LIMBUS then
                 mobH2HPenalty = 0.425 -- Vanilla - COP
@@ -125,11 +125,18 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
                 mobH2HPenalty = 0.650
             end
 
-            if physicalAttackType == xi.physicalAttackType.KICK then
-                kickDamage = actor:getMod(xi.mod.KICK_DMG)
-            end
+            baseDamage = actor:getWeaponDmg() + bonusBasePhysicalDamage
 
-            baseDamage = (actor:getWeaponDmg() + kickDamage + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(actor, target)) * mobH2HPenalty
+            if physicalAttackType == xi.physicalAttackType.KICK then
+                local kickPenalty = 2 / 3 -- Per Jimmy, kicks get a second penalty, then fSTR is added
+                local kickDamage  = actor:getMod(xi.mod.KICK_DMG)
+
+                -- Per Jimmy, kick damage penalty for mobs can only be damage * h2h penalty * kickpenalty + fstr
+                -- The math doesn't work in any other way, which is strange given fSTR is before the penalty on non-kicks
+                baseDamage = (baseDamage + kickDamage) * mobH2HPenalty * kickPenalty + fSTR
+            else
+                baseDamage = (baseDamage + fSTR) * mobH2HPenalty
+            end
         elseif physicalAttackType == xi.physicalAttackType.KICK then
             baseDamage = naturalH2hDamage + actor:getMod(xi.mod.KICK_DMG) + bonusBasePhysicalDamage + xi.combat.physical.calculateMeleeStatFactor(actor, target)
         else
@@ -471,7 +478,7 @@ xi.combat.physical.wRatioCapPC = function(wRatio, pDifFinalCap)
         pDifLowerCap = wRatio - 0.375
     end
 
-    return pDifUpperCap, pDifLowerCap
+    return pDifLowerCap, pDifUpperCap
 end
 
 -- wRatio cap for non-PCs
@@ -506,7 +513,7 @@ xi.combat.physical.wRatioCapOthers = function(wRatio, pDifFinalCap)
         pDifLowerCap = 1 + (1120 / 1024) * (wRatio - 1.59)
     end
 
-    return pDifUpperCap, pDifLowerCap
+    return pDifLowerCap, pDifUpperCap
 end
 
 -- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
@@ -551,7 +558,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     if tpIgnoresDefense then
         local ignoreDefenseFactor = 1 - tpFactor
 
-        targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
+        targetDefense = math.max(1, math.floor(targetDefense * ignoreDefenseFactor))
     end
 
     if isCannonball then
@@ -620,7 +627,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         -- This is also known as "pDIF spike"
         local sRatio = 0
 
-        if wRatio > 0.0 and wRatio < 1.75 then
+        if wRatio > 0.0 and wRatio < 0.75 then
             sRatio = -5 / 9 + (10 / 9) * wRatio
         elseif wRatio <= 1.3 then
             sRatio = 0.3

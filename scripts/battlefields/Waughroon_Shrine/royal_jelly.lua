@@ -17,7 +17,6 @@ local content = Battlefield:new({
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.STAR_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
 
-    experimental = true,
 })
 
 -- base queens that must be dead to get win, but doesn't start spawned

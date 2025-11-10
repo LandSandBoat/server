@@ -107,7 +107,9 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 void CMobSpellContainer::RemoveSpell(SpellID spellId)
 {
     auto findAndRemove = [](std::vector<SpellID>& list, SpellID id)
-    { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
+    {
+        list.erase(std::remove(list.begin(), list.end(), id), list.end());
+    };
 
     findAndRemove(m_gaList, spellId);
     findAndRemove(m_damageList, spellId);

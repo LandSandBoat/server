@@ -12,7 +12,7 @@ xi.settings = xi.settings or {}
 xi.settings.login =
 {
     -- Expected Client version (wrong version cannot log in)
-    CLIENT_VER = "30251003_2",
+    CLIENT_VER = '30251003_2',
 
     -- 0 - disabled (every version allowed)
     -- 1 - enabled - strict (only exact CLIENT_VER allowed)
@@ -36,7 +36,7 @@ xi.settings.login =
 
     -- Allow character creation through the lobby (true/false)
     CHARACTER_CREATION = true,
-    
+
     -- Number of simultaneous game sessions per IP (0 for no limit)
     LOGIN_LIMIT = 0,
 
@@ -68,19 +68,19 @@ xi.settings.login =
 
     -- Character names with any of these words in, in any position, will be rejected
     --
-    -- Examples that will be rejected (using "badword"):
-    -- "badword"
-    -- "imbadword"
-    -- "badwordisme"
-    -- "lolbadwordlol"
+    -- Examples that will be rejected (using 'badword'):
+    -- 'badword'
+    -- 'imbadword'
+    -- 'badwordisme'
+    -- 'lolbadwordlol'
     --
     -- WARNING:
-    -- Be aware of the "Scunthorpe problem"!
+    -- Be aware of the 'Scunthorpe problem'!
     --
     -- NOTE:
-    -- You can Google for "bad word list txt" to find lists of words to populate this table, if you'd like
+    -- You can Google for 'bad word list txt' to find lists of words to populate this table, if you'd like
     BANNED_WORDS_LIST =
     {
-        "badword",
+        'badword',
     }
 }

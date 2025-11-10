@@ -41,8 +41,10 @@ class CCharEntity;
 
 namespace jailutils
 {
-    auto InPrison(const CCharEntity* PChar) -> bool;
 
-    void Add(CCharEntity* PChar);
-    void Del(CCharEntity* PChar);
+auto InPrison(const CCharEntity* PChar) -> bool;
+
+void Add(CCharEntity* PChar);
+void Del(CCharEntity* PChar);
+
 }; // namespace jailutils

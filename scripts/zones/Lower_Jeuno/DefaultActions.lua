@@ -2,7 +2,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 
 return {
     ['_6t2']            = { event = 64 }, -- Door:Merchant's House
-    ['_6tc']            = { messageSpecial = ID.text.ITS_LOCKED }, -- Door:"Neptune's Spire"
     ['_6td']            = { messageSpecial = ID.text.DO_NOT_DISTURB }, -- Door:"Neptune's Spire"
     ['Amhu_Sabaroleka'] = { event = 14 },
     ['Biora']           = { event = 205 },
@@ -16,7 +15,7 @@ return {
     ['Faursel']         = { event = 10065 },
     ['Garnev']          = { event = 207 },
     ['Geuhbe']          = { event = 10033 },
-    ['Ghebi_Damomohe']  = { event = 106, 4 },
+    ['Ghebi_Damomohe']  = { event = 106, options = 4 },
     ['Greyson']         = { event = 20082 },
     ['Guide_Stone']     = { messageSpecial = ID.text.GUIDE_STONE },
     ['Gurdern']         = { event = 112 },

@@ -671,7 +671,6 @@ enum ABILITY
     ABILITY_TORNADO_II        = 968,
     ABILITY_WINDS_BLESSING    = 969,
     ABILITY_HYSTERIC_ASSAULT  = 970
-
 };
 
 #define MAX_ABILITY_ID 971
@@ -774,16 +773,18 @@ private:
 
 namespace ability
 {
-    void LoadAbilitiesList();
 
-    CAbility* GetAbility(uint16 AbilityID);
+void LoadAbilitiesList();
 
-    CAbility* GetTwoHourAbility(JOBTYPE JobID);
-    bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
-    Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
-    uint32    GetAbsorbMessage(uint32 message);
+CAbility* GetAbility(uint16 AbilityID);
 
-    std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
+CAbility* GetTwoHourAbility(JOBTYPE JobID);
+bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
+Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
+uint32    GetAbsorbMessage(uint32 message);
+
+std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
+
 }; // namespace ability
 
 #endif

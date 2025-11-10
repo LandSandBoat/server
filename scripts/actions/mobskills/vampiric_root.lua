@@ -10,7 +10,8 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    -- will only use vampiric root if there are buffs to steal
+    return target:countEffectWithFlag(xi.effectFlag.DISPELABLE) > 0 and 0 or 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

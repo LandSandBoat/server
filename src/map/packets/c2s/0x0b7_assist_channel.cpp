@@ -41,7 +41,7 @@ void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* P
     const auto victimId = charutils::getCharIdFromName(safeName);
     if (!victimId)
     {
-        PChar->pushPacket<CMessageStandardPacket>(MsgStd::AnErrorHasOccured);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);
         return;
     }
     // TODO: If char is offline, this is an automatic fail.
@@ -52,14 +52,14 @@ void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* P
         {
             if (PChar->aman().isMuted())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::AnErrorHasOccured);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);
                 return;
             }
 
             // Anyone can Thumbs Up, but only once a real life day.
             if (!PChar->aman().canThumbsUp())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::ThumbsUpCooldown);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::ThumbsUpCooldown);
                 return;
             }
 
@@ -75,13 +75,13 @@ void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* P
             // Must be a Mentor and not under cooldown to issue warnings (once a day).
             if (!PChar->aman().isMentor() || PChar->aman().isMuted())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::AnErrorHasOccured);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);
                 return;
             }
 
             if (!PChar->aman().canIssueWarning())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::WarningCooldown);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::WarningCooldown);
                 return;
             }
 
@@ -99,7 +99,7 @@ void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* P
                 PChar->aman().getMasteryRank() < 6 ||
                 PChar->aman().isMuted())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::AnErrorHasOccured);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);
                 return;
             }
 
@@ -117,7 +117,7 @@ void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* P
                 PChar->aman().getMasteryRank() < 6 ||
                 PChar->aman().isMuted())
             {
-                PChar->pushPacket<CMessageStandardPacket>(MsgStd::AnErrorHasOccured);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);
                 return;
             }
 

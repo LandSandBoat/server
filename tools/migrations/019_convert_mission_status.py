@@ -30,9 +30,9 @@ def migrate(cur, db):
         missions = bytearray(row[2])
         mission_status = row[3]
         nation_status_index = (nation * 70) + 4
-        missions[
-            nation_status_index : nation_status_index + 2
-        ] = mission_status.to_bytes(2, "little")
+        missions[nation_status_index : nation_status_index + 2] = (
+            mission_status.to_bytes(2, "little")
+        )
         try:
             cur.execute(
                 "UPDATE chars SET missions = %s WHERE charid = %s",

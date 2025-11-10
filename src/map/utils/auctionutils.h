@@ -30,11 +30,13 @@ class CCharEntity;
 
 namespace auctionutils
 {
-    void SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param);
-    void OpenListOfSales(CCharEntity* PChar);
-    void RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar);
-    void ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param);
-    auto PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -> bool;
-    void CancelSale(CCharEntity* PChar, int8_t AucWorkIndex);
-    void UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkIndex);
+
+void SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param);
+void OpenListOfSales(CCharEntity* PChar);
+void RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar);
+void ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param);
+auto PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -> bool;
+void CancelSale(CCharEntity* PChar, int8_t AucWorkIndex);
+void UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkIndex);
+
 }; // namespace auctionutils

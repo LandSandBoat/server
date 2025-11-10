@@ -23,62 +23,76 @@ content:addEssentialMobs({ 'Pilwiz', 'Bisan' })
 content.loot =
 {
     {
-        { itemId = xi.item.BEETLE_JAW, weight = 1000 }, -- beetle_jaw
+        { itemId = xi.item.BEETLE_JAW,             weight = 1000 },
     },
 
     {
-        { itemId = xi.item.BEETLE_SHELL, weight = 1000 }, -- beetle_shell
+        { itemId = xi.item.BEETLE_SHELL,           weight = 1000 },
     },
 
     {
-        { itemId = xi.item.NONE,        weight = 250 }, -- nothing
-        { itemId = xi.item.KATANA_OBI,  weight = 150 }, -- katana_obi
-        { itemId = xi.item.STAFF_BELT,  weight = 150 }, -- staff_belt
-        { itemId = xi.item.SONG_BELT,   weight = 150 }, -- song_belt
-        { itemId = xi.item.CESTUS_BELT, weight = 150 }, -- cestus_belt
-        { itemId = xi.item.PICK_BELT,   weight = 150 }, -- pick_belt
+        { itemId = xi.item.AVATAR_BELT,            weight = 71 },
+        { itemId = xi.item.AXE_BELT,               weight = 71 },
+        { itemId = xi.item.CESTUS_BELT,            weight = 72 },
+        { itemId = xi.item.DAGGER_BELT,            weight = 72 },
+        { itemId = xi.item.GUN_BELT,               weight = 72 },
+        { itemId = xi.item.KATANA_OBI,             weight = 71 },
+        { itemId = xi.item.LANCE_BELT,             weight = 71 },
+        { itemId = xi.item.SARASHI,                weight = 72 },
+        { itemId = xi.item.SCYTHE_BELT,            weight = 72 },
+        { itemId = xi.item.SHIELD_BELT,            weight = 72 },
+        { itemId = xi.item.SONG_BELT,              weight = 71 },
+        { itemId = xi.item.STAFF_BELT,             weight = 71 },
+        { itemId = xi.item.PICK_BELT,              weight = 71 },
+        { itemId = xi.item.RAPIER_BELT,            weight = 71 },
     },
 
     {
-        { itemId = xi.item.NONE,              weight = 125 }, -- nothing
-        { itemId = xi.item.GENIN_EARRING,     weight = 125 }, -- genin_earring
-        { itemId = xi.item.MAGICIANS_EARRING, weight = 125 }, -- magicians_earring
-        { itemId = xi.item.PILFERERS_EARRING, weight = 125 }, -- pilferers_earring
-        { itemId = xi.item.WARLOCKS_EARRING,  weight = 125 }, -- warlocks_earring
-        { itemId = xi.item.WRESTLERS_EARRING, weight = 125 }, -- wrestlers_earring
-        { itemId = xi.item.WYVERN_EARRING,    weight = 125 }, -- wyvern_earring
-        { itemId = xi.item.KILLER_EARRING,    weight = 125 }, -- killer_earring
+        { itemId = xi.item.ASHIGARU_EARRING,       weight = 71 },
+        { itemId = xi.item.ESQUIRES_EARRING,       weight = 71 },
+        { itemId = xi.item.MAGICIANS_EARRING,      weight = 72 },
+        { itemId = xi.item.MERCENARYS_EARRING,     weight = 72 },
+        { itemId = xi.item.PILFERERS_EARRING,      weight = 72 },
+        { itemId = xi.item.SINGERS_EARRING,        weight = 71 },
+        { itemId = xi.item.TRIMMERS_EARRING,       weight = 71 },
+        { itemId = xi.item.WARLOCKS_EARRING,       weight = 72 },
+        { itemId = xi.item.WIZARDS_EARRING,        weight = 72 },
+        { itemId = xi.item.WRESTLERS_EARRING,      weight = 72 },
+        { itemId = xi.item.WYVERN_EARRING,         weight = 71 },
+        { itemId = xi.item.BEATERS_EARRING,        weight = 71 },
+        { itemId = xi.item.GENIN_EARRING,          weight = 71 },
+        { itemId = xi.item.KILLER_EARRING,         weight = 71 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 160 }, -- nothing
-        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight = 140 }, -- chunk_of_darksteel_ore
-        { itemId = xi.item.MYTHRIL_INGOT,          weight = 140 }, -- mythril_ingot
-        { itemId = xi.item.SILVER_INGOT,           weight = 140 }, -- silver_ingot
-        { itemId = xi.item.STEEL_INGOT,            weight = 140 }, -- steel_ingot
-        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight = 140 }, -- chunk_of_mythril_ore
-        { itemId = xi.item.SARDONYX,               weight = 140 }, -- sardonyx
+        { itemId = xi.item.NONE,                   weight = 160 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight = 140 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight = 140 },
+        { itemId = xi.item.SILVER_INGOT,           weight = 140 },
+        { itemId = xi.item.STEEL_INGOT,            weight = 140 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight = 140 },
+        { itemId = xi.item.SARDONYX,               weight = 140 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 250 }, -- nothing
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 125 }, -- scroll_of_dispel
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 125 }, -- scroll_of_utsusemi_ni
-        { itemId = xi.item.SCROLL_OF_FIRE_II,      weight = 125 }, -- scroll_of_fire_ii
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 125 }, -- scroll_of_magic_finale
-        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight = 125 }, -- scroll_of_absorb-agi
-        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight = 125 }, -- scroll_of_absorb-int
+        { itemId = xi.item.NONE,                   weight = 250 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 125 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 125 },
+        { itemId = xi.item.SCROLL_OF_FIRE_II,      weight = 125 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 125 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight = 125 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight = 125 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.NONE,               weight = 500 }, -- nothing
-        { itemId = xi.item.JUG_OF_SCARLET_SAP, weight = 500 }, -- jug_of_scarlet_sap
+        { itemId = xi.item.NONE,                   weight = 500 },
+        { itemId = xi.item.JUG_OF_SCARLET_SAP,     weight = 500 },
     },
 
     {
-        { itemId = xi.item.NONE,     weight = 900 }, -- nothing
-        { itemId = xi.item.HI_ETHER, weight = 100 }, -- hi-ether
+        { itemId = xi.item.NONE,                   weight = 900 },
+        { itemId = xi.item.HI_ETHER,               weight = 100 },
     },
 }
 

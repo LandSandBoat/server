@@ -384,11 +384,6 @@ describe('Rise of the Zilart', function()
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
 
             player:gotoZone(xi.zone.THE_CELESTIAL_NEXUS)
-
-            -- Upcoming CS will dump us in Hall of the Gods.
-            -- TODO: Figure out how we can smartly load it on demand.
-            xi.test.world:loadZone(xi.zone.HALL_OF_THE_GODS)
-
             player.bcnm:enter('_513', xi.battlefield.id.CELESTIAL_NEXUS)
 
             -- Phase 1

@@ -28,10 +28,12 @@
 
 namespace
 {
-    const auto sendFailPacket = [](CCharEntity* PChar)
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BLACK_EDIT>(0, "", GP_SERV_COMMAND_BLACK_EDIT_MODE::Error);
-    };
+
+const auto sendFailPacket = [](CCharEntity* PChar)
+{
+    PChar->pushPacket<GP_SERV_COMMAND_BLACK_EDIT>(0, "", GP_SERV_COMMAND_BLACK_EDIT_MODE::Error);
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_BLACK_EDIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

@@ -328,6 +328,8 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     subPower       = subPower + (subPower / 5) * player:getMod(xi.mod.AUGMENTS_SLEIGHT_OF_SWORD) -- Add augment effect IF player has augment.
 
     player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, subPower, 0)
+
+    return xi.effect.SWORDPLAY
 end
 
 xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
@@ -489,6 +491,8 @@ xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation.
 
     target:addStatusEffect(xi.effect.BATTUTA, inquartataPower, 0, 90, 0, math.floor(spikesPower * modBonus), 0)
+
+    return xi.effect.BATTUTA
 end
 
 xi.job_utils.rune_fencer.onBattutaEffectGain = function(target, effect)
@@ -721,6 +725,8 @@ xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
 
     player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
+
+    return xi.effect.PFLUG
 end
 
 -- see https://www.bg-wiki.com/ffxi/Gambit
@@ -831,6 +837,8 @@ local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
     target:delStatusEffectSilent(xi.effect.LIEMENT)   -- Remove Liement if it's already up. The new one will overwrite regardless of strength.
 
     target:addStatusEffect(xi.effect.LIEMENT, absorbPower, 0, duration, 0, absorbBits)
+
+    return xi.effect.LIEMENT
 end
 
 -- see https://www.bg-wiki.com/ffxi/Liement

@@ -95,7 +95,7 @@ struct GP_AUC_PARAM
         GP_AUC_PARAM_HISTORY   History;   // History
         GP_AUC_PARAM_ASKCOMMIT AskCommit; // AskCommit
         GP_AUC_PARAM_TRANS     Trans;     // Trans
-    } param;
+    };
 };
 
 enum class GP_CLI_COMMAND_AUC_COMMAND : uint8_t

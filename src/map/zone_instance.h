@@ -65,18 +65,18 @@ public:
     virtual void ZoneServer(timer::time_point tick) override;
     virtual void CheckTriggerAreas() override;
 
-    void ForEachChar(std::function<void(CCharEntity*)> const& func) override;
-    void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func) override;
-    void ForEachMob(std::function<void(CMobEntity*)> const& func) override;
-    void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
-    void ForEachNpc(std::function<void(CNpcEntity*)> const& func) override;
-    void ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func) override;
-    void ForEachTrust(std::function<void(CTrustEntity*)> const& func) override;
-    void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func) override;
-    void ForEachPet(std::function<void(CPetEntity*)> const& func) override;
-    void ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func) override;
-    void ForEachAlly(std::function<void(CMobEntity*)> const& func) override;
-    void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func) override;
+    void ForEachChar(const std::function<void(CCharEntity*)>& func) override;
+    void ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func) override;
+    void ForEachMob(const std::function<void(CMobEntity*)>& func) override;
+    void ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func) override;
+    void ForEachNpc(const std::function<void(CNpcEntity*)>& func) override;
+    void ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func) override;
+    void ForEachTrust(const std::function<void(CTrustEntity*)>& func) override;
+    void ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func) override;
+    void ForEachPet(const std::function<void(CPetEntity*)>& func) override;
+    void ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func) override;
+    void ForEachAlly(const std::function<void(CMobEntity*)>& func) override;
+    void ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func) override;
 
     CInstance* CreateInstance(uint32 instanceid);
 

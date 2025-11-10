@@ -24,9 +24,9 @@
 
 enum class GP_CLI_COMMAND_RECIPE_MODE : uint8
 {
-    RequestAvailableRankList      = 1, // Not implemented
-    RequestAvailableRecipeList    = 2,
-    RequestRecipeMaterials        = 3,
+    RequestAvailableRankList      = 1, // Requesting a random recipe of appropriate rank
+    RequestAvailableRecipeList    = 2, // Requesting list of recipes for a given rank
+    RequestRecipeMaterials        = 3, // Requesting a specific recipe
     RequestCampaignOpsRecipe      = 4, // Not implemented
     SubmitCampaignOpsMaterialList = 5, // Not implemented
 };

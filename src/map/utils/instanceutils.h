@@ -66,9 +66,11 @@ struct InstanceData_t
 
 namespace instanceutils
 {
-    void LoadInstanceList(IPP mapIPP);
-    void CheckInstance(); // Called at the end of every tick by time_server
-    void LoadInstance(uint32 instanceid, CCharEntity* PRequester);
-    auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
-    bool IsValidInstanceID(uint32 instanceid);
+
+void LoadInstanceList(IPP mapIPP);
+void CheckInstance(); // Called at the end of every tick by time_server
+void LoadInstance(uint32 instanceid, CCharEntity* PRequester);
+auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
+bool IsValidInstanceID(uint32 instanceid);
+
 }; // namespace instanceutils

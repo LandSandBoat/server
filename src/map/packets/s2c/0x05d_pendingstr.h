@@ -38,7 +38,18 @@ public:
         char    string4[16];
     };
 
-    GP_SERV_COMMAND_PENDINGSTR(const std::string& string0 = "", const std::string& string1 = "", const std::string& string2 = "", const std::string& string3 = "",
-                               uint32_t param0 = 0, uint32_t param1 = 0, uint32_t param2 = 0, uint32_t param3 = 0, uint32_t param4 = 0,
-                               uint32_t param5 = 0, uint32_t param6 = 0, uint32_t param7 = 0, uint32_t param8 = 0);
+    GP_SERV_COMMAND_PENDINGSTR(
+        const std::string& string0 = "",
+        const std::string& string1 = "",
+        const std::string& string2 = "",
+        const std::string& string3 = "",
+        uint32_t           param0  = 0,
+        uint32_t           param1  = 0,
+        uint32_t           param2  = 0,
+        uint32_t           param3  = 0,
+        uint32_t           param4  = 0,
+        uint32_t           param5  = 0,
+        uint32_t           param6  = 0,
+        uint32_t           param7  = 0,
+        uint32_t           param8  = 0);
 };

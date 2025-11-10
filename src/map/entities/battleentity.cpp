@@ -42,6 +42,7 @@
 #include "mob_modifier.h"
 #include "notoriety_container.h"
 #include "packets/action.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -829,8 +830,7 @@ int32 CBattleEntity::addMP(int32 mp)
     return abs(mp);
 }
 
-int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
-                                DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
+int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/, DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
 {
     TracyZoneScoped;
     PLastAttacker                            = attacker;
@@ -925,7 +925,11 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     float strMultiplier = 0.5;
 
     // https://www.bg-wiki.com/ffxi/Strength
-    if (weapon && weapon->isTwoHanded()) // 2-handed weapon
+    if (objtype != TYPE_PC)
+    {
+        strMultiplier = 0.5;
+    }
+    else if (weapon && weapon->isTwoHanded()) // 2-handed weapon
     {
         strMultiplier = 1.0;
     }
@@ -1476,6 +1480,59 @@ void CBattleEntity::restoreModifiers()
     m_modStat = m_modStatSave;
 }
 
+void CBattleEntity::savePetModifiers()
+{
+    // these mods are set dynamically based on pet type
+    const std::vector<Mod> petModsToUpdate = {
+        // Physical SDT
+        Mod::SLASH_SDT,
+        Mod::PIERCE_SDT,
+        Mod::HTH_SDT,
+        Mod::IMPACT_SDT,
+        // Uncapped Magic
+        Mod::UDMGMAGIC,
+        // Element SDT
+        Mod::FIRE_SDT,
+        Mod::ICE_SDT,
+        Mod::WIND_SDT,
+        Mod::EARTH_SDT,
+        Mod::THUNDER_SDT,
+        Mod::WATER_SDT,
+        Mod::LIGHT_SDT,
+        Mod::DARK_SDT,
+        // Element RES_RANK
+        Mod::FIRE_RES_RANK,
+        Mod::ICE_RES_RANK,
+        Mod::WIND_RES_RANK,
+        Mod::EARTH_RES_RANK,
+        Mod::THUNDER_RES_RANK,
+        Mod::WATER_RES_RANK,
+        Mod::LIGHT_RES_RANK,
+        Mod::DARK_RES_RANK,
+        // Status RES_RANK
+        Mod::PARALYZE_RES_RANK,
+        Mod::BIND_RES_RANK,
+        Mod::SILENCE_RES_RANK,
+        Mod::SLOW_RES_RANK,
+        Mod::POISON_RES_RANK,
+        Mod::LIGHT_SLEEP_RES_RANK,
+        Mod::DARK_SLEEP_RES_RANK,
+        Mod::BLIND_RES_RANK,
+    };
+
+    // update the template mods so the dynamic mods are not overwritten
+    for (auto mod : petModsToUpdate)
+    {
+        // Only update the saved map if it exists and is different
+        int16 currentVal = m_modStat[mod];
+        auto  it         = m_modStatSave.find(mod);
+        if (it == m_modStatSave.end() || it->second != currentVal)
+        {
+            m_modStatSave[mod] = currentVal;
+        }
+    }
+}
+
 void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
 {
     TracyZoneScoped;
@@ -1811,16 +1868,16 @@ void CBattleEntity::Die()
     TracyZoneScoped;
     if (CBaseEntity* PKiller = GetEntity(m_OwnerID.targid))
     {
-        // clang-format off
-        static_cast<CBattleEntity*>(PKiller)->ForAlliance([this](CBattleEntity* PMember)
-        {
-            CCharEntity* member = static_cast<CCharEntity*>(PMember);
-            if (member->PClaimedMob == this)
+        static_cast<CBattleEntity*>(PKiller)->ForAlliance(
+            [this](CBattleEntity* PMember)
             {
-                member->PClaimedMob = nullptr;
-            }
-        });
-        // clang-format on
+                CCharEntity* member = static_cast<CCharEntity*>(PMember);
+                if (member->PClaimedMob == this)
+                {
+                    member->PClaimedMob = nullptr;
+                }
+            });
+
         PAI->EventHandler.triggerListener("DEATH", this, PKiller);
     }
     else
@@ -2094,7 +2151,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         {
             actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
 
         luautils::OnSpellInterrupted(this, PSpell);
@@ -2352,8 +2409,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
             if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
-                                                                    PSkill->getTertiarySkillchain());
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(), PSkill->getTertiarySkillchain());
                 if (effect != SUBEFFECT_NONE)
                 {
                     int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);
@@ -2682,8 +2738,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 actionTarget.param =
-                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1,
-                                                    attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
+                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
                 if (actionTarget.param < 0)
                 {
                     actionTarget.param     = -(actionTarget.param);
@@ -2744,8 +2799,11 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         // if we did hit, run enspell/spike routines as long as this isn't a Daken swing
         if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
-            battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
-                                       attack.GetDamage(), attack);
+            // Handle addtl effects/enspells only if the target is not already dead
+            if (PTarget->GetHPP() > 0)
+            {
+                battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()], attack.GetDamage(), attack);
+            }
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
@@ -2896,21 +2954,19 @@ bool CBattleEntity::hasEnmityEXPENSIVE() const
     // TODO: this is bad but because of how super tanking is implemented there's not much we can do without a larger refactor
     if (loc.zone)
     {
-        // clang-format off
         loc.zone->ForEachMob([&](CMobEntity* PMob)
-        {
-            if (!PMob->isAlive())
-            {
-                return;
-            }
-            // Account for charmed mobs attacking normal mobs, etc
-            if (PMob->GetBattleTargetID() == targid && PMob->allegiance != allegiance)
-            {
-                isTargeted = true;
-                return;
-            }
-        });
-        // clang-format on
+                             {
+                                 if (!PMob->isAlive())
+                                 {
+                                     return;
+                                 }
+                                 // Account for charmed mobs attacking normal mobs, etc
+                                 if (PMob->GetBattleTargetID() == targid && PMob->allegiance != allegiance)
+                                 {
+                                     isTargeted = true;
+                                     return;
+                                 }
+                             });
     }
 
     return isTargeted;

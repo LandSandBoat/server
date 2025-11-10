@@ -21,7 +21,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.JEUNO) >= 2
         end,
 
         [xi.zone.UPPER_JEUNO] =

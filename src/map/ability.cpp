@@ -325,279 +325,282 @@ uint16 CAbility::getAoEMsg() const
 
 namespace ability
 {
-    std::map<uint16, std::unique_ptr<CAbility>> PAbilityList;    // Complete Abilities List
-    std::map<JOBTYPE, std::vector<CAbility*>>   PAbilitiesByJob; // Abilities by Job
-    std::vector<std::unique_ptr<Charge_t>>      PChargesList;    // Abilities with charges
 
-    /************************************************************************
-     *                                                                       *
-     *  Load Abilities from Database                                         *
-     *                                                                       *
-     ************************************************************************/
+std::map<uint16, std::unique_ptr<CAbility>> PAbilityList;    // Complete Abilities List
+std::map<JOBTYPE, std::vector<CAbility*>>   PAbilitiesByJob; // Abilities by Job
+std::vector<std::unique_ptr<Charge_t>>      PChargesList;    // Abilities with charges
 
-    void LoadAbilitiesList()
+/************************************************************************
+ *                                                                       *
+ *  Load Abilities from Database                                         *
+ *                                                                       *
+ ************************************************************************/
+
+void LoadAbilitiesList()
+{
+    // TODO: Add message field to table
+
+    const auto rset = db::preparedStmt("SELECT "
+                                       "abilityId, "
+                                       "name, "
+                                       "job, "
+                                       "level, "
+                                       "validTarget, "
+                                       "recastTime, "
+                                       "message1, "
+                                       "message2, "
+                                       "animation, "
+                                       "animationTime, "
+                                       "castTime, "
+                                       "actionType, "
+                                       "`range`, "
+                                       "isAOE, "
+                                       "recastId, "
+                                       "CE, "
+                                       "VE, "
+                                       "meritModID, "
+                                       "addType, "
+                                       "content_tag "
+                                       "FROM abilities "
+                                       "WHERE job < ? AND abilityId < ? "
+                                       "ORDER BY job, level ASC",
+                                       MAX_JOBTYPE,
+                                       MAX_ABILITY_ID);
+
+    if (rset && rset->rowsCount())
     {
-        // TODO: Add message field to table
-
-        const auto rset = db::preparedStmt("SELECT "
-                                           "abilityId, "
-                                           "name, "
-                                           "job, "
-                                           "level, "
-                                           "validTarget, "
-                                           "recastTime, "
-                                           "message1, "
-                                           "message2, "
-                                           "animation, "
-                                           "animationTime, "
-                                           "castTime, "
-                                           "actionType, "
-                                           "`range`, "
-                                           "isAOE, "
-                                           "recastId, "
-                                           "CE, "
-                                           "VE, "
-                                           "meritModID, "
-                                           "addType, "
-                                           "content_tag "
-                                           "FROM abilities "
-                                           "WHERE job < ? AND abilityId < ? "
-                                           "ORDER BY job, level ASC",
-                                           MAX_JOBTYPE, MAX_ABILITY_ID);
-
-        if (rset && rset->rowsCount())
+        while (rset->next())
         {
-            while (rset->next())
+            const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+            if (!luautils::IsContentEnabled(contentTag))
             {
-                const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
-                if (!luautils::IsContentEnabled(contentTag))
-                {
-                    continue;
-                }
-
-                const auto abilityId    = rset->get<uint16>("abilityId");
-                PAbilityList[abilityId] = std::make_unique<CAbility>(abilityId);
-                const auto& PAbility    = PAbilityList[abilityId];
-
-                PAbility->setName(rset->get<std::string>("name"));
-                PAbility->setJob(rset->get<JOBTYPE>("job"));
-                PAbility->setLevel(rset->get<uint8>("level"));
-                PAbility->setValidTarget(rset->get<uint16>("validTarget"));
-                PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
-                PAbility->setMessage(rset->get<uint16>("message1"));
-                // Unused - message2
-                PAbility->setAnimationID(rset->get<uint16>("animation"));
-                PAbility->setAnimationTime(std::chrono::milliseconds(rset->get<uint16>("animationTime")));
-                PAbility->setCastTime(std::chrono::milliseconds(rset->get<uint16>("castTime")));
-                PAbility->setActionType(rset->get<ACTIONTYPE>("actionType"));
-                PAbility->setRange(rset->get<float>("range"));
-                PAbility->setAOE(rset->get<uint8>("isAOE"));
-                PAbility->setRecastId(rset->get<uint16>("recastId"));
-                PAbility->setCE(rset->get<int32>("CE"));
-                PAbility->setVE(rset->get<int32>("VE"));
-                PAbility->setMeritModID(rset->get<uint16>("meritModID"));
-                PAbility->setAddType(rset->get<uint16>("addType"));
-
-                PAbilitiesByJob[PAbility->getJob()].emplace_back(PAbility.get());
-
-                auto filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
-                if (PAbility->isPetAbility())
-                {
-                    filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
-                }
-                luautils::CacheLuaObjectFromFile(filename);
+                continue;
             }
-        }
 
-        const auto rset2 = db::preparedStmt("SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC");
-        if (rset2 && rset2->rowsCount())
-        {
-            while (rset2->next())
+            const auto abilityId    = rset->get<uint16>("abilityId");
+            PAbilityList[abilityId] = std::make_unique<CAbility>(abilityId);
+            const auto& PAbility    = PAbilityList[abilityId];
+
+            PAbility->setName(rset->get<std::string>("name"));
+            PAbility->setJob(rset->get<JOBTYPE>("job"));
+            PAbility->setLevel(rset->get<uint8>("level"));
+            PAbility->setValidTarget(rset->get<uint16>("validTarget"));
+            PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
+            PAbility->setMessage(rset->get<uint16>("message1"));
+            // Unused - message2
+            PAbility->setAnimationID(rset->get<uint16>("animation"));
+            PAbility->setAnimationTime(std::chrono::milliseconds(rset->get<uint16>("animationTime")));
+            PAbility->setCastTime(std::chrono::milliseconds(rset->get<uint16>("castTime")));
+            PAbility->setActionType(rset->get<ACTIONTYPE>("actionType"));
+            PAbility->setRange(rset->get<float>("range"));
+            PAbility->setAOE(rset->get<uint8>("isAOE"));
+            PAbility->setRecastId(rset->get<uint16>("recastId"));
+            PAbility->setCE(rset->get<int32>("CE"));
+            PAbility->setVE(rset->get<int32>("VE"));
+            PAbility->setMeritModID(rset->get<uint16>("meritModID"));
+            PAbility->setAddType(rset->get<uint16>("addType"));
+
+            PAbilitiesByJob[PAbility->getJob()].emplace_back(PAbility.get());
+
+            auto filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
+            if (PAbility->isPetAbility())
             {
-                auto PCharge        = std::make_unique<Charge_t>();
-                PCharge->ID         = rset2->get<uint16>("recastId");
-                PCharge->job        = static_cast<JOBTYPE>(rset2->get<uint8>("job"));
-                PCharge->level      = rset2->get<uint8>("level");
-                PCharge->maxCharges = rset2->get<uint8>("maxCharges");
-                PCharge->chargeTime = std::chrono::seconds(rset2->get<uint32>("chargeTime"));
-                PCharge->merit      = rset2->get<uint16>("meritModId");
-
-                PChargesList.emplace_back(std::move(PCharge));
+                filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
             }
+            luautils::CacheLuaObjectFromFile(filename);
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Get Ability By ID                                                    *
-     *                                                                       *
-     ************************************************************************/
-
-    CAbility* GetAbility(uint16 AbilityID)
+    const auto rset2 = db::preparedStmt("SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC");
+    if (rset2 && rset2->rowsCount())
     {
-        if (auto itr = PAbilityList.find(AbilityID); itr != PAbilityList.end())
+        while (rset2->next())
         {
-            return itr->second.get();
+            auto PCharge        = std::make_unique<Charge_t>();
+            PCharge->ID         = rset2->get<uint16>("recastId");
+            PCharge->job        = static_cast<JOBTYPE>(rset2->get<uint8>("job"));
+            PCharge->level      = rset2->get<uint8>("level");
+            PCharge->maxCharges = rset2->get<uint8>("maxCharges");
+            PCharge->chargeTime = std::chrono::seconds(rset2->get<uint32>("chargeTime"));
+            PCharge->merit      = rset2->get<uint16>("meritModId");
+
+            PChargesList.emplace_back(std::move(PCharge));
         }
-        ShowDebug("Unable to look up ability %d", AbilityID);
-        return nullptr;
+    }
+}
+
+/************************************************************************
+ *                                                                       *
+ *  Get Ability By ID                                                    *
+ *                                                                       *
+ ************************************************************************/
+
+CAbility* GetAbility(uint16 AbilityID)
+{
+    if (auto itr = PAbilityList.find(AbilityID); itr != PAbilityList.end())
+    {
+        return itr->second.get();
+    }
+    ShowDebug("Unable to look up ability %d", AbilityID);
+    return nullptr;
+}
+
+/************************************************************************
+ *                                                                       *
+ *  Get the initial (SP) ability of a job                                *
+ *                                                                       *
+ ************************************************************************/
+
+CAbility* GetTwoHourAbility(JOBTYPE JobID)
+{
+    if (JobID >= JOB_WAR || JobID <= MAX_JOBTYPE)
+    {
+        switch (JobID)
+        {
+            case JOB_WAR:
+                return GetAbility(ABILITY_MIGHTY_STRIKES);
+                break;
+            case JOB_MNK:
+                return GetAbility(ABILITY_HUNDRED_FISTS);
+                break;
+            case JOB_WHM:
+                return GetAbility(ABILITY_BENEDICTION);
+                break;
+            case JOB_BLM:
+                return GetAbility(ABILITY_MANAFONT);
+                break;
+            case JOB_RDM:
+                return GetAbility(ABILITY_CHAINSPELL);
+                break;
+            case JOB_THF:
+                return GetAbility(ABILITY_PERFECT_DODGE);
+                break;
+            case JOB_PLD:
+                return GetAbility(ABILITY_INVINCIBLE);
+                break;
+            case JOB_DRK:
+                return GetAbility(ABILITY_BLOOD_WEAPON);
+                break;
+            case JOB_BST:
+                return GetAbility(ABILITY_FAMILIAR);
+                break;
+            case JOB_BRD:
+                return GetAbility(ABILITY_SOUL_VOICE);
+                break;
+            case JOB_RNG:
+                return GetAbility(ABILITY_EAGLE_EYE_SHOT);
+                break;
+            case JOB_SAM:
+                return GetAbility(ABILITY_MEIKYO_SHISUI);
+                break;
+            case JOB_NIN:
+                return GetAbility(ABILITY_MIJIN_GAKURE);
+                break;
+            case JOB_DRG:
+                return GetAbility(ABILITY_SPIRIT_SURGE);
+                break;
+            case JOB_SMN:
+                return GetAbility(ABILITY_ASTRAL_FLOW);
+                break;
+            case JOB_BLU:
+                return GetAbility(ABILITY_AZURE_LORE);
+                break;
+            case JOB_COR:
+                return GetAbility(ABILITY_WILD_CARD);
+                break;
+            case JOB_PUP:
+                return GetAbility(ABILITY_OVERDRIVE);
+                break;
+            case JOB_DNC:
+                return GetAbility(ABILITY_TRANCE);
+                break;
+            case JOB_SCH:
+                return GetAbility(ABILITY_TABULA_RASA);
+                break;
+            case JOB_GEO:
+                return GetAbility(ABILITY_BOLSTER);
+                break;
+            case JOB_RUN:
+                return GetAbility(ABILITY_ELEMENTAL_SFORZO);
+                break;
+            default:
+                break;
+        }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Get the initial (SP) ability of a job                                *
-     *                                                                       *
-     ************************************************************************/
+    ShowWarning("Attempt to get two hour ability with invalid JOBTYPE %d.", JobID);
+    return nullptr;
+}
 
-    CAbility* GetTwoHourAbility(JOBTYPE JobID)
+bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
+{
+    auto* PAbility = GetAbility(AbilityID);
+    if (PAbility)
     {
-        if (JobID >= JOB_WAR || JobID <= MAX_JOBTYPE)
+        uint8 Job    = PAbility->getJob();
+        uint8 JobLvl = PAbility->getLevel();
+
+        return ((PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl));
+    }
+    return false;
+}
+
+/************************************************************************
+ *                                                                       *
+ *  Get Abilities By JobID                                               *
+ *                                                                       *
+ ************************************************************************/
+
+std::vector<CAbility*> GetAbilities(JOBTYPE JobID)
+{
+    return PAbilitiesByJob[JobID];
+}
+
+Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
+{
+    Charge_t* charge = nullptr;
+    for (auto& PCharge : PChargesList)
+    {
+        if (PCharge->ID == chargeID)
         {
-            switch (JobID)
+            if (PUser->GetMJob() == PCharge->job)
             {
-                case JOB_WAR:
-                    return GetAbility(ABILITY_MIGHTY_STRIKES);
-                    break;
-                case JOB_MNK:
-                    return GetAbility(ABILITY_HUNDRED_FISTS);
-                    break;
-                case JOB_WHM:
-                    return GetAbility(ABILITY_BENEDICTION);
-                    break;
-                case JOB_BLM:
-                    return GetAbility(ABILITY_MANAFONT);
-                    break;
-                case JOB_RDM:
-                    return GetAbility(ABILITY_CHAINSPELL);
-                    break;
-                case JOB_THF:
-                    return GetAbility(ABILITY_PERFECT_DODGE);
-                    break;
-                case JOB_PLD:
-                    return GetAbility(ABILITY_INVINCIBLE);
-                    break;
-                case JOB_DRK:
-                    return GetAbility(ABILITY_BLOOD_WEAPON);
-                    break;
-                case JOB_BST:
-                    return GetAbility(ABILITY_FAMILIAR);
-                    break;
-                case JOB_BRD:
-                    return GetAbility(ABILITY_SOUL_VOICE);
-                    break;
-                case JOB_RNG:
-                    return GetAbility(ABILITY_EAGLE_EYE_SHOT);
-                    break;
-                case JOB_SAM:
-                    return GetAbility(ABILITY_MEIKYO_SHISUI);
-                    break;
-                case JOB_NIN:
-                    return GetAbility(ABILITY_MIJIN_GAKURE);
-                    break;
-                case JOB_DRG:
-                    return GetAbility(ABILITY_SPIRIT_SURGE);
-                    break;
-                case JOB_SMN:
-                    return GetAbility(ABILITY_ASTRAL_FLOW);
-                    break;
-                case JOB_BLU:
-                    return GetAbility(ABILITY_AZURE_LORE);
-                    break;
-                case JOB_COR:
-                    return GetAbility(ABILITY_WILD_CARD);
-                    break;
-                case JOB_PUP:
-                    return GetAbility(ABILITY_OVERDRIVE);
-                    break;
-                case JOB_DNC:
-                    return GetAbility(ABILITY_TRANCE);
-                    break;
-                case JOB_SCH:
-                    return GetAbility(ABILITY_TABULA_RASA);
-                    break;
-                case JOB_GEO:
-                    return GetAbility(ABILITY_BOLSTER);
-                    break;
-                case JOB_RUN:
-                    return GetAbility(ABILITY_ELEMENTAL_SFORZO);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        ShowWarning("Attempt to get two hour ability with invalid JOBTYPE %d.", JobID);
-        return nullptr;
-    }
-
-    bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
-    {
-        auto* PAbility = GetAbility(AbilityID);
-        if (PAbility)
-        {
-            uint8 Job    = PAbility->getJob();
-            uint8 JobLvl = PAbility->getLevel();
-
-            return ((PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl));
-        }
-        return false;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Get Abilities By JobID                                               *
-     *                                                                       *
-     ************************************************************************/
-
-    std::vector<CAbility*> GetAbilities(JOBTYPE JobID)
-    {
-        return PAbilitiesByJob[JobID];
-    }
-
-    Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
-    {
-        Charge_t* charge = nullptr;
-        for (auto& PCharge : PChargesList)
-        {
-            if (PCharge->ID == chargeID)
-            {
-                if (PUser->GetMJob() == PCharge->job)
+                if (PUser->GetMLevel() >= PCharge->level)
                 {
-                    if (PUser->GetMLevel() >= PCharge->level)
-                    {
-                        charge = PCharge.get();
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    charge = PCharge.get();
                 }
-                else if (PUser->GetSJob() == PCharge->job)
+                else
                 {
-                    if (PUser->GetSLevel() >= PCharge->level)
-                    {
-                        charge = PCharge.get();
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
+            else if (PUser->GetSJob() == PCharge->job)
+            {
+                if (PUser->GetSLevel() >= PCharge->level)
+                {
+                    charge = PCharge.get();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
-        return charge;
     }
+    return charge;
+}
 
-    uint32 GetAbsorbMessage(uint32 msg)
+uint32 GetAbsorbMessage(uint32 msg)
+{
+    if (msg == 110)
     {
-        if (msg == 110)
-        {
-            return 102;
-        }
-        else if (msg == 264)
-        {
-            return 263;
-        }
-        return msg;
+        return 102;
     }
+    else if (msg == 264)
+    {
+        return 263;
+    }
+    return msg;
+}
+
 }; // namespace ability

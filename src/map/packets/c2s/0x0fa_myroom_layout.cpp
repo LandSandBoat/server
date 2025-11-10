@@ -99,8 +99,13 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
     if (MyroomFloorFlg && PItem->isGardeningPot())
     {
-        RATE_LIMIT(30s, ShowErrorFmt("{} has tried to gardening pot {} ({}) on 2nd floor",
-                                     PChar->getName(), PItem->getID(), PItem->getName()));
+        RATE_LIMIT(
+            30s,
+            ShowErrorFmt(
+                "{} has tried to gardening pot {} ({}) on 2nd floor",
+                PChar->getName(),
+                PItem->getID(),
+                PItem->getName()));
         return;
     }
 
@@ -170,7 +175,10 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
                                            "SET "
                                            "extra = ? "
                                            "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
-                                           PItem->m_extra, MyroomCategory, MyroomItemIndex, PChar->id);
+                                           PItem->m_extra,
+                                           MyroomCategory,
+                                           MyroomItemIndex,
+                                           PChar->id);
 
         if (rset && rset->rowsAffected() && !wasInstalled)
         {

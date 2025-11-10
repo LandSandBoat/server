@@ -26,13 +26,15 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "search",
-            .arguments  = {},
-        };
-    }
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "search",
+        .arguments  = {},
+    };
+}
+
 } // namespace
 
 SearchApplication::SearchApplication(const int argc, char** argv)

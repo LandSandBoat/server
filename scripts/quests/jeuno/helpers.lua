@@ -93,7 +93,11 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                     [73] = function(player, csid, option, npc)
                         if quest:complete(player) then
                             player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
-                            player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+
+                            if player:getContainerSize(xi.inv.MOGSATCHEL) > 0 then
+                                player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+                            end
+
                             player:messageSpecial(params.message)
                             player:confirmTrade()
                         end

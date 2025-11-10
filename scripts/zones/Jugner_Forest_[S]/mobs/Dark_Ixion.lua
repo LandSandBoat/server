@@ -21,8 +21,8 @@ entity.onWeaponskillHit = function(mob, attacker, weaponskill)
     xi.darkixion.onWeaponskillHit(mob, attacker, weaponskill)
 end
 
-entity.onMobWeaponSkill = function(mob, target, skill)
-    xi.darkixion.onMobWeaponSkill(mob, target, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
+    xi.darkixion.onMobWeaponSkill(target, mob, skill)
 end
 
 entity.onMobRoam = function(mob)

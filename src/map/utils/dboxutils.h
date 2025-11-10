@@ -30,25 +30,26 @@ class CCharEntity;
 
 namespace dboxutils
 {
-    void SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo);
-    void AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo, int8_t ItemWorkNo, uint32 ItemStacks, const std::string& receiverName);
-    void SendConfirmation(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void SendClientNewItemCount(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-    void ConfirmNameBeforeSending(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, const std::string& receiver);
-    void CloseMailWindow(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo);
 
-    void OpenSendBox(CCharEntity* PChar);
-    void OpenRecvBox(CCharEntity* PChar);
+void SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo);
+void AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo, int8_t ItemWorkNo, uint32 ItemStacks, const std::string& receiverName);
+void SendConfirmation(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void SendClientNewItemCount(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void ConfirmNameBeforeSending(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, const std::string& receiver);
+void CloseMailWindow(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo);
 
-    auto IsSendBoxOpen(const CCharEntity* PChar) -> bool;
-    auto IsRecvBoxOpen(const CCharEntity* PChar) -> bool;
-    auto IsAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool;
+void OpenSendBox(CCharEntity* PChar);
+void OpenRecvBox(CCharEntity* PChar);
+
+auto IsSendBoxOpen(const CCharEntity* PChar) -> bool;
+auto IsRecvBoxOpen(const CCharEntity* PChar) -> bool;
+auto IsAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool;
 
 }; // namespace dboxutils

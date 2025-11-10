@@ -19,24 +19,26 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(0, -3, -8, 60)
+        player:setPos(16.568, -3, 2.421, 128)
     end
 
-    local zoreRespawn = GetMobByID(ID.mob.ZOREDONITE):getLocalVar('respawn')
-    local zoneWindow = GetMobByID(ID.mob.ZOREDONITE):getLocalVar('zoneWindow')
-
-    -- If Zoredonite respawn is up, 30% chance to spawn
-    if
-        GetSystemTime() > zoreRespawn and
-        GetSystemTime() > zoneWindow and
-        math.random(1, 10) > 7
-    then
-        GetMobByID(ID.mob.ZOREDONITE):setRespawnTime(math.random(120, 480))
+    local zoredonite = GetMobByID(ID.mob.ZOREDONITE)
+    if not zoredonite then
+        return cs
     end
 
-    if GetSystemTime() > zoneWindow then
-        -- Block multiple spawn chance rolls per boat ride
-        GetMobByID(ID.mob.ZOREDONITE):setLocalVar('zoneWindow', GetSystemTime() + 20)
+    local currentTime       = GetSystemTime()
+    local zoredoniteRespawn = currentTime > zoredonite:getLocalVar('respawn')
+    local zoredoniteWindow  = currentTime > zoredonite:getLocalVar('zoneWindow')
+
+    if zoredoniteWindow then
+        zoredonite:setLocalVar('zoneWindow', GetSystemTime() + 20) -- Block multiple spawn chance rolls per boat ride.
+        if
+            zoredoniteRespawn and
+            math.random(1, 100) <= 30
+        then
+            zoredonite:setRespawnTime(math.random(120, 480))
+        end
     end
 
     return cs

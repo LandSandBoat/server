@@ -35,8 +35,10 @@
 
 namespace
 {
-    constexpr auto kTimeServerTickInterval = 2400ms;
-    constexpr auto kPumpQueuesTime         = 250ms;
+
+constexpr auto kTimeServerTickInterval = 2400ms;
+constexpr auto kPumpQueuesTime         = 250ms;
+
 } // namespace
 
 WorldEngine::WorldEngine(asio::io_context& io_context)

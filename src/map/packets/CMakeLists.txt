@@ -6,112 +6,18 @@ set(PACKET_SOURCES
     ${PACKET_S2C_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/action.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/action.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_health.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_health.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_jobs.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_jobs.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_recast.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_stats.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_stats.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/cs_position.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/cs_position.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/event.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/event.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/fishing.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/fishing.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_combat.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_combat.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_name.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_name.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_special.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_special.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_system.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_system.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_text.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_text.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_define.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_define.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_effects.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_invite.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_invite.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_map.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_map.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_member_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_search.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/party_search.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/position.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/position.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.h
     PARENT_SCOPE
 )

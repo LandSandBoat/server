@@ -25,7 +25,9 @@ def migrate(cur, db):
         for charid in ids:
             try:
                 charid = charid[0]
-                cur.execute("SELECT missions FROM chars WHERE charid = {}".format(charid))
+                cur.execute(
+                    "SELECT missions FROM chars WHERE charid = {}".format(charid)
+                )
                 missions = bytearray(cur.fetchone()[0])
                 while len(missions) < 990:
                     missions.append(0)

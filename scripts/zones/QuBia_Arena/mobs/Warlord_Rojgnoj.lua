@@ -8,14 +8,8 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.SLEEP_MEVA, 50)
-end
-
 entity.onMobSpawn = function(mob)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    mob:setMod(xi.mod.REGEN, 30)
 end
 
 return entity

@@ -114,50 +114,51 @@ struct FishingContestHistory
 
 namespace fishingcontest
 {
-    // Contest Data: Sets
-    void SetContestStatus(FISHING_CONTEST_STATUS newStatus);
-    void SetContestCriteria(FISHING_CONTEST_CRITERIA newCriteria);
-    void SetContestMeasure(FISHING_CONTEST_MEASURE newMeasure);
-    void SetContestFish(uint16 newFish);
-    void SetContestStartTime(uint32 startTime);
 
-    // Contest Data: Gets
-    auto   GetContestStatus() -> FISHING_CONTEST_STATUS;
-    auto   GetContestCriteria() -> FISHING_CONTEST_CRITERIA;
-    auto   GetContestMeasure() -> FISHING_CONTEST_MEASURE;
-    uint16 GetContestFish();
-    uint32 GetContestStartTime();
-    uint32 GetContestChangeTime();
+// Contest Data: Sets
+void SetContestStatus(FISHING_CONTEST_STATUS newStatus);
+void SetContestCriteria(FISHING_CONTEST_CRITERIA newCriteria);
+void SetContestMeasure(FISHING_CONTEST_MEASURE newMeasure);
+void SetContestFish(uint16 newFish);
+void SetContestStartTime(uint32 startTime);
 
-    // Contest Control
-    void   ProgressContest();
-    void   ScoreContest();
-    uint32 GetStageChangeTime(FISHING_CONTEST_STATUS stage, uint32 stageStartTime);
-    void   UpdateRankingHistory();
+// Contest Data: Gets
+auto   GetContestStatus() -> FISHING_CONTEST_STATUS;
+auto   GetContestCriteria() -> FISHING_CONTEST_CRITERIA;
+auto   GetContestMeasure() -> FISHING_CONTEST_MEASURE;
+uint16 GetContestFish();
+uint32 GetContestStartTime();
+uint32 GetContestChangeTime();
 
-    // Contest Entries
-    auto  GetFishRankEntry(uint8 position) -> FishingContestEntry*;
-    auto  GetPlayerEntry(CCharEntity* PChar) -> FishingContestEntry*;
-    uint8 FishingRankEntryCount();
+// Contest Control
+void   ProgressContest();
+void   ScoreContest();
+uint32 GetStageChangeTime(FISHING_CONTEST_STATUS stage, uint32 stageStartTime);
+void   UpdateRankingHistory();
 
-    // Data storage
-    bool WriteContestData();
-    bool WriteInitialContestData();
-    bool WriteContestEntryData(FishingContestEntry* entry);
+// Contest Entries
+auto  GetFishRankEntry(uint8 position) -> FishingContestEntry*;
+auto  GetPlayerEntry(CCharEntity* PChar) -> FishingContestEntry*;
+uint8 FishingRankEntryCount();
 
-    // Player Utils
-    bool SubmitFish(CCharEntity* PChar, uint32 score);
-    bool WithdrawFish(CCharEntity* PChar);
-    bool ClaimContestReward(CCharEntity* PChar);
-    auto GetFishingContestHistory(CCharEntity* PChar) -> FishingContestHistory;
+// Data storage
+bool WriteContestData();
+bool WriteInitialContestData();
+bool WriteContestEntryData(FishingContestEntry* entry);
 
-    // Initialization
-    void InitNewContest();
-    void InitNewContest(uint16 fishId, FISHING_CONTEST_CRITERIA criteria, FISHING_CONTEST_MEASURE measure);
-    void LoadContestParameters();
-    void LoadContestEntries();
-    void BuildPlaceholderEntries();
-    void InitializeFishingContestSystem();
+// Player Utils
+bool SubmitFish(CCharEntity* PChar, uint32 score);
+bool WithdrawFish(CCharEntity* PChar);
+bool ClaimContestReward(CCharEntity* PChar);
+auto GetFishingContestHistory(CCharEntity* PChar) -> FishingContestHistory;
+
+// Initialization
+void InitNewContest();
+void InitNewContest(uint16 fishId, FISHING_CONTEST_CRITERIA criteria, FISHING_CONTEST_MEASURE measure);
+void LoadContestParameters();
+void LoadContestEntries();
+void BuildPlaceholderEntries();
+void InitializeFishingContestSystem();
 
 }; // namespace fishingcontest
 

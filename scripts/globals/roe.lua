@@ -159,6 +159,29 @@ end
 
 xi.roe.initialize()
 
+local function isRepeatItemRewardException(items)
+    local itemExceptionsMap =
+    {
+        [xi.item.SILT_POUCH] = true, -- Escha Bead/Silt rewards are always rewarded
+        [xi.item.BEAD_POUCH] = true, -- Escha Bead/Silt rewards are always rewarded
+    }
+
+    -- clone of npcUtil.giveItem logic
+    if type(items) == 'table' then
+        for _, v in pairs(items) do
+            if type(v) == 'number' then
+                if itemExceptionsMap[v] == nil then
+                    return false -- if any item in the rewards list doesn't match, bail out
+                end
+            end
+        end
+    elseif type(items) == 'number' then
+        return itemExceptionsMap[items] ~= nil -- If the input is only an integer, then just check the map
+    end
+
+    return true
+end
+
 --[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
     For external calls use onRecordTrigger below. (see healing.lua for example)
@@ -178,11 +201,12 @@ xi.roe.initialize()
     })
 --------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
-    local recordEntry = xi.roe.records[record]
-    local recordFlags = recordEntry.flags
-    local rewards = recordEntry.reward
+    local recordEntry   = xi.roe.records[record]
+    local recordFlags   = recordEntry.flags
+    local rewards       = recordEntry.reward
+    local canRewardItem = rewards['item'] and (not player:getEminenceCompleted(record) or isRepeatItemRewardException(rewards['item']))
 
-    if not player:getEminenceCompleted(record) and rewards['item'] then
+    if canRewardItem then
         if not npcUtil.giveItem(player, rewards['item'], { silent = true }) then
             player:messageBasic(xi.msg.basic.ROE_UNABLE_BONUS_ITEM)
             return false
@@ -213,7 +237,7 @@ local function completeRecord(player, record)
 
     -- NOTE: To preserve retail order, messaging is here, but item is given if able at the beginning of this
     -- function, since if it fails, it will need to bail out.
-    if rewards['item'] then
+    if canRewardItem then
         local itemQty   = type(rewards['item'][1]) == 'table' and rewards['item'][1][2] or 1
         local itemId    = type(rewards['item'][1]) == 'table' and rewards['item'][1][1] or rewards['item'][1]
         local messageId = itemQty > 1 and xi.msg.basic.ROE_BONUS_ITEM_PLURAL or xi.msg.basic.ROE_BONUS_ITEM

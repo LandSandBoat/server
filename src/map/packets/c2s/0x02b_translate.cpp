@@ -34,5 +34,7 @@ auto GP_CLI_COMMAND_TRANSLATE::validate(MapSession* PSession, const CCharEntity*
 void GP_CLI_COMMAND_TRANSLATE::process(MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_TRANSLATE: Not implemented. FromIndex: {}, ToIndex: {}, Name: {}",
-                 FromIndex, ToIndex, asStringFromUntrustedSource(Name, sizeof(Name)));
+                 FromIndex,
+                 ToIndex,
+                 asStringFromUntrustedSource(Name, sizeof(Name)));
 }

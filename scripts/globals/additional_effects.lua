@@ -235,6 +235,11 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.HP_DRAIN] =  func
     params.element = xi.element.DARK
     local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
 
+    -- Undead cannot be drained
+    if defender:isUndead() then
+        return 0, 0, 0
+    end
+
     if damage > defender:getHP() then
         damage = defender:getHP()
     end
@@ -256,6 +261,11 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.MP_DRAIN] =  func
     params.element = xi.element.DARK
     local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
 
+    -- Undead cannot be drained
+    if defender:isUndead() then
+        return 0, 0, 0
+    end
+
     if damage > defender:getMP() then
         damage = defender:getMP()
     end
@@ -276,6 +286,11 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.TP_DRAIN] =  func
 
     -- Hardcoded for now
     params.element = xi.element.DARK
+
+    -- Undead cannot be drained
+    if defender:isUndead() then
+        return 0, 0, 0
+    end
 
     local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
 

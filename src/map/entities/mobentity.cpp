@@ -46,6 +46,7 @@
 #include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -63,7 +64,8 @@
 
 namespace
 {
-    // clang-format off
+
+// clang-format off
     std::map<uint8, uint16> geodeMap = {
         { ELEMENT_FIRE,    FLAME_GEODE   },
         { ELEMENT_ICE,     SNOW_GEODE    },
@@ -85,11 +87,12 @@ namespace
         { ELEMENT_LIGHT,   CARBITE   },
         { ELEMENT_DARK,    FENRITE   }
     };
-    // clang-format on
+// clang-format on
 
-    constexpr int             RECAST_SEAL           = 1;
-    constexpr int             RECAST_GEODE          = 2;
-    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
+constexpr int             RECAST_SEAL           = 1;
+constexpr int             RECAST_GEODE          = 2;
+constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
+
 } // namespace
 
 CMobEntity::CMobEntity()
@@ -1253,11 +1256,11 @@ void CMobEntity::Die()
         {
             if (PLastAttacker)
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
             }
 
             DistributeRewards();

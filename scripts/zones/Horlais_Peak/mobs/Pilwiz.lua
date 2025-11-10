@@ -6,6 +6,14 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+end
+
+entity.onMobMagicPrepare = function(mob, target, spellId)
+    return xi.magic.spell.STONEGA_II
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

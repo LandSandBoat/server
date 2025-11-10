@@ -31,7 +31,9 @@ class CTrustEntity;
 
 namespace gambits
 {
-    class CGambitsContainer;
+
+class CGambitsContainer;
+
 }
 
 class CTrustController : public CMobController

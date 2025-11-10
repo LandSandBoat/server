@@ -22,13 +22,6 @@
 #include "0x00f_clstat.h"
 
 #include "entities/charentity.h"
-#include "packets/char_sync.h"
-#include "packets/s2c/0x08c_merit.h"
-#include "packets/s2c/0x0aa_magic_data.h"
-#include "packets/s2c/0x0ac_command_data.h"
-#include "packets/s2c/0x0ae_mount_data.h"
-#include "packets/s2c/0x0ca_inspect_message.h"
-#include "utils/blacklistutils.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_CLSTAT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -39,19 +32,8 @@ auto GP_CLI_COMMAND_CLSTAT::validate(MapSession* PSession, const CCharEntity* PC
 
 void GP_CLI_COMMAND_CLSTAT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    charutils::SendKeyItems(PChar);
-    charutils::SendQuestMissionLog(PChar);
-    charutils::SendRecordsOfEminenceLog(PChar);
-
-    PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MOUNT_DATA>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-    PChar->pushPacket<CCharSyncPacket>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MERIT>(PChar);
-
-    charutils::SendInventory(PChar);
-
-    // Note: This sends the stop downloading packet!
-    blacklistutils::SendBlacklist(PChar);
+    // No direct response to this packet in regular conditions.
+    // It is theorized it may be used by the client to report its current state
+    // and may notify the server it is currently severely lagging (stat[0] == 1)
+    // which may have some effect on the packet prioritization.
 }

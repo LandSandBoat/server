@@ -25,8 +25,12 @@ def needs_to_run(cur):
 def migrate(cur, db):
     try:
         # Add default row for each character into new char_flags table, on duplicate do nothing.
-        cur.execute("INSERT INTO char_flags (charid) SELECT charid FROM chars ON DUPLICATE KEY UPDATE char_flags.disconnecting = char_flags.disconnecting;");
-        print("If this (char_flags) migration is running repeatedly, there is probably a bug somewhere. Please report this.")
+        cur.execute(
+            "INSERT INTO char_flags (charid) SELECT charid FROM chars ON DUPLICATE KEY UPDATE char_flags.disconnecting = char_flags.disconnecting;"
+        )
+        print(
+            "If this (char_flags) migration is running repeatedly, there is probably a bug somewhere. Please report this."
+        )
         db.commit()
 
     except mariadb.Error as err:

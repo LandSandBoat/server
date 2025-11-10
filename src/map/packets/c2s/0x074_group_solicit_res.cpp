@@ -25,7 +25,7 @@
 #include "common/ipc_structs.h"
 #include "entities/charentity.h"
 #include "ipc_client.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "party.h"
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
@@ -48,7 +48,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                 ShowDebug("%s declined party invite from %s", PChar->getName(), PInviter->getName());
 
                 // invitee declined invite
-                PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, MsgStd::InvitationDeclined);
+                PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::InvitationDeclined);
             }
             break;
             case GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept:
@@ -68,7 +68,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                             if (PInviter->PParty->m_PAlliance->isFull() || PInviter->PParty->m_PAlliance->getMainParty() != PInviter->PParty)
                             {
                                 ShowDebug("Alliance is full, invite to %s cancelled", PChar->getName());
-                                PChar->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::CannotBeProcessed);
+                                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
                                 break;
                             }
 
@@ -79,7 +79,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                         else if (PChar->PParty->HasTrusts() || PInviter->PParty->HasTrusts())
                         {
                             // Cannot form alliance if you have Trusts
-                            PChar->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::TrustCannotJoinAlliance);
+                            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::TrustCannotJoinAlliance);
                         }
                         else
                         {
@@ -107,9 +107,9 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                         {
                             if (PInviter->PParty->IsFull())
                             { // someone else accepted invitation
-                                // PInviter->pushPacket<CMessageStandardPacket>(PInviter, 0, 0, 14); Don't think retail sends error packet to inviter on full pt
+                                // PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, 14); Don't think retail sends error packet to inviter on full pt
                                 ShowDebug("Someone else accepted party invite, %s cannot be added to party", PChar->getName());
-                                PChar->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::CannotBeProcessed);
+                                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
                             }
                             else
                             {
@@ -120,7 +120,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                     }
                     else
                     {
-                        PChar->pushPacket<CMessageStandardPacket>(PChar, 0, 0, MsgStd::CannotJoinLevelSync);
+                        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotJoinLevelSync);
                     }
                 }
             }

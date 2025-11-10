@@ -46,7 +46,7 @@
 #include "mobskill.h"
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
 #include "zone_instance.h"
@@ -454,8 +454,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // Helpers to map HP/MPScale around 100 to 1-7 grades
     // std::clamp doesn't play nice with uint8, so -> unsigned int
-    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd,
-                        unsigned int inputVal) -> unsigned int
+    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd, unsigned int inputVal) -> unsigned int
     {
         unsigned int inputRange  = inputEnd - inputStart;
         unsigned int outputRange = outputEnd - outputStart;

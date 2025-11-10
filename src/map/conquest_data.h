@@ -75,7 +75,7 @@ public:
     //
     // Gets the array of region controls, indexed by regionId.
     //
-    auto getRegionControls() -> std::vector<region_control_t> const;
+    auto getRegionControls() -> const std::vector<region_control_t>;
 
     //
     // Adds the given influence points to the given nation for the given
@@ -86,12 +86,12 @@ public:
     //
     // Updates the influence points to match those given.
     //
-    void updateInfluencePoints(std::vector<influence_t> const& influencePoints);
+    void updateInfluencePoints(const std::vector<influence_t>& influencePoints);
 
     //
     // Updates region controls to match those given.
     //
-    void updateRegionControls(std::vector<region_control_t> const& regionControls);
+    void updateRegionControls(const std::vector<region_control_t>& regionControls);
 
 private:
     std::vector<region_control_t> regionControls;

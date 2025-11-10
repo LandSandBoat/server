@@ -57,8 +57,7 @@ void MapSocket::startReceive()
     TracyZoneScoped;
 
     socket_.async_receive_from(
-        asio::buffer(buffer_), remote_endpoint_,
-        [this](const std::error_code& ec, std::size_t bytes_recvd)
+        asio::buffer(buffer_), remote_endpoint_, [this](const std::error_code& ec, std::size_t bytes_recvd)
         {
             // NOTE: ASIO returns the address in host byte order, but we store it in network byte order,
             //     : so we convert it back.

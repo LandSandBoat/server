@@ -19,6 +19,7 @@ import requests as reqs
 import json
 import urllib.parse
 
+
 # At 12:00 on day-of-month 1 and 15.
 # Cron: '0 12 1,15 * *'
 def days_since_last_run():
@@ -31,6 +32,7 @@ def days_since_last_run():
         last_date_day = (today - timedelta(days=days)).day
     return days
 
+
 def is_real_name(str):
     parts = str.split(" ")
 
@@ -40,6 +42,7 @@ def is_real_name(str):
             parts_are_capitalized = False
 
     return len(parts) > 1 and parts_are_capitalized
+
 
 def remove_real_names(authors):
     to_remove = set()
@@ -55,7 +58,9 @@ def remove_real_names(authors):
 
 
 if len(sys.argv) < 3:
-    print("Usage:\ngenerate_changelog.py <days to generate, or 'ci'> <repo owner name/repo name> <optional changelog title>")
+    print(
+        "Usage:\ngenerate_changelog.py <days to generate, or 'ci'> <repo owner name/repo name> <optional changelog title>"
+    )
     sys.exit(-1)
 
 length_days = days_since_last_run()
@@ -75,9 +80,7 @@ print(f"Calculating changes for {length_days} days...")
 today = date.today()
 last_week = today - timedelta(days=length_days)
 
-params = {
-    "q": f"user:{user} repo:{repo} state:closed is:pr merged:>={str(last_week)}"
-}
+params = {"q": f"user:{user} repo:{repo} state:closed is:pr merged:>={str(last_week)}"}
 query_string = urllib.parse.urlencode(params)
 request = f"https://api.github.com/search/issues?page=1&per_page=100&{query_string}"
 response = reqs.get(request)

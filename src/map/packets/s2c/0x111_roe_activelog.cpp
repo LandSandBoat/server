@@ -35,7 +35,7 @@ GP_SERV_COMMAND_ROE_ACTIVELOG::GP_SERV_COMMAND_ROE_ACTIVELOG(const CCharEntity* 
     {
         const uint32 id          = PChar->m_eminenceLog.active[i];
         const uint32 progress    = PChar->m_eminenceLog.progress[i];
-        const int    c_offset    = i < 30 ? i : 60; // The time-limited record is a special case, it goes at the end (index 60).
+        const int    c_offset    = i < 30 ? i : 63; // The time-limited record is a special case, it goes at the end (index 63).
         packet.records[c_offset] = record_t{ .Id = id, .Count = progress };
     }
 }

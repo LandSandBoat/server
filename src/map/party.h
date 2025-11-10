@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 
 #include <vector>
 

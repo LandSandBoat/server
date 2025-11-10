@@ -66,6 +66,8 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
     end
 
     target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
+
+    return xi.effect.ARCANE_CIRCLE
 end
 
 xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
@@ -80,10 +82,14 @@ xi.job_utils.dark_knight.useBloodWeapon = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_WEAPON)
 
     target:addStatusEffect(xi.effect.BLOOD_WEAPON, power, 0, duration)
+
+    return xi.effect.BLOOD_WEAPON
 end
 
 xi.job_utils.dark_knight.useConsumeMana = function(player, target, ability)
     player:addStatusEffect(xi.effect.CONSUME_MANA, 1, 0, 60)
+
+    return xi.effect.CONSUME_MANA
 end
 
 xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
@@ -93,6 +99,8 @@ xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
     local subPower = player:getMerit(xi.merit.DARK_SEAL) * player:getMod(xi.mod.ENHANCES_DARK_SEAL) / 10
 
     player:addStatusEffect(xi.effect.DARK_SEAL, power, 0, 60, 0, subPower)
+
+    return xi.effect.DARK_SEAL
 end
 
 xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
@@ -100,10 +108,14 @@ xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
     local duration = 180 + player:getMerit(xi.merit.DIABOLIC_EYE) * player:getMod(xi.mod.ENHANCES_DIABOLIC_EYE)
 
     player:addStatusEffect(xi.effect.DIABOLIC_EYE, power, 0, duration)
+
+    return xi.effect.DIABOLIC_EYE
 end
 
 xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
     player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+
+    return xi.effect.LAST_RESORT
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
@@ -111,16 +123,22 @@ xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
     local duration = 60
 
     player:addStatusEffect(xi.effect.NETHER_VOID, power, 0, duration)
+
+    return xi.effect.NETHER_VOID
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
     local duration = 90 + player:getJobPointLevel(xi.jp.SCARLET_DELIRIUM_DURATION)
 
     player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 0, 0, duration)
+
+    return xi.effect.SCARLET_DELIRIUM
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
     player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 0, 0, 30)
+
+    return xi.effect.SOUL_ENSLAVEMENT
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
@@ -128,6 +146,8 @@ xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
     local subPower = target:getMod(xi.mod.ENHANCES_MUTED_SOUL) * target:getMerit(xi.merit.MUTED_SOUL) / 10 -- Origin: Abyss Flanchard +2
 
     player:addStatusEffect(xi.effect.SOULEATER, 1, 0, duration, 0, subPower)
+
+    return xi.effect.SOULEATER
 end
 
 xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)

@@ -41,6 +41,8 @@
 #include "common/utils.h"
 #include "petentity.h"
 
+#include "packets/s2c/0x029_battle_message.h"
+
 CPetEntity::CPetEntity(PET_TYPE petType)
 : CMobEntity()
 , m_PetID(0)
@@ -373,7 +375,7 @@ bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
         auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
         if (PChar && !PChar->IsMobOwner(PTarget))
         {
-            errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
             PAI->Disengage();
             return false;
         }
@@ -588,8 +590,11 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             target.knockback  = PSkill->getKnockback();
             if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
-                                                                    PSkill->getTertiarySkillchain());
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                    PTargetFound,
+                    PSkill->getPrimarySkillchain(),
+                    PSkill->getSecondarySkillchain(),
+                    PSkill->getTertiarySkillchain());
                 if (effect != SUBEFFECT_NONE)
                 {
                     int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);

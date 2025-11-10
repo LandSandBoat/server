@@ -33,6 +33,7 @@ return {
     ['Ki_Volep']           = { event = 260 },
     ['Kohpe_Takhabio']     = { event = 423 },
     ['Kototo']             = { event = 410 },
+    ['Kuoh_Rhel']          = { event = 222 },
     ['Kuu_Lohro']          = { event = 430 },
     ['Mahoh_Mahborogho']   = { event = 257 },
     ['Matata']             = { event = 223 },
@@ -67,5 +68,6 @@ return {
     ['Three_of_Spades']    = { event = 270 },
     ['Two_of_Spades']      = { event = 271 },
     ['Uuroro']             = { event = 272 },
+    ['Verun']              = { event = 432 },
     ['Zahsa_Syalmhaia']    = { event = 797 },
 }

@@ -23,103 +23,105 @@
 
 namespace besieged
 {
-    uint8 GetAstralCandescence()
-    {
-        return STRONGHOLD::ALZAHBI;
-    }
 
-    uint8 GetAlZahbiOrders()
-    {
-        return ORDERS_ALZAHBI_DEFENSE;
-    }
+uint8 GetAstralCandescence()
+{
+    return STRONGHOLD::ALZAHBI;
+}
 
-    uint8 GetMamookOrders()
-    {
-        return ORDERS_DEFEND;
-    }
+uint8 GetAlZahbiOrders()
+{
+    return ORDERS_ALZAHBI_DEFENSE;
+}
 
-    uint8 GetMamookLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
+uint8 GetMamookOrders()
+{
+    return ORDERS_DEFEND;
+}
 
-    uint8 GetMamookForces()
-    {
-        return 95;
-    }
+uint8 GetMamookLevel()
+{
+    return STRONGHOLD_LEVEL::LEVEL1;
+}
 
-    uint8 GetMamookMirrors()
-    {
-        return 0;
-    }
+uint8 GetMamookForces()
+{
+    return 95;
+}
 
-    uint8 GetMamookPrisoners()
-    {
-        return 0;
-    }
+uint8 GetMamookMirrors()
+{
+    return 0;
+}
 
-    bool GetMamookMirrorDestroyed()
-    {
-        return 0;
-    }
+uint8 GetMamookPrisoners()
+{
+    return 0;
+}
 
-    uint8 GetHalvungOrders()
-    {
-        return ORDERS_DEFEND;
-    }
+bool GetMamookMirrorDestroyed()
+{
+    return 0;
+}
 
-    uint8 GetHalvungLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
+uint8 GetHalvungOrders()
+{
+    return ORDERS_DEFEND;
+}
 
-    uint8 GetHalvungForces()
-    {
-        return 95;
-    }
+uint8 GetHalvungLevel()
+{
+    return STRONGHOLD_LEVEL::LEVEL1;
+}
 
-    uint8 GetHalvungMirrors()
-    {
-        return 0;
-    }
+uint8 GetHalvungForces()
+{
+    return 95;
+}
 
-    uint8 GetHalvungPrisoners()
-    {
-        return 0;
-    }
+uint8 GetHalvungMirrors()
+{
+    return 0;
+}
 
-    bool GetHalvungMirrorDestroyed()
-    {
-        return 0;
-    }
+uint8 GetHalvungPrisoners()
+{
+    return 0;
+}
 
-    uint8 GetArrapagoOrders()
-    {
-        return ORDERS_DEFEND;
-    }
+bool GetHalvungMirrorDestroyed()
+{
+    return 0;
+}
 
-    uint8 GetArrapagoLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
+uint8 GetArrapagoOrders()
+{
+    return ORDERS_DEFEND;
+}
 
-    uint8 GetArrapagoForces()
-    {
-        return 95;
-    }
+uint8 GetArrapagoLevel()
+{
+    return STRONGHOLD_LEVEL::LEVEL1;
+}
 
-    uint8 GetArrapagoMirrors()
-    {
-        return 0;
-    }
+uint8 GetArrapagoForces()
+{
+    return 95;
+}
 
-    uint8 GetArrapagoPrisoners()
-    {
-        return 0;
-    }
+uint8 GetArrapagoMirrors()
+{
+    return 0;
+}
 
-    bool GetArrapagoMirrorDestroyed()
-    {
-        return 0;
-    }
+uint8 GetArrapagoPrisoners()
+{
+    return 0;
+}
+
+bool GetArrapagoMirrorDestroyed()
+{
+    return 0;
+}
+
 }; // namespace besieged

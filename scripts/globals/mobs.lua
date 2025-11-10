@@ -246,6 +246,7 @@ xi.mob.additionalEffect =
     ENAMNESIA  = 23,
     DISPEL     = 24,
     BIND       = 25,
+    SLEEP      = 26,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -484,6 +485,20 @@ local additionalEffects =
         duration    = 30,
         minDuration = 1,
         maxDuration = 30,
+    },
+
+    [xi.mob.ae.SLEEP] =
+    {
+        chance      = 25,
+        ele         = xi.element.DARK,
+        sub         = xi.subEffect.SLEEP,
+        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff         = xi.effect.SLEEP_I,
+        power       = 20,
+        duration    = 30,
+        minDuration = 1,
+        maxDuration = 45,
     },
 
     [xi.mob.ae.SLOW] =

@@ -23,7 +23,6 @@ local content = Battlefield:new({
         spireOfMeaID.mob.ENVIER + 9,
         spireOfMeaID.mob.ENVIER + 14,
     },
-    experimental     = true,
 })
 
 content.groups =
@@ -70,7 +69,25 @@ content.groups =
 content.loot =
 {
     {
-        -- TODO: Loot
+        quantity = 3,
+        { itemId = xi.item.NONE,                           weight = 200 },
+        { itemId = xi.item.CLUSTER_OF_BURNING_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_BITTER_MEMORIES,     weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_FLEETING_MEMORIES,   weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_PROFANE_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_STARTLING_MEMORIES,  weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_SOMBER_MEMORIES,     weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_RADIANT_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_MALEVOLENT_MEMORIES, weight = 100 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                           weight = 500 },
+        { itemId = xi.item.SOLEMN_VISION,                  weight = 100 },
+        { itemId = xi.item.VALIANT_VISION,                 weight = 100 },
+        { itemId = xi.item.PRETENTIOUS_VISION,             weight = 100 },
+        { itemId = xi.item.MALICIOUS_VISION,               weight = 100 },
+        { itemId = xi.item.PRISTINE_VISION,                 weight = 100 },
     },
 }
 

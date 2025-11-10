@@ -2,6 +2,8 @@
 -- Area: Xarcabard [S]
 --   NM: Graoully
 -----------------------------------
+mixins = { require('scripts.mixins.families.red_dragon') }
+-----------------------------------
 local ID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 ---@type TMobEntity
@@ -18,6 +20,10 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
+    -- TODO: check for other immunities
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 

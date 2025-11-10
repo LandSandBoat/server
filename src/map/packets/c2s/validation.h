@@ -117,7 +117,10 @@ public:
         if (val < minVal || val > maxVal)
         {
             result_.addError(std::format("{} out of range: {} not in [{}, {}]",
-                                         fieldName, val, minVal, maxVal));
+                                         fieldName,
+                                         val,
+                                         minVal,
+                                         maxVal));
         }
 
         return *this;

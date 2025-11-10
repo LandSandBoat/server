@@ -27,6 +27,12 @@ end
 function CTestEntityAssertions:hasEffect(effectId)
 end
 
+---Assert entity has specified status animation
+---@param animation xi.animation
+---@return CTestEntityAssertions self for chaining
+function CTestEntityAssertions:hasAnimation(animation)
+end
+
 ---Assert player has expected nation rank
 ---@param expectedRank integer
 ---@return CTestEntityAssertions self for chaining

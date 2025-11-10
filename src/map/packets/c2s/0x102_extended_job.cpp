@@ -23,8 +23,7 @@
 
 #include "blue_spell.h"
 #include "entities/charentity.h"
-#include "packets/char_job_extra.h"
-#include "packets/char_stats.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "recast_container.h"
 #include "utils/blueutils.h"
@@ -137,9 +136,8 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
 
             charutils::BuildingCharTraitsTable(PChar);
             PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-            PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-            PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-            PChar->pushPacket<CCharStatsPacket>(PChar);
+            charutils::SendExtendedJobPackets(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
             PChar->UpdateHealth();
         }
         else
@@ -174,9 +172,8 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
                     blueutils::SetBlueSpell(PChar, spell, spellIndex, true);
                     charutils::BuildingCharTraitsTable(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-                    PChar->pushPacket<CCharStatsPacket>(PChar);
+                    charutils::SendExtendedJobPackets(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
                     PChar->UpdateHealth();
                 }
                 else
@@ -245,8 +242,7 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
             }
         }
 
-        PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-        PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+        charutils::SendExtendedJobPackets(PChar);
         puppetutils::SaveAutomaton(PChar);
     }
     else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)

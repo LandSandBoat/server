@@ -53,18 +53,18 @@ void CLuaClientEntityPairBCNM::killMobs(const sol::optional<sol::table>& params)
     }
 
     // Kill each spawned mob in the battlefield
-    // clang-format off
-    battlefield->ForEachEnemy([this, params](CMobEntity* mobEntity)
-    {
-        if (mobEntity && mobEntity->isAlive())
-        {
-            CLuaTestEntity mobWrapper(mobEntity);
 
-            const sol::object mobObj = sol::make_object(lua.lua_state(), &mobWrapper);
-            parent_->claimAndKillMob(mobObj, params);
-        }
-    });
-    // clang-format on
+    battlefield->ForEachEnemy(
+        [this, params](CMobEntity* mobEntity)
+        {
+            if (mobEntity && mobEntity->isAlive())
+            {
+                CLuaTestEntity mobWrapper(mobEntity);
+
+                const sol::object mobObj = sol::make_object(lua.lua_state(), &mobWrapper);
+                parent_->claimAndKillMob(mobObj, params);
+            }
+        });
 }
 
 /************************************************************************
@@ -94,8 +94,8 @@ void CLuaClientEntityPairBCNM::expectWin(sol::optional<sol::table> params) const
         parent_->simulation()->skipTime(7);
     }
 
-    const auto eventTable = lua.create_table_with("eventId", 32001,
-                                                  "finishOption", finishOption.value_or(0));
+    const auto eventTable = lua.create_table_with(
+        "eventId", 32001, "finishOption", finishOption.value_or(0));
     parent_->events().expect(eventTable);
 }
 

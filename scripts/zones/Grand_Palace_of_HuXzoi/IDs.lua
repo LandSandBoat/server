@@ -18,6 +18,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         CONQUEST_BASE                 = 7090, -- Tallying conquest results...
         DOES_NOT_RESPOND              = 7254, -- The gate does not respond...
         PRESENCE_HAS_DRAWN            = 7370, -- Your presence has drawn unwanted attention!
+        NOTHING_LEFT_TO_DO            = 7373, -- You have nothing left to do here.
         REQUEST_CONFIRMED             = 7375, -- Security portal access request confirmed. Commencing patrol routine. Stay on alert for intruder interference.
         PATROL_COMPLETED              = 7376, -- Patrol routine completed. Request transfer of final security portal access duty. Awaiting confirmation.
         DUTY_COMPLETE                 = 7377, -- Transfer of final security portal access duty complete.

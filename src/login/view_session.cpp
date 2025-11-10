@@ -58,7 +58,8 @@ void view_session::read_func()
             uint32 accountID = 0;
 
             const auto rset = db::preparedStmt("SELECT accid FROM chars WHERE charid = ? AND charname = ? LIMIT 1",
-                                               requestedCharacterID, requestedCharacter);
+                                               requestedCharacterID,
+                                               requestedCharacter);
             if (rset && rset->rowsCount() != 0 && rset->next())
             {
                 accountID                    = rset->get<uint32>("accid");
@@ -115,7 +116,8 @@ void view_session::read_func()
             uint32 charID = ref<uint32>(buffer_.data(), 0x20);
 
             ShowInfo(fmt::format("attempt to delete char:<{}> from ip:<{}>",
-                                 charID, ipAddress));
+                                 charID,
+                                 ipAddress));
 
             uint32 accountID = 0;
 
@@ -137,7 +139,9 @@ void view_session::read_func()
             // This allows character recovery.
 
             db::preparedStmt("UPDATE chars SET accid = 0, original_accid = ? WHERE charid = ? AND accid = ?",
-                             session.accountID, charID, session.accountID);
+                             session.accountID,
+                             charID,
+                             session.accountID);
         }
         break;
         case 0x21: // 33: Registering character name onto the lobby server
@@ -249,7 +253,7 @@ void view_session::read_func()
                 if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
                 {
                     const auto potentialName = to_upper(nameStr);
-                    for (auto const& entry : badWordsList)
+                    for (const auto& entry : badWordsList)
                     {
                         const auto badWord = to_upper(entry.second.as<std::string>());
                         if (potentialName.find(badWord) != std::string::npos)

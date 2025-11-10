@@ -28,6 +28,9 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     mob =
     {
+        EBA          = GetFirstID('Eba'),
+        MAHISHA      = GetFirstID('Mahisha'),
+        TRES_DUENDES = GetFirstID('Tres_Duendes'),
     },
     npc =
     {

@@ -71,11 +71,10 @@ describe('Chains of Promathia', function()
             player:gotoZone(xi.zone.HALL_OF_TRANSFERENCE)
             -- TODO: Not seeing 108 on the capture
             player.events:expect({ eventId = 108 })
-            xi.test.world:loadZone(xi.zone.PROMYVION_HOLLA)
-            player.entities:gotoAndTrigger('_0e3', { eventId = 160 })
-            -- Is ported to promyvion after event.
 
+            player.entities:gotoAndTrigger('_0e3', { eventId = 160 })
             player.assert:inZone(xi.zone.PROMYVION_HOLLA)
+
             -- 1st time entering gets a CS
             player.events:expect({ eventId = 50 })
 
@@ -93,22 +92,14 @@ describe('Chains of Promathia', function()
         it('should complete all three Promyvion battles and unlock teleports', function()
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
             player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
-            --             player:setCharVar()
-            --             player:setVar('M[6][3]Prog', 1) -- set at end of last mission
-
-            -- TODO: Optional event not implemented?
-            -- player:gotoZone(xi.zone.RULUDE_GARDENS)
-            -- player.entities:gotoAndTrigger('Chapi_Galepilai', { eventId = 11 })
 
             -- entering next promy
             player:gotoZone(xi.zone.KONSCHTAT_HIGHLANDS)
+            -- Touching the telepoint will warp us to Hall of Transference and then Promyvion-Dem
             player.entities:gotoAndTrigger('Shattered_Telepoint')
-            player.events:expect({ eventId = 912 })
-
-            -- CS on entering promy
-            player:gotoZone(xi.zone.HALL_OF_TRANSFERENCE)
-            player:gotoZone(xi.zone.PROMYVION_DEM)
-            player.events:expect({ eventId = 51 })
+            player.events:expect({ eventId = 912 }) -- Hall of Transference
+            player.events:expect({ eventId = 51 })  -- Promyvion-Dem
+            player.assert:inZone(xi.zone.PROMYVION_DEM)
 
             -- Fight at BCNM
             player:gotoZone(xi.zone.SPIRE_OF_DEM)
@@ -121,15 +112,12 @@ describe('Chains of Promathia', function()
             player:gotoZone(xi.zone.TAHRONGI_CANYON)
             player.entities:gotoAndTrigger('Shattered_Telepoint', { eventId = 913, finishOption = 0 })
 
-            xi.test.world:loadZone(xi.zone.PROMYVION_MEA)
-
             -- event upon entering hall
+            player.assert:inZone(xi.zone.HALL_OF_TRANSFERENCE)
             player.events:expect({ eventId = 155 })
 
-            -- TODO: This whole Promyvion section is a mess
-            player:gotoZone(xi.zone.PROMYVION_MEA)
-
             -- Event upon entering promy
+            player:gotoZone(xi.zone.PROMYVION_MEA)
             player.events:expect({ eventId = 52 })
 
             -- enter and beat BCNM
@@ -137,13 +125,12 @@ describe('Chains of Promathia', function()
             player.bcnm:enter('_0l0', xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA)
             player.bcnm:killMobs()
             player.bcnm:expectWin({ finishOption = 2 })
-            player.assert:hasKI(xi.ki.LIGHT_OF_MEA)
 
-            -- check if mission completes
+            -- Should have Light of Mea and be teleported to Lufaise Meadows
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
+                :hasKI(xi.ki.LIGHT_OF_MEA)
+                :inZone(xi.zone.LUFAISE_MEADOWS)
 
-            -- Mission complete check if new teleports work
-            player:gotoZone(xi.zone.LUFAISE_MEADOWS)
             -- zone in cs
             player.events:expect({ eventId = 110 })
             player.entities:gotoAndTrigger('Swirling_Vortex', { eventId = 100 })
@@ -207,10 +194,6 @@ describe('Chains of Promathia', function()
             -- Sewer door needs this mission explicitly completed to trigger event
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
             player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
-
-            -- setup mission
-            xi.test.world:loadZone(xi.zone.PHOMIUNA_AQUEDUCTS)
-
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS)
 
             player:gotoZone(xi.zone.TAVNAZIAN_SAFEHOLD)
@@ -281,9 +264,6 @@ describe('Chains of Promathia', function()
 
             player:gotoZone(xi.zone.RIVERNE_SITE_A01)
             player.events:expect({ eventId = 100 })
-
-            -- Upcoming CS will dump us in Gustaberg
-            xi.test.world:loadZone(xi.zone.SOUTH_GUSTABERG)
 
             player:gotoZone(xi.zone.MONARCH_LINN)
             player.bcnm:enter('SD_Entrance', xi.battlefield.id.ANCIENT_VOWS)
@@ -516,8 +496,6 @@ describe('Chains of Promathia', function()
     describe('4-3 The Secrets of Worship', function()
         it('should complete the mission successfully', function()
             local ID = zones[xi.zone.SACRARIUM]
-            -- Misareaux CS will teleport us to Sacrarium
-            xi.test.world:loadZone(xi.zone.SACRARIUM)
 
             -- setup mission
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP)
@@ -529,6 +507,7 @@ describe('Chains of Promathia', function()
             player.entities:gotoAndTrigger('_0p8', { eventId = 9, finishOption = 1 })
 
             -- Player is now in Sacrarium
+            player.assert:inZone(xi.zone.SACRARIUM)
             player.entities:gotoAndTrigger('_0s8', { eventId = 6 })
 
             local qm3 = player.entities:get('qm_prof_3')
@@ -596,13 +575,11 @@ describe('Chains of Promathia', function()
 
             player:claimAndKillMob(golem)
 
-            xi.test.world:loadZone(xi.zone.PROMYVION_VAHZL)
             player.entities:gotoAndTrigger('_i99', { eventId = 2, finishOption = 1 })
-
             player.assert:inZone(xi.zone.PROMYVION_VAHZL)
             player.events:expect({ eventId = 50 })
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
-            player.assert:hasKI(xi.ki.LIGHT_OF_VAHZL)
+                :hasKI(xi.ki.LIGHT_OF_VAHZL)
         end)
     end)
 
@@ -641,9 +618,9 @@ describe('Chains of Promathia', function()
             xi.test.world:skipTime(15)
             xi.test.world:tick()
             -- Player is sent to Beaucedine Glacier at end of event
-            xi.test.world:loadZone(xi.zone.BEAUCEDINE_GLACIER)
             player.bcnm:expectWin({ finishOption = 2 })
             player.events:expect({ eventId = 206 })
+            player.assert:inZone(xi.zone.BEAUCEDINE_GLACIER)
 
             player:gotoZone(xi.zone.METALWORKS)
             player.entities:gotoAndTrigger('Cid', { eventId = 850 })
@@ -1003,8 +980,6 @@ describe('Chains of Promathia', function()
 
             player:gotoZone(xi.zone.SEALIONS_DEN)
             player.entities:gotoAndTrigger('_0w0', { eventId = 32 })
-            -- Post BCNM will warp to AlTaieu
-            xi.test.world:loadZone(xi.zone.ALTAIEU)
 
             player.bcnm:enter('_0w0', xi.battlefield.id.WARRIORS_PATH)
             -- TODO: Tenzen can't be killed and causes this call to fail
@@ -1012,6 +987,7 @@ describe('Chains of Promathia', function()
             --             player.bcnm:expectWin({ finishOption = 2 })
             --             player.events:expect({ eventId = 1 })
             --
+            --             player.assert:inZone(xi.zone.ALTAIEU)
             --             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
         end)
     end)

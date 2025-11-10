@@ -77,7 +77,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     --TRUST
     if csid == 435 then
-        player:addSpell(xi.magic.spell.KUPIPI, true, true)
+        player:addSpell(xi.magic.spell.KUPIPI, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:setCharVar('WindurstFirstTrust', 1)
     elseif csid == 437 then
@@ -89,7 +89,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             var = 'WindurstFirstTrust' })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 439 then
-        player:addSpell(xi.magic.spell.KUPIPI, true, true)
+        player:addSpell(xi.magic.spell.KUPIPI, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)

@@ -37,10 +37,12 @@
 
 namespace
 {
-    bool arePositionsClose(const position_t& a, const position_t& b)
-    {
-        return distance(a, b) < 1.0f;
-    }
+
+bool arePositionsClose(const position_t& a, const position_t& b)
+{
+    return distance(a, b) < 1.0f;
+}
+
 } // namespace
 
 CPathFind::CPathFind(CBaseEntity* PTarget)

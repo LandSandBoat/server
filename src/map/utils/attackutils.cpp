@@ -29,348 +29,349 @@
 
 namespace attackutils
 {
-    /************************************************************************
-     *                                                                       *
-     *  Multihit calculator.                                                 *
-     *                                                                       *
-     ************************************************************************/
-    uint8 getHitCount(uint8 hits)
-    {
-        uint8 distribution = xirand::GetRandomNumber(100);
-        uint8 num          = 1;
 
-        switch (hits)
+/************************************************************************
+ *                                                                       *
+ *  Multihit calculator.                                                 *
+ *                                                                       *
+ ************************************************************************/
+uint8 getHitCount(uint8 hits)
+{
+    uint8 distribution = xirand::GetRandomNumber(100);
+    uint8 num          = 1;
+
+    switch (hits)
+    {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2: // cdf = 55,100
+            if (distribution < 55)
+            {
+                break;
+            }
+            else
+            {
+                num += 1;
+                break;
+            }
+            break;
+        case 3: // cdf = 30,80,100
+            if (distribution < 30)
+            {
+                break;
+            }
+            else if (distribution < 80)
+            {
+                num += 1;
+                break;
+            }
+            else
+            {
+                num += 2;
+                break;
+            }
+            break;
+        case 4: // cdf = 20,50,80,100
+            if (distribution < 20)
+            {
+                break;
+            }
+            else if (distribution < 50)
+            {
+                num += 1;
+                break;
+            }
+            else if (distribution < 80)
+            {
+                num += 2;
+                break;
+            }
+            else
+            {
+                num += 3;
+                break;
+            }
+            break;
+        case 5: // cdf = 10,30,60,90,100
+            if (distribution < 10)
+            {
+                break;
+            }
+            else if (distribution < 30)
+            {
+                num += 1;
+                break;
+            }
+            else if (distribution < 60)
+            {
+                num += 2;
+                break;
+            }
+            else if (distribution < 90)
+            {
+                num += 3;
+                break;
+            }
+            else
+            {
+                num += 4;
+                break;
+            }
+            break;
+        case 6: // cdf = 10,30,50,70,90,100
+            if (distribution < 10)
+            {
+                break;
+            }
+            else if (distribution < 30)
+            {
+                num += 1;
+                break;
+            }
+            else if (distribution < 50)
+            {
+                num += 2;
+                break;
+            }
+            else if (distribution < 70)
+            {
+                num += 3;
+                break;
+            }
+            else if (distribution < 90)
+            {
+                num += 4;
+                break;
+            }
+            else
+            {
+                num += 5;
+                break;
+            }
+            break;
+        case 7: // cdf = 5,20,45,70,85,95,100
+            if (distribution < 5)
+            {
+                break;
+            }
+            else if (distribution < 20)
+            {
+                num += 1;
+                break;
+            }
+            else if (distribution < 45)
+            {
+                num += 2;
+                break;
+            }
+            else if (distribution < 70)
+            {
+                num += 3;
+                break;
+            }
+            else if (distribution < 85)
+            {
+                num += 4;
+                break;
+            }
+            else if (distribution < 95)
+            {
+                num += 5;
+                break;
+            }
+            else
+            {
+                num += 6;
+                break;
+            }
+            break;
+        case 8: // cdf = 5,20,45,70,85,95,98,100
+            if (distribution < 5)
+            {
+                break;
+            }
+            else if (distribution < 20)
+            {
+                num += 1;
+                break;
+            }
+            else if (distribution < 45)
+            {
+                num += 2;
+                break;
+            }
+            else if (distribution < 70)
+            {
+                num += 3;
+                break;
+            }
+            else if (distribution < 85)
+            {
+                num += 4;
+                break;
+            }
+            else if (distribution < 95)
+            {
+                num += 5;
+                break;
+            }
+            else if (distribution < 98)
+            {
+                num += 6;
+                break;
+            }
+            else
+            {
+                num += 7;
+                break;
+            }
+            break;
+    }
+    return std::min<uint8>(num, 8); // no more than eight hits per attack
+}
+
+bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+{
+    auto isParriedFunc = lua["xi"]["combat"]["physical"]["isParried"];
+
+    if (isParriedFunc.valid())
+    {
+        try
         {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2: // cdf = 55,100
-                if (distribution < 55)
-                {
-                    break;
-                }
-                else
-                {
-                    num += 1;
-                    break;
-                }
-                break;
-            case 3: // cdf = 30,80,100
-                if (distribution < 30)
-                {
-                    break;
-                }
-                else if (distribution < 80)
-                {
-                    num += 1;
-                    break;
-                }
-                else
-                {
-                    num += 2;
-                    break;
-                }
-                break;
-            case 4: // cdf = 20,50,80,100
-                if (distribution < 20)
-                {
-                    break;
-                }
-                else if (distribution < 50)
-                {
-                    num += 1;
-                    break;
-                }
-                else if (distribution < 80)
-                {
-                    num += 2;
-                    break;
-                }
-                else
-                {
-                    num += 3;
-                    break;
-                }
-                break;
-            case 5: // cdf = 10,30,60,90,100
-                if (distribution < 10)
-                {
-                    break;
-                }
-                else if (distribution < 30)
-                {
-                    num += 1;
-                    break;
-                }
-                else if (distribution < 60)
-                {
-                    num += 2;
-                    break;
-                }
-                else if (distribution < 90)
-                {
-                    num += 3;
-                    break;
-                }
-                else
-                {
-                    num += 4;
-                    break;
-                }
-                break;
-            case 6: // cdf = 10,30,50,70,90,100
-                if (distribution < 10)
-                {
-                    break;
-                }
-                else if (distribution < 30)
-                {
-                    num += 1;
-                    break;
-                }
-                else if (distribution < 50)
-                {
-                    num += 2;
-                    break;
-                }
-                else if (distribution < 70)
-                {
-                    num += 3;
-                    break;
-                }
-                else if (distribution < 90)
-                {
-                    num += 4;
-                    break;
-                }
-                else
-                {
-                    num += 5;
-                    break;
-                }
-                break;
-            case 7: // cdf = 5,20,45,70,85,95,100
-                if (distribution < 5)
-                {
-                    break;
-                }
-                else if (distribution < 20)
-                {
-                    num += 1;
-                    break;
-                }
-                else if (distribution < 45)
-                {
-                    num += 2;
-                    break;
-                }
-                else if (distribution < 70)
-                {
-                    num += 3;
-                    break;
-                }
-                else if (distribution < 85)
-                {
-                    num += 4;
-                    break;
-                }
-                else if (distribution < 95)
-                {
-                    num += 5;
-                    break;
-                }
-                else
-                {
-                    num += 6;
-                    break;
-                }
-                break;
-            case 8: // cdf = 5,20,45,70,85,95,98,100
-                if (distribution < 5)
-                {
-                    break;
-                }
-                else if (distribution < 20)
-                {
-                    num += 1;
-                    break;
-                }
-                else if (distribution < 45)
-                {
-                    num += 2;
-                    break;
-                }
-                else if (distribution < 70)
-                {
-                    num += 3;
-                    break;
-                }
-                else if (distribution < 85)
-                {
-                    num += 4;
-                    break;
-                }
-                else if (distribution < 95)
-                {
-                    num += 5;
-                    break;
-                }
-                else if (distribution < 98)
-                {
-                    num += 6;
-                    break;
-                }
-                else
-                {
-                    num += 7;
-                    break;
-                }
-                break;
+            bool result = isParriedFunc(PDefender, PAttacker);
+            return result;
         }
-        return std::min<uint8>(num, 8); // no more than eight hits per attack
+        catch (const sol::error& err)
+        {
+            ShowError("attackutils::IsParried(): %s", err.what());
+            return false;
+        }
+    }
+    else
+    {
+        ShowError("attackutils::IsParried() failed to run Lua function");
     }
 
-    bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    return false;
+}
+
+bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+{
+    if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
     {
-        auto isParriedFunc = lua["xi"]["combat"]["physical"]["isParried"];
+        return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
+    }
+    return false;
+}
 
-        if (isParriedFunc.valid())
-        {
-            try
-            {
-                bool result = isParriedFunc(PDefender, PAttacker);
-                return result;
-            }
-            catch (const sol::error& err)
-            {
-                ShowError("attackutils::IsParried(): %s", err.what());
-                return false;
-            }
-        }
-        else
-        {
-            ShowError("attackutils::IsParried() failed to run Lua function");
-        }
+bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+{
+    if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
+    {
+        return (xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender));
+    }
+    return false;
+}
 
-        return false;
+/************************************************************************
+ *                                                                       *
+ *  Check for damage multiplier, relic weapons etc.                      *
+ *                                                                       *
+ ************************************************************************/
+uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc)
+{
+    if (PWeapon == nullptr)
+    {
+        return damage;
     }
 
-    bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    uint32 originalDamage    = damage;
+    int16  occ_do_triple_dmg = 0;
+    int16  occ_do_double_dmg = 0;
+
+    switch (attackType)
     {
-        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
-        {
-            return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
-        }
-        return false;
+        case PHYSICAL_ATTACK_TYPE::RANGED:
+        case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
+            occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG_RANGED) / 10;
+            occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG_RANGED) / 10;
+            break;
+        case PHYSICAL_ATTACK_TYPE::NORMAL:
+            if (weaponSlot == SLOT_MAIN) // Only applies to mainhand
+            {
+                occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG) / 10;
+                occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG) / 10;
+            }
+            break;
+        default:
+            break;
     }
 
-    bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::OCC_DO_EXTRA_DMG) / 100.0f;
+    int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::EXTRA_DMG_CHANCE) / 10;
+
+    if (allowProc)
     {
-        if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
+        if (occ_extra_dmg > 3.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
         {
-            return (xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender));
+            return (uint32)(damage * occ_extra_dmg);
         }
-        return false;
+        else if (occ_do_triple_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_triple_dmg)
+        {
+            return (uint32)(damage * 3.0f);
+        }
+        else if (occ_extra_dmg > 2.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+        {
+            return (uint32)(damage * occ_extra_dmg);
+        }
+        else if (occ_do_double_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_double_dmg)
+        {
+            return (uint32)(damage * 2.0f);
+        }
+        else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+        {
+            return (uint32)(damage * occ_extra_dmg);
+        }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Check for damage multiplier, relic weapons etc.                      *
-     *                                                                       *
-     ************************************************************************/
-    uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc)
+    switch (attackType)
     {
-        if (PWeapon == nullptr)
-        {
-            return damage;
-        }
-
-        uint32 originalDamage    = damage;
-        int16  occ_do_triple_dmg = 0;
-        int16  occ_do_double_dmg = 0;
-
-        switch (attackType)
-        {
-            case PHYSICAL_ATTACK_TYPE::RANGED:
-            case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
-                occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG_RANGED) / 10;
-                occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG_RANGED) / 10;
-                break;
-            case PHYSICAL_ATTACK_TYPE::NORMAL:
-                if (weaponSlot == SLOT_MAIN) // Only applies to mainhand
-                {
-                    occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG) / 10;
-                    occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG) / 10;
-                }
-                break;
-            default:
-                break;
-        }
-
-        float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::OCC_DO_EXTRA_DMG) / 100.0f;
-        int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::EXTRA_DMG_CHANCE) / 10;
-
-        if (allowProc)
-        {
-            if (occ_extra_dmg > 3.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+        case PHYSICAL_ATTACK_TYPE::ZANSHIN:
+            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::ZANSHIN_DOUBLE_DAMAGE))
             {
-                return (uint32)(damage * occ_extra_dmg);
+                return originalDamage * 2;
             }
-            else if (occ_do_triple_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_triple_dmg)
+            break;
+        case PHYSICAL_ATTACK_TYPE::TRIPLE:
+            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DMG_RATE))
             {
-                return (uint32)(damage * 3.0f);
+                return originalDamage * 3;
             }
-            else if (occ_extra_dmg > 2.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+            break;
+        case PHYSICAL_ATTACK_TYPE::DOUBLE:
+            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DMG_RATE))
             {
-                return (uint32)(damage * occ_extra_dmg);
+                return originalDamage * 2;
             }
-            else if (occ_do_double_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_double_dmg)
+            break;
+        case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
+            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
             {
-                return (uint32)(damage * 2.0f);
+                return originalDamage * 2;
             }
-            else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+            break;
+        case PHYSICAL_ATTACK_TYPE::SAMBA:
+            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
             {
-                return (uint32)(damage * occ_extra_dmg);
+                return originalDamage * 2;
             }
-        }
-
-        switch (attackType)
-        {
-            case PHYSICAL_ATTACK_TYPE::ZANSHIN:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::ZANSHIN_DOUBLE_DAMAGE))
-                {
-                    return originalDamage * 2;
-                }
-                break;
-            case PHYSICAL_ATTACK_TYPE::TRIPLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DMG_RATE))
-                {
-                    return originalDamage * 3;
-                }
-                break;
-            case PHYSICAL_ATTACK_TYPE::DOUBLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DMG_RATE))
-                {
-                    return originalDamage * 2;
-                }
-                break;
-            case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
-                {
-                    return originalDamage * 2;
-                }
-                break;
-            case PHYSICAL_ATTACK_TYPE::SAMBA:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
-                {
-                    return originalDamage * 2;
-                }
-                break;
-            default:
-                break;
-        }
-        return originalDamage;
+            break;
+        default:
+            break;
     }
+    return originalDamage;
+}
 
 } // namespace attackutils

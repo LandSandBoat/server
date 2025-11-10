@@ -7,7 +7,6 @@ return {
     ['Anja-Enja']        = { event = 278 },
     ['Aora-Uora']        = { event = 378 },
     ['Arukoko']          = { event = 509 },
-    ['Buchi_Kohmrijah']  = { event = 591 },
     ['Bulolo']           = { event = 566 },
     ['Caliburn']         = { event = 599 },
     ['Chomoro-Kyotoro']  = { event = 432 },

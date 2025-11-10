@@ -27,12 +27,14 @@
 // Extensions to std namespace
 namespace std
 {
-    template <>
-    struct default_delete<FILE>
+
+template <>
+struct default_delete<FILE>
+{
+    void operator()(FILE* file) const
     {
-        void operator()(FILE* file) const
-        {
-            fclose(file);
-        }
-    };
+        fclose(file);
+    }
+};
+
 } // namespace std

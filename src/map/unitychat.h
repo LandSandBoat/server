@@ -45,13 +45,15 @@ private:
 
 namespace unitychat
 {
-    CUnityChat* LoadUnityChat(uint32 leader);
-    void        UnloadUnityChat(uint32 leader);
 
-    bool AddOnlineMember(CCharEntity* PChar, uint32 leader);
-    bool DelOnlineMember(CCharEntity* PChar, uint32 leader);
+CUnityChat* LoadUnityChat(uint32 leader);
+void        UnloadUnityChat(uint32 leader);
 
-    CUnityChat* GetUnityChat(uint32 leader);
+bool AddOnlineMember(CCharEntity* PChar, uint32 leader);
+bool DelOnlineMember(CCharEntity* PChar, uint32 leader);
+
+CUnityChat* GetUnityChat(uint32 leader);
+
 }; // namespace unitychat
 
 #endif

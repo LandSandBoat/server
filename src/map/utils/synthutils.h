@@ -33,30 +33,32 @@ class CCharEntity;
 
 namespace synthutils
 {
-    enum SYNTHESIS_ELEMENT
-    {
-        ELEMENT_FIRE      = 0,
-        ELEMENT_ICE       = 1,
-        ELEMENT_WIND      = 2,
-        ELEMENT_EARTH     = 3,
-        ELEMENT_LIGHTNING = 4,
-        ELEMENT_WATER     = 5,
-        ELEMENT_LIGHT     = 6,
-        ELEMENT_DARK      = 7
-    };
 
-    enum SYNTHESIS_RESULT
-    {
-        SYNTHESIS_FAIL    = 0,
-        SYNTHESIS_SUCCESS = 1,
-        SYNTHESIS_HQ      = 2,
-        SYNTHESIS_HQ2     = 3,
-        SYNTHESIS_HQ3     = 4
-    };
+enum SYNTHESIS_ELEMENT
+{
+    ELEMENT_FIRE      = 0,
+    ELEMENT_ICE       = 1,
+    ELEMENT_WIND      = 2,
+    ELEMENT_EARTH     = 3,
+    ELEMENT_LIGHTNING = 4,
+    ELEMENT_WATER     = 5,
+    ELEMENT_LIGHT     = 6,
+    ELEMENT_DARK      = 7
+};
 
-    void LoadSynthRecipes();
-    auto startSynth(CCharEntity* PChar) -> int32;
-    auto sendSynthDone(CCharEntity* PChar) -> int32;
-    void doSynthFail(CCharEntity* PChar);
-    void doSynthCriticalFail(CCharEntity* PChar);
+enum SYNTHESIS_RESULT
+{
+    SYNTHESIS_FAIL    = 0,
+    SYNTHESIS_SUCCESS = 1,
+    SYNTHESIS_HQ      = 2,
+    SYNTHESIS_HQ2     = 3,
+    SYNTHESIS_HQ3     = 4
+};
+
+void LoadSynthRecipes();
+auto startSynth(CCharEntity* PChar) -> int32;
+auto sendSynthDone(CCharEntity* PChar) -> int32;
+void doSynthFail(CCharEntity* PChar);
+void doSynthCriticalFail(CCharEntity* PChar);
+
 }; // namespace synthutils

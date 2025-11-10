@@ -26,102 +26,104 @@
 
 namespace synergyutils
 {
-    std::vector<SynergyRecipe> synergyRecipes;
 
-    void LoadSynergyRecipes()
+std::vector<SynergyRecipe> synergyRecipes;
+
+void LoadSynergyRecipes()
+{
+    const auto rset = db::preparedStmt("SELECT "
+                                       "id, "
+                                       "primary_skill, primary_rank, secondary_skill, secondary_rank, tertiary_skill, tertiary_rank, "
+                                       "cost_fire_fewell, cost_ice_fewell, cost_wind_fewell, cost_earth_fewell, "
+                                       "cost_lightning_fewell, cost_water_fewell, cost_light_fewell, cost_dark_fewell, "
+                                       "ingredient1, ingredient2, ingredient3, ingredient4, "
+                                       "ingredient5, ingredient6, ingredient7, ingredient8, "
+                                       "result, resultHQ1, resultHQ2, resultHQ3, "
+                                       "resultQty, resultHQ1Qty, resultHQ2Qty, resultHQ3Qty, "
+                                       "resultName "
+                                       "FROM synergy_recipes");
+    if (rset && rset->rowsCount())
     {
-        const auto rset = db::preparedStmt("SELECT "
-                                           "id, "
-                                           "primary_skill, primary_rank, secondary_skill, secondary_rank, tertiary_skill, tertiary_rank, "
-                                           "cost_fire_fewell, cost_ice_fewell, cost_wind_fewell, cost_earth_fewell, "
-                                           "cost_lightning_fewell, cost_water_fewell, cost_light_fewell, cost_dark_fewell, "
-                                           "ingredient1, ingredient2, ingredient3, ingredient4, "
-                                           "ingredient5, ingredient6, ingredient7, ingredient8, "
-                                           "result, resultHQ1, resultHQ2, resultHQ3, "
-                                           "resultQty, resultHQ1Qty, resultHQ2Qty, resultHQ3Qty, "
-                                           "resultName "
-                                           "FROM synergy_recipes");
-        if (rset && rset->rowsCount())
+        synergyRecipes.reserve(rset->rowsCount());
+
+        while (rset->next())
         {
-            synergyRecipes.reserve(rset->rowsCount());
+            auto recipe = SynergyRecipe{
+                .id = rset->get<uint32>("id"),
 
-            while (rset->next())
-            {
-                auto recipe = SynergyRecipe{
-                    .id = rset->get<uint32>("id"),
+                .primary_skill   = rset->get<uint8>("primary_skill"),
+                .primary_rank    = rset->get<uint8>("primary_rank"),
+                .secondary_skill = rset->get<uint8>("secondary_skill"),
+                .secondary_rank  = rset->get<uint8>("secondary_rank"),
+                .tertiary_skill  = rset->get<uint8>("tertiary_skill"),
+                .tertiary_rank   = rset->get<uint8>("tertiary_rank"),
 
-                    .primary_skill   = rset->get<uint8>("primary_skill"),
-                    .primary_rank    = rset->get<uint8>("primary_rank"),
-                    .secondary_skill = rset->get<uint8>("secondary_skill"),
-                    .secondary_rank  = rset->get<uint8>("secondary_rank"),
-                    .tertiary_skill  = rset->get<uint8>("tertiary_skill"),
-                    .tertiary_rank   = rset->get<uint8>("tertiary_rank"),
+                .cost_fire_fewell      = rset->get<uint8>("cost_fire_fewell"),
+                .cost_ice_fewell       = rset->get<uint8>("cost_ice_fewell"),
+                .cost_wind_fewell      = rset->get<uint8>("cost_wind_fewell"),
+                .cost_earth_fewell     = rset->get<uint8>("cost_earth_fewell"),
+                .cost_lightning_fewell = rset->get<uint8>("cost_lightning_fewell"),
+                .cost_water_fewell     = rset->get<uint8>("cost_water_fewell"),
+                .cost_light_fewell     = rset->get<uint8>("cost_light_fewell"),
+                .cost_dark_fewell      = rset->get<uint8>("cost_dark_fewell"),
 
-                    .cost_fire_fewell      = rset->get<uint8>("cost_fire_fewell"),
-                    .cost_ice_fewell       = rset->get<uint8>("cost_ice_fewell"),
-                    .cost_wind_fewell      = rset->get<uint8>("cost_wind_fewell"),
-                    .cost_earth_fewell     = rset->get<uint8>("cost_earth_fewell"),
-                    .cost_lightning_fewell = rset->get<uint8>("cost_lightning_fewell"),
-                    .cost_water_fewell     = rset->get<uint8>("cost_water_fewell"),
-                    .cost_light_fewell     = rset->get<uint8>("cost_light_fewell"),
-                    .cost_dark_fewell      = rset->get<uint8>("cost_dark_fewell"),
+                .ingredient1 = rset->get<uint16>("ingredient1"),
+                .ingredient2 = rset->get<uint16>("ingredient2"),
+                .ingredient3 = rset->get<uint16>("ingredient3"),
+                .ingredient4 = rset->get<uint16>("ingredient4"),
+                .ingredient5 = rset->get<uint16>("ingredient5"),
+                .ingredient6 = rset->get<uint16>("ingredient6"),
+                .ingredient7 = rset->get<uint16>("ingredient7"),
+                .ingredient8 = rset->get<uint16>("ingredient8"),
 
-                    .ingredient1 = rset->get<uint16>("ingredient1"),
-                    .ingredient2 = rset->get<uint16>("ingredient2"),
-                    .ingredient3 = rset->get<uint16>("ingredient3"),
-                    .ingredient4 = rset->get<uint16>("ingredient4"),
-                    .ingredient5 = rset->get<uint16>("ingredient5"),
-                    .ingredient6 = rset->get<uint16>("ingredient6"),
-                    .ingredient7 = rset->get<uint16>("ingredient7"),
-                    .ingredient8 = rset->get<uint16>("ingredient8"),
+                .result    = rset->get<uint16>("result"),
+                .resultHQ1 = rset->get<uint16>("resultHQ1"),
+                .resultHQ2 = rset->get<uint16>("resultHQ2"),
+                .resultHQ3 = rset->get<uint16>("resultHQ3"),
 
-                    .result    = rset->get<uint16>("result"),
-                    .resultHQ1 = rset->get<uint16>("resultHQ1"),
-                    .resultHQ2 = rset->get<uint16>("resultHQ2"),
-                    .resultHQ3 = rset->get<uint16>("resultHQ3"),
+                .resultQty    = rset->get<uint8>("resultQty"),
+                .resultHQ1Qty = rset->get<uint8>("resultHQ1Qty"),
+                .resultHQ2Qty = rset->get<uint8>("resultHQ2Qty"),
+                .resultHQ3Qty = rset->get<uint8>("resultHQ3Qty"),
 
-                    .resultQty    = rset->get<uint8>("resultQty"),
-                    .resultHQ1Qty = rset->get<uint8>("resultHQ1Qty"),
-                    .resultHQ2Qty = rset->get<uint8>("resultHQ2Qty"),
-                    .resultHQ3Qty = rset->get<uint8>("resultHQ3Qty"),
-
-                    .resultName = rset->get<std::string>("resultName").c_str(),
-                };
-                synergyRecipes.push_back(recipe);
-            }
+                .resultName = rset->get<std::string>("resultName").c_str(),
+            };
+            synergyRecipes.push_back(recipe);
         }
     }
+}
 
-    auto GetSynergyRecipeByID(uint32 id) -> std::optional<SynergyRecipe>
+auto GetSynergyRecipeByID(uint32 id) -> std::optional<SynergyRecipe>
+{
+    // TODO: Use a map instead of a vector for faster lookups
+    for (const auto& recipe : synergyRecipes)
     {
-        // TODO: Use a map instead of a vector for faster lookups
-        for (const auto& recipe : synergyRecipes)
+        if (recipe.id == id)
         {
-            if (recipe.id == id)
-            {
-                return recipe;
-            }
+            return recipe;
         }
-        return std::nullopt;
     }
+    return std::nullopt;
+}
 
-    auto GetSynergyRecipeByIngredients(uint16 ingredient1, uint16 ingredient2, uint16 ingredient3, uint16 ingredient4, uint16 ingredient5, uint16 ingredient6, uint16 ingredient7, uint16 ingredient8) -> std::optional<SynergyRecipe>
+auto GetSynergyRecipeByIngredients(uint16 ingredient1, uint16 ingredient2, uint16 ingredient3, uint16 ingredient4, uint16 ingredient5, uint16 ingredient6, uint16 ingredient7, uint16 ingredient8) -> std::optional<SynergyRecipe>
+{
+    // TODO: Use a map instead of a vector for faster lookups
+    for (const auto& recipe : synergyRecipes)
     {
-        // TODO: Use a map instead of a vector for faster lookups
-        for (const auto& recipe : synergyRecipes)
+        if (recipe.ingredient1 == ingredient1 &&
+            recipe.ingredient2 == ingredient2 &&
+            recipe.ingredient3 == ingredient3 &&
+            recipe.ingredient4 == ingredient4 &&
+            recipe.ingredient5 == ingredient5 &&
+            recipe.ingredient6 == ingredient6 &&
+            recipe.ingredient7 == ingredient7 &&
+            recipe.ingredient8 == ingredient8)
         {
-            if (recipe.ingredient1 == ingredient1 &&
-                recipe.ingredient2 == ingredient2 &&
-                recipe.ingredient3 == ingredient3 &&
-                recipe.ingredient4 == ingredient4 &&
-                recipe.ingredient5 == ingredient5 &&
-                recipe.ingredient6 == ingredient6 &&
-                recipe.ingredient7 == ingredient7 &&
-                recipe.ingredient8 == ingredient8)
-            {
-                return recipe;
-            }
+            return recipe;
         }
-        return std::nullopt;
     }
+    return std::nullopt;
+}
+
 } // namespace synergyutils

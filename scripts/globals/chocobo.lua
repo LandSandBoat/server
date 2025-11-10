@@ -197,7 +197,7 @@ end
 ---@param eventSucceed integer
 ---@return nil
 xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
-    local chocoGame = player:getLocalVar('[ChocoGame]DestCity')
+    local chocoGame = player:getCharVar('[ChocoGame]DestCity')
 
     if csid == eventSucceed and option == 0 then
         local mLvl     = player:getMainLvl()

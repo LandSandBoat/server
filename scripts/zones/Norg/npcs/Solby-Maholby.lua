@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         { xi.item.SCROLL_OF_SUITON_SAN,    125212 },
     }
 
-    player:showText(npc, zones[xi.zone.NORG].text.SOLBYMAHOLBY_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.NORG].text.SOLBYMAHOLBY_SHOP_DIALOG, 0, 0, 0, 0, true, false)
     xi.shop.general(player, stock)
 end
 

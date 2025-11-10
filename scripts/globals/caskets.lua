@@ -397,8 +397,6 @@ local function getDrops(npc, dropType, zoneId)
     -- Temp drops
     -----------------------------------
     if dropType == casketInfo.dropTypes.TEMP then
-        local temps = { 0, 0, 0 }
-
         -- Get item table.
         local tempDrops = xi.casket_loot.casketItems[zoneId].temps
         if casketInfo.splitZones[zoneId] then
@@ -412,28 +410,13 @@ local function getDrops(npc, dropType, zoneId)
 
         -- Get number of items in casket.
         local randomTable = { 1, 3, 1, 2, 1, 2, 1, 1, 3, 1, 2, 1 }
-        local itemCount   = randomTable[math.random(1, #randomTable)]
+        local itemCount = utils.randomEntry(randomTable)
 
-        -- Get total (sum) item weight.
-        local sum = 0
-        for _, entry in pairs(tempDrops) do
-            sum = sum + entry[2]
-        end
+        local temps = { 0, 0, 0 }
 
-        -- Get items.
+        -- roll for items
         for i = 1, itemCount do
-            local rand   = math.random() * sum -- note: NOT math.random(sum). That will truncate the fractional part of sum
-            local itemId = xi.item.POTION      -- Default to potion.
-
-            for _, entry in pairs(tempDrops) do
-                rand = rand - entry[2]
-                if rand <= 0 then
-                    itemId = entry[1]
-                    break
-                end
-            end
-
-            temps[i] = itemId
+            temps[i] = xi.itemUtils.pickItemRandom(tempDrops)
         end
 
         setTempItems(npc, temps[1], temps[2], temps[3])
@@ -441,8 +424,6 @@ local function getDrops(npc, dropType, zoneId)
     -- Item drops
     -----------------------------------
     elseif dropType == casketInfo.dropTypes.ITEM then
-        local items = { 0, 0, 0, 0 }
-
         -- Get item table.
         local drops = xi.casket_loot.casketItems[zoneId].items
         if casketInfo.splitZones[zoneId] then
@@ -456,35 +437,18 @@ local function getDrops(npc, dropType, zoneId)
 
         -- Get number of items in casket.
         local randomTable = { 1, 4, 1, 3, 1, 1, 2, 1, 3, 1, 2, 1 }
-        local itemCount   = randomTable[math.random(1, #randomTable)]
+        local itemCount = utils.randomEntry(randomTable)
 
-        -- Get total (sum) item weight.
-        local sum = 0
-        for _, entry in pairs(drops) do
-            sum = sum + entry[2]
-        end
+        local items = { 0, 0, 0, 0 }
 
-        -- Get items.
+        -- roll for items and give a chance for a regional item for every dropped item
         for i = 1, itemCount do
-            local rand = math.random() * sum -- note: NOT math.random(sum). That will truncate the fractional part of sum
-            local item = xi.item.POTION      -- Default to potion.
+            local itemId = xi.itemUtils.pickItemRandom(drops)
 
-            for _, entry in pairs(drops) do
-                rand = rand - entry[2]
-                if rand <= 0 then
-                    item = entry[1]
-                    break
-                end
-            end
-
-            if
-                item and
-                item ~= 0 and
-                math.random(1, 100) <= 5
-            then
-                items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #xi.casket_loot.casketItems[zoneId].regionalItems)]
+            if math.random(1, 100) <= 5 then
+                items[1] = utils.randomEntry(xi.casket_loot.casketItems[zoneId].regionalItems)
             else
-                items[i] = item
+                items[i] = itemId
             end
         end
 

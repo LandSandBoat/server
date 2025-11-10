@@ -36,39 +36,41 @@
 
 namespace
 {
-    constexpr uint32 MinTestCharId = 20000000;
-    constexpr uint32 MinTestAccId  = 20000000;
 
-    std::vector<std::string> charIdTables = {
-        "chars",
-        "char_chocobos",
-        "char_effects",
-        "char_equip",
-        "char_equip_saved",
-        "char_exp",
-        "char_flags",
-        "char_history",
-        "char_inventory",
-        "char_job_points",
-        "char_jobs",
-        "char_look",
-        "char_merit",
-        "char_monstrosity",
-        "char_pet",
-        "char_points",
-        "char_profile",
-        "char_recast",
-        "char_skills",
-        "char_spells",
-        "char_stats",
-        "char_storage",
-        "char_style",
-        "char_unlocks",
-        "char_vars",
+constexpr uint32 MinTestCharId = 20000000;
+constexpr uint32 MinTestAccId  = 20000000;
 
-        "accounts_parties",
-        "accounts_sessions",
-    };
+std::vector<std::string> charIdTables = {
+    "chars",
+    "char_chocobos",
+    "char_effects",
+    "char_equip",
+    "char_equip_saved",
+    "char_exp",
+    "char_flags",
+    "char_history",
+    "char_inventory",
+    "char_job_points",
+    "char_jobs",
+    "char_look",
+    "char_merit",
+    "char_monstrosity",
+    "char_pet",
+    "char_points",
+    "char_profile",
+    "char_recast",
+    "char_skills",
+    "char_spells",
+    "char_stats",
+    "char_storage",
+    "char_style",
+    "char_unlocks",
+    "char_vars",
+
+    "accounts_parties",
+    "accounts_sessions",
+};
+
 } // namespace
 
 // Cleans the given character ID or all characters with IDs >= MinTestCharId.
@@ -120,8 +122,11 @@ auto TestChar::create(const uint16_t zoneId) -> std::unique_ptr<TestChar>
     }
 
     auto accountName = std::format("TEST_{}", accId);
-    rset             = db::preparedStmt("INSERT INTO accounts (id, login, password) VALUES (?, ?, ?)",
-                                        accId, accountName, BCrypt::generateHash("password"));
+
+    rset = db::preparedStmt("INSERT INTO accounts (id, login, password) VALUES (?, ?, ?)",
+                            accId,
+                            accountName,
+                            BCrypt::generateHash("password"));
     if (!rset)
     {
         TestError("Unable to create new account");

@@ -23,23 +23,25 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "lua/luautils.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
 
 namespace
 {
-    const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
-    {
-        if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-        {
-            const auto sender       = PChar->id;
-            const auto senderName   = PChar->getName();
-            const auto receiver     = PNpc->id;
-            const auto receiverName = PNpc->getName();
 
-            // clang-format off
+const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
+    {
+        const auto sender       = PChar->id;
+        const auto senderName   = PChar->getName();
+        const auto receiver     = PNpc->id;
+        const auto receiverName = PNpc->getName();
+
+        // clang-format off
             Async::getInstance()->submit([itemId, quantity, sender, senderName, receiver, receiverName]()
             {
                 const auto tradeDate    = earth_time::timestamp();
@@ -49,9 +51,10 @@ namespace
                     ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, tradeDate);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -66,7 +69,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
     // If PChar is invisible don't allow the trade
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
-        PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotWhileInvisible);
+        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotWhileInvisible);
         return;
     }
 

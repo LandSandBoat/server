@@ -31,15 +31,11 @@
 
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
-#include "entities/mobentity.h"
 
 #include "lua/luautils.h"
 
-#include "packets/char_recast.h"
-#include "packets/message_basic.h"
-#include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
-#include "recast_container.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 

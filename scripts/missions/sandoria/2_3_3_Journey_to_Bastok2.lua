@@ -27,7 +27,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 8 and missionStatus <= 10 then
-                        return mission:progressEvent(217)
+                        return mission:event(217)
                     end
                 end,
             },
@@ -47,9 +47,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 9 then
-                        return mission:progressEvent(426)
+                        return mission:progressEvent(426, 0)
                     else
-                        return mission:progressEvent(427)
+                        return mission:event(427)
                     end
                 end,
             },
@@ -62,7 +62,7 @@ mission.sections =
                     if missionStatus == 8 then
                         return mission:progressEvent(355)
                     elseif missionStatus < 11 then
-                        return mission:progressEvent(356)
+                        return mission:event(356)
                     end
                 end,
             },
@@ -73,7 +73,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 8 and missionStatus <= 10 then
-                        return mission:progressEvent(211)
+                        return mission:event(211)
                     end
                 end,
             },
@@ -84,7 +84,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 8 and missionStatus <= 10 then
-                        return mission:progressEvent(208)
+                        return mission:event(208)
                     elseif missionStatus == 11 then
                         return mission:progressEvent(207)
                     end
