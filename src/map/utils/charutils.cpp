@@ -4763,6 +4763,23 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                 return;
             }
 
+            // Custom Era Code
+            if (PMob->m_Type & MOBTYPE_NOTORIOUS)
+            {
+                uint32 nmHuntCheck = charutils::GetCharVar(PMember, "NMHuntTarget");
+
+                if (PMob->id == nmHuntCheck)
+                {
+                    charutils::SetCharVar(PMember, "NMHuntClear", 1);
+
+                    if (lua["xi"]["nmHunt"]["checkKill"].valid())
+                    {
+                        auto checkKill = lua["xi"]["nmHunt"]["checkKill"];
+                        checkKill(PMember);
+                    }
+                }
+            }
+
             bool chainactive = false;
 
             const uint8 moblevel    = PMob->GetMLevel();

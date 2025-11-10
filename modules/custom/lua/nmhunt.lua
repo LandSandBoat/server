@@ -181,6 +181,10 @@ xi.nmHunt.isHuntActive = function(player)
     return completeBy > 0 and completeBy >= GetSystemTime()
 end
 
+xi.nmHunt.checkKill = function(player)
+    player:printToPlayer('You have killed your NM Hunt target! Return to the Explorer Moogle for your reward!', xi.msg.channel.SYSTEM_3)
+end
+
 xi.nmHunt.isOnCooldown = function(player)
     local nextHunt = player:getVar(xi.nmHunt.vars.NEXT_HUNT)
     return nextHunt > GetSystemTime()
