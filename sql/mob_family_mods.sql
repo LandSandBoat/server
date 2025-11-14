@@ -680,14 +680,6 @@ INSERT INTO `mob_family_mods` VALUES (265,36,55,1);  -- ROAM_COOL: 55
 -- Wyvern
 INSERT INTO `mob_family_mods` VALUES (266,36,55,1);  -- ROAM_COOL: 55
 
--- Wyvern-Guivre
-INSERT INTO `mob_family_mods` VALUES (267,4,30,1);   -- SIGHT_RANGE: 30
-INSERT INTO `mob_family_mods` VALUES (267,36,55,1);  -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (267,37,1,1);   -- ALWAYS_AGGRO: 1
-INSERT INTO `mob_family_mods` VALUES (267,82,300,1); -- RUN_SPEED_MULT: 300
-INSERT INTO `mob_family_mods` VALUES (267,288,25,0);  -- DOUBLE_ATTACK: 25
-INSERT INTO `mob_family_mods` VALUES (267,302,15,0);  -- TRIPLE_ATTACK: 15
-
 -- Wyvern-Undead
 INSERT INTO `mob_family_mods` VALUES (268,36,55,1);  -- ROAM_COOL: 55
 
