@@ -15,26 +15,25 @@ local content = Battlefield:new({
     entryNpc      = 'BC_Entrance',
     exitNpc       = 'Burning_Circle',
     requiredItems = { xi.item.CLOTHO_ORB, wearMessage = qubiaID.text.A_CRACK_HAS_FORMED, wornMessage = qubiaID.text.ORB_IS_CRACKED },
-    experimental  = true,
 })
 
 content.groups =
 {
     {
         mobs     = { 'Anansi' },
-        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     },
 
     {
         mobs     = { 'Son_of_Anansi' },
-        spawned  = false
+        spawned  = false,
+        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     }
 }
 
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                        weight = 1000, amount = 24000 }, -- Gil
+        { itemId = xi.item.GIL,                        weight = 1000, amount = 24000 },
     },
 
     {

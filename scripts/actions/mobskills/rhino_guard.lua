@@ -1,9 +1,6 @@
 -----------------------------------
 -- Rhino Guard
---
--- Description: Enhances evasion.
--- Type: Enhancing
--- Utsusemi/Blink absorb: N/A
+-- Description: Enhances evasion, duration scales with TP.
 -- Range: Self
 -- Notes: Very sharp evasion increase.
 -----------------------------------
@@ -15,7 +12,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, 30, 0, 60))
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 180, 480)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, 25, 0, duration))
 
     return xi.effect.EVASION_BOOST
 end

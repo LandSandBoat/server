@@ -66,6 +66,7 @@ public:
         uint8_t       masterjob_lv;    // PS2: (New; did not exist.)
         uint8_t       masterjob_flags; // PS2: (New; did not exist.)
         uint8_t       Name[16];        // PS2: Name
+        // 4 bytes padding after the name (itself rounded to nearest 4 bytes)
     };
 
     GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar, uint8_t MemberNumber, uint16_t memberflags, uint16_t ZoneID);

@@ -23,59 +23,81 @@ content:addEssentialMobs({ 'Macha', 'Neman' })
 content.loot =
 {
     {
-        { itemId = xi.item.BIRD_FEATHER, weight = 1000 }, -- Bird Feather
+        { itemId = xi.item.GIL,                    weight = 1000, amount = 3000 },
     },
 
     {
-        { itemId = xi.item.ASHIGARU_EARRING,   weight = 125 }, -- Ashigaru Earring
-        { itemId = xi.item.TRIMMERS_EARRING,   weight = 125 }, -- Trimmers Earring
-        { itemId = xi.item.BEATERS_EARRING,    weight = 125 }, -- Beaters Earring
-        { itemId = xi.item.HEALERS_EARRING,    weight = 125 }, -- Healers Earring
-        { itemId = xi.item.MERCENARYS_EARRING, weight = 125 }, -- Mercenarys Earring
-        { itemId = xi.item.SINGERS_EARRING,    weight = 125 }, -- Singers Earring
-        { itemId = xi.item.WIZARDS_EARRING,    weight = 125 }, -- Wizards Earring
-        { itemId = xi.item.WRESTLERS_EARRING,  weight = 125 }, -- Wrestlers Earring
+        { itemId = xi.item.BIRD_FEATHER,           weight = 1000 },
     },
 
     {
-        { itemId = xi.item.NONE,        weight = 125 }, -- nothing
-        { itemId = xi.item.AVATAR_BELT, weight = 125 }, -- Avatar Belt
-        { itemId = xi.item.DAGGER_BELT, weight = 125 }, -- Dagger Belt
-        { itemId = xi.item.LANCE_BELT,  weight = 125 }, -- Lance Belt
-        { itemId = xi.item.RAPIER_BELT, weight = 125 }, -- Rapier Belt
-        { itemId = xi.item.SARASHI,     weight = 125 }, -- Sarashi
-        { itemId = xi.item.SCYTHE_BELT, weight = 125 }, -- Scythe Belt
-        { itemId = xi.item.SHIELD_BELT, weight = 125 }, -- Shield Belt
+        quantity = 2,
+        { itemId = xi.item.NONE,                   weight = 500 },
+        { itemId = xi.item.BIRD_EGG,               weight = 250 },
+        { itemId = xi.item.BIRD_FEATHER,           weight = 250 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 500 }, -- nothing
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 125 }, -- Scroll Of Dispel
-        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 125 }, -- Scroll Of Erase
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 125 }, -- Scroll Of Magic Finale
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 125 }, -- Scroll Of Utsusemi Ni
+        quantity = 2,
+        { itemId = xi.item.AVATAR_BELT,            weight =  25 },
+        { itemId = xi.item.AXE_BELT,               weight =  25 },
+        { itemId = xi.item.CESTUS_BELT,            weight =  25 },
+        { itemId = xi.item.DAGGER_BELT,            weight =  25 },
+        { itemId = xi.item.GUN_BELT,               weight =  25 },
+        { itemId = xi.item.KATANA_OBI,             weight =  25 },
+        { itemId = xi.item.LANCE_BELT,             weight =  25 },
+        { itemId = xi.item.MACE_BELT,              weight =  25 },
+        { itemId = xi.item.PICK_BELT,              weight =  25 },
+        { itemId = xi.item.RAPIER_BELT,            weight =  25 },
+        { itemId = xi.item.SARASHI,                weight =  25 },
+        { itemId = xi.item.SCYTHE_BELT,            weight =  25 },
+        { itemId = xi.item.SHIELD_BELT,            weight =  25 },
+        { itemId = xi.item.SONG_BELT,              weight =  25 },
+        { itemId = xi.item.STAFF_BELT,             weight =  25 },
+        { itemId = xi.item.ASHIGARU_EARRING,       weight =  25 },
+        { itemId = xi.item.BEATERS_EARRING,        weight =  25 },
+        { itemId = xi.item.ESQUIRES_EARRING,       weight =  25 },
+        { itemId = xi.item.GENIN_EARRING,          weight =  25 },
+        { itemId = xi.item.HEALERS_EARRING,        weight =  25 },
+        { itemId = xi.item.KILLER_EARRING,         weight =  25 },
+        { itemId = xi.item.MAGICIANS_EARRING,      weight =  25 },
+        { itemId = xi.item.MERCENARYS_EARRING,     weight =  25 },
+        { itemId = xi.item.PILFERERS_EARRING,      weight =  25 },
+        { itemId = xi.item.SINGERS_EARRING,        weight =  25 },
+        { itemId = xi.item.TRIMMERS_EARRING,       weight =  25 },
+        { itemId = xi.item.WARLOCKS_EARRING,       weight =  25 },
+        { itemId = xi.item.WIZARDS_EARRING,        weight =  25 },
+        { itemId = xi.item.WRESTLERS_EARRING,      weight =  25 },
+        { itemId = xi.item.WYVERN_EARRING,         weight =  25 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
+        { itemId = xi.item.IRON_INGOT,             weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
+        { itemId = xi.item.ELM_LOG,                weight =  20 },
+        { itemId = xi.item.SARDONYX,               weight =   5 },
+        { itemId = xi.item.AMBER_STONE,            weight =   5 },
+        { itemId = xi.item.LAPIS_LAZULI,           weight =   5 },
+        { itemId = xi.item.TOURMALINE,             weight =   5 },
+        { itemId = xi.item.CLEAR_TOPAZ,            weight =   5 },
+        { itemId = xi.item.AMETHYST,               weight =   5 },
+        { itemId = xi.item.LIGHT_OPAL,             weight =   5 },
+        { itemId = xi.item.ONYX,                   weight =   5 },
+        { itemId = xi.item.HI_ETHER,               weight =  10 },
     },
 
     {
-        { itemId = xi.item.NONE,         weight = 136 }, -- nothing
-        { itemId = xi.item.BIRD_EGG,     weight = 125 }, -- Bird Egg
-        { itemId = xi.item.BIRD_FEATHER, weight =  50 }, -- Bird Feather
-        { itemId = xi.item.CHESTNUT_LOG, weight = 125 }, -- Chestnut Log
-        { itemId = xi.item.ELM_LOG,      weight = 188 }, -- Elm Log
-        { itemId = xi.item.HI_ETHER,     weight =  63 }, -- Hi-ether
-        { itemId = xi.item.HORN_QUIVER,  weight = 313 }, -- Horn Quiver
-    },
-
-    {
-        { itemId = xi.item.NONE,                 weight = 123 }, -- nothing
-        { itemId = xi.item.IRON_INGOT,           weight =  63 }, -- Iron Ingot
-        { itemId = xi.item.LAPIS_LAZULI,         weight = 125 }, -- Lapis Lazuli
-        { itemId = xi.item.LIGHT_OPAL,           weight = 125 }, -- Light Opal
-        { itemId = xi.item.MYTHRIL_INGOT,        weight =  63 }, -- Mythril Ingot
-        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE, weight =  63 }, -- Chunk Of Mythril Ore
-        { itemId = xi.item.ONYX,                 weight = 250 }, -- Onyx
-        { itemId = xi.item.CHUNK_OF_SILVER_ORE,  weight =  63 }, -- Chunk Of Silver Ore
-        { itemId = xi.item.SILVER_INGOT,         weight = 125 }, -- Silver Ingot
+        { itemId = xi.item.HORN_QUIVER,            weight = 225 },
+        { itemId = xi.item.SCORPION_QUIVER,        weight = 225 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 200 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 100 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 100 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 100 },
+        { itemId = xi.item.HI_POTION,              weight =  50 },
     },
 }
 

@@ -458,7 +458,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
 
     -- Set message to damage
     -- This is for AoE because its only set once
-    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+    if mob:getCurrentAction() == xi.action.category.PET_MOBABILITY_FINISH then
         if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
             skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
         end

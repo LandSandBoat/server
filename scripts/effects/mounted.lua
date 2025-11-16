@@ -24,6 +24,12 @@ effectObject.onEffectGain = function(target, effect)
     if not target:isInEvent() then
         target:setAnimation(animation)
     end
+
+    -- Chocobo and mounts uncharm current pet
+    local pet = target:getPet()
+    if pet ~= nil and pet:isCharmed() then
+        target:despawnPet()
+    end
 end
 
 effectObject.onEffectTick = function(target, effect)

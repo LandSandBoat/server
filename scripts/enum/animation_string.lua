@@ -30,12 +30,14 @@ For most things you can get away with using the wrong one, and they still just w
 xi.animationString =
 {
     -- Physical
+    BASIC_ATTACK              = 'atk0',
     ATTACK_1                  = 'ati0',
     ATTACK_2                  = 'ati1',
     ATTACK_3                  = 'ati2',
     CRITICAL_HIT              = 'chit',
 
     -- Ranged start
+    RANGED_START              = 'calg', -- Generic non-weapon specific
     RANGED_SINGING_START      = 'lc00',
     RANGED_WIND_INSTR_START   = 'lc01',
     RANGED_STRING_INSTR_START = 'lc02',
@@ -44,6 +46,8 @@ xi.animationString =
     RANGED_BOW_START          = 'lc06',
 
     -- Ranged stop
+    RANGED_STOP               = 'shlg', -- Generic non-weapon specific
+    RANGED_INTERRUPT          = 'splg', -- Generic non-weapon specific
     RANGED_SINGING_STOP       = 'ls00',
     RANGED_WIND_INSTR_STOP    = 'ls01',
     RANGED_STRING_INSTR_STOP  = 'ls02',
@@ -54,20 +58,35 @@ xi.animationString =
     -- Casting start
     CAST_BLACK_MAGIC_START    = 'cabk',
     CAST_BLUE_MAGIC_START     = 'cabl',
+    CAST_GEOMANCY_MAGIC_START = 'cage',
     CAST_ITEM_START           = 'cait',
     CAST_NINJA_START          = 'canj',
     CAST_SUMMONER_START       = 'casm',
     CAST_SONG_START           = 'caso',
+    CAST_TRUST_START          = 'cafa',
     CAST_WHITE_MAGIC_START    = 'cawh',
 
     -- Casting finish
     CAST_BLACK_MAGIC_STOP     = 'shbk',
     CAST_BLUE_MAGIC_STOP      = 'shbl',
+    CAST_GEOMANCY_MAGIC_STOP  = 'shge',
     CAST_ITEM_STOP            = 'shit',
     CAST_NINJA_STOP           = 'shnj',
     CAST_SUMMONER_STOP        = 'shsm',
     CAST_SONG_STOP            = 'shso',
+    CAST_TRUST_STOP           = 'shfa',
     CAST_WHITE_MAGIC_STOP     = 'shwh',
+
+    -- Casting interrupt
+    CAST_BLACK_MAGIC_INTERRUPT    = 'spbk',
+    CAST_BLUE_MAGIC_INTERRUPT     = 'spbl',
+    CAST_GEOMANCY_MAGIC_INTERRUPT = 'spge',
+    CAST_ITEM_INTERRUPT           = 'spit',
+    CAST_NINJA_INTERRUPT          = 'spnj',
+    CAST_SUMMONER_INTERRUPT       = 'spsm',
+    CAST_SONG_INTERRUPT           = 'spso',
+    CAST_TRUST_INTERRUPT          = 'spfa',
+    CAST_WHITE_MAGIC_INTERRUPT    = 'spwh',
 
     -- Actions
     JUMP_0                    = 'jmp0',
@@ -76,6 +95,8 @@ xi.animationString =
     RESTING_STOP              = 'res2',
     SITTING_START             = 'sit0',
     SITTING_STOP              = 'sit2',
+    SKILL_START               = 'cate',
+    SKILL_INTERRUPT           = 'spte',
 
     -- Effects
     EFFECT_DEATH              = 'dead',

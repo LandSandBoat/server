@@ -246,10 +246,16 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
 
         player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
 
+        -- Renting a chocobo force despawns every type of pets
+        -- Note: This does not honor cooldown reductions offered otherwise when dismissing pets with full life.
+        -- TODO: Supposed to despawn without animation
+        player:despawnPet()
+
         if info.pos then
             player:setPos(unpack(info.pos))
         end
     elseif chocoGame ~= 0 and csid == eventSucceed then
+        player:despawnPet()
         xi.chocoboGame.beginRace(player, option)
     end
 end

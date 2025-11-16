@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Team
@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "entities/mobentity.h"
 
 class CPetSkill
 {
@@ -47,9 +48,9 @@ public:
     uint8           getFlag() const;
     timer::duration getAnimationTime() const;
     timer::duration getActivationTime() const;
-    uint16          getMsg() const;
+    auto            getMsg() const -> MSGBASIC_ID;
     uint8           getSkillFinishCategory() const;
-    uint16          getAoEMsg() const;
+    auto            getAoEMsg() const -> MSGBASIC_ID;
     uint16          getValidTargets() const;
     int16           getTP() const;
     auto            getHP() const -> int32;

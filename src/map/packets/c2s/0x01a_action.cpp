@@ -54,7 +54,21 @@ const auto actionToStr = [](const GP_CLI_COMMAND_ACTION_ACTIONID actionIn)
 auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_ACTION_ACTIONID>(ActionID);
+        .oneOf<GP_CLI_COMMAND_ACTION_ACTIONID>(ActionID)
+        .custom([&](PacketValidator& pv)
+                {
+                    switch (static_cast<GP_CLI_COMMAND_ACTION_ACTIONID>(ActionID))
+                    {
+                        // /assist and /blockaid can be performed while healing
+                        // Everything else is blocked.
+                        case GP_CLI_COMMAND_ACTION_ACTIONID::Assist:
+                        case GP_CLI_COMMAND_ACTION_ACTIONID::Blockaid:
+                            return;
+                        default:
+                            pv.isNotResting(PChar)
+                                .isNotCrafting(PChar);
+                    }
+                });
 }
 
 void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) const

@@ -523,6 +523,20 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         return false;
     }
 
+    // Clear timer queue for entity before removal
+    if (PEntity->PAI)
+    {
+        PEntity->PAI->ClearTimerQueue();
+    }
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
+    {
+        if (PChar->PPet && PChar->PPet->PAI)
+        {
+            PChar->PPet->PAI->ClearTimerQueue();
+        }
+    }
+
     auto found = false;
     if (PEntity->objtype == TYPE_PC)
     {

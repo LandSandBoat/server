@@ -100,7 +100,7 @@ entity.onMobEngage = function(mob, target)
         if
             qnAern and
             qnAern:isAlive() and
-            qnAern:getCurrentAction() == xi.action.ROAMING
+            qnAern:getCurrentAction() == xi.action.category.ROAMING
         then
             qnAern:updateEnmity(target)
         end

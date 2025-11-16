@@ -43,6 +43,27 @@ xi.combat.physicalHitRate.checkAnticipated = function(attacker, defender)
     return true
 end
 
+-- https://www.bg-wiki.com/ffxi/Hit_Rate
+-- This is only for melee attacks
+---@param attacker CBaseEntity
+---@param slot xi.attackAnimation
+---@return number
+xi.combat.physicalHitRate.getPhysicalHitRateCap = function(attacker, slot)
+    if attacker:isPet() then
+        return 0.99
+    elseif attacker:isPC() then
+        if attacker:isUsingH2H() then -- Kicks aren't explicitly listed as 99%, TODO: needs verification
+            return 0.99
+        elseif attacker:isWeaponTwoHanded() or slot >= xi.attackAnimation.LEFT_ATTACK then -- 1h offhand, ranged
+            return 0.95
+        end
+
+        return 0.99 -- 1h mainhand
+    end
+
+    return 0.95 -- mobs, charmed pets. -- Do trusts have a 99% or 95% acc cap?
+end
+
 ---@param attacker CBaseEntity
 ---@param target CBaseEntity
 ---@param bonus number
@@ -50,7 +71,9 @@ end
 ---@param isWeaponskill boolean
 ---@return number
 xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus, slot, isWeaponskill)
-    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect             = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(attacker)
+    local hitRateCap                 = xi.combat.physicalHitRate.getPhysicalHitRateCap(attacker, slot)
 
     if
         isWeaponskill and
@@ -96,23 +119,39 @@ xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus,
         bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
     end
 
+    if attacker:isPC() and attacker:isFacing(target) then
+        bonus = bonus + attacker:getMerit(xi.merit.CLOSED_POSITION)
+    end
+
+    if target:isPC() and target:isFacing(attacker) then
+        eva = eva + target:getMerit(xi.merit.CLOSED_POSITION)
+    end
+
     acc = acc + bonus
 
-    -- Accuracy Bonus, doesn't apply to PCs
-    if not attacker:isPC() and attacker:getMainLvl() > target:getMainLvl() then
-        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
+    if shouldApplyLevelCorrection then
+        local dlvl = attacker:getMainLvl() - target:getMainLvl()
 
-    -- Accuracy Penalty, only applies to PCs -- TODO: does this apply to player pets?
-    elseif attacker:isPC() and attacker:getMainLvl() < target:getMainLvl() then
-        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
+        -- cap dlvl for avatars. It's known to cap at 38
+        if attacker:isAvatar() then
+            dlvl = utils.clamp(dlvl, 0, 38)
+        end
+
+        -- Accuracy Bonus, doesn't apply to PCs
+        if not attacker:isPC() and attacker:getMainLvl() > target:getMainLvl() then
+            acc = acc + dlvl * 4
+
+        -- Accuracy Penalty, only applies to PCs -- TODO: does this apply to player pets?
+        elseif attacker:isPC() and attacker:getMainLvl() < target:getMainLvl() then
+            acc = acc - dlvl * 4
+        end
     end
 
     local hitdiff = (acc - eva) / 2
     local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
-    -- TODO: per weapon caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = utils.clamp(hitrate, 0.2, hitRateCap)
 
     return hitrate
 end

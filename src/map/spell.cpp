@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -29,6 +29,7 @@
 #include "mob_spell_list.h"
 #include "spell.h"
 
+#include "enums/four_cc.h"
 #include "map_engine.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
@@ -104,7 +105,7 @@ void CSpell::setName(const std::string& name)
     m_name = name;
 }
 
-SPELLGROUP CSpell::getSpellGroup()
+auto CSpell::getSpellGroup() const -> SPELLGROUP
 {
     return m_spellGroup;
 }
@@ -283,33 +284,31 @@ void CSpell::setMultiplier(float multiplier)
     m_multiplier = multiplier;
 }
 
-uint16 CSpell::getMessage() const
+auto CSpell::getMessage() const -> MSGBASIC_ID
 {
-    return m_message;
+    return static_cast<MSGBASIC_ID>(m_message);
 }
 
-uint16 CSpell::getAoEMessage() const
+auto CSpell::getAoEMessage() const -> MSGBASIC_ID
 {
     switch (m_message)
     {
-        case 7: // recovers HP
-            return 367;
-        case 93: // vanishes
-            return 273;
-        case 85: // resists
-            return 284;
-        case 230:       // casts gain the effect of
-            return 266; // gains the effect of
-        case 236:       // is blind
-            // return 203;
-            return 277;
-            // 279
-        case 237: // if its a damage spell msg and is hitting the 2nd+ target
-            return 278;
-        case 2: // if its a damage spell msg and is hitting the 2nd+ target
-            return 264;
+        case MSGBASIC_MAGIC_RECOVERS_HP:
+            return MSGBASIC_TARGET_RECOVERS_HP;
+        case MSGBASIC_MAGIC_TELEPORT:
+            return MSGBASIC_TARGET_TELEPORT;
+        case MSGBASIC_MAGIC_RESISTED:
+            return MSGBASIC_MAGIC_RESISTED_TARGET;
+        case MSGBASIC_MAGIC_GAINS_EFFECT:
+            return MSGBASIC_TARGET_GAINS_EFFECT;
+        case MSGBASIC_MAGIC_STATUS:
+            return MSGBASIC_TARGET_STATUS;
+        case MSGBASIC_MAGIC_RECEIVES_EFFECT:
+            return MSGBASIC_TARGET_RECEIVES_EFFECT;
+        case MSGBASIC_MAGIC_DAMAGE:
+            return MSGBASIC_TARGET_TAKES_DAMAGE;
         default:
-            return m_message;
+            return static_cast<MSGBASIC_ID>(m_message);
     }
 }
 
@@ -431,6 +430,33 @@ float CSpell::getRange() const
 uint32 CSpell::getPrimaryTargetID() const
 {
     return m_primaryTargetID;
+}
+
+auto CSpell::getFourCC(const bool interrupt) const -> FourCC
+{
+    switch (this->getSpellGroup())
+    {
+        case SPELLGROUP_WHITE:
+            return interrupt ? FourCC::WhiteMagicInterrupt : FourCC::WhiteMagicCast;
+        case SPELLGROUP_BLACK:
+            return interrupt ? FourCC::BlackMagicInterrupt : FourCC::BlackMagicCast;
+        case SPELLGROUP_BLUE:
+            return interrupt ? FourCC::BlueMagicInterrupt : FourCC::BlueMagicCast;
+        case SPELLGROUP_SONG:
+            return interrupt ? FourCC::SongMagicInterrupt : FourCC::SongMagicCast;
+        case SPELLGROUP_NINJUTSU:
+            return interrupt ? FourCC::NinjutsuMagicInterrupt : FourCC::NinjutsuMagicCast;
+        case SPELLGROUP_SUMMONING:
+            return interrupt ? FourCC::SummonMagicInterrupt : FourCC::SummonMagicCast;
+        case SPELLGROUP_GEOMANCY:
+            return interrupt ? FourCC::GeomancyMagicInterrupt : FourCC::GeomancyMagicCast;
+        case SPELLGROUP_TRUST:
+            return interrupt ? FourCC::TrustMagicInterrupt : FourCC::TrustMagicCast;
+        case SPELLGROUP_NONE:
+        default:
+            // Uh...
+            return FourCC::WhiteMagicInterrupt;
+    }
 }
 
 void CSpell::setContentTag(const std::string& contentTag)

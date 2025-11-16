@@ -20,7 +20,10 @@
 */
 
 #include "lua/helpers/lua_client_entity_pair_actions.h"
+
+#include "ai/ai_container.h"
 #include "common/logging.h"
+#include "common/utils.h"
 #include "enums/packet_c2s.h"
 #include "lua/helpers/lua_client_entity_pair_entities.h"
 #include "lua/helpers/lua_client_entity_pair_events.h"
@@ -28,6 +31,7 @@
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_spy.h"
 #include "map/ability.h"
+#include "map/ai/controllers/player_controller.h"
 #include "map/enums/party_kind.h"
 #include "map/lua/lua_baseentity.h"
 #include "map/packets/c2s/0x01a_action.h"
@@ -37,6 +41,7 @@
 #include "map/packets/c2s/0x074_group_solicit_res.h"
 #include "map/spell.h"
 #include "packets/c2s/0x015_pos.h"
+#include "test_char.h"
 #include "test_common.h"
 
 CLuaClientEntityPairActions::CLuaClientEntityPairActions(CLuaClientEntityPair* parent)
@@ -51,13 +56,14 @@ CLuaClientEntityPairActions::CLuaClientEntityPairActions(CLuaClientEntityPair* p
  *  Notes   :
  ************************************************************************/
 
-void CLuaClientEntityPairActions::move(const float x, const float y, const float z) const
+void CLuaClientEntityPairActions::move(const float x, const float y, const float z, sol::optional<uint8_t> rot) const
 {
     const auto packet    = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_POS);
     auto*      posPacket = packet->as<GP_CLI_COMMAND_POS>();
     posPacket->x         = x;
     posPacket->z         = y;
     posPacket->y         = z;
+    posPacket->dir       = rot.value_or(0);
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -383,6 +389,56 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
     }
 }
 
+/************************************************************************
+ *  Function: acceptRaise()
+ *  Purpose : Emits packet to accept a pending raise prompt.
+ *  Example : player.actions:acceptRaise()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::acceptRaise() const
+{
+    const auto packet                      = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_ACTION);
+    auto*      responsePacket              = packet->as<GP_CLI_COMMAND_ACTION>();
+    responsePacket->ActionID               = static_cast<uint8_t>(GP_CLI_COMMAND_ACTION_ACTIONID::RaiseMenu);
+    responsePacket->HomepointMenu.StatusId = GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::Accept;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: engage()
+ *  Purpose : Moves char in range of mob and engages it.
+ *  Example : player.actions:engage(mob)
+ *  Notes   : Will make both entities face each other.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::engage(CLuaBaseEntity* mob) const
+{
+    auto* PChar = parent_->testChar()->entity();
+    auto* PMob  = mob->GetBaseEntity();
+
+    // 1. Move the player next to the mob
+    this->move(PMob->loc.p.x - 1.0f, PMob->loc.p.y, PMob->loc.p.z, std::nullopt);
+
+    // 2. Make the player and the mob face each other
+    PChar->loc.p.rotation = worldAngle(PChar->loc.p, PMob->loc.p);
+    PMob->loc.p.rotation  = worldAngle(PMob->loc.p, PChar->loc.p);
+
+    // 3. Change last attack time so we can engage immediately
+    auto* controller = static_cast<CPlayerController*>(parent_->testChar()->entity()->PAI->GetController());
+    controller->setLastAttackTime(timer::now() - 30s);
+
+    // 4. Send packet to engage
+    const auto packet       = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_ACTION);
+    auto*      attackPacket = packet->as<GP_CLI_COMMAND_ACTION>();
+    attackPacket->UniqueNo  = mob->getID();
+    attackPacket->ActIndex  = mob->getTargID();
+    attackPacket->ActionID  = static_cast<uint8_t>(GP_CLI_COMMAND_ACTION_ACTIONID::Attack);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
 void CLuaClientEntityPairActions::Register()
 {
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
@@ -398,4 +454,6 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("formAlliance", CLuaClientEntityPairActions::formAlliance);
     SOL_REGISTER("acceptPartyInvite", CLuaClientEntityPairActions::acceptPartyInvite);
     SOL_REGISTER("tradeNpc", CLuaClientEntityPairActions::tradeNpc);
+    SOL_REGISTER("acceptRaise", CLuaClientEntityPairActions::acceptRaise);
+    SOL_REGISTER("engage", CLuaClientEntityPairActions::engage);
 }

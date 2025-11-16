@@ -9,10 +9,10 @@ local entity = {}
 local function usingAbility(mob)
     local action = mob:getCurrentAction()
     if
-        action == xi.action.MAGIC_CASTING or
-        action == xi.action.MAGIC_FINISH or
-        action == xi.action.MOBABILITY_START or
-        action == xi.action.MOBABILITY_USING
+        action == xi.action.category.MAGIC_CASTING or
+        action == xi.action.category.MAGIC_FINISH or
+        action == xi.action.category.MOBABILITY_START or
+        action == xi.action.category.MOBABILITY_USING
     then
         return true
     end

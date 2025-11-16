@@ -115,14 +115,14 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
         local naturalH2hDamage = math.floor(actor:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
 
         if actor:isMob() then
-            local mobH2HPenalty = 1.0
+            local mobH2HPenalty = 1
             local regionID      = actor:getCurrentRegion()
             local fSTR          = xi.combat.physical.calculateMeleeStatFactor(actor, target)
 
             if regionID <= xi.region.LIMBUS then
                 mobH2HPenalty = 0.425 -- Vanilla - COP
             else
-                mobH2HPenalty = 0.650
+                mobH2HPenalty = 0.65
             end
 
             baseDamage = actor:getWeaponDmg() + bonusBasePhysicalDamage
@@ -207,7 +207,7 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
             effect and
             power < 30
         then
-            local jpBonus = actor:getJobPointLevel(xi.jp.RESTRAINT) * 2
+            local jpBonus = actor:getJobPointLevel(xi.jp.RESTRAINT_EFFECT) * 2
 
             -- Convert weapon delay and divide
             -- Pull remainder of previous hit's value from Effect Sub Power
@@ -215,10 +215,10 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
             local remainder     = effect:getSubPower() / 100
 
             -- Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
-            boostPerRound = remainder + boostPerRound * (1 + actor:getMod(xi.Mod.ENHANCES_RESTRAINT) / 100) * (1 + jpBonus / 100)
+            boostPerRound = remainder + boostPerRound * (1 + actor:getMod(xi.mod.ENHANCES_RESTRAINT) / 100) * (1 + jpBonus / 100)
 
             -- Calculate new remainder and multiply by 100 so significant digits aren't lost
-            remainder     = math.floor((1 - (math.ceil(boostPerRound) - boostPerRound)) * 100)
+            remainder     = math.floor((1 - math.ceil(boostPerRound) - boostPerRound) * 100)
             boostPerRound = math.floor(boostPerRound)
 
             -- Cap total power to +30% WSD

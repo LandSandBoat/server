@@ -271,7 +271,7 @@ local attackTypeShields =
 
 xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
     local missMessage = xi.msg.basic.SKILL_MISS
-    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+    if mob:getCurrentAction() == xi.action.category.PET_MOBABILITY_FINISH then
         missMessage = xi.msg.basic.JA_MISS_2
     end
 
@@ -287,7 +287,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- set message to damage
     -- this is for AoE because its only set once
-    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+    if mob:getCurrentAction() == xi.action.category.PET_MOBABILITY_FINISH then
         if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
             skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
         end

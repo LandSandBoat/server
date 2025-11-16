@@ -32,7 +32,7 @@ public:
     void returnValue(const sol::object& value);
     void sideEffect(const sol::protected_function& func);
 
-    auto        operator()(sol::variadic_args args) -> sol::object override;
+    auto        operator()(sol::variadic_args args) -> sol::as_returns_t<std::vector<sol::object>> override;
     static void Register();
 
 private:

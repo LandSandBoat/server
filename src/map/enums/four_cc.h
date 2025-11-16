@@ -27,15 +27,14 @@
 // Note: Values are byte-swapped for little-endian storage.
 enum class FourCC : uint32_t
 {
-    UntestedInterrupt      = 28787,      // "sp"?
-    Attack                 = 0x306B7461, // "atk0"
+    BasicAttack            = 0x306B7461, // "atk0"
     SkillUse               = 0x65746163, // "cate"
     SkillInterrupt         = 0x65747073, // "spte"
     ItemUse                = 0x74696163, // "cait"
     ItemInterrupt          = 0x74697073, // "spit"
-    RangeStart             = 0x676C6163, // "calg"
-    RangeInterrupt         = 0x676C7073, // "splg"
-    RangeFinish            = 0x676C6873, // "shlg"
+    RangedStart            = 0x676C6163, // "calg"
+    RangedInterrupt        = 0x676C7073, // "splg"
+    RangedFinish           = 0x676C6873, // "shlg"
     WhiteMagicCast         = 0x68776163, // "cawh"
     BlackMagicCast         = 0x6B626163, // "cabk"
     BlueMagicCast          = 0x6C626163, // "cabl"

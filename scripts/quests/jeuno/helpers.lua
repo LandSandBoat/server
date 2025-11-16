@@ -435,6 +435,7 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                 {
                     onTrigger = function(player, npc)
                         if canStartQuest(player) then
+                            quest:setVar(player, 'Option', player:getMainJob())
                             return quest:progressEvent(155)
                         end
                     end,
@@ -443,7 +444,9 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                 onEventFinish =
                 {
                     [155] = function(player, csid, option, npc)
-                        quest:begin(player)
+                        if quest:getVar(player, 'Option') == player:getMainJob() then
+                            quest:begin(player)
+                        end
                     end,
                 },
             },

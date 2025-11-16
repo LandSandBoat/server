@@ -27,6 +27,12 @@ xi.mobSkill =
     PIT_AMBUSH_1             =  278,
     MANDIBULAR_BITE_1        =  279,
 
+    STOMPING                 =  281,
+
+    WHISTLE                  =  285,
+    BERSERK_DHALMEL          =  286,
+    HEALING_BREEZE           =  287,
+
     SUBSTITUTE               =  307,
     FROGKICK_1               =  308,
     SPORE_1                  =  309,
@@ -58,6 +64,9 @@ xi.mobSkill =
     FLURRY_OF_RAGE           =  397,
     WHISPERS_OF_IRE          =  398,
 
+    HAMMER_BEAK              =  406,
+
+    BALEFUL_GAZE_COCKATRICE  =  411,
     RANGED_ATTACK_2          =  412,
 
     SCISSION_THRUST          =  419, -- Mammet-800
@@ -67,6 +76,8 @@ xi.mobSkill =
     SANDSPIN                 =  426,
 
     MICROQUAKE               =  441, -- Mammet-800
+
+    BIG_SCISSORS             =  444,
 
     PERCUSSIVE_FOIN          =  447, -- Mammet-800
 
@@ -97,7 +108,9 @@ xi.mobSkill =
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
     BLOW                     =  581,
-    BLANK_GAZE              =   586,
+    BLANK_GAZE               =  586,
+
+    SWEEP                    =  620,
 
     VULTURE_3                =  626,
 
@@ -211,6 +224,8 @@ xi.mobSkill =
 
     CALL_BEAST               = 1017, -- "Tango with a Tracker" Shikaree X
 
+    HOWL                     = 1062,
+
     RANGED_ATTACK_3          = 1154,
 
     SLIPSTREAM_1             = 1157,
@@ -264,6 +279,10 @@ xi.mobSkill =
     PROMYVION_BRUME_2        = 1276,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
+
+    CONTAGION_TRANSFER       = 1333,
+    CONTAMINATION            = 1334,
+    TOXIC_PICK               = 1335,
 
     KNIFE_EDGE_CIRCLE        = 1341,
     TRAIN_FALL               = 1342,
@@ -384,6 +403,9 @@ xi.mobSkill =
     OPPRESSIVE_GLARE         = 2392,
 
     ROAR_3                   = 2406,
+
+    AQUA_BLAST               = 2437,
+    HYDRO_WAVE               = 2439,
 
     INFERNO_4                = 2480, -- Unknown usage.
     TIDAL_WAVE_4             = 2481, -- Unknown usage.

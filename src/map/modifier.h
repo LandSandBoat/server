@@ -631,13 +631,16 @@ enum class Mod
     ENHANCES_STRAFE            = 282,  // Strafe merit augment, +50 TP gained per merit level on breath use.
     ENHANCES_SPIRIT_LINK       = 281,  // Adds erase/-na to Spirit Link
 
-    // Summoner
-    AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
-    WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
-    DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
-    DAY_PERPETUATION_HALF     = 1170, // if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
-    WEATHER_PERPETUATION_HALF = 1171, // if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
-    PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
+    // Summoner: Perpetuation costs.
+    AVATAR_PERPETUATION         = 371,  // stores base cost of current avatar
+    WEATHER_REDUCTION           = 372,  // stores perpetuation reduction depending on weather
+    DAY_REDUCTION               = 373,  // stores perpetuation reduction depending on day
+    PERPETUATION_REDUCTION      = 346,  // stores the MP/tick reduction from gear
+    HALF_PERPETUATION_CARBUNCLE = 356,  // if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
+    HALF_PERPETUATION_DAY       = 1170, // if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
+    HALF_PERPETUATION_WEATHER   = 1171, // if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
+
+    // Summoner: Others.
     BP_DELAY                  = 357,  // stores blood pact delay reduction
     ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
     BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
@@ -1118,9 +1121,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs:
-    //   356
-    //   1172 and onward
+    // SPARE IDs: 1172 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

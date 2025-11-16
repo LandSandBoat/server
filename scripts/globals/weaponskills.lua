@@ -83,7 +83,7 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
         bonusHits = bonusHits + 1
     elseif firstHit and math.random(1, 100) <= oaThriceRate then -- Can only proc on first hit
         bonusHits = bonusHits + 2
-    elseif firstHit and math.random(1, 100) <= oaTwiceRate then -- Can only proc on first hit
+    elseif firstHit and math.random(1, 100) <= oaTwiceRate then  -- Can only proc on first hit
         bonusHits = bonusHits + 1
     end
 
@@ -128,7 +128,7 @@ xi.weaponskills.getRangedHitRate = function(attacker, target, bonus)
 
     acc = acc + bonus
 
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus
+    if attacker:getMainLvl() > target:getMainLvl() then     -- acc bonus
         acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
     elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty
         acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
@@ -188,16 +188,6 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
         return hitDamage, calcParams
     end
 
-    -- check guard
-    if
-        calcParams.attackType == xi.attackType.PHYSICAL and
-        not calcParams.guaranteedHit and
-        xi.combat.physical.isGuarded(target, attacker)
-    then
-        -- guarded logic
-        return hitDamage, calcParams
-    end
-
     local critChance = math.random() -- See if we land a critical hit
     criticalHit = (wsParams.critVaries and critChance <= calcParams.critRate) or
         calcParams.forcedFirstCrit or
@@ -218,6 +208,15 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
     -- handle blocking and reduce the hit damage if needed
     if xi.combat.physical.isBlocked(target, attacker) then
         hitDamage = hitDamage - xi.combat.physical.getDamageReductionForBlock(target, attacker, hitDamage)
+    end
+
+    -- handle guard and reduce the hit damage if needed
+    if
+        calcParams.attackType == xi.attackType.PHYSICAL and
+        xi.combat.physical.isGuarded(target, attacker)
+    then
+        calcParams.pdif        = math.max(calcParams.pdif - 1.0, 0)
+        calcParams.guardedHits = calcParams.guardedHits + 1
     end
 
     calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -367,6 +366,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.shadowsAbsorbed    = 0
     calcParams.mainhandHitsLanded = 0
     calcParams.offhandHitsLanded  = 0
+    calcParams.guardedHits        = 0
 
     -- Get ammo information
     if isRanged and attacker:isPC() then
@@ -681,7 +681,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
         ['type']       = xi.attackType.PHYSICAL,
         ['slot']       = xi.slot.MAIN,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.MAIN),
-        ['damageType'] = attacker:getWeaponDamageType(xi.slot.MAIN)
+        ['damageType'] = attacker:getWeaponDamageType(xi.slot.MAIN),
     }
 
     local calcParams = {}
@@ -761,7 +761,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         ['type']       = xi.attackType.RANGED,
         ['slot']       = xi.slot.RANGED,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.RANGED),
-        ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED)
+        ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED),
     }
 
     local calcParams =
@@ -786,7 +786,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         bonusfTP                = gearFTP,
         bonusAcc                = gearAcc + attacker:getMod(xi.mod.WSACC),
         bonusWSmods             = wsParams.bonusWSmods or 0,
-        attackType              = xi.attackType.RANGED
+        attackType              = xi.attackType.RANGED,
     }
     if wsParams.accVaries then
         -- applied to all hits (This is a penalty!)
@@ -851,7 +851,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
         ['bonusTP']         = wsParams.bonusTP or 0,
-        ['wsID']            = wsID
+        ['wsID']            = wsID,
     }
 
     local gearFTP = xi.combat.physical.calculateFTPBonus(attacker)
@@ -940,8 +940,12 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             end
 
             if finaldmg > 0 then
-                action:reaction(defender:getID(), xi.reaction.HIT)
                 action:speceffect(defender:getID(), xi.specEffect.RECOIL)
+                if wsResults.guardedHits and wsResults.guardedHits > 0 then
+                    action:reaction(defender:getID(), xi.reaction.GUARDED)
+                else
+                    action:reaction(defender:getID(), xi.reaction.HIT)
+                end
             end
         else
             if primaryMsg then

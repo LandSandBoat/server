@@ -340,7 +340,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (value < 0)
         {
-            actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+            actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
             actionTarget.param     = -value;
         }
     }

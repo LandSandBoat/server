@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    return xi.job_utils.dancer.useStepAbility(player, target, ability, action, xi.effect.WEAKENED_DAZE_1, 3, 7)
+    return xi.job_utils.dancer.useStepAbility(player, target, ability, action, xi.effect.WEAKENED_DAZE_1)
 end
 
 return abilityObject

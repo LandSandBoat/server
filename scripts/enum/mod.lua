@@ -466,7 +466,6 @@ xi.mod =
     ENSPELL_CHANCE                  = 856,
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
-    PERPETUATION_REDUCTION          = 346,
     SPIKES_DMG_BONUS                = 1079, -- Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     -- fTP modifiers
@@ -624,11 +623,16 @@ xi.mod =
     REGAIN                          = 368,
     REFRESH                         = 369,
     REGEN                           = 370,
+
+    -- Perpetuation Cost
     AVATAR_PERPETUATION             = 371,
     WEATHER_REDUCTION               = 372,
     DAY_REDUCTION                   = 373,
-    DAY_PERPETUATION_HALF           = 1170,
-    WEATHER_PERPETUATION_HALF       = 1171,
+    PERPETUATION_REDUCTION          = 346,
+    HALF_PERPETUATION_CARBUNCLE     = 356,  -- if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
+    HALF_PERPETUATION_DAY           = 1170, -- if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
+    HALF_PERPETUATION_WEATHER       = 1171, -- if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
+
     CURE_POTENCY                    = 374,
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,

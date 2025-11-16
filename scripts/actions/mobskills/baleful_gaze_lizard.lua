@@ -4,7 +4,6 @@
 -- Type: Gaze
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Single gaze
--- Notes: Nightmare Cockatrice extends this to a fan-shaped AOE.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

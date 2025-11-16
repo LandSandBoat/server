@@ -28,6 +28,7 @@
 #include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
+#include "utils/synthutils.h"
 
 namespace
 {
@@ -118,4 +119,13 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     luautils::OnTrade(PChar, PNpc);
     PChar->TradeContainer->unreserveUnconfirmed();
+    if (PChar->isInEvent())
+    {
+        // Retail accurate: If the trade started an event then any current synth is a crit fail.
+        if (PChar->animation == ANIMATION_SYNTH ||
+            (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
+        {
+            charutils::forceSynthCritFail("GP_CLI_COMMAND_ITEM_TRANSFER", PChar);
+        }
+    }
 }

@@ -410,6 +410,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             ability:setMsg(xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
         else
             ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY)
+            return xi.effect.VALLATION
         end
 
         return
@@ -465,6 +466,8 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             if inspirationFCBonus > 0 then
                 target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
             end
+
+            return xi.effect.VALLATION
         end
     end
 end
@@ -759,6 +762,7 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     player:removeAllRunes()
 
     -- Gambit doesn't seem to inform you if it had no effect? -- TODO: double check
+    return xi.effect.GAMBIT
 end
 
 -- see https://www.bg-wiki.com/ffxi/Rayke
@@ -872,4 +876,6 @@ xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
     else -- apply effects to self only
         applyLiementEffect(target, absorbTypes, absorbPower, duration)
     end
+
+    return xi.effect.LIEMENT
 end

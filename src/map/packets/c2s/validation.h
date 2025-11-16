@@ -191,6 +191,8 @@ public:
         return *this;
     }
 
+    // Character must not be resting
+    auto isNotResting(const CCharEntity* PChar) -> PacketValidator&;
     // Character must not be crafting
     auto isNotCrafting(const CCharEntity* PChar) -> PacketValidator&;
     // Character current status must be NORMAL

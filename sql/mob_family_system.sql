@@ -321,7 +321,7 @@ INSERT INTO `mob_family_system` VALUES (263,'Wyrm-Nidhogg',149,'Wyrm',10,'Dragon
 INSERT INTO `mob_family_system` VALUES (264,'Wyrm',149,'Wyrm',10,'Dragon',4.00,40,120,90,4,1,3,2,2,3,1,1,3,1,3,1.0,1,0);
 INSERT INTO `mob_family_system` VALUES (265,'Wyvern-Simorg',109,'Wyvern',10,'Dragon',1.00,50,115,90,4,2,3,4,6,3,3,1,3,1,3,2.0,1,0);
 INSERT INTO `mob_family_system` VALUES (266,'Wyvern',109,'Wyvern',10,'Dragon',1.00,75,115,90,4,2,3,4,6,3,3,1,3,1,3,3.0,1,0);
-INSERT INTO `mob_family_system` VALUES (267,'Wyvern-Guivre',109,'Wyvern',10,'Dragon',1.00,50,115,90,4,2,3,4,6,3,3,1,3,1,3,7.0,3,0);
+INSERT INTO `mob_family_system` VALUES (267,'Wyvern-Guivre',109,'Wyvern',10,'Dragon',1.00,50,115,90,4,2,3,4,6,3,3,1,3,1,3,7.0,257,0);
 INSERT INTO `mob_family_system` VALUES (268,'Wyvern-Undead',109,'Wyvern',10,'Dragon',1.00,40,109,90,4,2,3,4,6,3,3,1,3,1,3,8.0,1,0);
 INSERT INTO `mob_family_system` VALUES (269,'Xzomit',150,'Xzomit',15,'Luminian',0.00,50,100,110,3,2,4,6,4,5,1,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_family_system` VALUES (270,'Yagudo',151,'Yagudo',7,'Beastmen',0.00,40,85,120,2,2,3,3,4,5,3,1,3,1,3,3.0,1,0);

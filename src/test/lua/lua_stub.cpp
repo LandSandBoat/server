@@ -55,11 +55,9 @@ CLuaStub::~CLuaStub() = default;
  *  Notes   :
  ************************************************************************/
 
-auto CLuaStub::operator()(sol::variadic_args args) -> sol::object
+auto CLuaStub::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vector<sol::object>>
 {
     DebugTestFmt("Stub function called for path: {}", path_);
-
-    sol::object returnVal = sol::lua_nil;
 
     // Priority order:
     // 1. Replacement implementation (completely replaces function)
@@ -73,13 +71,23 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::object
         const auto result = implementation_.value()(args);
         if (result.valid())
         {
-            returnVal = result;
+            recordCall(args, result.get<sol::object>(0));
+            // Extract all return values into a vector and return them
+            std::vector<sol::object> returnValues;
+            for (int i = 0; i < result.return_count(); ++i)
+            {
+                returnValues.push_back(result.get<sol::object>(i));
+            }
+            return sol::as_returns(std::move(returnValues));
         }
     }
     else if (returnValue_.has_value())
     {
         // Return the stubbed value without calling anything
-        returnVal = returnValue_.value();
+        recordCall(args, returnValue_.value());
+        // Return single value
+        std::vector<sol::object> returnValues{ returnValue_.value() };
+        return sol::as_returns(std::move(returnValues));
     }
     else if (sideEffect_.has_value())
     {
@@ -90,7 +98,13 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::object
         const auto result = originalFunc_(args);
         if (result.valid())
         {
-            returnVal = result;
+            recordCall(args, result.get<sol::object>(0));
+            std::vector<sol::object> returnValues;
+            for (int i = 0; i < result.return_count(); ++i)
+            {
+                returnValues.push_back(result.get<sol::object>(i));
+            }
+            return sol::as_returns(std::move(returnValues));
         }
     }
     else
@@ -99,12 +113,20 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::object
         const auto result = originalFunc_(args);
         if (result.valid())
         {
-            returnVal = result;
+            recordCall(args, result.get<sol::object>(0));
+            std::vector<sol::object> returnValues;
+            for (int i = 0; i < result.return_count(); ++i)
+            {
+                returnValues.push_back(result.get<sol::object>(i));
+            }
+            return sol::as_returns(std::move(returnValues));
         }
     }
 
-    recordCall(args, returnVal);
-    return returnVal;
+    recordCall(args, sol::nullopt);
+    // Return empty (no values)
+    std::vector<sol::object> empty;
+    return sol::as_returns(std::move(empty));
 }
 
 /************************************************************************

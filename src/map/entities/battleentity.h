@@ -528,6 +528,7 @@ public:
     bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
+    bool isInGarrison();
     bool isInMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();

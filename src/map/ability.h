@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -711,8 +711,8 @@ public:
     uint8           getAOE() const;
     uint16          getValidTarget() const;
     uint16          getAddType() const;
-    uint16          getMessage() const;
-    uint16          getAoEMsg() const;
+    auto            getMessage() const -> MSGBASIC_ID;
+    auto            getAoEMsg() const -> MSGBASIC_ID;
     timer::duration getRecastTime() const;
     uint16          getRecastId() const;
     int32           getCE() const;
@@ -781,7 +781,7 @@ CAbility* GetAbility(uint16 AbilityID);
 CAbility* GetTwoHourAbility(JOBTYPE JobID);
 bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
 Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
-uint32    GetAbsorbMessage(uint32 message);
+auto      GetAbsorbMessage(MSGBASIC_ID msg) -> MSGBASIC_ID;
 
 std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
 

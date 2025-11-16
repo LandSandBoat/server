@@ -34,7 +34,7 @@ end
 
 entity.onSpikesDamage = function(mob, target, damage)
     -- we don't have an "isCasting()" so use getCurrentAction() instead
-    if mob:getCurrentAction() == xi.action.MAGIC_CASTING then
+    if mob:getCurrentAction() == xi.action.category.MAGIC_CASTING then
         -- No spikes when mid-cast.
         return 0, 0, 0
     else

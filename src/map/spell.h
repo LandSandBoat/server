@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -26,6 +26,7 @@
 
 #define CANNOT_USE_SPELL 0
 
+enum class FourCC : uint32_t;
 enum SPELLGROUP
 {
     SPELLGROUP_NONE      = 0,
@@ -1059,7 +1060,7 @@ public:
     uint16             getValidTarget() const;
     uint16             getAnimationID() const;
     timer::duration    getAnimationTime() const;
-    SPELLGROUP         getSpellGroup();
+    auto               getSpellGroup() const -> SPELLGROUP;
     SPELLFAMILY        getSpellFamily();
     uint8              getSkillType() const;
     uint16             getZoneMisc() const;
@@ -1067,20 +1068,21 @@ public:
     uint16             getBase() const;
     uint16             getElement() const;
     float              getMultiplier() const;
-    uint16             getMessage() const;
+    auto               getMessage() const -> MSGBASIC_ID;
     uint16             getDefaultMessage();
     uint16             getMagicBurstMessage() const;
     int32              getCE() const;
     int32              getVE() const;
     timer::duration    getModifiedRecast() const;
     float              getRadius() const;
-    uint16             getAoEMessage() const; // returns the single target message for AoE moves
+    auto               getAoEMessage() const -> MSGBASIC_ID; // returns the single target message for AoE moves
     uint8              getRequirements() const;
     uint16             getMeritId() const;
     uint8              getFlag() const;
     const std::string& getContentTag();
     float              getRange() const;
     uint32             getPrimaryTargetID() const;
+    auto               getFourCC(bool interrupt = false) const -> FourCC;
     bool               tookEffect() const; // returns true if the spell landed, not resisted or missed
     bool               hasMPCost();        // checks if spell costs mp to use
     bool               isHeal();           // is a heal spell

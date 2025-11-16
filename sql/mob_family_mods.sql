@@ -680,10 +680,6 @@ INSERT INTO `mob_family_mods` VALUES (265,36,55,1);  -- ROAM_COOL: 55
 -- Wyvern
 INSERT INTO `mob_family_mods` VALUES (266,36,55,1);  -- ROAM_COOL: 55
 
--- Wyvern-Guivre
-INSERT INTO `mob_family_mods` VALUES (267,4,20,1);   -- SIGHT_RANGE: 20
-INSERT INTO `mob_family_mods` VALUES (267,36,55,1);  -- ROAM_COOL: 55
-
 -- Wyvern-Undead
 INSERT INTO `mob_family_mods` VALUES (268,36,55,1);  -- ROAM_COOL: 55
 

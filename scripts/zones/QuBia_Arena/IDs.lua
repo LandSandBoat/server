@@ -61,6 +61,7 @@ zones[xi.zone.QUBIA_ARENA] =
     {
         ARCHLICH_TABERQUOAN      = GetFirstID('Archlich_Taberquoan'),
         ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
+        CAPELTHWAITE             = GetFirstID('Capelthwaite'),
         CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
         DOLL_FACTORY             = GetFirstID('Doll_Factory'),
         FIRE_POT                 = GetFirstID('Fire_Pot'),

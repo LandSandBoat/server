@@ -1947,9 +1947,7 @@ void StartFishing(CCharEntity* PChar)
         return;
     }
 
-    PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
-    PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
-    PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CAMOUFLAGE);
+    charutils::RemoveInvisible(PChar);
     uint16       MessageOffset = GetMessageOffset(PChar->getZone());
     CItemWeapon* Rod           = nullptr;
     CItemWeapon* Bait          = nullptr;

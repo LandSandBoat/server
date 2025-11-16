@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -247,9 +247,9 @@ int32 CAbility::getVE() const
  *                                                                       *
  ************************************************************************/
 
-uint16 CAbility::getMessage() const
+auto CAbility::getMessage() const -> MSGBASIC_ID
 {
-    return m_message;
+    return static_cast<MSGBASIC_ID>(m_message);
 }
 
 void CAbility::setMessage(uint16 message)
@@ -257,63 +257,65 @@ void CAbility::setMessage(uint16 message)
     m_message = message;
 }
 
-uint16 CAbility::getAoEMsg() const
+auto CAbility::getAoEMsg() const -> MSGBASIC_ID
 {
     switch (m_message)
     {
-        case 150: // Ancient Circle
-            return m_message + 1;
-        case 185:
-            return 264;
-        case 186:
-            return 266;
-        case 187:
-            return 281;
-        case 188:
-            return 282;
-        case 189:
-            return 283;
-        case 225:
-            return 366;
-        case 226:
-            return 226; // no message for this... I guess there is no aoe TP drain move
-        case 103:       // recover hp
-        case 102:       // recover hp
-        case 238:       // recover hp
-        case 306:       // recover hp
-        case 318:       // recover hp
-            return 24;
-        case 242:
-            return 277;
-        case 243:
-            return 278;
-        case 284:
-            return 284; // already the aoe message
-        case 370:
-            return 404;
-        case 362:
-            return 363;
-        case 378:
-            return 343;
-        case 224: // recovers mp
-            return 276;
-        case 420:
-        case 424:
-            return 421;
-        case 422:
-        case 425:
-            return 423;
-        case 426:
-            return 427;
-        case 435:
-        case 437:
-        case 439:
-            return m_message + 1;
-        case 668: // Valiance has a seperate message for party member who gain the effect.
-            return m_message + 1;
-
+        case MSGBASIC_USES_ABILITY_FORTIFIED_DRAGONS:
+            return MSGBASIC_TARGET_FORTIFIED_DRAGONS;
+        case MSGBASIC_USES_SKILL_TAKES_DAMAGE:
+            return MSGBASIC_TARGET_TAKES_DAMAGE;
+        case MSGBASIC_USES_SKILL_GAINS_EFFECT:
+            return MSGBASIC_TARGET_GAINS_EFFECT;
+        case MSGBASIC_USES_SKILL_HP_DRAINED:
+            return MSGBASIC_TARGET_HP_DRAINED;
+        case MSGBASIC_USES_SKILL_MISSES:
+            return MSGBASIC_TARGET_EVADES;
+        case MSGBASIC_USES_SKILL_NO_EFFECT:
+            return MSGBASIC_TARGET_NO_EFFECT;
+        case MSGBASIC_USES_SKILL_MP_DRAINED:
+            return MSGBASIC_TARGET_MP_DRAINED;
+        case MSGBASIC_USES_SKILL_TP_DRAINED:
+            return MSGBASIC_USES_SKILL_TP_DRAINED; // no message for this... I guess there is no aoe TP drain move
+        case MSGBASIC_USES_RECOVERS_HP:
+            return MSGBASIC_TARGET_RECOVERS_HP2;
+        case MSGBASIC_SKILL_RECOVERS_HP:
+        case MSGBASIC_USES_SKILL_RECOVERS_HP_AOE:
+        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE:
+        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE2:
+            return MSGBASIC_TARGET_RECOVERS_HP_SIMPLE;
+        case MSGBASIC_USES_SKILL_STATUS:
+            return MSGBASIC_TARGET_STATUS;
+        case MSGBASIC_USES_SKILL_RECEIVES_EFFECT:
+            return MSGBASIC_TARGET_RECEIVES_EFFECT;
+        case MSGBASIC_MAGIC_RESISTED_TARGET:
+            return MSGBASIC_MAGIC_RESISTED_TARGET; // already the aoe message
+        case MSGBASIC_USES_SKILL_EFFECT_DRAINED:
+            return MSGBASIC_TARGET_EFFECT_DRAINED;
+        case MSGBASIC_USES_SKILL_TP_REDUCED:
+            return MSGBASIC_TARGET_TP_REDUCED;
+        case MSGBASIC_USES_ABILITY_DISPEL:
+            return MSGBASIC_TARGET_EFFECT_DISAPPEARS;
+        case MSGBASIC_USES_SKILL_RECOVERS_MP:
+            return MSGBASIC_TARGET_RECOVERS_MP;
+        case MSGBASIC_ROLL_MAIN:
+        case MSGBASIC_DOUBLEUP:
+            return MSGBASIC_ROLL_SUB;
+        case MSGBASIC_ROLL_MAIN_FAIL:
+        case MSGBASIC_DOUBLEUP_FAIL:
+            return MSGBASIC_ROLL_SUB_FAIL;
+        case MSGBASIC_DOUBLEUP_BUST:
+            return MSGBASIC_DOUBLEUP_BUST_SUB;
+        case MSGBASIC_USES_ABILITY_RECHARGE:
+            return MSGBASIC_TARGET_ABILITIES_RECHARGED;
+        case MSGBASIC_USES_ABILITY_RECHARGE_TP:
+            return MSGBASIC_TARGET_RECHARGED_TP;
+        case MSGBASIC_USES_ABILITY_RECHARGE_MP:
+            return MSGBASIC_TARGET_RECHARGED_MP;
+        case MSGBASIC_VALLATION_GAIN:
+            return MSGBASIC_VALIANCE_GAIN_PARTY_MEMBER;
         default:
-            return m_message;
+            return static_cast<MSGBASIC_ID>(m_message);
     }
 }
 
@@ -590,17 +592,17 @@ Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
     return charge;
 }
 
-uint32 GetAbsorbMessage(uint32 msg)
+auto GetAbsorbMessage(const MSGBASIC_ID msg) -> MSGBASIC_ID
 {
-    if (msg == 110)
+    switch (msg)
     {
-        return 102;
+        case MSGBASIC_USES_ABILITY_TAKES_DAMAGE:
+            return MSGBASIC_USES_RECOVERS_HP;
+        case MSGBASIC_TARGET_TAKES_DAMAGE:
+            return MSGBASIC_TARGET_RECOVERS_HP2;
+        default:
+            return msg;
     }
-    else if (msg == 264)
-    {
-        return 263;
-    }
-    return msg;
 }
 
 }; // namespace ability

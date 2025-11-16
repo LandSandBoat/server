@@ -1133,6 +1133,44 @@ INSERT INTO `item_latents` VALUES (14509,11,8,10,0);
 -- Shadow Ring
 INSERT INTO `item_latents` VALUES (14646,29,10,32,0);    -- Darksday: MDB+10
 
+-- Protean Ring
+INSERT INTO `item_latents` VALUES (14652,23,3,64,0); -- Attack +3 during Garrison
+INSERT INTO `item_latents` VALUES (14652,24,3,64,0); -- R.Attack +3 during Garrison
+-- TODO: Verify the points below.
+-- This is bare minimum to see a difference in different garrison tiers.
+-- stops at lv75 as Variable Ring likely does.
+INSERT INTO `item_latents` VALUES (14652,23,1,64,30); -- Atk +4, lv30+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,30);
+INSERT INTO `item_latents` VALUES (14652,23,1,64,40); -- Atk +5, lv40+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,40);
+INSERT INTO `item_latents` VALUES (14652,23,1,64,50); -- Atk +6, lv50+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,50);
+INSERT INTO `item_latents` VALUES (14652,23,1,64,60); -- Atk +7, lv60+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,60);
+INSERT INTO `item_latents` VALUES (14652,23,1,64,70); -- Atk +8, lv70+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,70);
+INSERT INTO `item_latents` VALUES (14652,23,1,64,75); -- Atk +9, lv75+
+INSERT INTO `item_latents` VALUES (14652,24,1,64,75);
+
+-- Variable Ring
+-- [known data points]
+-- lv20: 28 MP, 1 MPHEAL
+-- lv30: 30 MP, 1 MPHEAL
+-- lv50: 40 MP, 2 MPHEAL
+-- lv99: 55 MP, 4 MPHEAL
+-- Assumption: Scaling stops at level 75. TODO: verify
+INSERT INTO `item_latents` VALUES (14653,5,28,64,0);  -- MP +28 during Garrison
+INSERT INTO `item_latents` VALUES (14653,71,1,64,0);  -- MPHEAL +1 during Garrison
+INSERT INTO `item_latents` VALUES (14653,5,2,64,30);  -- MP +2 during Garrison lv30+ (30 MP)
+INSERT INTO `item_latents` VALUES (14653,5,5,64,40);  -- (verify) MP +5 during Garrison lv40+ (35 MP)
+INSERT INTO `item_latents` VALUES (14653,71,1,64,40); -- (verify) MPHEAL +1 during Garrison lv40+
+INSERT INTO `item_latents` VALUES (14653,5,5,64,50);  -- MP +5 during Garrison lv50+ (40 MP) (2 MPHEAL)
+INSERT INTO `item_latents` VALUES (14653,5,6,64,60);  -- (verify) MP +6 during Garrison lv60+ (46 MP)
+INSERT INTO `item_latents` VALUES (14653,71,1,64,60); -- (verify) MPHEAL +1 during Garrison lv60+ (3 MPHEAL)
+INSERT INTO `item_latents` VALUES (14653,5,6,64,70);  -- (verify) MP +6 during Garrison lv70+ (52 MP)
+INSERT INTO `item_latents` VALUES (14653,5,3,64,75);  -- (verify) MP +3 during Garrison lv75+ (55 MP)
+INSERT INTO `item_latents` VALUES (14653,71,1,64,75); -- (verify) MPHEAL +1 during Garrison lv75+ (4 MPHEAL)
+
 -- Atlaua's Ring
 INSERT INTO `item_latents` VALUES (14658,304,4,59,1); -- VS_ECOSYSTEM: AMORPH - TAME: 4
 INSERT INTO `item_latents` VALUES (14658,304,4,59,2); -- VS_ECOSYSTEM: AQUAN  - TAME: 4
@@ -1176,6 +1214,20 @@ INSERT INTO `item_latents` VALUES (14737,384,500,8,14);
 
 -- Magician's Earring
 INSERT INTO `item_latents` VALUES (14738,5,30,8,15);
+
+-- Refresh Earring
+INSERT INTO `item_latents` VALUES (14755,369,1,64,0); -- Refresh +1 during Garrison
+
+-- Mecurial Earring
+-- TODO: verify (somehow...) how much evasion increases per level.
+-- Stopping at lv75 as Variable Ring likely does.
+INSERT INTO `item_latents` VALUES (14757,68,1,64,0);  -- Evasion +1 during Garrison
+INSERT INTO `item_latents` VALUES (14757,68,1,64,30); -- Evasion +1 during Garrison, level 30+ (2 Eva)
+INSERT INTO `item_latents` VALUES (14757,68,1,64,40); -- Evasion +1 during Garrison, level 40+ (3 Eva)
+INSERT INTO `item_latents` VALUES (14757,68,1,64,50); -- Evasion +1 during Garrison, level 50+ (4 Eva)
+INSERT INTO `item_latents` VALUES (14757,68,1,64,60); -- Evasion +1 during Garrison, level 60+ (5 Eva)
+INSERT INTO `item_latents` VALUES (14757,68,1,64,70); -- Evasion +1 during Garrison, level 70+ (6 Eva)
+INSERT INTO `item_latents` VALUES (14757,68,1,64,75); -- Evasion +1 during Garrison, level 75+ (7 Eva)
 
 -- Vampire Earring
 INSERT INTO `item_latents` VALUES (14783,8,4,26,1);      -- STR+4 during Nighttime

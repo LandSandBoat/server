@@ -62,21 +62,30 @@ auto CLuaSpy::path() const -> std::string
  *  Notes   :
  ************************************************************************/
 
-auto CLuaSpy::operator()(sol::variadic_args args) -> sol::object
+auto CLuaSpy::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vector<sol::object>>
 {
     DebugTestFmt("Spy function called for path: {}", path_);
 
-    const auto result      = originalFunc_(args);
-    auto       returnValue = sol::object(sol::lua_nil);
+    const auto result = originalFunc_(args);
     if (result.valid())
     {
-        returnValue = result;
+        // Record first return value for spy tracking
+        recordCall(args, result.get<sol::object>(0));
+
+        DebugTestFmt("Spy returning value for path: {}", path_);
+        // Extract all return values and return them
+        std::vector<sol::object> returnValues;
+        for (int i = 0; i < result.return_count(); ++i)
+        {
+            returnValues.push_back(result.get<sol::object>(i));
+        }
+        return sol::as_returns(std::move(returnValues));
     }
 
-    recordCall(args, returnValue);
-
-    DebugTestFmt("Spy returning value for path: {}", path_);
-    return returnValue;
+    recordCall(args, sol::nullopt);
+    DebugTestFmt("Spy returning nil for path: {}", path_);
+    std::vector<sol::object> empty;
+    return sol::as_returns(std::move(empty));
 }
 
 // Records a call with its arguments and return value.

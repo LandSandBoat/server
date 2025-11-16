@@ -69,7 +69,13 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar,
         }
     }
 
-    std::memcpy(packet.Name, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.Name)));
+    const auto nameSize       = std::min<size_t>(PChar->getName().size(), sizeof(packet.Name));
+    const auto packetNameSize = roundUpToNearestFour(static_cast<uint32_t>(nameSize)) + 4; // Always 4 bytes of padding after name
+    std::memcpy(packet.Name, PChar->getName().c_str(), nameSize);
+
+    // Resize packets to match name length + the 4 bytes of padding the client expects.
+    // Header + struct - max name size + effective packet name size
+    this->setSize(sizeof(GP_SERV_HEADER) + sizeof(PacketData) - 16 + packetNameSize);
 }
 
 GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CTrustEntity* PTrust, const uint8_t MemberNumber)
@@ -95,7 +101,13 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CTrustEntity* PTrus
     packet.sjob_no      = PTrust->GetSJob();
     packet.sjob_lv      = PTrust->GetSLevel();
 
-    std::memcpy(packet.Name, PTrust->packetName.c_str(), std::min<size_t>(PTrust->packetName.size(), sizeof(packet.Name)));
+    const auto nameSize       = std::min<size_t>(PTrust->getName().size(), sizeof(packet.Name));
+    const auto packetNameSize = roundUpToNearestFour(static_cast<uint32_t>(nameSize)) + 4; // Always 4 bytes of padding after name
+    std::memcpy(packet.Name, PTrust->packetName.c_str(), nameSize);
+
+    // Resize packets to match name length + the 4 bytes of padding the client expects.
+    // Header + struct - max name size + effective packet name size
+    this->setSize(sizeof(GP_SERV_HEADER) + sizeof(PacketData) - 16 + packetNameSize);
 }
 
 GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const uint32_t id, const std::string& name, const uint16_t memberFlags, const uint8_t MemberNumber, const uint16_t ZoneID)
@@ -113,5 +125,11 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const uint32_t id, const 
     packet.GAttr.LevelSyncFlg      = (memberFlags >> 8) & 0x01; // Bit 8: LevelSyncFlg
     packet.ZoneNo                  = ZoneID;
 
-    std::memcpy(packet.Name, name.c_str(), std::min<size_t>(name.size(), sizeof(packet.Name)));
+    const auto nameSize       = std::min<size_t>(name.size(), sizeof(packet.Name));
+    const auto packetNameSize = roundUpToNearestFour(static_cast<uint32_t>(nameSize)) + 4; // Always 4 bytes of padding after name
+    std::memcpy(packet.Name, name.c_str(), nameSize);
+
+    // Resize packets to match name length + the 4 bytes of padding the client expects.
+    // Header + struct - max name size + effective packet name size
+    this->setSize(sizeof(GP_SERV_HEADER) + sizeof(PacketData) - 16 + packetNameSize);
 }

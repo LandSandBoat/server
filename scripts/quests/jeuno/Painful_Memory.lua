@@ -44,6 +44,7 @@ quest.sections =
                 [137] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
+                        npcUtil.giveKeyItem(player, xi.ki.MERTAIRES_BRACELET)
                     end
                 end,
 
@@ -52,6 +53,7 @@ quest.sections =
                         quest:setVar(player, 'Option', 1) -- Player declined
                     else
                         quest:begin(player)
+                        npcUtil.giveKeyItem(player, xi.ki.MERTAIRES_BRACELET)
                     end
                 end,
             },

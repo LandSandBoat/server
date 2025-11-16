@@ -1,7 +1,7 @@
 -----------------------------------
 -- Guild Masters
 -----------------------------------
-require('scripts/globals/crafting/crafting_utils')
+require('scripts/globals/hobbies/crafting/utils')
 require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}

@@ -465,7 +465,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:getHP() > 0 and
         wyvern:isEngaged()
     then
-        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+        wyvern:usePetAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 
     -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
@@ -784,7 +784,7 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
         end
     end
 
-    player:getPet():useJobAbility(breathToUse, target)
+    player:getPet():usePetAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
@@ -828,7 +828,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     local jobPointRecastReduction = player:getMod(xi.mod.DRAGOON_BREATH_RECAST)
     action:setRecast(ability:getRecast() - jobPointRecastReduction)
 
-    wyvern:useJobAbility(healingbreath, target)
+    wyvern:usePetAbility(healingbreath, target)
 end
 
 xi.job_utils.dragoon.useSmitingBreath = function(player, target, ability, action)

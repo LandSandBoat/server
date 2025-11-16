@@ -212,8 +212,8 @@ auto CLuaTestEntityAssertions::hasLocalVar(const std::string& varName, uint32 ex
 auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->hasStatusEffect(effectId, sol::lua_nil),
-                    std::format("Does not have effect {}", getEnumKey("xi.effect", effectId)),
-                    std::format("Has effect {}", getEnumKey("xi.effect", effectId)));
+                    std::format("Expected entity to have status effect {}", getEnumKey("xi.effect", effectId)),
+                    std::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", effectId)));
     return *this;
 }
 

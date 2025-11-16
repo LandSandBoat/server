@@ -2727,12 +2727,10 @@ int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t
     }
 
     // using an item removes invisible status effect
-    if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PUser))
+    // TODO: This is not always true! See #8673
+    if (const auto* PChar = dynamic_cast<CCharEntity*>(PUser))
     {
-        if (PBattleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_INVISIBLE))
-        {
-            PBattleEntity->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
-        }
+        charutils::RemoveInvisible(PChar);
     }
 
     auto result = onItemUse(PTarget, PUser, PItem, action);

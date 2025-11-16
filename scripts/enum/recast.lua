@@ -14,7 +14,9 @@ xi.recast =
 ---@enum xi.recastID
 xi.recastID =
 {
+    SPECIAL        =   0, -- 1HR abilities
     SIC            = 102,
+    MEDITATE       = 134,
     BLOODPACT_RAGE = 173,
     BLOODPACT_WARD = 174,
     QUICKDRAW      = 195,

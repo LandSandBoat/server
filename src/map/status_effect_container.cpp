@@ -2158,44 +2158,69 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
 
         if (m_POwner->getMod(Mod::AVATAR_PERPETUATION) > 0 && (m_POwner->objtype == TYPE_PC))
         {
-            int16 perpetuation = m_POwner->getMod(Mod::AVATAR_PERPETUATION);
+            int16 perpetuationCost = m_POwner->getMod(Mod::AVATAR_PERPETUATION);
 
-            if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
+            if (m_POwner->PPet != nullptr && PChar != nullptr)
             {
-                perpetuation = 0;
-            }
-            else
-            {
-                if (m_POwner->PPet != nullptr && PChar != nullptr)
+                CPetEntity* PPet          = (CPetEntity*)m_POwner->PPet;
+                ELEMENT     petElement    = static_cast<ELEMENT>(PPet->m_Element);
+                uint8       petElementIdx = static_cast<uint8>(petElement) - 1;
+                ELEMENT     dayElement    = battleutils::GetDayElement();
+                auto        weather       = battleutils::GetWeather(PChar, false);
+
+                static const Mod     strong[8]        = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP, Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
+                static const Weather weatherStrong[8] = { Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm, Weather::Thunder, Weather::Rain, Weather::Auroras, Weather::Gloom };
+
+                // Apply regular perpetuation reduction.
+                perpetuationCost = perpetuationCost - PChar->getMod(Mod::PERPETUATION_REDUCTION);
+
+                // Apply elemental affinity perpetuation bonus/penalty.
+                perpetuationCost = perpetuationCost - PChar->getMod(strong[petElementIdx]);
+
+                // Apply day element perpetuation reduction.
+                bool dayMatch = dayElement == petElement;
+                if (dayMatch)
                 {
-                    if (m_POwner->PPet->objtype == TYPE_PET)
-                    {
-                        CPetEntity* PPet  = (CPetEntity*)m_POwner->PPet;
-                        CItem*      hands = PChar->getEquip(SLOT_HANDS);
+                    perpetuationCost = perpetuationCost - PChar->getMod(Mod::DAY_REDUCTION);
+                }
 
-                        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
-                            ((PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH) || PPet->m_PetID == PETID_SIREN))
-                        {
-                            perpetuation = static_cast<int16>(perpetuation * 1.2);
-                        }
+                // Apply weather element perpetuation reduction.
+                bool weatherMatch = weather == weatherStrong[petElementIdx] || weather == static_cast<Weather>(static_cast<uint16_t>(weatherStrong[petElementIdx]) + 1);
+                if (weatherMatch)
+                {
+                    perpetuationCost = perpetuationCost - PChar->getMod(Mod::WEATHER_REDUCTION);
+                }
 
-                        // carbuncle mitts only work on carbuncle
-                        if (hands && hands->getID() == 14062 && PPet->m_PetID == PETID_CARBUNCLE)
-                        {
-                            perpetuation /= 2;
-                        }
-                    }
+                // Halve perpetuation cost after all regular reductions.
+                bool halfFromCarby   = PChar->getMod(Mod::HALF_PERPETUATION_CARBUNCLE) != 0 && PPet->m_PetID == PETID_CARBUNCLE;
+                bool halfFromDay     = PChar->getMod(Mod::HALF_PERPETUATION_DAY) != 0 && dayMatch;
+                bool halfFromWeather = PChar->getMod(Mod::HALF_PERPETUATION_WEATHER) != 0 && weatherMatch;
 
-                    perpetuation -= charutils::AvatarPerpetuationReduction(PChar, perpetuation);
+                if (halfFromCarby || halfFromDay || halfFromWeather)
+                {
+                    perpetuationCost = static_cast<int16>((perpetuationCost + 1) / 2);
+                }
 
-                    if (perpetuation < 1)
-                    {
-                        perpetuation = 1;
-                    }
+                // Avatar's Favor.
+                if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
+                    ((PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH) || PPet->m_PetID == PETID_SIREN))
+                {
+                    perpetuationCost = static_cast<int16>(perpetuationCost * 1.2);
+                }
+
+                // Astral Flow.
+                if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
+                {
+                    perpetuationCost = 1;
                 }
             }
 
-            m_POwner->addMP(refresh - perpetuation);
+            if (perpetuationCost < 1)
+            {
+                perpetuationCost = 1;
+            }
+
+            m_POwner->addMP(refresh - perpetuationCost);
 
             if (m_POwner->health.mp == 0 && m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET)
             {

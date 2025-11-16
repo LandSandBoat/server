@@ -6,7 +6,9 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.SILENCE_MEVA, 75)
+    mob:setMod(xi.mod.SLEEP_MEVA, 50)
 end
 
 return entity

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -271,7 +271,7 @@ void LoadPetSkillsList()
         PPetSkill->setMobSkillID(rset->get<uint16>("mob_skill_id"));
         g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
 
-        auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
+        auto filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PPetSkill->getName());
         luautils::CacheLuaObjectFromFile(filename);
     }
 }
@@ -1382,11 +1382,11 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                 if (Action->addEffectParam < 0)
                 {
                     Action->addEffectParam   = -Action->addEffectParam;
-                    Action->addEffectMessage = 384;
+                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_RECOVERS_HP;
                 }
                 else
                 {
-                    Action->addEffectMessage = 229;
+                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_ADDITIONAL_DAMAGE;
                 }
 
                 PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -2703,119 +2703,22 @@ uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 att
 {
     int32 hitrate = 75;
 
-    if (PAttacker->objtype == TYPE_PC &&
-        ((PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
-          (behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))) ||
-         (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) &&
-          battleutils::getAvailableTrickAttackChar(PAttacker, PDefender))))
+    bool hasSneakAttack      = PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK);
+    bool hasTrickAttack      = PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK);
+    bool isBehind            = behind(PAttacker->loc.p, PDefender->loc.p, 64);
+    bool hasAssassin         = PAttacker->hasTrait(TRAIT_ASSASSIN);
+    bool hasValidSneakAttack = hasSneakAttack && isBehind;
+    bool hasValidTrickAttack = hasTrickAttack && hasAssassin;
+
+    if ((hasValidSneakAttack || hasValidTrickAttack) && getAvailableTrickAttackChar(PAttacker, PDefender))
     {
         hitrate = 100; // Attack with SA active or TA/Assassin cannot miss
     }
     else
     {
-        // Check For Ambush Merit - Melee
-        if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
-        {
-            offsetAccuracy += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
-        }
-        // Check for Closed Position merit on attacker for additional accuracy and that attacker and defender are facing each other
-        if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_CLOSED_POSITION)) &&
-            (infront(PAttacker->loc.p, PDefender->loc.p, 64) && facing(PAttacker->loc.p, PDefender->loc.p, 64)))
-        {
-            offsetAccuracy += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_CLOSED_POSITION, (CCharEntity*)PAttacker);
-        }
-        // Check for Closed Position merit on defender for additional evasion and that attacker and defender are facing each other
-        if (PDefender->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_CLOSED_POSITION)) &&
-            (infront(PDefender->loc.p, PAttacker->loc.p, 64) && facing(PDefender->loc.p, PAttacker->loc.p, 64)))
-        {
-            offsetAccuracy -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_CLOSED_POSITION, (CCharEntity*)PDefender);
-        }
-        // Check for Innin accuracy bonus from behind target
-        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
-        {
-            offsetAccuracy += PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INNIN)->GetPower();
-        }
-        // Check for Yonin evasion bonus while in front of target
-        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
-        {
-            offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
-        }
+        double luaHitRate = luautils::callGlobal<double>("xi.combat.physicalHitRate.getPhysicalHitRate", PAttacker, PDefender, offsetAccuracy, attackNumber, false);
 
-        // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
-        // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
-        // bonuses cap at level diff of 38 based on this testing:
-        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-
-        // Floor because hitrate can only be integer values
-        // https://www.bluegartr.com/threads/68786-Dexterity-s-impact-on-critical-hits?p=3209015&viewfull=1#post3209015
-
-        uint16 attackerAcc = PAttacker->ACC(attackNumber, offsetAccuracy);
-
-        hitrate += static_cast<int32>(std::floor((attackerAcc - PDefender->EVA()) / 2));
-
-        // Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
-        // https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
-        uint16 zoneId = PAttacker->getZone();
-
-        // All zones from Adoulin onward have an id of 256+
-        // This includes Escha/Reisenjima and the new Dynamis zones
-        // (Not a post Adoulin Zone) && (Not Legion_A)
-        bool shouldApplyLevelCorrection = (zoneId < 256) && (zoneId != 183);
-
-        if (shouldApplyLevelCorrection)
-        {
-            int16 dLvl = 0;
-            // Skip penalties for avatars, this should likely be all pets and mobs but I have no proof
-            // of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
-            bool isPet    = PAttacker->objtype == TYPE_PET;
-            bool isAvatar = false;
-
-            if (isPet)
-            {
-                CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
-                isAvatar              = petEntity ? petEntity->getPetType() == PET_TYPE::AVATAR : false;
-            }
-
-            if (isAvatar)
-            {
-                dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
-                // Avatars have a known level difference cap of 38
-                dLvl = std::clamp(dLvl, static_cast<int16>(0), static_cast<int16>(38));
-            }
-            // Only players are penalized for dLvl
-            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMLevel() < PDefender->GetMLevel())
-            {
-                dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
-            }
-
-            hitrate += static_cast<int16>(dLvl * 2);
-        }
-
-        // https://www.bg-wiki.com/bg/Hit_Rate
-        // Update Notes: https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
-        // The maximum accuracy of one-handed weapons equipped as the main weapon has been increased from 95% to 99%.
-        // * Owing to this change, the maximum accuracy of abilities that rely on main weapon accuracy has also been raised from 95% to 99%.
-        // Further, some monster damage types have been changed from hand-to-hand to blunt.* Fellows and alter egos enjoy this benefit as well.
-        // The maximum accuracy of beastmaster familiars, wyverns, avatars, and automatons has been increased from 95% to 99%.
-        // * In line with this change, familiars summoned using the following items have had their damage types changed from hand-to-hand to blunt.
-        // Carrot Broth / Famous Carrot Broth / Bug Broth / Quadav Bug Broth / Berbal Broth / Singing Herbal Broth / Carrion Broth /
-        // Cold Carrion Broth / Meat Broth / Warm Meat Broth / Tree Sap / Scarlet Sap / Fish Broth / Fish Oil Broth / Seedbed Soil / Sun Water /
-        // Grasshopper Broth / Noisy Grasshopper Broth / Mole Broth / Lively Mole Broth / Blood Broth / Clear Blood Broth / Antica Broth / Fragrant Antica
-        // Broth
-
-        int32 maxHitRate  = 99;
-        auto* targ_weapon = PAttacker ? dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]) : nullptr;
-
-        // As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
-        bool isOffhand   = attackNumber == 1;
-        bool isTwoHanded = targ_weapon && targ_weapon->isTwoHanded();
-
-        if (isOffhand || isTwoHanded)
-        {
-            maxHitRate = 95;
-        }
-
-        hitrate = std::clamp(hitrate, 20, maxHitRate);
+        hitrate = std::floor<uint8>(std::clamp<double>(luaHitRate * 100.0, 20.0, 99.0));
     }
     return static_cast<uint8>(hitrate);
 }

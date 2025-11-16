@@ -353,9 +353,9 @@ entity.onMobFight = function(mob, target)
             local actionTimer = callPetParams.inactiveTime + 11000
             mob:timer(actionTimer, function(mobArg)
                 -- injects a fake action of "PW readies astral flow" before avatars use their respective abilities
-                mobArg:injectActionPacket(mob:getID(), xi.action.MOBABILITY_START, 438, 0, 0x18, xi.msg.basic.READIES_WS, 0, xi.mobSkill.ASTRAL_FLOW_1)
+                mobArg:injectActionPacket(mob:getID(), xi.action.category.MOBABILITY_START, 438, 0, 0x18, xi.msg.basic.READIES_WS, 0, xi.mobSkill.ASTRAL_FLOW_1)
                 -- injects the packet to end the animation
-                mobArg:injectActionPacket(mob:getID(), xi.action.MOBABILITY_FINISH, 438, 0, 0x18, xi.msg.basic.NONE, 0, xi.mobSkill.ASTRAL_FLOW_1)
+                mobArg:injectActionPacket(mob:getID(), xi.action.category.MOBABILITY_FINISH, 438, 0, 0x18, xi.msg.basic.NONE, 0, xi.mobSkill.ASTRAL_FLOW_1)
             end)
 
             -- Increment astral
