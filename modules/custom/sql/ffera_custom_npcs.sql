@@ -19,5 +19,11 @@ UPDATE npc_list SET pos_rot = 22, pos_x = -17.100, pos_y = 0.000, pos_z = 1.500,
 -- Homepoint #2
 UPDATE npc_list SET pos_x = -6.681, pos_y = 0.000, pos_z = -11.259 WHERE npcid = 17780874;
 
+-- Ru'Lude Gardens
+-- Explorer Moogle NPC for Era's NM Hunt
+UPDATE npc_list SET pos_rot = 0, pos_x = -61.000, pos_y = 6.000, pos_z = -6.000, flag = 0, speed = 40, speedsub = 40, status = 0, look = 0x00003A0800000000000000000000000000000000 WHERE npcid = 17772772;
+
 -- Provenance
 -- Need to add Provenance Crystal/Protocrystal as well as Pil in here but there are different IDs...?
+
+
