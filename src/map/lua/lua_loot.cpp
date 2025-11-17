@@ -63,7 +63,7 @@ void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
  *  Notes   : Item table is a list of tables with "item" key and an optional "weight" which defaults to 1
  ************************************************************************/
 
-void CLuaLootContainer::addGroup(uint16 groupRate, sol::table const& items)
+void CLuaLootContainer::addGroup(uint16 groupRate, const sol::table& items)
 {
     addGroupToContainer(RATE_PERCENTAGES[groupRate], items, false);
 }
@@ -89,7 +89,7 @@ void CLuaLootContainer::addItemFixed(uint16 item, uint16 rate, sol::variadic_arg
  *            Fixed drop rate is 0-1000.
  ************************************************************************/
 
-void CLuaLootContainer::addGroupFixed(uint16 groupRate, sol::table const& items)
+void CLuaLootContainer::addGroupFixed(uint16 groupRate, const sol::table& items)
 {
     addGroupToContainer(groupRate, items, true);
 }
@@ -103,7 +103,7 @@ void CLuaLootContainer::addItemToContainer(uint16 item, uint16 rate, sol::variad
     }
 }
 
-void CLuaLootContainer::addGroupToContainer(uint16 groupRate, sol::table const& items, bool hasFixedRate)
+void CLuaLootContainer::addGroupToContainer(uint16 groupRate, const sol::table& items, bool hasFixedRate)
 {
     DropGroup_t group(groupRate, hasFixedRate);
 

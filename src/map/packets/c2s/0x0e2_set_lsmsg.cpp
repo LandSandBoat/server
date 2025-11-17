@@ -40,7 +40,10 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
 {
     auto canEditLsMes = [&](CItemLinkshell* PItemLinkshell) -> bool
     {
-        switch (PChar->PLinkshell1->m_postRights)
+        // TODO: The LSTYPE definition is wrong in item_linkshell.h and values are off by 1 compared to what is actually passed
+        // by the client. We account for this temporarily by doing m_postRights - 1
+        const auto postRights = static_cast<uint8_t>(PChar->PLinkshell1->m_postRights) - 1;
+        switch (static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(postRights))
         {
             case GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL::Linkshell:
                 // Only the linkshell owner can edit the message

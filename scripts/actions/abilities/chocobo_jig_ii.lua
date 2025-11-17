@@ -24,6 +24,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     target:addStatusEffect(xi.effect.QUICKENING, 10, 0, finalDuration)
+
+    return xi.effect.QUICKENING
 end
 
 return abilityObject

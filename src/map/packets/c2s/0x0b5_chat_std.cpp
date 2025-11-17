@@ -39,15 +39,16 @@
 
 namespace
 {
-    const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const std::string& rawMessage)
-    {
-        const std::string auditConfigKey = std::format("map.AUDIT_{}", chatType);
-        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>(auditConfigKey))
-        {
-            const auto& name   = PChar->getName();
-            const auto  zoneId = PChar->getZone();
 
-            // clang-format off
+const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const std::string& rawMessage)
+{
+    const std::string auditConfigKey = std::format("map.AUDIT_{}", chatType);
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>(auditConfigKey))
+    {
+        const auto& name   = PChar->getName();
+        const auto  zoneId = PChar->getZone();
+
+        // clang-format off
             Async::getInstance()->submit([name, chatType, zoneId, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, message, datetime) VALUES(?, ?, ?, ?, current_timestamp())";
@@ -56,19 +57,19 @@ namespace
                     ShowErrorFmt("Failed to insert {} audit_chat record for player '{}'", chatType, name);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
 
-    const auto auditUnity = [](CCharEntity* PChar, const std::string& rawMessage)
+const auto auditUnity = [](CCharEntity* PChar, const std::string& rawMessage)
+{
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
     {
-        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
-        {
-            const auto name        = PChar->getName();
-            const auto zoneId      = PChar->getZone();
-            const auto unityLeader = PChar->PUnityChat->getLeader();
+        const auto name        = PChar->getName();
+        const auto zoneId      = PChar->getZone();
+        const auto unityLeader = PChar->PUnityChat->getLeader();
 
-            // clang-format off
+        // clang-format off
             Async::getInstance()->submit([name, zoneId, unityLeader, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, unity, message, datetime) VALUES(?, 'UNITY', ?, ?, ?, current_timestamp())";
@@ -77,20 +78,20 @@ namespace
                     ShowError("Failed to insert UNITY audit_chat record for player '%s'", name.c_str());
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
 
-    const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const std::string& rawMessage)
+const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const std::string& rawMessage)
+{
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
     {
-        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
-        {
-            const auto& name   = PChar->getName();
-            const auto  zoneId = PChar->getZone();
-            char        decodedLinkshellName[DecodeStringLength];
-            DecodeStringLinkshell(PLinkshell->getName(), decodedLinkshellName);
+        const auto& name   = PChar->getName();
+        const auto  zoneId = PChar->getZone();
+        char        decodedLinkshellName[DecodeStringLength];
+        DecodeStringLinkshell(PLinkshell->getName(), decodedLinkshellName);
 
-            // clang-format off
+        // clang-format off
             Async::getInstance()->submit([name, zoneId, decodedLinkshellName, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, lsName, zoneid, message, datetime) VALUES(?, 'LINKSHELL', ?, ?, ?, current_timestamp())";
@@ -99,9 +100,10 @@ namespace
                     ShowError("Failed to insert LINKSHELL audit_chat record for player '%s'", name);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_CHAT_STD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -285,21 +287,24 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Unity:
         {
-            if (PChar->PUnityChat != nullptr)
+            if (!PChar->PUnityChat)
             {
-                message::send(ipc::ChatMessageUnity{
-                    .unityLeaderId = PChar->PUnityChat->getLeader(),
-                    .senderId      = PChar->id,
-                    .senderName    = PChar->getName(),
-                    .message       = rawMessage,
-                    .zoneId        = PChar->getZone(),
-                    .gmLevel       = PChar->m_GMlevel,
-                });
-
-                roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", rawMessage));
-
-                auditUnity(PChar, rawMessage);
+                PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::UnityNotParticipating);
+                return;
             }
+
+            message::send(ipc::ChatMessageUnity{
+                .unityLeaderId = PChar->PUnityChat->getLeader(),
+                .senderId      = PChar->id,
+                .senderName    = PChar->getName(),
+                .message       = rawMessage,
+                .zoneId        = PChar->getZone(),
+                .gmLevel       = PChar->m_GMlevel,
+            });
+
+            roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", rawMessage));
+
+            auditUnity(PChar, rawMessage);
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::LinkshellPvp:

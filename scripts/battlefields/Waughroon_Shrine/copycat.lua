@@ -11,24 +11,63 @@ local content = Battlefield:new({
     battlefieldId    = xi.battlefield.id.COPYCAT,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
-    index            = 1,
+    index            = 16,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
-
-    experimental = true,
+    armouryCrates    =
+    {
+        waughroonID.mob.OSSCHAART + 1,
+        waughroonID.mob.OSSCHAART + 7,
+        waughroonID.mob.OSSCHAART + 13,
+    },
 })
 
 content.groups =
 {
     {
-        mobs      = { 'Osschaart' },
-        allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
+        mobIds =
+        {
+            {
+                waughroonID.mob.OSSCHAART,
+            },
+
+            {
+                waughroonID.mob.OSSCHAART + 6,
+            },
+
+            {
+                waughroonID.mob.OSSCHAART + 12,
+            },
+        },
+        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     },
 
     {
-        mobs      = { 'Osschaarts_Bat', 'Osschaarts_Wyvern', 'Osschaarts_Avatar', 'Osschaarts_Automaton' },
-        spawned  = false,
+        mobIds =
+        {
+            {
+                waughroonID.mob.OSSCHAART + 2, -- Bat
+                waughroonID.mob.OSSCHAART + 3, -- Wyvern
+                waughroonID.mob.OSSCHAART + 4, -- Avatar
+                waughroonID.mob.OSSCHAART + 5, -- Automaton
+            },
+
+            {
+                waughroonID.mob.OSSCHAART + 8,  -- Bat
+                waughroonID.mob.OSSCHAART + 9,  -- Wyvern
+                waughroonID.mob.OSSCHAART + 10, -- Avatar
+                waughroonID.mob.OSSCHAART + 11, -- Automaton
+            },
+
+            {
+                waughroonID.mob.OSSCHAART + 14, -- Bat
+                waughroonID.mob.OSSCHAART + 15, -- Wyvern
+                waughroonID.mob.OSSCHAART + 16, -- Avatar
+                waughroonID.mob.OSSCHAART + 17, -- Automaton
+            },
+        },
+        spawned = false,
     },
 }
 

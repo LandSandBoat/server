@@ -104,6 +104,13 @@ local dockTable =
     ['Yohj_Dukonlhy'  ] = { 231, xi.transport.routes.SILVER_SEA              }, -- Nashmau to Aht Urhgan Whitegate
 }
 
+-- times are minutes past midnight, and aligns with the transports.sql entries.
+-- Since the cycle is every 480 minutes, 3 cycles are listed for simpler logic
+-- time for arrivalStart: time_offset
+-- time for arrivalEnd:   time_offset + time_anim_arrive
+-- time for departStart:  time_offset + time_anim_arrive + time_waiting
+-- time for departEnd:    time_offset + time_anim_arrive + time_waiting + time_anim_depart
+-- time for ride on the boat to end: time_offset + time_anim_arrive - 10
 local scheduleTable =
 {
     -- used by ship and selbina dock timekeepers
@@ -172,12 +179,12 @@ end
 xi.transport.dockMessage = function(npc, triggerID, messages, dock)
     local dockNpcPos =
     {
-        mhaura =
+        [xi.zone.MHAURA] =
         {
             ARRIVING  = { { x = 7.06, y = -1.36, z = 2.20, rotation = 211 }, },
             DEPARTING = { { x = 8.26, y = -1.36, z = 2.20, rotation = 193 }, },
         },
-        selbina =
+        [xi.zone.SELBINA] =
         {
             ARRIVING  = { { x = 16.768, y = -1.38,  z = -58.843, rotation = 209 }, },
             DEPARTING = { { x = 17.979, y = -1.389, z = -58.800, rotation = 191 }, },

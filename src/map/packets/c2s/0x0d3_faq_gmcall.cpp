@@ -33,5 +33,9 @@ void GP_CLI_COMMAND_FAQ_GMCALL::process(MapSession* PSession, CCharEntity* PChar
 {
     PChar->m_charHistory.gmCalls++;
     ShowDebugFmt("GP_CLI_COMMAND_FAQ_GMCALL: Not implemented. type: {}, pktId: {}, seq: {}, eos: {}, blkNum: {}",
-                 type, pktId, seq, eos, blkNum);
+                 type,
+                 pktId,
+                 seq,
+                 eos,
+                 blkNum);
 }

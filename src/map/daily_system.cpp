@@ -27,14 +27,15 @@
 
 namespace daily
 {
-    std::vector<uint16> materialsDialItems;
-    std::vector<uint16> foodDialItems;
-    std::vector<uint16> medicineDialItems;
-    std::vector<uint16> sundries1DialItems;
-    std::vector<uint16> sundries2DialItems;
-    std::vector<uint16> specialDialItems;
 
-    // clang-format off
+std::vector<uint16> materialsDialItems;
+std::vector<uint16> foodDialItems;
+std::vector<uint16> medicineDialItems;
+std::vector<uint16> sundries1DialItems;
+std::vector<uint16> sundries2DialItems;
+std::vector<uint16> specialDialItems;
+
+// clang-format off
     std::vector<uint16> gobbieJunk =
     {
         2542, // Goblin Mess Tin
@@ -46,150 +47,151 @@ namespace daily
         4495, // Goblin Chocolate
         4539  // Goblin Pie
     };
-    // clang-format on
+// clang-format on
 
-    uint16 SelectItem(CCharEntity* player, uint8 dial)
+uint16 SelectItem(CCharEntity* player, uint8 dial)
+{
+    std::vector<uint16>* dialItems = &gobbieJunk;
+    switch (dial)
     {
-        std::vector<uint16>* dialItems = &gobbieJunk;
-        switch (dial)
+        case 1:
         {
-            case 1:
-            {
-                dialItems = &materialsDialItems;
-                break;
-            }
-            case 2:
-            {
-                dialItems = &foodDialItems;
-                break;
-            }
-            case 3:
-            {
-                dialItems = &medicineDialItems;
-                break;
-            }
-            case 4:
-            {
-                dialItems = &sundries1DialItems;
-                break;
-            }
-            case 5:
-            {
-                dialItems = &sundries2DialItems;
-                break;
-            }
-            case 6:
-            {
-                dialItems = &specialDialItems;
-                break;
-            }
+            dialItems = &materialsDialItems;
+            break;
         }
-        uint16 selection = xirand::GetRandomElement(dialItems);
-
-        // Check if Rare item is already owned and substitute with Goblin trash item.
-        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
+        case 2:
         {
-            dialItems = &gobbieJunk;
-            selection = xirand::GetRandomElement(dialItems);
+            dialItems = &foodDialItems;
+            break;
         }
+        case 3:
+        {
+            dialItems = &medicineDialItems;
+            break;
+        }
+        case 4:
+        {
+            dialItems = &sundries1DialItems;
+            break;
+        }
+        case 5:
+        {
+            dialItems = &sundries2DialItems;
+            break;
+        }
+        case 6:
+        {
+            dialItems = &specialDialItems;
+            break;
+        }
+    }
+    uint16 selection = xirand::GetRandomElement(dialItems);
 
-        return selection;
+    // Check if Rare item is already owned and substitute with Goblin trash item.
+    if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
+    {
+        dialItems = &gobbieJunk;
+        selection = xirand::GetRandomElement(dialItems);
     }
 
-    void LoadDailyItems()
+    return selection;
+}
+
+void LoadDailyItems()
+{
+    const auto rset = db::preparedStmt("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+
+    uint16 itemid = 0;
+    uint16 aH     = 0;
+    uint16 flags  = 0;
+    if (rset && rset->rowsCount())
     {
-        const auto rset = db::preparedStmt("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
-
-        uint16 itemid = 0;
-        uint16 aH     = 0;
-        uint16 flags  = 0;
-        if (rset && rset->rowsCount())
+        while (rset->next())
         {
-            while (rset->next())
-            {
-                itemid = rset->get<uint16>("itemid");
-                aH     = rset->get<uint16>("aH");
-                flags  = rset->get<uint16>("flags");
+            itemid = rset->get<uint16>("itemid");
+            aH     = rset->get<uint16>("aH");
+            flags  = rset->get<uint16>("flags");
 
-                specialDialItems.emplace_back(itemid);
-                switch (aH)
+            specialDialItems.emplace_back(itemid);
+            switch (aH)
+            {
+                /* Dial 1 (Materials) */
+                case 38: // Smithing
+                case 39: // Goldsmithing
+                case 40: // Clothcrafting
+                case 41: // Leathercrafting
+                case 42: // Bonecrafting
+                case 43: // Woodworking
+                case 44: // Alchemy
+                case 50: // Beast-Made
                 {
-                    /* Dial 1 (Materials) */
-                    case 38: // Smithing
-                    case 39: // Goldsmithing
-                    case 40: // Clothcrafting
-                    case 41: // Leathercrafting
-                    case 42: // Bonecrafting
-                    case 43: // Woodworking
-                    case 44: // Alchemy
-                    case 50: // Beast-Made
+                    materialsDialItems.emplace_back(itemid);
+                    break;
+                }
+                /* Dial 2 (Food) */
+                case 52: // Meat & Eggs
+                case 53: // Seafood
+                case 54: // Vegetables
+                case 55: // Soups
+                case 56: // Breads & Rice
+                case 57: // Sweets
+                case 58: // Drinks
+                {
+                    foodDialItems.emplace_back(itemid);
+                    break;
+                }
+                /* Dial 3 (Medicine) */
+                case 33: // Medicine
+                {
+                    medicineDialItems.emplace_back(itemid);
+                    break;
+                }
+                /* Dial 4 (Sundries 1) */
+                case 15: // Ammunition
+                case 36: // Cards
+                case 49: // Ninja Tools
+                {
+                    if ((flags & ITEM_FLAG_CANUSE) > 0) // only usable (pouch, case, quiver, etc)
                     {
-                        materialsDialItems.emplace_back(itemid);
+                        sundries1DialItems.emplace_back(itemid);
+                    }
+                    break;
+                }
+                /* Dial 5 (Sundries 2) */
+                case 47: // Fishing Gear
+                case 51: // Fish
+                {
+                    if (itemid == 489 || itemid == 17386) // Lu Shang is probably only special dial
+                    {
                         break;
                     }
-                    /* Dial 2 (Food) */
-                    case 52: // Meat & Eggs
-                    case 53: // Seafood
-                    case 54: // Vegetables
-                    case 55: // Soups
-                    case 56: // Breads & Rice
-                    case 57: // Sweets
-                    case 58: // Drinks
+                    sundries2DialItems.emplace_back(itemid);
+                    break;
+                }
+                default:
+                {
+                    switch (itemid)
                     {
-                        foodDialItems.emplace_back(itemid);
-                        break;
-                    }
-                    /* Dial 3 (Medicine) */
-                    case 33: // Medicine
-                    {
-                        medicineDialItems.emplace_back(itemid);
-                        break;
-                    }
-                    /* Dial 4 (Sundries 1) */
-                    case 15: // Ammunition
-                    case 36: // Cards
-                    case 49: // Ninja Tools
-                    {
-                        if ((flags & ITEM_FLAG_CANUSE) > 0) // only usable (pouch, case, quiver, etc)
+                        case 605:   // pickaxe
+                        case 1020:  // sickle
+                        case 1021:  // hatchet
+                        case 1022:  // thief's tools
+                        case 1023:  // living key
+                        case 15453: // lugworm belt
+                        case 15454: // little worm belt
                         {
-                            sundries1DialItems.emplace_back(itemid);
-                        }
-                        break;
-                    }
-                    /* Dial 5 (Sundries 2) */
-                    case 47: // Fishing Gear
-                    case 51: // Fish
-                    {
-                        if (itemid == 489 || itemid == 17386) // Lu Shang is probably only special dial
-                        {
+                            sundries2DialItems.emplace_back(itemid);
                             break;
-                        }
-                        sundries2DialItems.emplace_back(itemid);
-                        break;
-                    }
-                    default:
-                    {
-                        switch (itemid)
-                        {
-                            case 605:   // pickaxe
-                            case 1020:  // sickle
-                            case 1021:  // hatchet
-                            case 1022:  // thief's tools
-                            case 1023:  // living key
-                            case 15453: // lugworm belt
-                            case 15454: // little worm belt
-                            {
-                                sundries2DialItems.emplace_back(itemid);
-                                break;
-                            }
                         }
                     }
                 }
             }
         }
-        else
-        {
-            ShowError("Failed to load daily tally items");
-        }
     }
+    else
+    {
+        ShowError("Failed to load daily tally items");
+    }
+}
+
 } // namespace daily

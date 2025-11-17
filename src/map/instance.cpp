@@ -176,7 +176,7 @@ timer::duration CInstance::GetElapsedTime(timer::time_point tick)
     return std::max(timer::duration(0s), tick - m_startTime);
 }
 
-uint64_t CInstance::GetLocalVar(std::string const& name) const
+uint64_t CInstance::GetLocalVar(const std::string& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -216,7 +216,7 @@ void CInstance::SetWipeTime(timer::duration time)
     m_wipeTimer = time + m_startTime;
 }
 
-void CInstance::SetLocalVar(std::string const& name, uint64_t value)
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }

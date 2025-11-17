@@ -80,7 +80,7 @@ xi.chocoboGame.startRaceEvent = function(player, destination, eventSucceed)
     local eventParam = raceData[zoneId][destination].eventParam
 
     -- Temp destination var until player confirms race
-    player:setLocalVar('[ChocoGame]DestCity', destination)
+    player:setCharVar('[ChocoGame]DestCity', destination)
     player:startEvent(eventSucceed, -3, 0, 0, eventParam)
 end
 
@@ -88,14 +88,14 @@ end
 xi.chocoboGame.beginRace = function(player, option)
     if option == 0 then
         local zoneId     = player:getZone():getID()
-        local destCity   = player:getLocalVar('[ChocoGame]DestCity')
+        local destCity   = player:getCharVar('[ChocoGame]DestCity')
 
         player:setCharVar('[ChocoGame]StartingCity', zoneId)
         player:setCharVar('[ChocoGame]DestCity', destCity)
         player:setCharVar('[ChocoGame]NextEntryTime', 1, NextConquestTally())
         player:setCharVar('[ChocoGame]StartTime', GetSystemTime())
     else -- Player declined race, clearing var
-        player:setLocalVar('[ChocoGame]DestCity', 0)
+        player:setCharVar('[ChocoGame]DestCity', 0)
     end
 end
 

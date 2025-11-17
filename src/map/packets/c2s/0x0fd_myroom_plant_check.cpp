@@ -29,7 +29,9 @@
 
 namespace
 {
-    const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_CHECK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -57,8 +59,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
             {
                 if (PItem->getExtraCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getExtraCrystalFeed()), 0,
-                                                                      MSGBASIC_GARDENING_CRYSTAL_USED);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getExtraCrystalFeed()), 0, MSGBASIC_GARDENING_CRYSTAL_USED);
                 }
                 else
                 {
@@ -70,8 +71,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         {
             if (PItem->getCommonCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getCommonCrystalFeed()), 0,
-                                                                  MSGBASIC_GARDENING_CRYSTAL_USED);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getCommonCrystalFeed()), 0, MSGBASIC_GARDENING_CRYSTAL_USED);
             }
             else
             {
@@ -84,7 +84,10 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
             PItem->markExamined();
 
             db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                             PItem->m_extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+                             PItem->m_extra,
+                             PChar->id,
+                             PItem->getLocationID(),
+                             PItem->getSlotID());
         }
     }
 

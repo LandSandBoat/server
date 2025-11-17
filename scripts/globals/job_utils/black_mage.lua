@@ -23,10 +23,14 @@ end
 -----------------------------------
 xi.job_utils.black_mage.useCascade = function(player, target, ability)
     player:addStatusEffect(xi.effect.CASCADE, 1, 0, 60)
+
+    return xi.effect.CASCADE
 end
 
 xi.job_utils.black_mage.useElementalSeal = function(player, target, ability)
     player:addStatusEffect(xi.effect.ELEMENTAL_SEAL, 1, 0, 60)
+
+    return xi.effect.ELEMENTAL_SEAL
 end
 
 xi.job_utils.black_mage.useEnmityDouse = function(player, target, ability)
@@ -38,16 +42,24 @@ end
 
 xi.job_utils.black_mage.useManafont = function(player, target, ability)
     player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 60)
+
+    return xi.effect.MANAFONT
 end
 
 xi.job_utils.black_mage.useManaWall = function(player, target, ability)
     player:addStatusEffect(xi.effect.MANA_WALL, 1, 0, 300)
+
+    return xi.effect.MANA_WALL
 end
 
 xi.job_utils.black_mage.useManawell = function(player, target, ability)
     target:addStatusEffect(xi.effect.MANAWELL, 1, 0, 60)
+
+    return xi.effect.MANAWELL
 end
 
 xi.job_utils.black_mage.useSubtleSorcery = function(player, target, ability)
     player:addStatusEffect(xi.effect.SUBTLE_SORCERY, 1, 0, 60)
+
+    return xi.effect.SUBTLE_SORCERY
 end

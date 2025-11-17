@@ -77,7 +77,6 @@
 #include "mob_modifier.h"
 #include "modifier.h"
 #include "notoriety_container.h"
-#include "packets/char_job_extra.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_status_icons.h"
 #include "petskill.h"
@@ -98,7 +97,6 @@
 
 CCharEntity::CCharEntity()
 : m_PlayTime(0s)
-, m_AMAN(xi::lazy<CAMANContainer>::with_args(this))
 {
     TracyZoneScoped;
     objtype     = TYPE_PC;
@@ -259,6 +257,7 @@ CCharEntity::CCharEntity()
     m_StartActionPos   = {};
     m_ActionOffsetPos  = {};
     m_previousLocation = {};
+    m_PrevZonelineID   = 0;
 
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;
@@ -768,7 +767,11 @@ auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 
 auto CCharEntity::aman() -> CAMANContainer&
 {
-    return m_AMAN;
+    if (!m_AMAN)
+    {
+        m_AMAN = CAMANContainer(this);
+    }
+    return *m_AMAN;
 }
 
 int8 CCharEntity::getShieldSize()
@@ -1087,8 +1090,7 @@ void CCharEntity::PostTick()
     {
         pushPacket<CCharStatusPacket>(this);
         pushPacket<CCharSyncPacket>(this);
-        pushPacket<CCharJobExtraPacket>(this, true);
-        pushPacket<CCharJobExtraPacket>(this, false);
+        charutils::SendExtendedJobPackets(this);
         pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(this);
         if (PParty)
         {
@@ -1123,11 +1125,15 @@ void CCharEntity::PostTick()
             // clang-format on
         }
         // Do not send an update packet when only the position has change
-        if (updatemask ^ UPDATE_POS)
+        // Send one if the m_SendServerStatus flag is set (cutscenes will ALWAYS send one, and may also send an 0x00D!)
+        // sendServerStatus_ is essentially like a separate update mask, and acts like an "extension" of updatemask
+        if (updatemask ^ UPDATE_POS || sendServerStatus_)
         {
             pushPacket<CCharStatusPacket>(this);
         }
-        updatemask = 0;
+
+        sendServerStatus_ = false;
+        updatemask        = 0;
     }
 }
 
@@ -1578,8 +1584,11 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
-                        SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
-                                                                            PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                            PBattleTarget,
+                            PWeaponSkill->getPrimarySkillchain(),
+                            PWeaponSkill->getSecondarySkillchain(),
+                            PWeaponSkill->getTertiarySkillchain());
                         // See SUBEFFECT enum in battleentity.h
                         if (effect != SUBEFFECT_NONE)
                         {
@@ -1691,12 +1700,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        if (battleutils::IsParalyzed(this))
-        {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
-            return;
-        }
-
         // get any available recast reduction
         // TODO: this is DIFFERENT than gear reduction mod which is a static reduction for the entire ability!
         auto recastReduction = 0s;
@@ -1763,6 +1766,19 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = 0s;
         }
 
+        // Check paralysis and consume recast for non-SP abilities
+        if (battleutils::IsParalyzed(this))
+        {
+            // SP abilities (recastId == 0) don't consume recast when paralyzed
+            if (PAbility->getRecastId() != 0)
+            {
+                charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
+            }
+
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+            return;
+        }
+
         // remove invisible if aggressive
         if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
         {
@@ -1770,7 +1786,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             {
                 if (PAbility->getID() == ABILITY_ASSAULT)
                 {
-                    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                    charutils::RemoveInvisible(this);
                 }
                 // generic aggressive action
                 else
@@ -1782,7 +1798,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             else if (PAbility->getID() != ABILITY_TRICK_ATTACK)
             {
                 // remove invisible only
-                StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                charutils::RemoveInvisible(this);
                 StatusEffectContainer->DelStatusEffect(EFFECT_ILLUSION);
             }
         }
@@ -1920,7 +1936,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+                    actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
                     actionTarget.param     = -actionTarget.param;
                 }
 
@@ -1963,7 +1979,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (value < 0)
             {
-                actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+                actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
                 actionTarget.param     = -value;
             }
 
@@ -1985,22 +2001,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // Cleanup "consumed" abilities after action like Contradance
         StatusEffectContainer->DelStatusEffect(PAbility->getPostActionEffectCleanup());
 
-        if (charge)
-        {
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast, baseChargeTime, charge->maxCharges);
-        }
-        else
-        {
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-        }
-
-        uint16 recastID = PAbility->getRecastId();
-        if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastID == 173 || recastID == 174))
-        {
-            PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
-        }
-
-        pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(this);
+        charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
 
         // TODO: refactor
         //  if (this->getMijinGakure())
@@ -2098,7 +2099,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     for (uint8 i = 1; i <= hitCount; ++i)
     {
         // TODO: add Barrage mod racc bonus
-        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage, 0)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage, 0) && !state.IsOutOfRange()) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget, this))
@@ -2142,7 +2143,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
-            actionTarget.messageID  = 354;
+            actionTarget.messageID  = MSGBASIC_RANGED_ATTACK_MISS;
             hitCount                = i; // end barrage, shot missed
         }
 
@@ -2243,7 +2244,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             // TODO
         }
-        luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
+        // Handle additional effects only if target is not already dead
+        if (PTarget->GetHPP() > 0)
+        {
+            luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
+        }
     }
     else if (shadowsTaken > 0)
     {
@@ -2344,7 +2349,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             // Camouflage up, and retained, but all other effects must be dropped
             StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
-            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
             StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
             StatusEffectContainer->DelStatusEffect(EFFECT_ILLUSION);
         }
@@ -2599,7 +2603,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         db::preparedStmt("UPDATE char_inventory "
                          "SET extra = ? "
                          "WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PItem->m_extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+                         PItem->m_extra,
+                         this->id,
+                         PItem->getLocationID(),
+                         PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
@@ -3243,8 +3250,37 @@ void CCharEntity::queueEvent(EventInfo* eventToQueue)
 void CCharEntity::tryStartNextEvent()
 {
     TracyZoneScoped;
-    if (isInEvent() || eventQueue.empty())
+    if (isInEvent())
+    {
         return;
+    }
+
+    if (eventQueue.empty())
+    {
+        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing
+
+        // Chocobo NPC (outside, gives you a mount) edge case
+        if (auto PStatusEffect = StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED))
+        {
+            switch (PStatusEffect->GetPower())
+            {
+                case MOUNT_CHOCOBO:
+                case MOUNT_NOBLE_CHOCOBO:
+                    animation = ANIMATION_CHOCOBO;
+                    break;
+                default:
+                    animation = ANIMATION_MOUNT;
+                    break;
+            }
+        }
+        else
+        {
+            animation = ANIMATION_NONE;
+        }
+
+        sendServerStatus_ = true;
+        return;
+    }
 
     EventInfo* oldEvent = currentEvent;
     currentEvent        = eventQueue.front();
@@ -3288,6 +3324,10 @@ void CCharEntity::tryStartNextEvent()
     {
         pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
     }
+
+    animation = ANIMATION_EVENT;
+    updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
+    sendServerStatus_ = true; // sendServerStatus_ is somewhat like an update mask on its own
 }
 
 void CCharEntity::skipEvent()
@@ -3325,7 +3365,7 @@ void CCharEntity::setLocked(bool locked)
     }
 }
 
-auto CCharEntity::getCharVar(std::string const& varName) const -> int32
+auto CCharEntity::getCharVar(const std::string& varName) const -> int32
 {
     if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
     {
@@ -3345,14 +3385,15 @@ auto CCharEntity::getCharVar(std::string const& varName) const -> int32
     return value.first;
 }
 
-auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>
+auto CCharEntity::getCharVarsWithPrefix(const std::string& prefix) -> std::vector<std::pair<std::string, int32>>
 {
     const auto currentTimestamp = earth_time::timestamp();
 
     std::vector<std::pair<std::string, int32>> charVars;
 
     const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
-                                       this->id, fmt::format("{}%", prefix));
+                                       this->id,
+                                       fmt::format("{}%", prefix));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -3373,29 +3414,29 @@ auto CCharEntity::getCharVarsWithPrefix(std::string const& prefix) -> std::vecto
     return charVars;
 }
 
-void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::setCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
     charutils::PersistCharVar(this->id, charVarName, value, expiry);
 }
 
-void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::setVolatileCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
     charVarChanges.insert(charVarName);
 }
 
-void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
+void CCharEntity::updateCharVarCache(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
     charVarCache[charVarName] = { value, expiry };
 }
 
-void CCharEntity::removeFromCharVarCache(std::string const& varName)
+void CCharEntity::removeFromCharVarCache(const std::string& varName)
 {
     charVarCache.erase(varName);
 }
 
-void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
+void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
 {
     if (prefix.size() < 5)
     {

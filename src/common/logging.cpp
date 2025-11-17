@@ -38,11 +38,13 @@
 
 namespace
 {
-    std::string ServerName;
 
-    CircularBuffer<std::string> BacktraceBuffer(16);
+std::string ServerName;
 
-    bool gSeenWarningOrError = false;
+CircularBuffer<std::string> BacktraceBuffer(16);
+
+bool gSeenWarningOrError = false;
+
 } // namespace
 
 class star_formatter_flag : public spdlog::custom_flag_formatter
@@ -128,7 +130,7 @@ const std::vector<std::string> logNames = {
     "trace",
 };
 
-void logging::InitializeLog(std::string const& serverName, std::string const& logFile, bool appendDate)
+void logging::InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate)
 {
     ServerName = serverName;
 
@@ -169,7 +171,7 @@ void logging::ShutDown()
     spdlog::shutdown();
 }
 
-void logging::SetPattern(std::string const& str)
+void logging::SetPattern(const std::string& str)
 {
     // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
     auto formatter = std::make_unique<spdlog::pattern_formatter>();
@@ -181,7 +183,7 @@ void logging::SetPattern(std::string const& str)
     spdlog::set_formatter(std::move(formatter));
 }
 
-void logging::AddBacktrace(std::string const& str)
+void logging::AddBacktrace(const std::string& str)
 {
     BacktraceBuffer.enqueue(str);
 }

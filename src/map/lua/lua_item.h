@@ -92,11 +92,11 @@ public:
 
     bool isInstalled();
 
-    void setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> sol::table;
 
     auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
-    void setExData(sol::table const& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
+    void setExData(const sol::table& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
 
     bool operator==(const CLuaItem& other) const
     {

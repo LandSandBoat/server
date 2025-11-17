@@ -454,8 +454,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // Helpers to map HP/MPScale around 100 to 1-7 grades
     // std::clamp doesn't play nice with uint8, so -> unsigned int
-    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd,
-                        unsigned int inputVal) -> unsigned int
+    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd, unsigned int inputVal) -> unsigned int
     {
         unsigned int inputRange  = inputEnd - inputStart;
         unsigned int outputRange = outputEnd - outputStart;

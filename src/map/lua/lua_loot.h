@@ -37,10 +37,10 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaLootContainer& action);
 
     void addItem(uint16 item, uint16 rate, sol::variadic_args va);
-    void addGroup(uint16 groupRate, sol::table const& items);
+    void addGroup(uint16 groupRate, const sol::table& items);
 
     void addItemFixed(uint16 item, uint16 rate, sol::variadic_args va);
-    void addGroupFixed(uint16 groupRate, sol::table const& items);
+    void addGroupFixed(uint16 groupRate, const sol::table& items);
 
     bool operator==(const CLuaLootContainer& other) const
     {
@@ -51,7 +51,7 @@ public:
 
 private:
     void addItemToContainer(uint16 item, uint16 rate, sol::variadic_args va, bool hasFixedRate);
-    void addGroupToContainer(uint16 groupRate, sol::table const& items, bool hasFixedRate);
+    void addGroupToContainer(uint16 groupRate, const sol::table& items, bool hasFixedRate);
 };
 
 #endif

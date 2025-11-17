@@ -28,19 +28,21 @@
 #include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
+#include "utils/synthutils.h"
 
 namespace
 {
-    const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
-    {
-        if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-        {
-            const auto sender       = PChar->id;
-            const auto senderName   = PChar->getName();
-            const auto receiver     = PNpc->id;
-            const auto receiverName = PNpc->getName();
 
-            // clang-format off
+const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
+    {
+        const auto sender       = PChar->id;
+        const auto senderName   = PChar->getName();
+        const auto receiver     = PNpc->id;
+        const auto receiverName = PNpc->getName();
+
+        // clang-format off
             Async::getInstance()->submit([itemId, quantity, sender, senderName, receiver, receiverName]()
             {
                 const auto tradeDate    = earth_time::timestamp();
@@ -50,9 +52,10 @@ namespace
                     ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, tradeDate);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -116,4 +119,13 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     luautils::OnTrade(PChar, PNpc);
     PChar->TradeContainer->unreserveUnconfirmed();
+    if (PChar->isInEvent())
+    {
+        // Retail accurate: If the trade started an event then any current synth is a crit fail.
+        if (PChar->animation == ANIMATION_SYNTH ||
+            (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
+        {
+            charutils::forceSynthCritFail("GP_CLI_COMMAND_ITEM_TRANSFER", PChar);
+        }
+    }
 }

@@ -27,9 +27,11 @@
 
 namespace uuid
 {
-    // NOTE: We aren't using the built-in Linux implementation for generating UUIDs because it
-    //     : seeds the UUID using system information, so instead we're using the same implementation
-    //     : on both platforms powered by the user-chosen random engine (default MT32).
-    // TODO: Replace/augment this with a faster implementation on platforms that support it (SIMD, etc.)
-    auto GenerateUUID() -> std::string;
+
+// NOTE: We aren't using the built-in Linux implementation for generating UUIDs because it
+//     : seeds the UUID using system information, so instead we're using the same implementation
+//     : on both platforms powered by the user-chosen random engine (default MT32).
+// TODO: Replace/augment this with a faster implementation on platforms that support it (SIMD, etc.)
+auto GenerateUUID() -> std::string;
+
 } // namespace uuid

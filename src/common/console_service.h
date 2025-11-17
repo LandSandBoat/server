@@ -52,7 +52,7 @@ public:
 
     // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
     // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-    void registerCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>&)> func);
+    void registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func);
 
 private:
     void registerDefaultCommands();

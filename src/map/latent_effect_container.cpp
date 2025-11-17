@@ -307,6 +307,7 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
             case LATENT::WEATHER_CONDITION:
             case LATENT::WEATHER_ELEMENT:
             case LATENT::NATION_CONTROL:
+            case LATENT::IN_GARRISON:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -553,6 +554,7 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
             case LATENT::JOB_MULTIPLE_AT_NIGHT:
             case LATENT::JOB_LEVEL_BELOW:
             case LATENT::JOB_LEVEL_ABOVE:
+            case LATENT::IN_GARRISON:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -1150,6 +1152,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             break;
         case LATENT::IN_ADOULIN:
             expression = m_POwner->isInAdoulin();
+            break;
+        case LATENT::IN_GARRISON:
+            expression = m_POwner->isInGarrison() && m_POwner->GetMLevel() >= latentEffect.GetConditionsValue();
             break;
         case LATENT::FOOD_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD) &&

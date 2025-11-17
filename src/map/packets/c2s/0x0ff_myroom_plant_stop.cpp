@@ -32,7 +32,9 @@
 
 namespace
 {
-    const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_STOP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -54,7 +56,10 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
         PItem->setDried(true);
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PItem->m_extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+                         PItem->m_extra,
+                         PChar->id,
+                         PItem->getLocationID(),
+                         PItem->getSlotID());
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();

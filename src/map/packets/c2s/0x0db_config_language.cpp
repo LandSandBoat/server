@@ -22,6 +22,7 @@
 #include "0x0db_config_language.h"
 
 #include "entities/charentity.h"
+#include "packets/char_status.h"
 #include "packets/s2c/0x0b4_config.h"
 #include "utils/charutils.h"
 
@@ -76,4 +77,5 @@ void GP_CLI_COMMAND_CONFIG_LANGUAGE::process(MapSession* PSession, CCharEntity* 
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
+    PChar->pushPacket<CCharStatusPacket>(PChar);
 }

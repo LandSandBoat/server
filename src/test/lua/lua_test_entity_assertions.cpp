@@ -37,109 +37,111 @@
 
 namespace
 {
-    // Mission log IDs - used for xi.mission.id.*
-    const std::unordered_map<uint8, std::string> missionLogIdMap = {
-        { 0, "sandoria" },
-        { 1, "bastok" },
-        { 2, "windurst" },
-        { 3, "zilart" },
-        { 4, "toau" },
-        { 5, "wotg" },
-        { 6, "cop" },
-        { 7, "assault" },
-        { 8, "campaign" },
-        { 9, "anov" },
-        { 10, "amk" },
-        { 11, "asa" },
-        { 12, "roe" },
-        { 13, "voidwatch" },
-        { 14, "abyssea" },
-        { 15, "soa" },
-        { 16, "rov" }
-    };
 
-    // Quest log IDs - used for xi.quest.id.*
-    const std::unordered_map<uint8, std::string> questLogIdMap = {
-        { 0, "sandoria" },
-        { 1, "bastok" },
-        { 2, "windurst" },
-        { 3, "jeuno" },
-        { 4, "otherAreas" },
-        { 5, "outlands" },
-        { 6, "ahtUrhgan" },
-        { 7, "crystalWar" },
-        { 8, "abyssea" },
-        { 9, "adoulin" },
-        { 10, "coalition" }
-    };
+// Mission log IDs - used for xi.mission.id.*
+const std::unordered_map<uint8, std::string> missionLogIdMap = {
+    { 0, "sandoria" },
+    { 1, "bastok" },
+    { 2, "windurst" },
+    { 3, "zilart" },
+    { 4, "toau" },
+    { 5, "wotg" },
+    { 6, "cop" },
+    { 7, "assault" },
+    { 8, "campaign" },
+    { 9, "anov" },
+    { 10, "amk" },
+    { 11, "asa" },
+    { 12, "roe" },
+    { 13, "voidwatch" },
+    { 14, "abyssea" },
+    { 15, "soa" },
+    { 16, "rov" }
+};
 
-    auto getEnumKey = [](const std::string& enumPath, const uint32 value) -> std::string
+// Quest log IDs - used for xi.quest.id.*
+const std::unordered_map<uint8, std::string> questLogIdMap = {
+    { 0, "sandoria" },
+    { 1, "bastok" },
+    { 2, "windurst" },
+    { 3, "jeuno" },
+    { 4, "otherAreas" },
+    { 5, "outlands" },
+    { 6, "ahtUrhgan" },
+    { 7, "crystalWar" },
+    { 8, "abyssea" },
+    { 9, "adoulin" },
+    { 10, "coalition" }
+};
+
+auto getEnumKey = [](const std::string& enumPath, const uint32 value) -> std::string
+{
+    // Split the path by '.' and navigate to the enum table
+    sol::table current = lua.globals();
+
+    size_t start = 0;
+    size_t end   = enumPath.find('.');
+
+    while (end != std::string::npos)
     {
-        // Split the path by '.' and navigate to the enum table
-        sol::table current = lua.globals();
+        std::string part = enumPath.substr(start, end - start);
 
-        size_t start = 0;
-        size_t end   = enumPath.find('.');
-
-        while (end != std::string::npos)
+        // Check if this part is a number (for indexed tables)
+        sol::object next;
+        if (std::ranges::all_of(part, ::isdigit))
         {
-            std::string part = enumPath.substr(start, end - start);
-
-            // Check if this part is a number (for indexed tables)
-            sol::object next;
-            if (std::ranges::all_of(part, ::isdigit))
-            {
-                next = current[std::stoi(part)];
-            }
-            else
-            {
-                next = current[part];
-            }
-
-            if (!next.valid() || !next.is<sol::table>())
-            {
-                return std::to_string(value); // Path invalid
-            }
-
-            current = next.as<sol::table>();
-            start   = end + 1;
-            end     = enumPath.find('.', start);
+            next = current[std::stoi(part)];
+        }
+        else
+        {
+            next = current[part];
         }
 
-        if (start < enumPath.length())
+        if (!next.valid() || !next.is<sol::table>())
         {
-            std::string lastPart = enumPath.substr(start);
-            sol::object finalTable;
-
-            if (std::ranges::all_of(lastPart, ::isdigit))
-            {
-                finalTable = current[std::stoi(lastPart)];
-            }
-            else
-            {
-                finalTable = current[lastPart];
-            }
-
-            if (!finalTable.valid() || !finalTable.is<sol::table>())
-            {
-                return std::to_string(value);
-            }
-
-            current = finalTable.as<sol::table>();
+            return std::to_string(value); // Path invalid
         }
 
-        // Iterate through the table to find the matching value
-        for (const auto& [key, val] : current)
+        current = next.as<sol::table>();
+        start   = end + 1;
+        end     = enumPath.find('.', start);
+    }
+
+    if (start < enumPath.length())
+    {
+        std::string lastPart = enumPath.substr(start);
+        sol::object finalTable;
+
+        if (std::ranges::all_of(lastPart, ::isdigit))
         {
-            if (val.is<uint32>() && val.as<uint32>() == value)
-            {
-                return key.as<std::string>();
-            }
+            finalTable = current[std::stoi(lastPart)];
+        }
+        else
+        {
+            finalTable = current[lastPart];
         }
 
-        // Default to provided value if not found
-        return std::to_string(value);
-    };
+        if (!finalTable.valid() || !finalTable.is<sol::table>())
+        {
+            return std::to_string(value);
+        }
+
+        current = finalTable.as<sol::table>();
+    }
+
+    // Iterate through the table to find the matching value
+    for (const auto& [key, val] : current)
+    {
+        if (val.is<uint32>() && val.as<uint32>() == value)
+        {
+            return key.as<std::string>();
+        }
+    }
+
+    // Default to provided value if not found
+    return std::to_string(value);
+};
+
 } // namespace
 
 // Common assertions for a TestEntity/TestClientEntityPair
@@ -210,8 +212,23 @@ auto CLuaTestEntityAssertions::hasLocalVar(const std::string& varName, uint32 ex
 auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->hasStatusEffect(effectId, sol::lua_nil),
-                    std::format("Does not have effect {}", getEnumKey("xi.effect", effectId)),
-                    std::format("Has effect {}", getEnumKey("xi.effect", effectId)));
+                    std::format("Expected entity to have status effect {}", getEnumKey("xi.effect", effectId)),
+                    std::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", effectId)));
+    return *this;
+}
+
+/************************************************************************
+ *  Function: hasAnimation()
+ *  Purpose : Assert entity has specified animation
+ *  Example : player.assert:hasAnimation(xi.animation.CHOCOBO)
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaTestEntityAssertions::hasAnimation(const uint8 animation) -> CLuaTestEntityAssertions&
+{
+    assertCondition(entity_->getAnimation() == animation,
+                    std::format("Does not have animation {} set", getEnumKey("xi.animation", animation)),
+                    std::format("Does have animation {} set", getEnumKey("xi.animation", animation)));
     return *this;
 }
 
@@ -266,7 +283,7 @@ auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAsserti
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expectedMission) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasMission(const MissionLog logId, const uint16 expectedMission) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -276,8 +293,8 @@ auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expect
 
     const auto currentMission     = entity_->getCurrentMission(sol::make_object(lua.lua_state(), logId));
     const auto logIdValue         = logId;
-    const auto logIdStr           = getEnumKey("xi.mission.log_id", logIdValue);
-    const auto missionArea        = missionLogIdMap.contains(logIdValue) ? missionLogIdMap.at(logIdValue) : std::to_string(logIdValue);
+    const auto logIdStr           = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logIdValue));
+    const auto missionArea        = missionLogIdMap.contains(static_cast<uint8_t>(logIdValue)) ? missionLogIdMap.at(static_cast<uint8_t>(logIdValue)) : std::to_string(static_cast<uint8_t>(logIdValue));
     const auto expectedMissionStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), expectedMission);
     const auto currentMissionStr  = getEnumKey(std::format("xi.mission.id.{}", missionArea), currentMission);
 
@@ -294,7 +311,7 @@ auto CLuaTestEntityAssertions::hasMission(const uint8 logId, const uint16 expect
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasCompletedMission(const uint8 logId, const uint16 missionId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasCompletedMission(const MissionLog logId, const uint16 missionId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -302,8 +319,8 @@ auto CLuaTestEntityAssertions::hasCompletedMission(const uint8 logId, const uint
         return *this;
     }
 
-    const auto logIdStr     = getEnumKey("xi.mission.log_id", logId);
-    const auto missionArea  = missionLogIdMap.contains(logId) ? missionLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr     = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logId));
+    const auto missionArea  = missionLogIdMap.contains(static_cast<uint8_t>(logId)) ? missionLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto missionIdStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), missionId);
 
     assertCondition(entity_->hasCompletedMission(logId, missionId),
@@ -391,7 +408,7 @@ auto CLuaTestEntityAssertions::isAlive() -> CLuaTestEntityAssertions&
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -399,8 +416,8 @@ auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId)
         return *this;
     }
 
-    const auto logIdStr   = getEnumKey("xi.questLog", logId);
-    const auto questArea  = questLogIdMap.contains(logId) ? questLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
+    const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->getQuestStatus(logId, questId) != 0,
@@ -416,7 +433,7 @@ auto CLuaTestEntityAssertions::hasQuest(const uint8 logId, const uint16 questId)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasCompletedQuest(const uint8 logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasCompletedQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -424,8 +441,8 @@ auto CLuaTestEntityAssertions::hasCompletedQuest(const uint8 logId, const uint16
         return *this;
     }
 
-    const auto logIdStr   = getEnumKey("xi.questLog", logId);
-    const auto questArea  = questLogIdMap.contains(logId) ? questLogIdMap.at(logId) : std::to_string(logId);
+    const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
+    const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
     const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->hasCompletedQuest(logId, questId),
@@ -476,6 +493,7 @@ void CLuaTestEntityAssertions::Register()
     SOL_REGISTER("inZone", CLuaTestEntityAssertions::inZone);
     SOL_REGISTER("hasLocalVar", CLuaTestEntityAssertions::hasLocalVar);
     SOL_REGISTER("hasEffect", CLuaTestEntityAssertions::hasEffect);
+    SOL_REGISTER("hasAnimation", CLuaTestEntityAssertions::hasAnimation);
     SOL_REGISTER("hasNationRank", CLuaTestEntityAssertions::hasNationRank);
     SOL_REGISTER("hasKI", CLuaTestEntityAssertions::hasKI);
     SOL_REGISTER("hasMission", CLuaTestEntityAssertions::hasMission);

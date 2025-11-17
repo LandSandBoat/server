@@ -23,69 +23,98 @@ content:addEssentialMobs({ 'Gladiatorial_Weapon' })
 content.loot =
 {
     {
-        { itemId = xi.item.RUSTY_PICK, weight = 1000 }, -- rusty_pick
+        { itemId = xi.item.GIL,                    weight = 1000, amount = 3000 },
     },
 
     {
-        { itemId = xi.item.ASHIGARU_EARRING,   weight = 71 }, -- ashigaru_earring
-        { itemId = xi.item.ESQUIRES_EARRING,   weight = 71 }, -- esquires_earring
-        { itemId = xi.item.MAGICIANS_EARRING,  weight = 72 }, -- magicians_earring
-        { itemId = xi.item.MERCENARYS_EARRING, weight = 72 }, -- mercenarys_earring
-        { itemId = xi.item.PILFERERS_EARRING,  weight = 72 }, -- pilferers_earring
-        { itemId = xi.item.SINGERS_EARRING,    weight = 71 }, -- singers_earring
-        { itemId = xi.item.TRIMMERS_EARRING,   weight = 71 }, -- trimmers_earring
-        { itemId = xi.item.WARLOCKS_EARRING,   weight = 72 }, -- warlocks_earring
-        { itemId = xi.item.WIZARDS_EARRING,    weight = 72 }, -- wizards_earring
-        { itemId = xi.item.WRESTLERS_EARRING,  weight = 72 }, -- wrestlers_earring
-        { itemId = xi.item.WYVERN_EARRING,     weight = 71 }, -- wyvern_earring
-        { itemId = xi.item.BEATERS_EARRING,    weight = 71 }, -- beaters_earring
-        { itemId = xi.item.GENIN_EARRING,      weight = 71 }, -- genin_earring
-        { itemId = xi.item.KILLER_EARRING,     weight = 71 }, -- killer_earring
+        { itemId = xi.item.RUSTY_PICK,             weight = 1000 },
     },
 
     {
-        { itemId = xi.item.AVATAR_BELT, weight = 71 }, -- avatar_belt
-        { itemId = xi.item.AXE_BELT,    weight = 71 }, -- axe_belt
-        { itemId = xi.item.CESTUS_BELT, weight = 72 }, -- cestus_belt
-        { itemId = xi.item.DAGGER_BELT, weight = 72 }, -- dagger_belt
-        { itemId = xi.item.GUN_BELT,    weight = 72 }, -- gun_belt
-        { itemId = xi.item.KATANA_OBI,  weight = 71 }, -- katana_obi
-        { itemId = xi.item.LANCE_BELT,  weight = 71 }, -- lance_belt
-        { itemId = xi.item.SARASHI,     weight = 72 }, -- sarashi
-        { itemId = xi.item.SCYTHE_BELT, weight = 72 }, -- scythe_belt
-        { itemId = xi.item.SHIELD_BELT, weight = 72 }, -- shield_belt
-        { itemId = xi.item.SONG_BELT,   weight = 71 }, -- song_belt
-        { itemId = xi.item.STAFF_BELT,  weight = 71 }, -- staff_belt
-        { itemId = xi.item.PICK_BELT,   weight = 71 }, -- pick_belt
-        { itemId = xi.item.RAPIER_BELT, weight = 71 }, -- rapier_belt
+        { itemId = xi.item.NONE,                   weight = 500 },
+        { itemId = xi.item.RUSTY_PICK,             weight = 250 },
+        { itemId = xi.item.RUSTY_GREATSWORD,       weight = 100 },
+        { itemId = xi.item.CORAL_FRAGMENT,         weight =  50 },
+        { itemId = xi.item.GOLD_INGOT,             weight =  50 },
+        { itemId = xi.item.PLATINUM_INGOT,         weight =  50 },
     },
 
     {
-        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 200 }, -- scroll_of_erase
-        { itemId = xi.item.SCROLL_OF_REPRISAL,     weight = 200 }, -- scroll_of_reprisal
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 200 }, -- scroll_of_dispel
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 200 }, -- scroll_of_magic_finale
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 200 }, -- gscroll_of_utsusemi_nin_belt
+        quantity = 2,
+        { itemId = xi.item.AVATAR_BELT,            weight =  25 },
+        { itemId = xi.item.AXE_BELT,               weight =  25 },
+        { itemId = xi.item.CESTUS_BELT,            weight =  25 },
+        { itemId = xi.item.DAGGER_BELT,            weight =  25 },
+        { itemId = xi.item.GUN_BELT,               weight =  25 },
+        { itemId = xi.item.KATANA_OBI,             weight =  25 },
+        { itemId = xi.item.LANCE_BELT,             weight =  25 },
+        { itemId = xi.item.MACE_BELT,              weight =  25 },
+        { itemId = xi.item.PICK_BELT,              weight =  25 },
+        { itemId = xi.item.RAPIER_BELT,            weight =  25 },
+        { itemId = xi.item.SARASHI,                weight =  25 },
+        { itemId = xi.item.SCYTHE_BELT,            weight =  25 },
+        { itemId = xi.item.SHIELD_BELT,            weight =  25 },
+        { itemId = xi.item.SONG_BELT,              weight =  25 },
+        { itemId = xi.item.STAFF_BELT,             weight =  25 },
+        { itemId = xi.item.ASHIGARU_EARRING,       weight =  25 },
+        { itemId = xi.item.BEATERS_EARRING,        weight =  25 },
+        { itemId = xi.item.ESQUIRES_EARRING,       weight =  25 },
+        { itemId = xi.item.GENIN_EARRING,          weight =  25 },
+        { itemId = xi.item.KILLER_EARRING,         weight =  25 },
+        { itemId = xi.item.MAGICIANS_EARRING,      weight =  25 },
+        { itemId = xi.item.MERCENARYS_EARRING,     weight =  25 },
+        { itemId = xi.item.PILFERERS_EARRING,      weight =  25 },
+        { itemId = xi.item.SINGERS_EARRING,        weight =  25 },
+        { itemId = xi.item.TRIMMERS_EARRING,       weight =  25 },
+        { itemId = xi.item.WARLOCKS_EARRING,       weight =  25 },
+        { itemId = xi.item.WIZARDS_EARRING,        weight =  25 },
+        { itemId = xi.item.WRESTLERS_EARRING,      weight =  25 },
+        { itemId = xi.item.WYVERN_EARRING,         weight =  25 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
+        { itemId = xi.item.IRON_INGOT,             weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
+        { itemId = xi.item.ELM_LOG,                weight =  20 },
+        { itemId = xi.item.SARDONYX,               weight =   5 },
+        { itemId = xi.item.AMBER_STONE,            weight =   5 },
+        { itemId = xi.item.LAPIS_LAZULI,           weight =   5 },
+        { itemId = xi.item.TOURMALINE,             weight =   5 },
+        { itemId = xi.item.CLEAR_TOPAZ,            weight =   5 },
+        { itemId = xi.item.AMETHYST,               weight =   5 },
+        { itemId = xi.item.LIGHT_OPAL,             weight =   5 },
+        { itemId = xi.item.ONYX,                   weight =   5 },
+        { itemId = xi.item.HI_ETHER,               weight =  10 },
     },
 
     {
-        { itemId = xi.item.NONE,             weight = 775 }, -- nothing
-        { itemId = xi.item.GOLD_INGOT,       weight =  50 }, -- gold_ingot
-        { itemId = xi.item.PLATINUM_INGOT,   weight =  50 }, -- platinum_ingot
-        { itemId = xi.item.PETRIFIED_LOG,    weight =  50 }, -- petrified_log
-        { itemId = xi.item.RUSTY_GREATSWORD, weight =  75 }, -- rusty_greatsword
+        { itemId = xi.item.NONE,                   weight = 450 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 150 },
+        { itemId = xi.item.SCROLL_OF_REGEN,        weight = 140 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  70 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =  70 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =  70 },
+        { itemId = xi.item.HI_POTION,              weight =  50 },
     },
 
     {
-        { itemId = xi.item.NONE,            weight = 250 }, -- nothing
-        { itemId = xi.item.MANNEQUIN_HEAD,  weight = 250 }, -- mannequin_head
-        { itemId = xi.item.MANNEQUIN_BODY,  weight = 250 }, -- mannequin_body
-        { itemId = xi.item.MANNEQUIN_HANDS, weight = 250 }, -- mannequin_hands
+        { itemId = xi.item.NONE,                   weight = 900 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 100 },
     },
 
     {
-        { itemId = xi.item.NONE,     weight = 667 }, -- nothing
-        { itemId = xi.item.HI_ETHER, weight = 333 }, -- hi-ether
+        { itemId = xi.item.NONE,                   weight = 900 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight = 100 },
+
+    },
+
+    {
+        { itemId = xi.item.NONE,                   weight = 900 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 100 },
     },
 }
 

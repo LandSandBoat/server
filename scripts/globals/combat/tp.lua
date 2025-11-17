@@ -139,7 +139,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, acto
     if totalDamage > 0 and target and actor then
         local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
         local baseTPGain         = xi.combat.tp.calculateTPReturn(target, attackOutput.modifiedDelay)
-        local dAGI               = actor:getMod(xi.mod.AGI) - target:getMod(xi.mod.AGI)
+        local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
         local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
         local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)                    -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
         local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
@@ -172,7 +172,7 @@ end
 xi.combat.tp.calculateTPGainOnMagicalDamage = function(totalDamage, actor, target)
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     if totalDamage > 0 and target and actor then
-        local dAGI               = actor:getMod(xi.mod.AGI) - target:getMod(xi.mod.AGI)
+        local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
         local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
         local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)                    -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
         local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)

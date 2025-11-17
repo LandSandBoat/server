@@ -41,7 +41,7 @@ public:
     auto original() const -> sol::object;
     auto path() const -> std::string;
 
-    virtual auto operator()(sol::variadic_args args) -> sol::object;
+    virtual auto operator()(sol::variadic_args args) -> sol::as_returns_t<std::vector<sol::object>>;
     static void  Register();
 
 protected:

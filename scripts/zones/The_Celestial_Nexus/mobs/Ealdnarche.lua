@@ -12,53 +12,35 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     --50% fast cast, no standback
-    mob:addMod(xi.mod.UFASTCAST, 50)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMod(xi.mod.UFASTCAST, 50)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setUnkillable(true)
+    mob:setMod(xi.mod.MDEF, 50)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 5)
+    -- Wait 20 seconds before casting
+    mob:timer(20000, function(mobArg)
+        mobArg:setMagicCastingEnabled(true)
+    end)
+
     GetMobByID(mob:getID() + 1):updateEnmity(target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getBattleTime() % 9 <= 2 then
-        local orbitalOne = GetMobByID(mob:getID() + 3)
-        local orbitalTwo = GetMobByID(mob:getID() + 4)
-
-        if orbitalOne and not orbitalOne:isSpawned() then
-            orbitalOne:setPos(mob:getPos())
-            orbitalOne:spawn()
-            orbitalOne:updateEnmity(target)
-        elseif orbitalTwo and not orbitalTwo:isSpawned() then
-            orbitalTwo:setPos(mob:getPos())
-            orbitalTwo:spawn()
-            orbitalTwo:updateEnmity(target)
-        end
-    end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    local mobId      = mob:getID()
-    local orbitalOne = GetMobByID(mobId + 3)
-    local orbitalTwo = GetMobByID(mobId + 4)
-
-    if orbitalOne and orbitalOne:isSpawned() then
-        DespawnMob(mobId + 3)
-    end
-
-    if orbitalTwo and orbitalTwo:isSpawned() then
-        DespawnMob(mobId + 4)
-    end
+    -- Instantly respawns orbital when they despawn
+    local orbitals = { mob:getID() + 3, mob:getID() + 4 }
+    xi.mob.callPets(mob, orbitals, { dieWithOwner = true, noAnimation = true })
 end
 
 return entity

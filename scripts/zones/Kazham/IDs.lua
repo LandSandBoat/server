@@ -38,6 +38,7 @@ zones[xi.zone.KAZHAM] =
         NOMAD_MOOGLE_DIALOG           = 10610, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
         MAMERIE_SHOP_DIALOG           = 10634, -- Is there something you require?
         EVISCERATION_LEARNED          = 10671, -- You have learned the weapon skill Evisceration!
+        SUSPICIOUS_CHARACTERS         = 10690, -- It's my job to look out for suspicious characters coming in on the airships.
         RETRIEVE_DIALOG_ID            = 11021, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 11879, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

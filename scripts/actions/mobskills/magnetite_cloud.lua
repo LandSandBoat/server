@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
         target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.EARTH)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 75, 0, math.random(30, 60))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 75, 0, 60)
     end
 
     return damage

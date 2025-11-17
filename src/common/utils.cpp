@@ -101,7 +101,9 @@ void getMSB(uint32* result, uint32 value)
     _BitScanReverse((unsigned long*)result, value);
 #else
     while (value >>= 1)
+    {
         (*result)++;
+    }
 #endif
 }
 
@@ -722,7 +724,7 @@ std::string UnpackSoultrapperName(uint8 input[])
     return output;
 }
 
-std::string escape(std::string const& s)
+std::string escape(const std::string& s)
 {
     std::size_t n = s.length();
     std::string escaped;
@@ -738,7 +740,7 @@ std::string escape(std::string const& s)
     return escaped;
 }
 
-std::vector<std::string> split(std::string const& s, std::string const& delimiter)
+std::vector<std::string> split(const std::string& s, const std::string& delimiter)
 {
     std::size_t pos_start = 0;
     std::size_t pos_end   = 0;
@@ -758,34 +760,38 @@ std::vector<std::string> split(std::string const& s, std::string const& delimite
     return res;
 }
 
-std::string to_lower(std::string const& s)
+std::string to_lower(const std::string& s)
 {
-    // clang-format off
     std::string data = s;
-    std::transform(data.begin(), data.end(), data.begin(),
-    [](unsigned char c)
-    {
-        return std::tolower(c);
-    });
-    // clang-format on
+    std::transform(
+        data.begin(),
+        data.end(),
+        data.begin(),
+        [](unsigned char c)
+        {
+            return std::tolower(c);
+        });
+
     return data;
 }
 
-std::string to_upper(std::string const& s)
+std::string to_upper(const std::string& s)
 {
-    // clang-format off
     std::string data = s;
-    std::transform(data.begin(), data.end(), data.begin(),
-    [](unsigned char c)
-    {
-        return std::toupper(c);
-    });
-    // clang-format on
+    std::transform(
+        data.begin(),
+        data.end(),
+        data.begin(),
+        [](unsigned char c)
+        {
+            return std::toupper(c);
+        });
+
     return data;
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
-std::string trim(std::string const& str, std::string const& whitespace)
+std::string trim(const std::string& str, const std::string& whitespace)
 {
     const auto strBegin = str.find_first_not_of(whitespace);
     if (strBegin == std::string::npos)
@@ -802,27 +808,30 @@ std::string trim(std::string const& str, std::string const& whitespace)
 // trim from end (in place)
 void rtrim(std::string& s)
 {
-    // clang-format off
-    s.erase(std::find_if(s.rbegin(), s.rend(),
-    [](unsigned char ch)
-    {
-        return !std::isspace(ch) && ch != '\n';
-    }).base(), s.end());
-    // clang-format on
+    s.erase(
+        std::find_if(
+            s.rbegin(),
+            s.rend(),
+            [](unsigned char ch)
+            {
+                return !std::isspace(ch) && ch != '\n';
+            })
+            .base(),
+        s.end());
 }
 
 // Returns true if the given str matches the given pattern using standard regex
-bool matches(std::string const& target, std::string const& pattern)
+bool matches(const std::string& target, const std::string& pattern)
 {
     return std::regex_match(target, std::regex(pattern));
 }
 
-bool starts_with(std::string const& target, std::string const& pattern)
+bool starts_with(const std::string& target, const std::string& pattern)
 {
     return target.rfind(pattern, 0) != std::string::npos;
 }
 
-std::string replace(std::string const& target, std::string const& search, std::string const& replace)
+std::string replace(const std::string& target, const std::string& search, const std::string& replace)
 {
     try
     {
@@ -925,7 +934,7 @@ void crash()
     *ptr = 0xDEAD;
 }
 
-std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const& mode)
+std::unique_ptr<FILE> utils::openFile(const std::string& path, const std::string& mode)
 {
     return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
 }
@@ -944,12 +953,16 @@ auto utils::isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool
 
 auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
 {
-    // clang-format off
-    return std::all_of(str.begin(), str.end(), [mode](unsigned char ch) { return isPrintableASCII(ch, mode); });
-    // clang-format on
+    return std::all_of(
+        str.begin(),
+        str.end(),
+        [mode](unsigned char ch)
+        {
+            return isPrintableASCII(ch, mode);
+        });
 }
 
-std::string utils::toASCII(std::string const& target, unsigned char replacement)
+std::string utils::toASCII(const std::string& target, unsigned char replacement)
 {
     std::string out;
     out.reserve(target.size());

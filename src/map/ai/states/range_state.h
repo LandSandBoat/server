@@ -35,6 +35,10 @@ public:
     {
         return m_rapidShot;
     }
+    bool IsOutOfRange()
+    {
+        return m_isOutOfRange;
+    }
 
 protected:
     virtual bool CanChangeState() override;
@@ -58,6 +62,7 @@ private:
     const timer::duration m_freePhaseTime     = 1100ms; // Phase 3: The cooldown after a ranged attack is executed. (time after being able to move befer you stop getting "you must wait longer" when attempting to Range Attack again)
     bool                  m_rapidShot{ false };
     position_t            m_startPos;
+    bool                  m_isOutOfRange{ false }; // True if target moved out of range during aim time
 };
 
 #endif

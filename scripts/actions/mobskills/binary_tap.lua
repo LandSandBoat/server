@@ -1,10 +1,10 @@
 -----------------------------------
 -- Binary Tap
--- Attempts to absorb two buffs from a single target, or otherwise steals HP.
+-- Attempts to absorb two buffs from a single target.
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores Shadows
 -- Range: Melee
--- Notes: Can be any (positive) buff, including food. Will drain about 100HP if it can't take any buffs
+-- Notes: Can be any (positive) buff, including food.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,28 +14,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- try to drain buff
-    local effectFirst = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local effectSecond = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
+    local dispel = nil
+    local count = 0
+    local msg -- to be set later
 
-    if effectFirst ~= 0 then
-        local count = 1
+    for i = 1, 2 do
+        dispel = mob:stealStatusEffect(target, bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
-        if effectSecond ~= 0 then
+        if dispel ~= 0 then
             count = count + 1
         end
-
-        skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
-
-        return count
-    else
-        -- time to drain HP. 100-200
-        local power = math.random(0, 101) + 100
-        local dmg   = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-        skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
-        return dmg
     end
+
+    if count == 0 then
+        msg = xi.msg.basic.SKILL_NO_EFFECT -- no effect
+    else
+        msg = xi.msg.basic.DISAPPEAR_NUM
+    end
+
+    skill:setMsg(msg)
+
+    return count
 end
 
 return mobskillObject

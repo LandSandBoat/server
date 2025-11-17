@@ -142,9 +142,14 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
 
     influences[nation] += lost;
 
-    const auto rset2 = db::preparedStmt("UPDATE conquest_system SET sandoria_influence = ?, bastok_influence = ?, "
-                                        "windurst_influence = ?, beastmen_influence = ? WHERE region_id = ?",
-                                        influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
+    const auto rset2 = db::preparedStmt(
+        "UPDATE conquest_system SET sandoria_influence = ?, bastok_influence = ?, "
+        "windurst_influence = ?, beastmen_influence = ? WHERE region_id = ?",
+        influences[0],
+        influences[1],
+        influences[2],
+        influences[3],
+        static_cast<uint8>(region));
 
     return !rset2;
 }

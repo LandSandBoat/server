@@ -15,8 +15,6 @@ local content = Battlefield:new({
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.ATROPOS_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
-
-    experimental     = true,
 })
 
 content:addEssentialMobs({ 'Giant_Moa' })

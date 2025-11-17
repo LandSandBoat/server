@@ -14,8 +14,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = nil
-    local slowed     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 60)
-    local weight     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 40, 0, 60)
+    -- SubPower 1 marks this slow as overwritable by haste despite high power
+    local slowed     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 8500, 0, 90, 0, 1)
+    local weight     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 44, 0, 120)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

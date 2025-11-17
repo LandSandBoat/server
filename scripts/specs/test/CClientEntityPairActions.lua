@@ -4,6 +4,15 @@
 ---@class CClientEntityPairActions
 local CClientEntityPairActions = {}
 
+---Move character
+---@param x number
+---@param y number
+---@param z number
+---@param rot number?
+---@return nil
+function CClientEntityPairActions:move(x, y, z, rot)
+end
+
 ---Cast a spell on a target
 ---@param target CBaseEntity Target entity
 ---@param spellId xi.magic.spell Spell ID constant (e.g., xi.magic.spell.CURE)
@@ -79,4 +88,15 @@ end
 ---@param expectedEvent? ExpectedEvent Expected event configuration
 ---@return nil
 function CClientEntityPairActions:tradeNpc(npcQuery, items, expectedEvent)
+end
+
+---Accept raise prompt
+---@return nil
+function CClientEntityPairActions:acceptRaise()
+end
+
+---Move to, face and engage entity.
+---@param mob CBaseEntity Monster to engage
+---@return nil
+function CClientEntityPairActions:engage(mob)
 end

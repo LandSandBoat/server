@@ -19,6 +19,7 @@ zones[xi.zone.THRONE_ROOM] =
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7232, -- Your time in the battlefield is up! Now exiting...
         PARTY_MEMBERS_ARE_ENGAGED     = 7247, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         NO_BATTLEFIELD_ENTRY          = 7249, -- The door is sealed shut with an evil curse.
+        UNABLE_TO_PROTECT             = 7288, -- You were unable to protect Captain Volker. Now leaving the battlefield.
         TESTIMONY_IS_TORN             = 7290, -- Your <item> is torn...
         TESTIMONY_WEARS               = 7291, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
         MEMBERS_OF_YOUR_PARTY         = 7538, -- Currently, <number> members of your party (including yourself) have clearance to enter the battlefield.

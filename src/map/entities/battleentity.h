@@ -528,6 +528,7 @@ public:
     bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
+    bool isInGarrison();
     bool isInMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();
@@ -572,8 +573,7 @@ public:
     virtual int32 addMP(int32 mp); // increase/decrease the amount of mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
-    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE,
-                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
+    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE, DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
 
     int16 getMod(Mod modID);
     int16 getMaxGearMod(Mod modID);
@@ -591,6 +591,7 @@ public:
     void delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid);
     void saveModifiers();    // save current state of modifiers
     void restoreModifiers(); // restore to saved state
+    void savePetModifiers(); // saves dynamic pet modifiers
 
     void addPetModifier(Mod type, PetModType, int16 amount);
     void setPetModifier(Mod type, PetModType, int16 amount);

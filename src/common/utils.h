@@ -152,15 +152,15 @@ void        DecodeStringSignature(const std::string& signature, char* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
 
-auto escape(std::string const& s) -> std::string;
-auto split(std::string const& s, std::string const& delimiter = " ") -> std::vector<std::string>;
-auto to_lower(std::string const& s) -> std::string;
-auto to_upper(std::string const& s) -> std::string;
+auto escape(const std::string& s) -> std::string;
+auto split(const std::string& s, const std::string& delimiter = " ") -> std::vector<std::string>;
+auto to_lower(const std::string& s) -> std::string;
+auto to_upper(const std::string& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 void rtrim(std::string& s);
-bool matches(std::string const& target, std::string const& pattern);
-bool starts_with(std::string const& target, std::string const& pattern);
-auto replace(std::string const& target, std::string const& search, std::string const& replace) -> std::string;
+bool matches(const std::string& target, const std::string& pattern);
+bool starts_with(const std::string& target, const std::string& pattern);
+auto replace(const std::string& target, const std::string& search, const std::string& replace) -> std::string;
 
 look_t stringToLook(std::string str);
 
@@ -186,28 +186,30 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
 
 namespace utils
 {
-    auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
 
-    enum class ASCIIMode
+auto openFile(const std::string& path, const std::string& mode) -> std::unique_ptr<FILE>;
+
+enum class ASCIIMode
+{
+    IncludeSpace,
+    ExcludeSpace,
+};
+
+auto isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool;
+auto isStringPrintable(const std::string& str, ASCIIMode mode) -> bool;
+auto toASCII(const std::string& target, unsigned char replacement = '\0') -> std::string;
+
+template <typename T>
+auto getRandomSampleString(T min, T max) -> std::string
+{
+    std::vector<T> randomNumbers;
+    for (int i = 0; i < 3; i++)
     {
-        IncludeSpace,
-        ExcludeSpace,
-    };
-
-    auto isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool;
-    auto isStringPrintable(const std::string& str, ASCIIMode mode) -> bool;
-    auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
-
-    template <typename T>
-    auto getRandomSampleString(T min, T max) -> std::string
-    {
-        std::vector<T> randomNumbers;
-        for (int i = 0; i < 3; i++)
-        {
-            randomNumbers.push_back(xirand::GetRandomNumber(min, max));
-        }
-        return fmt::format("{}", fmt::join(randomNumbers, " "));
+        randomNumbers.push_back(xirand::GetRandomNumber(min, max));
     }
+    return fmt::format("{}", fmt::join(randomNumbers, " "));
+}
+
 } // namespace utils
 
 // clang-format off

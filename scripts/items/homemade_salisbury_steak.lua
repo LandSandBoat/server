@@ -18,6 +18,8 @@ end
 
 itemObject.onItemUse = function(target, user, item, action)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
+
+    return xi.effect.FOOD
 end
 
 itemObject.onEffectGain = function(target, effect)

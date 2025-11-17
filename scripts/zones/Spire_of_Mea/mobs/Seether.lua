@@ -2,37 +2,31 @@
 -- Area: Spire of Mea
 --  Mob: Seether ("Pet" of Envier)
 -----------------------------------
-mixins = { require('scripts/mixins/families/empty_terroanima') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Perform full captures on Seether.
 
-local vars =
-{
-    TP_DELAY = 'tpDelay',
-}
-
------------------------------------
--- Add a short TP delay so that the preparation message shows in the chat.
------------------------------------
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar(vars.TP_DELAY, GetSystemTime() + 1)
+    mob:setLocalVar('initialAbility', 1)
 end
 
------------------------------------
--- Use initial TP move after TP delay is over.
------------------------------------
-entity.onMobFight = function(mob, target)
-    local tpDelay = mob:getLocalVar(vars.TP_DELAY)
+entity.onMobEngage = function(mob, target) -- Seethers summoned by Envier immediately use an ability and spawn with HP based on Envier's current HP%, rounded up to the nearest 10%.
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        local maxHP = mob:getMaxHP()
 
-    if
-        tpDelay > 0 and
-        tpDelay < GetSystemTime()
-    then
-        mob:setTP(3000)
-        mob:setLocalVar(vars.TP_DELAY, 0)
+        local envierHPP = math.ceil(battlefield:getLocalVar('envierHPP') / 10) * 10
+        envierHPP       = utils.clamp(envierHPP, 10, 100)
+
+        local adjustedHP = math.floor(maxHP * envierHPP / 100)
+        adjustedHP       = utils.clamp(adjustedHP, 1, maxHP)
+
+        mob:setHP(adjustedHP)
+    end
+
+    if mob:getLocalVar('initialAbility') == 1 then
+        mob:useMobAbility()
+        mob:setLocalVar('initialAbility', 0)
     end
 end
 

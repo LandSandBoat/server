@@ -36,17 +36,7 @@ auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharE
 
 void GP_CLI_COMMAND_ZONE_TRANSITION::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PSession->blowfish.status = BLOWFISH_ACCEPTED;
-    PChar->status             = STATUS_TYPE::NORMAL;
-    PChar->health.tp          = 0;
-
-    for (uint8 i = 0; i < 16; ++i)
-    {
-        if (PChar->equip[i] != 0)
-        {
-            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(PChar->equip[i], static_cast<SLOTTYPE>(i), static_cast<CONTAINER_ID>(PChar->equipLoc[i]));
-        }
-    }
-
-    PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
+    // All this packet does on retail is respond with Kupowers messages.
+    // Retail will respond exactly once to it.
+    // TODO: Kupowers messages
 }

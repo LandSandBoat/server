@@ -93,7 +93,11 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                     [73] = function(player, csid, option, npc)
                         if quest:complete(player) then
                             player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
-                            player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+
+                            if player:getContainerSize(xi.inv.MOGSATCHEL) > 0 then
+                                player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+                            end
+
                             player:messageSpecial(params.message)
                             player:confirmTrade()
                         end
@@ -431,6 +435,7 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                 {
                     onTrigger = function(player, npc)
                         if canStartQuest(player) then
+                            quest:setVar(player, 'Option', player:getMainJob())
                             return quest:progressEvent(155)
                         end
                     end,
@@ -439,7 +444,9 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                 onEventFinish =
                 {
                     [155] = function(player, csid, option, npc)
-                        quest:begin(player)
+                        if quest:getVar(player, 'Option') == player:getMainJob() then
+                            quest:begin(player)
+                        end
                     end,
                 },
             },

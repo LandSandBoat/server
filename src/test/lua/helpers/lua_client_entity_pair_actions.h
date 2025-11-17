@@ -35,6 +35,7 @@ public:
     CLuaClientEntityPairActions(CLuaClientEntityPair* parent);
     ~CLuaClientEntityPairActions() = default;
 
+    void move(float x, float y, float z, sol::optional<uint8_t> rot) const;
     void useSpell(CLuaBaseEntity* target, SpellID spellId) const;
     void useWeaponskill(CLuaBaseEntity* target, uint16 wsId) const;
     void useAbility(CLuaBaseEntity* target, ABILITY abilityId) const;
@@ -46,6 +47,8 @@ public:
     void formAlliance(CLuaBaseEntity* player) const;
     void acceptPartyInvite() const;
     void tradeNpc(const sol::object& npcQuery, const sol::table& items, sol::optional<sol::table> expectedEvent) const;
+    void acceptRaise() const;
+    void engage(CLuaBaseEntity* mob) const;
 
     static void Register();
 

@@ -26,6 +26,7 @@
 #include "common/logging.h"
 #include "common/settings.h"
 #include "common/utils.h"
+#include "common/xi.h"
 
 #include <unordered_set>
 
@@ -50,139 +51,157 @@ HTTPServer::HTTPServer()
 
     ShowInfoFmt("Starting HTTP Server on http://{}:{}/api", host, port);
 
-    // clang-format off
-    Async::getInstance()->submit([this, host, port]()
-    {
-        m_httpServer.Get("/api", [&](httplib::Request const& req, httplib::Response& res)
+    Async::getInstance()->submit(
+        [this, host, port]()
         {
-            res.set_content("Hello LSB API", "text/plain");
-        });
-
-        m_httpServer.Get("/api/sessions", [&](httplib::Request const& req, httplib::Response& res)
-        {
-            LockingUpdate();
-            m_apiDataCache.read([&](const auto& apiDataCache)
-            {
-                json j = apiDataCache.activeSessionCount;
-                res.set_content(j.dump(), "application/json");
-            });
-        });
-
-        m_httpServer.Get("/api/ips", [&](httplib::Request const& req, httplib::Response& res)
-        {
-            LockingUpdate();
-            m_apiDataCache.read([&](const auto& apiDataCache)
-            {
-                json j = apiDataCache.activeUniqueIPCount;
-                res.set_content(j.dump(), "application/json");
-            });
-        });
-
-        m_httpServer.Get("/api/zones", [&](httplib::Request const& req, httplib::Response& res)
-        {
-            LockingUpdate();
-            m_apiDataCache.read([&](const auto& apiDataCache)
-            {
-                json j = apiDataCache.zonePlayerCounts;
-                res.set_content(j.dump(), "application/json");
-            });
-        });
-
-        m_httpServer.Get(R"(/api/zones/(\d+))", [&](httplib::Request const& req, httplib::Response& res)
-        {
-            auto maybeZoneId = req.matches[1].str();
-            uint16 zoneId = std::strtol(maybeZoneId.c_str(), nullptr, 10);
-            if (zoneId && zoneId < ZONEID::MAX_ZONEID)
-            {
-                LockingUpdate();
-                m_apiDataCache.read([&](const auto& apiDataCache)
+            m_httpServer.Get(
+                "/api",
+                [&](const httplib::Request& req, httplib::Response& res)
                 {
-                    json j = apiDataCache.zonePlayerCounts[zoneId];
+                    res.set_content("Hello LSB API", "text/plain");
+                });
+
+            m_httpServer.Get(
+                "/api/sessions",
+                [&](const httplib::Request& req, httplib::Response& res)
+                {
+                    LockingUpdate();
+                    m_apiDataCache.read([&](const auto& apiDataCache)
+                                        {
+                                            json j = apiDataCache.activeSessionCount;
+                                            res.set_content(j.dump(), "application/json");
+                                        });
+                });
+
+            m_httpServer.Get(
+                "/api/ips",
+                [&](const httplib::Request& req, httplib::Response& res)
+                {
+                    LockingUpdate();
+                    m_apiDataCache.read(
+                        [&](const auto& apiDataCache)
+                        {
+                            json j = apiDataCache.activeUniqueIPCount;
+                            res.set_content(j.dump(), "application/json");
+                        });
+                });
+
+            m_httpServer.Get(
+                "/api/zones",
+                [&](const httplib::Request& req, httplib::Response& res)
+                {
+                    LockingUpdate();
+                    m_apiDataCache.read(
+                        [&](const auto& apiDataCache)
+                        {
+                            json j = apiDataCache.zonePlayerCounts;
+                            res.set_content(j.dump(), "application/json");
+                        });
+                });
+
+            m_httpServer.Get(
+                R"(/api/zones/(\d+))",
+                [&](const httplib::Request& req, httplib::Response& res)
+                {
+                    auto   maybeZoneId = req.matches[1].str();
+                    uint16 zoneId      = std::strtol(maybeZoneId.c_str(), nullptr, 10);
+                    if (zoneId && zoneId < ZONEID::MAX_ZONEID)
+                    {
+                        LockingUpdate();
+                        m_apiDataCache.read(
+                            [&](const auto& apiDataCache)
+                            {
+                                json j = apiDataCache.zonePlayerCounts[zoneId];
+                                res.set_content(j.dump(), "application/json");
+                            });
+                    }
+                    else
+                    {
+                        res.status = 404;
+                    }
+                });
+
+            m_httpServer.Get(
+                "/api/settings",
+                [&](const httplib::Request& req, httplib::Response& res)
+                {
+                    // TODO: Cache these
+                    json j{};
+
+                    // Filter out settings we don't want to expose
+                    std::unordered_set<std::string> textToOmit{
+                        "logging.",
+                        "network.",
+                        "password", // Just in case
+                    };
+
+                    settings::visit(
+                        [&](const auto& key, const auto& variant)
+                        {
+                            for (const auto& text : textToOmit)
+                            {
+                                // NOTE: Remember that keys are stored as uppercase
+                                if (key.find(to_upper(text)) != std::string::npos)
+                                {
+                                    return;
+                                }
+                            }
+
+                            std::visit(
+                                xi::overload{
+                                    [&](const bool& arg)
+                                    {
+                                        j[key] = arg;
+                                    },
+                                    [&](const double& arg)
+                                    {
+                                        j[key] = arg;
+                                    },
+                                    [&](const std::string& arg)
+                                    {
+                                        // JSON can't handle non-ASCII characters, so strip them out
+                                        j[key] = utils::toASCII(arg, '?');
+                                    },
+                                },
+                                variant);
+                        });
+
                     res.set_content(j.dump(), "application/json");
                 });
-            }
-            else
-            {
-                res.status = 404;
-            }
-        });
 
-        m_httpServer.Get("/api/settings", [&](httplib::Request const& req, httplib::Response& res)
-        {
-            // TODO: Cache these
-            json j{};
-
-            // Filter out settings we don't want to expose
-            std::unordered_set<std::string> textToOmit{
-                "logging.",
-                "network.",
-                "password", // Just in case
-            };
-
-            settings::visit([&](auto const& key, auto const& variant)
-            {
-                for (auto const& text : textToOmit)
+            m_httpServer.set_error_handler(
+                [](const httplib::Request& /*req*/, httplib::Response& res)
                 {
-                    // NOTE: Remember that keys are stored as uppercase
-                    if (key.find(to_upper(text)) != std::string::npos)
+                    auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>",
+                                           res.status,
+                                           httplib::status_message(res.status));
+
+                    for (const auto& [key, val] : res.headers)
                     {
+                        str += fmt::format("<p>{}: {}</p>", key, val);
+                    }
+
+                    res.set_content(str, "text/html");
+                });
+
+            m_httpServer.set_logger(
+                [](const httplib::Request& req, const httplib::Response& res)
+                {
+                    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+                    if (res.status >= 500)
+                    {
+                        ShowErrorFmt("Server Error: {} ({})", res.status, httplib::status_message(res.status));
                         return;
                     }
-                }
-
-                std::visit(
-                settings::overloaded
-                {
-                    [&](bool const& arg)
+                    else if (res.status >= 400)
                     {
-                        j[key] = arg;
-                    },
-                    [&](double const& arg)
-                    {
-                        j[key] = arg;
-                    },
-                    [&](std::string const& arg)
-                    {
-                        // JSON can't handle non-ASCII characters, so strip them out
-                        j[key] = utils::toASCII(arg, '?');
-                    },
-                }, variant);
-            });
+                        ShowErrorFmt("Client Error: {} ({})", res.status, httplib::status_message(res.status));
+                        return;
+                    }
+                });
 
-            res.set_content(j.dump(), "application/json");
+            m_httpServer.listen(host, port);
         });
-
-        m_httpServer.set_error_handler([](httplib::Request const& /*req*/, httplib::Response& res)
-        {
-            auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>",
-                res.status, httplib::status_message(res.status));
-
-            for (auto const& [key, val] : res.headers)
-            {
-                str += fmt::format("<p>{}: {}</p>", key, val);
-            }
-
-            res.set_content(str, "text/html");
-        });
-
-        m_httpServer.set_logger([](httplib::Request const& req, httplib::Response const& res)
-        {
-            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-            if (res.status >= 500)
-            {
-                ShowErrorFmt("Server Error: {} ({})", res.status, httplib::status_message(res.status));
-                return;
-            }
-            else if (res.status >= 400)
-            {
-                ShowErrorFmt("Client Error: {} ({})", res.status, httplib::status_message(res.status));
-                return;
-            }
-        });
-
-        m_httpServer.listen(host, port);
-    });
-    // clang-format on
 }
 
 HTTPServer::~HTTPServer()
@@ -198,49 +217,48 @@ void HTTPServer::LockingUpdate()
         return;
     }
 
-    // clang-format off
-    m_apiDataCache.write([&](auto& apiDataCache)
-    {
-        ShowInfoFmt("API data is stale. Updating...");
-
-        // Total active sessions
+    m_apiDataCache.write(
+        [&](auto& apiDataCache)
         {
-            auto rset = db::preparedStmt("SELECT COUNT(*) AS `count` FROM accounts_sessions");
-            if (rset && rset->next())
-            {
-                apiDataCache.activeSessionCount = rset->get<uint32>("count");
-            }
-        }
+            ShowInfoFmt("API data is stale. Updating...");
 
-        // Total active unique IPs
-        {
-            auto rset = db::preparedStmt("SELECT COUNT(DISTINCT client_addr) AS `count` FROM accounts_sessions");
-            if (rset && rset->next())
+            // Total active sessions
             {
-                apiDataCache.activeUniqueIPCount = rset->get<uint32>("count");
-            }
-        }
-
-        // Chars per zone
-        {
-            auto rset = db::preparedStmt("SELECT chars.pos_zone, COUNT(*) AS `count` "
-                                "FROM chars "
-                                "INNER JOIN accounts_sessions "
-                                "ON chars.charid = accounts_sessions.charid "
-                                "GROUP BY pos_zone");
-            if (rset && rset->rowsCount())
-            {
-                while (rset->next())
+                auto rset = db::preparedStmt("SELECT COUNT(*) AS `count` FROM accounts_sessions");
+                if (rset && rset->next())
                 {
-                    auto zoneId = rset->get<uint16>("pos_zone");
-                    auto count  = rset->get<uint32>("count");
-
-                    apiDataCache.zonePlayerCounts[zoneId] = count;
+                    apiDataCache.activeSessionCount = rset->get<uint32>("count");
                 }
             }
-        }
 
-        m_lastUpdate.store(now);
-    });
-    // clang-format on
+            // Total active unique IPs
+            {
+                auto rset = db::preparedStmt("SELECT COUNT(DISTINCT client_addr) AS `count` FROM accounts_sessions");
+                if (rset && rset->next())
+                {
+                    apiDataCache.activeUniqueIPCount = rset->get<uint32>("count");
+                }
+            }
+
+            // Chars per zone
+            {
+                auto rset = db::preparedStmt("SELECT chars.pos_zone, COUNT(*) AS `count` "
+                                             "FROM chars "
+                                             "INNER JOIN accounts_sessions "
+                                             "ON chars.charid = accounts_sessions.charid "
+                                             "GROUP BY pos_zone");
+                if (rset && rset->rowsCount())
+                {
+                    while (rset->next())
+                    {
+                        auto zoneId = rset->get<uint16>("pos_zone");
+                        auto count  = rset->get<uint32>("count");
+
+                        apiDataCache.zonePlayerCounts[zoneId] = count;
+                    }
+                }
+            }
+
+            m_lastUpdate.store(now);
+        });
 }

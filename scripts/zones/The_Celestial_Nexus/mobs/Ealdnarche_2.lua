@@ -15,11 +15,24 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.UFASTCAST, 60)
     mob:addMod(xi.mod.UDMGPHYS, -7500)
     mob:addMod(xi.mod.REGAIN, 100)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMod(xi.mod.MDEF, 50)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.TELEPORT_CD, 1)
+    mob:setMobMod(xi.mobMod.TELEPORT_START, 988)
+    mob:setMobMod(xi.mobMod.TELEPORT_END, 989)
+    mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
+    mob:setMagicCastingEnabled(false)
+end
+
+entity.onMobEngage = function(mob, target)
+    -- Wait 20 seconds before casting
+    mob:timer(20000, function(mobArg)
+        mobArg:setMagicCastingEnabled(true)
+    end)
 end
 
 return entity

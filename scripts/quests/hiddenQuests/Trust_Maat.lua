@@ -32,7 +32,7 @@ quest.sections =
             {
                 [10241] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
-                        player:addSpell(xi.magic.spell.MAAT, true, true)
+                        player:addSpell(xi.magic.spell.MAAT, { silentLog = true })
                         player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
                     end
                 end,

@@ -28,7 +28,7 @@
 
 #include <cstring>
 
-GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAINER_ID locationId, const uint8_t slotId)
+GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAINER_ID locationId, const uint8_t slotId, CItem* staleItem)
 {
     auto& packet = this->data();
 
@@ -112,5 +112,9 @@ GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAIN
         {
             packet.Attr[8] = static_cast<CItemLinkshell*>(PItem)->GetLSType();
         }
+    }
+    else if (staleItem && settings::get<bool>("map.LEAK_EXT_DATA_ON_ITEM_MOVE")) // Yes, retail copies the previously moved item's extdata which leaks information about weaponskill points.
+    {
+        std::memcpy(packet.Attr, staleItem->m_extra, sizeof(staleItem->m_extra));
     }
 }

@@ -21,9 +21,16 @@
 
 #include "0x115_fish.h"
 
-GP_SERV_COMMAND_FISH::GP_SERV_COMMAND_FISH(const uint16 stamina, const uint16 regen, const uint16 response,
-                                           const uint16 hitDmg, const uint16 arrowDelay, const uint16 missRegen,
-                                           const uint16 gameTime, const uint8 sense, const uint32 special)
+GP_SERV_COMMAND_FISH::GP_SERV_COMMAND_FISH(
+    const uint16 stamina,
+    const uint16 regen,
+    const uint16 response,
+    const uint16 hitDmg,
+    const uint16 arrowDelay,
+    const uint16 missRegen,
+    const uint16 gameTime,
+    const uint8  sense,
+    const uint32 special)
 {
     auto& packet = this->data();
 

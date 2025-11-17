@@ -95,16 +95,18 @@ private:
 
 namespace itemutils
 {
-    void Initialize();
-    void FreeItemList();
 
-    CItem* GetItem(CItem* PItem);
-    CItem* GetItem(uint16 ItemID);
-    CItem* GetItemPointer(uint16 ItemID);
-    bool   IsItemPointer(CItem* item);
+void Initialize();
+void FreeItemList();
 
-    CItemWeapon* GetUnarmedItem();
-    CItemWeapon* GetUnarmedH2HItem();
+CItem* GetItem(CItem* PItem);
+CItem* GetItem(uint16 ItemID);
+CItem* GetItemPointer(uint16 ItemID);
+bool   IsItemPointer(CItem* item);
 
-    DropList_t* GetDropList(uint16 DropID);
+CItemWeapon* GetUnarmedItem();
+CItemWeapon* GetUnarmedH2HItem();
+
+DropList_t* GetDropList(uint16 DropID);
+
 }; // namespace itemutils

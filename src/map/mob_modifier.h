@@ -117,8 +117,9 @@ enum MOBMODIFIER : int
     MOBMOD_BASE_DAMAGE_MULTIPLIER = 86, // Multiplies the mob's base damage. Example: 150 = x1.5
     MOBMOD_DAMAGE_OFFSET          = 87, // Adds or subtracts the mob's base damage offset.
     MOBMOD_RANGED_DAMAGE_OFFSET   = 88, // Adds or subtracts the mob's ranged base damage offset.
-    AVATAR_PETID                  = 89, // A value from xi.petId to select model/ability from when owner uses astral flow
-    AVATAR_ASTRAL_DELAY           = 90, // Number of milliseconds to delay AF after avatar spawn
+    MOBMOD_AVATAR_PETID           = 89, // A value from xi.petId to select model/ability from when owner uses astral flow
+    MOBMOD_AVATAR_ASTRAL_DELAY    = 90, // Number of milliseconds to delay AF after avatar spawn
+    MOBMOD_H2H_SINGLE_SWING       = 91, // Mob will have only one swing per attack even as MNK with H2H skill
 };
 
 #endif

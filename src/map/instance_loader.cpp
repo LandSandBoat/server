@@ -239,7 +239,9 @@ CInstance* CInstanceLoader::LoadInstance() const
                                 "FROM instance_entities INNER JOIN npc_list ON "
                                 "(instance_entities.id = npc_list.npcid) "
                                 "WHERE instanceid = ? AND npcid >= ? AND npcid < ?",
-                                m_PInstance->GetID(), zoneMin, zoneMax);
+                                m_PInstance->GetID(),
+                                zoneMin,
+                                zoneMax);
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             CNpcEntity* PNpc = new CNpcEntity;

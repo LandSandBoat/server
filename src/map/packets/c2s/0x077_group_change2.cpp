@@ -30,10 +30,12 @@
 
 namespace
 {
-    const std::set validLinkshellOperations = {
-        GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Linkshell1,
-        GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Linkshell2,
-    };
+
+const std::set validLinkshellOperations = {
+    GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Linkshell1,
+    GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Linkshell2,
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

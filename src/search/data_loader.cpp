@@ -32,7 +32,9 @@
 
 namespace
 {
-    uint8 JOB_MON = 23;
+
+uint8 JOB_MON = 23;
+
 } // namespace
 
 CDataLoader::CDataLoader()
@@ -58,7 +60,8 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
                                  "WHERE itemid = ? AND stack = ? AND buyer_name IS NOT NULL "
                                  "ORDER BY sell_date DESC "
                                  "LIMIT 10",
-                                 ItemID, stack);
+                                 ItemID,
+                                 stack);
 
     if (rset && rset->rowsCount())
     {
@@ -112,7 +115,8 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const
                                           "WHERE aH = ? "
                                           "GROUP BY item_basic.itemid "
                                           "{}",
-                                          fromTable, orderByString);
+                                          fromTable,
+                                          orderByString);
 
         // We will now populate the ? in the prepared statement.
         return db::preparedStmt(queryStr, ahCategoryID);
@@ -240,7 +244,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     std::string fmtQuery =
         "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
-        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted "
+        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
+        "linkshellid1, linkshellid2 "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -299,6 +304,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->zone          = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
             PPlayer->languages     = rset->get<uint8>("languages");
             PPlayer->mentor        = playerSettings.MentorFlg;
+            PPlayer->linkshellid1  = rset->get<uint32>("linkshellid1");
+            PPlayer->linkshellid2  = rset->get<uint32>("linkshellid2");
             PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
             PPlayer->disconnecting = rset->get<bool>("disconnecting");
             PPlayer->gmHidden      = rset->get<bool>("gmHiddenEnabled");
@@ -357,6 +364,30 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             {
                 PPlayer->mjob = 0;
                 PPlayer->sjob = 0;
+            }
+
+            // filter by linkshell ID
+            if (sr.lsId.has_value())
+            {
+                auto searchedLsId = sr.lsId.value();
+                if (searchedLsId == 0)
+                {
+                    // lsId of 0 is automatic fail, it means the requester did not have a linkshell equipped
+                    continue;
+                }
+
+                if (PPlayer->linkshellid1 != searchedLsId && PPlayer->linkshellid2 != searchedLsId)
+                {
+                    // Current player does not match the given LS ID
+                    continue;
+                }
+            }
+
+            // filter anon players if job/nation/race/rank/level search
+            if ((PPlayer->flags1 & 0x4000) &&
+                (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0))
+            {
+                continue;
             }
 
             // filter by job
@@ -507,7 +538,8 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
                                  "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = ?) , partyid = ?) "
                                  "ORDER BY charname ASC "
                                  "LIMIT 64",
-                                 (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
+                                 (!AllianceID ? PartyID : AllianceID),
+                                 (!PartyID ? AllianceID : PartyID));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -615,7 +647,8 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                                  "WHERE linkshellid1 = ? OR linkshellid2 = ? "
                                  "ORDER BY charname ASC "
                                  "LIMIT 18",
-                                 LinkshellID, LinkshellID);
+                                 LinkshellID,
+                                 LinkshellID);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -756,7 +789,10 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 
             const auto rset2 = db::preparedStmt("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
                                                 "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
-                                                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
+                                                listing.sellerID,
+                                                listing.sellerName,
+                                                listing.itemID,
+                                                listing.ahStack == 1 ? listing.itemStack : 1);
             if (rset2 && rset2->rowsAffected())
             {
                 // delete the item from the auction house

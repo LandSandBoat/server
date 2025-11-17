@@ -2,8 +2,8 @@
 -- ID: 5757
 -- Item: yellow_curry_bun
 -- Food Effect: 30minutes, All Races
+-- https://wiki.ffo.jp/html/17703.html
 -----------------------------------
--- TODO: Group effects
 -- Health Points 20
 -- Strength 5
 -- Agility 2
@@ -26,34 +26,39 @@ itemObject.onItemUse = function(target, user, item, action)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
+local dataTable =
+{
+    [ 1] = { xi.mod.FOOD_HP,       30, 25, 20 },
+    [ 2] = { xi.mod.VIT,            2,  1,  0 },
+    [ 3] = { xi.mod.AGI,            3,  3,  2 },
+    [ 4] = { xi.mod.INT,           -2, -3, -4 },
+    [ 5] = { xi.mod.FOOD_ATTP,     22, 21, 20 },
+    [ 6] = { xi.mod.FOOD_ATT_CAP,  85, 80, 75 },
+    [ 7] = { xi.mod.FOOD_RATTP,    22, 21, 20 },
+    [ 8] = { xi.mod.FOOD_RATT_CAP, 85, 80, 75 },
+    [ 9] = { xi.mod.SLEEPRES,       5,  3,  3 },
+    [10] = { xi.mod.STUNRES,        6,  4,  4 },
+    [11] = { xi.mod.HPHEAL,         6,  4,  2 },
+    [12] = { xi.mod.MPHEAL,         3,  2,  1 },
+    [13] = { xi.mod.STR,            5,  5,  5 }
+}
+
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HP, 20)
-    target:addMod(xi.mod.STR, 5)
-    target:addMod(xi.mod.AGI, 2)
-    target:addMod(xi.mod.INT, -4)
-    target:addMod(xi.mod.FOOD_ATTP, 20)
-    target:addMod(xi.mod.FOOD_ATT_CAP, 75)
-    target:addMod(xi.mod.FOOD_RATTP, 20)
-    target:addMod(xi.mod.FOOD_RATT_CAP, 75)
-    target:addMod(xi.mod.SLEEPRES, 3)
-    target:addMod(xi.mod.STUNRES, 4)
-    target:addMod(xi.mod.HPHEAL, 2)
-    target:addMod(xi.mod.MPHEAL, 1)
+    for i = 1, #dataTable do
+        -- Get party factor.
+        local partySize = target:getPartySize()
+        local column = 4
+        if partySize >= 4 then
+            column = 2
+        elseif partySize >= 2 then
+            column = 3
+        end
+
+        effect:addMod(dataTable[i][1], dataTable[i][column])
+    end
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HP, 20)
-    target:delMod(xi.mod.STR, 5)
-    target:delMod(xi.mod.AGI, 2)
-    target:delMod(xi.mod.INT, -4)
-    target:delMod(xi.mod.FOOD_ATTP, 20)
-    target:delMod(xi.mod.FOOD_ATT_CAP, 75)
-    target:delMod(xi.mod.FOOD_RATTP, 20)
-    target:delMod(xi.mod.FOOD_RATT_CAP, 75)
-    target:delMod(xi.mod.SLEEPRES, 3)
-    target:delMod(xi.mod.STUNRES, 4)
-    target:delMod(xi.mod.HPHEAL, 2)
-    target:delMod(xi.mod.MPHEAL, 1)
 end
 
 return itemObject

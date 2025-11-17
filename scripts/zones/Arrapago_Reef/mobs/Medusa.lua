@@ -29,18 +29,28 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10 then
-        if not GetMobByID(ID.mob.MEDUSA + 1):isSpawned() then
-            GetMobByID(ID.mob.MEDUSA + 1):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+        local mob1 = GetMobByID(ID.mob.MEDUSA + 1)
+        if mob1 and not mob1:isSpawned() then
+            mob1:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
             SpawnMob(ID.mob.MEDUSA + 1):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.MEDUSA + 2):isSpawned() then
-            GetMobByID(ID.mob.MEDUSA + 2):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.MEDUSA + 2):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.MEDUSA + 3):isSpawned() then
-            GetMobByID(ID.mob.MEDUSA + 3):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.MEDUSA + 3):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.MEDUSA + 4):isSpawned() then
-            GetMobByID(ID.mob.MEDUSA + 4):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.MEDUSA + 4):updateEnmity(target)
+        else
+            local mob2 = GetMobByID(ID.mob.MEDUSA + 2)
+            if mob2 and not mob2:isSpawned() then
+                mob2:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+                SpawnMob(ID.mob.MEDUSA + 2):updateEnmity(target)
+            else
+                local mob3 = GetMobByID(ID.mob.MEDUSA + 3)
+                if mob3 and not mob3:isSpawned() then
+                    mob3:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+                    SpawnMob(ID.mob.MEDUSA + 3):updateEnmity(target)
+                else
+                    local mob4 = GetMobByID(ID.mob.MEDUSA + 4)
+                    if mob4 and not mob4:isSpawned() then
+                        mob4:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+                        SpawnMob(ID.mob.MEDUSA + 4):updateEnmity(target)
+                    end
+                end
+            end
         end
     end
 
@@ -48,7 +58,7 @@ entity.onMobFight = function(mob, target)
         local pet = GetMobByID(i)
         if
             pet and
-            pet:getCurrentAction() == xi.action.ROAMING
+            pet:getCurrentAction() == xi.action.category.ROAMING
         then
             pet:updateEnmity(target)
         end

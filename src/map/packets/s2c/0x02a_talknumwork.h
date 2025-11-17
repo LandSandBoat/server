@@ -42,6 +42,12 @@ public:
         uint8_t  padding3E[2]; // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_TALKNUMWORK(const CBaseEntity* PEntity, uint16 messageID, uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0,
-                                bool ShowName = false);
+    GP_SERV_COMMAND_TALKNUMWORK(
+        const CBaseEntity* PEntity,
+        uint16             messageID,
+        uint32             param0   = 0,
+        uint32             param1   = 0,
+        uint32             param2   = 0,
+        uint32             param3   = 0,
+        bool               ShowName = false);
 };

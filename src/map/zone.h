@@ -506,7 +506,9 @@ struct zoneWeather_t
     zoneWeather_t(uint8 _normal, uint8 _common, uint8 _rare)
     : normal(_normal)
     , common(_common)
-    , rare(_rare){};
+    , rare(_rare)
+    {
+    }
 };
 
 /************************************************************************
@@ -576,13 +578,13 @@ public:
     void SetBackgroundMusicDay(uint16 music);
     void SetBackgroundMusicNight(uint16 music);
 
-    auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
+    auto queryEntitiesByName(const std::string& pattern) -> const QueryByNameResult_t&;
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(std::string const& name);
+    virtual CCharEntity* GetCharByName(const std::string& name);
     virtual CCharEntity* GetCharByID(uint32 id);
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
@@ -634,18 +636,18 @@ public:
     virtual void ZoneServer(timer::time_point tick);
     virtual void CheckTriggerAreas();
 
-    virtual void ForEachChar(std::function<void(CCharEntity*)> const& func);
-    virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
-    virtual void ForEachMob(std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
-    virtual void ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func);
-    virtual void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
-    virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
-    virtual void ForEachPet(std::function<void(CPetEntity*)> const& func);
-    virtual void ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func);
-    virtual void ForEachAlly(std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachChar(const std::function<void(CCharEntity*)>& func);
+    virtual void ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func);
+    virtual void ForEachMob(const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
+    virtual void ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func);
+    virtual void ForEachTrust(const std::function<void(CTrustEntity*)>& func);
+    virtual void ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func);
+    virtual void ForEachPet(const std::function<void(CPetEntity*)>& func);
+    virtual void ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func);
+    virtual void ForEachAlly(const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func);
 
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();

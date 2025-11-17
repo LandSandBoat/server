@@ -29,6 +29,7 @@
 auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
+        .isNotCrafting(PChar)
         .isNormalStatus(PChar)
         .isNotPreventedAction(PChar)
         .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(Mode)
@@ -37,6 +38,9 @@ auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* 
 
 void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) const
 {
+    // Retail accurate: Can inject /sitchair while healing/logging out, but it cancels the effect.
+    PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_HEALING);
+
     if (Mode == static_cast<uint8>(GP_CLI_COMMAND_SITCHAIR_MODE::Off))
     {
         PChar->animation = ANIMATION_NONE;

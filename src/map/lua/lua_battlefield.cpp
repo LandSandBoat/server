@@ -204,7 +204,7 @@ uint8 CLuaBattlefield::getStatus()
     return m_PLuaBattlefield->GetStatus();
 }
 
-uint64_t CLuaBattlefield::getLocalVar(std::string const& name)
+uint64_t CLuaBattlefield::getLocalVar(const std::string& name)
 {
     return m_PLuaBattlefield->GetLocalVar(name);
 }
@@ -226,7 +226,7 @@ uint32 CLuaBattlefield::getArmouryCrate()
     return m_PLuaBattlefield->GetArmouryCrate();
 }
 
-void CLuaBattlefield::setLocalVar(std::string const& name, uint64_t value)
+void CLuaBattlefield::setLocalVar(const std::string& name, uint64_t value)
 {
     m_PLuaBattlefield->SetLocalVar(name, value);
 }
@@ -246,7 +246,7 @@ void CLuaBattlefield::setWipeTime(uint32 seconds)
     m_PLuaBattlefield->SetWipeTime(timer::start_time + std::chrono::seconds(seconds));
 }
 
-void CLuaBattlefield::setRecord(std::string const& name, uint32 seconds)
+void CLuaBattlefield::setRecord(const std::string& name, uint32 seconds)
 {
     m_PLuaBattlefield->SetRecord(name, std::chrono::seconds(seconds), m_PLuaBattlefield->GetPlayerCount());
 }
@@ -290,7 +290,7 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
-void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas)
+void CLuaBattlefield::addGroups(const sol::table& groups, bool hasMultipleArenas)
 {
     // get the global function "applyMixins"
     sol::function applyMixins = lua["applyMixins"];
@@ -306,7 +306,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
     if (hasMultipleArenas)
     {
         std::set<uint32> entityIds;
-        for (auto const& entry : groups)
+        for (const auto& entry : groups)
         {
             QueryByNameResult_t groupEntities;
             sol::table          groupData = entry.second.as<sol::table>();
@@ -315,7 +315,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
             if (groupMobs.valid())
             {
                 auto mobNames = groupMobs.get<std::vector<std::string>>();
-                for (std::string const& name : mobNames)
+                for (const std::string& name : mobNames)
                 {
                     const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
                     for (CBaseEntity* entity : result)
@@ -370,7 +370,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
     std::set<uint32> spawnedEntities;
 
     std::vector<BattlefieldGroup> battlefieldGroups;
-    for (auto const& entry : groups)
+    for (const auto& entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
 
@@ -381,7 +381,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
         if (groupMobs.valid())
         {
             auto mobNames = groupMobs.get<std::vector<std::string>>();
-            for (std::string const& name : mobNames)
+            for (const std::string& name : mobNames)
             {
                 const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
                 for (CBaseEntity* entity : result)
@@ -564,7 +564,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
                     return;
                 }
 
-                for (auto const& modifier : mods.get<sol::table>())
+                for (const auto& modifier : mods.get<sol::table>())
                 {
                     PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
                 }
@@ -584,7 +584,7 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
                     return;
                 }
 
-                for (auto const& modifier : mobMods.get<sol::table>())
+                for (const auto& modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
                 }

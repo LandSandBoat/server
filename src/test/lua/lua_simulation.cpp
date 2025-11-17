@@ -49,19 +49,21 @@
 
 namespace
 {
-    auto durationToVanaTime = [](const uint8 vanaHour, const uint8 vanaMinute) -> earth_time::duration
+
+auto durationToVanaTime = [](const uint8 vanaHour, const uint8 vanaMinute) -> earth_time::duration
+{
+    const auto vanaNow    = vanadiel_time::now();
+    auto       vanaTarget = std::chrono::floor<xi::vanadiel_clock::days>(vanaNow) + xi::vanadiel_clock::hours(vanaHour) + xi::vanadiel_clock::minutes(vanaMinute);
+
+    if (vanaTarget <= vanaNow)
+
     {
-        const auto vanaNow    = vanadiel_time::now();
-        auto       vanaTarget = std::chrono::floor<xi::vanadiel_clock::days>(vanaNow) + xi::vanadiel_clock::hours(vanaHour) + xi::vanadiel_clock::minutes(vanaMinute);
+        vanaTarget += xi::vanadiel_clock::days(1);
+    }
 
-        if (vanaTarget <= vanaNow)
+    return std::chrono::duration_cast<earth_time::duration>(vanaTarget - vanaNow);
+};
 
-        {
-            vanaTarget += xi::vanadiel_clock::days(1);
-        }
-
-        return std::chrono::duration_cast<earth_time::duration>(vanaTarget - vanaNow);
-    };
 } // namespace
 
 CLuaSimulation::CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink)
@@ -80,12 +82,14 @@ void CLuaSimulation::cleanClients(std::optional<ClientScope> scope)
     else
     {
         // Clean only clients with matching scope
-        // clang-format off
-        auto [first, last] = std::ranges::remove_if(clients_, [scope](const ClientInfo& info)
-        {
-             return info.scope == scope.value();
-        });
-        // clang-format on
+
+        auto [first, last] = std::ranges::remove_if(
+            clients_,
+            [scope](const ClientInfo& info)
+            {
+                return info.scope == scope.value();
+            });
+
         clients_.erase(first, last);
     }
 }
@@ -192,7 +196,8 @@ void CLuaSimulation::setRegionOwner(REGION_TYPE region, NATION_TYPE nation) cons
 {
     DebugTestFmt("Setting region {} owner to nation {}", static_cast<uint8>(region), static_cast<uint8>(nation));
     auto rset = db::preparedStmt("UPDATE conquest_system SET region_control = ? WHERE region_id = ?",
-                                 static_cast<uint8>(nation), static_cast<uint8>(region));
+                                 static_cast<uint8>(nation),
+                                 static_cast<uint8>(region));
 
     if (!rset)
     {
@@ -458,7 +463,13 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     uint8      key3[20]{};
     const auto rset = db::preparedStmt("INSERT INTO accounts_sessions(accid,charid,session_key,server_addr,server_port,client_addr,version_mismatch) "
                                        "VALUES(?,?,?,?,?,?,?)",
-                                       testChar->accountId(), testChar->charId(), key3, 0, 0, testChar->charId(), 0);
+                                       testChar->accountId(),
+                                       testChar->charId(),
+                                       key3,
+                                       0,
+                                       0,
+                                       testChar->charId(),
+                                       0);
     if (!rset)
     {
         TestError("Unable to create session for account.");

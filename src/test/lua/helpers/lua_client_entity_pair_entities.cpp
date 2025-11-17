@@ -29,6 +29,7 @@
 #include "map/lua/lua_baseentity.h"
 #include "map/utils/zoneutils.h"
 #include "map/zone.h"
+#include "test_char.h"
 #include "test_common.h"
 
 CLuaClientEntityPairEntities::CLuaClientEntityPairEntities(CLuaClientEntityPair* parent)
@@ -118,7 +119,15 @@ auto CLuaClientEntityPairEntities::moveTo(const sol::object& entityQuery) const 
     {
         if (const CBaseEntity* baseEntity = entity.value().GetBaseEntity())
         {
-            parent_->GetBaseEntity()->loc.p = baseEntity->loc.p;
+            // Move the player to the entity
+            const auto playerEntity = parent_->testChar()->entity();
+            playerEntity->loc.p     = baseEntity->loc.p;
+
+            // Force refresh of spawn lists, as if we had moved there manually.
+            playerEntity->loc.zone->SpawnNPCs(playerEntity);
+            playerEntity->loc.zone->SpawnMOBs(playerEntity);
+            playerEntity->loc.zone->SpawnPETs(playerEntity);
+            playerEntity->loc.zone->SpawnTRUSTs(playerEntity);
         }
     }
 

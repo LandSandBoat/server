@@ -50,7 +50,6 @@ return {
     ['Taillegeas']           = { event = 10061 },
     ['Tillecoe']             = { event = 70 },
     ['Tsugumi']              = { event = 163 },
-    ['Venessa']              = { event = 10064 },
     ['Vincent']              = { event = 10185 },
     ['Yavoraile']            = { event = 118 },
 }

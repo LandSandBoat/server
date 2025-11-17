@@ -68,9 +68,9 @@ quest.sections =
                     if progress == 0 then
                         return quest:event(7, xi.ki.ANCIENT_TABLET_FRAGMENT) -- Reminder to get KI
                     elseif progress == 1 then
-                        return quest:progressEvent(8, xi.ki.ANCIENT_TABLET_FRAGMENT) -- Player has returned with KI
+                        return quest:progressEvent(8, xi.ki.ANCIENT_TABLET_FRAGMENT, xi.ki.TABLET_OF_ANCIENT_MAGIC, xi.ki.LETTER_FROM_ALFESAR) -- Player has returned with KI
                     elseif progress == 2 then
-                        return quest:event(9, 0, xi.ki.ANCIENT_TABLET_FRAGMENT) -- Reminder to go to Sandy
+                        return quest:event(9, 0, xi.ki.TABLET_OF_ANCIENT_MAGIC) -- Reminder to go to Sandy
                     end
                 end,
             },

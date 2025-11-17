@@ -32,11 +32,12 @@
 
 namespace
 {
-    const auto auditSale = [](CCharEntity* PChar, uint32_t itemId, uint32_t quantity, uint32_t basePrice)
+
+const auto auditSale = [](CCharEntity* PChar, uint32_t itemId, uint32_t quantity, uint32_t basePrice)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
     {
-        if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
-        {
-            // clang-format off
+        // clang-format off
             Async::getInstance()->submit([itemId, quantity, seller = PChar->id, sellerName = PChar->getName(), basePrice]()
             {
                 auto totalPrice = quantity * basePrice;
@@ -47,9 +48,10 @@ namespace
                     ShowErrorFmt("Failed to log vendor sale (item: {}, quantity: {}, seller: {}, totalprice: {})", itemId, quantity, seller, totalPrice);
                 }
             });
-            // clang-format on
-        }
-    };
+        // clang-format on
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_SHOP_SELL_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

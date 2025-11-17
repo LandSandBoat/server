@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Team
@@ -49,7 +49,12 @@ CPetSkill::CPetSkill(uint16 id)
 
 bool CPetSkill::hasMissMsg() const
 {
-    return m_Message == 324 || m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == MSGBASIC_USES_BUT_MISSES ||
+           m_Message == MSGBASIC_ABILITY_MISSES ||
+           m_Message == MSGBASIC_USES_SKILL_MISSES ||
+           m_Message == MSGBASIC_USES_SKILL_NO_EFFECT ||
+           m_Message == MSGBASIC_SHADOW_ABSORB ||
+           m_Message == MSGBASIC_TARGET_ANTICIPATES;
 }
 
 bool CPetSkill::isAoE() const
@@ -231,9 +236,10 @@ std::optional<uint8> CPetSkill::getFinalAnimationSub()
 {
     return m_FinalAnimationSub;
 }
-uint16 CPetSkill::getMsg() const
+
+auto CPetSkill::getMsg() const -> MSGBASIC_ID
 {
-    return m_Message;
+    return static_cast<MSGBASIC_ID>(m_Message);
 }
 
 uint8 CPetSkill::getSkillFinishCategory() const
@@ -246,49 +252,48 @@ uint16 CPetSkill::getMsgForAction() const
     return getID();
 }
 
-// Converts skill's message id to the non-primary target version
-uint16 CPetSkill::getAoEMsg() const // TODO: put this in parent class?
+auto CPetSkill::getAoEMsg() const -> MSGBASIC_ID // TODO: put this in parent class?
 {
     switch (m_Message)
     {
-        case 185:
-            return 264;
-        case 186:
-            return 266;
-        case 187:
-            return 281;
-        case 324: // any miss message
-        case 158:
-        case 188:
-            return 282; // <target> evades.
-        case 189:
-            return 283;
-        case 225:
-            return 366;
-        case 226:
-            return 226; // no message for this... I guess there is no aoe TP drain move
-        case 103:       // recover hp
-        case 102:       // recover hp
-        case 238:       // recover hp
-        case 306:       // recover hp
-        case 318:       // recover hp
-            return 367;
-        case 242:
-            return 277;
-        case 243:
-            return 278;
-        case 284:
-            return 284; // already the aoe message
-        case 370:
-            return 404;
-        case 362:
-            return 363;
-        case 378:
-            return 343;
-        case 224: // recovers mp
-            return 276;
+        case MSGBASIC_USES_SKILL_TAKES_DAMAGE:
+            return MSGBASIC_TARGET_TAKES_DAMAGE;
+        case MSGBASIC_USES_SKILL_GAINS_EFFECT:
+            return MSGBASIC_TARGET_GAINS_EFFECT;
+        case MSGBASIC_USES_SKILL_HP_DRAINED:
+            return MSGBASIC_TARGET_HP_DRAINED;
+        case MSGBASIC_USES_BUT_MISSES:
+        case MSGBASIC_ABILITY_MISSES:
+        case MSGBASIC_USES_SKILL_MISSES:
+            return MSGBASIC_TARGET_EVADES;
+        case MSGBASIC_USES_SKILL_NO_EFFECT:
+            return MSGBASIC_TARGET_NO_EFFECT;
+        case MSGBASIC_USES_SKILL_MP_DRAINED:
+            return MSGBASIC_TARGET_MP_DRAINED;
+        case MSGBASIC_USES_SKILL_TP_DRAINED:
+            return MSGBASIC_USES_SKILL_TP_DRAINED; // no message for this... I guess there is no aoe TP drain move
+        case MSGBASIC_SKILL_RECOVERS_HP:
+        case MSGBASIC_USES_RECOVERS_HP:
+        case MSGBASIC_USES_SKILL_RECOVERS_HP_AOE:
+        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE:
+        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE2:
+            return MSGBASIC_TARGET_RECOVERS_HP;
+        case MSGBASIC_USES_SKILL_STATUS:
+            return MSGBASIC_TARGET_STATUS;
+        case MSGBASIC_USES_SKILL_RECEIVES_EFFECT:
+            return MSGBASIC_TARGET_RECEIVES_EFFECT;
+        case MSGBASIC_MAGIC_RESISTED_TARGET:
+            return MSGBASIC_MAGIC_RESISTED_TARGET; // already the aoe message
+        case MSGBASIC_USES_SKILL_EFFECT_DRAINED:
+            return MSGBASIC_TARGET_EFFECT_DRAINED;
+        case MSGBASIC_USES_SKILL_TP_REDUCED:
+            return MSGBASIC_TARGET_TP_REDUCED;
+        case MSGBASIC_USES_ABILITY_DISPEL:
+            return MSGBASIC_TARGET_EFFECT_DISAPPEARS;
+        case MSGBASIC_USES_SKILL_RECOVERS_MP:
+            return MSGBASIC_TARGET_RECOVERS_MP;
         default:
-            return m_Message;
+            return static_cast<MSGBASIC_ID>(m_Message);
     }
 }
 
@@ -330,7 +335,14 @@ uint8 CPetSkill::getKnockback() const
 
 bool CPetSkill::isDamageMsg() const
 {
-    return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226 || m_Message == 317;
+    return m_Message == MSGBASIC_USES_ABILITY_TAKES_DAMAGE ||
+           m_Message == MSGBASIC_USES_SKILL_TAKES_DAMAGE ||
+           m_Message == MSGBASIC_USES_SKILL_HP_DRAINED ||
+           m_Message == MSGBASIC_USES_ABILITY_RESISTS_DAMAGE ||
+           m_Message == MSGBASIC_USES_SKILL_MP_DRAINED ||
+           m_Message == MSGBASIC_USES_SKILL_TP_DRAINED ||
+           m_Message == MSGBASIC_TARGET_TAKES_DAMAGE ||
+           m_Message == MSGBASIC_USES_JA_TAKE_DAMAGE;
 }
 
 void CPetSkill::setParam(int16 value)

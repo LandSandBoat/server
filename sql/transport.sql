@@ -52,8 +52,8 @@ INSERT INTO `transport` VALUES (14,'Nashmau-Whitegate_Boat',16994327,16994326,3.
 INSERT INTO `transport` VALUES (15,'Manaclip_Bibiki-Tours',16793984,16793985,491.500,0.000,687.400,128,0,18,19,710,720,20,40,20,3);
 INSERT INTO `transport` VALUES (16,'Manaclip_Bibiki-Purgonorgo',16793984,16793985,491.500,0.000,687.400,128,0,18,19,270,720,20,40,20,3);
 INSERT INTO `transport` VALUES (17,'Manaclip_Purgonorgo-Bibiki',16793984,16793986,-392.000,0.000,-364.000,128,0,20,21,500,720,20,40,20,3);
-INSERT INTO `transport` VALUES (18,'Selbina-Mhaura_Boat_Pirates',17793088,17793087,9.294,0.000,-69.775,0,485,18,19,382,480,18,80,17,227);
-INSERT INTO `transport` VALUES (19,'Mhaura-Selbina_Boat_Pirates',17797182,17797181,-0.516,0.026,-8.409,0,493,18,19,382,480,18,80,17,228);
+INSERT INTO `transport` VALUES (18,'Selbina-Mhaura_Boat_Pirates',17793088,17793087,9.294,0.000,-69.775,0,485,18,19,382,480,18,80,17,227); -- Due to the way transport.cpp evicts from zones, causes duplicate onTransportEvent trigger in town
+INSERT INTO `transport` VALUES (19,'Mhaura-Selbina_Boat_Pirates',17797182,17797181,-0.516,0.026,-8.409,0,493,18,19,382,480,18,80,17,228); -- Due to the way transport.cpp evicts from zones, causes duplicate onTransportEvent trigger in town
 INSERT INTO `transport` VALUES (20,'Barge_South-Central',16785748,16785756,246.377,0.0,-529.793,192,0,18,19,0,1440,15,35,15,0);
 INSERT INTO `transport` VALUES (21,'Barge_Central-South-Day',16785748,16785757,-125.04,0.0,72.79,160,0,20,21,260,1440,15,35,15,1);
 INSERT INTO `transport` VALUES (22,'Barge_South-OOS-Day',16785748,0,246.377,0.0,-529.793,64,0,23,0,520,1440,15,6,15,1);

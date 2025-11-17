@@ -117,11 +117,13 @@ private:
 
 namespace automaton
 {
-    void                   LoadAutomatonSpellList();
-    bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
-    bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
-    std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
-    void                   LoadAutomatonAbilities();
+
+void                   LoadAutomatonSpellList();
+bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
+bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
+std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
+void                   LoadAutomatonAbilities();
+
 }; // namespace automaton
 
 #endif

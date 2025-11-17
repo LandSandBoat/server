@@ -82,6 +82,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         AIVEDOIR_DIALOG               = 11541, -- That's funny. I could have sworn she asked me to meet her here...
         CAPIRIA_DIALOG                = 11542, -- He's late! I do hope he hasn't forgotten.
         BERTENONT_DIALOG              = 11543, -- Stars are more beautiful up close. Don't you agree?
+        ITS_LOCKED                    = 11552, -- It's locked.
         GILIPESE_DIALOG               = 11564, -- Nothing to report!
         DOGGOMEHR_SHOP_DIALOG         = 11577, -- Welcome to the Blacksmiths' Guild shop.
         LUCRETIA_SHOP_DIALOG          = 11578, -- Blacksmiths' Guild shop, at your service!

@@ -12,12 +12,12 @@ end
 itemObject.onItemEquip = function(target, item)
     local mainWeapon = target:getEquippedItem(xi.slot.MAIN)
     if mainWeapon and mainWeapon:getID() == xi.item.DAYBREAK then
-        target:addSpell(xi.magic.spell.DISPELGA, true)
+        target:addSpell(xi.magic.spell.DISPELGA, { silentLog = true, saveToDB = false })
     end
 end
 
 itemObject.onItemUnequip = function(target, item)
-    target:delSpell(xi.magic.spell.DISPELGA)
+    target:delSpell(xi.magic.spell.DISPELGA, { saveToDB = false })
 end
 
 return itemObject

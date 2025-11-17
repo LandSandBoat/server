@@ -15,6 +15,7 @@ set(SOURCES
     login_helpers.h
     login_helpers.cpp
     login_packets.h
+    otp_helpers.h
     session.h
     view_session.h
     view_session.cpp

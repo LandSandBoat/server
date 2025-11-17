@@ -30,24 +30,26 @@ class CCharEntity;
 // This packet is sent by the server to inform the client of multiple different kinds of information.
 namespace GP_SERV_COMMAND_MISCDATA
 {
-    // Type 0x05: Job Points (data: 152 bytes, total: 156 bytes)
-    class JOB_POINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, JOB_POINTS>
-    {
-    public:
-        struct PacketData
-        {
-            GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
-            uint16_t                      unknown06; // PS2: (New; did not exist.)
-            uint8_t                       access;    // Access flag (0=no access, 1=access)
-            uint8_t                       padding[3];
-            struct JobPointData
-            {
-                uint16_t capacityPoints; // Capacity points for this job
-                uint16_t currentJp;      // Current unspent job points
-                uint16_t totalJpSpent;   // Total job points spent
-            } jobs[24];                  // One entry per job (starting from index 1, job 0 unused)
-        };
 
-        JOB_POINTS(const CCharEntity* PChar);
+// Type 0x05: Job Points (data: 152 bytes, total: 156 bytes)
+class JOB_POINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, JOB_POINTS>
+{
+public:
+    struct PacketData
+    {
+        GP_SERV_COMMAND_MISCDATA_TYPE type;      // PS2: type
+        uint16_t                      unknown06; // PS2: (New; did not exist.)
+        uint8_t                       access;    // Access flag (0=no access, 1=access)
+        uint8_t                       padding[3];
+        struct JobPointData
+        {
+            uint16_t capacityPoints; // Capacity points for this job
+            uint16_t currentJp;      // Current unspent job points
+            uint16_t totalJpSpent;   // Total job points spent
+        } jobs[24];                  // One entry per job (starting from index 1, job 0 unused)
     };
+
+    JOB_POINTS(const CCharEntity* PChar);
+};
+
 } // namespace GP_SERV_COMMAND_MISCDATA

@@ -47,7 +47,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
-        if npcUtil.giveItem(player, { { xi.item.MAGICMART_FLYER, 12 }, { xi.item.MAGICMART_FLYER, 3 } }) then
+        if npcUtil.giveItem(player, { { xi.item.MAGICMART_FLYER, 1 }, { xi.item.MAGICMART_FLYER, 14 } })  then
             player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then

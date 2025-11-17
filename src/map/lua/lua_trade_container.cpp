@@ -45,7 +45,7 @@ uint32 CLuaTradeContainer::getGil()
     return itemID == 0xFFFF ? m_pMyTradeContainer->getQuantity(0) : 0;
 }
 
-auto CLuaTradeContainer::getItem(sol::object const& SlotIDObj) -> CItem*
+auto CLuaTradeContainer::getItem(const sol::object& SlotIDObj) -> CItem*
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -58,7 +58,7 @@ auto CLuaTradeContainer::getItem(sol::object const& SlotIDObj) -> CItem*
 
 //======================================================//
 
-uint16 CLuaTradeContainer::getItemId(sol::object const& SlotIDObj)
+uint16 CLuaTradeContainer::getItemId(const sol::object& SlotIDObj)
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -78,7 +78,7 @@ uint16 CLuaTradeContainer::getItemId(sol::object const& SlotIDObj)
 
 //======================================================//
 
-uint16 CLuaTradeContainer::getItemSubId(sol::object const& SlotIDObj)
+uint16 CLuaTradeContainer::getItemSubId(const sol::object& SlotIDObj)
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -134,7 +134,7 @@ bool CLuaTradeContainer::hasItemQty(uint16 itemID, uint32 quantity)
 
 //======================================================//
 
-bool CLuaTradeContainer::confirmItem(uint16 itemID, sol::object const& amountObj)
+bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj)
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
@@ -159,7 +159,7 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, sol::object const& amountObj
 
 //======================================================//
 
-bool CLuaTradeContainer::confirmSlot(uint8 slotID, sol::object const& amountObj)
+bool CLuaTradeContainer::confirmSlot(uint8 slotID, const sol::object& amountObj)
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
     return m_pMyTradeContainer->setConfirmedStatus(slotID, amount);

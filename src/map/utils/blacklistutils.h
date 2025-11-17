@@ -28,10 +28,11 @@ class CCharEntity;
 
 namespace blacklistutils
 {
-    auto IsBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
-    auto AddBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
-    auto DeleteBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
-    void SendBlacklist(CCharEntity* PChar);
+
+auto IsBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
+auto AddBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
+auto DeleteBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
+void SendBlacklist(CCharEntity* PChar);
 
 } // namespace blacklistutils
 

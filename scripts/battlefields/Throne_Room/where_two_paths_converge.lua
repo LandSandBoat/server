@@ -35,12 +35,19 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
 
     local volkerCoords =
     {
-        [1] = { -450,      -167, -239,     125 },
-        [2] = { -769.949 , -407, -478.991, 125 },
-        [3] = { -1089.787, -647, -718.976, 125 },
+        [1] = { -451.155, -167, -240.004, 125 },
+        [2] = { -770.805, -407, -480.077, 125 },
+        [3] = { -1090.97, -647, -720.077, 125 },
     }
 
-    local zeid2 = SpawnMob(zeidId + 1)
+    -- Bail out if anyone else got here first
+    local zeid2Id = zeidId + 1
+    local zeid2Mob = GetMobByID(zeid2Id)
+    if zeid2Mob and zeid2Mob:isSpawned() then
+        return
+    end
+
+    local zeid2 = SpawnMob(zeid2Id)
 
     -- Set Phase 2 Zeid's HP to be same HPP as previous phase.
     local zeid1 = GetMobByID(zeidId)

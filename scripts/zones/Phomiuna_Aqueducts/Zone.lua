@@ -1,10 +1,25 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- Eba or Mahisha spawn on zone initialization
+    local mahisha = GetMobByID(ID.mob.MAHISHA)
+    local eba     = GetMobByID(ID.mob.EBA)
+
+    if mahisha and eba then
+        if math.random(1, 100) <= 50 then
+            DisallowRespawn(eba:getID(), true)
+            mahisha:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        else
+            DisallowRespawn(mahisha:getID(), true)
+            eba:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        end
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

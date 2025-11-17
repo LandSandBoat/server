@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "entities/mobentity.h"
 
 #include <vector>
 
@@ -72,8 +73,8 @@ public:
     uint8           getFlag() const;
     timer::duration getAnimationTime() const;
     timer::duration getActivationTime() const;
-    uint16          getMsg() const;
-    uint16          getAoEMsg() const;
+    auto            getMsg() const -> MSGBASIC_ID;
+    auto            getAoEMsg() const -> MSGBASIC_ID;
     uint16          getValidTargets() const;
     int16           getTP() const;
     auto            getHP() const -> int32;

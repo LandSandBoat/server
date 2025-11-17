@@ -115,7 +115,7 @@ g_mixins.helper_npc = function(helperMob)
         if not shouldEngage then
             for _, targetMobId in ipairs(targetMobs) do
                 local targetMob = GetMobByID(targetMobId)
-                if targetMob and targetMob:isEngaged() then
+                if targetMob and targetMob:isSpawned() and targetMob:isEngaged() then
                     shouldEngage = true
                     break
                 end

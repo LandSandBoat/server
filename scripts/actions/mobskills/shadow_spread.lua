@@ -11,24 +11,33 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = 0
-    local currentMsg = xi.msg.basic.NONE
+    local currentMsg = nil
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
-    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
-        typeEffect = xi.effect.CURSE_I
-        currentMsg = msg
+    local sleepDuration = 60
+    if
+        mob:getPool() == xi.mobPools.WREAKER or
+        mob:getPool() == xi.mobPools.AGONIZER
+    then
+        sleepDuration = 120
     end
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
-    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
-        typeEffect = xi.effect.BLINDNESS
-        currentMsg = msg
+    local effects =
+    {
+        { effect = xi.effect.CURSE_I,   power = 20,  duration = 180 },
+        { effect = xi.effect.SLEEP_I,   power = 1,   duration = sleepDuration },
+        { effect = xi.effect.BLINDNESS, power = 100, duration = 180 },
+    }
+
+    for _, effectData in ipairs(effects) do
+        local msg = xi.mobskills.mobStatusEffectMove(mob, target, effectData.effect, effectData.power, 0, effectData.duration)
+        if msg == xi.msg.basic.SKILL_ENFEEB_IS and currentMsg == nil then
+            typeEffect = effectData.effect
+            currentMsg = msg
+        end
     end
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
-    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
-        typeEffect = xi.effect.SLEEP_I
-        currentMsg = msg
+    if currentMsg == nil then
+        currentMsg = xi.msg.basic.SKILL_NO_EFFECT
     end
 
     skill:setMsg(currentMsg)

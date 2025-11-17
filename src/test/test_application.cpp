@@ -26,63 +26,65 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "test",
-            .arguments  = {
-                ArgumentDefinition{
-                     .name        = "--keep-going",
-                     .description = "Continue as much as possible after an error or failure.",
-                     .type        = ArgumentType::Flag,
-                },
-                ArgumentDefinition{
-                     .name        = "--verbose",
-                     .description = "Verbose output of errors.",
-                     .type        = ArgumentType::Flag,
-                },
-                ArgumentDefinition{
-                     .name        = "--watch",
-                     .description = "Watch files for changes and re-run tests. (Not yet implemented)",
-                     .type        = ArgumentType::Flag,
-                },
-                ArgumentDefinition{
-                     .name        = "--tag",
-                     .description = "Only run tests with these #tags.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--no-tag",
-                     .description = "Do not run tests with these #tags, takes precedence over tags.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--file",
-                     .description = "Only run test files matching the regex pattern.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--no-file",
-                     .description = "Do not run test files matching the regex pattern, takes precedence over file.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--filter",
-                     .description = "Only run test names matching the regex pattern.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--no-filter",
-                     .description = "Do not run test names matching the regex pattern, takes precedence over filter.",
-                     .type        = ArgumentType::Multiple,
-                },
-                ArgumentDefinition{
-                     .name        = "--output",
-                     .description = "Output file for test results. Use .json extension for CTRF format.",
-                },
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "test",
+        .arguments  = {
+            ArgumentDefinition{
+                 .name        = "--keep-going",
+                 .description = "Continue as much as possible after an error or failure.",
+                 .type        = ArgumentType::Flag,
             },
-        };
-    }
+            ArgumentDefinition{
+                 .name        = "--verbose",
+                 .description = "Verbose output of errors.",
+                 .type        = ArgumentType::Flag,
+            },
+            ArgumentDefinition{
+                 .name        = "--watch",
+                 .description = "Watch files for changes and re-run tests. (Not yet implemented)",
+                 .type        = ArgumentType::Flag,
+            },
+            ArgumentDefinition{
+                 .name        = "--tag",
+                 .description = "Only run tests with these #tags.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--no-tag",
+                 .description = "Do not run tests with these #tags, takes precedence over tags.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--file",
+                 .description = "Only run test files matching the regex pattern.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--no-file",
+                 .description = "Do not run test files matching the regex pattern, takes precedence over file.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--filter",
+                 .description = "Only run test names matching the regex pattern.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--no-filter",
+                 .description = "Do not run test names matching the regex pattern, takes precedence over filter.",
+                 .type        = ArgumentType::Multiple,
+            },
+            ArgumentDefinition{
+                 .name        = "--output",
+                 .description = "Output file for test results. Use .json extension for CTRF format.",
+            },
+        },
+    };
+}
+
 } // namespace
 
 TestApplication::TestApplication(const int argc, char** argv)

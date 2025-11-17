@@ -28,12 +28,12 @@ local abilityBlocked = function(mob)
     local action = mob:getCurrentAction()
 
     return
-        action == xi.action.MOBABILITY_START or
-        action == xi.action.MOBABILITY_USING or
-        action == xi.action.MOBABILITY_FINISH or
-        action == xi.action.MAGIC_START or
-        action == xi.action.MAGIC_CASTING or
-        action == xi.action.MAGIC_FINISH
+        action == xi.action.category.MOBABILITY_START or
+        action == xi.action.category.MOBABILITY_USING or
+        action == xi.action.category.MOBABILITY_FINISH or
+        action == xi.action.category.MAGIC_START or
+        action == xi.action.category.MAGIC_CASTING or
+        action == xi.action.category.MAGIC_FINISH
 end
 
 -----------------------------------

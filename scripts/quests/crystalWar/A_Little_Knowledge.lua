@@ -197,8 +197,8 @@ quest.sections =
             onEventFinish =
             {
                 [47] = function(player, csid, option, npc)
-                    player:addSpell(xi.magic.spell.EMBRAVA, true)
-                    player:addSpell(xi.magic.spell.KAUSTRA, true)
+                    player:addSpell(xi.magic.spell.EMBRAVA, { silentLog = true })
+                    player:addSpell(xi.magic.spell.KAUSTRA, { silentLog = true })
                     player:messageSpecial(eldiemeSID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
                 end,
             }

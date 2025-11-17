@@ -9,4 +9,9 @@ return {
     ['qm12']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm13']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm16']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['qm17']          = { messageSpecial = ID.text.SOMETHING_IS_WRITTEN },
+    ['qm_key1']       = { messageSpecial = ID.text.OFFERING },
+    ['qm_key2']       = { messageSpecial = ID.text.OFFERING },
+    ['qm_key3']       = { messageSpecial = ID.text.OFFERING },
+    ['Stone_Picture_Frame_QoT'] = { messageSpecial = ID.text.FRAME_FOR_A_PAINTING },
 }

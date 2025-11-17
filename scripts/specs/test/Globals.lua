@@ -74,7 +74,6 @@ end
 ---Create a stub that replaces a global function (alias for mock)
 ---@param path string Dot-separated path to the function (e.g., "xi.globals.interaction.trade")
 ---@param impl? function|any Optional implementation or return value
----@nodiscard
 ---@return CStub
 function stub(path, impl)
 end

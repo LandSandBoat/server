@@ -20,7 +20,7 @@ return {
     ['Dabbio']       = { event = 722 },
     ['Diraulate']    = { event = 581 },
     ['Eaugouint']    = { event = 579 },
-    ['Eddy']         = { event = 723 },
+    ['Eddy']         = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
     ['Fontoumant']   = { event = 561 },
     ['Gournaie']     = { event = 715 },
     ['Gulemont']     = { event = 593 },

@@ -26,9 +26,10 @@
 #include "enums/msg_std.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
-#include "packets/char_check.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "packets/s2c/0x0c9_equip_inspect_equipment.h"
+#include "packets/s2c/0x0c9_equip_inspect_general.h"
 #include "packets/s2c/0x0ca_inspect_message.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
@@ -130,7 +131,8 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PCharTarget);
-                PChar->pushPacket<CCheckPacket>(PChar, PCharTarget);
+                PChar->pushPacket<GP_SERV_COMMAND_EQUIP_INSPECT::EQUIPMENT>(PChar, PCharTarget);
+                PChar->pushPacket<GP_SERV_COMMAND_EQUIP_INSPECT::GENERAL>(PChar, PCharTarget);
             }
         }
         break;

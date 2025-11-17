@@ -60,7 +60,7 @@ public:
     auto     getAllies() -> sol::table;
     auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
     uint8    getStatus();
-    uint64_t getLocalVar(std::string const& name);
+    uint64_t getLocalVar(const std::string& name);
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
     uint32   getArmouryCrate();
@@ -68,14 +68,14 @@ public:
     void setLastTimeUpdate(uint32 seconds);
     void setTimeLimit(uint32 seconds);
     void setWipeTime(uint32 seconds);
-    void setRecord(std::string const& name, uint32 seconds);
+    void setRecord(const std::string& name, uint32 seconds);
     void setStatus(uint8 status);
-    void setLocalVar(std::string const& name, uint64_t value);
+    void setLocalVar(const std::string& name, uint64_t value);
     auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> CBaseEntity*;
     bool cleanup(bool cleanup);
     void win();
     void lose();
-    void addGroups(sol::table const& groups, bool hasMultipleArenas);
+    void addGroups(const sol::table& groups, bool hasMultipleArenas);
 
     bool operator==(const CLuaBattlefield& other) const
     {

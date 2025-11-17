@@ -42,43 +42,45 @@
 
 namespace
 {
-    // Marked as true by markLoaded() when the
-    // application is fully loaded and the main
-    // loop has begun.
-    bool gIsRunning = false;
 
-    void handleSignal(const std::error_code& error, int signal)
+// Marked as true by markLoaded() when the
+// application is fully loaded and the main
+// loop has begun.
+bool gIsRunning = false;
+
+void handleSignal(const std::error_code& error, int signal)
+{
+    if (error)
     {
-        if (error)
-        {
-            return;
-        }
-
-        switch (signal)
-        {
-#ifdef _WIN32
-            case SIGBREAK:
-#endif // _WIN32
-            case SIGINT:
-            case SIGTERM:
-                gIsRunning = false;
-                std::exit(0);
-#ifndef _WIN32
-            case SIGABRT:
-            case SIGSEGV:
-            case SIGFPE:
-            case SIGILL:
-                break;
-#endif
-            default:
-                std::cerr << fmt::format("Unhandled signal: {}\n", signal);
-                break;
-        }
+        return;
     }
 
+    switch (signal)
+    {
 #ifdef _WIN32
-    unsigned long prevQuickEditMode;
+        case SIGBREAK:
 #endif // _WIN32
+        case SIGINT:
+        case SIGTERM:
+            gIsRunning = false;
+            std::exit(0);
+#ifndef _WIN32
+        case SIGABRT:
+        case SIGSEGV:
+        case SIGFPE:
+        case SIGILL:
+            break;
+#endif
+        default:
+            std::cerr << fmt::format("Unhandled signal: {}\n", signal);
+            break;
+    }
+}
+
+#ifdef _WIN32
+unsigned long prevQuickEditMode;
+#endif // _WIN32
+
 } // namespace
 
 Application::Application(const ApplicationConfig& appConfig, int argc, char** argv)

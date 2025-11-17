@@ -33,7 +33,7 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
 {
     auto& packet = this->data();
 
-    uint8               count      = 0;
+    uint8               count      = 1;
     const RecastList_t* RecastList = PChar->PRecastContainer->GetRecastList(RECAST_ABILITY);
     for (auto&& recast : *RecastList)
     {
@@ -52,23 +52,24 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
 
             if (recast.maxCharges != 0)
             {
-                const auto* charge = ability::GetCharge(PChar, recast.ID);
-
-                const uint16_t actualChargeTime = timer::count_seconds(recast.chargeTime);
-                const uint16_t baseChargeTime   = timer::count_seconds(charge->chargeTime);
-
-                if (baseChargeTime > actualChargeTime)
+                if (const auto* charge = ability::GetCharge(PChar, recast.ID))
                 {
-                    packet.Timers[count].Calc1 = 0; // Not used in Ready, QD, Stratagems... Is this never used?
-                    packet.Timers[count].Calc2 = 65536 - (baseChargeTime - actualChargeTime) * recast.maxCharges;
+                    const uint16_t actualChargeTime = timer::count_seconds(recast.chargeTime);
+                    const uint16_t baseChargeTime   = timer::count_seconds(charge->chargeTime);
+
+                    if (baseChargeTime > actualChargeTime)
+                    {
+                        packet.Timers[count].Calc1 = 0; // Not used in Ready, QD, Stratagems... Is this never used?
+                        packet.Timers[count].Calc2 = 65536 - (baseChargeTime - actualChargeTime) * recast.maxCharges;
+                    }
                 }
             }
             count++;
         }
         else // 2hr edge case // TODO: retail uses Calc2 on 2hr for some reason...
         {
-            packet.Timers[count].Timer   = recastSeconds;
-            packet.Timers[count].TimerId = 0;
+            packet.Timers[0].Timer   = recastSeconds;
+            packet.Timers[0].TimerId = 0;
         }
 
         // Retail currently only allows 31 distinct recasts to be sent in the packet

@@ -36,7 +36,7 @@ Async::~Async()
 {
 }
 
-void Async::submit(const std::function<void()>& func)
+void Async::submit(const xi::Fn<void()>& func)
 {
     TracyZoneScoped;
 

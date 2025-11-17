@@ -91,12 +91,12 @@ public:
     EntityList_t GetMobList() const;
     bool         CharListEmpty() const;
 
-    void ForEachChar(std::function<void(CCharEntity*)> const& func);
-    void ForEachMob(std::function<void(CMobEntity*)> const& func);
-    void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
-    void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
-    void ForEachPet(std::function<void(CPetEntity*)> const& func);
-    void ForEachAlly(std::function<void(CMobEntity*)> const& func);
+    void ForEachChar(const std::function<void(CCharEntity*)>& func);
+    void ForEachMob(const std::function<void(CMobEntity*)>& func);
+    void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
+    void ForEachTrust(const std::function<void(CTrustEntity*)>& func);
+    void ForEachPet(const std::function<void(CPetEntity*)>& func);
+    void ForEachAlly(const std::function<void(CMobEntity*)>& func);
 
     auto GetNewCharTargID() -> uint16;
     void AssignDynamicTargIDandLongID(CBaseEntity* PEntity);

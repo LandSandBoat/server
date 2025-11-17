@@ -139,7 +139,11 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
             end
         end
 
-        if hitdamage > 0 and not isBlockedWithShieldMastery then
+        if
+            hitdamage > 0 and
+            not isBlockedWithShieldMastery and
+            not params.isRanged
+        then
             target:tryHitInterrupt(mob)
         end
 
@@ -148,7 +152,7 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
         finaldmg = finaldmg + hitdamage
     end
 
-    return hitslanded, finaldmg
+    return hitslanded, finaldmg, isCritical
 end
 
 -----------------------------------
@@ -167,23 +171,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     if params.isRanged then
         fSTR = xi.combat.physical.calculateRangedStatFactor(mob, target)
     end
-
-    local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        mob:isFacing(target, 23)
-    then
-        -- Yonin evasion boost if mob is facing target
-        targetEvasion = targetEvasion + target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    local lvldiff = math.max(0, mob:getMainLvl() - target:getMainLvl())
-
-    --work out hit rate for mobs
-    local hitrate = ((mob:getACC() * accMod) - targetEvasion) / 2 + (lvldiff * 2) + 75
-
-    hitrate = utils.clamp(hitrate, 20, 95)
 
     --work out the base damage for a single hit
     local hitdamage = math.max(1, mob:getWeaponDmg() + fSTR) * ftp
@@ -219,26 +206,35 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     local finaldmg   = 0
     local hitsdone   = 1
     local hitslanded = 0
+    local hitCrit    = false
 
-    -- first hit has a higher chance to land
-    local firstHitChance = hitrate * 1.5
+    local targetSpecialAttackEvasion = target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
+
+    -- Not sure if this first hit bonus is real. Needs verification.
+    local firstHitBonus = 100
 
     if params.isRanged then
-        firstHitChance = hitrate * 1.2
+        firstHitBonus = 40
     end
 
-    firstHitChance = utils.clamp(firstHitChance, 35, 95)
+    local firstHitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1 + firstHitBonus, xi.attackAnimation.RIGHT_ATTACK, false)
+    local hitrate        = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1, xi.attackAnimation.RIGHT_ATTACK, false)
 
-    if (math.random(1, 100)) <= firstHitChance then
+    if math.random() <= firstHitChance then
+        local isCritical = false
         -- use helper function check for parry guard and blocking and handle the hit
-        hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+        hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+
+        hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
     end
 
     while hitsdone < numHits do
-        if (math.random(1, 100)) <= hitrate then --it hit
-            hitslanded, finaldmg = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+        local isCritical = false
+        if math.random() <= hitrate then --it hit
+            hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
         end
 
+        hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
         hitsdone = hitsdone + 1
     end
 
@@ -261,6 +257,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
 
     returninfo.dmg        = finaldmg
     returninfo.hitslanded = hitslanded
+    returninfo.isCritical = hitCrit
 
     return returninfo
 end
@@ -447,7 +444,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
 
     -- Set message to damage
     -- This is for AoE because its only set once
-    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+    if mob:getCurrentAction() == xi.action.category.PET_MOBABILITY_FINISH then
         if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
             skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
         end
@@ -495,7 +492,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         end
 
         -- Handle Third Eye using shadowbehav as a guide.
-        if utils.thirdeye(target) then
+        if xi.combat.physicalHitRate.checkAnticipated(mob, target) then
             skill:setMsg(xi.msg.basic.ANTICIPATE)
 
             return 0

@@ -466,7 +466,6 @@ xi.mod =
     ENSPELL_CHANCE                  = 856,
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
-    PERPETUATION_REDUCTION          = 346,
     SPIKES_DMG_BONUS                = 1079, -- Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     -- fTP modifiers
@@ -596,7 +595,6 @@ xi.mod =
     AUGMENTS_SLEIGHT_OF_SWORD   = 277,  -- Enhances bonus "Subtle Blow" per merit.
 
     ADDS_WEAPONSKILL                = 355,
-    ADDS_WEAPONSKILL_DYN            = 356,
     BP_DELAY                        = 357,
     STEALTH                         = 358,
     RAPID_SHOT                      = 359,
@@ -625,9 +623,16 @@ xi.mod =
     REGAIN                          = 368,
     REFRESH                         = 369,
     REGEN                           = 370,
+
+    -- Perpetuation Cost
     AVATAR_PERPETUATION             = 371,
     WEATHER_REDUCTION               = 372,
     DAY_REDUCTION                   = 373,
+    PERPETUATION_REDUCTION          = 346,
+    HALF_PERPETUATION_CARBUNCLE     = 356,  -- if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
+    HALF_PERPETUATION_DAY           = 1170, -- if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
+    HALF_PERPETUATION_WEATHER       = 1171, -- if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
+
     CURE_POTENCY                    = 374,
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
@@ -686,7 +691,7 @@ xi.mod =
     ACC_COLLAB_EFFECT               = 884,  -- Increases amount of enmity transferred
     HIDE_DURATION                   = 885,  -- Hide duration increase (percentage based
     GILFINDER                       = 897,  -- Gil % increase
-    MOGHANCEMENT_GIL_BONUS_P        = 1158, -- Kill shot gil bonus (yes, really)
+    MOGHANCEMENT_GIL_BONUS_P        = 1158, -- Kill shot gil bonus and "open the armoury crate" bonus (yes, really)
     REVERSE_FLOURISH_EFFECT         = 836,  -- Reverse Flourish effect in tenths of squared term multiplier
     SENTINEL_EFFECT                 = 837,  -- Sentinel effect in percents
     REGEN_MULTIPLIER                = 838,  -- Regen base multiplier
@@ -794,7 +799,7 @@ xi.mod =
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-    THIRD_EYE_ANTICIPATE_RATE       = 839, -- Adds anticipate rate in percents
+    THIRD_EYE_RETENTION_RATE        = 839, -- Increases retention rate of third eye with Seigan. 50 = 50%
 
     CLAMMING_IMPROVED_RESULTS       = 509, --
     CLAMMING_REDUCED_INCIDENTS      = 510, --

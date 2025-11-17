@@ -563,6 +563,14 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
                 target:delStatusEffect(effectValue)
             end
         end
+
+    -- Invisible
+    elseif spellEffect == xi.effect.INVISIBLE then
+        -- Invisible does not overwrite Hide/Camouflage
+        if target:hasStatusEffectByFlag(xi.effectFlag.INVISIBLE) then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+            return 0
+        end
     end
 
     --------------------------------------------------
@@ -594,6 +602,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
+            return xi.effect.NONE
         end
     end
 

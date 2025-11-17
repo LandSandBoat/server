@@ -46,84 +46,86 @@ CTrait::CTrait(const uint16 id)
  ************************************************************************/
 namespace traits
 {
-    TraitList_t PTraitsList[MAX_JOBTYPE]; // Trait lists by job
 
-    /************************************************************************
-     *                                                                       *
-     *  LoadTraitList                                                        *
-     *                                                                       *
-     ************************************************************************/
-    void LoadTraitsList()
+TraitList_t PTraitsList[MAX_JOBTYPE]; // Trait lists by job
+
+/************************************************************************
+ *                                                                       *
+ *  LoadTraitList                                                        *
+ *                                                                       *
+ ************************************************************************/
+void LoadTraitsList()
+{
+    auto rset = db::preparedStmt("SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
+                                 "FROM traits "
+                                 "WHERE traitid < ? "
+                                 "ORDER BY job, traitid ASC, rank DESC",
+                                 MAX_TRAIT_ID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto rset = db::preparedStmt("SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
-                                     "FROM traits "
-                                     "WHERE traitid < ? "
-                                     "ORDER BY job, traitid ASC, rank DESC",
-                                     MAX_TRAIT_ID);
-        FOR_DB_MULTIPLE_RESULTS(rset)
+        if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
         {
-            if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
-            {
-                continue;
-            }
-
-            auto* PTrait = new CTrait(rset->get<uint16>("traitid"));
-
-            PTrait->setJob(rset->get<int8>("job"));
-            PTrait->setLevel(rset->get<uint8>("level"));
-            PTrait->setRank(rset->get<uint8>("rank"));
-            PTrait->setMod(rset->get<Mod>("modifier"));
-            PTrait->setValue(rset->get<int16>("value"));
-            PTrait->setMeritId(rset->get<uint32>("meritid"));
-
-            PTraitsList[PTrait->getJob()].emplace_back(PTrait);
+            continue;
         }
 
-        rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value "
-                                "FROM blue_traits "
-                                "WHERE traitid < ? "
-                                "ORDER BY trait_category ASC, trait_points_needed DESC",
-                                MAX_TRAIT_ID);
-        FOR_DB_MULTIPLE_RESULTS(rset)
-        {
-            auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"));
+        auto* PTrait = new CTrait(rset->get<uint16>("traitid"));
 
-            PTrait->setJob(JOB_BLU);
-            PTrait->setRank(1);
-            PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
-            PTrait->setMod(rset->get<Mod>("modifier"));
-            PTrait->setValue(rset->get<int16>("value"));
+        PTrait->setJob(rset->get<int8>("job"));
+        PTrait->setLevel(rset->get<uint8>("level"));
+        PTrait->setRank(rset->get<uint8>("rank"));
+        PTrait->setMod(rset->get<Mod>("modifier"));
+        PTrait->setValue(rset->get<int16>("value"));
+        PTrait->setMeritId(rset->get<uint32>("meritid"));
 
-            PTraitsList[JOB_BLU].emplace_back(PTrait);
-        }
+        PTraitsList[PTrait->getJob()].emplace_back(PTrait);
     }
 
-    void ClearTraitsList()
+    rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value "
+                            "FROM blue_traits "
+                            "WHERE traitid < ? "
+                            "ORDER BY trait_category ASC, trait_points_needed DESC",
+                            MAX_TRAIT_ID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        // Manually cleanup traits list
-        for (auto jobTraitList : PTraitsList)
-        {
-            for (auto trait : jobTraitList)
-            {
-                destroy(trait);
-            }
-            jobTraitList.clear();
-        }
-    }
-    /************************************************************************
-     *                                                                       *
-     *  Get List of Traits by Main Job or Sub Job                            *
-     *                                                                       *
-     ************************************************************************/
+        auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"));
 
-    TraitList_t* GetTraits(uint8 JobID)
+        PTrait->setJob(JOB_BLU);
+        PTrait->setRank(1);
+        PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
+        PTrait->setMod(rset->get<Mod>("modifier"));
+        PTrait->setValue(rset->get<int16>("value"));
+
+        PTraitsList[JOB_BLU].emplace_back(PTrait);
+    }
+}
+
+void ClearTraitsList()
+{
+    // Manually cleanup traits list
+    for (auto jobTraitList : PTraitsList)
     {
-        if (JobID >= MAX_JOBTYPE)
+        for (auto trait : jobTraitList)
         {
-            ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", JobID);
-            return nullptr;
+            destroy(trait);
         }
-
-        return &PTraitsList[JobID];
+        jobTraitList.clear();
     }
+}
+/************************************************************************
+ *                                                                       *
+ *  Get List of Traits by Main Job or Sub Job                            *
+ *                                                                       *
+ ************************************************************************/
+
+TraitList_t* GetTraits(uint8 JobID)
+{
+    if (JobID >= MAX_JOBTYPE)
+    {
+        ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", JobID);
+        return nullptr;
+    }
+
+    return &PTraitsList[JobID];
+}
+
 }; // namespace traits

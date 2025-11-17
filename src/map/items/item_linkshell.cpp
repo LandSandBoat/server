@@ -71,7 +71,7 @@ const std::string CItemLinkshell::getSignature()
     return signature; // return string copy
 }
 
-void CItemLinkshell::setSignature(std::string const& signature)
+void CItemLinkshell::setSignature(const std::string& signature)
 {
     std::memset(m_extra + 0x09, 0, sizeof(m_extra) - 0x09);
     std::memcpy(m_extra + 0x09, signature.c_str(), signature.size());

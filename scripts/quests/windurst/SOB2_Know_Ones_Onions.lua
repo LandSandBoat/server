@@ -31,6 +31,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getMainLvl() >= 5 and
                 player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
         end,
 

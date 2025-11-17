@@ -117,7 +117,10 @@ public:
         if (val < minVal || val > maxVal)
         {
             result_.addError(std::format("{} out of range: {} not in [{}, {}]",
-                                         fieldName, val, minVal, maxVal));
+                                         fieldName,
+                                         val,
+                                         minVal,
+                                         maxVal));
         }
 
         return *this;
@@ -188,6 +191,8 @@ public:
         return *this;
     }
 
+    // Character must not be resting
+    auto isNotResting(const CCharEntity* PChar) -> PacketValidator&;
     // Character must not be crafting
     auto isNotCrafting(const CCharEntity* PChar) -> PacketValidator&;
     // Character current status must be NORMAL

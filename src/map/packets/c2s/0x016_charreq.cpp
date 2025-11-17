@@ -65,7 +65,9 @@ void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) c
 
                 // PEntity->id will now be the full id of the entity we could not find
                 ShowWarning(fmt::format("Server missing npc_list.sql entry <{}> in zone <{} ({})>",
-                                        PEntity->id, zoneutils::GetZone(PChar->getZone())->getName(), PChar->getZone()));
+                                        PEntity->id,
+                                        zoneutils::GetZone(PChar->getZone())->getName(),
+                                        PChar->getZone()));
             }
 
             // Special case for onZoneIn cutscenes in Mog House

@@ -851,9 +851,8 @@ xi.garrison.start = function(player, npc)
     -- Adds level cap / registers lockout for the player / zone
     for _, member in pairs(player:getAlliance()) do
         if member:getZoneID() == player:getZoneID() then
-            xi.garrison.addLevelCap(member, zoneData.levelCap)
-
             table.insert(zoneData.players, member:getID())
+            xi.garrison.addLevelCap(member, zoneData.levelCap)
         end
     end
 
@@ -872,7 +871,10 @@ xi.garrison.stop = function(zone)
     -- Save lockout based off of garrison end time.
     saveZoneLockout(zone)
 
-    for _, entityId in pairs(zoneData.players or {}) do
+    local playerIDs  = { unpack(zoneData.players) } -- make a copy
+    zoneData.players = {} -- players table must be empty before level restriction status wears off for latent effects
+
+    for _, entityId in pairs(playerIDs or {}) do
         local entity = GetPlayerByID(entityId)
 
         if entity ~= nil then
@@ -888,7 +890,6 @@ xi.garrison.stop = function(zone)
         DespawnMob(entityId, zone)
     end
 
-    zoneData.players       = {}
     zoneData.spawnSchedule = {}
     zoneData.npcs          = {}
     zoneData.mobs          = {}
@@ -898,4 +899,19 @@ end
 xi.garrison.win = function(zone)
     local zoneData = xi.garrison.zoneData[zone:getID()]
     zoneData.state = xi.garrison.state.GRANT_LOOT
+end
+
+xi.garrison.isInGarrison = function(player)
+    local zoneID = player:getZoneID()
+    if not zoneID then
+        return false
+    end
+
+    local zoneData = xi.garrison.zoneData[zoneID]
+    if not zoneData then
+        return false
+    end
+
+    local players = zoneData.players or {}
+    return utils.contains(player:getID(), players)
 end

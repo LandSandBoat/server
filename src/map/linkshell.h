@@ -76,14 +76,16 @@ private:
 
 namespace linkshell
 {
-    auto LoadLinkshell(uint32 id) -> CLinkshell*;
-    void UnloadLinkshell(uint32 id);
 
-    bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
-    bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
+auto LoadLinkshell(uint32 id) -> CLinkshell*;
+void UnloadLinkshell(uint32 id);
 
-    uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
-    CLinkshell* GetLinkshell(uint32 id);
+bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
+bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
+
+uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
+CLinkshell* GetLinkshell(uint32 id);
+
 }; // namespace linkshell
 
 #endif

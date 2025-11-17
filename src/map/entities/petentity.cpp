@@ -340,7 +340,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (value < 0)
         {
-            actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+            actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
             actionTarget.param     = -value;
         }
     }
@@ -590,8 +590,11 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             target.knockback  = PSkill->getKnockback();
             if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
-                                                                    PSkill->getTertiarySkillchain());
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                    PTargetFound,
+                    PSkill->getPrimarySkillchain(),
+                    PSkill->getSecondarySkillchain(),
+                    PSkill->getTertiarySkillchain());
                 if (effect != SUBEFFECT_NONE)
                 {
                     int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);

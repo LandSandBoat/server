@@ -22,7 +22,6 @@
 #include "0x0be_merits.h"
 
 #include "entities/charentity.h"
-#include "packets/char_job_extra.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -102,8 +101,7 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+                    charutils::SendExtendedJobPackets(PChar);
                     PChar->pushPacket<CCharSyncPacket>(PChar);
                 }
             }

@@ -67,12 +67,33 @@ public:
     std::array<uint8, 4096> buffer_;
 
     // Blowfish key
-    // clang-format off
+
     uint8 key[24] = {
-        0x30, 0x73, 0x3D, 0x6D, 0x3C, 0x31, 0x49, 0x5A, 0x32, 0x7A, 0x42, 0x43,
-        0x63, 0x38, 0x7B, 0x7E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x30,
+        0x73,
+        0x3D,
+        0x6D,
+        0x3C,
+        0x31,
+        0x49,
+        0x5A,
+        0x32,
+        0x7A,
+        0x42,
+        0x43,
+        0x63,
+        0x38,
+        0x7B,
+        0x7E,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
     };
-    // clang-format on
 
 private:
     // A single IP should only have one request in flight at a time, so we are going to
@@ -88,9 +109,9 @@ private:
 
     void checkDeadline(const std::shared_ptr<search_handler>& self);
 
-    uint16_t getNumSessionsInUse(std::string const& ipAddressStr);
-    void     addToUsedIPAddresses(std::string const& ipAddressStr);
-    void     removeFromUsedIPAddresses(std::string const& ipAddressStr);
+    uint16_t getNumSessionsInUse(const std::string& ipAddressStr);
+    void     addToUsedIPAddresses(const std::string& ipAddressStr);
+    void     removeFromUsedIPAddresses(const std::string& ipAddressStr);
 
     bool validatePacket(uint16_t length);
     void decrypt(uint16_t length);

@@ -138,7 +138,9 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
                                  "FROM transport "
                                  "LEFT JOIN zone_settings ON ((transport >> 12) & 0xFFF) = zoneid "
                                  "WHERE IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)",
-                                 mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
+                                 mapIPP.getIP(),
+                                 mapIPP.getIPString(),
+                                 mapIPP.getPort());
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         TransportZone_Town zoneTown;
@@ -205,7 +207,9 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
                             "FROM transport LEFT JOIN "
                             "zone_settings ON zone = zoneid WHERE "
                             "IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)",
-                            mapIPP.getIP(), mapIPP.getIPString(), mapIPP.getPort());
+                            mapIPP.getIP(),
+                            mapIPP.getIPString(),
+                            mapIPP.getPort());
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         TransportZone_Voyage voyageZone{};

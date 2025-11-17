@@ -60,7 +60,8 @@ void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, 
     if (eventId.has_value() && eventId.value() != currentId())
     {
         TestError("Expected event {}, but current event is {}",
-                  eventId.value(), currentId());
+                  eventId.value(),
+                  currentId());
         return;
     }
 

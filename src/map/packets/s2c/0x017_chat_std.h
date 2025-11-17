@@ -29,7 +29,9 @@ enum CHAT_MESSAGE_TYPE : uint8_t;
 class CCharEntity;
 namespace ipc
 {
-    struct ChatMessageAssist;
+
+struct ChatMessageAssist;
+
 }
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0017
@@ -44,11 +46,11 @@ public:
         uint8_t           Attr;      // PS2: Attr
         uint16_t          Data;      // PS2: (New; did not exist.)
         uint8_t           sName[15]; // PS2: sName
-        uint8_t           Mes[128];  // PS2: Mes - Variable sized array
+        uint8_t           Mes[150];  // PS2: Mes - Variable sized array
     };
 
     // Standard constructor
-    GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender = std::string());
+    GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender = std::string());
 
     // Zone-based constructor
     GP_SERV_COMMAND_CHAT_STD(const std::string& name, uint16 zone, CHAT_MESSAGE_TYPE MessageType, const std::string& message, uint8 gmLevel = 0);

@@ -40,7 +40,7 @@ quest.sections =
             {
                 [869] = function(player, csid, option, npc)
                     if xi.trust.hasPermit(player) then
-                        player:addSpell(xi.magic.spell.SHIKAREE_Z, true, true)
+                        player:addSpell(xi.magic.spell.SHIKAREE_Z, { silentLog = true })
                         player:messageSpecial(woodsID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.SHIKAREE_Z)
                     end
                 end,

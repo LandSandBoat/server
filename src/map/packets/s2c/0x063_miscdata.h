@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class GP_SERV_COMMAND_MISCDATA_TYPE : uint16_t
 {
     Merits       = 0x02,

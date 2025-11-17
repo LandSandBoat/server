@@ -78,6 +78,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
         PATOLLE_OPEN_DIALOG            = 8330,  -- Hey, [mister/miss]! How about some specialty goods from Kuzotz?
         BONMAURIEUT_OPEN_DIALOG        = 8331,  -- My shipment is in! Would you like to see what has just arrived from the Elshimo Uplands?
         FFR_LOOKS_CURIOUSLY_BASE       = 8468,  -- Answald looks over curiously for a moment.
+        SUSPICIOUS_CHARACTERS          = 8544,  -- It's my job to look out for suspicious characters coming in on the airships.
         IMPERIAL_STANDING_INCREASED    = 11175, -- Your Imperial Standing has increased!
         EARNED_ALLIED_NOTES            = 11176, -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 11177, -- Obtained: <number> guild points.

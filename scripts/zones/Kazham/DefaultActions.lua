@@ -36,9 +36,10 @@ return {
     ['Popopp']            = { text = ID.text.OPO_OPO },
     ['Pula_Rhatti']       = { event = 92 },
     ['Qhio_Plittibhi']    = { event = 154 },
+    ['Romaa_Mihgo']       = { event = 263 },
     ['Roropp']            = { text = ID.text.OPO_OPO },
     ['Soun_Abralah']      = { event = 101 },
-    ['Swift']             = { event = 10018 },
+    ['Swift']             = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
     ['Tatapp']            = { text = ID.text.OPO_OPO },
     ['Thali_Mhobrum']     = { event = 190 },
     ['Tio_Moshroca']      = { event = 123 },

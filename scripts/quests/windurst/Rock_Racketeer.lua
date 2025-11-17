@@ -94,9 +94,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
-                    if progress <= 1 then
-                        return quest:event(432)
-                    elseif progress == 3 then
+                    if progress == 3 then
                         if quest:getVar(player, 'Option') < 2 then
                             return quest:progressEvent(100) -- Optional Dialogue that only places once
                         else

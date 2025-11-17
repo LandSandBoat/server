@@ -40,9 +40,16 @@ GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(const CCharEntity* PC
     std::memcpy(packet.String1, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.String1)));
 }
 
-GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(CBaseEntity* PActor, const uint16 messageID, CBaseEntity* PNameActor,
-                                                           const int32 param0, const int32 param1, const int32 param2, const int32 param3,
-                                                           const int32 chatType, const bool showSender)
+GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(
+    CBaseEntity* PActor,
+    const uint16 messageID,
+    CBaseEntity* PNameActor,
+    const int32  param0,
+    const int32  param1,
+    const int32  param2,
+    const int32  param3,
+    const int32  chatType,
+    const bool   showSender)
 {
     auto& packet = this->data();
 

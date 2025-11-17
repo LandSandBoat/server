@@ -52,7 +52,7 @@ GP_SERV_COMMAND_JOB_POINTS::GP_SERV_COMMAND_JOB_POINTS(CCharEntity* PChar)
                     .index  = static_cast<uint16_t>(currentType.id & 0x1F), // Lower 5 bits
                     .job_no = static_cast<uint16_t>(currentType.id >> 5),   // Upper 11 bits
                     .next   = static_cast<uint16_t>(JobPointCost(currentType.value)),
-                    .level  = static_cast<uint16_t>(JobPointValueFormat(currentType.value)),
+                    .level  = static_cast<uint16_t>(currentType.value),
                 };
                 pointIndex++;
             }
@@ -81,7 +81,7 @@ GP_SERV_COMMAND_JOB_POINTS::GP_SERV_COMMAND_JOB_POINTS(const CCharEntity* PChar,
         .index  = static_cast<uint16_t>(PJobPoint->id & 0x1F), // Lower 5 bits
         .job_no = static_cast<uint16_t>(PJobPoint->id >> 5),   // Upper 11 bits
         .next   = static_cast<uint16_t>(JobPointCost(PJobPoint->value)),
-        .level  = static_cast<uint16_t>(JobPointValueFormat(PJobPoint->value)),
+        .level  = static_cast<uint16_t>(PJobPoint->value),
     };
 
     // Retail sends full size packet even for single updates

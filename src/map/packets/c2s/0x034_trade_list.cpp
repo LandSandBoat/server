@@ -31,27 +31,29 @@
 
 namespace
 {
-    const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
+
+const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
     {
-        if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-        {
-            Async::getInstance()->submit(
-                [itemID        = PItem->getID(),
-                 quantity      = ItemNum,
-                 sender        = PChar->id,
-                 sender_name   = PChar->getName(),
-                 receiver      = PTarget->id,
-                 receiver_name = PTarget->getName(),
-                 date          = earth_time::timestamp()]()
+        Async::getInstance()->submit(
+            [itemID        = PItem->getID(),
+             quantity      = ItemNum,
+             sender        = PChar->id,
+             sender_name   = PChar->getName(),
+             receiver      = PTarget->id,
+             receiver_name = PTarget->getName(),
+             date          = earth_time::timestamp()]()
+            {
+                const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                if (!db::preparedStmt(query, itemID, quantity, sender, sender_name, receiver, receiver_name, date))
                 {
-                    const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    if (!db::preparedStmt(query, itemID, quantity, sender, sender_name, receiver, receiver_name, date))
-                    {
-                        ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemID, quantity, sender, receiver, date);
-                    }
-                });
-        }
-    };
+                    ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemID, quantity, sender, receiver, date);
+                }
+            });
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -81,7 +83,9 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         if (ItemNum != 0)
         {
             ShowError("GP_CLI_COMMAND_TRADE_LIST: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] ",
-                      PChar->getName(), PCurrentSlotItem->getID(), TradeIndex);
+                      PChar->getName(),
+                      PCurrentSlotItem->getID(),
+                      TradeIndex);
         }
 
         PCurrentSlotItem->setReserve(0);
@@ -98,15 +102,16 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         PItem->isSubType(ITEM_LOCKED))
     {
         ShowErrorFmt("GP_CLI_COMMAND_TRADE_LIST: {} trying to add an invalid item/quantity [Item: {} | Trade Slot: {}] ",
-                     PChar->getName(), ItemNo, TradeIndex);
+                     PChar->getName(),
+                     ItemNo,
+                     TradeIndex);
         return;
     }
 
     // If item count is zero remove from container
     if (ItemNum == 0)
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(),
-                 TradeIndex, PItem->getName());
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName());
         PItem->setReserve(0);
         PChar->UContainer->SetItem(TradeIndex, nullptr);
     }
@@ -125,16 +130,14 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         }
         else
         {
-            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(),
-                     TradeIndex, PItem->getName(), ItemNum);
+            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
             PItem->setReserve(ItemNum + PItem->getReserve());
             PChar->UContainer->SetItem(TradeIndex, PItem);
         }
     }
     else
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(),
-                 TradeIndex, PItem->getName(), ItemNum);
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
         PItem->setReserve(ItemNum + PItem->getReserve());
         PChar->UContainer->SetItem(TradeIndex, PItem);
     }

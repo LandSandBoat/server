@@ -58,8 +58,17 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
     {
         if (IsH2H()) // Build H2H attacks.
         {
+            bool h2hSingleSwing = false;
+            if (dynamic_cast<CMobEntity*>(m_attacker))
+            {
+                h2hSingleSwing = static_cast<CMobEntity*>(m_attacker)->getMobMod(MOBMOD_H2H_SINGLE_SWING) > 0;
+            }
+
             CreateAttacks(PMain, LEFTATTACK);
-            CreateAttacks(PMain, LEFTATTACK);
+            if (!h2hSingleSwing)
+            {
+                CreateAttacks(PMain, LEFTATTACK);
+            }
         }
         else // Build main weapon attacks.
         {

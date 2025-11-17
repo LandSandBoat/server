@@ -4859,6 +4859,8 @@ INSERT INTO `item_weapon` VALUES (21984,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,
 INSERT INTO `item_weapon` VALUES (21985,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21986,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21990,'zanmato_+2',10,0,269,269,269,0,1,464,320,0);
+INSERT INTO `item_weapon` VALUES (21993,'erudites_staff',12,0,0,0,0,3,1,412,1,0);
+INSERT INTO `item_weapon` VALUES (21994,'erudites_staff_+1',12,0,0,0,0,3,1,399,2,0);
 INSERT INTO `item_weapon` VALUES (21998,'lorg_mor',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21999,'prime_maul',1,0,0,0,0,1,1,999,1,0);        -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22000,'lorg_mor',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented

@@ -54,7 +54,10 @@ void CCharRecastContainer::Add(RECASTTYPE type, uint16 id, timer::duration durat
     if (type == RECAST_ABILITY)
     {
         db::preparedStmt("REPLACE INTO char_recast VALUES (?, ?, ?, ?)",
-                         m_PChar->id, recast->ID, earth_time::timestamp(timer::to_utc(recast->TimeStamp)), static_cast<uint32>(timer::count_seconds(recast->RecastTime)));
+                         m_PChar->id,
+                         recast->ID,
+                         earth_time::timestamp(timer::to_utc(recast->TimeStamp)),
+                         static_cast<uint32>(timer::count_seconds(recast->RecastTime)));
     }
 }
 

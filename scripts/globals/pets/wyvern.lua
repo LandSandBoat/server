@@ -66,7 +66,7 @@ local function doHealingBreath(player, divisor)
         player:getHP() <= math.floor(player:getMaxHP() / divisor) and
         inBreathRange(player)
     then
-        player:getPet():useJobAbility(healingbreath, player)
+        player:getPet():usePetAbility(healingbreath, player)
     elseif wyvernType == wyvernCapabilities.DEFENSIVE then
         local party = player:getPartyWithTrusts()
         for _, member in pairs(party) do
@@ -75,7 +75,7 @@ local function doHealingBreath(player, divisor)
                 inBreathRange(member) and
                 not member:isDead()
             then
-                player:getPet():useJobAbility(healingbreath, member)
+                player:getPet():usePetAbility(healingbreath, member)
                 break
             end
         end
@@ -108,7 +108,7 @@ local function doStatusBreath(target, player)
                     target:hasStatusEffect(effect) and
                     wyvern:checkDistance(target) <= breathRange
                 then
-                    wyvern:useJobAbility(ability, target)
+                    wyvern:usePetAbility(ability, target)
                     return true
                 end
             end
@@ -122,7 +122,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     local master = mob:getMaster()
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
-        mob:addJobTraits(master:getSubJob(), master:getSubLvl())
+        mob:addWyvernJobTraits(master:getSubJob(), master:getSubLvl())
     end
 
     local wyvernType = wyvernTypes[master:getSubJob()]

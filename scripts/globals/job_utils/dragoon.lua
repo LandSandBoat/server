@@ -234,6 +234,8 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
 
     target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
+
+    return xi.effect.ANCIENT_CIRCLE
 end
 
 xi.job_utils.dragoon.useJump = function(player, target, ability, action)
@@ -463,7 +465,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:getHP() > 0 and
         wyvern:isEngaged()
     then
-        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+        wyvern:usePetAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 
     -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
@@ -523,6 +525,8 @@ end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
     player:addStatusEffect(xi.effect.SPIRIT_BOND, 0, 0, 180)
+
+    return xi.effect.SPIRIT_BOND
 end
 
 xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
@@ -565,7 +569,7 @@ xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
 end
 
 xi.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DRAGON_BREAKER, 20, 0, 180)
+    target:addStatusEffect(xi.effect.DRAGON_BREAKER, 20, 0, 180)
 end
 
 xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
@@ -577,6 +581,8 @@ xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 167) -- Soul Jump
 
     player:addStatusEffect(xi.effect.FLY_HIGH, 0, 0, 30)
+
+    return xi.effect.FLY_HIGH
 end
 
 xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
@@ -778,7 +784,7 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
         end
     end
 
-    player:getPet():useJobAbility(breathToUse, target)
+    player:getPet():usePetAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
@@ -822,7 +828,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     local jobPointRecastReduction = player:getMod(xi.mod.DRAGOON_BREATH_RECAST)
     action:setRecast(ability:getRecast() - jobPointRecastReduction)
 
-    wyvern:useJobAbility(healingbreath, target)
+    wyvern:usePetAbility(healingbreath, target)
 end
 
 xi.job_utils.dragoon.useSmitingBreath = function(player, target, ability, action)

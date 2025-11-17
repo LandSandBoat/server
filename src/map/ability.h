@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -671,7 +671,6 @@ enum ABILITY
     ABILITY_TORNADO_II        = 968,
     ABILITY_WINDS_BLESSING    = 969,
     ABILITY_HYSTERIC_ASSAULT  = 970
-
 };
 
 #define MAX_ABILITY_ID 971
@@ -712,8 +711,8 @@ public:
     uint8           getAOE() const;
     uint16          getValidTarget() const;
     uint16          getAddType() const;
-    uint16          getMessage() const;
-    uint16          getAoEMsg() const;
+    auto            getMessage() const -> MSGBASIC_ID;
+    auto            getAoEMsg() const -> MSGBASIC_ID;
     timer::duration getRecastTime() const;
     uint16          getRecastId() const;
     int32           getCE() const;
@@ -774,16 +773,18 @@ private:
 
 namespace ability
 {
-    void LoadAbilitiesList();
 
-    CAbility* GetAbility(uint16 AbilityID);
+void LoadAbilitiesList();
 
-    CAbility* GetTwoHourAbility(JOBTYPE JobID);
-    bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
-    Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
-    uint32    GetAbsorbMessage(uint32 message);
+CAbility* GetAbility(uint16 AbilityID);
 
-    std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
+CAbility* GetTwoHourAbility(JOBTYPE JobID);
+bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
+Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
+auto      GetAbsorbMessage(MSGBASIC_ID msg) -> MSGBASIC_ID;
+
+std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
+
 }; // namespace ability
 
 #endif

@@ -94,7 +94,8 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
     if (testChar_->entity()->isInEvent())
     {
         TestError("Player is in event {} while zoning to {}",
-                  testChar_->entity()->currentEvent->eventId, zoneId);
+                  testChar_->entity()->currentEvent->eventId,
+                  zoneId);
         return;
     }
 
@@ -155,15 +156,15 @@ auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint8 quant
     uint8       slotId = 0;
     const auto* PChar  = testChar_->entity();
 
-    // clang-format off
-    PChar->getStorage(LOC_INVENTORY)->ForEachItem([&](const CItem* item)
+    const auto itemFn = [&](const CItem* item)
     {
         if (item->getID() == itemId && item->getQuantity() >= quantity)
         {
             slotId = item->getSlotID();
         }
-    });
-    // clang-format on
+    };
+
+    PChar->getStorage(LOC_INVENTORY)->ForEachItem(itemFn);
 
     if (slotId != 0)
     {
@@ -242,7 +243,8 @@ void CLuaClientEntityPair::claimAndKillMob(const sol::object& mobQuery, sol::opt
         if (mob.isSpawned())
         {
             TestError("{} did not despawn. Current state is: {}",
-                      mob.getName(), mob.getCurrentAction());
+                      mob.getName(),
+                      mob.getCurrentAction());
         }
     }
 }

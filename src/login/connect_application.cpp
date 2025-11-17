@@ -27,13 +27,15 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "connect",
-            .arguments  = {},
-        };
-    }
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "connect",
+        .arguments  = {},
+    };
+}
+
 } // namespace
 
 ConnectApplication::ConnectApplication(const int argc, char** argv)

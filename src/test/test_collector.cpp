@@ -32,7 +32,9 @@ using namespace std::chrono_literals;
 
 namespace
 {
-    constexpr auto SUITES_PATH = "scripts/tests";
+
+constexpr auto SUITES_PATH = "scripts/tests";
+
 } // namespace
 
 TestCollector::TestCollector(const FilterConfig& filters, ReporterContainer& reporters)
@@ -157,91 +159,101 @@ void TestCollector::loadTestFile(const std::filesystem::path& filePath)
 
 void TestCollector::registerTestFramework()
 {
-    // clang-format off
     // describe: Defines a new test suite. Multiple levels of nesting are supported.
-    lua.set_function("describe", [this](const std::string& name, const sol::protected_function& callback)
-    {
-        // Add child suite with parent reference
-        TestSuite& newSuite = currentSuite_->addChildSuite(name);
-        newSuite.setSourceFile(currentFile_);
-
-        // Set as current suite for nested calls
-        const auto previousSuite = currentSuite_;
-        currentSuite_ = &newSuite;
-
-        // Create environment for this describe block
-        sol::environment describeEnv;
-
-        if (currentEnvironment_.has_value())
+    lua.set_function(
+        "describe",
+        [this](const std::string& name, const sol::protected_function& callback)
         {
-            // Create environment that inherits from parent
-            describeEnv = sol::environment(lua, sol::create, currentEnvironment_.value());
-        }
-        else
-        {
-            // Top-level describe inherits from global
-            describeEnv = sol::environment(lua, sol::create, lua.globals());
-        }
+            // Add child suite with parent reference
+            TestSuite& newSuite = currentSuite_->addChildSuite(name);
+            newSuite.setSourceFile(currentFile_);
 
-        // Store the environment in the suite
-        newSuite.setEnvironment(describeEnv);
-        sol::set_environment(describeEnv, callback);
+            // Set as current suite for nested calls
+            const auto previousSuite = currentSuite_;
+            currentSuite_            = &newSuite;
 
-        // Track current environment for nested describes
-        const auto previousEnvironment = currentEnvironment_;
-        currentEnvironment_ = describeEnv;
+            // Create environment for this describe block
+            sol::environment describeEnv;
 
-        // Execute the callback to collect nested describes/its
-        if (const auto result = callback(); !result.valid())
-        {
-            const sol::error err = result;
-            ShowErrorFmt("Failed to execute describe block '{}': {}", name, err.what());
+            if (currentEnvironment_.has_value())
+            {
+                // Create environment that inherits from parent
+                describeEnv = sol::environment(lua, sol::create, currentEnvironment_.value());
+            }
+            else
+            {
+                // Top-level describe inherits from global
+                describeEnv = sol::environment(lua, sol::create, lua.globals());
+            }
 
-            // Create a failing test for the describe block error
-            newSuite.addTestCase("Describe Setup", std::nullopt);
-        }
+            // Store the environment in the suite
+            newSuite.setEnvironment(describeEnv);
+            sol::set_environment(describeEnv, callback);
 
-        // Restore previous environment and suite
-        currentEnvironment_ = previousEnvironment;
-        currentSuite_ = previousSuite;
-    });
+            // Track current environment for nested describes
+            const auto previousEnvironment = currentEnvironment_;
+            currentEnvironment_            = describeEnv;
+
+            // Execute the callback to collect nested describes/its
+            if (const auto result = callback(); !result.valid())
+            {
+                const sol::error err = result;
+                ShowErrorFmt("Failed to execute describe block '{}': {}", name, err.what());
+
+                // Create a failing test for the describe block error
+                newSuite.addTestCase("Describe Setup", std::nullopt);
+            }
+
+            // Restore previous environment and suite
+            currentEnvironment_ = previousEnvironment;
+            currentSuite_       = previousSuite;
+        });
 
     // it: Defines a new test case within the current suite
-    lua.set_function("it", [this](const std::string& name, const sol::protected_function& testFunc)
-    {
-        auto& testCase = currentSuite_->addTestCase(name, testFunc);
-
-        // Check if this test should be skipped based on filters
-        if (matcher_.shouldSkipTest(std::format("{}::{}", currentSuite_->fullName(), name)))
+    lua.set_function(
+        "it",
+        [this](const std::string& name, const sol::protected_function& testFunc)
         {
-            testCase.markAsSkipped();
-        }
-    });
+            auto& testCase = currentSuite_->addTestCase(name, testFunc);
+
+            // Check if this test should be skipped based on filters
+            if (matcher_.shouldSkipTest(std::format("{}::{}", currentSuite_->fullName(), name)))
+            {
+                testCase.markAsSkipped();
+            }
+        });
 
     // before_each: Function to run before each test in the current suite
-    lua.set_function("before_each", [this](const sol::protected_function& setupFunc)
-    {
-        currentSuite_->setBeforeEachFunc(setupFunc);
-    });
+    lua.set_function(
+        "before_each",
+        [this](const sol::protected_function& setupFunc)
+        {
+            currentSuite_->setBeforeEachFunc(setupFunc);
+        });
 
     // after_each: Function to run after each test in the current suite
-    lua.set_function("after_each", [this](const sol::protected_function& teardownFunc)
-    {
-        currentSuite_->setAfterEachFunc(teardownFunc);
-    });
+    lua.set_function(
+        "after_each",
+        [this](const sol::protected_function& teardownFunc)
+        {
+            currentSuite_->setAfterEachFunc(teardownFunc);
+        });
 
     // setup: Function to run once before all tests in the current suite
-    lua.set_function("setup", [this](const sol::protected_function& setupFunc)
-    {
-        currentSuite_->setSetupFunc(setupFunc);
-    });
+    lua.set_function(
+        "setup",
+        [this](const sol::protected_function& setupFunc)
+        {
+            currentSuite_->setSetupFunc(setupFunc);
+        });
 
     // teardown: Function to run once after all tests in the current suite
-    lua.set_function("teardown", [this](const sol::protected_function& teardownFunc)
-    {
-        currentSuite_->setTeardownFunc(teardownFunc);
-    });
-    // clang-format on
+    lua.set_function(
+        "teardown",
+        [this](const sol::protected_function& teardownFunc)
+        {
+            currentSuite_->setTeardownFunc(teardownFunc);
+        });
 }
 
 void TestCollector::countTestsAndSuites()

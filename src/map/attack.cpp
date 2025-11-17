@@ -400,58 +400,32 @@ bool CAttack::CheckAnticipated()
         return false;
     }
 
-    CStatusEffect* effect = m_victim->StatusEffectContainer->GetStatusEffect(EFFECT_THIRD_EYE, 0);
-    if (effect == nullptr)
+    // bail out before hitting lua if we dont have TE
+    CStatusEffect* thirdEyeEffect = m_victim->StatusEffectContainer->GetStatusEffect(EFFECT_THIRD_EYE, 0);
+    if (thirdEyeEffect == nullptr)
     {
         return false;
     }
 
-    // power stores how many times this effect has anticipated
-    auto pastAnticipations = effect->GetPower();
-
-    if (pastAnticipations > 7)
+    auto checkSeiganCounter = lua["xi"]["combat"]["counter"]["checkSeiganCounter"];
+    if (auto result = checkSeiganCounter(m_attacker, m_victim); result.valid())
     {
-        // max 7 anticipates!
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        return false;
+        m_isCountered = result.get<bool>(0);
+        if (m_isCountered)
+        {
+            m_isCritical = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+        }
     }
-    auto* weapon             = dynamic_cast<CItemWeapon*>(m_victim->m_Weapons[SLOT_MAIN]);
-    bool  isValid2HandWeapon = weapon && weapon->isTwoHanded();
-    bool  hasValidSeigan     = isValid2HandWeapon && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
 
-    if (!hasValidSeigan && pastAnticipations == 0)
+    auto checkAnticipated = lua["xi"]["combat"]["physicalHitRate"]["checkAnticipated"];
+    if (auto result = checkAnticipated(m_attacker, m_victim); result.valid())
     {
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        m_anticipated = true;
+        m_anticipated = result.get<bool>(0);
+
         return true;
     }
-    else if (!hasValidSeigan)
-    {
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        return false;
-    }
-    else
-    { // do have seigan, decay anticipations correctly (guesstimated)
-        // 5-6 anticipates is a 'lucky' streak, going to assume 15% decay per proc, with a 100% base w/ Seigan
-        if (xirand::GetRandomNumber(100) < (100 - (pastAnticipations * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
-        {
-            // increment power and don't remove
-            effect->SetPower(effect->GetPower() + 1);
-            // chance to counter - 25% base
-            if (xirand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
-            {
-                if (m_victim->PAI->IsEngaged())
-                {
-                    m_isCountered = true;
-                    m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
-                }
-            }
-            m_anticipated = true;
-            return true;
-        }
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        return false;
-    }
+
+    return false;
 }
 
 bool CAttack::IsSneakAttack() const
@@ -493,18 +467,22 @@ bool CAttack::CheckCounter()
         }
     }
 
-    // counter check (rate AND your hit rate makes it land, else its just a regular hit)
-    // having seigan active gives chance to counter at 25% of the zanshin proc rate
-    uint16 seiganChance       = 0;
-    auto*  weapon             = dynamic_cast<CItemWeapon*>(m_victim->m_Weapons[SLOT_MAIN]);
-    bool   isValid2HandWeapon = weapon && weapon->isTwoHanded();
-    bool   hasValidSeigan     = isValid2HandWeapon && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
+    uint16 seiganChance = 0;
 
-    if (m_victim->objtype == TYPE_PC && hasValidSeigan)
+    if (m_victim->objtype == TYPE_PC && m_victim->GetMJob() == JOB_SAM)
     {
-        seiganChance = m_victim->getMod(Mod::ZANSHIN) + ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)m_victim);
-        seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
-        seiganChance /= 4;
+        // counter check (rate AND your hit rate makes it land, else its just a regular hit)
+        // having seigan active gives chance to counter at 25% of the zanshin proc rate
+        auto* weapon             = dynamic_cast<CItemWeapon*>(m_victim->m_Weapons[SLOT_MAIN]);
+        bool  isValid2HandWeapon = weapon && weapon->isTwoHanded();
+        bool  hasValidSeigan     = isValid2HandWeapon && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
+
+        if (hasValidSeigan)
+        {
+            seiganChance = m_victim->getMod(Mod::ZANSHIN) + ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)m_victim);
+            seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
+            seiganChance /= 4;
+        }
     }
 
     // Do not counter if PD is up
@@ -661,6 +639,7 @@ void CAttack::ProcessDamage()
             // Mobs use a different base damage formula than players.
             // H2H attacks from mobs have a base damage penalty applied based on what zone they are in.
             float       mobH2HPenalty = 1.0f;
+            int32       fSTR          = battleutils::GetFSTR(m_attacker, m_victim, slot);
             REGION_TYPE regionID      = m_attacker->loc.zone->GetRegionID();
 
             if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
@@ -672,12 +651,21 @@ void CAttack::ProcessDamage()
                 mobH2HPenalty = 0.650f; // TOAU onward
             }
 
-            if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+            m_damage = m_baseDamage + m_bonusBasePhysicalDamage;
+
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Per Jimmy Kick damage adds in fSTR after the two penalties
             {
-                kickDamage = m_attacker->getMod(Mod::KICK_DMG);
+                float kickPenalty = 2.0f / 3.0f; // per Jimmy, 2/3rds penalty for kicks
+                kickDamage        = m_attacker->getMod(Mod::KICK_DMG);
+
+                m_damage = (m_damage + kickDamage) * mobH2HPenalty * kickPenalty + fSTR;
+            }
+            else // Non-kick mob h2h adds fSTR in before the penalty
+            {
+                m_damage = (m_damage + fSTR) * mobH2HPenalty;
             }
 
-            m_damage = (uint32)(((((m_baseDamage + kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot))) * mobH2HPenalty) * m_damageRatio));
+            m_damage = std::floor<uint32>(m_damage * m_damageRatio);
         }
         else if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Players use this calculation.
         {

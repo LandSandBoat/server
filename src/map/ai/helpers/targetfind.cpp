@@ -184,7 +184,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             // Is the monster casting on a player..
             if (m_findType == FIND_TYPE::MONSTER_PLAYER)
             {
-                if (m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER || m_PMasterTarget->allegiance == ALLEGIANCE_TYPE::PLAYER)
+                if (m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER || (m_PMasterTarget->objtype == TYPE_MOB && m_PMasterTarget->allegiance == ALLEGIANCE_TYPE::PLAYER))
                 {
                     addAllInZone(m_PMasterTarget, withPet);
                 }

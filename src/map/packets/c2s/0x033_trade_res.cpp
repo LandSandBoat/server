@@ -28,11 +28,13 @@
 
 namespace
 {
-    const auto cleanTradeTargets = [](CCharEntity* PChar, CCharEntity* PTarget)
-    {
-        PChar->TradePending.clean();
-        PTarget->TradePending.clean();
-    };
+
+const auto cleanTradeTargets = [](CCharEntity* PChar, CCharEntity* PTarget)
+{
+    PChar->TradePending.clean();
+    PTarget->TradePending.clean();
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

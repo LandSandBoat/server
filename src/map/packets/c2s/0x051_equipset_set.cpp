@@ -27,50 +27,52 @@
 
 namespace
 {
-    const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+{
+    // These are always available in both LSB and retail.
+    std::set allowedContainers = {
+        LOC_INVENTORY,
+        LOC_WARDROBE,
+        LOC_WARDROBE2,
+    };
+
+    // Global containers optionally unlockable
+    const std::set unlockableContainers = {
+        LOC_WARDROBE3, // Always available in LSB but paid feature on retail.
+        LOC_WARDROBE4,
+        LOC_WARDROBE5,
+        LOC_WARDROBE6,
+        LOC_WARDROBE7,
+        LOC_WARDROBE8,
+    };
+
+    const std::set additionalContainers = {
+        LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE
+    };
+
+    for (const auto containerId : unlockableContainers)
     {
-        // These are always available in both LSB and retail.
-        std::set allowedContainers = {
-            LOC_INVENTORY,
-            LOC_WARDROBE,
-            LOC_WARDROBE2,
-        };
+        if (PChar->getStorage(containerId)->GetSize() > 0)
+        {
+            allowedContainers.insert(containerId);
+        }
+    }
 
-        // Global containers optionally unlockable
-        const std::set unlockableContainers = {
-            LOC_WARDROBE3, // Always available in LSB but paid feature on retail.
-            LOC_WARDROBE4,
-            LOC_WARDROBE5,
-            LOC_WARDROBE6,
-            LOC_WARDROBE7,
-            LOC_WARDROBE8,
-        };
-
-        const std::set additionalContainers = {
-            LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE
-        };
-
-        for (const auto containerId : unlockableContainers)
+    if (settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS"))
+    {
+        for (const auto containerId : additionalContainers)
         {
             if (PChar->getStorage(containerId)->GetSize() > 0)
             {
                 allowedContainers.insert(containerId);
             }
         }
+    }
 
-        if (settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS"))
-        {
-            for (const auto containerId : additionalContainers)
-            {
-                if (PChar->getStorage(containerId)->GetSize() > 0)
-                {
-                    allowedContainers.insert(containerId);
-                }
-            }
-        }
+    return allowedContainers;
+};
 
-        return allowedContainers;
-    };
 } // namespace
 
 auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

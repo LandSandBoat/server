@@ -29,13 +29,15 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "world",
-            .arguments  = {},
-        };
-    }
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "world",
+        .arguments  = {},
+    };
+}
+
 } // namespace
 
 WorldApplication::WorldApplication(const int argc, char** argv)

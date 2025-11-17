@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    xi.job_utils.blue_mage.useChainAffinity(player, target, ability, action)
+    return xi.job_utils.blue_mage.useChainAffinity(player, target, ability, action)
 end
 
 return abilityObject
