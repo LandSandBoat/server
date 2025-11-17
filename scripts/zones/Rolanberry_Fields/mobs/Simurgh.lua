@@ -77,7 +77,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.EVA, 400)
+    mob:setMod(xi.mod.EVA, 400)   -- Very high evasion (retail confirmed)
+    mob:setMod(xi.mod.ATT, 180)   -- Moderate attack (level 58 NM, intentionally lower than other NMs)
+    mob:setMod(xi.mod.MATT, 40)   -- Magic attack bonus
 end
 
 entity.onMobFight = function(mob, target)

@@ -30,6 +30,9 @@ local pTable =
 --                                     1     2            3            4           5              6          7                 8
 -- Structure:            [spellId] = { Tier, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite, Tick_Seconds },
 
+    -- Adloquium
+    [495] = { 1, xi.effect.REGAIN,       88,   10,  180, true,  false, 3 },
+
     -- Aquaveil
     [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true,  0 },
 

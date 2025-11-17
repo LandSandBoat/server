@@ -72,6 +72,11 @@ entity.phList =
     [ID.mob.LORD_OF_ONZOZO - 1] = ID.mob.LORD_OF_ONZOZO, -- -39.356 14.265 -60.406
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.ATT, 250)  -- NM attack bonus (level 74-77 NM)
+    mob:setMod(xi.mod.MATT, 50)  -- Magic attack bonus
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
 end
