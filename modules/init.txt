@@ -41,8 +41,5 @@ custom/lua/test_npcs_in_gm_home.lua
 custom/lua/Fail_Badge_Quest.lua
 custom/lua/nmhunt.lua
 custom/lua/era_npc.lua
-custom/sql/Fail_Badge_NPCs.sql
-custom/sql/nmhunt_npc.sql
-custom/sql/bro_moogles.sql
 custom/sql/ffera_custom_npcs.sql
 era/sql/2007_exp_tables.sql
