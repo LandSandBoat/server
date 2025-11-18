@@ -106,56 +106,26 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     -- I have never read a limit on accuracy bonus from summoning skill which can currently go far past 200 over cap
     -- current retail is over +250 skill so I am removing the cap, my SMN is at 695 total skill
-    local acc = avatar:getACC() + xi.summon.getSummoningSkillOverCap(avatar)
-    local eva = target:getEVA()
+    local bonusAcc =  xi.summon.getSummoningSkillOverCap(avatar)
 
-    -- Handle double/triple attack
-    local bonusHits    = 0
-    local doubleRate   = avatar:getMod(xi.mod.DOUBLE_ATTACK)
-    local tripleRate   = avatar:getMod(xi.mod.TRIPLE_ATTACK)
-    if math.random(1, 100) <= tripleRate then
+    -- Handle DA/TA/QA
+    -- TODO: handle Nirvana
+    local bonusHits  = 0
+    local doubleRate = avatar:getMod(xi.mod.DOUBLE_ATTACK)
+    local tripleRate = avatar:getMod(xi.mod.TRIPLE_ATTACK)
+    local quadRate   = avatar:getMod(xi.mod.QUAD_ATTACK)
+
+    if math.random(1, 100) <= quadRate then
+        bonusHits = bonusHits + 3
+    elseif math.random(1, 100) <= tripleRate then
         bonusHits = bonusHits + 2
     elseif math.random(1, 100) <= doubleRate then
         bonusHits = bonusHits + 1
     end
 
-    -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
-    -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
-    local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(avatar)
-
-    -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
-    -- https://www.bg-wiki.com/bg/Hit_Rate
-    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-    -- As of December 10th 2015 pet hit rate caps at 99% (familiars, wyverns, avatars and automatons)
-    -- increased from 95%
-    local maxHitRate = 0.99
-    local minHitRate = 0.2
-
-    -- Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
-    -- For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
-    -- bonuses cap at level diff of 38 based on this testing:
-    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-    -- If there are penalties they seem to be applied differently similarly to monsters.
-    local levelDiff         = math.min(avatar:getMainLvl() - target:getMainLvl(), 38) -- Max level diff is 38
-    local levelCorrection   = 0
-
-    -- Only bonuses are applied for avatar level correction
-    if shouldApplyLevelCorrection then
-        if levelDiff > 0 then
-            levelCorrection = math.max(levelDiff * 2, 0)
-        end
-    end
-
-    -- Delta acc / 2 for hit rate
-    local dAcc = math.floor((acc - eva) / 2)
-
     -- Normal hits computed first
-    local hitrateSubsequent = 75 + dAcc + levelCorrection
-    local hitrateFirst      = hitrateSubsequent + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
-    hitrateSubsequent       = hitrateSubsequent / 100
-    hitrateFirst            = hitrateFirst / 100
-    hitrateSubsequent       = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst            = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    local hitrateFirst      = xi.combat.physicalHitRate.getPhysicalHitRate(avatar, target, bonusAcc + 100, xi.attackAnimation.RIGHT_ATTACK, false)
+    local hitrateSubsequent = xi.combat.physicalHitRate.getPhysicalHitRate(avatar, target, bonusAcc, xi.attackAnimation.RIGHT_ATTACK, false)
 
     -- Compute hits first so we can exit early
     local firstHitLanded   = false
@@ -199,6 +169,9 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
         local ratio  = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
         local cRatio = ratio
+
+        local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(avatar)
+        local levelDiff                  = math.min(avatar:getMainLvl() - target:getMainLvl(), 38) -- Max level diff is 38
 
         if shouldApplyLevelCorrection then
             -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)

@@ -137,13 +137,9 @@ end
 
 -- Get hitrate
 local function calculateHitrate(attacker, target, bonusacc)
-    local acc     = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2 + (attacker:getMainLvl() - target:getMainLvl()) * 4 + bonusacc
-    local eva     = target:getEVA()
-    local hitrate = (75 + (acc - eva) / 2) / 100
-
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    -- your mainhand may not be a sword, so hit rate would vary here
+    -- TODO: verify hit rate of physical blue magic with different weapons
+    return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonusacc + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2, xi.attackAnimation.RIGHT_ATTACK, false)
 end
 
 -- Get the effect of ecosystem correlation
