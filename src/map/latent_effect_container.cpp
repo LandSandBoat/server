@@ -740,19 +740,19 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
     switch (latentEffect.GetConditionsID())
     {
         case LATENT::HP_UNDER_PERCENT:
-            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue();
+            expression = ((float)m_POwner->health.hp / m_POwner->GetMaxHP()) * 100 <= latentEffect.GetConditionsValue();
             break;
         case LATENT::HP_OVER_PERCENT:
-            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue();
+            expression = ((float)m_POwner->health.hp / m_POwner->GetMaxHP()) * 100 >= latentEffect.GetConditionsValue();
             break;
         case LATENT::HP_UNDER_TP_UNDER_100:
-            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
+            expression = ((float)m_POwner->health.hp / m_POwner->GetMaxHP()) * 100 <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
         case LATENT::HP_OVER_TP_UNDER_100:
-            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
+            expression = ((float)m_POwner->health.hp / m_POwner->GetMaxHP()) * 100 >= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
         case LATENT::MP_UNDER_PERCENT:
-            expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 <= latentEffect.GetConditionsValue();
+            expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->GetMaxMP()) * 100 <= latentEffect.GetConditionsValue();
             break;
         case LATENT::MP_UNDER:
             expression = m_POwner->health.mp <= latentEffect.GetConditionsValue();

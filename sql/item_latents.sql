@@ -454,7 +454,7 @@ INSERT INTO `item_latents` VALUES (13294,237,3,2,75);    -- Enhances "Luminian K
 INSERT INTO `item_latents` VALUES (13294,238,3,2,75);    -- Enhances "Luminion Killer" effect while HP <=75% and TP <=100%
 
 -- Minstrel's Ring
-INSERT INTO `item_latents` VALUES (13295,455,25,2,75);  -- Song Spellcast -25% while HP <=75% and TP <=100%
+INSERT INTO `item_latents` VALUES (13295,455,25,2,76);  -- Song Spellcast -25% while HP <76% and TP <=100%
 
 -- Tracker's Ring
 INSERT INTO `item_latents` VALUES (13296,27,-2,2,75);    -- Enmity-2 while HP <=75% and TP <=100%
