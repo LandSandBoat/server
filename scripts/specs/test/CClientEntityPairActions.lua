@@ -100,3 +100,10 @@ end
 ---@return nil
 function CClientEntityPairActions:engage(mob)
 end
+
+---Perform a skillchain sequence on a target
+---@param target CBaseEntity Target entity
+---@param ... xi.weaponskill Weaponskill IDs to chain (requires at least 2)
+---@return nil
+function CClientEntityPairActions:skillchain(target, ...)
+end

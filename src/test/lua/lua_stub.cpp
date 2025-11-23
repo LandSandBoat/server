@@ -73,8 +73,10 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vec
         {
             recordCall(args, result.get<sol::object>(0));
             // Extract all return values into a vector and return them
+            const auto               count = result.return_count();
             std::vector<sol::object> returnValues;
-            for (int i = 0; i < result.return_count(); ++i)
+            returnValues.reserve(count);
+            for (int i = 0; i < count; ++i)
             {
                 returnValues.push_back(result.get<sol::object>(i));
             }
@@ -99,8 +101,10 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vec
         if (result.valid())
         {
             recordCall(args, result.get<sol::object>(0));
+            const auto               count = result.return_count();
             std::vector<sol::object> returnValues;
-            for (int i = 0; i < result.return_count(); ++i)
+            returnValues.reserve(count);
+            for (int i = 0; i < count; ++i)
             {
                 returnValues.push_back(result.get<sol::object>(i));
             }
@@ -114,8 +118,10 @@ auto CLuaStub::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vec
         if (result.valid())
         {
             recordCall(args, result.get<sol::object>(0));
+            const auto               count = result.return_count();
             std::vector<sol::object> returnValues;
-            for (int i = 0; i < result.return_count(); ++i)
+            returnValues.reserve(count);
+            for (int i = 0; i < count; ++i)
             {
                 returnValues.push_back(result.get<sol::object>(i));
             }

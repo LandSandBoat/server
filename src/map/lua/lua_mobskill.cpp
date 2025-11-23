@@ -140,6 +140,26 @@ uint8 CLuaMobSkill::getMobHPP()
     return m_PLuaMobSkill->getHPP();
 }
 
+auto CLuaMobSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_PLuaMobSkill->getAttackType();
+}
+
+void CLuaMobSkill::setAttackType(ATTACK_TYPE attackType)
+{
+    m_PLuaMobSkill->setAttackType(attackType);
+}
+
+bool CLuaMobSkill::isCritical()
+{
+    return m_PLuaMobSkill->isCritical();
+}
+
+void CLuaMobSkill::setCritical(bool isCritical)
+{
+    m_PLuaMobSkill->setCritical(isCritical);
+}
+
 //======================================================//
 
 void CLuaMobSkill::Register()
@@ -161,6 +181,10 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHP", CLuaMobSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+    SOL_REGISTER("getAttackType", CLuaMobSkill::getAttackType);
+    SOL_REGISTER("setAttackType", CLuaMobSkill::setAttackType);
+    SOL_REGISTER("isCritical", CLuaMobSkill::isCritical);
+    SOL_REGISTER("setCritical", CLuaMobSkill::setCritical);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)

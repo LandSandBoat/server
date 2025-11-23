@@ -32,9 +32,9 @@ entity.onTrade = function(player, npc, trade)
     local coney
     local currentPoint = npc:getLocalVar('currentPoint')
 
-    if IsMoonNew() then
+    if getVanadielMoonCycle() == xi.moonCycle.NEW_MOON then
         coney = ID.mob.BLACK_CONEY
-    elseif IsMoonFull() then
+    elseif getVanadielMoonCycle() == xi.moonCycle.FULL_MOON then
         coney = ID.mob.WHITE_CONEY
     end
 
@@ -42,12 +42,16 @@ entity.onTrade = function(player, npc, trade)
         local x = points[currentPoint][1]
         local y = points[currentPoint][2]
         local z = points[currentPoint][3]
-        GetMobByID(coney):setSpawn(x, y, z, 0)
-        if
-            npcUtil.tradeHas(trade, xi.item.SAN_DORIAN_CARROT) and
-            npcUtil.popFromQM(player, npc, coney)
-        then
-            player:confirmTrade()
+
+        local rabbit = GetMobByID(coney)
+        if rabbit then
+            rabbit:setSpawn(x, y, z, 0)
+            if
+                npcUtil.tradeHas(trade, xi.item.SAN_DORIAN_CARROT) and
+                npcUtil.popFromQM(player, npc, coney)
+            then
+                player:confirmTrade()
+            end
         end
     end
 end
@@ -75,11 +79,22 @@ local function moveFootprint(npc)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    local isSpawned = GetMobByID(ID.mob.WHITE_CONEY):isSpawned() or GetMobByID(ID.mob.BLACK_CONEY):isSpawned()
+    local whiteConey = GetMobByID(ID.mob.WHITE_CONEY)
+    local blackConey = GetMobByID(ID.mob.BLACK_CONEY)
     local activeTime = npc:getLocalVar('activeTime')
+    local isSpawned =  nil
+
+    if whiteConey then
+        isSpawned = whiteConey:isSpawned()
+    elseif blackConey then
+        isSpawned = blackConey:isSpawned()
+    end
 
     if not isSpawned then
-        if IsMoonFull() or IsMoonNew() then
+        if
+            (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) or
+            (getVanadielMoonCycle() == xi.moonCycle.NEW_MOON)
+        then
             if activeTime == 0 then
                 npc:setLocalVar('activeTime', GetSystemTime() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
             elseif GetSystemTime() > activeTime then

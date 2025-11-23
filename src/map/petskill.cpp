@@ -20,6 +20,7 @@
 */
 
 #include "petskill.h"
+#include "enums/action/category.h"
 #include "mobskill.h" // used for skillflags
 
 CPetSkill::CPetSkill(uint16 id)
@@ -191,9 +192,9 @@ uint16 CPetSkill::getID() const
     return m_ID;
 }
 
-uint16 CPetSkill::getAnimationID() const
+auto CPetSkill::getAnimationID() const -> ActionAnimation
 {
-    return m_AnimID;
+    return static_cast<ActionAnimation>(m_AnimID);
 }
 
 uint16 CPetSkill::getMobSkillID() const
@@ -242,9 +243,9 @@ auto CPetSkill::getMsg() const -> MSGBASIC_ID
     return static_cast<MSGBASIC_ID>(m_Message);
 }
 
-uint8 CPetSkill::getSkillFinishCategory() const
+auto CPetSkill::getSkillFinishCategory() const -> ActionCategory
 {
-    return m_SkillFinishCategory;
+    return static_cast<ActionCategory>(m_SkillFinishCategory);
 }
 
 uint16 CPetSkill::getMsgForAction() const
@@ -328,9 +329,9 @@ int16 CPetSkill::getParam() const
     return m_Param;
 }
 
-uint8 CPetSkill::getKnockback() const
+auto CPetSkill::getKnockback() const -> Knockback
 {
-    return m_knockback;
+    return static_cast<Knockback>(m_knockback);
 }
 
 bool CPetSkill::isDamageMsg() const
@@ -398,4 +399,24 @@ void CPetSkill::setSecondarySkillchain(uint8 skillchain)
 void CPetSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
+}
+
+auto CPetSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_attackType;
+}
+
+void CPetSkill::setAttackType(const ATTACK_TYPE attackType)
+{
+    m_attackType = attackType;
+}
+
+auto CPetSkill::isCritical() const -> bool
+{
+    return m_isCritical;
+}
+
+void CPetSkill::setCritical(const bool isCritical)
+{
+    m_isCritical = isCritical;
 }

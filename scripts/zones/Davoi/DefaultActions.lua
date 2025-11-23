@@ -10,6 +10,7 @@ return {
     ['Hide_Flap_2']  = { messageSpecial = ID.text.YOU_SEE_NOTHING },
     ['Jar']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm2']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['Quemaricond']  = { text = ID.text.QUEMARICOND_DIALOG },
     ['Sedal-Godjal'] = { event = 27 },
     ['Storage_Hole'] = { messageSpecial = ID.text.YOU_SEE_NOTHING },
     ['Zantaviat']    = { event = 101 },

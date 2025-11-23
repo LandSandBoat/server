@@ -95,9 +95,6 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
 
     // Delete the haste samba effect.
     attacker->StatusEffectContainer->DelStatusEffect(EFFECT_HASTE_SAMBA_HASTE);
-
-    // Clear the action list.
-    attacker->m_ActionList.clear();
 }
 
 /************************************************************************

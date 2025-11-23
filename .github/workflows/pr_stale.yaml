@@ -1,4 +1,5 @@
-name: 'Label and close stale PRs'
+name: Check Stale PRs
+
 on:
   workflow_dispatch: {}
   schedule:
@@ -10,7 +11,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  stale:
+  Stale:
+    name: Label and Close Stale PRs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@v10

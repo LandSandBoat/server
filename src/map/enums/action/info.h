@@ -26,18 +26,23 @@
 
 // result.info
 // 5 bits (bitflags)
-// This is used for ranged attacks, weaponskills and melee attacks
+// This field is used in various different ways:
+// - In the vast majority of cases, it's used to set flags relating to the attack
+//   - If the mob was defeated
+//   - If the hit was a critical hit
+// - Dancer (+ Konzen-Ittai) and Rune Fencer store various animation IDs in there
+// - DRG Soul/Sky Jump set it to 4
+// - COR stores the roll results in there
 enum class ActionInfo : uint8_t
 {
     None        = 0,
     Defeated    = 1, // 00001 - Set when the action defeats the target
     CriticalHit = 2, // 00010 - Set when the action is a critical hit
     UnknownAoE  = 4, // 00100 - Exact purpose unknown, set by self-targeting mobs when no valid target is in range. See Ruszors.
-};
+    Jump        = 4, // Spirit Jump / Soul Jump sets it (can be combined with Defeated/Critical Hit)
 
-// Dancer Steps and Flourish use result.info for animations
-enum class DancerInfo : uint8_t
-{
+    // Dancer Steps and Flourish use result.info for animations
+    KonzenIttai       = 5,
     WildFlourish      = 5,
     QuickStep         = 5,
     BoxStep           = 6,
@@ -45,11 +50,8 @@ enum class DancerInfo : uint8_t
     StutterStep       = 7,
     ViolentFlourish   = 7,
     FeatherStep       = 8,
-};
 
-// Some Rune Fencer abilities use result.info to convey Rune Element
-enum class RuneElement : uint8_t
-{
+    // Some Rune Fencer abilities use result.info to convey Rune Element
     ElementalMix = 0, // 00000 - If the runes are different elemental types, then mixing will occur and animation id 0 is used.
     Ignis        = 1, // 00001
     Gelus        = 2, // 00010
@@ -59,6 +61,8 @@ enum class RuneElement : uint8_t
     Unda         = 6, // 00110
     Lux          = 7, // 00111
     Tenebrae     = 8, // 01000
+
+    // Note: COR rolls are stored in info
 };
 
 template <>

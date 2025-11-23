@@ -22,9 +22,10 @@
 #ifndef _CPETSKILL_H
 #define _CPETSKILL_H
 
+#include "ability.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "entities/mobentity.h"
+#include "enums/action/knockback.h"
 
 class CPetSkill
 {
@@ -41,7 +42,7 @@ public:
     bool isBloodPactRage() const;
 
     uint16          getID() const;
-    uint16          getAnimationID() const;
+    auto            getAnimationID() const -> ActionAnimation;
     uint16          getMobSkillID() const;
     uint8           getAoe() const;
     float           getDistance() const;
@@ -49,7 +50,7 @@ public:
     timer::duration getAnimationTime() const;
     timer::duration getActivationTime() const;
     auto            getMsg() const -> MSGBASIC_ID;
-    uint8           getSkillFinishCategory() const;
+    auto            getSkillFinishCategory() const -> ActionCategory;
     auto            getAoEMsg() const -> MSGBASIC_ID;
     uint16          getValidTargets() const;
     int16           getTP() const;
@@ -61,10 +62,12 @@ public:
     uint16          getMsgForAction() const;
     float           getRadius() const;
     int16           getParam() const;
-    uint8           getKnockback() const;
+    auto            getKnockback() const -> Knockback;
     uint8           getPrimarySkillchain() const;
     uint8           getSecondarySkillchain() const;
     uint8           getTertiarySkillchain() const;
+    auto            getAttackType() const -> ATTACK_TYPE;
+    auto            isCritical() const -> bool;
 
     bool isDamageMsg() const;
 
@@ -90,6 +93,8 @@ public:
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
+    void setAttackType(ATTACK_TYPE attackType);
+    void setCritical(bool isCritical);
 
     const std::string& getName() const;
     void               setName(const std::string& name);
@@ -112,6 +117,8 @@ private:
     uint8           m_primarySkillchain; // weaponskill ID of skillchain properties
     uint8           m_secondarySkillchain;
     uint8           m_tertiarySkillchain;
+    ATTACK_TYPE     m_attackType{ ATTACK_TYPE::NONE };
+    bool            m_isCritical{ false };
 
     int16  m_TP;  // the tp at the time of finish readying (for scripts)
     int32  m_HP;  // HP at the time of using mob skill (for scripts)

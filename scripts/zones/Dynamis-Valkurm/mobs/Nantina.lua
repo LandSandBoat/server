@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('nantina_skill_count', 0)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     -- Blow x9 > Uppercut x3 > Attractant
     local skillCount = mob:getLocalVar('nantina_skill_count')
 

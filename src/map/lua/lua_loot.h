@@ -26,7 +26,7 @@
 #include "utils/itemutils.h"
 
 struct action_t;
-struct actionList_t;
+struct action_target_t;
 class CLuaLootContainer
 {
     LootContainer* m_PLootContainer;

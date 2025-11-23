@@ -40,6 +40,7 @@ for file in "${targets[@]}"; do
         --suppress=checkersReport \
         --enable=information,performance,portability,missingInclude --inline-suppr \
         --inconclusive \
+        --check-level=exhaustive \
         -DSA_INTERRUPT -DZMQ_DEPRECATED -DZMQ_EVENT_MONITOR_STOPPED -DTRACY_ENABLE \
         "$file" 2>&1 || true)
 
@@ -80,11 +81,6 @@ if [[ -n "$git_diff_output" ]]; then
     echo '```diff'
     echo "$git_diff_output"
     echo '```'
-    echo
-fi
-
-if ! $any_issues; then
-    echo "## :heavy_check_mark: C++ Checks Passed"
     echo
 fi
 

@@ -23,12 +23,14 @@
 
 #include "ai/ai_container.h"
 #include "common/logging.h"
+#include "common/timer.h"
 #include "common/utils.h"
 #include "enums/packet_c2s.h"
 #include "lua/helpers/lua_client_entity_pair_entities.h"
 #include "lua/helpers/lua_client_entity_pair_events.h"
 #include "lua/helpers/lua_client_entity_pair_packets.h"
 #include "lua/lua_client_entity_pair.h"
+#include "lua/lua_simulation.h"
 #include "lua/lua_spy.h"
 #include "map/ability.h"
 #include "map/ai/controllers/player_controller.h"
@@ -40,6 +42,7 @@
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
 #include "map/spell.h"
+#include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
 #include "test_char.h"
 #include "test_common.h"
@@ -439,6 +442,70 @@ void CLuaClientEntityPairActions::engage(CLuaBaseEntity* mob) const
     parent_->packets().sendBasicPacket(*packet);
 }
 
+/************************************************************************
+ *  Function: skillchain()
+ *  Purpose : Executes a sequence of weaponskills to create a skillchain.
+ *  Example : player.actions:skillchain(mob, xi.weaponskill.TACHI_FUDO, xi.weaponskill.TACHI_FUDO)
+ *  Notes   : Auto-engages target, sets TP, and bypasses timing by manipulating effect state.
+ *            Supports multistep skillchains with 2+ weaponskills.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::skillchain(CLuaBaseEntity* target, sol::variadic_args weaponskillIds) const
+{
+    if (!target)
+    {
+        TestError("CLuaClientEntityPairActions::skillchain: Invalid target");
+        return;
+    }
+
+    std::vector<uint16> wsIds;
+    for (const auto& arg : weaponskillIds)
+    {
+        if (arg.is<uint16>())
+        {
+            wsIds.push_back(arg.as<uint16>());
+        }
+    }
+
+    if (wsIds.size() < 2)
+    {
+        TestError("CLuaClientEntityPairActions::skillchain: Need at least 2 weaponskills");
+        return;
+    }
+
+    auto*       PChar = parent_->testChar()->entity();
+    const auto* PMob  = static_cast<CBattleEntity*>(target->GetBaseEntity());
+
+    this->engage(target);
+
+    for (size_t i = 0; i < wsIds.size(); ++i)
+    {
+        PChar->health.tp = 3000;
+
+        PChar->PAI->Internal_WeaponSkill(PMob->targid, wsIds[i]);
+        parent_->simulation()->skipTime(2);
+
+        if (i >= 1)
+        {
+            if (!PMob->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0))
+            {
+                TestError("Skillchain effect not found after weaponskill #{}", i + 1);
+            }
+        }
+
+        if (i < wsIds.size() - 1)
+        {
+            parent_->simulation()->skipTime(3);
+
+            // Backdate skillchain effect to bypass 3s timing window for next WS
+            if (auto* scEffect = PMob->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0))
+            {
+                scEffect->SetStartTime(timer::now() - 5s);
+            }
+        }
+    }
+}
+
 void CLuaClientEntityPairActions::Register()
 {
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
@@ -456,4 +523,5 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("tradeNpc", CLuaClientEntityPairActions::tradeNpc);
     SOL_REGISTER("acceptRaise", CLuaClientEntityPairActions::acceptRaise);
     SOL_REGISTER("engage", CLuaClientEntityPairActions::engage);
+    SOL_REGISTER("skillchain", CLuaClientEntityPairActions::skillchain);
 }

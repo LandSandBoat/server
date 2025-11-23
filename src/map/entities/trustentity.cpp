@@ -20,6 +20,8 @@
 */
 
 #include "trustentity.h"
+#include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "ai/controllers/trust_controller.h"
 #include "ai/helpers/pathfind.h"
@@ -102,7 +104,7 @@ void CTrustEntity::Die()
     PEnmityContainer->Clear();
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
-    ((CCharEntity*)PMaster)->RemoveTrust(this);
+    static_cast<CCharEntity*>(PMaster)->RemoveTrust(this);
     m_OwnerID.clean();
 
     // NOTE: This is purposefully calling CBattleEntity's impl.
@@ -117,7 +119,7 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-    ((CCharEntity*)PMaster)->pushPacket<CEntitySetNamePacket>(this);
+    static_cast<CCharEntity*>(PMaster)->pushPacket<CEntitySetNamePacket>(this);
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
@@ -139,11 +141,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (battleutils::IsParalyzed(this))
         {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+            ActionInterrupts::AbilityParalyzed(this, PTarget);
             return;
         }
 
-        action.id         = this->id;
+        action.actorId    = this->id;
         action.actiontype = PAbility->getActionType();
         action.actionid   = PAbility->getID();
         action.recast     = PAbility->getRecastTime();
@@ -159,65 +161,62 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
-                actionList_t& actionList     = action.getNewActionList();
-                actionList.ActionTargetID    = PTargetFound->id;
-                actionTarget_t& actionTarget = actionList.getNewActionTarget();
-                actionTarget.reaction        = REACTION::NONE;
-                actionTarget.speceffect      = SPECEFFECT::NONE;
-                actionTarget.animation       = PAbility->getAnimationID();
-                actionTarget.messageID       = PAbility->getMessage();
-                actionTarget.param           = 0;
+                action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+                action_result_t& actionResult = actionTarget.addResult();
+                actionResult.resolution       = ActionResolution::Hit;
+                actionResult.animation        = PAbility->getAnimationID();
+                actionResult.messageID        = PAbility->getMessage();
+                actionResult.param            = 0;
 
                 int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
                 if (prevMsg == 0) // get default message for the first target
                 {
-                    actionTarget.messageID = PAbility->getMessage();
+                    actionResult.messageID = PAbility->getMessage();
                 }
                 else // get AoE message for second, if there's a manual override, otherwise return message from PAbility->getMessage().
                 {
-                    actionTarget.messageID = PAbility->getAoEMsg();
+                    actionResult.messageID = PAbility->getAoEMsg();
                 }
 
-                actionTarget.param = value;
+                actionResult.param = value;
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
-                    actionTarget.param     = -actionTarget.param;
+                    actionResult.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionResult.messageID));
+                    actionResult.param     = -actionResult.param;
                 }
 
-                prevMsg = actionTarget.messageID;
+                prevMsg = actionResult.messageID;
 
                 state.ApplyEnmity();
             }
         }
         else
         {
-            actionList_t& actionList     = action.getNewActionList();
-            actionList.ActionTargetID    = PTarget->id;
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.reaction        = REACTION::NONE;
-            actionTarget.speceffect      = SPECEFFECT::RECOIL;
-            actionTarget.animation       = PAbility->getAnimationID();
-            actionTarget.param           = 0;
-            auto prevMsg                 = actionTarget.messageID;
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
+            actionResult.resolution       = ActionResolution::Hit;
+            actionResult.animation        = PAbility->getAnimationID();
+            auto prevMsg                  = actionResult.messageID;
 
             int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
-            if (prevMsg == actionTarget.messageID)
+            if (prevMsg == actionResult.messageID)
             {
-                actionTarget.messageID = PAbility->getMessage();
+                actionResult.messageID = PAbility->getMessage();
             }
-            if (actionTarget.messageID == 0)
+
+            if (actionResult.messageID == 0)
             {
-                actionTarget.messageID = MSGBASIC_USES_JA;
+                actionResult.messageID = MSGBASIC_USES_JA;
             }
-            actionTarget.param = value;
+
+            actionResult.param = value;
 
             if (value < 0)
             {
-                actionTarget.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionTarget.messageID));
-                actionTarget.param     = -value;
+                actionResult.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionResult.messageID));
+                actionResult.param     = -value;
             }
         }
 
@@ -238,16 +237,12 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     int32 damage      = 0;
     int32 totalDamage = 0;
 
-    action.id         = id;
-    action.actiontype = ACTION_RANGED_FINISH;
-
-    actionList_t& actionList  = action.getNewActionList();
-    actionList.ActionTargetID = PTarget->id;
-
-    actionTarget_t& actionTarget = actionList.getNewActionTarget();
-    actionTarget.reaction        = REACTION::HIT;   // 0x10
-    actionTarget.speceffect      = SPECEFFECT::HIT; // 0x60 (SPECEFFECT_HIT + SPECEFFECT_RECOIL)
-    actionTarget.messageID       = 352;
+    action.actorId                = id;
+    action.actiontype             = ActionCategory::RangedFinish;
+    action.actionid               = static_cast<uint32_t>(FourCC::RangedFinish);
+    action_target_t& actionTarget = action.addTarget(PTarget->id);
+    action_result_t& actionResult = actionTarget.addResult();
+    actionResult.messageID        = MSGBASIC_RANGED_ATTACK_HIT;
 
     /*
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
@@ -273,9 +268,9 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     uint8 shadowsTaken = 0;
     uint8 hitCount     = 1; // 1 hit by default
     uint8 realHits     = 0; // to store the real number of hit for tp multipler
-    // auto  ammoConsumed = 0;
-    bool hitOccured = false; // track if player hit mob at all
-    bool isBarrage  = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
+    bool  wasCritical  = false;
+    bool  hitOccured   = false; // track if player hit mob at all
+    bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     /*
     // if barrage is detected, getBarrageShotCount also checks for ammo count
@@ -303,15 +298,15 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
                 if (isCritical)
                 {
-                    actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
-                    actionTarget.messageID  = 353;
+                    wasCritical            = true;
+                    actionResult.messageID = MSGBASIC_RANGED_ATTACK_CRIT;
                 }
 
                 // at least 1 hit occured
                 hitOccured = true;
                 realHits++;
 
-                damage = (int32)((this->GetRangedWeaponDmg() + battleutils::GetFSTR(this, PTarget, slot)) * pdif);
+                damage = static_cast<int32>((this->GetRangedWeaponDmg() + battleutils::GetFSTR(this, PTarget, slot)) * pdif);
                 /*
                 if (slot == SLOT_RANGED)
                 {
@@ -338,19 +333,11 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         }
         else // miss
         {
-            actionTarget.reaction   = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT::NONE;
-            actionTarget.messageID  = 354;
+            actionResult.resolution = ActionResolution::Miss;
+            actionResult.messageID  = MSGBASIC_RANGED_ATTACK_MISS;
             hitCount                = i; // end barrage, shot missed
         }
         /*
-        // check for recycle chance
-        uint16 recycleChance = getMod(Mod::RECYCLE);
-        if (charutils::hasTrait(this, TRAIT_RECYCLE))
-        {
-            recycleChance += PMeritPoints->GetMeritValue(MERIT_RECYCLE, this);
-        }
-
         // Only remove unlimited shot on hit
         if (hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
         {
@@ -375,27 +362,31 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     if (hitOccured)
     {
         // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
-        if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE))
+        if ((actionResult.resolution == ActionResolution::Miss && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE)))
         {
-            actionTarget.messageID  = 352;
-            actionTarget.reaction   = REACTION::HIT;
-            actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
+            actionResult.messageID  = MSGBASIC_RANGED_ATTACK_HIT;
+            actionResult.resolution = ActionResolution::Hit;
         }
 
-        actionTarget.param =
-            battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
+        int32 finalDamage = battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
+        actionResult.recordDamage(attack_outcome_t{
+            .atkType    = ATTACK_TYPE::PHYSICAL,
+            .damage     = finalDamage,
+            .target     = PTarget,
+            .isCritical = wasCritical,
+        });
 
         // lower damage based on shadows taken
         if (shadowsTaken)
         {
-            actionTarget.param = (int32)(actionTarget.param * (1 - ((float)shadowsTaken / realHits)));
+            actionResult.param = static_cast<int32>(actionResult.param * (1 - static_cast<float>(shadowsTaken) / realHits));
         }
 
         // absorb message
-        if (actionTarget.param < 0)
+        if (actionResult.param < 0)
         {
-            actionTarget.param     = -(actionTarget.param);
-            actionTarget.messageID = 382;
+            actionResult.param     = -(actionResult.param);
+            actionResult.messageID = MSGBASIC_RANGED_ATTACK_ABSORBS;
         }
 
         /*
@@ -412,14 +403,9 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     else if (shadowsTaken > 0)
     {
         // shadows took damage
-        actionTarget.messageID = 0;
-        actionTarget.reaction  = REACTION::EVADE;
+        actionResult.messageID  = MSGBASIC_NONE;
+        actionResult.resolution = ActionResolution::Miss;
         PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
-    }
-
-    if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
-    {
-        actionTarget.speceffect = SPECEFFECT::RECOIL;
     }
 
     // remove barrage effect if present
@@ -522,41 +508,26 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
             PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
         }
 
-        // Assumed, it's very difficult to produce this due to WS being nearly instant
-        // TODO: attempt to verify.
         if (PAI->TargetFind->m_targets.size() == 0)
         {
-            // No targets, perhaps something like Super Jump or otherwise untargetable
-            action.actiontype         = ACTION_MAGIC_FINISH;
-            action.actionid           = 28787; // Some hardcoded magic for interrupts
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.animation       = 0x1FC; // assumed
-            actionTarget.messageID       = 0;
-            actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
-
+            // There used to be an assumed interrupt handler
+            // Add a test and capture before reintroducing.
             return;
         }
 
         for (auto&& PTarget : PAI->TargetFind->m_targets)
         {
-            bool          primary     = PTarget == PBattleTarget;
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = PTarget->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            bool             primary      = PTarget == PBattleTarget;
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
 
             uint16         tpHitsLanded    = 0;
             uint16         extraHitsLanded = 0;
             int32          damage          = 0;
             CBattleEntity* taChar          = battleutils::getAvailableTrickAttackChar(this, PTarget);
 
-            actionTarget.reaction                           = REACTION::NONE;
-            actionTarget.speceffect                         = SPECEFFECT::NONE;
-            actionTarget.animation                          = PWeaponSkill->getAnimationId();
-            actionTarget.messageID                          = 0;
+            actionResult.resolution                         = ActionResolution::Hit;
+            actionResult.animation                          = PWeaponSkill->getAnimationId();
             std::tie(damage, tpHitsLanded, extraHitsLanded) = luautils::OnUseWeaponSkill(this, PTarget, PWeaponSkill, tp, primary, action, taChar);
 
             if (!battleutils::isValidSelfTargetWeaponskill(PWeaponSkill->getID()))
@@ -568,38 +539,28 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
             }
             else // Self-targetting WS restoring MP
             {
-                actionTarget.messageID = primary ? 224 : 276; // Restores mp msg
-                actionTarget.reaction  = REACTION::HIT;
-                damage                 = std::max(damage, 0);
-                actionTarget.param     = addMP(damage);
+                actionResult.messageID  = primary ? MSGBASIC_USES_SKILL_RECOVERS_MP : MSGBASIC_TARGET_RECOVERS_MP;
+                actionResult.resolution = ActionResolution::Hit;
+                damage                  = std::max(damage, 0);
+                actionResult.param      = addMP(damage);
             }
 
             if (primary)
             {
-                if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE)
+                if (actionResult.resolution == ActionResolution::Hit)
                 {
                     if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
-                        SUBEFFECT effect = battleutils::GetSkillChainEffect(
+                        const auto effect = battleutils::GetSkillChainEffect(
                             PBattleTarget,
                             PWeaponSkill->getPrimarySkillchain(),
                             PWeaponSkill->getSecondarySkillchain(),
                             PWeaponSkill->getTertiarySkillchain());
-                        if (effect != SUBEFFECT_NONE)
+                        if (effect != ActionProcSkillChain::None)
                         {
-                            actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
-                            if (actionTarget.addEffectParam < 0)
-                            {
-                                actionTarget.addEffectParam   = -actionTarget.addEffectParam;
-                                actionTarget.addEffectMessage = 384 + effect;
-                            }
-                            else
-                            {
-                                actionTarget.addEffectMessage = 287 + effect;
-                            }
-                            actionTarget.additionalEffect = effect;
+                            actionResult.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar));
                         }
                     }
                 }
@@ -608,15 +569,6 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     }
     else
     {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PBattleTarget->id;
-        action.actiontype         = ACTION_MAGIC_FINISH; // all "too far" messages use cat 4
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // seems hardcoded, 2 bits away from 0x1FF.
-        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
-
-        actionTarget.speceffect = SPECEFFECT::NONE; // It seems most mobs use NONE, but player-like models use BLOOD for their weaponskills
-                                                    // TODO: figure out a good way to differentiate between the two. There does not seem to be a functional difference.
+        ActionInterrupts::WeaponSkillOutOfRange(this, PBattleTarget);
     }
 }

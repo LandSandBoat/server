@@ -1,0 +1,255 @@
+name: Reusable Runner Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: 'Runner to run the build on.'
+        required: true
+        type: string
+      compiler:
+        description: 'Compiler to build with.'
+        required: true
+        type: string
+      compiler_version:
+        description: 'Compiler version to build with.'
+        required: false
+        type: string
+      build_type:
+        description: 'CMake build type.'
+        required: true
+        type: string
+      save_cache:
+        description: 'Cache build and Python virtual environment.'
+        required: false
+        type: boolean
+        default: false
+      build_modules:
+        description: 'Build with modules enabled.'
+        required: false
+        type: boolean
+        default: false
+      tracy:
+        description: 'Build with tracy enabled.'
+        required: false
+        type: boolean
+        default: false
+      upload_artifact:
+        description: 'Upload built executables.'
+        required: false
+        type: boolean
+        default: false
+      clang_tidy:
+        description: 'Build with Clang Tidy and output build summary.'
+        required: false
+        type: boolean
+        default: false
+      optional_build:
+        description: 'Skip build if no relevant files changed (requires changed-files artifact).'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  Runner_Build:
+    name: ${{ format('{0}, {1}{2}, {3}', inputs.runner, inputs.compiler, inputs.compiler_version, inputs.build_type) }}
+    runs-on: ${{ inputs.runner }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SCCACHE_DIR: ${{ format('{0}/build/sccache', github.workspace) }}
+      SCCACHE_CACHE_SIZE: "1G"
+    steps:
+      - name: Download changed files artifact
+        if: ${{ inputs.optional_build }}
+        uses: actions/download-artifact@v4
+        with:
+          name: changed-files
+
+      - name: Install bash (macOS)
+        if: ${{ runner.os == 'macOS' }}
+        run: brew update && brew install --quiet bash
+
+      - name: Check for changed source files
+        id: check-changes
+        if: ${{ inputs.optional_build }}
+        run: |
+          mapfile -t changed_files < changed-files.txt
+          source_changes=false
+          for changed_file in "${changed_files[@]}"; do
+          if [[ $changed_file == src/**/*.cpp || $changed_file == modules/**/*.cpp || \
+                $changed_file == src/**/*.h   || $changed_file == modules/**/*.h   || \
+                $changed_file == src/**/CMakeLists.txt || $changed_file == modules/**/CMakeLists.txt || \
+                $changed_file == CMakeLists.txt || \
+                $changed_file == cmake/*.cmake ]]; then
+              source_changes=true
+              break
+            fi
+          done
+          echo "source_changes=$source_changes" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install dependencies (macOS)
+        if: ${{ runner.os == 'macOS' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          brew update && brew install --quiet \
+            mariadb \
+            zeromq \
+            luajit \
+            ninja
+
+      - name: Setup LLVM Clang (macOS)
+        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          brew update && brew install --quiet \
+            llvm@${{ inputs.compiler_version }} \
+            lld@${{ inputs.compiler_version }}
+
+          LLVM_PREFIX=$(brew --prefix llvm@${{ inputs.compiler_version }})
+          LLD_PREFIX=$(brew --prefix lld@${{ inputs.compiler_version }})
+
+          echo "PATH=$LLVM_PREFIX/bin:$LLD_PREFIX/bin:$PATH" >> $GITHUB_ENV
+          echo "AR=$LLVM_PREFIX/bin/llvm-ar" >> $GITHUB_ENV
+          echo "RANLIB=$LLVM_PREFIX/bin/llvm-ranlib" >> $GITHUB_ENV
+          echo "NM=$LLVM_PREFIX/bin/llvm-nm" >> $GITHUB_ENV
+
+          echo "CC=$LLVM_PREFIX/bin/clang" >> $GITHUB_ENV
+          echo "CXX=$LLVM_PREFIX/bin/clang++" >> $GITHUB_ENV
+          echo "CXXFLAGS=-flto=thin" >> $GITHUB_ENV
+          echo "LDFLAGS=-fuse-ld=lld -flto=thin" >> $GITHUB_ENV
+
+      - name: Setup GCC (macOS)
+        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'gcc') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          brew update && brew install --quiet gcc@${{ inputs.compiler_version }}
+          GCC_PREFIX=$(brew --prefix gcc@${{ inputs.compiler_version }})
+          echo "PATH=$GCC_PREFIX/bin:$PATH" >> $GITHUB_ENV
+          echo "CC=$GCC_PREFIX/bin/gcc-${{ inputs.compiler_version }}" >> $GITHUB_ENV
+          echo "CXX=$GCC_PREFIX/bin/g++-${{ inputs.compiler_version }}" >> $GITHUB_ENV
+
+      - name: Install dependencies (Linux)
+        if: ${{ runner.os == 'Linux' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
+            binutils-dev \
+            libluajit-5.1-dev \
+            libmariadb-dev-compat \
+            libssl-dev \
+            libzmq3-dev \
+            luajit \
+            mariadb-client \
+            tzdata \
+            zlib1g-dev
+
+      - name: Setup GCC (Linux)
+        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'gcc') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        env:
+          gcc_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet g++${{ env.gcc_version }}
+          echo "CC=/usr/bin/gcc${{ env.gcc_version }}" >> $GITHUB_ENV
+          echo "CXX=/usr/bin/g++${{ env.gcc_version }}" >> $GITHUB_ENV
+
+      - name: Setup Clang (Linux)
+        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        env:
+          llvm_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet g++-14
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh ${{ inputs.compiler_version }} all
+          echo "CC=/usr/bin/${{ inputs.compiler_version && format('clang-{0}', inputs.compiler_version) || 'clang' }}" >> $GITHUB_ENV
+          echo "CXX=/usr/bin/${{ inputs.compiler_version && format('clang++-{0}', inputs.compiler_version) || 'clang++' }}" >> $GITHUB_ENV
+          echo "CXXFLAGS=-stdlib=libstdc++" >> $GITHUB_ENV
+          echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
+
+      - name: Setup MSVC
+        if: ${{ runner.os == 'Windows' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: x64
+
+      - name: Setup sccache
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: mozilla-actions/sccache-action@v0.0.9
+        with:
+          disable_annotations: ${{ !inputs.save_cache }}
+
+      - name: Setup Python
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Enable modules
+        if: ${{ inputs.build_modules && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          python3 <<EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("example\n")
+              f.write("renamer\n")
+          EOF
+
+      - name: Restore build cache
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        id: restore_build
+        uses: actions/cache/restore@v4
+        env:
+          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
+        with:
+          path: build
+          key: ${{ format('buildcache-{0}-{1}{2}-{3}-{4}-{5}', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash, env.source_hash) }}
+          restore-keys: |
+            ${{ format('buildcache-{0}-{1}{2}-{3}-{4}-', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash) }}
+
+      - name: Configure CMake
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        run: |
+          cmake -G Ninja -S . -B build --fresh \
+            -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
+            -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
+            -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
+            -DPCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }} \
+            ${{ (runner.os == 'macOS' && startsWith(inputs.compiler, 'clang')) && '-DCMAKE_AR=$AR -DCMAKE_RANLIB=$RANLIB -DCMAKE_NM=$NM ' || '' }} \
+            -DCACHE_OPTION=sccache
+
+      - name: Build
+        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        run: cmake --build build | tee build.log
+
+      - name: Upload artifact
+        if: ${{ inputs.upload_artifact && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ format('LSB_{0}_{1}_{2}', runner.os, inputs.build_type, github.sha) }}
+          path: |
+            xi_*
+            tracy.tar.gz
+
+      - name: Cache build
+        if: ${{ inputs.save_cache && steps.restore_build.outputs.cache-hit != 'true' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        uses: actions/cache/save@v4
+        with:
+          path: build
+          key: ${{ steps.restore_build.outputs.cache-primary-key }}
+
+      - name: Summarize Clang Tidy Build
+        if: ${{ inputs.clang_tidy && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        run: |
+          echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
+          if [[ -f "build.log" && -s "build.log" ]]; then
+              python tools/ci/summarize_clang_tidy.py build.log >> $GITHUB_STEP_SUMMARY
+              if [[ $? -ne 0 ]]; then
+                  exit 1
+              fi
+          fi

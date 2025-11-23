@@ -49,6 +49,7 @@ public:
     void tradeNpc(const sol::object& npcQuery, const sol::table& items, sol::optional<sol::table> expectedEvent) const;
     void acceptRaise() const;
     void engage(CLuaBaseEntity* mob) const;
+    void skillchain(CLuaBaseEntity* target, sol::variadic_args weaponskillIds) const;
 
     static void Register();
 

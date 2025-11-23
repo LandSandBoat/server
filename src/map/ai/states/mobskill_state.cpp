@@ -20,12 +20,15 @@
 */
 
 #include "mobskill_state.h"
+#include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
+#include "enums/action/category.h"
 #include "mobskill.h"
-#include "packets/action.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
@@ -72,35 +75,27 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
 
     if (m_castTime > 0s)
     {
-        action_t action;
-        action.id         = m_PEntity->id;
-        action.actiontype = ACTION_MOBABILITY_START;
+        const auto isSelfTargeting = m_PSkill->getValidTargets() & TARGET_ANY_ALLEGIANCE &&
+                                     m_PSkill->getValidTargets() & TARGET_SELF;
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        action_t action{
+            .actorId    = m_PEntity->id,
+            .actiontype = ActionCategory::SkillStart,
+            .actionid   = static_cast<uint32_t>(FourCC::SkillUse),
+            .targets    = {
+                {
+                       .actorId = isSelfTargeting ? m_PEntity->id : PTarget->id,
+                       .results = {
+                        {
+                               .param     = m_PSkill->getID(),
+                               .messageID = m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG ? MSGBASIC_NONE : MSGBASIC_READIES_WS,
+                        },
+                    },
+                },
+            },
+        };
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-        actionTarget.reaction   = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT::NONE;
-        actionTarget.animation  = 0;
-        actionTarget.param      = m_PSkill->getID();
-        actionTarget.messageID  = 43;
-
-        if ((m_PSkill->getValidTargets() & TARGET_ANY_ALLEGIANCE) && (m_PSkill->getValidTargets() & TARGET_SELF))
-        {
-            // This ability targets self for aoe skills (such as Frozen Mist)
-            action.actiontype         = ACTION_WEAPONSKILL_START;
-            actionList.ActionTargetID = action.id;
-        }
-
-        // Don't emit message
-        if (m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG)
-        {
-            actionTarget.messageID = 0;
-        }
-
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
         // face toward target // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
         battleutils::turnTowardsTarget(m_PEntity, PTarget);
@@ -159,47 +154,62 @@ bool CMobSkillState::Update(timer::time_point tick)
 
     if (m_PEntity && m_PEntity->isAlive() && (tick >= GetEntryTime() + m_castTime && !IsCompleted()))
     {
-        action_t action;
+        action_t action{};
         m_PEntity->OnMobSkillFinished(*this, action);
 
         // Zero message ID
         if (m_PSkill->getFlag() & SKILLFLAG_NO_FINISH_MSG)
         {
-            for (auto&& act : action.actionLists)
-            {
-                for (auto&& targ : act.actionTargets)
-                {
-                    targ.messageID = 0;
-                }
-            }
+            action.ForEachResult([&](action_result_t& result)
+                                 {
+                                     result.messageID = MSGBASIC_NONE;
+                                 });
         }
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        // Only send packet if action was populated (e.g. interrupts return early)
+        if (!action.targets.empty())
+        {
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+        }
 
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)
     {
-        auto* PTarget = GetTarget();
-        if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
+        // Only act if they're able
+        if (!m_PEntity->StatusEffectContainer->HasPreventActionEffect(false))
         {
-            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
-        }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
-
-        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
-        {
-            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
-            if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
+            auto* PTarget = GetTarget();
+            if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
             {
-                auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
-                // Retail: Power is gained for BP use
-                auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
-                power += levelGained;
-                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
+                static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
             }
+
+            if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
+            {
+                CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
+                if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
+                {
+                    auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
+                    // Retail: Power is gained for BP use
+                    auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
+                    power += levelGained;
+                    PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
+                }
+            }
+
+            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
         }
+        else // Switch into inactive state when done
+        {
+            // Exit listener here because changing states will invalidate m_PEntity/m_PSkill
+            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
+            reduceTpOnInterrupt(); // Cleanup will call this only if IsCompleted is false, which is not the case here
+
+            m_PEntity->PAI->Inactive(0ms, false);
+        }
+
         return true;
     }
     return false;
@@ -207,30 +217,30 @@ bool CMobSkillState::Update(timer::time_point tick)
 
 void CMobSkillState::Cleanup(timer::time_point tick)
 {
-    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
+    if (m_PEntity && !IsCompleted())
     {
-        action_t action;
-        action.id         = m_PEntity->id;
-        action.actiontype = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid   = 28787;
+        ActionInterrupts::AbilityInterrupt(m_PEntity);
+        reduceTpOnInterrupt();
+    }
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = m_PEntity->id;
+    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+    {
+        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+        m_PEntity->updatemask |= UPDATE_COMBAT;
+    }
+}
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
-        actionTarget.reaction        = REACTION::HIT;
-
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-
+void CMobSkillState::reduceTpOnInterrupt()
+{
+    if (m_PEntity && m_PEntity->isAlive())
+    {
         // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
         // But lose 25% at < 2900 TP.
         // Testing was done via charm on a steelshell, methodology was the following on BST/DRK with a scythe
         // charm -> build tp -> leave -> stun -> interrupt TP move with weapon bash -> charm and check TP. Note that weapon bash incurs damage and thus adds TP.
         // Note: this is very incomplete. Further testing shows that other statuses also reduce TP but in addition it seems that specific mobskills may reduce TP more or less than these numbers
         // Thus while incomplete, is better than nothing.
-        if (m_PEntity->StatusEffectContainer &&
-            m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT::EFFECT_STUN, EFFECT::EFFECT_TERROR, EFFECT::EFFECT_PETRIFICATION, EFFECT::EFFECT_SLEEP, EFFECT::EFFECT_SLEEP_II, EFFECT::EFFECT_LULLABY }))
+        if (m_PEntity->StatusEffectContainer && m_PEntity->StatusEffectContainer->HasPreventActionEffect())
         {
             int16 tp = m_spentTP;
             if (tp >= 2900)
@@ -242,11 +252,5 @@ void CMobSkillState::Cleanup(timer::time_point tick)
                 m_PEntity->health.tp = std::floor(0.25f * tp);
             }
         }
-    }
-
-    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
-    {
-        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
-        m_PEntity->updatemask |= UPDATE_COMBAT;
     }
 }

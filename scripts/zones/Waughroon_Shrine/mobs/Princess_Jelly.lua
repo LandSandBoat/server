@@ -8,18 +8,6 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 ---@type TMobEntity
 local entity = {}
 
-local elementalSpells =
-{
-    { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
-    { xi.magic.spell.DROWN, xi.magic.spell.WATER },
-    { xi.magic.spell.SHOCK, xi.magic.spell.THUNDER },
-    { xi.magic.spell.RASP , xi.magic.spell.STONE },
-    { xi.magic.spell.CHOKE, xi.magic.spell.AERO },
-    { xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
-    { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
-    { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
-}
-
 local centers =
 {
     { -177.5,  60, -142 },
@@ -140,17 +128,24 @@ local function spawnQueenJelly(bfNum, target, zone)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    local element = mob:getLocalVar('mobElement')
-    local spell   = math.random(1, 100)
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellTable =
+    {
+        [xi.element.FIRE   ] = { xi.magic.spell.BIND, xi.magic.spell.BURN,  xi.magic.spell.FIRE     },
+        [xi.element.ICE    ] = { xi.magic.spell.BIND, xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
+        [xi.element.WIND   ] = { xi.magic.spell.BIND, xi.magic.spell.CHOKE, xi.magic.spell.AERO     },
+        [xi.element.EARTH  ] = { xi.magic.spell.BIND, xi.magic.spell.RASP , xi.magic.spell.STONE    },
+        [xi.element.THUNDER] = { xi.magic.spell.BIND, xi.magic.spell.SHOCK, xi.magic.spell.THUNDER  },
+        [xi.element.WATER  ] = { xi.magic.spell.BIND, xi.magic.spell.DROWN, xi.magic.spell.WATER    },
+        [xi.element.LIGHT  ] = { xi.magic.spell.BIND, xi.magic.spell.DIA,   xi.magic.spell.BANISH   },
+        [xi.element.DARK   ] = { xi.magic.spell.BIND, xi.magic.spell.BIO,   xi.magic.spell.DRAIN    },
+    }
 
-    if spell > 60 then
-        return elementalSpells[element][1] -- element's DoT
-    elseif spell > 20 then
-        return elementalSpells[element][2] -- element's nuke
-    else
-        return 258
-    end
+    local list      = mob:getLocalVar('mobElement')
+    list            = list > 0 and list or 1
+    local spellList = spellTable[list]
+
+    return spellList[math.random(1, #spellList)]
 end
 
 entity.onMobFight = function(mob, target)

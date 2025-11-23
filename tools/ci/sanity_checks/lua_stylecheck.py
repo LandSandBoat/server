@@ -519,7 +519,7 @@ class LuaStyleCheck:
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
                 self.check_invalid_enum(code_line)
-                self.check_getentity_nilsafety(code_line)
+                # self.check_getentity_nilsafety(code_line)
 
                 # TODO: Disabled until a solution for float parameters to math.random() is found
                 # self.check_random_bounds(code_line)

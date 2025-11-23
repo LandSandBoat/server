@@ -31,10 +31,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         dmg = math.floor(hp * (math.floor(0.072 * tp) - 96) / 256)
     end
 
-    dmg = dmg * 2.5
+    dmg = math.floor(dmg * 2.5)
 
     -- Believe it or not, it's been proven to be breath damage.
-    dmg = target:breathDmgTaken(dmg)
+    dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
+    dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     -- Handling phalanx
     dmg = dmg - target:getMod(xi.mod.PHALANX)

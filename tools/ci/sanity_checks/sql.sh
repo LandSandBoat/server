@@ -30,10 +30,4 @@ for file in "${targets[@]}"; do
     fi
 done
 
-# If no section was written, emit a success summary
-if ! $any_issues; then
-    echo "## :heavy_check_mark: SQL Checks Passed"
-    echo
-fi
-
 $any_issues && exit 1 || exit 0

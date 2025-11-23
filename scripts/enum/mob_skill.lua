@@ -57,6 +57,13 @@ xi.mobSkill =
     FLYING_HIP_PRESS         =  360,
     EARTH_SHOCK              =  361,
 
+    TAIL_ROLL                =  382,
+    TUSK                     =  383,
+    SCUTUM                   =  384,
+    BONE_CRUNCH              =  385,
+    AWFUL_EYE                =  386,
+    HEAVY_BELLOW             =  387,
+
     SONIC_BOOM_1             =  393,
     JET_STREAM_1             =  395,
 
@@ -111,6 +118,9 @@ xi.mobSkill =
     BLANK_GAZE               =  586,
 
     SWEEP                    =  620,
+
+    HELLDIVE_1               =  622,
+    WING_CUTTER_1            =  623,
 
     VULTURE_3                =  626,
 
@@ -230,6 +240,9 @@ xi.mobSkill =
 
     SLIPSTREAM_1             = 1157,
     TURBULENCE_1             = 1158,
+    BROADSIDE_BARRAGE_1      = 1159,
+    BLIND_SIDE_BARRAGE_1     = 1160,
+    DAMNATION_DIVE_1         = 1161,
 
     INFERNO_3                = 1162, -- Confirmed usage: "Trial-Size Trial by Fire" bcnm. (Ifrit)
     EARTHEN_FURY_3           = 1163, -- Confirmed usage: "Trial-Size Trial by Earth" bcnm. (Titan)
@@ -295,6 +308,8 @@ xi.mobSkill =
     SPINE_LASH               = 1355,
     TIDAL_DIVE               = 1357,
     PLASMA_CHARGE            = 1358,
+
+    HUNGRY_CRUNCH            = 1363,
 
     SINUATE_RUSH             = 1367,
 

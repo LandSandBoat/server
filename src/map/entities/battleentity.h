@@ -226,148 +226,6 @@ enum class DAMAGE_TYPE : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
-// This enum class is a set of bitfields that modify messages sent to the client.
-// There are helpers (PARRY/EVADE) because it is not intuitive
-// These flag names may not match SE's intent perfectly, but seem to work well.
-
-// For example
-// A guard is HIT + GUARDED
-// A parry is HIT + MISS + GUARDED
-// A block is HIT + BLOCK
-// It also seems weaponskills and job abilities set ABILITY in addition to these flags.
-// All of these flags are also seen in weaponskills.
-enum class REACTION : uint8
-{
-    NONE    = 0x00, // No Reaction
-    MISS    = 0x01, // Miss
-    GUARDED = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
-    PARRY   = 0x03, // Block with weapons (MISS + GUARDED)
-    BLOCK   = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
-    HIT     = 0x08, // Hit
-    EVADE   = 0x09, // Evasion (MISS + HIT)
-    ABILITY = 0x10, // Observed on JA and WS
-};
-DECLARE_FORMAT_AS_UNDERLYING(REACTION);
-
-// These operators are used to combine bits that may not have a discrete value upon combining.
-inline REACTION operator|(REACTION a, REACTION b)
-{
-    return (REACTION)((uint8)a | (uint8)b);
-}
-
-inline REACTION operator&(REACTION a, REACTION b)
-{
-    return (REACTION)((uint8)a & (uint8)b);
-}
-
-inline REACTION operator|=(REACTION& a, REACTION b)
-{
-    a = a | b;
-
-    return a;
-}
-
-enum class SPECEFFECT : uint8
-{
-    NONE         = 0x00,
-    BLOOD        = 0x02,
-    SELFAOE_MISS = 0x04,
-    HIT          = 0x10,
-    RAISE        = 0x11,
-    RECOIL       = 0x20,
-    CRITICAL_HIT = 0x22,
-};
-DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
-
-enum class MODIFIER : uint8
-{
-    NONE        = 0x00,
-    COVER       = 0x01,
-    RESIST      = 0x02,
-    MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
-    IMMUNOBREAK = 0x08,
-};
-DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
-
-enum SUBEFFECT : uint8
-{
-    // ATTACK
-    SUBEFFECT_FIRE_DAMAGE      = 1,  // 110000     3
-    SUBEFFECT_ICE_DAMAGE       = 2,  // 1-01000    5
-    SUBEFFECT_WIND_DAMAGE      = 3,  // 111000     7
-    SUBEFFECT_EARTH_DAMAGE     = 4,  // 1-00100    9
-    SUBEFFECT_LIGHTNING_DAMAGE = 5,  // 110100    11
-    SUBEFFECT_WATER_DAMAGE     = 6,  // 1-01100   13
-    SUBEFFECT_LIGHT_DAMAGE     = 7,  // 111100    15
-    SUBEFFECT_DARKNESS_DAMAGE  = 8,  // 1-00010   17
-    SUBEFFECT_SLEEP            = 9,  // 110010    19
-    SUBEFFECT_POISON           = 10, // 1-01010   21
-    SUBEFFECT_ADDLE            = 11, // Verified shared group 1
-    SUBEFFECT_AMNESIA          = 11, // Verified shared group 1
-    SUBEFFECT_PARALYSIS        = 11, // Verified shared group 1
-    SUBEFFECT_BLIND            = 12, // 1-00110   25
-    SUBEFFECT_SILENCE          = 13,
-    SUBEFFECT_PETRIFY          = 14,
-    SUBEFFECT_PLAGUE           = 15,
-    SUBEFFECT_STUN             = 16,
-    SUBEFFECT_CURSE            = 17,
-    SUBEFFECT_DEFENSE_DOWN     = 18, // 1-01001   37
-    SUBEFFECT_EVASION_DOWN     = 18, // Verified shared group 2
-    SUBEFFECT_ATTACK_DOWN      = 18, // Verified shared group 2
-    SUBEFFECT_SLOW             = 18, // Verified shared group 2
-    SUBEFFECT_DEATH            = 19,
-    SUBEFFECT_SHIELD           = 20,
-    SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
-    SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
-    SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
-    SUBEFFECT_STATUS_DRAIN     = 22, // Verified shared group 3
-    SUBEFFECT_HASTE            = 23,
-    // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
-
-    // SPIKES
-    SUBEFFECT_BLAZE_SPIKES = 1,  // 01-1000    6
-    SUBEFFECT_ICE_SPIKES   = 2,  // 01-0100   10
-    SUBEFFECT_DREAD_SPIKES = 3,  // 01-1100   14
-    SUBEFFECT_CURSE_SPIKES = 4,  // 01-0010   18
-    SUBEFFECT_SHOCK_SPIKES = 5,  // 01-1010   22
-    SUBEFFECT_REPRISAL     = 6,  // 01-0110   26
-                                 // SUBEFFECT_GLINT_SPIKES = 6,
-    SUBEFFECT_GALE_SPIKES   = 7, // Used by enchantment "Cool Breeze" http://www.ffxiah.com/item/22018/
-    SUBEFFECT_CLOD_SPIKES   = 8,
-    SUBEFFECT_DELUGE_SPIKES = 9,
-    SUBEFFECT_DEATH_SPIKES  = 10, // yes really: http://www.ffxiah.com/item/26944/
-    SUBEFFECT_COUNTER       = 63, // Also used by Retaliation
-                                  // There are no spikes effect animations beyond 63. Some effects share subeffect/animations.
-                                  // "Damage Spikes" use the Blaze Spikes animation even though they are different status.
-
-    // SKILLCHAINS
-    SUBEFFECT_LIGHT         = 1,
-    SUBEFFECT_DARKNESS      = 2,
-    SUBEFFECT_GRAVITATION   = 3,
-    SUBEFFECT_FRAGMENTATION = 4,
-    SUBEFFECT_DISTORTION    = 5,
-    SUBEFFECT_FUSION        = 6,
-    SUBEFFECT_COMPRESSION   = 7,
-    SUBEFFECT_LIQUEFACATION = 8,
-    SUBEFFECT_INDURATION    = 9,
-    SUBEFFECT_REVERBERATION = 10,
-    SUBEFFECT_TRANSFIXION   = 11,
-    SUBEFFECT_SCISSION      = 12,
-    SUBEFFECT_DETONATION    = 13,
-    SUBEFFECT_IMPACTION     = 14,
-    SUBEFFECT_RADIANCE      = 15,
-    SUBEFFECT_UMBRA         = 16,
-
-    SUBEFFECT_NONE = 0,
-
-    // UNKNOWN
-    SUBEFFECT_IMPAIRS_EVASION,
-    SUBEFFECT_BIND,
-    SUBEFFECT_WEIGHT,
-    SUBEFFECT_AUSPICE
-};
-DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
-
 enum TARGETTYPE : uint16
 {
     TARGET_NONE                    = 0x0000,
@@ -437,40 +295,6 @@ enum IMMUNITY : uint32
 };
 DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
-struct apAction_t
-{
-    CBattleEntity* ActionTarget;     // 32 bits
-    REACTION       reaction;         //  5 bits
-    uint16         animation;        // 12 bits
-    SPECEFFECT     speceffect;       // 7 bits
-    uint8          knockback;        // 3 bits
-    int32          param;            // 17 bits
-    uint16         messageID;        // 10 bits
-    SUBEFFECT      additionalEffect; // 10 bits
-    int32          addEffectParam;   // 17 bits
-    uint16         addEffectMessage; // 10 bits
-    SUBEFFECT      spikesEffect;     // 10 bits
-    uint16         spikesParam;      // 14 bits
-    uint16         spikesMessage;    // 10 bits
-
-    apAction_t()
-    : ActionTarget(nullptr)
-    , reaction(REACTION::NONE)
-    , animation(0)
-    , speceffect(SPECEFFECT::NONE)
-    , knockback(0)
-    , param(0)
-    , messageID(0)
-    , additionalEffect(SUBEFFECT_NONE)
-    , addEffectParam(0)
-    , addEffectMessage(0)
-    , spikesEffect(SUBEFFECT_NONE)
-    , spikesParam(0)
-    , spikesMessage(0)
-    {
-    }
-};
-
 struct health_t
 {
     int16 tp;
@@ -484,7 +308,6 @@ struct battlehistory_t
     ATTACK_TYPE lastHitTaken_atkType;
 };
 
-typedef std::vector<apAction_t> ActionList_t;
 class CModifier;
 class CParty;
 class CStatusEffectContainer;
@@ -519,8 +342,8 @@ public:
     uint16 ATT(SLOTTYPE slot);
     uint16 ACC(uint8 attackNumber, uint16 offsetAccuracy);
     uint16 EVA();
-    uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
-    uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RATT(uint16 bonusAtt = 0);
+    uint16 RACC(uint16 bonusAcc = 0);
 
     bool isDead();
     bool isAlive();
@@ -555,7 +378,7 @@ public:
     void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
     uint8 UpdateSpeed(bool run = false) override;
 
-    uint16 GetWeaponDelay(bool tp);              // returns delay of combined weapons
+    uint32 GetWeaponDelay(bool tp);              // returns delay of combined weapons
     float  GetMeleeRange() const;                // returns the distance considered to be within melee range of the entity
     int16  GetRangedWeaponDelay(bool forTPCalc); // returns delay of ranged weapon + ammo where applicable
     int16  GetAmmoDelay();                       // returns delay of ammo (for cooldown between shots)
@@ -684,9 +507,6 @@ public:
     virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
-    // Used to set an action to an "interrupted" state
-    void setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID);
-
     virtual void OnAbility(CAbilityState&, action_t&)
     {
     }
@@ -728,8 +548,6 @@ public:
     TraitList_t TraitList;
 
     EntityID_t m_OwnerID{}; // ID of the attacking entity (after death will store the ID of the entity that dealt the final blow)
-
-    ActionList_t m_ActionList{}; // List of actions performed in one attack (you will need to write a structure that includes an ActionList in which there will be categories, animations, etc.)
 
     CParty*           PParty;
     CBattleEntity*    PPet;

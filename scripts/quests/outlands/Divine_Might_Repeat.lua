@@ -117,7 +117,7 @@ quest.sections =
                     local vanaHour = VanadielHour()
 
                     if
-                        IsMoonFull() and
+                        (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
                         (vanaHour >= 18 or vanaHour < 6)
                     then
                         if npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT }) then

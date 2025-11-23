@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local cueMove = mob:getLocalVar('CUE_MOVE')
     mob:setLocalVar('CUE_MOVE', 0)
 

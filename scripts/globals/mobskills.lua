@@ -259,6 +259,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     returninfo.hitslanded = hitslanded
     returninfo.isCritical = hitCrit
 
+    skill:setAttackType(xi.attackType.PHYSICAL)
+    skill:setCritical(returninfo.isCritical)
+
     return returninfo
 end
 
@@ -382,16 +385,17 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, skillParams)
     local elementalSDT    = xi.spells.damage.calculateSDT(target, actionElement)
     local resistRate      = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, xi.skillRank.A_PLUS, actionElement, resistStat, 0, mAccuracyBonus)
     local dayAndWeather   = xi.spells.damage.calculateDayAndWeather(mob, actionElement, false)
-    local absorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, actionElement)
+    local absorb          = xi.spells.damage.calculateAbsorption(target, actionElement, true)
+    local nullify         = xi.spells.damage.calculateNullification(target, actionElement, true, true)
 
     damage = math.floor(damage * systemBonus)
     damage = math.floor(damage * elementalSDT)
     damage = math.floor(damage * resistRate)
     damage = math.floor(damage * dayAndWeather)
     damage = utils.clamp(damage, 0, breathSkillDamageCap)
-    damage = math.floor(damage * absorbOrNullify)
+    damage = math.floor(damage * absorb * nullify)
 
-    if absorbOrNullify < 0 then -- Return early since the rest of the calculations are not needed if we absorbed/nullified.
+    if damage <= 0 then -- Return early since the rest of the calculations are not needed if we absorbed/nullified.
         return damage
     end
 
@@ -506,8 +510,9 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         damage = target:physicalDmgTaken(damage, damageType)
     elseif attackType == xi.attackType.MAGICAL then
         local element = utils.clamp(damageType - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
-        damage = math.floor(damage * xi.spells.damage.calculateTMDA(target, element))
-        damage = math.floor(damage * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
+        damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, element, true))
+        damage = math.floor(damage * xi.spells.damage.calculateNullification(target, element, true, false))
         damage = math.floor(target:handleSevereDamage(damage, false))
     elseif attackType == xi.attackType.BREATH then
         -- Handle absorb messaging

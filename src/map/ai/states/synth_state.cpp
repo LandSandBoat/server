@@ -24,7 +24,6 @@
 #include "entities/battleentity.h"
 
 #include "ai/ai_container.h"
-#include "packets/action.h"
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)

@@ -55,6 +55,7 @@ global_objects=(
     fmt
     switch
     getVanaMidnight
+    getVanadielMoonCycle
     getMidnight
 
     Mission
@@ -168,11 +169,5 @@ for file in "${targets[@]}"; do
         echo
     fi
 done
-
-# If no section was written, emit a success summary
-if ! $any_issues; then
-    echo "## :heavy_check_mark: Lua Checks Passed"
-    echo
-fi
 
 $any_issues && exit 1 || exit 0

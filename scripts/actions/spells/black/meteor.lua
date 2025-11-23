@@ -36,9 +36,10 @@ spellObject.onSpellCast = function(caster, target, spell)
         damage = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + (caster:getMaxSkillLevel(caster:getMainLvl(), xi.job.BLM, xi.skill.ELEMENTAL_MAGIC)) / 6) * 9.4
     end
 
-    damage = math.floor(damage * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.NONE))
+    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, true))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, true, false))
     damage = math.floor(damage * xi.spells.damage.calculateMTDR(spell))
-    damage = math.floor(damage * xi.spells.damage.calculateTMDA(target, xi.element.NONE))
+    damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
 
     -- Handle Phalanx, One for All, Stoneskin.
     damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)

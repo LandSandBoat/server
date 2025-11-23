@@ -62,6 +62,8 @@ private:
     timer::time_point          m_finishTime;
     timer::duration            m_castTime{};
     int16                      m_spentTP;
+
+    void reduceTpOnInterrupt();
 };
 
 #endif

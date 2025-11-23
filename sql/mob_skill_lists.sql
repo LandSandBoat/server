@@ -4281,7 +4281,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,649); -- Voidsong
 
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',2088,313); -- Counterspore
 
--- Next ID : 2089
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,622);  -- Helldive
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,623);  -- Wing Cutter
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1159); -- Broadside Barrage
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1160); -- Blind Side Barrage
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1161); -- Damnation Dive
+
+-- Next ID : 2090
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -132,6 +132,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local numHitsLanded    = 0
     local numHitsProcessed = 1
     local finaldmg         = 0
+    local didCrit          = false
 
     if math.random() < hitrateFirst then
         firstHitLanded = true
@@ -191,7 +192,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             local wRatio = cRatio
             local isCrit = math.random() < critRate
             if isCrit then
-                wRatio = wRatio + 1
+                wRatio  = wRatio + 1
+                didCrit = true
             end
 
             local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max
@@ -209,7 +211,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             local wRatio = cRatio
             local isCrit = math.random() < critRate
             if isCrit then
-                wRatio = wRatio + 1
+                wRatio  = wRatio + 1
+                didCrit = true
             end
 
             local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max.
@@ -231,6 +234,9 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     returninfo.dmg        = finaldmg
     returninfo.hitslanded = numHitsLanded
+
+    skill:setAttackType(xi.attackType.PHYSICAL)
+    skill:setCritical(didCrit)
 
     return returninfo
 end

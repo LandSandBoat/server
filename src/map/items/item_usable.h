@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 
+#include "enums/action/animation.h"
 #include "item.h"
 
 class CItemUsable : public CItem
@@ -35,7 +36,7 @@ public:
     timer::duration   getUseDelay() const;
     uint8             getCurrentCharges();
     uint8             getMaxCharges() const;
-    uint16            getAnimationID() const;
+    auto              getAnimationID() const -> ActionAnimation;
     timer::duration   getAnimationTime() const;
     timer::duration   getActivationTime() const;
     uint16            getValidTarget() const;

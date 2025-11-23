@@ -4,8 +4,6 @@ add_subdirectory(s2c)
 set(PACKET_SOURCES
     ${PACKET_C2S_SOURCES}
     ${PACKET_S2C_SOURCES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/action.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/action.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h

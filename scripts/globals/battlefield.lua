@@ -91,7 +91,8 @@ xi.battlefield.returnCode =
     INCREMENT_REQUEST = 3,
     LOCKED            = 4,
     REQS_NOT_MET      = 5,
-    BATTLEFIELD_FULL  = 6
+    BATTLEFIELD_FULL  = 6,
+    PARTY_ENGAGED     = 9, -- Used as 2nd parameter to LOCKED
 }
 
 xi.battlefield.leaveCode =
@@ -777,6 +778,16 @@ end
 -- will still send the appropriate position packet, but not change the values for the player.
 
 function Battlefield:onEntryEventUpdate(player, csid, option, npc)
+    -- Can't enter if party locked the battlefield
+    local isEnteringExisting = player:getLocalVar('[BCNM]EnterExisting') == 1
+    if isEnteringExisting and not player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:setLocalVar('[BCNM]EnterExisting', 0)
+        player:setLocalVar('[battlefield]area', 0)
+        player:updateEvent(xi.battlefield.returnCode.LOCKED, xi.battlefield.returnCode.PARTY_ENGAGED)
+        player:setLocalVar('noPosUpdate', 1)
+        return 0
+    end
+
     local clearTime = 1
     local name      = 'Meme'
     local partySize = 1
@@ -1308,7 +1319,7 @@ end
 
 function xi.battlefield.rejectLevelSyncedParty(player, npc)
     for _, member in pairs(player:getAlliance()) do
-        if member:isLevelSync() then
+        if member:hasStatusEffect(xi.effect.LEVEL_SYNC) then
             local zoneId = player:getZoneID()
             local ID     = zones[zoneId]
 

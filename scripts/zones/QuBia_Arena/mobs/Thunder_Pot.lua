@@ -32,7 +32,7 @@ entity.onMobEngage = function(mob)
     DespawnMob(mobId + 1) -- Water
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.STUN,
@@ -41,6 +41,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.THUNDAGA_III,
         xi.magic.spell.THUNDER_IV,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

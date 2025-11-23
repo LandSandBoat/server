@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setBaseSpeed(60)
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.FIRE,
@@ -41,6 +41,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.DRAIN,
         xi.magic.spell.BINDGA,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

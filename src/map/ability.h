@@ -23,12 +23,12 @@
 #define _CABILITY_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
-#include "packets/action.h"
 
 #include "entities/battleentity.h"
+#include "enums/action/animation.h"
 #include "status_effect.h"
 
+enum class ActionCategory : uint8_t;
 enum ADDTYPE
 {
     ADDTYPE_NORMAL      = 0,
@@ -704,7 +704,7 @@ public:
     uint16          getMobSkillID() const;
     JOBTYPE         getJob();
     uint8           getLevel() const;
-    uint16          getAnimationID() const;
+    auto            getAnimationID() const -> ActionAnimation;
     timer::duration getAnimationTime();
     timer::duration getCastTime();
     float           getRange() const;
@@ -718,7 +718,7 @@ public:
     int32           getCE() const;
     int32           getVE() const;
     uint16          getMeritModID() const;
-    ACTIONTYPE      getActionType();
+    auto            getActionType() const -> ActionCategory;
     EFFECT          getPostActionEffectCleanup();
 
     void setID(uint16 id);
@@ -737,7 +737,7 @@ public:
     void setCE(int32 CE);
     void setVE(int32 VE);
     void setMeritModID(uint16 value);
-    void setActionType(ACTIONTYPE type);
+    void setActionType(ActionCategory type);
     void setPostActionEffectCleanup(EFFECT effectToCleanup);
 
     const std::string& getName();
@@ -761,7 +761,7 @@ private:
     int32           m_VE;
     uint16          m_meritModID;
     std::string     m_name;
-    ACTIONTYPE      m_actionType{};
+    ActionCategory  m_actionType{};
     EFFECT          m_cleanupEffect{};
 };
 

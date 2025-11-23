@@ -26,6 +26,7 @@
 #include "common/mmo.h"
 
 #include "entities/battleentity.h"
+#include "enums/action/animation.h"
 
 #define MAX_WEAPONSKILL_ID 256
 
@@ -44,7 +45,7 @@ public:
     bool            isAoE() const;
     bool            mainOnly() const; // can only be used as main job
     uint8           getAoe() const;
-    uint8           getAnimationId() const;
+    auto            getAnimationId() const -> ActionAnimation;
     timer::duration getAnimationTime();
     uint8           getType() const;
     uint8           getUnlockId() const;

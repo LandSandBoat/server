@@ -32,26 +32,21 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    if mob:getHPP() <= 25 then
-        return 244 -- Death
-    else
-        -- Can cast Blindga, Death, Graviga, Silencega, and Sleepga II.
-        -- Casts Graviga every time before he teleports.
-        local rnd = math.random(1, 100)
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.BLINDGA,
+        xi.magic.spell.DEATH,
+        xi.magic.spell.GRAVIGA,
+        xi.magic.spell.SLEEPGA_II,
+        xi.magic.spell.SILENCEGA,
+    }
 
-        if rnd <= 20 then
-            return 361 -- Blindga
-        elseif rnd <= 40 then
-            return 244 -- Death
-        elseif rnd <= 60 then
-            return 366 -- Graviga
-        elseif rnd <= 80 then
-            return 274 -- Sleepga II
-        else
-            return 359 -- Silencega
-        end
+    if mob:getHPP() <= 25 then
+        return xi.magic.spell.DEATH
     end
+
+    return spellList[math.random(1, #spellList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

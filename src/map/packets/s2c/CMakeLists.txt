@@ -38,6 +38,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x028_battle2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x028_battle2.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.h

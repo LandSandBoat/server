@@ -177,7 +177,7 @@ end
 -----------------------------------
 -- Solo weaponskill messages.
 -----------------------------------
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     if mob:getLocalVar('scStep') == 0 then
         mob:messageText(mob, messages.SOLO_WEAPONSKILL)
     end

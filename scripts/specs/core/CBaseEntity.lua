@@ -2441,11 +2441,6 @@ function CBaseEntity:disableLevelSync()
 end
 
 ---@nodiscard
----@return boolean
-function CBaseEntity:isLevelSync()
-end
-
----@nodiscard
 ---@return integer
 function CBaseEntity:checkSoloPartyAlliance()
 end
@@ -3241,12 +3236,6 @@ end
 ---@param damageType integer?
 ---@return integer
 function CBaseEntity:rangedDmgTaken(damage, damageType)
-end
-
----@nodiscard
----@param damage number
----@return integer
-function CBaseEntity:breathDmgTaken(damage)
 end
 
 ---@param damage number

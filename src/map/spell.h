@@ -26,6 +26,8 @@
 
 #define CANNOT_USE_SPELL 0
 
+enum class ActionAnimation : uint16_t;
+enum class ActionModifier : uint32_t;
 enum class FourCC : uint32_t;
 enum SPELLGROUP
 {
@@ -1058,7 +1060,7 @@ public:
     timer::duration    getCastTime() const;
     timer::duration    getRecastTime() const;
     uint16             getValidTarget() const;
-    uint16             getAnimationID() const;
+    auto               getAnimationID() const -> ActionAnimation;
     timer::duration    getAnimationTime() const;
     auto               getSpellGroup() const -> SPELLGROUP;
     SPELLFAMILY        getSpellFamily();
@@ -1112,8 +1114,8 @@ public:
     void setMultiplier(float multiplier);
     void setMessage(uint16 message);
     void setMagicBurstMessage(uint16 message);
-    auto getModifier() -> MODIFIER;
-    void setModifier(MODIFIER modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
+    auto getModifier() const -> ActionModifier;
+    void setModifier(ActionModifier modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
     void setPrimaryTargetID(uint32);
 
     void setCE(int32 ce);
@@ -1155,7 +1157,7 @@ private:
     uint16                         m_element{};                       // element of spell
     uint16                         m_message{};                       // message id
     uint16                         m_MagicBurstMessage{};             // Message used for magic bursts.
-    MODIFIER                       m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
+    ActionModifier                 m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
     int32                          m_CE{};                            // cumulative enmity of spell
     int32                          m_VE{};                            // volatile enmity of spell
     std::string                    m_name;                            // spell name

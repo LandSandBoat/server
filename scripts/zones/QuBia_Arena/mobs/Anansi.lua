@@ -24,13 +24,14 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, { chance = 20, power = 50, duration = 40 }) -- Very powerful additional effect: poison
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId) -- Anansi only casts Paralyga, Slowga, and Poisonga II
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.PARALYGA,
         xi.magic.spell.SLOWGA,
         xi.magic.spell.POISONGA_II,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

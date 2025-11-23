@@ -682,7 +682,7 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
     end
 
     local membersLevelRestricted = utils.any(membersInZone, function(_, v)
-        return v:isLevelSync()
+        return v:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or v:hasStatusEffect(xi.effect.LEVEL_SYNC)
     end)
 
     if membersLevelRestricted then

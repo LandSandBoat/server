@@ -46,7 +46,7 @@ end
 xi.job_utils.ninja.useMijinGakure = function(player, target, ability, action)
     local dmg        = math.floor(player:getHP() * 0.8)
     local resist     = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, 0, 0)
-    local tmdaFactor = xi.spells.damage.calculateTMDA(target, xi.element.NONE)
+    local tmdaFactor = xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false)
     local jpFactor   = 1 + player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03
 
     dmg = math.floor(dmg * resist)

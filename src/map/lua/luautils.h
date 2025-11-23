@@ -105,8 +105,8 @@ class CLuaTradeContainer;
 class CLuaZone;
 
 struct action_t;
-struct actionList_t;
-struct actionTarget_t;
+struct action_target_t;
+struct action_result_t;
 
 enum ConquestUpdate : uint8;
 enum class Emote : uint8;
@@ -273,8 +273,6 @@ uint8  VanadielMoonDirection();
 uint8  VanadielRSERace();
 uint8  VanadielRSELocation();
 void   SetTimeOffset(int32 offset); // Manipulate earth time forward or backward by offset seconds. Affects Vana'Diel time.
-bool   IsMoonNew();
-bool   IsMoonFull();
 void   StartElevator(uint32 ElevatorID);
 int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
@@ -342,7 +340,7 @@ int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpe
 int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
 void  OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell);
-auto  OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>;
+auto  OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>;
 void  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);
 bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster); // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
@@ -383,7 +381,7 @@ void OnBattlefieldKick(CCharEntity* PChar);
 void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield);
 void OnBattlefieldDestroy(CBattlefield* PBattlefield);
 
-uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget);
+uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget);
 int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action);
 int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
 auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
@@ -423,10 +421,10 @@ void   DisallowRespawn(uint32 mobid, bool allowRespawn);
 std::string GetServerMessage(uint8 language);               // Get the message to be delivered to player on first zone in of a session
 auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of recently active fishers (that fished in the last specified minutes)
 
-void  OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
-void  OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
-int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage);    // for items with additional effects
-void  additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
+void  OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);                                      // for mobs with additional effects
+void  OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_result_t* Action, int32 damage);                                          // for mobs with spikes
+int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage);    // for items with additional effects
+void  additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage); // for armor with spikes
 
 auto NearLocation(const sol::table& table, float radius, float theta) -> sol::table;
 auto GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta) -> sol::table;

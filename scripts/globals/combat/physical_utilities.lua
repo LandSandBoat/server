@@ -552,6 +552,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     end
 
     -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
+    -- TODO: do flourish and attack mods come before or after food?
     actorAttack = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod * flourishBonus))
 
     -- Target Defense Modifiers.

@@ -20,13 +20,14 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 15)
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.ICE_THRENODY,
         xi.magic.spell.BLIZZARD_IV,
         xi.magic.spell.BLIZZAGA_III,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

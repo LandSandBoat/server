@@ -26,7 +26,7 @@ zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
 
     if
-        IsMoonFull() and
+        (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
         (vanadielHour >= 18 or
         vanadielHour < 6)
     then

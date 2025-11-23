@@ -54,7 +54,7 @@ CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
 bool CDeathState::Update(timer::time_point tick)
 {
     // It's completed
-    if (IsCompleted() || m_PEntity->animation != ANIMATION_DEATH)
+    if (IsCompleted() || !m_PEntity->isDead())
     {
         return true;
     }

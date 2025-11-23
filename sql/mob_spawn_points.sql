@@ -51665,15 +51665,15 @@ INSERT INTO `mob_spawn_points` VALUES (17367095,0,'Metal_Crab','Metal Crab',17,2
 INSERT INTO `mob_spawn_points` VALUES (17367096,0,'Metal_Crab','Metal Crab',17,223.224,-60.000,134.946,130);
 
 -- Birds of a Feather
-INSERT INTO `mob_spawn_points` VALUES (17367098,0,'Macha','Macha',18,-177.000,60.000,-141.000,125);
-INSERT INTO `mob_spawn_points` VALUES (17367099,0,'Neman','Neman',19,-177.000,60.000,-137.000,120);
-INSERT INTO `mob_spawn_points` VALUES (17367100,0,'Neman','Neman',19,-177.000,60.000,-145.000,130);
-INSERT INTO `mob_spawn_points` VALUES (17367102,0,'Macha','Macha',18,23.274,0.000,18.964,125);
-INSERT INTO `mob_spawn_points` VALUES (17367103,0,'Neman','Neman',19,23.274,0.000,22.964,120);
-INSERT INTO `mob_spawn_points` VALUES (17367104,0,'Neman','Neman',19,23.274,0.000,14.964,130);
-INSERT INTO `mob_spawn_points` VALUES (17367106,0,'Macha','Macha',18,223.224,-60.000,138.946,125);
-INSERT INTO `mob_spawn_points` VALUES (17367107,0,'Neman','Neman',19,223.224,-60.000,142.946,120);
-INSERT INTO `mob_spawn_points` VALUES (17367108,0,'Neman','Neman',19,223.224,-60.000,134.946,130);
+INSERT INTO `mob_spawn_points` VALUES (17367098,0,'Macha','Macha',18,-177.354,59.696,-142.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17367099,0,'Neman','Neman',19,-177.354,59.893,-138.500,128);
+INSERT INTO `mob_spawn_points` VALUES (17367100,0,'Neman','Neman',19,-177.354,59.893,-145.500,128);
+INSERT INTO `mob_spawn_points` VALUES (17367102,0,'Macha','Macha',18,22.640,-0.301,17.945,128);
+INSERT INTO `mob_spawn_points` VALUES (17367103,0,'Neman','Neman',19,22.640,-0.104,21.445,128);
+INSERT INTO `mob_spawn_points` VALUES (17367104,0,'Neman','Neman',19,22.640,-0.104,14.445,128);
+INSERT INTO `mob_spawn_points` VALUES (17367106,0,'Macha','Macha',18,222.736,-60.313,138.024,128);
+INSERT INTO `mob_spawn_points` VALUES (17367107,0,'Neman','Neman',19,222.736,-60.116,141.524,128);
+INSERT INTO `mob_spawn_points` VALUES (17367108,0,'Neman','Neman',19,222.736,-60.116,134.524,128);
 
 -- Grove Guardians
 INSERT INTO `mob_spawn_points` VALUES (17367110,0,'Metsanneitsyt','Metsanneitsyt',20,-177.000,60.000,-137.000,120);

@@ -41,7 +41,7 @@ end
 -----------------------------------
 -- Only uses one TP move.
 -----------------------------------
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     return xi.mobSkill.DRILL_BRANCH
 end
 

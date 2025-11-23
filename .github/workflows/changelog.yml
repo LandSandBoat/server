@@ -1,4 +1,4 @@
-name: "changelog"
+name: Publish Changelog
 
 on:
   schedule:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   Publish_Changelog:
+    name: Generate and Publish Changelog
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v1

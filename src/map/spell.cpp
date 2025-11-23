@@ -209,9 +209,9 @@ void CSpell::setZoneMisc(uint16 Misc)
     m_zoneMisc = Misc;
 }
 
-uint16 CSpell::getAnimationID() const
+auto CSpell::getAnimationID() const -> ActionAnimation
 {
-    return m_animation;
+    return static_cast<ActionAnimation>(m_animation);
 }
 
 void CSpell::setAnimationID(uint16 AnimationID)
@@ -327,12 +327,12 @@ void CSpell::setMagicBurstMessage(uint16 message)
     m_MagicBurstMessage = message;
 }
 
-MODIFIER CSpell::getModifier()
+auto CSpell::getModifier() const -> ActionModifier
 {
     return m_MessageModifier;
 }
 
-void CSpell::setModifier(MODIFIER modifier)
+void CSpell::setModifier(const ActionModifier modifier)
 {
     m_MessageModifier = modifier;
 }
