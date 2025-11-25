@@ -10746,8 +10746,8 @@ INSERT INTO `mob_groups` VALUES (1,6783,154,'Demonic_Pugil_fished',0,128,147,0,0
 INSERT INTO `mob_groups` VALUES (2,344,154,'Bark_Tarantula',960,0,228,0,0,77,80,0);
 INSERT INTO `mob_groups` VALUES (3,920,154,'Darter',960,0,571,0,0,76,79,0);
 INSERT INTO `mob_groups` VALUES (4,978,154,'Demonic_Rose',960,0,2925,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,62000,0,90,90,0);
-INSERT INTO `mob_groups` VALUES (6,2840,154,'Nidhogg',0,128,1781,62000,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,60000,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (6,2840,154,'Nidhogg',0,128,1781,60000,0,90,90,0);
 
 -- ------------------------------------------------------------
 -- Castle_Zvahl_Keep_[S] (Zone 155)

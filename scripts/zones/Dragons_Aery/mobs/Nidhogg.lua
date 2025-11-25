@@ -70,6 +70,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 445)
     mob:setMod(xi.mod.ACC, 444)
     mob:setMod(xi.mod.EVA, 327)
+    mob:setMod(xi.mod.REGEN, 20) -- Regen assumed to be at least as strong as Fafnir, please recapture.
 
     -- Despawn the ???
     GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
