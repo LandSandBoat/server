@@ -733,7 +733,7 @@ INSERT INTO `mob_skills` VALUES (710,438,'charm',0,0.0,18.0,2000,0,4,4,0,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (716,460,'shadowbind',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (717,92,'venom_breath',4,0.0,20.0,2000,1500,4,0,0,0,0,0,0); -- hnm only
 -- INSERT INTO `mob_skills` VALUES (718,440,'jump',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (719,94,'critical_bite',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (719,94,'critical_bite',0,0.0,7.0,2000,1500,4,0,0,5,0,0,0);
 INSERT INTO `mob_skills` VALUES (720,95,'venom_sting',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (721,97,'stasis',0,0.0,9.0,2000,1500,4,0,0,0,0,0,0); -- hnm only
 INSERT INTO `mob_skills` VALUES (722,98,'venom_storm',1,0.0,40.0,2000,1500,4,0,0,0,0,0,0);
@@ -2931,12 +2931,12 @@ INSERT INTO `mob_skills` VALUES (2895,2639,'knuckle_sandwich',0,0.0,7.0,2000,150
 -- INSERT INTO `mob_skills` VALUES (2916,2660,'thrashing_assault',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2917,2661,'drill_claw',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2918,2662,'puncturing_frenzy',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2919,43,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2919,43,'',0,0.0,7.0,2000,1500,4,0,0,3,0,0,0);
 INSERT INTO `mob_skills` VALUES (2920,44,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2921,45,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2922,46,'soulshattering_roar',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2923,47,'calcifying_claw',0,0.0,18.0,2000,1000,4,0,0,1,0,0,0);
-INSERT INTO `mob_skills` VALUES (2924,48,'divesting_stampede',1,0.0,18.0,2000,1000,4,0,0,1,0,0,0);
+INSERT INTO `mob_skills` VALUES (2924,48,'divesting_stampede',1,0.0,18.0,2000,1000,4,0,0,5,0,0,0);
 INSERT INTO `mob_skills` VALUES (2925,49,'bonebreaking_barrage',0,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2926,2098,'beastruction',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2927,38,'metamorphic_blast',4,0.0,12.0,2000,1000,4,0,0,0,0,0,0);
