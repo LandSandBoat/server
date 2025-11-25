@@ -9,6 +9,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
     GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0) -- QM moves every 10 minutes
 
     xi.treasure.initZone(zone)
 end

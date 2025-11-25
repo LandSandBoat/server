@@ -220,7 +220,7 @@ end
 -----------------------------------
 -- Select TP moves based on current form.
 -----------------------------------
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local selectedMove = math.random(1, #tpMoves)
 
     return tpMoves[selectedMove]

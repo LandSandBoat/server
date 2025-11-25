@@ -82,12 +82,12 @@ zones[xi.zone.PORT_SAN_DORIA] =
         IMPERIAL_STANDING_INCREASED    = 11175, -- Your Imperial Standing has increased!
         EARNED_ALLIED_NOTES            = 11176, -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 11177, -- Obtained: <number> guild points.
-        FRAGMENT_FAR_TOO_SMALL         = 11536, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
-        FRAGMENTS_MELD                 = 11537, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
-        OBTAINED_NUM_KEYITEMS          = 11562, -- Obtained key item: <number> <keyitem>!
-        NOT_ACQUAINTED                 = 11564, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        MAP_MARKER_TUTORIAL            = 11912, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
-        UNABLE_RACE_CHANGE             = 12245, -- You were unable to use the specified appearance for your character.
+        FRAGMENT_FAR_TOO_SMALL         = 11537, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
+        FRAGMENTS_MELD                 = 11538, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
+        OBTAINED_NUM_KEYITEMS          = 11563, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                 = 11565, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
+        MAP_MARKER_TUTORIAL            = 11913, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
+        UNABLE_RACE_CHANGE             = 12246, -- You were unable to use the specified appearance for your character.
     },
     mob =
     {

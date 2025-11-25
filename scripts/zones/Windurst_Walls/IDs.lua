@@ -42,7 +42,7 @@ zones[xi.zone.WINDURST_WALLS] =
         EARNED_ALLIED_NOTES            = 9657,  -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 9658,  -- Obtained: <number> guild points.
         TEAR_IN_FABRIC_OF_SPACE        = 10870, -- There appears to be a tear in the fabric of space...
-        UNABLE_RACE_CHANGE             = 11490, -- You were unable to use the specified appearance for your character.
+        UNABLE_RACE_CHANGE             = 11507, -- You were unable to use the specified appearance for your character.
     },
     mob =
     {

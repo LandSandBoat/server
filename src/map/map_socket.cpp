@@ -105,16 +105,16 @@ void MapSocket::send(const IPP& ipp, std::span<uint8> buffer)
     const auto ip       = ntohl(ipp.getIP());
     const auto endpoint = asio::ip::udp::endpoint(asio::ip::address_v4(ip), ipp.getPort());
 
-    // clang-format off
-    socket_.async_send_to(asio::buffer(buffer), endpoint,
-    [](const std::error_code& ec, std::size_t /*bytes_sent*/)
-    {
-        if (ec)
+    socket_.async_send_to(
+        asio::buffer(buffer),
+        endpoint,
+        [](const std::error_code& ec, std::size_t /*bytes_sent*/)
         {
-            ShowErrorFmt("Error sending data: {}", ec.message());
-        }
-    });
-    // clang-format on
+            if (ec)
+            {
+                ShowErrorFmt("Error sending data: {}", ec.message());
+            }
+        });
 
     // This will only be called in the middle of a doSocketsFor() call, so we don't
     // need to enqueue more work when we're done here.

@@ -49,7 +49,7 @@ void CPlayerController::Tick(timer::time_point /*tick*/)
 bool CPlayerController::Cast(uint16 targid, SpellID spellid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (!PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0s))
+    if (canAct() && !PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0s))
     {
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
@@ -114,7 +114,7 @@ bool CPlayerController::Disengage()
 bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (PChar->PAI->CanChangeState())
+    if (canAct() && PChar->PAI->CanChangeState())
     {
         CAbility* PAbility = ability::GetAbility(abilityid);
         if (!PAbility)
@@ -155,7 +155,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
 bool CPlayerController::RangedAttack(uint16 targid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (PChar->PAI->CanChangeState())
+    if (canAct() && PChar->PAI->CanChangeState())
     {
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
@@ -173,7 +173,7 @@ bool CPlayerController::RangedAttack(uint16 targid)
 bool CPlayerController::UseItem(uint16 targid, uint8 loc, uint8 slotid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (PChar->PAI->CanChangeState())
+    if (canAct() && PChar->PAI->CanChangeState())
     {
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
@@ -187,7 +187,7 @@ bool CPlayerController::UseItem(uint16 targid, uint8 loc, uint8 slotid)
 bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (PChar->PAI->CanChangeState())
+    if (canAct() && PChar->PAI->CanChangeState())
     {
         // TODO: put all this in weaponskill_state
         CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
@@ -272,6 +272,16 @@ void CPlayerController::setLastAttackTime(timer::time_point _lastAttackTime)
     m_lastAttackTime = _lastAttackTime;
 }
 
+timer::time_point CPlayerController::getLastSpellFinishedTime()
+{
+    return m_spellFinishedTime;
+}
+
+void CPlayerController::setLastSpellFinishedTime(timer::time_point _spellFinishedTime)
+{
+    m_spellFinishedTime = _spellFinishedTime;
+}
+
 void CPlayerController::setLastErrMsgTime(timer::time_point _LastErrMsgTime)
 {
     m_errMsgTime = _LastErrMsgTime;
@@ -285,4 +295,14 @@ timer::time_point CPlayerController::getLastErrMsgTime()
 CWeaponSkill* CPlayerController::getLastWeaponSkill()
 {
     return m_lastWeaponSkill;
+}
+
+// Spells, JAs, ranged attacks and items can't be used instantly after a spell finishes
+// Engaging seems to be immune to this
+// TODO: there seems to be a penalty or rate limit to incoming 0x01As if you act too early
+bool CPlayerController::canAct()
+{
+    auto timeSinceLastSpell = timer::now() - getLastSpellFinishedTime();
+
+    return timeSinceLastSpell > 2.5s;
 }

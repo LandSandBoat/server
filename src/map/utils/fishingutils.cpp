@@ -2914,12 +2914,11 @@ CItemFish* GetFish(uint16 itemid)
  ************************************************************************/
 void LoadFishingMessages()
 {
-    // clang-format off
-        zoneutils::ForEachZone([](const CZone* PZone)
+    zoneutils::ForEachZone(
+        [](const CZone* PZone)
         {
             MessageOffset[PZone->GetID()] = luautils::GetTextIDVariable(PZone->GetID(), "FISHING_MESSAGE_OFFSET");
         });
-    // clang-format on
 }
 
 void LoadFishingAreas()

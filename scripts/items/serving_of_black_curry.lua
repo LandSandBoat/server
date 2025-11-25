@@ -2,6 +2,7 @@
 -- ID: 4297
 -- Item: serving_of_black_curry
 -- Food Effect: 180Min, All Races
+-- https://wiki.ffo.jp/html/5680.html
 -----------------------------------
 -- Dexterity 2
 -- Vitality 4
@@ -25,32 +26,35 @@ itemObject.onItemUse = function(target, user, item, action)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
+local dataTable =
+{
+    [ 1] = { xi.mod.DEX,            4,   2 },
+    [ 2] = { xi.mod.VIT,            6,   4 },
+    [ 3] = { xi.mod.INT,            3,   1 },
+    [ 4] = { xi.mod.HPHEAL,         6,   2 },
+    [ 5] = { xi.mod.MPHEAL,         3,   1 },
+    [ 6] = { xi.mod.FOOD_DEFP,     25,  15 },
+    [ 7] = { xi.mod.FOOD_DEF_CAP, 200, 180 },
+    [ 8] = { xi.mod.ACC,            5,   5 },
+    [ 9] = { xi.mod.RACC,           5,   5 },
+    [10] = { xi.mod.EVA,            5,   5 },
+    [11] = { xi.mod.SLEEPRES,       3,   3 }
+}
+
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.DEX, 2)
-    target:addMod(xi.mod.VIT, 4)
-    target:addMod(xi.mod.INT, 1)
-    target:addMod(xi.mod.HPHEAL, 2)
-    target:addMod(xi.mod.MPHEAL, 1)
-    target:addMod(xi.mod.FOOD_DEFP, 15)
-    target:addMod(xi.mod.FOOD_DEF_CAP, 180)
-    target:addMod(xi.mod.ACC, 5)
-    target:addMod(xi.mod.EVA, 5)
-    target:addMod(xi.mod.RACC, 5)
-    target:addMod(xi.mod.SLEEPRES, 3)
+    for i = 1, #dataTable do
+        -- Get party factor.
+        local partySize = target:getPartySize()
+        local column = 3
+        if partySize >= 4 then
+            column = 2
+        end
+
+        effect:addMod(dataTable[i][1], dataTable[i][column])
+    end
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DEX, 2)
-    target:delMod(xi.mod.VIT, 4)
-    target:delMod(xi.mod.INT, 1)
-    target:delMod(xi.mod.HPHEAL, 2)
-    target:delMod(xi.mod.MPHEAL, 1)
-    target:delMod(xi.mod.FOOD_DEFP, 15)
-    target:delMod(xi.mod.FOOD_DEF_CAP, 180)
-    target:delMod(xi.mod.ACC, 5)
-    target:delMod(xi.mod.EVA, 5)
-    target:delMod(xi.mod.RACC, 5)
-    target:delMod(xi.mod.SLEEPRES, 3)
 end
 
 return itemObject

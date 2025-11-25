@@ -6,7 +6,17 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMod(xi.mod.STORETP, 50)
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    return xi.mobSkill.GLOEOSUCCUS
 end
 
 entity.onMobDeath = function(mob, player, optParams)

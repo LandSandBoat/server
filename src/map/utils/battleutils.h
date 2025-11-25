@@ -29,6 +29,8 @@
 
 #include "entities/battleentity.h"
 
+enum class ActionReactKind : uint8_t;
+enum class ActionProcSkillChain : uint8_t;
 enum class Weather : uint16_t;
 class CMobEntity;
 class CAbility;
@@ -39,7 +41,7 @@ class CPetSkill;
 class CSpell;
 class CTrait;
 class CWeaponSkill;
-struct actionTarget_t;
+struct action_result_t;
 enum class PHYSICAL_ATTACK_TYPE;
 
 enum ENSPELL
@@ -130,10 +132,10 @@ void FreeWeaponSkillsList();
 void FreeMobSkillList();
 void FreePetSkillList();
 
-SUBEFFECT            GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary);
+auto                 GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary) -> ActionProcSkillChain;
 SKILLCHAIN_ELEMENT   FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill);
 uint8                GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain);
-uint8                GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
+auto                 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain) -> ActionProcSkillChain;
 int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT& appliedEle);
 std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
 Mod                  GetResistanceRankModFromElement(ELEMENT& element);
@@ -164,13 +166,12 @@ int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, i
 
 bool  TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell);
 float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, int16 bonusRangedAttack);
-void  HandleRangedAdditionalEffect(CCharEntity* PAttacker, CBattleEntity* PDefender, apAction_t* Action);
-int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken);
-bool  HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);
-bool  HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);
-bool  HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance);
-void  HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action);
-void  HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage, CAttack& attack);
+int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint16 damageTaken);
+bool  HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);
+bool  HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);
+bool  HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint8 damage, ActionReactKind spikesType, uint8 chance);
+void  HandleSpikesStatusEffect(const CBattleEntity* PAttacker, const CBattleEntity* PDefender, const action_result_t* Action);
+void  HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage, CAttack& attack);
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage);
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus);
 int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element);
@@ -207,7 +208,6 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing =
 void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker);
 void RelinquishClaim(CCharEntity* PDefender);
 
-int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage);
 int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element);
 int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
 int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
@@ -263,7 +263,7 @@ bool            RemoveAmmo(CCharEntity*, int quantity = 1);
 int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);
 
 int32       GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
-DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);
+auto        GetSpikesDamageType(ActionReactKind spikesType) -> DAMAGE_TYPE;
 DAMAGE_TYPE GetEnspellDamageType(ENSPELL enspellType);
 DAMAGE_TYPE GetRuneEnhancementDamageType(EFFECT runeEffect);
 ELEMENT     GetRuneEnhancementElement(EFFECT runeEffect);
@@ -273,5 +273,4 @@ bool           IsMagicCovered(CCharEntity* PCoverAbilityUser);
 void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
 void           addEcosystemKillerEffects(CBattleEntity* PBattleEntity);
 float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
-
 }; // namespace battleutils

@@ -39,6 +39,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 #include "ai/ai_container.h"
 #include "ai/states/inactive_state.h"
+#include "ai/states/mobskill_state.h"
 
 #include "enmity_container.h"
 #include "entities/automatonentity.h"
@@ -764,15 +765,15 @@ void CStatusEffectContainer::ApplyStateAlteringEffects(CStatusEffect* StatusEffe
             }
         }
 
-        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
-            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
+        if (HasPreventActionEffect(false))
         {
             // change icon of sleep II and lullaby. Apparently they don't stop player movement.
             if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
             {
                 StatusEffect->SetIcon(EFFECT_SLEEP);
             }
-            if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
+
+            if (!m_POwner->PAI->IsCurrentState<CInactiveState>() && !m_POwner->PAI->IsCurrentState<CMobSkillState>())
             {
                 m_POwner->PAI->Inactive(0ms, false);
             }
@@ -2207,15 +2208,14 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
                 {
                     perpetuationCost = static_cast<int16>(perpetuationCost * 1.2);
                 }
-
-                // Astral Flow.
-                if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
-                {
-                    perpetuationCost = 1;
-                }
             }
 
-            if (perpetuationCost < 1)
+            // Astral Flow.
+            if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
+            {
+                perpetuationCost = 0;
+            }
+            else if (perpetuationCost < 1)
             {
                 perpetuationCost = 1;
             }

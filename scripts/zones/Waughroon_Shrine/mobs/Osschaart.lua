@@ -302,7 +302,7 @@ end
 -----------------------------------
 --- MagicPrepare: Osschaarts spell list
 -----------------------------------
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.AEROGA_III,
@@ -325,6 +325,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.BIND,
         xi.magic.spell.STUN,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

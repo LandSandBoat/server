@@ -166,15 +166,11 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
 
                 if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
                 {
-                    const int skill      = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED))->getSkillType();
-                    const int bonusSkill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED))->getILvlSkill();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(skill, bonusSkill), PChar->RATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MSGBASIC_CHECKPARAM_RANGE);
                 }
                 else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
                 {
-                    const int skill      = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO))->getSkillType();
-                    const int bonusSkill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO))->getILvlSkill();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(skill, bonusSkill), PChar->RATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MSGBASIC_CHECKPARAM_RANGE);
                 }
                 else
                 {
@@ -200,12 +196,12 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
                 {
                     const int skill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED))->getSkillType();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE);
                 }
                 else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
                 {
                     const int skill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO))->getSkillType();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE);
                 }
                 else
                 {

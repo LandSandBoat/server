@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local form = mob:getAnimationSub()
     local tpMoves =
     {

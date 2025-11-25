@@ -63,7 +63,7 @@ local checks =
     end,
 
     levelSync = function(self, player, params)  -- Player is Level Sync'd
-        return self.reqs.levelSync and player:isLevelSync() and true or false
+        return self.reqs.levelSync and player:hasStatusEffect(xi.effect.LEVEL_SYNC) and true or false
     end,
 
     jobLvl = function(self, player, params)  -- Player has job at minimum level X

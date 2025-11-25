@@ -2353,10 +2353,7 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,619);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,620);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,764);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,1067);
-INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,367); -- fireball
-INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,369); -- brain crush
-INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,370); -- baleful_gaze
-INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,373); -- secretion
+-- 711: free
 INSERT INTO `mob_skill_lists` VALUES ('Sahagin DRG',712,770);
 INSERT INTO `mob_skill_lists` VALUES ('Sahagin DRG',712,771);
 INSERT INTO `mob_skill_lists` VALUES ('Sahagin DRG',712,774);
@@ -4281,7 +4278,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Hraun_Dragon',2087,649); -- Voidsong
 
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',2088,313); -- Counterspore
 
--- Next ID : 2089
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,622);  -- Helldive
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,623);  -- Wing Cutter
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1159); -- Broadside Barrage
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1160); -- Blind Side Barrage
+INSERT INTO `mob_skill_lists` VALUES ('Bird_Expansion',2089,1161); -- Damnation Dive
+
+-- Next ID : 2090
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

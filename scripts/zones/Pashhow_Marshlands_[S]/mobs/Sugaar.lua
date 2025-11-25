@@ -39,7 +39,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SILENCE, { chance = 15, duration = 30 })
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     -- seems overly complicated, but is reusable code for other mobs that use skills in a sequence
     local mobskillList =
     {

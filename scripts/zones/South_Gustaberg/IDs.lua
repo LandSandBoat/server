@@ -30,16 +30,16 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         FIRE_TAKE                     = 7425, -- You take <item> out of the fire.
         FIRE_LONGER                   = 7426, -- It may take a little while more to cook the <item>.
         MEAT_ALREADY_PUT              = 7427, -- The <item> is already in the fire.
-        ITEMS_ITEMS_LA_LA             = 7525, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7531, -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 7545, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7546, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7547, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7548, -- You already possess that temporary item.
-        NO_COMBINATION                = 7553, -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7615, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        TIME_ELAPSED                  = 7697, -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
-        REGIME_REGISTERED             = 9914, -- New training regime registered!
+        ITEMS_ITEMS_LA_LA             = 7526, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7532, -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 7546, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7547, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7548, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7549, -- You already possess that temporary item.
+        NO_COMBINATION                = 7554, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7616, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        TIME_ELAPSED                  = 7698, -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
+        REGIME_REGISTERED             = 9916, -- New training regime registered!
     },
     mob =
     {

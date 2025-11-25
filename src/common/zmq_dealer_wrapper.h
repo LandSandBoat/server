@@ -26,9 +26,9 @@
 
 #include <atomic>
 #include <memory>
+#include <thread>
 
 #include <concurrentqueue.h>
-#include <nonstd/jthread.hpp>
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
@@ -137,5 +137,5 @@ public:
 
 private:
     std::atomic<bool> requestExit_;
-    nonstd::jthread   thread_;
+    std::jthread      thread_;
 };

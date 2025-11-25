@@ -14,26 +14,30 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local moon = VanadielMoonPhase()
-    local buffvalue = 1
-    if moon > 90 then
-        buffvalue = 25
-    elseif moon > 75 then
-        buffvalue = 21
-    elseif moon > 60 then
-        buffvalue = 17
-    elseif moon > 40 then
-        buffvalue = 13
-    elseif moon > 25 then
-        buffvalue = 9
-    elseif moon > 10 then
-        buffvalue = 5
-    end
+    local moonCycle = getVanadielMoonCycle()
+
+    local cycleBuffs =
+    {
+        [xi.moonCycle.NEW_MOON]                = 1,
+        [xi.moonCycle.LESSER_WAXING_CRESCENT]  = 5,
+        [xi.moonCycle.GREATER_WAXING_CRESCENT] = 9,
+        [xi.moonCycle.FIRST_QUARTER]           = 13,
+        [xi.moonCycle.LESSER_WAXING_GIBBOUS]   = 17,
+        [xi.moonCycle.GREATER_WAXING_GIBBOUS]  = 21,
+        [xi.moonCycle.FULL_MOON]               = 25,
+        [xi.moonCycle.GREATER_WANING_GIBBOUS]  = 21,
+        [xi.moonCycle.LESSER_WANING_GIBBOUS]   = 17,
+        [xi.moonCycle.THIRD_QUARTER]           = 13,
+        [xi.moonCycle.GREATER_WANING_CRESCENT] = 9,
+        [xi.moonCycle.LESSER_WANING_CRESCENT]  = 5,
+    }
+
+    local buffValue = cycleBuffs[moonCycle]
 
     target:delStatusEffect(xi.effect.ACCURACY_BOOST)
     target:delStatusEffect(xi.effect.EVASION_BOOST)
-    target:addStatusEffect(xi.effect.ACCURACY_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.EVASION_BOOST, 25-buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.ACCURACY_BOOST, buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.EVASION_BOOST, 25-buffValue, 0, duration)
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.ACC_EVA_BOOST)

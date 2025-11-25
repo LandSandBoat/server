@@ -159,6 +159,10 @@ def close(code):
 def main():
     print("Running exe startup checks...({})".format(platform.system()))
 
+    # --ci flag only on non-Linux systems. Option exits server as soon as it starts, Linux wants to keep it open to test HXIClient.
+    runCI = platform.system() != "Linux"
+    runHXIClient = platform.system() == "Linux"
+
     # Start the processes
     processes = [
         subprocess.Popen(
@@ -176,7 +180,7 @@ def main():
         subprocess.Popen(
             [
                 from_server_path("xi_map"),
-                # "--ci",
+                *(["--ci"] if runCI else []),
                 "--log",
                 "log/map-server-(1).log",
                 "--ip",
@@ -209,7 +213,7 @@ def main():
                     subprocess.Popen(
                         [
                             from_server_path("xi_map"),
-                            # "--ci",
+                            *(["--ci"] if runCI else []),
                             "--log",
                             "log/map-server-(2).log",
                             "--ip",
@@ -295,7 +299,7 @@ def main():
         # Check if all processes are marked ready
         if all(ready_status.values()):
             print("All processes reached 'ready to work'!")
-            if platform.system() == "Linux":
+            if runHXIClient:
                 from tools.headlessxi.hxiclient import HXIClient
 
                 if not cur:

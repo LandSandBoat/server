@@ -136,26 +136,9 @@ content.loot =
     {
         { itemId = xi.item.GIL,                    weight = 1000, amount = 4000 },
     },
+
     {
         { itemId = xi.item.WOLF_HIDE,              weight = 1000 },
-    },
-
-    {
-        { itemId = xi.item.NONE,                   weight = 500 },
-        { itemId = xi.item.REVIVAL_TREE_ROOT,      weight = 500 },
-    },
-
-    {
-        quantity = 2,
-        { itemId = xi.item.NONE,                   weight = 360 },
-        { itemId = xi.item.ELM_LOG,                weight =  80 },
-        { itemId = xi.item.CHESTNUT_LOG,           weight =  80 },
-        { itemId = xi.item.PETRIFIED_LOG,          weight =  80 },
-        { itemId = xi.item.MAHOGANY_LOG,           weight =  80 },
-        { itemId = xi.item.IRON_INGOT,             weight =  80 },
-        { itemId = xi.item.STEEL_INGOT,            weight =  80 },
-        { itemId = xi.item.SILVER_INGOT,           weight =  80 },
-        { itemId = xi.item.MYTHRIL_INGOT,          weight =  80 },
     },
 
     {
@@ -168,26 +151,45 @@ content.loot =
     {
         { itemId = xi.item.NONE,                   weight = 250 },
         { itemId = xi.item.ASHIGARU_MANTLE,        weight = 250 },
-        { itemId = xi.item.WIZARDS_MANTLE,         weight = 250 },
+        { itemId = xi.item.WYVERN_MANTLE,          weight = 250 },
         { itemId = xi.item.KILLER_MANTLE,          weight = 250 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 250 },
-        { itemId = xi.item.MANNEQUIN_BODY,         weight = 250 },
-        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 250 },
+        { itemId = xi.item.NONE,                   weight = 800 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
+        { itemId = xi.item.IRON_INGOT,             weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
+        { itemId = xi.item.ELM_LOG,                weight =  20 },
+    },
+
+    {
+        { itemId = xi.item.REVIVAL_TREE_ROOT,      weight = 250 },
+        { itemId = xi.item.PETRIFIED_LOG,          weight = 250 },
     },
 
     {
         { itemId = xi.item.NONE,                   weight = 500 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight =  72 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight =  72 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_VIT,   weight =  72 },
-        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  71 },
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =  71 },
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =  71 },
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =  71 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight =  91 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight =  91 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_VIT,   weight =  91 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =  92 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  45 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =  45 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =  45 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                   weight = 100 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 300 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight = 300 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 300 },
     },
 }
 

@@ -120,39 +120,39 @@ void MapEngine::prepareWatchdog()
 
     const auto periodMs = (period > 0) ? std::chrono::milliseconds(period) : 2000ms;
 
-    // clang-format off
-    watchdog_ = std::make_unique<Watchdog>(periodMs, [period]()
-    {
-        if (debug::isRunningUnderDebugger())
+    watchdog_ = std::make_unique<Watchdog>(
+        periodMs,
+        [period]()
         {
-            ShowCritical("!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!");
-            ShowCriticalFmt("Process main tick has taken {}ms or more.", period);
-            ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
-        }
-        else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
-        {
-            std::string outputStr = "!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!\n\n";
-
-            outputStr += fmt::format("Process main tick has taken {}ms or more.\n", period);
-            outputStr += fmt::format("Backtrace Messages:\n\n");
-
-            const auto backtrace = logging::GetBacktrace();
-            for (const auto& line : backtrace)
+            if (debug::isRunningUnderDebugger())
             {
-                outputStr += fmt::format("    {}\n", line);
+                ShowCritical("!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!");
+                ShowCriticalFmt("Process main tick has taken {}ms or more.", period);
+                ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
             }
+            else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
+            {
+                std::string outputStr = "!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!\n\n";
 
-            outputStr += "\nKilling Process!!!\n";
+                outputStr += fmt::format("Process main tick has taken {}ms or more.\n", period);
+                outputStr += fmt::format("Backtrace Messages:\n\n");
 
-            ShowCritical(outputStr);
+                const auto backtrace = logging::GetBacktrace();
+                for (const auto& line : backtrace)
+                {
+                    outputStr += fmt::format("    {}\n", line);
+                }
 
-            // Allow some time for logging to flush
-            std::this_thread::sleep_for(200ms);
+                outputStr += "\nKilling Process!!!\n";
 
-            throw std::runtime_error("Watchdog thread time exceeded. Killing process.");
-        }
-    });
-    // clang-format on
+                ShowCritical(outputStr);
+
+                // Allow some time for logging to flush
+                std::this_thread::sleep_for(200ms);
+
+                throw std::runtime_error("Watchdog thread time exceeded. Killing process.");
+            }
+        });
 }
 
 void MapEngine::gameLoop()
@@ -382,12 +382,11 @@ auto MapEngine::map_cleanup(timer::time_point tick, CTaskManager::CTask* PTask) 
 
     networking().sessions().cleanupSessions(networking().ipp());
 
-    // clang-format off
-    zoneutils::ForEachZone([](CZone* PZone)
-    {
-        PZone->GetZoneEntities()->EraseStaleDynamicTargIDs();
-    });
-    // clang-format on
+    zoneutils::ForEachZone(
+        [](CZone* PZone)
+        {
+            PZone->GetZoneEntities()->EraseStaleDynamicTargIDs();
+        });
 
     return 0;
 }

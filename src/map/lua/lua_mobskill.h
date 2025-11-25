@@ -57,6 +57,11 @@ public:
     uint32 getPrimaryTargetID();
     void   setFinalAnimationSub(uint8 newAnimationSub);
     void   setAnimationTime(uint32 newAnimationTime);
+    auto   getAttackType() const -> ATTACK_TYPE;
+    void   setAttackType(ATTACK_TYPE attackType);
+    auto   isCritical() -> bool;
+    void   setCritical(bool isCritical);
+    auto   getKnockback() const -> Knockback;
 
     bool operator==(const CLuaMobSkill& other) const
     {

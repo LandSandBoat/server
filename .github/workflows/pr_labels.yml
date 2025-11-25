@@ -1,4 +1,4 @@
-name: "pr_labels"
+name: PR Labels
 
 on:
   pull_request_target:
@@ -11,10 +11,12 @@ on:
 
 jobs:
   Check_Blocking_Labels:
+    name: Check Blocking Labels
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - uses: actions/github-script@v7
+      - name: Check for blocking labels
+        uses: actions/github-script@v7
         with:
           script: |
             const response = await github.rest.issues.listLabelsOnIssue({

@@ -224,7 +224,7 @@ void ConsoleService::run()
     bool attached = isatty(0);
     if (attached)
     {
-        m_consoleInputThread = nonstd::jthread(
+        m_consoleInputThread = std::jthread(
             [&]()
             {
                 std::string line;

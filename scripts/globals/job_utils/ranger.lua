@@ -154,10 +154,8 @@ xi.job_utils.ranger.useEagleEyeShot = function(player, target, ability, action)
     -- Set the message id ourselves
     if tpHits + extraHits > 0 then
         action:messageID(target:getID(), xi.msg.basic.JA_DAMAGE)
-        action:speceffect(target:getID(), 32)
     else
         action:messageID(target:getID(), xi.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), 0)
     end
 
     return damage
@@ -291,7 +289,7 @@ xi.job_utils.ranger.useBountyShot = function(player, target, ability, action)
 
     player:removeAmmo(1) -- TODO: does this check recycle?
 
-    action:speceffect(target:getID(), 0x01) -- functional, animation not correct without this
+    action:info(target:getID(), 1) -- Bounty shot sets the first bit likely for animation purposes
     ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
 
     target:updateClaim(player)

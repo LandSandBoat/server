@@ -29,14 +29,14 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         QUH_BERHUJA_STOLEN_ORBS       = 7414, -- Yowl! That was a close call, with those ferrral Carrrdians barrrging in therrre! Of courrrse, I rrran away...for help, I mean...
         PORE_OHRE_DIALOG              = 7416, -- There are reports of evil Cardians attacking people to steal the Mana Orbs created at this tower. Yikey-wikey, is this job scary!?
         PORE_OHRE_STOLEN_ORBS         = 7458, -- If you're heading back to town, then please go tell Minister Apururu at the Manustery about those feral Cardians stealing our Mana Orbs! Thanks, and be careful on your way homey-womey!
-        PLAYER_OBTAINS_ITEM           = 7571, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7572, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7573, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7574, -- You already possess that temporary item.
-        NO_COMBINATION                = 7579, -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7641, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        TIME_ELAPSED                  = 7723, -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
-        REGIME_REGISTERED             = 9940, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 7572, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7573, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7574, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7575, -- You already possess that temporary item.
+        NO_COMBINATION                = 7580, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7642, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        TIME_ELAPSED                  = 7724, -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
+        REGIME_REGISTERED             = 9942, -- New training regime registered!
     },
     mob =
     {

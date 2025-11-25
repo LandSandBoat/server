@@ -57,6 +57,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         DAGGERCLAW_DRACOS      = GetFirstID('Daggerclaw_Dracos'),
         WARAXE_BEAK            = GetFirstID('Waraxe_Beak'),
         COO_KEJA_THE_UNSEEN    = GetFirstID('Coo_Keja_the_Unseen'),
+        CHONCHON               = GetFirstID('Chonchon'),
 
         VOIDWALKER =
         {

@@ -29,6 +29,7 @@ zones[xi.zone.SACRARIUM] =
         DRAWER_EMPTY                  = 7279, -- There is nothing inside.
         DRAWER_SHUT                   = 7280, -- The drawer is jammed shut.
         CHEST_UNLOCKED                = 7369, -- You unlock the chest!
+        MUSTY_OLD_MANUSCRIPTS         = 7377, -- There is nothing here but a handful of musty old manuscripts.
         START_GET_GOOSEBUMPS          = 7379, -- You start to get goosebumps.
         HEART_RACING                  = 7380, -- Your heart is racing.
         LEAVE_QUICKLY_AS_POSSIBLE     = 7381, -- Your common sense tells you to leave as quickly as possible.
@@ -43,11 +44,12 @@ zones[xi.zone.SACRARIUM] =
     },
     npc =
     {
-        STALE_DRAFT_OFFSET  = GetFirstID('Stale_Draft'),
-        LABYRINTH_OFFSET    = GetFirstID('_0sb'),
-        SMALL_KEYHOLE       = GetFirstID('Small_Keyhole'),
-        QM_MARISELLE_OFFSET = GetFirstID('qm_prof_0'),
-        TREASURE_CHEST      = GetFirstID('Treasure_Chest'),
+        LABYRINTH_OFFSET      = GetFirstID('_0sb'),
+        QM_MARISELLE_OFFSET   = GetFirstID('qm_prof_0'),
+        QM_TAVNAZIAN_COOKBOOK = GetFirstID('qm_tavnazian_cookbook'),
+        SMALL_KEYHOLE         = GetFirstID('Small_Keyhole'),
+        STALE_DRAFT_OFFSET    = GetFirstID('Stale_Draft'),
+        TREASURE_CHEST        = GetFirstID('Treasure_Chest'),
     },
 }
 

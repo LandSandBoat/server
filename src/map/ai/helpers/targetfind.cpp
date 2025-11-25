@@ -31,7 +31,6 @@
 #include "entities/mobentity.h"
 #include "entities/trustentity.h"
 #include "mob_modifier.h"
-#include "packets/action.h"
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
 
@@ -51,6 +50,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 , m_APoint(nullptr)
 , m_BPoint{}
 , m_CPoint{}
+, m_selfCenteredAoE(false)
 {
     reset();
 }
@@ -59,10 +59,11 @@ void CTargetFind::reset()
 {
     m_findType = FIND_TYPE::NONE;
     m_targets.clear();
-    m_conal     = false;
-    m_radius    = 0.0f;
-    m_zone      = 0;
-    m_findFlags = FINDFLAGS_NONE;
+    m_conal           = false;
+    m_radius          = 0.0f;
+    m_zone            = 0;
+    m_findFlags       = FINDFLAGS_NONE;
+    m_selfCenteredAoE = false;
 
     m_APoint        = nullptr;
     m_PRadiusAround = nullptr;
@@ -90,7 +91,8 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
 
     if (radiusType == AOE_RADIUS::ATTACKER)
     {
-        m_PRadiusAround = &m_PBattleEntity->loc.p;
+        m_PRadiusAround   = &m_PBattleEntity->loc.p;
+        m_selfCenteredAoE = true;
     }
     else
     {
@@ -105,11 +107,14 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     // this is a buff because i'm targetting my self
     bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
 
-    // always add original target first
-    addEntity(PTarget, false); // pet will be added later
+    // add original target first except for self-centered moves
+    if (radiusType != AOE_RADIUS::ATTACKER)
+    {
+        addEntity(PTarget, false); // pet will be added later
+        m_PTarget = PTarget;
+    }
 
-    m_PTarget = PTarget;
-    isPlayer  = checkIsPlayer(m_PBattleEntity);
+    isPlayer = checkIsPlayer(m_PBattleEntity);
 
     if (isPlayer)
     {
@@ -134,8 +139,18 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             }
             else
             {
-                // just add myself
-                addEntity(m_PMasterTarget, withPet);
+                // For self-centered pet AoEs, add pet first then master (pet is primary target)
+                // For player/master AoEs, add master first then pet (master is primary target)
+                if (m_selfCenteredAoE && m_PBattleEntity->objtype == TYPE_PET)
+                {
+                    addEntity(m_PBattleEntity, false); // Add pet as primary target
+                    addEntity(m_PMasterTarget, false); // Add master as secondary target
+                }
+                else
+                {
+                    // just add myself
+                    addEntity(m_PMasterTarget, withPet);
+                }
             }
         }
         else
@@ -168,7 +183,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
         }
 
         // do not include pets in monster AoE buffs
-        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
+        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget && m_PTarget->PMaster == nullptr)
         {
             withPet = PETS_CAN_AOE_BUFF;
         }
@@ -464,7 +479,8 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
 
     // this is first target, always add him first
-    if (m_PTarget == nullptr)
+    // Exception: for self-centered AoEs, all targets must pass radius validation
+    if (m_PTarget == nullptr && !m_selfCenteredAoE)
     {
         return true;
     }
@@ -488,7 +504,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
     else
     {
-        if (m_PTarget->allegiance != PTarget->allegiance)
+        if (m_PTarget && m_PTarget->allegiance != PTarget->allegiance)
         {
             return false;
         }
@@ -520,7 +536,8 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
             }
             else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
             {
-                return PTarget->objtype == TYPE_TRUST;
+                // Allow Trusts and summoner/jug pets in party-targeted AoEs
+                return PTarget->objtype == TYPE_TRUST || PTarget->objtype == TYPE_PET;
             }
         }
     }

@@ -86,6 +86,9 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
+    skill:setAttackType(xi.attackType.PHYSICAL)
+    skill:setCritical(calcParams.criticalHit)
+
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
@@ -149,6 +152,9 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
+
+    skill:setAttackType(xi.attackType.RANGED)
+    skill:setCritical(calcParams.criticalHit)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end

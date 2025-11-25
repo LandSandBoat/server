@@ -50,13 +50,19 @@ public:
     timer::time_point getLastAttackTime();
     void              setLastAttackTime(timer::time_point);
 
+    timer::time_point getLastSpellFinishedTime();
+    void              setLastSpellFinishedTime(timer::time_point);
+
     void              setLastErrMsgTime(timer::time_point);
     timer::time_point getLastErrMsgTime();
 
     CWeaponSkill* getLastWeaponSkill();
 
+    bool canAct();
+
 protected:
     timer::time_point m_lastAttackTime{ timer::now() };
+    timer::time_point m_spellFinishedTime{ timer::now() };
     timer::time_point m_errMsgTime{ timer::now() };
     CWeaponSkill*     m_lastWeaponSkill{ nullptr };
 };

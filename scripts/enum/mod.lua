@@ -277,6 +277,7 @@ xi.mod =
     SPELLINTERRUPT                  = 168,
 
     -- Movement speed modifiers in use order.
+    -- See CBattleEntity::UpdateSpeed
     MOUNT_MOVE                      =  972, -- % Mount Movement Speed
     MOVE_SPEED_STACKABLE            =   75, -- Additive modifier. Applied before multipliers. Gear movement speed penalties.
     MOVE_SPEED_WEIGHT_PENALTY       =   77, -- Multiplicative modifier. For Gravity and curse.
@@ -1079,6 +1080,8 @@ xi.mod =
 
     -- TODO: These mods are not yet implemented.
     REWARD_RECAST                   = 1152, -- TODO: Reduces Reward recast time (seconds)
+
+    KNOCKBACK_REDUCTION = 1172, -- Reduces distance knocked back
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

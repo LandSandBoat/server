@@ -37,67 +37,40 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
--- NOTE: Data order in these tables matters to determine the range that is being checked.
--- If the first entry is larger, it is a boundary case where and `or` range is used instead
--- (Example, moon phase > 90, or moon phase < 10)
-local boulderOpenPhases =
+local boulderOpenCycles =
 {
-    [1] =
-    {
-        [ 1] = { 29, 43 },
-        [ 3] = { 12, 26 },
-        [ 5] = { 95, 10 },
-        [ 7] = { 79, 93 },
-        [ 9] = { 62, 76 },
-        [11] = { 45, 60 },
-        [13] = { 29, 43 },
-        [15] = { 12, 26 },
-        [17] = { 95, 10 },
-        [19] = { 79, 93 },
-        [21] = { 62, 76 },
-        [23] = { 45, 60 },
-    },
-
-    [2] =
-    {
-        [ 1] = { 57, 71 },
-        [ 3] = { 74, 88 },
-        [ 5] = { 90,  5 },
-        [ 7] = {  7, 21 },
-        [ 9] = { 24, 38 },
-        [11] = { 40, 55 },
-        [13] = { 57, 71 },
-        [15] = { 74, 88 },
-        [17] = { 90,  5 },
-        [19] = {  7, 21 },
-        [21] = { 24, 38 },
-        [23] = { 40, 55 },
-    }
+    [ 1] = { xi.moonCycle.LESSER_WAXING_GIBBOUS, xi.moonCycle.GREATER_WANING_CRESCENT },
+    [ 3] = { xi.moonCycle.GREATER_WAXING_GIBBOUS, xi.moonCycle.LESSER_WANING_CRESCENT },
+    [ 5] = { xi.moonCycle.NEW_MOON, xi.moonCycle.FULL_MOON },
+    [ 7] = { xi.moonCycle.LESSER_WAXING_CRESCENT, xi.moonCycle.GREATER_WANING_GIBBOUS },
+    [ 9] = { xi.moonCycle.GREATER_WAXING_CRESCENT, xi.moonCycle.LESSER_WANING_GIBBOUS },
+    [11] = { xi.moonCycle.FIRST_QUARTER, xi.moonCycle.THIRD_QUARTER },
+    [13] = { xi.moonCycle.LESSER_WAXING_GIBBOUS, xi.moonCycle.GREATER_WANING_CRESCENT },
+    [15] = { xi.moonCycle.GREATER_WAXING_GIBBOUS, xi.moonCycle.LESSER_WANING_CRESCENT },
+    [17] = { xi.moonCycle.NEW_MOON, xi.moonCycle.FULL_MOON },
+    [19] = { xi.moonCycle.LESSER_WAXING_CRESCENT, xi.moonCycle.GREATER_WANING_GIBBOUS },
+    [21] = { xi.moonCycle.GREATER_WAXING_CRESCENT, xi.moonCycle.LESSER_WANING_GIBBOUS },
+    [23] = { xi.moonCycle.FIRST_QUARTER, xi.moonCycle.THIRD_QUARTER },
 }
 
-local function isInRange(inputNum, rangeTable)
-    if not rangeTable then
-        return false
-    end
-
-    if rangeTable[1] < rangeTable[2] then
-        return inputNum >= rangeTable[1] and inputNum <= rangeTable[2]
-    else
-        return inputNum >= rangeTable[1] or inputNum <= rangeTable[2]
-    end
-end
-
 zoneObject.onGameHour = function(zone)
-    local moonDirection = VanadielMoonDirection() -- 0 (neither) 1 (waning) or 2 (waxing)
+    local moonCycle = getVanadielMoonCycle()
+    local hour = VanadielHour()
+    local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
+    local validCycles = nil
 
-    if moonDirection > 0 then
-        local phaseInfo = boulderOpenPhases[moonDirection][VanadielHour()]
-        local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
+    if hour then
+        validCycles = boulderOpenCycles[hour]
+    end
 
+    if
+        boulder and
+        validCycles and
+        boulder:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         if
-            boulder and
-            isInRange(VanadielMoonPhase(), phaseInfo) and
-            boulder:getAnimation() == xi.anim.CLOSE_DOOR
+            moonCycle == validCycles[1] or
+            moonCycle == validCycles[2]
         then
             boulder:openDoor(144 * 6) -- one vanadiel hour is 144 earth seconds. lower boulder for 6 vanadiel hours.
         end

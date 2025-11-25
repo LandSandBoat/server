@@ -1,3 +1,4 @@
+add_subdirectory(action)
 add_subdirectory(ai)
 add_subdirectory(entities)
 add_subdirectory(enums)
@@ -13,6 +14,7 @@ set(APP_SOURCES
 
 set(SOURCES
     ${COMMON_SOURCES}
+    ${ACTION_SOURCES}
     ${AI_SOURCES}
     ${ENTITY_SOURCES}
     ${ENUMS_SOURCES}

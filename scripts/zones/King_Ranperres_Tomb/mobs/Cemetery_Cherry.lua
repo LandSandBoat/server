@@ -39,6 +39,18 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('wasKilled', 0)
 end
 
+entity.onMobMobskillChoose = function(mob, target)
+    local tpMoves =
+    {
+        xi.mobSkill.DRILL_BRANCH_NM,
+        xi.mobSkill.PINECONE_BOMB_NM,
+        xi.mobSkill.LEAFSTORM_DISPEL,
+        xi.mobSkill.ENTANGLE_POISON,
+    }
+
+    return tpMoves[math.random(1, #tpMoves)]
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar('wasKilled', 1)
     player:addTitle(xi.title.MON_CHERRY)

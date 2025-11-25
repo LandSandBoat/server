@@ -24,12 +24,12 @@
 #include "cbasetypes.h"
 #include "timer.h"
 
+#include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <functional>
 #include <mutex>
-
-#include <nonstd/jthread.hpp>
+#include <thread>
 
 class Watchdog final
 {
@@ -48,7 +48,7 @@ private:
     voidFunc_t        m_callback;
     timer::time_point m_lastUpdate;
 
-    nonstd::jthread         m_watchdog;
+    std::jthread            m_watchdog;
     std::atomic_bool        m_running;
     std::mutex              m_bottleneck;
     std::condition_variable m_stopCondition;

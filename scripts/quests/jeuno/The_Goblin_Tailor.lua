@@ -37,6 +37,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.fameArea.JEUNO,
+    title    = xi.title.GOBLINS_EXCLUSIVE_FASHION_MANNEQUIN,
 }
 
 quest.sections =

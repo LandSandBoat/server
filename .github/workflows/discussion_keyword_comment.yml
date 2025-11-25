@@ -1,4 +1,4 @@
-name: "discussion_keyword_comment"
+name: Check Discussion Keywords
 
 on:
   discussion:
@@ -8,7 +8,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Discussion Keywords and Comment
+    - name: Comment on keywords in Discussion
       uses: actions/github-script@v6
       with:
         script: |

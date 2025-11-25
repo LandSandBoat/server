@@ -1,0 +1,183 @@
+name: Reusable Docker Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'ubuntu/alpine image to test.'
+        required: true
+        type: string
+      test_modules:
+        description: 'Test with modules enabled.'
+        required: false
+        type: boolean
+        default: false
+      multi_process:
+        description: 'Test with multiple map processes.'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  Docker_Test:
+    name: ${{ format('docker-{0}', inputs.os) }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      artifact_name: ${{ format('LSB_{0}_image_{1}', inputs.os, github.sha) }}
+      image_tag: ${{ format('{0}{1}', github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'latest', inputs.os == 'alpine' && '-alpine' || '') }}
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_SQL_DATABASE: xidb
+      XI_NETWORK_SQL_LOGIN: xiadmin
+      XI_NETWORK_SQL_PASSWORD: 'password'
+    services:
+      database:
+        image: mariadb:lts
+        env:
+          MARIADB_DATABASE: ${{ env.XI_NETWORK_SQL_DATABASE }}
+          MARIADB_USER: ${{ env.XI_NETWORK_SQL_LOGIN }}
+          MARIADB_PASSWORD: ${{ env.XI_NETWORK_SQL_PASSWORD }}
+          MARIADB_RANDOM_ROOT_PASSWORD: true
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=10s
+          --health-retries=10
+    steps:
+      - name: Lowercase repository
+        run: |
+          echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: recursive # For navmeshes
+
+      - name: Download artifact
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.artifact_name }}
+          path: ${{ runner.temp }}
+
+      - name: Load artifact
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          docker load --input ${{ runner.temp }}/${{ env.artifact_name }}.tar
+
+      - name: Start container
+        env:
+          image_name: ${{ format('ghcr.io/{0}:{1}', env.REPO, env.image_tag) }}
+        run: |
+          docker run -dt \
+            --name test-server \
+            --user root \
+            --network ${{ job.services.database.network }} \
+            --mount type=bind,src=./navmeshes,dst=/server/navmeshes \
+            --mount type=bind,src=./losmeshes,dst=/server/losmeshes \
+            --mount type=bind,src=./modules,dst=/server/modules \
+            --mount type=bind,src=.,dst=/server/log \
+            --env XI_NETWORK_SQL_HOST=database \
+            --env XI_NETWORK_SQL_PORT=${{ env.XI_NETWORK_SQL_PORT }} \
+            --env XI_NETWORK_SQL_DATABASE=${{ env.XI_NETWORK_SQL_DATABASE }} \
+            --env XI_NETWORK_SQL_LOGIN=${{ env.XI_NETWORK_SQL_LOGIN }} \
+            --env XI_NETWORK_SQL_PASSWORD=${{ env.XI_NETWORK_SQL_PASSWORD }} \
+            "${{ env.image_name }}"
+
+      - name: Enable modules
+        if: ${{ inputs.test_modules }}
+        run: |
+          python <<EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("example\n")
+              f.write("renamer\n")
+          EOF
+
+      - name: Initialize database
+        id: init_db
+        run: docker exec test-server /bin/bash -c 'python ./tools/dbtool.py update'
+
+      - name: Run xi_test
+        id: xi_test
+        continue-on-error: true
+        run: docker exec test-server /bin/bash -c './xi_test --keep-going --output log/tests.ctrf.json'
+
+      - name: Publish Test Report
+        if: ${{ !cancelled() }}
+        uses: ctrf-io/github-test-reporter@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          report-path: './tests.ctrf.json'
+          github-report: true
+          summary: true
+          pull-request: false
+          status-check: true
+          status-check-name: "xi_test (${{ format('docker-{0}', inputs.os) }})"
+          annotate: true
+          upload-artifact: true
+          artifact-name: "xi_test-ctrf-${{ format('docker-{0}', inputs.os) }}"
+
+      - name: Startup checks
+        id: startup_checks
+        timeout-minutes: 10
+        run: docker exec test-server /bin/bash -c 'python -m tools.ci.startup_checks'
+
+      - name: Summarize checks
+        id: summarize_checks
+        if: ${{ always() }}
+        run: |
+          echo "## Startup Results" >> $GITHUB_STEP_SUMMARY
+          found_issues=false
+          for log_file in ./*.log; do
+              if [[ -f "$log_file" && -s "$log_file" ]]; then
+                  if grep -qi "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:"; then
+                      found_issues=true
+                      log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
+                      echo "### :x: ${log_name} Checks Failed" >> $GITHUB_STEP_SUMMARY
+                      echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                      grep -i "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:" >> $GITHUB_STEP_SUMMARY
+                      echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                      echo "" >> $GITHUB_STEP_SUMMARY
+                  fi
+              fi
+          done
+          if [[ "$found_issues" == "false" ]]; then
+              if [[ "${{ steps.startup_checks.outcome }}" != "success" ]]; then
+                  echo "### :x: Startup checks failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
+                  echo "Check the logs for details." >> $GITHUB_STEP_SUMMARY
+                  found_issues=true
+              fi
+          fi
+          echo "<details><summary><h4>View Logs</h4></summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          for log_file in ./*.log; do
+              if [[ -f "$log_file" && -s "$log_file" ]]; then
+                  log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
+                  echo "### :sailboat: ${log_name}" >> $GITHUB_STEP_SUMMARY
+                  echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+                  cat "$log_file" >> $GITHUB_STEP_SUMMARY
+                  echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              fi
+          done
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
+
+      - name: Stop container
+        run: |
+          docker stop test-server
+          docker rm test-server
+
+      - name: Fail Workflow if Checks Failed
+        if: ${{ steps.xi_test.outcome == 'failure' || steps.startup_checks.outcome == 'failure' || steps.summarize_checks.outputs.issues_found == 'true' }}
+        run: |
+          echo "Startup checks failed. See summary for details."
+          exit 1

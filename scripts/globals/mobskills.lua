@@ -172,23 +172,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         fSTR = xi.combat.physical.calculateRangedStatFactor(mob, target)
     end
 
-    local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        mob:isFacing(target, 23)
-    then
-        -- Yonin evasion boost if mob is facing target
-        targetEvasion = targetEvasion + target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    local lvldiff = math.max(0, mob:getMainLvl() - target:getMainLvl())
-
-    --work out hit rate for mobs
-    local hitrate = ((mob:getACC() * accMod) - targetEvasion) / 2 + (lvldiff * 2) + 75
-
-    hitrate = utils.clamp(hitrate, 20, 95)
-
     --work out the base damage for a single hit
     local hitdamage = math.max(1, mob:getWeaponDmg() + fSTR) * ftp
 
@@ -225,16 +208,19 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     local hitslanded = 0
     local hitCrit    = false
 
-    -- first hit has a higher chance to land
-    local firstHitChance = hitrate * 1.5
+    local targetSpecialAttackEvasion = target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
+
+    -- Not sure if this first hit bonus is real. Needs verification.
+    local firstHitBonus = 100
 
     if params.isRanged then
-        firstHitChance = hitrate * 1.2
+        firstHitBonus = 40
     end
 
-    firstHitChance = utils.clamp(firstHitChance, 35, 95)
+    local firstHitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1 + firstHitBonus, xi.attackAnimation.RIGHT_ATTACK, false)
+    local hitrate        = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1, xi.attackAnimation.RIGHT_ATTACK, false)
 
-    if (math.random(1, 100)) <= firstHitChance then
+    if math.random() <= firstHitChance then
         local isCritical = false
         -- use helper function check for parry guard and blocking and handle the hit
         hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
@@ -244,7 +230,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
 
     while hitsdone < numHits do
         local isCritical = false
-        if (math.random(1, 100)) <= hitrate then --it hit
+        if math.random() <= hitrate then --it hit
             hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
         end
 
@@ -272,6 +258,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     returninfo.dmg        = finaldmg
     returninfo.hitslanded = hitslanded
     returninfo.isCritical = hitCrit
+
+    skill:setAttackType(xi.attackType.PHYSICAL)
+    skill:setCritical(returninfo.isCritical)
 
     return returninfo
 end
@@ -396,16 +385,17 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, skillParams)
     local elementalSDT    = xi.spells.damage.calculateSDT(target, actionElement)
     local resistRate      = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, xi.skillRank.A_PLUS, actionElement, resistStat, 0, mAccuracyBonus)
     local dayAndWeather   = xi.spells.damage.calculateDayAndWeather(mob, actionElement, false)
-    local absorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, actionElement)
+    local absorb          = xi.spells.damage.calculateAbsorption(target, actionElement, true)
+    local nullify         = xi.spells.damage.calculateNullification(target, actionElement, true, true)
 
     damage = math.floor(damage * systemBonus)
     damage = math.floor(damage * elementalSDT)
     damage = math.floor(damage * resistRate)
     damage = math.floor(damage * dayAndWeather)
     damage = utils.clamp(damage, 0, breathSkillDamageCap)
-    damage = math.floor(damage * absorbOrNullify)
+    damage = math.floor(damage * absorb * nullify)
 
-    if absorbOrNullify < 0 then -- Return early since the rest of the calculations are not needed if we absorbed/nullified.
+    if damage <= 0 then -- Return early since the rest of the calculations are not needed if we absorbed/nullified.
         return damage
     end
 
@@ -520,8 +510,9 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         damage = target:physicalDmgTaken(damage, damageType)
     elseif attackType == xi.attackType.MAGICAL then
         local element = utils.clamp(damageType - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
-        damage = math.floor(damage * xi.spells.damage.calculateTMDA(target, element))
-        damage = math.floor(damage * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
+        damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, element, true))
+        damage = math.floor(damage * xi.spells.damage.calculateNullification(target, element, true, false))
         damage = math.floor(target:handleSevereDamage(damage, false))
     elseif attackType == xi.attackType.BREATH then
         -- Handle absorb messaging
@@ -812,4 +803,13 @@ xi.mobskills.calculateDuration = function(tp, minimum, maximum)
     end
 
     return minimum + (maximum - minimum) * (tp - 1000) / 1000
+end
+
+---@param target CBaseEntity
+---@param attacker CBaseEntity
+---@param skill CMobSkill
+---@param action CAction
+---@return xi.action.knockback
+xi.mobskills.calculateKnockback = function(target, attacker, skill, action)
+    return utils.clamp(skill:getKnockback() - target:getMod(xi.mod.KNOCKBACK_REDUCTION), xi.action.knockback.NONE, xi.action.knockback.LEVEL7)
 end

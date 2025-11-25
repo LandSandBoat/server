@@ -21,9 +21,10 @@
 
 #include "weaponskill_state.h"
 
+#include "action/action.h"
 #include "ai/ai_container.h"
 #include "entities/battleentity.h"
-#include "packets/action.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -62,21 +63,24 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
 
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);
 
-    action_t action;
-    action.id         = m_PEntity->id;
-    action.actiontype = ACTION_WEAPONSKILL_START;
+    action_t action{
+        .actorId    = m_PEntity->id,
+        .actiontype = ActionCategory::SkillStart,
+        .actionid   = static_cast<uint32_t>(FourCC::SkillUse),
+        .targets    = {
+            {
+                   .actorId = PTarget->id,
+                   .results = {
+                    {
+                           .param     = m_PSkill->getID(),
+                           .messageID = MSGBASIC_READIES_WS,
+                    },
+                },
+            },
+        },
+    };
 
-    actionList_t& actionList  = action.getNewActionList();
-    actionList.ActionTargetID = PTarget->id;
-
-    actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-    actionTarget.reaction   = REACTION::NONE;
-    actionTarget.speceffect = SPECEFFECT::NONE;
-    actionTarget.animation  = 0;
-    actionTarget.param      = m_PSkill->getID();
-    actionTarget.messageID  = 43;
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 }
 
 CWeaponSkill* CWeaponSkillState::GetSkill()
@@ -126,7 +130,11 @@ bool CWeaponSkillState::Update(timer::time_point tick)
             SpendCost();
 
             m_PEntity->OnWeaponSkillFinished(*this, action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            // Only send packet if action was populated (e.g. interrupts return early)
+            if (!action.targets.empty())
+            {
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+            }
 
             // Reset Restraint bonus and trackers on weaponskill use
             if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
@@ -137,7 +145,7 @@ bool CWeaponSkillState::Update(timer::time_point tick)
                 m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
             }
 
-            if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
+            if (action.actiontype == ActionCategory::SkillFinish) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
             {
                 // only send lua the WS events if we are in range
                 uint32 weaponskillVar    = PTarget->GetLocalVar("weaponskillHit");
@@ -152,32 +160,9 @@ bool CWeaponSkillState::Update(timer::time_point tick)
                 }
             }
         }
-        else // Mob is dead before we could finish WS, generate interrupt for WS
+        else
         {
-            // Could not reproduce on retail due to server tick rate, this entire block is assumed.
-            // Ideally, you would ready a WS then have the mob die to either a DoT or a JA like Quick Draw/Jump and dump the packet.
-            // To the best of our knowledge this would produce a similar-enough effect to cancel the WS animation
-            // Essentially, very similar to "too far away" and casting out of range spell cancellation, with no message.
-            action.actiontype        = ACTION_MAGIC_FINISH;
-            action.actionid          = 28787; // Some hardcoded magic for interrupts
-            actionList_t& actionList = action.getNewActionList();
-
-            if (PTarget)
-            {
-                actionList.ActionTargetID = PTarget->id;
-            }
-            else // Dead code? PTarget should probably never be nullptr.
-            {
-                actionList.ActionTargetID = 0;
-            }
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-            actionTarget.animation = 0x1FC;
-            actionTarget.messageID = 0;
-            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
-
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            // There used to be specific handling here for the Weaponskill interrupt, but it was assumed and should not be reintroduced without a test and a proper capture.
         }
 
         auto delay   = m_PSkill->getAnimationTime(); // TODO: Is delay time a fixed number if the weaponskill is used out of range?

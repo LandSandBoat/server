@@ -5,7 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('initialAbility', 1)
 end

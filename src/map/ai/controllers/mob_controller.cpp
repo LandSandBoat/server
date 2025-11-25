@@ -352,7 +352,7 @@ auto CMobController::MobSkill(int listId) -> bool
 
         auto skillList{ battleutils::GetMobSkillList(listId) };
 
-        if (auto overrideSkill = luautils::OnMobWeaponSkillPrepare(PMob, PTarget); overrideSkill > 0)
+        if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget); overrideSkill > 0)
         {
             skillList = { overrideSkill };
         }
@@ -496,7 +496,7 @@ auto CMobController::TryCastSpell() -> bool
 
     // Try to get an override spell from the script (if available)
     auto PSpellTarget            = PTarget ? PTarget : PMob;
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PSpellTarget, chosenSpellId);
+    auto possibleOverriddenSpell = luautils::OnMobSpellChoose(PMob, PSpellTarget, chosenSpellId);
     if (possibleOverriddenSpell.has_value())
     {
         chosenSpellId = possibleOverriddenSpell;
@@ -831,16 +831,13 @@ void CMobController::Move()
                                 {
                                     auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
 
-                                    // clang-format off
-                                position_t new_pos
-                                {
-                                    PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
-                                    PTarget->loc.p.y,
-                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
-                                    0,
-                                    0
-                                };
-                                    // clang-format on
+                                    position_t new_pos{
+                                        PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
+                                        PTarget->loc.p.y,
+                                        PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
+                                        0,
+                                        0,
+                                    };
 
                                     if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                     {

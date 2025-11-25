@@ -8,7 +8,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, true)
-    GetNPCByID(ID.npc.BASTOK_7_1_QM):setPos(newPosition.x, newPosition.y, newPosition.z)
+    local bastokMissionQM = GetNPCByID(ID.npc.BASTOK_7_1_QM)
+    if bastokMissionQM then
+        bastokMissionQM:setPos(newPosition.x, newPosition.y, newPosition.z)
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -39,12 +42,21 @@ zoneObject.onGameHour = function(zone)
     local qm2 = GetNPCByID(ID.npc.BASTOK_7_1_QM)
     local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, false)
     -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
-    if moongate1 and moongate2 then
-        if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
+    if
+        moongate1 and
+        moongate2
+    then
+        if
+            (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
+            (vanadielHour >= 18 or vanadielHour < 6)
+        then
             if moongate1:getLocalVar('romaeveActive') == 0 then
                 -- Loop over the affected NPCs: Moongates, bridges and fountain
                 for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                    GetNPCByID(i):setAnimation(xi.anim.OPEN_DOOR) -- Open them
+                    local npc = GetNPCByID(i)
+                    if npc then
+                        npc:setAnimation(xi.anim.OPEN_DOOR) -- Open them
+                    end
                 end
 
                 moongate2:setUntargetable(true)
@@ -56,7 +68,10 @@ zoneObject.onGameHour = function(zone)
         elseif vanadielHour == 6 then
             if moongate1:getLocalVar('romaeveActive') == 1 then
                 for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                    GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
+                    local npc = GetNPCByID(i)
+                    if npc then
+                        npc:setAnimation(xi.anim.CLOSE_DOOR) -- Close them
+                    end
                 end
 
                 moongate2:setUntargetable(false)

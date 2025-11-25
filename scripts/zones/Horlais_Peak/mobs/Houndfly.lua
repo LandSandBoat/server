@@ -6,8 +6,13 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.LULLABY_MEVA, 500)
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    -- Only uses Venom
+    return xi.mobSkill.VENOM_1
 end
 
 entity.onMobDeath = function(mob, player, optParams)

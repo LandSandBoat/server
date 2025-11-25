@@ -124,7 +124,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('justSpawned', 1)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob)
+entity.onMobMobskillChoose = function(mob, target)
     if mob:getAnimationSub() >= 1 then
         return xi.mobSkill.FORCEFUL_BLOW -- Will ONLY use Forceful Blow when it's weapon is broken.
     end

@@ -288,6 +288,7 @@ enum class Mod
     SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // Movement speed modifiers in use order.
+    // See CBattleEntity::UpdateSpeed
     MOUNT_MOVE                = 972,  // % Mount Movement Speed
     MOVE_SPEED_STACKABLE      = 75,   // Additive modifier. Applied before multipliers. Gear movement speed penalties.
     MOVE_SPEED_WEIGHT_PENALTY = 77,   // Multiplicative modifier. For Gravity and curse.
@@ -1116,12 +1117,14 @@ enum class Mod
 
     MOGHANCEMENT_GIL_BONUS_P = 1158, // Kill shot gil bonus (yes, really)
 
+    KNOCKBACK_REDUCTION = 1172, // Reduces distance knocked +? gear. See Knockback enum.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1172 and onward
+    // SPARE IDs: 1173 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -20,6 +20,9 @@
 */
 
 #include "weapon_skill.h"
+
+#include "enums/action/animation.h"
+
 #include <cstring>
 
 CWeaponSkill::CWeaponSkill(const uint16 id)
@@ -163,9 +166,9 @@ bool CWeaponSkill::isElemental() const
     return m_Element != 0;
 }
 
-uint8 CWeaponSkill::getAnimationId() const
+auto CWeaponSkill::getAnimationId() const -> ActionAnimation
 {
-    return m_AnimationId;
+    return static_cast<ActionAnimation>(m_AnimationId);
 }
 
 timer::duration CWeaponSkill::getAnimationTime()

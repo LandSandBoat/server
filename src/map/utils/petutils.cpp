@@ -1680,12 +1680,13 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         return;
     }
 
-    // clang-format off
-        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
+    auto maybePetData = std::find_if(
+        g_PPetList.begin(),
+        g_PPetList.end(),
+        [PetID](Pet_t* t)
         {
             return t->PetID == PetID;
         });
-    // clang-format on
 
     if (maybePetData == g_PPetList.end())
     {

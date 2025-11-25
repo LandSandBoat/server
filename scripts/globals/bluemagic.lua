@@ -137,13 +137,9 @@ end
 
 -- Get hitrate
 local function calculateHitrate(attacker, target, bonusacc)
-    local acc     = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2 + (attacker:getMainLvl() - target:getMainLvl()) * 4 + bonusacc
-    local eva     = target:getEVA()
-    local hitrate = (75 + (acc - eva) / 2) / 100
-
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    -- your mainhand may not be a sword, so hit rate would vary here
+    -- TODO: verify hit rate of physical blue magic with different weapons
+    return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonusacc + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2, xi.attackAnimation.RIGHT_ATTACK, false)
 end
 
 -- Get the effect of ecosystem correlation
@@ -299,6 +295,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         hitsdone = hitsdone + 1
     end
 
+    finaldmg = math.floor(finaldmg * xi.spells.damage.calculateDamageAdjustment(target, true, false, false, false))
+
     if finaldmg <= 0 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
@@ -390,8 +388,9 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
 
     -- Early returns
     if
-        target:isUndead() or
-        xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement()) == 0 -- Drain spells cannot be absorbed, but they can be nullified.
+        xi.spells.damage.calculateAbsorption(target, spell:getElement(), true) ~= 1 or
+        xi.spells.damage.calculateNullification(target, spell:getElement(), true, false) ~= 1 or
+        target:isUndead()
     then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
@@ -436,7 +435,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     end
 
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateTMDA(target, spellElement))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
 
     -- MP drain
@@ -496,9 +495,9 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     -- Multipliers
     local correlationMultiplier       = 1 + calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
     local breathSDT                   = 1 + caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100
-
-    local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spellElement)
-    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
+    local absorb                      = xi.spells.damage.calculateAbsorption(target, spellElement, false)
+    local nullify                     = xi.spells.damage.calculateNullification(target, spellElement, false, true)
+    local targetMagicDamageAdjustment = xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(spell)
     local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
@@ -531,13 +530,10 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     dmg = math.floor(dmg * areaOfEffectResistance)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
-    if nukeAbsorbOrNullify > 0 then
+    if absorb ~= 1 and nullify ~= 1 then
         local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, dmg)
         dmg          = math.floor(dmg * nukeWallFactor)
     end
-
-    -- Apply damage
-    dmg = target:breathDmgTaken(dmg)
 
     -- Handle Magic Absorb message and HP recovery.
     if dmg < 0 then
@@ -546,6 +542,8 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 
         return dmg
     end
+
+    dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     -- Final adjustments.
     if dmg > 0 then
@@ -582,8 +580,9 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
-        local absorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-        dmg                   = math.floor(dmg * absorbOrNullify)
+        local absorb   = xi.spells.damage.calculateAbsorption(target, spell:getElement(), true)
+        local nullify  = xi.spells.damage.calculateNullification(target, spell:getElement(), true, false)
+        dmg            = math.floor(dmg * absorb * nullify)
 
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
@@ -591,9 +590,6 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
-
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spell:getElement())
-        dmg                               = math.floor(dmg * targetMagicDamageAdjustment)
 
         dmg = utils.oneforall(target, dmg)
     end

@@ -22,46 +22,62 @@ local content = Battlefield:new({
     },
 })
 
--- TODO: Shroom-in-Cap Mechanic
 content:addEssentialMobs({ 'Toadpillow', 'Toadsquab', 'Toadbolster', 'Toadcushion' })
 
 content.loot =
 {
     {
-        { itemId = xi.item.KING_TRUFFLE, weight = 1000 }, -- king_truffle
+        { itemId = xi.item.GIL,                    weight = 1000, amount = 4000 },
     },
 
     {
-        { itemId = xi.item.JUG_OF_SEEDBED_SOIL, weight = 1000 }, -- jug_of_seedbed_soil
+        { itemId = xi.item.KING_TRUFFLE,           weight = 250 },
+        { itemId = xi.item.WOOZYSHROOM,            weight = 250 },
+        { itemId = xi.item.DANCESHROOM,            weight = 250 },
+        { itemId = xi.item.SLEEPSHROOM,            weight = 250 },
     },
 
     {
-        { itemId = xi.item.NONE,             weight = 200 }, -- nothing
-        { itemId = xi.item.MAGICIANS_SHIELD, weight = 200 }, -- magicians_shield
-        { itemId = xi.item.MERCENARYS_TARGE, weight = 200 }, -- mercenarys_targe
-        { itemId = xi.item.BEATERS_ASPIS,    weight = 200 }, -- beaters_aspis
-        { itemId = xi.item.PILFERERS_ASPIS,  weight = 200 }, -- pilferers_aspis
+        { itemId = xi.item.NONE,                   weight = 250 },
+        { itemId = xi.item.MERCENARYS_TARGE,       weight = 250 },
+        { itemId = xi.item.BEATERS_ASPIS,          weight = 250 },
+        { itemId = xi.item.PILFERERS_ASPIS,        weight = 250 },
+    },
+
+        {
+        { itemId = xi.item.NONE,                   weight = 250 },
+        { itemId = xi.item.TRIMMERS_MANTLE,        weight = 250 },
+        { itemId = xi.item.GENIN_MANTLE,           weight = 250 },
+        { itemId = xi.item.WARLOCKS_MANTLE,        weight = 250 },
     },
 
     {
-        { itemId = xi.item.NONE,            weight = 250 }, -- nothing
-        { itemId = xi.item.TRIMMERS_MANTLE, weight = 250 }, -- trimmers_mantle
-        { itemId = xi.item.GENIN_MANTLE,    weight = 250 }, -- genin_mantle
-        { itemId = xi.item.WARLOCKS_MANTLE, weight = 250 }, -- warlocks_mantle
+        { itemId = xi.item.NONE,                   weight = 800 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
+        { itemId = xi.item.IRON_INGOT,             weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
+        { itemId = xi.item.ELM_LOG,                weight =  20 },
     },
 
     {
-        { itemId = xi.item.NONE,                  weight = 625 }, -- nothing
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
-        { itemId = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
-        { itemId = xi.item.SCROLL_OF_ERASE,       weight = 125 }, -- scroll_of_erase
+        { itemId = xi.item.NONE,                   weight = 500 },
+        { itemId = xi.item.KING_TRUFFLE,           weight = 125 },
+        { itemId = xi.item.WOOZYSHROOM,            weight = 125 },
+        { itemId = xi.item.DANCESHROOM,            weight = 125 },
+        { itemId = xi.item.SLEEPSHROOM,            weight = 125 },
     },
 
     {
-        { itemId = xi.item.NONE,            weight = 250 }, -- nothing
-        { itemId = xi.item.MANNEQUIN_HEAD,  weight = 250 }, -- mannequin_head
-        { itemId = xi.item.MANNEQUIN_BODY,  weight = 250 }, -- mannequin_body
-        { itemId = xi.item.MANNEQUIN_HANDS, weight = 250 }, -- mannequin_hands
+        { itemId = xi.item.NONE,                   weight = 100 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 300 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight = 300 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 300 },
     },
 }
 

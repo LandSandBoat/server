@@ -299,25 +299,25 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
         ++it;
     }
 
-    // clang-format off
-    xi::eraseIf(pending_sessions_, [&](auto &pair)
-    {
-        auto& map_session_data = pair.second;
-
-        auto now = timer::now();
-
-        if (now > map_session_data->last_update + std::chrono::seconds(timeoutSetting))
+    xi::eraseIf(
+        pending_sessions_,
+        [&](auto& pair)
         {
-            ShowDebug(fmt::format("Clearing map server pending session for pending char ID: '{}'", map_session_data->charID));
+            auto& map_session_data = pair.second;
 
-            db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", map_session_data->charID);
+            auto now = timer::now();
 
-            return true; // Erase
-        }
+            if (now > map_session_data->last_update + std::chrono::seconds(timeoutSetting))
+            {
+                ShowDebug(fmt::format("Clearing map server pending session for pending char ID: '{}'", map_session_data->charID));
 
-        return false; // Keep
-    });
-    // clang-format on
+                db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", map_session_data->charID);
+
+                return true; // Erase
+            }
+
+            return false; // Keep
+        });
 }
 
 void MapSessionContainer::destroySession(IPP ipp)

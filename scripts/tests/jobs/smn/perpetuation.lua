@@ -226,4 +226,11 @@ describe('Avatar perpetuation', function()
             verifyPerpetuationCost(player, cost)
         end
     end)
+
+    it('is 0 with Astral Flow', function()
+        player:spawnPet(xi.petId.IFRIT)
+        player.actions:useAbility(player, xi.jobAbility.ASTRAL_FLOW)
+        xi.test.world:tickEntity(player)
+        verifyPerpetuationCost(player, 0)
+    end)
 end)

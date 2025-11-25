@@ -188,8 +188,8 @@ auto GetCharToUpdate(uint32 primary, uint32 tertiary) -> CCharEntity*
 
     for (const auto PZone : g_PZoneList | std::views::values)
     {
-        // clang-format off
-            PZone->ForEachChar([primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
+        PZone->ForEachChar(
+            [primary, tertiary, &PPrimary, &PSecondary, &PTertiary](CCharEntity* PChar)
             {
                 if (!PPrimary)
                 {
@@ -207,7 +207,6 @@ auto GetCharToUpdate(uint32 primary, uint32 tertiary) -> CCharEntity*
                     }
                 }
             });
-        // clang-format on
 
         if (PPrimary)
         {
@@ -276,38 +275,38 @@ void LoadNPCList(const std::vector<uint16>& zoneIds)
     TracyZoneScoped;
     ShowInfo("Loading NPCs");
 
-    // clang-format off
-        for (const auto zoneId : zoneIds)
-        {
-            Async::getInstance()->submit([zoneId]()
+    for (const auto zoneId : zoneIds)
+    {
+        Async::getInstance()->submit(
+            [zoneId]()
             {
                 TracyZoneScoped;
 
                 auto* PZone = g_PZoneList[zoneId];
 
                 const auto query = "SELECT "
-                    "content_tag, "
-                    "npcid, "
-                    "npc_list.name, "
-                    "npc_list.polutils_name, "
-                    "pos_rot, "
-                    "pos_x, "
-                    "pos_y, "
-                    "pos_z, "
-                    "flag, "
-                    "speed, "
-                    "speedsub, "
-                    "animation, "
-                    "animationsub, "
-                    "namevis, "
-                    "status, "
-                    "entityFlags,"
-                    "look,"
-                    "name_prefix, "
-                    "widescan "
-                    "FROM npc_list INNER JOIN zone_settings "
-                    "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
-                    "WHERE ((npcid & 0xFFF000) >> 12) = ?";
+                                   "content_tag, "
+                                   "npcid, "
+                                   "npc_list.name, "
+                                   "npc_list.polutils_name, "
+                                   "pos_rot, "
+                                   "pos_x, "
+                                   "pos_y, "
+                                   "pos_z, "
+                                   "flag, "
+                                   "speed, "
+                                   "speedsub, "
+                                   "animation, "
+                                   "animationsub, "
+                                   "namevis, "
+                                   "status, "
+                                   "entityFlags,"
+                                   "look,"
+                                   "name_prefix, "
+                                   "widescan "
+                                   "FROM npc_list INNER JOIN zone_settings "
+                                   "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
+                                   "WHERE ((npcid & 0xFFF000) >> 12) = ?";
 
                 const auto rset = db::preparedStmt(query, zoneId);
                 if (rset && rset->rowsCount())
@@ -361,30 +360,31 @@ void LoadNPCList(const std::vector<uint16>& zoneIds)
                     }
                 }
             });
-        }
-    // clang-format on
+    }
 
     Async::getInstance()->wait();
 
     ShowInfo("Loading NPC scripts");
     // handle npc spawn functions after they're all done loading
-    // clang-format off
-        ForEachZone(zoneIds, [](CZone* PZone)
+    ForEachZone(
+        zoneIds,
+        [](CZone* PZone)
         {
             // NOTE: We have to do this in two passes because NPCs may rely on eachother.
             //     : So load them all, then spawn them all.
-            PZone->ForEachNpc([](CNpcEntity* PNpc)
-            {
-                // Cache NPC Lua
-                luautils::OnEntityLoad(PNpc);
-            });
+            PZone->ForEachNpc(
+                [](CNpcEntity* PNpc)
+                {
+                    // Cache NPC Lua
+                    luautils::OnEntityLoad(PNpc);
+                });
 
-            PZone->ForEachNpc([](CNpcEntity* PNpc)
-            {
-                luautils::OnNpcSpawn(PNpc);
-            });
+            PZone->ForEachNpc(
+                [](CNpcEntity* PNpc)
+                {
+                    luautils::OnNpcSpawn(PNpc);
+                });
         });
-    // clang-format on
 }
 
 /************************************************************************
@@ -401,17 +401,17 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
     const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
     const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-    // clang-format off
-        for (const auto zoneId : zoneIds)
-        {
-            Async::getInstance()->submit([normalLevelRangeMin, normalLevelRangeMax, zoneId]()
+    for (const auto zoneId : zoneIds)
+    {
+        Async::getInstance()->submit(
+            [normalLevelRangeMin, normalLevelRangeMax, zoneId]()
             {
                 TracyZoneScoped;
 
                 auto* PZone = g_PZoneList[zoneId];
 
                 // Load spawnsets
-                const auto spawnSetQuery = "SELECT spawnsetid, maxspawns FROM mob_spawn_sets WHERE zoneid = ?";
+                const auto spawnSetQuery  = "SELECT spawnsetid, maxspawns FROM mob_spawn_sets WHERE zoneid = ?";
                 const auto spawnSetResult = db::preparedStmt(spawnSetQuery, zoneId);
                 if (spawnSetResult && spawnSetResult->rowsCount())
                 {
@@ -424,28 +424,28 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 }
 
                 const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
-                    "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
-                    "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
-                    "ecosystemID, mobradius, speed, "
-                    "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
-                    "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
-                    "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
-                    "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
-                    "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
-                    "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
-                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
-                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
-                    "mob_family_system.charmable, "
-                    "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
-                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
-                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
-                    "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
-                    "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
-                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
-                    "LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) "
-                    "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
-                    "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
-                    "AND mob_groups.zoneid = ?";
+                                   "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                                   "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
+                                   "ecosystemID, mobradius, speed, "
+                                   "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
+                                   "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+                                   "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+                                   "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+                                   "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
+                                   "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
+                                   "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
+                                   "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
+                                   "mob_family_system.charmable, "
+                                   "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
+                                   "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                                   "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
+                                   "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                                   "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
+                                   "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
+                                   "LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) "
+                                   "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
+                                   "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
+                                   "AND mob_groups.zoneid = ?";
 
                 const auto rset = db::preparedStmt(query, zoneId);
                 if (rset && rset->rowsCount())
@@ -458,9 +458,9 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                         {
                             CMobEntity* PMob = new CMobEntity;
 
-                            PMob->name = rset->get<std::string>("mobname");
+                            PMob->name       = rset->get<std::string>("mobname");
                             PMob->packetName = rset->get<std::string>("packet_name");
-                            PMob->id   = rset->get<uint32>("mobid");
+                            PMob->id         = rset->get<uint32>("mobid");
 
                             PMob->targid = static_cast<uint16>(PMob->id & 0x0FFF);
 
@@ -652,17 +652,17 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                     }
                 }
             });
-        }
-    // clang-format on
+    }
 
     Async::getInstance()->wait();
 
     ShowInfo("Loading Mob scripts");
     // handle mob Initialize functions after they're all loaded
-    // clang-format off
-        ForEachZone(zoneIds, [](CZone* PZone)
+    ForEachZone(
+        zoneIds,
+        [](CZone* PZone)
         {
-            for (auto &spawnGroup : PZone->m_spawnGroups)
+            for (auto& spawnGroup : PZone->m_spawnGroups)
             {
                 spawnGroup.second->fillSpawnPool();
                 if (!spawnGroup.second->isValid(PZone))
@@ -671,51 +671,53 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 }
             }
 
-            PZone->ForEachMob([](CMobEntity* PMob)
-            {
-                // Cache Mob Lua
-                luautils::OnEntityLoad(PMob);
-            });
+            PZone->ForEachMob(
+                [](CMobEntity* PMob)
+                {
+                    // Cache Mob Lua
+                    luautils::OnEntityLoad(PMob);
+                });
 
-            PZone->ForEachMob([&PZone](CMobEntity* PMob)
-            {
-                mobutils::AddSqlModifiers(PMob);
+            PZone->ForEachMob(
+                [&PZone](CMobEntity* PMob)
+                {
+                    mobutils::AddSqlModifiers(PMob);
 
-                luautils::OnMobInitialize(PMob);
-                PZone->FindPartyForMob(PMob);
+                    luautils::OnMobInitialize(PMob);
+                    PZone->FindPartyForMob(PMob);
 
-                luautils::ApplyMixins(PMob);
-                luautils::ApplyZoneMixins(PMob);
+                    luautils::ApplyMixins(PMob);
+                    luautils::ApplyZoneMixins(PMob);
 
-                PMob->saveModifiers();
-                PMob->saveMobModifiers();
-            });
+                    PMob->saveModifiers();
+                    PMob->saveMobModifiers();
+                });
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
-            PZone->ForEachMob([](CMobEntity* PMob)
-            {
-                // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
-                // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
-                if (!PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
+            PZone->ForEachMob(
+                [](CMobEntity* PMob)
                 {
-                    PMob->m_AllowRespawn = true;
-                    if (!PMob->m_spawnGroup || PMob->CanSpawnFromGroup())
-                    {
-                        PMob->Spawn();
-                    }
-                }
-                else
-                {
-                    PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
-                    // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
-                    if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                    // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
+                    // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
+                    if (!PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
                     {
                         PMob->m_AllowRespawn = true;
+                        if (!PMob->m_spawnGroup || PMob->CanSpawnFromGroup())
+                        {
+                            PMob->Spawn();
+                        }
                     }
-                }
-            });
+                    else
+                    {
+                        PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
+                        // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
+                        if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                        {
+                            PMob->m_AllowRespawn = true;
+                        }
+                    }
+                });
         });
-    // clang-format on
 }
 
 /************************************************************************
@@ -798,28 +800,28 @@ void LoadZones(const std::vector<uint16>& zoneIds)
     ShowInfo("NOTE: LOS meshes wont be loaded on the 32-bit build. They take up enough memory to crash to process.");
 #endif // ENV32BIT
 
-    // clang-format off
-        for (const auto zoneId : zonesToLoad)
-        {
-            Async::getInstance()->submit([zoneId]()
+    for (const auto zoneId : zonesToLoad)
+    {
+        Async::getInstance()->submit(
+            [zoneId]()
             {
                 // NOTE: It is not safe to use SQL in this parallel loop!
                 g_PZoneList[zoneId]->LoadNavMesh();
             });
 #ifndef ENV32BIT
-            // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
-            // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
-            // TODO: Find a sane way around this
-            Async::getInstance()->submit([zoneId]()
+        // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
+        // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
+        // TODO: Find a sane way around this
+        Async::getInstance()->submit(
+            [zoneId]()
             {
                 // NOTE: It is not safe to use SQL in this parallel loop!
                 g_PZoneList[zoneId]->LoadZoneLos();
             });
 #endif // !ENV32BIT
-        }
+    }
 
-        Async::getInstance()->wait();
-    // clang-format on
+    Async::getInstance()->wait();
 
     // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
     for (const auto zoneId : zonesToLoad)

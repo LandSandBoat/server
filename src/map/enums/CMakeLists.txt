@@ -4,8 +4,7 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/action/info.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/knockback.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/modifier.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/action/proc_add_effect.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/action/proc_skillchain.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/action/proc_kind.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/react_kind.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/resolution.h
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message_area.h

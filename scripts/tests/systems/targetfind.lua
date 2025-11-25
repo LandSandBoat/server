@@ -65,6 +65,7 @@ describe('TargetFind', function()
         xi.test.world:skipTime(5)
 
         -- P1 and P2 should get hit. P3 should not.
+        m:called()
         assert(p1:getHPP() ~= 100, 'P1 was not hit by Spike Flail')
         assert(p2:getHPP() ~= 100, 'P2 was not hit by Spike Flail')
         assert(p3:getHPP() == 100, 'P3 was hit by Spike Flail')
@@ -100,6 +101,7 @@ describe('TargetFind', function()
         xi.test.world:skipTime(5)
 
         -- P1, P2 and P3 should get hit.
+        m:called()
         assert(p1:getHPP() ~= 100, 'P1 was not hit by Spike Flail')
         assert(p2:getHPP() ~= 100, 'P2 was not hit by Spike Flail')
         assert(p3:getHPP() ~= 100, 'P3 was not hit by Spike Flail')

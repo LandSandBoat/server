@@ -1,3 +1,5 @@
+name: Reusable Docker Build Workflow
+
 on:
   workflow_call:
     inputs:
@@ -9,6 +11,15 @@ on:
         description: 'Compiler to build with.'
         required: true
         type: string
+      compiler_version:
+        description: 'Compiler version to build with.'
+        required: false
+        type: string
+      clang_format_version:
+        description: 'Version of clang-format to use for devtools (sanity checks).'
+        required: false
+        type: string
+        default: '20'
       build_type:
         description: 'CMake build type.'
         required: true
@@ -41,7 +52,7 @@ on:
 
 jobs:
   Docker_Build:
-    name: ${{ format('Docker Build ({0}, {1}, {2})', inputs.os, inputs.compiler, inputs.build_type) }}
+    name: ${{ format('docker-{0}, {1}{2}, {3}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type) }}
     runs-on: ubuntu-latest
     env:
       BUILDX_NO_DEFAULT_ATTESTATIONS: 1 # https://github.com/orgs/community/discussions/45969
@@ -78,7 +89,6 @@ jobs:
         id: setup_buildx
 
       - name: Restore build cache
-        id: restore_build_cache
         if: ${{ !inputs.save_cache }}
         uses: actions/cache/restore@v4
         env:
@@ -88,9 +98,9 @@ jobs:
           path: |
             ${{ format('/tmp/{0}', env.build_id) }}
             ${{ format('/tmp/{0}', env.ccache_id) }}
-          key: ${{ format('buildcache-docker-{0}-{1}-{2}-{3}-{4}', inputs.os, inputs.compiler, inputs.build_type, env.cmake_hash, env.source_hash) }}
+          key: ${{ format('buildcache-docker-{0}-{1}{2}-{3}-{4}-{5}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash, env.source_hash) }}
           restore-keys: |
-            ${{ format('buildcache-docker-{0}-{1}-{2}-{3}-', inputs.os, inputs.compiler, inputs.build_type, env.cmake_hash) }}
+            ${{ format('buildcache-docker-{0}-{1}{2}-{3}-{4}-', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash) }}
 
       - name: Cache build
         id: cache_build
@@ -103,9 +113,9 @@ jobs:
           path: |
             ${{ format('/tmp/{0}', env.build_id) }}
             ${{ format('/tmp/{0}', env.ccache_id) }}
-          key: ${{ format('buildcache-docker-{0}-{1}-{2}-{3}-{4}', inputs.os, inputs.compiler, inputs.build_type, env.cmake_hash, env.source_hash) }}
+          key: ${{ format('buildcache-docker-{0}-{1}{2}-{3}-{4}-{5}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash, env.source_hash) }}
           restore-keys: |
-            ${{ format('buildcache-docker-{0}-{1}-{2}-{3}-', inputs.os, inputs.compiler, inputs.build_type, env.cmake_hash) }}
+            ${{ format('buildcache-docker-{0}-{1}{2}-{3}-{4}-', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash) }}
 
       - name: Inject cache into container
         uses: reproducible-containers/buildkit-cache-dance@v3.2.0
@@ -154,6 +164,8 @@ jobs:
           file: ${{ format('./docker/{0}.Dockerfile', inputs.os) }}
           target: devtools
           platforms: linux/amd64,linux/arm64,linux/arm/v7
+          build-args: |
+            LLVM_VERSION=${{ inputs.clang_format_version }}
           push: true
           tags: ${{ format('ghcr.io/{0}/devtools:{1}', env.REPO_OWNER, inputs.os) }}
 
@@ -166,9 +178,10 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
           annotations: ${{ steps.docker-meta.outputs.annotations }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64${{ inputs.publish && ',linux/arm64,linux/arm/v7' || '' }}
           build-args: |
             COMPILER=${{ inputs.compiler }}
+            ${{ format('{0}={1}', startsWith(inputs.compiler, 'gcc') && 'GCC_VERSION' || 'LLVM_VERSION', inputs.compiler_version) }}
             CMAKE_BUILD_TYPE=${{ inputs.build_type }}
             TRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }}
             PCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }}

@@ -171,13 +171,13 @@ void PrintPacketList(CCharEntity* PChar)
         sortedVec.emplace_back(entry);
     }
 
-    // clang-format off
-        std::sort(sortedVec.begin(), sortedVec.end(),
+    std::sort(
+        sortedVec.begin(),
+        sortedVec.end(),
         [](pair_t& a, pair_t& b)
         {
             return a.second < b.second;
         });
-    // clang-format on
 
     // Print
     std::string output;

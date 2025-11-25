@@ -850,19 +850,19 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
 
 bool CBattlefield::CheckInProgress()
 {
-    // clang-format off
-    ForEachEnemy([&](CMobEntity* PMob)
-    {
-        if (!PMob->PEnmityContainer->GetEnmityList()->empty())
-        {
-            if (m_Status == BATTLEFIELD_STATUS_OPEN)
-            {
-                SetStatus(BATTLEFIELD_STATUS_LOCKED);
-            }
-            m_Attacked = true;
-        }
-    });
-    // clang-format on
+    ForEachEnemy([&](const CMobEntity* PMob)
+                 {
+                     // Any entry in enmity list or currently chasing someone
+                     if (!PMob->PEnmityContainer->GetEnmityList()->empty() || PMob->GetBattleTargetID())
+                     {
+                         if (m_Status == BATTLEFIELD_STATUS_OPEN)
+                         {
+                             SetStatus(BATTLEFIELD_STATUS_LOCKED);
+                         }
+
+                         m_Attacked = true;
+                     }
+                 });
 
     // mobs might have 0 enmity but we wont allow anymore players to enter
     return m_Status != BATTLEFIELD_STATUS_OPEN;

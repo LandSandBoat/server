@@ -35,17 +35,15 @@
 
 #include "time_server.h"
 
-// clang-format off
-
 CLatentEffectContainer::CLatentEffectContainer(CCharEntity* PEntity)
 : m_POwner(PEntity)
 {
 }
 
 /************************************************************************
-*                                                                       *
-* Adds new latent effect to the character.                              *
-*                                                                       *
+ *                                                                       *
+ * Adds new latent effect to the character.                              *
+ *                                                                       *
  ************************************************************************/
 
 void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot)
@@ -60,21 +58,28 @@ void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLa
 }
 
 /************************************************************************
-*                                                                       *
-* Removes all latent effects associated with a specified slot           *
-*                                                                       *
+ *                                                                       *
+ * Removes all latent effects associated with a specified slot           *
+ *                                                                       *
  ************************************************************************/
 
 void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
 {
-    m_LatentEffectList.erase(std::remove_if(m_LatentEffectList.begin(), m_LatentEffectList.end(), [slot](auto& latent) { return latent.GetSlot() == slot; }),
-                             m_LatentEffectList.end());
+    m_LatentEffectList.erase(
+        std::remove_if(
+            m_LatentEffectList.begin(),
+            m_LatentEffectList.end(),
+            [slot](auto& latent)
+            {
+                return latent.GetSlot() == slot;
+            }),
+        m_LatentEffectList.end());
 }
 
 /************************************************************************
-*                                                                       *
-* Returns true if no latents for slot are inactive                      *
-*                                                                       *
+ *                                                                       *
+ * Returns true if no latents for slot are inactive                      *
+ *                                                                       *
  ************************************************************************/
 
 bool CLatentEffectContainer::HasAllLatentsActive(uint8 slot)
@@ -113,382 +118,383 @@ bool CLatentEffectContainer::DelLatentEffect(LATENT conditionID, uint16 conditio
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by HP and activates them if      *
-* the conditions are met.                                               *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by HP and activates them if      *
+ * the conditions are met.                                               *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsHP()
 {
     // TODO: hook into this from anywhere HP changes
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::HP_UNDER_PERCENT:
-            case LATENT::HP_OVER_PERCENT:
-            case LATENT::HP_UNDER_TP_UNDER_100:
-            case LATENT::HP_OVER_TP_UNDER_100:
-            case LATENT::SANCTION_REGEN_BONUS:
-            case LATENT::SIGIL_REGEN_BONUS:
-            case LATENT::HP_OVER_VISIBLE_GEAR:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::HP_UNDER_PERCENT:
+                case LATENT::HP_OVER_PERCENT:
+                case LATENT::HP_UNDER_TP_UNDER_100:
+                case LATENT::HP_OVER_TP_UNDER_100:
+                case LATENT::SANCTION_REGEN_BONUS:
+                case LATENT::SIGIL_REGEN_BONUS:
+                case LATENT::HP_OVER_VISIBLE_GEAR:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by TP and activates them if      *
-* the conditions are met.                                               *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by TP and activates them if      *
+ * the conditions are met.                                               *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsTP()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::TP_UNDER:
-            case LATENT::TP_OVER:
-            case LATENT::HP_UNDER_TP_UNDER_100:
-            case LATENT::HP_OVER_TP_UNDER_100:
-            case LATENT::SANCTION_REFRESH_BONUS:
-            case LATENT::SIGIL_REFRESH_BONUS:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::TP_UNDER:
+                case LATENT::TP_OVER:
+                case LATENT::HP_UNDER_TP_UNDER_100:
+                case LATENT::HP_OVER_TP_UNDER_100:
+                case LATENT::SANCTION_REFRESH_BONUS:
+                case LATENT::SIGIL_REFRESH_BONUS:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are occur during WS and activates them        *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are occur during WS and activates them        *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWS(bool isDuringWs)
 {
-    ProcessLatentEffects([this, isDuringWs](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this, isDuringWs](CLatentEffect& latentEffect)
         {
-            case LATENT::DURING_WS:
-                return ProcessLatentEffect(latentEffect, isDuringWs);
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::DURING_WS:
+                    return ProcessLatentEffect(latentEffect, isDuringWs);
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
+ *                                                                       *
  * Checks all latents that are affected by MP and activates them if     *
  * the conditions are met.                                              *
-*                                                                       *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsMP()
 {
     // TODO: hook into this from anywhere MP changes
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::MP_UNDER_PERCENT:
-            case LATENT::MP_UNDER:
-            case LATENT::MP_OVER:
-            case LATENT::WEAPON_DRAWN_MP_OVER:
-            case LATENT::MP_UNDER_VISIBLE_GEAR:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::MP_UNDER_PERCENT:
+                case LATENT::MP_UNDER:
+                case LATENT::MP_OVER:
+                case LATENT::WEAPON_DRAWN_MP_OVER:
+                case LATENT::MP_UNDER_VISIBLE_GEAR:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
+ *                                                                       *
  * Checks all latents for a given slot (ie. on equip)                   *
-*                                                                       *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsEquip(uint8 slot)
 {
-    ProcessLatentEffects([this, slot](CLatentEffect& latentEffect) {
-        if (latentEffect.GetSlot() == slot)
+    ProcessLatentEffects(
+        [this, slot](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
-        return false;
-    });
+            if (latentEffect.GetSlot() == slot)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
+ *                                                                       *
  * Checks all latents that are affected by drawn weapon and activates   *
  * them if the conditions are met.                                      *
-*                                                                       *
+ *                                                                       *
  ************************************************************************/
 
 // easy: when animationType changes to ANIMATION_ATTACK or to something else
 void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
 {
-    ProcessLatentEffects([this, drawn](CLatentEffect& latentEffect) {
-        if (drawn)
+    ProcessLatentEffects(
+        [this, drawn](CLatentEffect& latentEffect)
         {
-            switch (latentEffect.GetConditionsID())
+            if (drawn)
             {
-                case LATENT::WEAPON_DRAWN:
-                    return latentEffect.Activate();
-                    break;
-                case LATENT::WEAPON_DRAWN_MP_OVER:
-                    if (m_POwner->health.mp > latentEffect.GetConditionsValue())
-                    {
+                switch (latentEffect.GetConditionsID())
+                {
+                    case LATENT::WEAPON_DRAWN:
                         return latentEffect.Activate();
-                    }
-                    else
-                    {
+                        break;
+                    case LATENT::WEAPON_DRAWN_MP_OVER:
+                        if (m_POwner->health.mp > latentEffect.GetConditionsValue())
+                        {
+                            return latentEffect.Activate();
+                        }
+                        else
+                        {
+                            return latentEffect.Deactivate();
+                        }
+                        break;
+                    case LATENT::WEAPON_DRAWN_HP_UNDER:
+                        if (m_POwner->health.hp < latentEffect.GetConditionsValue())
+                        {
+                            return latentEffect.Activate();
+                        }
+                        else
+                        {
+                            return latentEffect.Deactivate();
+                        }
+                        break;
+                    case LATENT::WEAPON_SHEATHED:
                         return latentEffect.Deactivate();
-                    }
-                    break;
-                case LATENT::WEAPON_DRAWN_HP_UNDER:
-                    if (m_POwner->health.hp < latentEffect.GetConditionsValue())
-                    {
-                        return latentEffect.Activate();
-                    }
-                    else
-                    {
-                        return latentEffect.Deactivate();
-                    }
-                    break;
-                case LATENT::WEAPON_SHEATHED:
-                    return latentEffect.Deactivate();
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-        else
-        {
-            switch (latentEffect.GetConditionsID())
+            else
             {
-                case LATENT::WEAPON_DRAWN:
-                case LATENT::WEAPON_DRAWN_MP_OVER:
-                case LATENT::WEAPON_DRAWN_HP_UNDER:
-                    return latentEffect.Deactivate();
-                    break;
-                case LATENT::WEAPON_SHEATHED:
-                    return latentEffect.Activate();
-                    break;
-                default:
-                    break;
+                switch (latentEffect.GetConditionsID())
+                {
+                    case LATENT::WEAPON_DRAWN:
+                    case LATENT::WEAPON_DRAWN_MP_OVER:
+                    case LATENT::WEAPON_DRAWN_HP_UNDER:
+                        return latentEffect.Deactivate();
+                        break;
+                    case LATENT::WEAPON_SHEATHED:
+                        return latentEffect.Activate();
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
+ *                                                                       *
  * Checks all latents that are affected by status effects and activates *
  * them if the conditions are met.                                      *
-*                                                                       *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsStatusEffect()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::STATUS_EFFECT_ACTIVE:
-            case LATENT::WEATHER_CONDITION:
-            case LATENT::WEATHER_ELEMENT:
-            case LATENT::NATION_CONTROL:
-            case LATENT::IN_GARRISON:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::STATUS_EFFECT_ACTIVE:
+                case LATENT::WEATHER_CONDITION:
+                case LATENT::WEATHER_ELEMENT:
+                case LATENT::NATION_CONTROL:
+                case LATENT::IN_GARRISON:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
+ *                                                                       *
  * Checks latents that are affected by food effects. Usage:             *
  * LATENT_FOOD_ACTIVE: (49,foodItemId)                                  *
  * LATENT_NO_FOOD_ACTIVE: (14,0)                                        *
-*                                                                       *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsFoodEffect()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::FOOD_ACTIVE:
-            case LATENT::NO_FOOD_ACTIVE:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::FOOD_ACTIVE:
+                case LATENT::NO_FOOD_ACTIVE:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by rolls or songs and activates  *
-* them if the conditions are met.                                       *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by rolls or songs and activates  *
+ * them if the conditions are met.                                       *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsRollSong()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::SONG_ROLL_ACTIVE:
-            case LATENT::ELEVEN_ROLL_ACTIVE:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::SONG_ROLL_ACTIVE:
+                case LATENT::ELEVEN_ROLL_ACTIVE:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by day or moon and activates     *
-* them if the conditions are met.                                       *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by day or moon and activates     *
+ * them if the conditions are met.                                       *
+ *                                                                       *
  ************************************************************************/
 
 // probably call this at 00:00 vana time only
 void CLatentEffectContainer::CheckLatentsDay()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::TIME_OF_DAY)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::TIME_OF_DAY)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks latents affected by the moon phase and activates them          *
-*                                                                       *
+ *                                                                       *
+ * Checks latents affected by the moon phase and activates them          *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsMoonPhase()
 {
     TracyZoneScoped;
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::MOON_PHASE)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::MOON_PHASE)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks latents that are affected by the day of the week and           *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks latents that are affected by the day of the week and           *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeekDay()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::FIRESDAY:
-            case LATENT::EARTHSDAY:
-            case LATENT::WATERSDAY:
-            case LATENT::WINDSDAY:
-            case LATENT::DARKSDAY:
-            case LATENT::ICEDAY:
-            case LATENT::LIGHTNINGSDAY:
-            case LATENT::LIGHTSDAY:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::FIRESDAY:
+                case LATENT::EARTHSDAY:
+                case LATENT::WATERSDAY:
+                case LATENT::WINDSDAY:
+                case LATENT::DARKSDAY:
+                case LATENT::ICEDAY:
+                case LATENT::LIGHTNINGSDAY:
+                case LATENT::LIGHTSDAY:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks latents that are affected the hour and activates them          *
-* if the conditions are met.                                            *
-*                                                                       *
+ *                                                                       *
+ * Checks latents that are affected the hour and activates them          *
+ * if the conditions are met.                                            *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsHours()
 {
     TracyZoneScoped;
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::HOUR_OF_DAY)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::HOUR_OF_DAY)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by party members and             *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by party members and             *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t trustCount)
 {
-    ProcessLatentEffects([this, members, trustCount](CLatentEffect& latentEffect) {
-        size_t totalMembers = members + trustCount;
-
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this, members, trustCount](CLatentEffect& latentEffect)
         {
-            case LATENT::PARTY_MEMBERS:
-                if (latentEffect.GetConditionsValue() <= totalMembers)
-                {
-                    return latentEffect.Activate();
-                }
-                else
-                {
-                    return latentEffect.Deactivate();
-                }
-            case LATENT::PARTY_MEMBERS_IN_ZONE:
-                if (latentEffect.GetConditionsValue() <= totalMembers)
-                {
-                    auto inZone = 0;
-                    for (size_t m = 0; m < members; ++m)
-                    {
-                        auto* PMember = dynamic_cast<CCharEntity*>(m_POwner->PParty->members.at(m));
-                        if (PMember != nullptr && PMember->getZone() == m_POwner->getZone())
-                        {
-                            inZone++;
-                        }
-                    }
+            size_t totalMembers = members + trustCount;
 
-                    auto* PLeader = dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
-                    if (PLeader != nullptr && m_POwner->getZone() == PLeader->getZone())
-                    {
-                        inZone = inZone + static_cast<int>(trustCount);
-                    }
-
-                    if (inZone == latentEffect.GetConditionsValue())
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::PARTY_MEMBERS:
+                    if (latentEffect.GetConditionsValue() <= totalMembers)
                     {
                         return latentEffect.Activate();
                     }
@@ -496,97 +502,132 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t tru
                     {
                         return latentEffect.Deactivate();
                     }
-                }
-                else
-                {
-                    return latentEffect.Deactivate();
-                }
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+                case LATENT::PARTY_MEMBERS_IN_ZONE:
+                    if (latentEffect.GetConditionsValue() <= totalMembers)
+                    {
+                        auto inZone = 0;
+                        for (size_t m = 0; m < members; ++m)
+                        {
+                            auto* PMember = dynamic_cast<CCharEntity*>(m_POwner->PParty->members.at(m));
+                            if (PMember != nullptr && PMember->getZone() == m_POwner->getZone())
+                            {
+                                inZone++;
+                            }
+                        }
+
+                        auto* PLeader = dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
+                        if (PLeader != nullptr && m_POwner->getZone() == PLeader->getZone())
+                        {
+                            inZone = inZone + static_cast<int>(trustCount);
+                        }
+
+                        if (inZone == latentEffect.GetConditionsValue())
+                        {
+                            return latentEffect.Activate();
+                        }
+                        else
+                        {
+                            return latentEffect.Deactivate();
+                        }
+                    }
+                    else
+                    {
+                        return latentEffect.Deactivate();
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 void CLatentEffectContainer::CheckLatentsPartyJobs()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::JOB_IN_PARTY)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::JOB_IN_PARTY)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by an avatar in party and        *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by an avatar in party and        *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPartyAvatar()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::AVATAR_IN_PARTY)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::AVATAR_IN_PARTY)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by job level and                 *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by job level and                 *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsJobLevel()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::JOB_MULTIPLE:
-            case LATENT::JOB_MULTIPLE_AT_NIGHT:
-            case LATENT::JOB_LEVEL_BELOW:
-            case LATENT::JOB_LEVEL_ABOVE:
-            case LATENT::IN_GARRISON:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::JOB_MULTIPLE:
+                case LATENT::JOB_MULTIPLE_AT_NIGHT:
+                case LATENT::JOB_LEVEL_BELOW:
+                case LATENT::JOB_LEVEL_ABOVE:
+                case LATENT::IN_GARRISON:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by players pet type and          *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by players pet type and          *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPetType()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::PET_ID)
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
+            if (latentEffect.GetConditionsID() == LATENT::PET_ID)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
 
-        return false;
-    });
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by time of vana day and          *
-* activates them if the conditions are met.                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by time of vana day and          *
+ * activates them if the conditions are met.                             *
+ *                                                                       *
  ************************************************************************/
 
 // will probably only call this at transition points in the day
@@ -596,53 +637,57 @@ void CLatentEffectContainer::CheckLatentsTime()
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents that are affected by weapon skill points           *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents that are affected by weapon skill points           *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeaponBreak(uint8 slot)
 {
-    ProcessLatentEffects([this, slot](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT::WEAPON_BROKEN && latentEffect.GetConditionsValue() == slot)
+    ProcessLatentEffects(
+        [this, slot](CLatentEffect& latentEffect)
         {
-            return ProcessLatentEffect(latentEffect);
-        }
-        return false;
-    });
+            if (latentEffect.GetConditionsID() == LATENT::WEAPON_BROKEN && latentEffect.GetConditionsValue() == slot)
+            {
+                return ProcessLatentEffect(latentEffect);
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents regarding current zone                             *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents regarding current zone                             *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsZone()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::ZONE:
-            case LATENT::IN_ASSAULT:
-            case LATENT::IN_DYNAMIS:
-            case LATENT::IN_ADOULIN:
-            case LATENT::WEATHER_CONDITION:
-            case LATENT::WEATHER_ELEMENT:
-            case LATENT::NATION_CONTROL:
-            case LATENT::NATION_CITIZEN:
-            case LATENT::ZONE_HOME_NATION:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::ZONE:
+                case LATENT::IN_ASSAULT:
+                case LATENT::IN_DYNAMIS:
+                case LATENT::IN_ADOULIN:
+                case LATENT::WEATHER_CONDITION:
+                case LATENT::WEATHER_ELEMENT:
+                case LATENT::NATION_CONTROL:
+                case LATENT::NATION_CITIZEN:
+                case LATENT::ZONE_HOME_NATION:
+                    return ProcessLatentEffect(latentEffect);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 /************************************************************************
-*                                                                       *
-* Checks all latents regarding current weather                          *
-*                                                                       *
+ *                                                                       *
+ * Checks all latents regarding current weather                          *
+ *                                                                       *
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeather()
 {
@@ -660,36 +705,40 @@ void CLatentEffectContainer::CheckLatentsWeather()
 
 void CLatentEffectContainer::CheckLatentsWeather(Weather weather)
 {
-    ProcessLatentEffects([this, weather](CLatentEffect& latent) {
-        if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
+    ProcessLatentEffects(
+        [this, weather](CLatentEffect& latent)
         {
-            auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
-            return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
-        }
-        else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
-        {
-            auto element = battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather);
-            return ApplyLatentEffect(latent, latent.GetConditionsValue() == static_cast<uint16_t>(element));
-        }
-        return false;
-    });
+            if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
+            {
+                auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
+                return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
+            }
+            else if (latent.GetConditionsID() == LATENT::WEATHER_CONDITION)
+            {
+                auto element = battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather);
+                return ApplyLatentEffect(latent, latent.GetConditionsValue() == static_cast<uint16_t>(element));
+            }
+            return false;
+        });
 }
 
 void CLatentEffectContainer::CheckLatentsTargetChange()
 {
-    ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+    ProcessLatentEffects(
+        [this](CLatentEffect& latentEffect)
         {
-            case LATENT::SIGNET_BONUS:
-            case LATENT::VS_ECOSYSTEM:
-            case LATENT::VS_FAMILY:
-            case LATENT::VS_SUPERFAMILY:
-                return ProcessLatentEffect(latentEffect);
-            default:
-                break;
-        }
-        return false;
-    });
+            switch (latentEffect.GetConditionsID())
+            {
+                case LATENT::SIGNET_BONUS:
+                case LATENT::VS_ECOSYSTEM:
+                case LATENT::VS_FAMILY:
+                case LATENT::VS_SUPERFAMILY:
+                    return ProcessLatentEffect(latentEffect);
+                default:
+                    break;
+            }
+            return false;
+        });
 }
 
 // Process the latent effects container and apply a logic function responsible for
@@ -734,7 +783,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         return false;
     }
 
-    vanadiel_time::time_point vanaTime   = vanadiel_time::now();
+    vanadiel_time::time_point vanaTime = vanadiel_time::now();
 
     // find the latent type from the enum and find the expression to tests againts
     switch (latentEffect.GetConditionsID())
@@ -779,7 +828,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         case LATENT::SIGNET_BONUS:
         {
             CBattleEntity* PTarget = m_POwner->GetBattleTarget();
-            expression = PTarget != nullptr &&
+            expression             = PTarget != nullptr &&
                          m_POwner->GetMLevel() >= PTarget->GetMLevel() &&
                          m_POwner->loc.zone != nullptr &&
                          m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
@@ -819,7 +868,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         {
             size_t partyCount = 0;
             size_t trustCount = 0;
-            auto* PLeader = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
+            auto*  PLeader    = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
             if (PLeader)
             {
                 trustCount = PLeader->PTrusts.size();
@@ -861,9 +910,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
                     {
                         auto* PPet = static_cast<CPetEntity*>(member->PPet);
                         if (
-                                !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
-                                (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
-                            )
+                            !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                            (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21))
                         {
                             expression = true;
                             break;
@@ -875,9 +923,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             {
                 auto* PPet = (CPetEntity*)m_POwner->PPet;
                 if (
-                        !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
-                        (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)
-                    )
+                    !PPet->isDead() && PPet->m_PetID < 21 && // is a live avatar
+                    (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21))
                 {
                     expression = true;
                 }
@@ -1203,8 +1250,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         }
         case LATENT::ZONE_HOME_NATION:
         {
-            auto  nationRegion = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
-            auto  region       = zoneutils::GetCurrentRegion(playerZoneID);
+            auto nationRegion = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
+            auto region       = zoneutils::GetCurrentRegion(playerZoneID);
 
             switch (nationRegion)
             {
@@ -1292,5 +1339,3 @@ bool CLatentEffectContainer::ApplyLatentEffect(CLatentEffect& effect, bool expre
         return effect.Deactivate();
     }
 }
-
-// clang-format on

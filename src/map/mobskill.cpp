@@ -20,6 +20,11 @@
 */
 
 #include "mobskill.h"
+
+#include "entities/mobentity.h"
+#include "enums/action/animation.h"
+#include "enums/action/knockback.h"
+
 #include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
@@ -39,7 +44,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_TP(0)
 , m_HP(0)
 , m_HPP(0)
-, m_knockback(0)
+, m_knockback(Knockback::None)
 , m_primarySkillchain(0)
 , m_secondarySkillchain(0)
 , m_tertiarySkillchain(0)
@@ -196,9 +201,9 @@ uint16 CMobSkill::getID() const
     return m_ID;
 }
 
-uint16 CMobSkill::getAnimationID() const
+auto CMobSkill::getAnimationID() const -> ActionAnimation
 {
-    return m_AnimID;
+    return static_cast<ActionAnimation>(m_AnimID);
 }
 
 int16 CMobSkill::getTP() const
@@ -335,7 +340,7 @@ int16 CMobSkill::getParam() const
     return m_Param;
 }
 
-uint8 CMobSkill::getKnockback() const
+auto CMobSkill::getKnockback() const -> Knockback
 {
     return m_knockback;
 }
@@ -356,7 +361,7 @@ void CMobSkill::setParam(int16 value)
     m_Param = value;
 }
 
-void CMobSkill::setKnockback(uint8 knockback)
+void CMobSkill::setKnockback(const Knockback knockback)
 {
     m_knockback = knockback;
 }
@@ -404,4 +409,24 @@ void CMobSkill::setSecondarySkillchain(uint8 skillchain)
 void CMobSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
+}
+
+auto CMobSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_attackType;
+}
+
+void CMobSkill::setAttackType(const ATTACK_TYPE attackType)
+{
+    m_attackType = attackType;
+}
+
+auto CMobSkill::isCritical() const -> bool
+{
+    return m_isCritical;
+}
+
+void CMobSkill::setCritical(const bool isCritical)
+{
+    m_isCritical = isCritical;
 }

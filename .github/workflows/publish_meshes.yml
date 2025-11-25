@@ -1,4 +1,4 @@
-name: publish_meshes
+name: Publish Meshes Docker Image
 
 on:
   push:
@@ -12,6 +12,7 @@ on:
 
 jobs:
   Meshes_Build:
+    name: Build and Publish ximeshes Docker Image
     runs-on: ubuntu-latest
     steps:
       - name: Lowercase repository owner

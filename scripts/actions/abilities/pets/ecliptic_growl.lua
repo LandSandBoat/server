@@ -14,21 +14,25 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local moon = VanadielMoonPhase()
-    local buffvalue = 1
-    if moon > 90 then
-        buffvalue = 7
-    elseif moon > 75 then
-        buffvalue = 6
-    elseif moon > 60 then
-        buffvalue = 5
-    elseif moon > 40 then
-        buffvalue = 4
-    elseif moon > 25 then
-        buffvalue = 3
-    elseif moon > 10 then
-        buffvalue = 2
-    end
+    local moonCycle = getVanadielMoonCycle()
+
+    local cycleBuffs =
+    {
+        [xi.moonCycle.NEW_MOON]                = 1,
+        [xi.moonCycle.LESSER_WAXING_CRESCENT]  = 2,
+        [xi.moonCycle.GREATER_WAXING_CRESCENT] = 3,
+        [xi.moonCycle.FIRST_QUARTER]           = 4,
+        [xi.moonCycle.LESSER_WAXING_GIBBOUS]   = 5,
+        [xi.moonCycle.GREATER_WAXING_GIBBOUS]  = 6,
+        [xi.moonCycle.FULL_MOON]               = 7,
+        [xi.moonCycle.GREATER_WANING_GIBBOUS]  = 6,
+        [xi.moonCycle.LESSER_WANING_GIBBOUS]   = 5,
+        [xi.moonCycle.THIRD_QUARTER]           = 4,
+        [xi.moonCycle.GREATER_WANING_CRESCENT] = 3,
+        [xi.moonCycle.LESSER_WANING_CRESCENT]  = 2,
+    }
+
+    local buffValue = cycleBuffs[moonCycle]
 
     target:delStatusEffect(xi.effect.STR_BOOST)
     target:delStatusEffect(xi.effect.DEX_BOOST)
@@ -37,13 +41,13 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     target:delStatusEffect(xi.effect.MND_BOOST)
     target:delStatusEffect(xi.effect.CHR_BOOST)
 
-    target:addStatusEffect(xi.effect.STR_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.DEX_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.VIT_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.AGI_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.INT_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.MND_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.CHR_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.STR_BOOST, buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.DEX_BOOST, buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.VIT_BOOST, buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.AGI_BOOST, 8-buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.INT_BOOST, 8-buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.MND_BOOST, 8-buffValue, 0, duration)
+    target:addStatusEffect(xi.effect.CHR_BOOST, 8-buffValue, 0, duration)
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.STATUS_BOOST)

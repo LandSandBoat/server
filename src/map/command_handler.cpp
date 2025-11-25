@@ -214,16 +214,15 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
             std::string name       = PChar->name;
             std::string cmdlinestr = autotranslate::replaceBytes(commandline);
 
-            // clang-format off
-            Async::getInstance()->submit([name, cmdname, cmdlinestr]()
-            {
-                const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
-                if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmdname), db::escapeString(cmdlinestr)))
+            Async::getInstance()->submit(
+                [name, cmdname, cmdlinestr]()
                 {
-                    ShowError("cmdhandler::call: Failed to log GM command.");
-                }
-            });
-            // clang-format on
+                    const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
+                    if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmdname), db::escapeString(cmdlinestr)))
+                    {
+                        ShowError("cmdhandler::call: Failed to log GM command.");
+                    }
+                });
         }
     }
 

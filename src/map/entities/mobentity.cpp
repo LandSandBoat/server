@@ -43,7 +43,6 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
-#include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"

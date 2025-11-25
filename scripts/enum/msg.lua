@@ -174,6 +174,10 @@ xi.msg.basic =
     JA_MAGIC_BURST                  = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE              = 743, -- <user> uses <ability>. <target>'s enmity decreases.
     JA_TH_EFFECTIVENESS             = 608, -- <user> uses <ability>. Treasure Hunter effectiveness against <target> increases to <amount>.
+    USE_JA_ON                       = 119, -- <entity> uses <ability> on <entity>.
+    CHOCOBO_JIG                     = 126, -- <entity> uses <ability>. <entity> movement speed increases.
+    WILD_FLOURISH_TP                = 452, -- <entity> uses <ability>. <entity> regains <number> TP.
+    VIOLENT_FLOURISH_STUN           = 522, -- <entity> uses <ability>. The <entity> takes <number> points of damage and is stunned.
 
     -- "Fortified against" messages
     FORTIFIED_DEMONS                = 149, -- <target> is fortified against demons.

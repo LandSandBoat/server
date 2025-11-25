@@ -10,25 +10,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local moon = VanadielMoonPhase()
-    local buffvalue = 1
+    local moonCycle = getVanadielMoonCycle()
 
-    if moon > 90 then
-        buffvalue = 31
-    elseif moon > 75 then
-        buffvalue = 26
-    elseif moon > 60 then
-        buffvalue = 21
-    elseif moon > 40 then
-        buffvalue = 16
-    elseif moon > 25 then
-        buffvalue = 11
-    elseif moon > 10 then
-        buffvalue = 6
-    end
+    local cycleBuffs =
+    {
+        [xi.moonCycle.NEW_MOON]                = 1,
+        [xi.moonCycle.LESSER_WAXING_CRESCENT]  = 6,
+        [xi.moonCycle.GREATER_WAXING_CRESCENT] = 11,
+        [xi.moonCycle.FIRST_QUARTER]           = 16,
+        [xi.moonCycle.LESSER_WAXING_GIBBOUS]   = 21,
+        [xi.moonCycle.GREATER_WAXING_GIBBOUS]  = 26,
+        [xi.moonCycle.FULL_MOON]               = 31,
+        [xi.moonCycle.GREATER_WANING_GIBBOUS]  = 26,
+        [xi.moonCycle.LESSER_WANING_GIBBOUS]   = 21,
+        [xi.moonCycle.THIRD_QUARTER]           = 16,
+        [xi.moonCycle.GREATER_WANING_CRESCENT] = 11,
+        [xi.moonCycle.LESSER_WANING_CRESCENT]  = 6,
+    }
 
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    local buffValue = cycleBuffs[moonCycle]
+
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffValue, 0, 180)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffValue, 0, 180)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_2)
     return 0
 end

@@ -27,19 +27,14 @@ content.loot =
     },
 
     {
-        quantity = 2,
-        { itemId = xi.item.NONE,                   weight =  250 },
-        { itemId = xi.item.GIANT_FEMUR,            weight =  250 },
-        { itemId = xi.item.SLICE_OF_DHALMEL_MEAT,  weight =  250 },
-        { itemId = xi.item.DHALMEL_HIDE,           weight =  250 },
+        { itemId = xi.item.SLICE_OF_DHALMEL_MEAT,  weight = 1000 },
     },
 
     {
         { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.MERCENARY_MANTLE,       weight = 188 },
-        { itemId = xi.item.BEATERS_MANTLE,         weight = 187 },
-        { itemId = xi.item.ESQUIRES_MANTLE,        weight = 187 },
-        { itemId = xi.item.HEALERS_MANTLE,         weight = 188 },
+        { itemId = xi.item.BEATERS_MANTLE,         weight = 250 },
+        { itemId = xi.item.ESQUIRES_MANTLE,        weight = 250 },
+        { itemId = xi.item.HEALERS_MANTLE,         weight = 250 },
     },
 
     {
@@ -50,40 +45,41 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 500 },
-        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 100 },
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 100 },
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 100 },
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 100 },
-        { itemId = xi.item.SCROLL_OF_REGEN,        weight = 100 },
-    },
-
-    {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.SQUARE_OF_VELVET_CLOTH, weight = 250 },
-        { itemId = xi.item.SQUARE_OF_LINEN_CLOTH,  weight = 250 },
-        { itemId = xi.item.SQUARE_OF_WOOL_CLOTH,   weight = 250 },
-    },
-
-    {
         { itemId = xi.item.NONE,                   weight = 800 },
-        { itemId = xi.item.SARDONYX,               weight =  25 },
-        { itemId = xi.item.AMBER_STONE,            weight =  25 },
-        { itemId = xi.item.LAPIS_LAZULI,           weight =  25 },
-        { itemId = xi.item.TOURMALINE,             weight =  25 },
-        { itemId = xi.item.CLEAR_TOPAZ,            weight =  25 },
-        { itemId = xi.item.AMETHYST,               weight =  25 },
-        { itemId = xi.item.LIGHT_OPAL,             weight =  25 },
-        { itemId = xi.item.ONYX,                   weight =  25 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
+        { itemId = xi.item.IRON_INGOT,             weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
+        { itemId = xi.item.ELM_LOG,                weight =  20 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                   weight = 500 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 71 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight = 71 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 143 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 72 },
+        { itemId = xi.item.SCROLL_OF_REGEN,        weight = 143 },
+    },
+
+    {
+        { itemId = xi.item.SQUARE_OF_VELVET_CLOTH, weight = 333 },
+        { itemId = xi.item.SQUARE_OF_LINEN_CLOTH,  weight = 333 },
+        { itemId = xi.item.SQUARE_OF_WOOL_CLOTH,   weight = 334 },
+    },
+
+    {
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 1000 },
     },
 
     {
         { itemId = xi.item.NONE,                   weight = 950 },
         { itemId = xi.item.MANNEQUIN_HEAD,         weight =  50 },
-    },
-
-    {
-        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 1000 },
     },
 }
 

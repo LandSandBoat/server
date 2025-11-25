@@ -34,7 +34,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('gohSequence', 0)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local gohSequence = mob:getLocalVar('gohSequence')
 
     if gohSequence == 1 then

@@ -328,7 +328,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     -- Zipacna heavily prefers using Crystal Rain and Crystal Weapon
     local roll = math.random(1, 100)
 

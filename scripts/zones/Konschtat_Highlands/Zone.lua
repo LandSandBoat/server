@@ -52,21 +52,21 @@ zoneObject.onGameHour = function(zone)
     local hour = VanadielHour()
 
     if hour < 5 or hour >= 17 then
-        local phase = VanadielMoonPhase()
+        local moonCycle = getVanadielMoonCycle()
         local haty = GetMobByID(ID.mob.HATY)
         local vran = GetMobByID(ID.mob.BENDIGEIT_VRAN)
         local time = GetSystemTime()
 
         if
             haty and
-            phase >= 90 and
+            moonCycle == xi.moonCycle.FULL_MOON and
             not haty:isSpawned() and
             time > haty:getLocalVar('cooldown')
         then
             SpawnMob(ID.mob.HATY)
         elseif
             vran and
-            phase <= 10 and
+            moonCycle == xi.moonCycle.NEW_MOON and
             not vran:isSpawned() and
             time > vran:getLocalVar('cooldown')
         then

@@ -31,7 +31,7 @@ entity.onMobEngage = function(mob, target)
     DespawnMob(mobId + 1) -- Punctured Percy
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.AERO_III,
@@ -57,6 +57,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.TORNADO,
         xi.magic.spell.WATER_III,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

@@ -58,6 +58,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         GAKI              = GetFirstID('Gaki'),
         KUJHU_GRANITESKIN = GetFirstID('KuJhu_Graniteskin'),
         MAAT              = GetFirstID('Maat'),
+        METSANNEITSYT     = GetFirstID('Metsanneitsyt'),
         OSSCHAART         = GetFirstID('Osschaart'),
         PLATOON_SCORPION  = GetFirstID('Platoon_Scorpion'),
         QUEEN_JELLY       = GetFirstID('Queen_Jelly'),

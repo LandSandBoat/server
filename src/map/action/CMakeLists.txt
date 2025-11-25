@@ -1,0 +1,7 @@
+set(ACTION_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/action.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/action.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/interrupts.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/interrupts.cpp
+    PARENT_SCOPE
+)

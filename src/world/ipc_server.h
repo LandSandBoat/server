@@ -30,7 +30,9 @@
 #include "world_engine.h"
 #include "zone_settings.h"
 
-#include <nonstd/jthread.hpp>
+#include <atomic>
+#include <thread>
+
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 

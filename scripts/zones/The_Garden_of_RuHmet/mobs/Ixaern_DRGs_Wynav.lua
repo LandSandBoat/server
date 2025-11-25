@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, { specials = { { id = xi.jsa.SOUL_VOICE, hpp = math.random(10, 75) } } })
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.ARMYS_PAEON_V,
@@ -31,6 +31,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.CARNAGE_ELEGY,
         xi.magic.spell.MAGIC_FINALE,
     }
+
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         -- Virelai possible.
         table.insert(spellList, xi.magic.spell.MAIDENS_VIRELAI)
