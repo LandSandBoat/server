@@ -966,7 +966,7 @@ INSERT INTO `mob_skills` VALUES (948,650,'tachi_kasha',0,0.0,7.0,2000,0,4,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (949,693,'flame_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (950,652,'flame_blast_alt',0,0.0,18.0,2000,0,4,4,0,0,0,0,0); -- KS99_Wyrm regular airborne attack
 INSERT INTO `mob_skills` VALUES (951,653,'hurricane_wing',1,0.0,30.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (952,654,'spike_flail',2,0.0,30.0,2000,2000,4,0,0,4,0,0,0); -- Alliance only targeting version of spike flail
+INSERT INTO `mob_skills` VALUES (952,654,'spike_flail',2,30.0,30.0,2000,2000,4,0,0,4,0,0,0); -- Alliance only targeting version of spike flail
 INSERT INTO `mob_skills` VALUES (953,655,'dragon_breath',4,0.0,18.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (954,656,'touchdown',1,0.0,30.0,2000,0,2049,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (955,657,'flame_blast',1,0.0,30.0,2000,1500,4,0,0,0,0,0,0); -- KS99_Wyrm airborne fire AoE
@@ -1054,7 +1054,7 @@ INSERT INTO `mob_skills` VALUES (1036,737,'maats_bash',0,0.0,7.0,2000,0,4,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (1037,781,'fireball_1',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1038,782,'fireball_2',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1039,653,'hurricane_wing',1,0.0,30.0,2000,1500,4,8,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1040,654,'spike_flail',2,0.0,40.0,2000,2000,4,8,0,4,0,0,0); -- (nidhogg) outside alliance targeting version of spike flail
+INSERT INTO `mob_skills` VALUES (1040,654,'spike_flail',2,30.0,30.0,2000,2000,4,8,0,4,0,0,0); -- (nidhogg) outside alliance targeting version of spike flail
 INSERT INTO `mob_skills` VALUES (1041,655,'dragon_breath',4,0.0,18.0,2000,1500,4,8,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1042,786,'landing_to_the_surface',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1043,787,'giant_fireball_flying',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
