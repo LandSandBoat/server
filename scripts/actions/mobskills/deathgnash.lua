@@ -12,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local damage = target:getHP() - 1
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, nil, false)
     target:takeDamage(damage, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     mob:resetEnmity(target)
 

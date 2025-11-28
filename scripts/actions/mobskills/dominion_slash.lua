@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod  = 1
     local ftp     = 3.25 -- fTP and fTP scaling unknown. TODO: capture ftp
     local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2, nil, info.allHitsBlockedWithShieldMastery)
 
     -- Damage is HIGHLY conflicting.  Witnessed anywhere from 300 to 900.
     -- TP DMG VARIES can sort of account for this, but I feel like it's still not right.

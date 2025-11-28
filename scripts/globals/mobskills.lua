@@ -123,7 +123,7 @@ end
 ---@param hitslanded number
 ---@param finaldmg number
 ---@param params physicalMobSkillHitParams
----@return integer, integer, boolean
+---@return integer, integer, boolean, boolean
 local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, params)
     -- Determine if this hit is critical
     -- TODO: Remove CRIT_VARIES from existing mob skills and replace with params.canCrit
@@ -146,15 +146,15 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
 
     hitdamage = hitdamage * pDif
 
+    -- also handle blocking
+    local blockedWithShieldMastery = false
+
     -- if a ranged physical mobskill then cannot be parried or guarded
     if
         params.isRanged or
         (not xi.combat.physical.isParried(target, mob) and
         not xi.combat.physical.isGuarded(target, mob))
     then
-        -- also handle blocking
-        local blockedWithShieldMastery = false
-
         -- TODO: we took damage, so handle stoneskin and phalanx here
         -- TODO: apply PDT/DT/damage resistance/absorption here
 
@@ -183,14 +183,14 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
         finaldmg = finaldmg + hitdamage
     end
 
-    return hitslanded, finaldmg, isCritical
+    return hitslanded, finaldmg, isCritical, blockedWithShieldMastery
 end
 
 -- input to xi.mobskills.mobPhysicalMove
 ---@alias physicalMobSkillParam { canCrit: boolean?, isCannonball: boolean?, isRanged: boolean?}
 
 -- return value of xi.mobskills.mobPhysicalMove
----@alias physicalMobSkillRetVal { dmg: number, hitslanded: number, isCritical: boolean}
+---@alias physicalMobSkillRetVal { dmg: number, hitslanded: number, isCritical: boolean, allHitsBlockedWithShieldMastery: boolean}
 
 -- passed to handleSinglePhysicalHit inside xi.mobskills.mobPhysicalMove
 ---@alias physicalMobSkillHitParams { canCrit: boolean, tpEffect: xi.mobskills.physicalTpBonus, weaponType: xi.skill, attMod: number, applyLevelCorrection: boolean, isCannonball: boolean, isRanged: boolean}
@@ -265,6 +265,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     local hitsdone   = 1
     local hitslanded = 0
     local hitCrit    = false
+    local allHitsBlockedWithShieldMastery = true
 
     local targetSpecialAttackEvasion = target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
@@ -281,8 +282,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     -- TODO: handle Blink/Utsusemi/PD/etc
     if math.random() <= firstHitChance then
         local isCritical = false
+        local isBlockedWithShieldMastery = false
         -- use helper function check for parry guard and blocking and handle the hit
-        hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+        hitslanded, finaldmg, isCritical, isBlockedWithShieldMastery = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+
+        if not isBlockedWithShieldMastery then
+            allHitsBlockedWithShieldMastery = false
+        end
 
         hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
     end
@@ -290,8 +296,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     -- TODO: handle Blink/Utsusemi/PD/etc
     while hitsdone < numHits do
         local isCritical = false
+        local isBlockedWithShieldMastery = false
         if math.random() <= hitrate then --it hit
-            hitslanded, finaldmg, isCritical = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+            hitslanded, finaldmg, isCritical, isBlockedWithShieldMastery = handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, hitParams)
+        end
+
+        if not isBlockedWithShieldMastery then
+            allHitsBlockedWithShieldMastery = false
         end
 
         hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
@@ -315,9 +326,10 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         mob:addTP(tpReturn)
     end
 
-    returninfo.dmg        = finaldmg
-    returninfo.hitslanded = hitslanded
-    returninfo.isCritical = hitCrit
+    returninfo.dmg                             = finaldmg
+    returninfo.hitslanded                      = hitslanded
+    returninfo.isCritical                      = hitCrit
+    returninfo.allHitsBlockedWithShieldMastery = allHitsBlockedWithShieldMastery
 
     skill:setAttackType(xi.attackType.PHYSICAL)
     skill:setCritical(returninfo.isCritical)
@@ -485,9 +497,67 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, skillParams)
     return damage
 end
 
-xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackType, damageType, shadowsToRemove, hitsLanded)
+xi.mobskills.handleAbsorbedByShadows = function(damage, mob, skill, target, shadowsToRemove)
+    -- Handle shadows depending on shadow behavior / attackType
+    if
+        shadowsToRemove ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
+        shadowsToRemove ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    then
+        -- Handle Utsusemi preservation mechanic to reduce shadow consumption.
+        -- This is usually for AOE physical attacks(AOE Magic usually wipes shadows).
+        if
+            skill:isAoE() or
+            skill:isConal()
+        then
+            shadowsToRemove = MobTakeAoEShadow(mob, target, shadowsToRemove)
+        end
+
+        -- Remove shadows
+        damage = utils.takeShadows(target, damage, shadowsToRemove)
+
+        -- Dealt zero damage, so shadows took all hits.
+        if damage == 0 then
+            skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
+
+            return damage
+        end
+
+    elseif shadowsToRemove == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- Remove all shadows
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
+        target:delStatusEffect(xi.effect.THIRD_EYE)
+    end
+
+    return damage
+end
+
+xi.mobskills.handleThirdEyeAnticipation = function(mob, skill, target, attackType)
+    if
+        attackType == xi.attackType.PHYSICAL or
+        attackType == xi.attackType.RANGED
+    then
+        if not skill:isSingle() then -- Remove Third Eye. Third eye does not block AOE attacks.
+            target:delStatusEffect(xi.effect.THIRD_EYE)
+        end
+
+        -- Handle Third Eye using shadowbehav as a guide.
+        if xi.combat.physicalHitRate.checkAnticipated(mob, target) then
+            skill:setMsg(xi.msg.basic.ANTICIPATE)
+
+            return true
+        end
+    end
+
+    return false
+end
+
+xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackType, damageType, shadowsToRemove, hitsLanded, allHitsBlockedWithShieldMastery)
     if hitsLanded == nil then
         hitsLanded = 0
+    end
+
+    if allHitsBlockedWithShieldMastery == nil then
+        allHitsBlockedWithShieldMastery = false
     end
 
     -- If target has Hysteria, no message skip rest
@@ -527,50 +597,13 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         skill:setMsg(xi.msg.basic.DAMAGE)
     end
 
-    -- Handle shadows depending on shadow behavior / attackType
-    if
-        shadowsToRemove ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
-        shadowsToRemove ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-    then
-        -- Handle Utsusemi preservation mechanic to reduce shadow consumption.
-        -- This is usually for AOE physical attacks(AOE Magic usually wipes shadows).
-        if
-            skill:isAoE() or
-            skill:isConal()
-        then
-            shadowsToRemove = MobTakeAoEShadow(mob, target, shadowsToRemove)
-        end
-
-        -- Remove shadows
-        damage = utils.takeShadows(target, damage, shadowsToRemove)
-
-        -- Dealt zero damage, so shadows took all hits.
-        if damage == 0 then
-            skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
-
-            return shadowsToRemove
-        end
-
-    elseif shadowsToRemove == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- Remove all shadows
-        target:delStatusEffect(xi.effect.COPY_IMAGE)
-        target:delStatusEffect(xi.effect.BLINK)
-        target:delStatusEffect(xi.effect.THIRD_EYE)
+    damage = xi.mobskills.handleAbsorbedByShadows(damage, mob, skill, target, shadowsToRemove)
+    if damage == 0 then
+        return 0
     end
 
-    if
-        attackType == xi.attackType.PHYSICAL or
-        attackType == xi.attackType.RANGED
-    then
-        if not skill:isSingle() then -- Remove Third Eye. Third eye does not block AOE attacks.
-            target:delStatusEffect(xi.effect.THIRD_EYE)
-        end
-
-        -- Handle Third Eye using shadowbehav as a guide.
-        if xi.combat.physicalHitRate.checkAnticipated(mob, target) then
-            skill:setMsg(xi.msg.basic.ANTICIPATE)
-
-            return 0
-        end
+    if xi.mobskills.handleThirdEyeAnticipation(mob, skill, target, attackType) then
+        return 0
     end
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
@@ -622,6 +655,13 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
     if damage > 0 then
         target:updateEnmityFromDamage(mob, damage)
         target:handleAfflatusMiseryDamage(damage)
+
+        if
+            attackType == xi.attackType.PHYSICAL and
+            not allHitsBlockedWithShieldMastery
+        then
+            target:tryHitInterrupt(mob)
+        end
     end
 
     -- Calculate TP return of the mob skill.
