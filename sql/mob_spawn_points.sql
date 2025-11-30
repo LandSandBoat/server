@@ -50075,9 +50075,9 @@ INSERT INTO `mob_spawn_points` VALUES (17346670,0,'Cottontail','Cottontail',19,8
 INSERT INTO `mob_spawn_points` VALUES (17346672,0,'Sobbing_Eyes','Sobbing Eyes',20,-396.159,94.773,-64.397,46);
 INSERT INTO `mob_spawn_points` VALUES (17346673,0,'Compound_Eyes','Compound Eyes',21,-391.159,94.773,-62.397,46);
 INSERT INTO `mob_spawn_points` VALUES (17346674,0,'Compound_Eyes','Compound Eyes',21,-401.159,94.773,-66.397,46);
-INSERT INTO `mob_spawn_points` VALUES (17346676,0,'Sobbing_Eyes','Sobbing Eyes',20,-156.224,-25.236,115.573,46);
-INSERT INTO `mob_spawn_points` VALUES (17346677,0,'Compound_Eyes','Compound Eyes',21,-151.224,-25.236,117.573,46);
-INSERT INTO `mob_spawn_points` VALUES (17346678,0,'Compound_Eyes','Compound Eyes',21,-161.224,-25.236,113.573,46);
+INSERT INTO `mob_spawn_points` VALUES (17346676,0,'Sobbing_Eyes','Sobbing Eyes',20,-156.132,-25.788,115.587,46);
+INSERT INTO `mob_spawn_points` VALUES (17346677,0,'Compound_Eyes','Compound Eyes',21,-160.832,-25.59,113.587,46);
+INSERT INTO `mob_spawn_points` VALUES (17346678,0,'Compound_Eyes','Compound Eyes',21,-151.432,-25.59,117.587,46);
 INSERT INTO `mob_spawn_points` VALUES (17346680,0,'Sobbing_Eyes','Sobbing Eyes',20,83.769,-145.253,295.407,46);
 INSERT INTO `mob_spawn_points` VALUES (17346681,0,'Compound_Eyes','Compound Eyes',21,88.769,-145.253,297.407,46);
 INSERT INTO `mob_spawn_points` VALUES (17346682,0,'Compound_Eyes','Compound Eyes',21,78.769,-145.253,293.407,46);
