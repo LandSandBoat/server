@@ -4281,7 +4281,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2090,595); -- Heat Wave
 INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2090,596); -- Hellstorm
 INSERT INTO `mob_skill_lists` VALUES ('Bomb_Grow',2090,597); -- Self-destruct
 
--- Next ID : 2091
+INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,437); -- Death Ray
+INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,438); -- Hex Eye
+INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,439); -- Catharsis
+INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,440); -- Petro Gaze
+
+-- Next ID : 2092
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -103,6 +103,10 @@ xi.mobSkill =
     SANDSPIN                 =  426,
 
     GLOEOSUCCUS              =  436,
+    DEATH_RAY                =  437,
+    HEX_EYE                  =  438,
+    PETRO_GAZE               =  439,
+    CATHARSIS                =  440,
 
     MICROQUAKE               =  441, -- Mammet-800
 

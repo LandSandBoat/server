@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Horlais Peak
---  Mob: Sobbing Eyes
+--  Mob: Compound Eyes
 -- BCNM: Under Observation
 -----------------------------------
 ---@type TMobEntity
@@ -8,7 +8,6 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
@@ -26,10 +25,9 @@ entity.onMobFight = function(mob, target)
 
     -- Uses Hex Eye every 15 seconds if target is not paralyzed, once target is paralyzed, this stops
     local currentTime = GetSystemTime()
-    local lastHexeyeTime = mob:getLocalVar("lastHexeyeTime")
-
+    local lastSkillTime = mob:getLocalVar("lastHexeyeTime")
     if
-        currentTime - lastHexeyeTime >= 15 and
+        currentTime - lastSkillTime >= 15 and
         not target:hasStatusEffect(xi.effect.PARALYSIS)
     then
         mob:useMobAbility(xi.mobSkill.HEX_EYE)
@@ -55,10 +53,8 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        xi.magic.spell.FIRAGA,
-        xi.magic.spell.BINDGA,
-        xi.magic.spell.BREAKGA,
-        xi.magic.spell.STUN,
+        xi.magic.spell.FIRE_II,
+        xi.magic.spell.DRAIN,
     }
 
     return spellList[math.random(1, #spellList)]
