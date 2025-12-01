@@ -325,49 +325,38 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
     end
 
     -- Check party for trusts
-	local numPt     = 0
-	local numTrusts = 0
-	local party     = caster:getPartyWithTrusts()
+    local numPt     = 0
+    local numTrusts = 0
+    local party     = caster:getPartyWithTrusts()
 
-	for _, member in pairs(party) do	
-		if member:getObjType() == xi.objType.TRUST then
-			-- Check for same trust
-			if member:getTrustID() == spell:getID() then
-				caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
-				return -1
-			end
+    for _, member in pairs(party) do
+        if member:getObjType() == xi.objType.TRUST then
+            -- Check for same trust
+            if member:getTrustID() == spell:getID() then
+                caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
+                return -1
+            -- Check not allowed trust combinations (Shantotto I vs Shantotto II)
+            elseif type(notAllowedTrustIds) == 'number' then
+                if member:getTrustID() == notAllowedTrustIds then
+                    caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
+                    return -1
+                end
+            elseif type(notAllowedTrustIds) == 'table' then
+                for _, v in pairs(notAllowedTrustIds) do
+                    if type(v) == 'number' then
+                        if member:getTrustID() == v then
+                            caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
+                            return -1
+                        end
+                    end
+                end
+            end
 
-			-- Check not allowed trust combinations
-			if type(notAllowedTrustIds) == 'number' then
-				if member:getTrustID() == notAllowedTrustIds then
-					caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
-					return -1
-				end
-			elseif type(notAllowedTrustIds) == 'table' then
-				for _, v in pairs(notAllowedTrustIds) do
-					if member:getTrustID() == v then
-						caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
-						return -1
-					end
-				end
-			end
+            numTrusts = numTrusts + 1
+        end
 
-			numTrusts = numTrusts + 1
-		end
-
-		numPt = numPt + 1
-	end
-
------------------------------------------------------------------
--- 🎯 ***CUSTOM LIMIT: Max 2 active trusts in any situation***
------------------------------------------------------------------
-local MAX_TRUSTS = 2
-if numTrusts >= MAX_TRUSTS then
-    caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER) 
-    return -1
-end
------------------------------------------------------------------
-
+        numPt = numPt + 1
+    end
 
     -- Max party size
     if numPt >= 6 then

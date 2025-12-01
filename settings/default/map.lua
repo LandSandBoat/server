@@ -48,7 +48,7 @@ xi.settings.map =
     AH_BASE_FEE_STACKS = 4,
     AH_TAX_RATE_SINGLE = 1.0,
     AH_TAX_RATE_STACKS = 0.5,
-    AH_MAX_FEE         = 10000,
+    AH_MAX_FEE         = 1000,
 
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
@@ -81,13 +81,13 @@ xi.settings.map =
     VANADIEL_TIME_EPOCH = 0,
 
     -- For old fame calculation use .25
-    FAME_MULTIPLIER = 1.00,
+    FAME_MULTIPLIER = 2.00,
 
     -- Percentage of experience normally lost to keep upon death. 0 means full loss, where 1 means no loss.
     EXP_RETAIN = 0,
 
     -- Minimum level at which experience points can be lost
-    EXP_LOSS_LEVEL = 31,
+    EXP_LOSS_LEVEL = 1,
 
     -- Minimum level at which regional influence is lost in conquest when a player dies
     -- Level 5 and below don't lose influence: http://wiki.ffo.jp/html/498.html
@@ -100,7 +100,7 @@ xi.settings.map =
     DISABLE_GEAR_SCALING = false,
 
     -- Disables Treasure Hunter procs (Era behavior wants this true)
-    DISABLE_TREASURE_HUNTER_PROCS = false,
+    DISABLE_TREASURE_HUNTER_PROCS = true,
 
     -- Enable auto attack damage calculations in Lua
     ENABLE_AUTO_ATTACK_LUA = false,

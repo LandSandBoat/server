@@ -5,11 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    -- Set respawn time in **seconds**
-    mob:setRespawnTime(60)  -- 1 minute (adjust as you prefer)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 626, 1, xi.regime.type.GROUNDS)
 end
