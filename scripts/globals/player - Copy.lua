@@ -78,18 +78,6 @@ xi.player.charCreate = function(player)
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
         player:addItem(nationInfo.ring)
     end
-	
-	-----------------------------------------------
-    -- Give new players the PhalanxRising linkpearl
-    -----------------------------------------------
-	do
-		local LS_ID = 1 -- Replace with your LS ID
-
-		if not player:hasLinkPearl(LS_ID) then
-			player:addLinkPearl(LS_ID)
-			player:equipLinkPearl(LS_ID)
-		end
-	end
 
     -- unlock advanced jobs
     if xi.settings.main.ADVANCED_JOB_LEVEL == 0 then
@@ -130,7 +118,7 @@ xi.player.charCreate = function(player)
     -- increase starting inventory
     if xi.settings.main.START_INVENTORY > 30 then
         player:changeContainerSize(xi.inv.INVENTORY, xi.settings.main.START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY) -- Default satchel size is zero, so just set it to the setting size.
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY - 30)
     end
 
     --[[
@@ -156,7 +144,7 @@ xi.player.charCreate = function(player)
     player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
     player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
     player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
-    player:setNewPlayer(true)                          -- apply new player flag
+    player:setNewPlayer(true)                           -- apply new player flag
 end
 
 -- called by core after a player logs into the server or zones
@@ -251,8 +239,6 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- Enforce that gameLogin is always set to 0 once this method exits
     -- This assists with ensuring Abyssea visitant status is handled properly on logins
     player:setLocalVar('gameLogin', 0)
-
-    xi.xisp.onZone(player) -- XISP Change
 end
 
 xi.player.onPlayerDeath = function(player)
