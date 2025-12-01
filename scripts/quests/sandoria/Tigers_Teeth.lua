@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGERS_TEETH)
 
 quest.reward =
 {
-    gil   = 2100,
+    gil   = 10000,
     title = xi.title.FANG_FINDER,
     fame  = 30,
 }
@@ -92,7 +92,7 @@ quest.sections =
                 [572] = function(player, csid, option, npc)
                     if
                         quest:getLocalVar(player, 'Option') == 1 and
-                        npcUtil.giveCurrency(player, 'gil', 2100)
+                        npcUtil.giveCurrency(player, 'gil', 10000)
                     then
                         quest:setLocalVar(player, 'Option', 0)
                         player:confirmTrade()

@@ -78,18 +78,6 @@ xi.player.charCreate = function(player)
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
         player:addItem(nationInfo.ring)
     end
-	
-	-----------------------------------------------
-    -- Give new players the PhalanxRising linkpearl
-    -----------------------------------------------
-	do
-		local LS_ID = 1 -- Replace with your LS ID
-
-		if not player:hasLinkPearl(LS_ID) then
-			player:addLinkPearl(LS_ID)
-			player:equipLinkPearl(LS_ID)
-		end
-	end
 
     -- unlock advanced jobs
     if xi.settings.main.ADVANCED_JOB_LEVEL == 0 then
@@ -156,7 +144,7 @@ xi.player.charCreate = function(player)
     player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
     player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
     player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
-    player:setNewPlayer(true)                          -- apply new player flag
+    player:setNewPlayer(true)                           -- apply new player flag
 end
 
 -- called by core after a player logs into the server or zones
