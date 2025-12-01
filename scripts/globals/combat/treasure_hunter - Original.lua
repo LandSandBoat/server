@@ -1,22 +1,10 @@
 -----------------------------------
--- Treasure Hunter tuning
--- Custom TH curve:
--- TH1 = +15%
--- TH2 = +30%
--- TH3 = +50%
--- TH4+ = +75%
------------------------------------
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.treasureHunter = xi.combat.treasureHunter or {}
 -----------------------------------
-
--- NOTE:
--- These tables are kept for compatibility / reference,
--- but getDropRate below uses our custom flat-per-tier model
--- instead of this old SE-style bracket table.
 
 -- https://forum.square-enix.com/ffxi/threads/56550
 xi.combat.treasureHunter.treasureHunterTable =
@@ -50,51 +38,34 @@ xi.combat.treasureHunter.dropBracketTable =
     [7] = {    0 }, -- Set to 0, for weird cases in DB.
 }
 
------------------------------------
--- Custom TH getDropRate
--- Input:  thLevel  = Treasure Hunter tier (0–14)
---         dropRate = base drop chance (0–10000)
--- Output: new drop chance (0–10000)
------------------------------------
 xi.combat.treasureHunter.getDropRate = function(thLevel, dropRate)
     -- Sanitize parameters
-    local thTier   = utils.defaultIfNil(thLevel, 0)
-    local baseRate = utils.defaultIfNil(dropRate, 0)
+    local thTier     = utils.defaultIfNil(thLevel, 0)
+    local thDropRate = utils.defaultIfNil(dropRate, 0)
 
-    -- Clamp values
-    thTier   = utils.clamp(thTier, 0, 14)
-    baseRate = utils.clamp(baseRate, 0, 10000)
+    thTier     = utils.clamp(thTier, 0, 14)
+    thDropRate = utils.clamp(thDropRate, 0, 10000)
 
-    -- Early exits: no drop or guaranteed drop
-    if baseRate == 0 then
-        return 0
-    elseif baseRate == 10000 then
+    -- Early returns: Drop is guaranteed or non-existant.
+    if thDropRate == 10000 then
         return 10000
+    elseif thDropRate == 0 then
+        return 0
     end
 
-    -- Custom bonus per TH tier (as a multiplier of base rate)
-    -- TH1 = +25%, TH2 = +45%, TH3 = +65%, TH4+ = +85%
-    local bonus = 0.0
+    -- Calculate original drop rate bracket.
+    local thBracket = 0
 
-    if thTier == 0 then
-        bonus = 0.00
-    elseif thTier == 1 then
-        bonus = 0.25
-    elseif thTier == 2 then
-        bonus = 0.45
-    elseif thTier == 3 then
-        bonus = 0.65
-    elseif thTier >= 4 then
-        bonus = 0.85
+    for i = 1, #xi.combat.treasureHunter.dropBracketTable do
+        if thDropRate >= xi.combat.treasureHunter.dropBracketTable[i][1] then
+            thBracket = i
+
+            break
+        end
     end
 
-    -- Apply bonus to base rate
-    local newRate = math.floor(baseRate * (1.0 + bonus))
+    -- Calculate TH drop rate
+    local newDropRate = xi.combat.treasureHunter.treasureHunterTable[thTier][thBracket]
 
-    -- Cap at 100%
-    if newRate > 10000 then
-        newRate = 10000
-    end
-
-    return newRate
+    return newDropRate
 end

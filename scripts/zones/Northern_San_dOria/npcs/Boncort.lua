@@ -16,13 +16,16 @@ entity.onTrigger = function(player, npc)
     local stock =
     {
         { xi.item.LOAF_OF_BLACK_BREAD,      124, 3, },
-        { xi.item.LOAF_OF_WHITE_BREAD,      208, 2, },
+        { xi.item.LOAF_OF_WHITE_BREAD,      208, 3, },
         { xi.item.STRIP_OF_MEAT_JERKY,      124, 3, },
-        { xi.item.SMOKED_SALMON,            228, 2, },
+        { xi.item.SMOKED_SALMON,            228, 3, },
         { xi.item.FLASK_OF_DISTILLED_WATER,  12, 3, },
-        { xi.item.BOTTLE_OF_GRAPE_JUICE,    967, 1, },
-        { xi.item.BOTTLE_OF_APPLE_JUICE,    312, 2, },
+        { xi.item.BOTTLE_OF_GRAPE_JUICE,    967, 3, },
+        { xi.item.BOTTLE_OF_APPLE_JUICE,    312, 3, },
         { xi.item.SCROLL_OF_SWORD_MADRIGAL, 189, 3, },
+		-- Marguerite QoL addition. Check other nations for additional flowers.
+		{ xi.item.MARGUERITE,		        699, 3, },
+
     }
 
     player:showText(npc, ID.text.BONCORT_SHOP_DIALOG)
