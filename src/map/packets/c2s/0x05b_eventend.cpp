@@ -24,7 +24,7 @@
 #include "entities/baseentity.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
-#include "packets/release.h"
+#include "packets/s2c/0x052_eventucoff.h"
 
 auto GP_CLI_COMMAND_EVENTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -68,6 +68,6 @@ void GP_CLI_COMMAND_EVENTEND::process(MapSession* PSession, CCharEntity* PChar) 
         break;
     }
 
-    PChar->pushPacket<CReleasePacket>(PChar, RELEASE_TYPE::EVENT);
+    PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::EventRecvPending);
     PChar->updatemask |= UPDATE_HP;
 }

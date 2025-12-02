@@ -2,12 +2,9 @@
 -- Enfeebling Song Utilities
 -- Used for songs that deal negative status effects upon targets.
 -----------------------------------
-require('scripts/globals/combat/element_tables')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/combat/status_effect_tables')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -92,10 +89,11 @@ xi.spells.enfeebling.calculateSongPower = function(caster, spellEffect, basePowe
     }
 
     if effectTable[spellEffect] then
+        local marcatoEffect = caster:getStatusEffect(xi.effect.MARCATO)
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = power * 2
-        elseif caster:hasStatusEffect(xi.effect.MARCATO) then
-            power = power * 1.5
+        elseif marcatoEffect ~= nil then
+            power = power * (1 + (marcatoEffect:getPower() / 100))
         end
     end
 
@@ -154,20 +152,20 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     ------------------------------
     -- STEP 1: Check spell nullification.
     ------------------------------
-    if xi.combat.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
+    if xi.data.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
         spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
         return spellEffect
     end
 
     -- Check trait nullification trigger.
-    if xi.combat.statusEffect.isTargetResistant(caster, target, spellEffect) then
+    if xi.data.statusEffect.isTargetResistant(caster, target, spellEffect) then
         spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return spellEffect
     end
 
     -- Target already has an status effect that nullifies current.
-    if xi.combat.statusEffect.isEffectNullified(target, spellEffect) then
+    if xi.data.statusEffect.isEffectNullified(target, spellEffect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end
@@ -201,7 +199,7 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     local power     = xi.spells.enfeebling.calculateSongPower(caster, spellEffect, pTable[spellId][column.SONG_POWER_BASE], gearBoost) or 0
     local tick      = spellEffect == xi.effect.REQUIEM and 3 or 0
     local duration  = xi.spells.enfeebling.calculateSongDuration(caster, spellEffect, pTable[spellId][column.SONG_DURATION], gearBoost) or 0
-    local subEffect = spellEffect == xi.effect.THRENODY and xi.combat.element.getElementalMEVAModifier(xi.combat.element.getElementStrength(spellElement)) or 0
+    local subEffect = spellEffect == xi.effect.THRENODY and xi.data.element.getElementalMEVAModifier(xi.data.element.getElementStrength(spellElement)) or 0
 
     -- FClamp and floor.
     power    = math.floor(utils.clamp(power, 0, pTable[spellId][column.SONG_POWER_CAP]))

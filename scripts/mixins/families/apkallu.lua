@@ -26,7 +26,7 @@ g_mixins.families.apkallu = function(apkalluMob)
             if member:getID() ~= 0 and mob:getID() ~= member:getID() then
                 local memberDistance = mob:checkDistance(member)
                 if
-                    member:getCurrentAction() == xi.action.ROAMING and
+                    member:getCurrentAction() == xi.action.category.ROAMING and
                     memberDistance <= distance
                 then
                     closest = member

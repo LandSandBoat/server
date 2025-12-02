@@ -21,10 +21,10 @@ xi.msg.channel =
     EMOTION       = 8,
     -- 9 / 10 / 11 = Does not work / nothing
     GM_PROMPT     = 12, -- Menu prompt from GM
-    NS_SAY        = 13, -- Same as MESSAGE_SAY but has no speaker object displayed
-    NS_SHOUT      = 14, -- Same as MESSAGE_SHOUT but has no speaker object displayed
-    NS_PARTY      = 15, -- Same as MESSAGE_PARTY but has no speaker object displayed
-    NS_LINKSHELL  = 16, -- Same as MESSAGE_LINKSHELL but has no speaker object displayed
+    NS_SAY        = 13, -- NS = "No speaker object displayed", otherwise same as SAY
+    NS_SHOUT      = 14, -- NS = "No speaker object displayed", otherwise same as SHOUT
+    NS_PARTY      = 15, -- NS = "No speaker object displayed", otherwise same as PARTY
+    NS_LINKSHELL  = 16, -- NS = "No speaker object displayed", otherwise same as LINKSHELL
     UNKNOWN_17    = 17, -- 17 through 25 appear to repeat the effects of other values
     UNKNOWN_18    = 18,
     UNKNOWN_19    = 19,
@@ -36,7 +36,7 @@ xi.msg.channel =
     UNKNOWN_25    = 25,
     YELL          = 26,
     LINKSHELL2    = 27, -- Second LS color. Default is Green
-    NS_LINKSHELL2 = 28, -- Same as LINKSHELL_2 but has but has no speaker object displayed
+    NS_LINKSHELL2 = 28, -- NS = "No speaker object displayed", otherwise same as LINKSHELL2
     SYSTEM_3      = 29, -- "Basic system messages" in config menu. Yellow by default.
     LINKSHELL3    = 30, -- Yes really it looks like a 3rd LS may have been planned at some point.
     NS_LINKSHELL3 = 31, -- (assumed as it follows pattern and color)
@@ -75,6 +75,8 @@ xi.msg.basic =
     MAGIC_RECOVERS_HP               = 7,   -- <caster> casts <spell>. <target> recovers <amount> HP.
     MAGIC_UNABLE_TO_CAST            = 17,  -- Unable to cast spells at this time.
     MAGIC_UNABLE_TO_CAST_2          = 18,  -- Unable to cast spells at this time.
+    PLAYER_LEARNS_NEW_SPELL         = 23,  -- <player> learns a new spell!
+    READIES_SKILL                   = 43,  -- <entity> readies <skill>.
     MAGIC_CANNOT_CAST               = 47,  -- <caster> cannot cast <spell>.
     MAGIC_CANNOT_BE_CAST            = 48,  -- <spell> cannot be cast on <target>. (example: tractor)
     MAGIC_NO_EFFECT                 = 75,  -- <caster>'s <spell> has no effect on <target>.
@@ -92,6 +94,7 @@ xi.msg.basic =
     MAGIC_BURST_ENFEEB_IS           = 271, -- <caster> casts <spell> Magic burst! <target> is <status>.
     MAGIC_RESIST_2                  = 284, -- <target> resists the effects of the spell!
     MAGIC_CASTS_ON                  = 309, -- <caster> casts <spell> on <target>.
+    MAGIC_STARTS_CASTING_TARGET     = 327, -- <entity> starts casting <spell> on <target>.
     MAGIC_ABSORB_STR                = 329, -- <caster> casts <spell>. <target>'s STR is drained.
     MAGIC_ABSORB_DEX                = 330, -- <caster> casts <spell>. <target>'s DEX is drained.
     MAGIC_ABSORB_VIT                = 331, -- <caster> casts <spell>. <target>'s VIT is drained.
@@ -122,10 +125,12 @@ xi.msg.basic =
     SKILL_DRAIN_MP                  = 225, -- <user> uses <skill>. <amount> MP drained from <target>
     SKILL_DRAIN_TP                  = 226, -- <user> uses <skill>. <amount> TP drained from <target>
     SELF_HEAL                       = 238, -- <user> uses <skill>. <user> recovers <amount> HP.
+    SELF_HEAL_NOHP                  = 539, -- <user> uses <skill>. <user> regains HP.
     SKILL_ENFEEB_IS                 = 242, -- <user> uses <skill>. <target> is <status>.
     SKILL_ENFEEB                    = 243, -- <user> uses <skill>. <target> receives the effect of <status>.
     SELF_HEAL_SECONDARY             = 263, -- <target> recovers <amount> HP.
     DAMAGE_SECONDARY                = 264, -- <target> takes <amount> points of damage.
+    RECOVERS_MP_SECONDARY           = 276, -- <target> recovers <amount> MP.
     SKILL_GAIN_EFFECT_2             = 319, -- <user> uses <skill>. <target> gains the effect of <status>.
     RANGED_ATTACK_HIT               = 352, -- <user> ranged attack hits <target> for <amount> points of damage.
     RANGED_ATTACK_CRIT              = 353, -- <user> ranged attack scores a critical hit! \n <target> takes <amount> points of damage.
@@ -160,6 +165,7 @@ xi.msg.basic =
     JA_REMOVE_EFFECT_2              = 321, -- <user> uses <ability>. <target>'s <status> wears off.
     JA_NO_EFFECT_2                  = 323, -- <user> uses <ability>. No effect on <target>. (2 line msg)
     JA_MISS_2                       = 324, -- <user> uses <ability>, but misses <target>. (includes target name)
+    READIES_SKILL_2                 = 326, -- <entity> readies <skill>.
     JA_RECEIVES_EFFECT_3            = 441, -- <user> receives the effect of <ability>.
     JA_RECOVERS_MP                  = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     JA_ATK_ENHANCED                 = 285, -- <target>'s attacks are enhanced.
@@ -168,6 +174,10 @@ xi.msg.basic =
     JA_MAGIC_BURST                  = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
     JA_ENMITY_DECREASE              = 743, -- <user> uses <ability>. <target>'s enmity decreases.
     JA_TH_EFFECTIVENESS             = 608, -- <user> uses <ability>. Treasure Hunter effectiveness against <target> increases to <amount>.
+    USE_JA_ON                       = 119, -- <entity> uses <ability> on <entity>.
+    CHOCOBO_JIG                     = 126, -- <entity> uses <ability>. <entity> movement speed increases.
+    WILD_FLOURISH_TP                = 452, -- <entity> uses <ability>. <entity> regains <number> TP.
+    VIOLENT_FLOURISH_STUN           = 522, -- <entity> uses <ability>. The <entity> takes <number> points of damage and is stunned.
 
     -- "Fortified against" messages
     FORTIFIED_DEMONS                = 149, -- <target> is fortified against demons.
@@ -187,6 +197,7 @@ xi.msg.basic =
     NO_NINJA_TOOLS                  = 35,  -- The <player> lacks the ninja tools to cast (NULL).
     UNABLE_TO_CAST_SPELLS           = 49,  -- The <player> is unable to cast spells.
     SKILL_REACHES_LEVEL             = 53,  -- <target>'s <skill> skill reaches level <level>.
+    PARRIED                         = 70,  -- <target> parries <attacker>'s attack with his/her weapon.
     CANNOT_PERFORM                  = 71,  -- The <player> cannot perform that action.
     CANNOT_PERFORM_TARG             = 72,  -- That action cannot be performed on <target>.
     UNABLE_TO_USE_JA                = 87,  -- Unable to use job ability.
@@ -209,6 +220,7 @@ xi.msg.basic =
     NEEDS_2H_WEAPON                 = 307, -- That action requires a two-handed weapon.
     LEVEL_IS_RESTRICTED             = 314, -- <target>'s level is currently restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly.
     CANT_BE_USED_IN_AREA            = 316, -- That action cannot be used in this area.
+    TOO_FAR_AWAY_2                  = 328, -- <target> is too far away.
     CANT_HEAL_WITH_AVATAR           = 345, -- You cannot heal while you have an avatar summoned.
     FULL_INVENTORY                  = 356, -- Cannot execute command. Your inventory is full.
     NARROWLY_ESCAPE                 = 359, -- <name> narrowly escapes impending doom.
@@ -225,10 +237,12 @@ xi.msg.basic =
     ALREADY_HAVE_KEY_ITEM           = 759, -- You already have key item: <key item>.
 
     -- Distance
-    TARG_OUT_OF_RANGE               = 4,  -- <target> is out of range.
-    UNABLE_TO_SEE_TARG              = 5,  -- Unable to see <target>.
-    LOSE_SIGHT                      = 36, -- You lose sight of <target>.
-    TOO_FAR_AWAY                    = 78, -- <target> is too far away.
+    TARG_OUT_OF_RANGE               = 4,   -- <target> is out of range.
+    TARG_OUT_OF_RANGE_2             = 154, -- <target> is out of range.
+    UNABLE_TO_SEE_TARG              = 5,   -- Unable to see <target>.
+    LOSE_SIGHT                      = 36,  -- You lose sight of <target>.
+    NO_TARG_IN_AOE                  = 76,  -- No valid target within area of effect.
+    TOO_FAR_AWAY                    = 78,  -- <target> is too far away.
 
     -- Weaponskills
     READIES_WS                      = 43,  -- <actor> readies <weapon_skill>.
@@ -456,6 +470,7 @@ xi.msg.system =
 {
     GLOBAL_TRUST_OFFSET          = 0,
     EXECUTING_LOGOUT             = 7,   -- Executing logout in <seconds> seconds. Cancel healing to remain logged in.
+    OBTAINS_GIL                  = 19,  -- Treasure pool message ala 0x0D2 `Gold` value of non- zero "<Name> obtains <value> gil."
     EXECUTING_SHUTDOWN           = 35,  -- Executing shutdown in <seconds> seconds. Cancel healing to remain logged in.
     TRUST_NO_SEEKING_PARTY       = 296, -- You cannot use Trust magic while seeking a party.
     TRUST_DELAY_NEW_PARTY_MEMBER = 297, -- While inviting a party member, you must wait a while before using Trust magic.

@@ -31,13 +31,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits, shadowsAbsorbed = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    -- TODO: Second parameter of speceffect is attempting to bor nil with number.  Find
-    -- out what is expected here.
     if shadowsAbsorbed + tpHits + extraHits == 3 then
-        -- action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 8))
         utils.unused()
     elseif shadowsAbsorbed + tpHits + extraHits == 2 then
-        -- action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 4))
         utils.unused()
     end
 

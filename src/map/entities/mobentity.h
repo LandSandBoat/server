@@ -25,10 +25,12 @@
 #include "battleentity.h"
 #include <unordered_map>
 
+enum MSGBASIC_ID : uint16_t;
 // forward declaration
 class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
+class spawnGroup;
 
 enum SPAWNTYPE
 {
@@ -134,12 +136,13 @@ public:
     void              TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
+    bool ShouldForceLink();
 
     bool CanDropGil();    // mob has gil to drop
     bool CanStealGil();   // can steal gil from mob
     void ResetGilPurse(); // reset total gil held
     auto GetEligibleSeals() -> std::vector<uint16>;
-    auto GetEligibleGeodes() -> std::vector<uint16>;
+    auto GetEligibleGeodes() const -> std::vector<uint16>;
 
     void  setMobMod(uint16 type, int16 value);
     int16 getMobMod(uint16 type);
@@ -181,6 +184,7 @@ public:
 
     virtual void OnDespawn(CDespawnState&) override;
 
+    bool         CanSpawnFromGroup();
     virtual void Spawn() override;
     virtual void FadeOut() override;
     virtual bool isWideScannable() override;
@@ -254,6 +258,8 @@ public:
 
     uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8  m_name_prefix; // The ding bats VS Ding bats
+
+    spawnGroup* m_spawnGroup; // spawn group this mob Belongs to
 
     uint8 m_unk0; // possibly campaign related (entity 0x24)
     uint8 m_unk1; // (entity_update 0x25)

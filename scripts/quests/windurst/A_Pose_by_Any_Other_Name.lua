@@ -1,5 +1,6 @@
 -----------------------------------
 -- A Pose By Any Other Name
+-- Log ID: 2, Quest ID: 7
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
 
@@ -31,6 +32,15 @@ local poseItems =
     [xi.job.RUN] = xi.item.BRONZE_HARNESS,
 }
 
+local poseGear =
+{
+    [xi.item.BRONZE_HARNESS] = 1,
+    [xi.item.ROBE]           = 2,
+    [xi.item.TUNIC]          = 3,
+    [xi.item.LEATHER_VEST]   = 4,
+    [xi.item.KENPOGI]        = 6,
+}
+
 quest.reward =
 {
     fame = 75,
@@ -55,36 +65,33 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local desiredBody = poseItems[player:getMainJob()]
                     local currentBody = player:getEquipID(xi.slot.BODY)
+
                     if currentBody ~= desiredBody then
-                        if quest:getVar(player, 'Prog') == 1 then
+                        if quest:getVar(player, 'Option') == 0 then
                             return quest:progressEvent(90)
                         else
-                            return quest:progressEvent(87)
+                            return quest:progressEvent(91)
                         end
                     else
-                        -- default dialogs
-                        local rand = math.random(1, 3)
-                        if rand == 1 then
-                            player:startEvent(86)
-                        elseif rand == 2 then
-                            player:startEvent(88)
-                        else
-                            player:startEvent(89)
-                        end
+                        return quest:event(86):setPriority(101) -- If the player is wearing the requested body for their job Angelica will only return event 86 intead of cycling between 86 and 87.
                     end
                 end
             },
 
             onEventFinish =
             {
-                [87] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 1)
-                end,
-
                 [90] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        quest:setVar(player, 'Prog', 0)
+                        quest:setVar(player, 'Option', 0)
+                    elseif option == 2 then
+                        quest:setVar(player, 'Option', 1)
+                    end
+                end,
+
+                [91] = function(player, csid, option, npc)
+                    if option == 1 then
+                        quest:begin(player)
                     end
                 end,
             },
@@ -104,10 +111,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local requestedBody = poseItems[player:getMainJob()]
 
-                    quest:setVar(player, 'Stage', GetSystemTime() + 300)
+                    quest:setVar(player, 'Wait', GetSystemTime() + 3600) -- 1 Hour
                     quest:setVar(player, 'Prog', requestedBody)
-
-                    return quest:progressEvent(92, 0, 0, 0, requestedBody)
+                    return quest:progressEvent(92, 0, xi.item.BRONZE_HARNESS, xi.item.ROBE, xi.item.TUNIC, xi.item.LEATHER_VEST, xi.item.ROBE, xi.item.KENPOGI) -- Job check seems to be baked into the DAT.
                 end,
             },
         },
@@ -125,11 +131,12 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local requestedBody = quest:getVar(player, 'Prog')
-                    if quest:getVar(player, 'Stage') >= GetSystemTime() then -- Under time. Quest completed.
+
+                    if quest:getVar(player, 'Wait') >= GetSystemTime() then -- Under time. Quest completed.
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else
-                            return quest:progressEvent(93, 0, 0, 0, requestedBody)
+                            return quest:progressEvent(94, poseGear[quest:getVar(player, 'Prog')], xi.item.BRONZE_HARNESS, xi.item.ROBE, xi.item.TUNIC, xi.item.LEATHER_VEST, xi.item.ROBE, xi.item.KENPOGI)
                         end
                     else -- Over time. Quest failed.
                         return quest:progressEvent(102)
@@ -140,13 +147,16 @@ quest.sections =
             onEventFinish =
             {
                 [96] = function(player, csid, option, npc) -- Quest completed
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        quest:setMustZone(player)
+                    end
                 end,
 
                 [102] = function(player, csid, option, npc) -- Quest failed.
                     player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
-                    quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.
-                    quest:setVar(player, 'Stage', 0)
+                    quest:setVar(player, 'Prog', 0)
+                    quest:setVar(player, 'Wait', 0)
+                    quest:setVar(player, 'Option', 0)
                     player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
                     player:needToZone(true)
                 end,
@@ -165,7 +175,9 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(101):replaceDefault()
+                    if quest:getMustZone(player) then
+                        return quest:event(101):setPriority(101)
+                    end
                 end,
             },
         },

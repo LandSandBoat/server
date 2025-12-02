@@ -8,15 +8,17 @@ local commandObj = {}
 commandObj.cmdprops =
 {
     permission = 1,
-    parameters = 'is'
+    parameters = 'ss'
 }
 
 local function error(player, msg)
     player:printToPlayer(msg)
-    player:printToPlayer('!delspell <spellID> (player)')
+    player:printToPlayer('!delspell <spellID/spellName> (player)')
 end
 
-commandObj.onTrigger = function(player, spellId, target)
+commandObj.onTrigger = function(player, spellParam, target)
+    local spellId = tonumber(spellParam) or xi.magic.spell[string.upper(spellParam)]
+
     -- validate spellId
     if spellId == nil then
         error(player, 'Invalid spellID.')

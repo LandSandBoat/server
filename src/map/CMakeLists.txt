@@ -1,3 +1,4 @@
+add_subdirectory(action)
 add_subdirectory(ai)
 add_subdirectory(entities)
 add_subdirectory(enums)
@@ -5,11 +6,15 @@ add_subdirectory(items)
 add_subdirectory(los)
 add_subdirectory(lua)
 add_subdirectory(packets)
-add_subdirectory(packets/c2s)
 add_subdirectory(utils)
+
+set(APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+)
 
 set(SOURCES
     ${COMMON_SOURCES}
+    ${ACTION_SOURCES}
     ${AI_SOURCES}
     ${ENTITY_SOURCES}
     ${ENUMS_SOURCES}
@@ -17,7 +22,6 @@ set(SOURCES
     ${LOS_SOURCES}
     ${LUA_SOURCES}
     ${PACKET_SOURCES}
-    ${PACKET_C2S_SOURCES}
     ${UTIL_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ability.h
@@ -130,6 +134,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effect_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effect.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effect.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/spawn_group.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/spawn_group.h
     ${CMAKE_CURRENT_SOURCE_DIR}/time_server.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/time_server.h
     ${CMAKE_CURRENT_SOURCE_DIR}/timetriggers.cpp
@@ -185,16 +191,16 @@ foreach(entry ${INIT_FILE_ENTRIES})
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h")
         list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${entry}")
-        list(APPEND SOURCES ${module_files})
+        list(APPEND APP_SOURCES ${module_files})
         message(STATUS "Adding module files to build: ${module_files}")
     elseif (${entry} MATCHES "\.cpp")
-        list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
+        list(APPEND APP_SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
         message(STATUS "Adding module files to build: ${CMAKE_SOURCE_DIR}/modules/${entry}")
     endif()
 endforeach()
 
 add_executable(xi_map
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${APP_SOURCES}
     ${resource})
 
 set(MAP_LIB_SOURCES ${SOURCES})
@@ -222,19 +228,23 @@ target_link_libraries(xi_map_lib
         project_warnings
 )
 
+target_include_directories(xi_map
+    PUBLIC
+        ${module_include_dirs}
+)
+
 target_include_directories(xi_map_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${module_include_dirs}
 )
 
 target_link_libraries(xi_map
     PUBLIC
         xi_map_lib)
 
-if(NOT ${ENABLE_CLANG_TIDY})
+if(PCH_ENABLE)
     target_precompile_headers(xi_map_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 endif()
 

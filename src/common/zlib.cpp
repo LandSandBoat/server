@@ -80,13 +80,15 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 {
 #if XI_BIG_ENDIAN
     for (size_t i = 0; i < memb; ++i)
+    {
         v[i] = bswap32(v[i]);
+    }
 #else
     (void)v, (void)memb;
 #endif
 }
 
-static bool read_to_vector(std::string const& filename, std::vector<uint32>& vec)
+static bool read_to_vector(const std::string& filename, std::vector<uint32>& vec)
 {
     auto fp = utils::openFile(filename, "rb");
     if (!fp)

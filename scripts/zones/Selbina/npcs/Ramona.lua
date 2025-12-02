@@ -7,20 +7,22 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasCompletedUniqueEvent(xi.uniqueEvent.RAMONA_INTRODUCTION) then
+    if
+        player:getCharVar('metMathilde') == 1 and
+        not player:hasCompletedUniqueEvent(xi.uniqueEvent.RAMONA_INTRODUCTION)
+    then
         player:startEvent(172)
+    elseif player:hasCompletedUniqueEvent(xi.uniqueEvent.MET_MATHILDES_SON) then
+        player:startEvent(175)
     else
-        if not player:hasCompletedUniqueEvent(xi.uniqueEvent.MET_MATHILDES_SON) then
-            player:startEvent(170)
-        else
-            player:startEvent(175)
-        end
+        player:startEvent(170)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 172 then
         player:setUniqueEvent(xi.uniqueEvent.RAMONA_INTRODUCTION)
+        player:setCharVar('metMathilde', 0) -- Clears the var
     end
 end
 

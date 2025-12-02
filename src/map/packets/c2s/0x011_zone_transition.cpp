@@ -24,7 +24,7 @@
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "map_session.h"
-#include "packets/char_equip.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "utils/zoneutils.h"
 
 auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -36,17 +36,7 @@ auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharE
 
 void GP_CLI_COMMAND_ZONE_TRANSITION::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PSession->blowfish.status = BLOWFISH_ACCEPTED;
-    PChar->status             = STATUS_TYPE::NORMAL;
-    PChar->health.tp          = 0;
-
-    for (uint8 i = 0; i < 16; ++i)
-    {
-        if (PChar->equip[i] != 0)
-        {
-            PChar->pushPacket<CEquipPacket>(PChar->equip[i], i, PChar->equipLoc[i]);
-        }
-    }
-
-    PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
+    // All this packet does on retail is respond with Kupowers messages.
+    // Retail will respond exactly once to it.
+    // TODO: Kupowers messages
 }

@@ -22,18 +22,7 @@
 #include "0x061_clistatus.h"
 
 #include "entities/charentity.h"
-#include "packets/char_health.h"
-#include "packets/char_job_extra.h"
-#include "packets/char_recast.h"
-#include "packets/char_skills.h"
-#include "packets/char_stats.h"
-#include "packets/char_status.h"
-#include "packets/jobpoint_details.h"
-#include "packets/menu_jobpoints.h"
-#include "packets/menu_merit.h"
-#include "packets/monipulator1.h"
-#include "packets/monipulator2.h"
-#include "packets/status_effects.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -44,23 +33,5 @@ auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->pushPacket<CCharHealthPacket>(PChar);
-    PChar->pushPacket<CCharStatsPacket>(PChar);
-    PChar->pushPacket<CCharSkillsPacket>(PChar);
-    PChar->pushPacket<CCharRecastPacket>(PChar);
-    PChar->pushPacket<CMenuMeritPacket>(PChar);
-    PChar->pushPacket<CMonipulatorPacket1>(PChar);
-    PChar->pushPacket<CMonipulatorPacket2>(PChar);
-
-    if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
-    {
-        // Only send Job Points Packet if the player has unlocked them
-        PChar->pushPacket<CMenuJobPointsPacket>(PChar);
-        PChar->pushPacket<CJobPointDetailsPacket>(PChar);
-    }
-
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-    PChar->pushPacket<CStatusEffectPacket>(PChar);
+    charutils::SendLocalPlayerPackets(PChar);
 }

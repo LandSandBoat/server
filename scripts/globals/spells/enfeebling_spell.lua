@@ -2,12 +2,9 @@
 -- Enfeebling Spell Utilities
 -- Used for spells that deal negative status effects upon targets.
 -----------------------------------
-require('scripts/globals/combat/element_tables')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/combat/status_effect_tables')
 require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -341,20 +338,20 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- STEP 1: Check spell nullification.
     ------------------------------
-    if xi.combat.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
+    if xi.data.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
         spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
         return spellEffect
     end
 
     -- Check trait nullification trigger.
-    if xi.combat.statusEffect.isTargetResistant(caster, target, spellEffect) then
+    if xi.data.statusEffect.isTargetResistant(caster, target, spellEffect) then
         spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return spellEffect
     end
 
     -- Target already has an status effect that nullifies current.
-    if xi.combat.statusEffect.isEffectNullified(target, spellEffect) then
+    if xi.data.statusEffect.isEffectNullified(target, spellEffect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end
@@ -388,29 +385,36 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     -- STEP 3: Check if spell resists and Immunobreak.
     ------------------------------
     if resistRate <= 1 / (2 ^ resistStages) then
-        -- Attempt immunobreak. Fetch resistance rank modifier.
-        local resistRank          = 0
-        local immunobreakModifier = xi.combat.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
-        local rankModifier        = target:getMod(immunobreakModifier)
+        -- Decide which resistance rank modifier to use:
+        -- 1: If an effect exists, check if said effect has a specialized resistance rank.
+        -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
+        local resistanceRankMod = xi.data.statusEffect.getAssociatedResistanceRankModifier(spellEffect, spellElement)
 
-        if spellElement ~= xi.element.NONE then
-            resistRank = target:getMod(xi.combat.element.getElementalResistanceRankModifier(spellElement))
+        if resistanceRankMod == 0 then -- If it's an effect and this is 0, try with element.
+            resistanceRankMod = xi.data.element.getElementalResistanceRankModifier(spellElement)
         end
 
+        -- Fetch resistance rank and apply possible modifiers to it.
+        local resistanceRank = target:getMod(resistanceRankMod)
+
+        -- Attempt immunobreak. Fetch resistance rank modifier.
+        local immunobreakModifier = xi.data.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
+        local immunobreakValue    = target:getMod(immunobreakModifier)
+
         if
-            xi.settings.main.ENABLE_IMMUNOBREAK and
-            caster:isPC() and
-            target:isMob() and
+            xi.settings.main.ENABLE_IMMUNOBREAK and    -- Immunobreak didn't exist in lvl 75 era.
+            caster:isPC() and                          -- Only players can immunobreak.
+            caster:getMainJob() == xi.job.RDM and     -- Only Red Mages can immunobreak.
+            target:isMob() and                         -- Only non-players can be immunobroken.
             immunobreakModifier > 0 and                -- Only certain effects can be immunobroken.
             skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
-            (resistRank - rankModifier) > 4            -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
+            resistanceRank >= 5                        -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
         then
-            local immunobreakRandom = math.random(1, 100)
-            local immunobreakChance = 16 / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
+            local immunobreakChance = 20 / (1 + immunobreakValue) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE) -- TODO: Add immunobreak gear?
 
             -- We successfully trigger Immunobreak. Change target modifier and set correct message.
-            if immunobreakRandom <= immunobreakChance then
-                target:setMod(immunobreakModifier, rankModifier + 1) -- TODO: Add equipment modifier (x2) here.
+            if math.random(1, 100) <= immunobreakChance then
+                target:setMod(immunobreakModifier, immunobreakValue + 1) -- TODO: Add equipment modifier (x2) here.
 
                 spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
             end

@@ -2,7 +2,6 @@
 -- Modify interaction entry example
 -----------------------------------
 require('modules/module_utils')
-require('scripts/globals/utils')
 require('scripts/globals/interaction/interaction_global')
 -----------------------------------
 local m = Module:new('modify_interaction_entry_example')

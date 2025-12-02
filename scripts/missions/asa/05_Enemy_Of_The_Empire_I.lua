@@ -236,7 +236,7 @@ mission.sections =
 
                         npcUtil.giveItem(player, { xi.item.SOULTRAPPER, 12 })
                         mission:setVar(player, 'AndrauseBuy', 0)
-                        mission:setVar(player, 'Soulplate', getMidnight())
+                        mission:setVar(player, 'Soulplate', JstMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then
                         mission:setVar(player, 'AndrauseBuy', 0)
                     end
@@ -254,7 +254,7 @@ mission.sections =
                         player:addItem(xi.item.BLANK_SOUL_PLATE, 12)
                         player:messageSpecial(norgID.text.YOU_OBTAIN, xi.item.BLANK_SOUL_PLATE, 12) -- Soul Plates
                         mission:setVar(player, 'AndrauseBuy', 0)
-                        mission:setVar(player, 'Soulplate', getMidnight())
+                        mission:setVar(player, 'Soulplate', JstMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then
                         mission:setVar(player, 'AndrauseBuy', 0)
                     end

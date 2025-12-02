@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Grauberg_[S] (89)
 -----------------------------------
-require('scripts/globals/dark_ixion')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 

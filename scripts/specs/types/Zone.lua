@@ -9,7 +9,7 @@
 ---@field onInitialize? fun(zone: CZone)
 ---@field onEventUpdate? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
 ---@field onEventFinish? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
----@field onTransportEvent? fun(player: CBaseEntity, transportId: integer)
+---@field onTransportEvent? fun(player: CBaseEntity, prevZoneId: integer, transportId: integer)
 ---@field onConquestUpdate? fun(zone: CZone, type: integer, influence: integer, owner: integer, ranking: integer, isConquestAlliance: boolean)
 ---@field onGameDay? fun()
 ---@field onGameHour? fun(zone: CZone)

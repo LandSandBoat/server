@@ -22,7 +22,7 @@
 #include "0x01b_friendpass.h"
 
 #include "entities/charentity.h"
-#include "packets/world_pass.h"
+#include "packets/s2c/0x059_friendpass.h"
 
 auto GP_CLI_COMMAND_FRIENDPASS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -45,5 +45,5 @@ void GP_CLI_COMMAND_FRIENDPASS::process(MapSession* PSession, CCharEntity* PChar
             break;
     }
 
-    PChar->pushPacket<CWorldPassPacket>(Para & 1 ? static_cast<uint32>(xirand::GetRandomNumber(9999999999)) : 0);
+    PChar->pushPacket<GP_SERV_COMMAND_FRIENDPASS>(Para & 1 ? static_cast<uint32>(xirand::GetRandomNumber(9999999999)) : 0);
 }

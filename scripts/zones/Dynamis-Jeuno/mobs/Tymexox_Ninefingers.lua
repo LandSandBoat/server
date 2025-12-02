@@ -8,8 +8,20 @@ mixins =
     require('scripts/mixins/job_special')
 }
 -----------------------------------
+local ID = zones[xi.zone.DYNAMIS_JEUNO]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -0.592, y =  2.599, z =  116.860 }
+}
+
+entity.phList =
+{
+    [ID.mob.TYMEXOX_NINEFINGERS - 4] = ID.mob.TYMEXOX_NINEFINGERS, -- Vanguard_Tinkerer     2.257    2.489   117.621
+}
 
 entity.onMobDeath = function(mob, player, optParams)
 end

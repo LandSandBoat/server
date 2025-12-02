@@ -198,12 +198,15 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
         local petAction = pet:getCurrentAction()
 
         -- check if avatar is under status effect
-        if petAction == xi.action.SLEEP or petAction == xi.action.STUN then
+        if
+            petAction == xi.action.category.SLEEP or
+            petAction == xi.action.category.STUN
+        then
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
         end
 
         -- check if avatar is using a move already
-        if petAction == xi.action.PET_MOBABILITY_FINISH then
+        if petAction == xi.action.category.PET_MOBABILITY_FINISH then
             return 0, 0
         end
 

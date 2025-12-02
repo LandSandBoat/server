@@ -22,7 +22,7 @@
 #include "0x10e_roe_claim.h"
 
 #include "entities/charentity.h"
-#include "packets/currency1.h"
+#include "packets/s2c/0x113_currencies_1.h"
 #include "roe.h"
 
 auto GP_CLI_COMMAND_ROE_CLAIM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -35,5 +35,5 @@ auto GP_CLI_COMMAND_ROE_CLAIM::validate(MapSession* PSession, const CCharEntity*
 void GP_CLI_COMMAND_ROE_CLAIM::process(MapSession* PSession, CCharEntity* PChar) const
 {
     roeutils::onRecordClaim(PChar, ObjectiveId);
-    PChar->pushPacket<CCurrencyPacket1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CURRENCIES_1>(PChar);
 }

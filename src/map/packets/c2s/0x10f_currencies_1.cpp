@@ -22,7 +22,7 @@
 #include "0x10f_currencies_1.h"
 
 #include "entities/charentity.h"
-#include "packets/currency1.h"
+#include "packets/s2c/0x113_currencies_1.h"
 
 auto GP_CLI_COMMAND_CURRENCIES_1::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -32,5 +32,5 @@ auto GP_CLI_COMMAND_CURRENCIES_1::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_CURRENCIES_1::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<CCurrencyPacket1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CURRENCIES_1>(PChar);
 }

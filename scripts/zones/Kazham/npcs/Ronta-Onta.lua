@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
             player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
-            player:setCharVar('TrialByFire_date', getMidnight())
+            player:setCharVar('TrialByFire_date', JstMidnight())
             player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end

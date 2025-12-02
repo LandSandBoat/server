@@ -17,7 +17,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(100)
 end
 
@@ -26,7 +26,7 @@ zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
 
     if
-        IsMoonFull() and
+        (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
         (vanadielHour >= 18 or
         vanadielHour < 6)
     then

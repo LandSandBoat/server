@@ -39,10 +39,7 @@ zones[xi.zone.XARCABARD_S] =
     },
     mob =
     {
-        GRAOULLY_PH =
-        {
-            [17338384] = 17338386,
-        },
+        GRAOULLY = GetFirstID('Graoully'),
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =

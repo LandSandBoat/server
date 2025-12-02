@@ -16,7 +16,10 @@ zones[xi.zone.PHANAUET_CHANNEL] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7068, -- Tallying conquest results...
+        TONBERRY_MSG                  = 7236, -- ...
         FISHING_MESSAGE_OFFSET        = 7237, -- You can't fish here.
+        TRAVEL_ANY_FASTER             = 7381, -- Cannot this vessel travel any faster? At my age, every minute counts!
+        ARE_WE_THERE_YET              = 7382, -- <Sigh> Are we there yet?
         RICHE_DAVOI_WATERFALL         = 7425, -- <item>...Davoi...waterfall...
     },
     mob =
@@ -24,6 +27,9 @@ zones[xi.zone.PHANAUET_CHANNEL] =
     },
     npc =
     {
+        TIMEKEEPER_OFFSET = GetFirstID('Ineuteniace'),
+        TONBERRY_OFFSET   = GetFirstID('Riche'),
+        RIDER_OFFSET      = GetFirstID('Laiteconce'),
     },
 }
 

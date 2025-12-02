@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -93.769,  y = -4.499, z = 34.776 },
     { x = -84.932,  y = -4.000, z = 38.000 },
@@ -62,13 +62,13 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
 end
 
 entity.onMobDespawn = function(mob)
     -- Set Duke_Haborym's spawnpoint and respawn time (21-24 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 end
 

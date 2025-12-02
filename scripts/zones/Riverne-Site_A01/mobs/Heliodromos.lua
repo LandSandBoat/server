@@ -7,7 +7,12 @@ local ID = zones[xi.zone.RIVERNE_SITE_A01]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.HELIODROMOS_OFFSET)
     SetServerVariable('Heliodromos_Despawn', 0)
 end
 
@@ -35,6 +40,10 @@ entity.onMobRoam = function(mob)
             end
         end
     end
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.WEIGHT, { power = 50 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

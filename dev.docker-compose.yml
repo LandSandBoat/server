@@ -1,0 +1,213 @@
+# THIS FILE IS FOR DEVELOPMENT!
+#
+# Do not make changes to this file!
+# Use this file as a template and create a new docker-compose.yml
+# with your edits and additions.
+#
+# See docker/README.md and the Quick Start guide for instructions on running the server.
+
+x-dbcreds: &dbcreds
+  MARIADB_DATABASE: xidb
+  MARIADB_USER: xiadmin
+  MARIADB_PASSWORD: 'password'
+  MARIADB_RANDOM_ROOT_PASSWORD: true
+
+x-common: &common
+  image: landsandboat/server:testing
+  pull_policy: never
+  user: "1000:1000"
+
+services:
+  database:
+    image: mariadb:lts
+    restart: always
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
+    environment:
+      <<: *dbcreds
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  sanity_checks:
+    image: landsandboat/devtools:ubuntu
+    pull_policy: never
+    build:
+      dockerfile: docker/ubuntu.Dockerfile
+      target: devtools
+      context: .
+    user: "1000:1000"
+    command: ["/server/tools/ci/sanity_checks.sh", "origin/base"]
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}:/server
+
+  lls:
+    image: landsandboat/devtools:ubuntu
+    pull_policy: never
+    build:
+      dockerfile: docker/ubuntu.Dockerfile
+      target: devtools
+      context: .
+    user: "1000:1000"
+    command: ["python", "/server/tools/ci/lua_lang_server.py"]
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}:/server
+
+  clang_tidy:
+    <<: *common
+    build:
+      dockerfile: docker/ubuntu.Dockerfile
+      context: .
+      args:
+        COMPILER: "clang"
+        CMAKE_BUILD_TYPE: "Debug"
+        PCH_ENABLE: "OFF"
+        ENABLE_CLANG_TIDY: "ON"
+    command: /bin/sh -c "python /server/tools/ci/summarize_clang_tidy.py build.log > /server/log/clang_tidy_summary.md"
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+
+  build:
+    <<: *common
+    build:
+      dockerfile: docker/ubuntu.Dockerfile
+      context: .
+      args:
+        COMPILER: "gcc"
+        CMAKE_BUILD_TYPE: "Debug"
+        PCH_ENABLE: "OFF"
+
+  setup_database:
+    <<: *common
+    command: ["python", "/server/tools/dbtool.py", "update"]
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/.git:/server/.git
+    depends_on:
+      database:
+        condition: service_healthy
+
+  test:
+    <<: *common
+    command: ["./xi_test", "--keep-going", "--output", "log/tests.ctrf.json"]
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+    volumes:
+      - losmeshes:/server/losmeshes
+      - navmeshes:/server/navmeshes
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+
+  startup_checks:
+    <<: *common
+    command: ["python", "-m", "tools.ci.startup_checks"]
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+    volumes:
+      - losmeshes:/server/losmeshes
+      - navmeshes:/server/navmeshes
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+
+  connect:
+    <<: *common
+    command: ["/server/xi_connect"]
+    restart: unless-stopped
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_ZMQ_IP: world
+    ports:
+      - "54001:54001"
+      - "54230:54230"
+      - "54231:54231"
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  search:
+    <<: *common
+    command: ["/server/xi_search"]
+    restart: unless-stopped
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+    ports:
+      - "54002:54002"
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  world:
+    <<: *common
+    command: ["/server/xi_world"]
+    restart: unless-stopped
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_HTTP_HOST: 0.0.0.0
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_ZMQ_IP: world
+    ports:
+      - "8088:8088"
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  map:
+    <<: *common
+    command: ["/server/xi_map"]
+    restart: unless-stopped
+    environment:
+      <<: *dbcreds
+      XI_NETWORK_SQL_HOST: database
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_ZMQ_IP: world
+    ports:
+      - "54230:54230/udp"
+    volumes:
+      - losmeshes:/server/losmeshes
+      - navmeshes:/server/navmeshes
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+      world:
+        condition: service_started
+      connect:
+        condition: service_started
+      search:
+        condition: service_started
+
+volumes:
+  losmeshes:
+    external: true
+  navmeshes:
+    external: true

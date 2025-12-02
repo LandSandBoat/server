@@ -25,48 +25,47 @@ content:addEssentialMobs({ 'Heavy_Metal_Crab', 'Metal_Crab' })
 content.loot =
 {
     {
-        { item = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 1000 }, -- slice_of_land_crab_meat
+        { itemId = xi.item.GIL,                     weight = 1000, amount = 1500 },
     },
 
     {
-        { item = xi.item.MANNEQUIN_BODY, weight = 1000 }, -- mannequin_body
+        quantity = 2,
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,       weight = 200 },
+        { itemId = xi.item.BRONZE_SHEET,            weight = 100 },
+        { itemId = xi.item.BRONZE_INGOT,            weight = 100 },
+        { itemId = xi.item.PLATOON_CESTI,           weight =  75 },
+        { itemId = xi.item.PLATOON_DAGGER,          weight =  75 },
+        { itemId = xi.item.PLATOON_AXE,             weight =  75 },
+        { itemId = xi.item.PLATOON_BOW,             weight =  75 },
+        { itemId = xi.item.PLATOON_LANCE,           weight =  75 },
+        { itemId = xi.item.PLATOON_SWORD,           weight =  75 },
+        { itemId = xi.item.PLATOON_MACE,            weight =  75 },
+        { itemId = xi.item.PLATOON_ZAGHNAL,         weight =  75 },
     },
 
     {
-        { item = xi.item.NONE,       weight = 334 }, -- nothing
-        { item = xi.item.CRAB_SHELL, weight = 666 }, -- crab_shell
+        { itemId = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 1000 },
     },
 
     {
-        { item = xi.item.BEETLE_QUIVER,         weight = 444 }, -- beetle_quiver
-        { item = xi.item.JUG_OF_FISH_OIL_BROTH, weight = 556 }, -- jug_of_fish_oil_broth
+        { itemId = xi.item.NONE,                    weight = 500 },
+        { itemId = xi.item.CRAB_SHELL,              weight = 500 },
     },
 
     {
-        { item = xi.item.NONE,         weight = 450 }, -- nothing
-        { item = xi.item.BRASS_INGOT,  weight = 100 }, -- brass_ingot
-        { item = xi.item.BRONZE_SHEET, weight = 150 }, -- bronze_sheet
-        { item = xi.item.BRONZE_INGOT, weight = 300 }, -- bronze_ingot
+        { itemId = xi.item.BEETLE_QUIVER,           weight = 500 },
+        { itemId = xi.item.JUG_OF_FISH_OIL_BROTH,   weight = 500 },
     },
 
     {
-        { item = xi.item.NONE,              weight = 300 }, -- nothing
-        { item = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
-        { item = xi.item.MANNEQUIN_HANDS,   weight = 100 }, -- mannequin_hands
-        { item = xi.item.MANNEQUIN_HEAD,    weight = 100 }, -- mannequin_head
+        { itemId = xi.item.MANNEQUIN_BODY,          weight = 1000 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 200 }, -- nothing
-        { item = xi.item.PLATOON_CESTI,   weight = 100 }, -- platoon_cesti
-        { item = xi.item.PLATOON_DAGGER,  weight = 100 }, -- platoon_dagger
-        { item = xi.item.PLATOON_AXE,     weight = 100 }, -- platoon_axe
-        { item = xi.item.PLATOON_BOW,     weight = 100 }, -- platoon_bow
-        { item = xi.item.PLATOON_LANCE,   weight = 100 }, -- platoon_lance
-        { item = xi.item.PLATOON_SWORD,   weight = 100 }, -- platoon_sword
-        { item = xi.item.PLATOON_MACE,    weight = 100 }, -- platoon_mace
-        { item = xi.item.PLATOON_ZAGHNAL, weight = 100 }, -- platoon_zaghnal
+        { itemId = xi.item.NONE,                    weight = 950 },
+        { itemId = xi.item.MANNEQUIN_HANDS,         weight =  50 },
     },
+
 }
 
 return content:register()

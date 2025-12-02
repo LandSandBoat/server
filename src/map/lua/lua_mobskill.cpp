@@ -92,6 +92,16 @@ uint32 CLuaMobSkill::getPrimaryTargetID()
     return m_PLuaMobSkill->getPrimaryTargetID();
 }
 
+void CLuaMobSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    return m_PLuaMobSkill->setFinalAnimationSub(newAnimationSub);
+}
+
+void CLuaMobSkill::setAnimationTime(uint32 newAnimationTime)
+{
+    m_PLuaMobSkill->setAnimationTime(std::chrono::milliseconds(newAnimationTime));
+}
+
 uint16 CLuaMobSkill::getMsg()
 {
     return m_PLuaMobSkill->getMsg();
@@ -130,6 +140,31 @@ uint8 CLuaMobSkill::getMobHPP()
     return m_PLuaMobSkill->getHPP();
 }
 
+auto CLuaMobSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_PLuaMobSkill->getAttackType();
+}
+
+void CLuaMobSkill::setAttackType(ATTACK_TYPE attackType)
+{
+    m_PLuaMobSkill->setAttackType(attackType);
+}
+
+bool CLuaMobSkill::isCritical()
+{
+    return m_PLuaMobSkill->isCritical();
+}
+
+void CLuaMobSkill::setCritical(bool isCritical)
+{
+    m_PLuaMobSkill->setCritical(isCritical);
+}
+
+auto CLuaMobSkill::getKnockback() const -> Knockback
+{
+    return m_PLuaMobSkill->getKnockback();
+}
+
 //======================================================//
 
 void CLuaMobSkill::Register()
@@ -146,9 +181,16 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTargets", CLuaMobSkill::getTargets);
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
+    SOL_REGISTER("setFinalAnimationSub", CLuaMobSkill::setFinalAnimationSub);
+    SOL_REGISTER("setAnimationTime", CLuaMobSkill::setAnimationTime);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHP", CLuaMobSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+    SOL_REGISTER("getAttackType", CLuaMobSkill::getAttackType);
+    SOL_REGISTER("setAttackType", CLuaMobSkill::setAttackType);
+    SOL_REGISTER("isCritical", CLuaMobSkill::isCritical);
+    SOL_REGISTER("setCritical", CLuaMobSkill::setCritical);
+    SOL_REGISTER("getKnockback", CLuaMobSkill::getKnockback);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)

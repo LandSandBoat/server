@@ -11,19 +11,19 @@ xi.settings = xi.settings or {}
 
 xi.settings.network =
 {
-    SQL_HOST     = "127.0.0.1",
+    SQL_HOST     = '127.0.0.1',
     SQL_PORT     = 3306,
-    SQL_LOGIN    = "root",
-    SQL_PASSWORD = "root",
-    SQL_DATABASE = "xidb",
+    SQL_LOGIN    = 'root',
+    SQL_PASSWORD = 'root',
+    SQL_DATABASE = 'xidb',
 
-    LOGIN_DATA_IP   = "0.0.0.0",
+    LOGIN_DATA_IP   = '0.0.0.0',
     LOGIN_DATA_PORT = 54230,
-    LOGIN_VIEW_IP   = "0.0.0.0",
+    LOGIN_VIEW_IP   = '0.0.0.0',
     LOGIN_VIEW_PORT = 54001,
-    LOGIN_AUTH_IP   = "0.0.0.0",
+    LOGIN_AUTH_IP   = '0.0.0.0',
     LOGIN_AUTH_PORT = 54231,
-    LOGIN_CONF_IP   = "0.0.0.0",
+    LOGIN_CONF_IP   = '0.0.0.0',
     LOGIN_CONF_PORT = 51220,
 
     MAP_PORT = 54230,
@@ -34,11 +34,11 @@ xi.settings.network =
     SQL_QUERY_RETRY_COUNT = 1,
 
     ENABLE_HTTP = false,
-    HTTP_HOST   = "localhost",
+    HTTP_HOST   = 'localhost',
     HTTP_PORT   = 8088,
 
     -- Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
-    ZMQ_IP   = "127.0.0.1",
+    ZMQ_IP   = '127.0.0.1',
     ZMQ_PORT = 54003,
 
     -- ===========================
@@ -78,9 +78,9 @@ xi.settings.network =
     --   allow,deny     : Checks allow rules, then deny rules. Allows if no rules match.
     --   mutual-failure : Allows only if an allow rule matches and no deny rules match.
     -- (default is deny,allow)
-    TCP_ORDER = "deny,allow",
-    --TCP_ORDER = "allow,deny",
-    --TCP_ORDER = "mutual-failure",
+    TCP_ORDER = 'deny,allow',
+    --TCP_ORDER = 'allow,deny',
+    --TCP_ORDER = 'mutual-failure',
 
     -- ===========================
     -- IP rules
@@ -90,17 +90,17 @@ xi.settings.network =
     -- The rules are processed in order, the first matching rule of each list
     -- (allow and deny) is used
 
-    TCP_ALLOW = "",
-    --TCP_ALLOW = "127.0.0.1,192.168.0.0/16",
-    --TCP_ALLOW = "127.0.0.1"
-    --TCP_ALLOW = "192.168.0.0/16"
-    --TCP_ALLOW = "10.0.0.0/255.0.0.0"
-    --TCP_ALLOW = "all"
+    TCP_ALLOW = '',
+    --TCP_ALLOW = '127.0.0.1,192.168.0.0/16',
+    --TCP_ALLOW = '127.0.0.1'
+    --TCP_ALLOW = '192.168.0.0/16'
+    --TCP_ALLOW = '10.0.0.0/255.0.0.0'
+    --TCP_ALLOW = 'all'
 
-    TCP_DENY = "",
-    --TCP_DENY = "10.0.0.0/8,192.168.0.0/16",
-    --TCP_DENY = "127.0.0.1",
-    --TCP_DENY = "10.0.0.0/255.0.0.0",
+    TCP_DENY = '',
+    --TCP_DENY = '10.0.0.0/8,192.168.0.0/16',
+    --TCP_DENY = '127.0.0.1',
+    --TCP_DENY = '10.0.0.0/255.0.0.0',
 
     -- ===========================
     -- Connection Limit Settings

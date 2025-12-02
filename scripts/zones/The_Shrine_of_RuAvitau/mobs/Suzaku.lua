@@ -2,27 +2,17 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Suzaku (Pet version)
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
--- Return the selected spell ID.
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
-    -- Let's give -ga3 a higher distribution than the others.
-    local rnd = math.random(1, 100)
-
-    if rnd <= 50 then
-        return 176 -- firaga 3
-    elseif rnd <= 70 then
-        return 147 -- fire 4
-    elseif rnd <= 90 then
-        return 204 -- flare
-    else
-        return 235 -- burn
-    end
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE)
 end
 
 return entity

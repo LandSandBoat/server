@@ -14,9 +14,9 @@ local entity = {}
 local function notBusy(mob)
     local action = mob:getCurrentAction()
     if
-        action == xi.act.MOBABILITY_START or
-        action == xi.act.MOBABILITY_USING or
-        action == xi.act.MOBABILITY_FINISH
+        action == xi.action.category.MOBABILITY_START or
+        action == xi.action.category.MOBABILITY_USING or
+        action == xi.action.category.MOBABILITY_FINISH
     then
         return false
     end
@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('tpMoveCount', 3)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     if mob:getLocalVar('tpMoveCount') == 0 then
         mob:setLocalVar('tpMoveCount', 3)
     end

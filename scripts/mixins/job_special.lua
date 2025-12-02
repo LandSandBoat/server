@@ -82,9 +82,9 @@ xi.mix.jobSpecial.config(mob, {
         },
     },
 })
----------------------------------------------------------------- --]]
+----------------------------- --]]
+-----------------------------------
 require('scripts/globals/mixins')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
@@ -126,32 +126,21 @@ local familyEES =
     [ 25] = xi.jsa.EES_ANTICA,  -- Antica
     [115] = xi.jsa.EES_SHADE,   -- Fomor
     [126] = xi.jsa.EES_GIGA,    -- Gigas
-    [127] = xi.jsa.EES_GIGA,    -- Gigas
-    [128] = xi.jsa.EES_GIGA,    -- Gigas
-    [129] = xi.jsa.EES_GIGA,    -- Gigas
-    [130] = xi.jsa.EES_GIGA,    -- Gigas
     [133] = xi.jsa.EES_GOBLIN,  -- Goblin
     [169] = xi.jsa.EES_KINDRED, -- Kindred
     [171] = xi.jsa.EES_LAMIA,   -- Lamiae
     [182] = xi.jsa.EES_MERROW,  -- Merrow
     [184] = xi.jsa.EES_GOBLIN,  -- Moblin
     [189] = xi.jsa.EES_ORC,     -- Orc
-    [200] = xi.jsa.EES_QUADAV,  -- Quadav
-    [201] = xi.jsa.EES_QUADAV,  -- Quadav
     [202] = xi.jsa.EES_QUADAV,  -- Quadav
     [221] = xi.jsa.EES_SHADE,   -- Shadow
-    [222] = xi.jsa.EES_SHADE,   -- Shadow
-    [223] = xi.jsa.EES_SHADE,   -- Shadow
     [246] = xi.jsa.EES_TROLL,   -- Troll
     [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
     [327] = xi.jsa.EES_GOBLIN,  -- Goblin
     [328] = xi.jsa.EES_GIGA,    -- Gigas
-    [334] = xi.jsa.EES_ORC,     -- OrcNM
     [335] = xi.jsa.EES_MAAT,    -- Maat
-    [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
     [358] = xi.jsa.EES_KINDRED, -- Kindred
     [359] = xi.jsa.EES_SHADE,   -- Fomor
-    [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
     [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
 }
 
@@ -268,7 +257,7 @@ g_mixins.job_special = function(jobSpecialMob)
     -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
 
-    jobSpecialMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
+    jobSpecialMob:addListener('PRESPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
         local mJob    = mob:getMainJob()
         local ability = job2hr[mJob]
 

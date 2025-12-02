@@ -10,7 +10,16 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  219.000, y = -2.000, z = -99.000 }
+}
+
 entity.onMobInitialize = function(mob)
+    -- Update spawn point and set respawn time
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:setRespawnTime(75600 + 1800 * math.random(1, 6))
+
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.UNDERSTANDING_OVERLORD_OFFSET then
         mob:setMobMod(xi.mobMod.GIL_MAX, -1)
@@ -49,10 +58,10 @@ entity.onMobDespawn = function(mob)
     if GetSystemTime() > timeOfDeath and popNow then
         DisallowRespawn(mobId, true)
         DisallowRespawn(hqId, false)
-        UpdateNMSpawnPoint(hqId)
+        xi.mob.updateNMSpawnPoint(hqId)
         GetMobByID(hqId):setRespawnTime(respawnTime)
     else
-        UpdateNMSpawnPoint(mobId)
+        xi.mob.updateNMSpawnPoint(mobId)
         mob:setRespawnTime(respawnTime)
         SetServerVariable('[PH]Overlord_Bakgodek', kills)
     end

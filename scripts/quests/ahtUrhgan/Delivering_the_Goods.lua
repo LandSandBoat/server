@@ -111,7 +111,7 @@ quest.sections =
             {
                 [41] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setVar('Quest[6][62]Stage', getMidnight())
+                        player:setVar('Quest[6][62]Stage', JstMidnight())
 
                         -- Player must zone before being able to flag the next quest
                         player:setLocalVar('Quest[6][62]mustZone', 1)

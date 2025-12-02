@@ -22,4 +22,8 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.FAITH_QM)
+end
+
 return entity

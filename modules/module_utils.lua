@@ -1,8 +1,6 @@
 -----------------------------------
 -- Module helpers
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.module = xi.module or {}
 

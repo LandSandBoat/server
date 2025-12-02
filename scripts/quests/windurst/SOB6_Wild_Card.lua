@@ -69,6 +69,24 @@ quest.sections =
             },
         },
 
+        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
+        {
+            ['Treasure_Coffer'] =
+            {
+                onTrade = function(player, npc, trade)
+                    local questProgress = quest:getVar(player, 'Prog')
+                    if
+                        not player:hasKeyItem(xi.keyItem.JOKER_CARD) and
+                        (questProgress == 2 or questProgress == 3)
+                    then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.JOKER_CARD)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.WINDURST_WALLS] =
         {
             ['_6n2'] =

@@ -38,6 +38,7 @@ if(ENABLE_FAST_MATH)
     message(STATUS "ENABLE_FAST_MATH: ON")
     if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
         add_compile_options(-ffast-math)
+        add_compile_options(-fno-finite-math-only) # only GCC needs this, /fp:fast on VC++ doesnt force finite math only
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         add_compile_options(/fp:fast)
     endif()
@@ -67,7 +68,6 @@ if(MSVC)
         # /EDITANDCONTINUE isn't supported, it messes with Tracy
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
         list(APPEND FLAGS_AND_DEFINES
-            /Zi # The /Zi option produces a separate PDB file that contains all the symbolic debugging information for use with the debugger.
             /GR # Enable RTTI
         )
     else()

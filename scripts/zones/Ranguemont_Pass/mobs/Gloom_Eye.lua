@@ -2,8 +2,20 @@
 -- Area: Ranguemont Pass
 --   NM: Gloom Eye
 -----------------------------------
+local ID = zones[xi.zone.RANGUEMONT_PASS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -152.136, y = -5.216, z = -89.814 }
+}
+
+entity.phList =
+{
+    [ID.mob.GLOOM_EYE - 4] = ID.mob.GLOOM_EYE,
+}
 
 entity.onMobFight = function(mob, target)
     --[[

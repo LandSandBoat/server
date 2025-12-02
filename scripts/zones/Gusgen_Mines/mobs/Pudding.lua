@@ -12,18 +12,30 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
+end
+
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    local pudding = ID.mob.PUDDING_OFFSET
+
     if
         player:getCharVar('EcoStatus') == 101 and
         player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
     then
         local bothDead = true
-        for i = ID.mob.PUDDING_OFFSET, ID.mob.PUDDING_OFFSET + 1 do
-            if i ~= mob:getID() and GetMobByID(i):isAlive() then
+        for i = pudding, pudding + 1 do
+            local nmCheck = GetMobByID(i)
+
+            if
+                i ~= mob:getID() and
+                nmCheck and
+                nmCheck:isAlive()
+            then
                 bothDead = false
             end
         end

@@ -36,6 +36,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                         return quest:progressEvent(107)
+                    else
+                        return quest:event(106)
                     end
                 end,
             },

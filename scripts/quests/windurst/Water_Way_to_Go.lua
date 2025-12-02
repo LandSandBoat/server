@@ -4,6 +4,7 @@
 -- !addquest 2 16
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -- Giddeus Spring : !pos -258 -2 -249 145
+-- TODO: Wikis claim that this can be repeated. However, captures don't indicate this. Needs testing/verifying.
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
@@ -98,6 +99,7 @@ quest.sections =
 
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:tradeComplete()
                         -- Note: Message display for gil reward is handled by the event
                         player:addGil(900)
                         player:setLocalVar('Quest[2][17]mustZone', 1)

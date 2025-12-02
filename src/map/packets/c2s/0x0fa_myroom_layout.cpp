@@ -24,10 +24,10 @@
 #include "entities/charentity.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
-#include "packets/furniture_interact.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_size.h"
+#include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -99,8 +99,13 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
     if (MyroomFloorFlg && PItem->isGardeningPot())
     {
-        RATE_LIMIT(30s, ShowErrorFmt("{} has tried to gardening pot {} ({}) on 2nd floor",
-                                     PChar->getName(), PItem->getID(), PItem->getName()));
+        RATE_LIMIT(
+            30s,
+            ShowErrorFmt(
+                "{} has tried to gardening pot {} ({}) on 2nd floor",
+                PChar->getName(),
+                PItem->getID(),
+                PItem->getName()));
         return;
     }
 
@@ -164,13 +169,16 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
 
         PItem->setSubType(ITEM_LOCKED);
 
-        PChar->pushPacket<CFurnitureInteractPacket>(PItem, MyroomCategory, MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory "
                                            "SET "
                                            "extra = ? "
                                            "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
-                                           PItem->m_extra, MyroomCategory, MyroomItemIndex, PChar->id);
+                                           PItem->m_extra,
+                                           MyroomCategory,
+                                           MyroomItemIndex,
+                                           PChar->id);
 
         if (rset && rset->rowsAffected() && !wasInstalled)
         {
@@ -180,13 +188,14 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
                 PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
             }
 
-            PChar->pushPacket<CInventorySizePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
 
             luautils::OnFurniturePlaced(PChar, PItem);
 
             PChar->loc.zone->SpawnConditionalNPCs(PChar);
         }
-        PChar->pushPacket<CInventoryItemPacket>(PItem, MyroomCategory, MyroomItemIndex);
-        PChar->pushPacket<CInventoryFinishPacket>();
+
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
 }

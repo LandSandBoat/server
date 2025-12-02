@@ -2,8 +2,22 @@
 -- Area: Den of Rancor
 --   NM: Ogama
 -----------------------------------
+local ID = zones[xi.zone.DEN_OF_RANCOR]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -34.000, y =  36.000, z = -358.000 }
+}
+
+entity.phList =
+{
+    [ID.mob.OGAMA - 2] = ID.mob.OGAMA,
+    [ID.mob.OGAMA + 4] = ID.mob.OGAMA,
+    [ID.mob.OGAMA + 5] = ID.mob.OGAMA,
+}
 
 entity.onMobFight = function(mob, target)
     local mobHPP = mob:getHPP()

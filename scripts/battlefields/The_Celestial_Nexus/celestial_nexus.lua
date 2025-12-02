@@ -16,10 +16,7 @@ local content = BattlefieldMission:new({
     timeLimit     = utils.minutes(30),
     index         = 0,
     entryNpc      = '_513',
-
-    -- TODO: This needs verification, and potentially updating the door inside of the arena to not open
-    -- and display appropriate message.
-    exitNpcs      = { },
+    exitNpcs      = { '_514', '_515' },
 
     missionArea           = xi.mission.log_id.ZILART,
     mission               = xi.mission.id.zilart.THE_CELESTIAL_NEXUS,

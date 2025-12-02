@@ -20,11 +20,16 @@
 */
 
 #include "0x00a_login.h"
+#include "packets/s2c/0x00a_login.h"
 
+#include "ai/ai_container.h"
+#include "ai/helpers/action_queue.h"
 #include "entities/charentity.h"
-#include "packets/downloading_data.h"
-#include "packets/zone_in.h"
-#include "packets/zone_visited.h"
+#include "packets/s2c/0x008_enterzone.h"
+#include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x04f_equip_clear.h"
+#include "packets/s2c/0x050_equip_list.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "utils/charutils.h"
 #include "utils/gardenutils.h"
 #include "utils/zoneutils.h"
@@ -81,7 +86,13 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
             // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
             ShowWarning("GP_CLI_COMMAND_LOGIN: player tried to enter zone that was invalid or out of range");
             ShowWarning("GP_CLI_COMMAND_LOGIN: dumping player `%s` to homepoint!", PChar->getName());
-            charutils::HomePoint(PChar, true);
+            PChar->requestedWarp = true; // Not a "request" but a demand
+
+            // Save pet if any
+            if (PChar->shouldPetPersistThroughZoning())
+            {
+                PChar->setPetZoningInfo();
+            }
             return;
         }
 
@@ -116,8 +127,18 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
     if (PChar->loc.zone != nullptr)
     {
-        PChar->pushPacket<CDownloadingDataPacket>();
-        PChar->pushPacket<CZoneInPacket>(PChar, PChar->currentEvent);
-        PChar->pushPacket<CZoneVisitedPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_LOGIN>(PChar, PChar->currentEvent);
+        for (uint8 i = 0; i < 16; ++i)
+        {
+            if (PChar->equip[i] != 0)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(PChar->equip[i], static_cast<SLOTTYPE>(i), static_cast<CONTAINER_ID>(PChar->equipLoc[i]));
+            }
+        }
+        PChar->status = STATUS_TYPE::NORMAL;
+        PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
 }

@@ -19,16 +19,15 @@
 ===========================================================================
 */
 
-#include <cstring>
-
-#include "entities/charentity.h"
 #include "merit.h"
+#include "entities/charentity.h"
 
 #include "map_engine.h"
-#include "packets/char_abilities.h"
-#include "packets/char_spells.h"
+#include "packets/s2c/0x0aa_magic_data.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "utils/charutils.h"
 
+// clang-format off
 static uint8 upgrade[10][45] = {
     { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
     { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
@@ -44,11 +43,13 @@ static uint8 upgrade[10][45] = {
       48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51,
       51, 51 } // Max merits
 };
+// clang-format on
 
 #define MAX_LIMIT_POINTS 10000
 
 // TODO: Transfer all this to the database
 
+// clang-format off
 static uint8 cap[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           // 00-09  0
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           // 10-19  1
@@ -64,6 +65,7 @@ static uint8 cap[100] = {
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
 };
+// clang-format on
 
 struct MeritCategoryInfo_t
 {
@@ -72,6 +74,7 @@ struct MeritCategoryInfo_t
     uint8 UpgradeID;   // group index in upgrade array
 };
 
+// clang-format off
 static const MeritCategoryInfo_t meritCatInfo[] = {
     { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
     { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
@@ -135,6 +138,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 }, // MCATEGORY_GEO_2       catNumber 52
     { 4, 10, 7 }, // MCATEGORY_RUN_2       catNumber 53
 };
+// clang-format on
 
 #define GetMeritCategory(merit) (((merit) >> 6) - 1)    // get category from merit
 #define GetMeritID(merit)       (((merit) & 0x3F) >> 1) // get the offset in the category from merit
@@ -158,8 +162,8 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 
 void CMeritPoints::LoadMeritPoints(uint32 charid)
 {
-    uint8 catNumber   = 0;
-    uint8 maxCatCount = 54;
+    uint8       catNumber   = 0;
+    const uint8 maxCatCount = 54;
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
@@ -181,39 +185,43 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
     }
 
-    if (_sql->Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
+    const auto rset = db::preparedStmt("SELECT meritid, upgrades FROM char_merit WHERE charid = ?", charid);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        for (uint64 j = 0; j < _sql->NumRows(); j++)
+        const auto meritID  = rset->get<uint32>("meritid");
+        const auto upgrades = rset->get<uint32>("upgrades");
+        for (auto& merit : merits)
         {
-            if (_sql->NextRow() == SQL_SUCCESS)
+            if (merit.id == meritID)
             {
-                uint32 meritID  = _sql->GetUIntData(0);
-                uint32 upgrades = _sql->GetUIntData(1);
-                for (auto& merit : merits)
-                {
-                    if (merit.id == meritID)
-                    {
-                        merit.count = upgrades;
-                        merit.next  = upgrade[merit.upgradeid][merit.count];
-                    }
-                }
+                merit.count = upgrades;
+                merit.next  = upgrade[merit.upgradeid][merit.count];
             }
         }
     }
 }
 
-void CMeritPoints::SaveMeritPoints(uint32 charid)
+void CMeritPoints::SaveMeritPoints(const uint32 charid)
 {
-    for (auto& merit : merits)
+    for (const auto& merit : merits)
     {
         if (merit.count > 0)
         {
-            _sql->Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
-                        merit.id, merit.count, merit.count);
+            db::preparedStmt("INSERT INTO char_merit (charid, meritid, upgrades) "
+                             "VALUES(?, ?, ?) "
+                             "ON DUPLICATE KEY UPDATE upgrades = ?",
+                             charid,
+                             merit.id,
+                             merit.count,
+                             merit.count);
         }
         else
         {
-            _sql->Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            db::preparedStmt("DELETE FROM char_merit "
+                             "WHERE charid = ? "
+                             "AND meritid = ?",
+                             charid,
+                             merit.id);
         }
     }
 }
@@ -351,7 +359,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
             if (charutils::addSpell(m_PChar, PMerit->spellid))
             {
                 charutils::SaveSpell(m_PChar, PMerit->spellid);
-                m_PChar->pushPacket<CCharSpellsPacket>(m_PChar);
+                m_PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(m_PChar);
             }
         }
 
@@ -360,7 +368,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
             charutils::addLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
             charutils::BuildingCharWeaponSkills(m_PChar);
             charutils::SaveLearnedAbilities(m_PChar);
-            m_PChar->pushPacket<CCharAbilitiesPacket>(m_PChar);
+            m_PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(m_PChar);
         }
 
         PMerit->count++;
@@ -384,7 +392,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
         if (charutils::delSpell(m_PChar, PMerit->spellid))
         {
             charutils::DeleteSpell(m_PChar, PMerit->spellid);
-            m_PChar->pushPacket<CCharSpellsPacket>(m_PChar);
+            m_PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(m_PChar);
 
             // Reset traits
             charutils::BuildingCharTraitsTable(m_PChar);
@@ -396,7 +404,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
         charutils::delLearnedWeaponskill(m_PChar, PMerit->wsunlockid);
         charutils::BuildingCharWeaponSkills(m_PChar);
         charutils::SaveLearnedAbilities(m_PChar);
-        m_PChar->pushPacket<CCharAbilitiesPacket>(m_PChar);
+        m_PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(m_PChar);
     }
 }
 
@@ -425,64 +433,61 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
 
 namespace meritNameSpace
 {
-    Merit_t GMeritsTemplate[MERITS_COUNT]         = {};    // global list of merits and their properties
-    int16   groupOffset[MCATEGORY_COUNT / 64 - 1] = { 0 }; // the first merit offset of each category
 
-    void LoadMeritsList()
+Merit_t GMeritsTemplate[MERITS_COUNT]         = {};    // global list of merits and their properties
+int16   groupOffset[MCATEGORY_COUNT / 64 - 1] = { 0 }; // the first merit offset of each category
+
+void LoadMeritsList()
+{
+    const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id "
+                                       "FROM merits m "
+                                       "LEFT JOIN spell_list sl ON m.name = sl.name "
+                                       "LEFT JOIN weapon_skills ws ON m.name = ws.name "
+                                       "ORDER BY m.meritid ASC LIMIT ?",
+                                       MERITS_COUNT);
+
+    // issue with unknown catagories causing massive confusion
+
+    uint16 index            = 0; // global merit template count (to 255)
+    uint8  catIndex         = 0; // global merit category count (to 51)
+    int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
+    int8   catMeritIndex    = 0; // counts number of merits in a category
+
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        int32 ret = _sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id FROM merits m LEFT JOIN "
-                                "spell_list sl ON m.name = sl.name LEFT JOIN weapon_skills ws ON m.name = ws.name ORDER BY m.meritid ASC LIMIT %u",
-                                MERITS_COUNT);
+        Merit_t Merit = {}; // creat a new merit template.
 
-        if (ret != SQL_ERROR && _sql->NumRows() != MERITS_COUNT)
+        Merit.id         = rset->get<uint16>("meritid"); // set data from db.
+        Merit.value      = rset->get<uint32>("value");
+        Merit.jobs       = rset->get<uint32>("jobs");
+        Merit.upgrade    = rset->get<uint32>("upgrade");
+        Merit.upgradeid  = rset->get<uint8>("upgradeid");
+        Merit.catid      = rset->get<uint8>("catagoryid");
+        Merit.next       = upgrade[Merit.upgradeid][0];
+        Merit.spellid    = rset->getOrDefault<uint16>("spellid", 0);
+        Merit.wsunlockid = rset->getOrDefault<uint16>("unlock_id", 0);
+
+        GMeritsTemplate[index] = Merit; // add the merit to the array
+
+        previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
+
+        if (previousCatIndex != catIndex) // check for category change.
         {
-            // issue with unknown catagories causing massive confusion
+            groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
+            catIndex++;                                    // now on next category.
+            catMeritIndex = 0;                             // reset the merit category count to 0.
 
-            uint16 index            = 0; // global merit template count (to 255)
-            uint8  catIndex         = 0; // global merit category count (to 51)
-            int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
-            int8   catMeritIndex    = 0; // counts number of merits in a category
-
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                Merit_t Merit = {}; // creat a new merit template.
-
-                Merit.id         = _sql->GetUIntData(0); // set data from db.
-                Merit.value      = _sql->GetUIntData(1);
-                Merit.jobs       = _sql->GetUIntData(2);
-                Merit.upgrade    = _sql->GetUIntData(3);
-                Merit.upgradeid  = _sql->GetUIntData(4);
-                Merit.catid      = _sql->GetUIntData(5);
-                Merit.next       = upgrade[Merit.upgradeid][0];
-                Merit.spellid    = _sql->GetUIntData(6);
-                Merit.wsunlockid = _sql->GetUIntData(7);
-
-                GMeritsTemplate[index] = Merit; // add the merit to the array
-
-                previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
-
-                if (previousCatIndex != catIndex) // check for category change.
-                {
-                    groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
-                    catIndex++;                                    // now on next category.
-                    catMeritIndex = 0;                             // reset the merit category count to 0.
-
-                    if (previousCatIndex != catIndex)
-                    { // this deals with the problem with unknown catagories.
-                        catIndex = previousCatIndex;
-                    }
-                }
-
-                catMeritIndex++; // next index within category.
-                index++;         // next global template index.
+            if (previousCatIndex != catIndex)
+            { // this deals with the problem with unknown catagories.
+                catIndex = previousCatIndex;
             }
+        }
 
-            groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
-        }
-        else
-        {
-            ShowError("The merits table is damaged");
-        }
+        catMeritIndex++; // next index within category.
+        index++;         // next global template index.
     }
+
+    groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+}
 
 }; // namespace meritNameSpace

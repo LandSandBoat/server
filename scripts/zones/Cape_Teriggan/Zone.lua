@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
-require('scripts/quests/i_can_hear_a_rainbow')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -27,10 +25,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-219, 0, -318, 191)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 2
-    end
-
     return cs
 end
 
@@ -38,9 +32,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 2 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

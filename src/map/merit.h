@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMERIT_H
-#define _CMERIT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -582,10 +581,10 @@ private:
 
 namespace meritNameSpace
 {
-    void LoadMeritsList(); // load the global list of merits
 
-    extern Merit_t GMeritsTemplate[MERITS_COUNT];
-    extern int16   groupOffset[MCATEGORY_COUNT / 64 - 1]; // the first merit offset of each category
+void LoadMeritsList(); // load the global list of merits
+
+extern Merit_t GMeritsTemplate[MERITS_COUNT];
+extern int16   groupOffset[MCATEGORY_COUNT / 64 - 1]; // the first merit offset of each category
+
 }; // namespace meritNameSpace
-
-#endif

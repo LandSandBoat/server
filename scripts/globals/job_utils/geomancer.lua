@@ -170,6 +170,25 @@ xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
+xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck = function(player, target, ability)
+    local pet = player:getPet()
+    if not hasLuopan(player) or not pet then
+        return xi.msg.basic.REQUIRE_LUOPAN, 0
+    end
+
+    -- player out of range of luopan
+    if player:checkDistance(pet) > ability:getRange() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, 0
+    end
+
+    -- target out of range of luopan
+    if target:checkDistance(pet) > ability:getRange() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, pet:getTargID()
+    end
+
+    return 0, 0
+end
+
 xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, ability)
     if not hasLuopan(player) then
         return xi.msg.basic.REQUIRE_LUOPAN, 0
@@ -185,7 +204,6 @@ end
 xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ability)
     local luopan = getLuopan(player)
 
-    -- TODO: this never fires if you dont have a bubble up and says "Unable to attack that target." Core issue?
     if not luopan then
         return xi.msg.basic.REQUIRE_LUOPAN, 0
     end
@@ -265,6 +283,8 @@ end
 xi.job_utils.geomancer.bolster = function(player, target, ability)
     local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
     player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+
+    return xi.effect.BOLSTER
 end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
@@ -293,8 +313,11 @@ xi.job_utils.geomancer.fullCircle = function(player, target, ability)
 end
 
 xi.job_utils.geomancer.lastingEmanation = function(player, target, ability)
-    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
-    target:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(target:getMainLvl() / 14))
+    local luopan = getLuopan(player)
+    if luopan then
+        local hpDrain = luopan:getMod(xi.mod.REGEN_DOWN)
+        luopan:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(luopan:getMainLvl() / 14))
+    end
 end
 
 -- TODO: allegedly Blaze of Glory is additive to this, but we aren't keeping track of that potency, so BoG + Ecliptic Attrition is stronger than it should be.
@@ -323,6 +346,8 @@ end
 
 xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
     target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, 0, 0, 60)
+
+    return xi.effect.COLLIMATED_FERVOR
 end
 
 xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
@@ -340,10 +365,16 @@ end
 
 xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
     player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
+
+    return xi.effect.BLAZE_OF_GLORY
 end
 
 xi.job_utils.geomancer.dematerialize = function(player, target, ability)
-    target:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+    local luopan = getLuopan(player)
+    if luopan then
+        luopan:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+    end
+
     return xi.effect.DEMATERIALIZE
 end
 
@@ -352,6 +383,8 @@ end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
     player:addStatusEffect(xi.effect.WIDENED_COMPASS, 0, 3, 60)
+
+    return xi.effect.WIDENED_COMPASS
 end
 
 -----------------------------------

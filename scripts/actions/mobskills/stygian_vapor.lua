@@ -10,7 +10,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 0, 60))
+    local typeEffect = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 0, 120)
+
+    if typeEffect == nil then
+        typeEffect = xi.msg.basic.SKILL_NO_EFFECT
+    end
+
+    skill:setMsg(typeEffect)
 
     return xi.effect.PLAGUE
 end

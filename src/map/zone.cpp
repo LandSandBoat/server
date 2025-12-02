@@ -19,6 +19,14 @@
 ===========================================================================
 */
 
+#include "packets/s2c/0x057_weather.h"
+namespace
+{
+
+constexpr std::uint16_t WeatherCycle = 2160;
+
+}
+
 // TODO:
 // It is necessary to divide the CZone class into basic and heirs. Already painted: Standard, Resident, Instance and Dynamis
 // Each of these zones has special behavior
@@ -34,8 +42,6 @@
 #include <cstring>
 
 #include "battlefield.h"
-#include "common/vana_time.h"
-#include "enmity_container.h"
 #include "ipc_client.h"
 #include "latent_effect_container.h"
 #include "los/zone_los.h"
@@ -51,9 +57,6 @@
 #include "entities/petentity.h"
 
 #include "lua/luautils.h"
-
-#include "packets/action.h"
-#include "packets/server_ip.h"
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -77,7 +80,7 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
-    m_Weather            = WEATHER_NONE;
+    m_Weather            = Weather::None;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
@@ -152,12 +155,12 @@ uint16 CZone::GetTax() const
     return m_tax;
 }
 
-WEATHER CZone::GetWeather()
+auto CZone::GetWeather() const -> Weather
 {
     return m_Weather;
 }
 
-uint32 CZone::GetWeatherChangeTime() const
+auto CZone::GetWeatherChangeTime() const -> uint32
 {
     return m_WeatherChangeTime;
 }
@@ -214,7 +217,7 @@ void CZone::SetBackgroundMusicNight(uint16 music)
  * with other methods that perform pattern matching.
  * E.g: %anto% matches Shantotto and Canto-anto
  */
-QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern)
+const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern)
 {
     TracyZoneScoped;
 
@@ -296,25 +299,22 @@ void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
 
-    static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
-
-    int32 ret = _sql->Query(fmtQuery, m_zoneID);
-
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt("SELECT zoneline, tozone, tox, toy, toz, rotation "
+                                       "FROM zonelines "
+                                       "WHERE fromzone = ?",
+                                       m_zoneID);
+    FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
-        {
-            zoneLine_t* zl = new zoneLine_t;
+        auto* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)_sql->GetIntData(0);
-            zl->m_toZone         = (uint16)_sql->GetIntData(1);
-            zl->m_toPos.x        = _sql->GetFloatData(2);
-            zl->m_toPos.y        = _sql->GetFloatData(3);
-            zl->m_toPos.z        = _sql->GetFloatData(4);
-            zl->m_toPos.rotation = (uint8)_sql->GetIntData(5);
+        zl->m_zoneLineID     = rset->get<uint32>("zoneline");
+        zl->m_toZone         = rset->get<uint16>("tozone");
+        zl->m_toPos.x        = rset->get<float>("tox");
+        zl->m_toPos.y        = rset->get<float>("toy");
+        zl->m_toPos.z        = rset->get<float>("toz");
+        zl->m_toPos.rotation = rset->get<uint8>("rotation");
 
-            m_zoneLineList.emplace_back(zl);
-        }
+        m_zoneLineList.emplace_back(zl);
     }
 }
 
@@ -336,27 +336,25 @@ void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
-
-    int32 ret = _sql->Query(Query, m_zoneID);
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    const auto rset = db::preparedStmt("SELECT weather "
+                                       "FROM zone_weather "
+                                       "WHERE zone = ? LIMIT 1",
+                                       m_zoneID);
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        _sql->NextRow();
-        auto* weatherBlob = reinterpret_cast<uint16*>(_sql->GetData(0));
-        for (uint16 i = 0; i < WEATHER_CYCLE; i++)
+        uint16_t weatherBlob[WeatherCycle]{};
+
+        db::extractFromBlob(rset, "weather", weatherBlob);
+        for (uint16 i = 0; i < WeatherCycle; i++)
         {
             if (weatherBlob[i])
             {
-                uint8 w_normal = static_cast<uint8>(weatherBlob[i] >> 10);
-                uint8 w_common = static_cast<uint8>((weatherBlob[i] >> 5) & 0x1F);
-                uint8 w_rare   = static_cast<uint8>(weatherBlob[i] & 0x1F);
+                const auto w_normal = static_cast<uint8>(weatherBlob[i] >> 10);
+                const auto w_common = static_cast<uint8>((weatherBlob[i] >> 5) & 0x1F);
+                const auto w_rare   = static_cast<uint8>(weatherBlob[i] & 0x1F);
                 m_WeatherVector.insert(std::make_pair(i, zoneWeather_t(w_normal, w_common, w_rare)));
             }
         }
-    }
-    else
-    {
-        ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -364,55 +362,52 @@ void CZone::LoadZoneSettings()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT "
-                               "zone.name,"
-                               "zone.zoneip,"
-                               "zone.zoneport,"
-                               "zone.music_day,"
-                               "zone.music_night,"
-                               "zone.battlesolo,"
-                               "zone.battlemulti,"
-                               "zone.tax,"
-                               "zone.misc,"
-                               "zone.zonetype,"
-                               "bcnm.name "
-                               "FROM zone_settings AS zone "
-                               "LEFT JOIN bcnm_records AS bcnm "
-                               "USING (zoneid) "
-                               "WHERE zoneid = %u "
-                               "LIMIT 1";
-
-    if (_sql->Query(Query, m_zoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    const auto rset = db::preparedStmt("SELECT "
+                                       "zone.name,"
+                                       "zone.zoneip,"
+                                       "zone.zoneport,"
+                                       "zone.music_day,"
+                                       "zone.music_night,"
+                                       "zone.battlesolo,"
+                                       "zone.battlemulti,"
+                                       "zone.tax,"
+                                       "zone.misc,"
+                                       "zone.zonetype,"
+                                       "bcnm.name AS bcnmname "
+                                       "FROM zone_settings AS zone "
+                                       "LEFT JOIN bcnm_records AS bcnm "
+                                       "USING (zoneid) "
+                                       "WHERE zoneid = ? "
+                                       "LIMIT 1",
+                                       m_zoneID);
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        m_zoneName.insert(0, (const char*)_sql->GetData(0));
-        m_zoneIP = str2ip((const char*)_sql->GetData(1));
+        m_zoneName.insert(0, rset->get<std::string>("name"));
+        m_zoneIP   = str2ip(rset->get<std::string>("zoneip"));
+        m_zonePort = rset->get<uint16>("zoneport");
 
-        m_zonePort              = (uint16)_sql->GetUIntData(2);
-        m_zoneMusic.m_songDay   = (uint8)_sql->GetUIntData(3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)_sql->GetUIntData(4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)_sql->GetUIntData(5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)_sql->GetUIntData(6);           // party battle music
-        m_tax                   = (uint16)(_sql->GetFloatData(7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)_sql->GetUIntData(8);
+        m_zoneMusic.m_songDay   = rset->get<uint8>("music_day");
+        m_zoneMusic.m_songNight = rset->get<uint8>("music_night");
+        m_zoneMusic.m_bSongS    = rset->get<uint8>("battlesolo");
+        m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
+        m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
+        m_miscMask              = rset->get<uint16>("misc");
+        m_zoneType              = rset->get<ZONE_TYPE>("zonetype");
 
-        m_zoneType = static_cast<ZONE_TYPE>(_sql->GetUIntData(9));
-
-        if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
+        if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
+
         if (m_miscMask & MISC_TREASURE)
         {
             m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
         }
+
         if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
             destroy(m_CampaignHandler);
         }
-    }
-    else
-    {
-        ShowCritical("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 
@@ -497,9 +492,9 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
     m_zoneEntities->FindPartyForMob(PEntity);
 }
 
-void CZone::TransportDepart(uint16 boundary, uint16 zone)
+void CZone::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
 {
-    m_zoneEntities->TransportDepart(boundary, zone);
+    m_zoneEntities->TransportDepart(boundary, prevZoneId, transportId);
 }
 
 void CZone::updateCharLevelRestriction(CCharEntity* PChar)
@@ -533,13 +528,13 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
     }
 }
 
-void CZone::SetWeather(WEATHER weather)
+void CZone::SetWeather(const Weather weather)
 {
     TracyZoneScoped;
 
-    if (weather >= MAX_WEATHER_ID)
+    if (!magic_enum::enum_contains<Weather>(weather))
     {
-        ShowWarning("Weather value (%d) exceeds MAX_WEATHER_ID.", weather);
+        ShowWarningFmt("Weather value ({}) invalid.", static_cast<uint16_t>(weather));
         return;
     }
 
@@ -553,7 +548,7 @@ void CZone::SetWeather(WEATHER weather)
     m_Weather           = weather;
     m_WeatherChangeTime = earth_time::vanadiel_timestamp();
 
-    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<CWeatherPacket>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
+    m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<GP_SERV_COMMAND_WEATHER>(m_WeatherChangeTime, m_Weather, xirand::GetRandomNumber(4, 28)));
 }
 
 void CZone::UpdateWeather()
@@ -575,7 +570,7 @@ void CZone::UpdateWeather()
     WeatherDay = vanadiel_time::count_days(CurrentVanaDate.time_since_epoch());
 
     // The weather starts over again every 2160 days
-    WeatherDay = WeatherDay % WEATHER_CYCLE;
+    WeatherDay = WeatherDay % WeatherCycle;
 
     // Get a random number to determine which weather effect we will use
     WeatherChance = xirand::GetRandomNumber(100);
@@ -591,37 +586,37 @@ void CZone::UpdateWeather()
         weatherType = weather.second;
     }
 
-    uint8 Weather = 0;
+    auto selectedWeather = Weather::None;
 
     // 15% chance for rare weather, 35% chance for common weather, 50% chance for normal weather
     // * Percentages were generated from a 6 hour sample and rounded down to closest multiple of 5*
     if (WeatherChance < 15) // 15% chance to have the weather_rare
     {
-        Weather = weatherType.rare;
+        selectedWeather = static_cast<Weather>(weatherType.rare);
     }
     else if (WeatherChance < 50) // 35% chance to have weather_common
     {
-        Weather = weatherType.common;
+        selectedWeather = static_cast<Weather>(weatherType.common);
     }
     else
     {
-        Weather = weatherType.normal;
+        selectedWeather = static_cast<Weather>(weatherType.normal);
     }
 
     // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
     // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
     if ((CurrentVanaDate >= StartFogVanaDate) &&
         (CurrentVanaDate < EndFogVanaDate) &&
-        (Weather < WEATHER_HOT_SPELL) &&
+        (selectedWeather < Weather::HotSpell) &&
         !(GetTypeMask() & ZONE_TYPE::CITY))
     {
-        Weather = WEATHER_FOG;
+        selectedWeather = Weather::Fog;
         // Force the weather to change by 7 am
         WeatherNextUpdate = EndFogVanaDate - CurrentVanaDate;
     }
 
-    SetWeather((WEATHER)Weather);
-    luautils::OnZoneWeatherChange(GetID(), Weather);
+    SetWeather(selectedWeather);
+    luautils::OnZoneWeatherChange(GetID(), selectedWeather);
 
     // clang-format off
     timer::time_point nextWeatherTick = timer::now() + std::chrono::duration_cast<earth_time::duration>(WeatherNextUpdate);
@@ -785,7 +780,7 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(std::string const& name)
+CCharEntity* CZone::GetCharByName(const std::string& name)
 {
     return m_zoneEntities->GetCharByName(name);
 }
@@ -844,84 +839,84 @@ void CZone::ZoneServer(timer::time_point tick)
     }
 }
 
-void CZone::ForEachChar(std::function<void(CCharEntity*)> const& func)
+void CZone::ForEachChar(const std::function<void(CCharEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachChar(func);
 }
 
-void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func)
+void CZone::ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func)
 {
     TracyZoneScoped;
 
     ForEachChar(func);
 }
 
-void CZone::ForEachMob(std::function<void(CMobEntity*)> const& func)
+void CZone::ForEachMob(const std::function<void(CMobEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachMob(func);
 }
 
-void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
+void CZone::ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
 {
     TracyZoneScoped;
 
     ForEachMob(func);
 }
 
-void CZone::ForEachNpc(std::function<void(CNpcEntity*)> const& func)
+void CZone::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachNpc(func);
 }
 
-void CZone::ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func)
+void CZone::ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func)
 {
     TracyZoneScoped;
 
     ForEachNpc(func);
 }
 
-void CZone::ForEachTrust(std::function<void(CTrustEntity*)> const& func)
+void CZone::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachTrust(func);
 }
 
-void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func)
+void CZone::ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func)
 {
     TracyZoneScoped;
 
     ForEachTrust(func);
 }
 
-void CZone::ForEachPet(std::function<void(CPetEntity*)> const& func)
+void CZone::ForEachPet(const std::function<void(CPetEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachPet(func);
 }
 
-void CZone::ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func)
+void CZone::ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func)
 {
     TracyZoneScoped;
 
     ForEachPet(func);
 }
 
-void CZone::ForEachAlly(std::function<void(CMobEntity*)> const& func)
+void CZone::ForEachAlly(const std::function<void(CMobEntity*)>& func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachAlly(func);
 }
 
-void CZone::ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
+void CZone::ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
 {
     TracyZoneScoped;
 

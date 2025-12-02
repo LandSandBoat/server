@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, zones[xi.zone.RABAO].text.BRAVEOX_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.SELBINA_RABAO)
 end
 
 return entity

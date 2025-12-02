@@ -9,11 +9,10 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.geomancer.geoOnAbilityCheck(player, target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local master    = pet:getMaster()
+abilityObject.onPetAbility = function(target, pet, petskill, master, action)
     local hpAmount  = math.floor(7 * pet:getMainLvl())
     local hpRestore = hpAmount
 
@@ -27,8 +26,6 @@ abilityObject.onPetAbility = function(target, pet, skill)
     hpRestore = utils.clamp(hpRestore, 0, target:getMaxHP())
 
     target:wakeUp()
-
-    skill:setMsg(xi.msg.basic.SKILL_RECOVERS_HP)
 
     if target:getID() == pet:getID() then
         hpRestore = 0

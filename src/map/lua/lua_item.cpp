@@ -24,6 +24,7 @@
 #include "common/logging.h"
 #include "items/item.h"
 #include "items/item_equipment.h"
+#include "items/item_furnishing.h"
 #include "items/item_general.h"
 #include "items/item_weapon.h"
 #include "utils/itemutils.h"
@@ -193,6 +194,28 @@ uint16 CLuaItem::getWeaponskillPoints()
     return 0;
 }
 
+void CLuaItem::setWeaponskillPointsNeeded(uint16 points)
+{
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+
+    if (PItem)
+    {
+        PItem->setTotalUnlockPointsNeeded(points);
+    }
+}
+
+uint16 CLuaItem::getWeaponskillPointsNeeded()
+{
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+
+    if (PItem)
+    {
+        return PItem->getTotalUnlockPointsNeeded();
+    }
+
+    return 0;
+}
+
 bool CLuaItem::isTwoHanded()
 {
     if (CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(m_PLuaItem))
@@ -323,7 +346,7 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     m_PLuaItem->setSoulPlateData(name, interestData, zeni, skillIndex, fp);
 }
@@ -352,9 +375,9 @@ auto CLuaItem::getExData() -> sol::table
     return table;
 }
 
-void CLuaItem::setExData(sol::table const& newData)
+void CLuaItem::setExData(const sol::table& newData)
 {
-    for (auto const& [keyObj, valObj] : newData)
+    for (const auto& [keyObj, valObj] : newData)
     {
         uint8 key = keyObj.as<uint8>();
         uint8 val = valObj.as<uint8>();
@@ -398,6 +421,8 @@ void CLuaItem::Register()
     SOL_REGISTER("getAugment", CLuaItem::getAugment);
     SOL_REGISTER("getSkillType", CLuaItem::getSkillType);
     SOL_REGISTER("getWeaponskillPoints", CLuaItem::getWeaponskillPoints);
+    SOL_REGISTER("setWeaponskillPointsNeeded", CLuaItem::setWeaponskillPointsNeeded);
+    SOL_REGISTER("getWeaponskillPointsNeeded", CLuaItem::getWeaponskillPointsNeeded);
     SOL_REGISTER("isTwoHanded", CLuaItem::isTwoHanded);
     SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
     SOL_REGISTER("isShield", CLuaItem::isShield);

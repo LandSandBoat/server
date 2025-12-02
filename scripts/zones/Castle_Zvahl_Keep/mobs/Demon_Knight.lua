@@ -7,7 +7,6 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local bifronsSpawnPoints =
 {
     { x = -204.000, y = -52.125, z =  -95.000 },
@@ -62,16 +61,11 @@ local bifronsSpawnPoints =
     { x = -183.549, y = -52.000, z = -101.836 },
 }
 
-local bifronsPHTable =
-{
-    [ID.mob.COUNT_BIFRONS - 1] = ID.mob.COUNT_BIFRONS, -- -204.000 -52.125 -95.000
-}
-
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, bifronsPHTable, 10, 1, { spawnPoints = bifronsSpawnPoints }) -- No respawn
+    xi.mob.phOnDespawn(mob, ID.mob.COUNT_BIFRONS, 10, 1, { spawnPoints = bifronsSpawnPoints }) -- No respawn
 end
 
 return entity

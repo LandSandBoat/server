@@ -23,5 +23,7 @@
 
 namespace fellowutils
 {
-    // TODO
+
+// TODO
+
 } // namespace fellowutils

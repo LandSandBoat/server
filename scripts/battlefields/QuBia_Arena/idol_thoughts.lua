@@ -23,36 +23,36 @@ content:addEssentialMobs({ 'Fire_Golem', 'Water_Golem', 'Wind_Golem', 'Earth_Gol
 content.loot =
 {
     {
-        { item = xi.item.GOLEM_SHARD, weight = 1000 },
+        { itemId = xi.item.GOLEM_SHARD, weight = 1000 },
     },
 
     {
-        { item = xi.item.SLAB_OF_GRANITE, weight = 1000 },
+        { itemId = xi.item.SLAB_OF_GRANITE, weight = 1000 },
     },
 
     {
-        { item = xi.item.LIBATION_ABJURATION, weight = 500 },
-        { item = xi.item.OBLATION_ABJURATION, weight = 500 },
+        { itemId = xi.item.LIBATION_ABJURATION, weight = 500 },
+        { itemId = xi.item.OBLATION_ABJURATION, weight = 500 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 875 },
-        { item = xi.item.SCROLL_OF_FREEZE, weight = 125 },
+        { itemId = xi.item.NONE,             weight = 875 },
+        { itemId = xi.item.SCROLL_OF_FREEZE, weight = 125 },
     },
 
     {
-        { item = xi.item.NONE,           weight = 200 },
-        { item = xi.item.OPTICAL_NEEDLE, weight = 200 },
-        { item = xi.item.KAKANPU,        weight = 200 },
-        { item = xi.item.MANTRA_COIN,    weight = 200 },
-        { item = xi.item.NAZAR_BONJUK,   weight = 200 },
+        { itemId = xi.item.NONE,           weight = 200 },
+        { itemId = xi.item.OPTICAL_NEEDLE, weight = 200 },
+        { itemId = xi.item.KAKANPU,        weight = 200 },
+        { itemId = xi.item.MANTRA_COIN,    weight = 200 },
+        { itemId = xi.item.NAZAR_BONJUK,   weight = 200 },
     },
 
     {
-        { item = xi.item.NONE,                 weight = 100 },
-        { item = xi.item.CHUNK_OF_MYTHRIL_ORE, weight = 300 },
-        { item = xi.item.GOLD_INGOT,           weight = 300 },
-        { item = xi.item.PLATINUM_INGOT,       weight = 300 },
+        { itemId = xi.item.NONE,                 weight = 100 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE, weight = 300 },
+        { itemId = xi.item.GOLD_INGOT,           weight = 300 },
+        { itemId = xi.item.PLATINUM_INGOT,       weight = 300 },
     },
 }
 

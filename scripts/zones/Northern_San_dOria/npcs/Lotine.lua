@@ -9,7 +9,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local rand = math.random(1, 2)
     if rand == 1 then
-        player:startEvent(652)
+        player:startEvent(652, 0, 530)
     else
         player:startEvent(656)
     end

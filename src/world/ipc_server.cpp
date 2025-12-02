@@ -35,10 +35,12 @@
 
 namespace
 {
-    auto getZMQEndpointString() -> std::string
-    {
-        return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
-    }
+
+auto getZMQEndpointString() -> std::string
+{
+    return fmt::format("tcp://{}:{}", settings::get<std::string>("network.ZMQ_IP"), settings::get<uint16>("network.ZMQ_PORT"));
+}
+
 } // namespace
 
 IPCServer::IPCServer(WorldEngine& worldServer)
@@ -383,13 +385,17 @@ void IPCServer::handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct
     ShowWarningFmt("Received EmptyStruct message from {} - this is probably a bug", ipp.toString());
 }
 
-void IPCServer::handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message)
+void IPCServer::handleMessage_AccountLogin(const IPP& ipp, const ipc::AccountLogin& message)
 {
     TracyZoneScoped;
 
-    DebugIPCFmt("Received CharLogin message from {} for account {} char {}", ipp.toString(), message.accountId, message.charId);
+    DebugIPCFmt("Received AccountLogin message from {} for account {}", ipp.toString(), message.accountId);
 
-    // NOTE: Originally a NO-OP
+    for (const auto& zoneIIP : getIPPsForAllZones())
+    {
+        DebugIPCFmt("Message: -> rerouting to all zones on {}", ipp.toString());
+        sendMessage(zoneIIP, message);
+    }
 }
 
 void IPCServer::handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& message)
@@ -422,7 +428,17 @@ void IPCServer::handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMes
 {
     TracyZoneScoped;
 
-    rerouteMessageToCharName(message.recipientName, message);
+    const auto charIPP = getIPPForCharName(message.recipientName);
+    if (!charIPP)
+    {
+        sendMessage(ipp, ipc::MessageStandard{
+                             .recipientId = message.senderId,
+                             .message     = MsgStd::TellNotReceivedOffline,
+                         });
+        return;
+    }
+
+    sendMessage(charIPP.value(), message);
 }
 
 void IPCServer::handleMessage_ChatMessageParty(const IPP& ipp, const ipc::ChatMessageParty& message)

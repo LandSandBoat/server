@@ -1,7 +1,6 @@
 -----------------------------------
 -- xi.effect.COURSERS_ROLL
 -- TODO: Enable modifier and define power in job_utils/corsair.lua
--- Notes: Effect's subType stores caster's ID. See: scripts/globals/job_utils/corsair.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

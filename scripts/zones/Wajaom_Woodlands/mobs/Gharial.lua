@@ -5,6 +5,11 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x = -531.255, y = -9.756, z =  42.421 }
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
     mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 12)

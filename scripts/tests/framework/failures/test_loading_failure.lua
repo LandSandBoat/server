@@ -1,0 +1,14 @@
+-- This file is used to test framework error handling behavior
+-- It is commented out by default to avoid running during normal test execution
+-- Uncomment to verify that the test framework properly handles file loading failures
+
+-- describe("Test Loading Failure", function()
+--     it("should never run", function()
+--         assert(true)
+--     end)
+--
+--     -- Intentional syntax error: missing closing parenthesis
+--     it("syntax error test", function(
+--         assert(false, "This should never execute")
+--     end)
+-- end)

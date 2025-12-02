@@ -8,17 +8,11 @@ mixins = { require('scripts/mixins/families/maat') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobFight = function(mob, target)
-    local mobId = mob:getID()
-    local pet   = GetMobByID(mobId + 1)
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Maats_Wyvern')
+end
 
-    if
-        pet and
-        pet:isSpawned() and
-        pet:getCurrentAction() == xi.act.ROAMING
-    then
-        pet:updateEnmity(target)
-    end
+entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

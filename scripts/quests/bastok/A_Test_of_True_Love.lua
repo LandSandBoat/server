@@ -61,6 +61,48 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
+        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.UN_MOMENT) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.UN_MOMENT)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.CASTLE_ZVAHL_KEEP] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.UN_MOMENT) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.UN_MOMENT)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.LABYRINTH_OF_ONZOZO] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.LANCIENNE) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.LANCIENNE)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.PORT_BASTOK] =
         {
             ['Carmelo'] =
@@ -101,6 +143,20 @@ quest.sections =
                         for _, keyItemId in ipairs(pageKeyItems) do
                             player:delKeyItem(keyItemId)
                         end
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.SEA_SERPENT_GROTTO] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.LEPHEMERE) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.LEPHEMERE)
+
+                        return quest:noAction()
                     end
                 end,
             },

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Gambits decision making system
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 
 ai = ai or {}
 

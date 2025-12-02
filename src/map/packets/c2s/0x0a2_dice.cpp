@@ -22,7 +22,8 @@
 #include "0x0a2_dice.h"
 
 #include "entities/charentity.h"
-#include "packets/message_standard.h"
+#include "enums/msg_std.h"
+#include "packets/s2c/0x009_message.h"
 
 auto GP_CLI_COMMAND_DICE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -34,5 +35,5 @@ void GP_CLI_COMMAND_DICE::process(MapSession* PSession, CCharEntity* PChar) cons
 {
     uint16 diceRoll = xirand::GetRandomNumber(1000);
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageStandardPacket>(PChar, diceRoll, MsgStd::DiceRoll));
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MESSAGE>(PChar, diceRoll, MsgStd::DiceRoll));
 }

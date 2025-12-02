@@ -34,35 +34,32 @@ public:
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
 
-        // clang-format off
-        do_accept([&](asio::ip::tcp::socket socket)
-        {
-            const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, ipInFlight_, ipWhitelist);
-            handler->start();
-        });
-        // clang-format on
+        do_accept(
+            [&](asio::ip::tcp::socket socket)
+            {
+                const auto handler = std::make_shared<search_handler>(std::move(socket), io_context, ipInFlight_, ipWhitelist);
+                handler->start();
+            });
     }
 
 private:
     void do_accept(std::function<void(asio::ip::tcp::socket&&)> acceptFn)
     {
-        // clang-format off
         acceptor_.async_accept(
-        [this, acceptFn](const std::error_code ec, asio::ip::tcp::socket socket)
-        {
-            if (!ec)
+            [this, acceptFn](const std::error_code ec, asio::ip::tcp::socket socket)
             {
-                acceptFn(std::move(socket));
-            }
-            else
-            {
-                // TODO: This can't be the Fmt variant because of constexpr things?
-                ShowError(ec.message());
-            }
+                if (!ec)
+                {
+                    acceptFn(std::move(socket));
+                }
+                else
+                {
+                    // TODO: This can't be the Fmt variant because of constexpr things?
+                    ShowError(ec.message());
+                }
 
-            do_accept(acceptFn);
-        });
-        // clang-format on
+                do_accept(acceptFn);
+            });
     }
 
     asio::ip::tcp::acceptor acceptor_;

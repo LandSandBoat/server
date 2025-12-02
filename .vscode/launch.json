@@ -99,6 +99,21 @@
             },
         },
         {
+            "name": "(Windows) xi_test",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_test.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+        {
             "name": "Python: Current File",
             "type": "debugpy",
             "request": "launch",
@@ -146,6 +161,16 @@
           "cwd": "${workspaceFolder}",
           "MIMode": "lldb",
           "targetArchitecture": "x64"
+        },
+        {
+            "name": "(OSX) xi_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_test",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "MIMode": "lldb",
+            "targetArchitecture": "x64"
         },
         {
             "name": "(gdb) Attach to xi_map",

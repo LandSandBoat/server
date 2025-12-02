@@ -11,6 +11,11 @@ end
 
 ---@nodiscard
 ---@return integer
+function CPetSkill:getMobHP()
+end
+
+---@nodiscard
+---@return integer
 function CPetSkill:getMobHPP()
 end
 
@@ -62,4 +67,29 @@ end
 ---@nodiscard
 ---@return integer
 function CPetSkill:getPrimaryTargetID()
+end
+
+---@param newAnimationSub integer
+---@return nil
+function CPetSkill:setFinalAnimationSub(newAnimationSub)
+end
+
+---@nodiscard
+---@return xi.attackType
+function CPetSkill:getAttackType()
+end
+
+---@param attackType xi.attackType
+---@return nil
+function CPetSkill:setAttackType(attackType)
+end
+
+---@nodiscard
+---@return boolean
+function CPetSkill:isCritical()
+end
+
+---@param isCritical boolean
+---@return nil
+function CPetSkill:setCritical(isCritical)
 end

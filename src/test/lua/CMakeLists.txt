@@ -1,0 +1,25 @@
+set(LUA_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_simulation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_simulation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_test_entity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_test_entity.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_test_entity_assertions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_test_entity_assertions.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_client_entity_pair.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_client_entity_pair.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_actions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_actions.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_bcnm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_bcnm.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_entities.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_entities.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_events.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_events.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_packets.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_packets.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_spy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_spy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_stub.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_stub.h
+    PARENT_SCOPE
+)

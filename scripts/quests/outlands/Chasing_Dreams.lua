@@ -60,6 +60,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
+            -- TODO: There is a pre-req to this quest as confirmed in captures, however the exact pre-req is unknown. WIKI indicates CoP 2-1 being started. Needs confirmation.
             return status == xi.questStatus.QUEST_AVAILABLE
         end,
 

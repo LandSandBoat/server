@@ -23,7 +23,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.agi_wsc             = 0.25
     params.rangedAccuracyBonus = 100 -- https://www.ffxiah.com/forum/topic/52018/luck-of-the-draw-a-corsairs-guide-new/127/#3726841 (Empyreal Arrow is a bow copy of Detonator)
 
-
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod  = { 1.5, 2.5, 5.0 }
         params.str_wsc = 0.20

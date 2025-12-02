@@ -20,7 +20,8 @@
 */
 
 #include "lua_action.h"
-#include "packets/action.h"
+
+#include "action/action.h"
 
 CLuaAction::CLuaAction(action_t* Action)
 : m_PLuaAction(Action)
@@ -31,214 +32,258 @@ CLuaAction::CLuaAction(action_t* Action)
     }
 }
 
-void CLuaAction::ID(uint32 actionTargetID, uint32 newActionTargetID)
+void CLuaAction::ID(const uint32 actionTargetId, const uint32 newactionTargetId) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.ActionTargetID = newActionTargetID;
+            actionTarget.actorId = newactionTargetId;
             return;
         }
     }
 }
 
 // Get the first (primary) target's long ID, if available.
-uint32 CLuaAction::getPrimaryTargetID()
+uint32 CLuaAction::getPrimaryTargetID() const
 {
-    if (!m_PLuaAction->actionLists.empty())
+    if (!m_PLuaAction->targets.empty())
     {
-        return m_PLuaAction->actionLists[0].ActionTargetID;
+        return m_PLuaAction->targets[0].actorId;
     }
 
     return 0;
 }
 
-void CLuaAction::setRecast(uint16 recast)
+void CLuaAction::setRecast(const uint16 recast) const
 {
     m_PLuaAction->recast = std::chrono::seconds(recast);
 }
 
-uint16 CLuaAction::getRecast()
+auto CLuaAction::getRecast() const -> uint16
 {
     return static_cast<uint16>(timer::count_seconds(m_PLuaAction->recast));
 }
 
-void CLuaAction::actionID(uint16 actionid)
+void CLuaAction::actionID(const uint16 actionid) const
 {
     m_PLuaAction->actionid = actionid;
 }
 
-uint16 CLuaAction::getParam(uint32 actionTargetID)
+auto CLuaAction::getParam(const uint32 actionTargetId) const -> uint16
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            return actionList.actionTargets[0].param;
+            return actionTarget.results[0].param;
         }
     }
 
     return 0;
 }
 
-void CLuaAction::param(uint32 actionTargetID, int32 param)
+void CLuaAction::param(const uint32 actionTargetId, const int32 param) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].param = param;
+            actionTarget.results[0].param = param;
             return;
         }
     }
 }
 
-void CLuaAction::messageID(uint32 actionTargetID, uint16 messageID)
+void CLuaAction::messageId(const uint32 actionTargetId, const MSGBASIC_ID messageId) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].messageID = messageID;
+            actionTarget.results[0].messageID = messageId;
             return;
         }
     }
 }
 
-std::optional<uint16> CLuaAction::getMsg(uint32 actionTargetID)
+auto CLuaAction::getMsg(const uint32 actionTargetId) const -> std::optional<uint16>
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            return actionList.actionTargets[0].messageID;
+            return actionTarget.results[0].messageID;
         }
     }
 
     return std::nullopt;
 }
 
-std::optional<uint16> CLuaAction::getAnimation(uint32 actionTargetID)
+auto CLuaAction::getAnimation(const uint32 actionTargetId) const -> std::optional<ActionAnimation>
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            return actionList.actionTargets[0].animation;
+            return actionTarget.results[0].animation;
         }
     }
 
     return std::nullopt;
 }
 
-void CLuaAction::setAnimation(uint32 actionTargetID, uint16 animation)
+void CLuaAction::setAnimation(const uint32 actionTargetId, const ActionAnimation animation) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].animation = animation;
+            actionTarget.results[0].animation = animation;
             return;
         }
     }
 }
 
-auto CLuaAction::getCategory() -> uint8
+auto CLuaAction::getCategory() const -> ActionCategory
 {
     return m_PLuaAction->actiontype;
 }
 
-void CLuaAction::setCategory(uint8 category)
+void CLuaAction::setCategory(uint8 category) const
 {
-    m_PLuaAction->actiontype = static_cast<ACTIONTYPE>(category);
+    m_PLuaAction->actiontype = static_cast<ActionCategory>(category);
 }
 
-void CLuaAction::speceffect(uint32 actionTargetID, uint8 speceffect)
+void CLuaAction::resolution(const uint32 actionTargetId, const ActionResolution resolution) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].speceffect = static_cast<SPECEFFECT>(speceffect);
+            actionTarget.results[0].resolution = resolution;
             return;
         }
     }
 }
 
-void CLuaAction::reaction(uint32 actionTargetID, uint8 reaction)
+void CLuaAction::info(const uint32 actionTargetId, const ActionInfo info) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].reaction = static_cast<REACTION>(reaction);
+            actionTarget.results[0].info |= info;
             return;
         }
     }
 }
 
-void CLuaAction::modifier(uint32 actionTargetID, uint8 modifier)
+void CLuaAction::hitDistortion(const uint32 actionTargetId, const HitDistortion distortion) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].modifier = static_cast<MODIFIER>(modifier);
+            actionTarget.results[0].hitDistortion = distortion;
             return;
         }
     }
 }
 
-void CLuaAction::additionalEffect(uint32 actionTargetID, uint16 additionalEffect)
+void CLuaAction::knockback(const uint32 actionTargetId, const Knockback knockback) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].additionalEffect = static_cast<SUBEFFECT>(additionalEffect);
+            actionTarget.results[0].knockback = knockback;
             return;
         }
     }
 }
 
-void CLuaAction::addEffectParam(uint32 actionTargetID, int32 addEffectParam)
+void CLuaAction::recordDamage(const CLuaBaseEntity* PLuaTarget, const ATTACK_TYPE atkType, const int32 damage, const std::optional<bool> isCritical) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    if (auto* PTarget = dynamic_cast<CBattleEntity*>(PLuaTarget->GetBaseEntity()))
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        const uint32 actionTargetId = PTarget->id;
+        for (auto&& actionTarget : m_PLuaAction->targets)
         {
-            actionList.actionTargets[0].addEffectParam = addEffectParam;
+            if (actionTarget.actorId == actionTargetId)
+            {
+                actionTarget.results[0].recordDamage(attack_outcome_t{
+                    .atkType    = atkType,
+                    .damage     = damage,
+                    .target     = PTarget,
+                    .isCritical = isCritical.value_or(false),
+                });
+                return;
+            }
+        }
+    }
+}
+
+void CLuaAction::modifier(const uint32 actionTargetId, uint8 modifier) const
+{
+    for (auto&& actionTarget : m_PLuaAction->targets)
+    {
+        if (actionTarget.actorId == actionTargetId)
+        {
+            actionTarget.results[0].modifier = static_cast<ActionModifier>(modifier);
             return;
         }
     }
 }
 
-void CLuaAction::addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage)
+void CLuaAction::additionalEffect(const uint32 actionTargetId, const ActionProcAddEffect additionalEffect) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
         {
-            actionList.actionTargets[0].addEffectMessage = addEffectMessage;
+            actionTarget.results[0].additionalEffect = additionalEffect;
             return;
         }
     }
 }
 
-bool CLuaAction::addAdditionalTarget(uint32 actionTargetID)
+void CLuaAction::addEffectParam(const uint32 actionTargetId, const int32 addEffectParam) const
 {
-    for (auto&& actionList : m_PLuaAction->actionLists)
+    for (auto&& actionTarget : m_PLuaAction->targets)
     {
-        if (actionList.ActionTargetID == actionTargetID)
+        if (actionTarget.actorId == actionTargetId)
+        {
+            actionTarget.results[0].addEffectParam = addEffectParam;
+            return;
+        }
+    }
+}
+
+void CLuaAction::addEffectMessage(const uint32 actionTargetId, const MSGBASIC_ID addEffectMessage) const
+{
+    for (auto&& actionTarget : m_PLuaAction->targets)
+    {
+        if (actionTarget.actorId == actionTargetId)
+        {
+            actionTarget.results[0].addEffectMessage = addEffectMessage;
+            return;
+        }
+    }
+}
+
+auto CLuaAction::addAdditionalTarget(const uint32 actionTargetId) const -> bool
+{
+    for (auto&& actionTarget : m_PLuaAction->targets)
+    {
+        if (actionTarget.actorId == actionTargetId)
         {
             return false;
         }
     }
 
-    auto& newAction          = m_PLuaAction->getNewActionList();
-    newAction.ActionTargetID = actionTargetID;
-    newAction.getNewActionTarget();
+    auto& newAction = m_PLuaAction->addTarget(actionTargetId);
+    newAction.addResult();
 
     return true;
 }
@@ -255,14 +300,17 @@ void CLuaAction::Register()
     SOL_REGISTER("actionID", CLuaAction::actionID);
     SOL_REGISTER("getParam", CLuaAction::getParam);
     SOL_REGISTER("param", CLuaAction::param);
-    SOL_REGISTER("messageID", CLuaAction::messageID);
+    SOL_REGISTER("messageID", CLuaAction::messageId);
     SOL_REGISTER("getMsg", CLuaAction::getMsg);
     SOL_REGISTER("getAnimation", CLuaAction::getAnimation);
     SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
     SOL_REGISTER("getCategory", CLuaAction::getCategory);
     SOL_REGISTER("setCategory", CLuaAction::setCategory);
-    SOL_REGISTER("speceffect", CLuaAction::speceffect);
-    SOL_REGISTER("reaction", CLuaAction::reaction);
+    SOL_REGISTER("resolution", CLuaAction::resolution);
+    SOL_REGISTER("info", CLuaAction::info);
+    SOL_REGISTER("hitDistortion", CLuaAction::hitDistortion);
+    SOL_REGISTER("knockback", CLuaAction::knockback);
+    SOL_REGISTER("recordDamage", CLuaAction::recordDamage);
     SOL_REGISTER("modifier", CLuaAction::modifier);
     SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
@@ -272,7 +320,7 @@ void CLuaAction::Register()
 
 std::ostream& operator<<(std::ostream& os, const CLuaAction& action)
 {
-    std::string id = action.m_PLuaAction ? std::to_string(action.m_PLuaAction->id) : "nullptr";
+    std::string id = action.m_PLuaAction ? std::to_string(action.m_PLuaAction->actorId) : "nullptr";
     return os << "CLuaAction(" << id << ")";
 }
 

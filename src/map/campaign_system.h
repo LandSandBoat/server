@@ -31,22 +31,24 @@ class CZoneCampaign;
 
 namespace campaign
 {
-    void LoadNations();
-    void LoadState(); // Loads nation and region status as well as allied notes for character.
 
-    void SetReconnaissance(CampaignArmy army, int8 amount); // Change the reconnaissance level for the army by the amount.
-    void SetMorale(CampaignArmy army, int8 amount);         // Change the morale level for the army by the amount.
-    void SetProsperity(CampaignArmy army, int8 amount);     // Change the prosperity level for the army by the amount.
-    void SetAlliedNotes(CCharEntity* chr, int32 amount);    // Each week, certain aspects of the campaign are set back to defaults.
+void LoadNations();
+void LoadState(); // Loads nation and region status as well as allied notes for character.
 
-    CampaignState GetCampaignState();
-    uint8         GetReconnaissance(CampaignArmy army); // Change the reconnaissance level for the army by the amount.
-    uint8         GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
-    uint8         GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
-    int32         GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
+void SetReconnaissance(CampaignArmy army, int8 amount); // Change the reconnaissance level for the army by the amount.
+void SetMorale(CampaignArmy army, int8 amount);         // Change the morale level for the army by the amount.
+void SetProsperity(CampaignArmy army, int8 amount);     // Change the prosperity level for the army by the amount.
+void SetAlliedNotes(CCharEntity* chr, int32 amount);    // Each week, certain aspects of the campaign are set back to defaults.
 
-    void SendUpdate(CCharEntity* PChar);
+CampaignState GetCampaignState();
+uint8         GetReconnaissance(CampaignArmy army); // Change the reconnaissance level for the army by the amount.
+uint8         GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
+uint8         GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
+int32         GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
 
-    // CampaignState state;
+void SendUpdate(CCharEntity* PChar);
+
+// CampaignState state;
+
 }; // namespace campaign
 #endif

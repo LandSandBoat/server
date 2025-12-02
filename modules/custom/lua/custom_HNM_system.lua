@@ -40,7 +40,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
         SetServerVariable('[HNM]Fafnir', hnmPopTime) -- Save pop time.
     end
 
-    UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
+    xi.mob.updateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -60,7 +60,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
 
     -- Set spawn time and position.
     GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(randomPopTime)
-    UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
+    xi.mob.updateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
 end)
 
 hnmSystem:addOverride('xi.zones.Dragons_Aery.npcs.qm0.onTrade', function(player, npc, trade)
@@ -90,7 +90,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
         SetServerVariable('[HNM]Adamantoise', hnmPopTime) -- Save pop time.
     end
 
-    UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
+    xi.mob.updateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -110,7 +110,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
 
     -- Set spawn time and position.
     GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(randomPopTime)
-    UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
+    xi.mob.updateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
 end)
 
 hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.npcs.qm1.onTrade', function(player, npc, trade)
@@ -140,7 +140,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
         SetServerVariable('[HNM]Behemoth', hnmPopTime) -- Save pop time.
     end
 
-    UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
+    xi.mob.updateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
 
     -- Spawn mob or set spawn time.
     if hnmPopTime <= currentTime then
@@ -160,7 +160,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
 
     -- Set spawn time and position.
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
-    UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
+    xi.mob.updateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
 end)
 
 hnmSystem:addOverride('xi.zones.Behemoths_Dominion.npcs.qm2.onTrade', function(player, npc, trade)

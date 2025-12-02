@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -187.611, y = -8.000, z = -35.805 },
     { x = -196.069, y = -8.000, z = -36.258 },
@@ -17,6 +17,7 @@ local spawnPoints =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
+    mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.MAGIC, xi.detects.SCENT)) -- TODO: Verify scent tracking on retail.
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -26,7 +27,7 @@ entity.onMobInitialize = function(mob)
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 60, 0, 0)
     mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 
@@ -42,7 +43,8 @@ entity.onSpikesDamage = function(mob, target, damage)
     params.includemab = false
     dmg = addBonusesAbility(mob, xi.element.THUNDER, target, dmg, params)
     dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.THUNDER, 0)
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.THUNDER)
+    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.THUNDER, true))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.THUNDER, true, false))
     dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.THUNDER, dmg)
 
     if dmg < 0 then
@@ -57,7 +59,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 

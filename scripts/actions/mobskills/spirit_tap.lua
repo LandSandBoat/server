@@ -1,10 +1,10 @@
 -----------------------------------
 -- Spirit Tap
--- Attempts to absorb one buff from a single target, or otherwise steals HP.
+-- Attempts to absorb one buff from a single target.
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores Shadows
 -- Range: Melee
--- Notes: Can be any (positive) buff, including food. Will drain about 100HP if it can't take any buffs
+-- Notes: Can be any (positive) buff, including food
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,22 +18,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- try to drain buff
-    local effect = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local dmg
+    local dispel = mob:stealStatusEffect(target, bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
+    local msg -- to be set later
 
-    if effect ~= 0 then
-        skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
-        return 1
+    if dispel == 0 then
+        msg = xi.msg.basic.SKILL_NO_EFFECT -- no effect
     else
-        -- time to drain HP. 50-100
-        local power = math.random(0, 51) + 50
-        dmg = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-        skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
+        msg = xi.msg.basic.EFFECT_DRAINED
     end
 
-    return dmg
+    skill:setMsg(msg)
+
+    return 1
 end
 
 return mobskillObject

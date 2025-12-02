@@ -17,33 +17,44 @@ local content = Battlefield:new({
     entryNpc         = '_0j0',
     exitNpcs         = { '_0j1', '_0j2', '_0j3' },
     requiredKeyItems = { xi.ki.CENSER_OF_ANTIPATHY, message = spireOfDemID.text.FADES_INTO_NOTHINGNESS },
-    experimental     = true,
+    grantXP          = 3000,
 })
 
 content.groups =
 {
     {
-        mobIds =
-        {
-            {
-                spireOfDemID.mob.INGESTER,
-            },
+        mobs      = { 'Ingester' },
+        allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
+    },
 
-            {
-                spireOfDemID.mob.INGESTER + 6,
-            },
-
-            {
-                spireOfDemID.mob.INGESTER + 12,
-            },
-        },
+    {
+        mobs      = { 'Neoingester', 'Neogorger', 'Neosatiator', 'Wanderer_enm' },
+        spawned  = false,
     },
 }
 
 content.loot =
 {
     {
-        -- TODO: Loot
+        quantity = 3,
+        { itemId = xi.item.NONE,                           weight = 200 },
+        { itemId = xi.item.CLUSTER_OF_BURNING_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_BITTER_MEMORIES,     weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_FLEETING_MEMORIES,   weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_PROFANE_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_STARTLING_MEMORIES,  weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_SOMBER_MEMORIES,     weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_RADIANT_MEMORIES,    weight = 100 },
+        { itemId = xi.item.CLUSTER_OF_MALEVOLENT_MEMORIES, weight = 100 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                           weight = 500 },
+        { itemId = xi.item.VIOLENT_VISION,                 weight = 100 },
+        { itemId = xi.item.PAINFUL_VISION,                 weight = 100 },
+        { itemId = xi.item.TIMOROUS_VISION,                weight = 100 },
+        { itemId = xi.item.BRILLIANT_VISION,               weight = 100 },
+        { itemId = xi.item.VENERABLE_VISION,               weight = 100 },
     },
 }
 

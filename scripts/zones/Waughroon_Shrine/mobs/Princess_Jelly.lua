@@ -8,18 +8,6 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 ---@type TMobEntity
 local entity = {}
 
-local elementalSpells =
-{
-    { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
-    { xi.magic.spell.DROWN, xi.magic.spell.WATER },
-    { xi.magic.spell.SHOCK, xi.magic.spell.THUNDER },
-    { xi.magic.spell.RASP , xi.magic.spell.STONE },
-    { xi.magic.spell.CHOKE, xi.magic.spell.AERO },
-    { xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
-    { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
-    { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
-}
-
 local centers =
 {
     { -177.5,  60, -142 },
@@ -27,28 +15,45 @@ local centers =
     {  222.5, -60,  138 },
 }
 
-local mevaList =
-{
-    { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
-    { xi.mod.THUNDER_MEVA, xi.mod.WATER_ABSORB },
-    { xi.mod.EARTH_MEVA,   xi.mod.LTNG_ABSORB },
-    { xi.mod.WIND_MEVA,    xi.mod.EARTH_ABSORB },
-    { xi.mod.ICE_MEVA,     xi.mod.WIND_ABSORB },
-    { xi.mod.FIRE_MEVA,    xi.mod.ICE_ABSORB },
-    { xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB },
-    { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 40)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(xi.settings.map.BASE_SPEED * 0.05) -- ~5% of normal movementspeed
+    mob:setBaseSpeed(xi.settings.map.BASE_SPEED * 0.05) -- ~5% of normal movement speed
     mob:setMod(xi.mod.REGEN, 3)
-    mob:setLocalVar('mobElement', math.random(1, 8))
-    mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)
-    mob:addMod(mevaList[mob:getLocalVar('mobElement')][2], 1000)
+
+    -- All Princess Jellies pick a different element on spawn
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local elementBitmask = battlefield:getLocalVar('elementChosen')
+
+    -- Build table with available elements.
+    local elementTable = {}
+    for i = xi.element.FIRE, xi.element.DARK do
+        if not utils.mask.getBit(elementBitmask, i) then
+            table.insert(elementTable, i)
+        end
+    end
+
+    -- Pick one random available element.
+    local chosenElement   = elementTable[math.random(1, #elementTable)]
+    local oppositeElement = xi.data.element.getElementWeakness(chosenElement)
+
+    -- Mark element as picked and save it to battlefield.
+    elementBitmask = utils.mask.setBit(elementBitmask, chosenElement, true)
+    battlefield:setLocalVar('elementChosen', elementBitmask)
+
+    -- Apply element-specific resistances/weaknesses
+    mob:setLocalVar('mobElement', chosenElement)
+    mob:addMod(xi.data.element.getElementalMEVAModifier(chosenElement), 250)
+    mob:addMod(xi.data.element.getElementalMEVAModifier(oppositeElement), -250)
+    mob:addMod(xi.data.element.getElementalAbsorptionModifier(chosenElement), 1000)
 end
 
 local function getQueenJellyID(bfNum)
@@ -105,16 +110,10 @@ local function spawnQueenJelly(bfNum, target, zone)
 
     if queen and not queen:isSpawned() then
         SpawnMob(queen:getID())
+        queen:setMaxHP(princessesTotalHP(bfNum, zone))
         queen:setHP(princessesTotalHP(bfNum, zone))
         queen:setPos(centers[bfNum][1], centers[bfNum][2], centers[bfNum][3], 0)
         queen:setLocalVar('target', target:getID())
-
-        queen:timer(3000, function(queenArg)
-            local player = GetPlayerByID(queenArg:getLocalVar('target'))
-            if player ~= nil and player:isAlive() then
-                queen:updateClaim(player)
-            end
-        end)
 
         for i = 1, 8 do
             DespawnMob(queen:getID() + i)
@@ -122,17 +121,24 @@ local function spawnQueenJelly(bfNum, target, zone)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    local element = mob:getLocalVar('mobElement')
-    local spell   = math.random(1, 100)
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellTable =
+    {
+        [xi.element.FIRE   ] = { xi.magic.spell.BIND, xi.magic.spell.BURN,  xi.magic.spell.FIRE     },
+        [xi.element.ICE    ] = { xi.magic.spell.BIND, xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
+        [xi.element.WIND   ] = { xi.magic.spell.BIND, xi.magic.spell.CHOKE, xi.magic.spell.AERO     },
+        [xi.element.EARTH  ] = { xi.magic.spell.BIND, xi.magic.spell.RASP , xi.magic.spell.STONE    },
+        [xi.element.THUNDER] = { xi.magic.spell.BIND, xi.magic.spell.SHOCK, xi.magic.spell.THUNDER  },
+        [xi.element.WATER  ] = { xi.magic.spell.BIND, xi.magic.spell.DROWN, xi.magic.spell.WATER    },
+        [xi.element.LIGHT  ] = { xi.magic.spell.BIND, xi.magic.spell.DIA,   xi.magic.spell.BANISH   },
+        [xi.element.DARK   ] = { xi.magic.spell.BIND, xi.magic.spell.BIO,   xi.magic.spell.DRAIN    },
+    }
 
-    if spell > 60 then
-        return elementalSpells[element][1] -- element's DoT
-    elseif spell > 20 then
-        return elementalSpells[element][2] -- element's nuke
-    else
-        return 258
-    end
+    local list      = mob:getLocalVar('mobElement')
+    list            = list > 0 and list or 1
+    local spellList = spellTable[list]
+
+    return spellList[math.random(1, #spellList)]
 end
 
 entity.onMobFight = function(mob, target)
@@ -142,7 +148,14 @@ entity.onMobFight = function(mob, target)
 
     mob:pathThrough(center, xi.path.flag.SCRIPT)
 
-    if getDistanceFromCenter(bfNum, mob) <= 0.5 then
+    -- Jellies become invulnerable in the center
+    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
+        mob:setMod(xi.mod.UDMGPHYS, -10000)
+        mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    end
+
+    -- When all the jellies are in the center, spawn the queen
+    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
         if
             queen and
             not queen:isSpawned() and

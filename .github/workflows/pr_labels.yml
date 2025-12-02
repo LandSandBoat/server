@@ -1,4 +1,4 @@
-name: "pr_labels"
+name: PR Labels
 
 on:
   pull_request_target:
@@ -11,10 +11,12 @@ on:
 
 jobs:
   Check_Blocking_Labels:
+    name: Check Blocking Labels
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - uses: actions/github-script@v7
+      - name: Check for blocking labels
+        uses: actions/github-script@v7
         with:
           script: |
             const response = await github.rest.issues.listLabelsOnIssue({
@@ -26,7 +28,7 @@ jobs:
             for (const idx in response.data)
             {
                 const entry = response.data[idx];
-                if (entry.name === "hold" || entry.name === "squash")
+                if (entry.name === "hold" || entry.name === "squash" || entry.name === "audit" || entry.name === "invalid")
                 {
                     console.log("Found PR-blocking label: " + entry.name)
                     core.setFailed("Found PR-blocking label: " + entry.name)

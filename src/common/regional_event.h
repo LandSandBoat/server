@@ -62,7 +62,7 @@ DECLARE_FORMAT_AS_UNDERLYING(ConquestMessage);
 // W2M_BroadcastInfluencePoints
 struct ConquestInfluenceUpdate
 {
-    uint8                    shouldUpdateZones;
+    bool                     shouldUpdateZones;
     std::vector<influence_t> influences;
 };
 

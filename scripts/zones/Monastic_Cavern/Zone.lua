@@ -1,15 +1,10 @@
 -----------------------------------
 -- Zone: Monastic Cavern (150)
 -----------------------------------
-local ID = zones[xi.zone.MONASTIC_CAVERN]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.ORCISH_OVERLORD)
-    GetMobByID(ID.mob.ORCISH_OVERLORD):setRespawnTime(math.random(900, 10800))
-
     xi.treasure.initZone(zone)
 end
 

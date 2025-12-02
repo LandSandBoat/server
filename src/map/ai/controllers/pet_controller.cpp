@@ -29,11 +29,13 @@
 
 namespace
 {
-    const std::set immobilePets = {
-        PETID_LUOPAN,
-        PETID_ALEXANDER,
-        PETID_ODIN,
-    };
+
+const std::set immobilePets = {
+    PETID_LUOPAN,
+    PETID_ALEXANDER,
+    PETID_ODIN,
+};
+
 }
 
 CPetController::CPetController(CMobEntity* _PPet)
@@ -89,7 +91,7 @@ void CPetController::DoRoamTick(timer::time_point tick)
         return;
     }
 
-    if (PPet->objtype == TYPE_PET)
+    if (PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC))
     {
         CPetEntity* PetEntity = static_cast<CPetEntity*>(PPet);
         // automaton, wyvern

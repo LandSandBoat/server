@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(512)
 end
 
@@ -31,7 +31,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 512 then
-        player:setPos(0, 0, 0, 0, 249)
+        player:setPos(0, 0, 0, 0, xi.zone.MHAURA)
     end
 end
 

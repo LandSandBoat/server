@@ -66,4 +66,5 @@ xi.latent =
     VS_SUPERFAMILY           = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
     MAINJOB                  = 62, -- mainjob - PARAM: JOBTYPE
     IN_ADOULIN               = 63, -- in adoulin city zone
+    IN_GARRISON              = 64, -- while in an active Garrison
 }

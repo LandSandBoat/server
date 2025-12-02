@@ -2,7 +2,7 @@
 -- xi.effect.BATTLEFIELD
 -- Notes: Effect parameters:
 -- power: Stores battlefield ID.
--- subType: stores charIDs
+-- sourceTypeParam: Stores charIDs
 -- subPower: stores battlefield area (Which "arena" within the battlefield if not an instanced zone)
 -----------------------------------
 ---@type TEffect

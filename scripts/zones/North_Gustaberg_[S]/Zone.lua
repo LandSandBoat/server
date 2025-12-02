@@ -5,10 +5,6 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    local olgoikhorkhoi = zone:queryEntitiesByName('Olgoi-Khorkhoi')[1]
-    -- UpdatSpawnPoint(OLGOI_KHORKHOI:getID()) TODO: need rows in nm_spawn_points.sql
-    olgoikhorkhoi:setRespawnTime(math.random(3600, 5400))
-
     xi.helm.initZone(zone, xi.helmType.MINING)
     xi.voidwalker.zoneOnInit(zone)
 end

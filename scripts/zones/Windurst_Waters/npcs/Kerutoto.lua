@@ -23,9 +23,6 @@ entity.onTrigger = function(player, npc)
             + (player:hasSpell(xi.magic.spell.DIABOLOS) and 32 or 16) -- Pact or gil
         player:startEvent(920, xi.item.DIABOLOSS_POLE, xi.item.DIABOLOSS_EARRING, xi.item.DIABOLOSS_RING, xi.item.DIABOLOSS_TORQUE, 0, 0, 0, availRewards)
     elseif
-        -- TODO: There is no current way to reobtain the KI in case of BCNM failure.  This KI
-        -- is consumed on battlefield entry.
-
         not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
         (
             player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
@@ -66,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
-            player:setCharVar('Darkness_Named_date', getMidnight())
+            player:setCharVar('Darkness_Named_date', JstMidnight())
         end
     end
 end

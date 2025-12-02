@@ -4,7 +4,6 @@
 -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Racing_Guide
 -----------------------------------
 require('scripts/globals/packet')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}

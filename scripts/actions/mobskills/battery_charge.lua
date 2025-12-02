@@ -11,7 +11,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REFRESH, 3, 3, 300))
+    local power = utils.clamp(skill:getTP() / 1000, 1, 3)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REFRESH, power, 3, 198))
 
     return xi.effect.REFRESH
 end

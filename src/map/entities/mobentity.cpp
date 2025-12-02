@@ -27,6 +27,7 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/mobskill_state.h"
+#include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
 #include "common/timer.h"
@@ -34,6 +35,7 @@
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
+#include "enums/weather.h"
 #include "items.h"
 #include "lua/lua_loot.h"
 #include "lua/luautils.h"
@@ -41,9 +43,9 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
-#include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -61,7 +63,8 @@
 
 namespace
 {
-    // clang-format off
+
+// clang-format off
     std::map<uint8, uint16> geodeMap = {
         { ELEMENT_FIRE,    FLAME_GEODE   },
         { ELEMENT_ICE,     SNOW_GEODE    },
@@ -83,11 +86,12 @@ namespace
         { ELEMENT_LIGHT,   CARBITE   },
         { ELEMENT_DARK,    FENRITE   }
     };
-    // clang-format on
+// clang-format on
 
-    constexpr int             RECAST_SEAL           = 1;
-    constexpr int             RECAST_GEODE          = 2;
-    constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
+constexpr int             RECAST_SEAL           = 1;
+constexpr int             RECAST_GEODE          = 2;
+constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
+
 } // namespace
 
 CMobEntity::CMobEntity()
@@ -142,6 +146,7 @@ CMobEntity::CMobEntity()
 , m_Pool(0)
 , m_flags(0)
 , m_name_prefix(0)
+, m_spawnGroup(nullptr)
 , m_unk0(0)
 , m_unk1(8)
 , m_unk2(0)
@@ -390,6 +395,29 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     return true;
 }
 
+bool CMobEntity::ShouldForceLink()
+{
+    // There are certain cases where mobs should always be able
+    // to link with other mobs, even if their families or sublinks
+    // do not align
+    if (loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS)
+    {
+        return true;
+    }
+
+    if (m_Type & MOBTYPE_BATTLEFIELD)
+    {
+        return true;
+    }
+
+    if (getMobMod(MOBMOD_SUPERLINK))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool CMobEntity::CanDeaggro() const
 {
     return !(m_Type & MOBTYPE_NOTORIOUS || m_Type & MOBTYPE_BATTLEFIELD);
@@ -591,6 +619,16 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return false;
 }
 
+bool CMobEntity::CanSpawnFromGroup()
+{
+    if (!m_spawnGroup)
+    {
+        return true;
+    }
+
+    return m_spawnGroup->isInSpawnPool(this->targid);
+}
+
 void CMobEntity::Spawn()
 {
     TracyZoneScoped;
@@ -645,6 +683,13 @@ void CMobEntity::Spawn()
 
     m_DespawnTimer = timer::time_point::min();
     luautils::OnMobSpawn(this);
+
+    // Set the despawn time if the mob has a non-zero idle despawn time modifier.
+    // This is used to despawn mobs that are not engaged in combat after a certain time.
+    if (getMobMod(MOBMOD_IDLE_DESPAWN) > 0)
+    {
+        SetDespawnTime(std::chrono::seconds(getMobMod(MOBMOD_IDLE_DESPAWN)));
+    }
 }
 
 void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
@@ -750,7 +795,7 @@ auto CMobEntity::GetEligibleSeals() -> std::vector<uint16>
 // Rules:
 // - Mob >= 50: Geodes of matching weather/day can drop. Weather takes priority.
 // - Mob >= 80: Avatarites of matching weather/day can also drop. Weather takes priority.
-auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
+auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
 {
     if (!luautils::IsContentEnabled("ABYSSEA"))
     {
@@ -760,7 +805,7 @@ auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
     uint8 element = 0;
 
     // Set element by weather
-    if (const WEATHER weather = loc.zone->GetWeather(); weather >= WEATHER_HOT_SPELL && weather <= WEATHER_DARKNESS)
+    if (const Weather weather = loc.zone->GetWeather(); weather >= Weather::HotSpell && weather <= Weather::Darkness)
     {
         /*
         element = zoneutils::GetWeatherElement(weather);
@@ -769,36 +814,36 @@ auto CMobEntity::GetEligibleGeodes() -> std::vector<uint16>
         */
         switch (weather)
         {
-            case WEATHER_HOT_SPELL:
-            case WEATHER_HEAT_WAVE:
+            case Weather::HotSpell:
+            case Weather::HeatWave:
                 element = ELEMENT_FIRE;
                 break;
-            case WEATHER_RAIN:
-            case WEATHER_SQUALL:
+            case Weather::Rain:
+            case Weather::Squall:
                 element = ELEMENT_WATER;
                 break;
-            case WEATHER_DUST_STORM:
-            case WEATHER_SAND_STORM:
+            case Weather::DustStorm:
+            case Weather::SandStorm:
                 element = ELEMENT_EARTH;
                 break;
-            case WEATHER_WIND:
-            case WEATHER_GALES:
+            case Weather::Wind:
+            case Weather::Gales:
                 element = ELEMENT_WIND;
                 break;
-            case WEATHER_SNOW:
-            case WEATHER_BLIZZARDS:
+            case Weather::Snow:
+            case Weather::Blizzards:
                 element = ELEMENT_ICE;
                 break;
-            case WEATHER_THUNDER:
-            case WEATHER_THUNDERSTORMS:
+            case Weather::Thunder:
+            case Weather::Thunderstorms:
                 element = ELEMENT_THUNDER;
                 break;
-            case WEATHER_AURORAS:
-            case WEATHER_STELLAR_GLARE:
+            case Weather::Auroras:
+            case Weather::StellarGlare:
                 element = ELEMENT_LIGHT;
                 break;
-            case WEATHER_GLOOM:
-            case WEATHER_DARKNESS:
+            case Weather::Gloom:
+            case Weather::Darkness:
                 element = ELEMENT_DARK;
                 break;
             default:
@@ -1074,17 +1119,23 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
     auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
     if (skill_list_id)
     {
-        auto attack_range{ GetMeleeRange() };
+        auto attack_range{ GetMeleeRange(PTarget) };
         auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
+
         if (!skillList.empty())
         {
             auto* skill{ battleutils::GetMobSkill(skillList.front()) };
             if (skill)
             {
-                attack_range = (uint8)skill->getDistance();
+                attack_range = modelHitboxSize + skill->getDistance() + PTarget->modelHitboxSize;
             }
         }
-        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
+
+        bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
+        float distanceFromTarget = distance(loc.p, PTarget->loc.p);
+        bool  tooFar             = distanceFromTarget > attack_range;
+
+        return !tooFar && autoAttackEnabled;
     }
     else
     {
@@ -1150,6 +1201,29 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
+
+    if (m_spawnGroup)
+    {
+        auto replacementTargID = m_spawnGroup->removeAndReplaceWithRandomMember(this->targid);
+        if (replacementTargID != this->targid) // Respawn normally if we got selected again, otherwise poke the replacement to do so
+        {
+            auto PMob = this->loc.zone->GetEntity(replacementTargID);
+            if (PMob && PMob->PAI)
+            {
+                // Check if replacement can switch into respawn state with our current respawn time
+                // if Internal_Respawn returns true, the mob will switch into respawn state with m_RespawnTime (should it be the target mob's respawn time?)
+                if (!PMob->PAI->Internal_Respawn(m_RespawnTime))
+                {
+                    // If they're already in the respawn state...
+                    if (PMob->PAI->IsCurrentState<CRespawnState>())
+                    {
+                        PMob->PAI->GetCurrentState()->ResetEntryTime(); // Reset their despawn time
+                    }
+                }
+            }
+        }
+    }
+
     PAI->Internal_Respawn(m_RespawnTime);
     luautils::OnMobDespawn(this);
     // #event despawn
@@ -1181,11 +1255,11 @@ void CMobEntity::Die()
         {
             if (PLastAttacker)
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
             }
 
             DistributeRewards();

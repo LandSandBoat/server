@@ -30,8 +30,9 @@ zones[xi.zone.VELUGANNON_PALACE] =
     },
     mob =
     {
-        MIMIC            = GetFirstID('Mimic'),
         BRIGANDISH_BLADE = GetFirstID('Brigandish_Blade'),
+        DETECTOR         = GetTableOfIDs('Detector'),
+        MIMIC            = GetFirstID('Mimic'),
         STEAM_CLEANER    = GetFirstID('Steam_Cleaner'),
         ZIPACNA          = GetFirstID('Zipacna'),
     },

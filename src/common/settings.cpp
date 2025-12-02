@@ -33,204 +33,206 @@
 
 namespace settings
 {
-    std::unordered_map<std::string, SettingsVariant_t> settingsMap;
 
-    // We need this to figure out which environment variables are numbers
-    // so we can pass them to the lua settings properly typed.
-    bool isNumber(const std::string& stringValue)
+std::unordered_map<std::string, SettingsVariant> settingsMap;
+
+// We need this to figure out which environment variables are numbers
+// so we can pass them to the lua settings properly typed.
+bool isNumber(const std::string& stringValue)
+{
+    for (const char c : stringValue)
     {
-        for (char const c : stringValue)
+        if (std::isdigit(c) == 0)
         {
-            if (std::isdigit(c) == 0)
-            {
-                return false;
-            }
+            return false;
         }
-
-        return true;
     }
 
-    /**
-     * @brief
-     * Load the settings Lua files found in <root>/settings/. Default settings are loaded first from <root>/settings/default/,
-     * and are then replaced by the settings found in <root>/settings/, if any.
-     */
-    void init()
+    return true;
+}
+
+/**
+ * @brief
+ * Load the settings Lua files found in <root>/settings/. Default settings are loaded first from <root>/settings/default/,
+ * and are then replaced by the settings found in <root>/settings/, if any.
+ */
+void init()
+{
+    // Load defaults
+    for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
     {
-        // Load defaults
-        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
+        auto path     = entry.relative_path();
+        auto isLua    = path.extension() == ".lua";
+        auto filename = path.string();
+        auto key      = path.lexically_normal().replace_extension("").generic_string();
+
+        if (isLua)
         {
-            auto path     = entry.relative_path();
-            auto isLua    = path.extension() == ".lua";
-            auto filename = path.string();
-            auto key      = path.lexically_normal().replace_extension("").generic_string();
-
-            if (isLua)
             {
+                auto res = lua.safe_script_file(filename);
+                if (!res.valid())
                 {
-                    auto res = lua.safe_script_file(filename);
-                    if (!res.valid())
-                    {
-                        sol::error err = res;
+                    sol::error err = res;
 
-                        auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
-                        ShowCritical(errorString.c_str());
-                        throw std::runtime_error(errorString);
-                    }
+                    auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
+                    ShowCritical(errorString.c_str());
+                    throw std::runtime_error(errorString);
                 }
+            }
 
+            {
+                // `require()` the file first, so it can be cached, and won't overwrite our settings later
+                // TODO: Why is using lua.require_file(key, filename) such a struggle?
+                auto res = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", key, key));
+                if (!res.valid())
                 {
-                    // `require()` the file first, so it can be cached, and won't overwrite our settings later
-                    // TODO: Why is using lua.require_file(key, filename) such a struggle?
-                    auto res = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", key, key));
-                    if (!res.valid())
-                    {
-                        sol::error err = res;
+                    sol::error err = res;
 
-                        auto errorString = fmt::format("{}", err.what());
-                        ShowCritical(errorString.c_str());
-                        throw std::runtime_error(errorString);
-                    }
+                    auto errorString = fmt::format("{}", err.what());
+                    ShowCritical(errorString.c_str());
+                    throw std::runtime_error(errorString);
                 }
             }
         }
-
-        // Scrape defaults into cpp's settingsMap
-        for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
-        {
-            auto outerKey = outerKeyObj.as<std::string>();
-
-            for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
-            {
-                auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
-
-                if (innerValObj.is<bool>())
-                {
-                    settingsMap[key] = innerValObj.as<bool>();
-                }
-                else if (innerValObj.is<double>())
-                {
-                    settingsMap[key] = innerValObj.as<double>();
-                }
-                else if (innerValObj.is<std::string>())
-                {
-                    settingsMap[key] = innerValObj.as<std::string>();
-                }
-            }
-        }
-
-        // Load user settings
-        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/"))
-        {
-            auto path     = entry.relative_path();
-            auto isLua    = path.extension() == ".lua";
-            auto filename = path.string();
-            auto key      = path.lexically_normal().replace_extension("").generic_string();
-
-            if (isLua)
-            {
-                {
-                    auto res = lua.safe_script_file(filename);
-                    if (!res.valid())
-                    {
-                        sol::error err = res;
-
-                        auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
-                        ShowCritical(errorString.c_str());
-                        throw std::runtime_error(errorString);
-                    }
-                }
-
-                {
-                    // `require()` the file first, so it can be cached, and won't overwrite our settings later
-                    // TODO: Why is using lua.require_file(key, filename) such a struggle?
-                    auto res = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", key, key));
-                    if (!res.valid())
-                    {
-                        sol::error err = res;
-
-                        auto errorString = fmt::format("{}", err.what());
-                        ShowCritical(errorString.c_str());
-                        throw std::runtime_error(errorString);
-                    }
-                }
-            }
-        }
-
-        // Scrape user settings into cpp's settingsMap
-        // This will overwrite the defaults, if user settings exist. Otherwise the
-        // defaults will be left intact.
-        for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
-        {
-            auto outerKey = outerKeyObj.as<std::string>();
-
-            for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
-            {
-                auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
-
-                if (innerValObj.is<bool>())
-                {
-                    settingsMap[key] = innerValObj.as<bool>();
-                }
-                else if (innerValObj.is<double>())
-                {
-                    settingsMap[key] = innerValObj.as<double>();
-                }
-                else if (innerValObj.is<std::string>())
-                {
-                    settingsMap[key] = innerValObj.as<std::string>();
-                }
-
-                // Apply any environment variables over the default/user settings.
-                auto envKey = fmt::format("XI_{}_{}", to_upper(outerKey), to_upper(innerKey));
-
-                // If we try to assign this value in the if() statement, it will
-                // come back as a bool, so we have to check only then assign in the
-                // block.
-                if (std::getenv(envKey.c_str()))
-                {
-                    auto value = std::string(trim(std::getenv(envKey.c_str())));
-                    ShowInfo(fmt::format("Applying ENV VAR {} to {}", envKey, key));
-
-                    // If we don't convert the PORTS to doubles (or ints), then the LUA
-                    // doesn't interpret them correctly and it breaks everything.
-                    // Therefor we need to check if the value is a number.
-                    if (isNumber(value))
-                    {
-                        settingsMap[key] = std::stod(value);
-                    }
-                    else
-                    {
-                        settingsMap[key] = value;
-                    }
-                }
-            }
-        }
-
-        // Push the consolidated defaults + user settings back up into xi.settings
-        for (const auto& [key, value] : settingsMap)
-        {
-            auto parts                          = split(key, ".");
-            auto outer                          = to_lower(parts[0]);
-            auto inner                          = to_upper(parts[1]);
-            lua["xi"]["settings"][outer][inner] = value;
-        }
-
-        logging::SetPattern(get<std::string>("logging.PATTERN"));
-
-        // Test to ensure requires aren't trampling changes, and that the user's settings aren't reverting
-        // to the defaults:
-        //
-        // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
 
-    void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor)
+    // Scrape defaults into cpp's settingsMap
+    for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
     {
-        for (auto& [key, value] : settingsMap)
+        auto outerKey = outerKeyObj.as<std::string>();
+
+        for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
         {
-            visitor(key, value);
+            auto innerKey = innerKeyObj.as<std::string>();
+            auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
+
+            if (innerValObj.is<bool>())
+            {
+                settingsMap[key] = innerValObj.as<bool>();
+            }
+            else if (innerValObj.is<double>())
+            {
+                settingsMap[key] = innerValObj.as<double>();
+            }
+            else if (innerValObj.is<std::string>())
+            {
+                settingsMap[key] = innerValObj.as<std::string>();
+            }
         }
     }
+
+    // Load user settings
+    for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/"))
+    {
+        auto path     = entry.relative_path();
+        auto isLua    = path.extension() == ".lua";
+        auto filename = path.string();
+        auto key      = path.lexically_normal().replace_extension("").generic_string();
+
+        if (isLua)
+        {
+            {
+                auto res = lua.safe_script_file(filename);
+                if (!res.valid())
+                {
+                    sol::error err = res;
+
+                    auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
+                    ShowCritical(errorString.c_str());
+                    throw std::runtime_error(errorString);
+                }
+            }
+
+            {
+                // `require()` the file first, so it can be cached, and won't overwrite our settings later
+                // TODO: Why is using lua.require_file(key, filename) such a struggle?
+                auto res = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", key, key));
+                if (!res.valid())
+                {
+                    sol::error err = res;
+
+                    auto errorString = fmt::format("{}", err.what());
+                    ShowCritical(errorString.c_str());
+                    throw std::runtime_error(errorString);
+                }
+            }
+        }
+    }
+
+    // Scrape user settings into cpp's settingsMap
+    // This will overwrite the defaults, if user settings exist. Otherwise the
+    // defaults will be left intact.
+    for (const auto& [outerKeyObj, outerValObj] : lua["xi"]["settings"].get<sol::table>())
+    {
+        auto outerKey = outerKeyObj.as<std::string>();
+
+        for (const auto& [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
+        {
+            auto innerKey = innerKeyObj.as<std::string>();
+            auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
+
+            if (innerValObj.is<bool>())
+            {
+                settingsMap[key] = innerValObj.as<bool>();
+            }
+            else if (innerValObj.is<double>())
+            {
+                settingsMap[key] = innerValObj.as<double>();
+            }
+            else if (innerValObj.is<std::string>())
+            {
+                settingsMap[key] = innerValObj.as<std::string>();
+            }
+
+            // Apply any environment variables over the default/user settings.
+            auto envKey = fmt::format("XI_{}_{}", to_upper(outerKey), to_upper(innerKey));
+
+            // If we try to assign this value in the if() statement, it will
+            // come back as a bool, so we have to check only then assign in the
+            // block.
+            if (std::getenv(envKey.c_str()))
+            {
+                auto value = std::string(trim(std::getenv(envKey.c_str())));
+                ShowInfo(fmt::format("Applying ENV VAR {} to {}", envKey, key));
+
+                // If we don't convert the PORTS to doubles (or ints), then the LUA
+                // doesn't interpret them correctly and it breaks everything.
+                // Therefor we need to check if the value is a number.
+                if (isNumber(value))
+                {
+                    settingsMap[key] = std::stod(value);
+                }
+                else
+                {
+                    settingsMap[key] = value;
+                }
+            }
+        }
+    }
+
+    // Push the consolidated defaults + user settings back up into xi.settings
+    for (const auto& [key, value] : settingsMap)
+    {
+        auto parts                          = split(key, ".");
+        auto outer                          = to_lower(parts[0]);
+        auto inner                          = to_upper(parts[1]);
+        lua["xi"]["settings"][outer][inner] = value;
+    }
+
+    logging::SetPattern(get<std::string>("logging.PATTERN"));
+
+    // Test to ensure requires aren't trampling changes, and that the user's settings aren't reverting
+    // to the defaults:
+    //
+    // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
+}
+
+void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor)
+{
+    for (auto& [key, value] : settingsMap)
+    {
+        visitor(key, value);
+    }
+}
+
 } // namespace settings

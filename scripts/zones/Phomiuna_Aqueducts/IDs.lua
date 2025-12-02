@@ -28,10 +28,14 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     mob =
     {
+        EBA          = GetFirstID('Eba'),
+        MAHISHA      = GetFirstID('Mahisha'),
+        TRES_DUENDES = GetFirstID('Tres_Duendes'),
     },
     npc =
     {
-        LADDER_KNOCKING = GetTableOfIDs('Wooden_Ladder')[4], -- 4th Wooden Ladder on the list
+        LADDER_KNOCKING       = GetTableOfIDs('Wooden_Ladder')[4], -- 4th Wooden Ladder on the list
+        QM_TAVNAZIAN_COOKBOOK = GetFirstID('qm_tavnazian_cookbook'),
     },
 }
 

@@ -39,6 +39,7 @@
 
 search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist)
 : socket_(std::move(socket))
+, buffer_{}
 , IPAddressesInUse_(IPAddressesInUseList)
 , IPAddressWhitelist_(IPAddressWhitelist)
 , deadline_(io_context)
@@ -86,26 +87,27 @@ void search_handler::start()
 
 void search_handler::do_read()
 {
-    // clang-format off
-    socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t length)
-    {
-        if (!ec)
+    std::memset(buffer_.data(), 0, buffer_.size());
+
+    socket_.async_read_some(
+        asio::buffer(buffer_.data(), buffer_.size()),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t length)
         {
-            DebugSocketsFmt("async_read_some: Received packet from IP {} ({} bytes)", ipAddress, length);
-            read_func(length);
-        }
-        else
-        {
-            // EOF when searchPackets is empty is normal. Any other state is a legitimate error.
-            if (!searchPackets.empty() || (searchPackets.empty() && ec.value() != asio::error::eof))
+            if (!ec)
             {
-                DebugSocketsFmt("async_read_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
-                handle_error(ec, self);
+                DebugSocketsFmt("async_read_some: Received packet from IP {} ({} bytes)", ipAddress, length);
+                read_func(length);
             }
-        }
-    });
-    // clang-format on
+            else
+            {
+                // EOF when searchPackets is empty is normal. Any other state is a legitimate error.
+                if (!searchPackets.empty() || (searchPackets.empty() && ec.value() != asio::error::eof))
+                {
+                    DebugSocketsFmt("async_read_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
+                    handle_error(ec, self);
+                }
+            }
+        });
 }
 
 void search_handler::do_write()
@@ -113,29 +115,29 @@ void search_handler::do_write()
     auto packet = searchPackets.front();
     auto length = packet.getSize();
 
+    std::memset(buffer_.data(), 0, buffer_.size());
     std::memcpy(buffer_.data(), packet.getData(), packet.getSize());
 
     searchPackets.pop_front();
 
     encrypt(length);
 
-    // clang-format off
     DebugSocketsFmt("async_write: Sending packet to IP {} ({} bytes)", ipAddress, length);
-    socket_.async_write_some(asio::buffer(buffer_.data(), length),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
-    {
-        if (!ec)
+    socket_.async_write_some(
+        asio::buffer(buffer_.data(), length),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
         {
-            // Apparently a reply is expected. Not sure what the reply contains exactly, but bad things happen if we don't wait for it.
-            do_read();
-        }
-        else
-        {
-            DebugSocketsFmt("async_write_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
-            handle_error(ec, self);
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                // Apparently a reply is expected. Not sure what the reply contains exactly, but bad things happen if we don't wait for it.
+                do_read();
+            }
+            else
+            {
+                DebugSocketsFmt("async_write_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
+                handle_error(ec, self);
+            }
+        });
 }
 
 void search_handler::decrypt(uint16_t length)
@@ -388,14 +390,18 @@ void search_handler::HandleGroupListRequest()
             {
                 bool success = PLinkshellPacket.AddPlayer(*it);
                 if (!success)
+                {
                     break;
+                }
 
                 currentResult++;
                 ++it;
             }
 
             if (currentResult == totalResults)
+            {
                 PLinkshellPacket.SetFinal();
+            }
 
             uint16_t length = PLinkshellPacket.GetSize();
 
@@ -434,7 +440,7 @@ void search_handler::HandleSearchComment()
 
 void search_handler::HandleSearchRequest()
 {
-    search_req sr = _HandleSearchRequest();
+    const search_req sr = _HandleSearchRequest();
 
     CDataLoader PDataLoader;
     int         totalCount = 0;
@@ -456,7 +462,9 @@ void search_handler::HandleSearchRequest()
         {
             bool success = PSearchPacket.AddPlayer(*it);
             if (!success)
+            {
                 break;
+            }
 
             currentResult++;
             ++it;
@@ -575,6 +583,7 @@ search_req search_handler::_HandleSearchRequest()
 {
     // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
+    search_req sr;
 
     uint32 bitOffset = 0;
 
@@ -616,7 +625,7 @@ search_req search_handler::_HandleSearchRequest()
         uint8 EntryType = (uint8)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
         bitOffset += 5;
 
-        if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
+        if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_LINKSHELL2) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
             if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpreted as name entry
             {
@@ -744,10 +753,18 @@ search_req search_handler::_HandleSearchRequest()
             // so they may be off
             case SEARCH_LINKSHELL: // 4 Byte
             {
-                unsigned int lsId = (unsigned int)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
+                sr.lsId = static_cast<uint32>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
                 bitOffset += 32;
 
-                ShowInfoFmt("Linkshell Entry found. Value: {}", hex32ToString(lsId));
+                ShowInfoFmt("Linkshell Entry found. Value: {}", hex32ToString(sr.lsId.value()));
+                break;
+            }
+            case SEARCH_LINKSHELL2: // 4 Byte
+            {
+                sr.lsId = static_cast<uint32>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
+                bitOffset += 32;
+
+                ShowInfoFmt("Linkshell2 Entry found. Value: {}", hex32ToString(sr.lsId.value()));
                 break;
             }
             case SEARCH_FRIEND: // Friend Packet, 0 byte
@@ -788,7 +805,6 @@ search_req search_handler::_HandleSearchRequest()
     const auto printableName = nameLen > 0 ? name : "<empty>";
     ShowInfoFmt("Name: {} Job: {} Lvls: {} ~ {}", printableName, jobid, minLvl, maxLvl);
 
-    search_req sr;
     sr.jobid  = jobid;
     sr.maxlvl = maxLvl;
     sr.minlvl = minLvl;
@@ -812,101 +828,98 @@ search_req search_handler::_HandleSearchRequest()
     // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
-uint16_t search_handler::getNumSessionsInUse(std::string const& ipAddressStr)
+uint16_t search_handler::getNumSessionsInUse(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Checking if IP is in use: {}", ipAddressStr);
 
-    // clang-format off
-    if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
-    {
-        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
-    }))
+    if (IPAddressWhitelist_.read(
+            [ipAddressStr](const auto& ipWhitelist)
+            {
+                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+            }))
     {
         return 0;
     }
-    // clang-format on
 
     // ShowInfoFmt("Checking if IP is in use: {}", ipAddressStr);
-    // clang-format off
-    return IPAddressesInUse_.read([ipAddressStr](auto const& ipAddrsInUse) -> uint16_t
-    {
-        if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
-        {
-            return ipAddrsInUse.at(ipAddressStr);
-        }
 
-        return 0;
-    });
-    // clang-format on
+    return IPAddressesInUse_.read(
+        [ipAddressStr](const auto& ipAddrsInUse) -> uint16_t
+        {
+            if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
+            {
+                return ipAddrsInUse.at(ipAddressStr);
+            }
+
+            return 0;
+        });
 }
 
-void search_handler::removeFromUsedIPAddresses(std::string const& ipAddressStr)
+void search_handler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Removing IP from active set: {}", ipAddressStr);
 
-    // clang-format off
-    if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
-    {
-        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
-    }))
+    if (IPAddressWhitelist_.read(
+            [ipAddressStr](const auto& ipWhitelist)
+            {
+                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+            }))
     {
         return;
     }
-    // clang-format on
 
     // ShowInfoFmt("Removing IP from set: {}", ipAddressStr);
-    // clang-format off
-    IPAddressesInUse_.write([ipAddressStr](auto& ipAddrsInUse)
-    {
-        if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
-        {
-            ipAddrsInUse[ipAddressStr] -= 1;
-        }
-        else // Removing nothing, do nothing.
-        {
-            return;
-        }
 
-        // If we got here, check if we want to remove an IP from the map
-        if (ipAddrsInUse[ipAddressStr] <= 0)
+    IPAddressesInUse_.write(
+        [ipAddressStr](auto& ipAddrsInUse)
         {
-            ipAddrsInUse.erase(ipAddressStr);
-        }
-    });
-    // clang-format on
+            if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
+            {
+                ipAddrsInUse[ipAddressStr] -= 1;
+            }
+            else // Removing nothing, do nothing.
+            {
+                return;
+            }
+
+            // If we got here, check if we want to remove an IP from the map
+            if (ipAddrsInUse[ipAddressStr] <= 0)
+            {
+                ipAddrsInUse.erase(ipAddressStr);
+            }
+        });
 }
 
-void search_handler::addToUsedIPAddresses(std::string const& ipAddressStr)
+void search_handler::addToUsedIPAddresses(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Adding IP to active set: {}", ipAddressStr);
 
-    // clang-format off
-    if (IPAddressWhitelist_.read([ipAddressStr](auto const& ipWhitelist)
-    {
-        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
-    }))
+    if (IPAddressWhitelist_.read(
+            [ipAddressStr](const auto& ipWhitelist)
+            {
+                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+            }))
     {
         return;
     }
-    // clang-format on
 
     // ShowInfoFmt("Adding IP to set: {}", ipAddressStr);
-    // clang-format off
-    IPAddressesInUse_.write([ipAddressStr](auto& ipAddrsInUse)
-    {
-        if (ipAddrsInUse.find(ipAddressStr) == ipAddrsInUse.end())
+
+    IPAddressesInUse_.write(
+        [ipAddressStr](auto& ipAddrsInUse)
         {
-            ipAddrsInUse[ipAddressStr] = 1;
-        }
-        else
-        {
-            ipAddrsInUse[ipAddressStr] += 1;
-        }
-    });
-    // clang-format on
+            if (ipAddrsInUse.find(ipAddressStr) == ipAddrsInUse.end())
+            {
+                ipAddrsInUse[ipAddressStr] = 1;
+            }
+            else
+            {
+                ipAddrsInUse[ipAddressStr] += 1;
+            }
+        });
 }
 
-void search_handler::checkDeadline(std::shared_ptr<search_handler> self) // self to keep the object alive
+void search_handler::checkDeadline(const std::shared_ptr<search_handler>& self) // self to keep the object alive
 {
     if (timer::now() > deadline_.expiry())
     {

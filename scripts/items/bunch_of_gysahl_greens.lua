@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target, user, item)
+itemObject.onItemUse = function(target, user, item, action)
     local chocoboShirt = target:getMod(xi.mod.APPRECIATE_GYSAHL_GREENS)
     target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
 end

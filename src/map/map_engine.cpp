@@ -59,7 +59,7 @@
 
 #include "items/item_equipment.h"
 
-#include "packets/chat_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -92,23 +92,15 @@
 
 // TODO: These are all hacks and shouldn't be globally exposed like this!
 
-std::unique_ptr<SqlConnection>  _sql;
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 MapEngine::MapEngine(asio::io_context& io_context, MapConfig& config)
-: mapStatistics_(std::make_unique<MapStatistics>())
-, networking_(std::make_unique<MapNetworking>(*mapStatistics_, config, io_context))
+: ioContext_(io_context)
+, mapStatistics_(std::make_unique<MapStatistics>())
+, networking_(std::make_unique<MapNetworking>(*mapStatistics_, config, ioContext_))
 , engineConfig_(config)
 {
     do_init();
-
-    // Queue the first game loop iteration
-    // clang-format off
-    asio::post(io_context, [&]()
-    {
-        gameLoop(io_context);
-    });
-    // clang-format on
 }
 
 MapEngine::~MapEngine()
@@ -128,50 +120,56 @@ void MapEngine::prepareWatchdog()
 
     const auto periodMs = (period > 0) ? std::chrono::milliseconds(period) : 2000ms;
 
-    // clang-format off
-    watchdog_ = std::make_unique<Watchdog>(periodMs, [period]()
-    {
-        if (debug::isRunningUnderDebugger())
+    watchdog_ = std::make_unique<Watchdog>(
+        periodMs,
+        [period]()
         {
-            ShowCritical("!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!");
-            ShowCriticalFmt("Process main tick has taken {}ms or more.", period);
-            ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
-        }
-        else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
-        {
-            std::string outputStr = "!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!\n\n";
-
-            outputStr += fmt::format("Process main tick has taken {}ms or more.\n", period);
-            outputStr += fmt::format("Backtrace Messages:\n\n");
-
-            const auto backtrace = logging::GetBacktrace();
-            for (const auto& line : backtrace)
+            if (debug::isRunningUnderDebugger())
             {
-                outputStr += fmt::format("    {}\n", line);
+                ShowCritical("!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!");
+                ShowCriticalFmt("Process main tick has taken {}ms or more.", period);
+                ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
             }
+            else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
+            {
+                std::string outputStr = "!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!\n\n";
 
-            outputStr += "\nKilling Process!!!\n";
+                outputStr += fmt::format("Process main tick has taken {}ms or more.\n", period);
+                outputStr += fmt::format("Backtrace Messages:\n\n");
 
-            ShowCritical(outputStr);
+                const auto backtrace = logging::GetBacktrace();
+                for (const auto& line : backtrace)
+                {
+                    outputStr += fmt::format("    {}\n", line);
+                }
 
-            // Allow some time for logging to flush
-            std::this_thread::sleep_for(200ms);
+                outputStr += "\nKilling Process!!!\n";
 
-            throw std::runtime_error("Watchdog thread time exceeded. Killing process.");
-        }
-    });
-    // clang-format on
+                ShowCritical(outputStr);
+
+                // Allow some time for logging to flush
+                std::this_thread::sleep_for(200ms);
+
+                throw std::runtime_error("Watchdog thread time exceeded. Killing process.");
+            }
+        });
 }
 
-void MapEngine::gameLoop(asio::io_context& io_context)
+void MapEngine::gameLoop()
 {
+    TracyZoneNamed(_tasks, "MapEngine Main Loop");
+
     timer::duration tasksDuration;
     timer::duration networkDuration;
     timer::duration tickDuration;
 
     const auto tickStart = timer::now();
     {
+        TracyZoneNamed(_tasks, "MapEngine Tasks");
         tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+    }
+    {
+        TracyZoneNamed(_networking, "MapEngine Networking");
         // Use tick remainder for networking with a maximum to ensure that the network phase
         // doesn't starve and a minimum to prevent bumping up against the time limit.
         networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
@@ -192,24 +190,20 @@ void MapEngine::gameLoop(asio::io_context& io_context)
                         timer::count_milliseconds(tickDuration),
                         timer::count_milliseconds(tickDiffTime));
 
-    watchdog_->update();
+    if (watchdog_)
+    {
+        watchdog_->update();
+    }
 
     if (tickDiffTime > 0ms)
     {
+        TracyZoneNamed(_sleep, "MapEngine Sleep");
         std::this_thread::sleep_for(tickDiffTime);
     }
     else if (tickDiffTime < -kMainLoopBacklogThreshold)
     {
         RATE_LIMIT(15s, ShowWarningFmt("Main loop is running {}ms behind, performance is degraded!", -timer::count_milliseconds(tickDiffTime)));
     }
-
-    // Requeue loop
-    // clang-format off
-    asio::post(io_context, [&]()
-    {
-        gameLoop(io_context);
-    });
-    // clang-format on
 }
 
 void MapEngine::do_init()
@@ -235,10 +229,7 @@ void MapEngine::do_init()
     ShowInfo(fmt::format("Random samples (integer): {}", utils::getRandomSampleString(0, 255)));
     ShowInfo(fmt::format("Random samples (float): {}", utils::getRandomSampleString(0.0f, 1.0f)));
 
-    // TODO: Get rid of legacy _sql and SqlConnection
     ShowInfo("do_init: connecting to database");
-    _sql = std::make_unique<SqlConnection>();
-
     ShowInfo(fmt::format("database name: {}", db::getDatabaseSchema()).c_str());
     ShowInfo(fmt::format("database server version: {}", db::getDatabaseVersion()).c_str());
     ShowInfo(fmt::format("database client version: {}", db::getDriverVersion()).c_str());
@@ -256,7 +247,10 @@ void MapEngine::do_init()
 
     // Delete sessions that are associated with this map process, but leave others alone
     db::preparedStmt("DELETE FROM accounts_sessions WHERE IF(? = 0 AND ? = 0, true, server_addr = ? AND server_port = ?)",
-                     mapIPP.getIP(), mapIPP.getPort(), mapIPP.getIP(), mapIPP.getPort());
+                     mapIPP.getIP(),
+                     mapIPP.getPort(),
+                     mapIPP.getIP(),
+                     mapIPP.getPort());
 
     ShowInfo("do_init: zlib is reading");
     zlib_init();
@@ -307,21 +301,30 @@ void MapEngine::do_init()
         ShowInfo("./losmeshes/ directory isn't present or is empty");
     }
 
-    ShowInfo("do_init: loading zones");
-    zoneutils::LoadZoneList(mapIPP);
+    zoneutils::Initialize(mapIPP, engineConfig_.lazyZones, !engineConfig_.isTestServer);
+
+    if (!engineConfig_.lazyZones)
+    {
+        instanceutils::LoadInstanceList(mapIPP);
+        CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+    }
 
     fishingutils::InitializeFishingSystem();
-    instanceutils::LoadInstanceList(mapIPP);
 
     monstrosity::LoadStaticData();
 
-    zoneutils::InitializeWeather(); // Need VanaTime initialized
+    if (!engineConfig_.controlledWeather)
+    {
+        zoneutils::InitializeWeather(); // Need VanaTime initialized
+    }
 
-    CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+    if (!engineConfig_.isTestServer)
+    {
+        CTaskManager::getInstance()->AddTask("map_cleanup", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 5s, std::bind(&MapEngine::map_cleanup, this, std::placeholders::_1, std::placeholders::_2));
+        CTaskManager::getInstance()->AddTask("garbage_collect", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 15min, std::bind(&MapEngine::map_garbage_collect, this, std::placeholders::_1, std::placeholders::_2));
+    }
 
     CTaskManager::getInstance()->AddTask("time_server", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, kTimeServerTickInterval, time_server);
-    CTaskManager::getInstance()->AddTask("map_cleanup", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 5s, std::bind(&MapEngine::map_cleanup, this, std::placeholders::_1, std::placeholders::_2));
-    CTaskManager::getInstance()->AddTask("garbage_collect", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 15min, std::bind(&MapEngine::map_garbage_collect, this, std::placeholders::_1, std::placeholders::_2));
     CTaskManager::getInstance()->AddTask("persist_server_vars", timer::now(), nullptr, CTaskManager::TASK_INTERVAL, 1min, serverutils::PersistVolatileServerVars);
 
     zoneutils::TOTDChange(vanadiel_time::get_totd()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
@@ -339,10 +342,12 @@ void MapEngine::do_init()
 
     moduleutils::ReportLuaModuleUsage();
 
-    _sql->EnableTimers();
     db::enableTimers();
 
-    prepareWatchdog();
+    if (!engineConfig_.isTestServer)
+    {
+        prepareWatchdog();
+    }
 
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
@@ -377,12 +382,11 @@ auto MapEngine::map_cleanup(timer::time_point tick, CTaskManager::CTask* PTask) 
 
     networking().sessions().cleanupSessions(networking().ipp());
 
-    // clang-format off
-    zoneutils::ForEachZone([](CZone* PZone)
-    {
-        PZone->GetZoneEntities()->EraseStaleDynamicTargIDs();
-    });
-    // clang-format on
+    zoneutils::ForEachZone(
+        [](CZone* PZone)
+        {
+            PZone->GetZoneEntities()->EraseStaleDynamicTargIDs();
+        });
 
     return 0;
 }
@@ -425,8 +429,8 @@ void MapEngine::onGM(const std::vector<std::string>& inputs) const
         return;
     }
 
-    const auto name  = inputs[1];
-    auto*      PChar = zoneutils::GetCharByName(name);
+    const auto& name  = inputs[1];
+    auto*       PChar = zoneutils::GetCharByName(name);
     if (!PChar)
     {
         fmt::print("Couldnt find character: {}\n", name);
@@ -440,7 +444,7 @@ void MapEngine::onGM(const std::vector<std::string>& inputs) const
     charutils::SaveCharGMLevel(PChar);
 
     fmt::print("> Promoting {} to GM level {}\n", PChar->name, level);
-    PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have been set to GM level {}.", level));
+    PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have been set to GM level {}.", level));
 }
 
 auto MapEngine::networking() const -> MapNetworking&

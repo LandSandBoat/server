@@ -166,39 +166,40 @@ std::array<std::array<float, 2>, 6> MobRBI = { {
 
 namespace grade
 {
-    uint8 GetJobGrade(JOBTYPE job, uint8 stat)
-    {
-        return JobGrades[job][stat];
-    }
 
-    uint8 GetRaceGrades(uint8 race, uint8 stat)
-    {
-        return RaceGrades[race][stat];
-    }
+uint8 GetJobGrade(JOBTYPE job, uint8 stat)
+{
+    return JobGrades[job][stat];
+}
 
-    float GetHPScale(uint8 rank, uint8 scale)
-    {
-        return HPScale[rank][scale];
-    }
+uint8 GetRaceGrades(uint8 race, uint8 stat)
+{
+    return RaceGrades[race][stat];
+}
 
-    float GetMPScale(uint8 rank, uint8 scale)
-    {
-        return MPScale[rank][scale];
-    }
+float GetHPScale(uint8 rank, uint8 scale)
+{
+    return HPScale[rank][scale];
+}
 
-    float GetStatScale(uint8 rank, uint8 scale)
-    {
-        return StatScale[rank][scale];
-    }
+float GetMPScale(uint8 rank, uint8 scale)
+{
+    return MPScale[rank][scale];
+}
 
-    uint8 GetMobHPScale(uint8 rank, uint8 scale)
-    {
-        return MobHPScale[rank][scale];
-    }
+float GetStatScale(uint8 rank, uint8 scale)
+{
+    return StatScale[rank][scale];
+}
 
-    uint8 GetMobRBI(uint8 rank, uint8 scale)
-    {
-        return MobRBI[rank][scale];
-    }
+uint8 GetMobHPScale(uint8 rank, uint8 scale)
+{
+    return MobHPScale[rank][scale];
+}
+
+uint8 GetMobRBI(uint8 rank, uint8 scale)
+{
+    return MobRBI[rank][scale];
+}
 
 }; // namespace grade

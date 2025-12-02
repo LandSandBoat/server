@@ -1,6 +1,6 @@
 -----------------------------------
 -- Dispelling Wind
--- Description: Dispels two effects from targets in an area of effect.
+-- Description: Dispels up to 3 effects from targets in an area of effect.
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10' radial
@@ -13,21 +13,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dis1 = target:dispelStatusEffect()
-    local dis2 = target:dispelStatusEffect()
+    local dispelCount = math.random(1, 3)
+    local successfulDispels = 0
 
-    if dis1 ~= xi.effect.NONE and dis2 ~= xi.effect.NONE then
-        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
-        return 2
-    elseif dis1 ~= xi.effect.NONE or dis2 ~= xi.effect.NONE then
-        -- dispeled only one
-        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
-        return 1
-    else
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+    for i = 1, dispelCount do
+        local dispelled = target:dispelStatusEffect()
+        if dispelled ~= xi.effect.NONE then
+            successfulDispels = successfulDispels + 1
+        end
     end
 
-    return 0
+    if successfulDispels > 0 then
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+        return successfulDispels
+    else
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        return 0
+    end
 end
 
 return mobskillObject

@@ -2,7 +2,6 @@
 -- Nyzul Isle Global
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}

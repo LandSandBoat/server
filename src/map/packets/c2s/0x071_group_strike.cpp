@@ -200,15 +200,18 @@ void GP_CLI_COMMAND_GROUP_STRIKE::process(MapSession* PSession, CCharEntity* PCh
                 if (const auto victimId = charutils::getCharIdFromName(victimName))
                 {
                     const auto rset = db::preparedStmt(
-                        "SELECT partyid FROM accounts_parties WHERE charid = ? AND allianceid = ? AND partyflag & ?",
-                        victimId, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
+                        "SELECT partyid FROM accounts_parties WHERE charid = ? AND allianceid = ? AND partyflag & ? LIMIT 1",
+                        victimId,
+                        PChar->PParty->m_PAlliance->m_AllianceID,
+                        PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
 
                     FOR_DB_SINGLE_RESULT(rset)
                     {
                         uint32 partyid = rset->get<uint32>("partyid");
 
                         const auto rset2 = db::preparedStmt("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~? WHERE partyid = ?",
-                                                            PARTY_SECOND | PARTY_THIRD, partyid);
+                                                            PARTY_SECOND | PARTY_THIRD,
+                                                            partyid);
                         if (rset2 && rset2->rowsAffected())
                         {
                             ShowDebug("%s has removed %s party from alliance", PChar->getName(), victimName);

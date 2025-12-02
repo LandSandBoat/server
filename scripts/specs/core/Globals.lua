@@ -289,16 +289,6 @@ end
 function VanadielRSELocation()
 end
 
----@nodiscard
----@return boolean
-function IsMoonNew()
-end
-
----@nodiscard
----@return boolean
-function IsMoonFull()
-end
-
 ---@param ElevatorID integer
 ---@return nil
 function RunElevator(ElevatorID)
@@ -378,11 +368,6 @@ end
 ---@param allowRespawn boolean
 ---@return nil
 function DisallowRespawn(mobid, allowRespawn)
-end
-
----@param mobid integer
----@return nil
-function UpdateNMSpawnPoint(mobid)
 end
 
 ---@nodiscard

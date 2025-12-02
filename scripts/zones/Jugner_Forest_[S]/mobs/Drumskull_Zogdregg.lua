@@ -2,8 +2,20 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Drumskull Zogdregg
 -----------------------------------
+local ID = zones[xi.zone.JUGNER_FOREST_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  204.878, y =  0.886, z = -347.779 }
+}
+
+entity.phList =
+{
+    [ID.mob.DRUMSKULL_ZOGDREGG - 1] = ID.mob.DRUMSKULL_ZOGDREGG, -- 195.578 -0.556 -347.699
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

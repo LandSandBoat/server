@@ -60,6 +60,34 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
+        [xi.zone.MIDDLE_DELKFUTTS_TOWER] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.GUIDING_BELL) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.GUIDING_BELL)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.UPPER_DELKFUTTS_TOWER] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.GUIDING_BELL) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.GUIDING_BELL)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.UPPER_JEUNO] =
         {
             ['Brutus'] =

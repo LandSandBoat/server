@@ -13,7 +13,7 @@ local abilityObject = {}
 abilityObject.onAbilityCheck = function(player, target, ability)
     -- You can't actually use Restoring Breath on retail unless your wyvern is up
     -- This is on the pet menu, but just in case...
-    return xi.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability)
+    return xi.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability, true)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)

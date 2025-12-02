@@ -511,7 +511,7 @@ xi.magian.trials =
         textOffset     = 99,
         dayWeather     = xi.magianElement.ANY,
         defeatMob      = true,
-        mobSuperFamily = set{ 56 },
+        mobSuperFamily = set{ xi.mobSuperFamily.SKELETON },
         numRequired    = 50,
 
         rewardItem =

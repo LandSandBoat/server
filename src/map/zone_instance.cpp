@@ -132,12 +132,12 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
+void CZoneInstance::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
 {
     TracyZoneScoped;
     for (const auto& PInstance : m_InstanceList)
     {
-        PInstance->TransportDepart(boundary, zone);
+        PInstance->TransportDepart(boundary, prevZoneId, transportId);
     }
 }
 
@@ -229,7 +229,9 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     else
     {
         ShowWarning(fmt::format("Failed to place {} in {} ({}). Placing them in that zone's instance exit area.",
-                                PChar->name, this->getName(), this->GetID())
+                                PChar->name,
+                                this->getName(),
+                                this->GetID())
                         .c_str());
 
         // instance no longer exists: put them outside (at exit)

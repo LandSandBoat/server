@@ -72,8 +72,10 @@ public:
     auto getAugment(uint8 slot) -> sol::table; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    uint8  getSkillType();         // get skill type
-    uint16 getWeaponskillPoints(); // get current ws points
+    uint8  getSkillType();                            // get skill type
+    uint16 getWeaponskillPoints();                    // get current ws points
+    void   setWeaponskillPointsNeeded(uint16 points); // set required ws points to unlock (used for Unlocking a Myth era module)
+    uint16 getWeaponskillPointsNeeded();              // confirm required ws points on this item object
 
     bool  isTwoHanded();             // is a two handed weapon
     bool  isHandToHand();            // is a hand to hand weapon (or unarmed H2H)
@@ -90,11 +92,11 @@ public:
 
     bool isInstalled();
 
-    void setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> sol::table;
 
     auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
-    void setExData(sol::table const& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
+    void setExData(const sol::table& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
 
     bool operator==(const CLuaItem& other) const
     {

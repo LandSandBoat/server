@@ -14,10 +14,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power    = 200
-    local duration = 20
+    -- TODO: Flash needs a decay
+    -- 66% Accuracy reduction
+    local targetAcc = target:getMod(xi.mod.ACC)
+    local power = math.floor(targetAcc * 0.66)
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, power, 0, math.random(15, 30)))
 
     return xi.effect.FLASH
 end

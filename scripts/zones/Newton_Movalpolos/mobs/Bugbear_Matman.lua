@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     -- Below 30% Bugbear Matman heavily prefers Heavy Whisk
     if mob:getHPP() <= 30 and math.random(1, 100) <= 60 then
         return 358
@@ -27,7 +27,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.MOBLIN_SHOWMAN):setStatus(xi.status.NORMAL)
+    local showman = GetNPCByID(ID.npc.MOBLIN_SHOWMAN)
+    if showman then
+        showman:setStatus(xi.status.NORMAL)
+    end
 end
 
 return entity

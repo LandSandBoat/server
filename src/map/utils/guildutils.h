@@ -29,13 +29,15 @@ class CItemShop;
 
 namespace guildutils
 {
-    void Initialize();
-    void Cleanup();
-    void UpdateGuildsStock();
-    void UpdateGuildPointsPattern();
 
-    auto GetGuildShop(uint16 guildShopId) -> CItemContainer*;
-    auto GetGuild(uint8 guildId) -> CGuild*;
+void Initialize();
+void Cleanup();
+void UpdateGuildsStock();
+void UpdateGuildPointsPattern();
 
-    auto getItemDynamicBasePrice(const CItemShop* PItem) -> uint32;
+auto GetGuildShop(uint16 guildShopId) -> CItemContainer*;
+auto GetGuild(uint8 guildId) -> CGuild*;
+
+auto getItemDynamicBasePrice(const CItemShop* PItem) -> uint32;
+
 } // namespace guildutils

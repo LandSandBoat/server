@@ -7,7 +7,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for 'Got It All' Quest cutscene.
     zone:registerCuboidTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for 'Vanishing Act' Quest cutscene.
-    zone:registerCuboidTriggerArea(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
+    zone:registerCuboidTriggerArea(3,   31, -7.0,  -60,   39, -6.0,  -52) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
     zone:registerCuboidTriggerArea(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
     zone:registerCuboidTriggerArea(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
     zone:registerCuboidTriggerArea(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
@@ -26,16 +26,12 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        if
-            player:hasKeyItem(xi.ki.FERRY_TICKET) and
-            prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI
-        then
+        if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
             player:setPos(-11, 2, -142, 192)
             return 201
         elseif
-            player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) and
-            (prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
-            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU)
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
         then
             player:setPos(11, 2, 142, 64)
             return 204
@@ -80,9 +76,12 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     -- Boat to Mhaura.
-    if transport == 46 or transport == 47 then
+    if
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA
+    then
         if player:hasKeyItem(xi.ki.FERRY_TICKET) then
             player:startEvent(200)
         else
@@ -90,7 +89,10 @@ zoneObject.onTransportEvent = function(player, transport)
         end
 
     -- Boat to Nashmau.
-    elseif transport == 58 or transport == 59 then
+    elseif
+        prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU or
+        prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI
+    then
         if player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) then
             player:startEvent(203)
         else
@@ -108,13 +110,9 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('vanishingactCS', 4)
         player:setPos(-80, -6, 122, 5)
     elseif csid == 200 then
-        player:setPos(0, -2, 0, 0, 47)
-    elseif csid == 201 then
-        player:setPos(-11, 2, -142, 192)
+        player:setPos(0, -2, 0, 0, xi.zone.OPEN_SEA_ROUTE_TO_MHAURA)
     elseif csid == 203 then
-        player:setPos(0, -2, 0, 0, 58)
-    elseif csid == 204 then
-        player:setPos(11, 2, 142, 64)
+        player:setPos(0, -2, 0, 0, xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU)
     elseif csid == 526 then
         player:setCharVar('gotitallCS', 6)
         player:setPos(60, 0, -71, 38)
@@ -122,7 +120,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('AgainstAllOdds', 1)                                          -- Set For Corsair BCNM
         player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
-        player:setCharVar('AgainstAllOddsTimer', getMidnight())
+        player:setCharVar('AgainstAllOddsTimer', JstMidnight())
     end
 end
 

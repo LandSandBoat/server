@@ -28,6 +28,7 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
     },
     npc =
     {
+        PIRATES = GetTableOfIDs('Pirate_NPC'),
     },
 }
 

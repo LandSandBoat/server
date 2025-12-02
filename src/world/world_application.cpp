@@ -29,13 +29,15 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "world",
-            .arguments  = {},
-        };
-    }
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "world",
+        .arguments  = {},
+    };
+}
+
 } // namespace
 
 WorldApplication::WorldApplication(const int argc, char** argv)
@@ -48,4 +50,10 @@ WorldApplication::~WorldApplication() = default;
 auto WorldApplication::createEngine() -> std::unique_ptr<Engine>
 {
     return std::make_unique<WorldEngine>(ioContext());
+}
+
+void WorldApplication::requestExit()
+{
+    Application::requestExit();
+    io_context_.stop();
 }

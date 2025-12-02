@@ -10,13 +10,18 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:hasStatusEffect(xi.effect.REGEN) then
+        return 1
+    end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = mob:getMainLvl() / 10 * 4 + 5
+    local tpFactor = utils.clamp(3 * (skill:getTP() - 1000) / 1000, 0, 6)
+    local power    = 5 + tpFactor
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 3, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 3, 300))
 
     return xi.effect.REGEN
 end

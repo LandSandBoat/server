@@ -22,7 +22,7 @@
 #include "0x015_pos.h"
 
 #include "entities/charentity.h"
-#include "packets/wide_scan_track.h"
+#include "packets/s2c/0x0f5_tracking_pos.h"
 
 auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
     {
         if (const auto* PWideScanEntity = PChar->GetEntity(wideScanTarget.targid, TYPE_MOB | TYPE_NPC))
         {
-            PChar->pushPacket<CWideScanTrackPacket>(PWideScanEntity);
+            PChar->pushPacket<GP_SERV_COMMAND_TRACKING_POS>(PWideScanEntity);
 
             if (PWideScanEntity->status == STATUS_TYPE::DISAPPEAR)
             {

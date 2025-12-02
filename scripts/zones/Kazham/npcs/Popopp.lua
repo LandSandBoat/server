@@ -56,8 +56,6 @@ entity.onTrigger = function(player, npc)
         elseif progress >= 5 or failed >= 6 then
             player:startEvent(246) -- happy with wandering bulb
         end
-    else
-        player:startEvent(201)
     end
 end
 

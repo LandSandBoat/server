@@ -35,7 +35,6 @@
 //
 
 class IPP;
-class SqlConnection;
 class MapNetworking;
 class MapStatistics;
 class CZone;
@@ -44,14 +43,16 @@ struct MapConfig final
 {
     IPP  ipp{};
     bool inCI{ false };
+    bool isTestServer{ false };      // Disables watchdog and certain recurring tasks when ticks are externally managed.
+    bool lazyZones{ false };         // Load zones when first accessed
+    bool controlledWeather{ false }; // Disables automated weather
 };
 
 //
 // Exposed globals
 //
 
-extern std::unique_ptr<SqlConnection> _sql;
-extern std::map<uint16, CZone*>       g_PZoneList; // Global array of pointers for zones
+extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 class MapEngine final : public Engine
 {
@@ -59,7 +60,7 @@ public:
     MapEngine(asio::io_context& io_context, MapConfig& config);
     ~MapEngine() override;
 
-    void gameLoop(asio::io_context& io_context);
+    void gameLoop();
 
     //
     // Init
@@ -95,7 +96,10 @@ public:
     auto zones() const -> std::map<uint16, CZone*>&; // g_PZoneList
     // gameState()
 
+    void requestExit();
+
 private:
+    asio::io_context&              ioContext_; // this is also shared with networking_
     std::unique_ptr<MapStatistics> mapStatistics_;
     std::unique_ptr<MapNetworking> networking_;
     std::unique_ptr<Watchdog>      watchdog_;

@@ -1,6 +1,5 @@
 -----------------------------------
 -- xi.effect.CAROL
--- Notes: Effect subType for enhancing songs stores IDs of the caster. Set in scripts/globals/spells/enhancing_song.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}
@@ -25,7 +24,7 @@ effectObject.onEffectGain = function(target, effect)
         end
     end
 
-    effect:addMod(xi.combat.element.getElementalMEVAModifier(subPower), effect:getPower())
+    effect:addMod(xi.data.element.getElementalMEVAModifier(subPower), effect:getPower())
 
     if subPower == xi.element.FIRE then -- fire add STR
         effect:addMod(xi.mod.STR, buff)

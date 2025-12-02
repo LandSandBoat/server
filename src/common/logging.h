@@ -33,27 +33,32 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/printf.h>
+#include <fmt/ranges.h>
 
 #include <spdlog/spdlog.h>
 
 // Forward declaration
 namespace settings
 {
-    template <typename T>
-    T get(std::string);
+
+template <typename T>
+T get(std::string);
+
 } // namespace settings
 
 namespace logging
 {
-    void InitializeLog(std::string const& serverName, std::string const& logFile, bool appendDate);
-    void ShutDown();
 
-    void SetPattern(std::string const& str);
+void InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate);
+void ShutDown();
 
-    void AddBacktrace(std::string const& str);
-    auto GetBacktrace() -> std::vector<std::string>;
+void SetPattern(const std::string& str);
 
-    void tapWarningOrError();
+void AddBacktrace(const std::string& str);
+auto GetBacktrace() -> std::vector<std::string>;
+
+void tapWarningOrError();
+
 } // namespace logging
 
 // clang-format off
@@ -164,6 +169,7 @@ inline auto format_as(type v) \
 #define DebugDeliveryBox(...) LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_DELIVERY_BOX", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugBazaars(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_BAZAARS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugPerformance(...) LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PERFORMANCE", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugTest(...)        LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_TEST", __FILE__, __LINE__, __VA_ARGS__)
 
 // Debug Loggers fmt variants
 #define DebugSocketsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_SOCKETS", __FILE__, __LINE__, __VA_ARGS__)
@@ -178,5 +184,6 @@ inline auto format_as(type v) \
 #define DebugDeliveryBoxFmt(...) LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_DELIVERY_BOX", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugBazaarsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_BAZAARS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugPerformanceFmt(...) LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PERFORMANCE", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugTestFmt(...)        LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_TEST", __FILE__, __LINE__, __VA_ARGS__)
 
 // clang-format on

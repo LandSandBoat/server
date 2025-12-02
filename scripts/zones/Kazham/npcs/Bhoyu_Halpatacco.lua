@@ -3,6 +3,8 @@
 --  NPC: Bhoyu Halpatacco
 -- !pos -18 -4 -15 250
 -----------------------------------
+local ID = zones[xi.zone.KAZHAM]
+-----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -13,6 +15,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(67)
     elseif player:getGil() >= 200 then
         player:startEvent(116, 0, 200)
+    else
+        player:showText(npc, ID.text.NOT_ENOUGH_GIL)
     end
 end
 

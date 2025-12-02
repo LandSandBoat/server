@@ -7,6 +7,7 @@
 -- Oswald  : !pos 47.119 -15.273 7.989 248
 -- Jimaida : !pos -17.342 -2.597 -18.766 248
 -- Zaldon  : !pos -11.810 -7.287 -6.742 248
+-- TODO: The quest is NOT supposed to appear in your log after talking to Yaya. Verify if/when it does appear.
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA)

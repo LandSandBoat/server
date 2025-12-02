@@ -33,5 +33,7 @@ auto GP_CLI_COMMAND_PARTY_REQUEST::validate(MapSession* PSession, const CCharEnt
 void GP_CLI_COMMAND_PARTY_REQUEST::process(MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_PARTY_REQUEST: Not implemented. UniqueNo: {}, ActIndex: {}, Kind: {}",
-                 UniqueNo, ActIndex, Kind);
+                 UniqueNo,
+                 ActIndex,
+                 Kind);
 }

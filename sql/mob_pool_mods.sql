@@ -48,20 +48,6 @@ INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
 INSERT INTO `mob_pool_mods` VALUES (181,2,9234,1); -- GIL_MAX: 9234
 
--- Ark Angel Gk
-INSERT INTO `mob_pool_mods` VALUES (236,30,732,1); -- SPECIAL_SKILL: 732
-INSERT INTO `mob_pool_mods` VALUES (236,33,60,1);  -- SPECIAL_COOL: 60
-
--- Ark Angel Hm
-INSERT INTO `mob_pool_mods` VALUES (237,44,1,1); -- DUAL_WIELD: 1
-
--- Ark Angel Tt
-INSERT INTO `mob_pool_mods` VALUES (242,40,30,1);  -- TELEPORT_CD: 30
-INSERT INTO `mob_pool_mods` VALUES (242,41,936,1); -- TELEPORT_START: 936
-INSERT INTO `mob_pool_mods` VALUES (242,42,962,1); -- TELEPORT_END: 962
-INSERT INTO `mob_pool_mods` VALUES (242,43,1,1);   -- TELEPORT_TYPE: 1
-INSERT INTO `mob_pool_mods` VALUES (242,47,22,1);  -- SPAWN_LEASH: 22
-
 -- Aspidochelone
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (268,370,50,0);  -- REGEN: 50
@@ -98,9 +84,6 @@ INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
 INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200
 INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
 
--- Cerebrator
-INSERT INTO `mob_pool_mods` VALUES (681,368,10,0); -- REGAIN: 10
-
 -- Citipati
 INSERT INTO `mob_pool_mods` VALUES (733,302,5,0); -- TRIPLE_ATTACK: 5
 
@@ -109,9 +92,6 @@ INSERT INTO `mob_pool_mods` VALUES (768,28,5,1); -- EXP_BONUS: 5
 
 -- Colossus
 INSERT INTO `mob_pool_mods` VALUES (770,4,4,1); -- SIGHT_RANGE: 4
-
--- Coveter
-INSERT INTO `mob_pool_mods` VALUES (820,368,10,0); -- REGAIN: 10
 
 -- Darksteel Golem
 INSERT INTO `mob_pool_mods` VALUES (906,4,4,1); -- SIGHT_RANGE: 4
@@ -161,6 +141,10 @@ INSERT INTO `mob_pool_mods` VALUES (1461,4,4,1); -- SIGHT_RANGE: 4
 
 -- Genbu
 INSERT INTO `mob_pool_mods` VALUES (1491,3,100,1); -- MP_BASE: 100
+
+-- Gladiatorial Weapon
+INSERT INTO `mob_pool_mods` VALUES (1620,5,18,1);   -- SOUND_RANGE: 18
+INSERT INTO `mob_pool_mods` VALUES (1620,72,22,1);  -- MAGIC_RANGE: 22
 
 -- Goblin Digger Near
 INSERT INTO `mob_pool_mods` VALUES (1648,17,1,1);  -- NO_DESPAWN: 1
@@ -371,6 +355,9 @@ INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
 
 -- Tavnazian Ram
 INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
+
+-- Tiny Mandragora
+INSERT INTO `mob_pool_mods` VALUES (3924,91,1,1); -- H2H_SINGLE_SWING: 1
 
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-1000,0); -- DMGMAGIC: -1000

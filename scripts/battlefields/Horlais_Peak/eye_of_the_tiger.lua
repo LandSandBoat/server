@@ -23,61 +23,64 @@ content:addEssentialMobs({ 'Gerjis' })
 content.loot =
 {
     {
+        { itemId = xi.item.GIL,                      weight = 1000, amount = 8000 }, -- Gil
+    },
+
+    {
         quantity = 2,
-        { item = xi.item.BLACK_TIGER_FANG, weight = 1000 }, -- black_tiger_fang
+        { itemId = xi.item.BLACK_TIGER_FANG,         weight = 1000 }, -- Black Tiger Fang
     },
 
     {
-        { item = xi.item.NONE,     weight = 700 }, -- nothing
-        { item = xi.item.NUE_FANG, weight = 300 }, -- nue_fang
+        { itemId = xi.item.NONE,                     weight = 400 }, -- Nothing
+        { itemId = xi.item.SLICE_OF_BUFFALO_MEAT,    weight = 200 }, -- Slice of Buffalo Meat
+        { itemId = xi.item.SLICE_OF_DRAGON_MEAT,     weight = 200 }, -- Slice of Dragon Meat
+        { itemId = xi.item.SLICE_OF_COEURL_MEAT,     weight = 200 }, -- Slice of Coeurl Meat
     },
 
     {
-        { item = xi.item.NONE,                    weight = 125 }, -- nothing
-        { item = xi.item.IVORY_MITTS,             weight = 125 }, -- ivory_mitts
-        { item = xi.item.SUPER_RIBBON,            weight = 125 }, -- super_ribbon
-        { item = xi.item.MANA_CIRCLET,            weight = 125 }, -- mana_circlet
-        { item = xi.item.RIVAL_RIBBON,            weight = 125 }, -- rival_ribbon
-        { item = xi.item.SLY_GAUNTLETS,           weight = 125 }, -- sly_gauntlets
-        { item = xi.item.SHOCK_MASK,              weight = 125 }, -- shock_mask
-        { item = xi.item.SPIKED_FINGER_GAUNTLETS, weight = 125 }, -- spiked_finger_gauntlets
+        { itemId = xi.item.NONE,                     weight = 700 }, -- Nothing
+        { itemId = xi.item.NUE_FANG,                 weight = 300 }, -- Nue Fang
     },
 
     {
-        { item = xi.item.INTELLECT_TORQUE, weight = 125 }, -- intellect_torque
-        { item = xi.item.ESOTERIC_MANTLE,  weight = 125 }, -- esoteric_mantle
-        { item = xi.item.TEMPLARS_MANTLE,  weight = 125 }, -- templars_mantle
-        { item = xi.item.SNIPERS_MANTLE,   weight = 125 }, -- snipers_mantle
-        { item = xi.item.HATEFUL_COLLAR,   weight = 125 }, -- hateful_collar
-        { item = xi.item.STORM_GORGET,     weight = 125 }, -- storm_gorget
-        { item = xi.item.HEAVY_MANTLE,     weight = 125 }, -- heavy_mantle
-        { item = xi.item.BENIGN_NECKLACE,  weight = 125 }, -- benign_necklace
+        quantity = 2,
+        { itemId = xi.item.MANA_CIRCLET,             weight = 62 }, -- Mana Circlet
+        { itemId = xi.item.RIVAL_RIBBON,             weight = 62 }, -- Rival Ribbon
+        { itemId = xi.item.SHOCK_MASK,               weight = 62 }, -- Shock Mask
+        { itemId = xi.item.SUPER_RIBBON,             weight = 62 }, -- Super Ribbon
+        { itemId = xi.item.IVORY_MITTS,              weight = 62 }, -- Ivory Mitts
+        { itemId = xi.item.RUSH_GLOVES,              weight = 62 }, -- Rush Gloves
+        { itemId = xi.item.SLY_GAUNTLETS,            weight = 62 }, -- Sly Gauntlets
+        { itemId = xi.item.SPIKED_FINGER_GAUNTLETS,  weight = 62 }, -- Spiked Finger Gauntlets
+        { itemId = xi.item.ESOTERIC_MANTLE,          weight = 62 }, -- Esoteric Mantle
+        { itemId = xi.item.HEAVY_MANTLE,             weight = 62 }, -- Heavy Mantle
+        { itemId = xi.item.SNIPERS_MANTLE,           weight = 62 }, -- Snipers Mantle
+        { itemId = xi.item.TEMPLARS_MANTLE,          weight = 62 }, -- Templars Mantle
+        { itemId = xi.item.BENIGN_NECKLACE,          weight = 62 }, -- Benign Necklace
+        { itemId = xi.item.HATEFUL_COLLAR,           weight = 62 }, -- Hateful Collar
+        { itemId = xi.item.INTELLECT_TORQUE,         weight = 62 }, -- Intellect Torque
+        { itemId = xi.item.STORM_GORGET,             weight = 62 }, -- Storm Gorget
     },
 
     {
-        { item = xi.item.NONE,           weight = 125 }, -- nothing
-        { item = xi.item.GOLD_INGOT,     weight = 125 }, -- gold_ingot
-        { item = xi.item.RAM_HORN,       weight = 125 }, -- ram_horn
-        { item = xi.item.WYVERN_SKIN,    weight = 125 }, -- wyvern_skin
-        { item = xi.item.EBONY_LOG,      weight = 125 }, -- ebony_log
-        { item = xi.item.MYTHRIL_INGOT,  weight = 125 }, -- mythril_ingot
-        { item = xi.item.RAM_SKIN,       weight = 125 }, -- ram_skin
-        { item = xi.item.CORAL_FRAGMENT, weight = 125 }, -- coral_fragment
-    },
-
-    {
-        { item = xi.item.NONE,                  weight = 400 }, -- nothing
-        { item = xi.item.SLICE_OF_BUFFALO_MEAT, weight = 200 }, -- slice_of_buffalo_meat
-        { item = xi.item.SLICE_OF_DRAGON_MEAT,  weight = 200 }, -- slice_of_dragon_meat
-        { item = xi.item.SLICE_OF_COEURL_MEAT,  weight = 200 }, -- slice_of_coeurl_meat
-    },
-
-    {
-        { item = xi.item.NONE,               weight = 625 }, -- nothing
-        { item = xi.item.SCROLL_OF_FREEZE,   weight = 125 }, -- scroll_of_freeze
-        { item = xi.item.SCROLL_OF_RAISE_II, weight = 125 }, -- scroll_of_raise_ii
-        { item = xi.item.SCROLL_OF_QUAKE,    weight = 125 }, -- scroll_of_quake
-    },
+        { itemId = xi.item.SCROLL_OF_QUAKE,          weight = 62 }, -- Scroll of Quake
+        { itemId = xi.item.SCROLL_OF_FREEZE,         weight = 62 }, -- Scroll of Freeze
+        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight = 62 }, -- Scroll of Raise II
+        { itemId = xi.item.SCROLL_OF_REGEN_III,      weight = 62 }, -- Scroll of Regen III
+        { itemId = xi.item.PIECE_OF_WISTERIA_LUMBER, weight = 62 }, -- Piece of Wisteria Lumber
+        { itemId = xi.item.MAHOGANY_LOG,             weight = 62 }, -- Mahogany Log
+        { itemId = xi.item.EBONY_LOG,                weight = 62 }, -- Ebony Log
+        { itemId = xi.item.PETRIFIED_LOG,            weight = 62 }, -- Petrified Log
+        { itemId = xi.item.DARKSTEEL_INGOT,          weight = 62 }, -- Darksteel Ingot
+        { itemId = xi.item.GOLD_INGOT,               weight = 62 }, -- Gold Ingot
+        { itemId = xi.item.MYTHRIL_INGOT,            weight = 62 }, -- Mythril Ingot
+        { itemId = xi.item.HANDFUL_OF_WYVERN_SCALES, weight = 62 }, -- Handful of Wyvern Scales
+        { itemId = xi.item.RAM_HORN,                 weight = 62 }, -- Ram Horn
+        { itemId = xi.item.WYVERN_SKIN,              weight = 62 }, -- Wyvern Skin
+        { itemId = xi.item.RAM_SKIN,                 weight = 62 }, -- Ram Skin
+        { itemId = xi.item.CORAL_FRAGMENT,           weight = 62 }, -- Coral Fragment
+    }
 }
 
 return content:register()

@@ -31,15 +31,11 @@
 
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
-#include "entities/mobentity.h"
 
 #include "lua/luautils.h"
 
-#include "packets/char_recast.h"
-#include "packets/char_skills.h"
-#include "packets/message_basic.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
-#include "recast_container.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 
@@ -52,6 +48,15 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 : m_PZone(PZone)
 , m_MaxBattlefields(luautils::OnBattlefieldHandlerInitialize(PZone))
 {
+}
+
+CBattlefieldHandler::~CBattlefieldHandler()
+{
+    for (auto& [area, PBattlefield] : m_Battlefields)
+    {
+        destroy(PBattlefield);
+    }
+    m_Battlefields.clear();
 }
 
 void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)

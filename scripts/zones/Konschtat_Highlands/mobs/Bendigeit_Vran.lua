@@ -13,7 +13,11 @@ end
 
 entity.onMobRoam = function(mob)
     local hour = VanadielHour()
-    if hour >= 5 and hour < 17 then
+    local moonCycle = getVanadielMoonCycle()
+    if
+        (hour >= 5 and hour < 17) or
+        (moonCycle ~= xi.moonCycle.NEW_MOON)
+    then
         DespawnMob(mob:getID())
     end
 end

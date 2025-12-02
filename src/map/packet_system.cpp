@@ -166,6 +166,7 @@
 #include "packets/c2s/0x11b_mastery_display.h"
 #include "packets/c2s/0x11c_party_request.h"
 #include "packets/c2s/0x11d_jump.h"
+#include "utils/moduleutils.h"
 
 uint8 PacketSize[512];
 
@@ -221,6 +222,12 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
 
     if (const auto result = packet->validate(PSession, PChar); result.valid())
     {
+        // Modules can optionally block processing of packets by returning true from OnIncomingPacket
+        if (moduleutils::OnIncomingPacket(PSession, PChar, data))
+        {
+            return;
+        }
+
         packet->process(PSession, PChar);
     }
     else
@@ -238,11 +245,13 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
 void PacketParserInitialize()
 {
     TracyZoneScoped;
+
     for (uint16 i = 0; i < 512; ++i)
     {
         PacketSize[i]   = 0;
         PacketParser[i] = &SmallPacket0x000;
     }
+
     // clang-format off
     PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &ValidatedPacketHandler<GP_CLI_COMMAND_LOGIN>;
     PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &ValidatedPacketHandler<GP_CLI_COMMAND_GAMEOK>;

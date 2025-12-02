@@ -2,8 +2,20 @@
 -- Area: Lufaise Meadows
 --   NM: Megalobugard
 -----------------------------------
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -175.852, y = -7.811, z =  22.823 }
+}
+
+entity.phList =
+{
+    [ID.mob.MEGALOBUGARD - 21] = ID.mob.MEGALOBUGARD, -- -137.168 -15.390 91.016
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REGEN, 25)

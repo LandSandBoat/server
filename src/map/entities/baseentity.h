@@ -25,7 +25,7 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/timer.h"
-#include "packets/message_basic.h"
+#include "packets/basic.h"
 
 #include <map>
 #include <memory>
@@ -267,7 +267,7 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& getName();       // Internal name of entity
+    virtual const std::string& getName() const; // Internal name of entity
     virtual const std::string& getPacketName(); // Name of entity sent to the client
 
     uint16        getZone() const; // Current zone
@@ -325,6 +325,9 @@ public:
     ALLEGIANCE_TYPE allegiance;     // what types of targets the entity can fight
     uint8           updatemask;     // what to update next server tick to players nearby
     bool            priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)
+
+    float modelHitboxSize = 0.0f; // used for distance calculations and is in packets
+    uint8 modelSize       = 0;
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 

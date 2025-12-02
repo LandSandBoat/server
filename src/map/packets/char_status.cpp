@@ -32,6 +32,7 @@
 #include "ai/states/death_state.h"
 #include "entities/charentity.h"
 #include "item_container.h"
+#include "items/item_linkshell.h"
 #include "status_effect_container.h"
 #include "utils/itemutils.h"
 #include "utils/mountutils.h"
@@ -41,97 +42,99 @@
 // Namespace to avoid compilation units using the same structs twice with different definitions
 namespace charStatusFlags
 {
-    struct flags0_t
-    {
-        uint32_t HideFlag : 1;
-        uint32_t SleepFlag : 1;
-        uint32_t GroundFlag : 1;
-        uint32_t CliPosInitFlag : 1;
-        uint32_t LfgFlag : 1;
-        uint32_t AnonymousFlag : 1;
-        uint32_t CfhFlag : 1;
-        uint32_t AwayFlag : 1;
-        uint32_t Gender : 1;
-        uint32_t unknown_1_9 : 1;
-        uint32_t unknown_1_10 : 1;
-        uint32_t GraphSize : 2;
-        uint32_t Chocobo_Index : 3;
-        uint32_t hpp : 8;
-        uint32_t PlayOnelineFlag : 1;
-        uint32_t LinkShellFlag : 1;
-        uint32_t LinkDeadFlag : 1;
-        uint32_t TargetOffFlag : 1;
-        uint32_t unknown_3_28 : 1;
-        uint32_t GmLevel : 3;
-    };
 
-    struct flags1_t
-    {
-        uint32_t Speed : 12;
-        uint32_t Hackmove : 1;
-        uint32_t FreezeFlag : 1;
-        uint32_t unknown_1_14 : 1;
-        uint32_t InvisFlag : 1;
-        uint32_t unknown_2_16 : 1;
-        uint32_t SpeedBase : 8;
-        uint32_t unknown_3_25 : 4;
-        uint32_t BazaarFlag : 1;
-        uint32_t CharmFlag : 1;
-        uint32_t GmIconFlag : 1;
-    };
+struct flags0_t
+{
+    uint32_t HideFlag : 1;
+    uint32_t SleepFlag : 1;
+    uint32_t GroundFlag : 1;
+    uint32_t CliPosInitFlag : 1;
+    uint32_t LfgFlag : 1;
+    uint32_t AnonymousFlag : 1;
+    uint32_t CfhFlag : 1;
+    uint32_t AwayFlag : 1;
+    uint32_t Gender : 1;
+    uint32_t unknown_1_9 : 1;
+    uint32_t unknown_1_10 : 1;
+    uint32_t GraphSize : 2;
+    uint32_t Chocobo_Index : 3;
+    uint32_t hpp : 8;
+    uint32_t PlayOnelineFlag : 1;
+    uint32_t LinkShellFlag : 1;
+    uint32_t LinkDeadFlag : 1;
+    uint32_t TargetOffFlag : 1;
+    uint32_t unknown_3_28 : 1;
+    uint32_t GmLevel : 3;
+};
 
-    struct flags2_t
-    {
-        uint32_t NamedFlag : 1;
-        uint32_t SingleFlag : 1;
-        uint32_t AutoPartyFlag : 1;
-        uint32_t PetIndex : 16;
-        uint32_t MotStopFlag : 1;
-        uint32_t CliPriorityFlag : 1;
-        uint32_t BallistaFlg : 8;
-        uint32_t unknown_3_29 : 3;
-    };
+struct flags1_t
+{
+    uint32_t Speed : 12;
+    uint32_t Hackmove : 1;
+    uint32_t FreezeFlag : 1;
+    uint32_t unknown_1_14 : 1;
+    uint32_t InvisFlag : 1;
+    uint32_t unknown_2_16 : 1;
+    uint32_t SpeedBase : 8;
+    uint32_t unknown_3_25 : 4;
+    uint32_t BazaarFlag : 1;
+    uint32_t CharmFlag : 1;
+    uint32_t GmIconFlag : 1;
+};
 
-    struct flags3_t
-    {
-        uint32_t LfgMasterFlag : 1;
-        uint32_t TrialFlag : 1;
-        uint32_t SilenceFlag : 1;
-        uint32_t NewCharacterFlag : 1;
-        uint32_t MentorFlag : 1;
-        uint32_t unknown_0_5 : 1;
-        uint32_t unknown_0_6 : 1;
-        uint32_t unknown_0_7 : 1;
-        uint32_t BallistaTeam : 8;
-        uint32_t unknown_2_16 : 16;
-    };
+struct flags2_t
+{
+    uint32_t NamedFlag : 1;
+    uint32_t SingleFlag : 1;
+    uint32_t AutoPartyFlag : 1;
+    uint32_t PetIndex : 16;
+    uint32_t MotStopFlag : 1;
+    uint32_t CliPriorityFlag : 1;
+    uint32_t BallistaFlg : 8;
+    uint32_t unknown_3_29 : 3;
+};
 
-    struct flags4_t
-    {
-        uint8_t GeoIndiElement : 4;
-        uint8_t GeoIndiSize : 2;
-        uint8_t GeoIndiFlag : 1;
-        uint8_t JobMasterFlag : 1;
-    };
+struct flags3_t
+{
+    uint32_t LfgMasterFlag : 1;
+    uint32_t TrialFlag : 1;
+    uint32_t SilenceFlag : 1;
+    uint32_t NewCharacterFlag : 1;
+    uint32_t MentorFlag : 1;
+    uint32_t unknown_0_5 : 1;
+    uint32_t unknown_0_6 : 1;
+    uint32_t unknown_0_7 : 1;
+    uint32_t BallistaTeam : 8;
+    uint32_t unknown_2_16 : 16;
+};
 
-    struct flags5_t
-    {
-        uint8_t unknown_0_0 : 2;
-        uint8_t unknown_0_2 : 2;
-        uint8_t unknown_0_4 : 4;
-    };
+struct flags4_t
+{
+    uint8_t GeoIndiElement : 4;
+    uint8_t GeoIndiSize : 2;
+    uint8_t GeoIndiFlag : 1;
+    uint8_t JobMasterFlag : 1;
+};
 
-    struct flags6_t
-    {
-        uint32_t unknown_0_0 : 1;
-        uint32_t unknown_0_1 : 1;
-        uint32_t unknown_0_2 : 1;
-        uint32_t unknown_0_3 : 1;
-        uint32_t unknown_0_4 : 1;
-        uint32_t unknown_0_5 : 1;
-        uint32_t unknown_0_6 : 1;
-        uint32_t unknown_0_7 : 25;
-    };
+struct flags5_t
+{
+    uint8_t unknown_0_0 : 2;
+    uint8_t unknown_0_2 : 2;
+    uint8_t unknown_0_4 : 4;
+};
+
+struct flags6_t
+{
+    uint32_t unknown_0_0 : 1;
+    uint32_t unknown_0_1 : 1;
+    uint32_t unknown_0_2 : 1;
+    uint32_t unknown_0_3 : 1;
+    uint32_t unknown_0_4 : 1;
+    uint32_t unknown_0_5 : 1;
+    uint32_t unknown_0_6 : 1;
+    uint32_t unknown_0_7 : 25;
+};
+
 } // namespace charStatusFlags
 
 struct status_bits_t
@@ -215,7 +218,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     std::memcpy(&packet->BufStatusBits, &PChar->StatusEffectContainer->m_Flags, sizeof(status_bits_t));
 
     packet->UniqueNo      = PChar->id;
-    packet->server_status = PChar->isInEvent() ? static_cast<uint8>(ANIMATION_EVENT) : PChar->animation;
+    packet->server_status = PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
@@ -235,7 +238,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     packet->dead_counter1     = static_cast<uint32>(60 * deadRemaining);
     packet->dead_counter2     = earth_time::vanadiel_timestamp() + deadRemaining;
     packet->costume_id        = PChar->m_Costume;
-    packet->model_hitbox_size = 4; // TODO: verify this
+    packet->model_hitbox_size = static_cast<uint8_t>(PChar->modelHitboxSize * 10);
     packet->mount_id          = 0;
 
     if (PChar->animation == ANIMATION_FISHING_START)
@@ -279,7 +282,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
 
     flags1.Speed        = PChar->UpdateSpeed();
     flags1.Hackmove     = PChar->wallhackEnabled; // GM wallhack, walk through walls
-    flags1.FreezeFlag   = 0;                      // Freeze client in place. Is this used?
+    flags1.FreezeFlag   = PChar->isFrozenFlagged; // Freezes player in place, making them unable to move. Used when opening treasure chests, for instance.
     flags1.unknown_1_14 = 0;                      // Unknown.
     flags1.InvisFlag    = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
     flags1.unknown_2_16 = 0; // Unknown.

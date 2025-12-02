@@ -22,6 +22,7 @@
 #pragma once
 
 #include "singleton.h"
+#include "xi.h"
 
 #include <atomic>
 #include <condition_variable>
@@ -31,7 +32,9 @@
 
 namespace asio
 {
-    class thread_pool;
+
+class thread_pool;
+
 }
 
 class Async : public Singleton<Async>
@@ -39,7 +42,7 @@ class Async : public Singleton<Async>
 public:
     ~Async();
 
-    void submit(const std::function<void()>& func);
+    void submit(const xi::Fn<void()>& func);
     void wait();
     auto currentTaskCount() const -> std::size_t;
 

@@ -23,9 +23,9 @@
 #ifndef _CSTATE_H
 #define _CSTATE_H
 
-#include "common/mmo.h"
 #include "common/timer.h"
-#include "packets/message_basic.h"
+#include "entities/baseentity.h"
+#include "packets/basic.h"
 #include <memory>
 
 class CBattleEntity;
@@ -80,6 +80,8 @@ protected:
     uint16            GetTargetID() const;
     void              Complete();
     timer::time_point GetEntryTime() const;
+    bool              WasExitDelayed();
+    void              DelayExitTime(std::chrono::milliseconds delayMilliseconds);
 
     std::unique_ptr<CBasicPacket> m_errorMsg;
 
@@ -89,6 +91,7 @@ protected:
 private:
     CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
+    bool              m_wasDelayed{ false };
     timer::time_point m_entryTime{ timer::now() };
 };
 

@@ -1,4 +1,9 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.25)
+
+# https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_DEBUG_INFORMATION_FORMAT.html
+cmake_policy(SET CMP0141 NEW)
+set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
+
 project(server C CXX)
 
 # https://cmake.org/cmake/help/latest/policy/CMP0069.html
@@ -109,6 +114,9 @@ add_definitions(
 
 # For external libs
 set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
+
+option(PCH_ENABLE "Enable precompiled headers." ON)
+message(STATUS "PCH_ENABLE: ${PCH_ENABLE}")
 
 # Tracy flags
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)

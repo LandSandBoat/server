@@ -2,8 +2,20 @@
 -- Area: Yuhtunga Jungle
 --   NM: Mischievous Micholas
 -----------------------------------
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -279.575, y =  3.317, z =  16.011 }
+}
+
+entity.phList =
+{
+    [ID.mob.MISCHIEVOUS_MICHOLAS - 1] = ID.mob.MISCHIEVOUS_MICHOLAS, -- -265.616 -0.5 -24.389
+}
 
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -18,7 +30,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

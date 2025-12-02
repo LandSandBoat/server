@@ -19,6 +19,10 @@ zones[xi.zone.DEN_OF_RANCOR] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7068,  -- Tallying conquest results...
         LANTERN_OFFSET                = 7227,  -- The grating will not budge.
+        LANTERN_ALREADY_LIT           = 7234,  -- The lantern is already lit.
+        RUSTY_OLD_LANTERN             = 7241,  -- Rusty old lanterns hang from this altar.
+        ONE_OF_THE_LANTERNS           = 7242,  -- One of the lanterns is lit.
+        TANSFORMED_INTO_A_MONSTER     = 7246,  -- The flames of rancor have transformed into a monster!
         FISHING_MESSAGE_OFFSET        = 7255,  -- You can't fish here.
         CHEST_UNLOCKED                = 7363,  -- You unlock the chest!
         SENSE_OMINOUS_PRESENCE        = 7373,  -- You sense an ominous presence...
@@ -36,18 +40,19 @@ zones[xi.zone.DEN_OF_RANCOR] =
         AZRAEL                  = GetFirstID('Azrael'),
         BISTRE_HEARTED_MALBERRY = GetFirstID('Bistre-hearted_Malberry'),
         CARMINE_TAILED_JANBERRY = GetFirstID('Carmine-tailed_Janberry'),
-        TAWNY_FINGERED_MUGBERRY = GetFirstID('Tawny-fingered_Mugberry'),
         CELESTE_EYED_TOZBERRY   = GetFirstID('Celeste-eyed_Tozberry'),
         FRIAR_RUSH              = GetFirstID('Friar_Rush'),
         HAKUTAKU                = GetFirstID('Hakutaku'),
         MIMIC                   = GetFirstID('Mimic'),
         MOKUMOKUREN             = GetFirstID('Mokumokuren'),
         OGAMA                   = GetFirstID('Ogama'),
+        RANCOR_TORCH            = GetFirstID('Rancor_Torch'),
+        TAWNY_FINGERED_MUGBERRY = GetFirstID('Tawny-fingered_Mugberry'),
     },
     npc =
     {
-        LANTERN_OFFSET  = GetFirstID('_4g3'),
         DROP_GATE       = GetFirstID('_4g0'),
+        LANTERN_OFFSET  = GetFirstID('_4g3'),
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }

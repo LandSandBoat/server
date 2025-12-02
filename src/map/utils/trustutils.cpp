@@ -46,7 +46,7 @@
 #include "mobskill.h"
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
 #include "zone_instance.h"
@@ -61,71 +61,81 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust);
 
 struct TrustData
 {
-    uint32      trustID;
-    uint32      pool;
+    uint32      trustID{};
+    uint32      pool{};
     look_t      look;        // appearance data
     std::string name;        // script name string
     std::string packet_name; // packet name string
-    ECOSYSTEM   EcoSystem;   // ecosystem
+    ECOSYSTEM   EcoSystem{}; // ecosystem
 
-    uint8  name_prefix;
-    uint8  radius; // Model Radius - affects melee range etc.
-    uint16 m_Family;
+    uint8  name_prefix{};
+    uint8  modelSize{ 0 };
+    float  modelHitboxSize{ 0.0f };
+    uint16 m_Family{};
 
-    uint8 mJob;
-    uint8 sJob;
-    float HPscale; // HP boost percentage
-    float MPscale; // MP boost percentage
+    uint8 mJob{};
+    uint8 sJob{};
+    float HPscale{}; // HP boost percentage
+    float MPscale{}; // MP boost percentage
 
-    uint8  cmbSkill;
-    uint16 cmbDmgMult;
-    uint16 cmbDelay;
-    uint8  baseSpeed;
-    uint8  animationSpeed;
+    uint8  cmbSkill{};
+    uint16 cmbDmgMult{};
+    uint16 cmbDelay{};
+    uint8  baseSpeed{};
+    uint8  animationSpeed{};
 
     // stat ranks
-    uint8 strRank;
-    uint8 dexRank;
-    uint8 vitRank;
-    uint8 agiRank;
-    uint8 intRank;
-    uint8 mndRank;
-    uint8 chrRank;
-    uint8 attRank;
-    uint8 defRank;
-    uint8 evaRank;
-    uint8 accRank;
+    uint8 strRank{};
+    uint8 dexRank{};
+    uint8 vitRank{};
+    uint8 agiRank{};
+    uint8 intRank{};
+    uint8 mndRank{};
+    uint8 chrRank{};
+    uint8 attRank{};
+    uint8 defRank{};
+    uint8 evaRank{};
+    uint8 accRank{};
 
-    uint16 m_MobSkillList;
+    uint16 m_MobSkillList{};
 
     // magic stuff
-    uint16 spellList;
+    uint16 spellList{};
 
     // resists
-    int16 slash_sdt;
-    int16 pierce_sdt;
-    int16 hth_sdt;
-    int16 impact_sdt;
+    int16 slash_sdt{};
+    int16 pierce_sdt{};
+    int16 hth_sdt{};
+    int16 impact_sdt{};
 
-    int16 magical_sdt;
+    int16 magical_sdt{};
 
-    int16 fire_sdt;
-    int16 ice_sdt;
-    int16 wind_sdt;
-    int16 earth_sdt;
-    int16 thunder_sdt;
-    int16 water_sdt;
-    int16 light_sdt;
-    int16 dark_sdt;
+    int16 fire_sdt{};
+    int16 ice_sdt{};
+    int16 wind_sdt{};
+    int16 earth_sdt{};
+    int16 thunder_sdt{};
+    int16 water_sdt{};
+    int16 light_sdt{};
+    int16 dark_sdt{};
 
-    int8 fire_res_rank;
-    int8 ice_res_rank;
-    int8 wind_res_rank;
-    int8 earth_res_rank;
-    int8 thunder_res_rank;
-    int8 water_res_rank;
-    int8 light_res_rank;
-    int8 dark_res_rank;
+    int8 fire_res_rank{};
+    int8 ice_res_rank{};
+    int8 wind_res_rank{};
+    int8 earth_res_rank{};
+    int8 thunder_res_rank{};
+    int8 water_res_rank{};
+    int8 light_res_rank{};
+    int8 dark_res_rank{};
+
+    int8 paralyze_res_rank{};
+    int8 bind_res_rank{};
+    int8 silence_res_rank{};
+    int8 slow_res_rank{};
+    int8 poison_res_rank{};
+    int8 light_sleep_res_rank{};
+    int8 dark_sleep_res_rank{};
+    int8 blind_res_rank{};
 };
 
 std::unordered_map<uint16, std::unique_ptr<TrustData>> g_PTrustData;
@@ -198,8 +208,9 @@ void BuildTrustData(uint32 TrustID)
                                        "mob_pools.cmbDmgMult, "
                                        "mob_pools.name_prefix, "
                                        "mob_pools.skill_list_id, "
+                                       "mob_pools.modelSize, "
+                                       "mob_pools.modelHitboxSize, "
                                        "spell_list.spellid, "
-                                       "mob_family_system.mobradius, "
                                        "mob_family_system.ecosystemID, "
                                        "(mob_family_system.HP / 100) AS HP, "
                                        "(mob_family_system.MP / 100) AS MP, "
@@ -225,7 +236,11 @@ void BuildTrustData(uint32 TrustID)
                                        "mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, "
                                        "mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, "
                                        "mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, "
-                                       "mob_resistances.light_res_rank, mob_resistances.dark_res_rank "
+                                       "mob_resistances.light_res_rank, mob_resistances.dark_res_rank, "
+                                       "mob_resistances.paralyze_res_rank, mob_resistances.bind_res_rank, "
+                                       "mob_resistances.silence_res_rank, mob_resistances.slow_res_rank, "
+                                       "mob_resistances.poison_res_rank, mob_resistances.light_sleep_res_rank, "
+                                       "mob_resistances.dark_sleep_res_rank, mob_resistances.blind_res_rank "
                                        "FROM spell_list, mob_pools, mob_family_system, mob_resistances "
                                        "WHERE spell_list.spellid = ? "
                                        "AND (spell_list.spellid + 5000) = mob_pools.poolid "
@@ -260,10 +275,11 @@ void BuildTrustData(uint32 TrustID)
             data->name_prefix    = rset->get<uint8>("name_prefix");
             data->m_MobSkillList = rset->get<uint16>("skill_list_id");
 
-            data->radius    = rset->get<uint8>("mobradius");
-            data->EcoSystem = static_cast<ECOSYSTEM>(rset->get<uint8>("ecosystemID"));
-            data->HPscale   = rset->get<float>("HP");
-            data->MPscale   = rset->get<float>("MP");
+            data->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
+            data->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+            data->EcoSystem       = rset->get<ECOSYSTEM>("ecosystemID");
+            data->HPscale         = rset->get<float>("HP");
+            data->MPscale         = rset->get<float>("MP");
 
             data->baseSpeed      = 62;
             data->animationSpeed = 50;
@@ -306,6 +322,15 @@ void BuildTrustData(uint32 TrustID)
             data->light_res_rank   = rset->get<int8>("light_res_rank");
             data->dark_res_rank    = rset->get<int8>("dark_res_rank");
 
+            data->paralyze_res_rank    = rset->get<int8>("paralyze_res_rank");
+            data->bind_res_rank        = rset->get<int8>("bind_res_rank");
+            data->silence_res_rank     = rset->get<int8>("silence_res_rank");
+            data->slow_res_rank        = rset->get<int8>("slow_res_rank");
+            data->poison_res_rank      = rset->get<int8>("poison_res_rank");
+            data->light_sleep_res_rank = rset->get<int8>("light_sleep_res_rank");
+            data->dark_sleep_res_rank  = rset->get<int8>("dark_sleep_res_rank");
+            data->blind_res_rank       = rset->get<int8>("blind_res_rank");
+
             g_PTrustData[TrustID] = std::move(data);
         }
     }
@@ -343,10 +368,11 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     PTrust->baseSpeed      = trustData->baseSpeed;
     PTrust->animationSpeed = trustData->animationSpeed;
     PTrust->UpdateSpeed();
-    PTrust->m_TrustID     = trustData->trustID;
-    PTrust->status        = STATUS_TYPE::NORMAL;
-    PTrust->m_ModelRadius = trustData->radius;
-    PTrust->m_EcoSystem   = trustData->EcoSystem;
+    PTrust->m_TrustID       = trustData->trustID;
+    PTrust->status          = STATUS_TYPE::NORMAL;
+    PTrust->modelSize       = trustData->modelSize;
+    PTrust->modelHitboxSize = trustData->modelHitboxSize;
+    PTrust->m_EcoSystem     = trustData->EcoSystem;
 
     PTrust->SetMJob(trustData->mJob);
     PTrust->SetSJob(trustData->sJob);
@@ -432,8 +458,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // Helpers to map HP/MPScale around 100 to 1-7 grades
     // std::clamp doesn't play nice with uint8, so -> unsigned int
-    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd,
-                        unsigned int inputVal) -> unsigned int
+    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd, unsigned int inputVal) -> unsigned int
     {
         unsigned int inputRange  = inputEnd - inputStart;
         unsigned int outputRange = outputEnd - outputStart;

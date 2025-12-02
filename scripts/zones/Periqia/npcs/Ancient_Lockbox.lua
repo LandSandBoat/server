@@ -11,28 +11,28 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             {
-                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 400 },
-                { itemid = xi.item.UNAPPRAISED_SWORD,   droprate = 200 },
-                { itemid = xi.item.UNAPPRAISED_POLEARM, droprate = 200 },
-                { itemid = xi.item.UNAPPRAISED_GLOVES,  droprate = 200 },
+                { itemId = xi.item.UNAPPRAISED_BOX,     weight = 400 },
+                { itemId = xi.item.UNAPPRAISED_SWORD,   weight = 200 },
+                { itemId = xi.item.UNAPPRAISED_POLEARM, weight = 200 },
+                { itemId = xi.item.UNAPPRAISED_GLOVES,  weight = 200 },
             },
         },
 
         [xi.assault.mission.REQUIEM] =
         {
             {
-                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 400 },
-                { itemid = xi.item.UNAPPRAISED_GLOVES,  droprate = 200 },
-                { itemid = xi.item.UNAPPRAISED_POLEARM, droprate = 200 },
-                { itemid = xi.item.UNAPPRAISED_AXE,     droprate = 200 },
+                { itemId = xi.item.UNAPPRAISED_BOX,     weight = 400 },
+                { itemId = xi.item.UNAPPRAISED_GLOVES,  weight = 200 },
+                { itemId = xi.item.UNAPPRAISED_POLEARM, weight = 200 },
+                { itemId = xi.item.UNAPPRAISED_AXE,     weight = 200 },
             },
         },
 
         [xi.assault.mission.SHOOTING_DOWN_THE_BARON] =
         {
             {
-                { itemid = xi.item.UNAPPRAISED_BOW,   droprate = 600 },
-                { itemid = xi.item.UNAPPRAISED_BOX,   droprate = 400 },
+                { itemId = xi.item.UNAPPRAISED_BOW,   weight = 600 },
+                { itemId = xi.item.UNAPPRAISED_BOX,   weight = 400 },
             },
         },
     }
@@ -42,57 +42,57 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             {
-                { itemid = xi.item.HI_RERAISER,       droprate = 700 },
-                { itemid = 0,                         droprate = 300 },
+                { itemId = xi.item.HI_RERAISER,       weight = 700 },
+                { itemId = 0,                         weight = 300 },
             },
 
             {
-                { itemid = xi.item.HI_POTION_TANK,    droprate = 100 },
-                { itemid = xi.item.HI_ETHER_TANK,     droprate = 100 },
-                { itemid = 0,                         droprate = 800 },
+                { itemId = xi.item.HI_POTION_TANK,    weight = 100 },
+                { itemId = xi.item.HI_ETHER_TANK,     weight = 100 },
+                { itemId = 0,                         weight = 800 },
             },
 
             {
-                { itemid = xi.item.HI_POTION_P3,      droprate = 530 },
-                { itemid = 0,                         droprate = 470 },
+                { itemId = xi.item.HI_POTION_P3,      weight = 530 },
+                { itemId = 0,                         weight = 470 },
             },
         },
 
         [xi.assault.mission.REQUIEM] =
         {
             {
-                { itemid = xi.item.HI_POTION_P3,      droprate = 500 },
-                { itemid = 0,                         droprate = 500 },
+                { itemId = xi.item.HI_POTION_P3,      weight = 500 },
+                { itemId = 0,                         weight = 500 },
             },
 
             {
-                { itemid = xi.item.HI_ETHER_TANK,     droprate = 100 },
-                { itemid = 0,                         droprate = 900 },
+                { itemId = xi.item.HI_ETHER_TANK,     weight = 100 },
+                { itemId = 0,                         weight = 900 },
             },
 
             {
-                { itemid = xi.item.HI_RERAISER,       droprate = 500 },
-                { itemid = 0,                         droprate = 500 },
+                { itemId = xi.item.HI_RERAISER,       weight = 500 },
+                { itemId = 0,                         weight = 500 },
             },
         },
 
         [xi.assault.mission.SHOOTING_DOWN_THE_BARON] =
         {
             {
-                { itemid = xi.item.HI_POTION_P2,      droprate = 850 },
-                { itemid = 0,                         droprate = 150 },
+                { itemId = xi.item.HI_POTION_P2,      weight = 850 },
+                { itemId = 0,                         weight = 150 },
             },
             {
-                { itemid = xi.item.HI_POTION_P3,      droprate = 50 },
-                { itemid = 0,                         droprate = 950 },
+                { itemId = xi.item.HI_POTION_P3,      weight = 50 },
+                { itemId = 0,                         weight = 950 },
             },
             {
-                { itemid = xi.item.HI_POTION_TANK,    droprate = 400 },
-                { itemid = 0,                         droprate = 600 },
+                { itemId = xi.item.HI_POTION_TANK,    weight = 400 },
+                { itemId = 0,                         weight = 600 },
             },
             {
-                { itemid = xi.item.HI_RERAISER,       droprate = 200 },
-                { itemid = 0,                         droprate = 800 },
+                { itemId = xi.item.HI_RERAISER,       weight = 200 },
+                { itemId = 0,                         weight = 800 },
             },
         },
     }

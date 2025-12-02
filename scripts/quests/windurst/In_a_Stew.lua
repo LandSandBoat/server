@@ -21,7 +21,7 @@ quest.sections =
             return vars.Prog == 0 and
             vars.Wait < NextConquestTally() and
             player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) and
-            player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
             not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
         end,
 
@@ -146,8 +146,6 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getMustZone(player) then
                         return quest:event(240)
-                    else
-                        return quest:event(222):replaceDefault()
                     end
                 end,
             },

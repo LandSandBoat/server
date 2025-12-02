@@ -21,7 +21,7 @@
 
 #include "event_handler.h"
 
-void CAIEventHandler::addListener(std::string const& eventname, sol::function const& lua_func, std::string const& identifier)
+void CAIEventHandler::addListener(const std::string& eventname, const sol::function& lua_func, const std::string& identifier)
 {
     TracyZoneScoped;
     TracyZoneString(eventname);
@@ -34,7 +34,7 @@ void CAIEventHandler::addListener(std::string const& eventname, sol::function co
     eventListeners[eventname].emplace_back(identifier, lua_func);
 }
 
-void CAIEventHandler::removeListener(std::string const& identifier)
+void CAIEventHandler::removeListener(const std::string& identifier)
 {
     TracyZoneScoped;
     TracyZoneString(identifier);
@@ -51,7 +51,7 @@ void CAIEventHandler::removeListener(std::string const& identifier)
     removeFromAllListeners(identifier);
 }
 
-bool CAIEventHandler::hasListener(std::string const& eventName)
+bool CAIEventHandler::hasListener(const std::string& eventName)
 {
     const auto& listeners = eventListeners.find(eventName);
     return listeners != eventListeners.end() && !listeners->second.empty();

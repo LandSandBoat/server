@@ -38,7 +38,7 @@ entity.onMobDespawn = function(mob)
     SetServerVariable('[PH]Overlord_Bakgodek', 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
-    UpdateNMSpawnPoint(nqId)
+    xi.mob.updateNMSpawnPoint(nqId)
     GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
 end
 

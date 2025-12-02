@@ -71,7 +71,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.enmityMult = params.enmityMult + (tp + xi.combat.physical.calculateFTPBonus(player) * 1000 - 1000) / 2000
     params.enmityMult = utils.clamp(params.enmityMult, 1, 2) -- necessary because of Gorget/Belt bonus
 
-    damage = target:breathDmgTaken(dmg)
+    damage = dmg
+    damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
+    damage = math.floor(target:handleSevereDamage(damage, false))
+
     if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
         damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end
@@ -91,6 +96,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     damage = xi.weaponskills.takeWeaponskillDamage(target, player, params, primary, attack, calcParams, action)
+
+    if damage == 0 then
+        -- The logic above sets the action as a miss if CE/VE are 0 on the target
+        -- because the landed hits are (correctly) set to 0
+        -- Atonement is not known to miss and should always report as a hit.
+        -- It is fairly unique in that regard, which is why it is handled as a special case here.
+        action:resolution(target:getID(), xi.action.resolution.HIT)
+        action:messageID(target:getID(), xi.msg.basic.DAMAGE)
+    end
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
 end

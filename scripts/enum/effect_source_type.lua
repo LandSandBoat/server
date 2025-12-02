@@ -11,4 +11,5 @@ xi.effectSourceType =
     TEMPORARY_ITEM = 2,
     MOB            = 3,
     FOOD           = 4,
+    CORSAIR_ROLL   = 5,
 }

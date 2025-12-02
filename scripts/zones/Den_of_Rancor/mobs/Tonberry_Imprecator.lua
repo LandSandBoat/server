@@ -9,12 +9,6 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 ---@type TMobEntity
 local entity = {}
 
-local carminePHTable =
-{
-    [ID.mob.CARMINE_TAILED_JANBERRY + 2] = ID.mob.CARMINE_TAILED_JANBERRY,
-    [ID.mob.CARMINE_TAILED_JANBERRY + 3] = ID.mob.CARMINE_TAILED_JANBERRY,
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 798, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 799, 2, xi.regime.type.GROUNDS)
@@ -22,7 +16,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, carminePHTable, 5, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.CARMINE_TAILED_JANBERRY, 5, 3600) -- 1 hour
 end
 
 return entity

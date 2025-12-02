@@ -1,6 +1,6 @@
 -----------------------------------
 -- xi.effect.ATMA
--- Notes: Effect subType = Atma slot.  See: scripts/globals/abyssea/atma.lua
+-- Notes: Effect sourceTypeParam = Atma slot.  See: scripts/globals/abyssea/atma.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

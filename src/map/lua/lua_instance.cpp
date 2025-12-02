@@ -160,7 +160,7 @@ uint32 CLuaInstance::getWipeTime()
     return static_cast<uint32>(time_ms);
 }
 
-auto CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj) -> CBaseEntity*
+auto CLuaInstance::getEntity(uint16 targid, const sol::object& filterObj) -> CBaseEntity*
 {
     uint8 filter = -1;
     if (filterObj.is<uint8>())
@@ -176,7 +176,7 @@ uint32 CLuaInstance::getStage()
     return m_PLuaInstance->GetStage();
 }
 
-uint64_t CLuaInstance::getLocalVar(std::string const& name)
+uint64_t CLuaInstance::getLocalVar(const std::string& name)
 {
     return m_PLuaInstance->GetLocalVar(name);
 }
@@ -211,7 +211,7 @@ void CLuaInstance::setStage(uint32 stage)
     m_PLuaInstance->SetStage(stage);
 }
 
-void CLuaInstance::setLocalVar(std::string const& name, uint64_t value)
+void CLuaInstance::setLocalVar(const std::string& name, uint64_t value)
 {
     m_PLuaInstance->SetLocalVar(name, value);
 }

@@ -22,7 +22,7 @@
 #include "0x058_recipe.h"
 
 #include "entities/charentity.h"
-#include "packets/synth_suggestion.h"
+#include "packets/s2c/0x031_recipe.h"
 #include "validation.h"
 
 auto GP_CLI_COMMAND_RECIPE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -30,8 +30,8 @@ auto GP_CLI_COMMAND_RECIPE::validate(MapSession* PSession, const CCharEntity* PC
     return PacketValidator()
         .range("skill", skill, 0x01, 0x08) // Fishing 0x00 to Digging 0x0A. 0x00, 0x09, and 0x0A are not implemented
         .range("level", level, 0, 110)
-        .range("Mode", Mode, // 1-5 but only 2-3 are implemented
-               GP_CLI_COMMAND_RECIPE_MODE::RequestAvailableRecipeList,
+        .range("Mode", Mode, // 1-5 but only 1-3 are implemented
+               GP_CLI_COMMAND_RECIPE_MODE::RequestAvailableRankList,
                GP_CLI_COMMAND_RECIPE_MODE::RequestRecipeMaterials)
         .custom([&](PacketValidator& v)
                 {
@@ -62,18 +62,21 @@ void GP_CLI_COMMAND_RECIPE::process(MapSession* PSession, CCharEntity* PChar) co
 
     switch (static_cast<GP_CLI_COMMAND_RECIPE_MODE>(Mode))
     {
+        case GP_CLI_COMMAND_RECIPE_MODE::RequestAvailableRankList:
+            PChar->pushPacket<GP_SERV_COMMAND_RECIPE>(GP_SERV_COMMAND_RECIPE_TYPE::RecipeDetail1, skill, level, skillRank, selectedRecipeIndex);
+            break;
         case GP_CLI_COMMAND_RECIPE_MODE::RequestAvailableRecipeList:
             // For pagination, the client sends the range in increments of 16. (0..0x10, 0x10..0x20, etc)
             skillRank  = Param4;
             pagination = Param1;
 
-            PChar->pushPacket<CSynthSuggestionListPacket>(skill, level, skillRank, pagination);
+            PChar->pushPacket<GP_SERV_COMMAND_RECIPE>(GP_SERV_COMMAND_RECIPE_TYPE::RecipeList, skill, level, skillRank, pagination);
             break;
         case GP_CLI_COMMAND_RECIPE_MODE::RequestRecipeMaterials:
             skillRank           = Param4;
             selectedRecipeIndex = Param3;
 
-            PChar->pushPacket<CSynthSuggestionRecipePacket>(skill, level, skillRank, selectedRecipeIndex);
+            PChar->pushPacket<GP_SERV_COMMAND_RECIPE>(GP_SERV_COMMAND_RECIPE_TYPE::RecipeDetail2, skill, level, skillRank, selectedRecipeIndex);
             break;
         default:
             break;

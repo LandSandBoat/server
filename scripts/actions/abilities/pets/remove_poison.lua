@@ -1,18 +1,18 @@
 -----------------------------------
 -- Remove Poison
 -----------------------------------
----@type TAbility
+---@type TAbilityPet
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-abilityObject.onUseAbility = function(pet, target, skill, action)
+abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
     if target:delStatusEffect(xi.effect.POISON) then
-        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        petskill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
     else
-        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
 
     return xi.effect.POISON

@@ -1,7 +1,7 @@
 -----------------------------------
---  Hecatomb Wave
---  Description: Deals wind damage to enemies within a fan-shaped area originating from the caster. Additional effect: Blindness.
---  Type: Magical (Wind)
+-- Hecatomb Wave
+-- Family: Demons
+-- Description: Deals Wind damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Blindness.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,13 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 0, 180)
+    local params = {}
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.1, 1.5, xi.element.WIND, 400)
+    params.percentMultipier  = 0.0476
+    params.element           = xi.element.WIND
+    params.damageCap         = 260
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WIND)
-    return dmg
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WIND)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 30, 0, math.random(60, 120))
+    end
+
+    return damage
 end
 
 return mobskillObject

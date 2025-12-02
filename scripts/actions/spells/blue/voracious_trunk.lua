@@ -19,12 +19,9 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
     local stolen = 0
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
     if resist >= 0.5 then
         stolen = caster:stealStatusEffect(target)
         if stolen ~= 0 then

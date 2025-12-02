@@ -6,17 +6,11 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:hasPet() or mob:getPet() == nil then
-        return 1
-    end
-
-    return 0
+    return xi.pet.onMobSkillCheck(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:spawnPet()
-
-    skill:setMsg(xi.msg.basic.NONE)
+    xi.pet.spawnPet(mob, nil, skill)
 
     return 0
 end

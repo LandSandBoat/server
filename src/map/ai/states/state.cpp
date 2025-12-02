@@ -60,6 +60,17 @@ timer::time_point CState::GetEntryTime() const
     return m_entryTime;
 }
 
+bool CState::WasExitDelayed()
+{
+    return m_wasDelayed;
+}
+
+void CState::DelayExitTime(std::chrono::milliseconds delayMilliseconds)
+{
+    m_entryTime += delayMilliseconds;
+    m_wasDelayed = true;
+}
+
 void CState::ResetEntryTime()
 {
     m_entryTime = timer::now();

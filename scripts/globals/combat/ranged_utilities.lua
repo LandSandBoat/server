@@ -112,3 +112,22 @@ xi.combat.ranged.accuracyDistancePenalty = function(attacker, defender)
 
     return penalty
 end
+
+xi.combat.ranged.shouldUseAmmo = function(attacker)
+    if attacker:isPC() then
+        local recycleChance = attacker:getMod(xi.mod.RECYCLE) + attacker:getMerit(xi.merit.RECYCLE) + attacker:getJobPointLevel(xi.jp.AMMO_CONSUMPTION)
+
+        if attacker:hasStatusEffect(xi.effect.UNLIMITED_SHOT) then
+            attacker:delStatusEffect(xi.effect.UNLIMITED_SHOT) -- TODO: allegedly Unlimited Shot doesn't remove itself unless you hit
+            recycleChance = 100
+        end
+
+        if math.random(1, 100) <= recycleChance then
+            return false
+        end
+
+        return true
+    end
+
+    return false
+end

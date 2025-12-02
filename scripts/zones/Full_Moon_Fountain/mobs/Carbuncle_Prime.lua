@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     -- use healing_ruby_ii with only a 5% chance (as much rarer than the other carby skills)
     if math.random(1, 20) == 1 then
         return 911

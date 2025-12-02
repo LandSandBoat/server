@@ -64,43 +64,43 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.KABRAKANS_AXE, weight = 250 }, -- kabrakans_axe
-        { item = xi.item.SARNGA,        weight = 250 }, -- sarnga
-        { item = xi.item.DRAGVANDIL,    weight = 250 }, -- dragvandil
-        { item = xi.item.HAMELIN_FLUTE, weight = 250 }, -- hamelin_flute
+        { itemId = xi.item.KABRAKANS_AXE, weight = 250 }, -- kabrakans_axe
+        { itemId = xi.item.SARNGA,        weight = 250 }, -- sarnga
+        { itemId = xi.item.DRAGVANDIL,    weight = 250 }, -- dragvandil
+        { itemId = xi.item.HAMELIN_FLUTE, weight = 250 }, -- hamelin_flute
     },
 
     {
-        { item = xi.item.NONE,            weight = 400 }, -- nothing
-        { item = xi.item.SPECTACLES,      weight = 200 }, -- spectacles
-        { item = xi.item.ASSAULT_EARRING, weight = 200 }, -- assault_earring
-        { item = xi.item.PEACE_RING,      weight = 200 }, -- peace_ring
+        { itemId = xi.item.NONE,            weight = 400 }, -- nothing
+        { itemId = xi.item.SPECTACLES,      weight = 200 }, -- spectacles
+        { itemId = xi.item.ASSAULT_EARRING, weight = 200 }, -- assault_earring
+        { itemId = xi.item.PEACE_RING,      weight = 200 }, -- peace_ring
     },
 
     {
-        { item = xi.item.NONE,             weight = 200 }, -- nothing
-        { item = xi.item.TRANSLUCENT_ROCK, weight = 200 }, -- translucent_rock
-        { item = xi.item.GREEN_ROCK,       weight = 200 }, -- green_rock
-        { item = xi.item.YELLOW_ROCK,      weight = 200 }, -- yellow_rock
-        { item = xi.item.PURPLE_ROCK,      weight = 200 }, -- purple_rock
+        { itemId = xi.item.NONE,             weight = 200 }, -- nothing
+        { itemId = xi.item.TRANSLUCENT_ROCK, weight = 200 }, -- translucent_rock
+        { itemId = xi.item.GREEN_ROCK,       weight = 200 }, -- green_rock
+        { itemId = xi.item.YELLOW_ROCK,      weight = 200 }, -- yellow_rock
+        { itemId = xi.item.PURPLE_ROCK,      weight = 200 }, -- purple_rock
     },
 
     {
-        { item = xi.item.PAINITE,         weight = 100 }, -- painite
-        { item = xi.item.JADEITE,         weight = 100 }, -- jadeite
-        { item = xi.item.MYTHRIL_INGOT,   weight = 100 }, -- mythril_ingot
-        { item = xi.item.STEEL_INGOT,     weight = 100 }, -- steel_ingot
-        { item = xi.item.FLUORITE,        weight = 100 }, -- fluorite
-        { item = xi.item.GOLD_INGOT,      weight = 100 }, -- gold_ingot
-        { item = xi.item.ZIRCON,          weight = 100 }, -- zircon
-        { item = xi.item.CHRYSOBERYL,     weight = 100 }, -- chrysoberyl
-        { item = xi.item.DARKSTEEL_INGOT, weight = 100 }, -- darksteel_ingot
-        { item = xi.item.MOONSTONE,       weight = 100 }, -- moonstone
+        { itemId = xi.item.PAINITE,         weight = 100 }, -- painite
+        { itemId = xi.item.JADEITE,         weight = 100 }, -- jadeite
+        { itemId = xi.item.MYTHRIL_INGOT,   weight = 100 }, -- mythril_ingot
+        { itemId = xi.item.STEEL_INGOT,     weight = 100 }, -- steel_ingot
+        { itemId = xi.item.FLUORITE,        weight = 100 }, -- fluorite
+        { itemId = xi.item.GOLD_INGOT,      weight = 100 }, -- gold_ingot
+        { itemId = xi.item.ZIRCON,          weight = 100 }, -- zircon
+        { itemId = xi.item.CHRYSOBERYL,     weight = 100 }, -- chrysoberyl
+        { itemId = xi.item.DARKSTEEL_INGOT, weight = 100 }, -- darksteel_ingot
+        { itemId = xi.item.MOONSTONE,       weight = 100 }, -- moonstone
     },
 
     {
-        { item = xi.item.NONE,           weight =  900 }, -- nothing
-        { item = xi.item.VILE_ELIXIR_P1, weight =  100 }, -- vile_elixir_+1
+        { itemId = xi.item.NONE,           weight =  900 }, -- nothing
+        { itemId = xi.item.VILE_ELIXIR_P1, weight =  100 }, -- vile_elixir_+1
     },
 }
 

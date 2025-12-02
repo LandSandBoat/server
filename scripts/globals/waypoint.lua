@@ -2,8 +2,6 @@
 -- Waypoint Teleporters
 -- https://www.bg-wiki.com/ffxi/Waypoint
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.waypoint = xi.waypoint or {}
 

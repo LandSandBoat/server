@@ -72,7 +72,7 @@ quest.sections =
                 [576] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:needToZone(true)
-                        player:setVar('Quest[6][30]Stage', getMidnight())
+                        player:setVar('Quest[6][30]Stage', JstMidnight())
                     end
                 end,
             },

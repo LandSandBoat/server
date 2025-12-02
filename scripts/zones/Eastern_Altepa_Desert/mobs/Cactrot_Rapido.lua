@@ -114,7 +114,7 @@ local pathNodes =
     { x = -40, y = 0, z = -203 },
 }
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x =  -43.733, y =   0.029, z =  -205.890 },
     { x =  -26.834, y =  -2.920, z =  -183.684 },
@@ -169,7 +169,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(172800, 259200)) -- When server restarts, reset timer
 end
 
@@ -193,7 +193,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(172800, 259200)) -- 2 to 3 days
 end
 

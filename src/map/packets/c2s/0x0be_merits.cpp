@@ -22,18 +22,16 @@
 #include "0x0be_merits.h"
 
 #include "entities/charentity.h"
-#include "packets/char_abilities.h"
-#include "packets/char_job_extra.h"
-#include "packets/char_recast.h"
-#include "packets/char_skills.h"
-#include "packets/char_stats.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/menu_merit.h"
-#include "packets/merit_points_categories.h"
-#include "packets/message_basic.h"
-#include "packets/monipulator1.h"
-#include "packets/monipulator2.h"
+#include "packets/s2c/0x029_battle_message.h"
+#include "packets/s2c/0x061_clistatus.h"
+#include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x063_miscdata_merits.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
+#include "packets/s2c/0x08c_merit.h"
+#include "packets/s2c/0x0ac_command_data.h"
+#include "packets/s2c/0x119_abil_recast.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_MERITS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -54,9 +52,9 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
             if (db::preparedStmt("UPDATE char_exp SET mode = ? WHERE charid = ? LIMIT 1", Param1, PChar->id))
             {
                 PChar->MeritMode = Param1;
-                PChar->pushPacket<CMenuMeritPacket>(PChar);
-                PChar->pushPacket<CMonipulatorPacket1>(PChar);
-                PChar->pushPacket<CMonipulatorPacket2>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
             }
         }
         break;
@@ -73,18 +71,18 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     {
                         case GP_CLI_COMMAND_MERITS_PARAM1::Lower:
                             PChar->PMeritPoints->LowerMerit(merit);
-                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_DECREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_DECREASE);
                             break;
                         case GP_CLI_COMMAND_MERITS_PARAM1::Raise:
                             PChar->PMeritPoints->RaiseMerit(merit);
-                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_INCREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_INCREASE);
                             break;
                     }
 
-                    PChar->pushPacket<CMenuMeritPacket>(PChar);
-                    PChar->pushPacket<CMonipulatorPacket1>(PChar);
-                    PChar->pushPacket<CMonipulatorPacket2>(PChar);
-                    PChar->pushPacket<CMeritPointsCategoriesPacket>(PChar, merit);
+                    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_MERIT>(PChar, merit);
 
                     charutils::SaveCharExp(PChar, PChar->GetMJob());
                     PChar->PMeritPoints->SaveMeritPoints(PChar->id);
@@ -99,12 +97,11 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     PChar->addHP(PChar->GetMaxHP());
                     PChar->addMP(PChar->GetMaxMP());
                     PChar->pushPacket<CCharStatusPacket>(PChar);
-                    PChar->pushPacket<CCharStatsPacket>(PChar);
-                    PChar->pushPacket<CCharSkillsPacket>(PChar);
-                    PChar->pushPacket<CCharRecastPacket>(PChar);
-                    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-                    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
+                    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
+                    charutils::SendExtendedJobPackets(PChar);
                     PChar->pushPacket<CCharSyncPacket>(PChar);
                 }
             }

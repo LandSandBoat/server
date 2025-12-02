@@ -26,8 +26,22 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local realDmg = 50 * target:getCharVar('EVERYONES_GRUDGE_KILLS')
 
-    if target:getID() > 100000 then
+    -- TODO: Verify if this is accurate
+    if target:isPet() then
         realDmg = 50 * math.random(50, 100)
+    end
+
+    -- Uggalepih Necklace mitigation
+    -- While worn, consumes all TP to mitigate damage at flat breakpoints
+    -- 1500 TP = 50% reduction, 3000 TP = 100% reduction
+    if
+        target:isPC() and
+        target:getEquipID(xi.slot.NECK) == xi.item.UGGALEPIH_NECKLACE
+    then
+        local tpFactor = 1 - 0.5 * math.floor(target:getTP() / 1500)
+        realDmg        = math.floor(realDmg * tpFactor)
+
+        target:setTP(0)
     end
 
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)

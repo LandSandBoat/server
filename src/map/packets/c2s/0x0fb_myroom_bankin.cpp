@@ -22,18 +22,21 @@
 #include "0x0fb_myroom_bankin.h"
 
 #include "entities/charentity.h"
+#include "enums/item_lockflg.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
 #include "packets/char_status.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_count.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_size.h"
+#include "packets/s2c/0x01c_item_max.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x026_item_subcontainer.h"
 #include "utils/charutils.h"
 namespace
 {
-    const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
+const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+
 }
 
 auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -67,7 +70,7 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
             // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
             if (PItem->isMannequin())
             {
-                PChar->pushPacket<CInventoryCountPacket>(MyroomCategory, MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
                 for (uint8 i = 0; i < 8; ++i)
                 {
                     if (PItem->m_extra[10 + i] > 0)
@@ -77,7 +80,7 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
                         {
                             continue;
                         }
-                        PChar->pushPacket<CInventoryAssignPacket>(PEquippedItem, INV_NORMAL);
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PEquippedItem, ItemLockFlg::Normal);
                         PItem->m_extra[10 + i] = 0;
                     }
                 }
@@ -87,7 +90,10 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
                                                "SET "
                                                "extra = ? "
                                                "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
-                                               PItem->m_extra, MyroomCategory, MyroomItemIndex, PChar->id);
+                                               PItem->m_extra,
+                                               MyroomCategory,
+                                               MyroomItemIndex,
+                                               PChar->id);
 
             if (rset && rset->rowsAffected())
             {
@@ -106,14 +112,14 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
                     PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
                 }
 
-                PChar->pushPacket<CInventorySizePacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
 
                 luautils::OnFurnitureRemoved(PChar, PItem);
 
                 PChar->loc.zone->SpawnConditionalNPCs(PChar);
             }
-            PChar->pushPacket<CInventoryItemPacket>(PItem, MyroomCategory, PItem->getSlotID());
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), PItem->getSlotID());
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
         else
         {

@@ -1,6 +1,5 @@
 -----------------------------------
 -- xi.effect.MARCH
--- Notes: Effect subType for enhancing songs stores IDs of the caster. Set in scripts/globals/spells/enhancing_song.lua
 -- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -- DO NOT ALTER ANY OF THE EFFECT VALUES! DO NOT ALTER EFFECT POWER!
 -- TODO: Find a better way of doing this. Need to account for varying modifiers + CASTER's skill (not target)

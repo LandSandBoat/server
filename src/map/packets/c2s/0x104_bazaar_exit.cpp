@@ -22,7 +22,7 @@
 #include "0x104_bazaar_exit.h"
 
 #include "entities/charentity.h"
-#include "packets/bazaar_check.h"
+#include "packets/s2c/0x108_bazaar_shopping.h"
 
 auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -49,7 +49,7 @@ void GP_CLI_COMMAND_BAZAAR_EXIT::process(MapSession* PSession, CCharEntity* PCha
         }
         if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
         {
-            PTarget->pushPacket<CBazaarCheckPacket>(PChar, BAZAAR_LEAVE);
+            PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SHOPPING>(PChar, GP_SERV_COMMAND_BAZAAR_SHOPPING_STATE::Exit);
         }
 
         DebugBazaarsFmt("Bazaar Interaction [Leave Bazaar] - Buyer: {}, Seller: {}", PChar->name, PTarget->name);

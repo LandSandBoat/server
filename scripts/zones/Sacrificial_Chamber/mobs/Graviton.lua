@@ -12,9 +12,14 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+end
+
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEP_MEVA, 50)
-    mob:addMod(xi.mod.LULLABY_MEVA, 50)
     mob:setLocalVar('everyonesRancorHPP', math.random(20, 30))
 end
 

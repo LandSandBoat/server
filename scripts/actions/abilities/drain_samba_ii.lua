@@ -30,6 +30,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     player:delStatusEffect(xi.effect.HASTE_SAMBA)
     player:delStatusEffect(xi.effect.ASPIR_SAMBA)
     player:addStatusEffect(xi.effect.DRAIN_SAMBA, 2, 0, duration)
+
+    return xi.effect.DRAIN_SAMBA
 end
 
 return abilityObject

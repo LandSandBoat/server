@@ -24,7 +24,9 @@
 #include "entities/charentity.h"
 #include "items/item_weapon.h"
 #include "latent_effect.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "status_effect_container.h"
+#include "utils/charutils.h"
 
 CLatentEffect::CLatentEffect(CBattleEntity* owner, LATENT conditionsId, uint16 conditionsValue, uint8 slot, Mod modValue, int16 modPower)
 : m_POwner(owner)
@@ -115,6 +117,7 @@ bool CLatentEffect::ModOnItemOnly(Mod modID)
         modID == Mod::ITEM_ADDEFFECT_STATUS ||
         modID == Mod::ITEM_ADDEFFECT_POWER ||
         modID == Mod::ITEM_ADDEFFECT_DURATION ||
+        modID == Mod::ADDS_WEAPONSKILL ||
         modID == Mod::MOVE_SPEED_GEAR_BONUS)
     {
         return true;
@@ -135,6 +138,8 @@ bool CLatentEffect::Activate()
             if (item)
             {
                 item->addModifier(GetModValue(), GetModPower());
+                charutils::BuildingCharWeaponSkills(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 m_PItem = item;
             }
         }
@@ -160,6 +165,9 @@ bool CLatentEffect::Deactivate()
             if (m_PItem != nullptr)
             {
                 m_PItem->delModifier(GetModValue(), GetModPower());
+                CCharEntity* PChar = static_cast<CCharEntity*>(m_POwner);
+                charutils::BuildingCharWeaponSkills(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
         }
         // Remove other modifiers from player

@@ -45,7 +45,7 @@ CTaskManager::CTask* CTaskManager::AddTask(CTask* PTask)
     return PTask;
 }
 
-void CTaskManager::RemoveTask(std::string const& TaskName)
+void CTaskManager::RemoveTask(const std::string& TaskName)
 {
     TracyZoneScoped;
 

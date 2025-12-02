@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `audit_trade` (
   `sender` int(10) unsigned NOT NULL DEFAULT '0',
   `sender_name` varchar(15) DEFAULT NULL,
   `receiver` int(10) unsigned NOT NULL DEFAULT '0',
-  `receiver_name` varchar(15) DEFAULT NULL,
+  `receiver_name` varchar(24) DEFAULT NULL,
   `date` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `itemid` (`itemid`),

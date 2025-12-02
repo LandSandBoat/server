@@ -33,7 +33,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][2]DayCompleted') + 2 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 3
                     then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
                     else

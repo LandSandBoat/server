@@ -16,8 +16,7 @@ local content = Battlefield:new({
     index         = 5,
     entryNpcs     = { 'qm1_1', 'qm1_2', 'qm1_3', 'qm1_4', 'qm1_5' },
 
-    -- TODO: wornMessage needs verification, but is necessary to ensure item cannot be reused.
-    requiredItems = { xi.item.ARK_PENTASPHERE, wearMessage = laLoffID.text.THE_SEAL_FADES, wornMessage = { laLoffID.text.LARGE_CRACK_RUNNING_DOWN, xi.item.ARK_PENTASPHERE } },
+    requiredItems = { xi.item.ARK_PENTASPHERE, wearMessage = laLoffID.text.THE_SEAL_FADES, wornMessage = { laLoffID.text.INK_HAS_FADED, xi.item.ARK_PENTASPHERE } },
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)

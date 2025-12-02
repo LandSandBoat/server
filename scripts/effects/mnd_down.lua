@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore mind of 1 every 3 ticks.
+    -- The effect restores 1 MND every 3 ticks. (1 Tick = 3 seconds).
     local downMNDEffectSize = effect:getPower()
     if downMNDEffectSize > 0 then
         effect:setPower(downMNDEffectSize - 1)
         target:delMod(xi.mod.MND, -1)
+    else
+        target:delStatusEffect(xi.effect.MND_DOWN)
     end
 end
 

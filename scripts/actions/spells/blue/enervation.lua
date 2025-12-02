@@ -20,16 +20,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.BEASTMEN
-    params.effect = xi.effect.DEFENSE_DOWN
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    local duration = 30
+    local duration        = 30
     local resistThreshold = 0.5
-    local returnEffect = xi.effect.DEFENSE_DOWN
+    local returnEffect    = xi.effect.DEFENSE_DOWN
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.DEFENSE_DOWN, 0)
     if resist >= resistThreshold then
 
         local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 0, duration * resist)

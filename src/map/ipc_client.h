@@ -25,11 +25,11 @@
 #include "common/ipc.h"
 #include "common/lua.h"
 #include "common/mmo.h"
-
-#include "common/sql.h"
 #include "common/zmq_dealer_wrapper.h"
 
-#include <nonstd/jthread.hpp>
+#include <atomic>
+#include <thread>
+
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
@@ -53,7 +53,7 @@ public:
     //
 
     void handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message);
-    void handleMessage_CharLogin(const IPP& ipp, const ipc::CharLogin& message);
+    void handleMessage_AccountLogin(const IPP& ipp, const ipc::AccountLogin& message);
     void handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& message);
     void handleMessage_CharVarUpdate(const IPP& ipp, const ipc::CharVarUpdate& message);
     void handleMessage_ChatMessageTell(const IPP& ipp, const ipc::ChatMessageTell& message);
@@ -121,13 +121,15 @@ extern std::unique_ptr<IPCClient> ipcClient_;
 
 namespace message
 {
-    void init(MapNetworking& networking);
 
-    template <typename T>
-    void send(const T& message)
-    {
-        ipcClient_->sendMessage(message);
-    }
+void init(MapNetworking& networking);
 
-    void handle_incoming();
+template <typename T>
+void send(const T& message)
+{
+    ipcClient_->sendMessage(message);
+}
+
+void handle_incoming();
+
 } // namespace message

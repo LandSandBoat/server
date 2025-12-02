@@ -173,7 +173,7 @@ auto CLuaZone::getBattlefieldByInitiator(uint32 charID) -> CBattlefield*
     return nullptr;
 }
 
-WEATHER CLuaZone::getWeather()
+auto CLuaZone::getWeather() const -> Weather
 {
     return m_pLuaZone->GetWeather();
 }
@@ -281,7 +281,7 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
-sol::table CLuaZone::queryEntitiesByName(std::string const& name)
+sol::table CLuaZone::queryEntitiesByName(const std::string& name)
 {
     const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 

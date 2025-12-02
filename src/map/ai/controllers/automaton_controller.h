@@ -70,9 +70,9 @@ protected:
 
     void         setCooldowns();
     void         setMagicCooldowns();
-    virtual bool CanCastSpells() override;
+    virtual bool CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) override;
     virtual bool Cast(uint16 targid, SpellID spellid) override;
-    virtual bool MobSkill(uint16 targid, uint16 wsid) override;
+    virtual bool MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride) override;
 
 private:
     bool TryAction();
@@ -117,11 +117,13 @@ private:
 
 namespace automaton
 {
-    void                   LoadAutomatonSpellList();
-    bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
-    bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
-    std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
-    void                   LoadAutomatonAbilities();
+
+void                   LoadAutomatonSpellList();
+bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
+bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
+std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
+void                   LoadAutomatonAbilities();
+
 }; // namespace automaton
 
 #endif

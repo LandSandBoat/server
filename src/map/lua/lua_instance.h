@@ -58,9 +58,9 @@ public:
     uint32 getLastTimeUpdate();
     uint32 getProgress();
     uint32 getWipeTime();
-    auto   getEntity(uint16 targid, sol::object const& filterObj) -> CBaseEntity*;
+    auto   getEntity(uint16 targid, const sol::object& filterObj) -> CBaseEntity*;
     uint32 getStage();
-    auto   getLocalVar(std::string const& name) -> uint64_t;
+    auto   getLocalVar(const std::string& name) -> uint64_t;
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 ms);
@@ -68,7 +68,7 @@ public:
     void setProgress(uint32 progress);
     void setWipeTime(uint32 ms);
     void setStage(uint32 stage);
-    void setLocalVar(std::string const& name, uint64_t value);
+    void setLocalVar(const std::string& name, uint64_t value);
 
     void fail();
     bool failed();

@@ -1,4 +1,4 @@
--- local ID = zones[xi.zone.WINDURST_WATERS]
+local ID = zones[xi.zone.WINDURST_WATERS]
 
 return {
     ['Ajen-Myoojen']     = { event = 270 },
@@ -7,13 +7,12 @@ return {
     ['Anja-Enja']        = { event = 278 },
     ['Aora-Uora']        = { event = 378 },
     ['Arukoko']          = { event = 509 },
-    ['Buchi_Kohmrijah']  = { event = 591 },
     ['Bulolo']           = { event = 566 },
     ['Caliburn']         = { event = 599 },
     ['Chomoro-Kyotoro']  = { event = 432 },
     ['Chyuk-Kochak']     = { event = 664 },
     ['Cochal-Monchal']   = { event = 696 },
-    ['Dabido-Sorobido']  = { event = 904 },
+    ['Dabido-Sorobido']  = { text = ID.text.CHEF_IN_TRAINING },
     ['Dagoza-Beruza']    = { event = 104 },
     ['Damami-Karumi']    = { event = 575 },
     ['Dienger']          = { event = 815 },
@@ -46,6 +45,7 @@ return {
     ['Leepe-Hoppe']      = { event = 345 },
     ['Library_book1']    = { event = 367 },
     ['Library_book2']    = { event = 368 },
+    ['Library_book3']    = { event = 369 },
     ['Majiji']           = { event = 435 },
     ['Mashishi']         = { event = 513 },
     ['Mashuu-Ajuu']      = { event = 429 },

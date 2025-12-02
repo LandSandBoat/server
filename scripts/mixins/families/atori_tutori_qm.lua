@@ -1,8 +1,9 @@
 require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
+g_mixins.families = g_mixins.families or {}
 
-g_mixins.atori_tutori_qm = function(atoriMob)
+g_mixins.families.atori_tutori_qm = function(atoriMob)
     atoriMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
         mob:setLocalVar('specialThreshold', 35)
     end)
@@ -44,4 +45,4 @@ g_mixins.atori_tutori_qm = function(atoriMob)
     end)
 end
 
-return g_mixins.atori_tutori_qm
+return g_mixins.families.atori_tutori_qm

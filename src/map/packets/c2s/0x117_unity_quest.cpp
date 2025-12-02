@@ -22,8 +22,8 @@
 #include "0x117_unity_quest.h"
 
 #include "entities/charentity.h"
-#include "packets/menu_unity.h"
-#include "packets/roe_sparkupdate.h"
+#include "packets/s2c/0x110_unity.h"
+#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_UNITY_QUEST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -35,6 +35,6 @@ void GP_CLI_COMMAND_UNITY_QUEST::process(MapSession* PSession, CCharEntity* PCha
 {
     // TODO: Incomplete implementation.
     // This stub only handles the needed RoE updates.
-    PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
-    PChar->pushPacket<CMenuUnityPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
+    charutils::SendUnityPackets(PChar);
 }

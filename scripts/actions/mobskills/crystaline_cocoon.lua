@@ -14,8 +14,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, 50, 0, 300))
-    xi.mobskills.mobBuffMove(mob, xi.effect.SHELL, 2000, 0, 300)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, 50, 0, 120))
+    xi.mobskills.mobBuffMove(mob, xi.effect.SHELL, 781, 0, 120)
 
     return xi.effect.PROTECT
 end

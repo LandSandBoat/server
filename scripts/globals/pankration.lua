@@ -2,7 +2,6 @@
 -- Pankration System + Helpers
 -----------------------------------
 require('scripts/globals/magic')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.pankration = xi.pankration or {}
@@ -83,7 +82,7 @@ set{
     -- Demon
     -- Devrgr
 
-    115, 359, -- Fomor
+    115, 359, 360, -- Fomor
     140, 141, -- Hippogryph
     163, 164, -- Hydra
 

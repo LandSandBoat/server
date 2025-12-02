@@ -33,5 +33,6 @@ void GP_CLI_COMMAND_GMCOMMAND::process(MapSession* PSession, CCharEntity* PChar)
 {
     auto commandStr = asStringFromUntrustedSource(Command, sizeof(Command));
     ShowDebugFmt("GP_CLI_COMMAND_GMCOMMAND: Not implemented. GMUniqueNo: {}, Command: '{}'",
-                 GMUniqueNo, commandStr);
+                 GMUniqueNo,
+                 commandStr);
 }

@@ -2,7 +2,6 @@
 -- Zone: Valkurm_Dunes (103)
 -----------------------------------
 local ID = zones[xi.zone.VALKURM_DUNES]
-require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 ---@type TZone
@@ -38,10 +37,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(60.989, -4.898, -151.001, 198)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 3
-    end
-
     -- AMK06/AMK07
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
@@ -62,9 +57,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 3 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

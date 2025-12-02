@@ -17,25 +17,31 @@ entity.onTrigger = function(player, npc)
     local zoneMinute = VanadielMinute()
     local correctTime = zoneHour >= 19 or zoneHour < 4 or (zoneHour == 4 and zoneMinute == 0)
 
-    if not GetMobByID(ID.mob.AGAS):isSpawned() then
-        if player:hasKeyItem(xi.ki.MOONDROP) then
-            player:messageSpecial(ID.text.CAN_SEE_SKY)
+    local agas = GetMobByID(ID.mob.AGAS)
+    if agas then
+        if not agas:isSpawned() then
+            if player:hasKeyItem(xi.ki.MOONDROP) then
+                player:messageSpecial(ID.text.CAN_SEE_SKY)
 
-        elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_ACCEPTED then
+            elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_ACCEPTED then
 
-            if IsMoonNew() or not correctTime then
-                player:messageSpecial(ID.text.CANNOT_SEE_MOON)
+                if
+                    (getVanadielMoonCycle() == xi.moonCycle.NEW_MOON) or
+                    not correctTime
+                then
+                    player:messageSpecial(ID.text.CANNOT_SEE_MOON)
 
-            elseif player:getCharVar('Searching_AgasKilled') == 1 then
-                player:startEvent(14)
+                elseif player:getCharVar('Searching_AgasKilled') == 1 then
+                    player:startEvent(14)
+
+                else
+                    player:messageSpecial(ID.text.SOMETHING_NOT_RIGHT)
+                    SpawnMob(ID.mob.AGAS):updateClaim(player) -- missing repop timer for Agas due to errors with SpawnMob
+                end
 
             else
-                player:messageSpecial(ID.text.SOMETHING_NOT_RIGHT)
-                SpawnMob(ID.mob.AGAS):updateClaim(player) -- missing repop timer for Agas due to errors with SpawnMob
+                player:messageSpecial(ID.text.CAN_SEE_SKY)
             end
-
-        else
-            player:messageSpecial(ID.text.CAN_SEE_SKY)
         end
     end
 end

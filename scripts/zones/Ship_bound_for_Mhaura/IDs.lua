@@ -23,6 +23,7 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA] =
     },
     mob =
     {
+        SEA_HORROR = GetFirstID('Sea_Horror'),
     },
     npc =
     {

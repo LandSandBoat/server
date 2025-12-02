@@ -45,7 +45,7 @@ bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
         case ConquestMessage::M2W_GM_ConquestUpdate:
         {
             // Trigger a full update of influence points
-            sendInfluencesMsg(true);
+            sendInfluencesMsg(ShouldUpdateZones::Yes);
             return true;
         }
         break;
@@ -80,7 +80,7 @@ void ConquestSystem::sendTallyStartMsg()
     });
 }
 
-void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones)
+void ConquestSystem::sendInfluencesMsg(ShouldUpdateZones shouldUpdateZones)
 {
     worldServer_.ipcServer_->broadcastMessage(ipc::ConquestEvent{
         .type    = ConquestMessage::W2M_BroadcastInfluencePoints,
@@ -142,9 +142,14 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
 
     influences[nation] += lost;
 
-    const auto rset2 = db::preparedStmt("UPDATE conquest_system SET sandoria_influence = ?, bastok_influence = ?, "
-                                        "windurst_influence = ?, beastmen_influence = ? WHERE region_id = ?",
-                                        influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
+    const auto rset2 = db::preparedStmt(
+        "UPDATE conquest_system SET sandoria_influence = ?, bastok_influence = ?, "
+        "windurst_influence = ?, beastmen_influence = ? WHERE region_id = ?",
+        influences[0],
+        influences[1],
+        influences[2],
+        influences[3],
+        static_cast<uint8>(region));
 
     return !rset2;
 }
@@ -174,12 +179,12 @@ void ConquestSystem::updateWeekConquest()
 
 void ConquestSystem::updateHourlyConquest()
 {
-    sendInfluencesMsg(true);
+    sendInfluencesMsg(ShouldUpdateZones::Yes);
 }
 
 void ConquestSystem::updateVanaHourlyConquest()
 {
-    sendInfluencesMsg(false);
+    sendInfluencesMsg(ShouldUpdateZones::No);
 }
 
 auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const

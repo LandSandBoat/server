@@ -29,11 +29,17 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         THE_DOOR_IS_LOCKED            = 7371,  -- The door is locked. You might be able to open it with <item>.
         PROTECTED_BY_UNKNOWN_FORCE    = 7372,  -- The door is protected by some unknown force.
         YOUR_KEY_BREAKS               = 7374,  -- Your <item> breaks!
+        FRAME_FOR_A_PAINTING          = 7378,  -- This is a frame for a painting.
+        STILL_HANGS_ON_THE_WALL       = 7390,  -- The <keyitem> still hangs on the wall.
         DOOR_LOCKED                   = 7392,  -- The door is locked.
         HATE_RESET                    = 7445,  -- The built-up hate has been cleansed...!
         DOOR_SHUT                     = 7447,  -- The door is firmly shut.
         NO_HATE                       = 7448,  -- You have no built-up hate to cleanse.
         NOTHING_I_CANT_CUT            = 7452,  -- Nothing... Nothing... Nothing I can't cut... Nothing...
+        YOU_CANNOT_OPEN_THIS_DOOR     = 7458,  -- You cannot open this door.
+        OFFERING                      = 7459,  -- This platform looks a place for an offering.
+        SOMETHING_IS_WRITTEN          = 7460,  -- Something is written here, but you cannot make out the words.
+        SLIGHTLY_QUIVERS              = 7461,  -- The <keyitem> slightly quivers, but there is no sign of Lightbringer here.
         BEGINS_TO_QUIVER              = 7462,  -- The <keyitem> begins to quiver!
         SOME_SORT_OF_CEREMONY         = 7464,  -- Some sort of ceremony was performed here...
         NM_OFFSET                     = 7514,  -- It looks like some sort of device. A thin thread leads down to the floor...
@@ -51,33 +57,34 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
     },
     mob =
     {
-        SOZU_SARBERRY            = GetFirstID('Sozu_Sarberry'),
-        SOZU_TERBERRY            = GetFirstID('Sozu_Terberry'),
-        TONBERRY_KINQ            = GetFirstID('Tonberry_Kinq'),
+        BERYL_FOOTED_MOLBERRY    = GetFirstID('Beryl-footed_Molberry'),
+        CLEUVARION_M_RESOAIX     = GetFirstID('Cleuvarion_M_Resoaix'),
+        COOK_OFFSET              = GetFirstID('Cook_Solberry'),
+        CRIMSON_TOOTHED_PAWBERRY = GetFirstID('Crimson-toothed_Pawberry'),
+        DEATH_FROM_ABOVE         = GetFirstID('Death_from_Above'),
         FLAUROS                  = GetFirstID('Flauros'),
-        TEMPLE_GUARDIAN          = GetFirstID('Temple_Guardian'),
+        HABETROT                 = GetFirstID('Habetrot'),
+        MIMIC                    = GetFirstID('Mimic'),
         NIO_A                    = GetFirstID('Nio-A'),
         NIO_HUM                  = GetFirstID('Nio-Hum'),
-        MIMIC                    = GetFirstID('Mimic'),
-        SOZU_ROGBERRY            = GetFirstID('Sozu_Rogberry'),
-        CLEUVARION_M_RESOAIX     = GetFirstID('Cleuvarion_M_Resoaix'),
         ROMPAULION_S_CITALLE     = GetFirstID('Rompaulion_S_Citalle'),
-        BERYL_FOOTED_MOLBERRY    = GetFirstID('Beryl-footed_Molberry'),
-        DEATH_FROM_ABOVE         = GetFirstID('Death_from_Above'),
-        HABETROT                 = GetFirstID('Habetrot'),
-        CRIMSON_TOOTHED_PAWBERRY = GetFirstID('Crimson-toothed_Pawberry'),
         SACRIFICIAL_GOBLET       = GetFirstID('Sacrificial_Goblet'),
-        YALLERY_BROWN            = GetFirstID('Yallery_Brown'),
-        COOK_OFFSET              = GetFirstID('Cook_Solberry')
+        SOZU_ROGBERRY            = GetFirstID('Sozu_Rogberry'),
+        SOZU_SARBERRY            = GetFirstID('Sozu_Sarberry'),
+        SOZU_TERBERRY            = GetFirstID('Sozu_Terberry'),
+        TROMPE_LOEIL             = GetFirstID('Trompe_LOeil'),
+        TEMPLE_GUARDIAN          = GetFirstID('Temple_Guardian'),
+        TONBERRY_KINQ            = GetFirstID('Tonberry_Kinq'),
+        YALLERY_BROWN            = GetFirstID('Yallery_Brown')
     },
     npc =
     {
-        PLONGEUR_MONBERRY    = GetFirstID('Plongeur_Monberry'),
         BOOK_OFFSET          = GetFirstID('Worn_Book'),
-        TEMPLE_GUARDIAN_DOOR = GetFirstID('_mf1'),
+        CHEF_NONBERRY        = GetFirstID('Chef_Nonberry'),
         DOOR_TO_RANCOR       = GetFirstID('_mfb'),
-        TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
-        CHEF_NONBERRY        = GetFirstID('Chef_Nonberry')
+        PLONGEUR_MONBERRY    = GetFirstID('Plongeur_Monberry'),
+        TEMPLE_GUARDIAN_DOOR = GetFirstID('_mf1'),
+        TREASURE_COFFER      = GetFirstID('Treasure_Coffer')
     },
 }
 

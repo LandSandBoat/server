@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/job_special'), require('scripts/mixins/rotz_b
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x =  -44.353, y =  -0.433, z =  -243.704 },
     { x =  -34.786, y =   0.465, z =  -228.886 },
@@ -76,7 +76,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Centurio XII-I's spawnpoint and respawn time (21-24 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 end
 

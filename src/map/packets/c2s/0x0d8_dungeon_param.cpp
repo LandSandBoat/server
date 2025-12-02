@@ -34,5 +34,8 @@ auto GP_CLI_COMMAND_DUNGEON_PARAM::validate(MapSession* PSession, const CCharEnt
 void GP_CLI_COMMAND_DUNGEON_PARAM::process(MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_DUNGEON_PARAM: Not implemented. ActIndex: {}, Param1: {}, Param2: {}, UniqueNo: {}",
-                 ActIndex, Param1, Param2, UniqueNo);
+                 ActIndex,
+                 Param1,
+                 Param2,
+                 UniqueNo);
 }

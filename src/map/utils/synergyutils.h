@@ -26,50 +26,52 @@
 
 namespace synergyutils
 {
-    struct SynergyRecipe
-    {
-        uint32 id;
 
-        uint8 primary_skill;
-        uint8 primary_rank;
-        uint8 secondary_skill;
-        uint8 secondary_rank;
-        uint8 tertiary_skill;
-        uint8 tertiary_rank;
+struct SynergyRecipe
+{
+    uint32 id;
 
-        uint8 cost_fire_fewell;
-        uint8 cost_ice_fewell;
-        uint8 cost_wind_fewell;
-        uint8 cost_earth_fewell;
-        uint8 cost_lightning_fewell;
-        uint8 cost_water_fewell;
-        uint8 cost_light_fewell;
-        uint8 cost_dark_fewell;
+    uint8 primary_skill;
+    uint8 primary_rank;
+    uint8 secondary_skill;
+    uint8 secondary_rank;
+    uint8 tertiary_skill;
+    uint8 tertiary_rank;
 
-        uint16 ingredient1;
-        uint16 ingredient2;
-        uint16 ingredient3;
-        uint16 ingredient4;
-        uint16 ingredient5;
-        uint16 ingredient6;
-        uint16 ingredient7;
-        uint16 ingredient8;
+    uint8 cost_fire_fewell;
+    uint8 cost_ice_fewell;
+    uint8 cost_wind_fewell;
+    uint8 cost_earth_fewell;
+    uint8 cost_lightning_fewell;
+    uint8 cost_water_fewell;
+    uint8 cost_light_fewell;
+    uint8 cost_dark_fewell;
 
-        uint16 result;
-        uint16 resultHQ1;
-        uint16 resultHQ2;
-        uint16 resultHQ3;
+    uint16 ingredient1;
+    uint16 ingredient2;
+    uint16 ingredient3;
+    uint16 ingredient4;
+    uint16 ingredient5;
+    uint16 ingredient6;
+    uint16 ingredient7;
+    uint16 ingredient8;
 
-        uint8 resultQty;
-        uint8 resultHQ1Qty;
-        uint8 resultHQ2Qty;
-        uint8 resultHQ3Qty;
+    uint16 result;
+    uint16 resultHQ1;
+    uint16 resultHQ2;
+    uint16 resultHQ3;
 
-        std::string resultName;
-    };
+    uint8 resultQty;
+    uint8 resultHQ1Qty;
+    uint8 resultHQ2Qty;
+    uint8 resultHQ3Qty;
 
-    void LoadSynergyRecipes();
+    std::string resultName;
+};
 
-    auto GetSynergyRecipeByID(uint32 id) -> std::optional<SynergyRecipe>;
-    auto GetSynergyRecipeByIngredients(uint16 ingredient1, uint16 ingredient2, uint16 ingredient3, uint16 ingredient4, uint16 ingredient5, uint16 ingredient6, uint16 ingredient7, uint16 ingredient8) -> std::optional<SynergyRecipe>;
+void LoadSynergyRecipes();
+
+auto GetSynergyRecipeByID(uint32 id) -> std::optional<SynergyRecipe>;
+auto GetSynergyRecipeByIngredients(uint16 ingredient1, uint16 ingredient2, uint16 ingredient3, uint16 ingredient4, uint16 ingredient5, uint16 ingredient6, uint16 ingredient7, uint16 ingredient8) -> std::optional<SynergyRecipe>;
+
 } // namespace synergyutils

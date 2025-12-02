@@ -20,16 +20,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.BEAST
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.effect = xi.effect.NONE
-    local resistThreshold = 0.25
     local effect = xi.effect.NONE
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, xi.element.LIGHT, xi.mod.INT, xi.effect.NONE, 0)
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    if resist >= resistThreshold then
+    if resist >= 0.25 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
         -- Gaze move

@@ -6,7 +6,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     if math.random(1, 4) > 1 then
         return 1957
     end

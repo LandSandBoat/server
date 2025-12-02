@@ -36,7 +36,9 @@ float totalMemory = 0;
 
 namespace
 {
-    float ENTITY_HEIGHT = 2.0f;
+
+float ENTITY_HEIGHT = 2.0f;
+
 }
 
 ZoneLos::ZoneLos(Triangle* elements, int elementCount)
@@ -44,7 +46,7 @@ ZoneLos::ZoneLos(Triangle* elements, int elementCount)
 {
 }
 
-auto ZoneLos::Load(uint16 zoneId, std::string const& pathToObj) -> std::unique_ptr<ZoneLos>
+auto ZoneLos::Load(uint16 zoneId, const std::string& pathToObj) -> std::unique_ptr<ZoneLos>
 {
     TracyZoneScoped;
 
@@ -104,8 +106,8 @@ auto ZoneLos::Load(uint16 zoneId, std::string const& pathToObj) -> std::unique_p
     ShowDebug("Nodes: %d", stats.nodes);
     ShowDebug("Empty nodes: %d", stats.emptyNodes);
     ShowDebug("Max elements: %d", stats.maxElements);
-    float treeMem    = stats.nodes * sizeof(LosTreeNode) / 1000000.f;
-    float elementMem = (mesh->face_count * sizeof(Triangle) + mesh->face_count * sizeof(int)) / 1000000.f;
+    float treeMem    = stats.nodes * sizeof(LosTreeNode) / 1000000.0f;
+    float elementMem = (mesh->face_count * sizeof(Triangle) + mesh->face_count * sizeof(int)) / 1000000.0f;
     totalMemory += treeMem + elementMem;
     ShowDebug("Tree memory (%db): %.2f mb", sizeof(LosTreeNode), treeMem);
     ShowDebug("Element memory (%db): %.2f mb", sizeof(Triangle), elementMem);
@@ -123,7 +125,7 @@ bool ZoneLos::CanEntitySee(CBaseEntity* source, CBaseEntity* target) const
     return CanEntitySee(source, target->loc.p);
 }
 
-bool ZoneLos::CanEntitySee(CBaseEntity* source, position_t const& targetPointBase) const
+bool ZoneLos::CanEntitySee(CBaseEntity* source, const position_t& targetPointBase) const
 {
     TracyZoneScoped;
     return !DoesRayCollide({ source->loc.p.x, source->loc.p.y - ENTITY_HEIGHT, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - ENTITY_HEIGHT, targetPointBase.z });
@@ -135,7 +137,7 @@ std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, CBaseEntity* targe
     return Raycast(source->loc.p, target->loc.p);
 }
 
-std::optional<Vector3D> ZoneLos::Raycast(position_t const& source, position_t const& target) const
+std::optional<Vector3D> ZoneLos::Raycast(const position_t& source, const position_t& target) const
 {
     TracyZoneScoped;
     return DoesRayCollide({ source.x, source.y, source.z }, { target.x, target.y, target.z });

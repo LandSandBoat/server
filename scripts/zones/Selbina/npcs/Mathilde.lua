@@ -20,7 +20,12 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 173 then
+    if
+        csid == 171 and
+        not player:hasCompletedUniqueEvent(xi.uniqueEvent.RAMONA_INTRODUCTION)
+    then
+        player:setCharVar('metMathilde', 1)
+    elseif csid == 173 then
         player:setUniqueEvent(xi.uniqueEvent.MET_MATHILDES_SON)
     end
 end

@@ -8,7 +8,7 @@ local entity = {}
 local pathNodes =
 {
     { x = 150.716, y = -2.500, z = 130.594 },
-    { x = 150.995, z = 130.387 },
+    { x = 149.1266, z = 131.9665 },
 }
 
 entity.onSpawn = function(npc)

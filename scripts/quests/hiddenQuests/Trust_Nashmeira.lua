@@ -28,7 +28,7 @@ quest.sections =
             {
                 [5092] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
-                        player:addSpell(xi.magic.spell.NASHMEIRA, true, true)
+                        player:addSpell(xi.magic.spell.NASHMEIRA, { silentLog = true })
                         player:messageSpecial(whitegateID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NASHMEIRA)
                     end
                 end,

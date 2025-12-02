@@ -40,6 +40,7 @@
 
 #include "automatonentity.h"
 #include "battleentity.h"
+#include "packets/s2c/base.h"
 #include "petentity.h"
 
 #include "utils/fishingutils.h"
@@ -292,6 +293,7 @@ public:
 
     uint8 visibleGmLevel;        // See GmLevel of flags0_t
     bool  wallhackEnabled;       // GM walk through walls
+    bool  isFrozenFlagged;       // Player Freeze flag.
     bool  isSettingBazaarPrices; // Is setting bazaar prices (temporarily hide bazaar)
     bool  isLinkDead;            // Player is d/cing
 
@@ -386,7 +388,7 @@ public:
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
     template <typename F, typename... Args>
-    void ForPartyWithTrusts(F const& func, Args&&... args)
+    void ForPartyWithTrusts(const F& func, Args&&... args)
     {
         if (PParty)
         {
@@ -441,7 +443,8 @@ public:
     void pushPacket(Args&&... args)
     {
         // TODO: This could hook into pooling of packet objects, etc.
-        pushPacket(std::make_unique<T>(std::forward<Args>(args)...));
+        auto packet = std::make_unique<T>(std::forward<Args>(args)...);
+        pushPacket(std::move(packet));
     }
 
     void   pushPacket(std::unique_ptr<CBasicPacket>&&);                                   // Push packet to packet list
@@ -453,6 +456,7 @@ public:
     bool   isPacketFiltered(std::unique_ptr<CBasicPacket>& packet);
 
     bool pendingPositionUpdate;
+    bool sendServerStatus_ = false;
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
@@ -513,6 +517,8 @@ public:
     position_t m_ActionOffsetPos{}; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation{};
+
+    uint32 m_PrevZonelineID; // The ID of the previous zoneline the player went through.
 
     timer::duration   m_PlayTime;
     timer::time_point m_SaveTime;
@@ -642,14 +648,14 @@ public:
 
     virtual void OnItemFinish(CItemState&, action_t&);
 
-    auto getCharVar(std::string const& varName) const -> int32;
-    auto getCharVarsWithPrefix(std::string const& prefix) -> std::vector<std::pair<std::string, int32>>;
-    void setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
-    void updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
-    void removeFromCharVarCache(std::string const& varName);
+    auto getCharVar(const std::string& varName) const -> int32;
+    auto getCharVarsWithPrefix(const std::string& prefix) -> std::vector<std::pair<std::string, int32>>;
+    void setCharVar(const std::string& varName, int32 value, uint32 expiry = 0);
+    void setVolatileCharVar(const std::string& varName, int32 value, uint32 expiry = 0);
+    void updateCharVarCache(const std::string& varName, int32 value, uint32 expiry = 0);
+    void removeFromCharVarCache(const std::string& varName);
 
-    void clearCharVarsWithPrefix(std::string const& prefix);
+    void clearCharVarsWithPrefix(const std::string& prefix);
 
     bool m_Locked{}; // Is the player locked in a cutscene
 
@@ -664,7 +670,8 @@ protected:
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:
-    xi::lazy<CAMANContainer> m_AMAN;
+    // Lazily initialized AMAN data
+    xi::optional<CAMANContainer> m_AMAN;
 
     std::unique_ptr<CItemContainer> m_Inventory;
     std::unique_ptr<CItemContainer> m_Mogsafe;

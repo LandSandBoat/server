@@ -1,9 +1,8 @@
 -----------------------------------
 -- Festive Moogle
 -----------------------------------
-require('scripts/globals/crafting/crafting_utils')
+require('scripts/globals/hobbies/crafting/utils')
 require('scripts/globals/npc_util')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.festiveMoogle = {}

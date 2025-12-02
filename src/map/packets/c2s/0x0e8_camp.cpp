@@ -31,16 +31,19 @@ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PCha
     return PacketValidator()
         .isNormalStatus(PChar)
         .isNotPreventedAction(PChar)
+        .isNotCrafting(PChar)
         .mustNotEqual(PChar->PAI->IsEngaged(), true, "Cannot heal while engaged in combat")
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(Mode)
         .mustNotEqual(
             PChar->animation == ANIMATION_HEALING &&
                 Mode == static_cast<uint32_t>(GP_CLI_COMMAND_CAMP_MODE::On),
-            true, "Requested healing when already healing")
+            true,
+            "Requested healing when already healing")
         .mustNotEqual(
             PChar->animation != ANIMATION_HEALING &&
                 Mode == static_cast<uint32_t>(GP_CLI_COMMAND_CAMP_MODE::Off),
-            true, "Requested stop healing when not healing");
+            true,
+            "Requested stop healing when not healing");
 }
 
 void GP_CLI_COMMAND_CAMP::process(MapSession* PSession, CCharEntity* PChar) const

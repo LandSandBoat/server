@@ -33,5 +33,6 @@ auto GP_CLI_COMMAND_ITEMSEARCH::validate(MapSession* PSession, const CCharEntity
 void GP_CLI_COMMAND_ITEMSEARCH::process(MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_ITEMSEARCH: Not implemented. Language: {}, Name: {}",
-                 Language, asStringFromUntrustedSource(Name, sizeof(Name)));
+                 Language,
+                 asStringFromUntrustedSource(Name, sizeof(Name)));
 }

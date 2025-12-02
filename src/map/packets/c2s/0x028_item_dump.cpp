@@ -22,6 +22,7 @@
 #include "0x028_item_dump.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
@@ -29,26 +30,28 @@
 
 namespace
 {
-    // Retail honors _every_ container but Recycle Bin, even if you do not presently have access.
-    const std::set validContainers = {
-        LOC_INVENTORY,
-        LOC_MOGSAFE,
-        LOC_MOGSAFE2,
-        LOC_STORAGE,
-        LOC_TEMPITEMS,
-        LOC_MOGLOCKER,
-        LOC_MOGSATCHEL,
-        LOC_MOGSACK,
-        LOC_MOGCASE,
-        LOC_WARDROBE,
-        LOC_WARDROBE2,
-        LOC_WARDROBE3,
-        LOC_WARDROBE4,
-        LOC_WARDROBE5,
-        LOC_WARDROBE6,
-        LOC_WARDROBE7,
-        LOC_WARDROBE8,
-    };
+
+// Retail honors _every_ container but Recycle Bin, even if you do not presently have access.
+const std::set validContainers = {
+    LOC_INVENTORY,
+    LOC_MOGSAFE,
+    LOC_MOGSAFE2,
+    LOC_STORAGE,
+    LOC_TEMPITEMS,
+    LOC_MOGLOCKER,
+    LOC_MOGSATCHEL,
+    LOC_MOGSACK,
+    LOC_MOGCASE,
+    LOC_WARDROBE,
+    LOC_WARDROBE2,
+    LOC_WARDROBE3,
+    LOC_WARDROBE4,
+    LOC_WARDROBE5,
+    LOC_WARDROBE6,
+    LOC_WARDROBE7,
+    LOC_WARDROBE8,
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_ITEM_DUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -63,7 +66,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
     // Gil cannot be dropped.
     if (Category == LOC_INVENTORY && ItemIndex == 0)
     {
-        PChar->pushPacket<CMessageStandardPacket>(ITEMID::GIL, MsgStd::UnableToThrowAway);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(ITEMID::GIL, MsgStd::UnableToThrowAway);
         return;
     }
 
@@ -92,7 +95,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
         if (slipData != 0)
         {
-            PChar->pushPacket<CMessageStandardPacket>(PItem->getID(), MsgStd::UnableToThrowAway);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PItem->getID(), MsgStd::UnableToThrowAway);
             return;
         }
     }

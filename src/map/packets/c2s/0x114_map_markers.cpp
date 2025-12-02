@@ -22,7 +22,7 @@
 #include "0x114_map_markers.h"
 
 #include "entities/charentity.h"
-#include "packets/map_marker.h"
+#include "packets/s2c/0x063_miscdata_homepoints.h"
 
 auto GP_CLI_COMMAND_MAP_MARKERS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -32,5 +32,5 @@ auto GP_CLI_COMMAND_MAP_MARKERS::validate(MapSession* PSession, const CCharEntit
 
 void GP_CLI_COMMAND_MAP_MARKERS::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<CMapMarkerPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
 }

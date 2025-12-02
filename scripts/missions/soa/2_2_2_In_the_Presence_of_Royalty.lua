@@ -30,7 +30,7 @@ mission.sections =
             -- ['Harvesting_Point'] =
             -- {
             --     onTrade = function(player, npc, trade)
-            --         -- TODO: CSID for YORCIA_WEALD
+            --         -- No CS for HELM in Adoulin
             --         xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil, nil)
             --         return mission:keyItem(xi.ki.YORCIAS_TEAR)
             --     end,

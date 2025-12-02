@@ -22,30 +22,33 @@
 #include "0x0cb_myroom_is.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "utils/charutils.h"
 
 namespace
 {
-    const std::map<uint8, GP_CLI_COMMAND_MYROOM_IS_PARAM2> default2fStyles = {
-        { NATION_SANDORIA, GP_CLI_COMMAND_MYROOM_IS_PARAM2::SandorianStyle },
-        { NATION_BASTOK, GP_CLI_COMMAND_MYROOM_IS_PARAM2::BastokanStyle },
-        { NATION_WINDURST, GP_CLI_COMMAND_MYROOM_IS_PARAM2::WindurstianStyle },
-    };
 
-    const auto isRentARoom = [](const CCharEntity* PChar)
+const std::map<uint8, GP_CLI_COMMAND_MYROOM_IS_PARAM2> default2fStyles = {
+    { NATION_SANDORIA, GP_CLI_COMMAND_MYROOM_IS_PARAM2::SandorianStyle },
+    { NATION_BASTOK, GP_CLI_COMMAND_MYROOM_IS_PARAM2::BastokanStyle },
+    { NATION_WINDURST, GP_CLI_COMMAND_MYROOM_IS_PARAM2::WindurstianStyle },
+};
+
+const auto isRentARoom = [](const CCharEntity* PChar)
+{
+    switch (PChar->profile.nation)
     {
-        switch (PChar->profile.nation)
-        {
-            case NATION_SANDORIA:
-                return PChar->loc.zone->GetRegionID() != REGION_TYPE::SANDORIA;
-            case NATION_BASTOK:
-                return PChar->loc.zone->GetRegionID() != REGION_TYPE::BASTOK;
-            case NATION_WINDURST:
-                return PChar->loc.zone->GetRegionID() != REGION_TYPE::WINDURST;
-            default:
-                return true;
-        }
-    };
+        case NATION_SANDORIA:
+            return PChar->loc.zone->GetRegionID() != REGION_TYPE::SANDORIA;
+        case NATION_BASTOK:
+            return PChar->loc.zone->GetRegionID() != REGION_TYPE::BASTOK;
+        case NATION_WINDURST:
+            return PChar->loc.zone->GetRegionID() != REGION_TYPE::WINDURST;
+        default:
+            return true;
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -112,7 +115,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
             charutils::SaveCharStats(PChar);
 
             // Note: The forced zone may bypass this message.
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::SuccessfulRemodel);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::SuccessfulRemodel);
 
             // If the model changes AND you're on MH2F; force a rezone so the model change can take effect.
             if (Param2 != oldType && PChar->profile.mhflag & 0x0040)
@@ -123,7 +126,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
                 PChar->status          = STATUS_TYPE::DISAPPEAR;
 
                 PChar->clearPacketList();
-                charutils::SendToZone(PChar, zoneid);
+                PChar->requestedZoneChange = true;
             }
         }
         break;

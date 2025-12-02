@@ -145,7 +145,7 @@ quest.sections =
                     if option == 1 then
                         if quest:getVar(player, 'Prog') == packageCondition.CONFISCATED then
                             player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
-                            player:setVar('[AIRSHIP]suspended', getMidnight())
+                            player:setVar('[AIRSHIP]suspended', JstMidnight())
                             player:messageSpecial(juenoPortID.text.CONFISCATED, xi.ki.BRUGAIRE_GOODS)
                         else
                             player:messageSpecial(juenoPortID.text.CLEARED_CUSTOMS)

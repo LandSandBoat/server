@@ -2,8 +2,21 @@
 -- Area: Alzadaal Undersea Ruins (72)
 --   NM: Cookieduster Lipiroon
 -----------------------------------
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -105.000, y = -8.000, z =  94.000 }
+}
+
+entity.phList =
+{
+    [ID.mob.COOKIEDUSTER_LIPIROON - 8] = ID.mob.COOKIEDUSTER_LIPIROON,
+    [ID.mob.COOKIEDUSTER_LIPIROON - 6] = ID.mob.COOKIEDUSTER_LIPIROON,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

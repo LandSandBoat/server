@@ -22,19 +22,20 @@
 #include "0x06f_group_leave.h"
 
 #include "entities/charentity.h"
+#include "enums/party_kind.h"
 
 auto GP_CLI_COMMAND_GROUP_LEAVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_GROUP_LEAVE_KIND>(Kind)
+        .oneOf<PartyKind>(Kind)
         .mustNotEqual(PChar->PParty, nullptr, "Character is not in a party");
 }
 
 void GP_CLI_COMMAND_GROUP_LEAVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<GP_CLI_COMMAND_GROUP_LEAVE_KIND>(Kind))
+    switch (Kind)
     {
-        case GP_CLI_COMMAND_GROUP_LEAVE_KIND::Party:
+        case PartyKind::Party:
         {
             if (PChar->PParty->m_PAlliance &&
                 PChar->PParty->HasOnlyOneMember()) // single member alliance parties must be removed from alliance before disband
@@ -63,7 +64,7 @@ void GP_CLI_COMMAND_GROUP_LEAVE::process(MapSession* PSession, CCharEntity* PCha
             ShowDebug("%s is removed from party", PChar->getName());
         }
         break;
-        case GP_CLI_COMMAND_GROUP_LEAVE_KIND::Alliance:
+        case PartyKind::Alliance:
         {
             if (PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar)
             {

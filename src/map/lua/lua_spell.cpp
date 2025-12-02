@@ -51,9 +51,9 @@ void CLuaSpell::setMsg(uint16 messageID)
     m_PLuaSpell->setMessage(messageID);
 }
 
-void CLuaSpell::setModifier(uint8 modifier)
+void CLuaSpell::setModifier(const ActionModifier modifier) const
 {
-    m_PLuaSpell->setModifier(static_cast<MODIFIER>(modifier));
+    m_PLuaSpell->setModifier(modifier);
 }
 
 void CLuaSpell::setAoE(uint8 aoe)

@@ -57,8 +57,8 @@ zones[xi.zone.CASTLE_OZTROJA] =
     {
         HANDLE_DOOR_FLOOR_2    = GetFirstID('_471'),
         FIRST_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[1],
-        SECOND_PASSWORD_STATUE = GetTableOfIDs('Brass_Statue')[2],
-        THIRD_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[3],
+        SECOND_PASSWORD_STATUE = GetTableOfIDs('Brass_Statue')[3], -- This is intentional.
+        THIRD_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[2], -- This is intentional.
         FINAL_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[4],
         BRASS_DOOR_FLOOR_4_H7  = GetFirstID('_477'),
         TRAP_DOOR_FLOOR_4      = GetFirstID('_478'),

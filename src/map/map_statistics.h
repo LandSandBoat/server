@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include <unordered_map>
 
 class MapStatistics
 {

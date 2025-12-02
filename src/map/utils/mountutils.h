@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 class CCharEntity;
 
 struct MountPacketDefinition
@@ -69,5 +71,7 @@ struct ChocoboCustomProperties
 
 namespace mountutils
 {
-    auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition;
+
+auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition;
+
 }; // namespace mountutils

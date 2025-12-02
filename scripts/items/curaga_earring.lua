@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14759
 -- Item: Curaga Earring
--- Item Effect: Casts Curaga
+-- Item Effect: Casts weak "Curaga"
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -10,23 +10,24 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:forMembersInRange(30, function(member)
-        if member:isAlive() then
-            local healAmount = math.random(60, 90)
+-- Random roll for each target between 50 and 75
+-- Cure Pot, Cure Pot II, Cure Pot Received do not work
+itemObject.onItemUse = function(target, user, item, action)
+    local healAmount = math.random(50, 75)
 
-            healAmount = healAmount + (healAmount * (member:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-            healAmount = healAmount * xi.settings.main.CURE_POWER
+    healAmount = healAmount * xi.settings.main.CURE_POWER
 
-            local diff = (member:getMaxHP() - member:getHP())
-            if healAmount > diff then
-                healAmount = diff
-            end
+    local diff = (target:getMaxHP() - target:getHP())
+    if healAmount > diff then
+        healAmount = diff
+    end
 
-            member:addHP(healAmount)
-            member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
-        end
-    end)
+    target:addHP(healAmount)
+    action:messageID(target:getID(), xi.msg.basic.RECOVERS_HP)
+
+    user:updateEnmityFromCure(target, healAmount) -- You do gain enmity from this
+
+    return healAmount
 end
 
 return itemObject

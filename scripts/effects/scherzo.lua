@@ -1,7 +1,9 @@
 -----------------------------------
 -- xi.effect.SCHERZO
--- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
--- Notes: Effect subType for enhancing songs stores IDs of the caster. Set in scripts/globals/spells/enhancing_song.lua
+-- TODO: MOD_CRITICAL_DAMAGE_REDUCTION - Name pending. Will be used for gear that enhances reduction potency.
+-- TODO: Will also need a mod that enhances Scherzo duration.
+-- TODO: This will be handled in battleutils::HandleSevereDamage
+-- https://www.bg-wiki.com/ffxi/Category:Scherzo
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

@@ -25,6 +25,7 @@
 #include "spell.h"
 #include "state.h"
 
+class CMobEntity;
 struct action_t;
 
 enum MAGICFLAGS
@@ -58,7 +59,7 @@ public:
     void            ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
     void            ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
 
-    void SetInstantCast(bool const bInstantCast)
+    void SetInstantCast(const bool bInstantCast)
     {
         m_instantCast = bInstantCast;
     }

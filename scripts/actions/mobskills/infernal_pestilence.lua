@@ -1,11 +1,8 @@
 -----------------------------------
---  Infernal Pestilence
---
---  Description: Releases a horrible disease on targets in front.
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: Front arc
---  Notes: Only used by Chahnameed's Stomach.
+-- Infernal Pestilence
+-- Family: Doomed
+-- Description: Releases a horrible disease on targets in front.
+-- Notes: Only used by Chahnameed's Stomach.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,13 +12,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 4
+    local params = {}
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.percentMultipier  = 0.05
+    params.element           = xi.element.WATER
+    params.damageCap         = 200
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 360)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 780)
+    end
 
     return damage
 end

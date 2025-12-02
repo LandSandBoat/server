@@ -7,9 +7,11 @@ xi.combat.behavior = xi.combat.behavior or {}
 
 xi.combat.behavior.isEntityBusy = function(actor)
     -- Check poses (actions).
+    local currAction = actor:getCurrentAction()
     if
-        actor:getCurrentAction() ~= xi.action.NONE and
-        actor:getCurrentAction() ~= xi.action.ATTACK -- TODO: What does "ATTACK" entail? Just swinging or engaged in general?
+        currAction ~= xi.action.category.NONE and
+        currAction ~= xi.action.category.BASIC_ATTACK and-- TODO: What does "ATTACK" entail? Just swinging or engaged in general?
+        currAction ~= xi.action.category.ROAMING
     then
         return true
     end

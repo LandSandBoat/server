@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore intelligence of 1 every 3 ticks.
+    -- The effect restores 1 INT every 3 ticks. (1 Tick = 3 seconds).
     local downINTEffectSize = effect:getPower()
     if downINTEffectSize > 0 then
         effect:setPower(downINTEffectSize - 1)
         target:delMod(xi.mod.INT, -1)
+    else
+        target:delStatusEffect(xi.effect.INT_DOWN)
     end
 end
 

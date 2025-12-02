@@ -23,12 +23,13 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
-#include "packets/bazaar_close.h"
-#include "packets/bazaar_confirmation.h"
-#include "packets/bazaar_item.h"
-#include "packets/bazaar_purchase.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x105_bazaar_list.h"
+#include "packets/s2c/0x106_bazaar_buy.h"
+#include "packets/s2c/0x107_bazaar_close.h"
+#include "packets/s2c/0x109_bazaar_sell.h"
+#include "packets/s2c/0x10a_bazaar_sale.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -68,7 +69,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
     if (PChar->id == PTarget->id || PBuyerInventory->GetFreeSlotsCount() == 0)
     {
-        PChar->pushPacket<CBazaarPurchasePacket>(PTarget, false);
+        PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
 
         if (settings::get<bool>("logging.DEBUG_BAZAARS") && PChar->id == PTarget->id)
         {
@@ -90,7 +91,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
     if (PCharGil == nullptr || !PCharGil->isType(ITEM_CURRENCY) || PCharGil->getReserve() > 0)
     {
         // Player has no gil
-        PChar->pushPacket<CBazaarPurchasePacket>(PTarget, false);
+        PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
         return;
     }
 
@@ -102,7 +103,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         // Validate this player can afford said item
         if (PCharGil->getQuantity() < PriceWithTax)
         {
-            PChar->pushPacket<CBazaarPurchasePacket>(PTarget, false);
+            PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
 
             // Exploit attempt
             ShowWarningFmt("Bazaar Interaction [Insufficient Gil] - Buyer: {}, Seller: {}, Buyer Gil: {}, Price: {}", PChar->name, PTarget->name, PCharGil->getQuantity(), PriceWithTax);
@@ -144,14 +145,14 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(PriceWithTax));
         charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
 
-        PChar->pushPacket<CBazaarPurchasePacket>(PTarget, true);
+        PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::OK);
 
-        PTarget->pushPacket<CBazaarConfirmationPacket>(PChar, PItem);
+        PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SALE>(PChar, PItem);
 
         charutils::UpdateItem(PTarget, LOC_INVENTORY, BazaarItemIndex, -static_cast<int32>(BuyNum));
 
-        PTarget->pushPacket<CInventoryItemPacket>(PBazaar->GetItem(BazaarItemIndex), LOC_INVENTORY, BazaarItemIndex);
-        PTarget->pushPacket<CInventoryFinishPacket>();
+        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(BazaarItemIndex), LOC_INVENTORY, BazaarItemIndex);
+        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
         DebugBazaarsFmt("Bazaar Interaction [Purchase Successful] - Buyer: {}, Seller: {}, Item: {}, Qty: {}, Cost: {}", PChar->name, PTarget->name, PItem->getName(), BuyNum, PriceWithTax);
 
@@ -179,13 +180,13 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             {
                 if (PCustomer->id != PChar->id)
                 {
-                    PCustomer->pushPacket<CBazaarConfirmationPacket>(PChar, BazaarItemIndex, BuyNum);
+                    PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_SELL>(PChar, BazaarItemIndex, BuyNum);
                 }
-                PCustomer->pushPacket<CBazaarItemPacket>(PBazaar->GetItem(BazaarItemIndex), BazaarItemIndex, PChar->loc.zone->GetTax());
+                PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_LIST>(PBazaar->GetItem(BazaarItemIndex), BazaarItemIndex, PChar->loc.zone->GetTax());
 
                 if (BazaarIsEmpty)
                 {
-                    PCustomer->pushPacket<CBazaarClosePacket>(PTarget);
+                    PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_CLOSE>(PTarget);
 
                     DebugBazaarsFmt("Bazaar Interaction [Bazaar Emptied] - Buyer: {}, Seller: {}", PChar->name, PTarget->name);
                 }
@@ -200,5 +201,5 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    PChar->pushPacket<CBazaarPurchasePacket>(PTarget, false);
+    PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
 }

@@ -19,11 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _STATUSEFFECTCONTAINER_H
-#define _STATUSEFFECTCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "common/task_manager.h"
 
 #include <set>
 
@@ -99,7 +97,7 @@ public:
     uint8 GetEffectsCountWithFlag(EFFECTFLAG flag); // We get the number of effects with the specified flag
     uint8 GetLowestFreeSlot();                      // returns the lowest free slot for songs/rolls
 
-    bool ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration);
+    auto ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration) -> bool;
     bool CheckForElevenRoll();
     bool HasBustEffect(uint16 id);
     bool HasCorsairEffect(uint32 charid);
@@ -159,9 +157,9 @@ private:
 
 namespace effects
 {
-    void        LoadEffectsParameters();
-    uint16      GetEffectElement(uint16 effect);
-    std::string GetEffectName(uint16 effect);
-}; // namespace effects
 
-#endif
+void        LoadEffectsParameters();
+uint16      GetEffectElement(uint16 effect);
+std::string GetEffectName(uint16 effect);
+
+}; // namespace effects

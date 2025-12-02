@@ -23,12 +23,13 @@
 
 #include "aman.h"
 #include "entities/charentity.h"
-#include "packets/char_appearance.h"
+#include "enums/msg_std.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/menu_config.h"
-#include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x053_systemmes.h"
+#include "packets/s2c/0x0b4_config.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_CONFIG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -62,7 +63,7 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     {
         updated                          = true;
         PChar->playerConfig.AnonymityFlg = value;
-        PChar->pushPacket<CMessageSystemPacket>(0, 0, value ? MsgStd::CharacterInfoHidden : MsgStd::CharacterInfoShown);
+        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, value ? MsgStd::CharacterInfoHidden : MsgStd::CharacterInfoShown);
     }
 
     // Flag set if the client has auto-target disabled. (/autotarget)
@@ -92,7 +93,7 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     // Flag set if the client has disabled the 'New Adventurer' status. (Red question mark.)
     if (NewAdventurerOffFlg && PChar->playerConfig.NewAdventurerOffFlg != value)
     {
-        if (PChar->playerConfig.NewAdventurerOffFlg) // Can only turn it off, not on.
+        if (!PChar->playerConfig.NewAdventurerOffFlg) // Can only turn it off, not on.
         {
             updated                                 = true;
             PChar->playerConfig.NewAdventurerOffFlg = value;
@@ -108,10 +109,10 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
         if (PChar->getEquip(SLOT_HEAD))
         {
             // Only blink if you have headgear
-            PChar->pushPacket<CCharAppearancePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         }
 
-        PChar->pushPacket<CMessageStandardPacket>(value ? MsgStd::HeadgearHide : MsgStd::HeadgearShow);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(value ? MsgStd::HeadgearHide : MsgStd::HeadgearShow);
     }
 
     // Flag set if the client has enabled recruitment requests. (/rec)
@@ -122,7 +123,7 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     }
 
     // Retail replies with these packets even if no changes were made.
-    PChar->pushPacket<CMenuConfigPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
 
     if (updated)

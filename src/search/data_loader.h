@@ -72,6 +72,7 @@ struct SearchEntity
     bool        gmHidden       = false;
     bool        disconnecting  = false;
     bool        muted          = false;
+    uint8       unityLeader    = 0;
 };
 
 /************************************************************************

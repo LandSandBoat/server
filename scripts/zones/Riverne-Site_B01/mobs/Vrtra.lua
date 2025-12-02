@@ -5,6 +5,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Ziryu')
+end
+
 entity.onMobFight = function(mob, target)
     local drawInTable =
     {

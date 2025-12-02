@@ -1315,7 +1315,7 @@ INSERT INTO `job_point_gifts` VALUES (20,450,112,8,'SCH_Healing Magic Skill Bonu
 INSERT INTO `job_point_gifts` VALUES (20,500,997,1,'SCH_Superior 3');
 INSERT INTO `job_point_gifts` VALUES (20,500,274,3,'SCH_Magic Burst Damage Bonus');
 INSERT INTO `job_point_gifts` VALUES (20,545,915,23,'SCH_Capacity Point Bonus');
-INSERT INTO `job_point_gifts` VALUES (20,550,987,15,'SCH_Stratagem Recast Time');
+INSERT INTO `job_point_gifts` VALUES (20,550,1159,15,'SCH_Stratagem Recast Time');
 INSERT INTO `job_point_gifts` VALUES (20,605,29,6,'SCH_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` VALUES (20,655,915,25,'SCH_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (20,660,28,10,'SCH_Magic Attack Bonus');

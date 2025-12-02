@@ -36,6 +36,10 @@ xi.settings.map =
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 
+    -- Enable or disable leaking item extdata to client when moving items out of an inventory container into another one
+    -- Retail leaks extdata on move, which is useful for edge cases such as weapon skill points
+    LEAK_EXT_DATA_ON_ITEM_MOVE = true,
+
     -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
     ENABLE_ITEM_RECYCLE_BIN = true,
 
@@ -97,6 +101,9 @@ xi.settings.map =
 
     -- Disables Treasure Hunter procs (Era behavior wants this true)
     DISABLE_TREASURE_HUNTER_PROCS = true,
+
+    -- Enable auto attack damage calculations in Lua
+    ENABLE_AUTO_ATTACK_LUA = false,
 
     -- Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 5.
     WS_POINTS_BASE = 5,

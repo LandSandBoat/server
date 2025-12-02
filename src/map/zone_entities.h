@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CZONEENTITIES_H
-#define _CZONEENTITIES_H
+#pragma once
 
 #include "zone.h"
 
@@ -32,6 +31,7 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/music_slot.h"
 
 #include <set>
 #include <vector>
@@ -72,12 +72,13 @@ public:
     void InsertPET(CBaseEntity* PPet);
     void InsertTRUST(CBaseEntity* PTrust);
 
-    void FindPartyForMob(CBaseEntity* PEntity);         // looking for a party for the monster
-    void TransportDepart(uint16 boundary, uint16 zone); // ship/boat is leaving, passengers need to be collected
+    void FindPartyForMob(CBaseEntity* PEntity); // looking for a party for the monster
+
+    void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
 
     void TOTDChange(vanadiel_time::TOTD TOTD); // process the world's reactions to changing time of day
-    void WeatherChange(WEATHER weather);
-    void MusicChange(uint16 BlockID, uint16 MusicTrackID);
+    void WeatherChange(Weather weather);
+    void MusicChange(MusicSlot slotId, uint16 trackId);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&); // send a global package within the zone
 
@@ -85,16 +86,17 @@ public:
 
     CZone* GetZone();
 
+    auto         GetEffectCheckTime() const -> timer::time_point;
     EntityList_t GetCharList() const;
     EntityList_t GetMobList() const;
     bool         CharListEmpty() const;
 
-    void ForEachChar(std::function<void(CCharEntity*)> const& func);
-    void ForEachMob(std::function<void(CMobEntity*)> const& func);
-    void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
-    void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
-    void ForEachPet(std::function<void(CPetEntity*)> const& func);
-    void ForEachAlly(std::function<void(CMobEntity*)> const& func);
+    void ForEachChar(const std::function<void(CCharEntity*)>& func);
+    void ForEachMob(const std::function<void(CMobEntity*)>& func);
+    void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
+    void ForEachTrust(const std::function<void(CTrustEntity*)>& func);
+    void ForEachPet(const std::function<void(CPetEntity*)>& func);
+    void ForEachAlly(const std::function<void(CMobEntity*)>& func);
 
     auto GetNewCharTargID() -> uint16;
     void AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
@@ -131,14 +133,10 @@ private:
     // Intermediate collections for use inside ZoneServer
     //
 
-    std::vector<CMobEntity*>   m_mobsToDelete;
-    std::vector<CNpcEntity*>   m_npcsToDelete;
-    std::vector<CPetEntity*>   m_petsToDelete;
-    std::vector<CTrustEntity*> m_trustsToDelete;
-    std::vector<CMobEntity*>   m_aggroableMobs;
-    std::vector<CCharEntity*>  m_charsToLogout;
-    std::vector<CCharEntity*>  m_charsToWarp;
-    std::vector<CCharEntity*>  m_charsToChangeZone;
+    std::vector<CMobEntity*>         m_mobsToDelete;
+    std::vector<CNpcEntity*>         m_npcsToDelete;
+    std::vector<CPetEntity*>         m_petsToDelete;
+    std::vector<CTrustEntity*>       m_trustsToDelete;
+    std::vector<CMobEntity*>         m_aggroableMobs;
+    std::unordered_set<CCharEntity*> m_charsToChangeZone;
 };
-
-#endif

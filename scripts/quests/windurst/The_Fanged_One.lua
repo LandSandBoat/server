@@ -53,11 +53,6 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:event(352)
-                    elseif
-                        quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
-                    then
-                        return quest:event(356)
                     elseif player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
                         return quest:progressEvent(357)
                     end
@@ -96,6 +91,7 @@ quest.sections =
                         player:unlockJob(xi.job.RNG)
                         npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RANGER)
                         player:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
+                        quest:setMustZone(player)
                     end
                 end,
             },
@@ -110,19 +106,26 @@ quest.sections =
             ['Tiger_Bones'] =
             {
                 onTrigger = function(player, npc)
+                    local oldTiger = GetMobByID(sauromugueID.mob.OLD_SABERTOOTH)
+
+                    if not oldTiger then
+                        return quest:noAction()
+                    end
+
                     if
-                        quest:getVar(player, 'Prog') == 0 and
-                        quest:getVar(player, 'Timer') <= GetSystemTime() and
-                        not GetMobByID(sauromugueID.mob.OLD_SABERTOOTH):isSpawned()
-                    then
-                        SpawnMob(sauromugueID.mob.OLD_SABERTOOTH):addStatusEffect(xi.effect.POISON, 10, 10, 240)
-                        return quest:messageSpecial(sauromugueID.text.OLD_SABERTOOTH_DIALOG_I)
-                    elseif
-                        quest:getVar(player, 'Prog') == 1 and -- listeners for damage and onMobDeath actions are in Old_Sabtertooth.lua
+                        quest:getVar(player, 'Timer') > GetSystemTime() and
                         not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
                     then
                         npcUtil.giveKeyItem(player, xi.ki.OLD_TIGERS_FANG)
+                        quest:setVar(player, 'Prog', 1)
                         return quest:noAction()
+                    elseif
+                        quest:getVar(player, 'Prog') == 0 and
+                        quest:getVar(player, 'Wait') <= GetSystemTime() and
+                        not oldTiger:isSpawned()
+                    then
+                        SpawnMob(sauromugueID.mob.OLD_SABERTOOTH)
+                        return quest:messageSpecial(sauromugueID.text.OLD_SABERTOOTH_DIALOG_I)
                     end
                 end,
             },
@@ -136,7 +139,14 @@ quest.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Perih_Vashai'] = quest:event(348):replaceDefault(),
+            ['Perih_Vashai'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getMustZone(player) then
+                        return quest:event(358)
+                    end
+                end,
+            },
         },
     },
 }

@@ -22,13 +22,6 @@
 #include "0x00f_clstat.h"
 
 #include "entities/charentity.h"
-#include "packets/bazaar_message.h"
-#include "packets/char_abilities.h"
-#include "packets/char_mounts.h"
-#include "packets/char_spells.h"
-#include "packets/char_sync.h"
-#include "packets/merit_points_categories.h"
-#include "utils/blacklistutils.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_CLSTAT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -39,19 +32,8 @@ auto GP_CLI_COMMAND_CLSTAT::validate(MapSession* PSession, const CCharEntity* PC
 
 void GP_CLI_COMMAND_CLSTAT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    charutils::SendKeyItems(PChar);
-    charutils::SendQuestMissionLog(PChar);
-    charutils::SendRecordsOfEminenceLog(PChar);
-
-    PChar->pushPacket<CCharSpellsPacket>(PChar);
-    PChar->pushPacket<CCharMountsPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
-    PChar->pushPacket<CCharSyncPacket>(PChar);
-    PChar->pushPacket<CBazaarMessagePacket>(PChar);
-    PChar->pushPacket<CMeritPointsCategoriesPacket>(PChar);
-
-    charutils::SendInventory(PChar);
-
-    // Note: This sends the stop downloading packet!
-    blacklistutils::SendBlacklist(PChar);
+    // No direct response to this packet in regular conditions.
+    // It is theorized it may be used by the client to report its current state
+    // and may notify the server it is currently severely lagging (stat[0] == 1)
+    // which may have some effect on the packet prioritization.
 }

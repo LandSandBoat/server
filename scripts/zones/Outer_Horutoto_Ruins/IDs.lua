@@ -17,6 +17,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
         ITEM_OBTAINED                 = 6596,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6597,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6599,  -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6610,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET         = 6625,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7207,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7208,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!

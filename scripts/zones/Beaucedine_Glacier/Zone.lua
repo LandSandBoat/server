@@ -2,7 +2,6 @@
 -- Zone: Beaucedine_Glacier (111)
 -----------------------------------
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
-require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
@@ -27,10 +26,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-247.911, -82.165, 260.207, 248)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 114
-    end
-
     return cs
 end
 
@@ -42,9 +37,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 114 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

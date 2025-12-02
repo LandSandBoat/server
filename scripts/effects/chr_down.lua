@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore charism of 1 every 3 ticks.
+    -- The effect restores 1 CHR every 3 ticks. (1 Tick = 3 seconds).
     local downCHREffectSize = effect:getPower()
     if downCHREffectSize > 0 then
         effect:setPower(downCHREffectSize - 1)
         target:delMod(xi.mod.CHR, -1)
+    else
+        target:delStatusEffect(xi.effect.CHR_DOWN)
     end
 end
 

@@ -22,9 +22,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:eraseAllStatusEffect()
+    local effectcount = mob:eraseAllStatusEffect()
 
-    return 0
+    skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+
+    return effectcount
 end
 
 return mobskillObject

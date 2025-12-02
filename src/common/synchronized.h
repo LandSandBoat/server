@@ -60,9 +60,9 @@ struct Synchronized
     }
 
 private:
-    mutable TracyLockable(M, mutex);
-
     T target;
+
+    mutable TracyLockable(M, mutex);
 
     auto lock() const
     {

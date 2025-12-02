@@ -7,7 +7,6 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local goblinsaviorSpawnPoints =
 {
     { x = 153.000, y = -10.000, z = -53.000 },
@@ -62,19 +61,13 @@ local goblinsaviorSpawnPoints =
     { x = 151.647, y = -9.774,  z = -63.169 },
 }
 
-local goblinsaviorPHTable =
-{
-    [ID.mob.GOBLINSAVIOR_HERONOX - 4] = ID.mob.GOBLINSAVIOR_HERONOX,  -- 152.325 -10.702 -77.007
-    [ID.mob.GOBLINSAVIOR_HERONOX - 5] = ID.mob.GOBLINSAVIOR_HERONOX,  -- 165.558 -10.647 -68.537
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, goblinsaviorPHTable, 5, 10800, { spawnPoints = goblinsaviorSpawnPoints }) -- 3 hours
+    xi.mob.phOnDespawn(mob, ID.mob.GOBLINSAVIOR_HERONOX, 5, 10800, { spawnPoints = goblinsaviorSpawnPoints }) -- 3 hours
 end
 
 return entity

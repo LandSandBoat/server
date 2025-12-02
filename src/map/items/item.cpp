@@ -257,7 +257,7 @@ const std::string& CItem::getName()
     return m_name;
 }
 
-void CItem::setName(std::string const& name)
+void CItem::setName(const std::string& name)
 {
     m_name = name;
 }
@@ -273,7 +273,7 @@ const std::string& CItem::getSender()
     return m_send;
 }
 
-void CItem::setSender(std::string const& sender)
+void CItem::setSender(const std::string& sender)
 {
     m_send = sender;
 }
@@ -289,7 +289,7 @@ const std::string& CItem::getReceiver()
     return m_recv;
 }
 
-void CItem::setReceiver(std::string const& receiver)
+void CItem::setReceiver(const std::string& receiver)
 {
     m_recv = receiver;
 }
@@ -308,7 +308,7 @@ const std::string CItem::getSignature()
     return signature; // return string copy
 }
 
-void CItem::setSignature(std::string const& signature)
+void CItem::setSignature(const std::string& signature)
 {
     std::memset(m_extra + 0x0C, 0, sizeof(m_extra) - 0x0C);
     std::memcpy(m_extra + 0x0C, signature.c_str(), signature.size());
@@ -378,7 +378,7 @@ bool CItem::isSoultrapper() const
     return m_id == 18721 || m_id == 18724;
 }
 
-void CItem::setSoulPlateData(std::string const& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CItem::setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     PackSoultrapperName(name, m_extra);
 

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTRANSPORT_H
-#define _CTRANSPORT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
@@ -68,9 +67,10 @@ struct Transport_Time
 
 struct Transport_Ship : Transport_Time
 {
-    uint8 animationArrive;
-    uint8 animationDepart;
-    uint8 state;
+    uint16 transportId;
+    uint8  animationArrive;
+    uint8  animationDepart;
+    uint8  state;
 
     CBaseEntity* npc;
     location_t   dock;
@@ -143,5 +143,3 @@ private:
     std::vector<TransportZone_Town>   townZoneList;
     std::vector<TransportZone_Voyage> voyageZoneList;
 };
-
-#endif

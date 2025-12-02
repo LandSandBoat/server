@@ -64,37 +64,37 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.NONE,             weight = 250 }, -- nothing
-        { item = xi.item.ASSAULT_EARRING,  weight = 125 }, -- assault_earring
-        { item = xi.item.VASSAGOS_SCYTHE,  weight = 125 }, -- vassagos_scythe
-        { item = xi.item.CHICKEN_KNIFE,    weight = 125 }, -- chicken_knife
-        { item = xi.item.FEY_WAND,         weight = 125 }, -- fey_wand
-        { item = xi.item.ASTRAL_SHIELD,    weight = 125 }, -- astral_shield
-        { item = xi.item.ENHANCING_MANTLE, weight = 125 }, -- enhancing_mantle
+        { itemId = xi.item.NONE,             weight = 250 }, -- nothing
+        { itemId = xi.item.ASSAULT_EARRING,  weight = 125 }, -- assault_earring
+        { itemId = xi.item.VASSAGOS_SCYTHE,  weight = 125 }, -- vassagos_scythe
+        { itemId = xi.item.CHICKEN_KNIFE,    weight = 125 }, -- chicken_knife
+        { itemId = xi.item.FEY_WAND,         weight = 125 }, -- fey_wand
+        { itemId = xi.item.ASTRAL_SHIELD,    weight = 125 }, -- astral_shield
+        { itemId = xi.item.ENHANCING_MANTLE, weight = 125 }, -- enhancing_mantle
     },
 
     {
-        { item = xi.item.MYTHRIL_INGOT,   weight = 250 }, -- mythril_ingot
-        { item = xi.item.STEEL_INGOT,     weight = 250 }, -- steel_ingot
-        { item = xi.item.GOLD_INGOT,      weight = 250 }, -- gold_ingot
-        { item = xi.item.DARKSTEEL_INGOT, weight = 250 }, -- darksteel_ingot
+        { itemId = xi.item.MYTHRIL_INGOT,   weight = 250 }, -- mythril_ingot
+        { itemId = xi.item.STEEL_INGOT,     weight = 250 }, -- steel_ingot
+        { itemId = xi.item.GOLD_INGOT,      weight = 250 }, -- gold_ingot
+        { itemId = xi.item.DARKSTEEL_INGOT, weight = 250 }, -- darksteel_ingot
     },
 
     {
-        { item = xi.item.EBONY_LOG,     weight = 250 }, -- ebony_log
-        { item = xi.item.CHRYSOBERYL,   weight = 250 }, -- chrysoberyl
-        { item = xi.item.FLUORITE,      weight = 250 }, -- fluorite
-        { item = xi.item.DREAM_PLATTER, weight = 250 }, -- jadeite
+        { itemId = xi.item.EBONY_LOG,     weight = 250 }, -- ebony_log
+        { itemId = xi.item.CHRYSOBERYL,   weight = 250 }, -- chrysoberyl
+        { itemId = xi.item.FLUORITE,      weight = 250 }, -- fluorite
+        { itemId = xi.item.DREAM_PLATTER, weight = 250 }, -- jadeite
     },
 
     {
-        { item = xi.item.NONE,               weight = 875 }, -- nothing
-        { item = xi.item.SCROLL_OF_RAISE_II, weight = 125 }, -- scroll_of_raise_ii
+        { itemId = xi.item.NONE,               weight = 875 }, -- nothing
+        { itemId = xi.item.SCROLL_OF_RAISE_II, weight = 125 }, -- scroll_of_raise_ii
     },
 
     {
-        { item = xi.item.NONE,               weight = 800 }, -- nothing
-        { item = xi.item.SCROLL_OF_RAISE_II, weight = 200 }, -- hi-reraiser
+        { itemId = xi.item.NONE,               weight = 800 }, -- nothing
+        { itemId = xi.item.SCROLL_OF_RAISE_II, weight = 200 }, -- hi-reraiser
     },
 }
 

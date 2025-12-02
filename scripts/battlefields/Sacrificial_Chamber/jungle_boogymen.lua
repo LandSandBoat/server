@@ -81,75 +81,75 @@ content.groups =
 content.loot =
 {
     {
-        { item = xi.item.DARK_TORQUE,      weight = 250 }, -- Dark Torque
-        { item = xi.item.ELEMENTAL_TORQUE, weight = 250 }, -- Elemental Torque
-        { item = xi.item.HEALING_TORQUE,   weight = 250 }, -- Healing Torque
-        { item = xi.item.WIND_TORQUE,      weight = 250 }, -- Wind Torque
+        { itemId = xi.item.DARK_TORQUE,      weight = 250 }, -- Dark Torque
+        { itemId = xi.item.ELEMENTAL_TORQUE, weight = 250 }, -- Elemental Torque
+        { itemId = xi.item.HEALING_TORQUE,   weight = 250 }, -- Healing Torque
+        { itemId = xi.item.WIND_TORQUE,      weight = 250 }, -- Wind Torque
     },
 
     {
-        { item = xi.item.PLATINUM_BEASTCOIN,     weight = 500 }, -- Platinum Beastcoin
-        { item = xi.item.SCROLL_OF_ABSORB_STR,   weight =  48 }, -- Scroll Of Absorb-STR
-        { item = xi.item.SCROLL_OF_ERASE,        weight = 143 }, -- Scroll Of Erase
-        { item = xi.item.SCROLL_OF_PHALANX,      weight = 119 }, -- Scroll Of Phalanx
-        { item = xi.item.FIRE_SPIRIT_PACT,       weight =  48 }, -- Fire Spirit Pact
-        { item = xi.item.CHUNK_OF_FIRE_ORE,      weight =  48 }, -- Chunk Of Fire Ore
-        { item = xi.item.CHUNK_OF_ICE_ORE,       weight =  48 }, -- Chunk Of Ice Ore
-        { item = xi.item.CHUNK_OF_WIND_ORE,      weight =  48 }, -- Chunk Of Wind Ore
-        { item = xi.item.CHUNK_OF_EARTH_ORE,     weight =  48 }, -- Chunk Of Earth Ore
-        { item = xi.item.CHUNK_OF_LIGHTNING_ORE, weight =  48 }, -- Chunk Of Lightning Ore
-        { item = xi.item.CHUNK_OF_WATER_ORE,     weight =  48 }, -- Chunk Of Water Ore
-        { item = xi.item.CHUNK_OF_LIGHT_ORE,     weight =  48 }, -- Chunk Of Light Ore
-        { item = xi.item.CHUNK_OF_DARK_ORE,      weight =  48 }, -- Chunk Of Dark Ore
+        { itemId = xi.item.PLATINUM_BEASTCOIN,     weight = 500 }, -- Platinum Beastcoin
+        { itemId = xi.item.SCROLL_OF_ABSORB_STR,   weight =  48 }, -- Scroll Of Absorb-STR
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight = 143 }, -- Scroll Of Erase
+        { itemId = xi.item.SCROLL_OF_PHALANX,      weight = 119 }, -- Scroll Of Phalanx
+        { itemId = xi.item.FIRE_SPIRIT_PACT,       weight =  48 }, -- Fire Spirit Pact
+        { itemId = xi.item.CHUNK_OF_FIRE_ORE,      weight =  48 }, -- Chunk Of Fire Ore
+        { itemId = xi.item.CHUNK_OF_ICE_ORE,       weight =  48 }, -- Chunk Of Ice Ore
+        { itemId = xi.item.CHUNK_OF_WIND_ORE,      weight =  48 }, -- Chunk Of Wind Ore
+        { itemId = xi.item.CHUNK_OF_EARTH_ORE,     weight =  48 }, -- Chunk Of Earth Ore
+        { itemId = xi.item.CHUNK_OF_LIGHTNING_ORE, weight =  48 }, -- Chunk Of Lightning Ore
+        { itemId = xi.item.CHUNK_OF_WATER_ORE,     weight =  48 }, -- Chunk Of Water Ore
+        { itemId = xi.item.CHUNK_OF_LIGHT_ORE,     weight =  48 }, -- Chunk Of Light Ore
+        { itemId = xi.item.CHUNK_OF_DARK_ORE,      weight =  48 }, -- Chunk Of Dark Ore
     },
 
     {
-        { item = xi.item.PLATINUM_BEASTCOIN, weight = 833 }, -- Platinum Beastcoin
-        { item = xi.item.CHUNK_OF_ICE_ORE,   weight = 167 }, -- Chunk Of Ice Ore
+        { itemId = xi.item.PLATINUM_BEASTCOIN, weight = 833 }, -- Platinum Beastcoin
+        { itemId = xi.item.CHUNK_OF_ICE_ORE,   weight = 167 }, -- Chunk Of Ice Ore
     },
 
     {
-        { item = xi.item.ENFEEBLING_TORQUE, weight = 250 }, -- Enfeebling Torque
-        { item = xi.item.EVASION_TORQUE,    weight = 250 }, -- Evasion Torque
-        { item = xi.item.GUARDING_TORQUE,   weight = 250 }, -- Guarding Torque
-        { item = xi.item.SUMMONING_TORQUE,  weight = 250 }, -- Summoning Torque
+        { itemId = xi.item.ENFEEBLING_TORQUE, weight = 250 }, -- Enfeebling Torque
+        { itemId = xi.item.EVASION_TORQUE,    weight = 250 }, -- Evasion Torque
+        { itemId = xi.item.GUARDING_TORQUE,   weight = 250 }, -- Guarding Torque
+        { itemId = xi.item.SUMMONING_TORQUE,  weight = 250 }, -- Summoning Torque
     },
 
     {
-        { item = xi.item.DARKSTEEL_INGOT,    weight = 154 }, -- Darksteel Ingot
-        { item = xi.item.PAINITE,            weight = 154 }, -- Painite
-        { item = xi.item.GOLD_INGOT,         weight = 154 }, -- Gold Ingot
-        { item = xi.item.AQUAMARINE,         weight =  77 }, -- Aquamarine
-        { item = xi.item.VILE_ELIXIR_P1,     weight =  77 }, -- Vile Elixir +1
-        { item = xi.item.MYTHRIL_INGOT,      weight = 153 }, -- Mythril Ingot
-        { item = xi.item.CHRYSOBERYL,        weight =  30 }, -- Chrysoberyl
-        { item = xi.item.MOONSTONE,          weight =  30 }, -- Moonstone
-        { item = xi.item.SUNSTONE,           weight =  30 }, -- Sunstone
-        { item = xi.item.ZIRCON,             weight =  30 }, -- Zircon
-        { item = xi.item.AQUAMARINE,         weight =  30 }, -- Aquamarine
-        { item = xi.item.EBONY_LOG,          weight =  30 }, -- Ebony Log
-        { item = xi.item.MAHOGANY_LOG,       weight =  30 }, -- Mahogany Log
-        { item = xi.item.PHILOSOPHERS_STONE, weight =  30 }, -- Philosophers Stone
+        { itemId = xi.item.DARKSTEEL_INGOT,    weight = 154 }, -- Darksteel Ingot
+        { itemId = xi.item.PAINITE,            weight = 154 }, -- Painite
+        { itemId = xi.item.GOLD_INGOT,         weight = 154 }, -- Gold Ingot
+        { itemId = xi.item.AQUAMARINE,         weight =  77 }, -- Aquamarine
+        { itemId = xi.item.VILE_ELIXIR_P1,     weight =  77 }, -- Vile Elixir +1
+        { itemId = xi.item.MYTHRIL_INGOT,      weight = 153 }, -- Mythril Ingot
+        { itemId = xi.item.CHRYSOBERYL,        weight =  30 }, -- Chrysoberyl
+        { itemId = xi.item.MOONSTONE,          weight =  30 }, -- Moonstone
+        { itemId = xi.item.SUNSTONE,           weight =  30 }, -- Sunstone
+        { itemId = xi.item.ZIRCON,             weight =  30 }, -- Zircon
+        { itemId = xi.item.AQUAMARINE,         weight =  30 }, -- Aquamarine
+        { itemId = xi.item.EBONY_LOG,          weight =  30 }, -- Ebony Log
+        { itemId = xi.item.MAHOGANY_LOG,       weight =  30 }, -- Mahogany Log
+        { itemId = xi.item.PHILOSOPHERS_STONE, weight =  30 }, -- Philosophers Stone
     },
 
     {
-        { item = xi.item.DARKSTEEL_INGOT,            weight =  77 }, -- Darksteel Ingot
-        { item = xi.item.MOONSTONE,                  weight = 134 }, -- Moonstone
-        { item = xi.item.STEEL_INGOT,                weight = 154 }, -- Steel Ingot
-        { item = xi.item.CHRYSOBERYL,                weight =  50 }, -- Chrysoberyl
-        { item = xi.item.HI_RERAISER,                weight = 154 }, -- Hi-reraiser
-        { item = xi.item.JADEITE,                    weight = 121 }, -- Jadeite
-        { item = xi.item.SPOOL_OF_MALBORO_FIBER,     weight =  10 }, -- Spool Of Malboro Fiber
-        { item = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, weight =  10 }, -- Vial Of Black Beetle Blood
-        { item = xi.item.RED_ROCK,                   weight =  30 }, -- Red Rock
-        { item = xi.item.BLUE_ROCK,                  weight =  30 }, -- Blue Rock
-        { item = xi.item.YELLOW_ROCK,                weight =  30 }, -- Yellow Rock
-        { item = xi.item.GREEN_ROCK,                 weight =  30 }, -- Green Rock
-        { item = xi.item.TRANSLUCENT_ROCK,           weight =  30 }, -- Translucent Rock
-        { item = xi.item.PURPLE_ROCK,                weight =  30 }, -- Purple Rock
-        { item = xi.item.BLACK_ROCK,                 weight =  30 }, -- Black Rock
-        { item = xi.item.WHITE_ROCK,                 weight =  30 }, -- White Rock
-        { item = xi.item.FLUORITE,                   weight =  50 }, -- Fluorite
+        { itemId = xi.item.DARKSTEEL_INGOT,            weight =  77 }, -- Darksteel Ingot
+        { itemId = xi.item.MOONSTONE,                  weight = 134 }, -- Moonstone
+        { itemId = xi.item.STEEL_INGOT,                weight = 154 }, -- Steel Ingot
+        { itemId = xi.item.CHRYSOBERYL,                weight =  50 }, -- Chrysoberyl
+        { itemId = xi.item.HI_RERAISER,                weight = 154 }, -- Hi-reraiser
+        { itemId = xi.item.JADEITE,                    weight = 121 }, -- Jadeite
+        { itemId = xi.item.SPOOL_OF_MALBORO_FIBER,     weight =  10 }, -- Spool Of Malboro Fiber
+        { itemId = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, weight =  10 }, -- Vial Of Black Beetle Blood
+        { itemId = xi.item.RED_ROCK,                   weight =  30 }, -- Red Rock
+        { itemId = xi.item.BLUE_ROCK,                  weight =  30 }, -- Blue Rock
+        { itemId = xi.item.YELLOW_ROCK,                weight =  30 }, -- Yellow Rock
+        { itemId = xi.item.GREEN_ROCK,                 weight =  30 }, -- Green Rock
+        { itemId = xi.item.TRANSLUCENT_ROCK,           weight =  30 }, -- Translucent Rock
+        { itemId = xi.item.PURPLE_ROCK,                weight =  30 }, -- Purple Rock
+        { itemId = xi.item.BLACK_ROCK,                 weight =  30 }, -- Black Rock
+        { itemId = xi.item.WHITE_ROCK,                 weight =  30 }, -- White Rock
+        { itemId = xi.item.FLUORITE,                   weight =  50 }, -- Fluorite
     },
 }
 

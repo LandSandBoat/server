@@ -35,4 +35,5 @@ public:
 
     auto createEngine() -> std::unique_ptr<Engine> override;
     void registerCommands(ConsoleService& console) override;
+    void requestExit() override;
 };

@@ -35,8 +35,9 @@ xi.job_utils.monk.useBoost = function(player, target, ability)
 
     if player:hasStatusEffect(xi.effect.BOOST) then
         local effect = player:getStatusEffect(xi.effect.BOOST)
-        effect:setPower(effect:getPower() + power)
-        player:addMod(xi.mod.ATTP, power)
+
+        effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
+        effect:addMod(xi.mod.ATTP, power)
     else
         player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
     end
@@ -96,14 +97,24 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
 
     target:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
     target:addStatusEffect(xi.effect.COUNTERSTANCE, power, 0, 300)
+
+    return xi.effect.COUNTERSTANCE
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DODGE, 0, 0, 30)
+    local jpLevel  = target:getJobPointLevel(xi.jp.DODGE_EFFECT)
+    local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
+    player:addStatusEffect(xi.effect.DODGE, jpLevel + dodgeMod, 0, 30)
+
+    return xi.effect.DODGE
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.FOCUS, 0, 0, 30)
+    local jpLevel  = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+    local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
+    player:addStatusEffect(xi.effect.FOCUS, jpLevel + focusMod, 0, 30)
+
+    return xi.effect.FOCUS
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)
@@ -111,14 +122,20 @@ xi.job_utils.monk.useFootwork = function(player, target, ability)
     local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
 
     player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 60, 0, kickAttPercent)
+
+    return xi.effect.FOOTWORK
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)
     player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
+
+    return xi.effect.FORMLESS_STRIKES
 end
 
 xi.job_utils.monk.useHundredFists = function(player, target, ability)
     player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 45)
+
+    return xi.effect.HUNDRED_FISTS
 end
 
 -- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
@@ -173,10 +190,14 @@ end
 
 xi.job_utils.monk.useImpetus = function(player, target, ability)
     player:addStatusEffect(xi.effect.IMPETUS, 0, 0, 180)
+
+    return xi.effect.IMPETUS
 end
 
 xi.job_utils.monk.useInnerStrength = function(player, target, ability)
     player:addStatusEffect(xi.effect.INNER_STRENGTH, 2, 0, 30)
+
+    return xi.effect.INNER_STRENGTH
 end
 
 xi.job_utils.monk.useMantra = function(player, target, ability)
@@ -190,4 +211,6 @@ end
 
 xi.job_utils.monk.usePerfectCounter = function(player, target, ability)
     player:addStatusEffect(xi.effect.PERFECT_COUNTER, 2, 0, 30)
+
+    return xi.effect.PERFECT_COUNTER
 end

@@ -152,7 +152,9 @@ quest.sections =
                 -- is set to a very high level.
 
                 onMobDeath = function(mob, player, optParams)
-                    quest:setVar(player, 'Prog', 7)
+                    if quest:getVar(player, 'Prog') == 6 then
+                        quest:setVar(player, 'Prog', 7)
+                    end
                 end,
             },
 

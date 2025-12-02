@@ -38,19 +38,18 @@
 
 #include "lua/luautils.h"
 
-#include "packets/entity_animation.h"
 #include "packets/entity_update.h"
-#include "packets/message_basic.h"
-#include "packets/position.h"
+#include "packets/s2c/0x038_schedulor.h"
 
 #include "status_effect_container.h"
-#include "treasure_pool.h"
 
+#include "enums/four_cc.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
+
 #include <chrono>
 
 CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
@@ -76,6 +75,7 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 
 CBattlefield::~CBattlefield()
 {
+    m_groups.clear();
     luautils::OnBattlefieldDestroy(this);
 }
 
@@ -94,7 +94,7 @@ uint16 CBattlefield::GetZoneID() const
     return m_Zone->GetID();
 }
 
-std::string const& CBattlefield::GetName() const
+const std::string& CBattlefield::GetName() const
 {
     return m_Name;
 }
@@ -164,7 +164,7 @@ timer::duration CBattlefield::GetLastTimeUpdate() const
     return m_LastPromptTime;
 }
 
-uint64_t CBattlefield::GetLocalVar(std::string const& name) const
+uint64_t CBattlefield::GetLocalVar(const std::string& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -190,12 +190,12 @@ uint32 CBattlefield::GetArmouryCrate() const
     return m_armouryCrate;
 }
 
-void CBattlefield::SetName(std::string const& name)
+void CBattlefield::SetName(const std::string& name)
 {
     m_Name = name;
 }
 
-void CBattlefield::SetInitiator(std::string const& name)
+void CBattlefield::SetInitiator(const std::string& name)
 {
     m_Initiator.name = name;
 }
@@ -224,7 +224,7 @@ void CBattlefield::SetArea(uint8 area)
     m_Area = area;
 }
 
-void CBattlefield::SetRecord(std::string const& name, timer::duration time, size_t partySize)
+void CBattlefield::SetRecord(const std::string& name, timer::duration time, size_t partySize)
 {
     m_Record.name      = !name.empty() ? name : m_Initiator.name;
     m_Record.time      = time;
@@ -252,7 +252,7 @@ void CBattlefield::SetLevelCap(uint8 cap)
     m_LevelCap = cap;
 }
 
-void CBattlefield::SetLocalVar(std::string const& name, uint64_t value)
+void CBattlefield::SetLocalVar(const std::string& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -523,6 +523,20 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         return false;
     }
 
+    // Clear timer queue for entity before removal
+    if (PEntity->PAI)
+    {
+        PEntity->PAI->ClearTimerQueue();
+    }
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
+    {
+        if (PChar->PPet && PChar->PPet->PAI)
+        {
+            PChar->PPet->PAI->ClearTimerQueue();
+        }
+    }
+
     auto found = false;
     if (PEntity->objtype == TYPE_PC)
     {
@@ -665,7 +679,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PMob->PEnmityContainer->Clear();
             }
         }
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(PEntity, PEntity, FourCC::FadeOut));
     }
 
     PEntity->PBattlefield = nullptr;
@@ -823,7 +837,11 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
             const uint32 timeThing = timer::count_seconds(m_Record.time);
 
             db::preparedStmt("UPDATE bcnm_records SET fastestName = ?, fastestTime = ?, fastestPartySize = ? WHERE bcnmId = ? AND zoneid = ?",
-                             m_Record.name, timeThing, m_Record.partySize, this->GetID(), GetZoneID());
+                             m_Record.name,
+                             timeThing,
+                             static_cast<uint32>(m_Record.partySize),
+                             this->GetID(),
+                             GetZoneID());
         }
     }
 
@@ -832,19 +850,19 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
 
 bool CBattlefield::CheckInProgress()
 {
-    // clang-format off
-    ForEachEnemy([&](CMobEntity* PMob)
-    {
-        if (!PMob->PEnmityContainer->GetEnmityList()->empty())
-        {
-            if (m_Status == BATTLEFIELD_STATUS_OPEN)
-            {
-                SetStatus(BATTLEFIELD_STATUS_LOCKED);
-            }
-            m_Attacked = true;
-        }
-    });
-    // clang-format on
+    ForEachEnemy([&](const CMobEntity* PMob)
+                 {
+                     // Any entry in enmity list or currently chasing someone
+                     if (!PMob->PEnmityContainer->GetEnmityList()->empty() || PMob->GetBattleTargetID())
+                     {
+                         if (m_Status == BATTLEFIELD_STATUS_OPEN)
+                         {
+                             SetStatus(BATTLEFIELD_STATUS_LOCKED);
+                         }
+
+                         m_Attacked = true;
+                     }
+                 });
 
     // mobs might have 0 enmity but we wont allow anymore players to enter
     return m_Status != BATTLEFIELD_STATUS_OPEN;

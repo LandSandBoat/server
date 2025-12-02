@@ -140,7 +140,7 @@ entity.onMobInitialize = function(mob)
 end
 
 local function getAbsorbMod(element)
-    local absorbMod = xi.combat.element.getElementalAbsorptionModifier(element)
+    local absorbMod = xi.data.element.getElementalAbsorptionModifier(element)
 
     return absorbMod
 end
@@ -202,7 +202,7 @@ entity.onMobFight = function(mob, target)
     {
         conditions =
         {
-            distance >= mob:getMeleeRange() and distance >= 20,
+            distance >= mob:getMeleeRange(target) and distance >= 20,
         },
         position = mob:getPos(), -- Guessed
     }

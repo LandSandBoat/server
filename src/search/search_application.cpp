@@ -26,13 +26,15 @@
 
 namespace
 {
-    auto appConfig() -> ApplicationConfig
-    {
-        return ApplicationConfig{
-            .serverName = "search",
-            .arguments  = {},
-        };
-    }
+
+auto appConfig() -> ApplicationConfig
+{
+    return ApplicationConfig{
+        .serverName = "search",
+        .arguments  = {},
+    };
+}
+
 } // namespace
 
 SearchApplication::SearchApplication(const int argc, char** argv)
@@ -59,4 +61,10 @@ void SearchApplication::registerCommands(ConsoleService& console)
     console.registerCommand("expire_all",
                             "Force-expire all items on the AH, returning to sender",
                             std::bind(&SearchEngine::onExpireAll, searchEngine, std::placeholders::_1));
+}
+
+void SearchApplication::requestExit()
+{
+    Application::requestExit();
+    io_context_.stop();
 }

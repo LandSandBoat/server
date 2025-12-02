@@ -23,34 +23,37 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_linkshell.h"
-#include "packets/trade_item.h"
-#include "packets/trade_update.h"
+#include "packets/s2c/0x023_item_trade_list.h"
+#include "packets/s2c/0x025_item_trade_mylist.h"
 #include "universal_container.h"
 
 namespace
 {
-    const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
+
+const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
     {
-        if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-        {
-            Async::getInstance()->submit(
-                [itemID        = PItem->getID(),
-                 quantity      = ItemNum,
-                 sender        = PChar->id,
-                 sender_name   = PChar->getName(),
-                 receiver      = PTarget->id,
-                 receiver_name = PTarget->getName(),
-                 date          = earth_time::timestamp()]()
+        Async::getInstance()->submit(
+            [itemID        = PItem->getID(),
+             quantity      = ItemNum,
+             sender        = PChar->id,
+             sender_name   = PChar->getName(),
+             receiver      = PTarget->id,
+             receiver_name = PTarget->getName(),
+             date          = earth_time::timestamp()]()
+            {
+                const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                if (!db::preparedStmt(query, itemID, quantity, sender, sender_name, receiver, receiver_name, date))
                 {
-                    const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    if (!db::preparedStmt(query, itemID, quantity, sender, sender_name, receiver, receiver_name, date))
-                    {
-                        ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemID, quantity, sender, receiver, date);
-                    }
-                });
-        }
-    };
+                    ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemID, quantity, sender, receiver, date);
+                }
+            });
+    }
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -80,7 +83,9 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         if (ItemNum != 0)
         {
             ShowError("GP_CLI_COMMAND_TRADE_LIST: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] ",
-                      PChar->getName(), PCurrentSlotItem->getID(), TradeIndex);
+                      PChar->getName(),
+                      PCurrentSlotItem->getID(),
+                      TradeIndex);
         }
 
         PCurrentSlotItem->setReserve(0);
@@ -97,15 +102,16 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         PItem->isSubType(ITEM_LOCKED))
     {
         ShowErrorFmt("GP_CLI_COMMAND_TRADE_LIST: {} trying to add an invalid item/quantity [Item: {} | Trade Slot: {}] ",
-                     PChar->getName(), ItemNo, TradeIndex);
+                     PChar->getName(),
+                     ItemNo,
+                     TradeIndex);
         return;
     }
 
     // If item count is zero remove from container
     if (ItemNum == 0)
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(),
-                 TradeIndex, PItem->getName());
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName());
         PItem->setReserve(0);
         PChar->UContainer->SetItem(TradeIndex, nullptr);
     }
@@ -118,22 +124,20 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         if ((!PItemLinkshell1 && !PItemLinkshell2) || ((!PItemLinkshell1 || PItemLinkshell1->GetLSID() != PItemLinkshell->GetLSID()) &&
                                                        (!PItemLinkshell2 || PItemLinkshell2->GetLSID() != PItemLinkshell->GetLSID())))
         {
-            PChar->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellEquipBeforeUsing);
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellEquipBeforeUsing);
             PItem->setReserve(0);
             PChar->UContainer->SetItem(TradeIndex, nullptr);
         }
         else
         {
-            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(),
-                     TradeIndex, PItem->getName(), ItemNum);
+            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
             PItem->setReserve(ItemNum + PItem->getReserve());
             PChar->UContainer->SetItem(TradeIndex, PItem);
         }
     }
     else
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(),
-                 TradeIndex, PItem->getName(), ItemNum);
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
         PItem->setReserve(ItemNum + PItem->getReserve());
         PChar->UContainer->SetItem(TradeIndex, PItem);
     }
@@ -141,10 +145,10 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
     auditTrade(PChar, PTarget, PItem, ItemNum);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PChar->getName());
-    PChar->pushPacket<CTradeItemPacket>(PItem, TradeIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_MYLIST>(PItem, TradeIndex);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PTarget->getName());
-    PTarget->pushPacket<CTradeUpdatePacket>(PItem, TradeIndex);
+    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_LIST>(PItem, TradeIndex);
 
     PChar->UContainer->UnLock();
     PTarget->UContainer->UnLock();

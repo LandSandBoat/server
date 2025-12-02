@@ -11,6 +11,7 @@ CREATE TABLE `chars` (
   `nation` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `pos_zone` smallint(3) unsigned NOT NULL,
   `pos_prevzone` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `pos_prevzonelineid` int(10) unsigned NOT NULL DEFAULT '0',
   `pos_rot` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `pos_x` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',

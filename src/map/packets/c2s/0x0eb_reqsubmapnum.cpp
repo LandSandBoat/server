@@ -22,7 +22,7 @@
 #include "0x0eb_reqsubmapnum.h"
 
 #include "entities/charentity.h"
-#include "packets/release_special.h"
+#include "packets/s2c/0x10e_reqsubmapnum.h"
 
 auto GP_CLI_COMMAND_REQSUBMAPNUM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -38,5 +38,5 @@ void GP_CLI_COMMAND_REQSUBMAPNUM::process(MapSession* PSession, CCharEntity* PCh
         return;
     }
 
-    PChar->pushPacket<CSpecialReleasePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_REQSUBMAPNUM>(0);
 }

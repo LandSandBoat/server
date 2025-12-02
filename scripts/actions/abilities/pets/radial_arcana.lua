@@ -6,11 +6,10 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.geomancer.geoOnAbilityCheck(player, target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local master    = pet:getMaster()
+abilityObject.onPetAbility = function(target, pet, petskill, master, action)
     local mpAmount  = math.floor(3 * pet:getMainLvl())
     local mpRestore = mpAmount
 
@@ -22,8 +21,6 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     mpRestore = utils.clamp(mpRestore, 0, target:getMaxMP())
-
-    skill:setMsg(xi.msg.basic.SKILL_RECOVERS_MP)
 
     if target:getID() == pet:getID() then
         mpRestore = 0

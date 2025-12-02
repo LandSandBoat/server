@@ -61,7 +61,7 @@ const std::string& CLuaAbility::getName()
     return m_PLuaAbility->getName();
 }
 
-uint16 CLuaAbility::getAnimation()
+auto CLuaAbility::getAnimation() -> ActionAnimation
 {
     return m_PLuaAbility->getAnimationID();
 }

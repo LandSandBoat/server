@@ -31,7 +31,6 @@
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
-#include "packets/message_basic.h"
 #include "states/state.h"
 
 class CBaseEntity;
@@ -55,7 +54,7 @@ public:
     bool ChangeTarget(uint16 targid);
     bool Disengage();
     bool WeaponSkill(uint16 targid, uint16 wsid);
-    bool MobSkill(uint16 targid, uint16 wsid);
+    bool MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride);
     bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
     bool RangedAttack(uint16 targid);
@@ -70,16 +69,16 @@ public:
     bool Internal_ChangeTarget(uint16 targetid);
     bool Internal_Disengage();
     bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
-    bool Internal_MobSkill(uint16 targid, uint16 wsid);
+    bool Internal_MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride);
     bool Internal_PetSkill(uint16 targid, uint16 abilityid);
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);
     bool Internal_Die(timer::duration);
-    bool Internal_Raise();
     bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
     bool Internal_Despawn(bool instantDespawn = false);
     bool Internal_Respawn(timer::duration _duration);
     bool Internal_Synth(SKILLTYPE synthSkill);
+    bool Accept_Raise();
 
     void    Reset();
     void    Tick(timer::time_point _tick);

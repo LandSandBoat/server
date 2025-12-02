@@ -48,11 +48,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
     },
     mob =
     {
-        HOAR_KNUCKLED_RIMBERRY_PH =
-        {
-            [17285392] = 17285394,
-            [17285393] = 17285394,
-        },
+        HOAR_KNUCKLED_RIMBERRY = GetFirstID('Hoar-knuckled_Rimberry'),
         WOODLAND_SAGE          = 17285220,
         POWDERER_PENNY         = 17285248,
         BISQUE_HEELED_SUNBERRY = 17285460,

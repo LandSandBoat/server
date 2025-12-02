@@ -34,12 +34,12 @@ zones[xi.zone.NASHMAU] =
         WATAKHAMAZOM_SHOP_DIALOG      = 10510, -- Looking for some bows and bolts to strrrike fear into the hearts of your enemies? You can find 'em here!
         CHICHIROON_SHOP_DIALOG        = 10512, -- Howdy-hooo! I gots soooper rare dice for yooo.
         SANCTION                      = 10788, -- You have received the Empire's Sanction.
-        NENE_DELIVERY_DIALOG          = 10856, -- Yooo want to send gooods? Yooo want to send clink clink?
-        NANA_DELIVERY_DIALOG          = 10857, -- Yooo send gooods. Yooo send clink clink.
-        YOYOROON_SHOP_DIALOG          = 11816, -- Boooss, boooss! Yoyoroon bring yooo goood custooomer! Yoyoroon goood wooorker, nooo?
-        PIPIROON_SHOP_DIALOG          = 11817, -- Yes? I'm a busy man. Make it quick.
-        RETRIEVE_DIALOG_ID            = 11917, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 11956, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        NENE_DELIVERY_DIALOG          = 10860, -- Yooo want to send gooods? Yooo want to send clink clink?
+        NANA_DELIVERY_DIALOG          = 10861, -- Yooo send gooods. Yooo send clink clink.
+        YOYOROON_SHOP_DIALOG          = 11820, -- Boooss, boooss! Yoyoroon bring yooo goood custooomer! Yoyoroon goood wooorker, nooo?
+        PIPIROON_SHOP_DIALOG          = 11821, -- Yes? I'm a busy man. Make it quick.
+        RETRIEVE_DIALOG_ID            = 11921, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL         = 11960, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

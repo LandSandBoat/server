@@ -20,7 +20,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTERS_PREFERENCE) == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.WINDURST) > 5
+        player:getFameLevel(xi.fameArea.WINDURST) >= 6
     then
         player:startEvent(111, xi.item.DISH_OF_GUSGEN_CLAY) -- start quest A Potter's Preference
     elseif player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTERS_PREFERENCE) == xi.questStatus.QUEST_ACCEPTED then

@@ -1,7 +1,7 @@
 -----------------------------------
---  Plague Breath
---  Description: Deals water damage to enemies within a fan-shaped area originating from the caster. Additional effect: Poison.
---  Type: Magical Water (Element)
+-- Plague Breath
+-- Family: Lizards
+-- Description: Deals water damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Poison.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,15 +11,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = mob:getMainLvl() / 4 + 1
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, 60)
+    params.percentMultipier  = 0.0625
+    params.element           = xi.element.WATER
+    params.damageCap         = 500
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.1, 2, xi.element.WATER, 250)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
-    return dmg
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WATER)
+
+        local power    = math.max(1, mob:getMainLvl() / 10)
+        local duration = math.random(45, 60)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration)
+    end
+
+    return damage
 end
 
 return mobskillObject

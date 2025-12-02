@@ -6,7 +6,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = 356.491, y = -10.675, z = 182.225 },
     { x = 357.948, y = -10.675, z = 177.231 },
@@ -62,7 +62,7 @@ local spawnPoints =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hours
 end
 
@@ -76,7 +76,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Harvesman's spawnpoint and respawn time (21-24 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 end
 

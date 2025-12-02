@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
     return 0
 end
 
-itemObject.onItemUse = function(target, user, item)
+itemObject.onItemUse = function(target, user, item, action)
     local effect   = xi.effect.ENCHANTMENT
     local power    = 0
     local tick     = 0

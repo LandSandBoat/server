@@ -47,7 +47,7 @@ public:
     uint16 getRecastID();
     uint16 getRange();
     auto   getName() -> const std::string&;
-    uint16 getAnimation();
+    auto   getAnimation() -> ActionAnimation;
     uint16 getAddType(); // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
     void  setMsg(uint16 messageID);

@@ -34,13 +34,13 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
                   .mustEqual(Result, 0, "Result not 0")
                   .mustEqual(ResultStatus, 0, "Result status");
 
-    switch (static_cast<GP_CLI_COMMAND_AUC_COMMAND>(Command))
+    switch (Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
             pv
-                .range("Commission", Param.param.AskCommit.Commission, 1, 999999999)
-                .range("ItemStacks", Param.param.AskCommit.ItemStacks, 0, 1);
+                .range("Commission", Param.AskCommit.Commission, 1, 999999999)
+                .range("ItemStacks", Param.AskCommit.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Info:
@@ -57,16 +57,16 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .range("AucWorkIndex", AucWorkIndex, 0, 6)
-                .range("LimitPrice", Param.param.LotIn.LimitPrice, 1, 999999999)
-                .range("ItemStacks", Param.param.LotIn.ItemStacks, 0, 1);
+                .range("LimitPrice", Param.LotIn.LimitPrice, 1, 999999999)
+                .range("ItemStacks", Param.LotIn.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Bid:
         {
             pv
                 .range("AucWorkIndex", AucWorkIndex, 0, 6)
-                .range("BidPrice", Param.param.Bid.BidPrice, 1, 999999999)
-                .range("ItemStacks", Param.param.Bid.ItemStacks, 0, 1);
+                .range("BidPrice", Param.Bid.BidPrice, 1, 999999999)
+                .range("ItemStacks", Param.Bid.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCancel:
@@ -79,6 +79,8 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
             pv.range("AucWorkIndex", AucWorkIndex, 0, 6);
         }
         break;
+        default:
+            break;
     }
 
     return pv;
@@ -88,11 +90,11 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
 {
     const auto playerName = PChar->getName();
 
-    switch (static_cast<GP_CLI_COMMAND_AUC_COMMAND>(Command))
+    switch (Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
-            auctionutils::SellingItems(PChar, Param.param.AskCommit);
+            auctionutils::SellingItems(PChar, Param.AskCommit);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Info:
@@ -108,12 +110,12 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotIn:
         {
-            auctionutils::ProofOfPurchase(PChar, Param.param.LotIn);
+            auctionutils::ProofOfPurchase(PChar, Param.LotIn);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Bid:
         {
-            auctionutils::PurchasingItems(PChar, Param.param.Bid);
+            auctionutils::PurchasingItems(PChar, Param.Bid);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCancel:
@@ -126,5 +128,7 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
             auctionutils::UpdateSaleListByPlayer(PChar, AucWorkIndex);
         }
         break;
+        default:
+            break;
     }
 }

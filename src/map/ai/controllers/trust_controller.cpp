@@ -39,20 +39,22 @@
 
 namespace
 {
-    enum TRUST_MOVEMENT_TYPE : int8
-    {
-        // NOTE: If you need to add special movement types, add descending into the minus values.
-        //     : All of the positive values are taken for the ranged movement range.
-        // NOTE: You can use any positive value as a distance, and it will act as MID_RANGE or LONG_RANGE, but with the value you've provided.
-        //     : For example:
-        //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
-        //     : Will set the combat distance the trust tries to stick to to 20'
-        // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
-        NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
-        MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
-        MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
-        LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
-    };
+
+enum TRUST_MOVEMENT_TYPE : int8
+{
+    // NOTE: If you need to add special movement types, add descending into the minus values.
+    //     : All of the positive values are taken for the ranged movement range.
+    // NOTE: You can use any positive value as a distance, and it will act as MID_RANGE or LONG_RANGE, but with the value you've provided.
+    //     : For example:
+    //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
+    //     : Will set the combat distance the trust tries to stick to to 20'
+    // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
+    NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+    MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
+    MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
+    LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
+};
+
 } // namespace
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)

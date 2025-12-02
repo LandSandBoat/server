@@ -25,6 +25,8 @@
 
 namespace daily
 {
-    uint16 SelectItem(CCharEntity* player, uint8 dial);
-    void   LoadDailyItems();
+
+uint16 SelectItem(CCharEntity* player, uint8 dial);
+void   LoadDailyItems();
+
 } // namespace daily

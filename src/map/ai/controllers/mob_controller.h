@@ -30,6 +30,7 @@ enum class FollowType : uint8
     RunAway,
 };
 
+class CMobEntity;
 class CMobController : public CController
 {
 public:
@@ -41,7 +42,7 @@ public:
     virtual void Despawn() override;
     virtual void Reset() override;
 
-    virtual auto MobSkill(uint16 targid, uint16 wsid) -> bool;
+    virtual auto MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride) -> bool;
     virtual auto Ability(uint16 targid, uint16 abilityid) -> bool override
     {
         return false;
@@ -70,7 +71,7 @@ protected:
     auto         CanPursueTarget(const CBattleEntity* PTarget) const -> bool;
     auto         CheckLock(CBattleEntity* PTarget) const -> bool;
     auto         CheckDetection(CBattleEntity* PTarget) -> bool;
-    virtual auto CanCastSpells() -> bool;
+    virtual auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool;
     void         CastSpell(SpellID spellid);
     virtual void Move();
 

@@ -18,6 +18,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         CONQUEST_BASE                 = 7090, -- Tallying conquest results...
         DOES_NOT_RESPOND              = 7254, -- The gate does not respond...
         PRESENCE_HAS_DRAWN            = 7370, -- Your presence has drawn unwanted attention!
+        NOTHING_LEFT_TO_DO            = 7373, -- You have nothing left to do here.
         REQUEST_CONFIRMED             = 7375, -- Security portal access request confirmed. Commencing patrol routine. Stay on alert for intruder interference.
         PATROL_COMPLETED              = 7376, -- Patrol routine completed. Request transfer of final security portal access duty. Awaiting confirmation.
         DUTY_COMPLETE                 = 7377, -- Transfer of final security portal access duty complete.
@@ -32,6 +33,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         RECENTLY_ACTIVATED            = 7386, -- The alcove has recently been activated...
         TIME_RESTRICTION              = 7387, -- Time restriction: <number> [minute/minutes] (Earth time)
         QUASILUMIN_MAP_QUEST_OFFSET   = 7388, -- Warning. Chamber of Eventide accessed by unauthorized personnel, 4789209-980 increments previous.
+        IXAERN_MNK_QM                 = 7399, -- You hear something vaguely resembling a voice emanating from the depths of your soul. Bring me...aer...reccceptac...
         HOMEPOINT_SET                 = 7472, -- Home point set!
     },
     mob =
@@ -40,6 +42,8 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         IXGHRAH                 = GetFirstID('Ixghrah'),
         JAILER_OF_TEMPERANCE    = GetFirstID('Jailer_of_Temperance'),
         IXAERN_MNK              = GetFirstID('Ixaern_MNK'),
+        EOGHRAH_BIRD            = utils.slice(GetTableOfIDs('Eoghrah'), 1, 38),
+        EOGHRAH_SPIDER          = utils.slice(GetTableOfIDs('Eoghrah'), 39),
     },
     npc =
     {

@@ -27,9 +27,11 @@
 #include "common/timer.h"
 
 #include "map_constants.h"
+#include "packets/s2c/0x00b_logout.h"
 
 #include <array>
 
+enum class GP_GAME_LOGOUT_STATE : uint8_t;
 class CCharEntity;
 
 struct MapSession
@@ -44,14 +46,15 @@ struct MapSession
     std::unique_ptr<CCharEntity> PChar;                   // game char
     uint8                        shuttingDown = 0;        // prevents double session closing
     uint32                       charID       = 0;
+    uint32                       accountID    = 0;
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
     // If it doesn't, and we can still successfully decrypt here, that means we need to resend 0x00B.
     blowfish_t prev_blowfish = {};
 
     // Used to resend 0x00B zoneout packet in case the client needs it
-    uint8 zone_type = 0;
-    IPP   zone_ipp  = {};
+    GP_GAME_LOGOUT_STATE zone_type = GP_GAME_LOGOUT_STATE::NONE;
+    IPP                  zone_ipp  = {};
 
     void incrementBlowfish();
     void initBlowfish();

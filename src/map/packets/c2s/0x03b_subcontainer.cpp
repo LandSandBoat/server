@@ -22,68 +22,71 @@
 #include "0x03b_subcontainer.h"
 
 #include "entities/charentity.h"
+#include "enums/item_lockflg.h"
 #include "items/item_equipment.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_count.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x026_item_subcontainer.h"
 
 namespace
 {
-    const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slot, uint8 status) -> void
+
+const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slot, ItemLockFlg status) -> void
+{
+    if (PChar == nullptr || slot == 0)
     {
-        if (PChar == nullptr || slot == 0)
-        {
-            return;
-        }
+        return;
+    }
 
-        auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-        if (PItem == nullptr)
-        {
-            return;
-        }
-
-        PChar->pushPacket<CInventoryAssignPacket>(PItem, status);
-    };
-
-    // Build Mannequin model id list
-    const auto getModelIdFromStorageSlot = [](const CCharEntity* PChar, const uint8 slot) -> uint16
+    auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+    if (PItem == nullptr)
     {
-        uint16 modelId = 0x0000;
+        return;
+    }
 
-        if (slot == 0)
-        {
-            return modelId;
-        }
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, status);
+};
 
-        auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-        if (PItem == nullptr)
-        {
-            return modelId;
-        }
+// Build Mannequin model id list
+const auto getModelIdFromStorageSlot = [](const CCharEntity* PChar, const uint8 slot) -> uint16
+{
+    uint16 modelId = 0x0000;
 
-        if (const auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
-        {
-            modelId = PItemEquipment->getModelId();
-        }
-
+    if (slot == 0)
+    {
         return modelId;
-    };
+    }
 
-    const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+    auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+    if (PItem == nullptr)
     {
-        std::set allowedContainers = {
-            LOC_MOGSAFE
-        };
+        return modelId;
+    }
 
-        // Bitflag indicating if Mog 2F is unlocked
-        if (PChar->profile.mhflag & 0x20)
-        {
-            allowedContainers.insert(LOC_MOGSAFE2);
-        }
+    if (const auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
+    {
+        modelId = PItemEquipment->getModelId();
+    }
 
-        return allowedContainers;
+    return modelId;
+};
+
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+{
+    std::set allowedContainers = {
+        LOC_MOGSAFE
     };
+
+    // Bitflag indicating if Mog 2F is unlocked
+    if (PChar->profile.mhflag & 0x20)
+    {
+        allowedContainers.insert(LOC_MOGSAFE2);
+    }
+
+    return allowedContainers;
+};
+
 } // namespace
 
 auto GP_CLI_COMMAND_SUBCONTAINER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -117,19 +120,19 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
             // Action 1 Unequip Hack: Does this need to exist?
             if (PMannequin->m_extra[10 + ContainerIndex] == ItemIndex2)
             {
-                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_NORMAL);
+                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Normal);
                 PMannequin->m_extra[10 + ContainerIndex] = 0;
             }
             else // Regular Logic
             {
-                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_MANNEQUIN);
+                setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Mannequin);
                 PMannequin->m_extra[10 + ContainerIndex] = ItemIndex2;
             }
         }
         break;
         case GP_CLI_COMMAND_SUBCONTAINER_KIND::Unequip:
         {
-            setStatusOfStorageItemAtSlot(PChar, ItemIndex2, INV_NORMAL);
+            setStatusOfStorageItemAtSlot(PChar, ItemIndex2, ItemLockFlg::Normal);
             PMannequin->m_extra[10 + ContainerIndex] = 0;
         }
         break;
@@ -139,7 +142,7 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
             {
                 if (PMannequin->m_extra[10 + i] > 0)
                 {
-                    setStatusOfStorageItemAtSlot(PChar, PMannequin->m_extra[10 + i], INV_NORMAL);
+                    setStatusOfStorageItemAtSlot(PChar, PMannequin->m_extra[10 + i], ItemLockFlg::Normal);
                 }
                 PMannequin->m_extra[10 + i] = 0;
             }
@@ -164,12 +167,15 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
                                        "SET "
                                        "extra = ? "
                                        "WHERE location = ? AND slot = ? AND charid = ?",
-                                       PMannequin->m_extra, Category1, ItemIndex1, PChar->id);
+                                       PMannequin->m_extra,
+                                       Category1,
+                                       ItemIndex1,
+                                       PChar->id);
     if (rset)
     {
-        PChar->pushPacket<CInventoryItemPacket>(PMannequin, Category1, ItemIndex1);
-        PChar->pushPacket<CInventoryCountPacket>(Category1, ItemIndex1, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
-        PChar->pushPacket<CInventoryFinishPacket>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PMannequin, static_cast<CONTAINER_ID>(Category1), ItemIndex1);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(Category1), ItemIndex1, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
     else
     {

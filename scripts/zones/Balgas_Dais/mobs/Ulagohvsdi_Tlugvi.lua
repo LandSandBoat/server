@@ -16,42 +16,6 @@ local entity = {}
 -- TODO: TP move characteristics (like AOE type). Update the TP move lua file if necessary.
 -- TODO: Check if the next tree is already aggroed and targeting someone else, does it switch to the 2HR'ing mobs target?
 
-local elementalNinjutsuWeights =
-{
-    { id = xi.magic.spell.DOTON_NI,  chance = 15 },
-    { id = xi.magic.spell.HUTON_NI,  chance = 40 },
-    { id = xi.magic.spell.HYOTON_NI, chance = 5  },
-    { id = xi.magic.spell.KATON_NI,  chance = 5  },
-    { id = xi.magic.spell.RAITON_NI, chance = 20 },
-    { id = xi.magic.spell.SUITON_NI, chance = 15 },
-}
-
-local enfeebleNinjutsuWeights =
-{
-    { id = xi.magic.spell.KURAYAMI_NI, chance = 15 },
-    { id = xi.magic.spell.DOKUMORI_NI, chance = 50 },
-    { id = xi.magic.spell.HOJO_NI,     chance = 25 },
-    { id = xi.magic.spell.JUBAKU_NI,   chance = 10 },
-}
-
------------------------------------
--- Reroll spells with proper weights.
------------------------------------
-local reRollActionWeights = function(weights)
-    local abilityRoll    = math.random(1, 100)
-    local probabilitySum = 0
-
-    for _, skill in ipairs(weights) do
-        probabilitySum = probabilitySum + skill.chance
-
-        if abilityRoll <= probabilitySum then
-            return skill.id
-        end
-    end
-
-    return 0
-end
-
 -----------------------------------
 -- Enable additional effects on melee.
 -----------------------------------
@@ -77,30 +41,28 @@ end
 -----------------------------------
 -- Ninjutsu usage is not evenly distributed.
 -----------------------------------
-entity.onMobMagicPrepare = function(mob, target, spell)
-    local spellID = spell:getID()
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.DOKUMORI_NI,
+        xi.magic.spell.DOTON_NI,
+        xi.magic.spell.HOJO_NI,
+        xi.magic.spell.HUTON_NI,
+        xi.magic.spell.HYOTON_NI,
+        xi.magic.spell.JUBAKU_NI,
+        xi.magic.spell.KATON_NI,
+        xi.magic.spell.KURAYAMI_NI,
+        xi.magic.spell.RAITON_NI,
+        xi.magic.spell.SUITON_NI,
+    }
 
-    -- If we're casting elemental ninjutsu then follow the weights.
-    for _, spellData in ipairs(elementalNinjutsuWeights) do
-        if spellData.id == spellID then
-            return reRollActionWeights(elementalNinjutsuWeights)
-        end
-    end
-
-    -- If we're casting enfeebling ninjutsu then follow the weights.
-    for _, spellData in ipairs(enfeebleNinjutsuWeights) do
-        if spellData.id == spellID then
-            return reRollActionWeights(enfeebleNinjutsuWeights)
-        end
-    end
-
-    return spellID
+    return spellList[math.random(1, #spellList)]
 end
 
 -----------------------------------
 -- Only uses one TP move.
 -----------------------------------
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     return xi.mobSkill.PINECONE_BOMB
 end
 

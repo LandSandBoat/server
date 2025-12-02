@@ -55,21 +55,26 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
     if
         (skilltype == xi.attackType.PHYSICAL or
         skilltype == xi.attackType.RANGED) and
-        utils.thirdeye(target)
+        xi.combat.physicalHitRate.checkAnticipated(attacker, target)
     then
         skill:setMsg(xi.msg.basic.ANTICIPATE)
 
         return 0
     end
 
+    local element = utils.clamp(skillparam - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
     if skilltype == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, skillparam)
     elseif skilltype == xi.attackType.MAGICAL then
-        local element = utils.clamp(skillparam - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
-        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, element))
-        dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, true, false))
+        dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.BREATH then
-        dmg = target:breathDmgTaken(dmg)
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, false))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, false, true))
+        dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
@@ -99,17 +104,12 @@ end
 
 xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, attackType, damageType, slot, tpHitsLanded, extraHitsLanded, shadowsAbsorbed, bonusTP, action, taChar)
     if tpHitsLanded + extraHitsLanded > 0 then
-        if finaldmg >= 0 then
-            if finaldmg > 0 then
-                action:reaction(defender:getID(), xi.reaction.HIT)
-                action:speceffect(defender:getID(), xi.specEffect.RECOIL)
-            end
-        else
+        if finaldmg < 0 then
             -- TODO: ability absorb messages (if there are any)
             -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
 
-        action:param(defender:getID(), finaldmg)
+        action:recordDamage(defender, attackType, finaldmg)
     elseif shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), shadowsAbsorbed)
