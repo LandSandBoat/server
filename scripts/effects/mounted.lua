@@ -21,16 +21,6 @@ effectObject.onEffectGain = function(target, effect)
         animation = xi.anim.MOUNT
     end
 
-    if not target:isInEvent() then
-        target:setAnimation(animation)
-    end
-
-    -- Chocobo and mounts uncharm current pet
-    local pet = target:getPet()
-    if pet ~= nil and pet:isCharmed() then
-        target:despawnPet()
-    end
-
     -- XISP Changes ------------------------------------------
     local hasChocobo = target:getCharVar('[XISP]chocoID')
 
