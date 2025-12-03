@@ -251,6 +251,8 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- Enforce that gameLogin is always set to 0 once this method exits
     -- This assists with ensuring Abyssea visitant status is handled properly on logins
     player:setLocalVar('gameLogin', 0)
+
+    xi.xisp.onZone(player) -- XISP Change
 end
 
 xi.player.onPlayerDeath = function(player)

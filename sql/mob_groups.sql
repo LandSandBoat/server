@@ -13840,6 +13840,7 @@ INSERT INTO `mob_groups` VALUES (2,7071,210,'Garrison_30',0,128,0,0,0,25,30,1);
 INSERT INTO `mob_groups` VALUES (3,7071,210,'Garrison_40',0,128,0,0,0,35,40,1);
 INSERT INTO `mob_groups` VALUES (4,7071,210,'Garrison_50',0,128,0,0,0,45,50,1);
 INSERT INTO `mob_groups` VALUES (5,7071,210,'Garrison_75',0,128,0,0,0,70,75,1);
+INSERT INTO `mob_groups` VALUES (100,7057,210,'[XISP]Chocobo',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- Cloister_of_Tides (Zone 211)

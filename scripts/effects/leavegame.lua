@@ -42,6 +42,7 @@ effectObject.onEffectTick = function(target, effect)
     -- but it does change the message displayed.
     local elapsedTicks = effect:getTickCount()
     if elapsedTicks > 5 then
+        xi.xispal.resetFollowers(target) -- XISP Change
         target:leaveGame()
     else
         target:messageSystem(messages[effect:getPower()], 30 - elapsedTicks * 5)
