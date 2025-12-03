@@ -24,11 +24,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.DEX, effect:getPower())
+    effect:addMod(xi.mod.DEX, effect:getPower())
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DEX, effect:getPower())
 end
 
 return itemObject

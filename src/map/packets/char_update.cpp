@@ -282,7 +282,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
 
         packet->Hpp             = PChar->GetHPP();
         packet->server_status   = PChar->animation;
-        packet->ModelHitboxSize = 4; // TODO: verify this value and if it changes (Monstrosity?)
+        packet->ModelHitboxSize = static_cast<uint8_t>(PChar->modelHitboxSize * 10); // TODO: verify this value and if it changes (Monstrosity?)
 
         packet->Flags1.MonsterFlag = false; // TODO: Is this ever set for Monstrosity PVP?
         packet->Flags1.HideFlag    = false;

@@ -35,7 +35,7 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
 
     // Skip header and the WorkSize
     uint32_t      bitOffset = 8 * 5;
-    const uint8_t trg_sum   = std::min<uint8_t>(static_cast<uint8_t>(action.targets.size()), 64);
+    const uint8_t trg_sum   = std::min<uint8_t>(static_cast<uint8_t>(action.targets.size()), 15);
 
     // Pack header fields in exact order from XiPackets
     bitOffset = packBitsBE(packet, action.actorId, bitOffset, 32);                          // Caster ID
@@ -45,17 +45,28 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
     bitOffset = packBitsBE(packet, action.actionid, bitOffset, 32);                         // Command argument
     bitOffset = packBitsBE(packet, timer::count_seconds(action.recast), bitOffset, 32);     // Action info
 
-    // Pack targets
+    // Pack targets - 15 max!
+    uint8_t targetIdx = 0;
     action.ForEachTarget([&](const action_target_t& target)
                          {
+                             if (targetIdx++ >= 15)
+                             {
+                                 return;
+                             }
+
                              // Pack target header
                              bitOffset                 = packBitsBE(packet, target.actorId, bitOffset, 32);
                              const uint8_t resultCount = std::min<uint8_t>(static_cast<uint8_t>(target.results.size()), 8);
                              bitOffset                 = packBitsBE(packet, resultCount, bitOffset, 4);
 
-                             // Pack results for this target
+                             // Pack results for this target - 8 max!
+                             uint8_t resultIdx = 0;
                              for (const auto& result : target.results)
                              {
+                                 if (resultIdx++ >= 8)
+                                 {
+                                     break;
+                                 }
                                  // Core result fields (85 bits)
                                  bitOffset = packBitsBE(packet, static_cast<uint8_t>(result.resolution), bitOffset, 3);
                                  bitOffset = packBitsBE(packet, result.kind, bitOffset, 2);

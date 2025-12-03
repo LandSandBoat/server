@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -162,7 +162,7 @@ void LoadSkillTable()
 void LoadWeaponSkillsList()
 {
     const auto rset = db::preparedStmt("SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
-                                       "animationTime, `range`, aoe, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
+                                       "animationTime, `range`, aoe, radius, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
                                        "FROM weapon_skills "
                                        "WHERE weaponskillid < ? "
                                        "ORDER BY type, skilllevel ASC",
@@ -188,6 +188,7 @@ void LoadWeaponSkillsList()
         PWeaponSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
         PWeaponSkill->setRange(rset->get<uint8>("range"));
         PWeaponSkill->setAoe(rset->get<uint8>("aoe"));
+        PWeaponSkill->setRadius(rset->get<uint8>("radius"));
         PWeaponSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PWeaponSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PWeaponSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
@@ -248,7 +249,7 @@ void LoadPetSkillsList()
 {
     // Load all pet skills
     const auto rset = db::preparedStmt("SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
-                                       "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
+                                       "pet_skill_aoe, pet_skill_radius, pet_skill_distance, pet_anim_time, pet_prepare_time, "
                                        "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc, mob_skill_id "
                                        "FROM pet_skills");
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -258,6 +259,7 @@ void LoadPetSkillsList()
         PPetSkill->setAnimationID(rset->get<uint16>("pet_anim_id"));
         PPetSkill->setName(rset->get<std::string>("pet_skill_name"));
         PPetSkill->setAoe(rset->get<uint8>("pet_skill_aoe"));
+        PPetSkill->setRadius(rset->get<uint8>("pet_skill_radius"));
         PPetSkill->setDistance(rset->get<float>("pet_skill_distance"));
         PPetSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("pet_anim_time")));
         PPetSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("pet_prepare_time")));
@@ -1576,74 +1578,17 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus)
 {
-    int  acc                   = 0;
-    int  hitrate               = 75;
-    auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["accuracyDistancePenalty"];
-    auto distancePenaltyResult = rangedPenaltyFunction(PAttacker, PDefender);
-    int  distancePenalty       = 0;
-
     // Check to see if distance is greater than 25 and force hitrate to be 0
     if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
     {
         return 0;
     }
 
-    if (!distancePenaltyResult.valid())
-    {
-        sol::error err = distancePenaltyResult;
-        ShowError("battleutils::GetRangedHitRate: %s", err.what());
-    }
-    else
-    {
-        distancePenalty = distancePenaltyResult.get_type() == sol::type::number ? distancePenaltyResult.get<int16>(0) : 0;
-    }
+    double luaHitRate = luautils::callGlobal<double>("xi.combat.physicalHitRate.getRangedHitRate", PAttacker, PDefender, accBonus, false);
 
-    if (PAttacker->objtype == TYPE_PC)
-    {
-        CCharEntity* PChar = (CCharEntity*)PAttacker;
-        CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+    uint8 hitrate = std::floor<uint8>(luaHitRate * 100.0);
 
-        if (PItem == nullptr || !PItem->isType(ITEM_WEAPON))
-        {
-            // try throwing weapon
-            PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-        }
-
-        if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
-        {
-            acc = PChar->RACC();
-        }
-
-        // Check For Ambush Merit - Ranged
-        if ((charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
-        {
-            acc += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
-        }
-    }
-    else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
-    {
-        acc = PAttacker->RACC();
-    }
-    else if (PAttacker->objtype == TYPE_TRUST)
-    {
-        acc = PAttacker->RACC();
-    }
-    // Check for Yonin evasion bonus while in front of target
-    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
-    {
-        acc -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
-    }
-
-    // Add any specific accuracy bonus, e.g. Daken RAcc +100
-    acc += accBonus;
-
-    acc -= distancePenalty;
-
-    int eva = PDefender->EVA();
-    hitrate = hitrate + (acc - eva) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
-
-    uint8 finalhitrate = std::clamp(hitrate, 20, 95);
-    return finalhitrate;
+    return hitrate;
 }
 
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage)
@@ -2731,7 +2676,7 @@ uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 att
     {
         double luaHitRate = luautils::callGlobal<double>("xi.combat.physicalHitRate.getPhysicalHitRate", PAttacker, PDefender, offsetAccuracy, attackNumber, false);
 
-        hitrate = std::floor<uint8>(std::clamp<double>(luaHitRate * 100.0, 20.0, 99.0));
+        hitrate = std::floor<uint8>(luaHitRate * 100);
     }
     return static_cast<uint8>(hitrate);
 }
@@ -6780,7 +6725,7 @@ CBattleEntity* GetCoverAbilityUser(CBattleEntity* PCoverAbilityTarget, CBattleEn
             float distTAmob  = distance(PCoverAbilityUser->loc.p, PMob->loc.p);
 
             // check if cover user is within melee range and that cover target is in-line behind
-            if (distTAmob <= static_cast<float>(PMob->GetMeleeRange()) &&        // make sure cover user is within melee range
+            if (distTAmob <= PMob->GetMeleeRange(PCoverAbilityUser) &&           // make sure cover user is within melee range
                 distTAmob >= worldAngleMinDistance &&                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
                 distTAmob < distance(PCoverAbilityTarget->loc.p, PMob->loc.p) && // make sure cover user is closer to the mob than cover target
                 areInLine(angleTAmob, PMob, PCoverAbilityTarget))

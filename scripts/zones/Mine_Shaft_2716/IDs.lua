@@ -26,11 +26,20 @@ zones[xi.zone.MINE_SHAFT_2716] =
         SNAPS_IN_TWO                  = 7433, -- The <keyitem> snaps in two!
         CONQUEST_BASE                 = 7442, -- Tallying conquest results...
         ENTERING_THE_BATTLEFIELD_FOR  = 7605, -- Entering the battlefield for [A Century of Hardship/Return to the Depths/Bionic Bug/Pulling the Strings/Automaton Assault/The Mobline Comedy/To Movalpolos!]!
+        MOVAMUQ_DIALOGUE              = 7823, -- Bug bug! Come come!
+        CHEKOCHUK_DIALOGUE            = 7831, -- Buuug! Oooveeer heeere nooow!
+        TRIKOTRAK_DIALOGUE            = 7839, -- Bg! Pnch! Kck!
+        SWIPOSTIK_DIALOGUE            = 7847, -- Bug's! Smash's up's this's one's!
+        BUGBBY_DIALOGUE               = 7854, -- Ugh.
     },
     mob =
     {
-        BUGBOY  = GetFirstID('Bugboy'),
-        MOVAMUQ = GetFirstID('Movamuq'),
+        BUGBBY     = GetFirstID('Bugbby'),
+        BUGBOY     = GetFirstID('Bugboy'),
+        CHEKOCHUK  = GetFirstID('Chekochuk'),
+        MOVAMUQ    = GetFirstID('Movamuq'),
+        SWIPOSTIK  = GetFirstID('Swipostik'),
+        TRIKOTRAK  = GetFirstID('Trikotrak'),
     },
     npc =
     {

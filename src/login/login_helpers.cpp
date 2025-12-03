@@ -34,15 +34,18 @@ std::unordered_map<std::string, std::map<std::string, session_t>>& getAuthentica
 
 bool isStringMalformed(const std::string& str, std::size_t max_length)
 {
-    // clang-format off
-        const bool isEmpty        = str.empty();
-        const bool isTooLong      = str.size() > max_length;
-        const bool hasInvalidChar = std::any_of(str.cbegin(), str.cend(),
-                                                [](char const& c)
-                                                {
-                                                    return c < 0x20;
-                                                });
-    // clang-format on
+    const auto unprintableChar = [](char const& c) -> bool
+    {
+        return c < 0x20;
+    };
+
+    const bool isEmpty   = str.empty();
+    const bool isTooLong = str.size() > max_length;
+
+    const bool hasInvalidChar = std::any_of(
+        str.cbegin(),
+        str.cend(),
+        unprintableChar);
 
     return isEmpty || isTooLong || hasInvalidChar;
 }

@@ -74,11 +74,11 @@ public:
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);
     bool Internal_Die(timer::duration);
-    bool Internal_Raise();
     bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
     bool Internal_Despawn(bool instantDespawn = false);
     bool Internal_Respawn(timer::duration _duration);
     bool Internal_Synth(SKILLTYPE synthSkill);
+    bool Accept_Raise();
 
     void    Reset();
     void    Tick(timer::time_point _tick);

@@ -238,7 +238,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     packet->dead_counter1     = static_cast<uint32>(60 * deadRemaining);
     packet->dead_counter2     = earth_time::vanadiel_timestamp() + deadRemaining;
     packet->costume_id        = PChar->m_Costume;
-    packet->model_hitbox_size = 4; // TODO: verify this
+    packet->model_hitbox_size = static_cast<uint8_t>(PChar->modelHitboxSize * 10);
     packet->mount_id          = 0;
 
     if (PChar->animation == ANIMATION_FISHING_START)

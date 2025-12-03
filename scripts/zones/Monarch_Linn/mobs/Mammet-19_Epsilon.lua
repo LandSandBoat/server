@@ -33,6 +33,11 @@ local tpMoves =
     [3] = { 464, 471 },
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 end

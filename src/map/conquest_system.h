@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/regional_event.h"
+#include "common/types/flag.h"
 
 #include "conquest_data.h"
 #include "zone.h"
@@ -44,6 +45,8 @@ class CCharEntity;
 namespace conquest
 {
 
+using ShouldUpdateZones = xi::Flag<struct ShouldUpdateZonesTag>;
+
 ConquestData& GetConquestData(); // Cached data with influences / region controls
 
 void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
@@ -57,9 +60,9 @@ uint8 GetInfluenceGraphics(REGION_TYPE RegionID);                               
 uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);
 uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf);
 
-void HandleInfluenceUpdate(const std::vector<influence_t>& influences, bool shouldUpdateZones); // Triggered periodically when world server sends updates of the latest influence data.
-void HandleWeeklyTallyStart();                                                                  // Triggered on update conquest system every sunday (by world server msg)
-void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls);                 // Triggered when conquest update ends (by world server msg)
+void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpdateZones shouldUpdateZones); // Triggered periodically when world server sends updates of the latest influence data.
+void HandleWeeklyTallyStart();                                                                               // Triggered on update conquest system every sunday (by world server msg)
+void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls);                              // Triggered when conquest update ends (by world server msg)
 
 // Ranking for 3 nations
 uint8 GetBalance();

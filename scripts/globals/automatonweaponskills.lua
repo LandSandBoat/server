@@ -133,7 +133,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         bonusAcc = 0 + attacker:getMod(xi.mod.WSACC),
         tpUsed = tp,
     }
-    calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, calcParams.bonusAcc)
+    calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, calcParams.bonusAcc) -- TODO: do automatons get ranged hit rate bonuses?
     calcParams.skillType = attack.weaponType
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed

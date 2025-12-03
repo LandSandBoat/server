@@ -2,7 +2,6 @@
 -- Shooting Fish
 -- Horlais Peak BCNM20, Cloudy Orb
 -- !additem 1551
--- TODO : Figure out how to get Counterspore (their auto attack) to print to log as a normal auto attack.
 -----------------------------------
 local horlaisID = zones[xi.zone.HORLAIS_PEAK]
 -----------------------------------

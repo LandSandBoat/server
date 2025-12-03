@@ -72,7 +72,8 @@ struct Pet_t
     uint8 maxLevel;
 
     uint8           name_prefix;
-    uint8           radius; // Model Radius - affects melee range etc.
+    uint8           modelSize{ 0 };
+    float           modelHitboxSize{ 0.0f };
     uint16          m_Family;
     timer::duration time; // Duration of pet's "life span" before despawning
 
@@ -145,7 +146,6 @@ struct Pet_t
     , minLevel(-1)
     , maxLevel(99)
     , name_prefix(0)
-    , radius(0)
     , m_Family(0)
     , time(0s)
     , mJob(0)

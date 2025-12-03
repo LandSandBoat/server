@@ -47,6 +47,8 @@ public:
     std::optional<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
     std::optional<SpellID> GetSpell();       // return a random spell
 
+    bool IsAnySpellAvailable();
+
     bool HasSpells() const;
     bool HasMPSpells() const;
     bool HasNaSpell(SpellID spellId) const;

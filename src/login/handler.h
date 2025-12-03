@@ -53,36 +53,34 @@ public:
 private:
     void do_accept()
     {
-        // clang-format off
         acceptor_.async_accept(
-        [this](std::error_code ec, asio::ip::tcp::socket socket)
-        {
-            if (!ec)
+            [this](std::error_code ec, asio::ip::tcp::socket socket)
             {
-                if constexpr (std::is_same_v<T, auth_session>)
+                if (!ec)
                 {
-                    const auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
-                    auth_handler->start();
+                    if constexpr (std::is_same_v<T, auth_session>)
+                    {
+                        const auto auth_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
+                        auth_handler->start();
+                    }
+                    else if constexpr (std::is_same_v<T, view_session>)
+                    {
+                        const auto view_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
+                        view_handler->start();
+                    }
+                    else if constexpr (std::is_same_v<T, data_session>)
+                    {
+                        const auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
+                        data_handler->start();
+                    }
                 }
-                else if constexpr (std::is_same_v<T, view_session>)
+                else
                 {
-                    const auto view_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_));
-                    view_handler->start();
+                    ShowError(ec.message());
                 }
-                else if constexpr (std::is_same_v<T, data_session>)
-                {
-                    const auto data_handler = std::make_shared<T>(asio::ssl::stream<asio::ip::tcp::socket>(std::move(socket), sslContext_), zmqDealerWrapper_);
-                    data_handler->start();
-                }
-            }
-            else
-            {
-                ShowError(ec.message());
-            }
 
-            do_accept();
-        });
-        // clang-format on
+                do_accept();
+            });
     }
 
     asio::ip::tcp::acceptor acceptor_;

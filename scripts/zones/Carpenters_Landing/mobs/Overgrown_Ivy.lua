@@ -15,11 +15,11 @@ entity.onMobFight = function(mob, target)
     local badBreaths = mob:getLocalVar('badBreaths')
     -- also check to make sure that mob is not currently using a bad breath
     if
-        mob:getCurrentAction() == xi.action.category.BASIC_ATTACK and
+        not xi.combat.behavior.isEntityBusy(mob) and
         badBreaths < 5 and
         mob:getHPP() <= 25
     then
-        mob:useMobAbility(319)
+        mob:useMobAbility(xi.mobSkill.BAD_BREATH_1)
         mob:setLocalVar('badBreaths', badBreaths + 1)
     end
 end

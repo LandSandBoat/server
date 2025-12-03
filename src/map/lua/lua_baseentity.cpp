@@ -77,7 +77,6 @@
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
 #include "ai/states/petskill_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/range_state.h"
 #include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
@@ -1726,7 +1725,7 @@ uint8 CLuaBaseEntity::getCurrentAction()
     {
         action = 24;
     }
-    else if (m_PBaseEntity->PAI->IsCurrentState<CRaiseState>())
+    else if (m_PBaseEntity->PAI->IsCurrentState<CDeathState>() && m_PBaseEntity->objtype == TYPE_PC && static_cast<CCharEntity*>(m_PBaseEntity)->m_hasRaise)
     {
         action = 37;
     }
@@ -16999,7 +16998,7 @@ uint8 CLuaBaseEntity::getModelSize()
  *  Notes   :
  ************************************************************************/
 
-float CLuaBaseEntity::getMeleeRange()
+float CLuaBaseEntity::getMeleeRange(CLuaBaseEntity* target)
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -17008,48 +17007,14 @@ float CLuaBaseEntity::getMeleeRange()
         return 0;
     }
 
-    return PEntity->GetMeleeRange();
-}
-
-/************************************************************************
- *  Function: setMeleeRange()
- *  Purpose : Sets the maximum melee range for a mob
- *  Example : mob:setMeleeRange(12.0)
- *  Notes   : This affects the distance players can hit the mob from
- ************************************************************************/
-void CLuaBaseEntity::setMeleeRange(float range)
-{
-    // Only valid for mobs
-    if (m_PBaseEntity->objtype != TYPE_MOB)
+    auto* PTarget = dynamic_cast<CBattleEntity*>(target->m_PBaseEntity);
+    if (!PTarget)
     {
-        ShowWarning("Attempt to set melee range for non-mob entity (%s).", m_PBaseEntity->getName());
-        return;
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return 0;
     }
 
-    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
-
-    // Ensure that the cast to MobEntity worked properly and we dont have a NULL PTR
-    if (!PMob)
-    {
-        ShowWarning("Error casting to CMobEntity in CLuaBaseEntity::setMeleeRange()");
-        return;
-    }
-
-    // Account for zero/negative values and set to default melee range value
-    if (range < 3.0f)
-    {
-        range = 3.0f;
-    }
-    else
-    {
-        // Ensure that the range has a precision of .1
-        range = ((float)((int)(range * 10))) / 10;
-    }
-
-    // Update the melee range
-    PMob->m_ModelRadius = range;
-
-    return;
+    return PEntity->GetMeleeRange(PTarget);
 }
 
 /************************************************************************
@@ -18265,6 +18230,18 @@ void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) co
 {
     CBattleEntity* PTarget{ nullptr };
 
+    // Don't queue an ability if we're not in auto attack state or no state
+    if (!m_PBaseEntity->PAI->IsCurrentState<CAttackState>() && !m_PBaseEntity->PAI->IsStateStackEmpty())
+    {
+        return;
+    }
+
+    // Don't queue an ability if we are unable to act
+    if (auto PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity); PBattleEntity && PBattleEntity->StatusEffectContainer->HasPreventActionEffect())
+    {
+        return;
+    }
+
     if (!battleutils::GetPetSkill(skillId))
     {
         return;
@@ -18345,8 +18322,10 @@ bool CLuaBaseEntity::hasTPMoves()
 /************************************************************************
  *  Function: drawIn()
  *  Purpose : Draws in the target, or current target if not specified
- *  Example : mob:drawIn()     mob:drawIn(player)
+ *  Example : mob:drawIn()     mob:drawIn(player, 0, 0, {x=100, y=0, z=200, rot=64})
  *  Notes   : Draws in a player even if within the draw-in leash
+ *            Optional 4th parameter: custom position table to draw to (instead of mob position)
+ *  TODO    : Cleanup and centralize all draw-in functions
  ************************************************************************/
 void CLuaBaseEntity::drawIn(const sol::variadic_args& va) const
 {
@@ -18374,6 +18353,7 @@ void CLuaBaseEntity::drawIn(const sol::variadic_args& va) const
     const CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(0);
     const float           offset         = va.get<float>(1);
     const float           degrees        = va.get<float>(2);
+    const sol::object     customPosObj   = va.get<sol::object>(3);
 
     if (!PLuaBaseEntity)
     {
@@ -18391,7 +18371,19 @@ void CLuaBaseEntity::drawIn(const sol::variadic_args& va) const
 
     if (PTarget)
     {
-        battleutils::DrawIn(PTarget, mobObj->loc.p, offset, degrees);
+        position_t drawInPos = mobObj->loc.p;
+
+        // If a custom position table is provided, use it instead of mob's position
+        if (customPosObj.valid() && customPosObj.is<sol::table>())
+        {
+            sol::table posTable = customPosObj.as<sol::table>();
+            drawInPos.x         = posTable.get_or("x", mobObj->loc.p.x);
+            drawInPos.y         = posTable.get_or("y", mobObj->loc.p.y);
+            drawInPos.z         = posTable.get_or("z", mobObj->loc.p.z);
+            drawInPos.rotation  = posTable.get_or("rot", mobObj->loc.p.rotation);
+        }
+
+        battleutils::DrawIn(PTarget, drawInPos, offset, degrees);
     }
 }
 
@@ -20135,7 +20127,6 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getModelSize", CLuaBaseEntity::getModelSize);
     SOL_REGISTER("getMeleeRange", CLuaBaseEntity::getMeleeRange);
-    SOL_REGISTER("setMeleeRange", CLuaBaseEntity::setMeleeRange);
     SOL_REGISTER("setMobFlags", CLuaBaseEntity::setMobFlags);
     SOL_REGISTER("getMobFlags", CLuaBaseEntity::getMobFlags);
     SOL_REGISTER("setNpcFlags", CLuaBaseEntity::setNpcFlags);

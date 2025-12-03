@@ -53,21 +53,21 @@ auto ConnectApplication::createEngine() -> std::unique_ptr<Engine>
 
 void ConnectApplication::registerCommands(ConsoleService& console)
 {
-    // clang-format off
-    console.registerCommand("stats", "Print server runtime statistics",
-    [](std::vector<std::string>& inputs)
-    {
-        const size_t uniqueIPs = loginHelpers::getAuthenticatedSessions().size();
-        size_t uniqueAccounts  = 0;
-
-        for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
+    console.registerCommand(
+        "stats",
+        "Print server runtime statistics",
+        [](std::vector<std::string>& inputs)
         {
-            uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
-        }
+            const size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
+            size_t       uniqueAccounts = 0;
 
-        ShowInfo("Serving %u IP addresses with %u accounts", uniqueIPs, uniqueAccounts);
-    });
-    // clang-format on
+            for (auto& ipAddrMap : loginHelpers::getAuthenticatedSessions())
+            {
+                uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
+            }
+
+            ShowInfo("Serving %u IP addresses with %u accounts", uniqueIPs, uniqueAccounts);
+        });
 }
 
 void ConnectApplication::requestExit()

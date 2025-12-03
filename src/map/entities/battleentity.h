@@ -378,16 +378,16 @@ public:
     void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
     uint8 UpdateSpeed(bool run = false) override;
 
-    uint32 GetWeaponDelay(bool tp);              // returns delay of combined weapons
-    float  GetMeleeRange() const;                // returns the distance considered to be within melee range of the entity
-    int16  GetRangedWeaponDelay(bool forTPCalc); // returns delay of ranged weapon + ammo where applicable
-    int16  GetAmmoDelay();                       // returns delay of ammo (for cooldown between shots)
-    uint16 GetMainWeaponDmg();                   // returns total main hand DMG
-    uint16 GetSubWeaponDmg();                    // returns total sub weapon DMG
-    uint16 GetRangedWeaponDmg();                 // returns total ranged weapon DMG
-    uint16 GetMainWeaponRank();                  // returns total main hand DMG Rank
-    uint16 GetSubWeaponRank();                   // returns total sub weapon DMG Rank
-    uint16 GetRangedWeaponRank();                // returns total ranged weapon DMG Rank
+    uint32 GetWeaponDelay(bool tp);                          // returns delay of combined weapons
+    float  GetMeleeRange(const CBattleEntity* Target) const; // returns the distance considered to be within melee range of the entity
+    int16  GetRangedWeaponDelay(bool forTPCalc);             // returns delay of ranged weapon + ammo where applicable
+    int16  GetAmmoDelay();                                   // returns delay of ammo (for cooldown between shots)
+    uint16 GetMainWeaponDmg();                               // returns total main hand DMG
+    uint16 GetSubWeaponDmg();                                // returns total sub weapon DMG
+    uint16 GetRangedWeaponDmg();                             // returns total ranged weapon DMG
+    uint16 GetMainWeaponRank();                              // returns total main hand DMG Rank
+    uint16 GetSubWeaponRank();                               // returns total sub weapon DMG Rank
+    uint16 GetRangedWeaponRank();                            // returns total ranged weapon DMG Rank
 
     uint16 GetSkill(uint16 SkillID); // the current value of the skill (not the maximum, but limited by the level)
 

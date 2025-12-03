@@ -66,68 +66,72 @@ end
 
 ---@param attacker CBaseEntity
 ---@param target CBaseEntity
----@param bonus number
----@param slot xi.attackAnimation
 ---@param isWeaponskill boolean
----@return number
-xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus, slot, isWeaponskill)
-    local flourishEffect             = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
-    local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(attacker)
-    local hitRateCap                 = xi.combat.physicalHitRate.getPhysicalHitRateCap(attacker, slot)
+---@return number, number
+xi.combat.physicalHitRate.getHitRateModifiers = function(attacker, target, isWeaponskill, isRanged)
+    local accBonus = 0
+    local evaBonus = 0
 
+    -- Melee only
+    if not isRanged then
+        local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+
+        if
+            isWeaponskill and
+            flourishEffect ~= nil and
+            flourishEffect:getPower() >= 1
+        then -- 1 or more Finishing moves used.
+            accBonus = 40 + flourishEffect:getSubPower() * 2
+        end
+
+        if
+            attacker:hasStatusEffect(xi.effect.INNIN) and
+            attacker:isBehind(target, 23) -- angle needs confirmation
+        then
+            -- Innin acc boost if attacker is behind target
+            accBonus = accBonus + attacker:getStatusEffect(xi.effect.INNIN):getPower()
+        end
+
+        -- Yonin reduces your accuracy regardless of position
+        if attacker:hasStatusEffect(xi.effect.YONIN) then
+            accBonus = accBonus - attacker:getStatusEffect(xi.effect.YONIN):getPower()
+        end
+
+        if attacker:isPC() and attacker:isFacing(target) then
+            accBonus = accBonus + attacker:getMerit(xi.merit.CLOSED_POSITION)
+        end
+    end
+
+    -- Description calls out both melee and ranged
+    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
+        accBonus = accBonus + attacker:getMerit(xi.merit.AMBUSH)
+    end
+
+    -- Yonin evasion is likely agnostic to ranged or melee but needs confirmation
     if
-        isWeaponskill and
-        flourishEffect ~= nil and
-        flourishEffect:getPower() >= 1
-    then -- 1 or more Finishing moves used.
-        attacker:addMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
+        attacker:hasStatusEffect(xi.effect.YONIN) and
+        attacker:isFacing(target, 64) -- angle needs confirmation
+    then
+        evaBonus = evaBonus + attacker:getStatusEffect(xi.effect.YONIN):getPower()
+    end
+
+    -- target modifiers
+    if target:isPC() and target:isFacing(attacker) then
+        evaBonus = evaBonus + target:getMerit(xi.merit.CLOSED_POSITION)
     end
 
     -- TODO: realtime flash penalty
-    local acc = attacker:getACC(slot) -- TODO: clamp slot for 0, 1, 2 (mainhand, offhand, kick)
-    local eva = target:getEVA()
 
-    if
-        isWeaponskill and
-        flourishEffect ~= nil and
-        flourishEffect:getPower() >= 1
-    then -- 1 or more Finishing moves used.
-        attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
-    end
+    return accBonus, evaBonus
+end
 
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if
-        attacker:hasStatusEffect(xi.effect.INNIN) and
-        attacker:isBehind(target, 23)
-    then
-        -- Innin acc boost if attacker is behind target
-        bonus = bonus + attacker:getStatusEffect(xi.effect.INNIN):getPower()
-    end
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        attacker:isFacing(target, 23)
-    then
-        -- Yonin evasion boost if attacker is facing target
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    if attacker:isPC() and attacker:isFacing(target) then
-        bonus = bonus + attacker:getMerit(xi.merit.CLOSED_POSITION)
-    end
-
-    if target:isPC() and target:isFacing(attacker) then
-        eva = eva + target:getMerit(xi.merit.CLOSED_POSITION)
-    end
-
-    acc = acc + bonus
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param acc number
+---@param eva number
+---@return number
+local function accuracyAndEvasionToHitRate(attacker, target, acc, eva)
+    local shouldApplyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(attacker)
 
     if shouldApplyLevelCorrection then
         local dlvl = attacker:getMainLvl() - target:getMainLvl()
@@ -150,8 +154,67 @@ xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus,
     local hitdiff = (acc - eva) / 2
     local hitrate = (75 + hitdiff) / 100
 
-    -- Applying hitrate caps
+    return hitrate
+end
+
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@param slot xi.attackAnimation
+---@param isWeaponskill boolean
+---@return number
+xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus, slot, isWeaponskill)
+    local hitRateCap = xi.combat.physicalHitRate.getPhysicalHitRateCap(attacker, slot)
+
+    local acc = attacker:getACC(slot) -- TODO: clamp slot for 0, 1, 2 (mainhand, offhand, kick)
+    local eva = target:getEVA()
+
+    local accBonus, evaBonus = xi.combat.physicalHitRate.getHitRateModifiers(attacker, target, isWeaponskill, false)
+
+    if bonus == nil then
+        bonus = 0
+    end
+
+    acc = acc + bonus + accBonus
+    eva = eva + evaBonus
+
+    local hitrate = accuracyAndEvasionToHitRate(attacker, target, acc, eva)
+
+    -- Apply hitrate caps
     hitrate = utils.clamp(hitrate, 0.2, hitRateCap)
+
+    return hitrate
+end
+
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@param isWeaponskill boolean
+---@return number
+xi.combat.physicalHitRate.getRangedHitRate = function(attacker, target, bonus, isWeaponskill)
+    local distance = attacker:checkDistance(target)
+
+    -- special case
+    if distance > 25 then
+        return 0
+    end
+
+    local acc = attacker:getRACC()
+    local eva = target:getEVA()
+
+    local accBonus, evaBonus = xi.combat.physicalHitRate.getHitRateModifiers(attacker, target, isWeaponskill, true)
+
+    if bonus == nil then
+        bonus = 0
+    end
+
+    acc = acc + bonus + accBonus - xi.combat.ranged.accuracyDistancePenalty(attacker, target)
+    eva = eva + evaBonus
+
+    local hitrate = accuracyAndEvasionToHitRate(attacker, target, acc, eva)
+
+    -- Apply hitrate caps
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
 end

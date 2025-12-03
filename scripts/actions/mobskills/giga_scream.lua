@@ -6,7 +6,6 @@
 -- Can be dispelled: N/A
 -- Utsusemi/Blink absorb: 3 shadows
 -- Range: Melee
--- Notes: Used by some notorious monsters in place of Triple Attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

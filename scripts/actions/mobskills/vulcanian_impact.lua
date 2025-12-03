@@ -1,5 +1,8 @@
------------------------------------
 -- Vulcanian Impact
+-- Description : Deals fire damage to a single target.
+-- Utsusemi/Blink absorb: Ignores Shadows
+-- Range: Melee
+-- Vulcanian Impact is only used by small or medium bombs.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,18 +12,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local targetHP  = target:getHP()
-    local targetHPP = math.floor(target:getMaxHP() / 10)
-    local dmg       = 0
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.FIRE, 4, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    if targetHP >= targetHPP then
-        dmg = targetHP - targetHPP
-    end
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE, { breakBind = false })
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
-
-    return dmg
+    return damage
 end
 
 return mobskillObject

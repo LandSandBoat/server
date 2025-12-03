@@ -177,11 +177,13 @@ xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck = function(player, targe
     end
 
     -- player out of range of luopan
+    -- TODO: Luopan hitbox + player hitbox
     if player:checkDistance(pet) > ability:getRange() then
         return xi.msg.basic.TARG_OUT_OF_RANGE_2, 0
     end
 
     -- target out of range of luopan
+    -- TODO: Luopan hitbox + target hitbox
     if target:checkDistance(pet) > ability:getRange() then
         return xi.msg.basic.TARG_OUT_OF_RANGE_2, pet:getTargID()
     end

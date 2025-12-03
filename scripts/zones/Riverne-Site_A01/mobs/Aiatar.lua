@@ -16,6 +16,10 @@ entity.phList =
     [ID.mob.AIATAR - 1] = ID.mob.AIATAR,
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.mob.updateNMSpawnPoint(mob)
 end

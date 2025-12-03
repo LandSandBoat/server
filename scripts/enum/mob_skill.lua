@@ -49,6 +49,8 @@ xi.mobSkill =
 
     SOMERSAULT_1             =  318,
 
+    BAD_BREATH_1             =  319,
+
     DRILL_BRANCH             =  328,
     PINECONE_BOMB            =  329,
 
@@ -101,6 +103,10 @@ xi.mobSkill =
     SANDSPIN                 =  426,
 
     GLOEOSUCCUS              =  436,
+    DEATH_RAY                =  437,
+    HEX_EYE                  =  438,
+    PETRO_GAZE               =  439,
+    CATHARSIS                =  440,
 
     MICROQUAKE               =  441, -- Mammet-800
 
@@ -134,6 +140,11 @@ xi.mobSkill =
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
+    CAMISADO_1               =  544,
+    NOCTOSHIELD_1            =  546,
+    ULTIMATE_TERROR_1        =  547,
+    NIGHTMARE_1              =  558,
+
     SLING_BOMB_1             =  567,
     FORMATION_ATTACK_1       =  568,
     REFUELING_1              =  569,
@@ -144,8 +155,22 @@ xi.mobSkill =
     SELF_DESTRUCT_2_DEATH    =  574,
     SELF_DESTRUCT_1_DEATH    =  575,
 
+    BACK_HEEL_1              =  576,
+    JETTATURA_1              =  577,
+    NIHILITY_SONG_1          =  578,
+    CHOKE_BREATH_1           =  579,
+    FANTOD_1                 =  580,
+
     BLOW                     =  581,
     BLANK_GAZE               =  586,
+
+    BOMB_TOSS_1              =  591,
+
+    BERSERK_BOMB_BIG         =  593, -- Big Bomb / Friars Lantern
+    VULCANIAN_IMPACT         =  594, -- Big Bomb / Friars Lantern
+    HEAT_WAVE                =  595, -- Big Bomb / Friars Lantern
+    HELLSTORM                =  596, -- Big Bomb / Friars Lantern
+    SELF_DESTRUCT_BOMB_BIG   =  597, -- Big Bomb / Friars Lantern
 
     SWEEP                    =  620,
 
@@ -277,6 +302,12 @@ xi.mobSkill =
 
     HOWL                     = 1062,
 
+    FRYPAN_1                 = 1081,
+    SMOKEBOMB_1              = 1082,
+
+    GOBLIN_DICE_HEAL         = 1099,
+    GOBLIN_DICE_RESET        = 1109,
+
     RANGED_ATTACK_3          = 1154,
 
     SUBSONICS_1              = 1155,
@@ -334,6 +365,8 @@ xi.mobSkill =
     IMPALEMENT               = 1274,
     EMPTY_THRASH             = 1275,
     PROMYVION_BRUME_2        = 1276,
+
+    HOOF_VOLLEY              = 1330,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
 

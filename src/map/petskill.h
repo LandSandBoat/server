@@ -75,6 +75,7 @@ public:
     void setAnimationID(uint16 aid);
     void setMobSkillID(uint16 skillID);
     void setAoe(uint8 aoe);
+    void setRadius(uint8 radius);
     void setDistance(float distance);
     void setFlag(uint8 flag);
     void setAnimationTime(timer::duration AnimationTime);
@@ -105,6 +106,7 @@ private:
     uint16          m_MobSkillID; // mobskill id for jug petskill packet to use instead of JA ability ID
     std::string     m_name;
     uint8           m_Aoe;
+    uint8           m_Radius{ 0 };
     float           m_Distance;
     timer::duration m_AnimationTime;  // how long the tp animation lasts
     timer::duration m_ActivationTime; // how long the pet prepares the tp move for

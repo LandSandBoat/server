@@ -1119,7 +1119,7 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
     auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
     if (skill_list_id)
     {
-        auto attack_range{ GetMeleeRange() };
+        auto attack_range{ GetMeleeRange(PTarget) };
         auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
 
         if (!skillList.empty())
@@ -1127,13 +1127,13 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
             auto* skill{ battleutils::GetMobSkill(skillList.front()) };
             if (skill)
             {
-                attack_range = (uint8)skill->getDistance();
+                attack_range = modelHitboxSize + skill->getDistance() + PTarget->modelHitboxSize;
             }
         }
 
         bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
         float distanceFromTarget = distance(loc.p, PTarget->loc.p);
-        bool  tooFar             = (distanceFromTarget - PTarget->m_ModelRadius) > attack_range;
+        bool  tooFar             = distanceFromTarget > attack_range;
 
         return !tooFar && autoAttackEnabled;
     }

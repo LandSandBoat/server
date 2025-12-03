@@ -20,17 +20,13 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.INT, 1)
-    target:addMod(xi.mod.FOOD_MPP, 10)
-    target:addMod(xi.mod.FOOD_MP_CAP, 80)
-    target:addMod(xi.mod.AGI, -1)
+    effect:addMod(xi.mod.INT, 1)
+    effect:addMod(xi.mod.FOOD_MPP, 10)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 80)
+    effect:addMod(xi.mod.AGI, -1)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.INT, 1)
-    target:delMod(xi.mod.FOOD_MPP, 10)
-    target:delMod(xi.mod.FOOD_MP_CAP, 80)
-    target:delMod(xi.mod.AGI, -1)
 end
 
 return itemObject

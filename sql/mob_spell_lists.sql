@@ -2906,7 +2906,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Nosferatu',293,277,1,255); -- dread_spike
 INSERT INTO `mob_spell_lists` VALUES ('Honor',294,356,1,255); -- paralyga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Honor',294,359,1,255); -- silencega (1~255)
 
--- Bomb_Queen (295)
+-- Bomb_Queen / Big Bomb / Friars Lantern (295)
 INSERT INTO `mob_spell_lists` VALUES ('Bomb_Queen',295,100,24,255); -- enfire (24~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bomb_Queen',295,147,73,85);  -- fire_iv (73~85)
 INSERT INTO `mob_spell_lists` VALUES ('Bomb_Queen',295,176,69,255); -- firaga_iii (69~255)

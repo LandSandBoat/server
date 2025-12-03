@@ -561,7 +561,7 @@ local additionalEffects =
     {
         chance      = 25,
         ele         = xi.element.WIND,
-        sub         = xi.subEffect.BLIND, -- TODO
+        sub         = xi.subEffect.ATTACK_DOWN,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
         eff         = xi.effect.WEIGHT,
@@ -781,12 +781,13 @@ xi.mob.diff = xi.mob.difficulty
 xi.mob.callPets = function(mob, petIds, params)
     params = params or {}
     -- params table:
-    --      params.dieWithOwner: will kill pets immediately if owner dies
-    --      params.superLink:    mob will assist pet (pet will always assist mob)
-    --      params.maxSpawns:    stop if this many pets get spawned
-    --      params.ignoreBusy:   allow pets to get summoned even if owner is busy, interupting any action it was performing
-    --      params.noAnimation:  no animation packet from owner when calling pet
-    --      params.inactiveTime: how long for the call pet to take (owner will be inactive during period)
+    --      params.dieWithOwner:   will kill pets immediately if owner dies
+    --      params.persistOnDeath: pets persist when owner dies/disengages (default: false)
+    --      params.superLink:      mob will assist pet (pet will always assist mob)
+    --      params.maxSpawns:      stop if this many pets get spawned
+    --      params.ignoreBusy:     allow pets to get summoned even if owner is busy, interupting any action it was performing
+    --      params.noAnimation:    no animation packet from owner when calling pet
+    --      params.inactiveTime:   how long for the call pet to take (owner will be inactive during period)
     --          this implies using summoner start/stop entity animation packet (which most mobs use when calling either pets or additional helpers)
     -- if inactiveTime is zero, the following will determine an action packet to signal the mob is calling a pet
     --      params.callPetJob will map to a particular mobskill action packet
@@ -947,17 +948,49 @@ xi.mob.callPets = function(mob, petIds, params)
                 local ownerID = mobArg:getID()
                 petToSummon:stun(500)
                 if petToSummon ~= mobArg:getPet() then
-                    petToSummon:addListener('ROAM_TICK', 'ASSIST_OWNER', function(petArg)
-                        local owner = GetMobByID(ownerID)
-                        local newtarget = owner and owner:getTarget() or nil
-                        if newtarget then
-                            petArg:updateEnmity(newtarget)
-                        elseif owner and owner:isDead() then
-                            petArg:setHP(0)
-                        elseif not petArg:hasFollowTarget() then
-                            petArg:follow(owner, xi.followType.ROAM)
-                        end
-                    end)
+                    local persistOnDeath = params.persistOnDeath or false
+                    if persistOnDeath then
+                        petToSummon:addListener('ROAM_TICK', 'ASSIST_OWNER', function(petArg)
+                            local owner = GetMobByID(ownerID)
+                            if not owner then
+                                return
+                            end
+
+                            local newTarget = owner:getTarget() or nil
+                            if newTarget then
+                                petArg:updateEnmity(newTarget)
+                                return
+                            end
+
+                            if owner:isAlive() and not petArg:hasFollowTarget() then
+                                petArg:follow(owner, xi.followType.ROAM)
+                                return
+                            end
+                        end)
+                    else
+                        petToSummon:addListener('ROAM_TICK', 'ASSIST_OWNER', function(petArg)
+                            local owner = GetMobByID(ownerID)
+                            if not owner then
+                                return
+                            end
+
+                            local newTarget = owner:getTarget() or nil
+                            if newTarget then
+                                petArg:updateEnmity(newTarget)
+                                return
+                            end
+
+                            if owner:isDead() then
+                                petArg:setHP(0)
+                                return
+                            end
+
+                            if not petArg:hasFollowTarget() then
+                                petArg:follow(owner, xi.followType.ROAM)
+                                return
+                            end
+                        end)
+                    end
 
                     -- so we don't wait for the next roam tick (pet assists as soon as :stun is complete)
                     petToSummon:queue(0, function(petArg)

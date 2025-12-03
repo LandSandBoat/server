@@ -1,6 +1,6 @@
 -----------------------------------
 -- ID: 5761
--- Item: kohlrouladen
+-- Item: kohlrouladen +1
 -- Food Effect: 4hr, All Races
 -----------------------------------
 -- Strength 4
@@ -23,27 +23,18 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.STR, 4)
-    target:addMod(xi.mod.AGI, 4)
-    target:addMod(xi.mod.INT, -4)
-    target:addMod(xi.mod.FOOD_RACCP, 10)
-    target:addMod(xi.mod.FOOD_RACC_CAP, 65)
-    target:addMod(xi.mod.FOOD_RATTP, 16)
-    target:addMod(xi.mod.FOOD_RATT_CAP, 70)
-    target:addMod(xi.mod.ENMITY, -5)
-    target:addMod(xi.mod.SUBTLE_BLOW, 6)
+    effect:addMod(xi.mod.STR, 4)
+    effect:addMod(xi.mod.AGI, 4)
+    effect:addMod(xi.mod.INT, -4)
+    effect:addMod(xi.mod.FOOD_RACCP, 10)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 65)
+    effect:addMod(xi.mod.FOOD_RATTP, 16)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 70)
+    effect:addMod(xi.mod.ENMITY, -5)
+    effect:addMod(xi.mod.SUBTLE_BLOW, 6)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.STR, 4)
-    target:delMod(xi.mod.AGI, 4)
-    target:delMod(xi.mod.INT, -4)
-    target:delMod(xi.mod.FOOD_RACCP, 10)
-    target:delMod(xi.mod.FOOD_RACC_CAP, 65)
-    target:delMod(xi.mod.FOOD_RATTP, 16)
-    target:delMod(xi.mod.FOOD_RATT_CAP, 70)
-    target:delMod(xi.mod.ENMITY, -5)
-    target:delMod(xi.mod.SUBTLE_BLOW, 6)
 end
 
 return itemObject

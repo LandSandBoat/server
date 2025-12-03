@@ -21,13 +21,12 @@ itemObject.onItemUse = function(target)
     end
 end
 
-itemObject.onEffectGain = function(target)
+itemObject.onEffectGain = function(target, effect)
     -- **Power needs validation**
-    target:addMod(xi.mod.CONSERVE_MP, 10)
+    effect:addMod(xi.mod.CONSERVE_MP, 10)
 end
 
-itemObject.onEffectLose = function(target)
-    target:delMod(xi.mod.CONSERVE_MP, 10)
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject

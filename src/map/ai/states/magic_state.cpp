@@ -362,10 +362,23 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         return false;
     }
 
-    if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
+    if (m_PEntity->objtype == TYPE_PC)
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
-        return false;
+        float spellRange = m_PSpell->getRange() + PTarget->modelHitboxSize + m_PEntity->modelHitboxSize;
+
+        // Entrust has a 25 yalm range for Indi spells (not affected by hitboxes)
+        const auto spellFamily = m_PSpell->getSpellFamily();
+        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) &&
+            (spellFamily == SPELLFAMILY_INDI_BUFF || spellFamily == SPELLFAMILY_INDI_DEBUFF))
+        {
+            spellRange = 25.0f;
+        }
+
+        if (distance(m_PEntity->loc.p, PTarget->loc.p) > spellRange)
+        {
+            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
+            return false;
+        }
     }
 
     if (dynamic_cast<CMobEntity*>(m_PEntity))

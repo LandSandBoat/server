@@ -436,6 +436,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                    "mob_family_system.charmable, "
+                                   "mob_pools.modelSize, mob_pools.modelHitboxSize, "
                                    "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
                                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
@@ -587,9 +588,11 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
                             PMob->m_Pool = rset->get<uint32>("poolid");
 
-                            PMob->allegiance = rset->get<ALLEGIANCE_TYPE>("allegiance");
-                            PMob->namevis    = rset->get<uint8>("namevis");
-                            PMob->m_Aggro    = rset->get<bool>("aggro");
+                            PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+                            PMob->namevis         = rset->get<uint8>("namevis");
+                            PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+                            PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
+                            PMob->m_Aggro         = rset->get<bool>("aggro");
 
                             PMob->m_roamFlags    = rset->get<uint16>("roamflag");
                             PMob->m_MobSkillList = rset->get<uint16>("skill_list_id");
@@ -667,7 +670,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 spawnGroup.second->fillSpawnPool();
                 if (!spawnGroup.second->isValid(PZone))
                 {
-                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_groups.sql.", spawnGroup.first));
+                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_sets.sql.", spawnGroup.first));
                 }
             }
 

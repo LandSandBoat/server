@@ -106,41 +106,12 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     return numHits
 end
 
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@return number
 xi.weaponskills.getRangedHitRate = function(attacker, target, bonus)
-    local acc = attacker:getRACC()
-    local eva = target:getEVA()
-
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        target:isFacing(attacker, 23)
-    then
-        -- Yonin evasion boost if defender is facing attacker
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    if attacker:getMainLvl() > target:getMainLvl() then     -- acc bonus
-        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty
-        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
-    end
-
-    local hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
-    local hitrate = (75 + hitdiff) / 100
-
-    -- Applying hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    return xi.combat.physicalHitRate.getRangedHitRate(attacker, target, bonus, true)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done

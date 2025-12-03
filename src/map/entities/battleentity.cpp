@@ -34,7 +34,6 @@
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
@@ -539,9 +538,9 @@ uint32 CBattleEntity::GetWeaponDelay(bool tp)
     return finalDelay;
 }
 
-float CBattleEntity::GetMeleeRange() const
+float CBattleEntity::GetMeleeRange(const CBattleEntity* target) const
 {
-    return m_ModelRadius + 3.0f;
+    return modelHitboxSize + 2.0f + target->modelHitboxSize;
 }
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool forTPCalc)
@@ -2641,7 +2640,7 @@ bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPack
 
     bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
     float distanceFromTarget = distance(loc.p, PTarget->loc.p);
-    bool  tooFar             = (distanceFromTarget - PTarget->m_ModelRadius) > GetMeleeRange();
+    bool  tooFar             = distanceFromTarget > GetMeleeRange(PTarget);
 
     return !tooFar && autoAttackEnabled;
 }
@@ -3086,8 +3085,7 @@ void CBattleEntity::Tick(timer::time_point /*unused*/)
 void CBattleEntity::PostTick()
 {
     TracyZoneScoped;
-    if (health.hp == 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CRaiseState>() &&
-        !PAI->IsCurrentState<CDespawnState>())
+    if (health.hp <= 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CDespawnState>())
     {
         Die();
     }

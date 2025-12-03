@@ -24,27 +24,18 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HPP, 17)
-    target:addMod(xi.mod.FOOD_HP_CAP, 130)
-    target:addMod(xi.mod.DEX, 3)
-    target:addMod(xi.mod.VIT, 2)
-    target:addMod(xi.mod.AGI, -1)
-    target:addMod(xi.mod.MND, -2)
-    target:addMod(xi.mod.CHR, -1)
-    target:addMod(xi.mod.DOUBLE_ATTACK, 1)
-    target:addMod(xi.mod.STORETP, 6)
+    effect:addMod(xi.mod.FOOD_HPP, 17)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 130)
+    effect:addMod(xi.mod.DEX, 3)
+    effect:addMod(xi.mod.VIT, 2)
+    effect:addMod(xi.mod.AGI, -1)
+    effect:addMod(xi.mod.MND, -2)
+    effect:addMod(xi.mod.CHR, -1)
+    effect:addMod(xi.mod.DOUBLE_ATTACK, 1)
+    effect:addMod(xi.mod.STORETP, 6)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HPP, 17)
-    target:delMod(xi.mod.FOOD_HP_CAP, 130)
-    target:delMod(xi.mod.DEX, 3)
-    target:delMod(xi.mod.VIT, 2)
-    target:delMod(xi.mod.AGI, -1)
-    target:delMod(xi.mod.MND, -2)
-    target:delMod(xi.mod.CHR, -1)
-    target:delMod(xi.mod.DOUBLE_ATTACK, 1)
-    target:delMod(xi.mod.STORETP, 6)
 end
 
 return itemObject

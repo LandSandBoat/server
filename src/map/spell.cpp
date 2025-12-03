@@ -480,7 +480,7 @@ std::map<uint16, uint16>          PMobSkillToBlueSpell; // maps the skill id (ke
 void LoadSpellList()
 {
     auto rset = db::preparedStmt("SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, "
-                                 "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range "
+                                 "AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range, radius "
                                  "FROM spell_list");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
@@ -528,12 +528,7 @@ void LoadSpellList()
         PSpell->setContentTag(rset->getOrDefault<std::string>("content_tag", ""));
 
         PSpell->setRange(rset->get<float>("spell_range") / 10);
-
-        if (PSpell->getAOE())
-        {
-            // default radius
-            PSpell->setRadius(10);
-        }
+        PSpell->setRadius(rset->get<float>("radius") / 10);
 
         PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
 

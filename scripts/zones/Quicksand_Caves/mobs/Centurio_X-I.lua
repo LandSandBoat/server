@@ -31,9 +31,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SILENCE_MEVA, 35)
-    mob:addMod(xi.mod.SLEEP_MEVA, 50)
-    mob:addMod(xi.mod.LULLABY_MEVA, 50)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
+
     mob:addMod(xi.mod.SPELLINTERRUPT, 25)
 end
 

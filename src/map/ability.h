@@ -709,6 +709,7 @@ public:
     timer::duration getCastTime();
     float           getRange() const;
     uint8           getAOE() const;
+    uint8           getRadius() const;
     uint16          getValidTarget() const;
     uint16          getAddType() const;
     auto            getMessage() const -> MSGBASIC_ID;
@@ -729,6 +730,7 @@ public:
     void setCastTime(timer::duration time);
     void setRange(float range);
     void setAOE(uint8 aoe);
+    void setRadius(uint8 radius);
     void setValidTarget(uint16 validTarget);
     void setAddType(uint16 addtype);
     void setMessage(uint16 message);
@@ -752,6 +754,7 @@ private:
     timer::duration m_castTime{};
     float           m_range;
     uint8           m_aoe;
+    uint8           m_radius{ 0 };
     uint16          m_validTarget;
     uint16          m_addType;
     uint16          m_message;

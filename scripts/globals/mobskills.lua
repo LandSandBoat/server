@@ -12,6 +12,7 @@ require('scripts/globals/spells/damage_spell')
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
 
+---@enum xi.mobskills.drainType
 xi.mobskills.drainType =
 {
     HP = 0,
@@ -20,6 +21,7 @@ xi.mobskills.drainType =
 }
 
 -- Shadow Behavior (Number of shadows to remove)
+---@enum xi.mobskills.shadowBehavior
 xi.mobskills.shadowBehavior =
 {
     IGNORE_SHADOWS = 0,
@@ -30,6 +32,7 @@ xi.mobskills.shadowBehavior =
     WIPE_SHADOWS   = 999,
 }
 
+---@enum xi.mobskills.physicalTpBonus
 xi.mobskills.physicalTpBonus =
 {
     NO_EFFECT   = 0,
@@ -39,6 +42,7 @@ xi.mobskills.physicalTpBonus =
     CRIT_VARIES = 4, -- Deprecated, pending removal from mob skills
 }
 
+---@enum xi.mobskills.magicalTpBonus
 xi.mobskills.magicalTpBonus =
 {
     NO_EFFECT  = 0,
@@ -93,6 +97,18 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
+---@param mob CBaseEntity
+---@param target CBaseEntity
+---@param skill CPetSkill|CMobSkill
+---@param numberofhits number
+---@param accmod number?
+---@param ftp number
+---@param tpEffect xi.mobskills.physicalTpBonus?
+---@param mtp000 number?
+---@param mtp150 number?
+---@param mtp300 number?
+---@param params physicalMobSkillParam?
+---@return physicalMobSkillRetVal
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, ftp, tpEffect, mtp000, mtp150, mtp300, params)
     -- TODO: Replace this with ranged attack code
     params = params or {}
@@ -101,6 +117,13 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, 
 end
 
 -- helper function to handle a single hit and check for parrying, guarding, and blocking
+---@param mob CBaseEntity
+---@param target CBaseEntity
+---@param hitdamage number
+---@param hitslanded number
+---@param finaldmg number
+---@param params physicalMobSkillHitParams
+---@return integer, integer, boolean
 local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, finaldmg, params)
     -- Determine if this hit is critical
     -- TODO: Remove CRIT_VARIES from existing mob skills and replace with params.canCrit
@@ -130,18 +153,26 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
         not xi.combat.physical.isGuarded(target, mob))
     then
         -- also handle blocking
-        local isBlockedWithShieldMastery = false
-        if xi.combat.physical.isBlocked(target, mob) then
+        local blockedWithShieldMastery = false
+
+        -- TODO: we took damage, so handle stoneskin and phalanx here
+        -- TODO: apply PDT/DT/damage resistance/absorption here
+
+        -- What is the correct order of operations for SS, Phalanx and Block reduction?
+        if not params.isRanged and xi.combat.physical.isBlocked(target, mob) then
             hitdamage = hitdamage - xi.combat.physical.getDamageReductionForBlock(target, mob, hitdamage)
 
             if target:hasTrait(xi.trait.SHIELD_MASTERY) then
-                isBlockedWithShieldMastery = true
+                blockedWithShieldMastery = true
             end
         end
 
+        -- Reduce HP of target
+
+        -- if this individual hit landed and > 0 damage was taken, try to interrupt
         if
             hitdamage > 0 and
-            not isBlockedWithShieldMastery and
+            not blockedWithShieldMastery and
             not params.isRanged
         then
             target:tryHitInterrupt(mob)
@@ -155,6 +186,16 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
     return hitslanded, finaldmg, isCritical
 end
 
+-- input to xi.mobskills.mobPhysicalMove
+---@alias physicalMobSkillParam { canCrit: boolean?, isCannonball: boolean?, isRanged: boolean?}
+
+-- return value of xi.mobskills.mobPhysicalMove
+---@alias physicalMobSkillRetVal { dmg: number, hitslanded: number, isCritical: boolean}
+
+-- passed to handleSinglePhysicalHit inside xi.mobskills.mobPhysicalMove
+---@alias physicalMobSkillHitParams { canCrit: boolean, tpEffect: xi.mobskills.physicalTpBonus, weaponType: xi.skill, attMod: number, applyLevelCorrection: boolean, isCannonball: boolean, isRanged: boolean}
+
+-- TODO: accMod currently does nothing
 -----------------------------------
 -- Mob Physical Abilities
 -- accMod     : linear multiplier for accuracy (1 default)
@@ -162,9 +203,26 @@ end
 -- tpEffect   : Defined in xi.mobskills.physicalTpBonus
 -- params     : optional table for additional parameters { canCrit = true, isCannonball = true, isRanged = true }
 -----------------------------------
+---@param mob CBaseEntity
+---@param target CBaseEntity
+---@param skill CPetSkill|CMobSkill
+---@param numHits number
+---@param accMod number?
+---@param ftp number
+---@param tpEffect xi.mobskills.physicalTpBonus?
+---@param mtp000 number?
+---@param mtp150 number?
+---@param mtp300 number?
+---@param params physicalMobSkillParam?
+---@return physicalMobSkillRetVal
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp, tpEffect, mtp000, mtp150, mtp300, params)
-    local returninfo = {}
     params           = params or {}
+    local returninfo =
+    {
+        dmg = 0,
+        hitslanded = 0,
+        isCritical = false,
+    }
 
     -- mobs use fSTR (but with special calculation in the called function)
     local fSTR = xi.combat.physical.calculateMeleeStatFactor(mob, target)
@@ -220,6 +278,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
     local firstHitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1 + firstHitBonus, xi.attackAnimation.RIGHT_ATTACK, false)
     local hitrate        = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, targetSpecialAttackEvasion * -1, xi.attackAnimation.RIGHT_ATTACK, false)
 
+    -- TODO: handle Blink/Utsusemi/PD/etc
     if math.random() <= firstHitChance then
         local isCritical = false
         -- use helper function check for parry guard and blocking and handle the hit
@@ -228,6 +287,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         hitCrit = isCritical or hitCrit -- set crit flag, might be used in WS messaging
     end
 
+    -- TODO: handle Blink/Utsusemi/PD/etc
     while hitsdone < numHits do
         local isCritical = false
         if math.random() <= hitrate then --it hit
@@ -286,19 +346,29 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 300
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
+---@param actor CBaseEntity
+---@param target CBaseEntity
+---@param action CPetSkill|CMobSkill
+---@param baseDamage number
+---@param actionElement number
+---@param damageModifier number
+---@param tpEffect xi.mobskills.magicalTpBonus?
+---@param tpMultiplier number?
+---@return number
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier)
     local finalDamage = baseDamage
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        finalDamage = math.floor(finalDamage * action:getTP() * tpMultiplier / 1000)
+        local multiplier = tpMultiplier or 1000
+        finalDamage = math.floor(finalDamage * action:getTP() * multiplier / 1000)
     end
 
     -- Get bonus macc.
     local petAccBonus = 0
     if actor:isPet() and actor:getMaster() ~= nil then
         local master = actor:getMaster()
-        if actor:isAvatar() then
+        if master and actor:isAvatar() then
             petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(actor:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
 
@@ -478,7 +548,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         if damage == 0 then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
 
-            return shadowsToRemove
+            return 0
         end
 
     elseif shadowsToRemove == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- Remove all shadows

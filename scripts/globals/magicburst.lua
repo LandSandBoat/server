@@ -22,6 +22,9 @@ local matches = -- [element id][resonance id]
 }
 
 -- Returns a boolean if the spell's element matches the resonance given
+---@param ele number
+---@param resonance CStatusEffect
+---@return boolean
 local function doesSpellElementMatchResonance(ele, resonance)
     if ele == nil or utils.clamp(ele, 0, 12) ~= ele then
         return false
@@ -31,6 +34,9 @@ local function doesSpellElementMatchResonance(ele, resonance)
     return (isMatch ~= nil and isMatch > 0)
 end
 
+---@param element number
+---@param target CBaseEntity
+---@return number, number
 xi.magicburst.formMagicBurst = function(element, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
 

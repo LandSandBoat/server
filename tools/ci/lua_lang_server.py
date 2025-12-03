@@ -103,8 +103,8 @@ os_to_asset = {
     "Darwin": "darwin-x64.tar.gz",
 }
 
-# URL of the GitHub API for the latest release
-api_url = "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest"
+# URL of the GitHub API for this specific release (3.15.0)
+api_url = "https://api.github.com/repos/LuaLS/lua-language-server/releases/tags/3.15.0"
 
 response = requests.get(api_url)
 

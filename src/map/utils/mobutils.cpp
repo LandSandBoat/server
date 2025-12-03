@@ -1698,6 +1698,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
                                        "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
                                        "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects "
+                                       "mob_pools.modelSize, mob_pools.modelHitboxSize, "
                                        "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
                                        "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
@@ -1812,6 +1813,8 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
 
         PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
         PMob->namevis         = rset->get<uint8>("namevis");
+        PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+        PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
@@ -1871,6 +1874,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
                                        "mob_pools.familyid, name_prefix, entityFlags, animationsub, "
                                        "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
+                                       "mob_pools.modelSize, mob_pools.modelHitboxSize, "
                                        "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects "
                                        "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
@@ -1971,6 +1975,8 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
         PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
         PMob->namevis         = rset->get<uint8>("namevis");
+        PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+        PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");

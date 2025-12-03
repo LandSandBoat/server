@@ -11,7 +11,7 @@ entity.onMobFight = function(mob, target)
     {
         conditions =
         {
-            distance >= mob:getMeleeRange() and distance <= 20,
+            distance >= mob:getMeleeRange(target) and distance <= 20,
         },
         position = mob:getPos(),
     }

@@ -18,11 +18,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.ARCANA_KILLER, 20)
+    effect:addMod(xi.mod.ARCANA_KILLER, 20)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.ARCANA_KILLER, 20)
 end
 
 return itemObject

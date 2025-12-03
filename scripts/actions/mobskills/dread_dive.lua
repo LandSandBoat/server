@@ -5,7 +5,6 @@
 -- Type: Physical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
--- Notes: Used instead of Gliding Spike by certain notorious monsters.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

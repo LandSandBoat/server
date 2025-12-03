@@ -71,7 +71,6 @@ void LoadPetList()
                        "minLevel, "
                        "maxLevel, "
                        "time, "
-                       "mobradius, "
                        "ecosystemID, "
                        "mob_pools.familyid, "
                        "mob_pools.mJob, "
@@ -96,7 +95,8 @@ void LoadPetList()
                        "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                        "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
                        "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
-                       "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType "
+                       "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType, "
+                       "mob_pools.modelSize, mob_pools.modelHitboxSize "
                        "FROM pet_list, mob_pools, mob_resistances, mob_family_system "
                        "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
@@ -109,15 +109,16 @@ void LoadPetList()
         Pet->name.insert(0, rset->get<std::string>("name"));
         db::extractFromBlob(rset, "modelid", Pet->look);
 
-        Pet->minLevel  = rset->get<uint8>("minLevel");
-        Pet->maxLevel  = rset->get<uint8>("maxLevel");
-        Pet->time      = std::chrono::seconds(rset->get<uint32>("time"));
-        Pet->radius    = rset->get<uint8>("mobradius");
-        Pet->EcoSystem = rset->get<ECOSYSTEM>("ecosystemID");
-        Pet->m_Family  = rset->get<uint16>("familyid");
-        Pet->mJob      = rset->get<uint8>("mJob");
-        Pet->sJob      = rset->get<uint8>("sJob");
-        Pet->m_Element = rset->get<uint8>("element");
+        Pet->minLevel        = rset->get<uint8>("minLevel");
+        Pet->maxLevel        = rset->get<uint8>("maxLevel");
+        Pet->time            = std::chrono::seconds(rset->get<uint32>("time"));
+        Pet->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
+        Pet->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+        Pet->EcoSystem       = rset->get<ECOSYSTEM>("ecosystemID");
+        Pet->m_Family        = rset->get<uint16>("familyid");
+        Pet->mJob            = rset->get<uint8>("mJob");
+        Pet->sJob            = rset->get<uint8>("sJob");
+        Pet->m_Element       = rset->get<uint8>("element");
 
         Pet->HPscale = rset->get<float>("hp_scale");
         Pet->MPscale = rset->get<float>("mp_scale");
@@ -1861,9 +1862,10 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     }
 
     PPet->setSpawnLevel(PPet->GetMLevel());
-    PPet->status        = STATUS_TYPE::NORMAL;
-    PPet->m_ModelRadius = PPetData->radius;
-    PPet->m_EcoSystem   = PPetData->EcoSystem;
+    PPet->status          = STATUS_TYPE::NORMAL;
+    PPet->modelSize       = PPetData->modelSize;
+    PPet->modelHitboxSize = PPetData->modelHitboxSize;
+    PPet->m_EcoSystem     = PPetData->EcoSystem;
 
     if (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::JUG_PET)
     {

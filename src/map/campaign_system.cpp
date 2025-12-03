@@ -62,8 +62,8 @@ void LoadState()
         state                  = CState;
     }
 
-    // clang-format off
-        zoneutils::ForEachZone([&state](CZone* PZone)
+    zoneutils::ForEachZone(
+        [&state](CZone* PZone)
         {
             if (PZone->m_CampaignHandler != nullptr)
             {
@@ -102,15 +102,21 @@ void LoadState()
             }
         });
 
-        std::sort(state.regions.begin(), state.regions.end(), [](const CampaignRegion& a, const CampaignRegion& b) -> bool
+    std::sort(
+        state.regions.begin(),
+        state.regions.end(),
+        [](const CampaignRegion& a, const CampaignRegion& b) -> bool
         {
             if (a.campaignId < b.campaignId)
+            {
                 return true;
+            }
             if (a.campaignId > b.campaignId)
+            {
                 return false;
+            }
             return false;
         });
-    // clang-format on
 
     CState = state;
 }

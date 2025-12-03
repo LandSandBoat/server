@@ -45,7 +45,7 @@ bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
         case ConquestMessage::M2W_GM_ConquestUpdate:
         {
             // Trigger a full update of influence points
-            sendInfluencesMsg(true);
+            sendInfluencesMsg(ShouldUpdateZones::Yes);
             return true;
         }
         break;
@@ -80,7 +80,7 @@ void ConquestSystem::sendTallyStartMsg()
     });
 }
 
-void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones)
+void ConquestSystem::sendInfluencesMsg(ShouldUpdateZones shouldUpdateZones)
 {
     worldServer_.ipcServer_->broadcastMessage(ipc::ConquestEvent{
         .type    = ConquestMessage::W2M_BroadcastInfluencePoints,
@@ -179,12 +179,12 @@ void ConquestSystem::updateWeekConquest()
 
 void ConquestSystem::updateHourlyConquest()
 {
-    sendInfluencesMsg(true);
+    sendInfluencesMsg(ShouldUpdateZones::Yes);
 }
 
 void ConquestSystem::updateVanaHourlyConquest()
 {
-    sendInfluencesMsg(false);
+    sendInfluencesMsg(ShouldUpdateZones::No);
 }
 
 auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const

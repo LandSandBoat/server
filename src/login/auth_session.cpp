@@ -48,28 +48,27 @@ void auth_session::start()
 {
     if (socket_.lowest_layer().is_open())
     {
-        // clang-format off
-        socket_.async_handshake(asio::ssl::stream_base::server,
-        [this, self = shared_from_this()](std::error_code ec)
-        {
-            if (!ec)
+        socket_.async_handshake(
+            asio::ssl::stream_base::server,
+            [this, self = shared_from_this()](std::error_code ec)
             {
-                do_read();
-            }
-            else
-            {
-                const auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
-                ShowWarning(errStr);
-                ShowWarning("Failed to handshake!");
-                if (errStr.find("wrong version number (SSL routines)") != std::string::npos)
+                if (!ec)
                 {
-                    ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
-                    ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                    do_read();
                 }
-                socket_.next_layer().close();
-            }
-        });
-        // clang-format on
+                else
+                {
+                    const auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
+                    ShowWarning(errStr);
+                    ShowWarning("Failed to handshake!");
+                    if (errStr.find("wrong version number (SSL routines)") != std::string::npos)
+                    {
+                        ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
+                        ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                    }
+                    socket_.next_layer().close();
+                }
+            });
     }
 }
 
@@ -77,21 +76,20 @@ void auth_session::do_read()
 {
     std::memset(buffer_.data(), 0, buffer_.size());
 
-    // clang-format off
-    socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t length)
-    {
-        if (!ec)
+    socket_.async_read_some(
+        asio::buffer(buffer_.data(), buffer_.size()),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t length)
         {
-            read_func();
-        }
-        else
-        {
-            DebugSockets(fmt::format("async_read_some error in auth_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
-            handle_error(ec, self);
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                read_func();
+            }
+            else
+            {
+                DebugSockets(fmt::format("async_read_some error in auth_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
+                handle_error(ec, self);
+            }
+        });
 }
 
 void auth_session::read_func()
@@ -564,25 +562,24 @@ void auth_session::read_func()
 
 void auth_session::do_write(std::size_t length)
 {
-    // clang-format off
-    asio::async_write(socket_, asio::buffer(buffer_.data(), length),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
-    {
-        if (!ec)
+    asio::async_write(
+        socket_,
+        asio::buffer(buffer_.data(), length),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
         {
-            write_func();
-        }
-        else
-        {
-            ShowError(ec.message());
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                write_func();
+            }
+            else
+            {
+                ShowError(ec.message());
+            }
+        });
 }
 
 bool auth_session::validatePassword(std::string username, std::string password)
 {
-    // clang-format off
     auto passHash = [&]() -> std::string
     {
         const auto rset = db::preparedStmt("SELECT accounts.password FROM accounts WHERE accounts.login = ?", username);
@@ -592,7 +589,6 @@ bool auth_session::validatePassword(std::string username, std::string password)
         }
         return "";
     }();
-    // clang-format on
 
     if (isBcryptHash(passHash))
     {
