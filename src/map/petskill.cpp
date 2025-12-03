@@ -146,6 +146,11 @@ void CPetSkill::setAoe(uint8 aoe)
     m_Aoe = aoe;
 }
 
+void CPetSkill::setRadius(uint8 radius)
+{
+    m_Radius = radius;
+}
+
 void CPetSkill::setDistance(float distance)
 {
     m_Distance = distance;
@@ -315,13 +320,7 @@ float CPetSkill::getDistance() const
 
 float CPetSkill::getRadius() const
 {
-    if (m_Aoe == 2)
-    {
-        // centered around target, usually 8' // TODO: AoE range setter?
-        return 8.0f;
-    }
-
-    return m_Distance;
+    return m_Radius;
 }
 
 int16 CPetSkill::getParam() const

@@ -20,17 +20,13 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.DEX, 4)
-    target:addMod(xi.mod.MND, -3)
-    target:addMod(xi.mod.ACC, 2)
-    target:addMod(xi.mod.ATT, 8)
+    effect:addMod(xi.mod.DEX, 4)
+    effect:addMod(xi.mod.MND, -3)
+    effect:addMod(xi.mod.ACC, 2)
+    effect:addMod(xi.mod.ATT, 8)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DEX, 4)
-    target:delMod(xi.mod.MND, -3)
-    target:delMod(xi.mod.ACC, 2)
-    target:delMod(xi.mod.ATT, 8)
 end
 
 return itemObject

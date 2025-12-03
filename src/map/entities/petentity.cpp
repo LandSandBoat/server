@@ -391,16 +391,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     }
 
     PAI->TargetFind->reset();
-
-    float distance  = PSkill->getDistance();
     uint8 findFlags = 0;
-
-    /* // TODO: do pet skills need this?
-    if (PSkill->getFlag() & SKILLFLAG_HIT_ALL)
-    {
-        findFlags |= FINDFLAGS_HIT_ALL;
-    }
-    */
 
     // Mob buff abilities also hit monster's pets
     if (PSkill->getValidTargets() & TARGET_SELF)
@@ -435,7 +426,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         action.actionid = PSkill->getID();
     }
 
-    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
+    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, PSkill->getDistance() + this->modelHitboxSize + PTarget->modelHitboxSize))
     {
         if (PSkill->isAoE())
         {
@@ -444,7 +435,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         else if (PSkill->isConal())
         {
             float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getValidTargets());
+            PAI->TargetFind->findWithinCone(PTarget, PSkill->getRadius(), angle, findFlags, PSkill->getValidTargets());
         }
         else
         {
@@ -463,7 +454,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             if (this->getPetType() == PET_TYPE::JUG_PET && this->PMaster != nullptr && PTarget == this && PSkill->getValidTargets() & TARGET_PLAYER_PARTY)
             {
                 // addEntity does not handle range checking
-                if (PAI->TargetFind->isWithinRange(&this->PMaster->loc.p, PSkill->getDistance()))
+                if (PAI->TargetFind->isWithinRange(&this->PMaster->loc.p, PSkill->getRadius()))
                 {
                     PAI->TargetFind->addEntity(this->PMaster, false);
                 }

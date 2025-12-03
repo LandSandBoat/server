@@ -670,7 +670,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 spawnGroup.second->fillSpawnPool();
                 if (!spawnGroup.second->isValid(PZone))
                 {
-                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_groups.sql.", spawnGroup.first));
+                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_sets.sql.", spawnGroup.first));
                 }
             }
 

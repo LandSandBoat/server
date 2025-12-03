@@ -41,57 +41,30 @@ itemObject.onEffectGain = function(target, effect)
         targetRace == xi.race.ELVAAN_M or
         targetRace == xi.race.ELVAAN_F
     then
-        target:addMod(xi.mod.FOOD_HP, 20)
-        target:addMod(xi.mod.FOOD_MP, 20)
-        target:addMod(xi.mod.STR, 6)
-        target:addMod(xi.mod.DEX, 2)
-        target:addMod(xi.mod.INT, -2)
-        target:addMod(xi.mod.MND, 5)
-        target:addMod(xi.mod.CHR, 4)
-        target:addMod(xi.mod.FOOD_ATTP, 22)
-        target:addMod(xi.mod.FOOD_ATT_CAP, 80)
-        target:addMod(xi.mod.FOOD_RATTP, 22)
-        target:addMod(xi.mod.FOOD_RATT_CAP, 80)
+        effect:addMod(xi.mod.FOOD_HP, 20)
+        effect:addMod(xi.mod.FOOD_MP, 20)
+        effect:addMod(xi.mod.STR, 6)
+        effect:addMod(xi.mod.DEX, 2)
+        effect:addMod(xi.mod.INT, -2)
+        effect:addMod(xi.mod.MND, 5)
+        effect:addMod(xi.mod.CHR, 4)
+        effect:addMod(xi.mod.FOOD_ATTP, 22)
+        effect:addMod(xi.mod.FOOD_ATT_CAP, 80)
+        effect:addMod(xi.mod.FOOD_RATTP, 22)
+        effect:addMod(xi.mod.FOOD_RATT_CAP, 80)
     else
-        target:addMod(xi.mod.STR, 5)
-        target:addMod(xi.mod.DEX, 2)
-        target:addMod(xi.mod.INT, -3)
-        target:addMod(xi.mod.MND, 4)
-        target:addMod(xi.mod.FOOD_ATTP, 20)
-        target:addMod(xi.mod.FOOD_ATT_CAP, 65)
-        target:addMod(xi.mod.FOOD_RATTP, 20)
-        target:addMod(xi.mod.FOOD_RATT_CAP, 65)
+        effect:addMod(xi.mod.STR, 5)
+        effect:addMod(xi.mod.DEX, 2)
+        effect:addMod(xi.mod.INT, -3)
+        effect:addMod(xi.mod.MND, 4)
+        effect:addMod(xi.mod.FOOD_ATTP, 20)
+        effect:addMod(xi.mod.FOOD_ATT_CAP, 65)
+        effect:addMod(xi.mod.FOOD_RATTP, 20)
+        effect:addMod(xi.mod.FOOD_RATT_CAP, 65)
     end
 end
 
 itemObject.onEffectLose = function(target, effect)
-    local targetRace = target:getRace()
-
-    if
-        targetRace == xi.race.ELVAAN_M or
-        targetRace == xi.race.ELVAAN_F
-    then
-        target:delMod(xi.mod.FOOD_HP, 20)
-        target:delMod(xi.mod.FOOD_MP, 20)
-        target:delMod(xi.mod.STR, 6)
-        target:delMod(xi.mod.DEX, 2)
-        target:delMod(xi.mod.INT, -2)
-        target:delMod(xi.mod.MND, 5)
-        target:delMod(xi.mod.CHR, 4)
-        target:delMod(xi.mod.FOOD_ATTP, 22)
-        target:delMod(xi.mod.FOOD_ATT_CAP, 80)
-        target:delMod(xi.mod.FOOD_RATTP, 22)
-        target:delMod(xi.mod.FOOD_RATT_CAP, 80)
-    else
-        target:delMod(xi.mod.STR, 5)
-        target:delMod(xi.mod.DEX, 2)
-        target:delMod(xi.mod.INT, -3)
-        target:delMod(xi.mod.MND, 4)
-        target:delMod(xi.mod.FOOD_ATTP, 20)
-        target:delMod(xi.mod.FOOD_ATT_CAP, 65)
-        target:delMod(xi.mod.FOOD_RATTP, 20)
-        target:delMod(xi.mod.FOOD_RATT_CAP, 65)
-    end
 end
 
 return itemObject

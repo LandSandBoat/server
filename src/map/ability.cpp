@@ -126,6 +126,16 @@ uint8 CAbility::getAOE() const
     return m_aoe;
 }
 
+void CAbility::setRadius(uint8 radius)
+{
+    m_radius = radius;
+}
+
+uint8 CAbility::getRadius() const
+{
+    return m_radius;
+}
+
 void CAbility::setAnimationID(uint16 animationID)
 {
     m_animationID = animationID;
@@ -357,6 +367,7 @@ void LoadAbilitiesList()
                                        "actionType, "
                                        "`range`, "
                                        "isAOE, "
+                                       "radius, "
                                        "recastId, "
                                        "CE, "
                                        "VE, "
@@ -396,6 +407,7 @@ void LoadAbilitiesList()
             PAbility->setActionType(rset->get<ActionCategory>("actionType"));
             PAbility->setRange(rset->get<float>("range"));
             PAbility->setAOE(rset->get<uint8>("isAOE"));
+            PAbility->setRadius(rset->get<uint8>("radius"));
             PAbility->setRecastId(rset->get<uint16>("recastId"));
             PAbility->setCE(rset->get<int32>("CE"));
             PAbility->setVE(rset->get<int32>("VE"));

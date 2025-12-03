@@ -249,7 +249,7 @@ void LoadPetSkillsList()
 {
     // Load all pet skills
     const auto rset = db::preparedStmt("SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
-                                       "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
+                                       "pet_skill_aoe, pet_skill_radius, pet_skill_distance, pet_anim_time, pet_prepare_time, "
                                        "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc, mob_skill_id "
                                        "FROM pet_skills");
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -259,6 +259,7 @@ void LoadPetSkillsList()
         PPetSkill->setAnimationID(rset->get<uint16>("pet_anim_id"));
         PPetSkill->setName(rset->get<std::string>("pet_skill_name"));
         PPetSkill->setAoe(rset->get<uint8>("pet_skill_aoe"));
+        PPetSkill->setRadius(rset->get<uint8>("pet_skill_radius"));
         PPetSkill->setDistance(rset->get<float>("pet_skill_distance"));
         PPetSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("pet_anim_time")));
         PPetSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("pet_prepare_time")));

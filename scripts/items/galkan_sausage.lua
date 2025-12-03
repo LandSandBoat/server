@@ -31,34 +31,21 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     if target:getRace() ~= xi.race.GALKA then
-        target:addMod(xi.mod.STR, 3)
-        target:addMod(xi.mod.INT, -4)
-        target:addMod(xi.mod.ATT, 9)
-        target:addMod(xi.mod.RATT, 9)
+        effect:addMod(xi.mod.STR, 3)
+        effect:addMod(xi.mod.INT, -4)
+        effect:addMod(xi.mod.ATT, 9)
+        effect:addMod(xi.mod.RATT, 9)
     else
-        target:addMod(xi.mod.STR, 3)
-        target:addMod(xi.mod.INT, -1)
-        target:addMod(xi.mod.FOOD_ATTP, 25)
-        target:addMod(xi.mod.FOOD_ATT_CAP, 30)
-        target:addMod(xi.mod.FOOD_RATTP, 25)
-        target:addMod(xi.mod.FOOD_RATT_CAP, 30)
+        effect:addMod(xi.mod.STR, 3)
+        effect:addMod(xi.mod.INT, -1)
+        effect:addMod(xi.mod.FOOD_ATTP, 25)
+        effect:addMod(xi.mod.FOOD_ATT_CAP, 30)
+        effect:addMod(xi.mod.FOOD_RATTP, 25)
+        effect:addMod(xi.mod.FOOD_RATT_CAP, 30)
     end
 end
 
 itemObject.onEffectLose = function(target, effect)
-    if target:getRace() ~= xi.race.GALKA then
-        target:delMod(xi.mod.STR, 3)
-        target:delMod(xi.mod.INT, -4)
-        target:delMod(xi.mod.ATT, 9)
-        target:delMod(xi.mod.RATT, 9)
-    else
-        target:delMod(xi.mod.STR, 3)
-        target:delMod(xi.mod.INT, -1)
-        target:delMod(xi.mod.FOOD_ATTP, 25)
-        target:delMod(xi.mod.FOOD_ATT_CAP, 30)
-        target:delMod(xi.mod.FOOD_RATTP, 25)
-        target:delMod(xi.mod.FOOD_RATT_CAP, 30)
-    end
 end
 
 return itemObject

@@ -1638,12 +1638,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
     {
-        if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > (PAbility->getRange() + this->modelHitboxSize + PTarget->modelHitboxSize))
-        {
-            // TODO: Is this relevant? Out of range is a BATTLE_MESSAGE, not an interrupt...
-            return;
-        }
-
         // get any available recast reduction
         // TODO: this is DIFFERENT than gear reduction mod which is a static reduction for the entire ability!
         auto recastReduction = 0s;
@@ -1832,10 +1826,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         else if (isAbilityAoE())
         {
             PAI->TargetFind->reset();
-
-            float distance = PAbility->getRange();
-
-            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags, PAbility->getValidTarget());
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, PAbility->getRadius(), findFlags, PAbility->getValidTarget());
 
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)

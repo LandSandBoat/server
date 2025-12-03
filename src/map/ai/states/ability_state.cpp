@@ -29,12 +29,72 @@
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "entities/petentity.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "petskill.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+
+namespace
+{
+// Handle Blood Pacts and Ready distance checks separately.
+// They come in as the final ability to be used through the packets but must pass the intermediary ability distance before triggering
+// Examples:
+// Predator Claws in packet -> PC must pass Blood Pact: Rage (20y) distance check
+// Lamb Chop in packet -> PC must pass Ready (4y) distance check
+auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbility* PAbility) -> bool
+{
+    auto*            PPet      = dynamic_cast<CPetEntity*>(PChar->PPet);
+    const CPetSkill* PPetSkill = battleutils::GetPetSkill(PAbility->getID());
+
+    if (!PPet || !PPetSkill)
+    {
+        return false;
+    }
+
+    if (PPetSkill->isBloodPactRage() || PPetSkill->isBloodPactWard())
+    {
+        // Blood Pacts:
+        // 1 - PC must be within 20y + hitboxes from target
+        // 2 - Avatar must be within skill range + hitboxes from target
+        if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > 20.0f + PChar->modelHitboxSize + PTarget->modelHitboxSize)
+        {
+            return false;
+        }
+
+        if (distance(PPet->loc.p, PTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PTarget->modelHitboxSize)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
+            return false;
+        }
+    }
+    else if (PPetSkill->getMobSkillID() > 0)
+    {
+        // Jug pet skills:
+        // 1 - PC must be within 4y + hitboxes from pet
+        // 2 - Pet must be within skill range + hitboxes from enemy (if skill targets enemy)
+        if (distance(PChar->loc.p, PPet->loc.p) > 4.0f + PChar->modelHitboxSize + PPet->modelHitboxSize)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
+            return false;
+        }
+
+        if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+        {
+            if (auto* PPetTarget = PPet->GetBattleTarget(); PPetTarget && distance(PPet->loc.p, PPetTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PPetTarget->modelHitboxSize)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PPetTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+} // namespace
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
 : CState(PEntity, targid)
@@ -199,7 +259,17 @@ bool CAbilityState::CanUseAbility()
 
         if (PTarget && PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
-            if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange() + PChar->modelHitboxSize + PTarget->modelHitboxSize)
+            // TODO: Rework the way abilities and pet abilities are laid out so it can all go through the same block and have the pet special checks done in lua
+            const CPetSkill* PPetSkill       = PAbility->isPetAbility() ? battleutils::GetPetSkill(PAbility->getID()) : nullptr;
+            const bool       isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
+            if (PPetSkill && !isLuopanAbility && (PPetSkill->isBloodPactRage() || PPetSkill->isBloodPactWard() || PPetSkill->getMobSkillID() > 0))
+            {
+                if (!PetSkillDistanceCheck(PChar, PTarget, PAbility))
+                {
+                    return false;
+                }
+            }
+            else if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange() + PChar->modelHitboxSize + PTarget->modelHitboxSize)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
                 return false;

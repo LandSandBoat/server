@@ -22,11 +22,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.CURE_POTENCY, 15)
+    effect:addMod(xi.mod.CURE_POTENCY, 15)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.CURE_POTENCY, 15)
 end
 
 return itemObject

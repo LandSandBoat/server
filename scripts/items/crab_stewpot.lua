@@ -23,25 +23,17 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HPP, 10)
-    target:addMod(xi.mod.FOOD_HP_CAP, 50)
-    target:addMod(xi.mod.FOOD_MP, 10)
-    target:addMod(xi.mod.HPHEAL, 5)
-    target:addMod(xi.mod.MPHEAL, 1)
-    target:addMod(xi.mod.FOOD_DEFP, 20)
-    target:addMod(xi.mod.FOOD_DEF_CAP, 50)
-    target:addMod(xi.mod.EVA, 5)
+    effect:addMod(xi.mod.FOOD_HPP, 10)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 50)
+    effect:addMod(xi.mod.FOOD_MP, 10)
+    effect:addMod(xi.mod.HPHEAL, 5)
+    effect:addMod(xi.mod.MPHEAL, 1)
+    effect:addMod(xi.mod.FOOD_DEFP, 20)
+    effect:addMod(xi.mod.FOOD_DEF_CAP, 50)
+    effect:addMod(xi.mod.EVA, 5)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HPP, 10)
-    target:delMod(xi.mod.FOOD_HP_CAP, 50)
-    target:delMod(xi.mod.FOOD_MP, 10)
-    target:delMod(xi.mod.HPHEAL, 5)
-    target:delMod(xi.mod.MPHEAL, 1)
-    target:delMod(xi.mod.FOOD_DEFP, 20)
-    target:delMod(xi.mod.FOOD_DEF_CAP, 50)
-    target:delMod(xi.mod.EVA, 5)
 end
 
 return itemObject

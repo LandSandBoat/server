@@ -23,27 +23,18 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HP, 30)
-    target:addMod(xi.mod.FOOD_MPP, 1)
-    target:addMod(xi.mod.FOOD_MP_CAP, 110)
-    target:addMod(xi.mod.DEX, 3)
-    target:addMod(xi.mod.INT, 1)
-    target:addMod(xi.mod.MND, -3)
-    target:addMod(xi.mod.EARTH_MEVA, 10)
-    target:addMod(xi.mod.FOOD_RACCP, 6)
-    target:addMod(xi.mod.FOOD_RACC_CAP, 15)
+    effect:addMod(xi.mod.FOOD_HP, 30)
+    effect:addMod(xi.mod.FOOD_MPP, 1)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 110)
+    effect:addMod(xi.mod.DEX, 3)
+    effect:addMod(xi.mod.INT, 1)
+    effect:addMod(xi.mod.MND, -3)
+    effect:addMod(xi.mod.EARTH_MEVA, 10)
+    effect:addMod(xi.mod.FOOD_RACCP, 6)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 15)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HP, 30)
-    target:delMod(xi.mod.FOOD_MPP, 1)
-    target:delMod(xi.mod.FOOD_MP_CAP, 110)
-    target:delMod(xi.mod.DEX, 3)
-    target:delMod(xi.mod.INT, 1)
-    target:delMod(xi.mod.MND, -3)
-    target:delMod(xi.mod.EARTH_MEVA, 10)
-    target:delMod(xi.mod.FOOD_RACCP, 6)
-    target:delMod(xi.mod.FOOD_RACC_CAP, 15)
 end
 
 return itemObject

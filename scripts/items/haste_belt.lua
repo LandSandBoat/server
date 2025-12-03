@@ -21,11 +21,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.HASTE_GEAR, 1000)
+    effect:addMod(xi.mod.HASTE_GEAR, 1000)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.HASTE_GEAR, 1000)
 end
 
 return itemObject
