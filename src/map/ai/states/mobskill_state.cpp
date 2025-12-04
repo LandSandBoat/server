@@ -177,6 +177,8 @@ bool CMobSkillState::Update(timer::time_point tick)
     }
     if (IsCompleted() && tick > m_finishTime)
     {
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
+
         // Only act if they're able
         if (!m_PEntity->StatusEffectContainer->HasPreventActionEffect(false))
         {
@@ -198,13 +200,10 @@ bool CMobSkillState::Update(timer::time_point tick)
                     PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
                 }
             }
-
-            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
         }
         else // Switch into inactive state when done
         {
             // Exit listener here because changing states will invalidate m_PEntity/m_PSkill
-            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
             reduceTpOnInterrupt(); // Cleanup will call this only if IsCompleted is false, which is not the case here
 
             m_PEntity->PAI->Inactive(0ms, false);
@@ -212,6 +211,7 @@ bool CMobSkillState::Update(timer::time_point tick)
 
         return true;
     }
+
     return false;
 }
 
