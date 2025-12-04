@@ -36,7 +36,7 @@ g_mixins.abyssea_weakness = function(mob)
             end
         end)
 
-        mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_PROC_CHECK', function(target, user, wsid)
+        mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_PROC_CHECK', function(user, target, wsid)
             if target:canChangeState() then
                 if wsid == target:getLocalVar('[RedWeakness]') then
                     xi.abyssea.procMonster(target, user, xi.abyssea.triggerType.RED)

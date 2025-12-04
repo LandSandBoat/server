@@ -96,7 +96,7 @@ g_mixins.families.maat = function(maatMob)
         mob:messageText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
     end)
 
-    maatMob:addListener('WEAPONSKILL_TAKE', 'MAAT_WEAPONSKILL_TAKE', function(target, user, wsid, tp, action)
+    maatMob:addListener('WEAPONSKILL_TAKE', 'MAAT_WEAPONSKILL_TAKE', function(user, target, wsid, tp, action)
         local ID = zones[target:getZoneID()]
         target:messageText(target, ID.text.THAT_LL_HURT_IN_THE_MORNING)
     end)

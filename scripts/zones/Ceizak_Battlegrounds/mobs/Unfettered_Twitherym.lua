@@ -94,14 +94,14 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_TAKE', 'SKILLCHAIN_DETECT', function(mobArg, _, skillID)
-        if mobArg:hasStatusEffect(xi.effect.SKILLCHAIN) then
-            if mobArg:getLocalVar('chosenElement') ~= 0 then
-                local skillchainEffect = mobArg:getStatusEffect(xi.effect.SKILLCHAIN)
+    mob:addListener('WEAPONSKILL_TAKE', 'SKILLCHAIN_DETECT', function(user, target, skillID)
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) then
+            if target:getLocalVar('chosenElement') ~= 0 then
+                local skillchainEffect = target:getStatusEffect(xi.effect.SKILLCHAIN)
                 local power            = skillchainEffect:getPower()
 
-                if isSkillchainCorrect(mobArg, power) then
-                    resetDamageModifiers(mobArg)
+                if isSkillchainCorrect(target, power) then
+                    resetDamageModifiers(target)
                     mobArg:setLocalVar('chosenElement', 0)
                     for phase, _ in pairs(phaseDTApplied) do
                         phaseDTApplied[phase] = false

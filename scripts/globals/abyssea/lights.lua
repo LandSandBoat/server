@@ -539,7 +539,7 @@ xi.abyssea.AddDeathListeners = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_DEATH_CHECK', function(target, user, wsid)
+    mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_DEATH_CHECK', function(user, target, wsid)
         -- TODO: Make this human-readable, and break out from the listener
         local magicalWS =
         {

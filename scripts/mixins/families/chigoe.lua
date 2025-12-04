@@ -41,11 +41,11 @@ g_mixins.families.chigoe = function(chigoeMob)
         mob:setHP(0)
     end)
 
-    chigoeMob:addListener('WEAPONSKILL_TAKE', 'CHIGOE_WEAPONSKILL_TAKE', function(mob, wsid)
+    chigoeMob:addListener('WEAPONSKILL_TAKE', 'CHIGOE_WEAPONSKILL_TAKE', function(mob, target, wsid)
         if wsid then
-            mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
-            mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-            mob:setHP(0)
+            target:setMobMod(xi.mobMod.EXP_BONUS, -100)
+            target:setMobMod(xi.mobMod.NO_DROPS, 1)
+            target:setHP(0)
         end
     end)
 

@@ -68,7 +68,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         end
     end)
 
-    dynamisDreamlandMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(target, user, wsid)
+    dynamisDreamlandMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, wsid)
         local currency = target:getLocalVar('dynamis_currency')
         local vanaHour = VanadielHour()
 
