@@ -479,7 +479,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.SOUTH_GUSTABERG] =
     {
-        regionalItems = { xi.item.BRONZE_BANDOLIER },
+        regionalItems = { xi.item.BOUNDING_BOOTS }, --Original = xi.item.BRONZE_BANDOLIER
         temps =
         {
             { itemId = xi.item.POTION,                 weight = 1060 },
