@@ -240,6 +240,10 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     local attempts         = math.random(5, 8)
 	-- orginal is local attempts = math.random(4, 6)
     local kupowersBonus    = 0
+    -- Early return.
+    if npc == nil then
+        return
+    end
 
     local chestStyle = 965
     local correctNum = math.random(10, 99)
