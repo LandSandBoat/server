@@ -160,8 +160,14 @@ xi.shop.celebratory = function(player)
         { xi.item.JOYOUS_SERINETTE,      6000 },
         { xi.item.BOTTLE_OF_GRAPE_JUICE, 1116 },
         { xi.item.INFERNO_CRYSTAL,       3000 },
-        { xi.item.CYCLONE_CRYSTAL,       3000 },
         { xi.item.TERRA_CRYSTAL,         3000 },
+        { xi.item.TORRENT_CRYSTAL,       3000 },
+        { xi.item.CYCLONE_CRYSTAL,       3000 },
+        { xi.item.GLACIER_CRYSTAL,       3000 },
+		{ xi.item.PLASMA_CRYSTAL,        3000 },
+        { xi.item.AURORA_CRYSTAL,        3000 },
+        { xi.item.TWILIGHT_CRYSTAL,      3000 },
+
     }
     xi.shop.general(player, stock)
 end
@@ -171,174 +177,183 @@ xi.shop.generalGuildStock =
 {
     [xi.skill.COOKING] =
     {
-        { xi.item.CHUNK_OF_ROCK_SALT,           16, xi.craftRank.AMATEUR    },
-        { xi.item.FLASK_OF_DISTILLED_WATER,     12, xi.craftRank.AMATEUR    },
-        { xi.item.LIZARD_EGG,                  100, xi.craftRank.AMATEUR    },
-        { xi.item.SARUTA_ORANGE,                32, xi.craftRank.AMATEUR    },
-        { xi.item.BUNCH_OF_SAN_DORIAN_GRAPES,   76, xi.craftRank.AMATEUR    },
-        { xi.item.JAR_OF_MISO,                2500, xi.craftRank.AMATEUR    },
-        { xi.item.JAR_OF_SOY_SAUCE,           2500, xi.craftRank.AMATEUR    },
-        { xi.item.HANDFUL_OF_DRIED_BONITO,    2500, xi.craftRank.AMATEUR    },
-        { xi.item.BAG_OF_SAN_DORIAN_FLOUR,      60, xi.craftRank.RECRUIT    },
-        { xi.item.POT_OF_MAPLE_SUGAR,           40, xi.craftRank.RECRUIT    },
-        { xi.item.FAERIE_APPLE,                 44, xi.craftRank.RECRUIT    },
-        { xi.item.JUG_OF_SELBINA_MILK,          60, xi.craftRank.RECRUIT    },
-        { xi.item.POT_OF_HONEY,                200, xi.craftRank.RECRUIT    },
-        { xi.item.KAZHAM_PINEAPPLE,             60, xi.craftRank.INITIATE   },
-        { xi.item.LA_THEINE_CABBAGE,            24, xi.craftRank.INITIATE   },
-        { xi.item.BAG_OF_RYE_FLOUR,             40, xi.craftRank.INITIATE   },
-        { xi.item.THUNDERMELON,                325, xi.craftRank.NOVICE     },
-        { xi.item.WATERMELON,                  200, xi.craftRank.NOVICE     },
-        { xi.item.STICK_OF_SELBINA_BUTTER,      60, xi.craftRank.NOVICE     },
-        { xi.item.BUNCH_OF_KAZHAM_PEPPERS,      60, xi.craftRank.APPRENTICE },
-        { xi.item.BLOCK_OF_GELATIN,            900, xi.craftRank.APPRENTICE },
-        { xi.item.SERVING_OF_SPAGHETTI,       3000, xi.craftRank.JOURNEYMAN },
-        { xi.item.JAR_OF_GROUND_WASABI,       2595, xi.craftRank.JOURNEYMAN },
-        { xi.item.PIECE_OF_PIE_DOUGH,         1600, xi.craftRank.CRAFTSMAN  },
-        { xi.item.PIECE_OF_PIZZA_DOUGH,       3000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.AZUKI_BEAN,                  600, xi.craftRank.CRAFTSMAN  },
-        -- kits																  -- Return on Craft (Profits:) Test Complete! Prices have been ajusted accordingly.
-		{ xi.item.COOKING_KIT_5,              148, xi.craftRank.AMATEUR    }, -- 74g 	(Pebble Soup)
-        { xi.item.COOKING_KIT_10,             100, xi.craftRank.AMATEUR    }, -- 50g	(Orange Juice)
-        { xi.item.COOKING_KIT_15,              80, xi.craftRank.RECRUIT    }, -- 40g	(Slice of Bluetail x4)
-        { xi.item.COOKING_KIT_20,             152, xi.craftRank.RECRUIT    }, -- 76g	(Apple Juice)
-        { xi.item.COOKING_KIT_25,             512, xi.craftRank.INITIATE   }, -- 256g	(Vegetable Soup)
-        { xi.item.COOKING_KIT_30,             194, xi.craftRank.INITIATE   }, -- 97g	(Pineapple Juice)
-        { xi.item.COOKING_KIT_35,             240, xi.craftRank.NOVICE     }, -- 120g	(Meatball x12)
-        { xi.item.COOKING_KIT_40,             440, xi.craftRank.NOVICE     }, -- 220g 	(Melon Juice)
-        { xi.item.COOKING_KIT_45,             698, xi.craftRank.APPRENTICE }, -- 349g	(Menemen)
-        { xi.item.COOKING_KIT_50,             616, xi.craftRank.APPRENTICE }, -- 308g	(Apple Pie x4)
-		{ xi.item.COOKING_KIT_55,             336, xi.craftRank.JOURNEYMAN }, -- 168g	(Beaugreen Saute)
-		{ xi.item.COOKING_KIT_60,             996, xi.craftRank.JOURNEYMAN }, -- 498g	(Green Quiche)
-		{ xi.item.COOKING_KIT_65,            1820, xi.craftRank.CRAFTSMAN  }, -- 910g	(Ratatouille)
-        { xi.item.COOKING_KIT_70,             384, xi.craftRank.CRAFTSMAN  }, -- 192g	(San d'Orian tea)
-        { xi.item.COOKING_KIT_75,            5838, xi.craftRank.ARTISAN    }, -- 2919g	(Celerity Salad)
-        { xi.item.COOKING_KIT_80,            2870, xi.craftRank.ARTISAN    }, -- 1435g	(Shallops Tropicale)
-        { xi.item.COOKING_KIT_85,            1412, xi.craftRank.ADEPT      }, -- 706g	(Yellow Curry)
-        { xi.item.COOKING_KIT_90,            1320, xi.craftRank.ADEPT      }, -- 660g	(Vampire Juice)
-        { xi.item.COOKING_KIT_95,            1578, xi.craftRank.VETERAN    }, -- 789g	(Dragon Steak)
+        { xi.item.CHUNK_OF_ROCK_SALT,             16, xi.craftRank.AMATEUR    },
+        { xi.item.FLASK_OF_DISTILLED_WATER,       12, xi.craftRank.AMATEUR    },
+        { xi.item.LIZARD_EGG,                    100, xi.craftRank.AMATEUR    },
+        { xi.item.SARUTA_ORANGE,                  32, xi.craftRank.AMATEUR    },
+        { xi.item.BUNCH_OF_SAN_DORIAN_GRAPES,     76, xi.craftRank.AMATEUR    },
+        { xi.item.JAR_OF_MISO,                  2500, xi.craftRank.AMATEUR    },
+        { xi.item.JAR_OF_SOY_SAUCE,             2500, xi.craftRank.AMATEUR    },
+        { xi.item.HANDFUL_OF_DRIED_BONITO,      2500, xi.craftRank.AMATEUR    },
+        { xi.item.BAG_OF_SAN_DORIAN_FLOUR,        60, xi.craftRank.RECRUIT    },
+        { xi.item.POT_OF_MAPLE_SUGAR,             40, xi.craftRank.RECRUIT    },
+        { xi.item.FAERIE_APPLE,                   44, xi.craftRank.RECRUIT    },
+        { xi.item.JUG_OF_SELBINA_MILK,            60, xi.craftRank.RECRUIT    },
+        { xi.item.POT_OF_HONEY,                  200, xi.craftRank.RECRUIT    },
+        { xi.item.KAZHAM_PINEAPPLE,               60, xi.craftRank.INITIATE   },
+        { xi.item.LA_THEINE_CABBAGE,              24, xi.craftRank.INITIATE   },
+        { xi.item.BAG_OF_RYE_FLOUR,               40, xi.craftRank.INITIATE   },
+        { xi.item.THUNDERMELON,                  325, xi.craftRank.NOVICE     },
+        { xi.item.WATERMELON,                    200, xi.craftRank.NOVICE     },
+        { xi.item.STICK_OF_SELBINA_BUTTER,        60, xi.craftRank.NOVICE     },
+        { xi.item.BUNCH_OF_KAZHAM_PEPPERS,        60, xi.craftRank.APPRENTICE },
+        { xi.item.BLOCK_OF_GELATIN,              900, xi.craftRank.APPRENTICE },
+        { xi.item.SERVING_OF_SPAGHETTI,         3000, xi.craftRank.JOURNEYMAN },
+        { xi.item.JAR_OF_GROUND_WASABI,         2595, xi.craftRank.JOURNEYMAN },
+        { xi.item.PIECE_OF_PIE_DOUGH,           1600, xi.craftRank.CRAFTSMAN  },
+        { xi.item.PIECE_OF_PIZZA_DOUGH,         3000, xi.craftRank.CRAFTSMAN  },
+        { xi.item.AZUKI_BEAN,                    600, xi.craftRank.CRAFTSMAN  },
+        -- kits																     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.COOKING_KIT_5,                 148, xi.craftRank.AMATEUR    }, -- 74g 	(Pebble Soup)
+        { xi.item.COOKING_KIT_10,                100, xi.craftRank.AMATEUR    }, -- 50g	(Orange Juice)
+        { xi.item.COOKING_KIT_15,                 80, xi.craftRank.RECRUIT    }, -- 40g	(Slice of Bluetail x4)
+        { xi.item.COOKING_KIT_20,                152, xi.craftRank.RECRUIT    }, -- 76g	(Apple Juice)
+        { xi.item.COOKING_KIT_25,                512, xi.craftRank.INITIATE   }, -- 256g	(Vegetable Soup)
+        { xi.item.COOKING_KIT_30,                194, xi.craftRank.INITIATE   }, -- 97g	(Pineapple Juice)
+        { xi.item.COOKING_KIT_35,                240, xi.craftRank.NOVICE     }, -- 120g	(Meatball x12)
+        { xi.item.COOKING_KIT_40,                440, xi.craftRank.NOVICE     }, -- 220g 	(Melon Juice)
+        { xi.item.COOKING_KIT_45,                698, xi.craftRank.APPRENTICE }, -- 349g	(Menemen)
+        { xi.item.COOKING_KIT_50,                616, xi.craftRank.APPRENTICE }, -- 308g	(Apple Pie x4)
+		{ xi.item.COOKING_KIT_55,                336, xi.craftRank.JOURNEYMAN }, -- 168g	(Beaugreen Saute)
+		{ xi.item.COOKING_KIT_60,                996, xi.craftRank.JOURNEYMAN }, -- 498g	(Green Quiche)
+		{ xi.item.COOKING_KIT_65,               1820, xi.craftRank.CRAFTSMAN  }, -- 910g	(Ratatouille)
+        { xi.item.COOKING_KIT_70,                384, xi.craftRank.CRAFTSMAN  }, -- 192g	(San d'Orian tea)
+        { xi.item.COOKING_KIT_75,               5838, xi.craftRank.ARTISAN    }, -- 2919g	(Celerity Salad)
+        { xi.item.COOKING_KIT_80,               2870, xi.craftRank.ARTISAN    }, -- 1435g	(Shallops Tropicale)
+        { xi.item.COOKING_KIT_85,               1412, xi.craftRank.ADEPT      }, -- 706g	(Yellow Curry)
+        { xi.item.COOKING_KIT_90,               1320, xi.craftRank.ADEPT      }, -- 660g	(Vampire Juice)
+        { xi.item.COOKING_KIT_95,               1578, xi.craftRank.VETERAN    }, -- 789g	(Dragon Steak)
 	},
 
     [xi.skill.CLOTHCRAFT] =
     {
-        { xi.item.SPINDLE,                     75, xi.craftRank.AMATEUR    },
-        { xi.item.SPOOL_OF_ZEPHYR_THREAD,      75, xi.craftRank.AMATEUR    },
-        { xi.item.CLUMP_OF_MOKO_GRASS,         20, xi.craftRank.AMATEUR    },
-        { xi.item.BALL_OF_SARUTA_COTTON,      500, xi.craftRank.RECRUIT    },
-        { xi.item.CLUMP_OF_RED_MOKO_GRASS,    200, xi.craftRank.RECRUIT    },
-        { xi.item.SPOOL_OF_LINEN_THREAD,      150, xi.craftRank.INITIATE   },
-        { xi.item.SPOOL_OF_WOOL_THREAD,      2800, xi.craftRank.NOVICE     },
-        { xi.item.CLUMP_OF_MOHBWA_GRASS,      800, xi.craftRank.APPRENTICE },
-        { xi.item.SPOOL_OF_SILK_THREAD,      1500, xi.craftRank.APPRENTICE },
-        { xi.item.CLUMP_OF_KARAKUL_WOOL,     1400, xi.craftRank.JOURNEYMAN },
-        { xi.item.SPOOL_OF_GOLD_THREAD,     14500, xi.craftRank.CRAFTSMAN  },
-        -- kits															      -- Return on Craft (Profits:) Test Complete! Prices have been ajusted accordingly.
-		{ xi.item.CLOTHCRAFT_KIT_5,           140, xi.craftRank.AMATEUR    }, -- 70g	(Headgear)
-        { xi.item.CLOTHCRAFT_KIT_10,          238, xi.craftRank.AMATEUR    }, -- 119g	(Doublet)
-        { xi.item.CLOTHCRAFT_KIT_15,          124, xi.craftRank.RECRUIT    }, -- 62g	(Red Grass Thread)
-        { xi.item.CLOTHCRAFT_KIT_20,          764, xi.craftRank.RECRUIT    }, -- 382g	(Cotton Headband)
-        { xi.item.CLOTHCRAFT_KIT_25,          630, xi.craftRank.INITIATE   }, -- 315g	(Bracers)
-        { xi.item.CLOTHCRAFT_KIT_30,          600, xi.craftRank.INITIATE   }, -- 300g	(Fisherman's Tunica)
-        { xi.item.CLOTHCRAFT_KIT_35,         1200, xi.craftRank.NOVICE     }, -- 600g	(Wool Thread)
-        { xi.item.CLOTHCRAFT_KIT_40,         2352, xi.craftRank.NOVICE     }, -- 1176g	(Shadow Roll x3)
-        { xi.item.CLOTHCRAFT_KIT_45,         8468, xi.craftRank.APPRENTICE }, -- 4234g	(Wool Cap)
-        { xi.item.CLOTHCRAFT_KIT_50,         1122, xi.craftRank.APPRENTICE }, -- 561g	(Velvet Cloth)
-		{ xi.item.CLOTHCRAFT_KIT_55,         1214, xi.craftRank.JOURNEYMAN }, -- 607g	(Mohbwa Scarf)
-		{ xi.item.CLOTHCRAFT_KIT_60,         5440, xi.craftRank.JOURNEYMAN }, -- 2720g	(Black Mitts)
-		{ xi.item.CLOTHCRAFT_KIT_64,         2584, xi.craftRank.CRAFTSMAN  }, -- 1292g	(White Cape)
-        { xi.item.CLOTHCRAFT_KIT_70,         4408, xi.craftRank.CRAFTSMAN  }, -- 2204g	(Gold Obi) 
-        { xi.item.CLOTHCRAFT_KIT_75,         8794, xi.craftRank.ARTISAN    }, -- 4397g	(Tabin Bracers)
-        { xi.item.CLOTHCRAFT_KIT_80,         5964, xi.craftRank.ARTISAN    }, -- 2982g	(Brocade Obi)
-        { xi.item.CLOTHCRAFT_KIT_85,         7820, xi.craftRank.ADEPT      }, -- 3910g	(Rainbow Headband)
-        { xi.item.CLOTHCRAFT_KIT_90,         7680, xi.craftRank.ADEPT      }, -- 3840g	(Rainbow Obi)
-        { xi.item.CLOTHCRAFT_KIT_95,         7200, xi.craftRank.VETERAN    }, -- 3600g	(Tarutaru Sash)
+        { xi.item.SPINDLE,                        75, xi.craftRank.AMATEUR    },
+        { xi.item.SPOOL_OF_ZEPHYR_THREAD,         75, xi.craftRank.AMATEUR    },
+        { xi.item.CLUMP_OF_MOKO_GRASS,            20, xi.craftRank.AMATEUR    },
+        { xi.item.BALL_OF_SARUTA_COTTON,         500, xi.craftRank.RECRUIT    },
+        { xi.item.CLUMP_OF_RED_MOKO_GRASS,       200, xi.craftRank.RECRUIT    },
+        { xi.item.SPOOL_OF_LINEN_THREAD,         150, xi.craftRank.INITIATE   },
+        { xi.item.SPOOL_OF_WOOL_THREAD,         2800, xi.craftRank.NOVICE     },
+        { xi.item.CLUMP_OF_MOHBWA_GRASS,         800, xi.craftRank.APPRENTICE },
+        { xi.item.SPOOL_OF_SILK_THREAD,         1500, xi.craftRank.APPRENTICE },
+        { xi.item.CLUMP_OF_KARAKUL_WOOL,        1400, xi.craftRank.JOURNEYMAN },
+        { xi.item.SPOOL_OF_GOLD_THREAD,        14500, xi.craftRank.CRAFTSMAN  },
+        -- kits									   						         -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.CLOTHCRAFT_KIT_5,              140, xi.craftRank.AMATEUR    }, -- 70g	(Headgear)
+        { xi.item.CLOTHCRAFT_KIT_10,             238, xi.craftRank.AMATEUR    }, -- 119g	(Doublet)
+        { xi.item.CLOTHCRAFT_KIT_15,             124, xi.craftRank.RECRUIT    }, -- 62g	(Red Grass Thread)
+        { xi.item.CLOTHCRAFT_KIT_20,             764, xi.craftRank.RECRUIT    }, -- 382g	(Cotton Headband)
+        { xi.item.CLOTHCRAFT_KIT_25,             630, xi.craftRank.INITIATE   }, -- 315g	(Bracers)
+        { xi.item.CLOTHCRAFT_KIT_30,             600, xi.craftRank.INITIATE   }, -- 300g	(Fisherman's Tunica)
+        { xi.item.CLOTHCRAFT_KIT_35,            1200, xi.craftRank.NOVICE     }, -- 600g	(Wool Thread)
+        { xi.item.CLOTHCRAFT_KIT_40,            2352, xi.craftRank.NOVICE     }, -- 1176g	(Shadow Roll x3)
+        { xi.item.CLOTHCRAFT_KIT_45,            8468, xi.craftRank.APPRENTICE }, -- 4234g	(Wool Cap)
+        { xi.item.CLOTHCRAFT_KIT_50,            1122, xi.craftRank.APPRENTICE }, -- 561g	(Velvet Cloth)
+		{ xi.item.CLOTHCRAFT_KIT_55,            1214, xi.craftRank.JOURNEYMAN }, -- 607g	(Mohbwa Scarf)
+		{ xi.item.CLOTHCRAFT_KIT_60,            5440, xi.craftRank.JOURNEYMAN }, -- 2720g	(Black Mitts)
+		{ xi.item.CLOTHCRAFT_KIT_64,            2584, xi.craftRank.CRAFTSMAN  }, -- 1292g	(White Cape)
+        { xi.item.CLOTHCRAFT_KIT_70,            4408, xi.craftRank.CRAFTSMAN  }, -- 2204g	(Gold Obi) 
+        { xi.item.CLOTHCRAFT_KIT_75,            8794, xi.craftRank.ARTISAN    }, -- 4397g	(Tabin Bracers)
+        { xi.item.CLOTHCRAFT_KIT_80,            5964, xi.craftRank.ARTISAN    }, -- 2982g	(Brocade Obi)
+        { xi.item.CLOTHCRAFT_KIT_85,            7820, xi.craftRank.ADEPT      }, -- 3910g	(Rainbow Headband)
+        { xi.item.CLOTHCRAFT_KIT_90,            7680, xi.craftRank.ADEPT      }, -- 3840g	(Rainbow Obi)
+        { xi.item.CLOTHCRAFT_KIT_95,            7200, xi.craftRank.VETERAN    }, -- 3600g	(Tarutaru Sash)
 	},
 
     [xi.skill.GOLDSMITHING] =
     {
-        { xi.item.WORKSHOP_ANVIL,              75, xi.craftRank.AMATEUR    },
-        { xi.item.MANDREL,                     75, xi.craftRank.AMATEUR    },
-        { xi.item.CHUNK_OF_ZINC_ORE,          200, xi.craftRank.AMATEUR    },
-        { xi.item.CHUNK_OF_COPPER_ORE,         12, xi.craftRank.AMATEUR    },
-        { xi.item.BRASS_NUGGET,                40, xi.craftRank.RECRUIT    },
-        { xi.item.BRASS_SHEET,                300, xi.craftRank.RECRUIT    },
-        { xi.item.CHUNK_OF_SILVER_ORE,        450, xi.craftRank.RECRUIT    },
-        { xi.item.SILVER_NUGGET,              200, xi.craftRank.INITIATE   },
-        { xi.item.TOURMALINE,                1863, xi.craftRank.INITIATE   },
-        { xi.item.SARDONYX,                  1863, xi.craftRank.INITIATE   },
-        { xi.item.CLEAR_TOPAZ,               1863, xi.craftRank.INITIATE   },
-        { xi.item.AMETHYST,                  1863, xi.craftRank.INITIATE   },
-        { xi.item.LAPIS_LAZULI,              1863, xi.craftRank.INITIATE   },
-        { xi.item.AMBER_STONE,               1863, xi.craftRank.INITIATE   },
-        { xi.item.ONYX,                      1863, xi.craftRank.INITIATE   },
-        { xi.item.LIGHT_OPAL,                1863, xi.craftRank.INITIATE   },
-        { xi.item.SILVER_CHAIN,             23000, xi.craftRank.NOVICE     },
-        { xi.item.CHUNK_OF_MYTHRIL_ORE,      2000, xi.craftRank.NOVICE     },
-        { xi.item.CHUNK_OF_GOLD_ORE,         3000, xi.craftRank.APPRENTICE },
-        { xi.item.MYTHRIL_SHEET,            12000, xi.craftRank.APPRENTICE },
-        { xi.item.PERIDOT,                   8000, xi.craftRank.APPRENTICE },
-        { xi.item.GARNET,                    8000, xi.craftRank.APPRENTICE },
-        { xi.item.GOSHENITE,                 8000, xi.craftRank.APPRENTICE },
-        { xi.item.AMETRINE,                  8000, xi.craftRank.APPRENTICE },
-        { xi.item.TURQUOISE,                 8000, xi.craftRank.APPRENTICE },
-        { xi.item.SPHENE,                    8000, xi.craftRank.APPRENTICE },
-        { xi.item.BLACK_PEARL,              12000, xi.craftRank.APPRENTICE },
-        { xi.item.PEARL,                    11000, xi.craftRank.APPRENTICE },
-        { xi.item.CHUNK_OF_ALUMINUM_ORE,     5000, xi.craftRank.APPRENTICE },
-        { xi.item.GOLD_SHEET,               32000, xi.craftRank.JOURNEYMAN },
-        { xi.item.GOLD_CHAIN,               58000, xi.craftRank.JOURNEYMAN },
-        { xi.item.CHUNK_OF_PLATINUM_ORE,     6000, xi.craftRank.CRAFTSMAN  },
-        -- kits 															  -- Return on Craft (Profits:) Test Complete! Prices have been ajusted accordingly.
-		{ xi.item.GOLDSMITHING_KIT_5,          38, xi.craftRank.AMATEUR    }, -- 19g 	(Copper Ring)
-        { xi.item.GOLDSMITHING_KIT_10,         96, xi.craftRank.AMATEUR    }, -- 48g 	(Brass Ingot)
-        { xi.item.GOLDSMITHING_KIT_15,        280, xi.craftRank.RECRUIT    }, -- 140g 	(Brass Zaghnal)
-        { xi.item.GOLDSMITHING_KIT_20,        700, xi.craftRank.RECRUIT    }, -- 350g   (Silver Ingot)
-        { xi.item.GOLDSMITHING_KIT_25,        714, xi.craftRank.INITIATE   }, -- 357g   (Silver Belt)
-        { xi.item.GOLDSMITHING_KIT_30,       1508, xi.craftRank.INITIATE   }, -- 754g	(Brass Finger Gauntlets)
-        { xi.item.GOLDSMITHING_KIT_35,       1222, xi.craftRank.NOVICE     }, -- 611g	(Tigereye Ring)
-        { xi.item.GOLDSMITHING_KIT_40,       2500, xi.craftRank.NOVICE     }, -- 1250g	(Mythril Ingot)
-        { xi.item.GOLDSMITHING_KIT_45,       2506, xi.craftRank.APPRENTICE }, -- 1253g	(Peridot Earring)
-        { xi.item.GOLDSMITHING_KIT_50,       1644, xi.craftRank.APPRENTICE }, -- 822g	(Aluminum Sheet)
-		{ xi.item.GOLDSMITHING_KIT_55,       5908, xi.craftRank.JOURNEYMAN }, -- 2954g	(Heater Shield)
-		{ xi.item.GOLDSMITHING_KIT_60,       7094, xi.craftRank.JOURNEYMAN }, -- 3547g	(Mythril Cuisses)
-		{ xi.item.GOLDSMITHING_KIT_65,       3962, xi.craftRank.CRAFTSMAN  }, -- 1981g	(Moon Earring)
-        { xi.item.GOLDSMITHING_KIT_70,       7118, xi.craftRank.CRAFTSMAN  }, -- 3559g	(Gold Bangles)
-        { xi.item.GOLDSMITHING_KIT_75,       6500, xi.craftRank.ARTISAN    }, -- 3250g	(Ashura)
-        { xi.item.GOLDSMITHING_KIT_80,       8160, xi.craftRank.ARTISAN    }, -- 4080g	(Gold Buckler)
-        { xi.item.GOLDSMITHING_KIT_85,       9582, xi.craftRank.ADEPT      }, -- 4791g	(Platinum Bangles)
-        { xi.item.GOLDSMITHING_KIT_90,       7560, xi.craftRank.ADEPT      }, -- 3780g	(Jeweled Collar)
-        { xi.item.GOLDSMITHING_KIT_94,       4037, xi.craftRank.VETERAN    }, -- 0g		(Phrygian ring) Price of all items average. 38+96+280+700.../19=4037g.
+        { xi.item.WORKSHOP_ANVIL,                 75, xi.craftRank.AMATEUR    },
+        { xi.item.MANDREL,                        75, xi.craftRank.AMATEUR    },
+        { xi.item.CHUNK_OF_ZINC_ORE,             200, xi.craftRank.AMATEUR    },
+        { xi.item.CHUNK_OF_COPPER_ORE,            12, xi.craftRank.AMATEUR    },
+        { xi.item.BRASS_NUGGET,                   40, xi.craftRank.RECRUIT    },
+        { xi.item.BRASS_SHEET,                   300, xi.craftRank.RECRUIT    },
+        { xi.item.CHUNK_OF_SILVER_ORE,           450, xi.craftRank.RECRUIT    },
+        { xi.item.SILVER_NUGGET,                 200, xi.craftRank.INITIATE   },
+        { xi.item.TOURMALINE,                   1863, xi.craftRank.INITIATE   },
+        { xi.item.SARDONYX,                     1863, xi.craftRank.INITIATE   },
+        { xi.item.CLEAR_TOPAZ,                  1863, xi.craftRank.INITIATE   },
+        { xi.item.AMETHYST,                     1863, xi.craftRank.INITIATE   },
+        { xi.item.LAPIS_LAZULI,                 1863, xi.craftRank.INITIATE   },
+        { xi.item.AMBER_STONE,                  1863, xi.craftRank.INITIATE   },
+        { xi.item.ONYX,                         1863, xi.craftRank.INITIATE   },
+        { xi.item.LIGHT_OPAL,                   1863, xi.craftRank.INITIATE   },
+        { xi.item.SILVER_CHAIN,                23000, xi.craftRank.NOVICE     },
+        { xi.item.CHUNK_OF_MYTHRIL_ORE,         2000, xi.craftRank.NOVICE     },
+        { xi.item.CHUNK_OF_GOLD_ORE,            3000, xi.craftRank.APPRENTICE },
+        { xi.item.MYTHRIL_SHEET,               12000, xi.craftRank.APPRENTICE },
+        { xi.item.PERIDOT,                      8000, xi.craftRank.APPRENTICE },
+        { xi.item.GARNET,                       8000, xi.craftRank.APPRENTICE },
+        { xi.item.GOSHENITE,                    8000, xi.craftRank.APPRENTICE },
+        { xi.item.AMETRINE,                     8000, xi.craftRank.APPRENTICE },
+        { xi.item.TURQUOISE,                    8000, xi.craftRank.APPRENTICE },
+        { xi.item.SPHENE,                       8000, xi.craftRank.APPRENTICE },
+        { xi.item.BLACK_PEARL,                 12000, xi.craftRank.APPRENTICE },
+        { xi.item.PEARL,                       11000, xi.craftRank.APPRENTICE },
+        { xi.item.CHUNK_OF_ALUMINUM_ORE,        5000, xi.craftRank.APPRENTICE },
+        { xi.item.GOLD_SHEET,                  32000, xi.craftRank.JOURNEYMAN },
+        { xi.item.GOLD_CHAIN,                  58000, xi.craftRank.JOURNEYMAN },
+        { xi.item.CHUNK_OF_PLATINUM_ORE,        6000, xi.craftRank.CRAFTSMAN  },
+        -- kits 									  						     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.GOLDSMITHING_KIT_5,             38, xi.craftRank.AMATEUR    }, -- 19g 	(Copper Ring)
+        { xi.item.GOLDSMITHING_KIT_10,            96, xi.craftRank.AMATEUR    }, -- 48g 	(Brass Ingot)
+        { xi.item.GOLDSMITHING_KIT_15,           280, xi.craftRank.RECRUIT    }, -- 140g 	(Brass Zaghnal)
+        { xi.item.GOLDSMITHING_KIT_20,           700, xi.craftRank.RECRUIT    }, -- 350g   (Silver Ingot)
+        { xi.item.GOLDSMITHING_KIT_25,           714, xi.craftRank.INITIATE   }, -- 357g   (Silver Belt)
+        { xi.item.GOLDSMITHING_KIT_30,          1508, xi.craftRank.INITIATE   }, -- 754g	(Brass Finger Gauntlets)
+        { xi.item.GOLDSMITHING_KIT_35,          1222, xi.craftRank.NOVICE     }, -- 611g	(Tigereye Ring)
+        { xi.item.GOLDSMITHING_KIT_40,          2500, xi.craftRank.NOVICE     }, -- 1250g	(Mythril Ingot)
+        { xi.item.GOLDSMITHING_KIT_45,          2506, xi.craftRank.APPRENTICE }, -- 1253g	(Peridot Earring)
+        { xi.item.GOLDSMITHING_KIT_50,          1644, xi.craftRank.APPRENTICE }, -- 822g	(Aluminum Sheet)
+		{ xi.item.GOLDSMITHING_KIT_55,          5908, xi.craftRank.JOURNEYMAN }, -- 2954g	(Heater Shield)
+		{ xi.item.GOLDSMITHING_KIT_60,          7094, xi.craftRank.JOURNEYMAN }, -- 3547g	(Mythril Cuisses)
+		{ xi.item.GOLDSMITHING_KIT_65,          3962, xi.craftRank.CRAFTSMAN  }, -- 1981g	(Moon Earring)
+        { xi.item.GOLDSMITHING_KIT_70,          7118, xi.craftRank.CRAFTSMAN  }, -- 3559g	(Gold Bangles)
+        { xi.item.GOLDSMITHING_KIT_75,          6500, xi.craftRank.ARTISAN    }, -- 3250g	(Ashura)
+        { xi.item.GOLDSMITHING_KIT_80,          8160, xi.craftRank.ARTISAN    }, -- 4080g	(Gold Buckler)
+        { xi.item.GOLDSMITHING_KIT_85,          9582, xi.craftRank.ADEPT      }, -- 4791g	(Platinum Bangles)
+        { xi.item.GOLDSMITHING_KIT_90,          7560, xi.craftRank.ADEPT      }, -- 3780g	(Jeweled Collar)
+        { xi.item.GOLDSMITHING_KIT_94,          4037, xi.craftRank.VETERAN    }, -- 0g		(Phrygian ring) Price of all items average. 38+96+280+700.../19=4037g.
 	},
 
     [xi.skill.WOODWORKING] =
     {
-        { xi.item.SPOOL_OF_BUNDLING_TWINE,     100, xi.craftRank.AMATEUR    },
-        { xi.item.ARROWWOOD_LOG,                25, xi.craftRank.AMATEUR    },
-        { xi.item.LAUAN_LOG,                    50, xi.craftRank.AMATEUR    },
-        { xi.item.MAPLE_LOG,                    70, xi.craftRank.AMATEUR    },
-        { xi.item.HOLLY_LOG,                   800, xi.craftRank.RECRUIT    },
-        { xi.item.WILLOW_LOG,                 1600, xi.craftRank.RECRUIT    },
-        { xi.item.WALNUT_LOG,                 1300, xi.craftRank.RECRUIT    },
-        { xi.item.YEW_LOG,                     500, xi.craftRank.INITIATE   },
-        { xi.item.ELM_LOG,                    3800, xi.craftRank.INITIATE   },
-        { xi.item.CHESTNUT_LOG,               3400, xi.craftRank.INITIATE   },
-        { xi.item.DOGWOOD_LOG,                2000, xi.craftRank.NOVICE     },
-        { xi.item.OAK_LOG,                    4000, xi.craftRank.NOVICE     },
-        { xi.item.ROSEWOOD_LOG,               4500, xi.craftRank.APPRENTICE },
-        { xi.item.MAHOGANY_LOG,               4500, xi.craftRank.JOURNEYMAN },
-        { xi.item.EBONY_LOG,                  5000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.FEYWEALD_LOG,               5500, xi.craftRank.CRAFTSMAN  },
-        { xi.item.WOODWORKING_KIT_5,           300, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_10,          400, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_15,          650, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_20,         1050, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_25,         1600, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_30,         2300, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_35,         3150, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_40,         4150, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_45,         5300, xi.craftRank.AMATEUR    },
-        { xi.item.WOODWORKING_KIT_50,         7600, xi.craftRank.AMATEUR    },
-        { xi.item.CYPRESS_LOG,             1126125, xi.craftRank.AMATEUR    },
+        { xi.item.SPOOL_OF_BUNDLING_TWINE,       100, xi.craftRank.AMATEUR    },
+        { xi.item.ARROWWOOD_LOG,                  25, xi.craftRank.AMATEUR    },
+        { xi.item.LAUAN_LOG,                      50, xi.craftRank.AMATEUR    },
+        { xi.item.MAPLE_LOG,                      70, xi.craftRank.AMATEUR    },
+        { xi.item.HOLLY_LOG,                     800, xi.craftRank.RECRUIT    },
+        { xi.item.WILLOW_LOG,                   1600, xi.craftRank.RECRUIT    },
+        { xi.item.WALNUT_LOG,                   1300, xi.craftRank.RECRUIT    },
+        { xi.item.YEW_LOG,                       500, xi.craftRank.INITIATE   },
+        { xi.item.ELM_LOG,                      3800, xi.craftRank.INITIATE   },
+        { xi.item.CHESTNUT_LOG,                 3400, xi.craftRank.INITIATE   },
+        { xi.item.DOGWOOD_LOG,                  2000, xi.craftRank.NOVICE     },
+        { xi.item.OAK_LOG,                      4000, xi.craftRank.NOVICE     },
+        { xi.item.ROSEWOOD_LOG,                 4500, xi.craftRank.APPRENTICE },
+        { xi.item.MAHOGANY_LOG,                 4500, xi.craftRank.JOURNEYMAN },
+        { xi.item.EBONY_LOG,                    5000, xi.craftRank.CRAFTSMAN  },
+        { xi.item.FEYWEALD_LOG,                 5500, xi.craftRank.CRAFTSMAN  },
+        -- kits 															     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.WOODWORKING_KIT_5,             112, xi.craftRank.AMATEUR    }, -- 56g		(Padded Box)
+        { xi.item.WOODWORKING_KIT_10,             32, xi.craftRank.AMATEUR    }, -- 16g		(Ash Staff)
+        { xi.item.WOODWORKING_KIT_15,            274, xi.craftRank.RECRUIT    }, -- 137g 	(Bamboo Fishing Rod)
+        { xi.item.WOODWORKING_KIT_20,            440, xi.craftRank.RECRUIT    }, -- 220g	(Piccolo)
+        { xi.item.WOODWORKING_KIT_25,            492, xi.craftRank.INITIATE   }, -- 246g	(Tarutaru Stool)
+        { xi.item.WOODWORKING_KIT_30,            198, xi.craftRank.INITIATE   }, -- 99g		(Silver Arrow x33)
+        { xi.item.WOODWORKING_KIT_35,            660, xi.craftRank.NOVICE     }, -- 330g	(Black Bolt x33)
+        { xi.item.WOODWORKING_KIT_40,           1280, xi.craftRank.NOVICE     }, -- 640g	(Bahut)
+        { xi.item.WOODWORKING_KIT_45,           1960, xi.craftRank.APPRENTICE }, -- 980g	(Rosewood Lumber)
+        { xi.item.WOODWORKING_KIT_50,            462, xi.craftRank.APPRENTICE }, -- 231g	(Sleep Arrow x33)
+		{ xi.item.WOODWORKING_KIT_55,            570, xi.craftRank.JOURNEYMAN }, -- 285g	(Fastwater Fishing Rod)
+		{ xi.item.WOODWORKING_KIT_60,           4064, xi.craftRank.JOURNEYMAN }, -- 2032g	(Pot of White Viola)
+		{ xi.item.WOODWORKING_KIT_65,           1756, xi.craftRank.CRAFTSMAN  }, -- 878g	(Tarutaru Fishing Rod)
+        { xi.item.WOODWORKING_KIT_71,           7118, xi.craftRank.CRAFTSMAN  }, -- 4753g	(Ebony Harp)
+        { xi.item.WOODWORKING_KIT_74,           2160, xi.craftRank.ARTISAN    }, -- 1080g	(Hume Fishing Rod)
+        { xi.item.WOODWORKING_KIT_81,           6400, xi.craftRank.ARTISAN    }, -- 3200g	(Cabinet)
+        { xi.item.WOODWORKING_KIT_84,          12924, xi.craftRank.ADEPT      }, -- 6462g	(Numinous Shield)
+        { xi.item.WOODWORKING_KIT_90,      	   14000, xi.craftRank.ADEPT      }, -- 7000g	(Mythic Harp)
+        { xi.item.WOODWORKING_KIT_94,       	2889, xi.craftRank.VETERAN    }, -- 0g		(Sasah Wand) Price of all items average. 112+32+274+440.../19=2889g.
     },
 
     [xi.skill.ALCHEMY] =
@@ -361,76 +376,103 @@ xi.shop.generalGuildStock =
         { xi.item.JAR_OF_TOAD_OIL,              3600, xi.craftRank.JOURNEYMAN },
         { xi.item.CERMET_CHUNK,                 5000, xi.craftRank.CRAFTSMAN  },
         { xi.item.PINCH_OF_VENOM_DUST,          1035, xi.craftRank.CRAFTSMAN  },
-        { xi.item.ALCHEMY_KIT_5,                 300, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_10,                400, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_15,                650, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_20,               1050, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_25,               1600, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_30,               2300, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_35,               3150, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_40,               4150, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_45,               5300, xi.craftRank.AMATEUR    },
-        { xi.item.ALCHEMY_KIT_50,               7600, xi.craftRank.AMATEUR    },
-        { xi.item.AZURE_LEAF,                1126125, xi.craftRank.AMATEUR    },
+		-- kits 															     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.ALCHEMY_KIT_5,         	     160, xi.craftRank.AMATEUR    }, -- 80g  	(Black Ink x2)
+        { xi.item.ALCHEMY_KIT_10,         	     160, xi.craftRank.AMATEUR    }, -- 80g	 	(Deodorizer)
+        { xi.item.ALCHEMY_KIT_15,               1386, xi.craftRank.RECRUIT    }, -- 693g	(Cracker)
+        { xi.item.ALCHEMY_KIT_20,               2260, xi.craftRank.RECRUIT    }, -- 1130g	(Hushed Baghnakhs)
+        { xi.item.ALCHEMY_KIT_25,                640, xi.craftRank.INITIATE   }, -- 320g	(Poison Baselard)
+        { xi.item.ALCHEMY_KIT_30,                872, xi.craftRank.INITIATE   }, -- 436g	(Sieglinde Putty)
+        { xi.item.ALCHEMY_KIT_35,               4308, xi.craftRank.NOVICE     }, -- 2154g	(Poison Baghnakhs)
+        { xi.item.ALCHEMY_KIT_40,               1280, xi.craftRank.NOVICE     }, -- 640g	(Firesand x2)
+        { xi.item.ALCHEMY_KIT_45,               1164, xi.craftRank.APPRENTICE }, -- 582g	(Carbon Fiber x3)		
+        { xi.item.ALCHEMY_KIT_50,               1208, xi.craftRank.APPRENTICE }, -- 604g	(Ether)
+		{ xi.item.ALCHEMY_KIT_55,               2400, xi.craftRank.JOURNEYMAN }, -- 1200g	(Yoto)
+		{ xi.item.ALCHEMY_KIT_60,                492, xi.craftRank.JOURNEYMAN }, -- 246g	(Hi-Potion)
+		{ xi.item.ALCHEMY_KIT_65,               5338, xi.craftRank.CRAFTSMAN  }, -- 2669g	(Melt Baselard)
+        { xi.item.ALCHEMY_KIT_70,              20756, xi.craftRank.CRAFTSMAN  }, -- 10378g	(Saber)
+        { xi.item.ALCHEMY_KIT_75,              14580, xi.craftRank.ARTISAN    }, -- 7290g	(Venom Kukri)
+        { xi.item.ALCHEMY_KIT_80,              16900, xi.craftRank.ARTISAN    }, -- 8450g	(Stun Knife)
+        { xi.item.ALCHEMY_KIT_85,              15200, xi.craftRank.ADEPT      }, -- 7600g	(Bloody Rapier)
+        { xi.item.ALCHEMY_KIT_90,              11878, xi.craftRank.ADEPT      }, -- 5939g	(Bloody Lance)
+        { xi.item.ALCHEMY_KIT_95,               1578, xi.craftRank.VETERAN    }, -- 789g	(Max-Potion)
     },
 
     [xi.skill.BONECRAFT] =
     {
-        { xi.item.SHAGREEN_FILE,               75, xi.craftRank.AMATEUR    },
-        { xi.item.BONE_CHIP,                  150, xi.craftRank.AMATEUR    },
-        { xi.item.HANDFUL_OF_FISH_SCALES,      96, xi.craftRank.AMATEUR    },
-        { xi.item.CHICKEN_BONE,              1500, xi.craftRank.RECRUIT    },
-        { xi.item.GIANT_FEMUR,               1400, xi.craftRank.RECRUIT    },
-        { xi.item.BEETLE_SHELL,               500, xi.craftRank.INITIATE   },
-        { xi.item.BEETLE_JAW,                1000, xi.craftRank.INITIATE   },
-        { xi.item.RAM_HORN,                  1800, xi.craftRank.NOVICE     },
-        { xi.item.BLACK_TIGER_FANG,          2000, xi.craftRank.NOVICE     },
-        { xi.item.CRAB_SHELL,                2500, xi.craftRank.APPRENTICE },
-        { xi.item.TURTLE_SHELL,              6000, xi.craftRank.JOURNEYMAN },
-        { xi.item.SCORPION_CLAW,             2400, xi.craftRank.JOURNEYMAN },
-        { xi.item.BUGARD_TUSK,               4000, xi.craftRank.JOURNEYMAN },
-        { xi.item.SCORPION_SHELL,            3000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.MARID_TUSK,                4500, xi.craftRank.CRAFTSMAN  },
-        { xi.item.BONECRAFT_KIT_5,            300, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_10,           400, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_15,           650, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_20,          1050, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_25,          1600, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_30,          2300, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_35,          3150, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_40,          4150, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_45,          5300, xi.craftRank.AMATEUR    },
-        { xi.item.BONECRAFT_KIT_50,          7600, xi.craftRank.AMATEUR    },
-        { xi.item.FRAGMENT_OF_CYAN_CORAL, 1126125, xi.craftRank.AMATEUR    },
+        { xi.item.SHAGREEN_FILE,                  75, xi.craftRank.AMATEUR    },
+        { xi.item.BONE_CHIP,                     150, xi.craftRank.AMATEUR    },
+        { xi.item.HANDFUL_OF_FISH_SCALES,         96, xi.craftRank.AMATEUR    },
+        { xi.item.CHICKEN_BONE,                 1500, xi.craftRank.RECRUIT    },
+        { xi.item.GIANT_FEMUR,                  1400, xi.craftRank.RECRUIT    },
+        { xi.item.BEETLE_SHELL,                  500, xi.craftRank.INITIATE   },
+        { xi.item.BEETLE_JAW,                   1000, xi.craftRank.INITIATE   },
+        { xi.item.RAM_HORN,                     1800, xi.craftRank.NOVICE     },
+        { xi.item.BLACK_TIGER_FANG,             2000, xi.craftRank.NOVICE     },
+        { xi.item.CRAB_SHELL,                   2500, xi.craftRank.APPRENTICE },
+        { xi.item.TURTLE_SHELL,                 6000, xi.craftRank.JOURNEYMAN },
+        { xi.item.SCORPION_CLAW,                2400, xi.craftRank.JOURNEYMAN },
+        { xi.item.BUGARD_TUSK,                  4000, xi.craftRank.JOURNEYMAN },
+        { xi.item.SCORPION_SHELL,               3000, xi.craftRank.CRAFTSMAN  },
+        { xi.item.MARID_TUSK,                   4500, xi.craftRank.CRAFTSMAN  },
+        -- kits 															     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.BONECRAFT_KIT_5,         	     112, xi.craftRank.AMATEUR    }, -- 56g		(Shell Powder)
+        { xi.item.BONECRAFT_KIT_10,         	  24, xi.craftRank.AMATEUR    }, -- 12g		(Bone Arrowheads x6)
+        { xi.item.BONECRAFT_KIT_15,             1272, xi.craftRank.RECRUIT    }, -- 636g	(Fang Necklace)
+        { xi.item.BONECRAFT_KIT_20,              410, xi.craftRank.RECRUIT    }, -- 205g	(Bone Axe)
+        { xi.item.BONECRAFT_KIT_25,             1178, xi.craftRank.INITIATE   }, -- 589g	(Beetle Ring)
+        { xi.item.BONECRAFT_KIT_30,             2468, xi.craftRank.INITIATE   }, -- 1234g	(Beetle Mask)
+        { xi.item.BONECRAFT_KIT_35,             1230, xi.craftRank.NOVICE     }, -- 615g	(Turtle Shield)
+        { xi.item.BONECRAFT_KIT_40,             1566, xi.craftRank.NOVICE     }, -- 783g	(Bone Cudgel)
+        { xi.item.BONECRAFT_KIT_45,             2072, xi.craftRank.APPRENTICE }, -- 1036g	(Carapace Mask)		
+        { xi.item.BONECRAFT_KIT_50,             2244, xi.craftRank.APPRENTICE }, -- 1122g	(Bone Rod)
+		{ xi.item.BONECRAFT_KIT_55,             3500, xi.craftRank.JOURNEYMAN }, -- 1750g	(Tortoise Earring)	
+		{ xi.item.BONECRAFT_KIT_60,              900, xi.craftRank.JOURNEYMAN }, -- 450g	(Scorpion Ring)
+		{ xi.item.BONECRAFT_KIT_65,              430, xi.craftRank.CRAFTSMAN  }, -- 215g	(Ladybug Ring)
+        { xi.item.BONECRAFT_KIT_70,             2306, xi.craftRank.CRAFTSMAN  }, -- 1153g	(Demon's Ring)
+        { xi.item.BONECRAFT_KIT_75,             5256, xi.craftRank.ARTISAN    }, -- 2628g	(Ladybug Earring)
+        { xi.item.BONECRAFT_KIT_80,             8608, xi.craftRank.ARTISAN    }, -- 4304g	(Coral Ring)
+        { xi.item.BONECRAFT_KIT_85,             1500, xi.craftRank.ADEPT      }, -- 750g	(Hellish Bugle)
+        { xi.item.BONECRAFT_KIT_90,             7816, xi.craftRank.ADEPT      }, -- 3908g	(Dragon Claws)
+        { xi.item.BONECRAFT_KIT_95,            27582, xi.craftRank.VETERAN    }, -- 13791g	(Carapace Breastplate)
     },
 
     [xi.skill.LEATHERCRAFT] =
     {
-        { xi.item.TANNING_VAT,                              75, xi.craftRank.AMATEUR    },
-        { xi.item.SHEEPSKIN,                               100, xi.craftRank.AMATEUR    },
-        { xi.item.RABBIT_HIDE,                              80, xi.craftRank.AMATEUR    },
-        { xi.item.LIZARD_SKIN,                             600, xi.craftRank.RECRUIT    },
-        { xi.item.KARAKUL_SKIN,                            600, xi.craftRank.RECRUIT    },
-        { xi.item.WOLF_HIDE,                               600, xi.craftRank.RECRUIT    },
-        { xi.item.DHALMEL_HIDE,                           2400, xi.craftRank.INITIATE   },
-        { xi.item.BUGARD_SKIN,                            2500, xi.craftRank.INITIATE   },
-        { xi.item.RAM_SKIN,                               1500, xi.craftRank.NOVICE     },
-        { xi.item.BUFFALO_HIDE,                          16000, xi.craftRank.APPRENTICE },
-        { xi.item.RAPTOR_SKIN,                            3000, xi.craftRank.JOURNEYMAN },
-        { xi.item.CATOBLEPAS_HIDE,                        2500, xi.craftRank.JOURNEYMAN },
-        { xi.item.SMILODON_HIDE,                          3000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.COCKATRICE_SKIN,                        3000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.LEATHERCRAFT_KIT_5,                      300, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_10,                     400, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_15,                     650, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_20,                    1050, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_25,                    1600, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_30,                    2300, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_35,                    3150, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_40,                    4150, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_45,                    5300, xi.craftRank.AMATEUR    },
-        { xi.item.LEATHERCRAFT_KIT_50,                    7600, xi.craftRank.AMATEUR    },
-        { xi.item.SQUARE_OF_SYNTHETIC_FAULPIE_LEATHER, 1126125, xi.craftRank.AMATEUR    },
+        { xi.item.TANNING_VAT,                    75, xi.craftRank.AMATEUR    },
+        { xi.item.SHEEPSKIN,                     100, xi.craftRank.AMATEUR    },
+        { xi.item.RABBIT_HIDE,                    80, xi.craftRank.AMATEUR    },
+        { xi.item.LIZARD_SKIN,                   600, xi.craftRank.RECRUIT    },
+        { xi.item.KARAKUL_SKIN,                  600, xi.craftRank.RECRUIT    },
+        { xi.item.WOLF_HIDE,                     600, xi.craftRank.RECRUIT    },
+        { xi.item.DHALMEL_HIDE,                 2400, xi.craftRank.INITIATE   },
+        { xi.item.BUGARD_SKIN,                  2500, xi.craftRank.INITIATE   },
+        { xi.item.RAM_SKIN,                     1500, xi.craftRank.NOVICE     },
+        { xi.item.BUFFALO_HIDE,                16000, xi.craftRank.APPRENTICE },
+        { xi.item.RAPTOR_SKIN,                  3000, xi.craftRank.JOURNEYMAN },
+        { xi.item.CATOBLEPAS_HIDE,              2500, xi.craftRank.JOURNEYMAN },
+        { xi.item.SMILODON_HIDE,                3000, xi.craftRank.CRAFTSMAN  },
+        { xi.item.COCKATRICE_SKIN,              3000, xi.craftRank.CRAFTSMAN  },
+        -- kits 															     -- Return on Craft (Profits:) Test Complete! Prices ajusted.
+		{ xi.item.LEATHERCRAFT_KIT_5,         	 104, xi.craftRank.AMATEUR    }, -- 52g 	(Leather Bandana)
+        { xi.item.LEATHERCRAFT_KIT_10,         	 184, xi.craftRank.AMATEUR    }, -- 92g		(Leather Vest)
+        { xi.item.LEATHERCRAFT_KIT_15,           354, xi.craftRank.RECRUIT    }, -- 177g	(Lizard Helm)
+        { xi.item.LEATHERCRAFT_KIT_20,           360, xi.craftRank.RECRUIT    }, -- 180g	(Fisherman's Boots)
+        { xi.item.LEATHERCRAFT_KIT_25,           672, xi.craftRank.INITIATE   }, -- 336g	(Warrior's Belt)
+        { xi.item.LEATHERCRAFT_KIT_30,          3360, xi.craftRank.INITIATE   }, -- 1680g	(Studded Trousers)
+        { xi.item.LEATHERCRAFT_KIT_35,          1208, xi.craftRank.NOVICE     }, -- 604g	(Ram Leather)
+        { xi.item.LEATHERCRAFT_KIT_40,          1330, xi.craftRank.NOVICE     }, -- 665g	(Field Boots)
+        { xi.item.LEATHERCRAFT_KIT_45,          3360, xi.craftRank.APPRENTICE }, -- 1680g	(Cuir Trousers)	
+        { xi.item.LEATHERCRAFT_KIT_50,          2560, xi.craftRank.APPRENTICE }, -- 1280g	(Leather Shield)
+		{ xi.item.LEATHERCRAFT_KIT_55,          7200, xi.craftRank.JOURNEYMAN }, -- 3600g	(Raptor Gloves)	
+		{ xi.item.LEATHERCRAFT_KIT_60,          1570, xi.craftRank.JOURNEYMAN }, -- 785g	(Hard Leather Ring)
+		{ xi.item.LEATHERCRAFT_KIT_66,          7766, xi.craftRank.CRAFTSMAN  }, -- 3883g	(Battle Boots)
+        { xi.item.LEATHERCRAFT_KIT_70,         15790, xi.craftRank.CRAFTSMAN  }, -- 7895g	(Behemoth Mantle)
+        { xi.item.LEATHERCRAFT_KIT_75,          2500, xi.craftRank.ARTISAN    }, -- 1250g	(Tiger Mantle)
+        { xi.item.LEATHERCRAFT_KIT_79,          4132, xi.craftRank.ARTISAN    }, -- 2066g	(Marid Mantle)
+        { xi.item.LEATHERCRAFT_KIT_85,          4304, xi.craftRank.ADEPT      }, -- 2152g	(Coeurl Mantle)
+        { xi.item.LEATHERCRAFT_KIT_90,          8688, xi.craftRank.ADEPT      }, -- 4344g	(Koenigs Belt)
+        { xi.item.LEATHERCRAFT_KIT_95,         15526, xi.craftRank.VETERAN    }, -- 7763g	(Peiste Mantle)
     },
 
     [xi.skill.SMITHING] =
@@ -453,18 +495,27 @@ xi.shop.generalGuildStock =
         { xi.item.STEEL_NUGGET,                  800, xi.craftRank.JOURNEYMAN },
         { xi.item.DARKSTEEL_SHEET,             28000, xi.craftRank.JOURNEYMAN },
         { xi.item.CHUNK_OF_SWAMP_ORE,           5000, xi.craftRank.CRAFTSMAN  },
-        { xi.item.SMITHING_KIT_5,                300, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_10,               400, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_15,               650, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_20,              1050, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_25,              1600, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_30,              2300, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_35,              3150, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_40,              4150, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_45,              5300, xi.craftRank.AMATEUR    },
-        { xi.item.SMITHING_KIT_50,              7600, xi.craftRank.AMATEUR    },
-        { xi.item.NIOBIUM_ORE,               1126125, xi.craftRank.AMATEUR    },
-    }
+        -- kits 															     -- Return on Craft (Profits:) In progress...
+		{ xi.item.SMITHING_KIT_5,         	     104, xi.craftRank.AMATEUR    }, -- 
+        { xi.item.SMITHING_KIT_10,         	     184, xi.craftRank.AMATEUR    }, -- 
+        { xi.item.SMITHING_KIT_15,               354, xi.craftRank.RECRUIT    }, -- 
+        { xi.item.SMITHING_KIT_20,               360, xi.craftRank.RECRUIT    }, -- 
+        { xi.item.SMITHING_KIT_25,               672, xi.craftRank.INITIATE   }, -- 
+        { xi.item.SMITHING_KIT_30,              3360, xi.craftRank.INITIATE   }, -- 
+        { xi.item.SMITHING_KIT_35,              1208, xi.craftRank.NOVICE     }, -- 
+        { xi.item.SMITHING_KIT_40,              1330, xi.craftRank.NOVICE     }, -- 
+        { xi.item.SMITHING_KIT_45,              3360, xi.craftRank.APPRENTICE }, -- 
+        { xi.item.SMITHING_KIT_50,              2560, xi.craftRank.APPRENTICE }, -- 
+		{ xi.item.SMITHING_KIT_55,              7200, xi.craftRank.JOURNEYMAN }, -- 
+		{ xi.item.SMITHING_KIT_60,              1570, xi.craftRank.JOURNEYMAN }, -- 
+		{ xi.item.SMITHING_KIT_65,              7766, xi.craftRank.CRAFTSMAN  }, -- 
+        { xi.item.SMITHING_KIT_70,             15790, xi.craftRank.CRAFTSMAN  }, -- 
+        { xi.item.SMITHING_KIT_76,              2500, xi.craftRank.ARTISAN    }, -- 
+        { xi.item.SMITHING_KIT_80,              4132, xi.craftRank.ARTISAN    }, -- 
+        { xi.item.SMITHING_KIT_84,              4304, xi.craftRank.ADEPT      }, -- 
+        { xi.item.SMITHING_KIT_91,              8688, xi.craftRank.ADEPT      }, -- 
+        { xi.item.SMITHING_KIT_94,             15526, xi.craftRank.VETERAN    }, -- 
+    },
 }
 
 xi.shop.curioVendorMoogleStock =
