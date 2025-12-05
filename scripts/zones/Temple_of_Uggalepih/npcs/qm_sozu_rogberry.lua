@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
 --  NPC: ??? (Spawns Sozu Rogberry NM)
+-- !pos 220.570 -8.691 259.923 159
 -----------------------------------
 local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------

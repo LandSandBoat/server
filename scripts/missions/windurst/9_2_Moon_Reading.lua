@@ -8,7 +8,7 @@
 -- Janshura-Rashura : !pos -227 -8 184 240
 -- Zokima-Rokima    : !pos 0 -16 124 239
 -- _6q2             : !pos 0.1 -49 37 242
--- qm16             : !pos -239.442 -1.000 -18.870 159
+-- qm_windy_9_2     : !pos -239.442 -1.000 -18.870 159
 -- Qu'Hau Spring    : !pos 0 -29 64 122
 -----------------------------------
 local heavensTowerID = zones[xi.zone.HEAVENS_TOWER]
@@ -192,7 +192,7 @@ mission.sections =
 
         [xi.zone.TEMPLE_OF_UGGALEPIH] =
         {
-            ['qm16'] =
+            ['qm_windy_9_2'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) >= 1 then

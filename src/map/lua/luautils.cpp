@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -5549,6 +5549,18 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
         if (spawnType > 0)
         {
             PMob->m_SpawnType = (SPAWNTYPE)spawnType;
+        }
+
+        const auto modelSize = table["modelSize"].get_or<uint8>(0);
+        if (modelSize > 0)
+        {
+            PMob->modelSize = std::clamp<uint8>(modelSize, 0, 3);
+        }
+
+        const auto modelHitboxSize = table["modelHitboxSize"].get_or<float>(0);
+        if (modelHitboxSize > 0)
+        {
+            PMob->modelHitboxSize = std::max(modelHitboxSize, 0.0f);
         }
 
         luautils::OnEntityLoad(PMob);

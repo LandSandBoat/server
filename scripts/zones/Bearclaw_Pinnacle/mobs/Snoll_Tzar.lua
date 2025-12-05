@@ -7,94 +7,92 @@ local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addMobMod(xi.mobMod.SIGHT_RANGE, 30)
+end
+
 entity.onMobSpawn = function(mob)
-    mob:setAnimationSub(4) -- starting animationSub
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'SNOLL_EXPLOSION', function(snoll, skillID)
+        if skillID == xi.mobSkill.HYPOTHERMAL_COMBUSTION_2 then
+            snoll:getBattlefield():lose()
+        end
+    end)
 end
 
 entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('changeTime', GetSystemTime() + 20)
 end
 
-entity.onMobFight = function(mob, player)
+entity.onMobFight = function(mob, target)
+    local currentTime = GetSystemTime()
+    local currentSize = mob:getAnimationSub()
+    local saltTime    = mob:getLocalVar('saltTime')
+
+    -- Handle Shumeyo Salt effects
+    if saltTime > currentTime then
+        -- Show steam message every 7-10 seconds
+        local nextSteam = mob:getLocalVar('nextSteam')
+        if currentTime >= nextSteam then
+            mob:messageText(mob, ID.text.LARGE_STEAM)
+            mob:setLocalVar('nextSteam', currentTime + math.random(7, 10))
+        end
+
+    -- Salt just wore off - show message and reset
+    elseif saltTime > 0 and saltTime <= currentTime then
+        mob:messageText(mob, ID.text.SHOOK_SALT)
+        mob:setLocalVar('saltTime', 0)
+    end
+
+    -- Handle size changes
     local changeTime = mob:getLocalVar('changeTime')
-    local delay = mob:getLocalVar('delayed')
-    local cd = mob:getLocalVar('cooldown')
-    local salty = mob:getLocalVar('salty')
-    local melting = mob:getLocalVar('melt')
+    if currentTime >= changeTime then
+        switch (currentSize): caseof
+        {
+            [4] = function()
+                mob:setAnimationSub(5)
+                mob:setDamage(140)
+                mob:setLocalVar('changeTime', changeTime + math.random(20, 25))
+            end,
 
-    mob:setDamage(130)
+            [5] = function()
+                mob:setAnimationSub(6)
+                mob:setDamage(150)
+                mob:setLocalVar('changeTime', changeTime + math.random(20, 25))
+            end,
 
-    -- handle salt usage
-    if melting == 1 then
-        mob:setLocalVar('melt', 0)
+            [6] = function()
+                mob:setAnimationSub(7)
+                mob:setDamage(160)
+                mob:setLocalVar('changeTime', changeTime + 90)
+            end,
+
+            [7] = function()
+                mob:useMobAbility(xi.mobSkill.HYPOTHERMAL_COMBUSTION_2)
+            end,
+        }
     end
+end
 
-    -- handle salt cooldown
+entity.onMobMobskillChoose = function(mob, target)
     if
-        cd < GetSystemTime() and
-        salty == 1
-    then
-        player:messageText(player, ID.text.SHOOK_SALT)
-        mob:setLocalVar('salty', 0)
-    end
-
-    -- big
-    if
-        delay < GetSystemTime() and
-        mob:getAnimationSub() == 4 and
-        mob:getBattleTime() - changeTime > 11
-    then
-        mob:setLocalVar('delayed', 0)
-        mob:setAnimationSub(5)
-        mob:setLocalVar('changeTime', mob:getBattleTime())
-        mob:setDamage(140)
-    -- bigger
-    elseif
-        delay < GetSystemTime() and
-        mob:getAnimationSub() == 5 and
-        mob:getBattleTime() - changeTime > 11
-    then
-        player:messageText(player, ID.text.LARGE_STEAM) -- approx. midway point - give warning
-        mob:setLocalVar('delayed', 0)
-        mob:setAnimationSub(6)
-        mob:setLocalVar('changeTime', mob:getBattleTime())
-        mob:setDamage(150)
-    -- biggest
-    elseif
-        delay < GetSystemTime() and
-        mob:getAnimationSub() == 6 and
-        mob:getBattleTime() - changeTime > 11
-    then
-        mob:setLocalVar('delayed', 0)
-        mob:setAnimationSub(7)
-        mob:setLocalVar('changeTime', mob:getBattleTime())
-        mob:setDamage(160)
-    -- self-destruct
-    elseif
-        delay < GetSystemTime() and
         mob:getAnimationSub() == 7 and
-        mob:getBattleTime() - changeTime > 12
+        math.random(1, 100) <= 75
     then
-        mob:useMobAbility(1644)
-        mob:setLocalVar('changeTime', mob:getBattleTime())
-        mob:setLocalVar('gameover', 1)
+        return xi.mobSkill.HYPOTHERMAL_COMBUSTION_2
     end
+
+    local tpList =
+    {
+        xi.mobSkill.ARCTIC_IMPACT,
+        xi.mobSkill.COLD_WAVE_2,
+        xi.mobSkill.HIEMAL_STORM,
+    }
+
+    return tpList[math.random(1, #tpList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local bf = mob:getBattlefield()
-    local changeTime = mob:getLocalVar('changeTime')
-    local gameOver = mob:getLocalVar('gameover')
-
-    -- end BCNM
-    if
-        bf and
-        gameOver == 1 and
-        mob:getBattleTime() - changeTime > 3
-    then
-        mob:setAnimationSub(4)
-        bf:lose()
-        return
-    end
+    mob:removeListener('SNOLL_EXPLOSION')
 end
 
 return entity

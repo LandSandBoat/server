@@ -4,15 +4,12 @@
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Notes: Damage is based on remaining HP
+-- CoP 5-3 Snoll Tzar version, does not kill himself
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobType.NOTORIOUS) then
-        return 1
-    end
-
     return 0
 end
 
@@ -23,7 +20,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
-    mob:setHP(0)
 
     return damage
 end
