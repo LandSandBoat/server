@@ -264,6 +264,14 @@ xi.mod =
     LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage.
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage.
 
+    -- Action-type power multipliers
+    POWER_MULTIPLIER_BASIC_ATTACK   = 1173, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_BASIC_RANGED   = 1174, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_SPELL          = 1175, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_WEAPONSKILL    = 1176, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_JOB_ABILITY    = 1177, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_MOBSKILL       = 1178, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+
     CRITHITRATE                     = 165,
     CRITHITRATE_ONLY_WEP            = 141,
     CRIT_DMG_INCREASE               = 421,
@@ -1079,7 +1087,7 @@ xi.mod =
     PARRY_HP_RECOVERY = 1135, -- Recover <Mod Value> HP on successful parry.
 
     -- TODO: These mods are not yet implemented.
-    REWARD_RECAST                   = 1152, -- TODO: Reduces Reward recast time (seconds)
+    REWARD_RECAST = 1152, -- TODO: Reduces Reward recast time (seconds)
 
     KNOCKBACK_REDUCTION = 1172, -- Reduces distance knocked back
 

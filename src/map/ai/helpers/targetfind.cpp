@@ -108,7 +108,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
 
     // add original target first except for self-centered moves
-    if (radiusType != AOE_RADIUS::ATTACKER)
+    if (radiusType != AOE_RADIUS::ATTACKER || m_conal)
     {
         addEntity(PTarget, false); // pet will be added later
         m_PTarget = PTarget;
@@ -480,7 +480,8 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
 
     // this is first target, always add him first
     // Exception: for self-centered AoEs, all targets must pass radius validation
-    if (m_PTarget == nullptr && !m_selfCenteredAoE)
+    // Conals always add the main target
+    if (m_PTarget == nullptr && (!m_selfCenteredAoE || m_conal))
     {
         return true;
     }

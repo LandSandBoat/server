@@ -915,6 +915,12 @@ xi.spells.damage.calculateAreaOfEffectResistance = function(target, spell)
     return areaOfEffectMultiplier
 end
 
+xi.spells.damage.calculateSpellActionTypeMultiplier = function(caster)
+    local actionTypeMultiplier = 1 + caster:getMod(xi.mod.POWER_MULTIPLIER_SPELL) / 100
+
+    return actionTypeMultiplier
+end
+
 xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     -- Absobtion by liement.
     local liementFactor = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- Check for Liement.
@@ -1186,6 +1192,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local scarletDeliriumMultiplier = xi.combat.damage.scarletDeliriumMultiplier(caster)
     local helixMeritMultiplier      = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local areaOfEffectResistance    = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
+    local actionTypeMultiplier      = xi.spells.damage.calculateSpellActionTypeMultiplier(caster)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -1210,6 +1217,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * helixMeritMultiplier)
     finalDamage = math.floor(finalDamage * areaOfEffectResistance)
+    finalDamage = math.floor(finalDamage * actionTypeMultiplier)
     finalDamage = math.floor(finalDamage * absorb)
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)

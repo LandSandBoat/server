@@ -209,7 +209,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1241); -- rear lasers
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,622);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,623);
 INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,510);
-INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,511);
+INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,509);
 INSERT INTO `mob_skill_lists` VALUES ('Buffalo',57,493);
 INSERT INTO `mob_skill_lists` VALUES ('Buffalo',57,494);
 INSERT INTO `mob_skill_lists` VALUES ('Buffalo',57,495);
@@ -1321,7 +1321,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1823);
 INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1824);
 INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1826);
 INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,510);
-INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,511);
+INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,509);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1709);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1710);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1711);
@@ -4287,7 +4287,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,439); -- Cathars
 INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,440); -- Petro Gaze
 
 -- Next ID : 2092
-
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

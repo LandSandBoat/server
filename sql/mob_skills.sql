@@ -270,7 +270,7 @@ INSERT INTO `mob_skills` VALUES (252,252,'dancing_chains',1,0.0,10.0,2000,0,4,0,
 INSERT INTO `mob_skills` VALUES (253,253,'barbed_crescent',0,0.0,7.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (254,254,'vulcan_shot',1,0.0,14.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (255,190,'dimensional_death',0,0.0,7.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (256,253,'self-destruct_321',2,0.0,50.0,2000,500,6,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (256,253,'heat_wave',2,0.0,50.0,2000,500,6,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (257,1,'foot_kick',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (258,2,'dust_cloud',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (259,3,'whirl_claws',1,0.0,5.0,2000,1500,4,0,0,0,0,0,0);
@@ -523,9 +523,9 @@ INSERT INTO `mob_skills` VALUES (503,856,'unblessed_armor',0,0.0,7.0,2000,1500,1
 -- INSERT INTO `mob_skills` VALUES (506,863,'palsynyxis',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (507,864,'painful_whip',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (508,865,'suctorial_tentacle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (509,253,'self-destruct',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (509,253,'self-destruct_bomb',1,0.0,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (510,254,'berserk',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (511,253,'self-destruct_bomb',1,0.0,20.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (511,253,'self-destruct_bomb_321',1,0.0,30.0,0,0,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (512,256,'heat_wave',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (513,257,'smite_of_rage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (514,258,'whirl_of_rage',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
@@ -585,11 +585,11 @@ INSERT INTO `mob_skills` VALUES (567,866,'sling_bomb',0,0.0,7.0,2000,1500,4,0,0,
 INSERT INTO `mob_skills` VALUES (568,867,'formation_attack',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (569,868,'refueling',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (570,869,'circle_of_flames',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (571,870,'self-destruct_3',1,0.0,10.0,2000,3000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (572,871,'self-destruct_3_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (573,872,'self-destruct_2',1,0.0,10.0,2000,3000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (574,873,'self-destruct_2_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (575,874,'self-destruct_1_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (571,870,'self-destruct_cluster_3',1,0.0,10.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (572,871,'self-destruct_cluster_3_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (573,872,'self-destruct_cluster_2',1,0.0,10.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (574,873,'self-destruct_cluster_2_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (575,874,'self-destruct_cluster_1_death',1,0.0,10.0,2000,5000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (576,910,'back_heel',0,0.0,7.0,2000,1500,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (577,911,'jettatura',4,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (578,912,'nihility_song',1,0.0,12.5,2000,1500,4,0,0,0,0,0,0);
@@ -613,10 +613,10 @@ INSERT INTO `mob_skills` VALUES (595,881,'heat_wave',1,0.0,10.0,2000,1500,4,0,0,
 INSERT INTO `mob_skills` VALUES (596,882,'hellstorm',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (597,883,'self-destruct_bomb_big',1,0.0,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (598,1598,'berserk',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (599,885,'arctic_impact',1,0.0,15.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (600,886,'cold_wave',1,0.0,15.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (601,887,'hiemal_storm',1,0.0,15.0,2000,2000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (602,346,'hypothermal_combustion',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (599,885,'arctic_impact',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (600,886,'cold_wave',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (601,887,'hiemal_storm',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (602,888,'hypothermal_combustion_tzar',1,0.0,20.0,2000,5000,4,0,0,0,0,0,0); -- Snoll Tzar specific skill
 -- INSERT INTO `mob_skills` VALUES (603,432,'lateral_slash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (604,433,'throat_stab',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (605,349,'aerial_wheel',0,0.0,15.0,2000,1500,4,0,0,0,0,0,0);

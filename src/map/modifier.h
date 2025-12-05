@@ -263,6 +263,14 @@ enum class Mod
     LIGHT_ABSORB      = 465, // Occasionally absorbs light elemental damage.
     DARK_ABSORB       = 466, // Occasionally absorbs dark elemental damage.
 
+    // Action-type power multipliers
+    POWER_MULTIPLIER_BASIC_ATTACK = 1173, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_BASIC_RANGED = 1174, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_SPELL        = 1175, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_WEAPONSKILL  = 1176, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_JOB_ABILITY  = 1177, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_MOBSKILL     = 1178, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+
     // Crit Damage / Delay
     CRITHITRATE              = 165,  // Raises chance to crit
     CRITHITRATE_ONLY_WEP     = 141,  // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
@@ -1124,7 +1132,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1173 and onward
+    // SPARE IDs: 1179 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

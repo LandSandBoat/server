@@ -32,7 +32,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 66 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_3_DEATH or xi.mobSkill.SELF_DESTRUCT_3
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_3_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_3
                 table.insert(tpList, selfDestruct)
             end
         end,
@@ -42,7 +42,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 66 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_3_DEATH or xi.mobSkill.SELF_DESTRUCT_3
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_3_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_3
                 table.insert(tpList, selfDestruct)
             end
         end,
@@ -52,14 +52,14 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 33 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_2_DEATH or xi.mobSkill.SELF_DESTRUCT_2
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_2_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_2
                 table.insert(tpList, selfDestruct)
             end
         end,
 
         [6] = function()
             if mobHPP < 20 then
-                table.insert(tpList, xi.mobSkill.SELF_DESTRUCT_1_DEATH)
+                table.insert(tpList, xi.mobSkill.SELF_DESTRUCT_CLUSTER_1_DEATH)
             end
         end,
 
@@ -69,7 +69,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 66 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_3_DEATH or xi.mobSkill.SELF_DESTRUCT_3
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_3_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_3
                 table.insert(tpList, selfDestruct)
             end
         end,
@@ -79,7 +79,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 66 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_3_DEATH or xi.mobSkill.SELF_DESTRUCT_3
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_3_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_3
                 table.insert(tpList, selfDestruct)
             end
         end,
@@ -89,14 +89,14 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
             table.insert(tpList, xi.mobSkill.CIRCLE_OF_FLAMES_1)
             table.insert(tpList, xi.mobSkill.FORMATION_ATTACK_1)
             if mobHPP < 33 then
-                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_2_DEATH or xi.mobSkill.SELF_DESTRUCT_2
+                local selfDestruct = deathVersion and xi.mobSkill.SELF_DESTRUCT_CLUSTER_2_DEATH or xi.mobSkill.SELF_DESTRUCT_CLUSTER_2
                 table.insert(tpList, selfDestruct)
             end
         end,
 
         [14] = function()
             if mobHPP < 20 then
-                table.insert(tpList, xi.mobSkill.SELF_DESTRUCT_1_DEATH)
+                table.insert(tpList, xi.mobSkill.SELF_DESTRUCT_CLUSTER_1_DEATH)
             end
         end,
     }

@@ -1173,9 +1173,9 @@ INSERT INTO `mob_spawn_points` VALUES (16798095,0,'Camahueto','Camahueto',53,-63
 -- ------------------------------------------------------------
 
 -- Flames of the Dead
-INSERT INTO `mob_spawn_points` VALUES (16801793,0,'Snoll_Tzar','Snoll Tzar',1,-457.617,-0.097,885.874,62);
-INSERT INTO `mob_spawn_points` VALUES (16801794,0,'Snoll_Tzar','Snoll Tzar',1,-216.735,-0.325,481.815,62);
-INSERT INTO `mob_spawn_points` VALUES (16801795,0,'Snoll_Tzar','Snoll Tzar',1,-617.067,-0.346,202.142,62);
+INSERT INTO `mob_spawn_points` VALUES (16801793,0,'Snoll_Tzar','Snoll Tzar',1,-460.000,0.402,902.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16801794,0,'Snoll_Tzar','Snoll Tzar',1,-220.168,0.397,501.688,64);
+INSERT INTO `mob_spawn_points` VALUES (16801795,0,'Snoll_Tzar','Snoll Tzar',1,-621.041,0.414,221.900,64);
 
 -- Follow the White Rabbit
 INSERT INTO `mob_spawn_points` VALUES (16801796,0,'Bearclaw_Rabbit','Bearclaw Rabbit',2,-458.421,0.054,871.617,85);
@@ -51766,9 +51766,9 @@ INSERT INTO `mob_spawn_points` VALUES (17367200,0,'Princess_Jelly','Princess Jel
 INSERT INTO `mob_spawn_points` VALUES (17367201,0,'Princess_Jelly','Princess Jelly',25,240.224,-62.000,125.946,155);
 
 -- 3, 2, 1...
-INSERT INTO `mob_spawn_points` VALUES (17367203,0,'Time_Bomb','Time Bomb',26,-177.000,60.000,-141.000,125);
-INSERT INTO `mob_spawn_points` VALUES (17367205,0,'Time_Bomb','Time Bomb',26,23.274,0.000,18.964,125);
-INSERT INTO `mob_spawn_points` VALUES (17367207,0,'Time_Bomb','Time Bomb',26,223.224,-60.000,138.946,125);
+INSERT INTO `mob_spawn_points` VALUES (17367203,0,'Time_Bomb','Time Bomb',26,-177.354,59.696,-142,128);
+INSERT INTO `mob_spawn_points` VALUES (17367205,0,'Time_Bomb','Time Bomb',26,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367207,0,'Time_Bomb','Time Bomb',26,222.5,-60.000,137.946,128);
 
 -- Grimshell Shocktroopers
 INSERT INTO `mob_spawn_points` VALUES (17367209,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,-169.000,59.000,-139.000,120);
@@ -70099,19 +70099,19 @@ INSERT INTO `mob_spawn_points` VALUES (17621089,0,'Rongeur_Dos','Rongeur D\'os',
 INSERT INTO `mob_spawn_points` VALUES (17621090,0,'Guytrash','Guytrash',19,396,197.875,-400,192);
 
 -- Factory Rejects (BS40)
-INSERT INTO `mob_spawn_points` VALUES (17621092,0,'Doll_Factory','Doll Factory',20,-400.000,-201.000,403.000,190);
+INSERT INTO `mob_spawn_points` VALUES (17621092,0,'Doll_Factory','Doll Factory',20,-400.001,-202.125,400.001,192);
 INSERT INTO `mob_spawn_points` VALUES (17621093,0,'Generic_Doll','Generic Doll',76,-399.000,-201.000,399.000,190);
 INSERT INTO `mob_spawn_points` VALUES (17621094,0,'Generic_Doll','Generic Doll',21,-393.000,-201.000,399.000,185);
 INSERT INTO `mob_spawn_points` VALUES (17621095,0,'Generic_Doll','Generic Doll',21,-397.000,-201.000,395.000,185);
 INSERT INTO `mob_spawn_points` VALUES (17621096,0,'Generic_Doll','Generic Doll',21,-404.000,-201.000,399.000,195);
 INSERT INTO `mob_spawn_points` VALUES (17621097,0,'Generic_Doll','Generic Doll',21,-402.000,-201.000,395.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621099,0,'Doll_Factory','Doll Factory',20,0.073,-1.000,3.099,190);
+INSERT INTO `mob_spawn_points` VALUES (17621099,0,'Doll_Factory','Doll Factory',20,1.06,-1.625,-0.9,192);
 INSERT INTO `mob_spawn_points` VALUES (17621100,0,'Generic_Doll','Generic Doll',21,1.073,-1.000,-0.901,190);
 INSERT INTO `mob_spawn_points` VALUES (17621101,0,'Generic_Doll','Generic Doll',21,7.073,-1.000,-0.901,185);
 INSERT INTO `mob_spawn_points` VALUES (17621102,0,'Generic_Doll','Generic Doll',21,3.073,-1.000,-4.901,185);
 INSERT INTO `mob_spawn_points` VALUES (17621103,0,'Generic_Doll','Generic Doll',21,-3.927,-1.000,-0.901,195);
 INSERT INTO `mob_spawn_points` VALUES (17621104,0,'Generic_Doll','Generic Doll',21,-1.927,-1.000,-4.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621106,0,'Doll_Factory','Doll Factory',20,400.028,199.000,-396.677,190);
+INSERT INTO `mob_spawn_points` VALUES (17621106,0,'Doll_Factory','Doll Factory',20,400,199.000,-400.677,192);
 INSERT INTO `mob_spawn_points` VALUES (17621107,0,'Generic_Doll','Generic Doll',21,401.028,199.000,-400.677,190);
 INSERT INTO `mob_spawn_points` VALUES (17621108,0,'Generic_Doll','Generic Doll',21,407.028,199.000,-400.677,185);
 INSERT INTO `mob_spawn_points` VALUES (17621109,0,'Generic_Doll','Generic Doll',21,403.028,199.000,-404.677,185);

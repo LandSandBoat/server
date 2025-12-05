@@ -9,35 +9,35 @@ local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    local result = 0
-    local id = target:getID()
-    local checkID = true
+    local msg     = 0
+    local offset  = target:getBattlefield():getArea() - 1
+    local snollID = ID.mob.SNOLL_TZAR_OFFSET + offset
 
-    for i = 0, 2 do
-        if ID.mob.SNOLL_TZAR_OFFSET + i == id then
-            checkID = false
-        end
-    end
-
-    if checkID then -- snoll tzar
-        result = xi.msg.basic.ITEM_UNABLE_TO_USE
+    if target:getID() ~= snollID then
+        msg = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(caster) > 10 then
-        result = xi.msg.basic.TOO_FAR_AWAY
+        msg = xi.msg.basic.TOO_FAR_AWAY
     end
 
-    return result
+    return msg
 end
 
 itemObject.onItemUse = function(target, player)
-    local salt = target:getLocalVar('salty')
+    local currentTime = GetSystemTime()
+    local changeTime = target:getLocalVar('changeTime')
+    local saltTime = target:getLocalVar('saltTime')
 
-    player:messageText(player, ID.text.BEGINS_TO_MELT)
+    -- Delay next form change by 20 seconds
+    target:setLocalVar('changeTime', changeTime + 20)
 
-    if salt == 0 then -- random time until shaken off
-        target:setLocalVar('delayed', GetSystemTime() + 20)
-        target:setLocalVar('cooldown', GetSystemTime() + math.random(15, 20))
-        target:setLocalVar('salty', 1)
-        target:setLocalVar('melt', 1)
+    if saltTime < currentTime then
+        target:messageText(target, ID.text.BEGINS_TO_MELT)
+        target:setLocalVar('saltTime', currentTime + 20)
+        target:setLocalVar('nextSteam', currentTime + math.random(7, 10))
+
+    -- Extend existing salt duration by 20 seconds
+    else
+        target:setLocalVar('saltTime', saltTime + 20)
     end
 end
 

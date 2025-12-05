@@ -247,6 +247,11 @@ entity.onMobFight = function(mob, target)
     local twoHourHPP = mob:getLocalVar('twoHourHPP')
     local twoHourUsed = mob:getLocalVar('twoHourUsed')
 
+    -- Add a busy check here after variables are defined to prevent charm/two-hour usage while busy
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
     -- Handle charm timer first
     if
         lastCharmTime == 0 or
@@ -254,6 +259,7 @@ entity.onMobFight = function(mob, target)
     then
         charm(mob)
         mob:setLocalVar('lastCharmTime', currentTime)
+        return
     end
 
     -- Then check if we should use the copied two-hour ability
