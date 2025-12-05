@@ -977,6 +977,13 @@ void LoadSpells(CCharEntity* PChar)
         }
     }
 
+    std::string condition = "spell_list.content_tag IS NULL";
+
+    if (!enabledExpansions.empty())
+    {
+        condition = fmt::format("spell_list.content_tag IN ({}) OR spell_list.content_tag IS NULL", fmt::join(enabledExpansions, ","));
+    }
+
     // Select all player spells from enabled expansions
     //
     // NOTE: We normally don't want to build a prepared statement with fmt::format,
@@ -985,10 +992,8 @@ void LoadSpells(CCharEntity* PChar)
                              "FROM char_spells "
                              "JOIN spell_list "
                              "ON spell_list.spellid = char_spells.spellid "
-                             "WHERE charid = ? AND "
-                             "(spell_list.content_tag IN ({}) OR "
-                             "spell_list.content_tag IS NULL)",
-                             fmt::join(enabledExpansions, ","));
+                             "WHERE charid = ? AND ({})",
+                             condition);
 
     auto rset = db::preparedStmt(query, PChar->id);
     if (rset && rset->rowsCount())

@@ -1,9 +1,9 @@
 -----------------------------------
--- Petrifactive Breath
--- Description: Petrifies a single target.
--- Type: Breath
+-- Mortal Blast
+-- Description: Inflicts Death on a single target (Gaze)
+-- Type: Magical
 -- Utsusemi/Blink absorb: Ignores shadows
--- Range: Unknown
+-- TODO : Capture Animation, Range & Death message from Abyssea
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,9 +13,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 60))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.KO, 1, 0, 1))
 
-    return xi.effect.PETRIFICATION
+    target:setHP(0)
+
+    return xi.effect.KO
 end
 
 return mobskillObject

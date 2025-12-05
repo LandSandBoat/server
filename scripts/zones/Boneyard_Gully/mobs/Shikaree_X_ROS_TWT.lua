@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Boneyard_Gully
---  Mob: Shikaree Y
+--  Mob: Shikaree X
+-- TODO: Rework based off of Head Wind changes
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
@@ -9,27 +10,29 @@ local entity = {}
 
 -- TODO: Add sleep resistance.
 -- TODO: Add gravity resistance.
+-- TODO: Adjust ninjutsu weights.
+-- TODO: Ninjutsu and Song immunities.
 
 local boneyardID = zones[xi.zone.BONEYARD_GULLY]
-local skillList  = 1166
+local skillList  = 1165
 
 -- Indexed by step in the skillchain.
 local weaponskills =
 {
-    [ 1 ] = xi.weaponskill.GUILLOTINE,
-    [ 2 ] = xi.weaponskill.VORPAL_SCYTHE,
+    [ 1 ] = xi.weaponskill.EVISCERATION,
+    [ 2 ] = xi.weaponskill.SHADOWSTITCH,
 }
 
 local messages =
 {
-    ENGAGE           = boneyardID.text.GET_YOUR_BLOOD_RACING,
-    TP_READY         = boneyardID.text.READY_TO_REAP,
-    BEGIN_SKILLCHAIN = boneyardID.text.LET_THE_MASSACRE_BEGIN,
-    CLOSE_SKILLCHAIN = boneyardID.text.JUST_FOR_YOU_SUGARPLUM,
-    SOLO_WEAPONSKILL = boneyardID.text.IN_YOUR_EYE_HONEYCAKES,
-    USE_TWO_HOUR     = boneyardID.text.SCENT_OF_FRESH_BLOOD,
-    SUMMON_PET       = 0,
-    DEATH            = boneyardID.text.I_CANT_HAVE_LOST,
+    ENGAGE           = 0,
+    TP_READY         = boneyardID.text.READY_TO_RUMBLE,
+    BEGIN_SKILLCHAIN = boneyardID.text.TIME_TO_HUNT,
+    CLOSE_SKILLCHAIN = boneyardID.text.MY_TURN,
+    SOLO_WEAPONSKILL = boneyardID.text.YOURE_MINE,
+    USE_TWO_HOUR     = boneyardID.text.SHIKAREE_X_2HR,
+    CALL_BEAST       = boneyardID.text.DINNER_TIME_ADVENTURER_STEAK,
+    DEATH            = boneyardID.text.EVEN_AT_MY_BEST,
 }
 
 -----------------------------------
@@ -148,7 +151,9 @@ end
 -- Zero the skill list to prevent solo weaponskilling while another Shikaree is able to skillchain.
 -----------------------------------
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 2, 'Shikaree_Xs_Rabbit')
     -- Regain from mob_pool_mods.sql
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)
 end
 
@@ -160,17 +165,10 @@ entity.onMobSpawn = function(mob)
 end
 
 -----------------------------------
--- Engagement message.
------------------------------------
-entity.onMobEngage = function(mob, target)
-    mob:messageText(mob, messages.ENGAGE)
-end
-
------------------------------------
 -- Primary battle controller.
 -----------------------------------
 entity.onMobFight = function(mob, target)
-    local scPartner = GetMobByID(mob:getID() + 1)
+    local scPartner = GetMobByID(mob:getID() - 1)
     battleController(mob, target, scPartner)
 end
 
@@ -189,8 +187,10 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
 
-    if skillID == xi.mobSkill.BLOOD_WEAPON_1 then
+    if skillID == xi.mobSkill.FAMILIAR_1 then
         mob:messageText(mob, messages.USE_TWO_HOUR)
+    elseif skillID == xi.mobSkill.CALL_BEAST then
+        mob:messageText(mob, messages.CALL_BEAST)
     else
         skillchainReset(mob)
     end

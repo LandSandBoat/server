@@ -1,8 +1,6 @@
 -----------------------------------
--- Chaotic Eye
---
--- Description: Silences an enemy.
--- Type: Magical (Wind)
+-- Remove Paralysis
+-- Description: Removes Paralysis from target
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,9 +10,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SILENCE, 1, 0, 60))
+    if target:delStatusEffect(xi.effect.PARALYSIS) then
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
+    else
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+    end
 
-    return xi.effect.SILENCE
+    return xi.effect.PARALYSIS
 end
 
 return mobskillObject

@@ -14,4 +14,11 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
 end
 
+entity.onMobDespawn = function(mob)
+    local master = GetMobByID(mob:getID() - 2)
+    if master then
+        master:setLocalVar('petTimer', GetSystemTime() + 15)
+    end
+end
+
 return entity

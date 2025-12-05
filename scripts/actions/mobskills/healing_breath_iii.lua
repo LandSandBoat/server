@@ -1,8 +1,6 @@
 -----------------------------------
--- Chaotic Eye
---
--- Description: Silences an enemy.
--- Type: Magical (Wind)
+-- Healing Breath III
+-- Description: Restores HP for target
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,9 +10,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SILENCE, 1, 0, 60))
+    local curePower = 60 + math.floor(mob:getMaxHP() * 63 / 256)
 
-    return xi.effect.SILENCE
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
+
+    return xi.mobskills.mobHealMove(target, curePower)
 end
 
 return mobskillObject

@@ -35,5 +35,6 @@
 ---@field onSpikesDamage? fun(mob: CBaseEntity, target: CBaseEntity, damage: integer): (integer?, integer?, integer?)
 ---@field onMagicHit? fun(caster: CBaseEntity, target: CBaseEntity, spell: CSpell)
 ---@field onSpellPrecast? fun(mob: CBaseEntity, spell: CSpell)
+---@field onSpellInterrupted? fun(mob: CBaseEntity, spell: CSpell)
 ---@field onSteal? fun(player: CBaseEntity, target: CBaseEntity, ability: CAbility, action: CAction): integer?
 ---@field onMagicCastingCheck? fun(mob: CBaseEntity, target: CBaseEntity, spell: CSpell): integer?

@@ -871,7 +871,9 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
             self.requiredItems.wearMessage == nil and
             #self.tradeItems > 0
         then
-            player:tradeComplete()
+            if not self.requiredItems.keep then
+                player:tradeComplete()
+            end
         end
 
         -- Handle party/alliance members
