@@ -5259,69 +5259,6 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
     }
 }
 
-uint8 GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell)
-{
-    // Majesty turns the Cure and Protect spell families into AoE when active
-    if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MAJESTY) &&
-        (PSpell->getSpellFamily() == SPELLFAMILY_CURE || PSpell->getSpellFamily() == SPELLFAMILY_PROTECT))
-    {
-        return SPELLAOE_RADIAL;
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE) // Divine Veil goes here because -na spells have AoE w/ Accession
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
-            (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
-             (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || xirand::GetRandomNumber(100) < PCaster->getMod(Mod::AOE_NA))))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))
-        {
-            PCaster->StatusEffectContainer->DelStatusEffect(EFFECT_PIANISSIMO);
-            return SPELLAOE_NONE;
-        }
-        else
-        {
-            return SPELLAOE_RADIAL;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_DIFFUSION)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIFFUSION))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    return PSpell->getAOE();
-}
-
 ELEMENT GetDayElement()
 {
     DAYTYPE weekday = static_cast<DAYTYPE>(vanadiel_time::get_weekday());

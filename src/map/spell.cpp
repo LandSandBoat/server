@@ -860,26 +860,4 @@ bool CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level)
     return false;
 }
 
-float GetSpellRadius(CSpell* spell, CBattleEntity* entity)
-{
-    float total = spell->getRadius();
-
-    // brd gets bonus radius from string skill
-    if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
-    {
-        if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
-                                            ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
-        {
-            total += ((float)entity->GetSkill(SKILL_STRING_INSTRUMENT) / 276) * 10;
-        }
-
-        if (total > 20)
-        {
-            total = 20;
-        }
-    }
-
-    return total;
-}
-
 }; // namespace spell

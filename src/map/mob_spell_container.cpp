@@ -61,7 +61,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
     // add spell to correct vector
     // try to add it to ga list first
-    uint8 aoe = battleutils::GetSpellAoEType(m_PMob, spell);
+    const uint8 aoe = spell->getAOE();
     if (aoe > 0 && spell->canTargetEnemy())
     {
         m_gaList.emplace_back(spellId);

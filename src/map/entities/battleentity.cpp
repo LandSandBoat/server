@@ -2105,38 +2105,36 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         flags |= FINDFLAGS_HIT_ALL;
     }
-    uint8 aoeType = battleutils::GetSpellAoEType(this, PSpell);
 
-    if (aoeType == SPELLAOE_RADIAL)
+    const auto     result    = luautils::callGlobal<sol::table>("xi.combat.magicAoE.calculateTypeAndRadius", this, PSpell);
+    const SPELLAOE aoeType   = result.get_or(1, SPELLAOE_NONE);
+    const float    aoeRadius = result.get_or(2, 0.0f);
+    switch (aoeType)
     {
-        float distance = spell::GetSpellRadius(PSpell, this);
-
-        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags, PSpell->getValidTarget());
-    }
-    else if (aoeType == SPELLAOE_CONAL)
-    {
-        // TODO: actual radius calculation
-        float radius = spell::GetSpellRadius(PSpell, this);
-
-        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags, PSpell->getValidTarget());
-    }
-    else
-    {
-        if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
+        case SPELLAOE_RADIAL:
+            PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, aoeRadius, flags, PSpell->getValidTarget());
+            break;
+        case SPELLAOE_CONAL:
+            PAI->TargetFind->findWithinCone(PActionTarget, aoeRadius, 45, flags, PSpell->getValidTarget());
+            break;
+        default:
         {
-            CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
-            IsMagicCovered                   = battleutils::IsMagicCovered((CCharEntity*)PCoverAbilityUser);
-
-            if (IsMagicCovered)
+            if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
             {
-                PActionTarget = PCoverAbilityUser;
+                CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
+                IsMagicCovered                   = battleutils::IsMagicCovered(static_cast<CCharEntity*>(PCoverAbilityUser));
+
+                if (IsMagicCovered)
+                {
+                    PActionTarget = PCoverAbilityUser;
+                }
             }
+            // only add target
+            PAI->TargetFind->findSingleTarget(PActionTarget, flags, PSpell->getValidTarget());
         }
-        // only add target
-        PAI->TargetFind->findSingleTarget(PActionTarget, flags, PSpell->getValidTarget());
     }
 
-    auto totalTargets = (uint16)PAI->TargetFind->m_targets.size();
+    const auto totalTargets = static_cast<uint16>(PAI->TargetFind->m_targets.size());
 
     PSpell->setTotalTargets(totalTargets);
     PSpell->setPrimaryTargetID(PActionTarget->id);
