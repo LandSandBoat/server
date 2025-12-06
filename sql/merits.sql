@@ -162,7 +162,7 @@ INSERT INTO `merits` VALUES (1472,'automaton_skills',5,2,131072,6,22);
 INSERT INTO `merits` VALUES (1474,'maintenance_recast',5,3,131072,6,22);
 INSERT INTO `merits` VALUES (1476,'repair_effect',5,2,131072,6,22);
 INSERT INTO `merits` VALUES (1478,'activate_recast',5,40,131072,6,22);
-INSERT INTO `merits` VALUES (1480,'repair_recast',5,6,131072,6,22);
+INSERT INTO `merits` VALUES (1480,'repair_recast',5,3,131072,6,22);
 INSERT INTO `merits` VALUES (1536,'step_accuracy',5,3,262144,6,23);
 INSERT INTO `merits` VALUES (1538,'haste_samba_effect',5,100,262144,6,23);
 INSERT INTO `merits` VALUES (1540,'reverse_flourish_effect',5,3,262144,6,23);

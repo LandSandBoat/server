@@ -3698,6 +3698,23 @@ function CBaseEntity:getModelSize()
 end
 
 ---@nodiscard
+---@param newSize number
+---@return nil
+function CBaseEntity:setModelSize(newSize)
+end
+
+---@nodiscard
+---@return number
+function CBaseEntity:getHitboxSize()
+end
+
+---@nodiscard
+---@param newSize number
+---@return nil
+function CBaseEntity:setHitboxSize(newSize)
+end
+
+---@nodiscard
 ---@param target CBaseEntity
 ---@return number
 function CBaseEntity:getMeleeRange(target)

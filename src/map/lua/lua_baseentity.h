@@ -839,6 +839,9 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
+    void   setModelSize(uint8 newSize);
+    float  getHitboxSize();
+    void   setHitboxSize(float newSize);
     float  getMeleeRange(CLuaBaseEntity* target);
     void   setMobFlags(uint32 flags, const sol::object& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();

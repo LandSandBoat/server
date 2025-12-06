@@ -1883,6 +1883,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionResult.messageID = PAbility->getMessage();
             }
 
+            // TODO: Some abilities legitimately have no message (e.g., Full Circle)
             if (actionResult.messageID == 0)
             {
                 actionResult.messageID = MSGBASIC_USES_JA;

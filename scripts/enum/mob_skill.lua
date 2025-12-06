@@ -3,6 +3,23 @@ xi = xi or {}
 ---@enum xi.mobSkill
 xi.mobSkill =
 {
+    SHADOWSTITCH                  =   18,
+
+    DANCING_EDGE                  =   23,
+    SHARK_BITE                    =   24,
+    EVISCERATION                  =   25,
+
+    VORPAL_SCYTHE                 =  101,
+    GUILLOTINE_1                  =  102,
+
+    SPIRAL_HELL                   =  104,
+
+    PENTA_THRUST                  =  116,
+
+    SKEWER                        =  118,
+    WHEELING_THRUST               =  119,
+    IMPULSE_DRIVE                 =  120,
+
     BARBED_CRESCENT_1             =  245,
 
     FOOT_KICK_1                   =  257,
@@ -117,6 +134,10 @@ xi.mobSkill =
 
     MIND_WALL                     =  471, -- Mammet-800
 
+    PETRIFACTIVE_BREATH           =  480,
+
+    CHARGED_WHISKER               =  483,
+
     TRANSMOGRIFICATION            =  487, -- Mammet-800
 
     TRICLIP_1                     =  498,
@@ -191,8 +212,17 @@ xi.mobSkill =
 
     FINAL_METEOR                  =  634, -- Final Meteor Chlevnik
 
+    CHAOTIC_EYE_1                 =  653,
+
     CURSED_SPHERE_1               =  659,
     VENOM_1                       =  660,
+
+    KICK_BACK                     =  668,
+    IMPLOSION                     =  669,
+
+    UMBRA_SMASH                   =  671,
+    GIGA_SLASH                    =  672,
+    DARK_NOVA                     =  673,
 
     CRYSTAL_RAIN                  =  678,
     CRYSTAL_WEAPON_FIRE           =  679, -- Zipacna Weapon Start
@@ -207,6 +237,8 @@ xi.mobSkill =
     SOUL_VOICE_1                  =  696,
 
     CHARM                         =  710,
+
+    JUMP_1                        =  718,
 
     MEIKYO_SHISUI_1               =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1                =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
@@ -258,6 +290,10 @@ xi.mobSkill =
 
     JUDGMENT_BOLT_1               =  893, -- Confirmed usage: "Trial by Lightning" bcnm. Regular avatar-type mobs (Ramuh).
 
+    HEALING_BREATH_III            =  896,
+    REMOVE_POISON                 =  897,
+    REMOVE_BLINDNESS              =  898,
+    REMOVE_PARALYSIS              =  899,
     PET_FLAME_BREATH              =  900,
     PET_FROST_BREATH              =  901,
     PET_GUST_BREATH               =  902,
@@ -391,6 +427,7 @@ xi.mobSkill =
     CONTAMINATION                 = 1334,
     TOXIC_PICK                    = 1335,
 
+    FRENZIED_RAGE_1               = 1336,
     CHARM_2                       = 1337,
 
     KNIFE_EDGE_CIRCLE             = 1341,

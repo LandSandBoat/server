@@ -277,7 +277,7 @@ xi.znm.soultrapper.getZeniValue = function(target, player)
     zeni = zeni * utils.clamp((1 / distance) * 8, 1, 1.5)
 
     -- Size Component
-    zeni = zeni + (target:getModelSize() * 5)
+    zeni = zeni + (target:getHitboxSize() * 5) -- needs verification
 
     -- Angle/Facing Component
     if isFacing then

@@ -1657,19 +1657,19 @@ INSERT INTO `mob_spawn_points` VALUES (16806288,0,'Muuts_Sacrifice','Muut\'s Sac
 -- ------------------------------------------------------------
 
 -- Head Wind
-INSERT INTO `mob_spawn_points` VALUES (16809985,0,'Shikaree_Z','Shikaree Z',1,-565.000,2.999,-431.000,64);
-INSERT INTO `mob_spawn_points` VALUES (16809986,0,'Shikaree_Y','Shikaree Y',2,-560.000,2.799,-431.000,64);
-INSERT INTO `mob_spawn_points` VALUES (16809987,0,'Shikaree_X','Shikaree X',3,-570.000,2.425,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16809985,0,'Shikaree_Z_HW','Shikaree Z',1,-565.000,2.999,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16809986,0,'Shikaree_Y_HW','Shikaree Y',2,-560.000,2.799,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16809987,0,'Shikaree_X_HW','Shikaree X',3,-570.000,2.425,-431.000,64);
 INSERT INTO `mob_spawn_points` VALUES (16809988,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',4,-564.318,3.572,-430.988,64);
 INSERT INTO `mob_spawn_points` VALUES (16809989,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',5,-567.611,2.903,-427.431,64);
-INSERT INTO `mob_spawn_points` VALUES (16809990,0,'Shikaree_Z','Shikaree Z',1,-3.743,3.432,127.413,64); -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16809991,0,'Shikaree_Y','Shikaree Y',2,0.679,3.087,129.045,64);  -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16809992,0,'Shikaree_X','Shikaree X',3,-7.036,2.763,130.970,64); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809990,0,'Shikaree_Z_HW','Shikaree Z',1,-3.743,3.432,127.413,64); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809991,0,'Shikaree_Y_HW','Shikaree Y',2,0.679,3.087,129.045,64);  -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809992,0,'Shikaree_X_HW','Shikaree X',3,-7.036,2.763,130.970,64); -- Pos needs audit
 INSERT INTO `mob_spawn_points` VALUES (16809993,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',4,-3.743,3.432,128.413,64);
 INSERT INTO `mob_spawn_points` VALUES (16809994,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',5,-7.036,2.763,131.970,64);
-INSERT INTO `mob_spawn_points` VALUES (16809995,0,'Shikaree_Z','Shikaree Z',1,475.306,3.639,609.579,64); -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16809996,0,'Shikaree_Y','Shikaree Y',2,479.728,3.294,611.211,64); -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16809997,0,'Shikaree_X','Shikaree X',3,472.013,2.970,613.136,64); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809995,0,'Shikaree_Z_HW','Shikaree Z',1,475.306,3.639,609.579,64); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809996,0,'Shikaree_Y_HW','Shikaree Y',2,479.728,3.294,611.211,64); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16809997,0,'Shikaree_X_HW','Shikaree X',3,472.013,2.970,613.136,64); -- Pos needs audit
 INSERT INTO `mob_spawn_points` VALUES (16809998,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',4,475.306,3.639,610.579,64);
 INSERT INTO `mob_spawn_points` VALUES (16809999,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',5,472.013,2.970,614.136,64);
 
@@ -1751,21 +1751,21 @@ INSERT INTO `mob_spawn_points` VALUES (16810081,0,'Erdgeist','Erdgeist',18,494.8
 INSERT INTO `mob_spawn_points` VALUES (16810082,0,'Erdgeist','Erdgeist',18,451.878,-1.490,569.768,64);
 
 -- Tango with a Tracker / Requiem of Sin
-INSERT INTO `mob_spawn_points` VALUES (16810084,0,'Shikaree_Z','Shikaree Z',21,-565.000,2.999,-431.000,64);
-INSERT INTO `mob_spawn_points` VALUES (16810085,0,'Shikaree_Y','Shikaree Y',22,-560.000,2.799,-431.000,64);
-INSERT INTO `mob_spawn_points` VALUES (16810086,0,'Shikaree_X','Shikaree X',23,-570.000,2.425,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16810084,0,'Shikaree_Z_ROS','Shikaree Z',21,-565.000,2.999,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16810085,0,'Shikaree_Y_ROS_TWT','Shikaree Y',22,-560.000,2.799,-431.000,64);
+INSERT INTO `mob_spawn_points` VALUES (16810086,0,'Shikaree_X_ROS_TWT','Shikaree X',23,-570.000,2.425,-431.000,64);
 INSERT INTO `mob_spawn_points` VALUES (16810087,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',24,-564.000,2.999,-430.000,108);
 INSERT INTO `mob_spawn_points` VALUES (16810088,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',25,-570,3,-431,64);
-INSERT INTO `mob_spawn_points` VALUES (16810090,0,'Shikaree_Z','Shikaree Z',21,-4.425,2.859,128.401,64); -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810091,0,'Shikaree_Y','Shikaree Y',22,0,3.3,129,64);            -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810092,0,'Shikaree_X','Shikaree X',23,-10,-2.925,129,64);       -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810093,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',24,-3.425,2.859,129.401,108);
-INSERT INTO `mob_spawn_points` VALUES (16810094,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',25,-10,3,129,64);
-INSERT INTO `mob_spawn_points` VALUES (16810096,0,'Shikaree_Z','Shikaree Z',21,474.624,3.066,610.567,64); -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810097,0,'Shikaree_Y','Shikaree Y',22,479,3.3,611,64);           -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810098,0,'Shikaree_X','Shikaree X',23,469,2.925,611,64);         -- Pos needs audit
-INSERT INTO `mob_spawn_points` VALUES (16810099,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',24,475.624,3.066,611.567,108);
-INSERT INTO `mob_spawn_points` VALUES (16810100,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',25,469,3,611,64);
+INSERT INTO `mob_spawn_points` VALUES (16810090,0,'Shikaree_Z_ROS','Shikaree Z',21,-4.425,2.859,128.401,64);                 -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810091,0,'Shikaree_Y_ROS_TWT','Shikaree Y',22,0,3.3,129,64);                        -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810092,0,'Shikaree_X_ROS_TWT','Shikaree X',23,-10,-2.925,129,64);                   -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810093,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',24,-3.425,2.859,129.401,108);  -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810094,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',25,-10,3,129,64);              -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810096,0,'Shikaree_Z_ROS','Shikaree Z',21,474.624,3.066,610.567,64);                -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810097,0,'Shikaree_Y_ROS_TWT','Shikaree Y',22,479,3.3,611,64);                      -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810098,0,'Shikaree_X_ROS_TWT','Shikaree X',23,469,2.925,611,64);                    -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810099,0,'Shikaree_Zs_Wyvern','Shikaree Z\'s Wyvern',24,475.624,3.066,611.567,108); -- Pos needs audit
+INSERT INTO `mob_spawn_points` VALUES (16810100,0,'Shikaree_Xs_Rabbit','Shikaree X\'s Rabbit',25,469,3,611,64);              -- Pos needs audit
 
 -- -- Antagonistic Ambuscade
 INSERT INTO `mob_spawn_points` VALUES (16810102,0,'Antiphus','Antiphus',19,0.000,0.000,0.000,0);
@@ -52929,9 +52929,9 @@ INSERT INTO `mob_spawn_points` VALUES (17375398,0,'Dromiceiomimus','Dromiceiomim
 INSERT INTO `mob_spawn_points` VALUES (17375399,0,'Dromiceiomimus','Dromiceiomimus',36,178.059,-64.000,175.999,190);
 
 -- Wild Wild Whiskers
-INSERT INTO `mob_spawn_points` VALUES (17375401,0,'Macan_Gadangan','Macan Gadangan',37,-138.000,56.000,-225.000,190);
-INSERT INTO `mob_spawn_points` VALUES (17375403,0,'Macan_Gadangan','Macan Gadangan',37,22.231,-4.000,-25.076,190);
-INSERT INTO `mob_spawn_points` VALUES (17375405,0,'Macan_Gadangan','Macan Gadangan',37,182.059,-64.000,174.999,190);
+INSERT INTO `mob_spawn_points` VALUES (17375401,0,'Macan_Gadangan','Macan Gadangan',37,-139.000,56.043,-224.199,192);
+INSERT INTO `mob_spawn_points` VALUES (17375403,0,'Macan_Gadangan','Macan Gadangan',37,21.089,-3.463,-24.282,192);
+INSERT INTO `mob_spawn_points` VALUES (17375405,0,'Macan_Gadangan','Macan Gadangan',37,181.039,-63.471,175.760,192);
 
 -- Seasons Greetings
 INSERT INTO `mob_spawn_points` VALUES (17375407,0,'Gilagoge_Tlugvi','Gilagoge Tlugvi',38,-137.46,56.63,-222.27,223);
@@ -58574,12 +58574,12 @@ INSERT INTO `mob_spawn_points` VALUES (17449376,0,'Laidly_Laurence','Laidly Laur
 -- ------------------------------------------------------------
 
 -- The Shadow Lord Battle (Mission 5-2)
-INSERT INTO `mob_spawn_points` VALUES (17453057,0,'Shadow_Lord','Shadow Lord',1,-464.812,-167.200,-239.941,0); -- stage 1
-INSERT INTO `mob_spawn_points` VALUES (17453058,0,'Shadow_Lord','Shadow Lord',1,-784.761,-407.200,-479.932,0);
-INSERT INTO `mob_spawn_points` VALUES (17453059,0,'Shadow_Lord','Shadow Lord',1,-1104.599,-647.200,-719.917,0);
-INSERT INTO `mob_spawn_points` VALUES (17453060,0,'Shadow_Lord','Shadow Lord',2,-464.812,-167.200,-239.941,0); -- stage 2
-INSERT INTO `mob_spawn_points` VALUES (17453061,0,'Shadow_Lord','Shadow Lord',2,-784.761,-407.200,-479.932,0);
-INSERT INTO `mob_spawn_points` VALUES (17453062,0,'Shadow_Lord','Shadow Lord',2,-1104.599,-647.200,-719.917,0);
+INSERT INTO `mob_spawn_points` VALUES (17453057,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-464.527,-167.200,-240.076,0); -- stage 1
+INSERT INTO `mob_spawn_points` VALUES (17453058,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-784.761,-407.200,-479.932,0);
+INSERT INTO `mob_spawn_points` VALUES (17453059,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-1104.599,-647.200,-719.917,0);
+INSERT INTO `mob_spawn_points` VALUES (17453060,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-464.812,-167.200,-239.941,0); -- stage 2
+INSERT INTO `mob_spawn_points` VALUES (17453061,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-784.761,-407.200,-479.932,0);
+INSERT INTO `mob_spawn_points` VALUES (17453062,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-1104.599,-647.200,-719.917,0);
 
 -- Where Two Paths Converge (Basty 9-2)
 INSERT INTO `mob_spawn_points` VALUES (17453063,0,'Zeid','Zeid',3,-465.000,-167.000,-240.000,0);

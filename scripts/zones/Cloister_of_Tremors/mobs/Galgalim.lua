@@ -6,6 +6,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

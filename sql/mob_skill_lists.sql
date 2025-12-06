@@ -967,10 +967,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Seether',220,1258);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',221,255);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',222,255);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',223,255);
-INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,668);
-INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,671);
-INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,672);
-INSERT INTO `mob_skill_lists` VALUES ('ShadowLord',224,673);
+-- 224 free
+-- 225 free
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,260);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,261);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,262);

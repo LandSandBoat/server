@@ -27,12 +27,15 @@ zones[xi.zone.BONEYARD_GULLY] =
         THE_PARTY_WILL_BE_REMOVED     = 7425, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7442, -- Tallying conquest results...
         ENTERING_THE_BATTLEFIELD_FOR  = 7605, -- Entering the battlefield for [Head Wind/Like the Wind/Sheep in Antlion's Clothing/Shell We Dance?/Totentanz/Tango with a Tracker/Requiem of Sin/Antagonistic Ambuscade/Head Wind]!
+        SHIKAREE_ENGAGE               = 7725, -- We are the Mithran Trackers! You will answer for your sins!
+        SHIKAREE_Z_OFFSET             = 7726, -- H-how...is this possible...?
         FOLLOW_LEAD                   = 7728, -- Follow my lead!
-        I_CANT_HAVE_LOST              = 7737, -- I...I can't have lost...
+        SHIKAREE_Y_OFFSET             = 7737, -- I...I can't have lost...
         READY_TO_REAP                 = 7738, -- Ready to rrrreap!
         LET_THE_MASSACRE_BEGIN        = 7739, -- Let the massacrrre begin!
         JUST_FOR_YOU_SUGARPLUM        = 7740, -- Just for you, sugarplum!
         IN_YOUR_EYE_HONEYCAKES        = 7741, -- In your eye, honeycakes!
+        SHIKAREE_X_OFFSET             = 7748, -- Defeated...on my...first hunt...
         READY_TO_RUMBLE               = 7749, -- Ready to rrrumble!
         TIME_TO_HUNT                  = 7750, -- Mithran Trackers! Time to hunt!
         MY_TURN                       = 7751, -- My turn! My turn!
@@ -40,18 +43,20 @@ zones[xi.zone.BONEYARD_GULLY] =
         TUCHULCHA_SANDPIT             = 7761, -- Tuchulcha retreats beneath the soil!
         BURSTS_INTO_FLAMES            = 7766, -- The <keyitem> suddenly bursts into flames, the blackened remains borne away by the wind...
         GET_YOUR_BLOOD_RACING         = 7816, -- I'll get your blood rrracing!
-        SCENT_OF_FRESH_BLOOD          = 7818, -- Ah, the scent of frrresh blood!
+        SHIKAREE_Y_2HR                = 7818, -- Ah, the scent of frrresh blood!
         EVEN_AT_MY_BEST               = 7820, -- Even at my best...
-        TIME_TO_END_THE_HUNT          = 7821, -- Time to end the hunt! Go for the jugular!
+        SHIKAREE_X_2HR                = 7821, -- Time to end the hunt! Go for the jugular!
         DINNER_TIME_ADVENTURER_STEAK  = 7822, -- Dinner time! Tonight we're having Adventurer Steak!
     },
 
     mob =
     {
-        PARATA            = GetFirstID('Parata'),
-        SHIKAREE_Z        = GetFirstID('Shikaree_Z'),
-        TUCHULCHA         = GetFirstID('Tuchulcha'),
-        SHIKAREE_Z_OFFSET = GetTableOfIDs('Shikaree_Z'),
+        PARATA         = GetFirstID('Parata'),
+        SHIKAREE_Z_HW  = GetFirstID('Shikaree_Z_HW'),
+        SHIKAREE_Y_HW  = GetFirstID('Shikaree_Y_HW'),
+        SHIKAREE_X_HW  = GetFirstID('Shikaree_X_HW'),
+        SHIKAREE_Z_ROS = GetFirstID('Shikaree_Z_ROS'),
+        TUCHULCHA      = GetFirstID('Tuchulcha'),
     },
 
     npc =

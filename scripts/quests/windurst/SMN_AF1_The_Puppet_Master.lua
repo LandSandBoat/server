@@ -46,14 +46,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['_6n2'] =
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
-                        return quest:event(403)
-                    end
-                end,
-            },
+            ['_6n2'] = quest:event(403),
 
             ['Koru-Moru'] =
             {
@@ -68,6 +61,7 @@ quest.sections =
             {
                 [404] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        quest:setMustZone(player)
                         xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
                     end
                 end,
@@ -82,13 +76,18 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        return quest:progressEvent(256, 0, 329, 0, xi.item.EARTH_PENDULUM)
+                        return quest:progressEvent(256, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, xi.item.EARTH_PENDULUM):progress() -- Takes priority over quest "Trial by Earth"
                     elseif
                         questProgress == 1 and
                         not player:hasItem(xi.item.EARTH_PENDULUM)
                     then
                         return quest:progressEvent(257, 0, xi.item.EARTH_PENDULUM)
-                    elseif questProgress == 2 then
+                    elseif questProgress == 1 then
+                        return quest:event(253, 0, 0, 0, 0, 0, xi.item.EARTH_PENDULUM, 1)
+                    elseif
+                        questProgress == 2 and
+                        player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) ~= xi.questStatus.QUEST_ACCEPTED -- Progress is locked as long as the player is on Trial by Earth as confirmed in captures
+                    then
                         return quest:progressEvent(258)
                     end
                 end,
@@ -136,7 +135,14 @@ quest.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Koru-Moru'] = quest:event(405):replaceDefault(),
+            ['Koru-Moru'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getMustZone(player) then
+                        return quest:event(405)
+                    end
+                end,
+            },
         },
     },
 }

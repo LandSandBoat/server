@@ -683,7 +683,7 @@ INSERT INTO `mob_skills` VALUES (665,409,'grand_slam',1,0.0,15.0,2000,1500,4,0,0
 INSERT INTO `mob_skills` VALUES (666,410,'power_attack',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (667,411,'power_attack_weapon',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (668,412,'kick_back',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (669,413,'implosion',1,0.0,60.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (669,413,'implosion',1,0.0,35.0,2000,0,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (670,414,'implosion',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (671,415,'umbra_smash',1,0.0,12.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (672,416,'giga_slash',1,0.0,12.0,3000,1500,4,0,0,0,0,0,0);
@@ -732,7 +732,7 @@ INSERT INTO `mob_skills` VALUES (710,438,'charm',0,0.0,18.0,2000,0,4,4,0,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (715,459,'barrage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (716,460,'shadowbind',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (717,92,'venom_breath',4,0.0,20.0,2000,1500,4,0,0,0,0,0,0); -- hnm only
--- INSERT INTO `mob_skills` VALUES (718,440,'jump',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (718,204,'jump',0,0.0,9.5,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (719,94,'critical_bite',0,0.0,7.0,2000,1500,4,0,0,5,0,0,0);
 INSERT INTO `mob_skills` VALUES (720,95,'venom_sting',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (721,97,'stasis',0,0.0,9.0,2000,1500,4,0,0,0,0,0,0); -- hnm only
@@ -910,10 +910,10 @@ INSERT INTO `mob_skills` VALUES (892,598,'thunderstorm',0,0.0,10.0,615,3000,4,64
 INSERT INTO `mob_skills` VALUES (893,599,'judgment_bolt',1,0.0,30.0,616,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (894,621,'healing_breath_i',0,0.0,10.0,2000,2000,2,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (895,622,'healing_breath_ii',0,0.0,10.0,2000,2000,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (896,623,'healing_breath_iii',0,0.0,10.0,2000,2000,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (897,624,'remove_poison',0,0.0,10.0,2000,1500,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (898,625,'remove_blindness',0,0.0,10.0,2000,1500,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (899,626,'remove_paralysis',0,0.0,10.0,2000,1500,2,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (896,623,'healing_breath_iii',0,0.0,10.0,2000,2000,65,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (897,624,'remove_poison',0,0.0,10.0,2000,1500,65,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (898,625,'remove_blindness',0,0.0,10.0,2000,1500,65,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (899,626,'remove_paralysis',0,0.0,10.0,2000,1500,65,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (900,627,'pet_flame_breath',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (901,628,'pet_frost_breath',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (902,629,'pet_gust_breath',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
@@ -2614,7 +2614,7 @@ INSERT INTO `mob_skills` VALUES (2578,1805,'colossal_slam',1,0.0,15.0,2000,3000,
 -- INSERT INTO `mob_skills` VALUES (2599,2343,'tepal_twist',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2600,2344,'bloom_fouette',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2601,2345,'petalback_spin',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2602,2346,'mortal_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (2602,2346,'mortal_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0); TODO: Capture Animation & Range from Abyssea
 -- INSERT INTO `mob_skills` VALUES (2603,2347,'heat_breath',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2604,2348,'gorge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2605,2349,'disgorge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

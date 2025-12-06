@@ -16988,7 +16988,63 @@ uint8 CLuaBaseEntity::getModelSize()
         return 0;
     }
 
-    return PEntity->m_ModelRadius;
+    return PEntity->modelSize;
+}
+
+/************************************************************************
+ *  Function: setModelSize()
+ *  Purpose : sets the Model Size (visual) of the entity
+ *  Example : mob:setModelSize(2)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setModelSize(uint8 newSize)
+{
+    auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PEntity)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    PEntity->modelSize = std::clamp<uint8>(newSize, 0, 3);
+}
+
+/************************************************************************
+ *  Function: getHitboxSize()
+ *  Purpose : Returns the hitbox size of the entity
+ *  Example : local size = mob:getHitboxSize()
+ *  Notes   :
+ ************************************************************************/
+
+float CLuaBaseEntity::getHitboxSize()
+{
+    auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PEntity)
+    {
+        return 0;
+    }
+
+    return PEntity->modelHitboxSize;
+}
+
+/************************************************************************
+ *  Function: setHitboxSize()
+ *  Purpose : sets the hitbox size of the entity
+ *  Example : mob:setHitboxSize(1.1)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setHitboxSize(const float newSize)
+{
+    auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PEntity)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    PEntity->modelHitboxSize = newSize;
 }
 
 /************************************************************************
@@ -20126,6 +20182,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isNM", CLuaBaseEntity::isNM);
 
     SOL_REGISTER("getModelSize", CLuaBaseEntity::getModelSize);
+    SOL_REGISTER("setModelSize", CLuaBaseEntity::setModelSize);
+    SOL_REGISTER("getHitboxSize", CLuaBaseEntity::getHitboxSize);
+    SOL_REGISTER("setHitboxSize", CLuaBaseEntity::setHitboxSize);
     SOL_REGISTER("getMeleeRange", CLuaBaseEntity::getMeleeRange);
     SOL_REGISTER("setMobFlags", CLuaBaseEntity::setMobFlags);
     SOL_REGISTER("getMobFlags", CLuaBaseEntity::getMobFlags);
