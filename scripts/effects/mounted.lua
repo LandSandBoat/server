@@ -11,14 +11,24 @@ effectObject.onEffectGain = function(target, effect)
     local animation = xi.animation.NONE
 
     if
-    mountId == xi.mount.CHOCOBO or
-    mountId == xi.mount.NOBLE_CHOCOBO
+        mountId == xi.mount.CHOCOBO or
+        mountId == xi.mount.NOBLE_CHOCOBO
     then
         target:changeMusic(4, 212)
         animation = xi.anim.CHOCOBO
     else
         target:changeMusic(4, 84)
         animation = xi.anim.MOUNT
+    end
+
+    if not target:isInEvent() then
+        target:setAnimation(animation)
+    end
+
+    -- Chocobo and mounts uncharm current pet
+    local pet = target:getPet()
+    if pet ~= nil and pet:isCharmed() then
+        target:despawnPet()
     end
 
     -- XISP Changes ------------------------------------------

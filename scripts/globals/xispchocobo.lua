@@ -17,9 +17,9 @@ dialogue1 =
         'Can\'t wait!',
         function(playerArg)
             if playerArg:getCharVar('[XISP]hasChocobo') == 1 then
-                playerArg:printToPlayer("It appears you already have a chocobo.", xi.msg.channel.SAY, ' ')
+                playerArg:printToPlayer('It appears you already have a chocobo.', xi.msg.channel.SAY, ' ')
             else
-                playerArg:printToPlayer("Congratulations on your new chocobo! All the best to you both.", xi.msg.channel.SAY, ' ')
+                playerArg:printToPlayer('Congratulations on your new chocobo! All the best to you both.', xi.msg.channel.SAY, ' ')
                 playerArg:setCharVar('[XISP]hasChocobo', 1)
                 playerArg:setCharVar('[XISP]chocoGrow', 0)
                 playerArg:setCharVar('[XISP]hasEgg', 0)
@@ -60,9 +60,9 @@ xi.xispchocobo.onTrainerTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_EGG_SOMEWHAT_WARM)
         then
             if player:getCharVar('[XISP]hasChocobo') == 1 then
-                player:printToPlayer("It looks like you already have a chocobo.", xi.msg.channel.SAY, name)
+                player:printToPlayer('It looks like you already have a chocobo.', xi.msg.channel.SAY, name)
             else
-                player:printToPlayer("A new chocobo egg? How wonderful! I will hold onto it for you.", xi.msg.channel.SAY, name)
+                player:printToPlayer('A new chocobo egg? How wonderful! I will hold onto it for you.', xi.msg.channel.SAY, name)
                 player:setCharVar('[XISP]hasEgg', 1)
                 player:confirmTrade()
 
@@ -124,16 +124,16 @@ xi.xispchocobo.chocoboTrigger = function(player, choco)
 
     if chocogrow >= 20 then -- Adult
         if choco:getLocalVar('[XISP]ownerID') ~= player:getID() then
-            player:printToPlayer("This chocobo does not seem to recognize you as its owner.", xi.msg.channel.NS_SAY, ' ')
+            player:printToPlayer('This chocobo does not seem to recognize you as its owner.', xi.msg.channel.NS_SAY, ' ')
             return
         elseif player:getMainLvl() < 20 then
-            player:printToPlayer("You need to be at least level 20 to ride your chocobo.", xi.msg.channel.NS_SAY, ' ')
+            player:printToPlayer('You need to be at least level 20 to ride your chocobo.', xi.msg.channel.NS_SAY, ' ')
             return
         elseif #player:getNotorietyList() > 0 then
-            player:printToPlayer("You cannot mount your chocobo while in combat.", xi.msg.channel.NS_SAY, ' ')
+            player:printToPlayer('You cannot mount your chocobo while in combat.', xi.msg.channel.NS_SAY, ' ')
             return
         elseif player:getCharVar('[XISP]chocoboTimer') > os.time() then -- Timer set when getting off mount
-            player:printToPlayer("Your chocobo appears too tired to ride.", xi.msg.channel.NS_SAY, ' ')
+            player:printToPlayer('Your chocobo appears too tired to ride.', xi.msg.channel.NS_SAY, ' ')
             return
         end
 
@@ -147,19 +147,19 @@ xi.xispchocobo.chocoboTrigger = function(player, choco)
             chocogrow = player:getCharVar('[XISP]chocoGrow')
 
             if chocogrow < 1 then
-                player:printToPlayer("Your chocobo seems a little nervous.", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo seems a little nervous.', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow < 3 then
-                player:printToPlayer("Your chocobo has begun to warm up to you.", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo has begun to warm up to you.', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow < 6 then
-                player:printToPlayer("Your chocobo refuses to leave your side.", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo refuses to leave your side.', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow <= 9 then
-                player:printToPlayer("Your chocobo has come to adore you.", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo has come to adore you.', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow <= 12 then
-                player:printToPlayer("Your chocobo is growing rapidly!", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo is growing rapidly!', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow <= 15 then
-                player:printToPlayer("Your chocobo considers you as their parent.", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo considers you as their parent.', xi.msg.channel.SYSTEM_3, ' ')
             elseif chocogrow <= 19 then
-                player:printToPlayer("Your chocobo seems almost fully grown!", xi.msg.channel.SYSTEM_3, ' ')
+                player:printToPlayer('Your chocobo seems almost fully grown!', xi.msg.channel.SYSTEM_3, ' ')
             else
                 -- Chocobo all grown up!
                 choco:entityAnimationPacket(xi.animationString.SPECIAL_20)
@@ -183,17 +183,17 @@ end
 
 xi.xispchocobo.spawnChocobo = function(player, zone)
     if player:getCharVar('[XISP]hasChocobo') == 1 then
-        local look       = "0x0700200000000000000000000000000000000000" -- Default yellow chocobo
+        local look       = '0x0700200000000000000000000000000000000000' -- Default yellow chocobo
         local pos        = player:getPos()
-        local name       = "Chocobo"
+        local name       = 'Chocobo'
         local chocoStage = player:getCharVar('[XISP]chocoGrow')
         local color      = player:getCharVar('[XISP]chocoColor')
         local babyLook   = 1997
 
         if chocoStage < 10 then
-            name = "Baby Chocobo"
+            name = 'Baby Chocobo'
         elseif chocoStage < 20 then
-            name = "Young Chocobo"
+            name = 'Young Chocobo'
         end
 
         -- Alternatively check for zones we don't want chocobo in
@@ -221,13 +221,13 @@ xi.xispchocobo.spawnChocobo = function(player, zone)
         -- Check for color overrides (Adult)
         elseif chocoStage >= 20 then
             if color == 2 then
-                look = "0x0700210000000000000000000000000000000000" -- Black
+                look = '0x0700210000000000000000000000000000000000' -- Black
             elseif color == 4 then
-                look = "0x0700220000000000000000000000000000000000" -- Blue
+                look = '0x0700220000000000000000000000000000000000' -- Blue
             elseif color == 6 then
-                look = "0x0700230000000000000000000000000000000000" -- Red
+                look = '0x0700230000000000000000000000000000000000' -- Red
             elseif color == 8 then
-                look = "0x0700240000000000000000000000000000000000" -- Green
+                look = '0x0700240000000000000000000000000000000000' -- Green
             end
         end
 
@@ -250,13 +250,16 @@ xi.xispchocobo.spawnChocobo = function(player, zone)
 
             onMobSpawn = function(choco)
                 xi.xispal.onMobSpawn(choco, player, 1, 1)
-                choco:setStatus(xi.status.NORMAL)
                 choco:setAutoAttackEnabled(false)
                 choco:setUnkillable(true)
+                choco:setStatus(xi.status.NORMAL)
+                choco:setLocalVar('[XISP]isChocobo', 1)
+                choco:setLocalVar('[XISP]ownerID', player:getID())
+                player:setCharVar('[XISP]chocoID', choco:getID())
             end,
 
             onMobRoam = function(choco)
-                xi.xispal.follow(choco, player)
+                xi.xispal.follow(choco)
                 -- Cute animations
                 if math.random(10) <= 2 and choco:getModelId() == 1997 then
                     if math.random(2) == 1 then
@@ -265,14 +268,10 @@ xi.xispchocobo.spawnChocobo = function(player, zone)
                         choco:entityAnimationPacket(xi.animationString.SPECIAL_00)
                     end
                 end
-
             end,
         })
 
-        player:setCharVar('[XISP]chocoID', choco:getID())
         choco:setSpawn(pos.x + 1, pos.y, pos.z - 1)
         choco:spawn()
-        choco:setLocalVar('[XISP]isChocobo', 1)
-        choco:setLocalVar('[XISP]ownerID', player:getID())
     end
 end
