@@ -216,6 +216,14 @@ xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ab
     return 0, 0
 end
 
+xi.job_utils.geomancer.geoOnTheurgicFocusCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.THEURGIC_FOCUS) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    end
+
+    return 0, 0
+end
+
 -----------------------------------
 -- GEO/INDI Potency Function
 -----------------------------------
@@ -404,6 +412,9 @@ xi.job_utils.geomancer.dematerialize = function(player, target, ability, action)
 end
 
 xi.job_utils.geomancer.theurgicFocus = function(player, target, ability)
+    player:addStatusEffect(xi.effect.THEURGIC_FOCUS, 1, 0, 60)
+
+    return xi.effect.THEURGIC_FOCUS
 end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
