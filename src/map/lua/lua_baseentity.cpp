@@ -14882,31 +14882,6 @@ uint16 CLuaBaseEntity::getILvlParry()
 }
 
 /************************************************************************
- *  Function: isSpellAoE()
- *  Purpose : Returns true if a specified spell is AoE
- *  Example : if caster:isSpellAoE(spell:getID()) then
- *  Notes   : Only found in scripts/globals/magic.lua
- ************************************************************************/
-
-bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
-{
-    auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    if (!PBattle)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return false;
-    }
-
-    CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(spellId));
-    if (PSpell != nullptr)
-    {
-        return battleutils::GetSpellAoEType(PBattle, PSpell) > 0;
-    }
-
-    return false;
-}
-
-/************************************************************************
  *  Function: physicalDmgTaken()
  *  Purpose : Returns the value of Physical Damage taken after calculation
  *  Example : dmg = target:physicalDmgTaken(dmg, damageType)
@@ -20076,8 +20051,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getILvlMacc", CLuaBaseEntity::getILvlMacc);
     SOL_REGISTER("getILvlSkill", CLuaBaseEntity::getILvlSkill);
     SOL_REGISTER("getILvlParry", CLuaBaseEntity::getILvlParry);
-
-    SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
     SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
     SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);
