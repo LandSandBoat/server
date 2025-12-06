@@ -50,6 +50,7 @@ public:
     void   setMPCost(uint16 mpcost);
     bool   canTargetEnemy();
     uint8  isAoE();
+    float  getRadius();
     bool   tookEffect();
     uint16 getTotalTargets();
     uint16 getMagicBurstMessage();
@@ -60,6 +61,7 @@ public:
     uint8  getSpellGroup();
     uint8  getSpellFamily();
     uint8  getFlag();
+    uint8  getLevel(JOBTYPE jobId);
     uint32 getCastTime();
     uint32 getPrimaryTargetID();
 

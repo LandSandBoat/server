@@ -50,8 +50,13 @@ function CSpell:canTargetEnemy()
 end
 
 ---@nodiscard
----@return boolean
+---@return xi.magic.aoe
 function CSpell:isAoE()
+end
+
+---@nodiscard
+---@return number
+function CSpell:getRadius()
 end
 
 ---@nodiscard
@@ -102,6 +107,12 @@ end
 ---@nodiscard
 ---@return integer
 function CSpell:getFlag()
+end
+
+---@nodiscard
+---@param jobId xi.job
+---@return integer
+function CSpell:getLevel(jobId)
 end
 
 ---@nodiscard
