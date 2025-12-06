@@ -1,17 +1,18 @@
 -----------------------------------
--- Area: Zeruhn Mines (172)
+-- Area: Zeruhn Mines
 --  Mob: Ding Bats
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    -- Set respawn time in **seconds**
-    mob:setRespawnTime(60)  -- 1 minute (adjust as you prefer)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
-    xi.regime.checkRegime(player, mob, 626, 1, xi.regime.type.GROUNDS)
+	-- Set respawn time in seconds
+	mob:setRespawnTime(30)
+
+    -- Only award regime credit if we have a valid killer
+    if player ~= nil and optParams ~= nil and optParams.isKiller then
+        xi.regime.checkRegime(player, mob, 626, 1, xi.regime.type.GROUNDS)
+    end
 end
 
 return entity

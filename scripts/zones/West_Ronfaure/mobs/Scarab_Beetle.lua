@@ -1,16 +1,20 @@
 -----------------------------------
--- Area: West Ronfaure(100)
+-- Area: West Ronfaure
 --  Mob: Scarab Beetle
--- Note: Place holder for Fungus Beetle
------------------------------------
-local ID = zones[xi.zone.WEST_RONFAURE]
+-- Note: PH for Fungus Beetle
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.regime.checkRegime(player, mob, 3, 1, xi.regime.type.FIELDS)
-    xi.regime.checkRegime(player, mob, 4, 2, xi.regime.type.FIELDS)
+	-- Set respawn time in seconds
+	mob:setRespawnTime(30)
+
+    -- Only award regime credit if we have a valid killer
+    if player ~= nil and optParams ~= nil and optParams.isKiller then
+        xi.regime.checkRegime(player, mob, 3, 1, xi.regime.type.FIELDS)
+        xi.regime.checkRegime(player, mob, 4, 2, xi.regime.type.FIELDS)
+    end
 end
 
 entity.onMobDespawn = function(mob)
