@@ -1,0 +1,16 @@
+-----------------------------------
+-- Area: Central Temenos 2nd Floor
+--  Mob: Earth Elemental
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY)
+end
+
+return entity
