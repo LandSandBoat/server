@@ -44,16 +44,8 @@ xi.xispal.resetFollowers = function(player)
 end
 
 xi.xispal.onMobSpawn = function(pal, player, race, job)
-    -- pal:setLocalVar('[XISP]spellRecast', os.time() + math.random(7, 12))
-    -- pal:setLocalVar('[XISP]isPal', 1)
-    -- pal:setMobLevel(player:getMainLvl())
     pal:setRotation(player:getPos().rot + math.random(-5, 5))
     pal:setRoamFlags(xi.roamFlag.SCRIPTED)
-
-    if xi.xispal.isCaster(pal) then
-        pal:setBehavior(bit.bor(pal:getBehavior(), xi.behavior.STANDBACK))
-        pal:setAutoAttackEnabled(false)
-    end
 
     -- Update Model
     pal:timer(400, function(palArg)
@@ -62,10 +54,5 @@ xi.xispal.onMobSpawn = function(pal, player, race, job)
         palArg:setMobMod(xi.mobMod.NO_DESPAWN, 1)
         palArg:setMobMod(xi.mobMod.ROAM_COOL, 0)
         palArg:setMobMod(xi.mobMod.NO_REST, 1)
-
-        -- if pal:getLocalVar('[XISP]isChocobo') ~= 1 then
-            -- player:sendEntityUpdateToPlayer(pal, xi.entityUpdate.ENTITY_SPAWN, xi.updateType.UPDATE_LOOK)
-            -- xi.xispal.calculateStats(palArg, player)
-        -- end
     end)
 end
