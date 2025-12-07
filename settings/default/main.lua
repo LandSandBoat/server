@@ -31,7 +31,10 @@ xi.settings.main =
     ENABLE_ACP       = 1,
     ENABLE_AMK       = 1,
     ENABLE_ASA       = 1,
-    ENABLE_ABYSSEA   = 1,
+    ENABLE_ABYSSEA   = 1, -- Migrate to the below three
+    ENABLE_VABY      = 1,
+    ENABLE_SABY      = 1,
+    ENABLE_HABY      = 1,
     ENABLE_SOA       = 1,
     ENABLE_ROV       = 1,
     ENABLE_TVR       = 1,
@@ -69,14 +72,32 @@ xi.settings.main =
     CAP_CURRENCY_SPARKS    = 99999,
     CAP_CURRENCY_VALOR     = 50000,
 
+    -- Ballista
+    ENABLE_BALLISTA = 1,
+
+    -- NPC Fellows
+    ENABLE_FELLOWS = 1,
+
     -- Magian Trials
     ENABLE_MAGIAN_TRIALS = 1,
 
-    -- VoidWalker
+    -- Voidwalkers
     ENABLE_VOIDWALKER = 1,
 
     -- Moblin Maze Mongers
     ENABLE_MMM = 0,
+
+    -- Meebles Burrows
+    ENABLE_MEEBLES = 1,
+
+    -- Legion
+    ENABLE_LEGION = 1,
+
+    -- Proto-Waypoints
+    ENABLE_PWP = 1,
+
+    -- Enable Eschuteons
+    ENABLE_ESCHUTEONS = 1,
 
     -- Monstrosity (Heavily in development, use at your own risk!)
     ENABLE_MONSTROSITY               = 0,
