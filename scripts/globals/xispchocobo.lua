@@ -181,6 +181,17 @@ xi.xispchocobo.chocoboTrigger = function(player, choco)
     end
 end
 
+xi.xispchocobo.despawnChocobo = function(player)
+    if player:getCharVar('[XISP]hasChocobo') == 1 then
+        local choco = GetMobByID(player:getCharVar('[XISP]chocoID'))
+
+        if choco and choco:isSpawned() then
+            choco:setBehavior(bit.band(choco:getBehavior(), bit.bnot(xi.behavior.NO_DESPAWN)))
+            DespawnMob(choco:getID())
+        end
+    end
+end
+
 xi.xispchocobo.spawnChocobo = function(player, zone)
     if player:getCharVar('[XISP]hasChocobo') == 1 then
         local look       = '0x0700200000000000000000000000000000000000' -- Default yellow chocobo
@@ -249,13 +260,22 @@ xi.xispchocobo.spawnChocobo = function(player, zone)
             end,
 
             onMobSpawn = function(choco)
-                xi.xispal.onMobSpawn(choco, player, 1, 1)
+                choco:setRotation(player:getPos().rot + math.random(-5, 5))
+                choco:setRoamFlags(xi.roamFlag.SCRIPTED)
                 choco:setAutoAttackEnabled(false)
                 choco:setUnkillable(true)
                 choco:setStatus(xi.status.NORMAL)
                 choco:setLocalVar('[XISP]isChocobo', 1)
                 choco:setLocalVar('[XISP]ownerID', player:getID())
                 player:setCharVar('[XISP]chocoID', choco:getID())
+
+                choco:timer(400, function(chocoArg)
+                    chocoArg:setMobMod(xi.mobMod.DONT_ROAM_HOME, 1)
+                    chocoArg:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
+                    chocoArg:setMobMod(xi.mobMod.NO_DESPAWN, 1)
+                    chocoArg:setMobMod(xi.mobMod.ROAM_COOL, 0)
+                    chocoArg:setMobMod(xi.mobMod.NO_REST, 1)
+                end)
             end,
 
             onMobRoam = function(choco)

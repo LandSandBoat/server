@@ -35,12 +35,7 @@ effectObject.onEffectGain = function(target, effect)
     local hasChocobo = target:getCharVar('[XISP]chocoID')
 
     if hasChocobo > 0 then
-        local choco = GetMobByID(hasChocobo)
-        if choco then
-            target:setLocalVar('ridingOwnChoco', 1)
-            choco:setBehavior(bit.band(choco:getBehavior(), bit.bnot(xi.behavior.NO_DESPAWN)))
-            DespawnMob(hasChocobo)
-        end
+        xi.xispchocobo.despawnChocobo(target)
 
         if target:getLocalVar('ownChoco') == 1 then
             target:changeMusic(4, 177) -- Special XISP mount music
