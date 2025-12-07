@@ -259,7 +259,7 @@ xi.xispchocobo.spawnChocobo = function(player, zone)
             end,
 
             onMobRoam = function(choco)
-                xi.xispfollow.follow(choco)
+                xi.xispfollow.follow(choco, player)
                 -- Cute animations
                 if math.random(10) <= 2 and choco:getModelId() == 1997 then
                     if math.random(2) == 1 then

@@ -2,16 +2,8 @@ xi = xi or {}
 xi.xispal = xi.xispal or {}
 
 xi.xispal.getFollowers = function(player)
-    local squireID = player:getCharVar('[XISP]squireID')
     local chocoID  = player:getCharVar('[XISP]chocoID')
     local followers = {}
-
-    if squireID ~= 0 then
-        squire = GetMobByID(squireID)
-        if squire and squire:isSpawned() then
-            table.insert(followers, squire)
-        end
-    end
 
     if chocoID ~= 0 then
         chocobo = GetMobByID(chocoID)

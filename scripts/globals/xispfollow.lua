@@ -1,8 +1,7 @@
 xi = xi or {}
 xi.xispfollow = xi.xispfollow or {}
 
-xi.xispfollow.getFollowTarget = function(pal)
-    local player = GetPlayerByID(pal:getLocalVar('OwnerID'))
+xi.xispfollow.getFollowTarget = function(pal, player)
     local followers = xi.xispal.getFollowers(player)
 
     for followerIndex = #followers, 1, -1 do -- Loop through followers
@@ -29,8 +28,8 @@ xi.xispfollow.getFollowTarget = function(pal)
     return player -- Fallback onto player if no other leader was found
 end
 
-xi.xispfollow.follow = function(pal)
-    local leader = xi.xispfollow.getFollowTarget(pal)
+xi.xispfollow.follow = function(pal, player)
+    local leader = xi.xispfollow.getFollowTarget(pal, player)
     local lPos   = leader:getPos()
     local posX, posZ = xi.xisp.getPointAroundLoc(lPos, 2, 2)
     local pos    = pal:getPos()
