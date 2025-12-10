@@ -7,16 +7,20 @@ local abilityObject = {}
 local skillName = 'shakeshroom'
 
 abilityObject.onAbilityCheck = function(player, target, ability)
+    ---@cast ability CMobSkill
     local pet = player:getPet()
-    local checkResult = xi.actions.mobskills[skillName].onMobSkillCheck(target, pet, ability)
-    if checkResult ~= 0 then
-        return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+    if pet then
+        local checkResult = xi.actions.mobskills[skillName].onMobSkillCheck(target, pet, ability)
+        if checkResult ~= 0 then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+        end
     end
 
     return 0
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
+    ---@cast petskill CMobSkill
     local result = xi.actions.mobskills[skillName].onMobWeaponSkill(target, pet, petskill)
 
     return result

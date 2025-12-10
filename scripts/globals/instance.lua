@@ -329,6 +329,9 @@ end
 xi.instance.onTrade = function(player, npc, trade)
 end
 
+---@param player CBaseEntity
+---@param npc CBaseEntity
+---@param instanceZoneID xi.zone
 xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local zoneLookup = xi.instance.lookup[instanceZoneID]
 

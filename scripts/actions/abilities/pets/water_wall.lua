@@ -11,6 +11,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
+    ---@cast petskill CMobSkill
     local result = xi.actions.mobskills[skillName].onMobWeaponSkill(target, pet, petskill)
 
     return result

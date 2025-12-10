@@ -6,7 +6,7 @@
 ---@class xi
 ---@field actions xi.actions
 ---@field settings xi.settings
----@field zones table
+---@field zones table<string, table>
 ---@field commands table<string, TCommand>
 xi = xi or {}
 
