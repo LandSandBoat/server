@@ -58,11 +58,11 @@ local astralFlowPets = function()
             -- Picking annoying abilities for now...
             pet:timer(1500, function(petArg)
                 if petArg:getFamily() == 269 then -- xzomit
-                    petArg:useMobAbility(xi.mobskill.MANTLE_PIERCE)
+                    petArg:useMobAbility(xi.mobSkill.MANTLE_PIERCE)
                 elseif petArg:getFamily() == 144 then -- hpemde
-                    petArg:useMobAbility(xi.mobskill.SINUATE_RUSH)
+                    petArg:useMobAbility(xi.mobSkill.SINUATE_RUSH)
                 elseif petArg:getFamily() == 194 then -- shark
-                    petArg:useMobAbility(xi.mobskill.AERIAL_COLLISION)
+                    petArg:useMobAbility(xi.mobSkill.AERIAL_COLLISION)
                 end
             end)
         end

@@ -226,7 +226,7 @@ end
 
 xi.mogTablet.moogleOnTrigger = function(player, npc)
     -- NOTE: This setting doesn't exist yet, because this feature isn't ready!
-    if xi.settings.ENABLE_MOG_TABLETS then
+    if xi.settings.map.ENABLE_MOG_TABLETS then
         local allTabletsFound = false
         if allTabletsFound then
             player:startEvent(10109)

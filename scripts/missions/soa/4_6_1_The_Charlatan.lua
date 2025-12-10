@@ -75,7 +75,7 @@ mission.sections =
                     end
 
                     -- Experience is given after this cutscene regardless of mission complete.
-                    player:addExp(500 * xi.settings.EXP_RATE)
+                    player:addExp(500 * xi.settings.map.EXP_RATE)
                 end,
 
                 [1548] = function(player, csid, option, npc)

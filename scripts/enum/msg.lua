@@ -62,7 +62,7 @@ xi.msg.area =
 -- Basic Messages
 -----------------------------------
 
----@enum xi.basic
+---@enum xi.msg.basic
 xi.msg.basic =
 {
     NONE                            = 0,  -- Display nothing
