@@ -1,5 +1,29 @@
 ---@meta
 
+--- Global xi object
+--- Only tables injected from core (or living outside the scripts/ tree) need explicit documentation here.
+--- LLS should wire the tables defined in lua automagically.
+---@class xi
+---@field actions xi.actions
+---@field settings xi.settings
+---@field zones table
+---@field commands table<string, TCommand>
+xi = xi or {}
+
+---@class xi.actions
+---@field abilities table<string, TAbility>
+---@field mobskills table<string, TMobSkill>
+---@field spells table<string, TSpell>
+---@field weaponskills table<string, TWeaponSkill>
+
+---@class xi.settings
+---@field main table
+---@field map table
+---@field login table
+---@field network table
+---@field logging table
+---@field search table
+
 ---@return integer
 function GarbageCollectStep()
 end
