@@ -71,3 +71,12 @@ template <typename Tag>
 constexpr Flag<Tag> Flag<Tag>::No{ false };
 
 } // namespace xi
+
+//
+// Common flags
+//
+// TODO: When lots of callsites are moved to be inside xi::, then these flags can also be moved
+//     : inside xi::
+//
+
+using SendPacket = xi::Flag<struct SendPacketTag>;

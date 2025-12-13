@@ -88,7 +88,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
                        .results = {
                         {
                                .param     = m_PSkill->getID(),
-                               .messageID = m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG ? MSGBASIC_NONE : MSGBASIC_READIES_WS,
+                               .messageID = m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG ? MsgBasic::NONE : MsgBasic::READIES_WS,
                         },
                     },
                 },
@@ -162,7 +162,7 @@ bool CMobSkillState::Update(timer::time_point tick)
         {
             action.ForEachResult([&](action_result_t& result)
                                  {
-                                     result.messageID = MSGBASIC_NONE;
+                                     result.messageID = MsgBasic::NONE;
                                  });
         }
 

@@ -76,14 +76,16 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         return
     end
 
-    -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
-    if battlefield:getLocalVar('scState') == 4 then
-        mob:messageText(mob, ID.text.SHIKAREE_Y_OFFSET + 4)
-    end
-
     -- 2-Hour message.
     if skillID == xi.mobSkill.BLOOD_WEAPON_1 then
         mob:messageText(mob, ID.text.SHIKAREE_Y_2HR)
+        return
+    end
+
+    -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
+    if battlefield:getLocalVar('scState') == 4 then
+        mob:messageText(mob, ID.text.SHIKAREE_Y_OFFSET + 4)
+        return
     end
 
     -- Handle skillchain progression

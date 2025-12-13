@@ -19,7 +19,7 @@ effectObject.onEffectTick = function(target, effect)
     -- handle diabolos nightmare bio damage explicitly
     if effect:getTier() >= 5 then
         -- re-using logic from helix effect processing
-        local dmg = utils.stoneskin(target, effect:getPower())
+        local dmg = utils.handleStoneskin(target, effect:getPower())
 
         if dmg > 0 then
             target:takeDamage(dmg, nil, nil, nil, { wakeUp = false, breakBind = false })

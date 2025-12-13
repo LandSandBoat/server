@@ -93,6 +93,8 @@ local ids =
     EAST_SANDY_GLYPH      = 82,
     BASTOK_MINES_GLYPH    = 83,
     WINDY_WOODS_GLYPH     = 84,
+    CUMULUS_MASQUE        = 85,
+    WYRMKING_SUIT         = 86,
 }
 xi.teleport.id = ids
 
@@ -157,7 +159,7 @@ xi.teleport.destination =
     [ids.SEA]                   = {  -31.800,    0.000, -618.700, 190,  33 }, -- (R)
     [ids.ZVAHL_KEEP]            = { -555.996,  -70.100,   59.989,   0, 162 },
     [ids.SOUTHERN_SAN_DORIA_S]  = {  -98.000,    1.000,  -41.000, 224,  80 },
-    [ids.BASTOK_MARKETS_S]      = { -291.000,  -10.000, -107.000, 212,  87 },
+    [ids.BASTOK_MARKETS_S]      = { -292.921,  -10.000, -105.802,   0,  87 },
     [ids.WINDURST_WATERS_S]     = {  -31.442,   -5.000,  129.202, 128,  94 },
     [ids.ESCHA_ZITAH]           = {     -338,        6,     -225, 172, 288 },
     [ids.QUFIM_CONFLUENCE]      = {     -203,      -20,       81,  76, 126 },
@@ -178,6 +180,8 @@ xi.teleport.destination =
     [ids.EAST_SANDY_GLYPH]      = {  101.292,    1.000,  -48.889,  31, 230 }, -- Southern San d'Oria East Gate
     [ids.BASTOK_MINES_GLYPH]    = {   -2.658,   -1.001, -120.508,  70, 234 }, -- Bastok Mines Gate
     [ids.WINDY_WOODS_GLYPH]     = {  108.726,   -5.000,  -43.588,   0, 241 }, -- Windurst Woods Gate
+    [ids.CUMULUS_MASQUE]        = {  260.000,  -87.000,   86.000, 192, 291 }, -- Reisenjima Place of Parting
+    [ids.WYRMKING_SUIT]         = { -506.157,   -8.500, -384.025, 220,  30 }, -- Riverne Site #B-01
 }
 
 xi.teleport.type =
@@ -220,7 +224,7 @@ end
 
 xi.teleport.toLeader = function(player)
     local leader = player:getPartyLeader()
-    if leader ~= nil and not leader:isInMogHouse() then
+    if leader ~= nil and not leader:inMogHouse() then
         player:gotoPlayer(leader:getName())
     end
 end

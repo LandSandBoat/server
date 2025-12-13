@@ -131,7 +131,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
-            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
+            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->inMogHouse()))
             {
                 PNpc->PAI->Trigger(PChar);
                 PChar->m_charHistory.npcInteractions++;
@@ -219,19 +219,19 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
                 {
                     PMob->SetCallForHelpFlag(true);
-                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CFH));
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CFH));
                     return;
                 }
             }
 
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_CFH);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_CFH);
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Weaponskill:
         {
             if (!PChar->PAI->IsEngaged() && settings::get<bool>("map.PREVENT_UNENGAGED_WS")) // Prevent Weaponskill usage if player isn't engaged.
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_WS);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_WS);
                 return;
             }
 
@@ -251,7 +251,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             {
                 if (JobAbility.SkillId >= ABILITY_FOOT_KICK && JobAbility.SkillId <= ABILITY_PENTAPECK) // Is this a BST ability?
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_JA2);
                     return;
                 }
             }
@@ -300,7 +300,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Fish:
         {
-            if (PChar->m_moghouseID != 0)
+            if (PChar->inMogHouse())
             {
                 ShowWarningFmt("GP_CLI_COMMAND_ACTION: Player {} trying to fish in Mog House", PChar->getName());
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
@@ -386,7 +386,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::SendResRdy:
         {
-            if (PChar->m_moghouseID != 0) // TODO: For now this is only in the moghouse
+            if (PChar->inMogHouse()) // TODO: For now this is only in the moghouse
             {
                 PChar->loc.zone->SpawnConditionalNPCs(PChar);
             }
@@ -440,21 +440,21 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
 
             if (PChar->animation != ANIMATION_NONE)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_PERFORM_ACTION);
             }
             else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_IN_AREA);
             }
             else if (PChar->GetMLevel() < 20)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 20, 0, MSGBASIC_MOUNT_REQUIRED_LEVEL);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 20, 0, MsgBasic::MOUNT_REQUIRED_LEVEL);
             }
             else if (charutils::hasKeyItem(PChar, mountKeyItem))
             {
                 if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, 256, 60s))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WAIT_LONGER);
 
                     // add recast timer
                     // PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, 202);
@@ -463,7 +463,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
 
                 if (PChar->hasEnmityEXPENSIVE())
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_YOUR_MOUNT_REFUSES);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::YOUR_MOUNT_REFUSES);
                     return;
                 }
 

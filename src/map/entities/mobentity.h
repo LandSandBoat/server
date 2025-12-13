@@ -25,7 +25,7 @@
 #include "battleentity.h"
 #include <unordered_map>
 
-enum MSGBASIC_ID : uint16_t;
+enum class MsgBasic : uint16_t;
 // forward declaration
 class CMobSpellContainer;
 class CMobSpellList;
@@ -177,7 +177,7 @@ public:
     virtual bool OnAttack(CAttackState&, action_t&) override;
     virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
     virtual void OnCastFinished(CMagicState&, action_t&) override;
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast) override;
+    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
 
     virtual void OnDisengage(CAttackState&) override;
     virtual void OnDeathTimer() override;

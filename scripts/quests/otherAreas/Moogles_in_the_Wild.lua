@@ -22,7 +22,7 @@ quest.sections[1] =
 
         return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC) and
-            xi.moghouse.isInMogHouseInHomeNation(player) and
+            xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 7 and
             not quest:getMustZone(player) and
             quest:getLocalVar(player, 'questSeen') == 0 and

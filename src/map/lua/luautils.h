@@ -340,7 +340,7 @@ int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpe
 int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
 void  OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell);
-auto  OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>;
+auto  OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::tuple<std::optional<SpellID>, std::optional<CBattleEntity*>>;
 void  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);
 bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster); // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not

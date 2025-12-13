@@ -32,6 +32,14 @@ xi.job_utils.blue_mage.checkDiffusion = function(player, target, ability)
     return 0, 0
 end
 
+xi.job_utils.blue_mage.checkConvergence = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.CONVERGENCE) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    end
+
+    return 0, 0
+end
+
 xi.job_utils.blue_mage.checkEfflux = function(player, target, ability)
     return 0, 0
 end
@@ -68,6 +76,11 @@ end
 xi.job_utils.blue_mage.useDiffusion = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.DIFFUSION, 1, 0, 60)
     return xi.effect.DIFFUSION
+end
+
+xi.job_utils.blue_mage.useConvergence = function(player, target, ability, action)
+    player:addStatusEffect(xi.effect.CONVERGENCE, 1, 0, 60)
+    return xi.effect.CONVERGENCE
 end
 
 xi.job_utils.blue_mage.useEfflux = function(player, target, ability, action)

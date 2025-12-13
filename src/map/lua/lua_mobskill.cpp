@@ -45,7 +45,7 @@ CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
  *                                                                       *
  ************************************************************************/
 
-void CLuaMobSkill::setMsg(uint16 message)
+void CLuaMobSkill::setMsg(MsgBasic message)
 {
     m_PLuaMobSkill->setMsg(message);
 }
@@ -102,7 +102,7 @@ void CLuaMobSkill::setAnimationTime(uint32 newAnimationTime)
     m_PLuaMobSkill->setAnimationTime(std::chrono::milliseconds(newAnimationTime));
 }
 
-uint16 CLuaMobSkill::getMsg()
+auto CLuaMobSkill::getMsg() -> MsgBasic
 {
     return m_PLuaMobSkill->getMsg();
 }

@@ -8,8 +8,8 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
-    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS) ~= nil then
-        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS)
+    if target:getStatusEffectBySource(xi.effect.ATTACK_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS) ~= nil then
+        target:delStatusEffect(xi.effect.ATTACK_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS)
     end
 
     return 0
@@ -17,7 +17,7 @@ end
 
 itemObject.onItemUse = function(target)
     if target:hasEquipped(xi.item.HYDRA_HARNESS) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS)
+        target:addStatusEffect(xi.effect.ATTACK_BOOST, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS)
     end
 end
 

@@ -72,18 +72,6 @@ local function calculateMobMagicBurst(caster, ele, target)
     return burstMultiplier
 end
 
-local function MobTakeAoEShadow(mob, target, max)
-    -- TODO: Use actual NIN skill, not this function
-    if target:getMainJob() == xi.job.NIN and math.random(1, 100) <= 60 then
-        max = max - 1
-        if max < 1 then
-            max = 1
-        end
-    end
-
-    return math.random(1, max)
-end
-
 local function fTP(tp, ftp1, ftp2, ftp3)
     tp = math.max(tp, 1000)
 
@@ -538,7 +526,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
             skill:isAoE() or
             skill:isConal()
         then
-            shadowsToRemove = MobTakeAoEShadow(mob, target, shadowsToRemove)
+            shadowsToRemove = utils.attemptShadowMitigation(target, shadowsToRemove)
         end
 
         -- Remove shadows
@@ -568,13 +556,12 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         -- Handle Third Eye using shadowbehav as a guide.
         if xi.combat.physicalHitRate.checkAnticipated(mob, target) then
             skill:setMsg(xi.msg.basic.ANTICIPATE)
-
             return 0
         end
     end
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
-    xi.mobskills.handleAutomatonAutoAnalyzer(damage, skill, target)
+    utils.handleAutomatonAutoAnalyzer(target, skill, damage)
 
     if attackType == xi.attackType.PHYSICAL then
         damage = target:physicalDmgTaken(damage, damageType)
@@ -604,20 +591,13 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         return damage
     end
 
-    -- Handle Phalanx
-    if damage > 0 then
-        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
+    damage = utils.handlePhalanx(target, damage)
 
     if attackType == xi.attackType.MAGICAL then
-        damage = utils.oneforall(target, damage)
-
-        if damage < 0 then
-            return 0
-        end
+        damage = utils.handleOneForAll(target, damage)
     end
 
-    damage = utils.stoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
 
     if damage > 0 then
         target:updateEnmityFromDamage(mob, damage)
@@ -628,28 +608,6 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
     xi.mobskills.calculateSkillTPReturn(damage, mob, skill, target, attackType, hitsLanded)
 
     return damage
-end
-
-xi.mobskills.handleAutomatonAutoAnalyzer = function(damage, skill, target)
-    -- TODO: Should this reside in a more universal place for use in other places?
-    -- Handle Automaton Analyzer which decreases damage from successive special attacks
-    if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
-        local analyzerSkill = target:getLocalVar('analyzer_skill')
-        local analyzerHits = target:getLocalVar('analyzer_hits')
-        if
-            analyzerSkill == skill:getID() and
-            target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits
-        then
-            -- Successfully mitigating damage at a fixed 40%
-            damage = damage * 0.6
-            analyzerHits = analyzerHits + 1
-        else
-            target:setLocalVar('analyzer_skill', skill:getID())
-            analyzerHits = 0
-        end
-
-        target:setLocalVar('analyzer_hits', analyzerHits)
-    end
 end
 
 xi.mobskills.calculateSkillTPReturn = function(damage, mob, skill, target, attackType, hitsLanded)

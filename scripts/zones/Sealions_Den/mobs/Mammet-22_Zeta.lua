@@ -5,11 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
-    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
-end
-
 local forms =
 {
     UNARMED = 0,
@@ -21,38 +16,48 @@ local forms =
 local tpMoves =
 {
 
-    [0] = -- h2h Skills
+    [forms.UNARMED] =
     {
-        487, -- Transmogrification: Absorbs all physical damage for ~30 seconds
-        540, -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
+        xi.mobSkill.TRANSMOGRIFICATION,
+        xi.mobSkill.TREMOROUS_TREAD,
     },
-    [1] =      -- Sword Skills:
+    [forms.SWORD] =
     {
-        347, -- Velocious Blade: 5-hit attack
-        419, -- Sonic Blade: High AoE damage.
-        422, -- Scission Thrust: Low conal AoE damage.
+        xi.mobSkill.VELOCIOUS_BLADE,
+        xi.mobSkill.SONIC_BLADE,
+        xi.mobSkill.SCISSION_THRUST,
     },
-    [2] = -- Polearm Skills:
+    [forms.POLEARM] =
     {
-        441, -- Percussive Foin: Medium directional AoE damage.
-        447, -- Gravity Wheel: High AoE damage and Gravity.
-        457, -- Microquake: High single-target damage.
+        xi.mobSkill.PERCUSSIVE_FOIN,
+        xi.mobSkill.GRAVITY_WHEEL,
+        xi.mobSkill.MICROQUAKE,
     },
-    [3] = -- Staff Skills
+    [forms.STAFF] =
     {
-        464, -- Psychomancy: AoE Aspir, drains 80+ MP.
-        471, -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
+        xi.mobSkill.PSYCHOMANCY,
+        xi.mobSkill.MIND_WALL,
     },
 }
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+end
 
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 end
 
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('formTimeTracker', GetSystemTime() + math.random(25, 60))
+end
+
 entity.onMobFight = function(mob, target)
     -- Chages forms after 30-60 seconds randomly
     local timeTracker = mob:getLocalVar('formTimeTracker')
-    local currentTime = mob:getBattleTime()
+    local currentTime = GetSystemTime()
     -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
     local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
 
@@ -87,36 +92,15 @@ entity.onMobFight = function(mob, target)
                 mob:setDamage(40)
             end,
         }
-        mob:setLocalVar('formTimeTracker', mob:getBattleTime() + math.random(30, 60))
+        mob:setLocalVar('formTimeTracker', currentTime + math.random(25, 60))
     end
 end
 
 entity.onMobMobskillChoose = function(mob, target)
-    switch (mob:getAnimationSub()): caseof
-    {
-        [forms.UNARMED] = function()
-            local wsChoice = math.random(1, 2)
-            return tpMoves[forms.UNARMED][wsChoice]
-        end,
+    local form  = mob:getAnimationSub()
+    local moves = tpMoves[form]
 
-        [forms.SWORD] = function()
-            local wsChoice = math.random(1, 3)
-            return tpMoves[forms.SWORD][wsChoice]
-        end,
-
-        [forms.POLEARM] = function()
-            local wsChoice = math.random(1, 3)
-            return tpMoves[forms.POLEARM][wsChoice]
-        end,
-
-        [forms.STAFF] = function()
-            local wsChoice = math.random(1, 2)
-            return tpMoves[forms.STAFF][wsChoice]
-        end,
-    }
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    return moves[math.random(1, #moves)]
 end
 
 return entity

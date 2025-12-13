@@ -1286,7 +1286,7 @@ bool isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 
 
 fishingarea_t* GetFishingArea(CCharEntity* PChar)
 {
-    if (PChar->m_moghouseID > 0)
+    if (PChar->inMogHouse())
     {
         ShowWarning("fishingutils::GetFishingArea() - Player %s is attempting to fish from Mog House", PChar->name);
         return nullptr;
@@ -1883,7 +1883,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
         if (skillAmount > 0)
         {
             PChar->RealSkills.skill[SKILL_FISHING] += skillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, static_cast<MSGBASIC_ID>(38));
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, MsgBasic::SKILL_GAIN);
 
             if ((charSkill / 10) < (charSkill + skillAmount) / 10)
             {
@@ -1895,7 +1895,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, static_cast<MSGBASIC_ID>(53));
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
             }
 
             charutils::SaveCharSkills(PChar, SKILL_FISHING);

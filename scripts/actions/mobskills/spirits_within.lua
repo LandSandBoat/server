@@ -40,13 +40,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     -- Handling phalanx
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
+    dmg = utils.handlePhalanx(target, dmg)
 
     if dmg < 0 then
         return 0
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     if dmg > 0 then
         target:wakeUp()

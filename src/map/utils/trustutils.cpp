@@ -21,7 +21,6 @@
 
 #include "trustutils.h"
 
-#include "common/timer.h"
 #include "common/utils.h"
 
 #include <algorithm>
@@ -34,7 +33,6 @@
 #include "zoneutils.h"
 
 #include "grades.h"
-#include "mob_modifier.h"
 #include "mob_spell_list.h"
 
 #include "ai/ai_container.h"
@@ -44,9 +42,6 @@
 #include "entities/trustentity.h"
 #include "items/item_weapon.h"
 #include "mobskill.h"
-#include "packets/char_sync.h"
-#include "packets/entity_update.h"
-#include "packets/s2c/0x009_message.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
 #include "zone_instance.h"

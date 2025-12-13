@@ -43,6 +43,7 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.extraOffhandHit = false
     calcParams.hybridHit = false
     calcParams.flourishEffect = false
+    calcParams.criticalHit = false
     calcParams.alpha = 1
     calcParams.bonusWSmods = math.max(attacker:getMainLvl() - target:getMainLvl(), 0)
     calcParams.bonusTP = wsParams.bonusTP or 0

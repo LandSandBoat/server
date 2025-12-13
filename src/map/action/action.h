@@ -55,16 +55,16 @@ struct action_result_t
     HitDistortion    hitDistortion{ HitDistortion::None };  // result.scale (2 bits) (shared with knockback)
     Knockback        knockback{ Knockback::None };          // result.scale (3 bits) (shared with hitDistortion)
     int32            param{ 0 };                            // result.value - 17 bits
-    MSGBASIC_ID      messageID{ MSGBASIC_NONE };            // result.message - 10 bits
+    MsgBasic         messageID{ MsgBasic::NONE };           // result.message - 10 bits
     ActionModifier   modifier{ ActionModifier::None };      // result.bit - 31 bits
     ActionProcKind   additionalEffect{};                    // result.has_proc (1 bit), result.proc_kind (6 bits)
     uint8_t          addEffectInfo{ 0 };                    // result.proc_info (4 bits)
     int32            addEffectParam{ 0 };                   // result.proc_value (17 bits)
-    MSGBASIC_ID      addEffectMessage{ MSGBASIC_NONE };     // result.proc_message (10 bits)
+    MsgBasic         addEffectMessage{ MsgBasic::NONE };    // result.proc_message (10 bits)
     ActionReactKind  spikesEffect{ ActionReactKind::None }; // result.has_react (1 bit), result.react_kind (6 bits)
     uint8_t          spikesInfo{ 0 };                       // result.react_info (4 bits)
     uint16           spikesParam{ 0 };                      // result.react_value (14 bits)
-    MSGBASIC_ID      spikesMessage{ MSGBASIC_NONE };        // result.react_message (10 bits)
+    MsgBasic         spikesMessage{ MsgBasic::NONE };       // result.react_message (10 bits)
 
     void recordSkillchain(ActionProcSkillChain effect, int16_t dmg);
     auto recordDamage(const attack_outcome_t& outcome) -> action_result_t&;

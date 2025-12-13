@@ -2,7 +2,7 @@
 -- Head Wind
 -- Boneyard Gully mission battlefield
 -----------------------------------
-local boneyardGullyID = zones[xi.zone.BONEYARD_GULLY]
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 
 local content = BattlefieldMission:new({
@@ -28,84 +28,93 @@ local content = BattlefieldMission:new({
     title                 = xi.title.DELTA_ENFORCER,
 })
 
--- Skillchain definitions indexed by [leader][aliveCount]
--- Structure: [leaderBaseID][aliveCount] = { readyMessage, [participantBaseID] = { skill, delay, message } }
+-- Key for 3-mob skillchain lookup (all shikarees alive)
+local allAlive = 1
+
+-- Message offset lookup by base mob ID
+local msgOffsets =
+{
+    [ID.mob.SHIKAREE_X_HW] = ID.text.SHIKAREE_X_OFFSET,
+    [ID.mob.SHIKAREE_Y_HW] = ID.text.SHIKAREE_Y_OFFSET,
+    [ID.mob.SHIKAREE_Z_HW] = ID.text.SHIKAREE_Z_OFFSET,
+}
+
+-- Skillchain execution logic
+-- Shikarees are referenced by the base mob ID (without battlefield area offset)
+-- Always has a specific order depending on which Shikaree is leading and how many are alive
+-- Table is keyed off the Shikaree initiating the skillchain, with sub-tables for which shikarees are alive to skillchain with
+-- Array position determines execution order
 local skillchainData =
 {
-    [boneyardGullyID.mob.SHIKAREE_X_HW] =
+    -- Shikaree X initiated
+    [ID.mob.SHIKAREE_X_HW] =
     {
-        msgOffset = boneyardGullyID.text.SHIKAREE_X_OFFSET,
-
-        -- 3 alive: X → Y → Z (Evisceration → Vorpal Scythe → Impulse Drive)
-        [3] =
+        -- All shikaree are alive: X Evisceration → Y Vorpal Scythe → Z Impulse Drive
+        [allAlive] =
         {
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.EVISCERATION,  delay =  0, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.VORPAL_SCYTHE, delay =  8, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 3 },
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.IMPULSE_DRIVE, delay = 13, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.EVISCERATION  },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.VORPAL_SCYTHE },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.IMPULSE_DRIVE },
         },
-        -- 2 alive with Y: X → Y (Evisceration → Vorpal Scythe)
-        [boneyardGullyID.mob.SHIKAREE_Y_HW] =
+        -- Shikaree X and Y are alive: X Evisceration → Y Vorpal Scythe
+        [ID.mob.SHIKAREE_Y_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.EVISCERATION,  delay = 0, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.VORPAL_SCYTHE, delay = 8, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.EVISCERATION  },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.VORPAL_SCYTHE },
         },
-        -- 2 alive with Z: X → Z (Dancing Edge → Penta Thrust)
-        [boneyardGullyID.mob.SHIKAREE_Z_HW] =
+        -- Shikaree X and Z are alive: X Dancing Edge → Z Penta Thrust
+        [ID.mob.SHIKAREE_Z_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.DANCING_EDGE, delay = 0, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.PENTA_THRUST, delay = 8, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.DANCING_EDGE },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.PENTA_THRUST },
         },
     },
 
-    -- Shikaree Y (Dark Knight) leads
-    [boneyardGullyID.mob.SHIKAREE_Y_HW] =
+    -- Shikaree Y initiated
+    [ID.mob.SHIKAREE_Y_HW] =
     {
-        msgOffset = boneyardGullyID.text.SHIKAREE_Y_OFFSET,
-
-        -- 3 alive: Y → X → Z (Guillotine → Shadowstitch → Wheeling Thrust)
-        [3] =
+        -- All shikaree are alive: Y Guillotine → X Shadowstitch → Z Wheeling Thrust
+        [allAlive] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.GUILLOTINE_1,    delay =  0, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.SHADOWSTITCH,    delay =  8, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 3 },
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.WHEELING_THRUST, delay = 13, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.GUILLOTINE_1    },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.SHADOWSTITCH    },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.WHEELING_THRUST },
         },
-        -- 2 alive with X: Y → X (Spiral Hell → Dancing Edge)
-        [boneyardGullyID.mob.SHIKAREE_X_HW] =
+        -- Shikaree Y and X are alive: Y Spiral Hell → X Shadowstitch
+        [ID.mob.SHIKAREE_X_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.SPIRAL_HELL,  delay = 0, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.SHADOWSTITCH, delay = 8, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.SPIRAL_HELL  },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.SHADOWSTITCH },
         },
-        -- 2 alive with Z: Y → Z (Spiral Hell → Impulse Drive)
-        [boneyardGullyID.mob.SHIKAREE_Z_HW] =
+        -- Shikaree Y and Z are alive: Y Spiral Hell → Z Impulse Drive
+        [ID.mob.SHIKAREE_Z_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.SPIRAL_HELL,   delay = 0, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.IMPULSE_DRIVE, delay = 8, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.SPIRAL_HELL   },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.IMPULSE_DRIVE },
         },
     },
 
-    -- Shikaree Z (Dragoon) leads
-    [boneyardGullyID.mob.SHIKAREE_Z_HW] =
+    -- Shikaree Z initiated
+    [ID.mob.SHIKAREE_Z_HW] =
     {
-        msgOffset = boneyardGullyID.text.SHIKAREE_Z_OFFSET,
-
-        -- 3 alive: Z → Y → X (Skewer → Spiral Hell → Evisceration)
-        [3] =
+        -- All shikaree are alive: Z Skewer → Y Spiral Hell → X Evisceration
+        [allAlive] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.SKEWER,       delay =  0, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.SPIRAL_HELL,  delay =  8, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 3 },
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.EVISCERATION, delay = 13, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.SKEWER       },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.SPIRAL_HELL  },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.EVISCERATION },
         },
-        -- 2 alive with X: Z → X (Skewer → Dancing Edge)
-        [boneyardGullyID.mob.SHIKAREE_X_HW] =
+        -- Shikaree Z and X are alive: Z Wheeling Thrust → X Shark Bite
+        [ID.mob.SHIKAREE_X_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.WHEELING_THRUST, delay = 0, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_X_HW] = { skill = xi.mobSkill.SHARK_BITE,      delay = 8, message = boneyardGullyID.text.SHIKAREE_X_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.WHEELING_THRUST },
+            { mobId = ID.mob.SHIKAREE_X_HW, skill = xi.mobSkill.SHARK_BITE      },
         },
-        -- 2 alive with Y: Z → Y (Impulse Drive → Vorpal Scythe)
-        [boneyardGullyID.mob.SHIKAREE_Y_HW] =
+        -- Shikaree Z and Y are alive: Z Skewer → Y Spiral Hell
+        [ID.mob.SHIKAREE_Y_HW] =
         {
-            [boneyardGullyID.mob.SHIKAREE_Z_HW] = { skill = xi.mobSkill.SKEWER,      delay = 0, message = boneyardGullyID.text.SHIKAREE_Z_OFFSET + 2 },
-            [boneyardGullyID.mob.SHIKAREE_Y_HW] = { skill = xi.mobSkill.SPIRAL_HELL, delay = 8, message = boneyardGullyID.text.SHIKAREE_Y_OFFSET + 3 },
+            { mobId = ID.mob.SHIKAREE_Z_HW, skill = xi.mobSkill.SKEWER      },
+            { mobId = ID.mob.SHIKAREE_Y_HW, skill = xi.mobSkill.SPIRAL_HELL },
         },
     },
 }
@@ -146,7 +155,7 @@ local function readySkillChain(leaderShikaree, aliveShikarees)
 
     if #aliveShikarees == 3 then
         -- Use 3-mob skillchain
-        chainData = leaderData[3]
+        chainData = leaderData[allAlive]
     else
         -- Use 2-mob skillchain: index by the other alive mob's baseID
         for i = 1, 2 do
@@ -165,16 +174,17 @@ local function readySkillChain(leaderShikaree, aliveShikarees)
     battlefield:setLocalVar('scState', scStateList.STARTING)
 
     -- Setup Shikarees with their skill sequence order and behavior
-    local sequence = {}
-    for i = 1, #aliveShikarees do
-        local mobID       = aliveShikarees[i]
-        local baseID      = mobID - offset
-        local data        = chainData[baseID]
+    -- chainData is an array where position determines execution order
+    for i, data in ipairs(chainData) do
+        local mobID       = data.mobId + offset
         local shikareeMob = GetMobByID(mobID)
 
-        if data and shikareeMob then
+        if shikareeMob then
+            -- Leader of skillchains uses message offset + 2, followers use offset + 3
+            local msgOffset = msgOffsets[data.mobId] + (i == 1 and 2 or 3)
+
             shikareeMob:setLocalVar('scSkill', data.skill)
-            shikareeMob:setLocalVar('scMessage', data.message)
+            shikareeMob:setLocalVar('scMessage', msgOffset)
             shikareeMob:setMagicCastingEnabled(false)
 
             -- Force all Shikarees to target the leader's target
@@ -182,19 +192,11 @@ local function readySkillChain(leaderShikaree, aliveShikarees)
                 shikareeMob:updateEnmity(leaderTarget)
             end
 
-            table.insert(sequence, { id = mobID, mob = shikareeMob, delay = data.delay })
+            -- Set next mob in chain (next entry in array, or 0 if last)
+            local nextData = chainData[i + 1]
+            local nextID   = nextData and (nextData.mobId + offset) or 0
+            shikareeMob:setLocalVar('scNextID', nextID)
         end
-    end
-
-    -- Sort by delay and set up next mob chain
-    table.sort(sequence, function(a, b)
-        return a.delay < b.delay
-    end)
-
-    -- Set var to initiate the next shikaree in the chain's skill usage
-    for i = 1, #sequence do
-        local nextID = sequence[i + 1] and sequence[i + 1].id or 0
-        sequence[i].mob:setLocalVar('scNextID', nextID)
     end
 end
 
@@ -253,16 +255,16 @@ end
 local function checkForNewLeader(battlefield, offsetID)
     for i = 0, 2 do
         local currentID   = offsetID + i
-        local baseID      = boneyardGullyID.mob.SHIKAREE_Z_HW + i
+        local baseID      = ID.mob.SHIKAREE_Z_HW + i
         local shikareeMob = GetMobByID(currentID)
 
         if shikareeMob and shikareeMob:isAlive() and shikareeMob:getTP() >= 1000 then
-            local leaderData = skillchainData[baseID]
+            local leaderMsgOffset = msgOffsets[baseID]
 
-            if leaderData and leaderData.msgOffset then
+            if leaderMsgOffset then
                 battlefield:setLocalVar('scState', scStateList.READY)
                 battlefield:setLocalVar('scLeader', currentID)
-                shikareeMob:messageText(shikareeMob, leaderData.msgOffset + 1)
+                shikareeMob:messageText(shikareeMob, leaderMsgOffset + 1)
 
                 return
             end
@@ -363,7 +365,7 @@ function content:onBattlefieldTick(battlefield, tick)
     Battlefield.onBattlefieldTick(self, battlefield, tick)
 
     local offset     = (battlefield:getArea() - 1) * 5
-    local offsetID   = boneyardGullyID.mob.SHIKAREE_Z_HW + offset
+    local offsetID   = ID.mob.SHIKAREE_Z_HW + offset
     local scState    = battlefield:getLocalVar('scState')
     local scLeaderID = battlefield:getLocalVar('scLeader')
 
@@ -421,21 +423,21 @@ content.groups =
         mobIds =
         {
             {
-                boneyardGullyID.mob.SHIKAREE_Z_HW,
-                boneyardGullyID.mob.SHIKAREE_Y_HW,
-                boneyardGullyID.mob.SHIKAREE_X_HW,
+                ID.mob.SHIKAREE_Z_HW,
+                ID.mob.SHIKAREE_Y_HW,
+                ID.mob.SHIKAREE_X_HW,
             },
 
             {
-                boneyardGullyID.mob.SHIKAREE_Z_HW + 5,
-                boneyardGullyID.mob.SHIKAREE_Y_HW + 5,
-                boneyardGullyID.mob.SHIKAREE_X_HW + 5,
+                ID.mob.SHIKAREE_Z_HW + 5,
+                ID.mob.SHIKAREE_Y_HW + 5,
+                ID.mob.SHIKAREE_X_HW + 5,
             },
 
             {
-                boneyardGullyID.mob.SHIKAREE_Z_HW + 10,
-                boneyardGullyID.mob.SHIKAREE_Y_HW + 10,
-                boneyardGullyID.mob.SHIKAREE_X_HW + 10,
+                ID.mob.SHIKAREE_Z_HW + 10,
+                ID.mob.SHIKAREE_Y_HW + 10,
+                ID.mob.SHIKAREE_X_HW + 10,
             },
         },
 
@@ -448,9 +450,9 @@ content.groups =
     {
         mobIds =
         {
-            { boneyardGullyID.mob.SHIKAREE_Z_HW +  4 },
-            { boneyardGullyID.mob.SHIKAREE_Z_HW +  9 },
-            { boneyardGullyID.mob.SHIKAREE_Z_HW + 14 },
+            { ID.mob.SHIKAREE_Z_HW +  4 },
+            { ID.mob.SHIKAREE_Z_HW +  9 },
+            { ID.mob.SHIKAREE_Z_HW + 14 },
         },
 
         superlinkGroup = 1,
@@ -460,9 +462,9 @@ content.groups =
     {
         mobIds =
         {
-            { boneyardGullyID.mob.SHIKAREE_Z_HW +  3 },
-            { boneyardGullyID.mob.SHIKAREE_Z_HW +  8 },
-            { boneyardGullyID.mob.SHIKAREE_Z_HW + 13 },
+            { ID.mob.SHIKAREE_Z_HW +  3 },
+            { ID.mob.SHIKAREE_Z_HW +  8 },
+            { ID.mob.SHIKAREE_Z_HW + 13 },
         },
 
         superlinkGroup = 1,

@@ -239,7 +239,6 @@ float HandleTranquilHeart(CBattleEntity* PEntity);
 
 void assistTarget(CCharEntity* PChar, uint16 TargID);
 
-uint8   GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell);
 ELEMENT GetDayElement();
 auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> Weather;
 auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar, Weather zoneWeather) -> Weather;

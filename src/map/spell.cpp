@@ -142,7 +142,7 @@ bool CSpell::isBuff() const
 
 bool CSpell::tookEffect() const
 {
-    return !(m_message == 75 || m_message == 284 || m_message == 283 || m_message == 85);
+    return !(m_message == MsgBasic::MAGIC_NO_EFFECT || m_message == MsgBasic::MAGIC_RESISTED_TARGET || m_message == MsgBasic::TARGET_NO_EFFECT || m_message == MsgBasic::MAGIC_RESISTED);
 }
 
 bool CSpell::hasMPCost()
@@ -191,7 +191,7 @@ bool CSpell::canHitShadow()
 bool CSpell::dealsDamage() const
 {
     // damage or drain hp
-    return m_message == 2 || m_message == 227 || m_message == 252 || m_message == 274;
+    return m_message == MsgBasic::MAGIC_DAMAGE || m_message == MsgBasic::MAGIC_DRAINS_HP || m_message == MsgBasic::MAGIC_BURST_DAMAGE || m_message == MsgBasic::MAGIC_BURST_DRAINS_HP;
 }
 
 float CSpell::getRadius() const
@@ -284,45 +284,22 @@ void CSpell::setMultiplier(float multiplier)
     m_multiplier = multiplier;
 }
 
-auto CSpell::getMessage() const -> MSGBASIC_ID
+auto CSpell::getMessage() const -> MsgBasic
 {
-    return static_cast<MSGBASIC_ID>(m_message);
+    return m_message;
 }
 
-auto CSpell::getAoEMessage() const -> MSGBASIC_ID
-{
-    switch (m_message)
-    {
-        case MSGBASIC_MAGIC_RECOVERS_HP:
-            return MSGBASIC_TARGET_RECOVERS_HP;
-        case MSGBASIC_MAGIC_TELEPORT:
-            return MSGBASIC_TARGET_TELEPORT;
-        case MSGBASIC_MAGIC_RESISTED:
-            return MSGBASIC_MAGIC_RESISTED_TARGET;
-        case MSGBASIC_MAGIC_GAINS_EFFECT:
-            return MSGBASIC_TARGET_GAINS_EFFECT;
-        case MSGBASIC_MAGIC_STATUS:
-            return MSGBASIC_TARGET_STATUS;
-        case MSGBASIC_MAGIC_RECEIVES_EFFECT:
-            return MSGBASIC_TARGET_RECEIVES_EFFECT;
-        case MSGBASIC_MAGIC_DAMAGE:
-            return MSGBASIC_TARGET_TAKES_DAMAGE;
-        default:
-            return static_cast<MSGBASIC_ID>(m_message);
-    }
-}
-
-void CSpell::setMessage(uint16 message)
+void CSpell::setMessage(const MsgBasic message)
 {
     m_message = message;
 }
 
-uint16 CSpell::getMagicBurstMessage() const
+auto CSpell::getMagicBurstMessage() const -> MsgBasic
 {
     return m_MagicBurstMessage;
 }
 
-void CSpell::setMagicBurstMessage(uint16 message)
+void CSpell::setMagicBurstMessage(const MsgBasic message)
 {
     m_MagicBurstMessage = message;
 }
@@ -520,8 +497,8 @@ void LoadSpellList()
         PSpell->setElement(rset->get<uint16>("element"));
         PSpell->setZoneMisc(rset->get<uint16>("zonemisc"));
         PSpell->setMultiplier(rset->get<float>("multiplier"));
-        PSpell->setMessage(rset->get<uint16>("message"));
-        PSpell->setMagicBurstMessage(rset->get<uint16>("magicBurstMessage"));
+        PSpell->setMessage(rset->get<MsgBasic>("message"));
+        PSpell->setMagicBurstMessage(rset->get<MsgBasic>("magicBurstMessage"));
         PSpell->setCE(rset->get<int32>("CE"));
         PSpell->setVE(rset->get<int32>("VE"));
         PSpell->setRequirements(rset->get<uint8>("requirements"));
@@ -858,28 +835,6 @@ bool CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level)
         return level > jobMLevel;
     }
     return false;
-}
-
-float GetSpellRadius(CSpell* spell, CBattleEntity* entity)
-{
-    float total = spell->getRadius();
-
-    // brd gets bonus radius from string skill
-    if (spell->getSpellGroup() == SPELLGROUP_SONG && (spell->getValidTarget() & TARGET_SELF))
-    {
-        if (entity->objtype == TYPE_MOB || (entity->GetMJob() == JOB_BRD && entity->objtype == TYPE_PC && ((CCharEntity*)entity)->getEquip(SLOT_RANGED) &&
-                                            ((CItemWeapon*)((CCharEntity*)entity)->getEquip(SLOT_RANGED))->getSkillType() == SKILL_STRING_INSTRUMENT))
-        {
-            total += ((float)entity->GetSkill(SKILL_STRING_INSTRUMENT) / 276) * 10;
-        }
-
-        if (total > 20)
-        {
-            total = 20;
-        }
-    }
-
-    return total;
 }
 
 }; // namespace spell

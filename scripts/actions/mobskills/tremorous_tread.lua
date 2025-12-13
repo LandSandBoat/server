@@ -20,8 +20,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 3)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 3)
+
     return dmg
 end
 

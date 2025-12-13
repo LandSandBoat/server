@@ -226,9 +226,6 @@ INSERT INTO `mob_pool_mods` VALUES (2463,61,20,1); -- HP_SCALE: 20
 -- Mammet-19 Epsilon
 INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 
--- Mammet-22 Zeta
-INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- SLEEPRES: 90
-
 -- Minotaur
 INSERT INTO `mob_pool_mods` VALUES (2675,4,25,1); -- SIGHT_RANGE: 25
 
@@ -262,10 +259,6 @@ INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50
 
 -- Nunyunuwi
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0); -- REGEN: 100
-
--- Omega
-INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
-INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
 
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
@@ -357,10 +350,6 @@ INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
 
 -- Ullikummi
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
-
--- Ultima
-INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
-INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
 
 -- Vanguard_Armorer
 INSERT INTO `mob_pool_mods` VALUES (4136,75,3,1); -- CAN_PARRY: 3

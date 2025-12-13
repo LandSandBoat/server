@@ -43534,8 +43534,10 @@ INSERT INTO `item_mods` VALUES (21032,25,20); -- ACC: 20
 INSERT INTO `item_mods` VALUES (21033,25,25); -- ACC: 25
 
 -- Atakigiri
-INSERT INTO `item_mods` VALUES (21036,8,15);  -- STR: 15
-INSERT INTO `item_mods` VALUES (21036,62,25); -- ATTP: 25
+INSERT INTO `item_mods` VALUES (21036,8,15);    -- STR: 15
+INSERT INTO `item_mods` VALUES (21036,23,25);   -- ATT: 25
+INSERT INTO `item_mods` VALUES (21036,89,242);  -- GKATANA: 242
+INSERT INTO `item_mods` VALUES (21036,110,242); -- PARRY: 242
 
 -- Senkuto
 INSERT INTO `item_mods` VALUES (21038,25,24); -- ACC: 24

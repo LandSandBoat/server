@@ -59,7 +59,7 @@ bool CPlayerController::Cast(uint16 targid, SpellID spellid)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_CAST);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_CAST);
         return false;
     }
 }
@@ -86,12 +86,12 @@ bool CPlayerController::Engage(uint16 targid)
             }
             else
             {
-                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_WAIT_LONGER);
+                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::WAIT_LONGER);
             }
         }
         else
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TOO_FAR_AWAY);
         }
     }
     if (errMsg)
@@ -119,7 +119,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
         CAbility* PAbility = ability::GetAbility(abilityid);
         if (!PAbility)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_JA);
             return false;
         }
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
@@ -135,8 +135,8 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
             }
 
             currentRecast = std::chrono::ceil<std::chrono::seconds>(currentRecast);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MSGBASIC_TIME_LEFT);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_JA2);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MsgBasic::TIME_LEFT);
             return false;
         }
         if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
@@ -147,7 +147,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_JA);
         return false;
     }
 }
@@ -165,7 +165,7 @@ bool CPlayerController::RangedAttack(uint16 targid)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WAIT_LONGER);
     }
     return false;
 }
@@ -194,25 +194,25 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
         if (PWeaponSkill == nullptr)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_WS);
             return false;
         }
 
         if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()) || !charutils::canUseWeaponSkill(PChar, wsid))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_WS);
             return false;
         }
 
         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) || (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) && (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x02 || PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x03)))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_ANY_WS);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_ANY_WS);
             return false;
         }
 
         if (PChar->health.tp < 1000)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_NOT_ENOUGH_TP);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NOT_ENOUGH_TP);
             return false;
         }
 
@@ -225,7 +225,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             // before allowing ranged weapon skill...
             if (PItem == nullptr || !weapon || !weapon->isRanged() || !ammo || !ammo->isRanged() || PChar->equip[SLOT_AMMO] == 0)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NO_RANGED_WEAPON);
                 return false;
             }
         }
@@ -242,7 +242,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::CANNOT_SEE);
                 return false;
             }
 
@@ -257,7 +257,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_WS);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_WS);
     }
     return false;
 }

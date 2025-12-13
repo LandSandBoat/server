@@ -57921,24 +57921,24 @@ INSERT INTO `mob_spawn_points` VALUES (17444878,0,'Tonberrys_Elemental','Tonberr
 INSERT INTO `mob_spawn_points` VALUES (17444879,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,278.577,31.999,-277.401,32);
 
 -- Jungle Boogymen
-INSERT INTO `mob_spawn_points` VALUES (17444880,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,-278.368,-32.000,328.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444881,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,-281.368,-32.000,325.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444882,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,-284.368,-32.000,322.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444883,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,-287.368,-32.000,319.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444885,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,-285.368,-32.000,319.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444886,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,-286.368,-32.000,319.647,25);
-INSERT INTO `mob_spawn_points` VALUES (17444887,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,1.646,0.000,48.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444888,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,-1.354,0.000,45.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444889,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,-4.354,0.000,42.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444890,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,-7.354,0.000,39.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444892,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,-5.354,0.000,39.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444893,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,-6.354,0.000,39.679,25);
-INSERT INTO `mob_spawn_points` VALUES (17444894,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,281.709,31.999,-271.754,25);
-INSERT INTO `mob_spawn_points` VALUES (17444895,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,278.709,31.999,-274.754,25);
-INSERT INTO `mob_spawn_points` VALUES (17444896,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,275.709,31.999,-277.754,25);
-INSERT INTO `mob_spawn_points` VALUES (17444897,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,272.709,31.999,-280.754,25);
-INSERT INTO `mob_spawn_points` VALUES (17444899,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,274.709,31.999,-280.754,25);
-INSERT INTO `mob_spawn_points` VALUES (17444900,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,273.709,31.999,-280.754,25);
+INSERT INTO `mob_spawn_points` VALUES (17444880,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,-280.878,-32.5,326.971,32);
+INSERT INTO `mob_spawn_points` VALUES (17444881,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,-282.99,-32.5,325.069,32);
+INSERT INTO `mob_spawn_points` VALUES (17444882,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,-285.101,-32.488,323.167,32);
+INSERT INTO `mob_spawn_points` VALUES (17444883,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,-287.213,-32.5,321.266,32);
+INSERT INTO `mob_spawn_points` VALUES (17444885,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,-287.212,-32.5,321.266,32);
+INSERT INTO `mob_spawn_points` VALUES (17444886,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,-286.368,-32.000,319.647,32);
+INSERT INTO `mob_spawn_points` VALUES (17444887,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,-1.0935,-0.5000,47.6074,32);
+INSERT INTO `mob_spawn_points` VALUES (17444888,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,-3.2055,-0.5000,45.7054,32);
+INSERT INTO `mob_spawn_points` VALUES (17444889,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,-5.3165,-0.4880,43.8034,32);
+INSERT INTO `mob_spawn_points` VALUES (17444890,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,-7.4285,-0.5000,41.9024,32);
+INSERT INTO `mob_spawn_points` VALUES (17444892,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,-7.4275,-0.5000,41.9024,32);
+INSERT INTO `mob_spawn_points` VALUES (17444893,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,-6.5835, 0.0000,39.2836,32);
+INSERT INTO `mob_spawn_points` VALUES (17444894,0,'Sable-tongued_Gonberry','Sable-tongued Gonberry',6,281.1295,31.5000,-273.2244,32);
+INSERT INTO `mob_spawn_points` VALUES (17444895,0,'Virid-faced_Shanberry','Virid-faced Shanberry',7,279.0175,31.5000,-275.1264,32);
+INSERT INTO `mob_spawn_points` VALUES (17444896,0,'Cyaneous-toed_Yallberry','Cyaneous-toed Yallberry',8,276.9065,31.5120,-277.0284,32);
+INSERT INTO `mob_spawn_points` VALUES (17444897,0,'Vermilion-eared_Noberry','Vermilion-eared Noberry',9,274.7945,31.5000,-278.9294,32);
+INSERT INTO `mob_spawn_points` VALUES (17444899,0,'Tonberrys_Elemental','Tonberry\'s Elemental',4,274.7955,31.5000,-278.9294,32);
+INSERT INTO `mob_spawn_points` VALUES (17444900,0,'Tonberrys_Avatar','Tonberry\'s Avatar',5,275.6395,32.0000,-281.5485,32);
 
 -- Amphibian Assault
 INSERT INTO `mob_spawn_points` VALUES (17444901,0,'Qull_the_Fallstopper','Qull the Fallstopper',10,-278.000,-32.000,318.000,25);
@@ -58574,12 +58574,12 @@ INSERT INTO `mob_spawn_points` VALUES (17449376,0,'Laidly_Laurence','Laidly Laur
 -- ------------------------------------------------------------
 
 -- The Shadow Lord Battle (Mission 5-2)
-INSERT INTO `mob_spawn_points` VALUES (17453057,0,'Shadow_Lord','Shadow Lord',1,-464.812,-167.200,-239.941,0); -- stage 1
-INSERT INTO `mob_spawn_points` VALUES (17453058,0,'Shadow_Lord','Shadow Lord',1,-784.761,-407.200,-479.932,0);
-INSERT INTO `mob_spawn_points` VALUES (17453059,0,'Shadow_Lord','Shadow Lord',1,-1104.599,-647.200,-719.917,0);
-INSERT INTO `mob_spawn_points` VALUES (17453060,0,'Shadow_Lord','Shadow Lord',2,-464.812,-167.200,-239.941,0); -- stage 2
-INSERT INTO `mob_spawn_points` VALUES (17453061,0,'Shadow_Lord','Shadow Lord',2,-784.761,-407.200,-479.932,0);
-INSERT INTO `mob_spawn_points` VALUES (17453062,0,'Shadow_Lord','Shadow Lord',2,-1104.599,-647.200,-719.917,0);
+INSERT INTO `mob_spawn_points` VALUES (17453057,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-464.527,-167.200,-240.076,0); -- stage 1
+INSERT INTO `mob_spawn_points` VALUES (17453058,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-784.761,-407.200,-479.932,0);
+INSERT INTO `mob_spawn_points` VALUES (17453059,0,'Shadow_Lord_Phase_1','Shadow Lord',1,-1104.599,-647.200,-719.917,0);
+INSERT INTO `mob_spawn_points` VALUES (17453060,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-464.812,-167.200,-239.941,0); -- stage 2
+INSERT INTO `mob_spawn_points` VALUES (17453061,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-784.761,-407.200,-479.932,0);
+INSERT INTO `mob_spawn_points` VALUES (17453062,0,'Shadow_Lord_Phase_2','Shadow Lord',2,-1104.599,-647.200,-719.917,0);
 
 -- Where Two Paths Converge (Basty 9-2)
 INSERT INTO `mob_spawn_points` VALUES (17453063,0,'Zeid','Zeid',3,-465.000,-167.000,-240.000,0);
@@ -58595,7 +58595,6 @@ INSERT INTO `mob_spawn_points` VALUES (17453072,0,'Zeid_2','Zeid',4,-1104.787,-6
 INSERT INTO `mob_spawn_points` VALUES (17453073,0,'Shadow_of_Rage','Shadow of Rage',5,-638.787,-479.000,-478.976,0);
 INSERT INTO `mob_spawn_points` VALUES (17453074,0,'Shadow_of_Rage','Shadow of Rage',5,-638.787,-479.000,-478.976,0);
 
--- TODO: Verify exact positions for battlefield instances 2 and 3
 -- Kindred Spirits (BS60)
 INSERT INTO `mob_spawn_points` VALUES (17453075,0,'Grand_Marquis_Chomiel','Grand Marquis Chomiel',6,-464.527,-167.58,-241.576,0);
 INSERT INTO `mob_spawn_points` VALUES (17453076,0,'Duke_Amduscias','Duke Amduscias',7,-464.527,-167.5,-244.576,0);
@@ -70141,32 +70140,32 @@ INSERT INTO `mob_spawn_points` VALUES (17621134,0,'Wind_Golem','Wind Golem',26,3
 INSERT INTO `mob_spawn_points` VALUES (17621135,0,'Earth_Golem','Earth Golem',27,398.028,199.000,-404.677,195);
 
 -- Demolition Squad (BS60)
-INSERT INTO `mob_spawn_points` VALUES (17621137,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-390.000,-201.000,405.000,178);
-INSERT INTO `mob_spawn_points` VALUES (17621138,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-410.000,-201.000,405.000,210);
-INSERT INTO `mob_spawn_points` VALUES (17621139,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-410.000,-201.000,393.000,200);
-INSERT INTO `mob_spawn_points` VALUES (17621140,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,-390.000,-201.000,393.000,178);
-INSERT INTO `mob_spawn_points` VALUES (17621142,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,10.073,-1.000,5.099,178);
-INSERT INTO `mob_spawn_points` VALUES (17621143,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-9.927,-1.000,5.099,210);
-INSERT INTO `mob_spawn_points` VALUES (17621144,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-9.927,-1.000,-6.901,200);
-INSERT INTO `mob_spawn_points` VALUES (17621145,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,10.073,-1.000,-6.901,178);
-INSERT INTO `mob_spawn_points` VALUES (17621147,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,410.028,199.000,-394.677,178);
-INSERT INTO `mob_spawn_points` VALUES (17621148,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,390.028,199.000,-394.677,210);
-INSERT INTO `mob_spawn_points` VALUES (17621149,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,390.028,199.000,-406.677,200);
-INSERT INTO `mob_spawn_points` VALUES (17621150,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,410.028,199.000,-406.677,178);
+INSERT INTO `mob_spawn_points` VALUES (17621137,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-405.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621138,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,-395.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621139,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,-400.001,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621140,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,-400.001,-202.125,395.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621142,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,-3.940,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621143,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29, 6.060,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621144,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30, 1.060,-1.625,-0.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621145,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31, 1.060,-1.625,-5.900,192);
+INSERT INTO `mob_spawn_points` VALUES (17621147,0,'Nephiyl_Rampartbreacher','Nephiyl Rampartbreacher',28,395.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621148,0,'Nephiyl_Keepcollapser','Nephiyl Keepcollapser',29,405.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621149,0,'Nephiyl_Moatfiller','Nephiyl Moatfiller',30,400.000,199.000,-400.677,192);
+INSERT INTO `mob_spawn_points` VALUES (17621150,0,'Nephiyl_Pinnacletosser','Nephiyl Pinnacletosser',31,400.000,199.000,-405.677,192);
 
 -- Brothers D'Aurphe (BS60)
-INSERT INTO `mob_spawn_points` VALUES (17621152,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-393.000,-201.000,399.000,185);
-INSERT INTO `mob_spawn_points` VALUES (17621153,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-397.000,-201.000,395.000,185);
-INSERT INTO `mob_spawn_points` VALUES (17621154,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-404.000,-201.000,399.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621155,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-402.000,-201.000,395.000,195);
-INSERT INTO `mob_spawn_points` VALUES (17621157,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,7.073,-1.000,-0.901,185);
-INSERT INTO `mob_spawn_points` VALUES (17621158,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,3.073,-1.000,-4.901,185);
-INSERT INTO `mob_spawn_points` VALUES (17621159,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-3.927,-1.000,-0.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621160,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-1.927,-1.000,-4.901,195);
-INSERT INTO `mob_spawn_points` VALUES (17621162,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,407.028,199.000,-400.677,185);
-INSERT INTO `mob_spawn_points` VALUES (17621163,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,403.028,199.000,-404.677,185);
-INSERT INTO `mob_spawn_points` VALUES (17621164,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,396.028,199.000,-400.677,195);
-INSERT INTO `mob_spawn_points` VALUES (17621165,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,398.028,199.000,-404.677,195);
+INSERT INTO `mob_spawn_points` VALUES (17621152,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-401.366,-202.107,400.448,203);
+INSERT INTO `mob_spawn_points` VALUES (17621153,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-404.071,-202.125,400.831,211);
+INSERT INTO `mob_spawn_points` VALUES (17621154,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,-398.439,-202.076,401.298,193);
+INSERT INTO `mob_spawn_points` VALUES (17621155,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,-395.501,-202.125,400.001,192);
+INSERT INTO `mob_spawn_points` VALUES (17621157,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,-1.413,-2.107,0.571,203);
+INSERT INTO `mob_spawn_points` VALUES (17621158,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,-4.118,-2.125,0.954,211);
+INSERT INTO `mob_spawn_points` VALUES (17621159,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,1.514,-2.076,1.421,193);
+INSERT INTO `mob_spawn_points` VALUES (17621160,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,4.452,-2.125,0.124,192);
+INSERT INTO `mob_spawn_points` VALUES (17621162,0,'Vaicoliaux_B_DAurphe','Vaicoliaux B D\'Aurphe',32,398.635,197.893,-399.715,203);
+INSERT INTO `mob_spawn_points` VALUES (17621163,0,'Maldaramet_B_DAurphe','Maldaramet B D\'Aurphe',33,395.930,197.875,-399.332,211);
+INSERT INTO `mob_spawn_points` VALUES (17621164,0,'Disfaurit_B_DAurphe','Disfaurit B D\'Aurphe',34,401.562,197.924,-398.865,193);
+INSERT INTO `mob_spawn_points` VALUES (17621165,0,'Jeumouque_B_DAurphe','Jeumouque B D\'Aurphe',35,404.500,197.875,-400.162,192);
 
 -- An Awful Autopsy (BS50)
 INSERT INTO `mob_spawn_points` VALUES (17621167,0,'Chahnameeds_Stomach','Chahnameed\'s Stomach',36,-393.000,-201.000,399.000,185);

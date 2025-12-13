@@ -1949,7 +1949,7 @@ void OnZoneIn(CCharEntity* PChar)
     TracyZoneScoped;
 
     CZone* destinationZone = zoneutils::GetZone(PChar->loc.destination);
-    if (!PChar->m_moghouseID && destinationZone == nullptr)
+    if (!PChar->inMogHouse() && destinationZone == nullptr)
     {
         ShowWarning("Attempt to Zone In player to invalid/disabled zone %d.", PChar->loc.destination);
         return;
@@ -2351,7 +2351,7 @@ void OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
     }
 
     Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::NONE;
     Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
@@ -2378,7 +2378,7 @@ void OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_r
     }
 
     Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
-    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
+    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::NONE;
     Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
@@ -2407,7 +2407,7 @@ int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     }
 
     Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::NONE;
     Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
     return 0;
@@ -2434,7 +2434,7 @@ void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, 
     }
 
     Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
-    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
+    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::NONE;
     Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
@@ -2825,7 +2825,7 @@ void OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell)
     }
 }
 
-std::optional<SpellID> OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
+std::tuple<std::optional<SpellID>, std::optional<CBattleEntity*>> OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
 {
     TracyZoneScoped;
 
@@ -2855,13 +2855,35 @@ std::optional<SpellID> OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* P
         return {};
     }
 
-    uint32 retVal = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
-    if (retVal > 0)
+    CBattleEntity* newTarget = nullptr;
+    // change target
+    if (result.get_type(1) == sol::type::userdata)
     {
-        return static_cast<SpellID>(retVal);
+        CLuaBaseEntity* PLuaBaseEntity = result.get<CLuaBaseEntity*>(1);
+        if (PLuaBaseEntity)
+        {
+            if (auto* PBattle = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()); PBattle)
+            {
+                newTarget = PBattle;
+            }
+        }
     }
 
-    return {};
+    uint32 newSpellId = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+
+    std::tuple<std::optional<SpellID>, std::optional<CBattleEntity*>> retVal = {};
+
+    if (newSpellId > 0)
+    {
+        std::get<0>(retVal) = static_cast<SpellID>(newSpellId);
+    }
+
+    if (newTarget)
+    {
+        std::get<1>(retVal) = newTarget;
+    }
+
+    return retVal;
 }
 
 // Called when mob is targeted by a spell.

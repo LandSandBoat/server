@@ -52,18 +52,18 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
 
     if (PItem->isPlanted())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getSeedID(PItem->getPlant()), 0, MSGBASIC_GARDENING_SEED_SOWN);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getSeedID(PItem->getPlant()), 0, MsgBasic::GARDENING_SEED_SOWN);
         if (PItem->isTree())
         {
             if (PItem->getStage() > FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL)
             {
                 if (PItem->getExtraCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getExtraCrystalFeed()), 0, MSGBASIC_GARDENING_CRYSTAL_USED);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getExtraCrystalFeed()), 0, MsgBasic::GARDENING_CRYSTAL_USED);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_GARDENING_CRYSTAL_NONE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::GARDENING_CRYSTAL_NONE);
                 }
             }
         }
@@ -71,11 +71,11 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         {
             if (PItem->getCommonCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getCommonCrystalFeed()), 0, MSGBASIC_GARDENING_CRYSTAL_USED);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PItem->getCommonCrystalFeed()), 0, MsgBasic::GARDENING_CRYSTAL_USED);
             }
             else
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_GARDENING_CRYSTAL_NONE);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::GARDENING_CRYSTAL_NONE);
             }
         }
 

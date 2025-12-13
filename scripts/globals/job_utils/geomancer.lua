@@ -177,14 +177,12 @@ xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck = function(player, targe
     end
 
     -- player out of range of luopan
-    -- TODO: Luopan hitbox + player hitbox
-    if player:checkDistance(pet) > ability:getRange() then
+    if player:checkDistance(pet) > ability:getRange() + player:getHitboxSize() + pet:getHitboxSize() then
         return xi.msg.basic.TARG_OUT_OF_RANGE_2, 0
     end
 
     -- target out of range of luopan
-    -- TODO: Luopan hitbox + target hitbox
-    if target:checkDistance(pet) > ability:getRange() then
+    if target:checkDistance(pet) > ability:getRange() + target:getHitboxSize() + pet:getHitboxSize() then
         return xi.msg.basic.TARG_OUT_OF_RANGE_2, pet:getTargID()
     end
 
@@ -213,6 +211,14 @@ xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ab
     if luopan:getLocalVar('eclipticAttrition') ~= 0 then
         -- This message is guessed
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
+    end
+
+    return 0, 0
+end
+
+xi.job_utils.geomancer.geoOnTheurgicFocusCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.THEURGIC_FOCUS) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
 
     return 0, 0
@@ -290,7 +296,12 @@ xi.job_utils.geomancer.bolster = function(player, target, ability)
 end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
-    local hppRemaining = target:getHPP()
+    local luopan = getLuopan(player)
+    if not luopan then
+        return
+    end
+
+    local hppRemaining = luopan:getHPP()
     local mpCost       = player:getLocalVar('MP_COST')
     local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
     local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
@@ -314,35 +325,45 @@ xi.job_utils.geomancer.fullCircle = function(player, target, ability)
     player:despawnPet()
 end
 
-xi.job_utils.geomancer.lastingEmanation = function(player, target, ability)
+xi.job_utils.geomancer.lastingEmanation = function(player, target, ability, action)
     local luopan = getLuopan(player)
     if luopan then
         local hpDrain = luopan:getMod(xi.mod.REGEN_DOWN)
         luopan:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(luopan:getMainLvl() / 14))
+        -- Self cast ability but targets Luopan
+        action:ID(player:getID(), luopan:getID())
     end
 end
 
 -- TODO: allegedly Blaze of Glory is additive to this, but we aren't keeping track of that potency, so BoG + Ecliptic Attrition is stronger than it should be.
 --       That is probably fixable with some localvars on the bubble...?
-xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability)
-    if target:getLocalVar('eclipticAttrition') ~= 0 then
+xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if not luopan then
         return
     end
 
-    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
-    target:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(target:getMainLvl() / 16))
+    -- Self cast ability but targets Luopan
+    action:ID(player:getID(), luopan:getID())
+
+    if luopan:getLocalVar('eclipticAttrition') ~= 0 then
+        return
+    end
+
+    local hpDrain = luopan:getMod(xi.mod.REGEN_DOWN)
+    luopan:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(luopan:getMainLvl() / 16))
 
     if player:hasStatusEffect(xi.effect.BOLSTER) then
         return
     end
 
-    local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
+    local effect = luopan:getStatusEffect(xi.effect.COLURE_ACTIVE)
     if effect then
         local finalPotency = math.floor(1.25 * effect:getSubPower())
 
         -- This floors https://www.bg-wiki.com/ffxi/Ecliptic_Attrition
         effect:setSubPower(finalPotency)
-        target:setLocalVar('eclipticAttrition', 1)
+        luopan:setLocalVar('eclipticAttrition', 1)
     end
 end
 
@@ -352,7 +373,15 @@ xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
     return xi.effect.COLLIMATED_FERVOR
 end
 
-xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
+xi.job_utils.geomancer.lifeCycle = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if not luopan then
+        return
+    end
+
+    -- Self cast ability but targets Luopan
+    action:ID(player:getID(), luopan:getID())
+
     local hpAmount   = math.floor(0.25 * player:getHP())
     local hpTransfer = hpAmount
 
@@ -360,7 +389,7 @@ xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
         hpTransfer = hpAmount * player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10
     end
 
-    target:restoreHP(hpTransfer)
+    luopan:restoreHP(hpTransfer)
     player:delHP(hpAmount)
     return hpTransfer
 end
@@ -371,16 +400,21 @@ xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
     return xi.effect.BLAZE_OF_GLORY
 end
 
-xi.job_utils.geomancer.dematerialize = function(player, target, ability)
+xi.job_utils.geomancer.dematerialize = function(player, target, ability, action)
     local luopan = getLuopan(player)
     if luopan then
         luopan:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+        -- Self-cast ability but reports effect on Luopan
+        action:ID(player:getID(), luopan:getID())
     end
 
     return xi.effect.DEMATERIALIZE
 end
 
 xi.job_utils.geomancer.theurgicFocus = function(player, target, ability)
+    player:addStatusEffect(xi.effect.THEURGIC_FOCUS, 1, 0, 60)
+
+    return xi.effect.THEURGIC_FOCUS
 end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)

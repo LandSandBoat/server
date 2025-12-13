@@ -3,7 +3,6 @@
 --  Mob: Shikaree Z (Head Wind)
 -- BCNM: Head Wind
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 ---@type TMobEntity
@@ -100,6 +99,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
     if battlefield:getLocalVar('scState') == 4 then
         mob:messageText(mob, ID.text.SHIKAREE_Z_OFFSET + 4)
+        return
     end
 
     -- Handle skillchain progression

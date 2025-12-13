@@ -24,7 +24,8 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
         dmg = dmg + (dmg * 0.01 * dmgBoost)
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    -- TODO: Affected by Phalanx, MDT, Magic Damage % modifiers, OneForAll?
+    dmg = utils.handleStoneskin(target, dmg)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 

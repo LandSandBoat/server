@@ -314,7 +314,7 @@ void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
     {
         static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
         {
-            if (!PMember->isInMogHouse())
+            if (!PMember->inMogHouse())
             {
                 addEntity(PMember, withPet);
             }

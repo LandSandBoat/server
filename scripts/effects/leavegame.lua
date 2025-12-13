@@ -19,7 +19,7 @@ local messages =
 effectObject.onEffectGain = function(target, effect)
     -- If you're a GM or in a MH, you get disconnected immediately.
     if
-        target:isInMogHouse() or
+        target:inMogHouse() or
         target:getGMLevel() > 0
     then
         target:leaveGame()

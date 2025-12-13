@@ -75,7 +75,7 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
                                  bitOffset = packBitsBE(packet, static_cast<uint64>(result.hitDistortion), bitOffset, 2);
                                  bitOffset = packBitsBE(packet, static_cast<uint64>(result.knockback), bitOffset, 3);
                                  bitOffset = packBitsBE(packet, result.param, bitOffset, 17);
-                                 bitOffset = packBitsBE(packet, result.messageID, bitOffset, 10);
+                                 bitOffset = packBitsBE(packet, static_cast<uint16_t>(result.messageID), bitOffset, 10);
                                  bitOffset = packBitsBE(packet, static_cast<uint32_t>(result.modifier), bitOffset, 31);
 
                                  // Conditional proc block
@@ -91,7 +91,7 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
                                      bitOffset = packBitsBE(packet, effectValue, bitOffset, 6);
                                      bitOffset = packBitsBE(packet, result.addEffectInfo, bitOffset, 4);
                                      bitOffset = packBitsBE(packet, result.addEffectParam, bitOffset, 17);
-                                     bitOffset = packBitsBE(packet, result.addEffectMessage, bitOffset, 10);
+                                     bitOffset = packBitsBE(packet, static_cast<uint16_t>(result.addEffectMessage), bitOffset, 10);
                                  }
 
                                  // Conditional reaction block
@@ -101,7 +101,7 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
                                      bitOffset = packBitsBE(packet, static_cast<uint64>(result.spikesEffect), bitOffset, 6);
                                      bitOffset = packBitsBE(packet, result.spikesInfo, bitOffset, 4);
                                      bitOffset = packBitsBE(packet, result.spikesParam, bitOffset, 14);
-                                     bitOffset = packBitsBE(packet, result.spikesMessage, bitOffset, 10);
+                                     bitOffset = packBitsBE(packet, static_cast<uint16_t>(result.spikesMessage), bitOffset, 10);
                                  }
                              }
                          });

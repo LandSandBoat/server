@@ -617,6 +617,7 @@ enum class Mod
     NINJUTSU_DURATION    = 1000,
     ENHANCES_SANGE       = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
     ENHANCES_FUTAE       = 1148, // Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
+    UTSUSEMI_AOE         = 1179, // "Utsusemi" effect extends to an area
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -1132,7 +1133,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1179 and onward
+    // SPARE IDs: 1180 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

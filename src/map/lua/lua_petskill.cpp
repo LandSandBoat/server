@@ -45,7 +45,7 @@ CLuaPetSkill::CLuaPetSkill(CPetSkill* PSkill)
  *                                                                       *
  ************************************************************************/
 
-void CLuaPetSkill::setMsg(uint16 message)
+void CLuaPetSkill::setMsg(MsgBasic message)
 {
     m_PLuaPetSkill->setMsg(message);
 }
@@ -85,7 +85,7 @@ void CLuaPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
     return m_PLuaPetSkill->setFinalAnimationSub(newAnimationSub);
 }
 
-uint16 CLuaPetSkill::getMsg()
+auto CLuaPetSkill::getMsg() -> MsgBasic
 {
     return m_PLuaPetSkill->getMsg();
 }

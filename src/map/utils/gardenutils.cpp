@@ -84,7 +84,7 @@ void Initialize()
     LoadResultList();
 }
 
-void UpdateGardening(CCharEntity* PChar, bool sendPacket)
+void UpdateGardening(CCharEntity* PChar, SendPacket sendPacket)
 {
     TracyZoneScoped;
     uint32 vanatime = earth_time::vanadiel_timestamp();

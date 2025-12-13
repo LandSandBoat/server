@@ -344,16 +344,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
-        dmg = utils.oneforall(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
     end
 
-    -- Handle Phalanx
-    if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
-
-    -- handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handlePhalanx(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     -- Check if the mob has a damage cap
     dmg = target:checkDamageCap(dmg)

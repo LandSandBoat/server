@@ -318,7 +318,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     end
 end
 
-xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
+xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
     local wyvern      = player:getPet()
     local playerHP    = player:getHP()
     local petTP       = wyvern:getTP()
@@ -403,6 +403,8 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         healPet = healPet + 15
     end
 
+    -- Spirit Link is self target but reports effect on Wyvern.
+    action:ID(player:getID(), wyvern:getID())
     return wyvern:addHP(healPet) -- add the hp to wyvern
 end
 
@@ -590,6 +592,9 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
                 effect:setTier(5) -- Empathy doesn't overwrite this stoneskin wih player casted stoneskin
             end
         end
+
+        -- Steady Wing is self target but reports effect on Wyvern.
+        action:ID(player:getID(), wyvern:getID())
     end
 end
 

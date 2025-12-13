@@ -2,7 +2,7 @@
 -- Area: Upper Delkfutt's Tower
 --   NM: Enkelados
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins = { require('scripts/mixins/families/gigas_bst_nm') }
 -----------------------------------
 local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 -----------------------------------

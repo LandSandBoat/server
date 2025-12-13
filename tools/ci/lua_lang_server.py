@@ -14,6 +14,12 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument(
+    "--version",
+    default=None,
+    help="Version of LLS to use. Defaults to latest.",
+)
+
+parser.add_argument(
     "--blame",
     default=None,
     action="store_true",
@@ -103,8 +109,8 @@ os_to_asset = {
     "Darwin": "darwin-x64.tar.gz",
 }
 
-# URL of the GitHub API for this specific release (3.15.0)
-api_url = "https://api.github.com/repos/LuaLS/lua-language-server/releases/tags/3.15.0"
+# URL of the GitHub API
+api_url = f"https://api.github.com/repos/LuaLS/lua-language-server/releases/{f"tags/{args.version}" if args.version else "latest"}"
 
 response = requests.get(api_url)
 

@@ -75,8 +75,7 @@ public:
     uint8           getFlag() const;
     timer::duration getAnimationTime() const;
     timer::duration getActivationTime() const;
-    auto            getMsg() const -> MSGBASIC_ID;
-    auto            getAoEMsg() const -> MSGBASIC_ID;
+    auto            getMsg() const -> MsgBasic;
     uint16          getValidTargets() const;
     int16           getTP() const;
     auto            getHP() const -> int32;
@@ -105,7 +104,7 @@ public:
     void setFlag(uint8 flag);
     void setAnimationTime(timer::duration AnimationTime);
     void setActivationTime(timer::duration ActivationTime);
-    void setMsg(uint16 msg);
+    void setMsg(MsgBasic msg);
     void setValidTargets(uint16 targ);
     void setTP(int16 tp);
     auto setHP(int32 hp) -> void;
@@ -138,7 +137,7 @@ private:
     uint16          m_ValidTarget;
     timer::duration m_AnimationTime;  // how long the tp animation lasts for in ms
     timer::duration m_ActivationTime; // how long the mob prepares the tp move for
-    uint16          m_Message;        // message param, scripters can edit this depending on self/resist/etc.
+    MsgBasic        m_Message;        // message param, scripters can edit this depending on self/resist/etc.
     int16           m_TP;             // the tp at the time of finish readying (for scripts)
     int32           m_HP;             // HP at the time of using mob skill (for scripts)
     uint8           m_HPP;            // HPP at the time of using mob skill (for scripts)

@@ -43,7 +43,7 @@ GP_SERV_COMMAND_MERIT::GP_SERV_COMMAND_MERIT(CCharEntity* PChar)
             packet.merits[i].next  = PMerit->next;
         }
 
-        if (!PChar->m_moghouseID)
+        if (!PChar->inMogHouse())
         {
             for (uint8 i = 0; i < MAX_MERITS_IN_PACKET; ++i)
             {

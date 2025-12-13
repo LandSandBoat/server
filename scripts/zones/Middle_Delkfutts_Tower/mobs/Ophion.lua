@@ -2,7 +2,7 @@
 -- Area: Middle Delkfutt's Tower
 --   NM: Ophion
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins = { require('scripts/mixins/families/gigas_bst_nm') }
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------

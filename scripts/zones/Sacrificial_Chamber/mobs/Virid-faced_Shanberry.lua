@@ -1,7 +1,8 @@
 -----------------------------------
--- Area: Sacrificial Chamber
---  Mob: Virid-faced Shanberry
--- BCNM: Jungle Boogymen
+-- Area : Sacrificial Chamber
+-- Mob  : Virid-faced Shanberry
+-- BCNM : Jungle Boogymen
+-- Job  : Thief
 -----------------------------------
 mixins =
 {
@@ -12,7 +13,10 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 4)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
 return entity

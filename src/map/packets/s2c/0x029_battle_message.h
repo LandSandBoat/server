@@ -23,7 +23,7 @@
 
 #include "base.h"
 
-enum MSGBASIC_ID : uint16_t;
+enum class MsgBasic : uint16_t;
 enum class MsgStd : uint16_t;
 class CBaseEntity;
 
@@ -45,11 +45,11 @@ public:
         uint8_t  padding1B;   // PS2: dammy3
     };
 
-    inline auto getMessageId() const -> MSGBASIC_ID
+    inline auto getMessageId() const -> MsgBasic
     {
-        return static_cast<MSGBASIC_ID>(this->data().MessageNum);
+        return static_cast<MsgBasic>(this->data().MessageNum);
     }
 
     GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MsgStd messageId);
-    GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MSGBASIC_ID messageId);
+    GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MsgBasic messageId);
 };

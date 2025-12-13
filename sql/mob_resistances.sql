@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS `mob_resistances`;
 CREATE TABLE `mob_resistances` (
   `resist_id` smallint(4) unsigned NOT NULL,
   `name` tinytext, -- Purely for human readability
-  `slash_sdt` smallint(5) NOT NULL DEFAULT 1, -- sdt vs physical type
-  `pierce_sdt` smallint(5) NOT NULL DEFAULT 1,
-  `h2h_sdt` smallint(5) NOT NULL DEFAULT 1,
-  `impact_sdt` smallint(5) NOT NULL DEFAULT 1,
+  `slash_sdt` smallint(5) NOT NULL DEFAULT 0, -- sdt vs physical type
+  `pierce_sdt` smallint(5) NOT NULL DEFAULT 0,
+  `h2h_sdt` smallint(5) NOT NULL DEFAULT 0,
+  `impact_sdt` smallint(5) NOT NULL DEFAULT 0,
   `magical_sdt` smallint(5) NOT NULL DEFAULT 0, -- General elemental SDT
   `fire_sdt` smallint(5) NOT NULL DEFAULT 0, -- sdt vs element
   `ice_sdt` smallint(5) NOT NULL DEFAULT 0,
@@ -38,6 +38,7 @@ CREATE TABLE `mob_resistances` (
 
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+INSERT INTO `mob_resistances` VALUES (0,'DEFAULT',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (1,'Acrolith',0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,2,0,6,11,3,3,3,3,0,6,11,11);
 INSERT INTO `mob_resistances` VALUES (2,'Adamantoise',0,0,0,0,0,0,0,0,0,0,0,0,0,4,-2,4,11,11,11,4,4,-2,-2,4,11,11,4,4,4);
 INSERT INTO `mob_resistances` VALUES (3,'Aern',0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,6,-2,-1,-1,-1,-1,-1,6,-2,-2);
@@ -261,8 +262,8 @@ INSERT INTO `mob_resistances` VALUES (220,'Seether',0,0,0,0,0,0,0,0,0,0,0,0,0,11
 INSERT INTO `mob_resistances` VALUES (221,'Shadow - COP',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,4,0,0,0,0,-2,4,4,4,0,0,0,-2,4,4);
 INSERT INTO `mob_resistances` VALUES (222,'Shadow - Brothers DAurphe',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,4,0,0,0,0,-2,4,4,4,0,0,0,-2,4,4);
 INSERT INTO `mob_resistances` VALUES (223,'Shadow - NM',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,4,0,0,0,0,-2,4,4,4,0,0,0,-2,4,4);
-INSERT INTO `mob_resistances` VALUES (224,'ShadowLord1',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-INSERT INTO `mob_resistances` VALUES (225,'ShadowLord2',0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,10,5,5,5,5,5,0,10,10);
+-- 224 free
+-- 225 free
 INSERT INTO `mob_resistances` VALUES (226,'Sheep',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,0,-2,-2,-3,-3,-2,-2,0,0,-2,-2,-3,-2,-2,-2);
 INSERT INTO `mob_resistances` VALUES (227,'Skeleton',-1250,-5000,1250,2500,0,0,0,0,0,0,0,0,0,-3,0,-2,-2,-2,-2,-3,4,0,0,-2,-2,-2,-3,11,4);
 INSERT INTO `mob_resistances` VALUES (228,'Slime - NM',-5000,-5000,-7500,-7500,0,0,0,0,0,0,0,0,0,-3,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2);

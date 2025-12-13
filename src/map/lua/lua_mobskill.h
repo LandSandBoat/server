@@ -50,8 +50,8 @@ public:
     bool   isConal();
     bool   isSingle();
     bool   hasMissMsg();
-    void   setMsg(uint16 message);
-    uint16 getMsg();
+    void   setMsg(MsgBasic message);
+    auto   getMsg() -> MsgBasic;
     auto   getTargets() -> sol::table;
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();

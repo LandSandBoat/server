@@ -42,7 +42,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaAbility& ability);
 
     uint16 getID();
-    int16  getMsg();
+    auto   getMsg() -> MsgBasic;
     uint16 getRecast();
     uint16 getRecastID();
     uint16 getRange();
@@ -50,7 +50,7 @@ public:
     auto   getAnimation() -> ActionAnimation;
     uint16 getAddType(); // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
-    void  setMsg(uint16 messageID);
+    void  setMsg(MsgBasic messageID);
     void  setAnimation(uint16 animationID);
     void  setRecast(uint16 recastTime);
     int32 getCE();

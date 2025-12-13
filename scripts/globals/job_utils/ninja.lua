@@ -52,7 +52,7 @@ xi.job_utils.ninja.useMijinGakure = function(player, target, ability, action)
     dmg = math.floor(dmg * resist)
     dmg = math.floor(dmg * tmdaFactor)
     dmg = math.floor(dmg * jpFactor)
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
     player:setLocalVar('MijinGakure', 1)

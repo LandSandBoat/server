@@ -1255,11 +1255,11 @@ void CMobEntity::Die()
         {
             if (PLastAttacker)
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::DEFEATS_TARG));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FALLS_TO_GROUND));
             }
 
             DistributeRewards();
@@ -1311,7 +1311,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
     TapDeaggroTime();
 }
 
-void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
+void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
 {
     TracyZoneScoped;
     CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);

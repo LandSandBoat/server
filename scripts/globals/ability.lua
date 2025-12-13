@@ -83,16 +83,13 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         return dmg
     end
 
-    -- Handle Phalanx
-    if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
+    dmg = utils.handlePhalanx(target, dmg)
 
     if skilltype == xi.attackType.MAGICAL then
-        dmg = utils.oneforall(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     if dmg > 0 then
         target:wakeUp()

@@ -214,7 +214,7 @@ xi.combat.physicalHitRate.getRangedHitRate = function(attacker, target, bonus, i
     local hitrate = accuracyAndEvasionToHitRate(attacker, target, acc, eva)
 
     -- Apply hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = utils.clamp(hitrate, 0.05, 0.95)
 
     return hitrate
 end

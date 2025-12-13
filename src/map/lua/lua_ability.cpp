@@ -36,7 +36,7 @@ uint16 CLuaAbility::getID()
     return m_PLuaAbility->getID();
 }
 
-int16 CLuaAbility::getMsg()
+auto CLuaAbility::getMsg() -> MsgBasic
 {
     return m_PLuaAbility->getMessage();
 }
@@ -71,7 +71,7 @@ uint16 CLuaAbility::getAddType()
     return m_PLuaAbility->getAddType();
 }
 
-void CLuaAbility::setMsg(uint16 messageID)
+void CLuaAbility::setMsg(MsgBasic messageID)
 {
     m_PLuaAbility->setMessage(messageID);
 }

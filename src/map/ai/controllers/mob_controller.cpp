@@ -495,11 +495,38 @@ auto CMobController::TryCastSpell() -> bool
     }
 
     // Try to get an override spell from the script (if available)
+    // OnMobSpellChoose can also change PSpellTarget
     auto PSpellTarget            = PTarget ? PTarget : PMob;
     auto possibleOverriddenSpell = luautils::OnMobSpellChoose(PMob, PSpellTarget, chosenSpellId);
-    if (possibleOverriddenSpell.has_value())
+
+    std::optional<SpellID>        maybeSpellOverride  = std::get<0>(possibleOverriddenSpell);
+    std::optional<CBattleEntity*> maybeTargetOverride = std::get<1>(possibleOverriddenSpell);
+
+    auto isSpellEligibleToCast = [this](CBattleEntity* PCastTarget, CSpell* PSpell) -> bool
     {
-        chosenSpellId = possibleOverriddenSpell;
+        if (!PSpell)
+        {
+            return false;
+        }
+
+        // Check if target is in range before attempting to cast
+        if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
+        {
+            return false;
+        }
+
+        // Check if mob can afford to cast this spell
+        if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+        {
+            return false;
+        }
+
+        return true;
+    };
+
+    if (maybeSpellOverride.has_value())
+    {
+        chosenSpellId = maybeSpellOverride.value();
     }
 
     if (chosenSpellId.has_value())
@@ -513,7 +540,22 @@ auto CMobController::TryCastSpell() -> bool
         }
         else
         {
+            // if we have a target override, override the weird self target logic later and try to cast
+            if (maybeTargetOverride.has_value())
+            {
+                PSpellTarget = maybeTargetOverride.value();
+
+                if (!isSpellEligibleToCast(PSpellTarget, PSpell))
+                {
+                    return false;
+                }
+
+                Cast(PSpellTarget->targid, chosenSpellId.value());
+                return true;
+            }
+
             CBattleEntity* PCastTarget = nullptr;
+
             if (PSpell->getValidTarget() & TARGET_SELF)
             {
                 PCastTarget = PMob;
@@ -523,14 +565,7 @@ auto CMobController::TryCastSpell() -> bool
                 PCastTarget = PTarget;
             }
 
-            // Check if target is in range before attempting to cast
-            if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
-            {
-                return false;
-            }
-
-            // Check if mob can afford to cast this spell
-            if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+            if (!isSpellEligibleToCast(PCastTarget, PSpell))
             {
                 return false;
             }

@@ -735,7 +735,7 @@ end
 
 ---@nodiscard
 ---@return boolean
-function CBaseEntity:isInMogHouse()
+function CBaseEntity:inMogHouse()
 end
 
 ---@param triggerAreaId integer
@@ -3219,12 +3219,6 @@ function CBaseEntity:getIlvlParry()
 end
 
 ---@nodiscard
----@param spellId integer
----@return boolean
-function CBaseEntity:isSpellAoE(spellId)
-end
-
----@nodiscard
 ---@param damage number
 ---@param damageType integer?
 ---@return integer
@@ -3695,6 +3689,23 @@ end
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getModelSize()
+end
+
+---@nodiscard
+---@param newSize number
+---@return nil
+function CBaseEntity:setModelSize(newSize)
+end
+
+---@nodiscard
+---@return number
+function CBaseEntity:getHitboxSize()
+end
+
+---@nodiscard
+---@param newSize number
+---@return nil
+function CBaseEntity:setHitboxSize(newSize)
 end
 
 ---@nodiscard

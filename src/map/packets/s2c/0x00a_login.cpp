@@ -192,7 +192,7 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
         packet.PosHead.server_status = ANIMATION_EVENT;
     }
 
-    if (PChar->m_moghouseID != 0)
+    if (PChar->inMogHouse())
     {
         packet.LoginState = SAVE_LOGIN_STATE::SAVE_LOGIN_STATE_MYROOM;
 

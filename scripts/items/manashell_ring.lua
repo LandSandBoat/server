@@ -17,8 +17,15 @@ end
 
 itemObject.onItemUse = function(target)
     if target:hasEquipped(xi.item.MANASHELL_RING) then
-        target:addStatusEffect(xi.effect.MAX_MP_BOOST, 9, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MANASHELL_RING)
+        target:addStatusEffect(xi.effect.MAX_MP_BOOST, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MANASHELL_RING)
     end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.MP, 9)
+end
+
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject

@@ -149,6 +149,8 @@ xi.job_utils.puppetmaster.onAbilityCheckRepair = function(player, target, abilit
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not pet:isAutomaton() then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
+    elseif pet:checkDistance(player) > 20.0 + player:getHitboxSize() + pet:getHitboxSize() then
+        return xi.msg.basic.TOO_FAR_AWAY_2, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
 
@@ -161,11 +163,14 @@ xi.job_utils.puppetmaster.onAbilityCheckRepair = function(player, target, abilit
 end
 
 -- On Ability Use Repair
-xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability)
+xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability, action)
     local pet = player:getPet()
     if not pet then
         return
     end
+
+    -- Self-cast ability but reports on pet
+    action:ID(player:getID(), pet:getID())
 
     local petMaxHP            = pet:getMaxHP()
     local numRemovableEffects = player:getMod(xi.mod.REPAIR_EFFECT)

@@ -26,8 +26,9 @@ abilityObject.onUseAbility = function(player, target, ability)
     local jobLevel = utils.getActiveJobLevel(player, xi.job.DRK)
     local damage   = math.floor(player:getMod(xi.mod.WEAPON_BASH) + (jobLevel + 11) / 4)
 
+    -- TODO: Affected by Phalanx/Physical Damage % modifiers?
     -- Calculating and applying Blade Bash damage
-    damage = utils.stoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 

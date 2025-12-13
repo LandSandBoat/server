@@ -212,15 +212,16 @@ namespace petutils
 void LoadPetList();
 void FreePetList();
 
-void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
-void  DetachPet(CBattleEntity* PMaster);
-void  DespawnPet(CBattleEntity* PMaster);
-void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
-void  RetreatToMaster(CBattleEntity* PMaster);
-int16 PerpetuationCost(uint32 id, uint8 level);
-void  ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
-void  LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void   SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void   SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+void   DetachPet(CBattleEntity* PMaster);
+void   DespawnPet(CBattleEntity* PMaster);
+void   AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
+uint16 GetJugWeaponDamage(CPetEntity* PPet);
+void   RetreatToMaster(CBattleEntity* PMaster);
+int16  PerpetuationCost(uint32 id, uint8 level);
+void   ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
+void   LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
 
 void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
 void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);

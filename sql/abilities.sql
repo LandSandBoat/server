@@ -97,7 +97,7 @@ INSERT INTO `abilities` VALUES (76,'trick_attack',6,30,1,60,66,0,0,82,2000,0,6,0
 INSERT INTO `abilities` VALUES (77,'weapon_bash',8,20,4,180,88,110,0,201,2000,0,3,3,0,0,1,900,0,0,NULL);
 INSERT INTO `abilities` VALUES (78,'reward',9,12,257,90,103,102,0,84,2000,0,6,4,0,0,0,0,898,0,NULL);
 INSERT INTO `abilities` VALUES (79,'cover',7,35,2,180,76,0,0,86,2000,0,6,16,0,0,1,300,0,0,NULL);
-INSERT INTO `abilities` VALUES (80,'spirit_link',14,25,257,90,162,318,0,94,2000,0,6,0,0,0,0,0,1224,4,NULL);
+INSERT INTO `abilities` VALUES (80,'spirit_link',14,25,1,90,162,318,0,94,2000,0,6,0,0,0,0,0,1224,4,NULL);
 -- INSERT INTO `abilities` VALUES (81,'enrage',0,0,0,0,6,0,0,0,0,0,6,16,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (82,'chi_blast',2,41,4,180,18,110,0,92,2000,0,6,16,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (83,'convert',5,40,1,600,49,0,0,88,2000,0,6,0,0,0,1,80,640,0,NULL);
@@ -153,7 +153,7 @@ INSERT INTO `abilities` VALUES (132,'dark_shot',17,40,4,1,195,0,0,124,2000,0,6,2
 INSERT INTO `abilities` VALUES (133,'random_deal',17,50,1,1200,196,0,0,131,2000,0,6,0,1,8,1,300,1414,0,'TOAU');
 INSERT INTO `abilities` VALUES (135,'overdrive',18,0,1,3600,0,0,0,143,2000,0,6,0,0,0,0,0,0,0,'TOAU');
 INSERT INTO `abilities` VALUES (136,'activate',18,1,1,1200,205,0,0,83,2000,0,6,0,0,0,1,80,1478,0,'TOAU');
-INSERT INTO `abilities` VALUES (137,'repair',18,15,257,180,206,102,0,83,2000,0,6,0,0,0,0,0,1480,0,'TOAU'); -- FYI: Retail has this at 90s and its merit at 3s per upgrade due to a 99 cap Automaton HP increase (as well as reworked Auto-repair Kits and oil changes)
+INSERT INTO `abilities` VALUES (137,'repair',18,15,1,90,206,102,0,83,2000,0,6,0,0,0,0,0,1480,0,'TOAU');
 INSERT INTO `abilities` VALUES (138,'deploy',18,1,4,10,207,0,0,83,2000,0,6,16,0,0,0,0,0,512,'TOAU');
 INSERT INTO `abilities` VALUES (139,'deactivate',18,1,1,60,208,0,0,83,2000,0,6,0,0,0,0,0,0,512,'TOAU');
 INSERT INTO `abilities` VALUES (140,'retrieve',18,10,1,10,209,0,0,83,2000,0,6,0,0,0,0,0,0,512,'TOAU');
@@ -306,8 +306,8 @@ INSERT INTO `abilities` VALUES (288,'hagakure',12,95,1,180,54,0,0,249,2000,0,6,0
 INSERT INTO `abilities` VALUES (291,'issekigan',13,95,1,300,57,0,0,246,2000,0,6,0,0,0,1,0,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (292,'dragon_breaker',14,87,4,300,58,320,0,236,2000,0,6,10,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (293,'soul_jump',14,85,4,120,167,100,0,209,2000,0,3,8,0,0,1,0,1220,0,NULL);
-INSERT INTO `abilities` VALUES (295,'steady_wing',14,95,257,300,70,100,0,262,2000,0,6,0,0,0,0,0,0,0,NULL);
-INSERT INTO `abilities` VALUES (296,'mana_cede',15,87,257,300,71,100,0,241,2000,0,6,0,0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (295,'steady_wing',14,95,1,300,70,100,0,262,2000,0,6,0,0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (296,'mana_cede',15,87,1,300,71,100,0,241,2000,0,6,0,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (297,'efflux',16,83,1,180,185,100,0,256,2000,0,6,0,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (298,'unbridled_learning',16,95,1,300,81,100,0,263,2000,0,6,0,0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (301,'triple_shot',17,87,1,300,467,100,0,242,2000,0,6,0,0,0,0,0,0,0,NULL);
@@ -351,12 +351,12 @@ INSERT INTO `abilities` VALUES (342,'caper_emissarius',20,96,2,3600,254,0,0,290,
 INSERT INTO `abilities` VALUES (343,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0,0,0,1,300,0,4,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (344,'swipe',22,25,4,90,241,110,0,0,2000,0,15,3,0,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (345,'full_circle',21,5,1,10,243,0,0,94,2000,0,6,0,0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,257,300,244,663,0,306,2000,0,6,0,0,0,1,300,1730,0,'SOA');
-INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,257,300,244,664,0,307,2000,0,6,0,0,0,1,300,1730,0,'SOA');
+INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,1,300,244,663,0,306,2000,0,6,0,0,0,1,300,1730,0,'SOA');
+INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,1,300,244,664,0,307,2000,0,6,0,0,0,1,300,1730,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'collimated_fervor',21,40,1,300,245,100,0,304,2000,0,6,0,0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,257,600,246,306,0,309,2000,0,6,0,0,0,1,300,1732,0,'SOA');
+INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,1,600,246,306,0,309,2000,0,6,0,0,0,1,300,1732,0,'SOA');
 INSERT INTO `abilities` VALUES (350,'blaze_of_glory',21,60,1,600,247,100,0,308,2000,0,6,0,0,0,1,300,1734,0,'SOA');
-INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,257,600,248,319,0,310,2000,0,6,0,0,0,1,300,1736,0,'SOA');
+INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,1,600,248,319,0,310,2000,0,6,0,0,0,1,300,1736,0,'SOA');
 INSERT INTO `abilities` VALUES (352,'theurgic_focus',21,80,1,300,249,100,0,305,2000,0,6,0,0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (353,'concentric_pulse',21,90,4,300,250,0,0,94,2000,0,6,10,0,10,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (354,'mending_halation',21,75,3,300,251,0,0,94,2000,0,6,0,0,10,1,0,3392,0,'SOA');

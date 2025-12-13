@@ -40,7 +40,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_ValidTarget(0)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
-, m_Message(0)
+, m_Message(MsgBasic::NONE)
 , m_TP(0)
 , m_HP(0)
 , m_HPP(0)
@@ -53,12 +53,12 @@ CMobSkill::CMobSkill(uint16 id)
 
 bool CMobSkill::hasMissMsg() const
 {
-    return m_Message == MSGBASIC_ABILITY_MISSES ||
-           m_Message == MSGBASIC_USES_SKILL_MISSES ||
-           m_Message == MSGBASIC_USES_SKILL_NO_EFFECT ||
-           m_Message == MSGBASIC_SHADOW_ABSORB ||
-           m_Message == MSGBASIC_TARGET_ANTICIPATES ||
-           m_Message == MSGBASIC_RANGED_ATTACK_MISS;
+    return m_Message == MsgBasic::ABILITY_MISSES ||
+           m_Message == MsgBasic::USES_SKILL_MISSES ||
+           m_Message == MsgBasic::USES_SKILL_NO_EFFECT ||
+           m_Message == MsgBasic::SHADOW_ABSORB ||
+           m_Message == MsgBasic::TARGET_ANTICIPATES ||
+           m_Message == MsgBasic::RANGED_ATTACK_MISS;
 }
 
 bool CMobSkill::isAoE() const
@@ -109,7 +109,7 @@ void CMobSkill::setID(uint16 id)
     m_ID = id;
 }
 
-void CMobSkill::setMsg(uint16 msg)
+void CMobSkill::setMsg(MsgBasic msg)
 {
     m_Message = msg;
 }
@@ -248,58 +248,14 @@ std::optional<uint8> CMobSkill::getFinalAnimationSub()
     return m_FinalAnimationSub;
 }
 
-auto CMobSkill::getMsg() const -> MSGBASIC_ID
+auto CMobSkill::getMsg() const -> MsgBasic
 {
-    return static_cast<MSGBASIC_ID>(m_Message);
+    return m_Message;
 }
 
 uint16 CMobSkill::getMsgForAction() const
 {
     return getID();
-}
-
-auto CMobSkill::getAoEMsg() const -> MSGBASIC_ID
-{
-    switch (m_Message)
-    {
-        case MSGBASIC_USES_SKILL_TAKES_DAMAGE:
-            return MSGBASIC_TARGET_TAKES_DAMAGE;
-        case MSGBASIC_USES_SKILL_GAINS_EFFECT:
-            return MSGBASIC_TARGET_GAINS_EFFECT;
-        case MSGBASIC_USES_SKILL_HP_DRAINED:
-            return MSGBASIC_TARGET_HP_DRAINED;
-        case MSGBASIC_USES_SKILL_MISSES:
-            return MSGBASIC_TARGET_EVADES;
-        case MSGBASIC_USES_SKILL_NO_EFFECT:
-            return MSGBASIC_TARGET_NO_EFFECT;
-        case MSGBASIC_USES_SKILL_MP_DRAINED:
-            return MSGBASIC_TARGET_MP_DRAINED;
-        case MSGBASIC_USES_SKILL_TP_DRAINED:
-            return MSGBASIC_USES_SKILL_TP_DRAINED; // no message for this... I guess there is no aoe TP drain move
-        case MSGBASIC_USES_RECOVERS_HP:
-            return MSGBASIC_TARGET_RECOVERS_HP2;
-        case MSGBASIC_SKILL_RECOVERS_HP:
-        case MSGBASIC_USES_SKILL_RECOVERS_HP_AOE:
-        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE:
-        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE2:
-            return MSGBASIC_TARGET_RECOVERS_HP_SIMPLE;
-        case MSGBASIC_USES_SKILL_STATUS:
-            return MSGBASIC_TARGET_STATUS;
-        case MSGBASIC_USES_SKILL_RECEIVES_EFFECT:
-            return MSGBASIC_TARGET_RECEIVES_EFFECT;
-        case MSGBASIC_MAGIC_RESISTED_TARGET:
-            return MSGBASIC_MAGIC_RESISTED_TARGET; // already the aoe message
-        case MSGBASIC_USES_SKILL_EFFECT_DRAINED:
-            return MSGBASIC_TARGET_EFFECT_DRAINED;
-        case MSGBASIC_USES_SKILL_TP_REDUCED:
-            return MSGBASIC_TARGET_TP_REDUCED;
-        case MSGBASIC_USES_ABILITY_DISPEL:
-            return MSGBASIC_TARGET_EFFECT_DISAPPEARS;
-        case MSGBASIC_USES_SKILL_RECOVERS_MP:
-            return MSGBASIC_TARGET_RECOVERS_MP;
-        default:
-            return static_cast<MSGBASIC_ID>(m_Message);
-    }
 }
 
 uint8 CMobSkill::getFlag() const
@@ -347,13 +303,13 @@ auto CMobSkill::getKnockback() const -> Knockback
 
 bool CMobSkill::isDamageMsg() const
 {
-    return m_Message == MSGBASIC_USES_ABILITY_TAKES_DAMAGE ||
-           m_Message == MSGBASIC_USES_SKILL_TAKES_DAMAGE ||
-           m_Message == MSGBASIC_USES_SKILL_HP_DRAINED ||
-           m_Message == MSGBASIC_USES_ABILITY_RESISTS_DAMAGE ||
-           m_Message == MSGBASIC_USES_SKILL_MP_DRAINED ||
-           m_Message == MSGBASIC_USES_SKILL_TP_DRAINED ||
-           m_Message == MSGBASIC_TARGET_TAKES_DAMAGE;
+    return m_Message == MsgBasic::USES_ABILITY_TAKES_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_TAKES_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_HP_DRAINED ||
+           m_Message == MsgBasic::USES_ABILITY_RESISTS_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_MP_DRAINED ||
+           m_Message == MsgBasic::USES_SKILL_TP_DRAINED ||
+           m_Message == MsgBasic::TARGET_TAKES_DAMAGE;
 }
 
 void CMobSkill::setParam(int16 value)

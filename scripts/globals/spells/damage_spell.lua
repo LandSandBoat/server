@@ -1237,9 +1237,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     end
 
     -- Handle Phalanx, One for All, Stoneskin.
-    finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
-    finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
-    finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+    finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
+    finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
+    finalDamage = utils.clamp(utils.handleStoneskin(target, finalDamage), -99999, 99999)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     -- Check if the mob has a damage cap

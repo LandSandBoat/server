@@ -21,7 +21,7 @@ mission.sections[1] = -- REMEMBER: Lua is 1-indexed!
 {
     check = function(player, currentMission, missionStatus, vars)
         return currentMission == mission.missionId and
-            xi.moghouse.isInMogHouseInHomeNation(player)
+            xi.moghouse.inMogHouseInHomeNation(player)
     end,
 }
 

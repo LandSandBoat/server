@@ -151,9 +151,9 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
 
     -- Final operations.
     if modAbsorbed == xi.mod.HP then
-        finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
-        finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
-        finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+        finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
+        finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
+        finalDamage = utils.clamp(utils.handleStoneskin(target, finalDamage), -99999, 99999)
         finalDamage = utils.clamp(finalDamage, 0, targetPoints)
         finalDamage = target:checkDamageCap(finalDamage)
 

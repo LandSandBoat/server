@@ -11,17 +11,18 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUnequip = function(target, item)
-    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
+    target:delStatusEffect(xi.effect.HASTE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
 end
 
 itemObject.onItemUse = function(target)
     if target:hasEquipped(xi.item.HASTE_BELT) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
+        -- TODO: Haste applied by the belt should a separate buff from Spell Haste and stacks. Currently overwrites.
+        target:addStatusEffect(xi.effect.HASTE, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
     end
 end
 
 itemObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.HASTE_GEAR, 1000)
+    effect:addMod(xi.mod.HASTE_MAGIC, 1000)
 end
 
 itemObject.onEffectLose = function(target, effect)

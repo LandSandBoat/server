@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Eurymedon
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins = { require('scripts/mixins/families/gigas_bst_nm') }
 -----------------------------------
 local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------

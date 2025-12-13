@@ -23,7 +23,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVA_DOWN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVASION_DOWN)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

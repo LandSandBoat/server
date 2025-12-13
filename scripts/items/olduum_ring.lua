@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUse = function(target)
-    target:setPos(-199, -10, 80, 94, 51)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WAJAOM_LEYPOINT, 0, 3)
 end
 
 return itemObject

@@ -53,8 +53,8 @@ public:
     void actionID(uint16 actionid) const;
     auto getParam(uint32 actionTargetId) const -> uint16;
     void param(uint32 actionTargetId, int32 param) const;
-    void messageId(uint32 actionTargetId, MSGBASIC_ID messageId) const;
-    auto getMsg(uint32 actionTargetId) const -> std::optional<uint16>;
+    void messageId(uint32 actionTargetId, MsgBasic messageId) const;
+    auto getMsg(uint32 actionTargetId) const -> std::optional<MsgBasic>;
     auto getAnimation(uint32 actionTargetId) const -> std::optional<ActionAnimation>;
     void setAnimation(uint32 actionTargetId, ActionAnimation animation) const;
     auto getCategory() const -> ActionCategory;
@@ -67,7 +67,7 @@ public:
     void modifier(uint32 actionTargetId, uint8 modifier) const;
     void additionalEffect(uint32 actionTargetId, ActionProcAddEffect additionalEffect) const;
     void addEffectParam(uint32 actionTargetId, int32 addEffectParam) const;
-    void addEffectMessage(uint32 actionTargetId, MSGBASIC_ID addEffectMessage) const;
+    void addEffectMessage(uint32 actionTargetId, MsgBasic addEffectMessage) const;
     auto addAdditionalTarget(uint32 actionTargetId) const -> bool;
 
     bool operator==(const CLuaAction& other) const

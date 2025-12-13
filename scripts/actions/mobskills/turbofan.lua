@@ -12,12 +12,22 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+    local params = {}
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 2, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.percentMultipier  = 0.05
+    params.element           = xi.element.WIND
+    params.damageCap         = 490
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WIND)
+    end
+
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SILENCE, 1, 3, 30)
 
     if target:hasStatusEffect(xi.effect.ELEMENTALRES_DOWN) then

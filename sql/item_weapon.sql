@@ -914,44 +914,44 @@ INSERT INTO `item_weapon` VALUES (17275,'coffinmaker',26,1,0,0,0,1,1,600,27,500)
 INSERT INTO `item_weapon` VALUES (17276,'atq._bullet_+1',26,1,0,0,0,1,1,249,61,0);
 INSERT INTO `item_weapon` VALUES (17277,'hedgehog_bomb',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (17278,'gold_bullet',26,1,0,0,0,1,1,247,46,0);
-INSERT INTO `item_weapon` VALUES (17279,'moonring_blade_+1',27,0,0,0,0,0,1,294,28,0);
-INSERT INTO `item_weapon` VALUES (17280,'boomerang',27,0,0,0,0,0,1,294,11,0);
-INSERT INTO `item_weapon` VALUES (17281,'wingedge',27,0,0,0,0,0,1,294,15,0);
-INSERT INTO `item_weapon` VALUES (17282,'cmb.cst._bmerang',27,0,0,0,0,0,1,294,21,0);
-INSERT INTO `item_weapon` VALUES (17283,'jr.msk._chakram',27,0,0,0,0,0,1,302,23,0);
-INSERT INTO `item_weapon` VALUES (17284,'chakram',27,0,0,0,0,0,1,294,16,0);
-INSERT INTO `item_weapon` VALUES (17285,'moonring_blade',27,0,0,0,0,0,1,294,27,0);
-INSERT INTO `item_weapon` VALUES (17286,'rising_sun',27,0,0,0,0,0,1,294,30,0);
-INSERT INTO `item_weapon` VALUES (17287,'boomerang_+1',27,0,0,0,0,0,1,286,12,0);
-INSERT INTO `item_weapon` VALUES (17288,'wingedge_+1',27,0,0,0,0,0,1,286,16,0);
-INSERT INTO `item_weapon` VALUES (17289,'chakram_+1',27,0,0,0,0,0,1,286,17,0);
-INSERT INTO `item_weapon` VALUES (17290,'coarse_boomerang',27,0,0,0,0,0,1,323,6,0);
-INSERT INTO `item_weapon` VALUES (17291,'flame_boomerang',27,0,0,0,0,0,1,294,13,0);
-INSERT INTO `item_weapon` VALUES (17292,'long_boomerang',27,0,0,0,0,0,1,294,18,0);
-INSERT INTO `item_weapon` VALUES (17293,'yagudo_freezer',27,0,0,0,0,0,1,294,24,0);
-INSERT INTO `item_weapon` VALUES (17294,'comet_tail',27,0,0,0,0,0,1,265,26,0);
-INSERT INTO `item_weapon` VALUES (17295,'rising_sun_+1',27,0,0,0,0,0,1,286,31,0);
-INSERT INTO `item_weapon` VALUES (17296,'pebble',27,0,0,0,0,0,1,276,5,0);
-INSERT INTO `item_weapon` VALUES (17297,'throwing_coin',27,0,0,0,0,0,1,276,16,0);
-INSERT INTO `item_weapon` VALUES (17298,'tathlum',27,0,0,0,0,0,1,276,24,0);
-INSERT INTO `item_weapon` VALUES (17299,'astragalos',27,0,0,0,0,0,1,276,32,0);
+INSERT INTO `item_weapon` VALUES (17279,'moonring_blade_+1',27,0,0,0,0,1,1,294,28,0);
+INSERT INTO `item_weapon` VALUES (17280,'boomerang',27,0,0,0,0,1,1,294,11,0);
+INSERT INTO `item_weapon` VALUES (17281,'wingedge',27,0,0,0,0,1,1,294,15,0);
+INSERT INTO `item_weapon` VALUES (17282,'cmb.cst._bmerang',27,0,0,0,0,1,1,294,21,0);
+INSERT INTO `item_weapon` VALUES (17283,'jr.msk._chakram',27,0,0,0,0,1,1,302,23,0);
+INSERT INTO `item_weapon` VALUES (17284,'chakram',27,0,0,0,0,1,1,294,16,0);
+INSERT INTO `item_weapon` VALUES (17285,'moonring_blade',27,0,0,0,0,1,1,294,27,0);
+INSERT INTO `item_weapon` VALUES (17286,'rising_sun',27,0,0,0,0,1,1,294,30,0);
+INSERT INTO `item_weapon` VALUES (17287,'boomerang_+1',27,0,0,0,0,1,1,286,12,0);
+INSERT INTO `item_weapon` VALUES (17288,'wingedge_+1',27,0,0,0,0,1,1,286,16,0);
+INSERT INTO `item_weapon` VALUES (17289,'chakram_+1',27,0,0,0,0,1,1,286,17,0);
+INSERT INTO `item_weapon` VALUES (17290,'coarse_boomerang',27,0,0,0,0,1,1,323,6,0);
+INSERT INTO `item_weapon` VALUES (17291,'flame_boomerang',27,0,0,0,0,1,1,294,13,0);
+INSERT INTO `item_weapon` VALUES (17292,'long_boomerang',27,0,0,0,0,1,1,294,18,0);
+INSERT INTO `item_weapon` VALUES (17293,'yagudo_freezer',27,0,0,0,0,1,1,294,24,0);
+INSERT INTO `item_weapon` VALUES (17294,'comet_tail',27,0,0,0,0,1,1,265,26,0);
+INSERT INTO `item_weapon` VALUES (17295,'rising_sun_+1',27,0,0,0,0,1,1,286,31,0);
+INSERT INTO `item_weapon` VALUES (17296,'pebble',27,0,0,0,0,1,1,276,5,0);
+INSERT INTO `item_weapon` VALUES (17297,'throwing_coin',27,0,0,0,0,1,1,276,16,0);
+INSERT INTO `item_weapon` VALUES (17298,'tathlum',27,0,0,0,0,1,1,276,24,0);
+INSERT INTO `item_weapon` VALUES (17299,'astragalos',27,0,0,0,0,1,1,276,32,0);
 INSERT INTO `item_weapon` VALUES (17300,'platinum_bullet',26,1,0,0,0,1,1,249,46,0);
 INSERT INTO `item_weapon` VALUES (17301,'shuriken',27,3,0,0,0,1,1,192,29,0);
 INSERT INTO `item_weapon` VALUES (17302,'juji_shuriken',27,3,0,0,0,1,1,192,41,0);
 INSERT INTO `item_weapon` VALUES (17303,'manji_shuriken',27,3,0,0,0,1,1,192,63,0);
 INSERT INTO `item_weapon` VALUES (17304,'fuma_shuriken',27,3,0,0,0,1,1,192,72,0);
-INSERT INTO `item_weapon` VALUES (17305,'cluster_arm',27,0,0,0,0,0,1,300,7,0);
-INSERT INTO `item_weapon` VALUES (17306,'snoll_arm',27,0,0,0,0,0,1,300,7,0);
+INSERT INTO `item_weapon` VALUES (17305,'cluster_arm',27,0,0,0,0,1,1,300,7,0);
+INSERT INTO `item_weapon` VALUES (17306,'snoll_arm',27,0,0,0,0,1,1,300,7,0);
 INSERT INTO `item_weapon` VALUES (17307,'dart',27,0,0,0,0,1,1,168,6,0);
 INSERT INTO `item_weapon` VALUES (17308,'hawkeye',27,0,0,0,0,1,1,168,9,0);
-INSERT INTO `item_weapon` VALUES (17309,'pinwheel',27,0,0,0,0,0,1,168,12,0);
-INSERT INTO `item_weapon` VALUES (17310,'hyo',27,0,0,0,0,0,1,168,15,0);
+INSERT INTO `item_weapon` VALUES (17309,'pinwheel',27,0,0,0,0,1,1,168,12,0);
+INSERT INTO `item_weapon` VALUES (17310,'hyo',27,0,0,0,0,1,1,168,15,0);
 INSERT INTO `item_weapon` VALUES (17311,'dart_+1',27,0,0,0,0,1,1,168,21,0);
 INSERT INTO `item_weapon` VALUES (17312,'iron_bullet',26,1,0,0,0,1,1,240,55,0);
-INSERT INTO `item_weapon` VALUES (17313,'grenade',27,0,0,0,0,0,1,300,13,0);
-INSERT INTO `item_weapon` VALUES (17314,'quake_grenade',27,0,0,0,0,0,1,300,18,0);
-INSERT INTO `item_weapon` VALUES (17315,'riot_grenade',27,0,0,0,0,0,1,300,21,0);
-INSERT INTO `item_weapon` VALUES (17316,'bomb_arm',27,0,0,0,0,0,1,300,6,0);
+INSERT INTO `item_weapon` VALUES (17313,'grenade',27,0,0,0,0,1,1,300,13,0);
+INSERT INTO `item_weapon` VALUES (17314,'quake_grenade',27,0,0,0,0,1,1,300,18,0);
+INSERT INTO `item_weapon` VALUES (17315,'riot_grenade',27,0,0,0,0,1,1,300,21,0);
+INSERT INTO `item_weapon` VALUES (17316,'bomb_arm',27,0,0,0,0,1,1,300,6,0);
 INSERT INTO `item_weapon` VALUES (17317,'gold_arrow',25,0,0,0,0,0,1,93,17,0);
 INSERT INTO `item_weapon` VALUES (17318,'wooden_arrow',25,0,0,0,0,0,1,120,5,0);
 INSERT INTO `item_weapon` VALUES (17319,'bone_arrow',25,0,0,0,0,0,1,120,9,0);
@@ -1766,10 +1766,10 @@ INSERT INTO `item_weapon` VALUES (18128,'skystrider',8,0,0,0,0,1,1,492,93,0);
 INSERT INTO `item_weapon` VALUES (18129,'dabo',8,0,0,0,0,1,1,396,71,0);
 INSERT INTO `item_weapon` VALUES (18130,'dabo_+1',8,0,0,0,0,1,1,385,72,0);
 INSERT INTO `item_weapon` VALUES (18131,'zaide',8,0,0,0,0,1,1,478,93,0);
-INSERT INTO `item_weapon` VALUES (18132,'cmb.cst.bmrng_+1',27,0,0,0,0,0,1,286,22,0);
-INSERT INTO `item_weapon` VALUES (18133,'cmb.cst.bmrng_+2',27,0,0,0,0,0,1,278,23,0);
-INSERT INTO `item_weapon` VALUES (18134,'jr.msk.chakram_+1',27,0,0,0,0,0,1,293,24,0);
-INSERT INTO `item_weapon` VALUES (18135,'jr.msk.chakram_+2',27,0,0,0,0,0,1,285,25,0);
+INSERT INTO `item_weapon` VALUES (18132,'cmb.cst.bmrng_+1',27,0,0,0,0,1,1,286,22,0);
+INSERT INTO `item_weapon` VALUES (18133,'cmb.cst.bmrng_+2',27,0,0,0,0,1,1,278,23,0);
+INSERT INTO `item_weapon` VALUES (18134,'jr.msk.chakram_+1',27,0,0,0,0,1,1,293,24,0);
+INSERT INTO `item_weapon` VALUES (18135,'jr.msk.chakram_+2',27,0,0,0,0,1,1,285,25,0);
 INSERT INTO `item_weapon` VALUES (18136,'morion_tathlum',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18137,'holy_ampulla',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18138,'bailathorn',0,0,0,0,0,0,1,999,0,0);
@@ -1795,18 +1795,18 @@ INSERT INTO `item_weapon` VALUES (18157,'poison_arrow',25,0,0,0,0,0,1,120,16,0);
 INSERT INTO `item_weapon` VALUES (18158,'sleep_arrow',25,0,0,0,0,0,1,90,1,0);
 INSERT INTO `item_weapon` VALUES (18159,'demon_arrow',25,0,0,0,0,0,1,90,34,0);
 INSERT INTO `item_weapon` VALUES (18160,'spartan_bullet',26,1,0,0,0,1,1,240,1,0);
-INSERT INTO `item_weapon` VALUES (18161,'arctic_wind',27,0,0,0,0,0,1,276,250,0);
-INSERT INTO `item_weapon` VALUES (18162,'east_wind',27,0,0,0,0,0,1,276,250,0);
-INSERT INTO `item_weapon` VALUES (18163,'zephyr',27,0,0,0,0,0,1,276,250,0);
-INSERT INTO `item_weapon` VALUES (18164,'antarctic_wind',27,0,0,0,0,0,1,276,250,0);
+INSERT INTO `item_weapon` VALUES (18161,'arctic_wind',27,0,0,0,0,1,1,276,250,0);
+INSERT INTO `item_weapon` VALUES (18162,'east_wind',27,0,0,0,0,1,1,276,250,0);
+INSERT INTO `item_weapon` VALUES (18163,'zephyr',27,0,0,0,0,1,1,276,250,0);
+INSERT INTO `item_weapon` VALUES (18164,'antarctic_wind',27,0,0,0,0,1,1,276,250,0);
 INSERT INTO `item_weapon` VALUES (18165,'fenrirs_stone',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18166,'happy_egg',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18167,'fortune_egg',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (18168,'imperial_egg',27,0,0,0,0,0,1,999,99,0);
-INSERT INTO `item_weapon` VALUES (18169,'tsars_egg',27,0,0,0,0,0,1,999,100,0);
-INSERT INTO `item_weapon` VALUES (18170,'platoon_edge',27,0,0,0,0,0,1,294,13,0);
-INSERT INTO `item_weapon` VALUES (18171,'platoon_disc',27,0,0,0,0,0,1,286,11,0);
-INSERT INTO `item_weapon` VALUES (18172,'light_boomerang',27,0,0,0,0,0,1,294,28,0);
+INSERT INTO `item_weapon` VALUES (18168,'imperial_egg',27,0,0,0,0,1,1,999,99,0);
+INSERT INTO `item_weapon` VALUES (18169,'tsars_egg',27,0,0,0,0,1,1,999,100,0);
+INSERT INTO `item_weapon` VALUES (18170,'platoon_edge',27,0,0,0,0,1,1,294,13,0);
+INSERT INTO `item_weapon` VALUES (18171,'platoon_disc',27,0,0,0,0,1,1,286,11,0);
+INSERT INTO `item_weapon` VALUES (18172,'light_boomerang',27,0,0,0,0,1,1,294,28,0);
 INSERT INTO `item_weapon` VALUES (18173,'nokizaru_shuriken',27,3,0,0,0,1,1,192,85,0);
 INSERT INTO `item_weapon` VALUES (18174,'mantra_coin',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18175,'optical_needle',0,0,0,0,0,0,1,999,0,0);
@@ -1864,7 +1864,7 @@ INSERT INTO `item_weapon` VALUES (18227,'dst._voulge_+1',6,0,0,0,0,2,1,514,82,0)
 INSERT INTO `item_weapon` VALUES (18228,'battery',0,0,0,0,0,25,1,1,25,0);
 INSERT INTO `item_weapon` VALUES (18229,'kilo_battery',0,0,0,0,0,50,1,1,50,0);
 INSERT INTO `item_weapon` VALUES (18230,'mega_battery',0,0,0,0,0,75,1,1,75,0);
-INSERT INTO `item_weapon` VALUES (18231,'death_chakram',27,0,0,0,0,0,1,294,28,0);
+INSERT INTO `item_weapon` VALUES (18231,'death_chakram',27,0,0,0,0,1,1,294,28,0);
 INSERT INTO `item_weapon` VALUES (18232,'hydro_pump',0,0,0,0,0,25,1,2,25,0);
 INSERT INTO `item_weapon` VALUES (18233,'kilo_pump',0,0,0,0,0,50,1,2,50,0);
 INSERT INTO `item_weapon` VALUES (18234,'mega_pump',0,0,0,0,0,75,1,2,75,0);
@@ -1878,8 +1878,8 @@ INSERT INTO `item_weapon` VALUES (18241,'refresh_musk',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18242,'wyvern_feed',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18243,'astral_pot',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18244,'virtue_stone',0,0,0,0,0,1,1,4,1,0);
-INSERT INTO `item_weapon` VALUES (18245,'aureole',27,0,0,0,0,0,1,192,28,0);
-INSERT INTO `item_weapon` VALUES (18246,'rogetsurin',27,0,0,0,0,0,1,286,9,0);
+INSERT INTO `item_weapon` VALUES (18245,'aureole',27,0,0,0,0,1,1,192,28,0);
+INSERT INTO `item_weapon` VALUES (18246,'rogetsurin',27,0,0,0,0,1,1,286,9,0);
 INSERT INTO `item_weapon` VALUES (18247,'balm_sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18248,'mille._sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18249,'olibanum_sachet',0,0,0,0,0,0,1,999,0,0);
@@ -2100,7 +2100,7 @@ INSERT INTO `item_weapon` VALUES (18463,'sasanuki_+1',10,0,0,0,0,2,1,407,96,0);
 INSERT INTO `item_weapon` VALUES (18464,'ark_tachi',10,0,0,0,0,2,1,999,1,0);
 INSERT INTO `item_weapon` VALUES (18465,'genjito',10,0,0,0,0,2,1,450,105,0);
 INSERT INTO `item_weapon` VALUES (18466,'tenkomaru',10,0,0,0,0,2,1,437,108,0);
-INSERT INTO `item_weapon` VALUES (18468,'bonanza_ball',27,0,0,0,0,0,1,168,1,0);
+INSERT INTO `item_weapon` VALUES (18468,'bonanza_ball',27,0,0,0,0,1,1,168,1,0);
 INSERT INTO `item_weapon` VALUES (18469,'moogle_moolah',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18470,'cheruski_needle',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18471,'brigantia_pebble',0,0,0,0,0,0,1,999,0,0);
@@ -2300,7 +2300,7 @@ INSERT INTO `item_weapon` VALUES (18677,'annihilator',26,1,0,0,0,1,1,582,71,0);
 INSERT INTO `item_weapon` VALUES (18678,'yoichinoyumi',25,4,0,0,0,1,1,524,118,0);
 INSERT INTO `item_weapon` VALUES (18679,'soulgauger_sgr-1',0,0,0,0,0,0,1,240,10,0);
 INSERT INTO `item_weapon` VALUES (18680,'b._gauger_plate',0,0,0,0,0,0,1,240,0,0);
-INSERT INTO `item_weapon` VALUES (18681,'aht_urhgan_dart',27,0,0,0,0,0,1,168,23,0);
+INSERT INTO `item_weapon` VALUES (18681,'aht_urhgan_dart',27,0,0,0,0,1,1,168,23,0);
 INSERT INTO `item_weapon` VALUES (18682,'lamian_kaman_+1',25,0,0,0,0,1,1,261,20,0);
 INSERT INTO `item_weapon` VALUES (18683,'imperial_bow',25,4,0,0,0,1,1,540,75,0);
 INSERT INTO `item_weapon` VALUES (18684,'storm_zamburak',26,0,0,0,0,1,1,288,36,0);
@@ -2311,9 +2311,9 @@ INSERT INTO `item_weapon` VALUES (18688,'lamian_kaman_-1',25,0,0,0,0,1,1,540,10,
 INSERT INTO `item_weapon` VALUES (18689,'volunteers_dart',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18690,'mercenarys_dart',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (18691,'imperial_dart',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (18692,'mamoolbane',27,0,0,0,0,0,1,294,1,0);
-INSERT INTO `item_weapon` VALUES (18693,'lamiabane',27,0,0,0,0,0,1,294,1,0);
-INSERT INTO `item_weapon` VALUES (18694,'trollbane',27,0,0,0,0,0,1,294,1,0);
+INSERT INTO `item_weapon` VALUES (18692,'mamoolbane',27,0,0,0,0,1,1,294,1,0);
+INSERT INTO `item_weapon` VALUES (18693,'lamiabane',27,0,0,0,0,1,1,294,1,0);
+INSERT INTO `item_weapon` VALUES (18694,'trollbane',27,0,0,0,0,1,1,294,1,0);
 INSERT INTO `item_weapon` VALUES (18695,'cerberus_bow',25,4,0,0,0,1,1,600,72,0);
 INSERT INTO `item_weapon` VALUES (18696,'paralysis_arrow',25,0,0,0,0,0,1,90,1,0);
 INSERT INTO `item_weapon` VALUES (18697,'marid_arrow',25,0,0,0,0,0,1,90,36,0);
@@ -2327,8 +2327,8 @@ INSERT INTO `item_weapon` VALUES (18704,'darksteel_hexagun',26,1,0,0,0,1,1,480,2
 INSERT INTO `item_weapon` VALUES (18705,'dst._hexagun_+1',26,1,0,0,0,1,1,466,26,0);
 INSERT INTO `item_weapon` VALUES (18706,'peacemaker',26,1,0,0,0,1,1,270,13,0);
 INSERT INTO `item_weapon` VALUES (18707,'fire_bomblet',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (18708,'snakeeye',27,0,0,0,0,0,1,294,31,0);
-INSERT INTO `item_weapon` VALUES (18709,'snakeeye_+1',27,0,0,0,0,0,1,286,32,0);
+INSERT INTO `item_weapon` VALUES (18708,'snakeeye',27,0,0,0,0,1,1,294,31,0);
+INSERT INTO `item_weapon` VALUES (18709,'snakeeye_+1',27,0,0,0,0,1,1,286,32,0);
 INSERT INTO `item_weapon` VALUES (18710,'seadog_gun',26,1,0,0,0,1,1,600,25,0);
 INSERT INTO `item_weapon` VALUES (18711,'seadog_gun_+1',26,1,0,0,0,1,1,582,26,0);
 INSERT INTO `item_weapon` VALUES (18712,'koga_shuriken',27,3,0,0,0,1,1,192,88,0);
@@ -2348,7 +2348,7 @@ INSERT INTO `item_weapon` VALUES (18725,'h.s._soul_plate',0,0,0,0,0,0,1,15,0,0);
 INSERT INTO `item_weapon` VALUES (18726,'peiste_dart',27,0,0,0,0,1,1,162,15,0);
 INSERT INTO `item_weapon` VALUES (18727,'fourth_gun',26,1,0,0,0,1,1,582,37,0);
 INSERT INTO `item_weapon` VALUES (18728,'cobra_bow',25,4,0,0,0,1,1,524,77,0);
-INSERT INTO `item_weapon` VALUES (18729,'djinn_arm',27,0,0,0,0,0,1,300,8,0);
+INSERT INTO `item_weapon` VALUES (18729,'djinn_arm',27,0,0,0,0,1,1,300,8,0);
 INSERT INTO `item_weapon` VALUES (18730,'obsidian_arrow',25,0,0,0,0,0,1,90,30,0);
 INSERT INTO `item_weapon` VALUES (18731,'automaton_oil',0,10,0,0,0,542,1,84,527,0);
 INSERT INTO `item_weapon` VALUES (18732,'automat._oil_+1',0,10,0,0,0,572,1,84,542,0);
@@ -2805,15 +2805,15 @@ INSERT INTO `item_weapon` VALUES (19198,'dweomer_bullet',26,1,0,0,0,1,1,240,90,0
 INSERT INTO `item_weapon` VALUES (19199,'oberons_bullet',26,1,0,0,0,1,1,240,77,0);
 INSERT INTO `item_weapon` VALUES (19200,'black_bolt',26,0,0,0,0,1,1,192,45,0);
 INSERT INTO `item_weapon` VALUES (19201,'electrum_bullet',26,1,0,0,0,1,1,240,51,0);
-INSERT INTO `item_weapon` VALUES (19202,'smart_grenade',27,0,0,0,0,0,1,300,42,0);
-INSERT INTO `item_weapon` VALUES (19203,'war_hoop',27,0,0,0,0,0,1,286,21,0);
+INSERT INTO `item_weapon` VALUES (19202,'smart_grenade',27,0,0,0,0,1,1,300,42,0);
+INSERT INTO `item_weapon` VALUES (19203,'war_hoop',27,0,0,0,0,1,1,286,21,0);
 INSERT INTO `item_weapon` VALUES (19204,'fiendtrapper',0,0,0,0,0,10,1,23045,10,0);
 INSERT INTO `item_weapon` VALUES (19205,'blank_f._plate',0,0,0,0,0,0,1,15,0,0);
 INSERT INTO `item_weapon` VALUES (19206,'silver_cassandra',26,1,0,0,0,1,1,480,33,0);
 INSERT INTO `item_weapon` VALUES (19207,'great_cassandra',26,1,0,0,0,1,1,466,34,0);
 INSERT INTO `item_weapon` VALUES (19208,'grand_crossbow',26,0,0,0,0,1,1,288,38,0);
 INSERT INTO `item_weapon` VALUES (19209,'molybdosis',26,0,242,0,0,0,1,480,103,0);
-INSERT INTO `item_weapon` VALUES (19210,'stygian_ash',27,0,0,0,0,0,1,168,21,0);
+INSERT INTO `item_weapon` VALUES (19210,'stygian_ash',27,0,0,0,0,1,1,168,21,0);
 INSERT INTO `item_weapon` VALUES (19211,'reacton_arm',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19212,'black_tathlum',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19213,'white_tathlum',0,0,0,0,0,0,1,999,0,0);
@@ -3370,7 +3370,7 @@ INSERT INTO `item_weapon` VALUES (19766,'fracas_grenade',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19767,'oneiros_pebble',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19768,'egoists_tathlum',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19769,'mantis_eye',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (19770,'aliyat_chakram',27,0,0,0,0,0,1,286,35,0);
+INSERT INTO `item_weapon` VALUES (19770,'aliyat_chakram',27,0,0,0,0,1,1,286,35,0);
 INSERT INTO `item_weapon` VALUES (19771,'strobilus',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19772,'esper_stone',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19773,'hagneia_stone',0,0,0,0,0,0,1,999,0,0);
@@ -3383,7 +3383,7 @@ INSERT INTO `item_weapon` VALUES (19779,'potestas_bomblet',0,0,0,0,0,0,1,999,0,0
 INSERT INTO `item_weapon` VALUES (19780,'mana_ampulla',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19781,'eluders_sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (19782,'iron_gobbet',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (19783,'iga_shuriken',27,3,0,0,0,0,1,192,80,0);
+INSERT INTO `item_weapon` VALUES (19783,'iga_shuriken',27,3,0,0,0,1,1,192,80,0);
 INSERT INTO `item_weapon` VALUES (19784,'lanner_bow',25,0,0,0,0,1,1,270,40,0);
 INSERT INTO `item_weapon` VALUES (19785,'lanner_bow_+1',25,0,0,0,0,1,1,261,41,0);
 INSERT INTO `item_weapon` VALUES (19786,'nurigomeyumi',25,4,0,0,0,1,1,600,95,0);
@@ -3780,7 +3780,7 @@ INSERT INTO `item_weapon` VALUES (20735,'cama._blade',3,0,108,108,84,2,1,240,86,
 INSERT INTO `item_weapon` VALUES (20736,'iztaasu_+1',3,0,162,162,126,2,1,236,97,0);
 INSERT INTO `item_weapon` VALUES (20737,'forefront_blade',3,0,63,63,52,2,1,247,71,0);
 INSERT INTO `item_weapon` VALUES (20738,'buramenkah',3,0,242,242,188,2,1,240,130,0);
-INSERT INTO `item_weapon` VALUES (20739,'halachuinic_sword',3,0,162,162,126,0,1,228,104,0);
+INSERT INTO `item_weapon` VALUES (20739,'halachuinic_sword',3,0,162,162,126,2,1,228,104,0);
 INSERT INTO `item_weapon` VALUES (20740,'camatlatia',3,0,67,67,52,1,1,240,76,0);
 INSERT INTO `item_weapon` VALUES (20741,'coalition_blade',3,0,0,0,0,1,1,240,60,0);
 INSERT INTO `item_weapon` VALUES (20742,'iztaasu',3,0,54,54,42,2,1,236,68,0);
@@ -3911,7 +3911,7 @@ INSERT INTO `item_weapon` VALUES (20869,'cama._reaver',6,0,108,108,84,2,1,504,18
 INSERT INTO `item_weapon` VALUES (20870,'iclamar_+1',6,0,162,162,126,2,1,504,208,0);
 INSERT INTO `item_weapon` VALUES (20871,'forefront_labrys',6,0,67,67,52,2,1,504,146,0);
 INSERT INTO `item_weapon` VALUES (20872,'ixtab',6,0,188,188,146,2,1,504,245,0);
-INSERT INTO `item_weapon` VALUES (20873,'bloodbath_axe',6,0,162,162,126,0,1,504,231,0);
+INSERT INTO `item_weapon` VALUES (20873,'bloodbath_axe',6,0,162,162,126,2,1,504,231,0);
 INSERT INTO `item_weapon` VALUES (20874,'razorfury',6,0,215,215,167,2,1,504,259,0);
 INSERT INTO `item_weapon` VALUES (20875,'razorfury_+1',6,0,228,228,177,2,1,489,260,0);
 INSERT INTO `item_weapon` VALUES (20876,'trunkcleaver',6,0,0,0,0,2,1,504,130,0);
@@ -4082,7 +4082,7 @@ INSERT INTO `item_weapon` VALUES (21049,'anahera_blade',10,0,242,242,188,2,1,494
 INSERT INTO `item_weapon` VALUES (21050,'cama._tachi',10,0,108,108,84,2,1,450,162,0);
 INSERT INTO `item_weapon` VALUES (21051,'shichishito_+1',10,0,162,162,126,2,1,450,185,0);
 INSERT INTO `item_weapon` VALUES (21052,'tsurumaru',10,0,242,242,188,2,1,450,243,0);
-INSERT INTO `item_weapon` VALUES (21053,'uguisumaru',10,0,153,153,188,0,1,420,192,0);
+INSERT INTO `item_weapon` VALUES (21053,'uguisumaru',10,0,153,153,188,2,1,420,192,0);
 INSERT INTO `item_weapon` VALUES (21054,'suijingiri_km',10,0,67,67,52,2,1,450,144,0);
 INSERT INTO `item_weapon` VALUES (21055,'kashiwadachi',10,0,0,0,0,2,1,420,113,0);
 INSERT INTO `item_weapon` VALUES (21056,'tomonari',10,0,0,0,0,2,1,420,118,0);
@@ -4368,18 +4368,18 @@ INSERT INTO `item_weapon` VALUES (21342,'erlenes_notebook',0,0,0,0,0,0,1,999,0,0
 INSERT INTO `item_weapon` VALUES (21343,'ghastly_tathlum',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21344,'ghastly_tathlum_+1',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21345,'focal_orb',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (21346,'leafkin_grenade',27,0,0,0,0,0,1,168,1,0);
+INSERT INTO `item_weapon` VALUES (21346,'leafkin_grenade',27,0,0,0,0,1,1,168,1,0);
 INSERT INTO `item_weapon` VALUES (21347,'charitoni_sling',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (21348,'narmar_boomerang',27,0,0,0,0,0,1,286,45,0);
-INSERT INTO `item_weapon` VALUES (21349,'wingcutter',27,0,242,0,0,0,1,294,64,0);
+INSERT INTO `item_weapon` VALUES (21348,'narmar_boomerang',27,0,0,0,0,1,1,286,45,0);
+INSERT INTO `item_weapon` VALUES (21349,'wingcutter',27,0,242,0,0,1,1,294,64,0);
 INSERT INTO `item_weapon` VALUES (21350,'wingcutter_+1',27,0,242,0,0,1,1,286,65,0);
-INSERT INTO `item_weapon` VALUES (21351,'roppo_shuriken',27,3,81,0,0,0,1,192,71,0);
-INSERT INTO `item_weapon` VALUES (21352,'roppo_shuriken_+1',27,3,94,0,0,0,1,188,72,0);
-INSERT INTO `item_weapon` VALUES (21353,'happo_shuriken',27,3,215,0,0,0,1,192,98,0);
-INSERT INTO `item_weapon` VALUES (21354,'happo_shuriken_+1',27,3,228,0,0,0,1,188,99,0);
-INSERT INTO `item_weapon` VALUES (21355,'hachiya_shuriken',27,3,215,0,0,0,1,192,90,0);
-INSERT INTO `item_weapon` VALUES (21356,'suppa_shuriken',27,3,215,0,0,0,1,192,92,0);
-INSERT INTO `item_weapon` VALUES (21357,'togakushi_shuriken',27,3,242,0,0,0,1,192,104,0);
+INSERT INTO `item_weapon` VALUES (21351,'roppo_shuriken',27,3,81,0,0,1,1,192,71,0);
+INSERT INTO `item_weapon` VALUES (21352,'roppo_shuriken_+1',27,3,94,0,0,1,1,188,72,0);
+INSERT INTO `item_weapon` VALUES (21353,'happo_shuriken',27,3,215,0,0,1,1,192,98,0);
+INSERT INTO `item_weapon` VALUES (21354,'happo_shuriken_+1',27,3,228,0,0,1,1,188,99,0);
+INSERT INTO `item_weapon` VALUES (21355,'hachiya_shuriken',27,3,215,0,0,1,1,192,90,0);
+INSERT INTO `item_weapon` VALUES (21356,'suppa_shuriken',27,3,215,0,0,1,1,192,92,0);
+INSERT INTO `item_weapon` VALUES (21357,'togakushi_shuriken',27,3,242,0,0,1,1,192,104,0);
 INSERT INTO `item_weapon` VALUES (21358,'plumose_sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21359,'quartz_tathlum_+1',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21360,'leisure_musk_+1',0,0,0,0,0,0,1,999,0,0);
@@ -4390,7 +4390,7 @@ INSERT INTO `item_weapon` VALUES (21364,'elders_grip_+1',0,0,0,0,0,1,1,999,1,0);
 INSERT INTO `item_weapon` VALUES (21365,'dilettantes_grip_+1',0,0,0,0,0,1,1,999,1,0);
 INSERT INTO `item_weapon` VALUES (21366,'floestone',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21367,'tengu-no-hane',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (21368,'bestas_bane',27,0,242,0,0,0,1,286,65,0);
+INSERT INTO `item_weapon` VALUES (21368,'bestas_bane',27,0,242,0,0,1,1,286,65,0);
 INSERT INTO `item_weapon` VALUES (21369,'moggie_goodie_bag',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21370,'gobbie_goodie_bag',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21371,'ginsen',0,0,0,0,0,0,1,999,0,0);
@@ -4412,8 +4412,8 @@ INSERT INTO `item_weapon` VALUES (21386,'jukukik_feather',0,0,0,0,0,0,1,999,0,0)
 INSERT INTO `item_weapon` VALUES (21387,'convocaller',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21388,'dashavatara_sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21389,'honed_tathlum',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (21390,'albin_bane',27,0,242,0,0,0,1,240,66,0);
-INSERT INTO `item_weapon` VALUES (21391,'seki_shuriken',27,3,242,0,0,0,1,192,101,0);
+INSERT INTO `item_weapon` VALUES (21390,'albin_bane',27,0,242,0,0,1,1,240,66,0);
+INSERT INTO `item_weapon` VALUES (21391,'seki_shuriken',27,3,242,0,0,1,1,192,101,0);
 INSERT INTO `item_weapon` VALUES (21392,'animator_z',0,10,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21393,'arasy_sachet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (21394,'sancus_sachet',0,0,0,0,0,0,1,999,0,0);
@@ -4808,19 +4808,19 @@ INSERT INTO `item_weapon` VALUES (21905,'taka',9,0,228,228,215,2,1,190,123,0);
 INSERT INTO `item_weapon` VALUES (21906,'kikoku',9,0,269,269,242,2,1,210,148,0);
 INSERT INTO `item_weapon` VALUES (21907,'nagi',9,0,269,269,242,2,1,227,142,0);
 INSERT INTO `item_weapon` VALUES (21908,'kannagi',9,0,269,269,242,2,1,210,148,0);
-INSERT INTO `item_weapon` VALUES (21909,'yoshikiri',9,0,242,242,188,0,1,227,116,0);
-INSERT INTO `item_weapon` VALUES (21910,'yoshikiri_+1',9,0,242,242,188,0,1,222,117,0);
-INSERT INTO `item_weapon` VALUES (21912,'voluspa_katana',9,0,215,215,215,0,1,227,122,0);
-INSERT INTO `item_weapon` VALUES (21915,'koga_shin',9,0,242,242,228,0,1,227,152,0);     -- DMG:152 Delay:227
-INSERT INTO `item_weapon` VALUES (21916,'mochi._shin.',9,0,255,255,242,0,1,222,153,0);  -- DMG:153 Delay:222
-INSERT INTO `item_weapon` VALUES (21917,'fudo_masamune',9,0,269,269,255,0,1,222,154,0); -- DMG:154 Delay:222
-INSERT INTO `item_weapon` VALUES (21918,'tokko_katana',9,0,215,215,215,0,1,227,122,0);  -- DMG:122 Delay:227
-INSERT INTO `item_weapon` VALUES (21919,'ajja_katana',9,0,223,223,223,0,1,227,132,0);   -- DMG:132 Delay:227
-INSERT INTO `item_weapon` VALUES (21920,'eletta_katana',9,0,231,231,231,0,1,227,138,0); -- DMG:138 Delay:227
-INSERT INTO `item_weapon` VALUES (21921,'kaja_katana',9,0,242,242,242,0,1,227,148,0);   -- DMG:148 Delay:227
-INSERT INTO `item_weapon` VALUES (21922,'gokotai',9,0,250,250,250,0,1,227,157,0);       -- DMG:157 Delay:227
-INSERT INTO `item_weapon` VALUES (21923,'debahocho',9,0,0,0,0,0,1,227,1,0);             -- DMG:1 Delay:227
-INSERT INTO `item_weapon` VALUES (21924,'debahocho_+1',9,0,0,0,0,0,1,222,2,0);          -- DMG:2 Delay:222
+INSERT INTO `item_weapon` VALUES (21909,'yoshikiri',9,0,242,242,188,2,1,227,116,0);
+INSERT INTO `item_weapon` VALUES (21910,'yoshikiri_+1',9,0,242,242,188,2,1,222,117,0);
+INSERT INTO `item_weapon` VALUES (21912,'voluspa_katana',9,0,215,215,215,2,1,227,122,0);
+INSERT INTO `item_weapon` VALUES (21915,'koga_shin',9,0,242,242,228,2,1,227,152,0);     -- DMG:152 Delay:227
+INSERT INTO `item_weapon` VALUES (21916,'mochi._shin.',9,0,255,255,242,2,1,222,153,0);  -- DMG:153 Delay:222
+INSERT INTO `item_weapon` VALUES (21917,'fudo_masamune',9,0,269,269,255,2,1,222,154,0); -- DMG:154 Delay:222
+INSERT INTO `item_weapon` VALUES (21918,'tokko_katana',9,0,215,215,215,2,1,227,122,0);  -- DMG:122 Delay:227
+INSERT INTO `item_weapon` VALUES (21919,'ajja_katana',9,0,223,223,223,2,1,227,132,0);   -- DMG:132 Delay:227
+INSERT INTO `item_weapon` VALUES (21920,'eletta_katana',9,0,231,231,231,2,1,227,138,0); -- DMG:138 Delay:227
+INSERT INTO `item_weapon` VALUES (21921,'kaja_katana',9,0,242,242,242,2,1,227,148,0);   -- DMG:148 Delay:227
+INSERT INTO `item_weapon` VALUES (21922,'gokotai',9,0,250,250,250,2,1,227,157,0);       -- DMG:157 Delay:227
+INSERT INTO `item_weapon` VALUES (21923,'debahocho',9,0,0,0,0,2,1,227,1,0);             -- DMG:1 Delay:227
+INSERT INTO `item_weapon` VALUES (21924,'debahocho_+1',9,0,0,0,0,2,1,222,2,0);          -- DMG:2 Delay:222
 INSERT INTO `item_weapon` VALUES (21925,'kunimitsu',1,0,0,0,0,1,1,999,1,0);             -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21926,'tsuru',1,0,0,0,0,1,1,999,1,0);                 -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21927,'yagyu_darkblade',1,0,0,0,0,1,1,999,1,0);       -- TODO: Not implemented
@@ -4832,23 +4832,23 @@ INSERT INTO `item_weapon` VALUES (21932,'dokoku',1,0,0,0,0,1,1,999,1,0);        
 INSERT INTO `item_weapon` VALUES (21954,'amanomurakumo',10,0,269,269,228,2,1,437,308,0);
 INSERT INTO `item_weapon` VALUES (21955,'kogarasumaru',10,0,269,269,228,2,1,450,281,0);
 INSERT INTO `item_weapon` VALUES (21956,'masamune',10,0,269,269,228,2,1,437,308,0);
-INSERT INTO `item_weapon` VALUES (21960,'ashijiro_no_tachi',10,0,228,228,188,0,1,450,231,0);
-INSERT INTO `item_weapon` VALUES (21961,'ashi._no_tachi_+1',10,0,228,228,188,0,1,437,232,0);
-INSERT INTO `item_weapon` VALUES (21963,'beryllium_tachi',10,0,228,228,188,0,1,420,274,0); -- DMG:274 Delay:420
-INSERT INTO `item_weapon` VALUES (21964,'beryllium_tachi_+1',10,0,228,228,188,0,1,407,275,0); -- DMG:275 Delay:407
-INSERT INTO `item_weapon` VALUES (21965,'zanmato',10,0,0,0,0,0,1,464,1,0);                -- DMG:1 Delay:464
-INSERT INTO `item_weapon` VALUES (21966,'zanmato_+1',10,0,0,0,0,0,1,450,2,0);             -- DMG:2 Delay:450
-INSERT INTO `item_weapon` VALUES (21967,'melon_slicer',10,0,0,0,0,0,1,450,1,0);           -- DMG:1 Delay:450
-INSERT INTO `item_weapon` VALUES (21968,'saotome-no-tachi',10,0,242,242,228,0,1,450,300,0); -- DMG:300 Delay:450
-INSERT INTO `item_weapon` VALUES (21969,'sakonji-no-tachi',10,0,255,255,242,0,1,437,301,0); -- DMG:301 Delay:437
-INSERT INTO `item_weapon` VALUES (21970,'fusenaikyo',10,0,269,269,255,0,1,437,302,0);     -- DMG:302 Delay:437
-INSERT INTO `item_weapon` VALUES (21971,'tokko_tachi',10,0,215,215,215,0,1,450,243,0);    -- DMG:243 Delay:450
-INSERT INTO `item_weapon` VALUES (21972,'ajja_tachi',10,0,223,223,223,0,1,450,262,0);     -- DMG:262 Delay:450
-INSERT INTO `item_weapon` VALUES (21973,'eletta_tachi',10,0,231,231,231,0,1,450,281,0);   -- DMG:281 Delay:450
-INSERT INTO `item_weapon` VALUES (21974,'kaja_tachi',10,0,242,242,242,0,1,450,300,0);     -- DMG:300 Delay:450
-INSERT INTO `item_weapon` VALUES (21975,'hachimonji',10,0,250,250,250,0,1,450,318,0);     -- DMG:318 Delay:450
-INSERT INTO `item_weapon` VALUES (21976,'voluspa_tachi',10,0,215,215,215,0,1,450,243,0);
-INSERT INTO `item_weapon` VALUES (21977,'mutsunokami',10,0,0,0,0,0,1,450,1,0);            -- DMG:1 Delay:450
+INSERT INTO `item_weapon` VALUES (21960,'ashijiro_no_tachi',10,0,228,228,188,2,1,450,231,0);
+INSERT INTO `item_weapon` VALUES (21961,'ashi._no_tachi_+1',10,0,228,228,188,2,1,437,232,0);
+INSERT INTO `item_weapon` VALUES (21963,'beryllium_tachi',10,0,228,228,188,2,1,420,274,0); -- DMG:274 Delay:420
+INSERT INTO `item_weapon` VALUES (21964,'beryllium_tachi_+1',10,0,228,228,188,2,1,407,275,0); -- DMG:275 Delay:407
+INSERT INTO `item_weapon` VALUES (21965,'zanmato',10,0,0,0,0,2,1,464,1,0);                -- DMG:1 Delay:464
+INSERT INTO `item_weapon` VALUES (21966,'zanmato_+1',10,0,0,0,0,2,1,450,2,0);             -- DMG:2 Delay:450
+INSERT INTO `item_weapon` VALUES (21967,'melon_slicer',10,0,0,0,0,2,1,450,1,0);           -- DMG:1 Delay:450
+INSERT INTO `item_weapon` VALUES (21968,'saotome-no-tachi',10,0,242,242,228,2,1,450,300,0); -- DMG:300 Delay:450
+INSERT INTO `item_weapon` VALUES (21969,'sakonji-no-tachi',10,0,255,255,242,2,1,437,301,0); -- DMG:301 Delay:437
+INSERT INTO `item_weapon` VALUES (21970,'fusenaikyo',10,0,269,269,255,2,1,437,302,0);     -- DMG:302 Delay:437
+INSERT INTO `item_weapon` VALUES (21971,'tokko_tachi',10,0,215,215,215,2,1,450,243,0);    -- DMG:243 Delay:450
+INSERT INTO `item_weapon` VALUES (21972,'ajja_tachi',10,0,223,223,223,2,1,450,262,0);     -- DMG:262 Delay:450
+INSERT INTO `item_weapon` VALUES (21973,'eletta_tachi',10,0,231,231,231,2,1,450,281,0);   -- DMG:281 Delay:450
+INSERT INTO `item_weapon` VALUES (21974,'kaja_tachi',10,0,242,242,242,2,1,450,300,0);     -- DMG:300 Delay:450
+INSERT INTO `item_weapon` VALUES (21975,'hachimonji',10,0,250,250,250,2,1,450,318,0);     -- DMG:318 Delay:450
+INSERT INTO `item_weapon` VALUES (21976,'voluspa_tachi',10,0,215,215,215,2,1,450,243,0);
+INSERT INTO `item_weapon` VALUES (21977,'mutsunokami',10,0,0,0,0,2,1,450,1,0);            -- DMG:1 Delay:450
 INSERT INTO `item_weapon` VALUES (21978,'mutsunokami_+1',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21979,'gekkei',1,0,0,0,0,1,1,999,1,0);                  -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21980,'zanmato_+2',1,0,0,0,0,1,1,999,1,0);              -- TODO: Not implemented
@@ -4858,7 +4858,7 @@ INSERT INTO `item_weapon` VALUES (21983,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,
 INSERT INTO `item_weapon` VALUES (21984,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21985,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (21986,'kusanagi-no-tsurugi',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
-INSERT INTO `item_weapon` VALUES (21990,'zanmato_+2',10,0,269,269,269,0,1,464,320,0);
+INSERT INTO `item_weapon` VALUES (21990,'zanmato_+2',10,0,269,269,269,2,1,464,320,0);
 INSERT INTO `item_weapon` VALUES (21993,'erudites_staff',12,0,0,0,0,3,1,412,1,0);
 INSERT INTO `item_weapon` VALUES (21994,'erudites_staff_+1',12,0,0,0,0,3,1,399,2,0);
 INSERT INTO `item_weapon` VALUES (21998,'lorg_mor',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented
@@ -4871,32 +4871,32 @@ INSERT INTO `item_weapon` VALUES (22005,'burrowers_wand',11,0,0,0,0,3,1,264,1,0)
 INSERT INTO `item_weapon` VALUES (22006,'voluspa_hammer',11,0,215,215,215,3,1,340,184,0);
 INSERT INTO `item_weapon` VALUES (22015,'arasy_rod',11,0,242,242,215,3,1,288,148,0);
 INSERT INTO `item_weapon` VALUES (22016,'arasy_rod_+1',11,0,242,242,215,3,1,280,149,0);
-INSERT INTO `item_weapon` VALUES (22017,'seika_uchiwa',11,0,0,0,0,0,1,216,1,0);
-INSERT INTO `item_weapon` VALUES (22018,'seika_uchiwa_+1',11,0,0,0,0,0,1,210,2,0);
-INSERT INTO `item_weapon` VALUES (22019,'jingly_rod',11,0,0,0,0,0,1,216,1,0);
-INSERT INTO `item_weapon` VALUES (22020,'jingly_rod_+1',11,0,0,0,0,0,1,210,2,0);
-INSERT INTO `item_weapon` VALUES (22021,'ames',11,0,242,242,215,0,1,216,141,0);
-INSERT INTO `item_weapon` VALUES (22022,'ames_+1',11,0,242,242,215,0,1,210,142,0);
-INSERT INTO `item_weapon` VALUES (22023,'beryllium_mace',11,0,242,242,188,0,1,300,195,0);    -- DMG:195 Delay:300
-INSERT INTO `item_weapon` VALUES (22024,'beryllium_mace_+1',11,0,242,242,188,0,1,291,196,0); -- DMG:196 Delay:291
-INSERT INTO `item_weapon` VALUES (22025,'raetic_rod',11,0,215,215,242,0,1,288,192,0);        -- DMG:192 Delay:288
-INSERT INTO `item_weapon` VALUES (22026,'raetic_rod_+1',11,0,215,215,242,0,1,280,193,0);     -- DMG:193 Delay:280
-INSERT INTO `item_weapon` VALUES (22027,'tokko_rod',11,0,215,215,215,0,1,288,156,0);         -- DMG:156 Delay:288
-INSERT INTO `item_weapon` VALUES (22028,'ajja_rod',11,0,223,223,223,0,1,288,168,0);          -- DMG:168 Delay:288
-INSERT INTO `item_weapon` VALUES (22029,'eletta_rod',11,0,231,231,231,0,1,288,176,0);        -- DMG:176 Delay:288
-INSERT INTO `item_weapon` VALUES (22030,'kaja_rod',11,0,242,242,242,0,1,288,188,0);          -- DMG:188 Delay:288
-INSERT INTO `item_weapon` VALUES (22031,'maxentius',11,0,250,250,250,0,1,288,200,0);         -- DMG:200 Delay:288
+INSERT INTO `item_weapon` VALUES (22017,'seika_uchiwa',11,0,0,0,0,3,1,216,1,0);
+INSERT INTO `item_weapon` VALUES (22018,'seika_uchiwa_+1',11,0,0,0,0,3,1,210,2,0);
+INSERT INTO `item_weapon` VALUES (22019,'jingly_rod',11,0,0,0,0,3,1,216,1,0);
+INSERT INTO `item_weapon` VALUES (22020,'jingly_rod_+1',11,0,0,0,0,3,1,210,2,0);
+INSERT INTO `item_weapon` VALUES (22021,'ames',11,0,242,242,215,3,1,216,141,0);
+INSERT INTO `item_weapon` VALUES (22022,'ames_+1',11,0,242,242,215,3,1,210,142,0);
+INSERT INTO `item_weapon` VALUES (22023,'beryllium_mace',11,0,242,242,188,3,1,300,195,0);    -- DMG:195 Delay:300
+INSERT INTO `item_weapon` VALUES (22024,'beryllium_mace_+1',11,0,242,242,188,3,1,291,196,0); -- DMG:196 Delay:291
+INSERT INTO `item_weapon` VALUES (22025,'raetic_rod',11,0,215,215,242,3,1,288,192,0);        -- DMG:192 Delay:288
+INSERT INTO `item_weapon` VALUES (22026,'raetic_rod_+1',11,0,215,215,242,3,1,280,193,0);     -- DMG:193 Delay:280
+INSERT INTO `item_weapon` VALUES (22027,'tokko_rod',11,0,215,215,215,3,1,288,156,0);         -- DMG:156 Delay:288
+INSERT INTO `item_weapon` VALUES (22028,'ajja_rod',11,0,223,223,223,3,1,288,168,0);          -- DMG:168 Delay:288
+INSERT INTO `item_weapon` VALUES (22029,'eletta_rod',11,0,231,231,231,3,1,288,176,0);        -- DMG:176 Delay:288
+INSERT INTO `item_weapon` VALUES (22030,'kaja_rod',11,0,242,242,242,3,1,288,188,0);          -- DMG:188 Delay:288
+INSERT INTO `item_weapon` VALUES (22031,'maxentius',11,0,250,250,250,3,1,288,200,0);         -- DMG:200 Delay:288
 INSERT INTO `item_weapon` VALUES (22032,'thunder_hammer',1,0,0,0,0,1,1,999,1,0);             -- TODO: Not implemented
-INSERT INTO `item_weapon` VALUES (22033,'clerics_wand',11,0,228,228,242,0,1,288,192,0);      -- DMG:192 Delay:288
-INSERT INTO `item_weapon` VALUES (22034,'piety_wand',11,0,242,242,255,0,1,280,193,0);        -- DMG:193 Delay:280
-INSERT INTO `item_weapon` VALUES (22035,'asclepius',11,0,255,255,269,0,1,280,194,0);         -- DMG:194 Delay:280
-INSERT INTO `item_weapon` VALUES (22036,'bagua_wand',11,0,228,228,242,0,1,288,192,0);        -- DMG:192 Delay:288
-INSERT INTO `item_weapon` VALUES (22037,'sifang_wand',11,0,242,242,255,0,1,280,193,0);       -- DMG:193 Delay:280
-INSERT INTO `item_weapon` VALUES (22038,'bhima',11,0,255,255,269,0,1,280,194,0);             -- DMG:194 Delay:280
-INSERT INTO `item_weapon` VALUES (22039,'floral_hagoita',11,0,0,0,0,0,1,264,2,0);            -- DMG:2 Delay:264
+INSERT INTO `item_weapon` VALUES (22033,'clerics_wand',11,0,228,228,242,3,1,288,192,0);      -- DMG:192 Delay:288
+INSERT INTO `item_weapon` VALUES (22034,'piety_wand',11,0,242,242,255,3,1,280,193,0);        -- DMG:193 Delay:280
+INSERT INTO `item_weapon` VALUES (22035,'asclepius',11,0,255,255,269,3,1,280,194,0);         -- DMG:194 Delay:280
+INSERT INTO `item_weapon` VALUES (22036,'bagua_wand',11,0,228,228,242,3,1,288,192,0);        -- DMG:192 Delay:288
+INSERT INTO `item_weapon` VALUES (22037,'sifang_wand',11,0,242,242,255,3,1,280,193,0);       -- DMG:193 Delay:280
+INSERT INTO `item_weapon` VALUES (22038,'bhima',11,0,255,255,269,3,1,280,194,0);             -- DMG:194 Delay:280
+INSERT INTO `item_weapon` VALUES (22039,'floral_hagoita',11,0,0,0,0,3,1,264,2,0);            -- DMG:2 Delay:264
 INSERT INTO `item_weapon` VALUES (22040,'daybreak',11,0,228,228,40,3,1,216,150,0);
 INSERT INTO `item_weapon` VALUES (22041,'bunzis_rod',1,0,0,0,0,1,1,999,1,0);                 -- TODO: Not implemented
-INSERT INTO `item_weapon` VALUES (22042,'wizards_rod',11,0,250,250,250,0,1,216,200,0);
+INSERT INTO `item_weapon` VALUES (22042,'wizards_rod',11,0,250,250,250,3,1,216,200,0);
 INSERT INTO `item_weapon` VALUES (22043,'apkallu_scepter',1,0,0,0,0,1,1,999,1,0);   -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22044,'tengu_war_fan',1,0,0,0,0,1,1,999,1,0);     -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22045,'feline_hagoita',1,0,0,0,0,1,1,999,1,0);    -- TODO: Not implemented
@@ -4927,31 +4927,31 @@ INSERT INTO `item_weapon` VALUES (22071,'profane_staff',1,0,0,0,0,1,1,999,1,0); 
 INSERT INTO `item_weapon` VALUES (22072,'lamia_staff',12,0,0,0,0,3,1,366,1,0);   -- DMG:1 Delay:366
 INSERT INTO `item_weapon` VALUES (22074,'arasy_staff',12,0,242,242,228,3,1,366,188,0);
 INSERT INTO `item_weapon` VALUES (22075,'arasy_staff_+1',12,0,242,242,228,3,1,356,189,0);
-INSERT INTO `item_weapon` VALUES (22076,'was',12,0,242,242,188,0,1,366,238,0);
-INSERT INTO `item_weapon` VALUES (22077,'was_+1',12,0,242,242,188,0,1,356,239,0);
-INSERT INTO `item_weapon` VALUES (22078,'exalted_staff',12,0,242,242,188,0,1,412,268,0);  -- DMG:268 Delay:412
-INSERT INTO `item_weapon` VALUES (22079,'exalted_staff_+1',12,0,242,242,188,0,1,399,269,0); -- DMG:269 Delay:399
-INSERT INTO `item_weapon` VALUES (22080,'raetic_staff',12,0,215,215,242,0,1,366,244,0);   -- DMG:244 Delay:366
-INSERT INTO `item_weapon` VALUES (22081,'raetic_staff_+1',12,0,215,215,242,0,1,356,245,0); -- DMG:245 Delay:356
-INSERT INTO `item_weapon` VALUES (22082,'tokko_staff',12,0,215,215,215,0,1,366,198,0);    -- DMG:198 Delay:366
-INSERT INTO `item_weapon` VALUES (22083,'ajja_staff',12,0,223,223,223,0,1,366,213,0);     -- DMG:213 Delay:366
-INSERT INTO `item_weapon` VALUES (22084,'eletta_staff',12,0,231,231,231,0,1,366,223,0);   -- DMG:223 Delay:366
-INSERT INTO `item_weapon` VALUES (22085,'kaja_staff',12,0,242,242,242,0,1,366,238,0);     -- DMG:238 Delay:366
-INSERT INTO `item_weapon` VALUES (22086,'xoanon',12,0,250,250,250,0,1,366,254,0);         -- DMG:254 Delay:366
-INSERT INTO `item_weapon` VALUES (22087,'malignance_pole',12,0,255,255,215,0,1,412,286,0); -- DMG:286 Delay:412
+INSERT INTO `item_weapon` VALUES (22076,'was',12,0,242,242,188,3,1,366,238,0);
+INSERT INTO `item_weapon` VALUES (22077,'was_+1',12,0,242,242,188,3,1,356,239,0);
+INSERT INTO `item_weapon` VALUES (22078,'exalted_staff',12,0,242,242,188,3,1,412,268,0);  -- DMG:268 Delay:412
+INSERT INTO `item_weapon` VALUES (22079,'exalted_staff_+1',12,0,242,242,188,3,1,399,269,0); -- DMG:269 Delay:399
+INSERT INTO `item_weapon` VALUES (22080,'raetic_staff',12,0,215,215,242,3,1,366,244,0);   -- DMG:244 Delay:366
+INSERT INTO `item_weapon` VALUES (22081,'raetic_staff_+1',12,0,215,215,242,3,1,356,245,0); -- DMG:245 Delay:356
+INSERT INTO `item_weapon` VALUES (22082,'tokko_staff',12,0,215,215,215,3,1,366,198,0);    -- DMG:198 Delay:366
+INSERT INTO `item_weapon` VALUES (22083,'ajja_staff',12,0,223,223,223,3,1,366,213,0);     -- DMG:213 Delay:366
+INSERT INTO `item_weapon` VALUES (22084,'eletta_staff',12,0,231,231,231,3,1,366,223,0);   -- DMG:223 Delay:366
+INSERT INTO `item_weapon` VALUES (22085,'kaja_staff',12,0,242,242,242,3,1,366,238,0);     -- DMG:238 Delay:366
+INSERT INTO `item_weapon` VALUES (22086,'xoanon',12,0,250,250,250,3,1,366,254,0);         -- DMG:254 Delay:366
+INSERT INTO `item_weapon` VALUES (22087,'malignance_pole',12,0,255,255,215,3,1,412,286,0); -- DMG:286 Delay:412
 INSERT INTO `item_weapon` VALUES (22088,'voluspa_pole',12,0,215,215,215,3,1,402,217,0);
 INSERT INTO `item_weapon` VALUES (22089,'sophistry',12,0,0,0,0,3,1,366,1,0);
-INSERT INTO `item_weapon` VALUES (22091,'sorcerers_staff',12,0,228,228,242,0,1,412,274,0); -- DMG:274 Delay:412
-INSERT INTO `item_weapon` VALUES (22092,'archmages_staff',12,0,242,242,255,0,1,399,275,0); -- DMG:275 Delay:399
-INSERT INTO `item_weapon` VALUES (22093,'kaumodaki',12,0,255,255,269,0,1,399,276,0);      -- DMG:276 Delay:399
-INSERT INTO `item_weapon` VALUES (22094,'summoners_staff',12,0,228,228,242,0,1,412,274,0); -- DMG:274 Delay:412
-INSERT INTO `item_weapon` VALUES (22095,'glyphic_staff',12,0,242,242,255,0,1,399,275,0);  -- DMG:275 Delay:399
-INSERT INTO `item_weapon` VALUES (22096,'draumstafir',12,0,255,255,269,0,1,399,276,0);    -- DMG:276 Delay:399
-INSERT INTO `item_weapon` VALUES (22097,'argute_staff',12,0,228,228,242,0,1,412,274,0);   -- DMG:274 Delay:412
-INSERT INTO `item_weapon` VALUES (22098,'pedagogy_staff',12,0,242,242,255,0,1,399,275,0); -- DMG:275 Delay:399
-INSERT INTO `item_weapon` VALUES (22099,'musa',12,0,255,255,269,0,1,399,276,0);           -- DMG:276 Delay:399
-INSERT INTO `item_weapon` VALUES (22100,'mpacas_staff',12,0,242,242,255,0,1,402,268,0); -- DMG:268 Delay:402
-INSERT INTO `item_weapon` VALUES (22101,'pandits_staff',12,0,269,269,269,0,1,412,284,0);
+INSERT INTO `item_weapon` VALUES (22091,'sorcerers_staff',12,0,228,228,242,3,1,412,274,0); -- DMG:274 Delay:412
+INSERT INTO `item_weapon` VALUES (22092,'archmages_staff',12,0,242,242,255,3,1,399,275,0); -- DMG:275 Delay:399
+INSERT INTO `item_weapon` VALUES (22093,'kaumodaki',12,0,255,255,269,3,1,399,276,0);      -- DMG:276 Delay:399
+INSERT INTO `item_weapon` VALUES (22094,'summoners_staff',12,0,228,228,242,3,1,412,274,0); -- DMG:274 Delay:412
+INSERT INTO `item_weapon` VALUES (22095,'glyphic_staff',12,0,242,242,255,3,1,399,275,0);  -- DMG:275 Delay:399
+INSERT INTO `item_weapon` VALUES (22096,'draumstafir',12,0,255,255,269,3,1,399,276,0);    -- DMG:276 Delay:399
+INSERT INTO `item_weapon` VALUES (22097,'argute_staff',12,0,228,228,242,3,1,412,274,0);   -- DMG:274 Delay:412
+INSERT INTO `item_weapon` VALUES (22098,'pedagogy_staff',12,0,242,242,255,3,1,399,275,0); -- DMG:275 Delay:399
+INSERT INTO `item_weapon` VALUES (22099,'musa',12,0,255,255,269,3,1,399,276,0);           -- DMG:276 Delay:399
+INSERT INTO `item_weapon` VALUES (22100,'mpacas_staff',12,0,242,242,255,3,1,402,268,0); -- DMG:268 Delay:402
+INSERT INTO `item_weapon` VALUES (22101,'pandits_staff',12,0,269,269,269,3,1,412,284,0);
 INSERT INTO `item_weapon` VALUES (22102,'prime_staff',1,0,0,0,0,1,1,999,1,0);       -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22103,'opashoro',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented
 INSERT INTO `item_weapon` VALUES (22104,'opashoro',1,0,0,0,0,1,1,999,1,0);          -- TODO: Not implemented
@@ -5046,30 +5046,30 @@ INSERT INTO `item_weapon` VALUES (22252,'sapience_orb',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22253,'falcon_eye',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22254,'seething_bomblet',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22255,'seeth._bomblet_+1',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (22256,'jokushunoibuki',27,0,242,0,0,0,1,276,300,0);
-INSERT INTO `item_weapon` VALUES (22257,'genmeinoibuki',27,0,242,0,0,0,1,276,300,0);
-INSERT INTO `item_weapon` VALUES (22258,'shukuyunoibuki',27,0,242,0,0,0,1,276,300,0);
-INSERT INTO `item_weapon` VALUES (22259,'kobonoibuki',27,0,242,0,0,0,1,276,300,0);
+INSERT INTO `item_weapon` VALUES (22256,'jokushunoibuki',27,0,242,0,0,1,1,276,300,0);
+INSERT INTO `item_weapon` VALUES (22257,'genmeinoibuki',27,0,242,0,0,1,1,276,300,0);
+INSERT INTO `item_weapon` VALUES (22258,'shukuyunoibuki',27,0,242,0,0,1,1,276,300,0);
+INSERT INTO `item_weapon` VALUES (22259,'kobonoibuki',27,0,242,0,0,1,1,276,300,0);
 INSERT INTO `item_weapon` VALUES (22260,'e._animator_ii',0,11,0,0,0,0,1,240,0,0);
 INSERT INTO `item_weapon` VALUES (22261,'divinator_ii',0,11,0,0,0,0,1,240,0,0);
 INSERT INTO `item_weapon` VALUES (22262,'amar_cluster',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22263,'hydrocera',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22264,'mantoptera_eye',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22265,'elis_tome',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (22266,'antitail',27,0,242,0,0,0,1,265,70,0);
-INSERT INTO `item_weapon` VALUES (22267,'antitail_+1',27,0,242,0,0,0,1,252,71,0);
+INSERT INTO `item_weapon` VALUES (22266,'antitail',27,0,242,0,0,1,1,265,70,0);
+INSERT INTO `item_weapon` VALUES (22267,'antitail_+1',27,0,242,0,0,1,1,252,71,0);
 INSERT INTO `item_weapon` VALUES (22268,'homiliary',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22269,'barathrum',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22270,'expeditious_pinion',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22271,'pemphredo_tathlum',0,0,0,0,0,0,1,999,0,0);
-INSERT INTO `item_weapon` VALUES (22275,'pamama_peel',27,0,0,0,0,0,1,800,1,0);
-INSERT INTO `item_weapon` VALUES (22276,'sasuke_shuriken',27,3,242,0,0,0,1,192,99,0);
-INSERT INTO `item_weapon` VALUES (22277,'sasuke_shuriken_+1',27,3,242,0,0,0,1,188,100,0);
+INSERT INTO `item_weapon` VALUES (22275,'pamama_peel',27,0,0,0,0,1,1,800,1,0);
+INSERT INTO `item_weapon` VALUES (22276,'sasuke_shuriken',27,3,242,0,0,1,1,192,99,0);
+INSERT INTO `item_weapon` VALUES (22277,'sasuke_shuriken_+1',27,3,242,0,0,1,1,188,100,0);
 INSERT INTO `item_weapon` VALUES (22278,'staunch_tathlum',0,0,0,0,0,0,1,0,0,0);           -- Resistance to all status ailments +10 Spellcasting interruption rate -10% Damage taken -2%
 INSERT INTO `item_weapon` VALUES (22279,'staunch_tathlum_+1',0,0,0,0,0,0,1,0,0,0);        -- Resistance to all status ailments +11 Spellcasting interruption rate -11% Damage taken -3%
 INSERT INTO `item_weapon` VALUES (22280,'yamarang',0,0,0,0,0,0,1,0,0,0);                  -- Accuracy+15 Magic Accuracy+15 Evasion+15 Magic Evasion+15 "Store TP"+3 "Waltz" potency +5%
 INSERT INTO `item_weapon` VALUES (22281,'knobkierrie',0,0,0,0,0,0,1,0,0,0);               -- Attack+23 Weapon skill damage +6%
-INSERT INTO `item_weapon` VALUES (22282,'grudge',27,0,0,0,0,0,1,294,1,0);                 -- DMG:1 Delay:294
+INSERT INTO `item_weapon` VALUES (22282,'grudge',27,0,0,0,0,1,1,294,1,0);                 -- DMG:1 Delay:294
 INSERT INTO `item_weapon` VALUES (22283,'marvelous_cheer',0,0,0,0,0,0,1,240,0,0);         -- Says "Wind Instrument" but is actually cosmetic and should not unlock singing skill or a second song for sub BRD
 INSERT INTO `item_weapon` VALUES (22284,'abdhaljs_tome',0,0,0,0,0,0,1,0,0,0);             -- A copy of a book written by the great Abdhaljs. He has the only original copy. Hallmark Bonus: +200% Gallantry Bonus: +200%
 INSERT INTO `item_weapon` VALUES (22285,'beryllium_bolt',26,0,0,0,0,1,1,192,108,0);       -- DMG:108 Delay:192 Ranged Attack+12

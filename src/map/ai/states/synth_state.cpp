@@ -24,6 +24,7 @@
 #include "entities/battleentity.h"
 
 #include "ai/ai_container.h"
+#include "trade_container.h"
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)
@@ -63,6 +64,15 @@ CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)
 
 bool CSynthState::Update(timer::time_point tick)
 {
+    // Exit state if dead
+    if (m_PEntity->isDead())
+    {
+        synthutils::doSynthCriticalFail(m_PEntity);
+
+        m_PEntity->CraftContainer->Clean(); // Clean to reset m_ItemCount to 0
+        return true;
+    }
+
     if (SynthReady())
     {
         synthutils::sendSynthDone(m_PEntity);

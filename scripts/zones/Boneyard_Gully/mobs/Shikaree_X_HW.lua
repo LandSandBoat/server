@@ -85,14 +85,20 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID     = skill:getID()
     local battlefield = mob:getBattlefield()
 
-    -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
-    if battlefield and battlefield:getLocalVar('scState') == 4 then
-        mob:messageText(mob, ID.text.SHIKAREE_X_OFFSET + 4)
+    if not battlefield then
+        return
     end
 
     -- 2-Hour message.
     if skillID == xi.mobSkill.FAMILIAR_1 then
         mob:messageText(mob, ID.text.SHIKAREE_X_2HR)
+        return
+    end
+
+    -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
+    if battlefield:getLocalVar('scState') == 4 then
+        mob:messageText(mob, ID.text.SHIKAREE_X_OFFSET + 4)
+        return
     end
 
     -- Handle skillchain progression
@@ -101,7 +107,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
     if skillID == scSkill then
         -- Transition from STARTING to EXECUTING when leader's skill fires
-        if battlefield and battlefield:getLocalVar('scState') == 2 then
+        if battlefield:getLocalVar('scState') == 2 then
             battlefield:setLocalVar('scState', 3)
         end
 

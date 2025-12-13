@@ -11,11 +11,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local potency = 18
-
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return xi.mobskills.mobHealMove(target, mob:getMaxHP() * potency)
+    return xi.mobskills.mobHealMove(target, 188 * mob:getMaxHP() / 1024)
 end
 
 return mobskillObject

@@ -95,7 +95,7 @@ void CLuaAction::param(const uint32 actionTargetId, const int32 param) const
     }
 }
 
-void CLuaAction::messageId(const uint32 actionTargetId, const MSGBASIC_ID messageId) const
+void CLuaAction::messageId(const uint32 actionTargetId, const MsgBasic messageId) const
 {
     for (auto&& actionTarget : m_PLuaAction->targets)
     {
@@ -107,7 +107,7 @@ void CLuaAction::messageId(const uint32 actionTargetId, const MSGBASIC_ID messag
     }
 }
 
-auto CLuaAction::getMsg(const uint32 actionTargetId) const -> std::optional<uint16>
+auto CLuaAction::getMsg(const uint32 actionTargetId) const -> std::optional<MsgBasic>
 {
     for (auto&& actionTarget : m_PLuaAction->targets)
     {
@@ -260,7 +260,7 @@ void CLuaAction::addEffectParam(const uint32 actionTargetId, const int32 addEffe
     }
 }
 
-void CLuaAction::addEffectMessage(const uint32 actionTargetId, const MSGBASIC_ID addEffectMessage) const
+void CLuaAction::addEffectMessage(const uint32 actionTargetId, const MsgBasic addEffectMessage) const
 {
     for (auto&& actionTarget : m_PLuaAction->targets)
     {

@@ -36,7 +36,7 @@ CAbility::CAbility(uint16 id)
 , m_aoe(0)
 , m_validTarget(0)
 , m_addType(0)
-, m_message(0)
+, m_message(MsgBasic::NONE)
 , m_recastTime(0s)
 , m_recastId(0)
 , m_CE(0)
@@ -257,76 +257,14 @@ int32 CAbility::getVE() const
  *                                                                       *
  ************************************************************************/
 
-auto CAbility::getMessage() const -> MSGBASIC_ID
+auto CAbility::getMessage() const -> MsgBasic
 {
-    return static_cast<MSGBASIC_ID>(m_message);
+    return m_message;
 }
 
-void CAbility::setMessage(uint16 message)
+void CAbility::setMessage(MsgBasic message)
 {
     m_message = message;
-}
-
-auto CAbility::getAoEMsg() const -> MSGBASIC_ID
-{
-    switch (m_message)
-    {
-        case MSGBASIC_USES_ABILITY_FORTIFIED_DRAGONS:
-            return MSGBASIC_TARGET_FORTIFIED_DRAGONS;
-        case MSGBASIC_USES_SKILL_TAKES_DAMAGE:
-            return MSGBASIC_TARGET_TAKES_DAMAGE;
-        case MSGBASIC_USES_SKILL_GAINS_EFFECT:
-            return MSGBASIC_TARGET_GAINS_EFFECT;
-        case MSGBASIC_USES_SKILL_HP_DRAINED:
-            return MSGBASIC_TARGET_HP_DRAINED;
-        case MSGBASIC_USES_SKILL_MISSES:
-            return MSGBASIC_TARGET_EVADES;
-        case MSGBASIC_USES_SKILL_NO_EFFECT:
-            return MSGBASIC_TARGET_NO_EFFECT;
-        case MSGBASIC_USES_SKILL_MP_DRAINED:
-            return MSGBASIC_TARGET_MP_DRAINED;
-        case MSGBASIC_USES_SKILL_TP_DRAINED:
-            return MSGBASIC_USES_SKILL_TP_DRAINED; // no message for this... I guess there is no aoe TP drain move
-        case MSGBASIC_USES_RECOVERS_HP:
-            return MSGBASIC_TARGET_RECOVERS_HP2;
-        case MSGBASIC_SKILL_RECOVERS_HP:
-        case MSGBASIC_USES_SKILL_RECOVERS_HP_AOE:
-        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE:
-        case MSGBASIC_USES_ITEM_RECOVERS_HP_AOE2:
-            return MSGBASIC_TARGET_RECOVERS_HP_SIMPLE;
-        case MSGBASIC_USES_SKILL_STATUS:
-            return MSGBASIC_TARGET_STATUS;
-        case MSGBASIC_USES_SKILL_RECEIVES_EFFECT:
-            return MSGBASIC_TARGET_RECEIVES_EFFECT;
-        case MSGBASIC_MAGIC_RESISTED_TARGET:
-            return MSGBASIC_MAGIC_RESISTED_TARGET; // already the aoe message
-        case MSGBASIC_USES_SKILL_EFFECT_DRAINED:
-            return MSGBASIC_TARGET_EFFECT_DRAINED;
-        case MSGBASIC_USES_SKILL_TP_REDUCED:
-            return MSGBASIC_TARGET_TP_REDUCED;
-        case MSGBASIC_USES_ABILITY_DISPEL:
-            return MSGBASIC_TARGET_EFFECT_DISAPPEARS;
-        case MSGBASIC_USES_SKILL_RECOVERS_MP:
-            return MSGBASIC_TARGET_RECOVERS_MP;
-        case MSGBASIC_ROLL_MAIN:
-        case MSGBASIC_DOUBLEUP:
-            return MSGBASIC_ROLL_SUB;
-        case MSGBASIC_ROLL_MAIN_FAIL:
-        case MSGBASIC_DOUBLEUP_FAIL:
-            return MSGBASIC_ROLL_SUB_FAIL;
-        case MSGBASIC_DOUBLEUP_BUST:
-            return MSGBASIC_DOUBLEUP_BUST_SUB;
-        case MSGBASIC_USES_ABILITY_RECHARGE:
-            return MSGBASIC_TARGET_ABILITIES_RECHARGED;
-        case MSGBASIC_USES_ABILITY_RECHARGE_TP:
-            return MSGBASIC_TARGET_RECHARGED_TP;
-        case MSGBASIC_USES_ABILITY_RECHARGE_MP:
-            return MSGBASIC_TARGET_RECHARGED_MP;
-        case MSGBASIC_VALLATION_GAIN:
-            return MSGBASIC_VALIANCE_GAIN_PARTY_MEMBER;
-        default:
-            return static_cast<MSGBASIC_ID>(m_message);
-    }
 }
 
 /************************************************************************
@@ -399,7 +337,7 @@ void LoadAbilitiesList()
             PAbility->setLevel(rset->get<uint8>("level"));
             PAbility->setValidTarget(rset->get<uint16>("validTarget"));
             PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
-            PAbility->setMessage(rset->get<uint16>("message1"));
+            PAbility->setMessage(rset->get<MsgBasic>("message1"));
             // Unused - message2
             PAbility->setAnimationID(rset->get<uint16>("animation"));
             PAbility->setAnimationTime(std::chrono::milliseconds(rset->get<uint16>("animationTime")));
@@ -602,19 +540,6 @@ Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
         }
     }
     return charge;
-}
-
-auto GetAbsorbMessage(const MSGBASIC_ID msg) -> MSGBASIC_ID
-{
-    switch (msg)
-    {
-        case MSGBASIC_USES_ABILITY_TAKES_DAMAGE:
-            return MSGBASIC_USES_RECOVERS_HP;
-        case MSGBASIC_TARGET_TAKES_DAMAGE:
-            return MSGBASIC_TARGET_RECOVERS_HP2;
-        default:
-            return msg;
-    }
 }
 
 }; // namespace ability

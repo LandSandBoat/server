@@ -43,6 +43,7 @@
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/messageutils.h"
 #include "utils/trustutils.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
@@ -157,7 +158,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
             PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, FINDFLAGS_NONE, PAbility->getValidTarget());
 
-            uint16 prevMsg = 0;
+            auto prevMsg = MsgBasic::NONE;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
                 action_target_t& actionTarget = action.addTarget(PTargetFound->id);
@@ -169,20 +170,20 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
-                if (prevMsg == 0) // get default message for the first target
+                if (prevMsg == MsgBasic::NONE) // get default message for the first target
                 {
                     actionResult.messageID = PAbility->getMessage();
                 }
-                else // get AoE message for second, if there's a manual override, otherwise return message from PAbility->getMessage().
+                else // get AoE message for secondary targets
                 {
-                    actionResult.messageID = PAbility->getAoEMsg();
+                    actionResult.messageID = messageutils::GetAoEVariant(PAbility->getMessage());
                 }
 
                 actionResult.param = value;
 
                 if (value < 0)
                 {
-                    actionResult.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionResult.messageID));
+                    actionResult.messageID = messageutils::GetAbsorbVariant(actionResult.messageID);
                     actionResult.param     = -actionResult.param;
                 }
 
@@ -205,16 +206,16 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionResult.messageID = PAbility->getMessage();
             }
 
-            if (actionResult.messageID == 0)
+            if (actionResult.messageID == MsgBasic::NONE)
             {
-                actionResult.messageID = MSGBASIC_USES_JA;
+                actionResult.messageID = MsgBasic::USES_JA;
             }
 
             actionResult.param = value;
 
             if (value < 0)
             {
-                actionResult.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionResult.messageID));
+                actionResult.messageID = messageutils::GetAbsorbVariant(actionResult.messageID);
                 actionResult.param     = -value;
             }
         }
@@ -241,7 +242,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     action.actionid               = static_cast<uint32_t>(FourCC::RangedFinish);
     action_target_t& actionTarget = action.addTarget(PTarget->id);
     action_result_t& actionResult = actionTarget.addResult();
-    actionResult.messageID        = MSGBASIC_RANGED_ATTACK_HIT;
+    actionResult.messageID        = MsgBasic::RANGED_ATTACK_HIT;
 
     /*
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
@@ -298,7 +299,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 if (isCritical)
                 {
                     wasCritical            = true;
-                    actionResult.messageID = MSGBASIC_RANGED_ATTACK_CRIT;
+                    actionResult.messageID = MsgBasic::RANGED_ATTACK_CRIT;
                 }
 
                 // at least 1 hit occured
@@ -333,7 +334,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         else // miss
         {
             actionResult.resolution = ActionResolution::Miss;
-            actionResult.messageID  = MSGBASIC_RANGED_ATTACK_MISS;
+            actionResult.messageID  = MsgBasic::RANGED_ATTACK_MISS;
             hitCount                = i; // end barrage, shot missed
         }
         /*
@@ -363,7 +364,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
         if ((actionResult.resolution == ActionResolution::Miss && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE)))
         {
-            actionResult.messageID  = MSGBASIC_RANGED_ATTACK_HIT;
+            actionResult.messageID  = MsgBasic::RANGED_ATTACK_HIT;
             actionResult.resolution = ActionResolution::Hit;
         }
 
@@ -385,7 +386,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if (actionResult.param < 0)
         {
             actionResult.param     = -(actionResult.param);
-            actionResult.messageID = MSGBASIC_RANGED_ATTACK_ABSORBS;
+            actionResult.messageID = MsgBasic::RANGED_ATTACK_ABSORBS;
         }
 
         /*
@@ -402,9 +403,9 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     else if (shadowsTaken > 0)
     {
         // shadows took damage
-        actionResult.messageID  = MSGBASIC_NONE;
+        actionResult.messageID  = MsgBasic::NONE;
         actionResult.resolution = ActionResolution::Miss;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
+        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, shadowsTaken, MsgBasic::SHADOW_ABSORB));
     }
 
     // remove barrage effect if present
@@ -538,7 +539,7 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
             }
             else // Self-targetting WS restoring MP
             {
-                actionResult.messageID  = primary ? MSGBASIC_USES_SKILL_RECOVERS_MP : MSGBASIC_TARGET_RECOVERS_MP;
+                actionResult.messageID  = primary ? MsgBasic::USES_SKILL_RECOVERS_MP : MsgBasic::TARGET_RECOVERS_MP;
                 actionResult.resolution = ActionResolution::Hit;
                 damage                  = std::max(damage, 0);
                 actionResult.param      = addMP(damage);
