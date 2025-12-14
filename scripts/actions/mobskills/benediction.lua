@@ -9,6 +9,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+
+    if target:getAllegiance() ~= mob:getAllegiance() then
+        return 0
+    end
+
     target:eraseAllStatusEffect()
 
     local maxHeal = target:getMaxHP() - target:getHP()
