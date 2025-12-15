@@ -13,8 +13,7 @@ echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/
 EOF
 
 # Install runtime dependencies.
-RUN <<EOF
-apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     bash \
     binutils \
     ca-certificates \
@@ -28,8 +27,8 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     sudo \
     tini \
     tzdata \
-    zlib1g
-EOF
+    zlib1g \
+    && rm -rf /var/lib/apt/lists/*
 
 # Setup runtime user.
 ARG UNAME=xiadmin
