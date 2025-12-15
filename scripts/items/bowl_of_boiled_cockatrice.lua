@@ -25,27 +25,18 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.STR, 5)
-    target:addMod(xi.mod.AGI, 2)
-    target:addMod(xi.mod.INT, -2)
-    target:addMod(xi.mod.MND, 1)
-    target:addMod(xi.mod.FOOD_ATTP, 22)
-    target:addMod(xi.mod.FOOD_ATT_CAP, 60)
-    target:addMod(xi.mod.FOOD_RATTP, 22)
-    target:addMod(xi.mod.FOOD_RATT_CAP, 60)
-    target:addMod(xi.mod.PETRIFYRES, 4)
+    effect:addMod(xi.mod.STR, 5)
+    effect:addMod(xi.mod.AGI, 2)
+    effect:addMod(xi.mod.INT, -2)
+    effect:addMod(xi.mod.MND, 1)
+    effect:addMod(xi.mod.FOOD_ATTP, 22)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 60)
+    effect:addMod(xi.mod.FOOD_RATTP, 22)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 60)
+    effect:addMod(xi.mod.PETRIFYRES, 4)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.STR, 5)
-    target:delMod(xi.mod.AGI, 2)
-    target:delMod(xi.mod.INT, -2)
-    target:delMod(xi.mod.MND, 1)
-    target:delMod(xi.mod.FOOD_ATTP, 22)
-    target:delMod(xi.mod.FOOD_ATT_CAP, 60)
-    target:delMod(xi.mod.FOOD_RATTP, 22)
-    target:delMod(xi.mod.FOOD_RATT_CAP, 60)
-    target:delMod(xi.mod.PETRIFYRES, 4)
 end
 
 return itemObject

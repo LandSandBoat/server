@@ -35,6 +35,8 @@
 #include "macros.h"
 #include "tracy.h"
 
+#include "types/flag.h"
+
 using int8  = std::int8_t;
 using int16 = std::int16_t;
 using int32 = std::int32_t;

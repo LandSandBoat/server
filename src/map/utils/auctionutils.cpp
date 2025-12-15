@@ -300,32 +300,34 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
     {
         AuctionHistory_t canceledItem = PChar->m_ah_history[AucWorkIndex];
 
-        // clang-format off
-        const auto success = db::transaction([&]()
-        {
-            const auto rset = db::preparedStmt("DELETE FROM auction_house WHERE seller = ? AND itemid = ? AND stack = ? AND price = ? AND sale = 0 LIMIT 1",
-                                                                               PChar->id, canceledItem.itemid, canceledItem.stack, canceledItem.price);
-            if (rset && rset->rowsAffected())
+        const auto success = db::transaction(
+            [&]()
             {
-                if (const CItem* PDelItem = itemutils::GetItemPointer(canceledItem.itemid))
+                const auto rset = db::preparedStmt("DELETE FROM auction_house WHERE seller = ? AND itemid = ? AND stack = ? AND price = ? AND sale = 0 LIMIT 1",
+                                                   PChar->id,
+                                                   canceledItem.itemid,
+                                                   canceledItem.stack,
+                                                   canceledItem.price);
+                if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
+                    if (const CItem* PDelItem = itemutils::GetItemPointer(canceledItem.itemid))
                     {
-                        return;
+                        if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
+                        {
+                            return;
+                        }
                     }
                 }
-            }
 
-            // If we got here, something went wrong.
-            throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
-        });
+                // If we got here, something went wrong.
+                throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
+            });
         if (success)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             return;
         }
-        // clang-format on
     }
 
     // Let client know something went wrong

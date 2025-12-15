@@ -263,6 +263,14 @@ enum class Mod
     LIGHT_ABSORB      = 465, // Occasionally absorbs light elemental damage.
     DARK_ABSORB       = 466, // Occasionally absorbs dark elemental damage.
 
+    // Action-type power multipliers
+    POWER_MULTIPLIER_BASIC_ATTACK = 1173, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_BASIC_RANGED = 1174, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_SPELL        = 1175, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_WEAPONSKILL  = 1176, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_JOB_ABILITY  = 1177, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_MOBSKILL     = 1178, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+
     // Crit Damage / Delay
     CRITHITRATE              = 165,  // Raises chance to crit
     CRITHITRATE_ONLY_WEP     = 141,  // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
@@ -288,6 +296,7 @@ enum class Mod
     SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // Movement speed modifiers in use order.
+    // See CBattleEntity::UpdateSpeed
     MOUNT_MOVE                = 972,  // % Mount Movement Speed
     MOVE_SPEED_STACKABLE      = 75,   // Additive modifier. Applied before multipliers. Gear movement speed penalties.
     MOVE_SPEED_WEIGHT_PENALTY = 77,   // Multiplicative modifier. For Gravity and curse.
@@ -608,6 +617,7 @@ enum class Mod
     NINJUTSU_DURATION    = 1000,
     ENHANCES_SANGE       = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
     ENHANCES_FUTAE       = 1148, // Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
+    UTSUSEMI_AOE         = 1179, // "Utsusemi" effect extends to an area
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -1116,12 +1126,14 @@ enum class Mod
 
     MOGHANCEMENT_GIL_BONUS_P = 1158, // Kill shot gil bonus (yes, really)
 
+    KNOCKBACK_REDUCTION = 1172, // Reduces distance knocked +? gear. See Knockback enum.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1172 and onward
+    // SPARE IDs: 1180 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -18,9 +18,21 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setBaseSpeed(60)
+    local battlefield = mob:getBattlefield()
+
+    if not battlefield then
+        return
+    end
+
+    local players = battlefield:getPlayers()
+    for _, player in pairs(players) do
+        if player:isAlive() then
+            mob:updateClaim(player)
+        end
+    end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.FIRE,
@@ -41,6 +53,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.DRAIN,
         xi.magic.spell.BINDGA,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 

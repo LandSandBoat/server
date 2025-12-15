@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/timer.h"
+#include "enums/loot_recast.h"
 
 #include <vector>
 
@@ -64,8 +65,10 @@ public:
     virtual void Del(RECASTTYPE type, uint16 id);
     virtual void DeleteByIndex(RECASTTYPE type, uint8 index);
     bool         Has(RECASTTYPE type, uint16 id);
+    bool         HasLootRecast(LootRecastID id);
     bool         HasRecast(RECASTTYPE type, uint16 id, timer::duration recast);
     virtual void Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
+    void         AddLootRecast(LootRecastID id, timer::duration duration);
     Recast_t*    Load(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
     virtual void ResetAbilities();
     virtual void ChangeJob()
@@ -74,6 +77,7 @@ public:
 
     virtual RecastList_t* GetRecastList(RECASTTYPE type);
     Recast_t*             GetRecast(RECASTTYPE type, uint16 id);
+    Recast_t*             GetLootRecast(LootRecastID id);
 
     CRecastContainer(CBattleEntity* PChar);
     virtual ~CRecastContainer()

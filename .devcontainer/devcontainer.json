@@ -1,0 +1,41 @@
+{
+    "name": "LandSandBoat",
+    "runArgs": ["--name", "lsb-devcontainer", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined", "--network=host"],
+    "build": {
+        "dockerfile": "../docker/ubuntu.Dockerfile",
+        "target": "devtools",
+        "context": ".."
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/server,type=bind,consistency=cached",
+    "workspaceFolder": "/server",
+    "remoteUser": "xiadmin",
+    "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    "customizations": {
+            "vscode": {
+                "settings": {
+                    "terminal.integrated.defaultProfile.linux": "bash",
+                    "terminal.integrated.profiles.linux": { "bash": { "path": "/bin/bash" } }
+                },
+                "extensions": [
+                    "sumneko.lua",
+                    "Chouzz.vscode-better-align",
+                    "ms-python.python",
+                    "ms-python.black-formatter",
+                    "eamodio.gitlens",
+                    "donjayamanne.githistory",
+                    "josetr.cmake-language-support-vscode",
+                    "ms-vscode.cpptools-themes",
+                    "ms-vscode.cpptools-extension-pack",
+                    "ms-vscode.cpptools",
+                    "jeff-hykin.better-cpp-syntax",
+                    "EditorConfig.EditorConfig",
+                    "github.vscode-github-actions",
+                    "bierner.github-markdown-preview",
+                    "xaver.clang-format"
+                ]
+            }
+    }
+}

@@ -20,21 +20,19 @@
 */
 
 #include "0x055_scenarioitem.h"
-
 #include "entities/charentity.h"
 
-GP_SERV_COMMAND_SCENARIOITEM::GP_SERV_COMMAND_SCENARIOITEM(const CCharEntity* PChar, const KEYS_TABLE keyTable)
+GP_SERV_COMMAND_SCENARIOITEM::GP_SERV_COMMAND_SCENARIOITEM(const CCharEntity* PChar, const uint8_t keyTable)
 {
     auto& packet = this->data();
-
-    if (keyTable >= MAX_KEYS_TABLE)
+    if (keyTable >= PChar->keys.tables.size())
     {
-        ShowWarningFmt("KeyTable ({}) exceeds MAX_KEYS_TABLE.", keyTable);
+        ShowErrorFmt("Index {} exceeds key items table capacity.", keyTable);
         return;
     }
 
-    std::memcpy(packet.GetItemFlag, &(PChar->keys.tables[keyTable].keyList), sizeof(packet.GetItemFlag));
-    std::memcpy(packet.LookItemFlag, &(PChar->keys.tables[keyTable].seenList), sizeof(packet.LookItemFlag));
+    std::memcpy(packet.GetItemFlag, &PChar->keys.tables[keyTable].keyList, sizeof(packet.GetItemFlag));
+    std::memcpy(packet.LookItemFlag, &PChar->keys.tables[keyTable].seenList, sizeof(packet.LookItemFlag));
 
     packet.TableIndex = keyTable;
 }

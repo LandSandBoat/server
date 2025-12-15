@@ -23,16 +23,16 @@
 
 #include "0x042_black_edit.h"
 
-GP_SERV_COMMAND_BLACK_LIST::GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, bool resetClientBlist, bool lastBlistPacket)
+GP_SERV_COMMAND_BLACK_LIST::GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, ResetClientBlacklist resetClientBlacklist, LastBlacklistPacket lastBlacklistPacket)
 {
     auto& packet = this->data();
 
-    if (resetClientBlist)
+    if (resetClientBlacklist)
     {
         packet.Stat |= 0x01;
     }
 
-    if (lastBlistPacket)
+    if (lastBlacklistPacket)
     {
         packet.Stat |= 0x02;
     }

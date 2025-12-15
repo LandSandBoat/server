@@ -19,11 +19,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MOVE_SPEED_QUICKENING, 5)
+    effect:addMod(xi.mod.MOVE_SPEED_QUICKENING, 5)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MOVE_SPEED_QUICKENING, 5)
 end
 
 return itemObject

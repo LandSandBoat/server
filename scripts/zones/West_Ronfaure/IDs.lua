@@ -47,14 +47,14 @@ zones[xi.zone.WEST_RONFAURE] =
         CONQUEST                      = 7549,  -- You've earned conquest points!
         SOMETHING_IS_AMISS            = 7901,  -- Something is amiss.
         GARRISON_BASE                 = 7931,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        TIME_ELAPSED                  = 8061,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
-        PLAYER_OBTAINS_ITEM           = 8068,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8069,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8070,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8071,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8076,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10442, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12443, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TIME_ELAPSED                  = 8062,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
+        PLAYER_OBTAINS_ITEM           = 8069,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8070,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8071,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8072,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8077,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10444, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12445, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

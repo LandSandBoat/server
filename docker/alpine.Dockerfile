@@ -3,7 +3,8 @@
 ########
 # Base #
 ########
-FROM --platform=$BUILDPLATFORM alpine:3.22 AS base
+ARG BASE_TAG=3.22
+FROM --platform=$BUILDPLATFORM alpine:$BASE_TAG AS base
 
 # Install runtime dependencies.
 RUN <<EOF
@@ -31,14 +32,17 @@ ARG UNAME=xiadmin
 ARG UGROUP=xiadmin
 ARG UID=1000
 ARG GID=1000
-RUN addgroup --gid $GID $UGROUP && \
-    adduser  --uid $UID $UNAME --ingroup $UGROUP --home /xiadmin --disabled-password && \
-    echo "$UNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME && \
-    chmod 0440 /etc/sudoers.d/$UNAME
 
 WORKDIR /server
-RUN chown $UNAME:$UGROUP /server
-RUN git config --system --add safe.directory /server
+
+RUN <<EOF
+addgroup --gid $GID $UGROUP
+adduser  --uid $UID $UNAME --ingroup $UGROUP --home /xiadmin --disabled-password
+echo "$UNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME
+chmod 0440 /etc/sudoers.d/$UNAME
+chown $UNAME:$UGROUP /server
+git config --system --add safe.directory /server
+EOF
 
 ENV VIRTUAL_ENV=/xiadmin/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
@@ -51,9 +55,11 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
+ARG LLVM_VERSION=20
+
 # Install build dependencies.
-RUN --mount=type=cache,target=/var/cache/apk,id=cache-apk,sharing=locked \
-    apk --update-cache add \
+RUN --mount=type=cache,target=/var/cache/apk,id=cache-apk,sharing=locked <<EOF
+apk --update-cache add \
     binutils-dev \
     ccache \
     cmake \
@@ -69,15 +75,16 @@ RUN --mount=type=cache,target=/var/cache/apk,id=cache-apk,sharing=locked \
     samurai \
     zeromq-dev \
     zlib-dev
+EOF
 
-    
 # Install secondary dependencies as user.
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
-    --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-alpine \
-    python3 -m venv $VIRTUAL_ENV && \
-    python -m pip install --upgrade pip setuptools wheel && \
-    python -m pip install --upgrade -r /tmp/requirements.txt
+    --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-alpine <<EOF
+python3 -m venv $VIRTUAL_ENV
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade -r /tmp/requirements.txt
+EOF
 USER root
 
 ############
@@ -86,14 +93,17 @@ USER root
 FROM staging AS devtools
 
 # Install misc dev/ci tools on top of build tools.
-RUN apk --update-cache add \
-    clang20-extra-tools \
+RUN <<EOF
+apk --update-cache add \
+    clang$LLVM_VERSION-extra-tools \
     cppcheck \
     gdb \
-    luarocks \
-    && apk cache clean
-RUN ln -s /usr/bin/luarocks-5.1 /usr/bin/luarocks && \
-    luarocks --tree /xiadmin/.luarocks install luacheck
+    luarocks
+apk cache clean
+ln -s /usr/lib/llvm$LLVM_VERSION/bin/clang-format /usr/bin/clang-format
+ln -s /usr/bin/luarocks-5.1 /usr/bin/luarocks
+EOF
+RUN luarocks --tree /xiadmin/.luarocks install luacheck
 ENV PATH="/xiadmin/.luarocks/bin:$PATH"
 
 COPY --chmod=0755 docker/entrypoint.sh /entrypoint.sh
@@ -105,16 +115,16 @@ CMD ["/bin/bash"]
 #########
 FROM staging AS build
 
-ARG COMPILER=clang20
+ARG COMPILER=clang
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     apk --update-cache add \
-    clang20 \
-    clang20-extra-tools \
-    compiler-rt \
-    lld \
-    llvm20
+        clang$LLVM_VERSION \
+        clang$LLVM_VERSION-extra-tools \
+        compiler-rt \
+        lld$LLVM_VERSION \
+        llvm$LLVM_VERSION
 fi
 EOF
 
@@ -148,13 +158,13 @@ cp -p /xiadmin/build/version.cpp /server/src/common/ 2> /dev/null || true
 cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
-    export CXXFLAGS="-stdlib=libc++ -flto=thin"
-    export LDFLAGS="-fuse-ld=lld -flto=thin"
+    export CC=/usr/bin/clang-$LLVM_VERSION
+    export CXX=/usr/bin/clang++-$LLVM_VERSION
+    export CXXFLAGS="-stdlib=libstdc++"
+    export LDFLAGS="-fuse-ld=lld"
 fi
 
-cmake -G Ninja -S /server -B /xiadmin/build \
+cmake -G Ninja -S /server -B /xiadmin/build --fresh \
     -DENABLE_CLANG_TIDY=$ENABLE_CLANG_TIDY \
     -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
     -DTRACY_ENABLE=$TRACY_ENABLE \
@@ -168,7 +178,6 @@ ccache -s
 cp -p /server/xi_* /xiadmin/build/
 cp -p /server/src/common/version.cpp /xiadmin/build/
 mv xi_map_tracy xi_map 2> /dev/null || true
-
 EOF
 
 ###########

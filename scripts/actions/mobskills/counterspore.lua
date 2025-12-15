@@ -17,6 +17,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
 
+    skill:setMsg(xi.msg.basic.HIT_DMG)
+
     return damage
 end
 

@@ -54,7 +54,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
     end
 
-    local damage = target:breathDmgTaken(wsc)
+    local damage = wsc
+    damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
+    damage = math.floor(target:handleSevereDamage(damage, false))
+
     if damage > 0 then
         if player:getOffhandDmg() > 0 then
             calcParams.tpHitsLanded = 2

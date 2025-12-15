@@ -12,7 +12,7 @@ attachmentObject.onEquip = function(pet)
             not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.FLASHBULB) and
             master and
             master:countEffect(xi.effect.LIGHT_MANEUVER) > 0 and
-            (automaton:checkDistance(target) - target:getModelSize()) < 7
+            automaton:checkDistance(target) < (7 + target:getHitboxSize() + automaton:getHitboxSize()) -- needs verification
         then
             automaton:useMobAbility(xi.automaton.abilities.FLASHBULB)
         end

@@ -39,7 +39,7 @@ GP_SERV_COMMAND_BATTLE_MESSAGE::GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity
     packet.padding1B   = 0;
 }
 
-GP_SERV_COMMAND_BATTLE_MESSAGE::GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MSGBASIC_ID messageId)
+GP_SERV_COMMAND_BATTLE_MESSAGE::GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MsgBasic messageId)
 : GP_SERV_COMMAND_BATTLE_MESSAGE(PSender, PTarget, param, value, static_cast<MsgStd>(messageId))
 {
 }

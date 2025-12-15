@@ -8,7 +8,22 @@ local professorTables = require('scripts/zones/Sacrarium/globals')
 ---@type TMobEntity
 local entity = {}
 
+local pets =
+{
+    ID.mob.OLD_PROFESSOR_MARISELLE + 1,
+    ID.mob.OLD_PROFESSOR_MARISELLE + 2
+}
+
+local callPetParams =
+{
+    maxSpawns    = 1,
+    inactiveTime = 3000,
+    dieWithOwner = true
+}
+
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -22,91 +37,66 @@ entity.onMobSpawn = function(mob)
     end
 end
 
+entity.onMobEngage = function(mob, target)
+    local currentTime = GetSystemTime()
+    mob:setLocalVar('petTimer', currentTime + 10)
+    mob:setLocalVar('teleportTime', currentTime + math.random(30, 180))
+end
+
 entity.onMobFight = function(mob, target)
-    local opMariselle = mob:getID()
-
+    local currentTime = GetSystemTime()
     if
-        mob:getBattleTime() % 30 < 3 and
-        mob:getBattleTime() > 3
+        currentTime > mob:getLocalVar('petTimer') and
+        xi.mob.callPets(mob, pets, callPetParams)
     then
-        local xPos = mob:getXPos()
-        local yPos = mob:getYPos()
-        local zPos = mob:getZPos()
-
-        for i = opMariselle + 1, opMariselle + 2 do
-            local m = GetMobByID(i)
-            if m and not m:isSpawned() then
-                m:spawn()
-                m:updateEnmity(target)
-                m:setPos(xPos + 1, yPos, zPos + 1) -- Set pupil x and z position +1 from Mariselle
-                return
-            end
-        end
+        mob:setLocalVar('petTimer', currentTime + 10)
     end
 
-    for i = opMariselle + 1, opMariselle + 2 do
-        local m = GetMobByID(i)
-        if m and m:isSpawned() then
-            m:updateEnmity(target)
-        end
-    end
-
-    local teleTime = mob:getLocalVar('teleTime')
+    local teleportTime = mob:getLocalVar('teleportTime')
     if
-        mob:getBattleTime() - teleTime > 30 and
-        mob:getBattleTime() > 59 and
+        currentTime > teleportTime and
         not xi.combat.behavior.isEntityBusy(mob)
     then
-        local profLocation = mob:getLocalVar('spawnLocation')
-        local randomPosition = math.random(1, 9)
-        utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
-        mob:setLocalVar('teleTime', mob:getBattleTime())
-    end
+        local profLocation     = mob:getLocalVar('spawnLocation')
+        local shufflePositions = utils.shuffle(professorTables.locations[profLocation])
+        -- Teleport Mariselle and his pets to a new location
+        utils.mobTeleport(mob, 2000, shufflePositions[1])
 
-    -- If players wander too far from professor and his teleport room he deaggros --
-    -- This is a safety measure due to the navmesh sucking, if players wanted too far and OPM + Babies are teleporting they will just wander through walls --
-    -- This happens to all mobs, but due to the teleport mechanics can sometimes cause issues --
-    -- TODO Remove de-aggro when OOB Navmesh issues are fixed
+        for i = 1, #pets do
+            local pet = GetMobByID(pets[i])
+            if pet and pet:isSpawned() then
+                utils.mobTeleport(pet, 2000, shufflePositions[i + 1])
+                pet:setLocalVar('teleported',  1)
+            end
+        end
 
-    local mobTarget = mob:getTarget()
-    if
-        mobTarget and
-        mob:checkDistance(mobTarget) > 55
-    then
-        mob:disengage()
-        mob:resetEnmity(target)
+        mob:setLocalVar('teleportTime', currentTime + math.random(30, 180))
     end
+end
+
+entity.onMobSpellChoose = function(mob)
+    local spellList =
+    {
+        xi.magic.spell.ABSORB_INT,
+        xi.magic.spell.BLIND,
+        xi.magic.spell.DRAIN,
+        xi.magic.spell.SLEEP_II,
+        xi.magic.spell.SLEEPGA_II,
+    }
+
+    return spellList[math.random(1, #spellList)]
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar('teleTime', 0)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    local opMariselle = mob:getID()
-
-    for i = opMariselle + 1, opMariselle + 2 do
-        local m = GetMobByID(i)
-        if m and m:isSpawned() then
-            DespawnMob(i)
-        end
-    end
+    mob:setLocalVar('teleportTime', 0)
 end
 
 entity.onMobDespawn = function(mob)
-    local opMariselle = mob:getID()
-
-    for i = opMariselle + 1, opMariselle + 2 do
-        local m = GetMobByID(i)
-        if m and m:isSpawned() then
-            DespawnMob(i)
-        end
-    end
-
     -- Randomize Old Prof. Mariselle's spawn location
     local nextSpawn = math.random(0, 5)
     for i = 0, 5 do
-        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', (i == nextSpawn) and 1 or 0)
+        local value = i == nextSpawn and 1 or 0
+        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', value)
     end
 end
 

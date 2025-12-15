@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellTable =
     {
         [1] =
@@ -51,7 +51,11 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
             xi.magic.spell.WIND_CAROL,
         },
     }
-    local spellList = spellTable[mob:getLocalVar('spellList')]
+
+    local list      = mob:getLocalVar('spellList')
+    list            = list > 0 and list or 1
+    local spellList = spellTable[list]
+
     return spellList[math.random(1, #spellList)]
 end
 

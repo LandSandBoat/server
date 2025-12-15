@@ -34,6 +34,8 @@
 class ConquestSystem
 {
 public:
+    using ShouldUpdateZones = conquest::ShouldUpdateZones;
+
     ConquestSystem(WorldEngine& worldServer);
 
     bool handleMessage(uint8 messageType, IPPMessage&& message);
@@ -63,7 +65,7 @@ private:
     auto getRegionControls() -> const std::vector<region_control_t>;
 
     void sendTallyStartMsg();
-    void sendInfluencesMsg(bool shouldUpdateZones);
+    void sendInfluencesMsg(ShouldUpdateZones shouldUpdateZones);
     void sendRegionControlsMsg(ConquestMessage msgType);
 
     WorldEngine& worldServer_;

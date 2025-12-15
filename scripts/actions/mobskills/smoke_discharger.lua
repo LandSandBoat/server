@@ -12,13 +12,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+    local params = {}
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.EARTH, 2, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.percentMultipier  = 0.05
+    params.element           = xi.element.EARTH
+    params.damageCap         = 490
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.EARTH)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PETRIFICATION, 1, 3, 15)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.EARTH)
+    end
+
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PETRIFICATION, 1, 3, 45)
 
     if target:hasStatusEffect(xi.effect.ELEMENTALRES_DOWN) then
         target:delStatusEffectSilent(xi.effect.ELEMENTALRES_DOWN)

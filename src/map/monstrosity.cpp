@@ -407,8 +407,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
 
     // NOTE: The amount of pointer per level is level + 10, this is set in the client
 
-    // clang-format off
-    auto getTotalInstinctsCost = [&](const std::array<uint16, 12> &input) -> uint8
+    auto getTotalInstinctsCost = [&](const std::array<uint16, 12>& input) -> uint8
     {
         uint8 total = 0;
 
@@ -420,12 +419,15 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         return total;
     };
 
-    auto instinctsContainDuplicates = [&](const std::array<uint16, 12> &input) -> bool
+    auto instinctsContainDuplicates = [&](const std::array<uint16, 12>& input) -> bool
     {
         std::unordered_set<uint16> set;
         for (auto const& idx : input)
         {
-            if (idx == 0) continue; // Skip empty/unequipped slots
+            if (idx == 0)
+            {
+                continue; // Skip empty/unequipped slots
+            }
 
             if (set.contains(idx))
             {
@@ -437,7 +439,6 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         }
         return false;
     };
-    // clang-format on
 
     if (data.Flags0.SpeciesFlag)
     {

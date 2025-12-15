@@ -448,15 +448,17 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
-    // clang-format off
     status = m_navMeshQuery.findRandomPointAroundCircle(
-        startRef, spos, maxRadius, &filter,
+        startRef,
+        spos,
+        maxRadius,
+        &filter,
         []() -> float
         {
             return xirand::GetRandomNumber(1.0f);
         },
-        &randomRef, randomPt);
-    // clang-format on
+        &randomRef,
+        randomPt);
 
     if (dtStatusFailed(status))
     {

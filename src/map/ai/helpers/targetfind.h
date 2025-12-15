@@ -147,6 +147,9 @@ protected:
     position_t* m_APoint;
     position_t  m_BPoint;
     position_t  m_CPoint;
+
+    // For self-centered AoEs (radiusType == AOE_RADIUS::ATTACKER)
+    bool m_selfCenteredAoE;
 };
 
 #endif

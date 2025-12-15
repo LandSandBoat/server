@@ -35,16 +35,17 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
-entity.onMobMagicPrepare = function(mob, target)
-    -- uses only stone II and Stonega
-    if math.random(1, 100) <= 50 then
-        return xi.magic.spell.STONE_II
-    end
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.STONE_II,
+        xi.magic.spell.STONEGA,
+    }
 
-    return xi.magic.spell.STONEGA
+    return spellList[math.random(1, #spellList)]
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     return xi.mobSkill.SANDSPIN -- Sandspin is only TP move
 end
 

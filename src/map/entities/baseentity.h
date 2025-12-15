@@ -326,6 +326,9 @@ public:
     uint8           updatemask;     // what to update next server tick to players nearby
     bool            priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)
 
+    float modelHitboxSize = 0.0f; // used for distance calculations and is in packets
+    uint8 modelSize       = 0;
+
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
     bool m_bReleaseTargIDOnDisappear;

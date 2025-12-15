@@ -5,20 +5,24 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobFight = function(mob, target)
-    local keremet = mob:getID()
-
-    -- Send spawned skeleton "pets" to Keremet's target
-    for i = keremet + 1, keremet + 12 do
-        local m = GetMobByID(i)
-
-        if m and m:getCurrentAction() == xi.action.category.ROAMING then
-            m:updateEnmity(target)
-        end
-    end
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobFight = function(mob, target)
+    -- Send spawned skeleton "pets" to Keremet's target.
+    local keremetId  = mob:getID()
+    for i = keremetId + 1, keremetId + 12 do
+        local keremetSkeleton = GetMobByID(i)
+
+        if
+            keremetSkeleton and
+            keremetSkeleton:getCurrentAction() == xi.action.category.ROAMING
+        then
+            keremetSkeleton:updateEnmity(target)
+        end
+    end
 end
 
 entity.onMobDespawn = function(mob)

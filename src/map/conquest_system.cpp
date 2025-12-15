@@ -71,7 +71,7 @@ void HandleMessage(ConquestMessage type, const std::span<const uint8> data)
         {
             if (const auto object = ipc::fromBytes<ConquestInfluenceUpdate>(data))
             {
-                HandleInfluenceUpdate((*object).influences, (*object).shouldUpdateZones);
+                HandleInfluenceUpdate((*object).influences, ShouldUpdateZones{ (*object).shouldUpdateZones });
             }
         }
         break;
@@ -443,7 +443,7 @@ void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls)
  *                                                                       *
  ************************************************************************/
 
-void HandleInfluenceUpdate(const std::vector<influence_t>& influences, bool shouldUpdateZones)
+void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpdateZones shouldUpdateZones)
 {
     TracyZoneScoped;
 

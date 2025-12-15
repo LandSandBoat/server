@@ -17,7 +17,6 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false) -- Does not cast spells.
     mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
     mob:setMod(xi.mod.REGAIN, 50)
-    mob:setMod(xi.mod.DELAY, -3500)
 end
 
 entity.onMobEngage = function(mob, target)

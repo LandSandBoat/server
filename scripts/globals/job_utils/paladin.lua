@@ -228,7 +228,7 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     local randomizer = 1 + (math.random(1, 5) / 100)
 
     damage = damage * randomizer
-    damage = utils.stoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
 
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)

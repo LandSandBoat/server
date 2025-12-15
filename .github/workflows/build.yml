@@ -1,202 +1,130 @@
+name: Builds
+
 on:
-  workflow_call:
-    inputs:
-      runner:
-        description: 'Runner to run the build on.'
-        required: true
-        type: string
-      compiler:
-        description: 'Compiler to build with.'
-        required: true
-        type: string
-      build_type:
-        description: 'CMake build type.'
-        required: true
-        type: string
-      save_cache:
-        description: 'Cache build and Python virtual environment.'
-        required: false
-        type: boolean
-        default: false
-      build_modules:
-        description: 'Build with modules enabled.'
-        required: false
-        type: boolean
-        default: false
-      tracy:
-        description: 'Build with tracy enabled.'
-        required: false
-        type: boolean
-        default: false
-      upload_artifact:
-        description: 'Upload built executables.'
-        required: false
-        type: boolean
-        default: false
-      clang_tidy:
-        description: 'Build with Clang Tidy and output build summary.'
-        required: false
-        type: boolean
-        default: false
-      optional_build:
-        description: 'Skip build if no relevant files changed (requires changed-files artifact).'
-        required: false
-        type: boolean
-        default: false
+  push:
+    branches:
+      - base
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-  Build:
-    name: ${{ format('{0} ({1}, {2}, {3})', inputs.clang_tidy && 'Clang Tidy' || 'Build', inputs.runner, inputs.compiler, inputs.build_type) }}
-    runs-on: ${{ inputs.runner }}
-    defaults:
-      run:
-        shell: bash
-    env:
-      SCCACHE_DIR: ${{ format('{0}/build/sccache', github.workspace) }}
-      SCCACHE_CACHE_SIZE: "1G"
-    steps:
-      - name: Download changed files artifact
-        if: ${{ inputs.optional_build }}
-        uses: actions/download-artifact@v4
-        with:
-          name: changed-files
-        # continue-on-error: true
+  Clang_Tidy:
+    name: Clang Tidy
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ubuntu-24.04
+      compiler: clang
+      compiler_version: 20
+      build_type: Debug
+      tracy: false
+      build_modules: false
+      save_cache: true
+      upload_artifact: false
+      clang_tidy: true
 
-      - name: Check for changed source files
-        id: check-changes
-        if: ${{ inputs.optional_build }}
-        run: |
-          mapfile -t changed_files < changed-files.txt
-          source_changes=false
-          for changed_file in "${changed_files[@]}"; do
-          if [[ $changed_file == src/**/*.cpp || $changed_file == modules/**/*.cpp || \
-                $changed_file == src/**/*.h   || $changed_file == modules/**/*.h   || \
-                $changed_file == src/**/CMakeLists.txt || $changed_file == modules/**/CMakeLists.txt || \
-                $changed_file == CMakeLists.txt || \
-                $changed_file == cmake/*.cmake ]]; then
-              source_changes=true
-              break
-            fi
-          done
-          echo "source_changes=$source_changes" >> $GITHUB_OUTPUT
+  Runner_Build:
+    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build_type: Release
+            runner: windows-2025
+            compiler: msvc
+            tracy: false
+            build_modules: false
+            save_cache: false
+            upload_artifact: true
+            clang_tidy: false
+          - build_type: Release
+            runner: macos-26
+            compiler: appleClang
+            tracy: false
+            build_modules: false
+            save_cache: false
+            upload_artifact: true
+            clang_tidy: false
+          - build_type: Debug
+            runner: windows-2025
+            compiler: msvc
+            tracy: false
+            build_modules: false
+            save_cache: true
+            upload_artifact: false
+            clang_tidy: false
+          - build_type: Debug
+            runner: macos-26
+            compiler: appleClang
+            tracy: false
+            build_modules: false
+            save_cache: true
+            upload_artifact: false
+            clang_tidy: false
+          - build_type: Debug
+            runner: ubuntu-24.04
+            compiler: gcc
+            compiler_version: 14
+            tracy: false
+            build_modules: false
+            save_cache: true
+            upload_artifact: false
+            clang_tidy: false
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ${{ matrix.runner }}
+      compiler: ${{ matrix.compiler }}
+      compiler_version: ${{ matrix.compiler_version }}
+      build_type: ${{ matrix.build_type }}
+      build_modules: ${{ matrix.build_modules }}
+      tracy: ${{ matrix.tracy }}
+      save_cache: ${{ matrix.save_cache }}
+      upload_artifact: ${{ matrix.upload_artifact }}
+      clang_tidy: ${{ matrix.clang_tidy }}
 
-      - name: Checkout
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Install dependencies (Brew)
-        if: ${{ runner.os == 'macOS' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        run: brew install mariadb zeromq zmq luajit
-
-      - name: Install dependencies (APT)
-        if: ${{ runner.os == 'Linux' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        run: |
-          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
-            binutils-dev \
-            g++-14 \
-            libluajit-5.1-dev \
-            libmariadb-dev-compat \
-            libssl-dev \
-            libzmq3-dev \
-            luajit \
-            mariadb-client \
-            tzdata \
-            zlib1g-dev
-          echo "CC=/usr/bin/gcc-14" >> $GITHUB_ENV
-          echo "CXX=/usr/bin/g++-14" >> $GITHUB_ENV
-
-      - name: Install Clang
-        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        run: |
-          sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
-            clang-18 \
-            clang-tidy \
-            libclang-rt-dev \
-            lld \
-            llvm-dev
-          echo "CC=/usr/bin/clang-18" >> $GITHUB_ENV
-          echo "CXX=/usr/bin/clang++-18" >> $GITHUB_ENV
-          echo "CXXFLAGS=-stdlib=libstdc++" >> $GITHUB_ENV
-          echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
-
-      - name: Setup MSVC
-        if: ${{ runner.os == 'Windows' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        uses: TheMrMilchmann/setup-msvc-dev@v3
-        with:
-          arch: x64
-
-      - name: Setup sccache
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        uses: mozilla-actions/sccache-action@v0.0.9
-        with:
-          disable_annotations: ${{ !inputs.save_cache }}
-
-      - name: Setup Python
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Enable modules
-        if: ${{ inputs.build_modules && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        run: |
-          python3 <<EOF
-          with open("modules/init.txt", "w") as f:
-              f.write("custom\n")
-              f.write("era\n")
-              f.write("example\n")
-              f.write("renamer\n")
-          EOF
-
-      - name: Restore build cache
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        id: restore_build
-        uses: actions/cache/restore@v4
-        env:
-          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
-        with:
-          path: build
-          key: ${{ format('buildcache-{0}-{1}-{2}-{3}-{4}', runner.os, inputs.compiler, inputs.build_type, env.cmake_hash, env.source_hash) }}
-          restore-keys: |
-            ${{ format('buildcache-{0}-{1}-{2}-{3}-', runner.os, inputs.compiler, inputs.build_type, env.cmake_hash) }}
-
-      - name: Configure CMake
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        run: |
-          cmake -G Ninja -S . -B build \
-            -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
-            -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
-            -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
-            -DPCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }} \
-            -DCACHE_OPTION=sccache
-
-      - name: Build
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
-        run: cmake --build build | tee build.log
-
-      - name: Summarize Clang Tidy Build
-        if: ${{ inputs.clang_tidy && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        run: |
-          echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
-          if [[ -f "build.log" && -s "build.log" ]]; then
-              python tools/ci/summarize_clang_tidy.py build.log >> $GITHUB_STEP_SUMMARY
-          fi
-
-      - name: Upload artifact
-        if: ${{ inputs.upload_artifact && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ format('LSB_{0}_{1}_{2}', runner.os, inputs.build_type, github.sha) }}
-          path: |
-            xi_*
-            tracy.tar.gz
-
-      - name: Cache build
-        if: ${{ inputs.save_cache && steps.restore_build.outputs.cache-hit != 'true' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        uses: actions/cache/save@v4
-        with:
-          path: build
-          key: ${{ steps.restore_build.outputs.cache-primary-key }}
+  Docker_Build:
+    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build_type: Release
+            os: ubuntu
+            compiler: gcc
+            compiler_version: 14
+            clang_format_version: 20
+            tracy: false
+            build_modules: false
+            save_cache: false
+            publish: true
+          # - build_type: Debug
+          #   os: ubuntu
+          #   compiler: gcc
+          #   compiler_version: 14
+          #   tracy: false
+          #   build_modules: false
+          #   save_cache: true
+          #   publish: false
+          - build_type: Release
+            os: alpine
+            compiler: clang
+            compiler_version: 20
+            clang_format_version: 20
+            tracy: false
+            build_modules: false
+            save_cache: false
+            publish: true
+    uses: ./.github/workflows/docker_build.yml
+    with:
+      os: ${{ matrix.os }}
+      compiler: ${{ matrix.compiler }}
+      compiler_version: ${{ matrix.compiler_version }}
+      clang_format_version: ${{ matrix.clang_format_version }}
+      build_type: ${{ matrix.build_type }}
+      save_cache: ${{ matrix.save_cache }}
+      build_modules: ${{ matrix.build_modules }}
+      tracy: ${{ matrix.tracy }}
+      upload_artifact: false
+      publish: ${{ matrix.publish }}

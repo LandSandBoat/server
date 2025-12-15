@@ -53,7 +53,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
     if (jailutils::InPrison(PInviter))
     {
         // Initiator is in prison.  Send error message.
-        PInviter->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PInviter, PInviter, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA);
+        PInviter->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PInviter, PInviter, 0, 0, MsgBasic::CANNOT_USE_IN_AREA);
         return;
     }
 

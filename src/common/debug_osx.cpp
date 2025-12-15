@@ -74,7 +74,7 @@ void dumpBacktrace(int signal)
 
 void debug::init()
 {
-    rlimit core_limits;
+    rlimit core_limits{};
     core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
     setrlimit(RLIMIT_CORE, &core_limits);
 
@@ -104,7 +104,7 @@ bool debug::isRunningUnderDebugger()
             getpid(),
         };
 
-        kinfo_proc info;
+        kinfo_proc info{};
         info.kp_proc.p_flag = 0;
 
         size_t size = sizeof(info);

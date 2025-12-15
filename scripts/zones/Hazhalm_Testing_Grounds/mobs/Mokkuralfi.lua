@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     if
         mob:getHPP() <= 20 and
         mob:getLocalVar('xenoglossia') == 0
@@ -31,7 +31,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     if mob:getLocalVar('tga4Next') ~= 0 then
         mob:setLocalVar('tga4Next', 0)
         return xi.magic.spell.THUNDAGA_IV

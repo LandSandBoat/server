@@ -27,7 +27,9 @@
 #include "common/mmo.h"
 #include "common/zmq_dealer_wrapper.h"
 
-#include <nonstd/jthread.hpp>
+#include <atomic>
+#include <thread>
+
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 

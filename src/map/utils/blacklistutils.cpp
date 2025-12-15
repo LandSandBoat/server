@@ -67,7 +67,11 @@ void SendBlacklist(CCharEntity* PChar)
     const auto rset = db::preparedStmt("SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = ?", PChar->id);
     if (!rset || !rset->rowsCount())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, true, true);
+        PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(
+            blacklist,
+            GP_SERV_COMMAND_BLACK_LIST::ResetClientBlacklist::Yes,
+            GP_SERV_COMMAND_BLACK_LIST::LastBlacklistPacket::Yes);
+
         return;
     }
 
@@ -87,9 +91,11 @@ void SendBlacklist(CCharEntity* PChar)
 
         if (currentCount == 12)
         {
-            // reset the client blist if it's the first 12 (or less)
-            // this is the last blist packet if total count equals row count
-            PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, totalCount <= 12, totalCount == rowCount);
+            PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(
+                blacklist,
+                GP_SERV_COMMAND_BLACK_LIST::ResetClientBlacklist{ totalCount <= 12 },
+                GP_SERV_COMMAND_BLACK_LIST::LastBlacklistPacket{ totalCount == rowCount });
+
             blacklist.clear();
             currentCount = 0;
         }
@@ -98,7 +104,10 @@ void SendBlacklist(CCharEntity* PChar)
     // Push remaining entries..
     if (!blacklist.empty())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(blacklist, false, true);
+        PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(
+            blacklist,
+            GP_SERV_COMMAND_BLACK_LIST::ResetClientBlacklist::No,
+            GP_SERV_COMMAND_BLACK_LIST::LastBlacklistPacket::Yes);
     }
 }
 

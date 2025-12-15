@@ -116,7 +116,7 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                     break;
             }
 
-            bool moghouseExitRegular          = MyRoomExitMode == static_cast<uint8>(GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom) && PChar->m_moghouseID > 0;
+            bool moghouseExitRegular          = MyRoomExitMode == static_cast<uint8>(GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom) && PChar->inMogHouse();
             bool requestedMoghouseFloorChange = startingZone == destinationZone && (MyRoomExitMode == static_cast<uint8>(GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F) || MyRoomExitMode == static_cast<uint8>(GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F));
             bool moghouse2FUnlocked           = PChar->profile.mhflag & 0x20;
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
@@ -139,11 +139,11 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
 
             bool moghouseExitQuestZoneline = moghouseQuestComplete &&
                                              startingRegion == destinationRegion &&
-                                             PChar->m_moghouseID > 0 &&
+                                             PChar->inMogHouse() &&
                                              moghouseSameRegion &&
                                              !requestedMoghouseFloorChange;
 
-            bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
+            bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->inMogHouse();
 
             // Validate travel
             if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)

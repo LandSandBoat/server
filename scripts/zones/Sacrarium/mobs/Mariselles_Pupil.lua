@@ -3,47 +3,60 @@
 --  Mob: Mariselles' Pupils
 -----------------------------------
 local ID = zones[xi.zone.SACRARIUM]
-local professorTables = require('scripts/zones/Sacrarium/globals')
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setCarefulPathing(true)
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:setMod(xi.mod.REFRESH, 3)
+end
 
-    for i = 0, 5 do
-        if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar('hasProfessorMariselle') == 1 then
-            mob:setLocalVar('spawnLocation', i)
-        end
-    end
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setLocalVar('nextSpell', xi.magic.spell.BLIND)
+    mob:setLocalVar('spellTimer', GetSystemTime() + 5)
 end
 
 entity.onMobFight = function(mob, target)
-    local teleTime = mob:getLocalVar('teleTime')
-    if
-        mob:getBattleTime() - teleTime > 30 and
-        mob:getBattleTime() > 59 and
-        not xi.combat.behavior.isEntityBusy(mob)
-    then
-        local profLocation = mob:getLocalVar('spawnLocation')
-        local randomPosition = math.random(1, 9)
-        utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
-        mob:setLocalVar('teleTime', mob:getBattleTime())
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
     end
 
-    local mobTarget = mob:getTarget()
+    local teleported = mob:getLocalVar('teleported')
+    if teleported == 1 then
+        mob:castSpell(xi.magic.spell.GRAVITY, target)
+        mob:setLocalVar('teleported', 0)
+        mob:setLocalVar('nextSpell', xi.magic.spell.BLIND)
+        mob:setLocalVar('spellTimer', GetSystemTime() + 20)
+    end
 
+    local nextSpell = mob:getLocalVar('nextSpell')
+    local spellTimer = mob:getLocalVar('spellTimer')
     if
-        mobTarget and
-        mob:checkDistance(mobTarget) > 55
+        GetSystemTime() > spellTimer and
+        nextSpell ~= 0
     then
-        mob:disengage()
-        mob:resetEnmity(target)
+        mob:castSpell(nextSpell, target)
     end
 end
 
-entity.onMobDisengage = function(mob)
-    mob:setLocalVar('teleTime', 0)
+entity.onSpellPrecast = function(mob, spell)
+    if spell:getID() == xi.magic.spell.BLIND then
+        mob:setLocalVar('nextSpell', xi.magic.spell.DRAIN)
+        mob:setLocalVar('spellTimer', GetSystemTime() + 15)
+    elseif spell:getID() == xi.magic.spell.DRAIN then
+        mob:setLocalVar('nextSpell', xi.magic.spell.BLIND)
+        mob:setLocalVar('spellTimer', GetSystemTime() + 50)
+    end
+end
+
+entity.onMobDespawn = function(mob)
+    local mariselle = GetMobByID(ID.mob.OLD_PROFESSOR_MARISELLE)
+    if mariselle and mariselle:isSpawned() then
+        mariselle:setLocalVar('petTimer', GetSystemTime() + 10)
+    end
 end
 
 return entity

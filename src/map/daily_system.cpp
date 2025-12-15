@@ -35,19 +35,16 @@ std::vector<uint16> sundries1DialItems;
 std::vector<uint16> sundries2DialItems;
 std::vector<uint16> specialDialItems;
 
-// clang-format off
-    std::vector<uint16> gobbieJunk =
-    {
-        2542, // Goblin Mess Tin
-        2543, // Goblin Weel
-        4324, // Hobgoblin Chocolate
-        4325, // Hobgoblin Pie
-        4328, // Hobgoblin Bread
-        4458, // Goblin Bread
-        4495, // Goblin Chocolate
-        4539  // Goblin Pie
-    };
-// clang-format on
+std::vector<uint16> gobbieJunk = {
+    2542, // Goblin Mess Tin
+    2543, // Goblin Weel
+    4324, // Hobgoblin Chocolate
+    4325, // Hobgoblin Pie
+    4328, // Hobgoblin Bread
+    4458, // Goblin Bread
+    4495, // Goblin Chocolate
+    4539  // Goblin Pie
+};
 
 uint16 SelectItem(CCharEntity* player, uint8 dial)
 {

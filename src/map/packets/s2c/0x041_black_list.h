@@ -31,6 +31,9 @@
 class GP_SERV_COMMAND_BLACK_LIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BLACK_LIST, GP_SERV_COMMAND_BLACK_LIST>
 {
 public:
+    using ResetClientBlacklist = xi::Flag<struct ResetClientBlacklistTag>;
+    using LastBlacklistPacket  = xi::Flag<struct LastBlacklistPacketTag>;
+
     struct PacketData
     {
         SAVE_BLACK List[12];  // PS2: List
@@ -39,5 +42,5 @@ public:
         uint16_t   padding00; // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, bool resetClientBlist, bool lastBlistPacket);
+    GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, ResetClientBlacklist resetClientBlacklist, LastBlacklistPacket lastBlacklistPacket);
 };

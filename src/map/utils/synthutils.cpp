@@ -854,7 +854,7 @@ void doSynthSkillUp(CCharEntity* PChar)
 
         // Skill Up addition:
         PChar->RealSkills.skill[skillID] += skillUpAmount;
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, skillUpAmount, static_cast<MSGBASIC_ID>(38));
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, skillUpAmount, MsgBasic::SKILL_GAIN);
 
         if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
         {
@@ -866,7 +866,7 @@ void doSynthSkillUp(CCharEntity* PChar)
             }
 
             PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, static_cast<MSGBASIC_ID>(53));
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
         }
 
         charutils::SaveCharSkills(PChar, skillID);
@@ -875,13 +875,13 @@ void doSynthSkillUp(CCharEntity* PChar)
         if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
         {
             PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, skillUpAmount, static_cast<MSGBASIC_ID>(310));
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, skillUpAmount, MsgBasic::SKILL_DROP);
 
             if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
             {
                 PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, static_cast<MSGBASIC_ID>(53));
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
             }
 
             charutils::SaveCharSkills(PChar, skillHighest);

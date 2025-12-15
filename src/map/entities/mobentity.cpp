@@ -35,6 +35,7 @@
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
+#include "enums/loot_recast.h"
 #include "enums/weather.h"
 #include "items.h"
 #include "lua/lua_loot.h"
@@ -43,7 +44,6 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
-#include "packets/action.h"
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -89,8 +89,6 @@ namespace
     };
 // clang-format on
 
-constexpr int             RECAST_SEAL           = 1;
-constexpr int             RECAST_GEODE          = 2;
 constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between special drops
 
 } // namespace
@@ -881,20 +879,20 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     };
 
     // Checks if the party is eligible for adding global drops (seals, geodes, avatarites)
-    auto CanAddSpecial = [PChar](const uint16 id)
+    auto CanAddSpecial = [PChar](LootRecastID id)
     {
         const auto PParty = PChar->PParty;
 
         if (!PParty || !PChar->PTreasurePool)
         {
-            return !PChar->PRecastContainer->Has(RECAST_LOOT, id);
+            return !PChar->PRecastContainer->HasLootRecast(id);
         }
 
         for (const auto& member : PChar->PTreasurePool->getMembers())
         {
             if (member->PParty == PParty)
             {
-                if (member->PRecastContainer->Has(RECAST_LOOT, id))
+                if (member->PRecastContainer->HasLootRecast(id))
                 {
                     return false;
                 }
@@ -910,13 +908,13 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Note that the following has been verified to be retail accurate:
     // - Other alliance parties are NOT included in that cooldown.
     // - The cooldown does reset when zoning.
-    auto AddSpecialRecast = [PChar](const uint16 id)
+    auto AddSpecialRecast = [PChar](LootRecastID id)
     {
         const auto PParty = PChar->PParty;
 
         if (!PParty || !PChar->PTreasurePool)
         {
-            PChar->PRecastContainer->Add(RECAST_LOOT, id, SPECIAL_DROP_COOLDOWN);
+            PChar->PRecastContainer->AddLootRecast(id, SPECIAL_DROP_COOLDOWN);
             return;
         }
 
@@ -924,7 +922,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         {
             if (member->PParty == PParty)
             {
-                member->PRecastContainer->Add(RECAST_LOOT, id, SPECIAL_DROP_COOLDOWN);
+                member->PRecastContainer->AddLootRecast(id, SPECIAL_DROP_COOLDOWN);
             }
         }
     };
@@ -1002,21 +1000,21 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         // Check for seal drops
         // Only one type of seal can drop per mob
-        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(RECAST_SEAL))
+        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Seal))
         {
             const auto seals = GetEligibleSeals();
             AddItemToPool(seals[xirand::GetRandomNumber(seals.size())]);
-            AddSpecialRecast(RECAST_SEAL);
+            AddSpecialRecast(LootRecastID::Seal);
         }
 
         // Check for geode/avatarites drops
         // Only one type of geode can drop per mob
-        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(RECAST_GEODE))
+        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Geode))
         {
             if (const auto geodes = GetEligibleGeodes(); !geodes.empty())
             {
                 AddItemToPool(geodes[xirand::GetRandomNumber(geodes.size())]);
-                AddSpecialRecast(RECAST_GEODE);
+                AddSpecialRecast(LootRecastID::Geode);
             }
         }
 
@@ -1120,7 +1118,7 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
     auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
     if (skill_list_id)
     {
-        auto attack_range{ GetMeleeRange() };
+        auto attack_range{ GetMeleeRange(PTarget) };
         auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
 
         if (!skillList.empty())
@@ -1128,13 +1126,13 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
             auto* skill{ battleutils::GetMobSkill(skillList.front()) };
             if (skill)
             {
-                attack_range = (uint8)skill->getDistance();
+                attack_range = modelHitboxSize + skill->getDistance() + PTarget->modelHitboxSize;
             }
         }
 
         bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
         float distanceFromTarget = distance(loc.p, PTarget->loc.p);
-        bool  tooFar             = (distanceFromTarget - PTarget->m_ModelRadius) > attack_range;
+        bool  tooFar             = distanceFromTarget > attack_range;
 
         return !tooFar && autoAttackEnabled;
     }
@@ -1256,11 +1254,11 @@ void CMobEntity::Die()
         {
             if (PLastAttacker)
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::DEFEATS_TARG));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FALLS_TO_GROUND));
             }
 
             DistributeRewards();
@@ -1312,7 +1310,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
     TapDeaggroTime();
 }
 
-void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
+void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
 {
     TracyZoneScoped;
     CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);

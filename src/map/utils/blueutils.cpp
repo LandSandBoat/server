@@ -166,7 +166,7 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
                 {
                     if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                     {
-                        PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
+                        PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MsgBasic::LEARNS_SPELL);
                         charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
                         PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
                     }

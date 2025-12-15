@@ -22,17 +22,79 @@
 #include "ability_state.h"
 
 #include "ability.h"
+#include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
-#include "packets/action.h"
+#include "entities/petentity.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "petskill.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+
+namespace
+{
+// Handle Blood Pacts and Ready distance checks separately.
+// They come in as the final ability to be used through the packets but must pass the intermediary ability distance before triggering
+// Examples:
+// Predator Claws in packet -> PC must pass Blood Pact: Rage (20y) distance check
+// Lamb Chop in packet -> PC must pass Ready (4y) distance check
+auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbility* PAbility) -> bool
+{
+    auto*            PPet      = dynamic_cast<CPetEntity*>(PChar->PPet);
+    const CPetSkill* PPetSkill = battleutils::GetPetSkill(PAbility->getID());
+
+    if (!PPet || !PPetSkill)
+    {
+        return false;
+    }
+
+    if (PPetSkill->isBloodPactRage() || PPetSkill->isBloodPactWard())
+    {
+        // Blood Pacts:
+        // 1 - PC must be within 20y + hitboxes from target
+        // 2 - Avatar must be within skill range + hitboxes from target
+        if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > 20.0f + PChar->modelHitboxSize + PTarget->modelHitboxSize)
+        {
+            return false;
+        }
+
+        if (distance(PPet->loc.p, PTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PTarget->modelHitboxSize)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TARG_OUT_OF_RANGE);
+            return false;
+        }
+    }
+    else if (PPetSkill->getMobSkillID() > 0)
+    {
+        // Jug pet skills:
+        // 1 - PC must be within 4y + hitboxes from pet
+        // 2 - Pet must be within skill range + hitboxes from enemy (if skill targets enemy)
+        if (distance(PChar->loc.p, PPet->loc.p) > 4.0f + PChar->modelHitboxSize + PPet->modelHitboxSize)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::TARG_OUT_OF_RANGE);
+            return false;
+        }
+
+        if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+        {
+            if (auto* PPetTarget = PPet->GetBattleTarget(); PPetTarget && distance(PPet->loc.p, PPetTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PPetTarget->modelHitboxSize)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PPetTarget, 0, 0, MsgBasic::TARG_OUT_OF_RANGE);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+} // namespace
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
 : CState(PEntity, targid)
@@ -42,7 +104,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
 
     if (!PAbility)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UNABLE_TO_USE_JA));
     }
     auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
 
@@ -63,17 +125,24 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
 
     if (m_castTime > 0s && CanUseAbility())
     {
-        action_t action;
-        action.id              = PEntity->id;
-        action.actiontype      = ACTION_WEAPONSKILL_START;
-        auto& list             = action.getNewActionList();
-        list.ActionTargetID    = PTarget->id;
-        auto& actionTarget     = list.getNewActionTarget();
-        actionTarget.reaction  = REACTION::HIT | REACTION::ABILITY; // TODO: not all abilities are HIT + Ability (provoke/chi blast has been observed as only REACTION:ABILITY)
-        actionTarget.animation = 121;
-        actionTarget.messageID = 326;
-        actionTarget.param     = PAbility->getID();
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        action_t action{
+            .actorId    = PEntity->id,
+            .actiontype = ActionCategory::AbilityStart,
+            .targets    = {
+                {
+                       .actorId = PTarget->id,
+                       .results = {
+                        {
+                               .animation = ActionAnimation::SkillStart,
+                               .param     = PAbility->getID(),
+                               .messageID = MsgBasic::READIES_SKILL,
+                        },
+                    },
+                },
+            }
+        };
+
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
 
         // face toward target
@@ -132,33 +201,20 @@ bool CAbilityState::Update(timer::time_point tick)
     {
         if (CanUseAbility())
         {
-            action_t action;
+            action_t action{};
             m_PEntity->OnAbility(*this, action);
             m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            // Only send packet if action was populated (e.g. interrupts return early)
+            if (!action.targets.empty())
+            {
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+            }
             if (auto* target = GetTarget())
             {
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
             }
         }
-        else if (m_castTime > 0s) // Instant abilities do not need to be interrupted
-        {
-            CBaseEntity* PTarget = GetTarget();
 
-            action_t action;
-            action.id         = m_PEntity->id;
-            action.actiontype = ACTION_JOBABILITY_INTERRUPT;
-            action.actionid   = 28787;
-
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.animation       = 0x1FC;
-            actionTarget.reaction        = REACTION::MISS;
-
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-        }
         Complete();
     }
 
@@ -188,7 +244,7 @@ bool CAbilityState::CanUseAbility()
         auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WAIT_LONGER);
             return false;
         }
 
@@ -197,40 +253,39 @@ bool CAbilityState::CanUseAbility()
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UNABLE_TO_USE_JA2);
             return false;
         }
 
         if (PTarget && PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
-            if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())
+            // TODO: Rework the way abilities and pet abilities are laid out so it can all go through the same block and have the pet special checks done in lua
+            const CPetSkill* PPetSkill       = PAbility->isPetAbility() ? battleutils::GetPetSkill(PAbility->getID()) : nullptr;
+            const bool       isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
+            if (PPetSkill && !isLuopanAbility && (PPetSkill->isBloodPactRage() || PPetSkill->isBloodPactWard() || PPetSkill->getMobSkillID() > 0))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+                if (!PetSkillDistanceCheck(PChar, PTarget, PAbility))
+                {
+                    return false;
+                }
+            }
+            else if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange() + PChar->modelHitboxSize + PTarget->modelHitboxSize)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TOO_FAR_AWAY);
                 return false;
             }
 
             if (m_PEntity->loc.zone->CanUseMisc(MISC_LOS_PLAYER_BLOCK) && !m_PEntity->CanSeeTarget(PTarget, false))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::UNABLE_TO_SEE_TARG);
                 return false;
-            }
-
-            // TODO: Remove this when all pet abilities are moved to PetSkill system.
-            if (PAbility->getID() >= ABILITY_HEALING_RUBY && !battleutils::GetPetSkill(PAbility->getID()))
-            {
-                // Blood pact MP costs are stored under animation ID
-                if (PChar->health.mp < PAbility->getAnimationID())
-                {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
-                    return false;
-                }
             }
 
             CBaseEntity* PMsgTarget = PChar;
             int32        errNo      = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
             if (errNo != 0)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), static_cast<MSGBASIC_ID>(errNo));
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), static_cast<MsgBasic>(errNo));
                 return false;
             }
             return true;
@@ -239,7 +294,6 @@ bool CAbilityState::CanUseAbility()
     }
     else
     {
-        bool   tooFarAway      = false;
         bool   cancelAbility   = false;
         bool   hasAmnesia      = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA);
         bool   hasImpairment   = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT);
@@ -258,38 +312,14 @@ bool CAbilityState::CanUseAbility()
 
         if (PTarget && m_PEntity->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
-            if (m_PEntity != PTarget && distance(m_PEntity->loc.p, PTarget->loc.p) > PAbility->getRange())
+            if (m_PEntity != PTarget && distance(m_PEntity->loc.p, PTarget->loc.p) > PAbility->getRange() + m_PEntity->modelHitboxSize + PTarget->modelHitboxSize)
             {
                 cancelAbility = true;
-                tooFarAway    = true;
             }
         }
 
         if (cancelAbility)
         {
-            // Only create a packet if the ability isn't instant
-            if (m_castTime > 0s)
-            {
-                // Create this action packet that also sort of looks like an animation cancel packet to emit a red "Target is too far away" message.
-                // Captured from a red "<target> is too far away" message from healing breath IV
-                action_t action;
-
-                action.id         = m_PEntity->id;
-                action.actiontype = ACTION_MAGIC_FINISH;
-                action.actionid   = 0;
-
-                actionList_t& actionList  = action.getNewActionList();
-                actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
-
-                actionTarget_t& actionTarget = actionList.getNewActionTarget();
-                actionTarget.animation       = 0x1FC;
-                actionTarget.reaction        = REACTION::MISS;
-                actionTarget.speceffect      = static_cast<SPECEFFECT>(0x24);
-                actionTarget.param           = 0; // Observed as 639 on retail, but I'm not sure that it actually does anything.
-                actionTarget.messageID       = tooFarAway ? MSGBASIC_TOO_FAR_AWAY_RED : 0;
-
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-            }
             return false;
         }
 

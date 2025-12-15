@@ -266,27 +266,29 @@ void CInstance::ClearEntities()
         }
     };
 
-    // clang-format off
-    ForEachChar([&](CCharEntity* PChar)
-    {
-        clearStates(PChar);
-    });
+    ForEachChar(
+        [&](CCharEntity* PChar)
+        {
+            clearStates(PChar);
+        });
 
-    ForEachMob([&](CMobEntity* PMob)
-    {
-        clearStates(PMob);
-    });
+    ForEachMob(
+        [&](CMobEntity* PMob)
+        {
+            clearStates(PMob);
+        });
 
-    ForEachPet([&](CPetEntity* PPet)
-    {
-        clearStates(PPet);
-    });
+    ForEachPet(
+        [&](CPetEntity* PPet)
+        {
+            clearStates(PPet);
+        });
 
-    ForEachTrust([&](CTrustEntity* PTrust)
-    {
-        clearStates(PTrust);
-    });
-    // clang-format on
+    ForEachTrust(
+        [&](CTrustEntity* PTrust)
+        {
+            clearStates(PTrust);
+        });
 }
 
 void CInstance::Fail()

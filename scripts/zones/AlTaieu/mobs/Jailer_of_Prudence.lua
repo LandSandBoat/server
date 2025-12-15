@@ -109,7 +109,7 @@ entity.onMobFight = function(mob, target)
 
         if targetSwitched then
             if
-                mob:checkDistance(target) > mob:getMeleeRange()
+                mob:checkDistance(target) > mob:getMeleeRange(target)
             then
                 teleportToTarget(mob, target, currentTargetId)
             end

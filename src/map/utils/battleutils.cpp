@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -36,7 +36,7 @@
 
 #include "lua/luautils.h"
 
-#include "ability.h"
+#include "action/action.h"
 #include "ai/ai_container.h"
 #include "ai/controllers/pet_controller.h"
 #include "ai/controllers/player_charm_controller.h"
@@ -49,6 +49,8 @@
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/action/hit_distortion.h"
+#include "enums/action/info.h"
 #include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
@@ -160,7 +162,7 @@ void LoadSkillTable()
 void LoadWeaponSkillsList()
 {
     const auto rset = db::preparedStmt("SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
-                                       "animationTime, `range`, aoe, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
+                                       "animationTime, `range`, aoe, radius, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
                                        "FROM weapon_skills "
                                        "WHERE weaponskillid < ? "
                                        "ORDER BY type, skilllevel ASC",
@@ -186,6 +188,7 @@ void LoadWeaponSkillsList()
         PWeaponSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
         PWeaponSkill->setRange(rset->get<uint8>("range"));
         PWeaponSkill->setAoe(rset->get<uint8>("aoe"));
+        PWeaponSkill->setRadius(rset->get<uint8>("radius"));
         PWeaponSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PWeaponSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PWeaponSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
@@ -221,11 +224,11 @@ void LoadMobSkillsList()
         PMobSkill->setValidTargets(rset->get<uint16>("mob_valid_targets"));
         PMobSkill->setFlag(rset->get<uint8>("mob_skill_flag"));
         PMobSkill->setParam(rset->get<int16>("mob_skill_param"));
-        PMobSkill->setKnockback(rset->get<uint8>("knockback"));
+        PMobSkill->setKnockback(rset->get<Knockback>("knockback"));
         PMobSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PMobSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PMobSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
-        PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
+        PMobSkill->setMsg(MsgBasic::USES_SKILL_TAKES_DAMAGE); // standard damage message. Scripters will change this.
         g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
         auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
@@ -246,7 +249,7 @@ void LoadPetSkillsList()
 {
     // Load all pet skills
     const auto rset = db::preparedStmt("SELECT pet_skill_id, pet_anim_id, pet_skill_name, "
-                                       "pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, "
+                                       "pet_skill_aoe, pet_skill_radius, pet_skill_distance, pet_anim_time, pet_prepare_time, "
                                        "pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc, mob_skill_id "
                                        "FROM pet_skills");
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -256,11 +259,12 @@ void LoadPetSkillsList()
         PPetSkill->setAnimationID(rset->get<uint16>("pet_anim_id"));
         PPetSkill->setName(rset->get<std::string>("pet_skill_name"));
         PPetSkill->setAoe(rset->get<uint8>("pet_skill_aoe"));
+        PPetSkill->setRadius(rset->get<uint8>("pet_skill_radius"));
         PPetSkill->setDistance(rset->get<float>("pet_skill_distance"));
         PPetSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("pet_anim_time")));
         PPetSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("pet_prepare_time")));
         PPetSkill->setValidTargets(rset->get<uint16>("pet_valid_targets"));
-        PPetSkill->setMsg(rset->get<uint16>("pet_message"));
+        PPetSkill->setMsg(rset->get<MsgBasic>("pet_message"));
         PPetSkill->setFlag(rset->get<uint8>("pet_skill_flag"));
         PPetSkill->setParam(rset->get<int16>("pet_skill_param"));
         PPetSkill->setSkillFinishCategory(rset->get<uint8>("pet_skill_finish_category"));
@@ -747,10 +751,10 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
  *                                                                       *
  ************************************************************************/
 
-int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
+int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint16 damageTaken)
 {
-    ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
-    int32   damage       = Action->spikesParam;
+    const auto spikeElement = static_cast<ELEMENT>(static_cast<uint8>(GetSpikesDamageType(Action->spikesEffect)) - (uint8)DAMAGE_TYPE::ELEMENTAL);
+    int32      damage       = Action->spikesParam;
 
     if (PDefender->getMod(Mod::SPIKES_DMG_BONUS) > 0)
     {
@@ -767,16 +771,16 @@ int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, a
 
     if (damage < 0) // apply heal message
     {
-        Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HEAL;
+        Action->spikesMessage = MsgBasic::SPIKES_EFFECT_HEAL;
     }
 
     return damage;
 }
 
-bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
+auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, const int32 damage) -> bool
 {
-    Action->spikesEffect  = (SUBEFFECT)PDefender->getMod(Mod::SPIKES);
-    Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_DMG;
+    Action->spikesEffect  = static_cast<ActionReactKind>(PDefender->getMod(Mod::SPIKES));
+    Action->spikesMessage = MsgBasic::SPIKES_EFFECT_DMG;
     Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::SPIKES_DMG), 0);
 
     // Handle Retaliation
@@ -787,12 +791,12 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
         // Other theories exist but were not proven or reliably tested (I have to assume too many things to even consider JP translations about weapon
         // delay), this at least has data to back it up.
         // https://web.archive.org/web/20141228105335/http://www.bluegartr.com/threads/120193-Retaliation-Testing?s=7a6221e10ffdfaa6a7f5e8f0387f787d&p=4620727&viewfull=1#post4620727
-        Action->reaction     = REACTION::HIT;
-        Action->spikesEffect = SUBEFFECT_COUNTER;
+        Action->resolution   = ActionResolution::Hit;
+        Action->spikesEffect = ActionReactKind::Counter;
 
         if (battleutils::IsAbsorbByShadow(PAttacker, PDefender)) // Struck a shadow
         {
-            Action->spikesMessage = 535;
+            Action->spikesMessage = MsgBasic::RETALIATE_SHADOW_ABSORBS;
         }
         else // Struck the target
         {
@@ -810,37 +814,37 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                 }
 
                 // Check for skillup
-                charutils::TrySkillUP((CCharEntity*)PDefender, skilltype, PAttacker->GetMLevel());
+                charutils::TrySkillUP(static_cast<CCharEntity*>(PDefender), skilltype, PAttacker->GetMLevel());
             }
 
             // Check if crit
-            bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
+            const bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
             // Dmg math.
-            float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.0f, skilltype, SLOT_MAIN, false);
-            uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
-            dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg, PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
-            uint16 bonus       = dmg * (PDefender->getMod(Mod::RETALIATION) / 100);
-            dmg                = dmg + bonus;
+            const float DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.0f, skilltype, SLOT_MAIN, false);
+            uint16      dmg         = static_cast<uint32>((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
+            dmg                     = attackutils::CheckForDamageMultiplier(static_cast<CCharEntity*>(PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg, PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
+            const uint16 bonus      = dmg * (PDefender->getMod(Mod::RETALIATION) / 100);
+            dmg                     = dmg + bonus;
 
             // TP and stoneskin are handled inside TakePhysicalDamage
-            Action->spikesMessage = 536;
+            Action->spikesMessage = MsgBasic::RETALIATE_DAMAGE;
             Action->spikesParam =
                 battleutils::TakePhysicalDamage(PDefender, PAttacker, PHYSICAL_ATTACK_TYPE::NORMAL, dmg, false, SLOT_MAIN, 1, nullptr, true, true, true);
         }
     }
 
     // Handle spikes from spells or auto-spikes (scripted) effects
-    else if (Action->spikesEffect > 0)
+    else if (Action->spikesEffect != ActionReactKind::None)
     {
         // check if spikes are handled in mobs script
-        if (PDefender->objtype == TYPE_MOB && ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) > 0)
+        if (PDefender->objtype == TYPE_MOB && static_cast<CMobEntity*>(PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) > 0)
         {
             luautils::OnSpikesDamage(PDefender, PAttacker, Action, Action->spikesParam);
         }
 
         // calculate damage
-        int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+        int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, static_cast<uint16>(abs(damage)));
         if (spikesDamage > 0)
         {
             spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
@@ -857,7 +861,7 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
             Action->spikesParam = static_cast<uint16>(spikesDamage);
         }
 
-        if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
+        if (PDefender->objtype != TYPE_MOB || static_cast<CMobEntity*>(PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
         {
             switch (static_cast<SPIKES>(Action->spikesEffect))
             {
@@ -871,20 +875,19 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                     if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
                     {
                         // is undead no effect
-                        Action->spikesEffect = (SUBEFFECT)0;
+                        Action->spikesEffect = ActionReactKind::None;
                         return false;
                     }
                     else
                     {
                         if (PDefender->isAlive())
                         {
-                            auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
-                            if (PEffect)
+                            if (auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES))
                             {
                                 // see https://www.bg-wiki.com/ffxi/Dread_Spikes
 
                                 // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
-                                int remainingDrain = PEffect->GetSubPower();
+                                const int remainingDrain = PEffect->GetSubPower();
                                 if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
                                 {
                                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
@@ -897,7 +900,7 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
 
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
-                                Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                Action->spikesMessage = MsgBasic::SPIKES_EFFECT_HP_DRAIN;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -906,14 +909,14 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                     break;
 
                 case SPIKE_REPRISAL:
-                    if ((Action->reaction & REACTION::BLOCK) == REACTION::BLOCK)
+                    if (Action->resolution == ActionResolution::Block)
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
                     else
                     {
                         // only works on shield blocks
-                        Action->spikesEffect = (SUBEFFECT)0;
+                        Action->spikesEffect = ActionReactKind::None;
                         return false;
                     }
                     break;
@@ -946,11 +949,11 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                 {
                     uint8 chance = 0;
 
-                    Action->spikesEffect = (SUBEFFECT)0;
+                    Action->spikesEffect = ActionReactKind::None;
                     auto spikes_type     = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_SUBEFFECT);
                     if (spikes_type > 0 && spikes_type < 7)
                     {
-                        Action->spikesEffect = (SUBEFFECT)spikes_type;
+                        Action->spikesEffect = static_cast<ActionReactKind>(spikes_type);
                     }
 
                     Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
@@ -961,7 +964,7 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                         PMobAtt->m_HiPCLvl = std::max(PMobAtt->m_HiPCLvl, PDefender->GetMLevel());
                     }
 
-                    if (Action->spikesEffect && HandleSpikesEquip(PAttacker, PDefender, Action, (uint8)Action->spikesParam, Action->spikesEffect, chance))
+                    if (Action->spikesEffect != ActionReactKind::None && HandleSpikesEquip(PAttacker, PDefender, Action, static_cast<uint8>(Action->spikesParam), Action->spikesEffect, chance))
                     {
                         return true;
                     }
@@ -969,24 +972,24 @@ bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
             }
         }
     }
-    else if (Action->spikesEffect == 0)
+    else if (Action->spikesEffect == ActionReactKind::None)
     {
         Action->spikesParam   = 0;
-        Action->spikesMessage = 0;
+        Action->spikesMessage = MsgBasic::NONE;
     }
     return false;
 }
 
-bool HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
+auto HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, const int32 damage) -> bool
 {
-    Action->spikesEffect  = (SUBEFFECT)PDefender->getMod(Mod::PARRY_SPIKES);
-    Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_DMG;
+    Action->spikesEffect  = static_cast<ActionReactKind>(PDefender->getMod(Mod::PARRY_SPIKES));
+    Action->spikesMessage = MsgBasic::SPIKES_EFFECT_DMG;
     Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::PARRY_SPIKES_DMG), 0);
 
-    if (Action->spikesEffect > 0)
+    if (Action->spikesEffect != ActionReactKind::None)
     {
         // calculate damage
-        int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+        int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, static_cast<uint16>(abs(damage)));
         if (spikesDamage > 0)
         {
             spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
@@ -1012,24 +1015,25 @@ bool HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
         }
         return true;
     }
+
     return false;
 }
 
-bool HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance)
+auto HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, const uint8 damage, const ActionReactKind spikesType, const uint8 chance) -> bool
 {
     int lvlDiff = std::clamp((PDefender->GetMLevel() - PAttacker->GetMLevel()), -5, 5) * 2;
 
     if (xirand::GetRandomNumber(100) < chance + lvlDiff)
     {
-        if (spikesType == SUBEFFECT_CURSE_SPIKES)
+        if (spikesType == ActionReactKind::CurseSpikes)
         {
-            Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
+            Action->spikesMessage = MsgBasic::STATUS_SPIKES;
             Action->spikesParam   = EFFECT_CURSE;
         }
         /* Todo: wire this up fully.
         else if (spikesType == SUBEFFECT_DEATH_SPIKES)
         {
-            Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
+            Action->spikesMessage = MsgBasic::STATUS_SPIKES;
             Action->spikesParam   = EFFECT_KO;
             PDefender->setHP(0);
         }
@@ -1067,15 +1071,15 @@ bool HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actio
     {
         // Technically, these should be the default values and then conditional branches change them
         // However, it wasn't worth the effort when the whole thing is going to be eventually burned down to make way for fully scripted spikes
-        Action->spikesEffect  = SUBEFFECT_NONE;
+        Action->spikesEffect  = ActionReactKind::None;
         Action->spikesParam   = 0;
-        Action->spikesMessage = 0;
+        Action->spikesMessage = MsgBasic::NONE;
     }
 
     return false;
 }
 
-void HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action)
+void HandleSpikesStatusEffect(const CBattleEntity* PAttacker, const CBattleEntity* PDefender, const action_result_t* Action)
 {
     int lvlDiff = 0;
     if (PDefender)
@@ -1085,7 +1089,7 @@ void HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender
 
     switch (Action->spikesEffect)
     {
-        case SUBEFFECT_CURSE_SPIKES:
+        case ActionReactKind::CurseSpikes:
         {
             if (!PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE))
             {
@@ -1093,7 +1097,7 @@ void HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender
             }
             break;
         }
-        case SUBEFFECT_ICE_SPIKES:
+        case ActionReactKind::IceSpikes:
         {
             if (xirand::GetRandomNumber(100) < 20 + lvlDiff && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_PARALYSIS))
             {
@@ -1101,7 +1105,7 @@ void HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender
             }
             break;
         }
-        case SUBEFFECT_SHOCK_SPIKES:
+        case ActionReactKind::ShockSpikes:
         {
             if (xirand::GetRandomNumber(100) < 30 + lvlDiff && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STUN))
             {
@@ -1120,7 +1124,7 @@ void HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender
  *                                                                       *
  ************************************************************************/
 
-void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 finaldamage, CAttack& attack)
+void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 finaldamage, CAttack& attack)
 {
     CCharEntity* PChar = nullptr;
 
@@ -1190,8 +1194,8 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                     {
                         PMob->m_THLvl++;
 
-                        Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE; // Looks like enlight, and is reflected in the capture
-                        Action->addEffectMessage = static_cast<uint16>(MsgStd::TreasureHunterProc);
+                        Action->additionalEffect = ActionProcAddEffect::LightDamage; // Looks like enlight, and is reflected in the capture
+                        Action->addEffectMessage = static_cast<MsgBasic>(MsgStd::TreasureHunterProc);
                         Action->addEffectParam   = PMob->m_THLvl;
                         return;
                     }
@@ -1200,8 +1204,8 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
         }
     }
 
-    Action->additionalEffect = SUBEFFECT_NONE;
-    Action->addEffectMessage = 0;
+    Action->additionalEffect = ActionProcAddEffect::None;
+    Action->addEffectMessage = MsgBasic::NONE;
     Action->addEffectParam   = 0;
 
     EFFECT previous_daze       = EFFECT_NONE;
@@ -1273,23 +1277,23 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
          (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100))) ||
         PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement means we deal enspell damage
     {
-        static SUBEFFECT enspell_subeffects[8] = {
-            SUBEFFECT_FIRE_DAMAGE,
-            SUBEFFECT_ICE_DAMAGE,
-            SUBEFFECT_WIND_DAMAGE,
-            SUBEFFECT_EARTH_DAMAGE,
-            SUBEFFECT_LIGHTNING_DAMAGE,
-            SUBEFFECT_WATER_DAMAGE,
-            SUBEFFECT_LIGHT_DAMAGE,
-            SUBEFFECT_DARKNESS_DAMAGE,
+        static ActionProcAddEffect enspell_subeffects[8] = {
+            ActionProcAddEffect::FireDamage,
+            ActionProcAddEffect::IceDamage,
+            ActionProcAddEffect::WindDamage,
+            ActionProcAddEffect::EarthDamage,
+            ActionProcAddEffect::LightningDamage,
+            ActionProcAddEffect::WaterDamage,
+            ActionProcAddEffect::LightDamage,
+            ActionProcAddEffect::DarkDamage,
         };
 
         uint8 enspell = (uint8)PAttacker->getMod(Mod::ENSPELL);
 
         if (enspell == ENSPELL_BLOOD_WEAPON && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
         {
-            Action->additionalEffect = SUBEFFECT_HP_DRAIN;
-            Action->addEffectMessage = 161;
+            Action->additionalEffect = ActionProcAddEffect::HPDrain;
+            Action->addEffectMessage = MsgBasic::ADD_EFFECT_HP_DRAINED;
 
             // Increase HP Absorbed by 2% per JP
             int32 absorbed = Action->param;
@@ -1333,25 +1337,25 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
             if (Action->addEffectParam < 0)
             {
                 Action->addEffectParam   = -Action->addEffectParam;
-                Action->addEffectMessage = 384;
+                Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
             }
             else
             {
-                Action->addEffectMessage = 229;
+                Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
             }
 
             PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, damageType);
         }
         else if (enspell == ENSPELL_AUSPICE && isFirstSwing)
         {
-            Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
-            Action->addEffectMessage = 229;
+            Action->additionalEffect = ActionProcAddEffect::LightDamage;
+            Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
             Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7, weapon);
 
             if (Action->addEffectParam < 0)
             {
                 Action->addEffectParam   = -Action->addEffectParam;
-                Action->addEffectMessage = 384;
+                Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
             }
 
             PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -1377,16 +1381,16 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                 }
             }
 
-            if (Action->additionalEffect)
+            if (Action->hasAdditionalEffect())
             {
                 if (Action->addEffectParam < 0)
                 {
                     Action->addEffectParam   = -Action->addEffectParam;
-                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_RECOVERS_HP;
+                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
                 }
                 else
                 {
-                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_ADDITIONAL_DAMAGE;
+                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
                 }
 
                 PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -1395,11 +1399,11 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
     }
     // check weapon for additional effects
     else if (PAttacker->objtype == TYPE_PC && battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
-             luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->additionalEffect)
+             luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
     {
-        if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
+        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
         {
-            Action->addEffectMessage = 384; // TODO: enums instead of raw IDs
+            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
         }
     }
     // check script for grip if main failed
@@ -1407,19 +1411,19 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
              static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB))->getSkillType() == SKILL_NONE &&
              battleutils::GetScaledItemModifier(PAttacker, static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB), Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
              luautils::additionalEffectAttack(PAttacker, PDefender, static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB)), Action, finaldamage) == 0 &&
-             Action->additionalEffect)
+             Action->hasAdditionalEffect())
     {
-        if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
+        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
         {
-            Action->addEffectMessage = 384;
+            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
         }
     }
     else if (PAttacker->objtype == TYPE_MOB && ((CMobEntity*)PAttacker)->getMobMod(MOBMOD_ADD_EFFECT) > 0)
     {
         luautils::OnAdditionalEffect(PAttacker, PDefender, Action, finaldamage);
-        if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
+        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
         {
-            Action->addEffectMessage = 384;
+            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
         }
     }
     else
@@ -1519,8 +1523,8 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                     Samba = 0;
                 }
 
-                Action->additionalEffect = SUBEFFECT_HP_DRAIN;
-                Action->addEffectMessage = 161;
+                Action->additionalEffect = ActionProcAddEffect::HPDrain;
+                Action->addEffectMessage = MsgBasic::ADD_EFFECT_HP_DRAINED;
                 Action->addEffectParam   = Samba;
 
                 PAttacker->addHP(Samba); // does not do any additional damage to targets HP, only heals the attacker
@@ -1548,8 +1552,8 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                     Samba = 0;
                 }
 
-                Action->additionalEffect = SUBEFFECT_MP_DRAIN;
-                Action->addEffectMessage = 162;
+                Action->additionalEffect = ActionProcAddEffect::MPDrain;
+                Action->addEffectMessage = MsgBasic::ADD_EFFECT_MP_DRAINED;
 
                 int16 mpDrained = PDefender->addMP(-Samba);
 
@@ -1563,7 +1567,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
             }
             else if (daze == EFFECT_HASTE_DAZE && power > 0)
             {
-                Action->additionalEffect = SUBEFFECT_HASTE;
+                Action->additionalEffect = ActionProcAddEffect::Haste;
                 // Ability haste added in scripts\globals\effects\haste_samba_haste_effect.lua
                 PAttacker->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HASTE_SAMBA_HASTE, 0, power, 0s, 10s));
                 // Status effect removed in CAttackRound constructor (i.e. after next attack round is calculated)
@@ -1572,91 +1576,19 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  Handle Ranged weapon's additional effects (e.g. Bolts)               *
- *                                                                       *
- ************************************************************************/
-
-void HandleRangedAdditionalEffect(CCharEntity* PAttacker, CBattleEntity* PDefender, apAction_t* Action)
-{
-    // TODO: remove function
-}
-
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus)
 {
-    int  acc                   = 0;
-    int  hitrate               = 75;
-    auto rangedPenaltyFunction = lua["xi"]["combat"]["ranged"]["accuracyDistancePenalty"];
-    auto distancePenaltyResult = rangedPenaltyFunction(PAttacker, PDefender);
-    int  distancePenalty       = 0;
-
     // Check to see if distance is greater than 25 and force hitrate to be 0
     if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
     {
         return 0;
     }
 
-    if (!distancePenaltyResult.valid())
-    {
-        sol::error err = distancePenaltyResult;
-        ShowError("battleutils::GetRangedHitRate: %s", err.what());
-    }
-    else
-    {
-        distancePenalty = distancePenaltyResult.get_type() == sol::type::number ? distancePenaltyResult.get<int16>(0) : 0;
-    }
+    double luaHitRate = luautils::callGlobal<double>("xi.combat.physicalHitRate.getRangedHitRate", PAttacker, PDefender, accBonus, false);
 
-    if (PAttacker->objtype == TYPE_PC)
-    {
-        CCharEntity* PChar = (CCharEntity*)PAttacker;
-        CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+    uint8 hitrate = std::floor<uint8>(luaHitRate * 100.0);
 
-        if (PItem == nullptr || !PItem->isType(ITEM_WEAPON))
-        {
-            // try throwing weapon
-            PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-        }
-
-        if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
-        {
-            acc = PChar->RACC(PItem->getSkillType());
-        }
-
-        // Check For Ambush Merit - Ranged
-        if ((charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
-        {
-            acc += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
-        }
-    }
-    else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
-    {
-        acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
-    }
-    else if (PAttacker->objtype == TYPE_TRUST)
-    {
-        auto archery_acc      = PAttacker->RACC(SKILL_ARCHERY);
-        auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP);
-        auto throwing_acc     = PAttacker->RACC(SKILL_THROWING);
-
-        acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
-    }
-    // Check for Yonin evasion bonus while in front of target
-    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
-    {
-        acc -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
-    }
-
-    // Add any specific accuracy bonus, e.g. Daken RAcc +100
-    acc += accBonus;
-
-    acc -= distancePenalty;
-
-    int eva = PDefender->EVA();
-    hitrate = hitrate + (acc - eva) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
-
-    uint8 finalhitrate = std::clamp(hitrate, 20, 95);
-    return finalhitrate;
+    return hitrate;
 }
 
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage)
@@ -2114,9 +2046,35 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
 
         damage = damage * formlessMod / 100;
 
-        // TODO: chance to 'resist'
-        // breath damage, not magic damage
-        damage = BreathDmgTaken(PDefender, damage);
+        float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.0f;
+        resist       = std::max(resist, 0.0f);
+        damage       = (int32)(damage * resist);
+
+        resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 10000.0f + PDefender->getMod(Mod::DMG) / 10000.0f;
+        resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
+        damage = (int32)(damage * resist);
+
+        // TODO: Breaths can have elements. Where are those handled for absorption and nullification.
+
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE)) // All damage.
+        {
+            damage = -damage;
+        }
+
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
+        {
+            damage = 0;
+        }
+
+        else
+        {
+            damage = HandleSevereDamage(PDefender, damage, false);
+        }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
     }
     else
     {
@@ -2718,7 +2676,7 @@ uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 att
     {
         double luaHitRate = luautils::callGlobal<double>("xi.combat.physicalHitRate.getPhysicalHitRate", PAttacker, PDefender, offsetAccuracy, attackNumber, false);
 
-        hitrate = std::floor<uint8>(std::clamp<double>(luaHitRate * 100.0, 20.0, 99.0));
+        hitrate = std::floor<uint8>(luaHitRate * 100);
     }
     return static_cast<uint8>(hitrate);
 }
@@ -3514,32 +3472,32 @@ bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender)
  ************************************************************************/
 #define PAIR(x, y) (((x) << 8) + (y))
 
-uint8 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain)
+auto GetSkillchainSubeffect(const SKILLCHAIN_ELEMENT skillchain) -> ActionProcSkillChain
 {
     if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
     {
         ShowWarning("battleutils::GetSkillchainSubeffect() - Invalid Element passed to function.");
-        return 0;
+        return ActionProcSkillChain::None;
     }
 
-    static const uint8 effects[] = {
-        SUBEFFECT_NONE,          // SC_NONE
-        SUBEFFECT_TRANSFIXION,   // SC_TRANSFIXION
-        SUBEFFECT_COMPRESSION,   // SC_COMPRESSION
-        SUBEFFECT_LIQUEFACATION, // SC_LIQUEFACTION
-        SUBEFFECT_SCISSION,      // SC_SCISSION
-        SUBEFFECT_REVERBERATION, // SC_REVERBERATION
-        SUBEFFECT_DETONATION,    // SC_DETONATION
-        SUBEFFECT_INDURATION,    // SC_INDURATION
-        SUBEFFECT_IMPACTION,     // SC_IMPACTION
-        SUBEFFECT_GRAVITATION,   // SC_GRAVITATION
-        SUBEFFECT_DISTORTION,    // SC_DISTORTION
-        SUBEFFECT_FUSION,        // SC_FUSION
-        SUBEFFECT_FRAGMENTATION, // SC_FRAGMENTATION
-        SUBEFFECT_LIGHT,         // SC_LIGHT
-        SUBEFFECT_DARKNESS,      // SC_DARKNESS
-        SUBEFFECT_LIGHT,         // SC_LIGHT_II
-        SUBEFFECT_DARKNESS,      // SC_DARKNESS_II
+    static constexpr ActionProcSkillChain effects[] = {
+        ActionProcSkillChain::None,          // SC_NONE
+        ActionProcSkillChain::Transfixion,   // SC_TRANSFIXION
+        ActionProcSkillChain::Compression,   // SC_COMPRESSION
+        ActionProcSkillChain::Liquefaction,  // SC_LIQUEFACTION
+        ActionProcSkillChain::Scission,      // SC_SCISSION
+        ActionProcSkillChain::Reverberation, // SC_REVERBERATION
+        ActionProcSkillChain::Detonation,    // SC_DETONATION
+        ActionProcSkillChain::Induration,    // SC_INDURATION
+        ActionProcSkillChain::Impaction,     // SC_IMPACTION
+        ActionProcSkillChain::Gravitation,   // SC_GRAVITATION
+        ActionProcSkillChain::Distortion,    // SC_DISTORTION
+        ActionProcSkillChain::Fusion,        // SC_FUSION
+        ActionProcSkillChain::Fragmentation, // SC_FRAGMENTATION
+        ActionProcSkillChain::Light,         // SC_LIGHT
+        ActionProcSkillChain::Darkness,      // SC_DARKNESS
+        ActionProcSkillChain::Light,         // SC_LIGHT_II
+        ActionProcSkillChain::Darkness,      // SC_DARKNESS_II
     };
 
     return effects[skillchain];
@@ -3641,115 +3599,113 @@ SKILLCHAIN_ELEMENT FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance
     return SC_NONE;
 }
 
-SUBEFFECT GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary)
+auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary) -> ActionProcSkillChain
 {
     CStatusEffect*     PSCEffect           = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
     CStatusEffect*     PCBEffect           = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_CHAINBOUND, 0);
     SKILLCHAIN_ELEMENT skillchain          = SC_NONE;
-    auto               combined_properties = primary | (secondary << 4) | (tertiary << 8);
+    const auto         combined_properties = primary | (secondary << 4) | (tertiary << 8);
 
     if (PSCEffect == nullptr && PCBEffect == nullptr)
     {
         // No effect exists, apply an effect using the weaponskill ID as the power with a tier of 0.
         PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SKILLCHAIN, 0, combined_properties, 0s, 10s, 0, 0, 0));
-        return SUBEFFECT_NONE;
+        return ActionProcSkillChain::None;
     }
-    else
+
+    std::list<SKILLCHAIN_ELEMENT>       resonanceProperties;
+    const std::list<SKILLCHAIN_ELEMENT> skillProperties = { static_cast<SKILLCHAIN_ELEMENT>(primary), static_cast<SKILLCHAIN_ELEMENT>(secondary), static_cast<SKILLCHAIN_ELEMENT>(tertiary) };
+
+    // Chainbound active on target
+    if (PCBEffect)
     {
-        std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-        std::list<SKILLCHAIN_ELEMENT> skillProperties = { (SKILLCHAIN_ELEMENT)primary, (SKILLCHAIN_ELEMENT)secondary, (SKILLCHAIN_ELEMENT)tertiary };
-
-        // Chainbound active on target
-        if (PCBEffect)
+        if (PCBEffect->GetStartTime() + 2s < timer::now())
         {
-            if (PCBEffect->GetStartTime() + 2s < timer::now())
+            // Konzen-Ittai
+            if (PCBEffect->GetPower() > 1)
             {
-                // Konzen-Ittai
-                if (PCBEffect->GetPower() > 1)
-                {
-                    resonanceProperties.emplace_back(SC_LIGHT);
-                    resonanceProperties.emplace_back(SC_DARKNESS);
-                    resonanceProperties.emplace_back(SC_GRAVITATION);
-                    resonanceProperties.emplace_back(SC_FRAGMENTATION);
-                    resonanceProperties.emplace_back(SC_DISTORTION);
-                    resonanceProperties.emplace_back(SC_FUSION);
-                }
-                resonanceProperties.emplace_back(SC_LIQUEFACTION);
-                resonanceProperties.emplace_back(SC_INDURATION);
-                resonanceProperties.emplace_back(SC_REVERBERATION);
-                resonanceProperties.emplace_back(SC_IMPACTION);
-                resonanceProperties.emplace_back(SC_COMPRESSION);
-
-                skillchain = FormSkillchain(resonanceProperties, skillProperties);
+                resonanceProperties.emplace_back(SC_LIGHT);
+                resonanceProperties.emplace_back(SC_DARKNESS);
+                resonanceProperties.emplace_back(SC_GRAVITATION);
+                resonanceProperties.emplace_back(SC_FRAGMENTATION);
+                resonanceProperties.emplace_back(SC_DISTORTION);
+                resonanceProperties.emplace_back(SC_FUSION);
             }
-            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SKILLCHAIN, 0, combined_properties, 0s, 10s, 0, 0, 0));
-            PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_CHAINBOUND);
-            PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+            resonanceProperties.emplace_back(SC_LIQUEFACTION);
+            resonanceProperties.emplace_back(SC_INDURATION);
+            resonanceProperties.emplace_back(SC_REVERBERATION);
+            resonanceProperties.emplace_back(SC_IMPACTION);
+            resonanceProperties.emplace_back(SC_COMPRESSION);
+
+            skillchain = FormSkillchain(resonanceProperties, skillProperties);
         }
-        // Previous effect exists
-        else if (PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now())
-        {
-            if (PSCEffect->GetTier() == 0)
-            {
-                if (!PSCEffect->GetPower())
-                {
-                    ShowWarning("PSCEffect Power was 0.");
-                    return SUBEFFECT_NONE;
-                }
-
-                // Previous effect is an opening effect, meaning the power is
-                // actually the ID of the opening weaponskill.  We need all 3
-                // of the possible skillchain properties on the initial link.
-                auto properties = PSCEffect->GetPower();
-                resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(properties & 0b1111));
-                resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((properties >> 4) & 0b1111));
-                resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((properties >> 8) & 0b1111));
-                skillchain = FormSkillchain(resonanceProperties, skillProperties);
-            }
-            else
-            {
-                // Previous effect is not an opening effect, meaning the power is
-                // The skill chain ID resonating.
-                resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
-                skillchain = FormSkillchain(resonanceProperties, skillProperties);
-            }
-        }
-
-        Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
-
-        // Reset the effects resistance rank mods
-        for (auto& resistanceRank : resistanceRankMods)
-        {
-            PSCEffect->setMod(resistanceRank, 0);
-        }
-
-        if (skillchain != SC_NONE)
-        {
-            PSCEffect->SetStartTime(timer::now());
-            PSCEffect->SetDuration(PSCEffect->GetDuration() - 1s);
-            PSCEffect->SetTier(GetSkillchainTier(skillchain));
-            PSCEffect->SetPower(skillchain);
-            PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
-
-            // Set new resistance rank modifiers
-            // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
-            for (auto& element : GetSkillchainMagicElement(skillchain))
-            {
-                Mod resistanceRankMod = GetResistanceRankModFromElement(element);
-                PSCEffect->setMod(resistanceRankMod, -1);
-            }
-
-            return (SUBEFFECT)GetSkillchainSubeffect(skillchain);
-        }
-
-        PSCEffect->SetStartTime(timer::now());
-        PSCEffect->SetDuration(10s);
-        PSCEffect->SetTier(0);
-        PSCEffect->SetPower(combined_properties);
-        PSCEffect->SetSubPower(0);
-
-        return SUBEFFECT_NONE;
+        PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SKILLCHAIN, 0, combined_properties, 0s, 10s, 0, 0, 0));
+        PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_CHAINBOUND);
+        PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
     }
+    // Previous effect exists
+    else if (PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now())
+    {
+        if (PSCEffect->GetTier() == 0)
+        {
+            if (!PSCEffect->GetPower())
+            {
+                ShowWarning("PSCEffect Power was 0.");
+                return ActionProcSkillChain::None;
+            }
+
+            // Previous effect is an opening effect, meaning the power is
+            // actually the ID of the opening weaponskill.  We need all 3
+            // of the possible skillchain properties on the initial link.
+            const auto properties = PSCEffect->GetPower();
+            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(properties & 0b1111));
+            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((properties >> 4) & 0b1111));
+            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((properties >> 8) & 0b1111));
+            skillchain = FormSkillchain(resonanceProperties, skillProperties);
+        }
+        else
+        {
+            // Previous effect is not an opening effect, meaning the power is
+            // The skill chain ID resonating.
+            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSCEffect->GetPower()));
+            skillchain = FormSkillchain(resonanceProperties, skillProperties);
+        }
+    }
+
+    Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
+
+    // Reset the effects resistance rank mods
+    for (const auto& resistanceRank : resistanceRankMods)
+    {
+        PSCEffect->setMod(resistanceRank, 0);
+    }
+
+    if (skillchain != SC_NONE)
+    {
+        PSCEffect->SetStartTime(timer::now());
+        PSCEffect->SetDuration(PSCEffect->GetDuration() - 1s);
+        PSCEffect->SetTier(GetSkillchainTier(skillchain));
+        PSCEffect->SetPower(skillchain);
+        PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
+
+        // Set new resistance rank modifiers
+        // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
+        for (auto& element : GetSkillchainMagicElement(skillchain))
+        {
+            const Mod resistanceRankMod = GetResistanceRankModFromElement(element);
+            PSCEffect->setMod(resistanceRankMod, -1);
+        }
+
+        return GetSkillchainSubeffect(skillchain);
+    }
+
+    PSCEffect->SetStartTime(timer::now());
+    PSCEffect->SetDuration(10s);
+    PSCEffect->SetTier(0);
+    PSCEffect->SetPower(combined_properties);
+    PSCEffect->SetSubPower(0);
+
+    return ActionProcSkillChain::None;
 }
 
 // This whole thing need re-evaluated
@@ -4882,41 +4838,6 @@ int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender)
     return std::clamp(damage, damageCap - damageVariant, damageCap);
 }
 
-int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
-{
-    float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.0f;
-    resist       = std::max(resist, 0.0f);
-    damage       = (int32)(damage * resist);
-
-    resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 10000.0f + PDefender->getMod(Mod::DMG) / 10000.0f;
-    resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
-    damage = (int32)(damage * resist);
-
-    // TODO: Breaths can have elements. Where are those handled for absorption and nullification.
-
-    // Handle damage absorption.
-    if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE)) // All damage.
-    {
-        damage = -damage;
-    }
-
-    // Handle damage nullification.
-    else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
-             xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
-    {
-        damage = 0;
-    }
-
-    else
-    {
-        damage = HandleSevereDamage(PDefender, damage, false);
-    }
-
-    damage = CheckAndApplyDamageCap(damage, PDefender);
-
-    return damage;
-}
-
 // TODO: Study using lua functions.
 int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element)
 {
@@ -5338,69 +5259,6 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
     }
 }
 
-uint8 GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell)
-{
-    // Majesty turns the Cure and Protect spell families into AoE when active
-    if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MAJESTY) &&
-        (PSpell->getSpellFamily() == SPELLFAMILY_CURE || PSpell->getSpellFamily() == SPELLFAMILY_PROTECT))
-    {
-        return SPELLAOE_RADIAL;
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE) // Divine Veil goes here because -na spells have AoE w/ Accession
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
-            (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
-             (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || xirand::GetRandomNumber(100) < PCaster->getMod(Mod::AOE_NA))))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))
-        {
-            PCaster->StatusEffectContainer->DelStatusEffect(EFFECT_PIANISSIMO);
-            return SPELLAOE_NONE;
-        }
-        else
-        {
-            return SPELLAOE_RADIAL;
-        }
-    }
-
-    if (PSpell->getAOE() == SPELLAOE_DIFFUSION)
-    {
-        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIFFUSION))
-        {
-            return SPELLAOE_RADIAL;
-        }
-        else
-        {
-            return SPELLAOE_NONE;
-        }
-    }
-
-    return PSpell->getAOE();
-}
-
 ELEMENT GetDayElement()
 {
     DAYTYPE weekday = static_cast<DAYTYPE>(vanadiel_time::get_weekday());
@@ -5641,7 +5499,7 @@ void DrawIn(CBattleEntity* PTarget, const position_t pos, const float offset, co
         {
             // draw in!
             PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(PTarget, nearEntity));
-            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, 0, static_cast<MSGBASIC_ID>(232)));
+            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, 0, MsgBasic::DRAWN_IN));
         }
     }
 }
@@ -5916,7 +5774,7 @@ int32 GetRangedAttackBonuses(CBattleEntity* battleEntity)
 
     int32 bonus = 0;
 
-    // Reduction from velocity shot mod
+    // bonus from velocity shot mod
     if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
     {
         bonus += battleEntity->getMod(Mod::VELOCITY_RATT_BONUS);
@@ -6665,30 +6523,30 @@ int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, Mod m
     }
 }
 
-DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType)
+auto GetSpikesDamageType(const ActionReactKind spikesType) -> DAMAGE_TYPE
 {
     switch (spikesType)
     {
         // Action packet animation string order
-        case SUBEFFECT_BLAZE_SPIKES:
+        case ActionReactKind::BlazeSpikes:
             return DAMAGE_TYPE::FIRE;
-        case SUBEFFECT_ICE_SPIKES:
+        case ActionReactKind::IceSpikes:
             return DAMAGE_TYPE::ICE;
-        case SUBEFFECT_DREAD_SPIKES:
+        case ActionReactKind::DreadSpikes:
             return DAMAGE_TYPE::DARK;
-        case SUBEFFECT_CURSE_SPIKES:
+        case ActionReactKind::CurseSpikes:
             return DAMAGE_TYPE::NONE;
-        case SUBEFFECT_SHOCK_SPIKES:
+        case ActionReactKind::ShockSpikes:
             return DAMAGE_TYPE::LIGHTNING;
-        case SUBEFFECT_REPRISAL:
+        case ActionReactKind::ReprisalSpikes:
             return DAMAGE_TYPE::LIGHT;
-        case SUBEFFECT_GALE_SPIKES:
+        case ActionReactKind::WindSpikes:
             return DAMAGE_TYPE::WIND;
-        case SUBEFFECT_CLOD_SPIKES:
+        case ActionReactKind::EarthSpikes:
             return DAMAGE_TYPE::EARTH;
-        case SUBEFFECT_DELUGE_SPIKES:
+        case ActionReactKind::WaterSpikes:
             return DAMAGE_TYPE::WATER;
-        case SUBEFFECT_DEATH_SPIKES:
+        case ActionReactKind::DeathSpikes:
             return DAMAGE_TYPE::DARK;
         default:
             return DAMAGE_TYPE::NONE;
@@ -6804,7 +6662,7 @@ CBattleEntity* GetCoverAbilityUser(CBattleEntity* PCoverAbilityTarget, CBattleEn
             float distTAmob  = distance(PCoverAbilityUser->loc.p, PMob->loc.p);
 
             // check if cover user is within melee range and that cover target is in-line behind
-            if (distTAmob <= static_cast<float>(PMob->GetMeleeRange()) &&        // make sure cover user is within melee range
+            if (distTAmob <= PMob->GetMeleeRange(PCoverAbilityUser) &&           // make sure cover user is within melee range
                 distTAmob >= worldAngleMinDistance &&                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
                 distTAmob < distance(PCoverAbilityTarget->loc.p, PMob->loc.p) && // make sure cover user is closer to the mob than cover target
                 areInLine(angleTAmob, PMob, PCoverAbilityTarget))
@@ -6927,5 +6785,4 @@ void addEcosystemKillerEffects(CBattleEntity* PBattleEntity)
             break;
     }
 }
-
 }; // namespace battleutils

@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "entities/mobentity.h"
+#include "enums/action/animation.h"
+#include "enums/action/knockback.h"
 
 #include <vector>
 
@@ -67,14 +69,13 @@ public:
     bool isBloodPactRage() const;
 
     uint16          getID() const;
-    uint16          getAnimationID() const;
+    auto            getAnimationID() const -> ActionAnimation;
     uint8           getAoe() const;
     float           getDistance() const;
     uint8           getFlag() const;
     timer::duration getAnimationTime() const;
     timer::duration getActivationTime() const;
-    auto            getMsg() const -> MSGBASIC_ID;
-    auto            getAoEMsg() const -> MSGBASIC_ID;
+    auto            getMsg() const -> MsgBasic;
     uint16          getValidTargets() const;
     int16           getTP() const;
     auto            getHP() const -> int32;
@@ -86,10 +87,12 @@ public:
     uint16          getMsgForAction() const;
     float           getRadius() const;
     int16           getParam() const;
-    uint8           getKnockback() const;
+    auto            getKnockback() const -> Knockback;
     uint8           getPrimarySkillchain() const;
     uint8           getSecondarySkillchain() const;
     uint8           getTertiarySkillchain() const;
+    auto            getAttackType() const -> ATTACK_TYPE;
+    auto            isCritical() const -> bool;
 
     bool isDamageMsg() const;
 
@@ -101,7 +104,7 @@ public:
     void setFlag(uint8 flag);
     void setAnimationTime(timer::duration AnimationTime);
     void setActivationTime(timer::duration ActivationTime);
-    void setMsg(uint16 msg);
+    void setMsg(MsgBasic msg);
     void setValidTargets(uint16 targ);
     void setTP(int16 tp);
     auto setHP(int32 hp) -> void;
@@ -111,10 +114,12 @@ public:
     void setPrimaryTargetID(uint32 targid);
     void setFinalAnimationSub(uint8 newAnimationSub);
     void setParam(int16 value);
-    void setKnockback(uint8 knockback);
+    void setKnockback(Knockback knockback);
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
+    void setAttackType(ATTACK_TYPE attackType);
+    void setCritical(bool isCritical);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -132,14 +137,16 @@ private:
     uint16          m_ValidTarget;
     timer::duration m_AnimationTime;  // how long the tp animation lasts for in ms
     timer::duration m_ActivationTime; // how long the mob prepares the tp move for
-    uint16          m_Message;        // message param, scripters can edit this depending on self/resist/etc.
+    MsgBasic        m_Message;        // message param, scripters can edit this depending on self/resist/etc.
     int16           m_TP;             // the tp at the time of finish readying (for scripts)
     int32           m_HP;             // HP at the time of using mob skill (for scripts)
     uint8           m_HPP;            // HPP at the time of using mob skill (for scripts)
-    uint8           m_knockback;      // knockback value (0-7)
+    Knockback       m_knockback;      // knockback value (0-7)
     uint8           m_primarySkillchain;
     uint8           m_secondarySkillchain;
     uint8           m_tertiarySkillchain;
+    ATTACK_TYPE     m_attackType{ ATTACK_TYPE::NONE };
+    bool            m_isCritical{ false };
 
     std::optional<uint8> m_FinalAnimationSub; // If non-null, entity will get this new animation sub after state exits
 

@@ -83,20 +83,14 @@ end
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
-    dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, ele))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, ele))
+    dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, ele, true))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, ele, true, false))
     dmg = math.floor(target:handleSevereDamage(dmg, false))
 
-    if dmg > 0 then
-        dmg = dmg - target:getMod(xi.mod.PHALANX)
-        dmg = utils.clamp(dmg, 0, 99999)
-    end
-
-    -- handle one for all
-    dmg = utils.oneforall(target, dmg)
-
-    -- handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handlePhalanx(target, dmg)
+    dmg = utils.handleOneForAll(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 

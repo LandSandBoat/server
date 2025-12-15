@@ -50,12 +50,15 @@ public:
     }
 
     void allowSendRaise();
+    void acceptRaise();
 
 private:
     CBattleEntity* const m_PEntity;
     timer::duration      m_deathTime;
     bool                 m_raiseSent{ false };
+    bool                 m_raiseAccepted{ false };
     timer::time_point    m_raiseTime;
+    timer::time_point    m_raiseAcceptedTime;
 };
 
 #endif

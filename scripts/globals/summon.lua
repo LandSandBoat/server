@@ -132,6 +132,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local numHitsLanded    = 0
     local numHitsProcessed = 1
     local finaldmg         = 0
+    local didCrit          = false
 
     if math.random() < hitrateFirst then
         firstHitLanded = true
@@ -191,7 +192,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             local wRatio = cRatio
             local isCrit = math.random() < critRate
             if isCrit then
-                wRatio = wRatio + 1
+                wRatio  = wRatio + 1
+                didCrit = true
             end
 
             local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max
@@ -209,7 +211,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             local wRatio = cRatio
             local isCrit = math.random() < critRate
             if isCrit then
-                wRatio = wRatio + 1
+                wRatio  = wRatio + 1
+                didCrit = true
             end
 
             local qRatio = getRandRatio(wRatio)                  -- Get a random ratio from min and max.
@@ -231,6 +234,9 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     returninfo.dmg        = finaldmg
     returninfo.hitslanded = numHitsLanded
+
+    skill:setAttackType(xi.attackType.PHYSICAL)
+    skill:setCritical(didCrit)
 
     return returninfo
 end
@@ -338,16 +344,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
-        dmg = utils.oneforall(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
     end
 
-    -- Handle Phalanx
-    if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
-
-    -- handling stoneskin
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handlePhalanx(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     -- Check if the mob has a damage cap
     dmg = target:checkDamageCap(dmg)

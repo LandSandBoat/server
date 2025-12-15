@@ -71,6 +71,11 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
     return nullptr;
 }
 
+Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
+{
+    return GetRecast(RECAST_LOOT, static_cast<uint16>(id));
+}
+
 /************************************************************************
  *                                                                       *
  *  Adding an entry to the container                                     *
@@ -80,6 +85,11 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 void CRecastContainer::Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Load(type, id, duration, chargeTime, maxCharges);
+}
+
+void CRecastContainer::AddLootRecast(LootRecastID id, timer::duration duration)
+{
+    Add(RECAST_LOOT, static_cast<uint16>(id), duration);
 }
 
 Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
@@ -206,14 +216,20 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    // clang-format off
-    auto maybeRecast = std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-    {
-        return recast.ID == id;
-    });
-    // clang-format on
+    auto maybeRecast = std::find_if(
+        PRecastList->begin(),
+        PRecastList->end(),
+        [&id](auto& recast)
+        {
+            return recast.ID == id;
+        });
 
     return maybeRecast != PRecastList->end();
+}
+
+bool CRecastContainer::HasLootRecast(LootRecastID id)
+{
+    return Has(RECAST_LOOT, static_cast<uint16>(id));
 }
 
 /************************************************************************

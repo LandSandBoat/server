@@ -22,11 +22,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MPP, 5)
+    effect:addMod(xi.mod.MPP, 5)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MPP, 5)
 end
 
 return itemObject

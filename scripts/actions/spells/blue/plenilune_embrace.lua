@@ -14,34 +14,30 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local duration = 90
-    local attBoost = 1
-    local magAttBoost = 1
-    local moonPhase = VanadielMoonPhase()
-    if moonPhase <= 5 then
-        magAttBoost = 15
-        attBoost = 1
-    elseif moonPhase <= 25 then
-        magAttBoost = 12
-        attBoost = 3
-    elseif moonPhase <= 40 then
-        magAttBoost = 10
-        attBoost = 5
-    elseif moonPhase <= 60 then
-        magAttBoost = 7
-        attBoost = 7
-    elseif moonPhase <= 75 then
-        magAttBoost = 5
-        attBoost = 10
-    elseif moonPhase <= 90 then
-        magAttBoost = 3
-        attBoost = 12
-    elseif moonPhase <= 100 then
-        magAttBoost = 1
-        attBoost = 15
-    end
+    local moonCycle = getVanadielMoonCycle()
 
-    caster:addStatusEffect(xi.effect.ATTACK_BOOST, attBoost, 0, duration)
-    caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, magAttBoost, 0, duration)
+    local cycleBuffs =
+    {
+        [xi.moonCycle.NEW_MOON]                = { atk = 1,  mab = 15 },
+        [xi.moonCycle.LESSER_WAXING_CRESCENT]  = { atk = 3,  mab = 12 },
+        [xi.moonCycle.GREATER_WAXING_CRESCENT] = { atk = 5,  mab = 10 },
+        [xi.moonCycle.FIRST_QUARTER]           = { atk = 7,  mab = 7  },
+        [xi.moonCycle.LESSER_WAXING_GIBBOUS]   = { atk = 10, mab = 5  },
+        [xi.moonCycle.GREATER_WAXING_GIBBOUS]  = { atk = 12, mab = 3  },
+        [xi.moonCycle.FULL_MOON]               = { atk = 15, mab = 1  },
+        [xi.moonCycle.GREATER_WANING_GIBBOUS]  = { atk = 12, mab = 3  },
+        [xi.moonCycle.LESSER_WANING_GIBBOUS]   = { atk = 10, mab = 5  },
+        [xi.moonCycle.THIRD_QUARTER]           = { atk = 7,  mab = 7  },
+        [xi.moonCycle.GREATER_WANING_CRESCENT] = { atk = 5,  mab = 10 },
+        [xi.moonCycle.LESSER_WANING_CRESCENT]  = { atk = 3,  mab = 12 },
+    }
+
+    local moonBuff = cycleBuffs[moonCycle]
+    local atkBoost = moonBuff.atk
+    local mabBoost = moonBuff.mab
+
+    caster:addStatusEffect(xi.effect.ATTACK_BOOST, atkBoost, 0, duration)
+    caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, mabBoost, 0, duration)
 
     local minCure = 350
 

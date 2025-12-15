@@ -82,12 +82,12 @@ zones[xi.zone.BASTOK_MINES] =
         EMALIVEULAUX_COP_NOT_COMPLETED = 12279, -- I'd like to start my own business someday, but I just haven't found anything that truly interests me.
         EMALIVEULAUX_OPEN_DIALOG       = 12280, -- Rare Tavnazian imports! Get them before they're gone!
         EMALIVEULAUX_CLOSED_DIALOG     = 12281, -- I'd love to sell you goods imported from the island of Tavnazia, but with the area under foreign control, I can't secure my trade routes...
-        CHOCOBO_FEEDING_SLEEP          = 12858, -- Your chocobo is sleeping soundly. You cannot feed it now.
-        CHOCOBO_FEEDING_RUN_AWAY       = 12859, -- Your chocobo has run away. You cannot feed it now.
-        CHOCOBO_FEEDING_STILL_EGG      = 12860, -- You cannot feed a chocobo that has not hatched yet.
-        CHOCOBO_FEEDING_ITEM           = 13943, -- #: %
-        COMMON_SENSE_SURVIVAL          = 16048, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE        = 16647, -- There appears to be a tear in the fabric of space...
+        CHOCOBO_FEEDING_SLEEP          = 12861, -- Your chocobo is sleeping soundly. You cannot feed it now.
+        CHOCOBO_FEEDING_RUN_AWAY       = 12862, -- Your chocobo has run away. You cannot feed it now.
+        CHOCOBO_FEEDING_STILL_EGG      = 12863, -- You cannot feed a chocobo that has not hatched yet.
+        CHOCOBO_FEEDING_ITEM           = 13946, -- #: %
+        COMMON_SENSE_SURVIVAL          = 16051, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TEAR_IN_FABRIC_OF_SPACE        = 16652, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

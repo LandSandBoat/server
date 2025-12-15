@@ -11,10 +11,10 @@ g_mixins.families.mimic = function(mimicMob)
             {
                 conditions =
                 {
-                    mob:checkDistance(target) >= mob:getMeleeRange(),
+                    mob:checkDistance(target) >= mob:getMeleeRange(target),
                 },
                 position = mob:getPos(),
-                offset = mob:getMeleeRange() - 0.2,
+                offset = mob:getMeleeRange(target) - 0.2, -- TODO: does this change by target size?
             }
             utils.drawIn(target, drawInTable)
         end

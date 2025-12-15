@@ -29,7 +29,8 @@ zones[xi.zone.THE_SHROUDED_MAW] =
     },
     mob =
     {
-        DIABOLOS = GetFirstID('Diabolos'),
+        DIABOLOS      = GetFirstID('Diabolos_DN'),
+        DIABOLOS_WD   = GetFirstID('Diabolos_WD'),
     },
     npc =
     {

@@ -74,8 +74,10 @@ auto CLuaSpy::operator()(sol::variadic_args args) -> sol::as_returns_t<std::vect
 
         DebugTestFmt("Spy returning value for path: {}", path_);
         // Extract all return values and return them
+        const auto               count = result.return_count();
         std::vector<sol::object> returnValues;
-        for (int i = 0; i < result.return_count(); ++i)
+        returnValues.reserve(count);
+        for (int i = 0; i < count; ++i)
         {
             returnValues.push_back(result.get<sol::object>(i));
         }

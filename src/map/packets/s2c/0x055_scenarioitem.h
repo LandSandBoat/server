@@ -21,25 +21,9 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-
 #include "base.h"
 
 class CCharEntity;
-
-// TODO: Do we really need this enum?
-enum KEYS_TABLE : uint8
-{
-    KEYS_TABLE_0,
-    KEYS_TABLE_1,
-    KEYS_TABLE_2,
-    KEYS_TABLE_3,
-    KEYS_TABLE_4,
-    KEYS_TABLE_5,
-    KEYS_TABLE_6,
-};
-#define MAX_KEYS_TABLE 7
-DECLARE_FORMAT_AS_UNDERLYING(KEYS_TABLE);
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0055
 // This packet is sent by the server to populate the clients key item information.
@@ -54,5 +38,5 @@ public:
         uint16_t padding00;        // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_SCENARIOITEM(const CCharEntity* PChar, KEYS_TABLE keyTable);
+    GP_SERV_COMMAND_SCENARIOITEM(const CCharEntity* PChar, uint8_t keyTable);
 };

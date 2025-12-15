@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('fomorHateAdj', 4) -- treated as negative in fomor_hate mixin
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local tpMoves =
     {
         xi.mobSkill.TRICLIP_1,

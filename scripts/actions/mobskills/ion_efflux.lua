@@ -8,15 +8,11 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if not target:isBehind(mob) then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 60))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 180))
 
     return xi.effect.PARALYSIS
 end

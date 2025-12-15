@@ -20,6 +20,9 @@
 */
 
 #include "weapon_skill.h"
+
+#include "enums/action/animation.h"
+
 #include <cstring>
 
 CWeaponSkill::CWeaponSkill(const uint16 id)
@@ -123,6 +126,11 @@ void CWeaponSkill::setAoe(uint8 aoe)
     m_AOE = aoe;
 }
 
+void CWeaponSkill::setRadius(const uint8 radius)
+{
+    m_Radius = radius;
+}
+
 void CWeaponSkill::setRange(uint8 range)
 {
     m_Range = range;
@@ -163,9 +171,9 @@ bool CWeaponSkill::isElemental() const
     return m_Element != 0;
 }
 
-uint8 CWeaponSkill::getAnimationId() const
+auto CWeaponSkill::getAnimationId() const -> ActionAnimation
 {
-    return m_AnimationId;
+    return static_cast<ActionAnimation>(m_AnimationId);
 }
 
 timer::duration CWeaponSkill::getAnimationTime()
@@ -176,6 +184,11 @@ timer::duration CWeaponSkill::getAnimationTime()
 uint8 CWeaponSkill::getAoe() const
 {
     return m_AOE;
+}
+
+auto CWeaponSkill::getRadius() const -> uint8
+{
+    return m_Radius;
 }
 
 uint8 CWeaponSkill::getRange() const

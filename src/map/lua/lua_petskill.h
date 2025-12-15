@@ -50,11 +50,15 @@ public:
     bool   isConal();
     bool   isSingle();
     bool   hasMissMsg();
-    void   setMsg(uint16 message);
-    uint16 getMsg();
+    void   setMsg(MsgBasic message);
+    auto   getMsg() -> MsgBasic;
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();
     void   setFinalAnimationSub(uint8 newAnimationSub);
+    auto   getAttackType() const -> ATTACK_TYPE;
+    void   setAttackType(ATTACK_TYPE attackType) const;
+    auto   isCritical() const -> bool;
+    void   setCritical(bool isCritical) const;
 
     bool operator==(const CLuaPetSkill& other) const
     {

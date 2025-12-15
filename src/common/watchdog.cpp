@@ -27,7 +27,7 @@ Watchdog::Watchdog(timer::duration timeout, std::function<void()> callback)
 , m_lastUpdate(timer::now())
 , m_running(true)
 {
-    m_watchdog = nonstd::jthread(&Watchdog::_innerFunc, this);
+    m_watchdog = std::jthread(&Watchdog::_innerFunc, this);
 }
 
 Watchdog::~Watchdog()

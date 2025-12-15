@@ -17,7 +17,7 @@ g_mixins.families.antlion_ambush_no_rehide = function(antlion)
     end)
 
     antlion:addListener('ENGAGE', 'ANTLION_AMBUSH_ENGAGE', function(mob, target)
-        if mob:setLocalVar('[Ambush]Done') == 0 then
+        if mob:getLocalVar('[Ambush]Done') == 0 then
             -- mob:setStatus(xi.status.UPDATE)
             mob:useMobAbility(xi.mobSkill.PIT_AMBUSH_1)
         end

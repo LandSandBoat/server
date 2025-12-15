@@ -13,6 +13,7 @@
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
+-- TODO: Radius 5y at 2334 TP
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1

@@ -21,7 +21,7 @@ quest.sections[1] =
         local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
 
         return status == xi.questStatus.QUEST_AVAILABLE and
-            xi.moghouse.isInMogHouseInHomeNation(player) and
+            xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 3 and
             not quest:getMustZone(player) and
             quest:getLocalVar(player, 'questSeen') == 0 and

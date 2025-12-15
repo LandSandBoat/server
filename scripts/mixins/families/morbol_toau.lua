@@ -99,7 +99,7 @@ g_mixins.families.morbol_toau = function(morbolToAUMob)
             local drainPercent = drainVar > 0 and drainVar or 0.01
             local drainPotency = math.floor(target:getMaxHP() * drainPercent)
 
-            drainPotency = utils.stoneskin(target, drainPotency)
+            drainPotency = utils.handleStoneskin(target, drainPotency)
 
             action:additionalEffect(targetID, xi.subEffect.HP_DRAIN)
             action:addEffectMessage(targetID, xi.msg.basic.ADD_EFFECT_HP_DRAIN)

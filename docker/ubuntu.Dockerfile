@@ -3,12 +3,14 @@
 ########
 # Base #
 ########
-FROM --platform=$BUILDPLATFORM ubuntu:24.04 AS base
+ARG BASE_TAG=24.04
+FROM --platform=$BUILDPLATFORM ubuntu:$BASE_TAG AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN rm -f /etc/apt/apt.conf.d/docker-clean && \
-    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
-    > /etc/apt/apt.conf.d/keep-cache
+RUN <<EOF
+rm -f /etc/apt/apt.conf.d/docker-clean
+echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+EOF
 
 # Install runtime dependencies.
 RUN <<EOF
@@ -34,15 +36,18 @@ ARG UNAME=xiadmin
 ARG UGROUP=xiadmin
 ARG UID=1000
 ARG GID=1000
-RUN userdel --remove ubuntu && \
-    groupadd --gid $GID $UNAME && \
-    useradd  --uid $UID $UNAME --gid $UGROUP --home-dir /xiadmin --create-home && \
-    echo "$UNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME && \
-    chmod 0440 /etc/sudoers.d/$UNAME
 
 WORKDIR /server
-RUN chown $UNAME:$UGROUP /server
-RUN git config --system --add safe.directory /server
+
+RUN <<EOF
+userdel --remove ubuntu
+groupadd --gid $GID $UNAME
+useradd --uid $UID $UNAME --gid $UGROUP --home-dir /xiadmin --create-home
+echo "$UNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME
+chmod 0440 /etc/sudoers.d/$UNAME
+chown $UNAME:$UGROUP /server
+git config --system --add safe.directory /server
+EOF
 
 ENV VIRTUAL_ENV=/xiadmin/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
@@ -55,15 +60,17 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
+ARG GCC_VERSION=14
+ARG LLVM_VERSION=20
+
 # Install build dependencies.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked \
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
-    build-essential \
     ccache \
     cmake \
-    g++-14 \
+    g++-$GCC_VERSION \
     libluajit-5.1-dev \
     libmariadb-dev-compat \
     libssl-dev \
@@ -73,17 +80,20 @@ RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     python3-dev \
     python3-venv \
     zlib1g-dev
-
-ENV CC=/usr/bin/gcc-14
-ENV CXX=/usr/bin/g++-14
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+EOF
+ENV CC=/usr/bin/gcc-$GCC_VERSION
+ENV CXX=/usr/bin/g++-$GCC_VERSION
 
 # Install secondary dependencies as user.
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
-    --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu \
-    python3 -m venv $VIRTUAL_ENV && \
-    python -m pip install --upgrade pip setuptools wheel && \
-    python -m pip install --upgrade -r /tmp/requirements.txt
+    --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
+python3 -m venv $VIRTUAL_ENV
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade -r /tmp/requirements.txt
+EOF
 USER root
 
 ############
@@ -92,13 +102,15 @@ USER root
 FROM staging AS devtools
 
 # Install misc dev/ci tools on top of build tools.
-RUN apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-    clang-format-20 \
+RUN <<EOF
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+    clang-format-$LLVM_VERSION \
     cppcheck \
     gdb \
-    luarocks \
-    && rm -rf /var/lib/apt/lists/*
-RUN ln -s /usr/bin/clang-format-20 /usr/bin/clang-format
+    luarocks
+rm -rf /var/lib/apt/lists/*
+update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-$LLVM_VERSION 100
+EOF
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
 ENV PATH="/xiadmin/.luarocks/bin:$PATH"
 
@@ -111,16 +123,14 @@ CMD ["/bin/bash"]
 #########
 FROM staging AS build
 
-ARG COMPILER=gcc14
+ARG COMPILER=gcc
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-    clang \
-    clang-tidy \
-    libclang-rt-dev \
-    lld \
-    llvm-dev
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet lsb-release wget software-properties-common gnupg
+    wget https://apt.llvm.org/llvm.sh
+    chmod +x llvm.sh
+    sudo ./llvm.sh $LLVM_VERSION all
 fi
 EOF
 
@@ -154,13 +164,13 @@ cp -p /xiadmin/build/version.cpp /server/src/common/ 2> /dev/null || true
 cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
+    export CC=/usr/bin/clang-$LLVM_VERSION
+    export CXX=/usr/bin/clang++-$LLVM_VERSION
     export CXXFLAGS="-stdlib=libstdc++"
     export LDFLAGS="-fuse-ld=lld"
 fi
 
-cmake -G Ninja -S /server -B /xiadmin/build \
+cmake -G Ninja -S /server -B /xiadmin/build --fresh \
     -DENABLE_CLANG_TIDY=$ENABLE_CLANG_TIDY \
     -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
     -DTRACY_ENABLE=$TRACY_ENABLE \
@@ -174,7 +184,6 @@ ccache -s
 cp -p /server/xi_* /xiadmin/build/
 cp -p /server/src/common/version.cpp /xiadmin/build/
 mv xi_map_tracy xi_map 2> /dev/null || true
-
 EOF
 
 ###########

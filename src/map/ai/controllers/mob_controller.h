@@ -71,7 +71,7 @@ protected:
     auto         CanPursueTarget(const CBattleEntity* PTarget) const -> bool;
     auto         CheckLock(CBattleEntity* PTarget) const -> bool;
     auto         CheckDetection(CBattleEntity* PTarget) -> bool;
-    virtual auto CanCastSpells() -> bool;
+    virtual auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool;
     void         CastSpell(SpellID spellid);
     virtual void Move();
 

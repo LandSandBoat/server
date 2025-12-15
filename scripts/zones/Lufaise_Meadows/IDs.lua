@@ -28,7 +28,18 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         MURDEROUS_PRESENCE            = 7755, -- Wait, you sense a murderous presence...!
         YOU_CAN_SEE_FOR_MALMS         = 7756, -- You can see for malms in every direction.
         SPINE_CHILLING_PRESENCE       = 7758, -- You sense a spine-chilling presence!
+        AMALTHEIA_TEXT                = 7797, -- A message has been engraved into the rock: Offer up the ancient shield, and the pact shall be honored.
         KURREA_TEXT                   = 7801, -- The stench of rotten flesh fills the air around you. Some scavenger must have made this place its territory.
+        KURREA_SLURP                  = 7804, -- Kurrea slurps down the adamantoise soup!
+        KURREA_MUSCLES                = 7805, -- Kurrea's muscles bulge crazily!
+        KURREA_SHINE                  = 7806, -- Kurrea's scales shine mysteriously!
+        KURREA_WIND                   = 7807, -- Kurrea is enveloped by a fierce wind!
+        KURREA_RIGID                  = 7808, -- Kurrea's hide grows rigid!
+        KURREA_VEIN                   = 7809, -- The veins in Kurrea's head are popping out!
+        KURREA_EYES                   = 7810, -- Kurrea's eyes glow weirdly!
+        KURREA_CURE                   = 7811, -- Kurrea's wounds disappear!
+        KURREA_AURA                   = 7812, -- Kurrea is surrounded by an ominous aura!
+        KURREA_GREEN                  = 7813, -- Kurrea's face has turned green...
         COMMON_SENSE_SURVIVAL         = 8753, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 8817, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
@@ -44,6 +55,8 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         MEGALOBUGARD          = GetFirstID('Megalobugard'),
         PADFOOT               = GetTableOfIDs('Padfoot'),
         SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
+        TAVNAZIAN_RAM         = GetTableOfIDs('Tavnazian_Ram'),
+        TAVNAZIAN_SHEEP       = GetTableOfIDs('Tavnazian_Sheep'),
     },
     npc =
     {

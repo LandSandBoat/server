@@ -23,12 +23,12 @@
 #define _CABILITY_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
-#include "packets/action.h"
 
 #include "entities/battleentity.h"
+#include "enums/action/animation.h"
 #include "status_effect.h"
 
+enum class ActionCategory : uint8_t;
 enum ADDTYPE
 {
     ADDTYPE_NORMAL      = 0,
@@ -704,21 +704,21 @@ public:
     uint16          getMobSkillID() const;
     JOBTYPE         getJob();
     uint8           getLevel() const;
-    uint16          getAnimationID() const;
+    auto            getAnimationID() const -> ActionAnimation;
     timer::duration getAnimationTime();
     timer::duration getCastTime();
     float           getRange() const;
     uint8           getAOE() const;
+    uint8           getRadius() const;
     uint16          getValidTarget() const;
     uint16          getAddType() const;
-    auto            getMessage() const -> MSGBASIC_ID;
-    auto            getAoEMsg() const -> MSGBASIC_ID;
+    auto            getMessage() const -> MsgBasic;
     timer::duration getRecastTime() const;
     uint16          getRecastId() const;
     int32           getCE() const;
     int32           getVE() const;
     uint16          getMeritModID() const;
-    ACTIONTYPE      getActionType();
+    auto            getActionType() const -> ActionCategory;
     EFFECT          getPostActionEffectCleanup();
 
     void setID(uint16 id);
@@ -729,15 +729,16 @@ public:
     void setCastTime(timer::duration time);
     void setRange(float range);
     void setAOE(uint8 aoe);
+    void setRadius(uint8 radius);
     void setValidTarget(uint16 validTarget);
     void setAddType(uint16 addtype);
-    void setMessage(uint16 message);
+    void setMessage(MsgBasic message);
     void setRecastTime(timer::duration recastTime);
     void setRecastId(uint16 recastId);
     void setCE(int32 CE);
     void setVE(int32 VE);
     void setMeritModID(uint16 value);
-    void setActionType(ACTIONTYPE type);
+    void setActionType(ActionCategory type);
     void setPostActionEffectCleanup(EFFECT effectToCleanup);
 
     const std::string& getName();
@@ -752,16 +753,17 @@ private:
     timer::duration m_castTime{};
     float           m_range;
     uint8           m_aoe;
+    uint8           m_radius{ 0 };
     uint16          m_validTarget;
     uint16          m_addType;
-    uint16          m_message;
+    MsgBasic        m_message;
     timer::duration m_recastTime{};
     uint16          m_recastId;
     int32           m_CE;
     int32           m_VE;
     uint16          m_meritModID;
     std::string     m_name;
-    ACTIONTYPE      m_actionType{};
+    ActionCategory  m_actionType{};
     EFFECT          m_cleanupEffect{};
 };
 
@@ -781,7 +783,6 @@ CAbility* GetAbility(uint16 AbilityID);
 CAbility* GetTwoHourAbility(JOBTYPE JobID);
 bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
 Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
-auto      GetAbsorbMessage(MSGBASIC_ID msg) -> MSGBASIC_ID;
 
 std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
 

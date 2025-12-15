@@ -10,19 +10,15 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if not target:isBehind(mob) then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 3
+    local numhits = 3
+    local accmod = 0.8
+    local ftp    = 2
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end

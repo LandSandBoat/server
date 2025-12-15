@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 25)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local tpMoves =
     {
         xi.mobSkill.SPIRIT_ABSORPTION_2,

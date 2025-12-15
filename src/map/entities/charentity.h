@@ -534,6 +534,9 @@ public:
     uint32 m_moghouseID;
     uint16 m_moghancementID;
 
+    // The character is in ANY Mog House (their own or someone else's)
+    auto inMogHouse() const -> bool;
+
     CharHistory_t m_charHistory{};
 
     int8  getShieldSize();
@@ -639,7 +642,7 @@ public:
     virtual void           OnEngage(CAttackState&) override;
     virtual void           OnDisengage(CAttackState&) override;
     virtual void           OnCastFinished(CMagicState&, action_t&) override;
-    virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast) override;
+    virtual void           OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
     virtual void           OnRangedAttack(CRangeState&, action_t&) override;

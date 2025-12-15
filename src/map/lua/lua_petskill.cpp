@@ -45,7 +45,7 @@ CLuaPetSkill::CLuaPetSkill(CPetSkill* PSkill)
  *                                                                       *
  ************************************************************************/
 
-void CLuaPetSkill::setMsg(uint16 message)
+void CLuaPetSkill::setMsg(MsgBasic message)
 {
     m_PLuaPetSkill->setMsg(message);
 }
@@ -85,7 +85,7 @@ void CLuaPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
     return m_PLuaPetSkill->setFinalAnimationSub(newAnimationSub);
 }
 
-uint16 CLuaPetSkill::getMsg()
+auto CLuaPetSkill::getMsg() -> MsgBasic
 {
     return m_PLuaPetSkill->getMsg();
 }
@@ -122,6 +122,26 @@ uint8 CLuaPetSkill::getMobHPP()
     return m_PLuaPetSkill->getHPP();
 }
 
+auto CLuaPetSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_PLuaPetSkill->getAttackType();
+}
+
+void CLuaPetSkill::setAttackType(const ATTACK_TYPE attackType) const
+{
+    m_PLuaPetSkill->setAttackType(attackType);
+}
+
+auto CLuaPetSkill::isCritical() const -> bool
+{
+    return m_PLuaPetSkill->isCritical();
+}
+
+void CLuaPetSkill::setCritical(const bool isCritical) const
+{
+    m_PLuaPetSkill->setCritical(isCritical);
+}
+
 //======================================================//
 
 void CLuaPetSkill::Register()
@@ -141,6 +161,10 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("getTP", CLuaPetSkill::getTP);
     SOL_REGISTER("getMobHP", CLuaPetSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaPetSkill::getMobHPP);
+    SOL_REGISTER("getAttackType", CLuaPetSkill::getAttackType);
+    SOL_REGISTER("setAttackType", CLuaPetSkill::setAttackType);
+    SOL_REGISTER("isCritical", CLuaPetSkill::isCritical);
+    SOL_REGISTER("setCritical", CLuaPetSkill::setCritical);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaPetSkill& petskill)

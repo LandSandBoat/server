@@ -19,6 +19,8 @@ xi.recastID =
     MEDITATE       = 134,
     BLOODPACT_RAGE = 173,
     BLOODPACT_WARD = 174,
+    PHANTOM_ROLL   = 193,
+    DOUBLE_UP      = 194,
     QUICKDRAW      = 195,
     STRATAGEM      = 231,
 }

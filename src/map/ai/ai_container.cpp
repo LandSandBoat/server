@@ -38,7 +38,6 @@
 #include "states/magic_state.h"
 #include "states/mobskill_state.h"
 #include "states/petskill_state.h"
-#include "states/raise_state.h"
 #include "states/range_state.h"
 #include "states/respawn_state.h"
 #include "states/synth_state.h"
@@ -347,16 +346,6 @@ bool CAIContainer::Internal_Die(timer::duration deathTime)
     return false;
 }
 
-bool CAIContainer::Internal_Raise()
-{
-    auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
-    if (entity)
-    {
-        return ForceChangeState<CRaiseState>(entity);
-    }
-    return false;
-}
-
 bool CAIContainer::Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid)
 {
     auto* entity = dynamic_cast<CCharEntity*>(PEntity);
@@ -582,4 +571,13 @@ void CAIContainer::CheckCompletedStates()
         m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
+}
+
+bool CAIContainer::Accept_Raise()
+{
+    if (IsCurrentState<CDeathState>())
+    {
+        static_cast<CDeathState*>(PEntity->PAI->GetCurrentState())->acceptRaise();
+    }
+    return false;
 }

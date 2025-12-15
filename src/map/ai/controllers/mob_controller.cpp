@@ -291,7 +291,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         }
     }
 
-    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
+    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange(PTarget);
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
@@ -352,7 +352,7 @@ auto CMobController::MobSkill(int listId) -> bool
 
         auto skillList{ battleutils::GetMobSkillList(listId) };
 
-        if (auto overrideSkill = luautils::OnMobWeaponSkillPrepare(PMob, PTarget); overrideSkill > 0)
+        if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget); overrideSkill > 0)
         {
             skillList = { overrideSkill };
         }
@@ -464,7 +464,7 @@ auto CMobController::TrySpecialSkill() -> bool
 auto CMobController::TryCastSpell() -> bool
 {
     TracyZoneScoped;
-    if (!CanCastSpells())
+    if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
         return false;
     }
@@ -495,11 +495,38 @@ auto CMobController::TryCastSpell() -> bool
     }
 
     // Try to get an override spell from the script (if available)
+    // OnMobSpellChoose can also change PSpellTarget
     auto PSpellTarget            = PTarget ? PTarget : PMob;
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PSpellTarget, chosenSpellId);
-    if (possibleOverriddenSpell.has_value())
+    auto possibleOverriddenSpell = luautils::OnMobSpellChoose(PMob, PSpellTarget, chosenSpellId);
+
+    std::optional<SpellID>        maybeSpellOverride  = std::get<0>(possibleOverriddenSpell);
+    std::optional<CBattleEntity*> maybeTargetOverride = std::get<1>(possibleOverriddenSpell);
+
+    auto isSpellEligibleToCast = [this](CBattleEntity* PCastTarget, CSpell* PSpell) -> bool
     {
-        chosenSpellId = possibleOverriddenSpell;
+        if (!PSpell)
+        {
+            return false;
+        }
+
+        // Check if target is in range before attempting to cast
+        if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
+        {
+            return false;
+        }
+
+        // Check if mob can afford to cast this spell
+        if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+        {
+            return false;
+        }
+
+        return true;
+    };
+
+    if (maybeSpellOverride.has_value())
+    {
+        chosenSpellId = maybeSpellOverride.value();
     }
 
     if (chosenSpellId.has_value())
@@ -513,7 +540,22 @@ auto CMobController::TryCastSpell() -> bool
         }
         else
         {
+            // if we have a target override, override the weird self target logic later and try to cast
+            if (maybeTargetOverride.has_value())
+            {
+                PSpellTarget = maybeTargetOverride.value();
+
+                if (!isSpellEligibleToCast(PSpellTarget, PSpell))
+                {
+                    return false;
+                }
+
+                Cast(PSpellTarget->targid, chosenSpellId.value());
+                return true;
+            }
+
             CBattleEntity* PCastTarget = nullptr;
+
             if (PSpell->getValidTarget() & TARGET_SELF)
             {
                 PCastTarget = PMob;
@@ -523,14 +565,7 @@ auto CMobController::TryCastSpell() -> bool
                 PCastTarget = PTarget;
             }
 
-            // Check if target is in range before attempting to cast
-            if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange())
-            {
-                return false;
-            }
-
-            // Check if mob can afford to cast this spell
-            if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+            if (!isSpellEligibleToCast(PCastTarget, PSpell))
             {
                 return false;
             }
@@ -543,7 +578,7 @@ auto CMobController::TryCastSpell() -> bool
     return false;
 }
 
-auto CMobController::CanCastSpells() -> bool
+auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
 {
     TracyZoneScoped;
     if (!PMob->SpellContainer->HasSpells())
@@ -566,7 +601,17 @@ auto CMobController::CanCastSpells() -> bool
         }
     }
 
-    return IsMagicCastingEnabled();
+    if (!IsMagicCastingEnabled())
+    {
+        return false;
+    }
+
+    if (!ignoreRecastsAndCosts && !PMob->SpellContainer->IsAnySpellAvailable())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void CMobController::CastSpell(SpellID spellid)
@@ -728,10 +773,10 @@ void CMobController::Move()
     }
 
     const bool  move          = PMob->PAI->PathFind->IsFollowingPath();
-    float       attack_range  = PMob->GetMeleeRange();
+    float       attack_range  = PMob->GetMeleeRange(PTarget);
     const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
     const float offset        = static_cast<float>(offsetMod) / 10.0f;
-    float       closeDistance = (attack_range - (offsetMod == 0 ? 0.2f : offset)) / 2;
+    float       closeDistance = attack_range - (offsetMod == 0 ? 0.4f : offset);
 
     // No going negative on the final value.
     if (closeDistance < 0.0f)
@@ -782,7 +827,7 @@ void CMobController::Move()
             }
         }
 
-        if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
+        if (((currentDistance > attack_range) || move) && PMob->PAI->CanFollowPath())
         {
             if (PMob->GetSpeed() != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
             {
@@ -803,16 +848,20 @@ void CMobController::Move()
                     if (!PMob->PAI->PathFind->IsFollowingPath())
                     {
                         // out of melee range, try to path towards
-                        if (currentDistance > closeDistance)
+                        if (currentDistance > attack_range)
                         {
+                            auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
+
                             // try to find path towards target
-                            PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                            PMob->PAI->PathFind->PathInRange(projectedPosition, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                         }
                     }
-                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 2.5f))
+                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 0.1)) // This checks against the previous frames distance, and can false positive for where we want to be _now_
                     {
+                        auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
+
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(projectedPosition, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     }
 
                     PMob->PAI->PathFind->FollowPath(m_Tick);
@@ -831,16 +880,13 @@ void CMobController::Move()
                                 {
                                     auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
 
-                                    // clang-format off
-                                position_t new_pos
-                                {
-                                    PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
-                                    PTarget->loc.p.y,
-                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
-                                    0,
-                                    0
-                                };
-                                    // clang-format on
+                                    position_t new_pos{
+                                        PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
+                                        PTarget->loc.p.y,
+                                        PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
+                                        0,
+                                        0,
+                                    };
 
                                     if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                     {
@@ -1077,7 +1123,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 }
                 else if (
                     (!PMob->PBattlefield || PMob->PBattlefield->GetStatus() != BATTLEFIELD_STATUS_OPEN) &&
-                    PMob->GetMJob() == JOB_SMN && CanCastSpells() &&
+                    PMob->GetMJob() == JOB_SMN && CanCastSpells(IgnoreRecastsAndCosts::No) &&
                     PMob->SpellContainer->HasBuffSpells() && m_Tick >= m_nextMagicTime)
                 {
                     // summon pet
@@ -1085,7 +1131,7 @@ void CMobController::DoRoamTick(timer::time_point tick)
                     // - Once battlefield is locked, behavior is back to normal with no rng added to pet summoning
                     TryCastSpell();
                 }
-                else if (CanCastSpells() && xirand::GetRandomNumber(10) < 3 && PMob->SpellContainer->HasBuffSpells())
+                else if (CanCastSpells(IgnoreRecastsAndCosts::No) && xirand::GetRandomNumber(10) < 3 && PMob->SpellContainer->HasBuffSpells())
                 {
                     // cast buff
                     TryCastSpell();
@@ -1475,7 +1521,7 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
         (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
-        return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+        return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells(IgnoreRecastsAndCosts::Yes);
     }
 
     if (PTarget && !PMob->CanSeeTarget(PTarget))

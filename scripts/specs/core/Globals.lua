@@ -289,16 +289,6 @@ end
 function VanadielRSELocation()
 end
 
----@nodiscard
----@return boolean
-function IsMoonNew()
-end
-
----@nodiscard
----@return boolean
-function IsMoonFull()
-end
-
 ---@param ElevatorID integer
 ---@return nil
 function RunElevator(ElevatorID)

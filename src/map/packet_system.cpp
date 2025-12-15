@@ -245,11 +245,13 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
 void PacketParserInitialize()
 {
     TracyZoneScoped;
+
     for (uint16 i = 0; i < 512; ++i)
     {
         PacketSize[i]   = 0;
         PacketParser[i] = &SmallPacket0x000;
     }
+
     // clang-format off
     PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &ValidatedPacketHandler<GP_CLI_COMMAND_LOGIN>;
     PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &ValidatedPacketHandler<GP_CLI_COMMAND_GAMEOK>;

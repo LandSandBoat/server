@@ -26,7 +26,7 @@ entity.onMobFight = function(mob, target)
     local form = mob:getAnimationSub()
 
     if GetSystemTime() > nextFormShiftTime and mob:canUseAbilities() then
-        mob:setLocalVar('nextFormShiftTime', GetSystemTime() + 30)
+        mob:setLocalVar('nextFormShiftTime', GetSystemTime() + 60)
 
         local formConfigs =
         {
@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     local form = mob:getAnimationSub()
     local tpMoves =
     {

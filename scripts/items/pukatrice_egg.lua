@@ -23,27 +23,18 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HP, 15)
-    target:addMod(xi.mod.FOOD_MP, 15)
-    target:addMod(xi.mod.STR, 2)
-    target:addMod(xi.mod.FIRE_MEVA, 20)
-    target:addMod(xi.mod.FOOD_ATTP, 20)
-    target:addMod(xi.mod.FOOD_ATT_CAP, 85)
-    target:addMod(xi.mod.FOOD_RATTP, 20)
-    target:addMod(xi.mod.FOOD_RATT_CAP, 85)
-    target:addMod(xi.mod.SUBTLE_BLOW, 8)
+    effect:addMod(xi.mod.FOOD_HP, 15)
+    effect:addMod(xi.mod.FOOD_MP, 15)
+    effect:addMod(xi.mod.STR, 2)
+    effect:addMod(xi.mod.FIRE_MEVA, 20)
+    effect:addMod(xi.mod.FOOD_ATTP, 20)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 85)
+    effect:addMod(xi.mod.FOOD_RATTP, 20)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 85)
+    effect:addMod(xi.mod.SUBTLE_BLOW, 8)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HP, 15)
-    target:delMod(xi.mod.FOOD_MP, 15)
-    target:delMod(xi.mod.STR, 2)
-    target:delMod(xi.mod.FIRE_MEVA, 20)
-    target:delMod(xi.mod.FOOD_ATTP, 20)
-    target:delMod(xi.mod.FOOD_ATT_CAP, 85)
-    target:delMod(xi.mod.FOOD_RATTP, 20)
-    target:delMod(xi.mod.FOOD_RATT_CAP, 85)
-    target:delMod(xi.mod.SUBTLE_BLOW, 8)
 end
 
 return itemObject

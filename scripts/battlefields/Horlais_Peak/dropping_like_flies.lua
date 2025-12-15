@@ -23,51 +23,74 @@ content:addEssentialMobs({ 'Huntfly', 'Houndfly' })
 content.loot =
 {
     {
-        { itemId = xi.item.GIL, weight = 1000, amount = 4000 }, -- Gil
+        { itemId = xi.item.GIL,                     weight = 1000, amount = 4000 },
     },
 
     {
-        { itemId = xi.item.INSECT_WING, weight = 1000 }, -- Insect Wing
+        { itemId = xi.item.INSECT_WING,             weight = 1000 },
     },
 
     {
-        { itemId = xi.item.MANNEQUIN_HEAD, weight = 1000 }, -- Mannequin Head
+        { itemId = xi.item.NONE,                    weight = 650 },
+        { itemId = xi.item.EMPEROR_HAIRPIN,         weight = 350 },
     },
 
     {
-        { itemId = xi.item.NONE,            weight = 636 }, -- Nothing
-        { itemId = xi.item.EMPEROR_HAIRPIN, weight = 364 }, -- Emperor Hairpin
+        { itemId = xi.item.NONE,                    weight = 250 },
+        { itemId = xi.item.ASHIGARU_TARGE,          weight = 250 },
+        { itemId = xi.item.VARLETS_TARGE,           weight = 250 },
+        { itemId = xi.item.WRESTLERS_ASPIS,         weight = 250 },
     },
 
     {
-        { itemId = xi.item.ASHIGARU_TARGE,  weight = 175 }, -- Ashigaru Targe
-        { itemId = xi.item.BEATERS_ASPIS,   weight = 175 }, -- Beaters Aspis
-        { itemId = xi.item.VARLETS_TARGE,   weight = 175 }, -- Varlets Targe
-        { itemId = xi.item.WRESTLERS_ASPIS, weight = 175 }, -- Wrestlers Aspis
-        { itemId = xi.item.CLEAR_TOPAZ,     weight = 100 }, -- Clear Topaz
-        { itemId = xi.item.LAPIS_LAZULI,    weight = 100 }, -- Lapis Lazuli
-        { itemId = xi.item.LIGHT_OPAL,      weight = 100 }, -- Light Opal
+        { itemId = xi.item.NONE,                    weight = 250 },
+        { itemId = xi.item.MERCENARY_MANTLE,        weight = 250 },
+        { itemId = xi.item.SINGERS_MANTLE,          weight = 250 },
+        { itemId = xi.item.WIZARDS_MANTLE,          weight = 250 },
     },
 
     {
-        { itemId = xi.item.MERCENARY_MANTLE, weight = 250 }, -- Mercenary Mantle
-        { itemId = xi.item.SINGERS_MANTLE,   weight = 250 }, -- Singers Mantle
-        { itemId = xi.item.WIZARDS_MANTLE,   weight = 250 }, -- Wizards Mantle
-        { itemId = xi.item.WYVERN_MANTLE,    weight = 250 }, -- Wyvern Mantle
+        { itemId = xi.item.NONE,                    weight = 800 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,       weight =  20 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,     weight =  20 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,    weight =  20 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE,  weight =  20 },
+        { itemId = xi.item.IRON_INGOT,              weight =  20 },
+        { itemId = xi.item.STEEL_INGOT,             weight =  20 },
+        { itemId = xi.item.SILVER_INGOT,            weight =  20 },
+        { itemId = xi.item.MYTHRIL_INGOT,           weight =  20 },
+        { itemId = xi.item.CHESTNUT_LOG,            weight =  20 },
+        { itemId = xi.item.ELM_LOG,                 weight =  20 },
     },
 
     {
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,   weight =  70 }, -- Scroll Of Utsusemi Ni
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE,  weight =  70 }, -- Scroll Of Magic Finale
-        { itemId = xi.item.JUG_OF_QUADAV_BUG_BROTH, weight = 150 }, -- Jug Of Quadav Bug Broth
-        { itemId = xi.item.ONYX,                    weight = 100 }, -- Onyx
-        { itemId = xi.item.LAPIS_LAZULI,            weight = 100 }, -- Lapis Lazuli
-        { itemId = xi.item.LIGHT_OPAL,              weight = 100 }, -- Light Opal
-        { itemId = xi.item.SCROLL_OF_DISPEL,        weight = 150 }, -- Scroll Of Dispel
-        { itemId = xi.item.SCROLL_OF_ERASE,         weight = 100 }, -- Scroll Of Erase
-        { itemId = xi.item.ELM_LOG,                 weight =  90 }, -- Elm Log
-        { itemId = xi.item.MANNEQUIN_BODY,          weight =  70 }, -- Mannequin Body
+        { itemId = xi.item.SARDONYX,                weight = 125 },
+        { itemId = xi.item.AMBER_STONE,             weight = 125 },
+        { itemId = xi.item.LAPIS_LAZULI,            weight = 125 },
+        { itemId = xi.item.TOURMALINE,              weight = 125 },
+        { itemId = xi.item.CLEAR_TOPAZ,             weight = 125 },
+        { itemId = xi.item.AMETHYST,                weight = 125 },
+        { itemId = xi.item.LIGHT_OPAL,              weight = 125 },
+        { itemId = xi.item.ONYX,                    weight = 125 },
     },
+
+    {
+        { itemId = xi.item.JUG_OF_QUADAV_BUG_BROTH, weight = 500 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE,  weight = 200 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,        weight = 100 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,   weight = 100 },
+        { itemId = xi.item.SCROLL_OF_ERASE,         weight = 100 },
+    },
+
+    {
+        { itemId = xi.item.MANNEQUIN_HEAD,          weight = 1000 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                    weight = 900 },
+        { itemId = xi.item.MANNEQUIN_BODY,          weight =  50 },
+        { itemId = xi.item.PAPILLION,               weight =  50 },
+    }
 }
 
 return content:register()

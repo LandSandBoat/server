@@ -13,17 +13,17 @@ end
 
 entity.onMobRoam = function(mob)
     local hour = VanadielHour()
-    local phase = VanadielMoonPhase()
+    local moonCycle = getVanadielMoonCycle()
     if
         (hour >= 5 and hour < 17) or
-        phase > 10
+        (moonCycle ~= xi.moonCycle.NEW_MOON)
     then
         DespawnMob(mob:getID())
     end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVA_DOWN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVASION_DOWN)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

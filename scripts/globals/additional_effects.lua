@@ -96,8 +96,9 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     params.bonusmab   = 0
     params.includemab = false -- May possibly need to include mab on case by case basis, further tests needed
     damage            = addBonusesAbility(attacker, element, defender, damage, params)
-    damage            = damage * applyResistanceAddEffect(attacker, defender, element, 0)
-    damage            = damage * xi.spells.damage.calculateNukeAbsorbOrNullify(defender, element)
+    damage            = math.floor(damage * applyResistanceAddEffect(attacker, defender, element, 0))
+    damage            = math.floor(damage * xi.spells.damage.calculateAbsorption(defender, element, true))
+    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, true, false))
     -- Todo: make sure day/weather/affinity bonuses tie in right here
     damage            = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 

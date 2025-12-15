@@ -24,7 +24,7 @@ local content = BattlefieldQuest:new({
 })
 
 -- There are many different Shikaree Z groups. Can't grab the first one.
-local offsetID = boneyardGullyID.mob.SHIKAREE_Z_OFFSET[4]
+local offsetID = boneyardGullyID.mob.SHIKAREE_Z_ROS
 
 content.groups =
 {

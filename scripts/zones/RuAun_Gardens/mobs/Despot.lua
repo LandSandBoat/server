@@ -45,22 +45,30 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobSpawn = function(mob)
-    local ph = GetMobByID(mob:getLocalVar('ph'))
-    if ph then
-        local pos = ph:getPos()
-        mob:setPos(pos.x, pos.y, pos.z, pos.r)
-        local killerId = ph:getLocalVar('killer')
-        if killerId ~= 0 then
-            local killer = GetPlayerByID(killerId)
-            if
-                killer and
-                not killer:isEngaged() and
-                killer:checkDistance(mob) <= 50
-            then
-                mob:updateClaim(killer)
+    local zone = mob:getZone()
+
+    if zone then
+        local ph = GetMobByID(zone:getLocalVar('DespotPlaceholderID'))
+        if ph then
+            local pos      = ph:getPos()
+            local killerId = ph:getLocalVar('killer')
+
+            mob:setPos(pos.x, pos.y, pos.z, pos.r)
+
+            if killerId ~= 0 then
+                local killer = GetPlayerByID(killerId)
+
+                if
+                    killer and
+                    not killer:isEngaged() and
+                    killer:checkDistance(mob) <= 50
+                then
+                    mob:updateClaim(killer)
+                end
             end
         end
     end
@@ -108,7 +116,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:removeListener('PH_VAR')
 end
 
 return entity

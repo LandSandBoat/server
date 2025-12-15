@@ -242,7 +242,7 @@ struct keyitems_table_t
 
 struct keyitems_t
 {
-    std::array<keyitems_table_t, 7> tables;
+    std::array<keyitems_table_t, 8> tables; // 8 tables of key items as of December 2025
 };
 
 struct position_t

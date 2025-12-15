@@ -586,4 +586,11 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         // Copy in name
         std::memcpy(start, name.c_str(), maxLength);
     }
+
+    if (packet->SendFlg.General)
+    {
+        packet->Flags1.GraphSize = PEntity->modelSize;
+        // For some reason, SE reused a player struct where this "g" value is the hitbox size.
+        packet->Flags2.g = static_cast<uint8_t>(PEntity->modelHitboxSize * 10);
+    }
 }

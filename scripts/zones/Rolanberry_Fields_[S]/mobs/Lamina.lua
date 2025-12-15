@@ -42,7 +42,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { chance = 5, duration = 30, power = 10 })
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     return xi.mobSkill.PEDAL_PIROUETTE -- Petal Pirouette is only TP move
 end
 

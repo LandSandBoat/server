@@ -62,15 +62,19 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         return 0
     end
 
+    local element = utils.clamp(skillparam - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
     if skilltype == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, skillparam)
     elseif skilltype == xi.attackType.MAGICAL then
-        local element = utils.clamp(skillparam - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
-        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, element))
-        dmg = math.floor(dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, element))
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, true, false))
         dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.BREATH then
-        dmg = target:breathDmgTaken(dmg)
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, false))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, false, true))
+        dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
@@ -79,16 +83,13 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         return dmg
     end
 
-    -- Handle Phalanx
-    if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
+    dmg = utils.handlePhalanx(target, dmg)
 
     if skilltype == xi.attackType.MAGICAL then
-        dmg = utils.oneforall(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
     end
 
-    dmg = utils.stoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     if dmg > 0 then
         target:wakeUp()
@@ -100,17 +101,10 @@ end
 
 xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, attackType, damageType, slot, tpHitsLanded, extraHitsLanded, shadowsAbsorbed, bonusTP, action, taChar)
     if tpHitsLanded + extraHitsLanded > 0 then
-        if finaldmg >= 0 then
-            if finaldmg > 0 then
-                action:reaction(defender:getID(), xi.reaction.HIT)
-                action:speceffect(defender:getID(), xi.specEffect.RECOIL)
-            end
-        else
+        if finaldmg < 0 then
             -- TODO: ability absorb messages (if there are any)
             -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
-
-        action:param(defender:getID(), finaldmg)
     elseif shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), shadowsAbsorbed)
@@ -120,6 +114,10 @@ xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, 
 
     local targetTPMult = params.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attackType, damageType, slot, primary, tpHitsLanded, (extraHitsLanded * 10) + bonusTP, targetTPMult)
+    if tpHitsLanded + extraHitsLanded > 0 then
+        action:recordDamage(defender, attackType, math.abs(finaldmg))
+    end
+
     local enmityEntity = taChar or attacker
     if params.overrideCE and params.overrideVE then
         defender:addEnmity(enmityEntity, params.overrideCE, params.overrideVE)

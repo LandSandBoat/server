@@ -11,6 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDespawn = function(mob)

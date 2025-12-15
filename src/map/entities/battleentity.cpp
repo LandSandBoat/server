@@ -25,6 +25,8 @@
 #include "common/logging.h"
 #include "common/utils.h"
 
+#include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/death_state.h"
@@ -32,7 +34,6 @@
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
@@ -41,13 +42,13 @@
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "notoriety_container.h"
-#include "packets/action.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "trustentity.h"
 #include "utils/battleutils.h"
+#include "utils/messageutils.h"
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
@@ -171,11 +172,11 @@ bool CBattleEntity::isInGarrison()
     return luautils::callGlobal<bool>("xi.garrison.isInGarrison", this);
 }
 
-bool CBattleEntity::isInMogHouse()
+bool CBattleEntity::inMogHouse()
 {
     if (this->objtype == TYPE_PC)
     {
-        return static_cast<CCharEntity*>(this)->m_moghouseID;
+        return static_cast<CCharEntity*>(this)->inMogHouse();
     }
 
     return false;
@@ -449,10 +450,10 @@ bool CBattleEntity::Rest(float rate)
     return didRest;
 }
 
-uint16 CBattleEntity::GetWeaponDelay(bool tp)
+uint32 CBattleEntity::GetWeaponDelay(bool tp)
 {
     TracyZoneScoped;
-    uint16 finalDelay = 8000; // 480 (base) * 1000 / 60 (milisecond conversion)
+    uint32 finalDelay = 8000; // 480 (base) * 1000 / 60 (milisecond conversion)
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
@@ -523,7 +524,7 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
 
         // Store upper and lower values.
         uint16 minDelay = weaponDelay * 0.2;
-        uint16 maxDelay = weaponDelay * 2;
+        uint32 maxDelay = weaponDelay * 2;
 
         // Apply delay modifications.
         finalDelay = weaponDelay - martialArts;
@@ -532,15 +533,15 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
         finalDelay = finalDelay * delayModMultiplier;
 
         // Clamp
-        finalDelay = std::clamp<uint16>(finalDelay, minDelay, maxDelay);
+        finalDelay = std::clamp<uint32>(finalDelay, minDelay, maxDelay);
     }
 
     return finalDelay;
 }
 
-float CBattleEntity::GetMeleeRange() const
+float CBattleEntity::GetMeleeRange(const CBattleEntity* target) const
 {
-    return m_ModelRadius + 3.0f;
+    return modelHitboxSize + 2.0f + target->modelHitboxSize;
 }
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool forTPCalc)
@@ -594,12 +595,43 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 {
     TracyZoneScoped;
 
-    if (objtype == TYPE_MOB ||
-        (objtype == TYPE_PET &&
-         static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON))
+    if (objtype == TYPE_MOB)
     {
         auto* PMob = static_cast<CMobEntity*>(this);
         return mobutils::GetWeaponDamage(PMob, SLOT_MAIN);
+    }
+    else if (objtype == TYPE_PET)
+    {
+        auto* PPetEntity = static_cast<CPetEntity*>(this);
+
+        if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
+        {
+            // Unsure of the accuracy of this, but it's what we have in petutils
+            return std::floor(GetSkill(SKILL_AUTOMATON_MELEE) / 9 * 2) + 3 + getMod(Mod::MAIN_DMG_RATING);
+        }
+        else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        {
+            // Accurate for lvl 75 circa 2006~2008ish
+            // Unknown if this ever changed
+            return std::floor(GetMLevel() / 2) + 3 + getMod(Mod::MAIN_DMG_RATING);
+        }
+        else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
+        {
+            // In a 2014 update SE updated Avatar base damage
+            // Based on testing this value appears to be Level now instead of Level * 0.74f
+            uint16 weaponDamage = 1 + GetMLevel();
+            if (PPetEntity->m_PetID == PETID_CARBUNCLE || PPetEntity->m_PetID == PETID_CAIT_SITH)
+            {
+                weaponDamage = static_cast<uint16>(floor(GetMLevel() * 0.9f));
+            }
+
+            return weaponDamage + getMod(Mod::MAIN_DMG_RATING);
+        }
+        else // jugs
+        {
+            // Formula looks fake...
+            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(Mod::MAIN_DMG_RATING);
+        }
     }
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
@@ -657,12 +689,43 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     TracyZoneScoped;
     uint16 dmg = 0;
 
-    if (objtype == TYPE_MOB ||
-        (objtype == TYPE_PET &&
-         static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON))
+    if (objtype == TYPE_MOB)
     {
         auto* PMob = static_cast<CMobEntity*>(this);
         return mobutils::GetWeaponDamage(PMob, SLOT_RANGED);
+    }
+    else if (objtype == TYPE_PET)
+    {
+        auto* PPetEntity = static_cast<CPetEntity*>(this);
+
+        if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
+        {
+            // Unsure of the accuracy of this, but it's what we have in petutils
+            return std::floor(GetSkill(SKILL_AUTOMATON_RANGED) / 9 * 2) + 3 + getMod(Mod::RANGED_DMG_RATING);
+        }
+        else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        {
+            // Accurate for lvl 75 circa 2006~2008ish
+            // Unknown if this ever changed
+            return std::floor(GetMLevel() / 2) + 3 + getMod(Mod::RANGED_DMG_RATING);
+        }
+        else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
+        {
+            // In a 2014 update SE updated Avatar base damage
+            // Based on testing this value appears to be Level now instead of Level * 0.74f
+            uint16 weaponDamage = 1 + GetMLevel();
+            if (PPetEntity->m_PetID == PETID_CARBUNCLE || PPetEntity->m_PetID == PETID_CAIT_SITH)
+            {
+                weaponDamage = static_cast<uint16>(floor(GetMLevel() * 0.9f));
+            }
+
+            return weaponDamage + getMod(Mod::RANGED_DMG_RATING);
+        }
+        else // jugs
+        {
+            // Formula looks fake...
+            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(Mod::RANGED_DMG_RATING);
+        }
     }
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
@@ -923,7 +986,7 @@ uint16 CBattleEntity::CHR()
 uint16 CBattleEntity::ATT(SLOTTYPE slot)
 {
     TracyZoneScoped;
-    // TODO: consider which weapon!
+
     int32 ATT           = 8 + m_modStat[Mod::ATT];
     auto  ATTP          = m_modStat[Mod::ATTP];
     auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
@@ -998,7 +1061,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]));
 }
 
-uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
+uint16 CBattleEntity::RATT(uint16 bonusAtt)
 {
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
@@ -1006,40 +1069,207 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
         return 0;
     }
 
-    // make sure to not use fishing skill
-    uint16 baseSkill = skill == SKILL_FISHING ? 0 : GetSkill(skill);
-    int32  RATT      = 8 + baseSkill + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR();
+    uint16 skillLevel    = 0;
+    double strMultiplier = 0.5;
+
+    if (objtype == TYPE_PC)
+    {
+        strMultiplier = 1.0;
+        auto* weapon  = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
+
+        // Return 0 if ranged weapon but no ammo
+        if (weapon && weapon->getSkillType() != SKILL_THROWING && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
+        {
+            return 0;
+        }
+
+        // try ammo
+        if (weapon == nullptr)
+        {
+            weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
+        }
+
+        if (weapon)
+        {
+            // non-damaging weapon
+            if (weapon->getDmgType() == DAMAGE_TYPE::NONE || weapon->getSkillType() == SKILL_NONE)
+            {
+                return 0;
+            }
+
+            if (weapon->getSkillType() != SKILL_FISHING)
+            {
+                skillLevel = GetSkill(weapon->getSkillType());
+                skillLevel += weapon->getILvlSkill();
+            }
+        }
+
+        if (!weapon)
+        {
+            return 0;
+        }
+    }
+    else if (objtype & TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        skillLevel = this->GetSkill(SKILL_AUTOMATON_RANGED);
+    }
+    else if (objtype & TYPE_TRUST)
+    {
+        strMultiplier = 0.75; // TODO: verify
+
+        auto archery_acc      = this->GetSkill(SKILL_ARCHERY);
+        auto marksmanship_acc = this->GetSkill(SKILL_MARKSMANSHIP);
+        auto throwing_acc     = this->GetSkill(SKILL_THROWING);
+
+        skillLevel = std::max({ archery_acc, marksmanship_acc, throwing_acc });
+    }
+    // mobs and pets don't have "skill level" -- it's baked into m_modStat[Mod::RATT]
+
+    int32 RATT = 8 + skillLevel + bonusAtt + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
     // use max to prevent any underflow
-    return std::max(1, RATT + (RATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]));
+    return std::max<int16>(1, RATT + (RATT * m_modStat[Mod::RATTP] / 100.f) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100.f), m_modStat[Mod::FOOD_RATT_CAP]));
 }
 
-uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
+inline uint32 GetAccFromSkill(uint32 skill)
+{
+    uint32 accuracy = skill;
+
+    if (skill > 600)
+    {
+        accuracy = std::floor<uint32_t>(static_cast<float>(skill - 600.f) * 0.9f) + 540;
+    }
+    else if (skill > 400)
+    {
+        accuracy = std::floor(static_cast<float>(skill - 400.f) * 0.8f) + 380;
+    }
+    else if (skill > 200)
+    {
+        accuracy = std::floor(static_cast<float>(skill - 200.f) * 0.9f) + 200;
+    }
+
+    return accuracy;
+}
+
+uint16 CBattleEntity::RACC(uint16 bonusAcc)
 {
     TracyZoneScoped;
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
     {
-        return 0;
+        return 1;
     }
 
-    // make sure to not use fishing skill
-    uint16 baseSkill   = skill == SKILL_FISHING ? 0 : GetSkill(skill);
-    uint16 skill_level = baseSkill + bonusSkill;
-    int16  RACC        = skill_level;
-    if (skill_level > 200)
+    int32 RACC = 0;
+
+    if (objtype & TYPE_PC)
     {
-        RACC = (int16)(200 + (skill_level - 200) * 0.9);
+        auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
+
+        // Return 0 if ranged weapon but no ammo
+        if (weapon && weapon->getSkillType() != SKILL_THROWING && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
+        {
+            return 0;
+        }
+
+        // try ammo
+        if (weapon == nullptr)
+        {
+            weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
+        }
+
+        uint16 skillLevel = 0;
+
+        if (weapon)
+        {
+            // non-damaging weapon
+            if (weapon->getDmgType() == DAMAGE_TYPE::NONE || weapon->getSkillType() == SKILL_NONE)
+            {
+                return 0;
+            }
+
+            if (weapon->getSkillType() != SKILL_FISHING)
+            {
+                skillLevel = GetSkill(weapon->getSkillType());
+                skillLevel += weapon->getILvlSkill();
+            }
+        }
+
+        if (!weapon)
+        {
+            return 0;
+        }
+
+        RACC = GetAccFromSkill(skillLevel);
+
+        RACC += getMod(Mod::RACC);
+        RACC += bonusAcc;
+        RACC += battleutils::GetRangedAccuracyBonuses(this);
+        RACC += std::floor(AGI() * 3 / 4);
     }
-    RACC += getMod(Mod::RACC);
-    RACC += battleutils::GetRangedAccuracyBonuses(this);
-    RACC += (AGI() * 3) / 4;
+    else if (objtype & TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        uint16 skillLevel = this->GetSkill(SKILL_AUTOMATON_RANGED);
+
+        RACC = GetAccFromSkill(skillLevel);
+        RACC += std::floor(AGI() * 0.5);
+        RACC += m_modStat[Mod::ACC] + bonusAcc;
+
+        // Tandem Strike is listed here in ACC call but no clue if it works for automatons or RACC in general
+    }
+    else if (objtype & TYPE_TRUST)
+    {
+        auto archery_acc      = this->GetSkill(SKILL_ARCHERY);
+        auto marksmanship_acc = this->GetSkill(SKILL_MARKSMANSHIP);
+        auto throwing_acc     = this->GetSkill(SKILL_THROWING);
+
+        RACC = GetAccFromSkill(std::max({ archery_acc, marksmanship_acc, throwing_acc }));
+        RACC += std::floor(AGI() * 0.75); // 0.75 needs verification
+        RACC += m_modStat[Mod::RACC] + bonusAcc;
+    }
+    else // pets, mobs
+    {
+        RACC = m_modStat[Mod::RACC] + bonusAcc;
+
+        // TODO: does this work for ranged accuracy?
+        if (petutils::IsTandemActive(this))
+        {
+            if (this->PMaster && this->PMaster->objtype == TYPE_PC)
+            {
+                RACC += this->PMaster->getMod(Mod::TANDEM_STRIKE_POWER);
+            }
+        }
+
+        // TODO: does this work for ranged accuracy?
+        if (this->objtype == TYPE_PET)
+        {
+            auto getEcoStrBonusFunc = lua["utils"]["getEcosystemStrengthBonus"];
+
+            if (getEcoStrBonusFunc.valid())
+            {
+                CBattleEntity* thisTarget = nullptr;
+                if (this->PAI->IsEngaged())
+                {
+                    thisTarget = this->GetBattleTarget();
+                }
+
+                if (thisTarget != nullptr && (int8)getEcoStrBonusFunc(this->m_EcoSystem, thisTarget->m_EcoSystem) > 0)
+                {
+                    RACC += this->getMod(Mod::ENHANCES_MONSTER_CORRELATION);
+                }
+            }
+        }
+
+        RACC = RACC + std::floor(AGI() / 2);
+    }
     // use max to prevent underflow
-    return std::max(0, RACC + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * RACC) / 100), getMod(Mod::FOOD_RACC_CAP)));
+    return std::max(1, RACC + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * RACC) / 100), getMod(Mod::FOOD_RACC_CAP)));
 }
 
 uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 {
     TracyZoneScoped;
+
+    int32 ACC = 0;
 
     if (this->objtype & TYPE_PC)
     {
@@ -1088,17 +1318,19 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             }
             skill = SKILL_HAND_TO_HAND;
         }
-        int32 ACC           = GetSkill(skill) + iLvlSkill;
-        ACC                 = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
+
+        uint32_t skillLevel = GetSkill(skill) + iLvlSkill;
+        ACC                 = GetAccFromSkill(skillLevel);
+
         float dexMultiplier = settings::get<bool>("main.USE_PRE_2013_DEX_MULTIPLIER") ? 0.50f : 0.75f;
         if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
-            ACC += (int16)(DEX() * dexMultiplier);
+            ACC += std::floor(DEX() * dexMultiplier);
             ACC += m_modStat[Mod::TWOHAND_ACC];
         }
         else
         {
-            ACC += (int16)(DEX() * dexMultiplier);
+            ACC += std::floor(DEX() * dexMultiplier);
         }
         ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
 
@@ -1118,14 +1350,15 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
         }
 
-        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
+        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100.f), m_modStat[Mod::FOOD_ACC_CAP]);
         return std::max<int16>(0, ACC);
     }
     else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        int32 ACC = this->GetSkill(SKILL_AUTOMATON_MELEE);
-        ACC       = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
-        ACC += (int16)(DEX() * 0.5);
+        int32 skillLevel = this->GetSkill(SKILL_AUTOMATON_MELEE);
+
+        ACC = GetAccFromSkill(skillLevel);
+        ACC += std::floor(DEX() * 0.5);
         ACC += m_modStat[Mod::ACC] + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
@@ -1140,13 +1373,10 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
                 ACC += this->PMaster->getMod(Mod::TANDEM_STRIKE_POWER);
             }
         }
-
-        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
-        return std::max<int16>(0, ACC);
     }
     else
     {
-        int32 ACC = m_modStat[Mod::ACC] + offsetAccuracy;
+        ACC = m_modStat[Mod::ACC] + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
         {
@@ -1178,9 +1408,10 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
                 }
             }
         }
-        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]) + DEX() / 2; // Account for food mods here for Snatch Morsel
-        return std::max<int16>(0, ACC);
+        ACC = ACC + std::floor(DEX() / 2);
     }
+
+    return std::max(1, ACC + std::min<int16>(((100 + getMod(Mod::FOOD_ACCP) * ACC) / 100), getMod(Mod::FOOD_ACC_CAP)));
 }
 
 uint16 CBattleEntity::DEF()
@@ -1934,62 +2165,56 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         flags |= FINDFLAGS_HIT_ALL;
     }
-    uint8 aoeType = battleutils::GetSpellAoEType(this, PSpell);
 
-    if (aoeType == SPELLAOE_RADIAL)
+    const auto     result    = luautils::callGlobal<sol::table>("xi.combat.magicAoE.calculateTypeAndRadius", this, PSpell);
+    const SPELLAOE aoeType   = result.get_or(1, SPELLAOE_NONE);
+    const float    aoeRadius = result.get_or(2, 0.0f);
+    switch (aoeType)
     {
-        float distance = spell::GetSpellRadius(PSpell, this);
-
-        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags, PSpell->getValidTarget());
-    }
-    else if (aoeType == SPELLAOE_CONAL)
-    {
-        // TODO: actual radius calculation
-        float radius = spell::GetSpellRadius(PSpell, this);
-
-        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags, PSpell->getValidTarget());
-    }
-    else
-    {
-        if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
+        case SPELLAOE_RADIAL:
+            PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, aoeRadius, flags, PSpell->getValidTarget());
+            break;
+        case SPELLAOE_CONAL:
+            PAI->TargetFind->findWithinCone(PActionTarget, aoeRadius, 45, flags, PSpell->getValidTarget());
+            break;
+        default:
         {
-            CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
-            IsMagicCovered                   = battleutils::IsMagicCovered((CCharEntity*)PCoverAbilityUser);
-
-            if (IsMagicCovered)
+            if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
             {
-                PActionTarget = PCoverAbilityUser;
+                CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
+                IsMagicCovered                   = battleutils::IsMagicCovered(static_cast<CCharEntity*>(PCoverAbilityUser));
+
+                if (IsMagicCovered)
+                {
+                    PActionTarget = PCoverAbilityUser;
+                }
             }
+            // only add target
+            PAI->TargetFind->findSingleTarget(PActionTarget, flags, PSpell->getValidTarget());
         }
-        // only add target
-        PAI->TargetFind->findSingleTarget(PActionTarget, flags, PSpell->getValidTarget());
     }
 
-    auto totalTargets = (uint16)PAI->TargetFind->m_targets.size();
+    const auto totalTargets = static_cast<uint16>(PAI->TargetFind->m_targets.size());
 
     PSpell->setTotalTargets(totalTargets);
     PSpell->setPrimaryTargetID(PActionTarget->id);
 
-    action.id         = id;
-    action.actiontype = ACTION_MAGIC_FINISH;
+    action.actorId    = id;
+    action.actiontype = ActionCategory::MagicFinish;
     action.actionid   = static_cast<uint16>(PSpell->getID());
     action.recast     = state.GetRecast();
     action.spellgroup = PSpell->getSpellGroup();
 
-    uint16 msg = MSGBASIC_NONE;
+    MsgBasic msg = MsgBasic::NONE;
 
     for (auto* PTarget : PAI->TargetFind->m_targets)
     {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        action_target_t& actionTarget = action.addTarget(PTarget->id);
+        action_result_t& actionResult = actionTarget.addResult();
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-        actionTarget.reaction   = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT::NONE;
-        actionTarget.animation  = PSpell->getAnimationID();
-        actionTarget.param      = 0;
-        actionTarget.messageID  = MSGBASIC_NONE;
+        actionResult.resolution = ActionResolution::Hit;
+        actionResult.animation  = PSpell->getAnimationID();
+        actionResult.param      = 0;
 
         auto ce = PSpell->getCE();
         auto ve = PSpell->getVE();
@@ -2008,8 +2233,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         if (PSpell->canHitShadow() && aoeType == SPELLAOE_NONE && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS) && battleutils::IsAbsorbByShadow(PTarget, this))
         {
             // take shadow
-            msg                = MSGBASIC_SHADOW_ABSORB;
-            actionTarget.param = 1;
+            msg                = MsgBasic::SHADOW_ABSORB;
+            actionResult.param = 1;
             ve                 = 0;
             ce                 = 0;
         }
@@ -2023,42 +2248,50 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
                 StatusEffectContainer->DelStatusEffect(EFFECT_SABOTEUR);
             }
 
-            if (msg == MSGBASIC_NONE)
+            if (msg == MsgBasic::NONE)
             {
                 msg = PSpell->getMessage();
             }
             else
             {
-                msg = PSpell->getAoEMessage();
+                msg = messageutils::GetAoEVariant(PSpell->getMessage());
             }
 
-            actionTarget.modifier = PSpell->getModifier();
-            PSpell->setModifier(MODIFIER::NONE); // Reset modifier on use
+            actionResult.modifier = PSpell->getModifier();
+            PSpell->setModifier(ActionModifier::None); // Reset modifier on use
 
-            actionTarget.param = damage;
+            actionResult.param = damage;
+
+            // Handle EFFECT_NONE - spell failed to apply
+            if (damage == EFFECT_NONE)
+            {
+                actionResult.resolution = ActionResolution::Miss;
+                actionResult.param      = 0;
+            }
         }
 
-        if (actionTarget.animation == 122)
+        if (actionResult.animation == ActionAnimation::Teleport)
         { // Teleport spells don't target unqualified members
-            if (PSpell->getMessage() == MSGBASIC_NONE)
+            if (PSpell->getMessage() == MsgBasic::NONE)
             {
-                actionTarget.animation = 0; // stop target from going invisible
+                actionResult.animation = ActionAnimation::None; // stop target from going invisible
                 if (PTarget != PActionTarget)
                 {
-                    action.actionLists.pop_back();
+                    action.targets.pop_back();
                 }
                 else
                 { // set this message in anticipation of nobody having the gate crystal
-                    actionTarget.messageID = MSGBASIC_MAGIC_NO_EFFECT;
+                    actionResult.messageID = MsgBasic::MAGIC_NO_EFFECT;
                 }
                 continue;
             }
-            if (msg == MSGBASIC_MAGIC_TELEPORT && PTarget != PActionTarget)
+            if (msg == MsgBasic::MAGIC_TELEPORT && PTarget != PActionTarget)
             { // reset the no effect message above if somebody has gate crystal
-                action.actionLists[0].actionTargets[0].messageID = MSGBASIC_NONE;
+                action.targets[0].results[0].messageID = MsgBasic::NONE;
             }
         }
-        actionTarget.messageID = msg;
+
+        actionResult.messageID = msg;
 
         if (IsMagicCovered)
         {
@@ -2070,7 +2303,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         }
 
         if (PTarget->objtype == TYPE_MOB &&
-            msg != MSGBASIC_SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
+            msg != MsgBasic::SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
             luautils::OnMagicHit(this, PTarget, PSpell);
         }
@@ -2092,15 +2325,15 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         {
             if (PSpell->isHeal())
             {
-                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionTarget.param));
+                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionResult.param));
 
                 // We know its an ally or self, if not self and leader matches, credit the RoE Objective
                 if (PEminenceTarget != PTarget && PEminenceTarget->objtype == TYPE_PC && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(PEminenceTarget)->profile.unity_leader == static_cast<CCharEntity*>(PTarget)->profile.unity_leader)
                 {
-                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionTarget.param));
+                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionResult.param));
                 }
             }
-            else if (PEminenceTarget != PTarget && PSpell->isBuff() && actionTarget.param)
+            else if (PEminenceTarget != PTarget && PSpell->isBuff() && actionResult.param)
             {
                 roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagramList{});
             }
@@ -2127,34 +2360,15 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 }
 
-void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
+void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
 {
     TracyZoneScoped;
-    CSpell* PSpell = state.GetSpell();
-    if (PSpell)
+    if (CSpell* PSpell = state.GetSpell())
     {
-        action.id         = id;
-        action.spellgroup = PSpell->getSpellGroup();
-        action.recast     = 0s;
-        action.actiontype = ACTION_MAGIC_INTERRUPT;
+        ActionInterrupts::MagicInterrupt(this, PSpell);
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.messageID       = 0;
-        actionTarget.animation       = 0;
-        actionTarget.param           = static_cast<uint16>(PSpell->getID());
-
-        if (blockedCast)
+        if (!blockedCast)
         {
-            // In a cutscene or otherwise, it seems the target "evades" the cast, despite the ID being set to the caster?
-            // No message is sent in this case
-            actionTarget.reaction = REACTION::EVADE;
-        }
-        else
-        {
-            actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
@@ -2168,8 +2382,8 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
     TracyZoneScoped;
     auto* PWeaponskill = state.GetSkill();
 
-    action.id         = id;
-    action.actiontype = ACTION_WEAPONSKILL_FINISH;
+    action.actorId    = id;
+    action.actiontype = ActionCategory::SkillFinish;
     action.actionid   = PWeaponskill->getID();
 }
 
@@ -2181,6 +2395,13 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     if (PTarget == nullptr)
     {
         ShowWarning("CMobEntity::OnMobSkillFinished: PTarget is null");
+        return;
+    }
+
+    // Forced interrupt via status effect
+    if (StatusEffectContainer->HasPreventActionEffect(false))
+    {
+        ActionInterrupts::AbilityInterrupt(this);
         return;
     }
 
@@ -2210,58 +2431,54 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
 
-    action.id = id;
+    action.actorId = id;
     if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)
     {
-        action.actiontype = ACTION_PET_MOBABILITY_FINISH;
+        action.actiontype = ActionCategory::PetSkillFinish;
     }
     else if (PSkill->getID() < 256)
     {
-        action.actiontype = ACTION_WEAPONSKILL_FINISH;
+        action.actiontype = ActionCategory::SkillFinish;
     }
     else
     {
-        action.actiontype = ACTION_MOBABILITY_FINISH;
+        action.actiontype = ActionCategory::MobSkillFinish;
     }
     action.actionid = PSkill->getID();
 
-    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
-    {
-        if (PSkill->isAoE())
-        {
-            PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags, PSkill->getValidTargets());
-        }
-        else if (PSkill->isConal())
-        {
-            float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getValidTargets(), PSkill->getAoe());
-        }
-        else
-        {
-            if (this->objtype == TYPE_MOB && PTarget->objtype == TYPE_PC)
-            {
-                CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PTarget, this);
-                if (PCoverAbilityUser != nullptr)
-                {
-                    PTarget = PCoverAbilityUser;
-                }
-            }
+    // Self-centered AoEs (mob_skill_aoe = 1) don't have a "primary target" concept
+    // They should find targets around the mob regardless of where any specific entity is
+    bool isSelfCenteredAoE = PSkill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER);
 
-            PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
-        }
-    }
-    else // Out of range
+    // For non-self-centered skills, check if the primary target is within range
+    if (!isSelfCenteredAoE && !PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 0;
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
-        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
-        actionTarget.speceffect      = SPECEFFECT::BLOOD;
+        ActionInterrupts::MobSkillOutOfRange(this, PTarget);
         return;
+    }
+
+    // Find targets based on skill type
+    if (PSkill->isAoE())
+    {
+        PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags, PSkill->getValidTargets());
+    }
+    else if (PSkill->isConal())
+    {
+        float angle = 45.0f;
+        PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getValidTargets(), PSkill->getAoe());
+    }
+    else
+    {
+        if (this->objtype == TYPE_MOB && PTarget->objtype == TYPE_PC)
+        {
+            CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PTarget, this);
+            if (PCoverAbilityUser != nullptr)
+            {
+                PTarget = PCoverAbilityUser;
+            }
+        }
+
+        PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
     }
 
     uint16 targets  = static_cast<uint16>(PAI->TargetFind->m_targets.size());
@@ -2281,27 +2498,24 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.messageID       = 0;
+        action_target_t& actionTarget = action.addTarget(id);
+        action_result_t& actionResult = actionTarget.addResult();
+        actionResult.messageID        = MsgBasic::NONE;
 
         if (skipSelf)
         {
             // This ability targets self for aoe skills (such as Frozen Mist)
             // And it found no valid targets in range, the skill and animation should still trigger
             // action.actiontype unchanged
-            actionTarget.animation  = PSkill->getAnimationID();
-            actionTarget.reaction   = REACTION::MISS | REACTION::HIT | REACTION::GUARDED;
-            actionTarget.speceffect = SPECEFFECT::SELFAOE_MISS;
+            actionResult.animation  = PSkill->getAnimationID();
+            actionResult.resolution = ActionResolution::Miss;
+            actionResult.info       = ActionInfo::UnknownAoE;
+
+            // TODO: This is supposed to emit an extra 'spte'!
         }
         else
         {
-            action.actiontype      = ACTION_MOBABILITY_INTERRUPT;
-            action.actionid        = 28787; // Some hardcoded magic for interrupts
-            actionTarget.animation = 0x1FC; // Hardcoded magic sent from the server
-            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+            ActionInterrupts::MobSkillNoTargetInRange(this);
         }
 
         return;
@@ -2314,31 +2528,41 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     PSkill->setHP(health.hp);
     PSkill->setHPP(GetHPP());
 
-    uint16 msg            = 0;
-    uint16 defaultMessage = PSkill->getMsg();
+    auto msg            = MsgBasic::NONE;
+    auto defaultMessage = PSkill->getMsg();
 
     bool first{ true };
+
+    // Process self first if present in target list (for self-buff abilities)
+    // This ensures the caster appears as the first target in the packet
+    CBattleEntity* selfTarget = nullptr;
     for (auto&& PTargetFound : PAI->TargetFind->m_targets)
+    {
+        if (PTargetFound == this)
+        {
+            selfTarget = PTargetFound;
+            break;
+        }
+    }
+
+    // Lambda to process a target
+    auto processTarget = [&](CBattleEntity* PTargetFound)
     {
         if (PTarget == PTargetFound && skipSelf)
         {
             // This ability targets self for aoe skills (such as Frozen Mist)
             // Ignore self completely
-
-            continue;
+            return;
         }
 
-        actionList_t& list = action.getNewActionList();
+        action_target_t& target = action.addTarget(PTargetFound->id);
+        action_result_t& result = target.addResult();
 
-        list.ActionTargetID = PTargetFound->id;
-
-        actionTarget_t& target = list.getNewActionTarget();
-
-        list.ActionTargetID = PTargetFound->id;
-        target.reaction     = REACTION::HIT;
-        target.speceffect   = SPECEFFECT::HIT;
-        target.animation    = PSkill->getAnimationID();
-        target.messageID    = PSkill->getMsg();
+        target.actorId    = PTargetFound->id;
+        result.resolution = ActionResolution::Hit;
+        result.animation  = PSkill->getAnimationID();
+        result.messageID  = PSkill->getMsg();
+        result.knockback  = luautils::callGlobal<Knockback>("xi.mobskills.calculateKnockback", PTargetFound, this, PSkill, &action);
 
         // reset the skill's message back to default
         PSkill->setMsg(defaultMessage);
@@ -2363,72 +2587,62 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             PTargetFound->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTargetFound, this, PSkill->getID(), state.GetSpentTP(), &action);
         }
 
-        if (msg == 0)
+        if (msg == MsgBasic::NONE)
         {
             msg = PSkill->getMsg();
         }
         else
         {
-            msg = PSkill->getAoEMsg();
+            msg = messageutils::GetAoEVariant(PSkill->getMsg());
         }
 
         if (damage < 0)
         {
-            msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp);
+            msg          = MsgBasic::SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            result.param = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp);
         }
         else
         {
-            target.param = damage;
+            // We use the skill to carry the critical flag and the attack type
+            // This should be deprecated in favor of onMobWeaponSkill returning a table...
+            result.recordDamage(attack_outcome_t{
+                .atkType    = PSkill->getAttackType(),
+                .damage     = damage,
+                .target     = PTargetFound,
+                .isCritical = PSkill->isCritical(),
+            });
+
+            // Reset the flag
+            PSkill->setCritical(false);
         }
 
-        target.messageID = msg;
+        result.messageID = msg;
 
         if (PSkill->hasMissMsg())
         {
-            target.reaction   = REACTION::MISS;
-            target.speceffect = SPECEFFECT::NONE;
-            if (msg == PSkill->getAoEMsg())
+            result.resolution = ActionResolution::Miss;
+            result.param      = 0;
+            if (msg == messageutils::GetAoEVariant(PSkill->getMsg()))
             {
-                msg = 282;
+                msg = MsgBasic::TARGET_EVADES;
             }
+
+            // Evading negates knockback
+            result.knockback = Knockback::None;
         }
         else
         {
-            target.reaction   = REACTION::HIT;
-            target.speceffect = SPECEFFECT::HIT;
+            result.resolution = ActionResolution::Hit;
         }
 
-        // TODO: Should this be reaction and not speceffect?
-        if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
+        if (result.resolution != ActionResolution::Miss && result.resolution != ActionResolution::Parry)
         {
-            target.speceffect = SPECEFFECT::RECOIL;
-            if (target.reaction == REACTION::HIT)
-            {
-                target.knockback = PSkill->getKnockback();
-            }
-            else
-            {
-                target.knockback = 0;
-            }
-
             if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(), PSkill->getTertiarySkillchain());
-                if (effect != SUBEFFECT_NONE)
+                const auto effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(), PSkill->getTertiarySkillchain());
+                if (effect != ActionProcSkillChain::None)
                 {
-                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);
-                    if (skillChainDamage < 0)
-                    {
-                        target.addEffectParam   = -skillChainDamage;
-                        target.addEffectMessage = 384 + effect;
-                    }
-                    else
-                    {
-                        target.addEffectParam   = skillChainDamage;
-                        target.addEffectMessage = 287 + effect;
-                    }
-                    target.additionalEffect = effect;
+                    result.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTargetFound, result.param, nullptr));
                 }
 
                 first = false;
@@ -2445,6 +2659,21 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             battleutils::ClaimMob(PTargetFound, this);
         }
         battleutils::DirtyExp(PTargetFound, this);
+    };
+
+    // Process self first if present in targets
+    if (selfTarget)
+    {
+        processTarget(selfTarget);
+    }
+
+    // Process remaining targets (skip self since it was already processed)
+    for (auto&& PTargetFound : PAI->TargetFind->m_targets)
+    {
+        if (PTargetFound != this)
+        {
+            processTarget(PTargetFound);
+        }
     }
 
     PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
@@ -2469,7 +2698,7 @@ bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPack
 
     bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
     float distanceFromTarget = distance(loc.p, PTarget->loc.p);
-    bool  tooFar             = (distanceFromTarget - PTarget->m_ModelRadius) > GetMeleeRange();
+    bool  tooFar             = distanceFromTarget > GetMeleeRange(PTarget);
 
     return !tooFar && autoAttackEnabled;
 }
@@ -2488,23 +2717,6 @@ void CBattleEntity::OnDisengage(CAttackState& s)
 
 void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
-}
-
-void CBattleEntity::setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID)
-{
-    if (PTarget)
-    {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
-        action.id                 = this->id;
-        action.actiontype         = ACTION_MAGIC_FINISH; // all "is paralyzed" messages are cat 4
-        action.actionid           = actionID;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
-        actionTarget.messageID       = messageID;
-        actionTarget.param           = 0;
-    }
 }
 
 CBattleEntity* CBattleEntity::GetBattleTarget()
@@ -2529,26 +2741,23 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     if (battleutils::IsParalyzed(this))
     {
-        setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, 0);
+        ActionInterrupts::AttackParalyzed(this, PTarget);
         return true;
     }
 
     if (battleutils::IsIntimidated(this, PTarget))
     {
-        setActionInterrupted(action, PTarget, MSGBASIC_IS_INTIMIDATED, 0);
+        ActionInterrupts::AttackIntimidated(this, PTarget);
         return true;
     }
 
     // Create a new attack round.
     CAttackRound attackRound(this, PTarget);
 
-    action.actiontype  = ACTION_ATTACK;
-    action.id          = this->id;
-    actionList_t& list = action.getNewActionList();
-
-    list.ActionTargetID = PTarget->id;
-
-    CBattleEntity* POriginalTarget = PTarget;
+    action.actiontype                = ActionCategory::BasicAttack;
+    action.actorId                   = this->id;
+    action_target_t& list            = action.addTarget(PTarget->id);
+    CBattleEntity*   POriginalTarget = PTarget;
 
     /////////////////////////////////////////////////////////////////////////
     //  Start of the attack loop.
@@ -2557,30 +2766,28 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     /////////////////////////////////////////////////////////////////////////
     while (attackRound.GetAttackSwingCount() && PTarget->isAlive() && this->isAlive())
     {
-        actionTarget_t& actionTarget = list.getNewActionTarget();
+        action_result_t& actionResult = list.addResult();
         // Reference to the current swing.
         CAttack& attack = attackRound.GetCurrentAttack();
 
         // Set the swing animation.
-        actionTarget.animation = attack.GetAnimationID();
+        actionResult.animation = static_cast<ActionAnimation>(attack.GetAnimationID());
 
         if (attack.CheckCover())
         {
-            PTarget             = attackRound.GetCoverAbilityUserEntity();
-            list.ActionTargetID = PTarget->id;
+            PTarget      = attackRound.GetCoverAbilityUserEntity();
+            list.actorId = PTarget->id;
         }
 
         if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
         {
-            actionTarget.messageID  = 32;
-            actionTarget.reaction   = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT::NONE;
+            actionResult.messageID  = MsgBasic::TARGET_DODGES;
+            actionResult.resolution = ActionResolution::Miss;
         }
         else if (attack.IsDeflected())
         {
-            actionTarget.messageID  = 1;
-            actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
-            actionTarget.speceffect = SPECEFFECT::NONE;
+            actionResult.messageID  = MsgBasic::ATTACK_HITS;
+            actionResult.resolution = ActionResolution::Parry;
         }
         else if ((xirand::GetRandomNumber(100) < attack.GetHitRate() || attackRound.GetSATAOccured()) &&
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
@@ -2588,41 +2795,37 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             // Check parry.
             if (attack.CheckParried())
             {
-                actionTarget.messageID  = 70;
-                actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
-                actionTarget.speceffect = SPECEFFECT::NONE;
+                actionResult.messageID  = MsgBasic::TARGET_PARRIES;
+                actionResult.resolution = ActionResolution::Parry;
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
             }
             // attack hit, try to be absorbed by shadow unless it is a SATA attack round
             else if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget, this))
             {
-                actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
-                actionTarget.param     = 1;
-                actionTarget.reaction  = REACTION::EVADE;
+                actionResult.messageID  = MsgBasic::SHADOW_ABSORB;
+                actionResult.param      = 1;
+                actionResult.resolution = ActionResolution::Miss;
                 attack.SetEvaded(true);
             }
             else if (attack.CheckAnticipated() || attack.CheckCounter())
             {
                 if (attack.IsAnticipated())
                 {
-                    actionTarget.messageID  = 30;
-                    actionTarget.reaction   = REACTION::EVADE;
-                    actionTarget.speceffect = SPECEFFECT::NONE;
+                    actionResult.messageID  = MsgBasic::TARGET_ANTICIPATES;
+                    actionResult.resolution = ActionResolution::Miss;
                 }
+
                 if (attack.IsCountered())
                 {
-                    actionTarget.reaction     = REACTION::EVADE;
-                    actionTarget.speceffect   = SPECEFFECT::NONE;
-                    actionTarget.param        = 0;
-                    actionTarget.messageID    = 0;
-                    actionTarget.spikesEffect = SUBEFFECT_COUNTER;
+                    actionResult.resolution   = ActionResolution::Miss;
+                    actionResult.spikesEffect = ActionReactKind::Counter;
                     if (battleutils::IsAbsorbByShadow(this, PTarget))
                     {
-                        actionTarget.spikesParam   = 1;
-                        actionTarget.spikesMessage = MSGBASIC_COUNTER_ABS_BY_SHADOW;
-                        actionTarget.messageID     = 0;
-                        actionTarget.param         = 0;
+                        actionResult.spikesParam   = 1;
+                        actionResult.spikesMessage = MsgBasic::COUNTER_ABS_BY_SHADOW;
+                        actionResult.messageID     = MsgBasic::NONE;
+                        actionResult.param         = 0;
                     }
                     else
                     {
@@ -2664,9 +2867,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         int16 extraCounterDMG = (int16)(PTarget->getMod(Mod::COUNTER_DAMAGE));
                         auto  damage          = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + extraCounterDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
-                        actionTarget.spikesParam =
+                        actionResult.spikesParam =
                             battleutils::TakePhysicalDamage(PTarget, this, attack.GetAttackType(), damage, false, SLOT_MAIN, 1, nullptr, true, false, true);
-                        actionTarget.spikesMessage = 33;
+                        actionResult.spikesMessage = MsgBasic::ATTACK_COUNTERED_DAMAGE;
                         if (PTarget->objtype == TYPE_PC)
                         {
                             charutils::TrySkillUP((CCharEntity*)PTarget, skilltype, GetMLevel());
@@ -2689,13 +2892,14 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
                 this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", this, PTarget, &attack);
 
-                actionTarget.reaction = REACTION::HIT;
+                actionResult.resolution = ActionResolution::Hit;
 
                 // Critical hit.
                 if (attack.IsCritical())
                 {
-                    actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
-                    actionTarget.messageID  = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 353 : 67;
+                    // TODO: Use withPhysicalDamage
+                    actionResult.info |= ActionInfo::CriticalHit;
+                    actionResult.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? MsgBasic::RANGED_ATTACK_CRIT : MsgBasic::ATTACK_CRIT;
 
                     if (PTarget->objtype == TYPE_MOB)
                     {
@@ -2709,14 +2913,13 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Not critical hit.
                 else
                 {
-                    actionTarget.speceffect = SPECEFFECT::HIT;
-                    actionTarget.messageID  = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 352 : 1;
+                    actionResult.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? MsgBasic::RANGED_ATTACK_HIT : MsgBasic::ATTACK_HITS;
                 }
 
                 // Guarded. TODO: Stuff guards that shouldn't.
                 if (attack.IsGuarded())
                 {
-                    actionTarget.reaction |= REACTION::GUARDED;
+                    actionResult.resolution = ActionResolution::Guard;
                     battleutils::HandleTacticalGuard(PTarget);
                 }
 
@@ -2739,15 +2942,24 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Try shield block
                 if (attack.IsBlocked())
                 {
-                    actionTarget.reaction |= REACTION::BLOCK;
+                    actionResult.resolution = ActionResolution::Block;
                 }
 
-                actionTarget.param =
-                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
-                if (actionTarget.param < 0)
+                const auto damage = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
+                if (damage < 0)
                 {
-                    actionTarget.param     = -(actionTarget.param);
-                    actionTarget.messageID = 373;
+                    actionResult.param     = -damage;
+                    actionResult.messageID = MsgBasic::SPIKES_EFFECT_RECOVER;
+                }
+                else
+                {
+                    // This will set the physical hit distortion accordingly
+                    actionResult.recordDamage(attack_outcome_t{
+                        .atkType    = ATTACK_TYPE::PHYSICAL,
+                        .damage     = damage,
+                        .target     = PTarget,
+                        .isCritical = attack.IsCritical(),
+                    });
                 }
             }
 
@@ -2778,9 +2990,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         else
         {
             // misses the target
-            actionTarget.reaction   = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT::NONE;
-            actionTarget.messageID  = 15;
+            actionResult.resolution = ActionResolution::Miss;
+            actionResult.messageID  = MsgBasic::ATTACK_MISSES;
             attack.SetEvaded(true);
 
             // Check & Handle Afflatus Misery Accuracy Bonus
@@ -2796,44 +3007,42 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
 
         // If we didn't hit at all, set param to 0 if we didn't blink any shadows.
-        if ((actionTarget.reaction & REACTION::HIT) == REACTION::NONE && actionTarget.messageID != MSGBASIC_SHADOW_ABSORB)
+        if (actionResult.resolution == ActionResolution::Miss && actionResult.messageID != MsgBasic::SHADOW_ABSORB)
         {
-            actionTarget.param = 0;
+            actionResult.param = 0;
         }
 
         // if we did hit, run enspell/spike routines as long as this isn't a Daken swing
-        if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
+        if (actionResult.resolution == ActionResolution::Hit && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             // Handle addtl effects/enspells only if the target is not already dead
             if (PTarget->GetHPP() > 0)
             {
-                battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()], attack.GetDamage(), attack);
+                battleutils::HandleEnspell(this, PTarget, &actionResult, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()], attack.GetDamage(), attack);
             }
-            battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
+            battleutils::HandleSpikesDamage(this, PTarget, &actionResult, attack.GetDamage());
         }
 
         // if we parried, run battuta check if applicable
-        if ((actionTarget.reaction & REACTION::PARRY) == REACTION::PARRY && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BATTUTA))
+        if (actionResult.resolution == ActionResolution::Parry && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BATTUTA))
         {
-            battleutils::HandleParrySpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
-        }
-
-        // set recoil if we hit and dealt non-zero damage
-        if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
-        {
-            actionTarget.speceffect = SPECEFFECT::RECOIL;
+            battleutils::HandleParrySpikesDamage(this, PTarget, &actionResult, attack.GetDamage());
         }
 
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
-        // if zanshin procs, add a new zanshin based attack.
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
+
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
-            if ((((actionTarget.reaction & REACTION::MISS) != REACTION::NONE || (actionTarget.reaction & REACTION::GUARDED) != REACTION::NONE || actionTarget.spikesEffect == SUBEFFECT_COUNTER) &&
-                 xirand::GetRandomNumber(100) < zanshinChance) ||
-                (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && xirand::GetRandomNumber(100) < (zanshinChance / 4)))
+            const bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == ActionReactKind::Counter;
+            const bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
+
+            const bool isSamWithHasso   = GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
+            const bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
+
+            if (normalZanshinProc || hassoZanshinProc)
             {
                 attackRound.AddAttackSwing(PHYSICAL_ATTACK_TYPE::ZANSHIN, PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK, 1);
             }
@@ -2857,7 +3066,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
         attackRound.DeleteAttackSwing();
 
-        if (list.actionTargets.size() == 8)
+        if (list.results.size() == 8)
         {
             break;
         }
@@ -2934,8 +3143,7 @@ void CBattleEntity::Tick(timer::time_point /*unused*/)
 void CBattleEntity::PostTick()
 {
     TracyZoneScoped;
-    if (health.hp == 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CRaiseState>() &&
-        !PAI->IsCurrentState<CDespawnState>())
+    if (health.hp <= 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CDespawnState>())
     {
         Die();
     }

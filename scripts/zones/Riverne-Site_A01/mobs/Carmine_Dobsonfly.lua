@@ -7,6 +7,11 @@ local ID = zones[xi.zone.RIVERNE_SITE_A01]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
     mob:setMagicCastingEnabled(false) -- does not cast spells while idle
@@ -39,8 +44,6 @@ entity.onMobDespawn = function(mob)
             DisallowRespawn(i, false)
             GetMobByID(i):setRespawnTime(respawnTime)
         end
-    -- else
-    --    DisallowRespawn(mob:getID(), true)
     end
 end
 

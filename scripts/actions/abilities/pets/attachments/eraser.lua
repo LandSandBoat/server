@@ -44,7 +44,7 @@ attachmentObject.onEquip = function(pet)
             then
                 erasetarget = automaton
             elseif
-                (automaton:checkDistance(master) - master:getModelSize()) < 7 and
+                automaton:checkDistance(target) < (7 + target:getHitboxSize() + automaton:getHitboxSize()) and -- needs verification
                 (master:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(master))
             then
                 erasetarget = master

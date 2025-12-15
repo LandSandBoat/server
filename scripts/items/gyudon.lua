@@ -19,15 +19,12 @@ itemObject.onItemUse = function(target, user, item, action)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.ENMITY, -5)
-    target:addMod(xi.mod.DOUBLE_ATTACK, 5)
-    target:addMod(xi.mod.ALL_WSDMG_ALL_HITS, 5)
+    effect:addMod(xi.mod.ENMITY, -5)
+    effect:addMod(xi.mod.DOUBLE_ATTACK, 5)
+    effect:addMod(xi.mod.ALL_WSDMG_ALL_HITS, 5)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.ENMITY, -5)
-    target:delMod(xi.mod.DOUBLE_ATTACK, 5)
-    target:delMod(xi.mod.ALL_WSDMG_ALL_HITS, 5)
 end
 
 return itemObject

@@ -13,10 +13,11 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 5
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, 1, 1, 1, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local ftp     = 1
+    local tp      = skill:getTP()
+    local accmod  = 0.8 + 0.1 * math.floor((tp - 1000) / 1000)
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 

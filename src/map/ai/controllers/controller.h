@@ -32,6 +32,8 @@ class CBattleEntity;
 class CController
 {
 public:
+    using IgnoreRecastsAndCosts = xi::Flag<struct IgnoreRecastsAndCostsTag>;
+
     CController(CBattleEntity* _POwner);
     virtual ~CController()
     {

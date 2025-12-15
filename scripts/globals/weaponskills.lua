@@ -106,41 +106,12 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     return numHits
 end
 
+---@param attacker CBaseEntity
+---@param target CBaseEntity
+---@param bonus number
+---@return number
 xi.weaponskills.getRangedHitRate = function(attacker, target, bonus)
-    local acc = attacker:getRACC()
-    local eva = target:getEVA()
-
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if
-        target:hasStatusEffect(xi.effect.YONIN) and
-        target:isFacing(attacker, 23)
-    then
-        -- Yonin evasion boost if defender is facing attacker
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    if attacker:getMainLvl() > target:getMainLvl() then     -- acc bonus
-        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty
-        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
-    end
-
-    local hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
-    local hitrate = (75 + hitdiff) / 100
-
-    -- Applying hitrate caps
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    return xi.combat.physicalHitRate.getRangedHitRate(attacker, target, bonus, true)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
@@ -253,12 +224,8 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     -- Souleater
     adjustedDamage = adjustedDamage + xi.combat.damage.souleaterAddition(attacker)
 
-    if adjustedDamage > 0 then
-        adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
-        adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
-    end
-
-    adjustedDamage = utils.stoneskin(target, adjustedDamage)
+    adjustedDamage = utils.handlePhalanx(target, adjustedDamage)
+    adjustedDamage = utils.handleStoneskin(target, adjustedDamage)
 
     return adjustedDamage
 end
@@ -280,18 +247,18 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
     magicdmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams))
     magicdmg = math.floor(magicdmg + calcParams.bonusfTP * physicaldmg)
     magicdmg = math.floor(magicdmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, 0, wsParams.skill, 0, wsParams.ele, 0, 0, calcParams.bonusAcc))
-    magicdmg = math.floor(magicdmg * xi.spells.damage.calculateTMDA(target, wsParams.ele))
+    magicdmg = math.floor(magicdmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
     magicdmg = math.floor(target:handleSevereDamage(magicdmg, false))
 
     if magicdmg > 0 then
-        magicdmg = math.floor(magicdmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele))
+        magicdmg = math.floor(magicdmg * xi.spells.damage.calculateAbsorption(target, wsParams.ele, true))
+        magicdmg = math.floor(magicdmg * xi.spells.damage.calculateNullification(target, wsParams.ele, true, false))
     end
 
     if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
-        magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-        magicdmg = utils.clamp(magicdmg, 0, 99999)
-        magicdmg = utils.oneforall(target, magicdmg)
-        magicdmg = utils.stoneskin(target, magicdmg)
+        magicdmg = utils.handlePhalanx(target, magicdmg)
+        magicdmg = utils.handleOneForAll(target, magicdmg)
+        magicdmg = utils.handleStoneskin(target, magicdmg)
     end
 
     return math.floor(magicdmg)
@@ -890,7 +857,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         -- Calculate magical bonuses and reductions
         dmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams))
         dmg = math.floor(dmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, 0, wsParams.skill, 0, wsParams.ele, 0, 0, gearAcc))
-        dmg = math.floor(dmg * xi.spells.damage.calculateTMDA(target, wsParams.ele))
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
         dmg = math.floor(target:handleSevereDamage(dmg, false))
 
         if dmg < 0 then
@@ -900,15 +867,12 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             return dmg
         end
 
-        dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, wsParams.ele)
+        dmg = dmg * xi.spells.damage.calculateAbsorption(target, wsParams.ele, true)
+        dmg = dmg * xi.spells.damage.calculateNullification(target, wsParams.ele, true, false)
 
-        if dmg > 0 then
-            dmg = dmg - target:getMod(xi.mod.PHALANX)
-            dmg = utils.clamp(dmg, 0, 99999)
-        end
-
-        dmg = utils.oneforall(target, dmg)
-        dmg = utils.stoneskin(target, dmg)
+        dmg = utils.handlePhalanx(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
+        dmg = utils.handleStoneskin(target, dmg)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
@@ -940,11 +904,10 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             end
 
             if finaldmg > 0 then
-                action:speceffect(defender:getID(), xi.specEffect.RECOIL)
                 if wsResults.guardedHits and wsResults.guardedHits > 0 then
-                    action:reaction(defender:getID(), xi.reaction.GUARDED)
+                    action:resolution(defender:getID(), xi.action.resolution.GUARD)
                 else
-                    action:reaction(defender:getID(), xi.reaction.HIT)
+                    action:resolution(defender:getID(), xi.action.resolution.HIT)
                 end
             end
         else
@@ -954,8 +917,6 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
         end
-
-        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -966,7 +927,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             action:messageID(defender:getID(), xi.msg.basic.EVADES)
         end
 
-        action:reaction(defender:getID(), xi.reaction.EVADE)
+        action:resolution(defender:getID(), xi.action.resolution.MISS)
     end
 
     local targetTPMult   = wsParams.targetTPMult or 1
@@ -981,11 +942,8 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
-
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
-        if finaldmg >= 0 then
-            action:param(defender:getID(), math.abs(finaldmg))
-        end
+        action:recordDamage(defender, attack.type, math.abs(finaldmg), wsResults.criticalHit)
     end
 
     local enmityEntity = wsResults.taChar or attacker

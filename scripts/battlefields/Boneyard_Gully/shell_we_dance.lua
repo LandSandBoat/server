@@ -42,17 +42,17 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.NONE,         weight = 812 },
-        { itemId = xi.item.CLOUD_EVOKER, weight = 188 },
+        { itemId = xi.item.NONE,                     weight = 850 },
+        { itemId = xi.item.CLOUD_EVOKER,             weight = 150 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.NONE,                    weight = 199 },
-        { itemId = xi.item.STONE_SPLITTER,          weight = 150 },
-        { itemId = xi.item.FRENZY_FIFE,             weight = 175 },
-        { itemId = xi.item.BLAU_DOLCH,              weight = 238 },
-        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V, weight = 238 },
+        { itemId = xi.item.NONE,                     weight = 275 },
+        { itemId = xi.item.STONE_SPLITTER,           weight = 150 },
+        { itemId = xi.item.FRENZY_FIFE,              weight = 150 },
+        { itemId = xi.item.BLAU_DOLCH,               weight = 150 },
+        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V,  weight = 275 },
     },
 }
 

@@ -17,8 +17,15 @@ end
 
 itemObject.onItemUse = function(target)
     if target:hasEquipped(xi.item.HYDRA_TIARA) then
-        target:addStatusEffect(xi.effect.POTENCY, 7, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIARA)
+        target:addStatusEffect(xi.effect.POTENCY, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIARA)
     end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.CRITHITRATE, 7)
+end
+
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject

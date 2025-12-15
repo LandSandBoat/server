@@ -96,15 +96,18 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         displayCap   = caster:getMaxMP() - caster:getMP()
     end
 
-    -- Early return: Target absorbs or nullifies dark.
-    if xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.DARK) ~= 1 then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-        return finalDamage
-    end
-
     -- Early return: Target is undead.
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return finalDamage
+    end
+
+    -- Early return: Target absorbs or nullifies dark.
+    if
+        xi.spells.damage.calculateAbsorption(target, xi.element.DARK, true) ~= 1 or
+        xi.spells.damage.calculateNullification(target, xi.element.DARK, true, false) ~= 1
+    then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return finalDamage
     end
 
@@ -148,9 +151,9 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
 
     -- Final operations.
     if modAbsorbed == xi.mod.HP then
-        finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
-        finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
-        finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+        finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
+        finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
+        finalDamage = utils.clamp(utils.handleStoneskin(target, finalDamage), -99999, 99999)
         finalDamage = utils.clamp(finalDamage, 0, targetPoints)
         finalDamage = target:checkDamageCap(finalDamage)
 
@@ -215,7 +218,10 @@ xi.spells.absorb.doAbsorbTPSpell = function(caster, target, spell)
     local finalDamage = 0
 
     -- Early return: Target absorbs or nullifies dark.
-    if xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.DARK) ~= 1 then
+    if
+        xi.spells.damage.calculateAbsorption(target, xi.element.DARK, true) ~= 1 or
+        xi.spells.damage.calculateNullification(target, xi.element.DARK, true, false) ~= 1
+    then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return finalDamage
     end

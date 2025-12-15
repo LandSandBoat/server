@@ -34,7 +34,7 @@ mission.sections[1] =
         return currentMission == mission.missionId and
             xi.settings.main.ENABLE_ROV == 1 and
             player:getMainLvl() >= 3 and
-            not player:isInMogHouse()
+            not player:inMogHouse()
     end,
 }
 

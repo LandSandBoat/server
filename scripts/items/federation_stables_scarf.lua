@@ -8,8 +8,8 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, param, caster)
     local result = 0
-    if not target:hasVisitedZone(241) then
-        result = 56
+    if not target:hasVisitedZone(xi.zone.WINDURST_WOODS) then
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
 
     return result

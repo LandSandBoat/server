@@ -12,19 +12,29 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 3)
 
-    if
-        npc:getAnimation() == xi.anim.CLOSE_DOOR and
-        brassDoor and
-        brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
-    then
+    if not brassDoor then -- Nil check
+        return
+    end
+
+    if brassDoor:getAnimation() == xi.anim.OPEN_DOOR then -- Door is already open
+        return
+    end
+
+    if npc:getAnimation() == xi.anim.OPEN_DOOR then -- Torch is already lit
+        return
+    end
+
+    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
         player:startEvent(10)
+    else
+        player:messageSpecial(ID.text.UNLIT_TORCH)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local brassDoor = GetNPCByID(ID.npc.THIRD_PASSWORD_STATUE - 2)
-    local torch1 = GetNPCByID(ID.npc.THIRD_PASSWORD_STATUE + 1)
-    local torch2 = GetNPCByID(ID.npc.THIRD_PASSWORD_STATUE + 2)
+    local brassDoor = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE - 2)
+    local torch1 = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE + 1)
+    local torch2 = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE + 2)
 
     if
         torch1 and

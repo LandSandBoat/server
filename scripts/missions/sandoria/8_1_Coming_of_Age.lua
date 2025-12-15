@@ -78,6 +78,24 @@ mission.sections =
                 end,
             },
 
+            ['_6h0'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 2 then
+                        return mission:event(64)
+                    end
+                end,
+            },
+
+            ['_6h1'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 2 then
+                        return mission:event(75)
+                    end
+                end,
+            },
+
             onZoneIn = function(player, prevZone)
                 if player:getMissionStatus(mission.areaId) == 0 then
                     return 116
@@ -182,7 +200,7 @@ mission.sections =
             onZoneIn = function(player, prevZone)
                 if
                     mission:getVar(player, 'Progress') < GetSystemTime() and
-                    not player:isInMogHouse()
+                    not player:inMogHouse()
                 then
                     return 16
                 end

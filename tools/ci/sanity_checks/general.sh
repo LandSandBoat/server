@@ -30,11 +30,12 @@ fi
 
 if [[ $# -gt 0 ]]; then
     targets=("$@")
+    general_output=""
     for file in "${targets[@]}"; do
         # Black formatter used for Python violates some of our general rules
         [[ -f $file && $file != *.py ]] || continue
-
-        general_output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
+        output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
+        general_output+="$output"
     done
 else
     general_output=$(python tools/ci/sanity_checks/general.py . 2>&1 || true)
@@ -46,12 +47,6 @@ if [[ -n "$general_output" ]]; then
         any_issues=true
     fi
     echo "$general_output"
-    echo
-fi
-
-# If no section was written, emit a success summary
-if ! $any_issues; then
-    echo "## :heavy_check_mark: General Checks Passed"
     echo
 fi
 

@@ -54,6 +54,36 @@ xi.action.category =
     JOBABILITY_INTERRUPT  = 38,
 }
 
+-- action.cmd_arg (32 bits)
+---@enum xi.action.fourCC
+xi.action.fourCC =
+{
+    ATTACK                   = 0x306B7461, -- "atk0"
+    SKILL_USE                = 0x65746163, -- "cate"
+    SKILL_INTERRUPT          = 0x65747073, -- "spte"
+    ITEM_USE                 = 0x74696163, -- "cait"
+    ITEM_INTERRUPT           = 0x74697073, -- "spit"
+    RANGE_START              = 0x676C6163, -- "calg"
+    RANGE_INTERRUPT          = 0x676C7073, -- "splg"
+    RANGE_FINISH             = 0x676C6873, -- "shlg"
+    WHITE_MAGIC_CAST         = 0x68776163, -- "cawh"
+    BLACK_MAGIC_CAST         = 0x6B626163, -- "cabk"
+    BLUE_MAGIC_CAST          = 0x6C626163, -- "cabl"
+    SONG_MAGIC_CAST          = 0x6F736163, -- "caso"
+    NINJUTSU_MAGIC_CAST      = 0x6A6E6163, -- "canj"
+    SUMMON_MAGIC_CAST        = 0x6D736163, -- "casm"
+    GEOMANCY_MAGIC_CAST      = 0x65676163, -- "cage"
+    TRUST_MAGIC_CAST         = 0x61666163, -- "cafa"
+    WHITE_MAGIC_INTERRUPT    = 0x68777073, -- "spwh"
+    BLACK_MAGIC_INTERRUPT    = 0x6B627073, -- "spbk"
+    BLUE_MAGIC_INTERRUPT     = 0x6C627073, -- "spbl"
+    SONG_MAGIC_INTERRUPT     = 0x6F737073, -- "spso"
+    NINJUTSU_MAGIC_INTERRUPT = 0x6A6E7073, -- "spnj"
+    SUMMON_MAGIC_INTERRUPT   = 0x6D737073, -- "spsm"
+    GEOMANCY_MAGIC_INTERRUPT = 0x65677073, -- "spge"
+    TRUST_MAGIC_INTERRUPT    = 0x61667073, -- "spfa"
+}
+
 -- action.result.miss (3 bits)
 -- Denotes final resolution of the attack.
 -- Only one may be set.

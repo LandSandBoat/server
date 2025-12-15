@@ -88,6 +88,8 @@ if __name__ == "__main__":
             parsed_warnings = parse_tidy_log(log_data)
             markdown_summary = generate_markdown_summary(parsed_warnings)
             print(markdown_summary)
+            if parsed_warnings:
+                sys.exit(1)
         except FileNotFoundError:
             print(f"Error: File not found at {log_file_path}", file=sys.stderr)
             sys.exit(1)

@@ -30,8 +30,6 @@
 #include <thread>
 #include <unordered_map>
 
-#include <nonstd/jthread.hpp>
-
 class Application;
 
 class ConsoleService final
@@ -62,7 +60,7 @@ private:
 
     std::mutex              m_consoleInputBottleneck;
     std::atomic<bool>       m_consoleThreadRun;
-    nonstd::jthread         m_consoleInputThread;
+    std::jthread            m_consoleInputThread;
     std::condition_variable m_consoleStopCondition;
 
     std::unordered_map<std::string, ConsoleCommand> m_commands;

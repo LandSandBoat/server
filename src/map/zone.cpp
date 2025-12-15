@@ -34,7 +34,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "zone.h"
 
 #include "common/logging.h"
-
+#include "common/settings.h"
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
@@ -42,6 +42,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include <cstring>
 
 #include "battlefield.h"
+#include "enums/loot_recast.h"
 #include "ipc_client.h"
 #include "latent_effect_container.h"
 #include "los/zone_los.h"
@@ -49,6 +50,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "monstrosity.h"
 #include "navmesh.h"
 #include "party.h"
+#include "recast_container.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "zone_entities.h"
@@ -1054,6 +1056,28 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     charutils::ReadHistory(PChar);
 
+    // Restore seal recast timer if enabled
+    if (settings::get<bool>("main.PERSIST_SEAL_TIMERS"))
+    {
+        auto expirationTimestamp = static_cast<uint32>(PChar->getCharVar("SealTimerExpiry"));
+        if (expirationTimestamp > 0)
+        {
+            auto currentTimestamp = earth_time::timestamp();
+            if (expirationTimestamp > currentTimestamp)
+            {
+                auto remainingSeconds = expirationTimestamp - currentTimestamp;
+                // Sanity check: seal timer should never exceed 5 minutes (300 seconds)
+                if (remainingSeconds <= 300)
+                {
+                    PChar->PRecastContainer->AddLootRecast(LootRecastID::Seal, std::chrono::seconds(remainingSeconds));
+                }
+            }
+
+            // Ensure var is wiped after zone in
+            PChar->setCharVar("SealTimerExpiry", 0);
+        }
+    }
+
     moduleutils::OnCharZoneIn(PChar);
 }
 
@@ -1067,6 +1091,23 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         {
             luautils::OnTriggerAreaLeave(PChar, triggerArea);
             break;
+        }
+    }
+
+    // Save seal recast timer if enabled
+    if (settings::get<bool>("main.PERSIST_SEAL_TIMERS"))
+    {
+        auto* recast = PChar->PRecastContainer->GetLootRecast(LootRecastID::Seal);
+        if (recast && recast->RecastTime > 0s)
+        {
+            auto remaining = (recast->TimeStamp + recast->RecastTime) - timer::now();
+            // Don't save if it will expire during zoning process
+            if (remaining > 10s)
+            {
+                auto remainingSeconds    = std::chrono::duration_cast<std::chrono::seconds>(remaining).count();
+                auto expirationTimestamp = earth_time::timestamp() + static_cast<uint32>(remainingSeconds);
+                PChar->setCharVar("SealTimerExpiry", static_cast<int32>(expirationTimestamp));
+            }
         }
     }
 

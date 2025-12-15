@@ -7,6 +7,8 @@ local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0) -- QM moves every 10 minutes
+
     -- Eba or Mahisha spawn on zone initialization
     local mahisha = GetMobByID(ID.mob.MAHISHA)
     local eba     = GetMobByID(ID.mob.EBA)

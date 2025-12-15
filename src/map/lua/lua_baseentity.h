@@ -90,7 +90,7 @@ public:
 
     // Packets, Events, and Flags
     void injectPacket(const std::string& filename); // Send the character a packet kept in a file
-    void injectActionPacket(uint32 inTargetID, uint16 inCategory, uint16 inAnimationID, uint16 inSpecEffect, uint16 inReaction, uint16 inMessage, uint16 inActionParam, uint16 inParam);
+    void injectActionPacket(uint32 inTargetID, uint16 inCategory, uint16 inAnimationID, uint16 inInfo, uint16 inReaction, uint16 inMessage, uint16 inActionParam, uint16 inParam) const;
     void entityVisualPacket(const std::string& command, const sol::object& entity) const;
     void entityAnimationPacket(const char* command, const sol::object& target);
     void sendDebugPacket(const sol::table& packetData);
@@ -196,7 +196,7 @@ public:
     uint32 getPreviousZoneLineID();
     uint8  getCurrentRegion();
     uint8  getContinentID();
-    bool   isInMogHouse();
+    bool   inMogHouse();
 
     bool isPlayerInTriggerArea(uint32 triggerAreaId);
     void onPlayerTriggerAreaEnter(uint32 triggerAreaId);
@@ -577,7 +577,6 @@ public:
 
     void reloadParty();
     void disableLevelSync();
-    bool isLevelSync();
 
     uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance (0=Solo 1=Party 2=Alliance)
 
@@ -735,11 +734,9 @@ public:
     uint16 getILvlMacc();
     uint16 getILvlSkill();
     uint16 getILvlParry();
-    bool   isSpellAoE(uint16 spellId);
 
     int32 physicalDmgTaken(double damage, sol::variadic_args va);
     int32 rangedDmgTaken(double damage, sol::variadic_args va);
-    int32 breathDmgTaken(double damage);
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
@@ -841,8 +838,10 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
-    float  getMeleeRange();
-    void   setMeleeRange(float range);
+    void   setModelSize(uint8 newSize);
+    float  getHitboxSize();
+    void   setHitboxSize(float newSize);
+    float  getMeleeRange(CLuaBaseEntity* target);
     void   setMobFlags(uint32 flags, const sol::object& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();
 

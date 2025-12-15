@@ -136,7 +136,7 @@ xi.mod =
     COMBAT_SKILLUP_RATE             = 64, -- % increase in skillup combat rate
     MAGIC_SKILLUP_RATE              = 65, -- % increase in skillup magic rate
     RATTP                           = 66,
-    EVA                             = 68,
+    EVA                             = 68, -- Evasion stat (Not Combat Skill Evasion)
     RDEF                            = 69,
     REVA                            = 70,
     MPHEAL                          = 71,
@@ -264,6 +264,14 @@ xi.mod =
     LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage.
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage.
 
+    -- Action-type power multipliers
+    POWER_MULTIPLIER_BASIC_ATTACK   = 1173, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_BASIC_RANGED   = 1174, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_SPELL          = 1175, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_WEAPONSKILL    = 1176, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_JOB_ABILITY    = 1177, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_MOBSKILL       = 1178, -- Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+
     CRITHITRATE                     = 165,
     CRITHITRATE_ONLY_WEP            = 141,
     CRIT_DMG_INCREASE               = 421,
@@ -277,6 +285,7 @@ xi.mod =
     SPELLINTERRUPT                  = 168,
 
     -- Movement speed modifiers in use order.
+    -- See CBattleEntity::UpdateSpeed
     MOUNT_MOVE                      =  972, -- % Mount Movement Speed
     MOVE_SPEED_STACKABLE            =   75, -- Additive modifier. Applied before multipliers. Gear movement speed penalties.
     MOVE_SPEED_WEIGHT_PENALTY       =   77, -- Multiplicative modifier. For Gravity and curse.
@@ -414,7 +423,8 @@ xi.mod =
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
     UTSUSEMI                        = 307,
-    UTSUSEMI_BONUS                  = 900, -- Extra shadows from gear
+    UTSUSEMI_BONUS                  = 900,  -- Extra shadows from gear
+    UTSUSEMI_AOE                    = 1179, -- "Utsusemi" effect extends to an area
     NINJA_TOOL                      = 308,
     BLUE_POINTS                     = 309, -- Tracks extra blue points
     BLUE_LEARN_CHANCE               = 945, -- Additional chance to learn blue magic
@@ -1078,7 +1088,9 @@ xi.mod =
     PARRY_HP_RECOVERY = 1135, -- Recover <Mod Value> HP on successful parry.
 
     -- TODO: These mods are not yet implemented.
-    REWARD_RECAST                   = 1152, -- TODO: Reduces Reward recast time (seconds)
+    REWARD_RECAST = 1152, -- TODO: Reduces Reward recast time (seconds)
+
+    KNOCKBACK_REDUCTION = 1172, -- Reduces distance knocked back
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

@@ -36,8 +36,9 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     dmg       = addBonusesAbility(player, xi.element.THUNDER, target, dmg, params)
 
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
-    dmg            = dmg * xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.THUNDER, 0, 0, bonusAcc)
-    dmg            = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.THUNDER)
+    dmg            = math.floor(dmg * xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.THUNDER, 0, 0, bonusAcc))
+    dmg            = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.THUNDER, false))
+    dmg            = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.THUNDER, false, false))
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
     dmg                 = xi.ability.takeDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.slot.RANGED, 1, 0, 0, 0, action, nil)

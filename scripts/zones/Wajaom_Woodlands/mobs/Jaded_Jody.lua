@@ -28,7 +28,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.toau_morbol.config(mob, { nightRoaming = 1, })
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     return target:countEffectWithFlag(xi.effectFlag.DISPELABLE) > 0 and xi.mobSkill.VAMPIRIC_ROOT or 0
 end
 

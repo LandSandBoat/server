@@ -67,6 +67,8 @@ entity.onMobInitialize = function(mob)
 
     mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.POISON)
 end
 
@@ -79,7 +81,7 @@ entity.onMobFight = function(mob, target)
     {
         conditions =
         {
-            mob:checkDistance(target) > mob:getMeleeRange(),
+            mob:checkDistance(target) > mob:getMeleeRange(target),
         },
         position = mob:getPos(),
         wait = 3,

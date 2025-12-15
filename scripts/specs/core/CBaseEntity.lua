@@ -735,7 +735,7 @@ end
 
 ---@nodiscard
 ---@return boolean
-function CBaseEntity:isInMogHouse()
+function CBaseEntity:inMogHouse()
 end
 
 ---@param triggerAreaId integer
@@ -2441,11 +2441,6 @@ function CBaseEntity:disableLevelSync()
 end
 
 ---@nodiscard
----@return boolean
-function CBaseEntity:isLevelSync()
-end
-
----@nodiscard
 ---@return integer
 function CBaseEntity:checkSoloPartyAlliance()
 end
@@ -3224,12 +3219,6 @@ function CBaseEntity:getIlvlParry()
 end
 
 ---@nodiscard
----@param spellId integer
----@return boolean
-function CBaseEntity:isSpellAoE(spellId)
-end
-
----@nodiscard
 ---@param damage number
 ---@param damageType integer?
 ---@return integer
@@ -3241,12 +3230,6 @@ end
 ---@param damageType integer?
 ---@return integer
 function CBaseEntity:rangedDmgTaken(damage, damageType)
-end
-
----@nodiscard
----@param damage number
----@return integer
-function CBaseEntity:breathDmgTaken(damage)
 end
 
 ---@param damage number
@@ -3709,13 +3692,26 @@ function CBaseEntity:getModelSize()
 end
 
 ---@nodiscard
----@return number
-function CBaseEntity:getMeleeRange()
+---@param newSize number
+---@return nil
+function CBaseEntity:setModelSize(newSize)
 end
 
----@param range number
+---@nodiscard
+---@return number
+function CBaseEntity:getHitboxSize()
+end
+
+---@nodiscard
+---@param newSize number
 ---@return nil
-function CBaseEntity:setMeleeRange(range)
+function CBaseEntity:setHitboxSize(newSize)
+end
+
+---@nodiscard
+---@param target CBaseEntity
+---@return number
+function CBaseEntity:getMeleeRange(target)
 end
 
 ---@param flags integer
@@ -3998,8 +3994,9 @@ end
 ---@param PLuaBaseEntity CBaseEntity
 ---@param offset integer
 ---@param degrees integer
+---@param position table
 ---@return nil
-function CBaseEntity:drawIn(PLuaBaseEntity, offset, degrees)
+function CBaseEntity:drawIn(PLuaBaseEntity, offset, degrees, position)
 end
 
 ---@return nil

@@ -72,7 +72,8 @@ struct Pet_t
     uint8 maxLevel;
 
     uint8           name_prefix;
-    uint8           radius; // Model Radius - affects melee range etc.
+    uint8           modelSize{ 0 };
+    float           modelHitboxSize{ 0.0f };
     uint16          m_Family;
     timer::duration time; // Duration of pet's "life span" before despawning
 
@@ -145,7 +146,6 @@ struct Pet_t
     , minLevel(-1)
     , maxLevel(99)
     , name_prefix(0)
-    , radius(0)
     , m_Family(0)
     , time(0s)
     , mJob(0)
@@ -212,15 +212,16 @@ namespace petutils
 void LoadPetList();
 void FreePetList();
 
-void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
-void  DetachPet(CBattleEntity* PMaster);
-void  DespawnPet(CBattleEntity* PMaster);
-void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
-void  RetreatToMaster(CBattleEntity* PMaster);
-int16 PerpetuationCost(uint32 id, uint8 level);
-void  ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
-void  LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void   SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void   SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+void   DetachPet(CBattleEntity* PMaster);
+void   DespawnPet(CBattleEntity* PMaster);
+void   AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
+uint16 GetJugWeaponDamage(CPetEntity* PPet);
+void   RetreatToMaster(CBattleEntity* PMaster);
+int16  PerpetuationCost(uint32 id, uint8 level);
+void   ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
+void   LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
 
 void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
 void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);

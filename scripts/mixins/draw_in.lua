@@ -10,7 +10,7 @@ g_mixins.draw_in = function(mobArg)
             {
                 conditions =
                 {
-                    mob:checkDistance(target) >= mob:getMeleeRange() * 2,
+                    mob:checkDistance(target) >= mob:getMeleeRange(target) * 2,
                 },
                 position = mob:getPos(),
             }

@@ -47,7 +47,7 @@ namespace gardenutils
 
 void Initialize();
 
-void                      UpdateGardening(CCharEntity* PChar, bool sendPacket);
+void                      UpdateGardening(CCharEntity* PChar, SendPacket sendPacket);
 std::tuple<uint16, uint8> CalculateResults(CCharEntity* PChar, CItemFlowerpot* PItem);
 void                      GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed = false);
 uint8                     GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);

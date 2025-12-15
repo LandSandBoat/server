@@ -513,10 +513,11 @@ end
 xi.darkixion.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
 
     mob:setMobMod(xi.mobMod.NO_REST, 10)
 end

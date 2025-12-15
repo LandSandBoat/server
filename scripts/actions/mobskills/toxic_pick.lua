@@ -21,8 +21,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power   = mob:getMainLvl() / 2
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, power, 3, 180)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 0, 60)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 75, 0, 120)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PLAGUE, 5, 0, 60)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 75, 0, 120)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg

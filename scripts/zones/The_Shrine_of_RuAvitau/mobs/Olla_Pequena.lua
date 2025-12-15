@@ -16,6 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:setMod(xi.mod.REGAIN, 100)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

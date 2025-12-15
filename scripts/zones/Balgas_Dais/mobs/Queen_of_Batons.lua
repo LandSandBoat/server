@@ -26,7 +26,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.FIRE_IV,
@@ -52,6 +52,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         xi.magic.spell.ASPIR,
         xi.magic.spell.BLAZE_SPIKES,
     }
+
     return spellList[math.random(1, #spellList)]
 end
 
