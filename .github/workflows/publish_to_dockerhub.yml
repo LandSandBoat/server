@@ -1,0 +1,42 @@
+name: Publish to Docker Hub
+
+on:
+  push:
+    branches:
+      - 'base'
+
+jobs:
+  build:
+    timeout-minutes: 360
+    uses: ./.github/workflows/docker_build.yml
+    with:
+      os: 'ubuntu'
+      compiler: 'gcc'
+      build_type: 'Release'
+      upload_artifact: true
+      publish: false # We are not publishing to ghcr.io
+
+  publish-to-dockerhub:
+    timeout-minutes: 360
+    name: Publish to Docker Hub
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LSB_ubuntu_image_${{ github.sha }}
+          path: /tmp
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Load image, tag, and push to Docker Hub
+        run: |
+          LOAD_OUTPUT=$(docker load --input /tmp/LSB_ubuntu_image_${{ github.sha }}.tar)
+          IMAGE_NAME=$(echo "$LOAD_OUTPUT" | sed -n 's/Loaded image: //p')
+          docker tag "$IMAGE_NAME" jasonpulse/xiserver:latest
+          docker push jasonpulse/xiserver:latest
