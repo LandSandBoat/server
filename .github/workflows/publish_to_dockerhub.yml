@@ -7,20 +7,19 @@ on:
 
 jobs:
   build:
-    timeout-minutes: 360
     uses: ./.github/workflows/docker_build.yml
     with:
       os: 'ubuntu'
       compiler: 'gcc'
       build_type: 'Release'
       upload_artifact: true
-      publish: false # We are not publishing to ghcr.io
+      publish: false
 
   publish-to-dockerhub:
-    timeout-minutes: 360
     name: Publish to Docker Hub
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 360
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v4
