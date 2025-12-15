@@ -37,6 +37,6 @@ jobs:
       - name: Load image, tag, and push to Docker Hub
         run: |
           LOAD_OUTPUT=$(docker load --input /tmp/LSB_ubuntu_image_${{ github.sha }}.tar)
-          IMAGE_NAME=$(echo "$LOAD_OUTPUT" | sed -n 's/Loaded image: //p')
+          IMAGE_NAME=$(echo "$LOAD_OUTPUT" | head -n 1 | sed -n 's/Loaded image: //p')
           docker tag "$IMAGE_NAME" jasonpulse/xiserver:latest
           docker push jasonpulse/xiserver:latest
