@@ -11,9 +11,10 @@ jobs:
     with:
       os: 'ubuntu'
       compiler: 'gcc'
+      compiler_version: '14'
       build_type: 'Release'
       upload_artifact: true
-      publish: false
+      publish: false # We are not publishing to ghcr.io
 
   publish-to-dockerhub:
     name: Publish to Docker Hub
