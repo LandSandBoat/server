@@ -65,12 +65,12 @@ ARG LLVM_VERSION=20
 # Install build dependencies.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked \
-    sh -c 'apt-get update && \
+    sh -c "apt-get update && \
     apt-get install -y --no-install-recommends \
         binutils-dev \
         ccache \
         cmake \
-        g++-$GCC_VERSION \
+        g++-${GCC_VERSION} \
         libluajit-5.1-dev \
         libmariadb-dev-compat \
         libssl-dev \
@@ -80,8 +80,8 @@ RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
         python3-dev \
         python3-venv \
         zlib1g-dev && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100'
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 100 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 100"
 ENV CC=/usr/bin/gcc-$GCC_VERSION
 ENV CXX=/usr/bin/g++-$GCC_VERSION
 
