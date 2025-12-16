@@ -137,6 +137,18 @@ local function corsairSetup(caster, ability, action, effect, job)
     checkForJobBonus(caster, job)
 end
 
+local function hasBeenInitialized(ability, caster)
+    return caster:getLocalVar('[cor]init' .. ability:getID()) >= GetSystemTime()
+end
+
+local function setInitialized(ability, caster, initialize)
+    if initialize == nil then
+        initialize = true
+    end
+
+    caster:setLocalVar('[cor]init' .. ability:getID(), initialize and GetSystemTime() + 1 or 0)
+end
+
 -- in_ability == current_ability if not using doubleup. current_ability is used to set the message whether you're using a doubleup or not.
 local function applyRoll(caster, target, inAbility, action, total, isDoubleup, currentAbility)
     local abilityId    = inAbility:getID()
@@ -184,7 +196,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         end
     else
         -- success
-        if caster:getID() == target:getID() then
+        if not hasBeenInitialized(currentAbility, caster) then
             if isDoubleup then
                 currentAbility:setMsg(xi.msg.basic.DOUBLEUP)      -- success on doubleup for COR has different message than from just using Phantom Roll
             else
@@ -202,7 +214,7 @@ end
 
 -- TODO: Binding does not exist, implement this (old code remains)
 xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
+    if not hasBeenInitialized(ability, caster) then
         local roll = math.random(1, 6)
 
         caster:setLocalVar('corsairRollTotal', roll)
@@ -218,11 +230,12 @@ xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + (total) - 1)
 
+    setInitialized(ability, caster)
     return total
 end
 
 xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then -- the COR handles all the calculations
+    if not hasBeenInitialized(ability, caster) then
         local duEffect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
         local prevRoll = caster:getStatusEffect(duEffect:getSubPower())
         local roll     = prevRoll:getSubPower()
@@ -273,12 +286,15 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             action:setAnimation(target:getID(), prevAbility:getAnimation())
         end
 
+        setInitialized(ability, caster)
         return total
     end
+
+    setInitialized(ability, caster)
 end
 
 xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
+    if not hasBeenInitialized(ability, caster) then
         local roll = math.random(1, 6)
         caster:setLocalVar('corsairRollTotal', roll)
         action:info(caster:getID(), roll)
@@ -290,6 +306,7 @@ xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + total - 1)
 
+    setInitialized(ability, caster)
     return total
 end
 
@@ -305,6 +322,7 @@ xi.job_utils.corsair.onRollAbilityCheck = function(player, target, ability)
     elseif atMaxCorsairBusts(player) then
         return xi.msg.basic.CANNOT_PERFORM, 0
     else
+        setInitialized(ability, player, false)
         return 0, 0
     end
 end
@@ -315,13 +333,15 @@ xi.job_utils.corsair.onRollUseAbility = function(caster, target, ability, action
     local effectId  = corsairRollMods[abilityId][4]
     local bonusJob  = corsairRollMods[abilityId][6]
 
-    if caster:getID() == target:getID() then
+    if not hasBeenInitialized(ability, caster) then
         corsairSetup(caster, ability, action, effectId, bonusJob)
     end
 
     local total = caster:getLocalVar('corsairRollTotal')
+    total = applyRoll(caster, target, ability, action, total, false, ability)
 
-    return applyRoll(caster, target, ability, action, total, false, ability)
+    setInitialized(ability, caster)
+    return total
 end
 
 -- Called by Double Up ability onAbilityCheck
@@ -331,6 +351,7 @@ xi.job_utils.corsair.onDoubleUpAbilityCheck = function(player, target, ability)
     if not player:hasStatusEffect(xi.effect.DOUBLE_UP_CHANCE) then
         return xi.msg.basic.NO_ELIGIBLE_ROLL, 0
     else
+        setInitialized(ability, player, false)
         return 0, 0
     end
 end
