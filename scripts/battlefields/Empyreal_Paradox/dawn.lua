@@ -41,6 +41,8 @@ function content:setupBattlefield(battlefield)
     prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
     prishe:lookAt(pos)
     prishe:spawn()
+    -- Handling of Prishe Item: Daedalus Wing
+    prishe:setLocalVar('used_item_1', 0)
 
     local selhteus = battlefield:insertEntity(12, true, true)
     selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
@@ -66,8 +68,13 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
     for _, ally in pairs(bcnmAllies) do
         ally:resetLocalVars()
         local spawn = ally:getSpawnPos()
+        -- Logic to refrain Prishe from using Daedalus Wing again
+        if ally:getName() == 'Prishe' then
+            ally:setLocalVar('used_item_1', 1)
+        end
         ally:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
     end
+    
 end
 
 function content:onEventFinishWin(player, csid, option, npc)
