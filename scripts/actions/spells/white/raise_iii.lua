@@ -3,7 +3,6 @@
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
-local BEHAVIOR_RAISABLE = 0x004
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     -- Can't cast on living targets
@@ -17,11 +16,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     end
 
     -- Non-PC targets must be explicitly raisable (behavior bit)
-    if not target:isPC() then
-        local behavior = target:getBehavior()
-        if bit.band(behavior, BEHAVIOR_RAISABLE) == 0 then
-            return xi.msg.basic.MAGIC_CANNOT_BE_CAST
-        end
+    if
+        not target:isPC() and
+        bit.band(target:getBehavior(), xi.behavior.RAISABLE) == 0
+    then
+        return xi.msg.basic.MAGIC_CANNOT_BE_CAST
     end
 
     return 0
