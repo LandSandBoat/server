@@ -53,7 +53,7 @@ entity.onMobEngage = function(mob, target)
 
     if battlefield:getLocalVar('usedWing') ~= 1 then
         battlefield:setLocalVar('usedWing', 1)
-        mob:useMobAbility(1487)
+        mob:useMobAbility(xi.mobSkill.DEADALUS_WING_COP_PRISHE)
     end
 
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
