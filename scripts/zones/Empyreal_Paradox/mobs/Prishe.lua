@@ -46,10 +46,17 @@ end
 
 entity.onMobEngage = function(mob, target)
     -- Logic to only allow Daedalus Wing to be cast once
-    if mob:getLocalVar('used_item_1') == 0 then
-        mob:setLocalVar('used_item_1', 1)
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+    
+    if battlefield:getLocalVar('usedWing') ~= 1 then
+        battlefield:setLocalVar('usedWing', 1)
         mob:useMobAbility(1487)
     end
+end
+
 
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
 end
