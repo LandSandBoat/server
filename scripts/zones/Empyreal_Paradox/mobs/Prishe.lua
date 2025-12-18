@@ -50,7 +50,7 @@ entity.onMobEngage = function(mob, target)
     if not battlefield then
         return
     end
-    
+
     if battlefield:getLocalVar('usedWing') ~= 1 then
         battlefield:setLocalVar('usedWing', 1)
         mob:useMobAbility(1487)
