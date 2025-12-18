@@ -9,10 +9,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
-    if target:getAllegiance() ~= mob:getAllegiance() then
-        return 0
-    end
+    -- if target:getAllegiance() ~= mob:getAllegiance() then
+    --     return 0
+    -- end
+    printf(
+    "[DEBUG][Benediction] mob=%s target=%s target_is_nil=%s",
+    mob:getName(),
+    target and target:getName() or "nil",
+    target == nil and "true" or "false"
+    )
 
     target:eraseAllStatusEffect()
 
