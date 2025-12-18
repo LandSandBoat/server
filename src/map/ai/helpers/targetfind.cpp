@@ -506,7 +506,8 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
     else
     {
-        if (m_PTarget && m_PTarget->allegiance != PTarget->allegiance)
+        CBattleEntity* allegianceBase = m_PTarget ? m_PTarget : m_PBattleEntity;
+        if (allegianceBase->allegiance != PTarget->allegiance)
         {
             return false;
         }
