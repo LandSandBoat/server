@@ -55,8 +55,6 @@ entity.onMobEngage = function(mob, target)
         battlefield:setLocalVar('usedWing', 1)
         mob:useMobAbility(1487)
     end
-end
-
 
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
 end
