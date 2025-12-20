@@ -14,6 +14,34 @@
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
+weaponskillObject.onWeaponSkillSetup = function()
+    return
+    {
+        requirements =
+        {
+            skill = xi.skill.HAND_TO_HAND,
+            level = 150,
+        },
+        animation    = 21,
+        skillchain   =
+        {
+            primary   = xi.skillchainType.LIQUEFACTION,
+            secondary = xi.skillchainType.IMPACTION,
+        },
+        range        = 3,
+        target       = { xi.target.HOSTILE },
+        aoe          =
+        {
+            affects = { xi.target.HOSTILE },
+            sphere  =
+            {
+                origin = xi.aoe.sphere.TARGET,
+                radius = 4,
+            },
+        },
+    }
+end
+
 -- TODO: Radius 5y at 2334 TP
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}

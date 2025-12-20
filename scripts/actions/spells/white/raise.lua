@@ -4,6 +4,32 @@
 ---@type TSpell
 local spellObject = {}
 
+spellObject.onSpellSetup = function()
+    return
+    {
+        skill        = xi.skill.HEALING_MAGIC,
+        group        = xi.magic.spellGroup.WHITE,
+        family       = xi.magic.spellFamily.RAISE,
+        element      = xi.element.LIGHT,
+        requirements =
+        {
+            jobs =
+            {
+                [xi.job.WHM] = 25,
+                [xi.job.RDM] = 38,
+                [xi.job.PLD] = 50,
+                [xi.job.SCH] = 35,
+            },
+            cost = 150,
+        },
+        castTime     = 15,
+        recast       = 60,
+        animation    = 12,
+        range        = 20,
+        target       = { xi.target.FRIENDLY, xi.target.DEAD },
+    }
+end
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     -- Can’t cast on living targets
     if target:isAlive() then

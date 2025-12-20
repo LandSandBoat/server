@@ -14,6 +14,24 @@
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
+weaponskillObject.onWeaponSkillSetup = function()
+    return
+    {
+        requirements =
+        {
+            skill = xi.skill.POLEARM,
+            level = 5,
+        },
+        animation    = 121,
+        skillchain   =
+        {
+            primary = xi.skillchainType.TRANSFIXION,
+        },
+        range        = 3,
+        target       = { xi.target.HOSTILE },
+    }
+end
+
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2

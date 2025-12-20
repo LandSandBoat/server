@@ -11,6 +11,25 @@
 ---@type TMobSkill
 local mobskillObject = {}
 
+mobskillObject.onMobSkillSetup = function()
+    return
+    {
+        prepareTime = 1500,
+        animation   = 653,
+        range       = 30,
+        target      = { xi.target.HOSTILE },
+        aoe         =
+        {
+            affects = { xi.target.HOSTILE },
+            sphere  =
+            {
+                origin = xi.aoe.sphere.CASTER,
+                radius = 30,
+            },
+        },
+    }
+end
+
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if not target:isInfront(mob, 128) then
         return 1

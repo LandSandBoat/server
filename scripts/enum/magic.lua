@@ -16,6 +16,17 @@ xi.magic.spellFlag =
     NO_FINISH_MSG  = 0x10, -- Doesn't emit finish message when magic state completes
 }
 
+---@enum xi.magic.spellReq
+xi.magic.spellReq =
+{
+    NONE               = 0x00,
+    ADDENDUM_BLACK     = 0x01, -- Requires Addendum: Black for access (if not native to job)
+    ADDENDUM_WHITE     = 0x02, -- Requires Addendum: White for access (if not native to job)
+    UNBRIDLED_LEARNING = 0x04, -- Requires "Unbridled Learning" or "Unbridled Wisdom" for access
+    TABULA_RASA        = 0x08, -- Requires "Tabula Rasa" for access
+    MAIN_JOB           = 0x10, -- Only available if obtained from main job current level
+}
+
 -----------------------------------
 -- Spell AOE IDs
 -----------------------------------

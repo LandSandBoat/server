@@ -5,6 +5,16 @@
 ---@type TMobSkill
 local mobskillObject = {}
 
+mobskillObject.onMobSkillSetup = function()
+    return
+    {
+        prepareTime = 1500,
+        animation   = 659,
+        range       = 10, -- Unconfirmed
+        target      = { xi.target.HOSTILE },
+    }
+end
+
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) or

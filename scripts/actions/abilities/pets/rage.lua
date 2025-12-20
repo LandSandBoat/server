@@ -6,6 +6,27 @@
 local abilityObject = {}
 local skillName = 'rage'
 
+abilityObject.onPetSkillSetup = function()
+    return
+    {
+        mobSkillId = 3858,
+        animation  = 5,
+        message    = 238,
+        actionType = xi.action.category.MOBABILITY_FINISH,
+        range      = 3,
+        target     = { xi.target.SELF },
+        aoe        =
+        {
+            affects = { xi.target.SELF, xi.target.MASTER },
+            sphere  =
+            {
+                origin = xi.aoe.sphere.CASTER,
+                radius = 8,
+            },
+        },
+    }
+end
+
 abilityObject.onAbilityCheck = function(player, target, ability)
     return 0
 end

@@ -4,6 +4,30 @@
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
+weaponskillObject.onWeaponSkillSetup = function()
+    return
+    {
+        requirements =
+        {
+            skill = xi.skill.CLUB,
+            level = 125,
+            jobs  = { xi.job.PLD, xi.job.WHM, xi.job.GEO, xi.job.WAR, xi.job.DRK, xi.job.BLU, xi.job.SAM },
+        },
+        animation    = 80,
+        range        = 3,
+        target       = { xi.target.SELF },
+        aoe          =
+        {
+            affects = { xi.target.SELF, xi.target.PARTY },
+            sphere  =
+            {
+                origin = xi.aoe.sphere.TARGET,
+                radius = 6,
+            },
+        },
+    }
+end
+
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local lvl = player:getSkillLevel(11) -- get club skill
     local damage = (lvl / 9) - 1

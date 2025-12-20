@@ -12,6 +12,36 @@
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
+weaponskillObject.onWeaponSkillSetup = function()
+    return
+    {
+        requirements =
+        {
+            skill = xi.skill.POLEARM,
+            level = 300,
+            jobs  = { xi.job.DRG, xi.job.WAR, xi.job.PLD },
+        },
+        animation    = 132,
+        skillchain   =
+        {
+            primary   = xi.skillchainType.TRANSFIXION,
+            secondary = xi.skillchainType.SCISSION,
+        },
+        range        = 3,
+        target       = { xi.target.HOSTILE },
+        aoe          =
+        {
+            affects = { xi.target.HOSTILE },
+            cone    =
+            {
+                origin   = xi.aoe.cone.FRONT,
+                angle    = 45,
+                distance = 10,
+            },
+        },
+    }
+end
+
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1

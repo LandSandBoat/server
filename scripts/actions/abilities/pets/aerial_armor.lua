@@ -4,6 +4,25 @@
 ---@type TAbilityPet
 local abilityObject = {}
 
+abilityObject.onPetSkillSetup = function()
+    return
+    {
+        animation = 84,
+        message   = 319,
+        flags     = { xi.skillFlag.BLOODPACT_WARD },
+        target    = { xi.target.SELF },
+        aoe       =
+        {
+            affects = { xi.target.PARTY },
+            sphere  =
+            {
+                origin = xi.aoe.sphere.CASTER,
+                radius = 14,
+            },
+        },
+    }
+end
+
 abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
