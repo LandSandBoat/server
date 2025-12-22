@@ -17,6 +17,10 @@ entity.phList =
     [ID.mob.DIAMOND_DAIG + 9] = ID.mob.DIAMOND_DAIG, -- -95.632 -0.5 -214.732
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 1200)
     mob:setMobMod(xi.mobMod.GIL_MAX, 3000)

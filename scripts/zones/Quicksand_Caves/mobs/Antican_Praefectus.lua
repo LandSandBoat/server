@@ -19,9 +19,13 @@ entity.phList =
     [ID.mob.ANTICAN_PRAEFECTUS - 1] = ID.mob.ANTICAN_PRAEFECTUS, -- -90.01 -0.567 -29.424
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 2100)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 4500)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 3000)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
