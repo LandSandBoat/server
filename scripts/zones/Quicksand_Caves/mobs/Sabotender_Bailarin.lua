@@ -13,13 +13,13 @@ entity.phList =
     [ID.mob.SABOTENDER_BAILARIN - 2] = ID.mob.SABOTENDER_BAILARIN, -- 600 -5.5 -673
 }
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-end
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 9000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 9000)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
