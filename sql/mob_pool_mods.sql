@@ -44,10 +44,6 @@ INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 -- Animated Shield
 INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 
--- Antican Praetor
-INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
-INSERT INTO `mob_pool_mods` VALUES (181,2,9234,1); -- GIL_MAX: 9234
-
 -- Aspidochelone
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (268,370,50,0);  -- REGEN: 50
