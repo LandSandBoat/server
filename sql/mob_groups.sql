@@ -11446,7 +11446,7 @@ INSERT INTO `mob_groups` VALUES (10,3959,160,'Tonberry_Imprecator',960,0,2438,0,
 INSERT INTO `mob_groups` VALUES (11,3711,160,'Sozu_Bliberry',21600,0,2297,7100,7100,65,66,0);
 INSERT INTO `mob_groups` VALUES (12,669,160,'Celeste-eyed_Tozberry',0,32,440,7300,0,67,69,0);
 INSERT INTO `mob_groups` VALUES (13,3967,160,'Tonberry_Slasher',960,0,2446,0,0,67,71,0);
-INSERT INTO `mob_groups` VALUES (14,3949,160,'Tonberry_Beleaguerer',960,0,0,0,66,71,0);
+INSERT INTO `mob_groups` VALUES (14,3949,160,'Tonberry_Beleaguerer',960,0,2429,0,0,66,71,0);
 INSERT INTO `mob_groups` VALUES (15,3971,160,'Tonberrys_Elemental',0,128,0,0,0,53,59,0);
 INSERT INTO `mob_groups` VALUES (16,6585,160,'Bifrons',960,0,270,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (17,1425,160,'Friar_Rush',0,32,906,8600,0,70,70,0);
