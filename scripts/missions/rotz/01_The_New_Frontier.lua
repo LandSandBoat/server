@@ -33,7 +33,9 @@ mission.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if option == 1 then
+                        mission:complete(player)
+                    end
                 end,
             },
         },
