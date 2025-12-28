@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Delta Thrust 
+-- Spell: Delta Thrust
 -- Delivers a threefold attack. Additional effect: Plague
 -- Spell cost: 28 MP
 -- Monster Type: Lizard
@@ -62,7 +62,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
-    return damage 
+    return damage
 end
 
 return spellObject
