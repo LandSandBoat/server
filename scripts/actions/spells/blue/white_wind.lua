@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: White Wind
--- Restores HP of all party members within area of effect. 
+-- Restores HP of all party members within area of effect.
 -- Spell cost: 145 MP
 -- Monster Type: Dragon
 -- Spell Type: Magical (Wind)

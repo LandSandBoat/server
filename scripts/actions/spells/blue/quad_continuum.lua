@@ -6,7 +6,7 @@
 -- Spell Type: Physical (Piercing)
 -- Blue Magic Points: 4
 -- Stat Bonus: DEX+3 CHR-2
--- Level: 85 
+-- Level: 85
 -- Casting Time: 1 seconds
 -- Recast Time: 31.75 seconds
 -- Skillchain Element(s): Distortion/Scission

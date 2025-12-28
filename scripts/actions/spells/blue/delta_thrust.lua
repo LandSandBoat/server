@@ -28,6 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
         params.bonusacc = math.floor(caster:getTP() / 50)
     end
+
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = xi.skillchainType.LIQUEFACTION

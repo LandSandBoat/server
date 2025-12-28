@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Dream Flower 
+-- Spell: Dream Flower
 -- Puts all enemies within range to sleep
 -- Spell cost: 68 MP
 -- Monster Type: Plantoid

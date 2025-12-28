@@ -5,11 +5,11 @@
 -- Monster Type: Dragons
 -- Spell Type: Magical (Wind)
 -- Blue Magic Points: 2
--- Stat Bonus: STR+2 AGI+2 
+-- Stat Bonus: STR+2 AGI+2
 -- Level: 99
 -- Casting Time: 1.5 seconds
 -- Recast Time: 29.5 seconds
--- Magic Bursts on: None 
+-- Magic Bursts on: None
 -- Combos: Fast Cast
 -----------------------------------
 ---@type TSpell

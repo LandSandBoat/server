@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Fantod 
--- Enhances attack and magic attack.  
+-- Spell: Fantod
+-- Enhances attack and magic attack.
 -- Spell cost: 12 MP
 -- Monster Type: Birds
 -- Spell Type: Magical (Fire)
@@ -32,6 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:addStatusEffect(xi.effect.ATTACK_BOOST, power, 0, 180)
         caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, power, 0, 180)
     end
+
     return xi.mod.BOOST_EFFECT
 end
 

@@ -1,11 +1,11 @@
 -----------------------------------
 -- Spell: Charged Whisker
--- Deals Lightning damage to enemies within area of effect.  
+-- Deals Lightning damage to enemies within area of effect.
 -- Spell cost: 183 MP
 -- Monster Type: Beast
 -- Spell Type: Magical (Lightning)
 -- Blue Magic Points: 4
--- Stat Bonus: HP-10 DEX+2 INT+2 
+-- Stat Bonus: HP-10 DEX+2 INT+2
 -- Level: 88
 -- Casting Time: 5 seconds
 -- Recast Time: 85 seconds

@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Quadrastrike 
--- Delivers a fourfold attack. Chance of critical hit varies with TP. 
+-- Spell: Quadrastrike
+-- Delivers a fourfold attack. Chance of critical hit varies with TP.
 -- Spell cost: 98 MP
 -- Monster Type: Demons
 -- Spell Type: Physical (Slashing)

@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Amorphic Spikes 
+-- Spell: Amorphic Spikes
 -- Delivers a fivefold attack. Danage varies with TP
 -- Spell cost: 79 MP
 -- Monster Type: AMORPH
@@ -29,6 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
         params.bonusacc = math.floor(caster:getTP() / 50)
     end
+
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
     params.scattr = xi.skillchainType.GRAVITATION

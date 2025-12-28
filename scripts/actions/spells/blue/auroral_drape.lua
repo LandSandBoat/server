@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Auroral Drape 
--- Silences and blinds enemies within range. 
+-- Spell: Auroral Drape
+-- Silences and blinds enemies within range.
 -- Spell cost: 51 MP
 -- Monster Type: Empty
 -- Spell Type: Magical (Wind)
@@ -10,7 +10,7 @@
 -- Casting Time: Casting Time: 4 seconds
 -- Recast Time: Recast Time: 60 seconds
 -- Duration: 40-60 seconds
--- Magic Bursts on: None 
+-- Magic Bursts on: None
 -- Combos: Fast Cast
 -----------------------------------
 ---@type TSpell
