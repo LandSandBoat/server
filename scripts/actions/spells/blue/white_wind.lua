@@ -20,6 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    -- Need to confirm increases by Divine Seal and Cure Potency equipment
     local params = {}
     params.minCure = math.floor(caster:getMaxHP() / 7) * 2
     params.divisor0 = 0.6666

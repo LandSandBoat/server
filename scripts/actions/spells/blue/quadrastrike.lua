@@ -20,6 +20,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+
+    -- Missing proper info and logic for crit.
     local params = {}
     params.ecosystem = xi.ecosystem.DEMON
     params.tpmod = xi.spells.blue.tpMod.CRITHITRATE

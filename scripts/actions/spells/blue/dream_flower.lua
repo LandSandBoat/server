@@ -23,7 +23,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem       = xi.ecosystem.PLANTOID
-    params.effect          = xi.effect.SLEEP_II
+    params.effect          = xi.effect.SLEEP_II -- guessing it's sleep II as it blue gartr wiki says it doesn't overwrite itself or sleep II
     params.power           = 1
     params.tick            = 0
     params.duration        = 120

@@ -34,6 +34,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
 
     -- Handle status effects.
+    -- Not sure if there's a better way to implement both status effects
     local effectTable =
     {
         [1] = { xi.effect.BIND, 25, 0, 40 + math.floor(resist * 20) },
