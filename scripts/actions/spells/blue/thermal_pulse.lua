@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Thermal Pulse
--- Deals Fire damage to enemies within area of effect. Additional effect: Blindness  
+-- Deals Fire damage to enemies within area of effect. Additional effect: Blindness
 -- Spell cost: 151 MP
 -- Monster Type: Vermin
 -- Spell Type: Magical (FIRE)
@@ -9,7 +9,7 @@
 -- Level: 86
 -- Casting Time: 5.5 seconds
 -- Recast Time: 70 seconds
--- Magic Bursts on: None 
+-- Magic Bursts on: None
 -- Combos: Attck Bonus
 -----------------------------------
 ---@type TSpell

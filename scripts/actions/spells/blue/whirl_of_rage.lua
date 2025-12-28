@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Whirl Of Rage 
--- Delivers an area attack that stuns enemies. Damage varies with TP.  
+-- Spell: Whirl Of Rage
+-- Delivers an area attack that stuns enemies. Damage varies with TP.
 -- Spell cost: 73 MP
 -- Monster Type: Arcana
 -- Spell Type: Physical (Slashing)

@@ -62,7 +62,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
-
     return damage 
 end
 

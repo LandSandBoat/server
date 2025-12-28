@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Goblin Rush 
+-- Spell: Goblin Rush
 -- Delivers a threefold attack. Accuracy varies with TP
 -- Spell cost: 81 MP
 -- Monster Type: BEASTMEN
