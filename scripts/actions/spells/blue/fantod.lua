@@ -25,8 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if caster:hasStatusEffect(xi.effect.BOOST) then
         local effect = caster:getStatusEffect(xi.effect.BOOST)
-
-        effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
+        effect:setPower(effect:getPower() or 0 + power) -- Store updated power in boost for zoning
         effect:addMod(xi.mod.ATTP, power)
     else
         caster:addStatusEffect(xi.effect.ATTACK_BOOST, power, 0, 180)
