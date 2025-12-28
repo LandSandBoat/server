@@ -26,7 +26,12 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:progressEvent(3071, { text_table = 0 }),
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3071, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
         },
 
         [xi.zone.NASHMAU] =
@@ -48,7 +53,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(277)
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(278)
+                        return mission:event(278)
                     end
                 end,
             },

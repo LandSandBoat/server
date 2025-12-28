@@ -14,7 +14,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local magicskill = xi.combat.skillLevel.getSkillCap(target:getMainLvl(), xi.skillRank.A_PLUS)
+    local magicskill = xi.data.skillLevel.getSkillCap(target:getMainLvl(), xi.skillRank.A_PLUS)
     local potency    = 3 + 6 * magicskill / 100
 
     if magicskill > 200 then

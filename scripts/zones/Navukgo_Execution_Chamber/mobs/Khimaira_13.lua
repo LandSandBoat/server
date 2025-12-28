@@ -2,6 +2,11 @@
 -- Area: Navukgo Execution Chamber
 --  Mob: Khimaira 13
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/families/khimaira'),
+}
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

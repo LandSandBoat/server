@@ -18,30 +18,22 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 6064)
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_MPP, 6)
-    target:addMod(xi.mod.FOOD_MP_CAP, 55)
-    target:addMod(xi.mod.INT, 4)
-    target:addMod(xi.mod.MND, 3)
-    target:addMod(xi.mod.CHR, 2)
-    target:addMod(xi.mod.STR, -2)
-    target:addMod(xi.mod.MACC, 4)
-    target:addMod(xi.mod.MATT, 7)
+    effect:addMod(xi.mod.FOOD_MPP, 6)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 55)
+    effect:addMod(xi.mod.INT, 4)
+    effect:addMod(xi.mod.MND, 3)
+    effect:addMod(xi.mod.CHR, 2)
+    effect:addMod(xi.mod.STR, -2)
+    effect:addMod(xi.mod.MACC, 4)
+    effect:addMod(xi.mod.MATT, 7)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_MPP, 6)
-    target:delMod(xi.mod.FOOD_MP_CAP, 55)
-    target:delMod(xi.mod.INT, 4)
-    target:delMod(xi.mod.MND, 3)
-    target:delMod(xi.mod.CHR, 2)
-    target:delMod(xi.mod.STR, -2)
-    target:delMod(xi.mod.MACC, 4)
-    target:delMod(xi.mod.MATT, 7)
 end
 
 return itemObject

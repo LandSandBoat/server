@@ -6,38 +6,62 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-    mob:setMod(xi.mod.REGAIN, 100)
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 54)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:setMod(xi.mod.ATTP, 30)
 end
 
-entity.onMobFight = function(mob)
-    -- Gains regain at under 25% HP
-    local stage = mob:getLocalVar('stage')
+entity.onMobFight = function(mob, target)
+    local hpp = mob:getHPP()
 
-    if mob:getHPP() < 60 and stage == 0 then
-        mob:setDelay(3000)
-        mob:setMod(xi.mod.REGAIN, 150)
-        mob:setLocalVar('stage', 1)
-    elseif mob:getHPP() < 25 and stage < 2 then
-        mob:setDelay(2500)
-        mob:setMod(xi.mod.REGAIN, 200)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 1187)
-        mob:setLocalVar('stage', 2)
+    if hpp < 20 then
+        mob:setDelay(1100)
+        mob:setMod(xi.mod.ATTP, 100)
+    elseif hpp < 60 then
+        mob:setDelay(2100)
     end
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    local hpp      = mob:getHPP()
+    local tpSkills = {}
+
+    -- Phase 1 (100-20%): Standard skills
+    if hpp >= 20 then
+        tpSkills =
+        {
+            xi.mobSkill.HYPER_PULSE,
+            xi.mobSkill.ION_EFFLUX,
+            xi.mobSkill.GUIDED_MISSILE,
+            xi.mobSkill.TARGET_ANALYSIS,
+        }
+
+        -- Rear Lasers available when target is behind Omega
+        if target:isBehind(mob) then
+            table.insert(tpSkills, xi.mobSkill.REAR_LASERS)
+        end
+
+    -- Phase 2 (<20%): Critical skills
+    else
+        tpSkills =
+        {
+            xi.mobSkill.PILE_PITCH,
+            xi.mobSkill.DISCHARGER,
+        }
+    end
+
+    return tpSkills[math.random(1, #tpSkills)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

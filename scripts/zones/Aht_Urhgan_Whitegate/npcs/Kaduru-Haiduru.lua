@@ -13,8 +13,8 @@ local function canUse_KaduruHaiduru_Service(player)
 
     -- Kaduru-Haiduru can be used unless the following are true.
     if
-        (shihuDanhuEncounters > 1 and os.time() < shihuDanhuDate) or
-        os.time() < caughtUsingShihuDanhuDate
+        (shihuDanhuEncounters > 1 and GetSystemTime() < shihuDanhuDate) or
+        GetSystemTime() < caughtUsingShihuDanhuDate
     then
         return false
     end

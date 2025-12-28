@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore dexterity of 1 every 3 ticks.
+    -- The effect restores 1 DEX every 3 ticks. (1 Tick = 3 seconds).
     local downDEXEffectSize = effect:getPower()
     if downDEXEffectSize > 0 then
         effect:setPower(downDEXEffectSize - 1)
         target:delMod(xi.mod.DEX, -1)
+    else
+        target:delStatusEffect(xi.effect.DEX_DOWN)
     end
 end
 

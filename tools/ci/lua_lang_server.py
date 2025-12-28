@@ -14,6 +14,12 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument(
+    "--version",
+    default=None,
+    help="Version of LLS to use. Defaults to latest.",
+)
+
+parser.add_argument(
     "--blame",
     default=None,
     action="store_true",
@@ -84,6 +90,7 @@ def generate_spec_file(file):
                         f"Warning: {function_name} is defined but not registered in {file}"
                     )
 
+
 # TODO:
 # # Find all files ending in *.cpp in the lua bindings directory
 # for root, dirs, files in os.walk(lua_bindings_cpp_path):
@@ -102,8 +109,8 @@ os_to_asset = {
     "Darwin": "darwin-x64.tar.gz",
 }
 
-# URL of the GitHub API for the latest release
-api_url = "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest"
+# URL of the GitHub API
+api_url = f"https://api.github.com/repos/LuaLS/lua-language-server/releases/{f"tags/{args.version}" if args.version else "latest"}"
 
 response = requests.get(api_url)
 
@@ -183,6 +190,7 @@ if len(parsed_data) == 0:
     print("No errors found, removing check.json and exiting.")
     os.remove("./check.json")
     exit()
+
 
 def get_committer(file, line):
     try:

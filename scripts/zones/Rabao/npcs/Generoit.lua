@@ -2,26 +2,24 @@
 -- Area: Rabao
 --  NPC: Generoit
 -----------------------------------
-local ID = zones[xi.zone.RABAO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4545,    61,    -- Gysahl Greens
-        840,      7,    -- Chocobo Feather
-        17016,   10,    -- Pet Food Alpha Biscuit
-        17017,   81,    -- Pet Food Beta Biscuit
-        17860,   81,    -- Carrot Broth
-        17862,  687,    -- Bug Broth
-        17864,  125,    -- Herbal Broth
-        17866,  687,    -- Carrion Broth
-        5073, 50784,    -- Scroll of Chocobo Mazurka
+        { xi.item.BUNCH_OF_GYSAHL_GREENS,       70 },
+        { xi.item.CHOCOBO_FEATHER,               8 },
+        { xi.item.PET_FOOD_ALPHA_BISCUIT,       12 },
+        { xi.item.PET_FOOD_BETA_BISCUIT,        93 },
+        { xi.item.JUG_OF_CARROT_BROTH,          62 },
+        { xi.item.JUG_OF_BUG_BROTH,            101 },
+        { xi.item.JUG_OF_HERBAL_BROTH,         112 },
+        { xi.item.JUG_OF_CARRION_BROTH,        313 },
+        { xi.item.SCROLL_OF_CHOCOBO_MAZURKA, 57408 },
     }
 
-    player:showText(npc, ID.text.GENEROIT_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.RABAO].text.GENEROIT_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

@@ -12,18 +12,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
-    -- MOG HOUSE EXIT
-    if
-        player:getXPos() == 0 and
-        player:getYPos() == 0 and
-        player:getZPos() == 0
-    then
-        player:setPos(157 + math.random(1, 5), -5, -62, 192)
-    end
-
-    return cs
+    return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

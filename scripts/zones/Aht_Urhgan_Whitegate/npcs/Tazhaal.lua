@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Tazhaal
--- Admits players to the dock in Aht Urhgan
--- !pos -5.195 -1 -98.966 50
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
@@ -13,6 +11,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 221 and option == 333 then
+        player:addKeyItem(xi.ki.FERRY_TICKET)
         player:delGil(100)
     end
 end

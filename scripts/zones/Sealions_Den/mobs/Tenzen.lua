@@ -3,106 +3,199 @@
 --  Mob: Tenzen
 -----------------------------------
 local ID = zones[xi.zone.SEALIONS_DEN]
-local tenzenFunctions = require('scripts/zones/Sealions_Den/helpers/TenzenFunctions')
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
+local formTable =
+{
+    [0] = {    0,     0, xi.behavior.NONE,      true  }, -- Melee unseathed.
+    [1] = { 2056, -1200, xi.behavior.STANDBACK, false }, -- Bow low.
+    [2] = { 2055, -2400, xi.behavior.STANDBACK, false }, -- Bow high.
+    [3] = {    0,     0, xi.behavior.NONE,      false }, -- Melee seathed.
+}
+
+local weaponskillTable =
+{
+    [0] = { xi.mobSkill.AMATSU_HANAIKUSA   },
+    [1] = { xi.mobSkill.AMATSU_TORIMAI     },
+    [2] = { xi.mobSkill.AMATSU_KAZAKIRI    },
+    [3] = { xi.mobSkill.AMATSU_TSUKIKAGE   },
+    [4] = { xi.mobSkill.COSMIC_ELUCIDATION },
+}
+local function setupForm(mob, newForm)
+    mob:timer(1500, function(mobArg)
+        mobArg:setAnimationSub(newForm)
+        mobArg:setMobSkillAttack(formTable[newForm][1])
+        mobArg:setMod(xi.mod.DELAY, formTable[newForm][2])
+        mobArg:setBehavior(formTable[newForm][3])
+        mobArg:setMobAbilityEnabled(formTable[newForm][4])
+    end)
+end
+
+local function wsSequence(mob)
+    local step       = mob:getLocalVar('[Tenzen]MeikyoStep')
+    local breakChain = (step <= 3 and not mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI)) and true or false -- If "Amatsu Tsukikage" happens, Cosmic Euclidation happens. You loose.
+
+    if breakChain then
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
+
+        mob:setLocalVar('[Tenzen]MorphingTime', mob:getBattleTime())
+        mob:setLocalVar('[Tenzen]MeikyoActive', 0)
+        mob:setLocalVar('[Tenzen]MeikyoStep', 0)
+
+        return
+    end
+
+    -- Chance was given to break sequence. Continue.
+    mob:setTP(1000)
+    mob:useMobAbility(weaponskillTable[step][1])
+    mob:setLocalVar('[Tenzen]MeikyoStep', step + 1)
+end
+
 entity.onMobSpawn = function(mob)
-    -- Tenzen in Warriors Path is a completely scripted encounter once you trigger certain states
-    -- Leaving mods here as visuals
     mob:setMod(xi.mod.DEF, 350)
-    mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.STANDBACK)))
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMod(xi.mod.REGAIN, 30)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
+    mob:setMobMod(xi.mobMod.ROAM_TURNS, 0)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
-    mob:setAnimationSub(0)
-    mob:setMobSkillAttack(0)
-    mob:setMobAbilityEnabled(true)
+
+    -- Setup melee form.
+    setupForm(mob, 0)
+
+    -- Reset action usage
     mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setUnkillable(true)
-    mob:setLocalVar('skillchain', math.random(1, 100)) -- set chance that Tenzen will use Cosmic Elucidation
-    mob:setLocalVar('twohourthreshold', math.random(75, 80)) -- set HP threshold for Meikyo Shisui usage
+
+    -- Reset local vars.
+    mob:setLocalVar('[Tenzen]LastWeaponskill', 0)
+    mob:setLocalVar('[Tenzen]Riceball', 0)
+    mob:setLocalVar('[Tenzen]MorphingTime', 0)
+    mob:setLocalVar('[Tenzen]MeikyoActive', 0)
+    mob:setLocalVar('[Tenzen]MeikyoUses', 0)
+    mob:setLocalVar('[Tenzen]MeikyoStep', 0)
+    mob:setLocalVar('[Tenzen]MeikyoHPP', 80)
 end
 
 entity.onMobEngage = function(mob, target)
     mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    -- three tarus fight with tenzen
-    local mobId  = mob:getID()
-    local offset = mobId - ID.mob.TENZEN
 
-    if
-        offset >= 0 and
-        offset <= 8
-    then
-        for i = mobId + 1, mobId + 3 do
-            GetMobByID(i):updateEnmity(target)
+    -- Update Taru helpers enmity.
+    local mobId  = mob:getID()
+
+    for taruId = mobId + 1, mobId + 3 do
+        GetMobByID(taruId):updateEnmity(target)
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    local skillId = skill:getID()
+
+    -- Track last time Tenzen did a mobskill. Dont Meikyo Shisui immediately after.
+    mob:setLocalVar('[Tenzen]LastWeaponskill', mob:getBattleTime())
+
+    -- Setup weaponskill chain.
+    if skillId == xi.mobSkill.MEIKYO_SHISUI_1 then
+        mob:setAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
+
+        mob:setLocalVar('[Tenzen]MeikyoActive', 1)
+        mob:setLocalVar('[Tenzen]MeikyoUses', mob:getLocalVar('[Tenzen]MeikyoUses') + 1)
+        mob:setLocalVar('[Tenzen]MeikyoHPP', 60)
+
+    -- Chance of switching from high bow form to low bow form.
+    elseif skillId == xi.mobSkill.RANGED_ATTACK_TENZEN_1 then
+        if math.random(1, 100) <= 25 then
+            setupForm(mob, 1)
         end
+
+    -- Chance of switching from low bow form to high bow form.
+    elseif skillId == xi.mobSkill.RANGED_ATTACK_TENZEN_2 then
+        if math.random(1, 100) <= 25 then
+            setupForm(mob, 2)
+        end
+
+    -- Loose battle.
+    elseif skillId == xi.mobSkill.COSMIC_ELUCIDATION then
+        mob:timer(2000, function(mobArg)
+            mobArg:setAnimationSub(3)
+            mobArg:showText(mobArg, ID.text.TENZEN_MSG_OFFSET + 1)
+            mobArg:getBattlefield():lose()
+        end)
     end
 end
 
 entity.onMobFight = function(mob, target)
-    -- Uses Meikyo Shisui around 75-80% Hanaikusa > Torimai > Kazakiri > Tsukikage > Cosmic Elucidation
-    local twohourtrigger   = mob:getLocalVar('twohourtrigger')
-    local twohourthreshold = mob:getLocalVar('twohourthreshold')
+    local mobHPP = mob:getHPP()
 
-    if
-        mob:getHPP() < twohourthreshold and
-        twohourtrigger == 0
-    then -- first meikyo shisui usage 75-85%
-        tenzenFunctions.firstMeikyo(mob)
-    elseif
-        mob:getHPP() < twohourthreshold and
-        twohourtrigger == 2
-    then -- second meikyo shisui usage 45-55%
-        tenzenFunctions.secondMeikyo(mob)
-    end
-
-    local isBusy = false
-    local act    = mob:getCurrentAction()
-
-    if
-        act == xi.act.MOBABILITY_START or
-        act == xi.act.MOBABILITY_USING or
-        act == xi.act.MOBABILITY_FINISH
-    then
-        isBusy = true -- is set to true if Tenzen is in any stage of using a mobskill
-    end
-
-    -- scripted sequence of weaponskills in order to potentially create the level 4 skillchain cosmic elucidation
-    if
-        mob:actionQueueEmpty() and
-        not isBusy
-    then
-        tenzenFunctions.wsSequence(mob)
-    end
-
-    tenzenFunctions.formSwap(mob)
-
-    -- win condition set
-    local battlefield = mob:getBattlefield()
-    if
-        battlefield and
-        battlefield:getID() == 993 and
-        mob:getHPP() <= 15
-    then -- Tenzen gives up at 15% - win
+    -- Win battle.
+    if mobHPP <= 15 then
+        mob:setAnimationSub(3)
         mob:showText(target, ID.text.TENZEN_MSG_OFFSET + 2)
-        mob:setAnimationSub(5)
-        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        battlefield:win()
+
+        mob:timer(2000, function(mobArg)
+            mobArg:getBattlefield():win()
+        end)
+
         return
     end
 
-    tenzenFunctions.riceBall(mob, target, isBusy)
-
-    if mob:getHPP() > 35 then
-        mob:setMod(xi.mod.REGAIN, 30)
-    else
+    -- Enhance regain.
+    if mobHPP <= 35 then
         mob:setMod(xi.mod.REGAIN, 70)
     end
-end
 
-entity.onMobDeath = function(mob, player, optParams)
+    -- If mob is busy or otherwise unable to perform actions.
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    -- Scripted sequence of weaponskills in order to potentially create the level 4 skillchain cosmic elucidation
+    if mob:getLocalVar('[Tenzen]MeikyoActive') == 1 then
+        mob:timer(1500, function(mobArg)
+            wsSequence(mobArg)
+        end)
+
+        return
+    end
+
+    -- Rice ball
+    if
+        mob:getHPP() <= 70 and
+        mob:getLocalVar('[Tenzen]Riceball') == 0
+    then
+        mob:showText(target, ID.text.TENZEN_MSG_OFFSET + 3)
+        mob:useMobAbility(xi.mobSkill.RICEBALL_TENZEN)
+        mob:setLocalVar('[Tenzen]Riceball', 1)
+        return
+    end
+
+    -- Meikyo Shisui
+    if
+        mob:getAnimationSub() == 0 and
+        mob:getLocalVar('[Tenzen]LastWeaponskill') <= mob:getBattleTime() - 5 and
+        mob:getLocalVar('[Tenzen]MeikyoActive') == 0 and
+        mob:getLocalVar('[Tenzen]MeikyoUses') <= 1 and
+        mob:getLocalVar('[Tenzen]MeikyoHPP') >= mobHPP
+    then
+        mob:useMobAbility(xi.mobSkill.MEIKYO_SHISUI_1)
+        return
+    end
+
+    local changeTime   = mob:getBattleTime() - mob:getLocalVar('[Tenzen]MorphingTime')
+    local animationSub = mob:getAnimationSub()
+    local cooldown     = animationSub == 0 and 90 or 45
+
+    if
+        changeTime > cooldown and
+        animationSub <= 1
+    then
+        local newForm = animationSub == 0 and 1 or 0
+        mob:setLocalVar('[Tenzen]MorphingTime', mob:getBattleTime())
+        setupForm(mob, newForm)
+    end
 end
 
 return entity

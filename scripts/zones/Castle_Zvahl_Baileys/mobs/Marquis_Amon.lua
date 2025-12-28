@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = -30.715, y = -4.500, z = -20.455 },
     { x = -40.749, y = -4.000, z = -11.079 },
@@ -62,13 +62,13 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
 end
 
 entity.onMobDespawn = function(mob)
     -- Set Marquis_Amon's spawnpoint and respawn time (21-24 hours)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 end
 

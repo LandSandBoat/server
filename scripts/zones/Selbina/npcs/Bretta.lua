@@ -7,8 +7,11 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() > -28.750 then
-        player:startEvent(1133, 1152 - ((os.time() - 1009810584) % 1152))
+    -- Outside dock zone.
+    if player:getZPos() >= -28.750 then
+        player:startEvent(1133, 1152 - ((GetSystemTime() - 1009810584) % 1152))
+
+    -- Inside dock zone.
     else
         player:startEvent(222)
     end

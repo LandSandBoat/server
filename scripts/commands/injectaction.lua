@@ -13,10 +13,10 @@ commandObj.cmdprops =
 
 local function error(player, msg)
     player:printToPlayer(msg)
-    player:printToPlayer('!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)')
+    player:printToPlayer('!injectaction <action ID> <animation ID> (info) (reaction) (message)')
 end
 
-commandObj.onTrigger = function(player, actionId, animationId, speceffect, reaction, message)
+commandObj.onTrigger = function(player, actionId, animationId, info, reaction, message)
     -- validate actionId
     if actionId == nil then
         error(player, 'You must provide an action ID.')
@@ -42,8 +42,8 @@ commandObj.onTrigger = function(player, actionId, animationId, speceffect, react
     end
 
     -- Set default values for optional !injectaction parameters
-    if speceffect == nil then
-        speceffect = 0
+    if info == nil then
+        info = 0
     end
 
     if reaction == nil then
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player, actionId, animationId, speceffect, react
     end
 
     -- inject action packet
-    player:injectActionPacket(target:getID(), actionId, animationId, speceffect, reaction, message, 10, 1)
+    player:injectActionPacket(target:getID(), actionId, animationId, info, reaction, message, 10, 1)
 end
 
 return commandObj

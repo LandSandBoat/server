@@ -13,10 +13,8 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
-    local month = tonumber(os.date('%m'))
-    local day = tonumber(os.date('%d'))
+    local month = JstMonth()
+    local day = JstDayOfTheMonth()
 
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if
@@ -28,16 +26,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    -- MOG HOUSE EXIT
-    if
-        player:getXPos() == 0 and
-        player:getYPos() == 0 and
-        player:getZPos() == 0
-    then
-        player:setPos(41.2, -5, 84, 85)
-    end
-
-    return cs
+    return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -93,8 +82,9 @@ zoneObject.onGameHour = function(zone)
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()
-            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
-            npc:pathThrough(lowerJeunoGlobal.lampPath, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
+            npc:setLocalVar('path', 1)
+            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath[1]))
+            npc:pathThrough(lowerJeunoGlobal.lampPath[1], bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
         end
     end
 end

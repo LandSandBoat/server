@@ -14,7 +14,7 @@ mixins =
 local entity = {}
 
 local function spawnSaplings()
-    for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
+    for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 8 do
         local mob = GetMobByID(i)
         if mob ~= nil and mob:getName() == 'Cherry_Sapling' and not mob:isSpawned() then
             SpawnMob(i)
@@ -37,6 +37,18 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('wasKilled', 0)
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    local tpMoves =
+    {
+        xi.mobSkill.DRILL_BRANCH_NM,
+        xi.mobSkill.PINECONE_BOMB_NM,
+        xi.mobSkill.LEAFSTORM_DISPEL,
+        xi.mobSkill.ENTANGLE_POISON,
+    }
+
+    return tpMoves[math.random(1, #tpMoves)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -23,47 +23,66 @@ content:addEssentialMobs({ 'Metsanneitsyt', 'Metsanhaltija' })
 content.loot =
 {
     {
-        { item = xi.item.MANNEQUIN_BODY, weight = 1000 }, -- mannequin_body
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 4000 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 800 }, -- nothing
-        { item = xi.item.MANNEQUIN_HANDS, weight = 200 }, -- mannequin_hands
+        { itemId = xi.item.BAG_OF_HERB_SEEDS,      weight =  3333 },
+        { itemId = xi.item.BAG_OF_VEGETABLE_SEEDS, weight =  3333 },
+        { itemId = xi.item.BAG_OF_GRAIN_SEEDS,     weight =  3334 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 250 }, -- nothing
-        { item = xi.item.WRESTLERS_MANTLE, weight = 250 }, -- wrestlers_mantle
-        { item = xi.item.MAGICIANS_MANTLE, weight = 250 }, -- magicians_mantle
-        { item = xi.item.PILFERERS_MANTLE, weight = 250 }, -- pilferers_mantle
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.WRESTLERS_MANTLE,       weight =  2500 },
+        { itemId = xi.item.MAGICIANS_MANTLE,       weight =  2500 },
+        { itemId = xi.item.PILFERERS_MANTLE,       weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,           weight = 200 }, -- nothing
-        { item = xi.item.HEALERS_SHIELD, weight = 200 }, -- healers_shield
-        { item = xi.item.GENIN_ASPIS,    weight = 200 }, -- genin_aspis
-        { item = xi.item.KILLER_TARGE,   weight = 200 }, -- killer_targe
-        { item = xi.item.STAFF_BELT,     weight = 200 }, -- staff_belt
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.HEALERS_SHIELD,         weight =  2500 },
+        { itemId = xi.item.GENIN_ASPIS,            weight =  2500 },
+        { itemId = xi.item.KILLER_TARGE,           weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,                   weight = 250 }, -- nothing
-        { item = xi.item.BAG_OF_HERB_SEEDS,      weight = 250 }, -- bag_of_herb_seeds
-        { item = xi.item.BAG_OF_VEGETABLE_SEEDS, weight = 250 }, -- bag_of_vegetable_seeds
-        { item = xi.item.BAG_OF_GRAIN_SEEDS,     weight = 250 }, -- bag_of_grain_seeds
+        { itemId = xi.item.NONE,                   weight =  8000 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =   200 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =   200 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =   200 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   200 },
+        { itemId = xi.item.IRON_INGOT,             weight =   200 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   200 },
+        { itemId = xi.item.SILVER_INGOT,           weight =   200 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   200 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =   200 },
+        { itemId = xi.item.ELM_LOG,                weight =   200 },
     },
 
     {
-        { item = xi.item.NONE,                   weight = 500 }, -- nothing
-        { item = xi.item.SCROLL_OF_DISPEL,       weight = 125 }, -- scroll_of_dispel
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 125 }, -- scroll_of_utsusemi_ni
-        { item = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 125 }, -- scroll_of_magic_finale
-        { item = xi.item.SCROLL_OF_ERASE,        weight = 125 }, -- scroll_of_erase
+        { itemId = xi.item.NONE,                   weight =  5000 },
+        { itemId = xi.item.BAG_OF_HERB_SEEDS,      weight =  1666 },
+        { itemId = xi.item.BAG_OF_VEGETABLE_SEEDS, weight =  1666 },
+        { itemId = xi.item.BAG_OF_GRAIN_SEEDS,     weight =  1667 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 800 }, -- nothing
-        { item = xi.item.SCORPION_QUIVER, weight = 200 }, -- scorpion_quiver
+        { itemId = xi.item.HORN_QUIVER,            weight =  2500 },
+        { itemId = xi.item.SCORPION_QUIVER,        weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  1000 },
+    },
+
+    {
+        { itemId = xi.item.MANNEQUIN_BODY,         weight = 10000 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                   weight =  9500 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight =   500 },
     },
 }
 

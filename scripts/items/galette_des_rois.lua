@@ -24,24 +24,20 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 5875)
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
     local rand = math.random(784, 815)
     npcUtil.giveItem(target, { { rand, 1 } })
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HP, 8)
-    target:addMod(xi.mod.FOOD_MPP, 3)
-    target:addMod(xi.mod.FOOD_MP_CAP, 13)
-    target:addMod(xi.mod.INT, 2)
+    effect:addMod(xi.mod.FOOD_HP, 8)
+    effect:addMod(xi.mod.FOOD_MPP, 3)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 13)
+    effect:addMod(xi.mod.INT, 2)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HP, 8)
-    target:delMod(xi.mod.FOOD_MPP, 3)
-    target:delMod(xi.mod.FOOD_MP_CAP, 13)
-    target:delMod(xi.mod.INT, 2)
 end
 
 return itemObject

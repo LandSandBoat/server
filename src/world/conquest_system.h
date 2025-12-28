@@ -21,9 +21,8 @@
 
 #pragma once
 
-#include "world_server.h"
-
 #include "common/regional_event.h"
+#include "world_engine.h"
 
 #include "map/conquest_system.h"
 #include "map/zone.h"
@@ -35,7 +34,9 @@
 class ConquestSystem
 {
 public:
-    ConquestSystem(WorldServer& worldServer);
+    using ShouldUpdateZones = conquest::ShouldUpdateZones;
+
+    ConquestSystem(WorldEngine& worldServer);
 
     bool handleMessage(uint8 messageType, IPPMessage&& message);
 
@@ -60,12 +61,12 @@ public:
 private:
     bool updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region);
 
-    auto getRegionalInfluences() -> std::vector<influence_t> const;
-    auto getRegionControls() -> std::vector<region_control_t> const;
+    auto getRegionalInfluences() -> const std::vector<influence_t>;
+    auto getRegionControls() -> const std::vector<region_control_t>;
 
     void sendTallyStartMsg();
-    void sendInfluencesMsg(bool shouldUpdateZones);
+    void sendInfluencesMsg(ShouldUpdateZones shouldUpdateZones);
     void sendRegionControlsMsg(ConquestMessage msgType);
 
-    WorldServer& worldServer_;
+    WorldEngine& worldServer_;
 };

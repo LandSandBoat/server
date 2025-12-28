@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 
     if
         (trialByFire == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) >= 6) or
-        (trialByFire == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByFire_date'))
+        (trialByFire == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByFire_date'))
     then
         player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
     elseif
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
             player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
-            player:setCharVar('TrialByFire_date', getMidnight())
+            player:setCharVar('TrialByFire_date', JstMidnight())
             player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end

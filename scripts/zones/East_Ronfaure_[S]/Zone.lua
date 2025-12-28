@@ -1,15 +1,13 @@
 -----------------------------------
 -- Zone: East_Ronfaure_[S] (81)
 -----------------------------------
-require('scripts/globals/dark_ixion')
------------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.MYRADROSH)
+    xi.mob.updateNMSpawnPoint(ID.mob.MYRADROSH)
     GetMobByID(ID.mob.MYRADROSH):setRespawnTime(math.random(5400, 7200))
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)

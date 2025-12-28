@@ -30,7 +30,7 @@ class CBattleEntity;
 class CMobSkillState : public CState
 {
 public:
-    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride);
 
     CMobSkill* GetSkill();
 
@@ -52,16 +52,18 @@ protected:
     {
         return true;
     }
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
+    virtual bool Update(timer::time_point tick) override;
+    virtual void Cleanup(timer::time_point tick) override;
     void         SpendCost();
 
 private:
     CBattleEntity* const       m_PEntity;
     std::unique_ptr<CMobSkill> m_PSkill;
-    time_point                 m_finishTime;
-    duration                   m_castTime{};
+    timer::time_point          m_finishTime;
+    timer::duration            m_castTime{};
     int16                      m_spentTP;
+
+    void reduceTpOnInterrupt() const;
 };
 
 #endif

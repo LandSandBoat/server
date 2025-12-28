@@ -27,10 +27,6 @@ zoneObject.onInitialize = function(zone)
 
     -- Select portals.
     xi.promyvion.setupInitialPortals(zone)
-
-    -- Update NM between Floor 3 islands.
-    UpdateNMSpawnPoint(ID.mob.CEREBRATOR)
-    GetMobByID(ID.mob.CEREBRATOR):setRespawnTime(math.random(3600, 21600))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -48,6 +44,10 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
+    -- ZONE WIDE LEVEL RESTRICTION
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 30, 0, 0)
+    end
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

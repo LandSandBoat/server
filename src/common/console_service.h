@@ -19,26 +19,20 @@
 ===========================================================================
 */
 
-#ifndef _CONSOLE_SERVICE_H_
-#define _CONSOLE_SERVICE_H_
-
 #pragma once
 
 #include <any>
 #include <condition_variable>
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <thread>
+#include <unordered_map>
 
-#include <nonstd/jthread.hpp>
+class Application;
 
-#include "logging.h"
-#include "taskmgr.h"
-#include "tracy.h"
-#include "utils.h"
-
-class ConsoleService
+class ConsoleService final
 {
 private:
     struct ConsoleCommand
@@ -51,23 +45,23 @@ private:
     };
 
 public:
-    ConsoleService();
+    ConsoleService(Application& application);
     ~ConsoleService();
 
     // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
     // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-    void RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>&)> func);
-
-    // Call this to stop processing commands
-    void stop();
+    void registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func);
 
 private:
+    void registerDefaultCommands();
+    void run();
+
+    Application& application_;
+
     std::mutex              m_consoleInputBottleneck;
-    std::atomic<bool>       m_consoleThreadRun = true;
-    nonstd::jthread         m_consoleInputThread;
+    std::atomic<bool>       m_consoleThreadRun;
+    std::jthread            m_consoleInputThread;
     std::condition_variable m_consoleStopCondition;
 
     std::unordered_map<std::string, ConsoleCommand> m_commands;
 };
-
-#endif // _CONSOLE_SERVICE_H_

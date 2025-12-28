@@ -6,7 +6,11 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(10095)
+    xi.mmm.shopOnTrigger(player)
+end
+
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.mmm.shopOnEventUpdate(player, csid, option)
 end
 
 return entity

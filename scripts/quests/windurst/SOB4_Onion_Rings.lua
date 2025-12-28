@@ -7,10 +7,10 @@
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS)
 
 local function timedEvents(player, inTime, outATime)
-    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
-    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
+    local currentTime = VanadielTime()
+    local endTime     = quest:getVar(player, 'EndTime')
 
-    if totalHoursLeft > 0 then
+    if currentTime < endTime then
         return quest:event(inTime)
     else
         return quest:event(outATime)
@@ -48,11 +48,11 @@ quest.sections =
                         not quest:getMustZone(player)
                     then
                         if player:hasKeyItem(xi.ki.OLD_RING) then
-                            local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
-                            local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
+                            local currentTime = VanadielTime()
+                            local endTime     = quest:getVar(player, 'EndTime')
 
                             if
-                                totalHoursLeft > 0 and
+                                currentTime < endTime and
                                 quest:getVar(player, 'Prog') == 1
                             then
                                 return quest:progressEvent(430, 0, xi.ki.OLD_RING) -- Quest starting event.
@@ -73,8 +73,7 @@ quest.sections =
                 [429] = function(player, csid, option, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         quest:setVar(player, 'Prog', 1)
-                        quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables.
-                        quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables.
+                        quest:setVar(player, 'EndTime', VanadielTime() + xi.vanaTime.DAY) -- Set current quest started variables.
                     end
                 end,
 
@@ -165,9 +164,10 @@ quest.sections =
             ['_6n2'] =
             {
                 onTrigger = function(player, npc)
-                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
-                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
-                    if totalHoursLeft > 0 then
+                    local currentTime = VanadielTime()
+                    local endTime     = quest:getVar(player, 'EndTime')
+
+                    if currentTime < endTime then
                         return quest:progressEvent(289)
                     end
                 end,

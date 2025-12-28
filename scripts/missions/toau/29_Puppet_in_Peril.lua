@@ -20,13 +20,23 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3117, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.JADE_SEPULCHER] =
         {
             ['_1v0'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(4)
+                        return mission:progressEvent(4, 0, 4, 0, 0, 0, 0, 0, 0)
                     end
                 end,
             },

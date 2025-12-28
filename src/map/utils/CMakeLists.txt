@@ -27,10 +27,14 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/itemutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/jailutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/jailutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/messageutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/messageutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mobutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mobutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/moduleutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/moduleutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/mountutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mountutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/petutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/petutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/puppetutils.cpp

@@ -2,76 +2,53 @@
 -- Area: Attohwa Chasm
 --  Mob: Lioumere
 -----------------------------------
+mixins = { require('scripts/mixins/families/antlion_ambush_no_rehide') }
+-----------------------------------
+
 ---@type TMobEntity
 local entity = {}
 
-local lioumereHome = { x = 478.8, y = 20, z = 41.7 }
+local home = { x = 478.8, y = 20, z = 41.7 }
 
-local function resetAllEnmity(mob)
-    -- reset enmity
+-- Reset stats. TODO: Study creating a combat behavior utility.
+local function resetStats(mob)
+    mob:delStatusEffectSilent(xi.effect.DIA)
+    mob:delStatusEffectSilent(xi.effect.BIO)
+    mob:delStatusEffectSilent(xi.effect.POISON)
+    mob:delStatusEffectSilent(xi.effect.REQUIEM)
+    mob:delStatusEffectSilent(xi.effect.BURN)
+    mob:delStatusEffectSilent(xi.effect.CHOKE)
+    mob:delStatusEffectSilent(xi.effect.DROWN)
+    mob:delStatusEffectSilent(xi.effect.FROST)
+    mob:delStatusEffectSilent(xi.effect.RASP)
+    mob:delStatusEffectSilent(xi.effect.SHOCK)
+    mob:delStatusEffectSilent(xi.effect.HELIX)
+    mob:delStatusEffectSilent(xi.effect.KAUSTRA)
+    mob:setHP(mob:getMaxHP())
+end
+
+local function resetEnmity(mob)
     local enmitylist = mob:getEnmityList()
     for _, enmity in ipairs(enmitylist) do
         mob:resetEnmity(enmity.entity)
     end
 end
 
-local function travelToHome(mob)
-    -- reset all enmity (to zero)
-    resetAllEnmity(mob)
-    -- start walking home
-    mob:pathTo(lioumereHome.x, lioumereHome.y, lioumereHome.z)
-    mob:setLocalVar('pathingHome', 1)
-end
-
-local function healWhileAtHome(mob, isAtHome)
-    if
-        isAtHome and
-        mob:getHPP() < 100
-    then
-        mob:setHP(mob:getMaxHP())
-    end
-end
-
-local function resetAtHome(mob, isAtHome)
+local function resetPosition(mob)
+    resetStats(mob)
     mob:setLocalVar('pathingHome', 0)
-    -- face the correct direction and do not move while waiting at home
     mob:setRotation(0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    -- heal Lioumere
-    healWhileAtHome(mob, isAtHome)
-    -- disengage clears enmity list and claim
-    mob:disengage()
+    mob:disengage() -- Clears enmity list and claim
+end
+
+local function pathHome(mob)
+    mob:pathTo(home.x, home.y, home.z)
+    mob:setLocalVar('pathingHome', 1)
 end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-
-    -- use custom listeners rather than antlion_ambush or antlion_ambush_noaggro mixins
-    -- because unlike other Antlions Lioumere does not go underground or use pit
-    -- ambush when reengaging (after initial spawn)
-    mob:addListener('SPAWN', 'LIOUMERE_AMBUSH_SPAWN', function(mobArg)
-        mobArg:hideName(true)
-        mobArg:setUntargetable(true)
-        mobArg:setAnimationSub(0)
-    end)
-
-    mob:addListener('ENGAGE', 'LIOUMERE_AMBUSH_ENGAGE', function(mobArg, target)
-        if mobArg:getLocalVar('alreadyEngagedOnce') == 0 then
-            mobArg:setLocalVar('alreadyEngagedOnce', 1)
-            mobArg:useMobAbility(xi.mobSkill.PIT_AMBUSH_1)
-        end
-
-        -- make sure Lioumere can move away from home if needed
-        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    end)
-
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'LIOUMERE_AMBUSH_FINISH', function(mobArg, skillID)
-        if skillID == xi.mobSkill.PIT_AMBUSH_1 then
-            mobArg:hideName(false)
-            mobArg:setUntargetable(false)
-            mobArg:setAnimationSub(1)
-        end
-    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -79,58 +56,63 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local isAtHome = mob:atPoint(lioumereHome.x, lioumereHome.y, lioumereHome.z)
+    local homeDistance = mob:checkDistance(home.x, home.y, home.z)
 
-    -- if disengaged away from home (for some reason) then go home
-    if not isAtHome then
-        travelToHome(mob)
+    -- About at home. Heal.
+    if homeDistance <= 2 then
+        resetStats(mob)
     end
 
-    -- if Lioumere is home always keep healed
-    healWhileAtHome(mob, isAtHome)
+    -- Not exactly at home. Keep pathing.
+    if homeDistance ~= 0 then
+        resetEnmity(mob)
+        pathHome(mob)
 
-    -- if Lioumere just reaches home then perform some reset logic
-    if
-        isAtHome and
-        mob:getLocalVar('pathingHome') == 1
-    then
-        resetAtHome(mob, isAtHome)
+    -- Exactly at home. Reset position, status and stop pathing.
+    elseif mob:getLocalVar('pathingHome') == 1 then
+        resetPosition(mob)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    -- travel to home after a mob skill (except initial pit ambush skill)
+    -- Travel to home after a mob skill (except initial pit ambush skill)
     if skill:getID() ~= xi.mobSkill.PIT_AMBUSH_1 then
-        travelToHome(mob)
+        resetEnmity(mob)
+        pathHome(mob)
     end
 end
 
 entity.onMobFight = function(mob, target)
-    local isAtHome = mob:atPoint(lioumereHome.x, lioumereHome.y, lioumereHome.z)
-    local totalEnmity = mob:getCE(target) + mob:getVE(target)
+    local homeDistance = mob:checkDistance(home.x, home.y, home.z)
 
-    -- if Lioumere just reaches home then perform some reset logic like disengaging
-    if
-        isAtHome and
-        mob:getLocalVar('pathingHome') == 1
-    then
-        resetAtHome(mob, isAtHome)
-    -- also Lioumere travels home if pulled more than 40 yalms away from home
-    elseif
-        mob:getLocalVar('pathingHome') == 0 and
-        mob:checkDistance(lioumereHome.x, lioumereHome.y, lioumereHome.z) > 40
-    then
-        travelToHome(mob)
+    -- About at home. Heal.
+    if homeDistance <= 2 then
+        resetStats(mob)
     end
 
-    -- interrupt Lioumere pathing home if generating enough enmity while pathing
+    -- Reset pathing if enough hate.
+    local totalEnmity = mob:getCE(target) + mob:getVE(target)
     if totalEnmity > 6000 then
         mob:setLocalVar('pathingHome', 0)
         mob:clearPath()
+        return
     end
-end
 
-entity.onMobDeath = function(mob, player, optParams)
+    -- Too far from home. Reset enmity and path home.
+    if
+        homeDistance > 40 and
+        mob:getLocalVar('pathingHome') == 0
+    then
+        resetEnmity(mob)
+        pathHome(mob)
+
+    -- Exactly at home. Reset position, status and stop pathing.
+    elseif
+        homeDistance == 0 and
+        mob:getLocalVar('pathingHome') == 1
+    then
+        resetPosition(mob)
+    end
 end
 
 return entity

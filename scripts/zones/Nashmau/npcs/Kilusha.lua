@@ -10,7 +10,7 @@ local ID = zones[xi.zone.NASHMAU]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local lampCost = 60000 -- base cost without RHAPSODY_IN_AZURE key item
+    local lampCost = xi.einherjar.settings.SMOLDERING_LAMP_BASE_COST -- base cost without RHAPSODY_IN_AZURE key item
 
     if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
         lampCost = 1000
@@ -20,20 +20,23 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHasExactly(trade, { { 'gil', lampCost } }) and
         player:getCharVar('EinherjarIntro') ~= 1
     then
-        if npcUtil.giveItem(player, xi.item.SMOLDERING_LAMP) then
-            player:tradeComplete()
-            player:startEvent(25)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SMOLDERING_LAMP)
+        if
+            player:getFreeSlotsCount() == 0 or
+            player:hasItem(xi.item.SMOLDERING_LAMP)
+        then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINEDX, xi.item.SMOLDERING_LAMP)
+            return
         end
+
+        player:startEvent(25) -- Lamp given in onEventFinish
     end
 end
 
 entity.onTrigger = function(player, npc)
     local ichor               = player:getCurrency('therion_ichor')
     local allowValkyrieBuying = 29360128 -- set this to 0 if you wish to allow players to buy feather key items without KI
-    local lampCost            = 60000 -- base cost without RHAPSODY_IN_AZURE key item
-    local reentryTime         = 20 -- in hours
+    local lampCost            = xi.einherjar.settings.SMOLDERING_LAMP_BASE_COST -- base cost without RHAPSODY_IN_AZURE key item
+    local reentryTime         = xi.einherjar.settings.EINHERJAR_REENTRY_TIME -- in hours
     local toau                = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
     if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
@@ -45,10 +48,13 @@ entity.onTrigger = function(player, npc)
         allowValkyrieBuying = 0
     end
 
-    if player:getMainLvl() <= 59 or not toau then
+    if
+        player:getMainLvl() < xi.einherjar.settings.EINHERJAR_LEVEL_MIN or
+        not toau
+    then
         player:startEvent(22) -- worthless CS
     elseif
-        (player:getMainLvl() >= 60 or toau) and
+        (player:getMainLvl() >= xi.einherjar.settings.EINHERJAR_LEVEL_MIN or toau) and
         player:getCharVar('EinherjarIntro') == 1
     then
         player:startEvent(23, lampCost, 856, 3, 616, 10, 172, 172, 0) -- Einherjar introduction
@@ -67,11 +73,12 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 then
         player:setCharVar('EinherjarIntro', 0) -- deletes CharVar set at character creation
-    elseif
-        csid == 24 and
-        option ~= utils.EVENT_CANCELLED_OPTION and
-        option ~= 0
-    then
+    elseif csid == 25 then
+        -- Give players their purchased lamp
+        if npcUtil.giveItem(player, xi.item.SMOLDERING_LAMP) then
+            player:confirmTrade()
+        end
+    elseif csid == 24 and option ~= utils.EVENT_CANCELLED_OPTION and option ~= 0 then
         local kilushaItems =
         {
             [1] =  { item = xi.item.ANIMATOR_P1,          cost =  15000 },
@@ -102,14 +109,10 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         local row = kilushaItems[option]
 
-        if
-            player:getFreeSlotsCount() ~= 0 and
-            player:getCurrency('therion_ichor') >= row.cost
-        then
-            npcUtil.giveItem(player, row.item)
-            player:delCurrency('therion_ichor', row.cost)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
+        if player:getCurrency('therion_ichor') >= row.cost then
+            if npcUtil.giveItem(player, row.item) then
+                player:delCurrency('therion_ichor', row.cost)
+            end
         end
     end
 end

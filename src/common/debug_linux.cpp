@@ -26,7 +26,7 @@
 #include <sys/types.h>
 
 #include "debug.h"
-#include "kernel.h"
+#include "logging.h"
 
 #define BACKWARD_HAS_BFD 1
 #include "ext/backward/backward.hpp"
@@ -46,7 +46,7 @@ void dumpBacktrace(int signal)
     backward::StackTrace trace;
     backward::Printer    printer;
 
-    trace.load_here(10);
+    trace.load_here();
 
     printer.object     = true;
     printer.color_mode = backward::ColorMode::always;

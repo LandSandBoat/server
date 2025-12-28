@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
 
 quest.reward =
 {
-    fame = 50,
+    fame     = 50,
     fameArea = xi.fameArea.JEUNO,
 }
 
@@ -21,9 +21,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainLvl() >= 76 and
-                player:getLevelCap() == 80 and
-                xi.settings.main.MAX_LEVEL >= 85
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) and
+                player:getLevelCap() == 80
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -31,7 +30,23 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 2, 0) -- Confirmed.
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 0
+                    local lastQuestStage  = 0
+                    if
+                        xi.settings.main.MAX_LEVEL > 80 and
+                        limitBreaker == 1
+                    then
+                        if playerLevel > 75 then
+                            lastQuestNumber = 2
+                        elseif playerLevel == 75 then
+                            lastQuestNumber = 1
+                            lastQuestStage  = 2
+                        end
+                    end
+
+                    return quest:progressEvent(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
                 end,
             },
 
@@ -56,10 +71,6 @@ quest.sections =
         {
             ['Nomad_Moogle'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(10045, 0, 1, 2, 1)
-                end,
-
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_CREST, 5 } }) and
@@ -67,6 +78,15 @@ quest.sections =
                     then
                         return quest:progressEvent(10136)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 2
+                    local lastQuestStage  = 1
+
+                    return quest:event(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
                 end,
             },
 

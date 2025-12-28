@@ -64,7 +64,18 @@ quest.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Juroro'] = quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH),
+            ['Juroro'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Optional dialogue to start "Trial by Earth" if the player has SMN AF1 "The Puppet Master" in progress.
+                    local smnAF  = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) == xi.questStatus.QUEST_ACCEPTED and player:getVar('Quest[2][81]Prog') == 1
+                    local param4 = smnAF and 1 or 0
+                    local param6 = smnAF and xi.item.EARTH_PENDULUM or 0
+                    local param7 = smnAF and 1 or 0
+
+                    return quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
+                end,
+            },
 
             onEventFinish =
             {
@@ -140,7 +151,18 @@ quest.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Juroro'] = quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH),
+            ['Juroro'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Optional dialogue to start "Trial by Earth" if the player has SMN AF1 "The Puppet Master" in progress.
+                    local smnAF  = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) == xi.questStatus.QUEST_ACCEPTED and player:getVar('Quest[2][81]Prog') == 1
+                    local param4 = smnAF and 1 or 0
+                    local param6 = smnAF and xi.item.EARTH_PENDULUM or 0
+                    local param7 = smnAF and 1 or 0
+
+                    return quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
+                end,
+            },
 
             onEventFinish =
             {

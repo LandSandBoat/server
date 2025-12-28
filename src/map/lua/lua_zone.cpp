@@ -26,7 +26,9 @@
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
+#include "los/zone_los.h"
 #include "lua_baseentity.h"
+#include "navmesh.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
 #include "zone.h"
@@ -56,7 +58,7 @@ auto CLuaZone::getLocalVar(const char* key)
 /************************************************************************
  *  Function: setLocalVar()
  *  Purpose : Assigns a local variable to an entity
- *  Example : mob:setLocalVar("pop", os.time() + math.random(1200,7200));
+ *  Example : mob:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
  *  Notes   :
  ************************************************************************/
 
@@ -171,17 +173,14 @@ auto CLuaZone::getBattlefieldByInitiator(uint32 charID) -> CBattlefield*
     return nullptr;
 }
 
-WEATHER CLuaZone::getWeather()
+auto CLuaZone::getWeather() const -> Weather
 {
     return m_pLuaZone->GetWeather();
 }
 
 uint32 CLuaZone::getUptime()
 {
-    time_point currentTime   = std::chrono::system_clock::now(); // Gets the current time
-    time_point zoneStartTime = get_server_start_time();          // Gets the start time of the zone group (cluster)
-
-    long long uptime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - zoneStartTime).count();
+    long long uptime = timer::count_seconds(timer::get_uptime());
     // returns the zone up time in seconds
     return static_cast<uint32>(uptime);
 }
@@ -282,7 +281,7 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
-sol::table CLuaZone::queryEntitiesByName(std::string const& name)
+sol::table CLuaZone::queryEntitiesByName(const std::string& name)
 {
     const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 

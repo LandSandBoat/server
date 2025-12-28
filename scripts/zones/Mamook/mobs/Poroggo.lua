@@ -2,8 +2,6 @@
 -- Area: Mamook
 --  Mob: Poroggo
 -----------------------------------
-mixins = { require('scripts/mixins/families/poroggo') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 

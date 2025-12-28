@@ -19,6 +19,8 @@
 ===========================================================================
 */
 
+#include "common/async.h"
+
 #include "dboxutils.h"
 
 #include "common/database.h"
@@ -29,180 +31,29 @@
 
 #include "entities/charentity.h"
 
-#include "packets/delivery_box.h"
-#include "packets/inventory_finish.h"
-
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
-#include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
-#include "trade_container.h"
+#include "packets/c2s/0x04d_pbx.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x04b_pbx_result.h"
 #include "universal_container.h"
 
-extern std::unique_ptr<SqlConnection> _sql;
-
-namespace
+void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 {
-    auto escapeString(const std::string_view str) -> std::string
+    DebugDeliveryBoxFmt("DBOX: SendOldItems: player: {} ({}), BoxNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo));
+
+    if (!IsAnyDeliveryBoxOpen(PChar))
     {
-        // TODO: Replace with db::escapeString
-        return _sql->EscapeString(str);
-    }
-} // namespace
-
-void dboxutils::HandlePacket(CCharEntity* PChar, CBasicPacket& data)
-{
-    TracyZoneScoped;
-
-    const auto charName = PChar->getName();
-
-    // TODO: Validate all of these to make sure they're within sane bounds.
-    const auto action  = data.ref<uint8>(0x04);
-    const auto boxtype = data.ref<uint8>(0x05);
-    const auto slotID  = data.ref<uint8>(0x06);
-
-    if (jailutils::InPrison(PChar)) // If jailed, no mailbox menu for you.
-    {
-        return;
-    }
-
-    if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
-    {
-        ShowWarningFmt("DBOX: {} ({}) is trying to use the delivery box in a disallowed zone [{}]", charName, PChar->id, PChar->loc.zone->getName());
-        return;
-    }
-
-    if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
-    {
-        ShowWarningFmt("DBOX: {} ({}) attempting to access delivery box in the middle of a synth!", charName, PChar->id);
-        return;
-    }
-
-    if ((PChar->animation >= ANIMATION_FISHING_FISH && PChar->animation <= ANIMATION_FISHING_STOP) ||
-        PChar->animation == ANIMATION_FISHING_START_OLD || PChar->animation == ANIMATION_FISHING_START)
-    {
-        ShowWarningFmt("DBOX: {} ({}) attempting to access delivery box while fishing!", charName, PChar->id);
-        return;
-    }
-
-    switch (action)
-    {
-        case 0x01:
-        {
-            DebugDeliveryBoxFmt("DBOX: SendOldItems (action: {:02X}): player: {}, boxtype: {}", action, charName, PChar->id, boxtype);
-            SendOldItems(PChar, action, boxtype);
-        }
-        break;
-        case 0x02:
-        {
-            const uint8  invslot      = data.ref<uint8>(0x07);
-            const uint32 quantity     = data.ref<uint32>(0x08);
-            const auto   recieverName = escapeString(asStringFromUntrustedSource(data[0x10], 15));
-
-            DebugDeliveryBoxFmt("DBOX: AddItemsToBeSent (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}, invslot: {}, quantity: {}, recieverName: {}",
-                                action, charName, PChar->id, boxtype, slotID, invslot, quantity, recieverName);
-            AddItemsToBeSent(PChar, action, boxtype, slotID, invslot, quantity, recieverName);
-        }
-        break;
-        case 0x03:
-        {
-            DebugDeliveryBoxFmt("DBOX: SendConfirmation (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            SendConfirmation(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x04:
-        {
-            DebugDeliveryBoxFmt("DBOX: CancelSendingItem (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            CancelSendingItem(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x05:
-        {
-            DebugDeliveryBoxFmt("DBOX: SendClientNewItemCount (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            SendClientNewItemCount(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x06:
-        {
-            DebugDeliveryBoxFmt("DBOX: SendNewItems (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            SendNewItems(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x07:
-        {
-            DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            RemoveDeliveredItemFromSendingBox(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x08:
-        {
-            DebugDeliveryBoxFmt("DBOX: UpdateDeliveryCellBeforeRemoving (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            UpdateDeliveryCellBeforeRemoving(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x09:
-        {
-            DebugDeliveryBoxFmt("DBOX: ReturnToSender (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            ReturnToSender(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x0A:
-        {
-            DebugDeliveryBoxFmt("DBOX: TakeItemFromCell (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            TakeItemFromCell(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x0B:
-        {
-            DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell (action: {:02X}): player: {} ({}), boxtype: {}, slotID: {}", action, charName, PChar->id, boxtype, slotID);
-            RemoveItemFromCell(PChar, action, boxtype, slotID);
-        }
-        break;
-        case 0x0C:
-        {
-            const auto recieverName = escapeString(asStringFromUntrustedSource(data[0x10], 15));
-
-            DebugDeliveryBoxFmt("DBOX: ConfirmNameBeforeSending (action: {:02X}): player: {} ({}), boxtype: {}, recieverName: {}", action, charName, PChar->id, boxtype, recieverName);
-            ConfirmNameBeforeSending(PChar, action, boxtype, recieverName);
-        }
-        break;
-        case 0x0D:
-        {
-            DebugDeliveryBoxFmt("DBOX: OpenSendBox (action: {:02X}): player: {} ({}), boxtype: {}", action, charName, PChar->id, boxtype);
-            OpenSendBox(PChar, action, boxtype);
-        }
-        break;
-        case 0x0E:
-        {
-            DebugDeliveryBoxFmt("DBOX: OpenRecvBox (action: {:02X}): player: {} ({}), boxtype: {}", action, charName, PChar->id, boxtype);
-            OpenRecvBox(PChar, action, boxtype);
-        }
-        break;
-        case 0x0F:
-        {
-            DebugDeliveryBoxFmt("DBOX: CloseMailWindow (action: {:02X}): player: {} ({}), boxtype: {}", action, charName, PChar->id, boxtype);
-            CloseMailWindow(PChar, action, boxtype);
-        }
-        break;
-        default:
-        {
-            ShowErrorFmt("DBOX: Unhandled action: {:02X}, from player {} ({})", action, charName, PChar->id);
-        }
-    }
-}
-
-void dboxutils::SendOldItems(CCharEntity* PChar, uint8 action, uint8 boxtype)
-{
-    if (boxtype < 1 || boxtype > 2 || !IsAnyDeliveryBoxOpen(PChar))
-    {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in an invalid state: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action SendOldItems while UContainer is in an invalid state: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
     const auto rset = db::preparedStmt("SELECT itemid, itemsubid, slot, quantity, sent, extra, sender, charname FROM delivery_box WHERE charid = ? AND box = ? "
                                        "AND slot < 8 ORDER BY slot",
-                                       PChar->id, boxtype);
+                                       PChar->id,
+                                       BoxNo);
     if (rset)
     {
         uint8 items = 0;
@@ -225,7 +76,7 @@ void dboxutils::SendOldItems(CCharEntity* PChar, uint8 action, uint8 boxtype)
 
                     db::extractFromBlob(rset, "extra", PItem->m_extra);
 
-                    if (boxtype == 2)
+                    if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
                     {
                         PItem->setSender(rset->get<std::string>("charname"));
                         PItem->setReceiver(rset->get<std::string>("sender"));
@@ -244,35 +95,44 @@ void dboxutils::SendOldItems(CCharEntity* PChar, uint8 action, uint8 boxtype)
 
         for (uint8 i = 0; i < 8; ++i)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PChar->UContainer->GetItem(i), i, items, 1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Work, BoxNo, PChar->UContainer->GetItem(i), i, items, 1);
         }
     }
 }
 
-void dboxutils::AddItemsToBeSent(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID, uint8 invslot, uint32 quantity, const std::string& recieverName)
+void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo, int8_t ItemWorkNo, uint32_t ItemStacks, const std::string& receiverName)
 {
+    DebugDeliveryBoxFmt("DBOX: AddItemsToBeSent: player: {} ({}), BoxNo: {}, PostWorkNo: {}, ItemWorkNo: {}, ItemStacks: {}, receiverName: {}",
+                        PChar->name,
+                        PChar->id,
+                        static_cast<int8_t>(BoxNo),
+                        PostWorkNo,
+                        ItemWorkNo,
+                        ItemStacks,
+                        receiverName);
+
     if (!IsSendBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received AddItemsToBeSent while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invslot);
+    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(ItemWorkNo);
 
-    if (quantity == 0 || !PItem)
+    if (ItemStacks == 0 || !PItem)
     {
         return;
     }
 
-    if (PItem->getQuantity() < quantity || PItem->getReserve() > 0)
+    if (PItem->getQuantity() < ItemStacks || PItem->getReserve() > 0)
     {
-        ShowWarningFmt("DBOX: {} attempted to send insufficient/reserved {}: {} ({})", PChar->getName(), quantity, PItem->getName(), PItem->getID());
+        ShowWarningFmt("DBOX: {} attempted to send insufficient/reserved {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
         return;
     }
 
-    if (PChar->UContainer->IsSlotEmpty(slotID))
+    if (PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        const auto [recvCharid, recvAccid] = charutils::getCharIdAndAccountIdFromName(recieverName);
+        const auto [recvCharid, recvAccid] = charutils::getCharIdAndAccountIdFromName(receiverName);
         if (recvCharid && recvAccid)
         {
             if (PItem->getFlag() & ITEM_FLAG_NODELIVERY)
@@ -296,23 +156,32 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, uint8 action, uint8 boxtype
                 return;
             }
 
-            PUBoxItem->setReceiver(recieverName);
+            PUBoxItem->setReceiver(receiverName);
             PUBoxItem->setSender(PChar->getName());
-            PUBoxItem->setQuantity(quantity);
+            PUBoxItem->setQuantity(ItemStacks);
             PUBoxItem->setSlotID(PItem->getSlotID());
             std::memcpy(PUBoxItem->m_extra, PItem->m_extra, sizeof(PUBoxItem->m_extra));
 
             // NOTE: This will trigger SQL trigger: delivery_box_insert
-            const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows(
+            const auto rset = db::preparedStmt(
                 "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) "
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                PChar->id, PChar->getName(), 2, slotID, PItem->getID(), PItem->getSubID(), quantity, PItem->m_extra, recvCharid, recieverName);
+                PChar->id,
+                PChar->getName(),
+                2,
+                PostWorkNo,
+                PItem->getID(),
+                PItem->getSubID(),
+                ItemStacks,
+                PItem->m_extra,
+                recvCharid,
+                receiverName);
 
-            if (rset && affectedRows && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
+            if (rset && rset->rowsAffected() && charutils::UpdateItem(PChar, LOC_INVENTORY, ItemWorkNo, -static_cast<int32>(ItemStacks)))
             {
-                PChar->UContainer->SetItem(slotID, PUBoxItem);
-                PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PUBoxItem, slotID, PChar->UContainer->GetItemsCount(), 1);
-                PChar->pushPacket<CInventoryFinishPacket>();
+                PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
+                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             }
             else
             {
@@ -322,11 +191,13 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, uint8 action, uint8 boxtype
     }
 }
 
-void dboxutils::SendConfirmation(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::SendConfirmation(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: SendConfirmation: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsSendBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action SendConfirmation while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
@@ -339,9 +210,9 @@ void dboxutils::SendConfirmation(CCharEntity* PChar, uint8 action, uint8 boxtype
         }
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        CItem* PItem = PChar->UContainer->GetItem(slotID);
+        CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
 
         if (PItem && !PItem->isSent())
         {
@@ -350,28 +221,28 @@ void dboxutils::SendConfirmation(CCharEntity* PChar, uint8 action, uint8 boxtype
             {
                 uint32 charid = charutils::getCharIdFromName(PItem->getReceiver());
 
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("UPDATE delivery_box SET sent = 1 WHERE charid = ? AND senderid = ? AND slot = ? AND box = ?",
-                                                                                   PChar->id, charid, slotID, 2);
-                if (rset && affectedRows)
+                const auto rset = db::preparedStmt("UPDATE delivery_box SET sent = 1 WHERE charid = ? AND senderid = ? AND slot = ? AND box = ?",
+                                                                                   PChar->id, charid, PostWorkNo, 2);
+                if (rset && rset->rowsAffected())
                 {
                     // NOTE: This will trigger SQL trigger: delivery_box_insert
-                    const auto [rset2, affectedRows2] = db::preparedStmtWithAffectedRows(
+                    const auto rset2 = db::preparedStmt(
                         "INSERT INTO delivery_box(charid, charname, box, itemid, itemsubid, quantity, extra, senderid, sender) "
                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         charid, PItem->getReceiver(), 1, PItem->getID(), PItem->getSubID(), PItem->getQuantity(), PItem->m_extra, PChar->id, PChar->getName());
 
-                    if (rset2 && affectedRows2)
+                    if (rset2 && rset2->rowsAffected())
                     {
                         PItem->setSent(true);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, send_items, 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, send_items, 0x01);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Send, BoxNo, PItem, PostWorkNo, send_items, 0x01);
                         return;
                     }
                 }
 
                 // If we got here, something went wrong.
-                throw std::runtime_error(fmt::format("DBOX: Could not finalize send confirmation transaction (player: {} ({}), target: {}, slotID: {})",
-                                                     PChar->getName(), PChar->id, PItem->getReceiver(), slotID));
+                throw std::runtime_error(fmt::format("DBOX: Could not finalize send confirmation transaction (player: {} ({}), target: {}, PostWorkNo: {})",
+                                                     PChar->getName(), PChar->id, PItem->getReceiver(), PostWorkNo));
             });
             if (success)
             {
@@ -382,40 +253,42 @@ void dboxutils::SendConfirmation(CCharEntity* PChar, uint8 action, uint8 boxtype
     }
 }
 
-void dboxutils::CancelSendingItem(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: CancelSendingItem: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsSendBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action CancelSendingItem while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        CItem* PItem = PChar->UContainer->GetItem(slotID);
+        CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
 
         // clang-format off
         const auto success = db::transaction([&]()
         {
-            uint32 charid = charutils::getCharIdFromName(PChar->UContainer->GetItem(slotID)->getReceiver());
+            uint32 charid = charutils::getCharIdFromName(PChar->UContainer->GetItem(PostWorkNo)->getReceiver());
             if (charid)
             {
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows(
+                const auto rset = db::preparedStmt(
                     "UPDATE delivery_box SET sent = 0 WHERE charid = ? AND box = 2 AND slot = ? AND sent = 1 AND received = 0 LIMIT 1",
-                    PChar->id, slotID);
+                    PChar->id, PostWorkNo);
 
-                if (rset && affectedRows)
+                if (rset && rset->rowsAffected())
                 {
-                    const auto [rset2, affectedRows2] = db::preparedStmtWithAffectedRows(
+                    const auto rset2 = db::preparedStmt(
                         "DELETE FROM delivery_box WHERE senderid = ? AND box = 1 AND charid = ? AND itemid = ? AND quantity = ? "
                         "AND slot >= 8 LIMIT 1",
                         PChar->id, charid, PItem->getID(), PItem->getQuantity());
 
-                    if (rset2 && affectedRows2 == 1)
+                    if (rset2 && rset->rowsAffected())
                     {
-                        PChar->UContainer->GetItem(slotID)->setSent(false);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PChar->UContainer->GetItem(slotID), slotID, PChar->UContainer->GetItemsCount(), 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PChar->UContainer->GetItem(slotID), slotID, PChar->UContainer->GetItemsCount(), 0x01);
+                        PChar->UContainer->GetItem(PostWorkNo)->setSent(false);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x01);
 
                         return;
                     }
@@ -423,40 +296,42 @@ void dboxutils::CancelSendingItem(CCharEntity* PChar, uint8 action, uint8 boxtyp
             }
 
             // If we got here, something went wrong.
-            throw std::runtime_error(fmt::format("DBOX: Could not finalize cancel send transaction (player: {} ({}), target: {}, slotID: {})",
-                                                 PChar->getName(), PChar->id, PItem->getReceiver(), slotID));
+            throw std::runtime_error(fmt::format("DBOX: Could not finalize cancel send transaction (player: {} ({}), target: {}, PostWorkNo: {})",
+                                                 PChar->getName(), PChar->id, PItem->getReceiver(), PostWorkNo));
         });
         if (!success)
         {
-            const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows(
+            const auto rset = db::preparedStmt(
                 "DELETE FROM delivery_box WHERE box = 2 AND charid = ? AND itemid = ? AND quantity = ? AND slot = ? LIMIT 1",
-                PChar->id, PItem->getID(), PItem->getQuantity(), slotID);
-            if (rset && affectedRows)
+                PChar->id, PItem->getID(), PItem->getQuantity(), PostWorkNo);
+            if (rset && rset->rowsAffected())
             {
-                ShowErrorFmt("DBOX: Deleting orphaned outbox record (player: {} ({}), target: {}, slotID: {})",
-                                PChar->getName(), PChar->id, PItem->getReceiver(), slotID);
-                PChar->pushPacket<CDeliveryBoxPacket>(0x0F, boxtype, 0, 1);
+                ShowErrorFmt("DBOX: Deleting orphaned outbox record (player: {} ({}), target: {}, PostWorkNo: {})",
+                                PChar->getName(), PChar->id, PItem->getReceiver(), PostWorkNo);
+                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(static_cast<GP_CLI_COMMAND_PBX_COMMAND>(0x0F), BoxNo, 0, 1);
             }
 
             // error message: "Delivery orders are currently backlogged."
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, -1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, 0, -1);
         }
         // clang-format on
     }
 }
 
-void dboxutils::SendClientNewItemCount(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::SendClientNewItemCount(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: SendClientNewItemCount: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     // Send the player the new items count not seen
-    if (boxtype < 1 || boxtype > 2 || !IsAnyDeliveryBoxOpen(PChar))
+    if (!IsAnyDeliveryBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in an invalid state: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action SendClientNewItemCount while UContainer is in an invalid state: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
     const uint8 received_items = [&]() -> uint8
     {
-        if (boxtype == 0x01)
+        if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Incoming)
         {
             int limit = 0;
             for (int i = 0; i < 8; ++i)
@@ -473,7 +348,7 @@ void dboxutils::SendClientNewItemCount(CCharEntity* PChar, uint8 action, uint8 b
                 return rset->rowsCount();
             }
         }
-        else if (boxtype == 0x02)
+        else if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
         {
             const auto rset = db::preparedStmt("SELECT charid FROM delivery_box WHERE charid = ? AND received = 1 AND box = 2", PChar->id);
             if (rset)
@@ -485,63 +360,83 @@ void dboxutils::SendClientNewItemCount(CCharEntity* PChar, uint8 action, uint8 b
         return 0;
     }();
 
-    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0xFF, 0x02);
-    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, received_items, 0x01);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, 0xFF, 0x02);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Check, BoxNo, received_items, 0x01);
 }
 
-void dboxutils::SendNewItems(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: SendNewItems: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsRecvBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action SendNewItems while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (boxtype == 1)
+    if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Incoming)
     {
         // clang-format off
         const auto success = db::transaction([&]()
         {
-            CItem* PItem = nullptr;
 
             const auto rset = db::preparedStmt("SELECT itemid, itemsubid, quantity, extra, sender, senderid FROM delivery_box WHERE charid = ? "
                                                "AND box = 1 AND slot >= 8 ORDER BY slot ASC LIMIT 1",
                                                PChar->id);
             FOR_DB_SINGLE_RESULT(rset)
             {
-                PItem = itemutils::GetItem(rset->get<uint32>("itemid"));
-                if (PItem)
+                if (CItem* PItem = itemutils::GetItem(rset->get<uint32>("itemid")))
                 {
                     PItem->setSubID(rset->get<uint16>("itemsubid"));
                     PItem->setQuantity(rset->get<uint32>("quantity"));
                     db::extractFromBlob(rset, "extra", PItem->m_extra);
                     PItem->setSender(rset->get<std::string>("sender"));
 
-                    if (PChar->UContainer->IsSlotEmpty(slotID))
+                    if (PChar->UContainer->IsSlotEmpty(PostWorkNo))
                     {
                         uint32 senderID = rset->get<uint32>("senderid");
-                        PItem->setSlotID(slotID);
+                        PItem->setSlotID(PostWorkNo);
 
                         // the result of this query doesn't really matter, it can be sent from the auction house which has no sender record
                         db::preparedStmt("UPDATE delivery_box SET received = 1 WHERE senderid = ? AND charid = ? AND box = 2 AND received = 0 AND quantity = ? AND sent = 1 AND itemid = ? LIMIT 1",
                                          PChar->id, senderID, PItem->getQuantity(), PItem->getID());
+
+                        if (settings::get<bool>("map.AUDIT_PLAYER_DBOX"))
+                        {
+                            Async::getInstance()->submit(
+                                [itemid        = PItem->getID(),
+                                 quantity      = PItem->getQuantity(),
+                                 sender        = senderID,
+                                 sender_name   = PItem->getSender(),
+                                 receiver      = PChar->id,
+                                 receiver_name = PChar->getName(),
+                                 date          = earth_time::timestamp()]()
+                                {
+                                    const auto query = "INSERT INTO audit_dbox(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                    if (!db::preparedStmt(query, itemid, quantity, sender, sender_name, receiver, receiver_name, date))
+                                    {
+                                        ShowErrorFmt("Failed to log delivery box transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemid, quantity, sender, receiver, date);
+                                    }
+                                }
+                            );
+                        }
 
                         const auto rset = db::preparedStmt("SELECT slot FROM delivery_box WHERE charid = ? AND box = 1 AND slot > 7 ORDER BY slot ASC", PChar->id);
                         FOR_DB_SINGLE_RESULT(rset)
                         {
                             uint8 queue = rset->get<uint8>("slot");
 
-                            const auto rset2 = db::preparedStmt("UPDATE delivery_box SET slot = ? WHERE charid = ? AND box = 1 AND slot = ?", slotID, PChar->id, queue);
+                            const auto rset2 = db::preparedStmt("UPDATE delivery_box SET slot = ? WHERE charid = ? AND box = 1 AND slot = ?", PostWorkNo, PChar->id, queue);
                             if (rset2)
                             {
                                 const auto rset3 = db::preparedStmt("UPDATE delivery_box SET slot = slot - 1 WHERE charid = ? AND box = 1 AND slot > ?", PChar->id, queue);
                                 if (rset3)
                                 {
-                                    PChar->UContainer->SetItem(slotID, PItem);
+                                    PChar->UContainer->SetItem(PostWorkNo, PItem);
 
                                     // TODO: increment "count" for every new item, if needed
-                                    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, nullptr, slotID, 1, 2);
-                                    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, 1, 1);
+                                    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, nullptr, PostWorkNo, 1, 2);
+                                    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, PItem, PostWorkNo, 1, 1);
                                     return;
                                 }
                             }
@@ -554,22 +449,24 @@ void dboxutils::SendNewItems(CCharEntity* PChar, uint8 action, uint8 boxtype, ui
             }
 
             // If we got here, something went wrong.
-            throw std::runtime_error(fmt::format("DBOX: Could not finalize send new items transaction (player: {} ({}), slotID: {})",
-                                                 PChar->getName(), PChar->id, slotID));
+            throw std::runtime_error(fmt::format("DBOX: Could not finalize send new items transaction (player: {} ({}), PostWorkNo: {})",
+                                                 PChar->getName(), PChar->id, PostWorkNo));
         });
         if (!success)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, 0xEB);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, 0, 0xEB);
         }
         // clang-format on
     }
 }
 
-void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsSendBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action RemoveDeliveredItemFromSendingBox while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
@@ -588,14 +485,17 @@ void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, uint8 acti
                 CItem* PItem = PChar->UContainer->GetItem(deliverySlotID);
                 if (PItem && PItem->isSent())
                 {
-                    const auto [rset2, affectedRows2] = db::preparedStmtWithAffectedRows("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ? LIMIT 1", PChar->id, deliverySlotID);
-                    if (rset2 && affectedRows2)
+                    const auto rset2 = db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ? LIMIT 1", PChar->id, deliverySlotID);
+                    if (rset2 && rset2->rowsAffected())
                     {
-                        DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox (action: {:02X}): player: {} ({}) removed item: {} ({})",
-                                            action, PChar->getName(), PChar->id, PItem->getName(), PItem->getID());
+                        DebugDeliveryBoxFmt("DBOX: RemoveDeliveredItemFromSendingBox: player: {} ({}) removed item: {} ({})",
+                                            PChar->getName(),
+                                            PChar->id,
+                                            PItem->getName(),
+                                            PItem->getID());
 
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, 0x02);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, deliverySlotID, receivedItems, 0x01);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, 0, 0x02);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Confirm, BoxNo, PItem, deliverySlotID, receivedItems, 0x01);
                         PChar->UContainer->SetItem(deliverySlotID, nullptr);
                         destroy(PItem);
                     }
@@ -605,31 +505,35 @@ void dboxutils::RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, uint8 acti
     }
 }
 
-void dboxutils::UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: UpdateDeliveryCellBeforeRemoving: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsAnyDeliveryBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in an invalid state: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action UpdateDeliveryCellBeforeRemoving while UContainer is in an invalid state: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PChar->UContainer->GetItem(slotID), slotID, 1, 1);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Accept, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, 1, 1);
     }
 }
 
-void dboxutils::ReturnToSender(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: ReturnToSender: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsRecvBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action ReturnToSender while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        CItem* PItem = PChar->UContainer->GetItem(slotID);
+        CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
 
         // For logging
         const auto itemId   = PItem->getID();
@@ -642,7 +546,7 @@ void dboxutils::ReturnToSender(CCharEntity* PChar, uint8 action, uint8 boxtype, 
             const auto [senderID, senderName] = [&]() -> std::pair<uint32, std::string>
             {
                 const auto rset = db::preparedStmt("SELECT senderid, sender FROM delivery_box WHERE charid = ? AND slot = ? AND box = 1 LIMIT 1",
-                                                   PChar->id, slotID);
+                                                   PChar->id, PostWorkNo);
                 FOR_DB_SINGLE_RESULT(rset)
                 {
                     const auto senderID = rset->get<uint32>("senderid");
@@ -656,20 +560,20 @@ void dboxutils::ReturnToSender(CCharEntity* PChar, uint8 action, uint8 boxtype, 
             if (senderID)
             {
                 // NOTE: This will trigger SQL trigger: delivery_box_insert
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, extra, senderid, sender) "
+                const auto rset = db::preparedStmt("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, extra, senderid, sender) "
                                                                                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                                                                    senderID, senderName, 1, PItem->getID(), PItem->getSubID(), PItem->getQuantity(), PItem->m_extra, PChar->id, PChar->getName());
-                if (rset && affectedRows)
+                if (rset && rset->rowsAffected())
                 {
                     // Remove original delivery record
-                    const auto [rset2, affectedRows2] = db::preparedStmtWithAffectedRows("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = 1 LIMIT 1", PChar->id, slotID);
-                    if (rset2 && affectedRows2)
+                    const auto rset2 = db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = 1 LIMIT 1", PChar->id, PostWorkNo);
+                    if (rset2 && rset2->rowsAffected())
                     {
-                        PChar->UContainer->SetItem(slotID, nullptr);
-                        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1);
+                        PChar->UContainer->SetItem(PostWorkNo, nullptr);
+                        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
 
-                        DebugDeliveryBoxFmt("DBOX: ReturnToSender (action: {:02X}): player: {} ({}) returned item: {} ({}) to sender: {} ({})",
-                                            action, PChar->getName(), PChar->id, PItem->getName(), itemId, senderName, senderID);
+                        DebugDeliveryBoxFmt("DBOX: ReturnToSender: player: {} ({}) returned item: {} ({}) to sender: {} ({})",
+                                            PChar->getName(), PChar->id, PItem->getName(), itemId, senderName, senderID);
 
                         destroy(PItem);
                         return;
@@ -683,38 +587,40 @@ void dboxutils::ReturnToSender(CCharEntity* PChar, uint8 action, uint8 boxtype, 
         });
         if (!success)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 0xEB);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Reject, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xEB);
         }
         // clang-format on
     }
 }
 
-void dboxutils::TakeItemFromCell(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
-    if (boxtype < 1 || boxtype > 2 || !IsAnyDeliveryBoxOpen(PChar))
+    DebugDeliveryBoxFmt("DBOX: TakeItemFromCell: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
+    if (!IsAnyDeliveryBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in an invalid state {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action TakeItemFromCell while UContainer is in an invalid state {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        CItem* PItem = PChar->UContainer->GetItem(slotID);
+        CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
 
         if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 0xB9);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xB9);
             return;
         }
 
         // clang-format off
         const auto success = db::transaction([&]()
         {
-            if (boxtype == 0x01)
+            if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Incoming)
             {
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = ? LIMIT 1",
-                                                                   PChar->id, slotID, boxtype);
-                if (rset && affectedRows)
+                const auto rset = db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = ? LIMIT 1",
+                                                                   PChar->id, PostWorkNo, BoxNo);
+                if (rset && rset->rowsAffected())
                 {
                     if (charutils::AddItem(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
                     {
@@ -722,11 +628,11 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, uint8 action, uint8 boxtype
                     }
                 }
             }
-            else if (boxtype == 0x02)
+            else if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
             {
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("DELETE FROM delivery_box WHERE charid = ? AND sent = 0 AND slot = ? AND box = ? LIMIT 1",
-                                                                                   PChar->id, slotID, boxtype);
-                if (rset && affectedRows)
+                const auto rset = db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND sent = 0 AND slot = ? AND box = ? LIMIT 1",
+                                                                                   PChar->id, PostWorkNo, BoxNo);
+                if (rset && rset->rowsAffected())
                 {
                     if (charutils::AddItem(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
                     {
@@ -736,118 +642,132 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, uint8 action, uint8 boxtype
             }
 
             // If we got here, something went wrong.
-            throw std::runtime_error(fmt::format("DBOX: Could not finalize take item transaction (player: {} ({}), slotID: {})",
-                                                 PChar->getName(), PChar->id, slotID));
+            throw std::runtime_error(fmt::format("DBOX: Could not finalize take item transaction (player: {} ({}), PostWorkNo: {})",
+                                                 PChar->getName(), PChar->id, PostWorkNo));
         });
         if (success)
         {
-            DebugDeliveryBoxFmt("DBOX: TakeItemFromCell (action: {:02X}): player: {} ({}) received item: {} ({}) from slot {}",
-                                action, PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), slotID);
+            DebugDeliveryBoxFmt("DBOX: TakeItemFromCell: player: {} ({}) received item: {} ({}) from slot {}",
+                                PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
 
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1);
-            PChar->pushPacket<CInventoryFinishPacket>();
-            PChar->UContainer->SetItem(slotID, nullptr);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->UContainer->SetItem(PostWorkNo, nullptr);
             destroy(PItem);
         }
         else
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 0xBA);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xBA);
         }
         // clang-format on
     }
 }
 
-void dboxutils::RemoveItemFromCell(CCharEntity* PChar, uint8 action, uint8 boxtype, uint8 slotID)
+void dboxutils::RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo)
 {
+    DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell: player: {} ({}), BoxNo: {}, PostWorkNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), PostWorkNo);
+
     if (!IsRecvBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action RemoveItemFromCell while UContainer is in a state other than UCONTAINER_RECV_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    if (!PChar->UContainer->IsSlotEmpty(slotID))
+    if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = 1 LIMIT 1", PChar->id, slotID);
-        if (rset && affectedRows)
+        const auto rset = db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND slot = ? AND box = 1 LIMIT 1", PChar->id, PostWorkNo);
+        if (rset && rset->rowsAffected())
         {
-            CItem* PItem = PChar->UContainer->GetItem(slotID);
-            PChar->UContainer->SetItem(slotID, nullptr);
+            CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
+            PChar->UContainer->SetItem(PostWorkNo, nullptr);
 
-            DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell (action: {:02X}): player: {} ({}) removed item {} ({}) from slot {}",
-                                action, PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), slotID);
+            DebugDeliveryBoxFmt("DBOX: RemoveItemFromCell: player: {} ({}) removed item {} ({}) from slot {}",
+                                PChar->getName(),
+                                PChar->id,
+                                PItem->getName(),
+                                PItem->getID(),
+                                PostWorkNo);
 
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Clear, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
             destroy(PItem);
         }
     }
 }
 
-void dboxutils::ConfirmNameBeforeSending(CCharEntity* PChar, uint8 action, uint8 boxtype, const std::string& recieverName)
+void dboxutils::ConfirmNameBeforeSending(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, const std::string& receiverName)
 {
+    DebugDeliveryBoxFmt("DBOX: ConfirmNameBeforeSending: player: {} ({}), BoxNo: {}, receiverName: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), receiverName);
+
     if (!IsSendBoxOpen(PChar))
     {
-        ShowWarningFmt("DBOX: Received action {} while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", action, PChar->getName(), PChar->id);
+        ShowWarningFmt("DBOX: Received action ConfirmNameBeforeSending while UContainer is in a state other than UCONTAINER_SEND_DELIVERYBOX: {} ({})", PChar->getName(), PChar->id);
         return;
     }
 
-    uint32 accid = charutils::getAccountIdFromName(recieverName);
+    uint32 accid = charutils::getAccountIdFromName(receiverName);
     if (accid)
     {
         const auto rset = db::preparedStmt("SELECT COUNT(*) FROM chars WHERE charid = ? AND accid = ? LIMIT 1", PChar->id, accid);
         if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("COUNT(*)"))
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0xFF, 0x02);
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0x01, 0x01);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x01, 0x01);
         }
         else
         {
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0xFF, 0x02);
-            PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0x00, 0x01);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0x01);
         }
     }
     else
     {
-        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0xFF, 0x02);
-        PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0x00, 0xFB);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0xFF, 0x02);
+        PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Query, BoxNo, 0x00, 0xFB);
     }
 }
 
-void dboxutils::CloseMailWindow(CCharEntity* PChar, uint8 action, uint8 boxtype)
+void dboxutils::CloseMailWindow(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 {
+    DebugDeliveryBoxFmt("DBOX: CloseMailWindow: player: {} ({}), BoxNo: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo));
+
     if (IsAnyDeliveryBoxOpen(PChar))
     {
         PChar->UContainer->Clean();
     }
 
     // Open mail, close mail
-    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::PostClose, BoxNo, 0, 1);
 }
 
-void dboxutils::OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype)
+void dboxutils::OpenSendBox(CCharEntity* PChar)
 {
+    DebugDeliveryBoxFmt("DBOX: OpenSendBox: player: {} ({})", PChar->name, PChar->id);
+
     PChar->UContainer->Clean();
     PChar->UContainer->SetType(UCONTAINER_SEND_DELIVERYBOX);
-    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::DeliOpen, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, 0, 1);
 }
 
-void dboxutils::OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype)
+void dboxutils::OpenRecvBox(CCharEntity* PChar)
 {
+    DebugDeliveryBoxFmt("DBOX: OpenRecvBox: player: {} ({})", PChar->name, PChar->id);
+
     PChar->UContainer->Clean();
     PChar->UContainer->SetType(UCONTAINER_RECV_DELIVERYBOX);
-    PChar->pushPacket<CDeliveryBoxPacket>(action, boxtype, 0, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::PostOpen, GP_CLI_COMMAND_PBX_BOXNO::Incoming, 0, 1);
 }
 
-bool dboxutils::IsSendBoxOpen(CCharEntity* PChar)
+auto dboxutils::IsSendBoxOpen(const CCharEntity* PChar) -> bool
 {
     return PChar->UContainer->GetType() == UCONTAINER_SEND_DELIVERYBOX;
 }
 
-bool dboxutils::IsRecvBoxOpen(CCharEntity* PChar)
+auto dboxutils::IsRecvBoxOpen(const CCharEntity* PChar) -> bool
 {
     return PChar->UContainer->GetType() == UCONTAINER_RECV_DELIVERYBOX;
 }
 
-bool dboxutils::IsAnyDeliveryBoxOpen(CCharEntity* PChar)
+auto dboxutils::IsAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool
 {
     return IsSendBoxOpen(PChar) || IsRecvBoxOpen(PChar);
 }

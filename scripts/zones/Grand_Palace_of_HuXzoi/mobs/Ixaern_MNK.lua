@@ -14,14 +14,14 @@ local bracerMode = function(mob, qnAern1, qnAern2)
     -- captures show delay reduction from 280 -> 120
     -- note this is actual delay reduction with change in tp gained and imparted
     -- note lvl 83 mnk with martial arts vii
-    mob:setMod(xi.mod.DELAY, 2600)
+    mob:setMod(xi.mod.DELAY, -2600)
 
     if qnAern1 and qnAern1:isAlive() then
         qnAern1:setAnimationSub(2)
         qnAern1:addMod(xi.mod.ATT, 200)
         -- captures show delay reduction from 240 -> 120
         -- note this is actual delay reduction with change in tp gained and imparted
-        qnAern1:setMod(xi.mod.DELAY, 2000)
+        qnAern1:setMod(xi.mod.DELAY, -2000)
     end
 
     if qnAern2 and qnAern2:isAlive() then
@@ -29,7 +29,7 @@ local bracerMode = function(mob, qnAern1, qnAern2)
         qnAern2:addMod(xi.mod.ATT, 200)
         -- captures show delay reduction from 240 -> 120
         -- note this is actual delay reduction with change in tp gained and imparted
-        qnAern2:setMod(xi.mod.DELAY, 2000)
+        qnAern2:setMod(xi.mod.DELAY, -2000)
     end
 
     -- slightly delay adding local var to avoid adding bracers to Ix'Mnk
@@ -41,13 +41,21 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.TERROR)
 
     mob:addListener('ITEM_DROPS', 'ITEM_DROPS_IXAERN_MNK', function(mobArg, loot)
         local rate = mob:getLocalVar('[SEA]IxAern_DropRate')
         loot:addGroupFixed(rate,
         {
-            { item = xi.item.DEED_OF_PLACIDITY, weight = 750 },
-            { item = xi.item.VICE_OF_ANTIPATHY, weight = 250 },
+            { item = xi.item.DEED_OF_PLACIDITY, weight = 850 },
+            { item = xi.item.VICE_OF_ANTIPATHY, weight = 150 },
         })
     end)
 end
@@ -56,21 +64,13 @@ entity.onMobSpawn = function(mob)
     -- reset the subanim otherwise it will respawn with bracers on
     -- note that Aerns are never actually supposed to be in subanim 0
     mob:setAnimationSub(1)
-    mob:addImmunity(xi.immunity.GRAVITY)
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.STUN)
-    mob:addImmunity(xi.immunity.PARALYZE)
-    mob:addImmunity(xi.immunity.BLIND)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobFight = function(mob, target)
     if mob:getLocalVar('BracerMode') == 0 then
-        local IxaernID = mob:getID()
-        local qnAern1 = GetMobByID(IxaernID + 1)
-        local qnAern2 = GetMobByID(IxaernID + 2)
+        local ixaernID = mob:getID()
+        local qnAern1 = GetMobByID(ixaernID + 1)
+        local qnAern2 = GetMobByID(ixaernID + 2)
 
         -- if any of the three mobs gets below 60% then all three go to bracer mode
         if
@@ -100,7 +100,7 @@ entity.onMobEngage = function(mob, target)
         if
             qnAern and
             qnAern:isAlive() and
-            qnAern:getCurrentAction() == xi.act.ROAMING
+            qnAern:getCurrentAction() == xi.action.category.ROAMING
         then
             qnAern:updateEnmity(target)
         end

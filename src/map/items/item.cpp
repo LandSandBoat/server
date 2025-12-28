@@ -257,7 +257,7 @@ const std::string& CItem::getName()
     return m_name;
 }
 
-void CItem::setName(std::string const& name)
+void CItem::setName(const std::string& name)
 {
     m_name = name;
 }
@@ -273,7 +273,7 @@ const std::string& CItem::getSender()
     return m_send;
 }
 
-void CItem::setSender(std::string const& sender)
+void CItem::setSender(const std::string& sender)
 {
     m_send = sender;
 }
@@ -289,7 +289,7 @@ const std::string& CItem::getReceiver()
     return m_recv;
 }
 
-void CItem::setReceiver(std::string const& receiver)
+void CItem::setReceiver(const std::string& receiver)
 {
     m_recv = receiver;
 }
@@ -308,7 +308,7 @@ const std::string CItem::getSignature()
     return signature; // return string copy
 }
 
-void CItem::setSignature(std::string const& signature)
+void CItem::setSignature(const std::string& signature)
 {
     std::memset(m_extra + 0x0C, 0, sizeof(m_extra) - 0x0C);
     std::memcpy(m_extra + 0x0C, signature.c_str(), signature.size());
@@ -378,13 +378,15 @@ bool CItem::isSoultrapper() const
     return m_id == 18721 || m_id == 18724;
 }
 
-void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CItem::setSoulPlateData(const std::string& name, uint32 interestData, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     PackSoultrapperName(name, m_extra);
 
-    // Hack: Artificially chop off extremely long names, so we can pack the mobFamily info into m_extra
-    m_extra[17] = (mobFamily & 0xFF00) >> 8;
-    m_extra[18] = mobFamily & 0x00FF;
+    // interestData is zone ID (high) + mob family ID (low)
+    m_extra[15] = (interestData >> 24) & 0xFF;
+    m_extra[16] = (interestData >> 16) & 0xFF;
+    m_extra[17] = (interestData >> 8) & 0xFF;
+    m_extra[18] = interestData & 0xFF;
 
     m_extra[19] = zeni;
 
@@ -396,14 +398,17 @@ void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 ze
     m_extra[23] = (0x03 << 4) & fp;
 }
 
-auto CItem::getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>
+auto CItem::getSoulPlateData() -> std::tuple<std::string, uint32, uint8, uint16, uint8>
 {
-    auto   name       = UnpackSoultrapperName(m_extra);
-    uint16 mobFamily  = (m_extra[17] << 8) + m_extra[18];
+    auto   name         = UnpackSoultrapperName(m_extra);
+    uint32 interestData = (m_extra[15] << 24) |
+                          (m_extra[16] << 16) |
+                          (m_extra[17] << 8) |
+                          m_extra[18];
     uint8  zeni       = m_extra[19];
     uint16 skillIndex = (m_extra[20] >> 7) + (m_extra[21] << 1) + ((m_extra[22] & 0x03) << 9);
     uint8  fp         = (m_extra[22] >> 3) + ((m_extra[23] & 0x03) << 4);
-    return std::tuple(name, mobFamily, zeni, skillIndex, fp);
+    return std::tuple(name, interestData, zeni, skillIndex, fp);
 }
 
 bool CItem::isMannequin() const

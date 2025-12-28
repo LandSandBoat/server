@@ -21,12 +21,12 @@
 
 #pragma once
 
-#include "world_server.h"
+#include "world_engine.h"
 
 class PartySystem
 {
 public:
-    PartySystem(WorldServer& worldServer)
+    PartySystem(WorldEngine& worldServer)
     : worldServer_(worldServer)
     {
         std::ignore = worldServer_;
@@ -40,5 +40,5 @@ public:
     }
 
 private:
-    WorldServer& worldServer_;
+    WorldEngine& worldServer_;
 };

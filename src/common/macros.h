@@ -102,3 +102,8 @@
 #define _gmtime_s(a, b)    gmtime_s(a, b)
 #define _localtime_s(a, b) localtime_s(a, b)
 #endif
+
+// MSVC doesn't have __PRETTY_FUNCTION__ so we use an equivalent
+#if defined(_MSC_VER)
+#define __PRETTY_FUNCTION__ __FUNCSIG__
+#endif

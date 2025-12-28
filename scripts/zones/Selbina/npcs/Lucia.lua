@@ -7,15 +7,19 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() > -28.750 then
+    -- Outside dock zone.
+    if player:getZPos() >= -28.750 then
         player:startEvent(221, player:getGil(), 100)
+
+    -- Inside dock zone.
     else
         player:startEvent(235)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 221 and player:getZPos() < -28.750 then
+    if csid == 221 and player:getZPos() < -28.750 then -- This means they have crossed. Option returned is always 0.
+        player:addKeyItem(xi.ki.FERRY_TICKET)
         player:delGil(100)
     end
 end

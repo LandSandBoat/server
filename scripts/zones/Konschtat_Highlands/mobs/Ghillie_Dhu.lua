@@ -7,12 +7,23 @@ require('scripts/quests/tutorial')
 ---@type TMobEntity
 local entity = {}
 
+entity.spawnPoints =
+{
+    { x =  387.000, y =  -8.873, z =  -338.999 },
+    { x =  403.000, y =  -9.000, z =  -362.000 },
+    { x =  400.000, y =  -8.000, z =  -342.000 },
+    { x =  349.000, y = -16.000, z =  -444.000 },
+    { x =  401.000, y =  -9.000, z =  -369.000 },
+    { x =  393.000, y =  -9.000, z =  -359.000 },
+    { x =  381.000, y = -10.000, z =  -331.000 },
+}
+
 entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     -- For its TP drain melee.
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-
-    -- Hits especially hard for his level, even by NM standards.
-    mob:addMod(xi.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
 
 entity.onMobRoam = function(mob)
@@ -43,7 +54,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
 end
 

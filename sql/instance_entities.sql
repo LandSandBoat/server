@@ -1949,6 +1949,22 @@ INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 INSERT INTO `instance_entities` VALUES (7701,17093483);
 
+-- Waking the Colossus/Divine Intereference
+-- mobs
+INSERT INTO `instance_entities` VALUES (7702,17093148); -- Alexander_WTC
+INSERT INTO `instance_entities` VALUES (7702,17093149); -- Alexander_Image
+INSERT INTO `instance_entities` VALUES (7702,17093150); -- Alexander_Image
+INSERT INTO `instance_entities` VALUES (7702,17093151); -- Alexander_Image
+-- npcs
+INSERT INTO `instance_entities` VALUES (7702,17093419); -- Gilded Doors
+INSERT INTO `instance_entities` VALUES (7702,17093420); -- Gilded Doors
+INSERT INTO `instance_entities` VALUES (7702,17093421); -- _k5w
+INSERT INTO `instance_entities` VALUES (7702,17093422); -- Gilded Gateway
+INSERT INTO `instance_entities` VALUES (7702,17093423); -- Test_Actor
+INSERT INTO `instance_entities` VALUES (7702,17093424); -- Weather
+INSERT INTO `instance_entities` VALUES (7702,17093425); -- GOAL_SW
+INSERT INTO `instance_entities` VALUES (7702,17093440); -- Rune_of_Transfer
+
 -- Nyzul Isle Investigation
 -- npcs
 INSERT INTO `instance_entities` VALUES (7704,17092609); -- Chests

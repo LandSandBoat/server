@@ -9,8 +9,8 @@ local itemObject = {}
 itemObject.onItemCheck = function(target, item, param, caster)
     local result = 0
     -- Need retail verification: Is having set foot in the zone a requirement?
-    if not target:hasVisitedZone(162) then
-        result = 56
+    if not target:hasVisitedZone(xi.zone.CASTLE_ZVAHL_KEEP) then
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
 
     return result

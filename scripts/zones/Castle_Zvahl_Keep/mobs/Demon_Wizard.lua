@@ -7,7 +7,6 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local baronSpawnPoints =
 {
     { x = -254.000, y = -52.125, z =  86.000 },
@@ -62,17 +61,11 @@ local baronSpawnPoints =
     { x = -232.100, y = -52.000, z =  93.063 },
 }
 
-local baronPHTable =
-{
-    [ID.mob.BARON_VAPULA - 3] = ID.mob.BARON_VAPULA, -- -254.000 -52.125 86.000
-    [ID.mob.BARON_VAPULA - 1] = ID.mob.BARON_VAPULA, -- -227.007 -52.125 83.768
-}
-
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, baronPHTable, 10, 1, { spawnPoints = baronSpawnPoints }) -- No respawn
+    xi.mob.phOnDespawn(mob, ID.mob.BARON_VAPULA, 10, 1, { spawnPoints = baronSpawnPoints }) -- No respawn
 end
 
 return entity

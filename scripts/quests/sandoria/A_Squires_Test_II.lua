@@ -101,7 +101,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
-                        quest:setVar(player, 'Timer', os.time() + 30)
+                        quest:setVar(player, 'Timer', GetSystemTime() + 30)
                     end
 
                     return quest:messageSpecial(ordellesCavesID.text.PLACE_HANDS_IN_POOL)
@@ -112,7 +112,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
-                        if os.time() <= quest:getVar(player, 'Timer') then
+                        if GetSystemTime() <= quest:getVar(player, 'Timer') then
                             return quest:keyItem(xi.ki.STALACTITE_DEW)
                         else
                             return quest:messageSpecial(ordellesCavesID.text.DEW_SLIPS_THROUGH_FINGERS)

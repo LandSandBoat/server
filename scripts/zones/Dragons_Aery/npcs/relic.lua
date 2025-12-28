@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, { xi.item.RANPERRE_GOLDPIECE, xi.item.HOLY_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.CALIBURN })
     then
         -- currency, shard, necropsyche, stage 4
-        player:startEvent(3, xi.item.EXCALIBUR)
+        player:startEvent(3, xi.item.EXCALIBUR_75)
     end
 end
 
@@ -25,7 +25,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 3 and
-        npcUtil.giveItem(player, { xi.item.EXCALIBUR, { xi.item.MONTIONT_SILVERPIECE, 30 } })
+        npcUtil.giveItem(player, { xi.item.EXCALIBUR_75, { xi.item.MONTIONT_SILVERPIECE, 30 } })
     then
         player:confirmTrade()
         player:setCharVar('RELIC_IN_PROGRESS', 0)

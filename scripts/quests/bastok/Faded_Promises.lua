@@ -91,6 +91,23 @@ quest.sections =
             },
         },
 
+        [xi.zone.PALBOROUGH_MINES] =
+        {
+            ['Treasure_Chest' ] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        not player:hasKeyItem(xi.keyItem.DIARY_OF_MUKUNDA)
+                    then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.DIARY_OF_MUKUNDA)
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.PORT_BASTOK] =
         {
             ['Kagetora'] =

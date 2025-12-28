@@ -132,12 +132,9 @@ mission.sections =
                         if mission:getLocalVar(player, 'nmDefeated') == 1 then
                             player:setMissionStatus(mission.areaId, 2)
                             return mission:keyItem(xi.ki.REINFORCED_CERMET)
-                        elseif
-                            -- TODO: xi.settings default (300s) is used to hide this QM on spawn.  Verify if this is accurate since we're moving the QM
+                        else
                             npcUtil.popFromQM(player, npc, { romaeveID.mob.MOKKURKALFI, romaeveID.mob.MOKKURKALFI + 1 }, { claim = false, look = true, radius = 2 })
-                        then
-                            local newPosition = npcUtil.pickNewPosition(npc:getID(), romaeveID.npc.BASTOK_7_1_QM_POS, true)
-                            npcUtil.queueMove(npc, newPosition)
+                            npc:hideNPC(0)
                             return mission:messageSpecial(romaeveID.text.A_CHILL_RUNS_DOWN_SPINE)
                         end
                     end

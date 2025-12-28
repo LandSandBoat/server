@@ -11,8 +11,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local guildSkillId = xi.skill.GOLDSMITHING
-    local stock = xi.shop.generalGuildStock[guildSkillId]
-    xi.shop.generalGuild(player, stock, guildSkillId)
+    xi.shop.generalGuild(player, xi.shop.generalGuildStock[guildSkillId], guildSkillId)
 end
 
 return entity

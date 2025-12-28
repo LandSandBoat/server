@@ -8,7 +8,9 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasSpell(xi.magic.spell.ABQUHBAH) and
+            return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+                xi.trust.hasPermit(player) and
+                not player:hasSpell(xi.magic.spell.ABQUHBAH) and
                 not player:findItem(xi.item.CIPHER_OF_ABQUHBAHS_ALTER_EGO) and
                 player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) and
                 player:getCurrentMission(xi.mission.log_id.ROV) >= xi.mission.id.rov.EVER_FORWARD

@@ -19,13 +19,11 @@
 ===========================================================================
 */
 
-#ifndef _CMOBSPELLLIST_H
-#define _CMOBSPELLLIST_H
+#pragma once
 
 #include <vector>
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 
 #include "spell.h"
 
@@ -41,22 +39,25 @@ typedef struct
 class CMobSpellList
 {
 public:
-    CMobSpellList();
+    CMobSpellList(uint16 listId);
 
-    void   AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl);
-    uint16 GetSpellMinLevel(SpellID spellId);
+    auto getId() const -> uint16;
+
+    void AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl);
+    auto GetSpellMinLevel(SpellID spellId) const -> uint16;
 
     // main spell list
     std::vector<MobSpell_t> m_spellList;
 
 private:
+    uint16 m_listId{};
 };
 
 namespace mobSpellList
 {
-    void LoadMobSpellList();
 
-    CMobSpellList* GetMobSpellList(uint16 MobSpellListID);
+void LoadMobSpellList();
+
+auto GetMobSpellList(uint16 mobSpellListId) -> CMobSpellList*;
+
 }; // namespace mobSpellList
-
-#endif

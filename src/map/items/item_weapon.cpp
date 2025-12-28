@@ -37,7 +37,7 @@ CItemWeapon::CItemWeapon(uint16 id)
     setType(ITEM_WEAPON);
 
     m_skillType      = SKILL_NONE;
-    m_subSkillType   = SUBSKILL_XBO;
+    m_subSkillType   = SUBSKILL_XBOW_SHORTBOW;
     m_iLvlSkill      = 0;
     m_iLvlParry      = 0;
     m_iLvlMacc       = 0;
@@ -317,7 +317,7 @@ void CItemWeapon::setDelay(uint16 delay)
  *                                                                      *
  ************************************************************************/
 
-int16 CItemWeapon::getDelay() const
+uint16 CItemWeapon::getDelay() const
 {
     return m_delay;
 }
@@ -342,7 +342,7 @@ void CItemWeapon::setBaseDelay(uint16 delay)
  *                                                                       *
  ************************************************************************/
 
-int16 CItemWeapon::getBaseDelay() const
+uint16 CItemWeapon::getBaseDelay() const
 {
     return m_baseDelay;
 }

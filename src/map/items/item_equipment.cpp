@@ -21,33 +21,37 @@
 
 #include "item_equipment.h"
 
-#include "map.h"
+#include "common/database.h"
+#include "common/logging.h"
+
 #include <cstring>
 
 namespace
 {
-    /*
-    From augments.sql:
 
-    `augmentId` smallint(5) unsigned NOT NULL,
-    `multiplier` smallint(2) NOT NULL DEFAULT 0,
-    `modId` smallint(5) unsigned NOT NULL DEFAULT 0,
-    `value` smallint(5) NOT NULL DEFAULT 0,
-    `isPet` tinyint(1) NOT NULL DEFAULT 0,
-    `petType` tinyint(3) unsigned NOT NULL DEFAULT 0,
-    */
-    struct AugmentDataRow
-    {
-        uint16 augmentId;
-        uint16 multiplier;
-        uint16 modId;
-        int16  value; // Can be negative
-        uint8  isPet;
-        uint8  petType;
-    };
+/*
+From augments.sql:
 
-    using AugmentDataRows = std::vector<AugmentDataRow>;
-    std::unordered_map<uint16, AugmentDataRows> sAugmentData;
+`augmentId` smallint(5) unsigned NOT NULL,
+`multiplier` smallint(2) NOT NULL DEFAULT 0,
+`modId` smallint(5) unsigned NOT NULL DEFAULT 0,
+`value` smallint(5) NOT NULL DEFAULT 0,
+`isPet` tinyint(1) NOT NULL DEFAULT 0,
+`petType` tinyint(3) unsigned NOT NULL DEFAULT 0,
+*/
+struct AugmentDataRow
+{
+    uint16 augmentId;
+    uint16 multiplier;
+    uint16 modId;
+    int16  value; // Can be negative
+    uint8  isPet;
+    uint8  petType;
+};
+
+using AugmentDataRows = std::vector<AugmentDataRow>;
+std::unordered_map<uint16, AugmentDataRows> sAugmentData;
+
 } // namespace
 
 void CItemEquipment::LoadAugmentData()
@@ -445,6 +449,12 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
         // otherwise increase modifier power using the multiplier
         // check if we should be adding to or taking away from the mod power (handle scripted augments properly)
         modValue = (modValue > 0 ? modValue + value : modValue - value) * (multiplier > 1 ? multiplier : 1);
+
+        // Skip unimplemented augments modifiers
+        if (modId == Mod::NONE)
+        {
+            continue;
+        }
 
         if (!isPet)
         {

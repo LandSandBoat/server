@@ -34,17 +34,17 @@
 
 #include "lua/luautils.h"
 
-#include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
-#include "packets/char_job_extra.h"
-#include "packets/char_jobs.h"
-#include "packets/char_stats.h"
-#include "packets/monipulator1.h"
-#include "packets/monipulator2.h"
+#include "packets/s2c/0x01b_job_info.h"
+#include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x061_clistatus.h"
+#include "packets/s2c/0x0ac_command_data.h"
 
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
+#include "packets/c2s/0x01a_action.h"
+#include "packets/c2s/0x102_extended_job.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 
@@ -69,8 +69,10 @@ struct MonstrosityInstinctRow
 
 namespace
 {
-    std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
-    std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+
+std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
+std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
@@ -111,8 +113,8 @@ void monstrosity::LoadStaticData()
                     .monstrosityId          = rset->get<uint8>("monstrosity_id"),
                     .monstrositySpeciesCode = monstrositySpeciesCode,
                     .name                   = rset->get<std::string>("name"),
-                    .mjob                   = static_cast<JOBTYPE>(rset->get<uint8>("mjob")),
-                    .sjob                   = static_cast<JOBTYPE>(rset->get<uint8>("sjob")),
+                    .mjob                   = rset->get<JOBTYPE>("mjob"),
+                    .sjob                   = rset->get<JOBTYPE>("sjob"),
                     .size                   = rset->get<uint8>("size"),
                     .look                   = rset->get<uint16>("look"),
                 };
@@ -138,12 +140,12 @@ void monstrosity::LoadStaticData()
 
     for (auto& [_, entry] : gMonstrosityInstinctMap)
     {
-        const auto rset = db::preparedStmt("SELECT modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = (?)", entry.monstrosityInstinctId);
+        const auto rset = db::preparedStmt("SELECT modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = ?", entry.monstrosityInstinctId);
         if (rset && rset->rowsCount())
         {
             while (rset->next())
             {
-                const auto mod = static_cast<Mod>(rset->get<uint16>("modId"));
+                const auto mod = rset->get<Mod>("modId");
                 const auto val = rset->get<int16>("value");
                 entry.mods.emplace_back(mod, val);
             }
@@ -296,7 +298,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         if (maybeInstinct != gMonstrosityInstinctMap.end())
         {
             auto instinct = (*maybeInstinct).second;
-            for (auto const& mod : instinct.mods)
+            for (const auto& mod : instinct.mods)
             {
                 PChar->addModifier(mod.getModID(), mod.getModAmount());
             }
@@ -308,9 +310,9 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     // TODO: There are more conditions to handle here?
     if (PChar->loc.zone->GetID() != ZONE_FERETORY)
     {
-        uint32 duration = PChar->m_PMonstrosity->Belligerency ? 60 : 64800 /* 18 hours */;
+        auto duration = PChar->m_PMonstrosity->Belligerency ? 1min : 18h;
 
-        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, duration);
+        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0s, duration);
 
         // TODO: Move these into the db
         PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
@@ -325,7 +327,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         // NOTE: It DOES say the effect wears off
         // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
 
-        PChar->StatusEffectContainer->AddStatusEffect(PEffect, true);
+        PChar->StatusEffectContainer->AddStatusEffect(PEffect, EffectNotice::Silent);
     }
 
     SendFullMonstrosityUpdate(PChar);
@@ -370,52 +372,42 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
     luautils::OnMonstrosityUpdate(PChar);
 
-    PChar->pushPacket<CMonipulatorPacket1>(PChar);
-    PChar->pushPacket<CMonipulatorPacket2>(PChar);
-    PChar->pushPacket<CCharJobsPacket>(PChar);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
-    PChar->pushPacket<CCharAppearancePacket>(PChar);
-    PChar->pushPacket<CCharStatsPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
+    charutils::SendExtendedJobPackets(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 
     PChar->updatemask |= UPDATE_LOOK;
 }
 
-void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacket& data)
+void monstrosity::HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data)
 {
     if (PChar->GetMJob() != JOB_MON)
     {
         return;
     }
 
-    if (PChar->m_PMonstrosity == nullptr)
+    if (!PChar->m_PMonstrosity)
     {
         return;
     }
-
-    // uint16 other = data.ref<uint16>(0x0A); // Always 25?
-
-    uint16 targId  = data.ref<uint16>(0x08);
-    uint16 skillId = data.ref<uint16>(0x0C);
 
     // TODO: Validate that this move is available at this level, for this species, and that
     // we're capable of using it (state, TP, etc.).
 
-    PChar->PAI->Internal_MobSkill(targId, skillId);
+    PChar->PAI->Internal_MobSkill(data.ActIndex, data.MonsterSkill.SkillId, std::nullopt);
 }
 
-void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)
+void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
 {
-    if (PChar->loc.zone->GetID() != ZONE_FERETORY || PChar->m_PMonstrosity == nullptr)
-    {
-        return;
-    }
+    // There used to be more checks here, but they've been moved to the packet handler.
 
     // NOTE: The amount of pointer per level is level + 10, this is set in the client
 
-    // clang-format off
-    auto getTotalInstinctsCost = [&](std::array<uint16, 12> input) -> uint8
+    auto getTotalInstinctsCost = [&](const std::array<uint16, 12>& input) -> uint8
     {
         uint8 total = 0;
 
@@ -427,55 +419,58 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         return total;
     };
 
-    auto instinctsContainDuplicates = [&](std::array<uint16, 12> input) -> bool
+    auto instinctsContainDuplicates = [&](const std::array<uint16, 12>& input) -> bool
     {
         std::unordered_set<uint16> set;
         for (auto const& idx : input)
         {
-            if (set.find(idx) != set.end())
+            if (idx == 0)
+            {
+                continue; // Skip empty/unequipped slots
+            }
+
+            if (set.contains(idx))
             {
                 // Found dupe
                 return true;
             }
+
+            set.insert(idx);
         }
         return false;
     };
-    // clang-format on
 
-    uint8 flag = data.ref<uint16>(0x0A);
-    if (flag == 0x01) // Species Change
+    if (data.Flags0.SpeciesFlag)
     {
-        auto previousId = PChar->m_PMonstrosity->MonstrosityId;
-
-        auto newSpecies = data.ref<uint16>(0x0C);
+        const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
 
         // Invalid species
-        if (gMonstrositySpeciesMap.find(newSpecies) == gMonstrositySpeciesMap.end())
+        if (!gMonstrositySpeciesMap.contains(data.SpeciesIndex))
         {
             return;
         }
 
-        auto data = gMonstrositySpeciesMap[newSpecies];
+        const auto speciesData = gMonstrositySpeciesMap[data.SpeciesIndex];
 
         // Not unlocked
-        if (PChar->m_PMonstrosity->levels[data.monstrosityId] == 0)
+        if (PChar->m_PMonstrosity->levels[speciesData.monstrosityId] == 0)
         {
             return;
         }
 
         // If is a variant, and isn't unlocked, bail
-        if (newSpecies >= 256 && !IsVariantUnlocked(PChar, newSpecies - 256))
+        if (data.SpeciesIndex >= 256 && !IsVariantUnlocked(PChar, data.SpeciesIndex - 256))
         {
             return;
         }
 
-        PChar->m_PMonstrosity->Species = newSpecies;
+        PChar->m_PMonstrosity->Species = data.SpeciesIndex;
 
-        PChar->m_PMonstrosity->MonstrosityId = data.monstrosityId;
-        PChar->m_PMonstrosity->MainJob       = data.mjob;
-        PChar->m_PMonstrosity->SubJob        = data.sjob;
-        PChar->m_PMonstrosity->Size          = data.size;
-        PChar->m_PMonstrosity->Look          = data.look;
+        PChar->m_PMonstrosity->MonstrosityId = speciesData.monstrosityId;
+        PChar->m_PMonstrosity->MainJob       = speciesData.mjob;
+        PChar->m_PMonstrosity->SubJob        = speciesData.sjob;
+        PChar->m_PMonstrosity->Size          = speciesData.size;
+        PChar->m_PMonstrosity->Look          = speciesData.look;
 
         // If changing "family" of species
         if (PChar->m_PMonstrosity->MonstrosityId != previousId)
@@ -492,68 +487,51 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
             }
         }
     }
-    else if (flag == 0x04) // Instinct Change
+    else if (data.Flags0.InstinctFlag)
     {
-        auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
+        const auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
 
         // NOTE: This is set by the client
-        auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
+        const auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
 
-        // Remove All
-        if (data.ref<uint16>(0x16) == 0xFFFF)
+        for (std::size_t idx = 0; idx < 12; ++idx)
         {
-            for (std::size_t idx = 0; idx < 12; ++idx)
+            if (data.Slots[idx] != 0)
             {
-                uint16 value = data.ref<uint16>(0x10 + (idx * 2));
-                if (value != 0)
+                if (data.Slots[idx] == 0xFFFF) // Entry equals 0xFFFF if it's being removed
                 {
                     PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+
+                    for (const auto& mod : gMonstrosityInstinctMap[previousEquipped[idx]].mods)
+                    {
+                        PChar->delModifier(mod.getModID(), mod.getModAmount());
+                    }
                 }
-            }
-        }
-        else // Set
-        {
-            for (std::size_t idx = 0; idx < 12; ++idx)
-            {
-                uint16 value = data.ref<uint16>(0x10 + (idx * 2));
-                if (value != 0)
+                else
                 {
-                    if (value == 0xFFFF)
+                    auto maybeInstinct = gMonstrosityInstinctMap.find(data.Slots[idx]);
+                    if (maybeInstinct != gMonstrosityInstinctMap.end())
                     {
-                        // Remove
-                        PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
-
-                        for (auto const& mod : gMonstrosityInstinctMap[previousEquipped[idx]].mods)
+                        if (!IsInstinctUnlocked(PChar, data.Slots[idx]))
                         {
-                            PChar->delModifier(mod.getModID(), mod.getModAmount());
+                            return;
                         }
-                    }
-                    else
-                    {
-                        auto maybeInstinct = gMonstrosityInstinctMap.find(value);
-                        if (maybeInstinct != gMonstrosityInstinctMap.end())
+
+                        PChar->m_PMonstrosity->EquippedInstincts[idx] = data.Slots[idx];
+
+                        // Validate cost
+                        if (getTotalInstinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints ||
+                            instinctsContainDuplicates(PChar->m_PMonstrosity->EquippedInstincts))
                         {
-                            if (!IsInstinctUnlocked(PChar, value))
+                            // Reset to what it was before and don't handle mods
+                            PChar->m_PMonstrosity->EquippedInstincts = previousEquipped;
+                        }
+                        else
+                        {
+                            auto instinct = (*maybeInstinct).second;
+                            for (const auto& mod : instinct.mods)
                             {
-                                return;
-                            }
-
-                            PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
-
-                            // Validate cost
-                            if (getTotalInstinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints ||
-                                instinctsContainDuplicates(PChar->m_PMonstrosity->EquippedInstincts))
-                            {
-                                // Reset to what it was before and don't handle mods
-                                PChar->m_PMonstrosity->EquippedInstincts = previousEquipped;
-                            }
-                            else
-                            {
-                                auto instinct = (*maybeInstinct).second;
-                                for (auto const& mod : instinct.mods)
-                                {
-                                    PChar->addModifier(mod.getModID(), mod.getModAmount());
-                                }
+                                PChar->addModifier(mod.getModID(), mod.getModAmount());
                             }
                         }
                     }
@@ -561,13 +539,13 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
             }
         }
     }
-    else if (flag == 0x08) // Name Change 1
+    else if (data.Flags0.Descriptor1Flag)
     {
-        PChar->m_PMonstrosity->NamePrefix1 = data.ref<uint8>(0x28);
+        PChar->m_PMonstrosity->NamePrefix1 = data.Descriptor1Index;
     }
-    else if (flag == 0x10) // Name Change 2
+    else if (data.Flags0.Descriptor2Flag)
     {
-        PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
+        PChar->m_PMonstrosity->NamePrefix2 = data.Descriptor2Index;
     }
 
     WriteMonstrosityData(PChar);
@@ -588,9 +566,9 @@ void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
     PChar->m_PMonstrosity->levels[id] = level;
 }
 
-void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
+void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type)
 {
-    if (PChar->m_PMonstrosity == nullptr)
+    if (!PChar->m_PMonstrosity)
     {
         return;
     }
@@ -601,14 +579,11 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
 
     PChar->updatemask |= UPDATE_HP;
 
-    // Monstrosity death menu:
-    // 2: Retry
-    // 1: Cancel
-    if (type == 1)
+    if (type == GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityCancel)
     {
         luautils::OnMonstrosityReturnToEntrance(PChar);
     }
-    else if (type == 2)
+    else if (type == GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityRetry)
     {
         // TODO: Pick a location from the starting points list
 
@@ -616,7 +591,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
         PChar->loc.p.y = 0.0f;
         PChar->loc.p.z = 0.0f;
 
-        PChar->SetDeathTimestamp(0);
+        PChar->SetDeathTime(timer::time_point::min());
 
         PChar->status = STATUS_TYPE::DISAPPEAR;
 
@@ -624,7 +599,8 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
 
         // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
-        charutils::SendToZone(PChar, ZoningType::Zoning, zoneutils::GetZoneIPP(PChar->loc.destination));
+
+        PChar->requestedZoneChange = true;
     }
 }
 
@@ -694,7 +670,7 @@ void monstrosity::MaxAllLevels(CCharEntity* PChar)
         return;
     }
 
-    for (auto const& [_, entry] : gMonstrositySpeciesMap)
+    for (const auto& [_, entry] : gMonstrositySpeciesMap)
     {
         SetLevel(PChar, entry.monstrosityId, 99);
     }
@@ -708,7 +684,7 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
     }
 
     // Level based
-    for (auto const& [_, entry] : gMonstrositySpeciesMap)
+    for (const auto& [_, entry] : gMonstrositySpeciesMap)
     {
         uint8 level        = 99;
         uint8 byteOffset   = entry.monstrosityId / 4;

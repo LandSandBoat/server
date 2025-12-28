@@ -12,11 +12,15 @@ local ID = zones[xi.zone.DYNAMIS_JEUNO]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Slime')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BLAZOX_BONEYBOD_PH, 10, 1200) -- 10% lottery chance and 20 minute cooldown values ASSUMED same as Dynamis-Beaucedine/Xarcabard, needs final verification
+    xi.mob.phOnDespawn(mob, ID.mob.BLAZOX_BONEYBOD, 10, 1200) -- 10% lottery chance and 20 minute cooldown values ASSUMED same as Dynamis-Beaucedine/Xarcabard, needs final verification
 end
 
 return entity

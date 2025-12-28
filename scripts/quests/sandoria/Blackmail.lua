@@ -7,7 +7,7 @@
 -- Halver    : !pos 2 0 0 233
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
 
 quest.reward =
 {

@@ -9,7 +9,7 @@ local entity = {}
 
 local guardNation = xi.nation.WINDURST
 local guardType   = xi.conquest.guard.BORDER
-local guardRegion = xi.region.ELSHIMOLOWLANDS
+local guardRegion = xi.region.ELSHIMO_LOWLANDS
 local guardEvent  = 32758
 
 entity.onTrade = function(player, npc, trade)

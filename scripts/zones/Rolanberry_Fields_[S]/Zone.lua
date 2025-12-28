@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields_[S] (91)
 -----------------------------------
-require('scripts/globals/dark_ixion')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 

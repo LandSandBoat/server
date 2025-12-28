@@ -125,7 +125,7 @@ mission.sections =
 
                     if
                         missionStatus == 1 and
-                        npcUtil.popFromQM(player, npc, ranparresRestTable, { hide = 0, })
+                        npcUtil.popFromQM(player, npc, ranparresRestTable, { hide = 0, claim = false })
                     then
                         return mission:messageSpecial(krtID.text.SENSE_SOMETHING_EVIL)
                     elseif

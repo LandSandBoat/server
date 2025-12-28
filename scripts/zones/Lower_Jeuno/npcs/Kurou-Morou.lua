@@ -10,16 +10,6 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == xi.questStatus.QUEST_ACCEPTED and
-        trade:getItemCount() == 1
-    then
-        if trade:hasItemQty(xi.item.AHRIMAN_LENS, 1) then
-            player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
-        elseif trade:hasItemQty(xi.item.DIVINATION_SPHERE, 1) then
-            player:startEvent(196) -- Trade divination sphere, finish quest
-        end
-
-    elseif
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_ACCEPTED and
         trade:hasItemQty(xi.item.HORN_HAIRPIN, 1) and
         trade:getItemCount() == 1
@@ -37,16 +27,10 @@ entity.onTrigger = function(player, npc)
     local searchingForWordsPrereq   = player:getCharVar('QuestSearchRightWords_prereq')
 
     if
-        jeunoFame >= 2 and
-        yourCrystalBall == xi.questStatus.QUEST_AVAILABLE
-    then
-        player:startEvent(194) -- Start 'Your Crystal Ball' quest
-
-    elseif
         jeunoFame >= 5 and
         yourCrystalBall == xi.questStatus.QUEST_COMPLETED and
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_AVAILABLE and
-        player:getCharVar('QuestNeverToReturn_day') ~= VanadielDayOfTheYear()
+        player:getCharVar('QuestNeverToReturn_day') ~= VanadielUniqueDay()
     then
         local prog = player:getCharVar('QuestNeverToReturn_prog')
         if prog <= 2 then
@@ -87,18 +71,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 194 and option == 0 then
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-
-    elseif csid == 196 then
-        player:addTitle(xi.title.FORTUNE_TELLER_IN_TRAINING)
-        player:addFame(xi.fameArea.JEUNO, 30)
-        player:tradeComplete()
-        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-
-    elseif csid == 204 and option == 0 then
+    if csid == 204 and option == 0 then
         player:incrementCharVar('QuestNeverToReturn_prog', 1)  -- Keep track of how many times the players fortune has been read
-        player:setCharVar('QuestNeverToReturn_day', VanadielDayOfTheYear()) -- new vanadiel day
+        player:setCharVar('QuestNeverToReturn_day', VanadielUniqueDay()) -- new vanadiel day
 
     elseif csid == 202 and option == 0 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)

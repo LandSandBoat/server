@@ -16,7 +16,7 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     for element = xi.element.FIRE, xi.element.DARK do
-        local elementSDTModifier   = xi.combat.element.getElementalSDTModifier(element)
+        local elementSDTModifier   = xi.data.element.getElementalSDTModifier(element)
         local elementSDTValue      = target:getMod(elementSDTModifier)
         local elementSDTAdjustment = math.floor(elementSDTValue * 0.25)
 

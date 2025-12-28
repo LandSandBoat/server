@@ -74,7 +74,9 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
         --     : So populate it with something unique-ish even if you aren't going to use it.
         --     : You can then hide the name with entity:hideName(true)
         -- NOTE: This name CAN include spaces and underscores.
-        name = 'Horro',
+        -- NOTE: You can use xi.icon.* to add icons to the name, with string.format() or the
+        --     : `..` string concat operator.
+        name = string.format('%sHorro', xi.icon.STAR_LARGE),
 
         -- Optional: Define a different name that is visible to players.
         -- 'Horro' (DE_Horro) will still be used internally for lookups.

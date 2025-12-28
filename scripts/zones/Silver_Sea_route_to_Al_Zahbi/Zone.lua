@@ -16,7 +16,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(1025)
 end
 
@@ -25,7 +25,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 1025 then
-        player:setPos(0, 0, 0, 0, 50)
+        player:setPos(0, 0, 0, 0, xi.zone.AHT_URHGAN_WHITEGATE)
     end
 end
 

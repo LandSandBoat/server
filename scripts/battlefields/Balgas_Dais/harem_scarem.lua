@@ -23,53 +23,63 @@ content:addEssentialMobs({ 'Nenaunir', 'Nenaunirs_Wife' })
 content.loot =
 {
     {
-        { item = xi.item.DHALMEL_HIDE, weight = 1000 }, -- dhalmel_hide
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 4000 },
     },
 
     {
-        { item = xi.item.NONE,        weight =  500 }, -- nothing
-        { item = xi.item.GIANT_FEMUR, weight =  500 }, -- giant_femur
+        { itemId = xi.item.SLICE_OF_DHALMEL_MEAT,  weight = 10000 },
     },
 
     {
-        { item = xi.item.NONE,                  weight = 500 }, -- nothing
-        { item = xi.item.SLICE_OF_DHALMEL_MEAT, weight = 500 }, -- slice_of_dhalmel_meat
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.BEATERS_MANTLE,         weight =  2500 },
+        { itemId = xi.item.ESQUIRES_MANTLE,        weight =  2500 },
+        { itemId = xi.item.HEALERS_MANTLE,         weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 400 }, -- nothing
-        { item = xi.item.MERCENARY_MANTLE, weight = 150 }, -- mercenary_mantle
-        { item = xi.item.BEATERS_MANTLE,   weight = 150 }, -- beaters_mantle
-        { item = xi.item.ESQUIRES_MANTLE,  weight = 150 }, -- esquires_mantle
-        { item = xi.item.HEALERS_MANTLE,   weight = 150 }, -- healers_mantle
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.WIZARDS_SHIELD,         weight =  2500 },
+        { itemId = xi.item.TRIMMERS_ASPIS,         weight =  2500 },
+        { itemId = xi.item.WYVERN_TARGE,           weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,           weight = 400 }, -- nothing
-        { item = xi.item.WIZARDS_SHIELD, weight = 200 }, -- wizards_shield
-        { item = xi.item.TRIMMERS_ASPIS, weight = 200 }, -- trimmers_aspis
-        { item = xi.item.WYVERN_TARGE,   weight = 200 }, -- wyvern_targe
+        { itemId = xi.item.NONE,                   weight =  8000 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =   200 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =   200 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =   200 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   200 },
+        { itemId = xi.item.IRON_INGOT,             weight =   200 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   200 },
+        { itemId = xi.item.SILVER_INGOT,           weight =   200 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   200 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =   200 },
+        { itemId = xi.item.ELM_LOG,                weight =   200 },
     },
 
     {
-        { item = xi.item.NONE,                   weight = 200 }, -- nothing
-        { item = xi.item.SCROLL_OF_ERASE,        weight = 200 }, -- scroll_of_erase
-        { item = xi.item.SCROLL_OF_DISPEL,       weight = 200 }, -- scroll_of_dispel
-        { item = xi.item.SCROLL_OF_MAGIC_FINALE, weight = 200 }, -- scroll_of_magic_finale
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight = 200 }, -- scroll_of_utsusemi_ni
+        { itemId = xi.item.NONE,                   weight =  5000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =   714 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =   713 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =  1430 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =   713 },
+        { itemId = xi.item.SCROLL_OF_REGEN,        weight =  1430 },
     },
 
     {
-        { item = xi.item.NONE,                   weight = 250 }, -- nothing
-        { item = xi.item.SQUARE_OF_VELVET_CLOTH, weight = 250 }, -- square_of_velvet_cloth
-        { item = xi.item.SQUARE_OF_LINEN_CLOTH,  weight = 250 }, -- square_of_linen_cloth
-        { item = xi.item.SQUARE_OF_WOOL_CLOTH,   weight = 250 }, -- square_of_wool_cloth
+        { itemId = xi.item.SQUARE_OF_VELVET_CLOTH, weight =  3333 },
+        { itemId = xi.item.SQUARE_OF_LINEN_CLOTH,  weight =  3333 },
+        { itemId = xi.item.SQUARE_OF_WOOL_CLOTH,   weight =  3334 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 600 }, -- nothing
-        { item = xi.item.MANNEQUIN_HEAD,  weight = 200 }, -- mannequin_head
-        { item = xi.item.MANNEQUIN_HANDS, weight = 200 }, -- mannequin_hands
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 10000 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                   weight =  9500 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight =   500 },
     },
 }
 

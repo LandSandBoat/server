@@ -182,8 +182,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:canLearnSpell(xi.magic.spell.EMBRAVA) and
-                        player:canLearnSpell(xi.magic.spell.KAUSTRA)
+                        player:getMainJob() == xi.job.SCH and
+                        player:getMainLvl() >= 5 and
+                        not player:hasSpell(xi.magic.spell.EMBRAVA) and
+                        not player:hasSpell(xi.magic.spell.KAUSTRA)
                     then
                         return quest:progressEvent(47)
                     else
@@ -195,8 +197,8 @@ quest.sections =
             onEventFinish =
             {
                 [47] = function(player, csid, option, npc)
-                    player:addSpell(xi.magic.spell.EMBRAVA, true)
-                    player:addSpell(xi.magic.spell.KAUSTRA, true)
+                    player:addSpell(xi.magic.spell.EMBRAVA, { silentLog = true })
+                    player:addSpell(xi.magic.spell.KAUSTRA, { silentLog = true })
                     player:messageSpecial(eldiemeSID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
                 end,
             }

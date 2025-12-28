@@ -7,7 +7,6 @@ local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local pelicanSpawnPoints =
 {
     { x = 178.857, y = 20.256, z = -44.151 },
@@ -62,13 +61,6 @@ local pelicanSpawnPoints =
     { x = 187.565, y = 19.662, z = -31.867 },
 }
 
-local pelicanPHTable =
-{
-    [ID.mob.PELICAN - 4] = ID.mob.PELICAN, -- 178.857 20.256 -44.151
-    [ID.mob.PELICAN - 3] = ID.mob.PELICAN, -- 179.394 20.061 -34.062
-    [ID.mob.PELICAN - 1] = ID.mob.PELICAN, -- 188.610 19.245 -50.076
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 741, 2, xi.regime.type.GROUNDS)
 end
@@ -76,7 +68,7 @@ end
 entity.onMobDespawn = function(mob)
     local params = {}
     params.SpawnPoints = pelicanSpawnPoints
-    xi.mob.phOnDespawn(mob, pelicanPHTable, 5, 10800, params) -- 4 hours
+    xi.mob.phOnDespawn(mob, ID.mob.PELICAN, 5, 10800, params) -- 4 hours
 end
 
 return entity

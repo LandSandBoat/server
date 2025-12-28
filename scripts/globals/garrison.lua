@@ -1,13 +1,10 @@
 -----------------------------------
 -- Garrison
 -----------------------------------
-require('scripts/globals/common')
-require('scripts/globals/npc_util')
 require('scripts/globals/garrison_data')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}
@@ -325,31 +322,16 @@ end
 
 -- Distributes loot amongst all players
 xi.garrison.handleLootRolls = function(levelCap, players)
-    local lootTable = xi.garrison.loot[levelCap]
-    local max       = 0
+    local lootGroup = xi.garrison.loot[levelCap]
+    local firstPlayer = players[1]
 
-    for _, entry in ipairs(lootTable) do
-        max = max + entry.droprate
-    end
-
-    local roll = math.random(max)
-
-    for _, entry in pairs(lootTable) do
-        max = max - entry.droprate
-
-        if roll > max then
-            if entry.itemid ~= 0 then
-                for _, player in ipairs(players) do
-                    if player ~= nil then
-                        player:addTreasure(entry.itemid)
-
-                        return
-                    end
-                end
-            end
-
-            break
-        end
+    -- completion of garrison gives a random item from the pool per player
+    lootGroup.quantity = #players
+    local lootTable = { lootGroup }
+    local selectedLoot = utils.selectFromLootGroups(firstPlayer, lootTable)
+    for _, entry in ipairs(selectedLoot) do
+        -- garrison completion loot has no gil
+        firstPlayer:addTreasure(entry.itemId) -- nil npc parameter for addTreasure gives no message, on purpose
     end
 end
 
@@ -409,7 +391,7 @@ xi.garrison.tick = function(npc)
     {
         [xi.garrison.state.SPAWN_NPCS] = function()
             debugLog('State: Spawn NPCs')
-            zoneData.stateTime = os.time()
+            zoneData.stateTime = GetSystemTime()
 
             if xi.garrison.spawnNPCs(zone, zoneData) then
                 zoneData.state = xi.garrison.state.BATTLE
@@ -448,7 +430,7 @@ xi.garrison.tick = function(npc)
             end
 
             -- Case 2: More mobs to spawn in this wave, and past next spawn time. Spawn Mobs.
-            local shouldSpawnMobs = os.time() >= zoneData.nextSpawnTime
+            local shouldSpawnMobs = GetSystemTime() >= zoneData.nextSpawnTime
             local numGroups       = #zoneData.spawnSchedule[zoneData.waveIndex]
             local isLastGroup     = zoneData.groupIndex > numGroups
 
@@ -492,7 +474,7 @@ xi.garrison.tick = function(npc)
             end
 
             -- Case 6: Timeout
-            if os.time() > zoneData.endTime then
+            if GetSystemTime() > zoneData.endTime then
                 -- You fought hard, and you proved yourself worthy...
                 debugPrintToPlayers(players, 'Mission failed by timeout')
                 messagePlayers(npc, players, ID.text.GARRISON_BASE + 39)
@@ -529,7 +511,7 @@ xi.garrison.tick = function(npc)
 
             zoneData.waveIndex = zoneData.waveIndex + 1
             zoneData.groupIndex = 1
-            zoneData.nextSpawnTime = os.time() + xi.garrison.waves.delayBetweenGroups
+            zoneData.nextSpawnTime = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
             zoneData.state = xi.garrison.state.BATTLE
             zoneData.mobs = {}
 
@@ -572,7 +554,7 @@ xi.garrison.tick = function(npc)
 
             debugPrintToPlayers(players, 'Spawn: ' .. #zoneData.mobs .. '/' .. poolSize .. '. Wave: ' .. zoneData.waveIndex)
 
-            zoneData.nextSpawnTime = os.time() + xi.garrison.waves.delayBetweenGroups
+            zoneData.nextSpawnTime = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
             zoneData.state = xi.garrison.state.BATTLE
             zoneData.groupIndex = zoneData.groupIndex + 1
         end,
@@ -596,7 +578,7 @@ xi.garrison.tick = function(npc)
     }
 
     -- Updates last tick so watchdog knows we are ok
-    zoneData.lastTick = os.time()
+    zoneData.lastTick = GetSystemTime()
 
     -- Keep running tick until done
     if zoneData.isRunning then
@@ -640,8 +622,8 @@ end
 local function isZoneOnLockout(zone)
     local nextValidAttemptTime = GetServerVariable('[Garrison]NextEntryTime_' .. zone:getID())
 
-    if os.time() < nextValidAttemptTime then
-        debugLogf('Zone lockout time remaining: %d', nextValidAttemptTime - os.time())
+    if GetSystemTime() < nextValidAttemptTime then
+        debugLogf('Zone lockout time remaining: %d', nextValidAttemptTime - GetSystemTime())
 
         return true
     end
@@ -658,7 +640,7 @@ end
 
 -- Stores the next valid entry time for the given zone, based on lockout.
 local function saveZoneLockout(zone)
-    local nextEntryTime = os.time() + xi.settings.main.GARRISON_LOCKOUT
+    local nextEntryTime = GetSystemTime() + xi.settings.main.GARRISON_LOCKOUT
 
     SetServerVariable('[Garrison]NextEntryTime_' .. zone:getID(), nextEntryTime)
 end
@@ -700,7 +682,7 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
     end
 
     local membersLevelRestricted = utils.any(membersInZone, function(_, v)
-        return v:isLevelSync()
+        return v:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or v:hasStatusEffect(xi.effect.LEVEL_SYNC)
     end)
 
     if membersLevelRestricted then
@@ -826,7 +808,7 @@ local function garrisonWatchdog(npc)
 
         if
             zoneData.isRunning and
-            os.time() - zoneData.lastTick > tickInterval
+            GetSystemTime() - zoneData.lastTick > tickInterval
         then
             local zone = npcArg:getZone()
             debugLogf('[error] Invalid garrison state detected for zone: %s. Stopping it now.', zone:getName())
@@ -848,17 +830,17 @@ xi.garrison.start = function(player, npc)
     zoneData.mobs          = {}
     zoneData.state         = xi.garrison.state.SPAWN_NPCS
     zoneData.isRunning     = true
-    zoneData.stateTime     = os.time()
+    zoneData.stateTime     = GetSystemTime()
     zoneData.waveIndex     = 1
     zoneData.groupIndex    = 1
     zoneData.bossSpawned   = false
     -- First mob spawn takes xi.garrison.waves.delayBetweenGroups to start
-    zoneData.nextSpawnTime     = os.time() + xi.garrison.waves.delayBetweenGroups
-    zoneData.endTime           = os.time() + xi.settings.main.GARRISON_TIME_LIMIT
+    zoneData.nextSpawnTime     = GetSystemTime() + xi.garrison.waves.delayBetweenGroups
+    zoneData.endTime           = GetSystemTime() + xi.settings.main.GARRISON_TIME_LIMIT
     zoneData.deadNPCCount      = 0
     zoneData.deadMobCount      = 0
     zoneData.despawnedMobCount = 0
-    zoneData.lastTick          = os.time()
+    zoneData.lastTick          = GetSystemTime()
 
     -- Register lockout for the player
     -- Only the trading player is locked out per tally
@@ -869,9 +851,8 @@ xi.garrison.start = function(player, npc)
     -- Adds level cap / registers lockout for the player / zone
     for _, member in pairs(player:getAlliance()) do
         if member:getZoneID() == player:getZoneID() then
-            xi.garrison.addLevelCap(member, zoneData.levelCap)
-
             table.insert(zoneData.players, member:getID())
+            xi.garrison.addLevelCap(member, zoneData.levelCap)
         end
     end
 
@@ -890,7 +871,10 @@ xi.garrison.stop = function(zone)
     -- Save lockout based off of garrison end time.
     saveZoneLockout(zone)
 
-    for _, entityId in pairs(zoneData.players or {}) do
+    local playerIDs  = { unpack(zoneData.players) } -- make a copy
+    zoneData.players = {} -- players table must be empty before level restriction status wears off for latent effects
+
+    for _, entityId in pairs(playerIDs or {}) do
         local entity = GetPlayerByID(entityId)
 
         if entity ~= nil then
@@ -906,7 +890,6 @@ xi.garrison.stop = function(zone)
         DespawnMob(entityId, zone)
     end
 
-    zoneData.players       = {}
     zoneData.spawnSchedule = {}
     zoneData.npcs          = {}
     zoneData.mobs          = {}
@@ -916,4 +899,19 @@ end
 xi.garrison.win = function(zone)
     local zoneData = xi.garrison.zoneData[zone:getID()]
     zoneData.state = xi.garrison.state.GRANT_LOOT
+end
+
+xi.garrison.isInGarrison = function(player)
+    local zoneID = player:getZoneID()
+    if not zoneID then
+        return false
+    end
+
+    local zoneData = xi.garrison.zoneData[zoneID]
+    if not zoneData then
+        return false
+    end
+
+    local players = zoneData.players or {}
+    return utils.contains(player:getID(), players)
 end

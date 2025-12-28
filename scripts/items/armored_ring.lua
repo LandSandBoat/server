@@ -22,11 +22,10 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.DEF, 8)
+    effect:addMod(xi.mod.DEF, 8)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DEF, 8)
 end
 
 return itemObject

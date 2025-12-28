@@ -42,7 +42,7 @@ void CAIActionQueue::pushAction(queueAction_t&& action)
     }
 }
 
-void CAIActionQueue::checkAction(time_point tick)
+void CAIActionQueue::checkAction(timer::time_point tick)
 {
     while (!timerQueue.empty())
     {

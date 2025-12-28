@@ -11,9 +11,9 @@
 -- Door: Prince Royal's  : !pos -38 -3 73 233
 -- Door: Prince Regent's : !pos -37 -3 31 233
 -- Halver                : !pos 2 0.1 0.1 233
--- qm11                  : !pos -13 -17 -151 159
--- qm12                  : !pos -32 -17 -153 159
--- qm13                  : !pos -68 -17 -153 159
+-- qm_key1               : !pos -13 -17 -151 159
+-- qm_key2               : !pos -32 -17 -153 159
+-- qm_key3               : !pos -68 -17 -153 159
 -- Granite Door          : !pos -50 -17 -154 159
 -----------------------------------
 local chateauID   = zones[xi.zone.CHATEAU_DORAGUILLE]
@@ -220,7 +220,7 @@ mission.sections =
                 end,
             },
 
-            ['qm11'] =
+            ['qm_key1'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -233,7 +233,7 @@ mission.sections =
                 end,
             },
 
-            ['qm12'] =
+            ['qm_key2'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -246,7 +246,7 @@ mission.sections =
                 end,
             },
 
-            ['qm13'] =
+            ['qm_key3'] =
             {
                 onTrigger = function(player, npc)
                     if
@@ -256,6 +256,13 @@ mission.sections =
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
                         return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
                     end
+                end,
+            },
+
+            ['qm17'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:messageSpecial(uggalepihID.text.SLIGHTLY_QUIVERS, xi.ki.CRYSTAL_DOWSER)
                 end,
             },
 

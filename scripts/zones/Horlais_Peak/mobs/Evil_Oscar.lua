@@ -70,6 +70,7 @@ end
 entity.onMobInitialize = function(mob)
     -- Melee attacks have Additional effect: Weight.
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

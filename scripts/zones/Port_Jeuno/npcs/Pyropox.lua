@@ -3,34 +3,32 @@
 --  NPC: Pyropox
 -- !pos -17.580 4.000 24.600 246
 -----------------------------------
-local ID = zones[xi.zone.PORT_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 local stock =
 {
-    4251,   25,    -- Festive Fan
-    4252,   25,    -- Summer Fan
-    4256,   25,    -- Ouka Ranman
-    4184,   50,    -- Kongou Inaho
-    4185,   50,    -- Meifu Goma
-    4253,   50,    -- Spirit Masque
-    5881,   50,    -- Shisai Kaboku
-    4183,  100,    -- Konron Hassen
-    5360,  100,    -- Muteppo
-    5361,  100,    -- Datechochin
-    6268,  150,    -- Komanezumi
-    5884,  250,    -- Rengedama
-    5532,  250,    -- Ichinintousen Koma
-    5725,  300,    -- Goshikitenge
+    { xi.item.FESTIVE_FAN,         25 },
+    { xi.item.SUMMER_FAN,          25 },
+    { xi.item.OUKA_RANMAN,         25 },
+    { xi.item.KONGOU_INAHO,        50 },
+    { xi.item.MEIFU_GOMA,          50 },
+    { xi.item.SPIRIT_MASQUE,       50 },
+    { xi.item.SHISAI_KABOKU,       50 },
+    { xi.item.KONRON_HASSEN,      100 },
+    { xi.item.MUTEPPO,            100 },
+    { xi.item.DATECHOCHIN,        100 },
+    { xi.item.KOMANEZUMI,         150 },
+    { xi.item.RENGEDAMA,          250 },
+    { xi.item.ICHININTOUSEN_KOMA, 250 },
+    { xi.item.GOSHIKITENGE,       300 },
 }
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar('spokePyropox') == 1 then
         player:startEvent(349)
     else
-        player:showText(npc, ID.text.PYROPOX_SHOP_DIALOG)
+        player:showText(npc, zones[xi.zone.PORT_JEUNO].text.PYROPOX_SHOP_DIALOG)
         xi.shop.general(player, stock)
     end
 end

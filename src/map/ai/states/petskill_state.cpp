@@ -20,13 +20,16 @@
 */
 
 #include "petskill_state.h"
+#include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"
 #include "entities/petentity.h"
-#include "packets/action.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "petskill.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/petutils.h"
 
 CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
@@ -60,25 +63,35 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
 
     m_PSkill = std::make_unique<CPetSkill>(*skill);
 
-    m_castTime = std::chrono::milliseconds(m_PSkill->getActivationTime());
+    m_castTime = m_PSkill->getActivationTime();
 
     if (m_castTime > 0s)
     {
-        action_t action;
-        action.id         = m_PEntity->id;
-        action.actiontype = ACTION_WEAPONSKILL_START;
+        action_t action{
+            .actorId    = m_PEntity->id,
+            .actiontype = ActionCategory::SkillStart,
+            .actionid   = static_cast<uint32_t>(FourCC::SkillUse),
+            .targets    = {
+                {
+                       .actorId = PTarget->id,
+                       .results = {
+                        {
+                               .param     = m_PSkill->getMobSkillID() > 0 ? m_PSkill->getMobSkillID() : m_PSkill->getID(),
+                               .messageID = m_PSkill->getMobSkillID() > 0 ? MsgBasic::READIES_WS : MsgBasic::READIES_SKILL,
+                        },
+                    },
+                },
+            },
+        };
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-        actionTarget.reaction   = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT::NONE;
-        actionTarget.animation  = 0;
-        actionTarget.param      = m_PSkill->getID();
-        actionTarget.messageID  = 326; // Seems hardcoded? TODO: Verify on more pet actions. Tested on Wyvern and SMN BPs.
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, std::make_unique<CActionPacket>(action));
+        // Wyverns immediately emit a skill interrupt packet.
+        // This looks like a hack but is retail accurate
+        if (PEntity->m_PetID == PETID_WYVERN)
+        {
+            ActionInterrupts::WyvernSkillReady(PEntity);
+        }
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", m_PEntity, m_PSkill->getID());
     SpendCost();
@@ -98,15 +111,18 @@ void CPetSkillState::SpendCost()
     }
 }
 
-bool CPetSkillState::Update(time_point tick)
+bool CPetSkillState::Update(timer::time_point tick)
 {
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
     {
-        action_t action;
+        action_t action{};
         m_PEntity->OnPetSkillFinished(*this, action);
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-        auto delay   = std::chrono::milliseconds(m_PSkill->getAnimationTime());
-        m_finishTime = tick + delay;
+        // Only send packet if action was populated (e.g. interrupts return early)
+        if (!action.targets.empty())
+        {
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+        }
+        m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)
@@ -135,22 +151,16 @@ bool CPetSkillState::Update(time_point tick)
     return false;
 }
 
-void CPetSkillState::Cleanup(time_point tick)
+void CPetSkillState::Cleanup(timer::time_point tick)
 {
     if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {
-        action_t action;
-        action.id         = m_PEntity->id;
-        action.actiontype = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid   = 28787;
+        ActionInterrupts::AbilityInterrupt(m_PEntity);
+    }
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = m_PEntity->id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
-        actionTarget.reaction        = REACTION::HIT;
-
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, std::make_unique<CActionPacket>(action));
+    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+    {
+        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+        m_PEntity->updatemask |= UPDATE_COMBAT;
     }
 }

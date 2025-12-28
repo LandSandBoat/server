@@ -23,6 +23,8 @@
 
 #include "handler_session.h"
 
+#include "common/timer.h"
+
 // Metadata about each session
 struct session_t
 {
@@ -38,6 +40,7 @@ struct session_t
     std::string requestedNewCharacterName = "";
     bool        justCreatedNewChar        = false;
     bool        versionMismatch           = false;
+    uint8       incrementKeyValue         = 0; // Used to increment key by N in case of errors
 
-    std::chrono::time_point<std::chrono::system_clock> authorizedTime = server_clock::now();
+    timer::time_point authorizedTime = timer::now();
 };

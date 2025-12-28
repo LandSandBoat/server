@@ -7,17 +7,21 @@ local ID = zones[xi.zone.MHAURA]
 local zoneObject = {}
 
 zoneObject.onGameHour = function(zone)
-    -- Script for Laughing Bison sign flip animations
-    local timer = 1152 - ((os.time() - 1009810802)%1152)
+    local laughingBison = GetNPCByID(ID.npc.LAUGHING_BISON)
+    if laughingBison then
+        -- Script for Laughing Bison sign flip animations
+        local timer = 1152 - (GetSystemTime() - 1009810802) % 1152
 
-    -- Next ferry is Al Zhabi for higher values.
-    if timer >= 576 then
-        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(1)
-    else
-        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
+        -- Next ferry is Al Zhabi for higher values.
+        if timer >= 576 then
+            laughingBison:setAnimationSub(1)
+        else
+            laughingBison:setAnimationSub(0)
+        end
     end
 
-    SetServerVariable('Mhaura_Destination', math.random(1, 100))
+    local destinationId = math.random(1, 100) <= 10 and xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES or xi.zone.SHIP_BOUND_FOR_SELBINA
+    zone:setLocalVar('[Pirate]Zone', destinationId)
 end
 
 zoneObject.onInitialize = function(zone)
@@ -33,9 +37,10 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if
-            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
+            player:hasKeyItem(xi.ki.FERRY_TICKET) and
+            (prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
             prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
-            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         then
             cs = 202
             player:setPos(14.960, -3.430, 18.423, 192)
@@ -51,19 +56,31 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    if transport == 47 or transport == 46 then
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    if player:isInEvent() then
+        return
+    end
+
+    if
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or
+        prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA
+    then
         if
-            not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or
-            xi.settings.main.ENABLE_TOAU == 0
+            xi.settings.main.ENABLE_TOAU == 1 and
+            player:hasKeyItem(xi.ki.BOARDING_PERMIT) and
+            player:hasKeyItem(xi.ki.FERRY_TICKET)
         then
-            player:setPos(8.200, -1.363, 3.445, 192)
-            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
-        else
             player:startEvent(200)
+        else
+            player:startEvent(204)
+            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
         end
     else
-        player:startEvent(200)
+        if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+            player:startEvent(200)
+        else
+            player:startEvent(204)
+        end
     end
 end
 
@@ -72,18 +89,21 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 200 then
-        local DepartureTime = VanadielHour()
+        local departureTime = VanadielHour() % 8
+        local zone          = player:getZone()
+        local destinationId = zone and zone:getLocalVar('[Pirate]Zone') or xi.zone.SHIP_BOUND_FOR_SELBINA
 
-        if DepartureTime % 8 == 0 then
-            if GetServerVariable('Mhaura_Destination') > 89 then
-                player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
-            else
-                player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)
-            end
-        elseif DepartureTime % 8 == 4 then
+        -- To Selbina.
+        if departureTime == 0 then
+            player:setPos(0, 0, 0, 0, destinationId)
+
+        -- To Al Zahbi
+        elseif departureTime == 4 then
             player:setPos(0, 0, 0, 0, xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI)
+
+        -- Something went wrong, dump them on the dock for safety.
         else
-            player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
+            player:setPos(8, -1, 5, 62, xi.zone.MHAURA)
         end
     end
 end

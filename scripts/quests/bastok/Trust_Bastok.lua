@@ -229,7 +229,7 @@ quest.sections =
             onEventFinish =
             {
                 [980] = function(player, csid, option, npc)
-                    player:addSpell(xi.magic.spell.NAJI, true, true)
+                    player:addSpell(xi.magic.spell.NAJI, { silentLog = true })
                     player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NAJI)
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -245,7 +245,7 @@ quest.sections =
 
                 [984] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addSpell(xi.magic.spell.NAJI, true, true)
+                        player:addSpell(xi.magic.spell.NAJI, { silentLog = true })
                         player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NAJI)
                         player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
                         player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
@@ -326,21 +326,21 @@ quest.sections =
             {
                 [985] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.AYAME, true, true)
+                        player:addSpell(xi.magic.spell.AYAME, { silentLog = true })
                         player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.AYAME)
                     end
                 end,
 
                 [986] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.VOLKER, true, true)
+                        player:addSpell(xi.magic.spell.VOLKER, { silentLog = true })
                         player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.VOLKER)
                     end
                 end,
 
                 [988] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.IRON_EATER, true, true)
+                        player:addSpell(xi.magic.spell.IRON_EATER, { silentLog = true })
                         player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.IRON_EATER)
                     end
                 end,

@@ -74,7 +74,7 @@ public:
     void setInvSlotID(uint8 slotID, uint8 invSlotID);
     void setQuantity(uint8 slotID, uint32 quantity);
     bool setConfirmedStatus(uint8 slotID, uint32 amount);
-    void setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint32 quantity, CItem* item = nullptr);
+    void setItem(uint8 slotId, uint16 itemId, uint8 invSlotId, uint32 quantity, CItem* item = nullptr);
     void setSize(uint8 size);
     void setExSize(uint8 size); // Set "extra" size information; purpose changes depending on container's goal
     void unreserveUnconfirmed();

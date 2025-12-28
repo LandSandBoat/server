@@ -2,8 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Ness Rugetomal
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -12,23 +10,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.NESSRUGETOMALL_SHOP_DIALOG)
-
     local stock =
     {
-        4394,   10, 1, -- Ginger Cookie
-        4407,  727, 1, -- Carp Sushi
-        4425,  323, 1, -- Tomato Juice
-        4459, 1656, 1, -- Nebimonite Bake
-        4397,   14, 2, -- Cinna-cookie
-        4422,  184, 2, -- Orange Juice
-        4456, 2070, 2, -- Boiled Crab
-        4510,   21, 3, -- Acorn Cookie
-        4376,  108, 3, -- Meat Jerky
-        4509,   10, 3, -- Distilled Water
-        4538,  846, 3, -- Roast Pipira
+        { xi.item.ACORN_COOKIE,               24, 3 },
+        { xi.item.CINNA_COOKIE,               16, 2 },
+        { xi.item.GINGER_COOKIE,              12, 1 },
+        { xi.item.STRIP_OF_MEAT_JERKY,       124, 3 },
+        { xi.item.CARP_SUSHI,                748, 1 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12, 3 },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,    208, 2 },
+        { xi.item.BOTTLE_OF_TOMATO_JUICE,    332, 1 },
+        { xi.item.ROAST_PIPIRA,              956, 3 },
+        { xi.item.BOILED_CRAB,              2340, 2 },
+        { xi.item.NEBIMONITE_BAKE,          1872, 1 },
     }
 
+    player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.NESSRUGETOMALL_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

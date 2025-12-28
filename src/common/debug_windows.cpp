@@ -25,6 +25,8 @@
 #include "WheatyExceptionReport.h"
 
 #include <shlobj_core.h>
+#pragma comment(lib, "shell32.lib")
+#pragma comment(lib, "user32.lib")
 
 WheatyExceptionReport g_WheatyExceptionReport;
 

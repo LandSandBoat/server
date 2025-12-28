@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.MAX_MP_DOWN, 42, 0, 120))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.MAX_MP_DOWN, 50, 0, 10))
 
     return xi.effect.MAX_MP_DOWN
 end

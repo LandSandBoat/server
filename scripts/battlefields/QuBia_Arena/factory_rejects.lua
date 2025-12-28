@@ -63,43 +63,100 @@ content.groups =
             },
         },
 
-        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
-        spawned  = false,
+        allDeath = function(battlefield, mob)
+            -- Win when all 5 dolls have been killed
+            if battlefield:getLocalVar('dollsSpawned') >= 5 then
+                content:handleAllMonstersDefeated(battlefield, mob)
+            end
+        end,
+
+        spawned = false,
     },
 }
 
 content.loot =
 {
     {
-        { item = xi.item.DOLL_SHARD, weight = 1000 }, -- doll_shard
+        { itemId = xi.item.GIL,                   weight = 10000, amount = 6000 },
     },
 
     {
-        { item = xi.item.VIAL_OF_MERCURY, weight = 1000 }, -- vial_of_mercury
+        { itemId = xi.item.JONGLEURS_DAGGER,      weight =  1000 },
+        { itemId = xi.item.DUSKY_STAFF,           weight =  1000 },
+        { itemId = xi.item.RAIFU,                 weight =  1000 },
+        { itemId = xi.item.BUZZARD_TUCK,          weight =  1000 },
+        { itemId = xi.item.AGILE_MANTLE,          weight =  4000 },
+        { itemId = xi.item.BLACK_ROCK,            weight =   100 },
+        { itemId = xi.item.BLUE_ROCK,             weight =   100 },
+        { itemId = xi.item.GREEN_ROCK,            weight =   100 },
+        { itemId = xi.item.PURPLE_ROCK,           weight =   100 },
+        { itemId = xi.item.RED_ROCK,              weight =   100 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,      weight =   100 },
+        { itemId = xi.item.WHITE_ROCK,            weight =   100 },
+        { itemId = xi.item.YELLOW_ROCK,           weight =   100 },
+        { itemId = xi.item.AMETRINE,              weight =   100 },
+        { itemId = xi.item.BLACK_PEARL,           weight =   100 },
+        { itemId = xi.item.GARNET,                weight =   100 },
+        { itemId = xi.item.GOSHENITE,             weight =   100 },
+        { itemId = xi.item.PEARL,                 weight =   100 },
+        { itemId = xi.item.PERIDOT,               weight =   100 },
+        { itemId = xi.item.SPHENE,                weight =   100 },
+        { itemId = xi.item.TURQUOISE,             weight =   100 },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight =   100 },
+        { itemId = xi.item.ROSEWOOD_LOG,          weight =   100 },
+        { itemId = xi.item.OAK_LOG,               weight =   100 },
+        { itemId = xi.item.VILE_ELIXIR,           weight =   100 },
     },
 
     {
-        { item = xi.item.NONE,           weight = 500 }, -- nothing
-        { item = xi.item.GOLD_BEASTCOIN, weight = 500 }, -- gold_beastcoin
+        { itemId = xi.item.BEHOURD_LANCE,         weight =  1000 },
+        { itemId = xi.item.OHAGURO,               weight =  1000 },
+        { itemId = xi.item.KAGEHIDE,              weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,       weight =  1000 },
+        { itemId = xi.item.REARGUARD_MANTLE,      weight =  4000 },
+        { itemId = xi.item.BLACK_ROCK,            weight =   100 },
+        { itemId = xi.item.BLUE_ROCK,             weight =   100 },
+        { itemId = xi.item.GREEN_ROCK,            weight =   100 },
+        { itemId = xi.item.PURPLE_ROCK,           weight =   100 },
+        { itemId = xi.item.RED_ROCK,              weight =   100 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,      weight =   100 },
+        { itemId = xi.item.WHITE_ROCK,            weight =   100 },
+        { itemId = xi.item.YELLOW_ROCK,           weight =   100 },
+        { itemId = xi.item.AMETRINE,              weight =   100 },
+        { itemId = xi.item.BLACK_PEARL,           weight =   100 },
+        { itemId = xi.item.GARNET,                weight =   100 },
+        { itemId = xi.item.GOSHENITE,             weight =   100 },
+        { itemId = xi.item.PEARL,                 weight =   100 },
+        { itemId = xi.item.PERIDOT,               weight =   100 },
+        { itemId = xi.item.SPHENE,                weight =   100 },
+        { itemId = xi.item.TURQUOISE,             weight =   100 },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight =   100 },
+        { itemId = xi.item.ROSEWOOD_LOG,          weight =   100 },
+        { itemId = xi.item.OAK_LOG,               weight =   100 },
+        { itemId = xi.item.RERAISER,              weight =   100 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 250 }, -- nothing
-        { item = xi.item.RAIFU,            weight = 250 }, -- raifu
-        { item = xi.item.BUZZARD_TUCK,     weight = 250 }, -- buzzard_tuck
-        { item = xi.item.JONGLEURS_DAGGER, weight = 250 }, -- jongleurs_dagger
+        { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight =  3000 },
+        { itemId = xi.item.SCROLL_OF_REFRESH,     weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  2000 },
+        { itemId = xi.item.GOLD_BEASTCOIN,        weight =  3000 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 200 }, -- nothing
-        { item = xi.item.REARGUARD_MANTLE, weight = 400 }, -- rearguard_mantle
-        { item = xi.item.AGILE_MANTLE,     weight = 400 }, -- agile_mantle
+        { itemId = xi.item.FIRE_SPIRIT_PACT,      weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_STR,  weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,       weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_PHALANX,     weight =  2000 },
+        { itemId = xi.item.PETRIFIED_LOG,         weight =  3000 },
     },
 
     {
-        { item = xi.item.NONE,                  weight = 750 }, -- nothing
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
-        { item = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
+        { itemId = xi.item.DOLL_SHARD,            weight = 10000 },
+    },
+
+    {
+        { itemId = xi.item.VIAL_OF_MERCURY,       weight = 10000 },
     },
 }
 

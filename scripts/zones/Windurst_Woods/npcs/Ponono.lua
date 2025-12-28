@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getCharVar('moral') == 3 and
         player:getLocalVar('moralZone') == 0 and
-        player:getCharVar('moralWait') <= os.time()
+        player:getCharVar('moralWait') <= GetSystemTime()
     then
         player:startEvent(705)
 

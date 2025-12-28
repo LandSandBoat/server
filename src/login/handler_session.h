@@ -21,10 +21,12 @@
 
 #pragma once
 
+#include "common/cbasetypes.h"
+#include "common/logging.h"
+
 #include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
-#include <common/logging.h>
 
 class handler_session
 : public std::enable_shared_from_this<handler_session>
@@ -50,10 +52,5 @@ public:
 
     asio::ssl::stream<asio::ip::tcp::socket> socket_;
 
-    // TODO: Use std::array
-    enum
-    {
-        max_length = 4096
-    };
-    char data_[max_length] = {};
+    std::array<uint8, 4096> buffer_ = {};
 };

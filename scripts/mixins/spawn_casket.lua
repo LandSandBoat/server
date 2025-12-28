@@ -1,5 +1,4 @@
 -- Casket Mixins
-require('scripts/globals/caskets')
 require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}

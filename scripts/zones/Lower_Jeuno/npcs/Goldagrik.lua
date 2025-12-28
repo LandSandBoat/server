@@ -6,7 +6,11 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(20006)
+    xi.mmm.tutorialOnTrigger(player)
+end
+
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.mmm.tutorialOnEventFinish(player, csid, option)
 end
 
 return entity

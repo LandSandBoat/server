@@ -5,16 +5,30 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
+    local mountId = effect:getPower()
     -- Retail sends a music change packet (packet ID 0x5F) in both cases.
 
-    -- TODO: This isn't quite right. The IDs we use for mounts vs what we use for power etc.
-    -- seem to be off-by-one.
-    if effect:getPower() < 2 then
+    local animation = xi.animation.NONE
+
+    if
+        mountId == xi.mount.CHOCOBO or
+        mountId == xi.mount.NOBLE_CHOCOBO
+    then
         target:changeMusic(4, 212)
-        target:setAnimation(xi.anim.CHOCOBO)
+        animation = xi.anim.CHOCOBO
     else
         target:changeMusic(4, 84)
-        target:setAnimation(xi.anim.MOUNT)
+        animation = xi.anim.MOUNT
+    end
+
+    if not target:isInEvent() then
+        target:setAnimation(animation)
+    end
+
+    -- Chocobo and mounts uncharm current pet
+    local pet = target:getPet()
+    if pet ~= nil and pet:isCharmed() then
+        target:despawnPet()
     end
 end
 
@@ -22,7 +36,9 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:setAnimation(xi.anim.NONE)
+    if not target:isInEvent() then -- Paranoia safety check
+        target:setAnimation(xi.anim.NONE)
+    end
 
     -- Remove CharVars from player participating in chocobo riding game
     if target:isPC() then

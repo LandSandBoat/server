@@ -22,46 +22,62 @@ local content = Battlefield:new({
     },
 })
 
--- TODO: Shroom-in-Cap Mechanic
 content:addEssentialMobs({ 'Toadpillow', 'Toadsquab', 'Toadbolster', 'Toadcushion' })
 
 content.loot =
 {
     {
-        { item = xi.item.KING_TRUFFLE, weight = 1000 }, -- king_truffle
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 4000 },
     },
 
     {
-        { item = xi.item.JUG_OF_SEEDBED_SOIL, weight = 1000 }, -- jug_of_seedbed_soil
+        { itemId = xi.item.KING_TRUFFLE,           weight =  2500 },
+        { itemId = xi.item.WOOZYSHROOM,            weight =  2500 },
+        { itemId = xi.item.DANCESHROOM,            weight =  2500 },
+        { itemId = xi.item.SLEEPSHROOM,            weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 200 }, -- nothing
-        { item = xi.item.MAGICIANS_SHIELD, weight = 200 }, -- magicians_shield
-        { item = xi.item.MERCENARYS_TARGE, weight = 200 }, -- mercenarys_targe
-        { item = xi.item.BEATERS_ASPIS,    weight = 200 }, -- beaters_aspis
-        { item = xi.item.PILFERERS_ASPIS,  weight = 200 }, -- pilferers_aspis
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.MERCENARYS_TARGE,       weight =  2500 },
+        { itemId = xi.item.BEATERS_ASPIS,          weight =  2500 },
+        { itemId = xi.item.PILFERERS_ASPIS,        weight =  2500 },
+    },
+
+        {
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.TRIMMERS_MANTLE,        weight =  2500 },
+        { itemId = xi.item.GENIN_MANTLE,           weight =  2500 },
+        { itemId = xi.item.WARLOCKS_MANTLE,        weight =  2500 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 250 }, -- nothing
-        { item = xi.item.TRIMMERS_MANTLE, weight = 250 }, -- trimmers_mantle
-        { item = xi.item.GENIN_MANTLE,    weight = 250 }, -- genin_mantle
-        { item = xi.item.WARLOCKS_MANTLE, weight = 250 }, -- warlocks_mantle
+        { itemId = xi.item.NONE,                   weight =  8000 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =   200 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =   200 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =   200 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   200 },
+        { itemId = xi.item.IRON_INGOT,             weight =   200 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   200 },
+        { itemId = xi.item.SILVER_INGOT,           weight =   200 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   200 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =   200 },
+        { itemId = xi.item.ELM_LOG,                weight =   200 },
     },
 
     {
-        { item = xi.item.NONE,                  weight = 625 }, -- nothing
-        { item = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 125 }, -- scroll_of_utsusemi_ni
-        { item = xi.item.SCROLL_OF_PHALANX,     weight = 125 }, -- scroll_of_phalanx
-        { item = xi.item.SCROLL_OF_ERASE,       weight = 125 }, -- scroll_of_erase
+        { itemId = xi.item.NONE,                   weight =  5000 },
+        { itemId = xi.item.KING_TRUFFLE,           weight =  1250 },
+        { itemId = xi.item.WOOZYSHROOM,            weight =  1250 },
+        { itemId = xi.item.DANCESHROOM,            weight =  1250 },
+        { itemId = xi.item.SLEEPSHROOM,            weight =  1250 },
     },
 
     {
-        { item = xi.item.NONE,            weight = 250 }, -- nothing
-        { item = xi.item.MANNEQUIN_HEAD,  weight = 250 }, -- mannequin_head
-        { item = xi.item.MANNEQUIN_BODY,  weight = 250 }, -- mannequin_body
-        { item = xi.item.MANNEQUIN_HANDS, weight = 250 }, -- mannequin_hands
+        { itemId = xi.item.NONE,                   weight =  1000 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight =  3000 },
     },
 }
 

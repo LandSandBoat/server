@@ -79,7 +79,7 @@ entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.CLAMMING_KIT) then
         local delay = player:getLocalVar('ClammingPointDelay')
 
-        if delay > 0 and delay > os.time() then
+        if delay > 0 and delay > GetSystemTime() then
             player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
         else
             local eventID = npc:getID() - npc:getLocalVar('firstClammingPoint') + 20
@@ -168,7 +168,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     player:messageSpecial(ID.text.YOU_FIND_ITEM, clammedItem)
                 end
 
-                player:setLocalVar('ClammingPointDelay', os.time() + 10)
+                player:setLocalVar('ClammingPointDelay', GetSystemTime() + 10)
                 player:setLocalVar('ClammedItem', 0)
             end
         end

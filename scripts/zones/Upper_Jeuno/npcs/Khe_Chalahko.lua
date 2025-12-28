@@ -2,23 +2,21 @@
 -- Area: Upper Jeuno
 --  NPC: Khe Chalahko
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12416, 29311,    -- Sallet
-        12544, 45208,    -- Breastplate
-        12800, 34776,    -- Cuisses
-        12928, 21859,    -- Plate Leggins
-        12810, 53130,    -- Breeches
-        12938, 32637,    -- Sollerets
+        { xi.item.SALLET,         31860 },
+        { xi.item.BREASTPLATE,    49140 },
+        { xi.item.CUISSES,        37800 },
+        { xi.item.PLATE_LEGGINGS, 23760 },
+        { xi.item.BREECHES,       57750 },
+        { xi.item.SOLLERETS,      35475 },
     }
 
-    player:showText(npc, ID.text.DURABLE_SHIELDS_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.UPPER_JEUNO].text.DURABLE_SHIELDS_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

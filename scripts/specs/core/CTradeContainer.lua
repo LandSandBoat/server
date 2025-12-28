@@ -67,3 +67,7 @@ end
 ---@return boolean
 function CTradeContainer:confirmSlot(slotID, amountObj)
 end
+
+---@return nil
+function CTradeContainer:clean()
+end

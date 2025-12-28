@@ -21,6 +21,16 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3119, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.CAEDARVA_MIRE] =
         {
             ['Nashib'] =

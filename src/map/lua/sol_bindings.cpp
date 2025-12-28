@@ -26,7 +26,7 @@
 #include "lua_ability.h"
 SOL_BIND_DEF(CLuaAbility, CAbility);
 
-#include "packets/action.h"
+#include "action/action.h"
 #include "lua_action.h"
 SOL_BIND_DEF(CLuaAction, action_t);
 
@@ -121,4 +121,8 @@ SOL_BIND_DEF(CLuaTriggerArea, ITriggerArea);
 #include "zone.h"
 #include "lua_zone.h"
 SOL_BIND_DEF(CLuaZone, CZone);
+
+#include "treasure_pool.h"
+#include "lua_treasure_pool.h"
+SOL_BIND_DEF(CLuaTreasurePool, CTreasurePool);
 // clang-format on

@@ -19,19 +19,13 @@
 ===========================================================================
 */
 
-#include "world_server.h"
-
-// TODO: Standardize our running arguments for shutdown and thread signals
-std::atomic<bool> gRunFlag = true;
+#include "world_application.h"
 
 int main(int argc, char** argv)
 {
-    auto pWorldServer = std::make_unique<WorldServer>(argc, argv);
+    const auto worldApp = std::make_unique<WorldApplication>(argc, argv);
 
-    while (pWorldServer->IsRunning())
-    {
-        pWorldServer->Tick();
-    }
+    worldApp->run();
 
     return 0;
 }

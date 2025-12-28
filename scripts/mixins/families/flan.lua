@@ -19,8 +19,8 @@ g_mixins.families.flan = function(flanMob)
                 damage > mob:getMaxHP() * 0.1
             then
                 mob:setAnimationSub(2) -- Spike head
-                mob:setMod(xi.mod.DMGPHYS, -50)
-                mob:setMod(xi.mod.DMGRANGE, -50)
+                mob:setMod(xi.mod.DMGPHYS, -5000)
+                mob:setMod(xi.mod.DMGRANGE, -5000)
                 mob:setMod(xi.mod.DMGMAGIC, 0)
                 mob:setLocalVar('Damage', 0)
                 accumulatedPhisical = 0
@@ -37,7 +37,7 @@ g_mixins.families.flan = function(flanMob)
                 mob:setAnimationSub(1) -- Smooth head
                 mob:setMod(xi.mod.DMGPHYS, 0)
                 mob:setMod(xi.mod.DMGRANGE, 0)
-                mob:setMod(xi.mod.DMGMAGIC, -50)
+                mob:setMod(xi.mod.DMGMAGIC, -5000)
                 mob:setLocalVar('Damage', 1)
                 accumulatedMagical = 0
             end

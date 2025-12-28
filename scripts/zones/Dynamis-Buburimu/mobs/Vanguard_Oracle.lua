@@ -12,11 +12,15 @@ local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BAA_DAVA_THE_BIBLIOPHAGE_PH, 10, 1200) -- 20 minutes
+    xi.mob.phOnDespawn(mob, ID.mob.BAA_DAVA_THE_BIBLIOPHAGE, 10, 1200) -- 20 minutes
 end
 
 return entity

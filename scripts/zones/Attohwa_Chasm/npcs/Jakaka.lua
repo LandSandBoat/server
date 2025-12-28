@@ -24,9 +24,9 @@ entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.MIASMA_FILTER) then
         player:startEvent(11)
     else
-        if miasmaFilterCD >= os.time() then
+        if miasmaFilterCD >= GetSystemTime() then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
-            player:startEvent(14, VanadielTime() + (miasmaFilterCD - os.time()))
+            player:startEvent(14, VanadielTime() + (miasmaFilterCD - GetSystemTime()))
         else
             if
                 player:hasItem(xi.item.POUCH_OF_PARRADAMO_STONES) or
@@ -43,7 +43,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
         npcUtil.giveKeyItem(player, xi.ki.MIASMA_FILTER)
-        player:setCharVar('[ENM]MiasmaFilter', os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar('[ENM]MiasmaFilter', GetSystemTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 13 then
         npcUtil.giveItem(player, xi.item.FLAXEN_POUCH)
     end

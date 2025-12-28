@@ -285,17 +285,6 @@ xi.voidwalker.zoneOnInit = function(zone)
     end
 end
 
-local mobIsBusy = function(mob)
-    local act = mob:getCurrentAction()
-
-    return  act == xi.act.MOBABILITY_START or
-            act == xi.act.MOBABILITY_USING or
-            act == xi.act.MOBABILITY_FINISH or
-            act == xi.act.MAGIC_START or
-            act == xi.act.MAGIC_CASTING or
-            act == xi.act.MAGIC_FINISH
-end
-
 local function doMobSkillEveryHPP(mob, every, start, mobskill, condition)
     local mobhpp = mob:getHPP()
 
@@ -321,10 +310,10 @@ local function randomly(mob, chance, between, effect, skill)
     if
         math.random(0, 100) <= chance and
         not mob:hasStatusEffect(effect) and
-        os.time() > (mob:getLocalVar('MOBSKILL_TIME') + between)
+        GetSystemTime() > (mob:getLocalVar('MOBSKILL_TIME') + between)
     then
         mob:setLocalVar('MOBSKILL_USE', 1)
-        mob:setLocalVar('MOBSKILL_TIME', os.time())
+        mob:setLocalVar('MOBSKILL_TIME', GetSystemTime())
         mob:useMobAbility(skill)
     end
 end
@@ -378,7 +367,10 @@ local mixinByMobName =
 {
     ['Capricornus'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.MIGHTY_STRIKES, not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES))
-        if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and not mobIsBusy(mob) then
+        if
+            mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+            not xi.combat.behavior.isEntityBusy(mob)
+        then
             mob:useMobAbility(xi.mob.skills.RECOIL_DIVE)
         end
     end,
@@ -464,7 +456,7 @@ xi.voidwalker.onMobFight = function(mob, target)
     end
 
     local poptime = mob:getLocalVar('[VoidWalker]PopedAt')
-    local now     = os.time()
+    local now     = GetSystemTime()
 
     if
         mob:isSpawned() and
@@ -579,7 +571,7 @@ xi.voidwalker.onHealing = function(player)
 
         mob:setLocalVar('[VoidWalker]PopedBy', player:getID())
         mob:setLocalVar('[VoidWalker]PopedWith', mobNearest.keyItem)
-        mob:setLocalVar('[VoidWalker]PopedAt', os.time())
+        mob:setLocalVar('[VoidWalker]PopedAt', GetSystemTime())
 
         if
             mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and

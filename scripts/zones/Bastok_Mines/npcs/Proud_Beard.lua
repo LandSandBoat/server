@@ -2,8 +2,6 @@
 -- Area: Bastok Mines
 --  NPC: Proud Beard
 -----------------------------------
-local ID = zones[xi.zone.BASTOK_MINES]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -14,21 +12,21 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.item.HUME_TUNIC,       312,
-        xi.item.HUME_VEST,        312,
-        xi.item.HUME_M_GLOVES,    187,
-        xi.item.HUME_F_GLOVES,    187,
-        xi.item.HUME_SLACKS,      270,
-        xi.item.HUME_PANTS,       270,
-        xi.item.HUME_M_BOOTS,     187,
-        xi.item.HUME_F_BOOTS,     187,
-        xi.item.GALKAN_SURCOAT,   312,
-        xi.item.GALKAN_BRACERS,   187,
-        xi.item.GALKAN_BRAGUETTE, 270,
-        xi.item.GALKAN_SANDALS,   187,
+        { xi.item.HUME_TUNIC,       315 },
+        { xi.item.HUME_VEST,        315 },
+        { xi.item.HUME_M_GLOVES,    189 },
+        { xi.item.HUME_F_GLOVES,    189 },
+        { xi.item.HUME_SLACKS,      273 },
+        { xi.item.HUME_PANTS,       273 },
+        { xi.item.HUME_M_BOOTS,     189 },
+        { xi.item.HUME_F_BOOTS,     189 },
+        { xi.item.GALKAN_SURCOAT,   315 },
+        { xi.item.GALKAN_BRACERS,   189 },
+        { xi.item.GALKAN_BRAGUETTE, 273 },
+        { xi.item.GALKAN_SANDALS,   189 },
     }
 
-    player:showText(npc, ID.text.PROUDBEARD_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.BASTOK_MINES].text.PROUDBEARD_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

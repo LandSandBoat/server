@@ -34,7 +34,6 @@ __author__ = "Michael Gilfix <mgilfix@eecs.tufts.edu>"
 
 
 class Blowfish:
-
     """Blowfish encryption Scheme
 
     This class implements the encryption and decryption

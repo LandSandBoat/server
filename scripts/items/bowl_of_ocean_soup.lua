@@ -17,32 +17,23 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4285)
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_HPP, 5)
-    target:addMod(xi.mod.FOOD_HP_CAP, 150)
-    target:addMod(xi.mod.FOOD_MP, 5)
-    target:addMod(xi.mod.DEX, 4)
-    target:addMod(xi.mod.HPHEAL, 9)
-    target:addMod(xi.mod.FOOD_ATTP, 14)
-    target:addMod(xi.mod.FOOD_ATT_CAP, 90)
-    target:addMod(xi.mod.FOOD_RATTP, 14)
-    target:addMod(xi.mod.FOOD_RATT_CAP, 90)
+    effect:addMod(xi.mod.FOOD_HPP, 5)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 150)
+    effect:addMod(xi.mod.FOOD_MP, 5)
+    effect:addMod(xi.mod.DEX, 4)
+    effect:addMod(xi.mod.HPHEAL, 9)
+    effect:addMod(xi.mod.FOOD_ATTP, 14)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 90)
+    effect:addMod(xi.mod.FOOD_RATTP, 14)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 90)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_HPP, 5)
-    target:delMod(xi.mod.FOOD_HP_CAP, 150)
-    target:delMod(xi.mod.FOOD_MP, 5)
-    target:delMod(xi.mod.DEX, 4)
-    target:delMod(xi.mod.HPHEAL, 9)
-    target:delMod(xi.mod.FOOD_ATTP, 14)
-    target:delMod(xi.mod.FOOD_ATT_CAP, 90)
-    target:delMod(xi.mod.FOOD_RATTP, 14)
-    target:delMod(xi.mod.FOOD_RATT_CAP, 90)
 end
 
 return itemObject

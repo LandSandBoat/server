@@ -69,6 +69,16 @@ enum class Mod
     LIGHT_RES_RANK   = 198, // Light Resistance Rank
     DARK_RES_RANK    = 199, // Dark Resistance Rank
 
+    // Magic Evasion RANK versus status effects (resistance ranks)
+    PARALYZE_RES_RANK    = 1160,
+    BIND_RES_RANK        = 1161,
+    SILENCE_RES_RANK     = 1162,
+    SLOW_RES_RANK        = 1163,
+    POISON_RES_RANK      = 1164,
+    LIGHT_SLEEP_RES_RANK = 1165,
+    DARK_SLEEP_RES_RANK  = 1166,
+    BLIND_RES_RANK       = 1167,
+
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
 
@@ -86,14 +96,14 @@ enum class Mod
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
-    FIREATT      = 32, // Fire Damage
-    ICEATT       = 33, // Ice Damage
-    WINDATT      = 34, // Wind Damage
-    EARTHATT     = 35, // Earth Damage
-    THUNDERATT   = 36, // Thunder Damage
-    WATERATT     = 37, // Water Damage
-    LIGHTATT     = 38, // Light Damage
-    DARKATT      = 39, // Dark Damage
+    FIRE_MAB     = 32, // Elemental "Magic Attack Bonus" aka "Affinity"
+    ICE_MAB      = 33, // Elemental "Magic Attack Bonus" aka "Affinity"
+    WIND_MAB     = 34, // Elemental "Magic Attack Bonus" aka "Affinity"
+    EARTH_MAB    = 35, // Elemental "Magic Attack Bonus" aka "Affinity"
+    THUNDER_MAB  = 36, // Elemental "Magic Attack Bonus" aka "Affinity"
+    WATER_MAB    = 37, // Elemental "Magic Attack Bonus" aka "Affinity"
+    LIGHT_MAB    = 38, // Elemental "Magic Attack Bonus" aka "Affinity"
+    DARK_MAB     = 39, // Elemental "Magic Attack Bonus" aka "Affinity"
     FIRE_MACC    = 40, // Fire Accuracy
     ICE_MACC     = 41, // Ice Accuracy
     WIND_MACC    = 42, // Wind Accuracy
@@ -102,6 +112,17 @@ enum class Mod
     WATER_MACC   = 45, // Water Accuracy
     LIGHT_MACC   = 46, // Light Accuracy
     DARK_MACC    = 47, // Dark Accuracy
+
+    // Day/Weather elemental bonuses.
+    FORCE_FIRE_DWBONUS      = 531,  // Set to above 0 to force fire day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_ICE_DWBONUS       = 532,  // Set to above 0 to force ice day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_WIND_DWBONUS      = 533,  // Set to above 0 to force wind day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_EARTH_DWBONUS     = 534,  // Set to above 0 to force earth day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_LIGHTNING_DWBONUS = 535,  // Set to above 0 to force lightning day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_WATER_DWBONUS     = 536,  // Set to above 0 to force water day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_LIGHT_DWBONUS     = 537,  // Set to above 0 to force light day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_DARK_DWBONUS      = 538,  // Set to above 0 to force dark day/weather elemental bonuses. Penalties are NOT forced.
+    FORCE_DW_BONUS_PENALTY  = 1156, // Set to above 0 to force all day/weather elemental bonus AND penalties. This is used by "Hachirin-no-Obi".
 
     WSACC = 48, // Weaponskill Accuracy
 
@@ -242,15 +263,24 @@ enum class Mod
     LIGHT_ABSORB      = 465, // Occasionally absorbs light elemental damage.
     DARK_ABSORB       = 466, // Occasionally absorbs dark elemental damage.
 
+    // Action-type power multipliers
+    POWER_MULTIPLIER_BASIC_ATTACK = 1173, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_BASIC_RANGED = 1174, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_SPELL        = 1175, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_WEAPONSKILL  = 1176, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_JOB_ABILITY  = 1177, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+    POWER_MULTIPLIER_MOBSKILL     = 1178, // Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
+
     // Crit Damage / Delay
-    CRITHITRATE              = 165, // Raises chance to crit
-    CRITHITRATE_ONLY_WEP     = 141, // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
-    CRIT_DMG_INCREASE        = 421, // Raises the damage of critical hit by percent %
-    RANGED_CRIT_DMG_INCREASE = 964, // Increases ranged critical damage by a percent
-    CRITICAL_HIT_EVASION     = 166, // Modifies chance enemy will crit
-    CRIT_DEF_BONUS           = 908, // Reduces crit hit damage
-    MAGIC_CRITHITRATE        = 562, // Raises chance to magic crit
-    MAGIC_CRIT_DMG_INCREASE  = 563, // Raises damage done when criting with magic
+    CRITHITRATE              = 165,  // Raises chance to crit
+    CRITHITRATE_ONLY_WEP     = 141,  // Raises chance to crit (but only for attacks with the specific weapon that has the mod)
+    CRIT_DMG_INCREASE        = 421,  // Raises the damage of critical hit by percent %
+    RANGED_CRIT_DMG_INCREASE = 964,  // Increases ranged critical damage by a percent
+    CRITICAL_HIT_EVASION     = 166,  // Modifies chance enemy will crit
+    CRIT_DEF_BONUS           = 908,  // Reduces crit hit damage
+    MAGIC_CRITHITRATE        = 562,  // Raises chance to magic crit
+    MAGIC_CRITHITRATE_II     = 1168, // Raises chance to add a critical 1.25 magic damage multiplier.
+    MAGIC_CRIT_DMG_INCREASE  = 563,  // Raises damage done when criting with magic
 
     FENCER_TP_BONUS    = 903, // TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE = 904, // Increased Crit chance from Fencer Trait
@@ -266,6 +296,7 @@ enum class Mod
     SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // Movement speed modifiers in use order.
+    // See CBattleEntity::UpdateSpeed
     MOUNT_MOVE                = 972,  // % Mount Movement Speed
     MOVE_SPEED_STACKABLE      = 75,   // Additive modifier. Applied before multipliers. Gear movement speed penalties.
     MOVE_SPEED_WEIGHT_PENALTY = 77,   // Multiplicative modifier. For Gravity and curse.
@@ -381,6 +412,18 @@ enum class Mod
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
+    // fTP modifiers
+    FIRE_FTP_BONUS    = 544,  // Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
+    ICE_FTP_BONUS     = 545,  // Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
+    WIND_FTP_BONUS    = 546,  // Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
+    EARTH_FTP_BONUS   = 547,  // Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
+    THUNDER_FTP_BONUS = 548,  // Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
+    WATER_FTP_BONUS   = 549,  // Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
+    LIGHT_FTP_BONUS   = 550,  // Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
+    DARK_FTP_BONUS    = 551,  // Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
+    ANY_FTP_BONUS     = 1144, // Gives bonus fTP when weaponskill has a (any) property. (Fotia Gorget, Fotia Belt) /256
+    DAY_FTP_BONUS     = 1145, // Gives bonus fTP when weaponskill has a property that matches current day. (Mekira Oto, Gavialis helm, etc...) /256
+
     // Warrior
     DOUBLE_ATTACK       = 288,  // Percent chance to proc
     DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
@@ -401,7 +444,7 @@ enum class Mod
     KICK_ATTACK_RATE    = 292,   // Percent chance to kick
     PERFECT_COUNTER_ATT = 428,   // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
                                  // not if fighting barehanded).
-    COUNTER_DAMAGE       = 1047, // TODO: Increases Damage from Counter Attacks (Percent)
+    COUNTER_DAMAGE       = 1047, // Increases Damage from Counter Attacks (Percent)
     FOOTWORK_ATT_BONUS   = 429,  // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543,  // Counterstance effect in percents
     DODGE_EFFECT         = 552,  // Dodge effect in percents
@@ -420,15 +463,19 @@ enum class Mod
     REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
-    CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
-    CONSERVE_MP = 296, // Percent chance
+    CLEAR_MIND              = 295,  // Used in conjunction with HEALMP to increase amount between tics
+    CONSERVE_MP             = 296,  // Percent chance
+    ELEMENTAL_MAGIC_RECAST  = 1146, // Recast time for elemental magic spells (percent, usually negative)
+    ENHANCES_ELEMENTAL_SEAL = 1149, // Bonus magic damage when using Elemental Seal (percent)
+    ELEMENTAL_DEBUFF_EFFECT = 1150, // Increase stat reduction by N, and DoT by N/2 HP per tick
 
     // Red Mage
-    BLINK             = 299, // Tracks blink shadows
-    STONESKIN         = 300, // Tracks stoneskin HP pool
-    PHALANX           = 301, // Tracks direct damage reduction
-    ENF_MAG_POTENCY   = 290, // Increases Enfeebling magic potency %
-    ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
+    BLINK             = 299,  // Tracks blink shadows
+    STONESKIN         = 300,  // Tracks stoneskin HP pool
+    PHALANX           = 301,  // Tracks direct damage reduction
+    ENF_MAG_POTENCY   = 290,  // Increases Enfeebling magic potency %
+    ENF_MAG_DURATION  = 1151, // Increases enfeebling magic duration %
+    ENHANCES_SABOTEUR = 297,  // Increases Saboteur Potency %
 
     // Thief
     FLEE_DURATION        = 93,   // Flee duration in seconds
@@ -449,6 +496,7 @@ enum class Mod
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857,  // Holy Circle extended duration in seconds
+    HOLY_CIRCLE_POTENCY    = 1141, // Increases the potency of the Holy Circle effect (e.g. mod value 2 = +2% Undead Killer)
     RAMPART_DURATION       = 92,   // Rampart duration in seconds
     ABSORB_PHYSDMG_TO_MP   = 426,  // Absorbs a percentage of physical damage taken to MP.
     SHIELD_MASTERY_TP      = 485,  // Shield mastery TP bonus when blocking with a shield
@@ -468,32 +516,39 @@ enum class Mod
     SHIELD_BARRIER         = 1082, // Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
-    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
-    SOULEATER_EFFECT       = 96,   // Souleater power in percents
-    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
-    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
-    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
-    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
-    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
-    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
-    ENHANCES_DIABOLIC_EYE  = 275,  // Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
-    ENHANCES_NETHER_VOID   = 1083, // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
-    ENHANCES_MUTED_SOUL    = 1084, // Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ARCANE_CIRCLE_DURATION  = 858,  // Arcane Circle extended duration in seconds
+    ARCANE_CIRCLE_POTENCY   = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT        = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II     = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
+    DESPERATE_BLOWS         = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL           = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT     = 998,  // Percent increase to total HP drain for Dread Spikes
+    DARK_MAGIC_CAST         = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION     = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON   = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    ENHANCES_DARK_SEAL      = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DIABOLIC_EYE   = 275,  // Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
+    ENHANCES_NETHER_VOID    = 1083, // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
+    ENHANCES_MUTED_SOUL     = 1084, // Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ENHANCES_ABSORB_EFFECTS = 1136, // Absorb Spell duration +x seconds (Enhances "Absorb" effects)
+    AUGMENTS_ABSORB         = 1137, // Non-Liberator Absorb Spell potency +x% (Augments "Absorb" effects)
+    ABSORB_EFFECT_DURATION  = 1138, // Absorb Spell duration +% ("Absorb" effect duration +x%)
+    AUGMENTS_ABSORB_TP      = 1153, // Increases absorb-TP potency, stacks with AUGMENTS_ABSORB
 
     // Beastmaster
-    TAME                = 304,  // Additional percent chance to charm
-    CHARM_TIME          = 360,  // extends the charm time only, no effect of charm chance
-    REWARD_HP_BONUS     = 364,  // Percent to add to reward HP healed. (364)
-    CHARM_CHANCE        = 391,  // extra chance to charm (light+apollo staff ect)
-    FERAL_HOWL_DURATION = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
-    JUG_LEVEL_RANGE     = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
-    CALL_BEAST_DELAY    = 273,  // Lowers Call Beast recast
-    SIC_READY_RECAST    = 1052, // SIC/Ready recast reduction (seconds)
-    TANDEM_STRIKE_POWER = 271,  // Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
-    TANDEM_BLOW_POWER   = 272,  // Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
+    TAME                         = 304,  // Additional percent chance to charm
+    CHARM_TIME                   = 360,  // extends the charm time only, no effect of charm chance
+    FAMILIAR_BONUS               = 1169, // Bonus minutes of charm and haste when using familiar
+    REWARD_HP_BONUS              = 364,  // Percent to add to reward HP healed. (364)
+    CHARM_CHANCE                 = 391,  // extra chance to charm (light+apollo staff ect)
+    FERAL_HOWL_DURATION          = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
+    JUG_LEVEL_RANGE              = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
+    CALL_BEAST_DELAY             = 273,  // Lowers Call Beast recast
+    SIC_READY_RECAST             = 1052, // SIC/Ready recast reduction (seconds)
+    TANDEM_STRIKE_POWER          = 271,  // Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
+    TANDEM_BLOW_POWER            = 272,  // Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
+    ENHANCES_MONSTER_CORRELATION = 1155, // Grants your pet acc +X and attp +X% against a weaker opposing ecosystem. Typically applied to pet, not owner (item_mods_pet.sql)
+    ENHANCES_SPUR                = 1157, // Increases Store TP bonus by the mod amount when using job ability Spur
 
     // Bard
     MINNE_EFFECT           = 433,  //
@@ -541,15 +596,16 @@ enum class Mod
     BOUNTY_SHOT_TH_BONUS    = 826,  // Boosts base TH level of bounty shot
 
     // Samurai
-    WARDING_CIRCLE_DURATION   = 95,   // Warding Circle extended duration in seconds
-    MEDITATE_DURATION         = 94,   // Meditate duration in seconds
-    ZANSHIN                   = 306,  // Zanshin percent chance
-    THIRD_EYE_COUNTER_RATE    = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-    THIRD_EYE_ANTICIPATE_RATE = 839,  // Adds anticipate rate in percents
-    THIRD_EYE_BONUS           = 1055, // TODO: Bonus Third Eye Evasion (count)
-    SENGIKORI_SC_DMG_DEBUFF   = 1088, // % Increase to closing skillchain damage. Applied to defender.
-    SENGIKORI_MB_DMG_DEBUFF   = 1089, // % Increase to magic burst damage. Applied to defender.
-    SENGIKORI_BONUS           = 1090, // additive % increase to Sengikori
+    WARDING_CIRCLE_DURATION  = 95,   // Warding Circle extended duration in seconds
+    WARDING_CIRCLE_POTENCY   = 1143, // Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
+    MEDITATE_DURATION        = 94,   // Meditate duration in seconds
+    ZANSHIN                  = 306,  // Zanshin percent chance
+    THIRD_EYE_COUNTER_RATE   = 508,  // Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
+    THIRD_EYE_RETENTION_RATE = 839,  // Increases retention rate of third eye with Seigan. 50 = 50%
+    THIRD_EYE_BONUS          = 1055, // TODO: Bonus Third Eye Evasion (count)
+    SENGIKORI_SC_DMG_DEBUFF  = 1088, // % Increase to closing skillchain damage. Applied to defender.
+    SENGIKORI_MB_DMG_DEBUFF  = 1089, // % Increase to magic burst damage. Applied to defender.
+    SENGIKORI_BONUS          = 1090, // additive % increase to Sengikori
 
     // Ninja
     UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.
@@ -560,9 +616,12 @@ enum class Mod
     DAKEN                = 911, // chance to throw a shuriken without consuming it
     NINJUTSU_DURATION    = 1000,
     ENHANCES_SANGE       = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
+    ENHANCES_FUTAE       = 1148, // Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
+    UTSUSEMI_AOE         = 1179, // "Utsusemi" effect extends to an area
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
+    ANCIENT_CIRCLE_POTENCY     = 1142, // Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
     JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
     JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
     JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
@@ -582,17 +641,22 @@ enum class Mod
     ENHANCES_STRAFE            = 282,  // Strafe merit augment, +50 TP gained per merit level on breath use.
     ENHANCES_SPIRIT_LINK       = 281,  // Adds erase/-na to Spirit Link
 
-    // Summoner
-    AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
-    WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
-    DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
-    PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
+    // Summoner: Perpetuation costs.
+    AVATAR_PERPETUATION         = 371,  // stores base cost of current avatar
+    WEATHER_REDUCTION           = 372,  // stores perpetuation reduction depending on weather
+    DAY_REDUCTION               = 373,  // stores perpetuation reduction depending on day
+    PERPETUATION_REDUCTION      = 346,  // stores the MP/tick reduction from gear
+    HALF_PERPETUATION_CARBUNCLE = 356,  // if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
+    HALF_PERPETUATION_DAY       = 1170, // if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
+    HALF_PERPETUATION_WEATHER   = 1171, // if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
+
+    // Summoner: Others.
     BP_DELAY                  = 357,  // stores blood pact delay reduction
     ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
     BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
     BP_DAMAGE                 = 126,  // Blood Pact: Rage Damage increase percentage
     BLOOD_BOON                = 913,  // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
-    AVATARS_FAVOR_ENHANCE     = 141,  // Enhances Avatars Favor Effect by 1 tier per point
+    AVATARS_FAVOR_ENHANCE     = 1154, // Enhances Avatars Favor Effect by 1 tier per point
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
@@ -601,10 +665,13 @@ enum class Mod
     SPIRIT_CAST_REDUCTION     = 140,  // Spirit Pact casting time reduction in seconds
 
     // Blue Mage
-    BLUE_POINTS          = 309,  // Tracks extra blue points
-    BLUE_LEARN_CHANCE    = 945,  // Additional chance to learn blue magic
-    BLUE_JOB_TRAIT_BONUS = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
-    BLUE_MAGIC_EFFECT    = 1059, // TODO: Bonus to Attribute Value of spell (percent)
+    BLUE_POINTS             = 309,  // Tracks extra blue points
+    BLUE_LEARN_CHANCE       = 945,  // Additional chance to learn blue magic
+    BLUE_JOB_TRAIT_BONUS    = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
+    BLUE_MAGIC_EFFECT       = 1059, // TODO: Bonus to Attribute Value of spell (percent)
+    ENHANCES_BURST_AFFINITY = 1139, // Increases WSC bonus on spells cast with Burst Affinity (percent)
+    ENHANCES_CHAIN_AFFINITY = 1140, // TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
+    BLUE_MAGIC_RECAST       = 1147, // Recast time for blue magic spells (percent, usually negative)
 
     // Corsair
     EXP_BONUS         = 382,  //
@@ -693,24 +760,25 @@ enum class Mod
     STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar
-    BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
-    WHITE_MAGIC_COST         = 394, // MP cost for white magic (light/dark arts)
-    BLACK_MAGIC_CAST         = 395, // Cast time for black magic (light/dark arts)
-    WHITE_MAGIC_CAST         = 396, // Cast time for black magic (light/dark arts)
-    BLACK_MAGIC_RECAST       = 397, // Recast time for black magic (light/dark arts)
-    WHITE_MAGIC_RECAST       = 398, // Recast time for white magic (light/dark arts)
-    ALACRITY_CELERITY_EFFECT = 399, // Bonus for celerity/alacrity effect
-    LIGHT_ARTS_EFFECT        = 334, //
-    DARK_ARTS_EFFECT         = 335, //
-    LIGHT_ARTS_SKILL         = 336, //
-    DARK_ARTS_SKILL          = 337, //
-    LIGHT_ARTS_REGEN         = 338, // Regen bonus flat HP amount from Light Arts and Tabula Rasa
-    REGEN_DURATION           = 339, //
-    HELIX_EFFECT             = 478, //
-    HELIX_DURATION           = 477, //
-    STORMSURGE_EFFECT        = 400, //
-    SUBLIMATION_BONUS        = 401, //
-    GRIMOIRE_SPELLCASTING    = 489, // "Grimoire: Reduces spellcasting time" bonus
+    BLACK_MAGIC_COST         = 393,  // MP cost for black magic (light/dark arts)
+    WHITE_MAGIC_COST         = 394,  // MP cost for white magic (light/dark arts)
+    BLACK_MAGIC_CAST         = 395,  // Cast time for black magic (light/dark arts)
+    WHITE_MAGIC_CAST         = 396,  // Cast time for black magic (light/dark arts)
+    BLACK_MAGIC_RECAST       = 397,  // Recast time for black magic (light/dark arts)
+    WHITE_MAGIC_RECAST       = 398,  // Recast time for white magic (light/dark arts)
+    ALACRITY_CELERITY_EFFECT = 399,  // Bonus for celerity/alacrity effect
+    LIGHT_ARTS_EFFECT        = 334,  //
+    DARK_ARTS_EFFECT         = 335,  //
+    LIGHT_ARTS_SKILL         = 336,  //
+    DARK_ARTS_SKILL          = 337,  //
+    LIGHT_ARTS_REGEN         = 338,  // Regen bonus flat HP amount from Light Arts and Tabula Rasa
+    REGEN_DURATION           = 339,  //
+    HELIX_EFFECT             = 478,  //
+    HELIX_DURATION           = 477,  //
+    STORMSURGE_EFFECT        = 400,  //
+    SUBLIMATION_BONUS        = 401,  //
+    GRIMOIRE_SPELLCASTING    = 489,  // "Grimoire: Reduces spellcasting time" bonus
+    STRATAGEM_RECAST         = 1159, // Recast reduction in seconds
 
     // Geo
     CARDINAL_CHANT       = 959,
@@ -764,24 +832,14 @@ enum class Mod
     SPECIAL_ATTACK_EVASION      = 1024, // Foil "Special Attack" evasion
     AUGMENTS_SLEIGHT_OF_SWORD   = 277,  // Enhances bonus "Subtle Blow" per merit.
 
-    // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
-    FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
-    ICE_AFFINITY_DMG     = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
-    WIND_AFFINITY_DMG    = 349, // Each level of damage affinity is +/-5% damage, acc is +/-10 acc, and perp is
-    EARTH_AFFINITY_DMG   = 350, // +/-1 mp/tic. This means that anyone adding these modifiers will have to add
-    THUNDER_AFFINITY_DMG = 351, // 1 to the wiki amount. For example, Fire Staff has 2 in fire affinity for
-    WATER_AFFINITY_DMG   = 352, // DMG, ACC, and PERP, while the wiki lists it as having 1 in each.
-    LIGHT_AFFINITY_DMG   = 353,
-    DARK_AFFINITY_DMG    = 354,
-
-    FIRE_AFFINITY_ACC    = 544,
-    ICE_AFFINITY_ACC     = 545,
-    WIND_AFFINITY_ACC    = 546,
-    EARTH_AFFINITY_ACC   = 547,
-    THUNDER_AFFINITY_ACC = 548,
-    WATER_AFFINITY_ACC   = 549,
-    LIGHT_AFFINITY_ACC   = 550,
-    DARK_AFFINITY_ACC    = 551,
+    FIRE_STAFF_BONUS    = 347,
+    ICE_STAFF_BONUS     = 348,
+    WIND_STAFF_BONUS    = 349,
+    EARTH_STAFF_BONUS   = 350,
+    THUNDER_STAFF_BONUS = 351,
+    WATER_STAFF_BONUS   = 352,
+    LIGHT_STAFF_BONUS   = 353,
+    DARK_STAFF_BONUS    = 354,
 
     FIRE_AFFINITY_PERP    = 553,
     ICE_AFFINITY_PERP     = 554,
@@ -793,8 +851,7 @@ enum class Mod
     DARK_AFFINITY_PERP    = 560,
 
     // Special Modifier+
-    ADDS_WEAPONSKILL     = 355, //
-    ADDS_WEAPONSKILL_DYN = 356, // In Dynamis
+    ADDS_WEAPONSKILL = 355, //
 
     STEALTH            = 358, //
     SNEAK_DURATION     = 946, // Additional duration in seconds
@@ -905,7 +962,7 @@ enum class Mod
     SHIELDBLOCKRATE           = 518, // Affects shield block rate, percent based
     DIA_DOT                   = 313, // Increases the DoT damage of Dia
     ENH_DRAIN_ASPIR           = 315, // % damage boost to Drain and Aspir
-    AUGMENTS_ABSORB           = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based)
+    AUGMENTS_ABSORB_LIBERATOR = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
     AMMO_SWING                = 523, // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
     AUGMENTS_CONVERT          = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA               = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
@@ -917,14 +974,6 @@ enum class Mod
     AUGMENTS_CONSPIRATOR      = 912, // Applies Conspirator benefits to player at the top of the hate list
     ENHANCES_REFRESH          = 529, // "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION     = 530, // % to not deplete MP on spellcast.
-    FORCE_FIRE_DWBONUS        = 531, // Set to above 0 to force fire day/weather spell bonus/penalty.
-    FORCE_ICE_DWBONUS         = 532, // Set to above 0 to force ice day/weather spell bonus/penalty.
-    FORCE_WIND_DWBONUS        = 533, // Set to above 0 to force wind day/weather spell bonus/penalty.
-    FORCE_EARTH_DWBONUS       = 534, // Set to above 0 to force earth day/weather spell bonus/penalty.
-    FORCE_LIGHTNING_DWBONUS   = 535, // Set to above 0 to force lightning day/weather spell bonus/penalty.
-    FORCE_WATER_DWBONUS       = 536, // Set to above 0 to force water day/weather spell bonus/penalty.
-    FORCE_LIGHT_DWBONUS       = 537, // Set to above 0 to force light day/weather spell bonus/penalty.
-    FORCE_DARK_DWBONUS        = 538, // Set to above 0 to force dark day/weather spell bonus/penalty.
     STONESKIN_BONUS_HP        = 539, // Bonus "HP" granted to Stoneskin spell.
     DAY_NUKE_BONUS            = 565, // Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
     IRIDESCENCE               = 566, // Iridescence trait (additional weather damage/penalty)
@@ -1072,12 +1121,19 @@ enum class Mod
 
     PARRY_HP_RECOVERY = 1135, // Recover <Mod Value> HP on successful parry.
 
+    // TODO: These mods are not yet implemented.
+    REWARD_RECAST = 1152, // TODO: Reward recast time reduction (seconds)
+
+    MOGHANCEMENT_GIL_BONUS_P = 1158, // Kill shot gil bonus (yes, really)
+
+    KNOCKBACK_REDUCTION = 1172, // Reduces distance knocked +? gear. See Knockback enum.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1136 and onward
+    // SPARE IDs: 1180 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

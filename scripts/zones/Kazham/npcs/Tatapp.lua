@@ -135,8 +135,6 @@ entity.onTrigger = function(player, npc)
         elseif progress >= 7 or failed >= 8 then
             player:startEvent(248) -- happy with blackened toad
         end
-    else
-        player:startEvent(203)
     end
 end
 

@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: Specified Mob Group
 -----------------------------------
-mixins = { require('scripts/mixins/families/poroggo') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 

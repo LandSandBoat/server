@@ -80,9 +80,20 @@ commandObj.onTrigger = function(player, logId, questId, target)
                 end,
             }
             playerArg:printToPlayer(string.format('Player %s status for %s quest ID %i is: %s', targ:getName(), logName, questId, statusName), xi.msg.channel.NS_LINKSHELL3)
-            playerArg:printToPlayer(string.format('Player %s variables for %s Quest %i are', targ:getName(), logName, questId), xi.msg.channel.NS_LINKSHELL3)
-            playerArg:printToPlayer(string.format('Prog: %i, Stage: %i, Option: %i, Wait %i', xi.quest.getVar(targ, logId, questId, 'Prog'),
-                xi.quest.getVar(targ, logId, questId, 'Stage'), xi.quest.getVar(targ, logId, questId, 'Option'), xi.quest.getVar(targ, logId, questId, 'Wait')), xi.msg.channel.NS_LINKSHELL3)
+            playerArg:printToPlayer(string.format('Player %s variables for %s Quest %i are:', targ:getName(), logName, questId), xi.msg.channel.NS_LINKSHELL3)
+
+            local targetQuest = xi.quest.getVarPrefix(logId, questId)
+            local questVars   = targ:getCharVarsWithPrefix(targetQuest)
+            local count       = 0
+
+            for tag, value in pairs(questVars) do
+                playerArg:printToPlayer(string.format('%s = %s', tag, value), xi.msg.channel.NS_LINKSHELL3)
+                count = count + 1
+            end
+
+            if count == 0 then
+                playerArg:printToPlayer('No variables found.', xi.msg.channel.NS_LINKSHELL3)
+            end
         end,
 
         options =

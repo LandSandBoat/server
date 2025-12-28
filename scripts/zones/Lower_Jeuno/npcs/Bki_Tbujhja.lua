@@ -25,15 +25,8 @@ end
 entity.onTrigger = function(player, npc)
     local theRequiem = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
 
-    -- PATH OF THE BARD (Bard Flag)
-    if
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_COMPLETED and
-        player:getCharVar('PathOfTheBard_Event') == 0
-    then
-        player:startEvent(182) -- mentions song runes in Valkurm
-
     -- THE REQUIEM (Bard AF2)
-    elseif
+    if
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_COMPLETED and
         theRequiem == xi.questStatus.QUEST_AVAILABLE and
         player:getMainJob() == xi.job.BRD and
@@ -70,20 +63,12 @@ entity.onTrigger = function(player, npc)
 
     elseif theRequiem == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(134) -- Standard dialog after "The Requiem"
-
-    -- DEFAULT DIALOG
-    else
-        player:startEvent(180)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- PATH OF THE BARD
-    if csid == 182 then
-        player:setCharVar('PathOfTheBard_Event', 1)
-
     -- THE REQUIEM
-    elseif csid == 145 and option == 0 then
+    if csid == 145 and option == 0 then
         player:setCharVar('TheRequiemCS', 1) -- player declines quest
     elseif
         (csid == 145 or csid == 148) and

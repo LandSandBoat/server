@@ -37,8 +37,6 @@ This tool is used to distribute the following items:
 
 Sends `<your message>` to every character, in every zone, on every map process.  
 
-
-
 Setup
 ========================
 
@@ -62,4 +60,4 @@ Download the latest version from the website or check your package manager.
 
 ## Other
 `./install-systemd-service.sh` - Installs a systemd service for running the servers on Linux.  
-`./run_clang_format.sh` - Formats C++ code. Run from repo root.  
+`./run_clang_format.py` - Formats C++ code. Run from repo root.  

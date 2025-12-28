@@ -27,7 +27,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(3028, { text_table = 0 })
+                        return mission:progressEvent(3028, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
                     end
                 end,
             },

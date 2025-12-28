@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@
 #include "common/timer.h"
 #include "roe.h"
 
-#include "packets/treasure_find_item.h"
-#include "packets/treasure_lot_item.h"
+#include "packets/s2c/0x0d2_trophy_list.h"
+#include "packets/s2c/0x0d3_trophy_solution.h"
 
 #include "item_container.h"
 #include "recast_container.h"
@@ -32,10 +32,10 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-static constexpr duration treasure_checktime = 3s;
-static constexpr duration treasure_livetime  = 5min;
+static constexpr timer::duration treasure_checktime = 3s;
+static constexpr timer::duration treasure_livetime  = 5min;
 
-CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType)
+CTreasurePool::CTreasurePool(const TreasurePoolType PoolType)
 : m_count(0)
 , m_TreasurePoolType(PoolType)
 {
@@ -44,15 +44,41 @@ CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType)
         m_PoolItems[i].ID     = 0;
         m_PoolItems[i].SlotID = i;
     }
-    members.reserve(PoolType);
+
+    m_Members.reserve(static_cast<std::size_t>(PoolType));
 }
 
-TREASUREPOOLTYPE CTreasurePool::GetPoolType()
+auto CTreasurePool::getPoolType() const -> TreasurePoolType
 {
     return m_TreasurePoolType;
 }
 
-void CTreasurePool::AddMember(CCharEntity* PChar)
+auto CTreasurePool::getItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&
+{
+    return m_PoolItems;
+}
+
+auto CTreasurePool::itemCount() const -> uint8
+{
+    return m_count;
+}
+
+auto CTreasurePool::getMembers() const -> const std::vector<CCharEntity*>&
+{
+    return m_Members;
+}
+
+auto CTreasurePool::memberCount() const -> size_t
+{
+    return m_Members.size();
+}
+
+bool CTreasurePool::isMember(const CCharEntity* PChar)
+{
+    return std::find(m_Members.begin(), m_Members.end(), PChar) != m_Members.end();
+}
+
+void CTreasurePool::addMember(CCharEntity* PChar)
 {
     if (PChar == nullptr || PChar->PTreasurePool != this)
     {
@@ -60,25 +86,27 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
         return;
     }
 
-    if (std::find(members.begin(), members.end(), PChar) != members.end())
+    if (std::find(m_Members.begin(), m_Members.end(), PChar) != m_Members.end())
     {
         ShowWarning("CTreasurePool::AddMember() - PChar was already in the members list!");
         return;
     }
 
-    members.emplace_back(PChar);
+    m_Members.emplace_back(PChar);
 
-    if (m_TreasurePoolType == TREASUREPOOL_SOLO && members.size() > 1)
+    if (m_TreasurePoolType == TreasurePoolType::Solo && PChar->PParty)
     {
-        m_TreasurePoolType = TREASUREPOOL_PARTY;
+        m_TreasurePoolType = TreasurePoolType::Party;
     }
-    else if (m_TreasurePoolType == TREASUREPOOL_PARTY && members.size() > 6)
+    else if (m_TreasurePoolType == TreasurePoolType::Party && PChar->PParty && PChar->PParty->m_PAlliance)
     {
-        m_TreasurePoolType = TREASUREPOOL_ALLIANCE;
+        m_TreasurePoolType = TreasurePoolType::Alliance;
     }
+
+    updatePool(PChar);
 }
 
-void CTreasurePool::DelMember(CCharEntity* PChar)
+void CTreasurePool::delMember(CCharEntity* PChar)
 {
     if (PChar == nullptr || PChar->PTreasurePool != this)
     {
@@ -97,30 +125,29 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
             while (lotterIterator != m_PoolItems[i].Lotters.end())
             {
                 // remove their lot info
-                LotInfo* info = &(*lotterIterator);
-                if (PChar->id == info->member->id)
+                if (LotInfo* info = &(*lotterIterator); PChar->id == info->member->id)
                 {
                     lotterIterator = m_PoolItems[i].Lotters.erase(lotterIterator);
                     continue;
                 }
-                lotterIterator++;
+                ++lotterIterator;
             }
         }
     }
 
-    auto memberToDelete = std::find(members.begin(), members.end(), PChar);
-    if (memberToDelete != members.end())
+    auto memberToDelete = std::find(m_Members.begin(), m_Members.end(), PChar);
+    if (memberToDelete != m_Members.end())
     {
         PChar->PTreasurePool = nullptr;
-        members.erase(memberToDelete);
+        m_Members.erase(memberToDelete);
     }
 
-    if ((m_TreasurePoolType == TREASUREPOOL_PARTY || m_TreasurePoolType == TREASUREPOOL_ALLIANCE) && members.size() == 1)
+    if ((m_TreasurePoolType == TreasurePoolType::Party || m_TreasurePoolType == TreasurePoolType::Alliance) && memberCount() == 1)
     {
-        m_TreasurePoolType = TREASUREPOOL_SOLO;
+        m_TreasurePoolType = TreasurePoolType::Solo;
     }
 
-    if (m_TreasurePoolType != TREASUREPOOL_ZONE && members.empty())
+    if (m_TreasurePoolType != TreasurePoolType::Zone && memberCount() == 0)
     {
         // TODO: This entire system needs rewriting to both:
         //     : - Make it stable
@@ -136,12 +163,12 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
+uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
 {
-    uint8      SlotID     = 0;
-    uint8      FreeSlotID = -1;
-    time_point oldest     = time_point::max();
-    CItem*     PNewItem   = itemutils::GetItemPointer(ItemID);
+    uint8             SlotID     = 0;
+    uint8             FreeSlotID = -1;
+    timer::time_point oldest     = timer::time_point::max();
+    CItem*            PNewItem   = itemutils::GetItemPointer(ItemID);
 
     if (!PNewItem)
     {
@@ -153,7 +180,7 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
     {
         bool doesNotHaveRareItem = false;
 
-        for (const auto& member : members)
+        for (const auto& member : m_Members)
         {
             // Someone doesn't have the rare item
             if (!charutils::HasItem(member, PNewItem->getID()))
@@ -168,19 +195,6 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
         {
             return m_count; // no change
         }
-    }
-
-    switch (ItemID)
-    {
-        case 1126: // beastmen seal
-        case 1127: // kindred seal
-        case 2955: // kindred crest
-        case 2956: // high kindred crest
-            for (auto& member : members)
-            {
-                member->PRecastContainer->Add(RECAST_LOOT, 1, 300); // 300 = 5 min cooldown
-            }
-            break;
     }
 
     for (SlotID = 0; SlotID < 10; ++SlotID)
@@ -240,28 +254,30 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 
     if (SlotID == 10)
     {
-        m_PoolItems[FreeSlotID].TimeStamp = get_server_start_time();
-        CheckTreasureItem(server_clock::now(), FreeSlotID);
+        m_PoolItems[FreeSlotID].TimeStamp = timer::start_time;
+        checkTreasureItem(timer::now(), FreeSlotID);
     }
 
     m_count++;
     m_PoolItems[FreeSlotID].ID        = ItemID;
-    m_PoolItems[FreeSlotID].TimeStamp = server_clock::now() - treasure_checktime;
+    m_PoolItems[FreeSlotID].TimeStamp = timer::now() - treasure_checktime;
 
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureFindItemPacket>(&m_PoolItems[FreeSlotID], PEntity, false);
+        // Issue RoE event for loot item and issue treasure pool packet
+        roeutils::event(ROE_EVENT::ROE_LOOTITEM, member, RoeDatagram("itemid", m_PoolItems[FreeSlotID].ID));
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_LIST>(&m_PoolItems[FreeSlotID], PEntity, false);
     }
 
-    if (m_TreasurePoolType == TREASUREPOOL_SOLO)
+    if (memberCount() == 1)
     {
-        CheckTreasureItem(server_clock::now(), FreeSlotID);
+        checkTreasureItem(timer::now(), FreeSlotID);
     }
 
     return m_count;
 }
 
-void CTreasurePool::UpdatePool(CCharEntity* PChar)
+void CTreasurePool::updatePool(CCharEntity* PChar)
 {
     if (PChar == nullptr || PChar->PTreasurePool != this)
     {
@@ -273,7 +289,20 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
     {
         for (auto& m_PoolItem : m_PoolItems)
         {
-            PChar->pushPacket<CTreasureFindItemPacket>(&m_PoolItem, nullptr, true);
+            PChar->pushPacket<GP_SERV_COMMAND_TROPHY_LIST>(&m_PoolItem, nullptr, true);
+        }
+    }
+}
+
+void CTreasurePool::flush()
+{
+    if (m_count != 0)
+    {
+        const auto tick = timer::now() + treasure_checktime + 1s;
+
+        for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
+        {
+            checkTreasureItem(tick, i);
         }
     }
 }
@@ -284,7 +313,7 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
+void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 {
     if (PChar == nullptr || PChar->PTreasurePool != this)
     {
@@ -297,7 +326,7 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
         return;
     }
 
-    CItem* PItem = itemutils::GetItem(m_PoolItems[SlotID].ID);
+    CItem* PItem = itemutils::GetItemPointer(m_PoolItems[SlotID].ID);
     if (PItem == nullptr)
     {
         ShowWarning(fmt::format("Player {} is trying to lot on an item that doesn't exist (PItem was nullptr) (Packet injection?)!", PChar->getName()).c_str());
@@ -337,19 +366,19 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // Player lots Item for XXX message
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, Lot);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(highestLotter, highestLot, PChar, SlotID, Lot);
     }
 
     // if all lotters have lotted, evaluate immediately.
-    if (m_PoolItems[SlotID].Lotters.size() == members.size())
+    if (m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
-        CheckTreasureItem(m_Tick, SlotID);
+        checkTreasureItem(m_Tick, SlotID);
     }
 }
 
-void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
+void CTreasurePool::passItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (PChar == nullptr || PChar->PTreasurePool != this)
     {
@@ -397,28 +426,26 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
 
     uint16 PassedLot = 65535; // passed mask is FF FF
     // Player lots Item for XXX message
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, PassedLot);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(highestLotter, highestLot, PChar, SlotID, PassedLot);
     }
 
     // if all lotters have lotted, evaluate immediately.
-    if (m_PoolItems[SlotID].Lotters.size() == members.size())
+    if (m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
-        CheckTreasureItem(m_Tick, SlotID);
+        checkTreasureItem(m_Tick, SlotID);
     }
 }
 
-bool CTreasurePool::HasLottedItem(CCharEntity* PChar, uint8 SlotID)
+bool CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {
         return false;
     }
 
-    std::vector<LotInfo> lotters = m_PoolItems[SlotID].Lotters;
-
-    for (auto& lotter : lotters)
+    for (const auto& lotter : m_PoolItems[SlotID].Lotters)
     {
         if (lotter.member->id == PChar->id)
         {
@@ -429,16 +456,14 @@ bool CTreasurePool::HasLottedItem(CCharEntity* PChar, uint8 SlotID)
     return false;
 }
 
-bool CTreasurePool::HasPassedItem(CCharEntity* PChar, uint8 SlotID)
+bool CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID)
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {
         return false;
     }
 
-    std::vector<LotInfo> lotters = m_PoolItems[SlotID].Lotters;
-
-    for (auto& lotter : lotters)
+    for (auto& lotter : m_PoolItems[SlotID].Lotters)
     {
         if (lotter.member->id == PChar->id)
         {
@@ -449,7 +474,7 @@ bool CTreasurePool::HasPassedItem(CCharEntity* PChar, uint8 SlotID)
     return false;
 }
 
-void CTreasurePool::CheckItems(time_point tick)
+void CTreasurePool::checkItems(timer::time_point tick)
 {
     if (m_count != 0)
     {
@@ -457,14 +482,14 @@ void CTreasurePool::CheckItems(time_point tick)
         {
             for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
             {
-                CheckTreasureItem(tick, i);
+                checkTreasureItem(tick, i);
             }
             m_Tick = tick;
         }
     }
 }
 
-void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
+void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
 {
     if (m_PoolItems[SlotID].ID == 0)
     {
@@ -472,8 +497,8 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
     }
 
     if ((tick - m_PoolItems[SlotID].TimeStamp) > treasure_livetime ||
-        (m_TreasurePoolType == TREASUREPOOL_SOLO && members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
-        m_PoolItems[SlotID].Lotters.size() == members.size())
+        (memberCount() == 1 && m_Members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
+        m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
         // Find item's highest lotter
         LotInfo highestInfo;
@@ -494,31 +519,31 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
                 // add item as they have room!
                 if (charutils::AddItem(highestInfo.member, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
                 {
-                    TreasureWon(highestInfo.member, SlotID);
+                    treasureWon(highestInfo.member, SlotID);
                 }
                 else
                 {
-                    TreasureError(highestInfo.member, SlotID);
+                    treasureError(highestInfo.member, SlotID);
                 }
             }
             else
             {
                 // drop the item
-                TreasureLost(SlotID);
+                treasureLost(SlotID);
             }
         }
         else
         {
             // No one has lotted on this item - Give to random member who has not passed
             std::vector<CCharEntity*> candidates;
-            for (auto& member : members)
+            for (auto& member : m_Members)
             {
-                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
+                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItemPointer(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
                 {
                     continue;
                 }
 
-                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(member, SlotID))
+                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !hasPassedItem(member, SlotID))
                 {
                     candidates.emplace_back(member);
                 }
@@ -526,7 +551,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
 
             if (candidates.empty())
             {
-                TreasureLost(SlotID);
+                treasureLost(SlotID);
             }
             else
             {
@@ -534,18 +559,18 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
                 CCharEntity* PChar = candidates.at(xirand::GetRandomNumber(candidates.size()));
                 if (charutils::AddItem(PChar, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
                 {
-                    TreasureWon(PChar, SlotID);
+                    treasureWon(PChar, SlotID);
                 }
                 else
                 {
-                    TreasureError(PChar, SlotID);
+                    treasureError(PChar, SlotID);
                 }
             }
         }
     }
 }
 
-void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
+void CTreasurePool::treasureWon(CCharEntity* winner, uint8 SlotID)
 {
     if (winner == nullptr || winner->PTreasurePool != this || m_PoolItems[SlotID].ID == 0)
     {
@@ -553,13 +578,11 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
         return;
     }
 
-    m_PoolItems[SlotID].TimeStamp = get_server_start_time();
+    m_PoolItems[SlotID].TimeStamp = timer::start_time;
 
-    roeutils::event(ROE_EVENT::ROE_LOOTITEM, winner, RoeDatagram("itemid", m_PoolItems[SlotID].ID));
-
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, 0, ITEMLOT_WIN);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(winner, SlotID, 0, GP_TROPHY_SOLUTION_STATE::Win);
     }
     m_count--;
 
@@ -567,7 +590,7 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
     m_PoolItems[SlotID].Lotters.clear();
 }
 
-void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
+void CTreasurePool::treasureError(CCharEntity* winner, uint8 SlotID)
 {
     if (winner == nullptr || winner->PTreasurePool != this || m_PoolItems[SlotID].ID == 0)
     {
@@ -575,11 +598,11 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
         return;
     }
 
-    m_PoolItems[SlotID].TimeStamp = get_server_start_time();
+    m_PoolItems[SlotID].TimeStamp = timer::start_time;
 
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, -1, ITEMLOT_WINERROR);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(winner, SlotID, -1, GP_TROPHY_SOLUTION_STATE::WinError);
     }
     m_count--;
 
@@ -587,7 +610,7 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
     m_PoolItems[SlotID].Lotters.clear();
 }
 
-void CTreasurePool::TreasureLost(uint8 SlotID)
+void CTreasurePool::treasureLost(uint8 SlotID)
 {
     if (m_PoolItems[SlotID].ID == 0)
     {
@@ -595,27 +618,14 @@ void CTreasurePool::TreasureLost(uint8 SlotID)
         return;
     }
 
-    m_PoolItems[SlotID].TimeStamp = get_server_start_time();
+    m_PoolItems[SlotID].TimeStamp = timer::start_time;
 
-    for (auto& member : members)
+    for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(SlotID, ITEMLOT_WINERROR);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(SlotID, GP_TROPHY_SOLUTION_STATE::WinError);
     }
     m_count--;
 
     m_PoolItems[SlotID].ID = 0;
     m_PoolItems[SlotID].Lotters.clear();
-}
-
-bool CTreasurePool::CanAddSeal()
-{
-    for (auto& member : members)
-    {
-        if (member->PRecastContainer->Has(RECAST_LOOT, 1))
-        {
-            return false;
-        }
-    }
-
-    return true;
 }

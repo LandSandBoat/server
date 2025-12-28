@@ -34,8 +34,12 @@ INSERT INTO `blue_traits` VALUES (11,2,4,1,10);
 INSERT INTO `blue_traits` VALUES (12,2,33,229,8);
 INSERT INTO `blue_traits` VALUES (13,2,6,29,10);
 INSERT INTO `blue_traits` VALUES (14,8,10,369,1);
-INSERT INTO `blue_traits` VALUES (15,2,7,2,30);
-INSERT INTO `blue_traits` VALUES (15,4,7,2,90);
+INSERT INTO `blue_traits` VALUES (15,8,7,1095,30);   -- Max HP Boost 1
+INSERT INTO `blue_traits` VALUES (15,16,7,1095,60);  -- Max HP Boost 2
+INSERT INTO `blue_traits` VALUES (15,24,7,1095,120); -- Max HP Boost 3
+INSERT INTO `blue_traits` VALUES (15,32,7,1095,180); -- Max HP Boost 4
+-- INSERT INTO `blue_traits` VALUES (15,4,7,1095,240); -- Max HP Boost 5 TODO: Through BLU Job Point Gift 100 "Job Trait Bonus"
+-- INSERT INTO `blue_traits` VALUES (15,4,7,1095,280); -- Max HP Boost 6 TODO: Through BLU Job Point Gift 1200 "Job Trait Bonus"
 INSERT INTO `blue_traits` VALUES (16,2,1,25,10);
 INSERT INTO `blue_traits` VALUES (16,2,1,26,10);
 INSERT INTO `blue_traits` VALUES (17,2,13,296,25);
@@ -54,5 +58,5 @@ INSERT INTO `blue_traits` VALUES (25,4,18,259,15);
 INSERT INTO `blue_traits` VALUES (25,6,18,259,25);
 INSERT INTO `blue_traits` VALUES (26,2,70,306,15);
 INSERT INTO `blue_traits` VALUES (27,2,110,487,5);
-INSERT INTO `blue_traits` VALUES (28,2,20,897,50);
+INSERT INTO `blue_traits` VALUES (28,2,20,897,1);
 INSERT INTO `blue_traits` VALUES (28,3,19,303,1);

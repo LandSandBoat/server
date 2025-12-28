@@ -170,16 +170,16 @@ bool CTradeContainer::setConfirmedStatus(uint8 slotID, uint32 amount)
     return false;
 }
 
-void CTradeContainer::setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint32 quantity, CItem* item)
+void CTradeContainer::setItem(const uint8 slotId, const uint16 itemId, const uint8 invSlotId, const uint32 quantity, CItem* item)
 {
-    if (slotID < m_PItem.size())
+    if (slotId < m_PItem.size())
     {
         m_ItemsCount += 1;
 
-        m_PItem[slotID]    = item;
-        m_itemID[slotID]   = itemID;
-        m_slotID[slotID]   = invSlotID;
-        m_quantity[slotID] = quantity;
+        m_PItem[slotId]    = item;
+        m_itemID[slotId]   = itemId;
+        m_slotID[slotId]   = invSlotId;
+        m_quantity[slotId] = quantity;
     }
 }
 

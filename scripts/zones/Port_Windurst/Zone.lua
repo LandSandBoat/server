@@ -11,30 +11,25 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = { -1 }
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
         if prevZone == xi.zone.WINDURST_JEUNO_AIRSHIP then
-            cs = { 10004 }
             player:setPos(228.000, -3.000, 76.000, 160)
-        else
-            local position = math.random(1, 5) + 195
-            player:setPos(position, -15.56, 258, 65)
+            return 10004
         end
     end
 
-    return cs
+    return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(10002)
 end
 

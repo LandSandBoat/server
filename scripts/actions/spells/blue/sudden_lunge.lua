@@ -21,34 +21,41 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.VERMIN
-    params.tpmod = xi.spells.blue.tpMod.DAMAGE
+    params.ecosystem  = xi.ecosystem.VERMIN
+    params.tpmod      = xi.spells.blue.tpMod.DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
-    params.scattr = xi.skillchainType.DETONATION
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.numhits = 1
+    params.scattr     = xi.skillchainType.DETONATION
+    params.attribute  = xi.mod.INT
+    params.skillType  = xi.skill.BLUE_MAGIC
+    params.numhits    = 1
     params.multiplier = 1.5
-    params.tp150 = 2.5
-    params.tp300 = 3
-    params.azuretp = 3.5
-    params.duppercap = 100
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.4
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 2.5
+    params.tp300      = 3
+    params.azuretp    = 3.5
+    params.duppercap  = 100
+    params.str_wsc    = 0.0
+    params.dex_wsc    = 0.0
+    params.vit_wsc    = 0.0
+    params.agi_wsc    = 0.4
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.STUN
-    local power = 1
-    local tick = 0
-    local duration = 5
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.STUN, 1, 0, 5 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

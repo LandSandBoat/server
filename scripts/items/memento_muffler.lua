@@ -17,8 +17,15 @@ end
 
 itemObject.onItemUse = function(target)
     if target:hasEquipped(xi.item.MEMENTO_MUFFLER) then
-        target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MEMENTO_MUFFLER)
+        target:addStatusEffect(xi.effect.VIT_BOOST, 0, 0, 300, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MEMENTO_MUFFLER)
     end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, 7)
+end
+
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject

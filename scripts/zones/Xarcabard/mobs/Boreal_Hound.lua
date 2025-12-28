@@ -91,8 +91,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setBaseSpeed(baseSpeed)
     -- Failsafe to make sure NPC is down when NM is up
     if xi.settings.main.OLDSCHOOL_G2 then

@@ -21,6 +21,8 @@
 
 #include "guildutils.h"
 
+#include "common/database.h"
+#include "common/logging.h"
 #include "common/vana_time.h"
 
 #include <vector>
@@ -31,7 +33,6 @@
 #include "guild.h"
 #include "item_container.h"
 #include "itemutils.h"
-#include "map.h"
 #include "serverutils.h"
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild
@@ -39,168 +40,174 @@
 std::vector<CGuild*>         g_PGuildList;
 std::vector<CItemContainer*> g_PGuildShopList;
 
-/************************************************************************
- *                                                                      *
- *                                                                      *
- *                                                                      *
- ************************************************************************/
-
 namespace guildutils
 {
-    void Initialize()
+
+void Initialize()
+{
+    auto rset = db::preparedStmt("SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC");
+    if (rset)
     {
-        const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC";
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
-        {
-            g_PGuildList.reserve((unsigned int)_sql->NumRows());
+        g_PGuildList.reserve(rset->rowsCount());
+    }
 
-            while (_sql->NextRow() == SQL_SUCCESS)
-            {
-                g_PGuildList.emplace_back(new CGuild(_sql->GetIntData(0), _sql->GetStringData(1)));
-            }
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        g_PGuildList.emplace_back(new CGuild(rset->get<uint8>("id"), rset->get<std::string>("points_name")));
+    }
+
+    if (g_PGuildShopList.size() != 0)
+    {
+        ShowWarning("g_PGuildShopList contains information prior to initialization.");
+        return;
+    }
+
+    rset = db::preparedStmt("SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256");
+    if (rset)
+    {
+        g_PGuildShopList.reserve(rset->rowsCount());
+    }
+
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        g_PGuildShopList.emplace_back(new CItemContainer(rset->get<uint16>("guildid")));
+    }
+
+    for (auto* PGuildShop : g_PGuildShopList)
+    {
+        rset = db::preparedStmt("SELECT gs.itemid, gs.min_price, gs.max_price, gs.max_quantity, gs.daily_increase, gs.initial_quantity, ib.flags "
+                                "FROM guild_shops gs "
+                                "JOIN item_basic ib ON gs.itemid = ib.itemid "
+                                "WHERE gs.guildid = ? "
+                                "LIMIT ?",
+                                PGuildShop->GetID(),
+                                MAX_CONTAINER_SIZE);
+        if (rset)
+        {
+            PGuildShop->SetSize(static_cast<uint8>(rset->rowsCount()));
         }
 
-        if (g_PGuildShopList.size() != 0)
+        FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            ShowWarning("g_PGuildShopList contains information prior to initialization.");
-            return;
+            auto* PItem = new CItemShop(rset->get<uint32>("itemid"));
+
+            PItem->setMinPrice(rset->get<uint32>("min_price"));
+            PItem->setMaxPrice(rset->get<uint32>("max_price"));
+            PItem->setStackSize(rset->get<uint32>("max_quantity"));
+            PItem->setDailyIncrease(rset->get<uint16>("daily_increase"));
+            PItem->setInitialQuantity(rset->get<uint16>("initial_quantity"));
+            PItem->setFlag(rset->get<uint16>("flags"));
+
+            PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
+            PItem->setBasePrice(getItemDynamicBasePrice(PItem));
+
+            PGuildShop->InsertItem(PItem);
         }
+    }
 
-        fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256";
+    UpdateGuildPointsPattern();
+}
 
-        if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
+void Cleanup()
+{
+    // Delete pointers and cleanup vectors manually
+    for (auto guild : g_PGuildList)
+    {
+        destroy(guild);
+    }
+
+    g_PGuildList.clear();
+
+    for (auto itemContainer : g_PGuildShopList)
+    {
+        destroy(itemContainer);
+    }
+
+    g_PGuildShopList.clear();
+}
+
+void UpdateGuildsStock()
+{
+    for (const auto* PGuildShop : g_PGuildShopList)
+    {
+        for (uint8 slotid = 1; slotid <= PGuildShop->GetSize(); ++slotid)
         {
-            g_PGuildShopList.reserve((unsigned int)_sql->NumRows());
-
-            while (_sql->NextRow() == SQL_SUCCESS)
+            if (auto* PItem = static_cast<CItemShop*>(PGuildShop->GetItem(slotid)))
             {
-                g_PGuildShopList.emplace_back(new CItemContainer(_sql->GetIntData(0)));
-            }
-        }
-        for (auto* PGuildShop : g_PGuildShopList)
-        {
-            fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity \
-                    FROM guild_shops \
-                    WHERE guildid = %u \
-                    LIMIT %u";
+                PItem->setBasePrice(getItemDynamicBasePrice(PItem));
 
-            int32 ret = _sql->Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
-
-            if (ret != SQL_ERROR && _sql->NumRows() != 0)
-            {
-                PGuildShop->SetSize((uint8)_sql->NumRows());
-
-                while (_sql->NextRow() == SQL_SUCCESS)
+                if (PItem->IsDailyIncrease())
                 {
-                    CItemShop* PItem = new CItemShop(_sql->GetIntData(0));
-
-                    PItem->setMinPrice(_sql->GetIntData(1));
-                    PItem->setMaxPrice(_sql->GetIntData(2));
-                    PItem->setStackSize(_sql->GetIntData(3));
-                    PItem->setDailyIncrease(_sql->GetIntData(4));
-                    PItem->setInitialQuantity(_sql->GetIntData(5));
-
-                    PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
-
-                    PGuildShop->InsertItem(PItem);
+                    PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
                 }
             }
         }
-
-        UpdateGuildPointsPattern();
     }
 
-    void Cleanup()
+    ShowDebug("UpdateGuildsStock is finished");
+}
+
+void UpdateGuildPointsPattern()
+{
+    // TODO: This function can be faulty when dealing with multiple processes. Needs to be synchronized properly across servers.
+    const auto jstDayOfYear = earth_time::jst::get_yearday();
+    const bool doUpdate     = serverutils::GetServerVar("[GUILD]pattern_update") != jstDayOfYear;
+
+    uint8 pattern = xirand::GetRandomNumber(8);
+    if (doUpdate)
     {
-        // Delete pointers and cleanup vectors manually
-        for (auto guild : g_PGuildList)
-        {
-            destroy(guild);
-        }
-        g_PGuildList.clear();
-
-        for (auto itemContainer : g_PGuildShopList)
-        {
-            destroy(itemContainer);
-        }
-        g_PGuildList.clear();
+        // write the new pattern and update time to try to prevent other servers from updating the pattern
+        serverutils::SetServerVar("[GUILD]pattern_update", jstDayOfYear);
+        serverutils::SetServerVar("[GUILD]pattern", pattern);
     }
-
-    void UpdateGuildsStock()
+    else
     {
-        for (auto* PGuildShop : g_PGuildShopList)
-        {
-            for (uint8 slotid = 1; slotid <= PGuildShop->GetSize(); ++slotid)
-            {
-                CItemShop* PItem = (CItemShop*)PGuildShop->GetItem(slotid);
-
-                if (PItem != nullptr)
-                {
-                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
-
-                    if (PItem->IsDailyIncrease())
-                    {
-                        PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
-                    }
-                }
-            }
-        }
-        ShowDebug("UpdateGuildsStock is finished");
+        // load the pattern in case it was set by another server (and this server did not set it)
+        pattern = serverutils::GetServerVar("[GUILD]pattern");
     }
 
-    void UpdateGuildPointsPattern()
+    for (const auto PGuild : g_PGuildList)
     {
-        // TODO: This function can be faulty when dealing with multiple processes. Needs to be synchronized properly across servers.
-
-        bool doUpdate = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != CVanaTime::getInstance()->getJstYearDay();
-
-        uint8 pattern = xirand::GetRandomNumber(8);
-        if (doUpdate)
-        {
-            // write the new pattern and update time to try to prevent other servers from updating the pattern
-            serverutils::SetServerVar("[GUILD]pattern_update", CVanaTime::getInstance()->getJstYearDay());
-            serverutils::SetServerVar("[GUILD]pattern", pattern);
-            charutils::ClearCharVarFromAll("[GUILD]daily_points");
-        }
-        else
-        {
-            // load the pattern in case it was set by another server (and this server did not set it)
-            pattern = serverutils::GetServerVar("[GUILD]pattern");
-            charutils::ClearCharVarFromAll("[GUILD]daily_points", true);
-        }
-
-        for (auto PGuild : g_PGuildList)
-        {
-            PGuild->updateGuildPointsPattern(pattern);
-        }
-
-        ShowDebug("Guild point pattern update has finished. New pattern: %d", pattern);
+        PGuild->updateGuildPointsPattern(pattern);
     }
 
-    CItemContainer* GetGuildShop(uint16 GuildShopID)
+    ShowDebug("Guild point pattern update has finished. New pattern: %d", pattern);
+}
+
+auto GetGuildShop(const uint16 guildShopId) -> CItemContainer*
+{
+    for (auto* PGuildShop : g_PGuildShopList)
     {
-        for (auto* PGuildShop : g_PGuildShopList)
+        if (PGuildShop->GetID() == guildShopId)
         {
-            if (PGuildShop->GetID() == GuildShopID)
-            {
-                return PGuildShop;
-            }
+            return PGuildShop;
         }
-        ShowDebug("GuildShop with id <%u> is not found on server", GuildShopID);
-        return nullptr;
     }
 
-    CGuild* GetGuild(uint8 GuildID)
+    ShowDebug("GuildShop with id <%u> is not found on server", guildShopId);
+    return nullptr;
+}
+
+auto GetGuild(const uint8 guildId) -> CGuild*
+{
+    if (guildId < g_PGuildList.size())
     {
-        if (GuildID < g_PGuildList.size())
-        {
-            return g_PGuildList.at(GuildID);
-        }
-        ShowDebug("Guild with id <%u> is not found on server", GuildID);
-        return nullptr;
+        return g_PGuildList.at(guildId);
     }
+
+    ShowDebug("Guild with id <%u> is not found on server", guildId);
+    return nullptr;
+}
+
+auto getItemDynamicBasePrice(const CItemShop* PItem) -> uint32
+{
+    // Calculate how much of the stock has been depleted (0.0 = full, 1.0 = empty)
+    const float depletionRatio = static_cast<float>(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize();
+    // Delta between min and max price
+    const uint32 priceRange = PItem->getMaxPrice() - PItem->getMinPrice();
+
+    // Price increases as stock depletes: min price + (depletion * price range)
+    return PItem->getMinPrice() + static_cast<uint32>(depletionRatio * priceRange);
+}
 
 } // namespace guildutils

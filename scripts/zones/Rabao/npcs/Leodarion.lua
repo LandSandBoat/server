@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(91)
         elseif
             illTakeTheBigBoxCS == 3 and
-            VanadielDayOfTheYear() == player:getCharVar('illTakeTheBigBox_Timer')
+            VanadielUniqueDay() == player:getCharVar('illTakeTheBigBox_Timer')
         then
             player:startEvent(93)
         elseif illTakeTheBigBoxCS == 3 then
@@ -56,7 +56,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('illTakeTheBigBoxCS', 2)
     elseif csid == 92 then
         player:tradeComplete()
-        player:setCharVar('illTakeTheBigBox_Timer', VanadielDayOfTheYear())
+        player:setCharVar('illTakeTheBigBox_Timer', VanadielUniqueDay())
         player:setCharVar('illTakeTheBigBoxCS', 3)
     elseif csid == 94 then
         player:setCharVar('illTakeTheBigBox_Timer', 0)

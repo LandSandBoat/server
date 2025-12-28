@@ -319,7 +319,6 @@
     LIGHT_AFFINITY_DMG           = 353,
     DARK_AFFINITY_DMG            = 354,
     ADDS_WEAPONSKILL             = 355, //
-    ADDS_WEAPONSKILL_DYN         = 356, // In Dynamis
     BP_DELAY                     = 357, // stores blood pact delay reduction
     STEALTH                      = 358, //
     RAPID_SHOT                   = 359, // Percent chance to proc rapid shot

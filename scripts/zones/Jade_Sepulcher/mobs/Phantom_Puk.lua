@@ -8,26 +8,25 @@ mixins = { require('scripts/mixins/families/puk') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-end
-
-entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.REQUIEM)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
+
+    mob:setMod(xi.mod.WIND_ABSORB, 100)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('boreas_mantle', os.time() + math.random(15, 45))
+    mob:setLocalVar('boreas_mantle', GetSystemTime() + math.random(15, 45))
 end
 
 entity.onMobFight = function(mob, target)
-    local now = os.time()
-    if mob:getLocalVar('boreas_mantle') <= now then
+    local currentTime = GetSystemTime()
+    if mob:getLocalVar('boreas_mantle') <= currentTime then
         mob:useMobAbility(xi.mobSkill.BOREAS_MANTLE, mob)
-        mob:setLocalVar('boreas_mantle', now + math.random(60, 90))
+        mob:setLocalVar('boreas_mantle', currentTime + math.random(60, 90))
     end
 end
 
@@ -37,7 +36,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local clone = GetMobByID(cloneID)
         if clone then
             local action = clone:getCurrentAction()
-            if action ~= xi.act.NONE and action ~= xi.act.DEATH then
+            if action ~= xi.action.category.NONE and action ~= xi.action.category.DEATH then
                 DespawnMob(cloneID)
             end
         end

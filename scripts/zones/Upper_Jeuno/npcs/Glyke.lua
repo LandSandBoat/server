@@ -2,31 +2,29 @@
 -- Area: Upper Jeuno
 --  NPC: Glyke
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4499,   92,    -- Iron Bread
-        4408,  128,    -- Tortilla
-        4356,  184,    -- White Bread
-        4416, 1400,    -- Pea Soup
-        4456, 2070,    -- Boiled Crab
-        4437,  662,    -- Roast Mutton
-        4406,  440,    -- Baked Apple
-        4555, 1711,    -- Windurst Salad
-        4559, 4585,    -- Herb Quus
-        4422,  184,    -- Orange Juice
-        4423,  276,    -- Apple Juice
-        4442,  368,    -- Pineapple Juice
-        4424, 1012,    -- Mellon Juice
-        4441,  855,    -- Grape Juice
+        { xi.item.LOAF_OF_IRON_BREAD,         100 },
+        { xi.item.TORTILLA,                   140 },
+        { xi.item.LOAF_OF_WHITE_BREAD,        200 },
+        { xi.item.BOWL_OF_PEA_SOUP,          1400 },
+        { xi.item.BOILED_CRAB,               2250 },
+        { xi.item.SLICE_OF_ROAST_MUTTON,      720 },
+        { xi.item.BAKED_APPLE,                440 },
+        { xi.item.WINDURST_SALAD,            1860 },
+        { xi.item.SERVING_OF_HERB_QUUS,      4984 },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,     200 },
+        { xi.item.BOTTLE_OF_APPLE_JUICE,      300 },
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  400 },
+        { xi.item.BOTTLE_OF_MELON_JUICE,     1100 },
+        { xi.item.BOTTLE_OF_GRAPE_JUICE,      930 },
     }
 
-    player:showText(npc, ID.text.GLYKE_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.UPPER_JEUNO].text.GLYKE_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

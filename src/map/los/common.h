@@ -60,7 +60,7 @@ struct BoundingBox
         return (getAxisMax(axis) - axisMin) / 2 + axisMin;
     }
 
-    void expandTo(BoundingBox const& other)
+    void expandTo(const BoundingBox& other)
     {
         if (other.coords[0] < coords[0])
         {
@@ -98,12 +98,12 @@ struct Vector3D
     float z;
 
     // Addition
-    Vector3D operator+(Vector3D const& vec)
+    Vector3D operator+(const Vector3D& vec)
     {
         return Vector3D{ x + vec.x, y + vec.y, z + vec.z };
     }
 
-    Vector3D& operator+=(Vector3D const& vec)
+    Vector3D& operator+=(const Vector3D& vec)
     {
         x += vec.x;
         y += vec.y;
@@ -112,12 +112,12 @@ struct Vector3D
     }
 
     // Subtraction
-    Vector3D operator-(Vector3D const& vec)
+    Vector3D operator-(const Vector3D& vec)
     {
         return Vector3D{ x - vec.x, y - vec.y, z - vec.z };
     }
 
-    Vector3D& operator-=(Vector3D const& vec)
+    Vector3D& operator-=(const Vector3D& vec)
     {
         x -= vec.x;
         y -= vec.y;
@@ -154,7 +154,7 @@ struct Vector3D
     }
 
     // Misc other
-    Vector3D crossProduct(Vector3D const& other) const
+    Vector3D crossProduct(const Vector3D& other) const
     {
         float ni = y * other.z - z * other.y;
         float nj = z * other.x - x * other.z;
@@ -162,7 +162,7 @@ struct Vector3D
         return Vector3D{ ni, nj, nk };
     }
 
-    float dotProduct(Vector3D const& other) const
+    float dotProduct(const Vector3D& other) const
     {
         return x * other.x + y * other.y + z * other.z;
     }

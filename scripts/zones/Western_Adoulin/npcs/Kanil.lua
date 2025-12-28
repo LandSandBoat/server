@@ -14,12 +14,12 @@ entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.KANIL_SHOP_TEXT)
     local stock =
     {
-        610, 60,     -- San D'Or. Flour
-        4509, 12,     -- Distilled Water
-        936, 16,     -- Rock Salt
-        633, 16,     -- Olive Oil
-        5299, 148,    -- Salsa
-        1523, 316,    -- Apple Mint
+        {  610,  60, }, -- San D'Or. Flour
+        { 4509,  12, }, -- Distilled Water
+        {  936,  16, }, -- Rock Salt
+        {  633,  16, }, -- Olive Oil
+        { 5299, 148, }, -- Salsa
+        { 1523, 316, }, -- Apple Mint
     }
     xi.shop.general(player, stock)
 end

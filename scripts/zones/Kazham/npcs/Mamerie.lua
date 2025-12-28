@@ -2,27 +2,25 @@
 -- Area: Kazham
 --  NPC: Mamerie
 -----------------------------------
-local ID = zones[xi.zone.KAZHAM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4545,    62,    -- Gysahl Greens
-        840,      7,    -- Chocobo Feather
-        17016,   11,    -- Pet Food Alpha Biscuit
-        17017,   82,    -- Pet Food Beta Biscuit
-        17860,   82,    -- Carrot Broth
-        17862,  695,    -- Bug Broth
-        17864,  126,    -- Herbal Broth
-        17866,  695,    -- Carrion Broth
-        5073, 50784,    -- Scroll of Chocobo Mazurka
+        { xi.item.BUNCH_OF_GYSAHL_GREENS,       71 },
+        { xi.item.CHOCOBO_FEATHER,               8 },
+        { xi.item.PET_FOOD_ALPHA_BISCUIT,       12 },
+        { xi.item.PET_FOOD_BETA_BISCUIT,        94 },
+        { xi.item.JUG_OF_CARROT_BROTH,          63 },
+        { xi.item.JUG_OF_BUG_BROTH,            102 },
+        { xi.item.JUG_OF_HERBAL_BROTH,         113 },
+        { xi.item.JUG_OF_CARRION_BROTH,        316 },
+        { xi.item.SCROLL_OF_CHOCOBO_MAZURKA, 57960 },
     }
 
-    player:showText(npc, ID.text.MAMERIE_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    player:showText(npc, zones[xi.zone.KAZHAM].text.MAMERIE_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end
 
 return entity

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Team
@@ -22,8 +22,10 @@
 #ifndef _CPETSKILL_H
 #define _CPETSKILL_H
 
+#include "ability.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "enums/action/knockback.h"
 
 class CPetSkill
 {
@@ -39,76 +41,93 @@ public:
     bool isBloodPactWard() const;
     bool isBloodPactRage() const;
 
-    uint16 getID() const;
-    uint16 getAnimationID() const;
-    uint8  getAoe() const;
-    float  getDistance() const;
-    uint8  getFlag() const;
-    uint16 getAnimationTime() const;
-    uint16 getActivationTime() const;
-    uint16 getMsg() const;
-    uint8  getSkillFinishCategory() const;
-    uint16 getAoEMsg() const;
-    uint16 getValidTargets() const;
-    int16  getTP() const;
-    uint8  getHPP() const;
-    uint16 getTotalTargets() const;
-    uint32 getPrimaryTargetID() const;
-    uint16 getMsgForAction() const;
-    float  getRadius() const;
-    int16  getParam() const;
-    uint8  getKnockback() const;
-    uint8  getPrimarySkillchain() const;
-    uint8  getSecondarySkillchain() const;
-    uint8  getTertiarySkillchain() const;
+    uint16          getID() const;
+    auto            getAnimationID() const -> ActionAnimation;
+    uint16          getMobSkillID() const;
+    uint8           getAoe() const;
+    float           getDistance() const;
+    uint8           getFlag() const;
+    timer::duration getAnimationTime() const;
+    timer::duration getActivationTime() const;
+    auto            getMsg() const -> MsgBasic;
+    auto            getSkillFinishCategory() const -> ActionCategory;
+    uint16          getValidTargets() const;
+    int16           getTP() const;
+    auto            getHP() const -> int32;
+    uint8           getHPP() const;
+    uint16          getTotalTargets() const;
+    uint32          getPrimaryTargetID() const;
+    auto            getFinalAnimationSub() -> std::optional<uint8>;
+    uint16          getMsgForAction() const;
+    float           getRadius() const;
+    int16           getParam() const;
+    auto            getKnockback() const -> Knockback;
+    uint8           getPrimarySkillchain() const;
+    uint8           getSecondarySkillchain() const;
+    uint8           getTertiarySkillchain() const;
+    auto            getAttackType() const -> ATTACK_TYPE;
+    auto            isCritical() const -> bool;
 
     bool isDamageMsg() const;
 
     void setID(uint16 id);
     void setAnimationID(uint16 aid);
+    void setMobSkillID(uint16 skillID);
     void setAoe(uint8 aoe);
+    void setRadius(uint8 radius);
     void setDistance(float distance);
     void setFlag(uint8 flag);
-    void setAnimationTime(uint16 AnimationTime);
-    void setActivationTime(uint16 ActivationTime);
-    void setMsg(uint16 msg);
+    void setAnimationTime(timer::duration AnimationTime);
+    void setActivationTime(timer::duration ActivationTime);
+    void setMsg(MsgBasic msg);
     void setSkillFinishCategory(uint8 category);
     void setValidTargets(uint16 targ);
     void setTP(int16 tp);
+    void setHP(int32 hp);
     void setHPP(uint8 hpp);
     void setTotalTargets(uint16 targets);
     void setPrimaryTargetID(uint32 targid);
+    void setFinalAnimationSub(uint8 newAnimationSub);
     void setParam(int16 value);
     void setKnockback(uint8 knockback);
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
+    void setAttackType(ATTACK_TYPE attackType);
+    void setCritical(bool isCritical);
 
     const std::string& getName() const;
     void               setName(const std::string& name);
 
 private:
-    uint16      m_ID;
-    uint16      m_AnimID; // animation id
-    std::string m_name;
-    uint8       m_Aoe;
-    float       m_Distance;
-    uint16      m_AnimationTime;  // how long the tp animation lasts for in ms
-    uint16      m_ActivationTime; // how long the pet prepares the tp move for
-    uint16      m_ValidTarget;
-    uint16      m_Message; // message param, scripters can edit this depending on self/resist/etc.
-    uint8       m_Flag;
-    int16       m_Param;
-    uint8       m_SkillFinishCategory;
-    uint8       m_knockback;         // knockback value (0-7)
-    uint8       m_primarySkillchain; // weaponskill ID of skillchain properties
-    uint8       m_secondarySkillchain;
-    uint8       m_tertiarySkillchain;
+    uint16          m_ID;
+    uint16          m_AnimID;     // animation id
+    uint16          m_MobSkillID; // mobskill id for jug petskill packet to use instead of JA ability ID
+    std::string     m_name;
+    uint8           m_Aoe;
+    uint8           m_Radius{ 0 };
+    float           m_Distance;
+    timer::duration m_AnimationTime;  // how long the tp animation lasts
+    timer::duration m_ActivationTime; // how long the pet prepares the tp move for
+    uint16          m_ValidTarget;
+    MsgBasic        m_Message; // message param, scripters can edit this depending on self/resist/etc.
+    uint8           m_Flag;
+    int16           m_Param;
+    uint8           m_SkillFinishCategory;
+    uint8           m_knockback;         // knockback value (0-7)
+    uint8           m_primarySkillchain; // weaponskill ID of skillchain properties
+    uint8           m_secondarySkillchain;
+    uint8           m_tertiarySkillchain;
+    ATTACK_TYPE     m_attackType{ ATTACK_TYPE::NONE };
+    bool            m_isCritical{ false };
 
     int16  m_TP;  // the tp at the time of finish readying (for scripts)
+    int32  m_HP;  // HP at the time of using mob skill (for scripts)
     uint8  m_HPP; // HPP at the time of using mob skill (for scripts)
     uint16 m_TotalTargets;
     uint32 m_PrimaryTargetID; // primary target ID
+
+    std::optional<uint8> m_FinalAnimationSub; // If non-null, entity will get this new animation sub after state exits
 };
 
 #endif

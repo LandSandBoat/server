@@ -27,11 +27,11 @@
 
 #include "entities/charentity.h"
 
-struct map_session_data_t;
+struct MapSession;
 
 extern uint8 PacketSize[512];
 
-extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 void PrintPacket(CBasicPacket& data);
 void PacketParserInitialize();

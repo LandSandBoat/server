@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.instance.onTrigger(player, npc, xi.zones.RUHOTZ_SILVERMINES)
+    xi.instance.onTrigger(player, npc, xi.zone.RUHOTZ_SILVERMINES)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

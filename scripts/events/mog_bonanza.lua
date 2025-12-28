@@ -21,11 +21,11 @@ local localSettings =
     -- 0x5E: <number>
     BONANZA_ID = 0x5C,
 
-    -- These are local times, and should be tweaked based on your time zone
-    BUYING_PERIOD_START     = os.time({ year = 2023, month = 5, day = 17, hour = 1, min =  0 }),
-    BUYING_PERIOD_END       = os.time({ year = 2023, month = 6, day = 15, hour = 7, min = 59 }),
-    COLLECTION_PERIOD_START = os.time({ year = 2023, month = 7, day = 11, hour = 1, min =  0 }),
-    COLLECTION_PERIOD_END   = os.time({ year = 2023, month = 7, day = 31, hour = 7, min = 59 }),
+    -- ALL TIMES JST
+    BUYING_PERIOD_START     = { year = 2023, month = 5, day = 17, hour = 1 },
+    BUYING_PERIOD_END       = { year = 2023, month = 6, day = 15, hour = 8 },
+    COLLECTION_PERIOD_START = { year = 2023, month = 7, day = 11, hour = 1 },
+    COLLECTION_PERIOD_END   = { year = 2023, month = 7, day = 31, hour = 8 },
 
     COLLECTION_SERVER_MESSAGE =
         'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
@@ -51,26 +51,23 @@ local localSettings =
 local event = SeasonalEvent:new('MogBonanza')
 
 xi.events.mogBonanza.enabledCheck = function()
-    local currentTime = os.time()
-
-    return currentTime >= localSettings.BUYING_PERIOD_START and
-        currentTime <= localSettings.COLLECTION_PERIOD_END
+    local jstNow  = { year = JstYear(), month = JstMonth(), day = JstDayOfTheMonth(), hour = JstHour() }
+    return utils.timeIsAfterOrEqual(jstNow, localSettings.BUYING_PERIOD_START) and
+        utils.timeIsBefore(jstNow, localSettings.COLLECTION_PERIOD_END)
 end
 
 local isInPurchasingPeriod = function()
-    local currentTime = os.time()
-
+    local jstNow  = { year = JstYear(), month = JstMonth(), day = JstDayOfTheMonth(), hour = JstHour() }
     return xi.events.mogBonanza.enabledCheck() and
-        currentTime >= localSettings.BUYING_PERIOD_START and
-        currentTime <= localSettings.BUYING_PERIOD_END
+        utils.timeIsAfterOrEqual(jstNow, localSettings.BUYING_PERIOD_START) and
+        utils.timeIsBefore(jstNow, localSettings.BUYING_PERIOD_END)
 end
 
 local isInCollectionPeriod = function()
-    local currentTime = os.time()
-
+    local jstNow  = { year = JstYear(), month = JstMonth(), day = JstDayOfTheMonth(), hour = JstHour() }
     return xi.events.mogBonanza.enabledCheck() and
-        currentTime >= localSettings.COLLECTION_PERIOD_START and
-        currentTime <= localSettings.COLLECTION_PERIOD_END
+        utils.timeIsAfterOrEqual(jstNow, localSettings.COLLECTION_PERIOD_START) and
+        utils.timeIsBefore(jstNow, localSettings.COLLECTION_PERIOD_END)
 end
 
 event:setEnableCheck(xi.events.mogBonanza.enabledCheck)

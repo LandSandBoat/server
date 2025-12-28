@@ -10,7 +10,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getAnimationSub() == 0 and
+        mob:getAnimationSub() ~= 1 and
         (
             mob:getMainJob() == xi.job.COR or
             mob:getMainJob() == xi.job.BRD or

@@ -9,35 +9,11 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    local IASvar = player:getCharVar('IASvar')
-
-    -- In a Stew
-    if IASvar == 3 then
-        local count = trade:getItemCount()
-        if trade:hasItemQty(xi.item.WOOZYSHROOM, 3) and count == 3 then
-            player:startEvent(556) -- Correct items given, advance quest
-        else
-            player:startEvent(555, 0, xi.item.WOOZYSHROOM) -- incorrect or not enough, play reminder dialog
-        end
-    end
-end
-
 entity.onTrigger = function(player, npc)
     local crisisstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    local IAS = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_STEW)
-    local IASvar = player:getCharVar('IASvar')
-
-    -- In a Stew
-    if IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 2 then
-        player:startEvent(554, 0, xi.item.WOOZYSHROOM)                    -- start fetch portion of quest
-    elseif IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 3 then
-        player:startEvent(555, 0, xi.item.WOOZYSHROOM)                    -- reminder dialog
-    elseif IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 4 then
-        player:startEvent(557)                             -- new dialog before finish of quest
 
     -- A Crisis in the Making
-    elseif
+    if
         crisisstatus == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
         not player:needToZone()
@@ -109,14 +85,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(xi.fameArea.WINDURST, 8)
         player:needToZone(true)
-
-    -- In a Stew
-    elseif csid == 554 then        -- start fetch portion
-        player:setCharVar('IASvar', 3)
-    elseif csid == 556 then
-        player:tradeComplete()
-        player:setCharVar('IASvar', 4)
-        npcUtil.giveKeyItem(player, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     end
 end
 

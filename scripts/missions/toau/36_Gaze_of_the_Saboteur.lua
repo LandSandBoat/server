@@ -22,6 +22,16 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3133, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.HAZHALM_TESTING_GROUNDS] =
         {
             ['_260'] =
@@ -46,6 +56,7 @@ mission.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.PERCIPIENT_EYE)
                     mission:complete(player)
                 end,
             },

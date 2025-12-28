@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(57 + (player:getFameLevel(4) - 1))
+    player:startEvent(57 + (player:getFameLevel(xi.fameArea.SELBINA_RABAO) - 1))
 end
 
 return entity

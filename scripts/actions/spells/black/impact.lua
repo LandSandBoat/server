@@ -11,69 +11,32 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.attribute = xi.mod.INT
-    params.bonus = 1.0
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.dmg = 939
-    params.effect = nil
-    params.hasMultipleTargetReduction = false
-    params.multiplier = 2.335
-    params.resistBonus = 1.0
-    params.skillType = xi.skill.ELEMENTAL_MAGIC
+    local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    local duration = 180 * resist -- BG wiki suggests only duration gets effected by resist, not stat amount.
+    -- Apply effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.STR_DOWN, xi.mod.STR },
+        [2] = { xi.effect.DEX_DOWN, xi.mod.DEX },
+        [3] = { xi.effect.VIT_DOWN, xi.mod.VIT },
+        [4] = { xi.effect.AGI_DOWN, xi.mod.AGI },
+        [5] = { xi.effect.INT_DOWN, xi.mod.INT },
+        [6] = { xi.effect.MND_DOWN, xi.mod.MND },
+        [7] = { xi.effect.CHR_DOWN, xi.mod.CHR },
+    }
 
-    -- Todo: loop to avoid repeatedly doing same thing for each stat
-    local strLoss = ((target:getStat(xi.mod.STR) / 100) * 20) -- Should be 20%
-    local dexLoss = ((target:getStat(xi.mod.DEX) / 100) * 20)
-    local vitLoss = ((target:getStat(xi.mod.VIT) / 100) * 20)
-    local agiLoss = ((target:getStat(xi.mod.AGI) / 100) * 20)
-    local intLoss = ((target:getStat(xi.mod.INT) / 100) * 20)
-    local mndLoss = ((target:getStat(xi.mod.MND) / 100) * 20)
-    local chrLoss = ((target:getStat(xi.mod.CHR) / 100) * 20)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), 0, 0, xi.element.DARK, xi.mod.INT, 0, 0)
 
-    if not target:hasStatusEffect(xi.effect.STR_DOWN) then
-        target:addStatusEffect(xi.effect.STR_DOWN, strLoss, 0, duration)
+    for i = 1, 7 do
+        local effectId = effectTable[i][1]
+        if not target:hasStatusEffect(effectId) then
+            local power    = math.floor(target:getStat(effectTable[i][2]) / 5)
+            local duration = math.floor(180 * resist)
+            target:addStatusEffect(effectId, power, 0, duration)
+        end
     end
 
-    if not target:hasStatusEffect(xi.effect.DEX_DOWN) then
-        target:addStatusEffect(xi.effect.DEX_DOWN, dexLoss, 0, duration)
-    end
-
-    if not target:hasStatusEffect(xi.effect.VIT_DOWN) then
-        target:addStatusEffect(xi.effect.VIT_DOWN, vitLoss, 0, duration)
-    end
-
-    if not target:hasStatusEffect(xi.effect.AGI_DOWN) then
-        target:addStatusEffect(xi.effect.AGI_DOWN, agiLoss, 0, duration)
-    end
-
-    if not target:hasStatusEffect(xi.effect.INT_DOWN) then
-        target:addStatusEffect(xi.effect.INT_DOWN, intLoss, 0, duration)
-    end
-
-    if not target:hasStatusEffect(xi.effect.MND_DOWN) then
-        target:addStatusEffect(xi.effect.MND_DOWN, mndLoss, 0, duration)
-    end
-
-    if not target:hasStatusEffect(xi.effect.CHR_DOWN) then
-        target:addStatusEffect(xi.effect.CHR_DOWN, chrLoss, 0, duration)
-    end
-
-    -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
-    -- Get the resisted damage
-    dmg = dmg * resist
-    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    -- Add in target adjustment
-    dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, spell:getElement())
-    -- Add in final adjustments
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
-
-    return dmg
+    return damage
 end
 
 return spellObject

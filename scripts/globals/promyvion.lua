@@ -1,8 +1,6 @@
 -----------------------------------
 -- Promyvion global file
 -----------------------------------
-require('scripts/globals/combat/element_tables')
------------------------------------
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 -----------------------------------
@@ -226,18 +224,12 @@ end
 -----------------------------------
 xi.promyvion.emptyOnMobSpawn = function(mob, mobType)
     local element    = math.random(xi.element.FIRE, xi.element.DARK)
-    local opposite   = xi.combat.element.getOppositeElement(element)
-    local complement = xi.element.NONE
-
-    if element == xi.element.WATER then
-        complement = xi.element.FIRE
-    elseif element < xi.element.WATER then
-        complement = element + 1
-    end
+    local opposite   = xi.data.element.getElementWeakness(element)
+    local complement = xi.data.element.getElementStrength(element)
 
     -- Setup resistances.
     for i = xi.element.FIRE, xi.element.DARK do
-        local resRankModId = xi.combat.element.getElementalResistanceRankModifier(i)
+        local resRankModId = xi.data.element.getElementalResistanceRankModifier(i)
         local value        = 0
 
         if
@@ -268,7 +260,7 @@ end
 
 xi.promyvion.receptacleOnMobSpawn = function(mob)
     -- Handle Stray pop cooldown.
-    mob:setLocalVar('[Stray]CooldownIdle', os.time() + 60 * math.random(2, 6))
+    mob:setLocalVar('[Stray]CooldownIdle', GetSystemTime() + 60 * math.random(2, 6))
     mob:setLocalVar('[Stray]CooldownFight', 0)
 
     -- Handle decoration: Fade-in.
@@ -281,7 +273,7 @@ end
 xi.promyvion.receptacleOnMobRoam = function(mob)
     -- Handle idle stray spawn.
     -- NOTE: Strays poped when receptacles are idle don't automatically link unless they are in a certain range.
-    if os.time() >= mob:getLocalVar('[Stray]CooldownIdle') then
+    if GetSystemTime() >= mob:getLocalVar('[Stray]CooldownIdle') then
         local strayId = checkForStrays(mob) -- Returns stray Id OR 0
 
         -- Spawn stray.
@@ -291,7 +283,7 @@ xi.promyvion.receptacleOnMobRoam = function(mob)
         end
 
         -- Handle cooldown.
-        mob:setLocalVar('[Stray]CooldownIdle', os.time() + 60 * math.random(2, 6))
+        mob:setLocalVar('[Stray]CooldownIdle', GetSystemTime() + 60 * math.random(2, 6))
     end
 end
 
@@ -307,12 +299,12 @@ xi.promyvion.receptacleOnMobFight = function(mob, target)
 
     -- Handle initial cooldown.
     if strayCooldown == 0 then
-        strayCooldown = os.time() + 5 * math.random(2, 4)
+        strayCooldown = GetSystemTime() + 5 * math.random(2, 4)
         mob:setLocalVar('[Stray]CooldownFight', strayCooldown)
     end
 
     -- Handle engaged stray spawn.
-    if os.time() >= strayCooldown then
+    if GetSystemTime() >= strayCooldown then
         local strayId = checkForStrays(mob)
 
         -- Spawn stray.
@@ -321,7 +313,7 @@ xi.promyvion.receptacleOnMobFight = function(mob, target)
         end
 
         -- Handle cooldown.
-        mob:setLocalVar('[Stray]CooldownFight', os.time() + 5 * math.random(2, 4))
+        mob:setLocalVar('[Stray]CooldownFight', GetSystemTime() + 5 * math.random(2, 4))
     end
 
     -- Check for alive associated Strays and update enmity.

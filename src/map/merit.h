@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMERIT_H
-#define _CMERIT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -278,11 +277,11 @@ enum MERIT_TYPE
     MERIT_BUST_DURATION       = MCATEGORY_COR_1 + 0x08,
 
     // PUP 1
-    MERIT_AUTOMATON_SKILLS  = MCATEGORY_PUP_1 + 0x00,
-    MERIT_MAINTENACE_RECAST = MCATEGORY_PUP_1 + 0x02,
-    MERIT_REPAIR_EFFECT     = MCATEGORY_PUP_1 + 0x04,
-    MERIT_ACTIVATE_RECAST   = MCATEGORY_PUP_1 + 0x06,
-    MERIT_REPAIR_RECAST     = MCATEGORY_PUP_1 + 0x08,
+    MERIT_AUTOMATON_SKILLS   = MCATEGORY_PUP_1 + 0x00,
+    MERIT_MAINTENANCE_RECAST = MCATEGORY_PUP_1 + 0x02,
+    MERIT_REPAIR_EFFECT      = MCATEGORY_PUP_1 + 0x04,
+    MERIT_ACTIVATE_RECAST    = MCATEGORY_PUP_1 + 0x06,
+    MERIT_REPAIR_RECAST      = MCATEGORY_PUP_1 + 0x08,
 
     // DNC 1
     MERIT_STEP_ACCURACY            = MCATEGORY_DNC_1 + 0x00,
@@ -582,10 +581,10 @@ private:
 
 namespace meritNameSpace
 {
-    void LoadMeritsList(); // load the global list of merits
 
-    extern Merit_t GMeritsTemplate[MERITS_COUNT];
-    extern int16   groupOffset[MCATEGORY_COUNT / 64 - 1]; // the first merit offset of each category
+void LoadMeritsList(); // load the global list of merits
+
+extern Merit_t GMeritsTemplate[MERITS_COUNT];
+extern int16   groupOffset[MCATEGORY_COUNT / 64 - 1]; // the first merit offset of each category
+
 }; // namespace meritNameSpace
-
-#endif

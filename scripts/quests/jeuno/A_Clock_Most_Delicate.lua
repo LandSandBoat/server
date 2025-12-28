@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.JEUNO) >= 5
+                player:getFameLevel(xi.fameArea.JEUNO) >= 2
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -45,6 +45,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Option') == 0 then
                         return quest:progressEvent(112)
+                    else
+                        return quest:event(186)
                     end
                 end,
             },

@@ -14,7 +14,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     target:delStatusEffect(xi.effect.HAGAKURE)
-    player:addStatusEffect(xi.effect.HAGAKURE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.HAGAKURE, 400, 0, 60, 0, 1000)
 end
 
 return abilityObject

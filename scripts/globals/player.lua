@@ -118,7 +118,7 @@ xi.player.charCreate = function(player)
     -- increase starting inventory
     if xi.settings.main.START_INVENTORY > 30 then
         player:changeContainerSize(xi.inv.INVENTORY, xi.settings.main.START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY - 30)
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY) -- Default satchel size is zero, so just set it to the setting size.
     end
 
     --[[
@@ -226,7 +226,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
-    player:setLocalVar('ZoneInTime', os.time())
+    player:setLocalVar('ZoneInTime', GetSystemTime())
     player:setLocalVar('ZoningIn', 1)
 
     -- Slight delay to ensure player is fully logged in

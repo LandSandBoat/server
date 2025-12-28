@@ -2,7 +2,6 @@
 -- Claim Shield
 -----------------------------------
 require('modules/module_utils')
-require('scripts/globals/utils')
 -----------------------------------
 local m = Module:new('claim_shield')
 
@@ -100,7 +99,7 @@ local timerFunc = function(mob)
 
     local numEntries = #entries
 
-    mob:setClaimable(true)
+    mob:setMobMod(xi.mobMod.CLAIM_TYPE, xi.claimType.EXCLUSIVE)
     mob:setUnkillable(false)
     mob:setCallForHelpBlocked(false)
 
@@ -148,7 +147,7 @@ end
 local listenerFunc = function(mob)
     print(string.format('Applying Claimshield to %s for %ims', mob:getPacketName(), claimshieldTime))
 
-    mob:setClaimable(false)
+    mob:setMobMod(xi.mobMod.CLAIM_TYPE, xi.claimType.UNCLAIMABLE)
     mob:setUnkillable(true)
     mob:setCallForHelpBlocked(true)
     mob:stun(claimshieldTime)
@@ -158,7 +157,7 @@ end
 
 -- Main entrypoint of each override
 local overrideFunc = function(mob)
-    mob:addListener('SPAWN', mob:getPacketName() .. '_CS_SPAWN', listenerFunc)
+    mob:addListener('SPAWN', string.format('%s_CS_SPAWN', mob:getPacketName()), listenerFunc)
 
     -- Call original onMobInitialize
     super(mob)

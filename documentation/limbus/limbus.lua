@@ -204,7 +204,7 @@ end
 ---@diagnostic disable-next-line: duplicate-set-field
 function Limbus:onBattlefieldEnter(player, battlefield)
     Battlefield.onBattlefieldEnter(self, player, battlefield)
-    player:setCharVar('Cosmo_Cleanse_TIME', os.time())
+    player:setCharVar('Cosmo_Cleanse_TIME', GetSystemTime())
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field

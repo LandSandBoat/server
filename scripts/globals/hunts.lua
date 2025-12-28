@@ -1247,7 +1247,7 @@ function xi.hunts.onTrigger(player, npc)
     local lockBit = bit.lshift(1, 24)
 
     -- one vana'diel day lockout timer after completing a hunt
-    if os.time() < player:getCharVar('[hunt]nextHunt') then
+    if GetSystemTime() < player:getCharVar('[hunt]nextHunt') then
         scyldBits = scyldBits + lockBit
     -- [hunt]status 1 player has already accepted a hunt
     elseif huntStatus == 1 then

@@ -36,17 +36,17 @@ uint16 CLuaAbility::getID()
     return m_PLuaAbility->getID();
 }
 
-int16 CLuaAbility::getMsg()
+auto CLuaAbility::getMsg() -> MsgBasic
 {
     return m_PLuaAbility->getMessage();
 }
 
 uint16 CLuaAbility::getRecast()
 {
-    return m_PLuaAbility->getRecastTime();
+    return static_cast<uint16>(timer::count_seconds(m_PLuaAbility->getRecastTime()));
 }
 
-uint16 CLuaAbility::getRecastID()
+auto CLuaAbility::getRecastID() const -> Recast
 {
     return m_PLuaAbility->getRecastId();
 }
@@ -56,12 +56,22 @@ uint16 CLuaAbility::getRange()
     return static_cast<uint16>(m_PLuaAbility->getRange());
 }
 
+auto CLuaAbility::getRadius() const -> uint8
+{
+    return m_PLuaAbility->getRadius();
+}
+
+auto CLuaAbility::getAOE() const -> uint8
+{
+    return m_PLuaAbility->getAOE();
+}
+
 const std::string& CLuaAbility::getName()
 {
     return m_PLuaAbility->getName();
 }
 
-uint16 CLuaAbility::getAnimation()
+auto CLuaAbility::getAnimation() -> ActionAnimation
 {
     return m_PLuaAbility->getAnimationID();
 }
@@ -71,7 +81,7 @@ uint16 CLuaAbility::getAddType()
     return m_PLuaAbility->getAddType();
 }
 
-void CLuaAbility::setMsg(uint16 messageID)
+void CLuaAbility::setMsg(MsgBasic messageID)
 {
     m_PLuaAbility->setMessage(messageID);
 }
@@ -83,25 +93,25 @@ void CLuaAbility::setAnimation(uint16 animationID)
 
 void CLuaAbility::setRecast(uint16 recastTime)
 {
-    m_PLuaAbility->setRecastTime(recastTime);
+    m_PLuaAbility->setRecastTime(std::chrono::seconds(recastTime));
 }
 
-uint16 CLuaAbility::getCE()
+int32 CLuaAbility::getCE()
 {
     return m_PLuaAbility->getCE();
 }
 
-void CLuaAbility::setCE(uint16 ce)
+void CLuaAbility::setCE(int32 ce)
 {
     m_PLuaAbility->setCE(ce);
 }
 
-uint16 CLuaAbility::getVE()
+int32 CLuaAbility::getVE()
 {
     return m_PLuaAbility->getVE();
 }
 
-void CLuaAbility::setVE(uint16 ve)
+void CLuaAbility::setVE(int32 ve)
 {
     m_PLuaAbility->setVE(ve);
 }
@@ -126,6 +136,8 @@ void CLuaAbility::Register()
     SOL_REGISTER("getRecast", CLuaAbility::getRecast);
     SOL_REGISTER("getRecastID", CLuaAbility::getRecastID);
     SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getRadius", CLuaAbility::getRadius);
+    SOL_REGISTER("getAOE", CLuaAbility::getAOE);
     SOL_REGISTER("getName", CLuaAbility::getName);
     SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
     SOL_REGISTER("getAddType", CLuaAbility::getAddType);

@@ -22,12 +22,12 @@ quest.sections[1] =
 
         return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK) and
-            xi.moghouse.isInMogHouseInHomeNation(player) and
+            xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 5 and
             not quest:getMustZone(player) and
             quest:getLocalVar(player, 'questSeen') == 0 and
             bedPlacedTime ~= 0 and
-            os.time() > bedPlacedTime + 60
+            GetSystemTime() > bedPlacedTime + 60
     end
 }
 
@@ -83,7 +83,7 @@ local questAccepted =
                 return quest:progressEvent(30010, 0, 0, 0, 0, 0, xi.item.SHRIMP_LURE, xi.item.STICK_OF_SELBINA_BUTTER)
             elseif
                 questProgress == 1 and
-                quest:getVar(player, 'Timer') < os.time()
+                quest:getVar(player, 'Timer') < GetSystemTime()
             then
                 return quest:progressEvent(30012)
             end
@@ -99,7 +99,7 @@ local questAccepted =
         [30011] = function(player, csid, option, npc)
             player:confirmTrade()
             quest:setVar(player, 'Prog', 1)
-            quest:setVar(player, 'Timer', os.time() + 60)
+            quest:setVar(player, 'Timer', GetSystemTime() + 60)
         end,
 
         [30012] = function(player, csid, option, npc)

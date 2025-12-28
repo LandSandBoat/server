@@ -3007,7 +3007,8 @@ xi.keyItem =
     BYAKKO_COMPANION                         = 3104,
     NOBLE_CHOCOBO_COMPANION                  = 3105,
     IXION_COMPANION                          = 3106,
-
+    PHUABO_COMPANION                         = 3107,
+    CRAKLAW_COMPANION                        = 3108,
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,
     YGNASS_INSIGNIA                          = 3138,

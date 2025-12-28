@@ -25,14 +25,25 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        not mission:getMustZone(player) and
-                        VanadielUniqueDay() >= mission:getVar(player, 'Timer')
-                    then
-                        return mission:progressEvent(3130, { text_table = 0 })
-                    else
-                        return mission:progressEvent(3120, { text_table = 0 })
+                    local hasZoned      = not mission:getMustZone(player)
+                    local hasTimePassed = VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+
+                    -- Calculate event.
+                    local eventId = (hasZoned and hasTimePassed) and 3130 or 3120
+
+                    -- Calculate dialog.
+                    local dialog = 2
+
+                    if not hasTimePassed then -- Dialog parameter cycles between 0 and 2 until time lockout is over. At that point, option 0 stops happening.
+                        dialog = mission:getVar(player, 'Option')
+                        if dialog == 0 then
+                            mission:setVar(player, 'Option', 2)
+                        else
+                            mission:setVar(player, 'Option', 0)
+                        end
                     end
+
+                    return mission:event(eventId, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, dialog, 0)
                 end,
             },
 

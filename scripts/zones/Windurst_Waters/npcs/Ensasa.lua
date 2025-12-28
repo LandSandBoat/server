@@ -2,8 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Ensasa
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -12,26 +10,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.ENSASA_SHOP_DIALOG)
-
     local stock =
     {
-        104,   3881, 1, -- Tarutaru Folding Screen
-        17336,    5, 2, -- Crossbow Bolt
-        17318,    3, 2, -- Wooden Arrow
-        112,    456, 2, -- Yellow Jar
-        17319,    4, 3, -- Bone Arrow
-        218,    920, 3, -- Earthen Flowerpot
-        17396,    3, 3, -- Little Worm
-        17395,    9, 3, -- Lugworm
-        1890,   576, 3, -- River Foliage
-        5065,   283, 3, -- Earth Threnody
-        5062,   644, 3, -- Fire Threnody
-        1891,   576, 3, -- Sea Foliage
-        92,     905, 3, -- Tarutaru Stool
-        110,   4744, 3, -- White Jar
+        { xi.item.EARTHEN_FLOWERPOT,        1040, 3 },
+        { xi.item.TARUTARU_STOOL,           1023, 3 },
+        { xi.item.YELLOW_JAR,                515, 2 },
+        { xi.item.TARUTARU_FOLDING_SCREEN,  3996, 1 },
+        { xi.item.WOODEN_ARROW,                4, 2 },
+        { xi.item.BONE_ARROW,                  5, 3 },
+        { xi.item.CROSSBOW_BOLT,               6, 2 },
+        { xi.item.SCROLL_OF_EARTH_THRENODY,  320, 3 },
+        { xi.item.SCROLL_OF_FIRE_THRENODY,   728, 3 },
+        { xi.item.WHITE_JAR,                5397, 3 },
+        { xi.item.BUNDLE_OF_RIVER_FOLIAGE,   665, 3 },
+        { xi.item.BUNDLE_OF_SEA_FOLIAGE,     665, 3 },
+        { xi.item.LUGWORM,                    12, 3 },
+        { xi.item.LITTLE_WORM,                 4, 3 },
     }
 
+    player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.ENSASA_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

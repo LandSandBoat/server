@@ -3,10 +3,17 @@
 --  Mob: Aw'aern
 -- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
+mixins = { require('scripts/mixins/families/aern') }
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Aerns_Euvhi')
+    xi.pet.setMobPet(mob, 1, 'Aerns_Wynav')
+    xi.pet.setMobPet(mob, 1, 'Aerns_Elemental')
+end
 
 entity.onMobSpawn = function(mob)
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
@@ -14,10 +21,9 @@ entity.onMobSpawn = function(mob)
         not GetMobByID(ID.mob.IXAERN_DRG):isSpawned() and
         GetServerVariable('[SEA]IxAernDRG_PH') == 0
     then
-        -- This should be cleared when the mob is killed.
-        local groups      = ID.mob.AWAERN_DRG_GROUPS
-        local IxAernDRGPH = groups[math.random(1, #groups)] + math.random(0, 2) -- The 4th mobid in each group is a pet. F that son
-        SetServerVariable('[SEA]IxAernDRG_PH', IxAernDRGPH)
+        -- Give Ix'DRG a random placeholder by picking one of the four groups' first PH, then adding a random number of 0-2 for the specific mob.
+        local basePhId = utils.randomEntry(ID.mob.AWAERN_DRG_GROUPS)
+        SetServerVariable('[SEA]IxAernDRG_PH', basePhId + math.random(0, 2))
     end
 end
 
@@ -28,7 +34,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
         if qmDrk then
             local hatedPlayer = qmDrk:getLocalVar('hatedPlayer')
-            local isInTime    = qmDrk:getLocalVar('hateTimer') > os.time()
+            local isInTime    = qmDrk:getLocalVar('hateTimer') > GetSystemTime()
 
             if
                 qmDrk:getStatus() ~= xi.status.DISAPPEAR and
@@ -46,7 +52,7 @@ entity.onMobDeath = function(mob, player, optParams)
                 if offset >= 0 and offset <= 2 then
                     if math.random(1, 8) == 1 then
                         qmDrk:setLocalVar('hatedPlayer', player:getID())
-                        qmDrk:setLocalVar('hateTimer', os.time() + 600) -- player with animosity has 10 minutes to touch QM
+                        qmDrk:setLocalVar('hateTimer', GetSystemTime() + 600) -- player with animosity has 10 minutes to touch QM
                         player:messageSpecial(ID.text.SHEER_ANIMOSITY)
                     end
                 end
@@ -71,7 +77,7 @@ entity.onMobDespawn = function(mob)
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-520, 5, -359, 30) -- Top Left
         elseif offset >= 8 and offset <= 11 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-319, 5, -359, 95) -- Top Right
-        elseif offset >= 12 and offset <= 15 then
+        else
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-319, 5, -520, 156) -- Bottom Right
         end
 

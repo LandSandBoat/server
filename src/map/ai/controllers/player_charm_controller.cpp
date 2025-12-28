@@ -42,7 +42,7 @@ CPlayerCharmController::~CPlayerCharmController()
     POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
 }
 
-void CPlayerCharmController::Tick(time_point tick)
+void CPlayerCharmController::Tick(timer::time_point tick)
 {
     m_Tick = tick;
     if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
@@ -61,7 +61,7 @@ void CPlayerCharmController::Tick(time_point tick)
     }
 }
 
-void CPlayerCharmController::DoCombatTick(time_point tick)
+void CPlayerCharmController::DoCombatTick(timer::time_point tick)
 {
     if (!POwner->PMaster->PAI->IsEngaged())
     {
@@ -90,7 +90,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
     }
 }
 
-void CPlayerCharmController::DoRoamTick(time_point tick)
+void CPlayerCharmController::DoRoamTick(timer::time_point tick)
 {
     if (POwner->PMaster->PAI->IsEngaged())
     {

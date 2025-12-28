@@ -384,9 +384,18 @@ xi.rhapsodies.requiredCharacters =
 xi.rhapsodies.charactersAvailable = function(player)
     local rovMission = player:getCurrentMission(xi.mission.log_id.ROV)
     for _, char in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
-        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[char])
+        local expansionLog     = xi.rhapsodies.expansion[char]
+        local expansionMission = player:getCurrentMission(expansionLog)
+
         if xi.rhapsodies.unavailability[char][expansionMission] then
-            return false
+            -- CoP "Dawn" exception. TODO: Maybe add support for mission status checks in the future.
+            if
+                expansionLog ~= xi.mission.log_id.COP or       -- Mission log isn't CoP -> false
+                expansionMission ~= xi.mission.id.cop.DAWN or  -- Mission log is CoP, but mission isn't "Dawn" -> false
+                player:getCharVar('Mission[6][828]Status') < 4 -- Mission log is CoP and mission is "Dawn", but status for "Dawn" is under 4 -> false
+            then
+                return false -- Character is unavailable.
+            end
         end
     end
 

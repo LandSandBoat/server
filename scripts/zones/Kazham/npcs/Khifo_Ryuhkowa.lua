@@ -2,32 +2,30 @@
 -- Area: Kazham
 --  NPC: Khifo Ryuhkowa
 -----------------------------------
-local ID = zones[xi.zone.KAZHAM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16473,   5713,    -- Kukri
-        16595, 153014,    -- Ram-Dao
-        16833,    809,    -- Bronze Spear
-        16835,  16228,    -- Spear
-        16839,  75541,    -- Partisan
-        17025,   1600,    -- Chestnut Club
-        17026,   4945,    -- Bone Cudgel
-        17052,   5255,    -- Chestnut Wand
-        17092,  29752,    -- Mahogany Staff
-        17099,  99176,    -- Mahogany Pole
-        17163,  39744,    -- Battle Bow
-        17308,     55,    -- Hawkeye
-        17280,   1610,    -- Boomerang
-        17318,      3,    -- Woden Arrow
+        { xi.item.KUKRI,            6520 },
+        { xi.item.RAM_DAO,        174636 },
+        { xi.item.BRONZE_SPEAR,      924 },
+        { xi.item.SPEAR,           18522 },
+        { xi.item.PARTISAN,        86215 },
+        { xi.item.CHESTNUT_CLUB,    1827 },
+        { xi.item.BONE_CUDGEL,      5644 },
+        { xi.item.CHESTNUT_WAND,    5997 },
+        { xi.item.MAHOGANY_STAFF,  33957 },
+        { xi.item.MAHOGANY_POLE,  113190 },
+        { xi.item.BATTLE_BOW,      45360 },
+        { xi.item.HAWKEYE,            63 },
+        { xi.item.BOOMERANG,        1837 },
+        { xi.item.WOODEN_ARROW,        4 },
     }
 
-    player:showText(npc, ID.text.KHIFORYUHKOWA_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    player:showText(npc, zones[xi.zone.KAZHAM].text.KHIFORYUHKOWA_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end
 
 return entity

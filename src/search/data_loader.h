@@ -60,7 +60,7 @@ struct SearchEntity
     uint8       race           = 0;
     uint16      zone           = 0;
     uint16      prevzone       = 0;
-    uint16      flags1         = 0;
+    uint32      flags1         = 0;
     uint32      flags2         = 0;
     uint32      linkshellid1   = 0;
     uint32      linkshellid2   = 0;
@@ -71,6 +71,8 @@ struct SearchEntity
     uint8       languages      = 0;
     bool        gmHidden       = false;
     bool        disconnecting  = false;
+    bool        muted          = false;
+    uint8       unityLeader    = 0;
 };
 
 /************************************************************************

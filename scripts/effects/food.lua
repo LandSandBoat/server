@@ -1,12 +1,14 @@
 -----------------------------------
 -- xi.effect.FOOD
+-- Notes: Effect getSourceTypeParam is used to store itemID of usable food item. See: CStatusEffectContainer::SetEffectParams
+-- Effect getSourceTypeParam of 0 allows effect to use the effect script below.
 -----------------------------------
 ---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    -- Food from items will always have a SubType, food from FoV/GoV will be zero
-    if effect:getSubType() == 0 then
+    -- Food from items will always have a getSourceTypeParam, food from FoV/GoV will be zero
+    if effect:getSourceTypeParam() == 0 then
         -- Todo: table this
         if effect:getPower() == 1 then -- Dried Meat
             target:addMod(xi.mod.STR, 4)
@@ -45,8 +47,8 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    -- Food from items will always have a SubType, food from FoV/GoV will be zero
-    if effect:getSubType() == 0 then
+    -- Food from items will always have a getSourceTypeParam, food from FoV/GoV will be zero
+    if effect:getSourceTypeParam() == 0 then
         -- Todo: table this
         if effect:getPower() == 1 then -- Dried Meat
             target:delMod(xi.mod.STR, 4)

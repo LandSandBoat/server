@@ -28,9 +28,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) then
-                        return mission:progressEvent(3156, { text_table = 0 })
+                        return mission:progressEvent(3156, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
                     else
-                        return mission:progressEvent(3149, { text_table = 0 })
+                        return mission:event(3149, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
                     end
                 end,
             },
@@ -49,7 +49,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(8)
+                        return mission:progressEvent(8, 0, 4, 0, 0, 0, 1, 0, 0)
                     end
                 end,
             },
@@ -72,9 +72,8 @@ mission.sections =
                     mission:complete(player)
                 end,
 
-                -- TODO: This is a workaround for _20m (Runic Seal) NPC onEventFinish not being
-                -- called during event 116.  This will finish things up and send the player to the
-                -- instance.
+                -- TODO: This is a workaround for _20m (Runic Seal) NPC onEventFinish not being called during event 116.
+                -- This will finish things up and send the player to the instance.
                 [116] = function(player, csid, option, npc)
                     if
                         option == 1 and

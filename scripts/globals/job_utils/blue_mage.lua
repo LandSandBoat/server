@@ -1,8 +1,6 @@
 -----------------------------------
 -- Blue Mage Job Utilities
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.blue_mage = xi.job_utils.blue_mage or {}
@@ -34,6 +32,14 @@ xi.job_utils.blue_mage.checkDiffusion = function(player, target, ability)
     return 0, 0
 end
 
+xi.job_utils.blue_mage.checkConvergence = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.CONVERGENCE) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    end
+
+    return 0, 0
+end
+
 xi.job_utils.blue_mage.checkEfflux = function(player, target, ability)
     return 0, 0
 end
@@ -53,6 +59,8 @@ end
 
 xi.job_utils.blue_mage.useAzureLore = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.AZURE_LORE, 1, 0, 30)
+
+    return xi.effect.AZURE_LORE
 end
 
 xi.job_utils.blue_mage.useBurstAffinity = function(player, target, ability, action)
@@ -70,14 +78,25 @@ xi.job_utils.blue_mage.useDiffusion = function(player, target, ability, action)
     return xi.effect.DIFFUSION
 end
 
+xi.job_utils.blue_mage.useConvergence = function(player, target, ability, action)
+    player:addStatusEffect(xi.effect.CONVERGENCE, 1, 0, 60)
+    return xi.effect.CONVERGENCE
+end
+
 xi.job_utils.blue_mage.useEfflux = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.EFFLUX, 16, 1, 60)
+
+    return xi.effect.EFFLUX
 end
 
 xi.job_utils.blue_mage.useUnbridledWisdom = function(player, target, ability, action)
     target:addStatusEffect(xi.effect.UNBRIDLED_WISDOM, 16, 1, 30)
+
+    return xi.effect.UNBRIDLED_WISDOM
 end
 
 xi.job_utils.blue_mage.useUnbridledLearning = function(player, target, ability, action)
     target:addStatusEffect(xi.effect.UNBRIDLED_LEARNING, 16, 1, 60)
+
+    return xi.effect.UNBRIDLED_LEARNING
 end

@@ -21,7 +21,7 @@ local content = BattlefieldMission:new({
     missionArea           = xi.mission.log_id.ZILART,
     mission               = xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER,
     missionStatusArea     = xi.mission.log_id.ZILART,
-    requiredMissionStatus = 2,
+    requiredMissionStatus = 1,
     title                 = xi.title.DESTROYER_OF_ANTIQUITY,
 })
 

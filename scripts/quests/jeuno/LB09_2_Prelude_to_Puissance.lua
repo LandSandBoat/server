@@ -24,9 +24,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainLvl() >= 91 and
-                player:getLevelCap() == 95 and
-                xi.settings.main.MAX_LEVEL >= 99
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) and
+                player:getLevelCap() == 95
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -34,7 +33,26 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10194)
+                    local eventId         = 10045
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 0
+                    local lastQuestStage  = 0
+                    if
+                        xi.settings.main.MAX_LEVEL > 95 and
+                        limitBreaker == 1
+                    then
+                        if playerLevel > 90 then
+                            eventId         = 10194
+                            lastQuestNumber = 6
+                            lastQuestStage  = 2
+                        elseif playerLevel >= 75 then
+                            lastQuestNumber = 4
+                            lastQuestStage  = 2
+                        end
+                    end
+
+                    return quest:progressEvent(eventId, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
                 end,
             },
 
@@ -57,33 +75,35 @@ quest.sections =
         {
             ['Nomad_Moogle'] =
             {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'tradeCompleted') == 1 then
-                        return quest:progressEvent(10045, 0, 1, 5)
-                    else
-                        return quest:event(10045, 0, 1, 6, 2)
-                    end
-                end,
-
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'tradeCompleted') == 0 and
                         npcUtil.tradeHasExactly(trade, xi.item.SEASONING_STONE)
                     then
-                        return quest:progressEvent(10045, 0, 1, 5)
+                        quest:setVar(player, 'tradeCompleted', 1)
+                        player:confirmTrade()
+
+                        return quest:progressEvent(10045, 0, 1, 5, 0)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 6
+                    local lastQuestStage  = 2
+                    if quest:getVar(player, 'tradeCompleted') > 0 then
+                        lastQuestNumber = 5
+                        lastQuestStage  = 0
+                    end
+
+                    return quest:progressEvent(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage, 0)
                 end,
             },
 
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    -- Trade is completed regardless of option chosen.
-                    if quest:getVar(player, 'tradeCompleted') == 0 then
-                        player:confirmTrade()
-                        quest:setVar(player, 'tradeCompleted', 1)
-                    end
-
                     -- All this options complete the current quest.
                     if
                         option == 0 or
@@ -94,6 +114,12 @@ quest.sections =
                         option == 20 or
                         option == 21
                     then
+                        -- Rejected offer. Still completes quest.
+                        if option == 15 then
+                            player:setLocalVar('rejectedStartLB10', 1)
+                        end
+
+                        -- Complete quest.
                         if quest:complete(player) then
                             -- This options immediately start next quest. (All except 0 and 15).
                             if

@@ -38,8 +38,8 @@ public:
     uint16      getILvlSkill() const;
     uint16      getILvlParry() const;
     uint16      getILvlMacc() const;
-    int16       getDelay() const;
-    int16       getBaseDelay() const;
+    uint16      getDelay() const;
+    uint16      getBaseDelay() const;
     uint16      getDamage() const;
     DAMAGE_TYPE getDmgType();
     uint8       getAdditionalEffect() const;
@@ -81,8 +81,8 @@ private:
     uint16      m_iLvlParry;
     uint16      m_iLvlMacc;
     uint16      m_damage;
-    int16       m_delay; // can be -ve e.g. ammo/ranged weapons
-    int16       m_baseDelay;
+    uint16      m_delay;
+    uint16      m_baseDelay;
     DAMAGE_TYPE m_dmgType;
     uint8       m_effect;
     uint8       m_maxHit;

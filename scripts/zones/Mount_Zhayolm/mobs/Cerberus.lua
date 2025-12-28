@@ -7,6 +7,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 end
 
 entity.onMobRoam = function(mob)

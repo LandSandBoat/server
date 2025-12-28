@@ -19,3 +19,8 @@ const char* version::GetGitCommitSubject()
 {
     return "@GIT_COMMIT_SUBJECT@";
 }
+
+const char* version::GetVersionString()
+{
+    return "@GIT_BRANCH@ (@GIT_SHA1@)";
+}

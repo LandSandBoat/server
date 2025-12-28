@@ -14,13 +14,11 @@
 ===========================================================================
 */
 
-#ifndef _CJOBPOINTS_H
-#define _CJOBPOINTS_H
+#pragma once
 
 #include <vector>
 
 #include "./entities/battleentity.h"
-#include "ability.h"
 #include "common/cbasetypes.h"
 #include "modifier.h"
 
@@ -340,7 +338,6 @@ enum JOBPOINT_TYPE : uint16
 #define JobPointsCategoryIndexByJpType(jp_type) (jp_type >> 5)
 #define JobPointTypeIndex(id)                   (id & 0x1F)
 #define JobPointCost(value)                     ((value + 1) % 21)
-#define JobPointValueFormat(value)              (value << 2)
 
 /************************************************************************
  *                                                                       *
@@ -385,7 +382,7 @@ public:
     bool   IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
     void   RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
     uint16 GetJobPoints();                        // Get unspent job points for current job
-    uint16 GetJobPointsByJob(uint8 jobID);        // get current job points for a players specified job
+    uint16 GetJobPointsByJob(uint8 jobID) const;  // get current job points for a players specified job
     void   SetJobPoints(int16 amount);            // Set job points for current job
 
     void AddJobPoints(uint8 jobID, uint16 amount); // Add jobpoints to a players specififed job
@@ -398,7 +395,7 @@ public:
 
     JobPoints_t* GetAllJobPoints();
 
-    uint16 GetJobPointsSpent();
+    uint16 GetJobPointsSpent() const;
 
     bool   AddCapacityPoints(uint16 amount); // Add Capacity Points for current job, and increase JP as needed
     uint32 GetCapacityPoints();              // Get Capacity Points for Character's Current Job
@@ -417,9 +414,9 @@ private:
 
 namespace jobpointutils
 {
-    void                                LoadGifts();
-    void                                RefreshGiftMods(CCharEntity* PChar);
-    extern std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE];
-} // namespace jobpointutils
 
-#endif
+void                                LoadGifts();
+void                                RefreshGiftMods(CCharEntity* PChar);
+extern std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE];
+
+} // namespace jobpointutils

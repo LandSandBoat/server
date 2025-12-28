@@ -21,51 +21,45 @@
 
 #include "database.h"
 
+#include "application.h"
 #include "logging.h"
 #include "macros.h"
 #include "settings.h"
-#include "taskmgr.h"
+#include "task_manager.h"
+#include "timer.h"
+#include "utils.h"
 
 #include <chrono>
 using namespace std::chrono_literals;
 
 namespace
 {
-    // TODO: Manual checkout and pooling of state
-    // Each thread gets its own connection, so we don't need to worry about thread safety.
-    thread_local Synchronized<db::detail::State> state;
 
-    // Replacement map similar to str_replace in PHP
-    const std::unordered_map<char, std::string> replacements = {
-        { '\\', "\\\\" },
-        { '\0', "\\0" },
-        { '\n', "\\n" },
-        { '\r', "\\r" },
-        { '\'', "\\'" },
-        { '\"', "\\\"" },
-        { '\x1a', "\\Z" }
-    };
+// TODO: Manual checkout and pooling of state
+// Each thread gets its own connection, so we don't need to worry about thread safety.
+thread_local Synchronized<db::detail::State> state;
 
-    const std::vector<std::string> connectionIssues = {
-        "Lost connection",
-        "Server has gone away",
-        "Connection refused",
-        "Can't connect to server",
-    };
+const std::vector<std::string> connectionIssues = {
+    "Lost connection",
+    "Server has gone away",
+    "Connection refused",
+    "Can't connect to server",
+};
 
-    bool timersEnabled = false;
+bool timersEnabled = false;
+
 } // namespace
 
 auto db::getConnection() -> std::unique_ptr<sql::Connection>
 {
     try
     {
-        auto login  = settings::get<std::string>("network.SQL_LOGIN");
-        auto passwd = settings::get<std::string>("network.SQL_PASSWORD");
-        auto host   = settings::get<std::string>("network.SQL_HOST");
-        auto port   = settings::get<uint16>("network.SQL_PORT");
-        auto schema = settings::get<std::string>("network.SQL_DATABASE");
-        auto url    = fmt::format("tcp://{}:{}/{}", host, port, schema);
+        const auto login  = settings::get<std::string>("network.SQL_LOGIN");
+        const auto passwd = settings::get<std::string>("network.SQL_PASSWORD");
+        const auto host   = settings::get<std::string>("network.SQL_HOST");
+        const auto port   = settings::get<uint16>("network.SQL_PORT");
+        const auto schema = settings::get<std::string>("network.SQL_DATABASE");
+        const auto url    = fmt::format("tcp://{}:{}/{}", host, port, schema);
 
         return std::unique_ptr<sql::Connection>(sql::mariadb::get_driver_instance()->connect(url.c_str(), login.c_str(), passwd.c_str()));
     }
@@ -94,6 +88,105 @@ auto db::detail::isConnectionIssue(const std::exception& e) -> bool
     return false;
 }
 
+auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> ResultSetType
+{
+    auto parts = split(to_upper(query), " ");
+
+    std::vector<std::string> cleanedParts;
+    for (const auto& part : parts)
+    {
+        if (!part.empty() && part != "\n")
+        {
+            cleanedParts.push_back(trim(trim(part), "\n"));
+        }
+    }
+    parts = std::move(cleanedParts);
+
+    if (parts.empty())
+    {
+        return ResultSetType::Invalid;
+    }
+
+    const auto keyword = parts[0];
+    if (keyword == "SELECT")
+    {
+        return ResultSetType::Select;
+    }
+    else if (keyword == "INSERT")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "UPDATE")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "DELETE")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "REPLACE")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "CREATE")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "ALTER")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "DROP")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "TRUNCATE")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "SET")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "SHOW")
+    {
+        return ResultSetType::Select;
+    }
+    else if (keyword == "START")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "COMMIT")
+    {
+        return ResultSetType::Update;
+    }
+    else if (keyword == "ROLLBACK")
+    {
+        return ResultSetType::Update;
+    }
+
+    // Else
+    return ResultSetType::Invalid;
+}
+
+auto db::detail::validateQueryContent(const std::string& query) -> bool
+{
+    // NOTE: We shouldn't be checking for the presence of '%', as this
+    //     : is the SQL wildcard character.
+
+    if (query.find("{}") != std::string::npos)
+    {
+        return false;
+    }
+
+    if (query.find(';') != std::string::npos)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 Synchronized<db::detail::State>& db::detail::getState()
 {
     TracyZoneScoped;
@@ -101,11 +194,11 @@ Synchronized<db::detail::State>& db::detail::getState()
     // NOTE: mariadb-connector-cpp doesn't seem to make any guarantees about whether or not isValid()
     //     : is const. So we're going to have to wrap calls to it as though they aren't.
 
-    // clang-format off
-    if (state.read([&](auto& state)
-    {
-        return state.connection != nullptr;
-    }))
+    if (state.read(
+            [&](auto& state)
+            {
+                return state.connection != nullptr;
+            }))
     {
         return state;
     }
@@ -113,88 +206,56 @@ Synchronized<db::detail::State>& db::detail::getState()
     // Otherwise, create a new connection. Writing it to the state.connection unique_ptr will release any previous connection
     // that might be there.
 
-    state.write([&](auto& state)
-    {
-        state.reset();
-    });
-    // clang-format on
+    state.write(
+        [&](auto& state)
+        {
+            state.reset();
+        });
 
     return state;
 }
 
-auto db::detail::timer(std::string const& query) -> xi::final_action<std::function<void()>>
+auto db::detail::timer(const std::string& query) -> xi::final_action<std::function<void()>>
 {
-    // clang-format off
-    const auto start = hires_clock::now();
-    return xi::finally<std::function<void()>>([query, start]() -> void
-    {
-        const auto end      = hires_clock::now();
-        const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-        if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
+    const auto start = timer::now();
+    return xi::finally<std::function<void()>>(
+        [query, start]() -> void
         {
-            if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME"))
+            const auto end      = timer::now();
+            const auto duration = timer::count_milliseconds(end - start);
+            if (timersEnabled && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
             {
-                ShowError(fmt::format("SQL query took {}ms: {}", duration, query));
-            }
-            else if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_WARNING_TIME"))
-            {
-                ShowWarning(fmt::format("SQL query took {}ms: {}", duration, query));
-            }
-        }
-    });
-    // clang-format on
-}
-
-auto db::queryStr(std::string const& rawQuery) -> std::unique_ptr<db::detail::ResultSetWrapper>
-{
-    TracyZoneScoped;
-    TracyZoneString(rawQuery);
-
-    // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<db::detail::ResultSetWrapper>
-    {
-        const auto operation = [&]() -> std::unique_ptr<db::detail::ResultSetWrapper>
-        {
-            auto stmt = state.connection->createStatement();
-
-            DebugSQL(fmt::format("query: {}", rawQuery));
-            auto queryTimer = detail::timer(rawQuery);
-            auto rset       = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
-            return std::make_unique<db::detail::ResultSetWrapper>(std::move(rset), rawQuery);
-        };
-
-        const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
-        for (auto i = 0U; i < queryRetryCount; ++i)
-        {
-            try
-            {
-                if (i > 0)
+                if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME"))
                 {
-                    ShowInfo("Connection lost, re-establishing connection and retrying query (attempt %d)", i);
-                    state.reset();
+                    ShowError(fmt::format("SQL query took {}ms: {}", duration, query));
                 }
-                return operation();
-            }
-            catch (const std::exception& e)
-            {
-                if (!detail::isConnectionIssue(e))
+                else if (duration > settings::get<uint32>("logging.SQL_SLOW_QUERY_WARNING_TIME"))
                 {
-                    ShowError("Query Failed: %s", rawQuery.c_str());
-                    ShowError(e.what());
-                    return nullptr;
+                    ShowWarning(fmt::format("SQL query took {}ms: {}", duration, query));
                 }
             }
-        }
-
-        ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        std::terminate();
-    });
-    // clang-format on
+        });
 }
 
-auto db::escapeString(std::string const& str) -> std::string
+auto db::escapeString(std::string_view str) -> std::string
 {
+    static const std::unordered_map<char, std::string> replacements = {
+        // Replacement map similar to str_replace in PHP
+        { '\\', "\\\\" },
+        { '\0', "\\0" },
+        { '\n', "\\n" },
+        { '\r', "\\r" },
+        { '\'', "\\'" },
+        { '\"', "\\\"" },
+        { '\x1a', "\\Z" },
+
+        // Extras
+        { '\b', "\\b" },
+        { '%', "\\%" },
+        { '|', "\\|" },
+        { ';', "\\;" },
+    };
+
     std::string escapedStr;
 
     for (size_t i = 0; i < str.size(); ++i)
@@ -207,7 +268,7 @@ auto db::escapeString(std::string const& str) -> std::string
             break;
         }
 
-        auto it = replacements.find(c);
+        const auto it = replacements.find(c);
         if (it != replacements.end())
         {
             escapedStr += it->second;
@@ -221,42 +282,59 @@ auto db::escapeString(std::string const& str) -> std::string
     return escapedStr;
 }
 
+auto db::escapeString(const std::string& str) -> std::string
+{
+    if (str.empty())
+    {
+        return {};
+    }
+
+    return db::escapeString(std::string_view(str));
+}
+
+auto db::escapeString(const char* str) -> std::string
+{
+    if (str == nullptr)
+    {
+        return {};
+    }
+
+    return db::escapeString(std::string_view(str));
+}
+
 auto db::getDatabaseSchema() -> std::string
 {
     TracyZoneScoped;
 
-    // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::string
-    {
-        return state.connection->getSchema().c_str();
-    });
-    // clang-format on
+    return detail::getState().write(
+        [&](detail::State& state) -> std::string
+        {
+            return state.connection->getSchema().c_str();
+        });
 }
 
 auto db::getDatabaseVersion() -> std::string
 {
     TracyZoneScoped;
 
-    // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::string
-    {
-        const auto metadata = state.connection->getMetaData();
-        return fmt::format("{} {}", metadata->getDatabaseProductName().c_str(), metadata->getDatabaseProductVersion().c_str());
-    });
-    // clang-format on
+    return detail::getState().write(
+        [&](detail::State& state) -> std::string
+        {
+            const std::unique_ptr<sql::DatabaseMetaData> metadata(state.connection->getMetaData());
+            return fmt::format("{} {}", metadata->getDatabaseProductName().c_str(), metadata->getDatabaseProductVersion().c_str());
+        });
 }
 
 auto db::getDriverVersion() -> std::string
 {
     TracyZoneScoped;
 
-    // clang-format off
-    return detail::getState().write([&](detail::State& state) -> std::string
-    {
-        const auto metadata = state.connection->getMetaData();
-        return fmt::format("{} {}", metadata->getDriverName().c_str(), metadata->getDriverVersion().c_str());
-    });
-    // clang-format on
+    return detail::getState().write(
+        [&](detail::State& state) -> std::string
+        {
+            const std::unique_ptr<sql::DatabaseMetaData> metadata(state.connection->getMetaData());
+            return fmt::format("{} {}", metadata->getDriverName().c_str(), metadata->getDriverVersion().c_str());
+        });
 }
 
 void db::checkCharset()
@@ -264,21 +342,23 @@ void db::checkCharset()
     TracyZoneScoped;
 
     // Check that the SQL charset is what we require
-    auto rset = query("SELECT @@character_set_database, @@collation_database");
+    const auto rset = preparedStmt("SELECT @@character_set_database, @@collation_database");
     if (rset && rset->rowsCount())
     {
         bool foundError = false;
         while (rset->next())
         {
-            auto charsetSetting   = rset->get<std::string>(0);
-            auto collationSetting = rset->get<std::string>(1);
+            const auto charsetSetting   = rset->get<std::string>(0);
+            const auto collationSetting = rset->get<std::string>(1);
             if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
             {
                 foundError = true;
-                // clang-format off
-                ShowWarning(fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
-                    charsetSetting, collationSetting).c_str());
-                // clang-format on
+
+                ShowWarning(
+                    fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
+                                charsetSetting,
+                                collationSetting)
+                        .c_str());
             }
         }
 
@@ -307,10 +387,9 @@ void db::checkTriggers()
     };
 
     bool foundError = false;
-
     for (const auto& trigger : triggers)
     {
-        auto rset = preparedStmt(triggerQuery, trigger);
+        const auto rset = preparedStmt(triggerQuery, trigger);
         if (!rset || rset->rowsCount() == 0)
         {
             ShowWarning(fmt::format("Missing trigger: {}", trigger));
@@ -430,4 +509,23 @@ bool db::transaction(const std::function<void()>& transactionFn)
 
     db::setAutoCommit(wasAutoCommitOn);
     return true;
+}
+
+auto db::getTableColumnNames(const std::string& tableName) -> std::vector<std::string>
+{
+    TracyZoneScoped;
+
+    const auto rset = db::preparedStmt("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?", tableName, db::getDatabaseSchema());
+    if (rset && rset->rowsCount())
+    {
+        std::vector<std::string> columnNames;
+        while (rset->next())
+        {
+            columnNames.emplace_back(rset->get<std::string>(0));
+        }
+
+        return columnNames;
+    }
+
+    return {};
 }

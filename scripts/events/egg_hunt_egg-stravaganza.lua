@@ -79,8 +79,8 @@ end
 loadSettings(settings, 'EGG_HUNT')
 
 xi.events.eggHunt.enabledCheck = function()
-    local month = tonumber(os.date('%m'))
-    local day = tonumber(os.date('%d'))
+    local month = JstMonth()
+    local day = JstDayOfTheMonth()
 
     if month == settings.START.MONTH then
         if day >= settings.START.DAY then
@@ -884,7 +884,7 @@ xi.events.eggHunt.onTrade = function(player, npc, trade)
                 if type(v.message) == 'number' then
                     player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + v.message)
                 else
-                    player:printToPlayer(string.format('Moogle : %s', v.message), xi.msg.channel.NS_SAY, 'Moogle')
+                    player:printToPlayer(v.message, xi.msg.channel.SAY, 'Moogle')
                 end
             end
 

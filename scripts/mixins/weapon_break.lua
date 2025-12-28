@@ -11,7 +11,7 @@ g_mixins.weapon_break = function(weaponBreakMob)
     -- set default 10% chance to break weapon on critical hit taken
     -- this can be overridden in onMobSpawn
 
-    weaponBreakMob:addListener('SPAWN', 'WEAPON_BREAK', function(mob)
+    weaponBreakMob:addListener('PRESPAWN', 'WEAPON_BREAK', function(mob)
         mob:setLocalVar('BreakChance', 10)
     end)
 
@@ -21,7 +21,7 @@ g_mixins.weapon_break = function(weaponBreakMob)
             local animationSub = mob:getAnimationSub()
 
             -- break weapon
-            if animationSub == 0 then
+            if animationSub ~= 1 then
                 mob:setAnimationSub(1)
             end
         end

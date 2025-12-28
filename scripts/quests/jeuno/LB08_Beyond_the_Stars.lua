@@ -26,9 +26,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainLvl() >= 81 and
-                player:getLevelCap() == 85 and
-                xi.settings.main.MAX_LEVEL >= 90
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) and
+                player:getLevelCap() == 85
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -36,7 +35,23 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 3, 0)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 0
+                    local lastQuestStage  = 0
+                    if
+                        xi.settings.main.MAX_LEVEL > 85 and
+                        limitBreaker == 1
+                    then
+                        if playerLevel > 80 then
+                            lastQuestNumber = 3
+                        elseif playerLevel >= 75 then
+                            lastQuestNumber = 2
+                            lastQuestStage  = 2
+                        end
+                    end
+
+                    return quest:progressEvent(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
                 end,
             },
 
@@ -61,16 +76,6 @@ quest.sections =
         {
             ['Nomad_Moogle'] =
             {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        -- Rock, Paper, Scissor Minigame starting event.
-                        -- NOT CODED. WAITING FOR CAPS.
-                        return quest:progressEvent(10161)
-                    else
-                        return quest:event(10045, 0, 1, 3, 1)
-                    end
-                end,
-
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_CREST, 10 } }) and
@@ -79,13 +84,56 @@ quest.sections =
                         return quest:progressEvent(10137)
                     end
                 end,
+
+                onTrigger = function(player, npc)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 3
+                    local lastQuestStage  = 1
+
+                    -- Rock, Paper, Scissor Minigame.
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(10161, playerLevel, 0)
+
+                    -- Reminder
+                    else
+                        return quest:event(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
+                    end
+                end,
             },
 
-            -- onEventUpdate =
-            -- {
-                -- [10161] = function(player, csid, option, npc)
-                -- end,
-            -- },
+            onEventUpdate =
+            {
+                [10161] = function(player, csid, option, npc)
+                    -- Maat move choice.
+                    local maatMove = 0
+                    if option == 21 then
+                        maatMove = 0 -- Red.
+                    elseif option == 22 then
+                        maatMove = 1 -- Blue.
+                    elseif option == 23 then
+                        maatMove = 2 -- Green.
+                    end
+
+                    -- Degenhard move choice.
+                    local degenhardMove = math.random(0, 2)
+
+                    -- Rock-Paper-Scissors: Red beats Blue; Blue beats Green; Green beats Red.
+                    local clashOutcome = 1 -- Assume Degenhard wins
+                    if maatMove == degenhardMove then
+                        clashOutcome = 2 -- Draw
+                    elseif
+                        (maatMove == 0 and degenhardMove == 1) or
+                        (maatMove == 1 and degenhardMove == 2) or
+                        (maatMove == 2 and degenhardMove == 0)
+                    then
+                        clashOutcome = 0
+                    end
+
+                    local eventBitmask = maatMove + degenhardMove * 4 + clashOutcome * 16 -- Controls moves chosen by Maat and Degenhard, and who wins the round.
+                    player:updateEvent(eventBitmask)
+                end,
+            },
 
             onEventFinish =
             {
@@ -96,7 +144,8 @@ quest.sections =
                 end,
 
                 [10161] = function(player, csid, option, npc)
-                    if quest:complete(player) then
+                    if option == 254 then
+                        quest:complete(player)
                         player:setLevelCap(90)
                         player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
                     end

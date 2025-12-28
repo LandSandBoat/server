@@ -17,15 +17,15 @@ local skillToAbsorb =
 }
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('nextEnSkill', os.time() + 10)
+    mob:setLocalVar('nextEnSkill', GetSystemTime() + 10)
 end
 
 entity.onMobFight = function(mob, target)
-    if os.time() > mob:getLocalVar('nextEnSkill') then
+    if GetSystemTime() > mob:getLocalVar('nextEnSkill') then
         local skill = math.random(823, 828)
         mob:setLocalVar('currentTP', mob:getTP())
         mob:useMobAbility(skill)
-        mob:setLocalVar('nextEnSkill', os.time() + 30)
+        mob:setLocalVar('nextEnSkill', GetSystemTime() + 30)
     end
 end
 

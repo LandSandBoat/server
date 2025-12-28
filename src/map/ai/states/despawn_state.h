@@ -28,8 +28,8 @@ class CDespawnState : public CState
 {
 public:
     CDespawnState(CBaseEntity* PEntity, bool instantDespawn);
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
+    virtual bool Update(timer::time_point tick) override;
+    virtual void Cleanup(timer::time_point tick) override;
     virtual bool CanChangeState() override;
     virtual bool CanFollowPath() override
     {

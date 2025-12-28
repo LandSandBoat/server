@@ -12,27 +12,16 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
     if prevZone == xi.zone.EAST_RONFAURE_S then
         if
             player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == xi.questStatus.QUEST_ACCEPTED and
             player:getCharVar('KnotQuiteThere') == 2
         then
-            cs = 62
+            return 62
         end
     end
 
-    -- MOG HOUSE EXIT
-    if
-        player:getXPos() == 0 and
-        player:getYPos() == 0 and
-        player:getZPos() == 0
-    then
-        player:setPos(161, -2, 161, 94)
-    end
-
-    return cs
+    return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

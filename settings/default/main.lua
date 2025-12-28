@@ -12,11 +12,11 @@ xi.settings = xi.settings or {}
 xi.settings.main =
 {
     -- Server name (not longer than 15 characters)
-    SERVER_NAME = "Nameless",
+    SERVER_NAME = 'Nameless',
 
     SERVER_MESSAGE =
-        "Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n" ..
-        "Thank you, and we hope you enjoy sailing the sands!",
+        'Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n' ..
+        'Thank you, and we hope you enjoy sailing the sands!',
 
     -- Setting to lock content more accurately to the expansions defined below.
     -- This generally results in a more accurate presentation of your selected expansions,
@@ -51,6 +51,11 @@ xi.settings.main =
     DAILY_TALLY_LIMIT  = 50000,
     GOBBIE_BOX_MIN_AGE = 45, -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
 
+    -- A.M.A.N.
+    ASSIST_CHANNEL_ENABLED            = true, -- Enable Assist Channel
+    ASSIST_CHANNEL_MEMBERSHIP_LENGTH  = 240,  -- How long returnees and new players will have access to the assist channel, in playtime hours.
+    ASSIST_CHANNEL_RETURNEE_LOGIN_GAP =  48,  -- How many days must have elapsed before returnees are added to the assist channel.
+
     -- Records of Eminence
     ENABLE_ROE            = 1, -- Enable Records of Eminence
     ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
@@ -69,6 +74,9 @@ xi.settings.main =
 
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
+
+    -- Moblin Maze Mongers
+    ENABLE_MMM = 0,
 
     -- Monstrosity (Heavily in development, use at your own risk!)
     ENABLE_MONSTROSITY               = 0,
@@ -133,6 +141,25 @@ xi.settings.main =
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
 
+    -- STR:ATT/RATT ratios. For players only. Mobs are hardcoded to 0.5
+    TWO_HANDED_STR_ATTACK_MULTIPLIER         = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.75 in previous eras
+    HAND_TO_HAND_STR_ATTACK_MULTIPLIER       = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.625 in previous eras.
+    ONE_HAND_MAIN_HAND_STR_ATTACK_MULTIPLIER = 0.75, -- 0.75: 1 STR = 0.75 Attack. This has been 0.5 in previous eras.
+    ONE_HAND_OFF_HAND_STR_ATTACK_MULTIPLIER  = 0.5,  -- 0.5: 1 STR = 0.5 Attack. This has always been 0.5 but is provided anyway.
+    RANGED_STR_ATTACK_MULTIPLIER             = 1.0,  -- 1.0: 1 STR = 1.0 Ranged Attack. This has been 0.5 and 0.75 in previous eras.
+
+    -- DEX:ACC ratios. For players only. Mobs are hardcoded to 0.5
+    TWO_HANDED_DEX_ACCURACY_MULTIPLIER         = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 and 0.75 in previous eras
+    HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER       = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+    ONE_HAND_MAIN_HAND_DEX_ACCURACY_MULTIPLIER = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+    ONE_HAND_OFF_HAND_DEX_ACCURACY_MULTIPLIER  = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+
+    -- AGI:RACC ratio. Mobs are hardcoded to 0.5
+    RANGED_AGI_ACCURACY_MULTIPLIER = 0.75, -- 0.75: 1 AGI = 0.75 Ranged Accuracy. This has been 0.5 in previous eras.
+
+    -- VIT:DEF ratio. Applies to everything but mobs and charmed mobs. Those are hardcoded to 0.5.
+    PLAYER_ALLIES_VIT_DEF_MULTIPLIER = 1.5, -- 1.5: 1 VIT = 1.5 DEF. This has been 0.5 in previous eras.
+
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
@@ -148,14 +175,14 @@ xi.settings.main =
     ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE         = 0, -- 0 = disabled, 1 = add announcement to player login
 
     TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
-        "\n \n" .. -- The space between these newlines is intentional
-        "\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n" ..
-        "This is an excellent time to fill out your roster of Trusts!",
+        '\n \n' .. -- The space between these newlines is intentional
+        '\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n' ..
+        'This is an excellent time to fill out your roster of Trusts!',
 
     TRUST_ALTER_EGO_EXPO_MESSAGE =
-        "\n \n" .. -- The space between these newlines is intentional
-        "\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n" ..
-        "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
+        '\n \n' .. -- The space between these newlines is intentional
+        '\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n' ..
+        'Trusts gain the benefits of Increased HP, MP, and Status Resistances!',
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
     EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
@@ -210,20 +237,16 @@ xi.settings.main =
     AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest
     AF3_QUEST_LEVEL = 50,    -- Minimum level to start AF3 quest
     OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-    OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+    OLDSCHOOL_G2    = false, -- Set true to require the NMs for 'Atop the Highest Mountains' be dead to get KI like before SE changed it.
+    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the '???' target.
     ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS
-    DIA_OVERWRITE                   = 1,     -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
-    BIO_OVERWRITE                   = 0,     -- Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
     STONESKIN_CAP                   = 350,   -- Soft cap for hp absorbed by stoneskin
     BLINK_SHADOWS                   = 2,     -- Number of shadows supplied by Blink spell
     SPIKE_EFFECT_DURATION           = 180,   -- the duration of RDM, BLM spikes effects (not Reprisal)
     ELEMENTAL_DEBUFF_DURATION       = 120,   -- base duration of elemental debuffs
     AQUAVEIL_COUNTER                = 1,     -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
-    ABSORB_SPELL_AMOUNT             = 8,     -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
-    ABSORB_SPELL_TICK               = 9,     -- duration of 1 absorb spell tick
     SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
     USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
@@ -306,6 +329,7 @@ xi.settings.main =
     FORCE_SPAWN_QM_RESET_TIME    = 300,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
     REGIME_REWARD_THRESHOLD      = 15,    -- If the player is more than N levels below the minimum suggested range, do not award experience.
+    PERSIST_SEAL_TIMERS          = false, -- Persist seal (Beastmen/Kindred) recast timers across zone changes and logout.
 
     -- SYSTEM
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.

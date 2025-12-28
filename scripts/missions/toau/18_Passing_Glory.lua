@@ -31,10 +31,18 @@ mission.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [3090] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 1, 0)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [3090] = function(player, csid, option, npc)
-                    -- TODO: Verify event update options from captures for this CS.
                     mission:complete(player)
                 end,
             },

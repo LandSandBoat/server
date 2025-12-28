@@ -21,20 +21,32 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3148, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.RULUDE_GARDENS] =
         {
             ['Pherimociel'] =
             {
                 onTrigger = function(player, npc)
-                    local questTimer = mission:getVar(player, 'Timer')
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        if
+                            not mission:getMustZone(player) and
+                            VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+                        then
+                            return mission:progressEvent(10098) -- Ship is ready.
 
-                    if questTimer == 0 then
-                        return mission:progressEvent(10099)
-                    elseif
-                        VanadielUniqueDay() >= questTimer and
-                        not mission:getMustZone(player)
-                    then
-                        return mission:progressEvent(10098)
+                        -- Optional cutscene. Plays one time per zone until time is up. FORCES zoning, which blocks progress until you do.
+                        elseif player:getLocalVar('Mission[4][39]seenCS') == 0 then
+                            return mission:event(10099) -- Ship isn't ready.
+                        end
                     end
                 end,
             },
@@ -42,21 +54,14 @@ mission.sections =
             onEventFinish =
             {
                 [10098] = function(player, csid, option, npc)
-                    if option == 1 then
-                        -- Title can be obtained immediately following this event.  Since these are stringed
-                        -- together, set it at the end for clarity in mission rewards.
-
-                        -- NOTE: Setting absolute pos here in the past has caused issues, so we chuck to Wajaom
-                        -- and then start moving things around.  This is probably something good to fix in the
-                        -- future for all events.
-                        player:setPos(0, 0, 0, 0, 51)
-                    else
-                        mission:setMustZone(player)
+                    if option == 1 then -- Confirmed that if you decline the offer, you don't need to zone to get the CS again.
+                        player:setMissionStatus(mission.areaId, 1)
+                        player:setPos(-200.036, -10, 79.948, 254, xi.zone.WAJAOM_WOODLANDS)
                     end
                 end,
 
                 [10099] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    player:setLocalVar('Mission[4][39]seenCS', 1)
                     mission:setMustZone(player)
                 end,
             },
@@ -65,30 +70,45 @@ mission.sections =
         [xi.zone.WAJAOM_WOODLANDS] =
         {
             onZoneIn = function(player, prevZone)
-                -- Each of these 3 cutscenes that follow Ru'Lude 10098 are onZone events.  It is possible
-                -- to not require this, but is retail accurate.
+                -- Each of these 3 cutscenes that follow Ru'Lude 10098 are onZone events.
+                -- It is possible to not require this, but is retail accurate.
 
                 local missionStatus = player:getMissionStatus(mission.areaId)
 
-                if missionStatus == 0 then
+                if missionStatus == 1 then
                     return 11
-                elseif missionStatus == 1 then
+                elseif missionStatus == 2 then
                     return 21
-                else
+                elseif missionStatus == 3 then
                     return 22
                 end
             end,
 
-            onEventFinish =
+            onEventUpdate =
             {
                 [11] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-                    player:setPos(-200.036, -10, 79.948, 254, 51)
+                    if option == 0 then
+                        player:updateEvent(0, 4, 0, 0, 0, 0, 0, 3, 0)
+                    end
                 end,
 
                 [21] = function(player, csid, option, npc)
+                    if option == 0 then
+                        player:updateEvent(0, 4, 0, 0, 0, 0, 0, 3, 0)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [11] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    player:setPos(-200.036, -10, 79.948, 254, 51)
+                    player:setPos(-200.036, -10, 79.948, 254, xi.zone.WAJAOM_WOODLANDS)
+                end,
+
+                [21] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 3)
+                    player:setPos(-200.036, -10, 79.948, 254, xi.zone.WAJAOM_WOODLANDS)
                 end,
 
                 [22] = function(player, csid, option, npc)

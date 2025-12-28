@@ -29,5 +29,7 @@ class CFellowEntity;
 
 namespace fellowutils
 {
-    // TODO
+
+// TODO
+
 } // namespace fellowutils

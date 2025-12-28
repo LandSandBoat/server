@@ -7,7 +7,7 @@ g_mixins.families = g_mixins.families or {}
 
 local function attemptTransform(mob, timeThreshold)
     local transformTime = mob:getLocalVar('transformTime')
-    local currentTime = os.time()
+    local currentTime = GetSystemTime()
     if currentTime - transformTime >= timeThreshold then
         local animSub = mob:getAnimationSub()
         animSub = (animSub + 1) % 2
@@ -18,7 +18,7 @@ end
 
 g_mixins.families.gnole = function(gnoleMob)
     gnoleMob:addListener('SPAWN', 'GNOLE_SPAWN', function(mob)
-        mob:setLocalVar('transformTime', os.time())
+        mob:setLocalVar('transformTime', GetSystemTime())
     end)
 
     gnoleMob:addListener('ROAM_TICK', 'GNOLE_ROAM', function(mob)

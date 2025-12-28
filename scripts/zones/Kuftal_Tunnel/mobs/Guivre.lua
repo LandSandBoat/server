@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     { x = 119.000, y = -0.010, z = 38.000 },
     { x = 123.207, y = -0.053, z = 42.922 },
@@ -202,18 +202,19 @@ local pathFind =
 entity.onMobInitialize = function(mob)
     -- Guivre has increased movespeed, sight range with
     -- Natural double/triple attack.
-    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 150)
-    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMod(xi.mobMod.RUN_SPEED_MULT, 300)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
 end
 
 entity.onMobSpawn = function(mob)
     -- Guivre will despawn if not claimed within 3-5 hours.
-    mob:setLocalVar('despawnTime', math.random(10800, 18000) + os.time())
+    mob:setLocalVar('despawnTime', math.random(10800, 18000) + GetSystemTime())
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
@@ -261,13 +262,13 @@ end
 
 entity.onMobRoam = function(mob)
     local despawnCheck = mob:getLocalVar('despawnTime')
-    if despawnCheck <= os.time() then
+    if despawnCheck <= GetSystemTime() then
         DespawnMob(mob:getID())
     end
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
 end
 

@@ -6,10 +6,12 @@
 
 #define _NO_CVCONST_H
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winnt.h>
 #include <winternl.h>
 #include <dbghelp.h>
+
 #include <set>
 #include <cstdlib>
 #include <cstdio>

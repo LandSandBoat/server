@@ -2,81 +2,79 @@
 -- Area: Lower Jeuno
 --  NPC: Hasim
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4612,  23400, -- Scroll of Cure IV
-        4616,  11200, -- Scroll of Curaga II
-        4617,  19932, -- Scroll of Curaga III
-        4625,   2330, -- Scroll of Silena
-        4626,  19200, -- Scroll of Stona
-        4627,  13300, -- Scroll of Viruna
-        4628,   8586, -- Scroll of Cursna
-        4653,  32000, -- Scroll of Protect III
-        4734,   7074, -- Scroll of Protectra II
-        4735,  19200, -- Scroll of Protectra III
-        4658,  26244, -- Scroll of Shell III
-        4738,   1760, -- Scroll of Shellra
-        4739,  14080, -- Scroll of Shellra II
-        4740,  26244, -- Scroll of Shellra III
-        4668,   1760, -- Scroll of Barfire
-        4669,   3624, -- Scroll of Barblizzard
-        4670,    930, -- Scroll of Baraero
-        4671,    156, -- Scroll of Barstone
-        4672,   5754, -- Scroll of Barthunder
-        4673,    360, -- Scroll of Barwater
-        4674,   1760, -- Scroll of Barfira
-        4675,   3624, -- Scroll of Barblizzara
-        4676,    930, -- Scroll of Baraera
-        4677,    156, -- Scroll of Barstonra
-        4678,   5754, -- Scroll of Barthundra
-        4679,    360, -- Scroll of Barwatera
-        4680,    244, -- Scroll of Barsleep
-        4681,    400, -- Scroll of Barpoison
-        4682,    780, -- Scroll of Barparalyze
-        4683,   2030, -- Scroll of Barblind
-        4684,   4608, -- Scroll of Barsilence
-        4694,    244, -- Scroll of Barsleepra
-        4695,    400, -- Scroll of Barpoisonra
-        4696,    780, -- Scroll of Barparalyzra
-        4697,   2030, -- Scroll of Barblindra
-        4698,   4608, -- Scroll of Barsilencera
-        4685,  15120, -- Scroll of Barpetrify
-        4686,   9600, -- Scroll of Barvirus
-        4699,  15120, -- Scroll of Barpetra
-        4700,   9600, -- Scroll of Barvira
-        5089,  73740, -- Scroll of Gain-VIT
-        5092,  77500, -- Scroll of Gain-MND
-        5090,  85680, -- Scroll of Gain-AGI
-        5093,  81900, -- Scroll of Gain-CHR
-        5087,  89804, -- Scroll of Gain-STR
-        5091,  94461, -- Scroll of Gain-INT
-        5088,  99613, -- Scroll of Gain-DEX
-        5096,  73740, -- Scroll of Boost-VIT
-        5099,  77500, -- Scroll of Boost-MND
-        5097,  85680, -- Scroll of Boost-AGI
-        5100,  81900, -- Scroll of Boost-CHR
-        5094,  89804, -- Scroll of Boost-STR
-        5098,  94461, -- Scroll of Boost-INT
-        5095,  99613, -- Scroll of Boost-DEX
-        5106,  73500, -- Scroll of Inundation
-        4849, 130378, -- Scroll of Addle
-        4629,  35000, -- Scroll of Holy
-        4647,  20000, -- Scroll of Banishga II
-        4737, 119240, -- Scroll of Protecra V
-        4742, 124540, -- Scroll of Shellra V
-        4633, 139135, -- Scroll of Dia III
-        6569, 139135, -- Scroll of Slow II
-        6570, 139135, -- Scroll of Paralyze II
-        6571, 139135, -- Scroll of Phalanx II
+        { xi.item.SCROLL_OF_CURE_IV,        23400 },
+        { xi.item.SCROLL_OF_CURAGA_II,      11200 },
+        { xi.item.SCROLL_OF_CURAGA_III,     19932 },
+        { xi.item.SCROLL_OF_SILENA,          2330 },
+        { xi.item.SCROLL_OF_STONA,          19200 },
+        { xi.item.SCROLL_OF_VIRUNA,         13300 },
+        { xi.item.SCROLL_OF_CURSNA,          8586 },
+        { xi.item.SCROLL_OF_PROTECT_III,    32000 },
+        { xi.item.SCROLL_OF_PROTECTRA_II,    7074 },
+        { xi.item.SCROLL_OF_PROTECTRA_III,  19200 },
+        { xi.item.SCROLL_OF_SHELL_III,      26244 },
+        { xi.item.SCROLL_OF_SHELLRA,         1760 },
+        { xi.item.SCROLL_OF_SHELLRA_II,     14080 },
+        { xi.item.SCROLL_OF_SHELLRA_III,    26244 },
+        { xi.item.SCROLL_OF_BARFIRE,         1760 },
+        { xi.item.SCROLL_OF_BARBLIZZARD,     3624 },
+        { xi.item.SCROLL_OF_BARAERO,          930 },
+        { xi.item.SCROLL_OF_BARSTONE,         156 },
+        { xi.item.SCROLL_OF_BARTHUNDER,      5754 },
+        { xi.item.SCROLL_OF_BARWATER,         360 },
+        { xi.item.SCROLL_OF_BARFIRA,         1760 },
+        { xi.item.SCROLL_OF_BARBLIZZARA,     3624 },
+        { xi.item.SCROLL_OF_BARAERA,          930 },
+        { xi.item.SCROLL_OF_BARSTONRA,        156 },
+        { xi.item.SCROLL_OF_BARTHUNDRA,      5754 },
+        { xi.item.SCROLL_OF_BARWATERA,        360 },
+        { xi.item.SCROLL_OF_BARSLEEP,         244 },
+        { xi.item.SCROLL_OF_BARPOISON,        400 },
+        { xi.item.SCROLL_OF_BARPARALYZE,      780 },
+        { xi.item.SCROLL_OF_BARBLIND,        2030 },
+        { xi.item.SCROLL_OF_BARSILENCE,      4608 },
+        { xi.item.SCROLL_OF_BARSLEEPRA,       244 },
+        { xi.item.SCROLL_OF_BARPOISONRA,      400 },
+        { xi.item.SCROLL_OF_BARPALARYZRA,     780 },
+        { xi.item.SCROLL_OF_BARBLINDRA,      2030 },
+        { xi.item.SCROLL_OF_BARSILENCERA,    4608 },
+        { xi.item.SCROLL_OF_BARPETRIFY,     15120 },
+        { xi.item.SCROLL_OF_BARVIRUS,        9600 },
+        { xi.item.SCROLL_OF_BARPETRA,       15120 },
+        { xi.item.SCROLL_OF_BARVIRA,         9600 },
+        { xi.item.SCROLL_OF_GAIN_VIT,       73740 },
+        { xi.item.SCROLL_OF_GAIN_MND,       77500 },
+        { xi.item.SCROLL_OF_GAIN_AGI,       85680 },
+        { xi.item.SCROLL_OF_GAIN_CHR,       81900 },
+        { xi.item.SCROLL_OF_GAIN_STR,       89804 },
+        { xi.item.SCROLL_OF_GAIN_INT,       94461 },
+        { xi.item.SCROLL_OF_GAIN_DEX,       99613 },
+        { xi.item.SCROLL_OF_BOOST_VIT,      73740 },
+        { xi.item.SCROLL_OF_BOOST_MND,      77500 },
+        { xi.item.SCROLL_OF_BOOST_AGI,      85680 },
+        { xi.item.SCROLL_OF_BOOST_CHR,      81900 },
+        { xi.item.SCROLL_OF_BOOST_STR,      89804 },
+        { xi.item.SCROLL_OF_BOOST_INT,      94461 },
+        { xi.item.SCROLL_OF_BOOST_DEX,      99613 },
+        { xi.item.SCROLL_OF_INUNDATION,     73500 },
+        { xi.item.SCROLL_OF_ADDLE,         130378 },
+        { xi.item.SCROLL_OF_HOLY,           35000 },
+        { xi.item.SCROLL_OF_BANISHGA_II,    20000 },
+        { xi.item.SCROLL_OF_PROTECTRA_V,   119240 },
+        { xi.item.SCROLL_OF_SHELLRA_V,     124540 },
+        { xi.item.SCROLL_OF_DIA_III,       139135 },
+        { xi.item.SCROLL_OF_SLOW_II,       139135 },
+        { xi.item.SCROLL_OF_PARALYZE_II,   139135 },
+        { xi.item.SCROLL_OF_PHALANX_II,    139135 },
     }
 
-    player:showText(npc, ID.text.WAAG_DEEG_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.WAAG_DEEG_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

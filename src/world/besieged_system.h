@@ -21,12 +21,12 @@
 
 #pragma once
 
-#include "world_server.h"
+#include "world_engine.h"
 
 class BesiegedSystem
 {
 public:
-    BesiegedSystem(WorldServer& worldServer)
+    BesiegedSystem(WorldEngine& worldServer)
     : worldServer_(worldServer)
     {
         std::ignore = worldServer_;
@@ -40,5 +40,5 @@ public:
     }
 
 private:
-    WorldServer& worldServer_;
+    WorldEngine& worldServer_;
 };

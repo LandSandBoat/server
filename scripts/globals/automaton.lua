@@ -86,7 +86,7 @@ local attachmentModifiers =
     ['galvanizer']          = { { xi.mod.COUNTER,                     {    10,    20,    35,    50 }, true  }, },
     ['hammermill']          = { { xi.mod.SHIELD_BASH,                 {    15,    25,    50,   100 }, true  },
                                 { xi.mod.AUTO_SHIELD_BASH_SLOW,       {     0,    12,    19,    25 }, true  }, },
-    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {     2,     4,     5,     6 }, true  }, },
+    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {     1,     3,     4,     5 }, true  }, },
     ['inhibitor']           = { { xi.mod.STORETP,                     {     5,    15,    25,    40 }, true  },
                                 { xi.mod.AUTO_TP_EFFICIENCY,          {   900,   900,   900,   900 }, false }, },
     ['inhibitor_ii']        = { { xi.mod.STORETP,                     {    10,    25,    40,    65 }, true  },

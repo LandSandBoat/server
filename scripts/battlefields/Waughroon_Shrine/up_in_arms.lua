@@ -23,64 +23,70 @@ content:addEssentialMobs({ 'Fee' })
 content.loot =
 {
     {
-        { item = xi.item.GIL, weight = 1000, amount = 15000 }, -- Gil
+        { itemId = xi.item.GIL,                 weight = 10000, amount = 15000 },
     },
 
     {
-        { item = xi.item.BLACK_PEARL, weight = 1000 }, -- Black Pearl
+        { itemId = xi.item.BLACK_PEARL,         weight = 10000 },
     },
 
     {
         quantity = 2,
-        { item = xi.item.PEARL, weight = 1000 }, -- Pearl
+        { itemId = xi.item.PEARL,               weight = 10000 },
     },
 
     {
         quantity = 3,
-        { item = xi.item.PIECE_OF_OXBLOOD, weight = 1000 }, -- Piece Of Oxblood
+        { itemId = xi.item.PIECE_OF_OXBLOOD,    weight = 10000 },
     },
 
     {
-        { item = xi.item.TELEPORT_RING_ALTEP, weight = 447 }, -- Teleport Ring Altep
-        { item = xi.item.TELEPORT_RING_DEM,   weight = 487 }, -- Teleport Ring Dem
+        { itemId = xi.item.TELEPORT_RING_ALTEP, weight =  5000 },
+        { itemId = xi.item.TELEPORT_RING_DEM,   weight =  5000 },
     },
 
     {
-        { item = xi.item.AJARI_BEAD_NECKLACE, weight = 494 }, -- Ajari Bead Necklace
-        { item = xi.item.PHILOMATH_STOLE,     weight = 449 }, -- Philomath Stole
+        { itemId = xi.item.AJARI_BEAD_NECKLACE, weight =  4750 },
+        { itemId = xi.item.PHILOMATH_STOLE,     weight =  4750 },
+        { itemId = xi.item.WALKURE_MASK,        weight =   500 },
     },
 
     {
-        { item = xi.item.AQUAMARINE,       weight =  51 }, -- Aquamarine
-        { item = xi.item.CHRYSOBERYL,      weight =  32 }, -- Chrysoberyl
-        { item = xi.item.DARKSTEEL_INGOT,  weight =  39 }, -- Darksteel Ingot
-        { item = xi.item.EBONY_LOG,        weight =  21 }, -- Ebony Log
-        { item = xi.item.HI_RERAISER,      weight =  32 }, -- Hi-reraiser
-        { item = xi.item.GOLD_INGOT,       weight =  55 }, -- Gold Ingot
-        { item = xi.item.JADEITE,          weight =  62 }, -- Jadeite
-        { item = xi.item.MYTHRIL_INGOT,    weight =  81 }, -- Mythril Ingot
-        { item = xi.item.MOONSTONE,        weight =  56 }, -- Moonstone
-        { item = xi.item.PAINITE,          weight = 195 }, -- Painite
-        { item = xi.item.STEEL_INGOT,      weight =  58 }, -- Steel Ingot
-        { item = xi.item.SUNSTONE,         weight =  38 }, -- Sunstone
-        { item = xi.item.TRANSLUCENT_ROCK, weight =  11 }, -- Translucent Rock
-        { item = xi.item.VILE_ELIXIR_P1,   weight =  21 }, -- Vile Elixir +1
-        { item = xi.item.YELLOW_ROCK,      weight =  15 }, -- Yellow Rock
-        { item = xi.item.ZIRCON,           weight =  26 }, -- Zircon
-        { item = xi.item.RED_ROCK,         weight =  21 }, -- Red Rock
-        { item = xi.item.MAHOGANY_LOG,     weight =  17 }, -- Mahogany Log
-        { item = xi.item.BLUE_ROCK,        weight =   9 }, -- Blue Rock
-        { item = xi.item.FLUORITE,         weight =  62 }, -- Fluorite
-        { item = xi.item.PURPLE_ROCK,      weight =  11 }, -- Purple Rock
-        { item = xi.item.BLACK_ROCK,       weight =  11 }, -- Black Rock
-        { item = xi.item.GREEN_ROCK,       weight =  11 }, -- Green Rock
-        { item = xi.item.WHITE_ROCK,       weight =   9 }, -- White Rock
+        { itemId = xi.item.AQUAMARINE,          weight =   400 },
+        { itemId = xi.item.CHRYSOBERYL,         weight =   400 },
+        { itemId = xi.item.FLUORITE,            weight =   400 },
+        { itemId = xi.item.JADEITE,             weight =   400 },
+        { itemId = xi.item.MOONSTONE,           weight =   400 },
+        { itemId = xi.item.PAINITE,             weight =   400 },
+        { itemId = xi.item.SUNSTONE,            weight =   400 },
+        { itemId = xi.item.ZIRCON,              weight =   400 },
+        { itemId = xi.item.BLACK_ROCK,          weight =   400 },
+        { itemId = xi.item.BLUE_ROCK,           weight =   400 },
+        { itemId = xi.item.GREEN_ROCK,          weight =   400 },
+        { itemId = xi.item.PURPLE_ROCK,         weight =   400 },
+        { itemId = xi.item.RED_ROCK,            weight =   400 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,    weight =   400 },
+        { itemId = xi.item.WHITE_ROCK,          weight =   400 },
+        { itemId = xi.item.YELLOW_ROCK,         weight =   400 },
+        { itemId = xi.item.EBONY_LOG,           weight =   400 },
+        { itemId = xi.item.MAHOGANY_LOG,        weight =   400 },
+        { itemId = xi.item.DARKSTEEL_INGOT,     weight =   400 },
+        { itemId = xi.item.GOLD_INGOT,          weight =   400 },
+        { itemId = xi.item.MYTHRIL_INGOT,       weight =   400 },
+        { itemId = xi.item.STEEL_INGOT,         weight =   400 },
+        { itemId = xi.item.DEMON_HORN,          weight =   400 },
+        { itemId = xi.item.CORAL_FRAGMENT,      weight =   400 },
+        { itemId = xi.item.HI_RERAISER,         weight =   200 },
+        { itemId = xi.item.VILE_ELIXIR_P1,      weight =   200 },
     },
 
+    -- This drop rate is not a mistake
+    -- https://www.ffxiah.com/forum/topic/54987/up-in-arms-bcnm/2/#3648004
+    -- Thorny noted only 3 drops out of 17,000 runs. Extremely rare.
+    -- BG Wiki States its also "signficantly rarer" than UR. (.1%)
     {
-        { item = xi.item.NONE,         weight =  939 }, -- Nothing
-        { item = xi.item.KRAKEN_CLUB,  weight =    7 }, -- Kraken Club
-        { item = xi.item.WALKURE_MASK, weight =   54 }, -- Walkure Mask
+        { itemId = xi.item.NONE,                weight =  9999 },
+        { itemId = xi.item.KRAKEN_CLUB,         weight =     1 },
     },
 }
 

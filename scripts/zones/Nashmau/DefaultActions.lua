@@ -2,8 +2,6 @@
 
 return {
     ['Awaheen']           = { event = 240 },
-    ['Belligerent_Sheep'] = { event = 237 },
-    ['Bellowing_Scout']   = { event = 236 },
     ['Buburoon']          = { event = 259 },
     ['Chuchuroon']        = { event = 266 },
     ['Gehuha']            = { event = 13 },
@@ -18,7 +16,6 @@ return {
     ['Paparoon']          = { event = 26 },
     ['Pyopyoroon']        = { event = 275 },
     ['Ququroon']          = { event = 241 },
-    ['Sajhra']            = { event = 220 },
     ['Sisiroon']          = { event = 268 },
     ['Tataroon']          = { event = 270 },
     ['Teco_Chatpaya']     = { event = 306 },

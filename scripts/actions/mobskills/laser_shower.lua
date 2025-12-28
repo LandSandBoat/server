@@ -1,9 +1,8 @@
 -----------------------------------
--- Laser_Shower
--- Description: Fires several lasers into a fan-shaped area of effect. Additional effect: Defense Down
--- Type: Breath
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Unknown cone
+-- Laser Shower
+-- Famnily: Omega
+-- Description: Fires several lasers into a fan-shaped area of effect. Additional Effect: Defense Down
+-- Notes: Used by Proto Omega and Pantokrator
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -17,18 +16,30 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.2, 1.25, xi.element.LIGHT, 1600)
-    local dis = ((mob:checkDistance(target) * 2) / 20)
+    local params = {}
 
-    dmgmod = dmgmod * dis
-    dmgmod = utils.clamp(dmgmod, 50, 1600)
+    params.percentMultipier  = 0.20 -- TODO: Capture Value
+    params.element           = xi.element.LIGHT
+    params.damageCap         = 1600
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    local dis = ((mob:checkDistance(target) * 2) / 20) -- TODO: Verify this skill has a damage adjustment based on range from mob.
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, 25, 0, 60)
+    damage = damage * dis
+    damage = utils.clamp(damage, 50, 1600)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.LIGHT)
-    return dmg
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.LIGHT)
+
+        -- TODO: Capture effect power/duration
+        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, 25, 0, 60)
+    end
+
+    return damage
 end
 
 return mobskillObject

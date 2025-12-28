@@ -19,18 +19,14 @@
 ===========================================================================
 */
 
-#ifndef SRC_MAP_ROE_H_
-#define SRC_MAP_ROE_H_
+#pragma once
 
 #include <array>
-#include <bitset>
-#include <utility>
 #include <variant>
 #include <vector>
 
 #include "ai/helpers/event_handler.h"
 #include "common/cbasetypes.h"
-#include "packets/weather.h"
 
 class CItemContainer;
 
@@ -78,17 +74,17 @@ typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
 struct RoeSystemData
 {
     RecordTimetable_W        TimedRecordTable;
-    std::bitset<4096>        ImplementedRecords;
-    std::bitset<4096>        RepeatableRecords;
-    std::bitset<4096>        RetroactiveRecords;
-    std::bitset<4096>        HiddenRecords;
-    std::bitset<4096>        DailyRecords;
+    xi::bitset<4096>         ImplementedRecords;
+    xi::bitset<4096>         RepeatableRecords;
+    xi::bitset<4096>         RetroactiveRecords;
+    xi::bitset<4096>         HiddenRecords;
+    xi::bitset<4096>         DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
-    std::bitset<4096>        WeeklyRecords;
+    xi::bitset<4096>         WeeklyRecords;
     std::vector<uint16>      WeeklyRecordIDs;
-    std::bitset<4096>        UnityRecords;
+    xi::bitset<4096>         UnityRecords;
     std::vector<uint16>      UnityRecordIDs;
-    std::bitset<4096>        TimedRecords;
+    xi::bitset<4096>         TimedRecords;
     std::array<uint32, 4096> NotifyThresholds    = {};
     uint8                    unityLeaderRank[11] = {}; // 0..10 for Unity Leader, stores rank position
 
@@ -100,7 +96,7 @@ struct RoeSystemData
 
 struct RoeCheckHandler
 {
-    std::bitset<4096> bitmap;
+    xi::bitset<4096> bitmap;
 };
 
 extern std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
@@ -112,17 +108,17 @@ struct RoeDatagram
     std::string        luaKey;
     RoeDatagramPayload data;
 
-    RoeDatagram(std::string const& param, uint32 payload)
+    RoeDatagram(const std::string& param, uint32 payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string const& param, CMobEntity* payload)
+    RoeDatagram(const std::string& param, CMobEntity* payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string const& param, std::string const& payload)
+    RoeDatagram(const std::string& param, const std::string& payload)
     : luaKey{ param }
     , data{ payload }
     {
@@ -133,40 +129,39 @@ typedef std::vector<RoeDatagram> RoeDatagramList;
 
 namespace roeutils
 {
-    extern RoeSystemData RoeSystem;
 
-    void init();
-    void ParseRecords(sol::table const& records_table);
-    void ParseTimedSchedule(sol::table const& schedule_table);
+extern RoeSystemData RoeSystem;
 
-    bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload);
-    bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& payload);
+void init();
+void ParseRecords(const sol::table& records_table);
+void ParseTimedSchedule(const sol::table& schedule_table);
 
-    void   SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus);
-    bool   GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID);
-    uint16 GetNumEminenceCompleted(CCharEntity* PChar);
-    bool   AddEminenceRecord(CCharEntity* PChar, uint16 recordID);
-    bool   DelEminenceRecord(CCharEntity* PChar, uint16 recordID);
-    bool   HasEminenceRecord(CCharEntity* PChar, uint16 recordID);
-    bool   SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress);
-    uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID);
+bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload);
+bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& payload);
 
-    void onCharLoad(CCharEntity* PChar);
-    bool onRecordClaim(CCharEntity* PChar, uint16 recordID);
-    void onRecordTake(CCharEntity* PChar, uint16 recordID);
+void   SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus);
+bool   GetEminenceRecordCompletion(const CCharEntity* PChar, uint16 recordID);
+uint16 GetNumEminenceCompleted(CCharEntity* PChar);
+bool   AddEminenceRecord(CCharEntity* PChar, uint16 recordID);
+bool   DelEminenceRecord(CCharEntity* PChar, uint16 recordID);
+bool   HasEminenceRecord(CCharEntity* PChar, uint16 recordID);
+bool   SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress);
+uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID);
 
-    void ClearDailyRecords(CCharEntity* PChar);
-    void CycleDailyRecords();
-    void ClearWeeklyRecords(CCharEntity* PChar);
-    void CycleWeeklyRecords();
-    void CycleUnityRankings();
-    void UpdateUnityRankings();
-    void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate = false);
+void onCharLoad(CCharEntity* PChar);
+bool onRecordClaim(CCharEntity* PChar, uint16 recordID);
+void onRecordTake(CCharEntity* PChar, uint16 recordID);
 
-    uint16 GetActiveTimedRecord();
-    void   AddActiveTimedRecord(CCharEntity* PChar);
-    void   CycleTimedRecords();
+void ClearDailyRecords(CCharEntity* PChar);
+void CycleDailyRecords();
+void ClearWeeklyRecords(CCharEntity* PChar);
+void CycleWeeklyRecords();
+void CycleUnityRankings();
+void UpdateUnityRankings();
+void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate = false);
+
+uint16 GetActiveTimedRecord();
+void   AddActiveTimedRecord(CCharEntity* PChar);
+void   CycleTimedRecords();
 
 } // namespace roeutils
-
-#endif /* SRC_MAP_ROE_H_ */

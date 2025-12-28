@@ -21,14 +21,22 @@
 
 #include "console_service.h"
 
+#include "application.h"
 #include "database.h"
+#include "logging.h"
 #include "lua.h"
+#include "settings.h"
+#include "task_manager.h"
+#include "tracy.h"
+#include "utils.h"
+#include "version.h"
 
 #include <sstream>
 
 #ifdef _WIN32
 #include <conio.h>
 #include <io.h>
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #define isatty  _isatty
 #define getchar _getch
@@ -61,13 +69,15 @@ bool getLine(std::string& line)
     {
         return false;
     }
+
 #if defined(_WIN32)
-    auto keyCharacter = static_cast<unsigned char>(getchar());
+    const auto keyCharacter = static_cast<unsigned char>(getchar());
     if (keyCharacter == '\r')
     {
         fmt::print("\n"); // Windows needs \r\n for newlines in the console, but the enter key is only \r.
         return true;
     }
+
     if (keyCharacter == '\n')
     {
         return true;
@@ -96,191 +106,177 @@ bool getLine(std::string& line)
 #endif
 }
 
-ConsoleService::ConsoleService()
+ConsoleService::ConsoleService(Application& application)
+: application_(application)
+, m_consoleThreadRun(true)
 {
-    // clang-format off
-    RegisterCommand("help", "Print a list of available console commands.",
-    [this](std::vector<std::string>& inputs)
+    registerDefaultCommands();
+
+    if (application_.isRunningInCI())
     {
-        fmt::print("> Available commands:\n");
-        for (auto& [name, command] : m_commands)
-        {
-            fmt::print("> {} : {}\n", command.name, command.description);
-        }
-    });
-
-    RegisterCommand("tasks", "Show the current amount of tasks registered to the application task manager.",
-    [](std::vector<std::string>& inputs)
-    {
-        fmt::print("> tasks registered to the application task manager: {}\n", CTaskMgr::getInstance()->getTaskList().size());
-    });
-
-    RegisterCommand("log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)",
-    [](std::vector<std::string>& inputs)
-    {
-        if (inputs.size() >= 2)
-        {
-            std::vector<std::string> names = { "trace", "debug", "info", "warn" };
-            auto level = std::clamp<uint8>(stoi(inputs[1]), 0, 3);
-            spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
-            fmt::print("> Log level set to: {} ({})\n", level, names[level]);
-        }
-        else
-        {
-            fmt::print("> Invalid inputs.\n");
-        }
-    });
-
-    RegisterCommand("lua", "Provides a Lua REPL",
-    [](std::vector<std::string>& inputs)
-    {
-        if (inputs.size() >= 2)
-        {
-            // Remove "lua" from the front of the inputs
-            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
-
-            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
-            lua.safe_script(input);
-        }
-    });
-
-    RegisterCommand("crash", "Crash the process",
-    [](std::vector<std::string>& inputs)
-    {
-        crash();
-    });
-
-    RegisterCommand("db", "Run both a query and a prepared statement to test the database connection",
-    [](std::vector<std::string>& inputs)
-    {
-        auto query = "SELECT 1";
-        auto rset = db::queryStr(query);
-        if (rset && rset->rowsCount())
-        {
-            fmt::print("> Query successful: {}\n", query);
-        }
-
-        auto preparedQuery = "SELECT 1";
-        auto preparedRset = db::preparedStmt(preparedQuery);
-        if (preparedRset && preparedRset->rowsCount())
-        {
-            fmt::print("> Prepared statement successful: {}\n", preparedQuery);
-        }
-    });
-
-    RegisterCommand("db_perf_test", "",
-    [](std::vector<std::string>& inputs)
-    {
-        {
-            const auto start = hires_clock::now();
-            for (int i = 0; i < 100; i++) // number of queries
-            {
-                for (int j = 0; j < 10; j++) // charids
-                {
-                    auto rset = db::query("SELECT * FROM chars WHERE charid = %u", j);
-                    if (rset && rset->rowsCount() && rset->next())
-                    {
-                        std::ignore = rset->get<uint32>(0);
-                    }
-                }
-            }
-            const auto end = hires_clock::now();
-            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-            fmt::print("> db_perf_test queries took {}ms\n", duration);
-        }
-
-        {
-            const auto start = hires_clock::now();
-            for (int i = 0; i < 100; i++) // number of queries
-            {
-                for (int j = 0; j < 10; j++) // charids
-                {
-                    auto rset = db::preparedStmt("SELECT * FROM chars WHERE charid = ?", j);
-                    if (rset && rset->rowsCount() && rset->next())
-                    {
-                        std::ignore = rset->get<uint32>(0);
-                    }
-                }
-            }
-            const auto end = hires_clock::now();
-            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-            fmt::print("> db_perf_test prepared statements took {}ms\n", duration);
-        }
-    });
-
-    bool attached = isatty(0);
-    if (attached)
-    {
-        ShowInfo("Console input thread is ready...");
-        ShowInfo("Type 'help' for a list of available commands.");
-        m_consoleInputThread = nonstd::jthread([&]()
-        {
-            std::string line;
-
-            while (m_consoleThreadRun)
-            {
-                std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
-
-                // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
-                if (!m_consoleStopCondition.wait_for(lock, 50ms, [&]{ return !m_consoleThreadRun; }))
-                {
-                    if (!getLine(line))
-                    {
-                        continue;
-                    }
-
-                    std::istringstream stream(line);
-                    std::string        input;
-
-                    std::vector<std::string> inputs;
-                    while (stream >> input)
-                    {
-                        for (auto& part : split(input))
-                        {
-                            inputs.emplace_back(part);
-                        }
-                    }
-
-                    if (!inputs.empty())
-                    {
-                        TracyZoneScoped;
-
-                        auto entry = m_commands.find(inputs[0]);
-                        if (entry != m_commands.end())
-                        {
-                            entry->second.func(inputs);
-                        }
-                        else
-                        {
-                            fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
-                        }
-                    }
-
-                    line = std::string();
-                }
-            }
-            fmt::print("Console input thread exiting...\n");
-        });
+        return;
     }
-    // clang-format on
+
+    run();
 }
 
 ConsoleService::~ConsoleService()
 {
-    stop();
+    m_consoleThreadRun = false;
     m_consoleStopCondition.notify_all();
 }
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-void ConsoleService::RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>&)> func)
+void ConsoleService::registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func)
 {
     std::lock_guard<std::mutex> lock(m_consoleInputBottleneck);
 
     m_commands[name] = ConsoleCommand{ name, description, std::move(func) };
 }
 
-void ConsoleService::stop()
+void ConsoleService::registerDefaultCommands()
 {
-    m_consoleThreadRun = false;
+    registerCommand(
+        "help", "Print a list of available console commands", [this](std::vector<std::string>& inputs)
+        {
+            fmt::print("> Available commands:\n");
+            for (auto& [name, command] : m_commands)
+            {
+                fmt::print("> {} : {}\n", command.name, command.description);
+            }
+        });
+
+    registerCommand(
+        "version", "Print the application version", [](std::vector<std::string>& inputs)
+        {
+            fmt::print("> Application branch: {}\n", version::GetVersionString());
+        });
+
+    registerCommand(
+        "tasks", "Show the current amount of tasks registered to the application task manager", [](std::vector<std::string>& inputs)
+        {
+            fmt::print("> tasks registered to the application task manager: {}\n", CTaskManager::getInstance()->getTaskList().size());
+        });
+
+    registerCommand(
+        "reload_settings", "Reload settings files", [](std::vector<std::string>& inputs)
+        {
+            fmt::print("Reloading settings files\n");
+            settings::init();
+        });
+
+    registerCommand(
+        "log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)", [](std::vector<std::string>& inputs)
+        {
+            if (inputs.size() >= 2)
+            {
+                std::vector<std::string> names = { "trace", "debug", "info", "warn" };
+                auto                     level = std::clamp<uint8>(stoi(inputs[1]), 0, 3);
+                spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
+                fmt::print("> Log level set to: {} ({})\n", level, names[level]);
+            }
+            else
+            {
+                fmt::print("> Invalid inputs.\n");
+            }
+        });
+
+    registerCommand(
+        "lua", "Provides a Lua REPL", [](std::vector<std::string>& inputs)
+        {
+            if (inputs.size() >= 2)
+            {
+                // Remove "lua" from the front of the inputs
+                inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+
+                auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+
+                // TODO: Make sure to execute on the main thread
+                lua.safe_script(input);
+            }
+        });
+
+    registerCommand(
+        "crash", "Crash the process", [](std::vector<std::string>& inputs)
+        {
+            // TODO: Make sure to execute on the main thread
+            crash();
+        });
+
+    registerCommand(
+        "throw", "Throw an exception", [](std::vector<std::string>& inputs)
+        {
+            // TODO: Make sure to execute on the main thread
+            throw std::runtime_error("Exception thrown from console command");
+        });
+
+    registerCommand(
+        "exit", "Request application exit", [&](std::vector<std::string>& inputs)
+        {
+            application_.requestExit();
+            fmt::print("> Goodbye!");
+        });
+}
+
+void ConsoleService::run()
+{
+    bool attached = isatty(0);
+    if (attached)
+    {
+        m_consoleInputThread = std::jthread(
+            [&]()
+            {
+                std::string line;
+
+                const auto predicate = [&]
+                {
+                    return !m_consoleThreadRun;
+                };
+
+                while (!predicate())
+                {
+                    std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
+
+                    // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
+                    if (!m_consoleStopCondition.wait_for(lock, 50ms, predicate))
+                    {
+                        if (!getLine(line))
+                        {
+                            continue;
+                        }
+
+                        std::istringstream stream(line);
+                        std::string        input;
+
+                        std::vector<std::string> inputs;
+                        while (stream >> input)
+                        {
+                            for (auto& part : split(input))
+                            {
+                                inputs.emplace_back(part);
+                            }
+                        }
+
+                        if (!inputs.empty())
+                        {
+                            TracyZoneScoped;
+
+                            auto entry = m_commands.find(inputs[0]);
+                            if (entry != m_commands.end())
+                            {
+                                // TODO: Execute this on the main thread, not the worker thread
+                                entry->second.func(inputs);
+                            }
+                            else
+                            {
+                                fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
+                            }
+                        }
+
+                        line = std::string();
+                    }
+                }
+            });
+    }
 }

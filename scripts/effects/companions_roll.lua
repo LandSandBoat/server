@@ -61,6 +61,8 @@ effectObject.onEffectLose = function(target, effect)
         target:delPetMod(xi.mod.REGAIN, effectregain[rollnum])
         target:delPetMod(xi.mod.REGEN, effectregen[rollnum])
     end
+
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
 end
 
 return effectObject

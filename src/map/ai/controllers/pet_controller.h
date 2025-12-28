@@ -31,13 +31,13 @@ public:
     CPetController(CMobEntity* PPet);
 
     static constexpr float PetRoamDistance{ 2.1f };
-    virtual void           DoRoamTick(time_point tick) override;
+    virtual void           DoRoamTick(timer::time_point tick) override;
     bool                   PetSkill(uint16 targid, uint16 abilityid);
 
 protected:
     bool PetIsHealing();
 
-    virtual void Tick(time_point tick) override;
+    virtual void Tick(timer::time_point tick) override;
     virtual void HandleEnmity() override
     {
     }

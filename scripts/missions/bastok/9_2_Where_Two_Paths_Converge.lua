@@ -96,6 +96,8 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(780)
+                    elseif missionStatus == 1 then
+                        return mission:progressEvent(769)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(782)
                     end

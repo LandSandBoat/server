@@ -1,0 +1,38 @@
+/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "0x10a_bazaar_sale.h"
+
+#include "entities/charentity.h"
+#include "items/item.h"
+
+GP_SERV_COMMAND_BAZAAR_SALE::GP_SERV_COMMAND_BAZAAR_SALE(const CCharEntity* PChar, const CItem* PItem)
+{
+    auto& packet = this->data();
+
+    if (PItem)
+    {
+        packet.ItemNum = PItem->getQuantity();
+        packet.ItemNo  = PItem->getID();
+    }
+
+    std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
+}

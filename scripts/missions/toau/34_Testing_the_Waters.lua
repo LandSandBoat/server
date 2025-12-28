@@ -21,13 +21,26 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3132, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.ARRAPAGO_REEF] =
         {
             onTriggerAreaEnter =
             {
                 [1] = function(player, triggerArea)
-                    if player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) then
-                        return mission:progressEvent(15)
+                    if
+                        not mission:getMustZone(player) and
+                        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+                    then
+                        return mission:progressEvent(15, 0, 0, 0, 0, 0, 0, 0, 0)
                     end
                 end,
             },
@@ -38,6 +51,8 @@ mission.sections =
                     if option == 1 then
                         player:setMissionStatus(mission.areaId, 1)
                         player:setPos(-88.879, -7.318, -109.233, 173, 57)
+                    else -- WRONG answer, you must zone and try again.
+                        mission:setMustZone(player)
                     end
                 end,
             },

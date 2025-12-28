@@ -21,33 +21,40 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = xi.spells.blue.tpMod.DURATION
+    params.ecosystem  = xi.ecosystem.PLANTOID
+    params.tpmod      = xi.spells.blue.tpMod.DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
-    params.scattr = xi.skillchainType.INDURATION
-    params.scattr2 = xi.skillchainType.DETONATION
-    params.numhits = 3
+    params.scattr     = xi.skillchainType.INDURATION
+    params.scattr2    = xi.skillchainType.DETONATION
+    params.numhits    = 3
     params.multiplier = 0.875
-    params.tp150 = 0.875
-    params.tp300 = 0.875
-    params.azuretp = 0.875
-    params.duppercap = 69
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.3
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 0.875
+    params.tp300      = 0.875
+    params.azuretp    = 0.875
+    params.duppercap  = 69
+    params.str_wsc    = 0.0
+    params.dex_wsc    = 0.3
+    params.vit_wsc    = 0.0
+    params.agi_wsc    = 0.0
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.DEFENSE_DOWN
-    local power = 8
-    local tick = 0
-    local duration = 120
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.DEFENSE_DOWN, 8, 0, 120 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

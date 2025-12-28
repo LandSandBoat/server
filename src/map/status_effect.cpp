@@ -27,7 +27,7 @@
 #include "status_effect_container.h"
 #include <utility>
 
-CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, uint32 tick, uint32 duration, uint32 subid, uint16 subPower, uint16 tier, uint32 flags)
+CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid, uint16 subPower, uint16 tier, uint32 flags, uint16 sourceType, uint32 sourceTypeParam, uint32 originID)
 : m_StatusID(id)
 , m_SubID(subid)
 , m_Icon(icon)
@@ -35,10 +35,13 @@ CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, uint32 tick, 
 , m_SubPower(subPower)
 , m_Tier(tier)
 , m_Flags(flags)
-, m_TickTime(tick * 1000)
-, m_Duration(duration * 1000)
+, m_OriginID(originID)
+, m_SourceType(sourceType)
+, m_SourceTypeParam(sourceTypeParam)
+, m_TickTime(tick)
+, m_Duration(duration)
 {
-    if (m_TickTime < 3000 && m_TickTime != 0)
+    if (m_TickTime < 3s && m_TickTime != 0s)
     {
         ShowWarning("Status Effect tick time less than 3s is no longer supported.  Effect ID: %d", id);
     }
@@ -71,14 +74,19 @@ uint32 CStatusEffect::GetSubID() const
     return m_SubID;
 }
 
-EffectSourceType CStatusEffect::GetSourceType() const
+auto CStatusEffect::GetSourceType() const -> uint16
 {
     return m_SourceType;
 }
 
-uint16 CStatusEffect::GetSourceTypeParam() const
+auto CStatusEffect::GetSourceTypeParam() const -> uint32
 {
     return m_SourceTypeParam;
+}
+
+auto CStatusEffect::GetOriginID() const -> uint32
+{
+    return m_OriginID;
 }
 
 uint16 CStatusEffect::GetEffectType() const
@@ -116,12 +124,12 @@ uint32 CStatusEffect::GetEffectFlags() const
     return m_Flags;
 }
 
-uint32 CStatusEffect::GetTickTime() const
+timer::duration CStatusEffect::GetTickTime() const
 {
     return m_TickTime;
 }
 
-uint32 CStatusEffect::GetDuration() const
+timer::duration CStatusEffect::GetDuration() const
 {
     return m_Duration;
 }
@@ -131,7 +139,7 @@ int CStatusEffect::GetElapsedTickCount() const
     return m_tickCount;
 }
 
-time_point CStatusEffect::GetStartTime()
+timer::time_point CStatusEffect::GetStartTime()
 {
     return m_StartTime;
 }
@@ -172,10 +180,15 @@ void CStatusEffect::SetIcon(uint16 Icon)
     m_POwner->StatusEffectContainer->UpdateStatusIcons();
 }
 
-void CStatusEffect::SetSource(EffectSourceType sourceType, uint16 sourceTypeParam)
+auto CStatusEffect::SetSource(uint16 sourceType, uint32 sourceTypeParam) -> void
 {
     m_SourceType      = sourceType;
     m_SourceTypeParam = sourceTypeParam;
+}
+
+auto CStatusEffect::SetOriginID(uint32 originID) -> void
+{
+    m_OriginID = originID;
 }
 
 void CStatusEffect::SetEffectType(uint16 Type)
@@ -203,18 +216,18 @@ void CStatusEffect::SetTier(uint16 tier)
     m_Tier = tier;
 }
 
-void CStatusEffect::SetDuration(uint32 Duration)
+void CStatusEffect::SetDuration(timer::duration Duration)
 {
     m_Duration = Duration;
 }
 
-void CStatusEffect::SetStartTime(time_point StartTime)
+void CStatusEffect::SetStartTime(timer::time_point StartTime)
 {
     m_tickCount = 0;
     m_StartTime = StartTime;
 }
 
-void CStatusEffect::SetTickTime(uint32 tick)
+void CStatusEffect::SetTickTime(timer::duration tick)
 {
     m_TickTime = tick;
 }
@@ -231,6 +244,13 @@ void CStatusEffect::SetEffectName(std::string name)
 
 void CStatusEffect::addMod(Mod modType, int16 amount)
 {
+    // Since an effect's mod list is only applied to entity when adding the effect
+    // we need to add the mod to the entity manually if the effect is already applied
+    if (m_POwner)
+    {
+        m_POwner->addModifier(modType, amount);
+    }
+
     for (auto& i : modList)
     {
         if (i.getModID() == modType)
@@ -248,9 +268,23 @@ void CStatusEffect::setMod(Mod modType, int16 value)
     {
         if (i.getModID() == modType)
         {
+            // Since an effect's mod list is only applied to entity when adding the effect
+            // we need to add the mod to the entity manually if the effect is already applied
+            if (m_POwner)
+            {
+                m_POwner->addModifier(modType, value - i.getModAmount());
+            }
+
             i.setModAmount(value);
             return;
         }
     }
     modList.emplace_back(modType, value);
+
+    // Since an effect's mod list is only applied to entity when adding the effect
+    // we need to add the mod to the entity manually if the effect is already applied
+    if (m_POwner)
+    {
+        m_POwner->addModifier(modType, value);
+    }
 }

@@ -3,6 +3,8 @@
 -- Bearclaw Pinnacle mission battlefield
 -- !pos -720 9 -441 6
 -----------------------------------
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
+-----------------------------------
 
 local content = BattlefieldMission:new({
     zoneId        = xi.zone.BEARCLAW_PINNACLE,
@@ -25,5 +27,11 @@ local content = BattlefieldMission:new({
 })
 
 content:addEssentialMobs({ 'Snoll_Tzar' })
+
+function content:onBattlefieldLoss(player, battlefield)
+    player:messageSpecial(ID.text.BLOWN_AWAY)
+
+    Battlefield.onBattlefieldLoss(self, player, battlefield)
+end
 
 return content:register()

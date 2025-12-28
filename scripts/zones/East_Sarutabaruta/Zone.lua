@@ -1,18 +1,12 @@
 -----------------------------------
 -- Zone: East_Sarutabaruta (116)
 -----------------------------------
-local ID = zones[xi.zone.EAST_SARUTABARUTA]
-require('scripts/quests/i_can_hear_a_rainbow')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
     zone:registerCylindricalTriggerArea(1, -119.92, -520.08, 10)
-
-    UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
-    GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -26,9 +20,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-125, -3, -519, 4)
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 50
-    elseif
+    if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
         prevZone == xi.zone.WINDURST_WOODS and
         not player:hasStatusEffect(xi.effect.MOUNTED)
@@ -56,9 +48,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 50 then
-        quests.rainbow.onEventUpdate(player)
-    elseif csid == 71 then
+    if csid == 71 then
         player:setCharVar('ASA_Status', option)
     end
 end

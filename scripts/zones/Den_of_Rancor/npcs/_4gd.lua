@@ -13,6 +13,7 @@ entity.onTrade = function(player, npc, trade)
         if npcUtil.giveItem(player, xi.item.RANCOR_FLAME) then
             trade:confirmItem(xi.item.UNLIT_LANTERN, 1)
             player:confirmTrade()
+            player:setCharVar('rancorCurse', 1) -- Player has been cursed
         end
     end
 end

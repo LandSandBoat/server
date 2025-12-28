@@ -1,0 +1,111 @@
+name: Tests
+
+on:
+  workflow_run:
+    workflows: [Builds]
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  Sanity_Checks:
+    name: Sanity Checks
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/landsandboat/devtools:ubuntu
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run checks
+        run: ./tools/ci/sanity_checks.sh
+
+      - name: Add sanity checks report to summary
+        if: ${{ always() }}
+        run: tr -d '\r' < sanity_checks_summary.md >> $GITHUB_STEP_SUMMARY
+
+  Lua_Language_Server:
+    name: Lua Language Server
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/landsandboat/devtools:ubuntu
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Lua Language Server
+        id: run_lls
+        run: python ./tools/ci/lua_lang_server.py
+
+      - name: Summarize run
+        id: summarize_run
+        run: |
+          found_issues=false
+          check_file=lua_lang_errors.txt
+          if [[ -f "$check_file" && -s "$check_file" ]]; then
+              found_issues=true
+              echo "## :x: Run Failed" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              tr -d '\r' < "$check_file" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [[ "$found_issues" == "false" ]]; then
+              if [[ "${{ steps.run_lls.outcome }}" == "success" ]]; then
+                  echo "## :heavy_check_mark: All checks passed." >> $GITHUB_STEP_SUMMARY
+              else
+                  echo "## :x: Lua Language Server had errors, but no specific output was found." >> $GITHUB_STEP_SUMMARY
+                  echo "Check the logs step for details." >> $GITHUB_STEP_SUMMARY
+                  found_issues=true
+              fi
+          fi
+          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
+
+      - name: Fail Workflow if Checks Failed
+        if: ${{ steps.run_lls.outcome == 'failure' || steps.summarize_run.outputs.issues_found == 'true' }}
+        run: |
+          echo "Lua Language Server failed. See summary for details."
+          exit 1
+
+  Runner_Test:
+    name: ${{ matrix.runner && 'Test' || '' }} # GitHub Actions hack to hide matrix args
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2025, macos-26]
+    uses: ./.github/workflows/runner_test.yml
+    with:
+      runner: ${{ matrix.runner }}
+      build_type: Release
+      test_modules: false
+      multi_process: true
+      xi_test: ${{ !startsWith(matrix.runner, 'macos') }}
+      startup_checks: true
+
+  Docker_Test:
+    name: ${{ matrix.os && 'Test' || '' }} # GitHub Actions hack to hide matrix args
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, alpine]
+    uses: ./.github/workflows/docker_test.yml
+    with:
+      os: ${{ matrix.os }}

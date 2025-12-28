@@ -1,15 +1,10 @@
 -----------------------------------
 -- Zone: Crawlers_Nest (197)
 -----------------------------------
-local ID = zones[xi.zone.CRAWLERS_NEST]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DYNAST_BEETLE)
-    GetMobByID(ID.mob.DYNAST_BEETLE):setRespawnTime(math.random(5400, 7200))
-
     xi.treasure.initZone(zone)
 end
 

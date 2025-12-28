@@ -38,28 +38,30 @@ struct packet_t
 
 namespace loginPackets
 {
-    inline uint32_t getTerminator()
-    {
-        uint8_t terminator[4] = { 0x49, 0x58, 0x46, 0x46 }; // "IXFF" special terminator
 
-        return terminator[0] | (terminator[1] << 8) | (terminator[2] << 16) | (terminator[3] << 24);
-    }
+inline uint32_t getTerminator()
+{
+    uint8_t terminator[4] = { 0x49, 0x58, 0x46, 0x46 }; // "IXFF" special terminator
 
-    inline void copyHashIntoPacket(packet_t& packet, uint8_t hash[16])
-    {
-        for (uint8_t i = 0; i < 16; i++)
-        {
-            packet.identifer[i] = hash[i];
-        }
-    }
+    return terminator[0] | (terminator[1] << 8) | (terminator[2] << 16) | (terminator[3] << 24);
+}
 
-    inline void clearIdentifier(packet_t& packet)
+inline void copyHashIntoPacket(packet_t& packet, uint8_t hash[16])
+{
+    for (uint8_t i = 0; i < 16; i++)
     {
-        for (uint8_t i = 0; i < 16; i++)
-        {
-            packet.identifer[i] = 0;
-        }
+        packet.identifer[i] = hash[i];
     }
+}
+
+inline void clearIdentifier(packet_t& packet)
+{
+    for (uint8_t i = 0; i < 16; i++)
+    {
+        packet.identifer[i] = 0;
+    }
+}
+
 } // namespace loginPackets
 
 // PS2: lpkt_next_login: https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x000B_ResponseNextLogin.md
@@ -131,7 +133,9 @@ struct lpkt_chr_info_sub2
     uint16_t          ffxi_id_world;      // PS2: ffxi_id_world
     uint16_t          worldid;            // PS2: worldid
     uint16_t          status;             // PS2: status
-    uint8_t           renamef;            // PS2: renamef
+    uint8_t           renamef : 1;        // PS2: renamef
+    uint8_t           race_change : 1;    // PS2: (New; did not exist.)
+    uint8_t           unused : 6;         // PS2: (New; did not exist.)
     uint8_t           ffxi_id_world_tbl;  // PS2: (New; did not exist.)
     char              character_name[16]; // PS2: character_name
     char              world_name[16];     // PS2: world_name

@@ -84,7 +84,7 @@ g_mixins.families.uragnite = function(uragniteMob)
     -- at spawn, give mob default skill lists for in-shell and out-of-shell states
     -- these defaults can be overwritten by using xi.mix.uragnite.config() in onMobSpawn.
 
-    uragniteMob:addListener('SPAWN', 'URAGNITE_SPAWN', function(mob)
+    uragniteMob:addListener('PRESPAWN', 'URAGNITE_SPAWN', function(mob)
         mob:setLocalVar('[uragnite]noShellSkillList', 251)
         mob:setLocalVar('[uragnite]inShellSkillList', 250)
         mob:setLocalVar('[uragnite]chanceToShell', 20)

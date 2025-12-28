@@ -18,7 +18,11 @@ entity.onMobRoam = function(mob)
     local ready = mob:getLocalVar('ready')
 
     if ready == 0 and wait > 240 then
-        if GetMobByID(promathia):getCurrentAction() ~= xi.act.NONE then
+        local promathiaMob = GetMobByID(promathia)
+        if
+            promathiaMob and
+            promathiaMob:getCurrentAction() ~= xi.action.category.NONE
+        then
             mob:entityAnimationPacket('prov')
             mob:messageText(mob, ID.text.PRISHE_TEXT)
         else
@@ -41,7 +45,17 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:useMobAbility(1487)
+    -- Logic to only allow Daedalus Wing to be cast once
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    if battlefield:getLocalVar('usedWing') ~= 1 then
+        battlefield:setLocalVar('usedWing', 1)
+        mob:useMobAbility(xi.mobSkill.DEADALUS_WING_COP_PRISHE)
+    end
+
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
 end
 

@@ -20,11 +20,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hatInHand = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
+    local hatInHand         = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
     local aFeatherInOnesCap = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONES_CAP)
-    local pfame = player:getFameLevel(xi.fameArea.WINDURST)
+    local pfame             = player:getFameLevel(xi.fameArea.WINDURST)
 
-    if hatInHand == xi.questStatus.QUEST_AVAILABLE then
+    if
+        hatInHand == xi.questStatus.QUEST_AVAILABLE and
+        player:getVar('Quest[2][23]Prog') == 0 -- Quest progress in "All At Sea" blocks "Hat In Hand" from starting
+    then
         player:startEvent(48) -- Quest Offered
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) then
         local count = player:getCharVar('QuestHatInHand_count')

@@ -10,23 +10,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1796 then
-            return 0
-        else
-            return 1
-        end
-    elseif mob:getFamily() == 313 then -- Tinnin
-        if mob:getAnimationSub() < 2 and target:isBehind(mob, 48) then
-            return 0
-        else
-            return 1
-        end
-    end
-
-    return 0
+    return target:isBehind(mob, 48) and 0 or 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

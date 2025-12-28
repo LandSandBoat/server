@@ -7,7 +7,6 @@ local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
 local baronetSpawnPoints =
 {
     { x = -335.444, y = -52.125, z = 15.148 },
@@ -62,17 +61,11 @@ local baronetSpawnPoints =
     { x = -331.973, y = -52.000, z = 19.368 },
 }
 
-local baronetPHTable =
-{
-    [ID.mob.BARONET_ROMWE - 2] = ID.mob.BARONET_ROMWE, -- -317.070 -52.125 14.052
-    [ID.mob.BARONET_ROMWE - 1] = ID.mob.BARONET_ROMWE, -- -335.444 -52.125 15.148
-}
-
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, baronetPHTable, 10, 1, { spawnPoints = baronetSpawnPoints }) -- No Respawn
+    xi.mob.phOnDespawn(mob, ID.mob.BARONET_ROMWE, 10, 1, { spawnPoints = baronetSpawnPoints }) -- No Respawn
 end
 
 return entity

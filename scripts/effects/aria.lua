@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.ARIA
+-- TODO: Song: Aria of Passion. Obtained when Loughnashade is equipped.
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

@@ -27,9 +27,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
-    if info.hitslanded > 0 then
-        target:addStatusEffect(xi.effect.PARALYSIS, power, 0, duration)
-    end
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, power, 0, duration)
 
     return dmg
 end

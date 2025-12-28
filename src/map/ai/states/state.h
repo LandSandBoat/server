@@ -23,8 +23,9 @@
 #ifndef _CSTATE_H
 #define _CSTATE_H
 
-#include "common/mmo.h"
-#include "packets/message_basic.h"
+#include "common/timer.h"
+#include "entities/baseentity.h"
+#include "packets/basic.h"
 #include <memory>
 
 class CBattleEntity;
@@ -54,14 +55,14 @@ public:
 
     auto GetErrorMsg() -> std::unique_ptr<CBasicPacket>;
 
-    bool DoUpdate(time_point tick);
+    bool DoUpdate(timer::time_point tick);
     // try interrupt (on hit)
     virtual void TryInterrupt(CBattleEntity* PAttacker)
     {
     }
 
     // called when state completes
-    virtual void Cleanup(time_point tick) = 0;
+    virtual void Cleanup(timer::time_point tick) = 0;
     // whether the state can be changed by normal means
     virtual bool CanChangeState() = 0;
     virtual bool CanFollowPath()  = 0;
@@ -72,13 +73,15 @@ public:
 
 protected:
     // state logic done per tick - returns whether to exit the state or not
-    virtual bool Update(time_point tick) = 0;
+    virtual bool Update(timer::time_point tick) = 0;
     virtual void UpdateTarget(uint16 targid);
     virtual void UpdateTarget(CBaseEntity* target);
 
-    uint16     GetTargetID() const;
-    void       Complete();
-    time_point GetEntryTime() const;
+    uint16            GetTargetID() const;
+    void              Complete();
+    timer::time_point GetEntryTime() const;
+    bool              WasExitDelayed();
+    void              DelayExitTime(std::chrono::milliseconds delayMilliseconds);
 
     std::unique_ptr<CBasicPacket> m_errorMsg;
 
@@ -86,9 +89,10 @@ protected:
     uint16             m_targid{ 0 };
 
 private:
-    CBaseEntity* m_PTarget{ nullptr };
-    bool         m_completed{ false };
-    time_point   m_entryTime{ server_clock::now() };
+    CBaseEntity*      m_PTarget{ nullptr };
+    bool              m_completed{ false };
+    bool              m_wasDelayed{ false };
+    timer::time_point m_entryTime{ timer::now() };
 };
 
 #endif

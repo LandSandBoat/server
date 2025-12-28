@@ -23,7 +23,8 @@
 #include "ai/ai_container.h"
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
-#include "packets/entity_animation.h"
+#include "enums/four_cc.h"
+#include "packets/s2c/0x038_schedulor.h"
 #include "zone.h"
 
 CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
@@ -31,11 +32,11 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 {
     if (!instantDespawn && (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN)))
     {
-        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<CEntityAnimationPacket>(_PEntity, _PEntity, CEntityAnimationPacket::Fade_Out));
+        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(_PEntity, _PEntity, FourCC::FadeOut));
     }
 }
 
-bool CDespawnState::Update(time_point tick)
+bool CDespawnState::Update(timer::time_point tick)
 {
     if (tick > GetEntryTime() + 3s && !IsCompleted() && !(static_cast<CMobEntity*>(m_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN))
     {
@@ -45,7 +46,7 @@ bool CDespawnState::Update(time_point tick)
     return IsCompleted();
 }
 
-void CDespawnState::Cleanup(time_point tick)
+void CDespawnState::Cleanup(timer::time_point tick)
 {
 }
 

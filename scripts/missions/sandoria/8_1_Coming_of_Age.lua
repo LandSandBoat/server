@@ -78,6 +78,24 @@ mission.sections =
                 end,
             },
 
+            ['_6h0'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 2 then
+                        return mission:event(64)
+                    end
+                end,
+            },
+
+            ['_6h1'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 2 then
+                        return mission:event(75)
+                    end
+                end,
+            },
+
             onZoneIn = function(player, prevZone)
                 if player:getMissionStatus(mission.areaId) == 0 then
                     return 116
@@ -95,7 +113,7 @@ mission.sections =
                         -- This cutscene is blocking after the mission has been completed.  Check this
                         -- before allowing further gate guard interaction (Mission[0][20]Progress).  Required
                         -- final CS will set this to 0, and we should disallow on non-zero values
-                        mission:setVar(player, 'Progress', os.time() + 60)
+                        mission:setVar(player, 'Progress', GetSystemTime() + 60)
                         player:delKeyItem(xi.ki.DROPS_OF_AMNIO)
                     end
                 end,
@@ -181,8 +199,8 @@ mission.sections =
 
             onZoneIn = function(player, prevZone)
                 if
-                    mission:getVar(player, 'Progress') < os.time() and
-                    not player:isInMogHouse()
+                    mission:getVar(player, 'Progress') < GetSystemTime() and
+                    not player:inMogHouse()
                 then
                     return 16
                 end

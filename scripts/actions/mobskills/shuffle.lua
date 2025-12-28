@@ -6,6 +6,10 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if not mob:isNM() then
+        return 1
+    end
+
     return 0
 end
 

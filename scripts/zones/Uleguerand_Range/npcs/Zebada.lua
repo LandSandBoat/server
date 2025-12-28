@@ -24,9 +24,9 @@ entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.ZEPHYR_FAN) then
         player:startEvent(12)
     else
-        if zephyrFanCD >= os.time() then
+        if zephyrFanCD >= GetSystemTime() then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
-            player:startEvent(15, VanadielTime() + (zephyrFanCD - os.time()))
+            player:startEvent(15, VanadielTime() + (zephyrFanCD - GetSystemTime()))
         else
             if
                 player:hasItem(xi.item.HANDFUL_OF_CHAMNAET_ICE) or
@@ -43,7 +43,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 13 then
         npcUtil.giveKeyItem(player, xi.ki.ZEPHYR_FAN)
-        player:setCharVar('[ENM]ZephyrFan', os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar('[ENM]ZephyrFan', GetSystemTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 14 then
         npcUtil.giveItem(player, xi.item.COTTON_POUCH)
     end

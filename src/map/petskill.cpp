@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Team
@@ -20,17 +20,20 @@
 */
 
 #include "petskill.h"
+
+#include "enums/action/category.h"
 #include "mobskill.h" // used for skillflags
 
 CPetSkill::CPetSkill(uint16 id)
 : m_ID(id)
 , m_AnimID(0)
+, m_MobSkillID(0)
 , m_Aoe(0)
 , m_Distance(0)
-, m_AnimationTime(0)
-, m_ActivationTime(0)
+, m_AnimationTime(0s)
+, m_ActivationTime(0s)
 , m_ValidTarget(0)
-, m_Message(0)
+, m_Message(MsgBasic::NONE)
 , m_Flag(0)
 , m_Param(0)
 , m_SkillFinishCategory(0)
@@ -39,6 +42,7 @@ CPetSkill::CPetSkill(uint16 id)
 , m_secondarySkillchain(0)
 , m_tertiarySkillchain(0)
 , m_TP(0)
+, m_HP(0)
 , m_HPP(0)
 , m_TotalTargets(1)
 , m_PrimaryTargetID(0)
@@ -47,7 +51,12 @@ CPetSkill::CPetSkill(uint16 id)
 
 bool CPetSkill::hasMissMsg() const
 {
-    return m_Message == 324 || m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == MsgBasic::USES_BUT_MISSES ||
+           m_Message == MsgBasic::ABILITY_MISSES ||
+           m_Message == MsgBasic::USES_SKILL_MISSES ||
+           m_Message == MsgBasic::USES_SKILL_NO_EFFECT ||
+           m_Message == MsgBasic::SHADOW_ABSORB ||
+           m_Message == MsgBasic::TARGET_ANTICIPATES;
 }
 
 bool CPetSkill::isAoE() const
@@ -93,7 +102,7 @@ void CPetSkill::setID(uint16 id)
     m_ID = id;
 }
 
-void CPetSkill::setMsg(uint16 msg)
+void CPetSkill::setMsg(MsgBasic msg)
 {
     m_Message = msg;
 }
@@ -118,6 +127,11 @@ void CPetSkill::setAnimationID(uint16 animID)
     m_AnimID = animID;
 }
 
+void CPetSkill::setMobSkillID(uint16 skillID)
+{
+    m_MobSkillID = skillID;
+}
+
 const std::string& CPetSkill::getName() const
 {
     return m_name;
@@ -131,6 +145,11 @@ void CPetSkill::setName(const std::string& name)
 void CPetSkill::setAoe(uint8 aoe)
 {
     m_Aoe = aoe;
+}
+
+void CPetSkill::setRadius(uint8 radius)
+{
+    m_Radius = radius;
 }
 
 void CPetSkill::setDistance(float distance)
@@ -148,18 +167,23 @@ void CPetSkill::setTP(int16 tp)
     m_TP = tp;
 }
 
+void CPetSkill::setHP(const int32 hp)
+{
+    m_HP = hp;
+}
+
 // Stores the Monsters HP% as it was at the start of mobskill
 void CPetSkill::setHPP(uint8 hpp)
 {
     m_HPP = hpp;
 }
 
-void CPetSkill::setAnimationTime(uint16 AnimationTime)
+void CPetSkill::setAnimationTime(timer::duration AnimationTime)
 {
     m_AnimationTime = AnimationTime;
 }
 
-void CPetSkill::setActivationTime(uint16 ActivationTime)
+void CPetSkill::setActivationTime(timer::duration ActivationTime)
 {
     m_ActivationTime = ActivationTime;
 }
@@ -174,14 +198,24 @@ uint16 CPetSkill::getID() const
     return m_ID;
 }
 
-uint16 CPetSkill::getAnimationID() const
+auto CPetSkill::getAnimationID() const -> ActionAnimation
 {
-    return m_AnimID;
+    return static_cast<ActionAnimation>(m_AnimID);
+}
+
+uint16 CPetSkill::getMobSkillID() const
+{
+    return m_MobSkillID;
 }
 
 int16 CPetSkill::getTP() const
 {
     return m_TP;
+}
+
+auto CPetSkill::getHP() const -> int32
+{
+    return m_HP;
 }
 
 // Retrieves the Pet's HP% as it was at the start of mobskill
@@ -200,62 +234,29 @@ uint32 CPetSkill::getPrimaryTargetID() const
     return m_PrimaryTargetID;
 }
 
-uint16 CPetSkill::getMsg() const
+void CPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    m_FinalAnimationSub = newAnimationSub;
+}
+
+std::optional<uint8> CPetSkill::getFinalAnimationSub()
+{
+    return m_FinalAnimationSub;
+}
+
+auto CPetSkill::getMsg() const -> MsgBasic
 {
     return m_Message;
 }
 
-uint8 CPetSkill::getSkillFinishCategory() const
+auto CPetSkill::getSkillFinishCategory() const -> ActionCategory
 {
-    return m_SkillFinishCategory;
+    return static_cast<ActionCategory>(m_SkillFinishCategory);
 }
 
 uint16 CPetSkill::getMsgForAction() const
 {
     return getID();
-}
-
-uint16 CPetSkill::getAoEMsg() const // TODO: put this in parent class?
-{
-    switch (m_Message)
-    {
-        case 185:
-            return 264;
-        case 186:
-            return 266;
-        case 187:
-            return 281;
-        case 188:
-            return 282;
-        case 189:
-            return 283;
-        case 225:
-            return 366;
-        case 226:
-            return 226; // no message for this... I guess there is no aoe TP drain move
-        case 103:       // recover hp
-        case 102:       // recover hp
-        case 238:       // recover hp
-        case 306:       // recover hp
-        case 318:       // recover hp
-            return 24;
-        case 242:
-            return 277;
-        case 243:
-            return 278;
-        case 284:
-            return 284; // already the aoe message
-        case 370:
-            return 404;
-        case 362:
-            return 363;
-        case 378:
-            return 343;
-        case 224: // recovers mp
-            return 276;
-        default:
-            return m_Message;
-    }
 }
 
 uint8 CPetSkill::getFlag() const
@@ -275,13 +276,7 @@ float CPetSkill::getDistance() const
 
 float CPetSkill::getRadius() const
 {
-    if (m_Aoe == 2)
-    {
-        // centered around target, usually 8' // TODO: AoE range setter?
-        return 8.0f;
-    }
-
-    return m_Distance;
+    return m_Radius;
 }
 
 int16 CPetSkill::getParam() const
@@ -289,14 +284,21 @@ int16 CPetSkill::getParam() const
     return m_Param;
 }
 
-uint8 CPetSkill::getKnockback() const
+auto CPetSkill::getKnockback() const -> Knockback
 {
-    return m_knockback;
+    return static_cast<Knockback>(m_knockback);
 }
 
 bool CPetSkill::isDamageMsg() const
 {
-    return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226 || m_Message == 317;
+    return m_Message == MsgBasic::USES_ABILITY_TAKES_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_TAKES_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_HP_DRAINED ||
+           m_Message == MsgBasic::USES_ABILITY_RESISTS_DAMAGE ||
+           m_Message == MsgBasic::USES_SKILL_MP_DRAINED ||
+           m_Message == MsgBasic::USES_SKILL_TP_DRAINED ||
+           m_Message == MsgBasic::TARGET_TAKES_DAMAGE ||
+           m_Message == MsgBasic::USES_JA_TAKE_DAMAGE;
 }
 
 void CPetSkill::setParam(int16 value)
@@ -314,12 +316,12 @@ uint16 CPetSkill::getValidTargets() const
     return m_ValidTarget;
 }
 
-uint16 CPetSkill::getAnimationTime() const
+timer::duration CPetSkill::getAnimationTime() const
 {
     return m_AnimationTime;
 }
 
-uint16 CPetSkill::getActivationTime() const
+timer::duration CPetSkill::getActivationTime() const
 {
     return m_ActivationTime;
 }
@@ -352,4 +354,24 @@ void CPetSkill::setSecondarySkillchain(uint8 skillchain)
 void CPetSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
+}
+
+auto CPetSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_attackType;
+}
+
+void CPetSkill::setAttackType(const ATTACK_TYPE attackType)
+{
+    m_attackType = attackType;
+}
+
+auto CPetSkill::isCritical() const -> bool
+{
+    return m_isCritical;
+}
+
+void CPetSkill::setCritical(const bool isCritical)
+{
+    m_isCritical = isCritical;
 }

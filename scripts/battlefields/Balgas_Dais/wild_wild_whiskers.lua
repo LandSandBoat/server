@@ -23,60 +23,66 @@ content:addEssentialMobs({ 'Macan_Gadangan' })
 content.loot =
 {
     {
+        { itemId = xi.item.GIL,                      weight = 10000, amount = 15000 },
+    },
+
+    {
         quantity = 3,
-        { item = xi.item.HIGH_QUALITY_COEURL_HIDE, weight = 1000 }, -- high-quality_coeurl_hide
+        { itemId = xi.item.HIGH_QUALITY_COEURL_HIDE, weight = 10000 },
     },
 
     {
-        { item = xi.item.CHUNK_OF_ADAMAN_ORE, weight = 1000 }, -- chunk_of_adaman_ore
+        { itemId = xi.item.CHUNK_OF_ADAMAN_ORE,      weight = 10000 },
     },
 
     {
-        { item = xi.item.HERMES_QUENCHER, weight = 1000 }, -- hermes_quencher
+        { itemId = xi.item.HERMES_QUENCHER,          weight = 10000 },
     },
 
     {
-        { item = xi.item.ICARUS_WING, weight = 1000 }, -- icarus_wing
+        { itemId = xi.item.ICARUS_WING,              weight = 10000 },
     },
 
     {
-        { item = xi.item.GLEEMANS_BELT,  weight = 365 }, -- gleemans_belt
-        { item = xi.item.PENITENTS_ROPE, weight = 635 }, -- penitents_rope
+        { itemId = xi.item.GLEEMANS_BELT,            weight =  3500 },
+        { itemId = xi.item.PENITENTS_ROPE,           weight =  6500 },
     },
 
     {
-        { item = xi.item.TELEPORT_RING_MEA,   weight = 426 }, -- teleport_ring_mea
-        { item = xi.item.TELEPORT_RING_YHOAT, weight = 574 }, -- teleport_ring_yhoat
+        { itemId = xi.item.TELEPORT_RING_MEA,        weight =  5000 },
+        { itemId = xi.item.TELEPORT_RING_YHOAT,      weight =  5000 },
     },
 
     {
-        { item = xi.item.NONE,         weight = 848 }, -- nothing
-        { item = xi.item.WALKURE_MASK, weight =  58 }, -- walkure_mask
-        { item = xi.item.HI_RERAISER,  weight =  78 }, -- hi-reraiser
-        { item = xi.item.EBONY_LOG,    weight =  16 }, -- ebony_log
+        { itemId = xi.item.NONE,                     weight =  9500 },
+        { itemId = xi.item.WALKURE_MASK,             weight =   500 },
     },
 
     {
-        { item = xi.item.YELLOW_ROCK,      weight =  9 }, -- yellow_rock
-        { item = xi.item.BLACK_ROCK,       weight =  9 }, -- black_rock
-        { item = xi.item.AQUAMARINE,       weight = 16 }, -- aquamarine
-        { item = xi.item.RED_ROCK,         weight = 16 }, -- red_rock
-        { item = xi.item.BLUE_ROCK,        weight = 16 }, -- blue_rock
-        { item = xi.item.PURPLE_ROCK,      weight = 16 }, -- purple_rock
-        { item = xi.item.MAHOGANY_LOG,     weight = 33 }, -- mahogany_log
-        { item = xi.item.CHRYSOBERYL,      weight = 33 }, -- chrysoberyl
-        { item = xi.item.ZIRCON,           weight = 33 }, -- zircon
-        { item = xi.item.STEEL_INGOT,      weight = 49 }, -- steel_ingot
-        { item = xi.item.DARKSTEEL_INGOT,  weight = 49 }, -- darksteel_ingot
-        { item = xi.item.TRANSLUCENT_ROCK, weight = 49 }, -- translucent_rock
-        { item = xi.item.SUNSTONE,         weight = 49 }, -- sunstone
-        { item = xi.item.MOONSTONE,        weight = 66 }, -- moonstone
-        { item = xi.item.MYTHRIL_INGOT,    weight = 82 }, -- mythril_ingot
-        { item = xi.item.FLUORITE,         weight = 82 }, -- fluorite
-        { item = xi.item.GOLD_INGOT,       weight = 98 }, -- gold_ingot
-        { item = xi.item.JADEITE,          weight = 98 }, -- jadeite
-        { item = xi.item.PAINITE,          weight = 98 }, -- painite
-        { item = xi.item.VILE_ELIXIR_P1,   weight = 99 }, -- vile_elixir_+1
+        { itemId = xi.item.RED_ROCK,                 weight =   400 },
+        { itemId = xi.item.YELLOW_ROCK,              weight =   400 },
+        { itemId = xi.item.BLUE_ROCK,                weight =   400 },
+        { itemId = xi.item.GREEN_ROCK,               weight =   400 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,         weight =   400 },
+        { itemId = xi.item.PURPLE_ROCK,              weight =   400 },
+        { itemId = xi.item.WHITE_ROCK,               weight =   400 },
+        { itemId = xi.item.BLACK_ROCK,               weight =   400 },
+        { itemId = xi.item.AQUAMARINE,               weight =   400 },
+        { itemId = xi.item.CHRYSOBERYL,              weight =   400 },
+        { itemId = xi.item.FLUORITE,                 weight =   400 },
+        { itemId = xi.item.JADEITE,                  weight =   400 },
+        { itemId = xi.item.MOONSTONE,                weight =   400 },
+        { itemId = xi.item.PAINITE,                  weight =   400 },
+        { itemId = xi.item.SUNSTONE,                 weight =   400 },
+        { itemId = xi.item.ZIRCON,                   weight =   400 },
+        { itemId = xi.item.MAHOGANY_LOG,             weight =   400 },
+        { itemId = xi.item.EBONY_LOG,                weight =   400 },
+        { itemId = xi.item.STEEL_INGOT,              weight =   400 },
+        { itemId = xi.item.MYTHRIL_INGOT,            weight =   400 },
+        { itemId = xi.item.GOLD_INGOT,               weight =   400 },
+        { itemId = xi.item.DARKSTEEL_INGOT,          weight =   400 },
+        { itemId = xi.item.HI_RERAISER,              weight =   600 },
+        { itemId = xi.item.VILE_ELIXIR_P1,           weight =   600 },
     },
 }
 

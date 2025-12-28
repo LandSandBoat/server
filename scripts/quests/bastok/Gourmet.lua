@@ -2,7 +2,7 @@
 -- Gourmet
 -----------------------------------
 -- Log ID: 1, Quest ID: 12
--- Salimah : !pos -173 -5 64 235
+-- Salimah : !pos -31.687 -6.824 -73.282
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
@@ -64,21 +64,23 @@ quest.sections =
             ['Salimah'] =
             {
                 onTrade = function(player, npc, trade)
-                    for itemId, itemData in pairs(tradeItemData) do
-                        if npcUtil.tradeHasExactly(trade, itemId) then
-                            local timeOffset = VanadielHour() - 6
+                    if not quest:getMustZone(player) then
+                        for itemId, itemData in pairs(tradeItemData) do
+                            if npcUtil.tradeHasExactly(trade, itemId) then
+                                local timeOffset = VanadielHour() - 6
 
-                            if timeOffset < 0 then
-                                timeOffset = 24 + timeOffset
-                            end
+                                if timeOffset < 0 then
+                                    timeOffset = 24 + timeOffset
+                                end
 
-                            if
-                                timeOffset >= itemData[2] and
-                                timeOffset < itemData[3]
-                            then
-                                return quest:progressEvent(itemData[1], itemId)
-                            else
-                                return quest:progressEvent(203, itemId)
+                                if
+                                    timeOffset >= itemData[2] and
+                                    timeOffset < itemData[3]
+                                then
+                                    return quest:progressEvent(itemData[1], itemId)
+                                else
+                                    return quest:progressEvent(203, itemId)
+                                end
                             end
                         end
                     end

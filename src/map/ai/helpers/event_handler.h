@@ -34,7 +34,7 @@ struct ai_event_t
     std::string   identifier;
     sol::function lua_func;
 
-    ai_event_t(std::string const& _ident, sol::function _lua_func)
+    ai_event_t(const std::string& _ident, sol::function _lua_func)
     : identifier(_ident)
     , lua_func(_lua_func)
     {
@@ -44,13 +44,13 @@ struct ai_event_t
 class CAIEventHandler
 {
 public:
-    void addListener(std::string const& eventname, sol::function const& lua_func, std::string const& identifier);
-    void removeListener(std::string const& identifier);
-    bool hasListener(std::string const& eventName);
+    void addListener(const std::string& eventname, const sol::function& lua_func, const std::string& identifier);
+    void removeListener(const std::string& identifier);
+    bool hasListener(const std::string& eventName);
 
     // calls event from core
     template <class... Args>
-    void triggerListener(std::string const& eventname, Args&&... args)
+    void triggerListener(const std::string& eventname, Args&&... args)
     {
         TracyZoneScoped;
         TracyZoneString(eventname);

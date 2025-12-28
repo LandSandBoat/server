@@ -1,9 +1,5 @@
-require('scripts/globals/utils')
-
 -----------------------------------
---
 -- MOB FOLLOWING
---
 -----------------------------------
 xi = xi or {}
 xi.follow = xi.follow or {}

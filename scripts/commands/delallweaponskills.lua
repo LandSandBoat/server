@@ -1,0 +1,40 @@
+-----------------------------------
+-- func: delallweaponskills
+-- desc: Removes all learned weaponskills to the given target. If no target then to the current player.
+-----------------------------------
+---@type TCommand
+local commandObj = {}
+
+commandObj.cmdprops =
+{
+    permission = 1,
+    parameters = 's'
+}
+
+local function error(player, msg)
+    player:printToPlayer(msg)
+    player:printToPlayer('!delallweaponskills (player)')
+end
+
+commandObj.onTrigger = function(player, target)
+    -- validate target
+    local targ
+    if target then
+        targ = GetPlayerByName(target)
+        if not targ then
+            error(player, string.format('Player named "%s" not found!', target))
+            return
+        end
+    else
+        targ = player
+    end
+
+    -- add all learned weaponskills
+    for _, wsUnlockId in pairs(xi.wsUnlock) do
+        targ:delLearnedWeaponskill(wsUnlockId)
+    end
+
+    player:printToPlayer(string.format('%s now has zero learned weaponskills.', targ:getName()))
+end
+
+return commandObj

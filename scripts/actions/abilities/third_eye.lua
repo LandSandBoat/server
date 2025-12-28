@@ -28,6 +28,8 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     else
         player:addStatusEffect(xi.effect.THIRD_EYE, 0, 0, 30) -- Power keeps track of procs
+
+        return xi.effect.THIRD_EYE
     end
 end
 

@@ -13,6 +13,7 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
 end
 
 return effectObject

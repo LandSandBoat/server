@@ -13,8 +13,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.geomancer.geoOnAbilityCheck(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    return xi.job_utils.geomancer.dematerialize(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.geomancer.dematerialize(player, target, ability, action)
 end
 
 return abilityObject

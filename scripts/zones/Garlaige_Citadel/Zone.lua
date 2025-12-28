@@ -25,15 +25,6 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(21, -191.5, -1, 322, -188.5, 1, 324.5)
     zone:registerCuboidTriggerArea(22, -131.5, -1, 322, -129, 1, 324.5)
 
-    UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
-    GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.SKEWER_SAM)
-    GetMobByID(ID.mob.SKEWER_SAM):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.SERKET)
-    GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
-
     xi.treasure.initZone(zone)
 end
 

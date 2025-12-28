@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     damage = math.min(0, damage) -- Cosmic Elucidation does not have an absorb message
 
     target:takeDamage(damage, mob, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    skill:setMsg(302)
+    skill:setMsg(xi.msg.basic.SKILLCHAIN_COSMIC_ELUCIDATION)
 
     return damage
 end

@@ -20,9 +20,19 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3116, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+        },
+
         [xi.zone.AYDEEWA_SUBTERRANE] =
         {
-            ['blank_toau20'] = mission:progressEvent(12),
+            ['blank_toau20'] = mission:progressEvent(12, 0, 4, 0, 0, 0, 0, 0, 0),
 
             onEventFinish =
             {

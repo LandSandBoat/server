@@ -4,7 +4,6 @@
 -- - Make resultant ridable chocobo speed/endurance etc. more rewarding
 -----------------------------------
 require('modules/module_utils')
-require('scripts/globals/utils')
 require('scripts/globals/chocobo_raising')
 -----------------------------------
 local m = Module:new('chocobo_raising_qol')

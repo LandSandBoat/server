@@ -7,24 +7,6 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-local sagittariusPHTable =
-{
-    [ID.mob.SAGITTARIUS_X_XIII - 5] = ID.mob.SAGITTARIUS_X_XIII, -- 641 -16.786 -774
-}
-
-local magisterPHTable =
-{
-    -- Antican Magister is a lottery of various Antica at (C-6).
-    -- https://www.bg-wiki.com/ffxi/Antican_Magister
-    [ID.mob.ANTICAN_MAGISTER - 2] = ID.mob.ANTICAN_MAGISTER,
-}
-
-local praefectusPHTable =
-{
-    [ID.mob.ANTICAN_PRAEFECTUS - 1] = ID.mob.ANTICAN_PRAEFECTUS, -- -90.01 -0.567 -29.424
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 812, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 813, 2, xi.regime.type.GROUNDS)
@@ -37,9 +19,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, sagittariusPHTable, 10, 14400) -- 4 hours
-    xi.mob.phOnDespawn(mob, praefectusPHTable, 10, 3600) -- 1 hour
-    xi.mob.phOnDespawn(mob, magisterPHTable, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.SAGITTARIUS_X_XIII, 10, 14400) -- 4 hours
+    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_PRAEFECTUS, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_MAGISTER, 10, 3600) -- 1 hour
 end
 
 return entity

@@ -6,7 +6,51 @@ sql_items = dict()
 npc_items = dict()
 errors = list()
 
-local_path = os.path.dirname(os.path.realpath(__file__))
+server_dir_path = os.path.normpath(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
+
+
+def from_server_path(path):
+    return os.path.normpath(os.path.join(server_dir_path, path))
+
+
+def load_item_enums(enum_path):
+    enums = {}
+    current_enum_type = None
+    recording = False
+
+    with open(enum_path, "r", errors="ignore") as f:
+        for line in f:
+            stripped = line.strip()
+
+            # Start recording when we see the enum marker
+            if not recording:
+                m = re.match(r"^---@enum\s+(xi\.\w+)", stripped)
+                if m:
+                    current_enum_type = m.group(1)
+                    recording = True
+                continue
+
+            if recording:
+                if stripped == "}":
+                    recording = False
+                    current_enum_type = None
+                    continue
+
+                # Skip comments and empty lines
+                if not stripped or stripped.startswith("--"):
+                    continue
+
+                m = re.match(r"^(\w+)\s*=\s*(\d+),?", stripped)
+                if m and current_enum_type:
+                    name, val = m.groups()
+                    enums[f"{current_enum_type}.{name}"] = int(val)
+
+    return enums
+
+
+item_enums = load_item_enums("scripts/enum/item.lua")
 
 
 def process_matches(match, line):
@@ -17,7 +61,7 @@ def process_matches(match, line):
         sliced = line[len(sql_line) :]
 
         # strip the parenthesis, semi-colon, newline chars and comments
-        sliced = sliced.split('--')[0]
+        sliced = sliced.split("--")[0]
         sliced = sliced[2:-3]
 
         split = sliced.split(",")
@@ -36,46 +80,61 @@ def log(message, *args):
 
 def process_npc(path):
     with open(path, mode="r", errors="ignore") as npc_file:
-        found_stock = False
-        found_brace = False
+        in_stock = False
+        brace_depth = 0
+
         for line in npc_file:
-            # find local stock
-            if "local stock" in line:
-                found_stock = True
-            # find the starting brace
-            elif found_stock and "{" in line:
-                found_brace = True
-            # next lines after local stock and brace are item and buy prices
-            elif found_stock and found_brace:
-                if "}" in line:
-                    break
-                else:
-                    split = line.split(",")
-                    if len(split) > 1:
-                        item_id = split[0].strip()
-                        buy_price = "".join(
-                            filter(lambda x: x.isdigit(), split[1].strip())
+            stripped = line.strip()
+
+            if not in_stock and "local stock" in stripped:
+                in_stock = True
+                continue
+
+            if in_stock:
+                brace_depth += stripped.count("{")
+                brace_depth -= stripped.count("}")
+
+                if brace_depth < 1:
+                    continue
+
+                # Match inner stock lines like: { item_id, buy_price, [ignored], ... }
+                match = re.match(r"\{\s*(.+?)\s*\}", stripped)
+                if not match:
+                    continue
+
+                # Extract and split the inner values
+                values = [v.strip() for v in match.group(1).split(",") if v.strip()]
+                if len(values) < 2:
+                    continue  # malformed or incomplete line
+
+                item_id_raw, buy_price = values[0], values[1]
+
+                # Resolve enum or raw
+                if item_id_raw.startswith("xi.item."):
+                    resolved = item_enums.get(item_id_raw)
+                    if resolved is None:
+                        errors.append(
+                            f"Unknown item enum {item_id_raw} found in script {path}."
                         )
-                        log(("Found item {0} with buy price {1}"), item_id, buy_price)
-                        if item_id in sql_items and int(sql_items[item_id]) > int(
-                            buy_price
-                        ):
-                            errors.append(
-                                (
-                                    "Found item {0}"
-                                    " with buy price {1}"
-                                    " which is lower than"
-                                    " sell price {2}"
-                                    " in script {3}"
-                                ).format(item_id, buy_price, sql_items[item_id], path)
-                            )
+                        continue  # enum not found
+                    item_id = str(resolved)
+                elif item_id_raw.isdigit():
+                    item_id = item_id_raw
+                else:
+                    errors.append(f"Unknown item type found in script {path}.")
+                    continue  # unhandled type
+
+                log(f"Found item {item_id} with buy price {buy_price}")
+
+                if item_id in sql_items and int(sql_items[item_id]) > int(buy_price):
+                    errors.append(
+                        f"Found item {item_id_raw} with buy price {buy_price} which is lower than sell price {sql_items[item_id]} in script {path}."
+                    )
 
 
 # process item_basic for item ids and base sell prices
 sql_line = "INSERT INTO `item_basic` VALUES"
-with open(
-    os.path.join(local_path, "../sql/item_basic.sql"), mode="r", errors="ignore"
-) as items:
+with open(from_server_path("sql/item_basic.sql"), mode="r", errors="ignore") as items:
     for line in items:
         split = process_matches(sql_line, line)
 
@@ -83,10 +142,10 @@ with open(
         if len(split) != 0 and split[-2] == "0" and split[-1] != "0":
             sql_items[split[0]] = split[-1]
 
-            log(("Added item {0} with base sell price {1}"), split[0], split[-1])
+            log(f"Added item {split[0]} with base sell price {split[-1]}")
 
 # iterate over npcs in ../scripts/zones/.../npcs/*.lua
-with os.scandir(os.path.join(local_path, "../scripts/zones")) as iterator:
+with os.scandir(from_server_path("scripts/zones")) as iterator:
     for entry in iterator:
         if entry.is_dir():
             npc_path = os.path.join(entry.path, "npcs")
@@ -99,9 +158,7 @@ with os.scandir(os.path.join(local_path, "../scripts/zones")) as iterator:
 
 # process guild_shops.sql for item ids and min_price
 sql_line = "INSERT INTO `guild_shops` VALUES"
-with open(
-    os.path.join(local_path, "../sql/guild_shops.sql"), mode="r", errors="ignore"
-) as guilds:
+with open(from_server_path("sql/guild_shops.sql"), mode="r", errors="ignore") as guilds:
     for line in guilds:
         split = process_matches(sql_line, line)
         if len(split) != 0:
@@ -110,21 +167,14 @@ with open(
             max_price = split[3].strip()
 
             log(
-                ("Found guild item {0} with min price {1} and max price {2}"),
-                item_id,
-                min_price,
-                max_price,
+                f"Found guild item {item_id} with min price {min_price} and max price {max_price}"
             )
             if item_id in sql_items and int(sql_items[item_id]) > int(min_price):
                 errors.append(
-                    (
-                        "Found guild item {0}"
-                        " with min price {1}"
-                        " which is lower than sell price {2}"
-                        " for guild shop {3}"
-                    ).format(item_id, min_price, sql_items[item_id], split[0].strip())
+                    f"Found guild item {item_id} with min price {min_price} which is lower than sell price {sql_items[item_id]} for guild shop {split[0].strip()}."
                 )
 
 for error in errors:
     print(error)
-    print("Found {0} errors".format(len(errors)))
+if len(errors) > 0:
+    print(f"Found {len(errors)} errors.")

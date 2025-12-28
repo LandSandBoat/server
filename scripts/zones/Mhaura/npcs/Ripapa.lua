@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     -- Trial by Lightning
     elseif
         (trialByLightning == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) >= 6) or
-        (trialByLightning == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
+        (trialByLightning == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByLightning_date'))
     then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
-            player:setCharVar('TrialByLightning_date', getMidnight())
+            player:setCharVar('TrialByLightning_date', JstMidnight())
             player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end

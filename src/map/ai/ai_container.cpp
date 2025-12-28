@@ -28,7 +28,7 @@
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
-#include "packets/entity_animation.h"
+#include "packets/s2c/0x038_schedulor.h"
 #include "states/ability_state.h"
 #include "states/attack_state.h"
 #include "states/death_state.h"
@@ -38,7 +38,6 @@
 #include "states/magic_state.h"
 #include "states/mobskill_state.h"
 #include "states/petskill_state.h"
-#include "states/raise_state.h"
 #include "states/range_state.h"
 #include "states/respawn_state.h"
 #include "states/synth_state.h"
@@ -51,13 +50,15 @@ CAIContainer::CAIContainer(CBaseEntity* _PEntity)
 {
 }
 
-CAIContainer::CAIContainer(CBaseEntity* _PEntity, std::unique_ptr<CPathFind>&& _pathfind, std::unique_ptr<CController>&& _controller,
+CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
+                           std::unique_ptr<CPathFind>&&   _pathfind,
+                           std::unique_ptr<CController>&& _controller,
                            std::unique_ptr<CTargetFind>&& _targetfind)
 : TargetFind(std::move(_targetfind))
 , PathFind(std::move(_pathfind))
 , Controller(std::move(_controller))
-, m_Tick(server_clock::now())
-, m_PrevTick(server_clock::now())
+, m_Tick(timer::now())
+, m_PrevTick(timer::now())
 , PEntity(_PEntity)
 , ActionQueue(_PEntity)
 {
@@ -108,12 +109,12 @@ bool CAIContainer::WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CAIContainer::MobSkill(uint16 targid, uint16 wsid)
+bool CAIContainer::MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride)
 {
     auto* AIController = dynamic_cast<CMobController*>(Controller.get());
     if (AIController)
     {
-        return AIController->MobSkill(targid, wsid);
+        return AIController->MobSkill(targid, wsid, castTimeOverride);
     }
     return false;
 }
@@ -155,7 +156,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
-        if (PathFind)
+        if (PathFind && PEntity->GetLocalVar("stopPathingOnTrigger") == 1)
         {
             PEntity->SetLocalVar("pauseNPCPathing", 1);
         }
@@ -174,12 +175,12 @@ bool CAIContainer::UseItem(uint16 targid, uint8 loc, uint8 slotid)
     return false;
 }
 
-bool CAIContainer::Inactive(duration _duration, bool canChangeState)
+bool CAIContainer::Inactive(timer::duration _duration, bool canChangeState)
 {
     return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, false);
 }
 
-bool CAIContainer::Untargetable(duration _duration, bool canChangeState)
+bool CAIContainer::Untargetable(timer::duration _duration, bool canChangeState)
 {
     return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, true);
 }
@@ -279,7 +280,7 @@ bool CAIContainer::Internal_WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
+bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid, std::optional<timer::duration> castTimeOverride)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
@@ -288,7 +289,7 @@ bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
         {
             return false;
         }
-        return ChangeState<CMobSkillState>(entity, targid, wsid);
+        return ChangeState<CMobSkillState>(entity, targid, wsid, castTimeOverride);
     }
     return false;
 }
@@ -335,22 +336,12 @@ bool CAIContainer::Internal_RangedAttack(uint16 targetid)
     return false;
 }
 
-bool CAIContainer::Internal_Die(duration deathTime)
+bool CAIContainer::Internal_Die(timer::duration deathTime)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
         return ChangeState<CDeathState>(entity, deathTime);
-    }
-    return false;
-}
-
-bool CAIContainer::Internal_Raise()
-{
-    auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
-    if (entity)
-    {
-        return ForceChangeState<CRaiseState>(entity);
     }
     return false;
 }
@@ -412,7 +403,7 @@ void CAIContainer::Reset()
     }
 }
 
-void CAIContainer::Tick(time_point _tick)
+void CAIContainer::Tick(timer::time_point _tick)
 {
     TracyZoneScoped;
     m_PrevTick = m_Tick;
@@ -464,7 +455,7 @@ void CAIContainer::ClearStateStack()
 {
     while (!m_stateStack.empty())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
 }
@@ -473,7 +464,7 @@ void CAIContainer::InterruptStates()
 {
     while (!m_stateStack.empty() && m_stateStack.top()->CanInterrupt())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
 }
@@ -498,12 +489,12 @@ bool CAIContainer::IsUntargetable()
     return (PEntity->PAI->IsCurrentState<CInactiveState>() && static_cast<CInactiveState*>(PEntity->PAI->GetCurrentState())->GetUntargetable()) || PEntity->GetUntargetable();
 }
 
-time_point CAIContainer::getTick()
+timer::time_point CAIContainer::getTick()
 {
     return m_Tick;
 }
 
-time_point CAIContainer::getPrevTick()
+timer::time_point CAIContainer::getPrevTick()
 {
     return m_PrevTick;
 }
@@ -542,7 +533,7 @@ void CAIContainer::ClearTimerQueue()
 
 void CAIContainer::checkQueueImmediately()
 {
-    ActionQueue.checkAction(server_clock::now());
+    ActionQueue.checkAction(timer::now());
 }
 
 bool CAIContainer::Internal_Despawn(bool instantDespawn)
@@ -554,7 +545,7 @@ bool CAIContainer::Internal_Despawn(bool instantDespawn)
     return false;
 }
 
-bool CAIContainer::Internal_Respawn(duration _duration)
+bool CAIContainer::Internal_Respawn(timer::duration _duration)
 {
     if (!IsCurrentState<CRespawnState>())
     {
@@ -577,7 +568,16 @@ void CAIContainer::CheckCompletedStates()
 {
     while (!m_stateStack.empty() && m_stateStack.top()->IsCompleted())
     {
-        m_stateStack.top()->Cleanup(server_clock::now());
+        m_stateStack.top()->Cleanup(timer::now());
         m_stateStack.pop();
     }
+}
+
+bool CAIContainer::Accept_Raise()
+{
+    if (IsCurrentState<CDeathState>())
+    {
+        static_cast<CDeathState*>(PEntity->PAI->GetCurrentState())->acceptRaise();
+    }
+    return false;
 }

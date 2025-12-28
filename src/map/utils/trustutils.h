@@ -29,13 +29,9 @@ class CTrustEntity;
 
 namespace trustutils
 {
-    void LoadTrustList();
-    void FreeTrustList();
 
-    CTrustEntity* SpawnTrust(CCharEntity* PMaster, uint32 TrustID);
+// We cache all of this so we don't have to hit the database every time a trust is spawned
+void LoadTrustList();
+auto SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*;
 
-    // Internal
-    void          BuildTrust(uint32 TrustID);
-    CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID);
-    void          LoadTrustStatsAndSkills(CTrustEntity* PTrust);
 }; // namespace trustutils

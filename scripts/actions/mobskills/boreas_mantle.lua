@@ -34,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             local clone = GetMobByID(cloneID)
             if clone then
                 local action = clone:getCurrentAction()
-                if action ~= xi.act.NONE and action ~= xi.act.DEATH then
+                if action ~= xi.action.category.NONE and action ~= xi.action.category.DEATH then
                     DespawnMob(cloneID)
                 end
             end

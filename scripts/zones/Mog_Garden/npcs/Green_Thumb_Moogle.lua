@@ -33,16 +33,15 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 1016 and option == 0xFFE00FF then -- Buy/Sell Things
         local stock =
         {
-            573, 280,    -- Vegetable Seeds
-            574, 320,    -- Fruit Seeds
-            575, 280,    -- Grain Seeds
-            572, 280,    -- Herb Seeds
-            1236, 1685,  -- Cactus Stems
-            2235, 320,   -- Wildgrass Seeds
-
-            3986, 1111,  -- Chestnut Tree Sap (11th Anniversary Campaign)
-            3985, 1111,  -- Monarch Beetle Saliva (11th Anniversary Campaign)
-            3984, 1111,  -- Golden Seed Pouch (11th Anniversary Campaign)
+            { 573,  280,  }, -- Vegetable Seeds
+            { 574,  320,  }, -- Fruit Seeds
+            { 575,  280,  }, -- Grain Seeds
+            { 572,  280,  }, -- Herb Seeds
+            { 1236, 1685, }, -- Cactus Stems
+            { 2235, 320,  }, -- Wildgrass Seeds
+            { 3986, 1111, }, -- Chestnut Tree Sap (11th Anniversary Campaign)
+            { 3985, 1111, }, -- Monarch Beetle Saliva (11th Anniversary Campaign)
+            { 3984, 1111, }, -- Golden Seed Pouch (11th Anniversary Campaign)
         }
         xi.shop.general(player, stock)
 

@@ -1,0 +1,224 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+# # Available machines:
+# # https://github.com/actions/runner-images/tree/main
+jobs:
+  Sanity_Checks:
+    name: Sanity Checks
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/landsandboat/devtools:ubuntu
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # github.workspace is the workspace in the runner (/home/runner/work/server/server)
+      # $GITHUB_WORKSPACE is the workspace in the container (/__w/server/server)
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
+
+      - name: Run checks
+        run: ./tools/ci/sanity_checks.sh origin/${{ github.event.pull_request.base.ref }}
+
+      - name: Add sanity checks report to summary
+        if: ${{ always() }}
+        run: tr -d '\r' < sanity_checks_summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload changed files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: changed-files
+          path: changed-files.txt
+        continue-on-error: true
+
+  Lua_Language_Server:
+    name: Lua Language Server
+    needs: Sanity_Checks
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/landsandboat/devtools:ubuntu
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Download Changed Files
+        uses: actions/download-artifact@v4
+        with:
+          name: changed-files
+
+      - name: Check For Changed Lua Files
+        id: check-changes
+        run: |
+          mapfile -t changed_files < changed-files.txt
+          lua_changes=false
+          for changed_file in ${changed_files[@]}; do
+              if [[ $changed_file == scripts/**/*.lua || $changed_file == modules/**/*.lua ]]; then
+                lua_changes=true
+                break
+              fi
+          done
+          echo "lua_changes=$lua_changes" >> $GITHUB_OUTPUT
+
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - uses: actions/checkout@v4
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        with:
+          fetch-depth: 0
+
+      - name: Install Python dependencies
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
+
+      - name: Run Lua Language Server
+        id: run_lls
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: python ./tools/ci/lua_lang_server.py
+
+      - name: Summarize run
+        id: summarize_run
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: |
+          found_issues=false
+          check_file=lua_lang_errors.txt
+          if [[ -f "$check_file" && -s "$check_file" ]]; then
+              found_issues=true
+              echo "## :x: Run Failed" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              tr -d '\r' < "$check_file" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [[ "$found_issues" == "false" ]]; then
+              if [[ "${{ steps.run_lls.outcome }}" == "success" ]]; then
+                  echo "## :heavy_check_mark: All checks passed." >> $GITHUB_STEP_SUMMARY
+              else
+                  echo "## :x: Lua Language Server had errors, but no specific output was found." >> $GITHUB_STEP_SUMMARY
+                  echo "Check the logs step for details." >> $GITHUB_STEP_SUMMARY
+                  found_issues=true
+              fi
+          fi
+          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
+
+      - name: Fail Workflow if Checks Failed
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' && (steps.run_lls.outcome == 'failure' || steps.summarize_run.outputs.issues_found == 'true') }}
+        run: |
+          echo "Lua Language Server failed. See summary for details."
+          exit 1
+
+  Clang_Tidy:
+    needs: Sanity_Checks
+    name: Clang Tidy
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ubuntu-24.04
+      compiler: clang
+      compiler_version: 20
+      build_type: Debug
+      build_modules: false
+      tracy: false
+      upload_artifact: false
+      clang_tidy: true
+      optional_build: true
+
+  Build:
+    needs: Sanity_Checks
+    name: ${{ matrix.runner && 'Build' || '' }} # GitHub Actions hack to hide matrix args
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build_type: Debug
+            runner: windows-2025
+            compiler: msvc
+            build_modules: false
+          - build_type: Debug
+            runner: macos-26
+            compiler: appleClang
+            build_modules: false
+          - build_type: Debug
+            runner: ubuntu-24.04
+            compiler: gcc
+            compiler_version: 14
+            build_modules: false
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ${{ matrix.runner }}
+      compiler: ${{ matrix.compiler }}
+      compiler_version: ${{ matrix.compiler_version }}
+      build_type: ${{ matrix.build_type }}
+      build_modules: ${{ matrix.build_modules }}
+      upload_artifact: true
+
+  Test:
+    needs: Build
+    if: ${{ !cancelled() && needs.Build.result == 'success' }}
+    name: ${{ matrix.runner && 'Test' || '' }} # GitHub Actions hack to hide matrix args
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2025
+            test_modules: false
+            multi_process: true
+            xi_test: true
+            startup_checks: true
+          - runner: macos-26
+            test_modules: false
+            multi_process: false
+            xi_test: false
+            startup_checks: true
+          - runner: ubuntu-24.04
+            test_modules: false
+            multi_process: false
+            xi_test: true
+            startup_checks: true
+    uses: ./.github/workflows/runner_test.yml
+    with:
+      runner: ${{ matrix.runner }}
+      test_modules: ${{ matrix.test_modules }}
+      multi_process: ${{ matrix.multi_process }}
+      xi_test: ${{ matrix.xi_test }}
+      startup_checks: ${{ matrix.startup_checks }}
+
+  # Docker_Build:
+  #   needs: Sanity_Checks
+  #   name: Build
+  #   uses: ./.github/workflows/docker_build.yml
+  #   with:
+  #     os: ubuntu
+  #     compiler: gcc14
+  #     build_type: Debug
+  #     build_modules: false
+  #     tracy: false
+  #     upload_artifact: true
+
+  # Docker_Test:
+  #   needs: Docker_Build
+  #   name: Test
+  #   uses: ./.github/workflows/docker_test.yml
+  #   with:
+  #     os: ubuntu
+  #     test_modules: false
+  #     multi_process: false

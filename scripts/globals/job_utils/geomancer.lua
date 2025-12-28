@@ -103,38 +103,40 @@ local indiData =
     [xi.magic.spell.INDI_GRAVITY]    = { visualEffect = indiVisualEffect.WIND.ENEMIES,    effect = xi.effect.GEO_WEIGHT,              targetType = xi.auraTarget.ENEMIES },
 }
 
+-- "minPotency" is potency as zero combined skill
+-- "maxSkill" is the combined skill where you reach maxPotency
 local potencyData =
 {
-    [xi.effect.GEO_REGEN]               = { divisor =  20.00, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_POISON]              = { divisor =  20.00, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_REFRESH]             = { divisor = 150.00, minPotency = 1.0, maxPotency =  6.0, geoModMultiplier = 1.0 },
-    [xi.effect.GEO_STR_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_DEX_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_VIT_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_AGI_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_INT_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_MND_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_CHR_BOOST]           = { divisor =  36.00, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
-    [xi.effect.GEO_ATTACK_BOOST]        = { divisor =  25.93, minPotency = 4.6, maxPotency = 34.7, geoModMultiplier = 2.7 },
-    [xi.effect.GEO_DEFENSE_BOOST]       = { divisor =  22.61, minPotency = 9.7, maxPotency = 39.8, geoModMultiplier = 4.6 },
-    [xi.effect.GEO_MAGIC_ATK_BOOST]     = { divisor =  60.00, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_MAGIC_DEF_BOOST]     = { divisor =  45.00, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
-    [xi.effect.GEO_ACCURACY_BOOST]      = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_EVASION_BOOST]       = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_ACC_BOOST]     = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_EVASION_BOOST] = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_ATTACK_DOWN]         = { divisor =  36.00, minPotency = 4.6, maxPotency = 25.0, geoModMultiplier = 4.6 },
-    [xi.effect.GEO_DEFENSE_DOWN]        = { divisor =  60.81, minPotency = 2.7, maxPotency = 14.8, geoModMultiplier = 2.7 },
-    [xi.effect.GEO_MAGIC_ATK_DOWN]      = { divisor =  45.00, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
-    [xi.effect.GEO_MAGIC_DEF_DOWN]      = { divisor =  60.00, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
-    [xi.effect.GEO_ACCURACY_DOWN]       = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_EVASION_DOWN]        = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_MAGIC_ACC_DOWN]      = { divisor =  13.84, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
-    [xi.effect.GEO_MAGIC_EVASION_DOWN]  = { divisor =  18.00, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
-    [xi.effect.GEO_SLOW]                = { divisor =  60.4,  minPotency = 0.9, maxPotency = 14.9, geoModMultiplier = 0.5 },
-    [xi.effect.GEO_PARALYSIS]           = { divisor =  60.00, minPotency = 1.0, maxPotency = 15.0, geoModMultiplier = 1.0 },
-    [xi.effect.GEO_WEIGHT]              = { divisor =  45.22, minPotency = 3.9, maxPotency = 19.9, geoModMultiplier = 1.1 },
-    [xi.effect.GEO_HASTE]               = { divisor =  30.1,  minPotency = 2.4, maxPotency = 29.9, geoModMultiplier = 1.1 },
+    [xi.effect.GEO_REGEN]               = { maxSkill = 600, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_POISON]              = { maxSkill = 600, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_REFRESH]             = { maxSkill = 900, minPotency = 1.0, maxPotency =  6.0, geoModMultiplier = 1.0 },
+    [xi.effect.GEO_STR_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_DEX_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_VIT_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_AGI_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_INT_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_MND_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_CHR_BOOST]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 25.0, geoModMultiplier = 2.0 },
+    [xi.effect.GEO_ATTACK_BOOST]        = { maxSkill = 900, minPotency = 4.6, maxPotency = 34.7, geoModMultiplier = 2.7 },
+    [xi.effect.GEO_DEFENSE_BOOST]       = { maxSkill = 900, minPotency = 9.7, maxPotency = 39.8, geoModMultiplier = 4.6 },
+    [xi.effect.GEO_MAGIC_ATK_BOOST]     = { maxSkill = 900, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_MAGIC_DEF_BOOST]     = { maxSkill = 900, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
+    [xi.effect.GEO_ACCURACY_BOOST]      = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_EVASION_BOOST]       = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_ACC_BOOST]     = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_EVASION_BOOST] = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_ATTACK_DOWN]         = { maxSkill = 900, minPotency = 4.6, maxPotency = 25.0, geoModMultiplier = 4.6 },
+    [xi.effect.GEO_DEFENSE_DOWN]        = { maxSkill = 900, minPotency = 2.7, maxPotency = 14.8, geoModMultiplier = 2.7 },
+    [xi.effect.GEO_MAGIC_ATK_DOWN]      = { maxSkill = 900, minPotency = 5.0, maxPotency = 20.0, geoModMultiplier = 4.0 },
+    [xi.effect.GEO_MAGIC_DEF_DOWN]      = { maxSkill = 900, minPotency = 3.0, maxPotency = 15.0, geoModMultiplier = 3.0 },
+    [xi.effect.GEO_ACCURACY_DOWN]       = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_EVASION_DOWN]        = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_MAGIC_ACC_DOWN]      = { maxSkill = 900, minPotency = 1.0, maxPotency = 65.0, geoModMultiplier = 6.0 },
+    [xi.effect.GEO_MAGIC_EVASION_DOWN]  = { maxSkill = 900, minPotency = 1.0, maxPotency = 50.0, geoModMultiplier = 5.0 },
+    [xi.effect.GEO_SLOW]                = { maxSkill = 900, minPotency = 0.9, maxPotency = 14.9, geoModMultiplier = 0.5 },
+    [xi.effect.GEO_PARALYSIS]           = { maxSkill = 900, minPotency = 1.0, maxPotency = 15.0, geoModMultiplier = 1.0 },
+    [xi.effect.GEO_WEIGHT]              = { maxSkill = 900, minPotency = 3.9, maxPotency = 19.9, geoModMultiplier = 1.1 },
+    [xi.effect.GEO_HASTE]               = { maxSkill = 900, minPotency = 2.4, maxPotency = 29.9, geoModMultiplier = 1.1 },
 }
 
 local function getLuopan(player)
@@ -168,6 +170,25 @@ xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
+xi.job_utils.geomancer.geoOnConcentricPulseAbilityCheck = function(player, target, ability)
+    local pet = player:getPet()
+    if not hasLuopan(player) or not pet then
+        return xi.msg.basic.REQUIRE_LUOPAN, 0
+    end
+
+    -- player out of range of luopan
+    if player:checkDistance(pet) > ability:getRange() + player:getHitboxSize() + pet:getHitboxSize() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, 0
+    end
+
+    -- target out of range of luopan
+    if target:checkDistance(pet) > ability:getRange() + target:getHitboxSize() + pet:getHitboxSize() then
+        return xi.msg.basic.TARG_OUT_OF_RANGE_2, pet:getTargID()
+    end
+
+    return 0, 0
+end
+
 xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, ability)
     if not hasLuopan(player) then
         return xi.msg.basic.REQUIRE_LUOPAN, 0
@@ -183,7 +204,6 @@ end
 xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ability)
     local luopan = getLuopan(player)
 
-    -- TODO: this never fires if you dont have a bubble up and says "Unable to attack that target." Core issue?
     if not luopan then
         return xi.msg.basic.REQUIRE_LUOPAN, 0
     end
@@ -191,6 +211,14 @@ xi.job_utils.geomancer.geoOnEclipticAttritionCheck = function(player, target, ab
     if luopan:getLocalVar('eclipticAttrition') ~= 0 then
         -- This message is guessed
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
+    end
+
+    return 0, 0
+end
+
+xi.job_utils.geomancer.geoOnTheurgicFocusCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.THEURGIC_FOCUS) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
 
     return 0, 0
@@ -221,10 +249,13 @@ local function getEffectPotency(player, effect)
     end
 
     local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
-    local divisor            = potencyData[effect].divisor
+    local maxSkill           = potencyData[effect].maxSkill
     local minPotency         = potencyData[effect].minPotency
     local maxPotency         = potencyData[effect].maxPotency
-    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
+    -- TODO find the real scaling formula?
+    -- linear regression to find divisor based on minPotency at 0 skill and maxPotency at "maxSkill"
+    local divisor            = maxSkill / (maxPotency - minPotency)
+    local potency            = utils.clamp(minPotency + combinedSkillLevel / divisor, minPotency, maxPotency)
 
     if geomancyMod > 0 and not player:hasStatusEffect(xi.effect.ENTRUST) then
         -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect
@@ -260,10 +291,17 @@ end
 xi.job_utils.geomancer.bolster = function(player, target, ability)
     local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
     player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+
+    return xi.effect.BOLSTER
 end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
-    local hppRemaining = target:getHPP()
+    local luopan = getLuopan(player)
+    if not luopan then
+        return
+    end
+
+    local hppRemaining = luopan:getHPP()
     local mpCost       = player:getLocalVar('MP_COST')
     local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
     local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
@@ -287,40 +325,63 @@ xi.job_utils.geomancer.fullCircle = function(player, target, ability)
     player:despawnPet()
 end
 
-xi.job_utils.geomancer.lastingEmanation = function(player, target, ability)
-    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
-    target:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(target:getMainLvl() / 14))
+xi.job_utils.geomancer.lastingEmanation = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if luopan then
+        local hpDrain = luopan:getMod(xi.mod.REGEN_DOWN)
+        luopan:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(luopan:getMainLvl() / 14))
+        -- Self cast ability but targets Luopan
+        action:ID(player:getID(), luopan:getID())
+    end
 end
 
 -- TODO: allegedly Blaze of Glory is additive to this, but we aren't keeping track of that potency, so BoG + Ecliptic Attrition is stronger than it should be.
 --       That is probably fixable with some localvars on the bubble...?
-xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability)
-    if target:getLocalVar('eclipticAttrition') ~= 0 then
+xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if not luopan then
         return
     end
 
-    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
-    target:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(target:getMainLvl() / 16))
+    -- Self cast ability but targets Luopan
+    action:ID(player:getID(), luopan:getID())
+
+    if luopan:getLocalVar('eclipticAttrition') ~= 0 then
+        return
+    end
+
+    local hpDrain = luopan:getMod(xi.mod.REGEN_DOWN)
+    luopan:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(luopan:getMainLvl() / 16))
 
     if player:hasStatusEffect(xi.effect.BOLSTER) then
         return
     end
 
-    local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
+    local effect = luopan:getStatusEffect(xi.effect.COLURE_ACTIVE)
     if effect then
         local finalPotency = math.floor(1.25 * effect:getSubPower())
 
         -- This floors https://www.bg-wiki.com/ffxi/Ecliptic_Attrition
         effect:setSubPower(finalPotency)
-        target:setLocalVar('eclipticAttrition', 1)
+        luopan:setLocalVar('eclipticAttrition', 1)
     end
 end
 
 xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
     target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, 0, 0, 60)
+
+    return xi.effect.COLLIMATED_FERVOR
 end
 
-xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
+xi.job_utils.geomancer.lifeCycle = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if not luopan then
+        return
+    end
+
+    -- Self cast ability but targets Luopan
+    action:ID(player:getID(), luopan:getID())
+
     local hpAmount   = math.floor(0.25 * player:getHP())
     local hpTransfer = hpAmount
 
@@ -328,32 +389,48 @@ xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
         hpTransfer = hpAmount * player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10
     end
 
-    target:restoreHP(hpTransfer)
+    luopan:restoreHP(hpTransfer)
     player:delHP(hpAmount)
     return hpTransfer
 end
 
 xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
     player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
+
+    return xi.effect.BLAZE_OF_GLORY
 end
 
-xi.job_utils.geomancer.dematerialize = function(player, target, ability)
-    target:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+xi.job_utils.geomancer.dematerialize = function(player, target, ability, action)
+    local luopan = getLuopan(player)
+    if luopan then
+        luopan:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+        -- Self-cast ability but reports effect on Luopan
+        action:ID(player:getID(), luopan:getID())
+    end
+
     return xi.effect.DEMATERIALIZE
 end
 
 xi.job_utils.geomancer.theurgicFocus = function(player, target, ability)
+    player:addStatusEffect(xi.effect.THEURGIC_FOCUS, 1, 0, 60)
+
+    return xi.effect.THEURGIC_FOCUS
 end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
     player:addStatusEffect(xi.effect.WIDENED_COMPASS, 0, 3, 60)
+
+    return xi.effect.WIDENED_COMPASS
 end
 
 -----------------------------------
 -- Magic Casting Checks
 -----------------------------------
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
-    -- No checks known as of yet
+    if caster ~= target and not caster:hasStatusEffect(xi.effect.ENTRUST) then
+        return xi.msg.basic.MAGIC_CANNOT_BE_CAST
+    end
+
     return 0
 end
 

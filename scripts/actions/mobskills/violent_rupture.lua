@@ -1,9 +1,6 @@
 -----------------------------------
---  Violent Rupture
---  Description: Deals Water damage to enemies in a fan-shaped area of effect. Additional effect: STR Down
---  Type: Breath
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: Unknown cone
+-- Violent Rupture
+-- Family: Shadow Lord (Dynamis Lord)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,17 +10,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 50
-    local duration = 120
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, power, 3, duration)
+    params.percentMultipier  = 0.10
+    params.element           = xi.element.FIRE
+    params.damageCap         = 200
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.1, 1, xi.element.FIRE, 200)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.FIRE)
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
-    return dmg
+        local power = 50
+        local duration = 120
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, power, 3, duration)
+    end
+
+    return damage
 end
 
 return mobskillObject

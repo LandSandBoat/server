@@ -13,7 +13,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.EVASION_DOWN, 50, 0, 120))
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 45, 210)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.EVASION_DOWN, 10, 0, duration))
 
     return xi.effect.EVASION_DOWN
 end

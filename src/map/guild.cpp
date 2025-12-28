@@ -22,6 +22,7 @@
 #include "guild.h"
 #include "entities/charentity.h"
 #include "items/item.h"
+#include "lua/luautils.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -29,9 +30,12 @@
 CGuild::CGuild(uint8 id, const std::string& _pointsName)
 : m_id(id)
 {
+    earth_time::duration currentTime = std::chrono::seconds(earth_time::vanadiel_timestamp()) - 24h;
+    uint32               elapsedDays = std::chrono::floor<std::chrono::days>(currentTime).count();
+
     for (size_t i = 0; i < m_GPItemsRank.size(); ++i)
     {
-        m_GPItemsRank[i] = (uint8)((CVanaTime::getInstance()->getVanaTime() / (60 * 60 * 24)) % (i + 4));
+        m_GPItemsRank[i] = static_cast<uint8>(elapsedDays % (i + 4));
     }
 
     pointsName = _pointsName;
@@ -55,53 +59,66 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
     {
         m_GPItemsRank[i] = (m_GPItemsRank[i] + 1) % (i + 4);
 
-        std::string query = "SELECT itemid, points, max_points FROM guild_item_points WHERE "
-                            "guildid = %u AND pattern = %u AND rank = %u";
-        int         ret   = _sql->Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
+        const auto rset = db::preparedStmt("SELECT itemid, points, max_points FROM guild_item_points WHERE "
+                                           "guildid = ? AND pattern = ? AND rank = ?",
+                                           m_id,
+                                           pattern,
+                                           m_GPItemsRank[i]);
 
-        if (ret != SQL_ERROR && _sql->NumRows() > 0)
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                m_GPItems[i].emplace_back(itemutils::GetItemPointer(_sql->GetUIntData(0)), _sql->GetUIntData(2), _sql->GetUIntData(1));
+                const auto itemId    = rset->get<uint16>("itemid");
+                const auto points    = rset->get<uint16>("points");
+                const auto maxPoints = rset->get<uint16>("max_points");
+
+                m_GPItems[i].emplace_back(itemutils::GetItemPointer(itemId), maxPoints, points);
             }
         }
     }
 }
 
-std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
+auto CGuild::addGuildPoints(CCharEntity* PChar, const CItem* PItem) const -> std::pair<uint8, int16>
 {
     uint8 rank = PChar->RealSkills.rank[m_id + 48];
 
-    rank = std::clamp<uint8>(rank, 3, 9);
+    rank                   = std::clamp<uint8>(rank, 3, 9);
+    const uint16 curPoints = PChar->getCharVar("[GUILD]daily_points");
+
+    if (curPoints == 1)
+    {
+        // curPoints set to 1 means the player is not eligible for points
+        // due to changing guilds recently.
+        return { 0, 0 };
+    }
 
     if (PItem)
     {
-        int32 curPoints = PChar->getCharVar("[GUILD]daily_points");
-        if (curPoints != 1)
+        for (auto& GPItem : m_GPItems[rank - 3])
         {
-            for (auto& GPItem : m_GPItems[rank - 3])
+            if (GPItem.item->getID() == PItem->getID())
             {
-                if (GPItem.item->getID() == PItem->getID())
+                // if a player ranks up to a new pattern whose maxpoints are fewer than the player's current daily points
+                // then we'd be trying to push a negative number into quantity. our edit to CGuild::getDailyGPItem should
+                // prevent this, but let's be doubly sure.
+                uint16 quantity    = std::min<uint16>((((GPItem.maxpoints - std::clamp<uint16>(curPoints, 0, GPItem.maxpoints)) / GPItem.points) + 1), PItem->getReserve());
+                uint16 pointsToAdd = GPItem.points * quantity;
+
+                if (curPoints <= GPItem.maxpoints)
                 {
-                    // if a player ranks up to a new pattern whose maxpoints are fewer than the player's current daily points
-                    // then we'd be trying to push a negative number into quantity. our edit to CGuild::getDailyGPItem should
-                    // prevent this, but let's be doubly sure.
-                    uint16 quantity = std::max<uint16>(0, std::min<uint16>((((GPItem.maxpoints - curPoints) / GPItem.points) + 1), PItem->getReserve()));
-                    uint16 points   = GPItem.points * quantity;
-                    if (points > GPItem.maxpoints - curPoints)
-                    {
-                        points = GPItem.maxpoints - curPoints;
-                    }
-
-                    charutils::AddPoints(PChar, pointsName.c_str(), points);
-
-                    PChar->setCharVar("[GUILD]daily_points", curPoints + points);
-
-                    return {
-                        std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max()), points
-                    };
+                    pointsToAdd = std::clamp<uint16>(pointsToAdd, 0, GPItem.maxpoints - curPoints);
                 }
+                else
+                {
+                    pointsToAdd = 0;
+                }
+
+                charutils::AddPoints(PChar, pointsName.c_str(), pointsToAdd);
+                // Tally of earned points expire at JST midnight.
+                PChar->setCharVar("[GUILD]daily_points", curPoints + pointsToAdd, luautils::JstMidnight());
+
+                return { quantity, pointsToAdd };
             }
         }
     }
@@ -109,24 +126,23 @@ std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
     return { 0, 0 };
 }
 
-std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
+auto CGuild::getDailyGPItem(CCharEntity* PChar) const -> std::pair<uint16, uint16>
 {
     uint8 rank = PChar->RealSkills.rank[m_id + 48];
 
     rank = std::clamp<uint8>(rank, 3, 9);
 
-    auto GPItem    = m_GPItems[rank - 3];
-    auto curPoints = (uint16)PChar->getCharVar("[GUILD]daily_points");
+    const auto GPItem    = m_GPItems[rank - 3];
+    const auto curPoints = static_cast<uint16>(PChar->getCharVar("[GUILD]daily_points"));
 
-    if (curPoints == 1) // char_var set to 1 in crafting.lua file when done getting points forthe day. Deleted in guildutils.cpp
+    // curPoints set to 1 means the player recently changed guild and is barred from trading for the day.
+    if (curPoints == 1)
     {
         return std::make_pair(GPItem[0].item->getID(), 0);
     }
-    else
-    {
-        // a rank-up can land player in a new pattern that rewards fewer max points than they
-        // have traded in today. we prevent remainingPoints from going negative here so that
-        // we don't later calculate a negative quantity in CGuild::addGuildPoints
-        return std::make_pair(GPItem[0].item->getID(), std::max<uint16>(0, (GPItem[0].maxpoints - curPoints)));
-    }
+
+    // a rank-up can land player in a new pattern that rewards fewer max points than they
+    // have traded in today. we prevent remainingPoints from going negative here so that
+    // we don't later calculate a negative quantity in CGuild::addGuildPoints
+    return std::make_pair(GPItem[0].item->getID(), GPItem[0].maxpoints - std::clamp<uint16>(curPoints, 0, GPItem[0].maxpoints));
 }

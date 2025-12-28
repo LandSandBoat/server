@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    xi.job_utils.rune_fencer.useRuneEnchantment(player, target, ability, xi.effect.SULPOR)
+    return xi.job_utils.rune_fencer.useRuneEnchantment(player, target, ability, xi.effect.SULPOR)
 end
 
 return abilityObject

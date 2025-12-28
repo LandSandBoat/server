@@ -2,34 +2,31 @@
 -- Area: Windurst Waters
 --  NPC: Shohrun-Tuhrun
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WATERS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.SHOHRUNTUHRUN_SHOP_DIALOG)
-
     local stock =
     {
-        4665, 18000, 1, -- Haste
-        4620,  5178, 2, -- Scroll of Raise
-        4632, 10080, 2, -- Scroll of Dia II
-        4637,  8100, 2, -- Scroll of Banish II
-        4652,  6366, 2, -- Scroll of Protect II
-        4657, 15840, 2, -- Scroll of Shell II
-        4708,  4644, 2, -- Scroll of Enfire
-        4709,  3688, 2, -- Scroll of Enblizzard
-        4710,  2250, 2, -- Scroll of Enaero
-        4711,  1827, 2, -- Scroll of Enstone
-        4712,  1363, 2, -- Scroll of Enthunder
-        4713,  6366, 2, -- Scroll of Enwater
-        4611,  3261, 3, -- Scroll of Cure III
-        4654, 78200, 3, -- Scroll of Protect IV
-        4736, 74520, 3, -- Scroll of Protectra IV
-        4868, 64400, 3, -- Scroll of Dispel
+        { xi.item.SCROLL_OF_CURE_III,       3768, 3 },
+        { xi.item.SCROLL_OF_RAISE,          5984, 2 },
+        { xi.item.SCROLL_OF_DIA_II,        11648, 2 },
+        { xi.item.SCROLL_OF_BANISH_II,      9360, 2 },
+        { xi.item.SCROLL_OF_PROTECT_II,     7356, 2 },
+        { xi.item.SCROLL_OF_PROTECT_IV,   104000, 3 },
+        { xi.item.SCROLL_OF_PROTECTRA_IV,  98800, 3 },
+        { xi.item.SCROLL_OF_DISPEL,        80704, 3 },
+        { xi.item.SCROLL_OF_SHELL_II,      18304, 2 },
+        { xi.item.SCROLL_OF_HASTE,         20800, 1 },
+        { xi.item.SCROLL_OF_ENFIRE,         5366, 2 },
+        { xi.item.SCROLL_OF_ENBLIZZARD,     4261, 2 },
+        { xi.item.SCROLL_OF_ENAERO,         2600, 2 },
+        { xi.item.SCROLL_OF_ENSTONE,        2111, 2 },
+        { xi.item.SCROLL_OF_ENTHUNDER,      1575, 2 },
+        { xi.item.SCROLL_OF_ENWATER,        7356, 2 },
     }
 
+    player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.SHOHRUNTUHRUN_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

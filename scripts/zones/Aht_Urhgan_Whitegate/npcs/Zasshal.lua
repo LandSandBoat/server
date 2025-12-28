@@ -8,9 +8,14 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- local currentday = tonumber(os.date('%j'))
-    -- local lastPermit = player:getCharVar('LAST_PERMIT')
-    -- local diffday = currentday - lastPermit
+    -- local nextPermit = player:getCharVar('LAST_PERMIT')
+    -- if nextPermit ~= 0 then
+    --     if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    --         nextPermit = nextPermit + xi.vanaTime.DAY
+    --     else
+    --         nextPermit = nextPermit + (24 * 60 * 60)
+    --     end
+    -- end
     -- local a1 = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
     -- local a2 = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
     -- local a3 = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
@@ -20,9 +25,9 @@ entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         player:startEvent(821)
 --[[    elseif player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getMainLvl() >= 65 then
-        if lastPermit == 0 then
+        if nextPermit == 0 then
             player:startEvent(818, a1, a2, a3, a4, a5)
-        elseif diffday > 0 then
+        elseif nextPermit <= GetSystemTime() then
             player:startEvent(820, a1, a2, a3, a4, a5)
         end]]
     else
@@ -65,9 +70,9 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local currentday = tonumber(os.date('%j'))
-    if not currentday then
-        return
+    local currentday = JstMidnight() - (24 * 60 * 60)
+    if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+        currentday = getVanaMidnight() - xi.vanaTime.DAY
     end
 
     if (csid == 818 or csid == 820) and option == 100 then

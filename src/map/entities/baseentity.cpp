@@ -24,9 +24,11 @@
 #include "common/tracy.h"
 
 #include "ai/ai_container.h"
+
 #include "battlefield.h"
 #include "instance.h"
-#include "map.h"
+#include "los/zone_los.h"
+#include "navmesh.h"
 #include "zone.h"
 
 #include <cstring>
@@ -50,7 +52,7 @@ CBaseEntity::CBaseEntity()
 , PAI(nullptr)
 , PBattlefield(nullptr)
 , PInstance(nullptr)
-, m_nextUpdateTimer(std::chrono::steady_clock::now())
+, m_nextUpdateTimer(timer::now())
 {
     TracyZoneScoped;
     speed          = baseSpeed;
@@ -72,7 +74,6 @@ void CBaseEntity::Spawn()
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
-    PAI->EventHandler.triggerListener("SPAWN", this);
 }
 
 void CBaseEntity::FadeOut()
@@ -81,7 +82,7 @@ void CBaseEntity::FadeOut()
     updatemask |= UPDATE_HP;
 }
 
-const std::string& CBaseEntity::getName()
+const std::string& CBaseEntity::getName() const
 {
     return name;
 }

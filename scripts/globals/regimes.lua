@@ -8,11 +8,10 @@
 -- http://ffxiclopedia.wikia.com/wiki/Field_Manual
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
 -----------------------------------
-require('scripts/globals/teleports')
-require('scripts/globals/utils')
-require('scripts/globals/roe')
-require('scripts/globals/npc_util')
 require('scripts/globals/extravaganza')
+require('scripts/globals/npc_util')
+require('scripts/globals/roe')
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.regime = xi.regime or {}
@@ -66,6 +65,8 @@ local regimeInfo =
             [133] = { act = 'SALTED_FISH',     cost = 50, discounted = 25, food = true },
             [149] = { act = 'HARD_COOKIE',     cost = 50, discounted = 25, food = true },
             [165] = { act = 'INSTANT_NOODLES', cost = 50, discounted = 25, food = true },
+            [181] = { act = 'CIPHER_KORU',     cost = 300, discounted = 300 },
+            [197] = { act = 'CIPHER_SAKURA',   cost = 300, discounted = 300 },
 
             -- TODO: implement elite training
             -- ELITE_INTRO     =  36,
@@ -76,8 +77,6 @@ local regimeInfo =
             -- ELITE_CHAP5     = 116,
             -- ELITE_CHAP6     = 132,
             -- ELITE_CHAP7     = 148,
-
-            -- TODO: implement Trust: Sakura and Trust: Koru-Moru (Alter Ego Extravaganza)
         },
         zone =
         {
@@ -1225,9 +1224,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
             ['REFRESH'] = function()
                 player:delStatusEffectSilent(xi.effect.REFRESH)
-                player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
-                player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
-                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600) -- Does indeed get overwriten by regular refresh.
             end,
 
             ['PROTECT'] = function()
@@ -1296,27 +1293,27 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['DRIED_MEAT'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['SALTED_FISH'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['HARD_COOKIE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['INSTANT_NOODLES'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['DRIED_AGARICUS'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['INSTANT_RICE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0)
+                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
             end,
 
             ['CIPHER_SAKURA'] = function()

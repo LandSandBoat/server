@@ -1,0 +1,15 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `accounts_totp`;
+CREATE TABLE `accounts_totp` (
+  `accid` int unsigned NOT NULL,
+  `secret` varchar(32) NOT NULL,
+  `recovery_code` varchar(32) NOT NULL,
+  `validated` boolean NOT NULL,
+  PRIMARY KEY (`accid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -55,9 +55,9 @@ public:
     PET_TYPE          getPetType();
     uint8             getSpawnLevel();
     void              setSpawnLevel(uint8 level);
-    uint32            getJugSpawnTime();              // initial spawn time (in seconds since epoch) of this pet if it's a jug pet
-    uint32            getJugDuration();               // duration of this jug pet in seconds
-    void              setJugDuration(uint32 seconds); // sets the duration of this jug pet in seconds
+    timer::time_point getJugSpawnTime();                       // initial spawn time of this pet if it's a jug pet
+    timer::duration   getJugDuration();                        // duration of this jug pet in seconds
+    void              setJugDuration(timer::duration seconds); // sets the duration of this jug pet in seconds
     bool              isBstPet();
     uint32            m_PetID;
     const std::string GetScriptName();
@@ -74,12 +74,12 @@ public:
     virtual bool      CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
 
 private:
-    PET_TYPE   m_PetType;      // the type of pet e.g. avatar/wyvern/jugpet etc
-    uint8      m_spawnLevel;   // The level the pet was spawned at
-    time_point m_jugSpawnTime; // original spawn time of a jug pet
-    duration   m_jugDuration;  // Time before the jug is despawned after being called
+    PET_TYPE          m_PetType;      // the type of pet e.g. avatar/wyvern/jugpet etc
+    uint8             m_spawnLevel;   // The level the pet was spawned at
+    timer::time_point m_jugSpawnTime; // original spawn time of a jug pet
+    timer::duration   m_jugDuration;  // Time before the jug is despawned after being called
 
-    void setJugSpawnTime(uint32 spawnTime); // sets the initial spawn time of this pet in seconds since epoch
+    void setJugSpawnTime(timer::time_point spawnTime); // sets the initial spawn time of this pet
 };
 
 #endif

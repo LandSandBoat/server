@@ -34,12 +34,14 @@ CInstance::CInstance(CZone* zone, uint32 instanceid)
 : CZoneEntities(zone)
 , m_instanceid(instanceid)
 , m_zone(zone)
+, m_startTime(timer::now())
 {
     TracyZoneScoped;
-    LoadInstance();
 
-    m_startTime = server_clock::now();
-    m_wipeTimer = m_startTime;
+    m_wipeTimer     = m_startTime;
+    m_lastTimeCheck = m_startTime;
+
+    LoadInstance();
 }
 
 CInstance::~CInstance()
@@ -72,42 +74,43 @@ void CInstance::LoadInstance()
 {
     TracyZoneScoped;
 
-    static const char* Query = "SELECT "
-                               "instance_name, "
-                               "time_limit, "
-                               "entrance_zone, "
-                               "start_x, "
-                               "start_y, "
-                               "start_z, "
-                               "start_rot, "
-                               "music_day, "
-                               "music_night, "
-                               "battlesolo, "
-                               "battlemulti "
-                               "FROM instance_list "
-                               "WHERE instanceid = %u "
-                               "LIMIT 1";
+    const auto rset = db::preparedStmt("SELECT "
+                                       "instance_name, "
+                                       "time_limit, "
+                                       "entrance_zone, "
+                                       "start_x, "
+                                       "start_y, "
+                                       "start_z, "
+                                       "start_rot, "
+                                       "music_day, "
+                                       "music_night, "
+                                       "battlesolo, "
+                                       "battlemulti "
+                                       "FROM instance_list "
+                                       "WHERE instanceid = ? "
+                                       "LIMIT 1",
+                                       m_instanceid);
 
-    if (_sql->Query(Query, m_instanceid) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+    if (rset && rset->rowsCount() && rset->next())
     {
-        m_instanceName.insert(0, (const char*)_sql->GetData(0));
+        m_instanceName = rset->get<std::string>("instance_name");
 
-        m_timeLimit                       = std::chrono::minutes(_sql->GetUIntData(1));
-        m_entrance                        = _sql->GetUIntData(2);
-        m_entryloc.x                      = _sql->GetFloatData(3);
-        m_entryloc.y                      = _sql->GetFloatData(4);
-        m_entryloc.z                      = _sql->GetFloatData(5);
-        m_entryloc.rotation               = _sql->GetUIntData(6);
-        m_zone_music_override.m_songDay   = _sql->GetUIntData(7);
-        m_zone_music_override.m_songNight = _sql->GetUIntData(8);
-        m_zone_music_override.m_bSongS    = _sql->GetUIntData(9);
-        m_zone_music_override.m_bSongM    = _sql->GetUIntData(10);
+        m_timeLimit                       = std::chrono::minutes(rset->get<uint32>("time_limit"));
+        m_entrance                        = rset->get<uint16>("entrance_zone");
+        m_entryloc.x                      = rset->get<float>("start_x");
+        m_entryloc.y                      = rset->get<float>("start_y");
+        m_entryloc.z                      = rset->get<float>("start_z");
+        m_entryloc.rotation               = rset->get<uint8>("start_rot");
+        m_zone_music_override.m_songDay   = !rset->isNull("music_day") ? xi::optional(rset->get<uint16>("music_day")) : std::nullopt;
+        m_zone_music_override.m_songNight = !rset->isNull("music_night") ? xi::optional(rset->get<uint16>("music_night")) : std::nullopt;
+        m_zone_music_override.m_bSongS    = !rset->isNull("battlesolo") ? xi::optional(rset->get<uint16>("battlesolo")) : std::nullopt;
+        m_zone_music_override.m_bSongM    = !rset->isNull("battlemulti") ? xi::optional(rset->get<uint16>("battlemulti")) : std::nullopt;
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern
-        auto zone     = m_zone->getName();
-        auto name     = m_instanceName;
-        auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
+        const auto zone     = m_zone->getName();
+        const auto name     = m_instanceName;
+        const auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
         luautils::CacheLuaObjectFromFile(filename);
     }
     else
@@ -147,32 +150,33 @@ position_t CInstance::GetEntryLoc()
     return m_entryloc;
 }
 
-duration CInstance::GetTimeLimit()
+timer::duration CInstance::GetTimeLimit()
 {
     return m_timeLimit;
 }
 
-void CInstance::SetTimeLimit(duration time)
+void CInstance::SetTimeLimit(timer::duration time)
 {
     m_timeLimit = time;
 }
 
-duration CInstance::GetLastTimeUpdate()
+timer::duration CInstance::GetLastTimeUpdate()
 {
     return m_lastTimeUpdate;
 }
 
-duration CInstance::GetWipeTime()
+timer::duration CInstance::GetWipeTime()
 {
     return m_wipeTimer - m_startTime;
 }
 
-duration CInstance::GetElapsedTime(time_point tick)
+timer::duration CInstance::GetElapsedTime(timer::time_point tick)
 {
-    return tick - m_startTime;
+    // no reason to allow returning a negative elapsed time, can happen if map server is delayed and processing a previous tick
+    return std::max(timer::duration(0s), tick - m_startTime);
 }
 
-uint64_t CInstance::GetLocalVar(std::string const& name) const
+uint64_t CInstance::GetLocalVar(const std::string& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -191,7 +195,7 @@ void CInstance::SetEntryLoc(float x, float y, float z, float rot)
     m_entryloc.rotation = (uint8)rot;
 }
 
-void CInstance::SetLastTimeUpdate(duration lastTime)
+void CInstance::SetLastTimeUpdate(timer::duration lastTime)
 {
     m_lastTimeUpdate = lastTime;
 }
@@ -207,12 +211,12 @@ void CInstance::SetStage(uint32 stage)
     m_stage = stage;
 }
 
-void CInstance::SetWipeTime(duration time)
+void CInstance::SetWipeTime(timer::duration time)
 {
     m_wipeTimer = time + m_startTime;
 }
 
-void CInstance::SetLocalVar(std::string const& name, uint64_t value)
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -223,11 +227,19 @@ void CInstance::SetLocalVar(std::string const& name, uint64_t value)
  *                                                                       *
  ************************************************************************/
 
-void CInstance::CheckTime(time_point tick)
+void CInstance::CheckTime(timer::time_point tick)
 {
-    if (m_lastTimeCheck + 1s <= tick && !Failed())
+    auto checkFrequency = 1s;
+    // Once someone zones in, m_lastTimeCheck will change and checkFrequency will be pinned at 1s for the remainder of the instance
+    if (CharListEmpty() && m_startTime == m_lastTimeCheck)
     {
-        luautils::OnInstanceTimeUpdate(GetZone(), this, (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(GetElapsedTime(tick)).count());
+        // give grace period before first instance check to allow time to register instance and zone in
+        // instance.lua lets the client run through the event for a maximum of 35s before forcing zone change with `setPos`
+        checkFrequency = 40s;
+    }
+    if (m_lastTimeCheck + checkFrequency <= tick && !Failed())
+    {
+        luautils::OnInstanceTimeUpdate(GetZone(), this, static_cast<uint32>(timer::count_milliseconds(GetElapsedTime(tick))));
         m_lastTimeCheck = tick;
     }
 }
@@ -254,27 +266,29 @@ void CInstance::ClearEntities()
         }
     };
 
-    // clang-format off
-    ForEachChar([&](CCharEntity* PChar)
-    {
-        clearStates(PChar);
-    });
+    ForEachChar(
+        [&](CCharEntity* PChar)
+        {
+            clearStates(PChar);
+        });
 
-    ForEachMob([&](CMobEntity* PMob)
-    {
-        clearStates(PMob);
-    });
+    ForEachMob(
+        [&](CMobEntity* PMob)
+        {
+            clearStates(PMob);
+        });
 
-    ForEachPet([&](CPetEntity* PPet)
-    {
-        clearStates(PPet);
-    });
+    ForEachPet(
+        [&](CPetEntity* PPet)
+        {
+            clearStates(PPet);
+        });
 
-    ForEachTrust([&](CTrustEntity* PTrust)
-    {
-        clearStates(PTrust);
-    });
-    // clang-format on
+    ForEachTrust(
+        [&](CTrustEntity* PTrust)
+        {
+            clearStates(PTrust);
+        });
 }
 
 void CInstance::Fail()
@@ -318,20 +332,20 @@ bool CInstance::CheckFirstEntry(uint32 id)
 
 uint16 CInstance::GetSoloBattleMusic()
 {
-    return m_zone_music_override.m_bSongS != (uint16)-1 ? m_zone_music_override.m_bSongS : GetZone()->GetSoloBattleMusic();
+    return m_zone_music_override.m_bSongS ? *m_zone_music_override.m_bSongS : GetZone()->GetSoloBattleMusic();
 }
 
 uint16 CInstance::GetPartyBattleMusic()
 {
-    return m_zone_music_override.m_bSongM != (uint16)-1 ? m_zone_music_override.m_bSongM : GetZone()->GetPartyBattleMusic();
+    return m_zone_music_override.m_bSongM ? *m_zone_music_override.m_bSongM : GetZone()->GetPartyBattleMusic();
 }
 
 uint16 CInstance::GetBackgroundMusicDay()
 {
-    return m_zone_music_override.m_songDay != (uint16)-1 ? m_zone_music_override.m_songDay : GetZone()->GetBackgroundMusicDay();
+    return m_zone_music_override.m_songDay ? *m_zone_music_override.m_songDay : GetZone()->GetBackgroundMusicDay();
 }
 
 uint16 CInstance::GetBackgroundMusicNight()
 {
-    return m_zone_music_override.m_songNight != (uint16)-1 ? m_zone_music_override.m_songNight : GetZone()->GetBackgroundMusicNight();
+    return m_zone_music_override.m_songNight ? *m_zone_music_override.m_songNight : GetZone()->GetBackgroundMusicNight();
 }

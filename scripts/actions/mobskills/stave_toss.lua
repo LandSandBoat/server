@@ -5,7 +5,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- If animationSub is 1, mob has already lost the staff. If zero, still has staff.
+    -- If animationSub is non-zero, mob has already lost the weapon.
     if
         mob:getAnimationSub() == 0 and
         (mob:getMainJob() == xi.job.BLM or mob:getMainJob() == xi.job.WHM)
@@ -17,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    skill:setFinalAnimationSub(2)
     local numhits = 1
     local accmod = 1
     local ftp    = 1

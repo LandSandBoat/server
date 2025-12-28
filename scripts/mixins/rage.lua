@@ -13,18 +13,18 @@ require('scripts/globals/mixins')
 g_mixins = g_mixins or {}
 
 g_mixins.rage = function(rageMob)
-    rageMob:addListener('SPAWN', 'RAGE_SPAWN', function(mob)
+    rageMob:addListener('PRESPAWN', 'RAGE_SPAWN', function(mob)
         mob:setLocalVar('[rage]timer', 1200) -- 20 minutes
     end)
 
     rageMob:addListener('ENGAGE', 'RAGE_ENGAGE', function(mob)
-        mob:setLocalVar('[rage]at', os.time() + mob:getLocalVar('[rage]timer'))
+        mob:setLocalVar('[rage]at', GetSystemTime() + mob:getLocalVar('[rage]timer'))
     end)
 
     rageMob:addListener('COMBAT_TICK', 'RAGE_CTICK', function(mob)
         if
             mob:getLocalVar('[rage]started') == 0 and
-            os.time() > mob:getLocalVar('[rage]at')
+            GetSystemTime() > mob:getLocalVar('[rage]at')
         then
             mob:setLocalVar('[rage]started', 1)
 

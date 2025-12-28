@@ -28,7 +28,7 @@
 
 #include "alliance.h"
 #include "baseentity.h"
-#include "map.h"
+#include "enums/msg_basic.h"
 #include "modifier.h"
 #include "party.h"
 #include "trait.h"
@@ -159,61 +159,16 @@ DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
 enum SUBSKILLTYPE : uint8
 {
-    SUBSKILL_XBO      = 0,
-    SUBSKILL_GUN      = 1,
-    SUBSKILL_CNN      = 2,
-    SUBSKILL_SHURIKEN = 3,
+    SUBSKILL_XBOW_SHORTBOW = 0,
+    SUBSKILL_GUN           = 1,
+    SUBSKILL_CANNON        = 2,
+    SUBSKILL_SHURIKEN      = 3,
+    SUBSKILL_LONGBOW       = 4,
 
     SUBSKILL_ANIMATOR    = 10,
     SUBSKILL_ANIMATOR_II = 11,
 
-    SUBSKILL_SHEEP      = 21,
-    SUBSKILL_HARE       = 22,
-    SUBSKILL_CRAB       = 23,
-    SUBSKILL_CARRIE     = 24,
-    SUBSKILL_HOMUNCULUS = 25,
-    SUBSKILL_FLYTRAP    = 26,
-    SUBSKILL_TIGER      = 27,
-    SUBSKILL_BILL       = 28,
-    SUBSKILL_EFT        = 29,
-    SUBSKILL_LIZARD     = 30,
-    SUBSKILL_MAYFLY     = 31,
-    SUBSKILL_FUNGUAR    = 32,
-    SUBSKILL_BEETLE     = 33,
-    SUBSKILL_ANTLION    = 34,
-    SUBSKILL_MITE       = 35,
-    SUBSKILL_MELODIA    = 36,
-    SUBSKILL_STEFFI     = 37,
-    SUBSKILL_BEN        = 38,
-    SUBSKILL_SIRAVARDE  = 39,
-    SUBSKILL_COMO       = 40,
-    SUBSKILL_OROB       = 41,
-    SUBSKILL_AUDREY     = 42,
-    SUBSKILL_ALLIE      = 43,
-    SUBSKILL_LARS       = 44,
-    SUBSKILL_GALAHAD    = 45,
-    SUBSKILL_CHUCKY     = 46,
-    SUBSKILL_SABOTENDER = 47,
-    SUBSKILL_CLYVONNE   = 49,
-    SUBSKILL_SHASRA     = 50,
-    SUBSKILL_LULUSH     = 51,
-    SUBSKILL_FARGANN    = 52,
-    SUBSKILL_LOUISE     = 53,
-    SUBSKILL_SIEGHARD   = 54,
-    SUBSKILL_YULY       = 55,
-    SUBSKILL_MERLE      = 56,
-    SUBSKILL_NAZUNA     = 57,
-    SUBSKILL_CETAS      = 58,
-    SUBSKILL_ANNA       = 59,
-    SUBSKILL_JULIO      = 60,
-    SUBSKILL_BRONCHA    = 61,
-    SUBSKILL_GERARD     = 62,
-    SUBSKILL_HOBS       = 63,
-    SUBSKILL_FALCORR    = 64,
-    SUBSKILL_RAPHIE     = 65,
-    SUBSKILL_MAC        = 66,
-    SUBSKILL_SILAS      = 67,
-    SUBSKILL_TOLOI      = 68,
+    // Ammo subskill types can map to jug pets, this is handled completely in lua
 };
 DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
@@ -271,146 +226,6 @@ enum class DAMAGE_TYPE : uint16
 };
 DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
-// This enum class is a set of bitfields that modify messages sent to the client.
-// There are helpers (PARRY/EVADE) because it is not intuitive
-// These flag names may not match SE's intent perfectly, but seem to work well.
-
-// For example
-// A guard is HIT + GUARDED
-// A parry is HIT + MISS + GUARDED
-// A block is HIT + BLOCK
-// It also seems weaponskills and job abilities set ABILITY in addition to these flags.
-// All of these flags are also seen in weaponskills.
-enum class REACTION : uint8
-{
-    NONE    = 0x00, // No Reaction
-    MISS    = 0x01, // Miss
-    GUARDED = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
-    PARRY   = 0x03, // Block with weapons (MISS + GUARDED)
-    BLOCK   = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
-    HIT     = 0x08, // Hit
-    EVADE   = 0x09, // Evasion (MISS + HIT)
-    ABILITY = 0x10, // Observed on JA and WS
-};
-DECLARE_FORMAT_AS_UNDERLYING(REACTION);
-
-// These operators are used to combine bits that may not have a discrete value upon combining.
-inline REACTION operator|(REACTION a, REACTION b)
-{
-    return (REACTION)((uint8)a | (uint8)b);
-}
-
-inline REACTION operator&(REACTION a, REACTION b)
-{
-    return (REACTION)((uint8)a & (uint8)b);
-}
-
-inline REACTION operator|=(REACTION& a, REACTION b)
-{
-    a = a | b;
-
-    return a;
-}
-
-enum class SPECEFFECT : uint8
-{
-    NONE         = 0x00,
-    BLOOD        = 0x02,
-    HIT          = 0x10,
-    RAISE        = 0x11,
-    RECOIL       = 0x20,
-    CRITICAL_HIT = 0x22,
-};
-DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
-
-enum class MODIFIER : uint8
-{
-    NONE        = 0x00,
-    COVER       = 0x01,
-    RESIST      = 0x02,
-    MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
-    IMMUNOBREAK = 0x08,
-};
-DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
-
-enum SUBEFFECT : uint8
-{
-    // ATTACK
-    SUBEFFECT_FIRE_DAMAGE      = 1,  // 110000     3
-    SUBEFFECT_ICE_DAMAGE       = 2,  // 1-01000    5
-    SUBEFFECT_WIND_DAMAGE      = 3,  // 111000     7
-    SUBEFFECT_EARTH_DAMAGE     = 4,  // 1-00100    9
-    SUBEFFECT_LIGHTNING_DAMAGE = 5,  // 110100    11
-    SUBEFFECT_WATER_DAMAGE     = 6,  // 1-01100   13
-    SUBEFFECT_LIGHT_DAMAGE     = 7,  // 111100    15
-    SUBEFFECT_DARKNESS_DAMAGE  = 8,  // 1-00010   17
-    SUBEFFECT_SLEEP            = 9,  // 110010    19
-    SUBEFFECT_POISON           = 10, // 1-01010   21
-    SUBEFFECT_ADDLE            = 11, // Verified shared group 1
-    SUBEFFECT_AMNESIA          = 11, // Verified shared group 1
-    SUBEFFECT_PARALYSIS        = 11, // Verified shared group 1
-    SUBEFFECT_BLIND            = 12, // 1-00110   25
-    SUBEFFECT_SILENCE          = 13,
-    SUBEFFECT_PETRIFY          = 14,
-    SUBEFFECT_PLAGUE           = 15,
-    SUBEFFECT_STUN             = 16,
-    SUBEFFECT_CURSE            = 17,
-    SUBEFFECT_DEFENSE_DOWN     = 18, // 1-01001   37
-    SUBEFFECT_EVASION_DOWN     = 18, // Verified shared group 2
-    SUBEFFECT_ATTACK_DOWN      = 18, // Verified shared group 2
-    SUBEFFECT_SLOW             = 18, // Verified shared group 2
-    SUBEFFECT_DEATH            = 19,
-    SUBEFFECT_SHIELD           = 20,
-    SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
-    SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
-    SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
-    SUBEFFECT_HASTE            = 23,
-    // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
-
-    // SPIKES
-    SUBEFFECT_BLAZE_SPIKES = 1,  // 01-1000    6
-    SUBEFFECT_ICE_SPIKES   = 2,  // 01-0100   10
-    SUBEFFECT_DREAD_SPIKES = 3,  // 01-1100   14
-    SUBEFFECT_CURSE_SPIKES = 4,  // 01-0010   18
-    SUBEFFECT_SHOCK_SPIKES = 5,  // 01-1010   22
-    SUBEFFECT_REPRISAL     = 6,  // 01-0110   26
-                                 // SUBEFFECT_GLINT_SPIKES = 6,
-    SUBEFFECT_GALE_SPIKES   = 7, // Used by enchantment "Cool Breeze" http://www.ffxiah.com/item/22018/
-    SUBEFFECT_CLOD_SPIKES   = 8,
-    SUBEFFECT_DELUGE_SPIKES = 9,
-    SUBEFFECT_DEATH_SPIKES  = 10, // yes really: http://www.ffxiah.com/item/26944/
-    SUBEFFECT_COUNTER       = 63, // Also used by Retaliation
-                                  // There are no spikes effect animations beyond 63. Some effects share subeffect/animations.
-                                  // "Damage Spikes" use the Blaze Spikes animation even though they are different status.
-
-    // SKILLCHAINS
-    SUBEFFECT_LIGHT         = 1,
-    SUBEFFECT_DARKNESS      = 2,
-    SUBEFFECT_GRAVITATION   = 3,
-    SUBEFFECT_FRAGMENTATION = 4,
-    SUBEFFECT_DISTORTION    = 5,
-    SUBEFFECT_FUSION        = 6,
-    SUBEFFECT_COMPRESSION   = 7,
-    SUBEFFECT_LIQUEFACATION = 8,
-    SUBEFFECT_INDURATION    = 9,
-    SUBEFFECT_REVERBERATION = 10,
-    SUBEFFECT_TRANSFIXION   = 11,
-    SUBEFFECT_SCISSION      = 12,
-    SUBEFFECT_DETONATION    = 13,
-    SUBEFFECT_IMPACTION     = 14,
-    SUBEFFECT_RADIANCE      = 15,
-    SUBEFFECT_UMBRA         = 16,
-
-    SUBEFFECT_NONE = 0,
-
-    // UNKNOWN
-    SUBEFFECT_IMPAIRS_EVASION,
-    SUBEFFECT_BIND,
-    SUBEFFECT_WEIGHT,
-    SUBEFFECT_AUSPICE
-};
-DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
-
 enum TARGETTYPE : uint16
 {
     TARGET_NONE                    = 0x0000,
@@ -425,6 +240,7 @@ enum TARGETTYPE : uint16
     TARGET_PET                     = 0x0100,
     TARGET_PLAYER_PARTY_ENTRUST    = 0x0200,
     TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
+    TARGET_ANY_ALLEGIANCE          = 0x0800, // Can hit targets from any allegiance simultaneously. To be used with other flags above and only makes sense for non-single-target skills
 };
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
@@ -479,40 +295,6 @@ enum IMMUNITY : uint32
 };
 DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
-struct apAction_t
-{
-    CBattleEntity* ActionTarget;     // 32 bits
-    REACTION       reaction;         //  5 bits
-    uint16         animation;        // 12 bits
-    SPECEFFECT     speceffect;       // 7 bits
-    uint8          knockback;        // 3 bits
-    int32          param;            // 17 bits
-    uint16         messageID;        // 10 bits
-    SUBEFFECT      additionalEffect; // 10 bits
-    int32          addEffectParam;   // 17 bits
-    uint16         addEffectMessage; // 10 bits
-    SUBEFFECT      spikesEffect;     // 10 bits
-    uint16         spikesParam;      // 14 bits
-    uint16         spikesMessage;    // 10 bits
-
-    apAction_t()
-    : ActionTarget(nullptr)
-    , reaction(REACTION::NONE)
-    , animation(0)
-    , speceffect(SPECEFFECT::NONE)
-    , knockback(0)
-    , param(0)
-    , messageID(0)
-    , additionalEffect(SUBEFFECT_NONE)
-    , addEffectParam(0)
-    , addEffectMessage(0)
-    , spikesEffect(SUBEFFECT_NONE)
-    , spikesParam(0)
-    , spikesMessage(0)
-    {
-    }
-};
-
 struct health_t
 {
     int16 tp;
@@ -526,7 +308,6 @@ struct battlehistory_t
     ATTACK_TYPE lastHitTaken_atkType;
 };
 
-typedef std::vector<apAction_t> ActionList_t;
 class CModifier;
 class CParty;
 class CStatusEffectContainer;
@@ -561,22 +342,24 @@ public:
     uint16 ATT(SLOTTYPE slot);
     uint16 ACC(uint8 attackNumber, uint16 offsetAccuracy);
     uint16 EVA();
-    uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
-    uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RATT(uint16 bonusAtt = 0);
+    uint16 RACC(uint16 bonusAcc = 0);
 
     bool isDead();
     bool isAlive();
+    bool isFullyHealed();
     bool isInAdoulin();
     bool isInAssault();
     bool isInDynamis();
-    bool isInMogHouse();
+    bool isInGarrison();
+    bool inMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();
     bool isMounted();
     bool isSitting();
 
-    JOBTYPE GetMJob();
-    JOBTYPE GetSJob();
+    JOBTYPE GetMJob() const;
+    JOBTYPE GetSJob() const;
     uint8   GetMLevel() const;
     uint8   GetSLevel() const;
 
@@ -595,16 +378,16 @@ public:
     void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
     uint8 UpdateSpeed(bool run = false) override;
 
-    int16  GetWeaponDelay(bool tp);              // returns delay of combined weapons
-    float  GetMeleeRange() const;                // returns the distance considered to be within melee range of the entity
-    int16  GetRangedWeaponDelay(bool forTPCalc); // returns delay of ranged weapon + ammo where applicable
-    int16  GetAmmoDelay();                       // returns delay of ammo (for cooldown between shots)
-    uint16 GetMainWeaponDmg();                   // returns total main hand DMG
-    uint16 GetSubWeaponDmg();                    // returns total sub weapon DMG
-    uint16 GetRangedWeaponDmg();                 // returns total ranged weapon DMG
-    uint16 GetMainWeaponRank();                  // returns total main hand DMG Rank
-    uint16 GetSubWeaponRank();                   // returns total sub weapon DMG Rank
-    uint16 GetRangedWeaponRank();                // returns total ranged weapon DMG Rank
+    uint32 GetWeaponDelay(bool tp);                          // returns delay of combined weapons
+    float  GetMeleeRange(const CBattleEntity* Target) const; // returns the distance considered to be within melee range of the entity
+    int16  GetRangedWeaponDelay(bool forTPCalc);             // returns delay of ranged weapon + ammo where applicable
+    int16  GetAmmoDelay();                                   // returns delay of ammo (for cooldown between shots)
+    uint16 GetMainWeaponDmg();                               // returns total main hand DMG
+    uint16 GetSubWeaponDmg();                                // returns total sub weapon DMG
+    uint16 GetRangedWeaponDmg();                             // returns total ranged weapon DMG
+    uint16 GetMainWeaponRank();                              // returns total main hand DMG Rank
+    uint16 GetSubWeaponRank();                               // returns total sub weapon DMG Rank
+    uint16 GetRangedWeaponRank();                            // returns total ranged weapon DMG Rank
 
     uint16 GetSkill(uint16 SkillID); // the current value of the skill (not the maximum, but limited by the level)
 
@@ -613,8 +396,7 @@ public:
     virtual int32 addMP(int32 mp); // increase/decrease the amount of mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
-    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE,
-                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
+    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE, DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
 
     int16 getMod(Mod modID);
     int16 getMaxGearMod(Mod modID);
@@ -632,6 +414,7 @@ public:
     void delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid);
     void saveModifiers();    // save current state of modifiers
     void restoreModifiers(); // restore to saved state
+    void savePetModifiers(); // saves dynamic pet modifiers
 
     void addPetModifier(Mod type, PetModType, int16 amount);
     void setPetModifier(Mod type, PetModType, int16 amount);
@@ -718,14 +501,11 @@ public:
     virtual void           OnDisengage(CAttackState&);
     /* Casting */
     virtual void OnCastFinished(CMagicState&, action_t&);
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
+    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
     virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
-
-    // Used to set an action to an "interrupted" state
-    void setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID);
 
     virtual void OnAbility(CAbilityState&, action_t&)
     {
@@ -740,13 +520,13 @@ public:
     virtual void TryHitInterrupt(CBattleEntity* PAttacker);
     virtual void OnDespawn(CDespawnState&);
 
-    void     SetBattleStartTime(time_point);
-    duration GetBattleTime();
+    void            SetBattleStartTime(timer::time_point);
+    timer::duration GetBattleTime();
 
     void   setBattleID(uint16 battleID);
     uint16 getBattleID();
 
-    virtual void Tick(time_point) override;
+    virtual void Tick(timer::time_point) override;
     virtual void PostTick() override;
 
     health_t health{}; // hp,mp,tp
@@ -756,8 +536,8 @@ public:
     uint16   m_magicEvasion; // store this so it can be removed easily
     bool     m_unkillable;   // entity is not able to die (probably until some action removes this flag)
 
-    time_point charmTime; // to hold the time entity is charmed
-    bool       isCharmed; // is the battle entity charmed?
+    timer::time_point charmTime; // to hold the time entity is charmed
+    bool              isCharmed; // is the battle entity charmed?
 
     float           m_ModelRadius;  // The radius of the entity model, for calculating the range of a physical attack
     ECOSYSTEM       m_EcoSystem{};  // Entity eco system
@@ -769,27 +549,25 @@ public:
 
     EntityID_t m_OwnerID{}; // ID of the attacking entity (after death will store the ID of the entity that dealt the final blow)
 
-    ActionList_t m_ActionList{}; // List of actions performed in one attack (you will need to write a structure that includes an ActionList in which there will be categories, animations, etc.)
-
-    CParty*         PParty;
-    CBattleEntity*  PPet;
-    CBattleEntity*  PMaster; // Owner/owner of the entity (applies to all combat entities)
-    CBattleEntity*  PLastAttacker;
-    time_point      LastAttacked;
-    battlehistory_t BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
+    CParty*           PParty;
+    CBattleEntity*    PPet;
+    CBattleEntity*    PMaster; // Owner/owner of the entity (applies to all combat entities)
+    CBattleEntity*    PLastAttacker;
+    timer::time_point LastAttacked;
+    battlehistory_t   BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
 
 private:
-    JOBTYPE    m_mjob;
-    JOBTYPE    m_sjob;
-    uint8      m_mlvl; // CURRENT level of the main job
-    uint8      m_slvl; // CURRENT level of the sub job
-    uint16     m_battleTarget{ 0 };
-    time_point m_battleStartTime;
-    uint16     m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
+    JOBTYPE           m_mjob;
+    JOBTYPE           m_sjob;
+    uint8             m_mlvl; // CURRENT level of the main job
+    uint8             m_slvl; // CURRENT level of the sub job
+    uint16            m_battleTarget{ 0 };
+    timer::time_point m_battleStartTime;
+    uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // array of modifiers
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state

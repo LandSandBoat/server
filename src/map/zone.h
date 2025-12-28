@@ -19,12 +19,12 @@
 ===========================================================================
 */
 
-#ifndef _CZONE_H
-#define _CZONE_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/taskmgr.h"
+#include "common/task_manager.h"
+#include "common/timer.h"
 #include "common/vana_time.h"
 
 #include <list>
@@ -33,10 +33,18 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "los/zone_los.h"
-#include "navmesh.h"
-#include "packets/weather.h"
+#include "common/logging.h"
+#include "packets/basic.h"
+#include "spawn_group.h"
 #include "trigger_area.h"
+
+//
+// Forward Declarations
+//
+
+enum class Weather : uint16_t;
+class CNavMesh;
+class ZoneLos;
 
 enum ZONEID : uint16
 {
@@ -372,8 +380,8 @@ enum class REGION_TYPE : uint8
     LITELOR          = 11,
     KUZOTZ           = 12,
     VOLLBOW          = 13,
-    ELSHIMOLOWLANDS  = 14,
-    ELSHIMOUPLANDS   = 15,
+    ELSHIMO_LOWLANDS = 14,
+    ELSHIMO_UPLANDS  = 15,
     TULIA            = 16,
     MOVALPOLOS       = 17,
     TAVNAZIA         = 18,
@@ -477,6 +485,7 @@ enum ZONEMISC : uint16
     MISC_TRUST            = 0x0800, // Ability to summon Trust NPC
     MISC_LOS_PLAYER_BLOCK = 0x1000, // Players can't use magic/JAs through walls if this is set
     MISC_LOS_OFF          = 0x2000, // Zone should not have LoS checks
+    MISC_ASSIST           = 0x4000, // Send and receive /assiste, /assistj commands
 };
 DECLARE_FORMAT_AS_UNDERLYING(ZONEMISC);
 
@@ -497,7 +506,9 @@ struct zoneWeather_t
     zoneWeather_t(uint8 _normal, uint8 _common, uint8 _rare)
     : normal(_normal)
     , common(_common)
-    , rare(_rare){};
+    , rare(_rare)
+    {
+    }
 };
 
 /************************************************************************
@@ -537,14 +548,14 @@ typedef std::map<uint16, CBaseEntity*> EntityList_t;
 
 using QueryByNameResult_t = std::vector<CBaseEntity*>;
 
-int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
+int32 zone_update_weather(uint32 tick, CTaskManager::CTask* PTask);
 
 class CZone
 {
 public:
     DISALLOW_COPY_AND_MOVE(CZone);
 
-    ZONEID             GetID();
+    auto               GetID() const -> ZONEID;
     ZONE_TYPE          GetTypeMask();
     REGION_TYPE        GetRegionID();
     CONTINENT_TYPE     GetContinentID();
@@ -552,8 +563,8 @@ public:
     uint32             GetIP() const;
     uint16             GetPort() const;
     uint16             GetTax() const;
-    WEATHER            GetWeather();
-    uint32             GetWeatherChangeTime() const;
+    auto               GetWeather() const -> Weather;
+    auto               GetWeatherChangeTime() const -> uint32;
     const std::string& getName();
     zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
@@ -567,13 +578,13 @@ public:
     void SetBackgroundMusicDay(uint16 music);
     void SetBackgroundMusicNight(uint16 music);
 
-    auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
+    auto queryEntitiesByName(const std::string& pattern) -> const QueryByNameResult_t&;
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(std::string const& name);
+    virtual CCharEntity* GetCharByName(const std::string& name);
     virtual CCharEntity* GetCharByID(uint32 id);
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
@@ -581,8 +592,9 @@ public:
 
     bool IsWeatherStatic() const;
     bool CanUseMisc(uint16 misc) const;
-    void SetWeather(WEATHER weatherCondition);
+    void SetWeather(Weather weather);
     void UpdateWeather();
+    bool CheckMobsPathedBack();
 
     virtual void SpawnPCs(CCharEntity* PChar);
     virtual void SpawnMOBs(CCharEntity* PChar);
@@ -604,12 +616,14 @@ public:
     virtual void InsertTRUST(CBaseEntity* PTrust);
 
     virtual void FindPartyForMob(CBaseEntity* PEntity);
-    virtual void TransportDepart(uint16 boundary, uint16 zone);  // Collect passengers if ship/boat is departing
+
+    virtual void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // Collect passengers if ship/boat is departing
+
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction, it is applied after it is removed.
 
     void InsertTriggerArea(std::unique_ptr<ITriggerArea>&& triggerArea); // Add an active area to the zone
 
-    virtual void TOTDChange(TIMETYPE TOTD);
+    virtual void TOTDChange(vanadiel_time::TOTD TOTD);
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&);
 
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
@@ -619,21 +633,21 @@ public:
 
     weatherVector_t m_WeatherVector; // The probability of each weather type
 
-    virtual void ZoneServer(time_point tick);
+    virtual void ZoneServer(timer::time_point tick);
     virtual void CheckTriggerAreas();
 
-    virtual void ForEachChar(std::function<void(CCharEntity*)> const& func);
-    virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
-    virtual void ForEachMob(std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
-    virtual void ForEachNpcInstance(CBaseEntity* PEntity, std::function<void(CNpcEntity*)> const& func);
-    virtual void ForEachTrust(std::function<void(CTrustEntity*)> const& func);
-    virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
-    virtual void ForEachPet(std::function<void(CPetEntity*)> const& func);
-    virtual void ForEachPetInstance(CBaseEntity* PEntity, std::function<void(CPetEntity*)> const& func);
-    virtual void ForEachAlly(std::function<void(CMobEntity*)> const& func);
-    virtual void ForEachAllyInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func);
+    virtual void ForEachChar(const std::function<void(CCharEntity*)>& func);
+    virtual void ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func);
+    virtual void ForEachMob(const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
+    virtual void ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func);
+    virtual void ForEachTrust(const std::function<void(CTrustEntity*)>& func);
+    virtual void ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func);
+    virtual void ForEachPet(const std::function<void(CPetEntity*)>& func);
+    virtual void ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func);
+    virtual void ForEachAlly(const std::function<void(CMobEntity*)>& func);
+    virtual void ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func);
 
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
@@ -641,10 +655,11 @@ public:
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
     CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
-    CNavMesh* m_navMesh   = nullptr;
-    ZoneLos*  lineOfSight = nullptr;
+    std::unique_ptr<CNavMesh>                       m_navMesh;
+    std::unique_ptr<ZoneLos>                        lineOfSight;
+    std::map<uint32_t, std::unique_ptr<spawnGroup>> m_spawnGroups;
 
-    time_point m_LoadedAt; // The time the zone was loaded
+    timer::time_point m_LoadedAt; // The time the zone was loaded
 
     void LoadNavMesh();
     void LoadZoneLos();
@@ -660,7 +675,7 @@ private:
     uint32         m_zoneIP{};
     bool           m_useNavMesh;
 
-    WEATHER m_Weather;
+    Weather m_Weather;
     uint32  m_WeatherChangeTime;
 
     CZoneEntities* m_zoneEntities;
@@ -680,13 +695,13 @@ private:
 
     CTreasurePool* m_TreasurePool;
 
-    time_point m_timeZoneEmpty; // The time point when the last player left the zone
+    timer::time_point m_timeZoneEmpty; // The time point when the last player left the zone
 
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
-    CTaskMgr::CTask* ZoneTimerTriggerAreas;
+    CTaskManager::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskManager::CTask* ZoneTimerTriggerAreas;
 
     triggerAreaList_t m_triggerAreaList;
 
@@ -696,5 +711,3 @@ protected:
 
     std::unordered_map<std::string, uint32> m_localVars;
 };
-
-#endif

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
---  NPC: Laughing_Bison
+--  NPC: Laughing Bison
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

@@ -14,38 +14,33 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local sublimationComplete = player:getStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
-    local sublimationCharging = player:getStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
-    local mp                  = 0
+    local mp        = 0
+    local maxMP     = player:getMaxMP()
+    local currentMP = player:getMP()
 
-    if sublimationComplete ~= nil then
-        mp           = sublimationComplete:getPower()
-        local maxmp  = player:getMaxMP()
-        local currmp = player:getMP()
+    if player:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
+        mp = player:getStatusEffect(xi.effect.SUBLIMATION_COMPLETE):getPower()
 
-        if mp + currmp > maxmp then
-            mp = maxmp - currmp
+        if mp + currentMP > maxMP then
+            mp = maxMP - currentMP
         end
 
         player:addMP(mp)
         player:delStatusEffectSilent(xi.effect.SUBLIMATION_COMPLETE)
         ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)
-    elseif sublimationCharging ~= nil then
-        mp           = sublimationCharging:getPower()
-        local maxmp  = player:getMaxMP()
-        local currmp = player:getMP()
+    elseif player:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) then
+        mp = player:getStatusEffect(xi.effect.SUBLIMATION_ACTIVATED):getPower()
 
-        if mp + currmp > maxmp then
-            mp = maxmp - currmp
+        if mp + currentMP > maxMP then
+            mp = maxMP - currentMP
         end
 
         player:addMP(mp)
         player:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
         ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)
     else
-        local refresh = player:getStatusEffect(xi.effect.REFRESH)
-
-        if refresh == nil or refresh:getSubPower() < 3 then
+        local refreshTier = player:hasStatusEffect(xi.effect.REFRESH) and player:getStatusEffect(xi.effect.REFRESH):getTier() or 0
+        if refreshTier < 3 then
             player:delStatusEffect(xi.effect.REFRESH)
             player:addStatusEffect(xi.effect.SUBLIMATION_ACTIVATED, 0, 3, 7200)
         else

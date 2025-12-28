@@ -9,7 +9,8 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
         player:sendMenu(xi.menuType.AUCTION)
-    -- Else 10918
+    else
+        player:showText(npc, zones[xi.zone.TAVNAZIAN_SAFEHOLD].text.CONTACT_WITH_THE_MAINLAND)
     end
 end
 

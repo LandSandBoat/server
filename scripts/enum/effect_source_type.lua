@@ -9,5 +9,7 @@ xi.effectSourceType =
     NONE           = 0,
     EQUIPPED_ITEM  = 1,
     TEMPORARY_ITEM = 2,
-    MOD            = 3,
+    MOB            = 3,
+    FOOD           = 4,
+    CORSAIR_ROLL   = 5,
 }

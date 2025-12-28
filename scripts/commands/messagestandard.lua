@@ -24,7 +24,7 @@ commandObj.onTrigger = function(player, msgId)
     end
 
     -- inject message packet
-    player:messageBasic(msgId)
+    player:messageStandard(msgId)
 end
 
 return commandObj

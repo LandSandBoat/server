@@ -40,6 +40,23 @@ zoneObject.onGameHour = function(zone)
     end
 end
 
+zoneObject.onZoneWeatherChange = function(weather)
+    local ID = zones[xi.zone.MISAREAUX_COAST]
+    local odqan1 = GetMobByID(ID.mob.ODQAN[1])
+    local odqan2 = GetMobByID(ID.mob.ODQAN[2])
+
+    if weather == xi.weather.FOG and odqan1 and odqan2 then
+        -- Check which Odqan is allowed to spawn
+        if odqan1:getLocalVar('canSpawn') == 1 then
+            DisallowRespawn(odqan1:getID(), false)
+            DisallowRespawn(odqan2:getID(), true)
+        elseif odqan2:getLocalVar('canSpawn') == 1 then
+            DisallowRespawn(odqan2:getID(), false)
+            DisallowRespawn(odqan1:getID(), true)
+        end
+    end
+end
+
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 

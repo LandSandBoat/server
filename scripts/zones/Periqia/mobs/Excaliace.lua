@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('mobChatMessage', 0)
     mob:setLocalVar('chatMessage', 0)
     mob:setLocalVar('runMessage', 0)
-    mob:setLocalVar('runTimeCheck', os.time())
+    mob:setLocalVar('runTimeCheck', GetSystemTime())
     mob:setLocalVar('pathPoint', 1)
 end
 

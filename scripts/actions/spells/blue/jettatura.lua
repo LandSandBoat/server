@@ -21,16 +21,16 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.BIRD
-    params.effect = xi.effect.TERROR
-    local power = 1
-    local tick = 0
-    local duration = 5
-    local resistThreshold = 0.5
-    local isGaze = true
-    local isConal = true
+    params.ecosystem       = xi.ecosystem.BIRD
+    params.effect          = xi.effect.TERROR
+    params.power           = 1
+    params.tick            = 0
+    params.duration        = 5
+    params.resistThreshold = 0.5
+    params.isGaze          = true
+    params.isConal         = true
 
-    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params)
 end
 
 return spellObject

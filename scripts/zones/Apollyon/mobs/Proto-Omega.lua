@@ -59,17 +59,17 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('formTime', os.time() + 120)
+    mob:setLocalVar('formTime', GetSystemTime() + 120)
 end
 
 entity.onMobFight = function(mob, target)
-    local now = os.time()
+    local now = GetSystemTime()
 
     -- If in Final form then do Pod Ejection every 5 minutes
     if mob:getLocalVar('final') == 1 then
         if
             now >= mob:getLocalVar('gunpodTime') and
-            mob:getCurrentAction() == xi.act.ATTACK and
+            mob:getCurrentAction() == xi.action.category.BASIC_ATTACK and
             GetMobByID(mob:getID() + 1):getStatus() == xi.status.DISAPPEAR
         then
             mob:setLocalVar('gunpodTime', now + utils.minutes(5))
@@ -87,7 +87,10 @@ entity.onMobFight = function(mob, target)
 
     -- Swap between forms every 2 minutes
     local form = mob:getLocalVar('formTime')
-    if now >= form and mob:getCurrentAction() == xi.act.ATTACK then
+    if
+        now >= form and
+        mob:getCurrentAction() == xi.action.category.BASIC_ATTACK
+    then
         mob:setLocalVar('formTime', now + utils.minutes(2))
         if mob:getAnimationSub() == 1 then
             bipedForm(mob)

@@ -30,8 +30,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(117, xi.item.GOLD_BEASTCOIN)
     elseif player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(119)  -- After completion cs
-    else
-        player:startEvent(115)
     end
 end
 

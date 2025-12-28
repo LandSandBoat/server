@@ -9,7 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
         target:isAlive() or          -- Can't cast on alive targets.
         target:hasRaiseTractorMenu() -- Raise and tractor menus both block the casting.
     then
-        return xi.msg.basic.CANNOT_ON_THAT_TARG
+        return xi.msg.basic.MAGIC_CANNOT_BE_CAST
     end
 
     return 0

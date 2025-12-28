@@ -30,15 +30,17 @@ mission.sections =
             ['Imperial_Whitegate'] =
             {
                 onTrigger = function(player, npc)
+                    local properlyDressed = whitegateShared.doRoyalPalaceArmorCheck(player) and 1 or 0
+
                     if
-                        player:getMissionStatus(mission.areaId) == 1 and
+                        player:getMissionStatus(mission.areaId) == 2 and
                         player:getEquipID(xi.slot.MAIN) == 0 and
                         player:getEquipID(xi.slot.SUB) == 0 and
-                        whitegateShared.doRoyalPalaceArmorCheck(player)
+                        properlyDressed == 1
                     then
-                        return mission:progressEvent(3078, 0, 1, 0, 0, 0, 0, 0, 1, 0)
+                        return mission:progressEvent(3078, 0, 1, 0, 0, 0, 0, 0, properlyDressed, 0)
                     else
-                        return mission:event(3081, 0, 2, 1, 0, 1, 0, 1, 0, 0)
+                        return mission:event(3081, 0, 2, 1, 0, 1, 0, 0, properlyDressed, 0)
                     end
                 end,
             },
@@ -46,12 +48,23 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    local eventId = player:getMissionStatus(mission.areaId) == 0 and 3076 or 3077
+                    local properlyDressed = whitegateShared.doRoyalPalaceArmorCheck(player) and 1 or 0
+                    local missionStatus   = player:getMissionStatus(mission.areaId)
 
-                    if whitegateShared.doRoyalPalaceArmorCheck(player) then
-                        return mission:progressEvent(eventId, 1, 0, 0, 0, 0, 0, 0, 1, 0)
-                    else
-                        return mission:progressEvent(eventId, { text_table = 0 })
+                    -- First interaction. If you are properly dressed from the get go, you skip playing dress-up again.
+                    if missionStatus == 0 then
+                        return mission:progressEvent(3076, xi.besieged.getMercenaryRank(player), 0, 0, 0, 0, 0, 0, properlyDressed, 0)
+
+                    -- You played dress-up again. Don't repeat.
+                    elseif missionStatus == 1 then
+                        if properlyDressed == 1 then
+                            return mission:progressEvent(3076, xi.besieged.getMercenaryRank(player), 0, 0, 0, 0, 0, 0, properlyDressed, 0)
+                        else
+                            return mission:event(3080, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, properlyDressed, 0)
+                        end
+                    -- Success.
+                    elseif missionStatus == 2 then
+                        return mission:progressEvent(3077, xi.besieged.getMercenaryRank(player), 0, 0, 0, 0, 0, 0, properlyDressed, 0)
                     end
                 end,
             },
@@ -98,9 +111,14 @@ mission.sections =
             onEventFinish =
             {
                 [3076] = function(player, csid, option, npc)
-                    mission:setLocalVar(player, 'najaDressUp', 0)
+                    -- Naja approved your gear.
                     if option == 0 then
+                        player:setMissionStatus(mission.areaId, 2)
+
+                    -- Played dress-up. Mark to not repeat it.
+                    else
                         player:setMissionStatus(mission.areaId, 1)
+                        mission:setLocalVar(player, 'najaDressUp', 0)
                     end
                 end,
 

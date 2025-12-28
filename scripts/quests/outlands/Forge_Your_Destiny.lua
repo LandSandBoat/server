@@ -60,7 +60,7 @@ quest.sections =
                             return quest:messageSpecial(konschtatID.text.BLACKENED_MUST_BE_CLOSER)
                         elseif
                             GetMobByID(konschtatID.mob.FORGER):isSpawned() or
-                            npc:getLocalVar('forgerNextPopAllowedTime') > os.time()
+                            npc:getLocalVar('forgerNextPopAllowedTime') > GetSystemTime()
                         then
                             return quest:messageSpecial(konschtatID.text.BLACKENED_NOTHING_HAPPENS, xi.item.LUMP_OF_ORIENTAL_STEEL)
                         else
@@ -79,7 +79,7 @@ quest.sections =
                                 local qmID = mobArg:getLocalVar('QMID')
 
                                 mobArg:removeListener('DESPAWN_' .. konschtatID.mob.FORGER)
-                                GetNPCByID(qmID):setLocalVar('forgerNextPopAllowedTime', os.time() + 120)
+                                GetNPCByID(qmID):setLocalVar('forgerNextPopAllowedTime', GetSystemTime() + 120)
                             end)
 
                             return quest:messageSpecial(konschtatID.text.PLACE_BLACKENED_SPOT, xi.item.LUMP_OF_ORIENTAL_STEEL)
@@ -90,7 +90,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if GetMobByID(konschtatID.mob.FORGER):isSpawned() then
                         return quest:messageSpecial(konschtatID.text.NOT_THE_TIME_FOR_THAT)
-                    elseif npc:getLocalVar('forgerNextPopAllowedTime') <= os.time() then
+                    elseif npc:getLocalVar('forgerNextPopAllowedTime') <= GetSystemTime() then
                         -- This message persists even after kill, while the QM is active and quest is accepted.
                         return quest:messageSpecial(konschtatID.text.BLACKENED_SHOULD_PLACE, xi.item.LUMP_OF_ORIENTAL_STEEL)
                     end
@@ -140,7 +140,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     local waitTime = quest:getVar(player, 'waitTime')
-                    local timeRemaining = waitTime - os.time()
+                    local timeRemaining = waitTime - GetSystemTime()
 
                     if waitTime == 0 then
                         return quest:progressEvent(26)
@@ -186,7 +186,7 @@ quest.sections =
                 [27] = function(player, csid, option, npc)
                     -- TODO: Add constant for Vana'diel day in seconds, this is a three game day wait.
                     player:confirmTrade()
-                    quest:setVar(player, 'waitTime', os.time() + 10368)
+                    quest:setVar(player, 'waitTime', GetSystemTime() + 10368)
                 end,
 
                 [29] = function(player, csid, option, npc)
@@ -240,7 +240,7 @@ quest.sections =
                     then
                         if
                             GetMobByID(zitahID.mob.GUARDIAN_TREANT):isSpawned() or
-                            npc:getLocalVar('treantNextPopAllowedTime') > os.time()
+                            npc:getLocalVar('treantNextPopAllowedTime') > GetSystemTime()
                         then
                             return quest:messageSpecial(zitahID.text.STRANGE_FORCE_PREVENTS)
                         else
@@ -259,7 +259,7 @@ quest.sections =
                                 local qmID = mobArg:getLocalVar('QMID')
 
                                 mobArg:removeListener('DESPAWN_' .. zitahID.mob.GUARDIAN_TREANT)
-                                GetNPCByID(qmID):setLocalVar('treantNextPopAllowedTime', os.time() + 60 * 10)
+                                GetNPCByID(qmID):setLocalVar('treantNextPopAllowedTime', GetSystemTime() + 60 * 10)
                             end)
 
                             return quest:messageSpecial(zitahID.text.SENSE_STRONG_EVIL_PRESENCE)
@@ -284,7 +284,7 @@ quest.sections =
                         return quest:messageSpecial(zitahID.text.NO_LONGER_SENSE_EVIL)
                     elseif questProgress == 2 then
                         return quest:messageSpecial(zitahID.text.NEWLY_SPROUTED_GLOWING, xi.item.SACRED_SPRIG)
-                    elseif npc:getLocalVar('treantNextPopAllowedTime') <= os.time() then
+                    elseif npc:getLocalVar('treantNextPopAllowedTime') <= GetSystemTime() then
                         return quest:messageSpecial(zitahID.text.LOOKS_LIKE_STURDY_BRANCH, xi.item.HATCHET)
                     end
                 end,

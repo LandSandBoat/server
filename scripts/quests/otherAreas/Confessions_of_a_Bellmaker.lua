@@ -51,12 +51,12 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressCutscene(102)
                     elseif quest:getVar(player, 'Prog') == 3 then
-                        local monumentObj = GetNPCByID(zones[player:getZoneID()].npc.STONE_MONUMENT)
+                        local monumentObj = GetNPCByID(zones[xi.zone.RIVERNE_SITE_A01].npc.STONE_MONUMENT)
 
                         if monumentObj then
                             -- TODO: Determine if message is displayed on NM pop, return message if this is successful, else
                             -- noAction()
-                            npcUtil.popFromQM(player, monumentObj, zones[player:getZoneID()].mob.ARCANE_PHANTASM, { hide = 0 })
+                            npcUtil.popFromQM(player, monumentObj, zones[xi.zone.RIVERNE_SITE_A01].mob.ARCANE_PHANTASM, { hide = 0 })
                         end
 
                         return quest:noAction()

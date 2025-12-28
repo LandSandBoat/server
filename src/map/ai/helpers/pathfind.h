@@ -19,14 +19,12 @@
 ===========================================================================
 */
 
-/*
-The PathFind class provides an interface for getting an entity to a destination. It will find a path from a navmesh and carry it out.
-*/
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/timer.h"
 
 #include <vector>
 
@@ -76,7 +74,7 @@ public:
     void ResumePatrol();
 
     // moves mob to next point
-    void FollowPath(time_point tick);
+    void FollowPath(timer::time_point tick);
 
     // returns true if entity is on a way point
     bool OnPoint() const;
@@ -149,7 +147,7 @@ private:
     bool   m_onPoint;
     int16  m_currentPoint;
 
-    time_point m_timeAtPoint;
+    timer::time_point m_timeAtPoint;
 
     uint8 m_currentTurn;
 

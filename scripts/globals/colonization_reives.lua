@@ -3,8 +3,6 @@
 -- https://www.bg-wiki.com/ffxi/Category:Reive#Colonization_Reive
 -- https://wiki.ffo.jp/html/28105.html
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.reives = xi.reives or {}
 

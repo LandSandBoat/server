@@ -1,4 +1,25 @@
-﻿#include "common/zlib.h"
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "common/zlib.h"
 
 #include "common/logging.h"
 #include "common/utils.h"
@@ -59,13 +80,15 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 {
 #if XI_BIG_ENDIAN
     for (size_t i = 0; i < memb; ++i)
+    {
         v[i] = bswap32(v[i]);
+    }
 #else
     (void)v, (void)memb;
 #endif
 }
 
-static bool read_to_vector(std::string const& filename, std::vector<uint32>& vec)
+static bool read_to_vector(const std::string& filename, std::vector<uint32>& vec)
 {
     auto fp = utils::openFile(filename, "rb");
     if (!fp)

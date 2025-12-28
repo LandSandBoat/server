@@ -1,5 +1,6 @@
 -----------------------------------
 -- Area: Residential_Area
+-- Note: Unused zone. Mog Houses are instanced in the zone they live in.
 -----------------------------------
 zones = zones or {}
 

@@ -22,21 +22,21 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 
-#include "packets/basic.h"
-
+struct GP_AUC_PARAM_BID;
+struct GP_AUC_PARAM_ASKCOMMIT;
+struct GP_AUC_PARAM_LOT;
 class CCharEntity;
 
 namespace auctionutils
 {
-    void HandlePacket(CCharEntity* PChar, CBasicPacket& data);
 
-    void SellingItems(CCharEntity* PChar, uint8 action, uint32 price, uint8 slot, uint16 itemid, uint8 quantity);
-    void OpenListOfSales(CCharEntity* PChar, uint8 action, uint16 itemid);
-    void RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar);
-    void ProofOfPurchase(CCharEntity* PChar, uint8 action, uint32 price, uint8 slot, uint8 quantity);
-    void PurchasingItems(CCharEntity* PChar, uint8 action, uint32 price, uint16 itemid, uint8 quantity);
-    void CancelSale(CCharEntity* PChar, uint8 action, uint8 slotid);
-    void UpdateSaleListByPlayer(CCharEntity* PChar, uint8 action, uint8 slotid);
+void SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param);
+void OpenListOfSales(CCharEntity* PChar);
+void RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar);
+void ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param);
+auto PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -> bool;
+void CancelSale(CCharEntity* PChar, int8_t AucWorkIndex);
+void UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkIndex);
+
 }; // namespace auctionutils

@@ -18,17 +18,35 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player) and
-                VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3096, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 1, 0, 2, 0)
+                end,
+            },
+
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3097, { text_table = 0 })
+                    if
+                        not mission:getMustZone(player) and
+                        VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+                    then
+                        return mission:progressEvent(3097, { text_table = 0 })
+                    end
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [3097] = function(player, csid, option, npc)
+                    player:updateEvent(78, 1, 0, 0, 0, 0, 0, 0)
                 end,
             },
 

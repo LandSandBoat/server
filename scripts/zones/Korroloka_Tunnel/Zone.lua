@@ -39,17 +39,17 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         {
             [1] = function()  -- Left Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar('POOL_TIME', os.time())
+                player:setLocalVar('POOL_TIME', GetSystemTime())
             end,
 
             [2] = function()  -- Center Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar('POOL_TIME', os.time())
+                player:setLocalVar('POOL_TIME', GetSystemTime())
             end,
 
             [3] = function()  -- Right pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar('POOL_TIME', os.time())
+                player:setLocalVar('POOL_TIME', GetSystemTime())
             end,
         }
     end
@@ -57,7 +57,7 @@ end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     local triggerAreaID = triggerArea:getTriggerAreaID()
-    local pooltime = os.time() - player:getLocalVar('POOL_TIME')
+    local pooltime = GetSystemTime() - player:getLocalVar('POOL_TIME')
 
     if triggerAreaID <= 3 and player:getCharVar('BathedInScent') == 1 then
         if pooltime >= 300 then

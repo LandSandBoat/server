@@ -1,19 +1,42 @@
-#ifndef _CBASETYPES_H_
-#define _CBASETYPES_H_
+/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
 
 #include <algorithm>
 #include <cctype>
+#include <chrono>
 #include <climits>
 #include <cstddef>
 #include <cstdint>
+#include <queue>
 #include <span>
 #include <utility>
 #include <vector>
 
-#include "logging.h"
 #include "macros.h"
+#include "tracy.h"
 
-// typedef/using
+#include "types/flag.h"
+
 using int8  = std::int8_t;
 using int16 = std::int16_t;
 using int32 = std::int32_t;
@@ -51,18 +74,7 @@ inline void destroy_arr(T*& ptr)
     ptr = nullptr;
 }
 
-#include <chrono>
-
 using namespace std::literals::chrono_literals;
-using server_clock = std::chrono::system_clock;
-using time_point   = server_clock::time_point;
-using duration     = server_clock::duration;
-
-using hires_clock      = std::chrono::high_resolution_clock;
-using hires_time_point = server_clock::time_point;
-using hires_duration   = server_clock::duration;
-
-#include <queue>
 
 template <class T>
 using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
@@ -78,7 +90,3 @@ struct PtrGreater
 
 template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
-
-#include "tracy.h"
-
-#endif /* _CBASETYPES_H_ */

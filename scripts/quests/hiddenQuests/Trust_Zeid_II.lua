@@ -8,7 +8,8 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasSpell(xi.magic.spell.ZEID_II) and
+            return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+                not player:hasSpell(xi.magic.spell.ZEID_II) and
                 not player:findItem(xi.item.CIPHER_OF_ZEIDS_ALTER_EGO_II) and
                 player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
         end,

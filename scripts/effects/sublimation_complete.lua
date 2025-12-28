@@ -5,6 +5,7 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
+    target:delStatusEffect(xi.effect.REFRESH)
 end
 
 effectObject.onEffectTick = function(target, effect)

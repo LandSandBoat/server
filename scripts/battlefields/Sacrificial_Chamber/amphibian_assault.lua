@@ -24,124 +24,135 @@ local content = Battlefield:new({
     },
 })
 
+-- Alternate death handler to check all mobs including the wyvern
+local function handleDeath(battlefield, mob)
+    local baseMobId = sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + (battlefield:getArea() - 1) * 6
+
+    for _, mobOffset in ipairs({ 0, 1, 2, 3, 5 }) do
+        local battlefieldMob = GetMobByID(baseMobId + mobOffset)
+        if battlefieldMob and battlefieldMob:isAlive() then
+            return
+        end
+    end
+
+    content:handleAllMonstersDefeated(battlefield, mob)
+end
+
 content.groups =
 {
     {
         mobIds =
         {
             {
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 1,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 2,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 3,
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER,     -- Qull the Fallstopper
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 1, -- Rauu the Whaleswooner
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 2, -- Hyohh the Conchblower
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 3, -- Pevv the Riverleaper
             },
 
             {
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 6,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 7,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 8,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 9,
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 6, -- Qull the Fallstopper
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 7, -- Rauu the Whaleswooner
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 8, -- Hyohh the Conchblower
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 9, -- Pevv the Riverleaper
             },
 
             {
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 12,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 13,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 14,
-                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 15,
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 12, -- Qull the Fallstopper
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 13, -- Rauu the Whaleswooner
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 14, -- Hyohh the Conchblower
+                sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 15, -- Pevv the Riverleaper
             },
         },
 
-        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
+        allDeath = handleDeath,
     },
 
-    -- Wyvern
     {
         mobIds =
         {
-            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 5  },
-            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 11 },
-            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 17 },
+            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 5  }, -- Sahagins Wyvern
+            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 11 }, -- Sahagins Wyvern
+            { sacrificialChamberID.mob.QULL_THE_FALLSTOPPER + 17 }, -- Sahagins Wyvern
         },
 
         spawned = false,
+        allDeath = handleDeath,
     },
 }
 
 content.loot =
 {
     {
-        { item = xi.item.ENFEEBLING_TORQUE, weight = 250 }, -- Enfeebling Torque
-        { item = xi.item.DIVINE_TORQUE,     weight = 250 }, -- Divine Torque
-        { item = xi.item.SHIELD_TORQUE,     weight = 250 }, -- Shield Torque
-        { item = xi.item.STRING_TORQUE,     weight = 250 }, -- String Torque
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 18000 },
     },
 
     {
-        { item = xi.item.ELEMENTAL_TORQUE, weight = 250 }, -- Elemental Torque
-        { item = xi.item.EVASION_TORQUE,   weight = 250 }, -- Evasion Torque
-        { item = xi.item.GUARDING_TORQUE,  weight = 250 }, -- Guarding Torque
-        { item = xi.item.ENHANCING_TORQUE, weight = 250 }, -- Enhancing Torque
+        { itemId = xi.item.DIVINE_TORQUE,          weight =  2500 },
+        { itemId = xi.item.ENFEEBLING_TORQUE,      weight =  2500 },
+        { itemId = xi.item.SHIELD_TORQUE,          weight =  2500 },
+        { itemId = xi.item.STRING_TORQUE,          weight =  2500 },
     },
 
     {
-        { item = xi.item.CHUNK_OF_WATER_ORE,     weight = 125 }, -- Chunk Of Water Ore
-        { item = xi.item.CHUNK_OF_WIND_ORE,      weight = 125 }, -- Chunk Of Wind Ore
-        { item = xi.item.CHUNK_OF_ICE_ORE,       weight = 125 }, -- Chunk Of Ice Ore
-        { item = xi.item.CHUNK_OF_LIGHTNING_ORE, weight = 125 }, -- Chunk Of Lightning Ore
-        { item = xi.item.CHUNK_OF_LIGHT_ORE,     weight = 125 }, -- Chunk Of Light Ore
-        { item = xi.item.CHUNK_OF_FIRE_ORE,      weight = 125 }, -- Chunk Of Fire Ore
-        { item = xi.item.CHUNK_OF_DARK_ORE,      weight = 125 }, -- Chunk Of Dark Ore
-        { item = xi.item.CHUNK_OF_EARTH_ORE,     weight = 125 }, -- Chunk Of Earth Ore
+        { itemId = xi.item.PLATINUM_BEASTCOIN,     weight =  5000 },
+        { itemId = xi.item.FIRE_SPIRIT_PACT,       weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_STR,   weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_PHALANX,      weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_RAISE_II,     weight =  1000 },
     },
 
     {
-        { item = xi.item.NONE,             weight = 750 }, -- nothing
-        { item = xi.item.SUMMONING_TORQUE, weight = 250 }, -- Summoning Torque
+        { itemId = xi.item.PLATINUM_BEASTCOIN,     weight =  5000 },
+        { itemId = xi.item.CHUNK_OF_GOLD_ORE,      weight =   500 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   500 },
+        { itemId = xi.item.CHUNK_OF_DARK_ORE,      weight =   500 },
+        { itemId = xi.item.CHUNK_OF_EARTH_ORE,     weight =   500 },
+        { itemId = xi.item.CHUNK_OF_FIRE_ORE,      weight =   500 },
+        { itemId = xi.item.CHUNK_OF_ICE_ORE,       weight =   500 },
+        { itemId = xi.item.CHUNK_OF_LIGHT_ORE,     weight =   500 },
+        { itemId = xi.item.CHUNK_OF_LIGHTNING_ORE, weight =   500 },
+        { itemId = xi.item.CHUNK_OF_WATER_ORE,     weight =   500 },
+        { itemId = xi.item.CHUNK_OF_WIND_ORE,      weight =   500 },
     },
 
     {
-        { item = xi.item.NONE,               weight = 200 }, -- nothing
-        { item = xi.item.PLATINUM_BEASTCOIN, weight = 800 }, -- Platinum Beastcoin
+        { itemId = xi.item.ELEMENTAL_TORQUE,       weight =  2000 },
+        { itemId = xi.item.ENHANCING_TORQUE,       weight =  2000 },
+        { itemId = xi.item.EVASION_TORQUE,         weight =  2000 },
+        { itemId = xi.item.GUARDING_TORQUE,        weight =  2000 },
+        { itemId = xi.item.SUMMONING_TORQUE,       weight =  2000 },
     },
 
     {
-        { item = xi.item.NONE,                 weight = 375 }, -- nothing
-        { item = xi.item.FIRE_SPIRIT_PACT,     weight = 125 }, -- Fire Spirit Pact
-        { item = xi.item.SCROLL_OF_ABSORB_STR, weight = 125 }, -- Scroll Of Absorb-str
-        { item = xi.item.SCROLL_OF_ERASE,      weight = 125 }, -- Scroll Of Erase
-        { item = xi.item.SCROLL_OF_PHALANX,    weight = 125 }, -- Scroll Of Phalanx
-        { item = xi.item.SCROLL_OF_RAISE_II,   weight = 125 }, -- Scroll Of Raise Ii
-    },
-
-    {
-        { item = xi.item.NONE,           weight = 888 }, -- nothing
-        { item = xi.item.VILE_ELIXIR_P1, weight =  56 }, -- Vile Elixir +1
-        { item = xi.item.HI_RERAISER,    weight =  56 }, -- Hi-reraiser
-    },
-
-    {
-        { item = xi.item.FLUORITE,         weight =  10 }, -- Fluorite
-        { item = xi.item.PAINITE,          weight =  50 }, -- Painite
-        { item = xi.item.SUNSTONE,         weight =  10 }, -- Sunstone
-        { item = xi.item.JADEITE,          weight = 150 }, -- Jadeite
-        { item = xi.item.AQUAMARINE,       weight =  50 }, -- Aquamarine
-        { item = xi.item.MOONSTONE,        weight = 150 }, -- Moonstone
-        { item = xi.item.YELLOW_ROCK,      weight =  50 }, -- Yellow Rock
-        { item = xi.item.RED_ROCK,         weight =  50 }, -- Red Rock
-        { item = xi.item.WHITE_ROCK,       weight = 100 }, -- White Rock
-        { item = xi.item.GREEN_ROCK,       weight =  50 }, -- Green Rock
-        { item = xi.item.TRANSLUCENT_ROCK, weight = 100 }, -- Translucent Rock
-        { item = xi.item.CHRYSOBERYL,      weight = 150 }, -- Chrysoberyl
-        { item = xi.item.BLACK_ROCK,       weight =  50 }, -- Black Rock
-        { item = xi.item.PURPLE_ROCK,      weight =  50 }, -- Purple Rock
-    },
-
-    {
-        { item = xi.item.PLATINUM_BEASTCOIN,     weight = 500 }, -- Platinum Beastcoin
-        { item = xi.item.CORAL_FRAGMENT,         weight = 222 }, -- Coral Fragment
-        { item = xi.item.SPOOL_OF_MALBORO_FIBER, weight =  10 }, -- Spool Of Malboro Fiber
-        { item = xi.item.STEEL_INGOT,            weight = 111 }, -- Steel Ingot
-        { item = xi.item.EBONY_LOG,              weight =  56 }, -- Ebony Log
+        quantity = 2,
+        { itemId = xi.item.AQUAMARINE,             weight =   400 },
+        { itemId = xi.item.CHRYSOBERYL,            weight =   400 },
+        { itemId = xi.item.FLUORITE,               weight =   400 },
+        { itemId = xi.item.JADEITE,                weight =   400 },
+        { itemId = xi.item.MOONSTONE,              weight =   400 },
+        { itemId = xi.item.PAINITE,                weight =   400 },
+        { itemId = xi.item.SUNSTONE,               weight =   400 },
+        { itemId = xi.item.ZIRCON,                 weight =   400 },
+        { itemId = xi.item.BLACK_ROCK,             weight =   400 },
+        { itemId = xi.item.BLUE_ROCK,              weight =   400 },
+        { itemId = xi.item.GREEN_ROCK,             weight =   400 },
+        { itemId = xi.item.PURPLE_ROCK,            weight =   400 },
+        { itemId = xi.item.RED_ROCK,               weight =   400 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,       weight =   400 },
+        { itemId = xi.item.WHITE_ROCK,             weight =   400 },
+        { itemId = xi.item.YELLOW_ROCK,            weight =   400 },
+        { itemId = xi.item.EBONY_LOG,              weight =   400 },
+        { itemId = xi.item.MAHOGANY_LOG,           weight =   400 },
+        { itemId = xi.item.DARKSTEEL_INGOT,        weight =   400 },
+        { itemId = xi.item.GOLD_INGOT,             weight =   400 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   400 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   400 },
+        { itemId = xi.item.DEMON_HORN,             weight =   400 },
+        { itemId = xi.item.CORAL_FRAGMENT,         weight =   400 },
+        { itemId = xi.item.HI_RERAISER,            weight =   200 },
+        { itemId = xi.item.VILE_ELIXIR_P1,         weight =   200 },
     },
 }
 

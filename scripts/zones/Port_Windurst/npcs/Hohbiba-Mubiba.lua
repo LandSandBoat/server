@@ -2,30 +2,29 @@
 -- Area: Port Windurst
 --  NPC: Hohbiba-Mubiba
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        17051,  1440, 1,    -- Yew Wand
-        17090,  3642, 1,    -- Elm Staff
-        17097, 18422, 1,    -- Elm Pole
-        17026,  4945, 2,    -- Bone Cudgel
-        17096,  4669, 2,    -- Holly Pole
-        17049,    47, 3,    -- Maple Wand
-        17050,   340, 3,    -- Willow Wand
-        17059,    91, 3,    -- Bronze Rod
-        17024,    66, 3,    -- Ash Club
-        17025,  1600, 3,    -- Chestnut Club
-        17088,    58, 3,    -- Ash Staff
-        17089,   584, 3,    -- Holly Staff
-        17095,   386, 3,    -- Ash Pole
+        { xi.item.MAPLE_WAND,       54, 3 },
+        { xi.item.WILLOW_WAND,     384, 3 },
+        { xi.item.YEW_WAND,       1628, 1 },
+        { xi.item.BRONZE_ROD,      104, 3 },
+        { xi.item.BRASS_ROD,       717, 3 },
+        { xi.item.ASH_CLUB,         74, 3 },
+        { xi.item.CHESTNUT_CLUB,  1809, 3 },
+        { xi.item.BONE_CUDGEL,    5591, 2 },
+        { xi.item.ASH_STAFF,        66, 3 },
+        { xi.item.HOLLY_STAFF,     660, 3 },
+        { xi.item.ELM_STAFF,      3750, 1 },
+        { xi.item.ASH_POLE,        436, 3 },
+        { xi.item.HOLLY_POLE,     5279, 2 },
+        { xi.item.ELM_POLE,      18969, 1 },
     }
 
-    player:showText(npc, ID.text.HOHBIBAMUBIBA_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.PORT_WINDURST].text.HOHBIBAMUBIBA_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

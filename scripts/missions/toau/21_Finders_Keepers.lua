@@ -25,7 +25,7 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3093)
+                    return mission:progressEvent(3093, 1, 1, 0, 0, 0, 0, 0, 0)
                 end,
             },
 

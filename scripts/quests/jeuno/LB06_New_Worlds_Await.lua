@@ -11,20 +11,23 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
 
 quest.reward =
 {
-    fame = 50,
+    fame     = 50,
     fameArea = xi.fameArea.JEUNO,
 }
 
+-- Event 10045 is the global event used in all Limit break quest from 6 to 10.
+-- Parameter 1 -> player level.
+-- Parameter 2 -> player has the Limit Breaker KI (1) or not (2)
+-- Parameter 3 -> "ID/number" of current LB quest associated with this npc. LB-6 = 1, LB-7 = 2, LB-8 = 3...
+-- Parameter 4 -> progress in current quest.
+
 quest.sections =
 {
-    -- Section: Quest available. Player doesn't have Limit Breaker KI.
+    -- Section: Quest accepted. There is no quest pre-requisite.
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                xi.settings.main.MAX_LEVEL >= 75 and
-                player:getMainLvl() >= 75 and
-                player:getLevelCap() == 75 and
-                not player:hasKeyItem(xi.ki.LIMIT_BREAKER)
+                player:getLevelCap() == 75
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -32,12 +35,19 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    -- NOTE:
-                    -- Event 10045 is the global event used in all Limit break quest from 6 to 10.
-                    -- First argument is player level. (Confirmed from retail captures)
-                    -- Second or third argument are seemingly event control parameters.
-                    -- The rest, I have no clue. I haven''t tried it without those, but im inclined to believe they are just unused garbage data.
-                    return quest:progressEvent(10045, 75, 2, 2964, -1, -1075052545, 2147434431, 3)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 0
+                    local lastQuestStage  = 0
+                    if
+                        xi.settings.main.MAX_LEVEL > 75 and -- Can we level over 75?
+                        playerLevel == 75 and               -- Are we at limit level?
+                        limitBreaker == 1                   -- Do we have limit breaker KI? (Pre-requisite)
+                    then
+                        lastQuestNumber = 1
+                    end
+
+                    return quest:progressEvent(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage)
                 end,
             },
 
@@ -45,7 +55,7 @@ quest.sections =
             {
                 [10045] = function(player, csid, option, npc)
                     if option == 4 then
-                        player:updateEvent(243, 2, 3, 1, 17154, 0, 235339776, 4)
+                        player:updateEvent(243, 2, 3, 1, 17154, 0, 235339776, 4) -- I've taken 3 different captures and they always seem different.
                     end
                 end,
             },
@@ -53,58 +63,12 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
+                    -- Obtain Limit Breaker KI option.
                     if option == 4 then
                         npcUtil.giveKeyItem(player, xi.ki.LIMIT_BREAKER)
-                    end
-                end,
-            },
-        },
-    },
 
-    -- Section: Quest available. Got Limit Breaker KI. Era server section.
-    {
-        check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
-                xi.settings.main.MAX_LEVEL == 75 and
-                player:getMainLvl() >= 75 and
-                player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER)
-        end,
-
-        [xi.zone.RULUDE_GARDENS] =
-        {
-            ['Nomad_Moogle'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(10045, 0, 1, 0, 0)
-                end,
-            },
-        },
-    },
-
-    -- Section: Quest available. Got Limit Breaker KI. Can actually raise level cap.
-    {
-        check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
-                xi.settings.main.MAX_LEVEL >= 80 and
-                player:getMainLvl() >= 75 and
-                player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER)
-        end,
-
-        [xi.zone.RULUDE_GARDENS] =
-        {
-            ['Nomad_Moogle'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 1, 0, 0, 62421, 4095)
-                end,
-            },
-
-            onEventFinish =
-            {
-                [10045] = function(player, csid, option, npc)
-                    if option == 5 then -- Accept quest option.
+                    -- Accept LB6 quest option.
+                    elseif option == 5 then
                         quest:begin(player)
                     end
                 end,
@@ -122,10 +86,6 @@ quest.sections =
         {
             ['Nomad_Moogle'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(10045, 0, 1, 1, 1)
-                end,
-
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_SEAL, 5 } }) and
@@ -133,6 +93,15 @@ quest.sections =
                     then
                         return quest:progressEvent(10135)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    local playerLevel     = player:getMainLvl()
+                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local lastQuestNumber = 1
+                    local lastQuestStage  = 1
+
+                    return quest:event(10045, playerLevel, limitBreaker, lastQuestNumber, lastQuestStage) -- Reminder.
                 end,
             },
 

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BLOWFISH_H
-#define _BLOWFISH_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -45,5 +44,3 @@ void blowfish_decipher(uint32* xl, uint32* xr, const uint32* P, uint32* S);
 void blowfish_encipher(uint32* xl, uint32* xr, const uint32* P, uint32* S);
 
 uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S);
-
-#endif

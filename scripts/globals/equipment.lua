@@ -1,28 +1,9 @@
 xi.equipment = xi.equipment or {}
 
-xi.equipment.baseNyzulWeapons =
-{
-    xi.item.STURDY_AXE,     -- (WAR)
-    xi.item.BURNING_FISTS,  -- (MNK)
-    xi.item.WEREBUSTER,     -- (WHM)
-    xi.item.MAGES_STAFF,    -- (BLM)
-    xi.item.VORPAL_SWORD,   -- (RDM)
-    xi.item.SWORDBREAKER,   -- (THF)
-    xi.item.BRAVE_BLADE,    -- (PLD)
-    xi.item.DEATH_SICKLE,   -- (DRK)
-    xi.item.DOUBLE_AXE,     -- (BST)
-    xi.item.DANCING_DAGGER, -- (BRD)
-    xi.item.KILLER_BOW,     -- (RNG)
-    xi.item.WINDSLICER,     -- (SAM)
-    xi.item.SASUKE_KATANA,  -- (NIN)
-    xi.item.RADIANT_LANCE,  -- (DRG)
-    xi.item.SCEPTER_STAFF,  -- (SMN)
-    xi.item.WIGHTSLAYER,    -- (BLU)
-    xi.item.QUICKSILVER,    -- (COR)
-    xi.item.INFERNO_CLAWS,  -- (PUP)
-    xi.item.MAIN_GAUCHE,    -- (DNC)
-    xi.item.ELDER_STAFF     -- (SCH)
-}
+-- To allow "unlocking_a_myth" module to use pre-2014 ws point scaling on Nyzul Climb progress
+xi.equipment.vigilWeaponRequiredWsPoints = function(player)
+    return 250
+end
 
 -----------------------------------
 -- Relic/Mythic/Empyrean tables
@@ -52,7 +33,7 @@ xi.equipment.relicIDs =
 {
     [xi.equipment.relic.SPHARAI] =
     {
-        xi.item.SPHARAI,
+        xi.item.SPHARAI_75,
         xi.item.SPHARAI_80,
         xi.item.SPHARAI_85,
         xi.item.SPHARAI_90,
@@ -66,7 +47,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.MANDAU] =
     {
-        xi.item.MANDAU,
+        xi.item.MANDAU_75,
         xi.item.MANDAU_80,
         xi.item.MANDAU_85,
         xi.item.MANDAU_90,
@@ -80,7 +61,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.EXCALIBUR] =
     {
-        xi.item.EXCALIBUR,
+        xi.item.EXCALIBUR_75,
         xi.item.EXCALIBUR_80,
         xi.item.EXCALIBUR_85,
         xi.item.EXCALIBUR_90,
@@ -94,7 +75,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.RAGNAROK] =
     {
-        xi.item.RAGNAROK,
+        xi.item.RAGNAROK_75,
         xi.item.RAGNAROK_80,
         xi.item.RAGNAROK_85,
         xi.item.RAGNAROK_90,
@@ -108,7 +89,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.GUTTLER] =
     {
-        xi.item.GUTTLER,
+        xi.item.GUTTLER_75,
         xi.item.GUTTLER_80,
         xi.item.GUTTLER_85,
         xi.item.GUTTLER_90,
@@ -122,7 +103,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.BRAVURA] =
     {
-        xi.item.BRAVURA,
+        xi.item.BRAVURA_75,
         xi.item.BRAVURA_80,
         xi.item.BRAVURA_85,
         xi.item.BRAVURA_90,
@@ -136,7 +117,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.APOCALYPSE] =
     {
-        xi.item.APOCALYPSE,
+        xi.item.APOCALYPSE_75,
         xi.item.APOCALYPSE_80,
         xi.item.APOCALYPSE_85,
         xi.item.APOCALYPSE_90,
@@ -150,7 +131,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.GUNGNIR] =
     {
-        xi.item.GUNGNIR,
+        xi.item.GUNGNIR_75,
         xi.item.GUNGNIR_80,
         xi.item.GUNGNIR_85,
         xi.item.GUNGNIR_90,
@@ -164,7 +145,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.KIKOKU] =
     {
-        xi.item.KIKOKU,
+        xi.item.KIKOKU_75,
         xi.item.KIKOKU_80,
         xi.item.KIKOKU_85,
         xi.item.KIKOKU_90,
@@ -178,7 +159,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.AMANOMURAKUMO] =
     {
-        xi.item.AMANOMURAKUMO,
+        xi.item.AMANOMURAKUMO_75,
         xi.item.AMANOMURAKUMO_80,
         xi.item.AMANOMURAKUMO_85,
         xi.item.AMANOMURAKUMO_90,
@@ -192,7 +173,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.MJOLLNIR] =
     {
-        xi.item.MJOLLNIR,
+        xi.item.MJOLLNIR_75,
         xi.item.MJOLLNIR_80,
         xi.item.MJOLLNIR_85,
         xi.item.MJOLLNIR_90,
@@ -206,7 +187,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.CLAUSTRUM] =
     {
-        xi.item.CLAUSTRUM,
+        xi.item.CLAUSTRUM_75,
         xi.item.CLAUSTRUM_80,
         xi.item.CLAUSTRUM_85,
         xi.item.CLAUSTRUM_90,
@@ -220,7 +201,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.YOICHINOYUMI] =
     {
-        xi.item.YOICHINOYUMI,
+        xi.item.YOICHINOYUMI_75,
         xi.item.YOICHINOYUMI_80,
         xi.item.YOICHINOYUMI_85,
         xi.item.YOICHINOYUMI_90,
@@ -235,7 +216,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.ANNIHILATOR] =
     {
-        xi.item.ANNIHILATOR,
+        xi.item.ANNIHILATOR_75,
         xi.item.ANNIHILATOR_80,
         xi.item.ANNIHILATOR_85,
         xi.item.ANNIHILATOR_90,
@@ -250,7 +231,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.GJALLARHORN] =
     {
-        xi.item.GJALLARHORN,
+        xi.item.GJALLARHORN_75,
         xi.item.GJALLARHORN_80,
         xi.item.GJALLARHORN_85,
         xi.item.GJALLARHORN_90,
@@ -261,7 +242,7 @@ xi.equipment.relicIDs =
 
     [xi.equipment.relic.AEGIS] =
     {
-        xi.item.AEGIS,
+        xi.item.AEGIS_75,
         xi.item.AEGIS_80,
         xi.item.AEGIS_85,
         xi.item.AEGIS_90,
@@ -302,16 +283,6 @@ local artifactArmorRanges =
 xi.equipment.isArtifactArmor = function(itemId)
     for _, v in ipairs(artifactArmorRanges) do
         if itemId >= v[1] and itemId <= v[2] then
-            return true
-        end
-    end
-
-    return false
-end
-
-xi.equipment.isBaseNyzulWeapon = function(itemId)
-    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
-        if itemId == wepId then
             return true
         end
     end

@@ -110,21 +110,22 @@ quest.sections =
     },
 
     -- Travel to Ordelle's Caves and hunt for an Ordelle Chest Key. Once you find a key, look for a Treasure Chest and open it.
-    -- Only people who have this quest flagged will receive some Torn-Out Pages (key item).
-    -- NOTE: this step is not included in this quest LUA. The key item is obtained via code in scripts/globals/treasure.lua
-
     -- Return to Selbina and talk to the mayor. He'll reveal some information to you which will prove interesting to Sobane.
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] =
+        [xi.zone.ORDELLES_CAVES] =
         {
-            ['Sobane'] =
+            ['Treasure_Chest' ] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(735)
+                onTrade = function(player, npc, trade)
+                    if not player:hasKeyItem(xi.keyItem.TORN_OUT_PAGES) then
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.TORN_OUT_PAGES)
+
+                        return quest:noAction()
+                    end
                 end,
             },
         },
@@ -146,6 +147,16 @@ quest.sections =
             {
                 [1106] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
+                end,
+            },
+        },
+
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(735)
                 end,
             },
         },

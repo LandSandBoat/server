@@ -98,7 +98,7 @@ xi.pyxis.npc.onPyxisTrigger = function(player, npc)
     local dropType        = npc:getLocalVar('DROPTYPE')
     local chestType       = npc:getLocalVar('CHESTTYPE')         -- 1:Blue 'twist dial' || 2:Red 'pressure' || 3:Gold 'enter two-digit combination (10~99)'.
     local messagetype     = npc:getLocalVar('MESSAGE')
-    local timeleft        = os.time() - npc:getLocalVar('[pyxis]SPAWNTIME')
+    local timeleft        = GetSystemTime() - npc:getLocalVar('[pyxis]SPAWNTIME')
     local contentMessage  = xi.pyxis.npc.contentMessage[messagetype] + chestType
     local lockedEvent, unlockedEvent = GetEvents(tier)
 

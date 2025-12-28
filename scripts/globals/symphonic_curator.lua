@@ -1,8 +1,5 @@
 -----------------------------------
 -- Symphonic Curator (Moghouse)
------------------------------------
-require('scripts/globals/utils')
------------------------------------
 -- See documentation/songdata.txt or documentation/MusicIDs.txt for song data.
 -----------------------------------
 

@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = zones[xi.zone.BATALLIA_DOWNS]
 require('scripts/quests/full_speed_ahead')
-require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
@@ -26,7 +25,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
-    zone:registerCylindricalTriggerArea(1, 467.16, -156.82, 20)
+    zone:registerCylindricalTriggerArea(10, 467.16, -156.82, 20)
 
     for i = 0, 7 do
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
@@ -56,10 +55,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         return -1
     end
 
-    if quests.rainbow.onZoneIn(player) then
-        cs = 901
-    end
-
     return cs
 end
 
@@ -74,17 +69,20 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:getTriggerAreaID()
 
-    if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
+    if
+        triggerAreaID ~= 10 and
+        player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD)
+    then
         xi.fsa.onTriggerAreaEnter(player, triggerAreaID)
-    elseif triggerAreaID == 1 and player:hasStatusEffect(xi.effect.MOUNTED) then
+    elseif
+        triggerAreaID == 10 and
+        player:hasStatusEffect(xi.effect.MOUNTED)
+    then
         xi.chocoboGame.onTriggerAreaEnter(player)
     end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
-    if csid == 901 then
-        quests.rainbow.onEventUpdate(player)
-    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)

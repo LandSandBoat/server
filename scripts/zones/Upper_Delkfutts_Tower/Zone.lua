@@ -17,6 +17,12 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+    if
+        prevZone == xi.zone.MIDDLE_DELKFUTTS_TOWER or
+        prevZone == xi.zone.STELLAR_FULCRUM
+    then
+        cs = 14 -- Teleport.
+    end
 
     if
         player:getXPos() == 0 and

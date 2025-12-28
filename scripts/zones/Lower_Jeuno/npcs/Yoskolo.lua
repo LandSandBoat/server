@@ -2,33 +2,31 @@
 -- Area: Lower Jeuno
 --  NPC: Yoskolo
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4509,    10, -- Distilled Water
-        4422,   184, -- Orange Juice
-        4423,   276, -- Apple Juice
-        4424,  1012, -- Melon Juice
-        4441,   855, -- Grape Juice
-        4442,   368, -- Pineapple Juice
-        4556,  5544, -- Icecap Rolanberry
-        5046,  6380, -- Scroll of Fire Carol
-        5047,  7440, -- Scroll of Ice Carol
-        5048,  5940, -- Scroll of Wind Carol
-        5049,  4600, -- Scroll of Earth Carol
-        5050,  7920, -- Scroll of Lightning Carol
-        5051,  5000, -- Scroll of Water Carol
-        5052,  4200, -- Scroll of Light Carol
-        5053,  8400, -- Scroll of Dark Carol
-        5078, 60000, -- Scroll of Sentinel's Scherzo
+        { xi.item.FLASK_OF_DISTILLED_WATER,       12 },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,        200 },
+        { xi.item.BOTTLE_OF_APPLE_JUICE,         300 },
+        { xi.item.BOTTLE_OF_MELON_JUICE,        1100 },
+        { xi.item.BOTTLE_OF_GRAPE_JUICE,         930 },
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,     400 },
+        { xi.item.SERVING_OF_ICECAP_ROLANBERRY, 5544 },
+        { xi.item.SCROLL_OF_FIRE_CAROL,         6380 },
+        { xi.item.SCROLL_OF_ICE_CAROL,          7440 },
+        { xi.item.SCROLL_OF_WIND_CAROL,         5940 },
+        { xi.item.SCROLL_OF_EARTH_CAROL,        4600 },
+        { xi.item.SCROLL_OF_LIGHTNING_CAROL,    7920 },
+        { xi.item.SCROLL_OF_WATER_CAROL,        5000 },
+        { xi.item.SCROLL_OF_LIGHT_CAROL,        4200 },
+        { xi.item.SCROLL_OF_DARK_CAROL,         8400 },
+        { xi.item.SCROLL_OF_SENTINELS_SCHERZO, 60000 },
     }
 
-    player:showText(npc, ID.text.YOSKOLO_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.YOSKOLO_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

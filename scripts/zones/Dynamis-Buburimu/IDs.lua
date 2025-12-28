@@ -7,22 +7,22 @@ zones[xi.zone.DYNAMIS_BUBURIMU] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7167, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN            = 7332, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND           = 7333, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1         = 7334, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2         = 7335, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED          = 7337, -- The sands of the hourglass have emptied...
-        DYNAMIS_SUB_UNLOCKED          = 7342, -- Memories of skills long forgotten come flooding back to you...
-        OMINOUS_PRESENCE              = 7349, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6391, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6392, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6394, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7002, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7168, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN            = 7333, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND           = 7334, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1         = 7335, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2         = 7336, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED          = 7338, -- The sands of the hourglass have emptied...
+        DYNAMIS_SUB_UNLOCKED          = 7343, -- Memories of skills long forgotten come flooding back to you...
+        OMINOUS_PRESENCE              = 7350, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
@@ -140,21 +140,21 @@ zones[xi.zone.DYNAMIS_BUBURIMU] =
             },
         },
 
-        GOSSPIX_BLABBERLIPS_PH      = { [16941089] = 16941097 }, -- Vanguard_Enchanter
-        SHAMBLIX_ROTTENHEART_PH     = { [16941078] = 16941082 }, -- Vanguard_Tinkerer
-        WOODNIX_SHRILLWHISTLE_PH    = { [16941060] = 16941066 }, -- Vanguard_Pathfinder
-        HAMFIST_GUKHBUK_PH          = { [16941124] = 16941133 }, -- Vanguard_Grappler
-        FLAMECALLER_ZOEQDOQ_PH      = { [16941103] = 16941115 }, -- Vanguard_Mesmerizer
-        LYNCEAN_JUWGNEG_PH          = { [16941127] = 16941134 }, -- Vanguard_Predator
-        ELVAANSTICKER_BXAFRAFF_PH   = { [16941113] = 16941116 }, -- Vanguard_Impaler
-        QUPHO_BLOODSPILLER_PH       = { [16941139] = 16941151 }, -- Vanguard_Vindicator
-        GIBHE_FLESHFEASTER_PH       = { [16941142] = 16941152 }, -- Vanguard_Constable
-        TEZHA_IRONCLAD_PH           = { [16941162] = 16941170 }, -- Vanguard_Defender
-        VARHU_BODYSNATCHER_PH       = { [16941161] = 16941169 }, -- Vanguard_Purloiner
-        REE_NATA_THE_MELOMANIC_PH   = { [16941184] = 16941188 }, -- Vanguard_Chanter
-        KOO_RAHI_THE_LEVINBLADE_PH  = { [16941185] = 16941189 }, -- Vanguard_Persecutor
-        DOO_PEKU_THE_FLEETFOOT_PH   = { [16941202] = 16941205 }, -- Vanguard_Assassin
-        BAA_DAVA_THE_BIBLIOPHAGE_PH = { [16941203] = 16941206 }, -- Vanguard_Oracle
+        GOSSPIX_BLABBERLIPS      = GetFirstID('Gosspix_Blabberlips'),
+        SHAMBLIX_ROTTENHEART     = GetFirstID('Shamblix_Rottenheart'),
+        WOODNIX_SHRILLWHISTLE    = GetFirstID('Woodnix_Shrillwhistle'),
+        HAMFIST_GUKHBUK          = GetFirstID('Hamfist_Gukhbuk'),
+        FLAMECALLER_ZOEQDOQ      = GetFirstID('Flamecaller_Zoeqdoq'),
+        LYNCEAN_JUWGNEG          = GetFirstID('Lyncean_Juwgneg'),
+        ELVAANSTICKER_BXAFRAFF   = GetFirstID('Elvaansticker_Bxafraff'),
+        QUPHO_BLOODSPILLER       = GetFirstID('QuPho_Bloodspiller'),
+        GIBHE_FLESHFEASTER       = GetFirstID('GiBhe_Fleshfeaster'),
+        TEZHA_IRONCLAD           = GetFirstID('TeZha_Ironclad'),
+        VARHU_BODYSNATCHER       = GetFirstID('VaRhu_Bodysnatcher'),
+        REE_NATA_THE_MELOMANIC   = GetFirstID('Ree_Nata_the_Melomanic'),
+        KOO_RAHI_THE_LEVINBLADE  = GetFirstID('Koo_Rahi_the_Levinblade'),
+        DOO_PEKU_THE_FLEETFOOT   = GetFirstID('Doo_Peku_the_Fleetfoot'),
+        BAA_DAVA_THE_BIBLIOPHAGE = GetFirstID('Baa_Dava_the_Bibliophage'),
     },
 
     npc =

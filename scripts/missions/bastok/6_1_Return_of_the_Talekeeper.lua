@@ -173,8 +173,8 @@ mission.sections =
                         (not mobEasternSphinx:isSpawned() or mobEasternSphinx:isDead()) and
                         (not mobWesternSphinx:isSpawned() or mobWesternSphinx:isDead())
                     then
-                        SpawnMob(westernAltepaID.mob.EASTERN_SPHINX)
-                        SpawnMob(westernAltepaID.mob.WESTERN_SPHINX)
+                        SpawnMob(westernAltepaID.mob.EASTERN_SPHINX):updateClaim(player)
+                        SpawnMob(westernAltepaID.mob.WESTERN_SPHINX):updateClaim(player)
                         return mission:messageSpecial(westernAltepaID.text.EVIL_LOOMING_ABOVE_YOU)
                     end
                 end,

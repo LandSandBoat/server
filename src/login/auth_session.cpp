@@ -22,108 +22,144 @@
 #include "auth_session.h"
 
 #include "common/ipc.h"
-#include "common/socket.h" // for ref<T>
 #include "common/utils.h"
+#include "otp_helpers.h"
 
 #include <bcrypt/BCrypt.hpp>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 namespace
 {
-    constexpr bool isBcryptHash(const std::string& passHash)
-    {
-        return std::size(passHash) == 60 &&
-               passHash[0] == '$' &&
-               passHash[1] == '2' &&
-               (passHash[2] == 'a' || passHash[2] == 'b' || passHash[2] == 'y' || passHash[2] == 'x') && // bcrypt hash versions
-               passHash[3] == '$';
-    }
+
+constexpr bool isBcryptHash(const std::string& passHash)
+{
+    return std::size(passHash) == 60 &&
+           passHash[0] == '$' &&
+           passHash[1] == '2' &&
+           (passHash[2] == 'a' || passHash[2] == 'b' || passHash[2] == 'y' || passHash[2] == 'x') && // bcrypt hash versions
+           passHash[3] == '$';
+}
+
 } // namespace
 
 void auth_session::start()
 {
     if (socket_.lowest_layer().is_open())
     {
-        // clang-format off
-        socket_.async_handshake(asio::ssl::stream_base::server,
-        [this, self = shared_from_this()](std::error_code ec)
-        {
-            if (!ec)
+        socket_.async_handshake(
+            asio::ssl::stream_base::server,
+            [this, self = shared_from_this()](std::error_code ec)
             {
-                do_read();
-            }
-            else
-            {
-                auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
-                ShowWarning(errStr);
-                ShowWarning("Failed to handshake!");
-                if (errStr.find("wrong version number (SSL routines)") != std::string::npos)
+                if (!ec)
                 {
-                    ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
-                    ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                    do_read();
                 }
-                socket_.next_layer().close();
-            }
-        });
-        // clang-format on
+                else
+                {
+                    const auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
+                    ShowWarning(errStr);
+                    ShowWarning("Failed to handshake!");
+                    if (errStr.find("wrong version number (SSL routines)") != std::string::npos)
+                    {
+                        ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
+                        ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                    }
+                    socket_.next_layer().close();
+                }
+            });
     }
 }
 
 void auth_session::do_read()
 {
-    // clang-format off
-    socket_.async_read_some(asio::buffer(data_, max_length),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t length)
-    {
-        if (!ec)
+    std::memset(buffer_.data(), 0, buffer_.size());
+
+    socket_.async_read_some(
+        asio::buffer(buffer_.data(), buffer_.size()),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t length)
         {
-            read_func();
-        }
-        else
-        {
-            DebugSockets(fmt::format("async_read_some error in auth_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
-            handle_error(ec, self);
-        }
-    });
-    // clang-format on
+            if (!ec)
+            {
+                read_func();
+            }
+            else
+            {
+                DebugSockets(fmt::format("async_read_some error in auth_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
+                handle_error(ec, self);
+            }
+        });
 }
 
 void auth_session::read_func()
 {
-    const auto newModeFlag = ref<uint8>(data_, 0) == 0xFF;
-    if (!newModeFlag)
+    const auto jsonBuffer = nlohmann::json::parse(buffer_, nullptr, false);
+
+    const auto sendJsonAsBuffer = [&](const json& json_)
     {
-        ShowDebug("Old xiloader connected. Not supported.");
-        ref<uint8>(data_, 0) = LOGIN_ERROR;
-        do_write(1);
+        std::string jsonString       = json_.dump();
+        const char* jsonStringBuffer = jsonString.c_str();
+        size_t      jsonStringSize   = strlen(jsonStringBuffer);
+
+        std::memset(buffer_.data(), 0, buffer_.size());
+        std::memcpy(buffer_.data(), jsonStringBuffer, jsonStringSize);
+
+        do_write(jsonStringSize);
+    };
+
+    const auto sendLoginResult = [&](const login_result errorCode, const uint8 len)
+    {
+        json loginErrorCodeReply;
+        loginErrorCodeReply["result"] = errorCode; // "old style" backwards compatible error code
+
+        sendJsonAsBuffer(loginErrorCodeReply);
+    };
+
+    const auto sendJsonOnlyErrorMessage = [&](const std::string& errorMessage)
+    {
+        json loginErrorCodeReply;
+        loginErrorCodeReply["error_message"] = errorMessage;
+
+        sendJsonAsBuffer(loginErrorCodeReply);
+    };
+
+    if (jsonBuffer.is_discarded()) // not json
+    {
+        const auto newModeFlag = ref<uint8>(buffer_.data(), 0) == 0xFF;
+        if (!newModeFlag) // Ancient, original xiloader pre-sessionhash
+        {
+            ref<uint8>(buffer_.data(), 0) = static_cast<uint8>(login_result::LOGIN_ERROR);
+
+            do_write(1);
+        }
+        else // old non-json xiloader
+        {
+            ref<uint8>(buffer_.data(), 0) = static_cast<uint8>(login_result::LOGIN_ERROR_VERSION_UNSUPPORTED);
+
+            do_write(1);
+        }
+
+        // close socket
+        socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both);
+        socket_.lowest_layer().close();
         return;
     }
 
-    // Feature flags from xiloader are sent over on the 2nd byte+
+    int8                   code             = loginHelpers::jsonGet<int8>(jsonBuffer, "command").value_or(0);
+    std::string            username         = loginHelpers::jsonGet<std::string>(jsonBuffer, "username").value_or("");
+    std::string            password         = loginHelpers::jsonGet<std::string>(jsonBuffer, "password").value_or("");
+    std::string            updated_password = loginHelpers::jsonGet<std::string>(jsonBuffer, "new_password").value_or("");
+    std::string            otp              = loginHelpers::jsonGet<std::string>(jsonBuffer, "otp").value_or("");
+    std::array<uint8_t, 3> version          = loginHelpers::jsonGet<uint8, 3>(jsonBuffer, "version").value_or(std::array<uint8_t, 3>{ 0, 0, 0 });
 
-    char usernameBuffer[17] = {};
-    char passwordBuffer[33] = {};
-
-    std::memcpy(usernameBuffer, data_ + 0x09, 16);
-    std::memcpy(passwordBuffer, data_ + 0x19, 32);
-    // 1 byte of command at 0x39
-    const std::string version(data_ + 0x61, 5);
-
-    std::string username{ usernameBuffer };
-    std::string password{ passwordBuffer };
-
-    // Only match on the first 3 characters of the version string
-    // ie. 1.1.1 -> 1.1.x
-    // Major.Minor.Patch
-    // Major and minor version changes should be breaking, patch should not.
-    if (strncmp(version.c_str(), SUPPORTED_XILOADER_VERSION, 3) != 0)
+    // Check major.minor but ignore trivial
+    if (version[0] != SupportedXiloaderVersion[0] || version[1] != SupportedXiloaderVersion[1])
     {
-        ref<uint8>(data_, 0) = LOGIN_ERROR_VERSION_UNSUPPORTED;
-
-        do_write(1);
+        std::string errorMessage = fmt::format("Your xiloader is too old.\nPlease update to version '{}.{}.x'.\nYour client reported '{}.{}.{}'.", SupportedXiloaderVersion[0], SupportedXiloaderVersion[1], version[0], version[1], version[2]);
+        sendJsonOnlyErrorMessage(errorMessage);
         return;
     }
-
-    const int8 code = ref<uint8>(data_, 0x39);
 
     DebugSockets(fmt::format("auth code: {} from {}", code, ipAddress));
 
@@ -140,68 +176,35 @@ void auth_session::read_func()
         return;
     }
 
-    username = db::escapeString(username);
-    password = db::escapeString(password);
-
-    switch (code)
+    switch (static_cast<login_cmd>(code))
     {
-        case 0:
+        case login_cmd::LOGIN_NOOP:
         {
             // no-op. This can happen if control + C is pressed in xiloader.
             break;
         }
-        case LOGIN_ATTEMPT:
+        case login_cmd::LOGIN_ATTEMPT:
         {
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
-            // clang-format off
-            auto passHash = [&]() -> std::string
+            // Look up and validate account password
+            if (!validatePassword(username, password))
             {
-                const auto rset = db::preparedStmt("SELECT accounts.password FROM accounts WHERE accounts.login = ?", username);
-                if (rset && rset->rowsCount() != 0 && rset->next())
-                {
-                    return rset->get<std::string>("password");
-                }
-                return "";
-            }();
-            // clang-format on
+                sendLoginResult(login_result::LOGIN_ERROR, 1);
+                return;
+            }
 
-            if (isBcryptHash(passHash))
+            bool usedOTP = false;
+
+            if (otpHelpers::doesAccountNeedOTP(username, "TOTP"))
             {
-                // It's a BCrypt hash, so we can validate it.
-                if (!BCrypt::validatePassword(password, passHash))
+                if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
                 {
-                    ref<uint8>(data_, 0) = LOGIN_ERROR;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR, 1);
                     return;
                 }
-            }
-            else
-            {
-                // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
-                // and then update the password to a BCrypt hash.
-                const auto passColumn = fmt::sprintf("PASSWORD('%s')", password);
-                const auto rset       = db::preparedStmt("SELECT ?", passColumn);
-                if (rset && rset->rowsCount() != 0 && rset->next())
-                {
-                    if (rset->get<std::string>(passColumn) != passHash)
-                    {
-                        ref<uint8>(data_, 0) = LOGIN_ERROR;
-                        do_write(1);
-                        return;
-                    }
-                    else
-                    {
-                        passHash = BCrypt::generateHash(password);
-                        db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash, username);
-                        if (!BCrypt::validatePassword(password, passHash))
-                        {
-                            ref<uint8>(data_, 0) = LOGIN_ERROR;
-                            do_write(1);
-                            return;
-                        }
-                    }
-                }
+
+                usedOTP = true;
             }
 
             // We've validated the password by this point, get account info
@@ -215,45 +218,28 @@ void auth_session::read_func()
                 {
                     db::preparedStmt("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = ?", accountID);
 
-                    const auto rset = db::preparedStmt("SELECT charid, server_addr, server_port "
-                                                       "FROM accounts_sessions JOIN accounts "
-                                                       "ON accounts_sessions.accid = accounts.id "
-                                                       "WHERE accounts.id = ?",
-                                                       accountID);
+                    const auto payload = ipc::toBytesWithHeader(ipc::AccountLogin{
+                        .accountId = accountID,
+                    });
 
-                    if (rset && rset->rowsCount() == 1)
+                    zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
+
+                    // set Satchel to the same size as inventory on all chars on their account if character has OTP
+                    // Note: Upgrades happen in-game with gobbiebag
+                    if (usedOTP)
                     {
-                        while (rset->next())
-                        {
-                            // NOTE: This only fires if there is already a session, so `CharLogin`
-                            //     : could be named better. Could this be used to eject existing sessions?
-
-                            // TODO: MSG_LOGIN is a no-op in message_server.cpp,
-                            //     : so sending this does nothing?
-                            //     : But in the client (message.cpp), it _could_
-                            //     : be used to clear out lingering PChar data.
-
-                            const auto charId = rset->get<uint32>("charid");
-
-                            // TODO: Make a thin wrapper around ZMQDealerWrapper to make it easier
-                            //     : to send messages to the world server from connect and search.
-
-                            const auto payload = ipc::toBytesWithHeader(ipc::CharLogin{
-                                .accountId = accountID,
-                                .charId    = charId,
-                            });
-
-                            zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
-                        }
+                        db::preparedStmt("UPDATE char_storage a JOIN char_storage b ON a.charid = b.charid "
+                                         "SET a.satchel = b.inventory "
+                                         "WHERE a.charid IN (SELECT charid FROM chars WHERE accid = ?)",
+                                         accountID);
                     }
-
                     // TODO: Lock out same account logging in multiple times. Can check data/view session existence on same IP/account?
                     // Not a real problem because the account is locked out when a character is logged in.
 
                     /*
-                    const auto rset = db::preparedStmt("SELECT charid \
-                            FROM accounts_sessions \
-                            WHERE accid = ? LIMIT 1";, accountID);
+                    const auto rset = db::preparedStmt("SELECT charid "
+                            "FROM accounts_sessions "
+                            "WHERE accid = ? LIMIT 1", accountID);
                     if (rset && rset->rowsCount() != 0 && rset->next())
                     {
                         // TODO: kick player out of map server if already logged in
@@ -261,48 +247,46 @@ void auth_session::read_func()
 
                         // This error message doesn't work when sent this way. Unknown how to transmit "1039" error message to a client already logged in.
                         // session_t& authenticatedSession = get_authenticated_session(socket_, session.sentAccountID);
-                        // if (auto data = authenticatedSession.data_session)
+                        // if (auto data = authenticatedSession.buffer_.data()session)
                         // {
-                        //  generateErrorMessage(data->data_, 139);
+                        //  generateErrorMessage(data->buffer_.data(), 139);
                         //  data->do_write(0x24);
                         //  return;
                         //}
-                        ref<uint8>(data_, 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
+                        ref<uint8>(buffer_.data(), 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
                         do_write(1);
                         return;
                     }
                     */
 
                     // Success
-                    std::memset(data_, 0, 49);
-                    ref<uint8>(data_, 0)  = LOGIN_SUCCESS;
-                    ref<uint32>(data_, 1) = accountID;
-
                     unsigned char hash[16];
-                    uint32        hashData = std::time(nullptr) ^ getpid();
+                    uint32        hashData = earth_time::timestamp() ^ getpid();
                     md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
-                    std::memcpy(data_ + 5, hash, 16);
 
-                    do_write(21);
+                    json loginSuccessReply;
+                    loginSuccessReply["result"]       = static_cast<uint8>(login_result::LOGIN_SUCCESS);
+                    loginSuccessReply["account_id"]   = accountID;
+                    loginSuccessReply["session_hash"] = hash; // This has to be sent as an array, json.dump() tries to convert to UTF which fails
 
-                    auto& session          = loginHelpers::get_authenticated_session(ipAddress, std::string(reinterpret_cast<const char*>(hash), sizeof(hash)));
+                    sendJsonAsBuffer(loginSuccessReply);
+
+                    auto& session          = loginHelpers::get_authenticated_session(ipAddress, asStringFromUntrustedSource(hash, sizeof(hash)));
                     session.accountID      = accountID;
-                    session.authorizedTime = server_clock::now();
+                    session.authorizedTime = timer::now();
                 }
                 else if (status & ACCOUNT_STATUS_CODE::BANNED)
                 {
-                    ref<uint8>(data_, 0) = LOGIN_FAIL;
-                    do_write(33);
+                    sendLoginResult(login_result::LOGIN_FAIL, 33);
                 }
             }
             else // No account match
             {
-                ref<uint8>(data_, 0) = LOGIN_ERROR;
-                do_write(1);
+                sendLoginResult(login_result::LOGIN_FAIL, 1);
             }
         }
         break;
-        case LOGIN_CREATE:
+        case login_cmd::LOGIN_CREATE:
         {
             DebugSockets(fmt::format("LOGIN_CREATE from {}", ipAddress));
 
@@ -311,8 +295,7 @@ void auth_session::read_func()
             {
                 ShowWarningFmt("login_parse: New account attempt <{}> but is disabled in settings.",
                                username);
-                ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE_DISABLED;
-                do_write(1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE_DISABLED, 1);
                 return;
             }
 
@@ -320,8 +303,7 @@ void auth_session::read_func()
             const auto rset = db::preparedStmt("SELECT accounts.id FROM accounts WHERE accounts.login = ?", username);
             if (!rset)
             {
-                ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
-                do_write(1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
                 return;
             }
 
@@ -330,104 +312,70 @@ void auth_session::read_func()
                 // creating new account_id
                 uint32 accid = 0;
 
-                const auto rset1 = db::preparedStmt("SELECT max(accounts.id) FROM accounts");
+                const auto rset1 = db::preparedStmt("SELECT COALESCE(MAX(accounts.id), 0) AS max_id FROM accounts");
                 if (rset1 && rset1->rowsCount() != 0 && rset1->next())
                 {
-                    accid = rset1->get<uint32>("max(accounts.id)") + 1;
+                    accid = rset1->get<uint32>("max_id") + 1;
                 }
                 else
                 {
-                    ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
                     return;
                 }
 
                 accid = (accid < 1000 ? 1000 : accid);
 
                 // creating new account
-                time_t timecreate{};
-                tm     timecreateinfo{};
-
-                time(&timecreate);
-                _localtime_s(&timecreateinfo, &timecreate);
+                std::tm timecreateinfo = earth_time::to_local_tm();
 
                 char strtimecreate[128];
                 strftime(strtimecreate, sizeof(strtimecreate), "%Y:%m:%d %H:%M:%S", &timecreateinfo);
 
-                const auto rset2 = db::preparedStmt("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) "
-                                                    "VALUES(?, ?, ?, ?, NULL, ?, ?)",
-                                                    accid, username, BCrypt::generateHash(password), strtimecreate, static_cast<uint8>(ACCOUNT_STATUS_CODE::NORMAL), static_cast<uint8>(ACCOUNT_PRIVILEGE_CODE::USER));
+                const auto rset2 = db::preparedStmt(
+                    "INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) "
+                    "VALUES(?, ?, ?, ?, NULL, ?, ?)",
+                    accid,
+                    username,
+                    BCrypt::generateHash(password),
+                    strtimecreate,
+                    static_cast<uint8>(ACCOUNT_STATUS_CODE::NORMAL),
+                    static_cast<uint8>(ACCOUNT_PRIVILEGE_CODE::USER));
+
                 if (!rset2)
                 {
-                    ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
                     return;
                 }
 
-                ref<uint8>(data_, 0) = LOGIN_SUCCESS_CREATE;
-                do_write(1);
+                sendLoginResult(login_result::LOGIN_SUCCESS_CREATE, 1);
                 return;
             }
             else
             {
-                ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE_TAKEN;
-                do_write(1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE_TAKEN, 1);
                 return;
             }
             break;
         }
-        case LOGIN_CHANGE_PASSWORD:
+        case login_cmd::LOGIN_CHANGE_PASSWORD:
         {
             // Look up and validate account password
-            // clang-format off
-            auto passHash = [&]() -> std::string
+            if (!validatePassword(username, password))
             {
-                const auto rset = db::preparedStmt("SELECT accounts.password FROM accounts WHERE accounts.login = ?", username);
-                if (rset && rset->rowsCount() != 0 && rset->next())
-                {
-                    return rset->get<std::string>("password");
-                }
-                return "";
-            }();
-            // clang-format on
+                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                return;
+            }
 
-            if (isBcryptHash(passHash))
+            if (otpHelpers::doesAccountNeedOTP(username, "TOTP"))
             {
-                // It's a BCrypt hash, so we can validate it.
-                if (!BCrypt::validatePassword(password, passHash))
+                if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
                 {
-                    ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
                     return;
                 }
             }
-            else
-            {
-                // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
-                // and then update the password to a BCrypt hash.
-                const auto rset = db::preparedStmt("SELECT PASSWORD(?)", password);
-                if (rset && rset->rowsCount() != 0 && rset->next())
-                {
-                    if (rset->get<std::string>(0) != passHash)
-                    {
-                        ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        do_write(1);
-                        return;
-                    }
-                    else
-                    {
-                        passHash = BCrypt::generateHash(password);
-                        db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash.c_str(), username);
-                        if (!BCrypt::validatePassword(password, passHash))
-                        {
-                            ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                            do_write(1);
-                            return;
-                        }
-                    }
-                }
-            }
 
+            // Is this check redundant?
             const auto rset = db::preparedStmt("SELECT accounts.id, accounts.status "
                                                "FROM accounts "
                                                "WHERE accounts.login = ?",
@@ -435,8 +383,8 @@ void auth_session::read_func()
             if (rset == nullptr || rset->rowsCount() == 0)
             {
                 ShowWarningFmt("login_parse: user <{}> could not be found using the provided information. Aborting.", username);
-                ref<uint8>(data_, 0) = LOGIN_ERROR;
-                do_write(1);
+
+                sendLoginResult(login_result::LOGIN_ERROR, 1);
                 return;
             }
 
@@ -448,46 +396,162 @@ void auth_session::read_func()
             if (status & ACCOUNT_STATUS_CODE::BANNED)
             {
                 ShowInfoFmt("login_parse: banned user <{}> detected. Aborting.", username);
-                ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                do_write(1);
+
+                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
             }
 
             if (status & ACCOUNT_STATUS_CODE::NORMAL)
             {
-                // Account info verified, grab password
-                std::string updated_password(data_ + 0x40, 32);
-
+                // Account info verified, update password
                 if (updated_password == "")
                 {
                     ShowWarningFmt("login_parse: Empty password: Could not update password for user <{}>.", username);
-                    ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
                     return;
                 }
-
-                updated_password = db::escapeString(updated_password);
 
                 db::preparedStmt("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = ?", accid);
 
-                const auto rset2 = db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.id = ?",
-                                                    BCrypt::generateHash(updated_password), accid);
+                const auto rset2 = db::preparedStmt(
+                    "UPDATE accounts SET accounts.password = ? WHERE accounts.id = ?",
+                    BCrypt::generateHash(updated_password),
+                    accid);
+
                 if (!rset2)
                 {
                     ShowWarningFmt("login_parse: Error trying to update password in database for user <{}>.", username);
-                    ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    do_write(1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
                     return;
                 }
 
-                memset(data_, 0, 33);
-                ref<uint8>(data_, 0) = LOGIN_SUCCESS_CHANGE_PASSWORD;
-                do_write(33);
+                json loginErrorChangePasswordReply;
+                loginErrorChangePasswordReply["result"]       = login_result::LOGIN_SUCCESS_CHANGE_PASSWORD;
+                loginErrorChangePasswordReply["account_id"]   = 0;
+                loginErrorChangePasswordReply["session_hash"] = "";
+
+                sendJsonAsBuffer(loginErrorChangePasswordReply);
 
                 ShowInfoFmt("login_parse: password updated for account {} successfully.", accid);
                 return;
             }
+            break;
         }
-        break;
+        case login_cmd::LOGIN_CREATE_TOTP:
+        {
+            // Look up and validate account password
+            if (!validatePassword(username, password))
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+                return;
+            }
+
+            const auto serverName = settings::get<std::string>("main.SERVER_NAME");
+            const auto secret     = otpHelpers::createAccountSecret(username, "TOTP");
+
+            if (!secret.empty())
+            {
+                const std::string uri = fmt::format("otpauth://totp/{}:{}?secret={}&issuer={}&algorithm={}&digits=6&period=30", serverName, username, secret, serverName, "SHA1");
+
+                json sendTOTP;
+                sendTOTP["result"]   = login_result::LOGIN_SUCCESS_CREATE_TOTP;
+                sendTOTP["TOTP_uri"] = uri;
+
+                sendJsonAsBuffer(sendTOTP);
+            }
+            else
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+            }
+            break;
+        }
+        case login_cmd::LOGIN_REMOVE_TOTP:
+        {
+            // Look up and validate account password
+            if (!validatePassword(username, password))
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+                return;
+            }
+
+            const auto secret       = otpHelpers::getAccountSecret(username, "TOTP");
+            const auto recoveryCode = otpHelpers::getAccountRecoveryCode(username, "TOTP");
+
+            // Perform case-insensitive comparison on the recovery code vs input otp
+            // use c_str() because that guarantees both have a null terminator (and thus are the same length)
+            if (otpHelpers::validateTOTP(otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
+            {
+                // validated
+                const auto rset = db::preparedStmt("DELETE FROM accounts_totp WHERE accounts_totp.accid = ? LIMIT 1", loginHelpers::getAccountId(username));
+
+                json sendSuccess;
+                sendSuccess["result"] = login_result::LOGIN_SUCCESS_REMOVE_TOTP;
+
+                sendJsonAsBuffer(sendSuccess);
+            }
+            else
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+            }
+            break;
+        }
+        case login_cmd::LOGIN_REGENERATE_RECOVERY:
+        {
+            // Look up and validate account password
+            if (!validatePassword(username, password))
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+                return;
+            }
+
+            const auto secret       = otpHelpers::getAccountSecret(username, "TOTP");
+            const auto recoveryCode = otpHelpers::getAccountRecoveryCode(username, "TOTP");
+
+            // Perform case-insensitive comparison on the recovery code vs input otp
+            // use c_str() because that guarantees both have a null terminator (and thus are the same length)
+            if (otpHelpers::validateTOTP(otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
+            {
+                const auto newRecoveryCode = otpHelpers::regenerateAccountRecoveryCode(username, "TOTP");
+
+                json sendTOTP;
+
+                sendTOTP["result"]        = login_result::LOGIN_SUCCESS_VERIFY_TOTP;
+                sendTOTP["recovery_code"] = newRecoveryCode;
+                sendJsonAsBuffer(sendTOTP);
+            }
+            else
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+            }
+            break;
+        }
+        case login_cmd::LOGIN_VERIFY_TOTP:
+        {
+            // Look up and validate account password
+            if (!validatePassword(username, password))
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+                return;
+            }
+
+            const auto secret = otpHelpers::getAccountSecret(username, "TOTP");
+
+            if (otpHelpers::validateTOTP(otp, secret))
+            {
+                // validated
+                const auto rset = db::preparedStmt("UPDATE accounts_totp SET validated = TRUE WHERE accid = ? LIMIT 1", loginHelpers::getAccountId(username));
+
+                json sendTOTP;
+                sendTOTP["result"]        = login_result::LOGIN_SUCCESS_VERIFY_TOTP;
+                sendTOTP["recovery_code"] = otpHelpers::getAccountRecoveryCode(username, "TOTP");
+                sendJsonAsBuffer(sendTOTP);
+            }
+            else
+            {
+                sendJsonOnlyErrorMessage("Failed to validate credentials");
+            }
+
+            break;
+        }
         default:
         {
             ShowErrorFmt("Unhandled auth code: {} from {}", code, ipAddress);
@@ -498,18 +562,61 @@ void auth_session::read_func()
 
 void auth_session::do_write(std::size_t length)
 {
-    // clang-format off
-    asio::async_write(socket_, asio::buffer(data_, length),
-    [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
+    asio::async_write(
+        socket_,
+        asio::buffer(buffer_.data(), length),
+        [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
+        {
+            if (!ec)
+            {
+                write_func();
+            }
+            else
+            {
+                ShowError(ec.message());
+            }
+        });
+}
+
+bool auth_session::validatePassword(std::string username, std::string password)
+{
+    auto passHash = [&]() -> std::string
     {
-        if (!ec)
+        const auto rset = db::preparedStmt("SELECT accounts.password FROM accounts WHERE accounts.login = ?", username);
+        if (rset && rset->rowsCount() != 0 && rset->next())
         {
-            write_func();
+            return rset->get<std::string>("password");
         }
-        else
+        return "";
+    }();
+
+    if (isBcryptHash(passHash))
+    {
+        // It's a BCrypt hash, so we can validate it.
+        if (!BCrypt::validatePassword(password, passHash))
         {
-            ShowError(ec.message());
+            return false;
         }
-    });
-    // clang-format on
+    }
+    else
+    {
+        // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
+        // and then update the password to a BCrypt hash.
+        const auto rset = db::preparedStmt("SELECT PASSWORD(?)", password);
+        if (rset && rset->rowsCount() != 0 && rset->next())
+        {
+            if (rset->get<std::string>(0) != passHash)
+            {
+                return false;
+            }
+
+            passHash = BCrypt::generateHash(password);
+            db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash, username);
+            if (!BCrypt::validatePassword(password, passHash))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }

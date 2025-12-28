@@ -1,10 +1,13 @@
 import mariadb
 
+
 def migration_name():
     return "Adding unique_event column to char_unlocks table"
 
+
 def check_preconditions(cur):
     return
+
 
 def needs_to_run(cur):
     # Ensure unique_event column exists in char_profile
@@ -14,6 +17,7 @@ def needs_to_run(cur):
         return False
 
     return True
+
 
 def migrate(cur, db):
     try:

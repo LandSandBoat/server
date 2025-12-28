@@ -12,7 +12,7 @@ local ID = zones[xi.zone.LUFAISE_MEADOWS]
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.spawnPoints =
 {
     [ID.mob.PADFOOT[1]] =
     {
@@ -285,10 +285,15 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    local mobID = mob:getID()
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints[mobID])
+    xi.mob.updateNMSpawnPoint(mob)
 
-    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_PADFOOD', function(mobArg, loot)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_PADFOOT', function(mobArg, loot)
         if mob:getID() == ID.mob.PADFOOT[GetServerVariable('realPadfoot')] then
             loot:addGroup(xi.drop_rate.GUARANTEED,
             {
@@ -312,12 +317,15 @@ entity.onMobDespawn = function(mob)
         local respawn = math.random(75600, 86400) -- 21-24 hours
 
         for _, v in pairs(ID.mob.PADFOOT) do
-            if v ~= mobId and GetMobByID(v):isSpawned() then
-                DespawnMob(v)
-            end
+            local padfootMob = GetMobByID(v)
+            if padfootMob then
+                if v ~= mobId and padfootMob:isSpawned() then
+                    DespawnMob(v)
+                end
 
-            xi.mob.updateNMSpawnPoint(GetMobByID(v), spawnPoints[v])
-            GetMobByID(v):setRespawnTime(respawn)
+                xi.mob.updateNMSpawnPoint(v)
+                padfootMob:setRespawnTime(respawn)
+            end
         end
 
         SetServerVariable('realPadfoot', math.random(1, 5))

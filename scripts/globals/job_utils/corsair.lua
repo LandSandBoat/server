@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/ability')
 require('scripts/globals/jobpoints')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -49,30 +48,6 @@ local corsairRollMods =
     [xi.jobAbility.COMPANIONS_ROLL ] = { {   1,   2,    3,   4,    5,    6,   7,    8,    9,   10,   11,   0 },  10,   0, xi.effect.COMPANIONS_ROLL,  nil,                            xi.job.NONE },
     [xi.jobAbility.AVENGERS_ROLL   ] = { {   2,   2,    3,  12,    4,    5,   6,    1,    7,    9,   18,   6 },   1,   0, xi.effect.AVENGERS_ROLL,    xi.mod.COUNTER,                 xi.job.NONE },
 }
-
--- Check for xi.mod.PHANTOM_ROLL Value and apply non-stack logic.
-local function phantombuffMultiple(caster)
-    local phantomValue = caster:getMod(xi.mod.PHANTOM_ROLL)
-    local phantomBuffMultiplier = 0
-
-    if phantomValue == 3 then
-        phantomBuffMultiplier = 3
-    elseif
-        phantomValue == 5 or
-        phantomValue == 8
-    then
-        phantomBuffMultiplier = 5
-    elseif
-        phantomValue == 7 or
-        phantomValue == 10 or
-        phantomValue == 12 or
-        phantomValue == 15
-    then
-        phantomBuffMultiplier = 7
-    end
-
-    return phantomBuffMultiplier
-end
 
 -- Sets local var if party contains specified job
 local function checkForJobBonus(caster, job)
@@ -142,9 +117,10 @@ local function corsairSetup(caster, ability, action, effect, job)
     local roll = math.random(1, 6)
 
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
-    caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE, xi.effect.DOUBLE_UP_CHANCE, roll, 0, 45, ability:getID(), effect, job, true)
+    caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE, xi.effect.DOUBLE_UP_CHANCE, roll, 0, 45, 0, effect, job, 0, xi.effectSourceType.CORSAIR_ROLL, ability:getID(), caster:getID(), true)
     caster:setLocalVar('corsairRollTotal', roll)
-    action:speceffect(caster:getID(), roll)
+    caster:setLocalVar('corsairDuEffect', effect)
+    action:info(caster:getID(), roll)
 
     local recastReduction = utils.clamp(caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST), 0, 45)
     local recastTime      = ability:getRecast()
@@ -180,7 +156,8 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
 
     -- Apply Additional Phantom Roll+ Buff
     local phantomBase = corsairRollMods[abilityId][2] -- Base increment buff
-    effectpower       = effectpower + (phantomBase * phantombuffMultiple(caster))
+    local phantomMult = caster:getMaxGearMod(xi.mod.PHANTOM_ROLL)
+    effectpower       = effectpower + (phantomBase * phantomMult)
 
     -- Effect Power varies depending on COR level (Main vs Sub)
     local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)
@@ -190,7 +167,8 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         effectpower = effectpower * actorLevel / targetLevel
     end
 
-    if not target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) then
+    caster:setLocalVar('corsairApplyingRoll', 1)
+    if not target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, corsairRollMods[abilityId][5], total, 0, xi.effectSourceType.CORSAIR_ROLL, caster:getID(), caster:getID()) then
         -- no effect or otherwise prevented
         if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
             currentAbility:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)    -- no effect for the COR rolling if they had the buff already
@@ -217,6 +195,8 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         end
     end
 
+    caster:setLocalVar('corsairApplyingRoll', 0)
+
     return total
 end
 
@@ -226,7 +206,7 @@ xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
         local roll = math.random(1, 6)
 
         caster:setLocalVar('corsairRollTotal', roll)
-        action:speceffect(caster:getID(), roll)
+        action:info(caster:getID(), roll)
     end
 
     local total = caster:getLocalVar('corsairRollTotal')
@@ -248,7 +228,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         local roll     = prevRoll:getSubPower()
         local job      = duEffect:getTier()
 
-        caster:setLocalVar('corsairActiveRoll', duEffect:getSubType())
+        caster:setLocalVar('corsairActiveRoll', duEffect:getSourceTypeParam())
 
         local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
 
@@ -274,7 +254,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         end
 
         caster:setLocalVar('corsairRollTotal', roll)
-        action:speceffect(caster:getID(), roll - prevRoll:getSubPower())
+        action:info(caster:getID(), roll - prevRoll:getSubPower())
         checkForJobBonus(caster, job)
     end
 
@@ -301,7 +281,7 @@ xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local roll = math.random(1, 6)
         caster:setLocalVar('corsairRollTotal', roll)
-        action:speceffect(caster:getID(), roll)
+        action:info(caster:getID(), roll)
     end
 
     local total = caster:getLocalVar('corsairRollTotal')
@@ -317,8 +297,6 @@ end
 xi.job_utils.corsair.onRollAbilityCheck = function(player, target, ability)
     local abilityId = ability:getID()
     local effectId  = corsairRollMods[abilityId][4]
-
-    ability:setRange(ability:getRange() + player:getMod(xi.mod.ROLL_RANGE))
 
     if player:hasStatusEffect(effectId) then
         return xi.msg.basic.ROLL_ALREADY_ACTIVE, 0
@@ -346,11 +324,23 @@ end
 
 -- Called by Double Up ability onAbilityCheck
 xi.job_utils.corsair.onDoubleUpAbilityCheck = function(player, target, ability)
-    ability:setRange(ability:getRange() + player:getMod(xi.mod.ROLL_RANGE))
-
     if not player:hasStatusEffect(xi.effect.DOUBLE_UP_CHANCE) then
         return xi.msg.basic.NO_ELIGIBLE_ROLL, 0
     else
         return 0, 0
+    end
+end
+
+xi.job_utils.corsair.onRollEffectLose = function(player, effect)
+    -- Ignore effect loss if COR is doubling up
+    if player:getLocalVar('corsairApplyingRoll') == 1 then
+        return
+    end
+
+    if player:hasStatusEffect(xi.effect.DOUBLE_UP_CHANCE) then
+        if player:getLocalVar('corsairDuEffect') == effect:getEffectType() then
+            player:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
+            player:setLocalVar('corsairDuEffect', 0)
+        end
     end
 end

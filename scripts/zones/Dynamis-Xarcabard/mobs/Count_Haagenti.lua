@@ -11,6 +11,10 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Haagentis_Avatar')
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

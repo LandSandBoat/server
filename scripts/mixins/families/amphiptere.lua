@@ -31,7 +31,7 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         if actionId == reavingWind then
             mobArg:setAnimationSub(2)
             -- Zirnitra spams a knockback while aura is active
-            mobArg:setLocalVar('auraEndTime', os.time() + 20)
+            mobArg:setLocalVar('auraEndTime', GetSystemTime() + 20)
         end
     end)
 
@@ -42,7 +42,7 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         if actionId == reavingWind then
             mobArg:useMobAbility(reavingWindKb)
         elseif actionId == reavingWindKb then
-            if os.time() >= mobArg:getLocalVar('auraEndTime') then
+            if GetSystemTime() >= mobArg:getLocalVar('auraEndTime') then
                 mobArg:setLocalVar('auraEndTime', 0)
                 mobArg:setAnimationSub(0)
             else

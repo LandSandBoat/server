@@ -1,10 +1,27 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0) -- QM moves every 10 minutes
+
+    -- Eba or Mahisha spawn on zone initialization
+    local mahisha = GetMobByID(ID.mob.MAHISHA)
+    local eba     = GetMobByID(ID.mob.EBA)
+
+    if mahisha and eba then
+        if math.random(1, 100) <= 50 then
+            DisallowRespawn(eba:getID(), true)
+            mahisha:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        else
+            DisallowRespawn(mahisha:getID(), true)
+            eba:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        end
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -26,6 +43,10 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
+    -- ZONE WIDE LEVEL RESTRICTION
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 40, 0, 0)
+    end
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

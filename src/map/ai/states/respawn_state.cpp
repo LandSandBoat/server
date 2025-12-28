@@ -24,19 +24,19 @@
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
 
-CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
+CRespawnState::CRespawnState(CBaseEntity* _PEntity, timer::duration spawnTime)
 : CState(_PEntity, _PEntity->targid)
 , m_spawnTime(spawnTime)
 {
 }
 
-bool CRespawnState::Update(time_point tick)
+bool CRespawnState::Update(timer::time_point tick)
 {
     // make sure that the respawn time is up to date
     auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
-        if (!PMob->m_AllowRespawn)
+        if ((!WasExitDelayed() && !PMob->m_AllowRespawn) || (PMob->m_spawnGroup && !PMob->CanSpawnFromGroup()))
         {
             if (m_spawnTime > 0s)
             {
@@ -45,21 +45,33 @@ bool CRespawnState::Update(time_point tick)
         }
         else
         {
-            if (std::chrono::milliseconds(PMob->m_RespawnTime) != m_spawnTime)
+            if (PMob->m_RespawnTime != m_spawnTime)
             {
-                m_spawnTime = std::chrono::milliseconds(PMob->m_RespawnTime);
+                m_spawnTime = PMob->m_RespawnTime;
             }
         }
     }
     if (m_spawnTime > 0s && tick > GetEntryTime() + m_spawnTime)
     {
+        // Delay spawn if PMob's lua decides it needs to be
+        if (PMob)
+        {
+            int32 spawnCheckResult = luautils::OnMobSpawnCheck(PMob);
+            if (spawnCheckResult > 0)
+            {
+                DelayExitTime(std::chrono::seconds(spawnCheckResult));
+
+                return false;
+            }
+        }
+
         m_PEntity->Spawn();
         return true;
     }
     return false;
 }
 
-void CRespawnState::Cleanup(time_point tick)
+void CRespawnState::Cleanup(timer::time_point tick)
 {
 }
 

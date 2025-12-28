@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRD
 
 quest.reward =
 {
-    item  = xi.item.ICARUS_WING,
+    item = xi.item.ICARUS_WING,
 }
 
 -- NOTE: For fishing up the required Key Items, capture was accomplished with 0 skill, and the
@@ -152,7 +152,9 @@ quest.sections =
                 -- is set to a very high level.
 
                 onMobDeath = function(mob, player, optParams)
-                    quest:setVar(player, 'Prog', 7)
+                    if quest:getVar(player, 'Prog') == 6 then
+                        quest:setVar(player, 'Prog', 7)
+                    end
                 end,
             },
 

@@ -27,31 +27,27 @@
 #include "ai/ai_container.h"
 #include "ai/controllers/player_controller.h"
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 namespace jailutils
 {
-    bool InPrison(CCharEntity* PChar)
-    {
-        TracyZoneScoped;
-        return PChar->m_GMlevel == 0 && PChar->getZone() == ZONE_MORDION_GAOL;
-    }
 
-    void Add(CCharEntity* PChar)
-    {
-        PChar->PAI->SetController(nullptr);
+auto InPrison(const CCharEntity* PChar) -> bool
+{
+    TracyZoneScoped;
+    return PChar->m_GMlevel == 0 && PChar->getZone() == ZONE_MORDION_GAOL;
+}
 
-        // TODO:
-    }
+void Add(CCharEntity* PChar)
+{
+    PChar->PAI->SetController(nullptr);
 
-    void Del(CCharEntity* PChar)
-    {
-        PChar->PAI->SetController(std::make_unique<CPlayerController>(PChar));
+    // TODO:
+}
 
-        // TODO:
-    }
+void Del(CCharEntity* PChar)
+{
+    PChar->PAI->SetController(std::make_unique<CPlayerController>(PChar));
+
+    // TODO:
+}
+
 }; // namespace jailutils

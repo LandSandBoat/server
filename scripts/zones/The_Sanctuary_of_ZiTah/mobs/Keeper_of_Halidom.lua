@@ -2,10 +2,17 @@
 -- Area: The Sanctuary of ZiTah
 --   NM: Keeper of Halidom
 -----------------------------------
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.phList =
+{
+    [ID.mob.KEEPER_OF_HALIDOM - 1] = ID.mob.KEEPER_OF_HALIDOM, -- 319.939 -0.037 187.231
+}
+
+entity.spawnPoints =
 {
     { x = 312.000, y = -0.500, z = 159.000 },
     { x = 352.304, y =  0.183, z = 198.403 },
@@ -16,7 +23,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -25,7 +32,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

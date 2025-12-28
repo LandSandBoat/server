@@ -26,6 +26,7 @@
 #include "common/ipp.h"
 #include "common/logging.h"
 
+#include <ranges>
 #include <set>
 #include <unordered_map>
 #include <vector>
@@ -46,19 +47,19 @@ public:
         const auto rset = db::preparedStmt("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings");
         if (!rset)
         {
-            ShowCritical("Error loading zone settings from DB");
+            ShowCriticalFmt("Error loading zone settings from DB");
             throw std::runtime_error("Message Server: Failed to load zone settings from database");
         }
 
         // Keep track of the zones, as well as a list of unique ip / port combinations.
         std::set<IPP> mapEndpointSet;
         std::set<IPP> yellMapEndpointSet;
+        std::set<IPP> assistMapEndpointSet;
 
         while (rset->next())
         {
-            uint64 ip = 0;
-            inet_pton(AF_INET, rset->get<std::string>("zoneip").c_str(), &ip);
-            uint64 port = rset->get<uint64>("zoneport");
+            const uint64 ip   = str2ip(rset->get<std::string>("zoneip"));
+            const uint64 port = rset->get<uint64>("zoneport");
 
             ZoneSettingsEntry zone_settings{};
             zone_settings.zoneid = rset->get<uint16>("zoneid");
@@ -72,11 +73,17 @@ public:
                 yellMapEndpointSet.insert(zone_settings.ipp);
             }
 
+            if (zone_settings.misc & ZONEMISC::MISC_ASSIST)
+            {
+                assistMapEndpointSet.insert(zone_settings.ipp);
+            }
+
             zoneSettingsMap_[zone_settings.zoneid] = zone_settings;
         }
 
-        std::copy(mapEndpointSet.begin(), mapEndpointSet.end(), std::back_inserter(mapEndpoints_));
-        std::copy(yellMapEndpointSet.begin(), yellMapEndpointSet.end(), std::back_inserter(yellMapEndpoints_));
+        std::ranges::copy(mapEndpointSet, std::back_inserter(mapEndpoints_));
+        std::ranges::copy(yellMapEndpointSet, std::back_inserter(yellMapEndpoints_));
+        std::ranges::copy(assistMapEndpointSet, std::back_inserter(assistMapEndpoints_));
     }
 
     // TODO: Properly encapsulate this
@@ -84,4 +91,5 @@ public:
     std::unordered_map<uint16, ZoneSettingsEntry> zoneSettingsMap_;
     std::vector<IPP>                              mapEndpoints_;
     std::vector<IPP>                              yellMapEndpoints_;
+    std::vector<IPP>                              assistMapEndpoints_;
 };

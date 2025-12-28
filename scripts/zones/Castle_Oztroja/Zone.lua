@@ -2,15 +2,11 @@
 -- Zone: Castle_Oztroja (151)
 -----------------------------------
 local oztrojaGlobal = require('scripts/zones/Castle_Oztroja/globals')
-local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.YAGUDO_AVATAR)
-    GetMobByID(ID.mob.YAGUDO_AVATAR):setRespawnTime(math.random(900, 10800))
-
     oztrojaGlobal.pickNewCombo() -- update combination for brass door on floor 2
     oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
 
@@ -38,14 +34,9 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onGameHour = function(zone)
-    local vanadielHour = VanadielHour()
-
-    -- every game day
-    if vanadielHour % 24 == 0 then
-        oztrojaGlobal.pickNewCombo() -- update combination for brass door on floor 2
-        oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
-    end
+zoneObject.onGameDay = function()
+    oztrojaGlobal.pickNewCombo()    -- update combination for brass door on floor 2
+    oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

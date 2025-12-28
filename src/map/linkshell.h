@@ -27,6 +27,7 @@
 
 #include <vector>
 
+enum class GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL : uint8_t;
 class CBasicPacket;
 class CCharEntity;
 class CItemLinkshell;
@@ -44,10 +45,10 @@ public:
 
     uint32 getID() const;
     uint16 getColor() const;
-    uint8  getPostRights();
+    auto   getPostRights() const -> GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL;
 
     void setColor(uint16 color);
-    void setPostRights(uint8 postrights);
+    void setPostRights(GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -57,14 +58,14 @@ public:
     bool DelMember(CCharEntity* PChar);
 
     void BreakLinkshell();
-    void RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell = false);
-    void ChangeMemberRank(const std::string& MemberName, uint8 toSack);
+    void RemoveMemberByName(const std::string& MemberName, uint8 requesterRank, bool breakLinkshell = false);
+    void ChangeMemberRank(const std::string& MemberName, uint8 requesterRank, uint8 newRank);
 
     void PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>& packet);
     void PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot);
 
-    std::vector<CCharEntity*> members;
-    uint8                     m_postRights;
+    std::vector<CCharEntity*>           members;
+    GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL m_postRights;
 
 private:
     uint32 m_id;
@@ -75,14 +76,16 @@ private:
 
 namespace linkshell
 {
-    CLinkshell* LoadLinkshell(uint32 id);
-    void        UnloadLinkshell(uint32 id);
 
-    bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
-    bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
+auto LoadLinkshell(uint32 id) -> CLinkshell*;
+void UnloadLinkshell(uint32 id);
 
-    uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
-    CLinkshell* GetLinkshell(uint32 id);
+bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
+bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
+
+uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
+CLinkshell* GetLinkshell(uint32 id);
+
 }; // namespace linkshell
 
 #endif

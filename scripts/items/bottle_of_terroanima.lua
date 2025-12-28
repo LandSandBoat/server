@@ -22,7 +22,7 @@ end
 
 itemObject.onItemUse = function(target, player)
     local duration = math.random(25, 32) -- Random duration between 25s and 32s
-    target:setLocalVar('EmptyTerror', os.time()) -- Sets terror start time.
+    target:setLocalVar('EmptyTerror', GetSystemTime()) -- Sets terror start time.
     target:setLocalVar('EmptyTerrorDuration', duration) -- Sets terror duration.
 end
 

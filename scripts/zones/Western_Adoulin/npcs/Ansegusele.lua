@@ -14,13 +14,13 @@ entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.ANSEGUSELE_SHOP_TEXT)
     local stock =
     {
-        4363, 44, -- Faerie Apple
-        4388, 44, -- Eggplant
-        4444, 24, -- Rarab Tail
-        619, 48, -- Popoto
-        4468, 80, -- Pamamas
-        4389, 32, -- San D'Or. Carrot
-        630, 96, -- Ogre Pumpkin
+        { 4363, 44, }, -- Faerie Apple
+        { 4388, 44, }, -- Eggplant
+        { 4444, 24, }, -- Rarab Tail
+        {  619, 48, }, -- Popoto
+        { 4468, 80, }, -- Pamamas
+        { 4389, 32, }, -- San D'Or. Carrot
+        {  630, 96, }, -- Ogre Pumpkin
     }
     xi.shop.general(player, stock)
 end

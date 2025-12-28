@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.SERENADE
+-- Notes: May be related to Devotee Serenade (Currently unobtainable BRD Song)
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

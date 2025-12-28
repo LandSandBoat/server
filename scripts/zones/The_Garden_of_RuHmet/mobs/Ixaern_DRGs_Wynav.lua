@@ -2,6 +2,8 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -10,42 +12,39 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('hpTrigger', math.random(10, 75))
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.BIND)
+
+    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.jsa.SOUL_VOICE, hpp = math.random(10, 75) } } })
 end
 
-entity.onMobFight = function(mob, target)
-    local hpTrigger = mob:getLocalVar('hpTrigger')
-    if mob:getLocalVar('SoulVoice') == 0 and mob:getHPP() <= hpTrigger then
-        mob:setLocalVar('SoulVoice', 1)
-        mob:useMobAbility(696) -- Soul Voice
-    end
-end
-
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [1] = 382,
-        [2] = 376,
-        [3] = 372,
-        [4] = 392,
-        [5] = 397,
-        [6] = 400,
-        [7] = 422,
-        [8] = 462,
-        [9] = 466 -- Virelai (charm)
+        xi.magic.spell.ARMYS_PAEON_V,
+        xi.magic.spell.HORDE_LULLABY,
+        xi.magic.spell.FOE_REQUIEM_V,
+        xi.magic.spell.KNIGHTS_MINNE_IV,
+        xi.magic.spell.VALOR_MINUET_IV,
+        xi.magic.spell.BLADE_MADRIGAL,
+        xi.magic.spell.CARNAGE_ELEGY,
+        xi.magic.spell.MAGIC_FINALE,
     }
+
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
-        return spellList[math.random(1, 9)] -- Virelai possible.
-    else
-        return spellList[math.random(1, 8)] -- No Virelai!
+        -- Virelai possible.
+        table.insert(spellList, xi.magic.spell.MAIDENS_VIRELAI)
     end
+
+    return utils.randomEntry(spellList)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar('repop', mob:getBattleTime()) -- This get erased on respawn automatic.
+    mob:setLocalVar('repop', GetSystemTime() + 10)
 end
 
 return entity

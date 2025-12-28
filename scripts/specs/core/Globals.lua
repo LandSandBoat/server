@@ -165,7 +165,32 @@ end
 
 ---@nodiscard
 ---@return integer
-function JstWeekday()
+function JstDayOfTheYear()
+end
+
+---@nodiscard
+---@return integer
+function JstDayOfTheMonth()
+end
+
+---@nodiscard
+---@return integer
+function JstDayOfTheWeek()
+end
+
+---@nodiscard
+---@return integer
+function JstYear()
+end
+
+---@nodiscard
+---@return integer
+function JstMonth()
+end
+
+---@nodiscard
+---@return integer
+function JstHour()
 end
 
 ---@nodiscard
@@ -264,22 +289,6 @@ end
 function VanadielRSELocation()
 end
 
----@nodiscard
----@param offset integer
----@return boolean
-function SetVanadielTimeOffset(offset)
-end
-
----@nodiscard
----@return boolean
-function IsMoonNew()
-end
-
----@nodiscard
----@return boolean
-function IsMoonFull()
-end
-
 ---@param ElevatorID integer
 ---@return nil
 function RunElevator(ElevatorID)
@@ -359,11 +368,6 @@ end
 ---@param allowRespawn boolean
 ---@return nil
 function DisallowRespawn(mobid, allowRespawn)
-end
-
----@param mobid integer
----@return nil
-function UpdateNMSpawnPoint(mobid)
 end
 
 ---@nodiscard

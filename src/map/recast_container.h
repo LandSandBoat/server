@@ -23,6 +23,9 @@
 #define _RECASTCONTAINER_H
 
 #include "common/cbasetypes.h"
+#include "common/timer.h"
+#include "enums/loot_recast.h"
+#include "enums/recast.h"
 
 #include <vector>
 
@@ -37,11 +40,11 @@ enum RECASTTYPE
 
 struct Recast_t
 {
-    uint16 ID;
-    time_t TimeStamp;
-    uint32 RecastTime;
-    uint32 chargeTime;
-    uint8  maxCharges;
+    Recast            ID;
+    timer::time_point TimeStamp;
+    timer::duration   RecastTime;
+    timer::duration   chargeTime;
+    uint8             maxCharges;
 };
 
 /************************************************************************
@@ -60,19 +63,22 @@ public:
     virtual void Check();
 
     virtual void Del(RECASTTYPE type);
-    virtual void Del(RECASTTYPE type, uint16 id);
+    virtual void Del(RECASTTYPE type, Recast id);
     virtual void DeleteByIndex(RECASTTYPE type, uint8 index);
-    bool         Has(RECASTTYPE type, uint16 id);
-    bool         HasRecast(RECASTTYPE type, uint16 id, uint32 recast);
-    virtual void Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
-    Recast_t*    Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
+    bool         Has(RECASTTYPE type, Recast id);
+    bool         HasLootRecast(LootRecastID id);
+    bool         HasRecast(RECASTTYPE type, Recast id, timer::duration recast);
+    virtual void Add(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
+    void         AddLootRecast(LootRecastID id, timer::duration duration);
+    Recast_t*    Load(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
     virtual void ResetAbilities();
     virtual void ChangeJob()
     {
     }
 
     virtual RecastList_t* GetRecastList(RECASTTYPE type);
-    Recast_t*             GetRecast(RECASTTYPE type, uint16 id);
+    Recast_t*             GetRecast(RECASTTYPE type, Recast id);
+    Recast_t*             GetLootRecast(LootRecastID id);
 
     CRecastContainer(CBattleEntity* PChar);
     virtual ~CRecastContainer()

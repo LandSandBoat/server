@@ -2,7 +2,7 @@
 -- Tigers Teeth
 -----------------------------------
 -- LogID: 0 QuestID: 23
--- Taukila : !pos -140 -6 -8 230
+-- Taumila : !pos -140 -6 -8 230
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGERS_TEETH)
@@ -48,7 +48,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { { xi.item.BLACK_TIGER_FANG, 3 } }) then
                         return quest:progressEvent(572)
-                    elseif npcUtil.tradeHas(trade, xi.item.BLACK_TIGER_FANG) then
+                    else
                         return quest:event(573)
                     end
                 end,
@@ -79,7 +79,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, { { xi.item.BLACK_TIGER_FANG, 3 } }) then
                         quest:setLocalVar(player, 'Option', 1)
                         return quest:progressEvent(572)
-                    elseif npcUtil.tradeHas(trade, xi.item.BLACK_TIGER_FANG) then
+                    else
                         return quest:event(573)
                     end
                 end,

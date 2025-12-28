@@ -1,11 +1,6 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
-require('scripts/globals/combat/element_tables')
-require('scripts/globals/combat/level_correction')
-require('scripts/globals/combat/skill_ranks')
-require('scripts/globals/combat/status_effect_tables')
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
@@ -41,11 +36,11 @@ local function magicAccuracyFromSkill(actor, skillType, skillRank)
 
     -- Made for bolts. Will probably see other uses.
     elseif skillRank > 0 then
-        magicAcc = xi.combat.skillLevel.getSkillCap(actor:getMainLvl(), skillRank)
+        magicAcc = xi.data.skillLevel.getSkillCap(actor:getMainLvl(), skillRank)
 
     -- For mob skills / additional effects which don't have a skill.
     else
-        magicAcc = xi.combat.skillLevel.getSkillCap(actor:getMainLvl(), xi.skillRank.A_PLUS)
+        magicAcc = xi.data.skillLevel.getSkillCap(actor:getMainLvl(), xi.skillRank.A_PLUS)
     end
 
     return magicAcc
@@ -56,7 +51,7 @@ local function magicAccuracyFromElement(actor, actionElement)
     local magicAcc = 0
 
     if actionElement > xi.element.NONE then
-        magicAcc = actor:getMod(xi.combat.element.getElementalMACCModifier(actionElement)) + actor:getMod(xi.combat.element.getElementalAffinityMACCModifier(actionElement)) * 10
+        magicAcc = actor:getMod(xi.data.element.getElementalMACCModifier(actionElement)) + actor:getMod(xi.data.element.getElementalStaffModifier(actionElement)) * 10
     end
 
     return magicAcc
@@ -112,7 +107,7 @@ local function magicAccuracyFromStatusEffects(actor, spellGroup, skillType, acti
     if
         actor:hasStatusEffect(xi.effect.KLIMAFORM) and
         actionElement > 0 and
-        (actorWeather == xi.combat.element.getAssociatedSingleWeather(actionElement) or actorWeather == xi.combat.element.getAssociatedDoubleWeather(actionElement))
+        (actorWeather == xi.data.element.getAssociatedSingleWeather(actionElement) or actorWeather == xi.data.element.getAssociatedDoubleWeather(actionElement))
     then
         magicAcc = magicAcc + 15
     end
@@ -166,7 +161,7 @@ local function magicAccuracyFromMerits(actor, skillType, actionElement)
                 actionElement >= xi.element.FIRE and
                 actionElement <= xi.element.WATER
             then
-                magicAcc = actor:getMerit(xi.combat.element.getElementalAccuracyMerit(actionElement))
+                magicAcc = actor:getMerit(xi.data.element.getElementalAccuracyMerit(actionElement))
             end
 
             -- Category 2
@@ -267,22 +262,53 @@ local function magicAccuracyFromMagicBurst(target, actionElement, statUsed)
     return magicAcc
 end
 
--- Magic Accuracy from Day's Element.
-local function magicAccuracyFromDayElement(actor, actionElement)
+-- Magic Accuracy from Day and Weather Element.
+local function magicAccuracyFromDayWeatherElement(actor, actionElement)
     local magicAcc = 0
 
-    if
-        actionElement ~= xi.element.NONE and
-        (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.getForcedDayOrWeatherBonusModifier(actionElement)) >= 1)
-    then
-        local dayElement = VanadielDayElement()
+    -- Early return: Invalid element.
+    if actionElement <= xi.element.NONE then
+        return magicAcc
+    end
 
-        -- Strong day.
+    -- Define what to apply.
+    local applyBonuses   = false
+    local applyPenalties = false
+
+    if
+        math.random(1, 100) <= 33 or                     -- Random. Applies to both bonuses and penalties.
+        actor:getMod(xi.mod.FORCE_DW_BONUS_PENALTY) >= 1 -- Hachirin-no-Obi forces both bonuses and penalties.
+    then
+        applyBonuses   = true
+        applyPenalties = true
+    elseif actor:getMod(xi.data.element.getForcedDayOrWeatherBonusModifier(actionElement)) >= 1 then -- Elemental Obis only force bonuses, not penalties.
+        applyBonuses = true
+    end
+
+    -- Calculate bonuses/penalties.
+    local dayElement   = VanadielDayElement()
+    local actorWeather = actor:getWeather()
+
+    if applyBonuses then
+        if actorWeather == xi.data.element.getAssociatedSingleWeather(actionElement) then
+            magicAcc = magicAcc + 5 + actor:getMod(xi.mod.IRIDESCENCE) * 5
+        elseif actorWeather == xi.data.element.getAssociatedDoubleWeather(actionElement) then
+            magicAcc = magicAcc + 10 + actor:getMod(xi.mod.IRIDESCENCE) * 5
+        end
+
         if dayElement == actionElement then
             magicAcc = magicAcc + 5
+        end
+    end
 
-        -- Weak day.
-        elseif dayElement == xi.combat.element.getOppositeElement(actionElement) then
+    if applyPenalties then
+        if actorWeather == xi.data.element.getOppositeSingleWeather(actionElement) then
+            magicAcc = magicAcc - 5 - actor:getMod(xi.mod.IRIDESCENCE) * 5
+        elseif actorWeather == xi.data.element.getOppositeDoubleWeather(actionElement) then
+            magicAcc = magicAcc - 10 - actor:getMod(xi.mod.IRIDESCENCE) * 5
+        end
+
+        if dayElement == xi.data.element.getElementWeakness(actionElement) then
             magicAcc = magicAcc - 5
         end
     end
@@ -290,28 +316,15 @@ local function magicAccuracyFromDayElement(actor, actionElement)
     return magicAcc
 end
 
--- Magic Accuracy from Weather's Element.
-local function magicAccuracyFromWeatherElement(actor, actionElement)
+-- Magic Accuracy from Tandem Strike (BST trait).
+local function magicAccuracyFromTandemStrike(actor)
     local magicAcc = 0
 
-    -- Calculate if weather bonus triggers.
-    if
-        actionElement ~= xi.element.NONE and
-        (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.getForcedDayOrWeatherBonusModifier(actionElement)) >= 1)
-    then
-        local actorWeather = actor:getWeather()
-
-        -- Strong weathers.
-        if actorWeather == xi.combat.element.getAssociatedSingleWeather(actionElement) then
-            magicAcc = magicAcc + actor:getMod(xi.mod.IRIDESCENCE) * 5 + 5
-        elseif actorWeather == xi.combat.element.getAssociatedDoubleWeather(actionElement) then
-            magicAcc = magicAcc + actor:getMod(xi.mod.IRIDESCENCE) * 5 + 10
-
-        -- Weak weathers.
-        elseif actorWeather == xi.combat.element.getOppositeSingleWeather(actionElement) then
-            magicAcc = magicAcc - actor:getMod(xi.mod.IRIDESCENCE) * 5 - 5
-        elseif actorWeather == xi.combat.element.getOppositeDoubleWeather(actionElement) then
-            magicAcc = magicAcc - actor:getMod(xi.mod.IRIDESCENCE) * 5 - 10
+    if actor:isTandemActive() then
+        if actor:getMaster() ~= nil and actor:getMaster():isPC() then
+            magicAcc = actor:getMaster():getMod(xi.mod.TANDEM_STRIKE_POWER)
+        else
+            magicAcc = actor:getMod(xi.mod.TANDEM_STRIKE_POWER)
         end
     end
 
@@ -359,23 +372,23 @@ end
 xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
     local finalMagicAcc = 0
 
-    local magicAccBase      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
-    local magicAccSkill     = magicAccuracyFromSkill(actor, skillType, skillRank)
-    local magicAccElement   = magicAccuracyFromElement(actor, actionElement)
-    local magicAccStatDiff  = magicAccuracyFromStatDifference(actor, target, statUsed)
-    local magicAccEffects   = magicAccuracyFromStatusEffects(actor, spellGroup, skillType, actionElement)
-    local magicAccMerits    = magicAccuracyFromMerits(actor, skillType, actionElement)
-    local magicAccJobPoints = magicAccuracyFromJobPoints(actor, spellGroup, skillType)
-    local magicAccBurst     = magicAccuracyFromMagicBurst(target, actionElement, statUsed)
-    local magicAccDay       = magicAccuracyFromDayElement(actor, actionElement)
-    local magicAccWeather   = magicAccuracyFromWeatherElement(actor, actionElement)
+    local magicAccBase       = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN)
+    local magicAccSkill      = magicAccuracyFromSkill(actor, skillType, skillRank)
+    local magicAccElement    = magicAccuracyFromElement(actor, actionElement)
+    local magicAccStatDiff   = magicAccuracyFromStatDifference(actor, target, statUsed)
+    local magicAccEffects    = magicAccuracyFromStatusEffects(actor, spellGroup, skillType, actionElement)
+    local magicAccMerits     = magicAccuracyFromMerits(actor, skillType, actionElement)
+    local magicAccJobPoints  = magicAccuracyFromJobPoints(actor, spellGroup, skillType)
+    local magicAccBurst      = magicAccuracyFromMagicBurst(target, actionElement, statUsed)
+    local magicAccDayWeather = magicAccuracyFromDayWeatherElement(actor, actionElement)
+    local magicAccTandem     = magicAccuracyFromTandemStrike(actor)
 
     -- Multipliers
     local magicAccFoodFactor      = magicAccuracyFromFoodMultiplier(actor)
     local magicAccSoulVoiceFactor = magicAccuracyFromSoulVoiceMultiplier(actor, skillType, effectId)
 
     -- Add up food magic accuracy.
-    finalMagicAcc = magicAccBase + magicAccSkill + magicAccElement + magicAccStatDiff + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccBurst + magicAccDay + magicAccWeather + bonusMacc
+    finalMagicAcc = magicAccBase + magicAccSkill + magicAccElement + magicAccStatDiff + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccBurst + magicAccDayWeather + magicAccTandem + bonusMacc
     finalMagicAcc = math.floor(finalMagicAcc * magicAccFoodFactor * magicAccSoulVoiceFactor)
 
     return finalMagicAcc
@@ -404,36 +417,29 @@ local resistRankMultiplier =
     [11] = 2.35,  -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
 }
 
-xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, actionElement, magicEvasionModifier, rankModifier)
-    local magicEva   = target:getMod(xi.mod.MEVA) -- Base MACC.
-    local resistRank = 0 -- Elemental specific Resistance rank. Acts as multiplier to base MACC.
-    local resMod     = 0 -- Elemental specific magic evasion. Acts as a additive bonus to base MACC after affected by resistance rank.
+xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, actionElement, effectId, resistanceRank)
+    local magicEva = target:getMod(xi.mod.MEVA) -- Base MACC.
 
-    -- Elemental magic evasion.
+    -- Elemental magic evasion. All actions and effects have an associated element.
     if actionElement ~= xi.element.NONE then
-        -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
-        resMod     = target:getMod(xi.combat.element.getElementalMEVAModifier(actionElement))
-        resistRank = utils.clamp(target:getMod(xi.combat.element.getElementalResistanceRankModifier(actionElement)), -3, 11)
-
-        if resistRank > 4 then
-            resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
-        end
-
-        magicEva = math.floor(magicEva * resistRankMultiplier[resistRank]) + resMod
+        magicEva = magicEva + target:getMod(xi.data.element.getElementalMEVAModifier(actionElement))
     end
 
     -- Magic evasion against specific status effects.
-    if magicEvasionModifier > 0 then
-        magicEva = magicEva + target:getMod(magicEvasionModifier) + target:getMod(xi.mod.STATUS_MEVA)
+    if effectId > 0 then
+        magicEva = magicEva + target:getMod(xi.data.statusEffect.getAssociatedMagicEvasionModifier(effectId)) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
     -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
     if
         not target:isPC() and
-        xi.combat.levelCorrection.isLevelCorrectedZone(actor)
+        xi.data.levelCorrection.isLevelCorrectedZone(actor)
     then
         magicEva = magicEva + utils.clamp(target:getMainLvl() - actor:getMainLvl(), 0, 100) * 4
     end
+
+    -- Apply resistance rank multiplier.
+    magicEva = math.floor(magicEva * resistRankMultiplier[resistanceRank])
 
     return magicEva
 end
@@ -458,7 +464,7 @@ end
 -- Calculate resist tier.
 -----------------------------------
 
-xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actionElement, magicHitRate, rankModifier)
+xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actionElement, magicHitRate, resistanceRank)
     local targetResistRate = 1 -- The variable we return.
 
     ----------------------------------------
@@ -480,25 +486,16 @@ xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actio
     end
 
     ----------------------------------------
-    -- Handle target resistance rank.
-    ----------------------------------------
-    local targetResistRank = target:getMod(xi.combat.element.getElementalResistanceRankModifier(actionElement)) or 0
-
-    if targetResistRank > 4 then
-        targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
-    end
-
-    ----------------------------------------
     -- Force 1/8 if target has max resistance rank.
     ----------------------------------------
-    if targetResistRank >= 11 then
+    if resistanceRank >= 11 then
         return 0.0625
     end
 
     ----------------------------------------
     -- Handle magic hit rate.
     ----------------------------------------
-    if targetResistRank >= 10 then
+    if resistanceRank >= 10 then
         magicHitRate = 0.05
     end
 
@@ -511,7 +508,7 @@ xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actio
 
     -- Players: Affected by element shown in equipment screen.
     if target:isPC() then
-        local playerElementalEvasion = target:getMod(xi.combat.element.getElementalMEVAModifier(actionElement)) or 0
+        local playerElementalEvasion = target:getMod(xi.data.element.getElementalMEVAModifier(actionElement)) or 0
 
         if playerElementalEvasion < 0 then
             maxResistTier = 1
@@ -521,7 +518,7 @@ xi.combat.magicHitRate.calculateResistanceFactor = function(actor, target, actio
 
     -- Non-players: Affected by resistance rank.
     else
-        if targetResistRank <= -3 then
+        if resistanceRank <= -3 then
             maxResistTier = 1
         end
     end
@@ -550,20 +547,53 @@ end
 -----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
-    local magicEvasionModifier = 0
-    local rankModifier         = 0
+    -- Early return: Something went really wrong.
+    if
+        not actor or
+        not target
+    then
+        return 0
+    end
 
-    -- Prepare parameters
-    if effectId and effectId > 0 then
-        magicEvasionModifier = xi.combat.statusEffect.getAssociatedMagicEvasionModifier(effectId)
-        rankModifier         = target:getMod(xi.combat.statusEffect.getAssociatedImmunobreakModifier(effectId))
+    -- Parameter validation.
+    spellGroup    = utils.defaultIfNil(spellGroup, 0)
+    skillType     = utils.defaultIfNil(skillType, 0)
+    skillRank     = utils.defaultIfNil(skillRank, 0)
+    actionElement = utils.defaultIfNil(actionElement, 0)
+    statUsed      = utils.defaultIfNil(statUsed, 0)
+    effectId      = utils.defaultIfNil(effectId, 0)
+    bonusMacc     = utils.defaultIfNil(bonusMacc, 0)
+
+    -- Decide which resistance rank modifier to use:
+    -- 1: If an effect exists, check if said effect has a specialized resistance rank.
+    -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
+    local resistanceRank    = 0 -- Specific Resistance rank value.
+    local resistanceRankMod = 0 -- Modifier ID of the resistance rank to use.
+
+    if not target:isPC() then
+        if effectId > 0 then -- Check if it's an effect.
+            resistanceRankMod = xi.data.statusEffect.getAssociatedResistanceRankModifier(effectId, actionElement)
+        end
+
+        if resistanceRankMod == 0 then -- If it's an effect and this is 0, try with element.
+            resistanceRankMod = xi.data.element.getElementalResistanceRankModifier(actionElement)
+        end
+
+        -- Fetch resistance rank and apply possible modifiers to it.
+        resistanceRank = target:getMod(resistanceRankMod)
+
+        if effectId > 0 then
+            resistanceRank = resistanceRank - target:getMod(xi.data.statusEffect.getAssociatedImmunobreakModifier(effectId)) -- Apply immunobreak modification.
+        end
+
+        resistanceRank = utils.clamp(resistanceRank, -3, 11)
     end
 
     -- Get Actor Magic Accuracy and target Magic Evasion
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
-    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, actionElement, magicEvasionModifier, rankModifier)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, actionElement, effectId, resistanceRank)
     local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
-    local resistRate   = xi.combat.magicHitRate.calculateResistanceFactor(actor, target, actionElement, magicHitRate, rankModifier)
+    local resistRate   = xi.combat.magicHitRate.calculateResistanceFactor(actor, target, actionElement, magicHitRate, resistanceRank)
 
     return resistRate
 end

@@ -9,15 +9,14 @@ local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 ---@type TMobEntity
 local entity = {}
 
-local bloodtearPHTable =
+entity.phList =
 {
-    [ID.mob.BATTERING_RAM[1]]  = ID.mob.BLOODTEAR, -- -372 -16 -6
-    [ID.mob.BATTERING_RAM[2]]  = ID.mob.BLOODTEAR, -- -117 -1 -136
-    [ID.mob.LUMBERING_LAMBERT] = ID.mob.BLOODTEAR, -- -216 -8 -107
-    [ID.mob.BLOODTEAR]         = ID.mob.LUMBERING_LAMBERT, -- Bloodtear can't spawn if Lumbering is up
+    [ID.mob.BATTERING_RAM[1]]  = ID.mob.LUMBERING_LAMBERT, -- -372 -16 -6
+    [ID.mob.BATTERING_RAM[2]]  = ID.mob.LUMBERING_LAMBERT, -- -117 -1 -136
+    [ID.mob.LUMBERING_LAMBERT] = ID.mob.BLOODTEAR, -- Lumbering can't spawn if Bloodtear is up
 }
 
-local bloodtearSpawnPoints =
+entity.spawnPoints =
 {
     { x = 79.000,   y = 8.000,   z = -241.000 },
     { x = 159.000,  y = 7.000,   z = -216.000 },
@@ -41,9 +40,11 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local params = { }
-    params.spawnPoints = bloodtearSpawnPoints
-    xi.mob.phOnDespawn(mob, bloodtearPHTable, 10, 75600, params) -- 21 hours
+    local params =
+    {
+        doNotEnablePhSpawn = true,
+    }
+    xi.mob.phOnDespawn(mob, ID.mob.BLOODTEAR, 10, 75600, params) -- 21 hours. do not re-enable lumbering lambert spawn after killing bloodtear
 end
 
 return entity

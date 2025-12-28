@@ -33,9 +33,9 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
 
     local trionCoords =
     {
-        [1] = { -403, -201,  413, 58 },
-        [2] = {   -3,   -1,    4, 61 },
-        [3] = {  397,  198, -395, 64 },
+        [1] = { -399.92, -201.62,  411.64, 63 },
+        [2] = {    0.08,   -1.62,   11.64, 63 },
+        [3] = {  400.10,  198.37, -388.32, 63 },
     }
 
     local battlefield     = player:getBattlefield()

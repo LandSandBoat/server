@@ -11,8 +11,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUse = function(target)
-    local effect = xi.effect.ENAERO
-    doEnspell(target, target, nil, effect)
+    local fakeSpell = GetSpell(xi.magic.spell.ENAERO)
+    xi.spells.enhancing.useEnhancingSpell(target, target, fakeSpell)
 end
 
 return itemObject

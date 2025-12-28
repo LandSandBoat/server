@@ -1505,9 +1505,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 end
 
                 player:delStatusEffectSilent(xi.effect.REFRESH)
-                player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
-                player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
-                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600) -- Does indeed get overwriten by regular refresh.
             end,
 
             -- 4: Protect

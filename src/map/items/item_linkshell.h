@@ -34,6 +34,8 @@ struct lscolor_t
     uint8 A : 4;
 };
 
+// TODO: The LSTYPE definition is wrong here and values are off by 1 compared to what is actually passed
+// by the client. The correct values are listed in 0x0e2_set_lsmsg.h in GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL
 enum LSTYPE : uint8
 {
     LSTYPE_NEW_LINKSHELL,
@@ -56,7 +58,7 @@ public:
     void              SetLSID(uint32 lsid);
     void              SetLSColor(uint16 color);
     const std::string getSignature() override;
-    void              setSignature(std::string const& signature) override;
+    void              setSignature(const std::string& signature) override;
     void              SetLSType(LSTYPE value);
 
 private:

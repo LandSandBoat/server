@@ -11,7 +11,7 @@ local spawnSkulls = function()
     end
 
     -- Used to stop Skulls from being spawned until an hour from being spawned
-    SetServerVariable('[ELDIEME]TimeToRespawnSkulls', os.time() + 3600)
+    SetServerVariable('[ELDIEME]TimeToRespawnSkulls', GetSystemTime() + 3600)
 end
 
 local brazierMessages =
@@ -92,7 +92,7 @@ local eldiemeGlobal = {
 
     handleCandleTrade = function(player, npc, trade)
         if
-            os.time() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') and
+            GetSystemTime() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') and
             npcUtil.tradeHasExactly(trade, xi.item.FLINT_STONE)
         then
             lightBrazier(player, npc)
@@ -104,7 +104,7 @@ local eldiemeGlobal = {
     handleCandleTrigger = function(player, npc)
         if npc:getAnimation() == xi.anim.OPEN_DOOR then
             player:messageSpecial(ID.text.BRAZIER_ACTIVE)
-        elseif os.time() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') then
+        elseif GetSystemTime() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') then
             player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.item.FLINT_STONE)
         else
             player:messageSpecial(ID.text.BRAZIER_COOLDOWN)

@@ -11,13 +11,13 @@ local function doTerrorRun(mob)
     local terrorStart = mob:getLocalVar('EmptyTerror')
     local terrorDuration = mob:getLocalVar('EmptyTerrorDuration')
     if terrorStart ~= 0 then
-        if terrorStart + terrorDuration < os.time() then
+        if terrorStart + terrorDuration < GetSystemTime() then
             mob:setLocalVar('EmptyTerror', 0)
             mob:setAutoAttackEnabled(true)
             mob:setMobAbilityEnabled(true)
             mob:setMagicCastingEnabled(true)
             mob:setRoamFlags(0)
-        elseif terrorStart + terrorDuration > os.time() then
+        elseif terrorStart + terrorDuration > GetSystemTime() then
             if not mob:isFollowingPath() then
                 mob:setRoamFlags(256, 512)
                 mob:setAutoAttackEnabled(false)

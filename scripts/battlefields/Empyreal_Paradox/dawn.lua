@@ -66,6 +66,7 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
     for _, ally in pairs(bcnmAllies) do
         ally:resetLocalVars()
         local spawn = ally:getSpawnPos()
+
         ally:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
     end
 end

@@ -135,7 +135,7 @@ entity.onTrigger = function(player, npc)
             local availRewards = getFenrirRewardMask(player)
 
             player:startEvent(850, 0, 13399, 1208, 1125, availRewards, 18165, 13572)
-        elseif os.time() > player:getCharVar('MoonlitPath_date') then --24 hours have passed, flag a new fight
+        elseif GetSystemTime() > player:getCharVar('MoonlitPath_date') then --24 hours have passed, flag a new fight
             player:startEvent(848, 0, 1125, 334)
         end
     elseif tuningIn == xi.questStatus.QUEST_ACCEPTED then
@@ -190,7 +190,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- if the player chooses an item, and they don't have space in their inventory.
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
         player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
-        player:setCharVar('MoonlitPath_date', getMidnight())
+        player:setCharVar('MoonlitPath_date', JstMidnight())
         player:addFame(xi.fameArea.WINDURST, 30)
 
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_ACCEPTED then

@@ -1,9 +1,7 @@
 {
     "recommendations": [
-        "jkiviluoto.tws",
         "sumneko.lua",
-        "wwm.better-align",
-        "tomblind.local-lua-debugger-vscode",
+        "Chouzz.vscode-better-align",
         "ms-python.python",
         "ms-python.black-formatter",
         "eamodio.gitlens",
@@ -12,6 +10,7 @@
         "ms-vscode.cpptools-themes",
         "ms-vscode.cpptools-extension-pack",
         "ms-vscode.cpptools",
-        "jeff-hykin.better-cpp-syntax"
+        "jeff-hykin.better-cpp-syntax",
+        "bierner.github-markdown-preview"
     ]
 }

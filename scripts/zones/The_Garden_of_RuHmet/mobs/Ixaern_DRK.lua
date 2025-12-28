@@ -11,10 +11,19 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Resistances need verifying: Light_Sleep, Poison, Requiem, Terror, Dispel, Petrify
-
 entity.onMobInitialize = function(IxAernDrkMob)
     IxAernDrkMob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    IxAernDrkMob:addImmunity(xi.immunity.BIND)
+    IxAernDrkMob:addImmunity(xi.immunity.BLIND)
+    IxAernDrkMob:addImmunity(xi.immunity.DARK_SLEEP)
+    IxAernDrkMob:addImmunity(xi.immunity.ELEGY)
+    IxAernDrkMob:addImmunity(xi.immunity.GRAVITY)
+    IxAernDrkMob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    IxAernDrkMob:addImmunity(xi.immunity.PARALYZE)
+    IxAernDrkMob:addImmunity(xi.immunity.SILENCE)
+    IxAernDrkMob:addImmunity(xi.immunity.SLOW)
+    IxAernDrkMob:addImmunity(xi.immunity.STUN)
+    IxAernDrkMob:addImmunity(xi.immunity.TERROR)
 
     IxAernDrkMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
         local timesReraised = mob:getLocalVar('AERN_RERAISES')
@@ -81,18 +90,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(1)
-
-    -- Not immune to: Drain, Aspir
-    -- Resistances Confirmed
-    mob:addImmunity(xi.immunity.ELEGY)
-    mob:addImmunity(xi.immunity.STUN)
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.SLOW)
-    mob:addImmunity(xi.immunity.PARALYZE)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.GRAVITY)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.BLIND)
 
     xi.mix.jobSpecial.config(mob, {
         specials =

@@ -48,7 +48,7 @@ local pondOnTrigger = function(player, npc)
     then
         quest:setLocalVar(player, 'npcOffset', npcOffset)
         player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET)
-        return quest:progressEvent(50 + npcOffset, 0, numPonds, player:getRace())
+        return quest:progressCutscene(50 + npcOffset, 0, numPonds, player:getRace())
     else
         return quest:messageSpecial(davoiID.text.COLOR_OF_BLOOD)
     end
@@ -126,7 +126,7 @@ quest.sections =
                     elseif questProgress == 2 then
                         return quest:progressEvent(21)
                     elseif questProgress == 3 then
-                        return quest:progressEvent(25, 0, 0, 0, 136)
+                        return quest:progressCutscene(25, 0, 0, 0, 136)
                     end
                 end,
             },

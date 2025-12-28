@@ -82,9 +82,9 @@ xi.mix.jobSpecial.config(mob, {
         },
     },
 })
----------------------------------------------------------------- --]]
+----------------------------- --]]
+-----------------------------------
 require('scripts/globals/mixins')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
@@ -126,32 +126,21 @@ local familyEES =
     [ 25] = xi.jsa.EES_ANTICA,  -- Antica
     [115] = xi.jsa.EES_SHADE,   -- Fomor
     [126] = xi.jsa.EES_GIGA,    -- Gigas
-    [127] = xi.jsa.EES_GIGA,    -- Gigas
-    [128] = xi.jsa.EES_GIGA,    -- Gigas
-    [129] = xi.jsa.EES_GIGA,    -- Gigas
-    [130] = xi.jsa.EES_GIGA,    -- Gigas
     [133] = xi.jsa.EES_GOBLIN,  -- Goblin
     [169] = xi.jsa.EES_KINDRED, -- Kindred
     [171] = xi.jsa.EES_LAMIA,   -- Lamiae
     [182] = xi.jsa.EES_MERROW,  -- Merrow
     [184] = xi.jsa.EES_GOBLIN,  -- Moblin
     [189] = xi.jsa.EES_ORC,     -- Orc
-    [200] = xi.jsa.EES_QUADAV,  -- Quadav
-    [201] = xi.jsa.EES_QUADAV,  -- Quadav
     [202] = xi.jsa.EES_QUADAV,  -- Quadav
     [221] = xi.jsa.EES_SHADE,   -- Shadow
-    [222] = xi.jsa.EES_SHADE,   -- Shadow
-    [223] = xi.jsa.EES_SHADE,   -- Shadow
     [246] = xi.jsa.EES_TROLL,   -- Troll
     [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
     [327] = xi.jsa.EES_GOBLIN,  -- Goblin
     [328] = xi.jsa.EES_GIGA,    -- Gigas
-    [334] = xi.jsa.EES_ORC,     -- OrcNM
     [335] = xi.jsa.EES_MAAT,    -- Maat
-    [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
     [358] = xi.jsa.EES_KINDRED, -- Kindred
     [359] = xi.jsa.EES_SHADE,   -- Fomor
-    [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
     [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
 }
 
@@ -177,7 +166,7 @@ local effectByAbility =
 
 xi.mix.jobSpecial.config = function(mob, params)
     if params.between and type(params.between) == 'number' then
-        mob:setLocalVar('[jobSpecial]between', utils.clamp(params.between, 0))
+        mob:setLocalVar('[jobSpecial]between', utils.clamp(params.between, 0, math.abs(params.between)))
     end
 
     if params.chance and type(params.chance) == 'number' then
@@ -185,7 +174,7 @@ xi.mix.jobSpecial.config = function(mob, params)
     end
 
     if params.delay and type(params.delay) == 'number' then
-        mob:setLocalVar('[jobSpecial]delayInitial', utils.clamp(params.delay, 2))
+        mob:setLocalVar('[jobSpecial]delayInitial', utils.clamp(params.delay, 2, math.abs(params.delay)))
     end
 
     if params.specials and type(params.specials) == 'table' then
@@ -198,13 +187,13 @@ xi.mix.jobSpecial.config = function(mob, params)
                 mob:setLocalVar('[jobSpecial]ability_' .. i, v.id)
 
                 if v.cooldown and type(v.cooldown) == 'number' then
-                    mob:setLocalVar('[jobSpecial]between_' .. i, utils.clamp(v.cooldown, 0))
+                    mob:setLocalVar('[jobSpecial]between_' .. i, utils.clamp(v.cooldown, 0, math.abs(v.cooldown)))
                 else
                     mob:setLocalVar('[jobSpecial]between_' .. i, 7200)
                 end
 
                 if v.duration and type(v.duration) == 'number' then
-                    mob:setLocalVar('[jobSpecial]duration_' .. i, utils.clamp(v.duration, 1))
+                    mob:setLocalVar('[jobSpecial]duration_' .. i, utils.clamp(v.duration, 1, math.abs(v.duration)))
                 end
 
                 if v.hpp and type(v.hpp) == 'number' then
@@ -237,7 +226,7 @@ end
 
 local abilitiesReady = function(mob)
     local abilities = {}
-    local now = os.time()
+    local now = GetSystemTime()
     local readyTime = mob:getLocalVar('[jobSpecial]readyInitial')
 
     if
@@ -268,7 +257,7 @@ g_mixins.job_special = function(jobSpecialMob)
     -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
 
-    jobSpecialMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
+    jobSpecialMob:addListener('PRESPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
         local mJob    = mob:getMainJob()
         local ability = job2hr[mJob]
 
@@ -291,7 +280,7 @@ g_mixins.job_special = function(jobSpecialMob)
 
     jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)
         if math.random(1, 100) <= mob:getLocalVar('[jobSpecial]chance') then
-            mob:setLocalVar('[jobSpecial]readyInitial', os.time() + mob:getLocalVar('[jobSpecial]delayInitial'))
+            mob:setLocalVar('[jobSpecial]readyInitial', GetSystemTime() + mob:getLocalVar('[jobSpecial]delayInitial'))
         end
     end)
 
@@ -301,7 +290,7 @@ g_mixins.job_special = function(jobSpecialMob)
         if #abilities > 0 then
             local i = abilities[math.random(#abilities)]
             local ability = mob:getLocalVar('[jobSpecial]ability_' .. i)
-            local now = os.time()
+            local now = GetSystemTime()
 
             if mob:getLocalVar('[jobSpecial]begCode_' .. i) == 1 then
                 mob:triggerListener('JOB_SPECIAL_BEG_' .. i, mob)

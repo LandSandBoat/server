@@ -2,34 +2,32 @@
 -- Area: Upper Jeuno
 --  NPC: Coumuna
 -----------------------------------
-local ID = zones[xi.zone.UPPER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16705,  4550,    -- Greataxe
-        16518, 31000,    -- Mythril Degen
-        16460, 12096,    -- Kris
-        16467, 14560,    -- Mythril Knife
-        16399, 15488,    -- Katars
-        16589, 13962,    -- Two-Handed Sword
-        16412, 29760,    -- Mythril Claws
-        16567, 85250,    -- Knight's Sword
-        16644, 48600,    -- Mythril Axe
-        17061,  6256,    -- Mythril Rod
-        17027, 11232,    -- Oak Cudgel
-        17036, 18048,    -- Mythril Mace
-        17044,  6558,    -- Warhammer
-        17098, 37440,    -- Oak Pole
-        16836, 44550,    -- Halberd
-        16774, 10596,    -- Scythe
-        17320,     8,    -- Iron Arrow
+        { xi.item.MYTHRIL_CLAWS,    29760 },
+        { xi.item.KATARS,           15488 },
+        { xi.item.MYTHRIL_KNIFE,    14560 },
+        { xi.item.KRIS,             12096 },
+        { xi.item.MYTHRIL_DEGEN,    31000 },
+        { xi.item.KNIGHTS_SWORD,    85250 },
+        { xi.item.TWO_HANDED_SWORD, 13926 },
+        { xi.item.MYTHRIL_AXE,      48600 },
+        { xi.item.GREATAXE,          4550 },
+        { xi.item.MYTHRIL_ROD,       6256 },
+        { xi.item.OAK_CUDGEL,       11232 },
+        { xi.item.MYTHRIL_MACE,     18048 },
+        { xi.item.WARHAMMER,         6558 },
+        { xi.item.OAK_POLE,         37440 },
+        { xi.item.HALBERD,          44550 },
+        { xi.item.SCYTHE,           10596 },
+        { xi.item.IRON_ARROW,           8 },
     }
 
-    player:showText(npc, ID.text.VIETTES_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.UPPER_JEUNO].text.VIETTES_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

@@ -19,8 +19,10 @@
 ===========================================================================
 */
 
-#include "mob_spell_container.h"
+#include <algorithm>
+
 #include "mob_modifier.h"
+#include "mob_spell_container.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
@@ -40,6 +42,7 @@ void CMobSpellContainer::ClearSpells()
     m_healList.clear();
     m_naList.clear();
     m_raiseList.clear();
+    m_severeList.clear();
     m_hasSpells = false;
 }
 
@@ -58,7 +61,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
     // add spell to correct vector
     // try to add it to ga list first
-    uint8 aoe = battleutils::GetSpellAoEType(m_PMob, spell);
+    const uint8 aoe = spell->getAOE();
     if (aoe > 0 && spell->canTargetEnemy())
     {
         m_gaList.emplace_back(spellId);
@@ -106,7 +109,9 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 void CMobSpellContainer::RemoveSpell(SpellID spellId)
 {
     auto findAndRemove = [](std::vector<SpellID>& list, SpellID id)
-    { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
+    {
+        list.erase(std::remove(list.begin(), list.end(), id), list.end());
+    };
 
     findAndRemove(m_gaList, spellId);
     findAndRemove(m_damageList, spellId);
@@ -120,6 +125,7 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
 }
 
 // Used in Gambits to see if the Trust can cast the spell
+// Used in mob/automaton AI to see if the spell is castable
 std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
 {
     auto* spell    = spell::GetSpell(spellId);
@@ -128,8 +134,10 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                     spell->getSkillType() == SKILL_SINGING ||
                     spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
                     spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_GEOMANCY;
-    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
+                    spell->getSkillType() == SKILL_GEOMANCY ||
+                    m_PMob->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT);
+
+    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellId));
 
     return (isNotInRecast && enoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
 }
@@ -150,7 +158,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
                             spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
                             spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
                             spell->getSkillType() == SKILL_GEOMANCY;
-            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
+            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(id));
             if (sameFamily && enoughMP && isNotInRecast)
             {
                 matches.emplace_back(id);
@@ -348,7 +356,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     std::size_t            weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
     std::optional<SpellID> choice           = std::nullopt;
     auto                   Weakness_Element = weakestIndex + 1;
-    if (spell::GetSpell(spellId) != 0)
+    if (spell::GetSpell(spellId) != nullptr)
     {
         auto Spell_Element = spell::GetSpell(spellId)->getElement();
         if (Spell_Element == Weakness_Element)
@@ -801,6 +809,32 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
     return {};
 }
 
+bool CMobSpellContainer::IsAnySpellAvailable()
+{
+    const auto isSpellAvailable = [&](auto spell) -> bool
+    {
+        return GetAvailable(spell).has_value();
+    };
+
+    const auto hasAvailableSpell = [&](const std::vector<SpellID>& list) -> bool
+    {
+        return std::ranges::any_of(list, isSpellAvailable);
+    };
+
+    const auto allLists = {
+        std::cref(m_gaList),
+        std::cref(m_damageList),
+        std::cref(m_buffList),
+        std::cref(m_debuffList),
+        std::cref(m_healList),
+        std::cref(m_naList),
+        std::cref(m_raiseList),
+        std::cref(m_severeList),
+    };
+
+    return std::ranges::any_of(allLists, hasAvailableSpell);
+}
+
 std::optional<SpellID> CMobSpellContainer::GetGaSpell()
 {
     if (m_gaList.empty())
@@ -843,7 +877,7 @@ std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
 
 std::optional<SpellID> CMobSpellContainer::GetHealSpell()
 {
-    if (m_PMob->m_EcoSystem == ECOSYSTEM::UNDEAD || m_healList.empty())
+    if (m_healList.empty())
     {
         return {};
     }

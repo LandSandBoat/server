@@ -2,25 +2,23 @@
 -- Area: Port Windurst
 --  NPC: Kucha Malkobhi
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12635, 273,    -- Tarutaru Kaftan
-        12756, 163,    -- Tarutaru Mitts
-        12886, 236,    -- Tarutaru Braccae
-        13007, 163,    -- Tarutaru Clomps
-        12636, 273,    -- Mithran Separates
-        12757, 163,    -- Mithran Gauntlets
-        12887, 236,    -- Mithran Loincloth
-        13008, 163,    -- Mithran Gaiters
+        { xi.item.TARUTARU_KAFTAN,   312 },
+        { xi.item.TARUTARU_MITTS,    187 },
+        { xi.item.TARUTARU_BRACCAE,  270 },
+        { xi.item.TARUTARU_CLOMPS,   187 },
+        { xi.item.MITHRAN_SEPARATES, 312 },
+        { xi.item.MITHRAN_GAUNTLETS, 187 },
+        { xi.item.MITHRAN_LOINCLOTH, 270 },
+        { xi.item.MITHRAN_GAITERS,   187 },
     }
 
-    player:showText(npc, ID.text.KUCHAMALKOBHI_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.PORT_WINDURST].text.KUCHAMALKOBHI_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

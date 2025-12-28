@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobFight = function(mob, target)
     local warp = mob:getLocalVar('warp')
     local wait = mob:getLocalVar('wait')
-    if mob:getLocalVar('warp') == 2 and wait < os.time() then
+    if mob:getLocalVar('warp') == 2 and wait < GetSystemTime() then
         mob:getBattlefield():lose()
     end
 
@@ -24,7 +24,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local powerup = mob:getLocalVar('powerup')
     local rnd = math.random(1, 6)
     local warp = mob:getLocalVar('warp')
@@ -32,26 +32,26 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     if warp == 1 then
         mob:showText(mob, ID.text.KARABABA_QUIT)
         mob:setLocalVar('warp', 2)
-        mob:setLocalVar('wait', os.time() + 8)
-        return 261
+        mob:setLocalVar('wait', GetSystemTime() + 8)
+        return xi.magic.spell.WARP
     elseif rnd == 1 then
         mob:showText(mob, ID.text.KARABARA_FIRE)
-        return 205 - powerup
+        return xi.magic.spell.FLARE_II - powerup
     elseif rnd == 2 then
         mob:showText(mob, ID.text.KARABARA_ICE)
-        return 207 - powerup
+        return xi.magic.spell.FREEZE_II - powerup
     elseif rnd == 3 then
         mob:showText(mob, ID.text.KARABARA_WIND)
-        return 209 - powerup
+        return xi.magic.spell.TORNADO_II - powerup
     elseif rnd == 4 then
         mob:showText(mob, ID.text.KARABARA_EARTH)
-        return 211 - powerup
+        return xi.magic.spell.QUAKE_II - powerup
     elseif rnd == 5 then
         mob:showText(mob, ID.text.KARABARA_LIGHTNING)
-        return 213 - powerup
+        return xi.magic.spell.BURST_II - powerup
     elseif rnd == 6 then
         mob:showText(mob, ID.text.KARABARA_WATER)
-        return 215 - powerup
+        return xi.magic.spell.FLOOD_II - powerup
     end
 end
 

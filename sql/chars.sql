@@ -11,6 +11,7 @@ CREATE TABLE `chars` (
   `nation` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `pos_zone` smallint(3) unsigned NOT NULL,
   `pos_prevzone` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `pos_prevzonelineid` int(10) unsigned NOT NULL DEFAULT '0',
   `pos_rot` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `pos_x` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
@@ -46,6 +47,7 @@ CREATE TABLE `chars` (
   `chatfilters_2` bigint(20) unsigned NOT NULL DEFAULT '0',
   `moghancement` smallint(4) unsigned NOT NULL DEFAULT '0',
   `timecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_logout` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
   FULLTEXT KEY `charname` (`charname`)

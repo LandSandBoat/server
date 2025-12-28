@@ -16,7 +16,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     So math.random() for now!
     ]]
     local heal = math.random(900, 1400)
-    if mob:getPool() == 243 then
+    if mob:getPool() == xi.mobPools.ARMED_GEARS then
         heal = heal * 2.5
     end
 

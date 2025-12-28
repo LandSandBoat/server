@@ -45,9 +45,9 @@ enum AUTOHEADTYPE
 
 struct automaton_equip_t
 {
-    uint8                 Frame{ 0 };
-    uint8                 Head{ 0 };
-    std::array<uint8, 12> Attachments{};
+    uint8                 Frame;
+    uint8                 Head;
+    std::array<uint8, 12> Attachments;
 };
 
 class CCharEntity;
@@ -58,7 +58,7 @@ public:
     CAutomatonEntity();
     ~CAutomatonEntity();
 
-    automaton_equip_t    m_Equip;
+    automaton_equip_t    m_Equip{};
     std::array<uint8, 8> m_ElementMax{};
     std::array<uint8, 8> m_ElementEquip{};
 

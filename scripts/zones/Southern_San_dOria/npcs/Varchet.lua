@@ -37,14 +37,6 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(638)
-    else
-        player:startEvent(525)
-    end
-end
-
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 519 then
         local result = player:getLocalVar('VarchetGame')
@@ -54,10 +46,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             local eventTarget = player:getEventTarget()
             if
                 eventTarget and
-                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == xi.questStatus.QUEST_ACCEPTED
+                xi.quest.getVar(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER, 'Stage') == 1
             then
-                player:setCharVar('exitTheGamblerStat', 1)
-                player:showText(eventTarget, ID.text.VARCHET_KEEP_PROMISE)
+                xi.quest.setVar(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER, 'Prog', 1)
+                player:showText(eventTarget, ID.text.VARCHET_KEEP_PROMISE) -- Repeats everytime the player wins until the quest is complete
             end
         elseif result == gameTie then
             npcUtil.giveCurrency(player, 'gil', 5)

@@ -5,8 +5,20 @@
 -- Only uses Impale, and does it in threes
 -- TODO allow deaggro based on distance (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
 -----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -515.400, y = -23.780, z = -453.510 }
+}
+
+entity.phList =
+{
+    [ID.mob.DELICIEUSE_DELPHINE - 1] = ID.mob.DELICIEUSE_DELPHINE, -- -484.535 -23.756 -467.462
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 5)
@@ -15,7 +27,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target)
     mob:setLocalVar('impaleCount', 2)
 
     return 316 -- Impale

@@ -34,7 +34,7 @@ end
 
 entity.onSpikesDamage = function(mob, target, damage)
     -- we don't have an "isCasting()" so use getCurrentAction() instead
-    if mob:getCurrentAction() == xi.action.MAGIC_CASTING then
+    if mob:getCurrentAction() == xi.action.category.MAGIC_CASTING then
         -- No spikes when mid-cast.
         return 0, 0, 0
     else
@@ -46,7 +46,8 @@ entity.onSpikesDamage = function(mob, target, damage)
         params.includemab = false
         dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
         dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
-        dmg = dmg * xi.spells.damage.calculateNukeAbsorbOrNullify(target, xi.element.FIRE)
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.FIRE, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.FIRE, true, false))
         dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
 
         if dmg < 0 then

@@ -19,12 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "char_sync.h"
 
 #include "entities/charentity.h"
 #include "status_effect_container.h"
+#include "utils/mountutils.h"
 
 CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 {
@@ -52,14 +51,12 @@ CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
     {
-        ref<uint16>(0x13) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower();
-        ref<uint32>(0x18) = PChar->m_FieldChocobo;
+        const auto [ChocoboIndex, CustomProperties] = mountutils::packetDefinition(PChar);
+        ref<uint16>(0x13)                           = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower();
+        ref<uint32>(0x18)                           = CustomProperties[0]; // Personal Chocobo model
+        ref<uint32>(0x1C)                           = CustomProperties[1]; // Noble Chocobo
     }
 
     ref<uint8>(0x25) = PChar->jobs.job[PChar->GetMJob()];
-
-    // Moghouse menu flags?
-    auto mhflag             = PChar->profile.mhflag;
-    bool enableChangeFloors = (mhflag & 0x04) && (mhflag & 0x02) && (mhflag & 0x01) ? 0x01 : 0x00;
-    ref<uint8>(0x27)        = enableChangeFloors;
+    ref<uint8>(0x27) = PChar->profile.mhflag & 0x20 ? 1 : 0; // MogExpansionFlag - Is 2nd floor unlocked.
 }

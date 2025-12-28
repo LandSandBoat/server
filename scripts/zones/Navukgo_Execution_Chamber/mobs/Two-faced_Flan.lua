@@ -11,7 +11,7 @@ local function smooth(mob)
     mob:setMod(xi.mod.DMGPHYS, -3300)
     mob:setMod(xi.mod.DMGMAGIC, 0)
     mob:setMod(xi.mod.REGAIN, 0)
-    mob:setLocalVar('spikesTime', os.time() + math.random(45, 60))
+    mob:setLocalVar('spikesTime', GetSystemTime() + math.random(45, 60))
 end
 
 local function spikes(mob)
@@ -27,7 +27,7 @@ entity.onMobInitialize = function(mob)
         if
             mob:getAnimationSub() == 1 and
             (attackType == xi.attackType.PHYSICAL or attackType == xi.attackType.RANGED) and
-            os.time() >= mobArg:getLocalVar('spikesTime')
+            GetSystemTime() >= mobArg:getLocalVar('spikesTime')
         then
             spikes(mobArg)
         end

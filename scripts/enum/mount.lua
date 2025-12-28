@@ -40,9 +40,10 @@ xi.mount =
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
     BYAKKO         = 33,
-    NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
+    NOBLE_CHOCOBO  = 34, -- NOTE: This uses Chocobo animation
     IXION          = 35,
     PHUABO         = 36,
+    CRACKLAW       = 37,
     --
-    MOUNT_MAX      = 37,
+    MOUNT_MAX      = 38,
 }

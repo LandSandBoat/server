@@ -7,21 +7,21 @@ zones[xi.zone.DYNAMIS_JEUNO] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7073, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN            = 7232, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND           = 7233, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1         = 7234, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2         = 7235, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED          = 7237, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE              = 7249, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED       = 6385, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6391, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6392, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6394, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7002, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7074, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN            = 7233, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND           = 7234, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1         = 7235, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2         = 7236, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED          = 7238, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE              = 7250, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
@@ -61,24 +61,24 @@ zones[xi.zone.DYNAMIS_JEUNO] =
             },
         },
 
-        GABBLOX_MAGPIETONGUE_PH    = { [17547275] = 17547277 }, -- Vanguard_Armorer 2.179 8.5 -61.613
-        TUFFLIX_LOGLIMBS_PH        = { [17547289] = 17547291 }, -- Vanguard_Armorer 15.499 8.384 -36.562
-        CLOKTIX_LONGNAIL_PH        = { [17547292] = 17547294 }, -- Vanguard_Armorer -17.690 8.321 -51.944
-        HERMITRIX_TOOTHROT_PH      = { [17547310] = 17547311 }, -- Vanguard_Enchanter 31.808 -0.566 -25.768
-        WYRMWIX_SNAKESPECS_PH      = { [17547321] = 17547312 }, -- Vanguard_Enchanter 21.160 0.000 -7.386
-        MORTILOX_WARTPAWS_PH       = { [17547443] = 17547438 }, -- Vanguard_Necromancer -9.120 1.400 67.003
-        RUTRIX_HAMGAMS_PH          = { [17547452] = 17547454 }, -- Vanguard_Dragontamer 0.144 1.756 43.922
-        ANVILIX_SOOTWRISTS_PH      = { [17547469] = 17547472 }, -- Vanguard_Smithy -2.563 2.706 112.752
-        BOOTRIX_JAGGEDELBOW_PH     = { [17547470] = 17547473 }, -- Vanguard_Pitfighter -2.487 2.418 106.984
-        MOBPIX_MUCOUSMOUTH_PH      = { [17547471] = 17547474 }, -- Vanguard_Welldigger -0.508 2.499 112.929
-        DISTILIX_STICKYTOES_PH     = { [17547475] = 17547478 }, -- Vanguard_Alchemist -2.164 2.5 106.255
-        EREMIX_SNOTTYNOSTRIL_PH    = { [17547476] = 17547479 }, -- Vanguard_Shaman 1.584 2.499 111.664
-        JABBROX_GRANNYGUISE_PH     = { [17547477] = 17547480 }, -- Vanguard_Enchanter 0.371 2.663 115.674
-        PROWLOX_BARRELBELLY_PH     = { [17547489] = 17547490 }, -- Vanguard_Ambusher 7.509 2.500 118.109
-        SCRUFFIX_SHAGGYCHEST_PH    = { [17547481] = 17547485 }, -- Vanguard_Armorer -0.428 2.599 117.675
-        TYMEXOX_NINEFINGERS_PH     = { [17547482] = 17547486 }, -- Vanguard_Tinkerer 2.257 2.489 117.621
-        BLAZOX_BONEYBOD_PH         = { [17547483] = 17547487 }, -- Vanguard_Pathfinder -1.698 2.493 116.454
-        SLYSTIX_MEGAPEEPERS_PH     = { [17547491] = 17547492 }, -- Vanguard_Hitman -8.440 2.500 118.349
+        GABBLOX_MAGPIETONGUE    = GetFirstID('Gabblox_Magpietongue'),
+        TUFFLIX_LOGLIMBS        = GetFirstID('Tufflix_Loglimbs'),
+        CLOKTIX_LONGNAIL        = GetFirstID('Cloktix_Longnail'),
+        HERMITRIX_TOOTHROT      = GetFirstID('Hermitrix_Toothrot'),
+        WYRMWIX_SNAKESPECS      = GetFirstID('Wyrmwix_Snakespecs'),
+        MORTILOX_WARTPAWS       = GetFirstID('Mortilox_Wartpaws'),
+        RUTRIX_HAMGAMS          = GetFirstID('Rutrix_Hamgams'),
+        ANVILIX_SOOTWRISTS      = GetFirstID('Anvilix_Sootwrists'),
+        BOOTRIX_JAGGEDELBOW     = GetFirstID('Bootrix_Jaggedelbow'),
+        MOBPIX_MUCOUSMOUTH      = GetFirstID('Mobpix_Mucousmouth'),
+        DISTILIX_STICKYTOES     = GetFirstID('Distilix_Stickytoes'),
+        EREMIX_SNOTTYNOSTRIL    = GetFirstID('Eremix_Snottynostril'),
+        JABBROX_GRANNYGUISE     = GetFirstID('Jabbrox_Grannyguise'),
+        PROWLOX_BARRELBELLY     = GetFirstID('Prowlox_Barrelbelly'),
+        SCRUFFIX_SHAGGYCHEST    = GetFirstID('Scruffix_Shaggychest'),
+        TYMEXOX_NINEFINGERS     = GetFirstID('Tymexox_Ninefingers'),
+        BLAZOX_BONEYBOD         = GetFirstID('Blazox_Boneybod'),
+        SLYSTIX_MEGAPEEPERS     = GetFirstID('Slystix_Megapeepers'),
     },
     npc =
     {

@@ -13,8 +13,8 @@ entity.onTrigger = function(player, npc)
     local evenmoreTravelsStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     local questprogress = player:getCharVar('EVEN_MORE_GULLIBLES_PROGRESS')
     local scentDay = player:getCharVar('RafflesiaScentDay')
-    local currentDay = VanadielDayOfTheYear()
-    local scentReady = (scentDay < currentDay) or (scentDay > currentDay and player:getCharVar('RafflesiaScentYear') < VanadielYear())
+    local currentDay = VanadielUniqueDay()
+    local scentReady = scentDay < currentDay
     local offset = npc:getID() - ID.npc.BLUE_RAFFLESIA_OFFSET
 
     if offset == 0 then
@@ -86,8 +86,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('SecondBlueRafflesiaCS', 0)
             player:setCharVar('ThirdBlueRafflesiaCS', 0)
             player:setCharVar('BathedInScent', 1)
-            player:setCharVar('RafflesiaScentDay', VanadielDayOfTheYear())
-            player:setCharVar('RafflesiaScentYear', VanadielYear())
+            player:setCharVar('RafflesiaScentDay', VanadielUniqueDay())
             npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == xi.questStatus.QUEST_ACCEPTED then
@@ -105,8 +104,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('FirstBlueRafflesiaCS', 0)
             player:setCharVar('ThirdBlueRafflesiaCS', 0)
             player:setCharVar('BathedInScent', 1)
-            player:setCharVar('RafflesiaScentDay', VanadielDayOfTheYear())
-            player:setCharVar('RafflesiaScentYear', VanadielYear())
+            player:setCharVar('RafflesiaScentDay', VanadielUniqueDay())
             npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == xi.questStatus.QUEST_ACCEPTED then
@@ -124,8 +122,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('FirstBlueRafflesiaCS', 0)
             player:setCharVar('SecondBlueRafflesiaCS', 0)
             player:setCharVar('BathedInScent', 1)
-            player:setCharVar('RafflesiaScentDay', VanadielDayOfTheYear())
-            player:setCharVar('RafflesiaScentYear', VanadielYear())
+            player:setCharVar('RafflesiaScentDay', VanadielUniqueDay())
             npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == xi.questStatus.QUEST_ACCEPTED then

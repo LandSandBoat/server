@@ -56,7 +56,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             if player:getCharVar('MeaChipRegistration') == 1 then
                 if
                     math.random(1, 100) <= 95 or
-                    player:getCharVar('LastSkyWarpMea') < os.time()
+                    player:getCharVar('LastSkyWarpMea') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
@@ -72,7 +72,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             if player:getCharVar('HollaChipRegistration') == 1 then
                 if
                     math.random(1, 100) <= 95 or
-                    player:getCharVar('LastSkyWarpHolla') < os.time()
+                    player:getCharVar('LastSkyWarpHolla') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
@@ -88,7 +88,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             if player:getCharVar('DemChipRegistration') == 1 then
                 if
                     math.random(1, 100) <= 95 or
-                    player:getCharVar('LastSkyWarpDem') < os.time()
+                    player:getCharVar('LastSkyWarpDem') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
@@ -119,11 +119,11 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         local prevZone = player:getPreviousZone()
 
         if prevZone == xi.zone.LA_THEINE_PLATEAU then
-            player:setCharVar('LastSkyWarpHolla', getMidnight())
+            player:setCharVar('LastSkyWarpHolla', JstMidnight())
         elseif prevZone == xi.zone.KONSCHTAT_HIGHLANDS then
-            player:setCharVar('LastSkyWarpDem', getMidnight())
+            player:setCharVar('LastSkyWarpDem', JstMidnight())
         elseif prevZone == xi.zone.TAHRONGI_CANYON then
-            player:setCharVar('LastSkyWarpMea', getMidnight())
+            player:setCharVar('LastSkyWarpMea', JstMidnight())
         end
 
         xi.teleport.to(player, xi.teleport.id.SKY)

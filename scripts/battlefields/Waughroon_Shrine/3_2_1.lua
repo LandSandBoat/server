@@ -18,36 +18,77 @@ local content = Battlefield:new({
     requiredItems    = { xi.item.COMET_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
 })
 
-content:addEssentialMobs({ 'Time_Bomb' })
+content.groups =
+{
+    {
+        mobs = { 'Time_Bomb' },
+
+        allDeath = function(battlefield, mob)
+            -- Check to see if the bomb died from self-destruct, if not, we win.
+            if battlefield:getLocalVar('timeBombExploded') ~= 1 then
+                content:handleAllMonstersDefeated(battlefield, mob)
+            end
+        end,
+    },
+}
 
 content.loot =
 {
     {
-        { item = xi.item.KAGEBOSHI, weight = 500 }, -- kageboshi
-        { item = xi.item.ODENTA,    weight = 500 }, -- odenta
+        { itemId = xi.item.GIL,                      weight = 10000, amount = 12000 },
     },
 
     {
-        { item = xi.item.OCEAN_BELT,  weight = 200 }, -- ocean_belt
-        { item = xi.item.FOREST_BELT, weight = 200 }, -- forest_belt
-        { item = xi.item.STEPPE_BELT, weight = 200 }, -- steppe_belt
-        { item = xi.item.JUNGLE_BELT, weight = 200 }, -- jungle_belt
-        { item = xi.item.DESERT_BELT, weight = 200 }, -- desert_belt
+        quantity = 2,
+        { itemId = xi.item.PINCH_OF_BOMB_ASH,        weight = 10000 },
     },
 
     {
-        { item = xi.item.NONE,                weight = 250 }, -- nothing
-        { item = xi.item.SCROLL_OF_FREEZE,    weight = 125 }, -- scroll_of_freeze
-        { item = xi.item.SCROLL_OF_QUAKE,     weight = 125 }, -- scroll_of_quake
-        { item = xi.item.SCROLL_OF_RAISE_II,  weight = 125 }, -- scroll_of_raise_ii
-        { item = xi.item.SCROLL_OF_REGEN_III, weight = 125 }, -- scroll_of_regen_iii
-        { item = xi.item.FIRE_SPIRIT_PACT,    weight = 125 }, -- fire_spirit_pact
-        { item = xi.item.LIGHT_SPIRIT_PACT,   weight = 125 }, -- light_spirit_pact
+        { itemId = xi.item.NONE,                     weight =  5000 },
+        { itemId = xi.item.BOMB_ARM,                 weight =  5000 },
     },
 
     {
-        { item = xi.item.NONE,          weight = 800 }, -- nothing
-        { item = xi.item.PETRIFIED_LOG, weight = 200 }, -- petrified_log
+        { itemId = xi.item.KAGEBOSHI,                weight =  5000 },
+        { itemId = xi.item.ODENTA,                   weight =  5000 },
+    },
+
+    {
+        { itemId = xi.item.OCEAN_BELT,               weight =  2000 },
+        { itemId = xi.item.FOREST_BELT,              weight =  2000 },
+        { itemId = xi.item.STEPPE_BELT,              weight =  2000 },
+        { itemId = xi.item.JUNGLE_BELT,              weight =  2000 },
+        { itemId = xi.item.DESERT_BELT,              weight =  2000 },
+    },
+
+    {
+        quantity = 2,
+        { itemId = xi.item.MAHOGANY_LOG,             weight =   400 },
+        { itemId = xi.item.EBONY_LOG,                weight =   400 },
+        { itemId = xi.item.PETRIFIED_LOG,            weight =   400 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,     weight =   400 },
+        { itemId = xi.item.CHUNK_OF_GOLD_ORE,        weight =   400 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE,   weight =   400 },
+        { itemId = xi.item.CHUNK_OF_PLATINUM_ORE,    weight =   400 },
+        { itemId = xi.item.MYTHRIL_INGOT,            weight =   400 },
+        { itemId = xi.item.GOLD_INGOT,               weight =   400 },
+        { itemId = xi.item.DARKSTEEL_INGOT,          weight =   400 },
+        { itemId = xi.item.PLATINUM_INGOT,           weight =   400 },
+        { itemId = xi.item.RAM_HORN,                 weight =   400 },
+        { itemId = xi.item.CORAL_FRAGMENT,           weight =   400 },
+        { itemId = xi.item.DEMON_HORN,               weight =   400 },
+        { itemId = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =   400 },
+        { itemId = xi.item.RAM_SKIN,                 weight =   400 },
+        { itemId = xi.item.MANTICORE_HIDE,           weight =   400 },
+        { itemId = xi.item.WYVERN_SKIN,              weight =   400 },
+        { itemId = xi.item.SCROLL_OF_FREEZE,         weight =   400 },
+        { itemId = xi.item.SCROLL_OF_QUAKE,          weight =   400 },
+        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight =   400 },
+        { itemId = xi.item.SCROLL_OF_REGEN_III,      weight =   400 },
+        { itemId = xi.item.FIRE_SPIRIT_PACT,         weight =   400 },
+        { itemId = xi.item.LIGHT_SPIRIT_PACT,        weight =   400 },
+        { itemId = xi.item.RERAISER,                 weight =   200 },
+        { itemId = xi.item.VILE_ELIXIR,              weight =   200 },
     },
 }
 

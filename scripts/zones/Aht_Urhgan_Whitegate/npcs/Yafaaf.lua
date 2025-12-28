@@ -11,8 +11,8 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        5577, 1500, -- Sutlac
-        5592,  450, -- Imperial Coffee
+        { 5577, 1500, }, -- Sutlac
+        { 5592,  450, }, -- Imperial Coffee
     }
 
     player:showText(npc, ID.text.YAFAAF_SHOP_DIALOG)

@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.ATMA
+-- Notes: Effect sourceTypeParam = Atma slot.  See: scripts/globals/abyssea/atma.lua
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

@@ -24,6 +24,13 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(3134, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+
             onTriggerAreaEnter =
             {
                 [5] = function(player, triggerArea)

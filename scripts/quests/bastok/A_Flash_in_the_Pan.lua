@@ -47,7 +47,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { { xi.item.FLINT_STONE, 4 } }) then
-                        if npc:getLocalVar('tradeCooldown') <= os.time() then
+                        if npc:getLocalVar('tradeCooldown') <= GetSystemTime() then
                             return quest:progressEvent(219)
                         else
                             return quest:progressEvent(218)
@@ -61,7 +61,7 @@ quest.sections =
                 [219] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', os.time() + 900)
+                        GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', GetSystemTime() + 900)
                     end
                 end,
             },

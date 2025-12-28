@@ -15,6 +15,7 @@
 #include "cbasetypes.h"
 #include "logging.h"
 #include "utils.h"
+#include "timer.h"
 #include "version.h"
 
 #ifdef __clang__
@@ -28,6 +29,7 @@
 #include <tchar.h>
 #include <psapi.h>
 #include <shlwapi.h>
+#include <shellapi.h>
 
 #define CrashFolder _T("dmp")
 
@@ -102,7 +104,7 @@ bool WheatyExceptionReport::alreadyCrashed;
 std::mutex WheatyExceptionReport::alreadyCrashedLock;
 WheatyExceptionReport::pRtlGetVersion WheatyExceptionReport::RtlGetVersion;
 
-time_point gStartUpTime = server_clock::now();
+timer::time_point gStartUpTime = timer::now();
 std::string gUptimeString;
 std::string gCrashDateString;
 std::string gProcessMemoryUsageString;
@@ -148,18 +150,18 @@ WheatyExceptionReport::~WheatyExceptionReport()
 
 const char* GetUptimeString()
 {
-    auto uptimeDuration = server_clock::now() - gStartUpTime;
-    if (uptimeDuration < std::chrono::minutes(2))
+    auto uptimeDuration = timer::now() - gStartUpTime;
+    if (uptimeDuration < 2min)
     {
-        gUptimeString = fmt::format("{} seconds", std::chrono::duration_cast<std::chrono::seconds>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} seconds", std::chrono::floor<std::chrono::seconds>(uptimeDuration).count()).c_str();
     }
-    else if (uptimeDuration > std::chrono::minutes(120))
+    else if (uptimeDuration > 2h)
     {
-        gUptimeString = fmt::format("{} hours", std::chrono::duration_cast<std::chrono::hours>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} hours", std::chrono::floor<std::chrono::hours>(uptimeDuration).count()).c_str();
     }
     else
     {
-        gUptimeString = fmt::format("{} minutes", std::chrono::duration_cast<std::chrono::minutes>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} minutes", std::chrono::floor<std::chrono::minutes>(uptimeDuration).count()).c_str();
     }
 
     return gUptimeString.c_str();
@@ -371,8 +373,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Process Name: %s"), GetCommandLineArgsString());
         Log(_T("Full crash report: %s"), m_szLogFileName);
         Log(_T("Memory dump: %s"), m_szDumpFileName);
-        std::time_t t = std::time(nullptr);
-        Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
+        Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", earth_time::to_local_tm()).c_str()));
         Log(_T("Process Uptime: %s"), GetUptimeString());
         PrintSystemInfo();
         Log(_T("Process Memory Usage: %s"), GetProcessMemoryUsageString());
@@ -400,7 +401,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     m_hReportFile = nullptr;
 
     // Pause for a moment to give spdlog a chance to flush
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(200ms);
 
     TerminateProcess(GetCurrentProcess(), 1);
     return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code

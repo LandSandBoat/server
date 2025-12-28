@@ -2,32 +2,30 @@
 -- Area: Port Windurst
 --  NPC: Ryan
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16640,  290,    -- Bronze Axe
-        16535,  246,    -- Bronze Sword
-        17336,    5,    -- Crossbow Bolt
-        12576,  235,    -- Bronze Harness
-        12577, 2286,    -- Brass Harness
-        12704,  128,    -- Bronze Mittens
-        12705, 1255,    -- Brass Mittens
-        12832,  191,    -- Bronze Subligar
-        12833, 1840,    -- Brass Subligar
-        12960,  117,    -- Bronze Leggings
-        12961, 1140,    -- Brass Leggings
-        12584, 1145,    -- Kenpogi
-        12712,  630,    -- Tekko
-        12840,  915,    -- Sitabaki
-        12968,  584,    -- Kyahan
+        { xi.item.BRONZE_AXE,       328 },
+        { xi.item.BRONZE_SWORD,     278 },
+        { xi.item.CROSSBOW_BOLT,      6 },
+        { xi.item.BRONZE_HARNESS,   266 },
+        { xi.item.BRASS_HARNESS,   2584 },
+        { xi.item.BRONZE_MITTENS,   145 },
+        { xi.item.BRASS_MITTENS,   1419 },
+        { xi.item.BRONZE_SUBLIGAR,  216 },
+        { xi.item.BRASS_SUBLIGAR,  2080 },
+        { xi.item.BRONZE_LEGGINGS,  133 },
+        { xi.item.BRASS_LEGGINGS,  1289 },
+        { xi.item.KENPOGI,         1294 },
+        { xi.item.TEKKO,            712 },
+        { xi.item.SITABAKI,        1034 },
+        { xi.item.KYAHAN,           660 },
     }
 
-    player:showText(npc, ID.text.RYAN_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.PORT_WINDURST].text.RYAN_SHOP_DIALOG)
     xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end
 

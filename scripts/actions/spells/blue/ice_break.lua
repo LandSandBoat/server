@@ -21,28 +21,35 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.ARCANA
-    params.attackType = xi.attackType.MAGICAL
-    params.damageType = xi.damageType.ICE
-    params.attribute = xi.mod.INT
-    params.multiplier = 2.25
+    params.ecosystem   = xi.ecosystem.ARCANA
+    params.attackType  = xi.attackType.MAGICAL
+    params.damageType  = xi.damageType.ICE
+    params.attribute   = xi.mod.INT
+    params.multiplier  = 2.25
     params.tMultiplier = 1.0
-    params.duppercap = 69
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.3
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.duppercap   = 69
+    params.str_wsc     = 0.0
+    params.dex_wsc     = 0.0
+    params.vit_wsc     = 0.0
+    params.agi_wsc     = 0.0
+    params.int_wsc     = 0.3
+    params.mnd_wsc     = 0.0
+    params.chr_wsc     = 0.0
 
-    params.addedEffect = xi.effect.BIND
-    local power = 1
-    local tick = 0
-    local duration = 30
-
+    -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
-    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.BIND, 1, 0, 30 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

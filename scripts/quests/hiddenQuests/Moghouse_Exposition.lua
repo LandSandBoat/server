@@ -10,7 +10,7 @@ quest.sections    = {}
 quest.sections[1] = {}
 
 quest.sections[1].check = function(player, currentMission, missionStatus, vars)
-    return xi.moghouse.isInMogHouseInHomeNation(player) and
+    return xi.moghouse.inMogHouseInHomeNation(player) and
         quest:getVar(player, 'notSeen') == 1
 end
 
@@ -35,8 +35,8 @@ local moogleZoneInEvent =
 quest.sections[2] = {}
 
 quest.sections[2].check = function(player, currentMission, missionStatus, vars)
-    return not xi.moghouse.isInMogHouseInHomeNation(player) and
-        player:isInMogHouse() and
+    return not xi.moghouse.inMogHouseInHomeNation(player) and
+        player:inMogHouse() and
         quest:getVar(player, 'oNation') == 1
 end
 

@@ -20,11 +20,11 @@ entity.onMobFight = function(mob, target)
     local mobPos = mob:getPos()
     local mobPet = GetMobByID((mob:getID() + 1), instance)
 
-    if os.time() - popTime > 15 then
+    if GetSystemTime() - popTime > 15 then
         if mobPet and not mobPet:isSpawned() then
             mobPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
-            mob:setLocalVar('lastPetPop', os.time())
+            mob:setLocalVar('lastPetPop', GetSystemTime())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() + 1), instance)
             end)

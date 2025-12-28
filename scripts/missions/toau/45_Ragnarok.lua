@@ -9,7 +9,6 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK)
 
 mission.reward =
 {
-    title       = xi.title.NASHMEIRAS_LOYALIST,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION },
 }
 
@@ -25,7 +24,7 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3139, { text_table = 0 })
+                    return mission:progressEvent(3139, 0, 1, 0, 0, 0, 0, 0, 0, 0)
                 end,
             },
 

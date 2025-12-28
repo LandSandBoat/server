@@ -39,20 +39,22 @@
 
 namespace
 {
-    enum TRUST_MOVEMENT_TYPE : int8
-    {
-        // NOTE: If you need to add special movement types, add descending into the minus values.
-        //     : All of the positive values are taken for the ranged movement range.
-        // NOTE: You can use any positive value as a distance, and it will act as MID_RANGE or LONG_RANGE, but with the value you've provided.
-        //     : For example:
-        //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
-        //     : Will set the combat distance the trust tries to stick to to 20'
-        // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
-        NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
-        MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
-        MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
-        LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
-    };
+
+enum TRUST_MOVEMENT_TYPE : int8
+{
+    // NOTE: If you need to add special movement types, add descending into the minus values.
+    //     : All of the positive values are taken for the ranged movement range.
+    // NOTE: You can use any positive value as a distance, and it will act as MID_RANGE or LONG_RANGE, but with the value you've provided.
+    //     : For example:
+    //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
+    //     : Will set the combat distance the trust tries to stick to to 20'
+    // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
+    NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+    MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
+    MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
+    LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
+};
+
 } // namespace
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
@@ -83,7 +85,7 @@ void CTrustController::Despawn()
     CMobController::Despawn();
 }
 
-void CTrustController::Tick(time_point tick)
+void CTrustController::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(POwner->getName());
@@ -110,7 +112,7 @@ void CTrustController::Tick(time_point tick)
     }
 }
 
-void CTrustController::DoCombatTick(time_point tick)
+void CTrustController::DoCombatTick(timer::time_point tick)
 {
     TracyZoneScoped;
 
@@ -215,13 +217,13 @@ void CTrustController::DoCombatTick(time_point tick)
     }
 }
 
-void CTrustController::DoRoamTick(time_point tick)
+void CTrustController::DoRoamTick(timer::time_point tick)
 {
     TracyZoneScoped;
 
     auto* PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
     auto  masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
-    bool  masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
+    bool  masterMeleeSwing     = masterLastAttackTime > timer::now() - 1s;
 
     bool trustEngageCondition = false;
     // NOTE: charvars are now cached, this is essentially a localvar read now.
@@ -365,7 +367,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         std::vector<position_t> positions(5);
         for (auto& position : positions)
         {
-            int        random_angle       = xirand::GetRandomNumber(255);
+            int        random_angle       = xirand::GetRandomNumber(256);
             position_t potential_position = {
                 PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
                 PTarget->loc.p.y,
@@ -407,7 +409,7 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
     TracyZoneScoped;
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityid), 0s))
     {
         return false;
     }
@@ -424,7 +426,7 @@ bool CTrustController::RangedAttack(uint16 targid)
 {
     TracyZoneScoped;
 
-    duration rangedDelay = 10s;
+    timer::duration rangedDelay = 10s;
     if (CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(POwner->m_Weapons[SLOT_RANGED]))
     {
         rangedDelay = std::chrono::milliseconds(PRange->getDelay());
@@ -448,7 +450,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
 
     FaceTarget(targid);
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellid)))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
     {
         return false;
     }

@@ -45,7 +45,7 @@ CLuaPetSkill::CLuaPetSkill(CPetSkill* PSkill)
  *                                                                       *
  ************************************************************************/
 
-void CLuaPetSkill::setMsg(uint16 message)
+void CLuaPetSkill::setMsg(MsgBasic message)
 {
     m_PLuaPetSkill->setMsg(message);
 }
@@ -80,7 +80,12 @@ uint32 CLuaPetSkill::getPrimaryTargetID()
     return m_PLuaPetSkill->getPrimaryTargetID();
 }
 
-uint16 CLuaPetSkill::getMsg()
+void CLuaPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
+{
+    return m_PLuaPetSkill->setFinalAnimationSub(newAnimationSub);
+}
+
+auto CLuaPetSkill::getMsg() -> MsgBasic
 {
     return m_PLuaPetSkill->getMsg();
 }
@@ -106,10 +111,35 @@ float CLuaPetSkill::getTP()
     return static_cast<float>(m_PLuaPetSkill->getTP());
 }
 
+auto CLuaPetSkill::getMobHP() const -> uint8
+{
+    return m_PLuaPetSkill->getHP();
+}
+
 // Retrieves the Monsters HP% as it was at the start of mobskill
 uint8 CLuaPetSkill::getMobHPP()
 {
     return m_PLuaPetSkill->getHPP();
+}
+
+auto CLuaPetSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_PLuaPetSkill->getAttackType();
+}
+
+void CLuaPetSkill::setAttackType(const ATTACK_TYPE attackType) const
+{
+    m_PLuaPetSkill->setAttackType(attackType);
+}
+
+auto CLuaPetSkill::isCritical() const -> bool
+{
+    return m_PLuaPetSkill->isCritical();
+}
+
+void CLuaPetSkill::setCritical(const bool isCritical) const
+{
+    m_PLuaPetSkill->setCritical(isCritical);
 }
 
 //======================================================//
@@ -127,8 +157,14 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("getID", CLuaPetSkill::getID);
     SOL_REGISTER("getTotalTargets", CLuaPetSkill::getTotalTargets);
     SOL_REGISTER("getPrimaryTargetID", CLuaPetSkill::getPrimaryTargetID);
+    SOL_REGISTER("setFinalAnimationSub", CLuaPetSkill::setFinalAnimationSub);
     SOL_REGISTER("getTP", CLuaPetSkill::getTP);
+    SOL_REGISTER("getMobHP", CLuaPetSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaPetSkill::getMobHPP);
+    SOL_REGISTER("getAttackType", CLuaPetSkill::getAttackType);
+    SOL_REGISTER("setAttackType", CLuaPetSkill::setAttackType);
+    SOL_REGISTER("isCritical", CLuaPetSkill::isCritical);
+    SOL_REGISTER("setCritical", CLuaPetSkill::setCritical);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaPetSkill& petskill)

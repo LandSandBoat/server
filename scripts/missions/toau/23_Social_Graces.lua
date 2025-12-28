@@ -24,7 +24,16 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3095)
+                    return mission:progressEvent(3095, 0, 1, 0, 0, 0, 0, 0, 4)
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [3095] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(1, 1, 0, 0, 0, 0, 0, 0)
+                    end
                 end,
             },
 

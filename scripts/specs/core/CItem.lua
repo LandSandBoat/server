@@ -181,12 +181,12 @@ function CItem:isInstalled()
 end
 
 ---@param name string
----@param mobFamily integer
+---@param interestData integer
 ---@param zeni integer
 ---@param skillIndex integer
 ---@param fp integer
 ---@return nil
-function CItem:setSoulPlateData(name, mobFamily, zeni, skillIndex, fp)
+function CItem:setSoulPlateData(name, interestData, zeni, skillIndex, fp)
 end
 
 ---@nodiscard

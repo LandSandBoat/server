@@ -2,24 +2,22 @@
 -- Area: Lower Jeuno
 --  NPC: Pawkrix
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        631,    36, -- Horo Flour
-        4458,  276, -- Goblin Bread
-        4539,  650, -- Goblin Pie
-        4495,   35, -- Goblin Chocolate
-        4543, 1140, -- Goblin Mushpot
-        952,   515, -- Poison Flour
-        1239,  490, -- Goblin Doll
+        { xi.item.BAG_OF_HORO_FLOUR,           40 },
+        { xi.item.LOAF_OF_GOBLIN_BREAD,       300 },
+        { xi.item.GOBLIN_PIE,                 650 },
+        { xi.item.CHUNK_OF_GOBLIN_CHOCOLATE,   35 },
+        { xi.item.GOBLIN_MUSHPOT,            1140 },
+        { xi.item.BAG_OF_POISON_FLOUR,        515 },
+        { xi.item.GOBLIN_DOLL,                500 },
     }
 
-    player:showText(npc, ID.text.PAWKRIX_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.PAWKRIX_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

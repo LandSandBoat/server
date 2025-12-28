@@ -2,13 +2,10 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'euvhi
 -----------------------------------
+mixins = { require('scripts/mixins/families/euvhi') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.onMobSpawn = function(mob)
-    -- Set a random animation when it spawns
-    mob:setAnimationSub(math.random(1, 4))
-end
 
 entity.onMobFight = function(mob)
     -- Forms: 0 = Closed  1 = Closed  2 = Open 3 = Closed

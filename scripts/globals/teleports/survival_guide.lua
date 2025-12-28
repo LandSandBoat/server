@@ -2,7 +2,6 @@
 -- Survival guides global file
 -----------------------------------
 require('scripts/globals/teleports')
-require('scripts/globals/utils')
 -----------------------------------
 local survival = require('scripts/globals/teleports/survival_guide_map')
 -----------------------------------
@@ -62,8 +61,14 @@ xi.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x0800)
             end
 
+            -- When all mog tablets are found, survival guides are free.
+            local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
+            if allMogTabletsFound then
+                param = bit.bor(param, 0x0400)
+            end
+
+            -- "Rhapsody in White" key item reduces teleport fee by 80%
             if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                -- "Rhapsody in White" key item reduces teleport fee by 80%
                 param = bit.bor(param, 0x2000)
             end
 
@@ -146,29 +151,34 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
             if
                 guide and
                 guide.zoneId ~= currentZoneId and
+                player:checkDistance(npc) <= 6 and
                 player:hasTeleport(xi.teleport.type.SURVIVAL, guide.groupIndex - 1, guide.group - 1) -- Destination check.
             then
                 local teleportCostGil  = 1000
                 local teleportCostTabs = 50
                 local canTeleport      = false
 
+                -- When all mog tablets are found, survival guides are free.
+                local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
+                if allMogTabletsFound then
+                    teleportCostGil  = 0
+                    teleportCostTabs = 0
+
                 -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
-                -- GIL: 1000 -> 100
-                -- TABS: 50 -> 10
-                if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                    teleportCostGil  = teleportCostGil / 10
-                    teleportCostTabs = teleportCostTabs / 5
+                elseif player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+                    teleportCostGil  = math.floor(teleportCostGil / 10)
+                    teleportCostTabs = math.floor(teleportCostTabs / 5)
                 end
 
                 -- Currency checks.
                 if bit.band(bit.rshift(option, 8), 1) == 1 then
                     -- Paying with tabs
-                    if player:getCurrency('valor_point') > teleportCostTabs then
+                    if player:getCurrency('valor_point') >= teleportCostTabs then
                         player:delCurrency('valor_point', teleportCostTabs)
                         canTeleport = true
                     end
                 else
-                    if player:getGil() > teleportCostGil then
+                    if player:getGil() >= teleportCostGil then
                         player:delGil(teleportCostGil)
                         canTeleport = true
                     end

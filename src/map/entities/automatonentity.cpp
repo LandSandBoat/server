@@ -21,17 +21,13 @@
 
 #include "automatonentity.h"
 
+#include "action/action.h"
 #include "ai/ai_container.h"
 #include "ai/controllers/automaton_controller.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
 #include "common/tracy.h"
 #include "common/utils.h"
-#include "mob_modifier.h"
-#include "packets/action.h"
-#include "packets/char_job_extra.h"
-#include "packets/entity_update.h"
-#include "packets/pet_sync.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/mobutils.h"
@@ -154,7 +150,7 @@ void CAutomatonEntity::PostTick()
     {
         if (PMaster && PMaster->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PMaster)->pushPacket<CCharJobExtraPacket>((CCharEntity*)PMaster, PMaster->GetMJob() == JOB_PUP);
+            charutils::SendExtendedJobPackets(static_cast<CCharEntity*>(PMaster));
         }
     }
 }
@@ -184,7 +180,7 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
     auto* PSpell  = state.GetSpell();
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
-    PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
+    PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
 
     if (PSpell->tookEffect())
     {

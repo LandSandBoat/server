@@ -17,10 +17,18 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
+    local animation =
+    {
+        miss = 1,
+        hit  = 5,
+    }
+
+    local infoValue = animation.miss
     if
         not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
         not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
     then
+        infoValue = animation.hit
         target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 10, 0, 1)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
@@ -51,9 +59,10 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         anim = 45
     end
 
+    action:info(target:getID(), infoValue)
     action:setAnimation(target:getID(), anim)
-    action:speceffect(target:getID(), 1)
 
+    -- TODO: This returns 3 as param/value on hit
     return 0
 end
 

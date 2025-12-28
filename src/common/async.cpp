@@ -24,8 +24,7 @@
 #include "logging.h"
 #include "tracy.h"
 
-#include <asio/post.hpp>
-#include <asio/thread_pool.hpp>
+#include <asio.hpp>
 
 Async::Async()
 : threadPool_(std::make_unique<asio::thread_pool>(threadPoolSize_))
@@ -37,7 +36,7 @@ Async::~Async()
 {
 }
 
-void Async::submit(const std::function<void()>& func)
+void Async::submit(const xi::Fn<void()>& func)
 {
     TracyZoneScoped;
 

@@ -1,10 +1,7 @@
 -----------------------------------
 -- Aqua Breath
---
+-- Family: Adamantoise
 -- Description: Deals Water damage to enemies within a fan-shaped area.
--- Type: Breath
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Unknown cone
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,18 +11,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgCap = 500
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.10, 1.5, xi.element.WATER, dmgCap) + 100
+    local params = {}
 
-    if dmgmod > dmgCap then
-        dmgmod = dmgCap
+    params.percentMultipier  = 0.10
+    params.element           = xi.element.WATER
+    params.damageCap         = 500
+    params.bonusDamage       = 100
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
+
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WATER)
     end
 
-    local dmg    = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
-
-    return dmg
+    return damage
 end
 
 return mobskillObject

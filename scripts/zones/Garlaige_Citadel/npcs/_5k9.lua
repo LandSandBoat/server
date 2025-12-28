@@ -9,18 +9,22 @@ local ID = zones[xi.zone.GARLAIGE_CITADEL]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
-        -- Door opens from both sides.
-        GetNPCByID(npc:getID()):openDoor(30)
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
+        if player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
+            -- Only the north side displays a message when interacting.
+            if player:getZPos() > 80.5 then
+                player:messageSpecial(ID.text.THE_GATE_OPENS_FOR_YOU, xi.ki.POUCH_OF_WEIGHTED_STONES)
+            end
 
-        -- Only the north side displays a message when interacting.
-        if player:getZPos() > 80.5 then
-            player:messageSpecial(ID.text.THE_GATE_OPENS_FOR_YOU, xi.ki.POUCH_OF_WEIGHTED_STONES)
-        end
-    else
-        -- North side regular interaction.
-        if player:getZPos() > 80.5 then
-            player:messageSpecial(ID.text.YOU_COULD_OPEN_THE_GATE, xi.ki.POUCH_OF_WEIGHTED_STONES)
+            -- Door opens from both sides. There's a short delay.
+            npc:timer(1500, function(npcArg)
+                npcArg:openDoor(15)
+            end)
+        else
+            -- North side regular interaction.
+            if player:getZPos() > 80.5 then
+                player:messageSpecial(ID.text.YOU_COULD_OPEN_THE_GATE, xi.ki.POUCH_OF_WEIGHTED_STONES)
+            end
         end
     end
 end

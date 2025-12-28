@@ -15,6 +15,16 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+    if prevZone == xi.zone.MIDDLE_DELKFUTTS_TOWER then
+        cs = 14 -- Teleport.
+    -- BORN OF HER NIGHTMARES
+    -- TODO: Convert to interaction.
+    elseif
+        prevZone == xi.zone.QUFIM_ISLAND and
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES
+    then
+        cs = 34
+    end
 
     if
         player:getXPos() == 0 and
@@ -22,14 +32,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(460.022, -1.77, -103.442, 188)
-    end
-
-    -- BORN OF HER NIGHTMARES
-    if
-        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and
-        prevZone == xi.zone.QUFIM_ISLAND
-    then
-        cs = 34
     end
 
     return cs

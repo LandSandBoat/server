@@ -20,8 +20,7 @@
 ===========================================================================
 */
 
-#ifndef _IPETUTILS_H
-#define _IPETUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -58,7 +57,8 @@ enum PETID
     PETID_CHOCOBO            = 74,
     PETID_LUOPAN             = 75,
     PETID_SIREN              = 76,
-    MAX_PETID                = 77,
+    // BST Jug pets exist in the gaps of this enum
+    MAX_PETID = 78,
 };
 
 struct Pet_t
@@ -71,10 +71,11 @@ struct Pet_t
     uint8 minLevel;
     uint8 maxLevel;
 
-    uint8  name_prefix;
-    uint8  radius; // Model Radius - affects melee range etc.
-    uint16 m_Family;
-    uint32 time; // Duration of pet's "life span" before despawning
+    uint8           name_prefix;
+    uint8           modelSize{ 0 };
+    float           modelHitboxSize{ 0.0f };
+    uint16          m_Family;
+    timer::duration time; // Duration of pet's "life span" before despawning
 
     uint8 mJob;
     uint8 sJob;
@@ -130,15 +131,23 @@ struct Pet_t
     int8 light_res_rank;
     int8 dark_res_rank;
 
+    int8 paralyze_res_rank;
+    int8 bind_res_rank;
+    int8 silence_res_rank;
+    int8 slow_res_rank;
+    int8 poison_res_rank;
+    int8 light_sleep_res_rank;
+    int8 dark_sleep_res_rank;
+    int8 blind_res_rank;
+
     Pet_t()
     : PetID(0)
     , EcoSystem(ECOSYSTEM::ECO_ERROR)
     , minLevel(-1)
     , maxLevel(99)
     , name_prefix(0)
-    , radius(0)
     , m_Family(0)
-    , time(0)
+    , time(0s)
     , mJob(0)
     , sJob(0)
     , m_Element(0)
@@ -182,6 +191,14 @@ struct Pet_t
     , water_res_rank(0)
     , light_res_rank(0)
     , dark_res_rank(0)
+    , paralyze_res_rank(0)
+    , bind_res_rank(0)
+    , silence_res_rank(0)
+    , slow_res_rank(0)
+    , poison_res_rank(0)
+    , light_sleep_res_rank(0)
+    , dark_sleep_res_rank(0)
+    , blind_res_rank(0)
     {
     }
 };
@@ -191,31 +208,33 @@ class CPetEntity;
 
 namespace petutils
 {
-    void LoadPetList();
-    void FreePetList();
 
-    void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-    void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
-    void  DetachPet(CBattleEntity* PMaster);
-    void  DespawnPet(CBattleEntity* PMaster);
-    void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
-    void  RetreatToMaster(CBattleEntity* PMaster);
-    int16 PerpetuationCost(uint32 id, uint8 level);
-    void  Familiar(CBattleEntity* PPet);
-    void  LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void LoadPetList();
+void FreePetList();
 
-    void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet);
-    void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet);
-    void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet);
+void   SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
+void   SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+void   DetachPet(CBattleEntity* PMaster);
+void   DespawnPet(CBattleEntity* PMaster);
+void   AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);
+uint16 GetJugWeaponDamage(CPetEntity* PPet);
+void   RetreatToMaster(CBattleEntity* PMaster);
+int16  PerpetuationCost(uint32 id, uint8 level);
+void   ExtendCharm(CBattleEntity* PPet, uint16 minSeconds, uint16 maxSeconds);
+void   LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
 
-    void SetupPetWithMaster(CBattleEntity* PMaster, CPetEntity* PPet);
+void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
+void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);
+void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet);
+void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet);
+void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet);
+void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet);
 
-    bool CheckPetModType(CBattleEntity* PPet, PetModType petmod);
+void SetupPetWithMaster(CBattleEntity* PMaster, CPetEntity* PPet);
 
-    Pet_t* GetPetInfo(uint32 PetID);
+bool CheckPetModType(CBattleEntity* PPet, PetModType petmod);
+bool IsTandemActive(CBattleEntity* PAttacker);
+
+Pet_t* GetPetInfo(uint32 PetID);
+
 }; // namespace petutils
-
-#endif

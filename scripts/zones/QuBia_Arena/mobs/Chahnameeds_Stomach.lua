@@ -6,28 +6,22 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobFight = function(mob, target)
-    local mobId = mob:getID()
-    if
-        mob:getHPP() <= 50 and
-        mob:getLocalVar('spawnedIntestines') == 0 and
-        not GetMobByID(mobId + 1):isSpawned()
-    then
-        SpawnMob(mobId + 1):updateEnmity(target)
-        mob:setLocalVar('spawnedIntestines', 1)
-    end
-
-    if
-        mob:getHPP() <= 33 and
-        mob:getLocalVar('spawnedLiver') == 0 and
-        not GetMobByID(mobId + 2):isSpawned()
-    then
-        SpawnMob(mobId + 2):updateEnmity(target)
-        mob:setLocalVar('spawnedLiver', 1)
-    end
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addMod(xi.mod.REGAIN, 100)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobMobskillChoose = function(mob, target)
+    local skillList =
+    {
+        xi.mobSkill.INFERNAL_PESTILENCE,
+        xi.mobSkill.STINKING_GAS,
+        xi.mobSkill.WHIP_TONGUE,
+        xi.mobSkill.ABYSS_BLAST,
+    }
+
+    return skillList[math.random(1, #skillList)]
 end
 
 return entity

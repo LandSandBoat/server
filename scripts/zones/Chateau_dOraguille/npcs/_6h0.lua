@@ -105,8 +105,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif csid == 574 and option == 2 then
-        player:addSpell(xi.magic.spell.TRION, false, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
+        player:addSpell(xi.magic.spell.TRION, { silentLog = true })
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.TRION)
     end
 end
 

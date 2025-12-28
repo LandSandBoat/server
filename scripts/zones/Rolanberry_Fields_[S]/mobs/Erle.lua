@@ -4,8 +4,15 @@
 -- https://www.bg-wiki.com/ffxi/Erle
 -- TODO allow deaggro based on distance (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
 -----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.phList =
+{
+    [ID.mob.ERLE - 6] = ID.mob.ERLE,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 35)

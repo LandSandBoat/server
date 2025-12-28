@@ -13,68 +13,38 @@ xi.job_utils.beastmaster = xi.job_utils.beastmaster or {}
 -----------------------------------
 xi = xi or {}
 
-local jugLevelTable =
-{
-    [xi.petId.SHEEP_FAMILIAR  ] = 23,
-    [xi.petId.HARE_FAMILIAR   ] = 23,
-    [xi.petId.CRAB_FAMILIAR   ] = 23,
-    [xi.petId.COURIER_CARRIE  ] = 23,
-    [xi.petId.HOMUNCULUS      ] = 23,
-    [xi.petId.FLYTRAP_FAMILIAR] = 28,
-    [xi.petId.TIGER_FAMILIAR  ] = 28,
-    [xi.petId.FLOWERPOT_BILL  ] = 28,
-    [xi.petId.EFT_FAMILIAR    ] = 33,
-    [xi.petId.LIZARD_FAMILIAR ] = 33,
-    [xi.petId.MAYFLY_FAMILIAR ] = 33,
-    [xi.petId.FUNGUAR_FAMILIAR] = 33,
-    [xi.petId.BEETLE_FAMILIAR ] = 38,
-    [xi.petId.ANTLION_FAMILIAR] = 38,
-    [xi.petId.MITE_FAMILIAR   ] = 43,
-    [xi.petId.LULLABY_MELODIA ] = 43,
-    [xi.petId.KEENEARED_STEFFI] = 43,
-    [xi.petId.FLOWERPOT_BEN   ] = 51,
-    [xi.petId.SABER_SIRAVARDE ] = 51,
-    [xi.petId.COLDBLOOD_COMO  ] = 53,
-    [xi.petId.SHELLBUSTER_OROB] = 53,
-    [xi.petId.VORACIOUS_AUDREY] = 53,
-    [xi.petId.AMBUSHER_ALLIE  ] = 58,
-    [xi.petId.LIFEDRINKER_LARS] = 63,
-    [xi.petId.PANZER_GALAHAD  ] = 63,
-    [xi.petId.CHOPSUEY_CHUCKY ] = 63,
-    [xi.petId.AMIGO_SABOTENDER] = 75,
-    [xi.petId.CRAFTY_CLYVONNE]  = 76,
-    [xi.petId.BLOODCLAW_SHASRA] = 90,
-    [xi.petId.LUCKY_LULUSH]     = 76,
-    [xi.petId.FATSO_FARGANN]    = 81,
-    [xi.petId.DISCREET_LOUISE]  = 79,
-    [xi.petId.SWIFT_SIEGHARD]   = 86,
-    [xi.petId.DIPPER_YULY]      = 76,
-    [xi.petId.FLOWERPOT_MERLE]  = 76,
-    [xi.petId.NURSERY_NAZUNA]   = 76,
-    [xi.petId.MAILBUSTER_CETAS] = 85,
-    [xi.petId.AUDACIOUS_ANNA]   = 85,
-    [xi.petId.PRESTO_JULIO]     = 83,
-    [xi.petId.BUGEYED_BRONCHA]  = 90,
-    [xi.petId.GOOEY_GERARD]     = 95,
-    [xi.petId.GOREFANG_HOBS]    = 94,
-    [xi.petId.FAITHFUL_FALCOR]  = 86,
-    [xi.petId.CRUDE_RAPHIE]     = 96,
-    [xi.petId.DAPPER_MAC]       = 76,
-    [xi.petId.SLIPPERY_SILAS]   = 23,
-    [xi.petId.TURBID_TOLOI]     = 75,
+local getValidJugPetID = function(player)
+    -- jug pet reagents are
+    -- - equipped in the ammo slot
+    -- - have skillid 0
+    -- - the subskill maps to the jug petid
+    local petId        = player:getWeaponSubSkillType(xi.slot.AMMO)
+    local ammoEquip    = player:getEquippedItem(xi.slot.AMMO)
+    local ammoSkill    = player:getWeaponSkillType(xi.slot.AMMO)
+    local minimumLevel = ammoEquip and ammoEquip:getReqLvl() or nil
+    if
+        ammoSkill ~= 0 or
+        minimumLevel == nil or
+        player:getMainLvl() < minimumLevel
+    then
+        petId = nil
+    end
 
-}
+    -- there are certain ammo items that have subskill < 20, double check we exclude that
+    if petId and petId >= xi.petId.SHEEP_FAMILIAR then
+        return petId
+    end
+
+    return nil
+end
 
 -- On Ability Check Jug (Call Beast and Bestial Loyalty)
 xi.job_utils.beastmaster.onAbilityCheckJug = function(player, target, ability)
-    local petId = player:getWeaponSubSkillType(xi.slot.AMMO)
+    local petId = getValidJugPetID(player)
 
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif
-        not player:hasValidJugPetItem() or
-        player:getMainLvl() < jugLevelTable[petId]
-    then
+    elseif not petId then
         return xi.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
@@ -85,10 +55,16 @@ end
 
 -- On Ability Use Jug (Call Beast and Bestial Loyalty)
 xi.job_utils.beastmaster.onUseAbilityJug = function(player, target, ability)
-    xi.pet.spawnPet(player, player:getWeaponSubSkillType(xi.slot.AMMO))
+    local petId = getValidJugPetID(player)
+    if not petId then
+        -- should not be possible but just in case
+        return
+    end
+
+    xi.pet.spawnPet(player, petId)
 
     if ability:getID() == xi.jobAbility.CALL_BEAST then
-        player:removeAmmo()
+        player:removeAmmo(1)
     end
 
     -- Briefly put the recastId for READY/SIC (102) into a recast state to
@@ -105,13 +81,12 @@ xi.job_utils.beastmaster.onAbilityCheckFamiliar = function(player, target, abili
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif
-        (not player:hasJugPet() and pet:getObjType() ~= xi.objType.MOB) or
-        pet:getLocalVar('ReceivedFamiliar') == 1
+        pet:getLocalVar('hasFamiliarBuffs') == 1 or
+        (not player:hasJugPet() and not pet:isCharmed())
     then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     end
 
-    pet:setLocalVar('ReceivedFamiliar', 1)
     ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
     return 0, 0
@@ -119,7 +94,7 @@ end
 
 -- On Ability Use Familiar
 xi.job_utils.beastmaster.onUseAbilityFamiliar = function(player, target, ability)
-    player:familiar()
+    xi.pet.applyFamiliarBuffs(player, player:getPet())
 
     ability:setMsg(xi.msg.basic.FAMILIAR_PC)
 
@@ -178,15 +153,15 @@ xi.job_utils.beastmaster.onUseAbilityGauge = function(player, target, ability)
     local charmChance = xi.job_utils.beastmaster.getCharmChance(player, target, false)
 
     if charmChance >= 75 then
-        ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM)  -- The <player> should be able to charm <target>.
+        ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM) -- The <player> should be able to charm <target>.
     elseif charmChance >= 50 then
-        ability:setMsg(xi.msg.basic.MIGHT_BE_ABLE_CHARM)   -- The <player> might be able to charm <target>.
+        ability:setMsg(xi.msg.basic.MIGHT_BE_ABLE_CHARM)  -- The <player> might be able to charm <target>.
     elseif charmChance >= 25 then
-        ability:setMsg(xi.msg.basic.DIFFICULT_TO_CHARM)    -- It would be difficult for the <player> to charm <target>.
+        ability:setMsg(xi.msg.basic.DIFFICULT_TO_CHARM)   -- It would be difficult for the <player> to charm <target>.
     elseif charmChance >= 1 then
-        ability:setMsg(xi.msg.basic.VERY_DIFFICULT_CHARM)  -- It would be very difficult for the <player> to charm <target>.
+        ability:setMsg(xi.msg.basic.VERY_DIFFICULT_CHARM) -- It would be very difficult for the <player> to charm <target>.
     else
-        ability:setMsg(xi.msg.basic.CANNOT_CHARM)          -- The <player> cannot charm <target>!
+        ability:setMsg(xi.msg.basic.CANNOT_CHARM)         -- The <player> cannot charm <target>!
     end
 end
 
@@ -212,7 +187,7 @@ xi.job_utils.beastmaster.onUseAbilityTame = function(player, target, ability)
         return 0
     end
 
-    local resist = applyResistanceAbility(player, target, xi.element.NONE, xi.skill.NONE, player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    local resist = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, 0, 0)
 
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)
@@ -280,7 +255,7 @@ xi.job_utils.beastmaster.onUseAbilityReward = function(player, target, ability)
     local totalHealing     = 0
     local playerMnd        = player:getStat(xi.mod.MND)
     local rewardHealingMod = player:getMod(xi.mod.REWARD_HP_BONUS)
-    local regenAmount      = 1 -- 1 is the minimum.
+    local regenAmount      = 1   -- 1 is the minimum.
     local regenTime        = 180 -- 3 minutes
     local pet              = player:getPet()
     local petCurrentHP     = pet:getHP()
@@ -291,7 +266,8 @@ xi.job_utils.beastmaster.onUseAbilityReward = function(player, target, ability)
     -- http://wiki.ffxiclopedia.org/wiki/Reward
 
     -- TODO: Create lookup table for these switches
-    switch (rangeObj) : caseof {
+    switch(rangeObj):caseof
+    {
         [xi.item.PET_FOOD_ALPHA_BISCUIT] = function() -- pet food alpha biscuit
             minimumHealing = 50
             regenAmount    = 1
@@ -342,7 +318,8 @@ xi.job_utils.beastmaster.onUseAbilityReward = function(player, target, ability)
     }
 
     -- Now calculating the bonus based on gear.
-    switch (player:getEquipID(xi.slot.BODY)) : caseof {
+    switch(player:getEquipID(xi.slot.BODY)):caseof
+    {
         [xi.item.BEAST_JACKCOAT] = function() -- beast jackcoat
             -- This will remove Paralyze, Poison and Blind from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
@@ -400,7 +377,7 @@ xi.job_utils.beastmaster.onUseAbilityReward = function(player, target, ability)
 
     pet:delStatusEffect(xi.effect.REGEN)
     pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
-    player:removeAmmo()
+    player:removeAmmo(1)
 
     pet:updateEnmityFromCure(pet, totalHealing)
 
@@ -417,6 +394,8 @@ end
 -- On Ability Use Unleash
 xi.job_utils.beastmaster.onUseAbilityUnleash = function(player, target, ability)
     player:addStatusEffect(xi.effect.UNLEASH, 9, 0, 60)
+
+    return xi.effect.UNLEASH
 end
 
 -- On Ability Check For Leave, Heel and Stay.
@@ -437,6 +416,15 @@ end
 
 -- On Ability Use Leave
 xi.job_utils.beastmaster.onUseAbilityLeave = function(player, target, ability)
+    local pet = target:getPet()
+
+    if
+        pet and
+        pet:hasStatusEffect(xi.effect.HEALING)
+    then
+        pet:delStatusEffect(xi.effect.HEALING)
+    end
+
     target:despawnPet()
 end
 
@@ -508,7 +496,7 @@ xi.job_utils.beastmaster.onAbilityCheckFight = function(player, target, ability)
     return 0, 0
 end
 
--- On Ability Use Stay
+-- On Ability Use Fight
 xi.job_utils.beastmaster.onUseAbilityFight = function(player, target, ability)
     local pet = player:getPet()
 
@@ -519,6 +507,34 @@ xi.job_utils.beastmaster.onUseAbilityFight = function(player, target, ability)
 
         player:petAttack(target)
     end
+end
+
+-- On Ability Check Killer Instinct
+xi.job_utils.beastmaster.onAbilityCheckKillerInstinct = function(player, target, ability)
+    local pet = player:getPet()
+
+    if
+        pet == nil or                                                   -- No pet currently spawned
+        (not player:hasJugPet() and pet:getObjType() ~= xi.objType.MOB) -- The pet spawned is not a jug pet or charmed mob
+    then
+        return xi.msg.basic.REQUIRES_A_PET, 0
+    end
+
+    return 0, 0
+end
+
+-- On Ability Use Killer Instinct
+xi.job_utils.beastmaster.onUseAbilityKillerInstinct = function(player, target, ability)
+    -- Notes: Pet ecosystem is assigned to the subPower, then mapped to the correct killer mod in the effect script.
+    local pet          = player:getPet()
+    local petEcosystem = pet:getEcosystem()
+    local power        = 10
+    local duration     = 180 + (player:getMerit(xi.merit.KILLER_INSTINCT) - 10)
+    -- TODO: Is there gear/mods that enhance power/duration?
+
+    target:addStatusEffect(xi.effect.KILLER_INSTINCT, power, 0, duration, 0, petEcosystem)
+
+    return xi.effect.KILLER_INSTINCT
 end
 
 local function getCharmDuration(charmer, target)
@@ -535,10 +551,10 @@ local function getCharmDuration(charmer, target)
         -- Quintic least squares fitting of duration multiplier as function of dLvl (r^2 > 0.999)
         -- Fitting on values from table at https://www.bg-wiki.com/ffxi/Charm_Duration
         -- See fitting at https://mycurvefit.com/index.html?action=openshare&id=358a5d99-4499-4a6a-bbfe-0a667739335c
-        dLvlCharmMult = 0.9997336 + 0.3652882 * dLvl + 0.02097742 * dLvl^2
-                    - 0.004106429 * dLvl^3 + 0.000007231037 * dLvl^4
-                    + 0.00005102634 * dLvl^5
-    -- Caps at dLvl > 9
+        dLvlCharmMult = 0.9997336 + 0.3652882 * dLvl + 0.02097742 * dLvl ^ 2
+            - 0.004106429 * dLvl ^ 3 + 0.000007231037 * dLvl ^ 4
+            + 0.00005102634 * dLvl ^ 5
+        -- Caps at dLvl > 9
     elseif dLvl >= 9 then
         dLvlCharmMult = 6
     end
@@ -619,8 +635,7 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
         target:isPC())
     then
         return xi.msg.basic.JA_MISS
-    elseif
-        -- Not charmable so apply bind
+    elseif -- Not charmable so apply bind
         target:getMobMod(xi.mobMod.CHARMABLE) == 0 or -- Target is not charmable
         target:isPC() or                              -- Target is a PC (ballista)
         target:getMaster()                            -- Target already has a master
@@ -648,4 +663,39 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
     end
 
     return xi.msg.basic.CHARM_FAIL
+end
+
+xi.job_utils.beastmaster.onUseAbilitySpur = function(player)
+    local power = 20 + player:getMod(xi.mod.ENHANCES_SPUR)          -- bonus STORETP
+    local subpower = player:getJobPointLevel(xi.jp.SPUR_EFFECT) * 3 -- bonus attack
+    local pet = player:getPet()
+    if pet then
+        pet:addStatusEffect(xi.effect.SPUR, power, 0, 90, 0, subpower)
+    end
+end
+
+xi.job_utils.beastmaster.onUseAbilityRunWild = function(player, target, ability, action)
+    -- all but regen are a 25% bonus
+    local power = 25
+    local pet = player:getPet()
+    if pet then
+        -- mods aren't tied to an effect, just applied to the pet. They leave when the pet dies or despawns
+        pet:addMod(xi.mod.ATTP, power)
+        pet:addMod(xi.mod.ACC, pet:getACC() * power / 100)
+        -- Yep, it's an MAB % addition
+        -- "If you have no sources of Magic Attack Bonus while using the slug pet, then Run Wild actually makes his innate MAB penalty even more negative, thus reducing damage."
+        pet:addMod(xi.mod.MATT, pet:getMod(xi.mod.MATT) * power / 100)
+        pet:addMod(xi.mod.EVA, pet:getEVA() * power / 100)
+        pet:addMod(xi.mod.DEFP, power)
+        -- TODO find out this potency, but appears to be consistently 1% per tick with hare familiar at lvl 99
+        pet:addMod(xi.mod.REGEN, 0.01 * pet:getMaxHP())
+
+        -- After 5 minutes, the pet just despawns
+        pet:setJugRemainingTime(300)
+    end
+
+    -- seems to display nothing in console, but this it the msg id from capture
+    ability:setMsg(154)
+
+    return ability:getID()
 end

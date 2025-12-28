@@ -6,7 +6,6 @@
 -- Windurst Woods      : !pos 89.9 -4.2 -47.63 241
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.deeds = xi.deeds or {}

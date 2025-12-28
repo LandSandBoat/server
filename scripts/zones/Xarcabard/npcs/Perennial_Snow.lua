@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     then
         if player:getCharVar('star_ringburied') == 0 then
             player:startEvent(3)
-        elseif os.time() > player:getCharVar('star_ringburied') then
+        elseif GetSystemTime() > player:getCharVar('star_ringburied') then
             player:startEvent(2)
         else
             player:messageSpecial(ID.text.PERENNIAL_SNOW_WAIT, 225)
@@ -33,7 +33,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
-        player:setCharVar('star_ringburied', os.time() + 60) -- wait 1 minute
+        player:setCharVar('star_ringburied', GetSystemTime() + 60) -- wait 1 minute
     elseif csid == 2 then
         player:setCharVar('star_ringburied', 0)
         player:setCharVar('circleTime', 4)

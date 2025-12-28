@@ -1,6 +1,7 @@
 -----------------------------------
 -- func: addalltrusts
 -- desc: Adds all trust spells to the given target. If no target then to the current player.
+--       utilizes !addallspells to not duplicate complex logic
 -----------------------------------
 ---@type TCommand
 local commandObj = {}
@@ -34,25 +35,20 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, fmt('Player named "{}" not found!', target))
             return
         end
     end
 
-    -- add all spells
-    local save = true
-    local silent = true -- Hide message
-    local sendUpdate = false -- Prevent packet spam
-    for i = 1, #validSpells do
-        if i == #validSpells then
-            silent = false
-            sendUpdate = true
-        end
-
-        targ:addSpell(validSpells[i], silent, save, sendUpdate)
+    if
+        xi.commands.addallspells and
+        type(xi.commands.addallspells.onTrigger) == 'function'
+    then
+        player:printToPlayer(fmt('Queuing unlock of all trust spells for {}', targ:getName()), xi.msg.channel.SYSTEM_3)
+        xi.commands.addallspells.onTrigger(player, target, validSpells)
+    else
+        player:printToPlayer(fmt('An error occurred calling !addallspells to learn all trusts'))
     end
-
-    player:printToPlayer(string.format('%s now has all trusts.', targ:getName()))
 end
 
 return commandObj

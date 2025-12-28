@@ -3,11 +3,17 @@
 --  Mob: Hydra
 -- !pos -282 -24 -1 51
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/families/hydra'),
+}
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 end
 
 entity.onMobRoam = function(mob)
@@ -44,27 +50,6 @@ entity.onMobFight = function(mob, target)
         else
             mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end
-    end
-
-    local battletime = mob:getBattleTime()
-    local headgrow = mob:getLocalVar('headgrow')
-    local broken = mob:getAnimationSub()
-
-    if headgrow < battletime and broken > 4 then
-        mob:setAnimationSub(broken - 1)
-        mob:setLocalVar('headgrow', battletime + 300)
-    end
-end
-
-entity.onCriticalHit = function(mob)
-    local battletime = mob:getBattleTime()
-    local headbreak  = mob:getLocalVar('headbreak')
-    local broken     = mob:getAnimationSub()
-
-    if math.random(1, 100) <= 15 and battletime >= headbreak and broken < 6 then
-        mob:setAnimationSub(broken + 1)
-        mob:setLocalVar('headgrow', battletime + math.random(120, 240))
-        mob:setLocalVar('headbreak', battletime + 300)
     end
 end
 

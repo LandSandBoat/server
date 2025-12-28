@@ -2,30 +2,32 @@
 -- Area: Port Windurst
 --  NPC: Guruna-Maguruna
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12593, 12355, 2,    -- Cotton Doublet
-        12721,  6696, 2,    -- Cotton Gloves
-        13085,   972, 3,    -- Hemp Gorget
-        12592,  2470, 3,    -- Doublet
-        12600,   216, 3,    -- Robe
-        12568,   604, 3,    -- Leather Vest
-        12608,  1260, 3,    -- Tunic
-        12601,  2776, 3,    -- Linen Robe
-        12720,  1363, 3,    -- Gloves
-        12728,   118, 3,    -- Cuffs
-        12696,   324, 3,    -- Leather Gloves
-        12736,   589, 3,    -- Mitts
-        12729,  1570, 3,    -- Linen Cuffs
+        { xi.item.HEMP_GORGET,     1123, 3 },
+        { xi.item.BEETLE_GORGET,   4854, 1 },
+        { xi.item.DOUBLET,         2854, 3 },
+        { xi.item.ROBE,             249, 3 },
+        { xi.item.LEATHER_VEST,     698, 3 },
+        { xi.item.TUNIC,           1456, 3 },
+        { xi.item.COTTON_DOUBLET, 14277, 2 },
+        { xi.item.LINEN_ROBE,      3208, 3 },
+        { xi.item.GLOVES,          1575, 3 },
+        { xi.item.CUFFS,            137, 3 },
+        { xi.item.LEATHER_GLOVES,   374, 3 },
+        { xi.item.MITTS,            681, 3 },
+        { xi.item.COTTON_GLOVES,   7737, 2 },
+        { xi.item.LINEN_CUFFS,     1814, 3 },
+        { xi.item.BONE_MASK,       4068, 2 },
+        { xi.item.BEETLE_MASK,     7943, 1 },
+
     }
 
-    player:showText(npc, ID.text.GURUNAMAGURUNA_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.PORT_WINDURST].text.GURUNAMAGURUNA_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    xi.job_utils.rune_fencer.useRuneEnchantment(player, target, ability, xi.effect.LUX)
+    return xi.job_utils.rune_fencer.useRuneEnchantment(player, target, ability, xi.effect.LUX)
 end
 
 return abilityObject

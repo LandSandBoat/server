@@ -1,15 +1,10 @@
 -----------------------------------
 -- Zone: Labyrinth of Onzozo (213)
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.MYSTICMAKER_PROFBLIX)
-    GetMobByID(ID.mob.MYSTICMAKER_PROFBLIX):setRespawnTime(math.random(900, 10800))
-
     xi.treasure.initZone(zone)
 end
 

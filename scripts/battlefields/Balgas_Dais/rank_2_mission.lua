@@ -3,8 +3,6 @@
 -- Name: Mission Rank 2
 -- !pos 299 -123 345 146
 -----------------------------------
-local balgasID = zones[xi.zone.BALGAS_DAIS]
------------------------------------
 
 local content = Battlefield:new({
     zoneId        = xi.zone.BALGAS_DAIS,
@@ -39,20 +37,6 @@ function content:checkSkipCutscene(player)
         ))
 end
 
-content.groups =
-{
-    {
-        mobIds =
-        {
-            { balgasID.mob.BLACK_DRAGON,     balgasID.mob.BLACK_DRAGON + 1 },
-            { balgasID.mob.BLACK_DRAGON + 2, balgasID.mob.BLACK_DRAGON + 3 },
-            { balgasID.mob.BLACK_DRAGON + 4, balgasID.mob.BLACK_DRAGON + 5 },
-        },
-
-        allDeath = function(battlefield, mob)
-            battlefield:setStatus(xi.battlefield.status.WON)
-        end,
-    },
-}
+content:addEssentialMobs({ 'Black_Dragon', 'Searcher' })
 
 return content:register()

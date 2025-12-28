@@ -2,8 +2,10 @@ set(SOURCES
     ${COMMON_SOURCES}
     auth_session.h
     auth_session.cpp
-    connect_server.h
-    connect_server.cpp
+    connect_application.h
+    connect_application.cpp
+    connect_engine.h
+    connect_engine.cpp
     data_session.h
     data_session.cpp
     handler.h
@@ -13,19 +15,11 @@ set(SOURCES
     login_helpers.h
     login_helpers.cpp
     login_packets.h
-    main.cpp
+    otp_helpers.h
     session.h
     view_session.h
     view_session.cpp
 )
-
-# Temporarily remove clashing old code
-# TODO: Remove this block
-list(REMOVE_ITEM SOURCES
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
-    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
 
 if(UNIX)
     set(resource "")
@@ -33,29 +27,41 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
 endif()
 
-add_executable(xi_connect ${SOURCES} ${resource})
+add_executable(xi_connect
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${resource})
 
-if (APPLE)
-    disable_lto(xi_connect)
-endif()
+set(CONNECT_LIB_SOURCES ${SOURCES})
+add_library(xi_connect_lib
+    STATIC
+        ${CONNECT_LIB_SOURCES})
 
 if(WIN32)
     set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)
 endif()
 
-target_link_libraries(xi_connect
+if (APPLE)
+    disable_lto(xi_connect)
+endif()
+
+target_link_libraries(xi_connect_lib
     PUBLIC
-        ${EXTERNAL_LIBS}
+        ${SHARED_EXTERNAL_LIBS}
+        ${CONNECT_ONLY_EXTERNAL_LIBS}
         project_options
     PRIVATE
         project_warnings
 )
 
-target_include_directories(xi_connect
+target_include_directories(xi_connect_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_link_libraries(xi_connect
+    PUBLIC
+        xi_connect_lib)
 
 set_target_output_directory(xi_connect)

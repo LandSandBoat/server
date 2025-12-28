@@ -23,6 +23,7 @@
 
 #include "common/logging.h"
 #include "common/synchronized.h"
+#include "common/timer.h"
 
 #include "map/zone.h"
 
@@ -39,8 +40,8 @@ public:
     void LockingUpdate();
 
 private:
-    httplib::Server         m_httpServer;
-    std::atomic<time_point> m_lastUpdate;
+    httplib::Server                m_httpServer;
+    std::atomic<timer::time_point> m_lastUpdate;
 
     struct APIDataCache
     {

@@ -2237,7 +2237,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DMG, -4, -6, -8, -10 },
+            { xi.mod.DMG, -400, -600, -800, -1000 },
         },
     },
 
@@ -2472,16 +2472,24 @@ xi.gear_sets.itemToSetId = xi.gear_sets.createItemToSetId()
 -- core on equip and unequip of an item.
 xi.gear_sets.checkForGearSet = function(player)
     player:clearGearSetMods()
+    local playerCurrentLevel = player:getMainLvl()
 
     -- Build a table containing equipped Set IDs, and the count for each one.
     local equippedSets = {}
     for equipmentSlot = 0, xi.MAX_SLOTID do
-        local equipId = player:getEquipID(equipmentSlot)
-        local setId   = xi.gear_sets.itemToSetId[equipId]
+        local equip = player:getEquippedItem(equipmentSlot)
+        if equip then
+            local equipId    = equip:getID()
+            local equipLevel = equip:getReqLvl()
+            local setId      = xi.gear_sets.itemToSetId[equipId]
 
-        if setId then
-            for _, v in ipairs(setId) do
-                equippedSets[v] = equippedSets[v] and (equippedSets[v] + 1) or 1
+            if
+                setId and
+                playerCurrentLevel >= equipLevel -- Player may be under Level Sync/Cap
+            then
+                for _, v in ipairs(setId) do
+                    equippedSets[v] = equippedSets[v] and (equippedSets[v] + 1) or 1
+                end
             end
         end
     end

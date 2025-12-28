@@ -120,7 +120,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         -- TRUST
     elseif csid == 866 and option == 2 then
-        player:addSpell(xi.magic.spell.AJIDO_MARUJIDO, true, true)
+        player:addSpell(xi.magic.spell.AJIDO_MARUJIDO, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.AJIDO_MARUJIDO)
     end
 end

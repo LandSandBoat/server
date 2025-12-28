@@ -24,7 +24,8 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "packets/message_basic.h"
+#include "common/timer.h"
+#include "packets/basic.h"
 
 #include <map>
 #include <memory>
@@ -143,11 +144,12 @@ enum MOUNTTYPE : uint8
     MOUNT_RED_RAPTOR     = 31,
     MOUNT_IRON_GIANT     = 32,
     MOUNT_BYAKKO         = 33,
-    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
+    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This uses Chocobo animation, and CustomProperties[1] set to 1
     MOUNT_IXION          = 35,
     MOUNT_PHUABO         = 36,
+    MOUNT_CRACKLAW       = 37,
     //
-    MOUNT_MAX = 37,
+    MOUNT_MAX = 38,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -265,7 +267,7 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& getName();       // Internal name of entity
+    virtual const std::string& getName() const; // Internal name of entity
     virtual const std::string& getPacketName(); // Name of entity sent to the client
 
     uint16        getZone() const; // Current zone
@@ -294,7 +296,7 @@ public:
     auto   GetLocalVars() -> std::map<std::string, uint32>&;
 
     // pre-tick update
-    virtual void Tick(time_point) = 0;
+    virtual void Tick(timer::time_point) = 0;
     // post-tick update
     virtual void PostTick() = 0;
 
@@ -324,6 +326,9 @@ public:
     uint8           updatemask;     // what to update next server tick to players nearby
     bool            priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)
 
+    float modelHitboxSize = 0.0f; // used for distance calculations and is in packets
+    uint8 modelSize       = 0;
+
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
     bool m_bReleaseTargIDOnDisappear;
@@ -334,7 +339,7 @@ public:
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
 
-    std::chrono::steady_clock::time_point m_nextUpdateTimer; // next time the entity should push an update packet
+    timer::time_point m_nextUpdateTimer; // next time the entity should push an update packet
 
 protected:
     std::map<std::string, uint32> m_localVars;

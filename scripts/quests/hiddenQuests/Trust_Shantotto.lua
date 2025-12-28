@@ -79,7 +79,8 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasSpell(xi.magic.spell.SHANTOTTO) and
+            return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+                not player:hasSpell(xi.magic.spell.SHANTOTTO) and
                 player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
         end,
 
@@ -103,7 +104,7 @@ quest.sections =
             {
                 [529] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:addSpell(xi.magic.spell.SHANTOTTO, true, true)
+                        player:addSpell(xi.magic.spell.SHANTOTTO, { silentLog = true })
                         player:messageSpecial(wallsID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.SHANTOTTO)
                     end
                 end,

@@ -24,7 +24,6 @@
 #include "common/logging.h"
 #include "common/mmo.h"
 #include "common/settings.h"
-#include "common/sql.h"
 
 #include <algorithm>
 
@@ -33,7 +32,9 @@
 
 namespace
 {
-    uint8 JOB_MON = 23;
+
+uint8 JOB_MON = 23;
+
 } // namespace
 
 CDataLoader::CDataLoader()
@@ -59,7 +60,8 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
                                  "WHERE itemid = ? AND stack = ? AND buyer_name IS NOT NULL "
                                  "ORDER BY sell_date DESC "
                                  "LIMIT 10",
-                                 ItemID, stack);
+                                 ItemID,
+                                 stack);
 
     if (rset && rset->rowsCount())
     {
@@ -88,7 +90,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
 
 std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString)
 {
-    ShowDebug("Try find category: %u", ahCategoryID);
+    ShowDebugFmt("Try find category: {}", ahCategoryID);
 
     std::vector<ahItem*> ItemList;
 
@@ -102,6 +104,9 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const
         const auto fromTable = settings::get<bool>("search.OMIT_NO_HISTORY") ? subQuery : "item_basic";
 
         // Build the query string with optional subquery and order-by statements before passing it to the prepared statement.
+        //
+        // NOTE: We normally don't want to build a prepared statement with fmt::format,
+        //     : but this query is entirely internal, so it's OK.
         const auto queryStr = fmt::format("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack) "
                                           "FROM {} "
                                           "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
@@ -110,7 +115,8 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const
                                           "WHERE aH = ? "
                                           "GROUP BY item_basic.itemid "
                                           "{}",
-                                          fromTable, orderByString);
+                                          fromTable,
+                                          orderByString);
 
         // We will now populate the ? in the prepared statement.
         return db::preparedStmt(queryStr, ahCategoryID);
@@ -156,19 +162,11 @@ ahItem CDataLoader::GetAHItemFromItemID(uint16 ItemID)
                                  "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
                                  "WHERE item_basic.itemid = ?",
                                  ItemID);
-    if (rset && rset->rowsCount())
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        while (rset->next())
-        {
-            CAHItem.Category     = rset->get<uint16>("aH");
-            CAHItem.SingleAmount = rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0);
-            CAHItem.StackAmount  = rset->getOrDefault<uint32>("SUM(stack)", 0);
-
-            if (rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0) == 1)
-            {
-                CAHItem.StackAmount = 0;
-            }
-        }
+        CAHItem.Category     = rset->get<uint16>("aH");
+        CAHItem.SingleAmount = rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0);
+        CAHItem.StackAmount  = rset->getOrDefault<uint32>("SUM(stack)", 0);
     }
     return CAHItem;
 }
@@ -241,12 +239,13 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     if (sr.commentType != 0)
     {
-        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType));
+        filterQry.append(fmt::format(" AND (seacom_type & 0xF0) = {}", sr.commentType));
     }
 
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, "
-        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
+        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
+        "linkshellid1, linkshellid2 "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -293,7 +292,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
@@ -305,11 +304,14 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->zone          = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
             PPlayer->languages     = rset->get<uint8>("languages");
             PPlayer->mentor        = playerSettings.MentorFlg;
+            PPlayer->linkshellid1  = rset->get<uint32>("linkshellid1");
+            PPlayer->linkshellid2  = rset->get<uint32>("linkshellid2");
             PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
             PPlayer->disconnecting = rset->get<bool>("disconnecting");
             PPlayer->gmHidden      = rset->get<bool>("gmHiddenEnabled");
-
-            const auto partyid = rset->getOrDefault<uint32>("partyid", 0);
+            PPlayer->muted         = rset->get<bool>("muted");
+            PPlayer->unityLeader   = rset->get<uint8>("unity_leader");
+            const auto partyid     = rset->getOrDefault<uint32>("partyid", 0);
 
             if (PPlayer->mentor)
             {
@@ -351,12 +353,41 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 PPlayer->flags1 |= 0x8000;
             }
 
+            if (PPlayer->muted)
+            {
+                PPlayer->flags1 |= 0x20000000;
+            }
+
             PPlayer->flags2 = PPlayer->flags1;
 
             if (PPlayer->mjob == JOB_MON || PPlayer->sjob == JOB_MON)
             {
                 PPlayer->mjob = 0;
                 PPlayer->sjob = 0;
+            }
+
+            // filter by linkshell ID
+            if (sr.lsId.has_value())
+            {
+                auto searchedLsId = sr.lsId.value();
+                if (searchedLsId == 0)
+                {
+                    // lsId of 0 is automatic fail, it means the requester did not have a linkshell equipped
+                    continue;
+                }
+
+                if (PPlayer->linkshellid1 != searchedLsId && PPlayer->linkshellid2 != searchedLsId)
+                {
+                    // Current player does not match the given LS ID
+                    continue;
+                }
+            }
+
+            // filter anon players if job/nation/race/rank/level search
+            if ((PPlayer->flags1 & 0x4000) &&
+                (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0))
+            {
+                continue;
             }
 
             // filter by job
@@ -411,9 +442,21 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
 
             // filter by flag (away, seek party etc.)
-            if (sr.flags != 0 && !(PPlayer->flags2 & sr.flags))
+            if (sr.flags != 0)
             {
-                continue;
+                // Check if unity ID is set (bits 22+)
+                if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
+                {
+                    if (PPlayer->unityLeader != searchUnityId)
+                    {
+                        continue;
+                    }
+                }
+                else if (!(PPlayer->flags2 & sr.flags))
+                {
+                    // Normal bitwise check for other flags (bits 0-21)
+                    continue;
+                }
             }
 
             // filter by level
@@ -468,7 +511,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowInfo("Found %i results, displaying %i", totalResults, visibleResults);
+        ShowInfoFmt("Found {} results, displaying {}", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -495,7 +538,8 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
                                  "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = ?) , partyid = ?) "
                                  "ORDER BY charname ASC "
                                  "LIMIT 64",
-                                 (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
+                                 (!AllianceID ? PartyID : AllianceID),
+                                 (!PartyID ? AllianceID : PartyID));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -525,7 +569,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = static_cast<uint8>(0U);
                     break;
             }
@@ -603,7 +647,8 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                                  "WHERE linkshellid1 = ? OR linkshellid2 = ? "
                                  "ORDER BY charname ASC "
                                  "LIMIT 18",
-                                 LinkshellID, LinkshellID);
+                                 LinkshellID,
+                                 LinkshellID);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -633,7 +678,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                     PPlayer->rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
                     PPlayer->rank = (uint8)0;
                     break;
             }
@@ -688,10 +733,10 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
 std::string CDataLoader::GetSearchComment(uint32 playerId)
 {
-    auto rset = db::preparedStmt("SELECT seacom_message FROM accounts_sessions WHERE charid = (?)", playerId);
+    auto rset = db::preparedStmt("SELECT seacom_message FROM accounts_sessions WHERE charid = ?", playerId);
     if (rset && rset->rowsCount() && rset->next())
     {
-        return rset->get<std::string>("seacom_message").c_str();
+        return rset->get<std::string>("seacom_message");
     }
     return std::string();
 }
@@ -708,7 +753,7 @@ struct ListingToExpire
 
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
-    ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
+    ShowInfoFmt("Expiring auction house listings over {} days old", expireAgeInDays);
 
     std::vector<ListingToExpire> listingsToExpire;
 
@@ -742,15 +787,18 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
                 listing.sellerName = rset1->get<std::string>("charname");
             }
 
-            const auto [rset2, affectedRows] = db::preparedStmtWithAffectedRows("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                                                                                "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
-                                                                                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
-            if (rset2 && affectedRows > 0)
+            const auto rset2 = db::preparedStmt("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+                                                "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
+                                                listing.sellerID,
+                                                listing.sellerName,
+                                                listing.itemID,
+                                                listing.ahStack == 1 ? listing.itemStack : 1);
+            if (rset2 && rset2->rowsAffected())
             {
                 // delete the item from the auction house
                 db::preparedStmt("DELETE FROM auction_house WHERE id = ?", listing.saleID);
             }
         }
     }
-    ShowInfo("Sent %u expired auction house listings back to sellers", expiredAuctions);
+    ShowInfoFmt("Sent {} expired auction house listings back to sellers", expiredAuctions);
 }

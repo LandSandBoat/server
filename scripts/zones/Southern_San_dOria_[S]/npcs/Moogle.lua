@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:isInMogHouse() then
+    if not player:inMogHouse() then
         player:startEvent(61)
     else
         xi.moghouse.moogleTrigger(player, npc)

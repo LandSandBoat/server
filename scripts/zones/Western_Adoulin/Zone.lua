@@ -9,27 +9,18 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
     local heartwingsAndTheKindhearted = player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
-
-    if
-        player:getXPos() == 0 and
-        player:getYPos() == 0 and
-        player:getZPos() == 0
-    then
-        player:setPos(-142, 4, -18, 4)
-    end
 
     if player:getCharVar('Raptor_Rapture_Status') == 2 then
         -- Resuming cutscene for Quest: 'Raptor Rapture', after Pagnelle warps you to Rala Waterways mid-CS, then back here.
-        cs = 5056
+        return 5056
     end
 
     if heartwingsAndTheKindhearted then
-        cs = 2
+        return 2
     end
 
-    return cs
+    return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

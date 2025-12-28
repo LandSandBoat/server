@@ -125,7 +125,7 @@ quest.sections =
 
                         if waitTime == 0 then
                             return quest:progressEvent(34)
-                        elseif os.time() < waitTime then
+                        elseif GetSystemTime() < waitTime then
                             return quest:event(46)
                         else
                             return quest:progressEvent(35)

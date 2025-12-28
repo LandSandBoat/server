@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/utils')
 require('scripts/globals/extravaganza')
 -----------------------------------
 xi = xi or {}
@@ -829,7 +828,7 @@ xi.abyssea.getNewYellowWeakness = function(mob)
         chosenDay = xi.day.FIRESDAY
     end
 
-    local element = xi.combat.element.getDayElement(chosenDay)
+    local element = xi.data.element.getDayElement(chosenDay)
 
     return yellowWeakness[element][math.random(1, #yellowWeakness[element])] -- Choose an specific spell the mob is weak to.
 end
@@ -1349,7 +1348,7 @@ xi.abyssea.traverserNPCOnUpdate = function(player, csid, option, npc)
             -- the result as a minute value to the player.
 
             local rechargeInterval = 20 - xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.CELERITY)
-            local lastStoneClaimedTime = os.time() - player:getTraverserEpoch() - rechargeInterval * 3600 * player:getClaimedTraverserStones()
+            local lastStoneClaimedTime = GetSystemTime() - player:getTraverserEpoch() - rechargeInterval * 3600 * player:getClaimedTraverserStones()
             local rechargeRemaining = rechargeInterval * 60 - lastStoneClaimedTime / 60
 
             player:updateEvent(0, 0, 0, 0, rechargeRemaining)

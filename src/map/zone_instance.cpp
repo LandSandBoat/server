@@ -132,12 +132,12 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
+void CZoneInstance::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
 {
     TracyZoneScoped;
     for (const auto& PInstance : m_InstanceList)
     {
-        PInstance->TransportDepart(boundary, zone);
+        PInstance->TransportDepart(boundary, prevZoneId, transportId);
     }
 }
 
@@ -157,7 +157,7 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
         {
             if (!(PInstance->Failed() || PInstance->Completed()))
             {
-                PInstance->SetWipeTime(PInstance->GetElapsedTime(server_clock::now()));
+                PInstance->SetWipeTime(PInstance->GetElapsedTime(timer::now()));
             }
         }
     }
@@ -217,7 +217,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         if (PChar->PInstance->GetLevelCap() > 0)
         {
-            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, PChar->PInstance->GetLevelCap(), 0, 0));
+            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, PChar->PInstance->GetLevelCap(), 0s, 0s));
         }
 
         if (PChar->PInstance->CheckFirstEntry(PChar->id))
@@ -229,7 +229,9 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     else
     {
         ShowWarning(fmt::format("Failed to place {} in {} ({}). Placing them in that zone's instance exit area.",
-                                PChar->name, this->getName(), this->GetID())
+                                PChar->name,
+                                this->getName(),
+                                this->GetID())
                         .c_str());
 
         // instance no longer exists: put them outside (at exit)
@@ -323,7 +325,7 @@ void CZoneInstance::SpawnTransport(CCharEntity* PChar)
     }
 }
 
-void CZoneInstance::TOTDChange(TIMETYPE TOTD)
+void CZoneInstance::TOTDChange(vanadiel_time::TOTD TOTD)
 {
     TracyZoneScoped;
     for (const auto& PInstance : m_InstanceList)
@@ -382,7 +384,7 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
     }
 }
 
-void CZoneInstance::ZoneServer(time_point tick)
+void CZoneInstance::ZoneServer(timer::time_point tick)
 {
     TracyZoneScoped;
 

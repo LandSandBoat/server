@@ -24,140 +24,75 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
+#include "common/timer.h"
 #include "common/tracy.h"
 
 #include "entities/charentity.h"
 
-#include "packets/auction_house.h"
-#include "packets/inventory_finish.h"
+#include "packets/c2s/0x04e_auc.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x04c_auc.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
-#include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
-void auctionutils::HandlePacket(CCharEntity* PChar, CBasicPacket& data)
+namespace
+{
+
+const auto isPartiallyUsed = [](CItem* PItem) -> bool
+{
+    if (PItem->isSubType(ITEM_CHARGED))
+    {
+        const auto PChargedItem = static_cast<CItemUsable*>(PItem);
+        return PChargedItem->getCurrentCharges() < PChargedItem->getMaxCharges();
+    }
+
+    return false;
+};
+
+} // namespace
+
+void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param)
 {
     TracyZoneScoped;
 
-    const auto playerName = PChar->getName();
+    DebugAuctionsFmt("AH: SellingItems: player: {}, Commission: {}, ItemWorkIndex: {}, ItemNo: {}, ItemStacks: {}",
+                     PChar->getName(),
+                     param.Commission,
+                     param.ItemWorkIndex,
+                     param.ItemNo,
+                     param.ItemStacks);
 
-    // TODO: Validate all of these to make sure they're within sane bounds.
-    const auto action   = data.ref<uint8>(0x04);
-    const auto slotid   = data.ref<uint8>(0x05);
-    const auto price    = data.ref<uint32>(0x08);
-    const auto slot     = data.ref<uint8>(0x0C);
-    const auto itemid   = data.ref<uint16>(0x0E);
-    const auto quantity = data.ref<uint8>(0x10);
-
-    if (jailutils::InPrison(PChar)) // If jailed, no AH menu for you.
+    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
+    if (!PItem)
     {
         return;
     }
 
-    if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
+    if (PItem->getID() == param.ItemNo && !PItem->isSubType(ITEM_LOCKED) && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION))
     {
-        ShowWarningFmt("{} is trying to use the auction house in a disallowed zone [{}]", PChar->getName(), PChar->loc.zone->getName());
-        return;
-    }
-
-    switch (action)
-    {
-        case 0x04:
+        if (isPartiallyUsed(PItem))
         {
-            DebugAuctionsFmt("AH: SellingItems (action: {:02X}): player: {}, price: {}, slot: {}, itemid: {}, quantity: {}", action, playerName, price, slot, itemid, quantity);
-            SellingItems(PChar, action, price, slot, itemid, quantity);
-        }
-        break;
-        case 0x05:
-        {
-            DebugAuctionsFmt("AH: OpenListOfSales (action: {:02X}): player: {}, itemid: {}", action, playerName, itemid);
-            OpenListOfSales(PChar, action, itemid);
-            [[fallthrough]];
-        }
-        // FALLTHROUGH!
-        case 0x0A:
-        {
-            DebugAuctionsFmt("AH: RetrieveListOfItemsSoldByPlayer (action: {:02X}): player: {}", action, playerName);
-            RetrieveListOfItemsSoldByPlayer(PChar);
-        }
-        break;
-        case 0x0B:
-        {
-            DebugAuctionsFmt("AH: ProofOfPurchase (action: {:02X}): player: {}, price: {}, slot: {}, itemid: {}, quantity: {}", action, playerName, price, slot, itemid, quantity);
-            ProofOfPurchase(PChar, action, price, slot, quantity);
-        }
-        break;
-        case 0x0E:
-        {
-            const auto itemIdFrom0x0C = data.ref<uint16>(0x0C);
-
-            DebugAuctionsFmt("AH: PurchasingItems (action: {:02X}): player: {}, price: {}, slot: {}, itemid: {}, quantity: {}", action, playerName, price, slot, itemIdFrom0x0C, quantity);
-            PurchasingItems(PChar, action, price, itemIdFrom0x0C, quantity);
-        }
-        break;
-        case 0x0C:
-        {
-            DebugAuctionsFmt("AH: CancelSale (action: {:02X}): player: {}, slotid: {}", action, playerName, slotid);
-            CancelSale(PChar, action, slotid);
-        }
-        break;
-        case 0x0D:
-        {
-            DebugAuctionsFmt("AH: UpdateSaleListByPlayer (action: {:02X}): player: {}, slotid: {}", action, playerName, slotid);
-            UpdateSaleListByPlayer(PChar, action, slotid);
-        }
-        break;
-        default:
-        {
-            ShowErrorFmt("AH: Unhandled action: {:02X}, from player {}", action, playerName);
-        }
-        break;
-    }
-}
-
-void auctionutils::SellingItems(CCharEntity* PChar, uint8 action, uint32 price, uint8 slot, uint16 itemid, uint8 quantity)
-{
-    TracyZoneScoped;
-
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slot);
-    if (PItem == nullptr)
-    {
-        return;
-    }
-
-    if (PItem->getID() == itemid && !PItem->isSubType(ITEM_LOCKED) && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION))
-    {
-        const bool isPartiallyUsed = [&]()
-        {
-            const bool isChargedItem = PItem->isSubType(ITEM_CHARGED);
-            if (isChargedItem)
-            {
-                const auto PChargedItem = static_cast<CItemUsable*>(PItem);
-                return PChargedItem->getCurrentCharges() < PChargedItem->getMaxCharges();
-            }
-            return false;
-        }();
-        if (isPartiallyUsed)
-        {
-            PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, 197, 0, 0, 0, 0);
             return;
         }
-        PChar->pushPacket<CAuctionHousePacket>(action, PItem, quantity, price);
+
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::AskCommit, PItem, param.ItemStacks, param.Commission);
     }
 }
 
-void auctionutils::OpenListOfSales(CCharEntity* PChar, uint8 action, uint16 itemid)
+void auctionutils::OpenListOfSales(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    const uint32 curTick = gettick();
+    DebugAuctionsFmt("AH: OpenListOfSales: player: {}", PChar->getName());
 
-    if (curTick - PChar->m_AHHistoryTimestamp > 5000)
+    if (const auto curTick = timer::now(); curTick > PChar->m_AHHistoryTimestamp + 5s)
     {
         PChar->m_ah_history.clear();
         PChar->m_AHHistoryTimestamp = curTick;
-        PChar->pushPacket<CAuctionHousePacket>(action);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Info);
 
         // A single SQL query for the player's AH history which is stored in a Char Entity struct + vector.
         const auto rset = db::preparedStmt("SELECT itemid, price, stack FROM auction_house WHERE seller = ? AND sale=0 ORDER BY id ASC LIMIT 7", PChar->id);
@@ -173,11 +108,12 @@ void auctionutils::OpenListOfSales(CCharEntity* PChar, uint8 action, uint16 item
                 });
             }
         }
+
         DebugAuctionsFmt("AH: {} has {} items up on the AH", PChar->getName(), PChar->m_ah_history.size());
     }
     else
     {
-        PChar->pushPacket<CAuctionHousePacket>(action, 246, 0, 0, 0, 0); // try again in a little while msg
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Info, 246, 0, 0, 0, 0); // try again in a little while msg
     }
 }
 
@@ -185,52 +121,50 @@ void auctionutils::RetrieveListOfItemsSoldByPlayer(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
+    DebugAuctionsFmt("AH: RetrieveListOfItemsSoldByPlayer: player: {}", PChar->getName());
+
     const auto totalItemsOnAh = PChar->m_ah_history.size();
 
     for (size_t auctionSlot = 0; auctionSlot < totalItemsOnAh; auctionSlot++)
     {
-        PChar->pushPacket<CAuctionHousePacket>(0x0C, static_cast<uint8>(auctionSlot), PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(auctionSlot), PChar);
     }
 }
 
-void auctionutils::ProofOfPurchase(CCharEntity* PChar, uint8 action, uint32 price, uint8 slot, uint8 quantity)
+void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
 {
     TracyZoneScoped;
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slot);
+    DebugAuctionsFmt("AH: ProofOfPurchase: player: {}, LimitPrice: {}, ItemWorkIndex: {}, ItemStacks: {}",
+                     PChar->getName(),
+                     param.LimitPrice,
+                     param.ItemWorkIndex,
+                     param.ItemStacks);
 
-    if ((PItem != nullptr) && !(PItem->isSubType(ITEM_LOCKED)) && PItem->getReserve() == 0 && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION) && PItem->getQuantity() >= quantity)
+    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
+
+    if (PItem && !(PItem->isSubType(ITEM_LOCKED)) && PItem->getReserve() == 0 && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION) && PItem->getQuantity() >= param.ItemStacks)
     {
-        const bool isPartiallyUsed = [&]()
+        if (isPartiallyUsed(PItem))
         {
-            const bool isChargedItem = PItem->isSubType(ITEM_CHARGED);
-            if (isChargedItem)
-            {
-                const auto PChargedItem = static_cast<CItemUsable*>(PItem);
-                return PChargedItem->getCurrentCharges() < PChargedItem->getMaxCharges();
-            }
-            return false;
-        }();
-        if (isPartiallyUsed)
-        {
-            PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0);
             return;
         }
 
         uint32 auctionFee = 0;
-        if (quantity == 0)
+        if (param.ItemStacks == 0) // Selling a stack
         {
             if (PItem->getStackSize() == 1 || PItem->getStackSize() != PItem->getQuantity())
             {
                 ShowErrorFmt("AH: Incorrect quantity of item {}", PItem->getName());
-                PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0); // Failed to place up
+                PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
                 return;
             }
-            auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (price * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
+            auctionFee = static_cast<uint32>(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (param.LimitPrice * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
         }
-        else
+        else // Selling a single item
         {
-            auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_SINGLE") + (price * settings::get<float>("map.AH_TAX_RATE_SINGLE") / 100));
+            auctionFee = static_cast<uint32>(settings::get<uint32>("map.AH_BASE_FEE_SINGLE") + (param.LimitPrice * settings::get<float>("map.AH_TAX_RATE_SINGLE") / 100));
         }
 
         auctionFee = std::clamp<uint32>(auctionFee, 0, settings::get<uint32>("map.AH_MAX_FEE"));
@@ -238,7 +172,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, uint8 action, uint32 pric
         const auto PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
         if (PGil->getQuantity() < auctionFee || PGil->getReserve() > 0)
         {
-            PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0); // Not enough gil to pay fee
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Not enough gil to pay fee
             return;
         }
 
@@ -250,6 +184,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, uint8 action, uint32 pric
             {
                 return rset->get<uint32>(0);
             }
+
             return 0;
         }();
 
@@ -257,37 +192,48 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, uint8 action, uint32 pric
         if (ahListLimit && ahListings >= ahListLimit)
         {
             DebugAuctionsFmt("AH: Player {} has reached the AH listing limit of {}", PChar->getName(), ahListLimit);
-            PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0); // Failed to place up
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Failed to place up
             return;
         }
 
         if (!db::preparedStmt("INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(?, ?, ?, ?, ?, ?)",
-                              PItem->getID(), quantity == 0, PChar->id, PChar->getName(), (uint32)time(nullptr), price))
+                              PItem->getID(),
+                              param.ItemStacks == 0,
+                              PChar->id,
+                              PChar->getName(),
+                              earth_time::timestamp(),
+                              param.LimitPrice))
         {
             ShowErrorFmt("AH: Cannot insert item {} to database", PItem->getName());
-            PChar->pushPacket<CAuctionHousePacket>(action, 197, 0, 0, 0, 0); // failed to place up
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(quantity != 0 ? 1 : PItem->getStackSize()));
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
+        charutils::UpdateItem(PChar, LOC_INVENTORY, param.ItemWorkIndex, -static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize()));
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(auctionFee)); // Deduct AH fee
 
-        PChar->pushPacket<CAuctionHousePacket>(action, 1, 0, 0, 0, 0);          // Merchandise put up on auction msg
-        PChar->pushPacket<CAuctionHousePacket>(0x0C, (uint8)ahListings, PChar); // Inform history of slot
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
     }
 }
 
-void auctionutils::PurchasingItems(CCharEntity* PChar, uint8 action, uint32 price, uint16 itemid, uint8 quantity)
+auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -> bool
 {
     TracyZoneScoped;
 
+    DebugAuctionsFmt("AH: PurchasingItems: player: {}, BidPrice: {}, ItemNo: {}, ItemStacks: {}",
+                     PChar->getName(),
+                     param.BidPrice,
+                     param.ItemNo,
+                     param.ItemStacks);
+
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
     {
-        PChar->pushPacket<CAuctionHousePacket>(action, 0xE5, 0, 0, 0, 0);
+        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
     }
     else
     {
-        CItem* PItem = itemutils::GetItemPointer(itemid);
+        const CItem* PItem = itemutils::GetItemPointer(param.ItemNo);
 
         if (PItem != nullptr)
         {
@@ -295,32 +241,36 @@ void auctionutils::PurchasingItems(CCharEntity* PChar, uint8 action, uint32 pric
             {
                 for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                 {
-                    if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
+                    if (PChar->getStorage(LocID)->SearchItem(param.ItemNo) != ERROR_SLOTID)
                     {
-                        PChar->pushPacket<CAuctionHousePacket>(action, 0xE5, 0, 0, 0, 0);
-                        return;
+                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
+                        return false;
                     }
                 }
             }
-            CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+            const CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
-            if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price && gil->getReserve() == 0)
+            if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= param.BidPrice && gil->getReserve() == 0)
             {
-                const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
-                                                                                   "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
-                                                                                   PChar->getName(), price, (uint32)time(nullptr), itemid, quantity == 0, price);
-                if (rset && affectedRows)
+                const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
+                                                   "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
+                                                   PChar->getName(),
+                                                   param.BidPrice,
+                                                   earth_time::timestamp(),
+                                                   param.ItemNo,
+                                                   param.ItemStacks == 0,
+                                                   param.BidPrice);
+                if (rset && rset->rowsAffected())
                 {
-                    uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, itemid, (quantity == 0 ? PItem->getStackSize() : 1));
-
-                    if (SlotID != ERROR_SLOTID)
+                    if (charutils::AddItem(PChar, LOC_INVENTORY, param.ItemNo, (param.ItemStacks == 0 ? PItem->getStackSize() : 1)) != ERROR_SLOTID)
                     {
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price));
+                        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
 
-                        PChar->pushPacket<CAuctionHousePacket>(action, 0x01, itemid, price, quantity, PItem->getStackSize());
-                        PChar->pushPacket<CInventoryFinishPacket>();
+                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+
+                        return true;
                     }
-                    return;
                 }
             }
         }
@@ -328,60 +278,67 @@ void auctionutils::PurchasingItems(CCharEntity* PChar, uint8 action, uint32 pric
         // You were unable to buy the {qty} {item}
         if (PItem)
         {
-            PChar->pushPacket<CAuctionHousePacket>(action, 0xC5, itemid, price, quantity, PItem->getStackSize());
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
         }
         else
         {
-            PChar->pushPacket<CAuctionHousePacket>(action, 0xC5, itemid, price, quantity, 0);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, 0);
         }
     }
+
+    return false;
 }
 
-void auctionutils::CancelSale(CCharEntity* PChar, uint8 action, uint8 slotid)
+void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
 {
     TracyZoneScoped;
 
-    if (slotid < PChar->m_ah_history.size())
-    {
-        AuctionHistory_t canceledItem = PChar->m_ah_history[slotid];
+    DebugAuctionsFmt("AH: CancelSale: player: {}, AucWorkIndex: {}", PChar->getName(), AucWorkIndex);
 
-        // clang-format off
-        const auto success = db::transaction([&]()
-        {
-            const auto [rset, affectedRows] = db::preparedStmtWithAffectedRows("DELETE FROM auction_house WHERE seller = ? AND itemid = ? AND stack = ? AND price = ? AND sale = 0 LIMIT 1",
-                                                                               PChar->id, canceledItem.itemid, canceledItem.stack, canceledItem.price);
-            if (rset && affectedRows)
+    // AucWorkIndex can technically be -1 but this is checked at the packet handler level.
+    if (AucWorkIndex < PChar->m_ah_history.size())
+    {
+        AuctionHistory_t canceledItem = PChar->m_ah_history[AucWorkIndex];
+
+        const auto success = db::transaction(
+            [&]()
             {
-                CItem* PDelItem = itemutils::GetItemPointer(canceledItem.itemid);
-                if (PDelItem)
+                const auto rset = db::preparedStmt("DELETE FROM auction_house WHERE seller = ? AND itemid = ? AND stack = ? AND price = ? AND sale = 0 LIMIT 1",
+                                                   PChar->id,
+                                                   canceledItem.itemid,
+                                                   canceledItem.stack,
+                                                   canceledItem.price);
+                if (rset && rset->rowsAffected())
                 {
-                    uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true);
-                    if (SlotID != ERROR_SLOTID)
+                    if (const CItem* PDelItem = itemutils::GetItemPointer(canceledItem.itemid))
                     {
-                        return;
+                        if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
+                        {
+                            return;
+                        }
                     }
                 }
-            }
 
-            // If we got here, something went wrong.
-            throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
-        });
+                // If we got here, something went wrong.
+                throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
+            });
         if (success)
         {
-            PChar->pushPacket<CAuctionHousePacket>(action, 0, PChar, slotid, false);
-            PChar->pushPacket<CInventoryFinishPacket>();
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
             return;
         }
-        // clang-format on
     }
 
     // Let client know something went wrong
-    PChar->pushPacket<CAuctionHousePacket>(action, 0xE5, PChar, slotid, true); // Inventory full, unable to remove msg
+    PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0xE5, PChar, static_cast<uint8_t>(AucWorkIndex), true); // Inventory full, unable to remove msg
 }
 
-void auctionutils::UpdateSaleListByPlayer(CCharEntity* PChar, uint8 action, uint8 slotid)
+void auctionutils::UpdateSaleListByPlayer(CCharEntity* PChar, int8_t AucWorkIndex)
 {
     TracyZoneScoped;
 
-    PChar->pushPacket<CAuctionHousePacket>(action, slotid, PChar);
+    // AucWorkIndex can technically be -1 but this is checked at the packet handler level.
+    DebugAuctionsFmt("AH: UpdateSaleListByPlayer: player: {}, AucWorkIndex: {}", PChar->getName(), AucWorkIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCheck, AucWorkIndex, PChar);
 }

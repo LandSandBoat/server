@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTRAIT_H
-#define _CTRAIT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -235,10 +234,10 @@ typedef std::vector<CTrait*> TraitList_t;
 
 namespace traits
 {
-    void LoadTraitsList();
-    void ClearTraitsList();
 
-    TraitList_t* GetTraits(uint8 JobID);
+void LoadTraitsList();
+void ClearTraitsList();
+
+TraitList_t* GetTraits(uint8 JobID);
+
 }; // namespace traits
-
-#endif

@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     elseif
         collectTarutCards == xi.questStatus.QUEST_COMPLETED and
         rubbishDay == xi.questStatus.QUEST_AVAILABLE and
-        player:getCharVar('RubbishDay_day') ~= VanadielDayOfTheYear()
+        player:getCharVar('RubbishDay_day') ~= VanadielUniqueDay()
     then
         -- prog = player:getCharVar('RubbishDay_prog')
         -- if prog <= 2 then
@@ -78,11 +78,11 @@ entity.onTrigger = function(player, npc)
         allInTheCards >= xi.questStatus.QUEST_ACCEPTED and
         player:getLocalVar('Cardstemp') == 0
     then
-        if cdate >= os.time() then
+        if cdate >= GetSystemTime() then
             player:startEvent(10111) -- During quest 'All in the Cards' and same AllInTheCards_date value
         elseif cdate == 0 then
             player:startEvent(10113) -- Start quest 'All in the Cards' repeat with option
-        elseif cdate < os.time() then
+        elseif cdate < GetSystemTime() then
             player:startEvent(10112) -- During quest 'All in the Cards'  THIS ONE GIVES ANOTHER BATCH
         end
 
@@ -130,13 +130,13 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 199 and option == 0 then
         player:incrementCharVar('RubbishDay_prog', 1)
-        player:setCharVar('RubbishDay_day', VanadielDayOfTheYear()) -- new vanadiel day
+        player:setCharVar('RubbishDay_day', VanadielUniqueDay()) -- new vanadiel day
 
     elseif csid == 198 and option == 0 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
         npcUtil.giveKeyItem(player, xi.ki.MAGIC_TRASH)
         player:setCharVar('RubbishDay_prog', 0)
-        player:setCharVar('RubbishDay_day', VanadielDayOfTheYear())
+        player:setCharVar('RubbishDay_day', VanadielUniqueDay())
 
     elseif
         (csid == 10110 or csid == 10112 or csid == 10113) and
@@ -155,7 +155,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.giveItem(player, { { card, 5 } }) then
             player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
-            player:setCharVar('AllInTheCards_date', getMidnight())
+            player:setCharVar('AllInTheCards_date', JstMidnight())
             player:setLocalVar('Cardstemp', 1)
         end
 

@@ -2,26 +2,24 @@
 -- Area: Kazham
 --  NPC: Pahya Lolohoiv
 -----------------------------------
-local ID = zones[xi.zone.KAZHAM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4509,   10,    -- Distilled Water
-        4150, 2387,    -- Eye Drops
-        4148,  290,    -- Antidote
-        4151,  736,    -- Echo Drops
-        4112,  837,    -- Potion
-        4128, 4445,    -- Ether
-        924,   556,    -- Fiend Blood
-        943,   294,    -- Poison Dust
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12 },
+        { xi.item.FLASK_OF_EYE_DROPS,       2724 },
+        { xi.item.ANTIDOTE,                  331 },
+        { xi.item.FLASK_OF_ECHO_DROPS,       840 },
+        { xi.item.POTION,                    955 },
+        { xi.item.ETHER,                    5073 },
+        { xi.item.VIAL_OF_FIEND_BLOOD,       635 },
+        { xi.item.PINCH_OF_POISON_DUST,      336 },
     }
 
-    player:showText(npc, ID.text.PAHYALOLOHOIV_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    player:showText(npc, zones[xi.zone.KAZHAM].text.PAHYALOLOHOIV_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end
 
 return entity

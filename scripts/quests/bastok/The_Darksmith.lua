@@ -49,10 +49,22 @@ quest.sections =
                         return quest:progressEvent(566)
                     end
                 end,
+
+                onTrigger = function(player, npc)
+                    if not quest:getMustZone(player) then
+                        return quest:event(561) -- First trigger only. Reset on zone.
+                    else
+                        return quest:event(560) -- Subsequent triggers.
+                    end
+                end,
             },
 
             onEventFinish =
             {
+                [561] = function(player, csid, option, npc)
+                    quest:setMustZone(player)
+                end,
+
                 [566] = function(player, csid, option, npc)
                     player:confirmTrade()
 

@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore vitality of 1 every 3 ticks.
+    -- The effect restores 1 VIT every 3 ticks. (1 Tick = 3 seconds).
     local downVITEffectSize = effect:getPower()
     if downVITEffectSize > 0 then
         effect:setPower(downVITEffectSize - 1)
         target:delMod(xi.mod.VIT, -1)
+    else
+        target:delStatusEffect(xi.effect.VIT_DOWN)
     end
 end
 

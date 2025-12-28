@@ -15,27 +15,37 @@ local sacrariumID = zones[xi.zone.SACRARIUM]
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP)
 
 local profQmOnTrigger = function(player, npc)
-    local missionStatus = mission:getVar(player, 'Status')
-    local isSpawnPoint = npc:getLocalVar('hasProfessorMariselle') == 1
-
     if
-        missionStatus == 3 and
-        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
-        isSpawnPoint
-    then
-        GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
-        for i = 1, 2 do
-            GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE + i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
-        end
-
-        npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
-        return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
-    elseif
-        mission:getLocalVar(player, 'hasKilled') == 1 and
+        mission:getVar(player, 'Status') == 3 and
         not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)
     then
-        npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
-        return mission:noAction()
+        local mariselle = GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE)
+
+        if not mariselle then
+            return
+        end
+
+        -- Has already fought Mariselle.
+        if mission:getLocalVar(player, 'hasKilledMariselle') == 1 then
+            npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
+            return mission:noAction()
+
+        elseif npc:getLocalVar('hasProfessorMariselle') == 1 then
+            -- Hasn't fought mariselle, but it's poped.
+            if mariselle:isSpawned() then
+                return mission:messageSpecial(sacrariumID.text.DRAWER_SHUT)
+
+            -- Pop Mariselle.
+            else
+                mariselle:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
+                for i = 1, 2 do
+                    GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE + i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
+                end
+
+                npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
+                return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
+            end
+        end
     end
 end
 
@@ -150,7 +160,7 @@ mission.sections =
             {
                 onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 3 then
-                        mission:setLocalVar(player, 'hasKilled', 1)
+                        mission:setLocalVar(player, 'hasKilledMariselle', 1)
                     end
                 end,
             },

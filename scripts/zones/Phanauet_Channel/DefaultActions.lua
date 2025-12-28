@@ -1,7 +1,8 @@
--- local ID = zones[xi.zone.PHANAUET_CHANNEL]
+local ID = zones[xi.zone.PHANAUET_CHANNEL]
 
 return {
-    ['Ineuteniace'] = { event = 101 },
-    ['Laiteconce']  = { event = 1 },
-    ['Luquillaue']  = { event = 3 },
+    ['Eunirange']   = { text = ID.text.ARE_WE_THERE_YET },
+    ['Ineuteniace'] = { text = ID.text.TRAVEL_ANY_FASTER },
+    ['Riche']       = { text = ID.text.TONBERRY_MSG },
+    ['Roi']         = { text = ID.text.TONBERRY_MSG },
 }

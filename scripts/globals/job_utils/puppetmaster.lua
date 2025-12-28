@@ -85,11 +85,16 @@ xi.job_utils.puppetmaster.onAbilityUseActivate = function(player, target, abilit
         local jpValue = player:getJobPointLevel(xi.jp.AUTOMATON_HP_MP_BONUS)
         pet:addMod(xi.mod.HP, jpValue * 10)
         pet:addMod(xi.mod.MP, jpValue * 5)
+        pet:updateHealth()
+
+        -- ensure it spawns at full hp
+        pet:addHP(pet:getMod(xi.mod.HP))
+        pet:addMP(pet:getMod(xi.mod.MP))
     end
 end
 
--- On Ability Check Deux Ex Automata
-xi.job_utils.puppetmaster.onAbilityCheckDeuxExAutomata = function(player, target, ability)
+-- On Ability Check Deus Ex Automata
+xi.job_utils.puppetmaster.onAbilityCheckDeusExAutomata = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
@@ -103,15 +108,21 @@ xi.job_utils.puppetmaster.onAbilityCheckDeuxExAutomata = function(player, target
     end
 end
 
--- On Ability Use Deux Ex Automata
-xi.job_utils.puppetmaster.onAbilityUseDeuxExAutomata = function(player, target, ability)
+-- On Ability Use Deus Ex Automata
+xi.job_utils.puppetmaster.onAbilityUseDeusExAutomata = function(player, target, ability)
     xi.pet.spawnPet(player, xi.petId.AUTOMATON)
     local pet = player:getPet()
 
     if pet then
+        local jpValue = player:getJobPointLevel(xi.jp.AUTOMATON_HP_MP_BONUS)
+        pet:addMod(xi.mod.HP, jpValue * 10)
+        pet:addMod(xi.mod.MP, jpValue * 5)
+        pet:updateHealth()
+
+        -- ensure it spawns at specific HPP/MPP based on level
         local percent = math.floor((player:getMainLvl() / 3)) / 100
-        pet:setHP(math.max(pet:getHP() * percent, 1))
-        pet:setMP(pet:getMP() * percent)
+        pet:setHP(math.max(pet:getMaxHP() * percent, 1))
+        pet:setMP(pet:getMaxMP() * percent)
     end
 end
 
@@ -138,6 +149,8 @@ xi.job_utils.puppetmaster.onAbilityCheckRepair = function(player, target, abilit
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not pet:isAutomaton() then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
+    elseif pet:checkDistance(player) > 20.0 + player:getHitboxSize() + pet:getHitboxSize() then
+        return xi.msg.basic.TOO_FAR_AWAY_2, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
 
@@ -150,11 +163,14 @@ xi.job_utils.puppetmaster.onAbilityCheckRepair = function(player, target, abilit
 end
 
 -- On Ability Use Repair
-xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability)
+xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability, action)
     local pet = player:getPet()
     if not pet then
         return
     end
+
+    -- Self-cast ability but reports on pet
+    action:ID(player:getID(), pet:getID())
 
     local petMaxHP            = pet:getMaxHP()
     local numRemovableEffects = player:getMod(xi.mod.REPAIR_EFFECT)
@@ -184,7 +200,7 @@ xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability)
 
     pet:delStatusEffect(xi.effect.REGEN)
     pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
-    player:removeAmmo()
+    player:removeAmmo(1)
     return totalHealing
 end
 
@@ -221,7 +237,7 @@ xi.job_utils.puppetmaster.onAbilityUseMaintenance = function(player, target, abi
         numRemoved = numRemoved + 1
     until toRemove <= 0
 
-    player:removeAmmo()
+    player:removeAmmo(1)
 
     return numRemoved
 end

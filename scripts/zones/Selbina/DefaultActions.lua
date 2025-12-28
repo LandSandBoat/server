@@ -1,13 +1,12 @@
-local ID = zones[xi.zone.SELBINA]
+-- local ID = zones[xi.zone.SELBINA]
 
 return {
-    ['Abelard']      = { text = ID.text.ABELARD_DIALOG },
     ['Battal']       = { event = 1102 },
     ['Elfriede']     = { event = 25 },
     ['Devean']       = { event = 124 },
     ['Diederik']     = { event = 1111 },
-    ['Flandiace']    = { event = 12 },
-    ['Gabwaleid']    = { event = 600 },
+    ['Helina']       = { event = 10031 },
+    ['Jillia']       = { event = 10014 },
     ['Jimaida']      = { event = 152 },
     ['Manfried']     = { event = 15 },
     ['Meldivon']     = { event = 720 },
@@ -19,10 +18,8 @@ return {
     ['Pacomart']     = { event = 180 },
     ['Pascaut']      = { event = 26 },
     ['Pomulus']      = { event = 700 },
-    ['Ramona']       = { event = 170 },
     ['Thunder_Hawk'] = { event = 84 },
     ['Valgeir']      = { event = 140 },
-    ['Velema']       = { event = 10 },
     ['Vobo']         = { event = 710 },
     ['Yaya']         = { event = 153 },
     ['Zaldon']       = { event = 150 },

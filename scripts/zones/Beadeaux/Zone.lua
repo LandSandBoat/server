@@ -46,7 +46,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:getTriggerAreaID()
     local yPos     = player:getYPos()
-    local time     = os.time()
+    local time     = GetSystemTime()
 
     -- TODO:
     -- Packet not implemented correctly. This should be able to have the npc use an animation onto the player itself but current cannot.

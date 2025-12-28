@@ -24,9 +24,7 @@
 #include "entities/battleentity.h"
 
 #include "ai/ai_container.h"
-#include "packets/action.h"
-#include "packets/lock_on.h"
-#include "utils/battleutils.h"
+#include "trade_container.h"
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)
@@ -64,8 +62,17 @@ CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)
     }
 }
 
-bool CSynthState::Update(time_point tick)
+bool CSynthState::Update(timer::time_point tick)
 {
+    // Exit state if dead
+    if (m_PEntity->isDead())
+    {
+        synthutils::doSynthCriticalFail(m_PEntity);
+
+        m_PEntity->CraftContainer->Clean(); // Clean to reset m_ItemCount to 0
+        return true;
+    }
+
     if (SynthReady())
     {
         synthutils::sendSynthDone(m_PEntity);
@@ -78,7 +85,7 @@ bool CSynthState::Update(time_point tick)
     return false;
 }
 
-void CSynthState::Cleanup(time_point tick)
+void CSynthState::Cleanup(timer::time_point tick)
 {
     std::ignore = tick;
 }

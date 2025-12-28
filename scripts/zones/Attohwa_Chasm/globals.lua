@@ -32,6 +32,21 @@ local attohwaChasmGlobal =
 
         return canStartTimer
     end,
+
+    handleMiasma = function(npc)
+        local timer    = npc:getLocalVar('timer')
+        local newTimer = math.random(30, 40)
+
+        if GetSystemTime() >= timer then
+            if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+                npc:setAnimation(xi.anim.OPEN_DOOR)
+            else
+                npc:setAnimation(xi.anim.CLOSE_DOOR)
+            end
+
+            npc:setLocalVar('timer', GetSystemTime() + newTimer)
+        end
+    end
 }
 
 return attohwaChasmGlobal

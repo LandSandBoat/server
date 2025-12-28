@@ -63,20 +63,7 @@ entity.onMobFight = function(mob, target)
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar('changeTime')
 
-    local isBusy = false
-    local act = mob:getCurrentAction()
-    if
-        act == xi.act.MOBABILITY_START or
-        act == xi.act.MOBABILITY_USING or
-        act == xi.act.MOBABILITY_FINISH
-    then
-        isBusy = true
-    end
-
-    if
-        mob:actionQueueEmpty() and
-        not isBusy
-    then -- dont change forms while charging Optic Induration
+    if not xi.combat.behavior.isEntityBusy(mob) then -- dont change forms while charging Optic Induration
         if
             mob:getAnimationSub() == 0 and
             mob:getBattleTime() - changeTime > randomTime
@@ -110,11 +97,11 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local hpp = mob:getHPP()
+    local hpp         = mob:getHPP()
     local healpercent = mob:getLocalVar('healpercent')
-    local heal = mob:getLocalVar('heal')
-    local zdeiOne = GetMobByID(ID.mob.IXZDEI_BASE + 2)
-    local zdeiTwo = GetMobByID(ID.mob.IXZDEI_BASE + 3)
+    local heal        = mob:getLocalVar('heal')
+    local zdeiOne     = GetMobByID(ID.mob.IXZDEI_BASE + 2)
+    local zdeiTwo     = GetMobByID(ID.mob.IXZDEI_BASE + 3)
     if
         hpp < healpercent and
         heal == 0

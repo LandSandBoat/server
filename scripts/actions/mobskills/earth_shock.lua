@@ -11,7 +11,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
---  TODO: unknown if multi-hit
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 2

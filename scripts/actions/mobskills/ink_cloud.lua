@@ -13,7 +13,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 0, 120))
+    local power = 50 + 5 * math.floor((skill:getTP() - 1000) / 1000)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, math.random(30, 60)))
 
     return xi.effect.BLINDNESS
 end

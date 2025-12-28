@@ -19,15 +19,14 @@
 ===========================================================================
 */
 
-#ifndef _CPARTY_H
-#define _CPARTY_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include "map.h"
-#include "packets/message_standard.h"
+#include "packets/s2c/0x009_message.h"
 
 #include <vector>
 
+enum class GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND : uint8_t;
 class CBasicPacket;
 class CBattleEntity;
 class CCharEntity;
@@ -86,7 +85,7 @@ public:
     void   PopMember(CBattleEntity* PEntity);    // remove a member from memberlist (zoned to different server)
     void   PushMember(CBattleEntity* PEntity);   // add a member without invoking chat/db
     void   SetPartyID(uint32 id);                // set new party ID
-    void   AssignPartyRole(const std::string& MemberName, uint8 role);
+    void   AssignPartyRole(const std::string& MemberName, GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND role);
     void   DisableSync();
     void   SetSyncTarget(const std::string& MemberName, MsgStd message);
     void   RefreshSync();
@@ -95,8 +94,8 @@ public:
     bool   IsFull() const;
     uint32 LoadPartySize() const;
 
-    uint32 GetTimeLastMemberJoined();
-    bool   HasTrusts();
+    timer::time_point GetTimeLastMemberJoined();
+    bool              HasTrusts();
 
     std::size_t GetMemberCountAcrossAllProcesses();
 
@@ -128,5 +127,3 @@ private:
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
 };
-
-#endif

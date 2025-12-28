@@ -16,26 +16,20 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6225)
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
 end
 
 itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.FOOD_MPP, 30)
-    target:addMod(xi.mod.FOOD_MP_CAP, 110)
-    target:addMod(xi.mod.INT, 7)
-    target:addMod(xi.mod.MND, 7)
-    target:addMod(xi.mod.MATT, 15)
-    target:addMod(xi.mod.LIZARD_KILLER, 7)
+    effect:addMod(xi.mod.FOOD_MPP, 30)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 110)
+    effect:addMod(xi.mod.INT, 7)
+    effect:addMod(xi.mod.MND, 7)
+    effect:addMod(xi.mod.MATT, 15)
+    effect:addMod(xi.mod.LIZARD_KILLER, 7)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.FOOD_MPP, 30)
-    target:delMod(xi.mod.FOOD_MP_CAP, 110)
-    target:delMod(xi.mod.INT, 7)
-    target:delMod(xi.mod.MND, 7)
-    target:delMod(xi.mod.MATT, 15)
-    target:delMod(xi.mod.LIZARD_KILLER, 7)
 end
 
 return itemObject

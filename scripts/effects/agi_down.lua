@@ -13,11 +13,13 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    -- the effect restore agility of 1 every 3 ticks.
+    -- The effect restores 1 AGI every 3 ticks. (1 Tick = 3 seconds).
     local downAGIEffectSize = effect:getPower()
     if downAGIEffectSize > 0 then
         effect:setPower(downAGIEffectSize - 1)
         target:delMod(xi.mod.AGI, -1)
+    else
+        target:delStatusEffect(xi.effect.AGI_DOWN)
     end
 end
 

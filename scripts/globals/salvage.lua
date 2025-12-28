@@ -291,22 +291,24 @@ xi.salvage.handleSocketCells = function(mob, player)
 end
 
 xi.salvage.spawnGroup = function(instance, indexID)
-    for _, enemies in pairs(indexID) do
-        if type(enemies) == 'table' then
-            for _, groups in pairs(enemies) do
-                if type(groups) == 'table' then
-                    for _, subGroups in pairs(groups) do
-                        SpawnMob(subGroups, instance)
-                        GetMobByID(subGroups, instance):setLocalVar('spawned', 1)
+    if indexID then
+        for _, enemies in pairs(indexID) do
+            if type(enemies) == 'table' then
+                for _, groups in pairs(enemies) do
+                    if type(groups) == 'table' then
+                        for _, subGroups in pairs(groups) do
+                            SpawnMob(subGroups, instance)
+                            GetMobByID(subGroups, instance):setLocalVar('spawned', 1)
+                        end
+                    else
+                        SpawnMob(groups, instance)
+                        GetMobByID(groups, instance):setLocalVar('spawned', 1)
                     end
-                else
-                    SpawnMob(groups, instance)
-                    GetMobByID(groups, instance):setLocalVar('spawned', 1)
                 end
+            else
+                SpawnMob(enemies, instance)
+                GetMobByID(enemies, instance):setLocalVar('spawned', 1)
             end
-        else
-            SpawnMob(enemies, instance)
-            GetMobByID(enemies, instance):setLocalVar('spawned', 1)
         end
     end
 end

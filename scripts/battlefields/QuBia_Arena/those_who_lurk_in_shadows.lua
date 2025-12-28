@@ -37,7 +37,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         not player:hasKeyItem(xi.ki.IVORY_KEY) and
         player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
     then
-        player:setCharVar('LastIvoryKey', getMidnight())
+        player:setCharVar('LastIvoryKey', JstMidnight())
         npcUtil.giveKeyItem(player, xi.ki.IVORY_KEY)
     end
 end

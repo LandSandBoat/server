@@ -57,31 +57,21 @@ local function performWSJump(player, target, action, params, abilityID)
     local taChar = player:getTrickAttackChar(target)
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, 0, params, 1000, action, true, taChar)
     local totalHits  = tpHits + extraHits
-    local specEffect = 0x00
 
     if totalHits > 0 then
-        if target:getHP() <= 0 then
-            specEffect = bit.bor(specEffect, 0x01) -- Add in 'killed target' bit
-        end
-
-        if criticalHit then -- set crit bit
-            specEffect = bit.bor(specEffect, 0x02)
-        end
-
         if
             abilityID == xi.jobAbility.SOUL_JUMP or
             abilityID == xi.jobAbility.SPIRIT_JUMP
         then
-            specEffect = bit.bor(specEffect, 0x04) -- Add in Soul/Spirit bit
+            action:info(target:getID(), 4) -- Special info flag for these abilities.
         end
 
         -- TODO: process additional effects such as Delphinius, Pteroslaver Mail +2/3, Hebo's Spear, enspells, other weapon built-in add effects
 
-        action:speceffect(target:getID(), specEffect)
+        action:recordDamage(target, xi.attackType.PHYSICAL, damage, criticalHit)
         action:messageID(target:getID(), xi.msg.basic.USES_JA_TAKE_DAMAGE)
     else
         action:messageID(target:getID(), xi.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), specEffect)
     end
 
     -- Jumps add JUMP_TP_BONUS regardless of 0 dmg or miss and is affected by Store TP but not the target's subtle blow
@@ -231,7 +221,11 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
         power = 15 + jpValue
     end
 
+    power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
+
     target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
+
+    return xi.effect.ANCIENT_CIRCLE
 end
 
 xi.job_utils.dragoon.useJump = function(player, target, ability, action)
@@ -324,7 +318,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     end
 end
 
-xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
+xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
     local wyvern      = player:getPet()
     local playerHP    = player:getHP()
     local petTP       = wyvern:getTP()
@@ -409,6 +403,8 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         healPet = healPet + 15
     end
 
+    -- Spirit Link is self target but reports effect on Wyvern.
+    action:ID(player:getID(), wyvern:getID())
     return wyvern:addHP(healPet) -- add the hp to wyvern
 end
 
@@ -461,7 +457,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:getHP() > 0 and
         wyvern:isEngaged()
     then
-        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+        wyvern:usePetAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 
     -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
@@ -506,7 +502,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     end
 
     target:updateClaim(player)
-    player:removeAmmo()
+    player:removeAmmo(1)
 
     return xi.effect.DEFENSE_DOWN
 end
@@ -521,6 +517,8 @@ end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
     player:addStatusEffect(xi.effect.SPIRIT_BOND, 0, 0, 180)
+
+    return xi.effect.SPIRIT_BOND
 end
 
 xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
@@ -563,7 +561,7 @@ xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
 end
 
 xi.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DRAGON_BREAKER, 20, 0, 180)
+    target:addStatusEffect(xi.effect.DRAGON_BREAKER, 20, 0, 180)
 end
 
 xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
@@ -575,6 +573,8 @@ xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 167) -- Soul Jump
 
     player:addStatusEffect(xi.effect.FLY_HIGH, 0, 0, 30)
+
+    return xi.effect.FLY_HIGH
 end
 
 xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
@@ -584,8 +584,6 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
     if wyvern then
         local power = wyvern:getMaxHP() * 0.3 + wyvern:getMaxHP() - wyvern:getHP()
 
-        action:reaction(wyvern:getID(), 0x10) -- Observed on retail
-
         if wyvern:addStatusEffect(xi.effect.STONESKIN, power, 0, 300) then
             local effect = wyvern:getStatusEffect(xi.effect.STONESKIN)
 
@@ -594,6 +592,9 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
                 effect:setTier(5) -- Empathy doesn't overwrite this stoneskin wih player casted stoneskin
             end
         end
+
+        -- Steady Wing is self target but reports effect on Wyvern.
+        action:ID(player:getID(), wyvern:getID())
     end
 end
 
@@ -635,7 +636,6 @@ xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     local totalHPRestored = target:addHP(curePower)
 
     skill:setMsg(xi.msg.basic.JA_RECOVERS_HP_2)
-    action:reaction(target:getID(), 0x18)
 
     -- also cure the Wyvern if Spirit Bond is up
     if master:hasStatusEffect(xi.effect.SPIRIT_BOND) then
@@ -644,7 +644,6 @@ xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
         action:addAdditionalTarget(wyvern:getID())
         action:setAnimation(wyvern:getID(), action:getAnimation(target:getID()))
         action:messageID(wyvern:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
-        action:reaction(wyvern:getID(), 0x18)
         action:param(wyvern:getID(), totalWyvernHPRestored)
     end
 
@@ -691,10 +690,11 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     local element            = damageType - xi.damageType.ELEMENTAL
     local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
 
-    -- 'Breath accuracy is directly affected by a wyvern's current HP', but no data exists.
+    -- Breath accuracy is directly affected by a wyvern's current HP, but no data exists.
     local resist              = xi.combat.magicHitRate.calculateResistRate(wyvern, target, 0, 0, 0, element, 0, 0, bonusMacc)
     local sdt                 = xi.spells.damage.calculateSDT(target, element)
-    local nukeAbsorbOrNullify = xi.spells.damage.calculateNukeAbsorbOrNullify(target, element)
+    local absorb              = xi.spells.damage.calculateAbsorption(target, element, true)
+    local nullify             = xi.spells.damage.calculateNullification(target, element, true, true)
     local magicBurst          = 1
 
     if skillchainCount > 0 then
@@ -702,10 +702,11 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     end
 
     -- It appears that MB breaths don't do more damage based on testing.
-    damage = damage * resist * sdt * nukeAbsorbOrNullify
+    damage = damage * resist * sdt * absorb * nullify
 
     if damage >= 0 then
         damage = xi.ability.adjustDamage(damage, wyvern, skill, target, xi.attackType.BREATH, damageType, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+        action:recordDamage(target, xi.attackType.BREATH, damage)
         action:messageID(target:getID(), xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
         if magicBurst > 1 then
@@ -776,7 +777,7 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
         end
     end
 
-    player:getPet():useJobAbility(breathToUse, target)
+    player:getPet():usePetAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
@@ -820,7 +821,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     local jobPointRecastReduction = player:getMod(xi.mod.DRAGOON_BREATH_RECAST)
     action:setRecast(ability:getRecast() - jobPointRecastReduction)
 
-    wyvern:useJobAbility(healingbreath, target)
+    wyvern:usePetAbility(healingbreath, target)
 end
 
 xi.job_utils.dragoon.useSmitingBreath = function(player, target, ability, action)

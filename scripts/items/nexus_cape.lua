@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     local leader = target:getPartyLeader()
     -- In a party and we were able to find the leader
     -- (currently fails in cross map server situations)
-    if leader ~= nil and not leader:isInMogHouse() then
+    if leader ~= nil and not leader:inMogHouse() then
         -- Don't try to teleport to self!
         if target:getID() ~= leader:getID() then
             local leaderZone = leader:getZoneID()

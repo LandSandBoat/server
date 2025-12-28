@@ -1,7 +1,7 @@
 -----------------------------------
---  Heat Breath
---  Description: Deals fire damage to enemies within a fan-shaped area originating from the caster.
---  Type: Magical (Fire)
+-- Heat Breath
+-- Family: Manticores
+-- Description: Deals Fire damage to enemies within a fan-shaped area originating from the caster.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,12 +11,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.5, 1, xi.element.FIRE, 500)
+    local params = {}
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.percentMultipier  = 0.125
+    params.element           = xi.element.FIRE
+    params.damageCap         = 500
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
-    return dmg
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
+
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.FIRE)
+    end
+
+    return damage
 end
 
 return mobskillObject

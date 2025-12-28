@@ -24,6 +24,26 @@ local content = BattlefieldQuest:new({
     title = xi.title.CONQUEROR_OF_FATE,
 })
 
+local function healCharacter(player)
+    if player:isAlive() then
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
+
+        if player:getPet() ~= nil then
+            local pet = player:getPet()
+            pet:setHP(pet:getMaxHP())
+            pet:setMP(pet:getMaxMP())
+            pet:setTP(0)
+        end
+    end
+end
+
+-- players on healed on entry to the battlefield
+function content:battlefieldEntry(player, battlefield)
+    healCharacter(player)
+end
+
 content.groups =
 {
     {

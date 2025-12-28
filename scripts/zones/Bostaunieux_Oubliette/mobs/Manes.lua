@@ -2,8 +2,23 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Manes
 -----------------------------------
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -60.400, y =  17.000, z = -138.000 }
+}
+
+entity.phList =
+{
+    [ID.mob.MANES - 2] = ID.mob.MANES,
+    [ID.mob.MANES - 1] = ID.mob.MANES,
+    [ID.mob.MANES + 5] = ID.mob.MANES,
+    [ID.mob.MANES + 6] = ID.mob.MANES,
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -24,7 +24,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) > 4 and
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                 player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == xi.questStatus.QUEST_COMPLETED
         end,
 

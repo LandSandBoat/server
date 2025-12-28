@@ -24,22 +24,24 @@
 #include "ai/ai_container.h"
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
-#include "packets/menu_raisetractor.h"
+#include "packets/s2c/0x0f9_res.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 
 namespace
 {
-    static const duration TIME_TO_SEND_RERAISE_MENU = 8s;
+
+static const timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
+
 }
 
-CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time)
+CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
 : CState(PEntity, PEntity->targid)
 , m_PEntity(PEntity)
 , m_deathTime(death_time)
 , m_raiseTime(GetEntryTime() + TIME_TO_SEND_RERAISE_MENU)
 {
-    m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
+    m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, EffectNotice::Silent);
 
     m_PEntity->animation = ANIMATION_DEATH;
     m_PEntity->updatemask |= UPDATE_HP;
@@ -49,29 +51,52 @@ CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time)
     }
 }
 
-bool CDeathState::Update(time_point tick)
+bool CDeathState::Update(timer::time_point tick)
 {
-    // It's completed
-    if (IsCompleted() || m_PEntity->animation != ANIMATION_DEATH)
+    if (m_PEntity->objtype != TYPE_PC)
     {
-        return true;
+        if (IsCompleted() || !m_PEntity->isDead())
+        {
+            return true;
+        }
+        else
+        {
+            auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
+            if (tick > time)
+            {
+                Complete();
+                m_PEntity->OnDeathTimer();
+            }
+        }
     }
-
-    // It's not completed
     else
     {
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+
         auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
-        if (tick > time)
+
+        // exit state after 2 seconds on raise
+        if (m_raiseAccepted && IsCompleted() && tick > m_raiseAcceptedTime + 2s)
+        {
+            m_PEntity->animation = ANIMATION_NONE; // TODO: should this be set in acceptRaise or after 2 seconds?
+            m_PEntity->updatemask |= UPDATE_HP;
+
+            return true;
+        }
+        // Check for auto-homepoint
+        else if (tick > time)
         {
             Complete();
             m_PEntity->OnDeathTimer();
+
+            return true;
         }
-        else if (m_PEntity->objtype == TYPE_PC && tick > m_raiseTime && !m_raiseSent && m_PEntity->isDead())
+
+        if (tick > m_raiseTime && !m_raiseSent && m_PEntity->isDead())
         {
-            auto* PChar = static_cast<CCharEntity*>(m_PEntity);
             if (PChar->m_hasRaise)
             {
-                PChar->pushPacket<CRaiseTractorMenuPacket>(PChar, TYPE_RAISE);
+                PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Raise);
                 m_raiseSent = true;
             }
         }
@@ -82,6 +107,13 @@ bool CDeathState::Update(time_point tick)
 
 void CDeathState::allowSendRaise()
 {
-    m_raiseTime = server_clock::now() + 12s;
+    m_raiseTime = timer::now() + 12s;
     m_raiseSent = false;
+}
+
+void CDeathState::acceptRaise()
+{
+    m_raiseAcceptedTime = timer::now();
+    m_raiseAccepted     = true;
+    Complete();
 }

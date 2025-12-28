@@ -42,25 +42,7 @@ INSERT INTO `mob_pool_mods` VALUES (44,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 
 -- Animated Shield
-INSERT INTO `mob_pool_mods` VALUES (154,163,-70,0); -- DMGMAGIC: -70
-
--- Antican Praetor
-INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
-INSERT INTO `mob_pool_mods` VALUES (181,2,9234,1); -- GIL_MAX: 9234
-
--- Ark Angel Gk
-INSERT INTO `mob_pool_mods` VALUES (236,30,732,1); -- SPECIAL_SKILL: 732
-INSERT INTO `mob_pool_mods` VALUES (236,33,60,1);  -- SPECIAL_COOL: 60
-
--- Ark Angel Hm
-INSERT INTO `mob_pool_mods` VALUES (237,44,1,1); -- DUAL_WIELD: 1
-
--- Ark Angel Tt
-INSERT INTO `mob_pool_mods` VALUES (242,40,30,1);  -- TELEPORT_CD: 30
-INSERT INTO `mob_pool_mods` VALUES (242,41,936,1); -- TELEPORT_START: 936
-INSERT INTO `mob_pool_mods` VALUES (242,42,962,1); -- TELEPORT_END: 962
-INSERT INTO `mob_pool_mods` VALUES (242,43,1,1);   -- TELEPORT_TYPE: 1
-INSERT INTO `mob_pool_mods` VALUES (242,47,22,1);  -- SPAWN_LEASH: 22
+INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 
 -- Aspidochelone
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
@@ -98,9 +80,6 @@ INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
 INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200
 INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
 
--- Cerebrator
-INSERT INTO `mob_pool_mods` VALUES (681,368,10,0); -- REGAIN: 10
-
 -- Citipati
 INSERT INTO `mob_pool_mods` VALUES (733,302,5,0); -- TRIPLE_ATTACK: 5
 
@@ -109,9 +88,6 @@ INSERT INTO `mob_pool_mods` VALUES (768,28,5,1); -- EXP_BONUS: 5
 
 -- Colossus
 INSERT INTO `mob_pool_mods` VALUES (770,4,4,1); -- SIGHT_RANGE: 4
-
--- Coveter
-INSERT INTO `mob_pool_mods` VALUES (820,368,10,0); -- REGAIN: 10
 
 -- Darksteel Golem
 INSERT INTO `mob_pool_mods` VALUES (906,4,4,1); -- SIGHT_RANGE: 4
@@ -136,7 +112,7 @@ INSERT INTO `mob_pool_mods` VALUES (979,9,60,1); -- HP_HEAL_CHANCE: 60
 INSERT INTO `mob_pool_mods` VALUES (1013,28,-100,1); -- EXP_BONUS: -100
 
 -- Effigy Prototype
-INSERT INTO `mob_pool_mods` VALUES (1178,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (1178,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Enkidu
 INSERT INTO `mob_pool_mods` VALUES (1234,4,4,1); -- SIGHT_RANGE: 4
@@ -161,6 +137,10 @@ INSERT INTO `mob_pool_mods` VALUES (1461,4,4,1); -- SIGHT_RANGE: 4
 
 -- Genbu
 INSERT INTO `mob_pool_mods` VALUES (1491,3,100,1); -- MP_BASE: 100
+
+-- Gladiatorial Weapon
+INSERT INTO `mob_pool_mods` VALUES (1620,5,18,1);   -- SOUND_RANGE: 18
+INSERT INTO `mob_pool_mods` VALUES (1620,72,22,1);  -- MAGIC_RANGE: 22
 
 -- Goblin Digger Near
 INSERT INTO `mob_pool_mods` VALUES (1648,17,1,1);  -- NO_DESPAWN: 1
@@ -190,7 +170,7 @@ INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);   -- STANDBACK_COOL: 0
 INSERT INTO `mob_pool_mods` VALUES (2032,244,15,0); -- SILENCERES: 15
 
 -- Icon Prototype
-INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (2047,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Intulo
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
@@ -242,9 +222,6 @@ INSERT INTO `mob_pool_mods` VALUES (2463,61,20,1); -- HP_SCALE: 20
 -- Mammet-19 Epsilon
 INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 
--- Mammet-22 Zeta
-INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- SLEEPRES: 90
-
 -- Minotaur
 INSERT INTO `mob_pool_mods` VALUES (2675,4,25,1); -- SIGHT_RANGE: 25
 
@@ -278,10 +255,6 @@ INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50
 
 -- Nunyunuwi
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0); -- REGEN: 100
-
--- Omega
-INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
-INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
 
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
@@ -334,18 +307,6 @@ INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
 -- Serket
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0); -- REGEN: 50
 
--- Shikaree X
-INSERT INTO `mob_pool_mods` VALUES (3598,161,30,0); -- DMGPHYS: 30
-INSERT INTO `mob_pool_mods` VALUES (3598,368,70,0); -- REGAIN: 70
-
--- Shikaree Y
-INSERT INTO `mob_pool_mods` VALUES (3600,161,30,0); -- DMGPHYS: 30
-INSERT INTO `mob_pool_mods` VALUES (3600,368,70,0); -- REGAIN: 70
-
--- Shikaree Z
-INSERT INTO `mob_pool_mods` VALUES (3601,168,30,0); -- SPELLINTERRUPT: 30
-INSERT INTO `mob_pool_mods` VALUES (3601,368,70,0); -- REGAIN: 70
-
 -- Slave Globe
 INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
 
@@ -353,7 +314,7 @@ INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
 INSERT INTO `mob_pool_mods` VALUES (3684,3,30,1); -- MP_BASE: 30
 
 -- Statue Prototype
-INSERT INTO `mob_pool_mods` VALUES (3759,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (3759,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Stone Golem
 INSERT INTO `mob_pool_mods` VALUES (3781,4,4,1); -- SIGHT_RANGE: 4
@@ -374,18 +335,17 @@ INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
 -- Tavnazian Ram
 INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 
+-- Tiny Mandragora
+INSERT INTO `mob_pool_mods` VALUES (3924,91,1,1); -- H2H_SINGLE_SWING: 1
+
 -- Tombstone Prototype
-INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
+INSERT INTO `mob_pool_mods` VALUES (3941,163,-1000,0); -- DMGMAGIC: -1000
 
 -- Tuchulcha
 INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
 
 -- Ullikummi
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
-
--- Ultima
-INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
-INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
 
 -- Vanguard_Armorer
 INSERT INTO `mob_pool_mods` VALUES (4136,75,3,1); -- CAN_PARRY: 3

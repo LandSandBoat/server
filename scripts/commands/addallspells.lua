@@ -1,6 +1,7 @@
 -----------------------------------
 -- func: addallspells
 -- desc: Adds all valid spells EXCEPT TRUSTS to the given target. If no target then to the current player.
+--       recursive to avoid xi_map crashing when tick takes too long on slower systems/databases
 -----------------------------------
 ---@type TCommand
 local commandObj = {}
@@ -11,12 +12,64 @@ commandObj.cmdprops =
     parameters = 's'
 }
 
-local function error(player, msg)
+local error = function(player, msg)
     player:printToPlayer(msg)
     player:printToPlayer('!addallspells (player)')
 end
 
-commandObj.onTrigger = function(player, target)
+local addSpellsInBatches -- forward delcaration to allow recursion
+
+addSpellsInBatches = function(player, targetName, validSpells, batchSize, learned, total)
+    local targ = GetPlayerByName(targetName)
+    -- ensure target still exists (hasn't zoned since we started the batch)
+    if targ == nil then
+        player:printToPlayer(fmt('Player named "{}" no longer found!', targetName))
+        return
+    end
+
+    local startTime = GetSystemTime()
+    local remainingSpells = {}
+    local addSpellConfig =
+    {
+        silentLog = true,
+        saveToDB = true,
+        sendUpdate = false,
+    }
+
+    for i = 1, #validSpells do
+        if i > batchSize then
+            remainingSpells[i - batchSize] = validSpells[i]
+        else
+            targ:addSpell(validSpells[i], addSpellConfig)
+        end
+    end
+
+    learned = learned + batchSize
+    if learned >= total then
+        -- send player update "<player> learns a new spell"
+        player:messageBasic(xi.msg.basic.PLAYER_LEARNS_NEW_SPELL)
+        player:printToPlayer(fmt('{} now has all spells.', targ:getName()), xi.msg.channel.SYSTEM_3)
+    else
+        player:printToPlayer(fmt('{} now has learned {} of {} spells.', targ:getName(), learned, total), xi.msg.channel.SYSTEM_3)
+
+        -- slowly increment batchSize, reducing if batch takes too long
+        local newBatchSize = batchSize
+        local finishTime = GetSystemTime()
+
+        if finishTime - startTime < 1 then
+            newBatchSize = newBatchSize + 30
+        elseif newBatchSize > 10 then
+            newBatchSize = newBatchSize - 10
+        end
+
+        -- queue another batch
+        player:timer(500, function(playerArg)
+            addSpellsInBatches(playerArg, targetName, remainingSpells, newBatchSize, learned, total)
+        end)
+    end
+end
+
+commandObj.onTrigger = function(player, target, alternateSpellList)
     local validSpells =
     {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
@@ -51,8 +104,6 @@ commandObj.onTrigger = function(player, target)
         841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866,
         867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 888, 889, 890, 891, 892,
         893, 894, 895
-
-        -- Trust spells are in their own command.
     }
 
     -- validate target
@@ -62,26 +113,24 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, fmt('Player named "{}" not found!', target))
             return
         end
     end
 
-    -- add all spells
-    local save = true
-    local silent = true
-    local sendUpdate = false -- prevent packet spam
-
-    for i = 1, #validSpells do
-        if i == #validSpells then
-            silent = false
-            sendUpdate = true
-        end
-
-        targ:addSpell(validSpells[i], silent, save, sendUpdate)
+    local targetName = target or player:getName()
+    -- Trust spells are in their own command and piggybacks on this command
+    if alternateSpellList then
+        validSpells = alternateSpellList
+    else
+        player:printToPlayer(fmt('Queuing unlock of all non-trust spells for {}', targetName), xi.msg.channel.SYSTEM_3)
     end
 
-    player:printToPlayer(string.format('%s now has all spells.', targ:getName()))
+    -- execute recursive function with
+    -- - base batch size of 25
+    -- - initial 0 learned spells
+    -- - total the full size of the spell list
+    addSpellsInBatches(player, targetName, validSpells, 25, 0, #validSpells)
 end
 
 return commandObj

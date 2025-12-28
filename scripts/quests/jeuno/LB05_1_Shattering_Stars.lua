@@ -11,9 +11,9 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
 
 quest.reward =
 {
-    fame = 80,
+    fame     = 80,
     fameArea = xi.fameArea.JEUNO,
-    title = xi.title.STAR_BREAKER,
+    title    = xi.title.STAR_BREAKER,
 }
 
 local maatBattlefieldIds =
@@ -95,22 +95,27 @@ quest.sections =
         {
             ['Maat'] =
             {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') >= 1 then
-                        return quest:progressEvent(93) -- Complete quest.
-                    elseif quest:getVar(player, 'Prog') == 0 then
-                        return quest:event(91, player:getMainJob())
-                    end
-                end,
-
                 onTrade = function(player, npc, trade)
-                    local properTestimony = xi.item.WARRIORS_TESTIMONY + player:getMainJob() - 1
+                    local playerJob       = player:getMainJob()
+                    local properTestimony = xi.item.WARRIORS_TESTIMONY + playerJob - 1
 
                     if
                         npcUtil.tradeHasExactly(trade, properTestimony) and
                         quest:getVar(player, 'Prog') == 0
                     then
-                        return quest:progressEvent(64, player:getMainJob())
+                        return quest:progressEvent(64, playerJob)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    local playerJob = player:getMainJob()
+
+                    if quest:getVar(player, 'Prog') >= 1 then
+                        return quest:progressEvent(93) -- Complete quest.
+                    elseif quest:getVar(player, 'tradedTestimony') == 0 then
+                        return quest:event(91, playerJob) -- Testimony never traded.
+                    else
+                        return quest:event(63, playerJob) -- Testimony traded at least once.
                     end
                 end,
             },
@@ -118,6 +123,9 @@ quest.sections =
             onEventFinish =
             {
                 [64] = function(player, csid, option, npc)
+                    quest:setVar(player, 'tradedTestimony', 1)
+
+                    -- Accept teleport.
                     if option == 1 then
                         local mJob = player:getMainJob()
                         if mJob == xi.job.MNK or mJob == xi.job.WHM or mJob == xi.job.SMN then

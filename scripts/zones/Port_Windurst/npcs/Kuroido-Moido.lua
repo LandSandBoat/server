@@ -13,31 +13,27 @@ entity.onTrigger = function(player, npc)
     local makingAmens = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local wonderWands = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local pfame = player:getFameLevel(xi.fameArea.WINDURST)
-    local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
-    if makingAmends == xi.questStatus.QUEST_ACCEPTED then -- MAKING AMENDS: During Quest
-        player:startEvent(276)
-    elseif
-        makingAmends == xi.questStatus.QUEST_COMPLETED and
-        makingAmens ~= xi.questStatus.QUEST_COMPLETED and
-        wonderWands ~= xi.questStatus.QUEST_COMPLETED and
-        needToZone
-    then
-        -- MAKING AMENDS: After Quest
-        player:startEvent(279)
-    elseif
+    if
         makingAmends == xi.questStatus.QUEST_COMPLETED and
         makingAmens == xi.questStatus.QUEST_AVAILABLE
     then
-        if pfame >= 4 and not needToZone then
+        if
+            pfame >= 4 and
+            not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
+        then
             player:startEvent(280) -- Start Making Amens! if prerequisites are met
-        else
-            player:startEvent(279) -- MAKING AMENDS: After Quest
         end
-    elseif makingAmens == xi.questStatus.QUEST_ACCEPTED and not brokenWand then -- Reminder for Making Amens!
-        player:startEvent(283)
-    elseif makingAmens == xi.questStatus.QUEST_ACCEPTED and brokenWand then -- Complete Making Amens!
+    elseif
+        makingAmens == xi.questStatus.QUEST_ACCEPTED and
+        not brokenWand
+    then
+        player:startEvent(283) -- Reminder for Making Amens!
+    elseif
+        makingAmens == xi.questStatus.QUEST_ACCEPTED and
+        brokenWand
+    then -- Complete Making Amens!
         player:startEvent(284, xi.settings.main.GIL_RATE * 6000)
     elseif makingAmens == xi.questStatus.QUEST_COMPLETED then
         if wonderWands == xi.questStatus.QUEST_ACCEPTED then -- During Wonder Wands dialogue

@@ -1,6 +1,4 @@
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.treasureHunter = xi.combat.treasureHunter or {}

@@ -26,7 +26,10 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getMustZone(player) or quest:getVar(player, 'Stage') > os.time() then
+                    if
+                        quest:getMustZone(player) or
+                        quest:getVar(player, 'Stage') > GetSystemTime()
+                    then
                         return quest:progressEvent(52)
                     else
                         return quest:progressEvent(42) -- Starts Quest
@@ -37,7 +40,7 @@ quest.sections =
             ['Ulamaal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:needToZone() or quest:getVar(player, 'Stage') > os.time() then
+                    if player:needToZone() or quest:getVar(player, 'Stage') > GetSystemTime() then
                         return quest:progressEvent(53)
                     else
                         return quest:progressEvent(42) -- Starts Quest
@@ -130,7 +133,7 @@ quest.sections =
                         player:needToZone(true)
                         player:delKeyItem(xi.ki.RAINBOW_BERRY)
                         -- Set variable for 'A taste of Honey' ToAU quest.
-                        player:setVar('Quest[6][12]Stage', getMidnight())
+                        player:setVar('Quest[6][12]Stage', JstMidnight())
                     end
                 end,
             },

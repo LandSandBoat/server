@@ -32,28 +32,36 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
-    params.scattr = xi.skillchainType.DISTORTION
-    params.numhits = 5
+    params.scattr     = xi.skillchainType.DISTORTION
+    params.numhits    = 5
     params.multiplier = 1.5
-    params.tp150 = 1.5
-    params.tp300 = 1.5
-    params.azuretp = 1.5
-    params.duppercap = 100
-    params.str_wsc = 0.2
-    params.dex_wsc = 0.2
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.tp150      = 1.5
+    params.tp300      = 1.5
+    params.azuretp    = 1.5
+    params.duppercap  = 100
+    params.str_wsc    = 0.2
+    params.dex_wsc    = 0.2
+    params.vit_wsc    = 0.0
+    params.agi_wsc    = 0.0
+    params.int_wsc    = 0.0
+    params.mnd_wsc    = 0.0
+    params.chr_wsc    = 0.0
 
-    params.effect = xi.effect.POISON
-    local power = (caster:getMainLvl() / 5) + 3
-    local tick = 0
-    local duration = 180
-
+    -- Handle damage.
     local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
-    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local power       = 3 + caster:getMainLvl() / 5
+    local effectTable =
+    {
+        [1] = { xi.effect.POISON, power, 3, 180 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

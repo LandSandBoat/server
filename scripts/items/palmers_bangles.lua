@@ -21,12 +21,11 @@ itemObject.onItemUse = function(target)
     end
 end
 
-itemObject.onEffectGain = function(target)
-    target:addMod(xi.mod.GILFINDER, 3)
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.GILFINDER, 3)
 end
 
-itemObject.onEffectLose = function(target)
-    target:delMod(xi.mod.GILFINDER, 3)
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject

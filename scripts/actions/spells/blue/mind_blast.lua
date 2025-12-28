@@ -21,29 +21,36 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.ecosystem = xi.ecosystem.DEMON
-    params.attackType = xi.attackType.MAGICAL
-    params.damageType = xi.damageType.THUNDER
-    params.attribute = xi.mod.MND
-    params.multiplier = 2.08
-    params.azureBonus = 0.5
+    params.ecosystem   = xi.ecosystem.DEMON
+    params.attackType  = xi.attackType.MAGICAL
+    params.damageType  = xi.damageType.THUNDER
+    params.attribute   = xi.mod.MND
+    params.multiplier  = 2.08
+    params.azureBonus  = 0.5
     params.tMultiplier = 1.5
-    params.duppercap = 69
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.3
-    params.chr_wsc = 0.0
+    params.duppercap   = 69
+    params.str_wsc     = 0.0
+    params.dex_wsc     = 0.0
+    params.vit_wsc     = 0.0
+    params.agi_wsc     = 0.0
+    params.int_wsc     = 0.0
+    params.mnd_wsc     = 0.3
+    params.chr_wsc     = 0.0
 
-    params.addedEffect = xi.effect.PARALYSIS
-    local power = 20
-    local tick = 0
-    local duration = 90
-
+    -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
-    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+
+    if damage <= 0 then
+        return damage
+    end
+
+    -- Handle status effects.
+    local effectTable =
+    {
+        [1] = { xi.effect.PARALYSIS, 20, 0, 90 },
+    }
+
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
 
     return damage
 end

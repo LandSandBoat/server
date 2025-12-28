@@ -26,7 +26,14 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3138, { text_table = 0 })
+                    return mission:progressEvent(3138, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0) -- Your mercenary rank is mentioned in the CS.
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [3138] = function(player, csid, option, npc)
+                    player:updateEvent(0, 1, 0, 0, 0, 0, 0, 0, 0)
                 end,
             },
 

@@ -27,13 +27,9 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    -- NOTE: In captures, parameter 2 is 1 and 8 is 0. This means we don't know what this args actually do nor where they come from.
-                    -- I could not notice any difference.
-                    if whitegateShared.doRoyalPalaceArmorCheck(player) then
-                        return mission:progressEvent(3074, 1, 0, 0, 0, 0, 0, 0, 1, 0)
-                    else
-                        return mission:progressEvent(3074, { text_table = 0 })
-                    end
+                    local properlyDressed = whitegateShared.doRoyalPalaceArmorCheck(player) and 1 or 0 -- Controls how bad Naja judges you.
+
+                    return mission:progressEvent(3074, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, properlyDressed, 0)
                 end,
             },
 
@@ -69,7 +65,7 @@ mission.sections =
                         player:updateEvent(paramOne, 1, 1, 22185, 0, 1, 0, 0, 0)
                     elseif option == 17 then -- Georgeous black.
                         paramOne = utils.mask.setBit(paramOne, 8, true)
-                        player:updateEvent(paramOne, 1, 1320, 0, 0, 1, 1, 1, 0, 0)
+                        player:updateEvent(paramOne, 1, 1320, 0, 0, 1, 1, 1, 0)
                     end
 
                     mission:setLocalVar(player, 'najaDressUp', paramOne)

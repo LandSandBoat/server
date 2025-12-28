@@ -15,6 +15,7 @@ end
 effectObject.onEffectLose = function(target, effect)
     target:delPetMod(xi.mod.MATT, effect:getPower())
     target:delPetMod(xi.mod.MACC, effect:getPower())
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
 end
 
 return effectObject

@@ -14,6 +14,8 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     player:addStatusEffect(xi.effect.TRIPLE_SHOT, 40, 0, 90)
+
+    return xi.effect.TRIPLE_SHOT
 end
 
 return abilityObject

@@ -15,7 +15,7 @@ effectObject.onEffectTick = function(target, effect)
     local remainingTicks = 1 + (effect:getTimeRemaining() / 1000) / 3
 
     -- doom counter
-    target:messagePublic(112, target, remainingTicks, remainingTicks)
+    target:messagePublic(xi.msg.basic.DOOM_COUNTER, target, remainingTicks, remainingTicks)
 end
 
 effectObject.onEffectLose = function(target, effect)

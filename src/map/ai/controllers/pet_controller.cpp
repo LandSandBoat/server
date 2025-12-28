@@ -27,6 +27,17 @@
 #include "status_effect_container.h"
 #include "utils/petutils.h"
 
+namespace
+{
+
+const std::set immobilePets = {
+    PETID_LUOPAN,
+    PETID_ALEXANDER,
+    PETID_ODIN,
+};
+
+}
+
 CPetController::CPetController(CMobEntity* _PPet)
 : CMobController(_PPet)
 , PPet(_PPet)
@@ -35,7 +46,7 @@ CPetController::CPetController(CMobEntity* _PPet)
     SetWeaponSkillEnabled(false);
 }
 
-void CPetController::Tick(time_point tick)
+void CPetController::Tick(timer::time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(PPet->getName());
@@ -56,9 +67,7 @@ void CPetController::Tick(time_point tick)
         auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
         if (PPetEntity && PPetEntity->isAlive() && PPetEntity->getPetType() == PET_TYPE::JUG_PET)
         {
-            // need to covert tick to unix time (in seconds) because getJugSpawnTime and getJugDuration give unix time
-            auto tickAsUnixTime = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(tick.time_since_epoch()).count());
-            if (tickAsUnixTime > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
+            if (tick > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
             {
                 petutils::DespawnPet(PPetEntity->PMaster);
                 return;
@@ -68,7 +77,7 @@ void CPetController::Tick(time_point tick)
     CMobController::Tick(tick);
 }
 
-void CPetController::DoRoamTick(time_point tick)
+void CPetController::DoRoamTick(timer::time_point tick)
 {
     if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
     {
@@ -82,7 +91,7 @@ void CPetController::DoRoamTick(time_point tick)
         return;
     }
 
-    if (PPet->objtype == TYPE_PET)
+    if (PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC))
     {
         CPetEntity* PetEntity = static_cast<CPetEntity*>(PPet);
         // automaton, wyvern
@@ -105,7 +114,7 @@ void CPetController::DoRoamTick(time_point tick)
                 return;
             }
         }
-        else if (PetEntity->m_PetID == PETID_LUOPAN) // Luopans do nothing
+        else if (immobilePets.contains(static_cast<PETID>(PetEntity->m_PetID))) // certain pets do not roam
         {
             return;
         }
@@ -115,22 +124,21 @@ void CPetController::DoRoamTick(time_point tick)
 
     if (currentDistance > PetRoamDistance)
     {
-        if (currentDistance < 35.0f)
+        if (!PPet->PAI->PathFind->IsFollowingPath() ||
+            distance(PPet->PAI->PathFind->GetDestination(), PPet->PMaster->loc.p) > 2.0f) // recalculate path only if owner moves more than X yalms
         {
-            if (!PPet->PAI->PathFind->IsFollowingPath() ||
-                distance(PPet->PAI->PathFind->GetDestination(), PPet->PMaster->loc.p) > 2.0f) // recalculate path only if owner moves more than X yalms
+            if (!PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
-                if (!PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                if (!PPet->PAI->PathFind->PathInRange(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                 {
-                    PPet->PAI->PathFind->PathInRange(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    // If we got here, the pet isn't able to path to master
+                    // But it cant, so maybe we teleported or dropped down a hole
+                    PPet->PAI->PathFind->WarpTo(PPet->PMaster->loc.p, PetRoamDistance);
                 }
             }
-            PPet->PAI->PathFind->FollowPath(m_Tick);
         }
-        else if (PPet->GetSpeed() > 0)
-        {
-            PPet->PAI->PathFind->WarpTo(PPet->PMaster->loc.p, PetRoamDistance);
-        }
+
+        PPet->PAI->PathFind->FollowPath(m_Tick);
     }
 }
 
@@ -143,7 +151,7 @@ bool CPetController::PetIsHealing()
     {
         // animation down
         PPet->animation = ANIMATION_HEALING;
-        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
+        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, std::chrono::seconds(settings::get<uint8>("map.HEALING_TICK_DELAY")), 0s));
         PPet->updatemask |= UPDATE_HP;
         return true;
     }

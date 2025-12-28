@@ -1,13 +1,14 @@
 -----------------------------------
---  Foul Breath
---  Description: Deals fire damage to enemies within a fan-shaped area originating from the caster.
---  Type: Magical (Fire)
+-- Foul Breath
+-- Family: Raptors
+-- Description: Deals Fire damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Disease
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- not used in Uleguerand_Range
+    -- Not used in Uleguerand_Range
+    -- TODO: Handle this with a proper skill list.
     if mob:getZoneID() == 5 then
         return 1
     end
@@ -16,14 +17,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 300)
+    local params = {}
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, 0.333, 0.625, xi.element.FIRE, 500)
+    params.percentMultipier  = 0.083
+    params.element           = xi.element.FIRE
+    params.damageCap         = 500
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
 
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local damage = xi.mobskills.mobBreathMove(mob, target, skill, params)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS, 1)
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
-    return dmg
+    if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
+        target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.FIRE)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 180)
+    end
+
+    return damage
 end
 
 return mobskillObject

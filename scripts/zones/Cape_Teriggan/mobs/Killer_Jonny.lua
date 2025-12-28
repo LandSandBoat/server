@@ -3,10 +3,17 @@
 --   NM: Killer Jonny
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
+local ID = zones[xi.zone.CAPE_TERIGGAN]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-local spawnPoints =
+entity.phList =
+{
+    [ID.mob.KILLER_JONNY - 14] = ID.mob.KILLER_JONNY, -- -41.000 0.351 120.000
+}
+
+entity.spawnPoints =
 {
     { x = -90.636, y = -8.859, z = 152.899 },
     { x = -80.809, y = -7.032, z = 147.464 },
@@ -17,8 +24,6 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
-    mob:setRespawnTime(math.random(28800, 86400)) -- 8 to 24 hours
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
 end
@@ -37,11 +42,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 407)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob, spawnPoints)
-    mob:setRespawnTime(math.random(28800, 86400)) -- 8 to 24 hours
 end
 
 return entity

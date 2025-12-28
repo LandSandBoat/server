@@ -39,7 +39,7 @@ entity.onTrigger = function(player, npc)
         Indomitable == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(131) --Begins Indomitable Spirit
-    elseif indomitableTimer ~= 0 and indomitableTimer > os.time() then
+    elseif indomitableTimer ~= 0 and indomitableTimer > GetSystemTime() then
         player:startEvent(133) --Asks the player to wait (next CQ tally)
     elseif indomitableTimer ~= 0 then
         player:startEvent(134) --Ends the Quest

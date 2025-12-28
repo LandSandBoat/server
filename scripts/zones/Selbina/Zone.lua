@@ -12,7 +12,8 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameHour = function(zone)
-    SetServerVariable('Selbina_Destination', math.random(1, 100))
+    local destinationId = math.random(1, 100) <= 10 and xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES or xi.zone.SHIP_BOUND_FOR_MHAURA
+    zone:setLocalVar('[Pirate]Zone', destinationId)
 end
 
 zoneObject.onZoneTick = function(zone)
@@ -30,8 +31,9 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if
-            prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or
-            prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES
+            player:hasKeyItem(xi.ki.FERRY_TICKET) and
+            (prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or
+            prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
         then
             cs = 202
             player:setPos(32.500, -2.500, -45.500, 192)
@@ -54,20 +56,30 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(200)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    -- TODO don't double fire transport events (a ship "arrives" from normal and pirates zones at the same time and triggers a transport event)
+    if player:isInEvent() then
+        return
+    end
+
+    if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+        player:startEvent(200)
+    else
+        player:startEvent(204)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    -- Transport event.
     if csid == 200 then
-        if GetServerVariable('Selbina_Destination') > 89 then
-            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
-        else
-            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
-        end
+        local zone          = player:getZone()
+        local destinationId = zone and zone:getLocalVar('[Pirate]Zone') or xi.zone.SHIP_BOUND_FOR_MHAURA
+        player:setPos(0, 0, 0, 0, destinationId)
+
+    -- Quest logic. TODO: Convert quest to interaction.
     elseif
         csid == 1101 and
         npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.fameArea.NORG, var = { 'Enagakure_Killed', 'illTakeTheBigBoxCS' } })

@@ -11,7 +11,7 @@ entity.onTrigger = function(player, npc)
     local toCureaCough = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if
-        player:getCharVar('DiaryPage') == 3 or
+        player:getCharVar('DiaryPage') >= 3 or
         toCureaCough == xi.questStatus.QUEST_ACCEPTED
     then
         if

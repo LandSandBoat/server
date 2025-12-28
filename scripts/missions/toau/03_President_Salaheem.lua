@@ -25,43 +25,31 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
-
-                    if missionStatus == 1 then
-                        return mission:progressEvent(73, { text_table = 0 })
-                    elseif missionStatus == 2 and not mission:getMustZone(player) then
-                        return mission:progressEvent(3020, { text_table = 0 })
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        if not mission:getMustZone(player) then
+                            -- Trivia: There is a copy of this CS, but as a flashback, with Falzum instead of your character. CS: 3030
+                            -- TODO: Maybe it's used?
+                            return mission:progressEvent(3020, { text_table = 0 }) -- Enter Not-Trion.
+                        else
+                            return mission:event(3003, { [0] = xi.besieged.getMercenaryRank(player), text_table = 0 }) -- Default Dialog.
+                        end
                     else
-                        return mission:event(3003, { [0] = xi.besieged.getMercenaryRank(player), text_table = 0 }) -- Default Dialog.
+                        return mission:progressEvent(73, { text_table = 0 }) -- Mog Locker scam.
                     end
                 end,
             },
 
-            ['Rytaal'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(269, { text_table = 0 })
-                    end
-                end,
-            },
+            -- NOTE: Wikis are wrong, the CS with Rytaal is unlocked by this mission, but isn't needed at all to progress it.
 
             onEventFinish =
             {
                 [73] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 2)
-                    mission:setMustZone(player)
-                end,
-
-                [269] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    -- Temporal fix until rytaal npc script gets an audit.
-                    player:setVar('ToAU3Progress', 1)
+                    mission:setMustZone(player)
                 end,
 
                 [3020] = function(player, csid, option, npc)
                     mission:complete(player)
-                    player:setVar('ToAU3Progress', 0)
                 end,
             },
         },

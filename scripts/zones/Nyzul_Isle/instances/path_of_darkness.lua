@@ -72,11 +72,11 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
     if progress >= 10 and progress < 20 then
         DespawnMob(ID.mob.AMNAF_BLU, instance)
     elseif progress == 24 then
-        local v = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
+        local naja = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
 
-        if v then
-            v:setLocalVar('ready', 0)
-            v:setLocalVar('Stage', 2)
+        if naja then
+            naja:setLocalVar('ready', 0)
+            naja:setLocalVar('Stage', 2)
         end
 
         SpawnMob(ID.mob.AMNAF_BLU, instance)
@@ -85,21 +85,17 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
     elseif progress == 48 then
         SpawnMob(ID.mob.AMNAF_PSYCHEFLAYER, instance)
 
-        local v = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
-
-        if v then
-            v:setLocalVar('ready', 0)
-            v:setLocalVar('Stage', 3)
+        local naja = GetMobByID(ID.mob.NAJA_SALAHEEM, instance)
+        if naja then
+            naja:setLocalVar('ready', 0)
+            naja:setLocalVar('Stage', 3)
         end
 
-        local npcs = instance:getNpcs()
-
-       -- Now we know we are closing a door. Why are we looping through all npcs just to close a single door? And why arent we stoping once we do?
-        for i, value in pairs(npcs) do
-            if value:getID() == ID.npc.DOOR_OFFSET + 6 then
-                value:setAnimation(8)
-            end
+        local door = GetNPCByID(ID.npc.DOOR_OFFSET + 8, instance)
+        if door then
+            door:setAnimation(xi.animation.OPEN_DOOR)
         end
+
     elseif progress == 50 then
         instance:complete()
     end

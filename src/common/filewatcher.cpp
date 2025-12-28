@@ -28,7 +28,7 @@
 #include <set>
 #include <string>
 
-Filewatcher::Filewatcher(std::vector<std::string> const& paths)
+Filewatcher::Filewatcher(const std::vector<std::string>& paths)
 #ifdef USE_GENERIC_FILEWATCHER
 : fileWatcherImpl(std::make_unique<efsw::FileWatcher>(true))
 #else
@@ -53,7 +53,7 @@ Filewatcher::~Filewatcher()
 }
 
 // cppcheck-suppress passedByValue
-void Filewatcher::handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename)
+void Filewatcher::handleFileAction(efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename)
 {
     TracySetThreadName("Filewatcher Thread");
     TracyZoneScoped;
@@ -97,7 +97,7 @@ auto Filewatcher::popChangedLuaFilesList() -> std::vector<std::pair<std::filesys
     std::vector<std::pair<std::filesystem::path, Action>> results;
     results.reserve(actions.size());
 
-    for (auto const& [path, action] : actions)
+    for (const auto& [path, action] : actions)
     {
         results.emplace_back(path, action);
     }

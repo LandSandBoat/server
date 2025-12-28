@@ -2,32 +2,30 @@
 -- Area: Port Windurst
 --  NPC: Taniko-Maniko
 -----------------------------------
-local ID = zones[xi.zone.PORT_WINDURST]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16649, 5864, 2,    -- Bone Pick
-        16405,  104, 3,    -- Cat Baghnakhs
-        16385,  129, 3,    -- Cesti
-        16391, 1521, 3,    -- Brass Knuckles
-        16407, 1521, 3,    -- Brass Baghnakhs
-        16642, 4198, 3,    -- Bone Axe
-        16768,  309, 3,    -- Bronze Zaghnal
-        16769, 2542, 3,    -- Brass Zaghnal
-        16832,   97, 3,    -- Harpoon
-        16448,  143, 3,    -- Bronze Dagger
-        16449,  837, 3,    -- Brass Dagger
-        16450, 1827, 3,    -- Dagger
-        16512, 3215, 3,    -- Bilbo
-        16530,  618, 3,    -- Xiphos
-        16565, 1674, 3,    -- Spatha
+        { xi.item.CAT_BAGHNAKHS,    120, 3 },
+        { xi.item.CESTI,            149, 3 },
+        { xi.item.BRASS_KNUCKLES,   936, 3 },
+        { xi.item.BRASS_BAGHNAKHS, 1757, 3 },
+        { xi.item.BONE_AXE,        4851, 3 },
+        { xi.item.BONE_PICK,       6776, 2 },
+        { xi.item.BRONZE_ZAGHNAL,   357, 3 },
+        { xi.item.BRASS_ZAGHNAL,   2938, 3 },
+        { xi.item.HARPOON,          112, 3 },
+        { xi.item.BRONZE_DAGGER,    162, 3 },
+        { xi.item.BRASS_DAGGER,     967, 3 },
+        { xi.item.DAGGER,          2111, 3 },
+        { xi.item.BILBO,           3634, 3 },
+        { xi.item.XIPHOS,           698, 3 },
+        { xi.item.SPATHA,          1934, 3 },
     }
 
-    player:showText(npc, ID.text.TANIKOMANIKO_SHOP_DIALOG)
+    player:showText(npc, zones[xi.zone.PORT_WINDURST].text.TANIKOMANIKO_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 

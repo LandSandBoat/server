@@ -46,7 +46,7 @@ end
 -- TP moves that spawned a clone in the capture: 310 - Queezyshroom, 311- Numbshroom, 312 - Shakeshroom
 -- No reports or captures if the clones can respawn.
 -- Reports from players saying only the original needs to be killed.
-entity.onMobWeaponSkill = function(target, mob, skill, player)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local hpp   = mob:getHPP()
     local skillId = skill:getID()
     local para = GetMobByID(ID.mob.PARA)

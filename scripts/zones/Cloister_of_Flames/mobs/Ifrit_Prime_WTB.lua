@@ -28,7 +28,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
     -- do not need to set res rank for fire because WTB primes have own
     -- mob resistances row that sets it already
-    mob:addImmunity(xi.immunity.PARALYZE)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -37,6 +36,8 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    -- element specific immunities
+    mob:addImmunity(xi.immunity.PARALYZE)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -61,13 +62,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('healTimer', os.time() + math.random(30, 60))
-    mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
+    mob:setLocalVar('healTimer', GetSystemTime() + math.random(30, 60))
+    mob:setLocalVar('hateTimer', GetSystemTime() + math.random(10, 20))
 end
 
 entity.onMobFight = function(mob, target)
     -- every 30-60 seconds have one of the elementals heal (via absorbing T4 spell) either self or Ifrit
-    if mob:getLocalVar('healTimer') < os.time() then
+    if mob:getLocalVar('healTimer') < GetSystemTime() then
         local avatarDamaged = mob:getHPP() < 100
 
         for i = 1, 4 do
@@ -93,7 +94,7 @@ entity.onMobFight = function(mob, target)
 
                 if spellTarget then
                     elemental:castSpell(xi.magic.spell.FIRE_IV, spellTarget)
-                    mob:setLocalVar('healTimer', os.time() + math.random(30, 60))
+                    mob:setLocalVar('healTimer', GetSystemTime() + math.random(30, 60))
                     break
                 end
             end
@@ -101,13 +102,13 @@ entity.onMobFight = function(mob, target)
     end
 
     -- every 10-20 seconds have the elementals refocus on the avatar's battle target
-    if mob:getLocalVar('hateTimer') < os.time() then
+    if mob:getLocalVar('hateTimer') < GetSystemTime() then
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID() + i)
 
             if elemental and elemental:isAlive() then
                 elemental:updateEnmity(target)
-                mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
+                mob:setLocalVar('hateTimer', GetSystemTime() + math.random(10, 20))
             end
         end
     end

@@ -18,4 +18,5 @@ xi.zoneMisc =
     TRUST                 = 0x0800, -- Ability to cast trust magic
     MISC_LOS_PLAYER_BLOCK = 0x1000, -- Players can't use magic/JAs through walls if this is set
     MISC_LOS_OFF          = 0x2000, -- Zone should not have LoS checks
+    ASSIST                = 0x4000, -- Send and receive /assiste, /assistj commands
 }
