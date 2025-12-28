@@ -21,20 +21,16 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
------------------------------------
--- Fantod Function
------------------------------------
-xi.job_utils.blue_mage.useFantod = function(player, target, spell)
-    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
+    local power = 12.5 + (0.10 * caster:getMod(xi.mod.BOOST_EFFECT))
 
-    if player:hasStatusEffect(xi.effect.BOOST) then
-        local effect = player:getStatusEffect(xi.effect.BOOST)
+    if caster:hasStatusEffect(xi.effect.BOOST) then
+        local effect = caster:getStatusEffect(xi.effect.BOOST)
 
         effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
         effect:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(xi.effect.ATTACK_BOOST, power, 0, 180)
-        player:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, power, 0, 180)
+        caster:addStatusEffect(xi.effect.ATTACK_BOOST, power, 0, 180)
+        caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, power, 0, 180)
     end
     return xi.mod.BOOST_EFFECT
 end
