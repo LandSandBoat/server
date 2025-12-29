@@ -24,11 +24,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Using Monk's boost logic for now
     local power = 12.5 + (0.10 * caster:getMod(xi.mod.BOOST_EFFECT))
 
-    if caster:hasStatusEffect(xi.effect.BOOST) and effect ~= nil then
+    if caster:hasStatusEffect(xi.effect.BOOST) then
         local effect = caster:getStatusEffect(xi.effect.BOOST)
 
-        effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
-        effect:addMod(xi.mod.ATTP, power)
+        if effect ~= nil then
+            effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
+            effect:addMod(xi.mod.ATTP, power)
+        end
     else
         caster:addStatusEffect(xi.effect.BOOST, power, 0, 180)
     end
