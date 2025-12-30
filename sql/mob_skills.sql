@@ -2448,7 +2448,7 @@ INSERT INTO `mob_skills` VALUES (2422,1678,'dark_mist',1,0.0,14.0,2000,1000,4,0,
 INSERT INTO `mob_skills` VALUES (2423,1680,'triumphant_roar',0,0.0,7.0,2000,1000,1,0,0,0,0,0,0); -- standing only.
 INSERT INTO `mob_skills` VALUES (2424,1681,'terror_eye',4,0.0,10.0,2000,1000,4,0,0,0,0,0,0); -- standing only.
 INSERT INTO `mob_skills` VALUES (2425,1679,'bloody_claw',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2426,1704,'reaving_wind_kb',1,0.0,10.0,2000,0,4,4,0,5,0,0,0);
+INSERT INTO `mob_skills` VALUES (2426,1704,'shadow_burst',1,0.0,10.0,2000,0,4,4,0,5,0,0,0);
 INSERT INTO `mob_skills` VALUES (2427,1705,'tail_lash',4,0.0,10.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2428,1706,'bloody_beak',1,0.0,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2429,1707,'feral_peck',0,0.0,9.0,2000,1000,4,0,0,0,0,0,0);
