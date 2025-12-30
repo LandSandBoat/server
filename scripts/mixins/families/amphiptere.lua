@@ -35,13 +35,13 @@ g_mixins.families.amphiptere = function(amphiptereMob)
 
     amphiptereMob:addListener('WEAPONSKILL_STATE_EXIT', 'SPAM_KNOCKBACK', function(mobArg, actionId)
         if actionId == xi.mobSkill.REAVING_WIND then
-            mobArg:useMobAbility(xi.mobSkill.SHADOW_BURST)
-        elseif actionId == xi.mobSkill.SHADOW_BURST then
+            mobArg:useMobAbility(xi.mobSkill.REAVING_WIND_KNOCKBACK)
+        elseif actionId == xi.mobSkill.REAVING_WIND_KNOCKBACK then
             if GetSystemTime() >= mobArg:getLocalVar('auraEndTime') then
                 mobArg:setLocalVar('auraEndTime', 0)
                 mobArg:setAnimationSub(0)
             else
-                mobArg:useMobAbility(xi.mobSkill.SHADOW_BURST)
+                mobArg:useMobAbility(xi.mobSkill.REAVING_WIND_KNOCKBACK)
             end
         end
     end)

@@ -1,5 +1,5 @@
 -----------------------------------
---  Shadow Burst (Knockback)
+--  Reaving Wing (Aura Knockback)
 --  Description: Does no damage, knockback only.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows

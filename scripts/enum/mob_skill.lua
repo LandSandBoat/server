@@ -600,8 +600,8 @@ xi.mobSkill =
 
     ROAR_3                        = 2406,
 
-    SHADOW_BURST                  = 2426,
     REAVING_WIND                  = 2431,
+    REAVING_WIND_KNOCKBACK        = 2434,
 
     AQUA_BLAST                    = 2437,
 
