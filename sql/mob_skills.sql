@@ -3995,6 +3995,9 @@ INSERT INTO `mob_skills` VALUES (3867,3611,'random_needles',1,0.0,10.0,2000,1500
 -- INSERT INTO `mob_skills` VALUES (3965,3709,'#2173',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3966,3710,'#2174',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3967,3711,'#2175',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+
+-- Intense Ambuscade START
+-- Skills below change every month
 INSERT INTO `mob_skills` VALUES (3968,34,'fire_meeble_warble',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3969,34,'blizzard_meeble_warble',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3970,34,'thunder_meeble_warble',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -4010,6 +4013,8 @@ INSERT INTO `mob_skills` VALUES (3975,36,'drill_claw',0,0.0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (3980,465,'grating_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3981,466,'stifling_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3982,468,'dark_recital',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- Intense Ambuscade END
+
 -- INSERT INTO `mob_skills` VALUES (3983,1268,'warm-up',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3984,1270,'groundburst',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3985,335,'dirty_bomb',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -4059,6 +4064,9 @@ INSERT INTO `mob_skills` VALUES (3975,36,'drill_claw',0,0.0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (4029,3773,'#2237',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4030,3774,'#2238',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4031,3775,'#2239',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+
+-- Regular Ambuscade START
+-- Skills below change every month
 -- INSERT INTO `mob_skills` VALUES (4032,72,'amplification',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4033,73,'boiling_point',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4034,727,'xenoglossia',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -4068,6 +4076,8 @@ INSERT INTO `mob_skills` VALUES (3975,36,'drill_claw',0,0.0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (4038,2004,'metastasis',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4039,2005,'gush_o_goo',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4040,2006,'self-destruct',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- Regular Ambuscade END
+
 -- INSERT INTO `mob_skills` VALUES (4041,203,'hard_membrane',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4042,2008,'depth_charge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (4043,2009,'blowhole_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
