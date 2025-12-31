@@ -197,8 +197,7 @@ end
 xi.combat.tp.calculateSpellTP = function(actor, spell)
     if
         actor:isPC() and
-        utils.contains(spell:getSkillType(), { xi.skill.ELEMENTAL_MAGIC, xi.skill.DARK_MAGIC }) and
-        actor:hasTrait(xi.trait.OCCULT_ACUMEN)
+        utils.contains(spell:getSkillType(), { xi.skill.ELEMENTAL_MAGIC, xi.skill.DARK_MAGIC })
     then
         local occultAcumenModifier = actor:getMod(xi.mod.OCCULT_ACUMEN) / 100
         local storeTPModifier      = (100 + actor:getMod(xi.mod.STORETP)) / 100
