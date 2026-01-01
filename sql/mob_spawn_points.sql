@@ -69968,7 +69968,7 @@ INSERT INTO `mob_spawn_points` VALUES (17617154,0,'Volcanic_Bomb','Volcanic Bomb
 INSERT INTO `mob_spawn_points` VALUES (17617155,0,'Volcanic_Bomb','Volcanic Bomb',18,-382.992,27.940,259.001,105);
 INSERT INTO `mob_spawn_points` VALUES (17617156,0,'Volcanic_Bomb','Volcanic Bomb',18,-21.588,39.921,62.884,127);
 INSERT INTO `mob_spawn_points` VALUES (17617157,0,'Mimic','Mimic',24,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17617158,0,'Bomb_Queen','Bomb Queen',25,14.682,20.058,-104.121,0);
+INSERT INTO `mob_spawn_points` VALUES (17617158,0,'Bomb_Queen','Bomb Queen',25,21.128,19.687,-110.232,0);
 INSERT INTO `mob_spawn_points` VALUES (17617159,0,'Bomb_Princess','Bomb Princess',26,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17617160,0,'Bomb_Prince','Bomb Prince',27,1.000,1.000,1.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17617161,0,'Bomb_Princess','Bomb Princess',26,1.000,1.000,1.000,0);

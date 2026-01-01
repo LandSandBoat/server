@@ -13662,10 +13662,10 @@ INSERT INTO `mob_groups` VALUES (21,2015,205,'Hurricane_Wyvern',300,0,1340,0,0,7
 INSERT INTO `mob_groups` VALUES (22,4258,205,'Vouivre',0,32,2591,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (23,265,205,'Ash_Dragon',0,128,179,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (24,2664,205,'Mimic',0,128,1691,0,0,63,69,0);
-INSERT INTO `mob_groups` VALUES (25,498,205,'Bomb_Queen',0,128,334,50000,0,80,81,0);
-INSERT INTO `mob_groups` VALUES (26,497,205,'Bomb_Princess',0,128,0,1000,0,64,65,0);
-INSERT INTO `mob_groups` VALUES (27,496,205,'Bomb_Prince',0,128,0,1000,0,64,65,0);
-INSERT INTO `mob_groups` VALUES (28,494,205,'Bomb_Bastard',0,128,0,1500,0,64,65,0);
+INSERT INTO `mob_groups` VALUES (25,498,205,'Bomb_Queen',0,128,334,47000,47000,79,81,0);
+INSERT INTO `mob_groups` VALUES (26,497,205,'Bomb_Princess',0,128,0,1120,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (27,496,205,'Bomb_Prince',0,128,0,1120,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (28,494,205,'Bomb_Bastard',0,128,0,1120,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (29,3844,205,'Tarasque',0,128,2377,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (30,607,205,'Cailleach_Bheur',0,128,0,9300,0,82,82,0);
 INSERT INTO `mob_groups` VALUES (31,5175,205,'Ildebrann',0,128,0,0,9999,98,99,0);
