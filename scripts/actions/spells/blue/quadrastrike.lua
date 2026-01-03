@@ -20,6 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+
     -- Missing proper info and logic for crit.
     local params = {}
     params.ecosystem = xi.ecosystem.DEMON
@@ -48,6 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+    params.critchance = 30 -- Guessed, this probably scales with TP, BG wiki says 33% which likely includes base crit rate so we're reducing it a bit lower
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

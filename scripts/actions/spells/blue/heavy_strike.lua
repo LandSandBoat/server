@@ -29,7 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.scattr = xi.skillchainType.FRAGMENTATION
     params.scattr2 = xi.skillchainType.TRANSFIXION
     params.numhits = 1
-    params.multiplier = 2.25
+    params.multiplier = 2.5 -- Using https://wiki.ffo.jp/html/24367.html over bg-wiki for this
     params.tp150 = 3.5
     params.tp300 = 4.0
     params.azuretp = 4.0 -- This is a guess as blue gartr doesn't have this info
@@ -41,6 +41,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+    params.bonusacc = -100
+    params.critchance = 100 -- TODO: this should cap to 100%
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
