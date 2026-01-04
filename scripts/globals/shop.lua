@@ -523,100 +523,101 @@ xi.shop.curioVendorMoogleStock =
 
     [xi.shop.curio.ninjutsuTools] =
     {
-        { xi.item.TOOLBAG_UCHITAKE,        3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_TSURARA,         3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_KAWAHORI_OGI,    3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_MAKIBISHI,       3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_HIRAISHIN,       3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_MIZU_DEPPO,      3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_SHIHEI,          5000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_JUSATSU,         5000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_KAGINAWA,        5000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_SAIRUI_RAN,      5000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_KODOKU,          5000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_SHINOBI_TABI,    3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_SANJAKU_TENUGUI, 3000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.TOOLBAG_SOSHI,           5000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Kabenro 5000
-        -- Jinko 5000
-        -- Ryuno 5000
-        -- Moku 5000
-        -- Ino 14000
-        -- Shika 19000
-        -- Cho 19000
-        -- Ranka 5000
-        -- Furu 5000
+        { xi.item.TOOLBAG_UCHITAKE,         3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_TSURARA,          3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_KAWAHORI_OGI,     3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_MAKIBISHI,        3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_HIRAISHIN,        3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_MIZU_DEPPO,       3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_SHIHEI,           5000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_JUSATSU,          5000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_KAGINAWA,         5000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_SAIRUI_RAN,       5000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_KODOKU,           5000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_SHINOBI_TABI,     3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_SANJAKU_TENUGUI,  3000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.TOOLBAG_SOSHI,            5000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.TOOLBAG_KABENRO,          5000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.TOOLBAG_JINKO,            5000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.TOOLBAG_RYUNO,            5000, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.TOOLBAG_MOKUJIN,          5000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.TOOLBAG_INOSHISHINOFUDA, 14000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TOOLBAG_SHIKANOFUDA,     19000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TOOLBAG_CHONOFUDA,       19000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TOOLBAG_RANKA,            5000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.TOOLBAG_FURU,             5000, xi.ki.RHAPSODY_IN_MAUVE   },
     },
+
     [xi.shop.curio.foodStuffs] =
     {
-        { xi.item.JUG_OF_SELBINA_MILK,         60, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.FLASK_OF_ORANGE_AU_LAIT,    100, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.FLASK_OF_APPLE_AU_LAIT,     300, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.FLASK_OF_PEAR_AU_LAIT,      600, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Dragon Fruit au Lait 2000
-        { xi.item.BOTTLE_OF_ORANGE_JUICE,     200, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BOTTLE_OF_MELON_JUICE,     1100, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.BOTTLE_OF_YAGUDO_DRINK,    2000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Kitron Juice 2500
-        { xi.item.RICE_BALL,                  160, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.STRIP_OF_MEAT_JERKY,        120, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SLICE_OF_GRILLED_HARE,      184, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.MEAT_MITHKABOB,             720, xi.ki.RHAPSODY_IN_UMBER   },
-        -- Yellow Curry Bun 3000
-        -- Rabbit Pie 5000
-        -- Marinara Slice 4000
-        -- Red Curry Bun 7000
-        { xi.item.FISH_MITHKABOB,            1080, xi.ki.RHAPSODY_IN_UMBER   },
-        -- Black Curry Bun 4000
-        -- Tavnazian Taco 4000
-        { xi.item.COEURL_SUB,                1500, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.ROAST_PIPIRA,               900, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SLICE_OF_ANCHOVY_PIZZA,     500, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.SLICE_OF_PEPPERONI_PIZZA,   400, xi.ki.RHAPSODY_IN_UMBER   },
-        -- Carbonara 4000
-        { xi.item.POT_AUF_FEU,               3500, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.JACK_O_LANTERN,            1000, xi.ki.RHAPSODY_IN_WHITE   },
-        -- Squid Sushi 6000
-        -- Sole Sushi 4000
-        { xi.item.PLATE_OF_BREAM_SUSHI,      5000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.PLATE_OF_DORADO_SUSHI,     4000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.PLATE_OF_CRAB_SUSHI,       1500, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.CHOCOLATE_CREPE,            500, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BUTTER_CREPE,              1000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Pear Crepe 2000
-        -- Fruit Parfait 3000
-        { xi.item.APPLE_PIE,                  320, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.MELON_PIE,                  800, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.PUMPKIN_PIE,               1200, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Crimson Jelly 7000
-        -- Icecap Rolanberry 5544
-        -- Cream Puff 1300
-        { xi.item.ROAST_MUSHROOM,             344, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.ACORN_COOKIE,                24, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.GINGER_COOKIE,               12, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.SUGAR_RUSK,                1000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.CHOCOLATE_RUSK,            2000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Coconut Rusk 3000
-        { xi.item.CHERRY_MACARON,            1000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.COFFEE_MACARON,            2000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Kitron Macaron 3000
-        { xi.item.SALTENA,                   1000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.ELSHENA,                   2000, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.MONTAGNA,                  2500, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Maringna 3000
-        { xi.item.STUFFED_PITARU,            1000, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.POULTRY_PITARU,            2000, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.SEAFOOD_PITARU,            2500, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- B.E.W. Pitaru 3000
-        { xi.item.PIECE_OF_SHIROMOCHI,       3000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.PIECE_OF_KUSAMOCHI,        3000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.PIECE_OF_AKAMOCHI,         3000, xi.ki.RHAPSODY_IN_CRIMSON },
-        -- Rolanberry Daifuku 4000
-        -- Bean Daifuku 4000
-        -- Grape Daifuku 4000
-        { xi.item.BEEF_STEWPOT,             15000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.SERVING_OF_ZARU_SOBA,     15000, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.SPICY_CRACKER,              450, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.JUG_OF_SELBINA_MILK,             60, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.FLASK_OF_ORANGE_AU_LAIT,        100, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.FLASK_OF_APPLE_AU_LAIT,         300, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.FLASK_OF_PEAR_AU_LAIT,          600, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.FLASK_OF_DRAGON_FRUIT_AU_LAIT, 2000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,         200, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BOTTLE_OF_MELON_JUICE,         1100, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.BOTTLE_OF_YAGUDO_DRINK,        2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.BOTTLE_OF_KITRON_JUICE,        2500, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.RICE_BALL,                      160, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.STRIP_OF_MEAT_JERKY,            120, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SLICE_OF_GRILLED_HARE,          184, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.MEAT_MITHKABOB,                 720, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.YELLOW_CURRY_BUN,              3000, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.RABBIT_PIE,                    5000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.SLICE_OF_MARINARA_PIZZA,       4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.RED_CURRY_BUN,                 7000, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.FISH_MITHKABOB,                1080, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.BLACK_CURRY_BUN,               4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TAVNAZIAN_TACO,                4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.COEURL_SUB,                    1500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ROAST_PIPIRA,                   900, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SLICE_OF_ANCHOVY_PIZZA,         500, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.SLICE_OF_PEPPERONI_PIZZA,       400, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.DISH_OF_SPAGHETTI_CARBONARA,   4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.POT_AUF_FEU,                   3500, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.JACK_O_LANTERN,                1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.PLATE_OF_SQUID_SUSHI,          6000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.PLATE_OF_SOLE_SUSHI,           4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.PLATE_OF_BREAM_SUSHI,          5000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PLATE_OF_DORADO_SUSHI,         4000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PLATE_OF_CRAB_SUSHI,           1500, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.CHOCOLATE_CREPE,                500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BUTTER_CREPE,                  1000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PEAR_CREPE,                    2000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.FRUIT_PARFAIT,                 3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.APPLE_PIE,                      320, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.MELON_PIE,                      800, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.PUMPKIN_PIE,                   1200, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.SERVING_OF_CRIMSON_JELLY,      7000, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.SERVING_OF_ICECAP_ROLANBERRY,  5544, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.CREAM_PUFF,                    1300, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.ROAST_MUSHROOM,                 344, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ACORN_COOKIE,                    24, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.GINGER_COOKIE,                   12, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.SUGAR_RUSK,                    1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.CHOCOLATE_RUSK,                2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.COCONUT_RUSK,                  3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.CHERRY_MACARON,                1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.COFFEE_MACARON,                2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.KITRON_MACARON,                3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.SALTENA,                       1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ELSHENA,                       2000, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.MONTAGNA,                      2500, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.MARINGNA,                      3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.STUFFED_PITARU,                1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.POULTRY_PITARU,                2000, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.SEAFOOD_PITARU,                2500, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.B_E_W_PITARU                   3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.PIECE_OF_SHIROMOCHI,           3000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PIECE_OF_KUSAMOCHI,            3000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PIECE_OF_AKAMOCHI,             3000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.ROLANBERRY_DAIFUKU,            4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.BEAN_DAIFUKU,                  4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.GRAPE_DAIFUKU,                 4000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.BEEF_STEWPOT,                 15000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.SERVING_OF_ZARU_SOBA,         15000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.SPICY_CRACKER,                  450, xi.ki.RHAPSODY_IN_CRIMSON },
     },
 
     [xi.shop.curio.scrolls] =
