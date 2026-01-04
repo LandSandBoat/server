@@ -421,58 +421,104 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.POTION,                  300, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.HI_POTION,               600, xi.ki.RHAPSODY_IN_UMBER   },
         { xi.item.X_POTION,               1200, xi.ki.RHAPSODY_IN_CRIMSON },
-     -- { xi.item.ETHER,                   650, xi.ki.RHAPSODY_IN_WHITE   }, -- Removed by SE June 2021
         { xi.item.HI_ETHER,               1300, xi.ki.RHAPSODY_IN_UMBER   },
         { xi.item.SUPER_ETHER,            3000, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.PRO_ETHER,              7000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.HI_ELIXIR,             20000, xi.ki.RHAPSODY_IN_MAUVE   },
         { xi.item.ELIXIR,                15000, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.ANTIDOTE,                300, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.FLASK_OF_PANACEA,      20000, xi.ki.RHAPSODY_IN_OCHRE   },
         { xi.item.FLASK_OF_EYE_DROPS,     1000, xi.ki.RHAPSODY_IN_UMBER   },
         { xi.item.FLASK_OF_ECHO_DROPS,     700, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.BOTTLE_OF_ANTACID,      1000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.FLASK_OF_HOLY_WATER,    1000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.REMEDY,                 3000, xi.ki.RHAPSODY_IN_FUCHSIA },
         { xi.item.BOTTLE_OF_MULSUM,        500, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.PINCH_OF_PRISM_POWDER,   500, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.POT_OF_SILENT_OIL,       500, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.FLASK_OF_DEODORIZER,     250, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.RERAISER,               1000, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.HI_RERAISER,            1500, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.VILE_ELIXIR,           20000, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.VILE_ELIXIR_P1,        40000, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.ICARUS_WING,           15000, xi.ki.RHAPSODY_IN_MAUVE   },
     },
 
     [xi.shop.curio.ammunition] =
     {
-        { xi.item.STONE_QUIVER,           400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BONE_QUIVER,            680, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.IRON_QUIVER,           1200, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BEETLE_QUIVER,         1350, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SILVER_QUIVER,         2040, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.HORN_QUIVER,           2340, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SLEEP_QUIVER,          3150, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.SCORPION_QUIVER,       3500, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.DEMON_QUIVER,          7000, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.KABURA_QUIVER,         8800, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.ANTLION_QUIVER,        9900, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.BRONZE_BOLT_QUIVER,     400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BLIND_BOLT_QUIVER,      800, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.ACID_BOLT_QUIVER,      1250, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SLEEP_BOLT_QUIVER,     1500, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BLOODY_BOLT_QUIVER,    2100, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.VENOM_BOLT_QUIVER,     2100, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.HOLY_BOLT_QUIVER,      2400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.MYTHRIL_BOLT_QUIVER,   3500, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.DARKSTEEL_BOLT_QUIVER, 5580, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.DARKLING_BOLT_QUIVER,  9460, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.FUSION_BOLT_QUIVER,    9790, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.BRONZE_BULLET_POUCH,    400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.BULLET_POUCH,          1920, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.SPARTAN_BULLET_POUCH,  2400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.IRON_BULLET_POUCH,     4800, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.SILVER_BULLET_POUCH,   4800, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.CORSAIR_BULLET_POUCH,  7100, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.STEEL_BULLET_POUCH,    7600, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.DWEOMER_BULLET_POUCH,  9680, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.OBERON_BULLET_POUCH,   9900, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.SHURIKEN_POUCH,        1400, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.JUJI_SHURIKEN_POUCH,   2280, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.MANJI_SHURIKEN_POUCH,  4640, xi.ki.RHAPSODY_IN_UMBER   },
-        { xi.item.FUMA_SHURIKEN_POUCH,   7000, xi.ki.RHAPSODY_IN_AZURE   },
-        { xi.item.IGA_SHURIKEN_POUCH,    9900, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.STONE_QUIVER,               400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BONE_QUIVER,                680, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.IRON_QUIVER,               1200, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BEETLE_QUIVER,             1350, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SILVER_QUIVER,             2040, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.HORN_QUIVER,               2340, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SLEEP_QUIVER,              3150, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.SCORPION_QUIVER,           3500, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.DEMON_QUIVER,              7000, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.KABURA_QUIVER,             8800, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.ANTLION_QUIVER,            9900, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.RUSZOR_QUIVER,            11880, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.GARGOUILLE_QUIVER,        13910, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.CHAPULI_QUIVER,           15400, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.MANTID_QUIVER,            15820, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TULFAIRE_QUIVER,          17610, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.RAAZ_QUIVER,              18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.ADLIVUN_QUIVER,           18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.RAKAZNAR_QUIVER,          18750, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.EMINENT_QUIVER,           19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.BRONZE_BOLT_QUIVER,         400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BLIND_BOLT_QUIVER,          800, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ACID_BOLT_QUIVER,          1250, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SLEEP_BOLT_QUIVER,         1500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BLOODY_BOLT_QUIVER,        2100, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.VENOM_BOLT_QUIVER,         2100, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.HOLY_BOLT_QUIVER,          2400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.MYTHRIL_BOLT_QUIVER,       3500, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.DARKSTEEL_BOLT_QUIVER,     5580, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.DARKLING_BOLT_QUIVER,      9460, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.FUSION_BOLT_QUIVER,        9790, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.DARK_ADAMAN_BOLT_QUIVER,  11880, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.ADAMAN_BOLT_QUIVER,       13780, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.OXIDANT_BOLT_QUIVER,      15400, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.MIDRIUM_BOLT_QUIVER,      15400, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.DAMASCUS_BOLT_QUIVER,     15820, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TITANIUM_BOLT_QUIVER,     17610, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.BISMUTH_BOLT_QUIVER,      18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.ADLIVUN_BOLT_QUIVER,      18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.GASHING_BOLT_QUIVER,      18750, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.RAKAZNAR_BOLT_QUIVER,     18750, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.ABRASION_BOLT_QUIVER,     19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.RIGHTEOUS_BOLT_QUIVER,    19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.EMINENT_BOLT_QUIVER,      19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.BRONZE_BULLET_POUCH,        400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BULLET_POUCH,              1920, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPARTAN_BULLET_POUCH,      2400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.IRON_BULLET_POUCH,         4800, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.SILVER_BULLET_POUCH,       4800, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.CORSAIR_BULLET_POUCH,      7100, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.STEEL_BULLET_POUCH,        7600, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.DWEOMER_BULLET_POUCH,      9680, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.OBERON_BULLET_POUCH,       9900, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.DARK_ADAMAN_BULLET_POUCH, 12000, xi.ki.RHAPSODY_IN_EMERALD },
+        { xi.item.ORICHALCUM_BULLET_POUCH,  13910, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.ADAMAN_BULLET_POUCH,      14040, xi.ki.RHAPSODY_IN_MAUVE   },
+        { xi.item.MIDRIUM_BULLET_POUCH,     15400, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.DAMASCUS_BULLET_POUCH,    15820, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.TITANIUM_BULLET_POUCH,    17610, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.BISMUTH_BULLET_POUCH,     18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.ADLIVUN_BULLET_POUCH,     18450, xi.ki.RHAPSODY_IN_PUCE    },
+        { xi.item.DECIMATING_BULLET_POUCH,  18750, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.RAKAZNAR_BULLET_POUCH,    18750, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.EMINENT_BULLET_POUCH,     19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.SHURIKEN_POUCH,            1400, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.JUJI_SHURIKEN_POUCH,       2280, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.MANJI_SHURIKEN_POUCH,      4640, xi.ki.RHAPSODY_IN_UMBER   },
+        { xi.item.FUMA_SHURIKEN_POUCH,       7000, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.IGA_SHURIKEN_POUCH,        9900, xi.ki.RHAPSODY_IN_CRIMSON },
+        { xi.item.ROPPO_SHURIKEN_POUCH,     17610, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.HAPPO_SHURIKEN_POUCH,     19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.HACHIYA_SHURIKEN_POUCH,   19050, xi.ki.RHAPSODY_IN_OCHRE   },
+        { xi.item.SUPPA_SHURIKEN_POUCH,     19050, xi.ki.RHAPSODY_IN_OCHRE   },
     },
 
     [xi.shop.curio.ninjutsuTools] =
@@ -491,53 +537,83 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.TOOLBAG_SHINOBI_TABI,    3000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.TOOLBAG_SANJAKU_TENUGUI, 3000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.TOOLBAG_SOSHI,           5000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Kabenro 5000
+        -- Jinko 5000
+        -- Ryuno 5000
+        -- Moku 5000
+        -- Ino 14000
+        -- Shika 19000
+        -- Cho 19000
+        -- Ranka 5000
+        -- Furu 5000
     },
     [xi.shop.curio.foodStuffs] =
     {
         { xi.item.JUG_OF_SELBINA_MILK,         60, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.FLASK_OF_ORANGE_AU_LAIT,    100, xi.ki.RHAPSODY_IN_WHITE   },
-        { xi.item.JUG_OF_ULEGUERAND_MILK,     100, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.FLASK_OF_APPLE_AU_LAIT,     300, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.FLASK_OF_PEAR_AU_LAIT,      600, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Dragon Fruit au Lait 2000
         { xi.item.BOTTLE_OF_ORANGE_JUICE,     200, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.BOTTLE_OF_MELON_JUICE,     1100, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.BOTTLE_OF_YAGUDO_DRINK,    2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Kitron Juice 2500
         { xi.item.RICE_BALL,                  160, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.STRIP_OF_MEAT_JERKY,        120, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.SLICE_OF_GRILLED_HARE,      184, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.MEAT_MITHKABOB,             720, xi.ki.RHAPSODY_IN_UMBER   },
-     -- { xi.item.BOILED_CRAB,                550, xi.ki.RHAPSODY_IN_WHITE   }, -- Removed by SE June 2021
+        -- Yellow Curry Bun 3000
+        -- Rabbit Pie 5000
+        -- Marinara Slice 4000
+        -- Red Curry Bun 7000
         { xi.item.FISH_MITHKABOB,            1080, xi.ki.RHAPSODY_IN_UMBER   },
+        -- Black Curry Bun 4000
+        -- Tavnazian Taco 4000
         { xi.item.COEURL_SUB,                1500, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.ROAST_PIPIRA,               900, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.SLICE_OF_ANCHOVY_PIZZA,     500, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.SLICE_OF_PEPPERONI_PIZZA,   400, xi.ki.RHAPSODY_IN_UMBER   },
+        -- Carbonara 4000
         { xi.item.POT_AUF_FEU,               3500, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.JACK_O_LANTERN,            1000, xi.ki.RHAPSODY_IN_WHITE   },
+        -- Squid Sushi 6000
+        -- Sole Sushi 4000
         { xi.item.PLATE_OF_BREAM_SUSHI,      5000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PLATE_OF_DORADO_SUSHI,     4000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PLATE_OF_CRAB_SUSHI,       1500, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.CHOCOLATE_CREPE,            500, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.BUTTER_CREPE,              1000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Pear Crepe 2000
+        -- Fruit Parfait 3000
         { xi.item.APPLE_PIE,                  320, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.MELON_PIE,                  800, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.PUMPKIN_PIE,               1200, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Crimson Jelly 7000
+        -- Icecap Rolanberry 5544
+        -- Cream Puff 1300
         { xi.item.ROAST_MUSHROOM,             344, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.ACORN_COOKIE,                24, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.GINGER_COOKIE,               12, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.SUGAR_RUSK,                1000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.CHOCOLATE_RUSK,            2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Coconut Rusk 3000
         { xi.item.CHERRY_MACARON,            1000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.COFFEE_MACARON,            2000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Kitron Macaron 3000
         { xi.item.SALTENA,                   1000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.ELSHENA,                   2000, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.MONTAGNA,                  2500, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Maringna 3000
         { xi.item.STUFFED_PITARU,            1000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.POULTRY_PITARU,            2000, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.SEAFOOD_PITARU,            2500, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- B.E.W. Pitaru 3000
         { xi.item.PIECE_OF_SHIROMOCHI,       3000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PIECE_OF_KUSAMOCHI,        3000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PIECE_OF_AKAMOCHI,         3000, xi.ki.RHAPSODY_IN_CRIMSON },
+        -- Rolanberry Daifuku 4000
+        -- Bean Daifuku 4000
+        -- Grape Daifuku 4000
         { xi.item.BEEF_STEWPOT,             15000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.SERVING_OF_ZARU_SOBA,     15000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.SPICY_CRACKER,              450, xi.ki.RHAPSODY_IN_CRIMSON },
@@ -551,6 +627,50 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.SCROLL_OF_INSTANT_PROTECT,   500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.SCROLL_OF_INSTANT_SHELL,     500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.SCROLL_OF_INSTANT_STONESKIN, 500, xi.ki.RHAPSODY_IN_UMBER },
+        -- Dimensional Ring Holla 115500 (Sandy Only)
+        -- Dimensional Ring Dem 115500 (Bastok Only)
+        -- Dimensional Ring Mea 115500 (Windurst Only)
+        -- Ancient Beastcoin 1000
+        -- Argyro Rivet 2000
+        -- Ecarlate Cloth 2000
+        -- Ancient Brass 2000
+        -- Utopian Gold Thread 2000
+        -- Benedict Yarn 2000
+        -- Benedict Silk 2000
+        -- Diabolic Yarn 2000
+        -- Diabolic Silk 2000
+        -- Cardinal Cloth 2000
+        -- Ruby Silk Thread 2000
+        -- Light Filament 2000
+        -- Supple Skin 2000
+        -- White Rivet 2000
+        -- Snowy Cermet 2000
+        -- Black Rivet 2000
+        -- Dark Orichalcum 2000
+        -- Fetid Lanolin 2000
+        -- Smalt Leather 2000
+        -- Brown Doeskin 2000
+        -- Coiled Yarn 2000
+        -- Charcoal Cotton 2000
+        -- Chameleon Yarn 2000
+        -- Kurogane 2000
+        -- Scarlet Odoshi 2000
+        -- Ebony Lacquer 2000
+        -- Plaited Cord 2000
+        -- Blue Rivet 2000
+        -- Cobalt Mythril Sheet 2000
+        -- Astral Leather 2000
+        -- Glittering Yarn 2000
+        -- Flameshun Cloth 2000
+        -- Luminian Thread 2000
+        -- Canvas Toile 2000
+        -- Silkworm Thread 2000
+        -- Corduroy Cloth 2000
+        -- Pantin Wire 2000
+        -- Gold Stud 2000
+        -- Filet Lace 2000
+        -- Electrum Stud 2000
+        -- Brilliantine 2000
     },
 
     [xi.shop.curio.keys] =
@@ -589,7 +709,6 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.GROTTO_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.ONZOZO_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.TORAIMARI_COFFER_KEY,  5000, xi.ki.RHAPSODY_IN_UMBER },
-        { xi.item.GROTTO_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.GROTTO_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.VELUGANNON_COFFER_KEY, 5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.SACRARIUM_CHEST_KEY,   2500, xi.ki.RHAPSODY_IN_WHITE },
