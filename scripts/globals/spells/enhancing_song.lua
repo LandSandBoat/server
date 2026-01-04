@@ -271,7 +271,8 @@ xi.spells.enhancing.useEnhancingSong = function(caster, target, spell)
     local tier            = pTable[spellId][column.EFFECT_TIER]
     local songEffect      = pTable[spellId][column.EFFECT_MAIN]
     local subEffect       = 0
-    local instrumentBoost = caster:getMod(pTable[spellId][column.MODIFIER]) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    local modifier        = pTable[spellId][column.MODIFIER]
+    local instrumentBoost = (modifier > 0 and caster:getMod(modifier) or 0) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     local soulVoicePower  = pTable[spellId][column.SOUL_VOICE]
 
     -- Calculate Song Pottency, Duration and SubEffect.

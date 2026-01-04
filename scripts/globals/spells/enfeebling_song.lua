@@ -174,7 +174,8 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     -- STEP 2: Check if spell resists.
     ------------------------------
     -- Check the amount of Song+ and All_Song+ gear.
-    local gearBoost = caster:getMod(pTable[spellId][column.SONG_MODIFIER]) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    local modifier  = pTable[spellId][column.SONG_MODIFIER]
+    local gearBoost = (modifier > 0 and caster:getMod(modifier) or 0) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
 
     -- Finale has innate +175 to magic accuracy.
     local bonusMagicAcc = 0
