@@ -21,11 +21,11 @@ g_mixins.families = g_mixins.families or {}
 
 local fissionAdds =
 {
-    [xi.mobPools.HADAL_SATIATOR] = 3,
-    [xi.mobPools.INGESTER      ] = 4,
-    [xi.mobPools.PROCREATOR    ] = 4,
-    [xi.mobPools.PROGENERATOR  ] = 4,
-    [xi.mobPools.PROPAGATOR    ] = 2,
+    [xi.mobPool.HADAL_SATIATOR] = 3,
+    [xi.mobPool.INGESTER      ] = 4,
+    [xi.mobPool.PROCREATOR    ] = 4,
+    [xi.mobPool.PROGENERATOR  ] = 4,
+    [xi.mobPool.PROPAGATOR    ] = 2,
 }
 
 xi.mix.gorger.canUseFission = function(mob)

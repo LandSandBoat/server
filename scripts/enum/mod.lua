@@ -414,6 +414,7 @@ xi.mod =
     BLINK                           = 299,
     STONESKIN                       = 300,
     PHALANX                         = 301,
+    PHALANX_RECEIVED                = 1182, -- Phalanx +N when Phalanx is received (cast on self or from other player)
     TRIPLE_ATTACK                   = 302,
     TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,

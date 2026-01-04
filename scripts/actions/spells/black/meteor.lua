@@ -38,7 +38,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, true))
     damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, true, false))
-    damage = math.floor(damage * xi.spells.damage.calculateMTDR(spell))
+    damage = math.floor(damage * xi.spells.damage.calculateMTDR(caster, spell))
     damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
 
     -- Handle Phalanx, One for All, Stoneskin.

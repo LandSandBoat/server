@@ -68,6 +68,8 @@ xi.mobSkill =
 
     BAD_BREATH_1                  =  319,
 
+    THOUSAND_NEEDLES_1            =  322,
+
     DRILL_BRANCH                  =  328,
     PINECONE_BOMB                 =  329,
 
@@ -456,7 +458,7 @@ xi.mobSkill =
     HOOF_VOLLEY                   = 1330,
 
     COUNTERSTANCE                 = 1331, -- The Waughroon Kid
-
+    EXTREMELY_BAD_BREATH_1        = 1332,
     CONTAGION_TRANSFER            = 1333,
     CONTAMINATION                 = 1334,
     TOXIC_PICK                    = 1335,

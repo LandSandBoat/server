@@ -15,7 +15,6 @@ local content = Battlefield:new({
     entryNpc         = 'SC_Entrance',
     exitNpc          = 'Shimmering_Circle',
     requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = chamberOfOraclesID.text.A_CRACK_HAS_FORMED, wornMessage = chamberOfOraclesID.text.ORB_IS_CRACKED },
-    experimental     = true,
 })
 
 content:addEssentialMobs({ 'Sabotender_Campeon', 'Sabotender_Amante' })

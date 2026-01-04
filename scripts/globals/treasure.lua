@@ -1774,12 +1774,6 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         return
     end
 
-    -- Early return: Player has no room for items.
-    if player:getFreeSlotsCount() == 0 then
-        player:messageSpecial(ID.text.CHEST_UNLOCKED - 6)
-        return
-    end
-
     -----------------------------------
     -- Handle failure states.
     -----------------------------------
@@ -1860,6 +1854,12 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Handle quest item reward.
     -----------------------------------
     if bypassType == 1 then
+        -- Early return: Player has no room for items.
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.CHEST_UNLOCKED - 6)
+            return
+        end
+
         kneelBeforeChest(player, npc)
 
         player:timer(2000, function(playerEntity)

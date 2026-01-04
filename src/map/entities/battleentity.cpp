@@ -59,9 +59,8 @@ CBattleEntity::CBattleEntity()
 {
     TracyZoneScoped;
     m_OwnerID.clean();
-    m_ModelRadius = 0;
-    m_mlvl        = 0;
-    m_slvl        = 0;
+    m_mlvl = 0;
+    m_slvl = 0;
 
     m_mjob = JOB_WAR;
     m_sjob = JOB_WAR;

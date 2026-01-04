@@ -50139,10 +50139,10 @@ INSERT INTO `mob_spawn_points` VALUES (17346742,0,'Dragonian_Minstrel','Dragonia
 -- Today's Horoscope
 INSERT INTO `mob_spawn_points` VALUES (17346744,0,'Aries','Aries',34,-396.153,94.703,-64.349,46);
 INSERT INTO `mob_spawn_points` VALUES (17346746,0,'Aries','Aries',34,-156.218,-25.306,115.621,46);
-INSERT INTO `mob_spawn_points` VALUES (17346748,0,'Aries','Aries',34,83.775,-145.323,295.455,46);
+INSERT INTO `mob_spawn_points` VALUES (17346748,0,'Aries','Aries',34,83.834,-145.788,295.622,46);
 
 -- Contaminated Colosseum
-INSERT INTO `mob_spawn_points` VALUES (17346750,0,'Evil_Oscar','Evil Oscar',35,-396.000,94.000,-63.000,46);
+INSERT INTO `mob_spawn_points` VALUES (17346750,0,'Evil_Oscar','Evil Oscar',35,-396.153,94.703,-64.349,46);
 INSERT INTO `mob_spawn_points` VALUES (17346752,0,'Evil_Oscar','Evil Oscar',35,-156.065,-26.009,116.970,46);
 INSERT INTO `mob_spawn_points` VALUES (17346754,0,'Evil_Oscar','Evil Oscar',35,83.928,-146.026,296.804,46);
 

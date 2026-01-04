@@ -15,8 +15,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local sleepDuration = 60
     if
-        mob:getPool() == xi.mobPools.WREAKER or
-        mob:getPool() == xi.mobPools.AGONIZER
+        mob:getPool() == xi.mobPool.WREAKER or
+        mob:getPool() == xi.mobPool.AGONIZER
     then
         sleepDuration = 120
     end

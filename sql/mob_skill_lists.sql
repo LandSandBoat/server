@@ -3729,6 +3729,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,625); -- vulture_2
 INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,626); -- vulture_3
 INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
 
+INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,316); -- Impale (Bind effect)
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
 

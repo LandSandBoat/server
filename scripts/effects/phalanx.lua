@@ -5,14 +5,13 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.PHALANX, effect:getPower())
+    effect:addMod(xi.mod.PHALANX, effect:getPower() + target:getMod(xi.mod.PHALANX_RECEIVED))
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.PHALANX, effect:getPower())
 end
 
 return effectObject

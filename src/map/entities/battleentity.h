@@ -539,7 +539,6 @@ public:
     timer::time_point charmTime; // to hold the time entity is charmed
     bool              isCharmed; // is the battle entity charmed?
 
-    float           m_ModelRadius;  // The radius of the entity model, for calculating the range of a physical attack
     ECOSYSTEM       m_EcoSystem{};  // Entity eco system
     CItemEquipment* m_Weapons[4]{}; // Four main slots used to store weapons (weapons only)
     bool            m_dualWield;    // True/false depending on if the entity is using two weapons

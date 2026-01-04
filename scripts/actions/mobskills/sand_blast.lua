@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 40, 0, 180))
 
     if
-        mob:getPool() == xi.mobPools.FEELER_ANTLION and
+        mob:getPool() == xi.mobPool.FEELER_ANTLION and
         mob:getLocalVar('SAND_BLAST') == 1
     then
         local alastorId = mob:getID() + 6

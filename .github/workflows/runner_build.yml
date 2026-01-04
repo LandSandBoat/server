@@ -60,6 +60,7 @@ jobs:
     env:
       SCCACHE_DIR: ${{ format('{0}/build/sccache', github.workspace) }}
       SCCACHE_CACHE_SIZE: "1G"
+      SKIP_BUILD: false
     steps:
       - name: Download changed files artifact
         if: ${{ inputs.optional_build }}
@@ -87,16 +88,16 @@ jobs:
               break
             fi
           done
-          echo "source_changes=$source_changes" >> $GITHUB_OUTPUT
+          echo "SKIP_BUILD=$([[ $source_changes == false && ${{ inputs.optional_build }} == true ]] && echo 'true' || echo 'false')" >> $GITHUB_ENV
 
       - name: Checkout
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
       - name: Install dependencies (macOS)
-        if: ${{ runner.os == 'macOS' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'macOS' && env.SKIP_BUILD != 'true' }}
         run: |
           brew update && brew install --quiet \
             mariadb \
@@ -105,7 +106,7 @@ jobs:
             ninja
 
       - name: Setup LLVM Clang (macOS)
-        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'clang') && env.SKIP_BUILD != 'true' }}
         run: |
           brew update && brew install --quiet \
             llvm@${{ inputs.compiler_version }} \
@@ -125,7 +126,7 @@ jobs:
           echo "LDFLAGS=-fuse-ld=lld -flto=thin" >> $GITHUB_ENV
 
       - name: Setup GCC (macOS)
-        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'gcc') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'gcc') && env.SKIP_BUILD != 'true' }}
         run: |
           brew update && brew install --quiet gcc@${{ inputs.compiler_version }}
           GCC_PREFIX=$(brew --prefix gcc@${{ inputs.compiler_version }})
@@ -134,7 +135,7 @@ jobs:
           echo "CXX=$GCC_PREFIX/bin/g++-${{ inputs.compiler_version }}" >> $GITHUB_ENV
 
       - name: Install dependencies (Linux)
-        if: ${{ runner.os == 'Linux' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'Linux' && env.SKIP_BUILD != 'true' }}
         run: |
           sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
             binutils-dev \
@@ -148,7 +149,7 @@ jobs:
             zlib1g-dev
 
       - name: Setup GCC (Linux)
-        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'gcc') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'gcc') && env.SKIP_BUILD != 'true' }}
         env:
           gcc_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
         run: |
@@ -157,9 +158,7 @@ jobs:
           echo "CXX=/usr/bin/g++${{ env.gcc_version }}" >> $GITHUB_ENV
 
       - name: Setup Clang (Linux)
-        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
-        env:
-          llvm_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        if: ${{ runner.os == 'Linux' && startsWith(inputs.compiler, 'clang') && env.SKIP_BUILD != 'true' }}
         run: |
           sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet g++-14
           wget https://apt.llvm.org/llvm.sh
@@ -171,25 +170,25 @@ jobs:
           echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
 
       - name: Setup MSVC
-        if: ${{ runner.os == 'Windows' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ runner.os == 'Windows' && env.SKIP_BUILD != 'true' }}
         uses: TheMrMilchmann/setup-msvc-dev@v3
         with:
           arch: x64
 
       - name: Setup sccache
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         uses: mozilla-actions/sccache-action@v0.0.9
         with:
           disable_annotations: ${{ !inputs.save_cache }}
 
       - name: Setup Python
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Enable modules
-        if: ${{ inputs.build_modules && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ inputs.build_modules && env.SKIP_BUILD != 'true' }}
         run: |
           python3 <<EOF
           with open("modules/init.txt", "w") as f:
@@ -200,7 +199,7 @@ jobs:
           EOF
 
       - name: Restore build cache
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         id: restore_build
         uses: actions/cache/restore@v4
         env:
@@ -213,7 +212,7 @@ jobs:
             ${{ format('buildcache-{0}-{1}{2}-{3}-{4}-', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash) }}
 
       - name: Configure CMake
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         run: |
           cmake -G Ninja -S . -B build --fresh \
             -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
@@ -224,11 +223,11 @@ jobs:
             -DCACHE_OPTION=sccache
 
       - name: Build
-        if: ${{ !inputs.optional_build || steps.check-changes.outputs.source_changes == 'true' }}
+        if: ${{ env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
 
       - name: Upload artifact
-        if: ${{ inputs.upload_artifact && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ format('LSB_{0}_{1}_{2}', runner.os, inputs.build_type, github.sha) }}
@@ -237,14 +236,14 @@ jobs:
             tracy.tar.gz
 
       - name: Cache build
-        if: ${{ inputs.save_cache && steps.restore_build.outputs.cache-hit != 'true' && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ inputs.save_cache && env.SKIP_BUILD != 'true' }}
         uses: actions/cache/save@v4
         with:
           path: build
           key: ${{ steps.restore_build.outputs.cache-primary-key }}
 
       - name: Summarize Clang Tidy Build
-        if: ${{ inputs.clang_tidy && (!inputs.optional_build || steps.check-changes.outputs.source_changes == 'true') }}
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
         run: |
           echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
           if [[ -f "build.log" && -s "build.log" ]]; then

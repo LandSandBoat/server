@@ -46,10 +46,11 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Not-player spell.
     else
-        if math.random(1, 100) > target:getMod(xi.mod.DEATHRES) then
-            target:setHP(0)
-        else
+        if math.random(1, 100) <= target:getMod(xi.mod.DEATHRES) then
+            spell:setModifier(xi.msg.actionModifier.RESIST) -- Resist!
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        else
+            target:setHP(0)
         end
 
         return 0

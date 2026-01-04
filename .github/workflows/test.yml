@@ -17,7 +17,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/landsandboat/devtools:ubuntu
+      image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
     defaults:
       run:
         shell: bash
@@ -39,7 +39,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/landsandboat/devtools:ubuntu
+      image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
     defaults:
       run:
         shell: bash

@@ -13,7 +13,7 @@ local function dive(mob)
     mob:setMobAbilityEnabled(false)
 
     -- Om'hpedme in north half of Al'Taieu do not dive or become untargetable
-    if mob:getPool() ~= xi.mobPools.HPEMDE_NO_DIVING then
+    if mob:getPool() ~= xi.mobPool.HPEMDE_NO_DIVING then
         mob:hideName(true)
         mob:setUntargetable(true)
         mob:setAnimationSub(5)
@@ -58,7 +58,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
         end
 
         if
-            mob:getPool() ~= xi.mobPools.HPEMDE_NO_DIVING and
+            mob:getPool() ~= xi.mobPool.HPEMDE_NO_DIVING and
             mob:getAnimationSub() ~= 5
         then
             dive(mob)

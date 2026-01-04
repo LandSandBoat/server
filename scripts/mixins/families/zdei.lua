@@ -20,12 +20,12 @@ g_mixins.families.zdei = function(zdeiMob)
     -- Assign rotation speed and direction based off of pools
     local rotationPools =
     {
-        [xi.mobPools.EOZDEI_LEFT]   = -16,
-        [xi.mobPools.EOZDEI_RIGHT]  =  16,
-        [xi.mobPools.AWZDEI_LEFT]   = -16,
-        [xi.mobPools.AWZDEI_RIGHT]  =  16,
-        [xi.mobPools.AWZDEI_FAST_L] = -32,
-        [xi.mobPools.AWZDEI_FAST_R] =  32,
+        [xi.mobPool.EOZDEI_LEFT]   = -16,
+        [xi.mobPool.EOZDEI_RIGHT]  =  16,
+        [xi.mobPool.AWZDEI_LEFT]   = -16,
+        [xi.mobPool.AWZDEI_RIGHT]  =  16,
+        [xi.mobPool.AWZDEI_FAST_L] = -32,
+        [xi.mobPool.AWZDEI_FAST_R] =  32,
     }
 
     zdeiMob:addListener('SPAWN', 'ZDEI_SPAWN', function(mob)

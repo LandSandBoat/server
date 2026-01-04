@@ -17,7 +17,7 @@ g_mixins.families.chigoe_pet = function(hostMob)
         end
 
         local numChigoesToSpawn = 1
-        if mob:getPool() == xi.mobPools.PEALLAIDH then
+        if mob:getPool() == xi.mobPool.PEALLAIDH then
             numChigoesToSpawn = 2
         end
 

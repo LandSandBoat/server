@@ -426,7 +426,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
                                    "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
                                    "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
-                                   "ecosystemID, mobradius, speed, "
+                                   "ecosystemID, speed, "
                                    "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
                                    "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
                                    "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
@@ -496,12 +496,11 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                             mainWeapon->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
                             mainWeapon->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
 
-                            PMob->m_Behavior    = rset->get<uint16>("behavior");
-                            PMob->m_Link        = rset->get<uint32>("links");
-                            PMob->m_Type        = rset->get<MOBTYPE>("mobType");
-                            PMob->m_Immunity    = rset->get<uint32>("immunity");
-                            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
-                            PMob->m_ModelRadius = rset->get<float>("mobradius");
+                            PMob->m_Behavior  = rset->get<uint16>("behavior");
+                            PMob->m_Link      = rset->get<uint32>("links");
+                            PMob->m_Type      = rset->get<MOBTYPE>("mobType");
+                            PMob->m_Immunity  = rset->get<uint32>("immunity");
+                            PMob->m_EcoSystem = rset->get<ECOSYSTEM>("ecosystemID");
 
                             PMob->baseSpeed      = rset->get<uint8>("speed");
                             PMob->animationSpeed = rset->get<uint8>("speed");
