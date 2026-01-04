@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 7)
 
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end

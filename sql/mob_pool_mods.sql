@@ -207,9 +207,6 @@ INSERT INTO `mob_pool_mods` VALUES (2271,165,15,0); -- CRITHITRATE: 15
 -- Ladon
 INSERT INTO `mob_pool_mods` VALUES (2314,28,23,1); -- EXP_BONUS: 23
 
--- Lindwurm
-INSERT INTO `mob_pool_mods` VALUES (2420,302,10,0); -- TRIPLE_ATTACK: 10
-
 -- Maats Avatar
 INSERT INTO `mob_pool_mods` VALUES (2461,61,25,1); -- HP_SCALE: 25
 

@@ -80,6 +80,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
 
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
+
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
