@@ -54,17 +54,29 @@ xi.shop.generalGuild = function(player, stock, guildSkillId)
     player:sendMenu(xi.menuType.SHOP)
 end
 
+
+local dimensionalRingByZone =
+{
+    [xi.zone.PORT_BASTOK   ] = xi.item.DIMENSIONAL_RING_DEM,
+    [xi.zone.PORT_SAN_DORIA] = xi.item.DIMENSIONAL_RING_HOLLA,
+    [xi.zone.PORT_WINDURST ] = xi.item.DIMENSIONAL_RING_MEA,
+}
+
 -- send curio vendor moogle shop shop dialog to player
 -- stock is of form { itemId1, price1, keyItemRequired, ... }
 -- log is default set to -1 as it's needed as part of createShop()
 xi.shop.curioVendorMoogle = function(player, stock)
     local log = -1
 
-    player:createShop(#stock / 3, log)
+    player:createShop(#stock, log)
 
     for _, stockItem in ipairs(stock) do
         if player:hasKeyItem(stockItem[3]) then
-            player:addShopItem(stockItem[1], stockItem[2])
+            if stockItem[1] then
+                player:addShopItem(stockItem[1], stockItem[2])
+            else
+                player:addShopItem(dimensionalRingByZone[player:getZoneID()], stockItem[2])
+            end
         end
     end
 
@@ -82,6 +94,7 @@ xi.shop.curio =
     ['foodStuffs']      = 4,
     ['scrolls']         = 5,
     ['keys']            = 6,
+    ['equipment']       = 7,
     -- keyitems not implemented yet
 }
 
@@ -608,7 +621,7 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.STUFFED_PITARU,                1000, xi.ki.RHAPSODY_IN_WHITE   },
         { xi.item.POULTRY_PITARU,                2000, xi.ki.RHAPSODY_IN_AZURE   },
         { xi.item.SEAFOOD_PITARU,                2500, xi.ki.RHAPSODY_IN_CRIMSON },
-        { xi.item.B_E_W_PITARU                   3000, xi.ki.RHAPSODY_IN_FUCHSIA },
+        { xi.item.B_E_W_PITARU,                  3000, xi.ki.RHAPSODY_IN_FUCHSIA },
         { xi.item.PIECE_OF_SHIROMOCHI,           3000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PIECE_OF_KUSAMOCHI,            3000, xi.ki.RHAPSODY_IN_CRIMSON },
         { xi.item.PIECE_OF_AKAMOCHI,             3000, xi.ki.RHAPSODY_IN_CRIMSON },
@@ -622,56 +635,54 @@ xi.shop.curioVendorMoogleStock =
 
     [xi.shop.curio.scrolls] =
     {
-        { xi.item.SCROLL_OF_INSTANT_WARP,      500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_RERAISE,   500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_RETRACE,   500, xi.ki.RHAPSODY_IN_AZURE },
-        { xi.item.SCROLL_OF_INSTANT_PROTECT,   500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_SHELL,     500, xi.ki.RHAPSODY_IN_WHITE },
-        { xi.item.SCROLL_OF_INSTANT_STONESKIN, 500, xi.ki.RHAPSODY_IN_UMBER },
-        -- Dimensional Ring Holla 115500 (Sandy Only)
-        -- Dimensional Ring Dem 115500 (Bastok Only)
-        -- Dimensional Ring Mea 115500 (Windurst Only)
-        -- Ancient Beastcoin 1000
-        -- Argyro Rivet 2000
-        -- Ecarlate Cloth 2000
-        -- Ancient Brass 2000
-        -- Utopian Gold Thread 2000
-        -- Benedict Yarn 2000
-        -- Benedict Silk 2000
-        -- Diabolic Yarn 2000
-        -- Diabolic Silk 2000
-        -- Cardinal Cloth 2000
-        -- Ruby Silk Thread 2000
-        -- Light Filament 2000
-        -- Supple Skin 2000
-        -- White Rivet 2000
-        -- Snowy Cermet 2000
-        -- Black Rivet 2000
-        -- Dark Orichalcum 2000
-        -- Fetid Lanolin 2000
-        -- Smalt Leather 2000
-        -- Brown Doeskin 2000
-        -- Coiled Yarn 2000
-        -- Charcoal Cotton 2000
-        -- Chameleon Yarn 2000
-        -- Kurogane 2000
-        -- Scarlet Odoshi 2000
-        -- Ebony Lacquer 2000
-        -- Plaited Cord 2000
-        -- Blue Rivet 2000
-        -- Cobalt Mythril Sheet 2000
-        -- Astral Leather 2000
-        -- Glittering Yarn 2000
-        -- Flameshun Cloth 2000
-        -- Luminian Thread 2000
-        -- Canvas Toile 2000
-        -- Silkworm Thread 2000
-        -- Corduroy Cloth 2000
-        -- Pantin Wire 2000
-        -- Gold Stud 2000
-        -- Filet Lace 2000
-        -- Electrum Stud 2000
-        -- Brilliantine 2000
+        { xi.item.SCROLL_OF_INSTANT_WARP,         500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SCROLL_OF_INSTANT_RERAISE,      500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SCROLL_OF_INSTANT_RETRACE,      500, xi.ki.RHAPSODY_IN_AZURE   },
+        { xi.item.SCROLL_OF_INSTANT_PROTECT,      500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SCROLL_OF_INSTANT_SHELL,        500, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SCROLL_OF_INSTANT_STONESKIN,    500, xi.ki.RHAPSODY_IN_UMBER   },
+        { nil,                                 115500, xi.ki.RHAPSODY_IN_FUCHSIA }, -- Dimensional Ring: Special case handled in curio trigger function
+        { xi.item.ANCIENT_BEASTCOIN,             1000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ARGYRO_RIVET,                  2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_ECARLATE_CLOTH,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ANCIENT_BRASS_INGOT,           2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.UTOPIAN_GOLD_THREAD,           2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_BENEDICT_YARN,        2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_BENEDICT_SILK,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_DIABOLIC_YARN,        2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_DIABOLIC_SILK,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_CARDINAL_CLOTH,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_RUBY_SILK_THREAD,     2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_LIGHT_FILAMENT,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_SUPPLE_SKIN,         2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.WHITE_RIVET,                   2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.CHUNK_OF_SNOWY_CERMET,         2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BLACK_RIVET,                   2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.DARK_ORICHALCUM_INGOT,         2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.FETID_LANOLIN_CUBE,            2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_SMALT_LEATHER,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_BROWN_DOESKIN,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_COILED_YARN,          2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_CHARCOAL_COTTON,     2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_CHAMELEON_YARN,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SHEET_OF_KUROGANE,             2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_SCARLET_ODOSHI,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.POT_OF_EBONY_LACQUER,          2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.PLAITED_CORD,                  2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.BLUE_RIVET,                    2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SHEET_OF_COBALT_MYTHRIL,       2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_ASTRAL_LEATHER,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_GLITTERING_YARN,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_FLAMESHUN_CLOTH,     2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_LUMINIAN_THREAD,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_CANVAS_TOILE,        2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SPOOL_OF_SILKWORM_THREAD,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_CORDUROY_CLOTH,      2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.PANTIN_WIRE,                   2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.GOLD_STUD,                     2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_FILET_LACE,          2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.ELECTRUM_STUD,                 2000, xi.ki.RHAPSODY_IN_WHITE   },
+        { xi.item.SQUARE_OF_BRILLIANTINE,        2000, xi.ki.RHAPSODY_IN_WHITE   },
     },
 
     [xi.shop.curio.keys] =
@@ -716,6 +727,11 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.OLDTON_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
         { xi.item.NEWTON_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.PSOXJA_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
+    },
+
+    [xi.shop.curio.equipment] =
+    {
+
     },
 }
 
