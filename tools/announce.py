@@ -9,107 +9,27 @@
 # pip3 install zmq pyzmq
 #
 #############################
-
-import socket
+import os
 import sys
-import zmq
-import struct
+import subprocess
 
-context = zmq.Context()
-sock = context.socket(zmq.DEALER)
+if len(sys.argv) < 2:
+    print('Usage: announce.py "message..."', file=sys.stderr)
+    sys.exit(2)
 
-ip_str = "127.0.0.1"
-port = 54003
+# Absolute path to this script's directory
+HERE = os.path.dirname(os.path.abspath(__file__))
 
-ip_bytes = socket.inet_aton(ip_str)
-(ip_int,) = struct.unpack("!I", ip_bytes)
-ipp = ip_int | (port << 32)
-ipp_bytes = struct.pack("!Q", ipp)
+# Native announce binary should live alongside this script
+EXE = os.path.join(HERE, "announce")
 
-print(f"Connecting to endpoint: {ip_str}:{port}")
+if not (os.path.isfile(EXE) and os.access(EXE, os.X_OK)):
+    print("ERROR: announce binary not found.", file=sys.stderr)
+    print("Expected at:", EXE, file=sys.stderr)
+    print("Build with:", file=sys.stderr)
+    print("  cmake -S . -B build && cmake --build build --target announce", file=sys.stderr)
+    sys.exit(1)
 
-sock.setsockopt(zmq.ROUTING_ID, ipp_bytes)
-sock.connect("tcp://127.0.0.1:54003")
-
-
-def print_help():
-    print("You must provide a message to send.")
-    print("Example:")
-    print('python3 .\\announce.py "Here is a message from python!"')
-
-
-def build_chat_packet(gm_flag, zone, sender, msg):
-    buff_size = min(236, len(sender) + len(msg) + 10)
-    buffer = bytearray(buff_size)
-
-    if sender is None:
-        sender = ""
-
-    # alpaca encoding for:
-    #
-    # ChatMessageServerMessage = 11;
-    #
-    # struct ChatMessageServerMessage
-    # {
-    #     uint32      senderId{};
-    #     std::string senderName{};
-    #     std::string message{};
-    #     uint16      zoneId{};
-    #     uint8       gmLevel{};
-    # };
-
-    idx = 0
-
-    # ChatMessageServerMessage
-    buffer[idx] = 11
-    idx += 1
-
-    # senderId
-    buffer[idx] = 0
-    idx += 1
-
-    # len(senderName)
-    buffer[idx] = len(sender)
-    idx += 1
-
-    # senderName
-    for i, c in enumerate(sender):
-        buffer[idx] = ord(c)
-        idx += 1
-
-    # len(message)
-    buffer[idx] = len(msg)
-    idx += 1
-
-    # message
-    for i, c in enumerate(msg):
-        buffer[idx] = ord(c)
-        idx += 1
-
-    # zoneId
-    buffer[idx] = zone
-    idx += 1
-
-    # gmLevel
-    buffer[idx] = gm_flag
-    idx += 1
-
-    return buffer
-
-
-def send_server_message(msg):
-    print(f"Sending '{msg}'")
-    buffer = build_chat_packet(1, 0, "", msg)
-    sock.send(buffer)
-
-
-def main():
-    if len(sys.argv) < 2:
-        print_help()
-        return
-
-    send_server_message(sys.argv[1])
-
-
-if __name__ == "__main__":
+msg = " ".join(sys.argv[1:])
+subprocess.check_call([EXE, msg])
     main()
