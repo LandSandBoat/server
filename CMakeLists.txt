@@ -154,4 +154,3 @@ endif()
 include_directories(${CMAKE_BINARY_DIR}/generated) # Globally include the build/generated directory
 
 add_subdirectory(src)
-add_subdirectory(tools)
