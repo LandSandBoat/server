@@ -21,8 +21,7 @@ m:addOverride('xi.actions.weaponskills.wasp_sting.onUseWeaponSkill', function(pl
     local actionElement = xi.element.WATER
     local power         = 1
     local skillType     = xi.skill.DAGGER
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor((75 + 15 * tp / 1000) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -60,14 +59,11 @@ m:addOverride('xi.actions.weaponskills.shadowstitch.onUseWeaponSkill', function(
     -- Handle status effect
     local effectId      = xi.effect.BIND
     local actionElement = xi.element.ICE
+    local power         = 1
     local skillType     = xi.skill.DAGGER
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
-    if math.random(1, 100) <= tp / 30 * resist then
-        local power         = 1
-        local duration      = math.floor((5 + tp / 200) * resist)
-        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
-    end
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
+    local duration      = math.floor((5 + tp / 200) * resist)
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -88,8 +84,7 @@ m:addOverride('xi.actions.weaponskills.viper_bite.onUseWeaponSkill', function(pl
     local actionElement = xi.element.WATER
     local power         = 3
     local skillType     = xi.skill.DAGGER
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor((30 + 6 * tp / 100) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -269,8 +264,7 @@ m:addOverride('xi.actions.weaponskills.mordant_rime.onUseWeaponSkill', function(
     local effectId      = xi.effect.WEIGHT
     local actionElement = xi.element.WIND
     local skillType     = xi.skill.DAGGER
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     if math.random(1, 100) <= tp / 30 * resist then
         local power         = 25
         local duration      = math.floor(60 * resist)

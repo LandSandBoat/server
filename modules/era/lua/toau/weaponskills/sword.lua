@@ -69,8 +69,7 @@ m:addOverride('xi.actions.weaponskills.flat_blade.onUseWeaponSkill', function(pl
     local effectId      = xi.effect.STUN
     local actionElement = xi.element.THUNDER
     local skillType     = xi.skill.SWORD
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     if math.random(1, 100) <= tp / 30 * resist then
         local power         = 1
         local duration      = math.floor(4 * resist)
@@ -350,8 +349,7 @@ m:addOverride('xi.actions.weaponskills.death_blossom.onUseWeaponSkill', function
     local actionElement = xi.element.THUNDER
     local power         = 10
     local skillType     = xi.skill.SWORD
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(60 * resist) -- TODO: Chance to apply varies with TP.
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

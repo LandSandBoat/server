@@ -56,6 +56,7 @@ zones[xi.zone.GUSGEN_MINES] =
         SMOTHERED_SCHMIDT   = GetFirstID('Smothered_Schmidt'),
         WOUNDED_WURFEL      = GetFirstID('Wounded_Wurfel'),
         APPARATUS_ELEMENTAL = GetTableOfIDs('Earth_Elemental')[3], -- Last elemental in the list
+        JUGGLER_HECATOMB    = GetFirstID('Juggler_Hecatomb'),
     },
     npc =
     {

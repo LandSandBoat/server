@@ -60,13 +60,15 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
     },
     mob =
     {
-        STRAY_MARY     = GetTableOfIDs('Stray_Mary'), -- 2 NMs
-        RAMPAGING_RAM  = GetFirstID('Rampaging_Ram'),
-        STEELFLEECE    = GetFirstID('Steelfleece_Baldarich'),
-        TREMOR_RAM     = GetTableOfIDs('Tremor_Ram'),
-        FORGER         = GetFirstID('Forger'),
-        HATY           = GetFirstID('Haty'),
-        BENDIGEIT_VRAN = GetFirstID('Bendigeit_Vran'),
+        STRAY_MARY        = GetTableOfIDs('Stray_Mary'), -- 2 NMs
+        RAMPAGING_RAM     = GetFirstID('Rampaging_Ram'),
+        STEELFLEECE       = GetFirstID('Steelfleece_Baldarich'),
+        TREMOR_RAM        = GetTableOfIDs('Tremor_Ram'),
+        FORGER            = GetFirstID('Forger'),
+        HATY              = GetFirstID('Haty'),
+        BENDIGEIT_VRAN    = GetFirstID('Bendigeit_Vran'),
+        GHILLIE_DHU       = GetFirstID('Ghillie_Dhu'),
+        HIGHLANDER_LIZARD = GetFirstID('Highlander_Lizard'),
 
         VOIDWALKER =
         {

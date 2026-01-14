@@ -35,6 +35,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
     {
         BALAM_QUITZ = GetFirstID('Balam-Quitz'),
         COQUECIGRUE = GetFirstID('Coquecigrue'),
+        HYAKINTHOS  = GetFirstID('Hyakinthos'),
 
         VOIDWALKER =
         {

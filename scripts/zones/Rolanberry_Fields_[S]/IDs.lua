@@ -36,6 +36,7 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         DELICIEUSE_DELPHINE = GetFirstID('Delicieuse_Delphine'),
         ERLE                = GetFirstID('Erle'), -- PH at -341 4 6
         DYINYINGA           = GetFirstID('Dyinyinga'), -- PH at 170 -31.8 -170
+        LAMINA              = GetFirstID('Lamina'),
 
         VOIDWALKER =
         {

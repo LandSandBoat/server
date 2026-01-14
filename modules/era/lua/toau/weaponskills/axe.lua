@@ -35,8 +35,7 @@ m:addOverride('xi.actions.weaponskills.smash_axe.onUseWeaponSkill', function(pla
     local actionElement = xi.element.THUNDER
     local power         = 1
     local skillType     = xi.skill.AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(tp / 500 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -59,8 +58,7 @@ m:addOverride('xi.actions.weaponskills.gale_axe.onUseWeaponSkill', function(play
     local actionElement = xi.element.WIND
     local power         = 5
     local skillType     = xi.skill.AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(90 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -166,8 +164,7 @@ m:addOverride('xi.actions.weaponskills.onslaught.onUseWeaponSkill', function(pla
     local actionElement = xi.element.EARTH
     local power         = 30
     local skillType     = xi.skill.AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(120 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

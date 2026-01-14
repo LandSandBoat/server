@@ -1115,51 +1115,25 @@ INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,274,1,255); -- sleepga_ii (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,360,1,255); -- dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,361,1,255); -- blindga (1~255)
 
--- Heavy_Metal_Crab (58)
-INSERT INTO `mob_spell_lists` VALUES ('Heavy_Metal_Crab',58,199,1,255); -- waterga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Heavy_Metal_Crab',58,230,1,255); -- bio (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Heavy_Metal_Crab',58,254,1,255); -- blind (1~255)
+-- Free (58)
 
--- Colo-Colo (59)
-INSERT INTO `mob_spell_lists` VALUES ('Colo-Colo',59,225,1,255); -- poisonga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Colo-Colo',59,245,1,255); -- drain (1~255)
+-- Free (59)
 
--- Furies (60)
-INSERT INTO `mob_spell_lists` VALUES ('Furies',60,245,1,255); -- drain (1~255)
+-- Free (60)
 
--- Macha (61)
-INSERT INTO `mob_spell_lists` VALUES ('Macha',61,273,1,255); -- sleepga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macha',61,360,1,255); -- dispelga (1~255)
+-- Free (61)
 
--- Bitoso (62)
-INSERT INTO `mob_spell_lists` VALUES ('Bitoso',62,3,1,255);   -- cure_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Bitoso',62,356,1,255); -- paralyga (1~255)
+-- Free (62)
 
--- Huntfly (63)
-INSERT INTO `mob_spell_lists` VALUES ('Huntfly',63,154,1,255); -- aero (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Huntfly',63,216,1,255); -- gravity (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Huntfly',63,237,1,255); -- choke (1~255)
+-- Free (63)
 
--- Metsanneitsyt (64)
-INSERT INTO `mob_spell_lists` VALUES ('Metsanneitsyt',64,160,1,255); -- stone_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Metsanneitsyt',64,189,1,255); -- stonega (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Metsanneitsyt',64,245,1,255); -- drain (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Metsanneitsyt',64,247,1,255); -- aspir (1~255)
+-- Free (64)
 
--- Nenaunir (65)
-INSERT INTO `mob_spell_lists` VALUES ('Nenaunir',65,33,1,255);  -- diaga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Nenaunir',65,160,1,255); -- stone_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Nenaunir',65,258,1,255); -- bind (1~255)
+-- Free (65)
 
--- Sobbing_Eyes (66)
-INSERT INTO `mob_spell_lists` VALUES ('Sobbing_Eyes',66,174,1,255); -- firaga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Sobbing_Eyes',66,252,1,255); -- stun (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Sobbing_Eyes',66,362,1,255); -- bindga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Sobbing_Eyes',66,365,1,255); -- breakga (1~255)
+-- Free (66)
 
--- Compound_Eyes (67)
-INSERT INTO `mob_spell_lists` VALUES ('Compound_Eyes',67,145,1,255); -- fire_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Compound_Eyes',67,245,1,255); -- drain (1~255)
+-- Free (67)
 
 -- Free (68)
 
@@ -1170,23 +1144,13 @@ INSERT INTO `mob_spell_lists` VALUES ('Compound_Eyes',67,245,1,255); -- drain (1
 -- Orcish_Onager (71)
 INSERT INTO `mob_spell_lists` VALUES ('Orcish_Onager',71,362,1,255); -- bindga (1~255)
 
--- Macan_Gadangan (72)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,164,1,255); -- thunder (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,165,1,255); -- thunder_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,166,1,255); -- thunder_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,194,1,255); -- thundaga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,195,1,255); -- thundaga_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Macan_Gadangan',72,212,1,255); -- burst (1~255)
+-- Free (72)
 
--- free (73)
+-- Free (73)
 
--- Beelzebub (74)
-INSERT INTO `mob_spell_lists` VALUES ('Beelzebub',74,5,1,255);   -- cure_v (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Beelzebub',74,356,1,255); -- paralyga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Beelzebub',74,359,1,255); -- silencega (1~255)
+-- Free (74)
 
--- Sabotender_Campeon (75)
-INSERT INTO `mob_spell_lists` VALUES ('Sabotender_Campeon',75,5,1,255); -- cure_v (1~255)
+-- Free (75)
 
 -- Free (76)
 
@@ -1662,9 +1626,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Avatar_SMN',141,301,1,255); -- garuda (1~
 INSERT INTO `mob_spell_lists` VALUES ('Avatar_SMN',141,302,1,255); -- shiva (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Avatar_SMN',141,303,1,255); -- ramuh (1~255)
 
--- Charming_Trio (142)
-INSERT INTO `mob_spell_lists` VALUES ('Charming_Trio',142,245,1,255); -- drain (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Charming_Trio',142,247,1,255); -- aspir (1~255)
+-- Free (142)
 
 -- Onki (143)
 INSERT INTO `mob_spell_lists` VALUES ('Onki',143,288,1,255); -- fire_spirit (1~255)

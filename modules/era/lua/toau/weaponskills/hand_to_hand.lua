@@ -35,8 +35,7 @@ m:addOverride('xi.actions.weaponskills.shoulder_tackle.onUseWeaponSkill', functi
     local actionElement = xi.element.THUNDER
     local power         = 1
     local skillType     = xi.skill.HAND_TO_HAND
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(tp / 500 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

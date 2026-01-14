@@ -199,7 +199,7 @@ jobs:
           found_issues=false
           for log_file in ./log/*.log; do
               if [[ -f "$log_file" && -s "$log_file" ]]; then
-                  if grep -qi "warning\|error\|crash\|critical" "$log_file" | grep -v "Invalid zone requested:"; then
+                  if grep -qi "warning\|error\|crash\|critical" "$log_file" && grep -qv "Invalid zone requested:"; then
                       found_issues=true
                       log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
                       echo "### :x: ${log_name} Checks Failed" >> $GITHUB_STEP_SUMMARY

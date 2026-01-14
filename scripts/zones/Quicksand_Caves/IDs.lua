@@ -63,6 +63,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         ANCIENT_VESSEL        = GetFirstID('Ancient_Vessel'),
         TRIBUNUS_VII_I        = GetFirstID('Tribunus_VII-I'),
         GIRTABLULU            = GetFirstID('Girtablulu'),
+        PROCONSUL_XII         = GetFirstID('Proconsul_XII'),
     },
     npc =
     {

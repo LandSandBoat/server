@@ -29,10 +29,13 @@ zones[xi.zone.GIDDEUS] =
     },
     mob =
     {
-        HOO_MJUU_THE_TORRENT   = GetFirstID('Hoo_Mjuu_the_Torrent'),
-        JUU_DUZU_THE_WHIRLWIND = GetFirstID('Juu_Duzu_the_Whirlwind'),
-        VUU_PUQU_THE_BEGUILER  = GetFirstID('Vuu_Puqu_the_Beguiler'),
-        VAA_HUJA_THE_ERUDITE   = GetFirstID('Vaa_Huja_the_Erudite'),
+        HOO_MJUU_THE_TORRENT    = GetFirstID('Hoo_Mjuu_the_Torrent'),
+        JUU_DUZU_THE_WHIRLWIND  = GetFirstID('Juu_Duzu_the_Whirlwind'),
+        VUU_PUQU_THE_BEGUILER   = GetFirstID('Vuu_Puqu_the_Beguiler'),
+        VAA_HUJA_THE_ERUDITE    = GetFirstID('Vaa_Huja_the_Erudite'),
+        EYY_MON_THE_IRONBREAKER = GetFirstID('Eyy_Mon_the_Ironbreaker'),
+        QUU_XIJO_THE_ILLUSORY   = GetFirstID('Quu_Xijo_the_Illusory'),
+        ZHUU_BUXU_THE_SILENT    = GetFirstID('Zhuu_Buxu_the_Silent'),
     },
     npc =
     {

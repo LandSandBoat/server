@@ -52,6 +52,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         IRIZ_IMA               = GetFirstID('Iriz_Ima'),
         GOTOH_ZHA_THE_REDOLENT = GetFirstID('Gotoh_Zha_the_Redolent'),
         TINNIN                 = GetFirstID('Tinnin'),
+        HYDRA                  = GetFirstID('Hydra'),
     },
     npc =
     {

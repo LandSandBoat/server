@@ -55,6 +55,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         BACKOO     = GetFirstID('Backoo'),
         BUBURIMBOO = GetFirstID('Buburimboo'),
         HELLDIVER  = GetFirstID('Helldiver'),
+        WANDA      = GetFirstID('Wake_Warder_Wanda'),
     },
     npc =
     {

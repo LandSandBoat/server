@@ -39,13 +39,18 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
 end
 
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.jsa.MIGHTY_STRIKES, hpp = math.random(90, 95), cooldown = 120 } -- "Special Attacks: ... Mighty Strikes (multiple times)"
+            { id = xi.jsa.MIGHTY_STRIKES, hpp = math.random(95, 100), cooldown = 60 } -- "Special Attacks: ... Mighty Strikes (multiple times)"
         }
     })
 end

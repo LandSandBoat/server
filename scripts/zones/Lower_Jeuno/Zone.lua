@@ -38,42 +38,47 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
-    local playerOnQuestId = GetServerVariable('[JEUNO]CommService')
+    local zauko        = GetNPCByID(ID.npc.ZAUKO)
+
+    if not zauko then
+        return
+    end
 
     -- Community Service Quest
-    -- 7AM: it's daytime. turn off all the lights
-    if vanadielHour == 7 then
+    -- 0500: Turn off all the lights, and clear vars
+    if vanadielHour == 5 then
+        zauko:setLocalVar('commServiceStart', 0)
+        zauko:setLocalVar('commServiceComp', 0)
+        zone:setLocalVar('allLightsLit', 0)
+
+        for i = 1, 4 do
+            zone:setLocalVar('commServPlayer' .. i, 0)
+        end
+
         for i = 0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
 
             if lamp then
                 lamp:setAnimation(xi.anim.CLOSE_DOOR)
+                lamp:setLocalVar('Option', 0)
             end
         end
 
-    -- 8PM: make quest available
-    -- notify anyone in zone with membership card that zauko is recruiting
+    -- 1800: Notify anyone in zone with membership card that zauko is recruiting
     elseif vanadielHour == 18 then
-        SetServerVariable('[JEUNO]CommService', 0)
         local players = zone:getPlayers()
+
         for name, player in pairs(players) do
             if player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
                 player:messageSpecial(ID.text.ZAUKO_IS_RECRUITING)
             end
         end
 
-    -- 9PM: notify the person on the quest that they can begin lighting lamps
-    elseif vanadielHour == 21 then
-        local playerOnQuest = GetPlayerByID(GetServerVariable('[JEUNO]CommService'))
-        if playerOnQuest then
-            playerOnQuest:startEvent(114)
-        end
-
-    -- 1AM: if nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
+    -- 0100: if nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
     -- she starts near Zauko and paths all the way to the Rolanberry exit.
     -- xi.path.flag.WALLHACK because she gets stuck on some terrain otherwise.
     elseif vanadielHour == 1 then
-        if playerOnQuestId == 0 then
+        if zauko:getLocalVar('commServiceComp') == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
             if not npc then
                 return

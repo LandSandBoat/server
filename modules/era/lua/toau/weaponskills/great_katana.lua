@@ -34,8 +34,7 @@ m:addOverride('xi.actions.weaponskills.tachi_hobaku.onUseWeaponSkill', function(
     local effectId      = xi.effect.STUN
     local actionElement = xi.element.THUNDER
     local skillType     = xi.skill.GREAT_KATANA
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     if math.random(1, 100) <= tp / 30 * resist then
         local power         = 1
         local duration      = 3
@@ -131,8 +130,7 @@ m:addOverride('xi.actions.weaponskills.tachi_yukikaze.onUseWeaponSkill', functio
     local actionElement = xi.element.DARK
     local power         = 25
     local skillType     = xi.skill.GREAT_KATANA
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(60 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -156,8 +154,7 @@ m:addOverride('xi.actions.weaponskills.tachi_gekko.onUseWeaponSkill', function(p
     local actionElement = xi.element.WIND
     local power         = 1
     local skillType     = xi.skill.GREAT_KATANA
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(60 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -181,8 +178,7 @@ m:addOverride('xi.actions.weaponskills.tachi_kasha.onUseWeaponSkill', function(p
     local actionElement = xi.element.ICE
     local power         = 25
     local skillType     = xi.skill.GREAT_KATANA
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(60 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

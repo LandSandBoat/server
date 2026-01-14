@@ -30,10 +30,11 @@ zones[xi.zone.PALBOROUGH_MINES] =
     },
     mob =
     {
-        BU_GHI_HOWLBLADE  = GetFirstID('BuGhi_Howlblade'),
-        ZI_GHI_BONEEATER  = GetFirstID('ZiGhi_Boneeater'),
-        BEHYA_HUNDREDWALL = GetFirstID('BeHya_Hundredwall'),
-        NI_GHU_NESTFENDER = GetFirstID('NiGhu_Nestfender'),
+        BU_GHI_HOWLBLADE   = GetFirstID('BuGhi_Howlblade'),
+        ZI_GHI_BONEEATER   = GetFirstID('ZiGhi_Boneeater'),
+        BEHYA_HUNDREDWALL  = GetFirstID('BeHya_Hundredwall'),
+        NI_GHU_NESTFENDER  = GetFirstID('NiGhu_Nestfender'),
+        QU_VHO_DEATHHURLER = GetFirstID('QuVho_Deathhurler'),
     },
     npc =
     {

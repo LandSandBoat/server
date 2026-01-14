@@ -59,14 +59,15 @@ zones[xi.zone.JUGNER_FOREST] =
 
     mob =
     {
-        CERNUNNOS          = GetFirstID('Cernunnos'),
-        FRAELISSA          = GetFirstID('Fraelissa'),
-        FRADUBIO           = GetFirstID('Fradubio'),
-        GIOLLEMITTE        = GetFirstID('Giollemitte_B_Feroun'),
-        KING_ARTHRO        = GetFirstID('King_Arthro'),
-        METEORMAULER       = GetFirstID('Meteormauler_Zhagtegg'),
-        PANZER_PERCIVAL    = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
-        SUPPLESPINE_MUJWUJ = GetFirstID('Supplespine_Mujwuj'),
+        CERNUNNOS             = GetFirstID('Cernunnos'),
+        FRAELISSA             = GetFirstID('Fraelissa'),
+        FRADUBIO              = GetFirstID('Fradubio'),
+        GIOLLEMITTE           = GetFirstID('Giollemitte_B_Feroun'),
+        KING_ARTHRO           = GetFirstID('King_Arthro'),
+        METEORMAULER          = GetFirstID('Meteormauler_Zhagtegg'),
+        PANZER_PERCIVAL       = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
+        SUPPLESPINE_MUJWUJ    = GetFirstID('Supplespine_Mujwuj'),
+        METEORMAULER_ZHAGTEGG = GetFirstID('Meteormauler_Zhagtegg'),
 
         VOIDWALKER =
         {

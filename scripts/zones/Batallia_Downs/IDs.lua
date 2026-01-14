@@ -68,6 +68,8 @@ zones[xi.zone.BATALLIA_DOWNS] =
         SUPARNA_FLEDGLING = GetFirstID('Suparna_Fledgling'),
         TOTTERING_TOBY    = GetFirstID('Tottering_Toby'),
         VEGNIX_GREENTHUMB = GetFirstID('Vegnix_Greenthumb'),
+        EYEGOUGER         = GetFirstID('Eyegouger'),
+        LUMBER_JACK       = GetFirstID('Lumber_Jack'),
 
         VOIDWALKER =
         {

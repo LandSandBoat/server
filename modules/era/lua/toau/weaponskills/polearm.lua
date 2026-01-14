@@ -66,8 +66,7 @@ m:addOverride('xi.actions.weaponskills.leg_sweep.onUseWeaponSkill', function(pla
     local effectId      = xi.effect.STUN
     local actionElement = xi.element.THUNDER
     local skillType     = xi.skill.POLEARM
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     if math.random(1, 100) <= tp / 30 * resist then
         local power         = 1
         local duration      = math.floor(4 * resist)

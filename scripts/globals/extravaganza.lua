@@ -6,6 +6,7 @@ require('scripts/globals/npc_util')
 xi = xi or {}
 xi.extravaganza = {}
 
+---@enum xi.extravaganza.campaign
 xi.extravaganza.campaign =
 {
     NONE        =   0,
@@ -14,12 +15,13 @@ xi.extravaganza.campaign =
     BOTH        =   3,
 }
 
+---@return xi.extravaganza.campaign
 xi.extravaganza.campaignActive = function()
     -- Extravaganza NPCs are currently not present in the client.  This function is disabled until
     -- such a time that they are reintroduced, or confirmed to be permanently removed.  If this changes,
     -- return to using xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
 
-    return false
+    return xi.extravaganza.campaign.NONE
 end
 
 -----------------------------------
@@ -40,15 +42,18 @@ end
 -- Check if Extravaganza is active, hide [S] vendors if inactive
 -----------------------------------
 
-xi.extravaganza.shadowEraHide = function(npc)
-    local active = xi.extravaganza.campaignActive()
-
-    if
-        (active == xi.extravaganza.campaign.NONE or
-        active == xi.extravaganza.campaign.SPRING_FALL) and
-        xi.settings.main.ENABLE_WOTG == 1
-    then
-        GetNPCByID(npc):setStatus(xi.status.DISAPPEAR)
+xi.extravaganza.shadowEraHide = function(npcId)
+    if type(npcId) == 'number' then
+        local active = xi.extravaganza.campaignActive()
+        local npc    = GetNPCByID(npcId)
+        if
+            (active == xi.extravaganza.campaign.NONE or
+            active == xi.extravaganza.campaign.SPRING_FALL) and
+            xi.settings.main.ENABLE_WOTG == 1 and
+            npc
+        then
+            npc:setStatus(xi.status.DISAPPEAR)
+        end
     end
 end
 

@@ -65,11 +65,12 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
     },
     mob =
     {
-        TUMBLING_TRUFFLE  = GetFirstID('Tumbling_Truffle'),
-        LUMBERING_LAMBERT = GetFirstID('Lumbering_Lambert'),
-        BLOODTEAR         = GetFirstID('Bloodtear_Baldurf'),
-        BATTERING_RAM     = GetTableOfIDs('Battering_Ram'),
-        NIHNIKNOOVI       = GetFirstID('Nihniknoovi'),
+        TUMBLING_TRUFFLE   = GetFirstID('Tumbling_Truffle'),
+        LUMBERING_LAMBERT  = GetFirstID('Lumbering_Lambert'),
+        BLOODTEAR          = GetFirstID('Bloodtear_Baldurf'),
+        BATTERING_RAM      = GetTableOfIDs('Battering_Ram'),
+        NIHNIKNOOVI        = GetFirstID('Nihniknoovi'),
+        SLUMBERING_SAMWELL = GetFirstID('Slumbering_Samwell'),
 
         VOIDWALKER =
         {

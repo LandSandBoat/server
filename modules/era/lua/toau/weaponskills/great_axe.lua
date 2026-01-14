@@ -21,8 +21,7 @@ m:addOverride('xi.actions.weaponskills.shield_break.onUseWeaponSkill', function(
     local actionElement = xi.element.ICE
     local power         = 40
     local skillType     = xi.skill.GREAT_AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor((120 + 6 * tp / 100) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -68,8 +67,7 @@ m:addOverride('xi.actions.weaponskills.armor_break.onUseWeaponSkill', function(p
     local actionElement = xi.element.WIND
     local power         = 25
     local skillType     = xi.skill.GREAT_AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor((120 + 6 * tp / 100) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -103,8 +101,7 @@ m:addOverride('xi.actions.weaponskills.weapon_break.onUseWeaponSkill', function(
     local actionElement = xi.element.WATER
     local power         = 25
     local skillType     = xi.skill.GREAT_AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor((120 + 6 * tp / 100) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
@@ -135,7 +132,6 @@ m:addOverride('xi.actions.weaponskills.full_break.onUseWeaponSkill', function(pl
 
     -- Handle status effects.
     local skillType     = xi.skill.GREAT_AXE
-    local skillRank     = player:getSkillRank(skillType)
     local effects =
     {
         [1] = { xi.effect.ATTACK_DOWN,   xi.element.WATER, 12.5 },
@@ -147,7 +143,7 @@ m:addOverride('xi.actions.weaponskills.full_break.onUseWeaponSkill', function(pl
         local effectId      = effects[index][1]
         local actionElement = effects[index][2]
         local power         = effects[index][3]
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
         local duration      = math.floor((120 + 6 * tp / 100) * resist)
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
@@ -184,8 +180,7 @@ m:addOverride('xi.actions.weaponskills.metatron_torment.onUseWeaponSkill', funct
     local actionElement = xi.element.WIND
     local power         = 19
     local skillType     = xi.skill.GREAT_AXE
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(120 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

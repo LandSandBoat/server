@@ -58,8 +58,7 @@ m:addOverride('xi.actions.weaponskills.dulling_arrow.onUseWeaponSkill', function
     local actionElement = xi.element.FIRE
     local power         = 10
     local skillType     = xi.skill.ARCHERY
-    local skillRank     = player:getSkillRank(skillType)
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, skillRank, actionElement, 0, effectId, 0)
+    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
     local duration      = math.floor(140 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
