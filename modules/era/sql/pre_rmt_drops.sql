@@ -1,3 +1,10 @@
+------------------------------------
+-- Pre RMT Drops
+-- This module reverts RMT changes from a ToAU era Patch in 2007
+------------------------------------
+-- Source : http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+------------------------------------
+
 DROP PROCEDURE IF EXISTS replace_drop;
 DELIMITER $$
 CREATE PROCEDURE replace_drop(
@@ -34,3 +41,17 @@ CALL replace_drop('Rolanberry_Fields', 'Simurgh', 'trotter_boots', 'strider_boot
 CALL replace_drop('Ordelles_Caves', 'Stroper_Chyme', 'shikaree_ring', 'archers_ring');
 
 -- Astral Ring (Coffer chests in Castle of Oztroja) handled in modules/era/lua/rmt_drops.lua
+
+-- Define rate variables
+SET @COMMON   = 150;  -- 15%
+SET @UNCOMMON = 100;  -- 10%
+SET @RARE     = 50;   -- 5%
+SET @VRARE = 10;   -- 1%
+
+INSERT INTO `mob_droplist` VALUES (2588,0,0,1000,1313,@RARE); -- Sea Serpent Grotto - Voll the Sharkfinned - Siren's Hair (5%)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,1313,@RARE); -- Sea Serpent Grotto - Zuug the Shoreleaper - Siren's Hair (5%)
+INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,1313,@RARE); -- Sea Serpent Grotto - Pahh the Gullcaller - Siren's Hair (5%)
+INSERT INTO `mob_droplist` VALUES (2673,0,0,1000,1313,@RARE); -- Sea Serpent Grotto - Worr the Clawfisted - Siren's Hair (5%)
+INSERT INTO `mob_droplist` VALUES (1825,0,0,1000,1313,@RARE); -- Sea Serpent Grotto - Novv the Whitehearted - Siren's Hair (5%)
+INSERT INTO `mob_droplist` VALUES (128,0,0,1000,1312,@RARE);  -- Cape Terrigan - Devil Manta (Fished) - Angel Skin - (5%)
+INSERT INTO `mob_droplist` VALUES (149,0,0,1000,836,@VRARE);  -- The Boyahda Tree - Aquarius - Damascene Cloth (1%)

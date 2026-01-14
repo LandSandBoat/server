@@ -21,6 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.WIND
     params.skill = xi.skill.DAGGER
     params.includemab = true
+    params.dStat = xi.mod.INT
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- http://wiki.ffo.jp/html/682.html

@@ -134,62 +134,62 @@ end
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                    weight = 1000, amount = 4000 },
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 4000 },
     },
 
     {
-        { itemId = xi.item.WOLF_HIDE,              weight = 1000 },
+        { itemId = xi.item.WOLF_HIDE,              weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.SINGERS_SHIELD,         weight = 250 },
-        { itemId = xi.item.WARLOCKS_SHIELD,        weight = 250 },
-        { itemId = xi.item.MAGICIANS_SHIELD,       weight = 250 },
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.SINGERS_SHIELD,         weight =  2500 },
+        { itemId = xi.item.WARLOCKS_SHIELD,        weight =  2500 },
+        { itemId = xi.item.MAGICIANS_SHIELD,       weight =  2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.ASHIGARU_MANTLE,        weight = 250 },
-        { itemId = xi.item.WYVERN_MANTLE,          weight = 250 },
-        { itemId = xi.item.KILLER_MANTLE,          weight = 250 },
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.ASHIGARU_MANTLE,        weight =  2500 },
+        { itemId = xi.item.WYVERN_MANTLE,          weight =  2500 },
+        { itemId = xi.item.KILLER_MANTLE,          weight =  2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 800 },
-        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
-        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
-        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
-        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
-        { itemId = xi.item.IRON_INGOT,             weight =  20 },
-        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
-        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
-        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
-        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
-        { itemId = xi.item.ELM_LOG,                weight =  20 },
+        { itemId = xi.item.NONE,                   weight =  8000 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =   200 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =   200 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =   200 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   200 },
+        { itemId = xi.item.IRON_INGOT,             weight =   200 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   200 },
+        { itemId = xi.item.SILVER_INGOT,           weight =   200 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   200 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =   200 },
+        { itemId = xi.item.ELM_LOG,                weight =   200 },
     },
 
     {
-        { itemId = xi.item.REVIVAL_TREE_ROOT,      weight = 250 },
-        { itemId = xi.item.PETRIFIED_LOG,          weight = 250 },
+        { itemId = xi.item.REVIVAL_TREE_ROOT,      weight =  2500 },
+        { itemId = xi.item.PETRIFIED_LOG,          weight =  2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 500 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight =  91 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight =  91 },
-        { itemId = xi.item.SCROLL_OF_ABSORB_VIT,   weight =  91 },
-        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =  92 },
-        { itemId = xi.item.SCROLL_OF_ERASE,        weight =  45 },
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =  45 },
-        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =  45 },
+        { itemId = xi.item.NONE,                   weight =  5000 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_AGI,   weight =   912 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_INT,   weight =   913 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_VIT,   weight =   912 },
+        { itemId = xi.item.SCROLL_OF_MAGIC_FINALE, weight =   913 },
+        { itemId = xi.item.SCROLL_OF_ERASE,        weight =   450 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI,  weight =   450 },
+        { itemId = xi.item.SCROLL_OF_DISPEL,       weight =   450 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 100 },
-        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 300 },
-        { itemId = xi.item.MANNEQUIN_BODY,         weight = 300 },
-        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 300 },
+        { itemId = xi.item.NONE,                   weight =  1000 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight =  3000 },
     },
 }
 

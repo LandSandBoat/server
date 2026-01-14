@@ -39,9 +39,19 @@ zones[xi.zone.SACRARIUM] =
     },
     mob =
     {
-        SWIFT_BELT_NM_OFFSET    = GetFirstID('Balor'),
-        OLD_PROFESSOR_MARISELLE = GetFirstID('Old_Professor_Mariselle'),
         ELEL                    = GetFirstID('Elel'),
+        FOMOR_BARD              = GetTableOfIDs('Fomor_Bard'),
+        FOMOR_BLACK_MAGE        = GetTableOfIDs('Fomor_Black_Mage'),
+        FOMOR_DARK_KNIGHT       = GetTableOfIDs('Fomor_Dark_Knight'),
+        FOMOR_DRAGOON           = GetTableOfIDs('Fomor_Dragoon'),
+        FOMOR_MONK              = GetTableOfIDs('Fomor_Monk'),
+        FOMOR_NINJA             = GetTableOfIDs('Fomor_Ninja'),
+        FOMOR_RANGER            = GetTableOfIDs('Fomor_Ranger'),
+        FOMOR_RED_MAGE          = GetTableOfIDs('Fomor_Red_Mage'),
+        FOMOR_SAMURAI           = GetTableOfIDs('Fomor_Samurai'),
+        FOMOR_WARRIOR           = GetTableOfIDs('Fomor_Warrior'),
+        OLD_PROFESSOR_MARISELLE = GetFirstID('Old_Professor_Mariselle'),
+        SWIFT_BELT_NM_OFFSET    = GetFirstID('Balor'),
     },
     npc =
     {

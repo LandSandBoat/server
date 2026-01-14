@@ -1,9 +1,9 @@
 -----------------------------------
---  Reaving Wind (Knockback)
+--  Reaving Wing (Aura Knockback)
 --  Description: Does no damage, knockback only.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
---  Notes: Zirnitra uses multiple times while reaving wind aura is active.
+--  Notes: Zirnitra uses multiple times while aura is active.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

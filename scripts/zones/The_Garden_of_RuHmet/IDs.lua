@@ -55,18 +55,18 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920665, -- SE
         },
 
-        JAILER_OF_FORTITUDE = GetFirstID('Jailer_of_Fortitude'),
-        KFGHRAH_WHM         = GetFirstID('Kfghrah_WHM'),
-        KFGHRAH_BLM         = GetFirstID('Kfghrah_BLM'),
-        IXAERN_DRK          = GetFirstID('Ixaern_DRK'),
-        IXZDEI_RDM          = GetFirstID('Ixzdei_RDM'),
-        JAILER_OF_FAITH     = GetFirstID('Jailer_of_Faith'),
-        IXAERN_DRG          = GetFirstID('Ixaern_DRG'),
-        IXZDEI_BASE         = GetFirstID('Ixzdei_RDM'),
-        QNZDEI_OFFSET       = GetFirstID('Qnzdei'),
         AWGHRAH_BIRD        = utils.slice(GetTableOfIDs('Awghrah'), 1, 57),
         AWGHRAH_SPIDER      = utils.slice(GetTableOfIDs('Awghrah'), 58, 94),
         AWGHRAH_HUMAN       = utils.slice(GetTableOfIDs('Awghrah'), 95),
+        IXAERN_DRK          = GetFirstID('Ixaern_DRK'),
+        IXAERN_DRG          = GetFirstID('Ixaern_DRG'),
+        IXZDEI_BLM          = GetFirstID('Ixzdei_BLM'),
+        IXZDEI_RDM          = GetFirstID('Ixzdei_RDM'),
+        JAILER_OF_FAITH     = GetFirstID('Jailer_of_Faith'),
+        JAILER_OF_FORTITUDE = GetFirstID('Jailer_of_Fortitude'),
+        KFGHRAH_WHM         = GetFirstID('Kfghrah_WHM'),
+        KFGHRAH_BLM         = GetFirstID('Kfghrah_BLM'),
+        QNZDEI_OFFSET       = GetFirstID('Qnzdei'),
     },
 
     npc =

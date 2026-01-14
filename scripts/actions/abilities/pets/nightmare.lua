@@ -20,7 +20,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if
         xi.data.statusEffect.isTargetImmune(target, xi.effect.SLEEP_I, xi.element.DARK) or
         xi.data.statusEffect.isTargetResistant(pet, target, xi.effect.SLEEP_I) or
-        xi.data.statusEffect.isEffectNullified(target, xi.effect.SLEEP_I) or
+        xi.data.statusEffect.isEffectNullified(target, xi.effect.SLEEP_I, 0) or
         target:hasStatusEffect(xi.effect.SLEEP_I)
     then
         petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
@@ -40,8 +40,9 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     -- Apply sleep and bio
     if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration, 0, 2, 4) then
         petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+        target:delStatusEffectSilent(xi.effect.DIA)
         target:delStatusEffectSilent(xi.effect.BIO)
-        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 0, 10, 5)
+        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 0, 10, 11)
 
     -- Miss
     else

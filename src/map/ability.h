@@ -26,6 +26,7 @@
 
 #include "entities/battleentity.h"
 #include "enums/action/animation.h"
+#include "enums/recast.h"
 #include "status_effect.h"
 
 enum class ActionCategory : uint8_t;
@@ -714,7 +715,7 @@ public:
     uint16          getAddType() const;
     auto            getMessage() const -> MsgBasic;
     timer::duration getRecastTime() const;
-    uint16          getRecastId() const;
+    Recast          getRecastId() const;
     int32           getCE() const;
     int32           getVE() const;
     uint16          getMeritModID() const;
@@ -734,7 +735,7 @@ public:
     void setAddType(uint16 addtype);
     void setMessage(MsgBasic message);
     void setRecastTime(timer::duration recastTime);
-    void setRecastId(uint16 recastId);
+    void setRecastId(Recast recastId);
     void setCE(int32 CE);
     void setVE(int32 VE);
     void setMeritModID(uint16 value);
@@ -758,7 +759,7 @@ private:
     uint16          m_addType;
     MsgBasic        m_message;
     timer::duration m_recastTime{};
-    uint16          m_recastId;
+    Recast          m_recastId;
     int32           m_CE;
     int32           m_VE;
     uint16          m_meritModID;

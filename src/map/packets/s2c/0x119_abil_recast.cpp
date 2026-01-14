@@ -40,19 +40,19 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
         const auto remaining     = recast.RecastTime == 0s ? 0s : std::chrono::ceil<std::chrono::seconds>(recast.TimeStamp - timer::now() + recast.RecastTime);
         const auto recastSeconds = static_cast<uint32>(std::max<int64>(timer::count_seconds(remaining), 0));
 
-        if (recast.ID == 256) // borrowing this id for mount recast
+        if (recast.ID == Recast::Mount) // borrowing this id for mount recast
         {
             packet.MountRecast   = recastSeconds;
-            packet.MountRecastId = recast.ID;
+            packet.MountRecastId = static_cast<uint32_t>(recast.ID);
         }
-        else if (recast.ID != 0)
+        else if (recast.ID != Recast::Special)
         {
             packet.Timers[count].Timer   = recastSeconds;
             packet.Timers[count].TimerId = static_cast<uint8_t>(recast.ID);
 
             if (recast.maxCharges != 0)
             {
-                if (const auto* charge = ability::GetCharge(PChar, recast.ID))
+                if (const auto* charge = ability::GetCharge(PChar, static_cast<uint16>(recast.ID)))
                 {
                     const uint16_t actualChargeTime = timer::count_seconds(recast.chargeTime);
                     const uint16_t baseChargeTime   = timer::count_seconds(charge->chargeTime);

@@ -11,7 +11,6 @@ xi.findFlag =
     DEAD            = 1,  -- target dead
     ALLIANCE        = 2,  -- force target alliance
     PET             = 4,  -- force target pet
-    UNLIMITED       = 8,  -- unlimited distance
-    HIT_ALL         = 16, -- hit all targets, regardless of party
+    -- 8 and 16 are available
     IGNORE_BATTLEID = 32, -- ignore battle id check
 }

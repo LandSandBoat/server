@@ -15,8 +15,10 @@ end
     -- Set Modifiers
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false) -- Does not cast spells.
+    mob:setTP(3000)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
     mob:setMod(xi.mod.REGAIN, 50)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -35,9 +37,6 @@ entity.onMobSkillTarget = function(target, mob, skill) -- Will reset enmity on m
     if skillID == xi.mobSkill.GREAT_WHIRLWIND_1 then
         mob:resetEnmity(target)
     end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

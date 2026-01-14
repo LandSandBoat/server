@@ -9,7 +9,6 @@ local ID = zones[xi.zone.HORLAIS_PEAK]
 local entity = {}
 
 -- TODO: Ninjutsu resists
--- TODO: Song resists
 
 local regenPower     = 100
 local skillWeights   =
@@ -22,25 +21,10 @@ local skillWeights   =
 }
 
 -----------------------------------
--- Used to block the self-sleep action while taking other actions.
------------------------------------
-local abilityBlocked = function(mob)
-    local action = mob:getCurrentAction()
-
-    return
-        action == xi.action.category.MOBABILITY_START or
-        action == xi.action.category.MOBABILITY_USING or
-        action == xi.action.category.MOBABILITY_FINISH or
-        action == xi.action.category.MAGIC_START or
-        action == xi.action.category.MAGIC_CASTING or
-        action == xi.action.category.MAGIC_FINISH
-end
-
------------------------------------
 -- Applies self-sleep and accompanying actions.
 -----------------------------------
 local applySelfSleep = function(mob)
-    if abilityBlocked(mob) then
+    if xi.combat.behavior.isEntityBusy(mob) then
         mob:setLocalVar('sleepWhenFree', 1)
         return
     end
@@ -71,17 +55,18 @@ local handleSleepStates = function(mob, isAsleep)
         mob:setMod(xi.mod.REGEN, 0)
 
         if isSelfSleep then
-            mob:useMobAbility(xi.mobSkill.VULTURE_3)    -- This is actually Smite of Rage (404), but that doesn't make the animation.
+            mob:injectActionPacket(mob:getID(), 11, 435, 0, 0x18, 0, 0, 0)
             mob:setLocalVar('isSelfSleeping', 0)
         end
+
+        mob:setTP(3000)
     end
 end
 
 -----------------------------------
 -- Sets initial mob-specific immunities and effects.
 -----------------------------------
-entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 0)
+entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.STUN)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PARALYZE)
@@ -91,6 +76,14 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.SPELLINTERRUPT, 100)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 65)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
 end
 
 -----------------------------------
@@ -112,17 +105,18 @@ entity.onMobFight = function(mob, target)
     local proximityTimer = 3
 
     handleSleepStates(mob, isAsleep)
-
     -- Use Rumble or Ram Charge twice in a row.
-    if doubleAbility > 0 and not abilityBlocked(mob) then
+    if
+        doubleAbility > 0 and
+        not xi.combat.behavior.isEntityBusy(mob)
+    then
         local abilityID = mob:getLocalVar('doubleAbilityID')
         mob:useMobAbility(abilityID)
     end
 
     -- Use self-sleep after Petribreath.
     if
-        not abilityBlocked(mob) and
-        not isAsleep and
+        not xi.combat.behavior.isEntityBusy(mob) and
         mob:getLocalVar('petribreathSelfSleep') == 1
     then
         mob:setLocalVar('petribreathSelfSleep', 0)
@@ -195,12 +189,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setLocalVar('doubleAbilityCount', 0)
         mob:setLocalVar('doubleAbilityID', 0)
     end
-end
-
------------------------------------
--- Handle special mob death actions.
------------------------------------
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

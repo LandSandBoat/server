@@ -380,7 +380,8 @@ void CGambitsContainer::Tick(timer::time_point tick)
                 }
                 else if (action.select == G_SELECT::EN_MOB_WEAKNESS)
                 {
-                    auto spell_id = POwner->SpellContainer->EnSpellAgainstTargetWeakness(target);
+                    CBattleEntity* battleTarget = POwner->GetBattleTarget();
+                    auto           spell_id     = POwner->SpellContainer->EnSpellAgainstTargetWeakness(battleTarget);
                     if (spell_id.has_value())
                     {
                         controller->Cast(POwner->targid, spell_id.value());

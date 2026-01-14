@@ -941,6 +941,9 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     // innate + 40 subtle blow
     PPet->setModifier(Mod::SUBTLE_BLOW, 40);
 
+    // Wyverns can parry... yes really.
+    PPet->setMobMod(MOBMOD_CAN_PARRY, 1);
+
     // Job Point: Wyvern Max HP
     if (PMaster->objtype == TYPE_PC)
     {

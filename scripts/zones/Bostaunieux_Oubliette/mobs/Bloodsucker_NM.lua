@@ -62,15 +62,15 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
-    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 9900)
-
+    mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+    mob:addImmunity(xi.immunity.TERROR)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(3600)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 35, power = math.random(135) }) -- Power of 135 but should be subject to resist. Additional effects need further updates before this can happen.
 end
 
 entity.onMobDeath = function(mob, player, optParams)

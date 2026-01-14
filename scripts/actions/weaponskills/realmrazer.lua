@@ -19,7 +19,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 7
     params.ftpMod = { 0.88, 0.88, 0.88 }
     params.mnd_wsc = player:getMerit(xi.merit.REALMRAZER) * 0.17
-    params.accVaries = { 0.8, 0.9, 1.0 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
+    params.accVaries = { 0, 30, 60 } -- TODO: verify exact number
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REALMRAZER) * 0.03)

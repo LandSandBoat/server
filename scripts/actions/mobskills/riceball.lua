@@ -15,6 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:addMod(xi.mod.VIT, 4)
     mob:addMod(xi.mod.CHR, 4)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 5)
+    mob:setMod(xi.mod.DMGMAGIC, -2500)
 
     skill:setMsg(xi.msg.basic.NONE)
 

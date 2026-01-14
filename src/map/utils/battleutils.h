@@ -153,9 +153,6 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
 uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot, bool isCannonball);
 
 int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked, uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false, bool isCovered = false, CBattleEntity* POriginalTarget = nullptr);
@@ -256,7 +253,6 @@ timer::duration CalculateSpellCastTime(CBattleEntity*, CMagicState*);
 uint16          CalculateSpellCost(CBattleEntity*, CSpell*);
 timer::duration CalculateSpellRecastTime(CBattleEntity*, CSpell*);
 bool            CanAffordSpell(CBattleEntity* PEntity, CSpell* PSpell, uint8 flags = 0);
-int16           CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
 int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
 bool            RemoveAmmo(CCharEntity*, int quantity = 1);
 int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);

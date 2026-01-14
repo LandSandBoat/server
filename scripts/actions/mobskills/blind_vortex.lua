@@ -1,11 +1,10 @@
 -----------------------------------
--- Scratch
+-- Blind Vortex
 --
 -- Description: Strikes a single target in the face. Additional effect: Blind
 -- Type: Physical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
--- Notes: Used by some notorious monsters in place of Scratch.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

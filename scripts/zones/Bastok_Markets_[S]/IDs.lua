@@ -43,7 +43,7 @@ zones[xi.zone.BASTOK_MARKETS_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Hostarfaux_TK'), -- San, Bas, Win, Flag +4, CA
-        SHENNI              = GetFirstID('Shenni'),
+        -- SHENNI              = GetFirstID('Shenni'),
     },
 }
 

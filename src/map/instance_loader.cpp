@@ -69,7 +69,7 @@ CInstance* CInstanceLoader::LoadInstance() const
     auto rset = db::preparedStmt("SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, "
                                  "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
                                  "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
-                                 "ecosystemID, mobradius, speed, "
+                                 "ecosystemID, speed, "
                                  "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
                                  "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
                                  "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
@@ -126,12 +126,11 @@ CInstance* CInstanceLoader::LoadInstance() const
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
 
-            PMob->m_Behavior    = rset->get<uint16>("behavior");
-            PMob->m_Link        = rset->get<uint8>("links");
-            PMob->m_Type        = rset->get<uint8>("mobType");
-            PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
-            PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
-            PMob->m_ModelRadius = rset->get<float>("mobradius");
+            PMob->m_Behavior  = rset->get<uint16>("behavior");
+            PMob->m_Link      = rset->get<uint8>("links");
+            PMob->m_Type      = rset->get<uint8>("mobType");
+            PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+            PMob->m_EcoSystem = rset->get<ECOSYSTEM>("ecosystemID");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
             PMob->animationSpeed = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined animationSpeed

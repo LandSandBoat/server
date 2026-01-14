@@ -1,6 +1,8 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
+local ID = zones[xi.zone.QUFIM_ISLAND]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -33,6 +35,33 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    -- NM Dosetsu Tree only spawns during thunder weather
+    local dosetsuTree = GetMobByID(ID.mob.DOSETSU_TREE)
+
+    if not dosetsuTree then
+        return
+    end
+
+    if weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS then
+        -- Spawn if respawn is up
+        if
+            not dosetsuTree:isSpawned() and
+            GetSystemTime() > dosetsuTree:getLocalVar('respawn')
+        then
+            xi.mob.updateNMSpawnPoint(dosetsuTree)
+            SpawnMob(ID.mob.DOSETSU_TREE)
+        end
+    else
+        if
+            dosetsuTree:isSpawned() and
+            not dosetsuTree:isEngaged()
+        then
+            DespawnMob(ID.mob.DOSETSU_TREE)
+        end
+    end
 end
 
 return zoneObject

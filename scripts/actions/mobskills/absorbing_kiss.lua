@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- https://docs.google.com/spreadsheets/d/1TnrBzUAQ0hyuFVIjf5OLviIfhGw4vxN1x_4zv9gG4N4/edit?gid=368168805#gid=368168805&range=H31
     -- pic of -7/-8 stat to the right of that
-    if mob:getPool() == xi.mobPools.PEPPER then
+    if mob:getPool() == xi.mobPool.PEPPER then
         numAttributesDrained = 0 -- Reset in case of resists
 
         for i = xi.effect.STR_DOWN, xi.effect.CHR_DOWN do

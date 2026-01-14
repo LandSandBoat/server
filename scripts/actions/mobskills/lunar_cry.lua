@@ -30,8 +30,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local buffValue = cycleBuffs[moonCycle]
 
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffValue, 0, 180)
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffValue, 0, 180)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, buffValue, 0, 180)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.EVASION_DOWN, 32 - buffValue, 0, 180)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_2)
     return 0
 end

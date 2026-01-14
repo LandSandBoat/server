@@ -28,27 +28,27 @@ Gets mapped for convenience in scripts/enum/mobMod.lua -- always edit both
 
 enum MOBMODIFIER : int
 {
-    MOBMOD_NONE                   = 0,
-    MOBMOD_GIL_MIN                = 1,  // minimum gil drop -- spawn mod only
-    MOBMOD_GIL_MAX                = 2,  // maximum gil drop -- spawn mod only
-    MOBMOD_MP_BASE                = 3,  // Give mob mp. Used for mobs that are not mages, wyverns, avatars
-    MOBMOD_SIGHT_RANGE            = 4,  // sight range
-    MOBMOD_SOUND_RANGE            = 5,  // sound range
-    MOBMOD_BUFF_CHANCE            = 6,  // % chance to buff (combat only)
-    MOBMOD_GA_CHANCE              = 7,  // % chance to use -ga spell
-    MOBMOD_HEAL_CHANCE            = 8,  // % chance to use heal
-    MOBMOD_HP_HEAL_CHANCE         = 9,  // can cast cures below this HP %
-    MOBMOD_SUBLINK                = 10, // Sub link group. Enables mobs from different families to link if they share a SUBLINK value.
-    MOBMOD_LINK_RADIUS            = 11, // link radius
-    MOBMOD_SEES_THROUGH_ILLUSION  = 12, // Mob can see through the Illusion effect that grants effects similar to Sneak & Invisible without this mod and allows aggro (see Viscious Liquid in mamook)
-    MOBMOD_SEVERE_SPELL_CHANCE    = 13, // % chance to use a severe spell like death or impact
-    MOBMOD_SKILL_LIST             = 14, // uses given mob skill list
-    MOBMOD_MUG_GIL                = 15, // amount gil carried for mugging
-    MOBMOD_DETECTION              = 16, // Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
-    MOBMOD_NO_DESPAWN             = 17, // do not despawn when too far from spawn. Gob Diggers have this.
-    MOBMOD_VAR                    = 18, // temp var for whatever. Gets cleared on spawn
-    MOBMOD_CAN_SHIELD_BLOCK       = 19, // toggle shield use for mobs without physical shields (trusts)
-    MOBMOD_TP_USE_CHANCE          = 20, // % chance to use tp
+    MOBMOD_NONE                  = 0,
+    MOBMOD_GIL_MIN               = 1,  // minimum gil drop -- spawn mod only
+    MOBMOD_GIL_MAX               = 2,  // maximum gil drop -- spawn mod only
+    MOBMOD_MP_BASE               = 3,  // Give mob mp. Used for mobs that are not mages, wyverns, avatars
+    MOBMOD_SIGHT_RANGE           = 4,  // sight range
+    MOBMOD_SOUND_RANGE           = 5,  // sound range
+    MOBMOD_BUFF_CHANCE           = 6,  // % chance to buff (combat only)
+    MOBMOD_GA_CHANCE             = 7,  // % chance to use -ga spell
+    MOBMOD_HEAL_CHANCE           = 8,  // % chance to use heal
+    MOBMOD_HP_HEAL_CHANCE        = 9,  // can cast cures below this HP %
+    MOBMOD_SUBLINK               = 10, // Sub link group. Enables mobs from different families to link if they share a SUBLINK value.
+    MOBMOD_LINK_RADIUS           = 11, // link radius
+    MOBMOD_SEES_THROUGH_ILLUSION = 12, // Mob can see through the Illusion effect that grants effects similar to Sneak & Invisible without this mod and allows aggro (see Viscious Liquid in mamook)
+    MOBMOD_SEVERE_SPELL_CHANCE   = 13, // % chance to use a severe spell like death or impact
+    MOBMOD_SKILL_LIST            = 14, // uses given mob skill list
+    MOBMOD_MUG_GIL               = 15, // amount gil carried for mugging
+    MOBMOD_DETECTION             = 16, // Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
+    MOBMOD_NO_DESPAWN            = 17, // do not despawn when too far from spawn. Gob Diggers have this.
+    MOBMOD_VAR                   = 18, // temp var for whatever. Gets cleared on spawn
+    MOBMOD_CAN_SHIELD_BLOCK      = 19, // toggle shield use for mobs without physical shields (trusts)
+    // UNUSED                     = 20, // Free to repurpose
     MOBMOD_PET_SPELL_LIST         = 21, // set pet spell list
     MOBMOD_NA_CHANCE              = 22, // % chance to cast -na
     MOBMOD_IMMUNITY               = 23, // immune to set status effects. This only works from the db, not scripts
@@ -120,6 +120,7 @@ enum MOBMODIFIER : int
     MOBMOD_AVATAR_PETID           = 89, // A value from xi.petId to select model/ability from when owner uses astral flow
     MOBMOD_AVATAR_ASTRAL_DELAY    = 90, // Number of milliseconds to delay AF after avatar spawn
     MOBMOD_H2H_SINGLE_SWING       = 91, // Mob will have only one swing per attack even as MNK with H2H skill
+    MOBMOD_AOE_HIT_ALL            = 92, // Mob AoE can hit any player regardless of enmity
 };
 
 #endif

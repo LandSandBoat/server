@@ -87,12 +87,12 @@ public:
     auto IsFirstSwing() const -> bool;
     auto SetAsFirstSwing(bool isFirst = true) -> void;
     auto GetDamageRatio() const -> float;
-    auto SetGuarded(bool g) -> void;
-    auto IsGuarded() -> bool;
     auto IsEvaded() const -> bool;
     auto SetEvaded(bool e) -> void;
     auto IsBlocked() const -> bool;
     auto IsParried() const -> bool;
+    bool IsGuarded() const;
+    auto CheckGuarded() -> bool;
     auto CheckParried() -> bool;
     auto IsAnticipated() const -> bool;
     auto IsDeflected() const -> bool;

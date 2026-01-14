@@ -10,7 +10,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 3000, 0, 90))
+    local effectparams =
+    {
+        effectId = xi.effect.SLOW,
+        power    = 3000,
+        duration = 90,
+        tier     = 8, -- https://wiki.ffo.jp/html/4125.html
+    }
+
+    xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectparams, true)
 
     return xi.effect.SLOW
 end

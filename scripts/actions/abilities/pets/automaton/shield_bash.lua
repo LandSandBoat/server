@@ -31,7 +31,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
             duration = math.random(70, 75)
         end
 
-        target:addStatusEffect(xi.effect.SLOW, slowPower * 100, 0, duration)
+        target:addStatusEffect(xi.effect.SLOW, slowPower * 100, 0, duration, 0, 0, 3)
     end
 
     -- randomize damage

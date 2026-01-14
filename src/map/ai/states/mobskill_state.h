@@ -63,7 +63,7 @@ private:
     timer::duration            m_castTime{};
     int16                      m_spentTP;
 
-    void reduceTpOnInterrupt();
+    void reduceTpOnInterrupt() const;
 };
 
 #endif

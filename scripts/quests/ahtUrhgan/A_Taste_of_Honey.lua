@@ -10,6 +10,16 @@ quest.reward =
     item = xi.item.IRMIK_HELVASI
 }
 
+local pephredoOnTrigger = function(player, npc)
+    if
+        quest:getVar(player, npc:getID()) == 0 and
+        npcUtil.giveItem(player, xi.item.POT_OF_WHITE_HONEY)
+    then
+        quest:setVar(player, npc:getID(), 1, NextJstDay())
+        return quest:noAction()
+    end
+end
+
 quest.sections =
 {
     -- Section: Quest available
@@ -80,6 +90,11 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.WAJAOM_WOODLANDS] =
+        {
+            ['Pephredo_Hive'] = pephredoOnTrigger,
+        },
     },
 
     -- Section: Quest completed
@@ -122,6 +137,11 @@ quest.sections =
                     end
                 end,
             },
+        },
+
+        [xi.zone.WAJAOM_WOODLANDS] =
+        {
+            ['Pephredo_Hive'] = pephredoOnTrigger,
         },
     },
 }

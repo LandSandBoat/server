@@ -12,9 +12,8 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.CRITHITRATE, 25)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 10000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -22,10 +21,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.CRITHITRATE, 25)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95) },
+            { id = xi.jsa.HUNDRED_FISTS, cooldown = 70, hpp = math.random(98, 99) },
         },
     })
 end

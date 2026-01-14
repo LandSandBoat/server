@@ -1,13 +1,10 @@
 -----------------------------------
 --  Winds of Oblivion
 -----------------------------------
-local ID = zones[xi.zone.EMPYREAL_PARADOX]
------------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     return 0
 end
 

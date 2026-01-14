@@ -19,11 +19,15 @@ entity.spawnPoints =
 -- all body guard functionality in the rotz_bodyguarded_nm mixin
 
 entity.onMobSpawn = function(mob)
-    -- retail captures show these mods are not dependent on region control
+    -- retail captures show these mods do have a dependency that needs to be further investigated
     mob:setMod(xi.mod.UDMGPHYS, -5000)
     mob:setMod(xi.mod.UDMGRANGE, -5000)
     mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
+
+    mob:setMod(xi.mod.REGEN, 15)
+
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

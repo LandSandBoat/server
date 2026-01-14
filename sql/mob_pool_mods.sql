@@ -44,10 +44,6 @@ INSERT INTO `mob_pool_mods` VALUES (60,370,20,0); -- REGEN: 20
 -- Animated Shield
 INSERT INTO `mob_pool_mods` VALUES (154,163,-1250,0); -- DMGMAGIC: -1250
 
--- Antican Praetor
-INSERT INTO `mob_pool_mods` VALUES (181,1,6000,1); -- GIL_MIN: 6000
-INSERT INTO `mob_pool_mods` VALUES (181,2,9234,1); -- GIL_MAX: 9234
-
 -- Aspidochelone
 INSERT INTO `mob_pool_mods` VALUES (268,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (268,370,50,0);  -- REGEN: 50
@@ -179,12 +175,6 @@ INSERT INTO `mob_pool_mods` VALUES (2047,163,-1000,0); -- DMGMAGIC: -1000
 -- Intulo
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0); -- MDEF: 25
 
--- Ixzdei Blm
-INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);  -- SIGHT_RANGE: 15
-INSERT INTO `mob_pool_mods` VALUES (2114,5,15,1);  -- SOUND_RANGE: 15
-INSERT INTO `mob_pool_mods` VALUES (2114,11,30,1); -- LINK_RADIUS: 30
-INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1); -- MAGIC_COOL: 60
-
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
 
@@ -211,9 +201,6 @@ INSERT INTO `mob_pool_mods` VALUES (2271,165,15,0); -- CRITHITRATE: 15
 -- Ladon
 INSERT INTO `mob_pool_mods` VALUES (2314,28,23,1); -- EXP_BONUS: 23
 
--- Lindwurm
-INSERT INTO `mob_pool_mods` VALUES (2420,302,10,0); -- TRIPLE_ATTACK: 10
-
 -- Maats Avatar
 INSERT INTO `mob_pool_mods` VALUES (2461,61,25,1); -- HP_SCALE: 25
 
@@ -229,9 +216,6 @@ INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 -- Minotaur
 INSERT INTO `mob_pool_mods` VALUES (2675,4,25,1); -- SIGHT_RANGE: 25
 
--- Mischievous Micholas
-INSERT INTO `mob_pool_mods` VALUES (2677,288,55,0); -- DOUBLE_ATTACK: 55
-
 -- Morbolger
 INSERT INTO `mob_pool_mods` VALUES (2742,37,1,1); -- ALWAYS_AGGRO: 1
 
@@ -240,11 +224,6 @@ INSERT INTO `mob_pool_mods` VALUES (2745,28,23,1); -- EXP_BONUS: 23
 
 -- Morion Worm
 INSERT INTO `mob_pool_mods` VALUES (2748,370,5,0); -- REGEN: 5
-
--- Mysticmaker Profblix
-INSERT INTO `mob_pool_mods` VALUES (2790,168,50,0); -- SPELLINTERRUPT: 50
-INSERT INTO `mob_pool_mods` VALUES (2790,240,7,0);  -- SLEEPRES: 7
-INSERT INTO `mob_pool_mods` VALUES (2790,244,7,0);  -- SILENCERES: 7
 
 -- Mythril Golem
 INSERT INTO `mob_pool_mods` VALUES (2793,4,4,1); -- SIGHT_RANGE: 4
@@ -268,12 +247,6 @@ INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
 
 -- Polar Hare
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
-
--- Promathia
-INSERT INTO `mob_pool_mods` VALUES (3205,1,250,0);  -- DEF: 250
-INSERT INTO `mob_pool_mods` VALUES (3205,29,30,0);  -- MDEF: 30
-INSERT INTO `mob_pool_mods` VALUES (3205,288,25,0); -- DOUBLE_ATTACK: 25
-INSERT INTO `mob_pool_mods` VALUES (3205,366,25,0); -- MAIN_DMG_RATING: 25
 
 -- Proto-Omega
 INSERT INTO `mob_pool_mods` VALUES (3208,370,20,0); -- REGEN: 20
@@ -529,12 +502,6 @@ INSERT INTO `mob_pool_mods` VALUES (4837,62,1,1); -- NO_STANDBACK: 1
 INSERT INTO `mob_pool_mods` VALUES (4932,30,1017,1); -- SPECIAL_SKILL: 1017
 INSERT INTO `mob_pool_mods` VALUES (4932,33,50,1);   -- SPECIAL_COOL: 50
 
--- Promathia
-INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);  -- DEF: 250
-INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);  -- MDEF: 30
-INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0); -- DOUBLE_ATTACK: 25
-INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0); -- MAIN_DMG_RATING: 10
-
 -- Maat Nin
 INSERT INTO `mob_pool_mods` VALUES (5403,62,1,1); -- NO_STANDBACK: 1
 
@@ -577,12 +544,6 @@ INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25
 
 -- Trust: Shantotto II
 INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- HPP: -10
-
--- Ixzdei Rdm
-INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
-INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- SIGHT_RANGE: 15
-INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);  -- SOUND_RANGE: 15
-INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- LINK_RADIUS: 30
 
 -- Kaiser Behemoth (Apollyon NW)
 INSERT INTO `mob_pool_mods` VALUES (6732,3,100,1); -- MP_BASE: 100

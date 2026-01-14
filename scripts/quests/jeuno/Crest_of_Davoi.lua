@@ -52,7 +52,7 @@ quest.sections =
             ['Baudin'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_COEURL_MEAT) then
+                    if npcUtil.tradeHas(trade, xi.item.SLICE_OF_COEURL_MEAT) then
                         return quest:progressEvent(171)
                     end
                 end,
@@ -69,7 +69,25 @@ quest.sections =
                 end,
             },
         },
-    }
+    },
+
+        {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Baudin'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER) then
+                        return quest:event(122):replaceDefault()
+                    end
+                end,
+            },
+        },
+    },
 }
 
 return quest

@@ -45,7 +45,26 @@ local oztrojaGlobal =
         pick a new password for the trap door on floor 4
         ..............................................................................................]]
     pickNewPassword = function()
-        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar('password', math.random(0, 8))
+        local passwordLocalVarNames = { 'firstWord', 'secondWord', 'thirdWord' }
+        local passwordIndexes =
+        {
+            ID.text.DEGGI,
+            ID.text.HAQA,
+            ID.text.MJUU,
+            ID.text.PUQU,
+            ID.text.OUZI,
+            ID.text.DUZU,
+            ID.text.GADU,
+            ID.text.MONG,
+            ID.text.BUXU,
+            ID.text.XICU,
+        }
+
+        for i = 1, #passwordLocalVarNames do
+            local passwordIndex = math.random(1, #passwordIndexes)
+            GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar(passwordLocalVarNames[i], passwordIndexes[passwordIndex])
+            table.remove(passwordIndexes, passwordIndex) -- Prevent duplicates
+        end
     end,
 
     --[[..............................................................................................

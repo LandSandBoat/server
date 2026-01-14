@@ -16,6 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:addMobMod(xi.mobMod.HP_STANDBACK, 80)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {

@@ -25,30 +25,56 @@ content:addEssentialMobs({ 'Orcish_Onager' })
 content.loot =
 {
     {
-        { itemId = xi.item.GOLD_BEASTCOIN,    weight = 500 }, -- gold_beastcoin
-        { itemId = xi.item.MYTHRIL_BEASTCOIN, weight = 500 }, -- mythril_beastcoin
+        { itemId = xi.item.GIL,                 weight = 10000, amount = 15000 },
     },
 
     {
-        { itemId = xi.item.STEEL_INGOT, weight = 500 }, -- steel_ingot
-        { itemId = xi.item.AQUAMARINE,  weight = 500 }, -- aquamarine
+        { itemId = xi.item.TELEPORT_RING_HOLLA, weight =  5000 },
+        { itemId = xi.item.TELEPORT_RING_VAHZL, weight =  5000 },
     },
 
     {
-        { itemId = xi.item.NONE,         weight = 500 }, -- nothing
-        { itemId = xi.item.DEMON_QUIVER, weight = 500 }, -- demon_quiver
+        { itemId = xi.item.SAPIENT_CAPE,        weight =  6500 },
+        { itemId = xi.item.TRAINERS_WRISTBANDS, weight =  3500 },
     },
 
     {
-        { itemId = xi.item.NONE,                weight = 600 }, -- nothing
-        { itemId = xi.item.TELEPORT_RING_HOLLA, weight = 200 }, -- teleport_ring_holla
-        { itemId = xi.item.TELEPORT_RING_VAHZL, weight = 200 }, -- teleport_ring_vahzl
+        quantity = 4,
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,   weight =  6000 },
+        { itemId = xi.item.GOLD_BEASTCOIN,      weight =  3000 },
+        { itemId = xi.item.PLATINUM_BEASTCOIN,  weight =  1000 },
     },
 
     {
-        { itemId = xi.item.NONE,                weight = 600 }, -- nothing
-        { itemId = xi.item.SAPIENT_CAPE,        weight = 200 }, -- sapient_cape
-        { itemId = xi.item.TRAINERS_WRISTBANDS, weight = 200 }, -- trainers_wristbands
+        { itemId = xi.item.RED_ROCK,            weight =   400 },
+        { itemId = xi.item.YELLOW_ROCK,         weight =   400 },
+        { itemId = xi.item.BLUE_ROCK,           weight =   400 },
+        { itemId = xi.item.GREEN_ROCK,          weight =   400 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,    weight =   400 },
+        { itemId = xi.item.PURPLE_ROCK,         weight =   400 },
+        { itemId = xi.item.WHITE_ROCK,          weight =   400 },
+        { itemId = xi.item.BLACK_ROCK,          weight =   400 },
+        { itemId = xi.item.AQUAMARINE,          weight =   400 },
+        { itemId = xi.item.CHRYSOBERYL,         weight =   400 },
+        { itemId = xi.item.FLUORITE,            weight =   400 },
+        { itemId = xi.item.JADEITE,             weight =   400 },
+        { itemId = xi.item.MOONSTONE,           weight =   400 },
+        { itemId = xi.item.PAINITE,             weight =   400 },
+        { itemId = xi.item.SUNSTONE,            weight =   400 },
+        { itemId = xi.item.ZIRCON,              weight =   400 },
+        { itemId = xi.item.MAHOGANY_LOG,        weight =   400 },
+        { itemId = xi.item.EBONY_LOG,           weight =   400 },
+        { itemId = xi.item.STEEL_INGOT,         weight =   400 },
+        { itemId = xi.item.MYTHRIL_INGOT,       weight =   400 },
+        { itemId = xi.item.GOLD_INGOT,          weight =   400 },
+        { itemId = xi.item.DARKSTEEL_INGOT,     weight =   400 },
+        { itemId = xi.item.HI_RERAISER,         weight =   600 },
+        { itemId = xi.item.VILE_ELIXIR_P1,      weight =   600 },
+    },
+
+    {
+        quantity = 3,
+        { itemId = xi.item.DEMON_QUIVER,        weight = 10000 },
     },
 }
 

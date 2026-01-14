@@ -23,9 +23,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
-    mob:setHP(0)
 
     return damage
+end
+
+mobskillObject.onMobSkillFinalize = function(mob, skill)
+    mob:setHP(0)
 end
 
 return mobskillObject

@@ -41,6 +41,7 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
     },
     npc =
     {
+        TALES_BEGINNING = GetFirstID('Tales_Beginning'), -- CoP 1-1 mission script uses this
     },
 }
 

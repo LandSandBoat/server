@@ -368,8 +368,8 @@ xi.chocoboDig.start = function(player)
     -----------------------------------
 
     -- Set player variables, no matter the result.
-    player:setLocalVar('[DIG]LastXPos', currentX)
-    player:setLocalVar('[DIG]LastZPos', currentZ)
+    player:setLocalVar('[DIG]LastXPos', math.abs(currentX))
+    player:setLocalVar('[DIG]LastZPos', math.abs(currentZ))
     player:setLocalVar('[DIG]LastXPosSign', currentXSign)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', GetSystemTime())

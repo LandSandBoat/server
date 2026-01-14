@@ -165,7 +165,7 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     end
 
     -- Target already has an status effect that nullifies current.
-    if xi.data.statusEffect.isEffectNullified(target, spellEffect) then
+    if xi.data.statusEffect.isEffectNullified(target, spellEffect, 0) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end

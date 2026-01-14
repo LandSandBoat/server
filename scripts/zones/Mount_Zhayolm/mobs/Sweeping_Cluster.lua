@@ -11,8 +11,4 @@ entity.onMobMobskillChoose = function(mob, target)
     return xi.mix.clusters.onMobMobskillChoose(mob, target)
 end
 
-entity.onMobFight = function(mob, target)
-    mob:addTP(3000)
-end
-
 return entity

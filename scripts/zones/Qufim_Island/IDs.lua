@@ -48,10 +48,11 @@ zones[xi.zone.QUFIM_ISLAND] =
     },
     mob =
     {
+        DOSETSU_TREE      = GetFirstID('Dosetsu_Tree'),
+        KRAKEN_NM         = GetTableOfIDs('Kraken')[3],
+        OPHIOTAURUS       = GetFirstID('Ophiotaurus'),
         SLIPPERY_SUCKER   = GetFirstID('Slippery_Sucker'),
         TRICKSTER_KINETIX = GetFirstID('Trickster_Kinetix'),
-        OPHIOTAURUS       = GetFirstID('Ophiotaurus'),
-        KRAKEN_NM         = GetTableOfIDs('Kraken')[3],
     },
     npc =
     {

@@ -25,6 +25,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.MARKSMANSHIP
     params.includemab = true
+    params.dStat = xi.mod.AGI
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod = { 3.8906, 6.3906, 9.3906 }

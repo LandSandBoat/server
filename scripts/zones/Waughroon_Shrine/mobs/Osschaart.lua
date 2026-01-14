@@ -193,6 +193,7 @@ end
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 4) -- Sets Avatar at offset +4, so it can be called properly for Astral Flow
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
     mob:setMod(xi.mod.WIND_RES_RANK, 8) -- Should be extremely hard to silence, but possible with high enough accuracy or elemental seal
 end

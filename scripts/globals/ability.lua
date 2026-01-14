@@ -105,8 +105,6 @@ xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, 
             -- TODO: ability absorb messages (if there are any)
             -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
-
-        action:recordDamage(defender, attackType, finaldmg)
     elseif shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), shadowsAbsorbed)
@@ -116,6 +114,10 @@ xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, 
 
     local targetTPMult = params.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attackType, damageType, slot, primary, tpHitsLanded, (extraHitsLanded * 10) + bonusTP, targetTPMult)
+    if tpHitsLanded + extraHitsLanded > 0 then
+        action:recordDamage(defender, attackType, math.abs(finaldmg))
+    end
+
     local enmityEntity = taChar or attacker
     if params.overrideCE and params.overrideVE then
         defender:addEnmity(enmityEntity, params.overrideCE, params.overrideVE)

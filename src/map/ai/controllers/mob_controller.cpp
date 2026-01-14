@@ -36,6 +36,7 @@
 #include "mob_spell_container.h"
 #include "mobskill.h"
 #include "party.h"
+#include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
@@ -466,7 +467,7 @@ auto CMobController::TryCastSpell() -> bool
     TracyZoneScoped;
     if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
-        return false;
+        return false; // Can't cast spells.
     }
 
     // Find random spell from list
@@ -502,80 +503,61 @@ auto CMobController::TryCastSpell() -> bool
     std::optional<SpellID>        maybeSpellOverride  = std::get<0>(possibleOverriddenSpell);
     std::optional<CBattleEntity*> maybeTargetOverride = std::get<1>(possibleOverriddenSpell);
 
-    auto isSpellEligibleToCast = [this](CBattleEntity* PCastTarget, CSpell* PSpell) -> bool
-    {
-        if (!PSpell)
-        {
-            return false;
-        }
-
-        // Check if target is in range before attempting to cast
-        if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
-        {
-            return false;
-        }
-
-        // Check if mob can afford to cast this spell
-        if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
-        {
-            return false;
-        }
-
-        return true;
-    };
-
     if (maybeSpellOverride.has_value())
     {
         chosenSpellId = maybeSpellOverride.value();
     }
 
-    if (chosenSpellId.has_value())
+    if (!chosenSpellId.has_value())
     {
-        // Check if we can actually cast this spell before committing to it
-        CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
-        if (!PSpell)
-        {
-            ShowWarning("CMobController::TryCastSpell: SpellId <%i> is not found", static_cast<uint16>(chosenSpellId.value()));
-            return false;
-        }
-        else
-        {
-            // if we have a target override, override the weird self target logic later and try to cast
-            if (maybeTargetOverride.has_value())
-            {
-                PSpellTarget = maybeTargetOverride.value();
-
-                if (!isSpellEligibleToCast(PSpellTarget, PSpell))
-                {
-                    return false;
-                }
-
-                Cast(PSpellTarget->targid, chosenSpellId.value());
-                return true;
-            }
-
-            CBattleEntity* PCastTarget = nullptr;
-
-            if (PSpell->getValidTarget() & TARGET_SELF)
-            {
-                PCastTarget = PMob;
-            }
-            else
-            {
-                PCastTarget = PTarget;
-            }
-
-            if (!isSpellEligibleToCast(PCastTarget, PSpell))
-            {
-                return false;
-            }
-        }
-
-        CastSpell(chosenSpellId.value());
-        return true;
+        return false; // No spell Id.
     }
 
-    return false;
+    // Check if spell exists.
+    CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
+    if (!PSpell)
+    {
+        return false; // No spell object.
+    }
+
+    // Check spell cooldown.
+    if (PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(chosenSpellId.value())))
+    {
+        return false; // Spell is on cooldown.
+    }
+
+    // Check if mob can afford to cast this spell
+    if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+    {
+        return false; // Not enough MP.
+    }
+
+    // Target logic.
+    CBattleEntity* PCastTarget = nullptr;
+
+    if (PSpell->getValidTarget() & TARGET_SELF)
+    {
+        PCastTarget = PMob;
+    }
+    else
+    {
+        PCastTarget = PTarget;
+    }
+
+    if (maybeTargetOverride.has_value())
+    {
+        PCastTarget = maybeTargetOverride.value();
+    }
+
+    // Check if target is in range before attempting to cast
+    if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
+    {
+        return false; // Target out of range.
+    }
+
+    // Perform cast.
+    CastSpell(chosenSpellId.value());
+    return true;
 }
 
 auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
@@ -735,8 +717,9 @@ void CMobController::DoCombatTick(timer::time_point tick)
             return;
         }
 
-        if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
+        if (m_Tick >= m_LastMobSkillTime && PMob->shouldUseTPMove(m_tpThreshold) && MobSkill())
         {
+            m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
             return;
         }
     }
@@ -1030,10 +1013,19 @@ void CMobController::DoRoamTick(timer::time_point tick)
         PMob->m_OwnerID.clean();
     }
 
-    if (PFollowTarget != nullptr && m_followType == FollowType::Roam && distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRoamDistance)
+    if (PFollowTarget != nullptr && m_followType == FollowType::Roam)
     {
-        PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
-        PMob->PAI->PathFind->FollowPath(m_Tick);
+        // Only path to leader if they're moving
+        if (distance(PMob->loc.p, PFollowTarget->loc.p) > FollowRoamDistance &&
+            PFollowTarget->PAI->PathFind->IsFollowingPath())
+        {
+            PMob->PAI->PathFind->PathAround(PFollowTarget->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+        }
+
+        if (!PMob->PAI->PathFind->IsFollowingPath())
+        {
+            return;
+        }
     }
 
     if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(MOBMOD_NO_REST) == 0 && PMob->CanRest())
@@ -1363,6 +1355,8 @@ auto CMobController::Engage(const uint16 targid) -> bool
             m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
                                                                    xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
         }
+
+        m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
 
         // Pet should also fight the target if they can
         if (PMob->PPet && !PMob->PPet->PAI->IsEngaged())

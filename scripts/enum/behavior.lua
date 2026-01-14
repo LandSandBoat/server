@@ -10,6 +10,7 @@ xi.behavior =
     NO_DESPAWN   = 0x001, -- mob does not despawn on death
     STANDBACK    = 0x002, -- mob will standback forever
     RAISABLE     = 0x004, -- mob can be raised via Raise spells
+    NO_ASSIST    = 0x008, -- mob cannot be targeted by helpful magic from players (cure, protect, etc)
     AGGRO_AMBUSH = 0x200, -- mob aggroes by ambush
     NO_TURN      = 0x400, -- mob does not turn to face target
 }

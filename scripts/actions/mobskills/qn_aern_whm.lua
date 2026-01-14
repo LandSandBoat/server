@@ -6,7 +6,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() == xi.mobPools.QNAERN_WHM and mob:getHPP() <= 50 then
+    if mob:getPool() == xi.mobPool.QNAERN_WHM and mob:getHPP() <= 50 then
         return 0
     else
         return 1

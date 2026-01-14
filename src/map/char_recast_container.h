@@ -37,9 +37,9 @@ public:
     {
     }
     virtual void          Check() override;
-    virtual void          Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
+    virtual void          Add(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
     virtual void          Del(RECASTTYPE type) override;
-    virtual void          Del(RECASTTYPE type, uint16 id) override;
+    virtual void          Del(RECASTTYPE type, Recast id) override;
     virtual void          DeleteByIndex(RECASTTYPE type, uint8 index) override;
     virtual void          ResetAbilities() override;
     virtual RecastList_t* GetRecastList(RECASTTYPE type) override;

@@ -8,14 +8,13 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.ICE_MEVA, 75) -- Todo: Move to mob_resists.sql
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:setMod(xi.mod.BIND_RES_RANK, 8)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobSkillAttack(701)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    mob:setMobSkillAttack(701) -- Uses Sheep Charge as its' melee attack
 end
 
 return entity

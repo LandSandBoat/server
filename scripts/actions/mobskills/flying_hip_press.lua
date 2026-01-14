@@ -15,11 +15,11 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local fTP = 2.0
 
-    if mob:getPool() == xi.mobPools.BUGBOY then
+    if mob:getPool() == xi.mobPool.BUGBOY then
         fTP = 7.0
     end
 
-    if mob:getPool() == xi.mobPools.BUGBEAR_MATMAN then
+    if mob:getPool() == xi.mobPool.BUGBEAR_MATMAN then
         fTP = 10.0
     end
 

@@ -34,6 +34,7 @@ zones[xi.zone.WINDURST_WATERS] =
         RENOUNCE_CRAFTSMAN            = 7239,  -- You have successfully renounced your status as a [craftsman/artisan/adept] of the [Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         KOPOPO_SHOP_DIALOG            = 7878,  -- Cooking is as much an art as music and painting are. Can your taste buds appreciate the full value of our works of art?
         CHOMOJINJAHL_SHOP_DIALOG      = 7883,  -- The qualities needed to be a good cook are strong arms, a sense of taste, and devotion.
+        WHAT_DO_YOU_MEAN              = 8559,  -- What do you mean, you don't have enough gil? Well, you can't expect to buy our flowers without money, can you?
         ENSASA_SHOP_DIALOG            = 8950,  -- Welcome to my little catalyst shop, where you'll find a range of general and unusual goods!
         UPIHKHACHLA_SHOP_DIALOG       = 8951,  -- For adventurerrrs on the go, Ensasa's Catalyst Shop is the place for all you need in generrral goods!
         SHOHRUNTUHRUN_SHOP_DIALOG     = 8953,  -- Oh, hidey-widey! This is the Federal Magic Reservey-wervey. What can I do for you today-oway?

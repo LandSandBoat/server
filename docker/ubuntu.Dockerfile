@@ -29,6 +29,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     tini \
     tzdata \
     zlib1g
+apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
 # Setup runtime user.
@@ -108,7 +109,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     cppcheck \
     gdb \
     luarocks
-rm -rf /var/lib/apt/lists/*
+apt-get clean && rm -rf /var/lib/apt/lists/*
 update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-$LLVM_VERSION 100
 EOF
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
@@ -127,10 +128,12 @@ ARG COMPILER=gcc
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet lsb-release wget software-properties-common gnupg
-    wget https://apt.llvm.org/llvm.sh
-    chmod +x llvm.sh
-    sudo ./llvm.sh $LLVM_VERSION all
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+        clang-$LLVM_VERSION \
+        clang-tidy-$LLVM_VERSION \
+        libclang-rt-$LLVM_VERSION-dev \
+        llvm-$LLVM_VERSION-dev
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 fi
 EOF
 
@@ -166,8 +169,6 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
-    export CXXFLAGS="-stdlib=libstdc++"
-    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
@@ -190,8 +191,6 @@ EOF
 # Service #
 ###########
 FROM base AS service
-
-RUN rm -rf /var/lib/apt/lists/*
 
 USER $UNAME
 

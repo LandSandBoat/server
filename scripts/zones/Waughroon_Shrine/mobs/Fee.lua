@@ -8,59 +8,55 @@ local ID = zones[xi.zone.WAUGHROON_SHRINE]
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.MULTI_HIT, 6)
-    mob:setMod(xi.mod.BIND_MEVA, 20)
-    mob:setMod(xi.mod.BLIND_MEVA, 20)
-    mob:setMod(xi.mod.SLEEP_MEVA, 20)
-    mob:setMod(xi.mod.LULLABY_MEVA, 20)
-    mob:setMod(xi.mod.GRAVITY_MEVA, 20)
+-- [Tentacles] { Phase HP%, Delay Reduction, Regain, Base Damage Multiplier, Skill ID for Auto-Attack }
+local tentacleTable =
+{
+    [0] = { 0,  700,   0,   0, 704 },
+    [1] = { 33, 700,  50, 450,   0 },
+    [2] = { 44, 300, 100, 300,   0 },
+    [3] = { 55, 150, 125, 250,   0 },
+    [4] = { 66, 100, 150, 200,   0 },
+    [5] = { 77,   0, 175, 150,   0 },
+    [6] = { 88, -50, 200, 100,   0 },
+}
+
+local function setupPhase(mob, currentTentacles)
+    mob:setMod(xi.mod.DELAYP, tentacleTable[currentTentacles][2])
+    mob:setMod(xi.mod.REGAIN, tentacleTable[currentTentacles][3])
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, tentacleTable[currentTentacles][4])
+    mob:setMobSkillAttack(tentacleTable[currentTentacles][5])
+    mob:setLocalVar('currentTentacles', currentTentacles)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('tentacles', 6)
-    mob:setMobSkillAttack(0)
-end
-
--- Remove a tentacle from Fe'e.  This happens six times during the fight, with final at about 33% HP.
--- Each removal slows attack speed in exchange for TP regain and damage.
--- When all tentacles are removed, its normal melee attack is replaced by a special Ink Jet attack that
--- ignores shadows and has knockback.
-
-local function removeTentacle(mob, tentacles)
-    if tentacles > 0 then
-        mob:setMobMod(xi.mobMod.MULTI_HIT, tentacles)
-        mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
-    else
-        mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
-        mob:setMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
-    end
-
-    mob:addMod(xi.mod.ATT, 50)
-    mob:addMod(xi.mod.REGAIN, 50)
-    mob:addMod(xi.mod.BIND_MEVA, 10)
-    mob:addMod(xi.mod.BLIND_MEVA, 10)
-    mob:addMod(xi.mod.SLEEP_MEVA, 10)
-    mob:addMod(xi.mod.LULLABY_MEVA, 10)
-    mob:addMod(xi.mod.GRAVITY_MEVA, 10)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 35)
+    setupPhase(mob, 6)
 end
 
 entity.onMobFight = function(mob, target)
-    local tentacles = mob:getLocalVar('tentacles')
+    local currentTentacles = mob:getLocalVar('currentTentacles')
 
-    if tentacles > 0 then
-        local hpp = mob:getHPP()
-
-        while hpp < (11 * tentacles + 22) and tentacles > 0 do
-            tentacles = tentacles - 1
-            removeTentacle(mob, tentacles)
-        end
-
-        mob:setLocalVar('tentacles', tentacles)
+    -- If all our tentacles are gone, nothing to do here
+    if currentTentacles <= 0 then
+        return
     end
-end
 
-entity.onMobDeath = function(mob, player, optParams)
+    -- Get our current HP percent and refresh tentacle count variables
+    local mobHPP   = mob:getHPP()
+    local phaseHPP = tentacleTable[currentTentacles][1]
+
+    if mobHPP >= phaseHPP then
+        return
+    end
+
+    -- If we lost a tentacle, update our stats and play flavor text
+    setupPhase(mob, currentTentacles - 1)
+
+    if currentTentacles - 1 == 0 then
+        mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
+    else
+        mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
+    end
 end
 
 return entity

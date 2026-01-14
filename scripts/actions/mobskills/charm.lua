@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         return xi.effect.CHARM_I
     end
 
-    if mob:getPool() == xi.mobPools.OSSCHAART then
+    if mob:getPool() == xi.mobPool.OSSCHAART then
         duration = 30
     end
 

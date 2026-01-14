@@ -28,9 +28,22 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     mob =
     {
-        EBA          = GetFirstID('Eba'),
-        MAHISHA      = GetFirstID('Mahisha'),
-        TRES_DUENDES = GetFirstID('Tres_Duendes'),
+        EBA               = GetFirstID('Eba'),
+        FOMOR_BARD        = GetTableOfIDs('Fomor_Bard'),
+        FOMOR_BLACK_MAGE  = GetTableOfIDs('Fomor_Black_Mage'),
+        FOMOR_DARK_KNIGHT = GetTableOfIDs('Fomor_Dark_Knight'),
+        FOMOR_DRAGOON     = GetTableOfIDs('Fomor_Dragoon'),
+        FOMOR_MONK        = GetTableOfIDs('Fomor_Monk'),
+        FOMOR_NINJA       = GetTableOfIDs('Fomor_Ninja'),
+        FOMOR_PALADIN     = GetTableOfIDs('Fomor_Paladin'),
+        FOMOR_RANGER      = GetTableOfIDs('Fomor_Ranger'),
+        FOMOR_RED_MAGE    = GetTableOfIDs('Fomor_Red_Mage'),
+        FOMOR_SAMURAI     = GetTableOfIDs('Fomor_Samurai'),
+        FOMOR_SUMMONER    = GetTableOfIDs('Fomor_Summoner'),
+        FOMOR_THIEF       = GetTableOfIDs('Fomor_Thief'),
+        FOMOR_WARRIOR     = GetTableOfIDs('Fomor_Warrior'),
+        MAHISHA           = GetFirstID('Mahisha'),
+        TRES_DUENDES      = GetFirstID('Tres_Duendes'),
     },
     npc =
     {

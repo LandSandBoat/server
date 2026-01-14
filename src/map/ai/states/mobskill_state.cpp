@@ -23,10 +23,12 @@
 #include "action/action.h"
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
+#include "ai/helpers/targetfind.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
 #include "enums/action/category.h"
+#include "lua/luautils.h"
 #include "mobskill.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "status_effect_container.h"
@@ -48,7 +50,11 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         throw CStateInitException(nullptr);
     }
 
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
+    // Self-centered AoE: validate mob can target itself, but keep original targid for allegiance
+    const bool   isSelfCenteredAoE = skill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER);
+    const uint16 validTargets      = isSelfCenteredAoE ? static_cast<uint16>(TARGET_SELF) : skill->getValidTargets();
+    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : targid;
+    auto*        PTarget           = m_PEntity->IsValidTarget(validateTargid, validTargets, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
@@ -61,6 +67,9 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
             throw CStateInitException(std::make_unique<CBasicPacket>());
         }
     }
+
+    // Store original targid - for self-centered AoE this preserves battle target for allegiance checks
+    SetTarget(targid);
 
     m_PSkill = std::make_unique<CMobSkill>(*skill);
 
@@ -75,8 +84,14 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
 
     if (m_castTime > 0s)
     {
-        const auto isSelfTargeting = m_PSkill->getValidTargets() & TARGET_ANY_ALLEGIANCE &&
-                                     m_PSkill->getValidTargets() & TARGET_SELF;
+        // For self-centered AoE damaging moves, show battle target in readies message
+        // For true self-target buffs (TARGET_SELF), show self
+        const bool isSelfBuff    = skill->getValidTargets() == TARGET_SELF;
+        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : m_PEntity->GetEntity(targid));
+        if (!PActionTarget)
+        {
+            PActionTarget = m_PEntity;
+        }
 
         action_t action{
             .actorId    = m_PEntity->id,
@@ -84,7 +99,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
             .actionid   = static_cast<uint32_t>(FourCC::SkillUse),
             .targets    = {
                 {
-                       .actorId = isSelfTargeting ? m_PEntity->id : PTarget->id,
+                       .actorId = PActionTarget ? PActionTarget->id : m_PEntity->id,
                        .results = {
                         {
                                .param     = m_PSkill->getID(),
@@ -145,8 +160,7 @@ bool CMobSkillState::Update(timer::time_point tick)
     // Rotate towards target during ability // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
     {
-        CBaseEntity* PTarget = GetTarget();
-        if (PTarget)
+        if (CBaseEntity* PTarget = GetTarget())
         {
             battleutils::turnTowardsTarget(m_PEntity, PTarget);
         }
@@ -154,6 +168,12 @@ bool CMobSkillState::Update(timer::time_point tick)
 
     if (m_PEntity && m_PEntity->isAlive() && (tick >= GetEntryTime() + m_castTime && !IsCompleted()))
     {
+        // Check for stun/sleep/etc at the moment of skill completion - Cleanup handles the interrupt
+        if (m_PEntity->StatusEffectContainer->HasPreventActionEffect())
+        {
+            return true;
+        }
+
         action_t action{};
         m_PEntity->OnMobSkillFinished(*this, action);
 
@@ -175,39 +195,26 @@ bool CMobSkillState::Update(timer::time_point tick)
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
+
     if (IsCompleted() && tick > m_finishTime)
     {
-        // Only act if they're able
-        if (!m_PEntity->StatusEffectContainer->HasPreventActionEffect(false))
+        auto* PTarget = GetTarget();
+        if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
-            auto* PTarget = GetTarget();
-            if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
-            {
-                static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
-            }
-
-            if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
-            {
-                CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
-                if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
-                {
-                    auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
-                    // Retail: Power is gained for BP use
-                    auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
-                    power += levelGained;
-                    PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
-                }
-            }
-
-            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
+            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
-        else // Switch into inactive state when done
-        {
-            // Exit listener here because changing states will invalidate m_PEntity/m_PSkill
-            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
-            reduceTpOnInterrupt(); // Cleanup will call this only if IsCompleted is false, which is not the case here
 
-            m_PEntity->PAI->Inactive(0ms, false);
+        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
+        {
+            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
+            if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
+            {
+                auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
+                // Retail: Power is gained for BP use
+                auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
+                power += levelGained;
+                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
+            }
         }
 
         return true;
@@ -223,14 +230,25 @@ void CMobSkillState::Cleanup(timer::time_point tick)
         reduceTpOnInterrupt();
     }
 
-    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+    // Call finalizer if skill completed (not interrupted) and set any final animationsub
+    if (m_PEntity && IsCompleted())
     {
-        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
-        m_PEntity->updatemask |= UPDATE_COMBAT;
+        if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+        {
+            m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+            m_PEntity->updatemask |= UPDATE_COMBAT;
+        }
+
+        luautils::OnMobSkillFinalize(m_PEntity, m_PSkill.get());
+    }
+
+    if (m_PEntity)
+    {
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
     }
 }
 
-void CMobSkillState::reduceTpOnInterrupt()
+void CMobSkillState::reduceTpOnInterrupt() const
 {
     if (m_PEntity && m_PEntity->isAlive())
     {

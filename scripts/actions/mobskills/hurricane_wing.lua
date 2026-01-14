@@ -27,7 +27,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
 
-    if mob:getPool() == xi.mobPools.NIDHOGG then
+    if mob:getPool() == xi.mobPool.NIDHOGG then
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 160, 0, 30)
     else
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 100, 0, 30)

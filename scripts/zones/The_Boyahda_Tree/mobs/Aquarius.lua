@@ -30,20 +30,26 @@ entity.spawnPoints =
     { x = 193.785, y = 9.346, z = -54.751 },
     { x = 187.045, y = 9.514, z = -46.248 },
     { x = 177.735, y = 9.537, z = -44.149 },
+    { x = 172.981, y = 6.746, z = -51.870 }
 }
 
 entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.POISON)
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.POISON)
-    mob:setMod(xi.mod.UDMGPHYS, -5000)
-    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.DEF, 1100)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.BIND_RES_RANK, 9)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -52,6 +58,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 358)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

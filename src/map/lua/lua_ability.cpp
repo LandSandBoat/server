@@ -46,7 +46,7 @@ uint16 CLuaAbility::getRecast()
     return static_cast<uint16>(timer::count_seconds(m_PLuaAbility->getRecastTime()));
 }
 
-uint16 CLuaAbility::getRecastID()
+auto CLuaAbility::getRecastID() const -> Recast
 {
     return m_PLuaAbility->getRecastId();
 }
@@ -54,6 +54,16 @@ uint16 CLuaAbility::getRecastID()
 uint16 CLuaAbility::getRange()
 {
     return static_cast<uint16>(m_PLuaAbility->getRange());
+}
+
+auto CLuaAbility::getRadius() const -> uint8
+{
+    return m_PLuaAbility->getRadius();
+}
+
+auto CLuaAbility::getAOE() const -> uint8
+{
+    return m_PLuaAbility->getAOE();
 }
 
 const std::string& CLuaAbility::getName()
@@ -126,6 +136,8 @@ void CLuaAbility::Register()
     SOL_REGISTER("getRecast", CLuaAbility::getRecast);
     SOL_REGISTER("getRecastID", CLuaAbility::getRecastID);
     SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getRadius", CLuaAbility::getRadius);
+    SOL_REGISTER("getAOE", CLuaAbility::getAOE);
     SOL_REGISTER("getName", CLuaAbility::getName);
     SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
     SOL_REGISTER("getAddType", CLuaAbility::getAddType);

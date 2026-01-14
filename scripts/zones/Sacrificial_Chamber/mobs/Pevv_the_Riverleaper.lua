@@ -1,7 +1,8 @@
 -----------------------------------
--- Area: Sacrificial Chamber
---  Mob: Pevv the Riverleaper
--- BCNM: Amphibian Assault
+-- Area : Sacrificial Chamber
+-- Mob  : Pevv the Riverleaper
+-- BCNM : Amphibian Assault
+-- Job  : Dragoon
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
@@ -10,6 +11,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 2, 'Sahagins_Wyvern')
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 4)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 4)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -32,10 +36,6 @@ entity.onMobFight = function(mob, target)
     then
         pet:updateEnmity(target)
     end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    DespawnMob(mob:getID() + 2)
 end
 
 return entity

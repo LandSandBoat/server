@@ -16,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    if target:addStatusEffect(xi.effect.SLOW, 3000, 0, duration) then
+    if target:addStatusEffect(xi.effect.SLOW, 3000, 0, duration, 0, 0, 3) then
         petskill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     else
         petskill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)

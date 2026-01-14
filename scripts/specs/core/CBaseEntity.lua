@@ -1734,6 +1734,12 @@ end
 function CBaseEntity:getMissionStatus(missionLogID, missionStatusPosObj)
 end
 
+---@param missionLogID integer
+---@param completed boolean
+---@return nil
+function CBaseEntity:sendPartialMissionLog(missionLogID, completed)
+end
+
 ---@param recordID integer
 ---@param arg1 boolean?
 ---@param arg2 boolean?
@@ -3950,7 +3956,7 @@ end
 function CBaseEntity:actionQueueEmpty()
 end
 
----@param spell integer
+---@param spell integer?
 ---@param entity CBaseEntity?
 ---@return nil
 function CBaseEntity:castSpell(spell, entity)

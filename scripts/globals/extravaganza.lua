@@ -15,7 +15,11 @@ xi.extravaganza.campaign =
 }
 
 xi.extravaganza.campaignActive = function()
-    return xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+    -- Extravaganza NPCs are currently not present in the client.  This function is disabled until
+    -- such a time that they are reintroduced, or confirmed to be permanently removed.  If this changes,
+    -- return to using xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+
+    return false
 end
 
 -----------------------------------

@@ -10,7 +10,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     if caster:isMob() then
-        if caster:getPool() == xi.mobPools.AMNAF_PSYCHEFLAYER then
+        if caster:getPool() == xi.mobPool.AMNAF_PSYCHEFLAYER then
             caster:resetEnmity(target)
         end
 

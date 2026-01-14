@@ -122,8 +122,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
     if (PChar->isInEvent())
     {
         // Retail accurate: If the trade started an event then any current synth is a crit fail.
-        if (PChar->animation == ANIMATION_SYNTH ||
-            (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
+        if (PChar->isCrafting())
         {
             charutils::forceSynthCritFail("GP_CLI_COMMAND_ITEM_TRANSFER", PChar);
         }

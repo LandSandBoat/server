@@ -20,6 +20,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.EARTH
     params.skill = xi.skill.STAFF
     params.includemab = true
+    params.dStat = xi.mod.INT
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.4 params.int_wsc = 0.4

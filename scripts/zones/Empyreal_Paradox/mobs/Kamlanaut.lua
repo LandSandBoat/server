@@ -8,25 +8,56 @@ local entity = {}
 
 local skillToAbsorb =
 {
-    [823] = xi.mod.FIRE_ABSORB,  -- fire_blade
-    [824] = xi.mod.ICE_ABSORB,   -- frost_blade
-    [825] = xi.mod.WIND_ABSORB,  -- wind_blade2
-    [826] = xi.mod.EARTH_ABSORB, -- earth_blade
-    [827] = xi.mod.LTNG_ABSORB,  -- lightning_blade
-    [828] = xi.mod.WATER_ABSORB, -- water_blade
+    [xi.mobSkill.FIRE_BLADE_1     ] = xi.mod.FIRE_ABSORB,
+    [xi.mobSkill.FROST_BLADE_1    ] = xi.mod.ICE_ABSORB,
+    [xi.mobSkill.WIND_BLADE_1     ] = xi.mod.WIND_ABSORB,
+    [xi.mobSkill.EARTH_BLADE_1    ] = xi.mod.EARTH_ABSORB,
+    [xi.mobSkill.LIGHTNING_BLADE_1] = xi.mod.LTNG_ABSORB,
+    [xi.mobSkill.WATER_BLADE_1    ] = xi.mod.WATER_ABSORB,
 }
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMod(xi.mod.BIND_RES_RANK, 11)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 11)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 11)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 11)
+    mob:setMod(xi.mod.POISON_RES_RANK, 11)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 11)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 10)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
 
 entity.onMobEngage = function(mob, target)
     mob:setLocalVar('nextEnSkill', GetSystemTime() + 10)
 end
 
 entity.onMobFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
     if GetSystemTime() > mob:getLocalVar('nextEnSkill') then
-        local skill = math.random(823, 828)
-        mob:setLocalVar('currentTP', mob:getTP())
+        local skill = math.random(xi.mobSkill.FIRE_BLADE_1, xi.mobSkill.WATER_BLADE_1)
         mob:useMobAbility(skill)
         mob:setLocalVar('nextEnSkill', GetSystemTime() + 30)
     end
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    local tpList =
+    {
+        xi.mobSkill.GREAT_WHEEL_1,
+        xi.mobSkill.LIGHT_BLADE_1,
+    }
+
+    return tpList[math.random(1, #tpList)]
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -49,9 +80,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setLocalVar('currentAbsorb', absorbId)
         mob:setMod(absorbId, 100)
 
-        -- return TP
-        mob:setTP(mob:getLocalVar('currentTP'))
-
     else
         -- ----------------------------------------------------------------------
         -- when using Light Blade or Great Wheel, can do up to three WS in a row
@@ -67,14 +95,23 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
         if wsCount < wsMax then
             mob:setLocalVar('wsCount', wsCount + 1)
-            mob:setTP(1000)
+            mob:useMobAbility(skillId)
         else
             mob:setLocalVar('wsCount', 0)
         end
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpellChoose = function(mob, target)
+    local spellList =
+    {
+        [1] = { xi.magic.spell.DISPELGA,  target, false, xi.action.type.DAMAGE_TARGET,      nil,               0, 100 },
+        [2] = { xi.magic.spell.SLOWGA,    target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.SLOW,    3, 100 },
+        [3] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.SILENCE, 0, 100 },
+        [4] = { xi.magic.spell.GRAVIGA,   target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.WEIGHT,  0, 100 },
+    }
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity

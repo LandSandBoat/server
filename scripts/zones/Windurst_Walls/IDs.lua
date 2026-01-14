@@ -41,8 +41,8 @@ zones[xi.zone.WINDURST_WALLS] =
         IMPERIAL_STANDING_INCREASED    = 9656,  -- Your Imperial Standing has increased!
         EARNED_ALLIED_NOTES            = 9657,  -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 9658,  -- Obtained: <number> guild points.
-        TEAR_IN_FABRIC_OF_SPACE        = 10870, -- There appears to be a tear in the fabric of space...
-        UNABLE_RACE_CHANGE             = 11507, -- You were unable to use the specified appearance for your character.
+        TEAR_IN_FABRIC_OF_SPACE        = 10871, -- There appears to be a tear in the fabric of space...
+        UNABLE_RACE_CHANGE             = 11508, -- You were unable to use the specified appearance for your character.
     },
     mob =
     {

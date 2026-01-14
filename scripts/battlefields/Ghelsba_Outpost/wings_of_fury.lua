@@ -27,45 +27,45 @@ content:addEssentialMobs({ 'Colo-colo', 'Furies' })
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                 weight = 1000, amount = 1500 },
+        { itemId = xi.item.GIL,                 weight = 10000, amount = 1500 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.MYTHRIL_BEASTCOIN,   weight = 200 },
-        { itemId = xi.item.BLACK_ROCK,          weight = 25  },
-        { itemId = xi.item.BLUE_ROCK,           weight = 25  },
-        { itemId = xi.item.GREEN_ROCK,          weight = 25  },
-        { itemId = xi.item.PURPLE_ROCK,         weight = 25  },
-        { itemId = xi.item.RED_ROCK,            weight = 25  },
-        { itemId = xi.item.TRANSLUCENT_ROCK,    weight = 25  },
-        { itemId = xi.item.WHITE_ROCK,          weight = 25  },
-        { itemId = xi.item.YELLOW_ROCK,         weight = 25  },
-        { itemId = xi.item.GANKO,               weight = 75  },
-        { itemId = xi.item.GUNROMARU,           weight = 75  },
-        { itemId = xi.item.PLATOON_AXE,         weight = 75  },
-        { itemId = xi.item.PLATOON_DAGGER,      weight = 75  },
-        { itemId = xi.item.PLATOON_EDGE,        weight = 75  },
-        { itemId = xi.item.PLATOON_LANCE,       weight = 75  },
-        { itemId = xi.item.PLATOON_POLE,        weight = 75  },
-        { itemId = xi.item.PLATOON_SWORD,       weight = 75  },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,   weight =  2000 },
+        { itemId = xi.item.BLACK_ROCK,          weight =   250 },
+        { itemId = xi.item.BLUE_ROCK,           weight =   250 },
+        { itemId = xi.item.GREEN_ROCK,          weight =   250 },
+        { itemId = xi.item.PURPLE_ROCK,         weight =   250 },
+        { itemId = xi.item.RED_ROCK,            weight =   250 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,    weight =   250 },
+        { itemId = xi.item.WHITE_ROCK,          weight =   250 },
+        { itemId = xi.item.YELLOW_ROCK,         weight =   250 },
+        { itemId = xi.item.GANKO,               weight =   750 },
+        { itemId = xi.item.GUNROMARU,           weight =   750 },
+        { itemId = xi.item.PLATOON_AXE,         weight =   750 },
+        { itemId = xi.item.PLATOON_DAGGER,      weight =   750 },
+        { itemId = xi.item.PLATOON_EDGE,        weight =   750 },
+        { itemId = xi.item.PLATOON_LANCE,       weight =   750 },
+        { itemId = xi.item.PLATOON_POLE,        weight =   750 },
+        { itemId = xi.item.PLATOON_SWORD,       weight =   750 },
     },
 
     {
-        { itemId = xi.item.BAT_FANG,            weight = 1000 },
+        { itemId = xi.item.BAT_FANG,            weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                weight = 350 },
-        { itemId = xi.item.ASTRAL_RING,         weight = 150 },
-        { itemId = xi.item.BAT_WING,            weight = 500 },
+        { itemId = xi.item.NONE,                weight =  3500 },
+        { itemId = xi.item.ASTRAL_RING,         weight =  1500 },
+        { itemId = xi.item.BAT_WING,            weight =  5000 },
     },
 
     {
-        { itemId = xi.item.THUNDER_SPIRIT_PACT, weight = 250 },
-        { itemId = xi.item.SCROLL_OF_INVISIBLE, weight = 250 },
-        { itemId = xi.item.SCROLL_OF_SNEAK,     weight = 250 },
-        { itemId = xi.item.SCROLL_OF_DEODORIZE, weight = 250 },
+        { itemId = xi.item.THUNDER_SPIRIT_PACT, weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_INVISIBLE, weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_SNEAK,     weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_DEODORIZE, weight =  2500 },
     },
 }
 

@@ -8,81 +8,93 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Enfeeble and elemental resistances over time.
--- TODO: EEM
--- TODO: Ninjutsu resistances
--- TODO: Song resistances
--- TODO: Bonus damage trigger conditions (doesn't seem to be related to crits or 2HR)
--- TODO: TP move characteristics (like AOE type). Update the TP move lua file if necessary.
--- TODO: Check if the next tree is already aggroed and targeting someone else, does it switch to the 2HR'ing mobs target?
-
------------------------------------
--- Enable additional effects on melee.
------------------------------------
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-end
-
------------------------------------
--- Sets initial mob-specific immunities.
------------------------------------
-entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.SILENCE)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.NO_LINK, 1)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
------------------------------------
--- Additional effect: Paralyze
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 7)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 7)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 7)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 7)
+    mob:setMod(xi.mod.BIND_RES_RANK, 7)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 7)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setLocalVar('mijinGakureTime', 0)
+end
+
+-- If it has been more than 2 minutes since Mijin Gakure was used, gain a significant damage boost.
+entity.onMobFight = function(mob, target)
+    if mob:getMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER) == 250 then
+        return
+    end
+
+    local mijinGakureTime = mob:getLocalVar('mijinGakureTime')
+
+    if
+        mijinGakureTime > 0 and
+        GetSystemTime() > mijinGakureTime + 120
+    then
+        mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 250)
+    end
+end
+
+-- Has additional effect: Paralyze (15% chance)
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { chance = 15, duration = math.random(30, 60) })
 end
 
------------------------------------
--- Ninjutsu usage is not evenly distributed.
------------------------------------
-entity.onMobSpellChoose = function(mob, target, spellId)
-    local spellList =
-    {
-        xi.magic.spell.DOKUMORI_NI,
-        xi.magic.spell.DOTON_NI,
-        xi.magic.spell.HOJO_NI,
-        xi.magic.spell.HUTON_NI,
-        xi.magic.spell.HYOTON_NI,
-        xi.magic.spell.JUBAKU_NI,
-        xi.magic.spell.KATON_NI,
-        xi.magic.spell.KURAYAMI_NI,
-        xi.magic.spell.RAITON_NI,
-        xi.magic.spell.SUITON_NI,
-    }
-
-    return spellList[math.random(1, #spellList)]
-end
-
------------------------------------
--- Only uses one TP move.
------------------------------------
+-- Only uses Pinecone Bomb.
 entity.onMobMobskillChoose = function(mob, target)
     return xi.mobSkill.PINECONE_BOMB
 end
 
------------------------------------
--- Using 2-Hour causes the next tree to engage the player.
------------------------------------
+-- If Mijin Gakure is used, the Winter tree (Gola Tlugvi) attacks.
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
+    local battlefield = mob:getBattlefield()
 
-    -- Upon Mijin Gakure, Gola will become active.
+    if not battlefield then
+        return
+    end
+
     if skillID == xi.mobSkill.MIJIN_GAKURE_1 then
-        local mobID         = mob:getID()
-        local golaMob       = GetMobByID(mobID + 1)
-        local currentTarget = mob:getTarget()       -- The target passed in will be itself.
+        local currentTime = GetSystemTime()
+        mob:setLocalVar('mijinGakureTime', currentTime)
+        local baseId = mob:getID()
+        local winterTree = GetMobByID(baseId + 1)
 
-        -- The next tree becomes active and attacks the target.
-        if golaMob and currentTarget then
-            golaMob:updateEnmity(currentTarget)
+        if winterTree and winterTree:isAlive() then
+            local currentTarget = mob:getTarget()
+            if not currentTarget then
+                return
+            end
+
+            winterTree:updateEnmity(currentTarget)
         end
     end
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [ 1] = { xi.magic.spell.DOTON_NI,     target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 2] = { xi.magic.spell.HYOTON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 3] = { xi.magic.spell.HUTON_NI,     target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 4] = { xi.magic.spell.KATON_NI,     target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 5] = { xi.magic.spell.RAITON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 6] = { xi.magic.spell.SUITON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 7] = { xi.magic.spell.DOKUMORI_NI,  target, false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.POISON,     0, 100 },
+        [ 8] = { xi.magic.spell.KURAYAMI_NI,  target, false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.BLINDNESS,  0, 100 },
+        [ 9] = { xi.magic.spell.HOJO_NI,      target, false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.SLOW,       4, 100 },
+        [10] = { xi.magic.spell.JUBAKU_NI,    target, false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.PARALYSIS,  0, 100 },
+        [11] = { xi.magic.spell.UTSUSEMI_NI,  mob,    false, xi.action.type.ENHANCING_TARGET,  xi.effect.COPY_IMAGE, 0, 100 },
+    }
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity

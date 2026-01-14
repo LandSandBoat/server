@@ -30,6 +30,16 @@ function CAbility:getRange()
 end
 
 ---@nodiscard
+---@return integer
+function CAbility:getRadius()
+end
+
+---@nodiscard
+---@return xi.aoeType
+function CAbility:getAOE()
+end
+
+---@nodiscard
 ---@return string
 function CAbility:getName()
 end

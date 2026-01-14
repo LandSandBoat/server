@@ -1,0 +1,27 @@
+-----------------------------------
+-- Thornsong (Powerful Version)
+-- Description: Covers the user in fiery spikes. Enemies that hit it take fire damage. Significantly more powerful than normal Thornsong.
+-- Type: Enhancing
+-- Utsusemi/Blink absorb: N/A
+-- Range: Self
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    -- can only use if not silenced
+    if mob:hasStatusEffect(xi.effect.SILENCE) then
+        return 1
+    end
+
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local power = 120
+    local duration = 30
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DAMAGE_SPIKES, power, 0, duration))
+    return xi.effect.DAMAGE_SPIKES
+end
+
+return mobskillObject

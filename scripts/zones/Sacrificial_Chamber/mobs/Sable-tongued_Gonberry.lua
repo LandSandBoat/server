@@ -15,14 +15,14 @@ local entity = {}
 
 local enfeebleTable =
 {
-    [1] = { xi.magic.spell.BURN,       xi.effect.BURN      },
-    [2] = { xi.magic.spell.SHOCK,      xi.effect.SHOCK     },
-    [3] = { xi.magic.spell.CHOKE,      xi.effect.CHOKE     },
-    [4] = { xi.magic.spell.BIO_II,     xi.effect.BIO       },
-    [5] = { xi.magic.spell.BLIND,      xi.effect.BLINDNESS },
-    [6] = { xi.magic.spell.SLEEPGA_II, xi.effect.SLEEP_II  },
-    [7] = { xi.magic.spell.STUN,       xi.effect.STUN      },
-
+    [1] = { xi.magic.spell.BURN,        xi.effect.BURN      },
+    [2] = { xi.magic.spell.SHOCK,       xi.effect.SHOCK     },
+    [3] = { xi.magic.spell.CHOKE,       xi.effect.CHOKE     },
+    [4] = { xi.magic.spell.BIO_II,      xi.effect.BIO       },
+    [5] = { xi.magic.spell.POISONGA_II, xi.effect.POISON    },
+    [6] = { xi.magic.spell.BLIND,       xi.effect.BLINDNESS },
+    [7] = { xi.magic.spell.SLEEPGA,     xi.effect.SLEEP_I   },
+    [8] = { xi.magic.spell.SLEEPGA_II,  xi.effect.SLEEP_I   },
 }
 
 entity.onMobInitialize = function(mob)
@@ -37,15 +37,16 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
         xi.magic.spell.AERO_III,
-        xi.magic.spell.BLIZZAGA_II,
-        xi.magic.spell.BLIZZARD_III,
-        xi.magic.spell.BURST,
-        xi.magic.spell.DRAIN,
         xi.magic.spell.FIRE_III,
+        xi.magic.spell.BLIZZARD_III,
+        xi.magic.spell.BLIZZAGA_II,
+        xi.magic.spell.THUNDAGA_II,
+        xi.magic.spell.STONEGA_III,
+        xi.magic.spell.BURST,
         xi.magic.spell.FLARE,
         xi.magic.spell.FLOOD,
-        xi.magic.spell.STONEGA_III,
-        xi.magic.spell.THUNDAGA_II,
+        xi.magic.spell.DRAIN,
+        xi.magic.spell.STUN,
     }
 
     if target:getMP() > 0 then

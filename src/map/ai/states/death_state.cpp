@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
+#include "entities/mobentity.h"
 #include "packets/s2c/0x0f9_res.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
@@ -64,6 +65,13 @@ bool CDeathState::Update(timer::time_point tick)
             auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
             if (tick > time)
             {
+                auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+                // RAISABLE mobs should stay in death state indefinitely until raised
+                if (PMob && (PMob->m_Behavior & BEHAVIOR_RAISABLE))
+                {
+                    return false;
+                }
+
                 Complete();
                 m_PEntity->OnDeathTimer();
             }

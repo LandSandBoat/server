@@ -61,6 +61,15 @@ entity.spawnPoints =
     { x = -20.593, y =  0.986, z = -179.717 }
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
 entity.phList =
 {
     [ID.mob.SEWER_SYRUP - 2] = ID.mob.SEWER_SYRUP, -- -19.000 1.000 -173.000

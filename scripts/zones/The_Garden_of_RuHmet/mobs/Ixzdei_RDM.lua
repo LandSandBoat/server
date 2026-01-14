@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Garden of Ru'Hmet
---  Mob: Ix'zdei (Black Mage)
+--  Mob: Ix'zdei (Red Mage)
 -- Note: CoP Mission 8-3
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
@@ -9,182 +9,186 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-local chargeOptic = function(mob)
-    mob:setAutoAttackEnabled(false)
-    mob:setMobAbilityEnabled(false)
+local forms =
+{
+    IDLE  = 0,
+    POT   = 1,
+    POLES = 2,
+    RINGS = 3,
+}
 
-    if mob:getLocalVar('opticInduration') ~= 1 then
-        mob:timer(5000, function(mobArg)
-            mobArg:useMobAbility(1464)
-        end)
-    elseif mob:getLocalVar('opticInduration') == 1 then
-        mob:useMobAbility(1465)
-        mob:setLocalVar('opticInduration', 0)
-        mob:setAutoAttackEnabled(true)
-        mob:setMobAbilityEnabled(true)
+local pathPoints =
+{
+    [ID.mob.IXZDEI_RDM    ] = { x = 422.085, y = 0.000, z = 426.928 },
+    [ID.mob.IXZDEI_RDM + 1] = { x = 417.964, y = 0.000, z = 426.938 },
+}
+
+local changeForm = function(mob)
+    local currentForm = mob:getAnimationSub()
+    local possibleForms = {}
+    for i = forms.POT, forms.RINGS do
+        if i ~= currentForm then
+            table.insert(possibleForms, i)
+        end
     end
+
+    local newForm = possibleForms[math.random(1, #possibleForms)]
+    mob:setAnimationSub(newForm)
+end
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 5)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setLocalVar('healPercent', math.random(15, 25))
+
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
             { id = xi.jsa.MANAFONT, hpp = math.random(50, 80) },
         },
     })
-
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:setAnimationSub(0)
-    mob:setAutoAttackEnabled(true)
-    mob:setMobAbilityEnabled(true)
-    mob:setLocalVar('healpercent', math.random(15, 25))
 end
 
 entity.onMobEngage = function(mob, target)
-    local mobId = mob:getID()
-    -- each pot steps off the pedastal after casting initial spell and engaging target
-    switch (mobId): caseof
-    {
-        [ID.mob.IXZDEI_BASE] = function()
-            mob:pathTo(422.085, 0.000, 426.928)
-        end,
+    mob:setLocalVar('nextChangeTime', GetSystemTime() + math.random(15, 45))
+    mob:setAnimationSub(forms.POT)
 
-        [ID.mob.IXZDEI_BASE + 1] = function()
-            mob:pathTo(417.964, 0.000, 426.938)
-        end,
-    }
-
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    mob:setLocalVar('changeTime', 0)
-    local firstCast = { 144, 149, 154, 164, 169 }
-    mob:castSpell(firstCast[math.random(1, #firstCast)])
+    -- Mob paths off of alcove before casting
+    local mobID = mob:getID()
+    mob:pathTo(pathPoints[mobID].x, pathPoints[mobID].y, pathPoints[mobID].z)
 end
 
 entity.onMobFight = function(mob, target)
-    local randomTime = math.random(15, 45)
-    local changeTime = mob:getLocalVar('changeTime')
-
-    if not xi.combat.behavior.isEntityBusy(mob) then -- dont change forms while charging Optic Induration
-        if
-            mob:getAnimationSub() == 0 and
-            mob:getBattleTime() - changeTime > randomTime
-        then
-            mob:setAnimationSub(math.random(2, 3))
-            mob:setLocalVar('changeTime', mob:getBattleTime())
-        elseif
-            mob:getAnimationSub() == 1 and
-            mob:getBattleTime() - changeTime > randomTime
-        then
-            mob:setAnimationSub(math.random(2, 3))
-            mob:setLocalVar('changeTime', mob:getBattleTime())
-        elseif
-            mob:getAnimationSub() == 2 and
-            mob:getBattleTime() - changeTime > randomTime
-        then
-            local aniChance = math.random(0, 1)
-            if aniChance == 0 then
-                mob:setAnimationSub(0)
-                mob:setLocalVar('changeTime', mob:getBattleTime())
-            else
-                mob:setAnimationSub(3)
-                mob:setLocalVar('changeTime', mob:getBattleTime())
-            end
-        elseif
-            mob:getAnimationSub() == 3 and
-            mob:getBattleTime() - changeTime > randomTime
-        then
-            mob:setAnimationSub(math.random(0, 2))
-            mob:setLocalVar('changeTime', mob:getBattleTime())
-        end
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
     end
 
-    local hpp = mob:getHPP()
-    local healpercent = mob:getLocalVar('healpercent')
-    local heal = mob:getLocalVar('heal')
-    local zdeiOne = GetMobByID(ID.mob.IXZDEI_BASE)
-    local zdeiTwo = GetMobByID(ID.mob.IXZDEI_BASE + 1)
-
+    -- Paths to designated location and begins casting
     if
-        hpp < healpercent and
-        heal == 0
-    then -- if zdei is under the hp threshold and hasn't run to it's spawnpoint yet then
-        local mobID = mob:getID()
-        switch (mobID): caseof
-        {
-            [ID.mob.IXZDEI_BASE] = function()
-                if not zdeiOne then
-                    return
-                end
-
-                local spawnPos = zdeiOne:getSpawnPos()
-                mob:setMagicCastingEnabled(false)
-                mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z) -- go back to pedastal to heal
-                mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
-                mob:timer(8000, function(mobArg)
-                    if
-                        mob:checkDistance(spawnPos.x, spawnPos.y, spawnPos.z) < 2 and
-                        zdeiOne:getLocalVar('healed') == 0
-                    then
-                        mob:useMobAbility(626)
-                        mob:setHP(6500)
-                        mob:setLocalVar('healed', 1)
-                        mob:setLocalVar('heal', 1)
-                        mob:setMagicCastingEnabled(true)
-                    end
-                end)
-            end,
-
-            [ID.mob.IXZDEI_BASE + 1] = function()
-                if not zdeiTwo then
-                    return
-                end
-
-                local spawnPos = zdeiTwo:getSpawnPos()
-                mob:setMagicCastingEnabled(false)
-                mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
-                mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
-                mob:timer(8000, function(mobArg)
-                    if
-                        mob:checkDistance(spawnPos.x, spawnPos.y, spawnPos.z) < 2 and
-                        zdeiTwo:getLocalVar('healed') == 0
-                    then
-                        mob:useMobAbility(626)
-                        mob:setHP(6500)
-                        mob:setLocalVar('healed', 1)
-                        mob:setLocalVar('heal', 1)
-                        mob:setMagicCastingEnabled(true)
-                    end
-                end)
-            end,
-        }
+        mob:getLocalVar('reachedStart') == 0 and
+        not mob:isFollowingPath()
+    then
+        mob:setLocalVar('reachedStart', 1)
+        mob:castSpell()
     end
+
+    -- Change forms at random intervals if not charging Optic Induration
+    if
+        GetSystemTime() > mob:getLocalVar('nextChangeTime') and
+        mob:getLocalVar('chargeCount') == 0
+    then
+        changeForm(mob)
+        mob:setLocalVar('nextChangeTime', GetSystemTime() + math.random(15, 45))
+    end
+end
+
+entity.onMobMobskillChoose = function(mob, target)
+    local form = mob:getAnimationSub()
+    local tpMoves = { xi.mobSkill.REACTOR_COOL }
+
+    switch (form): caseof
+    {
+        [forms.POT] = function()
+            if math.random(1, 100) <= 75 then
+                table.insert(tpMoves, xi.mobSkill.OPTIC_INDURATION_CHARGE)
+            end
+        end,
+
+        [forms.POLES] = function()
+            table.insert(tpMoves, xi.mobSkill.STATIC_FILAMENT)
+            table.insert(tpMoves, xi.mobSkill.DECAYED_FILAMENT)
+        end,
+
+        [forms.RINGS] = function()
+            table.insert(tpMoves, xi.mobSkill.REACTOR_OVERLOAD)
+            table.insert(tpMoves, xi.mobSkill.REACTOR_OVERHEAT)
+        end,
+    }
+
+    return tpMoves[math.random(1, #tpMoves)]
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local skillID = skill:getID()
-    if skillID == 1464 then
-        mob:setAnimationSub(0)
-        local opticCounter = mob:getLocalVar('opticCounter')
+    -- Handle healing completion
+    if skill:getID() == xi.mobSkill.OPTIC_INDURATION_CHARGE then
+        local chargeCount = mob:getLocalVar('chargeCount')
+        local chargeTotal = mob:getLocalVar('chargeTotal')
 
-        opticCounter = opticCounter + 1
-        mob:setLocalVar('opticCounter', opticCounter)
-
-        if opticCounter > 2 then
-            mob:setLocalVar('opticCounter', 0)
-            mob:setLocalVar('opticInduration', 1)
-            chargeOptic(mob)
+        if chargeTotal > 0 and chargeCount == chargeTotal then
+            mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION, mob:getTarget())
         else
-            chargeOptic(mob)
+            if chargeCount == 0 then
+                mob:setAutoAttackEnabled(false)
+                mob:setMagicCastingEnabled(false)
+                mob:setLocalVar('chargeTotal', 3)
+            end
+
+            chargeCount = chargeCount + 1
+            mob:setLocalVar('chargeCount', chargeCount)
+            mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION_CHARGE)
         end
+
+    elseif skill:getID() == xi.mobSkill.OPTIC_INDURATION then
+        mob:setAutoAttackEnabled(true)
+        mob:setMagicCastingEnabled(true)
+        mob:setLocalVar('chargeCount', 0)
+        mob:setLocalVar('chargeTotal', 0)
     end
 end
 
-entity.onMobDisengage = function(mob)
-    mob:setAnimationSub(0)
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local isLight = mob:getID() == ID.mob.IXZDEI_RDM
+
+    local spellListLight =
+    {
+        [1] = { xi.magic.spell.CURE_V,    mob,    true,  xi.action.type.HEALING_TARGET,    33,                0, 100 },
+        [2] = { xi.magic.spell.REGEN,     mob,    true,  xi.action.type.ENHANCING_TARGET,  xi.effect.REGEN,   0, 100 },
+        [3] = { xi.magic.spell.GRAVITY,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.WEIGHT,  0, 100 },
+        [4] = { xi.magic.spell.DIAGA_II,  target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.DIA,     0, 100 },
+        [5] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SILENCE, 0, 100 },
+        [6] = { xi.magic.spell.FLASH,     target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.FLASH,   0, 100 },
+    }
+
+    local spellListDark =
+    {
+        [1] = { xi.magic.spell.POISON_II, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.POISON,    0, 100 },
+        [2] = { xi.magic.spell.BIO_III,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BIO,       0, 100 },
+        [3] = { xi.magic.spell.BLIND,     target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BLINDNESS, 0, 100 },
+        [5] = { xi.magic.spell.BINDGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BIND,      0, 100 },
+        [4] = { xi.magic.spell.DISPELGA,  target, false, xi.action.type.DAMAGE_TARGET,     nil,                 0, 100 },
+    }
+
+    local groupTableLight =
+    {
+        GetMobByID(mob:getID() + 1), -- Ix'zdei RDM
+        GetMobByID(mob:getID() + 2), -- Ix'zdei BLM
+        GetMobByID(mob:getID() + 3), -- Ix'zdei BLM
+    }
+
+    local groupTableDark =
+    {
+        GetMobByID(mob:getID() - 1), -- Ix'zdei RDM
+        GetMobByID(mob:getID() + 1), -- Ix'zdei BLM
+        GetMobByID(mob:getID() + 2), -- Ix'zdei BLM
+    }
+
+    local spellList  = isLight and spellListLight or spellListDark
+    local groupTable = isLight and groupTableLight or groupTableDark
+    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobDisengage = function(mob)
+    mob:setAnimationSub(forms.IDLE)
+    mob:setLocalVar('reachedStart', 0) -- Reset on disengage
 end
 
 return entity

@@ -14,8 +14,12 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 10000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 13640)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 9000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 9000)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

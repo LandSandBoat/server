@@ -20,6 +20,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 60)
+    mob:setMod(xi.mod.UDMGMAGIC, -1250)
     mob:setUnkillable(true)
     mob:setLocalVar('killable', 0)
     mob:setLocalVar('defaultAttack', mob:getMod(xi.mod.ATT))

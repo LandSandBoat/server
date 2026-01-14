@@ -7,13 +7,13 @@ describe('AoE', function()
     before_each(function()
         p1 = xi.test.world:spawnPlayer(
             {
-                zone  = xi.zone.WEST_RONFAURE,
+                zone  = xi.zone.GM_HOME,
                 job   = xi.job.BLM,
                 level = 99,
             })
         p2 = xi.test.world:spawnPlayer(
             {
-                zone  = xi.zone.WEST_RONFAURE,
+                zone  = xi.zone.GM_HOME,
                 job   = xi.job.BLM,
                 level = 99,
             })

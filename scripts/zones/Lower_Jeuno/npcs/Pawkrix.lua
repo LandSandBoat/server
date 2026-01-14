@@ -15,6 +15,7 @@ entity.onTrigger = function(player, npc)
         { xi.item.GOBLIN_MUSHPOT,            1140 },
         { xi.item.BAG_OF_POISON_FLOUR,        515 },
         { xi.item.GOBLIN_DOLL,                500 },
+        { xi.item.BOWL_OF_GOBLIN_STEW_880, 150000 },
     }
 
     player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.PAWKRIX_SHOP_DIALOG)

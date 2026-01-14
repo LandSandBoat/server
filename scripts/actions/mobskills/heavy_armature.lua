@@ -6,7 +6,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() == xi.mobPools.ARMED_GEARS then
+    if mob:getPool() == xi.mobPool.ARMED_GEARS then
         return 0
     else
         return 1

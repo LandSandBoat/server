@@ -66,6 +66,12 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 11)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 8)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 8)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
 end
 
 entity.onMobEngage = function(mob, target)

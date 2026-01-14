@@ -85,6 +85,7 @@
 #include "ai/controllers/trust_controller.h"
 
 #include "ai/helpers/gambits_container.h"
+#include "ai/helpers/targetfind.h"
 
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
@@ -3026,7 +3027,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, const s
 // Sends an arbitrary entity update to a specific player only
 void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask)
 {
-    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate && entityToUpdate->GetBaseEntity())
     {
         CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -3037,7 +3038,7 @@ void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, ui
 // Seems to be needed for Chocobo Racing
 void CLuaBaseEntity::sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate)
 {
-    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate && entityToUpdate->GetBaseEntity())
     {
         auto packet = std::make_unique<CBasicPacket>();
         packet->setType(0x0E);
@@ -8293,6 +8294,28 @@ uint32 CLuaBaseEntity::getMissionStatus(MissionLog logId, const sol::object& mis
     ShowError("Lua::getMissionStatus: missionLogID %i is invalid", static_cast<uint8_t>(logId));
     return 0;
 }
+/************************************************************************
+ *  Function: sendPartialMissionLog()
+ *  Purpose : Sends the packet for mission log
+ *  Example : player:sendPartialMissionLog(player:getNation())
+ *  Notes   : getMissionStatus(log id[,index 0-7])
+ ************************************************************************/
+
+void CLuaBaseEntity::sendPartialMissionLog(MissionLog logId, bool completed) const
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (static_cast<uint8_t>(logId) < MAX_MISSIONAREA)
+    {
+        charutils::SendPartialMissionLog(PChar, logId, completed);
+    }
+}
 
 /************************************************************************
  *  Function: setEminenceCompleted()
@@ -10076,7 +10099,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, const sol::object& attacker, const
         // Diabolos NM/mob ability
         // "Damage will not wake you up from Nightmare, only Cure and Benediction (Benediction will also remove the Bio effect)."
         if (wakeUp == true &&
-            PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() >= 5) // Tier 5 = Diabolos NM Nightmare
+            PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() >= 11) // Tier 11 = Diabolos NM Nightmare
         {
             wakeUp = false;
         }
@@ -12534,7 +12557,7 @@ void CLuaBaseEntity::addRecast(uint8 recastCont, uint16 recastID, uint32 duratio
     {
         RECASTTYPE recastContainer = static_cast<RECASTTYPE>(recastCont);
 
-        PBattleEntity->PRecastContainer->Add(recastContainer, recastID, std::chrono::seconds(duration));
+        PBattleEntity->PRecastContainer->Add(recastContainer, static_cast<Recast>(recastID), std::chrono::seconds(duration));
         if (PBattleEntity->objtype == TYPE_PC)
         {
             CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
@@ -12561,7 +12584,7 @@ bool CLuaBaseEntity::hasRecast(uint8 rType, uint16 recastID, const sol::object& 
         RECASTTYPE recastContainer = static_cast<RECASTTYPE>(rType);
         auto       recast          = (arg2 != sol::lua_nil) ? std::chrono::seconds(arg2.as<uint32>()) : 0s;
 
-        hasRecast = PBattleEntity->PRecastContainer->HasRecast(recastContainer, recastID, recast);
+        hasRecast = PBattleEntity->PRecastContainer->HasRecast(recastContainer, static_cast<Recast>(recastID), recast);
     }
 
     return hasRecast;
@@ -12583,10 +12606,10 @@ void CLuaBaseEntity::resetRecast(uint8 rType, uint16 recastID)
         auto*      PChar           = static_cast<CCharEntity*>(m_PBaseEntity);
         RECASTTYPE recastContainer = static_cast<RECASTTYPE>(rType);
 
-        if (PChar->PRecastContainer->Has(recastContainer, recastID))
+        if (PChar->PRecastContainer->Has(recastContainer, static_cast<Recast>(recastID)))
         {
-            PChar->PRecastContainer->Del(recastContainer, recastID);
-            PChar->PRecastContainer->Add(recastContainer, recastID, 0s);
+            PChar->PRecastContainer->Del(recastContainer, static_cast<Recast>(recastID));
+            PChar->PRecastContainer->Add(recastContainer, static_cast<Recast>(recastID), 0s);
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
@@ -13383,7 +13406,14 @@ bool CLuaBaseEntity::hasClaim(CLuaBaseEntity* PTarget)
         return false;
     }
 
-    return battleutils::HasClaim(dynamic_cast<CBattleEntity*>(m_PBaseEntity), PBattleEntity);
+    auto* PTargetBattleEntity = dynamic_cast<CBattleEntity*>(PTarget->GetBaseEntity());
+    if (!PTargetBattleEntity)
+    {
+        ShowWarning("Attempting to check claim against invalid target entity type (%s).", PTarget->GetBaseEntity()->getName());
+        return false;
+    }
+
+    return battleutils::HasClaim(PBattleEntity, PTargetBattleEntity);
 }
 
 /************************************************************************
@@ -14130,6 +14160,11 @@ int16 CLuaBaseEntity::getMod(uint16 modID)
         return 0;
     }
 
+    if (modID == 0)
+    {
+        return 0;
+    }
+
     return static_cast<CBattleEntity*>(m_PBaseEntity)->getMod(static_cast<Mod>(modID));
 }
 
@@ -14148,6 +14183,11 @@ void CLuaBaseEntity::setMod(uint16 modID, int16 value)
         return;
     }
 
+    if (modID == 0)
+    {
+        return;
+    }
+
     static_cast<CBattleEntity*>(m_PBaseEntity)->setModifier(static_cast<Mod>(modID), value);
 }
 
@@ -14163,6 +14203,11 @@ void CLuaBaseEntity::delMod(uint16 modID, int16 value)
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    if (modID == 0)
+    {
         return;
     }
 
@@ -18080,7 +18125,7 @@ void CLuaBaseEntity::castSpell(const sol::object& spell, const sol::object& enti
             // Always delete recast of spell if mob
             if (PMobEntity)
             {
-                PMobEntity->PRecastContainer->Del(RECAST_MAGIC, static_cast<uint16>(spellid));
+                PMobEntity->PRecastContainer->Del(RECAST_MAGIC, static_cast<Recast>(spellid));
             }
 
             if (targid)
@@ -18224,7 +18269,12 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         // does not have a specified target so default to current battle target
         else if (mobObj)
         {
-            if (PMobSkill->getValidTargets() & TARGET_ENEMY)
+            // Self-centered AoE uses self as target
+            if (PMobSkill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER))
+            {
+                PEntity->PAI->MobSkill(PEntity->targid, skillid, castTimeOverride);
+            }
+            else if (PMobSkill->getValidTargets() & TARGET_ENEMY)
             {
                 auto defaultTarget = mobObj->GetBattleTarget();
                 if (defaultTarget)
@@ -19731,6 +19781,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("completeMission", CLuaBaseEntity::completeMission);
     SOL_REGISTER("setMissionStatus", CLuaBaseEntity::setMissionStatus);
     SOL_REGISTER("getMissionStatus", CLuaBaseEntity::getMissionStatus);
+    SOL_REGISTER("sendPartialMissionLog", CLuaBaseEntity::sendPartialMissionLog);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
     SOL_REGISTER("getNumEminenceCompleted", CLuaBaseEntity::getNumEminenceCompleted);
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);

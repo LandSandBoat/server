@@ -22,6 +22,7 @@
 #include "ability.h"
 
 #include "common/database.h"
+#include "enums/recast.h"
 
 #include "lua/luautils.h"
 
@@ -38,7 +39,7 @@ CAbility::CAbility(uint16 id)
 , m_addType(0)
 , m_message(MsgBasic::NONE)
 , m_recastTime(0s)
-, m_recastId(0)
+, m_recastId(Recast::Special)
 , m_CE(0)
 , m_VE(0)
 , m_meritModID(0)
@@ -221,12 +222,12 @@ void CAbility::setName(const std::string& name)
     m_name = name;
 }
 
-uint16 CAbility::getRecastId() const
+auto CAbility::getRecastId() const -> Recast
 {
     return m_recastId;
 }
 
-void CAbility::setRecastId(uint16 recastId)
+void CAbility::setRecastId(const Recast recastId)
 {
     m_recastId = recastId;
 }
@@ -346,7 +347,7 @@ void LoadAbilitiesList()
             PAbility->setRange(rset->get<float>("range"));
             PAbility->setAOE(rset->get<uint8>("isAOE"));
             PAbility->setRadius(rset->get<uint8>("radius"));
-            PAbility->setRecastId(rset->get<uint16>("recastId"));
+            PAbility->setRecastId(rset->get<Recast>("recastId"));
             PAbility->setCE(rset->get<int32>("CE"));
             PAbility->setVE(rset->get<int32>("VE"));
             PAbility->setMeritModID(rset->get<uint16>("meritModID"));

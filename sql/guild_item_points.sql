@@ -275,7 +275,7 @@ INSERT INTO `guild_item_points` VALUES (1,17568,9,1800,15600,3); -- Eight-Sided 
 INSERT INTO `guild_item_points` VALUES (1,139,9,13430,22560,4); -- Star Globe (13430 / 22560)
 INSERT INTO `guild_item_points` VALUES (1,17364,9,5697,20880,5); -- Cythara Anglica (5697 / 20880)
 INSERT INTO `guild_item_points` VALUES (1,17837,9,7022,20880,5); -- Cythara Anglica +1 (7022 / 20880)
-INSERT INTO `guild_item_points` VALUES (1,76,9,7520,22560,6); -- Royal Bookshelf (7520 / 22560)
+INSERT INTO `guild_item_points` VALUES (1,76,9,14625,22560,6); -- Royal Bookshelf (14625 / 22560)
 INSERT INTO `guild_item_points` VALUES (1,77,9,14600,22560,7); -- Bookshelf (14600 / 22560)
 
 -- Blacksmithing / Amateur

@@ -21,7 +21,11 @@ describe('Chains of Promathia', function()
             -- zone into Lower Delkfutts Tower for a series of CS's
             player:gotoZone(xi.zone.QUFIM_ISLAND)
             player:gotoZone(xi.zone.LOWER_DELKFUTTS_TOWER)
-            player.events:expect({ eventId = 22 })
+
+            -- TODO: check Tales' Beginning with option 0, talking to the Tales' Beginning, which starts CS 53.
+            -- In CS 53, Send option 4 to accept CS, which will start CS 22 with out any options to select
+            -- Also verify charvar for TalesBeginning
+            player.events:expect({ eventId = 22, finishOption = 1 })
             player.events:expect({ eventId = 36 })
             player.events:expect({ eventId = 37 })
             player.events:expect({ eventId = 38 })

@@ -10,30 +10,27 @@
 ---@type TMobSkill
 local mobskillObject = {}
 
-local wildRageDamageIncrease = 0.10
-
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
-    local accmod = 1
-    local ftp    = 2.1
+    local accmod  = 1
+    local fTP     = 2.0
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    if mob:getPool() == xi.mobPools.PLATOON_SCORPION then
-        -- should not have to verify because platoon scorps only in battlefield
-        local numScorpsDead = mob:getBattlefield():getLocalVar('[ODS]NumScorpsDead')
+    if mob:getPool() == xi.mobPool.PLATOON_SCORPION then
+        local battlefield = mob:getBattlefield()
 
-        -- Increase the strength of Wild Rage as scorps in the BC die
-        -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-        info.dmg = info.dmg * (1 + wildRageDamageIncrease * numScorpsDead)
+        if battlefield then
+            fTP = fTP + battlefield:getLocalVar('scorpionsDefeated') * .5
+        end
     end
 
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, fTP, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
-    if mob:getPool() == xi.mobPools.KING_VINEGARROON then
+    if mob:getPool() == xi.mobPool.KING_VINEGARROON then
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 25, 3, 60)
     end
 

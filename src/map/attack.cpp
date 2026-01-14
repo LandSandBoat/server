@@ -138,38 +138,6 @@ void CAttack::SetCritical(bool value)
 
 /************************************************************************
  *                                                                      *
- *  Sets the guarded flag.                                              *
- *                                                                      *
- ************************************************************************/
-void CAttack::SetGuarded(bool isGuarded)
-{
-    m_isGuarded = isGuarded;
-}
-
-/************************************************************************
- *                                                                      *
- *  Gets the guarded flag.                                              *
- *                                                                      *
- ************************************************************************/
-bool CAttack::IsGuarded()
-{
-    m_isGuarded = attackutils::IsGuarded(m_attacker, m_victim);
-    if (m_isGuarded)
-    {
-        if (m_damageRatio > 1.0f)
-        {
-            m_damageRatio -= 1.0f;
-        }
-        else
-        {
-            m_damageRatio = 0;
-        }
-    }
-    return m_isGuarded;
-}
-
-/************************************************************************
- *                                                                      *
  *  Gets the evaded flag.                                               *
  *                                                                      *
  ************************************************************************/
@@ -201,6 +169,28 @@ bool CAttack::IsBlocked() const
 bool CAttack::IsParried() const
 {
     return m_isParried;
+}
+
+bool CAttack::IsGuarded() const
+{
+    return m_isGuarded;
+}
+
+bool CAttack::CheckGuarded()
+{
+    m_isGuarded = attackutils::IsGuarded(m_attacker, m_victim);
+    if (m_isGuarded)
+    {
+        if (m_damageRatio > 1.0f)
+        {
+            m_damageRatio -= 1.0f;
+        }
+        else
+        {
+            m_damageRatio = 0;
+        }
+    }
+    return m_isGuarded;
 }
 
 bool CAttack::CheckParried()

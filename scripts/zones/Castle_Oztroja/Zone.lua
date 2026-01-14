@@ -34,14 +34,9 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onGameHour = function(zone)
-    local vanadielHour = VanadielHour()
-
-    -- every game day
-    if vanadielHour % 24 == 0 then
-        oztrojaGlobal.pickNewCombo() -- update combination for brass door on floor 2
-        oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
-    end
+zoneObject.onGameDay = function()
+    oztrojaGlobal.pickNewCombo()    -- update combination for brass door on floor 2
+    oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

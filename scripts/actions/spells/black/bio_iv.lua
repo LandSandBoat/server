@@ -11,19 +11,18 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
+    local tier   = 8
 
-    -- Check for Dia
+    -- Check for Dia.
     local dia = target:getStatusEffect(xi.effect.DIA)
-    if dia and dia:getTier() >= 5 then
-        return damage
-    else
+    if dia and dia:getTier() < tier then
         target:delStatusEffect(xi.effect.DIA)
+
+        -- Calculate DoT effect (rough, though fairly accurate)
+        local power = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
+
+        target:addStatusEffect(xi.effect.BIO, power, 3, 180, 0, 25, tier)
     end
-
-    -- Calculate DoT effect (rough, though fairly accurate)
-    local power = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
-
-    target:addStatusEffect(xi.effect.BIO, power, 3, 180, 0, 25, 4)
 
     return damage
 end

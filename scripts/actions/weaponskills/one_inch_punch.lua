@@ -16,7 +16,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 1
+    params.numHits = 2
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.vit_wsc = 0.4
     -- Defense ignored is 0%, 30%, 50% as per http://www.bg-wiki.com/bg/One_Inch_Punch

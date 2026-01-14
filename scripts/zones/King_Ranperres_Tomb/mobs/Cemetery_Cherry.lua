@@ -28,6 +28,10 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 10000)
     mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 
     local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
     mob:timer(saplingsRespawn * 1000, function(mobArg)
@@ -37,6 +41,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('wasKilled', 0)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
 end
 
 entity.onMobMobskillChoose = function(mob, target)

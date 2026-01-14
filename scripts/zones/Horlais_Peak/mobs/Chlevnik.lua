@@ -13,6 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'FINAL_METEOR_DEATH', function(mobArg, skillID)
         if skillID == xi.mobSkill.FINAL_METEOR then
             if mobArg:getAnimationSub() ~= 1 then
@@ -73,7 +74,6 @@ end
 entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == xi.magic.spell.METEOR then
         spell:setAoE(xi.magic.aoe.RADIAL)
-        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
         spell:setMPCost(0)

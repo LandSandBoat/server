@@ -27,7 +27,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         else
             return 1
         end
-    elseif mob:getPool() ~= xi.mobPools.THRONE_ROOM_VOLKER then
+    elseif mob:getPool() ~= xi.mobPool.THRONE_ROOM_VOLKER then
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 40)
     end
 
@@ -35,7 +35,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getPool() == xi.mobPools.THRONE_ROOM_VOLKER then -- Volker@Throne_Room only
+    if mob:getPool() == xi.mobPool.THRONE_ROOM_VOLKER then -- Volker@Throne_Room only
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.BLADE_ANSWER)
     end
 

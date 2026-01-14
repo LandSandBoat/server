@@ -42,6 +42,25 @@ xi.combat.magicAoE.calculateSongRadius = function(caster, spell)
     return math.floor(baseRadius * multiplier)
 end
 
+-- Handle AoE for mobs (non-player, non-trust entities)
+-- Return the appropriate end result based on base type of the spell
+-- TODO: To be removed when spell definitions are reworked
+local calculateMobAoE = function(baseType, baseRadius)
+    if
+        baseType == xi.magic.aoe.RADIAL_MANI or
+        baseType == xi.magic.aoe.RADIAL_ACCE or
+        baseType == xi.magic.aoe.DIFFUSION
+    then
+        return { xi.magic.aoe.NONE, 0 }
+    end
+
+    if baseType == xi.magic.aoe.PIANISSIMO then
+        return { xi.magic.aoe.RADIAL, baseRadius }
+    end
+
+    return { baseType, baseRadius }
+end
+
 ---Calculate spell AoE type and radius based on caster modifiers.
 ---@param caster CBaseEntity
 ---@param spell CSpell
@@ -57,7 +76,7 @@ xi.combat.magicAoE.calculateTypeAndRadius = function(caster, spell)
         not caster:isPC() and
         not caster:isTrust()
     then
-        return { baseType, baseRadius }
+        return calculateMobAoE(baseType, baseRadius)
     end
 
     -- Majesty converts Cure and Protect spells to 10y AoE

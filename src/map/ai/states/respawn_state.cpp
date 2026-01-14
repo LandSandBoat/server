@@ -36,21 +36,12 @@ bool CRespawnState::Update(timer::time_point tick)
     auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
-        if ((!WasExitDelayed() && !PMob->m_AllowRespawn) || (PMob->m_spawnGroup && !PMob->CanSpawnFromGroup()))
+        if (!WasExitDelayed() && (PMob->m_RespawnTime != m_spawnTime))
         {
-            if (m_spawnTime > 0s)
-            {
-                m_spawnTime = 0s;
-            }
-        }
-        else
-        {
-            if (PMob->m_RespawnTime != m_spawnTime)
-            {
-                m_spawnTime = PMob->m_RespawnTime;
-            }
+            m_spawnTime = PMob->m_RespawnTime;
         }
     }
+
     if (m_spawnTime > 0s && tick > GetEntryTime() + m_spawnTime)
     {
         // Delay spawn if PMob's lua decides it needs to be
@@ -63,6 +54,8 @@ bool CRespawnState::Update(timer::time_point tick)
 
                 return false;
             }
+
+            return PMob->TrySpawn();
         }
 
         m_PEntity->Spawn();

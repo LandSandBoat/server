@@ -21,6 +21,7 @@
 
 #include "validation.h"
 
+#include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
@@ -39,8 +40,7 @@ auto PacketValidator::isNotResting(const CCharEntity* PChar) -> PacketValidator&
 
 auto PacketValidator::isNotCrafting(const CCharEntity* PChar) -> PacketValidator&
 {
-    if (PChar->animation == ANIMATION_SYNTH ||
-        (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0))
+    if (PChar->isCrafting())
     {
         result_.addError("Character is crafting.");
     }
@@ -195,10 +195,50 @@ auto PacketValidator::isAllianceLeader(const CCharEntity* PChar) -> PacketValida
 
 auto PacketValidator::isNotFishing(const CCharEntity* PChar) -> PacketValidator&
 {
-    if ((PChar->animation >= ANIMATION_FISHING_FISH && PChar->animation <= ANIMATION_FISHING_STOP) ||
-        PChar->animation == ANIMATION_FISHING_START_OLD || PChar->animation == ANIMATION_FISHING_START)
+    if (PChar->isFishing())
     {
         result_.addError("Character is fishing.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isNotSitting(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (PChar->animation == ANIMATION_SIT ||
+        (PChar->animation >= ANIMATION_SITCHAIR_0 && PChar->animation <= ANIMATION_SITCHAIR_10))
+    {
+        result_.addError("Character is sitting.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isNotCharmed(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }))
+    {
+        result_.addError("Character is charmed.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isNotMounted(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (PChar->isMounted())
+    {
+        result_.addError("Character is mounted.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isEngaged(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (!PChar->PAI->IsEngaged())
+    {
+        result_.addError("Character is not engaged.");
     }
 
     return *this;
