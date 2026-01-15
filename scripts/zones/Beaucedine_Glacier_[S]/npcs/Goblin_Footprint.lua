@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:getVar('gobquest') == 1 then
-        gobhook(player, npc)
+        xi.mafia.gobhook(player, npc)
     end
 end
 

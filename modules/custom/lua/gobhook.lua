@@ -290,78 +290,82 @@ xi.mafia.CONTRACTS =
 }
 
 local function getPurchaseItemFunc(itemId, quantity, cost, name)
-    return function(player)
-        player:queue(0, function(player)
+    return function(playerInner)
+        playerInner:queue(0, function(playerQueued)
             local confirmationMenu =
             {
                 title = 'Confirm Purchase (' .. cost .. ' Mafia)',
                 options =
                 {
-                    { 'Purchase ' .. name .. '.', function(player)
-                        local Legion_point = player:getCurrency('Legion_point')
+                    { 'Purchase ' .. name .. '.', function(playerConfirm)
+                        local legionPoint = playerConfirm:getCurrency('legion_point')
 
-                        if Legion_point < cost then
-                            player:printToPlayer(string.format('You do not have enough Mafia Points to claim that item.', cost, Legion_point))
+                        if legionPoint < cost then
+                            playerConfirm:printToPlayer('You do not have enough Mafia Points to claim that item.')
                             return
                         end
 
-                        if npcUtil.giveItem(player, {{ itemId, quantity }}) then
-                            player:delCurrency('Legion_point',  cost)
+                        if npcUtil.giveItem(playerConfirm, { { itemId, quantity } }) then
+                            playerConfirm:delCurrency('legion_point', cost)
                         end
-                    end},
-                    { 'I changed my mind.', function(player) return end },
+                    end },
+                    { 'I changed my mind.', function()
+                        return
+                    end },
                 }
             }
-            player:customMenu(confirmationMenu)
+            playerQueued:customMenu(confirmationMenu)
         end)
     end
 end
 
 local function getPurchaseKeyItemFunc(keyItemId, cost, name)
-    return function(player)
-        player:queue(0, function(player)
+    return function(playerInner)
+        playerInner:queue(0, function(playerQueued)
             local confirmationMenu =
             {
                 title = 'Confirm Purchase (' .. cost .. ' Mafia)',
                 options =
                 {
-                    { 'Purchase ' .. name .. '.', function(player)
-                        local Legion_point = player:getCurrency('Legion_point')
+                    { 'Purchase ' .. name .. '.', function(playerConfirm)
+                        local legionPoint = playerConfirm:getCurrency('legion_point')
 
-                        if Legion_point < cost then
-                            player:printToPlayer(string.format('You do not have enough Mafia Points to claim that item.', cost, Legion_point))
+                        if legionPoint < cost then
+                            playerConfirm:printToPlayer('You do not have enough Mafia Points to claim that item.')
                             return
                         end
 
-                        if player:hasKeyItem(keyItemId) then
-                            player:printToPlayer('You already have that.')
+                        if playerConfirm:hasKeyItem(keyItemId) then
+                            playerConfirm:printToPlayer('You already have that.')
                             return
                         end
 
-                        npcUtil.giveKeyItem(player, keyItemId)
-                        player:delCurrency('legion_point', cost)
+                        npcUtil.giveKeyItem(playerConfirm, keyItemId)
+                        playerConfirm:delCurrency('legion_point', cost)
 
-                    end},
-                    { 'I changed my mind.', function(player) return end },
+                    end },
+                    { 'I changed my mind.', function()
+                        return
+                    end },
                 }
             }
-            player:customMenu(confirmationMenu)
+            playerQueued:customMenu(confirmationMenu)
         end)
     end
 end
 
 local function getOpenMenuFunc(menuName)
-    return function(player)
-        player:queue(0, function(player)
-            player:customMenu(xi.mafia.standardShop[menuName])
+    return function(playerInner)
+        playerInner:queue(0, function(playerQueued)
+            playerQueued:customMenu(xi.mafia.standardShop[menuName])
         end)
     end
 end
 
 local function getZoneSpecificMenuFunc()
-    return function(player)
-        player:queue(0, function(player)
-            local zoneID = player:getZoneID()
+    return function(playerInner)
+        playerInner:queue(0, function(playerQueued)
+            local zoneID = playerQueued:getZoneID()
 
             if not xi.mafia.SALES[zoneID] then
                 return
@@ -376,7 +380,7 @@ local function getZoneSpecificMenuFunc()
             }
             print('sales[1] ' .. zoneMenu.options[1][1] .. ' ' .. type(zoneMenu.options[1][2]))
             print('sales[2] ' .. zoneMenu.options[2][1] .. ' ' .. type(zoneMenu.options[2][2]))
-            player:customMenu(zoneMenu)
+            playerQueued:customMenu(zoneMenu)
         end)
     end
 end
@@ -384,41 +388,43 @@ end
 local function getRelicResetFunc()
     local cost = 3000
 
-    return function(player)
-        local remaining = player:getVar('RELIC_DUE_AT') - GetSystemTime()
+    return function(playerInner)
+        local remaining = playerInner:getVar('RELIC_DUE_AT') - GetSystemTime()
 
         if remaining <= 0 then
-            player:printToPlayer('You have no relic in progress.')
+            playerInner:printToPlayer('You have no relic in progress.')
             return
         end
 
-        local days    = math.floor(remaining/ 86400)
-        local hours   = math.floor((remaining/ 3600) - (days * 24))
-        local minutes = math.floor((remaining/ 60) - (hours * 60) - (days * 1440))
-        
+        local days    = math.floor(remaining / 86400)
+        local hours   = math.floor((remaining / 3600) - (days * 24))
+        local minutes = math.floor((remaining / 60) - (hours * 60) - (days * 1440))
+
         local remainingString = string.format('%sd %sh %sm', days, hours, minutes)
 
-        player:queue(0, function(player)
+        playerInner:queue(0, function(playerQueued)
             local confirmMenu =
             {
                 title = string.format('Clear wait for current stage (%s mafia points)', cost),
                 options =
                 {
-                    { string.format('Clear %s', remainingString), function(player)
-                        if player:getCurrency('legion_point') < cost then
-                            player:printToPlayer('Not enough mafia points.')
+                    { string.format('Clear %s', remainingString), function(playerConfirm)
+                        if playerConfirm:getCurrency('legion_point') < cost then
+                            playerConfirm:printToPlayer('Not enough mafia points.')
                             return
                         end
 
-                        player:setVar('RELIC_DUE_AT', GetSystemTime())
-                        player:delCurrency('legion_point', cost)
-                        player:printToPlayer('Your relic timer has been reset.')
-                    end},
-                    { 'I changed my mind', function(player) return end },
+                        playerConfirm:setVar('RELIC_DUE_AT', GetSystemTime())
+                        playerConfirm:delCurrency('legion_point', cost)
+                        playerConfirm:printToPlayer('Your relic timer has been reset.')
+                    end },
+                    { 'I changed my mind', function()
+                        return
+                    end },
                 }
             }
 
-            player:customMenu(confirmMenu)
+            playerQueued:customMenu(confirmMenu)
         end)
     end
 end
@@ -431,10 +437,12 @@ xi.mafia.standardShop =
         options =
         {
             { 'Instant Reraise', getPurchaseItemFunc(GetItemIDByName('Instant_reraise'), 1, 50, 'Instant Reraise') },
-            { 'Instant Warp'   , getPurchaseItemFunc(GetItemIDByName('Instant_warp'   ), 1, 50, 'Instant Warp'   ) },
+            { 'Instant Warp', getPurchaseItemFunc(GetItemIDByName('Instant_warp'), 1, 50, 'Instant Warp') },
             { 'Instant Retrace', getPurchaseItemFunc(GetItemIDByName('Instant_retrace'), 1, 50, 'Instant Retrace') },
             { 'Zone Specific Items', getZoneSpecificMenuFunc() },
-            { 'Exit', function(player) return end },
+            { 'Exit', function(player)
+                return
+            end },
         }
     },
 
@@ -443,12 +451,12 @@ xi.mafia.standardShop =
         title = 'peak 2',
         options =
         {
-            { 'Atropos Orb KSNM 30',  getPurchaseItemFunc(GetItemIDByName('Atropos_orb'), 1, 5000, 'Atropos Orb') },
-            { 'Clotho Orb KSNM 30',    getPurchaseItemFunc(GetItemIDByName('Clotho_orb'), 1, 5000, 'Clotho Orb') },
+            { 'Atropos Orb KSNM 30', getPurchaseItemFunc(GetItemIDByName('Atropos_orb'), 1, 5000, 'Atropos Orb') },
+            { 'Clotho Orb KSNM 30', getPurchaseItemFunc(GetItemIDByName('Clotho_orb'), 1, 5000, 'Clotho Orb') },
             { 'Lachesis Orb KSNM 30', getPurchaseItemFunc(GetItemIDByName('Lachesis_orb'), 1, 5000, 'Lachesis Orb') },
-            { 'Themis Orb KSNM 99',   getPurchaseItemFunc(GetItemIDByName('Themis_orb'), 1, 7000, 'Themis Orb') },
+            { 'Themis Orb KSNM 99', getPurchaseItemFunc(GetItemIDByName('Themis_orb'), 1, 7000, 'Themis Orb') },
             { 'Back', getZoneSpecificMenuFunc() },
-        } 
+        }
     },
 }
 
@@ -457,44 +465,44 @@ xi.mafia.SALES =
     [xi.zone.AHT_URHGAN_WHITEGATE] =
     {
         { 'Imperial Army I.D. Tag', getPurchaseKeyItemFunc(xi.ki.IMPERIAL_ARMY_ID_TAG, 1000, 'Imperial Army I.D. Tag') },
-        { 'Remnants Permit',        getPurchaseKeyItemFunc(xi.ki.REMNANTS_PERMIT , 1500, 'Remnants Permit') },
+        { 'Remnants Permit', getPurchaseKeyItemFunc(xi.ki.REMNANTS_PERMIT , 1500, 'Remnants Permit') },
     },
     [xi.zone.CLOISTER_OF_FROST] =
     {
-        { '12 Glacier Crystals',    getPurchaseItemFunc(GetItemIDByName('Glacier_crystal'), 12, 500, '12 Glacier Crystals') },
+        { '12 Glacier Crystals', getPurchaseItemFunc(GetItemIDByName('Glacier_crystal'), 12, 500, '12 Glacier Crystals') },
     },
     [xi.zone.CLOISTER_OF_TREMORS] =
     {
-        { '12 Terra Crystals',     getPurchaseItemFunc(GetItemIDByName('Terra_crystal'), 12, 500, '12 Terra Crystals') },
+        { '12 Terra Crystals', getPurchaseItemFunc(GetItemIDByName('Terra_crystal'), 12, 500, '12 Terra Crystals') },
     },
     [xi.zone.CLOISTER_OF_TIDES] =
     {
-        { '12 Torrent Crystals',   getPurchaseItemFunc(GetItemIDByName('Torrent_crystal'), 12, 500, '12 Torrent Crystals') },
+        { '12 Torrent Crystals', getPurchaseItemFunc(GetItemIDByName('Torrent_crystal'), 12, 500, '12 Torrent Crystals') },
     },
     [xi.zone.CLOISTER_OF_GALES] =
     {
-        { '12 Cyclone Crystals',   getPurchaseItemFunc(GetItemIDByName('Cyclone_crystal'), 12, 500, '12 Cyclone Crystals') },
+        { '12 Cyclone Crystals', getPurchaseItemFunc(GetItemIDByName('Cyclone_crystal'), 12, 500, '12 Cyclone Crystals') },
     },
     [xi.zone.CLOISTER_OF_FLAMES] =
     {
-        { '12 Inferno Crystals'   ,getPurchaseItemFunc(GetItemIDByName('Inferno_crystal'), 12, 500, '12 Inferno Crystals') },
+        { '12 Inferno Crystals' ,getPurchaseItemFunc(GetItemIDByName('Inferno_crystal'), 12, 500, '12 Inferno Crystals') },
     },
     [xi.zone.CLOISTER_OF_STORMS] =
     {
-        { '12 Plasma Crystals',    getPurchaseItemFunc(GetItemIDByName('Plasma_crystals'), 12, 500, '12 Inferno Crystals') },
+        { '12 Plasma Crystals', getPurchaseItemFunc(GetItemIDByName('Plasma_crystals'), 12, 500, '12 Inferno Crystals') },
     },
     [xi.zone.DRAGONS_AERY] =
     {
-        { 'Dragon Meat'   ,        getPurchaseItemFunc(GetItemIDByName('Dragon_meat'),  1,  500, 'Dragon Meat') },
-        { '12 Dragon Meat',        getPurchaseItemFunc(GetItemIDByName('Dragon_meat'), 12, 6000, '12 Dragon Meat') },
+        { 'Dragon Meat' , getPurchaseItemFunc(GetItemIDByName('Dragon_meat'), 1, 500, 'Dragon Meat') },
+        { '12 Dragon Meat', getPurchaseItemFunc(GetItemIDByName('Dragon_meat'), 12, 6000, '12 Dragon Meat') },
     },
     [xi.zone.HALL_OF_THE_GODS] =
     {
-        { '12 Aurora Crystals',    getPurchaseItemFunc(GetItemIDByName('Aurora_crystal'), 12, 500, '12 Aurora Crystals') },
+        { '12 Aurora Crystals', getPurchaseItemFunc(GetItemIDByName('Aurora_crystal'), 12, 500, '12 Aurora Crystals') },
     },
     [xi.zone.THE_SHROUDED_MAW] =
     {
-        { '12 Twilight Crystals',   getPurchaseItemFunc(GetItemIDByName('Twilight_crystals'), 12, 500, '12 Twilight Crystals') },
+        { '12 Twilight Crystals', getPurchaseItemFunc(GetItemIDByName('Twilight_crystals'), 12, 500, '12 Twilight Crystals') },
     },
     [xi.zone.ULEGUERAND_RANGE] =
     {
@@ -503,9 +511,9 @@ xi.mafia.SALES =
     },
     [xi.zone.UPPER_JEUNO] =
     {
-        { 'Goblin Mask' , getPurchaseItemFunc(GetItemIDByName('Goblin_mask') , 1, 1500, 'Goblin Mask')  },
-        { 'Goblin Suit' , getPurchaseItemFunc(GetItemIDByName('Goblin_suit') , 1, 1500, 'Goblin Suit')  },
-        { 'Goblin Drink', getPurchaseItemFunc(GetItemIDByName('Goblin_drink'), 1, 200,  'Goblin Drink') },
+        { 'Goblin Mask' , getPurchaseItemFunc(GetItemIDByName('Goblin_mask') , 1, 1500, 'Goblin Mask') },
+        { 'Goblin Suit' , getPurchaseItemFunc(GetItemIDByName('Goblin_suit') , 1, 1500, 'Goblin Suit') },
+        { 'Goblin Drink', getPurchaseItemFunc(GetItemIDByName('Goblin_drink'), 1, 200, 'Goblin Drink') },
     },
     [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
@@ -528,16 +536,16 @@ xi.mafia.SALES =
     {
 
         { 'Cloudy Orb', getPurchaseItemFunc(GetItemIDByName('Cloudy_orb'), 1, 1500, 'Cloudy Orb') },
-        { 'Sky Orb',    getPurchaseItemFunc(GetItemIDByName('sky_orb'   ), 1, 2000, 'Sky Orb'   ) },
-        { 'Star Orb',   getPurchaseItemFunc(GetItemIDByName('star_orb'  ), 1, 2500, 'Star Orb'  ) },
-        { 'Comet Orb',  getPurchaseItemFunc(GetItemIDByName('Comet_orb' ), 1, 3000, 'Comet Orb' ) },
-        { 'Moon Orb',  getPurchaseItemFunc(GetItemIDByName('Moon_orb'   ), 1, 4000, 'Moon Orb'  ) },
+        { 'Sky Orb', getPurchaseItemFunc(GetItemIDByName('sky_orb'), 1, 2000, 'Sky Orb') },
+        { 'Star Orb', getPurchaseItemFunc(GetItemIDByName('star_orb'), 1, 2500, 'Star Orb') },
+        { 'Comet Orb', getPurchaseItemFunc(GetItemIDByName('Comet_orb'), 1, 3000, 'Comet Orb') },
+        { 'Moon Orb', getPurchaseItemFunc(GetItemIDByName('Moon_orb'), 1, 4000, 'Moon Orb') },
         { 'Page 2 of Orbs', getOpenMenuFunc('peak 2') },
     },
 
     [xi.zone.CASTLE_ZVAHL_BAILEYS] =
     {
-        { 'Relic Timer',  getRelicResetFunc() },
+        { 'Relic Timer', getRelicResetFunc() },
     }
 }
 
@@ -587,7 +595,7 @@ xi.mafia.grumEndItem =
     [28] = { item = xi.item.CERBERUS_MANTLE, points = 100, qnt = 1, itemname = 'Cerberus Mantle' },
 }
 
-function gobhook(player, npc)
+function xi.mafia.gobhook(player, npc)
     local gobid = npc:getID() - 1
     local zoneid = player:getZoneID()
     local plevel = player:getMainLvl()
@@ -616,7 +624,7 @@ function gobhook(player, npc)
         else
             local count = player:getVar('ghooked')
             player:printToPlayer('Already found this one. Your total is ' .. count .. '.')
-            player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('Legion_point')), xi.msg.channel.SAY, 'Ramblix')
+            player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('legion_point')), xi.msg.channel.SAY, 'Ramblix')
             player:customMenu(xi.mafia.standardShop['Main Menu'])
         end
     else
@@ -624,9 +632,9 @@ function gobhook(player, npc)
     end
 end
 
-function gobhook2(player, npc)
-    player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('Legion_point')), xi.msg.channel.SAY, 'Coffer')
-    player:customMenu(mafia.standardShop['Main Menu'])
+function xi.mafia.gobhook2(player, npc)
+    player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('legion_point')), xi.msg.channel.SAY, 'Coffer')
+    player:customMenu(xi.mafia.standardShop['Main Menu'])
 end
 
 return xi.mafia
