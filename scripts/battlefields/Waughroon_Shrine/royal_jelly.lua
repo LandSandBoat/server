@@ -28,62 +28,70 @@ content:addEssentialMobs({ 'Princess_Jelly' })
 content.loot =
 {
     {
+        { itemId = xi.item.GIL,                   weight = 10000, amount = 5000 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                  weight =  9000 },
+        { itemId = xi.item.ARCHERS_RING,          weight =  1000 },
+    },
+
+    {
+        { itemId = xi.item.MARKSMANS_RING,        weight =  4000 },
+        { itemId = xi.item.DUSKY_STAFF,           weight =  1000 },
+        { itemId = xi.item.HIMMEL_STOCK,          weight =  1000 },
+        { itemId = xi.item.SEALED_MACE,           weight =  1000 },
+        { itemId = xi.item.SHIKAR_BOW,            weight =  1000 },
+    },
+
+    {
+        { itemId = xi.item.MANA_RING,             weight =  4000 },
+        { itemId = xi.item.GRUDGE_SWORD,          weight =  1000 },
+        { itemId = xi.item.DE_SAINTRES_AXE,       weight =  1000 },
+        { itemId = xi.item.BUZZARD_TUCK,          weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  1000 },
+    },
+
+    {
+        { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_REFRESH,     weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  1500 },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight =  1000 },
+        { itemId = xi.item.GOLD_BEASTCOIN,        weight =  1000 },
+        { itemId = xi.item.BLACK_ROCK,            weight =   100 },
+        { itemId = xi.item.BLUE_ROCK,             weight =   100 },
+        { itemId = xi.item.GREEN_ROCK,            weight =   100 },
+        { itemId = xi.item.PURPLE_ROCK,           weight =   100 },
+        { itemId = xi.item.RED_ROCK,              weight =   100 },
+        { itemId = xi.item.TRANSLUCENT_ROCK,      weight =   100 },
+        { itemId = xi.item.WHITE_ROCK,            weight =   100 },
+        { itemId = xi.item.YELLOW_ROCK,           weight =   100 },
+        { itemId = xi.item.AMETRINE,              weight =   100 },
+        { itemId = xi.item.BLACK_PEARL,           weight =   100 },
+        { itemId = xi.item.GARNET,                weight =   100 },
+        { itemId = xi.item.GOSHENITE,             weight =   100 },
+        { itemId = xi.item.PEARL,                 weight =   100 },
+        { itemId = xi.item.PERIDOT,               weight =   100 },
+        { itemId = xi.item.SPHENE,                weight =   100 },
+        { itemId = xi.item.TURQUOISE,             weight =   100 },
+        { itemId = xi.item.ROSEWOOD_LOG,          weight =   100 },
+        { itemId = xi.item.OAK_LOG,               weight =   100 },
+        { itemId = xi.item.VILE_ELIXIR,           weight =   100 },
+        { itemId = xi.item.RERAISER,              weight =   100 },
+    },
+
+    {
+        { itemId = xi.item.FIRE_SPIRIT_PACT,      weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_ABSORB_STR,  weight =  1000 },
+        { itemId = xi.item.SCROLL_OF_ERASE,       weight =  2000 },
+        { itemId = xi.item.SCROLL_OF_PHALANX,     weight =  2000 },
+        { itemId = xi.item.STEEL_SHEET,           weight =  1500 },
+        { itemId = xi.item.STEEL_INGOT,           weight =  1500 },
+    },
+
+    {
         quantity = 2,
-        { itemId = xi.item.VIAL_OF_SLIME_OIL, weight = 1000 },
-    },
-
-    {
-        { itemId = xi.item.NONE,         weight = 909 },
-        { itemId = xi.item.ARCHERS_RING, weight =  91 },
-    },
-
-    {
-        { itemId = xi.item.MANA_RING,             weight = 469 },
-        { itemId = xi.item.GRUDGE_SWORD,          weight = 152 },
-        { itemId = xi.item.DE_SAINTRES_AXE,       weight = 120 },
-        { itemId = xi.item.BUZZARD_TUCK,          weight = 118 },
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 106 },
-    },
-
-    {
-        { itemId = xi.item.MARKSMANS_RING, weight = 258 },
-        { itemId = xi.item.DUSKY_STAFF,    weight = 152 },
-        { itemId = xi.item.HIMMEL_STOCK,   weight = 101 },
-        { itemId = xi.item.SEALED_MACE,    weight  = 98 },
-        { itemId = xi.item.SHIKAR_BOW,     weight  = 98 },
-    },
-
-    {
-        { itemId = xi.item.SCROLL_OF_ABSORB_STR, weight = 123 },
-        { itemId = xi.item.SCROLL_OF_ERASE,      weight = 165 },
-        { itemId = xi.item.SCROLL_OF_PHALANX,    weight = 140 },
-        { itemId = xi.item.FIRE_SPIRIT_PACT,     weight = 145 },
-        { itemId = xi.item.STEEL_SHEET,          weight = 229 },
-        { itemId = xi.item.STEEL_INGOT,          weight = 238 },
-    },
-
-    {
-        { itemId = xi.item.SCROLL_OF_REFRESH,     weight = 263 },
-        { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight = 246 },
-        { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 177 },
-        { itemId = xi.item.GOLD_BEASTCOIN,        weight = 182 },
-        { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight = 133 },
-        { itemId = xi.item.PERIDOT,               weight =  27 },
-        { itemId = xi.item.TURQUOISE,             weight =  20 },
-        { itemId = xi.item.BLACK_PEARL,           weight =  15 },
-        { itemId = xi.item.GOSHENITE,             weight =  15 },
-        { itemId = xi.item.SPHENE,                weight =  15 },
-        { itemId = xi.item.AMETRINE,              weight =  10 },
-        { itemId = xi.item.GARNET,                weight =   7 },
-        { itemId = xi.item.BLACK_ROCK,            weight =  12 },
-        { itemId = xi.item.GREEN_ROCK,            weight =   7 },
-        { itemId = xi.item.WHITE_ROCK,            weight =   7 },
-        { itemId = xi.item.BLUE_ROCK,             weight =   2 },
-        { itemId = xi.item.TRANSLUCENT_ROCK,      weight =   2 },
-        { itemId = xi.item.OAK_LOG,               weight =   5 },
-        { itemId = xi.item.ROSEWOOD_LOG,          weight =   5 },
-        { itemId = xi.item.VILE_ELIXIR,           weight =  10 },
-        { itemId = xi.item.RERAISER,              weight =   2 },
+        { itemId = xi.item.VIAL_OF_SLIME_OIL,     weight = 10000 },
     },
 }
 

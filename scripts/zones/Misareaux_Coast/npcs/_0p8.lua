@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP) then
-        player:startEvent(502)
+        player:startOptionalCutscene(502)
     else
         player:messageSpecial(ID.text.DOOR_CLOSED)
     end

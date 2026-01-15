@@ -26,7 +26,7 @@
 #include "luautils.h"
 
 class CAbility;
-
+enum class Recast : uint16_t;
 class CLuaAbility
 {
     CAbility* m_PLuaAbility;
@@ -44,7 +44,7 @@ public:
     uint16 getID();
     auto   getMsg() -> MsgBasic;
     uint16 getRecast();
-    uint16 getRecastID();
+    auto   getRecastID() const -> Recast;
     auto   getRange() -> uint16;
     auto   getRadius() const -> uint8;
     auto   getAOE() const -> uint8;

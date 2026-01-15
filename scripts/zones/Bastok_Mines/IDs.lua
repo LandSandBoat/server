@@ -87,7 +87,7 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_STILL_EGG      = 12863, -- You cannot feed a chocobo that has not hatched yet.
         CHOCOBO_FEEDING_ITEM           = 13946, -- #: %
         COMMON_SENSE_SURVIVAL          = 16051, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE        = 16652, -- There appears to be a tear in the fabric of space...
+        TEAR_IN_FABRIC_OF_SPACE        = 16653, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

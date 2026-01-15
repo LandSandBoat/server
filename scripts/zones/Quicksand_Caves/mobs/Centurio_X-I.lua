@@ -25,15 +25,17 @@ entity.phList =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 2000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 3000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 630)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.SILENCE)
 
     mob:addMod(xi.mod.SPELLINTERRUPT, 25)

@@ -22,54 +22,53 @@ content:addEssentialMobs({ 'Prune', 'Pepper', 'Phoedme' })
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                    weight = 1000, amount = 1500 },
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 1500 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.MYTHRIL_BEASTCOIN,      weight = 200 },
-        { itemId = xi.item.SQUARE_OF_COTTON_CLOTH, weight =  50 },
-        { itemId = xi.item.SQUARE_OF_WOOL_CLOTH,   weight =  50 },
-        { itemId = xi.item.SQUARE_OF_GRASS_CLOTH,  weight =  50 },
-        { itemId = xi.item.SQUARE_OF_LINEN_CLOTH,  weight =  50 },
-        { itemId = xi.item.GUNROMARU,              weight =  75 },
-        { itemId = xi.item.GANKO,                  weight =  75 },
-        { itemId = xi.item.PLATOON_BOW,            weight =  75 },
-        { itemId = xi.item.PLATOON_CUTTER,         weight =  75 },
-        { itemId = xi.item.PLATOON_DISC,           weight =  75 },
-        { itemId = xi.item.PLATOON_EDGE,           weight =  75 },
-        { itemId = xi.item.PLATOON_GUN,            weight =  75 },
-        { itemId = xi.item.PLATOON_MACE,           weight =  75 },
-        { itemId = xi.item.PLATOON_POLE,           weight =  75 },
-        { itemId = xi.item.PLATOON_SPATHA,         weight =  75 },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,      weight =  2000 },
+        { itemId = xi.item.SQUARE_OF_COTTON_CLOTH, weight =   500 },
+        { itemId = xi.item.SQUARE_OF_WOOL_CLOTH,   weight =   500 },
+        { itemId = xi.item.SQUARE_OF_GRASS_CLOTH,  weight =   500 },
+        { itemId = xi.item.SQUARE_OF_LINEN_CLOTH,  weight =   500 },
+        { itemId = xi.item.GUNROMARU,              weight =   750 },
+        { itemId = xi.item.GANKO,                  weight =   750 },
+        { itemId = xi.item.PLATOON_BOW,            weight =   750 },
+        { itemId = xi.item.PLATOON_CUTTER,         weight =   750 },
+        { itemId = xi.item.PLATOON_DISC,           weight =   750 },
+        { itemId = xi.item.PLATOON_EDGE,           weight =   750 },
+        { itemId = xi.item.PLATOON_GUN,            weight =   750 },
+        { itemId = xi.item.PLATOON_MACE,           weight =   750 },
+        { itemId = xi.item.PLATOON_POLE,           weight =   750 },
+        { itemId = xi.item.PLATOON_SPATHA,         weight =   750 },
     },
 
     {
-        { itemId = xi.item.VIAL_OF_FIEND_BLOOD,    weight = 1000 },
+        { itemId = xi.item.VIAL_OF_FIEND_BLOOD,    weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 400 },
-        { itemId = xi.item.VIAL_OF_FIEND_BLOOD,    weight = 200 },
-        { itemId = xi.item.JAR_OF_TOAD_OIL,        weight = 200 },
-        { itemId = xi.item.VIAL_OF_BEASTMAN_BLOOD, weight = 200 },
-
+        { itemId = xi.item.NONE,                   weight =  4000 },
+        { itemId = xi.item.VIAL_OF_FIEND_BLOOD,    weight =  2000 },
+        { itemId = xi.item.JAR_OF_TOAD_OIL,        weight =  2000 },
+        { itemId = xi.item.VIAL_OF_BEASTMAN_BLOOD, weight =  2000 },
     },
 
     {
-        { itemId = xi.item.POTION,                 weight = 350 },
-        { itemId = xi.item.POTION_P1,              weight = 350 },
-        { itemId = xi.item.AIR_SPIRIT_PACT,        weight = 250 },
-        { itemId = xi.item.SCROLL_OF_DRAIN,        weight =  50 },
+        { itemId = xi.item.POTION,                 weight =  3500 },
+        { itemId = xi.item.POTION_P1,              weight =  3500 },
+        { itemId = xi.item.AIR_SPIRIT_PACT,        weight =  2500 },
+        { itemId = xi.item.SCROLL_OF_DRAIN,        weight =   500 },
     },
 
     {
-        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 1000 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 950 },
-        { itemId = xi.item.MANNEQUIN_HEAD,         weight =  50 },
+        { itemId = xi.item.NONE,                   weight =  9500 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight =   500 },
     },
 }
 

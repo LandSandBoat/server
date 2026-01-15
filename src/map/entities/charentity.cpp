@@ -66,6 +66,7 @@
 #include "blue_spell.h"
 #include "conquest_system.h"
 #include "enums/key_items.h"
+#include "enums/recast.h"
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
@@ -549,6 +550,18 @@ bool CCharEntity::isAway() const
 bool CCharEntity::hasAutoTargetEnabled() const
 {
     return !playerConfig.AutoTargetOffFlg;
+}
+
+auto CCharEntity::isCrafting() const -> bool
+{
+    return animation == ANIMATION_SYNTH || (CraftContainer && CraftContainer->getItemsCount() > 0);
+}
+
+auto CCharEntity::isFishing() const -> bool
+{
+    return (animation >= ANIMATION_FISHING_FISH && animation <= ANIMATION_FISHING_STOP) ||
+           animation == ANIMATION_FISHING_START_OLD ||
+           animation == ANIMATION_FISHING_START;
 }
 
 void CCharEntity::setPetZoningInfo()
@@ -1654,7 +1667,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
         }
 
-        auto* charge         = ability::GetCharge(this, PAbility->getRecastId());
+        auto* charge         = ability::GetCharge(this, static_cast<uint16>(PAbility->getRecastId()));
         auto  baseChargeTime = 0ns; // this can be reduced with merits/job point gifts. NOT the same as Recast- gear (so far...)
 
         if (charge && PAbility->getID() != ABILITY_SIC)
@@ -1662,11 +1675,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             auto chargesUsed = timer::count_seconds(PAbility->getRecastTime()); // charge cost is stored in the recast...
 
             //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
-            if (PAbility->getRecastId() == 102) // Sic/Ready recast ID
+            if (PAbility->getRecastId() == Recast::Sic) // Sic/Ready recast ID
             {
                 recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(MERIT_SIC_RECAST, this));
             }
-            else if (PAbility->getRecastId() == 231) // Stratagems recast ID
+            else if (PAbility->getRecastId() == Recast::Strategems)
             {
                 recastReduction += std::chrono::seconds(this->getMod(Mod::STRATAGEM_RECAST));
             }
@@ -1680,7 +1693,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = PAbility->getRecastTime() - recastReduction;
         }
 
-        if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
+        if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == Recast::Strategems)
         {
             if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
             {
@@ -1688,7 +1701,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 baseChargeTime = 0s;
             }
         }
-        else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
+        else if (PAbility->getRecastId() == Recast::BloodPactRage || PAbility->getRecastId() == Recast::BloodPactWard)
         {
             uint16 favorReduction          = 0;
             uint16 bloodPact_I_Reduction   = std::min<int16>(getMod(Mod::BP_DELAY), 15);
@@ -1714,8 +1727,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // Check paralysis and consume recast for non-SP abilities
         if (battleutils::IsParalyzed(this))
         {
-            // SP abilities (recastId == 0) don't consume recast when paralyzed
-            if (PAbility->getRecastId() != 0)
+            // SP abilities don't consume recast when paralyzed
+            const auto recastId = PAbility->getRecastId();
+            if (recastId != Recast::Special && recastId != Recast::Special2)
             {
                 charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
             }
@@ -2478,7 +2492,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         if (PItem->getCurrentCharges() != 0)
         {
             // add recast timer to Recast List from any bag
-            this->PRecastContainer->Add(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID(), PItem->getReuseTime());
+            this->PRecastContainer->Add(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID()), PItem->getReuseTime());
         }
     }
     else // unlock all items except equipment
@@ -2521,7 +2535,17 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
     }
     else
     {
-        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ATTACK_TARGET);
+        // Check if target is a BEHAVIOR_NO_ASSIST mob with player allegiance
+        auto* PEntity = GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+        if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == ALLEGIANCE_TYPE::PLAYER &&
+            (static_cast<CMobEntity*>(PEntity)->m_Behavior & BEHAVIOR_NO_ASSIST))
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ON_THAT_TARG);
+        }
+        else
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CANNOT_ATTACK_TARGET);
+        }
     }
     return nullptr;
 }

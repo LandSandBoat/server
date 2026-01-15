@@ -25,45 +25,45 @@ content:addEssentialMobs({ 'Heavy_Metal_Crab', 'Metal_Crab' })
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                     weight = 1000, amount = 1500 },
+        { itemId = xi.item.GIL,                     weight = 10000, amount = 1500 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.MYTHRIL_BEASTCOIN,       weight = 200 },
-        { itemId = xi.item.BRONZE_SHEET,            weight = 100 },
-        { itemId = xi.item.BRONZE_INGOT,            weight = 100 },
-        { itemId = xi.item.PLATOON_CESTI,           weight =  75 },
-        { itemId = xi.item.PLATOON_DAGGER,          weight =  75 },
-        { itemId = xi.item.PLATOON_AXE,             weight =  75 },
-        { itemId = xi.item.PLATOON_BOW,             weight =  75 },
-        { itemId = xi.item.PLATOON_LANCE,           weight =  75 },
-        { itemId = xi.item.PLATOON_SWORD,           weight =  75 },
-        { itemId = xi.item.PLATOON_MACE,            weight =  75 },
-        { itemId = xi.item.PLATOON_ZAGHNAL,         weight =  75 },
+        { itemId = xi.item.MYTHRIL_BEASTCOIN,       weight =  2000 },
+        { itemId = xi.item.BRONZE_SHEET,            weight =  1000 },
+        { itemId = xi.item.BRONZE_INGOT,            weight =  1000 },
+        { itemId = xi.item.PLATOON_CESTI,           weight =   750 },
+        { itemId = xi.item.PLATOON_DAGGER,          weight =   750 },
+        { itemId = xi.item.PLATOON_AXE,             weight =   750 },
+        { itemId = xi.item.PLATOON_BOW,             weight =   750 },
+        { itemId = xi.item.PLATOON_LANCE,           weight =   750 },
+        { itemId = xi.item.PLATOON_SWORD,           weight =   750 },
+        { itemId = xi.item.PLATOON_MACE,            weight =   750 },
+        { itemId = xi.item.PLATOON_ZAGHNAL,         weight =   750 },
     },
 
     {
-        { itemId = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 1000 },
+        { itemId = xi.item.SLICE_OF_LAND_CRAB_MEAT, weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                    weight = 500 },
-        { itemId = xi.item.CRAB_SHELL,              weight = 500 },
+        { itemId = xi.item.NONE,                    weight =  5000 },
+        { itemId = xi.item.CRAB_SHELL,              weight =  5000 },
     },
 
     {
-        { itemId = xi.item.BEETLE_QUIVER,           weight = 500 },
-        { itemId = xi.item.JUG_OF_FISH_OIL_BROTH,   weight = 500 },
+        { itemId = xi.item.BEETLE_QUIVER,           weight =  5000 },
+        { itemId = xi.item.JUG_OF_FISH_OIL_BROTH,   weight =  5000 },
     },
 
     {
-        { itemId = xi.item.MANNEQUIN_BODY,          weight = 1000 },
+        { itemId = xi.item.MANNEQUIN_BODY,          weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                    weight = 950 },
-        { itemId = xi.item.MANNEQUIN_HANDS,         weight =  50 },
+        { itemId = xi.item.NONE,                    weight =  9500 },
+        { itemId = xi.item.MANNEQUIN_HANDS,         weight =   500 },
     },
 
 }

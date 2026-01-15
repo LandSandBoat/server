@@ -62,6 +62,38 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(259200, 432000))
+
+    mob:setCarefulPathing(true)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobFight = function(mob, target)
+    -- Ash Dragon will not allow you to pull him through either tunnel exit
+    local drawInTable =
+    {
+        conditions =
+        {
+            target:getZPos() < 66,
+            target:getXPos() < -299
+        },
+        position = mob:getPos(),
+        wait = 5,
+    }
+
+    for _, condition in ipairs(drawInTable.conditions) do
+        if condition then
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+            utils.drawIn(target, drawInTable)
+            break
+        else
+            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+        end
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

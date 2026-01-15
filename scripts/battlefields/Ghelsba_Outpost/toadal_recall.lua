@@ -27,57 +27,57 @@ content:addEssentialMobs({ 'Toadpillow', 'Toadsquab', 'Toadbolster', 'Toadcushio
 content.loot =
 {
     {
-        { itemId = xi.item.GIL,                    weight = 1000, amount = 4000 },
+        { itemId = xi.item.GIL,                    weight = 10000, amount = 4000 },
     },
 
     {
-        { itemId = xi.item.KING_TRUFFLE,           weight = 250 },
-        { itemId = xi.item.WOOZYSHROOM,            weight = 250 },
-        { itemId = xi.item.DANCESHROOM,            weight = 250 },
-        { itemId = xi.item.SLEEPSHROOM,            weight = 250 },
+        { itemId = xi.item.KING_TRUFFLE,           weight =  2500 },
+        { itemId = xi.item.WOOZYSHROOM,            weight =  2500 },
+        { itemId = xi.item.DANCESHROOM,            weight =  2500 },
+        { itemId = xi.item.SLEEPSHROOM,            weight =  2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.MERCENARYS_TARGE,       weight = 250 },
-        { itemId = xi.item.BEATERS_ASPIS,          weight = 250 },
-        { itemId = xi.item.PILFERERS_ASPIS,        weight = 250 },
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.MERCENARYS_TARGE,       weight =  2500 },
+        { itemId = xi.item.BEATERS_ASPIS,          weight =  2500 },
+        { itemId = xi.item.PILFERERS_ASPIS,        weight =  2500 },
     },
 
         {
-        { itemId = xi.item.NONE,                   weight = 250 },
-        { itemId = xi.item.TRIMMERS_MANTLE,        weight = 250 },
-        { itemId = xi.item.GENIN_MANTLE,           weight = 250 },
-        { itemId = xi.item.WARLOCKS_MANTLE,        weight = 250 },
+        { itemId = xi.item.NONE,                   weight =  2500 },
+        { itemId = xi.item.TRIMMERS_MANTLE,        weight =  2500 },
+        { itemId = xi.item.GENIN_MANTLE,           weight =  2500 },
+        { itemId = xi.item.WARLOCKS_MANTLE,        weight =  2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 800 },
-        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =  20 },
-        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =  20 },
-        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =  20 },
-        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =  20 },
-        { itemId = xi.item.IRON_INGOT,             weight =  20 },
-        { itemId = xi.item.STEEL_INGOT,            weight =  20 },
-        { itemId = xi.item.SILVER_INGOT,           weight =  20 },
-        { itemId = xi.item.MYTHRIL_INGOT,          weight =  20 },
-        { itemId = xi.item.CHESTNUT_LOG,           weight =  20 },
-        { itemId = xi.item.ELM_LOG,                weight =  20 },
+        { itemId = xi.item.NONE,                   weight =  8000 },
+        { itemId = xi.item.CHUNK_OF_IRON_ORE,      weight =   200 },
+        { itemId = xi.item.CHUNK_OF_SILVER_ORE,    weight =   200 },
+        { itemId = xi.item.CHUNK_OF_MYTHRIL_ORE,   weight =   200 },
+        { itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE, weight =   200 },
+        { itemId = xi.item.IRON_INGOT,             weight =   200 },
+        { itemId = xi.item.STEEL_INGOT,            weight =   200 },
+        { itemId = xi.item.SILVER_INGOT,           weight =   200 },
+        { itemId = xi.item.MYTHRIL_INGOT,          weight =   200 },
+        { itemId = xi.item.CHESTNUT_LOG,           weight =   200 },
+        { itemId = xi.item.ELM_LOG,                weight =   200 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 500 },
-        { itemId = xi.item.KING_TRUFFLE,           weight = 125 },
-        { itemId = xi.item.WOOZYSHROOM,            weight = 125 },
-        { itemId = xi.item.DANCESHROOM,            weight = 125 },
-        { itemId = xi.item.SLEEPSHROOM,            weight = 125 },
+        { itemId = xi.item.NONE,                   weight =  5000 },
+        { itemId = xi.item.KING_TRUFFLE,           weight =  1250 },
+        { itemId = xi.item.WOOZYSHROOM,            weight =  1250 },
+        { itemId = xi.item.DANCESHROOM,            weight =  1250 },
+        { itemId = xi.item.SLEEPSHROOM,            weight =  1250 },
     },
 
     {
-        { itemId = xi.item.NONE,                   weight = 100 },
-        { itemId = xi.item.MANNEQUIN_HEAD,         weight = 300 },
-        { itemId = xi.item.MANNEQUIN_BODY,         weight = 300 },
-        { itemId = xi.item.MANNEQUIN_HANDS,        weight = 300 },
+        { itemId = xi.item.NONE,                   weight =  1000 },
+        { itemId = xi.item.MANNEQUIN_HEAD,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_BODY,         weight =  3000 },
+        { itemId = xi.item.MANNEQUIN_HANDS,        weight =  3000 },
     },
 }
 

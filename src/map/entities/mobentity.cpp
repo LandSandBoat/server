@@ -27,7 +27,6 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/mobskill_state.h"
-#include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
 #include "common/timer.h"
@@ -49,6 +48,7 @@
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
 #include "roe.h"
+#include "spawn_slot.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "utils/battleutils.h"
@@ -95,6 +95,7 @@ constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between spe
 
 CMobEntity::CMobEntity()
 : m_AllowRespawn(false)
+, m_CanSpawn(false)
 , m_RespawnTime(5min)
 , m_DropItemTime(0)
 , m_DropID(0)
@@ -145,7 +146,6 @@ CMobEntity::CMobEntity()
 , m_Pool(0)
 , m_flags(0)
 , m_name_prefix(0)
-, m_spawnGroup(nullptr)
 , m_unk0(0)
 , m_unk1(8)
 , m_unk2(0)
@@ -178,6 +178,11 @@ CMobEntity::~CMobEntity()
     destroy(m_Weapons[SLOT_AMMO]);
     destroy(PEnmityContainer);
     destroy(SpellContainer);
+
+    if (spawnSlot)
+    {
+        spawnSlot->RemoveMob(this);
+    }
 
     if (PParty)
     {
@@ -223,6 +228,35 @@ void CMobEntity::SetDespawnTime(timer::duration _duration)
     {
         m_DespawnTimer = timer::time_point::min();
     }
+}
+
+void CMobEntity::SetSpawnSlot(SpawnSlot* sharedSpawn)
+{
+    this->spawnSlot = sharedSpawn;
+}
+
+SpawnSlot* CMobEntity::GetSpawnSlot()
+{
+    return this->spawnSlot;
+}
+
+bool CMobEntity::TrySpawn()
+{
+    if (m_AllowRespawn && !PAI->IsSpawned())
+    {
+        if (spawnSlot)
+        {
+            spawnSlot->TrySpawn();
+            return false;
+        }
+
+        if (m_CanSpawn)
+        {
+            Spawn();
+            return true;
+        }
+    }
+    return false;
 }
 
 uint32 CMobEntity::GetRandomGil()
@@ -432,27 +466,27 @@ bool CMobEntity::CanBeNeutral() const
     return !(m_Type & MOBTYPE_NOTORIOUS);
 }
 
-uint16 CMobEntity::TPUseChance()
+bool CMobEntity::shouldUseTPMove(uint16 tpThreshold)
 {
     const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
 
     if (health.tp < 1000 || MobSkillList.empty() || !static_cast<CMobController*>(PAI->GetController())->IsWeaponSkillEnabled())
     {
-        return 0;
+        return false;
     }
 
-    if (health.tp == 3000 || (GetHPP() <= 25 && health.tp >= 1000))
+    if (health.tp == 3000 || (GetHPP() < 25 && health.tp >= 1000))
     {
-        return 10000;
+        return true;
     }
 
     // mobs use three mob skills in a row under Meikyo Shisui
     if (StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) && GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
     {
-        return 10000;
+        return true;
     }
 
-    return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
+    return health.tp >= tpThreshold;
 }
 
 void CMobEntity::setMobMod(uint16 type, int16 value)
@@ -602,30 +636,20 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !isCharmed)
+    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
     {
         return true;
     }
 
     if (targetFlags & TARGET_NPC)
     {
-        if (allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NOHELP) && !isCharmed)
+        if (allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
         {
             return true;
         }
     }
 
     return false;
-}
-
-bool CMobEntity::CanSpawnFromGroup()
-{
-    if (!m_spawnGroup)
-    {
-        return true;
-    }
-
-    return m_spawnGroup->isInSpawnPool(this->targid);
 }
 
 void CMobEntity::Spawn()
@@ -1200,28 +1224,6 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
-
-    if (m_spawnGroup)
-    {
-        auto replacementTargID = m_spawnGroup->removeAndReplaceWithRandomMember(this->targid);
-        if (replacementTargID != this->targid) // Respawn normally if we got selected again, otherwise poke the replacement to do so
-        {
-            auto PMob = this->loc.zone->GetEntity(replacementTargID);
-            if (PMob && PMob->PAI)
-            {
-                // Check if replacement can switch into respawn state with our current respawn time
-                // if Internal_Respawn returns true, the mob will switch into respawn state with m_RespawnTime (should it be the target mob's respawn time?)
-                if (!PMob->PAI->Internal_Respawn(m_RespawnTime))
-                {
-                    // If they're already in the respawn state...
-                    if (PMob->PAI->IsCurrentState<CRespawnState>())
-                    {
-                        PMob->PAI->GetCurrentState()->ResetEntryTime(); // Reset their despawn time
-                    }
-                }
-            }
-        }
-    }
 
     PAI->Internal_Respawn(m_RespawnTime);
     luautils::OnMobDespawn(this);

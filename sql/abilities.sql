@@ -187,7 +187,7 @@ INSERT INTO `abilities` VALUES (167,'shikikoyo',12,75,2,300,136,452,0,152,2000,0
 INSERT INTO `abilities` VALUES (168,'blade_bash',12,75,4,180,137,110,0,202,2000,0,3,3,0,0,1,900,2754,1,'TOAU');
 INSERT INTO `abilities` VALUES (169,'deep_breathing',14,75,1,300,164,0,0,153,2000,0,6,0,0,0,0,0,2880,1,'TOAU');
 INSERT INTO `abilities` VALUES (170,'angon',14,75,4,180,165,127,0,245,2000,0,3,10,0,0,1,600,2882,1,'TOAU');
-INSERT INTO `abilities` VALUES (171,'sange',13,75,1,300,145,0,0,23,2000,0,6,0,0,0,1,0,2816,1,'TOAU');
+INSERT INTO `abilities` VALUES (171,'sange',13,75,1,180,145,0,0,23,2000,0,6,0,0,0,1,0,2816,1,'TOAU');
 INSERT INTO `abilities` VALUES (172,'blood_pact_ward',15,1,1,60,174,0,0,0,2000,0,6,20,0,0,1,300,0,256,NULL); -- new windower states 969
 INSERT INTO `abilities` VALUES (173,'hasso',12,25,1,60,138,0,0,163,2000,0,6,0,0,0,1,300,0,0,'TOAU');
 INSERT INTO `abilities` VALUES (174,'seigan',12,35,1,60,139,0,0,164,2000,0,6,0,0,0,1,300,0,0,'TOAU');
@@ -240,7 +240,7 @@ INSERT INTO `abilities` VALUES (220,'alacrity',20,25,1,1,231,0,0,178,2000,0,6,0,
 INSERT INTO `abilities` VALUES (221,'ebullience',20,55,1,1,231,0,0,179,2000,0,6,0,0,0,1,80,0,32,'WOTG');
 INSERT INTO `abilities` VALUES (222,'manifestation',20,40,1,1,231,0,0,180,2000,0,6,0,0,0,1,80,0,32,'WOTG');
 INSERT INTO `abilities` VALUES (223,'stratagems',20,10,1,0,233,0,0,0,2000,0,6,0,0,0,0,0,0,0,'WOTG');
-INSERT INTO `abilities` VALUES (224,'velocity_shot',11,45,1,60,129,0,0,186,2000,0,6,0,0,0,1,300,0,0,'WOTG');
+INSERT INTO `abilities` VALUES (224,'velocity_shot',11,45,1,60,129,0,0,186,2000,0,6,0,0,0,1,300,0,4,'WOTG');
 INSERT INTO `abilities` VALUES (225,'snarl',9,45,257,30,107,528,0,87,2000,0,6,10,0,0,0,0,0,192,'WOTG');
 INSERT INTO `abilities` VALUES (226,'retaliation',1,60,1,180,8,0,0,185,2000,0,6,0,0,0,1,80,0,0,'WOTG');
 INSERT INTO `abilities` VALUES (227,'footwork',2,65,1,300,21,0,0,197,2000,0,6,0,0,0,1,80,0,0,'WOTG');

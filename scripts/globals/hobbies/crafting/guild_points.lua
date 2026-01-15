@@ -11,7 +11,7 @@ xi.crafting = xi.crafting or {}
 -- Data
 -----------------------------------
 ---@class hqCrystals : { id: xi.item, cost: integer }
-local hqCrystals =
+xi.crafting.hqCrystals =
 {
     [0] = { id = xi.item.ROBBER_RIG,       cost = 1500 }, -- Robber Rig is located in category 3. Not a typo.
     [1] = { id = xi.item.INFERNO_CRYSTAL,  cost =  200 },
@@ -20,11 +20,11 @@ local hqCrystals =
     [4] = { id = xi.item.TERRA_CRYSTAL,    cost =  200 },
     [5] = { id = xi.item.PLASMA_CRYSTAL,   cost =  200 },
     [6] = { id = xi.item.TORRENT_CRYSTAL,  cost =  200 },
-    [7] = { id = xi.item.AURORA_CRYSTAL,   cost =  500 },
-    [8] = { id = xi.item.TWILIGHT_CRYSTAL, cost =  500 },
+    [7] = { id = xi.item.AURORA_CRYSTAL,   cost =  200 },
+    [8] = { id = xi.item.TWILIGHT_CRYSTAL, cost =  200 },
 }
 
-local guildKeyItemTable =
+xi.crafting.guildKeyItemTable =
 {
     [xi.guild.FISHING] =
     {
@@ -100,7 +100,7 @@ local guildKeyItemTable =
     },
 }
 
-local guildItemTable =
+xi.crafting.guildItemTable =
 {
     [xi.guild.FISHING] =
     {
@@ -251,7 +251,7 @@ xi.crafting.guildPointOnTrigger = function(player, csid, guildId)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
     local rank                    = player:getSkillRank(xi.crafting.guildTable[guildId][1])
     local skillCap                = (rank + 1) * 10
-    local keyItemBits             = calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId])
+    local keyItemBits             = calculateKeyItemBitmask(player, rank, xi.crafting.guildKeyItemTable[guildId])
 
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, skillCap, 0, keyItemBits, 0)
 end
@@ -264,7 +264,7 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
     local rank               = player:getSkillRank(xi.crafting.guildTable[guildId][1])
     local skillCap           = (rank + 1) * 10
     local currency           = xi.crafting.guildTable[guildId][2]
-    local keyItems           = guildKeyItemTable[guildId]
+    local keyItems           = xi.crafting.guildKeyItemTable[guildId]
 
     -- GP Key Item Option.
     if category == 3 then
@@ -279,14 +279,14 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
             end
         end
 
-        player:updateEvent(keyItem.id, 0, keyItem.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+        player:updateEvent(keyItem.id, 0, keyItem.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, xi.crafting.guildKeyItemTable[guildId]), 1)
         -- TODO: Revisit parameter 2. Smithing guild returns 0. Guild ID would be 2.
         -- TODO: Revisit parameter 8. Theory: 1 = successful purchuase. 0 = failed purchuase.
 
     -- GP Item Option.
     elseif category == 2 or category == 1 then
         local index    = bit.band(option, 3)
-        local items    = guildItemTable[guildId]
+        local items    = xi.crafting.guildItemTable[guildId]
         local item     = items[(category - 1) * 4 + index]
         local quantity = math.min(bit.rshift(option, 9), 12)
         local cost     = quantity * item.cost
@@ -311,7 +311,7 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
             end
         end
 
-        player:updateEvent(player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, item.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+        player:updateEvent(player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, item.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, xi.crafting.guildKeyItemTable[guildId]), 1)
         -- Todo: Revisit parameter 1 and 2. Theory: Parameter 1 will be item ID. Parameter 2 will be 0 or 1 (0 like KIs or quantity like with crystals).
         -- TODO: Revisit parameter 8. Theory: 1 = successful purchuase. 0 = failed purchuase.
 
@@ -320,7 +320,7 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
         category == 0 and
         option ~= utils.EVENT_CANCELLED_OPTION
     then
-        local crystal  = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
+        local crystal  = xi.crafting.hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
         local cost     = quantity * crystal.cost
 
@@ -335,7 +335,7 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
             end
         end
 
-        player:updateEvent(crystal.id, quantity, crystal.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, guildKeyItemTable[guildId]), 1)
+        player:updateEvent(crystal.id, quantity, crystal.cost, remainingPoints, skillCap, 0, calculateKeyItemBitmask(player, rank, xi.crafting.guildKeyItemTable[guildId]), 1)
         -- TODO: Revisit parameter 8. Theory: 1 = successful purchuase. 0 = failed purchuase.
     end
 end

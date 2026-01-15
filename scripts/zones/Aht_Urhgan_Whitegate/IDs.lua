@@ -47,6 +47,8 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         ASSAULT_FAILED                = 5673,  -- Your mission was not successful; however, the Empire recognizes your contribution and has awarded you Assault Points.
         AUTOMATON_RENAME              = 5850,  -- Your automaton has a new name.
         YOU_CAN_BECOME_PUP            = 5853,  -- You can now become a puppetmaster!
+        YOU_LOST_YOUR_ANIMATOR        = 5871,  -- What? You lost your <item>? Well... I suppose I can provide you with a spare if you pay me 10000 gil.
+        YOU_BETTER_NOT_LOSE_IT_AGAIN  = 5872,  -- You better not lose it again.
         PROMOTION_SERGEANT_MAJOR      = 6177,  -- <player> has been promoted to Sergeant Major!
         NYZUL_FAIL                    = 6194,  -- Your mission was not successful. I regret to inform you that the Imperial Army does not officially recognize your efforts within this Assault area.
         LANCE_CORPORAL                = 6684,  -- <player> has been promoted to Lance Corporal!
@@ -90,7 +92,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         SINGLE_TALLY                  = 13185, -- A single tally seal is proof positive of your prowess as an adventurer. You shan't be requiring another.
         MASTER_FORBID                 = 13186, -- Ah, please forgive me. My master, Sanraku, whom I respect and revere, has forbidden me from engaging in conversation, as it will disrupt my attunement with nature.
         RETRIEVE_DIALOG_ID            = 13557, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 14348, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 14349, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

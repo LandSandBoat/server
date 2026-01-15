@@ -1,19 +1,17 @@
 -----------------------------------
 -- Spell: Auroral Drape
--- Inflicts Silence and Blind on enemies within area of effect
+-- Silences and blinds enemies within range.
 -- Spell cost: 51 MP
--- Monster Type: Luminian
+-- Monster Type: Empty
 -- Spell Type: Magical (Wind)
 -- Blue Magic Points: 4
--- Stat Bonus: INT+3, CHR-2
+-- Stat Bonus: INT+3 CHR-2
 -- Level: 84
--- Casting Time: 3 seconds
--- Recast Time: 30 seconds
+-- Casting Time: Casting Time: 4 seconds
+-- Recast Time: Recast Time: 60 seconds
 -- Duration: 40-60 seconds
------------------------------------
+-- Magic Bursts on: None
 -- Combos: Fast Cast
------------------------------------
--- Notes: AoE Silence + Blind. Blind effect is -60 Accuracy (stronger than Blind II).
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
@@ -23,23 +21,28 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local duration = 50  -- 40-60s, using 50s as midpoint
-    local resist = applyResistanceEffect(caster, target, spell, { xi.element.WIND }, xi.skill.BLUE_MAGIC)
+    local params = {}
+    params.ecosystem       = xi.ecosystem.EMPTY
+    params.effect          = xi.effect.SILENCE
+    params.power           = 1
+    params.tick            = 0
+    params.duration        = 60
+    params.resistThreshold = 0.50
+    params.isGaze          = false
+    params.isConal         = false
 
-    if resist > 0.125 then
-        local silenceApplied = target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration * resist)
-        local blindApplied = target:addStatusEffect(xi.effect.BLINDNESS, 60, 0, duration * resist)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
 
-        if silenceApplied or blindApplied then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        end
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-    end
+    -- Handle status effects.
+    -- Not sure if there's a better way to implement both status effects
+    local effectTable =
+    {
+        [1] = { xi.effect.BIND, 25, 0, 40 + math.floor(resist * 20) },
+    }
 
-    return xi.effect.SILENCE
+    xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)
+
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params)
 end
 
 return spellObject

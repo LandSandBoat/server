@@ -706,11 +706,15 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
         if (isNM)
         {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.NM_HP_MULTIPLIER"));
+            auto hpMultiplierNM = settings::get<float>("map.NM_HP_MULTIPLIER");
+            hpMultiplierNM      = (hpMultiplierNM >= 0.1f && hpMultiplierNM <= 2.0f) ? hpMultiplierNM : 1.0f;
+            PMob->health.maxhp  = (int32)(PMob->health.maxhp * hpMultiplierNM);
         }
         else
         {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.MOB_HP_MULTIPLIER"));
+            auto hpMultiplierMob = settings::get<float>("map.MOB_HP_MULTIPLIER");
+            hpMultiplierMob      = (hpMultiplierMob >= 0.1f && hpMultiplierMob <= 2.0f) ? hpMultiplierMob : 1.0f;
+            PMob->health.maxhp   = (int32)(PMob->health.maxhp * hpMultiplierMob);
         }
 
         bool hasMp = false;
@@ -772,11 +776,15 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
             if (isNM)
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.NM_MP_MULTIPLIER"));
+                auto mpMultiplierNM = settings::get<float>("map.NM_MP_MULTIPLIER");
+                mpMultiplierNM      = (mpMultiplierNM >= 0.1f && mpMultiplierNM <= 2.0f) ? mpMultiplierNM : 1.0f;
+                PMob->health.maxmp  = (int32)(PMob->health.maxmp * mpMultiplierNM);
             }
             else
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.MOB_MP_MULTIPLIER"));
+                auto mpMultiplierMob = settings::get<float>("map.MOB_MP_MULTIPLIER");
+                mpMultiplierMob      = (mpMultiplierMob >= 0.1f && mpMultiplierMob <= 2.0f) ? mpMultiplierMob : 1.0f;
+                PMob->health.maxmp   = (int32)(PMob->health.maxmp * mpMultiplierMob);
             }
         }
     }
@@ -858,6 +866,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     PMob->stats.CHR = fCHR + mCHR + sCHR;
 
     auto statMultiplier = isNM ? settings::get<float>("map.NM_STAT_MULTIPLIER") : settings::get<float>("map.MOB_STAT_MULTIPLIER");
+    statMultiplier      = (statMultiplier >= 0.1f && statMultiplier <= 2.0f) ? statMultiplier : 1.0f;
     PMob->stats.STR     = (uint16)(PMob->stats.STR * statMultiplier);
     PMob->stats.DEX     = (uint16)(PMob->stats.DEX * statMultiplier);
     PMob->stats.VIT     = (uint16)(PMob->stats.VIT * statMultiplier);
@@ -1428,8 +1437,6 @@ void InitializeMob(CMobEntity* PMob)
     // add special mob mods
     PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
     PMob->defaultMobMod(MOBMOD_LINK_RADIUS, 10);
-    PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE,
-                        92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
     PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
     PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
     PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
@@ -1685,7 +1692,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
                                        "minLevel, maxLevel, modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
-                                       "ecosystemID, mobradius, speed, STR, "
+                                       "ecosystemID, speed, STR, "
                                        "DEX, VIT, AGI, `INT`, "
                                        "MND, CHR, EVA, DEF, "
                                        "ATT, ACC, slash_sdt, pierce_sdt, "
@@ -1736,12 +1743,11 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
 
-        PMob->m_Behavior    = rset->get<uint16>("behavior");
-        PMob->m_Link        = rset->get<uint8>("links");
-        PMob->m_Type        = rset->get<uint8>("mobType");
-        PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
-        PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
-        PMob->m_ModelRadius = rset->get<float>("mobradius");
+        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Link      = rset->get<uint8>("links");
+        PMob->m_Type      = rset->get<uint8>("mobType");
+        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_EcoSystem = rset->get<ECOSYSTEM>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
         PMob->animationSpeed = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined animationSpeed
@@ -1862,7 +1868,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
                                        "minLevel, maxLevel, modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
-                                       "ecosystemID, mobradius, speed, STR, "
+                                       "ecosystemID, speed, STR, "
                                        "DEX, VIT, AGI, `INT`, "
                                        "MND, CHR, EVA, DEF, "
                                        "ATT, ACC, slash_sdt, pierce_sdt, "
@@ -1910,12 +1916,11 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
 
-        PMob->m_Behavior    = rset->get<uint16>("behavior");
-        PMob->m_Link        = rset->get<uint8>("links");
-        PMob->m_Type        = rset->get<uint8>("mobType");
-        PMob->m_Immunity    = rset->get<IMMUNITY>("immunity");
-        PMob->m_EcoSystem   = rset->get<ECOSYSTEM>("ecosystemID");
-        PMob->m_ModelRadius = rset->get<float>("mobradius");
+        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Link      = rset->get<uint8>("links");
+        PMob->m_Type      = rset->get<uint8>("mobType");
+        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_EcoSystem = rset->get<ECOSYSTEM>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
         PMob->animationSpeed = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined animationSpeed

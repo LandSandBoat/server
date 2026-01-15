@@ -6,13 +6,22 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SLEEP_MEVA, 1000)
-    mob:setMod(xi.mod.SILENCE_MEVA, 900)
-    mob:setMod(xi.mod.LULLABY_MEVA, 700)
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 4)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 7)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.BLIZZARD_II,
+        xi.magic.spell.SLOWGA,
+        xi.magic.spell.HASTEGA,
+    }
+
+    return spellList[math.random(1, #spellList)]
 end
 
 return entity

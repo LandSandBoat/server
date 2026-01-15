@@ -520,6 +520,7 @@ xi.darkixion.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
 
     mob:setMobMod(xi.mobMod.NO_REST, 10)
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 end
 
 -- either turn in a random direction, or turn away from skillTarget to use acheron kick
@@ -688,9 +689,8 @@ end
 -- Used by Trample mechanics
 local getEnemiesInRange = function(mob, distance)
     local targetTypeFlag = xi.targetType.SELF + xi.targetType.ANY_ALLEGIANCE -- self + any_allegiance is the targetfind code for "target myself, and find any enemies in range"
-    local findFlags = xi.findFlag.HIT_ALL -- target doesn't need to be on enmity list
     local aoeCenter = xi.aoeRadius.ATTACKER
-    local enemies = mob:getEntitiesInRange(mob, xi.aoeType.ROUND, aoeCenter, distance, findFlags, targetTypeFlag)
+    local enemies = mob:getEntitiesInRange(mob, xi.aoeType.ROUND, aoeCenter, distance, 0, targetTypeFlag)
 
     return enemies
 end

@@ -20,6 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 5, 3, 120, 0, 10)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 10, 0, 120)
 

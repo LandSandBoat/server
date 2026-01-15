@@ -9,12 +9,17 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 2000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 5625)
+
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3600)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 3600)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

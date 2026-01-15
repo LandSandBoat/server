@@ -345,7 +345,7 @@ public:
     uint16 RATT(uint16 bonusAtt = 0);
     uint16 RACC(uint16 bonusAcc = 0);
 
-    bool isDead();
+    auto isDead() const -> bool;
     bool isAlive();
     bool isFullyHealed();
     bool isInAdoulin();
@@ -355,7 +355,7 @@ public:
     bool inMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();
-    bool isMounted();
+    auto isMounted() const -> bool;
     bool isSitting();
 
     JOBTYPE GetMJob() const;
@@ -539,7 +539,6 @@ public:
     timer::time_point charmTime; // to hold the time entity is charmed
     bool              isCharmed; // is the battle entity charmed?
 
-    float           m_ModelRadius;  // The radius of the entity model, for calculating the range of a physical attack
     ECOSYSTEM       m_EcoSystem{};  // Entity eco system
     CItemEquipment* m_Weapons[4]{}; // Four main slots used to store weapons (weapons only)
     bool            m_dualWield;    // True/false depending on if the entity is using two weapons

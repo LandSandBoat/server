@@ -2,7 +2,12 @@
 -- Area: Misareaux_Coast
 --  Mob: Fomor Summoner
 -----------------------------------
-mixins = { require('scripts/mixins/fomor_hate') }
+mixins =
+{
+    require('scripts/mixins/follow'),
+    require('scripts/mixins/fomor_hate'),
+    require('scripts/mixins/fomor_party'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -11,7 +16,18 @@ entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 2, 'Fomors_Elemental')
 end
 
+entity.onMobSpawn = function(mob)
+    xi.mix.fomorParty.onPartySpawn(mob)
+end
+
+entity.onMobRoam = function(mob)
+    xi.mix.fomorParty.onPartyRoam(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        xi.mix.fomorParty.onPartyDeath(mob)
+    end
 end
 
 return entity

@@ -25,6 +25,12 @@ local content = BattlefieldMission:new({
     title = xi.title.THE_CHEBUKKIS_WORST_NIGHTMARE,
 })
 
+function content:onBattlefieldLoss(player, battlefield)
+    player:messageSpecial(sealionsDenID.text.COSMIC_ELUCIDATION)
+
+    Battlefield.onBattlefieldLoss(self, player, battlefield)
+end
+
 content.groups =
 {
     {

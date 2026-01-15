@@ -252,3 +252,20 @@ xi.action.react =
     DEATH_SPIKES    = 10,
     COUNTER         = 63, -- Also used by Retaliation
 }
+
+-- Enums for AI actions.
+xi.action.type =
+{
+    NONE                  =  0,
+    DAMAGE_TARGET         =  1, -- No condition.
+    DAMAGE_FORCE_SELF     =  2, -- No condition.
+    HEALING_TARGET        =  3, -- HP Thresshold.
+    HEALING_FORCE_SELF    =  4, -- HP Thresshold. Force caster to be the main target.
+    HEALING_EFFECT        =  5, -- Status effect on self or ally present.
+    ENHANCING_TARGET      =  6, -- Status effect on self or ally not present.
+    ENHANCING_FORCE_SELF  =  7, -- Status effect on self or ally not present. Force caster to be the main target.
+    ENFEEBLING_TARGET     =  8, -- Status effect on target or other enemy not present.
+    ENFEEBLING_FORCE_SELF =  9, -- Status effect on target or other enemy not present. Force caster to be the main target.
+    DRAIN_HP              = 10, -- Enemy not undead. HP Thresshold optional.
+    DRAIN_MP              = 11, -- Enemy not undead. Enemy has MP. MP thresshold optional.
+}

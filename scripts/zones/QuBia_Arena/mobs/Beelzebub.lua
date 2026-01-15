@@ -16,12 +16,24 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:addMobMod(xi.mobMod.HP_STANDBACK, 80)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
             { id = xi.jsa.BENEDICTION, hpp = math.random(20, 30) }, -- "Uses Benediction once."
         },
     })
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.CURE_V,
+        xi.magic.spell.PARALYGA,
+        xi.magic.spell.SILENCEGA,
+    }
+
+    return spellList[math.random(1, #spellList)]
 end
 
 return entity

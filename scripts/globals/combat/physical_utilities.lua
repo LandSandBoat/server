@@ -940,18 +940,15 @@ xi.combat.physical.canParry = function(defender, attacker)
 
     if
         defender:isFacing(attacker) and
-        defender:isEngaged()
+        defender:isEngaged() and
+        not defender:hasPreventActionEffect(true) -- Not stunned, slept, etc, but can parry when charmed
     then
-        if defender:isPC() and defender:getSkillRank(xi.skill.PARRY) > 0 then
+        if defender:isPC() then
             local mainWeapon = defender:getEquippedItem(xi.slot.MAIN)
             if mainWeapon then
                 canParry = mainWeapon:getSkillType() ~= xi.skill.HAND_TO_HAND
             end
-        elseif
-            defender:isMob() or
-            defender:isPet() or
-            defender:isTrust()
-        then
+        else
             canParry = defender:getMobMod(xi.mobMod.CAN_PARRY) > 0
         end
     end
@@ -959,31 +956,42 @@ xi.combat.physical.canParry = function(defender, attacker)
     return canParry
 end
 
+-- Rough implementation of the following sheet, though we still dont know 100% how it all works
+-- https://docs.google.com/spreadsheets/d/1wtS0d4nNqosMwFuHWb7fkCcj4naAvwhnPocf3qSGJjk/edit?gid=0#gid=0
 xi.combat.physical.calculateParryRate = function(defender, attacker)
-    local parryRate = 0
-
-    -- http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
-    -- {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
-
-    local parrySkill = defender:getSkillLevel(xi.skill.PARRY) + defender:getMod(xi.mod.PARRY)
+    local parryRate     = 0
+    local attackerSkill = 0
+    local defenderSkill = 0
 
     if defender:isPC() then
-        parrySkill = parrySkill + defender:getILvlParry()
+        defenderSkill = defender:getSkillLevel(xi.skill.PARRY) + defender:getMod(xi.mod.PARRY) + defender:getILvlParry()
+    else
+        defenderSkill = xi.data.skillLevel.getSkillCap(defender:getMainLvl(), xi.skillRank.A_PLUS)
     end
 
-    local levelDiffMult = 1 + (defender:getMainLvl() - attacker:getMainLvl()) / 15
-
-    -- two handed weapons get a bonus
-    if defender:isPC() and defender:isWeaponTwoHanded() then
-        levelDiffMult = levelDiffMult + 0.1
+    if attacker:isPC() then
+        attackerSkill = attacker:getSkillLevel(attacker:getWeaponSkillType(xi.slot.MAIN)) + attacker:getILvlSkill()
+    else
+        attackerSkill = xi.data.skillLevel.getSkillCap(attacker:getMainLvl(), xi.skillRank.A_PLUS)
     end
 
-    levelDiffMult = utils.clamp(levelDiffMult, 0.4, 1.4)
+    local skillDelta = defenderSkill - attackerSkill
 
-    local attackerDex = attacker:getStat(xi.mod.DEX)
-    local defenderAgi = defender:getStat(xi.mod.AGI)
+    if skillDelta <= 5 then -- between -10 and 5
+    -- Matches the data
+        -- X = 6
+        -- but the slope is 36 / 9 for skill <= 5
+        parryRate = math.floor(10 + (skillDelta - 6) / (36 / 9))
 
-    parryRate = utils.clamp(((parrySkill * 0.1 + (defenderAgi - attackerDex) * 0.125 + 10.0) * levelDiffMult), 5, 25)
+    else -- between 6 and 105
+        -- In the formula "10 + (skill - X) / (60 / 9)"
+        -- where X = 6, this matches the level 43 chigoe data exactly, and X = 11 matches the existing level 64 chigoe data
+        -- We don't know what modifies X yet, (expansion, level, arbitrary?)
+        -- Level 64 chigoe data is incomplete so we will use level 43 for now.
+        parryRate = math.floor(10 + (skillDelta - 6) / (60 / 9))
+    end
+
+    parryRate = utils.clamp(parryRate, 5, 25)
 
     -- Issekigan grants parry rate bonus
     -- from best available data if you already capped out at 25% parry it grants another 25% bonus for ~50% parry rate
@@ -1004,7 +1012,8 @@ xi.combat.physical.canGuard = function(defender, attacker)
     -- https://genomeffxi.livejournal.com/18269.html
     if
         defender:isFacing(attacker) and
-        defender:isEngaged()
+        defender:isEngaged() and
+        not defender:hasPreventActionEffect(true) -- Not stunned, slept, etc, but can guard when charmed
     then
         if defender:isPC() and defender:getSkillRank(xi.skill.GUARD) > 0 then
             local mainWeapon = defender:getEquippedItem(xi.slot.MAIN)
@@ -1022,35 +1031,36 @@ xi.combat.physical.canGuard = function(defender, attacker)
 end
 
 xi.combat.physical.calculateGuardRate = function(defender, attacker)
-    local guardRate = 0
+    local guardRate     = 0
+    local attackerSkill = 0
+    local defenderSkill = 0
 
-    -- default to using actual skill
-    local guardSkill = defender:getSkillLevel(xi.skill.GUARD)
-
-    -- non-players do not have guard skill set on creation
-    -- so use max skill at the level for the job
-    if defender:isPet() then
-        guardSkill = defender:getMaxSkillLevel(defender:getMainLvl(), defender:getMainJob(), xi.skill.GUARD)
-    elseif defender:isTrust() then
-        -- TODO: check trust type for ilvl > 99 when implemented
-        guardSkill = defender:getMaxSkillLevel(math.min(defender:getMainLvl(), 99), defender:getMainJob(), xi.skill.GUARD)
-    end
-
-    guardSkill = guardSkill + defender:getMod(xi.mod.GUARD) + guardSkill * (defender:getMod(xi.mod.GUARD_PERCENT) / 100)
-
-    -- current assumption (from core) is that guard and parry Ilvl are the same
     if defender:isPC() then
-        guardSkill = guardSkill + defender:getILvlParry()
+        defenderSkill = defender:getSkillLevel(xi.skill.GUARD) + defender:getMod(xi.mod.GUARD) + defender:getILvlParry() -- getILvlParry also gets guard (h2h cannot have parry on the weapon)
+    else
+        defenderSkill = xi.data.skillLevel.getSkillCap(defender:getMainLvl(), xi.skillRank.A_PLUS)
     end
 
-    local levelDiffMult = 1 + (defender:getMainLvl() - attacker:getMainLvl()) / 15
-    levelDiffMult = utils.clamp(levelDiffMult, 0.4, 1.4)
+    if attacker:isPC() then
+        attackerSkill = attacker:getSkillLevel(attacker:getWeaponSkillType(xi.slot.MAIN)) + attacker:getILvlSkill()
+    else
+        attackerSkill = xi.data.skillLevel.getSkillCap(attacker:getMainLvl(), xi.skillRank.A_PLUS)
+    end
 
-    local attackerDex = attacker:getStat(xi.mod.DEX)
-    local defenderAgi = defender:getStat(xi.mod.AGI)
+    local skillDelta = defenderSkill - attackerSkill
+
+    -- This is approximated from parry
+    -- Two data points showed that Guard was approximately 1% better, so skillDelta is at _least_ 6 lower on the same target
+    -- The target was a lvl 43 chigoe, using the same parry skill vs guard skill with the known parrying rate data
+    -- This is a placeholder and is likely more accurate than the previous code.
+    if skillDelta <= 5 then
+        guardRate = math.floor(10 + skillDelta / (36 / 9))
+    else
+        guardRate = math.floor(10 + skillDelta / (60 / 9))
+    end
 
     -- Dodge's guard bonus goes over the cap
-    guardRate = utils.clamp(((guardSkill * 0.1 + (defenderAgi - attackerDex) * 0.125 + 10) * levelDiffMult), 5, 25) + defender:getMod(xi.mod.ADDITIVE_GUARD)
+    guardRate = utils.clamp(guardRate, 5, 25) + defender:getMod(xi.mod.ADDITIVE_GUARD)
 
     return guardRate
 end
@@ -1058,7 +1068,10 @@ end
 xi.combat.physical.canBlock = function(defender, attacker)
     local canBlock = false
 
-    if defender:isFacing(attacker) and not defender:hasPreventActionEffect() then
+    if
+        defender:isFacing(attacker) and
+        not defender:hasPreventActionEffect(true)
+    then
         if defender:isPC() and defender:getSkillRank(xi.skill.SHIELD) > 0 then
             local shield = defender:getEquippedItem(xi.slot.SUB)
             if shield then
@@ -1176,12 +1189,21 @@ end
 
 xi.combat.physical.isBlocked = function(defender, attacker)
     local blocked = false
-    if
-        xi.combat.physical.canBlock(defender, attacker) and
-        xi.combat.physical.calculateBlockRate(defender, attacker) > math.random(1, 100)
-    then
-        defender:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
-        blocked = true
+
+    if xi.combat.physical.canBlock(defender, attacker) then
+
+        if xi.combat.physical.calculateBlockRate(defender, attacker) * 100 >= math.random(1, 10000) then
+            blocked = true
+        end
+
+        -- Handle skill ups.
+        if
+            defender:isPC() and
+            (blocked or                                  -- We blocked
+            not xi.settings.map.PARRY_OLD_SKILLUP_STYLE) -- Old style skillup is not enabled
+        then
+            defender:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
+        end
     end
 
     return blocked
@@ -1193,7 +1215,7 @@ xi.combat.physical.isParried = function(defender, attacker)
     if xi.combat.physical.canParry(defender, attacker) then
         local isPC = defender:isPC()
 
-        if xi.combat.physical.calculateParryRate(defender, attacker) > math.random(1, 100) then
+        if xi.combat.physical.calculateParryRate(defender, attacker) * 100 >= math.random(1, 10000) then
             parried = true
 
             -- https://www.bg-wiki.com/ffxi/Turms_Mittens
@@ -1219,7 +1241,7 @@ xi.combat.physical.isParried = function(defender, attacker)
             (parried or                                  -- We parried
             not xi.settings.map.PARRY_OLD_SKILLUP_STYLE) -- Old style skillup is not enabled
         then
-                defender:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+            defender:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
         end
     end
 
@@ -1228,17 +1250,26 @@ end
 
 xi.combat.physical.isGuarded = function(defender, attacker)
     local guarded = false
-    if
-        xi.combat.physical.canGuard(defender, attacker) and
-        xi.combat.physical.calculateGuardRate(defender, attacker) > math.random(1, 100)
-    then
-        guarded = true
-        if defender:isPC() then
-            defender:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
-            -- handle tactical guard
-            if defender:hasTrait(xi.trait.TACTICAL_GUARD) then
-                defender:addTP(defender:getMod(xi.mod.TACTICAL_GUARD))
+
+    if xi.combat.physical.canGuard(defender, attacker) then
+        local isPC = defender:isPC()
+        if xi.combat.physical.calculateGuardRate(defender, attacker) * 100 >= math.random(1, 10000) then
+            guarded = true
+            if isPC then
+                -- handle tactical guard
+                if defender:hasTrait(xi.trait.TACTICAL_GUARD) then
+                    defender:addTP(defender:getMod(xi.mod.TACTICAL_GUARD))
+                end
             end
+        end
+
+        -- Handle skill ups.
+        if
+            isPC and
+            (guarded or                                  -- We guarded
+            not xi.settings.map.PARRY_OLD_SKILLUP_STYLE) -- Old style skillup is not enabled
+        then
+            defender:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
         end
     end
 

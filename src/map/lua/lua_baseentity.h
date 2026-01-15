@@ -417,6 +417,7 @@ public:
 
     void   setMissionStatus(MissionLog logId, const sol::object& arg2Obj, const sol::object& arg3Obj) const;
     uint32 getMissionStatus(MissionLog logId, const sol::object& missionStatusPosObj) const;
+    void   sendPartialMissionLog(MissionLog logId, bool completed) const;
 
     void   setEminenceCompleted(uint16 recordID, const sol::object& arg1, const sol::object& arg2);
     bool   getEminenceCompleted(uint16 recordID);
@@ -667,6 +668,7 @@ public:
     void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
     void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, const sol::object& fixedCE, const sol::object& fixedVE);
     void  resetEnmity(CLuaBaseEntity* PEntity);
+    void  setEnmityActive(CLuaBaseEntity* PEntity, bool active);
     void  updateClaim(const sol::object& entity);
     bool  hasClaim(CLuaBaseEntity* PTarget);
     bool  hasEnmity();

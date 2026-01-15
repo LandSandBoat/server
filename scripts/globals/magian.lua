@@ -266,7 +266,7 @@ end
 -- since onItemEquip/unEquip functions only exist for two items.
 -- NOTE: This function isn't the most efficient, but is only executed on server
 -- start, or magian reload.
-local function registerTrialListeners()
+xi.magian.registerTrialListeners = function()
     xi.items = xi.items or {}
 
     for trialId, magianData in pairs(xi.magian.trials) do
@@ -1017,6 +1017,3 @@ xi.magian.onMobDeath = function(mob, player, optParams, trialTable)
         progressPlayerTrial(player, trialId, 1)
     end
 end
-
--- Once everything else is setup, register listeners with the appropriate items
-registerTrialListeners()

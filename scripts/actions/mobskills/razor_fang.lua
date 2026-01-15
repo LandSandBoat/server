@@ -1,8 +1,7 @@
 -----------------------------------
 --  Razor Fang
---  Description: Bites a single target in a twofold attack.
+--  Description: Deals 300% base damage to a single target.
 --  Type: Physical
---  Utsusemi/Blink absorb: 2 shadows
 --  Range: Melee
 -----------------------------------
 ---@type TMobSkill
@@ -13,11 +12,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 2
-    local accmod = 1
-    local ftp    = 3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local numhits  = 1
+    local accmod   = 1
+    local ftp      = 3
+    local info     = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local dmg      = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg
 end

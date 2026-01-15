@@ -11,8 +11,9 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getAnimationSub() == 5 or
-        mob:getAnimationSub() == 6
+        (mob:getAnimationSub() == 5 or
+        mob:getAnimationSub() == 6) and
+        mob:getLocalVar('[Tenzen]ShouldOisoya') == 1
     then -- if tenzen is in bow mode
         return 0
     end
@@ -22,10 +23,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
-    local accmod = 1
+    local accmod = 0.8
     local ftp    = 5.5
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, 2, 2.75, 2.75, 2.75)
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ATK_VARIES, 2.75, 2.75, 2.75)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)

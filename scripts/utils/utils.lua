@@ -253,14 +253,31 @@ end
 
 ---@nodiscard
 ---@param input number
----@param min_val number?
----@param max_val number?
+---@param minValue number
+---@param maxValue number
 ---@return number
-function utils.clamp(input, min_val, max_val)
-    if min_val ~= nil and input < min_val then
-        input = min_val
-    elseif max_val ~= nil and input > max_val then
-        input = max_val
+function utils.clamp(input, minValue, maxValue)
+    if minValue == nil then
+        print('utils.clamp() -> invalid "min" value.')
+        return input
+    end
+
+    if maxValue == nil then
+        print('utils.clamp() -> invalid "max" value.')
+        return input
+    end
+
+    if minValue > maxValue then
+        print('utils.clamp() -> "min" value.is higher than "max" value.')
+        return input
+    end
+
+    if input < minValue then
+        return minValue
+    end
+
+    if input > maxValue then
+        return maxValue
     end
 
     return input

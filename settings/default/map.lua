@@ -177,16 +177,14 @@ xi.settings.map =
     TRUST_TP_MULTIPLIER  = 1.0,
     FELLOW_TP_MULTIPLIER = 1.0,
 
-    -- Adjust max HP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+    -- Adjust max HP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1. Valid range: 0.1 to 2.0
     NM_HP_MULTIPLIER        = 1.0,
     MOB_HP_MULTIPLIER       = 1.0,
-    PLAYER_HP_MULTIPLIER    = 1.0,
     ALTER_EGO_HP_MULTIPLIER = 1.0,
 
-    -- Adjust max MP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+    -- Adjust max MP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1. Valid range: 0.1 to 2.0
     NM_MP_MULTIPLIER        = 1.0,
     MOB_MP_MULTIPLIER       = 1.0,
-    PLAYER_MP_MULTIPLIER    = 1.0,
     ALTER_EGO_MP_MULTIPLIER = 1.0,
 
     -- Sets the fraction of MP a subjob provides to the main job. Retail is half and this acts as a divisor so default is 2
@@ -202,10 +200,9 @@ xi.settings.map =
     -- Also adjust monsters subjob in ratio adjustments? 1 = true / 0 = false
     INCLUDE_MOB_SJ = false,
 
-    -- Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+    -- Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.0. Valid range: 0.1 to 2.0
     NM_STAT_MULTIPLIER        = 1.0,
     MOB_STAT_MULTIPLIER       = 1.0,
-    PLAYER_STAT_MULTIPLIER    = 1.0,
     ALTER_EGO_STAT_MULTIPLIER = 1.0,
 
     -- Adjust skill caps for trusts/fellows. Acts as a multiplier, so default is 1.

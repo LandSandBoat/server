@@ -12,8 +12,6 @@ apk --update-cache add \
     bash \
     binutils \
     git \
-    libc++ \
-    llvm-libunwind \
     lua5.1-dev \
     luajit \
     mariadb-client \
@@ -25,6 +23,7 @@ apk --update-cache add \
     tzdata \
     zeromq \
     zlib
+apk cache clean
 EOF
 
 # Setup runtime user.
@@ -64,8 +63,6 @@ apk --update-cache add \
     ccache \
     cmake \
     g++ \
-    libc++-dev \
-    llvm-libunwind-dev \
     linux-headers \
     luajit-dev \
     make \
@@ -123,8 +120,8 @@ if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
         clang$LLVM_VERSION \
         clang$LLVM_VERSION-extra-tools \
         compiler-rt \
-        lld$LLVM_VERSION \
         llvm$LLVM_VERSION
+    apk cache clean
 fi
 EOF
 
@@ -160,8 +157,6 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
-    export CXXFLAGS="-stdlib=libstdc++"
-    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
@@ -184,8 +179,6 @@ EOF
 # Service #
 ###########
 FROM base AS service
-
-RUN apk cache clean
 
 USER $UNAME
 

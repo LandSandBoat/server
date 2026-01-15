@@ -63,14 +63,16 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMaxMP(0) -- WHM but has no MP
 end
 

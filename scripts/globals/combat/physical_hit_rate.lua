@@ -64,6 +64,23 @@ xi.combat.physicalHitRate.getPhysicalHitRateCap = function(attacker, slot)
     return 0.95 -- mobs, charmed pets. -- Do trusts have a 99% or 95% acc cap?
 end
 
+---@param entity CBaseEntity
+---@return number
+xi.combat.physicalHitRate.getFlashPenalty = function(entity)
+    local effect = entity:getStatusEffect(xi.effect.FLASH)
+
+    if effect then
+        -- https://github.com/LandSandBoat/server/discussions/6926
+        -- milliseconds. 12s flash has a potency of 360, 360 = 0.03*(12*1000)
+        local timeRemaining           = effect:getTimeRemaining()
+        local reductionPerMillisecond = 0.03
+
+        return math.floor(timeRemaining * reductionPerMillisecond)
+    end
+
+    return 0
+end
+
 ---@param attacker CBaseEntity
 ---@param target CBaseEntity
 ---@param isWeaponskill boolean
@@ -120,7 +137,7 @@ xi.combat.physicalHitRate.getHitRateModifiers = function(attacker, target, isWea
         evaBonus = evaBonus + target:getMerit(xi.merit.CLOSED_POSITION)
     end
 
-    -- TODO: realtime flash penalty
+    accBonus = accBonus - xi.combat.physicalHitRate.getFlashPenalty(attacker)
 
     return accBonus, evaBonus
 end
@@ -147,7 +164,7 @@ local function accuracyAndEvasionToHitRate(attacker, target, acc, eva)
 
         -- Accuracy Penalty, only applies to PCs -- TODO: does this apply to player pets?
         elseif attacker:isPC() and attacker:getMainLvl() < target:getMainLvl() then
-            acc = acc - dlvl * 4
+            acc = acc + dlvl * 4
         end
     end
 

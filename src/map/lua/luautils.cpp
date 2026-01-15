@@ -2413,6 +2413,35 @@ int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     return 0;
 }
 
+// Scripted additional effects
+int32 OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage)
+{
+    TracyZoneScoped;
+
+    std::string filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
+
+    sol::function onItemAdditionalEffect = GetCacheEntryFromFilename(filename)["onItemAdditionalEffect"].get<sol::function>();
+    if (!onItemAdditionalEffect.valid())
+    {
+        return -1;
+    }
+
+    auto result = onItemAdditionalEffect(PAttacker, PDefender, baseAttackDamage, PItem);
+    if (!result.valid())
+    {
+        sol::error err = result;
+        ShowError("luautils::onItemAdditionalEffect: %s", err.what());
+        ReportErrorToPlayer(PAttacker, err.what());
+        return -1;
+    }
+
+    Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::NONE;
+    Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+
+    return 0;
+}
+
 // NOTE: This is currently unused
 // future use: migrating items to scripts\globals\additional_effects.lua
 void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage)
@@ -3877,6 +3906,26 @@ CBattleEntity* OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobS
     }
 
     return PTarget;
+}
+
+// onMobSkillFinalize always executes once per uninterrupted mobskill use, independently of any target being found.
+void OnMobSkillFinalize(CBaseEntity* PMob, CMobSkill* PMobSkill)
+{
+    TracyZoneScoped;
+
+    auto name = PMobSkill->getName();
+
+    auto onMobSkillFinalize = lua["xi"]["actions"]["mobskills"][name]["onMobSkillFinalize"];
+    if (!onMobSkillFinalize.valid())
+    {
+        return;
+    }
+
+    if (const auto result = onMobSkillFinalize(PMob, PMobSkill); !result.valid())
+    {
+        const sol::error err = result;
+        ShowError("luautils::onMobSkillFinalize: %s", err.what());
+    }
 }
 
 int32 OnAutomatonAbilityCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)

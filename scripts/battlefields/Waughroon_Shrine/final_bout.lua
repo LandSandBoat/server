@@ -24,60 +24,60 @@ content.loot =
 {
 
     {
-        { itemId = xi.item.GIL,                      weight = 1000, amount = 8000 }, -- Gil
+        { itemId = xi.item.GIL,                      weight = 10000, amount = 8000 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight = 1000 }, -- Bag of Tree Cuttings
+        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight = 10000 },
     },
 
     {
-        { itemId = xi.item.NONE,                     weight = 500 }, -- Nothing
-        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight = 500 }, -- Bag of Tree Cuttings
+        { itemId = xi.item.NONE,                     weight =  5000 },
+        { itemId = xi.item.BAG_OF_TREE_CUTTINGS,     weight =  5000 },
     },
 
     {
-        { itemId = xi.item.CLUMP_OF_BOYAHDA_MOSS,    weight = 1000 }, -- Clump of Boyahda Moss
+        { itemId = xi.item.CLUMP_OF_BOYAHDA_MOSS,    weight = 10000 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.MANA_CIRCLET,             weight = 62 }, -- Mana Circlet
-        { itemId = xi.item.RIVAL_RIBBON,             weight = 62 }, -- Rival Ribbon
-        { itemId = xi.item.SHOCK_MASK,               weight = 62 }, -- Shock Mask
-        { itemId = xi.item.SUPER_RIBBON,             weight = 62 }, -- Super Ribbon
-        { itemId = xi.item.IVORY_MITTS,              weight = 62 }, -- Ivory Mitts
-        { itemId = xi.item.RUSH_GLOVES,              weight = 62 }, -- Rush
-        { itemId = xi.item.SLY_GAUNTLETS,            weight = 62 }, -- Sly Gauntlets
-        { itemId = xi.item.SPIKED_FINGER_GAUNTLETS,  weight = 62 }, -- Spiked Finger Gauntlets
-        { itemId = xi.item.ESOTERIC_MANTLE,          weight = 62 }, -- Esoteric Mantle
-        { itemId = xi.item.HEAVY_MANTLE,             weight = 62 }, -- Heavy Mantle
-        { itemId = xi.item.SNIPERS_MANTLE,           weight = 62 }, -- Snipers Mantle
-        { itemId = xi.item.TEMPLARS_MANTLE,          weight = 62 }, -- Templars Mantle
-        { itemId = xi.item.BENIGN_NECKLACE,          weight = 62 }, -- Benign Necklace
-        { itemId = xi.item.HATEFUL_COLLAR,           weight = 62 }, -- Hateful Collar
-        { itemId = xi.item.INTELLECT_TORQUE,         weight = 62 }, -- Intellect Torque
-        { itemId = xi.item.STORM_GORGET,             weight = 62 }, -- Storm Gorget
+        { itemId = xi.item.MANA_CIRCLET,             weight =   620 },
+        { itemId = xi.item.RIVAL_RIBBON,             weight =   620 },
+        { itemId = xi.item.SHOCK_MASK,               weight =   620 },
+        { itemId = xi.item.SUPER_RIBBON,             weight =   620 },
+        { itemId = xi.item.IVORY_MITTS,              weight =   620 },
+        { itemId = xi.item.RUSH_GLOVES,              weight =   620 },
+        { itemId = xi.item.SLY_GAUNTLETS,            weight =   620 },
+        { itemId = xi.item.SPIKED_FINGER_GAUNTLETS,  weight =   620 },
+        { itemId = xi.item.ESOTERIC_MANTLE,          weight =   620 },
+        { itemId = xi.item.HEAVY_MANTLE,             weight =   620 },
+        { itemId = xi.item.SNIPERS_MANTLE,           weight =   620 },
+        { itemId = xi.item.TEMPLARS_MANTLE,          weight =   620 },
+        { itemId = xi.item.BENIGN_NECKLACE,          weight =   620 },
+        { itemId = xi.item.HATEFUL_COLLAR,           weight =   620 },
+        { itemId = xi.item.INTELLECT_TORQUE,         weight =   620 },
+        { itemId = xi.item.STORM_GORGET,             weight =   620 },
     },
 
     {
-        { itemId = xi.item.SCROLL_OF_QUAKE,          weight = 62 }, -- Scroll of Quake
-        { itemId = xi.item.SCROLL_OF_FREEZE,         weight = 62 }, -- Scroll of Freeze
-        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight = 62 }, -- Scroll of Raise II
-        { itemId = xi.item.SCROLL_OF_REGEN_III,      weight = 62 }, -- Scroll of Regen III
-        { itemId = xi.item.PIECE_OF_WISTERIA_LUMBER, weight = 62 }, -- Piece of Wisteria Lumber
-        { itemId = xi.item.MAHOGANY_LOG,             weight = 62 }, -- Mahogany Log
-        { itemId = xi.item.EBONY_LOG,                weight = 62 }, -- Ebony Log
-        { itemId = xi.item.PETRIFIED_LOG,            weight = 62 }, -- Petrified Log
-        { itemId = xi.item.DARKSTEEL_INGOT,          weight = 62 }, -- Darksteel Ingot
-        { itemId = xi.item.GOLD_INGOT,               weight = 62 }, -- Gold Ingot
-        { itemId = xi.item.MYTHRIL_INGOT,            weight = 62 }, -- Mythril Ingot
-        { itemId = xi.item.HANDFUL_OF_WYVERN_SCALES, weight = 62 }, -- Handful of Wyvern Scales
-        { itemId = xi.item.RAM_HORN,                 weight = 62 }, -- Ram Horn
-        { itemId = xi.item.WYVERN_SKIN,              weight = 62 }, -- Wyvern Skin
-        { itemId = xi.item.RAM_SKIN,                 weight = 62 }, -- Ram Skin
-        { itemId = xi.item.CORAL_FRAGMENT,           weight = 62 }, -- Coral Fragment
+        { itemId = xi.item.SCROLL_OF_QUAKE,          weight =   620 },
+        { itemId = xi.item.SCROLL_OF_FREEZE,         weight =   620 },
+        { itemId = xi.item.SCROLL_OF_RAISE_II,       weight =   620 },
+        { itemId = xi.item.SCROLL_OF_REGEN_III,      weight =   620 },
+        { itemId = xi.item.PIECE_OF_WISTERIA_LUMBER, weight =   620 },
+        { itemId = xi.item.MAHOGANY_LOG,             weight =   620 },
+        { itemId = xi.item.EBONY_LOG,                weight =   620 },
+        { itemId = xi.item.PETRIFIED_LOG,            weight =   620 },
+        { itemId = xi.item.DARKSTEEL_INGOT,          weight =   620 },
+        { itemId = xi.item.GOLD_INGOT,               weight =   620 },
+        { itemId = xi.item.MYTHRIL_INGOT,            weight =   620 },
+        { itemId = xi.item.HANDFUL_OF_WYVERN_SCALES, weight =   620 },
+        { itemId = xi.item.RAM_HORN,                 weight =   620 },
+        { itemId = xi.item.WYVERN_SKIN,              weight =   620 },
+        { itemId = xi.item.RAM_SKIN,                 weight =   620 },
+        { itemId = xi.item.CORAL_FRAGMENT,           weight =   620 },
     }
 }
 

@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
         player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.AN_ETERNAL_MELODY or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
     then
-        player:startEvent(552)
+        player:startOptionalCutscene(552)
     end
 end
 

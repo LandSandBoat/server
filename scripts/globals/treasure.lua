@@ -28,15 +28,17 @@ local respawnType =
     IMMEDIATE =   5,
     REGULAR   = 180,
 }
+
 -----------------------------------
 -- Tables
 -----------------------------------
 local thiefKeyInfo =
 {
---   Key                       Item ID                      Success % Modifier
-    [keyType.THIEF_TOOLS ] = { xi.item.SET_OF_THIEFS_TOOLS, 10 },
-    [keyType.LIVING_KEY  ] = { xi.item.LIVING_KEY,          15 },
-    [keyType.SKELETON_KEY] = { xi.item.SKELETON_KEY,        20 },
+    -- [key type] = { { chest success, chest fail, chest trap, chest mimic }, { coffer success, coffer fail, coffer trap, coffer mimic } }
+    [keyType.ZONE_KEY    ] = { { 100,  0,  0, 0 }, { 100,  0,  0,  0 } },
+    [keyType.THIEF_TOOLS ] = { {  75, 10, 15, 0 }, {  65, 15, 10, 10 } },
+    [keyType.LIVING_KEY  ] = { {  75, 20,  5, 0 }, {  70, 15,  5, 10 } },
+    [keyType.SKELETON_KEY] = { {  75, 15, 10, 0 }, {  75, 20,  0,  5 } },
 }
 
 local npcTable =
@@ -133,13 +135,13 @@ local levelTable =
 {
     -- [zoneId] = { chest_level, coffer_level },
     [xi.zone.PSOXJA                ] = { 50,  0 },
-    [xi.zone.OLDTON_MOVALPOLOS     ] = { 50,  0 },
+    [xi.zone.OLDTON_MOVALPOLOS     ] = { 40,  0 },
     [xi.zone.NEWTON_MOVALPOLOS     ] = {  0, 70 },
     [xi.zone.SACRARIUM             ] = { 50,  0 },
     [xi.zone.RUAUN_GARDENS         ] = {  0, 70 },
     [xi.zone.FORT_GHELSBA          ] = { 20,  0 },
     [xi.zone.YUGHOTT_GROTTO        ] = { 20,  0 },
-    [xi.zone.PALBOROUGH_MINES      ] = { 30,  0 },
+    [xi.zone.PALBOROUGH_MINES      ] = { 20,  0 },
     [xi.zone.GIDDEUS               ] = { 20,  0 },
     [xi.zone.BEADEAUX              ] = { 40, 60 },
     [xi.zone.DAVOI                 ] = { 40,  0 },
@@ -1582,6 +1584,16 @@ local lootTable =
 -----------------------------------
 -- Local functions
 -----------------------------------
+local function kneelBeforeChest(player, npc)
+    player:tradeComplete()
+    player:setFreezeFlag(true)
+    player:setRotation(player:getFacingAngle(npc))
+    player:sendEmote(npc, xi.emote.KNEEL, xi.emoteMode.MOTION)
+    player:delStatusEffect(xi.effect.SNEAK)
+    player:delStatusEffect(xi.effect.DEODORIZE)
+    npc:setLocalVar('traded', 1)
+end
+
 local function moveTreasure(npc, respawnTime)
     local zoneId         = npc:getZoneID()
     local containerType  = npcTable[npc:getName()]
@@ -1717,6 +1729,12 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         return
     end
 
+    -- Early return: Can't lockpick while weakened.
+    if player:hasStatusEffect(xi.effect.WEAKNESS) then
+        player:messageSpecial(ID.text.CHEST_UNLOCKED + 3)
+        return
+    end
+
     -- Early return: Treasure is already open.
     if
         npc:getLocalVar('opened') ~= 0 or
@@ -1756,97 +1774,94 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         return
     end
 
-    -- Early return: Player has no room for items.
-    if player:getFreeSlotsCount() == 0 then
-        player:messageSpecial(ID.text.CHEST_UNLOCKED - 6)
+    -----------------------------------
+    -- Handle failure states.
+    -----------------------------------
+    local randomRoll  = math.random(1, 100)
+    local outcome     = 0
+    local outcomeRate = 0
+
+    for i = 1, 4 do
+        outcomeRate = outcomeRate + thiefKeyInfo[keyUsed][containerType][i]
+        if randomRoll <= outcomeRate then
+            outcome = i
+            break
+        end
+    end
+
+    -- Regular fail.
+    if outcome == 2 then
+        kneelBeforeChest(player, npc)
+
+        player:timer(2000, function(playerEntity)
+            playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
+            npc:setLocalVar('traded', 0)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
+        end)
+
         return
     end
 
-    -- Early return: Can't lockpick while weakened.
-    if
-        keyUsed ~= keyType.ZONE_KEY and
-        player:hasStatusEffect(xi.effect.WEAKNESS)
-    then
-        player:messageSpecial(ID.text.CHEST_UNLOCKED + 3)
+    -- It's a trap!
+    if outcome == 3 then
+        kneelBeforeChest(player, npc)
+
+        player:timer(2000, function(playerEntity)
+            local weaknessDuration = 5 + player:getMainLvl() - treasureLevel
+            weaknessDuration       = math.floor(weaknessDuration / 5)
+            weaknessDuration       = utils.clamp(weaknessDuration, 5, 60)
+
+            playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, weaknessDuration)
+            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 2)
+            trapAndMoveTreasure(npc, respawnType.REGULAR)
+        end)
+
+        player:timer(4000, function(playerEntity)
+            playerEntity:setFreezeFlag(false)
+        end)
+
         return
     end
 
-    -----------------------------------
-    -- Attempt to open treasure.
-    -----------------------------------
-    -- Player animations.
-    player:setFreezeFlag(true)
-    player:setRotation(player:getFacingAngle(npc))
-    player:sendEmote(npc, xi.emote.KNEEL, xi.emoteMode.MOTION)
-    player:delStatusEffect(xi.effect.SNEAK)
-    player:delStatusEffect(xi.effect.DEODORIZE)
-    npc:setLocalVar('traded', 1)
+    -- Mimic (Coffers only)
+    if outcome == 4 then
+        kneelBeforeChest(player, npc)
 
-    if keyUsed ~= keyType.ZONE_KEY then
-        local levelFactor = utils.clamp(player:getMainLvl() / treasureLevel, 0, 2)
-        local successRate = utils.clamp(25 * levelFactor + thiefKeyInfo[keyUsed][2], 0, 95)
+        player:timer(2000, function(playerEntity)
+            local mimicId = ID.mob.MIMIC
+            local mimic   = GetMobByID(mimicId)
 
-        -- Fail.
-        if math.random(1, 100) > successRate then
-            player:tradeComplete()
-
-            local outcome = math.random(1, containerType + 1)
-            -- Nothing happens
-            if outcome == 1 then
-                player:timer(2000, function(playerEntity)
-                    playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
-                    npc:setLocalVar('traded', 0)
-                end)
-
-                player:timer(4000, function(playerEntity)
-                    playerEntity:setFreezeFlag(false)
-                end)
-
-                return
-
-            -- It's a trap!
-            elseif outcome == 2 then
-                player:timer(2000, function(playerEntity)
-                    playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
-                    playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 2)
-                    trapAndMoveTreasure(npc, respawnType.REGULAR)
-                end)
-
-                player:timer(4000, function(playerEntity)
-                    playerEntity:setFreezeFlag(false)
-                end)
-
-                return
-
-            -- Mimic (Coffers only)
-            else
-                player:timer(2000, function(playerEntity)
-                    local mimicId = ID.mob.MIMIC
-                    local mimic   = GetMobByID(mimicId)
-
-                    if not mimic then
-                        playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
-                        npc:setLocalVar('traded', 0)
-                        return
-                    end
-
-                    mimic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
-                    npcUtil.popFromQM(playerEntity, npc, mimicId, { claim = true, hide = 5 })
-                    playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 4)
-                    moveTreasure(npc, respawnType.IMMEDIATE)
-                    playerEntity:setFreezeFlag(false)
-                end)
-
+            if not mimic then
+                playerEntity:messageName(ID.text.CHEST_UNLOCKED + 1, playerEntity)
+                npc:setLocalVar('traded', 0)
                 return
             end
-        end
+
+            mimic:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
+            npcUtil.popFromQM(playerEntity, npc, mimicId, { claim = true, hide = 5 })
+            playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 4)
+            moveTreasure(npc, respawnType.IMMEDIATE)
+            playerEntity:setFreezeFlag(false)
+        end)
+
+        return
     end
 
     -----------------------------------
     -- Handle quest item reward.
     -----------------------------------
     if bypassType == 1 then
-        player:tradeComplete()
+        -- Early return: Player has no room for items.
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.CHEST_UNLOCKED - 6)
+            return
+        end
+
+        kneelBeforeChest(player, npc)
+
         player:timer(2000, function(playerEntity)
             if npcUtil.giveItem(playerEntity, bypassReward) then
                 playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
@@ -1865,7 +1880,8 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Handle quest Key Item reward.
     -----------------------------------
     elseif bypassType == 2 then
-        player:tradeComplete()
+        kneelBeforeChest(player, npc)
+
         player:timer(2000, function(playerEntity)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED - 1, bypassReward) -- TODO: message -2 seems to be for other party members?
             playerEntity:addKeyItem(bypassReward)
@@ -1886,7 +1902,8 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         treasureMap > 0 and
         not player:hasKeyItem(treasureMap)
     then
-        player:tradeComplete()
+        kneelBeforeChest(player, npc)
+
         player:timer(2000, function(playerEntity)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED - 1, treasureMap) -- TODO: message -2 seems to be for other party members?
             playerEntity:addKeyItem(treasureMap)
@@ -1909,10 +1926,6 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
             moveTreasure(npc, respawnType.REGULAR)
         end)
 
-        player:timer(4000, function(playerEntity)
-            playerEntity:setFreezeFlag(false)
-        end)
-
         return
     end
 
@@ -1933,8 +1946,9 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Gil
     if itemId == xi.item.NONE then
         -- Distribute gil.
+        kneelBeforeChest(player, npc)
+
         player:timer(2000, function(playerEntity)
-            playerEntity:tradeComplete()
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
             handleGilDistribution(playerEntity, treasureLevel)
             openAndMoveTreasure(npc, respawnType.REGULAR)
@@ -1946,8 +1960,9 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
 
     -- Items (Gems or others)
     else
+        kneelBeforeChest(player, npc)
+
         player:timer(2000, function(playerEntity)
-            playerEntity:tradeComplete()
             playerEntity:addTreasure(itemId, npc)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
             openAndMoveTreasure(npc, respawnType.REGULAR)

@@ -6,11 +6,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getObjType() == xi.objType.TRUST then
-        return 0
-    else
-        return 1 --if BCNM version dont use this
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

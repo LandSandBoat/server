@@ -19,14 +19,14 @@ local teleportTable =
 }
 
 zoneObject.onInitialize = function(zone)
-    zone:registerCylindricalTriggerArea(1, -300, -20, 3) -- central porter on map 3
-    zone:registerCylindricalTriggerArea(2, -273, 5, 3) -- NE porter on map 3
+    zone:registerCylindricalTriggerArea(1, -300, -20, 3) -- Central porter on map 3
+    zone:registerCylindricalTriggerArea(2, -273,   5, 3) -- NE porter on map 3
     zone:registerCylindricalTriggerArea(3, -273, -45, 3) -- SE porter on map 3
-    zone:registerCylindricalTriggerArea(4, -327, 5, 3) -- NW porter on map 3
+    zone:registerCylindricalTriggerArea(4, -327,   5, 3) -- NW porter on map 3
     zone:registerCylindricalTriggerArea(5, -327, -45, 3) -- SW porter on map 3
-    zone:registerCylindricalTriggerArea(6, -527, 87, 3) -- N porter on map 4
-    zone:registerCylindricalTriggerArea(7, -527, 33, 3) -- S porter on map 4
-    zone:registerCylindricalTriggerArea(8, -460, 60, 3) -- Hidden room porter on map 4
+    zone:registerCylindricalTriggerArea(6, -527,  87, 3) -- N porter on map 4
+    zone:registerCylindricalTriggerArea(7, -527,  33, 3) -- S porter on map 4
+    zone:registerCylindricalTriggerArea(8, -460,  60, 3) -- Hidden room porter on map 4
 
     xi.treasure.initZone(zone)
 end
@@ -39,7 +39,8 @@ zoneObject.onZoneTick = function(zone)
         if teleporter and teleporter:getLocalVar('timer') < GetSystemTime() then
             -- If a player is already on the pad, teleport them
             for _, player in pairs(zone:getPlayers()) do
-                if player:getLocalVar(string.format('Zvhal_teleporter_%s', table.npc)) == 1 then
+                if player:getLocalVar(string.format('Zvahl_teleporter_%s', table.npc)) == 1 then
+                    player:delStatusEffect(xi.effect.INVISIBLE)
                     player:startCutscene(table.event)
                 end
             end
@@ -72,9 +73,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local table      = teleportTable[triggerArea:getTriggerAreaID()]
     local teleporter = GetNPCByID(table.npc)
 
-    player:setLocalVar(string.format('Zvhal_teleporter_%s', table.npc), 1)
+    player:setLocalVar(string.format('Zvahl_teleporter_%s', table.npc), 1)
 
     if teleporter and teleporter:getAnimation() == xi.animation.OPEN_DOOR then
+        player:delStatusEffect(xi.effect.INVISIBLE)
         player:startCutscene(table.event)
     end
 end
@@ -82,7 +84,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     local table = teleportTable[triggerArea:getTriggerAreaID()]
 
-    player:setLocalVar(string.format('Zvhal_teleporter_%s', table.npc), 0)
+    player:setLocalVar(string.format('Zvahl_teleporter_%s', table.npc), 0)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

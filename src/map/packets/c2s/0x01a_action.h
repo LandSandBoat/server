@@ -126,9 +126,9 @@ struct ACTIONBUF_MOUNT
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x001A
 // This packet is sent by the client when it is requesting to perform an action.
 GP_CLI_PACKET(GP_CLI_COMMAND_ACTION,
-              uint32_t UniqueNo; // PS2: UniqueNo
-              uint16_t ActIndex; // PS2: ActIndex
-              uint16_t ActionID; // PS2: ActionID
+              uint32_t                       UniqueNo; // PS2: UniqueNo
+              uint16_t                       ActIndex; // PS2: ActIndex
+              GP_CLI_COMMAND_ACTION_ACTIONID ActionID; // PS2: ActionID
               union {
                   ACTIONBUF_CASTMAGIC     CastMagic;
                   ACTIONBUF_WEAPONSKILL   Weaponskill;

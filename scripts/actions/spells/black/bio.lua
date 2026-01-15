@@ -11,22 +11,20 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
+    local tier   = 2
 
-    -- Check for Dia
+    -- Check for Dia.
     local dia = target:getStatusEffect(xi.effect.DIA)
-    if dia and dia:getTier() >= 2 then
-        return damage
-    else
+    if dia and dia:getTier() < tier then
         target:delStatusEffect(xi.effect.DIA)
+
+        -- Calculate DoT effect: http://wiki.ffo.jp/html/1954.html
+        local power = caster:getSkillLevel(xi.skill.DARK_MAGIC)
+        power       = math.ceil(power / 40)
+        power       = utils.clamp(power, 1, 3)
+
+        target:addStatusEffect(xi.effect.BIO, power, 3, 60, 0, 10, tier)
     end
-
-    -- Calculate DoT effect
-    -- http://wiki.ffo.jp/html/1954.html
-    local power = caster:getSkillLevel(xi.skill.DARK_MAGIC)
-    power       = math.ceil(power / 40)
-    power       = utils.clamp(power, 1, 3)
-
-    target:addStatusEffect(xi.effect.BIO, power, 3, 60, 0, 10, 1)
 
     return damage
 end

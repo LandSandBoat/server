@@ -15,6 +15,9 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    local params = {}
+    params.ftpMod  = { 0.0625, 0.1875, 0.46875 } -- https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
+
     local attack =
     {
         ['type'] = xi.attackType.BREATH,
@@ -22,6 +25,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         ['weaponType'] = player:getWeaponSkillType(xi.slot.MAIN),
         ['damageType'] = xi.damageType.ELEMENTAL
     }
+
     local calcParams =
     {
         wsID = wsID, -- need 'calcParams.wsID' passed to global
@@ -33,28 +37,16 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     }
 
     local playerHP = player:getHP()
-    local wsc = 0
-    -- Damage calculations based on https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
-    if tp == 3000 then
-        wsc = math.floor(playerHP * 120 / 256)
-    elseif tp >= 2000 then
-        wsc = math.floor(playerHP * (math.floor(0.072 * tp) - 96) / 256)
-    elseif tp >= 1000 then
-        wsc = math.floor(playerHP * (math.floor(0.016 * tp) + 16) / 256)
-    end
+    local dmg = 0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        -- Damage calculations changed based on: http://www.bg-wiki.com/bg/Spirits_Within http://www.bluegartr.com/threads/121610-Rehauled-Weapon-Skills-tier-lists?p=6142188&viewfull=1#post6142188
-        if tp == 3000 then
-            wsc = playerHP
-        elseif tp >= 2000 then
-            wsc = math.floor(playerHP * .5)
-        elseif tp >= 1000 then
-            wsc = math.floor(playerHP * .125)
-        end
+        params.ftpMod  = { 0.125, 0.5, 1 } -- https://www.bg-wiki.com/ffxi/Spirits_Within
     end
 
-    local damage = wsc
+    local ftp = xi.weaponskills.fTP(tp, params.ftpMod)
+    dmg = math.floor(playerHP * ftp)
+
+    local damage = dmg
     damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
     damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))

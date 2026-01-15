@@ -32,7 +32,7 @@ zones[xi.zone.EASTERN_ADOULIN] =
         ARTIFACT_TERMINAL_VOLUME      = 7818,  -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER        = 7819,  -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
         HOMEPOINT_SET                 = 8309,  -- Home point set!
-        COMMON_SENSE_SURVIVAL         = 13895, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 13896, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

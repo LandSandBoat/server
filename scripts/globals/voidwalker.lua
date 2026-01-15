@@ -371,7 +371,7 @@ local mixinByMobName =
             mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
             not xi.combat.behavior.isEntityBusy(mob)
         then
-            mob:useMobAbility(xi.mob.skills.RECOIL_DIVE)
+            mob:useMobAbility(xi.mobSkill.RECOIL_DIVE_1)
         end
     end,
 
@@ -398,7 +398,7 @@ local mixinByMobName =
     end,
 
     ['Blobdingnag'] = function(mob)
-        doMobSkillEveryHPP(mob, 20, 82, xi.mob.skills.CYTOKINESIS, true)
+        doMobSkillEveryHPP(mob, 20, 82, xi.mobSkill.CYTOKINESIS, true)
     end,
 
     ['Farruca_Fly'] = function(mob)

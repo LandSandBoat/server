@@ -25,6 +25,8 @@
 #include "entities/charentity.h"
 #include "recast_container.h"
 
+#include "enums/recast.h"
+
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
 {
@@ -58,7 +60,7 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
     return nullptr;
 }
 
-Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
+Recast_t* CRecastContainer::GetRecast(const RECASTTYPE type, const Recast id)
 {
     RecastList_t* list = GetRecastList(type);
     for (auto&& recast : *list)
@@ -73,7 +75,7 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 
 Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
 {
-    return GetRecast(RECAST_LOOT, static_cast<uint16>(id));
+    return GetRecast(RECAST_LOOT, static_cast<Recast>(id));
 }
 
 /************************************************************************
@@ -82,17 +84,17 @@ Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Add(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+void CRecastContainer::Add(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Load(type, id, duration, chargeTime, maxCharges);
 }
 
 void CRecastContainer::AddLootRecast(LootRecastID id, timer::duration duration)
 {
-    Add(RECAST_LOOT, static_cast<uint16>(id), duration);
+    Add(RECAST_LOOT, static_cast<Recast>(id), duration);
 }
 
-Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+Recast_t* CRecastContainer::Load(RECASTTYPE type, const Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Recast_t* recast = GetRecast(type, id);
 
@@ -162,7 +164,7 @@ void CRecastContainer::Del(RECASTTYPE type)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Del(RECASTTYPE type, uint16 id)
+void CRecastContainer::Del(RECASTTYPE type, Recast id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -212,7 +214,7 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
+bool CRecastContainer::Has(RECASTTYPE type, Recast id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -229,7 +231,7 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 
 bool CRecastContainer::HasLootRecast(LootRecastID id)
 {
-    return Has(RECAST_LOOT, static_cast<uint16>(id));
+    return Has(RECAST_LOOT, static_cast<Recast>(id));
 }
 
 /************************************************************************
@@ -238,7 +240,7 @@ bool CRecastContainer::HasLootRecast(LootRecastID id)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, timer::duration recast)
+bool CRecastContainer::HasRecast(RECASTTYPE type, Recast id, timer::duration recast)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -310,7 +312,7 @@ void CRecastContainer::Check()
 
 /************************************************************************
  *                                                                       *
- *  Resets all job abilities except two-hour                             *
+ *  Resets all job abilities except one-hours                            *
  *                                                                       *
  ************************************************************************/
 
@@ -320,7 +322,7 @@ void CRecastContainer::ResetAbilities()
 
     for (auto&& recast : *PRecastList)
     {
-        if (recast.ID != 0)
+        if (recast.ID != Recast::Special && recast.ID != Recast::Special2)
         {
             Load(RECAST_ABILITY, recast.ID, 0s);
         }

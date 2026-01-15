@@ -63,19 +63,22 @@ entity.spawnPoints =
 
 entity.phList =
 {
+    -- TODO: Two PH's should be in a spawn set along with the NM
     [ID.mob.CARGO_CRAB_COLIN + 22] = ID.mob.CARGO_CRAB_COLIN, -- -30.384 1.000 -33.277
     [ID.mob.CARGO_CRAB_COLIN + 24] = ID.mob.CARGO_CRAB_COLIN, -- -95.359 1.000 -34.375
 }
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 1200)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 1950)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 1320)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 1320)
 end
 
 entity.onMobSpawn = function(mob)
     -- Has very high physical defense, takes normal damage from magic.
-    mob:setMod(xi.mod.UDMGPHYS, -7000)
+    mob:setMod(xi.mod.DEF, 300)
+    mob:setMod(xi.mod.VIT, 25)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -84,6 +87,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 226)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

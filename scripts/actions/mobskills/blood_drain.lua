@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local shadow = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     -- Asanbosam uses a modified blood drain that ignores shadows
-    if mob:getPool() == xi.mobPools.ASANBOSAM then
+    if mob:getPool() == xi.mobPool.ASANBOSAM then
         shadow = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     end
 

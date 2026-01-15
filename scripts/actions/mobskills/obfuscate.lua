@@ -13,9 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 0, 0, math.random(15, 20)))
 
-    return xi.effect.BLINDNESS
+    return xi.effect.FLASH
 end
 
 return mobskillObject

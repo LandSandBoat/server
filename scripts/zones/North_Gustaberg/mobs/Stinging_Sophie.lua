@@ -28,9 +28,6 @@ entity.spawnPoints =
     [ID.mob.STINGING_SOPHIE[1]] =
     {
         { x = 234.104, y = -40.332, z = 462.288 },
-    },
-    [ID.mob.STINGING_SOPHIE[2]] =
-    {
         { x = 352.974, y = -40.359, z = 472.914 },
         { x = 353.313, y = -40.347, z = 463.609 },
         { x = 237.753, y = -40.500, z = 469.738 },
@@ -53,6 +50,9 @@ entity.spawnPoints =
         { x = 216.014, y = -40.313, z = 565.127 },
         { x = 293.364, y = -41.000, z = 617.523 },
         { x = 308.459, y = -39.780, z = 635.766 },
+    },
+    [ID.mob.STINGING_SOPHIE[2]] =
+    {
         { x = 236.612, y = -40.000, z = 458.831 },
         { x = 349.108, y = -39.789, z = 592.532 },
         { x = 258.034, y = -41.000, z = 411.800 },
@@ -86,6 +86,10 @@ entity.spawnPoints =
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 197)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

@@ -28,7 +28,7 @@ xi.mobMod =
     NO_DESPAWN             = 17, -- do not despawn when too far from spawn. Gob Diggers have this.
     VAR                    = 18, -- temp var for whatever. Gets cleared on spawn
     CAN_SHIELD_BLOCK       = 19, -- toggle shield use for mobs without physical shields (trusts)
-    TP_USE_CHANCE          = 20, -- % chance to use tp
+    -- Unused              = 20, -- Free to repurpose
     PET_SPELL_LIST         = 21, -- set pet spell list
     NA_CHANCE              = 22, -- % chance to cast -na
     IMMUNITY               = 23, -- immune to set status effects. This only works from the db, not scripts
@@ -100,4 +100,5 @@ xi.mobMod =
     AVATAR_PETID           = 89, -- A value from xi.petId to select model/ability from when owner uses astral flow
     AVATAR_ASTRAL_DELAY    = 90, -- Number of milliseconds to delay AF after avatar spawn
     H2H_SINGLE_SWING       = 91, -- Mob will have only one swing per attack even as MNK with H2H skill
+    AOE_HIT_ALL            = 92, -- Mob AoE can hit any player regardless of enmity
 }

@@ -4,4 +4,5 @@ return {
     ['Luck_Rune']           = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Shattered_Telepoint'] = { messageSpecial = ID.text.TELEPOINT_HAS_BEEN_SHATTERED },
     ['Stone_Monument']      = { event = 900 },
+    ['Tahrongi_Cacti']      = { messageSpecial = ID.text.POISONOUS_LOOKING_BUDS },
 }

@@ -7,6 +7,12 @@ mixins = { require('scripts/mixins/warriors_path_taru') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SPECIAL_COOL, 30) -- Makki Chebukki uses ranged attack every 30 seconds
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)

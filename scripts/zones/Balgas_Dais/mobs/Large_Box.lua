@@ -8,35 +8,71 @@ mixins = { require('scripts/mixins/families/mimic') }
 ---@type TMobEntity
 local entity = {}
 
+local armouryCratePositions =
+{
+    -- Area 1
+    [1] =
+    {
+        [1] = { -136.186, 56.241, -224.183, 192 }, -- Small
+        [2] = { -139.186, 56.044, -224.183, 192 }, -- Medium
+        [3] = { -142.186, 56.241, -224.183, 192 }, -- Large
+    },
+
+    -- Area 2
+    [2] =
+    {
+        [1] = { 24.045, -3.759, -24.259, 192 }, -- Small
+        [2] = { 21.045, -3.956, -24.259, 192 }, -- Medium
+        [3] = { 18.045, -3.759, -24.259, 192 }, -- Large
+    },
+
+    -- Area 3
+    [3] =
+    {
+        [1] = { 183.873, -63.759, 175.816, 192 }, -- Small
+        [2] = { 180.873, -63.956, 175.816, 192 }, -- Medium
+        [3] = { 177.873, -63.759, 175.816, 192 }, -- Large
+    },
+}
+
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.ATTP, 25)
-    mob:setMod(xi.mod.DEFP, 25)
-    mob:setMod(xi.mod.EVA, -50)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.REGAIN, 100)
 end
 
 entity.onMobEngage = function(mob, target)
-    local mobId = mob:getID()
-    local small = GetMobByID(mobId - 2)
-
-    if
-        small and
-        small:getLocalVar('engaged') == 0
-    then
-        small:setLocalVar('engaged', 1)
-
-        DespawnMob(mobId - 2)
-        DespawnMob(mobId - 1)
-
-        if math.random(1, 3) == 1 then
-            mob:setStatus(xi.status.INVISIBLE)
-            mob:setHP(0)
-        else
-            mob:setAnimationSub(1)
-        end
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
     end
-end
 
-entity.onMobDeath = function(mob, player, optParams)
+    local crate = GetNPCByID(battlefield:getArmouryCrate())
+    if not crate then
+        return
+    end
+
+    local boxId = mob:getID()
+    local area  = battlefield:getArea()
+
+    -- On engage, despawn the other two boxes
+    DespawnMob(boxId - 2) -- Small Box
+    DespawnMob(boxId - 1) -- Medium Box
+
+    -- Determine if this box is a winner
+    if math.random(1, 3) == 1 then
+        -- We won! Set to invisible and and kill the box, move Armoury Crate to Large Box position
+        mob:setStatus(xi.status.INVISIBLE)
+        mob:setHP(0)
+        local pos = armouryCratePositions[area][3] -- Large (3) position
+        crate:setPos(pos[1], pos[2], pos[3], pos[4])
+    else
+        -- We lost... Set animation sub to 1 (Mimic) and move Armoury Crate to Small or Medium Box position
+        mob:setAnimationSub(1)
+        local pos = armouryCratePositions[area][math.random(1, 2)] -- Small (1) or Medium (2) position
+        crate:setPos(pos[1], pos[2], pos[3], pos[4])
+    end
 end
 
 return entity

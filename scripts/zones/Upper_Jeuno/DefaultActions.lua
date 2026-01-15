@@ -2,12 +2,13 @@ local ID = zones[xi.zone.UPPER_JEUNO]
 
 return {
     ['_6s2']            = { messageSpecial = ID.text.NO_ONES_HOME },
+    ['_6s4']            = { messageSpecial = ID.text.ITS_LOCKED },
     ['_6sb']            = { text = ID.text.IT_READS_STAFF_ONLY },
     ['Ajithaam']        = { event = 10092 },
     ['Alfrieda']        = { event = 10123 },
     ['Artush']          = { event = 42 },
     ['Balkehr']         = { event = 39 },
-    ['Baudin']          = { event = 173 }, -- Door behind Baudin is supposed to be locked. Most likely opens once you're on Magicite and start Crest of Davoi/Save my Sister
+    ['Baudin']          = { event = 173 },
     ['Bozz']            = { event = 35 },
     ['Brutus']          = { event = 66 },
     ['Chiphraix']       = { event = 153 },

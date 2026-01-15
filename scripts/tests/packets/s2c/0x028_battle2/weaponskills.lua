@@ -214,10 +214,10 @@ local packets =
     ['Skillchain'] =
     {
         test = function(player, mob)
+            stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
             mob:setUnkillable(true)
             player:changeJob(xi.job.SAM)
             player:setLevel(99)
-            player:setMod(xi.mod.ACC, 10000)
             player:addItem(xi.item.MASAMUNE_99)
             player:equipItem(xi.item.MASAMUNE_99, nil, xi.slot.MAIN)
 

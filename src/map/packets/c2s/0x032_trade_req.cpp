@@ -58,8 +58,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
 
     // If either player is crafting, don't allow the trade request.
     // TODO: Not retail accurate but leaving it here for now.
-    if (PChar->animation == ANIMATION_SYNTH || (PChar->CraftContainer && PChar->CraftContainer->getItemsCount() > 0) ||
-        PTarget->animation == ANIMATION_SYNTH || (PTarget->CraftContainer && PTarget->CraftContainer->getItemsCount() > 0))
+    if (PChar->isCrafting() || PTarget->isCrafting())
     {
         ShowError("%s trade request with %s was blocked. They are synthing!", PChar->getName(), PTarget->getName());
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);

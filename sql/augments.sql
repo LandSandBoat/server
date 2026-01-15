@@ -431,15 +431,15 @@ INSERT INTO `augments` VALUES (345,0,0,0,0,0);
 INSERT INTO `augments` VALUES (346,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (347,0,0,0,0,0); -- Healing Magic Recast Delay -1
-INSERT INTO `augments` VALUES (348,0,0,0,0,0); -- Elemental Magic Recast Delay -1
-INSERT INTO `augments` VALUES (349,0,0,0,0,0); -- Enfeebling Magic Recast Delay -1
+INSERT INTO `augments` VALUES (347,0,1183,-1,0,0); -- Healing Magic Recast Delay -1%
+INSERT INTO `augments` VALUES (348,0,1146,-1,0,0); -- Elemental Magic Recast Delay -1%
+INSERT INTO `augments` VALUES (349,0,1184,-1,0,0); -- Enfeebling Magic Recast Delay -1%
 INSERT INTO `augments` VALUES (350,0,0,0,0,0); -- Occ. maximizes magic accuracy+1%
 INSERT INTO `augments` VALUES (351,0,909,1,0,0); -- Occ. quickens spellcasting+1%
 INSERT INTO `augments` VALUES (352,0,0,0,0,0); -- Occ. grants dmg. bonus based on TP+1%
 INSERT INTO `augments` VALUES (353,0,345,50,0,0); -- TP Bonus +50
 INSERT INTO `augments` VALUES (354,0,430,1,0,0);  -- Quadruple Attack+1%
-INSERT INTO `augments` VALUES (355,0,0,0,0,0); -- Enhancing Magic Recast Delay -1
+INSERT INTO `augments` VALUES (355,0,1185,-1,0,0); -- Enhancing Magic Recast Delay -1%
 INSERT INTO `augments` VALUES (356,0,375,1,0,0); -- Potency of Cure received+1%
 
 -- 354 to 362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
@@ -456,7 +456,7 @@ INSERT INTO `augments` VALUES (364,0,0,0,0,0); -- 364 currently unused. Leave at
 INSERT INTO `augments` VALUES (365,0,0,0,0,0); -- 365 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (366,0,0,0,0,0); -- Blood Pact Ability Delay II: (modId is 541 but no idea what the value of the augment is so leaving zero until the value is determined)
 INSERT INTO `augments` VALUES (367,0,0,0,0,0); -- 367 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (368,0,301,1,0,0); -- Phalanx+1
+INSERT INTO `augments` VALUES (368,0,1182,1,0,0); -- Phalanx Received+1
 INSERT INTO `augments` VALUES (369,0,126,1,1,1); -- Avatar: Blood Pact Dmg+1
 INSERT INTO `augments` VALUES (370,0,836,1,0,0); -- Reverse Flourish+1
 INSERT INTO `augments` VALUES (371,0,989,1,0,0); -- Regen Potency+1

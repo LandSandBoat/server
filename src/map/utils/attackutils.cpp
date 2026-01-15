@@ -234,45 +234,17 @@ uint8 getHitCount(uint8 hits)
 
 bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
 {
-    auto isParriedFunc = lua["xi"]["combat"]["physical"]["isParried"];
-
-    if (isParriedFunc.valid())
-    {
-        try
-        {
-            bool result = isParriedFunc(PDefender, PAttacker);
-            return result;
-        }
-        catch (const sol::error& err)
-        {
-            ShowError("attackutils::IsParried(): %s", err.what());
-            return false;
-        }
-    }
-    else
-    {
-        ShowError("attackutils::IsParried() failed to run Lua function");
-    }
-
-    return false;
+    return luautils::callGlobal<bool>("xi.combat.physical.isParried", PDefender, PAttacker);
 }
 
 bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
 {
-    if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
-    {
-        return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
-    }
-    return false;
+    return luautils::callGlobal<bool>("xi.combat.physical.isGuarded", PDefender, PAttacker);
 }
 
 bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
 {
-    if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
-    {
-        return (xirand::GetRandomNumber<float>(100) < battleutils::GetBlockRate(PAttacker, PDefender));
-    }
-    return false;
+    return luautils::callGlobal<bool>("xi.combat.physical.isBlocked", PDefender, PAttacker);
 }
 
 /************************************************************************

@@ -34,6 +34,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         YOU_NO_REQS                   = 7910, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         YOUR_IMPERIAL_STANDING        = 7926, -- Your Imperial Standing has increased!
         SPINE_CHILL                   = 8398, -- You feel a chill run down your spine!
+        PILE_OF_DISCARDED_MATERIALS   = 8429, -- There is a pile of discarded materials here.
         HAND_OVER_TO_IMMORTAL         = 8456, -- You hand over the % to the Immortal.
         CANNOT_ENTER                  = 8475, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 8476, -- This area is fully occupied. You were unable to enter.

@@ -385,6 +385,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget);
 int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action);
 int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
 auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
+void   OnMobSkillFinalize(CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers when mob skill state cleanup runs
 int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
 int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
@@ -423,6 +424,7 @@ auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of
 
 void  OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);                                      // for mobs with additional effects
 void  OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_result_t* Action, int32 damage);                                          // for mobs with spikes
+int32 OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage);    // for items with additional effects defined in a script
 int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage);    // for items with additional effects
 void  additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage); // for armor with spikes
 

@@ -300,7 +300,10 @@ xi.mod =
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
     CURE_CAST_TIME                  = 519,
-    ELEMENTAL_CELERITY              = 901, -- Quickens Elemental Magic Casting
+    ELEMENTAL_CELERITY              = 901,  -- Quickens Elemental Magic Casting
+    HEALING_MAGIC_RECAST            = 1183, -- Recast delay (percent, usually negative)
+    ENFEEBLING_MAGIC_RECAST         = 1184, -- Recast delay (percent, usually negative)
+    ENHANCING_MAGIC_RECAST          = 1185, -- Recast delay (percent, usually negative)
     DELAY                           = 171,
     RANGED_DELAY                    = 172,
     MARTIAL_ARTS                    = 173,
@@ -414,6 +417,7 @@ xi.mod =
     BLINK                           = 299,
     STONESKIN                       = 300,
     PHALANX                         = 301,
+    PHALANX_RECEIVED                = 1182, -- Phalanx +N when Phalanx is received (cast on self or from other player)
     TRIPLE_ATTACK                   = 302,
     TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
@@ -762,17 +766,19 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_LVADJUST = 278, -- level correction factor to use, if any
-    ITEM_ADDEFFECT_PLACEHLD = 279, -- placeholder, want to keep these together and 99% sure we'll use this
-    ITEM_ADDEFFECT_DSTAT    = 280, -- value = attacker modifier to use as bonus dmg (mnd, int, etc)
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_LVADJUST = 278,  -- level correction factor to use, if any
+    ITEM_ADDEFFECT_PLACEHLD = 279,  -- placeholder, want to keep these together and 99% sure we'll use this
+    ITEM_ADDEFFECT_DSTAT    = 280,  -- value = attacker modifier to use as bonus dmg (mnd, int, etc)
+    ITEM_ADDEFFECT_TYPE     = 431,  -- see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT          = 499,  -- Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500,  -- Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501,  -- Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950,  -- Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951,  -- Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952,  -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953,  -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_PRIORITY = 1180, -- Set to 1 to check add effect anyway even if enspells etc have already occured
+    ITEM_ADDEFFECT_SCRIPTED = 1181, -- Set to 1 to run item script directly instead of through scripts\globals\additional_effects.lua
 
     FERAL_HOWL_DURATION             = 503, -- +20% duration per merit when wearing augmented Monster Jackcoat +2
     MANEUVER_BONUS                  = 504, -- Maneuver Stat Bonus

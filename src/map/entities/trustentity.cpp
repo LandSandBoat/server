@@ -153,10 +153,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
         if (PAbility->isAoE())
         {
             PAI->TargetFind->reset();
-
-            float distance = PAbility->getRange();
-
-            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, FINDFLAGS_NONE, PAbility->getValidTarget());
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, PAbility->getRadius(), FINDFLAGS_NONE, PAbility->getValidTarget());
 
             auto prevMsg = MsgBasic::NONE;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
@@ -222,7 +219,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
         state.ApplyEnmity();
 
-        PRecastContainer->Add(RECAST_ABILITY, action.actionid, action.recast);
+        PRecastContainer->Add(RECAST_ABILITY, static_cast<Recast>(action.actionid), action.recast);
     }
 }
 
@@ -472,7 +469,7 @@ void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     auto* PSpell = state.GetSpell();
 
-    PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
+    PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
 }
 
 void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)

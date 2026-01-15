@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     -- Cyranuce M Cutauleon
-    if mob:getPool() == xi.mobPools.CYRANUCE_M_CUTAULEON then
+    if mob:getPool() == xi.mobPool.CYRANUCE_M_CUTAULEON then
         power = 100 -- yes, really
     end
 

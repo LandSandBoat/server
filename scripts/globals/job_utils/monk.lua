@@ -76,6 +76,12 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
 end
 
 xi.job_utils.monk.useChiBlast = function(player, target, ability)
+    local penanceMerits = player:getMerit(xi.merit.PENANCE) -- 20/40/60/80/100
+    if penanceMerits > 0 then
+        target:delStatusEffectSilent(xi.effect.INHIBIT_TP)
+        target:addStatusEffect(xi.effect.INHIBIT_TP, 25, 0, penanceMerits)
+    end
+
     local boost = player:getStatusEffect(xi.effect.BOOST)
     local multiplier = 1.0
     if boost ~= nil then

@@ -30,7 +30,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     }
 
     if not mob:hasStatusEffect(xi.effect.STONESKIN) then
-        table.insert(spellList, 1, xi.magic.spell.STONESKIN)
+        table.insert(spellList, xi.magic.spell.STONESKIN)
     end
 
     if not mob:hasStatusEffect(xi.effect.PROTECT) then

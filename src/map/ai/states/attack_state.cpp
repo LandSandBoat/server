@@ -75,6 +75,9 @@ bool CAttackState::Update(timer::time_point tick)
             action_t action{};
             if (m_PEntity->OnAttack(*this, action))
             {
+                // TODO: what about AoE auto attacks?
+                battleutils::handleKillshotEnmity(m_PEntity, PTarget);
+
                 // CMobEntity::OnAttack(...) can generate it's own action with a mobmod, and that leaves this action.actionType = 0, which is never valid. Skip sending the packet.
                 if (action.actiontype != ActionCategory::None)
                 {

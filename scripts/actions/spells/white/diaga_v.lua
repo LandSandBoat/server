@@ -11,19 +11,16 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local damage = xi.spells.damage.useDamageSpell(caster, target, spell)
+    local tier   = 9
 
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
-    if bio and bio:getTier() >= 5 then
-        return damage
-    else
+    if bio and bio:getTier() < tier then
         target:delStatusEffect(xi.effect.BIO)
+        local power = 5 + caster:getMod(xi.mod.DIA_DOT)
+
+        target:addStatusEffect(xi.effect.DIA, power, 3, 180, 0, 30, tier)
     end
-
-    -- Apply effect.
-    local power = 5 + caster:getMod(xi.mod.DIA_DOT)
-
-    target:addStatusEffect(xi.effect.DIA, power, 3, 180, 0, 30, 5)
 
     return damage
 end

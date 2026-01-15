@@ -1,23 +1,16 @@
 -----------------------------------
 -- Spell: Charged Whisker
--- Deals lightning damage to enemies within area of effect
+-- Deals Lightning damage to enemies within area of effect.
 -- Spell cost: 183 MP
 -- Monster Type: Beast
 -- Spell Type: Magical (Lightning)
 -- Blue Magic Points: 4
--- Stat Bonus: HP-10, DEX+2, INT+2
+-- Stat Bonus: HP-10 DEX+2 INT+2
 -- Level: 88
--- Casting Time: 7 seconds
--- Recast Time: 60 seconds
--- Magic Bursts on: Impaction, Fragmentation, Light
+-- Casting Time: 5 seconds
+-- Recast Time: 85 seconds
+-- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Gilfinder, Treasure Hunter
------------------------------------
--- Research from BG-Wiki:
--- - WSC: 50% DEX
--- - fTP: 4.5
--- - dINT Multiplier: 2.0
--- - AoE: Caster-centered, radial 12.5' yalms
--- - Strongly affected by MAB, Day/Weather, and Obis
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
@@ -30,11 +23,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem   = xi.ecosystem.BEAST
     params.attackType  = xi.attackType.MAGICAL
-    params.damageType  = xi.damageType.LIGHTNING
+    params.damageType  = xi.damageType.THUNDER
     params.attribute   = xi.mod.INT
-    params.multiplier  = 4.5
-    params.tMultiplier = 2.0
-    params.duppercap   = 89  -- Level 88 spell
+    params.multiplier  = 2.0
+    params.tMultiplier = 4.5
+    params.duppercap   = 100
     params.str_wsc     = 0.0
     params.dex_wsc     = 0.5
     params.vit_wsc     = 0.0
@@ -43,6 +36,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc     = 0.0
     params.chr_wsc     = 0.0
 
+    -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 
     return damage

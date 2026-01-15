@@ -2,25 +2,18 @@
 -- Area: Sacrificial Chamber
 -- Name: Tonberrys Elemental
 -----------------------------------
-mixins = { require('scripts/mixins/pet_summon_setup') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    local possibleSummons =
+    local possibleTypes =
     {
-        xi.pets.summon.type.FIRE_SPIRIT,
-        xi.pets.summon.type.WATER_SPIRIT,
-        xi.pets.summon.type.LIGHT_SPIRIT,
+        [1] = xi.pets.summon.type.FIRE_SPIRIT,
+        [2] = xi.pets.summon.type.WATER_SPIRIT,
+        [3] = xi.pets.summon.type.LIGHT_SPIRIT,
     }
 
-    local summonBitmask = 0
-    for _, entry in ipairs(possibleSummons) do
-        summonBitmask = utils.mask.setBit(summonBitmask, entry, true)
-    end
-
-    mob:setLocalVar('[Summon]mask', summonBitmask)
+    xi.pets.summon.setupSummon(mob, possibleTypes)
 end
 
 return entity

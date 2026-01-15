@@ -427,13 +427,13 @@ void CZoneEntities::WeatherChange(Weather weather)
             if (PCurrentMob->m_Element == element)
             {
                 PCurrentMob->SetDespawnTime(0s);
-                PCurrentMob->m_AllowRespawn = true;
-                PCurrentMob->Spawn();
+                PCurrentMob->m_CanSpawn = true;
+                PCurrentMob->TrySpawn();
             }
             else
             {
                 PCurrentMob->SetDespawnTime(1s);
-                PCurrentMob->m_AllowRespawn = false;
+                PCurrentMob->m_CanSpawn = false;
             }
         }
         else if (PCurrentMob->m_SpawnType & SPAWNTYPE_FOG)
@@ -441,13 +441,13 @@ void CZoneEntities::WeatherChange(Weather weather)
             if (weather == Weather::Fog)
             {
                 PCurrentMob->SetDespawnTime(0s);
-                PCurrentMob->m_AllowRespawn = true;
-                PCurrentMob->Spawn();
+                PCurrentMob->m_CanSpawn = true;
+                PCurrentMob->TrySpawn();
             }
             else
             {
                 PCurrentMob->SetDespawnTime(1s);
-                PCurrentMob->m_AllowRespawn = false;
+                PCurrentMob->m_CanSpawn = false;
             }
         }
     }
@@ -1351,7 +1351,7 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 if (PMob->m_SpawnType & SPAWNTYPE_ATNIGHT)
                 {
                     PMob->SetDespawnTime(1ms);
-                    PMob->m_AllowRespawn = false;
+                    PMob->m_CanSpawn = false;
                 }
             }
         }
@@ -1365,7 +1365,7 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 if (PMob->m_SpawnType & SPAWNTYPE_ATEVENING)
                 {
                     PMob->SetDespawnTime(1ms);
-                    PMob->m_AllowRespawn = false;
+                    PMob->m_CanSpawn = false;
                 }
             }
         }
@@ -1389,12 +1389,8 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 if (PMob->m_SpawnType & SPAWNTYPE_ATEVENING)
                 {
                     PMob->SetDespawnTime(0s);
-                    PMob->m_AllowRespawn = true;
-
-                    if ((PMob->m_spawnGroup && PMob->CanSpawnFromGroup()) || !PMob->m_spawnGroup)
-                    {
-                        PMob->Spawn();
-                    }
+                    PMob->m_CanSpawn = true;
+                    PMob->TrySpawn();
                 }
             }
         }
@@ -1406,12 +1402,8 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 if (PMob->m_SpawnType & SPAWNTYPE_ATNIGHT)
                 {
                     PMob->SetDespawnTime(0s);
-                    PMob->m_AllowRespawn = true;
-
-                    if ((PMob->m_spawnGroup && PMob->CanSpawnFromGroup()) || !PMob->m_spawnGroup)
-                    {
-                        PMob->Spawn();
-                    }
+                    PMob->m_CanSpawn = true;
+                    PMob->TrySpawn();
                 }
             }
         }

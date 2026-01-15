@@ -11,9 +11,9 @@ itemObject.onItemCheck = function(target, player)
     local result = xi.msg.basic.ITEM_UNABLE_TO_USE
 
     if
-        target:getPool() == xi.mobPools.SHIKAREE_X or
-        target:getPool() == xi.mobPools.SHIKAREE_Y or
-        target:getPool() == xi.mobPools.SHIKAREE_Z
+        target:getPool() == xi.mobPool.SHIKAREE_X or
+        target:getPool() == xi.mobPool.SHIKAREE_Y or
+        target:getPool() == xi.mobPool.SHIKAREE_Z
     then
         result = 0
     elseif target:checkDistance(player) > 10 then
@@ -28,7 +28,7 @@ itemObject.onItemUse = function(target, player)
     local siredonCount = target:getLocalVar('siredonCount')
 
     -- Shikaree Z rejects the second siredon
-    if pool == xi.mobPools.SHIKAREE_Z and siredonCount >= 1 then
+    if pool == xi.mobPool.SHIKAREE_Z and siredonCount >= 1 then
         target:messageText(target, ID.text.SHIKAREE_Z_OFFSET + 6) -- SIREDON_REJECT
         return
     end
@@ -36,9 +36,9 @@ itemObject.onItemUse = function(target, player)
     -- Determine which accept message to use based on pool and count
     local messageOffsets =
     {
-        [xi.mobPools.SHIKAREE_X] = { ID.text.SHIKAREE_X_OFFSET + 5, ID.text.SHIKAREE_X_OFFSET + 6 },
-        [xi.mobPools.SHIKAREE_Y] = { ID.text.SHIKAREE_Y_OFFSET + 5, ID.text.SHIKAREE_Y_OFFSET + 6 },
-        [xi.mobPools.SHIKAREE_Z] = { ID.text.SHIKAREE_Z_OFFSET + 5 },
+        [xi.mobPool.SHIKAREE_X] = { ID.text.SHIKAREE_X_OFFSET + 5, ID.text.SHIKAREE_X_OFFSET + 6 },
+        [xi.mobPool.SHIKAREE_Y] = { ID.text.SHIKAREE_Y_OFFSET + 5, ID.text.SHIKAREE_Y_OFFSET + 6 },
+        [xi.mobPool.SHIKAREE_Z] = { ID.text.SHIKAREE_Z_OFFSET + 5 },
     }
 
     local messages = messageOffsets[pool]

@@ -23,8 +23,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 15)
 
-    -- reset everyones enmity
-    mob:resetEnmity(target)
+    -- set everyone's enmity inactive
+    mob:setEnmityActive(target, false)
 
     return dmg
 end

@@ -306,6 +306,8 @@ public:
     bool isAnon() const;               // is /anon
     bool isAway() const;               // is /away (tells will not go through)
     bool hasAutoTargetEnabled() const; // has autotarget enabled
+    auto isCrafting() const -> bool;   // is currently synthesizing
+    auto isFishing() const -> bool;    // is currently fishing
 
     profile_t       profile{};
     capacityChain_t capacityChain{};

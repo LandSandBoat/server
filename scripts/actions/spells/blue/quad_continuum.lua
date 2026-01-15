@@ -1,19 +1,16 @@
 -----------------------------------
--- Spell: Quad Continuum
--- Delivers a fourfold attack
--- Spell cost: 55 MP
--- Monster Type: Luminian
+-- Spell: Quadratic Continuum
+-- Delivers a fourfold attack. Damage varies with TP
+-- Spell cost: 91 MP
+-- Monster Type: Empty
 -- Spell Type: Physical (Piercing)
 -- Blue Magic Points: 4
--- Stat Bonus: DEX+4, AGI+4
+-- Stat Bonus: DEX+3 CHR-2
 -- Level: 85
--- Casting Time: 0.5 seconds
--- Recast Time: 25 seconds
------------------------------------
+-- Casting Time: 1 seconds
+-- Recast Time: 31.75 seconds
+-- Skillchain Element(s): Distortion/Scission
 -- Combos: Dual Wield
------------------------------------
--- Notes: PROXY FORMULA: Based on Amorphic Spikes (WSC 20% DEX/20% INT, fTP 1.0)
--- 4 hits instead of 5
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
@@ -23,22 +20,24 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- PROXY: Using Amorphic Spikes formula (4 hits)
     local params = {}
-    params.ecosystem = xi.ecosystem.LUMINIAN
+    params.ecosystem = xi.ecosystem.EMPTY
+    params.tpmod = xi.spells.blue.tpMod.DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
+    params.scattr = xi.skillchainType.DISTORTION
+    params.scattr2 = xi.skillchainType.SCISSION
     params.numhits = 4
-    params.multiplier = 1.0
-    params.tp150 = 1.0
-    params.tp300 = 1.0
-    params.azuretp = 1.0
-    params.duppercap = 86
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.2
-    params.vit_wsc = 0.0
+    params.multiplier = 1.25
+    params.tp150 = 1.5
+    params.tp300 = 1.75
+    params.azuretp = 2.0
+    params.duppercap = 75
+    params.str_wsc = 0.32
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.32
     params.agi_wsc = 0.0
-    params.int_wsc = 0.2
+    params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 

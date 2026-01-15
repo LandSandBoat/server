@@ -47,13 +47,11 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 0 then
-                        return quest:progressEvent(172)
-                    elseif questProgress == 2 then
+                    if questProgress == 1 then
                         return quest:progressEvent(105)
-                    elseif questProgress == 4 then
+                    elseif questProgress == 3 then
                         return quest:event(27)
-                    elseif questProgress == 5 then
+                    elseif questProgress == 4 then
                         return quest:progressEvent(107)
                     end
                 end,
@@ -62,8 +60,10 @@ quest.sections =
             ['Mailloquetat'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
+                    if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(159)
+                    else
+                        return quest:event(158)
                     end
                 end,
             },
@@ -71,7 +71,7 @@ quest.sections =
             onEventFinish =
             {
                 [105] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 3)
+                    quest:setVar(player, 'Prog', 2)
                 end,
 
                 [107] = function(player, csid, option, npc)
@@ -79,7 +79,7 @@ quest.sections =
                 end,
 
                 [159] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
+                    quest:setVar(player, 'Prog', 1)
                 end,
 
                 [172] = function(player, csid, option, npc)
@@ -95,9 +95,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 3 then
+                    if questProgress == 2 then
                         return quest:progressEvent(98)
-                    elseif questProgress == 4 then
+                    elseif questProgress >= 3 then
                         return quest:progressEvent(99)
                     end
                 end,
@@ -106,8 +106,10 @@ quest.sections =
             onEventFinish =
             {
                 [98] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DUCAL_GUARDS_LANTERN)
-                    quest:setVar(player, 'Prog', 4)
+                    if option == 0 then
+                        npcUtil.giveKeyItem(player, xi.ki.DUCAL_GUARDS_LANTERN)
+                        quest:setVar(player, 'Prog', 3)
+                    end
                 end,
             },
         },
@@ -117,7 +119,7 @@ quest.sections =
             ['Brazier'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 4 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(44)
                     end
                 end,
@@ -136,7 +138,7 @@ quest.sections =
                             if lanternStage < 3 then
                                 quest:incrementVar(player, 'Stage', 1)
                             else
-                                quest:setVar(player, 'Prog', 5)
+                                quest:setVar(player, 'Prog', 4)
                             end
                         else
                             player:messageSpecial(brazierMessages[lanternStage][2], 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)

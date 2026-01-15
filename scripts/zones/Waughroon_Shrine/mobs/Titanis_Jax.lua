@@ -14,6 +14,9 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('spellList', 1)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 7)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 7)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.REGAIN, 200)
     xi.mix.jobSpecial.config(mob, {
         specials =
@@ -65,6 +68,7 @@ entity.onMobFight = function(mob, target)
         local deathCount = battlefield:getLocalVar('pigeonDeaths')
         if deathCount > 0 then
             local hasteValue = 750 * deathCount
+            mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150 + 16 * deathCount)
             mob:setMod(xi.mod.HASTE_ABILITY, hasteValue)
             mob:setMod(xi.mod.HASTE_GEAR, hasteValue)
             mob:setMod(xi.mod.HASTE_MAGIC, hasteValue)

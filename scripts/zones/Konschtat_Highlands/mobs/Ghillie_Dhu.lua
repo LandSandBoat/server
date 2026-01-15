@@ -21,12 +21,9 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
-
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     -- For its TP drain melee.
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-
-    -- Hits especially hard for his level, even by NM standards.
-    mob:addMod(xi.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
 
 entity.onMobRoam = function(mob)

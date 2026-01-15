@@ -69,6 +69,10 @@ entity.phList =
     [ID.mob.SHARP_EARED_ROPIPI - 1]  = ID.mob.SHARP_EARED_ROPIPI, -- 227.825 -16.978 -317.467
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 254)
 end

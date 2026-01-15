@@ -213,6 +213,14 @@ public:
     auto isAllianceLeader(const CCharEntity* PChar) -> PacketValidator&;
     // Character must not be fishing
     auto isNotFishing(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be sitting
+    auto isNotSitting(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be charmed
+    auto isNotCharmed(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be mounted
+    auto isNotMounted(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must be engaged in combat
+    auto isEngaged(const CCharEntity* PChar) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>

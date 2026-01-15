@@ -6,14 +6,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if
-        mob:getObjType() == xi.objType.TRUST or
-        mob:getAnimationSub() == 0
-    then
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
@@ -27,9 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
-    if info.hitslanded > 0 then
-        target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)
-    end
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BLINDNESS, power, 0, duration)
 
     return dmg
 end

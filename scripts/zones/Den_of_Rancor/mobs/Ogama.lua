@@ -19,6 +19,17 @@ entity.phList =
     [ID.mob.OGAMA + 5] = ID.mob.OGAMA,
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
+end
+
 entity.onMobFight = function(mob, target)
     local mobHPP = mob:getHPP()
     local appliedDmgBoost = mob:getLocalVar('appliedDmgBoost')

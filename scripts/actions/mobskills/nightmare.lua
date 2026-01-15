@@ -33,16 +33,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local bioPower      = 15
-    local duration      = math.random(20, 30)
-    local effectTierier = 5
+    local bioPower   = 15
+    local duration   = math.random(20, 30)
+    local effectTier = 11
 
     -- Handle unbreakable sleep
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, duration, 0, 0, effectTierier))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, duration, 0, 0, effectTier))
 
     -- Handle special Bio
+    target:delStatusEffectSilent(xi.effect.DIA)
     target:delStatusEffectSilent(xi.effect.BIO)
-    target:addStatusEffect(xi.effect.BIO, bioPower, 3, duration, 0, 10, effectTierier)
+    target:addStatusEffect(xi.effect.BIO, bioPower, 3, duration, 0, 10, effectTier)
 
     return xi.effect.SLEEP_I
 end

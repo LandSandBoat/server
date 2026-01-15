@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Queen
---  Vid: https://www.youtube.com/watch?v=AVsEbYjSAHM
------------------------------------
-mixins = { require('scripts/mixins/draw_in') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -24,31 +21,51 @@ local callPetParams =
 {
     inactiveTime = 5000,
     dieWithOwner = true,
+    ignoreInactive = true,
     maxSpawns = 1,
 }
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 900)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PETRIFY)
+
+    mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 3370)
-    mob:setMod(xi.mod.STUN_MEVA, 50)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.STUN)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.REGEN, 25)
     mob:setLocalVar('spawn_time', GetSystemTime() + 5) -- five seconds for first pet
 end
 
 entity.onMobFight = function(mob, target)
-    -- Every 30 seconds spawn a random Prince or Princess. If none remain then summon the Bastard.
-    -- Retail confirmed
+    -- Every 17-30 seconds unless extended by a spell cast spawn a random Prince or Princess. If none remain then summon the Bastard.
+    local drawInTable =
+    {
+        conditions =
+        {
+            mob:checkDistance(target) >= mob:getMeleeRange(target),
+        },
+
+        position = { x = 020.918, y = 019.953, z = -108.722, rot = 058.000 },
+    }
+
+    utils.drawIn(target, drawInTable)
     if
         not xi.combat.behavior.isEntityBusy(mob) and
         GetSystemTime() >= mob:getLocalVar('spawn_time')
     then
-        mob:setLocalVar('spawn_time', GetSystemTime() + 30)
+        mob:setLocalVar('spawn_time', GetSystemTime() + math.random(17, 30))
+        mob:setMagicCastingEnabled(false)
 
         -- will call the first that is not spawned
         if not xi.mob.callPets(mob, utils.shuffle(basicPets), callPetParams) then

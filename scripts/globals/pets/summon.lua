@@ -139,3 +139,18 @@ xi.pets.summon.spellListId =
     [xi.pets.summon.type.CAIT_SITH     ] =  0,
     [xi.pets.summon.type.SIREN         ] =  0,
 }
+
+xi.pets.summon.setupSummon = function(mob, summonTable)
+    local chosenSummon = summonTable[math.random(1, #summonTable)]
+
+    -- Sets the spell list and model
+    mob:setSpellList(xi.pets.summon.spellListId[chosenSummon])
+    mob:setModelId(xi.pets.summon.modelId[chosenSummon])
+
+    -- Apply resistance ranks
+    for element = xi.element.FIRE, xi.element.DARK do
+        local resistanceRankMod   = xi.data.element.getElementalResistanceRankModifier(element)
+        local resistanceRankValue = xi.pets.summon.resistanceRanks[chosenSummon][element]
+        mob:setMod(resistanceRankMod, resistanceRankValue)
+    end
+end

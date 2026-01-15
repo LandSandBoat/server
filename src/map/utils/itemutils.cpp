@@ -563,6 +563,16 @@ void Initialize()
     PUnarmedH2HItem->setDmgType(DAMAGE_TYPE::HTH);
     PUnarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
     PUnarmedH2HItem->setDamage(0);
+
+    // load magian trial data AFTER items
+    auto registerTrialListeners = lua["xi"]["magian"]["registerTrialListeners"];
+    if (!registerTrialListeners.valid())
+    {
+        ShowError("xi.magians.registerTrialListeners not valid!");
+    }
+
+    ShowInfo("do_init: loading Magian trial listeners");
+    registerTrialListeners();
 }
 
 /************************************************************************

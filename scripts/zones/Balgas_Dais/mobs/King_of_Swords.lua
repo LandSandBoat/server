@@ -15,6 +15,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PARALYZE)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobSpawn = function(mob)
@@ -39,17 +40,20 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        xi.magic.spell.PROTECT_IV,
-        xi.magic.spell.SHELL_III,
-        xi.magic.spell.BANISH_II,
-        xi.magic.spell.CURE_IV,
-        xi.magic.spell.FLASH,
+        [1] = { xi.magic.spell.BANISH_II,  target, false, xi.action.type.DAMAGE_TARGET,     nil,               0, 100 },
+        [2] = { xi.magic.spell.FLASH,      target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.FLASH,   0, 100 },
+        [3] = { xi.magic.spell.PROTECT_IV, mob,    true,  xi.action.type.ENHANCING_TARGET,  xi.effect.PROTECT, 0,  25 },
+        [4] = { xi.magic.spell.SHELL_III,  mob,    true,  xi.action.type.ENHANCING_TARGET,  xi.effect.SHELL,   0,  25 },
+        [5] = { xi.magic.spell.CURE_IV,    mob,    true,  xi.action.type.HEALING_TARGET,    33,                0, 100 },
     }
 
-    return spellList[math.random(1, #spellList)]
-end
+    local groupTable =
+    {
+        GetMobByID(mob:getID() + 2), -- Queen of Cups
+        GetMobByID(mob:getID() + 3), -- Queen of Batons
+    }
 
-entity.onMobDeath = function(mob, player, optParams)
+    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
 end
 
 return entity

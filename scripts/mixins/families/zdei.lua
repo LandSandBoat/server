@@ -20,12 +20,12 @@ g_mixins.families.zdei = function(zdeiMob)
     -- Assign rotation speed and direction based off of pools
     local rotationPools =
     {
-        [xi.mobPools.EOZDEI_LEFT]   = -16,
-        [xi.mobPools.EOZDEI_RIGHT]  =  16,
-        [xi.mobPools.AWZDEI_LEFT]   = -16,
-        [xi.mobPools.AWZDEI_RIGHT]  =  16,
-        [xi.mobPools.AWZDEI_FAST_L] = -32,
-        [xi.mobPools.AWZDEI_FAST_R] =  32,
+        [xi.mobPool.EOZDEI_LEFT]   = -16,
+        [xi.mobPool.EOZDEI_RIGHT]  =  16,
+        [xi.mobPool.AWZDEI_LEFT]   = -16,
+        [xi.mobPool.AWZDEI_RIGHT]  =  16,
+        [xi.mobPool.AWZDEI_FAST_L] = -32,
+        [xi.mobPool.AWZDEI_FAST_R] =  32,
     }
 
     zdeiMob:addListener('SPAWN', 'ZDEI_SPAWN', function(mob)
@@ -43,6 +43,33 @@ g_mixins.families.zdei = function(zdeiMob)
     zdeiMob:addListener('ENGAGE', 'ZDEI_ENGAGE', function(mob, target)
         mob:setAnimationSub(1)
         mob:setLocalVar('changeTime', GetSystemTime() + math.random(15, 30))
+    end)
+
+    zdeiMob:addListener('WEAPONSKILL_STATE_EXIT', 'ZDEI_WS_EXIT', function(mob, skillID)
+        if skillID == xi.mobSkill.OPTIC_INDURATION_CHARGE then
+            local chargeCount = mob:getLocalVar('chargeCount')
+            local chargeTotal = mob:getLocalVar('chargeTotal')
+
+            if chargeTotal > 0 and chargeCount == chargeTotal then
+                mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION, mob:getTarget())
+            else
+                if chargeCount == 0 then
+                    mob:setAutoAttackEnabled(false)
+                    mob:setMagicCastingEnabled(false)
+                    mob:setLocalVar('chargeTotal', math.random(3, 5))
+                end
+
+                chargeCount = chargeCount + 1
+                mob:setLocalVar('chargeCount', chargeCount)
+                mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION_CHARGE)
+            end
+
+        elseif skillID == xi.mobSkill.OPTIC_INDURATION then
+            mob:setAutoAttackEnabled(true)
+            mob:setMagicCastingEnabled(true)
+            mob:setLocalVar('chargeCount', 0)
+            mob:setLocalVar('chargeTotal', 0)
+        end
     end)
 
     zdeiMob:addListener('DISENGAGE', 'ZDEI_DISENGAGE', function(mob)

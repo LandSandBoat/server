@@ -27,8 +27,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     tini \
     tzdata \
-    zlib1g \
-    && rm -rf /var/lib/apt/lists/*
+    zlib1g
+apt-get clean && rm -rf /var/lib/apt/lists/*
+EOF
 
 # Setup runtime user.
 ARG UNAME=xiadmin
@@ -64,24 +65,24 @@ ARG LLVM_VERSION=20
 
 # Install build dependencies.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked \
-    sh -c "apt-get update && \
-    apt-get install -y --no-install-recommends \
-        binutils-dev \
-        ccache \
-        cmake \
-        g++-${GCC_VERSION} \
-        libluajit-5.1-dev \
-        libmariadb-dev-compat \
-        libssl-dev \
-        libzmq3-dev \
-        make \
-        ninja-build \
-        python3-dev \
-        python3-venv \
-        zlib1g-dev && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 100 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 100"
+    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+    binutils-dev \
+    ccache \
+    cmake \
+    g++-$GCC_VERSION \
+    libluajit-5.1-dev \
+    libmariadb-dev-compat \
+    libssl-dev \
+    libzmq3-dev \
+    make \
+    ninja-build \
+    python3-dev \
+    python3-venv \
+    zlib1g-dev
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+EOF
 ENV CC=/usr/bin/gcc-$GCC_VERSION
 ENV CXX=/usr/bin/g++-$GCC_VERSION
 
@@ -107,7 +108,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     cppcheck \
     gdb \
     luarocks
-rm -rf /var/lib/apt/lists/*
+apt-get clean && rm -rf /var/lib/apt/lists/*
 update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-$LLVM_VERSION 100
 EOF
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
@@ -126,10 +127,12 @@ ARG COMPILER=gcc
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet lsb-release wget software-properties-common gnupg
-    wget https://apt.llvm.org/llvm.sh
-    chmod +x llvm.sh
-    sudo ./llvm.sh $LLVM_VERSION all
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+        clang-$LLVM_VERSION \
+        clang-tidy-$LLVM_VERSION \
+        libclang-rt-$LLVM_VERSION-dev \
+        llvm-$LLVM_VERSION-dev
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 fi
 EOF
 
@@ -165,8 +168,6 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
-    export CXXFLAGS="-stdlib=libstdc++"
-    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
@@ -189,8 +190,6 @@ EOF
 # Service #
 ###########
 FROM base AS service
-
-RUN rm -rf /var/lib/apt/lists/*
 
 USER $UNAME
 

@@ -27,7 +27,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP
     -- http://wiki.ffo.jp/html/732.html does not list ACC Bonus
     -- https://www.bg-wiki.com/ffxi/Blade:_Ku does not list ACC Bonus
-    params.accVaries = { 1.0, 1.1, 1.2 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
+    params.accVaries = { 0, 30, 60 } -- TODO: verify exact number
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod = { 1.25, 1.25, 1.25 }

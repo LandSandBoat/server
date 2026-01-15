@@ -298,7 +298,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     -- calculate tp return of mob skill and add if hit primary target
     elseif skill:getPrimaryTargetID() == target:getID() then
-        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, false)
         tpReturn = tpReturn + 10 * (hitslanded - 1) -- extra hits give 10 TP each
         mob:addTP(tpReturn)
     end
@@ -385,7 +385,7 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
     -- magical mob skills are single hit so provide single Melee hit TP return if primary target
     -- TODO: This should probably be moved to AFTER all damage is calculated, since this is not the final step.
     if finalDamage > 0 and action:getPrimaryTargetID() == target:getID() then
-        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(actor, target)
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(actor, false)
         actor:addTP(tpReturn)
     end
 
@@ -620,8 +620,8 @@ xi.mobskills.calculateSkillTPReturn = function(damage, mob, skill, target, attac
         local targetTPReturn = 0
 
         if attackType == xi.attackType.BREATH then
-            mobTPReturn    = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
-            targetTPReturn = xi.combat.tp.calculateTPGainOnPhysicalDamage(damage, mob:getBaseDelay(), mob, target)
+            mobTPReturn    = xi.combat.tp.getSingleMeleeHitTPReturn(mob, false)
+            targetTPReturn = xi.combat.tp.calculateTPGainOnPhysicalDamage(mob, target, damage, mob:getBaseDelay())
             -- TODO: Add TP return for MAGICAL, PHYSICAL, RANGED once added in future PRs.
         end
 
@@ -767,9 +767,18 @@ end
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subType, subPower, tier)
     if target:canGainStatusEffect(typeEffect, power) then
-        local fullResist = xi.data.statusEffect.isTargetResistant(mob, target, typeEffect)
-        if fullResist then
-            return xi.msg.basic.SKILL_MISS -- resist !
+        -- Check immunity. TODO: We dont fetch elements.
+        if xi.data.statusEffect.isTargetImmune(target, typeEffect, xi.element.NONE) then
+            return xi.msg.basic.SKILL_MISS -- <user> uses <skill>, but misses <target>.
+
+        -- Check resist traits. TODO: We do not fetch action objects, so we cannot set action modifiers.
+        elseif xi.data.statusEffect.isTargetResistant(mob, target, typeEffect) then
+            -- action:setModifier(xi.msg.actionModifier.RESIST) -- Resist!
+            return xi.msg.basic.SKILL_MISS                  -- <user> uses <skill>, but misses <target>.
+
+        -- Check effect incompatibilities.
+        elseif xi.data.statusEffect.isEffectNullified(target, typeEffect, 0) then
+            return xi.msg.basic.SKILL_MISS -- <user> uses <skill>, but misses <target>.
         end
 
         local element    = mob:getStatusEffectElement(typeEffect) -- TODO: Do something.

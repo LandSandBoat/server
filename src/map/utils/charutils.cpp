@@ -288,7 +288,7 @@ void CalculateStats(CCharEntity* PChar)
     }
 
     uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
-    PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
+    PChar->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat + MeritBonus);
 
     // The beginning of the MP
 
@@ -331,7 +331,7 @@ void CalculateStats(CCharEntity* PChar)
     }
 
     MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
-    PChar->health.maxmp = (int16)(settings::get<float>("map.PLAYER_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
+    PChar->health.maxmp = (int16)(raceStat + jobStat + sJobStat + MeritBonus); // MP calculation result
 
     // Start calculating Stats
 
@@ -382,7 +382,7 @@ void CalculateStats(CCharEntity* PChar)
         MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
         // Value output
-        ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
+        ref<uint16>(&PChar->stats, counter) = (uint16)(raceStat + jobStat + sJobStat + MeritBonus);
         counter += 2;
     }
 }
@@ -833,7 +833,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
             }
             if (now < cast_time + recast)
             {
-                PChar->PRecastContainer->Load(RECAST_ABILITY, rset->get<uint32>("id"), (cast_time + recast - now), chargeTime, maxCharges);
+                PChar->PRecastContainer->Load(RECAST_ABILITY, rset->get<Recast>("id"), (cast_time + recast - now), chargeTime, maxCharges);
             }
         }
     }
@@ -2141,7 +2141,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
 
         if (PItem->isSubType(ITEM_CHARGED))
         {
-            PChar->PRecastContainer->Del(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID()); // Also remove item from the Recast List no matter what bag its in
+            PChar->PRecastContainer->Del(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID())); // Also remove item from the Recast List no matter what bag its in
         }
         PItem->setSubType(ITEM_UNLOCKED);
 
@@ -3174,7 +3174,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
                 {
                     PItem->setAssignTime(timer::now());
                     // add recast timer to Recast List from any bag
-                    PChar->PRecastContainer->Add(RECAST_ITEM, slotID << 8 | containerID, PItem->getReuseTime());
+                    PChar->PRecastContainer->Add(RECAST_ITEM, static_cast<Recast>(slotID << 8 | containerID), PItem->getReuseTime());
 
                     // Do not forget to update the timer when equipping the subject
 
@@ -3511,7 +3511,7 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
             if (PAbility->getID() < ABILITY_HEALING_RUBY && PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility))
             {
                 addAbility(PChar, PAbility->getID());
-                Charge_t*       charge     = ability::GetCharge(PChar, PAbility->getRecastId());
+                Charge_t*       charge     = ability::GetCharge(PChar, static_cast<uint16>(PAbility->getRecastId()));
                 timer::duration chargeTime = 0s;
                 auto            maxCharges = 0;
                 if (charge)
@@ -3551,7 +3551,7 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
                 if (PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility) && !(PAbility->getAddType() & ADDTYPE_MAIN_ONLY))
                 {
                     addAbility(PChar, PAbility->getID());
-                    Charge_t*       charge     = ability::GetCharge(PChar, PAbility->getRecastId());
+                    Charge_t*       charge     = ability::GetCharge(PChar, static_cast<uint16>(PAbility->getRecastId()));
                     timer::duration chargeTime = 0s;
                     auto            maxCharges = 0;
                     if (charge)
@@ -8068,10 +8068,10 @@ void ApplyAbilityRecast(CCharEntity* PChar, const CAbility* PAbility, const Char
         PChar->PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), recastTime);
     }
 
-    const uint16 recastId = PAbility->getRecastId();
-    if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastId == 173 || recastId == 174))
+    const auto recastId = PAbility->getRecastId();
+    if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastId == Recast::BloodPactRage || recastId == Recast::BloodPactWard))
     {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, (recastId == 173 ? 174 : 173), recastTime);
+        PChar->PRecastContainer->Add(RECAST_ABILITY, (recastId == Recast::BloodPactRage ? Recast::BloodPactWard : Recast::BloodPactRage), recastTime);
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);

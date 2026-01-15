@@ -25,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
-    if mob:getPool() == xi.mobPools.FAHRAFAHR_THE_BLOODIED then  -- Fahrafahr the Bloodied
+    if mob:getPool() == xi.mobPool.FAHRAFAHR_THE_BLOODIED then  -- Fahrafahr the Bloodied
         mob:resetEnmity(target)
     end
 

@@ -1,18 +1,16 @@
 -----------------------------------
 -- Spell: Goblin Rush
--- Delivers a blunt attack
--- Spell cost: 32 MP
--- Monster Type: Beastmen
+-- Delivers a threefold attack. Accuracy varies with TP
+-- Spell cost: 81 MP
+-- Monster Type: BEASTMEN
 -- Spell Type: Physical (Blunt)
--- Blue Magic Points: 4
--- Stat Bonus: STR+4
+-- Blue Magic Points: 3
+-- Stat Bonus: HP+10 DEX+3 MND-3
 -- Level: 81
 -- Casting Time: 0.5 seconds
--- Recast Time: 18 seconds
------------------------------------
+-- Recast Time: 25.5 seconds
+-- Skillchain Element(s): Fusion/Impaction
 -- Combos: Skillchain Bonus
------------------------------------
--- Notes: PROXY FORMULA: Based on Empty Thrash (WSC 50% STR, fTP 2.0)
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
@@ -22,19 +20,28 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- PROXY: Using Empty Thrash formula
     local params = {}
     params.ecosystem = xi.ecosystem.BEASTMEN
+    params.tpmod     = xi.spells.blue.tpMod.ACC
+    params.bonusacc  = 0
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+        params.bonusacc = 70
+    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        params.bonusacc = math.floor(caster:getTP() / 50)
+    end
+
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HTH
-    params.numhits = 1
-    params.multiplier = 2.0
-    params.tp150 = 2.0
-    params.tp300 = 2.0
-    params.azuretp = 2.0
-    params.duppercap = 82
-    params.str_wsc = 0.5
-    params.dex_wsc = 0.0
+    params.damageType = xi.damageType.BLUNT
+    params.scattr = xi.skillchainType.FUSION
+    params.scattr2 = xi.skillchainType.IMPACTION
+    params.numhits = 3
+    params.multiplier = 1.25
+    params.tp150 = 1.25
+    params.tp300 = 1.25
+    params.azuretp = 1.25
+    params.duppercap = 75
+    params.str_wsc = 0.30
+    params.dex_wsc = 0.30
     params.vit_wsc = 0.0
     params.agi_wsc = 0.0
     params.int_wsc = 0.0

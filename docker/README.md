@@ -216,11 +216,14 @@ docker build -f docker/ubuntu.Dockerfile .
 The Dockerfiles also support a few build args:
 
 ```
+BASE_TAG
 UNAME=xiadmin
 UGROUP=xiadmin
 UID=1000
 GID=1000
 COMPILER=gcc
+GCC_VERSION
+LLVM_VERSION
 CMAKE_BUILD_TYPE=Release
 TRACY_ENABLE=OFF
 ENABLE_CLANG_TIDY=OFF

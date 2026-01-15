@@ -159,7 +159,7 @@ void CMobSkill::setDistance(float distance)
     m_Distance = distance;
 }
 
-void CMobSkill::setFlag(uint8 flag)
+void CMobSkill::setFlag(uint16 flag)
 {
     m_Flag = flag;
 }
@@ -258,7 +258,7 @@ uint16 CMobSkill::getMsgForAction() const
     return getID();
 }
 
-uint8 CMobSkill::getFlag() const
+auto CMobSkill::getFlag() const -> uint16
 {
     return m_Flag;
 }

@@ -31,7 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Handle status effect
     local effectId      = xi.effect.BLINDNESS
     local actionElement = xi.element.DARK
-    local power         = 15
+    local power         = 20
     local duration      = math.floor(6 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

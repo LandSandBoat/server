@@ -8,8 +8,14 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 70)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
 end
 
 -- Additional effect: TP Drain absorbs all of the targets current TP

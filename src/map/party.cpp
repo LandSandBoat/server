@@ -1320,6 +1320,12 @@ void CParty::RefreshSync()
             NewMLevel = member->jobs.job[member->GetMJob()];
         }
 
+        CStatusEffect* syncEffect = member->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
+        if (syncEffect != nullptr)
+        {
+            syncEffect->SetPower(syncLevel);
+        }
+
         if (member->GetMLevel() != NewMLevel)
         {
             charutils::RemoveAllEquipMods(member);

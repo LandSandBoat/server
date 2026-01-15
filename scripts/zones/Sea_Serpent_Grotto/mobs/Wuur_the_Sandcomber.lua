@@ -20,8 +20,22 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1) -- "Will aggro any player, regardless of level"
-    mob:setMod(xi.mod.REGEN, 35) -- "Strong Auto Regen effect (around 30-40 HP)"
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PETRIFY)
+
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 5)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 2400)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 2400)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.REGEN, 35)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

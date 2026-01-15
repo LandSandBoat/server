@@ -15,7 +15,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if
         xi.data.statusEffect.isTargetImmune(target, xi.effect.SLEEP_I, xi.element.DARK) or
         xi.data.statusEffect.isTargetResistant(pet, target, xi.effect.SLEEP_I) or
-        xi.data.statusEffect.isEffectNullified(target, xi.effect.SLEEP_I) or
+        xi.data.statusEffect.isEffectNullified(target, xi.effect.SLEEP_I, 0) or
         target:hasStatusEffect(xi.effect.SLEEP_I)
     then
         if target:getID() == action:getPrimaryTargetID() then

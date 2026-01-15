@@ -18,13 +18,14 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 13)
 end
 
-entity.onMobFight = function(mob, target)
-end
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.CURE_III,
+        xi.magic.spell.PARALYGA,
+    }
 
-entity.onMagicHit = function(caster, target, spell)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    return spellList[math.random(1, #spellList)]
 end
 
 return entity

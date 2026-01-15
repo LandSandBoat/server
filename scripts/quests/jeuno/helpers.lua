@@ -454,7 +454,33 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
 
         {
             check = function(player, status, vars)
-                return status == xi.questStatus.QUEST_ACCEPTED
+                return status == xi.questStatus.QUEST_ACCEPTED and
+                    not player:hasKeyItem(xi.keyItem.OLD_GAUNTLETS)
+            end,
+
+            [xi.zone.UPPER_JEUNO] =
+            {
+                ['Guslam'] = quest:event(43),
+            },
+
+            -- Old gauntlets coffer logic.
+            [params.oldGauntletZoneId] =
+            {
+                ['Treasure_Coffer'] =
+                {
+                    onTrade = function(player, npc, trade)
+                        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.OLD_GAUNTLETS)
+
+                        return quest:noAction()
+                    end,
+                },
+            },
+        },
+
+        {
+            check = function(player, status, vars)
+                return status == xi.questStatus.QUEST_ACCEPTED and
+                    player:hasKeyItem(xi.keyItem.OLD_GAUNTLETS)
             end,
 
             [xi.zone.CASTLE_ZVAHL_BAILEYS] =
@@ -563,16 +589,7 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                     end,
                 },
 
-                ['Guslam'] =
-                {
-                    onTrigger = function(player, npc)
-                        if player:hasKeyItem(xi.keyItem.OLD_GAUNTLETS) then
-                            return quest:progressEvent(26)
-                        else
-                            return quest:event(43)
-                        end
-                    end,
-                },
+                ['Guslam'] = quest:progressEvent(26),
 
                 onEventFinish =
                 {
@@ -587,21 +604,6 @@ function xi.jeuno.helpers.BorghertzQuests:new(params)
                             else
                                 quest:setVar(player, 'Prog', 3) -- Skip intermediaries.
                             end
-                        end
-                    end,
-                },
-            },
-
-            -- Old gauntlets coffer logic.
-            [params.oldGauntletZoneId] =
-            {
-                ['Treasure_Coffer'] =
-                {
-                    onTrade = function(player, npc, trade)
-                        if not player:hasKeyItem(xi.keyItem.OLD_GAUNTLETS) then
-                            xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.OLD_GAUNTLETS)
-
-                            return quest:noAction()
                         end
                     end,
                 },

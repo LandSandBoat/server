@@ -90,7 +90,7 @@ void CLuaClientEntityPairActions::useSpell(CLuaBaseEntity* target, const SpellID
     auto*      actionPacket         = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo          = target->getID();
     actionPacket->ActIndex          = target->getTargID();
-    actionPacket->ActionID          = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::CastMagic);
+    actionPacket->ActionID          = GP_CLI_COMMAND_ACTION_ACTIONID::CastMagic;
     actionPacket->CastMagic.SpellId = static_cast<uint32_t>(spellId);
 
     parent_->packets().sendBasicPacket(*packet);
@@ -115,7 +115,7 @@ void CLuaClientEntityPairActions::useWeaponskill(CLuaBaseEntity* target, const u
     auto*      actionPacket           = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo            = target->getID();
     actionPacket->ActIndex            = target->getTargID();
-    actionPacket->ActionID            = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::Weaponskill);
+    actionPacket->ActionID            = GP_CLI_COMMAND_ACTION_ACTIONID::Weaponskill;
     actionPacket->Weaponskill.SkillId = wsId;
 
     parent_->packets().sendBasicPacket(*packet);
@@ -140,7 +140,7 @@ void CLuaClientEntityPairActions::useAbility(CLuaBaseEntity* target, const ABILI
     auto*      actionPacket          = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo           = target->getID();
     actionPacket->ActIndex           = target->getTargID();
-    actionPacket->ActionID           = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::JobAbility);
+    actionPacket->ActionID           = GP_CLI_COMMAND_ACTION_ACTIONID::JobAbility;
     actionPacket->JobAbility.SkillId = abilityId;
 
     parent_->packets().sendBasicPacket(*packet);
@@ -165,7 +165,7 @@ void CLuaClientEntityPairActions::changeTarget(CLuaBaseEntity* target) const
     auto*      actionPacket = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo  = target->getID();
     actionPacket->ActIndex  = target->getTargID();
-    actionPacket->ActionID  = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::ChangeTarget);
+    actionPacket->ActionID  = GP_CLI_COMMAND_ACTION_ACTIONID::ChangeTarget;
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -189,7 +189,7 @@ void CLuaClientEntityPairActions::rangedAttack(CLuaBaseEntity* target) const
     auto*      actionPacket = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo  = target->getID();
     actionPacket->ActIndex  = target->getTargID();
-    actionPacket->ActionID  = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::Shoot);
+    actionPacket->ActionID  = GP_CLI_COMMAND_ACTION_ACTIONID::Shoot;
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -239,7 +239,7 @@ void CLuaClientEntityPairActions::trigger(CLuaBaseEntity* target, sol::optional<
     auto*      actionPacket = packet->as<GP_CLI_COMMAND_ACTION>();
     actionPacket->UniqueNo  = target->getID();
     actionPacket->ActIndex  = target->getTargID();
-    actionPacket->ActionID  = static_cast<uint16>(GP_CLI_COMMAND_ACTION_ACTIONID::Talk);
+    actionPacket->ActionID  = GP_CLI_COMMAND_ACTION_ACTIONID::Talk;
 
     parent_->packets().sendBasicPacket(*packet);
     if (expectedEvent.has_value())
@@ -403,7 +403,7 @@ void CLuaClientEntityPairActions::acceptRaise() const
 {
     const auto packet                      = parent_->packets().createPacket(PacketC2S::GP_CLI_COMMAND_ACTION);
     auto*      responsePacket              = packet->as<GP_CLI_COMMAND_ACTION>();
-    responsePacket->ActionID               = static_cast<uint8_t>(GP_CLI_COMMAND_ACTION_ACTIONID::RaiseMenu);
+    responsePacket->ActionID               = GP_CLI_COMMAND_ACTION_ACTIONID::RaiseMenu;
     responsePacket->HomepointMenu.StatusId = GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::Accept;
 
     parent_->packets().sendBasicPacket(*packet);
@@ -437,7 +437,7 @@ void CLuaClientEntityPairActions::engage(CLuaBaseEntity* mob) const
     auto*      attackPacket = packet->as<GP_CLI_COMMAND_ACTION>();
     attackPacket->UniqueNo  = mob->getID();
     attackPacket->ActIndex  = mob->getTargID();
-    attackPacket->ActionID  = static_cast<uint8_t>(GP_CLI_COMMAND_ACTION_ACTIONID::Attack);
+    attackPacket->ActionID  = GP_CLI_COMMAND_ACTION_ACTIONID::Attack;
 
     parent_->packets().sendBasicPacket(*packet);
 }

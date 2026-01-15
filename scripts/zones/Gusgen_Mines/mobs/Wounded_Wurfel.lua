@@ -17,4 +17,9 @@ entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar('cooldown', GetSystemTime() + (144 * 13)) -- 13 vanadiel hours guarantees it will not spawn twice in the same night
 end
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
+end
+
 return entity

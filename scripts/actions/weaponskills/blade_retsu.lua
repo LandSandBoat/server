@@ -32,7 +32,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.PARALYSIS
     local actionElement = xi.element.ICE
     local power         = utils.clamp(30 + 3 * (player:getMainLvl() - target:getMainLvl()), 5, 35)
-    local duration      = math.floor(3 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(xi.weaponskills.fTP(tp, { 30, 60, 120 }) * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage

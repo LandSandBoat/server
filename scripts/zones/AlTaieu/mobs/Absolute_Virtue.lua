@@ -165,6 +165,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ABILITY_RESPONSE, 1)
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
     --[[
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
@@ -308,7 +309,6 @@ end
 entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == xi.magic.spell.METEOR then
         spell:setAoE(xi.magic.aoe.RADIAL)
-        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280) -- AoE Meteor Animation
     end

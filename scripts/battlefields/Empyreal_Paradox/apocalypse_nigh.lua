@@ -10,6 +10,7 @@ local content = BattlefieldQuest:new({
     battlefieldId = xi.battlefield.id.APOCALYPSE_NIGH,
     allowTrusts   = true,
     maxPlayers    = 6,
+    levelCap      = xi.settings.main.MAX_LEVEL,
     timeLimit     = utils.minutes(30),
     index         = 1,
     entryNpc      = 'TR_Entrance',
@@ -45,6 +46,7 @@ content.groups =
             },
         },
 
+        superlink = true,
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,

@@ -393,7 +393,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         if
             not xi.data.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and -- Check immunity.
             not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
-            not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT) and               -- Check conflicting effect.
+            not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT, 0) and               -- Check conflicting effect.
             resistRate > 0.25 and                                                                  -- Check actual resistance.
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)                       -- Check effect power.
         then
@@ -445,12 +445,13 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         action:recordDamage(target, xi.attackType.PHYSICAL, dmg)
 
         -- Effect
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
+        local bonusMacc  = player:getMod(xi.mod.VFLOURISH_MACC)
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, bonusMacc)
 
         if
             not xi.data.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.
             not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and          -- check resistance trigger.
-            not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN) and                  -- check conflicting effect.
+            not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0) and                  -- check conflicting effect.
             resistRate > 0.25                                                                       -- Check actual resistance.
         then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)

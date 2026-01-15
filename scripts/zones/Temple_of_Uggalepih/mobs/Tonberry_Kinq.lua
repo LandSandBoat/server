@@ -25,9 +25,20 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+
     xi.pet.setMobPet(mob, 1, 'Tonberrys_Elemental')
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

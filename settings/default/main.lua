@@ -141,11 +141,28 @@ xi.settings.main =
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
 
+    -- STR:ATT/RATT ratios. For players only. Mobs are hardcoded to 0.5
+    TWO_HANDED_STR_ATTACK_MULTIPLIER         = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.75 in previous eras
+    HAND_TO_HAND_STR_ATTACK_MULTIPLIER       = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.625 in previous eras.
+    ONE_HAND_MAIN_HAND_STR_ATTACK_MULTIPLIER = 0.75, -- 0.75: 1 STR = 0.75 Attack. This has been 0.5 in previous eras.
+    ONE_HAND_OFF_HAND_STR_ATTACK_MULTIPLIER  = 0.5,  -- 0.5: 1 STR = 0.5 Attack. This has always been 0.5 but is provided anyway.
+    RANGED_STR_ATTACK_MULTIPLIER             = 1.0,  -- 1.0: 1 STR = 1.0 Ranged Attack. This has been 0.5 and 0.75 in previous eras.
+
+    -- DEX:ACC ratios. For players only. Mobs are hardcoded to 0.5
+    TWO_HANDED_DEX_ACCURACY_MULTIPLIER         = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 and 0.75 in previous eras
+    HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER       = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+    ONE_HAND_MAIN_HAND_DEX_ACCURACY_MULTIPLIER = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+    ONE_HAND_OFF_HAND_DEX_ACCURACY_MULTIPLIER  = 0.75, -- 0.75: 1 DEX = 0.75 Accuracy. This has been 0.5 in previous eras.
+
+    -- AGI:RACC ratio. Mobs are hardcoded to 0.5
+    RANGED_AGI_ACCURACY_MULTIPLIER = 0.75, -- 0.75: 1 AGI = 0.75 Ranged Accuracy. This has been 0.5 in previous eras.
+
+    -- VIT:DEF ratio. Applies to everything but mobs and charmed mobs. Those are hardcoded to 0.5.
+    PLAYER_ALLIES_VIT_DEF_MULTIPLIER = 1.5, -- 1.5: 1 VIT = 1.5 DEF. This has been 0.5 in previous eras.
+
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
-    USE_PRE_2013_DEX_MULTIPLIER      = false, -- true/false. False uses 75% of DEX for accuracy calculation. Prior to 2013 50% of DEX was used.
-    USE_PRE_2013_STR_MULTIPLIER      = false, -- true/false. False uses STR multiplier of 1.0 for two handed, one handed main, and ranged attacks, 0.75 for H2H, and 0.5 for one handed in sub slot. True uses 0.5 of STR across the board and is how the game was from release to mid 2013.
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,

@@ -8,9 +8,9 @@ local entity = {}
 
 local stanceTable =
 {
--- [Stance] = { animationSub, canAutoAttack, canCastSpells, effectToApply, effectToDelete }
-    [1] = { 1, false, true,  xi.effect.MAGIC_SHIELD,    xi.effect.PHYSICAL_SHIELD }, -- Magical Stance
-    [2] = { 2, true,  false, xi.effect.PHYSICAL_SHIELD, xi.effect.MAGIC_SHIELD    }, -- Physical Stance
+-- [Stance] = { animationSub, canAutoAttack, canCastSpells, physicalShieldPower, magicalShieldPower }
+    [1] = { 1, false, true,  0, 1 }, -- Magical Stance
+    [2] = { 2, true,  false, 1, 0 }, -- Physical Stance
 }
 
 local function changeStance(mob, stance)
@@ -18,8 +18,20 @@ local function changeStance(mob, stance)
     mob:setAnimationSub(stanceTable[stance][1])
     mob:setAutoAttackEnabled(stanceTable[stance][2])
     mob:setMagicCastingEnabled(stanceTable[stance][3])
-    mob:addStatusEffectEx(stanceTable[stance][4], 0, 1, 0, 0)
-    mob:delStatusEffectSilent(stanceTable[stance][5])
+
+    -- Set effects.
+    local physicalShieldPower = stanceTable[stance][3]
+    local magicalShieldPower  = stanceTable[stance][4]
+
+    if physicalShieldPower > 0 then
+        mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, physicalShieldPower, 0, 0)
+        mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, physicalShieldPower, 0, 0)
+        mob:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
+    else
+        mob:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
+        mob:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
+        mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, magicalShieldPower, 0, 0)
+    end
 
     -- Set special modifiers for action delays.
     mob:setMod(xi.mod.HASTE_GEAR, 0)
