@@ -2819,6 +2819,12 @@ end
 function CBaseEntity:resetEnmity(PEntity)
 end
 
+---@param PEntity CBaseEntity
+---@param active boolean
+---@return nil
+function CBaseEntity:setEnmityActive(PEntity, active)
+end
+
 ---@param entity CBaseEntity
 ---@return nil
 function CBaseEntity:updateClaim(entity)

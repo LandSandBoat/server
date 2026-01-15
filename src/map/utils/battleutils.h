@@ -180,6 +180,8 @@ bool  CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
 int16 CalculateBaseTP(int32 delay);
 void  GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount, int32 fixedCE = 0, int32 fixedVE = 0);
 void  GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE);
+void  handleKillshotEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarget);
+void  handleSecondaryTargetEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarget);
 
 CItemWeapon*    GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot);
 CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot);

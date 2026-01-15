@@ -2402,6 +2402,16 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
                 roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagramList{});
             }
         }
+
+        if (PActionTarget->id == PTarget->id)
+        {
+            // TODO: only run this on offensive spells.
+            battleutils::handleKillshotEnmity(this, PActionTarget);
+        }
+        else
+        {
+            battleutils::handleSecondaryTargetEnmity(this, PActionTarget);
+        }
     }
     if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
     {
@@ -2708,6 +2718,16 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             battleutils::ClaimMob(PTargetFound, this);
         }
         battleutils::DirtyExp(PTargetFound, this);
+
+        if (PTargetFound->id == PTarget->id)
+        {
+            // TODO: only run this on offensive mobskills
+            battleutils::handleKillshotEnmity(this, PTargetFound);
+        }
+        else
+        {
+            battleutils::handleSecondaryTargetEnmity(this, PTargetFound);
+        }
     };
 
     // Process self first if present in targets

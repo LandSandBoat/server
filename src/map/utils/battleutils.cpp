@@ -4153,6 +4153,41 @@ void GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE)
     }
 }
 
+// handle "type 1" enmity reset
+void handleKillshotEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarget)
+{
+    // Handle killshot enmity reset if applicable
+    if (PAttacker->objtype == TYPE_MOB && PTarget)
+    {
+        if (PTarget->isDead())
+        {
+            auto* PMob = static_cast<CMobEntity*>(PAttacker);
+
+            if (auto* PHighest = PMob->PEnmityContainer->GetHighestEnmity(); PHighest && PHighest->targid == PTarget->targid)
+            {
+                PMob->PEnmityContainer->Clear(PTarget->id);
+            }
+        }
+    }
+}
+
+void handleSecondaryTargetEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarget)
+{
+    if (PAttacker->objtype == TYPE_MOB && PTarget)
+    {
+        auto* PMob = static_cast<CMobEntity*>(PAttacker);
+
+        // Secondary targets won't get targeted anymore if they were killed from this action
+        if (PTarget->isDead())
+        {
+            PMob->PEnmityContainer->SetActive(PTarget->id, false);
+        }
+        else // Inactive targets will get set back to active if hit (and not dead)
+        {
+            PMob->PEnmityContainer->SetActive(PTarget->id, true);
+        }
+    }
+}
 /************************************************************************
  *                                                                       *
  *  Transfer Enmity (used with ACCOMPLICE & COLLABORATOR ability type)   *
