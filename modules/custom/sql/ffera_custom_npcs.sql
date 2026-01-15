@@ -122,4 +122,7 @@ UPDATE npc_list SET pos_rot = 127, pos_x = -492.860, pos_y = -68.000, pos_z = 59
 -- Achieve Master for F.A.I.L. Badge Custom Quest
 UPDATE npc_list SET pos_rot = 48, pos_x = -631.087, pos_y = -20.425, pos_z = -462.653, status = 0, look = 0x0000790900000000000000000000000000000000, widescan = 0 WHERE npcid = 17686578;
 
+-- Grumblix
+UPDATE npc_list SET pos_rot = 0, pos_x = -648.807, pos_y = -19.66, pos_z = -487.959, status = 0, entityFlags = 2, look = 0x0000550000000000000000000000000000000000 WHERE npcid = 17686620;
+
 -- Need to add Provenance Crystal/Protocrystal as well as Pil in here but there are different IDs...?

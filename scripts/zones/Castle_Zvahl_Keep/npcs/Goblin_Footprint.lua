@@ -1,21 +1,15 @@
 -----------------------------------
--- Area: Castle Zvahl Keep
---  NPC: Goblin Footprint
--- !pos  45.948 -0.037 -17.059 162
+-- Universal Goblin Footprint NPC
+-----------------------------------
+require('modules/custom/lua/gobhook')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.goblinfootprint.rewatch(player)
-end
-
 entity.onTrigger = function(player, npc)
-    xi.goblinfootprint.rewatch(player, true)
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-    xi.goblinfootprint.startEvent(player, csid, option, npc)
+    if player:getVar('gobquest') == 1 then
+        gobhook(player, npc)
+    end
 end
 
 return entity

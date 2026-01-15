@@ -106,7 +106,7 @@ xi.mafia.CONTRACTS =
     [96]  = { mobId = zones[xi.zone.JUGNER_FOREST].mob.FRADUBIO, mobName = 'Fradubio', item = xi.item.BELLICOSE_MANTLE, itemName = 'Bellicose Mantle', reward = 500, bonus = 100 },
     [97]  = { mobId = zones[xi.zone.JUGNER_FOREST].mob.FRAELISSA, mobName = 'Fraelissa', item = xi.item.ALMOGAVAR_BOW, itemName = 'Almogavar Bow', reward = 100, bonus = 100 },
     [98]  = { mobId = zones[xi.zone.DEN_OF_RANCOR].mob.FRIAR_RUSH, mobName = 'Friar Rush', item = xi.item.BOMB_CORE, itemName = 'Bomb Core', reward = 500, bonus = 1000 },
-    [99]  = { mobId = zones[xi.zone.CAPE_TERRIGAN].mob.FROSTMANE, mobName = 'Frostmane', item = xi.item.LOCKHEART, itemName = 'Lockheart', reward = 700, bonus = 100 },
+    [99]  = { mobId = zones[xi.zone.CAPE_TERIGGAN].mob.FROSTMANE, mobName = 'Frostmane', item = xi.item.LOCKHEART, itemName = 'Lockheart', reward = 700, bonus = 100 },
     [100] = { mobId = zones[xi.zone.WEST_RONFAURE].mob.FUNGUS_BEETLE, mobName = 'Fungus Beetle', item = xi.item.CLIPEUS, itemName = 'Clipeus', reward = 500, bonus = 100 },
     [101] = { mobId = zones[xi.zone.SEA_SERPENT_GROTTO].mob.FYUU_THE_SEABELLOW, mobName = 'Fyuu the Seabellow', item = xi.item.FROG_TROUSERS, itemName = 'Frog Trousers', reward = 500, bonus = 100 },
     [102] = { mobId = zones[xi.zone.BEADEAUX].mob.GA_BHU_UNVANQUISHED, mobName = 'Ga\'Bhu Unvanquished', item = xi.item.VALKYRIES_MASK, itemName = 'Valkyrie\'s Mask', reward = 500, bonus = 400 },
@@ -136,10 +136,10 @@ xi.mafia.CONTRACTS =
     [126] = { mobId = zones[xi.zone.GIDDEUS].mob.HOO_MJUU_THE_TORRENT, mobName = 'Hoo Mjuu the Torrent', item = xi.item.MONSTER_SIGNA, itemName = 'Monster Signa', reward = 500, bonus = 300 },
     [127] = { mobId = zones[xi.zone.FORT_GHELSBA].mob.HUNDREDSCAR_HAJWAJ, mobName = 'Hundredscar Hajwaj', item = xi.item.WILD_CUDGEL, itemName = 'Wild Cudgel', reward = 500, bonus = 100 },
     [128] = { mobId = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S].mob.HYAKINTHOS, mobName = 'Hyakinthos', item = xi.item.LAVAS_RING, itemName = 'Lava\'s Ring', reward = 150, bonus = 100 },
-    [129] = { mobId = zones[xi.zone.WAJOAM_WOODLANDS].mob.HYDRA, mobName = 'Hydra', item = xi.item.BERSERKERS_TORQUE, itemName = 'Berserker\'s Torque', reward = 1000, bonus = 1000 },
+    [129] = { mobId = zones[xi.zone.WAJAOM_WOODLANDS].mob.HYDRA, mobName = 'Hydra', item = xi.item.BERSERKERS_TORQUE, itemName = 'Berserker\'s Torque', reward = 1000, bonus = 1000 },
     [130] = { mobId = zones[xi.zone.BHAFLAU_THICKETS].mob.MAHISHASURA, mobName = 'Mahishasura', item = xi.item.VEUGLAIRE, itemName = 'Veuglaire', reward = 500, bonus = 100 },
     [131] = { mobId = zones[xi.zone.BIBIKI_BAY].mob.INTULO, mobName = 'Intulo', item = xi.item.MAGIC_SLACKS, itemName = 'Magic Slacks', reward = 500, bonus = 100 },
-    [132] = { mobId = zones[xi.zone.WAJOAM_WOODLANDS].mob.JADED_JODY, mobName = 'Jaded Jody', item = xi.item.JET_SERAWEELS, itemName = 'Jet Seraweels', reward = 900, bonus = 1000 },
+    [132] = { mobId = zones[xi.zone.WAJAOM_WOODLANDS].mob.JADED_JODY, mobName = 'Jaded Jody', item = xi.item.JET_SERAWEELS, itemName = 'Jet Seraweels', reward = 900, bonus = 1000 },
     [133] = { mobId = zones[xi.zone.WEST_RONFAURE].mob.JAGGEDY_EARED_JACK, mobName = 'Jaggedy-Eared Jack', item = xi.item.RABBIT_CHARM, itemName = 'Rabbit Charm', reward = 500, bonus = 1000 },
     [134] = { mobId = zones[xi.zone.PASHHOW_MARSHLANDS].mob.JOLLY_GREEN, mobName = 'Jolly Green', item = xi.item.SHAMANS_BELT, itemName = 'Shaman\'s Belt', reward = 500, bonus = 200 },
     [135] = { mobId = zones[xi.zone.ULEGUERAND_RANGE].mob.JORMUNGAND, mobName = 'Jormungand', item = xi.item.MERCURIAL_POLE, itemName = 'Mercurial Pole', reward = 1000, bonus = 500 },
@@ -150,7 +150,7 @@ xi.mafia.CONTRACTS =
     [140] = { mobId = zones[xi.zone.BEHEMOTHS_DOMINION].mob.KING_BEHEMOTH, mobName = 'King Behemoth', item = xi.item.BEHEMOTH_TONGUE, itemName = 'Behemoth Tongue', reward = 1000, bonus = 500 },
     [141] = { mobId = zones[xi.zone.WESTERN_ALTEPA_DESERT].mob.KING_VINEGAROON, mobName = 'King Vinegaroon', item = xi.item.ACES_HELM, itemName = 'Ace\'s Helm', reward = 1000, bonus = 500 },
     [142] = { mobId = zones[xi.zone.BEAUCEDINE_GLACIER].mob.KIRATA, mobName = 'Kirata', item = xi.item.BOREAS_CESTI, itemName = 'Boreas Cesti', reward = 500, bonus = 100 },
-    [143] = { mobId = zones[xi.zone.CAPE_TERRIGAN].mob.KREUTZET, mobName = 'Kreutzet', item = xi.item.SIROCCO_KUKRI, itemName = 'Sirocco Kukri', reward = 500, bonus = 100 },
+    [143] = { mobId = zones[xi.zone.CAPE_TERIGGAN].mob.KREUTZET, mobName = 'Kreutzet', item = xi.item.SIROCCO_KUKRI, itemName = 'Sirocco Kukri', reward = 500, bonus = 100 },
     [144] = { mobId = zones[xi.zone.ROLANBERRY_FIELDS_S].mob.LAMINA, mobName = 'Lamina', item = xi.item.KUSHAS_RING, itemName = 'Kusha\'s Ring', reward = 150, bonus = 100 },
     [145] = { mobId = zones[xi.zone.THE_BOYAHDA_TREE].mob.LESHONKI, mobName = 'Leshonki', item = xi.item.LESHONKI_BULB, itemName = 'Leshonki Bulb', reward = 500, bonus = 100 },
     [146] = { mobId = zones[xi.zone.IFRITS_CAULDRON].mob.LINDWURM, mobName = 'Lindwurm', item = xi.item.VALIANT_KNIFE, itemName = 'Valiant Knife', reward = 500, bonus = 300 },
@@ -268,7 +268,7 @@ xi.mafia.CONTRACTS =
     [259] = { mobId = zones[xi.zone.CAEDARVA_MIRE].mob.ZIKKO, mobName = 'Zikko', item = xi.item.TEMPLAR_HAMMER, itemName = 'Templar Hammer', reward = 500, bonus = 500 },
     [260] = { mobId = zones[xi.zone.MISAREAUX_COAST].mob.ZIPHIUS, mobName = 'Ziphius', item = xi.item.HOSPITALER_EARRING, itemName = 'Hospitaler Earring', reward = 100, bonus = 600 },
     [261] = { mobId = zones[xi.zone.BEADEAUX].mob.ZO_KHU_BLACKCLOUD, mobName = 'Zo\'Khu Blackcloud', item = xi.item.FAERIE_SHIELD, itemName = 'Faerie Shield', reward = 500, bonus = 300 },
-    [262] = { mobId = zones[xi.zone.WAJOAM_WOODLANDS].mob.ZORAAL_JAS_PKUUCHA, mobName = 'Zoraal Ja\'s Pkuucha', item = xi.item.ZORAAL_JAS_AXE, itemName = 'Zoraal Ja\'s Axe', reward = 500, bonus = 400 },
+    [262] = { mobId = zones[xi.zone.WAJAOM_WOODLANDS].mob.ZORAAL_JAS_PKUUCHA, mobName = 'Zoraal Ja\'s Pkuucha', item = xi.item.ZORAAL_JAS_AXE, itemName = 'Zoraal Ja\'s Axe', reward = 500, bonus = 400 },
     [263] = { mobId = zones[xi.zone.SEA_SERPENT_GROTTO].mob.ZUUG_THE_SHORELEAPER, mobName = 'Zuug the Shoreleaper', item = xi.item.NARVAL, itemName = 'Narval', reward = 500, bonus = 100 },
     [264] = { mobId = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE].mob.MANES, mobName = 'Manes', item = xi.item.TAFFETA_CLOTH, itemName = 'Taffeta Cloth', reward = 500, bonus = 100 },
     [265] = { mobId = zones[xi.zone.CASTLE_ZVAHL_BAILEYS].mob.MARQUIS_SABNOCK, mobName = 'Marquis Sabnock', item = xi.item.ASTROLABE, itemName = 'Astrolabe', reward = 500, bonus = 300 },
@@ -288,5 +288,345 @@ xi.mafia.CONTRACTS =
     [279] = { mobId = zones[xi.zone.GARLAIGE_CITADEL].mob.HAZMAT, mobName = 'Hazmat', item = xi.item.PROMPTITUDE_SOLEA, itemName = 'Promptitude Solea', reward = 500, bonus = 500 },
     [280] = { mobId = zones[xi.zone.GARLAIGE_CITADEL].mob.HOVERING_HOTPOT, mobName = 'Hovering Hotpot', item = xi.item.SLEIGHT_KUKRI, itemName = 'Sleight Kukri', reward = 500, bonus = 500 },
 }
+
+local function getPurchaseItemFunc(itemId, quantity, cost, name)
+    return function(player)
+        player:queue(0, function(player)
+            local confirmationMenu =
+            {
+                title = 'Confirm Purchase (' .. cost .. ' Mafia)',
+                options =
+                {
+                    { 'Purchase ' .. name .. '.', function(player)
+                        local Legion_point = player:getCurrency('Legion_point')
+
+                        if Legion_point < cost then
+                            player:printToPlayer(string.format('You do not have enough Mafia Points to claim that item.', cost, Legion_point))
+                            return
+                        end
+
+                        if npcUtil.giveItem(player, {{ itemId, quantity }}) then
+                            player:delCurrency('Legion_point',  cost)
+                        end
+                    end},
+                    { 'I changed my mind.', function(player) return end },
+                }
+            }
+            player:customMenu(confirmationMenu)
+        end)
+    end
+end
+
+local function getPurchaseKeyItemFunc(keyItemId, cost, name)
+    return function(player)
+        player:queue(0, function(player)
+            local confirmationMenu =
+            {
+                title = 'Confirm Purchase (' .. cost .. ' Mafia)',
+                options =
+                {
+                    { 'Purchase ' .. name .. '.', function(player)
+                        local Legion_point = player:getCurrency('Legion_point')
+
+                        if Legion_point < cost then
+                            player:printToPlayer(string.format('You do not have enough Mafia Points to claim that item.', cost, Legion_point))
+                            return
+                        end
+
+                        if player:hasKeyItem(keyItemId) then
+                            player:printToPlayer('You already have that.')
+                            return
+                        end
+
+                        npcUtil.giveKeyItem(player, keyItemId)
+                        player:delCurrency('legion_point', cost)
+
+                    end},
+                    { 'I changed my mind.', function(player) return end },
+                }
+            }
+            player:customMenu(confirmationMenu)
+        end)
+    end
+end
+
+local function getOpenMenuFunc(menuName)
+    return function(player)
+        player:queue(0, function(player)
+            player:customMenu(xi.mafia.standardShop[menuName])
+        end)
+    end
+end
+
+local function getZoneSpecificMenuFunc()
+    return function(player)
+        player:queue(0, function(player)
+            local zoneID = player:getZoneID()
+
+            if not xi.mafia.SALES[zoneID] then
+                return
+            end
+
+            local zoneOptions = { unpack(xi.mafia.SALES[zoneID]) }
+            zoneOptions[#zoneOptions + 1] = { 'Back', getOpenMenuFunc('Main Menu') }
+            local zoneMenu =
+            {
+                title = 'Special Sales!',
+                options = zoneOptions,
+            }
+            print('sales[1] ' .. zoneMenu.options[1][1] .. ' ' .. type(zoneMenu.options[1][2]))
+            print('sales[2] ' .. zoneMenu.options[2][1] .. ' ' .. type(zoneMenu.options[2][2]))
+            player:customMenu(zoneMenu)
+        end)
+    end
+end
+
+local function getRelicResetFunc()
+    local cost = 3000
+
+    return function(player)
+        local remaining = player:getVar('RELIC_DUE_AT') - GetSystemTime()
+
+        if remaining <= 0 then
+            player:printToPlayer('You have no relic in progress.')
+            return
+        end
+
+        local days    = math.floor(remaining/ 86400)
+        local hours   = math.floor((remaining/ 3600) - (days * 24))
+        local minutes = math.floor((remaining/ 60) - (hours * 60) - (days * 1440))
+        
+        local remainingString = string.format('%sd %sh %sm', days, hours, minutes)
+
+        player:queue(0, function(player)
+            local confirmMenu =
+            {
+                title = string.format('Clear wait for current stage (%s mafia points)', cost),
+                options =
+                {
+                    { string.format('Clear %s', remainingString), function(player)
+                        if player:getCurrency('legion_point') < cost then
+                            player:printToPlayer('Not enough mafia points.')
+                            return
+                        end
+
+                        player:setVar('RELIC_DUE_AT', GetSystemTime())
+                        player:delCurrency('legion_point', cost)
+                        player:printToPlayer('Your relic timer has been reset.')
+                    end},
+                    { 'I changed my mind', function(player) return end },
+                }
+            }
+
+            player:customMenu(confirmMenu)
+        end)
+    end
+end
+
+xi.mafia.standardShop =
+{
+    ['Main Menu'] =
+    {
+        title = 'Choose an Item or Category.',
+        options =
+        {
+            { 'Instant Reraise', getPurchaseItemFunc(GetItemIDByName('Instant_reraise'), 1, 50, 'Instant Reraise') },
+            { 'Instant Warp'   , getPurchaseItemFunc(GetItemIDByName('Instant_warp'   ), 1, 50, 'Instant Warp'   ) },
+            { 'Instant Retrace', getPurchaseItemFunc(GetItemIDByName('Instant_retrace'), 1, 50, 'Instant Retrace') },
+            { 'Zone Specific Items', getZoneSpecificMenuFunc() },
+            { 'Exit', function(player) return end },
+        }
+    },
+
+    ['peak 2'] =
+    {
+        title = 'peak 2',
+        options =
+        {
+            { 'Atropos Orb KSNM 30',  getPurchaseItemFunc(GetItemIDByName('Atropos_orb'), 1, 5000, 'Atropos Orb') },
+            { 'Clotho Orb KSNM 30',    getPurchaseItemFunc(GetItemIDByName('Clotho_orb'), 1, 5000, 'Clotho Orb') },
+            { 'Lachesis Orb KSNM 30', getPurchaseItemFunc(GetItemIDByName('Lachesis_orb'), 1, 5000, 'Lachesis Orb') },
+            { 'Themis Orb KSNM 99',   getPurchaseItemFunc(GetItemIDByName('Themis_orb'), 1, 7000, 'Themis Orb') },
+            { 'Back', getZoneSpecificMenuFunc() },
+        } 
+    },
+}
+
+xi.mafia.SALES =
+{
+    [xi.zone.AHT_URHGAN_WHITEGATE] =
+    {
+        { 'Imperial Army I.D. Tag', getPurchaseKeyItemFunc(xi.ki.IMPERIAL_ARMY_ID_TAG, 1000, 'Imperial Army I.D. Tag') },
+        { 'Remnants Permit',        getPurchaseKeyItemFunc(xi.ki.REMNANTS_PERMIT , 1500, 'Remnants Permit') },
+    },
+    [xi.zone.CLOISTER_OF_FROST] =
+    {
+        { '12 Glacier Crystals',    getPurchaseItemFunc(GetItemIDByName('Glacier_crystal'), 12, 500, '12 Glacier Crystals') },
+    },
+    [xi.zone.CLOISTER_OF_TREMORS] =
+    {
+        { '12 Terra Crystals',     getPurchaseItemFunc(GetItemIDByName('Terra_crystal'), 12, 500, '12 Terra Crystals') },
+    },
+    [xi.zone.CLOISTER_OF_TIDES] =
+    {
+        { '12 Torrent Crystals',   getPurchaseItemFunc(GetItemIDByName('Torrent_crystal'), 12, 500, '12 Torrent Crystals') },
+    },
+    [xi.zone.CLOISTER_OF_GALES] =
+    {
+        { '12 Cyclone Crystals',   getPurchaseItemFunc(GetItemIDByName('Cyclone_crystal'), 12, 500, '12 Cyclone Crystals') },
+    },
+    [xi.zone.CLOISTER_OF_FLAMES] =
+    {
+        { '12 Inferno Crystals'   ,getPurchaseItemFunc(GetItemIDByName('Inferno_crystal'), 12, 500, '12 Inferno Crystals') },
+    },
+    [xi.zone.CLOISTER_OF_STORMS] =
+    {
+        { '12 Plasma Crystals',    getPurchaseItemFunc(GetItemIDByName('Plasma_crystals'), 12, 500, '12 Inferno Crystals') },
+    },
+    [xi.zone.DRAGONS_AERY] =
+    {
+        { 'Dragon Meat'   ,        getPurchaseItemFunc(GetItemIDByName('Dragon_meat'),  1,  500, 'Dragon Meat') },
+        { '12 Dragon Meat',        getPurchaseItemFunc(GetItemIDByName('Dragon_meat'), 12, 6000, '12 Dragon Meat') },
+    },
+    [xi.zone.HALL_OF_THE_GODS] =
+    {
+        { '12 Aurora Crystals',    getPurchaseItemFunc(GetItemIDByName('Aurora_crystal'), 12, 500, '12 Aurora Crystals') },
+    },
+    [xi.zone.THE_SHROUDED_MAW] =
+    {
+        { '12 Twilight Crystals',   getPurchaseItemFunc(GetItemIDByName('Twilight_crystals'), 12, 500, '12 Twilight Crystals') },
+    },
+    [xi.zone.ULEGUERAND_RANGE] =
+    {
+        { 'Molybdenum Ore', getPurchaseItemFunc(GetItemIDByName('Molybdenum_Ore'), 12, 300, 'Molybdenum Ore') },
+        { '12 Molybdenum Ore', getPurchaseItemFunc(GetItemIDByName('Molybdenum_Ore'), 12, 3000, '12 Molybdenum Ore') },
+    },
+    [xi.zone.UPPER_JEUNO] =
+    {
+        { 'Goblin Mask' , getPurchaseItemFunc(GetItemIDByName('Goblin_mask') , 1, 1500, 'Goblin Mask')  },
+        { 'Goblin Suit' , getPurchaseItemFunc(GetItemIDByName('Goblin_suit') , 1, 1500, 'Goblin Suit')  },
+        { 'Goblin Drink', getPurchaseItemFunc(GetItemIDByName('Goblin_drink'), 1, 200,  'Goblin Drink') },
+    },
+    [xi.zone.MAZE_OF_SHAKHRAMI] =
+    {
+        { 'Peacock Amulet', getPurchaseItemFunc(GetItemIDByName('Peacock_amulet'), 1, 25000, 'Peacock Amulet') },
+    },
+    [xi.zone.JUGNER_FOREST] =
+    {
+      { 'Velocious Belt', getPurchaseItemFunc(GetItemIDByName('Velocious_Belt'), 1, 30000, 'Velocious Belt') },
+    },
+    [xi.zone.SOUTH_GUSTABERG] =
+    {
+      { 'Bounding Boots', getPurchaseItemFunc(GetItemIDByName('Bounding_Boots'), 1, 10000, 'Bounding Boots') },
+    },
+    [xi.zone.ROMAEVE] =
+    {
+        { 'YinYang Robe', getPurchaseItemFunc(GetItemIDByName('YinYang_robe'), 1, 25000, 'YinYang Robe') },
+    },
+
+    [xi.zone.HORLAIS_PEAK] =
+    {
+
+        { 'Cloudy Orb', getPurchaseItemFunc(GetItemIDByName('Cloudy_orb'), 1, 1500, 'Cloudy Orb') },
+        { 'Sky Orb',    getPurchaseItemFunc(GetItemIDByName('sky_orb'   ), 1, 2000, 'Sky Orb'   ) },
+        { 'Star Orb',   getPurchaseItemFunc(GetItemIDByName('star_orb'  ), 1, 2500, 'Star Orb'  ) },
+        { 'Comet Orb',  getPurchaseItemFunc(GetItemIDByName('Comet_orb' ), 1, 3000, 'Comet Orb' ) },
+        { 'Moon Orb',  getPurchaseItemFunc(GetItemIDByName('Moon_orb'   ), 1, 4000, 'Moon Orb'  ) },
+        { 'Page 2 of Orbs', getOpenMenuFunc('peak 2') },
+    },
+
+    [xi.zone.CASTLE_ZVAHL_BAILEYS] =
+    {
+        { 'Relic Timer',  getRelicResetFunc() },
+    }
+}
+
+xi.mafia.grumItems =
+{
+    -- [1] = { itemid = 1236, amount = 40000, min = 30000, divisor = 2000, qnt = 5, itemname = 'Cactus Stems' },
+    -- [2] = { itemid = 1237, amount = 40000, min = 30000, divisor = 2000, qnt = 5, itemname = 'Tree Cuttings' },
+    -- [3] = { itemid = 2014, amount = 25000, min = 18000, divisor = 1000, qnt = 5, itemname = 'Bird Blood' },
+    -- [4] = { itemid = 656, amount = 10000, min = 5000, divisor = 1000, qnt = 5, itemname = 'Beastcoin' },
+    -- [5] = { itemid = 575, amount = 10000, min = 5000, divisor = 750, qnt = 5, itemname = 'Grain Seeds' },
+    -- [6] = { itemid = 574, amount = 10000, min = 5000, divisor = 750, qnt = 5, itemname = 'Fruit Seeds' },
+    -- [7] = { itemid = 573, amount = 10000, min = 5000, divisor = 750, qnt = 5, itemname = 'Vegetable Seeds' },
+    -- [8] = { itemid = 1664, amount = 30000, min = 5000, divisor = 5000, qnt = 5, itemname = 'Eastern Gem' },
+    -- [23] = { itemid = , amount = , min = , divisor = , qnt = , itemname = '' },
+    -- [24] = { itemid = , amount = , min = , divisor = , qnt = , itemname = '' },
+}
+
+xi.mafia.grumEndItem =
+{
+    [1]  = { item = xi.item.RAINBOW_CAPE, points = 100, qnt = 1, itemname = 'Rainbow Cape' },
+    [2]  = { item = xi.item.WIVRE_MASK, points = 100, qnt = 1, itemname = 'Wivre Mask' },
+    [3]  = { item = xi.item.BEAK_NECKLACE, points = 100, qnt = 1, itemname = 'Beak Necklace' },
+    [4]  = { item = xi.item.SNIPERS_RING, points = 100, qnt = 2, itemname = 'Sniper\'s Ring' },
+    [5]  = { item = xi.item.CURSED_MITTS, points = 200, qnt = 1, itemname = 'Cursed Mitts' },
+    [6]  = { item = xi.item.CURSED_CUIRASS, points = 300, qnt = 1, itemname = 'Cursed Cuirass' },
+    [7]  = { item = xi.item.CURSED_MAIL, points = 300, qnt = 1, itemname = 'Cursed Mail' },
+    [8]  = { item = xi.item.CURSED_HAIDATE, points = 300, qnt = 1, itemname = 'Cursed Haidate' },
+    [9]  = { item = xi.item.DUSK_GLOVES, points = 350, qnt = 1, itemname = 'Dusk Gloves' },
+    [10] = { item = xi.item.CORAL_RING, points = 100, qnt = 1, itemname = 'Coral Ring' },
+    [11] = { item = xi.item.CURSED_HANDSCHUHS, points = 300, qnt = 1, itemname = 'Cursed Handschuhs' },
+    [12] = { item = xi.item.CURSED_MASK, points = 300, qnt = 1, itemname = 'Cursed Mask' },
+    [13] = { item = xi.item.CURSED_FINGER_GAUNTLETS, points = 300, qnt = 1, itemname = 'Cursed Fng. Gnt.' },
+    [14] = { item = xi.item.CURSED_CUISSES, points = 300, qnt = 1, itemname = 'Cursed Cuisses' },
+    [15] = { item = xi.item.CURSED_GREAVES, points = 300, qnt = 1, itemname = 'Cursed Greaves' },
+    [16] = { item = xi.item.CURSED_CAP, points = 300, qnt = 1, itemname = 'Cursed Cap' },
+    [17] = { item = xi.item.CURSED_HARNESS, points = 300, qnt = 1, itemname = 'Cursed Harness' },
+    [18] = { item = xi.item.CURSED_GLOVES, points = 300, qnt = 1, itemname = 'Cursed Gloves' },
+    [19] = { item = xi.item.CURSED_SUBLIGAR, points = 300, qnt = 1, itemname = 'Cursed Subligar' },
+    [20] = { item = xi.item.CURSED_LEGGINGS, points = 300, qnt = 1, itemname = 'Cursed Leggings' },
+    [21] = { item = xi.item.SCORPION_HARNESS, points = 100, qnt = 1, itemname = 'Scorpion Harness' },
+    [22] = { item = xi.item.DRAGON_HARNESS, points = 200, qnt = 1, itemname = 'Dragon Harness' },
+    [23] = { item = xi.item.IGQIRA_TIARA, points = 200, qnt = 1, itemname = 'Igqira Tiara' },
+    [24] = { item = xi.item.ERRANT_CUFFS, points = 200, qnt = 1, itemname = 'Errant Cuffs' },
+    [25] = { item = xi.item.DUSK_TROUSERS, points = 200, qnt = 1, itemname = 'Dusk Trousers' },
+    [26] = { item = xi.item.DRAGON_LEGGINGS, points = 200, qnt = 1, itemname = 'Dragon Leggings' },
+    [27] = { item = xi.item.DUSK_LEDELSENS, points = 200, qnt = 1, itemname = 'Dusk Ledelsens' },
+    [28] = { item = xi.item.CERBERUS_MANTLE, points = 100, qnt = 1, itemname = 'Cerberus Mantle' },
+}
+
+function gobhook(player, npc)
+    local gobid = npc:getID() - 1
+    local zoneid = player:getZoneID()
+    local plevel = player:getMainLvl()
+
+    if zoneid == xi.zone.PROVENANCE then
+        -- gobid = 17686623 what the hell is this id? it just links to blank lol
+    end
+
+    local gob = GetNPCByID(gobid)
+    gob:setPos(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos(), player:getZoneID())
+    gob:setStatus(xi.status.NORMAL)
+
+    if plevel >= 5 then
+        if player:getVar('ghook' .. zoneid) == 0 then
+            local count = player:getVar('ghooked') + 1
+            player:setVar('ghooked', count)
+            player:printToPlayer('New footprint discovered. Your total is ' .. count .. '.')
+            player:addGil(xi.mafia.GIL_REWARD)
+            player:messageSpecial(zones[zoneid].text.GIL_OBTAINED, xi.mafia.GIL_REWARD)
+            player:setVar('ghook'.. zoneid, 1)
+            SetServerVariable('ghookOutput', GetServerVariable('ghookOutput') + xi.mafia.GIL_REWARD)
+            if player:getVar('ghookHintZone') == zoneid then
+                player:setVar('ghookHintZone', 0)
+                player:setVar('ghookHintTime', 0)
+            end
+        else
+            local count = player:getVar('ghooked')
+            player:printToPlayer('Already found this one. Your total is ' .. count .. '.')
+            player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('Legion_point')), xi.msg.channel.SAY, 'Ramblix')
+            player:customMenu(xi.mafia.standardShop['Main Menu'])
+        end
+    else
+        player:printToPlayer(string.format('Come back when you have more experience...'), xi.msg.channel.SAY, 'Ramblix')
+    end
+end
+
+function gobhook2(player, npc)
+    player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('Legion_point')), xi.msg.channel.SAY, 'Coffer')
+    player:customMenu(mafia.standardShop['Main Menu'])
+end
 
 return xi.mafia
