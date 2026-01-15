@@ -13,7 +13,8 @@ echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/
 EOF
 
 # Install runtime dependencies.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN <<EOF
+apt-get update && apt-get install -y --no-install-recommends \
     bash \
     binutils \
     ca-certificates \
