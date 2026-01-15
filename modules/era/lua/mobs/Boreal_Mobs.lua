@@ -117,84 +117,41 @@ local function onMobDisengage(mob)
 end
 
 -----------------------------------
--- Boreal Tiger
+-- Apply overrides to all Boreal mobs
 -----------------------------------
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Tiger.onMobSpawn', function(mob)
-    super(mob)
-    onMobSpawn(mob)
-end)
+local borealMobs =
+{
+    'Boreal_Tiger',
+    'Boreal_Hound',
+    'Boreal_Coeurl',
+}
 
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Tiger.onMobRoam', function(mob)
-    onMobRoam(mob)
-end)
+for _, mobName in ipairs(borealMobs) do
+    local basePath = 'xi.zones.Xarcabard.mobs.' .. mobName
 
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Tiger.onMobEngage', function(mob, target)
-    super(mob, target)
-    onMobEngage(mob, target)
-end)
+    m:addOverride(basePath .. '.onMobSpawn', function(mob)
+        super(mob)
+        onMobSpawn(mob)
+    end)
 
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Tiger.onMobFight', function(mob, target)
-    super(mob, target)
-    onMobFight(mob, target)
-end)
+    m:addOverride(basePath .. '.onMobRoam', function(mob)
+        onMobRoam(mob)
+    end)
 
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Tiger.onMobDisengage', function(mob)
-    super(mob)
-    onMobDisengage(mob)
-end)
+    m:addOverride(basePath .. '.onMobEngage', function(mob, target)
+        super(mob, target)
+        onMobEngage(mob, target)
+    end)
 
------------------------------------
--- Boreal Hound
------------------------------------
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Hound.onMobSpawn', function(mob)
-    super(mob)
-    onMobSpawn(mob)
-end)
+    m:addOverride(basePath .. '.onMobFight', function(mob, target)
+        super(mob, target)
+        onMobFight(mob, target)
+    end)
 
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Hound.onMobRoam', function(mob)
-    onMobRoam(mob)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Hound.onMobEngage', function(mob, target)
-    super(mob, target)
-    onMobEngage(mob, target)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Hound.onMobFight', function(mob, target)
-    super(mob, target)
-    onMobFight(mob, target)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Hound.onMobDisengage', function(mob)
-    super(mob)
-    onMobDisengage(mob)
-end)
-
------------------------------------
--- Boreal Coeurl
------------------------------------
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Coeurl.onMobSpawn', function(mob)
-    super(mob)
-    onMobSpawn(mob)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Coeurl.onMobRoam', function(mob)
-    onMobRoam(mob)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Coeurl.onMobEngage', function(mob, target)
-    super(mob, target)
-    onMobEngage(mob, target)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Coeurl.onMobFight', function(mob, target)
-    super(mob, target)
-    onMobFight(mob, target)
-end)
-
-m:addOverride('xi.zones.Xarcabard.mobs.Boreal_Coeurl.onMobDisengage', function(mob)
-    super(mob)
-    onMobDisengage(mob)
-end)
+    m:addOverride(basePath .. '.onMobDisengage', function(mob)
+        super(mob)
+        onMobDisengage(mob)
+    end)
+end
 
 return m
