@@ -11,6 +11,8 @@
 --   - Methods of detection for these NMs have been adjusted.
 --   - These NMs no longer use Doom.
 --
+-- This module re-introduces the following retail changes:
+--
 -- August 28, 2007 Version Update
 -- http://www.playonline.com/pcd/update/ff11us/20070828oz52G1/detail.html
 -- - Atop the Highest Mountains
