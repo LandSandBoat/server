@@ -41,13 +41,13 @@ zones[xi.zone.BEADEAUX] =
         BI_GHO_HEADTAKER    = GetFirstID('BiGho_Headtaker'),
         DA_DHA_HUNDREDMASK  = GetFirstID('DaDha_Hundredmask'),
         GA_BHU_UNVANQUISHED = GetFirstID('GaBhu_Unvanquished'),
-        DE_VYU_HEADHUNTER   = GetFirstID('De_Vyu_Headhunter'),
+        DE_VYU_HEADHUNTER   = GetFirstID('DeVyu_Headhunter'),
         GE_DHA_EVILEYE      = GetFirstID('GeDha_Evileye'),
         MAGNES_QUADAV_NM    = GetFirstID('Magnes_Quadav_NM'),
         NICKEL_QUADAV_NM    = GetFirstID('Nickel_Quadav_NM'),
         MIMIC               = GetFirstID('Mimic'),
         ZO_KHU_BLACKCLOUD   = GetFirstID('ZoKhu_Blackcloud'),
-        GO_BHU_GASCON       = GetFirstID('Go_Bhu_Gascon'),
+        GO_BHU_GASCON       = GetFirstID('GoBhu_Gascon'),
     },
     npc =
     {
