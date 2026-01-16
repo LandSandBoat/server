@@ -58,6 +58,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         STINGING_SOPHIE     = GetTableOfIDs('Stinging_Sophie'), -- 2 NMs
         MAIGHDEAN_UAINE     = GetFirstID('Maighdean_Uaine'), -- TODO: PH Audit, 2 NMs
         GAMBILOX_WANDERLING = GetFirstID('Gambilox_Wanderling'),
+        BEDROCK_BARRY       = GetFirstID('Bedrock_Barry'),
 
         VOIDWALKER =
         {

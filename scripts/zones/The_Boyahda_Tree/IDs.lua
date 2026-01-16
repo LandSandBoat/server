@@ -45,6 +45,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
         MIMIC             = GetFirstID('Mimic'),
         AGAS              = GetFirstID('Agas'),
         BEET_LEAFHOPPER   = GetFirstID('Beet_Leafhopper'),
+        ANCIENT_GOOBBUE   = GetFirstID('Ancient_Goobbue')
     },
     npc =
     {

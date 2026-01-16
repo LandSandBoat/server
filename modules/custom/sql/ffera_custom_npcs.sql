@@ -60,6 +60,12 @@ UPDATE npc_list SET name = 'Bro_Moogle', pos_rot = 22, pos_x = -19.1, pos_y = 0.
 -- B.R.O. Moogle
 UPDATE npc_list SET name = 'Bro_Moogle', pos_rot = 145, pos_x = -50.577, pos_y = 1.0, pos_z = 22.556, status = 0, look = 0x00003E0900000000000000000000000000000000, widescan = 1 WHERE npcid = 17776751;
 
+-- Game Table
+UPDATE npc_list SET pos_x = -49.0, pos_y = -0.244, pos_z = 16.394 WHERE npcid = 17776824;
+
+-- Goblin Enforcer
+UPDATE npc_list SET pos_rot = 63, pos_x = 3.142, pos_y = 1.7, pos_z = 77.611, status = 0, entityFlags = 3, look = 0x0000BD0200000000000000000000000000000000, name_prefix = 32 WHERE npcid = 17776869;
+
 -- ------------------------------------------------------------
 -- Ru'Lude Gardens
 -- ------------------------------------------------------------

@@ -148,7 +148,7 @@ xi.mafia.CONTRACTS =
     [138] = { mobId = zones[xi.zone.THE_SANCTUARY_OF_ZITAH].mob.KEEPER_OF_HALIDOM, mobName = 'Keeper of Halidom', item = xi.item.DAIHANNYA, itemName = 'Daihannya', reward = 500, bonus = 100 },
     [139] = { mobId = zones[xi.zone.JUGNER_FOREST].mob.KING_ARTHRO, mobName = 'King Arthro', item = xi.item.VELOCIOUS_BELT, itemName = 'Velocious Belt', reward = 1000, bonus = 1000 },
     [140] = { mobId = zones[xi.zone.BEHEMOTHS_DOMINION].mob.KING_BEHEMOTH, mobName = 'King Behemoth', item = xi.item.BEHEMOTH_TONGUE, itemName = 'Behemoth Tongue', reward = 1000, bonus = 500 },
-    [141] = { mobId = zones[xi.zone.WESTERN_ALTEPA_DESERT].mob.KING_VINEGAROON, mobName = 'King Vinegaroon', item = xi.item.ACES_HELM, itemName = 'Ace\'s Helm', reward = 1000, bonus = 500 },
+    [141] = { mobId = zones[xi.zone.WESTERN_ALTEPA_DESERT].mob.KING_VINEGARROON, mobName = 'King Vinegaroon', item = xi.item.ACES_HELM, itemName = 'Ace\'s Helm', reward = 1000, bonus = 500 },
     [142] = { mobId = zones[xi.zone.BEAUCEDINE_GLACIER].mob.KIRATA, mobName = 'Kirata', item = xi.item.BOREAS_CESTI, itemName = 'Boreas Cesti', reward = 500, bonus = 100 },
     [143] = { mobId = zones[xi.zone.CAPE_TERIGGAN].mob.KREUTZET, mobName = 'Kreutzet', item = xi.item.SIROCCO_KUKRI, itemName = 'Sirocco Kukri', reward = 500, bonus = 100 },
     [144] = { mobId = zones[xi.zone.ROLANBERRY_FIELDS_S].mob.LAMINA, mobName = 'Lamina', item = xi.item.KUSHAS_RING, itemName = 'Kusha\'s Ring', reward = 150, bonus = 100 },
@@ -182,7 +182,7 @@ xi.mafia.CONTRACTS =
     [172] = { mobId = zones[xi.zone.WEST_SARUTABARUTA].mob.NUMBING_NORMAN, mobName = 'Numbing Norman', item = xi.item.PIKE, itemName = 'Pike', reward = 150, bonus = 100 },
     [173] = { mobId = zones[xi.zone.WEST_SARUTABARUTA].mob.NUNYENUNC, mobName = 'Nunyenunc', item = xi.item.PILGRIMS_WAND, itemName = 'Pilgrim\'s Wand', reward = 500, bonus = 100 },
     [174] = { mobId = zones[xi.zone.QUICKSAND_CAVES].mob.NUSSKNACKER, mobName = 'Nussknacker', item = xi.item.SAND_GLOVES, itemName = 'Sand Gloves', reward = 500, bonus = 100 },
-    [175] = { mobId = zones[xi.zone.SEA_SERPENT_GROTTO].OCEAN_SAHAGIN, mobName = 'Ocean Sahagin', item = xi.item.COLOSSAL_LANCE, itemName = 'Colossal Lance', reward = 300, bonus = 100 },
+    -- [175] = { mobId = zones[xi.zone.SEA_SERPENT_GROTTO].OCEAN_SAHAGIN, mobName = 'Ocean Sahagin', item = xi.item.COLOSSAL_LANCE, itemName = 'Colossal Lance', reward = 300, bonus = 100 },
     [176] = { mobId = zones[xi.zone.GARLAIGE_CITADEL].mob.OLD_TWO_WINGS, mobName = 'Old Two-Wings', item = xi.item.BAT_CAPE, itemName = 'Bat Cape', reward = 300, bonus = 300 },
     [178] = { mobId = zones[xi.zone.TORAIMARAI_CANAL].mob.ONI_CARCASS, mobName = 'Oni Carcass', item = xi.item.ONIKIRI, itemName = 'Onikiri', reward = 300, bonus = 100 },
     [179] = { mobId = zones[xi.zone.MONASTIC_CAVERN].mob.ORCISH_HEXSPINNER, mobName = 'Orcish Hexspinner', item = xi.item.BLACK_MAGES_TESTIMONY, itemName = 'Black Mage\'s Testimony', reward = 100, bonus = 200 },
@@ -289,6 +289,48 @@ xi.mafia.CONTRACTS =
     [280] = { mobId = zones[xi.zone.GARLAIGE_CITADEL].mob.HOVERING_HOTPOT, mobName = 'Hovering Hotpot', item = xi.item.SLEIGHT_KUKRI, itemName = 'Sleight Kukri', reward = 500, bonus = 500 },
 }
 
+xi.mafia.vars = {
+    TARGET = 'mafiaTarget',
+    CLEARED = 'mafiaClear',
+}
+
+xi.mafia.checkKill = function(player)
+    player:printToPlayer('You have eliminated your target! Return to the Goblin Enforcer for your reward!', xi.msg.channel.SYSTEM_3)
+end
+
+-- Debugging ...
+function xi.mafia.validateContracts()
+    print('=== Validating Goblin Mafia Contracts ===')
+    local invalidCount = 0
+    local validCount = 0
+
+    for id, contract in pairs(xi.mafia.CONTRACTS) do
+        local mobId = contract.mobId
+        local isValid = false
+
+        -- Check if mobId exists and is a number or table
+        if type(mobId) == 'number' and mobId > 0 then
+            isValid = true
+        elseif type(mobId) == 'table' and mobId[1] and type(mobId[1]) == 'number' and mobId[1] > 0 then
+            isValid = true
+        end
+
+        if isValid then
+            validCount = validCount + 1
+        else
+            invalidCount = invalidCount + 1
+            print(string.format('[ERROR] Contract #%d: %s - mobId is invalid (type: %s, value: %s)', 
+                id, 
+                contract.mobName or 'UNKNOWN', 
+                type(mobId),
+                tostring(mobId)
+            ))
+        end
+    end
+
+    print(string.format('=== Validation Complete: %d valid, %d invalid ===', validCount, invalidCount))
+end
+
 local function getPurchaseItemFunc(itemId, quantity, cost, name)
     return function(playerInner)
         playerInner:queue(0, function(playerQueued)
@@ -297,25 +339,30 @@ local function getPurchaseItemFunc(itemId, quantity, cost, name)
                 title = 'Confirm Purchase (' .. cost .. ' Mafia)',
                 options =
                 {
-                    { 'Purchase ' .. name .. '.', function(playerConfirm)
-                        local legionPoint = playerConfirm:getCurrency('legion_point')
+                    {
+                        'Purchase ' .. name .. '.', function(playerConfirm)
+                            local legionPoint = playerConfirm:getCurrency('legion_point')
 
-                        if legionPoint < cost then
-                            playerConfirm:printToPlayer('You do not have enough Mafia Points to claim that item.')
-                            return
-                        end
+                            if legionPoint < cost then
+                                playerConfirm:printToPlayer('You do not have enough Mafia Points to claim that item.')
+                                return
+                            end
 
-                        if npcUtil.giveItem(playerConfirm, { { itemId, quantity } }) then
-                            playerConfirm:delCurrency('legion_point', cost)
+                            if npcUtil.giveItem(playerConfirm, { { itemId, quantity } }) then
+                                playerConfirm:delCurrency('legion_point', cost)
+                            end
                         end
-                    end
                     },
-                    { 'I changed my mind.', function()
-                        return
-                    end
+
+                    {
+                        'I changed my mind.',
+                        function()
+                           return
+                        end
                     },
                 }
             }
+
             playerQueued:customMenu(confirmationMenu)
         end)
     end
@@ -346,12 +393,14 @@ local function getPurchaseKeyItemFunc(keyItemId, cost, name)
                         playerConfirm:delCurrency('legion_point', cost)
                     end
                     },
+
                     { 'I changed my mind.', function()
                         return
                     end
                     },
                 }
             }
+
             playerQueued:customMenu(confirmationMenu)
         end)
     end
@@ -422,6 +471,7 @@ local function getRelicResetFunc()
                         playerConfirm:printToPlayer('Your relic timer has been reset.')
                     end
                     },
+
                     { 'I changed my mind', function()
                         return
                     end
@@ -641,5 +691,7 @@ function xi.mafia.gobhook2(player, npc)
     player:printToPlayer(string.format('Your balance with the Goblin Mafia is: %s Mafia points.', player:getCurrency('legion_point')), xi.msg.channel.SAY, 'Coffer')
     player:customMenu(xi.mafia.standardShop['Main Menu'])
 end
+
+xi.mafia.validateContracts()
 
 return xi.mafia

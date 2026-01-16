@@ -85,7 +85,8 @@ entity.onTrade = function(player, npc, trade)
         player:printToPlayer('Your Mafia reputation has gone up by 3000 points!', xi.msg.channel.SAY, 'Grumblix')
 
     -- Trade current desired item for mafia points
-    elseif currentSaleItem and
+    elseif
+        currentSaleItem and
         npcUtil.tradeHasExactly(trade, { { currentSaleItem.item, currentSaleItem.qnt } })
     then
         player:confirmTrade()

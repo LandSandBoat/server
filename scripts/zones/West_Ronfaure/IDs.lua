@@ -61,6 +61,7 @@ zones[xi.zone.WEST_RONFAURE] =
         FUNGUS_BEETLE      = GetFirstID('Fungus_Beetle'),
         JAGGEDY_EARED_JACK = GetFirstID('Jaggedy-Eared_Jack'),
         MARAUDER_DVOGZOG   = GetFirstID('Marauder_Dvogzog'),
+        AMANITA            = GetFirstID('Amanita')
     },
     npc =
     {

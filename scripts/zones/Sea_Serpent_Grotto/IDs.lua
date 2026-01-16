@@ -66,7 +66,6 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         MIMIC                   = GetFirstID('Mimic'),
         WATER_LEAPER            = GetFirstID('Water_Leaper'),
         GLYRYVILU               = GetFirstID('Glyryvilu'),
-        OCEAN_SAHAGIN           = GetFirstID('Ocean_Sahagin'),
     },
     npc =
     {

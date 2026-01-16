@@ -4811,6 +4811,19 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                         checkKill(PMember);
                     }
                 }
+
+                uint32 mafiaCheck = charutils::GetCharVar(PMember, "MafiaCurrentMob");
+
+                if (PMob->id == mafiaCheck)
+                {
+                    charutils::SetCharVar(PMember, "MafiaHuntKilled", 1);
+
+                    if (lua["xi"]["mafia"]["checkKill"].valid())
+                    {
+                        auto checkKill = lua["xi"]["mafia"]["checkKill"];
+                        checkKill(PMember);
+                    }
+                }
             }
 
             bool chainactive = false;
