@@ -307,7 +307,6 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* map_s
         if (map_session_data == nullptr)
         {
             auto pendingSession = mapSessions_.getPendingSessionByCharId(packetCharID);
-            ShowInfoFmt("Handling new connection for charid: {}. Pending session found: {}", packetCharID, pendingSession ? "Yes" : "No");
             if (pendingSession)
             {
                 mapSessions_.destroyPendingSession(pendingSession);

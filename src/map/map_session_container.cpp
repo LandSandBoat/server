@@ -40,6 +40,7 @@ auto MapSessionContainer::createSession(IPP ipp) -> MapSession*
     ShowDebugFmt("Creating session for {}", ipp.getIPString());
 
     const auto rset = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE client_addr = ? LIMIT 1", ipp.getIP());
+    ShowInfoFmt("Session lookup by client_addr: IP = {}, Big-Endian UINT32 = {}. Rows found = {}", ipp.getIPString(), ipp.getIP(), rset ? rset->rowsCount() : 0);
     if (!rset)
     {
         ShowError("SQL query failed in MapSessionContainer::createSession!");
