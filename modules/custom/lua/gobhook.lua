@@ -308,10 +308,12 @@ local function getPurchaseItemFunc(itemId, quantity, cost, name)
                         if npcUtil.giveItem(playerConfirm, { { itemId, quantity } }) then
                             playerConfirm:delCurrency('legion_point', cost)
                         end
-                    end },
+                    end
+                    },
                     { 'I changed my mind.', function()
                         return
-                    end },
+                    end
+                    },
                 }
             }
             playerQueued:customMenu(confirmationMenu)
@@ -342,11 +344,12 @@ local function getPurchaseKeyItemFunc(keyItemId, cost, name)
 
                         npcUtil.giveKeyItem(playerConfirm, keyItemId)
                         playerConfirm:delCurrency('legion_point', cost)
-
-                    end },
+                    end
+                    },
                     { 'I changed my mind.', function()
                         return
-                    end },
+                    end
+                    },
                 }
             }
             playerQueued:customMenu(confirmationMenu)
@@ -417,10 +420,12 @@ local function getRelicResetFunc()
                         playerConfirm:setVar('RELIC_DUE_AT', GetSystemTime())
                         playerConfirm:delCurrency('legion_point', cost)
                         playerConfirm:printToPlayer('Your relic timer has been reset.')
-                    end },
+                    end
+                    },
                     { 'I changed my mind', function()
                         return
-                    end },
+                    end
+                    },
                 }
             }
 
@@ -485,7 +490,7 @@ xi.mafia.SALES =
     },
     [xi.zone.CLOISTER_OF_FLAMES] =
     {
-        { '12 Inferno Crystals' ,getPurchaseItemFunc(GetItemIDByName('Inferno_crystal'), 12, 500, '12 Inferno Crystals') },
+        { '12 Inferno Crystals', getPurchaseItemFunc(GetItemIDByName('Inferno_crystal'), 12, 500, '12 Inferno Crystals') },
     },
     [xi.zone.CLOISTER_OF_STORMS] =
     {
@@ -521,11 +526,11 @@ xi.mafia.SALES =
     },
     [xi.zone.JUGNER_FOREST] =
     {
-      { 'Velocious Belt', getPurchaseItemFunc(GetItemIDByName('Velocious_Belt'), 1, 30000, 'Velocious Belt') },
+        { 'Velocious Belt', getPurchaseItemFunc(GetItemIDByName('Velocious_Belt'), 1, 30000, 'Velocious Belt') },
     },
     [xi.zone.SOUTH_GUSTABERG] =
     {
-      { 'Bounding Boots', getPurchaseItemFunc(GetItemIDByName('Bounding_Boots'), 1, 10000, 'Bounding Boots') },
+        { 'Bounding Boots', getPurchaseItemFunc(GetItemIDByName('Bounding_Boots'), 1, 10000, 'Bounding Boots') },
     },
     [xi.zone.ROMAEVE] =
     {

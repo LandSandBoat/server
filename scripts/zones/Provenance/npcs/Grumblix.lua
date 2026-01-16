@@ -3,7 +3,6 @@
 --  NPC: Grumblix
 -- Custom: Goblin Mafia NPC
 -----------------------------------
-local ID = zones[xi.zone.PROVENANCE]
 require('modules/custom/lua/gobhook')
 -----------------------------------
 ---@type TNpcEntity
@@ -86,7 +85,9 @@ entity.onTrade = function(player, npc, trade)
         player:printToPlayer('Your Mafia reputation has gone up by 3000 points!', xi.msg.channel.SAY, 'Grumblix')
 
     -- Trade current desired item for mafia points
-    elseif currentSaleItem and npcUtil.tradeHasExactly(trade, { { currentSaleItem.item, currentSaleItem.qnt } }) then
+    elseif currentSaleItem and
+        npcUtil.tradeHasExactly(trade, { { currentSaleItem.item, currentSaleItem.qnt } })
+    then
         player:confirmTrade()
         player:addCurrency('legion_point', currentSaleItem.points)
         player:printToPlayer(string.format('Your Mafia reputation has gone up by %s points!', currentSaleItem.points), xi.msg.channel.SAY, 'Grumblix')
