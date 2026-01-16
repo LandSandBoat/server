@@ -46,8 +46,6 @@ auto MapSessionContainer::createSession(IPP ipp) -> MapSession*
         return nullptr;
     }
 
-    ShowDebugFmt("Session lookup for client IP: {}. Found {} sessions.", ipp.getIPString(), rset->rowsCount());
-
     if (rset->rowsCount() == 0)
     {
         // This is noisy and not really necessary

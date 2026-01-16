@@ -150,6 +150,8 @@ void MapNetworking::handle_incoming_packet(const std::error_code& ec, std::span<
 {
     TracyZoneScoped;
 
+    DebugSocketsFmt("Received packet from: {}", ipp.toString());
+
     if (!ec && !buffer.empty())
     {
         // find player session. May be null if there is a pending session for that char id
@@ -305,6 +307,7 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* map_s
         if (map_session_data == nullptr)
         {
             auto pendingSession = mapSessions_.getPendingSessionByCharId(packetCharID);
+            ShowInfoFmt("Handling new connection for charid: {}. Pending session found: {}", packetCharID, pendingSession ? "Yes" : "No");
             if (pendingSession)
             {
                 mapSessions_.destroyPendingSession(pendingSession);
