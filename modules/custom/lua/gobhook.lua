@@ -613,6 +613,7 @@ xi.mafia.SALES =
 
 xi.mafia.grumItems =
 {
+    -- Consider adding grumblix gil trades again?
     -- [1] = { itemid = 1236, amount = 40000, min = 30000, divisor = 2000, qnt = 5, itemname = 'Cactus Stems' },
     -- [2] = { itemid = 1237, amount = 40000, min = 30000, divisor = 2000, qnt = 5, itemname = 'Tree Cuttings' },
     -- [3] = { itemid = 2014, amount = 25000, min = 18000, divisor = 1000, qnt = 5, itemname = 'Bird Blood' },
