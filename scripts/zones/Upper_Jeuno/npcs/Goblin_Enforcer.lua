@@ -23,9 +23,7 @@ entity.onTrade = function(player, npc, trade)
         player:printToPlayer('You have no Hit assigned to you, check the game table for a job.', xi.msg.channel.SAY, 'Goblin Enforcer')
 
     -- Trade the hunt item
-    elseif xi.mafia.CONTRACTS[contractId] and
-           npcUtil.tradeHasExactly(trade, { { xi.mafia.CONTRACTS[contractId].item, 1 } })
-    then
+    elseif xi.mafia.CONTRACTS[contractId] and npcUtil.tradeHasExactly(trade, { { xi.mafia.CONTRACTS[contractId].item, 1 } }) then
         player:confirmTrade()
         local contract = xi.mafia.CONTRACTS[contractId]
 

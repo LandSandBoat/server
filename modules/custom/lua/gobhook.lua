@@ -311,7 +311,11 @@ function xi.mafia.validateContracts()
         -- Check if mobId exists and is a number or table
         if type(mobId) == 'number' and mobId > 0 then
             isValid = true
-        elseif type(mobId) == 'table' and mobId[1] and type(mobId[1]) == 'number' and mobId[1] > 0 then
+        elseif type(mobId) == 'table' and
+            mobId[1] and
+            type(mobId[1]) == 'number' and
+            mobId[1] > 0
+        then
             isValid = true
         end
 
@@ -319,9 +323,9 @@ function xi.mafia.validateContracts()
             validCount = validCount + 1
         else
             invalidCount = invalidCount + 1
-            print(string.format('[ERROR] Contract #%d: %s - mobId is invalid (type: %s, value: %s)', 
-                id, 
-                contract.mobName or 'UNKNOWN', 
+            print(string.format('[ERROR] Contract #%d: %s - mobId is invalid (type: %s, value: %s)',
+                id,
+                contract.mobName or 'UNKNOWN',
                 type(mobId),
                 tostring(mobId)
             ))
@@ -357,9 +361,10 @@ local function getPurchaseItemFunc(itemId, quantity, cost, name)
                     {
                         'I changed my mind.',
                         function()
-                           return
+                            return
                         end
                     },
+
                 }
             }
 
@@ -398,6 +403,7 @@ local function getPurchaseKeyItemFunc(keyItemId, cost, name)
                         return
                     end
                     },
+
                 }
             }
 
@@ -476,6 +482,7 @@ local function getRelicResetFunc()
                         return
                     end
                     },
+
                 }
             }
 
