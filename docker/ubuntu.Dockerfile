@@ -81,6 +81,12 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     python3-dev \
     python3-venv \
     zlib1g-dev
+
+curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-10.6"
+
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+    libmariadb-dev
+
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
 EOF
