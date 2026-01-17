@@ -42,7 +42,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         target:delStatusEffectSilent(xi.effect.DIA)
         target:delStatusEffectSilent(xi.effect.BIO)
-        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 0, 10, 11)
+        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 1, 10, 11)
 
     -- Miss
     else
