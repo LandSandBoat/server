@@ -18,21 +18,15 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        xi.magic.spell.THUNDER,
-        xi.magic.spell.BLIZZARD,
-        xi.magic.spell.ABSORB_TP,
-        xi.magic.spell.DRAIN,
+        [1] = { xi.magic.spell.THUNDER,   target, false, xi.action.type.DAMAGE_TARGET,     nil,            0, 100 },
+        [2] = { xi.magic.spell.BLIZZARD,  target, false, xi.action.type.DAMAGE_TARGET,     nil,            0, 100 },
+        [3] = { xi.magic.spell.DRAIN,     target, false, xi.action.type.DRAIN_HP,          nil,            0, 100 },
+        [4] = { xi.magic.spell.ASPIR,     target, false, xi.action.type.DRAIN_MP,          nil,            0, 100 },
+        [5] = { xi.magic.spell.STUN,      target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.STUN, 0, 100 },
+        [6] = { xi.magic.spell.ABSORB_TP, target, false, xi.action.type.NONE,              nil,            0, 100 },
     }
 
-    if target:getMP() > 0 then
-        table.insert(spellList, xi.magic.spell.ASPIR)
-    end
-
-    if not target:hasStatusEffect(xi.effect.STUN) then
-        table.insert(spellList, xi.magic.spell.STUN)
-    end
-
-    return spellList[math.random(1, #spellList)]
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity

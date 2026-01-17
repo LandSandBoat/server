@@ -42,11 +42,6 @@ content.groups =
     {
         mobs           = { 'Ouryu' },
         superlinkGroup = 1,
-
-        -- This death handler needs to be defined locally since there is no armoury crate.
-        allDeath = function(battlefield, mob)
-            battlefield:setStatus(xi.battlefield.status.WON)
-        end,
     },
 
     {

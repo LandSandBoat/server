@@ -78,7 +78,7 @@ CInstance* CInstanceLoader::LoadInstance() const
                                  "Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, "
                                  "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, mob_groups.poolid, "
                                  "allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, "
-                                 "mob_family_system.charmable "
+                                 "mob_family_system.charmable, mob_pools.modelSize, mob_pools.modelHitboxSize "
                                  "FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid "
                                  "INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid AND mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) "
                                  "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
@@ -200,10 +200,12 @@ CInstance* CInstanceLoader::LoadInstance() const
 
             PMob->m_Pool = rset->get<uint32>("poolid");
 
-            PMob->allegiance = rset->get<ALLEGIANCE_TYPE>("allegiance");
-            PMob->namevis    = rset->get<uint8>("namevis");
-            const auto aggro = rset->get<uint32>("aggro");
-            PMob->m_Aggro    = aggro;
+            PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+            PMob->namevis         = rset->get<uint8>("namevis");
+            PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
+            PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
+            const auto aggro      = rset->get<uint32>("aggro");
+            PMob->m_Aggro         = aggro;
             // If a special instanced mob aggros, it should always aggro regardless of level.
             if (PMob->m_Type & MOBTYPE_EVENT)
             {

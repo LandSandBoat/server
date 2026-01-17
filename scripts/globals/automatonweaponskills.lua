@@ -127,6 +127,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         forcedFirstCrit = false,
         extraOffhandHit = false,
         flourishEffect = false,
+        criticalHit = false,
         alpha = 1,
         bonusWSmods = math.max(attacker:getMainLvl() - target:getMainLvl(), 0),
         bonusTP = wsParams.bonusTP or 0,
