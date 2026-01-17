@@ -16,6 +16,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
     -- This handles BOTH Leech King and Argus init timers
     if math.random(1, 100) <= 50 then
         DisallowRespawn(ID.mob.LEECH_KING, true)

@@ -51769,24 +51769,24 @@ INSERT INTO `mob_spawn_points` VALUES (17367205,0,'Time_Bomb','Time Bomb',26,22.
 INSERT INTO `mob_spawn_points` VALUES (17367207,0,'Time_Bomb','Time Bomb',26,222.5,-60.000,137.946,128);
 
 -- Grimshell Shocktroopers
-INSERT INTO `mob_spawn_points` VALUES (17367209,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,-169.000,59.000,-139.000,120);
-INSERT INTO `mob_spawn_points` VALUES (17367210,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,-169.000,59.000,-144.000,130);
-INSERT INTO `mob_spawn_points` VALUES (17367211,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,-177.000,59.000,-133.000,110);
-INSERT INTO `mob_spawn_points` VALUES (17367212,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,-175.000,60.000,-139.000,130);
-INSERT INTO `mob_spawn_points` VALUES (17367213,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,-176.000,60.000,-143.000,130);
-INSERT INTO `mob_spawn_points` VALUES (17367214,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,-178.000,59.000,-149.000,135);
-INSERT INTO `mob_spawn_points` VALUES (17367216,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,31.274,-1.000,20.964,120);
-INSERT INTO `mob_spawn_points` VALUES (17367217,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,31.274,-1.000,15.964,130);
-INSERT INTO `mob_spawn_points` VALUES (17367218,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,23.274,-1.000,26.964,110);
-INSERT INTO `mob_spawn_points` VALUES (17367219,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,25.274,0.000,20.964,130);
-INSERT INTO `mob_spawn_points` VALUES (17367220,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,24.274,0.000,16.964,130);
-INSERT INTO `mob_spawn_points` VALUES (17367221,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,22.274,-1.000,10.964,135);
-INSERT INTO `mob_spawn_points` VALUES (17367223,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,231.224,-61.000,140.946,120);
-INSERT INTO `mob_spawn_points` VALUES (17367224,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,231.224,-61.000,135.946,130);
-INSERT INTO `mob_spawn_points` VALUES (17367225,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,223.224,-61.000,146.946,110);
-INSERT INTO `mob_spawn_points` VALUES (17367226,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,225.224,-60.000,140.946,130);
-INSERT INTO `mob_spawn_points` VALUES (17367227,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,224.224,-60.000,136.946,130);
-INSERT INTO `mob_spawn_points` VALUES (17367228,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,222.224,-61.000,130.946,135);
+INSERT INTO `mob_spawn_points` VALUES (17367209,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,-179.358,59.695,-142.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367210,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,-175.358,59.797,-139.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367211,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,-175.358,59.797,-139.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367212,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,-175.358,59.695,-142.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367213,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,-179.358,59.797,-139.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367214,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,-179.358,59.797,-145.018,128);
+INSERT INTO `mob_spawn_points` VALUES (17367216,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367217,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367218,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367219,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367220,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367221,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,22.5,0.000,17.964,128);
+INSERT INTO `mob_spawn_points` VALUES (17367223,0,'YoBhu_Hideousmask','Yo\'Bhu Hideousmask',27,222.5,-60.000,137.946,128);
+INSERT INTO `mob_spawn_points` VALUES (17367224,0,'ZoDhu_Legslicer','Zo\'Dhu Legslicer',28,222.5,-60.000,137.946,128);
+INSERT INTO `mob_spawn_points` VALUES (17367225,0,'KaNha_Jabbertongue','Ka\'Nha Jabbertongue',29,222.5,-60.000,137.946,128);
+INSERT INTO `mob_spawn_points` VALUES (17367226,0,'BiFho_Jestergrin','Bi\'Fho Jestergrin',30,222.5,-60.000,137.946,128);
+INSERT INTO `mob_spawn_points` VALUES (17367227,0,'KuTya_Hotblood','Ku\'Tya Hotblood',31,222.5,-60.000,137.946,128);
+INSERT INTO `mob_spawn_points` VALUES (17367228,0,'EaTho_Cruelheart','Ea\'Tho Cruelheart',32,222.5,-60.000,137.946,128);
 
 -- The Hills are Alive
 INSERT INTO `mob_spawn_points` VALUES (17367230,0,'Tartaruga_Gigante','Tartaruga Gigante',33,-177.358,60.188,-141.977,124);

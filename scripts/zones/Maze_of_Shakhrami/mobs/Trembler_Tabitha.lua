@@ -23,4 +23,11 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.magian.onMobDeath(mob, player, optParams, set{ 943 })
 end
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
+end
+
 return entity

@@ -2,6 +2,7 @@
 -- Grimshell Shocktroopers
 -- Waughroon Shrine BCNM60, Moon Orb
 -- !additem 1130
+-- TODO: Capture complete spell lists for Ka'Nha Jabbertongue and Ea'Tho Cruelheart
 -----------------------------------
 local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
