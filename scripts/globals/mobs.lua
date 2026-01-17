@@ -617,6 +617,17 @@ local additionalEffects =
 }
 
 --[[
+    Helper function for xi.mob.onAddEffect that resolves the add-effect animation.
+--]]
+local addEffectAnimation = function(ae, params)
+    if params and params.sub ~= nil then
+        return params.sub
+    end
+
+    return ae.sub
+end
+
+--[[
     Helper function for xi.mob.onAddEffect that applies a status effect.
 --]]
 local addEffectStatus = function(mob, target, ae, params)
@@ -641,7 +652,8 @@ local addEffectStatus = function(mob, target, ae, params)
             ae.code(mob, target, power)
         end
 
-        return ae.sub, ae.msg, ae.eff
+        local subEffect = addEffectAnimation(ae, params)
+        return subEffect, ae.msg, ae.eff
     end
 
     return 0, 0, 0
@@ -650,14 +662,15 @@ end
 --[[
     Helper function for xi.mob.onAddEffect that dispels an effect.
 --]]
-local addEffectDispel = function(target, ae)
+local addEffectDispel = function(target, ae, params)
     local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
 
     if dispelledEffect == xi.effect.NONE then
         return 0, 0, 0
     end
 
-    return ae.sub, ae.msg, dispelledEffect
+    local subEffect = addEffectAnimation(ae, params)
+    return subEffect, ae.msg, dispelledEffect
 end
 
 --[[
@@ -714,7 +727,8 @@ local addEffectImmediate = function(mob, target, damage, ae, params)
             ae.code(mob, target, power)
         end
 
-        return ae.sub, message, power
+        local subEffect = addEffectAnimation(ae, params)
+        return subEffect, message, power
     end
 
     return 0, 0, 0
@@ -727,6 +741,7 @@ end
         chance: percent chance that effect procs on hit (default 20)
         power: power of effect
         duration: duration of effect, in seconds
+        sub: animation of the effect
         code: additional code that will run when effect procs, of form function(mob, target, power)
     params will override effect's default settings
 --]]
@@ -756,7 +771,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
             -- DISPEL
             elseif effect == xi.mob.ae.DISPEL and target then
-                return addEffectDispel(target, ae)
+                return addEffectDispel(target, ae, params)
 
             -- IMMEDIATE EFFECT
             else
