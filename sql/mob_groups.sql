@@ -7595,15 +7595,15 @@ INSERT INTO `mob_groups` VALUES (3,2768,101,'Mud_Pugil',0,128,975,0,0,9,10,0);
 INSERT INTO `mob_groups` VALUES (4,6769,101,'Pug_Pugil_fished',0,128,463,0,0,9,10,0);
 INSERT INTO `mob_groups` VALUES (5,1336,101,'Fighting_Pugil',0,128,279,0,0,9,10,0);
 
-INSERT INTO `mob_groups` VALUES (6,4343,101,'Wild_Rabbit',300,0,893,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (7,4053,101,'Tunnel_Worm',300,0,2496,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (8,1038,101,'Ding_Bats',300,2,82,0,0,1,5,0);
-INSERT INTO `mob_groups` VALUES (9,1404,101,'Forest_Hare',300,0,894,0,0,1,6,0);
-INSERT INTO `mob_groups` VALUES (10,656,101,'Carrion_Worm',300,0,428,0,0,1,6,0);
+INSERT INTO `mob_groups` VALUES (6,4343,101,'Wild_Rabbit',60,0,893,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (7,4053,101,'Tunnel_Worm',60,0,2496,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (8,1038,101,'Ding_Bats',180,2,82,0,0,1,5,0); -- TODO: 1 min respawn near Sandy
+INSERT INTO `mob_groups` VALUES (9,1404,101,'Forest_Hare',180,0,894,0,0,1,6,0);
+INSERT INTO `mob_groups` VALUES (10,656,101,'Carrion_Worm',180,0,428,0,0,1,6,0);
 INSERT INTO `mob_groups` VALUES (11,1403,101,'Forest_Funguar',300,0,892,0,0,3,6,0);
 INSERT INTO `mob_groups` VALUES (12,3494,101,'Scarab_Beetle',300,0,2174,0,0,3,7,0);
 INSERT INTO `mob_groups` VALUES (13,3013,101,'Orcish_Fodder',300,0,1904,0,0,3,8,0);
-INSERT INTO `mob_groups` VALUES (14,2763,101,'Mouse_Bat',300,2,19,0,0,3,7,0);
+INSERT INTO `mob_groups` VALUES (14,2763,101,'Mouse_Bat',180,2,19,0,0,3,7,0);
 INSERT INTO `mob_groups` VALUES (15,3022,101,'Orcish_Mesmerizer',300,0,1924,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (16,3016,101,'Orcish_Grappler',300,0,1913,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (17,1659,101,'Goblin_Fisher',300,0,1051,0,0,3,8,0);
@@ -7633,7 +7633,7 @@ INSERT INTO `mob_groups` VALUES (40,4850,101,'Hugemaw_Harold',0,128,0,0,0,75,75,
 INSERT INTO `mob_groups` VALUES (41,3241,101,'Pyracmon',0,128,2047,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (42,4381,101,'Wraith_Bat',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (43,6543,101,'Enchanted_Bones_war',300,1,769,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (44,3221,101,'Pugil',300,0,279,0,0,1,5,0);
+INSERT INTO `mob_groups` VALUES (44,3221,101,'Pugil',180,0,279,0,0,1,5,0);
 
 -- Voidwalker
 INSERT INTO `mob_groups` VALUES (45,6999,101,'Yilbegan',86400,0,3185,90000,5000,90,92,0);
