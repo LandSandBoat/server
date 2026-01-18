@@ -12,7 +12,7 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Send spawned skeleton "pets" to Keremet's target.
-    local keremetId  = mob:getID()
+    local keremetId = mob:getID()
     for i = keremetId + 1, keremetId + 12 do
         local keremetSkeleton = GetMobByID(i)
 
@@ -25,8 +25,20 @@ entity.onMobFight = function(mob, target)
     end
 end
 
+entity.onMobDeath = function(mob)
+    -- On Keremet death, kill all skeletons
+    local keremetId = mob:getID()
+    for i = keremetId + 1, keremetId + 12 do
+        local keremetSkeleton = GetMobByID(i)
+
+        if keremetSkeleton then
+            keremetSkeleton:setHP(0)
+        end
+    end
+end
+
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(1200, 1800)) -- 20 to 30 minutes
+    mob:setRespawnTime(math.random(600, 1800)) -- 10 to 30 minutes
 end
 
 return entity

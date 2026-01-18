@@ -1105,9 +1105,9 @@ INSERT INTO `mob_groups` VALUES (45,7284,27,'Fomor_Ranger',900,0,873,0,0,44,48,0
 -- Sacrarium (Zone 28)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1481,28,'Gazer',960,0,941,0,0,48,50,0);
-INSERT INTO `mob_groups` VALUES (2,1804,28,'Greater_Gaylas',960,0,234,0,0,46,48,0);
-INSERT INTO `mob_groups` VALUES (3,6638,28,'Stegotaur',780,0,2333,0,0,47,49,0);
+INSERT INTO `mob_groups` VALUES (1,1481,28,'Gazer',840,0,941,0,0,48,50,0);
+INSERT INTO `mob_groups` VALUES (2,1804,28,'Greater_Gaylas',840,0,234,0,0,46,48,0);
+INSERT INTO `mob_groups` VALUES (3,6638,28,'Stegotaur',840,0,2333,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (4,2770,28,'Mummy',960,0,1754,0,0,54,56,0);
 INSERT INTO `mob_groups` VALUES (5,2407,28,'Lich',960,0,958,0,0,54,56,0);
 INSERT INTO `mob_groups` VALUES (6,476,28,'Blubber_Eyes',960,0,315,0,0,57,59,0);
@@ -1133,7 +1133,7 @@ INSERT INTO `mob_groups` VALUES (25,1387,28,'Fomor_Paladin',960,0,872,0,0,54,58,
 INSERT INTO `mob_groups` VALUES (26,2964,28,'Old_Professor_Mariselle',0,128,0,5000,5000,55,55,0);
 INSERT INTO `mob_groups` VALUES (27,2566,28,'Mariselles_Pupil',0,128,0,1000,0,47,48,0);
 INSERT INTO `mob_groups` VALUES (28,3880,28,'Teratotaur',960,0,2333,0,0,57,59,0);
-INSERT INTO `mob_groups` VALUES (29,2210,28,'Keremet',1200,0,1431,6000,0,56,58,0);
+INSERT INTO `mob_groups` VALUES (29,2210,28,'Keremet',600,0,1431,6000,0,56,58,0);
 INSERT INTO `mob_groups` VALUES (30,315,28,'Azren_Kuguza',1800,0,0,300,0,42,43,0);
 INSERT INTO `mob_groups` VALUES (31,314,28,'Azren_Kuba',1800,0,0,300,0,42,43,0);
 INSERT INTO `mob_groups` VALUES (32,71,28,'Air_Elemental',960,4,38,0,0,59,60,0);
@@ -1145,7 +1145,7 @@ INSERT INTO `mob_groups` VALUES (37,2427,28,'Lobais',0,128,218,6100,0,59,59,0);
 INSERT INTO `mob_groups` VALUES (38,1392,28,'Fomors_Avatar',0,128,0,0,0,49,51,0);
 INSERT INTO `mob_groups` VALUES (39,608,28,'Caithleann',0,128,218,6200,0,59,59,0);
 INSERT INTO `mob_groups` VALUES (40,2074,28,'Indich',0,128,218,6500,0,59,59,0);
-INSERT INTO `mob_groups` VALUES (41,4531,28,'Aqueduct_Spider',300,0,3006,0,0,84,86,0);
+INSERT INTO `mob_groups` VALUES (41,4531,28,'Aqueduct_Spider',960,0,3006,0,0,84,86,0);
 INSERT INTO `mob_groups` VALUES (42,7284,28,'Fomor_Ranger',960,0,874,0,0,54,58,0);
 
 -- ------------------------------------------------------------
