@@ -13019,18 +13019,18 @@ INSERT INTO `mob_groups` VALUES (98,7257,188,'Vanguard_Pathfinder',600,0,2563,40
 -- King_Ranperres_Tomb (Zone 190)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1038,190,'Ding_Bats',660,2,655,0,0,2,5,0);
-INSERT INTO `mob_groups` VALUES (2,656,190,'Carrion_Worm',660,0,428,0,0,2,5,0);
-INSERT INTO `mob_groups` VALUES (3,1737,190,'Goblin_Thug',660,0,1170,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (1,1038,190,'Ding_Bats',300,2,655,0,0,2,5,0);
+INSERT INTO `mob_groups` VALUES (2,656,190,'Carrion_Worm',300,0,428,0,0,2,5,0);
+INSERT INTO `mob_groups` VALUES (3,1737,190,'Goblin_Thug',300,0,1170,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (4,2763,190,'Mouse_Bat',660,0,386,0,0,3,6,0);
-INSERT INTO `mob_groups` VALUES (5,1744,190,'Goblin_Weaver',660,0,1183,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (5,1744,190,'Goblin_Weaver',300,0,1183,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (6,3780,190,'Stone_Eater',660,0,2340,0,0,5,7,0);
-INSERT INTO `mob_groups` VALUES (7,1214,190,'Enchanted_Bones_blm',660,1,769,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (8,3739,190,'Spook',960,1,2840,220,0,11,13,0);
+INSERT INTO `mob_groups` VALUES (7,1214,190,'Enchanted_Bones_blm',300,1,769,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (8,3739,190,'Spook',360,1,2840,220,0,11,13,0);
 INSERT INTO `mob_groups` VALUES (9,4349,190,'Wind_Bats',660,0,82,0,0,9,11,0);
-INSERT INTO `mob_groups` VALUES (10,1635,190,'Goblin_Ambusher',660,0,1019,0,0,12,16,0);
-INSERT INTO `mob_groups` VALUES (11,1738,190,'Goblin_Tinkerer',660,0,1175,0,0,12,16,0);
-INSERT INTO `mob_groups` VALUES (12,1643,190,'Goblin_Butcher',660,0,1033,0,0,12,16,0);
+INSERT INTO `mob_groups` VALUES (10,1635,190,'Goblin_Ambusher',300,0,1019,0,0,12,16,0);
+INSERT INTO `mob_groups` VALUES (11,1738,190,'Goblin_Tinkerer',300,0,1175,0,0,12,16,0);
+INSERT INTO `mob_groups` VALUES (12,1643,190,'Goblin_Butcher',300,0,1033,0,0,12,16,0);
 INSERT INTO `mob_groups` VALUES (13,1796,190,'Grave_Bat',660,0,1221,0,0,11,13,0);
 INSERT INTO `mob_groups` VALUES (14,3378,190,'Rock_Eater',660,0,2116,0,0,14,16,0);
 INSERT INTO `mob_groups` VALUES (15,1670,190,'Goblin_Gruel',23400,0,1087,0,0,18,20,0);
@@ -13063,7 +13063,7 @@ INSERT INTO `mob_groups` VALUES (41,799,190,'Corrupted_Yorgos',0,128,0,7250,0,64
 INSERT INTO `mob_groups` VALUES (42,797,190,'Corrupted_Soffeil',0,128,0,0,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (43,798,190,'Corrupted_Ulbrig',0,128,0,0,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (44,5164,190,'Hahava',0,128,0,0,9999,94,95,0);
-INSERT INTO `mob_groups` VALUES (45,6543,190,'Enchanted_Bones_war',660,1,769,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (45,6543,190,'Enchanted_Bones_war',300,1,769,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (46,6563,190,'Nachzehrer_blm',660,0,1771,0,0,15,18,0);
 INSERT INTO `mob_groups` VALUES (47,6889,190,'Arcus_Blades',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (48,7058,190,'Locus_Hati',960,0,1278,305000,0,136,137,0);
