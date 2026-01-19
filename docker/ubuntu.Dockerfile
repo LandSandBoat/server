@@ -71,9 +71,10 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
+    curl \
+    ca-certificates \
     g++-$GCC_VERSION \
     libluajit-5.1-dev \
-    libmariadb-dev-compat \
     libssl-dev \
     libzmq3-dev \
     make \
