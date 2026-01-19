@@ -18,6 +18,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     bash \
     binutils \
     ca-certificates \
+    curl\
     git \
     libzmq5 \
     lua5.1 \
@@ -29,6 +30,11 @@ apt-get update && apt-get install -y --no-install-recommends \
     tini \
     tzdata \
     zlib1g
+
+curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-10.6"
+
+apt-get update && apt-get install -y --no-install-recommends libmariadb3
+
 apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
@@ -71,10 +77,9 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
-    curl \
-    ca-certificates \
     g++-$GCC_VERSION \
     libluajit-5.1-dev \
+    libmariadb-dev \
     libssl-dev \
     libzmq3-dev \
     make \
@@ -82,11 +87,6 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     python3-dev \
     python3-venv \
     zlib1g-dev
-
-curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-10.6"
-
-apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-    libmariadb-dev
 
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
