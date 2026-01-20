@@ -143,6 +143,8 @@ xi.mobSkill =
 
     MIND_WALL                     =  471, -- Mammet-800
 
+    GRAVE_REEL                    =  472,
+
     PETRIFACTIVE_BREATH           =  480,
 
     CHARGED_WHISKER               =  483,
@@ -594,6 +596,14 @@ xi.mobSkill =
     VAMPIRIC_ROOT                 = 1793,
 
     XENOGLOSSIA                   = 1823, -- Unique entry.
+
+    PYRIC_BLAST                   = 1828,
+    PYRIC_BULWARK                 = 1829,
+    POLAR_BLAST                   = 1830,
+    POLAR_BULWARK                 = 1831,
+    BAROFIELD                     = 1832,
+
+    NERVE_GAS                     = 1836,
 
     SANDBLAST_2                   = 1841,
     SANDPIT_2                     = 1842,

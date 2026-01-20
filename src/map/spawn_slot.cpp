@@ -16,31 +16,58 @@
 
 #include "spawn_slot.h"
 
-#include "entities/mobentity.h"
+#include <ranges>
 
-void SpawnSlot::AddMob(CMobEntity* mob, uint8 spawnChance)
+#include "entities/mobentity.h"
+#include "spawn_handler.h"
+#include "zone.h"
+
+void SpawnSlot::AddMob(CMobEntity* mob, const uint8 spawnChance)
 {
     entries.push_back({ mob, spawnChance });
     mob->SetSpawnSlot(this);
 }
 
-void SpawnSlot::RemoveMob(CMobEntity* mob)
+void SpawnSlot::RemoveMob(const CMobEntity* mob)
 {
-    // clang-format off
-    auto iter = std::find_if(entries.begin(), entries.end(), [&](SpawnSlotEntry const& entry)
-    {
-        return entry.mob == mob;
-    });
-    // clang-format on
-
-    if (iter != entries.end())
-    {
-        entries.erase(iter);
-    }
+    std::erase_if(entries, [mob](const SpawnSlotEntry& entry)
+                  {
+                      return entry.mob == mob;
+                  });
 }
 
-bool SpawnSlot::TrySpawn()
+auto SpawnSlot::TrySpawn(const std::optional<uint32> specificMobId) -> bool
 {
+    // Get SpawnHandler from first mob's zone for condition checking
+    SpawnHandler* spawnHandler = nullptr;
+    if (!entries.empty() && entries[0].mob->loc.zone)
+    {
+        spawnHandler = entries[0].mob->loc.zone->spawnHandler();
+    }
+
+    // Check if a specific mob should respawn (deaggro case)
+    if (specificMobId.has_value())
+    {
+        auto it = std::ranges::find_if(entries, [id = *specificMobId](const auto& entry)
+                                       {
+                                           return entry.mob->id == id;
+                                       });
+
+        if (it == entries.end())
+        {
+            return false;
+        }
+
+        if (!it->mob->isAlive() && (!spawnHandler || spawnHandler->canSpawnNow(it->mob)))
+        {
+            it->mob->m_AllowRespawn = true;
+            it->mob->Spawn();
+            return true;
+        }
+
+        return false;
+    }
+
     // Determine which of the mobs in the group can be spawned, and if there's one spawned already
     std::vector<std::tuple<uint32, CMobEntity*>> chanceSpawns;
     std::vector<CMobEntity*>                     remainingSpawns;
@@ -57,7 +84,8 @@ bool SpawnSlot::TrySpawn()
             break;
         }
 
-        if (!entry.mob->m_CanSpawn)
+        // Use SpawnHandler to check spawn conditions (time, weather, etc.)
+        if (spawnHandler && !spawnHandler->canSpawnNow(entry.mob))
         {
             continue;
         }
@@ -79,8 +107,8 @@ bool SpawnSlot::TrySpawn()
         return false;
     }
 
-    // If there are no remaining spawns available, bail out
-    if (remainingSpawns.empty())
+    // If there are no spawnable mobs at all, bail out
+    if (chanceSpawns.empty() && remainingSpawns.empty())
     {
         return false;
     }
@@ -88,7 +116,7 @@ bool SpawnSlot::TrySpawn()
     // Check for chance spawns
     if (totalChance > 0)
     {
-        uint32 roll = xirand::GetRandomNumber(100);
+        const uint32 roll = xirand::GetRandomNumber(100);
 
         // Check if roll is low enough number to make one of the chance mobs to spawn.
         if (roll < totalChance)
@@ -96,12 +124,11 @@ bool SpawnSlot::TrySpawn()
             // Find the chance spawn which matches the roll
             uint32 accumulatedRoll = 0;
 
-            bool spawned = false;
             for (auto&& entry : chanceSpawns)
             {
-                auto mob = std::get<1>(entry);
+                const auto mob = std::get<1>(entry);
                 accumulatedRoll += std::get<0>(entry);
-                if (!spawned && roll < accumulatedRoll)
+                if (roll < accumulatedRoll)
                 {
                     allowedSpawn = mob;
                     break;
@@ -130,17 +157,19 @@ bool SpawnSlot::TrySpawn()
         {
             entry.mob->m_AllowRespawn = true;
             entry.mob->Spawn();
-        }
-        else
-        {
-            entry.mob->m_AllowRespawn = false;
+            break;
         }
     }
 
     return allowedSpawn != nullptr;
 }
 
-bool SpawnSlot::IsEmpty()
+auto SpawnSlot::IsEmpty() const -> bool
 {
     return entries.empty();
+}
+
+auto SpawnSlot::GetEntries() const -> const std::vector<SpawnSlotEntry>&
+{
+    return entries;
 }

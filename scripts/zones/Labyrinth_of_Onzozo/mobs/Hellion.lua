@@ -20,7 +20,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.HELLION + 2]  = ID.mob.HELLION, -- 136.566 14.708 70.077
+    [ID.mob.HELLION + 2 ] = ID.mob.HELLION, -- 136.566 14.708 70.077
     [ID.mob.HELLION + 15] = ID.mob.HELLION, -- 127.523 14.327 210.258
 }
 
@@ -42,7 +42,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENDARK) -- This proced every time in caps and needs to be adjusted
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.DARK,
+        power          = damage / 2,
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAdditionalDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

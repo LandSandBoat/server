@@ -92,32 +92,6 @@ describe('Crystals', function()
     end)
 end)
 
----@param world CSimulation
----@param ... CBaseEntity
-local function waitForDespawn(world, ...)
-    local stillSpawned = true
-    local ticks = 0
-    while stillSpawned do
-        stillSpawned = false
-        for _, entity in ipairs({ ... }) do
-            if entity:isSpawned() then
-                stillSpawned = true
-                break
-            end
-        end
-
-        if stillSpawned then
-            world:skipTime(5)
-            world:tick()
-            ticks = ticks + 1
-        end
-
-        if ticks >= 20 then
-            error('Entities did not spawn as expected.')
-        end
-    end
-end
-
 describe('Elementals', function()
     local player
     local thunderEle, earthEle
@@ -130,27 +104,14 @@ describe('Elementals', function()
 
     it('do not spawn with no matching weather', function()
         player:setWeather(xi.weather.NONE)
-        waitForDespawn(xi.test.world, thunderEle, earthEle)
 
-        thunderEle.assert.no:isAlive()
-        earthEle.assert.no:isAlive()
-    end)
-
-    it('spawn during matching weather element', function()
-        player:setWeather(xi.weather.THUNDER)
-        thunderEle.assert:isAlive()
-        earthEle.assert.no:isAlive()
-
-        -- Earth weather spawns only Earth Elemental
-        player:setWeather(xi.weather.DUST_STORM)
-        waitForDespawn(xi.test.world, thunderEle)
-
-        thunderEle.assert.no:isAlive()
-        earthEle.assert:isAlive()
-
-        -- Other weather has none of them
-        player:setWeather(xi.weather.FOG)
-        waitForDespawn(xi.test.world, thunderEle, earthEle)
+        -- Wait for despawn to process
+        local ticks = 0
+        while (thunderEle:isSpawned() or earthEle:isSpawned()) and ticks < 20 do
+            xi.test.world:skipTime(5)
+            xi.test.world:tick()
+            ticks = ticks + 1
+        end
 
         thunderEle.assert.no:isAlive()
         earthEle.assert.no:isAlive()

@@ -37,6 +37,7 @@
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
+#include "spawn_handler.h"
 #include "spawn_slot.h"
 #include "zone_instance.h"
 
@@ -706,10 +707,14 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
             PZone->ForEachMob(
-                [](CMobEntity* PMob)
+                [&PZone](CMobEntity* PMob)
                 {
-                    // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
-                    // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
+                    // Skip mobs already registered via setRespawnTime in onMobInitialize - let SpawnHandler handle them
+                    if (PZone->spawnHandler()->isRegistered(PMob))
+                    {
+                        return;
+                    }
+
                     if (PMob->m_CanSpawn && PMob->m_AllowRespawn)
                     {
                         PMob->m_AllowRespawn = true;
@@ -722,7 +727,10 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                         {
                             PMob->m_AllowRespawn = true;
                         }
-                        PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
+
+                        // Condition-based mobs (time/weather) register with 0s so they spawn when conditions are met
+                        const bool isConditionBased = PMob->m_SpawnType & (SPAWNTYPE_ATNIGHT | SPAWNTYPE_ATEVENING | SPAWNTYPE_WEATHER | SPAWNTYPE_FOG);
+                        PZone->spawnHandler()->registerForRespawn(PMob, isConditionBased ? std::make_optional(0s) : std::nullopt);
                     }
                 });
         });

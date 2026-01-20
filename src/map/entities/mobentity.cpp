@@ -1225,9 +1225,7 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
     TracyZoneScoped;
     FadeOut();
 
-    PAI->Internal_Respawn(m_RespawnTime);
     luautils::OnMobDespawn(this);
-    // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", this);
 }
 

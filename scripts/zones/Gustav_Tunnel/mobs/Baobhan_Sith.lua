@@ -15,18 +15,27 @@ entity.phList =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.STUN)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 10)
+    mob:setMod(xi.mod.BIND_RES_RANK, 10)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 10)
+    mob:setMod(xi.mod.STUN_MEVA, 10000)
+    mob:setMod(xi.mod.DARK_RES_RANK, 10)
+    mob:setMod(xi.mod.ICE_RES_RANK, 10)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR, { chance = 20 })  -- Should be changed to enblizzard animation
 end
 
 entity.onMobDeath = function(mob, player, optParams)

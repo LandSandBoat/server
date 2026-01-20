@@ -340,7 +340,10 @@ void MapEngine::do_init()
 
     luautils::OnServerStart();
 
-    moduleutils::ReportLuaModuleUsage();
+    if (!engineConfig_.isTestServer)
+    {
+        moduleutils::ReportLuaModuleUsage();
+    }
 
     db::enableTimers();
 

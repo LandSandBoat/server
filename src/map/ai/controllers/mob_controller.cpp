@@ -37,9 +37,11 @@
 #include "mobskill.h"
 #include "party.h"
 #include "recast_container.h"
+#include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)
@@ -1096,6 +1098,8 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !settings::get<bool>("map.MOB_NO_DESPAWN"))
                 {
                     PMob->PAI->Despawn();
+                    // Override respawn timer set by CDespawnState for deaggro (60s instead of default)
+                    PMob->loc.zone->spawnHandler()->registerForRespawn(PMob, 60s);
                     return;
                 }
             }

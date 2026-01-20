@@ -69,6 +69,10 @@ entity.phList =
     [ID.mob.DEMONIC_TIPHIA - 2] = ID.mob.DEMONIC_TIPHIA, -- -75.000 -1.000 299.000
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
+end
+
 entity.onMobFight = function(mob, target)
     -- captures show cure v repeatedly every 15 sec below 50% health
     if

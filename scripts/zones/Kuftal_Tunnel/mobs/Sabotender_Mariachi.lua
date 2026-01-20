@@ -81,20 +81,24 @@ entity.spawnPoints =
 local mobRegen = function(mob)
     local hour = VanadielHour()
     if hour >= 6 and hour < 18 then
-        mob:setMod(xi.mod.REGEN, 80)
+        mob:setMod(xi.mod.REGEN, 50)
     else
         mob:setMod(xi.mod.REGEN, 0)
     end
 end
 
 entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 15000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobRoam = function(mob)
@@ -107,6 +111,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 417)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

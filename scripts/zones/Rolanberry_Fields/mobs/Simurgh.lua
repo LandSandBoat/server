@@ -72,14 +72,14 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 2550) -- (https://ffxiclopedia.fandom.com/wiki/Simurgh)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.EVA, 400)   -- Very high evasion (retail confirmed)
-    mob:setMod(xi.mod.ATT, 180)   -- Moderate attack (level 58 NM, intentionally lower than other NMs)
-    mob:setMod(xi.mod.MATT, 40)   -- Magic attack bonus
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 250)
+    mob:setMod(xi.mod.EVA, 400)
+    mob:setMod(xi.mod.ACC, 519)
 end
 
 entity.onMobFight = function(mob, target)

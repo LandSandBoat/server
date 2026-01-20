@@ -1,14 +1,21 @@
 -----------------------------------
--- Area: Horlais Peak
---  Mob: Armsmaster Dekbuk
--- BCNM Fight: Dismemberment Brigade
+-- Area : Horlais Peak
+-- Mob  : Armsmaster Dekbuk
+-- BCNM : Dismemberment Brigade
+-- Job  : Warrior
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 4)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 4)
 end
 
 return entity

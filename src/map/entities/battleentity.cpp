@@ -3180,7 +3180,6 @@ void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
     FadeOut();
     // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", this);
-    PAI->Internal_Respawn(0s);
 }
 
 void CBattleEntity::SetBattleStartTime(timer::time_point time)

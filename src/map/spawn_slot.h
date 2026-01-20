@@ -18,6 +18,8 @@
 
 #include "common/cbasetypes.h"
 
+#include <optional>
+
 class CMobEntity;
 
 struct SpawnSlotEntry
@@ -27,17 +29,18 @@ struct SpawnSlotEntry
     // Chance out of 100 of this mob spawning out of the mobs sharing the slot.
     // If not all mobs in the slot have a chance defined, then the ones without it
     // will be rolled between equally, if none of the ones with a specified chance succeeds.
-    uint8 spawnChance = 0;
+    uint8 spawnChance{ 0 };
 };
 
 class SpawnSlot
 {
-private:
-    std::vector<SpawnSlotEntry> entries;
-
 public:
     void AddMob(CMobEntity* mob, uint8 spawnChance);
-    void RemoveMob(CMobEntity* mob);
-    bool TrySpawn();
-    bool IsEmpty();
+    void RemoveMob(const CMobEntity* mob);
+    auto TrySpawn(std::optional<uint32> specificMobId = std::nullopt) -> bool;
+    auto IsEmpty() const -> bool;
+    auto GetEntries() const -> const std::vector<SpawnSlotEntry>&;
+
+private:
+    std::vector<SpawnSlotEntry> entries;
 };

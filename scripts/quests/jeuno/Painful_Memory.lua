@@ -22,7 +22,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD) and
                 player:getMainJob() == xi.job.BRD and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.LOWER_JEUNO] =

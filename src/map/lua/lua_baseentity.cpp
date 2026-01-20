@@ -57,6 +57,7 @@
 #include "notoriety_container.h"
 #include "recast_container.h"
 #include "roe.h"
+#include "spawn_handler.h"
 #include "spell.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
@@ -65,6 +66,7 @@
 #include "transport.h"
 #include "treasure_pool.h"
 #include "weapon_skill.h"
+#include "zone.h"
 
 #include "ai/ai_container.h"
 
@@ -78,7 +80,6 @@
 #include "ai/states/mobskill_state.h"
 #include "ai/states/petskill_state.h"
 #include "ai/states/range_state.h"
-#include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
 
 #include "ai/controllers/mob_controller.h"
@@ -1685,10 +1686,6 @@ uint8 CLuaBaseEntity::getCurrentAction()
     if (m_PBaseEntity->PAI->IsStateStackEmpty())
     {
         action = 16; // For mobs, this means roaming
-    }
-    else if (m_PBaseEntity->PAI->IsCurrentState<CRespawnState>())
-    {
-        action = 0;
     }
     else if (m_PBaseEntity->PAI->IsCurrentState<CAttackState>())
     {
@@ -17358,7 +17355,7 @@ uint32 CLuaBaseEntity::getRespawnTime()
         }
  ************************************************************************/
 
-void CLuaBaseEntity::setRespawnTime(uint32 seconds)
+void CLuaBaseEntity::setRespawnTime(const uint32 seconds) const
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
@@ -17368,13 +17365,14 @@ void CLuaBaseEntity::setRespawnTime(uint32 seconds)
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
-    PMob->m_RespawnTime = std::chrono::seconds(seconds);
-    if (PMob->PAI->IsCurrentState<CRespawnState>())
-    {
-        PMob->PAI->GetCurrentState()->ResetEntryTime();
-    }
-
+    PMob->m_RespawnTime  = std::chrono::seconds(seconds);
     PMob->m_AllowRespawn = true;
+
+    // If mob is not currently spawned, update its pending respawn time in SpawnHandler
+    if (!PMob->PAI->IsSpawned() && PMob->loc.zone != nullptr)
+    {
+        PMob->loc.zone->spawnHandler()->registerForRespawn(PMob, std::chrono::seconds(seconds));
+    }
 }
 
 /************************************************************************

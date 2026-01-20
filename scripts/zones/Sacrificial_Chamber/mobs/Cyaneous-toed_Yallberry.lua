@@ -14,14 +14,6 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
-local enfeebleTable =
-{
-    [1] = { xi.magic.spell.DOKUMORI_NI, xi.effect.POISON    },
-    [2] = { xi.magic.spell.KURAYAMI_NI, xi.effect.BLINDNESS },
-    [3] = { xi.magic.spell.HOJO_NI,     xi.effect.SLOW      },
-    [4] = { xi.magic.spell.JUBAKU_NI,   xi.effect.PARALYSIS },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
@@ -30,31 +22,22 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
-    -- Base Elemental Wheel
     local spellList =
     {
-        xi.magic.spell.DOTON_NI,
-        xi.magic.spell.HYOTON_NI,
-        xi.magic.spell.HUTON_NI,
-        xi.magic.spell.KATON_NI,
-        xi.magic.spell.RAITON_NI,
-        xi.magic.spell.SUITON_NI,
+        [ 1] = { xi.magic.spell.DOTON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 2] = { xi.magic.spell.HYOTON_NI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 3] = { xi.magic.spell.HUTON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 4] = { xi.magic.spell.KATON_NI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 5] = { xi.magic.spell.RAITON_NI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 6] = { xi.magic.spell.SUITON_NI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 7] = { xi.magic.spell.DOKUMORI_NI, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.POISON,     0, 100 },
+        [ 8] = { xi.magic.spell.KURAYAMI_NI, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BLINDNESS,  0, 100 },
+        [ 9] = { xi.magic.spell.HOJO_NI,     target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,       4, 100 },
+        [10] = { xi.magic.spell.JUBAKU_NI,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.PARALYSIS,  0, 100 },
+        [11] = { xi.magic.spell.UTSUSEMI_NI, mob,    false, xi.action.type.ENHANCING_TARGET,  xi.effect.COPY_IMAGE, 0, 100 },
     }
 
-    -- Add Utsusemi if we don't have it
-    if not mob:hasStatusEffect(xi.effect.COPY_IMAGE) then
-        table.insert(spellList, xi.magic.spell.UTSUSEMI_NI)
-    end
-
-    -- Add enfeebles if they are missing from our target
-    for i = 1, #enfeebleTable do
-        if not target:hasStatusEffect(enfeebleTable[i][2]) then
-            table.insert(spellList, enfeebleTable[i][1])
-        end
-    end
-
-    -- Return a random spell from the compiled list
-    return spellList[math.random(#spellList)]
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity

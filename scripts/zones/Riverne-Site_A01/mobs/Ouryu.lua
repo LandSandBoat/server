@@ -200,6 +200,12 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.OURYU_OVERWHELMER)
+    if optParams.isKiller or optParams.noKiller then
+        local battlefield = mob:getBattlefield()
+        if battlefield then
+            battlefield:setStatus(xi.battlefield.status.WON)
+        end
+    end
 end
 
 return entity

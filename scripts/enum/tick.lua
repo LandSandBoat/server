@@ -11,4 +11,5 @@ xi.tick =
     JST_DAY       = 5,
     VANA_HOUR     = 6,
     VANA_DAY      = 7,
+    SPAWN         = 8,
 }

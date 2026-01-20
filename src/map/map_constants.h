@@ -50,6 +50,10 @@ static constexpr auto kLogicUpdateInterval = std::chrono::milliseconds(static_ca
 // Check Trigger Areas 2x as often as the server tick rate (200ms)
 static constexpr auto kTriggerAreaInterval = std::chrono::milliseconds(static_cast<uint64>(1000.0f / (kLogicUpdateRate * 2.0f)));
 
+// SpawnHandler tick interval (30s) and spawn window (half of interval)
+static constexpr auto kSpawnHandlerInterval = 30s;
+static constexpr auto kSpawnHandlerWindow   = kSpawnHandlerInterval / 2;
+
 // Split betweek task manager and networking workload (200ms)
 static constexpr auto kMainLoopInterval = 200ms;
 

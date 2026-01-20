@@ -5,18 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-local eleAddEffects =
-{
-    [xi.element.FIRE]    = xi.mob.ae.ENFIRE,
-    [xi.element.ICE]     = xi.mob.ae.ENBLIZZARD,
-    [xi.element.WIND]    = xi.mob.ae.ENAERO,
-    [xi.element.EARTH]   = xi.mob.ae.ENSTONE,
-    [xi.element.THUNDER] = xi.mob.ae.ENTHUNDER,
-    [xi.element.WATER]   = xi.mob.ae.ENWATER,
-    [xi.element.LIGHT]   = xi.mob.ae.ENLIGHT,
-    [xi.element.DARK]    = xi.mob.ae.ENDARK,
-}
-
 local eleAbsorbActionID   = { 603, 604, 624, 404, 625, 626, 627, 307 }
 local eleAbsorbAnimations = { 432, 433, 434, 435, 436, 437, 438, 439 }
 
@@ -63,14 +51,16 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    local element = mob:getLocalVar('element')
-    local additionalEffect = eleAddEffects[element]
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = mob:getLocalVar('element'),
+        power          = damage / 2,
+        actorStat      = xi.mod.INT,
+    }
 
-    if additionalEffect then
-        return xi.mob.onAddEffect(mob, target, damage, additionalEffect, { chance = 1000 })
-    else
-        return 0, 0, 0 -- Just in case its somehow not got a variable set
-    end
+    return xi.combat.action.executeAdditionalDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
