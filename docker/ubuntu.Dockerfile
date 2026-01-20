@@ -23,6 +23,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     libzmq5 \
     lua5.1 \
     luajit \
+    libmariadb3 \
     mariadb-client \
     openssl \
     python3 \
@@ -65,36 +66,36 @@ SHELL ["/bin/bash", "-c"]
 ###########
 # Staging #
 ###########
-#FROM base AS staging
-FROM ghcr.io/landsandboat/devtools:latest AS staging
+FROM base AS staging
 
-#ARG GCC_VERSION=14
-#ARG LLVM_VERSION=20
-#
-## Install build dependencies.
-#RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
-#    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
-#apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-#    binutils-dev \
-#    ccache \
-#    cmake \
-#    g++-$GCC_VERSION \
-#    libluajit-5.1-dev \
-#    libmariadb-dev \
-#    libssl-dev \
-#    libzmq3-dev \
-#    make \
-#    ninja-build \
-#    python3-dev \
-#    python3-venv \
-#    zlib1g-dev
-#
-#update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
-#update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
-#EOF
-#ENV CC=/usr/bin/gcc-$GCC_VERSION
-#ENV CXX=/usr/bin/g++-$GCC_VERSION
-WORKDIR /server
+ARG GCC_VERSION=14
+ARG LLVM_VERSION=20
+
+# Install build dependencies.
+RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+    binutils-dev \
+    ccache \
+    cmake \
+    g++-$GCC_VERSION \
+    libluajit-5.1-dev \
+    libmariadb-dev \
+    mariadb-server \
+    libssl-dev \
+    libzmq3-dev \
+    make \
+    ninja-build \
+    python3-dev \
+    python3-venv \
+    zlib1g-dev
+
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+EOF
+ENV CC=/usr/bin/gcc-$GCC_VERSION
+ENV CXX=/usr/bin/g++-$GCC_VERSION
+
 # Install secondary dependencies as user.
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
