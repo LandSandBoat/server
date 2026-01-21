@@ -78,6 +78,8 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
+    curl \
+    git \
     clang-$LLVM_VERSION \
     libclang-rt-$LLVM_VERSION-dev \
     libluajit-5.1-dev \
@@ -89,7 +91,23 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     python3-dev \
     python3-venv \
     python3-pip \
-    zlib1g-dev
+    zlib1g-dev \
+    libcurl4-open-dev
+
+WORKDIR /tmp
+RUN git clone https://github.com/mariadb-corporation/mariadb-connector-c.git && \
+    cd mariadb-connector-c && \
+    git checkout v3.3.8 && \
+    mkdir build && cd build && \
+    cmake .. \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DMARIADB_PORT=3306 \
+        -DWITH_SSL=OPENSSL \
+        -DWITH_CURL=ON && \
+    make -j$(nproc) && \
+    make install && \
+    cd /server
 
 # Set Clang as the default compiler
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang-$LLVM_VERSION 100
