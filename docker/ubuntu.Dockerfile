@@ -13,29 +13,25 @@ echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/
 EOF
 
 # Install runtime dependencies.
+# Note: We include libmariadb3 (Native) here, not the -compat layer.
 RUN <<EOF
 apt-get update && apt-get install -y --no-install-recommends \
     bash \
     binutils \
     ca-certificates \
-    curl\
+    curl \
     git \
     libzmq5 \
     lua5.1 \
     luajit \
-    libmariadb3 \
     mariadb-client \
+    libmariadb3 \
     openssl \
     python3 \
     sudo \
     tini \
     tzdata \
     zlib1g
-
-curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash -s -- --mariadb-server-version="mariadb-10.6"
-
-apt-get update && apt-get install -y --no-install-recommends libmariadb3
-
 apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
@@ -68,35 +64,14 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
-#ARG GCC_VERSION=14
-#ARG LLVM_VERSION=20
-#
-## Install build dependencies.
-#RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
-#    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
-#apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-#    binutils-dev \
-#    ccache \
-#    cmake \
-#    g++-$GCC_VERSION \
-#    libluajit-5.1-dev \
-#    libmariadb-dev \
-#    mariadb-server \
-#    libssl-dev \
-#    libzmq3-dev \
-#    make \
-#    ninja-build \
-#    python3-dev \
-#    python3-venv \
-#    zlib1g-dev
-#
-#update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
-#update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+# We switch to Clang 18 to match LSB CI workflows and fix the endianness bug
 ARG LLVM_VERSION=18
+
+# Set Compiler Environment Variables Globally for this stage
 ENV CC=/usr/bin/clang-$LLVM_VERSION
 ENV CXX=/usr/bin/clang++-$LLVM_VERSION
 
-# Install dependencies (Removed -compat, Added Clang)
+# Install build dependencies.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
@@ -113,22 +88,28 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     ninja-build \
     python3-dev \
     python3-venv \
+    python3-pip \
     zlib1g-dev
 
 # Set Clang as the default compiler
+update-alternatives --install /usr/bin/cc cc /usr/bin/clang-$LLVM_VERSION 100
+update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-$LLVM_VERSION 100
 update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
 update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VERSION 100
 EOF
-ENV CC=/usr/bin/gcc-$GCC_VERSION
-ENV CXX=/usr/bin/g++-$GCC_VERSION
 
 # Install secondary dependencies as user.
 USER $UNAME
+# We ensure the venv is built using the correct python3 binary
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
 python3 -m venv $VIRTUAL_ENV
-python -m pip install --upgrade pip setuptools wheel
-python -m pip install --upgrade -r /tmp/requirements.txt
+# Activate venv explicitly for the run command
+source $VIRTUAL_ENV/bin/activate
+# Install wheel first to prevent build failures for headers
+pip install --upgrade pip setuptools wheel
+# Install requirements (compiling any C-extensions with Clang)
+pip install --upgrade -r /tmp/requirements.txt
 EOF
 USER root
 
@@ -159,36 +140,19 @@ CMD ["/bin/bash"]
 #########
 FROM staging AS build
 
-#ARG COMPILER=gcc
-#ARG ENABLE_CLANG_TIDY=OFF
-#RUN <<EOF
-#if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-#    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-#        clang-$LLVM_VERSION \
-#        clang-tidy-$LLVM_VERSION \
-#        libclang-rt-$LLVM_VERSION-dev \
-#        llvm-$LLVM_VERSION-dev
-#    apt-get clean && rm -rf /var/lib/apt/lists/*
-#fi
-ENV CC=/usr/bin/clang-18
-ENV CXX=/usr/bin/clang++-18
-RUN --mount=type=cache,target=/xiadmin/build ... <<EOF
-# Add -DMARIADB_CONNECTION_NEW_ENCODING=OFF as a safety net
-cmake -G Ninja -S /server -B /xiadmin/build --fresh \
-    -DMARIADB_CONNECTION_NEW_ENCODING=OFF \
-    -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
-    -DTRACY_ENABLE=$TRACY_ENABLE \
-    -DPCH_ENABLE=$PCH_ENABLE
-
-cmake --build /xiadmin/build -j$(nproc)
+ARG COMPILER=clang
+ARG ENABLE_CLANG_TIDY=OFF
+RUN <<EOF
+if [[ $ENABLE_CLANG_TIDY == ON ]]; then
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+        clang-tidy-$LLVM_VERSION
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+fi
 EOF
 
 USER $UNAME
 
 # Exclude changes to git metadata, scripts, and sql not needed for build.
-# Excluded here instead of dockerignore so they can be bind mounted during build.
-# Saves from copying everything whenever scripts/sql change.
-# https://docs.docker.com/reference/dockerfile/#copy---exclude (docker/dockerfile:1.7-labs)
 COPY --chown=$UNAME:$UGROUP \
     --exclude=.git \
     --exclude=losmeshes/** \
@@ -212,12 +176,13 @@ set -eo pipefail
 cp -p /xiadmin/build/version.cpp /server/src/common/ 2> /dev/null || true
 cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 
-if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    export CC=/usr/bin/clang-$LLVM_VERSION
-    export CXX=/usr/bin/clang++-$LLVM_VERSION
-fi
+# Force Clang env vars again just to be safe for CMake
+export CC=/usr/bin/clang-$LLVM_VERSION
+export CXX=/usr/bin/clang++-$LLVM_VERSION
 
+# Add -DMARIADB_CONNECTION_NEW_ENCODING=OFF to fix the IP Endianness bug
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
+    -DMARIADB_CONNECTION_NEW_ENCODING=OFF \
     -DENABLE_CLANG_TIDY=$ENABLE_CLANG_TIDY \
     -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
     -DTRACY_ENABLE=$TRACY_ENABLE \
