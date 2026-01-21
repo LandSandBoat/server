@@ -13,7 +13,7 @@ echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/
 EOF
 
 # Install runtime dependencies.
-# Note: We include libmariadb3 (Native) here, not the -compat layer.
+# We use the standard Ubuntu repositories which align with the Clang build we will perform.
 RUN <<EOF
 apt-get update && apt-get install -y --no-install-recommends \
     bash \
@@ -24,8 +24,8 @@ apt-get update && apt-get install -y --no-install-recommends \
     libzmq5 \
     lua5.1 \
     luajit \
-    mariadb-client \
     libmariadb3 \
+    mariadb-client \
     openssl \
     python3 \
     sudo \
@@ -64,22 +64,21 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
-# We switch to Clang 18 to match LSB CI workflows and fix the endianness bug
+# We use Clang 18 to match the LSB CI environment.
+# This prevents the GCC optimization that causes the IP Endian Swap.
 ARG LLVM_VERSION=18
-
-# Set Compiler Environment Variables Globally for this stage
 ENV CC=/usr/bin/clang-$LLVM_VERSION
 ENV CXX=/usr/bin/clang++-$LLVM_VERSION
 
 # Install build dependencies.
+# FIX: Added 'python3-pip' and 'pkg-config' to prevent the python crash.
+# FIX: Reverted to 'libmariadb-dev' (native) which works correctly when compiled with Clang.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
-    curl \
-    git \
     clang-$LLVM_VERSION \
     libclang-rt-$LLVM_VERSION-dev \
     libluajit-5.1-dev \
@@ -88,26 +87,11 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     libzmq3-dev \
     make \
     ninja-build \
+    pkg-config \
     python3-dev \
     python3-venv \
     python3-pip \
-    zlib1g-dev \
-    libcurl4-open-dev
-
-WORKDIR /tmp
-RUN git clone https://github.com/mariadb-corporation/mariadb-connector-c.git && \
-    cd mariadb-connector-c && \
-    git checkout v3.3.8 && \
-    mkdir build && cd build && \
-    cmake .. \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DMARIADB_PORT=3306 \
-        -DWITH_SSL=OPENSSL \
-        -DWITH_CURL=ON && \
-    make -j$(nproc) && \
-    make install && \
-    cd /server
+    zlib1g-dev
 
 # Set Clang as the default compiler
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang-$LLVM_VERSION 100
@@ -118,15 +102,14 @@ EOF
 
 # Install secondary dependencies as user.
 USER $UNAME
-# We ensure the venv is built using the correct python3 binary
+
+# We setup the venv.
+# FIX: We install 'wheel' first to ensure headers build correctly.
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
 python3 -m venv $VIRTUAL_ENV
-# Activate venv explicitly for the run command
 source $VIRTUAL_ENV/bin/activate
-# Install wheel first to prevent build failures for headers
 pip install --upgrade pip setuptools wheel
-# Install requirements (compiling any C-extensions with Clang)
 pip install --upgrade -r /tmp/requirements.txt
 EOF
 USER root
@@ -198,7 +181,7 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 export CC=/usr/bin/clang-$LLVM_VERSION
 export CXX=/usr/bin/clang++-$LLVM_VERSION
 
-# Add -DMARIADB_CONNECTION_NEW_ENCODING=OFF to fix the IP Endianness bug
+# We pass -DMARIADB_CONNECTION_NEW_ENCODING=OFF to explicitly disable the byte-swap logic.
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
     -DMARIADB_CONNECTION_NEW_ENCODING=OFF \
     -DENABLE_CLANG_TIDY=$ENABLE_CLANG_TIDY \
