@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setBehavior(xi.behavior.STANDBACK)
     mob:setMobMod(xi.mobMod.STANDBACK_RANGE, 12)
-    mob:setMobSkillAttack(2088) -- Will use Counterspore as their auto-attack.
+    mob:setMobSkillAttack(xi.mobSkillList.COUNTERSPORE_ATTACK)
 end
 
 return entity
