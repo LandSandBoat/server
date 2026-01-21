@@ -68,20 +68,45 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
-ARG GCC_VERSION=14
-ARG LLVM_VERSION=20
+#ARG GCC_VERSION=14
+#ARG LLVM_VERSION=20
+#
+## Install build dependencies.
+#RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
+#    --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
+#apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+#    binutils-dev \
+#    ccache \
+#    cmake \
+#    g++-$GCC_VERSION \
+#    libluajit-5.1-dev \
+#    libmariadb-dev \
+#    mariadb-server \
+#    libssl-dev \
+#    libzmq3-dev \
+#    make \
+#    ninja-build \
+#    python3-dev \
+#    python3-venv \
+#    zlib1g-dev
+#
+#update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
+#update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+ARG LLVM_VERSION=18
+ENV CC=/usr/bin/clang-$LLVM_VERSION
+ENV CXX=/usr/bin/clang++-$LLVM_VERSION
 
-# Install build dependencies.
+# Install dependencies (Removed -compat, Added Clang)
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
-    g++-$GCC_VERSION \
+    clang-$LLVM_VERSION \
+    libclang-rt-$LLVM_VERSION-dev \
     libluajit-5.1-dev \
     libmariadb-dev \
-    mariadb-server \
     libssl-dev \
     libzmq3-dev \
     make \
@@ -90,8 +115,9 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     python3-venv \
     zlib1g-dev
 
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
-update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
+# Set Clang as the default compiler
+update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
+update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VERSION 100
 EOF
 ENV CC=/usr/bin/gcc-$GCC_VERSION
 ENV CXX=/usr/bin/g++-$GCC_VERSION
@@ -133,17 +159,28 @@ CMD ["/bin/bash"]
 #########
 FROM staging AS build
 
-ARG COMPILER=gcc
-ARG ENABLE_CLANG_TIDY=OFF
-RUN <<EOF
-if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
-        clang-$LLVM_VERSION \
-        clang-tidy-$LLVM_VERSION \
-        libclang-rt-$LLVM_VERSION-dev \
-        llvm-$LLVM_VERSION-dev
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-fi
+#ARG COMPILER=gcc
+#ARG ENABLE_CLANG_TIDY=OFF
+#RUN <<EOF
+#if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
+#    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+#        clang-$LLVM_VERSION \
+#        clang-tidy-$LLVM_VERSION \
+#        libclang-rt-$LLVM_VERSION-dev \
+#        llvm-$LLVM_VERSION-dev
+#    apt-get clean && rm -rf /var/lib/apt/lists/*
+#fi
+ENV CC=/usr/bin/clang-18
+ENV CXX=/usr/bin/clang++-18
+RUN --mount=type=cache,target=/xiadmin/build ... <<EOF
+# Add -DMARIADB_CONNECTION_NEW_ENCODING=OFF as a safety net
+cmake -G Ninja -S /server -B /xiadmin/build --fresh \
+    -DMARIADB_CONNECTION_NEW_ENCODING=OFF \
+    -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
+    -DTRACY_ENABLE=$TRACY_ENABLE \
+    -DPCH_ENABLE=$PCH_ENABLE
+
+cmake --build /xiadmin/build -j$(nproc)
 EOF
 
 USER $UNAME
