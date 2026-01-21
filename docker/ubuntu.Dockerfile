@@ -12,8 +12,8 @@ rm -f /etc/apt/apt.conf.d/docker-clean
 echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 EOF
 
-# Install Standard Runtime Dependencies
-# We install 'curl' which includes 'libcurl4', needed by our custom MariaDB driver.
+# STANDARD RUNTIME DEPENDENCIES
+# We use the standard Ubuntu libraries. Nothing fancy.
 RUN <<EOF
 apt-get update && apt-get install -y --no-install-recommends \
     bash \
@@ -25,6 +25,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     lua5.1 \
     luajit \
     mariadb-client \
+    libmariadb3 \
     openssl \
     python3 \
     sudo \
@@ -63,24 +64,24 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
-# Use Clang 18 (Standard for Ubuntu 24.04)
+# LSB STANDARD: Use Clang 18
 ARG LLVM_VERSION=18
 ENV CC=/usr/bin/clang-$LLVM_VERSION
 ENV CXX=/usr/bin/clang++-$LLVM_VERSION
 
-# 1. Install Build Dependencies
-# Note: We purposely EXCLUDE 'libmariadb-dev' to avoid the broken Ubuntu package.
+# Install Standard Build Dependencies
+# FIX: Added 'python3-full' and 'pkg-config' to prevent the PIP crash.
+# RESTORED: 'libmariadb-dev' (The standard package).
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
-    curl \
-    git \
     clang-$LLVM_VERSION \
     libclang-rt-$LLVM_VERSION-dev \
     libluajit-5.1-dev \
+    libmariadb-dev \
     libssl-dev \
     libzmq3-dev \
     make \
@@ -89,8 +90,8 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     python3-dev \
     python3-venv \
     python3-pip \
-    zlib1g-dev \
-    libcurl4-openssl-dev
+    python3-full \
+    zlib1g-dev
 
 # Set Clang as default
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang-$LLVM_VERSION 100
@@ -99,28 +100,7 @@ update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 
 update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VERSION 100
 EOF
 
-# 2. MANUALLY COMPILE MARIADB CONNECTOR/C
-# This ensures the library is built with YOUR Clang compiler, fixing the Endian swap.
-WORKDIR /tmp
-RUN git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
-WORKDIR /tmp/mariadb-connector-c
-RUN <<EOF
-git checkout v3.3.8
-mkdir build
-cd build
-# Install to /usr/local/mariadb to keep it isolated and easy to copy
-cmake .. \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr/local/mariadb \
-    -DMARIADB_PORT=3306 \
-    -DWITH_SSL=OPENSSL \
-    -DWITH_CURL=ON
-make -j$(nproc)
-make install
-EOF
-
-# 3. Setup Python
-WORKDIR /server
+# Setup Python (Matches LSB Requirements)
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
@@ -189,13 +169,11 @@ set -eo pipefail
 cp -p /xiadmin/build/version.cpp /server/src/common/ 2> /dev/null || true
 cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 
+# Force Clang
 export CC=/usr/bin/clang-$LLVM_VERSION
 export CXX=/usr/bin/clang++-$LLVM_VERSION
 
-# Point CMake to our custom MariaDB installation
-export CMAKE_PREFIX_PATH=/usr/local/mariadb
-
-# We use the standard Clang build (No -stdlib=libc++ flag here to avoid crashing)
+# Standard LSB Build Command (No extra flags, just Clang + Ninja)
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
     -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
     -DTRACY_ENABLE=$TRACY_ENABLE \
@@ -217,7 +195,6 @@ FROM base AS service
 
 USER $UNAME
 
-# COPY ASSETS
 COPY --chown=$UNAME:$UGROUP res/compress.dat res/decompress.dat /server/res/
 COPY --chown=$UNAME:$UGROUP scripts /server/scripts
 COPY --chown=$UNAME:$UGROUP sql /server/sql
@@ -225,17 +202,9 @@ COPY --chown=$UNAME:$UGROUP tools /server/tools
 COPY --chown=$UNAME:$UGROUP modules /server/modules
 COPY --chown=$UNAME:$UGROUP settings /server/settings
 
-# COPY BINARIES
 COPY --chown=$UNAME:$UGROUP --from=staging /xiadmin/.venv /xiadmin/.venv
 COPY --chown=$UNAME:$UGROUP --from=build /server/xi_* /server/
 COPY --chown=$UNAME:$UGROUP --from=build /server/build.log /server/build.log
-
-# CRITICAL FIX: COPY THE CUSTOM MARIADB LIBRARY
-# We copy the entire folder we built in Staging to the Service image
-COPY --from=staging /usr/local/mariadb /usr/local/mariadb
-
-# Tell the runtime linker where to find our custom library
-ENV LD_LIBRARY_PATH="/usr/local/mariadb/lib/mariadb:$LD_LIBRARY_PATH"
 
 ARG REPO_URL
 ARG COMMIT_SHA
