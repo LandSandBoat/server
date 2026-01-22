@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 70)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return 0

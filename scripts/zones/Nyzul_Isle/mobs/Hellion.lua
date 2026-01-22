@@ -16,7 +16,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         chance         = 100,
         attackType     = xi.attackType.MAGICAL,
         magicalElement = xi.element.DARK,
-        power          = damage / 2,
+        basePower      = damage / 2,
         actorStat      = xi.mod.INT,
     }
 

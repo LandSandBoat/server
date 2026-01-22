@@ -83,7 +83,7 @@ end
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
-    dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+    dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
     dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, ele, true))
     dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, ele, true, false))
     dmg = math.floor(target:handleSevereDamage(dmg, false))
@@ -111,7 +111,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local affinityBonus = xi.spells.damage.calculateElementalStaffBonus(caster, ele)
     dmg = math.floor(dmg * affinityBonus)
 
-    local magicDefense = xi.spells.damage.calculateSDT(target, ele)
+    local magicDefense = xi.combat.damage.magicalElementSDT(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
     local dayWeatherBonus = xi.spells.damage.calculateDayAndWeather(caster, ele, false)

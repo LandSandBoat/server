@@ -29,9 +29,18 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
+--  Captures show unresisted damage between 120 and 200. TODO find what causes full power AE to vary so greatly
 entity.onAdditionalEffect = function(mob, target, damage)
-    -- Captures show unresisted damage between 120 and 200. TODO find what causes full power AE to vary so greatly
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO, { power = math.random(165, 190) })
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.WIND,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAdditionalDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -150,7 +150,16 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, { chance = 15 })
+    local pTable =
+    {
+        chance         = 15,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.EARTH,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAdditionalDamage(mob, target, pTable)
 end
 
 entity.onMobDisengage = function(mob)

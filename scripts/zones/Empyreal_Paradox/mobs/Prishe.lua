@@ -229,7 +229,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if
         target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD)

@@ -12,6 +12,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'SNOLL_EXPLOSION', function(snoll, skillID)
         if skillID == xi.mobSkill.HYPOTHERMAL_COMBUSTION_2 then
             snoll:getBattlefield():lose()
@@ -73,7 +75,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if
         mob:getAnimationSub() == 7 and
         math.random(1, 100) <= 75

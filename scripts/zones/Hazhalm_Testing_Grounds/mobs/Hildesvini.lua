@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     despawnDjiggas()
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local anyAlive = utils.any(DJIGGAS, function(_, mobId)
         local djigga = GetMobByID(mobId)
         if djigga and djigga:isAlive() then

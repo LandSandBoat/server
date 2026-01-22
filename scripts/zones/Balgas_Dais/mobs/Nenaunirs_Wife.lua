@@ -15,7 +15,7 @@ entity.onMobEngage = function(mob, target)
 end
 
 -- Only uses Stomping as a weapon skill.
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.STOMPING
 end
 

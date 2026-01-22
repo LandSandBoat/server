@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STORETP, 125) -- 6 hits to 1k tp
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.GRAVE_REEL
 end
 

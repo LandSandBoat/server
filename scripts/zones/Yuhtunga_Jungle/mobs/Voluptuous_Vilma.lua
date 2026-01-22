@@ -45,9 +45,21 @@ entity.onAdditionalEffect = function(mob, target, damage)
         [6] = xi.mob.ae.SLOW,
         [7] = xi.mob.ae.BIND,
     }
-    local random = math.random(1, #effects)
 
-    return xi.mob.onAddEffect(mob, target, damage, effects[random])
+    local chosenEffect = effects[math.random(1, #effects)]
+    if chosenEffect == xi.mob.ae.BLIND then
+        local pTable =
+        {
+            chance   = 25,
+            effectId = xi.effect.BLINDNESS,
+            power    = 20,
+            duration = 60,
+        }
+
+        return xi.combat.action.executeAdditionalStatus(mob, target, pTable)
+    end
+
+    return xi.mob.onAddEffect(mob, target, damage, chosenEffect)
 end
 
 entity.onMobDespawn = function(mob)

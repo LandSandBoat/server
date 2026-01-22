@@ -47,7 +47,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     dmg = math.floor(playerHP * ftp)
 
     local damage = dmg
-    damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
     damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
     damage = math.floor(target:handleSevereDamage(damage, false))

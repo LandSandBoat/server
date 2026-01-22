@@ -97,7 +97,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpList = {}
     if
         mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or

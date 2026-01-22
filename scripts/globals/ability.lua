@@ -66,12 +66,12 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
     if skilltype == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, skillparam)
     elseif skilltype == xi.attackType.MAGICAL then
-        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
         dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, true))
         dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, true, false))
         dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.BREATH then
-        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+        dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
         dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, false))
         dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, false, true))
         dmg = math.floor(target:handleSevereDamage(dmg, false))

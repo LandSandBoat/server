@@ -61,7 +61,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     -- Only allow the Memory move that matches the current element
     return elementalTPMoves[mob:getLocalVar('currentAbsorb')]
 end

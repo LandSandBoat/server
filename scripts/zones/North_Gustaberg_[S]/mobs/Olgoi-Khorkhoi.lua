@@ -45,7 +45,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     return spellList[math.random(1, #spellList)]
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.SANDSPIN -- Sandspin is only TP move
 end
 

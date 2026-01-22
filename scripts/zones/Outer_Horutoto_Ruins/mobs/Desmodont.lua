@@ -22,7 +22,15 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.BLIND)
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.BLINDNESS,
+        power    = 20,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAdditionalStatus(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

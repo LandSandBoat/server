@@ -72,6 +72,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('instance', inst)
     mob:setLocalVar('nightmarePercent', math.random(25, 75))
     mob:setMagicCastingEnabled(false)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillID)
         if
@@ -159,7 +160,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skills =
     {
         { skill = xi.mobSkill.NOCTOSHIELD_1,     weight = 50 },

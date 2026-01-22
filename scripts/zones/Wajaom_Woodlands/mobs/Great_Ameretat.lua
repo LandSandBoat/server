@@ -9,7 +9,7 @@ local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return target:countEffectWithFlag(xi.effectFlag.DISPELABLE) > 0 and xi.mobSkill.VAMPIRIC_ROOT or 0
 end
 

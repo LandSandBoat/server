@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.STORETP, 50)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.GLOEOSUCCUS
 end
 

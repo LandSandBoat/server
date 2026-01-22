@@ -17,13 +17,13 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.DEFP, 35)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 10)
     mob:setMod(xi.mod.STORETP, 62)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 15)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.SPIRIT_ABSORPTION_2,

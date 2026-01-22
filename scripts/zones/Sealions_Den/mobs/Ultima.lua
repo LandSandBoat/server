@@ -95,7 +95,7 @@ entity.onMobFight = function(mob, target)
     }
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local phase    = mob:getLocalVar('phase')
     local tpSkills = {}
 

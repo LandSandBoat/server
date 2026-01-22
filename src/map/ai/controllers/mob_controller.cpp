@@ -345,61 +345,64 @@ auto CMobController::MobSkill(int listId) -> bool
 {
     TracyZoneScoped;
 
-    if (PTarget)
+    if (!PTarget)
     {
-        /* #TODO: mob 2 hours, etc */
-        if (!listId)
+        return false;
+    }
+
+    // Fetch skill list from mobmod if not set in database.
+    if (!listId)
+    {
+        listId = PMob->getMobMod(MOBMOD_SKILL_LIST);
+    }
+
+    auto skillList{ battleutils::GetMobSkillList(listId) };
+    if (skillList.empty())
+    {
+        return false;
+    }
+
+    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
+    CBattleEntity* PActionTarget{ nullptr };
+
+    uint16 chosenSkillId = 0;
+    for (const auto skillId : skillList)
+    {
+        auto* PMobSkill{ battleutils::GetMobSkill(skillId) };
+        if (!PMobSkill)
         {
-            listId = PMob->getMobMod(MOBMOD_SKILL_LIST);
+            ShowError("CMobController::MobSkill -> Mobskill with ID (%i) [called from skill-list ID (%i)] isn't properly defined in mob_skills.sql", skillId, listId);
+            continue;
         }
 
-        auto skillList{ battleutils::GetMobSkillList(listId) };
+        chosenSkillId = skillId;
+        break;
+    }
 
-        if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget); overrideSkill > 0)
+    if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget, chosenSkillId); overrideSkill > 0)
+    {
+        chosenSkillId = overrideSkill;
+    }
+
+    auto* PMobSkill{ battleutils::GetMobSkill(chosenSkillId) };
+
+    if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
+    {
+        PActionTarget = PTarget;
+    }
+    else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
+    {
+        PActionTarget = PMob;
+    }
+
+    PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
+
+    if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
+    {
+        const float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
+        if (currentDistance <= PMobSkill->getDistance())
         {
-            skillList = { overrideSkill };
-        }
-
-        if (skillList.empty())
-        {
-            return false;
-        }
-
-        std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
-        CBattleEntity* PActionTarget{ nullptr };
-
-        for (const auto skillid : skillList)
-        {
-            auto* PMobSkill{ battleutils::GetMobSkill(skillid) };
-            if (!PMobSkill)
-            {
-                continue;
-            }
-
-            if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
-            {
-                PActionTarget = PTarget;
-            }
-            else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
-            {
-                PActionTarget = PMob;
-            }
-            else
-            {
-                continue;
-            }
-
-            PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
-
-            if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
-            {
-                const float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
-
-                if (currentDistance <= PMobSkill->getDistance())
-                {
-                    return MobSkill(PActionTarget->targid, PMobSkill->getID(), std::nullopt);
-                }
-            }
+            return MobSkill(PActionTarget->targid, PMobSkill->getID(), std::nullopt);
         }
     }
 

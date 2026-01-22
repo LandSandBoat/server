@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpList =
     {
         xi.mobSkill.REFUELING_1

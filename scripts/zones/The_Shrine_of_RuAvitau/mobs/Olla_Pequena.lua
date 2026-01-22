@@ -15,12 +15,21 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
-    mob:setMod(xi.mod.REGAIN, 100)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.REGAIN, 100)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.DISPEL, { chance = 5 })
+    local pTable =
+    {
+        chance  = 25,
+        element = xi.element.DARK,
+    }
+
+    return xi.combat.action.executeAdditionalDispel(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

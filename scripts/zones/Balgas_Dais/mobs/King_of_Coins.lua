@@ -9,18 +9,18 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PARALYZE)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -34,7 +34,13 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.DISPEL)
+    local pTable =
+    {
+        chance  = 25,
+        element = xi.element.DARK,
+    }
+
+    return xi.combat.action.executeAdditionalDispel(mob, target, pTable)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

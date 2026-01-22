@@ -30,7 +30,7 @@ entity.onMobInitialize = function(mob)
     mob:setBaseSpeed(100)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return 2099 -- Batterhorn is only TP move
 end
 

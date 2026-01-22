@@ -592,10 +592,15 @@ bool CheckSubJobZone(CMobEntity* PMob)
 
 void CalculateMobStats(CMobEntity* PMob, bool recover)
 {
-    // remove all to keep mods in sync
-    PMob->StatusEffectContainer->KillAllStatusEffect();
+    // Reset modifiers to base values to prevent stacking
     PMob->restoreModifiers();
     PMob->restoreMobModifiers();
+
+    if (recover)
+    {
+        // Clear status effects only when fully recovering
+        PMob->StatusEffectContainer->KillAllStatusEffect();
+    }
 
     bool      isNM     = PMob->m_Type & MOBTYPE_NOTORIOUS;
     JOBTYPE   mJob     = PMob->GetMJob();
@@ -950,9 +955,13 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
     // Max [HP/MP] Boost traits
     PMob->UpdateHealth();
-    PMob->health.tp = 0;
-    PMob->health.hp = PMob->GetMaxHP();
-    PMob->health.mp = PMob->GetMaxMP();
+
+    if (recover)
+    {
+        PMob->health.tp = 0;
+        PMob->health.hp = PMob->GetMaxHP();
+        PMob->health.mp = PMob->GetMaxMP();
+    }
 
     SetupJob(PMob);
     SetupRoaming(PMob);

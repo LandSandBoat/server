@@ -211,9 +211,8 @@ end
 -- mob additional melee effects
 -----------------------------------
 
-xi.mob.additionalEffect =
+xi.mob.ae =
 {
-    BLIND        = 0,
     CURSE        = 1,
     ENAERO       = 2,
     ENBLIZZARD   = 3,
@@ -243,24 +242,9 @@ xi.mob.additionalEffect =
     DEFENSE_DOWN = 27,
     ATTACK_DOWN  = 28,
 }
-xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
-    [xi.mob.ae.BLIND] =
-    {
-        chance = 25,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.BLIND,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.BLINDNESS,
-        power       = 20,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 45,
-    },
-
     [xi.mob.ae.CURSE] =
     {
         chance      = 20,
@@ -273,76 +257,6 @@ local additionalEffects =
         duration    = 300,
         minDuration = 1,
         maxDuration = 300,
-    },
-
-    [xi.mob.ae.ENAERO] =
-    {
-        ele                = xi.element.WIND,
-        sub                = xi.subEffect.WIND_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENBLIZZARD] =
-    {
-        ele                = xi.element.ICE,
-        sub                = xi.subEffect.ICE_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENFIRE] =
-    {
-        ele                = xi.element.FIRE,
-        sub                = xi.subEffect.FIRE_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENLIGHT] =
-    {
-        ele                = xi.element.LIGHT,
-        sub                = xi.subEffect.LIGHT_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENSTONE] =
-    {
-        ele                = xi.element.EARTH,
-        sub                = xi.subEffect.EARTH_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENTHUNDER] =
-    {
-        ele                = xi.element.THUNDER,
-        sub                = xi.subEffect.LIGHTNING_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
-    [xi.mob.ae.ENWATER] =
-    {
-        ele                = xi.element.WATER,
-        sub                = xi.subEffect.WATER_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
     },
 
     [xi.mob.ae.EVASION_DOWN] =
@@ -553,16 +467,6 @@ local additionalEffects =
         maxDuration = 45,
     },
 
-    [xi.mob.ae.DISPEL] =
-    {
-        chance      = 25,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.DARKNESS_DAMAGE,
-        msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
-        applyEffect = false,
-        power       = 1,
-    },
-
     [xi.mob.ae.BIND] =
     {
         chance      = 10,
@@ -635,19 +539,6 @@ local addEffectStatus = function(mob, target, ae, params)
     end
 
     return 0, 0, 0
-end
-
---[[
-    Helper function for xi.mob.onAddEffect that dispels an effect.
---]]
-local addEffectDispel = function(target, ae)
-    local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
-
-    if dispelledEffect == xi.effect.NONE then
-        return 0, 0, 0
-    end
-
-    return ae.sub, ae.msg, dispelledEffect
 end
 
 --[[
@@ -744,10 +635,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             if ae.applyEffect then
                 return addEffectStatus(mob, target, ae, params)
 
-            -- DISPEL
-            elseif effect == xi.mob.ae.DISPEL and target then
-                return addEffectDispel(target, ae)
-
             -- IMMEDIATE EFFECT
             else
                 return addEffectImmediate(mob, target, damage, ae, params)
@@ -759,24 +646,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
     return 0, 0, 0
 end
-
------------------------------------
--- mob difficulty enums for checkDifficulty()
------------------------------------
-
-xi.mob.difficulty =
-{
-    TOO_WEAK             = 0,
-    INCREDIBLY_EASY_PREY = 1,
-    EASY_PREY            = 2,
-    DECENT_CHALLENGE     = 3,
-    EVEN_MATCH           = 4,
-    TOUGH                = 5,
-    VERY_TOUGH           = 6,
-    INCREDIBLY_TOUGH     = 7,
-    MAX                  = 8,
-}
-xi.mob.diff = xi.mob.difficulty
 
 -----------------------------------
 -- Centralized function for calling one or more mob "pets"

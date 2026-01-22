@@ -381,7 +381,7 @@ void OnBattlefieldKick(CCharEntity* PChar);
 void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield);
 void OnBattlefieldDestroy(CBattlefield* PBattlefield);
 
-uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget);
+uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 chosenSkillId);
 int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action);
 int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
 auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;

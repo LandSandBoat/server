@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if
         mob:getHPP() <= 20 and
         mob:getLocalVar('xenoglossia') == 0

@@ -3780,7 +3780,7 @@ std::tuple<int32, uint8, uint8> OnUseWeaponSkill(CBattleEntity* PChar, CBaseEnti
     return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
 }
 
-uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
+uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 chosenSkillId)
 {
     TracyZoneScoped;
 
@@ -3795,7 +3795,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
         return 0;
     }
 
-    auto result = onMobMobskillChoose(PMob, PTarget);
+    auto result = onMobMobskillChoose(PMob, PTarget, chosenSkillId);
     if (!result.valid())
     {
         sol::error err = result;
@@ -3803,7 +3803,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
         return 0;
     }
 
-    uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+    uint16 retVal = result.get_type(0) == sol::type::number ? result.template get<uint16>(0) : 0;
     if (retVal > 0)
     {
         return retVal;

@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 150)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.BLOOD_DRAIN_1,

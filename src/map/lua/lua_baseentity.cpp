@@ -16864,11 +16864,11 @@ void CLuaBaseEntity::removeAllRunes()
 /************************************************************************
  *  Function: setMobLevel()
  *  Purpose : Updates the monsters level and recalculates stats
- *  Example : mob:setMobLevel(125)
- *  Notes   : CalculateStats will refill mobs hp/mp as well
+ *  Example : mob:setMobLevel(125) or mob:setMobLevel(125, false) to not reset HP/MP
+ *  Notes   : By default, CalculateStats will refill mobs hp/mp unless recover is false
  ************************************************************************/
 
-void CLuaBaseEntity::setMobLevel(uint8 level)
+void CLuaBaseEntity::setMobLevel(uint8 level, sol::optional<bool> recover)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
@@ -16884,7 +16884,7 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
         // Remove traits, because they were calculated in the previous CalculateMobStats and are NOT saved, so they must be recalculated.
         PMob->TraitList.clear();
 
-        mobutils::CalculateMobStats(PMob);
+        mobutils::CalculateMobStats(PMob, recover.value_or(true));
         mobutils::GetAvailableSpells(PMob);
     }
 }

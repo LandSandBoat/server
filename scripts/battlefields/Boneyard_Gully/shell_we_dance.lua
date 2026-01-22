@@ -23,36 +23,89 @@ local content = Battlefield:new({
         boneyardGullyID.mob.PARATA + 26,
     },
 
-    grantXP = 2000,
-
-    experimental = true,
+    grantXP = 3000,
 })
 
--- TODO: Needs additional cleanup and mixin work (previous comment).  Examine
--- mob spawn handling and move hardcoded IDs to this script or the mob and read as necessary.
+content.groups =
+{
+    {
+        mobIds =
+        {
+            {
+                boneyardGullyID.mob.PARATA,
+                boneyardGullyID.mob.PARATA + 1,
+            },
 
-content:addEssentialMobs({ 'Parata', 'Bladmall' })
+            {
+                boneyardGullyID.mob.PARATA + 9,
+                boneyardGullyID.mob.PARATA + 10,
+            },
+
+            {
+                boneyardGullyID.mob.PARATA + 18,
+                boneyardGullyID.mob.PARATA + 19,
+            },
+
+        },
+
+        allDeath = utils.bind(content.handleAllMonstersDefeated, content),
+    },
+
+    {
+        mobIds =
+        {
+            {
+                boneyardGullyID.mob.PARATA + 2,
+                boneyardGullyID.mob.PARATA + 3,
+                boneyardGullyID.mob.PARATA + 4,
+                boneyardGullyID.mob.PARATA + 5,
+                boneyardGullyID.mob.PARATA + 6,
+                boneyardGullyID.mob.PARATA + 7,
+                },
+
+            {
+                boneyardGullyID.mob.PARATA + 11,
+                boneyardGullyID.mob.PARATA + 12,
+                boneyardGullyID.mob.PARATA + 13,
+                boneyardGullyID.mob.PARATA + 14,
+                boneyardGullyID.mob.PARATA + 15,
+                boneyardGullyID.mob.PARATA + 16,
+            },
+
+            {
+                boneyardGullyID.mob.PARATA + 20,
+                boneyardGullyID.mob.PARATA + 21,
+                boneyardGullyID.mob.PARATA + 22,
+                boneyardGullyID.mob.PARATA + 23,
+                boneyardGullyID.mob.PARATA + 24,
+                boneyardGullyID.mob.PARATA + 25,
+            },
+        },
+
+        spawned = false,
+    },
+}
 
 content.loot =
 {
     {
-        { itemId = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = 375 },
-        { itemId = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = 328 },
-        { itemId = xi.item.DRAGON_BONE,              weight = 263 },
+        { itemId = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = 3750 },
+        { itemId = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = 3750 },
+        { itemId = xi.item.DRAGON_BONE,              weight = 2500 },
     },
 
     {
-        { itemId = xi.item.NONE,                     weight = 850 },
-        { itemId = xi.item.CLOUD_EVOKER,             weight = 150 },
+        { itemId = xi.item.NONE,                     weight = 9500 },
+        { itemId = xi.item.CLOUD_EVOKER,             weight =  500 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.NONE,                     weight = 275 },
-        { itemId = xi.item.STONE_SPLITTER,           weight = 150 },
-        { itemId = xi.item.FRENZY_FIFE,              weight = 150 },
-        { itemId = xi.item.BLAU_DOLCH,               weight = 150 },
-        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V,  weight = 275 },
+        { itemId = xi.item.NONE,                     weight = 2750 },
+        { itemId = xi.item.STONE_SPLITTER,           weight = 1500 },
+        { itemId = xi.item.FRENZY_FIFE,              weight = 1500 },
+        { itemId = xi.item.BLAU_DOLCH,               weight = 1500 },
+        { itemId = xi.item.SCROLL_OF_ARMYS_PAEON_V,  weight = 2750 },
     },
 }
 

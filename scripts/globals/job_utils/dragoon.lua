@@ -692,7 +692,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
 
     -- Breath accuracy is directly affected by a wyvern's current HP, but no data exists.
     local resist              = xi.combat.magicHitRate.calculateResistRate(wyvern, target, 0, 0, 0, element, 0, 0, bonusMacc)
-    local sdt                 = xi.spells.damage.calculateSDT(target, element)
+    local sdt                 = xi.combat.damage.magicalElementSDT(target, element)
     local absorb              = xi.spells.damage.calculateAbsorption(target, element, true)
     local nullify             = xi.spells.damage.calculateNullification(target, element, true, true)
     local magicBurst          = 1

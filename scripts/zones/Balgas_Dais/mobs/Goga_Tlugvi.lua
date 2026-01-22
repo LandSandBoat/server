@@ -48,7 +48,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 -- Only uses Leafstorm.
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.LEAFSTORM
 end
 

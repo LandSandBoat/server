@@ -423,7 +423,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                                    "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
                                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
-                                   "mob_family_system.charmable, "
+                                   "mob_family_system.charmable, mob_groups.content_tag, "
                                    "mob_pools.modelSize, mob_pools.modelHitboxSize "
                                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
@@ -439,6 +439,13 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 {
                     while (rset->next())
                     {
+                        // If there is no content tag, the mob will always be loaded
+                        const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                        if (!luautils::IsContentEnabled(contentTag))
+                        {
+                            continue;
+                        }
+
                         ZONE_TYPE zoneType = PZone->GetTypeMask();
 
                         if (!(zoneType & ZONE_TYPE::INSTANCED))
@@ -612,7 +619,8 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
     ShowInfo("Loading Mob spawn slots");
 
-    std::string spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid "
+    std::string spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid, "
+                                 "mob_groups.content_tag "
                                  "FROM mob_spawn_slots "
                                  "JOIN mob_spawn_points ON mob_spawn_points.spawnslotid = mob_spawn_slots.spawnslotid "
                                  "JOIN mob_groups ON mob_groups.zoneid = mob_spawn_slots.zoneid "
@@ -637,6 +645,13 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
         while (ret->next())
         {
+            // If there is no content tag, the mob will always be loaded
+            const auto contentTag = ret->getOrDefault<std::string>("content_tag", "");
+            if (!luautils::IsContentEnabled(contentTag))
+            {
+                continue;
+            }
+
             uint32 slotId      = ret->get<uint32>("spawnslotid");
             uint8  spawnChance = ret->get<uint8>("chance");
             uint32 mobId       = ret->get<uint32>("mobid");

@@ -111,7 +111,7 @@ entity.onMobFight = function(mob, target)
     }
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local mobskillTable =
     {
         [1] = { xi.mobSkill.KICK_BACK,   25 },

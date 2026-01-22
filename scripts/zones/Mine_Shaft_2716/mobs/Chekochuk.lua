@@ -69,7 +69,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.GOBLIN_DICE_HEAL + math.random(0, 10)
 end
 

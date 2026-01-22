@@ -34,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     dmg = math.floor(dmg * 2.5)
 
     -- Believe it or not, it's been proven to be breath damage.
-    dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
     dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
     dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
     dmg = math.floor(target:handleSevereDamage(dmg, false))

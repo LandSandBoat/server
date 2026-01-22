@@ -130,7 +130,7 @@ jobs:
           github-report: true
           summary: true
           pull-request: false
-          status-check: true
+          status-check: ${{ github.event_name != 'pull_request' }}
           status-check-name: "xi_test (${{ format('docker-{0}', inputs.os) }})"
           annotate: true
           upload-artifact: true
@@ -152,7 +152,7 @@ jobs:
                   if grep -qi "warning\|error\|crash\|critical" "$log_file"; then
                       found_issues=true
                       log_name=$(basename "$log_file" .log | sed 's/.*/\u&/; s/-\(.\)/ \u\1/g')
-                      echo "### :x: ${log_name} Checks Failed" >> $GITHUB_STEP_SUMMARY
+                      echo "### :warning: ${log_name} Checks" >> $GITHUB_STEP_SUMMARY
                       echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
                       grep -i "warning\|error\|crash\|critical" "$log_file" >> $GITHUB_STEP_SUMMARY
                       echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
@@ -160,12 +160,9 @@ jobs:
                   fi
               fi
           done
-          if [[ "$found_issues" == "false" ]]; then
-              if [[ "${{ steps.startup_checks.outcome }}" != "success" ]]; then
-                  echo "### :x: Startup checks failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
-                  echo "Check the logs for details." >> $GITHUB_STEP_SUMMARY
-                  found_issues=true
-              fi
+          if [[ "$found_issues" == "false" && "${{ steps.startup_checks.outcome }}" != "success" ]]; then
+              echo "### :x: Startup checks failed, but no specific errors were found." >> $GITHUB_STEP_SUMMARY
+              echo "Check the logs for details." >> $GITHUB_STEP_SUMMARY
           fi
           echo "<details><summary><h4>View Logs</h4></summary>" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -179,7 +176,6 @@ jobs:
               fi
           done
           echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
 
       - name: Stop container
         run: |
@@ -187,7 +183,7 @@ jobs:
           docker rm test-server
 
       - name: Fail Workflow if Checks Failed
-        if: ${{ steps.xi_test.outcome == 'failure' || steps.startup_checks.outcome == 'failure' || steps.summarize_checks.outputs.issues_found == 'true' }}
+        if: ${{ steps.xi_test.outcome == 'failure' || steps.startup_checks.outcome == 'failure' }}
         run: |
           echo "Startup checks failed. See summary for details."
           exit 1

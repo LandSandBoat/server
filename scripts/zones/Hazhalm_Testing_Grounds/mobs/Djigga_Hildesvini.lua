@@ -17,17 +17,15 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    if math.random(1, 100) <= 25 then
-        -- last argument is true to hide the "effect lost" message from the player
-        local result = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE, true)
-        if result == 0 then
-            return 0, 0, 0
-        end
+    local pTable =
+    {
+        chance       = 25,
+        absorbEffect = true,
+        animation    = xi.subEffect.STATUS_DRAIN,
+        message      = xi.msg.basic.NONE,
+    }
 
-        return xi.subEffect.STATUS_DRAIN, xi.msg.basic.NONE, result
-    end
-
-    return 0, 0, 0
+    return xi.combat.action.executeAdditionalDispel(mob, target, pTable)
 end
 
 return entity

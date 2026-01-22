@@ -370,7 +370,7 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
     end
 
     -- Multipliers.
-    local sdt            = xi.spells.damage.calculateSDT(target, actionElement)
+    local sdt            = xi.combat.damage.magicalElementSDT(target, actionElement)
     local resistRate     = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, 0, actionElement, xi.mod.INT, 0, petAccBonus)
     local dayAndWeather  = xi.spells.damage.calculateDayAndWeather(actor, actionElement, false)
     local magicBonusDiff = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
@@ -440,7 +440,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, skillParams)
     mAccuracyBonus = xi.combat.physical.calculateTPfactor(skill:getTP(), mAccuracyBonusfTP)
 
     local systemBonus     = 1 + utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem()) / 4
-    local elementalSDT    = xi.spells.damage.calculateSDT(target, actionElement)
+    local elementalSDT    = xi.combat.damage.magicalElementSDT(target, actionElement)
     local resistRate      = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, xi.skillRank.A_PLUS, actionElement, resistStat, 0, mAccuracyBonus)
     local dayAndWeather   = xi.spells.damage.calculateDayAndWeather(mob, actionElement, false)
     local absorb          = xi.spells.damage.calculateAbsorption(target, actionElement, true)
@@ -567,7 +567,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         damage = target:physicalDmgTaken(damage, damageType)
     elseif attackType == xi.attackType.MAGICAL then
         local element = utils.clamp(damageType - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
-        damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false))
+        damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
         damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, element, true))
         damage = math.floor(damage * xi.spells.damage.calculateNullification(target, element, true, false))
         damage = math.floor(target:handleSevereDamage(damage, false))

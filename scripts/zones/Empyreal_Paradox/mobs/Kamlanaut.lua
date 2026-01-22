@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpList =
     {
         xi.mobSkill.GREAT_WHEEL_1,

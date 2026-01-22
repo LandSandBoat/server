@@ -831,7 +831,7 @@ public:
     void   removeAllRunes();
 
     // Mob Entity-Specific
-    void   setMobLevel(uint8 level);
+    void   setMobLevel(uint8 level, sol::optional<bool> recover);
     uint8  getEcosystem();
     uint16 getSuperFamily();
     uint16 getFamily();

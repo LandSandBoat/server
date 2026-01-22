@@ -9,7 +9,7 @@ entity.onMobDeath = function(mob, player, optParams)
     player:setLocalVar('cernunnosDefeated', 1)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.DRILL_BRANCH_NM,
