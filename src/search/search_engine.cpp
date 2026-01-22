@@ -23,10 +23,6 @@
 #include "common/lua.h"
 #include "data_loader.h"
 
-#ifdef CAPTURE_TEST_DATA_SEARCH
-#include "test_data_capture.h"
-#endif
-
 SearchEngine::SearchEngine(asio::io_context& io_context)
 : m_searchHandler(io_context, settings::get<uint32>("network.SEARCH_PORT"), m_ipWhitelist)
 , m_periodicCleanupTimer(io_context, std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")))
@@ -64,36 +60,12 @@ void SearchEngine::onInitialize()
 
 void SearchEngine::onAHCleanup(std::vector<std::string>& inputs) const
 {
-#ifdef CAPTURE_TEST_DATA_SEARCH
-    static int capture_counter = 0;
-    std::string test_case_name = "search_onAHCleanup_" + std::to_string(++capture_counter);
-    TestDataCapture::captureCommandInput(test_case_name, inputs);
-#endif
-
     expireAH(settings::get<uint16>("search.EXPIRE_DAYS"));
-
-#ifdef CAPTURE_TEST_DATA_SEARCH
-    // Note: Output is database changes, not a return value
-    // To validate, would need to capture database state before/after
-    std::ofstream marker = TestDataCapture::getOutputStream(test_case_name, "completed");
-    marker << "completed";
-#endif
 }
 
 void SearchEngine::onExpireAll(std::vector<std::string>& inputs) const
 {
-#ifdef CAPTURE_TEST_DATA_SEARCH
-    static int capture_counter = 0;
-    std::string test_case_name = "search_onExpireAll_" + std::to_string(++capture_counter);
-    TestDataCapture::captureCommandInput(test_case_name, inputs);
-#endif
-
     expireAH(std::nullopt);
-
-#ifdef CAPTURE_TEST_DATA_SEARCH
-    std::ofstream marker = TestDataCapture::getOutputStream(test_case_name, "completed");
-    marker << "completed";
-#endif
 }
 
 void SearchEngine::expireAH(const std::optional<uint16> days) const
