@@ -27,7 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     -- PROXY: Using Dark Orb formula (high-power magical nuke)
     local params = {}
-    params.ecosystem = xi.ecosystem.BEASTMAN
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
     params.diff = 0

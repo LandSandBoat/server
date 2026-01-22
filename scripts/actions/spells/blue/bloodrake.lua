@@ -58,7 +58,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if damage > 0 and not target:isUndead() then
         local drain = damage
         caster:addHP(drain)
-        spell:setMsg(xi.msg.basic.SKILL_DRAIN)
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP)
     end
 
     return damage

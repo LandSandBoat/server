@@ -60,9 +60,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         if effect ~= xi.effect.NONE then
             -- Note: In retail, stolen buff would be added to caster
             -- For simplicity, we just dispel from target
-            spell:setMsg(xi.msg.basic.SKILL_DRAIN)
+            spell:setMsg(xi.msg.basic.MAGIC_ERASE)
         else
-            spell:setMsg(xi.msg.basic.SKILL_DRAIN)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
