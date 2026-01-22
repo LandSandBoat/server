@@ -48,7 +48,7 @@ on:
         description: 'Publish image to registry.'
         required: false
         type: boolean
-        default: false
+        default: true
 
 jobs:
   Docker_Build:
@@ -58,8 +58,8 @@ jobs:
       BUILDX_NO_DEFAULT_ATTESTATIONS: 1 # https://github.com/orgs/community/discussions/45969
       build_id: ${{ format('build-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
       ccache_id: ${{ format('ccache-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
-      REPO_OWNER: 'landsandboat'
-      REPO: 'landsandboat/server'
+      REPO_OWNER: 'jasonpulse'
+      REPO: 'jasonpulse/xiserver'
     steps:
       - name: Lowercase repository owner
         run: |
