@@ -12,20 +12,17 @@ rm -f /etc/apt/apt.conf.d/docker-clean
 echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 EOF
 
-# STANDARD RUNTIME DEPENDENCIES
-# We use the standard Ubuntu libraries. Nothing fancy.
+# Install runtime dependencies.
 RUN <<EOF
-apt-get update && apt-get install -y --no-install-recommends \
+apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     bash \
     binutils \
     ca-certificates \
-    curl \
     git \
     libzmq5 \
     lua5.1 \
     luajit \
     mariadb-client \
-    libmariadb3 \
     openssl \
     python3 \
     sudo \
@@ -35,7 +32,7 @@ apt-get update && apt-get install -y --no-install-recommends \
 apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
-# Setup runtime user
+# Setup runtime user.
 ARG UNAME=xiadmin
 ARG UGROUP=xiadmin
 ARG UID=1000
@@ -64,50 +61,39 @@ SHELL ["/bin/bash", "-c"]
 ###########
 FROM base AS staging
 
-# LSB STANDARD: Use Clang 18
-ARG LLVM_VERSION=18
-ENV CC=/usr/bin/clang-$LLVM_VERSION
-ENV CXX=/usr/bin/clang++-$LLVM_VERSION
+ARG GCC_VERSION=14
+ARG LLVM_VERSION=20
 
-# Install Standard Build Dependencies
-# FIX: Added 'python3-full' and 'pkg-config' to prevent the PIP crash.
-# RESTORED: 'libmariadb-dev' (The standard package).
+# Install build dependencies.
 RUN --mount=type=cache,target=/var/cache/apt,id=cache-apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=lib-apt,sharing=locked <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils-dev \
     ccache \
     cmake \
-    clang-$LLVM_VERSION \
-    libclang-rt-$LLVM_VERSION-dev \
+    g++-$GCC_VERSION \
     libluajit-5.1-dev \
-    libmariadb-dev \
+    libmariadb-dev-compat \
     libssl-dev \
     libzmq3-dev \
     make \
     ninja-build \
-    pkg-config \
     python3-dev \
     python3-venv \
-    python3-pip \
-    python3-full \
     zlib1g-dev
-
-# Set Clang as default
-update-alternatives --install /usr/bin/cc cc /usr/bin/clang-$LLVM_VERSION 100
-update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-$LLVM_VERSION 100
-update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
-update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VERSION 100
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 100
 EOF
+ENV CC=/usr/bin/gcc-$GCC_VERSION
+ENV CXX=/usr/bin/g++-$GCC_VERSION
 
-# Setup Python (Matches LSB Requirements)
+# Install secondary dependencies as user.
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
 python3 -m venv $VIRTUAL_ENV
-source $VIRTUAL_ENV/bin/activate
-pip install --upgrade pip setuptools wheel
-pip install --upgrade -r /tmp/requirements.txt
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade -r /tmp/requirements.txt
 EOF
 USER root
 
@@ -115,6 +101,8 @@ USER root
 # devtools #
 ############
 FROM staging AS devtools
+
+# Install misc dev/ci tools on top of build tools.
 RUN <<EOF
 apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     clang-format-$LLVM_VERSION \
@@ -126,6 +114,7 @@ update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-
 EOF
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
 ENV PATH="/xiadmin/.luarocks/bin:$PATH"
+
 COPY --chmod=0755 docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/bin/bash"]
@@ -135,17 +124,25 @@ CMD ["/bin/bash"]
 #########
 FROM staging AS build
 
-ARG COMPILER=clang
+ARG COMPILER=gcc
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
-if [[ $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends \
-        clang-tidy-$LLVM_VERSION
+if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+        clang-$LLVM_VERSION \
+        clang-tidy-$LLVM_VERSION \
+        libclang-rt-$LLVM_VERSION-dev \
+        llvm-$LLVM_VERSION-dev
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 fi
 EOF
 
 USER $UNAME
 
+# Exclude changes to git metadata, scripts, and sql not needed for build.
+# Excluded here instead of dockerignore so they can be bind mounted during build.
+# Saves from copying everything whenever scripts/sql change.
+# https://docs.docker.com/reference/dockerfile/#copy---exclude (docker/dockerfile:1.7-labs)
 COPY --chown=$UNAME:$UGROUP \
     --exclude=.git \
     --exclude=losmeshes/** \
@@ -169,18 +166,20 @@ set -eo pipefail
 cp -p /xiadmin/build/version.cpp /server/src/common/ 2> /dev/null || true
 cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 
-# Force Clang
-export CC=/usr/bin/clang-$LLVM_VERSION
-export CXX=/usr/bin/clang++-$LLVM_VERSION
+if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
+    export CC=/usr/bin/clang-$LLVM_VERSION
+    export CXX=/usr/bin/clang++-$LLVM_VERSION
+fi
 
-# Standard LSB Build Command (No extra flags, just Clang + Ninja)
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
+    -DENABLE_CLANG_TIDY=$ENABLE_CLANG_TIDY \
     -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
     -DTRACY_ENABLE=$TRACY_ENABLE \
     -DPCH_ENABLE=$PCH_ENABLE \
     -DWARNINGS_AS_ERRORS=$WARNINGS_AS_ERRORS
 
 cmake --build /xiadmin/build -j$(nproc) | tee build.log
+
 ccache -s
 
 cp -p /server/xi_* /xiadmin/build/
