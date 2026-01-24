@@ -31,38 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - build_type: Release
-            runner: windows-2025
-            compiler: msvc
-            tracy: false
-            build_modules: false
-            save_cache: false
-            upload_artifact: true
-            clang_tidy: false
-          - build_type: Release
-            runner: macos-26
-            compiler: appleClang
-            tracy: false
-            build_modules: false
-            save_cache: false
-            upload_artifact: true
-            clang_tidy: false
-          - build_type: Debug
-            runner: windows-2025
-            compiler: msvc
-            tracy: false
-            build_modules: false
-            save_cache: true
-            upload_artifact: false
-            clang_tidy: false
-          - build_type: Debug
-            runner: macos-26
-            compiler: appleClang
-            tracy: false
-            build_modules: false
-            save_cache: true
-            upload_artifact: false
-            clang_tidy: false
           - build_type: Debug
             runner: ubuntu-24.04
             compiler: gcc

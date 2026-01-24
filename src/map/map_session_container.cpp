@@ -36,16 +36,10 @@
 auto MapSessionContainer::createSession(IPP ipp) -> MapSession*
 {
     TracyZoneScoped;
-    uint32 ip_normal  = ipp.getIP();
-    uint32 ip_swapped = __builtin_bswap32(ip_normal);
 
-    ShowDebugFmt("Creating session for {} (Normal: {}, Swapped: {})", ipp.getIPString(), ip_normal, ip_swapped);
+    ShowDebugFmt("Creating session for {}", ipp.getIPString());
 
-    const auto rset = db::preparedStmt(
-            "SELECT charid FROM accounts_sessions WHERE (client_addr = ? OR client_addr = ?) LIMIT 1",
-            ip_normal,
-            ip_swapped
-        );
+    const auto rset = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE client_addr = ? LIMIT 1", ipp.getIP());
     ShowInfoFmt("Session lookup by client_addr: IP = {}, Big-Endian UINT32 = {}. Rows found = {}", ipp.getIPString(), ipp.getIP(), rset ? rset->rowsCount() : 0);
     if (!rset)
     {
