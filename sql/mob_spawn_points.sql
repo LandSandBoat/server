@@ -39233,7 +39233,7 @@ INSERT INTO `mob_spawn_points` VALUES (17236198,0,'Demon_Knight','Demon Knight',
 INSERT INTO `mob_spawn_points` VALUES (17236199,0,'Demon_Wizard','Demon Wizard',19,48,52,-404.000,-43.000,-12.000,42);
 INSERT INTO `mob_spawn_points` VALUES (17236200,0,'Demon_Knight','Demon Knight',20,48,52,-399.107,-44.431,-34.532,127);
 INSERT INTO `mob_spawn_points` VALUES (17236201,0,'Chaos_Elemental','Chaos Elemental',25,42,42,-331.000,-29.000,-49.000,3);
-INSERT INTO `mob_spawn_points` VALUES (17236202,0,'Boreal_Hound','Boreal Hound',26,53,53,-22.162,-24.674,-495.609,127);
+INSERT INTO `mob_spawn_points` VALUES (17236202,0,'Boreal_Hound','Boreal Hound',26,53,53,-22.162,-24.674,-495.609,192);
 INSERT INTO `mob_spawn_points` VALUES (17236203,0,'Boreal_Coeurl','Boreal Coeurl',27,53,53,583.522,-8.858,295.294,64);
 INSERT INTO `mob_spawn_points` VALUES (17236204,0,'Boreal_Tiger','Boreal Tiger',28,53,53,342.267,-28.927,373.998,64);
 INSERT INTO `mob_spawn_points` VALUES (17236205,0,'Koenigstiger','Koenigstiger',29,63,63,-293.000,-22.000,146.000,194);
