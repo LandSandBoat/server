@@ -33,6 +33,7 @@ local thirtyMinutes = 30 * 60
 local function onMobSpawn(mob)
     mob:setTrueDetection(true)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.ROAM_RESET_FACING, 1)
     mob:setLocalVar('fightStartTime', 0)
     mob:setLocalVar('doomUsed', 0)
     mob:setLocalVar('returningToSpawn', 0)
