@@ -5169,7 +5169,7 @@ INSERT INTO `mob_spawn_points` VALUES (16879733,0,'Gigass_Sheep','Gigas\'s Sheep
 INSERT INTO `mob_spawn_points` VALUES (16879734,0,'Gigas_Martialist','Gigas Martialist',28,41,44,259.928,-15.839,182.999,34);
 INSERT INTO `mob_spawn_points` VALUES (16879735,0,'Orcish_Gladiator','Orcish Gladiator',38,41,44,267.715,-15.925,184.125,198);
 INSERT INTO `mob_spawn_points` VALUES (16879736,0,'Gigantobugard','Gigantobugard',25,40,43,159.575,-24.554,238.742,133);
-INSERT INTO `mob_spawn_points` VALUES (16879737,0,'Odqan','Odqan',39,50,51,204.733,-24.365,316.403,127);
+INSERT INTO `mob_spawn_points` VALUES (16879737,0,'Odqan','Odqan',39,49,51,204.733,-24.365,316.403,127);
 INSERT INTO `mob_spawn_points` VALUES (16879738,0,'Gigantobugard','Gigantobugard',25,40,43,270.458,-24.800,304.112,116);
 INSERT INTO `mob_spawn_points` VALUES (16879739,0,'Gigas_Braver','Gigas Braver',27,41,44,201.065,-24.232,325.722,177);
 INSERT INTO `mob_spawn_points` VALUES (16879740,0,'Gigas_Warwolf','Gigas Warwolf',34,41,44,245.171,-24.357,316.001,125);
@@ -5190,7 +5190,7 @@ INSERT INTO `mob_spawn_points` VALUES (16879754,0,'Gigas_Catapulter','Gigas Cata
 INSERT INTO `mob_spawn_points` VALUES (16879755,0,'Orcish_Footsoldier','Orcish Footsoldier',36,41,44,55.847,-7.772,-112.059,165);
 INSERT INTO `mob_spawn_points` VALUES (16879756,0,'Orcish_Gladiator','Orcish Gladiator',38,41,44,83.492,-8.232,-86.677,154);
 INSERT INTO `mob_spawn_points` VALUES (16879757,0,'Orcish_Bowshooter','Orcish Bowshooter',31,41,44,44.092,-8.033,-108.637,173);
-INSERT INTO `mob_spawn_points` VALUES (16879758,0,'Odqan','Odqan',39,50,51,83.241,-8.259,-41.968,36);
+INSERT INTO `mob_spawn_points` VALUES (16879758,0,'Odqan','Odqan',39,49,51,83.241,-8.259,-41.968,36);
 INSERT INTO `mob_spawn_points` VALUES (16879759,0,'Gigantobugard','Gigantobugard',25,40,43,38.889,-7.924,-52.423,102);
 INSERT INTO `mob_spawn_points` VALUES (16879760,0,'Gigantobugard','Gigantobugard',25,40,43,84.783,-8.099,-47.025,187);
 INSERT INTO `mob_spawn_points` VALUES (16879761,0,'Gigas_Martialist','Gigas Martialist',28,41,44,118.473,-8.114,-51.182,116);
@@ -5242,7 +5242,7 @@ INSERT INTO `mob_spawn_points` VALUES (16879806,0,'Overgrown_Rose','Overgrown Ro
 INSERT INTO `mob_spawn_points` VALUES (16879807,0,'Overgrown_Rose','Overgrown Rose',41,47,50,-238.011,-32.417,125.226,78);
 INSERT INTO `mob_spawn_points` VALUES (16879808,0,'Thunder_Elemental','Thunder Elemental',8,42,44,-235.987,-31.895,145.642,121);
 INSERT INTO `mob_spawn_points` VALUES (16879809,0,'Dark_Elemental','Dark Elemental',16,42,44,-296.644,-31.666,192.381,59);
-INSERT INTO `mob_spawn_points` VALUES (16879810,0,'Upyri','Upyri',42,43,47,-282.944,-32.441,159.796,160);
+INSERT INTO `mob_spawn_points` VALUES (16879810,0,'Upyri','Upyri',42,45,45,-282.944,-32.441,159.796,160);
 INSERT INTO `mob_spawn_points` VALUES (16879811,0,'Fomor_Red_Mage','Fomor Red Mage',43,49,51,-156.070,-31.711,104.539,24);
 INSERT INTO `mob_spawn_points` VALUES (16879812,0,'Fomor_Ranger','Fomor Ranger',64,36,38,-156.993,-31.732,105.513,27);
 INSERT INTO `mob_spawn_points` VALUES (16879813,0,'Fomor_Paladin','Fomor Paladin',21,36,38,-302.500,-32.145,175.850,0);
@@ -5332,7 +5332,7 @@ INSERT INTO `mob_spawn_points` VALUES (16879896,0,'Bloody_Coffin','Bloody Coffin
 INSERT INTO `mob_spawn_points` VALUES (16879897,0,'Boggelmann','Boggelmann',56,70,70,-310.079,-32.877,181.822,163);
 INSERT INTO `mob_spawn_points` VALUES (16879898,0,'Alsha','Alsha',57,60,60,-155.804,-16.191,644.617,195);
 INSERT INTO `mob_spawn_points` VALUES (16879899,0,'Gration','Gration',58,85,85,111.363,-17.000,30.344,141);
-INSERT INTO `mob_spawn_points` VALUES (16879900,0,'Ziphius','Ziphius',59,60,62,148.401,-16.018,520.438,224);
+INSERT INTO `mob_spawn_points` VALUES (16879900,0,'Ziphius','Ziphius',59,55,55,148.401,-16.018,520.438,224);
 INSERT INTO `mob_spawn_points` VALUES (16879901,0,'Tsui-Goab','Tsui-Goab',60,65,65,441.191,-16.321,126.181,250); -- VNM
 INSERT INTO `mob_spawn_points` VALUES (16879902,0,'Bloodswiller_Fly','Bloodswiller Fly',61,0,0,442.637,-15.658,126.849,156);
 INSERT INTO `mob_spawn_points` VALUES (16879903,0,'Bloodswiller_Fly','Bloodswiller Fly',61,0,0,443.693,-15.680,127.950,131);
