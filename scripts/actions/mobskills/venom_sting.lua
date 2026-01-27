@@ -1,6 +1,6 @@
 -----------------------------------
 -- Venom Sting
--- Deals Water damage to targets in a fan-shaped area of effect. Additional effect: Poison
+-- Deals physical damage to a single target. Additional Effect: Poison
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,14 +11,15 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
-    local accmod = 1
-    local ftp    = 3.3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 100, 3, 60)
+    local accmod  = 1
+    local ftp     = 2
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 100, 3, 30)
+
     return dmg
 end
 

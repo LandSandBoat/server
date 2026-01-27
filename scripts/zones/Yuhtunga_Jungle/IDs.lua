@@ -57,16 +57,14 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     mob =
     {
-        MISCHIEVOUS_MICHOLAS = GetFirstID('Mischievous_Micholas'),
-        TIPHA                = GetFirstID('Tipha'),
-        CARTHI               = GetFirstID('Carthi'),
-        PYUU_THE_SPATEMAKER  = GetFirstID('Pyuu_the_Spatemaker'),
-        ROSE_GARDEN          = GetFirstID('Rose_Garden'),
-        VOLUPTUOUS_VILMA     = GetFirstID('Voluptuous_Vilma'),
-        NASUS_OFFSET         = GetFirstID('Nasus'),
-        SIREN                = GetFirstID('Siren'),
-        TURTLERIDER          = GetFirstID('Meww_the_Turtlerider'),
         BAYAWAK              = GetFirstID('Bayawak'),
+        CARTHI               = GetFirstID('Carthi'),
+        MISCHIEVOUS_MICHOLAS = GetFirstID('Mischievous_Micholas'),
+        NASUS_OFFSET         = GetFirstID('Nasus'),
+        TIPHA                = GetFirstID('Tipha'),
+        ROSE_GARDEN          = GetFirstID('Rose_Garden'),
+        SIREN                = GetFirstID('Siren'),
+        VOLUPTUOUS_VILMA     = GetFirstID('Voluptuous_Vilma'),
     },
     npc =
     {

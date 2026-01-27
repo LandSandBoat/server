@@ -195,11 +195,26 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, { damage = math.random(89, 111), chance = 10 })
+    local pTable =
+    {
+        chance         = 10,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.EARTH,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.OURYU_OVERWHELMER)
+    if optParams.isKiller or optParams.noKiller then
+        local battlefield = mob:getBattlefield()
+        if battlefield then
+            battlefield:setStatus(xi.battlefield.status.WON)
+        end
+    end
 end
 
 return entity

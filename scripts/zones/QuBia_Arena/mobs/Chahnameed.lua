@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skillList =
     {
         xi.mobSkill.INFERNAL_PESTILENCE,

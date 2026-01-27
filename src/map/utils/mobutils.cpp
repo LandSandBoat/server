@@ -592,10 +592,15 @@ bool CheckSubJobZone(CMobEntity* PMob)
 
 void CalculateMobStats(CMobEntity* PMob, bool recover)
 {
-    // remove all to keep mods in sync
-    PMob->StatusEffectContainer->KillAllStatusEffect();
+    // Reset modifiers to base values to prevent stacking
     PMob->restoreModifiers();
     PMob->restoreMobModifiers();
+
+    if (recover)
+    {
+        // Clear status effects only when fully recovering
+        PMob->StatusEffectContainer->KillAllStatusEffect();
+    }
 
     bool      isNM     = PMob->m_Type & MOBTYPE_NOTORIOUS;
     JOBTYPE   mJob     = PMob->GetMJob();
@@ -706,11 +711,15 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
         if (isNM)
         {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.NM_HP_MULTIPLIER"));
+            auto hpMultiplierNM = settings::get<float>("map.NM_HP_MULTIPLIER");
+            hpMultiplierNM      = (hpMultiplierNM >= 0.1f && hpMultiplierNM <= 2.0f) ? hpMultiplierNM : 1.0f;
+            PMob->health.maxhp  = (int32)(PMob->health.maxhp * hpMultiplierNM);
         }
         else
         {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.MOB_HP_MULTIPLIER"));
+            auto hpMultiplierMob = settings::get<float>("map.MOB_HP_MULTIPLIER");
+            hpMultiplierMob      = (hpMultiplierMob >= 0.1f && hpMultiplierMob <= 2.0f) ? hpMultiplierMob : 1.0f;
+            PMob->health.maxhp   = (int32)(PMob->health.maxhp * hpMultiplierMob);
         }
 
         bool hasMp = false;
@@ -772,11 +781,15 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
             if (isNM)
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.NM_MP_MULTIPLIER"));
+                auto mpMultiplierNM = settings::get<float>("map.NM_MP_MULTIPLIER");
+                mpMultiplierNM      = (mpMultiplierNM >= 0.1f && mpMultiplierNM <= 2.0f) ? mpMultiplierNM : 1.0f;
+                PMob->health.maxmp  = (int32)(PMob->health.maxmp * mpMultiplierNM);
             }
             else
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.MOB_MP_MULTIPLIER"));
+                auto mpMultiplierMob = settings::get<float>("map.MOB_MP_MULTIPLIER");
+                mpMultiplierMob      = (mpMultiplierMob >= 0.1f && mpMultiplierMob <= 2.0f) ? mpMultiplierMob : 1.0f;
+                PMob->health.maxmp   = (int32)(PMob->health.maxmp * mpMultiplierMob);
             }
         }
     }
@@ -858,6 +871,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     PMob->stats.CHR = fCHR + mCHR + sCHR;
 
     auto statMultiplier = isNM ? settings::get<float>("map.NM_STAT_MULTIPLIER") : settings::get<float>("map.MOB_STAT_MULTIPLIER");
+    statMultiplier      = (statMultiplier >= 0.1f && statMultiplier <= 2.0f) ? statMultiplier : 1.0f;
     PMob->stats.STR     = (uint16)(PMob->stats.STR * statMultiplier);
     PMob->stats.DEX     = (uint16)(PMob->stats.DEX * statMultiplier);
     PMob->stats.VIT     = (uint16)(PMob->stats.VIT * statMultiplier);
@@ -941,9 +955,13 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
     // Max [HP/MP] Boost traits
     PMob->UpdateHealth();
-    PMob->health.tp = 0;
-    PMob->health.hp = PMob->GetMaxHP();
-    PMob->health.mp = PMob->GetMaxMP();
+
+    if (recover)
+    {
+        PMob->health.tp = 0;
+        PMob->health.hp = PMob->GetMaxHP();
+        PMob->health.mp = PMob->GetMaxMP();
+    }
 
     SetupJob(PMob);
     SetupRoaming(PMob);
@@ -1428,8 +1446,6 @@ void InitializeMob(CMobEntity* PMob)
     // add special mob mods
     PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
     PMob->defaultMobMod(MOBMOD_LINK_RADIUS, 10);
-    PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE,
-                        92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
     PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
     PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
     PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
@@ -1682,7 +1698,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
 
     const auto rset = db::preparedStmt("SELECT zoneid, mob_groups.name, packet_name, respawntime, "
                                        "spawntype, dropid, mob_groups.HP, mob_groups.MP, "
-                                       "minLevel, maxLevel, modelid, mJob, "
+                                       "mob_spawn_points.minLevel, mob_spawn_points.maxLevel, modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
                                        "ecosystemID, speed, STR, "
@@ -1699,7 +1715,8 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
                                        "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize "
-                                       "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                                       "FROM mob_groups INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                                       "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
                                        "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
@@ -1858,7 +1875,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
     const auto rset = db::preparedStmt("SELECT zoneid, mob_groups.name, packet_name, respawntime, "
                                        "spawntype, dropid, mob_groups.HP, mob_groups.MP, "
-                                       "minLevel, maxLevel, modelid, mJob, "
+                                       "modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
                                        "ecosystemID, speed, STR, "
@@ -1892,9 +1909,6 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
         PMob->HPmodifier = rset->get<uint32>("HP");
         PMob->MPmodifier = rset->get<uint32>("MP");
-
-        PMob->m_minLevel = rset->get<uint8>("minLevel");
-        PMob->m_maxLevel = rset->get<uint8>("maxLevel");
 
         uint16 sqlModelID[10];
         db::extractFromBlob(rset, "modelid", sqlModelID);

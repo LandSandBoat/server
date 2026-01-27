@@ -17,6 +17,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
+    local targetHP = target:getHP()
     params.numHits = 1
     params.ftpMod = { 2.75, 2.75, 2.75 }
     params.agi_wsc = 0.4 params.int_wsc = 0.4
@@ -30,8 +31,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
+    -- Handle HP Drain
     if not target:isUndead() then
-        local drain = math.floor(damage * 0.4)
+        local drain = math.floor(damage * math.random(30, 70) / 100) -- TODO: JP Wiki States 50% Heal but all current proof i have shows 30-70%
+
+        drain = utils.clamp(drain, 0, targetHP)
+
         player:addHP(drain)
     end
 

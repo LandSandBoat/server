@@ -31,4 +31,5 @@ enum class TickType : uint8_t
     JSTDaily       = 5,
     VanadielHourly = 6,
     VanadielDaily  = 7,
+    SpawnHandler   = 8,
 };

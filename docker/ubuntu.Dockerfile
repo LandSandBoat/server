@@ -29,6 +29,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     tini \
     tzdata \
     zlib1g
+apt-get clean && rm -rf /var/lib/apt/lists/*
 EOF
 
 # Setup runtime user.
@@ -49,8 +50,10 @@ chown $UNAME:$UGROUP /server
 git config --system --add safe.directory /server
 EOF
 
+# Pre-enable Python virtual environment.
 ENV VIRTUAL_ENV=/xiadmin/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 ENV TRACY_NO_INVARIANT_CHECK=1
 
 SHELL ["/bin/bash", "-c"]
@@ -87,6 +90,7 @@ ENV CC=/usr/bin/gcc-$GCC_VERSION
 ENV CXX=/usr/bin/g++-$GCC_VERSION
 
 # Install secondary dependencies as user.
+# python3 = global, python = (pre-enabled) venv
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
@@ -108,7 +112,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     cppcheck \
     gdb \
     luarocks
-rm -rf /var/lib/apt/lists/*
+apt-get clean && rm -rf /var/lib/apt/lists/*
 update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-$LLVM_VERSION 100
 EOF
 RUN luarocks --tree /xiadmin/.luarocks install luacheck
@@ -127,10 +131,12 @@ ARG COMPILER=gcc
 ARG ENABLE_CLANG_TIDY=OFF
 RUN <<EOF
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
-    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet lsb-release wget software-properties-common gnupg
-    wget https://apt.llvm.org/llvm.sh
-    chmod +x llvm.sh
-    sudo ./llvm.sh $LLVM_VERSION all
+    apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
+        clang-$LLVM_VERSION \
+        clang-tidy-$LLVM_VERSION \
+        libclang-rt-$LLVM_VERSION-dev \
+        llvm-$LLVM_VERSION-dev
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 fi
 EOF
 
@@ -166,8 +172,6 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
-    export CXXFLAGS="-stdlib=libstdc++"
-    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
@@ -191,10 +195,9 @@ EOF
 ###########
 FROM base AS service
 
-RUN rm -rf /var/lib/apt/lists/*
-
 USER $UNAME
 
+COPY --chown=$UNAME:$UGROUP LICENSE /server/LICENSE
 COPY --chown=$UNAME:$UGROUP res/compress.dat res/decompress.dat /server/res/
 COPY --chown=$UNAME:$UGROUP scripts /server/scripts
 COPY --chown=$UNAME:$UGROUP sql /server/sql
@@ -202,12 +205,14 @@ COPY --chown=$UNAME:$UGROUP tools /server/tools
 COPY --chown=$UNAME:$UGROUP modules /server/modules
 COPY --chown=$UNAME:$UGROUP settings /server/settings
 
-COPY --chown=$UNAME:$UGROUP --from=staging /xiadmin/.venv /xiadmin/.venv
+COPY --chown=$UNAME:$UGROUP --from=staging $VIRTUAL_ENV $VIRTUAL_ENV
 COPY --chown=$UNAME:$UGROUP --from=build /server/xi_* /server/
 COPY --chown=$UNAME:$UGROUP --from=build /server/build.log /server/build.log
 
 ARG REPO_URL
 ARG COMMIT_SHA
+LABEL org.opencontainers.image.source="$REPO_URL"
+LABEL org.opencontainers.image.revision="$COMMIT_SHA"
 RUN <<EOF
 if [ -n "$REPO_URL" ] && [ -n "$COMMIT_SHA" ]; then
     git init

@@ -152,7 +152,7 @@ end
 -----------------------------------
 -- Favors certain moves over others.
 -----------------------------------
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local abilityRoll    = math.random(1, 100)
     local probabilitySum = 0
 

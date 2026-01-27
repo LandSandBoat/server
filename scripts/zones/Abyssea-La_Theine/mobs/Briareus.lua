@@ -43,14 +43,11 @@ entity.onMobFight = function(mob, target)
 
     -- Use Colossal Slam as many times as possible!
     if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
-        mob:setTP(1000)
-        mob:setMobMod(xi.mobMod.TP_USE_CHANCE, 10000)
-    else
-        mob:setMobMod(xi.mobMod.TP_USE_CHANCE, 200)
+        mob:setTP(3000)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local cueMove = mob:getLocalVar('CUE_MOVE')
     mob:setLocalVar('CUE_MOVE', 0)
 

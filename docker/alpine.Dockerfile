@@ -12,8 +12,6 @@ apk --update-cache add \
     bash \
     binutils \
     git \
-    libc++ \
-    llvm-libunwind \
     lua5.1-dev \
     luajit \
     mariadb-client \
@@ -25,6 +23,7 @@ apk --update-cache add \
     tzdata \
     zeromq \
     zlib
+apk cache clean
 EOF
 
 # Setup runtime user.
@@ -44,8 +43,10 @@ chown $UNAME:$UGROUP /server
 git config --system --add safe.directory /server
 EOF
 
+# Pre-enable Python virtual environment.
 ENV VIRTUAL_ENV=/xiadmin/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 ENV TRACY_NO_INVARIANT_CHECK=1
 
 SHELL ["/bin/bash", "-c"]
@@ -64,8 +65,6 @@ apk --update-cache add \
     ccache \
     cmake \
     g++ \
-    libc++-dev \
-    llvm-libunwind-dev \
     linux-headers \
     luajit-dev \
     make \
@@ -78,6 +77,7 @@ apk --update-cache add \
 EOF
 
 # Install secondary dependencies as user.
+# python3 = global, python = (pre-enabled) venv
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-alpine <<EOF
@@ -123,8 +123,8 @@ if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
         clang$LLVM_VERSION \
         clang$LLVM_VERSION-extra-tools \
         compiler-rt \
-        lld$LLVM_VERSION \
         llvm$LLVM_VERSION
+    apk cache clean
 fi
 EOF
 
@@ -160,8 +160,6 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
-    export CXXFLAGS="-stdlib=libstdc++"
-    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
@@ -185,10 +183,9 @@ EOF
 ###########
 FROM base AS service
 
-RUN apk cache clean
-
 USER $UNAME
 
+COPY --chown=$UNAME:$UGROUP LICENSE /server/LICENSE
 COPY --chown=$UNAME:$UGROUP res/compress.dat res/decompress.dat /server/res/
 COPY --chown=$UNAME:$UGROUP scripts /server/scripts
 COPY --chown=$UNAME:$UGROUP sql /server/sql
@@ -196,12 +193,14 @@ COPY --chown=$UNAME:$UGROUP tools /server/tools
 COPY --chown=$UNAME:$UGROUP modules /server/modules
 COPY --chown=$UNAME:$UGROUP settings /server/settings
 
-COPY --chown=$UNAME:$UGROUP --from=staging /xiadmin/.venv /xiadmin/.venv
+COPY --chown=$UNAME:$UGROUP --from=staging $VIRTUAL_ENV $VIRTUAL_ENV
 COPY --chown=$UNAME:$UGROUP --from=build /server/xi_* /server/
 COPY --chown=$UNAME:$UGROUP --from=build /server/build.log /server/build.log
 
 ARG REPO_URL
 ARG COMMIT_SHA
+LABEL org.opencontainers.image.source="$REPO_URL"
+LABEL org.opencontainers.image.revision="$COMMIT_SHA"
 RUN <<EOF
 if [ -n "$REPO_URL" ] && [ -n "$COMMIT_SHA" ]; then
     git init

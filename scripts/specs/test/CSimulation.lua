@@ -66,3 +66,10 @@ end
 ---@return nil
 function CSimulation:skipToNextVanaDay()
 end
+
+---Returns mobs in a spawn slot as a table
+---@param zoneId xi.zone
+---@param slotId integer
+---@return CTestEntity[]
+function CSimulation:getSpawnSlot(zoneId, slotId)
+end

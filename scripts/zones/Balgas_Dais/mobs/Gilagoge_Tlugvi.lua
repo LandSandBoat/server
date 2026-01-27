@@ -9,11 +9,11 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.SILENCE)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
 end
 
 entity.onMobSpawn = function(mob)
@@ -43,13 +43,17 @@ entity.onMobFight = function(mob, target)
     end
 end
 
--- Has additional effect: Dispel (15% chance)
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.DISPEL, { chance = 15 })
+    local pTable =
+    {
+        chance  = 25,
+        element = xi.element.DARK,
+    }
+
+    return xi.combat.action.executeAddEffectDispel(mob, target, pTable)
 end
 
--- Only uses Entangle.
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.ENTANGLE
 end
 

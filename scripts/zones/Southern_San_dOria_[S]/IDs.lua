@@ -63,7 +63,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Saphiriance_TK'), -- San, Bas, Win, Flag +4, CA
-        SHIXO               = GetFirstID('Shixo'),
+        -- SHIXO               = GetFirstID('Shixo'),
     },
 }
 

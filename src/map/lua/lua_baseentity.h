@@ -668,6 +668,7 @@ public:
     void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
     void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, const sol::object& fixedCE, const sol::object& fixedVE);
     void  resetEnmity(CLuaBaseEntity* PEntity);
+    void  setEnmityActive(CLuaBaseEntity* PEntity, bool active);
     void  updateClaim(const sol::object& entity);
     bool  hasClaim(CLuaBaseEntity* PTarget);
     bool  hasEnmity();
@@ -786,6 +787,7 @@ public:
     uint32 getPetID();
     bool   isAutomaton();
     bool   isAvatar();
+    auto   isJugPet() -> bool;
     auto   getMaster() -> CBaseEntity*;
     uint8  getPetElement();
     void   setPet(const sol::object& petObj);
@@ -830,7 +832,7 @@ public:
     void   removeAllRunes();
 
     // Mob Entity-Specific
-    void   setMobLevel(uint8 level);
+    void   setMobLevel(uint8 level, sol::optional<bool> recover);
     uint8  getEcosystem();
     uint16 getSuperFamily();
     uint16 getFamily();
@@ -853,7 +855,7 @@ public:
     auto   getSpawnPos() -> sol::table;
     void   setSpawn(float x, float y, float z, const sol::object& rot);
     uint32 getRespawnTime();
-    void   setRespawnTime(uint32 seconds);
+    void   setRespawnTime(uint32 seconds) const;
 
     void instantiateMob(uint32 groupID);
 

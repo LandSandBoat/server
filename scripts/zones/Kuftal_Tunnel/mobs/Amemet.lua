@@ -212,6 +212,13 @@ local pathFind =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
 end
@@ -220,6 +227,9 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
+
+    mob:setMod(xi.mod.STORETP, 125)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onPath = function(mob)
@@ -273,19 +283,12 @@ entity.onPath = function(mob)
     end
 end
 
-entity.onMobFight = function(mob)
-    -- At 25% HP or less, Amemet receives regain.
-    if mob:getHPP() <= 25 then
-        mob:setMod(xi.mod.REGAIN, 10)
-    end
-end
-
-entity.onMobDisengage = function(mob)
-    mob:setMod(xi.mod.REGAIN, 0)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 418)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

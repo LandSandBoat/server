@@ -107,11 +107,11 @@ end
 ---@param damage integer
 ---@return integer
 function utils.handlePhalanx(actor, damage)
-    if damage > 0 then
-        damage = utils.clamp(damage - actor:getMod(xi.mod.PHALANX), 0, 99999)
+    if damage <= 0 then
+        return damage
     end
 
-    return damage
+    return utils.clamp(damage - actor:getMod(xi.mod.PHALANX), 0, 99999)
 end
 
 -- Returns reduced magic damage from RUN buff, 'One for All'
@@ -120,17 +120,16 @@ end
 ---@param damage integer
 ---@return integer
 function utils.handleOneForAll(actor, damage)
-    if damage > 0 then
-        local oneForAllEffect = actor:getStatusEffect(xi.effect.ONE_FOR_ALL)
-
-        if oneForAllEffect ~= nil then
-            local power = oneForAllEffect:getPower()
-
-            damage = utils.clamp(damage - power, 0, 99999)
-        end
+    if damage <= 0 then
+        return damage
     end
 
-    return damage
+    local oneForAllEffect = actor:getStatusEffect(xi.effect.ONE_FOR_ALL)
+    if not oneForAllEffect then
+        return damage
+    end
+
+    return utils.clamp(damage - oneForAllEffect:getPower(), 0, 99999)
 end
 
 -- Calculates Stoneskin damage reduction.
@@ -139,24 +138,28 @@ end
 ---@param damage integer
 ---@return integer
 function utils.handleStoneskin(actor, damage)
-    if damage > 0 then
-        local stoneskinRemaining = actor:getMod(xi.mod.STONESKIN)
-
-        if stoneskinRemaining > 0 then
-            if stoneskinRemaining > damage then -- Absorb all damage
-                actor:delMod(xi.mod.STONESKIN, damage)
-
-                return 0
-            else -- Wear off if mitigated damage exceeds stoneskin.
-                actor:delStatusEffect(xi.effect.STONESKIN)
-                actor:setMod(xi.mod.STONESKIN, 0)
-
-                return damage - stoneskinRemaining
-            end
-        end
+    if damage <= 0 then
+        return damage
     end
 
-    return damage
+    local stoneskinRemaining = actor:getMod(xi.mod.STONESKIN)
+    if stoneskinRemaining <= 0 then
+        return damage
+    end
+
+    -- Absorb all damage
+    if stoneskinRemaining > damage then
+        actor:delMod(xi.mod.STONESKIN, damage)
+
+        return 0
+
+    -- Wear off if mitigated damage exceeds stoneskin.
+    else
+        actor:delStatusEffect(xi.effect.STONESKIN)
+        actor:setMod(xi.mod.STONESKIN, 0)
+
+        return damage - stoneskinRemaining
+    end
 end
 
 -- Handles Automaton attachment "Analyzer" which decreases damage from successive special attacks.

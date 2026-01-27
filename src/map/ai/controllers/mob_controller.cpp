@@ -36,9 +36,12 @@
 #include "mob_spell_container.h"
 #include "mobskill.h"
 #include "party.h"
+#include "recast_container.h"
+#include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)
@@ -342,61 +345,64 @@ auto CMobController::MobSkill(int listId) -> bool
 {
     TracyZoneScoped;
 
-    if (PTarget)
+    if (!PTarget)
     {
-        /* #TODO: mob 2 hours, etc */
-        if (!listId)
+        return false;
+    }
+
+    // Fetch skill list from mobmod if not set in database.
+    if (!listId)
+    {
+        listId = PMob->getMobMod(MOBMOD_SKILL_LIST);
+    }
+
+    auto skillList{ battleutils::GetMobSkillList(listId) };
+    if (skillList.empty())
+    {
+        return false;
+    }
+
+    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
+    CBattleEntity* PActionTarget{ nullptr };
+
+    uint16 chosenSkillId = 0;
+    for (const auto skillId : skillList)
+    {
+        auto* PMobSkill{ battleutils::GetMobSkill(skillId) };
+        if (!PMobSkill)
         {
-            listId = PMob->getMobMod(MOBMOD_SKILL_LIST);
+            ShowError("CMobController::MobSkill -> Mobskill with ID (%i) [called from skill-list ID (%i)] isn't properly defined in mob_skills.sql", skillId, listId);
+            continue;
         }
 
-        auto skillList{ battleutils::GetMobSkillList(listId) };
+        chosenSkillId = skillId;
+        break;
+    }
 
-        if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget); overrideSkill > 0)
+    if (auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget, chosenSkillId); overrideSkill > 0)
+    {
+        chosenSkillId = overrideSkill;
+    }
+
+    auto* PMobSkill{ battleutils::GetMobSkill(chosenSkillId) };
+
+    if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
+    {
+        PActionTarget = PTarget;
+    }
+    else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
+    {
+        PActionTarget = PMob;
+    }
+
+    PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
+
+    if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
+    {
+        const float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
+        if (currentDistance <= PMobSkill->getDistance())
         {
-            skillList = { overrideSkill };
-        }
-
-        if (skillList.empty())
-        {
-            return false;
-        }
-
-        std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
-        CBattleEntity* PActionTarget{ nullptr };
-
-        for (const auto skillid : skillList)
-        {
-            auto* PMobSkill{ battleutils::GetMobSkill(skillid) };
-            if (!PMobSkill)
-            {
-                continue;
-            }
-
-            if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
-            {
-                PActionTarget = PTarget;
-            }
-            else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
-            {
-                PActionTarget = PMob;
-            }
-            else
-            {
-                continue;
-            }
-
-            PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
-
-            if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
-            {
-                const float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
-
-                if (currentDistance <= PMobSkill->getDistance())
-                {
-                    return MobSkill(PActionTarget->targid, PMobSkill->getID(), std::nullopt);
-                }
-            }
+            return MobSkill(PActionTarget->targid, PMobSkill->getID(), std::nullopt);
         }
     }
 
@@ -466,7 +472,7 @@ auto CMobController::TryCastSpell() -> bool
     TracyZoneScoped;
     if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
-        return false;
+        return false; // Can't cast spells.
     }
 
     // Find random spell from list
@@ -502,80 +508,61 @@ auto CMobController::TryCastSpell() -> bool
     std::optional<SpellID>        maybeSpellOverride  = std::get<0>(possibleOverriddenSpell);
     std::optional<CBattleEntity*> maybeTargetOverride = std::get<1>(possibleOverriddenSpell);
 
-    auto isSpellEligibleToCast = [this](CBattleEntity* PCastTarget, CSpell* PSpell) -> bool
-    {
-        if (!PSpell)
-        {
-            return false;
-        }
-
-        // Check if target is in range before attempting to cast
-        if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
-        {
-            return false;
-        }
-
-        // Check if mob can afford to cast this spell
-        if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
-        {
-            return false;
-        }
-
-        return true;
-    };
-
     if (maybeSpellOverride.has_value())
     {
         chosenSpellId = maybeSpellOverride.value();
     }
 
-    if (chosenSpellId.has_value())
+    if (!chosenSpellId.has_value())
     {
-        // Check if we can actually cast this spell before committing to it
-        CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
-        if (!PSpell)
-        {
-            ShowWarning("CMobController::TryCastSpell: SpellId <%i> is not found", static_cast<uint16>(chosenSpellId.value()));
-            return false;
-        }
-        else
-        {
-            // if we have a target override, override the weird self target logic later and try to cast
-            if (maybeTargetOverride.has_value())
-            {
-                PSpellTarget = maybeTargetOverride.value();
-
-                if (!isSpellEligibleToCast(PSpellTarget, PSpell))
-                {
-                    return false;
-                }
-
-                Cast(PSpellTarget->targid, chosenSpellId.value());
-                return true;
-            }
-
-            CBattleEntity* PCastTarget = nullptr;
-
-            if (PSpell->getValidTarget() & TARGET_SELF)
-            {
-                PCastTarget = PMob;
-            }
-            else
-            {
-                PCastTarget = PTarget;
-            }
-
-            if (!isSpellEligibleToCast(PCastTarget, PSpell))
-            {
-                return false;
-            }
-        }
-
-        CastSpell(chosenSpellId.value());
-        return true;
+        return false; // No spell Id.
     }
 
-    return false;
+    // Check if spell exists.
+    CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
+    if (!PSpell)
+    {
+        return false; // No spell object.
+    }
+
+    // Check spell cooldown.
+    if (PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(chosenSpellId.value())))
+    {
+        return false; // Spell is on cooldown.
+    }
+
+    // Check if mob can afford to cast this spell
+    if (!battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+    {
+        return false; // Not enough MP.
+    }
+
+    // Target logic.
+    CBattleEntity* PCastTarget = nullptr;
+
+    if (PSpell->getValidTarget() & TARGET_SELF)
+    {
+        PCastTarget = PMob;
+    }
+    else
+    {
+        PCastTarget = PTarget;
+    }
+
+    if (maybeTargetOverride.has_value())
+    {
+        PCastTarget = maybeTargetOverride.value();
+    }
+
+    // Check if target is in range before attempting to cast
+    if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
+    {
+        return false; // Target out of range.
+    }
+
+    // Perform cast.
+    CastSpell(chosenSpellId.value());
+    return true;
 }
 
 auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
@@ -735,8 +722,9 @@ void CMobController::DoCombatTick(timer::time_point tick)
             return;
         }
 
-        if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
+        if (m_Tick >= m_LastMobSkillTime && PMob->shouldUseTPMove(m_tpThreshold) && MobSkill())
         {
+            m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
             return;
         }
     }
@@ -1113,6 +1101,8 @@ void CMobController::DoRoamTick(timer::time_point tick)
                 else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !settings::get<bool>("map.MOB_NO_DESPAWN"))
                 {
                     PMob->PAI->Despawn();
+                    // Override respawn timer set by CDespawnState for deaggro (60s instead of default)
+                    PMob->loc.zone->spawnHandler()->registerForRespawn(PMob, 60s);
                     return;
                 }
             }
@@ -1372,6 +1362,8 @@ auto CMobController::Engage(const uint16 targid) -> bool
             m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
                                                                    xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
         }
+
+        m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
 
         // Pet should also fight the target if they can
         if (PMob->PPet && !PMob->PPet->PAI->IsEngaged())

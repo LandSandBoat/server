@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('tpMoveCount', 3)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getLocalVar('tpMoveCount') == 0 then
         mob:setLocalVar('tpMoveCount', 3)
     end

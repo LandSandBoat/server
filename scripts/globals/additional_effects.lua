@@ -162,7 +162,7 @@ xi.additionalEffect.calcPhysDamage = function(attacker, defender, item, params)
         return params.damage * -1
     end
 
-    params.damage = params.damage * xi.spells.damage.calculateDamageAdjustment(defender, params.isPhysical, false, params.isRanged, params.isBreath)
+    params.damage = params.damage * xi.combat.damage.calculateDamageAdjustment(defender, params.isPhysical, false, params.isRanged, params.isBreath)
 
     -- multiplicative
     switch (params.damageType) : caseof

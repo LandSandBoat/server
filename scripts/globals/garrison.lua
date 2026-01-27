@@ -103,12 +103,15 @@ xi.garrison.getAllyInfo = function(zoneID, zoneData, nationID)
     -- Get zone garrison data
     local allyName    = xi.garrison.allyNames[zoneData.levelCap][nationID]
     local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][nationID]
-    local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+    local allyGroupId = xi.garrison.allyGroupInfo[zoneData.levelCap][1] -- Defaulted to 1 inside GM_HOME
+    local allyMinLvl  = xi.garrison.allyGroupInfo[zoneData.levelCap][2]
+    local allyMaxLvl  = xi.garrison.allyGroupInfo[zoneData.levelCap][3]
     local pos         = xi.garrison.zoneData[zoneID].pos
 
     if
         allyName == nil or
-        allyGroupId == nil or
+        allyMinLvl == nil or
+        allyMaxLvl == nil or
         allyLooks == nil or
         #allyLooks == 0 or
         pos == nil
@@ -119,10 +122,12 @@ xi.garrison.getAllyInfo = function(zoneID, zoneData, nationID)
     end
 
     return {
-        name    = allyName,
-        looks   = allyLooks,
-        groupId = allyGroupId,
-        pos     = pos,
+        name     = allyName,
+        looks    = allyLooks,
+        groupId  = allyGroupId, -- Defaults to groupID 1. This group ID is defaulted inside GM_HOME
+        minLevel = allyMinLvl,
+        maxLevel = allyMaxLvl,
+        pos      = pos,
     }
 end
 
@@ -160,7 +165,7 @@ xi.garrison.rollNPCs = function(zone, allyInfo, quantity)
 end
 
 -- Spawns and npc for the given zone and with the given name, look, pose. Uses dynamic entities
-xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look)
+xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look, minLevel, maxLevel)
     local mob = zone:insertDynamicEntity({
         objtype               = xi.objType.MOB,
         allegiance            = xi.allegiance.PLAYER,
@@ -171,6 +176,8 @@ xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look)
         rotation              = pos[4],
         look                  = look,
         groupId               = groupId,
+        minLevel              = minLevel,
+        maxLevel              = maxLevel,
         groupZoneId           = xi.zone.GM_HOME,
         releaseIdOnDisappear  = true,
         specialSpawnAnimation = true,
@@ -227,7 +234,7 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
     end
 
     for _, npcData in pairs(npcs) do
-        local mob = xi.garrison.spawnNPC(zone, zoneData, npcData.pos, npcData.name, allyInfo.groupId, npcData.look)
+        local mob = xi.garrison.spawnNPC(zone, zoneData, npcData.pos, npcData.name, allyInfo.groupId, npcData.look, allyInfo.minLevel, allyInfo.maxLevel)
         -- Note: This does change the mob level because ally npcs are of type mob, and
         -- level_restriction is only applied to PCs. However, we need the status to validate that the
         -- npcs are part of the garrison.

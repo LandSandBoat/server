@@ -15,9 +15,6 @@ zoneObject.onInitialize = function(zone)
     end
 
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
-
-    GetMobByID(ID.mob.FLOCKBOCK):setRespawnTime(math.random(3600, 7200))
-
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 end
 

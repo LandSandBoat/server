@@ -108,4 +108,5 @@ private:
 
     bool              m_firstSpell{ true };
     timer::time_point m_LastRoamScript{ timer::time_point::min() };
+    uint16_t          m_tpThreshold{ 1000 };
 };

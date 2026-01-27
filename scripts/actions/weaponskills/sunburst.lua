@@ -20,6 +20,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.mnd_wsc = 0.4
     params.skill = xi.skill.STAFF
     params.includemab = true
+    params.dStat = xi.mod.INT
     -- 50/50 shot of being light or dark
     params.ele = xi.element.LIGHT
     if math.random(1, 100) <= 50 then

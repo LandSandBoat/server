@@ -205,7 +205,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getAnimationSub() == 1 then
         mob:setLocalVar('skill_tp', mob:getTP())
     end
@@ -244,7 +244,16 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { chance = 20, power = 100 })
+    local pTable =
+    {
+        chance         = 20,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.ICE,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
 entity.onMobDisengage = function(mob)

@@ -65,6 +65,16 @@ entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:setMod(xi.mod.POWER_MULTIPLIER_SPELL, 15)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -14,14 +14,18 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.STORETP, 55) -- 10 hits to 1000 TP with 200 delay
 end
 
 entity.onMobDeath = function(mob, player, optParams)

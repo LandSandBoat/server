@@ -25,4 +25,15 @@ entity.onMobSpawn = function(mob)
     })
 end
 
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.CURE_V,
+        xi.magic.spell.PARALYGA,
+        xi.magic.spell.SILENCEGA,
+    }
+
+    return spellList[math.random(1, #spellList)]
+end
+
 return entity

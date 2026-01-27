@@ -8,7 +8,7 @@ mixins = { require('scripts/mixins/families/chariot') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getHPP() > 25 then
         return 0
     elseif math.random(1, 2) == 2 then

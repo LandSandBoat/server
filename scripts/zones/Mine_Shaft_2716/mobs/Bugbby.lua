@@ -14,6 +14,10 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.BIND)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()

@@ -24,27 +24,49 @@ local content = BattlefieldMission:new({
     mission       = xi.mission.id.cop.DAWN,
     requiredVar   = 'Mission[6][840]Status',
     requiredValue = 1,
+    hasWipeGrace  = false,
 
     grantXP = 2000,
     title   = xi.title.AVERTER_OF_THE_APOCALYPSE,
 })
 
+local playerCoords =
+{
+    [1] = { x = -520.000, y = -120.000, z =  493.778, r = 190 },
+    [2] = { x =  520.000, y =    0.000, z =  493.778, r = 190 },
+    [3] = { x = -520.000, y =  120.000, z = -545.538, r = 190 },
+}
+
+local prisheCoords =
+{
+    [1] = { x = -526.678, y = -120.000, z =  509.175, r = 192 },
+    [2] = { x =  513.225, y =    0.000, z =  509.710, r = 192 },
+    [3] = { x = -527.256, y =  120.000, z = -533.638, r = 192 },
+}
+
+local selhteusCoords =
+{
+    [1] = { x = -513.769, y = -120.000, z =  509.175, r = 170 },
+    [2] = { x =  531.881, y =    0.000, z =  510.375, r = 170 },
+    [3] = { x = -506.980, y =  120.000, z = -533.638, r = 170 },
+}
+
 function content:setupBattlefield(battlefield)
-    battlefield:setLocalVar('instantKick', 1)
-    local baseID = empyrealParadoxID.mob.PROMATHIA + (battlefield:getArea() - 1) * 2
-    local pos    = GetMobByID(baseID):getSpawnPos()
+    local battlefieldArea = battlefield:getArea()
+    local initiatorId, _  = battlefield:getInitiator()
+    local initiator       = GetPlayerByID(initiatorId)
+    if initiator then
+        battlefield:setLocalVar('initRace', initiator:getRace())
+    end
 
-    -- TODO: Get table of spawn positions for Allies and set exactly.  Rot value
-    -- is not accurate.  lookAt is used to workaround at this time.
-
-    local prishe = battlefield:insertEntity(11, true, true)
-    prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
-    prishe:lookAt(pos)
+    local prishe    = battlefield:insertEntity(11, true, true)
+    local prishePos = prisheCoords[battlefieldArea]
+    prishe:setSpawn(prishePos.x, prishePos.y, prishePos.z, prishePos.r)
     prishe:spawn()
 
-    local selhteus = battlefield:insertEntity(12, true, true)
-    selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
-    prishe:lookAt(pos)
+    local selhteus    = battlefield:insertEntity(12, true, true)
+    local selhteusPos = selhteusCoords[battlefieldArea]
+    selhteus:setSpawn(selhteusPos.x, selhteusPos.y, selhteusPos.z, selhteusPos.r)
     selhteus:spawn()
 end
 
@@ -52,23 +74,17 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
     local battlefield     = player:getBattlefield()
     local battlefieldArea = battlefield:getArea()
     local phaseTwoMobId   = empyrealParadoxID.mob.PROMATHIA + (battlefieldArea - 1) * 2 + 1
+    local playerPos       = playerCoords[battlefieldArea]
+
+    player:setPos(playerPos.x, playerPos.y, playerPos.z, playerPos.r)
 
     -- Bail out if anyone else got here first
     if GetMobByID(phaseTwoMobId):isSpawned() then
         return
     end
 
-    -- Set up the Arena for Phase 2
+    -- Spawn Promathia phase 2
     SpawnMob(phaseTwoMobId)
-
-    -- Reset allies
-    local bcnmAllies = battlefield:getAllies()
-    for _, ally in pairs(bcnmAllies) do
-        ally:resetLocalVars()
-        local spawn = ally:getSpawnPos()
-
-        ally:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
-    end
 end
 
 function content:onEventFinishWin(player, csid, option, npc)
@@ -86,10 +102,32 @@ content.groups =
         },
 
         allDeath = function(battlefield, mob)
-            local players = battlefield:getPlayers()
+            local battlefieldArea = battlefield:getArea()
 
+            -- Reposition Prishe and Selhteus
+            local bcnmAllies = battlefield:getAllies()
+            for _, ally in pairs(bcnmAllies) do
+                if ally:isMob() then
+                    ally:resetLocalVars()
+
+                    if ally:getPool() == xi.mobPools.PRISHE_DAWN then
+                        local prishePos = prisheCoords[battlefieldArea]
+                        ally:setPos(prishePos.x, prishePos.y, prishePos.z, prishePos.r)
+
+                        -- Reset Prishe's engage wait time
+                        ally:setLocalVar('[helperNpc]engageWaitTime', 180)
+                        ally:setLocalVar('engageWait', GetSystemTime() + 180)
+
+                    elseif ally:getPool() == xi.mobPools.SELHTEUS_DAWN then
+                        local selhteusPos = selhteusCoords[battlefieldArea]
+                        ally:setPos(selhteusPos.x, selhteusPos.y, selhteusPos.z, selhteusPos.r)
+                    end
+                end
+            end
+
+            local players = battlefield:getPlayers()
             for _, player in pairs(players) do
-                player:startEvent(32004, battlefield:getArea())
+                player:startEvent(32004, battlefieldArea)
             end
         end,
     },

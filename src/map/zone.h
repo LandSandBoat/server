@@ -35,7 +35,7 @@
 #include "campaign_handler.h"
 #include "common/logging.h"
 #include "packets/basic.h"
-#include "spawn_group.h"
+#include "spawn_slot.h"
 #include "trigger_area.h"
 
 //
@@ -44,6 +44,7 @@
 
 enum class Weather : uint16_t;
 class CNavMesh;
+class SpawnHandler;
 class ZoneLos;
 
 enum ZONEID : uint16
@@ -652,12 +653,16 @@ public:
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
-    CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
-    CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
+    CBattlefieldHandler*          m_BattlefieldHandler; // BCNM Instances in this zone
+    CCampaignHandler*             m_CampaignHandler;    // WOTG campaign information for this zone
+    std::unique_ptr<SpawnHandler> m_spawnHandler;       // Handles mob respawns
 
-    std::unique_ptr<CNavMesh>                       m_navMesh;
-    std::unique_ptr<ZoneLos>                        lineOfSight;
-    std::map<uint32_t, std::unique_ptr<spawnGroup>> m_spawnGroups;
+    auto spawnHandler() const -> SpawnHandler*;
+
+    std::unique_ptr<CNavMesh> m_navMesh;
+    std::unique_ptr<ZoneLos>  lineOfSight;
+
+    std::map<uint32_t, std::unique_ptr<SpawnSlot>> m_spawnSlots; // add unique slots to zone
 
     timer::time_point m_LoadedAt; // The time the zone was loaded
 
@@ -700,8 +705,9 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskManager::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskManager::CTask* ZoneTimer; // The pointer to the created timer is necessary for the possibility of stopping it
     CTaskManager::CTask* ZoneTimerTriggerAreas;
+    CTaskManager::CTask* SpawnHandlerTimer;
 
     triggerAreaList_t m_triggerAreaList;
 

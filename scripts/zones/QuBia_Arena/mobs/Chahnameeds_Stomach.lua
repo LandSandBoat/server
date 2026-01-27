@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 100)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skillList =
     {
         xi.mobSkill.INFERNAL_PESTILENCE,

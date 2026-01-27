@@ -26,9 +26,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PETRIFY)
 
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 5)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
-
     mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 3000)
 end

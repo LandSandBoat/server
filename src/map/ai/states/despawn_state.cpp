@@ -25,23 +25,33 @@
 #include "entities/mobentity.h"
 #include "enums/four_cc.h"
 #include "packets/s2c/0x038_schedulor.h"
+#include "spawn_handler.h"
 #include "zone.h"
 
 CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 : CState(_PEntity, _PEntity->targid)
+, despawnTime_(timer::now() + (instantDespawn ? 0s : 3s))
 {
     if (!instantDespawn && (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN)))
     {
         _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(_PEntity, _PEntity, FourCC::FadeOut));
     }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(_PEntity); PMob->m_AllowRespawn && PMob->loc.zone != nullptr)
+    {
+        PMob->loc.zone->spawnHandler()->registerForRespawn(PMob);
+    }
 }
 
 bool CDespawnState::Update(timer::time_point tick)
 {
-    if (tick > GetEntryTime() + 3s && !IsCompleted() && !(static_cast<CMobEntity*>(m_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN))
+    if (!IsCompleted() && !(static_cast<CMobEntity*>(m_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN))
     {
-        static_cast<CMobEntity*>(m_PEntity)->OnDespawn(*this);
-        Complete();
+        if (tick >= despawnTime_)
+        {
+            static_cast<CMobEntity*>(m_PEntity)->OnDespawn(*this);
+            Complete();
+        }
     }
     return IsCompleted();
 }

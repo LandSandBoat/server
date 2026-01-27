@@ -51,7 +51,8 @@ commandObj.onTrigger = function(player)
         --                       groupId ---^        ^--- groupZoneId
         groupId = 5,
         groupZoneId = 154,
-
+        minLevel = 90,
+        maxLevel = 90,
         -- You can provide an onMobDeath function if you want: if you don't
         -- add one, an empty one will be inserted for you behind the scenes.
         onMobDeath = function(mob, playerArg, optParams)

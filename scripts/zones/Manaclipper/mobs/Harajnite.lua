@@ -1,3 +1,7 @@
+-- To Do: Venom Shell poison tick rate is 24/HP per tick based on retail captures.
+-- To Do: Can be fished up multiple times in a row seemingly without any cooldown based on retail captures, but the chance to hook this NM is very low.
+-- Note: Can be fished up with any combination of fishing skill and rod/bait based on retail captures.
+-- To Do: Fix uragnite family mixin. Right now, they do not go into their shells to heal.
 -----------------------------------
 -- Area: Manaclipper
 --   NM: Harajnite

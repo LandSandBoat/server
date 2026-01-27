@@ -235,7 +235,7 @@ end
 -- to be removed once damage is overhauled
 xi.job_utils.summoner.calculateTPReturn = function(avatar, target, damage, numHits)
     if damage ~= 0 and numHits > 0 then -- absorbed hits still give TP, though we can't know how many hits actually connected in the current avatar damage formulas
-        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(avatar, target)
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(avatar, false)
         tpReturn = tpReturn + 10 * (numHits - 1) -- extra hits give 10 TP each
         avatar:setTP(tpReturn)
     else

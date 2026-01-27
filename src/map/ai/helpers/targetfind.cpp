@@ -73,7 +73,14 @@ void CTargetFind::reset()
 
 void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint16 targetFlags)
 {
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
     m_findFlags     = findFlags;
+    m_targetFlags   = targetFlags;
     m_zone          = m_PBattleEntity->getZone();
     m_PTarget       = nullptr;
     m_PRadiusAround = &PTarget->loc.p;
@@ -83,11 +90,20 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint
 
 void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, uint16 targetFlags)
 {
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
     TracyZoneScoped;
     m_findFlags   = findFlags;
     m_targetFlags = targetFlags;
     m_radius      = radius;
     m_zone        = m_PBattleEntity->getZone();
+
+    // Always set each time (CTargetFind objects may be reused between actions)
+    m_selfCenteredAoE = false;
 
     if (radiusType == AOE_RADIUS::ATTACKER)
     {
@@ -208,7 +224,11 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             // Is the monster casting on a player..
             if (m_findType == FIND_TYPE::MONSTER_PLAYER)
             {
-                if (m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER || (m_PMasterTarget->objtype == TYPE_MOB && m_PMasterTarget->allegiance == ALLEGIANCE_TYPE::PLAYER))
+                // Treat AoE as player-side if either:
+                // 1) The caster is player-aligned (trust, pet, charmed, etc.), OR
+                // 2) The base target is a player-aligned mob (mission / battlefield allies)
+                if (m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER ||
+                    (m_PMasterTarget->objtype == TYPE_MOB && m_PMasterTarget->allegiance == ALLEGIANCE_TYPE::PLAYER))
                 {
                     addAllInZone(m_PMasterTarget, withPet);
                 }
@@ -223,6 +243,12 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
 
 void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, uint16 targetFlags, uint8 aoeType)
 {
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
     m_findFlags   = findFlags;
     m_targetFlags = targetFlags;
     m_conal       = true;
@@ -246,9 +272,6 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
 
     m_CPoint.x = cosf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->x;
     m_CPoint.z = sinf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->z;
-
-    // ShowDebug("angle %f, left %f, right %f, distance %f, A (%f, %f) B (%f, %f) C (%f, %f)", angle, leftAngle, rightAngle, distance, m_APoint->x,
-    // m_APoint->z, m_BPoint.x, m_BPoint.z, m_CPoint.x, m_CPoint.z); ShowDebug("Target: (%f, %f)", PTarget->loc.p.x, PTarget->loc.p.z);
 
     // precompute for next stage
     m_BPoint.x = m_BPoint.x - m_APoint->x;
@@ -453,10 +476,15 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 
 /*
 validEntity will check if the given entity can be targeted in the AoE.
-
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    // Assume entity is valid only need to check target not null
+    if (PTarget == nullptr)
+    {
+        return false;
+    }
+
     // Check if entity is already in list
     // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
@@ -485,6 +513,21 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     if (PTarget->PAI->IsUntargetable())
     {
         return false;
+    }
+
+    // -------------------------------------------------
+    // IMPORTANT: Benediction/self-centered ally-only check
+    // This must run BEFORE the "first target always allowed" short-circuit.
+    // -------------------------------------------------
+    if (m_selfCenteredAoE &&
+        (m_targetFlags & TARGET_ANY_ALLEGIANCE) == 0 &&
+        (m_targetFlags & TARGET_ENEMY) == 0)
+    {
+        CBattleEntity* PCasterMaster = findMaster(m_PBattleEntity);
+        if (PCasterMaster && PCasterMaster->allegiance != PTarget->allegiance)
+        {
+            return false;
+        }
     }
 
     // this is first target, always add him first

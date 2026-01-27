@@ -152,7 +152,7 @@ entity.onMobEngage = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local form         = mob:getAnimationSub()
     local shouldOisoya = mob:getLocalVar('[Tenzen]ShouldOisoya') == 1
     local skill        = 0

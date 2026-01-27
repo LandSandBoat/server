@@ -69,6 +69,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
@@ -106,6 +107,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.THE_VIVISECTOR)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

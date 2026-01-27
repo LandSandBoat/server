@@ -105,7 +105,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     -- When Ix'Aern DRG readies a mob skill, all his pets use a corresponding breath attack
     local mobskill, breathSkill = utils.randomEntryIdx(breathList)
     for _, i in ipairs(pets) do

@@ -12,4 +12,8 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
 end
 
+entity.onMobSpellChoose = function(mob, target, spellId)
+    return xi.magic.spell.DRAIN
+end
+
 return entity

@@ -82,7 +82,10 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -7500)
-    mob:setMod(xi.mod.UDMGPHYS, -5000)
+    mob:setMod(xi.mod.SLASH_SDT, -5000)
+    mob:setMod(xi.mod.PIERCE_SDT, -5000)
+    mob:setMod(xi.mod.IMPACT_SDT, -5000)
+    mob:setMod(xi.mod.HTH_SDT, -5000)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setDelay(2250)
 

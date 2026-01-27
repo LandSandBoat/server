@@ -29,11 +29,6 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
         target:sendRaise(2)
-    else
-        -- NPC ally "raise" behavior (instant revive style)
-        target:addHP(target:getMaxHP())
-        target:addMP(target:getMaxMP())
-        target:entityAnimationPacket(xi.animationString.SPECIAL_00)
     end
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)

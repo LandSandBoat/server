@@ -2,6 +2,7 @@
 -- Divine Punishers
 -- Balga's Dais BCNM60, Moon Orb
 -- !additem 1130
+-- TODO : Capture more accurate spell list for Zuu Xowu the Darksmoke
 -----------------------------------
 local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------

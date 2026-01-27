@@ -202,8 +202,8 @@ enum class ATTACK_TYPE : uint8
     PHYSICAL = 1,
     MAGICAL  = 2,
     RANGED   = 3,
-    SPECIAL  = 4,
-    BREATH   = 5,
+    BREATH   = 4,
+    SPECIAL  = 5,
 };
 DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
 

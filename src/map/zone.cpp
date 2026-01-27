@@ -51,6 +51,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "navmesh.h"
 #include "party.h"
 #include "recast_container.h"
+#include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "zone_entities.h"
@@ -79,18 +80,27 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     ZoneTimer             = nullptr;
     ZoneTimerTriggerAreas = nullptr;
+    SpawnHandlerTimer     = nullptr;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = Weather::None;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
+    m_spawnHandler       = std::make_unique<SpawnHandler>(this);
 
     // settings should load first
     LoadZoneSettings();
 
     LoadZoneLines();
     LoadZoneWeather();
+
+    SpawnHandlerTimer = CTaskManager::getInstance()->AddTask(m_zoneName + "_SpawnHandler", timer::now(), this, CTaskManager::TASK_INTERVAL, kSpawnHandlerInterval, [](const timer::time_point tick, const CTaskManager::CTask* PTask)
+                                                             {
+                                                                 const auto* PZone = std::any_cast<CZone*>(PTask->m_data);
+                                                                 PZone->spawnHandler()->Tick(tick);
+                                                                 return 0;
+                                                             });
 
     // NOTE: Heavy resources like Navmesh are now loaded outside of the constructor in zoneutils::LoadZoneList
 }
@@ -165,6 +175,11 @@ auto CZone::GetWeather() const -> Weather
 auto CZone::GetWeatherChangeTime() const -> uint32
 {
     return m_WeatherChangeTime;
+}
+
+auto CZone::spawnHandler() const -> SpawnHandler*
+{
+    return m_spawnHandler.get();
 }
 
 const std::string& CZone::getName()
@@ -945,7 +960,6 @@ void CZone::createZoneTimers()
         PZone->CheckTriggerAreas();
         return 0;
     });
-    // clang-format on
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)

@@ -1,159 +1,213 @@
 -- Zone: Lower Jeuno (245)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = zones[xi.zone.LOWER_JEUNO]
------------------------------------
 
 local lowerJeunoGlobal =
 {
-    --[[..............................................................................................
-        Community Service Quest: player clicks a streetlamp
-        ..............................................................................................]]
-    lampTrigger = function(player, npc)
-        local lampId = npc:getID()
-        local lampNum = lampId - ID.npc.STREETLAMP_OFFSET
-        local lampCs = 120 + lampNum
-
-        if GetServerVariable('[JEUNO]CommService') == player:getID() then
-            local hour = VanadielHour()
-            if hour >= 20 and hour < 21 then
-                player:startEvent(lampCs, 4) -- It is too early to light it.  You must wait until nine o'clock.
-            elseif hour >= 21 or hour < 1 then
-                if npc:getAnimation() == xi.anim.OPEN_DOOR then
-                    player:startEvent(lampCs, 2) -- The lamp is already lit.
-                else
-                    player:startEvent(lampCs, 1, lampNum) -- Light the lamp? Yes/No
-                end
-            else
-                player:startEvent(lampCs, 3) -- You have failed to light the lamps in time.
-            end
-
-        else
-            if npc:getAnimation() == xi.anim.OPEN_DOOR then
-                player:startEvent(lampCs, 5) -- The lamp is lit.
-            else
-                player:startEvent(lampCs, 6) -- You examine the lamp. It seems that it must be lit manually.
-            end
-        end
-    end,
-
-    --[[..............................................................................................
-        Community Service Quest: end of event triggered by lamp click
-        ..............................................................................................]]
-    lampEventFinish = function(player, csid, option, lampNum)
-        local lampId = ID.npc.STREETLAMP_OFFSET + lampNum
-        local lampCs = 120 + lampNum
-
-        if csid == lampCs and option == 1 then
-            GetNPCByID(lampId):setAnimation(xi.anim.OPEN_DOOR)
-
-            local lampsRemaining = 12
-            for i = 0, 11 do
-                local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-                if lamp and lamp:getAnimation() == xi.anim.OPEN_DOOR then
-                    lampsRemaining = lampsRemaining - 1
-                end
-            end
-
-            if lampsRemaining == 0 then
-                player:messageSpecial(ID.text.LAMP_MSG_OFFSET)
-            else
-                player:messageSpecial(ID.text.LAMP_MSG_OFFSET + 1, lampsRemaining)
-            end
-        end
-    end,
-
     --[[..............................................................................................
         the path that Vhana Ehgaklywha will walk to light the lamps
         ..............................................................................................]]
     lampPath = {
         [1] =
         {
-            { x = 0, y = 0, z = 19 },
-            { x = -2, y = 0, z = 13 },
-            { x = -5, y = 0, z = 13 },
-            { x = -7, y = 0, z = 12 },
-            { x = -9, y = 0, z = 12 },        -- lamp 12 path 5
+            { x =    5.934, y = -2.512, z =    55.67, rotation =  23 },
+            { x =      8.9, y = -2.076, z =    53.77, rotation =  23 },
+            { x =   11.855, y = -1.642, z =   51.876, rotation =  23 },
+            { x =   14.842, y = -1.204, z =   49.962, rotation =  23 },
+            { x =   14.963, y = -1.151, z =   49.477, rotation =  78 },
+            { x =   13.895, y =     -1, z =   46.207, rotation =  58 },
+            { x =   14.374, y =     -1, z =    42.94, rotation =  58 },
+            { x =   14.379, y =     -1, z =   42.076, rotation =  90 },
+            { x =   12.069, y =     -1, z =    39.03, rotation =  90 },
+            { x =   11.751, y =     -1, z =   38.915, rotation = 113 },
+            { x =     8.51, y =     -1, z =   37.747, rotation = 113 },
+            { x =    7.765, y = -0.932, z =   37.317, rotation =  87 },
+            { x =     6.72, y = -0.413, z =   35.706, rotation =  87 },
+            { x =    5.909, y =  0.001, z =   34.146, rotation =  60 },
+            { x =    6.192, y =  0.002, z =   30.947, rotation =  60 },
+            { x =    6.484, y =  0.002, z =   27.645, rotation =  60 },
+            { x =    6.348, y =  0.002, z =   27.377, rotation =  85 },
+            { x =    4.553, y =  0.002, z =   24.331, rotation =  85 },
+            { x =    2.751, y =  0.001, z =   21.273, rotation =  85 },
+            { x =    0.956, y =  0.001, z =   18.226, rotation =  85 },
+            { x =   -0.877, y =      0, z =   15.113, rotation =  85 },
+            { x =   -2.156, y =      0, z =    13.37, rotation = 126 },
+            { x =   -5.403, y =      0, z =   13.215, rotation = 126 },
+            { x =   -8.623, y =      0, z =   13.062, rotation = 126 },
+            { x =   -8.948, y =      0, z =   13.054, rotation = 144, wait = 5000 }, -- lamp 12 path 5
         },
         [2] =
         {
-            { x = -10, y = 0, z = 11 },
-            { x = -18, y = 0, z = 15 },
-            { x = -25, y = 0, z = 3 },
-            { x = -19, y = 0, z = -1 },
-            { x = -17, y = 0, z = -2 },
-            { x = -18, y = 0, z = -5 },
-            { x = -19, y = 0, z = -4 },       -- lamp 11 path 12
+            { x =   -8.984, y =      0, z =   12.784, rotation =  61 },
+            { x =   -8.764, y =      0, z =    9.607, rotation =  61 },
+            { x =   -8.538, y =      0, z =    6.352, rotation =  61 },
+            { x =   -8.528, y =      0, z =    5.084, rotation =  80 },
+            { x =   -9.934, y =      0, z =    1.811, rotation =  80 },
+            { x =  -11.238, y =      0, z =   -1.087, rotation = 111 },
+            { x =  -14.291, y =      0, z =   -2.412, rotation = 111 },
+            { x =  -17.594, y =      0, z =   -3.846, rotation = 111 },
+            { x =  -18.789, y =      0, z =   -4.358, rotation = 153, wait = 5000 }, -- lamp 11 path 12
         },
         [3] =
         {
-            { x = -19, y = 0, z = -8 },
-            { x = -30, y = 0, z = -27 },
-            { x = -32, y = 0, z = -29 },
-            { x = -33, y = 0, z = -29 },
-            { x = -33, y = 0, z = -29 },      -- lamp 10 path 17
+            { x =  -18.895, y =      0, z =   -4.738, rotation =  67 },
+            { x =   -19.21, y =      0, z =   -7.901, rotation =  86 },
+            { x =  -21.065, y =      0, z =  -10.972, rotation =  86 },
+            { x =  -22.901, y =      0, z =   -14.01, rotation =  86 },
+            { x =  -24.749, y =      0, z =   -17.07, rotation =  86 },
+            { x =  -26.632, y =      0, z =  -20.185, rotation =  86 },
+            { x =  -28.622, y =      0, z =  -23.479, rotation =  86 },
+            { x =   -30.45, y =      0, z =  -26.505, rotation =  86 },
+            { x =  -30.952, y =      0, z =  -27.255, rotation = 105 },
+            { x =      -33, y =      0, z =  -28.519, rotation = 143, wait = 5000 }, -- lamp 10 path 17
         },
         [4] =
         {
-            { x = -32, y = 0, z = -39 },
-            { x = -35, y = 0, z = -43 },
-            { x = -45, y = 0, z = -47 },      -- lamp 9 path 20
+            { x =  -32.928, y =      0, z =  -28.862, rotation =  55 },
+            { x =  -32.264, y =      0, z =  -32.044, rotation =  55 },
+            { x =  -31.596, y =      0, z =  -35.251, rotation =  55 },
+            { x =  -31.384, y =      0, z =  -37.103, rotation =  84 },
+            { x =  -33.125, y =      0, z =  -40.211, rotation =  84 },
+            { x =  -34.822, y =      0, z =  -43.239, rotation =  84 },
+            { x =  -35.589, y =      0, z =  -44.251, rotation = 114 },
+            { x =  -38.636, y =      0, z =  -45.263, rotation = 114 },
+            { x =  -41.683, y =      0, z =  -46.276, rotation = 114 },
+            { x =  -44.706, y =      0, z =   -47.28, rotation = 114 },
+            { x =  -44.812, y =      0, z =  -47.316, rotation = 146, wait = 5000 }, -- lamp 9 path 20
         },
         [5] =
         {
-            { x = -53, y = 0, z = -61 },      -- lamp 8 path 21
+            { x =  -44.894, y =      0, z =  -47.463, rotation =  84 },
+            { x =  -46.653, y =      0, z =   -50.59, rotation =  84 },
+            { x =  -48.392, y =      0, z =  -53.684, rotation =  84 },
+            { x =  -50.138, y =      0, z =  -56.789, rotation =  84 },
+            { x =  -51.941, y =      0, z =  -59.996, rotation =  84 },
+            { x =  -52.184, y =      0, z =  -60.428, rotation = 133, wait = 5000 }, -- lamp 8 path 21
         },
         [6] =
         {
-            { x = -42, y = 0, z = -49 },
-            { x = -41, y = 0, z = -49 },
-            { x = -40, y = 0, z = -49 },
-            { x = -40, y = 0, z = -49 },
-            { x = -40, y = 0, z = -50 },
-            { x = -46, y = 6, z = -63 },
-            { x = -50, y = 6, z = -70 },
-            { x = -58, y = 6, z = -75 },
-            { x = -61, y = 6, z = -75 },      -- lamp 7 path 30
+            { x =  -52.123, y =      0, z =  -60.359, rotation = 221 },
+            { x =   -49.58, y =      0, z =  -57.489, rotation = 221 },
+            { x =  -47.002, y =      0, z =   -54.58, rotation = 221 },
+            { x =  -44.423, y =      0, z =  -51.671, rotation = 221 },
+            { x =  -42.018, y =      0, z =  -48.957, rotation = 221 },
+            { x =  -41.091, y =      0, z =  -48.316, rotation =  22 },
+            { x =  -39.621, y =  0.031, z =  -49.281, rotation =  80 },
+            { x =  -40.101, y =  0.555, z =  -50.385, rotation =  80 },
+            { x =    -40.6, y =  1.101, z =  -51.532, rotation =  80 },
+            { x =  -41.076, y =   1.62, z =  -52.625, rotation =  80 },
+            { x =  -41.546, y =  2.135, z =  -53.707, rotation =  80 },
+            { x =  -42.017, y =  2.649, z =  -54.789, rotation =  80 },
+            { x =  -42.493, y =  3.168, z =  -55.881, rotation =  80 },
+            { x =  -42.968, y =  3.688, z =  -56.974, rotation =  80 },
+            { x =  -43.543, y =  4.316, z =  -58.296, rotation =  80 },
+            { x =  -44.023, y =  4.841, z =    -59.4, rotation =  80 },
+            { x =  -44.565, y =  5.433, z =  -60.646, rotation =  80 },
+            { x =  -45.041, y =  5.953, z =  -61.738, rotation =  80 },
+            { x =  -45.166, y =  5.999, z =  -61.981, rotation =  85 },
+            { x =  -46.912, y =  5.999, z =  -65.056, rotation =  85 },
+            { x =  -48.664, y =  5.999, z =  -68.143, rotation =  85 },
+            { x =  -50.215, y =  5.999, z =  -70.633, rotation = 104 },
+            { x =  -53.477, y =  5.999, z =  -72.771, rotation = 104 },
+            { x =  -56.673, y =  5.999, z =  -74.867, rotation = 104 },
+            { x =  -57.726, y =  5.999, z =  -75.481, rotation = 136 },
+            { x =  -60.784, y =  5.999, z =  -74.875, rotation = 136 },
+            { x =  -60.784, y =  5.999, z =  -74.875, rotation = 147, wait = 5000 }, -- lamp 7 path 30
         },
         [7] =
         {
-            { x = -61, y = 6, z = -83 },
-            { x = -66, y = 6, z = -93 },
-            { x = -73, y = 6, z = -96 },      -- lamp 6 path 33
+            { x =  -60.789, y =  5.999, z =  -75.134, rotation =  64 },
+            { x =  -60.853, y =  5.999, z =  -78.358, rotation =  64 },
+            { x =  -60.919, y =  5.999, z =  -81.685, rotation =  64 },
+            { x =  -61.037, y =  5.999, z =  -83.535, rotation =  85 },
+            { x =  -62.776, y =  5.999, z =  -86.554, rotation =  85 },
+            { x =  -64.554, y =  5.999, z =   -89.64, rotation =  85 },
+            { x =  -66.293, y =  5.999, z =  -92.657, rotation =  85 },
+            { x =  -66.598, y =  5.999, z =  -92.802, rotation = 109 },
+            { x =  -69.838, y =  5.999, z =  -94.343, rotation = 109 },
+            { x =  -72.879, y =  5.999, z =  -95.789, rotation = 109 },
+            { x =  -72.879, y =  5.999, z =  -95.789, rotation = 146, wait = 5000 }, -- lamp 6 path 33
         },
         [8] =
         {
-            { x = -75, y = 6, z = -112 },
-            { x = -77, y = 6, z = -116 },
-            { x = -83, y = 1, z = -125 },
-            { x = -84, y = 0, z = -127 },
-            { x = -86, y = 0, z = -126 },
-            { x = -81, y = 0, z = -111 },     -- lamp 5 path 39
+            { x =  -72.903, y =  5.999, z =  -95.956, rotation =  70 },
+            { x =  -73.375, y =  5.999, z =  -99.132, rotation =  70 },
+            { x =  -73.825, y =  5.999, z = -102.167, rotation =  70 },
+            { x =  -74.299, y =  5.999, z = -105.356, rotation =  70 },
+            { x =  -74.769, y =  5.999, z = -108.519, rotation =  70 },
+            { x =  -75.234, y =  5.999, z = -111.657, rotation =  70 },
+            { x =  -75.523, y =  5.887, z = -112.788, rotation =  85 },
+            { x =  -76.283, y =  5.367, z = -114.079, rotation =  85 },
+            { x =  -77.073, y =  4.824, z = -115.423, rotation =  85 },
+            { x =  -77.827, y =  4.308, z = -116.704, rotation =  85 },
+            { x =  -78.617, y =  3.765, z = -118.048, rotation =  85 },
+            { x =  -79.371, y =  3.249, z = -119.328, rotation =  85 },
+            { x =  -80.161, y =  2.706, z = -120.672, rotation =  85 },
+            { x =  -80.921, y =  2.185, z = -121.964, rotation =  85 },
+            { x =  -81.724, y =  1.635, z = -123.329, rotation =  85 },
+            { x =  -82.471, y =  1.122, z = -124.599, rotation =  85 },
+            { x =  -83.268, y =  0.576, z = -125.954, rotation =  85 },
+            { x =  -84.027, y =  0.055, z = -127.245, rotation =  85 },
+            { x =  -84.328, y =      0, z = -127.243, rotation = 150 },
+            { x =  -86.326, y =      0, z = -125.895, rotation = 205 },
+            { x =  -85.273, y =      0, z = -122.806, rotation = 205 },
+            { x =  -84.221, y =      0, z = -119.718, rotation = 205 },
+            { x =  -83.101, y =      0, z = -116.432, rotation = 205 },
+            { x =  -82.052, y =      0, z = -113.356, rotation = 205 },
+            { x =  -81.104, y =      0, z = -110.589, rotation = 184, wait = 5000 }, -- lamp 5 path 39
         },
         [9] =
         {
-            { x = -89, y = 0, z = -123 },     -- lamp 4 path 40
+            { x =   -81.13, y =      0, z = -110.594, rotation =  85 },
+            { x =  -82.931, y =      0, z = -113.667, rotation =  85 },
+            { x =  -84.752, y =      0, z = -116.774, rotation =  85 },
+            { x =  -86.572, y =      0, z =  -119.88, rotation =  85 },
+            { x =   -88.38, y =      0, z = -122.965, rotation =  85 },
+            { x =  -88.578, y =      0, z = -123.302, rotation = 137, wait = 5000 }, -- lamp 4 path 40
         },
         [10] =
         {
-            { x = -88, y = 0, z = -134 },
-            { x = -88, y = 0, z = -135 },
-            { x = -93, y = 0, z = -143 },
-            { x = -100, y = 0, z = -144 },    -- lamp 3 path 44
+            { x =  -88.574, y =      0, z = -123.392, rotation =  62 },
+            { x =  -88.463, y =      0, z = -126.667, rotation =  62 },
+            { x =  -88.354, y =      0, z = -129.902, rotation =  62 },
+            { x =  -88.244, y =      0, z = -133.124, rotation =  62 },
+            { x =  -88.273, y =      0, z = -135.019, rotation =  84 },
+            { x =  -90.024, y =      0, z = -138.195, rotation =  84 },
+            { x =  -91.713, y =      0, z = -141.258, rotation =  84 },
+            { x =  -92.645, y =      0, z = -142.416, rotation = 118 },
+            { x =  -95.787, y =      0, z = -143.197, rotation = 118 },
+            { x =  -98.953, y =      0, z = -143.983, rotation = 118 },
+            { x =  -100.44, y =      0, z = -144.353, rotation = 145, wait = 5000 }, -- lamp 3 path 44
         },
         [11] =
         {
-            { x = -109, y = 0, z = -158 },    -- lamp 2 path 45
+            { x = -100.486, y =      0, z = -144.431, rotation =  86 },
+            { x = -102.414, y =      0, z =  -147.64, rotation =  86 },
+            { x = -104.247, y =      0, z = -150.694, rotation =  86 },
+            { x = -106.068, y =      0, z = -153.726, rotation =  86 },
+            { x = -107.941, y =      0, z = -156.846, rotation =  86 },
+            { x = -108.653, y =      0, z = -158.031, rotation = 145, wait = 5000 }, -- lamp 2 path 45
         },
         [12] =
         {
-            { x = -117, y = 0, z = -172 },    -- lamp 1 path 46
+            { x = -108.784, y =      0, z = -158.255, rotation =  85 },
+            { x =  -110.58, y =      0, z = -161.331, rotation =  85 },
+            { x = -112.363, y =      0, z = -164.384, rotation =  85 },
+            { x = -114.206, y =      0, z = -167.539, rotation =  85 },
+            { x = -115.996, y =      0, z = -170.603, rotation =  85 },
+            { x = -116.738, y =      0, z = -171.874, rotation = 145, wait = 5000 }, -- lamp 1 path 46
         },
         [13] =
         {
-            { x = -115, y = 0, z = -182 },
-            { x = -122, y = 0, z = -196 },    -- clear path 48
-            { x = -123, y = 0, z = -196 },     -- end path 49
+            { x = -116.669, y =      0, z = -172.204, rotation =  55 },
+            { x = -116.034, y =      0, z = -175.272, rotation =  55 },
+            { x = -115.368, y =      0, z = -178.493, rotation =  55 },
+            { x = -114.714, y =      0, z =  -181.65, rotation =  55 },
+            { x = -114.721, y =      0, z = -182.185, rotation =  86 },
+            { x =  -116.56, y =      0, z =  -185.22, rotation =  86 },
+            { x =  -118.48, y =      0, z = -188.389, rotation =  86 },
+            { x = -120.468, y =      0, z = -191.669, rotation =  86 },
+            { x = -122.326, y =      0, z = -194.723, rotation =  86, wait = 5000 }, -- end path 49
         },
     },
 }

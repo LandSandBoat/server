@@ -26,10 +26,10 @@
 ---@field onMobRoam? fun(mob: CBaseEntity)
 ---@field onMobDespawn? fun(mob: CBaseEntity)
 ---@field onPlayerAbilityUse? fun(mob: CBaseEntity, player: CBaseEntity, ability: CAbility)
----@field onMobMobskillChoose? fun(mob: CBaseEntity, target: CBaseEntity): integer?
+---@field onMobMobskillChoose? fun(mob: CBaseEntity, target: CBaseEntity, skillId: integer): integer?
 ---@field onMobWeaponSkill? fun(target: CBaseEntity, mob: CBaseEntity, mobSkill: CMobSkill, action: CAction): integer?
 ---@field onMobSkillTarget? fun(target: CBaseEntity, mob: CBaseEntity, mobSkill: CMobSkill): CBaseEntity?
----@field onAdditionalEffect? fun(mob: CBaseEntity, target: CBaseEntity, damage: integer): (integer?, integer?, integer?)
+---@field onAdditionalEffect? fun(mob: CBaseEntity, target: CBaseEntity, damage: integer): (any, any, integer?)
 ---@field onMobSpellChoose? fun(mob: CBaseEntity, target: CBaseEntity, spell: CSpell?): xi.magic.spell|0?, CBaseEntity?
 ---@field onWeaponskillHit? fun(mob: CBaseEntity, attacker: CBaseEntity, weaponskillId: xi.weaponskill)
 ---@field onSpikesDamage? fun(mob: CBaseEntity, target: CBaseEntity, damage: integer): (integer?, integer?, integer?)

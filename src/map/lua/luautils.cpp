@@ -3780,7 +3780,7 @@ std::tuple<int32, uint8, uint8> OnUseWeaponSkill(CBattleEntity* PChar, CBaseEnti
     return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
 }
 
-uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
+uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 chosenSkillId)
 {
     TracyZoneScoped;
 
@@ -3795,7 +3795,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
         return 0;
     }
 
-    auto result = onMobMobskillChoose(PMob, PTarget);
+    auto result = onMobMobskillChoose(PMob, PTarget, chosenSkillId);
     if (!result.valid())
     {
         sol::error err = result;
@@ -3803,7 +3803,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget)
         return 0;
     }
 
-    uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+    uint16 retVal = result.get_type(0) == sol::type::number ? result.template get<uint16>(0) : 0;
     if (retVal > 0)
     {
         return retVal;
@@ -5579,11 +5579,23 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
         {
             PMob->m_minLevel = minLevel;
         }
+        else
+        {
+            // If there is no level set default to 255
+            ShowError("luautils::GenerateDynamicEntity: No minLevel set for mob %s in zone %s. Defaulting to 255.", PMob->name.c_str(), PZone->getName().c_str());
+            PMob->m_minLevel = 255;
+        }
 
         const auto maxLevel = table["maxLevel"].get_or<uint8>(0);
         if (maxLevel > 0)
         {
             PMob->m_maxLevel = maxLevel;
+        }
+        else
+        {
+            // If there is no level set default to 255
+            ShowError("luautils::GenerateDynamicEntity: No maxLevel set for mob %s in zone %s. Defaulting to 255.", PMob->name.c_str(), PZone->getName().c_str());
+            PMob->m_maxLevel = 255;
         }
 
         const auto dropId = table["dropId"].get_or<uint16>(0);

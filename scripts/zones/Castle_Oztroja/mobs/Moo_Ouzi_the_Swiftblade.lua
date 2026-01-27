@@ -69,6 +69,10 @@ entity.phList =
     [ID.mob.MOO_OUZI_THE_SWIFTBLADE - 3] = ID.mob.MOO_OUZI_THE_SWIFTBLADE, -- -38.689 0.191 -101.068
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 303)
     xi.magian.onMobDeath(mob, player, optParams, set{ 892 })

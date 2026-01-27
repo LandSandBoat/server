@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
 end
 
 -- This quest NM has a special JUICED version of Cross Attack that will need to be fixed when mob skills are updated.  It's likely 4X base damage.
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skillList =
     {
         xi.mobSkill.CROSS_ATTACK_1,

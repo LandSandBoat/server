@@ -183,10 +183,14 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     end
 
     local resistRate = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.SONG, xi.skill.SINGING, 0, spellElement, xi.mod.CHR, spellEffect, bonusMagicAcc)
+    if not xi.data.statusEffect.isResistRateSuccessfull(spellEffect, resistRate, 0) then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+        return spellEffect
+    end
+
     if
-        resistRate <= 0.25 or
-        (spellEffect == xi.effect.CHARM_I and
-        target:isMob() and
+        spellEffect == xi.effect.CHARM_I and
+        (not target:isMob() or
         target:getMobMod(xi.mobMod.CHARMABLE) <= 0)
     then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)

@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STORETP, 78)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.BARBED_CRESCENT_1
 end
 

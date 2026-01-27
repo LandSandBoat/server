@@ -34,6 +34,11 @@ local mobRegen = function(mob)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+end
+
 entity.onMobRoam = function(mob)
     mobRegen(mob)
 
@@ -44,12 +49,20 @@ entity.onMobRoam = function(mob)
     end
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
 entity.onMobFight = function(mob, target)
     mobRegen(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 360)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

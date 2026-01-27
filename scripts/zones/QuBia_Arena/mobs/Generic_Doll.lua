@@ -51,7 +51,7 @@ local dollSkillLists =
     [5] = { xi.mobSkill.TYPHOON                             },
 }
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return

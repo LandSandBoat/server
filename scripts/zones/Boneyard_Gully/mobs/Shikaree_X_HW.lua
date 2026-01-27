@@ -9,17 +9,13 @@ local ID = zones[xi.zone.BONEYARD_GULLY]
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DUAL_WIELD, 1)
+    mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.BIND_RES_RANK, 8)
-    -- TODO: Needs gravity res rank
-end
-
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 30)
     mob:setMod(xi.mod.REGAIN, 55)
     mob:setMobAbilityEnabled(false)
     xi.mob.callPets(mob, mob:getID() + 2, { inactiveTime = 3000 })
@@ -69,7 +65,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.DANCING_EDGE,

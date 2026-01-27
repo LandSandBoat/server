@@ -22,6 +22,10 @@ entity.phList =
     [ID.mob.CWN_CYRFF - 1] = ID.mob.CWN_CYRFF, -- -376.974 0.586 343.750
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 191)
 end

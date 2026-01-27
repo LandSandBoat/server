@@ -12,24 +12,18 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.random(10, 12))
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15) -- 15' aggro range
 end
 
-entity.onMobSpawn = function(mob)
-    mob:setMagicCastingEnabled(false)
-end
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.DRAIN,
+        xi.magic.spell.ASPIR,
+    }
 
--- Seems to wait 10ish seconds to cast spells.
--- https://youtu.be/iNzWfVMUxiQ?t=188
--- There is no generic way to do this as far as I know, so set their two spell cast timers to 10~12 seconds
--- TODO: does this only happen on initial engage?
-entity.onMobEngage = function(mob, target)
-    local delay = (1000 * 10) + math.random(0, 2000)
-
-    mob:timer(delay, function(mobArg)
-        mobArg:setMagicCastingEnabled(true)
-        mobArg:castSpell()
-    end)
+    return spellList[math.random(1, #spellList)]
 end
 
 return entity

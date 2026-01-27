@@ -1041,6 +1041,7 @@ INSERT INTO `mob_droplist` VALUES (118,0,0,1000,1118,@ALWAYS);  -- Antican Pauld
 INSERT INTO `mob_droplist` VALUES (118,0,0,1000,645,@ALWAYS);   -- Chunk Of Darksteel Ore (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (118,0,0,1000,1426,@VCOMMON); -- Warriors Testimony (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (118,0,0,1000,1118,@VRARE);   -- Antican Pauldron (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (118,2,0,1000,751,0);         -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 114 - Antican Decurio
 -- ZoneID: 125 - Antican Eques
@@ -19542,7 +19543,8 @@ INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4808,@UNCOMMON); -- Scroll Of W
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4779,@COMMON);   -- Scroll Of Water Iii (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4822,@RARE);     -- Scroll Of Flood (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,751,@VCOMMON);   -- Platinum Beastcoin (Very Common, 24)
-INSERT INTO `mob_droplist` VALUES (2440,0,0,1000,1443,@RARE);     -- Pinch Of Dried Mugwort (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1443,@RARE);     -- Pinch Of Dried Mugwort (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2443,2,0,1000,751,0);          -- Platinum Beastcoin (Steal)
 
 -- ZoneID: 159 - Tonberry Pursuer
 INSERT INTO `mob_droplist` VALUES (2444,0,0,1000,1119,@COMMON);   -- Tonberry Coat (Common, 15%)

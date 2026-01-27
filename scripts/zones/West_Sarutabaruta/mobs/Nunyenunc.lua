@@ -70,6 +70,10 @@ entity.phList =
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.LIGHT_MEVA, 50)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

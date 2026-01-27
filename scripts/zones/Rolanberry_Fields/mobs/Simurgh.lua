@@ -72,12 +72,15 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 2550) -- (https://ffxiclopedia.fandom.com/wiki/Simurgh)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 250)
     mob:setMod(xi.mod.EVA, 400)
+    mob:setMod(xi.mod.ACC, 519)
 end
 
 entity.onMobFight = function(mob, target)

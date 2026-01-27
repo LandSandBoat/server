@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getHPP() <= 15 then
         return xi.mobSkill.CHAOS_BREATH
     end

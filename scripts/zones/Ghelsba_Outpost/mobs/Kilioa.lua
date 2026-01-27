@@ -19,7 +19,7 @@ entity.onMobEngage = function(mob, target)
     mob:useMobAbility(xi.mobSkill.SECRETION_1)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local mobskillTable =
     {
         [1] = { xi.mobSkill.TAIL_BLOW_1,         10 },

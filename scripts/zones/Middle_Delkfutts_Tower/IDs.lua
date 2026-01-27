@@ -21,6 +21,7 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7187, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7231, -- You can't fish here.
         CHEST_UNLOCKED                = 7339, -- You unlock the chest!
+        SENSE_A_FOUL_PRESENCE         = 7348, -- You sense a foul presence.
         PLAYER_OBTAINS_ITEM           = 7387, -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7388, -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7389, -- <name> obtains the temporary item: <item>!
@@ -30,13 +31,13 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
     },
     mob =
     {
+        BLADE_OF_EVIL_OFFSET     = GetFirstID('Gerwitzs_Scythe'),
         EURYTOS                  = GetFirstID('Eurytos'),
-        POLYBOTES                = GetFirstID('Polybotes'),
-        RHOITOS                  = GetFirstID('Rhoitos'),
-        OPHION                   = GetFirstID('Ophion'),
         OGYGOS                   = GetFirstID('Ogygos'),
+        OPHION                   = GetFirstID('Ophion'),
+        POLYBOTES                = GetFirstID('Polybotes'),
         RHOIKOS                  = GetFirstID('Rhoikos'),
-        BLADE_OF_EVIL_MOB_OFFSET = GetFirstID('Gerwitzs_Scythe'),
+        RHOITOS                  = GetFirstID('Rhoitos'),
     },
     npc =
     {

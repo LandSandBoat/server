@@ -154,31 +154,21 @@ xi.itemUtils.pickItemRandom = function(lootGroup)
     return itemId
 end
 
-xi.itemUtils.removeShield = function(effect, target)
-    if effect == xi.effect.PHYSICAL_SHIELD then
-        target:delStatusEffect(xi.effect.MAGIC_SHIELD)
-    else
-        target:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
-    end
-end
-
-xi.itemUtils.addItemShield = function(target, power, duration, effect, special)
+xi.itemUtils.addItemShield = function(target, power, duration, effect, subPower)
     if target:hasStatusEffect(effect) then
         local shield            = target:getStatusEffect(effect)
         local activeshieldpower = shield:getPower()
 
         if activeshieldpower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
-        else
-            xi.itemUtils.removeShield(effect, target)
-            target:addStatusEffect(effect, power, 0, duration, 0, special)
-            target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
+            return
         end
-    else
-        xi.itemUtils.removeShield(effect, target)
-        target:addStatusEffect(effect, power, 0, duration, 0, special)
-        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
     end
+
+    target:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
+    target:delStatusEffect(xi.effect.MAGIC_SHIELD)
+    target:addStatusEffect(effect, power, 0, duration, 0, subPower)
+    target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
 end
 
 xi.itemUtils.addItemEffect = function(target, effect, power, duration, subpower)

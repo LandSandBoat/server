@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     -- 20% chance to prefer Fission
     if
         math.random(1, 100) <= 20 and

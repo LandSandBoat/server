@@ -77,7 +77,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     -- Only uses Actinic Burst when using TP normally
     return xi.mobSkill.ACTINIC_BURST
 end

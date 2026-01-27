@@ -22,6 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele        = xi.element.LIGHT
     params.skill      = xi.skill.STAFF
     params.includemab = true
+    -- params.dStat = xi.mod.MND -- (pMND-mMND)×2 (Not supported in weaponskills.lua currently)
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod  = { 2.25, 2.25, 2.25 }
@@ -38,7 +39,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.DEFENSE_DOWN
     local actionElement = xi.element.WIND
     local power         = 12.5
-    local duration      = math.floor((30 + 3 * tp / 100) * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(6 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage

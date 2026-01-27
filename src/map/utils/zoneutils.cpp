@@ -37,7 +37,8 @@
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
-#include "navmesh.h"
+#include "spawn_handler.h"
+#include "spawn_slot.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -410,21 +411,8 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
                 auto* PZone = g_PZoneList[zoneId];
 
-                // Load spawnsets
-                const auto spawnSetQuery  = "SELECT spawnsetid, maxspawns FROM mob_spawn_sets WHERE zoneid = ?";
-                const auto spawnSetResult = db::preparedStmt(spawnSetQuery, zoneId);
-                if (spawnSetResult && spawnSetResult->rowsCount())
-                {
-                    while (spawnSetResult->next())
-                    {
-                        auto maxSpawns    = spawnSetResult->get<uint32>("maxspawns");
-                        auto spawnGroupID = spawnSetResult->get<uint32>("spawnsetid");
-                        GetZone(zoneId)->m_spawnGroups.insert(std::make_pair(spawnGroupID, new spawnGroup(maxSpawns, zoneId, spawnGroupID)));
-                    }
-                }
-
                 const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
-                                   "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                                   "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, mob_spawn_points.minLevel, mob_spawn_points.maxLevel, "
                                    "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
                                    "ecosystemID, speed, "
                                    "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
@@ -435,15 +423,15 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                                    "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
                                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
-                                   "mob_family_system.charmable, "
+                                   "mob_family_system.charmable, mob_groups.content_tag, "
                                    "mob_pools.modelSize, mob_pools.modelHitboxSize, "
-                                   "mob_spawn_points.spawnset, COALESCE(mob_spawn_sets.maxspawns, 0) AS maxspawns "
+                                   "mob_spawn_slots.spawnslotid, mob_spawn_slots.chance "
                                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
                                    "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                                   "LEFT JOIN mob_spawn_slots ON (mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid AND mob_spawn_slots.zoneid = mob_groups.zoneid) "
                                    "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
-                                   "LEFT JOIN mob_spawn_sets ON (mob_spawn_sets.spawnsetid = mob_spawn_points.spawnset AND mob_spawn_sets.zoneid = mob_groups.zoneid) "
                                    "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
                                    "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
                                    "AND mob_groups.zoneid = ?";
@@ -453,6 +441,13 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 {
                     while (rset->next())
                     {
+                        // If there is no content tag, the mob will always be loaded
+                        const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                        if (!luautils::IsContentEnabled(contentTag))
+                        {
+                            continue;
+                        }
+
                         ZONE_TYPE zoneType = PZone->GetTypeMask();
 
                         if (!(zoneType & ZONE_TYPE::INSTANCED))
@@ -601,38 +596,24 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
                             PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
 
-                            auto spawnGroupID = rset->get<uint32_t>("spawnset");
+                            // Add mob to spawn slot if it has one
+                            uint32 slotId      = rset->getOrDefault<uint32>("spawnslotid", 0);
+                            uint8  spawnChance = rset->getOrDefault<uint8>("chance", 0);
 
-                            // Add to the spawn group
-                            if (spawnGroupID > 0)
+                            if (slotId > 0)
                             {
-                                if (!GetZone(zoneId)->m_spawnGroups.contains(spawnGroupID))
+                                auto& spawnSlot = PZone->m_spawnSlots[slotId];
+                                if (!spawnSlot)
                                 {
-                                    ShowErrorFmt("Error: Spawn group {} doesn't exist in zone ID {}", spawnGroupID, zoneId);
-                                    GetZone(zoneId)->m_spawnGroups.insert(std::make_pair(spawnGroupID, new spawnGroup(rset->get<uint32>("maxspawns"), zoneId, spawnGroupID)));
+                                    spawnSlot = std::make_unique<SpawnSlot>();
                                 }
-                                auto* spawnGroup = GetZone(zoneId)->m_spawnGroups.at(spawnGroupID).get();
-                                if (spawnGroup)
-                                {
-                                    PMob->m_spawnGroup = spawnGroup;
-                                    spawnGroup->addMember(PMob->targid);
 
-                                    if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED)
-                                    {
-                                        ShowError(fmt::format("Mob {} ID {} in zone {} is set to SPAWNTYPE_SCRIPTED AND is in a group. This is not compatible!", PMob->packetName, PMob->id, zoneId));
-                                        PMob->m_SpawnType = SPAWNTYPE_NORMAL;
-                                    }
-
-                                    if (PMob->m_RespawnTime <= 0s)
-                                    {
-                                        ShowError(fmt::format("Mob {} ID {} in zone {} has a respawn time of 0s AND is in a group. This is not compatible!", PMob->packetName, PMob->id, zoneId));
-                                        PMob->m_RespawnTime = 5min;
-                                    }
-                                }
-                                else
+                                if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED)
                                 {
-                                    ShowError(fmt::format("Could not get Spawn Group!"));
+                                    ShowError("Mob with ID %u in spawn slot %u in zone %u is a scripted spawn. Scripted spawns should not be assigned to spawn slots.", PMob->id, slotId, zoneId);
                                 }
+
+                                spawnSlot->AddMob(PMob, spawnChance);
                             }
 
                             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
@@ -664,15 +645,6 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
         zoneIds,
         [](CZone* PZone)
         {
-            for (auto& spawnGroup : PZone->m_spawnGroups)
-            {
-                spawnGroup.second->fillSpawnPool();
-                if (!spawnGroup.second->isValid(PZone))
-                {
-                    ShowError(fmt::format("Mob SpawnGroup {} is not valid. Check mob_spawn_sets.sql.", spawnGroup.first));
-                }
-            }
-
             PZone->ForEachMob(
                 [](CMobEntity* PMob)
                 {
@@ -693,30 +665,46 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
                     PMob->saveModifiers();
                     PMob->saveMobModifiers();
+
+                    // Allow the mob to respawn if it is NOT a lottery, scripted, or windowed spawn
+                    PMob->m_AllowRespawn = !(PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
+                                             PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
+                                             PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
+
+                    // Intialize monsters that do not require specific conditions to spawn initially. Monsters conditioned to
+                    // spawn by time or weather will be allowed upon corresponding time/weather events.
+                    PMob->m_CanSpawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL ||
+                                       PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
+                                       PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
+                                       PMob->m_SpawnType == SPAWNTYPE_WINDOWED;
                 });
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
             PZone->ForEachMob(
-                [](CMobEntity* PMob)
+                [&PZone](CMobEntity* PMob)
                 {
-                    // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
-                    // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
-                    if (!PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
+                    // Skip mobs already registered via setRespawnTime in onMobInitialize - let SpawnHandler handle them
+                    if (PZone->spawnHandler()->isRegistered(PMob))
+                    {
+                        return;
+                    }
+
+                    if (PMob->m_CanSpawn && PMob->m_AllowRespawn)
                     {
                         PMob->m_AllowRespawn = true;
-                        if (!PMob->m_spawnGroup || PMob->CanSpawnFromGroup())
-                        {
-                            PMob->Spawn();
-                        }
+                        PMob->TrySpawn();
                     }
                     else
                     {
-                        PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
                         // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
                         if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
                         {
                             PMob->m_AllowRespawn = true;
                         }
+
+                        // Condition-based mobs (time/weather) register with 0s so they spawn when conditions are met
+                        const bool isConditionBased = PMob->m_SpawnType & (SPAWNTYPE_ATNIGHT | SPAWNTYPE_ATEVENING | SPAWNTYPE_WEATHER | SPAWNTYPE_FOG);
+                        PZone->spawnHandler()->registerForRespawn(PMob, isConditionBased ? std::make_optional(0s) : std::nullopt);
                     }
                 });
         });

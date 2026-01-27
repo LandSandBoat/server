@@ -39,7 +39,6 @@
 #include "states/mobskill_state.h"
 #include "states/petskill_state.h"
 #include "states/range_state.h"
-#include "states/respawn_state.h"
 #include "states/synth_state.h"
 #include "states/trigger_state.h"
 #include "states/weaponskill_state.h"
@@ -538,18 +537,9 @@ void CAIContainer::checkQueueImmediately()
 
 bool CAIContainer::Internal_Despawn(bool instantDespawn)
 {
-    if (!IsCurrentState<CDespawnState>() && !IsCurrentState<CRespawnState>())
+    if (!IsCurrentState<CDespawnState>())
     {
         return ForceChangeState<CDespawnState>(PEntity, instantDespawn);
-    }
-    return false;
-}
-
-bool CAIContainer::Internal_Respawn(timer::duration _duration)
-{
-    if (!IsCurrentState<CRespawnState>())
-    {
-        return ForceChangeState<CRespawnState>(PEntity, _duration);
     }
     return false;
 }

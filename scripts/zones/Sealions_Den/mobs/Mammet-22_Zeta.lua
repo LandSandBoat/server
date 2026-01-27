@@ -96,7 +96,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local form  = mob:getAnimationSub()
     local moves = tpMoves[form]
 

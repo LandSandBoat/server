@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
 end
 
 -- We only use Frenzied Rage if our spells are interrupted
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local mobskillList =
     {
         xi.mobSkill.CHARGED_WHISKER,

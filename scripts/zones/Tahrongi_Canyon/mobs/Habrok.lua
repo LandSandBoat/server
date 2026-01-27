@@ -14,6 +14,11 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     mob:setLocalVar('pop', GetSystemTime() + math.random(1200, 7200))
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.BIND)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

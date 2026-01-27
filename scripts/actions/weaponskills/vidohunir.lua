@@ -22,6 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele        = xi.element.DARK
     params.skill      = xi.skill.STAFF
     params.includemab = true
+    -- params.dStat = xi.mod.INT (pINT-mINT)×2 (Not supported in weaponskills.lua currently)
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.int_wsc = 0.8

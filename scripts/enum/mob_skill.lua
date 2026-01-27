@@ -78,6 +78,9 @@ xi.mobSkill =
 
     VELOCIOUS_BLADE               =  347, -- Mammet-800
 
+    WILD_RAGE                     =  354,
+    EARTH_POUNDER                 =  355,
+
     HEAVY_BLOW                    =  357,
     HEAVY_WHISK                   =  358,
     BIONIC_BOOST                  =  359,
@@ -140,6 +143,8 @@ xi.mobSkill =
 
     MIND_WALL                     =  471, -- Mammet-800
 
+    GRAVE_REEL                    =  472,
+
     PETRIFACTIVE_BREATH           =  480,
 
     CHARGED_WHISKER               =  483,
@@ -157,6 +162,11 @@ xi.mobSkill =
     FRIGHTFUL_ROAR_1              =  501,
     MORTAL_RAY_1                  =  502,
     UNBLESSED_ARMOR               =  503,
+    GAS_SHELL_1                   =  504,
+    VENOM_SHELL_1                 =  505,
+    PALSYNYXIS_1                  =  506,
+    PAINFUL_WHIP_1                =  507,
+    SUCTORIAL_TENTACLE_1          =  508,
 
     SELF_DESTRUCT_BOMB            =  509,
 
@@ -170,7 +180,7 @@ xi.mobSkill =
     BLITZSTRAHL                   =  535,
     PANZERFAUST                   =  536,
     BERSERK_DOLL                  =  537,
-
+    PANZERSCHRECK                 =  538,
     TYPHOON                       =  539,
 
     TREMOROUS_TREAD               =  540, -- Mammet-800
@@ -255,8 +265,16 @@ xi.mobSkill =
 
     CHARM                         =  710,
 
+    VENOM_BREATH_1                =  717,
     JUMP_1                        =  718,
+    CRITICAL_BITE                 =  719,
+    VENOM_STING_1                 =  720,
+    STASIS                        =  721,
+    VENOM_STORM_1                 =  722,
+    EARTHBREAKER_1                =  723,
+    EVASION                       =  724,
 
+    DEATH_TRAP                    =  729, -- Lockpicked coffer mimics only
     MEIKYO_SHISUI_1               =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1                =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
     CALL_WYVERN                   =  732,
@@ -348,6 +366,16 @@ xi.mobSkill =
     TACHI_YUKIKAZE                =  946, -- Ark Angel GK
     TACHI_GEKKO                   =  947, -- Ark Angel GK
     TACHI_KASHA                   =  948, -- Ark Angel GK
+
+    FLAME_BLAST_ATTACK            =  950,
+    HURRICANE_WING_1              =  951,
+    SPIKE_FLAIL_1                 =  952,
+    DRAGON_BREATH_1               =  953,
+    TOUCHDOWN_1                   =  954,
+    FLAME_BLAST_1                 =  955,
+    HURRICANE_WING_FLYING         =  956,
+    ABSOLUTE_TERROR_1             =  957,
+    HORRID_ROAR_1                 =  958,
 
     ARKANGEL_TT_WARP_IN           =  962, -- Ark Angel TT Warp In
 
@@ -535,7 +563,32 @@ xi.mobSkill =
     REACTOR_OVERHEAT              = 1468,
     REACTOR_OVERLOAD              = 1469,
 
-    DEADALUS_WING_COP_PRISHE      = 1487, -- Dwing COP 8-4 Dawn
+    HUNDRED_FISTS_PRISHE          = 1485,
+    BENEDICTION_PRISHE            = 1486,
+    ITEM_1_PRISHE                 = 1487,
+    ITEM_2_PRISHE                 = 1488,
+    NULLIFYING_DROPKICK_1         = 1489,
+    AURORAL_UPPERCUT_1            = 1490,
+    CHAINS_OF_APATHY              = 1491,
+    CHAINS_OF_ARROGANCE           = 1492,
+    CHAINS_OF_COWARDICE           = 1493,
+    CHAINS_OF_RAGE                = 1494,
+    CHAINS_OF_ENVY                = 1495,
+    MALEVOLENT_BLESSING_1         = 1496,
+    PESTILENT_PENANCE_1           = 1497,
+    EMPTY_SALVATION_1             = 1498,
+    INFERNAL_DELIVERANCE_1        = 1499,
+    MALEVOLENT_BLESSING_2         = 1500,
+    PESTILENT_PENANCE_2           = 1501,
+    EMPTY_SALVATION_2             = 1502,
+    INFERNAL_DELIVERANCE_2        = 1503,
+    WHEEL_OF_IMPREGNABILITY       = 1504,
+    BASTION_OF_TWILIGHT           = 1505,
+    WINDS_OF_OBLIVION             = 1506,
+    SEAL_OF_QUIESCENCE            = 1507,
+    LUMINOUS_LANCE_1              = 1508,
+    REJUVENATION_1                = 1509,
+    REVELATION_1                  = 1510,
 
     HOWLING_MOON_3                = 1520, -- Unknown usage.
 
@@ -566,6 +619,14 @@ xi.mobSkill =
     VAMPIRIC_ROOT                 = 1793,
 
     XENOGLOSSIA                   = 1823, -- Unique entry.
+
+    PYRIC_BLAST                   = 1828,
+    PYRIC_BULWARK                 = 1829,
+    POLAR_BLAST                   = 1830,
+    POLAR_BULWARK                 = 1831,
+    BAROFIELD                     = 1832,
+
+    NERVE_GAS                     = 1836,
 
     SANDBLAST_2                   = 1841,
     SANDPIT_2                     = 1842,

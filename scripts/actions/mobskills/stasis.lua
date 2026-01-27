@@ -1,9 +1,9 @@
 -----------------------------------
 -- Stasis
--- Description: Paralyzes targets in an area of effect.
+-- Description: Deals physical damage to a single target. Additional Effect : Paralysis, Enmity Reset
 -- Type: Enfeebling
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: 10' radial
+-- Utsusemi/Blink absorb: 1 shadow
+-- Range: Melee
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,18 +13,21 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    -- local dmg = xi.mobskills.mobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
+    local numhits = 1
+    local accmod  = 1
+    local ftp     = 1.5
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
-    mob:resetEnmity(target)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 20, 0, 20)
 
     if xi.mobskills.mobPhysicalHit(skill) then
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 40, 0, 60))
-
-        return xi.effect.PARALYSIS
+        target:resetEnmity(mob)
     end
 
-    return shadows
+    return dmg
 end
 
 return mobskillObject

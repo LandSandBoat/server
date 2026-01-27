@@ -45,7 +45,7 @@ on:
         type: boolean
         default: false
       publish:
-        description: 'Publish image to registry.'
+        description: 'Publish image to registry. Requires PUBLISH_DOCKER repo var to be set to a non-empty value and packages enabled.'
         required: false
         type: boolean
         default: false
@@ -58,6 +58,7 @@ jobs:
       BUILDX_NO_DEFAULT_ATTESTATIONS: 1 # https://github.com/orgs/community/discussions/45969
       build_id: ${{ format('build-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
       ccache_id: ${{ format('ccache-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
+      # Placeholder values. Actual values set in the first step.
       REPO_OWNER: 'landsandboat'
       REPO: 'landsandboat/server'
     steps:

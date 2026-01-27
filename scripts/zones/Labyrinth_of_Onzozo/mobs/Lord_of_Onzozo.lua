@@ -72,8 +72,25 @@ entity.phList =
     [ID.mob.LORD_OF_ONZOZO - 1] = ID.mob.LORD_OF_ONZOZO, -- -39.356 14.265 -60.406
 }
 
+entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 75) -- This is the amount of STP required for LOO to reach 1k TP via auto attacks in testing.
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

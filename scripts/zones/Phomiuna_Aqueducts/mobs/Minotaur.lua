@@ -7,9 +7,13 @@ mixins = { require('scripts/mixins/fomor_hate') }
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 45)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('fomorHateAdj', 2)
-    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 25)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
 end
 
 entity.onMobFight = function(mob, target)

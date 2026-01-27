@@ -17,7 +17,7 @@ entity.onPath = function(mob)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local form = mob:getAnimationSub()
     local tpMoves = { xi.mobSkill.REACTOR_COOL }
 

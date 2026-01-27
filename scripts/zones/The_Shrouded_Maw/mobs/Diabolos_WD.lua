@@ -162,7 +162,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skills =
     {
         { skill = xi.mobSkill.NOCTOSHIELD_1,     weight = 50 },

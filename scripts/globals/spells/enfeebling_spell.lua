@@ -12,106 +12,105 @@ xi.spells.enfeebling = xi.spells.enfeebling or {}
 -----------------------------------
 local column =
 {
-    EFFECT_ID      =  1,
-    EFFECT_TIER    =  2,
-    STAT_USED      =  3,
-    BASE_POTENCY   =  4,
-    BASE_TICK      =  5,
-    BASE_DURATION  =  6,
-    RESIST_STAGES  =  7,
-    MESSAGE_OFFSET =  8,
-    SABOTEUR       =  9,
-    BONUS_MACC     = 10,
+    EFFECT_ID      = 1,
+    EFFECT_TIER    = 2,
+    STAT_USED      = 3,
+    BASE_POTENCY   = 4,
+    BASE_TICK      = 5,
+    BASE_DURATION  = 6,
+    MESSAGE_OFFSET = 7,
+    SABOTEUR       = 8,
+    BONUS_MACC     = 9,
 }
 
 local pTable =
 {
     -- Black Magic
-    [xi.magic.spell.BIND          ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,       60,      2,   0, false,       0 },
-    [xi.magic.spell.BINDGA        ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,       60,      2,   0, false,       0 },
-    [xi.magic.spell.BLIND         ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,    0,   0,      180,      2,   0, true,        0 },
-    [xi.magic.spell.BLIND_II      ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,    0,   0,      180,      2,   0, true,        0 },
-    [xi.magic.spell.BLINDGA       ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,    0,   0,      180,      2,   0, true,        0 },
-    [xi.magic.spell.BREAK         ] = { xi.effect.PETRIFICATION,      1, xi.mod.INT,    1,   0,       30,      2,   0, false,       0 },
-    [xi.magic.spell.BREAKGA       ] = { xi.effect.PETRIFICATION,      2, xi.mod.INT,    1,   0,       30,      2,   0, false,       0 },
-    [xi.magic.spell.BURN          ] = { xi.effect.BURN,               1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.CHOKE         ] = { xi.effect.CHOKE,              1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.CURSE         ] = { xi.effect.CURSE_I,            1, xi.mod.INT,   50,   0,      300,      2,   0, false,       0 },
-    [xi.magic.spell.DISPEL        ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,        0,      4,   0, false,     175 },
-    [xi.magic.spell.DISPELGA      ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,        0,      4,   0, false,       0 },
-    [xi.magic.spell.DISTRACT      ] = { xi.effect.EVASION_DOWN,       1, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.DISTRACT_II   ] = { xi.effect.EVASION_DOWN,       2, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.DISTRACT_III  ] = { xi.effect.EVASION_DOWN,       3, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.DROWN         ] = { xi.effect.DROWN,              1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.FRAZZLE       ] = { xi.effect.MAGIC_EVASION_DOWN, 1, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.FRAZZLE_II    ] = { xi.effect.MAGIC_EVASION_DOWN, 2, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.FRAZZLE_III   ] = { xi.effect.MAGIC_EVASION_DOWN, 3, xi.mod.MND,    0,   0,      120,      2,   0, true,      150 },
-    [xi.magic.spell.FROST         ] = { xi.effect.FROST,              1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.GRAVITY       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   26,   0,      120,      2,   0, true,        0 },
-    [xi.magic.spell.GRAVITY_II    ] = { xi.effect.WEIGHT,             2, xi.mod.INT,   32,   0,      180,      2,   0, true,        0 },
-    [xi.magic.spell.GRAVIGA       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   50,   0,      120,      2,   0, true,        0 },
-    [xi.magic.spell.POISON        ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,       90,      2,   0, true,        0 },
-    [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             2, xi.mod.INT,    0,   3,      120,      2,   0, true,       30 },
-    [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             3, xi.mod.INT,    0,   3,      150,      2,   0, true,        0 },
-    [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,       90,      2,   0, true,        0 },
-    [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,      120,      2,   0, true,        0 },
-    [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,      150,      2,   0, true,        0 },
-    [xi.magic.spell.RASP          ] = { xi.effect.RASP,               1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              1, xi.mod.INT,    0,   3,       90,      3,   1, true,        0 },
-    [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,       60,      2,   0, false,       0 },
-    [xi.magic.spell.SLEEP_II      ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,       90,      2,   0, false,       0 },
-    [xi.magic.spell.SLEEPGA       ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,       60,      2,   0, false,       0 },
-    [xi.magic.spell.SLEEPGA_II    ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,       90,      2,   0, false,       0 },
-    [xi.magic.spell.STUN          ] = { xi.effect.STUN,               1, xi.mod.INT,    1,   0,        5,      4,   0, false,     200 },
-    [xi.magic.spell.VIRUS         ] = { xi.effect.PLAGUE,             1, xi.mod.INT,    5,   3,       60,      2,   0, false,       0 },
+    [xi.magic.spell.BIND          ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,  60, 0, false,   0 },
+    [xi.magic.spell.BINDGA        ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,  60, 0, false,   0 },
+    [xi.magic.spell.BLIND         ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BLIND_II      ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BLINDGA       ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BREAK         ] = { xi.effect.PETRIFICATION,      1, xi.mod.INT,    1,   0,  30, 0, false,   0 },
+    [xi.magic.spell.BREAKGA       ] = { xi.effect.PETRIFICATION,      2, xi.mod.INT,    1,   0,  30, 0, false,   0 },
+    [xi.magic.spell.BURN          ] = { xi.effect.BURN,               1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.CHOKE         ] = { xi.effect.CHOKE,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.CURSE         ] = { xi.effect.CURSE_I,            1, xi.mod.INT,   50,   0, 300, 0, false,   0 },
+    [xi.magic.spell.DISPEL        ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,   0, 0, false, 175 },
+    [xi.magic.spell.DISPELGA      ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,   0, 0, false,   0 },
+    [xi.magic.spell.DISTRACT      ] = { xi.effect.EVASION_DOWN,       1, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DISTRACT_II   ] = { xi.effect.EVASION_DOWN,       2, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DISTRACT_III  ] = { xi.effect.EVASION_DOWN,       3, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DROWN         ] = { xi.effect.DROWN,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.FRAZZLE       ] = { xi.effect.MAGIC_EVASION_DOWN, 1, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FRAZZLE_II    ] = { xi.effect.MAGIC_EVASION_DOWN, 2, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FRAZZLE_III   ] = { xi.effect.MAGIC_EVASION_DOWN, 3, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FROST         ] = { xi.effect.FROST,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.GRAVITY       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   26,   0, 120, 0, true,    0 },
+    [xi.magic.spell.GRAVITY_II    ] = { xi.effect.WEIGHT,             2, xi.mod.INT,   32,   0, 180, 0, true,    0 },
+    [xi.magic.spell.GRAVIGA       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   50,   0, 120, 0, true,    0 },
+    [xi.magic.spell.POISON        ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
+    [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             2, xi.mod.INT,    0,   3, 120, 0, true,   30 },
+    [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             3, xi.mod.INT,    0,   3, 150, 0, true,    0 },
+    [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
+    [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 120, 0, true,    0 },
+    [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 150, 0, true,    0 },
+    [xi.magic.spell.RASP          ] = { xi.effect.RASP,               1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,  60, 0, false,   0 },
+    [xi.magic.spell.SLEEP_II      ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,  90, 0, false,   0 },
+    [xi.magic.spell.SLEEPGA       ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,  60, 0, false,   0 },
+    [xi.magic.spell.SLEEPGA_II    ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,  90, 0, false,   0 },
+    [xi.magic.spell.STUN          ] = { xi.effect.STUN,               1, xi.mod.INT,    1,   0,   5, 0, false, 200 },
+    [xi.magic.spell.VIRUS         ] = { xi.effect.PLAGUE,             1, xi.mod.INT,    5,   3,  60, 0, false,   0 },
 
     -- Black magic Helixes
-    [xi.magic.spell.GEOHELIX      ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.GEOHELIX_II   ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.HYDROHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.HYDROHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.ANEMOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.ANEMOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.PYROHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.PYROHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.CRYOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.CRYOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.IONOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.IONOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.NOCTOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.NOCTOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.LUMINOHELIX   ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
-    [xi.magic.spell.LUMINOHELIX_II] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,       30,      0,   0, false,       0 },
+    [xi.magic.spell.GEOHELIX      ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.GEOHELIX_II   ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.HYDROHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.HYDROHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.ANEMOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.ANEMOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.PYROHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.PYROHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.CRYOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.CRYOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.IONOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.IONOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.NOCTOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.NOCTOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.LUMINOHELIX   ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.LUMINOHELIX_II] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
 
     -- White Magic
-    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              1, xi.mod.MND,   30,   0,      180,      2,   0, true,        0 },
-    [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              1, xi.mod.MND,    0,   0,       12,      4,   0, true,      512 },
-    [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         1, xi.mod.MND,    1,   0,      300,      5,   0, false,       0 },
-    [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          1, xi.mod.MND,    0,   0,      120,      2,   0, true,      -10 },
-    [xi.magic.spell.PARALYZE_II   ] = { xi.effect.PARALYSIS,          3, xi.mod.MND,    0,   0,      120,      2,   0, true,        0 },
-    [xi.magic.spell.PARALYGA      ] = { xi.effect.PARALYSIS,          2, xi.mod.MND,    0,   0,      120,      2,   0, true,        0 },
-    [xi.magic.spell.REPOSE        ] = { xi.effect.SLEEP_I,            2, xi.mod.MND,    2,   0,       90,      2,   1, false,       0 },
-    [xi.magic.spell.SILENCE       ] = { xi.effect.SILENCE,            1, xi.mod.MND,    1,   0,      120,      2,   0, false,       0 },
-    [xi.magic.spell.SILENCEGA     ] = { xi.effect.SILENCE,            2, xi.mod.MND,    1,   0,      120,      2,   0, false,       0 },
-    [xi.magic.spell.SLOW          ] = { xi.effect.SLOW,               3, xi.mod.MND,    0,   0,      180,      2,   0, true,       10 },
-    [xi.magic.spell.SLOW_II       ] = { xi.effect.SLOW,               7, xi.mod.MND,    0,   0,      180,      2,   0, true,       10 },
-    [xi.magic.spell.SLOWGA        ] = { xi.effect.SLOW,               8, xi.mod.MND,    0,   0,      180,      2,   0, true,        0 },
+    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              1, xi.mod.MND,   30,   0, 180, 0, true,    0 },
+    [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              1, xi.mod.MND,    0,   0,  12, 0, true,  512 },
+    [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         1, xi.mod.MND,    1,   0, 300, 0, false,   0 },
+    [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          1, xi.mod.MND,    0,   0, 120, 0, true,  -10 },
+    [xi.magic.spell.PARALYZE_II   ] = { xi.effect.PARALYSIS,          3, xi.mod.MND,    0,   0, 120, 0, true,    0 },
+    [xi.magic.spell.PARALYGA      ] = { xi.effect.PARALYSIS,          2, xi.mod.MND,    0,   0, 120, 0, true,    0 },
+    [xi.magic.spell.REPOSE        ] = { xi.effect.SLEEP_I,            2, xi.mod.MND,    2,   0,  90, 1, false,   0 },
+    [xi.magic.spell.SILENCE       ] = { xi.effect.SILENCE,            1, xi.mod.MND,    1,   0, 120, 0, false,   0 },
+    [xi.magic.spell.SILENCEGA     ] = { xi.effect.SILENCE,            2, xi.mod.MND,    1,   0, 120, 0, false,   0 },
+    [xi.magic.spell.SLOW          ] = { xi.effect.SLOW,               3, xi.mod.MND,    0,   0, 180, 0, true,   10 },
+    [xi.magic.spell.SLOW_II       ] = { xi.effect.SLOW,               7, xi.mod.MND,    0,   0, 180, 0, true,   10 },
+    [xi.magic.spell.SLOWGA        ] = { xi.effect.SLOW,               8, xi.mod.MND,    0,   0, 180, 0, true,    0 },
 
     -- Ninjutsu
-    [xi.magic.spell.AISHA_ICHI    ] = { xi.effect.ATTACK_DOWN,        1, xi.mod.INT,   15,   0,      120,      4,   1, false,       0 },
-    [xi.magic.spell.DOKUMORI_ICHI ] = { xi.effect.POISON,             1, xi.mod.INT,    3,   3,       60,      2,   0, false,       0 },
-    [xi.magic.spell.DOKUMORI_NI   ] = { xi.effect.POISON,             2, xi.mod.INT,   10,   3,      120,      2,   0, false,       0 },
-    [xi.magic.spell.DOKUMORI_SAN  ] = { xi.effect.POISON,             3, xi.mod.INT,   20,   3,      360,      2,   0, false,       0 },
-    [xi.magic.spell.HOJO_ICHI     ] = { xi.effect.SLOW,               3, xi.mod.INT, 1465,   0,      180,      2,   0, false,       0 },
-    [xi.magic.spell.HOJO_NI       ] = { xi.effect.SLOW,               4, xi.mod.INT, 1953,   0,      300,      2,   0, false,       0 },
-    [xi.magic.spell.HOJO_SAN      ] = { xi.effect.SLOW,               7, xi.mod.INT, 2930,   0,      420,      2,   0, false,       0 },
-    [xi.magic.spell.JUBAKU_ICHI   ] = { xi.effect.PARALYSIS,          1, xi.mod.INT,   20,   0,      180,      2,   1, false,       0 },
-    [xi.magic.spell.JUBAKU_NI     ] = { xi.effect.PARALYSIS,          2, xi.mod.INT,   30,   0,      300,      2,   1, false,       0 },
-    [xi.magic.spell.JUBAKU_SAN    ] = { xi.effect.PARALYSIS,          3, xi.mod.INT,   35,   0,      420,      2,   1, false,       0 },
-    [xi.magic.spell.KURAYAMI_ICHI ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,   20,   0,      180,      2,   0, false,       0 },
-    [xi.magic.spell.KURAYAMI_NI   ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,   30,   0,      300,      2,   0, false,       0 },
-    [xi.magic.spell.KURAYAMI_SAN  ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,   40,   0,      420,      2,   0, false,       0 },
-    [xi.magic.spell.YURIN_ICHI    ] = { xi.effect.INHIBIT_TP,         1, xi.mod.INT,   10,   0,      180,      3,   1, false,       0 },
+    [xi.magic.spell.AISHA_ICHI    ] = { xi.effect.ATTACK_DOWN,        1, xi.mod.INT,   15,   0, 120, 1, false,   0 },
+    [xi.magic.spell.DOKUMORI_ICHI ] = { xi.effect.POISON,             1, xi.mod.INT,    3,   3,  60, 0, false,   0 },
+    [xi.magic.spell.DOKUMORI_NI   ] = { xi.effect.POISON,             2, xi.mod.INT,   10,   3, 120, 0, false,   0 },
+    [xi.magic.spell.DOKUMORI_SAN  ] = { xi.effect.POISON,             3, xi.mod.INT,   20,   3, 360, 0, false,   0 },
+    [xi.magic.spell.HOJO_ICHI     ] = { xi.effect.SLOW,               3, xi.mod.INT, 1465,   0, 180, 0, false,   0 },
+    [xi.magic.spell.HOJO_NI       ] = { xi.effect.SLOW,               4, xi.mod.INT, 1953,   0, 300, 0, false,   0 },
+    [xi.magic.spell.HOJO_SAN      ] = { xi.effect.SLOW,               7, xi.mod.INT, 2930,   0, 420, 0, false,   0 },
+    [xi.magic.spell.JUBAKU_ICHI   ] = { xi.effect.PARALYSIS,          1, xi.mod.INT,   20,   0, 180, 1, false,   0 },
+    [xi.magic.spell.JUBAKU_NI     ] = { xi.effect.PARALYSIS,          2, xi.mod.INT,   30,   0, 300, 1, false,   0 },
+    [xi.magic.spell.JUBAKU_SAN    ] = { xi.effect.PARALYSIS,          3, xi.mod.INT,   35,   0, 420, 1, false,   0 },
+    [xi.magic.spell.KURAYAMI_ICHI ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,   20,   0, 180, 0, false,   0 },
+    [xi.magic.spell.KURAYAMI_NI   ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,   30,   0, 300, 0, false,   0 },
+    [xi.magic.spell.KURAYAMI_SAN  ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,   40,   0, 420, 0, false,   0 },
+    [xi.magic.spell.YURIN_ICHI    ] = { xi.effect.INHIBIT_TP,         1, xi.mod.INT,   10,   0, 180, 1, false,   0 },
 }
 
 local function getElementalDebuffPotency(caster, statUsed)
@@ -131,6 +130,63 @@ local function getElementalDebuffPotency(caster, statUsed)
     potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) + caster:getMod(xi.mod.ELEMENTAL_DEBUFF_EFFECT) / 2
 
     return potency
+end
+
+local function executeImmunobreak(caster, target, spell, effectId)
+    -- Early return: Immunobreak didn't exist in lvl 75 era.
+    if not xi.settings.main.ENABLE_IMMUNOBREAK then
+        return
+    end
+
+    -- Early return: Only players can immunobreak. (NOTE: Any job can proc Immunobreaks.)
+    if not caster:isPC() then
+        return
+    end
+
+    -- Early return: Only non-players can be immunobroken.
+    if not target:isMob() then
+        return
+    end
+
+    -- Early return: Only Enfeebling magic can immunobreak.
+    if spell:getSkillType() ~= xi.skill.ENFEEBLING_MAGIC then
+        return
+    end
+
+    -- Early return: This effect doesn't have an immunobreak associated modifier.
+    local immunobreakModId = xi.data.statusEffect.getAssociatedImmunobreakModifier(effectId)
+    if immunobreakModId == 0 then
+        return
+    end
+
+    -- Fetch resistance rank modifier (Either effect-specific or elemental)
+    local resistanceRankModId = xi.data.statusEffect.getAssociatedResistanceRankModifier(effectId, spell:getElement())
+    if resistanceRankModId == 0 then -- If it's an effect and this is 0, try with element.
+        resistanceRankModId = xi.data.element.getElementalResistanceRankModifier(spell:getElement())
+    end
+
+    -- Early return: Only mobs with a resistance rank of 6+ (x <= 30% EEM) can be immunobroken.
+    local baseResistanceRank  = target:getMod(resistanceRankModId)
+    if baseResistanceRank < 6 then
+        return
+    end
+
+    -- Early return: Resistance rank cannot be lowered (and wont trigger) bellow rank 4 (50% EEM)
+    local immunobreakValue    = target:getMod(immunobreakModId)
+    local finalResistanceRank = baseResistanceRank - immunobreakValue
+    if finalResistanceRank <= 4 then
+        return
+    end
+
+    -- Calculate Immunobreack chance.
+    local immunobreakChance = caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE) + 20 / (immunobreakValue + 1) -- TODO: Add immunobreak gear?
+    if math.random(1, 100) > immunobreakChance then
+        return
+    end
+
+    -- Apply immunobreak effect (lower resistance rank) and apply special message.
+    target:setMod(immunobreakModId, immunobreakValue + 1) -- TODO: Add equipment modifier (x2) here (Chironic Hose).
+    spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
 end
 
 -- Calculate potency.
@@ -333,6 +389,7 @@ end
 xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellId      = spell:getID()
     local spellElement = spell:getElement()
+    local skillType    = spell:getSkillType()
     local spellEffect  = pTable[spellId][column.EFFECT_ID]
     local tier         = pTable[spellId][column.TIER]
 
@@ -360,13 +417,11 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- STEP 2: Calculate resist tiers.
     ------------------------------
-    local skillType    = spell:getSkillType()
-    local spellGroup   = spell:getSpellGroup()
-    local statUsed     = pTable[spellId][column.STAT_USED]
-    local resistStages = pTable[spellId][column.RESIST_STAGES]
-    local message      = pTable[spellId][column.MESSAGE_OFFSET]
-    local bonusMacc    = pTable[spellId][column.BONUS_MACC]
-    local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, spellEffect, bonusMacc)
+    local spellGroup = spell:getSpellGroup()
+    local statUsed   = pTable[spellId][column.STAT_USED]
+    local message    = pTable[spellId][column.MESSAGE_OFFSET]
+    local bonusMacc  = pTable[spellId][column.BONUS_MACC]
+    local resistRate = xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, spellEffect, bonusMacc)
 
     if spellEffect ~= xi.effect.NONE then
         -- Stymie
@@ -383,45 +438,10 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     end
 
     ------------------------------
-    -- STEP 3: Check if spell resists and Immunobreak.
+    -- STEP 3: Check if spell resists.
     ------------------------------
-    if resistRate <= 1 / (2 ^ resistStages) then
-        -- Decide which resistance rank modifier to use:
-        -- 1: If an effect exists, check if said effect has a specialized resistance rank.
-        -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
-        local resistanceRankMod = xi.data.statusEffect.getAssociatedResistanceRankModifier(spellEffect, spellElement)
-
-        if resistanceRankMod == 0 then -- If it's an effect and this is 0, try with element.
-            resistanceRankMod = xi.data.element.getElementalResistanceRankModifier(spellElement)
-        end
-
-        -- Fetch resistance rank and apply possible modifiers to it.
-        local resistanceRank = target:getMod(resistanceRankMod)
-
-        -- Attempt immunobreak. Fetch resistance rank modifier.
-        local immunobreakModifier = xi.data.statusEffect.getAssociatedImmunobreakModifier(spellEffect)
-        local immunobreakValue    = target:getMod(immunobreakModifier)
-
-        if
-            xi.settings.main.ENABLE_IMMUNOBREAK and    -- Immunobreak didn't exist in lvl 75 era.
-            caster:isPC() and                          -- Only players can immunobreak.
-            caster:getMainJob() == xi.job.RDM and     -- Only Red Mages can immunobreak.
-            target:isMob() and                         -- Only non-players can be immunobroken.
-            immunobreakModifier > 0 and                -- Only certain effects can be immunobroken.
-            skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
-            resistanceRank >= 5                        -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
-        then
-            local immunobreakChance = 20 / (1 + immunobreakValue) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE) -- TODO: Add immunobreak gear?
-
-            -- We successfully trigger Immunobreak. Change target modifier and set correct message.
-            if math.random(1, 100) <= immunobreakChance then
-                target:setMod(immunobreakModifier, immunobreakValue + 1) -- TODO: Add equipment modifier (x2) here.
-
-                spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
-            end
-        end
-
-        -- We still resited.
+    if not xi.data.statusEffect.isResistRateSuccessfull(spellEffect, resistRate, 0) then
+        executeImmunobreak(caster, target, spell, spellEffect)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect

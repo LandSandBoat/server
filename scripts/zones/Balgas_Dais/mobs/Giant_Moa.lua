@@ -33,7 +33,7 @@ local mobskillTable =
     [4] = { xi.mobSkill.CONTAGION_TRANSFER,      40 },
 }
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local randomRoll = math.random(1, 100)
     local weightSum  = 0
     for i = 1, #mobskillTable do

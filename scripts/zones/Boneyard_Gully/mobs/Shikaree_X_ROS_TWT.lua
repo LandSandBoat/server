@@ -175,7 +175,7 @@ end
 -----------------------------------
 -- Solo weaponskill messages.
 -----------------------------------
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getLocalVar('scStep') == 0 then
         mob:messageText(mob, messages.SOLO_WEAPONSKILL)
     end

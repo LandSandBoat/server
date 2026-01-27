@@ -1,3 +1,5 @@
+# Set DEVTOOLS_IMAGE repo var to use a different devtools image. Default: ghcr.io/landsandboat/devtools:ubuntu
+
 name: Tests
 
 on:

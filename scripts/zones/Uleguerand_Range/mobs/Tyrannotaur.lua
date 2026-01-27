@@ -7,7 +7,7 @@ mixins = { require('scripts/mixins/families/tauri') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.TRICLIP_1,

@@ -32,7 +32,10 @@ zones[xi.zone.LOWER_JEUNO] =
         RHIMONNE_SHOP_DIALOG          = 7159,  -- Howdy! Thanks for visiting the Chocobo Shop!
         GUIDE_STONE                   = 7161,  -- Up: Upper Jeuno (facing San d'Oria) Down: Port Jeuno (facing Windurst)
         ALDO_DIALOG                   = 7166,  -- Hi. I'm Aldo, head of Tenshodo. We deal in things you can't buy anywhere else. Take your time and have a look around.
+        YOU_RETURN_THE                = 7247,  -- You return the <keyitem>.
+        THE_LAMPS_WERE_LIT_BY         = 7265,  -- The lamps were lit by <player> today. If you happen to run across the person who took time out to bring light to our city, don't forget to say a word of thanks.
         VHANA_DEFAULT                 = 7266,  -- Sorry. I'm busy.
+        YOU_LIGHT_THE_LAMP            = 7269,  -- You light the lamp.
         LAMP_MSG_OFFSET               = 7270,  -- All the lamps are lit.
         ZAUKO_IS_RECRUITING           = 7278,  -- Zauko is recruiting an adventurer to light the lamps.
         CHOCOBO_DIALOG                = 7340,  -- Hmph.
@@ -86,6 +89,7 @@ zones[xi.zone.LOWER_JEUNO] =
     {
         VHANA_EHGAKLYWHA  = GetFirstID('Vhana_Ehgaklywha'),
         STREETLAMP_OFFSET = GetFirstID('_l00'),
+        ZAUKO             = GetFirstID('Zauko'),
     },
 }
 

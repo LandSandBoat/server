@@ -31,7 +31,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('nextMove', xi.mobSkill.GIGA_SCREAM_1)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return mob:getLocalVar('nextMove')
 end
 

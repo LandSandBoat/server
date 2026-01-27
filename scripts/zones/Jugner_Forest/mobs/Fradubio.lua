@@ -75,6 +75,10 @@ local updateRegen = function(mob)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+end
+
 entity.onMobSpawn = function(mob)
     updateRegen(mob)
 end

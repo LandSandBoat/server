@@ -1069,11 +1069,11 @@ INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1898);
 INSERT INTO `mob_skill_lists` VALUES ('ArmoredTroll',247,1899);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_the_Spatemaker',248,770); -- Jumping Thrust
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',249,367); -- Fireball
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1572); -- venom_shell
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1573); -- palsynyxis
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1574); -- painful_whip
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1575); -- suctorial_tentacle
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,505); -- venom_shell
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,504); -- gas_shell
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,506); -- palsynyxis
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,507); -- painful_whip
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,508); -- suctorial_tentacle
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2106); -- bloodrake
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2107); -- decollation
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2108); -- nosferatus_kiss

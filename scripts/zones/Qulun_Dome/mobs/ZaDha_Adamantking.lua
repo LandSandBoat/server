@@ -20,7 +20,11 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 8)
     mob:setMod(xi.mod.SLOW_RES_RANK, 8)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
 end
 
 entity.onMobEngage = function(mob, target)

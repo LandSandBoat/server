@@ -445,7 +445,8 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         action:recordDamage(target, xi.attackType.PHYSICAL, dmg)
 
         -- Effect
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
+        local bonusMacc  = player:getMod(xi.mod.VFLOURISH_MACC)
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, bonusMacc)
 
         if
             not xi.data.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.

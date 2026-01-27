@@ -33,6 +33,11 @@ entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- When server restarts, reset timer
 
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
+
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50) -- just one spell to spam
 end
 

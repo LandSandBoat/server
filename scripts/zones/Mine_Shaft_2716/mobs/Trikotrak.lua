@@ -37,7 +37,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.SMOKEBOMB_1
 end
 

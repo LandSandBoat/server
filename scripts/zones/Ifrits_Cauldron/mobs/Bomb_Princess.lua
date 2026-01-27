@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.SELF_DESTRUCT_BOMB
 end
 

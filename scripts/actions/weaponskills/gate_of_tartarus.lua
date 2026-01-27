@@ -34,7 +34,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Handle status effect
     local effectId      = xi.effect.ATTACK_DOWN
     local actionElement = xi.element.WATER
-    local power         = 20
+    local power         = 18.75 -- TODO : JP Wiki claims this power scales with ilvl. Denotes 18.75% at base. https://wiki.ffo.jp/html/3093.html
     local duration      = math.floor(120 * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 

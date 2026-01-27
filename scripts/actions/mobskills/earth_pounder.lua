@@ -13,9 +13,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 4
+    local fTP = 2.0
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    if mob:getPool() == xi.mobPool.PLATOON_SCORPION then
+        local battlefield = mob:getBattlefield()
+
+        if battlefield then
+            fTP = fTP + battlefield:getLocalVar('scorpionsDefeated') * .5
+        end
+    end
+
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.EARTH, fTP, xi.mobskills.magicalTpBonus.NO_EFFECT)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.EARTH)

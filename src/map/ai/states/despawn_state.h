@@ -39,6 +39,9 @@ public:
     {
         return false;
     }
+
+private:
+    timer::time_point despawnTime_;
 };
 
 #endif

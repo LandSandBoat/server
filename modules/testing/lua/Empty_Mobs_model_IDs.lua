@@ -118,6 +118,8 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
             objtype     = xi.objType.MOB,
             name        = mobInfo[i][1],
             groupId     = 5,
+            minLevel    = 90,
+            maxLevel    = 90,
             groupZoneId = 154,
             onMobSpawn = function(mob)
                 mob:setModelId(mobInfo[i][2])

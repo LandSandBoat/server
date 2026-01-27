@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skills =
     {
         xi.mobSkill.VOIDSONG_1,

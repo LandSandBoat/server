@@ -5,7 +5,6 @@
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
--- Notes: 25% Evasion Boost.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 25
+    local power    =  50
     local duration = 180
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, duration))
