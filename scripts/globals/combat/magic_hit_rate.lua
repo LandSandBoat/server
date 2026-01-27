@@ -589,6 +589,11 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup,
         resistanceRank = utils.clamp(resistanceRank, -3, 11)
     end
 
+    -- https://www.bg-wiki.com/ffxi/Resist#Modifying_Negative_Status_Resistance_Ranks
+    if effectId > 0 and resistanceRank == 11 then
+        return 0 -- cannot land, ever. This is different than "Completely resists". Same effect as trying to land Stun on an earth elemental, it can never land but it's not "immune"
+    end
+
     -- Get Actor Magic Accuracy and target Magic Evasion
     local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
     local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(actor, target, actionElement, effectId, resistanceRank)
