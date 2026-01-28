@@ -13,56 +13,51 @@ local ID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 local m = Module:new('era_moongate_time')
 
-local function setMoongatesOpen(isOpen)
+local function activateRoMaeve(zone)
+    local validMoon    = (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON)
+    local validHour    = (VanadielHour() >= 0 and VanadielHour() < 3)
+    local validWeather = (zone:getWeather() == xi.weather.NONE or zone:getWeather() == xi.weather.SUNSHINE)
+
+    local shouldDoorsOpen        = (validMoon and validHour)
+    local shouldFountainActivate = (validMoon and validHour and validWeather)
+
     local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
+    if moongate1 then
+        moongate1:setUntargetable(shouldDoorsOpen)
+    end
+
     local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
-
-    if not moongate1 or not moongate2 then
-        return
+    if moongate2 then
+        moongate2:setUntargetable(shouldDoorsOpen)
     end
 
-    local desiredState = isOpen and 1 or 0
-    if moongate1:getLocalVar('romaeveActive') == desiredState then
-        return
-    end
+    -- Determine what the animation/status of the NPCs should be.
+    local doorStatus     = shouldDoorsOpen and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
+    local fountainStatus = shouldFountainActivate and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
 
+    -- Loop over the affected NPCs: Moongates, bridges and fountain
     for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
         local npc = GetNPCByID(i)
-        if npc then
-            npc:setAnimation(isOpen and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR)
+        if i == ID.npc.MOONGATE_OFFSET + 6 then -- Fountain
+            if npc and npc:getAnimation() ~= fountainStatus then
+                npc:setAnimation(fountainStatus)
+            end
+        else
+            if npc and npc:getAnimation() ~= doorStatus then
+                npc:setAnimation(doorStatus)
+            end
         end
     end
-
-    moongate2:setUntargetable(isOpen)
-    moongate1:setUntargetable(isOpen)
-    moongate1:setLocalVar('romaeveActive', desiredState)
 end
 
 m:addOverride('xi.zones.RoMaeve.Zone.onInitialize', function(zone)
     super(zone)
-    setMoongatesOpen(false)
+    activateRoMaeve(zone)
 end)
 
 m:addOverride('xi.zones.RoMaeve.Zone.onGameHour', function(zone)
-    local vanadielHour = VanadielHour()
-    local qm2 = GetNPCByID(ID.npc.BASTOK_7_1_QM)
-    local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, false)
-
-    local isOpenWindow =
-        (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
-        (vanadielHour >= 0 and vanadielHour < 3)
-    setMoongatesOpen(isOpenWindow)
-
-    if
-        vanadielHour == 0 or
-        vanadielHour == 6 or
-        vanadielHour == 12 or
-        vanadielHour == 18
-    then
-        if qm2 then
-            npcUtil.queueMove(qm2, newPosition)
-        end
-    end
+    super(zone)
+    activateRoMaeve(zone)
 end)
 
 return m
