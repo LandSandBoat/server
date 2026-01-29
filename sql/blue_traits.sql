@@ -59,6 +59,8 @@ INSERT INTO `blue_traits` VALUES (8,10,3,24,60,5,1);     -- Attack Bonus (5) (JP
 INSERT INTO `blue_traits` VALUES (8,12,3,23,72,6,1);     -- Attack Bonus (6) (JP only)
 INSERT INTO `blue_traits` VALUES (8,12,3,24,72,6,1);     -- Attack Bonus (6) (JP only)
 INSERT INTO `blue_traits` VALUES (9,2,11,359,25,1,0);    -- Rapid Shot (1)
+INSERT INTO `blue_traits` VALUES (9,4,11,359,30,2,1);    -- Rapid Shot (2) (JP only)
+INSERT INTO `blue_traits` VALUES (9,6,11,359,35,3,1);    -- Rapid Shot (3) (JP only) -- Value is guessed
 INSERT INTO `blue_traits` VALUES (10,2,8,5,10,1,0);      -- Max MP Boost (1)
 INSERT INTO `blue_traits` VALUES (10,4,8,5,20,2,0);      -- Max MP Boost (2)
 INSERT INTO `blue_traits` VALUES (11,2,4,1,10,1,0);      -- Defense Bonus (1)
