@@ -39,6 +39,8 @@ INSERT INTO `blue_traits` VALUES (4,12,24,71,3,6,1);     -- Clear Mind (6) (JP o
 INSERT INTO `blue_traits` VALUES (5,2,48,240,10,1,0);    -- Resist Sleep (1)
 INSERT INTO `blue_traits` VALUES (6,2,5,28,20,1,0);      -- Magic Attack Bonus (1)
 INSERT INTO `blue_traits` VALUES (7,2,39,231,8,1,0);     -- Undead Killer (1)
+INSERT INTO `blue_traits` VALUES (7,4,39,231,10,2,1);    -- Undead Killer (2) (JP only)
+INSERT INTO `blue_traits` VALUES (7,6,39,231,12,3,1);    -- Undead Killer (3) (JP only)
 INSERT INTO `blue_traits` VALUES (8,2,3,23,10,1,0);      -- Attack Bonus (1)
 INSERT INTO `blue_traits` VALUES (8,2,3,24,10,1,0);      -- Attack Bonus (1)
 INSERT INTO `blue_traits` VALUES (8,4,3,23,22,2,0);      -- Attack Bonus (2)
