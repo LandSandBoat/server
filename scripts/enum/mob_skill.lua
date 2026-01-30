@@ -415,6 +415,8 @@ xi.mobSkill =
 
     HOWL                          = 1062,
 
+    DOOM_1                        = 1067,
+
     FRYPAN_1                      = 1081,
     SMOKEBOMB_1                   = 1082,
 
