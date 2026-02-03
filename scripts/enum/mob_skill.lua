@@ -646,7 +646,12 @@ xi.mobSkill =
 
     WATER_BOMB                    = 1959,
 
+    MIND_BLAST                    = 1963,
+    IMMORTAL_MIND                 = 1964,
     IMMORTAL_SHIELD               = 1965,
+    MIND_PURGE                    = 1966,
+    TRIBULATION                   = 1967,
+    IMMORTAL_ANATHEMA             = 1968,
 
     ECLOSION                      = 1970, -- Unique entry.
 

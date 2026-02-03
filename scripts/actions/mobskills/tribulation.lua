@@ -16,7 +16,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = nil
-    local blinded    = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120)
+    local blinded    = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 110, 0, 120)
     local bio        = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 39, 0, 120)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)

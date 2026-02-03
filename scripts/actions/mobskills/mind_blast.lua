@@ -13,13 +13,16 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 6
+    local damage = mob:getMainLvl() + 2
+    local dINT   = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    damage       = damage + (dINT * 1.5)
 
-    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, 2, xi.mobskills.magicalTpBonus.NO_EFFECT)
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 180)
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 45)
 
     return damage
 end

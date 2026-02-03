@@ -1,15 +1,11 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  Mob: Mahjlaef the Paintorn (ZNM T3)
+--   Mob: Soulflayer
 -----------------------------------
 mixins = { require('scripts/mixins/families/soulflayer') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-end
 
 entity.onMobMobskillChoose = function(mob, target)
     local shield = mob:getLocalVar('immortalShieldStacks')
