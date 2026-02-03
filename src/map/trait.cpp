@@ -80,17 +80,17 @@ void LoadTraitsList()
         PTraitsList[PTrait->getJob()].emplace_back(PTrait);
     }
 
-    rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value "
+    rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value, tier, job_points_only "
                             "FROM blue_traits "
                             "WHERE traitid < ? "
-                            "ORDER BY trait_category ASC, trait_points_needed DESC",
+                            "ORDER BY tier ASC",
                             MAX_TRAIT_ID);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"));
+        auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"), rset->get<bool>("job_points_only"));
 
         PTrait->setJob(JOB_BLU);
-        PTrait->setRank(1);
+        PTrait->setRank(rset->get<uint8>("tier"));
         PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
         PTrait->setMod(rset->get<Mod>("modifier"));
         PTrait->setValue(rset->get<int16>("value"));

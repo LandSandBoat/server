@@ -96,11 +96,21 @@ quest.sections =
                         not GetMobByID(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 1):isSpawned() and
                         not GetMobByID(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 2):isSpawned()
                     then
-                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 0):updateClaim(player) -- Picklix_Longindex
-                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 1):updateClaim(player) -- Moxnix_Nightgoggle
-                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 2):updateClaim(player) -- Doglix_Muttsnout
+                        player:messageSpecial(behemothsDominionID.text.THERE_ARE_SYMBOLS)
+                        return quest:progressEvent(100)
+                    end
+                end,
+            },
 
-                        return quest:messageSpecial(behemothsDominionID.text.SENSE_OF_FOREBODING)
+            onEventFinish =
+            {
+                [100] = function(player, csid, option, npc)
+                    if option == 0 then
+                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 0):updateClaim(player) -- Picklix_Longindex
+                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 1):updateEnmity(player) -- Moxnix_Nightgoggle
+                        SpawnMob(behemothsDominionID.mob.TALEKEEPERS_GIFT_OFFSET + 2):updateEnmity(player) -- Doglix_Muttsnout
+
+                        return player:messageSpecial(behemothsDominionID.text.YOU_HEAR_A_NOISE)
                     end
                 end,
             },

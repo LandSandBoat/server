@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 10)
     mob:setMod(xi.mod.BIND_RES_RANK, 10)
     mob:setMod(xi.mod.BLIND_RES_RANK, 10)
-    mob:setMod(xi.mod.STUN_MEVA, 10000)
+    mob:setMod(xi.mod.STUN_RES_RANK, 10)
     mob:setMod(xi.mod.DARK_RES_RANK, 10)
     mob:setMod(xi.mod.ICE_RES_RANK, 10)
 end

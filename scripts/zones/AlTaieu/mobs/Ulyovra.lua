@@ -22,7 +22,15 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { duration = math.random(5, 10) })
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.PARALYSIS,
+        power    = 20,
+        duration = 30,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobEngage = function(mob, target)

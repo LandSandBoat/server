@@ -9,11 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.beastmaster.onAbilityCheckNilPet(player, target, ability)
+    return xi.job_utils.beastmaster.checkPetCommand(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    return xi.job_utils.beastmaster.onUseAbilityStay(player, target, ability)
+    return xi.job_utils.beastmaster.useStay(player, target, ability)
 end
 
 return abilityObject

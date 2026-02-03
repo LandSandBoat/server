@@ -118,7 +118,8 @@ bool CLatentEffect::ModOnItemOnly(Mod modID)
         modID == Mod::ITEM_ADDEFFECT_POWER ||
         modID == Mod::ITEM_ADDEFFECT_DURATION ||
         modID == Mod::ADDS_WEAPONSKILL ||
-        modID == Mod::MOVE_SPEED_GEAR_BONUS)
+        modID == Mod::MOVE_SPEED_GEAR_BONUS ||
+        modID == Mod::CRITHITRATE_ONLY_WEP)
     {
         return true;
     }

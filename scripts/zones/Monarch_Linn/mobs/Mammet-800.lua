@@ -7,11 +7,6 @@ local monarchLinnID = zones[xi.zone.MONARCH_LINN]
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Get staff delay.
--- TODO: Tweak attack speeds.
--- TODO: Investigate form damage.
--- TODO: Get Ninjutsu and Song resistances.
-
 -- Additional battlefield Mammets will be added to keep track for win conditions for each battlefield.
 local battlefieldMammets =
 {
@@ -20,10 +15,7 @@ local battlefieldMammets =
     [ monarchLinnID.mob.MAMMET_800 + 20 ] = { },
 }
 
--- Run time TP move container.
-local tpMoves = { }
-
-local modes =
+local forms =
 {
     UNARMED = 0,
     SWORD   = 1,
@@ -31,128 +23,63 @@ local modes =
     STAFF   = 3,
 }
 
-local modeData =
+local tpMoves =
 {
-    [modes.UNARMED] =
-    {
-        tpMoves  =
-        {
-            xi.mobSkill.TRANSMOGRIFICATION,
-            xi.mobSkill.TREMOROUS_TREAD,
-        },
-        isCaster = false,
-        delay    = 3040,
-        damage   = 40,
-    },
 
-    [modes.SWORD] =
+    [forms.UNARMED] =
     {
-        tpMoves  =
-        {
-            xi.mobSkill.VELOCIOUS_BLADE,
-            xi.mobSkill.SCISSION_THRUST,
-            xi.mobSkill.SONIC_BLADE,
-        },
-        isCaster = false,
-        delay    = 2090,
-        damage   = 40,
+        xi.mobSkill.TRANSMOGRIFICATION,
+        xi.mobSkill.TREMOROUS_TREAD,
     },
-
-    [modes.POLEARM] =
+    [forms.SWORD] =
     {
-        tpMoves  =
-        {
-            xi.mobSkill.MICROQUAKE,
-            xi.mobSkill.PERCUSSIVE_FOIN,
-            xi.mobSkill.GRAVITY_WHEEL,
-        },
-        isCaster = false,
-        delay    = 5060,
-        damage   = 75,
+        xi.mobSkill.VELOCIOUS_BLADE,
+        xi.mobSkill.SONIC_BLADE,
+        xi.mobSkill.SCISSION_THRUST,
     },
-
-    [modes.STAFF] =
+    [forms.POLEARM] =
     {
-        tpMoves  =
-        {
-            xi.mobSkill.PSYCHOMANCY,
-            xi.mobSkill.MIND_WALL,
-        },
-        isCaster = true,
-        delay    = 4100,
-        damage   = 40,
+        xi.mobSkill.PERCUSSIVE_FOIN,
+        xi.mobSkill.GRAVITY_WHEEL,
+        xi.mobSkill.MICROQUAKE,
+    },
+    [forms.STAFF] =
+    {
+        xi.mobSkill.PSYCHOMANCY,
+        xi.mobSkill.MIND_WALL,
     },
 }
 
 -----------------------------------
--- Switches the mammet to a new battle mode.
------------------------------------
-local modeSwitch = function(mob, newMode)
-    -- Avoid the same mode twice in a row.
-    if not newMode then
-        local currentMode = mob:getAnimationSub()
-
-        repeat
-            newMode = math.random(modes.UNARMED, modes.STAFF)
-        until newMode ~= currentMode
-    end
-
-    local details = modeData[newMode]
-    tpMoves = { }
-
-    -- Add base Mammet move set.
-    for _, skillID in ipairs(modeData[modes.UNARMED].tpMoves) do
-        table.insert(tpMoves, skillID)
-    end
-
-    -- Add weapon move set.
-    if newMode ~= modes.UNARMED then
-        for _, skillID in ipairs(details.tpMoves) do
-            table.insert(tpMoves, skillID)
-        end
-    end
-
-    mob:setAnimationSub(newMode)
-    mob:setMagicCastingEnabled(details.isCaster)
-    mob:setDelay(details.delay)
-    mob:setDamage(details.damage)
-end
-
------------------------------------
 -- Spawns additional mammets upon engagement based on player count.
 -----------------------------------
-local spawnAdditionalMammets = function(mob, target)
-    local parentID = mob:getID()
+local function spawnAdditionalMammets(mob, target)
+    local parentID    = mob:getID()
+    local battlefield = mob:getBattlefield()
+    if not battlefield or not battlefieldMammets[parentID] then
+        return
+    end
 
-    if battlefieldMammets[parentID] then
-        local players = mob:getBattlefield():getPlayers()
+    local players    = battlefield:getPlayers()
+    local spawnCount = math.floor((#players - 1) / 2)
 
-        mob:setLocalVar('parentMammet', parentID)
-        battlefieldMammets[parentID][mob:getID()] = true
+    mob:setLocalVar('parentMammet', parentID)
+    battlefieldMammets[parentID][parentID] = true
 
-        for i = 3, #players, 2 do
-            if i >= 19 then
-                break
-            end
+    if spawnCount < 1 then
+        return
+    end
 
-            local newMobID = parentID + i
-            local newMob   = SpawnMob(newMobID)
+    for i = 1, spawnCount do
+        local newMobID = parentID + i
+        local newMob   = SpawnMob(newMobID)
 
-            if newMob then
-                newMob:setLocalVar('parentMammet', parentID)
-                battlefieldMammets[parentID][newMobID] = true
-                newMob:updateEnmity(target)
-            end
+        if newMob then
+            newMob:setLocalVar('parentMammet', parentID)
+            battlefieldMammets[parentID][newMobID] = true
+            newMob:updateEnmity(target)
         end
     end
-end
-
------------------------------------
--- Sets the next form switch time.
------------------------------------
-local scheduleModeSwitch = function(mob, time)
-    time = time or mob:getBattleTime()
-    mob:setLocalVar('nextFormTime', time + math.random(50, 60))
 end
 
 -----------------------------------
@@ -173,8 +100,6 @@ end
 -- Will not move or auto-attack for 8 seconds after engagement.
 -----------------------------------
 entity.onMobSpawn = function(mob)
-    modeSwitch(mob, modes.UNARMED)
-    mob:setDelay(4070)
     mob:setLocalVar('engageDelay', 0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setAutoAttackEnabled(false)
@@ -186,34 +111,58 @@ end
 -- The first mammet will spawn additional mammets based on the number of players.
 -----------------------------------
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('engageDelay', mob:getBattleTime() + 8)
+    mob:setLocalVar('engageDelay', mob:getBattleTime() + 5)
     spawnAdditionalMammets(mob, target)
-    scheduleModeSwitch(mob)
 end
 
------------------------------------
--- Form switch controller.
------------------------------------
 entity.onMobFight = function(mob, target)
-    local currentTime = mob:getBattleTime()
-    local engageDelay = mob:getLocalVar('engageDelay')
-
-    if
-        currentTime >= mob:getLocalVar('nextFormTime') and
-        mob:canUseAbilities() and
-        not mob:hasStatusEffect(xi.effect.FOOD)     -- Yellow Liquid
-    then
-        modeSwitch(mob)
-        scheduleModeSwitch(mob, currentTime)
-    end
-
-    -- Initial battle engagement delay.
-    if engageDelay ~= 0 and currentTime >= engageDelay then
-        mob:setLocalVar('engageDelay', 0)
+    -- Only enable movement and auto-attack after the initial delay.
+    if mob:getBattleTime() >= mob:getLocalVar('engageDelay') then
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:setAutoAttackEnabled(true)
-    elseif engageDelay ~= 0 then
-        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    end
+
+    -- Changes forms after 15-60 seconds randomly
+    local timeTracker = mob:getLocalVar('formTimeTracker')
+    local currentTime = mob:getBattleTime()
+    -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
+    local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
+
+    if
+        currentTime >= timeTracker and
+        not cannotChangeForm
+    then
+        -- Pick a new form --
+        local rand = math.random(0, 3)
+        mob:setAnimationSub(rand)
+        switch (rand): caseof
+        {
+            [forms.UNARMED] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(2400)
+                mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+            end,
+
+            [forms.SWORD] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(1200)
+                mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+            end,
+
+            [forms.POLEARM] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(3000)
+                mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+            end,
+
+            [forms.STAFF] = function()
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+                mob:setMagicCastingEnabled(true)
+                mob:setDelay(2400)
+                mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 100)
+            end,
+        }
+        mob:setLocalVar('formTimeTracker', mob:getBattleTime() + math.random(15, 60))
     end
 end
 
@@ -221,35 +170,51 @@ end
 -- Select TP moves based on current form.
 -----------------------------------
 entity.onMobMobskillChoose = function(mob, target, skillId)
-    local selectedMove = math.random(1, #tpMoves)
+    local form  = mob:getAnimationSub()
+    local moves = tpMoves[form]
 
-    return tpMoves[selectedMove]
+    return moves[math.random(1, #moves)]
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.STONEGA_III,
+        xi.magic.spell.WATERGA_III,
+        xi.magic.spell.AEROGA_III,
+        xi.magic.spell.FIRAGA_III,
+        xi.magic.spell.BLIZZAGA_III,
+        xi.magic.spell.THUNDAGA_III,
+    }
+
+    return spellList[math.random(#spellList)]
 end
 
 -----------------------------------
 -- Check that all of the mobs from the battlefield have been defeated.
 -----------------------------------
 entity.onMobDeath = function(mob, player, optParams)
-    local parentMammet     = mob:getLocalVar('parentMammet')
-    local battlefieldGroup = battlefieldMammets[parentMammet]
+    if optParams.isKiller or optParams.noKiller then
+        local parentMammet = mob:getLocalVar('parentMammet')
+        local battlefieldGroup = battlefieldMammets[parentMammet]
 
-    if not battlefieldGroup then
-        return
-    end
-
-    for id, _ in pairs(battlefieldGroup) do
-        local checkMob = GetMobByID(id)
-
-        if checkMob and checkMob:isAlive() then
+        if not battlefieldGroup then
             return
         end
-    end
 
-    local battlefield = mob:getBattlefield()
-    battlefieldMammets[parentMammet] = { }
+        for id, _ in pairs(battlefieldGroup) do
+            local checkMob = GetMobByID(id)
+            if checkMob and checkMob:isAlive() then
+                return
+            end
+        end
 
-    if battlefield then
-        battlefield:setStatus(xi.battlefield.status.WON)
+        local battlefield = mob:getBattlefield()
+        battlefieldMammets[parentMammet] = { }
+
+        if battlefield then
+            battlefield:setStatus(xi.battlefield.status.WON)
+        end
     end
 end
 

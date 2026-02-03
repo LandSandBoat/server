@@ -66,6 +66,12 @@ entity.phList =
     [ID.mob.DUNE_WIDOW - 1] = ID.mob.DUNE_WIDOW,
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 408)
     xi.magian.onMobDeath(mob, player, optParams, set{ 712 })

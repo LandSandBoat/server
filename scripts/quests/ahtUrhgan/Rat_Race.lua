@@ -142,7 +142,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 4 and
-                        npcUtil.tradeHasExactly(trade, { xi.item.AHTAPOT, xi.item.ISTAKOZ, xi.item.ISTAVRIT, xi.item.ISTIRIDYE, xi.item.MERCANBALIGI })
+                        npcUtil.tradeHasExactly(trade, { xi.item.AHTAPOT, xi.item.ISTAKOZ, xi.item.ISTAVRIT_1, xi.item.ISTIRIDYE, xi.item.MERCANBALIGI })
                     then
                         return quest:progressEvent(310)
                     end

@@ -98,7 +98,7 @@ g_mixins.families.avatar = function(avatarMob)
         if abilityId > 0 then
             mob:timer(astralDelayMs, function(mobArg)
                 if mobArg:isAlive() then
-                    mobArg:useMobAbility(abilityId)
+                    mobArg:useMobAbility(abilityId, target)
                 end
             end)
         end

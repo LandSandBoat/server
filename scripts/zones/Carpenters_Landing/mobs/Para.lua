@@ -21,10 +21,15 @@ local checkIfShouldClone = function(hpp, skillId)
     end
 end
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
     mob:setMod(xi.mod.UDMGMAGIC, -4000)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 
     local para = GetMobByID(ID.mob.PARA)
 
@@ -46,6 +51,7 @@ end
 -- TP moves that spawned a clone in the capture: 310 - Queezyshroom, 311- Numbshroom, 312 - Shakeshroom
 -- No reports or captures if the clones can respawn.
 -- Reports from players saying only the original needs to be killed.
+-- To do: Per retail captures, a clone is only made when the appropriate TP move LANDS. It will NOT clone when it misses and fails to do damage to the player.
 entity.onMobWeaponSkill = function(target, mob, skill)
     local hpp   = mob:getHPP()
     local skillId = skill:getID()

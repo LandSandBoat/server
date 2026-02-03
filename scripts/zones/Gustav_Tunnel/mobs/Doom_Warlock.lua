@@ -61,6 +61,10 @@ local taximSpawnPoints =
     { x = -140.436, y = 0.053,  z = 45.891 },
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 765, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 766, 1, xi.regime.type.GROUNDS)

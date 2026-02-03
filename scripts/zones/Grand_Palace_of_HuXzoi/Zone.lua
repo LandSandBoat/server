@@ -36,8 +36,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-20, -1.5, -355.482, 192)
     end
 
-    player:setCharVar('Hu-Xzoi-TP', 0)
-
     return cs
 end
 
@@ -50,11 +48,11 @@ end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
-        player:getLocalVar('Hu-Xzoi-TP') == 0 and
+        player:getLocalVar('isTeleporting') == 0 and
         player:getAnimation() == xi.anim.NONE
     then
         -- prevent 2cs at same time
-        player:startEvent(149 + triggerArea:getTriggerAreaID())
+        player:startOptionalCutscene(149 + triggerArea:getTriggerAreaID()) -- Confirmed to wipe enmity.
     end
 end
 
@@ -63,13 +61,13 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
-        player:setLocalVar('Hu-Xzoi-TP', 1)
+        player:setLocalVar('isTeleporting', 1)
     end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
-        player:setLocalVar('Hu-Xzoi-TP', 0)
+        player:setLocalVar('isTeleporting', 0)
     end
 end
 

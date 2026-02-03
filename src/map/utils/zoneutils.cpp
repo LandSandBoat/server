@@ -412,7 +412,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                 auto* PZone = g_PZoneList[zoneId];
 
                 const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
-                                   "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "
+                                   "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, mob_spawn_points.minLevel, mob_spawn_points.maxLevel, "
                                    "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
                                    "ecosystemID, speed, "
                                    "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
@@ -424,10 +424,12 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                                    "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                                    "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                    "mob_family_system.charmable, mob_groups.content_tag, "
-                                   "mob_pools.modelSize, mob_pools.modelHitboxSize "
+                                   "mob_pools.modelSize, mob_pools.modelHitboxSize, "
+                                   "mob_spawn_slots.spawnslotid, mob_spawn_slots.chance "
                                    "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                    "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
                                    "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                                   "LEFT JOIN mob_spawn_slots ON (mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid AND mob_spawn_slots.zoneid = mob_groups.zoneid) "
                                    "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                                    "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
                                    "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
@@ -594,6 +596,26 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
                             PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
 
+                            // Add mob to spawn slot if it has one
+                            uint32 slotId      = rset->getOrDefault<uint32>("spawnslotid", 0);
+                            uint8  spawnChance = rset->getOrDefault<uint8>("chance", 0);
+
+                            if (slotId > 0)
+                            {
+                                auto& spawnSlot = PZone->m_spawnSlots[slotId];
+                                if (!spawnSlot)
+                                {
+                                    spawnSlot = std::make_unique<SpawnSlot>();
+                                }
+
+                                if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED)
+                                {
+                                    ShowError("Mob with ID %u in spawn slot %u in zone %u is a scripted spawn. Scripted spawns should not be assigned to spawn slots.", PMob->id, slotId, zoneId);
+                                }
+
+                                spawnSlot->AddMob(PMob, spawnChance);
+                            }
+
                             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                             // can be set in their onInitialize
                             if (PMob->m_Type & MOBTYPE_EVENT ||
@@ -616,69 +638,6 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
     }
 
     Async::getInstance()->wait();
-
-    ShowInfo("Loading Mob spawn slots");
-
-    std::string spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid, "
-                                 "mob_groups.content_tag "
-                                 "FROM mob_spawn_slots "
-                                 "JOIN mob_spawn_points ON mob_spawn_points.spawnslotid = mob_spawn_slots.spawnslotid "
-                                 "JOIN mob_groups ON mob_groups.zoneid = mob_spawn_slots.zoneid "
-                                 " AND mob_groups.groupid = mob_spawn_points.groupid "
-                                 " AND mob_groups.name = mob_spawn_points.mobname "
-                                 "WHERE mob_spawn_slots.zoneid = ?";
-
-    for (const auto zoneId : zoneIds)
-    {
-        auto* PZone = GetZone(zoneId);
-        if (!PZone)
-        {
-            continue;
-        }
-
-        const auto ret = db::preparedStmt(spawnSlotQuery, zoneId);
-
-        if (!ret || !ret->rowsCount())
-        {
-            continue;
-        }
-
-        while (ret->next())
-        {
-            // If there is no content tag, the mob will always be loaded
-            const auto contentTag = ret->getOrDefault<std::string>("content_tag", "");
-            if (!luautils::IsContentEnabled(contentTag))
-            {
-                continue;
-            }
-
-            uint32 slotId      = ret->get<uint32>("spawnslotid");
-            uint8  spawnChance = ret->get<uint8>("chance");
-            uint32 mobId       = ret->get<uint32>("mobid");
-
-            // Default: no slot
-            if (slotId == 0)
-            {
-                continue;
-            }
-
-            // Assign the spawnslot to the zone
-            auto& spawnSlot = PZone->m_spawnSlots[slotId];
-            if (!spawnSlot)
-            {
-                spawnSlot = std::make_unique<SpawnSlot>();
-            }
-
-            auto mob = static_cast<CMobEntity*>(GetEntity(mobId));
-            if (!mob)
-            {
-                ShowError("Expected to have mob %u in spawn slot %u, but the mob was not found.", mobId, slotId);
-                continue;
-            }
-
-            spawnSlot->AddMob(mob, spawnChance);
-        }
-    }
 
     ShowInfo("Loading Mob scripts");
     // handle mob Initialize functions after they're all loaded

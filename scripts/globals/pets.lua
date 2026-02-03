@@ -164,15 +164,6 @@ xi.pet.applyFamiliarBuffs = function(owner, pet)
     -- wakes up pets
     pet:addHP(addedHP)
 
-    -- adds % bonuses to the following stats
-    -- TODO are these the only stats boosted?
-    pet:addMod(xi.mod.ATTP, familiarBoost)
-    pet:addMod(xi.mod.RATTP, familiarBoost)
-    pet:addMod(xi.mod.DEFP, familiarBoost)
-    pet:addMod(xi.mod.ACC, pet:getMod(xi.mod.ACC) * familiarBoostPerc)
-    pet:addMod(xi.mod.RACC, pet:getMod(xi.mod.RACC) * familiarBoostPerc)
-    pet:addMod(xi.mod.EVA, pet:getMod(xi.mod.EVA) * familiarBoostPerc)
-
     -- TODO does familiar give some bonus resistance to crowd control? Is it only for mob pets?
     -- Lots of reports of mobs using Familiar and the pet having higher chance to resist bind/sleep/etc
 end

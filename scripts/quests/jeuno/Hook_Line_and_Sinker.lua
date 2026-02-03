@@ -25,7 +25,7 @@ quest.sections =
             ['Omer'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10040, 0, xi.item.THREE_EYED_FISH, xi.item.CRESCENT_FISH, 0, xi.item.EGRET_FISHING_ROD)
+                    return quest:progressEvent(10040, 0, xi.item.THREE_EYED_FISH_1, xi.item.CRESCENT_FISH, 0, xi.item.EGRET_FISHING_ROD)
                 end,
             },
 

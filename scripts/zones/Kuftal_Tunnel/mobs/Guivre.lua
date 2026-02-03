@@ -200,13 +200,18 @@ local pathFind =
 }
 
 entity.onMobInitialize = function(mob)
-    -- Guivre has increased movespeed, sight range with
-    -- Natural double/triple attack.
-    mob:setMod(xi.mobMod.RUN_SPEED_MULT, 300)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
-    mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
+    -- Guivre has increased sight range
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.GRAVITY)
+
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
 
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(900, 10800))
@@ -214,6 +219,8 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Guivre will despawn if not claimed within 3-5 hours.
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
     mob:setLocalVar('despawnTime', math.random(10800, 18000) + GetSystemTime())
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)

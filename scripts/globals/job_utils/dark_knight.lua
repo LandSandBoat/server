@@ -92,7 +92,7 @@ xi.job_utils.dark_knight.useConsumeMana = function(player, target, ability)
     return xi.effect.CONSUME_MANA
 end
 
-xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
+xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability, action)
     -- Power: Each merit level after the first reduces Dark Magic casting time by -10% (total of -40% bonus).
     -- Sub Power: Enhances Dark Seal effect by increasing duration of Dark Magic by 10% per merit level (total of 50% bonus).
     local power    = player:getMerit(xi.merit.DARK_SEAL) - 10
@@ -103,7 +103,7 @@ xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
     return xi.effect.DARK_SEAL
 end
 
-xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
+xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability, action)
     local power    = 15 + player:getMerit(xi.merit.DIABOLIC_EYE) * 5
     local duration = 180 + player:getMerit(xi.merit.DIABOLIC_EYE) * player:getMod(xi.mod.ENHANCES_DIABOLIC_EYE)
 
@@ -150,21 +150,40 @@ xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
     return xi.effect.SOULEATER
 end
 
-xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
-    -- Applying Weapon Bash stun. Rate is said to be near 100%, so let's say 99%.
-    if math.random(1, 100) <= 99 then
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
-    end
-
-    -- Weapon Bash deals damage dependant of Dark Knight level
+xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability, action)
+    -- Damage
     local darkKnightLvl = utils.getActiveJobLevel(player, xi.job.DRK)
-
-    -- Calculating and applying Weapon Bash damage
-    local jpValue = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT)
-    local damage  = math.floor((darkKnightLvl + 11) / 4 + player:getMod(xi.mod.WEAPON_BASH) + jpValue * 10)
-
+    local jpValue       = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT)
+    local damage        = math.floor((darkKnightLvl + 11) / 4 + player:getMod(xi.mod.WEAPON_BASH) + jpValue * 10)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
+
+    -- Stun.
+    if
+        not xi.data.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and
+        not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and
+        not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0)
+    then
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
+        if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
+            target:addStatusEffect(xi.effect.STUN, 1, 0, math.random(2, 8) * resistanceRate)
+        end
+    end
+
+    -- Animation.
+    local animationTable =
+    {
+        -- [weapon type] = animation ID,
+        [xi.skill.GREAT_SWORD ] = 201,
+        [xi.skill.GREAT_KATANA] = 201,
+        [xi.skill.GREAT_AXE   ] = 202,
+        [xi.skill.SCYTHE      ] = 202,
+        [xi.skill.STAFF       ] = 202,
+        [xi.skill.POLEARM     ] = 203,
+    }
+
+    local animation = animationTable[player:getWeaponSkillType(xi.slot.MAIN)] or 0
+    action:setAnimation(target:getID(), animation)
 
     return damage
 end

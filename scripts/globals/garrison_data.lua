@@ -29,13 +29,15 @@ xi.garrison.allyNames =
 -- Group Ids are different per cap due to min / max level requirements
 -- They all use the same pool at the moment, but we could also change families
 -- based on cap, which would change base stats
-xi.garrison.allyGroupIds =
+-- All these group ids are currently set to 1 and defaulted inside the GM HOME mob_groups section
+xi.garrison.allyGroupInfo =
 {
-    [20] = 1,
-    [30] = 2,
-    [40] = 3,
-    [50] = 4,
-    [99] = 5,
+    -- LvlCap = { groupId, minLevel, maxLevel }
+    [20] = { 1, 15, 20 },
+    [30] = { 1, 25, 30 },
+    [40] = { 1, 35, 40 },
+    [50] = { 1, 45, 50 },
+    [99] = { 1, 70, 75 },
 }
 
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost - More data needed)

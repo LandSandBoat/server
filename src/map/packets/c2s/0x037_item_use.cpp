@@ -49,13 +49,13 @@ auto GP_CLI_COMMAND_ITEM_USE::validate(MapSession* PSession, const CCharEntity* 
     return PacketValidator()
         .isNotMonstrosity(PChar)
         .mustEqual(PChar->inMogHouse(), false, "Player is in moghouse")
-        .mustEqual(ItemNum, 0, "ItemNum not 0")
-        .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers);
+        .mustEqual(this->ItemNum, 0, "ItemNum not 0")
+        .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers);
 }
 
 void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PEntity = PChar->GetEntity(ActIndex);
+    auto* PEntity = PChar->GetEntity(this->ActIndex);
     if (!PEntity)
     {
         return;
@@ -69,10 +69,41 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
         return;
     }
 
+    const auto* PItem = PChar->getStorage(this->Category)->GetItem(this->PropertyItemIndex);
+    if (!PItem)
+    {
+        return;
+    }
+
+    // Equipment can be locked (equipped state) and still usable, but must actually be equipped
+    // Non-equipment items should never be locked
+    auto isEquipped = [&]() -> bool
+    {
+        for (uint8 slot = 0; slot < 18; ++slot)
+        {
+            if (PChar->equipLoc[slot] == this->Category && PChar->equip[slot] == this->PropertyItemIndex)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    const bool isEquipment = PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT);
+    const bool isLocked    = PItem->isSubType(ITEM_LOCKED) && !(isEquipment && isEquipped());
+    if (isLocked ||
+        PItem->getReserve() > 0 ||
+        PItem->getCharPrice() > 0)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_ITEM_USE: {} trying to use invalid item (locked/reserved/bazaared)", PChar->getName());
+        return;
+    }
+
     // TODO: Using a charged item on a non-eligible target (i.e. Soultrapper): Cannot use the <item> on <target>.
     if (PChar->UContainer->GetType() != UCONTAINER_USEITEM)
     {
-        PChar->PAI->UseItem(ActIndex, Category, PropertyItemIndex);
+        PChar->PAI->UseItem(this->ActIndex, this->Category, this->PropertyItemIndex);
     }
     else
     {

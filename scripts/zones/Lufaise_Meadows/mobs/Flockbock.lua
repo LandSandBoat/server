@@ -14,6 +14,7 @@ entity.onMobInitialize = function(mob)
     -- TODO: Exact STP value needs to be researched further
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
     mob:addMod(xi.mod.STORETP,       25)
+    mob:setRespawnTime(math.random(3600, 7200))
 end
 
 entity.onMobSpawn = function(mob)

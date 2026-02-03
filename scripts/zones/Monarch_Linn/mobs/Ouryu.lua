@@ -159,7 +159,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         actorStat      = xi.mod.INT,
     }
 
-    return xi.combat.action.executeAdditionalDamage(mob, target, pTable)
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
 entity.onMobDisengage = function(mob)

@@ -8,7 +8,8 @@ local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
 entity.onMobDespawn = function(mob)

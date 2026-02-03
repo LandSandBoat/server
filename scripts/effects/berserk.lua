@@ -13,7 +13,7 @@ effectObject.onEffectGain = function(target, effect)
 
     effect:addMod(xi.mod.ATTP, power)
     effect:addMod(xi.mod.RATTP, power)
-    effect:addMod(xi.mod.DEFP, -25)
+    effect:addMod(xi.mod.DEFP, -25) -- TODO: This is supposed to mirror power in most cases
 
     -- Job Point Bonuses
     effect:addMod(xi.mod.ATT, jpEffect)

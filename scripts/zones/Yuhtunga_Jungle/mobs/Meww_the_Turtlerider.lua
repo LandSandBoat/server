@@ -18,6 +18,10 @@ entity.spawnPoints =
 
 -- all body guard functionality in the rotz_bodyguarded_nm mixin
 
+entity.onMobInitialize = function(mob)
+    mob:setRespawnTime(math.random(900, 10800))
+end
+
 entity.onMobSpawn = function(mob)
     -- retail captures show these mods do have a dependency that needs to be further investigated
     mob:setMod(xi.mod.UDMGPHYS, -5000)

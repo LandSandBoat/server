@@ -17,6 +17,10 @@ entity.phList =
     [ID.mob.SHADOW_EYE - 6] = ID.mob.SHADOW_EYE,
 }
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 315)
 end

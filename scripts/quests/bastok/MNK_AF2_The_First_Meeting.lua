@@ -51,16 +51,49 @@ quest.sections =
             ['Hide_Flap_2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
-                        if quest:getLocalVar(player, 'nmKilled') == 3 then
-                            npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
-                        elseif
-                            not GetMobByID(davoiID.mob.BILOPDOP):isSpawned() and
-                            not GetMobByID(davoiID.mob.DELOKNOK):isSpawned()
-                        then
-                            SpawnMob(davoiID.mob.BILOPDOP):updateClaim(player)
-                            SpawnMob(davoiID.mob.DELOKNOK):updateClaim(player)
-                        end
+                    player:messageSpecial(davoiID.text.FIND_ORC_TENT)
+
+                    if
+                        player:checkDistance(npc) > 1 and
+                        player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)
+                    then
+                        return quest:messageSpecial(davoiID.text.CLOSER_TO_SEARCH)
+                    elseif
+                        not GetMobByID(davoiID.mob.BILOPDOP):isAlive() and
+                        not GetMobByID(davoiID.mob.DELOKNOK):isAlive()
+                    then
+                        return quest:progressEvent(108)
+                    else
+                        return quest:noAction()
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [108] = function(player, csid, option, npc)
+                    if option ~= 0 then
+                        return
+                    end
+
+                    if player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
+                        player:messageSpecial(davoiID.text.FIND_NOTHING)
+                        return
+                    end
+
+                    if quest:getLocalVar(player, 'nmKilled') == 3 then
+                        npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
+                        return
+                    end
+
+                    if
+                        not GetMobByID(davoiID.mob.BILOPDOP):isSpawned() and
+                        not GetMobByID(davoiID.mob.DELOKNOK):isSpawned()
+                    then
+                        player:messageSpecial(davoiID.text.FIND_NOTHING)
+                        SpawnMob(davoiID.mob.BILOPDOP):updateClaim(player)
+                        SpawnMob(davoiID.mob.DELOKNOK):updateEnmity(player)
+                        return
                     end
                 end,
             },

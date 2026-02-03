@@ -50,21 +50,47 @@ quest.sections =
             ['Hide_Flap_1'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL) then
-                        if quest:getLocalVar(player, 'nmKilled') == 3 then
-                            return quest:keyItem(xi.ki.SWORD_GRIP_MATERIAL)
-                        elseif
-                            not GetMobByID(davoiID.mob.GAVOTVUT):isSpawned() and
-                            not GetMobByID(davoiID.mob.BARAKBOK):isSpawned()
-                        then
-                            SpawnMob(davoiID.mob.GAVOTVUT):updateClaim(player)
-                            SpawnMob(davoiID.mob.BARAKBOK):updateClaim(player)
+                    player:messageSpecial(davoiID.text.FIND_ORC_TENT)
 
-                            quest:setLocalVar(player, 'nmClaimed', 1)
+                    if player:checkDistance(npc) > 1 then
+                        return quest:messageSpecial(davoiID.text.CLOSER_TO_SEARCH)
+                    elseif
+                        not GetMobByID(davoiID.mob.GAVOTVUT):isAlive() and
+                        not GetMobByID(davoiID.mob.BARAKBOK):isAlive()
+                    then
+                        return quest:progressEvent(110)
+                    else
+                        return quest:noAction()
+                    end
+                end,
+            },
 
-                            -- TODO: Determine if a specific message is displayed here
-                            return quest:noAction()
-                        end
+            onEventFinish =
+            {
+                [110] = function(player, csid, option, npc)
+                    if option ~= 0 then
+                        return
+                    end
+
+                    if player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL) then
+                        player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
+                        return
+                    end
+
+                    if quest:getLocalVar(player, 'nmKilled') == 3 then
+                        npcUtil.giveKeyItem(player, xi.ki.SWORD_GRIP_MATERIAL)
+                        return
+                    end
+
+                    if
+                        not GetMobByID(davoiID.mob.GAVOTVUT):isSpawned() and
+                        not GetMobByID(davoiID.mob.BARAKBOK):isSpawned()
+                    then
+                        player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
+                        SpawnMob(davoiID.mob.GAVOTVUT):updateClaim(player)
+                        SpawnMob(davoiID.mob.BARAKBOK):updateClaim(player)
+                        quest:setLocalVar(player, 'nmClaimed', 1)
+                        return
                     end
                 end,
             },

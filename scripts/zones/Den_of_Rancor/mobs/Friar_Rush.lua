@@ -33,6 +33,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    return xi.mobSkill.BERSERK_BOMB
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 394)
 end

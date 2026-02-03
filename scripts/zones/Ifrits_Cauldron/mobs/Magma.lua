@@ -23,4 +23,17 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local skillList =
+    {
+        xi.mobSkill.BERSERK_BOMB,
+    }
+
+    if mob:getHPP() < 10 then
+        table.insert(skillList, xi.mobSkill.SELF_DESTRUCT_BOMB)
+    end
+
+    return skillList[math.random(1, #skillList)]
+end
+
 return entity

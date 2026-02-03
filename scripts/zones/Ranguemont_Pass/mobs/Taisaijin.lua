@@ -7,6 +7,19 @@ local ID = zones[xi.zone.RANGUEMONT_PASS]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 9)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 9)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
+    mob:setMod(xi.mod.POISON_RES_RANK, 9)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 9)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.BYE_BYE_TAISAI)
 end

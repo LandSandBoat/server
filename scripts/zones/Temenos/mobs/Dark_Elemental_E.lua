@@ -10,7 +10,15 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.CURSE)
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.CURSE_I,
+        power    = 50,
+        duration = 300,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 return entity

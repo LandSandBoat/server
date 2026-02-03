@@ -45,7 +45,15 @@ end
 
 -- Has additional effect: Paralyze (15% chance)
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { chance = 15, duration = math.random(30, 60) })
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.PARALYSIS,
+        power    = 20,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 -- Only uses Pinecone Bomb.

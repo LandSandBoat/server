@@ -1,59 +1,57 @@
 xi = xi or {}
 xi.magicburst = xi.magicburst or {}
 
-local matches = -- [element id][resonance id]
+local matches =
 {
+-- [element Id] = { resonance Id }
 --    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
 --    N  T  C  L  S  R  D  I  I  G  D  F  F  L  D  L  D
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (1) NONE
-    { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- (2) FIRE
-    { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- (3) ICE
-    { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0 }, -- (4) WIND
-    { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- (5) EARTH
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0 }, -- (6) THUNDER
-    { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- (7) WATER
-    { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- (8) LIGHT
-    { 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- (9) DARK
-    -- Blue mage spells.  Included for the sake of completeness
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (10) BLU - Physical Blunt
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (11) BLU - Physical Hand-to-Hand
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (12) BLU - Physical Piercing
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (13) BLU - Physical Slashing
+    [xi.element.NONE   ] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.element.FIRE   ] = { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 },
+    [xi.element.ICE    ] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
+    [xi.element.WIND   ] = { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0 },
+    [xi.element.EARTH  ] = { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 },
+    [xi.element.THUNDER] = { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0 },
+    [xi.element.WATER  ] = { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
+    [xi.element.LIGHT  ] = { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 },
+    [xi.element.DARK   ] = { 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 },
 }
 
--- Returns a boolean if the spell's element matches the resonance given
----@param ele number
----@param resonance CStatusEffect
----@return boolean
-local function doesSpellElementMatchResonance(ele, resonance)
-    if ele == nil or utils.clamp(ele, 0, 12) ~= ele then
-        return false
-    end
-
-    local isMatch = matches[ele + 1][resonance:getPower() + 1]
-    return (isMatch ~= nil and isMatch > 0)
-end
-
----@param element number
 ---@param target CBaseEntity
+---@param actionElement number
 ---@return number, number
-xi.magicburst.formMagicBurst = function(element, target)
-    local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
-
-    if
-        resonance ~= nil and
-        resonance:getTier() > 0
-    then
-        if doesSpellElementMatchResonance(element, resonance) then
-            return resonance:getTier(), resonance:getSubPower()
-        end
+xi.magicburst.formMagicBurst = function(target, actionElement)
+    if not target then
+        return 0, 0
     end
 
-    return 0, 0
+    if not actionElement then
+        return 0, 0
+    end
+
+    if actionElement <= xi.element.NONE or actionElement > xi.element.DARK then
+        return 0, 0
+    end
+
+    local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
+    if not resonance then
+        return 0, 0
+    end
+
+    local resonanceTier = resonance:getTier()
+    if resonanceTier <= 0 then
+        return 0, 0
+    end
+
+    local isMatch = matches[actionElement][resonance:getPower() + 1] > 0 and true or false
+    if not isMatch then
+        return 0, 0
+    end
+
+    return resonanceTier, resonance:getSubPower()
 end
 
 -- Returns a boolean if the element matches the skillchain property given
-xi.magicburst.doesElementMatchWeaponskill = function(ele, SCProp)
-    local isMatch = matches[ele + 1][SCProp + 1]
-    return (isMatch ~= nil and isMatch > 0)
+xi.magicburst.doesElementMatchWeaponskill = function(actionElement, SCProp)
+    return matches[actionElement][SCProp + 1] > 0 and true or false
 end

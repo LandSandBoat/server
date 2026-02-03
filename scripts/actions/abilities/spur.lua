@@ -10,11 +10,11 @@ local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     -- same requirements as snarl: pet exists and is attacking a target
-    return xi.job_utils.beastmaster.onAbilityCheckSnarl(player, target, ability)
+    return xi.job_utils.beastmaster.checkSnarl(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    return xi.job_utils.beastmaster.onUseAbilitySpur(player)
+    return xi.job_utils.beastmaster.useSpur(player)
 end
 
 return abilityObject

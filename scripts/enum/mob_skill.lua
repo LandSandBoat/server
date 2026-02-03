@@ -9,6 +9,14 @@ xi.mobSkill =
     SHARK_BITE                    =   24,
     EVISCERATION                  =   25,
 
+    HARD_SLASH_1                  =   48,
+    POWER_SLASH_1                 =   49,
+    FROSTBITE_1                   =   50,
+    FREEZEBITE_1                  =   51,
+    SHOCKWAVE_1                   =   52,
+    CRESCENT_MOON_1               =   53,
+    SICKLE_MOON_1                 =   54,
+
     VORPAL_SCYTHE                 =  101,
     GUILLOTINE_1                  =  102,
 
@@ -169,7 +177,7 @@ xi.mobSkill =
     SUCTORIAL_TENTACLE_1          =  508,
 
     SELF_DESTRUCT_BOMB            =  509,
-
+    BERSERK_BOMB                  =  510,
     SELF_DESTRUCT_BOMB_321        =  511,
 
     SMITE_OF_RAGE                 =  513,
@@ -265,8 +273,16 @@ xi.mobSkill =
 
     CHARM                         =  710,
 
+    VENOM_BREATH_1                =  717,
     JUMP_1                        =  718,
+    CRITICAL_BITE                 =  719,
+    VENOM_STING_1                 =  720,
+    STASIS                        =  721,
+    VENOM_STORM_1                 =  722,
+    EARTHBREAKER_1                =  723,
+    EVASION                       =  724,
 
+    DEATH_TRAP                    =  729, -- Lockpicked coffer mimics only
     MEIKYO_SHISUI_1               =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1                =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
     CALL_WYVERN                   =  732,
@@ -358,6 +374,16 @@ xi.mobSkill =
     TACHI_YUKIKAZE                =  946, -- Ark Angel GK
     TACHI_GEKKO                   =  947, -- Ark Angel GK
     TACHI_KASHA                   =  948, -- Ark Angel GK
+
+    FLAME_BLAST_ATTACK            =  950,
+    HURRICANE_WING_1              =  951,
+    SPIKE_FLAIL_1                 =  952,
+    DRAGON_BREATH_1               =  953,
+    TOUCHDOWN_1                   =  954,
+    FLAME_BLAST_1                 =  955,
+    HURRICANE_WING_FLYING         =  956,
+    ABSOLUTE_TERROR_1             =  957,
+    HORRID_ROAR_1                 =  958,
 
     ARKANGEL_TT_WARP_IN           =  962, -- Ark Angel TT Warp In
 

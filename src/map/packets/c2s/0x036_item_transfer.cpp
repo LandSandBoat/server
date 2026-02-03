@@ -62,7 +62,7 @@ auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEnt
 {
     return PacketValidator()
         .isNotMonstrosity(PChar)
-        .range("ItemNum", ItemNum, 1, 9);
+        .range("ItemNum", this->ItemNum, 1, 9);
 }
 
 void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PChar) const
@@ -74,11 +74,11 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    CBaseEntity* PNpc = PChar->GetEntity(ActIndex, TYPE_NPC | TYPE_MOB);
+    CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB);
 
     // NPC must match UniqueNo and be within 6.0' of the player
     if (!PNpc ||
-        PNpc->id != UniqueNo ||
+        PNpc->id != this->UniqueNo ||
         distance(PChar->loc.p, PNpc->loc.p) > 6.0f)
     {
         return;
@@ -92,22 +92,28 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     PChar->TradeContainer->Clean();
 
-    for (int32 slotId = 0; slotId < ItemNum; ++slotId)
+    for (int32 slotId = 0; slotId < this->ItemNum; ++slotId)
     {
-        const uint8_t  invSlotId = PropertyItemIndexTbl[slotId];
-        const uint32_t quantity  = ItemNumTbl[slotId];
+        const uint8_t  invSlotId = this->PropertyItemIndexTbl[slotId];
+        const uint32_t quantity  = this->ItemNumTbl[slotId];
 
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotId);
 
         if (PItem == nullptr || PItem->getQuantity() < quantity)
         {
-            ShowError("GP_CLI_COMMAND_ITEM_TRANSFER: %s trying to trade NPC %s with invalid item! ", PChar->getName(), PNpc->getName());
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with invalid item!", PChar->getName(), PNpc->getName());
             return;
         }
 
         if (PItem->getReserve() > 0)
         {
-            ShowError("GP_CLI_COMMAND_ITEM_TRANSFER: %s trying to trade NPC %s with reserved item! ", PChar->getName(), PNpc->getName());
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with reserved item!", PChar->getName(), PNpc->getName());
+            return;
+        }
+
+        if (PItem->isSubType(ITEM_LOCKED))
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with locked item!", PChar->getName(), PNpc->getName());
             return;
         }
 

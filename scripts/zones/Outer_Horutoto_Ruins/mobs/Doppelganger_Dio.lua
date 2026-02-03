@@ -5,10 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-end
-
 entity.spawnPoints =
 {
     { x =  310.000, y =  0.000, z =  710.000 },
@@ -16,8 +12,20 @@ entity.spawnPoints =
     { x =  530.000, y =  0.000, z =  775.000 }
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVASION_DOWN, { chance = 20, power = 10 })
+    local pTable =
+    {
+        chance   = 50,
+        effectId = xi.effect.EVASION_DOWN,
+        power    = 10,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 return entity

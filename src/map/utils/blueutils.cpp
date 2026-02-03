@@ -420,11 +420,13 @@ void ValidateBlueSpells(CCharEntity* PChar)
 // then loops over all blue traits to see if they match the eligible traits
 // each eligible blue trait is compared against existing job traits
 // if a higher-tier blue trait is found to be valid, lower is removed
+// ***note*** this function assumes Blue Traits are added with `tier` in ascending order to reduce complexity
 void CalculateTraits(CCharEntity* PChar)
 {
     TraitList_t*           PTraitsList = traits::GetTraits(JOB_BLU);
     std::map<uint8, uint8> points;
     std::vector<CTrait*>   traitsToAdd;
+    auto                   traitTierBonus = PChar->getMod(Mod::BLUE_JOB_TRAIT_BONUS);
 
     for (unsigned char m_SetBlueSpell : PChar->m_SetBlueSpells)
     {
@@ -450,6 +452,7 @@ void CalculateTraits(CCharEntity* PChar)
         }
     }
 
+    // Add BLU traits that are eligible
     for (auto& point : points)
     {
         uint8 category    = point.first;
@@ -462,70 +465,161 @@ void CalculateTraits(CCharEntity* PChar)
                 CBlueTrait* PTrait = (CBlueTrait*)i;
 
                 // Player is eligible for this Blue Trait
-                if (PTrait && PTrait->getCategory() == category && totalWeight >= PTrait->getPoints())
+                if (PTrait && PTrait->getCategory() == category && totalWeight >= PTrait->getPoints() && !PTrait->getJobPointsOnly())
                 {
-                    bool add = true;
-
-                    // Check if any existing player Traits conflict
-                    for (std::size_t j = 0; j < PChar->TraitList.size(); ++j)
+                    // Check all the eligible Blue Traits for conflicts
+                    for (auto it = traitsToAdd.begin(); it != traitsToAdd.end();)
                     {
-                        CTrait* PExistingTrait = PChar->TraitList.at(j);
+                        auto currentTrait = *it;
 
-                        if (PExistingTrait->getID() == PTrait->getID())
+                        // Same trait ID, trait mod, and is weaker than new trait
+                        if (currentTrait->getID() == PTrait->getID() && currentTrait->getRank() <= PTrait->getRank() && currentTrait->getMod() == PTrait->getMod())
                         {
-                            // Player has the real job trait, making them ineligible
-                            // TODO remove the trait and add the blu trait if it's stronger
-                            if (PExistingTrait->getLevel() > 0)
-                            {
-                                add = false;
-                                break;
-                            }
+                            // Erase lower tier trait
+                            it = traitsToAdd.erase(it);
+                        }
+                        else
+                        {
+                            ++it;
                         }
                     }
 
-                    if (add)
-                    {
-                        // Check all the eligible Blue Traits for conflicts
-                        std::size_t j = 0;
-                        for (j = 0; j < traitsToAdd.size(); ++j)
-                        {
-                            auto iter = traitsToAdd.at(j);
-                            // New Trait matches a Trait already marked to add
-                            if (iter->getID() == PTrait->getID() && iter->getMod() == PTrait->getMod())
-                            {
-                                if (iter->getValue() > PTrait->getValue())
-                                {
-                                    // New Trait is a lower tier
-                                    add = false;
-                                    break;
-                                }
-                            }
-                            else if ((PTrait->getMod() == Mod::DOUBLE_ATTACK && iter->getMod() == Mod::TRIPLE_ATTACK) ||
-                                     (PTrait->getMod() == Mod::GILFINDER && iter->getMod() == Mod::TREASURE_HUNTER))
-                            {
-                                // Triple Attack (16 pts) overwrites Double Attack (8 pts)
-                                // Treasure Hunter (18 pts) overwrites Gilfinder (12 pts)
-                                add = false;
-                                break;
-                            }
-                        }
+                    traitsToAdd.emplace_back((CBlueTrait*)PTrait);
+                }
+            }
+        }
+    }
 
-                        if (add)
-                        {
-                            if (j != traitsToAdd.size())
-                            {
-                                // New Trait is higher power than one already staged
-                                traitsToAdd.at(j) = (CBlueTrait*)PTrait;
-                            }
-                            else
-                            {
-                                // New Trait/Mod combination is not staged yet
-                                traitsToAdd.emplace_back((CBlueTrait*)PTrait);
-                            }
-                        }
+    std::vector<CTrait*> upgradedTraits;
+
+    auto isSameBluTrait = [](CBlueTrait* PBluTraitA, CBlueTrait* PBluTraitB) -> bool
+    {
+        if (PBluTraitA->getCategory() != PBluTraitB->getCategory())
+        {
+            return false;
+        }
+
+        // Edge case
+        // Double Attack upgrades to Triple Attack
+        // Gilfinder upgrades to Treasure Hunter
+        if (PBluTraitA->getMod() != PBluTraitB->getMod())
+        {
+            if (PBluTraitA->getMod() == Mod::DOUBLE_ATTACK && PBluTraitB->getMod() == Mod::TRIPLE_ATTACK)
+            {
+                return true;
+            }
+
+            if (PBluTraitA->getMod() == Mod::TRIPLE_ATTACK && PBluTraitB->getMod() == Mod::DOUBLE_ATTACK)
+            {
+                return true;
+            }
+
+            if (PBluTraitA->getMod() == Mod::GILFINDER && PBluTraitB->getMod() == Mod::TREASURE_HUNTER)
+            {
+                return true;
+            }
+
+            if (PBluTraitA->getMod() == Mod::TREASURE_HUNTER && PBluTraitB->getMod() == Mod::GILFINDER)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Must be after mod ID check due to edge case. They have different trait IDs. "Gilfinder" and "Treasure hunter" etc are different in the menus
+        if (PBluTraitA->getID() != PBluTraitB->getID())
+        {
+            return false;
+        }
+
+        return true;
+    };
+
+    // Search for higher tier bonuses to boost them before we check if existing traits are stronger
+    if (traitTierBonus > 0)
+    {
+        for (auto it = traitsToAdd.begin(); it != traitsToAdd.end();)
+        {
+            auto        currentTrait = (CBlueTrait*)*it;
+            auto        newRank      = currentTrait->getRank() + traitTierBonus;
+            CBlueTrait* newTrait     = nullptr;
+
+            for (auto& i : *PTraitsList)
+            {
+                if (i->getLevel() == 0)
+                {
+                    CBlueTrait* PTrait = (CBlueTrait*)i;
+
+                    if (isSameBluTrait(PTrait, currentTrait) && newRank >= PTrait->getRank())
+                    {
+                        newTrait = PTrait;
                     }
                 }
             }
+
+            if (newTrait)
+            {
+                it = traitsToAdd.erase(it);
+                upgradedTraits.push_back(newTrait);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+    }
+
+    // Append in upgraded traits in place of ones that were removed in the search for upgraded traits, if any
+    if (upgradedTraits.size() > 0)
+    {
+        traitsToAdd.insert(traitsToAdd.end(), upgradedTraits.begin(), upgradedTraits.end());
+    }
+
+    // Remove weaker BLU traits
+    for (auto PExistingTrait : PChar->TraitList)
+    {
+        for (auto it = traitsToAdd.begin(); it != traitsToAdd.end();)
+        {
+            auto PTrait = *it;
+
+            // Ensure they are the same modifier. BLU/THF can theoretically get Gilfinder from /THF and Treasure Hunter from BLU traits (though this is a weird edge case...)
+            // Need verification on that exact scenario... though not sure why you wouldn't just level your sub more? You can't get TH2/3 from BLU traits.
+            if (PExistingTrait->getID() == PTrait->getID() && PExistingTrait->getMod() == PTrait->getMod())
+            {
+                // Player has the real job trait, remove ours
+                if (PExistingTrait->getRank() >= PTrait->getRank())
+                {
+                    it = traitsToAdd.erase(it);
+                    continue;
+                }
+            }
+
+            ++it;
+        }
+    }
+
+    // Remove weaker player traits
+    for (auto PTrait : traitsToAdd)
+    {
+        for (auto it = PChar->TraitList.begin(); it != PChar->TraitList.end();)
+        {
+            auto PExistingTrait = *it;
+
+            // Ensure they are the same modifier. BLU/THF can theoretically get Gilfinder from /THF and Treasure Hunter from BLU traits (though this is a weird edge case...)
+            // Need verification on that exact scenario... though not sure why you wouldn't just level your sub more? You can't get TH2/3 from BLU traits.
+            if (PExistingTrait->getID() == PTrait->getID() && PExistingTrait->getMod() == PTrait->getMod())
+            {
+                // Player has the real job trait, and it's weaker, remove theirs
+                if (PExistingTrait->getRank() < PTrait->getRank())
+                {
+                    PChar->delModifier(PExistingTrait->getMod(), PExistingTrait->getValue());
+                    it = PChar->TraitList.erase(it);
+                    continue;
+                }
+            }
+
+            ++it;
         }
     }
 

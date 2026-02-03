@@ -22,6 +22,7 @@
 #include "0x10c_roe_start.h"
 
 #include "entities/charentity.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x110_unity.h"
 #include "roe.h"
 
@@ -29,16 +30,22 @@ auto GP_CLI_COMMAND_ROE_START::validate(MapSession* PSession, const CCharEntity*
 {
     return PacketValidator()
         .mustEqual(settings::get<bool>("main.ENABLE_ROE"), true, "RoE is disabled")
-        .range("ObjectiveId", ObjectiveId, 0, 4096)
-        .mustEqual(roeutils::RoeSystem.TimedRecords.test(ObjectiveId), false, "Cannot start a timed record")
-        .mustEqual(roeutils::GetEminenceRecordCompletion(PChar, ObjectiveId) && !roeutils::RoeSystem.RepeatableRecords.test(ObjectiveId),
+        .range("ObjectiveId", this->ObjectiveId, 0, 4096)
+        .mustEqual(roeutils::RoeSystem.TimedRecords.test(this->ObjectiveId), false, "Cannot start a timed record")
+        .mustEqual(roeutils::GetEminenceRecordCompletion(PChar, this->ObjectiveId) && !roeutils::RoeSystem.RepeatableRecords.test(this->ObjectiveId),
                    false,
                    "Cannot start a completed record that is not repeatable");
 }
 
 void GP_CLI_COMMAND_ROE_START::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    roeutils::AddEminenceRecord(PChar, ObjectiveId);
-    PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
-    roeutils::onRecordTake(PChar, ObjectiveId);
+    if (roeutils::AddEminenceRecord(PChar, this->ObjectiveId))
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
+        roeutils::onRecordTake(PChar, this->ObjectiveId);
+    }
+    else
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->ObjectiveId, 0, MsgBasic::ROE_UNABLE);
+    }
 }

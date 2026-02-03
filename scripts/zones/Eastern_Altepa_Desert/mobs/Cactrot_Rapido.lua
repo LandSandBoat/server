@@ -171,6 +171,10 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(172800, 259200)) -- When server restarts, reset timer
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.GRAVITY)
 end
 
 entity.onMobSpawn = function(mob)
@@ -178,6 +182,7 @@ entity.onMobSpawn = function(mob)
     mob:setBaseSpeed(72)
     mob:setAnimationSpeed(180)
     mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobDisengage = function(mob)

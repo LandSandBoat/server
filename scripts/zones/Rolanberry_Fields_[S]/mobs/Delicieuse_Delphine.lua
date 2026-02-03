@@ -41,7 +41,15 @@ entity.onMobWeaponSkill = function(target, mob, skill, action)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { chance = 50, duration = math.random(5, 30) })
+    local pTable =
+    {
+        chance   = 50,
+        effectId = xi.effect.PARALYSIS,
+        power    = 20,
+        duration = 30,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

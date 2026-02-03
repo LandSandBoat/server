@@ -23,6 +23,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7382, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7418, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7425, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        DO_NOT_MEET_REQUIREMENTS      = 7429, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         SNAPS_IN_TWO                  = 7433, -- The <keyitem> snaps in two!
         CONQUEST_BASE                 = 7442, -- Tallying conquest results...
         ENTERING_THE_BATTLEFIELD_FOR  = 7605, -- Entering the battlefield for [A Century of Hardship/Return to the Depths/Bionic Bug/Pulling the Strings/Automaton Assault/The Mobline Comedy/To Movalpolos!]!
@@ -34,12 +35,13 @@ zones[xi.zone.MINE_SHAFT_2716] =
     },
     mob =
     {
-        BUGBBY     = GetFirstID('Bugbby'),
-        BUGBOY     = GetFirstID('Bugboy'),
-        CHEKOCHUK  = GetFirstID('Chekochuk'),
-        MOVAMUQ    = GetFirstID('Movamuq'),
-        SWIPOSTIK  = GetFirstID('Swipostik'),
-        TRIKOTRAK  = GetFirstID('Trikotrak'),
+        BUGBBY         = GetFirstID('Bugbby'),
+        BUGBOY         = GetFirstID('Bugboy'),
+        CHEKOCHUK      = GetFirstID('Chekochuk'),
+        MOVAMUQ        = GetFirstID('Movamuq'),
+        SWIPOSTIK      = GetFirstID('Swipostik'),
+        TRIKOTRAK      = GetFirstID('Trikotrak'),
+        HUME_AUTOMATON = GetFirstID('Hume_Automaton'),
     },
     npc =
     {

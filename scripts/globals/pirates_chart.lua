@@ -64,19 +64,25 @@ local function removeFromConfrontation(player)
     player:changeMusic(3, 102)
 end
 
-local function resetEvent()
-    local qm4        = GetNPCByID(valkID.npc.PIRATE_CHART_QM)
-    local panicTaru  = GetNPCByID(valkID.npc.PIRATE_CHART_TARU)
-    local shimmering = GetNPCByID(valkID.npc.SHIMMERING_POINT)
+local function resetEvent(members)
+    local qm4          = GetNPCByID(valkID.npc.PIRATE_CHART_QM)
+    local panicTaru    = GetNPCByID(valkID.npc.PIRATE_CHART_TARU)
+    local shimmering   = GetNPCByID(valkID.npc.SHIMMERING_POINT)
+    local barnacledBox = GetNPCByID(valkID.npc.BARNACLED_BOX)
 
-    if qm4 then
-        for i = 1, 3 do
-            local member = GetPlayerByID(qm4:getLocalVar('pChartMemberID_' .. i))
+    if members then
+        for _, member in ipairs(members) do
             removeFromConfrontation(member)
         end
+    end
 
+    if qm4 then
         qm4:resetLocalVars()
         qm4:setStatus(xi.status.NORMAL)
+    end
+
+    if barnacledBox then
+        barnacledBox:resetLocalVars()
     end
 
     if panicTaru then
@@ -91,29 +97,33 @@ end
 
 local eventTable =
 {
-    { time = 1000,  text = valkID.text.RIGHT_OVER_THERE_POINT + 0, emote = xi.emote.POINT, animationString = nil                             },
-    { time = 20000, text = valkID.text.RIGHT_OVER_THERE_POINT + 1, emote = xi.emote.PANIC, animationString = nil                             },
-    { time = 30000, text = valkID.text.RIGHT_OVER_THERE_POINT + 2, emote = xi.emote.PANIC, animationString = nil                             },
-    { time = 40000, text = valkID.text.RIGHT_OVER_THERE_POINT + 3, emote = xi.emote.PANIC, animationString = nil                             },
-    { time = 45000, text = valkID.text.RIGHT_OVER_THERE_POINT + 4, emote = nil,            animationString = nil                             },
-    { time = 46000, text = valkID.text.RIGHT_OVER_THERE_POINT + 5, emote = nil,            animationString = xi.animationString.EFFECT_DEATH },
+    { time = 1,  text = valkID.text.RIGHT_OVER_THERE_POINT + 0, emote = xi.emote.POINT, animationString = nil                             },
+    { time = 20, text = valkID.text.RIGHT_OVER_THERE_POINT + 1, emote = xi.emote.PANIC, animationString = nil                             },
+    { time = 30, text = valkID.text.RIGHT_OVER_THERE_POINT + 2, emote = xi.emote.PANIC, animationString = nil                             },
+    { time = 40, text = valkID.text.RIGHT_OVER_THERE_POINT + 3, emote = xi.emote.PANIC, animationString = nil                             },
+    { time = 45, text = valkID.text.RIGHT_OVER_THERE_POINT + 4, emote = nil,            animationString = nil                             },
+    { time = 46, text = valkID.text.RIGHT_OVER_THERE_POINT + 5, emote = nil,            animationString = xi.animationString.EFFECT_DEATH },
 }
 
-local function tryTaruEmote(elapsedTime_ms, timerTable)
-    if not timerTable then
+local function tryTaruEmote(elapsedTime, timerTable, phase)
+    if
+        not timerTable or
+        not phase or
+        phase > #timerTable
+    then
         return
     end
 
     local panicTaru = GetNPCByID(valkID.npc.PIRATE_CHART_TARU)
     local qm4 = GetNPCByID(valkID.npc.PIRATE_CHART_QM)
-    local event = timerTable[1]
+    local event = timerTable[phase]
 
     if not (qm4 and panicTaru and event) then
         return
     end
 
-    if elapsedTime_ms < event.time then
-        return timerTable
+    if elapsedTime < event.time then
+        return phase
     end
 
     if event.text then
@@ -132,44 +142,42 @@ local function tryTaruEmote(elapsedTime_ms, timerTable)
         panicTaru:entityAnimationPacket(event.animationString)
     end
 
-    table.remove(timerTable, 1)
-
-    return timerTable
+    return phase + 1
 end
 
-local function rangeChecking(npc, spawner, timeToMobSpawn, timeOfLastCheck, wasInRangeLastCheck, timeOutOfRangeLastMsg, timerTable)
+local function rangeChecking(npc, spawner, timeToMobSpawn, timeOfLastCheck, wasInRangeLastCheck, timeOutOfRangeLastMsg, timerTable, phase)
     if eventIsNotValid(npc) then
-        resetEvent()
+        resetEvent(spawner:getParty())
 
         return false
     end
 
     local timeOfCurrentCheck = GetSystemTime()
-    local timeElapsedThisCheck = (timeOfCurrentCheck - timeOfLastCheck) * 1000
-    local totalTimeElapsed = 50000 - timeToMobSpawn
+    local timeElapsedThisCheck = timeOfCurrentCheck - timeOfLastCheck
+    local totalTimeElapsed = 50 - timeToMobSpawn
     local isInRange = true
     local timeOutOfRange = 0
 
-    timerTable = tryTaruEmote(totalTimeElapsed, timerTable)
+    phase = tryTaruEmote(totalTimeElapsed, timerTable, phase)
 
     if spawner:checkDistance(npc) > 10 then
         isInRange = false
         timeOutOfRange = timeOutOfRangeLastMsg - timeElapsedThisCheck
-        if wasInRangeLastCheck or (timeOutOfRange > 5000) then
+        if wasInRangeLastCheck or (timeOutOfRange > 5) then
             spawner:messageSpecial(valkID.text.NO_LONGER_FEEL_CHILL)
             timeOutOfRange = 0
         end
     end
 
-    if timeToMobSpawn > 1000 then
+    if timeToMobSpawn > 0 then
         npc:timer(1000, function(npcArg)
-            rangeChecking(npcArg, spawner, timeToMobSpawn - timeElapsedThisCheck, timeOfCurrentCheck, isInRange, timeOutOfRange, timerTable)
+            rangeChecking(npcArg, spawner, timeToMobSpawn - timeElapsedThisCheck, timeOfCurrentCheck, isInRange, timeOutOfRange, timerTable, phase)
         end)
     elseif
         spawner:checkDistance(npc) > 10 or
         not spawner:isAlive()
     then
-        resetEvent()
+        resetEvent(spawner:getParty())
     else
         local panicTaru  = GetNPCByID(valkID.npc.PIRATE_CHART_TARU)
         local shimmering = GetNPCByID(valkID.npc.SHIMMERING_POINT)
@@ -209,6 +217,20 @@ local function rangeChecking(npc, spawner, timeToMobSpawn, timeOfLastCheck, wasI
 end
 
 xi.piratesChart.onTrade = function(player, npc, trade)
+    local barnacledBox = GetNPCByID(valkID.npc.BARNACLED_BOX)
+    if
+        barnacledBox and
+        barnacledBox:getStatus() == xi.status.NORMAL
+    then
+        return
+    end
+
+    for _, member in ipairs(player:getParty()) do
+        if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            return
+        end
+    end
+
     if player:getPartySize() > 3 then
         player:messageSpecial(valkID.text.TOO_MANY_IN_PARTY, 3)
     elseif player:checkSoloPartyAlliance() == 2 then
@@ -224,7 +246,11 @@ end
 
 xi.piratesChart.onEventUpdate = function(player, csid, option, npc)
     if csid == 14 and option == 0 then
-        player:confirmTrade()
+        local barnacledBox = GetNPCByID(valkID.npc.BARNACLED_BOX)
+        if not barnacledBox then
+            printf('[error] Barnacled Box npc not found')
+            return
+        end
 
         local party = player:getParty()
 
@@ -232,7 +258,10 @@ xi.piratesChart.onEventUpdate = function(player, csid, option, npc)
             return
         end
 
+        player:confirmTrade()
+
         npc:setLocalVar('pChartSpawnerID', player:getID())
+        barnacledBox:setLocalVar('pChartSpawnerID', player:getID())
 
         -- Change music for party and remove buffs/temp items
         for idx, member in ipairs(party) do
@@ -267,17 +296,22 @@ xi.piratesChart.onEventFinish = function(player, csid, option, npc)
         -- Setup starting conditions
         panicTaru:setStatus(xi.status.NORMAL)
         panicTaru:setAnimation(xi.animation.NONE)
-        shimmering:setStatus(xi.status.NORMAL)
         npc:setStatus(xi.status.DISAPPEAR)
+        shimmering:setStatus(xi.status.NORMAL)
+
+        -- Appearing packet needs time to finish before another packet can be sent successfully
+        shimmering:timer(2000, function(shimmerArg)
+            shimmerArg:entityAnimationPacket(xi.animationString.SHIMMER)
+        end)
 
         -- Events will occur for the next 50 seconds according to eventTable
         -- confrontation will start when timer hits 0 and player still
         -- meets all required criteria
-        rangeChecking(npc, player, 50000, GetSystemTime(), true, 0, eventTable)
+        rangeChecking(npc, player, 50, GetSystemTime(), true, 0, eventTable, 1)
     end
 end
 
-local function myBuddiesAreDead(mob)
+xi.piratesChart.myBuddiesAreDead = function(mob)
     local mobID = mob:getID()
     for _, buddyID in ipairs(barnacleBuddyIDs) do
         local buddy = GetMobByID(buddyID)
@@ -320,7 +354,7 @@ xi.piratesChart.onMobDeath = function(mob, player, optParams)
         return
     end
 
-    if myBuddiesAreDead(mob) then
+    if xi.piratesChart.myBuddiesAreDead(mob) then
         -- Player beat all three bad guys, get treasure chest to appear on this one
         local barnacledBox = GetNPCByID(valkID.npc.BARNACLED_BOX)
 
@@ -332,6 +366,18 @@ xi.piratesChart.onMobDeath = function(mob, player, optParams)
         barnacledBox:setStatus(xi.status.NORMAL)
         barnacledBox:setLocalVar('open', 0)
         mob:setLocalVar('spawnedChest', 1)
+        barnacledBox:timer(180000, function(npcArg)
+            local spawnerID = barnacledBox:getLocalVar('pChartSpawnerID')
+            local spawner = GetPlayerByID(spawnerID)
+
+            npcArg:setStatus(xi.status.DISAPPEAR)
+
+            if spawner then
+                resetEvent(spawner:getParty())
+            else
+                resetEvent()
+            end
+        end)
     end
 end
 
@@ -381,17 +427,13 @@ local pChartLoot =
 }
 
 xi.piratesChart.barnacledBoxOnTrigger = function(player, npc)
-    local qm4 = GetNPCByID(valkID.npc.PIRATE_CHART_QM)
+    local spawnerID = npc:getLocalVar('pChartSpawnerID')
 
-    if qm4 then
-        local spawnerID = qm4:getLocalVar('pChartSpawnerID')
-
-        if player:getID() ~= spawnerID then
-            return
-        end
+    if player:getID() ~= spawnerID then
+        return
     end
 
-    resetEvent()
+    resetEvent(player:getParty())
 
     -- Distribute rewards
     if npc:getLocalVar(xi.animationString.OPEN_CRATE_GLOW) == 0 then

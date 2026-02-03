@@ -33,7 +33,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.GIANT_DONKO] =
+    [xi.item.GIANT_DONKO_1] =
     {
         gil = 96,
         items =
@@ -96,7 +96,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.MONKE_ONKE] =
+    [xi.item.MONKE_ONKE_1] =
     {
         gil = 150,
         items =
@@ -105,7 +105,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.DARK_BASS] =
+    [xi.item.DARK_BASS_1] =
     {
         gil = 10,
         items =
@@ -142,7 +142,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.BLADEFISH] =
+    [xi.item.BLADEFISH_1] =
     {
         gil = 200,
         items =
@@ -189,7 +189,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.THREE_EYED_FISH] =
+    [xi.item.THREE_EYED_FISH_1] =
     {
         gil = 250,
         items =
@@ -198,7 +198,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.BHEFHEL_MARLIN] =
+    [xi.item.BHEFHEL_MARLIN_1] =
     {
         gil = 150,
         items =
@@ -208,7 +208,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.GUGRU_TUNA] =
+    [xi.item.GUGRU_TUNA_1] =
     {
         gil = 50,
         items =
@@ -217,7 +217,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.OGRE_EEL] =
+    [xi.item.OGRE_EEL_1] =
     {
         gil = 16,
         title = xi.title.CORDON_BLEU_FISHER,
@@ -272,7 +272,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.RHINOCHIMERA] =
+    [xi.item.RHINOCHIMERA_1] =
     {
         gil = 300,
         items =
@@ -281,7 +281,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.ISTAVRIT] =
+    [xi.item.ISTAVRIT_1] =
     {
         gil = 50,
         items =
@@ -310,7 +310,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.VEYDAL_WRASSE] =
+    [xi.item.VEYDAL_WRASSE_1] =
     {
         gil = 225,
         items =
@@ -405,7 +405,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.GIGANT_OCTOPUS] =
+    [xi.item.GIGANT_OCTOPUS_1] =
     {
         gil = 119,
         items =
@@ -453,7 +453,7 @@ local fishRewards =
         }
     },
 
-    [xi.item.GIANT_CATFISH] =
+    [xi.item.GIANT_CATFISH_1] =
     {
         gil = 50,
         title = xi.title.CORDON_BLEU_FISHER,
@@ -582,18 +582,18 @@ local function zaldonOnTrigger(player, npc)
     {
         {
             162,
-            xi.item.GIANT_CATFISH,
-            xi.item.DARK_BASS,
-            xi.item.OGRE_EEL,
+            xi.item.GIANT_CATFISH_1,
+            xi.item.DARK_BASS_1,
+            xi.item.OGRE_EEL_1,
             xi.item.ZAFMLUG_BASS,
         },
 
         {
             163,
             xi.item.ZAFMLUG_BASS,
-            xi.item.GIANT_DONKO,
-            xi.item.BHEFHEL_MARLIN,
-            xi.item.BLADEFISH,
+            xi.item.GIANT_DONKO_1,
+            xi.item.BHEFHEL_MARLIN_1,
+            xi.item.BLADEFISH_1,
             xi.item.SILVER_SHARK,
         },
 

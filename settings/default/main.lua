@@ -122,24 +122,25 @@ xi.settings.main =
     ALL_MAPS                       = 0,  -- Set to 1 to give starting characters all the maps.
     UNLOCK_OUTPOST_WARPS           = 0,  -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
 
-    SHOP_PRICE      = 1.000, -- Multiplies prices in NPC shops.
-    GIL_RATE        = 1.000, -- Multiplies gil earned from quests.  Won't always display in game.
-    BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
+    SHOP_PRICE          = 1.000, -- Multiplies prices in NPC shops.
+    GIL_RATE            = 1.000, -- Multiplies gil earned from quests.  Won't always display in game.
+    BAYLD_RATE          = 1.000, -- Multiples bayld earned from quests.
     -- Note: EXP rates are also influenced by conf setting
-    EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
-    CAPACITY_RATE   = 1.000, -- Multiplies capacy points gained.
-    BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
-    TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
-    ROE_EXP_RATE    = 1.000, -- Multiplies exp earned from records of eminence.
-    SPARKS_RATE     = 1.000, -- Multiplies sparks earned from records of eminence.
-    CURE_POWER      = 1.000, -- Multiplies amount healed from Healing Magic, including the relevant Blue Magic.
-    ELEMENTAL_POWER = 1.000, -- Multiplies damage dealt by Elemental and non-drain Dark Magic.
-    DIVINE_POWER    = 1.000, -- Multiplies damage dealt by Divine Magic.
-    NINJUTSU_POWER  = 1.000, -- Multiplies damage dealt by Ninjutsu Magic.
-    BLUE_POWER      = 1.000, -- Multiplies damage dealt by Blue Magic.
-    DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
-    ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
+    EXP_RATE            = 1.000, -- Multiplies exp from script (except FoV/GoV).
+    CAPACITY_RATE       = 1.000, -- Multiplies capacity points gained.
+    BOOK_EXP_RATE       = 1.000, -- Multiplies exp from FoV/GoV book pages.
+    TABS_RATE           = 1.000, -- Multiplies tabs earned from fov.
+    ROE_EXP_RATE        = 1.000, -- Multiplies exp earned from records of eminence.
+    SPARKS_RATE         = 1.000, -- Multiplies sparks earned from records of eminence.
+    CURE_POWER          = 1.000, -- Multiplies amount healed from Healing Magic, including the relevant Blue Magic.
+    ELEMENTAL_POWER     = 1.000, -- Multiplies damage dealt by Elemental and non-drain Dark Magic.
+    DIVINE_POWER        = 1.000, -- Multiplies damage dealt by Divine Magic.
+    NINJUTSU_POWER      = 1.000, -- Multiplies damage dealt by Ninjutsu Magic.
+    BLUE_POWER          = 1.000, -- Multiplies damage dealt by Blue Magic.
+    DARK_POWER          = 1.000, -- Multiplies amount drained by Dark Magic.
+    ITEM_POWER          = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
+    DELAY_REDUCTION_CAP = 0.80,  -- Set the cap for melee swing haste effect. (0.80 = 80% retail delay reduction max, 0.93 = 93% ToAU delay reduction max)
 
     -- STR:ATT/RATT ratios. For players only. Mobs are hardcoded to 0.5
     TWO_HANDED_STR_ATTACK_MULTIPLIER         = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.75 in previous eras

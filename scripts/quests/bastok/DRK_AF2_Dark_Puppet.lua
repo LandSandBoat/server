@@ -59,7 +59,7 @@ quest.sections =
                     then
                         player:confirmTrade()
 
-                        return quest:messageSpecial(ordellesID.text.GERWITZS_AXE_DIALOG)
+                        return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end
                 end,
             },
@@ -74,7 +74,7 @@ quest.sections =
                     then
                         player:confirmTrade()
 
-                        return quest:messageSpecial(ordellesID.text.GERWITZS_SWORD_DIALOG)
+                        return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end
                 end,
             },
@@ -88,7 +88,7 @@ quest.sections =
                     then
                         player:confirmTrade()
 
-                        return quest:messageSpecial(ordellesID.text.GERWITZS_SOUL_DIALOG)
+                        return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end
                 end,
             },

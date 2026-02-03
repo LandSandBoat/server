@@ -275,7 +275,14 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     end
 
     -- Handle shadows depending on shadow behavior / skilltype
-    dmg = utils.takeShadows(target, dmg, shadowbehav)
+    local preShadowDmg = dmg
+    local shadowsUsed  = 0
+    dmg, shadowsUsed = utils.takeShadows(target, dmg, shadowbehav)
+
+    if preShadowDmg > 0 and dmg == 0 then
+        skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
+        return shadowsUsed
+    end
 
     -- handle Third Eye using shadowbehav as a guide
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)

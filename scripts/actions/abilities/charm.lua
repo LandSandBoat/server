@@ -9,11 +9,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.beastmaster.onAbilityCheckCharm(player, target, ability)
+    return xi.job_utils.beastmaster.checkCharm(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    return xi.job_utils.beastmaster.onUseAbilityCharm(player, target, ability)
+    return xi.job_utils.beastmaster.useCharm(player, target, ability)
 end
 
 return abilityObject

@@ -21,6 +21,19 @@ entity.onMobDeath = function(mob, player, optParams)
     player:setCharVar('rancorCurse', 0) -- Player has been cleansed of the curse
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local skillList =
+    {
+        xi.mobSkill.BERSERK_BOMB,
+    }
+
+    if mob:getHPP() < 20 then
+        table.insert(skillList, xi.mobSkill.SELF_DESTRUCT_BOMB)
+    end
+
+    return skillList[math.random(1, #skillList)]
+end
+
 -- Turns off all the lights once the NM despawns
 entity.onMobDespawn = function(mob)
     for npcId = ID.npc.LANTERN_OFFSET + 15, ID.npc.LANTERN_OFFSET + 18 do

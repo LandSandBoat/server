@@ -11,6 +11,11 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.ATT, 360)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar('ChasingQuotas_Progress') == 5 then
         player:setCharVar('SturmtigerKilled', 1)

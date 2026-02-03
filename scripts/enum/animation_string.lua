@@ -142,4 +142,7 @@ xi.animationString =
     SYNERGY_LIGHT_FEWELL      = 'ef97',
     SYNERGY_DARK_FEWELL       = 'ef98',
     SYNERGY_STEAM             = 'efa0',
+
+    -- QM animations
+    SHIMMER                   = 'efon',
 }

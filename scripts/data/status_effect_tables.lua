@@ -68,7 +68,7 @@ xi.data.statusEffect.dataTable =
     [xi.effect.SILENCE            ] = { 1, 0,                       0,               0,                  xi.element.WIND,    xi.immunity.SILENCE,    xi.mod.SILENCERES,  xi.mod.SILENCE_RES_RANK,    xi.mod.SILENCE_MEVA,  xi.mod.SILENCE_IMMUNOBREAK  },
     [xi.effect.SLEEP_I            ] = { 1, 0,                       0,               0,                  xi.element.DARK,    xi.immunity.DARK_SLEEP, xi.mod.SLEEPRES,    xi.mod.DARK_SLEEP_RES_RANK, xi.mod.SLEEP_MEVA,    xi.mod.SLEEP_IMMUNOBREAK    },
     [xi.effect.SLOW               ] = { 1, 0,                       xi.effect.HASTE, 0,                  xi.element.EARTH,   xi.immunity.SLOW,       xi.mod.SLOWRES,     xi.mod.SLOW_RES_RANK,       xi.mod.SLOW_MEVA,     xi.mod.SLOW_IMMUNOBREAK     },
-    [xi.effect.STUN               ] = { 2, xi.effect.PETRIFICATION, 0,               0,                  xi.element.THUNDER, xi.immunity.STUN,       xi.mod.STUNRES,     0,                          xi.mod.STUN_MEVA,     0                           },
+    [xi.effect.STUN               ] = { 2, xi.effect.PETRIFICATION, 0,               0,                  xi.element.THUNDER, xi.immunity.STUN,       xi.mod.STUNRES,     xi.mod.STUN_RES_RANK,       xi.mod.STUN_MEVA,     0                           },
     [xi.effect.TERROR             ] = { 2, 0,                       0,               0,                  0,                  xi.immunity.TERROR,     0,                  0,                          0,                    0                           }, -- TODO: implement Resist Terror https://www.bg-wiki.com/ffxi/Resist_Terror, TODO: sometimes Terror has an element, but sometimes it does not. It seems it may only be player based effects?
     [xi.effect.THRENODY           ] = { 1, 0,                       0,               0,                  xi.element.NONE,    0,                      0,                  0,                          0,                    0                           },
     [xi.effect.WEIGHT             ] = { 1, 0,                       0,               0,                  xi.element.WIND,    xi.immunity.GRAVITY,    xi.mod.GRAVITYRES,  0,                          xi.mod.GRAVITY_MEVA,  xi.mod.GRAVITY_IMMUNOBREAK  },
@@ -283,16 +283,24 @@ xi.data.statusEffect.isEffectNullified = function(target, effectId, effectTier)
         return true
     end
 
+    if effectTier == 0 then
+        return false
+    end
+
+    -- Check if current effect is in place with a higher tier.
+    if target:hasStatusEffect(effectId) then
+        if target:getStatusEffect(effectId):getTier() >= effectTier then
+            return true
+        end
+    end
+
     -- Check effects that can block current effect from being applied, based on tier.
-    local tierToCheck             = utils.defaultIfNil(effectId, 0)
     local tierNullificatingEffect = xi.data.statusEffect.getNullificatingEffectByTier(effectId)
     if
-        tierToCheck > 0 and
         tierNullificatingEffect > 0 and
         target:hasStatusEffect(tierNullificatingEffect)
     then
-        local blockingTier = target:getStatusEffect(tierNullificatingEffect):getTier()
-        if blockingTier > tierToCheck then
+        if target:getStatusEffect(tierNullificatingEffect):getTier() >= effectTier then
             return true
         end
     end

@@ -33,6 +33,7 @@ jobs:
       XI_NETWORK_SQL_DATABASE: xidb
       XI_NETWORK_SQL_LOGIN: xiadmin
       XI_NETWORK_SQL_PASSWORD: 'password'
+      # Placeholder values. Actual values set in the first step.
       REPO_OWNER: 'landsandboat'
       REPO: 'landsandboat/server'
     services:

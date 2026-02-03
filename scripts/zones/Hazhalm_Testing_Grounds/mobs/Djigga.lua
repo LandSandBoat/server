@@ -19,7 +19,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         message      = xi.msg.basic.NONE,
     }
 
-    return xi.combat.action.executeAdditionalDispel(mob, target, pTable)
+    return xi.combat.action.executeAddEffectDispel(mob, target, pTable)
 end
 
 return entity

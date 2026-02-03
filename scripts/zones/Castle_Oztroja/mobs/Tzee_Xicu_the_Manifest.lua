@@ -66,12 +66,14 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11)
-    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 11)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 8)
     mob:setMod(xi.mod.SLOW_RES_RANK, 8)
-    mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -79,12 +81,20 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { duration = 60 })
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.PARALYSIS,
+        power    = 20,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.DEITY_DEBUNKER)
-    if optParams.isKiller then
+    if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.YAGUDO_KING_DEATH)
     end
 end

@@ -4,6 +4,9 @@
 local ID = zones[xi.zone.LOWER_JEUNO]
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 -----------------------------------
+require('scripts/quests/jeuno/Community_Service')
+-----------------------------------
+
 ---@type TZone
 local zoneObject = {}
 
@@ -14,7 +17,7 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local month = JstMonth()
-    local day = JstDayOfTheMonth()
+    local day   = JstDayOfTheMonth()
 
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if
@@ -38,59 +41,32 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
-    local zauko        = GetNPCByID(ID.npc.ZAUKO)
 
-    if not zauko then
-        return
-    end
-
-    -- Community Service Quest
-    -- 0500: Turn off all the lights, and clear vars
-    if vanadielHour == 5 then
-        zauko:setLocalVar('commServiceStart', 0)
-        zauko:setLocalVar('commServiceComp', 0)
-        zone:setLocalVar('allLightsLit', 0)
-
-        for i = 1, 4 do
-            zone:setLocalVar('commServPlayer' .. i, 0)
-        end
-
-        for i = 0, 11 do
-            local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-
-            if lamp then
-                lamp:setAnimation(xi.anim.CLOSE_DOOR)
-                lamp:setLocalVar('Option', 0)
-            end
-        end
-
-    -- 1800: Notify anyone in zone with membership card that zauko is recruiting
-    elseif vanadielHour == 18 then
-        local players = zone:getPlayers()
-
-        for name, player in pairs(players) do
-            if player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
-                player:messageSpecial(ID.text.ZAUKO_IS_RECRUITING)
-            end
-        end
-
-    -- 0100: if nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
+    -- 01:00 - If nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
     -- she starts near Zauko and paths all the way to the Rolanberry exit.
     -- xi.path.flag.WALLHACK because she gets stuck on some terrain otherwise.
-    elseif vanadielHour == 1 then
-        if zauko:getLocalVar('commServiceComp') == 0 then
-            local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
-            if not npc then
+    if vanadielHour == 1 then
+        if xi.quest.communityServiceStartVhana(zone) then
+            local vhana = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
+            if not vhana then
                 return
             end
 
-            npc:clearPath()
-            npc:setStatus(0)
-            npc:initNpcAi()
-            npc:setLocalVar('path', 1)
-            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath[1]))
-            npc:pathThrough(lowerJeunoGlobal.lampPath[1], bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
+            vhana:clearPath()
+            vhana:setStatus(0)
+            vhana:initNpcAi()
+            vhana:setLocalVar('path', 1)
+            vhana:setPos(xi.path.first(lowerJeunoGlobal.lampPath[1]))
+            vhana:pathThrough(lowerJeunoGlobal.lampPath[1], bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
         end
+
+    -- 05:00 - Turn off all the lights.
+    elseif vanadielHour == 5 then
+        xi.quest.communityServiceCleanup(zone)
+
+    -- 18:00 - Notify anyone in zone with membership card that zauko is recruiting
+    elseif vanadielHour == 18 then
+        xi.quest.communityServiceNotification(zone)
     end
 end
 

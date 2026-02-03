@@ -5579,11 +5579,23 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
         {
             PMob->m_minLevel = minLevel;
         }
+        else
+        {
+            // If there is no level set default to 255
+            ShowError("luautils::GenerateDynamicEntity: No minLevel set for mob %s in zone %s. Defaulting to 255.", PMob->name.c_str(), PZone->getName().c_str());
+            PMob->m_minLevel = 255;
+        }
 
         const auto maxLevel = table["maxLevel"].get_or<uint8>(0);
         if (maxLevel > 0)
         {
             PMob->m_maxLevel = maxLevel;
+        }
+        else
+        {
+            // If there is no level set default to 255
+            ShowError("luautils::GenerateDynamicEntity: No maxLevel set for mob %s in zone %s. Defaulting to 255.", PMob->name.c_str(), PZone->getName().c_str());
+            PMob->m_maxLevel = 255;
         }
 
         const auto dropId = table["dropId"].get_or<uint16>(0);

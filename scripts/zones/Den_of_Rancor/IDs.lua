@@ -25,6 +25,7 @@ zones[xi.zone.DEN_OF_RANCOR] =
         TANSFORMED_INTO_A_MONSTER     = 7246,  -- The flames of rancor have transformed into a monster!
         FISHING_MESSAGE_OFFSET        = 7255,  -- You can't fish here.
         CHEST_UNLOCKED                = 7363,  -- You unlock the chest!
+        FIVE_DRIED_EYEBALLS           = 7371,  -- Five dried eyeballs are stuck to the surface of the rock...
         SENSE_OMINOUS_PRESENCE        = 7373,  -- You sense an ominous presence...
         PLAYER_OBTAINS_ITEM           = 7420,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7421,  -- You were unable to obtain the item.

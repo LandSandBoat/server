@@ -33,14 +33,14 @@ auto GP_CLI_COMMAND_SHOP_SELL_REQ::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_SHOP_SELL_REQ::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    uint32 quantity = ItemNum;
+    uint32 quantity = this->ItemNum;
 
-    const CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(ItemIndex);
-    if (PItem && (PItem->getID() == ItemNo) && !(PItem->getFlag() & ITEM_FLAG_NOSALE))
+    const CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->ItemIndex);
+    if (PItem && (PItem->getID() == this->ItemNo) && !(PItem->getFlag() & ITEM_FLAG_NOSALE))
     {
         quantity = std::min(quantity, PItem->getQuantity());
         // Store item-to-sell in the last slot of the shop container
-        PChar->Container->setItem(PChar->Container->getExSize(), ItemNo, ItemIndex, quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_SHOP_SELL>(ItemIndex, PItem->getBasePrice());
+        PChar->Container->setItem(PChar->Container->getExSize(), this->ItemNo, this->ItemIndex, quantity);
+        PChar->pushPacket<GP_SERV_COMMAND_SHOP_SELL>(this->ItemIndex, PItem->getBasePrice());
     }
 }

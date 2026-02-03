@@ -31,7 +31,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         duration = 60,
     }
 
-    return xi.combat.action.executeAdditionalStatus(mob, target, pTable)
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -138,7 +138,7 @@ xi.job_utils.thief.useAccomplice = function(player, target, ability)
     target:transferEnmity(player, 50 + player:getMod(xi.mod.ACC_COLLAB_EFFECT), 20.6)
 end
 
-xi.job_utils.thief.useAssassinsCharge = function(player, target, ability)
+xi.job_utils.thief.useAssassinsCharge = function(player, target, ability, action)
     local merits = player:getMerit(xi.merit.ASSASSINS_CHARGE)
     local crit   = 0
 
@@ -250,7 +250,7 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
     return despoiled
 end
 
-xi.job_utils.thief.useFeint = function(player, target, ability)
+xi.job_utils.thief.useFeint = function(player, target, ability, action)
     local bonus = player:getMod(xi.mod.AUGMENTS_FEINT) * player:getMerit(xi.merit.FEINT) / 25 -- Divide by the merit value (feint is 25) to get the number of merit points
 
     -- Subpower is the proc rate bonus for TH procs

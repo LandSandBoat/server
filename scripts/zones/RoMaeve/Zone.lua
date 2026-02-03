@@ -6,12 +6,58 @@ local ID = zones[xi.zone.ROMAEVE]
 ---@type TZone
 local zoneObject = {}
 
-zoneObject.onInitialize = function(zone)
-    local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, true)
-    local bastokMissionQM = GetNPCByID(ID.npc.BASTOK_7_1_QM)
-    if bastokMissionQM then
-        bastokMissionQM:setPos(newPosition.x, newPosition.y, newPosition.z)
+local function handleFullMoon()
+    local shouldDoorsOpen = (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON and VanadielHour() >= 18 and VanadielHour() < 6)
+
+    -- Set targetable status.
+    local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
+    if moongate1 then
+        moongate1:setUntargetable(shouldDoorsOpen)
     end
+
+    local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
+    if moongate2 then
+        moongate2:setUntargetable(shouldDoorsOpen)
+    end
+
+    -- Determine what the animation/status of the NPCs should be.
+    local doorStatus = shouldDoorsOpen and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
+
+    -- Loop over the affected NPCs: Moongates, bridges and fountain
+    for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
+        local npc = GetNPCByID(i)
+        if npc and npc:getAnimation() ~= doorStatus then
+            npc:setAnimation(doorStatus)
+        end
+    end
+end
+
+local function handleBastokQM(onInitialize)
+    local bastokMissionQM = GetNPCByID(ID.npc.BASTOK_7_1_QM)
+    if not bastokMissionQM then
+        return
+    end
+
+    local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, onInitialize)
+    if onInitialize then
+        bastokMissionQM:setPos(newPosition.x, newPosition.y, newPosition.z)
+        return
+    end
+
+    local vanadielHour = VanadielHour()
+    if
+        vanadielHour == 0 or
+        vanadielHour == 6 or
+        vanadielHour == 12 or
+        vanadielHour == 18
+    then
+        npcUtil.queueMove(bastokMissionQM, newPosition)
+    end
+end
+
+zoneObject.onInitialize = function(zone)
+    handleFullMoon()
+    handleBastokQM(true)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -36,61 +82,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameHour = function(zone)
-    local vanadielHour = VanadielHour()
-    local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
-    local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
-    local qm2 = GetNPCByID(ID.npc.BASTOK_7_1_QM)
-    local newPosition = npcUtil.pickNewPosition(ID.npc.BASTOK_7_1_QM, ID.npc.BASTOK_7_1_QM_POS, false)
-    -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
-    if
-        moongate1 and
-        moongate2
-    then
-        if
-            (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON) and
-            (vanadielHour >= 18 or vanadielHour < 6)
-        then
-            if moongate1:getLocalVar('romaeveActive') == 0 then
-                -- Loop over the affected NPCs: Moongates, bridges and fountain
-                for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                    local npc = GetNPCByID(i)
-                    if npc then
-                        npc:setAnimation(xi.anim.OPEN_DOOR) -- Open them
-                    end
-                end
-
-                moongate2:setUntargetable(true)
-                moongate1:setUntargetable(true)
-                moongate1:setLocalVar('romaeveActive', 1) -- Make this loop unavailable after firing
-            end
-
-        -- Clean up at 6am
-        elseif vanadielHour == 6 then
-            if moongate1:getLocalVar('romaeveActive') == 1 then
-                for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                    local npc = GetNPCByID(i)
-                    if npc then
-                        npc:setAnimation(xi.anim.CLOSE_DOOR) -- Close them
-                    end
-                end
-
-                moongate2:setUntargetable(false)
-                moongate1:setUntargetable(false)
-                moongate1:setLocalVar('romaeveActive', 0) -- Make loop available again
-            end
-        end
-    end
-
-    if
-        vanadielHour == 0 or
-        vanadielHour == 6 or
-        vanadielHour == 12 or
-        vanadielHour == 18
-    then
-        if qm2 then
-            npcUtil.queueMove(qm2, newPosition)
-        end
-    end
+    handleFullMoon()
+    handleBastokQM(false)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

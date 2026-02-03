@@ -5,14 +5,14 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.CLOTH, effect:getPower())
+    effect:addMod(xi.mod.CLOTH, effect:getPower())
+    effect:addMod(xi.mod.SYNTH_MATERIAL_LOSS_CLOTHCRAFT, effect:getSubPower())
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.CLOTH, effect:getPower())
 end
 
 return effectObject

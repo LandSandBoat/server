@@ -228,10 +228,6 @@ INSERT INTO `mob_pool_mods` VALUES (2748,370,5,0); -- REGEN: 5
 -- Mythril Golem
 INSERT INTO `mob_pool_mods` VALUES (2793,4,4,1); -- SIGHT_RANGE: 4
 
--- Nepionic Soulflayer
-INSERT INTO `mob_pool_mods` VALUES (2834,368,250,0); -- REGAIN: 250
-INSERT INTO `mob_pool_mods` VALUES (2834,574,100,0); -- WSD+% (Backhand Blow): 100
-
 -- Nidhogg
 INSERT INTO `mob_pool_mods` VALUES (2840,368,70,0); -- REGAIN: 70
 INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50

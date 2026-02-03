@@ -30,6 +30,7 @@ zones[xi.zone.ORDELLES_CAVES] =
         ALREADY_OBTAINED_DEW          = 7379,  -- You have already obtained the dew.
         DRY_WIND                      = 7389,  -- It is dry here, probably because of the wind.
         CHEST_UNLOCKED                = 7411,  -- You unlock the chest!
+        SENSE_A_FOUL_PRESENCE         = 7432,  -- You sense a foul presence.
         GERWITZS_AXE_DIALOG           = 7433,  -- Mine axe shall rend thy throat!
         GERWITZS_SWORD_DIALOG         = 7434,  -- Mine sword shall pierce thy tongue!
         GERWITZS_SOUL_DIALOG          = 7435,  -- Long have I waited. I will tell all...

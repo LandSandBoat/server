@@ -25,6 +25,7 @@
 #include "entities/battleentity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
+#include "mob_modifier.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
@@ -632,13 +633,16 @@ void CAttack::ProcessDamage()
             int32       fSTR          = battleutils::GetFSTR(m_attacker, m_victim, slot);
             REGION_TYPE regionID      = m_attacker->loc.zone->GetRegionID();
 
-            if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+            if (static_cast<CMobEntity*>(m_attacker)->getMobMod(MOBMOD_NO_H2H_PENALTY) == 0)
             {
-                mobH2HPenalty = 0.425f; // Vanilla - COP
-            }
-            else
-            {
-                mobH2HPenalty = 0.650f; // TOAU onward
+                if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+                {
+                    mobH2HPenalty = 0.425f; // Vanilla - COP
+                }
+                else
+                {
+                    mobH2HPenalty = 0.650f; // TOAU onward
+                }
             }
 
             m_damage = m_baseDamage + m_bonusBasePhysicalDamage;

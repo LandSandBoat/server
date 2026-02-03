@@ -10,22 +10,24 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE)
 
 quest.reward =
 {
-    fame = 30,
+    fame     = 30,
     fameArea = xi.fameArea.JEUNO,
-    title = xi.title.TORCHBEARER,
+    title    = xi.title.TORCHBEARER,
 }
 
 -- Lights the lamps
-local lightLamp = function(npc, option, player, questObj, zone)
-    local remaining = questObj:getVar(player, 'Count')
-
+local function lightLamp(player, npc, option)
     if option == 1 then
+        local remaining = quest:getVar(player, 'Count') - 1
+        quest:setVar(player, 'Count', remaining)
+
         npc:setAnimation(xi.anim.OPEN_DOOR)
-        questObj:setVar(player, 'Count', remaining - 1)
+
         if remaining == 0 then
+            local zone = player:getZone()
             player:messageSpecial(ID.text.YOU_LIGHT_THE_LAMP)
             player:messageSpecial(ID.text.LAMP_MSG_OFFSET)
-            questObj:setVar(player, 'Prog', 2)
+            quest:setVar(player, 'Prog', 2)
             zone:setLocalVar('allLightsLit', 1)
         else
             player:messageSpecial(ID.text.YOU_LIGHT_THE_LAMP)
@@ -35,13 +37,14 @@ local lightLamp = function(npc, option, player, questObj, zone)
 end
 
 -- Determines which parameter is passed when a player checks a light
-local lampCs = function(npc, player, questObj)
-    local hour         = VanadielHour()
-    local date         = VanadielUniqueDay()
-    local timer        = questObj:getVar(player, 'Timer')
+local function getLampParam(player, npc)
     local npcAnimation = npc:getAnimation()
 
-    if questObj:getVar(player, 'Prog') == 1 then
+    -- In progress.
+    if quest:getVar(player, 'Prog') == 1 then
+        local hour  = VanadielHour()
+        local date  = VanadielUniqueDay()
+        local timer = quest:getVar(player, 'Timer')
         if
             (timer == date and hour >= 18) or -- Same day flagged
             (timer + 1 == date and hour < 1)  -- Day after it was flagged
@@ -57,15 +60,22 @@ local lampCs = function(npc, player, questObj)
         then
             return 3
         end
+
+    -- The lamp is lit.
     elseif npcAnimation == xi.anim.OPEN_DOOR then
-        return 5 -- The lamp is lit.
+        return 5
+
+    -- You examine the lamp. It seems that it must be lit manually.
     else
-        return 6 -- You examine the lamp. It seems that it must be lit manually
+        return 6
     end
 end
 
 -- Stores the player name to be called lader as a string
-local encodeToVars = function(pName, zone)
+local encodeToVars = function(player)
+    local pName = player:getName()
+    local pZone = player:getZone()
+
     local stored = { 0, 0, 0, 0 }
     local chunk  = 1
 
@@ -90,7 +100,7 @@ local encodeToVars = function(pName, zone)
     end
 
     for i, v in ipairs(stored) do
-        zone:setLocalVar('commServPlayer' .. i, v)
+        pZone:setLocalVar('commServicePlayer' .. i, v)
     end
 end
 
@@ -99,7 +109,7 @@ local decodeFromVars = function(zone)
     local chars = {}
 
     for chunk = 1, 4 do
-        local v = zone:getLocalVar('commServPlayer' .. chunk)
+        local v = zone:getLocalVar('commServicePlayer' .. chunk)
         if v == 0 then
             break
         end
@@ -117,6 +127,47 @@ local decodeFromVars = function(zone)
     return table.concat(chars)
 end
 
+-- This gets called from Lower Jeuno zone script at 1:00 AM
+xi.quest.communityServiceStartVhana = function(zone)
+    if zone:getLocalVar('commServiceComp') == 0 then
+        return true
+    end
+
+    return false
+end
+
+-- This gets called from Lower Jeuno zone script at 5:00 AM
+xi.quest.communityServiceCleanup = function(zone)
+    -- Reset zone variables.
+    zone:setLocalVar('commServiceStart', 0)
+    zone:setLocalVar('commServiceComp', 0)
+    zone:setLocalVar('allLightsLit', 0)
+
+    for i = 1, 4 do
+        zone:setLocalVar('commServicePlayer' .. i, 0)
+    end
+
+    -- Turn lights off.
+    for i = 0, 11 do
+        local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
+
+        if lamp then
+            lamp:setAnimation(xi.anim.CLOSE_DOOR)
+        end
+    end
+end
+
+-- This gets called from Lower Jeuno zone script at 18:00 PM
+xi.quest.communityServiceNotification = function(zone)
+    local players = zone:getPlayers()
+
+    for _, player in pairs(players) do
+        if player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
+            player:messageSpecial(ID.text.ZAUKO_IS_RECRUITING)
+        end
+    end
+end
+
 quest.sections =
 {
     {
@@ -129,53 +180,59 @@ quest.sections =
             ['Zauko'] =
             {
                 onTrigger = function(player, npc)
+                    local zone = player:getZone()
+                    if not zone then
+                        return
+                    end
+
                     local date            = VanadielUniqueDay()
                     local doneCommService = (player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
                     local hour            = VanadielHour()
                     local member          = player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) and 1 or 0
                     local progress        = quest:getVar(player, 'Prog')
-                    local questCompleted  = npc:getLocalVar('commServiceComp') -- Either 1 or 0
-                    local questStarted    = npc:getLocalVar('commServiceStart') -- Either 1 or 0
+                    local questStarted    = zone:getLocalVar('commServiceStart') -- Either 1 or 0
+                    local questCompleted  = zone:getLocalVar('commServiceComp')  -- Either 1 or 0
                     local timer           = quest:getVar(player, 'Timer')
-                    local zone            = player:getZone()
                     local playerString    = decodeFromVars(zone)
 
-                    if not zone then
-                        return
-                    end
-
-                    if
                     -- Offers the quest
+                    if
                         hour >= 18 and
                         hour < 23 and
                         questStarted == 0 -- Only 1 person per night can flag the quest
                     then
                         return quest:progressEvent(116, doneCommService)
+
+                    -- Completes the quest
                     elseif progress == 2 then
-                        -- Completes the quest
                         return quest:progressEvent(117, doneCommService, member) -- 0 0 = First time, 1 0 Quest completed before and does not have KI., 1 1 Has completed quest and has KI
-                    elseif
+
                     -- Player has the quest flagged and failed
+                    elseif
                         progress == 1 and
                         ((timer + 1 == date and hour >= 1) or -- Day after quest flagged
                         (timer + 1 < date))  -- Day after it was flagged or later
                     then
                         return quest:progressEvent(119)
+
+                    -- Player is on the quest and has not failed/completed it yet
                     elseif progress == 1 then
-                        -- Player is on the quest and has not failed/completed it yet
                         return quest:event(114)
+
+                    -- Someone has completed the quest today and turned it in
                     elseif questCompleted == 1 then
-                        -- Someone has completed the quest today and turned it in
-                        if npc:getLocalVar('commServicePlayer') == player:getID() then
+                        if zone:getLocalVar('commServicePlayer') == player:getID() then
                             return quest:event(113)
                         else
                             return quest:event(113, { [0] = questCompleted, ['strings'] = { [0] = playerString } })
                         end
+
+                    -- Another player is on the quest and has lit all the lamps but has not turned it in yet
                     elseif zone:getLocalVar('allLightsLit') == 1 then
-                        -- Another player is on the quest and has lit all the lamps but has not turned it in yet
                         return quest:event(113)
+
+                    -- Asks a player with the KI if they would like to keep it. Only asks once per day.
                     elseif
-                        -- Asks a player with the KI if they would like to keep it. Only asks once per day.
                         hour >= 5 and
                         hour < 18 and
                         player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) and
@@ -189,118 +246,98 @@ quest.sections =
             ['_l00'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(120, lampVar)
+                    return quest:progressEvent(120, getLampParam(player, npc), 0)
                 end
             },
 
             ['_l01'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(121, lampVar, 1)
+                    return quest:progressEvent(121, getLampParam(player, npc), 1)
                 end
             },
 
             ['_l02'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(122, lampVar, 2)
+                    return quest:progressEvent(122, getLampParam(player, npc), 2)
                 end
             },
 
             ['_l03'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(123, lampVar, 3)
+                    return quest:progressEvent(123, getLampParam(player, npc), 3)
                 end
             },
 
             ['_l04'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(124, lampVar, 4)
+                    return quest:progressEvent(124, getLampParam(player, npc), 4)
                 end
             },
 
             ['_l05'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(125, lampVar, 5)
+                    return quest:progressEvent(125, getLampParam(player, npc), 5)
                 end
             },
 
             ['_l06'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(126, lampVar, 6)
+                    return quest:progressEvent(126, getLampParam(player, npc), 6)
                 end
             },
 
             ['_l07'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(127, lampVar, 7)
+                    return quest:progressEvent(127, getLampParam(player, npc), 7)
                 end
             },
 
             ['_l08'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(128, lampVar, 8)
+                    return quest:progressEvent(128, getLampParam(player, npc), 8)
                 end
             },
 
             ['_l09'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(129, lampVar, 9)
+                    return quest:progressEvent(129, getLampParam(player, npc), 9)
                 end
             },
 
             ['_l10'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(130, lampVar, 10)
+                    return quest:progressEvent(130, getLampParam(player, npc), 10)
                 end
             },
 
             ['_l11'] =
             {
                 onTrigger = function(player, npc)
-                    local lampVar = lampCs(npc, player, quest)
-
-                    return quest:progressEvent(131, lampVar, 11)
+                    return quest:progressEvent(131, getLampParam(player, npc), 11)
                 end
             },
 
             onEventUpdate =
             {
                 [116] = function(player, csid, option, npc)
+                    local zone = player:getZone()
+                    if not zone then
+                        return
+                    end
+
                     local hour            = VanadielHour()
                     local doneCommService = (player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
-                    local questStarted    = npc:getLocalVar('commServiceStart') -- Either 1 or 0
-                    local zone            = player:getZone()
+                    local questStarted    = zone:getLocalVar('commServiceStart') -- Either 1 or 0
 
                     -- Verifies if no one has accepted the quest/time has changed to too late
                     if
@@ -308,11 +345,11 @@ quest.sections =
                         hour < 23 and
                         questStarted == 0
                     then
-                        encodeToVars(player:getName(), zone)
-                        npc:setLocalVar('commServiceStart', 1)
+                        encodeToVars(player)
+                        zone:setLocalVar('commServiceStart', 1)
                         quest:begin(player)
                         quest:setVar(player, 'Prog', 1)
-                        quest:setVar(player, 'Count', 11)
+                        quest:setVar(player, 'Count', 12)
                         quest:setVar(player, 'Timer', VanadielUniqueDay())
                         player:updateEvent(1, doneCommService)
                     else
@@ -324,9 +361,15 @@ quest.sections =
             onEventFinish =
             {
                 [117] = function(player, csid, option, npc)
-                    npc:setLocalVar('commServiceComp', 1)
-                    npc:setLocalVar('commServicePlayer', player:getID())
+                    local zone = player:getZone()
+                    if not zone then
+                        return
+                    end
+
+                    zone:setLocalVar('commServiceComp', 1)
+                    zone:setLocalVar('commServicePlayer', player:getID())
                     quest:complete(player)
+
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD)
                     end
@@ -346,75 +389,51 @@ quest.sections =
                 end,
 
                 [120] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [121] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [122] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [123] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [124] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [125] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [126] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [127] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [128] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [129] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [130] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
 
                 [131] = function(player, csid, option, npc)
-                    local zone = player:getZone()
-
-                    lightLamp(npc, option, player, quest, zone)
+                    lightLamp(player, npc, option)
                 end,
             },
         },

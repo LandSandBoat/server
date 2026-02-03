@@ -5,7 +5,7 @@ xi.apkallu.zones = xi.apkallu.zones or {}
 xi.apkallu.fish =
 {
     xi.item.AHTAPOT,
-    xi.item.VEYDAL_WRASSE,
+    xi.item.VEYDAL_WRASSE_1,
     xi.item.YAYINBALIGI,
 }
 

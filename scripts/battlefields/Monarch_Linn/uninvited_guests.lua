@@ -20,7 +20,6 @@ local content = BattlefieldQuest:new({
     quest            = xi.quest.id.otherAreas.UNINVITED_GUESTS,
     requiredVar      = 'Quest[4][81]Prog',
     requiredValue    = 1,
-    experimental     = true,
 })
 
 content.groups =

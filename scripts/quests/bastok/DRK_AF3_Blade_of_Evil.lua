@@ -57,18 +57,16 @@ quest.sections =
                     if
                         npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_QUADAV_MAGE_BLOOD) and
                         quest:getVar(player, 'Prog') == 0 and
-                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):isSpawned() and
-                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 1):isSpawned() and
-                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 2):isSpawned()
+                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 0):isSpawned() and
+                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 1):isSpawned() and
+                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 2):isSpawned()
                     then
                         player:confirmTrade()
+                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 0):updateClaim(player)
+                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 1):updateEnmity(player)
+                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 2):updateEnmity(player)
 
-                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):updateClaim(player)
-                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 1):updateClaim(player)
-                        SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_MOB_OFFSET + 2):updateClaim(player)
-
-                        -- TODO: Determine if a message is displayed on spawn here.
-                        return quest:noAction()
+                        return quest:messageSpecial(middleDelkfuttsID.text.SENSE_A_FOUL_PRESENCE)
                     end
                 end,
             },

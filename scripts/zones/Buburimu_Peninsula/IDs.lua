@@ -37,6 +37,15 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         LOGGING_IS_POSSIBLE_HERE       = 7415,  -- Logging is possible here if you have <item>.
         CONQUEST                       = 7431,  -- You've earned conquest points!
         GARRISON_BASE                  = 7801,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        SHIP_SANK_NEAR_HERE            = 7844,  -- It seems that long ago, a ship sank near here. If you find any vestige of the wreck and return it to the sea, perhaps it would appease the spirits of the dead.
+        RETURN_TO_SEA                  = 7845,  -- You return the <item> to the sea.
+        MY_ITEM                        = 7851,  -- My <item>...
+        WHAT_CAN_I_DO                  = 7852,  -- What can I do...?
+        WORKED_SO_HARD                 = 7853,  -- I worked so hard to get it...
+        MUST_HAVE_IT_BACK              = 7854,  -- I must have it back...
+        MAKE_PARENTS_PROUD             = 7855,  -- I thought I could make my parents proud...  Why can't I do such a simple thing!?
+        IM_FADING                      = 7856,  -- I-I'm...fading... I can't go on much longer... Could this be the end?
+        IT_CANT_BE_NOO                 = 7857,  -- It can't be... Nooo!!!
         TIME_ELAPSED                   = 7894,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
         YOU_CANNOT_ENTER_DYNAMIS       = 7907,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7909,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
@@ -58,9 +67,13 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     },
     npc =
     {
-        LOGGING         = GetTableOfIDs('Logging_Point'),
-        OVERSEER_BASE   = GetFirstID('Bonbavour_RK'),
-        SIGNPOST_OFFSET = GetFirstID('Signpost'),
+        BRIGAND_CHART_HUME = GetFirstID('Brigand_Chart_Hume'),
+        BRIGAND_CHART_QM   = GetFirstID('qm1'),
+        JADE_ETUI_TABLE    = GetTableOfIDs('Jade_Etui'),
+        LOGGING            = GetTableOfIDs('Logging_Point'),
+        OVERSEER_BASE      = GetFirstID('Bonbavour_RK'),
+        SHIMMERING_POINT   = GetFirstID('Shimmering_Point'),
+        SIGNPOST_OFFSET    = GetFirstID('Signpost'),
     },
 }
 

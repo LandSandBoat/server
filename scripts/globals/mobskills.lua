@@ -63,7 +63,7 @@ local burstMultipliersByTier =
 
 local function calculateMobMagicBurst(caster, ele, target)
     local burstMultiplier = 1.0
-    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
+    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(target, ele)
 
     if skillchainTier > 0 then
         burstMultiplier = burstMultipliersByTier[skillchainCount]
@@ -120,7 +120,7 @@ local function handleSinglePhysicalHit(mob, target, hitdamage, hitslanded, final
         params.canCrit or
         params.tpEffect == xi.mobskills.physicalTpBonus.CRIT_VARIES
     then
-        local critRate = xi.combat.physical.calculateSwingCriticalRate(mob, target, mob:getTP(), nil)
+        local critRate = xi.combat.physical.calculateSwingCriticalRate(mob, target, mob:getTP(), xi.slot.MAIN)
         isCritical = math.random(1, 1000) <= critRate * 1000
     end
 
@@ -360,7 +360,7 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
             petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(actor:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
 
-        local skillchainTier, _ = xi.magicburst.formMagicBurst(actionElement, target)
+        local skillchainTier, _ = xi.magicburst.formMagicBurst(target, actionElement)
         if
             actor:getPetID() > 0 and
             skillchainTier > 0
@@ -530,13 +530,14 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         end
 
         -- Remove shadows
-        damage = utils.takeShadows(target, damage, shadowsToRemove)
+        local shadowsUsed = 0
+        damage, shadowsUsed = utils.takeShadows(target, damage, shadowsToRemove)
 
         -- Dealt zero damage, so shadows took all hits.
         if damage == 0 then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
 
-            return 0
+            return shadowsUsed
         end
 
     elseif shadowsToRemove == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- Remove all shadows
@@ -564,6 +565,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
     utils.handleAutomatonAutoAnalyzer(target, skill, damage)
 
     if attackType == xi.attackType.PHYSICAL then
+        damage = damage * xi.combat.damage.physicalElementSDT(target, damageType)
         damage = target:physicalDmgTaken(damage, damageType)
     elseif attackType == xi.attackType.MAGICAL then
         local element = utils.clamp(damageType - 5, xi.element.NONE, xi.element.DARK) -- Transform damage type to element
@@ -584,6 +586,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         damage = math.floor(target:handleSevereDamage(damage, false))
         damage = math.floor(target:checkDamageCap(damage))
     elseif attackType == xi.attackType.RANGED then
+        damage = damage * xi.combat.damage.physicalElementSDT(target, damageType)
         damage = target:rangedDmgTaken(damage)
     end
 

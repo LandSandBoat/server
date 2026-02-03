@@ -11007,6 +11007,36 @@ void CLuaBaseEntity::delSpell(uint16 spellID, const sol::optional<sol::table>& p
 }
 
 /************************************************************************
+ *  Function: getSetBlueSpells()
+ *  Purpose : Retrieves a players set BLU spell list (in the form of IDs)
+ *  Example : local spells = player:getSetBlueSpells()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getSetBlueSpells() -> sol::table
+{
+    auto spellList = lua.create_table();
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling getSetBlueSpells (%s).", m_PBaseEntity->getName());
+        return spellList;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    for (auto spellId : PChar->m_SetBlueSpells)
+    {
+        if (spellId != 0)
+        {
+            spellList.add(spellId + 0x200); // 0x200 magic offset also in blueutils
+        }
+    }
+
+    return spellList;
+}
+
+/************************************************************************
  *  Function: recalculateSkillsTable()
  *  Purpose : Recalculates skill tables to get new values and calculations
  *  Example : target:recalculateSkillsTable()
@@ -13527,7 +13557,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto effectIcon = va[0].as<uint16>();                      // The same
         auto power      = static_cast<uint16>(va[1].as<double>()); // Can come in as a lua_number, capture as double and truncate
         auto tick       = static_cast<uint32>(va[2].as<double>());
-        auto duration   = static_cast<uint32>(va[3].as<double>());
+        auto duration   = va[3].as<double>();
 
         // Optional
         auto subType         = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
@@ -13541,7 +13571,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
                                                    effectIcon,
                                                    power,
                                                    std::chrono::seconds(tick),
-                                                   std::chrono::seconds(duration),
+                                                   std::chrono::milliseconds(static_cast<uint64_t>(duration * 1000)),
                                                    subType,
                                                    subPower,
                                                    tier);
@@ -13598,7 +13628,7 @@ auto CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va) -> bool
     auto effectIcon = va[1].as<uint16>();
     auto power      = static_cast<uint16>(va[2].as<double>()); // Can come in as a lua_number, capture as double and truncate
     auto tick       = static_cast<uint32>(va[3].as<double>());
-    auto duration   = static_cast<uint32>(va[4].as<double>());
+    auto duration   = va[4].as<double>();
 
     // Optional
     auto subType         = va[5].is<uint32>() ? va[5].as<uint32>() : 0;
@@ -13614,7 +13644,7 @@ auto CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va) -> bool
                           effectIcon,
                           power,
                           std::chrono::seconds(tick),
-                          std::chrono::seconds(duration),
+                          std::chrono::milliseconds(static_cast<uint64_t>(duration * 1000)),
                           subType,
                           subPower,
                           tier,
@@ -14332,7 +14362,7 @@ bool CLuaBaseEntity::hasAllLatentsActive(uint8 slot)
 
 /************************************************************************
  *  Function: getMaxGearMod()
- *  Purpose : Returns the highest integer value of a specified Mod on all equiped items
+ *  Purpose : Returns the highest integer value of a specified Mod on all equipped items
  *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
  *  Notes   :
  ************************************************************************/
@@ -14347,6 +14377,32 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
     }
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<Mod>(modId));
+}
+
+/************************************************************************
+ *  Function: getGearModFromSlot()
+ *  Purpose : Returns mod value from a specific item equipped
+ *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+ *  Notes   :
+ ************************************************************************/
+int16 CLuaBaseEntity::getGearModFromSlot(uint8 slot, Mod modId)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid Entity (Non-PC: %s) calling function getGearModFromSlot.", m_PBaseEntity->getName());
+
+        return 0;
+    }
+
+    auto*           PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    CItemEquipment* PItem = PChar->getEquip(static_cast<SLOTTYPE>(slot));
+
+    if (PItem)
+    {
+        return PItem->getModifier(modId);
+    }
+
+    return 0;
 }
 
 /************************************************************************
@@ -16019,6 +16075,28 @@ bool CLuaBaseEntity::isAvatar()
     {
         uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
         if ((petID >= PETID_CARBUNCLE && petID <= PETID_CAIT_SITH) || petID == PETID_SIREN)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
+ *  Function: isJugPet()
+ *  Purpose : Returns true if entity is a BST jug pet.
+ *  Example : local isJugPet = pet:isJugPet()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::isJugPet() -> bool
+{
+    if (m_PBaseEntity->objtype == TYPE_PET)
+    {
+        uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
+        if ((petID >= PETID_SHEEP_FAMILIAR && petID <= PETID_TURBID_TOLOI) ||
+            (petID >= PETID_SWEET_CAROLINE && petID <= PETID_ENERGIZED_SEFINA))
         {
             return true;
         }
@@ -19934,6 +20012,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasSpell", CLuaBaseEntity::hasSpell);
     SOL_REGISTER("canLearnSpell", CLuaBaseEntity::canLearnSpell);
     SOL_REGISTER("delSpell", CLuaBaseEntity::delSpell);
+    SOL_REGISTER("getSetBlueSpells", CLuaBaseEntity::getSetBlueSpells);
 
     SOL_REGISTER("recalculateSkillsTable", CLuaBaseEntity::recalculateSkillsTable);
     SOL_REGISTER("recalculateAbilitiesTable", CLuaBaseEntity::recalculateAbilitiesTable);
@@ -20083,6 +20162,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delMod", CLuaBaseEntity::delMod);
     SOL_REGISTER("printAllMods", CLuaBaseEntity::printAllMods);
     SOL_REGISTER("getMaxGearMod", CLuaBaseEntity::getMaxGearMod);
+    SOL_REGISTER("getGearModFromSlot", CLuaBaseEntity::getGearModFromSlot);
 
     SOL_REGISTER("addLatent", CLuaBaseEntity::addLatent);
     SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
@@ -20160,6 +20240,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPetID", CLuaBaseEntity::getPetID);
     SOL_REGISTER("isAutomaton", CLuaBaseEntity::isAutomaton);
     SOL_REGISTER("isAvatar", CLuaBaseEntity::isAvatar);
+    SOL_REGISTER("isJugPet", CLuaBaseEntity::isJugPet);
     SOL_REGISTER("getPetElement", CLuaBaseEntity::getPetElement);
     SOL_REGISTER("setPet", CLuaBaseEntity::setPet);
     SOL_REGISTER("getMinimumPetLevel", CLuaBaseEntity::getMinimumPetLevel);

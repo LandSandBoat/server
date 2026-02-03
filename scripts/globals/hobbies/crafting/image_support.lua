@@ -63,14 +63,14 @@ local function freeImageSupport(player, effectId)
     end
 end
 
--- Give proper advanced image support power and duration.
+-- Give proper advanced image support power and duration. Also gives a material loss rate reduction.
 local function advancedImageSupport(player, effectId)
     player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
 
     if effectId == xi.effect.FISHING_IMAGERY then
         player:addStatusEffect(effectId, 2, 0, 7200)
     else
-        player:addStatusEffect(effectId, 3, 0, 480)
+        player:addStatusEffect(effectId, 3, 0, 480, 10)
     end
 end
 

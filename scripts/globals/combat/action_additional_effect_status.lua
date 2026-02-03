@@ -34,8 +34,11 @@ local defaultsTable =
 -----------------------------------
 -- Local functions to ensure defaults are set.
 -----------------------------------
-local function validateParameters(fedData)
+local function validateParameters(actor, target, fedData)
     local params = {}
+
+    -- Additional effect target.
+    params.aeTarget     = fedData.aeTarget or target -- Default to the current attack target.
 
     -- Chance.
     params.chance       = fedData.chance or 100 -- Default: Always proc.
@@ -61,8 +64,8 @@ local function validateParameters(fedData)
     params.absorbEffect = fedData.absorbEffect or false
 
     -- Animations and messaging.
-    params.animation    = fedData.animation or defaultsTable[params.effectId][1]
-    params.message      = fedData.message or defaultsTable[params.effectId][2]
+    params.animation    = fedData.animation or (defaultsTable[params.effectId][1] or 0)
+    params.message      = fedData.message or (defaultsTable[params.effectId][2] or 0)
 
     return params
 end
@@ -70,8 +73,34 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
-xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
-    local params = validateParameters(fedData)
+xi.combat.action.executeAddEffectEnhancement = function(actor, target, fedData)
+    local params = validateParameters(actor, target, fedData)
+
+    -- Early return: Incorrect effect ID.
+    if params.effectId == xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    -- Early return: No proc.
+    if math.random(1, 100) > params.chance then
+        return 0, 0, 0
+    end
+
+    -- Early return: Target has an status effect that invalidates current (Outright incompatible or higher tier).
+    if xi.data.statusEffect.isEffectNullified(params.aeTarget, params.effectId, params.tier) then
+        return 0, 0, 0
+    end
+
+    -- Apply effect.
+    if params.aeTarget:addStatusEffect(params.effectId, params.power, params.tick, params.duration, params.subType, params.subPower, params.tier) then
+        return params.animation, params.message, params.effectId
+    end
+
+    return 0, 0, 0
+end
+
+xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
+    local params = validateParameters(actor, target, fedData)
 
     -- Early return: Incorrect effect ID.
     if params.effectId == xi.effect.NONE then
@@ -84,22 +113,22 @@ xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
     end
 
     -- Early return: Target is immune.
-    if xi.data.statusEffect.isTargetImmune(target, params.effectId, params.element) then
+    if xi.data.statusEffect.isTargetImmune(params.aeTarget, params.effectId, params.element) then
         return 0, 0, 0
     end
 
     -- Early return: Target triggers resist trait.
-    if xi.data.statusEffect.isTargetResistant(actor, target, params.effectId) then
+    if xi.data.statusEffect.isTargetResistant(actor, params.aeTarget, params.effectId) then
         return 0, 0, 0
     end
 
     -- Early return: Target has an status effect that invalidates current (Outright incompatible or higher tier).
-    if xi.data.statusEffect.isEffectNullified(target, params.effectId, params.tier) then
+    if xi.data.statusEffect.isEffectNullified(params.aeTarget, params.effectId, params.tier) then
         return 0, 0, 0
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end
@@ -108,15 +137,15 @@ xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
     local totalDuration = math.floor(params.duration * resistanceRate)
 
     -- Apply effect.
-    if target:addStatusEffect(params.effectId, params.power, params.tick, totalDuration, params.subType, params.subPower, params.tier) then
+    if params.aeTarget:addStatusEffect(params.effectId, params.power, params.tick, totalDuration, params.subType, params.subPower, params.tier) then
         return params.animation, params.message, params.effectId
     end
 
     return 0, 0, 0
 end
 
-xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
-    local params = validateParameters(fedData)
+xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
+    local params = validateParameters(actor, target, fedData)
 
     -- Early return: Incorrect effect ID.
     if params.effectId ~= xi.effect.NONE then
@@ -129,12 +158,12 @@ xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
     end
 
     -- Early return: No dispelable effect.
-    if not target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+    if not params.aeTarget:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
         return 0, 0, 0
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end
@@ -142,9 +171,9 @@ xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
     -- Attampt to dispel or steal an status effect.
     local dispelledEffect = 0
     if params.absorbEffect then
-        dispelledEffect = actor:stealStatusEffect(target, xi.effectFlag.DISPELABLE, true)
+        dispelledEffect = actor:stealStatusEffect(params.aeTarget, xi.effectFlag.DISPELABLE, true)
     else
-        dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+        dispelledEffect = params.aeTarget:dispelStatusEffect(xi.effectFlag.DISPELABLE)
     end
 
     if dispelledEffect == 0 then

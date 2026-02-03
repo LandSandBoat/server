@@ -129,7 +129,7 @@ xi.job_utils.warrior.useWarcry = function(player, target, ability)
     return xi.effect.WARCRY
 end
 
-xi.job_utils.warrior.useWarriorsCharge = function(player, target, ability)
+xi.job_utils.warrior.useWarriorsCharge = function(player, target, ability, action)
     local merits = player:getMerit(xi.merit.WARRIORS_CHARGE)
 
     player:addStatusEffect(xi.effect.WARRIORS_CHARGE, merits - 5, 0, 60)

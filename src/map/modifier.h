@@ -78,6 +78,7 @@ enum class Mod
     LIGHT_SLEEP_RES_RANK = 1165,
     DARK_SLEEP_RES_RANK  = 1166,
     BLIND_RES_RANK       = 1167,
+    STUN_RES_RANK        = 1186,
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -965,36 +966,37 @@ enum class Mod
 
     EGGHELM = 517,
 
-    SHIELDBLOCKRATE           = 518, // Affects shield block rate, percent based
-    DIA_DOT                   = 313, // Increases the DoT damage of Dia
-    ENH_DRAIN_ASPIR           = 315, // % damage boost to Drain and Aspir
-    AUGMENTS_ABSORB_LIBERATOR = 521, // Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
-    AMMO_SWING                = 523, // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
-    AUGMENTS_CONVERT          = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
-    AUGMENTS_SA               = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
-    AUGMENTS_TA               = 527, // Adds Critical Attack Bonus to Trick Attack, percentage based.
-    AUGMENTS_FEINT            = 502, // Feint will give another -10 Evasion per merit level
-    AUGMENTS_ASSASSINS_CHARGE = 886, // Gives Assassin's Charge +1% Critical Hit Rate per merit level
-    AUGMENTS_AMBUSH           = 887, // Gives +1% Triple Attack per merit level when Ambush conditions are met
-    AUGMENTS_AURA_STEAL       = 889, // 20% chance of 2 effects to be dispelled or stolen per merit level
-    AUGMENTS_CONSPIRATOR      = 912, // Applies Conspirator benefits to player at the top of the hate list
-    ENHANCES_REFRESH          = 529, // "Enhances Refresh" adds +1 per modifier to spell's tick result.
-    NO_SPELL_MP_DEPLETION     = 530, // % to not deplete MP on spellcast.
-    STONESKIN_BONUS_HP        = 539, // Bonus "HP" granted to Stoneskin spell.
-    DAY_NUKE_BONUS            = 565, // Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
-    IRIDESCENCE               = 566, // Iridescence trait (additional weather damage/penalty)
-    BARSPELL_AMOUNT           = 567, // Additional elemental resistance granted by bar- spells
-    BARSPELL_MDEF_BONUS       = 827, // Extra magic defense bonus granted to the bar- spell effect
-    RAPTURE_AMOUNT            = 568, // Bonus amount added to Rapture effect
-    EBULLIENCE_AMOUNT         = 569, // Bonus amount added to Ebullience effect
-    AQUAVEIL_COUNT            = 832, // Modifies the amount of hits that Aquaveil absorbs before being removed
-    ENH_MAGIC_DURATION        = 890, // Enhancing Magic Duration increase %
-    ENHANCES_COURSERS_ROLL    = 891, // Courser's Roll Bonus % chance
-    ENHANCES_CASTERS_ROLL     = 892, // Caster's Roll Bonus % chance
-    ENHANCES_BLITZERS_ROLL    = 893, // Blitzer's Roll Bonus % chance
-    ENHANCES_ALLIES_ROLL      = 894, // Allies' Roll Bonus % chance
-    ENHANCES_TACTICIANS_ROLL  = 895, // Tactician's Roll Bonus % chance
-    OCCULT_ACUMEN             = 902, // Grants bonus TP when dealing damage with elemental or dark magic
+    SHIELDBLOCKRATE           = 518,  // Affects shield block rate, percent based
+    DIA_DOT                   = 313,  // Increases the DoT damage of Dia
+    ENH_DRAIN_ASPIR           = 315,  // % damage boost to Drain and Aspir
+    AUGMENTS_ABSORB_LIBERATOR = 521,  // Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
+    AMMO_SWING                = 523,  // Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
+    AUGMENTS_CONVERT          = 525,  // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
+    AUGMENTS_SA               = 526,  // Adds Critical Attack Bonus to Sneak Attack, percentage based.
+    AUGMENTS_TA               = 527,  // Adds Critical Attack Bonus to Trick Attack, percentage based.
+    AUGMENTS_FEINT            = 502,  // Feint will give another -10 Evasion per merit level
+    AUGMENTS_ASSASSINS_CHARGE = 886,  // Gives Assassin's Charge +1% Critical Hit Rate per merit level
+    AUGMENTS_AMBUSH           = 887,  // Gives +1% Triple Attack per merit level when Ambush conditions are met
+    AUGMENTS_AURA_STEAL       = 889,  // 20% chance of 2 effects to be dispelled or stolen per merit level
+    AUGMENTS_CONSPIRATOR      = 912,  // Applies Conspirator benefits to player at the top of the hate list
+    ENHANCES_REFRESH          = 529,  // "Enhances Refresh" adds +1 per modifier to spell's tick result.
+    NO_SPELL_MP_DEPLETION     = 530,  // % to not deplete MP on spellcast.
+    STONESKIN_BONUS_HP        = 539,  // Bonus "HP" granted to Stoneskin spell.
+    DAY_NUKE_BONUS            = 565,  // Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
+    DAY_WEATHER_PROC_BONUS    = 1787, // Bonus damage from Twilight cape which works with both day OR weather procs.
+    IRIDESCENCE               = 566,  // Iridescence trait (additional weather damage/penalty)
+    BARSPELL_AMOUNT           = 567,  // Additional elemental resistance granted by bar- spells
+    BARSPELL_MDEF_BONUS       = 827,  // Extra magic defense bonus granted to the bar- spell effect
+    RAPTURE_AMOUNT            = 568,  // Bonus amount added to Rapture effect
+    EBULLIENCE_AMOUNT         = 569,  // Bonus amount added to Ebullience effect
+    AQUAVEIL_COUNT            = 832,  // Modifies the amount of hits that Aquaveil absorbs before being removed
+    ENH_MAGIC_DURATION        = 890,  // Enhancing Magic Duration increase %
+    ENHANCES_COURSERS_ROLL    = 891,  // Courser's Roll Bonus % chance
+    ENHANCES_CASTERS_ROLL     = 892,  // Caster's Roll Bonus % chance
+    ENHANCES_BLITZERS_ROLL    = 893,  // Blitzer's Roll Bonus % chance
+    ENHANCES_ALLIES_ROLL      = 894,  // Allies' Roll Bonus % chance
+    ENHANCES_TACTICIANS_ROLL  = 895,  // Tactician's Roll Bonus % chance
+    OCCULT_ACUMEN             = 902,  // Grants bonus TP when dealing damage with elemental or dark magic
 
     QUICK_MAGIC = 909, // Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
 
@@ -1139,7 +1141,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1186 and onward
+    // SPARE IDs: 1188 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -192,7 +192,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 player:startEvent(183)
             end
         elseif teleportEventsByArea[areaId] then
-            player:startOptionalCutscene(teleportEventsByArea[areaId])
+            player:startOptionalCutscene(teleportEventsByArea[areaId]) -- Confirmed to wipe enmity.
         end
     end
 end

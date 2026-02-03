@@ -29,7 +29,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         element = xi.element.DARK,
     }
 
-    return xi.combat.action.executeAdditionalDispel(mob, target, pTable)
+    return xi.combat.action.executeAddEffectDispel(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

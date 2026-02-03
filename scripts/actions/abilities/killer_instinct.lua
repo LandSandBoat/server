@@ -8,11 +8,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.beastmaster.onAbilityCheckKillerInstinct(player, target, ability)
+    return xi.job_utils.beastmaster.checkKillerInstinct(player, target, ability)
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    return xi.job_utils.beastmaster.onUseAbilityKillerInstinct(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.beastmaster.useKillerInstinct(player, target, ability, action)
 end
 
 return abilityObject

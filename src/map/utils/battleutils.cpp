@@ -895,6 +895,8 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                                 const int remainingDrain = PEffect->GetSubPower();
                                 if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
                                 {
+                                    spikesDamage        = std::min(spikesDamage, remainingDrain);
+                                    Action->spikesParam = static_cast<uint16>(spikesDamage);
                                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
                                 }
                                 else

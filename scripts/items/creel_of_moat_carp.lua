@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.item.MOAT_CARP, math.random(6, 12) } })
+    npcUtil.giveItem(target, { { xi.item.MOAT_CARP_1, math.random(6, 12) } })
 end
 
 return itemObject

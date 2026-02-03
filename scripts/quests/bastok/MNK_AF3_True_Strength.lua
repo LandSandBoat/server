@@ -58,7 +58,7 @@ quest.sections =
                     then
                         player:confirmTrade()
 
-                        return quest:messageSpecial(oztrojaID.text.SENSE_OF_FOREBODING)
+                        return quest:messageSpecial(oztrojaID.text.YOU_HOLD, xi.item.BOTTLE_OF_YAGUDO_DRINK)
                     end
                 end,
             },

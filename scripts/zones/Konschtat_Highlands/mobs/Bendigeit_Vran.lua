@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local hour = VanadielHour()
+    local hour      = VanadielHour()
     local moonCycle = getVanadielMoonCycle()
     if
         (hour >= 5 and hour < 17) or
@@ -23,7 +23,15 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVASION_DOWN)
+    local pTable =
+    {
+        chance   = 50,
+        effectId = xi.effect.EVASION_DOWN,
+        power    = 25,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -213,27 +213,37 @@ volumes:
 docker build -f docker/ubuntu.Dockerfile .
 ```
 
-The Dockerfiles also support a few build args:
+The Dockerfiles support a few [build args](https://docs.docker.com/build/building/variables/#arg-usage-example), use these if you want to use a different compiler/version/user/etc:
 
 ```
-BASE_TAG
+BASE_TAG=24.04
 UNAME=xiadmin
 UGROUP=xiadmin
 UID=1000
 GID=1000
 COMPILER=gcc
-GCC_VERSION
-LLVM_VERSION
+GCC_VERSION=14
+LLVM_VERSION=20
 CMAKE_BUILD_TYPE=Release
 TRACY_ENABLE=OFF
 ENABLE_CLANG_TIDY=OFF
 PCH_ENABLE=ON
 WARNINGS_AS_ERRORS=TRUE
-REPO_URL
-BRANCH
+REPO_URL="https://github.com/USERNAME/server"
+COMMIT_SHA="$(git rev-parse HEAD)"
 ```
 
-`REPO_URL` and `BRANCH` are required for dbtool unless you mount the host .git directory at runtime.
+`REPO_URL` and `COMMIT_SHA` are required for dbtool unless you mount the host .git directory at runtime.
+
+Be mindful of the [license requirements](../LICENSE) if you publish your image, as not all source files are included in the final image. Providing the `REPO_URL` and `COMMIT_SHA` will add labels that link to your published source when viewed with `docker inspect`.
+
+```sh
+docker build -f docker/ubuntu.Dockerfile \
+--tag USERNAME/server:latest \
+--build-arg REPO_URL="https://github.com/USERNAME/server" \
+--build-arg COMMIT_SHA="$(git rev-parse HEAD)" \
+.
+```
 
 ## Devtools
 

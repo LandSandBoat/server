@@ -213,19 +213,8 @@ end
 
 xi.mob.ae =
 {
-    CURSE        = 1,
-    ENAERO       = 2,
-    ENBLIZZARD   = 3,
-    ENDARK       = 4,
-    ENFIRE       = 5,
-    ENLIGHT      = 6,
-    ENSTONE      = 7,
-    ENTHUNDER    = 8,
-    ENWATER      = 9,
-    EVASION_DOWN = 10,
     HP_DRAIN     = 11,
     MP_DRAIN     = 12,
-    PARALYZE     = 13,
     PETRIFY      = 14,
     PLAGUE       = 15,
     POISON       = 16,
@@ -236,7 +225,6 @@ xi.mob.ae =
     TP_DRAIN     = 21,
     WEIGHT       = 22,
     ENAMNESIA    = 23,
-    DISPEL       = 24,
     BIND         = 25,
     SLEEP        = 26,
     DEFENSE_DOWN = 27,
@@ -245,34 +233,6 @@ xi.mob.ae =
 
 local additionalEffects =
 {
-    [xi.mob.ae.CURSE] =
-    {
-        chance      = 20,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.CURSE,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.CURSE_I,
-        power       = 50,
-        duration    = 300,
-        minDuration = 1,
-        maxDuration = 300,
-    },
-
-    [xi.mob.ae.EVASION_DOWN] =
-    {
-        chance      = 25,
-        ele         = xi.element.ICE,
-        sub         = xi.subEffect.EVASION_DOWN,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.EVASION_DOWN,
-        power       = 25,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 60,
-    },
-
     [xi.mob.ae.HP_DRAIN] =
     {
         chance             = 10,
@@ -299,20 +259,6 @@ local additionalEffects =
             target:delMP(mp)
             mob:addMP(mp)
         end,
-    },
-
-    [xi.mob.ae.PARALYZE] =
-    {
-        chance      = 25,
-        ele         = xi.element.ICE,
-        sub         = xi.subEffect.PARALYSIS,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.PARALYSIS,
-        power       = 20,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 60,
     },
 
     [xi.mob.ae.PETRIFY] =

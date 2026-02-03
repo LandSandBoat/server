@@ -278,14 +278,6 @@ void CTradeContainer::unreserveUnconfirmed()
 
 void CTradeContainer::Clean()
 {
-    for (auto* PItem : m_PItem)
-    {
-        if (PItem)
-        {
-            PItem->setReserve(0);
-            PItem->setSubType(ITEM_UNLOCKED);
-        }
-    }
     m_type       = 0;
     m_craftType  = 0;
     m_ItemsCount = 0;

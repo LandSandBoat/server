@@ -9,54 +9,141 @@ CREATE TABLE `blue_traits` (
   `traitid` tinyint(3) unsigned NOT NULL,
   `modifier` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL,
-  PRIMARY KEY (`trait_category`,`trait_points_needed`,`modifier`)
+  `tier` tinyint(3) unsigned NOT NULL,
+  `job_points_only` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`trait_category`,`trait_points_needed`,`modifier`,`tier`)
 ) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records
 -- ----------------------------
-INSERT INTO `blue_traits` VALUES (1,2,32,230,8);
-INSERT INTO `blue_traits` VALUES (2,2,9,370,1);
-INSERT INTO `blue_traits` VALUES (3,2,35,227,8);
-INSERT INTO `blue_traits` VALUES (4,2,24,295,1);
-INSERT INTO `blue_traits` VALUES (4,4,24,295,2);
-INSERT INTO `blue_traits` VALUES (4,6,24,295,3);
-INSERT INTO `blue_traits` VALUES (4,8,24,295,4);
-INSERT INTO `blue_traits` VALUES (5,2,48,240,2);
-INSERT INTO `blue_traits` VALUES (6,2,5,28,20);
-INSERT INTO `blue_traits` VALUES (7,2,39,231,8);
-INSERT INTO `blue_traits` VALUES (8,2,3,23,10);
-INSERT INTO `blue_traits` VALUES (8,2,3,24,10);
-INSERT INTO `blue_traits` VALUES (9,2,11,359,10);
-INSERT INTO `blue_traits` VALUES (10,2,8,5,10);
-INSERT INTO `blue_traits` VALUES (10,4,8,5,30);
-INSERT INTO `blue_traits` VALUES (11,2,4,1,10);
-INSERT INTO `blue_traits` VALUES (12,2,33,229,8);
-INSERT INTO `blue_traits` VALUES (13,2,6,29,10);
-INSERT INTO `blue_traits` VALUES (14,8,10,369,1);
-INSERT INTO `blue_traits` VALUES (15,8,7,1095,30);   -- Max HP Boost 1
-INSERT INTO `blue_traits` VALUES (15,16,7,1095,60);  -- Max HP Boost 2
-INSERT INTO `blue_traits` VALUES (15,24,7,1095,120); -- Max HP Boost 3
-INSERT INTO `blue_traits` VALUES (15,32,7,1095,180); -- Max HP Boost 4
--- INSERT INTO `blue_traits` VALUES (15,4,7,1095,240); -- Max HP Boost 5 TODO: Through BLU Job Point Gift 100 "Job Trait Bonus"
--- INSERT INTO `blue_traits` VALUES (15,4,7,1095,280); -- Max HP Boost 6 TODO: Through BLU Job Point Gift 1200 "Job Trait Bonus"
-INSERT INTO `blue_traits` VALUES (16,2,1,25,10);
-INSERT INTO `blue_traits` VALUES (16,2,1,26,10);
-INSERT INTO `blue_traits` VALUES (17,2,13,296,25);
-INSERT INTO `blue_traits` VALUES (18,2,2,68,10);
-INSERT INTO `blue_traits` VALUES (19,2,58,249,2);
-INSERT INTO `blue_traits` VALUES (20,2,14,73,10);
-INSERT INTO `blue_traits` VALUES (20,4,14,73,25);
-INSERT INTO `blue_traits` VALUES (21,2,17,291,10);
-INSERT INTO `blue_traits` VALUES (22,2,12,170,5);
-INSERT INTO `blue_traits` VALUES (22,4,12,170,15);
-INSERT INTO `blue_traits` VALUES (23,2,106,174,8);
-INSERT INTO `blue_traits` VALUES (24,2,15,288,7);
-INSERT INTO `blue_traits` VALUES (24,4,16,302,5);
-INSERT INTO `blue_traits` VALUES (25,2,18,259,10);
-INSERT INTO `blue_traits` VALUES (25,4,18,259,15);
-INSERT INTO `blue_traits` VALUES (25,6,18,259,25);
-INSERT INTO `blue_traits` VALUES (26,2,70,306,15);
-INSERT INTO `blue_traits` VALUES (27,2,110,487,5);
-INSERT INTO `blue_traits` VALUES (28,2,20,897,1);
-INSERT INTO `blue_traits` VALUES (28,3,19,303,1);
+INSERT INTO `blue_traits` VALUES (1,2,32,230,8,1,0);     -- Beast Killer (1)
+INSERT INTO `blue_traits` VALUES (1,4,32,230,10,2,0);    -- Beast Killer (2)
+INSERT INTO `blue_traits` VALUES (1,6,32,230,12,3,0);    -- Beast Killer (3)
+INSERT INTO `blue_traits` VALUES (2,2,9,370,1,1,0);      -- Auto Regen (1)
+INSERT INTO `blue_traits` VALUES (2,4,9,370,2,2,1);      -- Auto Regen (2) (JP only)
+INSERT INTO `blue_traits` VALUES (2,6,9,370,3,3,1);      -- Auto Regen (3) (JP only)
+INSERT INTO `blue_traits` VALUES (3,2,35,227,8,1,0);     -- Lizard Killer (1)
+INSERT INTO `blue_traits` VALUES (3,4,35,227,10,2,0);    -- Lizard Killer (2)
+INSERT INTO `blue_traits` VALUES (3,6,35,227,12,3,1);    -- Lizard Killer (3) (JP only)
+INSERT INTO `blue_traits` VALUES (4,2,24,295,3,1,0);     -- Clear Mind (1)
+INSERT INTO `blue_traits` VALUES (4,4,24,295,6,2,0);     -- Clear Mind (2)
+INSERT INTO `blue_traits` VALUES (4,6,24,295,9,3,0);     -- Clear Mind (3)
+INSERT INTO `blue_traits` VALUES (4,6,24,71,1,3,0);      -- Clear Mind (3)
+INSERT INTO `blue_traits` VALUES (4,8,24,295,12,4,0);    -- Clear Mind (4)
+INSERT INTO `blue_traits` VALUES (4,8,24,71,1,4,0);      -- Clear Mind (4)
+INSERT INTO `blue_traits` VALUES (4,10,24,295,12,5,1);   -- Clear Mind (5) (JP only)
+INSERT INTO `blue_traits` VALUES (4,10,24,71,2,5,1);     -- Clear Mind (5) (JP only)
+INSERT INTO `blue_traits` VALUES (4,12,24,295,12,6,1);   -- Clear Mind (6) (JP only)
+INSERT INTO `blue_traits` VALUES (4,12,24,71,3,6,1);     -- Clear Mind (6) (JP only)
+INSERT INTO `blue_traits` VALUES (5,2,48,240,10,1,0);    -- Resist Sleep (1)
+INSERT INTO `blue_traits` VALUES (5,4,48,240,15,2,0);    -- Resist Sleep (2)
+INSERT INTO `blue_traits` VALUES (5,6,48,240,20,3,1);    -- Resist Sleep (3) (JP only)
+INSERT INTO `blue_traits` VALUES (5,8,48,240,25,4,1);    -- Resist Sleep (4) (JP only)
+INSERT INTO `blue_traits` VALUES (6,2,5,28,20,1,0);      -- Magic Attack Bonus (1)
+INSERT INTO `blue_traits` VALUES (6,4,5,28,24,2,0);      -- Magic Attack Bonus (2)
+INSERT INTO `blue_traits` VALUES (6,6,5,28,28,3,0);      -- Magic Attack Bonus (3)
+INSERT INTO `blue_traits` VALUES (6,8,5,28,32,4,0);      -- Magic Attack Bonus (4)
+INSERT INTO `blue_traits` VALUES (6,10,5,28,36,5,1);     -- Magic Attack Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (6,12,5,28,50,6,1);     -- Magic Attack Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (7,2,39,231,8,1,0);     -- Undead Killer (1)
+INSERT INTO `blue_traits` VALUES (7,4,39,231,10,2,1);    -- Undead Killer (2) (JP only)
+INSERT INTO `blue_traits` VALUES (7,6,39,231,12,3,1);    -- Undead Killer (3) (JP only)
+INSERT INTO `blue_traits` VALUES (8,2,3,23,10,1,0);      -- Attack Bonus (1)
+INSERT INTO `blue_traits` VALUES (8,2,3,24,10,1,0);      -- Attack Bonus (1)
+INSERT INTO `blue_traits` VALUES (8,4,3,23,22,2,0);      -- Attack Bonus (2)
+INSERT INTO `blue_traits` VALUES (8,4,3,24,22,2,0);      -- Attack Bonus (2)
+INSERT INTO `blue_traits` VALUES (8,6,3,23,35,3,0);      -- Attack Bonus (3)
+INSERT INTO `blue_traits` VALUES (8,6,3,24,35,3,0);      -- Attack Bonus (3)
+INSERT INTO `blue_traits` VALUES (8,8,3,23,48,4,0);      -- Attack Bonus (4)
+INSERT INTO `blue_traits` VALUES (8,8,3,24,48,4,0);      -- Attack Bonus (4)
+INSERT INTO `blue_traits` VALUES (8,10,3,23,60,5,1);     -- Attack Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (8,10,3,24,60,5,1);     -- Attack Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (8,12,3,23,72,6,1);     -- Attack Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (8,12,3,24,72,6,1);     -- Attack Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (9,2,11,359,25,1,0);    -- Rapid Shot (1)
+INSERT INTO `blue_traits` VALUES (9,4,11,359,30,2,1);    -- Rapid Shot (2) (JP only)
+INSERT INTO `blue_traits` VALUES (9,6,11,359,35,3,1);    -- Rapid Shot (3) (JP only) -- Value is guessed
+INSERT INTO `blue_traits` VALUES (10,2,8,5,10,1,0);      -- Max MP Boost (1)
+INSERT INTO `blue_traits` VALUES (10,4,8,5,20,2,0);      -- Max MP Boost (2)
+INSERT INTO `blue_traits` VALUES (11,2,4,1,10,1,0);      -- Defense Bonus (1)
+INSERT INTO `blue_traits` VALUES (11,4,4,1,22,2,0);      -- Defense Bonus (2)
+INSERT INTO `blue_traits` VALUES (11,6,4,1,35,3,0);      -- Defense Bonus (3)
+INSERT INTO `blue_traits` VALUES (11,8,4,1,48,4,0);      -- Defense Bonus (4)
+INSERT INTO `blue_traits` VALUES (11,10,4,1,60,5,1);     -- Defense Bonus (5)
+INSERT INTO `blue_traits` VALUES (11,12,4,1,72,6,1);     -- Defense Bonus (6)
+INSERT INTO `blue_traits` VALUES (12,2,33,229,8,1,0);    -- Plantoid Killer (1)
+INSERT INTO `blue_traits` VALUES (12,4,33,229,10,2,0);   -- Plantoid Killer (2)
+INSERT INTO `blue_traits` VALUES (12,6,33,229,12,3,1);   -- Plantoid Killer (3) (JP only)
+INSERT INTO `blue_traits` VALUES (13,2,6,29,10,1,0);     -- Magic Defense Bonus (1)
+INSERT INTO `blue_traits` VALUES (13,4,6,29,12,2,0);     -- Magic Defense Bonus (2)
+INSERT INTO `blue_traits` VALUES (13,6,6,29,14,3,0);     -- Magic Defense Bonus (3)
+INSERT INTO `blue_traits` VALUES (13,8,6,29,16,4,1);     -- Magic Defense Bonus (4) (JP only)
+INSERT INTO `blue_traits` VALUES (13,10,6,29,18,5,1);    -- Magic Defense Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (14,2,10,369,1,1,0);    -- Auto Refresh (1) -- Only tier available to BLU
+INSERT INTO `blue_traits` VALUES (15,2,7,1095,30,1,0);   -- Max HP Boost (1)
+INSERT INTO `blue_traits` VALUES (15,4,7,1095,60,2,0);   -- Max HP Boost (2)
+INSERT INTO `blue_traits` VALUES (15,6,7,1095,120,3,0);  -- Max HP Boost (3)
+INSERT INTO `blue_traits` VALUES (15,8,7,1095,180,4,0);  -- Max HP Boost (4)
+INSERT INTO `blue_traits` VALUES (15,10,7,1095,240,5,1); -- Max HP Boost (5) (JP only)
+INSERT INTO `blue_traits` VALUES (15,12,7,1095,280,6,1); -- Max HP Boost (6) (JP only)
+INSERT INTO `blue_traits` VALUES (16,2,1,25,10,1,0);     -- Accuracy Bonus (1)
+INSERT INTO `blue_traits` VALUES (16,2,1,26,10,1,0);     -- Accuracy Bonus (1)
+INSERT INTO `blue_traits` VALUES (16,4,1,25,22,2,0);     -- Accuracy Bonus (2)
+INSERT INTO `blue_traits` VALUES (16,4,1,26,22,2,0);     -- Accuracy Bonus (2)
+INSERT INTO `blue_traits` VALUES (16,6,1,25,35,3,0);     -- Accuracy Bonus (3)
+INSERT INTO `blue_traits` VALUES (16,6,1,26,35,3,0);     -- Accuracy Bonus (3)
+INSERT INTO `blue_traits` VALUES (16,8,1,25,48,4,0);     -- Accuracy Bonus (4)
+INSERT INTO `blue_traits` VALUES (16,8,1,26,48,4,0);     -- Accuracy Bonus (4)
+INSERT INTO `blue_traits` VALUES (16,10,1,25,60,5,1);    -- Accuracy Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (16,10,1,26,60,5,1);    -- Accuracy Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (16,12,1,25,73,6,1);    -- Accuracy Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (16,12,1,26,73,6,1);    -- Accuracy Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (17,2,13,296,25,1,0);   -- Conserve MP (1)
+INSERT INTO `blue_traits` VALUES (17,4,13,296,28,2,0);   -- Conserve MP (2)
+INSERT INTO `blue_traits` VALUES (17,6,13,296,31,3,0);   -- Conserve MP (3)
+INSERT INTO `blue_traits` VALUES (17,8,13,296,34,4,1);   -- Conserve MP (4) (JP only)
+INSERT INTO `blue_traits` VALUES (17,10,13,296,37,5,1);  -- Conserve MP (5) (JP only)
+INSERT INTO `blue_traits` VALUES (18,2,2,68,10,1,0);     -- Evasion Bonus (1)
+INSERT INTO `blue_traits` VALUES (18,4,2,68,22,2,0);     -- Evasion Bonus (2)
+INSERT INTO `blue_traits` VALUES (18,6,2,68,35,3,0);     -- Evasion Bonus (3)
+INSERT INTO `blue_traits` VALUES (18,8,2,68,48,4,1);     -- Evasion Bonus (4)
+INSERT INTO `blue_traits` VALUES (18,10,2,68,60,5,1);    -- Evasion Bonus (5)
+INSERT INTO `blue_traits` VALUES (19,2,58,249,10,1,0);   -- Resist Gravity (1)
+INSERT INTO `blue_traits` VALUES (19,3,58,249,15,2,1);   -- Resist Gravity (2) (JP only)
+INSERT INTO `blue_traits` VALUES (19,4,58,249,20,3,1);   -- Resist Gravity (3) (JP only)
+INSERT INTO `blue_traits` VALUES (20,2,14,73,10,1,0);    -- Store TP (1)
+INSERT INTO `blue_traits` VALUES (20,4,14,73,15,2,0);    -- Store TP (2)
+INSERT INTO `blue_traits` VALUES (20,6,14,73,20,3,0);    -- Store TP (3)
+INSERT INTO `blue_traits` VALUES (20,8,14,73,25,4,1);    -- Store TP (4) (JP onry)
+INSERT INTO `blue_traits` VALUES (20,10,14,73,30,5,1);   -- Store TP (5) (JP onry)
+INSERT INTO `blue_traits` VALUES (21,2,17,291,10,1,0);   -- Counter (1)
+INSERT INTO `blue_traits` VALUES (21,4,17,291,12,2,0);   -- Counter (2)
+INSERT INTO `blue_traits` VALUES (21,6,17,291,14,3,1);   -- Counter (3) (JP only)
+INSERT INTO `blue_traits` VALUES (21,8,17,291,16,4,1);   -- Counter (4) (JP only)
+INSERT INTO `blue_traits` VALUES (22,2,12,170,5,0,0);    -- Fast Cast (0) (Zero, weaker than /RDM.)
+INSERT INTO `blue_traits` VALUES (22,4,12,170,10,1,0);   -- Fast Cast (1)
+INSERT INTO `blue_traits` VALUES (22,6,12,170,15,2,0);   -- Fast Cast (2)
+INSERT INTO `blue_traits` VALUES (22,8,12,170,20,3,1);   -- Fast Cast (3) (JP only)
+INSERT INTO `blue_traits` VALUES (22,10,12,170,25,4,1);  -- Fast Cast (4) (JP only)
+INSERT INTO `blue_traits` VALUES (23,2,106,174,8,1,0);   -- Skillchain Bonus (1)
+INSERT INTO `blue_traits` VALUES (23,3,106,174,12,2,0);  -- Skillchain Bonus (2)
+INSERT INTO `blue_traits` VALUES (23,4,106,174,16,3,0);  -- Skillchain Bonus (3)
+INSERT INTO `blue_traits` VALUES (23,5,106,174,20,4,1);  -- Skillchain Bonus (4) (JP only)
+INSERT INTO `blue_traits` VALUES (23,6,106,174,23,5,1);  -- Skillchain Bonus (5) (JP only)
+INSERT INTO `blue_traits` VALUES (24,2,15,288,7,0,0);    -- Double Attack (0) -- Tier Zero because this is weaker than WAR double attack (1). It is BLU exclusive
+INSERT INTO `blue_traits` VALUES (24,4,16,302,5,1,0);    -- Triple Attack (1)
+INSERT INTO `blue_traits` VALUES (25,2,18,259,10,1,0);   -- Dual Wield (1)
+INSERT INTO `blue_traits` VALUES (25,4,18,259,15,2,0);   -- Dual Wield (2)
+INSERT INTO `blue_traits` VALUES (25,6,18,259,25,3,0);   -- Dual Wield (3)
+INSERT INTO `blue_traits` VALUES (25,8,18,259,30,4,0);   -- Dual Wield (4)
+INSERT INTO `blue_traits` VALUES (25,10,18,259,35,5,1);  -- Dual Wield (5) (JP only)
+INSERT INTO `blue_traits` VALUES (25,12,18,259,40,6,1);  -- Dual Wield (6) (JP only)
+INSERT INTO `blue_traits` VALUES (26,2,70,306,15,1,0);   -- Zanshin (1)
+INSERT INTO `blue_traits` VALUES (27,2,110,487,5,1,0);   -- Magic Burst Bonus (1)
+INSERT INTO `blue_traits` VALUES (27,3,110,487,7,2,0);   -- Magic Burst Bonus (2)
+INSERT INTO `blue_traits` VALUES (27,4,110,487,9,3,0);   -- Magic Burst Bonus (3)
+INSERT INTO `blue_traits` VALUES (27,5,110,487,11,4,1);  -- Magic Burst Bonus (4)
+INSERT INTO `blue_traits` VALUES (27,6,110,487,13,5,1);  -- Magic Burst Bonus (5)
+INSERT INTO `blue_traits` VALUES (28,2,20,897,1,1,0);    -- Gilfinder (1)
+INSERT INTO `blue_traits` VALUES (28,3,19,303,1,2,0);    -- Treasure Hunter (1)

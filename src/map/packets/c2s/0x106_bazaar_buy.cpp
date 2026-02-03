@@ -21,6 +21,8 @@
 
 #include "0x106_bazaar_buy.h"
 
+#include <limits>
+
 #include "common/async.h"
 #include "entities/charentity.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -37,7 +39,7 @@ auto GP_CLI_COMMAND_BAZAAR_BUY::validate(MapSession* PSession, const CCharEntity
 {
     // TODO: Short-circuit PV so we can bring all the other checks into this function
     return PacketValidator()
-        .range("BuyNum", BuyNum, 1, 99);
+        .range("BuyNum", this->BuyNum, 1, 99);
 }
 
 void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar) const
@@ -61,7 +63,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    CItem* PBazaarItem = PBazaar->GetItem(BazaarItemIndex);
+    CItem* PBazaarItem = PBazaar->GetItem(this->BazaarItemIndex);
     if (PBazaarItem == nullptr || PBazaarItem->getReserve() > 0)
     {
         return;
@@ -95,10 +97,20 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    if ((PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= BuyNum))
+    if ((PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= this->BuyNum))
     {
-        const uint32 Price        = (PBazaarItem->getCharPrice() * BuyNum);
-        uint32       PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
+        const uint64 basePrice  = static_cast<uint64>(PBazaarItem->getCharPrice()) * this->BuyNum;
+        const uint64 totalPrice = (PChar->loc.zone->GetTax() * basePrice) / 10000 + basePrice;
+
+        if (totalPrice > std::numeric_limits<uint32>::max())
+        {
+            ShowWarningFmt("Bazaar Interaction [Price Overflow] - Buyer: {}, Seller: {}, Price: {}", PChar->name, PTarget->name, totalPrice);
+            PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
+            return;
+        }
+
+        const uint32 Price        = static_cast<uint32>(basePrice);
+        uint32       PriceWithTax = static_cast<uint32>(totalPrice);
 
         // Validate this player can afford said item
         if (PCharGil->getQuantity() < PriceWithTax)
@@ -114,7 +126,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         CItem* PItem = itemutils::GetItem(PBazaarItem);
 
         PItem->setCharPrice(0);
-        PItem->setQuantity(BuyNum);
+        PItem->setQuantity(this->BuyNum);
         PItem->setSubType(ITEM_UNLOCKED);
 
         if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
@@ -126,7 +138,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         {
             Async::getInstance()->submit(
                 [itemID        = PItem->getID(),
-                 quantity      = BuyNum,
+                 quantity      = this->BuyNum,
                  sellerID      = PTarget->id,
                  sellerName    = PTarget->getName(),
                  purchaserID   = PChar->id,
@@ -149,12 +161,12 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
         PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SALE>(PChar, PItem);
 
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, BazaarItemIndex, -static_cast<int32>(BuyNum));
+        charutils::UpdateItem(PTarget, LOC_INVENTORY, this->BazaarItemIndex, -static_cast<int32>(this->BuyNum));
 
-        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(BazaarItemIndex), LOC_INVENTORY, BazaarItemIndex);
+        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(this->BazaarItemIndex), LOC_INVENTORY, this->BazaarItemIndex);
         PTarget->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
-        DebugBazaarsFmt("Bazaar Interaction [Purchase Successful] - Buyer: {}, Seller: {}, Item: {}, Qty: {}, Cost: {}", PChar->name, PTarget->name, PItem->getName(), BuyNum, PriceWithTax);
+        DebugBazaarsFmt("Bazaar Interaction [Purchase Successful] - Buyer: {}, Seller: {}, Item: {}, Qty: {}, Cost: {}", PChar->name, PTarget->name, PItem->getName(), this->BuyNum, PriceWithTax);
 
         bool BazaarIsEmpty = true;
 
@@ -180,9 +192,9 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             {
                 if (PCustomer->id != PChar->id)
                 {
-                    PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_SELL>(PChar, BazaarItemIndex, BuyNum);
+                    PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_SELL>(PChar, this->BazaarItemIndex, this->BuyNum);
                 }
-                PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_LIST>(PBazaar->GetItem(BazaarItemIndex), BazaarItemIndex, PChar->loc.zone->GetTax());
+                PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_LIST>(PBazaar->GetItem(this->BazaarItemIndex), this->BazaarItemIndex, PChar->loc.zone->GetTax());
 
                 if (BazaarIsEmpty)
                 {

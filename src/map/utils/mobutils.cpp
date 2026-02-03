@@ -1698,7 +1698,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
 
     const auto rset = db::preparedStmt("SELECT zoneid, mob_groups.name, packet_name, respawntime, "
                                        "spawntype, dropid, mob_groups.HP, mob_groups.MP, "
-                                       "minLevel, maxLevel, modelid, mJob, "
+                                       "mob_spawn_points.minLevel, mob_spawn_points.maxLevel, modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
                                        "ecosystemID, speed, STR, "
@@ -1715,7 +1715,8 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
                                        "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize "
-                                       "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
+                                       "FROM mob_groups INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
+                                       "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
                                        "INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
@@ -1874,7 +1875,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
     const auto rset = db::preparedStmt("SELECT zoneid, mob_groups.name, packet_name, respawntime, "
                                        "spawntype, dropid, mob_groups.HP, mob_groups.MP, "
-                                       "minLevel, maxLevel, modelid, mJob, "
+                                       "modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
                                        "ecosystemID, speed, STR, "
@@ -1908,9 +1909,6 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
         PMob->HPmodifier = rset->get<uint32>("HP");
         PMob->MPmodifier = rset->get<uint32>("MP");
-
-        PMob->m_minLevel = rset->get<uint8>("minLevel");
-        PMob->m_maxLevel = rset->get<uint8>("maxLevel");
 
         uint16 sqlModelID[10];
         db::extractFromBlob(rset, "modelid", sqlModelID);

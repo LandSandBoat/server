@@ -21,14 +21,36 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
+
+        [xi.zone.GUSGEN_MINES] =
+        {
+            ['qm4'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if trade:getItemQty(xi.item.PICKAXE) > 0 then
+                        return quest:messageSpecial(gusgenMinesID.text.YOU_CANNOT_EVEN_DIG, xi.item.PICKAXE)
+                    end
+                end,
+            },
+        },
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Oggbi'] = quest:progressEvent(231),
+            ['Oggbi'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:getMainJob() == xi.job.MNK and
+                        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+                    then
+                        return quest:progressEvent(231)
+                    else
+                        return quest:event(230)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
@@ -50,15 +72,14 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
+                        trade:getItemQty(xi.item.PICKAXE) > 0 and
                         not player:hasItem(xi.item.MINERS_PENDANT) and
                         not GetMobByID(gusgenMinesID.mob.WANDERING_GHOST):isSpawned()
                     then
-                        player:confirmTrade()
                         SpawnMob(gusgenMinesID.mob.WANDERING_GHOST):updateClaim(player)
-
-                        -- TODO: Determine if this spawn has a message associated with it.
-                        return quest:noAction()
+                        return quest:messageSpecial(gusgenMinesID.text.YOU_CANNOT_EVEN_DIG, xi.item.PICKAXE)
+                    else
+                        return player:messageSpecial(gusgenMinesID.text.YOU_CANNOT_EVEN_DIG, xi.item.PICKAXE)
                     end
                 end,
             },
@@ -82,6 +103,24 @@ quest.sections =
                         player:confirmTrade()
 
                         xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
+                    end
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.GUSGEN_MINES] =
+        {
+            ['qm4'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if trade:getItemQty(xi.item.PICKAXE) > 0 then
+                        return quest:messageSpecial(gusgenMinesID.text.YOU_CANNOT_EVEN_DIG, xi.item.PICKAXE)
                     end
                 end,
             },

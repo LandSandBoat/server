@@ -67,8 +67,8 @@ const std::set validCrystals = {
 auto GP_CLI_COMMAND_COMBINE_ASK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .oneOf("Crystal", static_cast<ITEMID>(Crystal), validCrystals)
-        .range("Items", Items, 1, 8)
+        .oneOf("Crystal", static_cast<ITEMID>(this->Crystal), validCrystals)
+        .range("Items", this->Items, 1, 8)
         .isNotMonstrosity(PChar)
         .isNotPreventedAction(PChar)
         .isNormalStatus(PChar)
@@ -131,8 +131,10 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
 
     PChar->CraftContainer->Clean();
 
-    const auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(CrystalIdx);
-    if (!PItem || Crystal != PItem->getID() || PItem->getQuantity() == 0)
+    const auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->CrystalIdx);
+    if (!PItem ||
+        this->Crystal != PItem->getID() ||
+        PItem->getQuantity() == 0)
     {
         // Detect invalid crystal usage
         // Prevent crafting exploit to crash on container size > 8
@@ -140,24 +142,40 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
         return;
     }
 
-    uint16 itemId    = Crystal;
-    uint8  invSlotId = CrystalIdx;
+    if (PItem->isSubType(ITEM_LOCKED) || PItem->getReserve() > 0)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_COMBINE_ASK: {} trying to use invalid crystal (locked/reserved)", PChar->getName());
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_IN_AREA);
+        return;
+    }
+
+    uint16 itemId    = this->Crystal;
+    uint8  invSlotId = this->CrystalIdx;
     PChar->CraftContainer->setItem(0, itemId, invSlotId, 0);
 
     std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
-    for (int32 slotId = 0; slotId < Items; ++slotId)
+    for (int32 slotId = 0; slotId < this->Items; ++slotId)
     {
-        itemId    = ItemNo[slotId];
-        invSlotId = TableNo[slotId];
+        itemId    = this->ItemNo[slotId];
+        invSlotId = this->TableNo[slotId];
 
         slotQty[invSlotId]++;
 
         const auto* PSlotItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotId);
 
-        if (PSlotItem && PSlotItem->getID() == itemId && slotQty[invSlotId] <= (PSlotItem->getQuantity() - PSlotItem->getReserve()))
+        if (!PSlotItem || PSlotItem->getID() != itemId)
         {
-            PChar->CraftContainer->setItem(slotId + 1, itemId, invSlotId, 1);
+            continue;
         }
+
+        if (PSlotItem->isSubType(ITEM_LOCKED) ||
+            slotQty[invSlotId] > (PSlotItem->getQuantity() - PSlotItem->getReserve()))
+        {
+            ShowWarningFmt("GP_CLI_COMMAND_COMBINE_ASK: {} trying to use invalid ingredient (locked/reserved)", PChar->getName());
+            continue;
+        }
+
+        PChar->CraftContainer->setItem(slotId + 1, itemId, invSlotId, 1);
     }
 
     synthutils::startSynth(PChar);

@@ -42,8 +42,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Prog == 1 and
-                (status == xi.questStatus.QUEST_ACCEPTED or
-                status == xi.questStatus.QUEST_COMPLETED)
+                status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BONEYARD_GULLY] =
@@ -62,8 +61,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Prog == 2 and
-                (status == xi.questStatus.QUEST_ACCEPTED or
-                status == xi.questStatus.QUEST_COMPLETED)
+                status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

@@ -286,7 +286,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.tphitslanded = 0
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
-    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, false)
+    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN)
     params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
@@ -412,7 +412,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local spellElement       = spell:getElement()
     local spellGroup         = spell:getSpellGroup()
     local skillType          = xi.skill.BLUE_MAGIC
-    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
     -- Final D value
     local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier) + statBonus
@@ -472,7 +472,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     local spellElement       = spell:getElement()
     local spellGroup         = spell:getSpellGroup()
     local skillType          = xi.skill.BLUE_MAGIC
-    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
     finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, params.attribute, 0, 0))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
@@ -740,7 +740,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
 
     if target:addStatusEffect(effect, params.power, params.tick, math.floor(params.duration * resist)) then
         -- Add "Magic Burst!" message
-        local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+        local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
         if skillchainCount > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS)

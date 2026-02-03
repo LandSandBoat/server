@@ -12,7 +12,10 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEP_MEVA, 90)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 9)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 9)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

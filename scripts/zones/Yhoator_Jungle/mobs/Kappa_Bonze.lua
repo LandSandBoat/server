@@ -11,12 +11,11 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

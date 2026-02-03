@@ -50,8 +50,10 @@ chown $UNAME:$UGROUP /server
 git config --system --add safe.directory /server
 EOF
 
+# Pre-enable Python virtual environment.
 ENV VIRTUAL_ENV=/xiadmin/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 ENV TRACY_NO_INVARIANT_CHECK=1
 
 SHELL ["/bin/bash", "-c"]
@@ -88,6 +90,7 @@ ENV CC=/usr/bin/gcc-$GCC_VERSION
 ENV CXX=/usr/bin/g++-$GCC_VERSION
 
 # Install secondary dependencies as user.
+# python3 = global, python = (pre-enabled) venv
 USER $UNAME
 RUN --mount=type=bind,source=tools/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/xiadmin/.cache/pip,id=cache-pip-ubuntu <<EOF
@@ -194,6 +197,7 @@ FROM base AS service
 
 USER $UNAME
 
+COPY --chown=$UNAME:$UGROUP LICENSE /server/LICENSE
 COPY --chown=$UNAME:$UGROUP res/compress.dat res/decompress.dat /server/res/
 COPY --chown=$UNAME:$UGROUP scripts /server/scripts
 COPY --chown=$UNAME:$UGROUP sql /server/sql
@@ -201,12 +205,14 @@ COPY --chown=$UNAME:$UGROUP tools /server/tools
 COPY --chown=$UNAME:$UGROUP modules /server/modules
 COPY --chown=$UNAME:$UGROUP settings /server/settings
 
-COPY --chown=$UNAME:$UGROUP --from=staging /xiadmin/.venv /xiadmin/.venv
+COPY --chown=$UNAME:$UGROUP --from=staging $VIRTUAL_ENV $VIRTUAL_ENV
 COPY --chown=$UNAME:$UGROUP --from=build /server/xi_* /server/
 COPY --chown=$UNAME:$UGROUP --from=build /server/build.log /server/build.log
 
 ARG REPO_URL
 ARG COMMIT_SHA
+LABEL org.opencontainers.image.source="$REPO_URL"
+LABEL org.opencontainers.image.revision="$COMMIT_SHA"
 RUN <<EOF
 if [ -n "$REPO_URL" ] && [ -n "$COMMIT_SHA" ]; then
     git init

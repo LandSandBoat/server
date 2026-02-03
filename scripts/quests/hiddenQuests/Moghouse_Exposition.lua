@@ -2,17 +2,12 @@
 -- Moghouse Exposition
 -----------------------------------
 
-local quest = HiddenQuest:new('mogExpo')
+local quest = HiddenQuest:new('moghouseExpo')
 
-quest.reward = {}
-
+quest.reward      = {}
 quest.sections    = {}
 quest.sections[1] = {}
-
-quest.sections[1].check = function(player, currentMission, missionStatus, vars)
-    return xi.moghouse.inMogHouseInHomeNation(player) and
-        quest:getVar(player, 'notSeen') == 1
-end
+quest.sections[2] = {}
 
 local moogleZoneInEvent =
 {
@@ -32,14 +27,6 @@ local moogleZoneInEvent =
     },
 }
 
-quest.sections[2] = {}
-
-quest.sections[2].check = function(player, currentMission, missionStatus, vars)
-    return not xi.moghouse.inMogHouseInHomeNation(player) and
-        player:inMogHouse() and
-        quest:getVar(player, 'oNation') == 1
-end
-
 local otherNationTriggerEvent =
 {
     ['Moogle'] = quest:progressEvent(30001),
@@ -51,6 +38,17 @@ local otherNationTriggerEvent =
         end,
     },
 }
+
+quest.sections[1].check = function(player, currentMission, missionStatus, vars)
+    return xi.moghouse.inMogHouseInHomeNation(player) and
+        quest:getVar(player, 'notSeen') == 1
+end
+
+quest.sections[2].check = function(player, currentMission, missionStatus, vars)
+    return not xi.moghouse.inMogHouseInHomeNation(player) and
+        player:inMogHouse() and
+        quest:getVar(player, 'oNation') == 1
+end
 
 for _, zoneId in ipairs(xi.moghouse.moghouseZones) do
     quest.sections[1][zoneId] = moogleZoneInEvent

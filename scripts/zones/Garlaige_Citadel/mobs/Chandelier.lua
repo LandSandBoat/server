@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 400)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -21,8 +21,12 @@ entity.onMobEngage = function(mob, target)
     local ve = mob:getVE(target)
     if ce == 0 and ve == 0 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-        mob:useMobAbility(511) -- self-destruct
+        mob:useMobAbility(xi.mobSkill.SELF_DESTRUCT_BOMB) -- Chandelier's self-destruct is similar to Volcanic Bomb's with a 1600ish cap and should be adjusted accordingly when its rewritten
     end
+end
+
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    return xi.mobSkill.BERSERK_BOMB
 end
 
 entity.onMobDeath = function(mob, player, optParams)

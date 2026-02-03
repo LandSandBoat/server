@@ -257,6 +257,7 @@ enum class MsgBasic : uint16_t
     JOB_POINTS_INCREASE            = 720, // Your <job point category> modification has risen to level ≺level≻.
     CHECKPARAM_ILVL                = 731,
     CHECKPARAM_NAME                = 733,
+    ROE_UNABLE                     = 742, // You are currently unable to undertake this objective.
     AUTO_EXCEEDS_CAPACITY          = 745, // Your automaton exceeds one or more elemental capacity values and cannot be activated.
     MOUNT_REQUIRED_LEVEL           = 773, // You are unable to call forth your mount because your main job level is not at least <level>.
 };

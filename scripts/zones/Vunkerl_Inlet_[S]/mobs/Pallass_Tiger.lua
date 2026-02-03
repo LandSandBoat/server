@@ -13,8 +13,15 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    -- level 99 got 15s paralyze once throughout whole fight
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { chance = 10, duration = 60 })
+    local pTable =
+    {
+        chance   = 25,
+        effectId = xi.effect.PARALYSIS,
+        power    = 20,
+        duration = 30,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 return entity

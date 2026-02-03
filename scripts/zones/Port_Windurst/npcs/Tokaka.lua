@@ -12,10 +12,10 @@ entity.onTrade = function(player, npc, trade)
 
     if tokakaSpokenTo == 1 and not needToZone then
         if
-            trade:hasItemQty(xi.item.BASTORE_SARDINE, 1) and
+            trade:hasItemQty(xi.item.BASTORE_SARDINE_1, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(210, xi.settings.main.GIL_RATE * 70, xi.item.BASTORE_SARDINE)
+            player:startEvent(210, xi.settings.main.GIL_RATE * 70, xi.item.BASTORE_SARDINE_1)
         end
     end
 end
@@ -27,10 +27,10 @@ entity.onTrigger = function(player, npc)
         if player:needToZone() then
             player:startEvent(211)
         else
-            player:startEvent(209, 0, xi.item.BASTORE_SARDINE)
+            player:startEvent(209, 0, xi.item.BASTORE_SARDINE_1)
         end
     elseif somethingFishy == xi.questStatus.QUEST_AVAILABLE then
-        player:startEvent(208, 0, xi.item.BASTORE_SARDINE)
+        player:startEvent(208, 0, xi.item.BASTORE_SARDINE_1)
     end
 end
 

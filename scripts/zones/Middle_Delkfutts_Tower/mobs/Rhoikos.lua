@@ -20,6 +20,13 @@ entity.phList =
     [ID.mob.RHOIKOS + 11] = ID.mob.RHOIKOS, -- -389.084 -111.532 35.374
 }
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 338)
 end

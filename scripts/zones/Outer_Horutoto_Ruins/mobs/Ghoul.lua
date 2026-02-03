@@ -8,6 +8,10 @@ local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -252,14 +252,12 @@ local function magicAccuracyFromMagicBurst(target, actionElement, statUsed)
         return 0
     end
 
-    local magicAcc           = 0
-    local _, skillchainCount = xi.magicburst.formMagicBurst(actionElement, target)
-
-    if skillchainCount > 0 then
-        magicAcc = 100
+    local _, skillchainCount = xi.magicburst.formMagicBurst(target, actionElement)
+    if skillchainCount <= 0 then
+        return 0
     end
 
-    return magicAcc
+    return 100
 end
 
 -- Magic Accuracy from Day and Weather Element.

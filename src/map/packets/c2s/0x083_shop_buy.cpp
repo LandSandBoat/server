@@ -31,22 +31,22 @@
 auto GP_CLI_COMMAND_SHOP_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .mustEqual(PropertyItemIndex, 0, "PropertyItemIndex not 0");
+        .mustEqual(this->PropertyItemIndex, 0, "PropertyItemIndex not 0");
 }
 
 void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto quantity = ItemNum;
+    auto quantity = this->ItemNum;
 
     // Prevent users from buying from invalid container slots
-    if (ShopItemIndex > PChar->Container->getExSize() - 1)
+    if (this->ShopItemIndex > PChar->Container->getExSize() - 1)
     {
         ShowError("User '%s' attempting to buy vendor item from an invalid slot!", PChar->getName());
         return;
     }
 
-    const uint16 itemId = PChar->Container->getItemID(ShopItemIndex);
-    const uint32 price  = PChar->Container->getQuantity(ShopItemIndex); // We used the "quantity" to store the item's sale price
+    const uint16 itemId = PChar->Container->getItemID(this->ShopItemIndex);
+    const uint32 price  = PChar->Container->getQuantity(this->ShopItemIndex); // We used the "quantity" to store the item's sale price
 
     const CItem* PItem = itemutils::GetItemPointer(itemId);
     if (!PItem)
@@ -75,7 +75,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
         {
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity));
             ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
-            PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(ShopItemIndex, quantity);
+            PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(this->ShopItemIndex, quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
         }
     }

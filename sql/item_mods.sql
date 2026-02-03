@@ -31297,10 +31297,10 @@ INSERT INTO `item_mods` VALUES (16256,1,3); -- DEF: 3
 INSERT INTO `item_mods` VALUES (16258,114,2); -- ENFEEBLE: 2
 
 -- Twilight Cape
-INSERT INTO `item_mods` VALUES (16259,1,7);   -- DEF: 7
-INSERT INTO `item_mods` VALUES (16259,2,25);  -- HP: 25
-INSERT INTO `item_mods` VALUES (16259,5,25);  -- MP: 25
-INSERT INTO `item_mods` VALUES (16259,565,5); -- DAY_NUKE_BONUS: 5
+INSERT INTO `item_mods` VALUES (16259,1,7);    -- DEF: 7
+INSERT INTO `item_mods` VALUES (16259,2,25);   -- HP: 25
+INSERT INTO `item_mods` VALUES (16259,5,25);   -- MP: 25
+INSERT INTO `item_mods` VALUES (16259,1787,5); -- DAY_WEATHER_PROC_BONUS: 5
 
 -- Atheling Mantle
 INSERT INTO `item_mods` VALUES (16260,1,15);  -- DEF: 15

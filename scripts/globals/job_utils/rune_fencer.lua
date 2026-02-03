@@ -530,7 +530,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.magicBurst          = 1
     multipliers.magicBurstBonus     = 1
 
-    local _, skillchainCount = xi.magicburst.formMagicBurst(element, target)
+    local _, skillchainCount = xi.magicburst.formMagicBurst(target, element)
 
     if skillchainCount > 0 then
         multipliers.magicBurst      = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)

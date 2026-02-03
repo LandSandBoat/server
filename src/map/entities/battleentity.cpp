@@ -517,7 +517,8 @@ uint32 CBattleEntity::GetWeaponDelay(bool tp)
                 hasteAbility = std::clamp<float>(hasteAbility, -0.25f, 0.25f);
                 hasteGear    = std::clamp<float>(hasteGear, -0.25f, 0.25f);
 
-                hasteMultiplier = std::clamp<float>(1.0f - hasteMagic - hasteAbility - hasteGear, 0.2f, 2.0f);
+                float hasteCap  = 1.0f - settings::get<float>("main.DELAY_REDUCTION_CAP");
+                hasteMultiplier = std::clamp<float>(1.0f - hasteMagic - hasteAbility - hasteGear, hasteCap, 2.0f);
             }
         }
 
@@ -2923,14 +2924,16 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         else if (PTarget->objtype == TYPE_MOB && targ_weapon && targ_weapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND) // This is how Attack Round checks for h2h penalty
                         {
                             REGION_TYPE regionID = PTarget->loc.zone->GetRegionID();
-
-                            if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+                            if (static_cast<CMobEntity*>(PTarget)->getMobMod(MOBMOD_NO_H2H_PENALTY) == 0)
                             {
-                                mobH2HPenalty = 0.425f; // Vanilla - COP
-                            }
-                            else
-                            {
-                                mobH2HPenalty = 0.650f; // TOAU onward
+                                if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+                                {
+                                    mobH2HPenalty = 0.425f; // Vanilla - COP
+                                }
+                                else
+                                {
+                                    mobH2HPenalty = 0.650f; // TOAU onward
+                                }
                             }
                         }
 

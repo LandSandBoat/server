@@ -6,6 +6,7 @@ xi = xi or {}
 ---@enum xi.keyItem
 xi.keyItem =
 {
+    NONE                                     = 0,
     ZERUHN_REPORT                            = 1,
     PALBOROUGH_MINES_LOGS                    = 2,
     BLUE_ACIDITY_TESTER                      = 3,

@@ -80,24 +80,34 @@ void SendBlacklist(CCharEntity* PChar)
     int       totalCount   = 0;
     const int rowCount     = rset->rowsCount();
 
+    auto isNameCharactersOnly = [](const std::string& name) -> bool
+    {
+        // null terminator added for paranoia, the docs say `find_first_not_of` _will_ check those.
+        // https://en.cppreference.com/w/cpp/string/basic_string/find_first_not_of
+        return to_lower(name).find_first_not_of("abcdefghijklmnopqrstuvwxyz\0") == std::string::npos;
+    };
+
     while (rset->next())
     {
         auto accid_target = rset->get<uint32>(0);
         auto targetName   = rset->get<std::string>(1);
 
-        blacklist.emplace_back(accid_target, targetName);
-        currentCount++;
-        totalCount++;
-
-        if (currentCount == 12)
+        if (isNameCharactersOnly(targetName))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(
-                blacklist,
-                GP_SERV_COMMAND_BLACK_LIST::ResetClientBlacklist{ totalCount <= 12 },
-                GP_SERV_COMMAND_BLACK_LIST::LastBlacklistPacket{ totalCount == rowCount });
+            blacklist.emplace_back(accid_target, targetName);
+            currentCount++;
+            totalCount++;
 
-            blacklist.clear();
-            currentCount = 0;
+            if (currentCount == 12)
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_BLACK_LIST>(
+                    blacklist,
+                    GP_SERV_COMMAND_BLACK_LIST::ResetClientBlacklist{ totalCount <= 12 },
+                    GP_SERV_COMMAND_BLACK_LIST::LastBlacklistPacket{ totalCount == rowCount });
+
+                blacklist.clear();
+                currentCount = 0;
+            }
         }
     }
 

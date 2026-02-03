@@ -6,7 +6,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Structure de la table `pet_list`
+-- Table structure for table `pet_list`
 --
 
 DROP TABLE IF EXISTS `pet_list`;
@@ -22,9 +22,7 @@ CREATE TABLE IF NOT EXISTS `pet_list` (
   PRIMARY KEY (`petid`)
 ) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Contenu de la table `pet_list`
---
+-- damageType ENUMs
 
 --    NONE      = 0,
 --    PIERCING  = 1,
@@ -110,3 +108,57 @@ INSERT INTO `pet_list` VALUES (72,'StormwakerFrame',5127,1,99,0,0,3);
 INSERT INTO `pet_list` VALUES (75,'Luopan',6040,1,99,0,0,0);
 INSERT INTO `pet_list` VALUES (76,'Siren',7047,1,99,0,0,2);
 INSERT INTO `pet_list` VALUES (77,'SweetCaroline',7500,99,119,7200,0,3);
+
+-- TODO: Lv. 99 + Jug Pets not currently implemented.
+-- Need to input values here as well as assign the petid to subskill of corresponding jug item in item_weapons.sql
+
+-- INSERT INTO `pet_list` VALUES (78,'Amiable Roche',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (79,'Headbreaker Ken',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (80,'Anklebiter Jedd',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (81,'Cursed Annabelle',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (82,'Brainy Waluis',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (83,'Slime Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (84,'Sultry Patrice',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (85,'Generous Arthur',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (86,'Redolent Candi',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (87,'Alluring Honey',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (88,'Lynx Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (89,'Vivacious Gaston',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (90,'Caring Kiyomaro',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (91,'Vivacious Vickie',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (92,'Suspicious Alice',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (93,'Surging Storm',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (94,'Submerged Iyo',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (95,'Warlike Patrick',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (96,'Rhyming Shizuna',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (97,'Blackbeard Randy',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (98,'Threestar Lynn',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (99,'Hurler Percival',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (100,'Acuex Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (101,'Fluffy Bredo',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (102,'Weevil Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (103,'Stalwart Angelina',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (104,'Fleet Reinhard',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (105,'Sharpwit Hermes',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (106,'Porter Crab Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (107,'Jovial Edwin',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (108,'Attentive Ibuki',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (109,'Swooping Zhivago',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (110,'Sunburst Malfik',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (111,'Aged Angus',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (112,'Scissorleg Xerin',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (113,'Bouncing Bertha',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (114,'Spider Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (115,'Gussy Hachirobe',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (116,'Colibri Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (117,'Choral Leera',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (118,'Droopy Dortwin',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (119,'Pondering Peter',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (120,'Herald Henry',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (121,'Hippogryph Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (122,'Daring Roland',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (123,'Mosquito Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (124,'Left-Handed Yoko',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (125,'Brave Hero Glenn',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (126,'Yellow Beetle Familiar',poolID,minLevel,maxLevel,time,element,damageType);
+-- INSERT INTO `pet_list` VALUES (127,'Energized Sefina',poolID,minLevel,maxLevel,time,element,damageType);

@@ -29,7 +29,7 @@ quest.sections =
         {
             ['Ufanne'] = quest:event(310),
 
-            ['Gallijaux'] = quest:progressEvent(300, xi.item.MOAT_CARP, xi.item.FOREST_CARP),
+            ['Gallijaux'] = quest:progressEvent(300, xi.item.MOAT_CARP_1, xi.item.FOREST_CARP),
 
             onEventFinish =
             {
@@ -57,7 +57,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     local count        = trade:getItemCount()
-                    local moatCarp     = trade:getItemQty(xi.item.MOAT_CARP)
+                    local moatCarp     = trade:getItemQty(xi.item.MOAT_CARP_1)
                     local forestCarp   = trade:getItemQty(xi.item.FOREST_CARP)
                     local fishCountVar = player:getCharVar('carpsTraded')
                     local totalFish    = moatCarp + forestCarp + fishCountVar
@@ -132,7 +132,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     local count        = trade:getItemCount()
-                    local moatCarp     = trade:getItemQty(xi.item.MOAT_CARP)
+                    local moatCarp     = trade:getItemQty(xi.item.MOAT_CARP_1)
                     local forestCarp   = trade:getItemQty(xi.item.FOREST_CARP)
                     local fishCountVar = player:getCharVar('carpsTraded')
                     local totalFish    = moatCarp + forestCarp + fishCountVar

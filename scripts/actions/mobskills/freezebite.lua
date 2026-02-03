@@ -1,15 +1,11 @@
 -----------------------------------
 -- Freezebite
--- Great Sword weapon skill
--- Skill Level: 100
--- Delivers an ice elemental attack. Damage varies with TP.
--- Aligned with the Snow Gorget & Breeze Gorget.
--- Aligned with the Snow Belt & Breeze Belt.
--- Element: Ice
--- Modifiers: STR:30%  INT:20%
--- 100%TP    200%TP    300%TP
--- 1.00      1.50      3.00
+-- Description: Delivers an Ice elemental attack.
+-- Type: Magical
+-- Utsusemi/Blink absorb: 1 shadow
+-- Range: Melee
 -----------------------------------
+
 ---@type TMobSkill
 local mobskillObject = {}
 
@@ -18,13 +14,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local params = {}
-    params.numHits = 1
-    params.ftpMod = { 1.0, 1.5, 3.0 }
-    params.str_wsc = 0.3 params.int_wsc = 0.2
-    local damage, _, _, _ = xi.weaponskills.doPhysicalWeaponskill(mob, target, 0, params, 0, nil, true, nil)
+    local damage = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.ICE, 4, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
+
     return damage
 end
 

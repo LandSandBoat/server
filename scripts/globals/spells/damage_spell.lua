@@ -534,16 +534,27 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellElement, alwaysA
 
     -- Calculate bonuses.
     if applyBonuses then
+        local singleWeather = xi.data.element.getAssociatedSingleWeather(spellElement)
+        local doubleWeather = xi.data.element.getAssociatedDoubleWeather(spellElement)
         -- Strong weathers.
-        if weather == xi.data.element.getAssociatedSingleWeather(spellElement) then
+        if weather == singleWeather then
             dayAndWeather = dayAndWeather + 0.1 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
-        elseif weather == xi.data.element.getAssociatedDoubleWeather(spellElement) then
+        elseif weather == doubleWeather then
             dayAndWeather = dayAndWeather + 0.25 + caster:getMod(xi.mod.IRIDESCENCE) * 0.05
         end
 
         -- Strong day.
         if dayElement == spellElement then
             dayAndWeather = dayAndWeather + 0.1
+        end
+
+        -- Twilight cape.
+        if
+            weather == singleWeather or
+            weather == doubleWeather or
+            dayElement == spellElement
+        then
+            dayAndWeather = dayAndWeather + caster:getMod(xi.mod.DAY_WEATHER_PROC_BONUS) / 100
         end
     end
 
@@ -571,7 +582,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellElement, alwaysA
     end
 
     -- Cap bonuses.
-    dayAndWeather = utils.clamp(dayAndWeather, 0, 2)
+    dayAndWeather = utils.clamp(dayAndWeather, 0, 1.4)
 
     return dayAndWeather
 end
@@ -1087,7 +1098,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
             (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
             caster:hasStatusEffect(xi.effect.AZURE_LORE)))
         then
-            local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+            local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
             if skillchainCount > 0 then
                 magicBurst      = xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount)

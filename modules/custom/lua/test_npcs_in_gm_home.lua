@@ -6,18 +6,28 @@ require('scripts/zones/GM_Home/Zone')
 -----------------------------------
 local m = Module:new('test_npcs_in_gm_home')
 
+--
 -- Forward declarations (required)
+--
+
 local menu  = {}
 local page1 = {}
 local page2 = {}
 
+--
 -- We need just a tiny delay to let the previous menu context be cleared out
--- 'New pages' are actually just whole new menus!
-local delaySendMenu = function(player)
+-- New 'pages' are actually just whole new menus!
+--
+
+local delaySendMenu = function(player, menuForPlayer)
     player:timer(50, function(playerArg)
-        playerArg:customMenu(menu)
+        playerArg:customMenu(menuForPlayer)
     end)
 end
+
+--
+-- Menu page definitions
+--
 
 menu =
 {
@@ -59,11 +69,81 @@ page2 =
     },
 }
 
+--
+-- Custom Chocobo Registrar NPC
+--
+
+local registerRandomChocobo = function(player, npc)
+    local colors =
+    {
+        xi.chocobo.color.YELLOW,
+        xi.chocobo.color.BLACK,
+        xi.chocobo.color.BLUE,
+        xi.chocobo.color.RED,
+        xi.chocobo.color.GREEN,
+    }
+
+    local color = utils.randomEntry(colors)
+
+    local randomBool = function()
+        return utils.randomEntry({ true, false })
+    end
+
+    local traits =
+    {
+        largeBeak   = randomBool(),
+        fullTail    = randomBool(),
+        largeTalons = randomBool(),
+    }
+
+    -- Permanently registers the chocobo to the player!
+    player:registerChocobo(color, traits)
+
+    -- Mount the registered chocobo
+    player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, xi.mount.CHOCOBO, 0, 1800, 0, 64, true)
+
+    --
+    -- Debug output
+    --
+
+    local colorToStr =
+    {
+        [xi.chocobo.color.YELLOW] = 'Yellow',
+        [xi.chocobo.color.BLACK]  = 'Black',
+        [xi.chocobo.color.BLUE]   = 'Blue',
+        [xi.chocobo.color.RED]    = 'Red',
+        [xi.chocobo.color.GREEN]  = 'Green',
+    }
+
+    local boolToStr =
+    {
+        [true]  = 'Enlarged',
+        [false] = 'Normal',
+    }
+
+    local debugStr = fmt(
+        '\nChocobo registered: \nColor: {} \nBeak: {} \nTail: {} \nFeet: {}',
+        colorToStr[color],
+        boolToStr[traits.largeBeak],
+        boolToStr[traits.fullTail],
+        boolToStr[traits.largeTalons]
+    )
+
+    player:printToPlayer(debugStr, 0, npc:getPacketName())
+end
+
+--
+-- Main override
+--
+
 m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
     -- Call the zone's original function for onInitialize
     super(zone)
 
-    -- Insert NPC into zone
+    --
+    -- Insert Horro example NPC into zone
+    --
+
     local horro = zone:insertDynamicEntity({
 
         -- NPC or MOB
@@ -123,7 +203,10 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
     -- You could also just not capture the object
     -- zone:insertDynamicEntity({ ...
 
+    --
     -- Menu NPC Example
+    --
+
     zone:insertDynamicEntity({
         objtype   = xi.objType.NPC,
         name      = 'Menu Example',
@@ -135,7 +218,25 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
         widescan  = 1,
         onTrigger  = function(player, npc)
             menu.options = page1
-            delaySendMenu(player)
+            delaySendMenu(player, menu)
+        end,
+    })
+
+    --
+    -- Chocobo Registrar NPC Example
+    --
+
+    zone:insertDynamicEntity({
+        objtype   = xi.objType.NPC,
+        name      = 'Random Chocobo',
+        look      = 3031,
+        x         = 5.000,
+        y         = 0.000,
+        z         = -5.000,
+        rotation  = 128,
+        widescan  = 1,
+        onTrigger  = function(player, npc)
+            registerRandomChocobo(player, npc)
         end,
     })
 end)

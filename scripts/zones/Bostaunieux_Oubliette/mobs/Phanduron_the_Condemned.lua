@@ -69,10 +69,15 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVASION_DOWN)
-end
+    local pTable =
+    {
+        chance   = 50,
+        effectId = xi.effect.EVASION_DOWN,
+        power    = 25,
+        duration = 60,
+    }
 
-entity.onMobDeath = function(mob, player, optParams)
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDespawn = function(mob)

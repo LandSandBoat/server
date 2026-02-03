@@ -21,10 +21,11 @@
 
 #include "blue_trait.h"
 
-CBlueTrait::CBlueTrait(uint8 category, uint8 id)
+CBlueTrait::CBlueTrait(uint8 category, uint8 id, bool jobPointsOnly)
 : CTrait(id)
 , m_points(0)
 , m_category(category)
+, m_jobPointsOnly(jobPointsOnly)
 {
 }
 
@@ -36,6 +37,11 @@ uint8 CBlueTrait::getCategory() const
 uint8 CBlueTrait::getPoints() const
 {
     return m_points;
+}
+
+uint8 CBlueTrait::getJobPointsOnly() const
+{
+    return m_jobPointsOnly;
 }
 
 void CBlueTrait::setPoints(uint8 points)

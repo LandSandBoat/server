@@ -154,8 +154,10 @@ quest.sections =
 
                 [56] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 5) -- Something flies out from the ceiling!
-                        GetMobByID(garlaigeID.mob.CHANDELIER):setRespawnTime(5)
+                        npc:timer(5000, function(npcArg)
+                            npcUtil.popFromQM(player, npc, garlaigeID.mob.CHANDELIER, { hide = 0, claim = false })
+                            player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 5) -- Something flies out from the ceiling!
+                        end)
                     else
                         player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 6) -- The presence in the ceiling still lingers...
                     end

@@ -474,7 +474,7 @@ auto calcSynthResult(CCharEntity* PChar) -> uint8
     uint8 currentHQTier   = 0; // Recipe current available HQ tier, based on current skill ID being checked.
     float chanceHQ        = 0;
     uint8 maxChanceHQ     = 50;
-    uint8 randomRoll      = 0; // 1 to 100.
+    float randomRoll      = 0; // 1.0f to 100.f
 
     if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
     {
@@ -495,10 +495,10 @@ auto calcSynthResult(CCharEntity* PChar) -> uint8
         }
 
         // Skill is involved.
-        successRate     = 95;                                 // Assume sucess rate is maxed.
-        randomRoll      = 1 + xirand::GetRandomNumber(100);   // Random call must be called for each involved skill. 1 to 100 both included.
-        currentHQTier   = 0;                                  // This is reset at the start of every loop. "finalHQTier" is not.
-        synthDifficulty = getSynthDifficulty(PChar, skillID); // Get synth difficulty for current skill.
+        successRate     = 95;                                   // Assume sucess rate is maxed.
+        randomRoll      = xirand::GetRandomNumber(1.0f, 100.f); // Random call must be called for each involved skill. 1 to 100 both included.
+        currentHQTier   = 0;                                    // This is reset at the start of every loop. "finalHQTier" is not.
+        synthDifficulty = getSynthDifficulty(PChar, skillID);   // Get synth difficulty for current skill.
 
         // Skill is at or over synth recipe level.
         if (synthDifficulty <= 0)
@@ -617,17 +617,17 @@ auto calcSynthResult(CCharEntity* PChar) -> uint8
             chanceHQ = maxChanceHQ;
         }
 
-        randomRoll = 1 + xirand::GetRandomNumber(100);
+        randomRoll = xirand::GetRandomNumber(1.0f, 100.f);
 
         if (randomRoll <= chanceHQ) // We HQ. Proceed to selct HQ Tier
         {
             synthResult = SYNTHESIS_HQ;
-            randomRoll  = 1 + xirand::GetRandomNumber(100);
+            randomRoll  = xirand::GetRandomNumber(1.0f, 100.f);
 
             if (randomRoll <= 25) // 25% Chance after HQ to upgrade to HQ2
             {
                 synthResult = SYNTHESIS_HQ2;
-                randomRoll  = 1 + xirand::GetRandomNumber(100);
+                randomRoll  = xirand::GetRandomNumber(1.0f, 100.f);
 
                 if (randomRoll <= 25) // 25% Chance after HQ2 to upgrade to HQ3
                 {
@@ -985,6 +985,43 @@ void doSynthFail(CCharEntity* PChar)
     if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost, skip break calculations.
     {
         handleMaterialLoss(PChar);
+    }
+    else
+    {
+        // Recipe cannot lose ingredients, unlock everything.
+        uint8 invSlotID  = PChar->CraftContainer->getInvSlotID(1);
+        uint8 nextSlotID = 0;
+        uint8 totalCount = 0;
+
+        for (uint8 slotID = 1; slotID <= 8; ++slotID)
+        {
+            if (slotID != 8)
+            {
+                nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
+            }
+
+            totalCount++;
+
+            if (invSlotID != nextSlotID)
+            {
+                if (auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID))
+                {
+                    PItem->setSubType(ITEM_UNLOCKED);
+                    PItem->setReserve(PItem->getReserve() - totalCount);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
+                }
+
+                invSlotID  = nextSlotID;
+                totalCount = 0;
+            }
+
+            nextSlotID = 0;
+
+            if (invSlotID == 0xFF)
+            {
+                break;
+            }
+        }
     }
 
     // Push "Synthesis failed" messages.

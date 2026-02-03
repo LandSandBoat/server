@@ -22,9 +22,6 @@ entity.phList =
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 5)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
-
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

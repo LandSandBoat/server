@@ -276,6 +276,7 @@ g_mixins.job_special = function(jobSpecialMob)
 
         mob:setLocalVar('[jobSpecial]chance', 100)     -- chance that mob will use any special at all during engagement
         mob:setLocalVar('[jobSpecial]delayInitial', 2) -- default wait until mob can use its first special (prevents insta-flow)
+        mob:setLocalVar('[jobSpecial]readyInitial', 0) -- reset from previous spawn
     end)
 
     jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)

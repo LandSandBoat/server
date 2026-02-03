@@ -3,6 +3,7 @@ xi = xi or {}
 ---@enum xi.questLog
 xi.questLog =
 {
+    NONE        = -1,
     SANDORIA    =  0,
     BASTOK      =  1,
     WINDURST    =  2,
