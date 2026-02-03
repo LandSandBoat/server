@@ -4961,7 +4961,7 @@ INSERT INTO `mob_spawn_points` VALUES (16875737,0,'Atomic_Cluster','Atomic Clust
 INSERT INTO `mob_spawn_points` VALUES (16875738,0,'Gigantobugard','Gigantobugard',52,40,43,-173.253,-8.211,37.949,144);
 INSERT INTO `mob_spawn_points` VALUES (16875739,0,'Gigantobugard','Gigantobugard',52,40,43,-190.875,-7.993,29.479,5);
 INSERT INTO `mob_spawn_points` VALUES (16875740,0,'Gigantobugard','Gigantobugard',52,40,43,-182.112,-7.555,11.472,24);
-INSERT INTO `mob_spawn_points` VALUES (16875741,0,'Megalobugard','Megalobugard',65,52,52,-173.265,-7.799,4.956,159);
+INSERT INTO `mob_spawn_points` VALUES (16875741,0,'Megalobugard','Megalobugard',65,50,50,-173.265,-7.799,4.956,159);
 INSERT INTO `mob_spawn_points` VALUES (16875742,0,'Gigas_Braver','Gigas Braver',54,41,44,-206.070,-8.782,39.417,143);
 INSERT INTO `mob_spawn_points` VALUES (16875743,0,'Orcish_Bowshooter','Orcish Bowshooter',57,41,44,-203.007,-8.625,37.168,17);
 INSERT INTO `mob_spawn_points` VALUES (16875744,0,'Gigantobugard','Gigantobugard',52,40,43,-110.989,-9.395,-27.374,228);
@@ -4982,7 +4982,7 @@ INSERT INTO `mob_spawn_points` VALUES (16875758,0,'Leshy','Leshy',66,52,54,-196.
 INSERT INTO `mob_spawn_points` VALUES (16875759,0,'Leshy','Leshy',66,52,54,-194.471,-16.089,276.414,9);
 INSERT INTO `mob_spawn_points` VALUES (16875760,0,'Leshy','Leshy',66,52,54,-163.431,-16.329,284.699,52);
 INSERT INTO `mob_spawn_points` VALUES (16875761,0,'Leshy','Leshy',66,52,54,-235.774,-15.743,305.243,205);
-INSERT INTO `mob_spawn_points` VALUES (16875762,0,'Colorful_Leshy','Colorful Leshy',67,56,58,-183.619,-15.623,246.343,217);
+INSERT INTO `mob_spawn_points` VALUES (16875762,0,'Colorful_Leshy','Colorful Leshy',67,57,58,-183.619,-15.623,246.343,217);
 INSERT INTO `mob_spawn_points` VALUES (16875763,0,'Defoliate_Leshy','Defoliate Leshy',68,57,58,-162.788,-16.185,249.421,23);
 INSERT INTO `mob_spawn_points` VALUES (16875764,0,'Fomor_Samurai','Fomor Samurai',38,41,44,-178.000,-16.122,304.700,64);
 INSERT INTO `mob_spawn_points` VALUES (16875765,0,'Fomor_Thief','Fomor Thief',61,42,44,-180.600,-15.888,301.899,224);

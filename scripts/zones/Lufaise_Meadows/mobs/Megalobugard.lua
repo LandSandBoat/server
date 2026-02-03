@@ -18,7 +18,7 @@ entity.phList =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.REGEN, 25)
+    mob:setMod(xi.mod.REGEN, 55)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
