@@ -5,14 +5,10 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    -- minimum time is 10 seconds!
-    if effect:getPower() < 10 then
-        effect:setPower(10)
-    end
 end
 
 effectObject.onEffectTick = function(target, effect)
-    local remainingTicks = 1 + (effect:getTimeRemaining() / 1000) / 3
+    local remainingTicks = math.floor(effect:getTimeRemaining() / 1000 - 0.5) / 3
 
     -- doom counter
     target:messagePublic(xi.msg.basic.DOOM_COUNTER, target, remainingTicks, remainingTicks)
