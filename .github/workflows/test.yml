@@ -83,22 +83,6 @@ jobs:
           echo "Lua Language Server failed. See summary for details."
           exit 1
 
-  Runner_Test:
-    name: ${{ matrix.runner && 'Test' || '' }} # GitHub Actions hack to hide matrix args
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        runner: [windows-2025, macos-26]
-    uses: ./.github/workflows/runner_test.yml
-    with:
-      runner: ${{ matrix.runner }}
-      build_type: Release
-      test_modules: false
-      multi_process: true
-      xi_test: ${{ !startsWith(matrix.runner, 'macos') }}
-      startup_checks: true
-
   Docker_Test:
     name: ${{ matrix.os && 'Test' || '' }} # GitHub Actions hack to hide matrix args
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}

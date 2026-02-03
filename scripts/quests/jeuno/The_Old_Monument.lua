@@ -66,7 +66,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
                     if questProgress == 1 then
-                        return quest:progressCutscene(0)
+                        -- return quest:progressCutscene(0)
+                        quest:setVar(player, 'Prog', 2)
+                        return quest:messageSpecial(buburimuID.text.SONG_RUNES_REQUIRE, xi.item.SHEET_OF_PARCHMENT)
                     elseif questProgress == 2 then
                         return quest:messageSpecial(buburimuID.text.SONG_RUNES_REQUIRE, xi.item.SHEET_OF_PARCHMENT)
                     end
