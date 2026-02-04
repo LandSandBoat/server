@@ -17,8 +17,4 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.FIVE_DRIED_EYEBALLS)
-end
-
 return entity
