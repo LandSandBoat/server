@@ -64,7 +64,10 @@ quest.sections =
                 [120] = function(player, csid, option, npc)
                     local eventCancelled = bit.rshift(option, 31) == 1 and true or false
 
-                    if not eventCancelled then
+                    if
+                        option ~= 0 and
+                        not eventCancelled
+                    then
                         local betAmount, vanaHoursRemaining = getSelectedOption(option)
 
                         if player:getGil() >= betAmount then
