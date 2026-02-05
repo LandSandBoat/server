@@ -29,8 +29,9 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.CURSE_I }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA })
 
     -- TODO: BRD trusts need better logic and major overhaul, for now they compliment each other
-    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.MARCH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MARCH })
-    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.BALLAD }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MAGES_BALLAD })
+    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.MARCH }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.VICTORY_MARCH })
+    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.BALLAD }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.MAGES_BALLAD })
+    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.MADRIGAL }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.BLADE_MADRIGAL })
 
     mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 75 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
 
