@@ -41,8 +41,9 @@ inline void generateSelfSignedCert()
             {
                 ShowInfo(fmt::format("Found existing login.key"));
             }
+
+            fclose(fileHandle);
         }
-        fclose(fileHandle);
     }
 
     if (std::filesystem::exists("login.cert"))
