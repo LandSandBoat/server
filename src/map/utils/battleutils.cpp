@@ -3838,7 +3838,7 @@ CItemWeapon* GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot)
         return nullptr;
     }
 
-    return dynamic_cast<CItemWeapon*>(((CMobEntity*)PEntity)->m_Weapons[Slot]);
+    return dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[Slot]);
 }
 
 void MakeEntityStandUp(CBattleEntity* PEntity)
