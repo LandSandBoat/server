@@ -37,8 +37,8 @@ CItemUsable::CItemUsable(uint16 id)
     m_MaxCharges  = 0;
     m_Animation   = 0;
     m_ValidTarget = 0;
-    m_AssignTime  = timer::time_point::min();
-    m_LastUseTime = timer::time_point::min();
+    m_AssignTime  = timer::time_point{};
+    m_LastUseTime = timer::time_point{};
     m_AoE         = 0;
 }
 

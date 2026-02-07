@@ -1072,7 +1072,10 @@ void LoadInventory(CCharEntity* PChar)
                 {
                     uint32 useTime = 0;
                     std::memcpy(&useTime, PItemUsable->m_extra + 0x04, sizeof(useTime));
-                    PItemUsable->setLastUseTime(timer::now() - std::chrono::seconds(earth_time::vanadiel_timestamp() - useTime));
+                    if (useTime != 0)
+                    {
+                        PItemUsable->setLastUseTime(timer::now() - std::chrono::seconds(earth_time::vanadiel_timestamp() - useTime));
+                    }
                 }
 
                 if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == LOC_MOGSAFE || PItem->getLocationID() == LOC_MOGSAFE2))
@@ -6043,9 +6046,17 @@ void SaveCharStats(CCharEntity* PChar)
 
     // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
     // we use charvars for jug specific things
-    const auto jugTimestamp = earth_time::timestamp(timer::to_utc(PChar->petZoningInfo.jugSpawnTime));
-    PChar->setCharVar("jugpet-spawn-time", jugTimestamp);
-    PChar->setCharVar("jugpet-duration-seconds", static_cast<int32>(timer::count_seconds(PChar->petZoningInfo.jugDuration)));
+    if (PChar->petZoningInfo.jugSpawnTime > timer::time_point{})
+    {
+        const auto jugTimestamp = earth_time::timestamp(timer::to_utc(PChar->petZoningInfo.jugSpawnTime));
+        PChar->setCharVar("jugpet-spawn-time", jugTimestamp);
+        PChar->setCharVar("jugpet-duration-seconds", static_cast<int32>(timer::count_seconds(PChar->petZoningInfo.jugDuration)));
+    }
+    else
+    {
+        PChar->setCharVar("jugpet-spawn-time", 0);
+        PChar->setCharVar("jugpet-duration-seconds", 0);
+    }
 }
 
 /************************************************************************

@@ -51,8 +51,8 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_PetID(0)
 , m_PetType(petType)
 , m_spawnLevel(0)
-, m_jugSpawnTime(timer::time_point::min())
-, m_jugDuration(timer::duration::min())
+, m_jugSpawnTime(timer::time_point{})
+, m_jugDuration(timer::duration{})
 {
     TracyZoneScoped;
     objtype                     = TYPE_PET;
