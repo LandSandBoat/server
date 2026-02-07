@@ -470,7 +470,7 @@ uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
             }
             break;
         default:
-            sJobStat = stat / 2;
+            sJobStat = stat / 2.0f;
             break;
     }
     return sJobStat;

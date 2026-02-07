@@ -4913,7 +4913,7 @@ float HandleTranquilHeart(CBattleEntity* PEntity)
     if (PEntity->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PEntity, TRAIT_TRANQUIL_HEART))
     {
         int16 healingSkill = PEntity->GetSkill(SKILL_HEALING_MAGIC);
-        reductionPercent   = ((healingSkill / 10) * .5f);
+        reductionPercent   = ((healingSkill / 10.0f) * 0.5f);
 
         // Reduction Percent Caps at 25%
         if (reductionPercent > 25)
