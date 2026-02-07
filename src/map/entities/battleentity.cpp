@@ -3135,13 +3135,15 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         {
             if (StatusEffectContainer && StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
             {
-                auto*       PChar = dynamic_cast<CCharEntity*>(this);
-                const auto* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-
-                if (PChar && PAmmo && PAmmo->isShuriken()) // Not sure how they wouldn't have a shuriken by this point, but just in case...
+                auto* PChar = dynamic_cast<CCharEntity*>(this);
+                if (PChar)
                 {
-                    // Removing ammo here is safe because you can only create one Daken attack per attack round
-                    battleutils::RemoveAmmo(PChar, 1);
+                    const auto* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+                    if (PAmmo && PAmmo->isShuriken())
+                    {
+                        // Removing ammo here is safe because you can only create one Daken attack per attack round
+                        battleutils::RemoveAmmo(PChar, 1);
+                    }
                 }
             }
         }

@@ -1767,7 +1767,7 @@ uint32 getItemCount(CCharEntity* PChar, uint16 ItemID)
 {
     if (ItemID == 0)
     {
-        return false;
+        return 0;
     }
 
     uint32 itemCount = 0;
@@ -2615,7 +2615,7 @@ bool hasValidStyle(CCharEntity* PChar, CItemEquipment* PItem, CItemEquipment* AI
 
         // Marvelous Cheer special case
         // It is not technically a Wind Instrument, but it can lockstyle one.
-        if (AItem->getID() == MARVELOUS_CHEER && PWeapon->getSkillType() == SKILL_WIND_INSTRUMENT)
+        if (PWeapon && AItem->getID() == MARVELOUS_CHEER && PWeapon->getSkillType() == SKILL_WIND_INSTRUMENT)
         {
             return HasItem(PChar, AItem->getID());
         }
@@ -3542,13 +3542,13 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
 
     for (auto PAbility : ability::GetAbilities(PChar->GetSJob()))
     {
+        if (!PAbility)
+        {
+            continue;
+        }
+
         if (PChar->GetSLevel() >= PAbility->getLevel())
         {
-            if (PAbility == nullptr)
-            {
-                continue;
-            }
-
             if (PAbility->getLevel() != 0 && PAbility->getID() < ABILITY_HEALING_RUBY)
             {
                 if (PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility) && !(PAbility->getAddType() & ADDTYPE_MAIN_ONLY))

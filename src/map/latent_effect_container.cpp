@@ -868,11 +868,12 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         {
             size_t partyCount = 0;
             size_t trustCount = 0;
-            auto*  PLeader    = m_POwner->PParty != nullptr ? dynamic_cast<CCharEntity*>(m_POwner->PParty->GetLeader()) : nullptr;
+            auto*  PParty     = m_POwner->PParty;
+            auto*  PLeader    = PParty ? dynamic_cast<CCharEntity*>(PParty->GetLeader()) : nullptr;
             if (PLeader)
             {
                 trustCount = PLeader->PTrusts.size();
-                partyCount = m_POwner->PParty->members.size();
+                partyCount = PParty->members.size();
             }
 
             expression = latentEffect.GetConditionsValue() <= (partyCount + trustCount);

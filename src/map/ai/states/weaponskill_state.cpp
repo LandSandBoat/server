@@ -169,7 +169,7 @@ bool CWeaponSkillState::Update(timer::time_point tick)
         m_finishTime = tick + delay;
         Complete();
     }
-    else if (tick > m_finishTime)
+    else if (tick > m_finishTime && m_PEntity)
     {
         if (m_PEntity->objtype == TYPE_PC)
         {

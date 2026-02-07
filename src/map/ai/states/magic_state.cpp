@@ -183,6 +183,11 @@ bool CMagicState::Update(timer::time_point tick)
         else if (PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
+            if (!PChar)
+            {
+                return false;
+            }
+
             if (PChar->m_Locked)
             {
                 m_PEntity->OnCastInterrupted(*this, action, msg, true);

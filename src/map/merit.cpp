@@ -348,6 +348,10 @@ Merit_t* CMeritPoints::GetMeritPointer(MERIT_TYPE merit)
 void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
+    if (!PMerit)
+    {
+        return;
+    }
 
     if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
     {
@@ -381,6 +385,10 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
+    if (!PMerit)
+    {
+        return;
+    }
 
     if (PMerit->count > 0)
     {

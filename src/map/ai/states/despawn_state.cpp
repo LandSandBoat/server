@@ -37,7 +37,7 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
         _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(_PEntity, _PEntity, FourCC::FadeOut));
     }
 
-    if (auto* PMob = dynamic_cast<CMobEntity*>(_PEntity); PMob->m_AllowRespawn && PMob->loc.zone != nullptr)
+    if (auto* PMob = dynamic_cast<CMobEntity*>(_PEntity); PMob && PMob->m_AllowRespawn && PMob->loc.zone != nullptr)
     {
         PMob->loc.zone->spawnHandler()->registerForRespawn(PMob);
     }

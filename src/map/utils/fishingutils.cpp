@@ -1374,31 +1374,27 @@ bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
 void RodBreak(CCharEntity* PChar)
 {
     CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
-    rod_t*       PRod    = FishingRods[PRanged->getID()];
-
     if (PRanged == nullptr)
     {
-        ShowWarning("PRod was null.");
+        ShowWarning("PRanged was null.");
         return;
     }
 
+    rod_t* PRod = FishingRods[PRanged->getID()];
     if (PRod == nullptr)
     {
         ShowWarning("PRod was null.");
         return;
     }
 
-    if (PRanged != nullptr && PRod != nullptr)
+    if (PRod->breakable && PRod->brokenRodId > 0)
     {
-        if (PRod->breakable && PRod->brokenRodId > 0)
-        {
-            BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
-            charutils::UnequipItem(PChar, SLOT_RANGED, false);
-            uint8 location = PRanged->getLocationID();
-            charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
-            charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
-        }
+        BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
+        charutils::UnequipItem(PChar, SLOT_RANGED, false);
+        uint8 location = PRanged->getLocationID();
+        charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
+        charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
     }
 }
 

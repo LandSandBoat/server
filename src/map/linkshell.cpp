@@ -506,7 +506,10 @@ uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
             if (rset && rset->rowsCount() && rset->next())
             {
                 const auto id = rset->get<uint32>("linkshellid");
-                return LoadLinkshell(id)->getID();
+                if (auto* PLinkshell = LoadLinkshell(id))
+                {
+                    return PLinkshell->getID();
+                }
             }
         }
     }

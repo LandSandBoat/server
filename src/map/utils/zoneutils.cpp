@@ -1357,7 +1357,12 @@ auto IsResidentialArea(const CCharEntity* PChar) -> bool
 void AfterZoneIn(CBaseEntity* PEntity)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
-    if (PChar != nullptr && (PChar->PBattlefield == nullptr || !PChar->PBattlefield->isEntered(PChar)))
+    if (!PChar)
+    {
+        return;
+    }
+
+    if (!PChar->PBattlefield || !PChar->PBattlefield->isEntered(PChar))
     {
         GetZone(PChar->getZone())->updateCharLevelRestriction(PChar);
     }

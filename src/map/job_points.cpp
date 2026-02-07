@@ -102,6 +102,11 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
     JobPoints_t*    job      = GetJobPointsByType(jpType);
     JobPointType_t* jobPoint = GetJobPointType(jpType);
 
+    if (!job || !jobPoint)
+    {
+        return;
+    }
+
     uint8 cost = JobPointCost(jobPoint->value);
 
     if (cost != 0 && job->currentJp >= cost)

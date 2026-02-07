@@ -196,7 +196,7 @@ bool CMobSkillState::Update(timer::time_point tick)
         Complete();
     }
 
-    if (IsCompleted() && tick > m_finishTime)
+    if (IsCompleted() && tick > m_finishTime && m_PEntity)
     {
         auto* PTarget = GetTarget();
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)

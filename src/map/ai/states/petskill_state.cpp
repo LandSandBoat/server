@@ -125,7 +125,7 @@ bool CPetSkillState::Update(timer::time_point tick)
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
-    if (IsCompleted() && tick > m_finishTime)
+    if (IsCompleted() && tick > m_finishTime && m_PEntity)
     {
         auto* PTarget = GetTarget();
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)

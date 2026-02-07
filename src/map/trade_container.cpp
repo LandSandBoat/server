@@ -71,7 +71,7 @@ uint32 CTradeContainer::getConfirmedStatus(uint8 slotID)
     {
         return m_confirmed[slotID];
     }
-    return false;
+    return 0;
 }
 
 uint32 CTradeContainer::getItemQuantity(uint16 itemID)

@@ -3921,9 +3921,13 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
             return 0;
         }
 
-        CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-        CItem*       PItem = PChar->getEquip(slot);
+        const auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        if (!PChar)
+        {
+            return 0;
+        }
 
+        const CItem* PItem = PChar->getEquip(slot);
         if (PItem && PItem->isType(ITEM_EQUIPMENT))
         {
             return PItem->getID();
@@ -4023,7 +4027,7 @@ uint32 CLuaBaseEntity::getItemCount(uint16 itemID)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        return false;
+        return 0;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -12958,7 +12962,7 @@ uint16 CLuaBaseEntity::getBaseWeaponDelay(uint16 slot)
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return false;
+        return 0;
     }
     CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -18520,6 +18524,10 @@ void CLuaBaseEntity::drawIn(const sol::variadic_args& va) const
     }
 
     const auto mobObj = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    if (!mobObj)
+    {
+        return;
+    }
 
     if (va.size() == 0)
     {
