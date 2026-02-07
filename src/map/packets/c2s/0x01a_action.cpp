@@ -211,6 +211,11 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
 
             const CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB);
 
+            if (!PNpc)
+            {
+                return;
+            }
+
             // MONs are allowed to use doors, but nothing else
             if (PChar->m_PMonstrosity != nullptr &&
                 PNpc->look.size != 0x02 &&
@@ -222,7 +227,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
-            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->inMogHouse()))
+            if (distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->inMogHouse()))
             {
                 PNpc->PAI->Trigger(PChar);
                 PChar->m_charHistory.npcInteractions++;
