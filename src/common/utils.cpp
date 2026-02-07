@@ -129,9 +129,13 @@ uint8 radianToRotation(float radian)
 
 uint8 worldAngle(const position_t& A, const position_t& B)
 {
-    uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
+    if (isWithinDistance(A, B, 0.1f, true))
+    {
+        return A.rotation;
+    }
 
-    return isWithinDistance(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
+    float radians = atan2f(B.z - A.z, B.x - A.x);
+    return static_cast<uint8>(radians * -(128.0f / M_PI));
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
