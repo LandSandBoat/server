@@ -70,7 +70,7 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
 
     if (!PTarget ||
         PTarget->id != PChar->TradePending.id ||
-        PChar->TradePending.id != PTarget->id)
+        PChar->id != PTarget->TradePending.id)
     {
         ShowWarningFmt("GP_CLI_COMMAND_TRADE_LIST: Could not find trade targets.");
         return;
