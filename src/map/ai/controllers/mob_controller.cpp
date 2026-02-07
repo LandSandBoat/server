@@ -737,15 +737,14 @@ void CMobController::DoCombatTick(timer::time_point tick)
 void CMobController::FaceTarget(const uint16 targid) const
 {
     TracyZoneScoped;
-    const CBaseEntity* targ = PTarget;
-    if (targid != 0 && ((targ && targid != targ->targid) || !targ))
+
+    const uint16 resolvedTargid = targid != 0 ? targid : PMob->GetBattleTargetID();
+    const auto*  maybeTarget    = PMob->GetEntity(resolvedTargid);
+    if (!(PMob->m_Behavior & BEHAVIOR_NO_TURN) && maybeTarget)
     {
-        targ = PMob->GetEntity(targid);
+        PMob->PAI->PathFind->LookAt(maybeTarget->loc.p);
     }
-    if (!(PMob->m_Behavior & BEHAVIOR_NO_TURN) && targ)
-    {
-        PMob->PAI->PathFind->LookAt(targ->loc.p);
-    }
+
     PMob->UpdateSpeed();
 }
 
