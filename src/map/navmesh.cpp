@@ -28,7 +28,6 @@
 #include "common/utils.h"
 #include "common/xirand.h"
 
-#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <set>
@@ -263,6 +262,13 @@ auto CNavMesh::findPath(const position_t& start, const position_t& end) -> std::
     if (!m_navMesh)
     {
         DebugNavmesh("CNavMesh::findPath No navmesh loaded (%u)", m_zoneID);
+        return {};
+    }
+
+    if (std::isnan(start.x) || std::isnan(start.y) || std::isnan(start.z) ||
+        std::isnan(end.x) || std::isnan(end.y) || std::isnan(end.z))
+    {
+        ShowWarning("CNavMesh::findPath NaN position detected (%u)", m_zoneID);
         return {};
     }
 
