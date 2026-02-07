@@ -13293,26 +13293,26 @@ void CLuaBaseEntity::transferEnmity(CLuaBaseEntity* entity, uint8 percent, float
  *  Notes   : Used in most Weaponskills and damaging abilities scripts
  ************************************************************************/
 
-void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage)
+void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, const int32 damage) const
 {
-    auto* PBaseMob = static_cast<CMobEntity*>(m_PBaseEntity);
-
     if (m_PBaseEntity->id == PEntity->getID())
     {
         ShowWarning(fmt::format("updateEnmityFromDamage(): Attempting to add enmity from damage to self ({}, {})!", PEntity->getName(), PEntity->getID()));
         return;
     }
 
+    auto* PBaseMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
     // This is a mob attacking a target and losing enmity from doing damage
-    if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_PET || (m_PBaseEntity->objtype == TYPE_MOB && PBaseMob->isCharmed))
+    if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_PET || (PBaseMob && PBaseMob->isCharmed))
     {
-        if (PEntity->GetBaseEntity() && PEntity->GetBaseEntity()->objtype == TYPE_MOB)
+        if (auto* PTargetMob = dynamic_cast<CMobEntity*>(PEntity->GetBaseEntity()))
         {
-            static_cast<CMobEntity*>(PEntity->GetBaseEntity())->PEnmityContainer->UpdateEnmityFromAttack(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
+            PTargetMob->PEnmityContainer->UpdateEnmityFromAttack(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
         }
     }
     // This is a mob being attacked and gaining enmity on the attacker
-    else if (m_PBaseEntity->objtype == TYPE_MOB)
+    else if (PBaseMob)
     {
         if (PEntity->GetBaseEntity() && damage > 0 && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
         {

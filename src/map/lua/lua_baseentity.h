@@ -666,7 +666,7 @@ public:
     void  lowerEnmity(CLuaBaseEntity* PEntity, uint8 percent);
     void  updateEnmity(CLuaBaseEntity* PEntity);
     void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
-    void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
+    void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage) const; // Adds Enmity to player for specified mob for the damage specified
     void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, const sol::object& fixedCE, const sol::object& fixedVE);
     void  resetEnmity(CLuaBaseEntity* PEntity);
     void  setEnmityActive(CLuaBaseEntity* PEntity, bool active);
