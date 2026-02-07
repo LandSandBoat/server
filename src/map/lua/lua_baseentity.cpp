@@ -11279,12 +11279,24 @@ uint8 CLuaBaseEntity::getPartySize(const sol::object& arg0)
 
 bool CLuaBaseEntity::hasPartyJob(uint8 job)
 {
-    if (static_cast<CCharEntity*>(m_PBaseEntity)->PParty != nullptr)
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
     {
-        for (const auto& member : static_cast<CCharEntity*>(m_PBaseEntity)->PParty->members)
+        if (auto* PTrust = dynamic_cast<CTrustEntity*>(m_PBaseEntity))
         {
-            CCharEntity* PTarget = static_cast<CCharEntity*>(member);
+            PChar = dynamic_cast<CCharEntity*>(PTrust->PMaster);
+        }
+    }
 
+    if (!PChar || !PChar->PParty)
+    {
+        return false;
+    }
+
+    for (const auto& member : PChar->PParty->members)
+    {
+        if (auto* PTarget = dynamic_cast<CCharEntity*>(member))
+        {
             if (PTarget->GetMJob() == job)
             {
                 return true;
