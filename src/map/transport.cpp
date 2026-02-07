@@ -446,6 +446,13 @@ Elevator_t* CTransportHandler::getElevator(uint8 elevatorID)
 
 void CTransportHandler::insertElevator(Elevator_t elevator)
 {
+    // Double check that the NPC entities all exist
+    if (!elevator.LowerDoor || !elevator.UpperDoor || !elevator.Elevator)
+    {
+        ShowError("Elevator could not load NPC entity. Ignoring this elevator.");
+        return;
+    }
+
     // check to see if this elevator already exists
     for (auto& i : ElevatorList)
     {
@@ -456,13 +463,6 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
             ShowError("Elevator already exists.");
             return;
         }
-    }
-
-    // Double check that the NPC entities all exist
-    if (elevator.LowerDoor == nullptr || elevator.UpperDoor == nullptr || elevator.Elevator == nullptr)
-    {
-        ShowError("Elevator %d could not load NPC entity. Ignoring this elevator.", elevator.Elevator->id);
-        return;
     }
 
     // Have permanent elevators wait until their next cycle to begin moving
