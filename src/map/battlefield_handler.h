@@ -67,10 +67,10 @@ public:
     void          addOrphanedPlayer(CCharEntity* PChar);
 
 private:
-    CZone*                       m_PZone;
-    uint8                        m_MaxBattlefields; // usually 3 except dynamis, einherjar, besieged, ...
-    std::map<int, CBattlefield*> m_Battlefields;    // area
-    std::map<uint32, uint8>      m_ReservedAreas;   // <charid, area>
+    CZone*                                       m_PZone;
+    uint8                                        m_MaxBattlefields; // usually 3 except dynamis, einherjar, besieged, ...
+    std::map<int, std::unique_ptr<CBattlefield>> m_Battlefields;    // area
+    std::map<uint32, uint8>                      m_ReservedAreas;   // <charid, area>
 
     // Players that need to be kicked from whatever battlefield they were in
     std::vector<std::pair<uint32, timer::time_point>> m_orphanedPlayers;

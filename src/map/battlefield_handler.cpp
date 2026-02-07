@@ -50,39 +50,28 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 {
 }
 
-CBattlefieldHandler::~CBattlefieldHandler()
-{
-    for (auto& [area, PBattlefield] : m_Battlefields)
-    {
-        destroy(PBattlefield);
-    }
-    m_Battlefields.clear();
-}
+CBattlefieldHandler::~CBattlefieldHandler() = default;
 
 void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
 {
     TracyZoneScoped;
-    // todo: use raw pointers otherwise might be harming lua
-    // dont want this to run again if we removed a battlefield
-    for (auto& PBattlefield : m_Battlefields)
+    for (auto& [area, PBattlefield] : m_Battlefields)
     {
-        if (!PBattlefield.second->CanCleanup())
+        if (!PBattlefield->CanCleanup())
         {
-            PBattlefield.second->onTick(tick);
+            PBattlefield->onTick(tick);
         }
     }
 
-    // can't std::remove_if in map so i'll workaround it
     for (auto it = m_Battlefields.begin(); it != m_Battlefields.end();)
     {
-        auto* PBattlefield = it->second;
+        auto* PBattlefield = it->second.get();
         if (PBattlefield->CanCleanup())
         {
             if (PBattlefield->Cleanup(tick, false))
             {
-                it = m_Battlefields.erase(it);
                 ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
-                destroy(PBattlefield);
+                it = m_Battlefields.erase(it);
                 continue;
             }
         }
@@ -131,7 +120,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         return BATTLEFIELD_RETURN_CODE_CUTSCENE;
     }
 
-    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
+    auto battlefield = std::make_unique<CBattlefield>(registration.id, m_PZone, registration.area, PChar);
 
     const auto rset = db::preparedStmt("SELECT name, fastestName, fastestTime, fastestPartySize "
                                        "FROM bcnm_records "
@@ -149,16 +138,18 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     const auto recordtime      = std::chrono::seconds(rset->get<uint32>("fastestTime"));
     const auto recordPartySize = rset->get<size_t>("fastestPartySize");
 
-    PBattlefield->SetName(name);
-    PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
-    PBattlefield->SetTimeLimit(registration.timeLimit);
-    PBattlefield->SetLevelCap(registration.levelCap);
-    PBattlefield->SetMaxParticipants(registration.maxPlayers);
-    PBattlefield->SetRuleMask(registration.rules);
-    PBattlefield->m_isMission = registration.isMission;
-    PBattlefield->m_showTimer = registration.showTimer;
+    battlefield->SetName(name);
+    battlefield->SetRecord(recordholder, recordtime, recordPartySize);
+    battlefield->SetTimeLimit(registration.timeLimit);
+    battlefield->SetLevelCap(registration.levelCap);
+    battlefield->SetMaxParticipants(registration.maxPlayers);
+    battlefield->SetRuleMask(registration.rules);
+    battlefield->m_isMission = registration.isMission;
+    battlefield->m_showTimer = registration.showTimer;
 
-    m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
+    const auto area = battlefield->GetArea();
+    m_Battlefields.insert(std::make_pair(area, std::move(battlefield)));
+    auto* PBattlefield = m_Battlefields[area].get();
 
     if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
     {
@@ -179,21 +170,21 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
 
     if (checkRegistered && entity && entity->objtype == TYPE_PC)
     {
-        for (auto& battlefield : m_Battlefields)
+        for (auto& [area, battlefield] : m_Battlefields)
         {
-            if (battlefield.second->IsRegistered(static_cast<CCharEntity*>(entity)))
+            if (battlefield->IsRegistered(static_cast<CCharEntity*>(entity)))
             {
-                return battlefield.second;
+                return battlefield.get();
             }
         }
         return nullptr;
     }
 
-    for (auto& battlefield : m_Battlefields)
+    for (auto& [area, battlefield] : m_Battlefields)
     {
-        if (battlefield.second->GetEntity(entity))
+        if (battlefield->GetEntity(entity))
         {
-            return battlefield.second;
+            return battlefield.get();
         }
     }
     return nullptr;
@@ -202,16 +193,16 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
 CBattlefield* CBattlefieldHandler::GetBattlefieldByArea(uint8 area) const
 {
     const auto it = m_Battlefields.find(area);
-    return it != m_Battlefields.end() ? it->second : nullptr;
+    return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
 CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
 {
-    for (auto& battlefield : m_Battlefields)
+    for (auto& [area, battlefield] : m_Battlefields)
     {
-        if (battlefield.second->GetInitiator().id == charID)
+        if (battlefield->GetInitiator().id == charID)
         {
-            return battlefield.second;
+            return battlefield.get();
         }
     }
     return nullptr;
@@ -230,11 +221,11 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const Battlef
     // Could not find this character registered, try find by id and initiator
     if (!PBattlefield)
     {
-        for (const auto& battlefield : m_Battlefields)
+        for (const auto& [area, battlefield] : m_Battlefields)
         {
-            if (battlefield.second->GetInitiator().id == registration.initiator && battlefield.second->GetID() == registration.id)
+            if (battlefield->GetInitiator().id == registration.initiator && battlefield->GetID() == registration.id)
             {
-                PBattlefield = battlefield.second;
+                PBattlefield = battlefield.get();
                 break;
             }
         }
@@ -289,9 +280,9 @@ bool CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefie
 
 bool CBattlefieldHandler::IsRegistered(CCharEntity* PChar)
 {
-    for (const auto& battlefield : m_Battlefields)
+    for (const auto& [area, battlefield] : m_Battlefields)
     {
-        if (battlefield.second->IsRegistered(PChar))
+        if (battlefield->IsRegistered(PChar))
         {
             return true;
         }
