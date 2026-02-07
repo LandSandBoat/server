@@ -9958,7 +9958,7 @@ void CLuaBaseEntity::setHP(int32 value)
     // When setting the HP to 0 the entity "falls to the ground" so the last attacker needs to be cleared
     if (value == 0)
     {
-        PBattle->PLastAttacker = nullptr;
+        PBattle->lastAttackerId_.clean();
     }
 }
 

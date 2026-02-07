@@ -551,7 +551,7 @@ public:
     CParty*           PParty;
     CBattleEntity*    PPet;
     CBattleEntity*    PMaster; // Owner/owner of the entity (applies to all combat entities)
-    CBattleEntity*    PLastAttacker;
+    EntityID_t        lastAttackerId_{};
     timer::time_point LastAttacked;
     battlehistory_t   BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
 

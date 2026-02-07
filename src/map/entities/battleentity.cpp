@@ -76,10 +76,9 @@ CBattleEntity::CBattleEntity()
     std::memset(&health, 0, sizeof(health));
     health.maxhp = 1;
 
-    PPet          = nullptr;
-    PParty        = nullptr;
-    PMaster       = nullptr;
-    PLastAttacker = nullptr;
+    PPet    = nullptr;
+    PParty  = nullptr;
+    PMaster = nullptr;
 
     StatusEffectContainer = std::make_unique<CStatusEffectContainer>(this);
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
@@ -901,7 +900,15 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/, DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
 {
     TracyZoneScoped;
-    PLastAttacker                            = attacker;
+    if (attacker)
+    {
+        lastAttackerId_.id     = attacker->id;
+        lastAttackerId_.targid = attacker->targid;
+    }
+    else
+    {
+        lastAttackerId_.clean();
+    }
     this->BattleHistory.lastHitTaken_atkType = attackType;
 
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
@@ -914,7 +921,7 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
             roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
         }
     }
-    else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
+    else if (attacker && attacker->objtype == TYPE_PC)
     {
         if (amount > 0)
         {
