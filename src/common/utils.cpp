@@ -134,8 +134,9 @@ uint8 worldAngle(const position_t& A, const position_t& B)
         return A.rotation;
     }
 
-    float radians = atan2f(B.z - A.z, B.x - A.x);
-    return static_cast<uint8>(radians * -(128.0f / M_PI));
+    float radians  = atan2f(B.z - A.z, B.x - A.x);
+    int16 rawAngle = static_cast<int16>(radians * -(128.0f / M_PI));
+    return static_cast<uint8>((rawAngle % 256 + 256) % 256);
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
