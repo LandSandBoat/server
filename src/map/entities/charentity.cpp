@@ -403,7 +403,7 @@ auto CCharEntity::getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket
     std::deque<std::unique_ptr<CBasicPacket>> PacketListCopy;
     for (const auto& packet : PacketList)
     {
-        PacketListCopy.emplace_back(std::make_unique<CBasicPacket>(packet));
+        PacketListCopy.emplace_back(packet->copy());
     }
     return PacketListCopy;
 }

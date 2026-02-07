@@ -37,6 +37,12 @@ struct GP_SERV_HEADER
 template <PacketS2C PacketId, typename Derived>
 class GP_SERV_PACKET : public CBasicPacket
 {
+public:
+    auto copy() const -> std::unique_ptr<CBasicPacket> override
+    {
+        return std::make_unique<Derived>(static_cast<const Derived&>(*this));
+    }
+
 protected:
     GP_SERV_PACKET()
     {

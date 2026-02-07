@@ -83,9 +83,9 @@ public:
     CBasicPacket& operator=(const CBasicPacket& other)     = delete;
     CBasicPacket& operator=(CBasicPacket&& other) noexcept = delete;
 
-    auto copy() -> std::unique_ptr<std::remove_pointer_t<decltype(this)>>
+    virtual auto copy() const -> std::unique_ptr<CBasicPacket>
     {
-        return std::make_unique<std::remove_pointer_t<decltype(this)>>(*this);
+        return std::make_unique<CBasicPacket>(*this);
     }
 
     auto getType() -> uint16
