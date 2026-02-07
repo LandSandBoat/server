@@ -1096,7 +1096,7 @@ void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     if (PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_BOLSTER))
     {
-        uint8 bolsterJPVal = dynamic_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JP_BOLSTER_EFFECT);
+        uint8 bolsterJPVal = static_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JP_BOLSTER_EFFECT);
         PPet->health.maxhp += (uint32)floor(PPet->health.maxhp * (0.03 * bolsterJPVal));
     }
 
@@ -1813,7 +1813,7 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         // spawn the luopan at the targets position with offsets from the action packet
         // this is calculated in the action packet to avoid incorrect placement after casting
         // m_ActionOffsetPos is a combination of targets pos + action offset pos
-        PPet->loc.p = dynamic_cast<CCharEntity*>(PMaster)->m_ActionOffsetPos;
+        PPet->loc.p = static_cast<CCharEntity*>(PMaster)->m_ActionOffsetPos;
     }
     else
     {
