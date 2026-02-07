@@ -2395,19 +2395,22 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             (PEminenceTarget->PParty && PTarget->PParty &&
              ((PEminenceTarget->PParty == PTarget->PParty) || (PEminenceTarget->PParty->m_PAlliance && PEminenceTarget->PParty->m_PAlliance == PTarget->PParty->m_PAlliance))))
         {
-            if (PSpell->isHeal())
+            if (auto* PCharEminence = dynamic_cast<CCharEntity*>(PEminenceTarget))
             {
-                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionResult.param));
-
-                // We know its an ally or self, if not self and leader matches, credit the RoE Objective
-                if (PEminenceTarget != PTarget && PEminenceTarget->objtype == TYPE_PC && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(PEminenceTarget)->profile.unity_leader == static_cast<CCharEntity*>(PTarget)->profile.unity_leader)
+                if (PSpell->isHeal())
                 {
-                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagram("heal", actionResult.param));
+                    roeutils::event(ROE_HEALALLY, PCharEminence, RoeDatagram("heal", actionResult.param));
+
+                    if (auto* PCharTarget = dynamic_cast<CCharEntity*>(PTarget);
+                        PCharTarget && PEminenceTarget != PTarget && PCharEminence->profile.unity_leader == PCharTarget->profile.unity_leader)
+                    {
+                        roeutils::event(ROE_HEAL_UNITYALLY, PCharEminence, RoeDatagram("heal", actionResult.param));
+                    }
                 }
-            }
-            else if (PEminenceTarget != PTarget && PSpell->isBuff() && actionResult.param)
-            {
-                roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagramList{});
+                else if (PEminenceTarget != PTarget && PSpell->isBuff() && actionResult.param)
+                {
+                    roeutils::event(ROE_BUFFALLY, PCharEminence, RoeDatagramList{});
+                }
             }
         }
 
