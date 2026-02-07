@@ -3100,6 +3100,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleParrySpikesDamage(this, PTarget, &actionResult, attack.GetDamage());
         }
 
+        const auto currentAttackType = attack.GetAttackType();
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
@@ -3120,12 +3121,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
 
         // Remove shuriken if Daken proc and Sange is up
-        if (attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN)
+        if (currentAttackType == PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             if (StatusEffectContainer && StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
             {
-                CCharEntity* PChar = dynamic_cast<CCharEntity*>(this);
-                CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+                auto*       PChar = dynamic_cast<CCharEntity*>(this);
+                const auto* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
                 if (PChar && PAmmo && PAmmo->isShuriken()) // Not sure how they wouldn't have a shuriken by this point, but just in case...
                 {
