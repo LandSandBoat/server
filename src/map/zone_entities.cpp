@@ -286,6 +286,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
     if (PPet == nullptr)
     {
         ShowError("CZone::InsertPET: entity is null");
+        return;
     }
 
     if (PPet->PInstance)
