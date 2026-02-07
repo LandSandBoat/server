@@ -541,6 +541,11 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     if (PEntity->objtype == TYPE_PC)
     {
         auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
+        if (!PChar)
+        {
+            return;
+        }
+
         if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
         {
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
@@ -575,7 +580,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             }
         }
 
-        m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
+        m_EnteredPlayers.erase(PEntity->id);
 
         if (leavecode != 255)
         {
