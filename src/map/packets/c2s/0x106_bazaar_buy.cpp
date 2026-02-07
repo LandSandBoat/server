@@ -73,7 +73,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
     {
         PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
 
-        if (settings::get<bool>("logging.DEBUG_BAZAARS") && PChar->id == PTarget->id)
+        if (settings::get<bool>("logging.DEBUG_BAZAARS"))
         {
             if (PChar->id == PTarget->id)
             {
