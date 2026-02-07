@@ -664,12 +664,16 @@ void CMobController::CastSpell(SpellID spellid)
 void CMobController::DoCombatTick(timer::time_point tick)
 {
     TracyZoneScopedC(0xFF0000);
-    if (PMob->m_OwnerID.targid != 0 && static_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid))->PClaimedMob != static_cast<CBattleEntity*>(PMob))
+    if (PMob->m_OwnerID.targid != 0)
     {
-        if (m_Tick >= m_DeclaimTime + 3s)
+        auto* POwner = dynamic_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid));
+        if (POwner && POwner->PClaimedMob != static_cast<CBattleEntity*>(PMob))
         {
-            PMob->m_OwnerID.clean();
-            PMob->updatemask |= UPDATE_STATUS;
+            if (m_Tick >= m_DeclaimTime + 3s)
+            {
+                PMob->m_OwnerID.clean();
+                PMob->updatemask |= UPDATE_STATUS;
+            }
         }
     }
 
