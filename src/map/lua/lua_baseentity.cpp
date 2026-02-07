@@ -1978,9 +1978,7 @@ bool CLuaBaseEntity::pathThrough(const sol::table& pointsTable, const sol::objec
         }
     }
 
-    CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
-
-    return PBattle->PAI->PathFind->PathThrough(std::move(points), flags);
+    return m_PBaseEntity->PAI->PathFind->PathThrough(std::move(points), flags);
 }
 
 /************************************************************************
@@ -2009,17 +2007,16 @@ bool CLuaBaseEntity::isFollowingPath()
 
 void CLuaBaseEntity::clearPath(const sol::object& pauseObj)
 {
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-    bool  pause   = pauseObj.is<bool>() ? pauseObj.as<bool>() : false;
+    bool pause = pauseObj.is<bool>() ? pauseObj.as<bool>() : false;
 
     // Stop onPath ticks for NPCs if this is true
     if (m_PBaseEntity->objtype == TYPE_NPC && pause)
     {
         m_PBaseEntity->SetLocalVar("pauseNPCPathing", 1);
     }
-    else if (PBattle->PAI->PathFind != nullptr)
+    else if (m_PBaseEntity->PAI->PathFind != nullptr)
     {
-        PBattle->PAI->PathFind->Clear();
+        m_PBaseEntity->PAI->PathFind->Clear();
     }
 }
 
