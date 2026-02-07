@@ -543,7 +543,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
         if (!PChar)
         {
-            return;
+            return false;
         }
 
         if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
