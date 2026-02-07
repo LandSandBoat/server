@@ -53,7 +53,7 @@ public:
     CItemUsable* GetItem() const;
 
     void InterruptItem(action_t& action);
-    void FinishItem(action_t& action);
+    auto FinishItem(action_t& action) -> bool;
 
 protected:
     bool HasMoved() const;

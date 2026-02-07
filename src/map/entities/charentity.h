@@ -651,7 +651,7 @@ public:
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
 
-    virtual void OnItemFinish(CItemState&, action_t&);
+    virtual auto OnItemFinish(CItemState&, action_t&) -> bool;
 
     auto getCharVar(const std::string& varName) const -> int32;
     auto getCharVarsWithPrefix(const std::string& prefix) -> std::vector<std::pair<std::string, int32>>;

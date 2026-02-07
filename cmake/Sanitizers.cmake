@@ -49,13 +49,13 @@ set(CMAKE_CXX_FLAGS_MSAN
         CACHE STRING "Flags used by the C++ compiler during MemorySanitizer builds."
         FORCE)
 
-# Undefinedbehavior
-# LeakSanitizer is a run-time undefined behavior detector.
+# UndefinedBehaviorSanitizer
+# UndefinedBehaviorSanitizer is a run-time undefined behavior detector.
 set(CMAKE_C_FLAGS_UBSAN
-        "-fsanitize=undefined"
+        "-fsanitize=undefined -fno-omit-frame-pointer -g -O2 -DNDEBUG"
         CACHE STRING "Flags used by the C compiler during UndefinedBehaviorSanitizer builds."
         FORCE)
 set(CMAKE_CXX_FLAGS_UBSAN
-        "-fsanitize=undefined"
+        "-fsanitize=undefined -fno-omit-frame-pointer -g -O2 -DNDEBUG"
         CACHE STRING "Flags used by the C++ compiler during UndefinedBehaviorSanitizer builds."
         FORCE)
