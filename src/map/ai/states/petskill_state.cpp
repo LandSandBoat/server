@@ -125,7 +125,14 @@ bool CPetSkillState::Update(timer::time_point tick)
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
     }
-    if (IsCompleted() && tick > m_finishTime && m_PEntity)
+
+    if (!m_PEntity)
+    {
+        ShowError("CPetSkillState: m_Pentity is nullptr");
+        return false;
+    }
+
+    if (IsCompleted() && tick > m_finishTime)
     {
         auto* PTarget = GetTarget();
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)

@@ -196,7 +196,13 @@ bool CMobSkillState::Update(timer::time_point tick)
         Complete();
     }
 
-    if (IsCompleted() && tick > m_finishTime && m_PEntity)
+    if (!m_PEntity)
+    {
+        ShowError("CMobSkillState: m_Pentity is nullptr");
+        return false;
+    }
+
+    if (IsCompleted() && tick > m_finishTime)
     {
         auto* PTarget = GetTarget();
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
