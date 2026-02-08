@@ -112,7 +112,7 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
                          PItemLinkshell->getSlotID());
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
 
         return;
@@ -221,6 +221,6 @@ void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEnt
         break;
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
 }

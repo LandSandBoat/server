@@ -196,6 +196,6 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

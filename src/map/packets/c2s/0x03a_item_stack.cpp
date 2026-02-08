@@ -96,5 +96,5 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
         }
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

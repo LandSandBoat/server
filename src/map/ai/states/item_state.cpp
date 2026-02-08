@@ -145,7 +145,7 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
     m_PItem->setSubType(ITEM_LOCKED);
 
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::NoSelect);
-    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
 }
 
 void CItemState::UpdateTarget(CBaseEntity* target)
@@ -253,7 +253,7 @@ void CItemState::Cleanup(timer::time_point tick)
     }
 
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(m_PItem, static_cast<CONTAINER_ID>(m_location), m_slot);
-    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
 }
 
 auto CItemState::CanChangeState() -> bool

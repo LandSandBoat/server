@@ -27,6 +27,8 @@
 #include "items/item_equipment.h"
 #include "zone.h"
 
+using Recalculate = xi::Flag<struct RecalculateTag>;
+
 struct Charge_t;
 enum class MissionLog : uint8_t;
 enum class QuestLog : uint8_t;
@@ -130,8 +132,7 @@ void   CheckEquipLogic(CCharEntity* PChar, SCRIPTTYPE ScriptType, uint32 param);
 void   SaveJobChangeGear(CCharEntity* PChar);
 void   LoadJobChangeGear(CCharEntity* PChar);
 void   EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
-void   UnequipItem(CCharEntity* PChar, uint8 equipSlotID,
-                   bool update = true); // call with update == false to prevent calls to UpdateHealth() - used for correct handling of stats on armor swaps
+void   UnequipItem(CCharEntity* PChar, uint8 equipSlotID, xi::Flag<struct RecalculateTag> recalculate = Recalculate::Yes);
 bool   hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID);
 void   RemoveSub(CCharEntity* PChar);
 bool   EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);

@@ -547,6 +547,9 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
         PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 
+    // Flush any batched equip changes after processing all incoming packets
+    PChar->flushEquipChanges();
+
     map_session_data->client_packet_id = SmallPD_Code;
 
     // Google Translate:

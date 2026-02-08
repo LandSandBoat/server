@@ -24,6 +24,7 @@
 #include "base.h"
 
 enum CONTAINER_ID : uint8;
+class CCharEntity;
 
 enum class GP_SERV_COMMAND_ITEM_SAME_STATE : uint8_t
 {
@@ -43,6 +44,6 @@ public:
         uint32_t                        Flags;        // PS2: (New; did not exist)
     };
 
-    GP_SERV_COMMAND_ITEM_SAME();
-    GP_SERV_COMMAND_ITEM_SAME(CONTAINER_ID id);
+    GP_SERV_COMMAND_ITEM_SAME(CCharEntity* PChar);
+    GP_SERV_COMMAND_ITEM_SAME(CONTAINER_ID id, CCharEntity* PChar);
 };

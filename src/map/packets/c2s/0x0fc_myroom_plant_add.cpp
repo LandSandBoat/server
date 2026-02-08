@@ -120,6 +120,6 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
 
         charutils::UpdateItem(PChar, MyroomAddCategory, MyroomAddItemIndex, -1);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

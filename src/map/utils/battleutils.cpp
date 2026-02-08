@@ -3963,7 +3963,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
         {
             // Futae Takes 2 of Your Tools
             charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
         else
         {
@@ -3979,7 +3979,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
             if (ConsumeTool && xirand::GetRandomNumber(100) > chance)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             }
         }
     }
@@ -6236,13 +6236,13 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
             charutils::UnequipItem(PChar, SLOT_AMMO);
             PChar->RequestPersist(CHAR_PERSIST::EQUIP);
             charutils::UpdateItem(PChar, loc, slot, -quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return true;
         }
         else
         {
             charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return false;
         }
     }

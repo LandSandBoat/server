@@ -181,7 +181,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             {
                 PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
                 PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             }
             else
             {
@@ -651,7 +651,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                 PChar->getName(), PChar->id, PItem->getName(), PItem->getID(), PostWorkNo);
 
             PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             PChar->UContainer->SetItem(PostWorkNo, nullptr);
             destroy(PItem);
         }

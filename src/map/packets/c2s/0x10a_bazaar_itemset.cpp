@@ -60,7 +60,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         PItem->setSubType((Price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, ItemIndex);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         DebugBazaarsFmt("Bazaar Interaction [Price Set] - Character: {}, Item: {}, Price: {}", PChar->name, PItem->getName(), Price);
     }

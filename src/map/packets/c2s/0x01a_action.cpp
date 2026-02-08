@@ -431,7 +431,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             if (luautils::OnChocoboDig(PChar))
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_DIG>(PChar));
             }
         }

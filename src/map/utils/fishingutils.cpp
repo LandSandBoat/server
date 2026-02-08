@@ -1356,13 +1356,13 @@ bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
             {
                 if (PBait->getQuantity() == 1)
                 {
-                    charutils::UnequipItem(PChar, SLOT_AMMO, false);
+                    charutils::UnequipItem(PChar, SLOT_AMMO);
                 }
                 charutils::UpdateItem(PChar, PBait->getLocationID(), PBait->getSlotID(), -1);
 
                 if (sendUpdate)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                 }
             }
         }
@@ -1390,11 +1390,11 @@ void RodBreak(CCharEntity* PChar)
     if (PRod->breakable && PRod->brokenRodId > 0)
     {
         BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
-        charutils::UnequipItem(PChar, SLOT_RANGED, false);
+        charutils::UnequipItem(PChar, SLOT_RANGED);
         uint8 location = PRanged->getLocationID();
         charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
         charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }
 

@@ -123,6 +123,6 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
     auditSale(PChar, itemId, quantity, basePrice);
     ShowInfo("GP_CLI_COMMAND_SHOP_SELL_SET: Player '%s' sold %u of itemID %u (Total: %u gil) [to VENDOR] ", PChar->getName(), quantity, itemId, cost);
     PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, itemId, quantity, MsgStd::Sell);
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     PChar->Container->setItem(PChar->Container->getExSize(), 0, -1, 0);
 }

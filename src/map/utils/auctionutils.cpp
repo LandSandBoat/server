@@ -267,7 +267,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
 
                         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
-                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
                         return true;
                     }
@@ -325,7 +325,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
         if (success)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return;
         }
     }

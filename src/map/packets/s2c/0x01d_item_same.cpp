@@ -21,22 +21,23 @@
 
 #include "0x01d_item_same.h"
 
+#include "entities/charentity.h"
 #include "item_container.h"
 
-GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME()
+GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     packet.State        = GP_SERV_COMMAND_ITEM_SAME_STATE::AllLoaded;
-    packet.padding00[0] = CONTAINER_ID::MAX_CONTAINER_ID; // This data appears to be used as the container index at times, but the client does not use any part of it at all.
-    packet.Flags        = 0x0003FFFF;
+    packet.padding00[0] = CONTAINER_ID::MAX_CONTAINER_ID;
+    packet.Flags        = PChar->inventorySyncState().getSyncedFlags();
 }
 
-GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(const CONTAINER_ID id)
+GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(const CONTAINER_ID id, CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     packet.State        = GP_SERV_COMMAND_ITEM_SAME_STATE::StillLoading;
-    packet.padding00[0] = id; // This data appears to be used as the container index at times, but the client does not use any part of it at all.
-    // TODO: Missing Flags
+    packet.padding00[0] = id;
+    packet.Flags        = PChar->inventorySyncState().getSyncedFlags();
 }

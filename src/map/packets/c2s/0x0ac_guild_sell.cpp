@@ -100,7 +100,7 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
             PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() + quantity);
             PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(
                 PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(), ItemNo, quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
     }
     // TODO: error messages!
