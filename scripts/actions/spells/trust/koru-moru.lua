@@ -23,22 +23,22 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 50 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
 
-    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.HASTE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE })
+    mob:addGambit(ai.t.MELEE, { ai.c.NOT_STATUS, xi.effect.HASTE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE })
 
-    mob:addGambit(ai.t.MASTER, {
+    mob:addGambit(ai.t.CASTER, {
         { ai.c.NOT_STATUS, xi.effect.REFRESH },
         { ai.c.NOT_STATUS, xi.effect.SUBLIMATION_ACTIVATED },
         { ai.c.NOT_STATUS, xi.effect.SUBLIMATION_COMPLETE },
-    }, { ai.r.MA, ai.s.MASTER, xi.magic.spellFamily.REFRESH })
+    }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH })
 
-    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.REFRESH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH })
+    mob:addGambit(ai.t.TANK, { ai.c.NOT_STATUS, xi.effect.REFRESH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH })
 
-    mob:addGambit(ai.t.MASTER, {
+    mob:addGambit(ai.t.RANGED, {
             { ai.c.NOT_STATUS, xi.effect.FLURRY_II }, -- xi.effect.FLURRY_II is not a typo
             { ai.c.NOT_STATUS, xi.effect.HASTE }, -- No overwriting Haste
-        }, { ai.r.MA, ai.s.MASTER, xi.magic.spellFamily.FLURRY })
+        }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.FLURRY })
 
-    mob:addGambit(ai.t.MASTER, { ai.c.NOT_STATUS, xi.effect.PHALANX }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX_II })
+    mob:addGambit(ai.t.TOP_ENMITY, { ai.c.NOT_STATUS, xi.effect.PHALANX }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX_II })
 
     mob:addGambit(ai.t.TARGET, { ai.c.STATUS_FLAG, xi.effectFlag.DISPELABLE }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.DISPEL })
 
