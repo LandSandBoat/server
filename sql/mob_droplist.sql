@@ -13245,6 +13245,7 @@ INSERT INTO `mob_droplist` VALUES (1616,0,0,1000,940,@RARE);    -- Revival Tree 
 -- ZoneID:  51 - Grand Marid
 -- ZoneID:  51 - Marid
 -- ZoneID:  52 - Grand Marid
+-- ZoneID:  52 - Marid
 INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2151,@COMMON); -- Marid Hide (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1617,0,0,1000,2166,@RARE);   -- Lock Of Marid Hair (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1617,2,0,1000,2155,0);       -- Lesser Chigoe (Steal)
