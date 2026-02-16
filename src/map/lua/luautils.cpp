@@ -24,6 +24,7 @@
 #include "common/application.h"
 #include "common/filewatcher.h"
 #include "common/ipc.h"
+#include "common/lua.h"
 #include "common/logging.h"
 #include "common/settings.h"
 #include "common/timer.h"
@@ -130,6 +131,26 @@ void ReportErrorToPlayer(CBaseEntity* PEntity, const std::string& message = "") 
         ShowError(e.what());
     }
 }
+
+namespace
+{
+// sol::error assumes the error object is a string. Lua allows error(<any>), so we must be resilient.
+auto safeLuaErrorToString(const sol::protected_function_result& result) -> std::string
+{
+    lua_State* L = result.lua_state();
+    if (!L)
+    {
+        return "lua error (no lua state)";
+    }
+
+    // When a protected function fails, the error object is on top of the stack.
+    // luaL_tolstring pushes a string representation (without popping the original).
+    const char* s = luaL_tolstring(L, -1, nullptr);
+    std::string out = s ? s : "lua error (non-string)";
+    lua_pop(L, 1); // pop the string representation
+    return out;
+}
+} // namespace
 
 namespace luautils
 {
@@ -2168,9 +2189,9 @@ int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     auto result = onTriggerFramework(PChar, PNpc, onTrigger);
     if (!result.valid())
     {
-        sol::error err = result;
-        ShowError("luautils::onTrigger: %s", err.what());
-        ReportErrorToPlayer(PChar, err.what());
+        const auto errStr = safeLuaErrorToString(result);
+        ShowError("luautils::onTrigger: %s", errStr);
+        ReportErrorToPlayer(PChar, errStr);
         return -1;
     }
 
@@ -4426,16 +4447,98 @@ auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
 {
     TracyZoneScoped;
 
-    auto instanceData = instanceutils::GetInstanceData(instanceId);
+    int stage = 0;
 
-    auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
-    if (!cachedInstanceScript.valid())
+    try
     {
-        ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d", instanceId);
-        return sol::lua_nil;
-    }
+        stage = 1;
+        if (!instanceutils::IsValidInstanceID(instanceId))
+        {
+            ShowError("luautils::GetCachedInstanceScript: Invalid instance ID: %d", instanceId);
+            return lua.create_table();
+        }
 
-    return cachedInstanceScript;
+        stage = 2;
+        const auto instanceData = instanceutils::GetInstanceData(instanceId);
+
+        // Resolve cache path safely without chained table indexing.
+        auto tryGetCached = [&](sol::table& outTable) -> bool
+        {
+            sol::object xiObj = lua["xi"];
+            if (!xiObj.valid() || xiObj.get_type() != sol::type::table)
+            {
+                return false;
+            }
+
+            auto xiTable = xiObj.as<sol::table>();
+
+            auto zonesObj = xiTable.raw_get<sol::object>("zones");
+            if (!zonesObj.valid() || zonesObj.get_type() != sol::type::table)
+            {
+                return false;
+            }
+
+            auto zonesTable = zonesObj.as<sol::table>();
+
+            auto zoneObj = zonesTable.raw_get<sol::object>(instanceData.instance_zone_name);
+            if (!zoneObj.valid() || zoneObj.get_type() != sol::type::table)
+            {
+                return false;
+            }
+
+            auto zoneTable = zoneObj.as<sol::table>();
+
+            auto instancesObj = zoneTable.raw_get<sol::object>("instances");
+            if (!instancesObj.valid() || instancesObj.get_type() != sol::type::table)
+            {
+                return false;
+            }
+
+            auto instancesTable = instancesObj.as<sol::table>();
+
+            auto scriptObj = instancesTable.raw_get<sol::object>(instanceData.instance_name);
+            if (!scriptObj.valid() || scriptObj.get_type() != sol::type::table)
+            {
+                return false;
+            }
+
+            outTable = scriptObj.as<sol::table>();
+            return true;
+        };
+
+        sol::table cached = lua.create_table();
+        stage             = 3;
+        if (tryGetCached(cached))
+        {
+            return cached;
+        }
+
+        // Under `xi_map --lazy`, instance scripts can be missing from cache at the time they're first referenced
+        // (e.g. when interacting with an entrance NPC in another zone). Try to cache the instance script on demand.
+        stage = 4;
+        CacheLuaObjectFromFile(instanceData.filename, true);
+
+        stage = 5;
+        if (!tryGetCached(cached))
+        {
+            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d (%s)",
+                      instanceId,
+                      instanceData.filename);
+            return lua.create_table();
+        }
+
+        return cached;
+    }
+    catch (const std::exception& e)
+    {
+        ShowError("luautils::GetCachedInstanceScript: exception for %d (stage %d): %s", instanceId, stage, e.what());
+        return lua.create_table();
+    }
+    catch (...)
+    {
+        ShowError("luautils::GetCachedInstanceScript: unknown exception for %d (stage %d)", instanceId, stage);
+        return lua.create_table();
+    }
 }
 
 void OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance)

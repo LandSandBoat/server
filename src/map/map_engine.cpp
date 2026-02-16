@@ -303,9 +303,12 @@ void MapEngine::do_init()
 
     zoneutils::Initialize(mapIPP, engineConfig_.lazyZones, !engineConfig_.isTestServer);
 
+    // NOTE: `--lazy` skips loading zones up-front, but instance metadata is still required
+    // for entrances (Assault/Salvage/Nyzul/etc.) to function.
+    instanceutils::LoadInstanceList(mapIPP);
+
     if (!engineConfig_.lazyZones)
     {
-        instanceutils::LoadInstanceList(mapIPP);
         CTransportHandler::getInstance()->InitializeTransport(mapIPP);
     }
 

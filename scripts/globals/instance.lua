@@ -306,8 +306,26 @@ end
 
 -- Party leader registering
 local checkRegistryReqs = function(player, instanceId)
-    local instanceObj = GetCachedInstanceScript(instanceId)
-    if type(instanceObj.registryRequirements) == 'function' then
+    -- Temporary hard guard: 6900 (Leujaoam Cleansing) throws from GetCachedInstanceScript in current runtime.
+    -- Keep entry functional by evaluating the mission requirements directly.
+    if instanceId == 6900 then
+        return player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and
+            player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
+            player:getCharVar('assaultEntered') == 0 and
+            player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+            player:getMainLvl() > 50
+    end
+
+    local ok, instanceObj = pcall(GetCachedInstanceScript, instanceId)
+    if not ok then
+        print('xi.instance: checkReqs: GetCachedInstanceScript failed for instance: ' .. instanceId .. ' error: ' .. tostring(instanceObj))
+        return false
+    end
+
+    if instanceObj == nil then
+        print('xi.instance: checkReqs: instance object is nil for instance: ' .. instanceId)
+        return false
+    elseif type(instanceObj.registryRequirements) == 'function' then
         return instanceObj.registryRequirements(player)
     else
         print('xi.instance: checkReqs: registryRequirements function not set for instance: ' .. instanceId)
@@ -317,8 +335,24 @@ end
 
 -- Further players joining
 local checkEntryReqs = function(player, instanceId)
-    local instanceObj = GetCachedInstanceScript(instanceId)
-    if type(instanceObj.entryRequirements) == 'function' then
+    -- Same guard as registryRequirements for 6900 while GetCachedInstanceScript is unstable for this ID.
+    if instanceId == 6900 then
+        return player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and
+            player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
+            player:getCharVar('assaultEntered') == 0 and
+            player:getMainLvl() > 50
+    end
+
+    local ok, instanceObj = pcall(GetCachedInstanceScript, instanceId)
+    if not ok then
+        print('xi.instance: checkReqs: GetCachedInstanceScript failed for instance: ' .. instanceId .. ' error: ' .. tostring(instanceObj))
+        return false
+    end
+
+    if instanceObj == nil then
+        print('xi.instance: checkReqs: instance object is nil for instance: ' .. instanceId)
+        return false
+    elseif type(instanceObj.entryRequirements) == 'function' then
         return instanceObj.entryRequirements(player)
     else
         print('xi.instance: checkReqs: entryRequirements function not set for instance: ' .. instanceId)

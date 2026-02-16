@@ -1016,6 +1016,12 @@ end
 function CBaseEntity:getItems(location)
 end
 
+---@param whitelistTable table number配列（例: `{ 4166, 1234 }`）または `{ [4166]=true, [1234]=true }`
+---@param price integer?
+---@return table posted_stacks, posted_singles, skipped, failed, whitelist_count, price, error?
+function CBaseEntity:ahPostWhitelist(whitelistTable, price)
+end
+
 ---@param size integer
 ---@param arg1 integer?
 ---@return nil

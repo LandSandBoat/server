@@ -21,6 +21,8 @@
 
 #include "0x031_recipe.h"
 
+#include <fmt/format.h>
+
 namespace
 {
 
@@ -117,7 +119,7 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
             const uint8 minSkill       = calculatedRank * 10;
             const uint8 maxSkill       = (calculatedRank + 1) * 10;
 
-            const auto query = std::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
+            const auto query = fmt::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
                                            "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
                                            "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
@@ -144,7 +146,7 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                 maxSkill = skillLevel;
             }
 
-            const auto query = std::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
+            const auto query = fmt::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
                                            "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
                                            "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
@@ -173,7 +175,7 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                 maxSkill = skillLevel;
             }
 
-            const auto query = std::format("SELECT Result FROM synth_recipes "
+            const auto query = fmt::format("SELECT Result FROM synth_recipes "
                                            "INNER JOIN item_basic ON Result = item_basic.itemid "
                                            "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
                                            "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 17",

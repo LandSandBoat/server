@@ -251,13 +251,14 @@ public:
     bool   addTempItem(uint16 itemID, const sol::object& arg1);
     uint8  getWornUses(uint16 itemID);                                     // Check if the item is already worn
     uint8  incrementItemWear(uint16 itemID);                               // Increment the item's worn value and returns it
-    auto   findItem(uint16 itemID, const sol::object& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
-    auto   findItems(uint16 itemID, const sol::object& location) -> sol::table;
-    auto   getItems(const sol::object& location) -> sol::table;
-
-    void createShop(uint8 size, const sol::object& arg1);
-    void addShopItem(uint16 itemID, double rawPrice, const sol::object& arg2, const sol::object& arg3);
-    auto getCurrentGPItem(uint8 guildId) const -> std::tuple<uint16, uint16>;
+     auto   findItem(uint16 itemID, const sol::object& location) -> CItem*; // Like hasItem, but returns the item object (nil if not found)
+     auto   findItems(uint16 itemID, const sol::object& location) -> sol::table;
+     auto   getItems(const sol::object& location) -> sol::table;
+     auto   ahPostWhitelist(const sol::table& whitelistTable, const sol::object& priceObj) -> sol::table; // ホワイトリストにあるアイテムを競売へ出品（GM用）
+ 
+     void createShop(uint8 size, const sol::object& arg1);
+     void addShopItem(uint16 itemID, double rawPrice, const sol::object& arg2, const sol::object& arg3);
+     auto getCurrentGPItem(uint8 guildId) const -> std::tuple<uint16, uint16>;
     bool breakLinkshell(const std::string& lsname);
     bool addLinkpearl(const std::string& lsname, bool equip);
 

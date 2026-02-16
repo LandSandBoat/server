@@ -155,7 +155,7 @@ auto PacketValidator::hasZoneMiscFlag(const CCharEntity* PChar, const ZONEMISC f
 {
     if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(flag))
     {
-        result_.addError(std::format("Zone {} does not allow misc flag {}.", PChar->loc.zone->getName(), static_cast<uint16_t>(flag)));
+        result_.addError(fmt::format("Zone {} does not allow misc flag {}.", PChar->loc.zone->getName(), static_cast<uint16_t>(flag)));
     }
 
     return *this;

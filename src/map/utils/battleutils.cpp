@@ -31,6 +31,8 @@
 #include <cstring>
 #include <unordered_map>
 
+#include <fmt/format.h>
+
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
 
@@ -115,7 +117,7 @@ void LoadSkillTable()
     {
         for (uint32 y = 0; y < 14; ++y)
         {
-            g_SkillTable[x][y] = rset->get<uint16>(std::format("r{}", y));
+            g_SkillTable[x][y] = rset->get<uint16>(fmt::format("r{}", y));
         }
 
         ++x;

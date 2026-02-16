@@ -21,9 +21,10 @@
 
 #pragma once
 
+#include <fmt/format.h>
+
 #include "magic_enum/magic_enum.hpp"
 #include "zone.h"
-#include <format>
 #include <set>
 
 enum LSTYPE : std::uint8_t;
@@ -116,7 +117,7 @@ public:
 
         if (val < minVal || val > maxVal)
         {
-            result_.addError(std::format("{} out of range: {} not in [{}, {}]",
+            result_.addError(fmt::format("{} out of range: {} not in [{}, {}]",
                                          fieldName,
                                          val,
                                          minVal,
@@ -133,7 +134,7 @@ public:
         const auto divVal = static_cast<T>(divisor);
         if (value % divVal != 0)
         {
-            result_.addError(std::format("{} is not a multiple of {}.", fieldName, divVal));
+            result_.addError(fmt::format("{} is not a multiple of {}.", fieldName, divVal));
         }
 
         return *this;
@@ -147,11 +148,11 @@ public:
         {
             if constexpr (std::is_enum_v<T>)
             {
-                result_.addError(std::format("{} value {} is not allowed.", fieldName, static_cast<std::underlying_type_t<T>>(value)));
+                result_.addError(fmt::format("{} value {} is not allowed.", fieldName, static_cast<std::underlying_type_t<T>>(value)));
             }
             else
             {
-                result_.addError(std::format("{} value {} is not allowed.", fieldName, value));
+                result_.addError(fmt::format("{} value {} is not allowed.", fieldName, value));
             }
         }
 
@@ -168,7 +169,7 @@ public:
         if (!magic_enum::enum_contains<E>(value))
         {
             constexpr std::string_view enumTypeName = magic_enum::enum_type_name<E>();
-            result_.addError(std::format("{} not a valid {} value.", value, enumTypeName));
+            result_.addError(fmt::format("{} not a valid {} value.", value, enumTypeName));
         }
 
         return *this;
@@ -185,7 +186,7 @@ public:
         {
             constexpr std::string_view enumTypeName    = magic_enum::enum_type_name<E>();
             auto                       underlyingValue = static_cast<std::underlying_type_t<E>>(value);
-            result_.addError(std::format("{} not a valid {} value.", underlyingValue, enumTypeName));
+            result_.addError(fmt::format("{} not a valid {} value.", underlyingValue, enumTypeName));
         }
 
         return *this;

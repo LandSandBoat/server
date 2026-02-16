@@ -16,6 +16,8 @@
 
 #include <string.h>
 
+#include <fmt/format.h>
+
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "job_points.h"
@@ -115,7 +117,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         job->totalJpSpent += cost;
         jobPoint->value++;
 
-        const auto query = std::format("UPDATE char_job_points SET jptype{}=?, job_points=?, job_points_spent=? WHERE charid=? AND jobid=?", JobPointTypeIndex(jobPoint->id));
+        const auto query = fmt::format("UPDATE char_job_points SET jptype{}=?, job_points=?, job_points_spent=? WHERE charid=? AND jobid=?", JobPointTypeIndex(jobPoint->id));
         db::preparedStmt(query, jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);

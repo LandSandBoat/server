@@ -38,6 +38,7 @@
 #include "enums/weather.h"
 #include "items.h"
 #include "lua/lua_loot.h"
+#include "utils/serverutils.h"
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
@@ -664,6 +665,8 @@ void CMobEntity::Spawn()
     m_ItemStolen     = false;
     m_ItemDespoiled  = false;
     m_DropItemTime   = 1000ms;
+    // GMが与ダメージしたかどうかのフラグ（モブごと / Spawn毎に初期化）
+    SetLocalVar("[gmdrop100]touched", 0);
     animationsub     = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 
@@ -955,6 +958,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
     if (!getMobMod(MOBMOD_NO_DROPS) && dropList != nullptr && (!dropList->Items.empty() || !dropList->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
+        // 通常ドロップ(mob_droplist相当)のみを対象にする。
+        // GMが与ダメージしたモブの場合に限り、ドロップ判定(乱数)をスキップして成功扱いにする（DropRate>0のみ）。
+        const bool gmDrop100Enabled = serverutils::GetVolatileServerVar("GMDROP100_ENABLED") != 0;
+        const bool gmDrop100Touched = GetLocalVar("[gmdrop100]touched") != 0;
+        const bool forceDrop100     = gmDrop100Enabled && gmDrop100Touched;
+
         // THLvl determines the drop rate.
         auto thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
 
@@ -979,7 +988,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
 
             // Determine if this group should drop an item.
-            if (groupDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (groupDropRate > 0 && (forceDrop100 || (1 + xirand::GetRandomNumber(10000)) <= groupDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER")))
             {
                 // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                 // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
@@ -1008,7 +1017,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 itemDropRate = thDropRateFunction(m_THLvl, itemDropRate);
             }
 
-            if (itemDropRate > 0 && (1 + xirand::GetRandomNumber(10000)) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER"))
+            if (itemDropRate > 0 && (forceDrop100 || (1 + xirand::GetRandomNumber(10000)) <= itemDropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER")))
             {
                 AddItemToPool(item.ItemID);
             }

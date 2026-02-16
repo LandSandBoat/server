@@ -40,6 +40,9 @@
 #include "utils/zoneutils.h"
 
 CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
+    : m_PInstance(nullptr)
+    , m_PZone(nullptr)
+    , m_PRequester(nullptr)
 {
     TracyZoneScoped;
 
@@ -65,6 +68,12 @@ CInstanceLoader::~CInstanceLoader()
 CInstance* CInstanceLoader::LoadInstance() const
 {
     TracyZoneScoped;
+
+    if (!m_PInstance || !m_PZone || !m_PRequester)
+    {
+        ShowError("CInstanceLoader::LoadInstance: loader is not initialized.");
+        return nullptr;
+    }
 
     auto rset = db::preparedStmt("SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, "
                                  "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, "

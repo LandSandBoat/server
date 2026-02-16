@@ -22,6 +22,8 @@
 #ifndef _SEARCH_H_
 #define _SEARCH_H_
 
+#include <optional>
+
 #include "common/cbasetypes.h"
 
 struct search_req

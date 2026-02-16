@@ -21,6 +21,8 @@
 
 #include "0x0b5_chat_std.h"
 
+#include <fmt/format.h>
+
 #include "aman.h"
 #include "command_handler.h"
 #include "common/async.h"
@@ -42,7 +44,7 @@ namespace
 
 const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const std::string& rawMessage)
 {
-    const std::string auditConfigKey = std::format("map.AUDIT_{}", chatType);
+    const std::string auditConfigKey = fmt::format("map.AUDIT_{}", chatType);
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>(auditConfigKey))
     {
         const auto& name   = PChar->getName();

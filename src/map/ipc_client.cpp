@@ -829,11 +829,12 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
         float x = 0.0f;
         float y = 0.0f;
         float z = 0.0f;
+        uint8 rot = PEntity->loc.p.rotation;
 
         if ((message.entityType & TYPE_MOB) && !isSpawned)
         {
             // If entity not spawned, go to default location as listed in database
-            const auto rset = db::preparedStmt("SELECT pos_x, pos_y, pos_z FROM mob_spawn_points WHERE mobid = ?", PEntity->id);
+            const auto rset = db::preparedStmt("SELECT pos_x, pos_y, pos_z, pos_rot FROM mob_spawn_points WHERE mobid = ?", PEntity->id);
             if (rset && rset->rowsCount())
             {
                 while (rset->next())
@@ -841,6 +842,7 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
                     x = rset->get<float>("pos_x");
                     y = rset->get<float>("pos_y");
                     z = rset->get<float>("pos_z");
+                    rot = rset->get<uint8>("pos_rot");
                 }
             }
         }
@@ -852,7 +854,9 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
             z = PEntity->loc.p.z;
         }
 
-        const bool shouldWarp = message.warp && isSpawned;
+        // For PCs, only warp if they're spawned (zoning chars can have transient state).
+        // For NPC/MOB, allow warping to known coordinates even if not spawned, unless spawnedOnly is set.
+        const bool shouldWarp = (message.entityType & TYPE_PC) ? (message.warp && isSpawned) : (message.warp && (!message.spawnedOnly || isSpawned));
 
         const auto moghouseId = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity)->m_moghouseID : 0;
 
@@ -865,13 +869,86 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
             .x           = x,
             .y           = y,
             .z           = z,
-            .rot         = PEntity->loc.p.rotation,
+            .rot         = rot,
             .moghouseId  = moghouseId,
         });
     }
     else
     {
-        ShowWarningFmt("EntityInformationRequest for entity {} failed", message.targetId);
+        // With --lazy, the target entity's zone can be unloaded, so zoneutils::GetEntity() may fail.
+        // Fall back to database coordinates so GM tools like !gotoid still work.
+
+        if (message.entityType & TYPE_PC)
+        {
+            ShowWarningFmt("EntityInformationRequest for PC {} failed", message.targetId);
+            return;
+        }
+
+        const uint16 zoneId = (message.targetId >> 12) & 0x0FFF;
+
+        bool  found = false;
+        float x     = 0.0f;
+        float y     = 0.0f;
+        float z     = 0.0f;
+        uint8 rot   = 0;
+        uint8 type  = message.entityType;
+
+        if (message.entityType & TYPE_NPC)
+        {
+            const auto rset = db::preparedStmt("SELECT pos_x, pos_y, pos_z, pos_rot FROM npc_list WHERE npcid = ?", message.targetId);
+            if (rset && rset->rowsCount())
+            {
+                rset->next();
+                x     = rset->get<float>("pos_x");
+                y     = rset->get<float>("pos_y");
+                z     = rset->get<float>("pos_z");
+                rot   = rset->get<uint8>("pos_rot");
+                type  = TYPE_NPC;
+                found = true;
+            }
+        }
+
+        if (!found && (message.entityType & TYPE_MOB))
+        {
+            const auto rset = db::preparedStmt("SELECT pos_x, pos_y, pos_z, pos_rot FROM mob_spawn_points WHERE mobid = ?", message.targetId);
+            if (rset && rset->rowsCount())
+            {
+                rset->next();
+                x     = rset->get<float>("pos_x");
+                y     = rset->get<float>("pos_y");
+                z     = rset->get<float>("pos_z");
+                rot   = rset->get<uint8>("pos_rot");
+                type  = TYPE_MOB;
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            ShowWarningFmt("EntityInformationRequest for entity {} failed", message.targetId);
+            return;
+        }
+
+        if (x == 0.0f && y == 0.0f && z == 0.0f)
+        {
+            ShowWarningFmt("EntityInformationRequest for entity {} has no coordinates (zone {})", message.targetId, zoneId);
+            return;
+        }
+
+        const bool shouldWarp = message.warp && !message.spawnedOnly;
+
+        message::send(ipc::EntityInformationResponse{
+            .requesterId = message.requesterId,
+            .targetId    = message.targetId,
+            .entityType  = type,
+            .warp        = shouldWarp,
+            .zoneId      = zoneId,
+            .x           = x,
+            .y           = y,
+            .z           = z,
+            .rot         = rot,
+            .moghouseId  = 0,
+        });
     }
 }
 

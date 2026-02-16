@@ -40,13 +40,22 @@ std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
 
 void LoadInstanceList(IPP mapIPP)
 {
+    // NOTE:
+    // - With `--lazy`, not all zones are instantiated up-front, so we must NOT rely on zoneutils::GetZone()
+    //   to resolve zone names here.
+    // - We also avoid caching instance lua at startup; the loader and GetCachedInstanceScript handle it on-demand.
     const auto rset = db::preparedStmt("SELECT instanceid,instance_name,instance_zone,entrance_zone,"
                                        "time_limit,start_x,start_y,start_z,"
                                        "start_rot,instance_list.music_day,instance_list.music_night,instance_list.battlesolo,"
-                                       "instance_list.battlemulti,zone_settings.name AS zone_name "
-                                       "FROM instance_list INNER JOIN zone_settings "
-                                       "ON instance_zone = zone_settings.zoneid "
-                                       "WHERE IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)",
+                                       "instance_list.battlemulti,"
+                                       "instance_zone_settings.name AS instance_zone_name,"
+                                       "entrance_zone_settings.name AS entrance_zone_name "
+                                       "FROM instance_list "
+                                       "INNER JOIN zone_settings AS instance_zone_settings "
+                                       "ON instance_zone = instance_zone_settings.zoneid "
+                                       "INNER JOIN zone_settings AS entrance_zone_settings "
+                                       "ON entrance_zone = entrance_zone_settings.zoneid "
+                                       "WHERE IF(? <> 0, ? = instance_zone_settings.zoneip AND ? = instance_zone_settings.zoneport, TRUE)",
                                        mapIPP.getIP(),
                                        mapIPP.getIPString(),
                                        mapIPP.getPort());
@@ -85,15 +94,12 @@ void LoadInstanceList(IPP mapIPP)
         }
 
         // Meta data
-        data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->getName();
-        data.entrance_zone_name = rset->get<std::string>("zone_name");
+        data.instance_zone_name = rset->get<std::string>("instance_zone_name");
+        data.entrance_zone_name = rset->get<std::string>("entrance_zone_name");
         data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
         // Add to data cache
         InstanceData[data.id] = data;
-
-        // Add to Lua cache
-        luautils::CacheLuaObjectFromFile(data.filename);
     }
 }
 
@@ -106,15 +112,31 @@ void CheckInstance()
     if (!LoadQueue.empty())
     {
         auto requestPair = LoadQueue.front();
-        LoadQueue.pop();
 
         auto* PRequester = zoneutils::GetChar(requestPair.first);
         if (!PRequester)
         {
+            LoadQueue.pop();
             ShowError("Encountered invalid requester id when loading instance!");
             return;
         }
         auto instanceId = requestPair.second;
+
+        if (!IsValidInstanceID(instanceId))
+        {
+            LoadQueue.pop();
+            ShowError("Encountered invalid instance id when loading instance! (%u)", instanceId);
+            return;
+        }
+
+        auto instanceData = GetInstanceData(instanceId);
+        // Under --lazy, instance zones may not be loaded yet. Keep the request queued until ready.
+        if (!zoneutils::IsZoneReady(instanceData.instance_zone))
+        {
+            return;
+        }
+
+        LoadQueue.pop();
 
         auto loader = std::make_unique<CInstanceLoader>(instanceId, PRequester);
         loader->LoadInstance();

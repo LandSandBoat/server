@@ -37,6 +37,7 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
+#include "entities/charentity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
@@ -54,6 +55,27 @@
 #include "utils/puppetutils.h"
 #include "utils/zoneutils.h"
 #include "weapon_skill.h"
+
+namespace
+{
+// GMの「攻撃した」を「与ダメージが発生した」として扱う。
+// attacker がペット/トラスト等の場合は PMaster を辿って GM本人かを判定する。
+auto IsGMAttackerOrMaster(const CBattleEntity* attacker) -> bool
+{
+    for (int i = 0; i < 8 && attacker != nullptr; i++)
+    {
+        if (attacker->objtype == TYPE_PC)
+        {
+            const auto* PChar = static_cast<const CCharEntity*>(attacker);
+            return PChar->m_GMlevel > 0;
+        }
+
+        attacker = attacker->PMaster;
+    }
+
+    return false;
+}
+} // namespace
 
 CBattleEntity::CBattleEntity()
 {
@@ -912,6 +934,15 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
     this->BattleHistory.lastHitTaken_atkType = attackType;
 
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
+
+    // GMが与ダメージしたモブのみ、ドロップ率100%の対象にする（フラグをモブ側に立てる）
+    if (amount > 0 && this->objtype == TYPE_MOB && attacker != nullptr)
+    {
+        if (IsGMAttackerOrMaster(attacker))
+        {
+            this->SetLocalVar("[gmdrop100]touched", 1);
+        }
+    }
 
     // RoE Damage Taken Trigger
     if (this->objtype == TYPE_PC)

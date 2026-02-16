@@ -6,6 +6,20 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+
+    -- `xi_map --lazy` 運用では、サーバ起動時点で当該ゾーンが未ロードのことがある。
+    -- その場合 SeasonalEvent 側の動的NPC生成がスキップされ得るため、ゾーン初期化時にも生成を促す。
+    if
+        xi.events and
+        xi.events.echadRingGiveaway and
+        xi.events.echadRingGiveaway.showEntities and
+        (
+            xi.events.echadRingGiveaway.enabledCheck == nil or
+            xi.events.echadRingGiveaway.enabledCheck()
+        )
+    then
+        xi.events.echadRingGiveaway.showEntities(true)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
