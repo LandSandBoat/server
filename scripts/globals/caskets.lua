@@ -624,6 +624,7 @@ xi.caskets.onTrigger = function(player, npc)
     local locked            = npc:getLocalVar('[caskets]LOCKED')      -- enter two-digit combination (10~99).
     local chestOwner        = npc:getLocalVar('[caskets]PARTYID')     -- the id of the party that has rights to the chest.
     local leaderId          = player:getLeaderID()
+    local gmBypass          = player:getGMLevel() > 0
     --local aumentflag      = 0x0202                                  -- Used for Evoliths (not implemented yet).
     local zone              = npc:getZone()
     -- Get a list of all entities in this zone that have the name 'Treasure_Casket'
@@ -640,8 +641,13 @@ xi.caskets.onTrigger = function(player, npc)
     local failedAtempts     = npc:getLocalVar('[caskets]FAILED_ATEMPTS')
     local remainingAttempts = attemptsAllowed - failedAtempts
 
-    if leaderId ~= chestOwner then
+    if not gmBypass and leaderId ~= chestOwner then
         return
+    end
+
+    if gmBypass and locked ~= 0 then
+        npc:setLocalVar('[caskets]LOCKED', 0)
+        locked = 0
     end
 
     getDrops(npc, dropType, player:getZoneID())
@@ -696,12 +702,13 @@ xi.caskets.onTrade = function(player, npc, trade)
     local correctNumber     = npc:getLocalVar('[caskets]CORRECT_NUM')
     local chestOwner        = npc:getLocalVar('[caskets]PARTYID')         -- the id of the player, party or alliance that has rights to the chest.
     local leaderId          = player:getLeaderID()
+    local gmBypass          = player:getGMLevel() > 0
 
     -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get
     -- around this restriction. Strip invisible to make sure that case is covered.
     player:delStatusEffect(xi.effect.INVISIBLE)
 
-    if leaderId ~= chestOwner then
+    if not gmBypass and leaderId ~= chestOwner then
         return
     end
 

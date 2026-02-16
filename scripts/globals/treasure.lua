@@ -2006,8 +2006,73 @@ end
 xi.treasure.onTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local ID     = zones[zoneId]
+    local isGM   = player:getGMLevel() > 0
 
     if npc:getLocalVar('opened') == 0 then
+        if isGM then
+            local containerType = npcTable[npc:getName()]
+            local treasureLevel = levelTable[zoneId][containerType]
+            local itemTable     = lootTable[zoneId][containerType]
+
+            -- GM bypass: allow opening without trading keys/tools.
+            if treasureLevel and itemTable then
+                if GetSystemTime() < npc:getLocalVar('illusionCooldown') then
+                    player:timer(2000, function(playerEntity)
+                        playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 6)
+                        moveTreasure(npc, respawnType.REGULAR)
+                    end)
+                    return
+                end
+
+                local roll   = math.random(1, 1000)
+                local itemId = xi.item.NONE
+                local weight = 0
+                for i = 1, #itemTable do
+                    weight = weight + itemTable[i][2]
+                    if roll <= weight then
+                        itemId = itemTable[i][1]
+                        break
+                    end
+                end
+
+                if itemId == xi.item.NONE then
+                    kneelBeforeChest(player, npc)
+
+                    player:timer(2000, function(playerEntity)
+                        playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+                        handleGilDistribution(playerEntity, treasureLevel)
+                        npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
+                        moveTreasure(npc, respawnType.REGULAR)
+                    end)
+
+                    player:timer(4000, function(playerEntity)
+                        playerEntity:setFreezeFlag(false)
+                    end)
+                else
+                    kneelBeforeChest(player, npc)
+
+                    player:timer(2000, function(playerEntity)
+                        playerEntity:addTreasure(itemId, npc)
+                        playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
+                        npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
+                        moveTreasure(npc, respawnType.REGULAR)
+                    end)
+
+                    player:timer(4000, function(playerEntity)
+                        playerEntity:setFreezeFlag(false)
+                    end)
+                end
+
+                if containerType == treasureType.CHEST then
+                    npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
+                else
+                    npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
+                end
+
+                return
+            end
+        end
+
         player:messageSpecial(ID.text.CHEST_UNLOCKED - 8, keyTable[zoneId][npcTable[npc:getName()]])
     else
         player:messageSpecial(ID.text.CHEST_UNLOCKED - 7)
