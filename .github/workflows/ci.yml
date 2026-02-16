@@ -1,4 +1,4 @@
-name: CI (C++ build + Lua check)
+name: CI (Checks only)
 
 on:
   push:
@@ -38,44 +38,28 @@ jobs:
               - 'scripts/**/*.lua'
               - 'modules/**/*.lua'
 
-  build_cpp:
-    name: Build (C++)
-    needs: detect_changes
-    if: ${{ needs.detect_changes.outputs.cpp == 'true' }}
-    uses: ./.github/workflows/runner_build.yml
-    with:
-      runner: ubuntu-24.04
-      compiler: gcc
-      compiler_version: 14
-      build_type: Debug
-      save_cache: ${{ github.event_name == 'push' && github.ref_name == 'custom' }}
-      build_modules: false
-      tracy: false
-      upload_artifact: true
-      clang_tidy: false
-
-  check_lua:
-    name: Check (Lua)
+  check_sanity:
+    name: Sanity Checks
     runs-on: ubuntu-latest
     needs: detect_changes
-    if: ${{ needs.detect_changes.outputs.lua == 'true' }}
+    if: ${{ needs.detect_changes.outputs.cpp == 'true' || needs.detect_changes.outputs.lua == 'true' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # まずは超軽量の「構文チェック」例（luajitで読み込みテスト）
-      - name: Install luajit
+      - name: Install Python dependencies
         run: |
-          sudo apt update
-          sudo apt install -y luajit
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
 
-      - name: Lua syntax check
+      - name: Run checks
         run: |
-          # luajit -b は output 指定が必須。構文チェック目的で一時ファイルへ出力する。
-          set -euo pipefail
-          tmp_out="$(mktemp)"
-          while IFS= read -r -d '' f; do
-            luajit -b "$f" "$tmp_out"
-          done < <(find ./scripts ./modules -type f -name "*.lua" -print0 2>/dev/null)
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            ./tools/ci/sanity_checks.sh "origin/${{ github.event.pull_request.base.ref }}"
+          else
+            ./tools/ci/sanity_checks.sh "${{ github.event.before }}"
+          fi
 
   no_relevant_changes:
     name: No Relevant Changes

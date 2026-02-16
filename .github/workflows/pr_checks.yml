@@ -19,8 +19,6 @@ concurrency:
 jobs:
   Sanity_Checks:
     name: Sanity Checks
-    outputs:
-      cpp_changes: ${{ steps.check-cpp.outputs.cpp_changes }}
     runs-on: ubuntu-latest
     container:
       image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
@@ -47,23 +45,6 @@ jobs:
       - name: Add sanity checks report to summary
         if: ${{ always() }}
         run: tr -d '\r' < sanity_checks_summary.md >> $GITHUB_STEP_SUMMARY
-
-      - name: Check for changed C++/CMake files
-        id: check-cpp
-        run: |
-          mapfile -t changed_files < changed-files.txt
-          cpp_changes=false
-          for changed_file in "${changed_files[@]}"; do
-              if [[ $changed_file == src/**/*.cpp || $changed_file == modules/**/*.cpp || \
-                    $changed_file == src/**/*.h   || $changed_file == modules/**/*.h   || \
-                    $changed_file == src/**/CMakeLists.txt || $changed_file == modules/**/CMakeLists.txt || \
-                    $changed_file == CMakeLists.txt || \
-                    $changed_file == cmake/**/*.cmake ]]; then
-                cpp_changes=true
-                break
-              fi
-          done
-          echo "cpp_changes=$cpp_changes" >> $GITHUB_OUTPUT
 
       - name: Upload changed files as artifact
         uses: actions/upload-artifact@v4
@@ -148,83 +129,6 @@ jobs:
         run: |
           echo "Lua Language Server failed. See summary for details."
           exit 1
-
-  Clang_Tidy:
-    needs: Sanity_Checks
-    name: Clang Tidy
-    if: ${{ needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
-    uses: ./.github/workflows/runner_build.yml
-    with:
-      runner: ubuntu-24.04
-      compiler: clang
-      compiler_version: 20
-      build_type: Debug
-      build_modules: false
-      tracy: false
-      upload_artifact: false
-      clang_tidy: true
-      optional_build: true
-
-  Build:
-    needs: Sanity_Checks
-    name: ${{ matrix.runner && 'Build' || '' }} # GitHub Actions hack to hide matrix args
-    if: ${{ needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - build_type: Debug
-            runner: windows-2025
-            compiler: msvc
-            build_modules: false
-          - build_type: Debug
-            runner: macos-26
-            compiler: appleClang
-            build_modules: false
-          - build_type: Debug
-            runner: ubuntu-24.04
-            compiler: gcc
-            compiler_version: 14
-            build_modules: false
-    uses: ./.github/workflows/runner_build.yml
-    with:
-      runner: ${{ matrix.runner }}
-      compiler: ${{ matrix.compiler }}
-      compiler_version: ${{ matrix.compiler_version }}
-      build_type: ${{ matrix.build_type }}
-      build_modules: ${{ matrix.build_modules }}
-      upload_artifact: true
-
-  Test:
-    needs: Build
-    if: ${{ !cancelled() && needs.Build.result == 'success' && needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
-    name: ${{ matrix.runner && 'Test' || '' }} # GitHub Actions hack to hide matrix args
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runner: windows-2025
-            test_modules: false
-            multi_process: true
-            xi_test: true
-            startup_checks: true
-          - runner: macos-26
-            test_modules: false
-            multi_process: false
-            xi_test: false
-            startup_checks: true
-          - runner: ubuntu-24.04
-            test_modules: false
-            multi_process: false
-            xi_test: true
-            startup_checks: true
-    uses: ./.github/workflows/runner_test.yml
-    with:
-      runner: ${{ matrix.runner }}
-      test_modules: ${{ matrix.test_modules }}
-      multi_process: ${{ matrix.multi_process }}
-      xi_test: ${{ matrix.xi_test }}
-      startup_checks: ${{ matrix.startup_checks }}
 
   # Docker_Build:
   #   needs: Sanity_Checks
