@@ -1,0 +1,101 @@
+name: Upstream Sync (base -> PR to custom)
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # 6時間おき
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream and fetch
+        run: |
+          if git remote get-url upstream >/dev/null 2>&1; then
+            git remote set-url upstream https://github.com/LandSandBoat/server.git
+          else
+            git remote add upstream https://github.com/LandSandBoat/server.git
+          fi
+          git fetch upstream base --prune
+          git fetch origin custom --prune
+
+      - name: Update bot branch from upstream/base
+        run: |
+          git checkout -B bot/upstream-sync upstream/base
+          git push origin bot/upstream-sync --force
+
+      - name: Create or update PR from bot/upstream-sync to custom
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head = "bot/upstream-sync";
+            const base = "custom";
+
+            const compare = await github.rest.repos.compareCommitsWithBasehead({
+              owner,
+              repo,
+              basehead: `${base}...${head}`,
+            });
+
+            if (compare.data.ahead_by === 0) {
+              core.info("No upstream changes to merge into custom.");
+              return;
+            }
+
+            const title = "Sync upstream: base -> custom";
+            const body = [
+              "Upstream (LandSandBoat/server) の base 更新を取り込みます。",
+              "- bot/upstream-sync は upstream/base から自動更新",
+              "- custom への反映はこのPRで確認してマージしてください",
+            ].join("\n");
+
+            const prs = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: "open",
+              head: `${owner}:${head}`,
+              base,
+              per_page: 1,
+            });
+
+            if (prs.data.length > 0) {
+              const pr = prs.data[0];
+              await github.rest.pulls.update({
+                owner,
+                repo,
+                pull_number: pr.number,
+                title,
+                body,
+              });
+              core.info(`Updated existing PR #${pr.number}`);
+              return;
+            }
+
+            const created = await github.rest.pulls.create({
+              owner,
+              repo,
+              title,
+              head,
+              base,
+              body,
+            });
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: created.data.number,
+              labels: ["upstream-sync"],
+            });
+
+            core.info(`Created PR #${created.data.number}`);
