@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,14 @@
 ===========================================================================
 */
 
-#include "0x0d4_faq_gmparam.h"
+#include "0x0b6_set_gmmsg.h"
 
-#include "entities/charentity.h"
-#include "packets/s2c/0x0b5_faq_gmparam.h"
-
-auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+GP_SERV_COMMAND_SET_GMMSG::GP_SERV_COMMAND_SET_GMMSG(const uint32_t msgId, const uint16_t seqId, const uint16_t pktNum, const std::string& message)
 {
-    return PacketValidator()
-        .mustEqual(this->Option, 0, "Option not 0");
-}
+    auto& packet = this->data();
 
-void GP_CLI_COMMAND_FAQ_GMPARAM::process(MapSession* PSession, CCharEntity* PChar) const
-{
-    // Respond to the player opening the Help Desk menu
-    // The client mostly ignores the response.
-    PChar->pushPacket<GP_SERV_COMMAND_FAQ_GMPARAM>(this->Id);
+    packet.msgId  = msgId;
+    packet.seqId  = seqId;
+    packet.pktNum = pktNum;
+    std::memcpy(packet.Msg, message.data(), std::min(message.size(), sizeof(packet.Msg)));
 }

@@ -59702,9 +59702,9 @@ INSERT INTO `mob_spawn_points` VALUES (17469761,0,'Mimic','Mimic',42,60,60,1.000
 -- ------------------------------------------------------------
 
 -- The Moonlit Path
-INSERT INTO `mob_spawn_points` VALUES (17473537,0,'Fenrir_Prime','Fenrir Prime',1,80,82,340.000,47.000,-337.000,65);
-INSERT INTO `mob_spawn_points` VALUES (17473538,0,'Fenrir_Prime','Fenrir Prime',1,80,82,-60.097,9.000,62.967,65);
-INSERT INTO `mob_spawn_points` VALUES (17473539,0,'Fenrir_Prime','Fenrir Prime',1,80,82,-379.943,-53.000,422.974,65);
+INSERT INTO `mob_spawn_points` VALUES (17473537,0,'Fenrir_Prime','Fenrir Prime',1,80,80,340.000,47.000,-337.000,65);
+INSERT INTO `mob_spawn_points` VALUES (17473538,0,'Fenrir_Prime','Fenrir Prime',1,80,80,-60.097,9.000,62.967,65);
+INSERT INTO `mob_spawn_points` VALUES (17473539,0,'Fenrir_Prime','Fenrir Prime',1,80,80,-379.943,-53.000,422.974,65);
 
 -- Moon Reading (Windy 9-2)
 INSERT INTO `mob_spawn_points` VALUES (17473540,0,'Ace_of_Cups','Ace of Cups',34,73,75,344.000,48.000,-341.000,61);

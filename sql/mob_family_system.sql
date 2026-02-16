@@ -87,7 +87,7 @@ INSERT INTO `mob_family_system` VALUES (32,'Avatar-Atomos',11,'Atomos',5,'Avatar
 INSERT INTO `mob_family_system` VALUES (33,'Avatar-Alexander',12,'Alexander',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (34,'Avatar-Carbuncle',13,'Carbuncle',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (35,'Avatar-Diabolos',14,'Diabolos',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
-INSERT INTO `mob_family_system` VALUES (36,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
+INSERT INTO `mob_family_system` VALUES (36,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',84,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (37,'Avatar-Garuda',16,'Garuda',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (38,'Avatar-Ifrit',17,'Ifrit',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (39,'Monoceros',18,'Monoceros',11,'Elemental',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
@@ -375,7 +375,7 @@ INSERT INTO `mob_family_system` VALUES (321,'Avatar-Titan',23,'Titan',5,'Avatar'
 INSERT INTO `mob_family_system` VALUES (322,'Avatar-Ifrit',17,'Ifrit',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (323,'Avatar-Leviathan',19,'Leviathan',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (324,'Avatar-Garuda',16,'Garuda',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
-INSERT INTO `mob_family_system` VALUES (325,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
+INSERT INTO `mob_family_system` VALUES (325,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',84,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (326,'Troll-Gurfurlur',140,'Troll',7,'Beastmen',40,120,120,1,2,2,5,3,3,3,1,2,1,3,1.0,272,0);
 INSERT INTO `mob_family_system` VALUES (327,'Goblin',77,'Goblin',7,'Beastmen',40,91,120,2,3,5,3,3,3,1,1,3,1,3,1.0,1,0);
 -- 328 Free

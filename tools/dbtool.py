@@ -225,6 +225,7 @@ player_data = [
     "delivery_box.sql",
     "fishing_contest.sql",
     "fishing_contest_entries.sql",
+    "help_desk.sql",
     "ip_exceptions.sql",
     "linkshells.sql",
     "server_variables.sql",

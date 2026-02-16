@@ -30,6 +30,15 @@ enum class GP_CLI_COMMAND_FAQ_GMCALL_TYPE : uint8_t
     GMNotice   = 3,
 };
 
+enum class GMReportBlockType : uint8_t
+{
+    Position     = 0x00,
+    Version      = 0x01,
+    Error        = 0x02,
+    StringParam  = 0x03,
+    LobbyHistory = 0x04,
+};
+
 struct FFGpGMReportBlockHdr
 {
     uint8_t  bkType;   // PS2: bkType
@@ -37,7 +46,7 @@ struct FFGpGMReportBlockHdr
     uint16_t bkOpt;    // PS2: bkOpt
 };
 
-struct sub_block_00_t
+struct FFGpGMReportCharBlock
 {
     FFGpGMReportBlockHdr header;
     uint16_t             zone;      // PS2: zone
@@ -53,7 +62,7 @@ struct sub_block_01_t
     uint32_t             unknown01[4];
 };
 
-struct sub_block_02_t
+struct FFGpGMReportECodeStruct
 {
     FFGpGMReportBlockHdr header;
     int16_t              code;     // PS2: code
@@ -67,20 +76,19 @@ struct sub_block_03_t
     uint8_t              Str[256]; // Unknown max size.
 };
 
-struct FFGpGMReportLobbyStruct
+struct FFGpGMReportLobbyEntry
 {
-    FFGpGMReportBlockHdr header;
-    uint16_t             cmd;      // PS2: cmd
-    uint16_t             opt;      // PS2: opt
-    uint32_t             timeCode; // PS2: timeCode
-    uint32_t             ident;    // PS2: ident
-    uint8_t              name[16]; // PS2: name
+    uint16_t cmd;      // PS2: cmd
+    uint16_t opt;      // PS2: opt
+    uint32_t timeCode; // PS2: timeCode
+    uint32_t ident;    // PS2: ident
+    uint8_t  name[16]; // PS2: name
 };
 
-struct sub_block_04_t
+struct FFGpGMReportLobbyStruct
 {
-    FFGpGMReportBlockHdr    header;
-    FFGpGMReportLobbyStruct characters[8];
+    FFGpGMReportBlockHdr   header;
+    FFGpGMReportLobbyEntry characters[8];
 };
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x00D3

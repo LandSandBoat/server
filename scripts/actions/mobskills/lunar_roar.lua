@@ -1,6 +1,6 @@
 -----------------------------------
 -- Lunar Roar
--- Fenrir removes up to 10 beneficial status effects from enemies within Area of Effect.
+-- Fenrir removes up to 6 beneficial status effects from enemies within Area of Effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,13 +13,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local effects = target:getStatusEffects()
     local num = 0
 
-    for i, effect in pairs(effects) do
-        -- check mask bit for xi.effectFlag.DISPELABLE
-        if
-            utils.mask.getBit(effect:getFlag(), 0) and
-            effect:getEffectType() ~= xi.effect.RERAISE and
-            num < 10
-        then
+    for _, effect in pairs(effects) do
+        if num >= 6 then
+            break
+        end
+
+        if bit.band(effect:getEffectFlags(), xi.effectFlag.DISPELABLE) ~= 0 then
             target:delStatusEffect(effect:getEffectType())
             num = num + 1
         end

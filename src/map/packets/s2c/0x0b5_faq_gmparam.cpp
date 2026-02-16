@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,15 @@
 ===========================================================================
 */
 
-#include "0x0d4_faq_gmparam.h"
+#include "0x0b5_faq_gmparam.h"
 
-#include "entities/charentity.h"
-#include "packets/s2c/0x0b5_faq_gmparam.h"
-
-auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+GP_SERV_COMMAND_FAQ_GMPARAM::GP_SERV_COMMAND_FAQ_GMPARAM(const uint16_t id)
 {
-    return PacketValidator()
-        .mustEqual(this->Option, 0, "Option not 0");
-}
+    auto& packet = this->data();
 
-void GP_CLI_COMMAND_FAQ_GMPARAM::process(MapSession* PSession, CCharEntity* PChar) const
-{
-    // Respond to the player opening the Help Desk menu
-    // The client mostly ignores the response.
-    PChar->pushPacket<GP_SERV_COMMAND_FAQ_GMPARAM>(this->Id);
+    packet.RescueCount = 0;    // This value has been observed to be 0 and non-zero values.
+    packet.params[0]   = 1;    // The first value of this array used to be the number of GM calls in the queue.
+    packet.Id          = id;   // This value is reflected from what the client sent in its own 0x0D4
+    packet.Option      = 0;    // This value has been observed to be 0. This value may reflect the option(s) selected within the Help Desk menu.
+    packet.RescueTime  = 1800; // This value has been observed to be 1800.
 }

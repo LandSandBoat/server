@@ -11946,7 +11946,7 @@ INSERT INTO `mob_groups` VALUES (42,2664,169,'Mimic',0,128,1684,0,0,0,NULL);
 -- Full_Moon_Fountain (Zone 170)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1322,170,'Fenrir_Prime',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,1322,170,'Fenrir_Prime',0,128,0,12500,12500,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,32,170,'Ace_of_Cups',0,128,12,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,30,170,'Ace_of_Batons',0,128,10,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,33,170,'Ace_of_Swords',0,128,13,0,0,0,NULL);

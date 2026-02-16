@@ -795,6 +795,11 @@ auto CCharEntity::inMogHouse() const -> bool
     return m_moghouseID != 0;
 }
 
+auto CCharEntity::gmCallContainer() -> GMCallContainer&
+{
+    return gmCallContainer_;
+}
+
 int8 CCharEntity::getShieldSize()
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);

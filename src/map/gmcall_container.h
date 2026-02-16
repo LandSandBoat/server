@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,23 @@
 ===========================================================================
 */
 
-#include "0x0d4_faq_gmparam.h"
+#pragma once
 
-#include "entities/charentity.h"
-#include "packets/s2c/0x0b5_faq_gmparam.h"
+#include "packets/c2s/0x0d3_faq_gmcall.h"
 
-auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+#include <vector>
+
+class CCharEntity;
+class GMCallContainer
 {
-    return PacketValidator()
-        .mustEqual(this->Option, 0, "Option not 0");
-}
+public:
+    auto addPacket(const GP_CLI_COMMAND_FAQ_GMCALL& packet) -> bool;
+    void processCall(const CCharEntity* PChar) const;
+    void sendPendingResponse(CCharEntity* PChar) const;
+    void acknowledgeOldestResponse(CCharEntity* PChar) const;
+    void clear();
 
-void GP_CLI_COMMAND_FAQ_GMPARAM::process(MapSession* PSession, CCharEntity* PChar) const
-{
-    // Respond to the player opening the Help Desk menu
-    // The client mostly ignores the response.
-    PChar->pushPacket<GP_SERV_COMMAND_FAQ_GMPARAM>(this->Id);
-}
+private:
+    uint8_t                                pktId_{};
+    std::vector<GP_CLI_COMMAND_FAQ_GMCALL> packets_;
+};
