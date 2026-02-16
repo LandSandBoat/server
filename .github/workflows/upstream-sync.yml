@@ -1,0 +1,44 @@
+name: Upstream Sync (base -> PR to custom)
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # 6時間おき
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream and fetch
+        run: |
+          git remote add upstream https://github.com/LandSandBoat/server.git
+          git fetch upstream --prune
+
+      - name: Update base from upstream/base
+        run: |
+          git checkout base
+          git reset --hard upstream/base
+          git push origin base --force
+
+      - name: Create PR from base to custom
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: custom
+          branch: bot/upstream-sync
+          title: "Sync upstream: base -> custom"
+          body: |
+            Upstream (LandSandBoat/server) の base 更新を取り込みます。
+            - base は upstream/base に強制追従
+            - custom への反映はこのPRで確認してマージしてください
+          labels: |
+            upstream-sync
