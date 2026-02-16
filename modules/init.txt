@@ -39,3 +39,4 @@
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
 custom/cpp/ah_pagination.cpp
+custom/cpp/post_anywhere.cpp
