@@ -3,7 +3,7 @@ name: Publish Meshes Docker Image
 on:
   push:
     branches:
-      - base
+      - custom
     paths:
       - './losmeshes/**'
       - './navmeshes/**'

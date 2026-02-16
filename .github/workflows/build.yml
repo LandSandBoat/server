@@ -3,7 +3,18 @@ name: Builds
 on:
   push:
     branches:
-      - base
+      - custom
+    paths:
+      - 'src/**/*.cpp'
+      - 'src/**/*.h'
+      - 'modules/**/*.cpp'
+      - 'modules/**/*.h'
+      - '**/CMakeLists.txt'
+      - 'cmake/**/*.cmake'
+      - 'docker/**'
+      - '.github/workflows/build.yml'
+      - '.github/workflows/runner_build.yml'
+      - '.github/workflows/docker_build.yml'
   workflow_dispatch:
 
 concurrency:
@@ -11,8 +22,40 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  Detect_Changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      cpp: ${{ steps.filter.outputs.cpp }}
+      docker: ${{ steps.filter.outputs.docker }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          base: ${{ github.event_name == 'push' && github.event.before || github.sha }}
+          ref: ${{ github.sha }}
+          filters: |
+            cpp:
+              - 'src/**/*.cpp'
+              - 'src/**/*.h'
+              - 'modules/**/*.cpp'
+              - 'modules/**/*.h'
+              - '**/CMakeLists.txt'
+              - 'cmake/**/*.cmake'
+            docker:
+              - 'docker/**'
+              - '.github/workflows/build.yml'
+              - '.github/workflows/docker_build.yml'
+
   Clang_Tidy:
     name: Clang Tidy
+    needs: Detect_Changes
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.Detect_Changes.outputs.cpp == 'true' }}
     uses: ./.github/workflows/runner_build.yml
     with:
       runner: ubuntu-24.04
@@ -27,6 +70,8 @@ jobs:
 
   Runner_Build:
     name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    needs: Detect_Changes
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.Detect_Changes.outputs.cpp == 'true' }}
     strategy:
       fail-fast: false
       matrix:
@@ -86,6 +131,8 @@ jobs:
 
   Docker_Build:
     name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    needs: Detect_Changes
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.Detect_Changes.outputs.cpp == 'true' || needs.Detect_Changes.outputs.docker == 'true' }}
     strategy:
       fail-fast: false
       matrix:
@@ -128,3 +175,12 @@ jobs:
       tracy: ${{ matrix.tracy }}
       upload_artifact: false
       publish: ${{ matrix.publish }}
+
+  No_Relevant_Changes:
+    name: No Relevant Changes
+    runs-on: ubuntu-latest
+    needs: Detect_Changes
+    if: ${{ github.event_name != 'workflow_dispatch' && needs.Detect_Changes.outputs.cpp != 'true' && needs.Detect_Changes.outputs.docker != 'true' }}
+    steps:
+      - name: Skip
+        run: echo "No C++/build/docker changes. Skipping heavy build jobs."

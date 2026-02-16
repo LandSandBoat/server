@@ -4,6 +4,7 @@ name: PR Checks
 
 on:
   pull_request:
+    branches: [custom]
     types:
       - opened
       - synchronize
@@ -18,6 +19,8 @@ concurrency:
 jobs:
   Sanity_Checks:
     name: Sanity Checks
+    outputs:
+      cpp_changes: ${{ steps.check-cpp.outputs.cpp_changes }}
     runs-on: ubuntu-latest
     container:
       image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
@@ -44,6 +47,23 @@ jobs:
       - name: Add sanity checks report to summary
         if: ${{ always() }}
         run: tr -d '\r' < sanity_checks_summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Check for changed C++/CMake files
+        id: check-cpp
+        run: |
+          mapfile -t changed_files < changed-files.txt
+          cpp_changes=false
+          for changed_file in "${changed_files[@]}"; do
+              if [[ $changed_file == src/**/*.cpp || $changed_file == modules/**/*.cpp || \
+                    $changed_file == src/**/*.h   || $changed_file == modules/**/*.h   || \
+                    $changed_file == src/**/CMakeLists.txt || $changed_file == modules/**/CMakeLists.txt || \
+                    $changed_file == CMakeLists.txt || \
+                    $changed_file == cmake/**/*.cmake ]]; then
+                cpp_changes=true
+                break
+              fi
+          done
+          echo "cpp_changes=$cpp_changes" >> $GITHUB_OUTPUT
 
       - name: Upload changed files as artifact
         uses: actions/upload-artifact@v4
@@ -132,6 +152,7 @@ jobs:
   Clang_Tidy:
     needs: Sanity_Checks
     name: Clang Tidy
+    if: ${{ needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
     uses: ./.github/workflows/runner_build.yml
     with:
       runner: ubuntu-24.04
@@ -147,6 +168,7 @@ jobs:
   Build:
     needs: Sanity_Checks
     name: ${{ matrix.runner && 'Build' || '' }} # GitHub Actions hack to hide matrix args
+    if: ${{ needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
     strategy:
       fail-fast: false
       matrix:
@@ -175,7 +197,7 @@ jobs:
 
   Test:
     needs: Build
-    if: ${{ !cancelled() && needs.Build.result == 'success' }}
+    if: ${{ !cancelled() && needs.Build.result == 'success' && needs.Sanity_Checks.outputs.cpp_changes == 'true' }}
     name: ${{ matrix.runner && 'Test' || '' }} # GitHub Actions hack to hide matrix args
     strategy:
       fail-fast: false
