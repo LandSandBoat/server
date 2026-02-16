@@ -18,6 +18,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.SLOW)
     mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    -- TODO: BIND or ICE resistance rank
 end
 
 entity.onMobSpawn = function(mob)
@@ -31,6 +33,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     if mob:hasStatusEffect(xi.effect.ENSTONE) then
         return 0, 0, 0
     else
+        -- TODO: This does NOT emit a message/animation.
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
     end
 end
