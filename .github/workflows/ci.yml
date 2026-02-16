@@ -10,31 +10,16 @@ on:
 jobs:
   build_cpp:
     name: Build (C++)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install --assume-yes --no-install-recommends --quiet \
-            ninja-build \
-            build-essential \
-            cmake \
-            git \
-            libluajit-5.1-dev \
-            libmariadb-dev-compat \
-            libssl-dev \
-            libzmq3-dev \
-            zlib1g-dev
-
-      - name: Configure
-        run: |
-          cmake -G Ninja -S . -B build --fresh -DCMAKE_BUILD_TYPE=Release
-
-      - name: Build
-        run: |
-          cmake --build build
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ubuntu-24.04
+      compiler: gcc
+      compiler_version: 14
+      build_type: Debug
+      build_modules: false
+      tracy: false
+      upload_artifact: false
+      clang_tidy: false
 
   check_lua:
     name: Check (Lua)
