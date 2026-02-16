@@ -16,17 +16,25 @@ jobs:
 
       - name: Install deps
         run: |
-          sudo apt update
-          sudo apt install -y build-essential cmake git \
-            libmariadb-dev libluajit-5.1-dev libssl-dev zlib1g-dev
+          sudo apt-get update
+          sudo apt-get install --assume-yes --no-install-recommends --quiet \
+            ninja-build \
+            build-essential \
+            cmake \
+            git \
+            libluajit-5.1-dev \
+            libmariadb-dev-compat \
+            libssl-dev \
+            libzmq3-dev \
+            zlib1g-dev
 
       - name: Configure
         run: |
-          cmake -S . -B build
+          cmake -G Ninja -S . -B build --fresh -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         run: |
-          cmake --build build -j $(nproc)
+          cmake --build build
 
   check_lua:
     name: Check (Lua)
@@ -42,6 +50,9 @@ jobs:
 
       - name: Lua syntax check
         run: |
-          # 例: 全luaを luajit -b でバイトコード化して構文エラー検出
-          # ※プロジェクトによっては読み込み副作用があるので必要なら対象ディレクトリを絞る
-          find . -type f -name "*.lua" -print0 | xargs -0 -n 1 luajit -b
+          # luajit -b は output 指定が必須。構文チェック目的で一時ファイルへ出力する。
+          set -euo pipefail
+          tmp_out="$(mktemp)"
+          while IFS= read -r -d '' f; do
+            luajit -b "$f" "$tmp_out"
+          done < <(find ./scripts ./modules -type f -name "*.lua" -print0 2>/dev/null)
