@@ -4,19 +4,13 @@ on:
   push:
     branches: [custom]
   pull_request:
-    branches: [custom]
+    branches: [base, custom]
+  workflow_dispatch:
 
 jobs:
   build_cpp:
     name: Build (C++)
     runs-on: ubuntu-latest
-    # C++/CMake まわりが変わったときだけ実行
-    if: |
-      github.event_name == 'pull_request' ||
-      contains(join(github.event.commits.*.modified, ' '), '.cpp') ||
-      contains(join(github.event.commits.*.modified, ' '), '.h') ||
-      contains(join(github.event.commits.*.modified, ' '), 'CMakeLists.txt') ||
-      contains(join(github.event.commits.*.modified, ' '), '.cmake')
     steps:
       - uses: actions/checkout@v4
 
@@ -37,10 +31,6 @@ jobs:
   check_lua:
     name: Check (Lua)
     runs-on: ubuntu-latest
-    # Lua が変わったときだけ実行
-    if: |
-      github.event_name == 'pull_request' ||
-      contains(join(github.event.commits.*.modified, ' '), '.lua')
     steps:
       - uses: actions/checkout@v4
 
