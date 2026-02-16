@@ -158,7 +158,7 @@ xi.settings.map =
     CRAFT_HQ_CHANCE_MULTIPLIER = 1.0,
 
     -- Enable/disable all fishing, including quests. ENABLE AT YOUR OWN RISK.
-    FISHING_ENABLE = false,
+    FISHING_ENABLE = true,
 
     -- Sets the minimum level a character must be to fish.
     FISHING_MIN_LEVEL = 1,
