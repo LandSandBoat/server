@@ -1,20 +1,6 @@
 name: Builds
 
 on:
-  push:
-    branches:
-      - custom
-    paths:
-      - 'src/**/*.cpp'
-      - 'src/**/*.h'
-      - 'modules/**/*.cpp'
-      - 'modules/**/*.h'
-      - '**/CMakeLists.txt'
-      - 'cmake/**/*.cmake'
-      - 'docker/**'
-      - '.github/workflows/build.yml'
-      - '.github/workflows/runner_build.yml'
-      - '.github/workflows/docker_build.yml'
   workflow_dispatch:
 
 concurrency:
