@@ -583,6 +583,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
 int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_session_data, bool usePreviousKey)
 {
     TracyZoneScoped;
+    constexpr uint32 kMaxOutgoingPayloadSize = kMaxBufferSize - FFXI_HEADER_SIZE;
 
     // Modify the header of the outgoing packet
     // The essence of the transformations:
@@ -708,14 +709,24 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
     // Record data size excluding header
+    // Ensure there is enough room for the MD5 suffix in PScratchBuffer.
+    if (PacketSize > kMaxBufferSize - 16U)
+    {
+        ShowCritical("Network: compressed packet overflow before hash append (%u) by %s", PacketSize, PChar->name);
+        *buffsize = 0;
+        return -1;
+    }
+
     uint8 hash[16];
     md5(PScratchBuffer.data(), hash, PacketSize);
     std::memcpy(PScratchBuffer.data() + PacketSize, hash, 16);
     PacketSize += 16;
 
-    if (PacketSize > kMaxBufferSize)
+    if (PacketSize > kMaxOutgoingPayloadSize)
     {
-        ShowCritical("Network: PScratchBuffer is overflowed (%u) by %s", PacketSize, PChar->name);
+        ShowCritical("Network: outgoing packet payload overflow (%u > %u) by %s", PacketSize, kMaxOutgoingPayloadSize, PChar->name);
+        *buffsize = 0;
+        return -1;
     }
 
     // Making total outgoing packet
@@ -798,6 +809,7 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* map_s
 int32 MapNetworking::sendSinglePacketNoPchar(uint8* buff, size_t* buffsize, MapSession* map_session_data, bool usePreviousKey, CBasicPacket* packet)
 {
     TracyZoneScoped;
+    constexpr uint32 kMaxOutgoingPayloadSize = kMaxBufferSize - FFXI_HEADER_SIZE;
 
     // Modify the header of the outgoing packet
     // The essence of the transformations:
@@ -841,6 +853,16 @@ int32 MapNetworking::sendSinglePacketNoPchar(uint8* buff, size_t* buffsize, MapS
         }
     }
 
+    if (*buffsize + packet->getSize() > kMaxBufferSize)
+    {
+        ShowCritical("Network: single packet exceeds buffer (%zu > %u) for char id %u",
+                     *buffsize + packet->getSize(),
+                     kMaxBufferSize,
+                     map_session_data->charID);
+        *buffsize = 0;
+        return -1;
+    }
+
     std::memcpy(buff + *buffsize, *packet, packet->getSize());
     *buffsize += packet->getSize();
     packets++;
@@ -870,14 +892,27 @@ int32 MapNetworking::sendSinglePacketNoPchar(uint8* buff, size_t* buffsize, MapS
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
     // Record data size excluding header
+    // Ensure there is enough room for the MD5 suffix in PScratchBuffer.
+    if (PacketSize > kMaxBufferSize - 16U)
+    {
+        ShowCritical("Network: single packet compressed payload overflow before hash append (%u) for char id %u", PacketSize, map_session_data->charID);
+        *buffsize = 0;
+        return -1;
+    }
+
     uint8 hash[16];
     md5(PScratchBuffer.data(), hash, PacketSize);
     std::memcpy(PScratchBuffer.data() + PacketSize, hash, 16);
     PacketSize += 16;
 
-    if (PacketSize > kMaxBufferSize)
+    if (PacketSize > kMaxOutgoingPayloadSize)
     {
-        ShowCritical("Network: PScratchBuffer is overflowed (%u) by char id %s", PacketSize, map_session_data->charID);
+        ShowCritical("Network: single packet outgoing payload overflow (%u > %u) for char id %u",
+                     PacketSize,
+                     kMaxOutgoingPayloadSize,
+                     map_session_data->charID);
+        *buffsize = 0;
+        return -1;
     }
 
     // Making total outgoing packet
