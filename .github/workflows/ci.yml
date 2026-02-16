@@ -7,6 +7,10 @@ on:
     branches: [base, custom]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   detect_changes:
     name: Detect Changes
