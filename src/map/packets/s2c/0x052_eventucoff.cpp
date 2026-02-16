@@ -20,7 +20,18 @@
 */
 
 #include "0x052_eventucoff.h"
+
+#include <string_view>
+
 #include "entities/charentity.h"
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 GP_SERV_COMMAND_EVENTUCOFF::GP_SERV_COMMAND_EVENTUCOFF(CCharEntity* PChar, const GP_SERV_COMMAND_EVENTUCOFF_MODE mode)
 {
@@ -31,6 +42,15 @@ GP_SERV_COMMAND_EVENTUCOFF::GP_SERV_COMMAND_EVENTUCOFF(CCharEntity* PChar, const
     if (mode == GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent && PChar->currentEvent)
     {
         packet.Mode = static_cast<GP_SERV_COMMAND_EVENTUCOFF_MODE>(static_cast<uint32_t>(packet.Mode) | PChar->currentEvent->eventId << 8);
+    }
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        ShowInfoFmt("[EventPkt][S2C][0x052] name={} zone={} modeRaw=0x{:08X} currentEventId={}",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    static_cast<uint32_t>(packet.Mode),
+                    PChar->currentEvent ? PChar->currentEvent->eventId : 0);
     }
 
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;

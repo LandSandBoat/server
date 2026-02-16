@@ -21,7 +21,19 @@
 
 #include "0x05c_pendingnum.h"
 
-GP_SERV_COMMAND_PENDINGNUM::GP_SERV_COMMAND_PENDINGNUM(const std::vector<std::pair<uint8_t, uint32_t>>& params)
+#include <string_view>
+
+#include "entities/charentity.h"
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
+
+GP_SERV_COMMAND_PENDINGNUM::GP_SERV_COMMAND_PENDINGNUM(const CCharEntity* PChar, const std::vector<std::pair<uint8_t, uint32_t>>& params)
 {
     auto& packet = this->data();
 
@@ -31,5 +43,20 @@ GP_SERV_COMMAND_PENDINGNUM::GP_SERV_COMMAND_PENDINGNUM(const std::vector<std::pa
         {
             packet.num[index] = static_cast<int32_t>(value);
         }
+    }
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        ShowInfoFmt("[EventPkt][S2C][0x05C] name={} zone={} p0={} p1={} p2={} p3={} p4={} p5={} p6={} p7={}",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    packet.num[0],
+                    packet.num[1],
+                    packet.num[2],
+                    packet.num[3],
+                    packet.num[4],
+                    packet.num[5],
+                    packet.num[6],
+                    packet.num[7]);
     }
 }

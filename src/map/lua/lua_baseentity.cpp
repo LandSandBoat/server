@@ -150,10 +150,12 @@
 #include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/s2c/0x0f9_res.h"
 #include "packets/s2c/0x119_abil_recast.h"
+#include "packets/c2s/0x04e_auc.h"
 
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
+#include "utils/auctionutils.h"
 #include "utils/dboxutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
@@ -166,6 +168,8 @@
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+#include <limits>
+#include <unordered_set>
 #include <magic_enum/magic_enum.hpp>
 
 extern std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
@@ -1247,7 +1251,8 @@ void CLuaBaseEntity::updateEvent(sol::variadic_args va)
         }
     }
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_PENDINGNUM>(params);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->pushPacket<GP_SERV_COMMAND_PENDINGNUM>(PChar, params);
 }
 
 /************************************************************************
@@ -1282,7 +1287,7 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
     uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
     uint32 param8 = va.get_type(12) == sol::type::number ? va.get<uint32>(12) : 0;
 
-    PChar->pushPacket<GP_SERV_COMMAND_PENDINGSTR>(string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
+    PChar->pushPacket<GP_SERV_COMMAND_PENDINGSTR>(PChar, string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7, param8);
 }
 
 /************************************************************************
@@ -4722,6 +4727,170 @@ auto CLuaBaseEntity::getItems(const sol::object& location) -> sol::table
     }
 
     return table;
+}
+
+/************************************************************************
+ *  Function: ahPostWhitelist()
+ *  Purpose : ホワイトリストにあるアイテムを、インベントリから競売へ一括出品する（GM用）
+ *  Example : local r = player:ahPostWhitelist({ 4166, 1234 }, 1)
+ *  Notes   : フルスタック = スタック出品、端数/非スタック品 = 単品出品（1個ずつ）
+ ************************************************************************/
+auto CLuaBaseEntity::ahPostWhitelist(const sol::table& whitelistTable, const sol::object& priceObj) -> sol::table
+{
+    auto  out   = lua.create_table();
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar)
+    {
+        return out;
+    }
+
+    uint32 price = 1;
+    if (priceObj != sol::lua_nil && priceObj.get_type() == sol::type::number)
+    {
+        const auto luaPrice = priceObj.as<int64>();
+        if (luaPrice > 0)
+        {
+            price = static_cast<uint32>(std::min<int64>(luaPrice, std::numeric_limits<uint32>::max()));
+        }
+    }
+
+    std::unordered_set<uint16> whitelist;
+    whitelist.reserve(static_cast<size_t>(whitelistTable.size()));
+
+    for (const auto& kv : whitelistTable)
+    {
+        const sol::object& k = kv.first;
+        const sol::object& v = kv.second;
+
+        if (v.get_type() == sol::type::number)
+        {
+            whitelist.insert(v.as<uint16>());
+        }
+        else if (v.get_type() == sol::type::boolean && v.as<bool>() && k.get_type() == sol::type::number)
+        {
+            whitelist.insert(k.as<uint16>());
+        }
+    }
+
+    out["price"] = price;
+    out["whitelist_count"] = static_cast<uint32>(whitelist.size());
+
+    if (whitelist.empty())
+    {
+        out["error"] = "whitelist_empty";
+        return out;
+    }
+
+    auto* inv = PChar->getStorage(LOC_INVENTORY);
+    if (!inv)
+    {
+        out["error"] = "inventory_missing";
+        return out;
+    }
+
+    uint32 postedStacks  = 0;
+    uint32 postedSingles = 0;
+    uint32 failed        = 0;
+    uint32 skipped       = 0;
+
+    // Slot 0 はギルのため対象外
+    for (int slot = 1; slot < inv->GetSize(); ++slot)
+    {
+        auto* item = inv->GetItem(slot);
+        if (!item)
+        {
+            continue;
+        }
+
+        const uint16 itemId = item->getID();
+        if (!whitelist.contains(itemId))
+        {
+            continue;
+        }
+
+        const uint32 stackSize = item->getStackSize();
+        if (stackSize == 0)
+        {
+            skipped++;
+            continue;
+        }
+
+        // フルスタックならスタック出品
+        if (stackSize > 1 && item->getQuantity() == stackSize)
+        {
+            const uint32 beforeQty = item->getQuantity();
+
+            GP_AUC_PARAM_LOT param{};
+            param.LimitPrice    = price;
+            param.ItemWorkIndex = static_cast<uint16>(slot);
+            param.ItemStacks    = 0; // stack
+
+            auctionutils::ProofOfPurchase(PChar, param);
+
+            // 失敗時は数量が変わらないので検出して次へ
+            auto* afterItem = inv->GetItem(slot);
+            const uint32 afterQty = afterItem ? afterItem->getQuantity() : 0;
+            if (afterQty == beforeQty)
+            {
+                failed++;
+            }
+            else
+            {
+                postedStacks++;
+            }
+
+            continue;
+        }
+
+        // 端数/非スタック品は単品出品（1個ずつ）
+        while (true)
+        {
+            auto* curItem = inv->GetItem(slot);
+            if (!curItem || curItem->getID() != itemId)
+            {
+                break;
+            }
+
+            const uint32 beforeQty = curItem->getQuantity();
+            if (beforeQty == 0)
+            {
+                break;
+            }
+
+            GP_AUC_PARAM_LOT param{};
+            param.LimitPrice    = price;
+            param.ItemWorkIndex = static_cast<uint16>(slot);
+            param.ItemStacks    = 1; // single
+
+            auctionutils::ProofOfPurchase(PChar, param);
+
+            auto* afterItem = inv->GetItem(slot);
+            const uint32 afterQty = afterItem ? afterItem->getQuantity() : 0;
+
+            if (afterQty == beforeQty)
+            {
+                // これ以上は同じ理由で失敗し続ける可能性が高いので停止
+                failed++;
+                break;
+            }
+
+            postedSingles++;
+
+            // アイテムが消えた/数量が0になったら次へ
+            if (!afterItem || afterQty == 0)
+            {
+                break;
+            }
+        }
+    }
+
+    out["posted_stacks"]  = postedStacks;
+    out["posted_singles"] = postedSingles;
+    out["skipped"]        = skipped;
+    out["failed"]         = failed;
+
+    return out;
 }
 
 /************************************************************************
@@ -19835,6 +20004,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("findItem", CLuaBaseEntity::findItem);
     SOL_REGISTER("findItems", CLuaBaseEntity::findItems);
     SOL_REGISTER("getItems", CLuaBaseEntity::getItems);
+    SOL_REGISTER("ahPostWhitelist", CLuaBaseEntity::ahPostWhitelist);
 
     SOL_REGISTER("createShop", CLuaBaseEntity::createShop);
     SOL_REGISTER("addShopItem", CLuaBaseEntity::addShopItem);

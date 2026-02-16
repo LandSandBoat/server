@@ -25,6 +25,8 @@
 #include <utility>
 #include <vector>
 
+class CCharEntity;
+
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x005C
 // This packet is sent by the server to update the clients event work parameters.
 class GP_SERV_COMMAND_PENDINGNUM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_PENDINGNUM, GP_SERV_COMMAND_PENDINGNUM>
@@ -35,5 +37,5 @@ public:
         int32_t num[8];
     };
 
-    GP_SERV_COMMAND_PENDINGNUM(const std::vector<std::pair<uint8_t, uint32_t>>& params);
+    GP_SERV_COMMAND_PENDINGNUM(const CCharEntity* PChar, const std::vector<std::pair<uint8_t, uint32_t>>& params);
 };

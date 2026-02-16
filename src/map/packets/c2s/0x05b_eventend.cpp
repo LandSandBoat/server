@@ -21,10 +21,20 @@
 
 #include "0x05b_eventend.h"
 
+#include <string_view>
+
 #include "entities/baseentity.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x052_eventucoff.h"
+
+namespace
+{
+    bool shouldLogEventPackets(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 auto GP_CLI_COMMAND_EVENTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -41,6 +51,19 @@ void GP_CLI_COMMAND_EVENTEND::process(MapSession* PSession, CCharEntity* PChar) 
     if (PChar->currentEvent->option != 0)
     {
         result = PChar->currentEvent->option;
+    }
+
+    if (shouldLogEventPackets(PChar))
+    {
+        ShowInfoFmt("[EventPkt][0x05B] name={} zone={} mode={} eventId={} endPara={} computedResult={} currentEventId={} currentOption={}",
+                    PChar->getName(),
+                    PChar->loc.zone ? PChar->loc.zone->GetID() : 0,
+                    Mode,
+                    eventId,
+                    EndPara,
+                    result,
+                    PChar->currentEvent ? PChar->currentEvent->eventId : 0,
+                    PChar->currentEvent ? PChar->currentEvent->option : 0);
     }
 
     switch (static_cast<GP_CLI_COMMAND_EVENTEND_MODE>(Mode))

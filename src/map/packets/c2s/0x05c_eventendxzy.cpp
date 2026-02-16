@@ -21,6 +21,8 @@
 
 #include "0x05c_eventendxzy.h"
 
+#include <string_view>
+
 #include "ai/ai_container.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
@@ -29,6 +31,14 @@
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x065_wpos2.h"
+
+namespace
+{
+    bool shouldLogEventPackets(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 auto GP_CLI_COMMAND_EVENTENDXZY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -42,6 +52,22 @@ void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PCha
     const auto result  = EndPara;
     const auto eventId = EventPara;
 
+    if (shouldLogEventPackets(PChar))
+    {
+        ShowInfoFmt("[EventPkt][0x05C] name={} zone={} mode={} eventId={} endPara={} x={} y={} z={} dir={} currentEventId={} currentOption={}",
+                    PChar->getName(),
+                    PChar->loc.zone ? PChar->loc.zone->GetID() : 0,
+                    Mode,
+                    eventId,
+                    EndPara,
+                    x,
+                    y,
+                    z,
+                    static_cast<int>(dir),
+                    PChar->currentEvent ? PChar->currentEvent->eventId : 0,
+                    PChar->currentEvent ? PChar->currentEvent->option : 0);
+    }
+
     bool updatePosition = false;
 
     // TODO: Currently the return value for onEventUpdate in Interaction Framework is not received.  Remove
@@ -50,6 +76,18 @@ void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PCha
     const int32  updateResult     = luautils::OnEventUpdate(PChar, eventId, result);
     const uint32 noPositionUpdate = PChar->GetLocalVar("noPosUpdate");
     updatePosition                = noPositionUpdate == 0 ? updateResult == 1 : false;
+
+    if (shouldLogEventPackets(PChar))
+    {
+        ShowInfoFmt("[EventPkt][0x05C][Update] name={} zone={} eventId={} result={} updateResult={} noPosUpdate={} updatePosition={}",
+                    PChar->getName(),
+                    PChar->loc.zone ? PChar->loc.zone->GetID() : 0,
+                    eventId,
+                    result,
+                    updateResult,
+                    noPositionUpdate,
+                    updatePosition ? 1 : 0);
+    }
 
     PChar->SetLocalVar("noPosUpdate", 0);
 

@@ -136,7 +136,15 @@ function InteractionGlobal.onEventFinish(player, csid, option, npc, fallbackFn)
 end
 
 function InteractionGlobal.onEventUpdate(player, csid, option, npc, fallbackFn)
-    return InteractionGlobal.lookup:onEventUpdate(player, csid, option, npc, fallbackFn)
+    local ret = InteractionGlobal.lookup:onEventUpdate(player, csid, option, npc, fallbackFn)
+
+    -- Debug event-stall investigations (limited to a single character to avoid spam)
+    if player and player.getName and player:getName() == 'Tsuketaru' and csid == 32000 then
+        printf('[IG][onEventUpdate] zone=%u csid=%u option=%u retType=%s ret=%s',
+            player:getZoneID(), csid, option, type(ret), tostring(ret))
+    end
+
+    return ret
 end
 
 return InteractionGlobal

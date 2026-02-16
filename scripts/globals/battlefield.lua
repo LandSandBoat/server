@@ -760,7 +760,8 @@ end
 -- Static function to lookup the correct battlefield to handle this event update
 function Battlefield.redirectEventUpdate(player, csid, option, npc)
     if option == 0 or option == 255 then
-        return false
+        -- Must return a number (0/1). Booleans are coerced to "not a number" and become 1 in C++.
+        return 0
     end
 
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
@@ -768,11 +769,21 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
 
     for _, content in pairs(contents) do
         if value == content.index then
-            content:onEntryEventUpdate(player, csid, option, npc)
+            -- IMPORTANT: This return value controls whether the server honors client position updates
+            -- during the entry cutscene. Not returning here can stall certain entry events.
+            local ret = content:onEntryEventUpdate(player, csid, option, npc)
 
-            break
+            -- Minimal debug to correlate with EventPkt logs, limited to a single character.
+            if player:getName() == 'Tsuketaru' and csid == 32000 then
+                printf('[Battlefield][32000] zone=%u option=%u idx=%u ret=%s',
+                    player:getZoneID(), option, value, tostring(ret))
+            end
+
+            return ret or 0
         end
     end
+
+    return 0
 end
 
 -- NOTE: Return values from this function impact if the server will honor update position

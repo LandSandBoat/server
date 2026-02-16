@@ -21,8 +21,18 @@
 
 #include "0x032_event.h"
 
+#include <string_view>
+
 #include "entities/charentity.h"
 #include "event_info.h"
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 GP_SERV_COMMAND_EVENT::GP_SERV_COMMAND_EVENT(const CCharEntity* PChar, const EventInfo* eventInfo)
 {
@@ -44,4 +54,13 @@ GP_SERV_COMMAND_EVENT::GP_SERV_COMMAND_EVENT(const CCharEntity* PChar, const Eve
     packet.Mode       = eventInfo->eventFlags & 0xFFFF;
     packet.EventNum2  = PChar->getZone();
     packet.EventPara2 = eventInfo->eventFlags >> 16;
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        ShowInfoFmt("[EventPkt][S2C][0x032] name={} zone={} eventId={} flags=0x{:08X}",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    eventInfo->eventId,
+                    eventInfo->eventFlags);
+    }
 }

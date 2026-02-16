@@ -22,9 +22,18 @@
 #include "0x034_eventnum.h"
 
 #include <cstring>
+#include <string_view>
 
 #include "entities/charentity.h"
 #include "event_info.h"
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 GP_SERV_COMMAND_EVENTNUM::GP_SERV_COMMAND_EVENTNUM(const CCharEntity* PChar, const EventInfo* eventInfo)
 {
@@ -69,5 +78,22 @@ GP_SERV_COMMAND_EVENTNUM::GP_SERV_COMMAND_EVENTNUM(const CCharEntity* PChar, con
     else
     {
         packet.Mode = 8;
+    }
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        ShowInfoFmt("[EventPkt][S2C][0x034] name={} zone={} eventId={} mode={} p0={} p1={} p2={} p3={} p4={} p5={} p6={} p7={}",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    eventInfo->eventId,
+                    packet.Mode,
+                    packet.num[0],
+                    packet.num[1],
+                    packet.num[2],
+                    packet.num[3],
+                    packet.num[4],
+                    packet.num[5],
+                    packet.num[6],
+                    packet.num[7]);
     }
 }

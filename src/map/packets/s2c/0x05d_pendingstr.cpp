@@ -22,9 +22,21 @@
 #include "0x05d_pendingstr.h"
 
 #include <cstring>
+#include <string_view>
+
+#include "entities/charentity.h"
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 // TODO: std::array
 GP_SERV_COMMAND_PENDINGSTR::GP_SERV_COMMAND_PENDINGSTR(
+    const CCharEntity* PChar,
     const std::string& string0,
     const std::string& string1,
     const std::string& string2,
@@ -55,4 +67,24 @@ GP_SERV_COMMAND_PENDINGSTR::GP_SERV_COMMAND_PENDINGSTR(
     std::memcpy(packet.string2, string1.c_str(), std::min<size_t>(string1.size(), sizeof(packet.string2) - 1));
     std::memcpy(packet.string3, string2.c_str(), std::min<size_t>(string2.size(), sizeof(packet.string3) - 1));
     std::memcpy(packet.string4, string3.c_str(), std::min<size_t>(string3.size(), sizeof(packet.string4) - 1));
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        ShowInfoFmt("[EventPkt][S2C][0x05D] name={} zone={} n0={} n1={} n2={} n3={} n4={} n5={} n6={} n7={} n8={} s0='{}' s1='{}' s2='{}' s3='{}'",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    packet.num[0],
+                    packet.num[1],
+                    packet.num[2],
+                    packet.num[3],
+                    packet.num[4],
+                    packet.num[5],
+                    packet.num[6],
+                    packet.num[7],
+                    packet.num[8],
+                    packet.string1,
+                    packet.string2,
+                    packet.string3,
+                    packet.string4);
+    }
 }

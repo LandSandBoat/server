@@ -25,6 +25,15 @@
 #include "event_info.h"
 
 #include <cstring>
+#include <string_view>
+
+namespace
+{
+    bool shouldLogEventPacketsS2C(const CCharEntity* PChar)
+    {
+        return PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru";
+    }
+} // namespace
 
 GP_SERV_COMMAND_EVENTSTR::GP_SERV_COMMAND_EVENTSTR(const CCharEntity* PChar, EventInfo* eventInfo)
 {
@@ -64,5 +73,31 @@ GP_SERV_COMMAND_EVENTSTR::GP_SERV_COMMAND_EVENTSTR(const CCharEntity* PChar, Eve
         {
             packet.Data[index] = value;
         }
+    }
+
+    if (shouldLogEventPacketsS2C(PChar))
+    {
+        // Don't dump the full string table; log a couple and the first few params.
+        const auto safeStr = [&](uint32 idx) -> std::string_view
+        {
+            static constexpr std::string_view kEmpty = "";
+            if (idx < std::size(packet.String))
+            {
+                return std::string_view(packet.String[idx]);
+            }
+            return kEmpty;
+        };
+
+        ShowInfoFmt("[EventPkt][S2C][0x033] name={} zone={} eventId={} mode={} s0='{}' s1='{}' d0={} d1={} d2={} d3={}",
+                    PChar->getName(),
+                    PChar->getZone(),
+                    eventInfo->eventId,
+                    packet.Mode,
+                    safeStr(0),
+                    safeStr(1),
+                    packet.Data[0],
+                    packet.Data[1],
+                    packet.Data[2],
+                    packet.Data[3]);
     }
 }

@@ -209,7 +209,23 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB | TYPE_TRUST);
+            // フェイス(Trust)の帰還処理（ターゲットメニューのReleaseや /returntrust 相当）
+            // NOTE: Trust は TYPE_NPC/TYPE_MOB では取得できないため、NPC取得より先に判定する。
+            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PChar->GetEntity(this->ActIndex, TYPE_TRUST)))
+            {
+                PChar->RemoveTrust(PTrust);
+
+                if (!PChar->isNpcLocked())
+                {
+                    PChar->eventPreparation->reset();
+                    PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard);
+                }
+
+                return;
+            }
+
+            CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB);
+
             if (!PNpc)
             {
                 return;

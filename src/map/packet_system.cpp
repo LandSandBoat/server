@@ -27,6 +27,7 @@
 #include "common/timer.h"
 #include "common/utils.h"
 
+#include <string_view>
 #include <cstring>
 #include <utility>
 
@@ -232,6 +233,17 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
     }
     else
     {
+        // Extra diagnostics for event packets: if the client is stuck in a cutscene, we want to know whether the
+        // EventEnd/EventEndXZY packets are being rejected by validation.
+        const auto packetId = (data.ref<uint16>(0) & 0x1FF);
+        if (PChar != nullptr && std::string_view(PChar->getName()) == "Tsuketaru" && (packetId == 0x05B || packetId == 0x05C))
+        {
+            ShowWarningFmt("[EventPkt][INVALID] id=0x{:03X} name={} zone={} err={}",
+                           packetId,
+                           PChar->getName(),
+                           PChar->loc.zone ? PChar->loc.zone->GetID() : 0,
+                           result.errorString());
+        }
         ShowWarningFmt("Invalid {} packet from {}: {} ", packet->getName(), PChar->name, result.errorString());
     }
 }

@@ -24,6 +24,8 @@
 #include "base.h"
 #include <string>
 
+class CCharEntity;
+
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x005D
 // This packet is sent by the server to update the clients event parameters.
 class GP_SERV_COMMAND_PENDINGSTR final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_PENDINGSTR, GP_SERV_COMMAND_PENDINGSTR>
@@ -39,6 +41,7 @@ public:
     };
 
     GP_SERV_COMMAND_PENDINGSTR(
+        const CCharEntity* PChar,
         const std::string& string0 = "",
         const std::string& string1 = "",
         const std::string& string2 = "",

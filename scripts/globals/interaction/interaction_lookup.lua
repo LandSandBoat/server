@@ -349,6 +349,15 @@ local function performNextAction(player, containerId, handlerId, actions, target
         return actionToPerform
     end
 
+    -- Some handlers (notably onEventUpdate for cutscene handshakes) legitimately return a numeric
+    -- value directly (e.g. 0/1), not an Action object. If any numeric return is present, use it
+    -- as the final result and skip Action-cycling logic entirely.
+    for _, maybeNumber in pairs(actions) do
+        if type(maybeNumber) == 'number' then
+            return maybeNumber
+        end
+    end
+
     -- Figure out which action to perform if there's multiple
     local actionCount = #actions
     if actionCount > 1 then
@@ -359,7 +368,7 @@ local function performNextAction(player, containerId, handlerId, actions, target
         local previousActionId = player:getLocalVar(actionCycleId)
         if previousActionId > 0 then
             for idx, currentAction in ipairs(actions) do
-                if currentAction.id == previousActionId then
+                if type(currentAction) == 'table' and currentAction.id == previousActionId then
                     nextIndex = idx + 1
                 end
             end
@@ -370,6 +379,11 @@ local function performNextAction(player, containerId, handlerId, actions, target
         end
 
         actionToPerform = actions[nextIndex]
+        -- Defensive: if we somehow selected a raw value, return it as-is.
+        if type(actionToPerform) ~= 'table' then
+            return actionToPerform
+        end
+
         player:setLocalVar(actionCycleId, actionToPerform.id)
     end
 
