@@ -51,7 +51,7 @@ jobs:
       save_cache: ${{ github.event_name == 'push' && github.ref_name == 'custom' }}
       build_modules: false
       tracy: false
-      upload_artifact: false
+      upload_artifact: true
       clang_tidy: false
 
   check_lua:
