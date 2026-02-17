@@ -175,6 +175,7 @@ public:
     void sendMenu(uint32 menu);                                                           // Displays a menu (AH,Raise,Tractor,MH etc)
     auto sendGuild(uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool; // Sends guild shop menu
     void openSendBox() const;                                                             // Opens send box (to deliver items)
+    void openRecvBox() const;                                                             // Opens receive box (to receive delivered items)
     void leaveGame();
     void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const;
 

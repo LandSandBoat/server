@@ -2620,6 +2620,20 @@ void CLuaBaseEntity::openSendBox() const
 }
 
 /************************************************************************
+ *  Function: openRecvBox()
+ *  Purpose : Opens the receive box for a PC
+ *  Example : player:openRecvBox()
+ ************************************************************************/
+
+void CLuaBaseEntity::openRecvBox() const
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        dboxutils::OpenRecvBox(PChar);
+    }
+}
+
+/************************************************************************
  *  Function: leaveGame()
  *  Purpose : Forces a client shutdown
  *  Example : player:leaveGame()
@@ -19940,6 +19954,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("sendMenu", CLuaBaseEntity::sendMenu);
     SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
     SOL_REGISTER("openSendBox", CLuaBaseEntity::openSendBox);
+    SOL_REGISTER("openRecvBox", CLuaBaseEntity::openRecvBox);
     SOL_REGISTER("leaveGame", CLuaBaseEntity::leaveGame);
     SOL_REGISTER("sendEmote", CLuaBaseEntity::sendEmote);
 

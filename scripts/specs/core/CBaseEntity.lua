@@ -632,6 +632,10 @@ function CBaseEntity:openSendBox()
 end
 
 ---@return nil
+function CBaseEntity:openRecvBox()
+end
+
+---@return nil
 function CBaseEntity:leaveGame()
 end
 
