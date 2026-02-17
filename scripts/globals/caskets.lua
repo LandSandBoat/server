@@ -899,7 +899,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                 else
                     local isGreater = inputNumber > correctNumber and 1 or 0
 
-                    player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_GREATER_LESS, inputNumber, isGreater, 0, 0, 0)
+                    player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_GREATER_LESS, isGreater, inputNumber, 0, 0, 0)
                     chestObj:setLocalVar('[caskets]FAILED_ATEMPTS', failedAtempts + 1)
                     checkRemainingAttempts(player, chestObj, remainingAttempts, correctNumber)
                 end
