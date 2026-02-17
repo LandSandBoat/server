@@ -61,7 +61,7 @@ xi.settings.map =
 
     -- Allow use of delivery/post system in normally disallowed zones.
     -- Requires modules/custom/cpp/post_anywhere.cpp to be loaded.
-    POST_ENABLED_ANYWHERE = false,
+    POST_ENABLED_ANYWHERE = true,
 
     -- The total enmity cap for a given entity on the enmity table.
     -- 30,000 is believed to be approximately current retail cap.
