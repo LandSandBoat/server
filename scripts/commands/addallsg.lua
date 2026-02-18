@@ -37,11 +37,11 @@ for i = 1, 32, 1 do
     local groupIndex = i
     local group = 1
     while( group ~= 4 ) do
-        targ:addTeleport(xi.teleport.type.SURVIVAL, groupIndex - 1, group - 1)
-        group = group+1
+    targ:addTeleport(xi.teleport.type.SURVIVAL, groupIndex - 1, group - 1)
+    group = group+1
     end
 end
-player:printToPlayer(string.format('%s now has all Survival Guides.', targ:getName()))
-end
 
-return commandObj
+    player:printToPlayer(string.format('%s now has all Survival Guides.', targ:getName()))
+end
+    return commandObj
