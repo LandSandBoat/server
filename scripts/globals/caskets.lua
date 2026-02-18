@@ -206,14 +206,18 @@ end
 -----------------------------------
 local function sendChestDropMessage(player)
     local ID          = zones[player:getZoneID()]
-    local dropMessage = ID.text.PLAYER_OBTAINS_TEMP_ITEM + casketInfo.messageOffset.MONSTER_CONCEALED_CHEST
     local party       = {}
+    local dropMessage = ID.text.MONSTER_CONCEALED_CHEST
 
     party = player:getAlliance()
 
     for _, member in pairs(party) do
         if member:getZoneID() == player:getZoneID() then
-            member:messageSpecial(dropMessage , 0)
+            if dropMessage ~= nil then
+                member:messageSpecial(dropMessage, 0, 0, 0, 0)
+            else
+                member:printToPlayer('The monster was concealing a treasure chest!', xi.msg.channel.SYSTEM_3)
+            end
         end
     end
 end
