@@ -169,3 +169,21 @@ UPDATE abilities SET recastTime = 1200 WHERE name = 'flashy_shot';
 
 -- Flashy Shot merit: Revert value to 150 seconds per level
 UPDATE merits SET value = 150 WHERE name = 'flashy_shot';
+
+-----------------------------------
+-- Ninja
+-----------------------------------
+
+-- Yonin: Revert recast from 3 minutes to 5 minutes and add shared cooldown with Innin
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/11/2011)
+UPDATE abilities SET recastTime = 300 WHERE name = 'yonin';
+
+-- Innin: Revert recast from 3 minutes to 5 minutes and add shared cooldown with Yonin
+UPDATE abilities SET recastTime = 300, recastId = 146 WHERE name = 'innin';
+
+-- Tonko: Ichi: Revert cast time from 1.5 to 4 seconds
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+UPDATE spell_list SET castTime = 4000 WHERE name = 'tonko_ichi';
+
+-- Monomi: Ichi: Revert cast time from 1.5 to 4 seconds
+UPDATE spell_list SET castTime = 4000 WHERE name = 'monomi_ichi';
