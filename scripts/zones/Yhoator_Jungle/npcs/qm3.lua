@@ -18,6 +18,7 @@ entity.onTrigger = function(player, npc)
             npcUtil.giveKeyItem(player, xi.ki.OLD_TRICK_BOX)
             player:setCharVar('trueWillKilledNM', 0)
         else
+            player:messageSpecial(ID.text.CHILL_RUNS_DOWN)
             npcUtil.popFromQM(player, npc, { ID.mob.KAPPA_AKUSO, ID.mob.KAPPA_BONZE, ID.mob.KAPPA_BIWA }, { hide = 0 })
         end
     else

@@ -36,7 +36,7 @@ g_mixins.families.apkallu = function(apkalluMob)
         end
 
         if closest ~= nil then
-            mob:follow(closest, xi.follow.RUN_AWAY)
+            mob:follow(closest, xi.followType.RUN_AWAY)
             mob:setLocalVar('RunAway', 2)
         end
     end)
