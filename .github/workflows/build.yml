@@ -1,9 +1,6 @@
 name: Builds
 
 on:
-  push:
-    branches:
-      - base
   workflow_dispatch:
 
 concurrency:
