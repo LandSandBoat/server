@@ -1,8 +1,7 @@
 -----------------------------------
 -- Proboscis
--- Steals MP and dispels one beneficial status effect from targets in front.
--- Type: Magical
--- Utsusemi/Blink absorb: ignore shadow
+-- Family: Wamoura
+-- Description: Drains MP from and dispels one beneficial status effect from targets in front.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,17 +10,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg()
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:dispelStatusEffect()
+    params.baseDamage           = mob:getMainLvl() - 2
+    params.fTP                  = { 4, 4, 4 }
+    params.element              = xi.element.NONE
+    params.attackType           = xi.attackType.MAGICAL
+    params.damageType           = xi.damageType.NONE
+    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipDamageAdjustment = true
+    params.skipMagicBonusDiff   = true
+    params.skipStoneSkin        = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.MP, damage))
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.MP, info.damage))
 
-    return damage
+        target:dispelStatusEffect()
+    end
+
+    return info.damage
 end
 
 return mobskillObject

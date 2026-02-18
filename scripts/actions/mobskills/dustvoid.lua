@@ -1,9 +1,7 @@
 -----------------------------------
 -- Dustvoid
--- Description: (**not in yet** Removes all equipment from player.) Additional effect: Knockback
--- Type: Breath
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: AoE 10'
+-- Family: Sandworms
+-- Description: Deals Wind damage to targets. Removes all equipment from targets. Additional Effect: Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,21 +10,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 0.5, 0.5, 0.5 }
+    params.element         = xi.element.WIND
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.WIND
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier = 1
+    -- TODO: Capture knockback
 
-    if target:isPC() then
-        for i = xi.slot.MAIN, xi.slot.BACK do
-            target:unequipItem(i)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        if target:isPC() then
+            for i = xi.slot.MAIN, xi.slot.BACK do
+                target:unequipItem(i)
+            end
         end
     end
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-
-    return damage
+    return info.damage
 end
 
 return mobskillObject

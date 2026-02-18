@@ -11,28 +11,34 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local tp = pet:getTP()
-
     -- Merit TP bonus.
     local merits = 0
 
     if summoner and summoner:isPC() then
-        merits = summoner:getMerit(xi.merit.WIND_BLADE)
+        merits = utils.clamp(summoner:getMerit(xi.merit.WIND_BLADE) - 400, 0, 3000)
     end
 
-    tp = utils.clamp(tp + merits - 400, 0, 3000)
+    local params = {}
 
-    --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
-    local damage = math.floor(512 + 0.172 * tp + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
+    params.baseDamage      = pet:getMainLvl() + 2
+    params.fTP             = { 5.3570, 8.0273, 10.7031 }
+    params.fTPBonus        = merits
+    params.int_wSC         = 0.30
+    params.element         = xi.element.WIND
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.WIND
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.dStatMultiplier = 1.5
+    params.canMagicBurst   = true
+    params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
-    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.WIND, petskill)
-    damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.WIND, 1)
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
-    target:updateEnmityFromDamage(pet, damage)
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+    end
 
-    return damage
+    return info.damage
 end
 
 return abilityObject

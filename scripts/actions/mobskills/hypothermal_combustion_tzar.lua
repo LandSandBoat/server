@@ -1,10 +1,9 @@
 -----------------------------------
 -- Hypothermal Combustion
--- Self-destructs, releasing ice at nearby targets.
--- Type: Magical
--- Utsusemi/Blink absorb: Ignores shadows
+-- Family: Bomb (Snoll Tzar)
+-- Description: Self-destructs, dealing Ice damage targets near the mob.
 -- Notes: Damage is based on remaining HP
--- CoP 5-3 Snoll Tzar version, does not kill himself
+--        CoP 5-3 Snoll Tzar version, does not kill himself
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,15 +12,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getHP() / 3)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.ICE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = skill:getMobHP() / 3
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.element        = xi.element.ICE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.ICE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

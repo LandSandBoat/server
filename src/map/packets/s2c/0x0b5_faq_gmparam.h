@@ -38,6 +38,5 @@ public:
         uint16_t RescueTime;  // PS2: RescueTime
     };
 
-    // TODO: Unimplemented
-    GP_SERV_COMMAND_FAQ_GMPARAM() = default;
+    GP_SERV_COMMAND_FAQ_GMPARAM(uint16_t id);
 };

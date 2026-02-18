@@ -1,10 +1,7 @@
 -----------------------------------
 -- Wing Cutter
--- Deals Wind damage to targets in a fan-shaped area of effect.
--- TODO: Capture Wing Cutter in Nightmare Dynamis, was unable to verify a difference. fTP looked similar.
--- Type: Magical (Wind)
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Melee
+-- Family: Birds
+-- Description: Deals Wind damage to targets in a fan-shaped area of effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,12 +10,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info   = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.WIND, 3, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    return damage
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3.00, 3.00, 3.00 } -- TODO: Capture fTP values
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

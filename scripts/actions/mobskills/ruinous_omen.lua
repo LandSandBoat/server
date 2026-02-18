@@ -1,6 +1,12 @@
 -----------------------------------
 -- Ruinous Omen
--- Deals dark elemental damage to enemies within area of effect.
+-- Family: Avatar (Diabolos)
+-- Description: Deals damage equal to a random percentage of HP to enemies within area of effect.
+
+-- https://ffxiclopedia.fandom.com/wiki/Ruinous_Omen
+-- Prime Avatar seems to do an unresisted ~66% HP reduction from players' current HP (not max HP)
+-- Ruinous Omen by design cannot KO a target, but can significantly reduce its HP
+-- Version used by player summoners seems capped at ~2% except against Behemoths
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,15 +15,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 9
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 3, xi.mobskills.magicalTpBonus.NO_EFFECT, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    -- TODO: Capture mechanics of this skill. Currently using default astral flow values.
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 9, 9, 9 }
+    params.element        = xi.element.DARK
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

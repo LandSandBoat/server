@@ -1,7 +1,7 @@
 -----------------------------------
---  Frozen Mist
---  Description: Deals ice damage to enemies around the caster. Additional effect: Terror
---  Type: Magical (Ice)
+-- Frozen Mist
+-- Family: Ruszors
+-- Description: Deals Ice damage to enemies around the caster. Additional Effect: Terror
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,23 +10,30 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- ice aura that provides special stoneskin that absorbs only physical damage
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
+
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 1.5, 1.5, 1.5 }
+    params.element        = xi.element.ICE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.ICE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 30)
+    end
+
+    -- Ice aura that provides special stoneskin that absorbs only physical damage
     skill:setFinalAnimationSub(1)
     mob:delStatusEffectSilent(xi.effect.STONESKIN)
     mob:addStatusEffect(xi.effect.STONESKIN, 0, 0, 180, 1, 1500)
 
-    local damage     = mob:getWeaponDmg()
-    local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, xi.element.ICE, xi.mod.INT, xi.effect.TERROR, 0)
-    local duration   = math.floor(30 * resistRate)
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.ICE, 1.5, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, duration)
-
-    return damage
+    return info.damage
 end
 
 return mobskillObject

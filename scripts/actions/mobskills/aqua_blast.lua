@@ -1,12 +1,9 @@
 -----------------------------------
---  Aqua Blast
---
---  Description: Fires a blast of Water, dealing damage in a fan-shaped area. Additional effect: knockback
---  Type: Magical (Water)
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: Fan (cone)
---  Note: There was not a lot of information about this spell available online, so
---        the initial implementation is relatively basic.
+-- Aqua Blast
+-- Family: Ruszors
+-- Description: Fires a blast of Water, dealing damage in a fan-shaped area. Additional Effect: Knockback
+-- Note: There was not a lot of information about this spell available online, so
+--       the initial implementation is relatively basic.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -21,15 +18,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WATER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.fTP            = { 2, 2, 2 }
+    params.element        = xi.element.WATER
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WATER
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    -- TODO: Capture knockback range
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

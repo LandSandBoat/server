@@ -1,10 +1,7 @@
 -----------------------------------
 -- Binary Tap
--- Attempts to absorb two buffs from a single target.
--- Type: Magical
--- Utsusemi/Blink absorb: Ignores Shadows
--- Range: Melee
--- Notes: Can be any (positive) buff, including food.
+-- Family: Thinkers
+-- Description: Steals up to 2 buffs from a target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,8 +12,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel = nil
-    local count = 0
-    local msg -- to be set later
+    local count  = 0
+    local msg -- To be set later
 
     for i = 1, 2 do
         dispel = mob:stealStatusEffect(target, bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
@@ -27,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     if count == 0 then
-        msg = xi.msg.basic.SKILL_NO_EFFECT -- no effect
+        msg = xi.msg.basic.SKILL_NO_EFFECT -- No effect
     else
         msg = xi.msg.basic.DISAPPEAR_NUM
     end

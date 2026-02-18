@@ -1,35 +1,39 @@
 -----------------------------------
---  Calamitous Wind
---    Mob Ability: 2433
---  Description: Destructive winds deal Wind damage to players in range.
---    Additional effect: knockback + full dispel
---  Type: Magical
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: 20' radial
---  Notes: Only used by Zirnitra, Turul, and Amhuluk under 50%
+-- Calamitous Wind
+-- Family: Amphipteres
+-- Description: Deals Wind damage to targets in range. Additional Effect: Full Dispel, Knockback
+-- Notes: Used by Zirnitra, Turul, and Amhuluk under 50%
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getHPP() >= 50 then
+    if mob:getHPP() >= 50 then -- TODO: Migrate to mob script?
         return 1
     else
         return 0
     end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 4
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4, 4, 4 }
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    -- TODO: Should print *each* effect dispelled in addition to damage taken.
-    target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

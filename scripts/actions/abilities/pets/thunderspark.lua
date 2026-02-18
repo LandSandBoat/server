@@ -1,5 +1,6 @@
 -----------------------------------
 -- Thunderspark
+-- Family: Ramuh (Player Pet)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -11,19 +12,28 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local damage = math.floor(275 + pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    local params = {}
 
-    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.THUNDER, petskill)
-    damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, 1)
+    params.baseDamage      = pet:getMainLvl() + 2
+    params.fTP             = { 2.500, 3.000, 3.246 }
+    params.int_wSC         = 0.30
+    params.element         = xi.element.THUNDER
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.THUNDER
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.dStatMultiplier = 1.5
+    params.canMagicBurst   = true
+    params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.THUNDER)
-    target:updateEnmityFromDamage(pet, damage)
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
-    target:addStatusEffect(xi.effect.PARALYSIS, 15, 0, 60)
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
 
-    return damage
+        xi.mobskills.mobStatusEffectMove(pet, target, xi.effect.PARALYSIS, 15, 0, 60)
+    end
+
+    return info.damage
 end
 
 return abilityObject

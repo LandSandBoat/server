@@ -24,7 +24,7 @@ end
 entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
-        xi.mobSkill.SPIRIT_ABSORPTION_2,
+        xi.mobSkill.SPIRIT_ABSORPTION_GORGER_2,
         xi.mobSkill.VANITY_DRIVE_2,
     }
 

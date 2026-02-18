@@ -298,7 +298,7 @@ xi.mobSkill =
 
     QUADRATIC_CONTINUUM_2         =  742,
 
-    SPIRIT_ABSORPTION_2           =  745,
+    SPIRIT_ABSORPTION_GORGER_2    =  745,
 
     VANITY_DRIVE_2                =  748,
 
@@ -328,6 +328,12 @@ xi.mobSkill =
     WATER_BLADE_1                 =  828,
     GREAT_WHEEL_1                 =  829,
     LIGHT_BLADE_1                 =  830,
+    MOONLIT_CHARGE                =  831,
+    CRESCENT_FANG                 =  832,
+    LUNAR_CRY                     =  833,
+
+    LUNAR_ROAR                    =  835,
+    ECLIPSE_BITE                  =  836,
 
     HOWLING_MOON_1                =  838, -- Unknown usage.
     HOWLING_MOON_2                =  839, -- Confirmed usage: "The Moonlit Path" bcnm (Fenrir).
@@ -612,6 +618,12 @@ xi.mobSkill =
     DUST_CLOUD_2                  = 1568,
     WHIRL_CLAWS_2                 = 1569,
 
+    MIASMIC_BREATH_1              = 1604, -- Cirrate Christelle - Mobskill Version
+    MIASMIC_BREATH_2              = 1605, -- Cirrate Christelle - Skill Attack version
+
+    PUTRID_BREATH_1               = 1608, -- Cirrate Christelle - Mobskill Version
+    PUTRID_BREATH_2               = 1609, -- Cirrate Christelle - Skill Attack version
+
     FROGKICK_2                    = 1621,
 
     SHEEP_BLEAT_2                 = 1633,
@@ -649,6 +661,7 @@ xi.mobSkill =
     VENOM_SPRAY_2                 = 1843,
     PIT_AMBUSH_2                  = 1844,
     MANDIBULAR_BITE_2             = 1845,
+    FIRESPIT_BLUE_MAMOOLJA        = 1923, -- Ignores shadows
 
     RANGED_ATTACK_15              = 1949,
 

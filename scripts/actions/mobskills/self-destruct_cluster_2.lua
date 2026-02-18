@@ -1,6 +1,8 @@
 -----------------------------------
 -- Self-Destruct
--- Used when only two clusters remain
+-- Family: Clusters
+-- Description: The 2nd bomb in the Cluster explodes to deal Fire damage on targets in range.
+-- Notes: Bomb Cluster Self Destruct - 2 Bomb up
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,23 +11,34 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getHP() / 3)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
+
+    params.baseDamage     = skill:getMobHP()
+    params.fTP            = { 0.40, 0.40, 0.40 }
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
     if mob:getPool() == xi.mobPool.RAZON then
-        damage = mob:getMaxHP() / 2
+        params.baseDamage = mob:getMaxHP()
+        params.fTP        = { 0.50, 0.50, 0.50 }
+
         if mob:getHPP() <= 33 then
-            damage = 0
+            params.baseDamage = 0
         end
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 0.4, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    skill:setFinalAnimationSub(6)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
 
-    return damage
+    skill:setFinalAnimationSub(6) -- TODO: Standardize cluster spawn animations.
+
+    return info.damage
 end
 
 return mobskillObject

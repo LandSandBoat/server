@@ -16,4 +16,16 @@ m:addOverride('xi.effects.arcane_circle.onEffectGain', function(target, effect)
     effect:addMod(xi.mod.ARCANA_KILLER, effect:getPower())
 end)
 
+-----------------------------------
+-- Ranger
+-----------------------------------
+
+-- Camouflage: Remove reduced enmity and chance to retain after ranged attack
+m:addOverride('xi.effects.camouflage.onEffectGain', function(target, effect)
+end)
+
+-- Unlimited Shot: In WotG era, removed on any ranged attack, not just successful hits
+m:addOverride('xi.effects.unlimited_shot.onEffectGain', function(target, effect)
+end)
+
 return m

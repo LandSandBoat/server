@@ -1,8 +1,8 @@
 -----------------------------------
 -- Cyclonic Turmoil
---
--- Deals Wind damage in an area of effect. Additional effect: Knockback & Dispel
--- Notes: Dispels multiple buffs. Wipes shadows.
+-- Family: Pixies
+-- Deals Wind damage in an area of effect. Additional Effect: Dispel, Knockback
+-- Notes: Dispels all buffs except Food.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,33 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 2.8
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3, 3, 3 } -- TODO: Capture fTPs
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    local dispel1 = target:dispelStatusEffect()
-    local dispel2 = target:dispelStatusEffect()
-    local total   = 0
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    if dispel1 ~= xi.effect.NONE then
-        total = total + 1
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        target:dispelAllStatusEffect(xi.effectFlag.DISPELABLE)
     end
 
-    if dispel2 ~= xi.effect.NONE then
-        total = total + 1
-    end
-
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-
-    if total == 0 then
-        return damage
-    else
-        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
-
-        return total
-    end
+    return info.damage
 end
 
 return mobskillObject

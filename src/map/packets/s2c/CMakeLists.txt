@@ -203,7 +203,9 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b5_faq_gmparam.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0b5_faq_gmparam.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b6_set_gmmsg.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0b6_set_gmmsg.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b7_gmscitem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0bf_registration.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0bf_registration.cpp

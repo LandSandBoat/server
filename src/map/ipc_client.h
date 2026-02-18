@@ -87,6 +87,8 @@ public:
     void handleMessage_EntityInformationResponse(const IPP& ipp, const ipc::EntityInformationResponse& message);
     void handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::SendPlayerToLocation& message);
     void handleMessage_AssistChannelEvent(const IPP& ipp, const ipc::AssistChannelEvent& message) const;
+    void handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallRequest& message);
+    void handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallResponse& message);
 
     void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
 

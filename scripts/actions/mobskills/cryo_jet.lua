@@ -2,6 +2,7 @@
 -- Cryo Jet
 -- Family: Ultima
 -- Description: Deals Ice breath damage to targets in front of mob. Additional Effect: Paralysis
+--  additional effect : Paralyze
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,15 +14,13 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
     local params = {}
 
-    params.percentMultipier = 0.05
-    params.damageCap        = 490
-    params.bonusDamage      = 0
-    params.mAccuracyBonus   = { 0, 0, 0 }
-    params.resistStat       = xi.mod.INT
-    params.element          = xi.element.ICE
-    params.attackType       = xi.attackType.BREATH
-    params.damageType       = xi.damageType.ICE
-    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.percentMultipier  = 0.05 -- TODO: Capture HP multiplier/threshhold.
+    params.element           = xi.element.ICE
+    params.damageCap         = 490
+    params.bonusDamage       = 0
+    params.mAccuracyBonus    = { 0, 0, 0 }
+    params.resistStat        = xi.mod.INT
+    params.resistStat        = xi.mod.INT
 
     local info = xi.mobskills.mobBreathMove(mob, target, skill, action, params)
 

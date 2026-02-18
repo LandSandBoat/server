@@ -1,27 +1,38 @@
 -----------------------------------
 -- Meltdown
--- Reactor failure causes self-destruct, dealing magic damage to targets in an area of effect.
+-- Family: Dolls
+-- Description: Doll self destructs and deals Light damage to targets in range.
+-- Note: Dolls will begin an animation sequence that changes their animationSub() before actually using this skill.
+-- This sequence may not be tied to normal TP usage.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobType.NOTORIOUS) then
+    if mob:isMobType(xi.mobType.NOTORIOUS) then -- TODO: Set skill lists instead of conditional.
         return 1
     end
 
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getHP() / 2
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = skill:getMobHP() / 2
+    params.fTP            = { 1, 1, 1 }
+    params.element        = xi.element.LIGHT
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.LIGHT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 mobskillObject.onMobSkillFinalize = function(mob, skill)

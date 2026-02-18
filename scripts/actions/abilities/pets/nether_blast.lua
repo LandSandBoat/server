@@ -1,5 +1,6 @@
 -----------------------------------
 -- Nether Blast
+-- Family: Diabolos (Player Pet)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -11,16 +12,24 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local damage = math.floor(10 + 5 * pet:getMainLvl())
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.DARK, petskill)
-    damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.DARK, 1)
+    params.baseDamage     = pet:getMainLvl() + 2
+    params.fTP            = { 5.0, 5.0, 5.0 }
+    params.element        = xi.element.DARK
+    params.attackType     = xi.attackType.BREATH
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.canMagicBurst  = true
+    params.primaryMessage = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
-    target:updateEnmityFromDamage(pet, damage)
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return abilityObject

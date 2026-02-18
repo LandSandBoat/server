@@ -1,9 +1,8 @@
 -----------------------------------
 -- Self-Destruct (Fire in the Sky)
+-- Family: Cluster
 -- Description: Deals massive fire damage to enemies within range. Damage scales 1:1 with remaining HP.
--- Type: Magical Fire
 -- Range: 10'
--- Utsusemi/Blink absorb: Ignores shadows
 -- Notes: Used by Razon in ENM "Fire in the Sky" when final self-destruct is triggered. Results in immediate ejection from the battlefield.
 -----------------------------------
 ---@type TMobSkill
@@ -13,15 +12,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getHP() * 2
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = skill:getMobHP()
+    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 mobskillObject.onMobSkillFinalize = function(mob, skill)

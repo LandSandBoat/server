@@ -1,11 +1,8 @@
 -----------------------------------
---  Vitriolic Spray
---  Family: Wamouracampa
---  Description: Expels a caustic stream at targets in a fan-shaped area of effect. Additional effect: Burn
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadow
---  Range: Cone
---  Notes: Burn is 10-30/tic
+-- Vitriolic Spray
+-- Family: Wamouracampa
+-- Description: Conal AoE Fire damage in front of mob. Additional Effect: Burn
+-- Note: Used while in Open form. (Handled via skill list in family mixin)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,17 +11,29 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * 2.7)
-    damage = damage + math.random(0, 4.5 + math.max(mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0))
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 4.50, 4.50, 4.50 }
+    params.element         = xi.element.FIRE
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.FIRE
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier = 1
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, math.random(10, 30), 3, 60)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Is power random? Based off level? Different individuals? Need captures
+        -- Sources say Burn is 10-30/tic but does not go into depth.
+        -- Personal captures showed 10/tick from Wamoura Prince(Mount Zhayolm). https://youtu.be/2H350wLAlFo?t=228
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, 10, 3, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

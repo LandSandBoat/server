@@ -1,10 +1,7 @@
 -----------------------------------
---  Smouldering Swarm
---
---  Description: Deals Fire damage to enemies within an area of effect. Additional effect: Knockback
---  Type: Magical (Fire)
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: 10' radial
+-- Smouldering Swarm
+-- Family: Twitherym
+-- Description: Deals Fire damage to enemies within an area of effect. Additional Effect: Burn, Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,19 +10,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 2
-    local duration = math.random(15, 90)
-    local damage = mob:getWeaponDmg()
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, 10, 3, duration)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-    return damage
+        -- TODO: Verify duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, 10, 3, 90)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

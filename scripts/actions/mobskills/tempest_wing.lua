@@ -1,10 +1,7 @@
 -----------------------------------
 --  Tempest Wing
 --  Family: Bahamut
---  Description: Turbulence deals Wind damage to enemies within a very wide area of effect. Additional effect: Knockback
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: Cone
+--  Description: Turbulence deals Wind damage to enemies in front of mob. Additional Effect: Blind, Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -17,15 +14,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 4
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl()
+    params.fTP            = { 4.75, 4.75, 4.75 }
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    -- TODO: Forces mob to face target.
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 50, 0, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

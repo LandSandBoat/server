@@ -211,7 +211,7 @@ xi.job_utils.ranger.useScavenge = function(player, target, ability, action)
     local playerID       = target:getID()
 
     if arrowsToReturn == 0 then
-        action:messageID(playerID, 139)
+        action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_NOTHING)
     else
         if arrowsToReturn > 99 then
             arrowsToReturn = 99
@@ -221,9 +221,9 @@ xi.job_utils.ranger.useScavenge = function(player, target, ability, action)
         player:addItem(arrowID, arrowsToReturn)
 
         if arrowsToReturn == 1 then
-            action:messageID(playerID, 140)
+            action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_ITEM)
         else
-            action:messageID(playerID, 674)
+            action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_ITEMS)
             action:additionalEffect(playerID, 1)
             action:addEffectParam(playerID, arrowsToReturn)
         end

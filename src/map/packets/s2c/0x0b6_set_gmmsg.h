@@ -37,6 +37,5 @@ public:
         uint8_t  Msg[244]; // PS2: Msg
     };
 
-    // TODO: Unimplemented
-    GP_SERV_COMMAND_SET_GMMSG() = default;
+    GP_SERV_COMMAND_SET_GMMSG(uint32_t msgId, uint16_t seqId, uint16_t pktNum, const std::string& message);
 };

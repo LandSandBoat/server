@@ -1,27 +1,39 @@
 -----------------------------------
 -- Homing Missle
+-- Family: Chariots
+-- Description: Deals near death damage to target and surrounding allies. Resets hate.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    -- TODO: JPWiki states this can only be used on targets in front. Need captures
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local targetcurrentHP = target:getHP()
-    local targetmaxHP = target:getMaxHP()
-    local hpset = targetmaxHP * 0.20
-    local dmg = 0
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
+    params.baseDamage           = target:getHP() * 0.90
+    params.fTP                  = { 1, 1, 1 }
+    params.element              = xi.element.NONE -- TODO: Capture element (Possibly Fire?)
+    params.attackType           = xi.attackType.MAGICAL
+    params.damageType           = xi.damageType.ELEMENTAL
+    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    -- TODO: Is it reduced by Shell/MDB?
 
-    if targetcurrentHP > hpset then
-        dmg = targetcurrentHP - hpset
+    -- TODO: Long-Bowed Chariot mechanics
+    -- https://www.bg-wiki.com/ffxi/Long-Bowed_Chariot
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        mob:resetEnmity(target)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, { breakBind = false })
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

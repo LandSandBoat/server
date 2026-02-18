@@ -1,10 +1,8 @@
 -----------------------------------
--- Roller Chain
--- Only used by Ramparts when its door is closed
--- Description: Single target Bind
--- Type: Magical
--- Utsusemi/Blink absorb: removes 2 shadows
--- Range: 7' single target
+-- Choke Chain
+-- Family: Ramparts
+-- Description: Inflicts Amnesia, Bind, Silence to a single target.
+-- Notes: Only used by Ramparts when its door is closed.
 -----------------------------------
 
 ---@type TMobSkill
@@ -19,15 +17,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 2
+    -- TODO: JPWiki states messaging priority is Amnesia > Silence > Bind.
+    -- If this is true, we need a way to have a fall back to the next effect for skills that apply multiple effects.
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.MAB_BONUS)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 60)) -- TODO: Capture power
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
-
-    return damage
+    return xi.effect.AMNESIA
 end
 
 return mobskillObject

@@ -1,12 +1,9 @@
 -----------------------------------
---  Hurricane Wing
---
---  Description: Deals hurricane-force wind damage to enemies within a very wide area of effect. Additional effect: Blind
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: 30' radial.
---  Notes: Used only by Dragua, Fafnir, Nidhogg, Cynoprosopi, Wyrm, and Odzmanouk. The blinding effect does not last long
---                but is very harsh. The attack is wide enough to generally hit an entire alliance.
+-- Hurricane Wing
+-- Family: Wyrm
+-- Description: Deals hurricane-force wind damage to enemies within a very wide area of effect. Additional effect: Blind
+-- Notes: Used only by Dragua, Fafnir, Nidhogg, Cynoprosopi, Wyrm, and Odzmanouk. The blinding effect does not last long
+--        but is very harsh. The attack is wide enough to generally hit an entire alliance.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -21,19 +18,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.WIND, 4, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3.250, 3.625, 4.000 }
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    if mob:getPool() == xi.mobPool.NIDHOGG then
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 160, 0, 30)
-    else
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 100, 0, 30)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local power = 100
+
+        if mob:getPool() == xi.mobPool.NIDHOGG then
+            power = 160
+        end
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, 30)
     end
 
-    return damage
+    return info.damage
 end
 
 return mobskillObject

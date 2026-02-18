@@ -1,11 +1,8 @@
 -----------------------------------
---  Dark Wave
---
---  Description: A wave of dark energy washes over targets in an area of effect. Additional effect: Bio
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: 10' radial
---  Notes: Severity of Bio effect varies by time of day, from 8/tic at midday to 20/tic at midnight.
+-- Dark Wave
+-- Family: Bombs (Dijin)
+-- Description: Inflicts Bio to targets around mob.
+-- Notes: Severity of Bio effect slip damage increases at night.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,21 +12,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 5
-    local hour   = VanadielHour()
-    local power  = 8
+    local hour  = VanadielHour()
+    local power = 8
 
-    if hour > 12 then
-        power = 8 + hour - 11
+    -- Note: Bio ATTP reduction seems to be static across time of day.
+    local attPercReduction = 25
+
+    if hour < 6 or hour >= 18 then
+        power = 20
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, power, 3, 60, 0, attPercReduction) -- TODO: Capture power/duration
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, power, 3, 60)
-
-    return damage
+    return xi.effect.BIO
 end
 
 return mobskillObject

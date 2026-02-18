@@ -1,11 +1,8 @@
 -----------------------------------
---  Wind Shear
---
---  Description: Deals damage to enemies within an area of effect. Additional effect: Knockback
---  Type: Physical
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: 10' radial
---  Notes: The knockback is rather severe. Vulpangue uses an enhanced version that inflicts Weight.
+-- Wind Shear
+-- Family: Puks
+-- Description: Deals Wind damage to enemies within an area of effect. Additional Effect: Knockback, Weight
+-- Notes: The knockback is rather severe. Used by Vulpangue.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,17 +11,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = math.random(2, 3)
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 50, 0, 120)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 1.25, 1.50, 1.75 } -- TODO: Capture fTP scaling
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior.
+    -- TODO: Jimmayus spreadsheet states if this is fully resisted, it misses(Knockback nullified as well?).
+    -- Might want to verify if physical or magical. Spreadsheet says Wind, JP Wiki says physical.
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject
