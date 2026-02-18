@@ -31,6 +31,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
         HARVESTING_IS_POSSIBLE_HERE   = 7690,  -- Harvesting is possible here if you have <item>.
         TREE_CHECK                    = 7697,  -- The hole in this tree is filled with a sweet-smelling liquid.
         TREE_FULL                     = 7698,  -- Your wine barrel is already full.
+        CHILL_RUNS_DOWN               = 7699,  -- A chill runs down your spine...
         WATER_HOLE                    = 7701,  -- There is an Opo-opo drinking well here. It seems they feast here, too.
         FAINT_CRY                     = 7702,  -- You hear the cry of a famished Opo-opo!
         PAMAMAS                       = 7705,  -- You might be able to draw an Opo-opo here if you had more pamamas.
