@@ -39,7 +39,7 @@ commandObj.onTrigger = function(player, target, zoneId, text, guide)
         while(group ~= 4) do
             targ:addTeleport(xi.teleport.type.SURVIVAL, groupIndex - 1, group - 1)
             group = group + 1
-		end
+        end
     end
 
     player:printToPlayer(string.format('%s now has all Survival Guides.', targ:getName()))
