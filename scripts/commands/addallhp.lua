@@ -28,12 +28,14 @@ commandObj.onTrigger = function(player, target)
             return
         end
     end
+
     -- adds all Home Points
     for i = 0, 121 do
         local hpBit = i % 32
         local hpSet = math.floor(i / 32)
         targ:addTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet)
     end
+
     player:printToPlayer(string.format('%s now has all Home Points.', targ:getName()))
 end
 

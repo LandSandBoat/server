@@ -31,7 +31,7 @@ commandObj.onTrigger = function(player, target, zoneId, text, guide)
             return
         end
     end
-    
+
     -- adds all Survival Guides
     for i = 1, 32 do
         local groupIndex = i
