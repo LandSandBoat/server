@@ -1,6 +1,6 @@
 -----------------------------------
--- func: addallmounts
--- desc: Adds all mount key items to GM if no target is specified.
+-- func: addallhp
+-- desc: Adds all Home Points to GM if no target is specified.
 -----------------------------------
 ---@type TCommand
 local commandObj = {}
@@ -13,7 +13,7 @@ commandObj.cmdprops =
 
 local function error(player, msg)
     player:printToPlayer(msg)
-    player:printToPlayer('!addallmounts (player)')
+    player:printToPlayer('!addallhp (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -29,12 +29,15 @@ commandObj.onTrigger = function(player, target)
         end
     end
 
-    -- add all mount key items
-    for i = 3072, 3108, 1 do
-        targ:addKeyItem(i)
-    end
+    -- adds all Home Points
+    for i = 0, 121, 1 do
+        local hpBit = i % 32
+        local hpSet = math.floor(i / 32)
+        targ:addTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet)
 
-    player:printToPlayer(string.format('%s now has all mounts.', targ:getName()))
+	end
+
+    player:printToPlayer(string.format('%s now has all Home Points.', targ:getName()))
 end
 
 return commandObj
