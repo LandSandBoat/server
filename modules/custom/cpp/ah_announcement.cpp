@@ -7,6 +7,7 @@
  ************************************************************************/
 
 #include "common/database.h"
+#include "common/timer.h"
 
 #include "map/ipc_client.h"
 #include "map/map_session.h"
@@ -30,9 +31,11 @@ class AHAnnouncementModule : public CPPModule
     {
         TracyZoneScoped;
 
+        constexpr auto restockBuyerName = "MarketHelper";
+
         const auto originalHandler = PacketParser[0x04E];
 
-        const auto newHandler = [originalHandler](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+        const auto newHandler = [originalHandler, restockBuyerName](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
         {
             TracyZoneScoped;
 
@@ -55,6 +58,41 @@ class AHAnnouncementModule : public CPPModule
 
                     if (auctionutils::PurchasingItems(PChar, payload))
                     {
+                        if (PChar->getName() == std::string(restockBuyerName))
+                        {
+                            const auto buyerId = [&]() -> uint32
+                            {
+                                uint32 charId = 0;
+
+                                const auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charname = ? LIMIT 1", PChar->getName());
+                                FOR_DB_SINGLE_RESULT(rset)
+                                {
+                                    charId = rset->get<uint32>("charid");
+                                }
+
+                                return charId;
+                            }();
+
+                            if (buyerId == 0)
+                            {
+                                ShowWarning("AH restock skipped: could not resolve charid for %s", PChar->getName());
+                            }
+                            else
+                            {
+                                const bool inserted = db::preparedStmt("INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(?, ?, ?, ?, ?, ?)",
+                                                                        itemid,
+                                                                        quantity == 0,
+                                                                        buyerId,
+                                                                        PChar->getName(),
+                                                                        earth_time::timestamp(),
+                                                                        price);
+                                if (!inserted)
+                                {
+                                    ShowError("AH restock failed: itemid=%u stack=%u seller=%s price=%u", itemid, quantity == 0, PChar->getName(), price);
+                                }
+                            }
+                        }
+
                         const auto sellerId = [&]() -> uint32
                         {
                             uint32 sellerId = 0;
