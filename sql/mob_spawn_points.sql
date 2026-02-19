@@ -2638,14 +2638,14 @@ INSERT INTO `mob_spawn_points` VALUES (16826506,0,'Nightmare_Bats','Nightmare Ba
 INSERT INTO `mob_spawn_points` VALUES (16826507,0,'Goblin_Swordsman','Goblin Swordsman',28,78,78,92.145,15.500,66.595,140);
 INSERT INTO `mob_spawn_points` VALUES (16826508,0,'Moblin_Aidman','Moblin Aidman',20,75,79,94.866,15.500,66.412,220);
 INSERT INTO `mob_spawn_points` VALUES (16826509,0,'Moblin_Engineman','Moblin Engineman',25,75,79,100.779,15.500,57.094,181);
-INSERT INTO `mob_spawn_points` VALUES (16826510,0,'Swashstox_Beadblinker','Swashstox Beadblinker',29,79,81,49.850,15.850,-20.750,0);
+INSERT INTO `mob_spawn_points` VALUES (16826510,0,'Swashstox_Beadblinker','Swashstox Beadblinker',29,80,80,49.850,15.850,-20.750,0);
 INSERT INTO `mob_spawn_points` VALUES (16826511,0,'Moblin_Aidman','Moblin Aidman',37,75,79,51.850,15.850,-22.750,0);
 INSERT INTO `mob_spawn_points` VALUES (16826512,0,'Moblin_Engineman','Moblin Engineman',38,75,79,47.850,15.850,-18.750,0);
 INSERT INTO `mob_spawn_points` VALUES (16826513,0,'Moblin_Groundman','Moblin Groundman',30,77,77,98.959,15.417,42.552,66);
 INSERT INTO `mob_spawn_points` VALUES (16826514,0,'Goblin_Swordsman','Goblin Swordsman',28,78,78,117.092,15.398,-20.675,128);
 INSERT INTO `mob_spawn_points` VALUES (16826515,0,'Moblin_Aidman','Moblin Aidman',20,75,79,118.597,15.395,-21.537,0);
 INSERT INTO `mob_spawn_points` VALUES (16826516,0,'Moblin_Engineman','Moblin Engineman',25,75,79,117.594,15.396,-21.707,1);
-INSERT INTO `mob_spawn_points` VALUES (16826517,0,'Swashstox_Beadblinker','Swashstox Beadblinker',29,79,81,110.552,15.510,-21.166,0);
+INSERT INTO `mob_spawn_points` VALUES (16826517,0,'Swashstox_Beadblinker','Swashstox Beadblinker',29,80,80,110.552,15.510,-21.166,0);
 INSERT INTO `mob_spawn_points` VALUES (16826518,0,'Moblin_Aidman','Moblin Aidman',37,75,79,109.450,15.528,-22.401,6);
 INSERT INTO `mob_spawn_points` VALUES (16826519,0,'Moblin_Engineman','Moblin Engineman',38,75,79,108.622,15.668,-21.742,15);
 INSERT INTO `mob_spawn_points` VALUES (16826520,0,'Moblin_Groundman','Moblin Groundman',30,77,77,136.153,15.402,-21.312,127);
@@ -2697,8 +2697,8 @@ INSERT INTO `mob_spawn_points` VALUES (16826565,0,'Moblin_Scalpelman','Moblin Sc
 INSERT INTO `mob_spawn_points` VALUES (16826566,0,'Moblin_Scalpelman','Moblin Scalpelman',32,78,80,65.348,15.417,-172.103,31);
 INSERT INTO `mob_spawn_points` VALUES (16826567,0,'Moblin_Scalpelman','Moblin Scalpelman',32,78,80,-4.669,15.421,13.363,65);
 INSERT INTO `mob_spawn_points` VALUES (16826568,0,'Moblin_Scalpelman','Moblin Scalpelman',32,78,80,301.061,23.585,-28.100,93);
-INSERT INTO `mob_spawn_points` VALUES (16826569,0,'Goblin_Collector','Goblin Collector',33,79,81,152.126,20.000,103.074,129);
-INSERT INTO `mob_spawn_points` VALUES (16826570,0,'Bugbear_Matman','Bugbear Matman',34,75,79,124.544,19.988,-60.670,246);
+INSERT INTO `mob_spawn_points` VALUES (16826569,0,'Goblin_Collector','Goblin Collector',33,83,84,152.126,20.000,103.074,129);
+INSERT INTO `mob_spawn_points` VALUES (16826570,0,'Bugbear_Matman','Bugbear Matman',34,78,78,124.544,19.988,-60.670,246);
 
 -- ------------------------------------------------------------
 -- Mine Shaft #2716 (Zone 13)
@@ -44850,8 +44850,8 @@ INSERT INTO `mob_spawn_points` VALUES (17285541,0,'Tonberry_Shadower','Tonberry 
 INSERT INTO `mob_spawn_points` VALUES (17285542,0,'Tonberry_Shadower','Tonberry Shadower',31,61,63,277.436,-18.500,-196.470,127);
 INSERT INTO `mob_spawn_points` VALUES (17285543,0,'Goblin_Digger','Goblin Digger',40,41,44,-69.276,6.961,-179.442,127);
 INSERT INTO `mob_spawn_points` VALUES (17285544,0,'Kappa_Akuso','Kappa Akuso',41,63,63,205.000,-1.000,83.000,230);
-INSERT INTO `mob_spawn_points` VALUES (17285545,0,'Kappa_Bonze','Kappa Bonze',42,60,60,204.000,-1.000,83.000,230);
-INSERT INTO `mob_spawn_points` VALUES (17285546,0,'Kappa_Biwa','Kappa Biwa',43,61,61,203.000,-1.000,83.000,230);
+INSERT INTO `mob_spawn_points` VALUES (17285545,0,'Kappa_Bonze','Kappa Bonze',42,61,61,204.000,-1.000,83.000,230);
+INSERT INTO `mob_spawn_points` VALUES (17285546,0,'Kappa_Biwa','Kappa Biwa',43,62,62,203.000,-1.000,83.000,230);
 INSERT INTO `mob_spawn_points` VALUES (17285547,0,'Hobgoblin_Warrior','Hobgoblin Warrior',44,50,55,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17285548,0,'Hobgoblin_White_Mage','Hobgoblin White Mage',45,50,55,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17285549,0,'Hobgoblin_Black_Mage','Hobgoblin Black Mage',46,50,55,0.000,0.000,0.000,0);
@@ -59702,9 +59702,9 @@ INSERT INTO `mob_spawn_points` VALUES (17469761,0,'Mimic','Mimic',42,60,60,1.000
 -- ------------------------------------------------------------
 
 -- The Moonlit Path
-INSERT INTO `mob_spawn_points` VALUES (17473537,0,'Fenrir_Prime','Fenrir Prime',1,80,82,340.000,47.000,-337.000,65);
-INSERT INTO `mob_spawn_points` VALUES (17473538,0,'Fenrir_Prime','Fenrir Prime',1,80,82,-60.097,9.000,62.967,65);
-INSERT INTO `mob_spawn_points` VALUES (17473539,0,'Fenrir_Prime','Fenrir Prime',1,80,82,-379.943,-53.000,422.974,65);
+INSERT INTO `mob_spawn_points` VALUES (17473537,0,'Fenrir_Prime','Fenrir Prime',1,80,80,340.000,47.000,-337.000,65);
+INSERT INTO `mob_spawn_points` VALUES (17473538,0,'Fenrir_Prime','Fenrir Prime',1,80,80,-60.097,9.000,62.967,65);
+INSERT INTO `mob_spawn_points` VALUES (17473539,0,'Fenrir_Prime','Fenrir Prime',1,80,80,-379.943,-53.000,422.974,65);
 
 -- Moon Reading (Windy 9-2)
 INSERT INTO `mob_spawn_points` VALUES (17473540,0,'Ace_of_Cups','Ace of Cups',34,73,75,344.000,48.000,-341.000,61);

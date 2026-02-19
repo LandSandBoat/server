@@ -1,6 +1,8 @@
 -----------------------------------
 -- Howling Moon
--- Deals dark elemental damage to enemies within area of effect.
+-- Family: Avatar (Fenrir)
+-- Description: Deals Dark elemental damage to enemies within area of effect.
+-- Notes: Astral Flow skill.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,15 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 9
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 3, xi.mobskills.magicalTpBonus.NO_EFFECT, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 9, 9, 9 }
+    params.element         = xi.element.DARK
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.DARK
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier = 1
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

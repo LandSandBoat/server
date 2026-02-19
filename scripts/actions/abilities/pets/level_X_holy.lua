@@ -1,5 +1,6 @@
 -----------------------------------
 -- Level X Holy
+-- Family: Cait sith (Player Pet)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -10,7 +11,7 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
-    local damage            = 0
+
     local holyRollOneAnimID = 164
     local primaryTargetID   = action:getPrimaryTargetID()
 
@@ -27,23 +28,33 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     local power = action:getAnimation(target:getID()) - 163
 
+    local params = {}
+
+    params.baseDamage       = pet:getMainLvl()
+    params.fTP              = { power, power, power }
+    -- TODO: wSCs?
+    params.element          = xi.element.LIGHT
+    params.attackType       = xi.attackType.MAGICAL
+    params.damageType       = xi.damageType.LIGHT
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.dStatMultiplier  = 1.5
+    params.dStatAttackerMod = xi.mod.MND
+    params.dStatDefenderMod = xi.mod.MND
+    params.canMagicBurst    = true
+    params.primaryMessage   = xi.msg.basic.USES_JA_TAKE_DAMAGE
+
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
+
     -- Only have an effect if target's level is divisible by die roll
     if target:getMainLvl() % power == 0 then
-        damage = math.floor(pet:getMainLvl() * power + (pet:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)) * 1.5)
-
-        local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 10)
-        info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.LIGHT, petskill)
-        damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
-
-        -- TODO: Magic burst?
-
-        target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.element.LIGHT)
-        target:updateEnmityFromDamage(pet, damage)
+        if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+            target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+        end
     else
         petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    return damage
+    return info.damage
 end
 
 return abilityObject

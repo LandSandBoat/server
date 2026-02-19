@@ -1,9 +1,7 @@
 -----------------------------------
---  Great Sandstorm
---  Description: Deals Wind damage to single target. Additional effect: Blind
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: Single target
+-- Great Sandstorm
+-- Family: Manticores
+-- Description: Deals Earth damage to single target. Additional Effect: Blind
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,15 +10,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() * 3, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    params.baseDamage     = mob:getMainLvl()
+    params.fTP            = { 3, 3, 3 }
+    params.element        = xi.element.EARTH
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.EARTH
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

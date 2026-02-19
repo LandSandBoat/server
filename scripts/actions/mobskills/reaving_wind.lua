@@ -1,11 +1,9 @@
 -----------------------------------
---  Reaving Wind
---    Mob Ability: 2431
---  Description: Deals damage in an area of effect. Reduces target's TP by 1000.
---  Type: Magical
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: Unknown radial
---  Notes: Causes Amphipteres to enter into an aura state
+-- Reaving Wind
+-- Family: Amphiptere
+-- Description: Resets TP of targets in range. Sometimes causes Amphipteres to enter into an aura state that constantly knocks back.
+-- Notes: Sometimes causes Amphipteres to enter into an aura state. TODO: Need captures on conditions/chance for entering state.
+-- Notes: The initial Reaving Wind that reduces TP does not seem to knock back.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,20 +13,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+    local tpReduced = 0
+    target:setTP(tpReduced)
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    skill:setMsg(xi.msg.basic.TP_REDUCED)
 
-    if target:getTP() == 0 then
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
-    else
-        target:setTP(target:getTP() - 1000)
-    end
-
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
-
-    return damage
+    return tpReduced
 end
 
 return mobskillObject

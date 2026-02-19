@@ -9,15 +9,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg()
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    -- TODO: Capture possible skillchain properties
+    -- TODO: Is this magical or physical skill?
+    params.baseDamage     = mob:getWeaponDmg()
+    params.fTP            = { 1, 1, 1 } -- TODO: Capture fTPs
+    params.element        = xi.element.LIGHT -- TODO: Capture element
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.LIGHT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

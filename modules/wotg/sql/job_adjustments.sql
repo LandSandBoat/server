@@ -44,17 +44,17 @@ UPDATE `abilities` SET `recastTime` = 180 WHERE `name` = 'reward';
 -- Reward merit: Revert value to 6 seconds per level
 UPDATE `merits` SET `value` = 6 WHERE `name` = 'reward';
 
--- Heel: Revert cooldown from 5 seconds to 10 seconds\
+-- Heel: Revert recast from 5 seconds to 10 seconds
 -- Source: http://www.playonline.com/pcd/update/ff11us/20071120wwnX41/detail.html
-UPDATE `abilities` SET `cooldown` = 10 WHERE `name` = 'heel';
+UPDATE `abilities` SET `recastTime` = 10 WHERE `name` = 'heel';
 
--- Stay: Revert cooldown from 5 seconds to 10 seconds
-UPDATE `abilities` SET `cooldown` = 10 WHERE `name` = 'stay';
+-- Stay: Revert recast from 5 seconds to 10 seconds
+UPDATE `abilities` SET `recastTime` = 10 WHERE `name` = 'stay';
 
--- Leave: Revert cooldown from 5 seconds to 10 seconds
-UPDATE `abilities` SET `cooldown` = 10 WHERE `name` = 'leave';
+-- Leave: Revert recast from 5 seconds to 10 seconds
+UPDATE `abilities` SET `recastTime` = 10 WHERE `name` = 'leave';
 
--- Heel/Stay/Leave: Remove shared cooldown
+-- Heel/Stay/Leave: Remove shared recast
 UPDATE `abilities` set `recastId` = 0 Where `name` = 'heel';
 UPDATE `abilities` set `recastId` = 0 Where `name` = 'leave';
 UPDATE `abilities` set `recastId` = 0 Where `name` = 'stay';

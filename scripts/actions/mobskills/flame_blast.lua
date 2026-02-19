@@ -1,26 +1,37 @@
 -----------------------------------
---  Flame Blast
---
---  Description: Deals fire damage to enemies within a wide area of effect.
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: 30'
---  Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
+-- Flame Blast
+-- Family: Wyrms
+-- Description: Deals Fire damage to enemies within a wide area of effect.
+-- Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getAnimationSub() ~= 1 then
+        return 1
+    end
+
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.FIRE, 11, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 11, 11, 11 }
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

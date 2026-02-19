@@ -1,9 +1,7 @@
 -----------------------------------
 -- Lamentation
---
--- Description: Deals Light damage to all targets in range. Additional effect: Dia
--- Range: 10' cone
--- Wipes Shadows
+-- Family: Seethers
+-- Description: Deals Light damage to all targets in range. Additional Effect: Dia
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,20 +10,29 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 1, 1, 1 } -- TODO: Capture fTPs
+    params.element        = xi.element.LIGHT
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.LIGHT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior. JP Wiki says ignores shadows, EN Wikis say it wipes them.
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DIA, 8, 3, 30, 0, 20)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    local effect1 = target:getStatusEffect(xi.effect.DIA)
-    if effect1 then
-        effect1:delEffectFlag(xi.effectFlag.ERASABLE)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DIA, 8, 3, 30, 0, 20)
+
+        local effect1 = target:getStatusEffect(xi.effect.DIA)
+        if effect1 then
+            effect1:delEffectFlag(xi.effectFlag.ERASABLE)
+        end
     end
 
-    return damage
+    return info.damage
 end
 
 return mobskillObject

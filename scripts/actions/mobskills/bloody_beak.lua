@@ -1,12 +1,9 @@
 -----------------------------------
---  Bloody Beak
---    Mob Ability: 2428
---  Description: Steals HP from targets within a fan-shaped area.
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores Utsusemi
---  Range: 5'
---  Notes: Seems to be magical-based Drain.
---    Witnessed Paladin taking lower damage from it than Ninja with Shell only.
+-- Bloody Beak
+-- Family: Amphipteres
+-- Description: 3 fold physical attack to targets in front of mob. Additional Effect: HP Drain
+-- Range: 5'
+-- TODO: Umeboshi: "This seems to be a physical skill, will fix it in the pass on mobPhysicalMove()"
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,15 +12,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 3, 3, 3 }
+    params.element         = xi.element.WIND
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.WIND
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier = 1
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, damage))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage, info.attackType, info.damageType))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

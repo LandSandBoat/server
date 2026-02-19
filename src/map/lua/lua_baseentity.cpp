@@ -2640,11 +2640,11 @@ void CLuaBaseEntity::leaveGame()
 /************************************************************************
  *  Function: sendEmote()
  *  Purpose : Makes a player or NPC entity emit an emote.
- *  Example : npc:sendEmote(npc2, xi.emote.HURRAY, xi.emoteMode.MOTION)
+ *  Example : npc:sendEmote(npc2, xi.emote.HURRAY, xi.emoteMode.MOTION, false)
  *  Notes   : Target is optional.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const
+void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const
 {
     const auto* PTarget   = target ? target->GetBaseEntity() : nullptr;
     const auto  emoteID   = static_cast<Emote>(emID);
@@ -2665,8 +2665,9 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
     {
         auto targetId     = PTarget ? PTarget->id : PChar->id;
         auto targetTargId = PTarget ? PTarget->targid : PChar->targid;
+        auto messageArea  = othersOnly ? CHAR_INRANGE : CHAR_INRANGE_SELF; // Everyone around the player or everyone around the player and the player
         PChar->loc.zone->PushPacket(PChar,
-                                    CHAR_INRANGE_SELF,
+                                    messageArea,
                                     std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
 
         return;

@@ -62,6 +62,9 @@ IPC_STRUCT_NAMES = [
     "SendPlayerToLocation",
 
     "AssistChannelEvent",
+
+    "GMCallRequest",
+    "GMCallResponse",
 ]
 
 

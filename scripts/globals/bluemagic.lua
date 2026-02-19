@@ -421,7 +421,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
         caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
@@ -478,7 +478,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
         caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
@@ -566,7 +566,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local additionalResistTier        = xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement)
     local elementalSDT                = xi.combat.damage.magicalElementSDT(target, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, false)
-    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, xi.skill.BLUE_MAGIC, spellElement)
+    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, xi.skill.BLUE_MAGIC, spellElement, 0)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(xi.skill.BLUE_MAGIC)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, xi.skill.BLUE_MAGIC)
     local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, xi.skill.BLUE_MAGIC)

@@ -1,5 +1,7 @@
 -----------------------------------
 -- Searing Light
+-- Family: Carbuncle (Player Pet)
+-- Note: Carbuncle's Astral Flow
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -11,17 +13,29 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local damage = math.floor(26 + pet:getMainLvl() * 6 + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.LIGHT, petskill)
-    damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
+    params.baseDamage      = pet:getMainLvl() + 2
+    params.fTP             = { 7.9765, 7.9765, 7.9765 }
+    params.int_wSC         = 0.30
+    params.element         = xi.element.LIGHT
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.LIGHT
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.dStatMultiplier = 1.5
+    params.canMagicBurst   = true
+    params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
+    -- TODO: Should not consume TP
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-    target:updateEnmityFromDamage(pet, damage)
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
+
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+    end
+
     summoner:setMP(0)
 
-    return damage
+    return info.damage
 end
 
 return abilityObject

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Electrocharge
--- Description: Deals thunder damage.
--- Type: Magical (thunder)
+-- Family: Spheroids
+-- Description: Deals Unaspected magic damage.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,13 +10,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.NONE, 0.5, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 0.5, 0.5, 0.5 }
+    params.element        = xi.element.NONE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.ELEMENTAL
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

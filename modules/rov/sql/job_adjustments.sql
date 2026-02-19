@@ -46,3 +46,22 @@ UPDATE merits SET upgrade = 0 WHERE name = 'ele_magic_acc';
 UPDATE merits SET upgrade = 0 WHERE name = 'ele_magic_debuff_duration';
 UPDATE merits SET upgrade = 0 WHERE name = 'ele_magic_debuff_effect';
 UPDATE merits SET upgrade = 0 WHERE name = 'aspir_absorption_amount';
+
+------------------------------------
+-- Ranger
+-- Source: https://forum.square-enix.com/ffxi/threads/55263-April.-3-2019-%28JST%29-Version-Update
+------------------------------------
+
+-- Velocity Shot: Revert recast from 1 minute to 5 minutes
+UPDATE abilities SET recastTime = 300 WHERE name = 'velocity_shot';
+
+-----------------------------------
+-- Ninja
+-- Source: https://forum.square-enix.com/ffxi/threads/55525-June.-10-2019-%28JST%29-Version-Update
+------------------------------------
+
+-- Disable OOE NIN Group 2 merits
+UPDATE merits SET upgrade = 0 WHERE name = 'yonin_effect';
+UPDATE merits SET upgrade = 0 WHERE name = 'innin_effect';
+UPDATE merits SET upgrade = 0 WHERE name = 'nin_magic_accuracy';
+UPDATE merits SET upgrade = 0 WHERE name = 'nin_magic_attack';

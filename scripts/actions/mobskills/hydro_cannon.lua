@@ -1,8 +1,7 @@
 -----------------------------------
---  Hydro_Canon
---  Description:
---  Type: Magical
---  additional effect : 40hp/tick Poison
+-- Hydro Cannon
+-- Family: Ultima
+-- Description: Deals Water damage in a conal AOE. Additional Effect : Poison
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

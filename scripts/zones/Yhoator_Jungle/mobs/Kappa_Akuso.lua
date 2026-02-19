@@ -19,7 +19,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.COUNTER, 0)
     mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 250)
 end

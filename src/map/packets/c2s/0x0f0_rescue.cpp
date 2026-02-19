@@ -21,16 +21,40 @@
 
 #include "0x0f0_rescue.h"
 
+#include "common/earth_time.h"
+#include "common/settings.h"
 #include "entities/charentity.h"
+#include "enums/chat_message_type.h"
+#include "packets/s2c/0x017_chat_std.h"
+#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_RESCUE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Unimplemented packet but State is always 0
     return PacketValidator()
-        .mustEqual(State, 0, "State not 0");
+        .mustEqual(State, 0, "State not 0")
+        .isNotJailed(PChar)
+        .isNotEngaged(PChar)
+        .isNotInEvent(PChar)
+        .isNotFishing(PChar)
+        .isNotCrafting(PChar);
 }
 
 void GP_CLI_COMMAND_RESCUE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    ShowDebugFmt("GP_CLI_COMMAND_RESCUE: Not implemented.");
+    if (!settings::get<bool>("map.SELF_UNSTUCK_ENABLED"))
+    {
+        return;
+    }
+
+    if (charutils::GetCharVar(PChar, "[GM]SelfUnstuck") != 0)
+    {
+        ShowInfoFmt("{} requested self-unstuck but is still on cooldown.", PChar->getName());
+        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Self-unstuck is on cooldown.");
+        return;
+    }
+
+    ShowInfoFmt("{} requested self-unstuck, warping them to their Home Point.", PChar->getName());
+    const auto cooldown = settings::get<uint32>("map.SELF_UNSTUCK_COOLDOWN");
+    charutils::SetCharVar(PChar, "[GM]SelfUnstuck", 1, earth_time::timestamp() + cooldown);
+    PChar->requestedWarp = true;
 }

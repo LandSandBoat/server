@@ -618,16 +618,18 @@ enum class Mod
     SEIGAN_COUNTER_BONUS     = 1188, // Enables Seigan counter bonus based on Zanshin rate
 
     // Ninja
-    UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.
-    UTSUSEMI_BONUS       = 900, // Extra shadows from gear
-    NINJA_TOOL           = 308, // Percent chance to not use a tool.
-    NIN_NUKE_BONUS_INNIN = 223, // Ninjutsu damage multiplier from Innin.
-    NIN_NUKE_BONUS_GEAR  = 522, // Ninjutsu damage multiplier from gear.
-    DAKEN                = 911, // chance to throw a shuriken without consuming it
-    NINJUTSU_DURATION    = 1000,
-    ENHANCES_SANGE       = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
-    ENHANCES_FUTAE       = 1148, // Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
-    UTSUSEMI_AOE         = 1179, // "Utsusemi" effect extends to an area
+    UTSUSEMI              = 307, // Everyone's favorite --tracks shadows.
+    UTSUSEMI_BONUS        = 900, // Extra shadows from gear
+    NINJA_TOOL            = 308, // Percent chance to not use a tool.
+    NIN_NUKE_BONUS_INNIN  = 223, // Ninjutsu damage multiplier from Innin.
+    NIN_NUKE_BONUS_GEAR   = 522, // Ninjutsu damage multiplier from gear.
+    DAKEN                 = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION     = 1000,
+    ENHANCES_SANGE        = 1091, // 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
+    ENHANCES_FUTAE        = 1148, // Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
+    UTSUSEMI_AOE          = 1179, // "Utsusemi" effect extends to an area
+    YONIN_UTSUSEMI_ENMITY = 1192, // Enables extra enmity from Utsusemi spells while under Yonin
+    SANGE_MULTI_HIT       = 1193, // Sange uses shadow-based multi-hit ranged attack instead of Daken boost
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -1146,7 +1148,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1192 and onward
+    // SPARE IDs: 1195 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

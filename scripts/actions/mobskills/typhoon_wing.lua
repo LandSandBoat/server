@@ -1,12 +1,9 @@
 -----------------------------------
---  Hurricane Wing
---
---  Description: Deals hurricane-force wind damage to enemies within a very wide area of effect. Additional effect: Blind
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: 30' radial.
---  Notes: Used only by Dragua, Fafnir, Nidhogg, Cynoprosopi, Wyrm, and Odzmanouk. The blinding effect does not last long
---                but is very harsh. The attack is wide enough to generally hit an entire alliance.
+-- Typhoon Wing
+-- Family: Wyrms
+-- Description: Deals Wind? damage to enemies within a very wide area of effect. Additional Effect: Blind
+-- Notes: Used by Ouryu and Dragua. The blinding effect does not last long
+--        but is very harsh. The attack is wide enough to generally hit an entire alliance.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,23 +11,32 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if target:isBehind(mob, 48) then
         return 1
-    elseif mob:getAnimationSub() ~= 0 then
+    elseif mob:getAnimationSub() ~= 0 then -- Do not use while flying
         return 1
     end
 
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 5
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4.50, 5.00, 5.50 }
+    params.element        = xi.element.WIND -- TODO: Capture element
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 30)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 30) -- TODO: Capture power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

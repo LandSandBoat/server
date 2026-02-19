@@ -316,4 +316,24 @@ m:addOverride('xi.effects.seigan.onEffectGain', function(target, effect)
     effect:addMod(xi.mod.DEF, jpValue * 3)
 end)
 
+-----------------------------------
+-- Ranger
+-----------------------------------
+
+-- Flashy Shot: Apply merit recast reduction
+m:addOverride('xi.job_utils.ranger.useFlashyShot', function(player, target, ability, action)
+    local recastReduction = player:getMerit(xi.merit.FLASHY_SHOT) - 150
+    action:setRecast(action:getRecast() - recastReduction)
+
+    player:addStatusEffect(xi.effect.FLASHY_SHOT, 1, 0, 60)
+
+    return xi.effect.FLASHY_SHOT
+end)
+
+-- Flashy Shot Effect: Add level correction bypass
+m:addOverride('xi.effects.flashy_shot.onEffectGain', function(target, effect)
+    effect:addMod(xi.mod.ENMITY, 50)
+    effect:addMod(xi.mod.RA_IGNORE_LVL_DIFF, 1)
+end)
+
 return m

@@ -1,5 +1,7 @@
 -----------------------------------
 -- Mijin Gakure
+-- Description: Deals unaspected magic damage to targets in range.
+-- Note: Behavior of skill differs from players. Example: Not all mobs die after using skill.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -8,15 +10,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * skill:getMobHPP() / 10) + 6
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    -- TODO: Capture fTPs/Formula
+    params.baseDamage      = mob:getWeaponDmg() * skill:getMobHPP() / 10 + 6
+    params.fTP             = { 1.0, 1.0, 1.0 }
+    params.element         = xi.element.NONE
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.ELEMENTAL
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

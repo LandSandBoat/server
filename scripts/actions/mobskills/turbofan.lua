@@ -27,9 +27,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
-
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 3, 30)
-
         if target:hasStatusEffect(xi.effect.ELEMENTALRES_DOWN) then
             target:delStatusEffectSilent(xi.effect.ELEMENTALRES_DOWN)
         end

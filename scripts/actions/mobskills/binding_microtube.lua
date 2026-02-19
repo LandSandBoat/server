@@ -1,7 +1,7 @@
 -----------------------------------
 -- Binding Microtube
--- Deals Magic damage to target. Additional effect: Bind
--- Used by Adelheid (Trust)
+-- Description: Deals Magic damage to target. Additional Effect: Bind
+-- Notes: Used by Adelheid (Trust)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,16 +10,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 5
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.NONE, 2.45, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage       = mob:getWeaponDmg()
+    params.fTP              = { 6.45, 6.45, 6.45 } -- TODO: Capture fTPs
+    params.element          = xi.element.NONE
+    params.attackType       = xi.attackType.MAGICAL
+    params.damageType       = xi.damageType.NONE
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE, { breakBind = false })
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 60)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

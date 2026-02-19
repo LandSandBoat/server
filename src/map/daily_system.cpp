@@ -48,47 +48,48 @@ std::vector<uint16> gobbieJunk = {
 
 uint16 SelectItem(CCharEntity* player, uint8 dial)
 {
-    std::vector<uint16>* dialItems = &gobbieJunk;
+    std::reference_wrapper<std::vector<uint16>> dialItems = gobbieJunk;
+
     switch (dial)
     {
         case 1:
         {
-            dialItems = &materialsDialItems;
+            dialItems = materialsDialItems;
             break;
         }
         case 2:
         {
-            dialItems = &foodDialItems;
+            dialItems = foodDialItems;
             break;
         }
         case 3:
         {
-            dialItems = &medicineDialItems;
+            dialItems = medicineDialItems;
             break;
         }
         case 4:
         {
-            dialItems = &sundries1DialItems;
+            dialItems = sundries1DialItems;
             break;
         }
         case 5:
         {
-            dialItems = &sundries2DialItems;
+            dialItems = sundries2DialItems;
             break;
         }
         case 6:
         {
-            dialItems = &specialDialItems;
+            dialItems = specialDialItems;
             break;
         }
     }
-    uint16 selection = xirand::GetRandomElement(dialItems);
+    uint16 selection = xirand::GetRandomElement(dialItems.get());
 
     // Check if Rare item is already owned and substitute with Goblin trash item.
     if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
     {
-        dialItems = &gobbieJunk;
-        selection = xirand::GetRandomElement(dialItems);
+        dialItems = gobbieJunk;
+        selection = xirand::GetRandomElement(dialItems.get());
     }
 
     return selection;

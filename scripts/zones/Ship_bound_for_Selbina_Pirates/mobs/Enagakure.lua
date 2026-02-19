@@ -8,6 +8,15 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
+    mob:addImmunity(xi.immunity.PARALYZE)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.BIND_RES_RANK, 4)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 4)
+    mob:setMod(xi.mod.DARK_RES_RANK, 4)
+    mob:setMod(xi.mod.ICE_RES_RANK, 4)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
