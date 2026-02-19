@@ -60,7 +60,7 @@ end
 xi.shop.curioVendorMoogle = function(player, stock)
     local log = -1
 
-    player:createShop(#stock / 3, log)
+    player:createShop(#stock, log)
 
     for _, stockItem in ipairs(stock) do
         if player:hasKeyItem(stockItem[3]) then
