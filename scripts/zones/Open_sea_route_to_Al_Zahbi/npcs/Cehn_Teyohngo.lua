@@ -10,7 +10,7 @@ local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(522, 1, 23, 5) then
+    if player:getGMLevel() > 0 or player:sendGuild(522, 1, 23, 5) then
         player:showText(npc, ID.text.CEHN_TEYOHNGO_SHOP_DIALOG)
     end
 end

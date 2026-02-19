@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(5272, 8, 23, 4) then
+    if player:getGMLevel() > 0 or player:sendGuild(5272, 8, 23, 4) then
         player:showText(npc, zones[xi.zone.BASTOK_MARKETS].text.VISALA_SHOP_DIALOG)
     end
 end

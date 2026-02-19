@@ -10,7 +10,7 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(531, 8, 23, 2) then
+    if player:getGMLevel() > 0 or player:sendGuild(531, 8, 23, 2) then
         player:showText(npc, ID.text.DOGGOMEHR_SHOP_DIALOG)
     end
 end

@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(60424, 9, 23, 7) then
+    if player:getGMLevel() > 0 or player:sendGuild(60424, 9, 23, 7) then
         player:showText(npc, zones[xi.zone.NORG].text.VULIAIE_SHOP_DIALOG)
     end
 end

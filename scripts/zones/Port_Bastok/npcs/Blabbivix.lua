@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(60418, 11, 22, 3) then
+    if player:getGMLevel() > 0 or player:sendGuild(60418, 11, 22, 3) then
         player:showText(npc, zones[xi.zone.PORT_BASTOK].text.BLABBIVIX_SHOP_DIALOG)
     end
 end

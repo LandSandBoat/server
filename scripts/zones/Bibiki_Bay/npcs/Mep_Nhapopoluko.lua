@@ -10,7 +10,7 @@ local ID = zones[xi.zone.BIBIKI_BAY]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(519, 1, 18, 5) then
+    if player:getGMLevel() > 0 or player:sendGuild(519, 1, 18, 5) then
         player:showText(npc, ID.text.MEP_NHAPOPOLUKO_DIALOG)
     end
 end

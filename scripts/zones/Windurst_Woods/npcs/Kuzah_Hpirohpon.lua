@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WOODS]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(5152, 6, 21, 0) then
+    if player:getGMLevel() > 0 or player:sendGuild(5152, 6, 21, 0) then
         player:showText(npc, ID.text.KUZAH_HPIROHPON_DIALOG)
     end
 end
