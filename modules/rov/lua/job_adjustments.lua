@@ -169,4 +169,42 @@ m:addOverride('xi.job_utils.ranger.useEagleEyeShot', function(player, target, ab
     return damage
 end)
 
+-----------------------------------
+-- Ninja
+-----------------------------------
+
+-- Yonin: Remove extra enmity bonus from Utsusemi spells and Yonin merits
+m:addOverride('xi.effects.yonin.onEffectGain', function(target, effect)
+    effect:addMod(xi.mod.ACC, -effect:getPower())
+    effect:addMod(xi.mod.NINJA_TOOL, effect:getPower())
+    effect:addMod(xi.mod.ENMITY, effect:getPower())
+end)
+
+-- San Spells: Add +5 Magic Attack and +5 Magic Accuracy per merit rank
+-- Source: https://forum.square-enix.com/ffxi/threads/55525-June.-10-2019-%28JST%29-Version-Update
+local sanSpellOverrides =
+{
+    { path = 'xi.actions.spells.ninjutsu.katon_san.onSpellCast',  merit = xi.merit.KATON_SAN  },
+    { path = 'xi.actions.spells.ninjutsu.hyoton_san.onSpellCast', merit = xi.merit.HYOTON_SAN },
+    { path = 'xi.actions.spells.ninjutsu.huton_san.onSpellCast',  merit = xi.merit.HUTON_SAN  },
+    { path = 'xi.actions.spells.ninjutsu.doton_san.onSpellCast',  merit = xi.merit.DOTON_SAN  },
+    { path = 'xi.actions.spells.ninjutsu.raiton_san.onSpellCast', merit = xi.merit.RAITON_SAN },
+    { path = 'xi.actions.spells.ninjutsu.suiton_san.onSpellCast', merit = xi.merit.SUITON_SAN },
+}
+
+for _, entry in ipairs(sanSpellOverrides) do
+    m:addOverride(entry.path, function(caster, target, spell)
+        local meritBonus = caster:getMerit(entry.merit)
+        caster:addMod(xi.mod.MATT, meritBonus)
+        caster:addMod(xi.mod.MACC, meritBonus)
+
+        local damage = super(caster, target, spell)
+
+        caster:delMod(xi.mod.MATT, meritBonus)
+        caster:delMod(xi.mod.MACC, meritBonus)
+
+        return damage
+    end)
+end
+
 return m

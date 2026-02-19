@@ -7,12 +7,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-     -- TODO: This is used by normal bats in COP/TOAU zones. Need to seperate skill lists.
-    if mob:isMobType(xi.mobType.NOTORIOUS) then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)

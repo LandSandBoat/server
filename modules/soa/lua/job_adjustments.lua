@@ -96,4 +96,31 @@ m:addOverride('xi.job_utils.ranger.useScavenge', function(player, target, abilit
     return 0
 end)
 
+-----------------------------------
+-- Ninja
+-----------------------------------
+
+-- Sange: Reverts to Utsusemi based barrage style ranged attack
+-- Source: https://forum.square-enix.com/ffxi/threads/44592-Oct-7-2014-%28JST%29-Version-Update
+m:addOverride('xi.job_utils.ninja.useSange', function(player, target, ability, action)
+    local meritReduction = player:getMerit(xi.merit.SANGE) - 150
+    ability:setRecast(math.max(0, ability:getRecast() - meritReduction))
+
+    -- Apply Sange effect (shadows are consumed when the ranged attack fires)
+    player:addStatusEffect(xi.effect.SANGE, 0, 0, 60)
+
+    return xi.effect.SANGE
+end)
+
+-- Sange effect: Replace 100% daken with multi-hit ranged mod
+m:addOverride('xi.effects.sange.onEffectGain', function(target, effect)
+    effect:addMod(xi.mod.SANGE_MULTI_HIT, 1)
+end)
+
+-- TODO: Detection Spell Durations
+-- Source: https://forum.square-enix.com/ffxi/threads/39564-Jan-21-2014-%28JST%29-Version-Update
+--   Tonko Ichi:  420 seconds -> 180 seconds
+--   Tonko Ni:    600 seconds -> 300 seconds
+--   Monomi Ichi: 420 seconds -> 180 seconds
+
 return m

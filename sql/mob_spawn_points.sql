@@ -44850,8 +44850,8 @@ INSERT INTO `mob_spawn_points` VALUES (17285541,0,'Tonberry_Shadower','Tonberry 
 INSERT INTO `mob_spawn_points` VALUES (17285542,0,'Tonberry_Shadower','Tonberry Shadower',31,61,63,277.436,-18.500,-196.470,127);
 INSERT INTO `mob_spawn_points` VALUES (17285543,0,'Goblin_Digger','Goblin Digger',40,41,44,-69.276,6.961,-179.442,127);
 INSERT INTO `mob_spawn_points` VALUES (17285544,0,'Kappa_Akuso','Kappa Akuso',41,63,63,205.000,-1.000,83.000,230);
-INSERT INTO `mob_spawn_points` VALUES (17285545,0,'Kappa_Bonze','Kappa Bonze',42,60,60,204.000,-1.000,83.000,230);
-INSERT INTO `mob_spawn_points` VALUES (17285546,0,'Kappa_Biwa','Kappa Biwa',43,61,61,203.000,-1.000,83.000,230);
+INSERT INTO `mob_spawn_points` VALUES (17285545,0,'Kappa_Bonze','Kappa Bonze',42,61,61,204.000,-1.000,83.000,230);
+INSERT INTO `mob_spawn_points` VALUES (17285546,0,'Kappa_Biwa','Kappa Biwa',43,62,62,203.000,-1.000,83.000,230);
 INSERT INTO `mob_spawn_points` VALUES (17285547,0,'Hobgoblin_Warrior','Hobgoblin Warrior',44,50,55,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17285548,0,'Hobgoblin_White_Mage','Hobgoblin White Mage',45,50,55,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17285549,0,'Hobgoblin_Black_Mage','Hobgoblin Black Mage',46,50,55,0.000,0.000,0.000,0);
