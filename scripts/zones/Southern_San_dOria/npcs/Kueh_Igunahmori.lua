@@ -10,7 +10,7 @@ local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getGMLevel() > 0 or player:sendGuild(529, 3, 18, 4) then
+    if player:sendGuild(529, 3, 18, 4) then
         player:showText(npc, ID.text.KUEH_IGUNAHMORI_DIALOG)
     end
 end

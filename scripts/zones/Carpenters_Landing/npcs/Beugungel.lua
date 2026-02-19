@@ -10,7 +10,7 @@ local ID = zones[xi.zone.CARPENTERS_LANDING]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getGMLevel() > 0 or player:sendGuild(534, 5, 22, 0) then
+    if player:sendGuild(534, 5, 22, 0) then
         player:showText(npc, ID.text.BEUGUNGEL_SHOP_DIALOG)
     end
 end

@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getGMLevel() > 0 or player:sendGuild(530, 5, 20, 7) then
+    if player:sendGuild(530, 5, 20, 7) then
         player:showText(npc, ID.text.KOPOPO_SHOP_DIALOG)
     end
 end

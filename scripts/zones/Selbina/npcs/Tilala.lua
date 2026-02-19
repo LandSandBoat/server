@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getGMLevel() > 0 or player:sendGuild(516, 6, 21, 0) then
+    if player:sendGuild(516, 6, 21, 0) then
         player:showText(npc, zones[xi.zone.SELBINA].text.CLOTHCRAFT_SHOP_DIALOG)
     end
 end

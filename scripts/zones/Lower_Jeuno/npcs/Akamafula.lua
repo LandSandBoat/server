@@ -12,7 +12,7 @@ entity.onTrigger = function(player, npc)
         return -- Anti-Cheat.
     end
 
-    if player:getGMLevel() > 0 or player:sendGuild(60417, 1, 23, 1) then
+    if player:sendGuild(60417, 1, 23, 1) then
         player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.AKAMAFULA_SHOP_DIALOG)
     end
 end

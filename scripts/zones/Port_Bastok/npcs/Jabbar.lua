@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
-        if player:getGMLevel() > 0 or player:sendGuild(60419, 1, 23, 4) then
+        if player:sendGuild(60419, 1, 23, 4) then
             player:showText(npc, zones[xi.zone.PORT_BASTOK].text.TENSHODO_SHOP_OPEN_DIALOG)
         end
     else

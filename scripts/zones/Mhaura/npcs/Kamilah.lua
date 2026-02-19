@@ -10,7 +10,7 @@ local ID = zones[xi.zone.MHAURA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getGMLevel() > 0 or player:sendGuild(532, 8, 23, 2) then
+    if player:sendGuild(532, 8, 23, 2) then
         player:showText(npc, ID.text.SMITHING_GUILD)
     end
 end
