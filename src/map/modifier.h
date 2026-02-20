@@ -809,8 +809,9 @@ enum class Mod
 
     ENSPELL           = 341,  // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343,  // stores the base damage of the enspell before reductions
-    ENSPELL_DMG_BONUS = 432,  //
+    ENSPELL_DMG_BONUS = 432,  // adds X to the base damage of the enspell before bonuses and reductions
     ENSPELL_CHANCE    = 856,  // Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
+    ENSPELL_DMG_PCT   = 1195,  // adds X% to the multiplier applied to enspell damage after base damage is calculated, before day and weather bonuses and reductions
     SPIKES            = 342,  // store the type of spike spell active (0 if nothing)
     SPIKES_DMG        = 344,  // stores the base damage of the spikes before reductions
     SPIKES_DMG_BONUS  = 1079, // Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
@@ -1148,7 +1149,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1195 and onward
+    // SPARE IDs: 1196 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
