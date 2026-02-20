@@ -1,6 +1,6 @@
 -----------------------------------
--- func: addallsg
--- desc: Adds all Survival Guides to GM if no target is specified.
+-- func: addallwarps
+-- desc: Adds all Survival Guides and Home Points to GM if no target is specified.
 -----------------------------------
 ---@type TCommand
 require('scripts/globals/teleports')
@@ -16,7 +16,7 @@ commandObj.cmdprops =
 
 local function error(player, msg)
     player:printToPlayer(msg)
-    player:printToPlayer('!addallsg (player)')
+    player:printToPlayer('!addallwarps (player)')
 end
 
 commandObj.onTrigger = function(player, target, zoneId, text, guide)
@@ -32,7 +32,7 @@ commandObj.onTrigger = function(player, target, zoneId, text, guide)
         end
     end
 
-    -- adds all Survival Guides
+    -- add all Survival Guides
     for i = 1, 32 do
         local groupIndex = i
         local group = 1
@@ -42,7 +42,14 @@ commandObj.onTrigger = function(player, target, zoneId, text, guide)
         end
     end
 
-    player:printToPlayer(string.format('%s now has all Survival Guides.', targ:getName()))
+    -- add all Home Points
+    for i = 0, 121 do
+        local hpBit = i % 32
+        local hpSet = math.floor(i / 32)
+        targ:addTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet)
+    end
+
+    player:printToPlayer(string.format('%s now has all Warps.', targ:getName()))
 end
 
 return commandObj
