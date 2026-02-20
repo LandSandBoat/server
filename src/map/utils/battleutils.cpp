@@ -715,7 +715,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
 
     // Apply multiplier exactly once
     damage = (int32)std::floor(damage * mult);
-    
+
     // matching day 10% bonus, matching weather 10% or 25% for double weather
     float  dBonus  = 1.0;
     float  resist  = 1.0;
