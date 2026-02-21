@@ -7,9 +7,6 @@
 -- Complete all 9 zone quests, then talk to Joachim. Zone into the Hall of the Gods between 18:00 and 5:00. Flags Emissaries of God upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DEATH_AND_REBIRTH)
 
 quest.reward = {}

@@ -14,9 +14,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.HYDRA_DOUBLET) then
-        target:addStatusEffect(xi.effect.REFRESH, 0, 0, 60, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_DOUBLET)
+        target:addStatusEffect(xi.effect.REFRESH, { duration = 60, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.HYDRA_DOUBLET })
     end
 end
 

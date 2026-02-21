@@ -10,12 +10,12 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.REGEN_CUIRASS) then
         if target:hasStatusEffect(xi.effect.REGEN) then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
-            target:addStatusEffect(xi.effect.REGEN, 15, 3, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.REGEN_CUIRASS)
+            target:addStatusEffect(xi.effect.REGEN, { power = 15, duration = 180, origin = user, tick = 3, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.REGEN_CUIRASS })
         end
     end
 end

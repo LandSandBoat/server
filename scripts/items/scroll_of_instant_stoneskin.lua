@@ -10,8 +10,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    if target:addStatusEffect(xi.effect.STONESKIN, 200, 0, 300, 0, 0, 4) then
+itemObject.onItemUse = function(target, user)
+    if target:addStatusEffect(xi.effect.STONESKIN, { power = 200, duration = 300, origin = user, tier = 4 }) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.STONESKIN)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

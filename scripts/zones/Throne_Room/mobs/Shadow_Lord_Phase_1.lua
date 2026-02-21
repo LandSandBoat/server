@@ -24,13 +24,13 @@ local function changeStance(mob, stance)
     local magicalShieldPower  = stanceTable[stance][4]
 
     if physicalShieldPower > 0 then
-        mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, physicalShieldPower, 0, 0)
-        mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, physicalShieldPower, 0, 0)
+        mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, { power = physicalShieldPower, origin = mob, icon = 0 })
+        mob:addStatusEffect(xi.effect.ARROW_SHIELD, { power = physicalShieldPower, origin = mob, icon = 0 })
         mob:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
     else
         mob:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
         mob:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
-        mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, magicalShieldPower, 0, 0)
+        mob:addStatusEffect(xi.effect.MAGIC_SHIELD, { power = magicalShieldPower, origin = mob, icon = 0 })
     end
 
     -- Set special modifiers for action delays.

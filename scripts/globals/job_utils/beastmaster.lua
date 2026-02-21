@@ -158,7 +158,7 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
     then
         local resist = applyResistanceAddEffect(charmer, target, xi.element.ICE, 0)
         if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
-            target:addStatusEffect(xi.effect.BIND, 1, 0, math.random(1, 5))
+            target:addStatusEffect(xi.effect.BIND, { power = 1, duration = math.random(1, 5), origin = charmer })
             return xi.msg.basic.JA_ENFEEB_IS
         else
             return xi.msg.basic.JA_MISS
@@ -583,7 +583,7 @@ xi.job_utils.beastmaster.useReward = function(player, target, ability)
     -- Apply regen xi.effect.
 
     pet:delStatusEffect(xi.effect.REGEN)
-    pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
+    pet:addStatusEffect(xi.effect.REGEN, { power = regenAmount, duration = regenTime, origin = player, tick = 3 }) -- 3 = tick, each 3 seconds.
     player:removeAmmo(1)
 
     pet:updateEnmityFromCure(pet, totalHealing)
@@ -592,7 +592,7 @@ xi.job_utils.beastmaster.useReward = function(player, target, ability)
 end
 
 xi.job_utils.beastmaster.useUnleash = function(player, target, ability)
-    player:addStatusEffect(xi.effect.UNLEASH, 9, 0, 60)
+    player:addStatusEffect(xi.effect.UNLEASH, { power = 9, duration = 60, origin = player })
 
     return xi.effect.UNLEASH
 end
@@ -654,7 +654,7 @@ xi.job_utils.beastmaster.useStay = function(player, target, ability)
 
         local tick = 10 - math.ceil(math.max(0, level / 20))
 
-        pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, tick, 0)
+        pet:addStatusEffect(xi.effect.HEALING, { origin = player, tick = tick, icon = 0 })
         pet:setAnimation(0)
     end
 end
@@ -678,7 +678,7 @@ xi.job_utils.beastmaster.useKillerInstinct = function(player, target, ability, a
     local power        = 10
     local duration     = 180 + (player:getMerit(xi.merit.KILLER_INSTINCT) - 10)
 
-    target:addStatusEffect(xi.effect.KILLER_INSTINCT, power, 0, duration, 0, petEcosystem)
+    target:addStatusEffect(xi.effect.KILLER_INSTINCT, { power = power, duration = duration, origin = player, subPower = petEcosystem })
 
     return xi.effect.KILLER_INSTINCT
 end
@@ -688,7 +688,7 @@ xi.job_utils.beastmaster.useSpur = function(player)
     local subpower = player:getJobPointLevel(xi.jp.SPUR_EFFECT) * 3 -- bonus attack
     local pet = player:getPet()
     if pet then
-        pet:addStatusEffect(xi.effect.SPUR, power, 0, 90, 0, subpower)
+        pet:addStatusEffect(xi.effect.SPUR, { power = power, duration = 90, origin = player, subPower = subpower })
     end
 end
 
@@ -741,7 +741,7 @@ xi.job_utils.beastmaster.useFeralHowl = function(player, target, ability, action
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.B_MINUS, xi.element.DARK, xi.mod.CHR, xi.effect.TERROR, modAcc)
 
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.TERROR, resistanceRate, 0) then
-            target:addStatusEffect(xi.effect.TERROR, 1, 0, duration * resistanceRate)
+            target:addStatusEffect(xi.effect.TERROR, { power = 1, duration = duration * resistanceRate, origin = player })
         end
     end
 

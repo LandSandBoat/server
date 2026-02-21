@@ -39,7 +39,7 @@ entity.onMobInitialize = function(mob)
     -- The Slow effect is strong enough to overwite Haste II.
     mob:addListener('TAKE_DAMAGE', 'BREADWINNDER_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if mobArg:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
-            attacker:addStatusEffect(xi.effect.SLOW, 30 * 100, 0, 60)
+            attacker:addStatusEffect(xi.effect.SLOW, { power = 30 * 100, duration = 60, origin = mob })
         end
     end)
 end

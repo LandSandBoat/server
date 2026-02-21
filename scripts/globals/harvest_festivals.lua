@@ -195,7 +195,7 @@ xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
                     local halloweenCostumeList = { quadav, orc, yagudo, shade, ghost, hound, skeleton, darkStalker }
 
                     local costumePicked = halloweenCostumeList[math.random(1, #halloweenCostumeList)] -- will randomly pick one of the costumes in the list
-                    player:addStatusEffect(xi.effect.COSTUME, costumePicked, 0, 3600)
+                    player:addStatusEffect(xi.effect.COSTUME, { power = costumePicked, duration = 3600, origin = player })
 
                     -- pitchForkCostumeList defines the special costumes per zone that can trigger the pitch fork requirement
                     -- zone, costumeID

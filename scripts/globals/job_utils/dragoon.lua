@@ -204,7 +204,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 159) -- High Jump
     target:resetRecast(xi.recast.ABILITY, 160) -- Super Jump
 
-    target:addStatusEffect(xi.effect.SPIRIT_SURGE, maxHPBoost, 0, duration, 0, strBoost)
+    target:addStatusEffect(xi.effect.SPIRIT_SURGE, { power = maxHPBoost, duration = duration, origin = player, subPower = strBoost })
     target:addHP(petHP) -- Add in wyvern's remaining HP before the wyvern was despawned
 end
 
@@ -223,7 +223,7 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
 
     power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
 
-    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
+    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.ANCIENT_CIRCLE
 end
@@ -244,7 +244,7 @@ xi.job_utils.dragoon.useJump = function(player, target, ability, action)
         player:hasStatusEffect(xi.effect.SPIRIT_SURGE) and
         not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) -- Does this overwrite itself?
     then
-        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 20, 0, 60)
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, { power = 20, duration = 60, origin = player })
     end
 
     return damage
@@ -358,12 +358,12 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
                 wyvern:delStatusEffectSilent(copyEffect:getEffectType())
             end
 
-            wyvern:addStatusEffect(copyEffect:getEffectType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining()) / 1000)) -- id, power, tick, duration(convert ms to s)
+            wyvern:copyStatusEffect(copyEffect)
             copyi = copyi + 1
         end
     end
 
-    wyvern:addStatusEffect(xi.effect.REGEN, regenAmount, 3, 90, 0, 0, 0) -- 90 seconds of regen
+    wyvern:addStatusEffect(xi.effect.REGEN, { power = regenAmount, duration = 90, origin = player, tick = 3 }) -- 90 seconds of regen
     player:addTP(petTP / 2) -- add half wyvern tp to you
     wyvern:delTP(petTP / 2) -- remove half tp from wyvern
 
@@ -497,7 +497,7 @@ end
 xi.job_utils.dragoon.useAngon = function(player, target, ability)
     local duration   = 15 + player:getMerit(xi.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
-    if not target:addStatusEffect(xi.effect.DEFENSE_DOWN, 20, 0, duration) then
+    if not target:addStatusEffect(xi.effect.DEFENSE_DOWN, { power = 20, duration = duration, origin = player }) then
         ability:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
@@ -511,12 +511,12 @@ xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
     local wyvern = getWyvern(player)
 
     if wyvern then
-        wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is 'Magic Attack boost wears off.'
+        wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { duration = 180, origin = player }) -- Message when effect is lost is 'Magic Attack boost wears off.'
     end
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SPIRIT_BOND, 0, 0, 180)
+    player:addStatusEffect(xi.effect.SPIRIT_BOND, { duration = 180, origin = player })
 
     return xi.effect.SPIRIT_BOND
 end
@@ -561,7 +561,7 @@ xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
 end
 
 xi.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
-    target:addStatusEffect(xi.effect.DRAGON_BREAKER, 20, 0, 180)
+    target:addStatusEffect(xi.effect.DRAGON_BREAKER, { power = 20, duration = 180, origin = player })
 end
 
 xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
@@ -572,7 +572,7 @@ xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 166) -- Spirit Jump
     target:resetRecast(xi.recast.ABILITY, 167) -- Soul Jump
 
-    player:addStatusEffect(xi.effect.FLY_HIGH, 0, 0, 30)
+    player:addStatusEffect(xi.effect.FLY_HIGH, { duration = 30, origin = player })
 
     return xi.effect.FLY_HIGH
 end
@@ -584,7 +584,7 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
     if wyvern then
         local power = wyvern:getMaxHP() * 0.3 + wyvern:getMaxHP() - wyvern:getHP()
 
-        if wyvern:addStatusEffect(xi.effect.STONESKIN, power, 0, 300) then
+        if wyvern:addStatusEffect(xi.effect.STONESKIN, { power = power, duration = 300, origin = player }) then
             local effect = wyvern:getStatusEffect(xi.effect.STONESKIN)
 
             if effect then

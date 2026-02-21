@@ -28,7 +28,7 @@ effectObject.onEffectGain = function(target, effect)
 
     -- addStatusEffect (non-Ex) forces the icon to the effect ID...
     if not target:hasStatusEffect(xi.effect.HEALING) then
-        target:addStatusEffectEx(xi.effect.HEALING, 0, 0, xi.settings.map.HEALING_TICK_DELAY, 0, true)
+        target:addStatusEffect(xi.effect.HEALING, { origin = target, tick = xi.settings.map.HEALING_TICK_DELAY, icon = 0, silent = true })
     end
 
     -- Note: Power stores the kind.

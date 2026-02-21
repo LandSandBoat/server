@@ -34,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
     -- TODO: Make a new function to handle stoneskin types.
     skill:setFinalAnimationSub(2)
     mob:delStatusEffectSilent(xi.effect.STONESKIN)
-    mob:addStatusEffect(xi.effect.STONESKIN, 0, 0, 180, 2, 1500)
+    mob:addStatusEffect(xi.effect.STONESKIN, { duration = 180, origin = mob, subType = 2, subPower = 1500 })
 
     return info.damage
 end

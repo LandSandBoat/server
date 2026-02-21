@@ -28,7 +28,7 @@ entity.onMobSpawn = function(mob)
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
-    mob:addStatusEffect(xi.effect.POISON, 7, 10, 240)
+    mob:addStatusEffect(xi.effect.POISON, { power = 7, duration = 240, origin = mob, tick = 10 })
     mob:addListener('TAKE_DAMAGE', 'PRIME_TAKE_DAMAGE', function(tiger, amount, attacker)
         if attacker then
             tiger:setLocalVar('tookDamage', 1)

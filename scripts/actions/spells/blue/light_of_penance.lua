@@ -28,8 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much
         target:delTP(100)
-        local actionOne = target:addStatusEffect(xi.effect.BLINDNESS, 10, 0, duration * resist)
-        local actionTwo = target:addStatusEffect(xi.effect.BIND, 1, 0, duration * resist)
+        local actionOne = target:addStatusEffect(xi.effect.BLINDNESS, { power = 10, duration = duration * resist, origin = caster })
+        local actionTwo = target:addStatusEffect(xi.effect.BIND, { power = 1, duration = duration * resist, origin = caster })
 
         -- Gaze move
         if target:isFacing(caster) and caster:isFacing(target) then

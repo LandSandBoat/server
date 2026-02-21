@@ -56,7 +56,7 @@ xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
         (keyItem == 0 or (keyItem > 0 and target:hasKeyItem(keyItem))) and
         (not campaign or (campaign and target:getCampaignAllegiance() > 0))
     then
-        target:addStatusEffectEx(xi.effect.TELEPORT, 0, teleportId, 0, duration)
+        target:addStatusEffect(xi.effect.TELEPORT, { power = teleportId, duration = duration, origin = caster, icon = 0 })
         spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
     else
         spell:setMsg(xi.msg.basic.NONE)

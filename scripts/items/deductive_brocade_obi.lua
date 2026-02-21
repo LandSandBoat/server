@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.DEDUCTIVE_BROCADE_OBI) then
-        target:addStatusEffect(xi.effect.MND_BOOST, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.DEDUCTIVE_BROCADE_OBI)
+        target:addStatusEffect(xi.effect.MND_BOOST, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.DEDUCTIVE_BROCADE_OBI })
     end
 end
 

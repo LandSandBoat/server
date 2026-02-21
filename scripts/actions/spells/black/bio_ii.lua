@@ -26,7 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         power       = math.floor((power + 29) / 40)
         power       = utils.clamp(power, 3, 8)
 
-        target:addStatusEffect(xi.effect.BIO, power, 3, 120, 0, 15, tier)
+        target:addStatusEffect(xi.effect.BIO, { power = power, duration = 120, origin = caster, tick = 3, subPower = 15, tier = tier })
     end
 
     return damage

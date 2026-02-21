@@ -24,7 +24,7 @@ entity.phList =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.STONESKIN, math.random(60, 70), 0, 300)
+    mob:addStatusEffect(xi.effect.STONESKIN, { power = math.random(60, 70), duration = 300, origin = mob })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

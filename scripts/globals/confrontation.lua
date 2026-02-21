@@ -232,7 +232,7 @@ xi.confrontation.start = function(player, npc, mobIds, params)
 
     for _, member in ipairs(alliance) do
         -- Using the pop npc's ID as the 'key'
-        member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
+        member:addStatusEffect(xi.effect.CONFRONTATION, { power = lookupKey, origin = member })
         table.insert(registeredPlayerIds, member:getID())
     end
 
@@ -241,7 +241,7 @@ xi.confrontation.start = function(player, npc, mobIds, params)
         local mob = GetMobByID(mobId)
 
         if mob then
-            mob:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
+            mob:addStatusEffect(xi.effect.CONFRONTATION, { power = lookupKey, origin = mob })
             mob:addListener('DEATH', 'CONFRONTATION_DEATH', function(mobArg)
                 mobArg:removeListener('CONFRONTATION_DEATH')
                 xi.confrontation.check(lookupKey, false)

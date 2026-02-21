@@ -33,8 +33,8 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     target:delStatusEffect(xi.effect.ACCURACY_DOWN)
     target:delStatusEffect(xi.effect.EVASION_DOWN)
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffValue, 0, 180)
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffValue, 0, 180)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, { power = buffValue, duration = 180, origin = pet })
+    target:addStatusEffect(xi.effect.EVASION_DOWN, { power = 32-buffValue, duration = 180, origin = pet })
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.ACC_EVA_DOWN)

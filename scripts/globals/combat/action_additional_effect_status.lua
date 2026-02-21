@@ -92,7 +92,7 @@ xi.combat.action.executeAddEffectEnhancement = function(actor, target, fedData)
     end
 
     -- Apply effect.
-    if params.aeTarget:addStatusEffect(params.effectId, params.power, params.tick, params.duration, params.subType, params.subPower, params.tier) then
+    if params.aeTarget:addStatusEffect(params.effectId, { power = params.power, duration = params.duration, origin = actor, tick = params.tick, subType = params.subType, subPower = params.subPower, tier = params.tier }) then
         return params.animation, params.message, params.effectId
     end
 
@@ -137,7 +137,7 @@ xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     local totalDuration = math.floor(params.duration * resistanceRate)
 
     -- Apply effect.
-    if params.aeTarget:addStatusEffect(params.effectId, params.power, params.tick, totalDuration, params.subType, params.subPower, params.tier) then
+    if params.aeTarget:addStatusEffect(params.effectId, { power = params.power, duration = totalDuration, origin = actor, tick = params.tick, subType = params.subType, subPower = params.subPower, tier = params.tier }) then
         return params.animation, params.message, params.effectId
     end
 

@@ -57,9 +57,9 @@ local function freeImageSupport(player, effectId)
     player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
 
     if effectId == xi.effect.FISHING_IMAGERY then
-        player:addStatusEffect(effectId, 1, 0, 3600)
+        player:addStatusEffect(effectId, { power = 1, duration = 3600, origin = player })
     else
-        player:addStatusEffect(effectId, 1, 0, 120)
+        player:addStatusEffect(effectId, { power = 1, duration = 120, origin = player })
     end
 end
 
@@ -68,9 +68,9 @@ local function advancedImageSupport(player, effectId)
     player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
 
     if effectId == xi.effect.FISHING_IMAGERY then
-        player:addStatusEffect(effectId, 2, 0, 7200)
+        player:addStatusEffect(effectId, { power = 2, duration = 7200, origin = player })
     else
-        player:addStatusEffect(effectId, 3, 0, 480, 10)
+        player:addStatusEffect(effectId, { power = 3, duration = 480, origin = player, subType = 10 })
     end
 end
 

@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGRANGE, 160)
 
     -- TODO:
-    -- mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
+    -- mob:addStatusEffect(xi.effect.NO_REST, { power = 1, origin = mob })
     mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SCENT)
 
     -- 70/30 split to be able to spawn a NM or not into rotation

@@ -1495,7 +1495,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 end
 
                 player:delStatusEffectSilent(xi.effect.REGEN)
-                player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+                player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
             -- 3: Refresh
@@ -1505,7 +1505,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 end
 
                 player:delStatusEffectSilent(xi.effect.REFRESH)
-                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600) -- Does indeed get overwriten by regular refresh.
+                player:addStatusEffect(xi.effect.REFRESH, { power = 1, duration = 3600, origin = player, tick = 3 }) -- Does indeed get overwriten by regular refresh.
             end,
 
             -- 4: Protect
@@ -1539,7 +1539,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
                 power = power + (bonus * tier)
                 player:delStatusEffectSilent(xi.effect.PROTECT)
-                player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
+                player:addStatusEffect(xi.effect.PROTECT, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
             -- 5: Shell
@@ -1575,13 +1575,13 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
                 power = power + (bonus * tier)
                 player:delStatusEffectSilent(xi.effect.SHELL)
-                player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
+                player:addStatusEffect(xi.effect.SHELL, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
             -- 6: Haste
             [6] = function()
                 player:delStatusEffectSilent(xi.effect.HASTE)
-                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+                player:addStatusEffect(xi.effect.HASTE, { power = 1000, duration = 600, origin = player })
             end,
         }
     end

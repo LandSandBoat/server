@@ -10,13 +10,13 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if
         not target:hasStatusEffect(xi.effect.SLEEP_I) and
         not target:hasStatusEffect(xi.effect.SLEEP_II) and
         not target:hasStatusEffect(xi.effect.LULLABY)
     then
-        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60)
+        target:addStatusEffect(xi.effect.SLEEP_I, { power = 1, duration = 60, origin = user })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

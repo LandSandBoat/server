@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     if not target:hasStatusEffect(xi.effect.REGEN) then
-        target:addStatusEffect(xi.effect.REGEN, 20, 3, 60)
+        target:addStatusEffect(xi.effect.REGEN, { power = 20, duration = 60, origin = mob, tick = 3 })
         return xi.effect.REGEN
     end
 

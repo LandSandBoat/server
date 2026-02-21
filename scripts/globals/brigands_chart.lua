@@ -116,7 +116,7 @@ xi.brigandsChart.onEventUpdate = function(player, csid, option, npc)
         player:changeMusic(1, 136)
         player:changeMusic(2, 136)
         player:changeMusic(3, 136)
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 20, 0, 0) -- level restriction removed by event end
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 20, origin = player }) -- level restriction removed by event end
     end
 end
 

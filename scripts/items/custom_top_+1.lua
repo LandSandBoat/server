@@ -15,8 +15,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.PURGONORGO, 0, 3)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.PURGONORGO, duration = 3, origin = user, icon = 0 })
 end
 
 return itemObject

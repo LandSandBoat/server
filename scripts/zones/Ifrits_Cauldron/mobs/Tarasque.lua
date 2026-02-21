@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
 
     mob:addListener('MELEE_SWING_HIT', 'TARASQUE_BLAZE_SPIKES', function(mobArg, targetArg, attackArg)
         if not mobArg:hasStatusEffect(xi.effect.BLAZE_SPIKES) then
-            mobArg:addStatusEffectEx(xi.effect.BLAZE_SPIKES, xi.effect.BLAZE_SPIKES, 50, 0, 3600, true)
+            mobArg:addStatusEffect(xi.effect.BLAZE_SPIKES, { power = 50, duration = 3600, origin = mob, silent = true })
         end
     end)
 end

@@ -134,7 +134,7 @@ xi.avatarsFavor.applyAvatarsFavorAuraToPet = function(target, effect)
             --Useful debug message
             --printf('Power %d, Effect %d', effect:getPower(), power)
 
-            pet:addStatusEffectEx(avatarEffect, avatarEffect, 6, 3, 15, avatarEffect, power, xi.auraTarget.ALLIES, bit.bor(xi.effectFlag.NO_LOSS_MESSAGE, xi.effectFlag.AURA))
+            pet:addStatusEffect(avatarEffect, { power = 6, duration = 15, origin = pet, tick = 3, subType = avatarEffect, subPower = power, tier = xi.auraTarget.ALLIES, flag = bit.bor(xi.effectFlag.NO_LOSS_MESSAGE, xi.effectFlag.AURA) })
         end
     end
 end

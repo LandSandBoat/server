@@ -14,18 +14,18 @@ commandObj.cmdprops =
 
 local godModeOn = function(player)
     -- Add bonus effects to the player..
-    player:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
-    player:addStatusEffect(xi.effect.MAX_MP_BOOST, 1000, 0, 0)
-    player:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
-    player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 0)
-    player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
-    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, 0)
-    player:addStatusEffect(xi.effect.INVINCIBLE, 1, 0, 0)
-    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, 1, 0, 0)
-    player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
-    player:addStatusEffect(xi.effect.REGAIN, 300, 0, 0)
-    player:addStatusEffect(xi.effect.REFRESH, 99, 0, 0)
-    player:addStatusEffect(xi.effect.REGEN, 99, 0, 0)
+    player:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = 1000, origin = player })
+    player:addStatusEffect(xi.effect.MAX_MP_BOOST, { power = 1000, origin = player })
+    player:addStatusEffect(xi.effect.MIGHTY_STRIKES, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.PERFECT_DODGE, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.INVINCIBLE, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.MANAFONT, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.REGAIN, { power = 300, origin = player })
+    player:addStatusEffect(xi.effect.REFRESH, { power = 99, origin = player })
+    player:addStatusEffect(xi.effect.REGEN, { power = 99, origin = player })
 
     -- Add bonus mods to the player..
     player:addMod(xi.mod.RACC, 2500)
@@ -72,12 +72,12 @@ end
 
 local godModeTierOneOn = function(player)
     -- Add bonus effects to the player..
-    player:addStatusEffect(xi.effect.MAX_HP_BOOST, 200, 0, 0)
-    player:addStatusEffect(xi.effect.REGAIN, 50, 0, 0)
-    player:addStatusEffect(xi.effect.REFRESH, 999, 0, 0)
-    player:addStatusEffect(xi.effect.REGEN, 999, 0, 0)
-    player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
-    player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
+    player:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = 200, origin = player })
+    player:addStatusEffect(xi.effect.REGAIN, { power = 50, origin = player })
+    player:addStatusEffect(xi.effect.REFRESH, { power = 999, origin = player })
+    player:addStatusEffect(xi.effect.REGEN, { power = 999, origin = player })
+    player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, origin = player })
+    player:addStatusEffect(xi.effect.MANAFONT, { power = 1, origin = player })
 
     -- Heal the player from the new buffs..
     player:addHP(50000)

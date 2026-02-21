@@ -36,8 +36,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local atkBoost = moonBuff.atk
     local mabBoost = moonBuff.mab
 
-    caster:addStatusEffect(xi.effect.ATTACK_BOOST, atkBoost, 0, duration)
-    caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, mabBoost, 0, duration)
+    caster:addStatusEffect(xi.effect.ATTACK_BOOST, { power = atkBoost, duration = duration, origin = caster })
+    caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { power = mabBoost, duration = duration, origin = caster })
 
     local minCure = 350
 

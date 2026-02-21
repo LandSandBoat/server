@@ -7,7 +7,7 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user)
     if target:getStatusEffectBySource(xi.effect.MAX_MP_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MANASHELL_RING) ~= nil then
         target:delStatusEffect(xi.effect.MAX_MP_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MANASHELL_RING)
     end
@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.MANASHELL_RING) then
-        target:addStatusEffect(xi.effect.MAX_MP_BOOST, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MANASHELL_RING)
+        target:addStatusEffect(xi.effect.MAX_MP_BOOST, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.MANASHELL_RING })
     end
 end
 

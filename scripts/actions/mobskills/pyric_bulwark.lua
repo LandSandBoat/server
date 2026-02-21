@@ -17,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
-    mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 45) -- addStatusEffectEx to pervent dispel.
+    mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, { power = 1, duration = 45, origin = mob, icon = 0 })
 
     return xi.effect.PHYSICAL_SHIELD
 end

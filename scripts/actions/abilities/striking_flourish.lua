@@ -25,19 +25,19 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
-        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, 2, 0, 60)
+        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, { power = 2, duration = 60, origin = player })
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
-        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
-        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, 3, 0, 60)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, { power = 1, duration = 7200, origin = player })
+        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, { power = 3, duration = 60, origin = player })
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
-        player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
-        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, 3, 0, 60)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_2, { power = 1, duration = 7200, origin = player })
+        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, { power = 3, duration = 60, origin = player })
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
-        player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
-        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, 3, 0, 60)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_3, { power = 1, duration = 7200, origin = player })
+        player:addStatusEffect(xi.effect.STRIKING_FLOURISH, { power = 3, duration = 60, origin = player })
     end
 end
 

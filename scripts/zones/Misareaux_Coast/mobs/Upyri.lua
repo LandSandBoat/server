@@ -11,7 +11,14 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:addMod(xi.mod.REGAIN, 150)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DARK_RES_RANK, 10)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)

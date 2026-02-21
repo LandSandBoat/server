@@ -14,7 +14,7 @@ local damageStages = { 0, -2500, -5000, -7500, -9900 } -- Predefined resistance 
 
 local function applyAura(mob)
     for _, effect in ipairs({ xi.effect.SILENCE, xi.effect.AMNESIA, xi.effect.POISON }) do
-        mob:addStatusEffectEx(effect, effect, 6, 3, auraDuration, effect, 50, xi.auraTarget.ENEMIES, xi.effectFlag.AURA)
+        mob:addStatusEffect(effect, { power = 6, duration = auraDuration, origin = mob, tick = 3, subType = effect, subPower = 50, tier = xi.auraTarget.ENEMIES, flag = xi.effectFlag.AURA })
     end
 end
 

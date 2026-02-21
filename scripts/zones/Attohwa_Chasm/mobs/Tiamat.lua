@@ -61,7 +61,7 @@ entity.spawnPoints =
 
 local function enterFlight(mob)
     mob:setAnimationSub(1) -- Change to flight.
-    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
     mob:setMobSkillAttack(730)
     mob:setLocalVar('flightTime', GetSystemTime() + 120)
     mob:setLocalVar('changeHP', mob:getHP() - 10000)
@@ -158,7 +158,7 @@ entity.onMobFight = function(mob, target)
         hpp <= 25 and
         not mob:hasStatusEffect(xi.effect.ATTACK_BOOST)
     then
-        mob:addStatusEffect(xi.effect.ATTACK_BOOST, 75, 0, 0)
+        mob:addStatusEffect(xi.effect.ATTACK_BOOST, { power = 75, origin = mob })
         mob:getStatusEffect(xi.effect.ATTACK_BOOST):addEffectFlag(xi.effectFlag.DEATH)
     end
 

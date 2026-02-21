@@ -65,7 +65,7 @@ entity.onMobFight = function(mob, target)
         if buffList[buffChoice].effect == xi.effect.NONE then
             mob:addHP(mob:getMaxHP() * .25)
         else
-            mob:addStatusEffectEx(buffList[buffChoice].effect, buffList[buffChoice].effect, buffList[buffChoice].power, 0, timer, true)
+            mob:addStatusEffect(buffList[buffChoice].effect, { power = buffList[buffChoice].power, duration = timer, origin = mob, silent = true })
         end
 
         mob:messageText(mob, ID.text.KURREA_SLURP, false)

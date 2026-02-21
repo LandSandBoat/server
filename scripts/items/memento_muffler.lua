@@ -7,7 +7,7 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user)
     if target:getStatusEffectBySource(xi.effect.VIT_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MEMENTO_MUFFLER) ~= nil then
         target:delStatusEffect(xi.effect.VIT_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MEMENTO_MUFFLER)
     end
@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.MEMENTO_MUFFLER) then
-        target:addStatusEffect(xi.effect.VIT_BOOST, 0, 0, 300, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MEMENTO_MUFFLER)
+        target:addStatusEffect(xi.effect.VIT_BOOST, { duration = 300, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.MEMENTO_MUFFLER })
     end
 end
 

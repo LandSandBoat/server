@@ -67,7 +67,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         power    = power * 1.5
         subpower = subpower * 1.5
         target:delStatusEffectSilent(effectId)
-        target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
+        target:addStatusEffect(effectId, { power = power, duration = duration, origin = player, tick = tick, subType = subId, subPower = subpower, tier = tier })
 
         local newEffect = target:getStatusEffect(effectId)
         if newEffect then
@@ -75,7 +75,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end
     end
 
-    if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration) then
+    if target:addStatusEffect(xi.effect.SLEEP_I, { power = 1, duration = duration, origin = player }) then
         ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)

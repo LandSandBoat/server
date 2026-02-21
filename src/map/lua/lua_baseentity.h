@@ -677,8 +677,8 @@ public:
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
-    bool  addStatusEffect(sol::variadic_args va);
-    auto  addStatusEffectEx(sol::variadic_args va) -> bool;
+    auto  addStatusEffect(EFFECT effectId, sol::table params) const -> bool;
+    auto  copyStatusEffect(const CLuaStatusEffect* PStatusEffect) const -> bool;
     auto  getStatusEffect(uint16 StatusID, const sol::object& SubType, const sol::object& SourceType, const sol::object& SourceTypeParam) -> CStatusEffect*;
     auto  getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> CStatusEffect*;
     auto  getStatusEffects() -> sol::table;

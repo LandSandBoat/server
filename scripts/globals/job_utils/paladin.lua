@@ -76,7 +76,7 @@ xi.job_utils.paladin.useCover = function(player, target, ability)
     local jpValue      = player:getJobPointLevel(xi.jp.COVER_DURATION)
     local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION) + jpValue
 
-    player:addStatusEffect(xi.effect.COVER, player:getMod(xi.mod.COVER_TO_MP), 0, duration)
+    player:addStatusEffect(xi.effect.COVER, { power = player:getMod(xi.mod.COVER_TO_MP), duration = duration, origin = player })
     player:setLocalVar('COVER_ABILITY_TARGET', target:getID())
     ability:setMsg(xi.msg.basic.COVER_SUCCESS)
 end
@@ -85,7 +85,7 @@ xi.job_utils.paladin.useDivineEmblem = function(player, target, ability)
     -- Divine Magic bonus damage handled in globals/magic.lua
     local power = 50 + player:getMod(xi.mod.ENHANCES_DIVINE_EMBLEM) -- 50% increase to enmity
 
-    player:addStatusEffect(xi.effect.DIVINE_EMBLEM, power, 0, 60)
+    player:addStatusEffect(xi.effect.DIVINE_EMBLEM, { power = power, duration = 60, origin = player })
 
     return xi.effect.DIVINE_EMBLEM
 end
@@ -95,7 +95,7 @@ xi.job_utils.paladin.useFealty = function(player, target, ability)
     local enhFealty = (player:getMerit(xi.merit.FEALTY) / 5) * player:getMod(xi.mod.ENHANCES_FEALTY)
     local duration  = 60 + merits + enhFealty
 
-    player:addStatusEffect(xi.effect.FEALTY, 1, 0, duration)
+    player:addStatusEffect(xi.effect.FEALTY, { power = 1, duration = duration, origin = player })
 
     return xi.effect.FEALTY
 end
@@ -115,7 +115,7 @@ xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
 
     power = power + player:getMod(xi.mod.HOLY_CIRCLE_POTENCY)
 
-    target:addStatusEffect(xi.effect.HOLY_CIRCLE, power, 0, duration)
+    target:addStatusEffect(xi.effect.HOLY_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.HOLY_CIRCLE
 end
@@ -136,19 +136,19 @@ xi.job_utils.paladin.useIntervene = function(player, target, ability)
 
     damage = damage * jpValue
 
-    target:addStatusEffect(xi.effect.INTERVENE, 1, 0, 30)
+    target:addStatusEffect(xi.effect.INTERVENE, { power = 1, duration = 30, origin = player })
 
     return damage
 end
 
 xi.job_utils.paladin.useInvincible = function(player, target, ability)
-    player:addStatusEffect(xi.effect.INVINCIBLE, 1, 0, 30)
+    player:addStatusEffect(xi.effect.INVINCIBLE, { power = 1, duration = 30, origin = player })
 
     return xi.effect.INVINCIBLE
 end
 
 xi.job_utils.paladin.useMajesty = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MAJESTY, 25, 0, 180)
+    player:addStatusEffect(xi.effect.MAJESTY, { power = 25, duration = 180, origin = player })
 
     return xi.effect.MAJESTY
 end
@@ -157,7 +157,7 @@ xi.job_utils.paladin.usePalisade = function(player, target, ability)
     local jpValue = player:getJobPointLevel(xi.jp.PALISADE_EFFECT)
     local power   = 30 + jpValue
 
-    player:addStatusEffect(xi.effect.PALISADE, power, 0, 60)
+    player:addStatusEffect(xi.effect.PALISADE, { power = power, duration = 60, origin = player })
 
     return xi.effect.PALISADE
 end
@@ -165,7 +165,7 @@ end
 xi.job_utils.paladin.useRampart = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
 
-    target:addStatusEffect(xi.effect.RAMPART, 2500, 0, duration)
+    target:addStatusEffect(xi.effect.RAMPART, { power = 2500, duration = duration, origin = player })
 
     return xi.effect.RAMPART
 end
@@ -180,7 +180,7 @@ xi.job_utils.paladin.useSentinel = function(player, target, ability)
     local duration    = 30 + enhGuardian
 
     -- Sent as positive power because UINTs, man.
-    player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
+    player:addStatusEffect(xi.effect.SENTINEL, { power = power, duration = duration, origin = player, tick = 3, subPower = guardian + jpValue })
 
     return xi.effect.SENTINEL
 end
@@ -190,7 +190,7 @@ xi.job_utils.paladin.useSepulcher = function(player, target, ability)
     local jpValue  = player:getJobPointLevel(xi.jp.SEPULCHER_DURATION)
     local duration = 180 + jpValue
 
-    target:addStatusEffect(xi.effect.SEPULCHER, power, 0, duration)
+    target:addStatusEffect(xi.effect.SEPULCHER, { power = power, duration = duration, origin = player })
 end
 
 xi.job_utils.paladin.useShieldBash = function(player, target, ability)
@@ -221,7 +221,7 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5
 
     if math.random(1, 100) <= chance then
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
+        target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 6, origin = player })
     end
 
     -- Randomize damage

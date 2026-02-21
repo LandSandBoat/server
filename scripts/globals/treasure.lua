@@ -1822,7 +1822,7 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
             weaknessDuration       = math.floor(weaknessDuration / 5)
             weaknessDuration       = utils.clamp(weaknessDuration, 5, 60) * 60 -- Clamp and convert to seconds.
 
-            playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, weaknessDuration)
+            playerEntity:addStatusEffect(xi.effect.WEAKNESS, { power = 1, duration = weaknessDuration, origin = player })
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 2)
             npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_SMOKE)
             moveTreasure(npc, respawnType.REGULAR)

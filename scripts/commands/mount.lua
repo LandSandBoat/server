@@ -37,7 +37,7 @@ commandObj.onTrigger = function(player, mount, target)
         end
     end
 
-    targ:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, mount, 0, 0, true)
+    targ:addStatusEffect(xi.effect.MOUNTED, { power = mount, origin = player, silent = true })
 end
 
 return commandObj

@@ -356,7 +356,7 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
 
     if overload ~= 0 then
         target:removeAllManeuvers()
-        target:addStatusEffect(xi.effect.OVERLOAD, 0, 0, overload)
+        target:addStatusEffect(xi.effect.OVERLOAD, { duration = overload, origin = player })
         action:messageID(player:getID(), xi.msg.basic.AUTO_OVERLOADED)
     else
         local pupLevel
@@ -373,7 +373,7 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
         end
 
         local duration = player:getPet():getLocalVar('MANEUVER_DURATION')
-        target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 60, 300))
+        target:addStatusEffect(maneuverInfo[1], { power = bonus, duration = utils.clamp(duration, 60, 300), origin = player })
     end
 
     return target:getOverloadChance(maneuverInfo[2] - 1)

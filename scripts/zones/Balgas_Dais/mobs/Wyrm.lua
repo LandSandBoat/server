@@ -19,7 +19,7 @@ local entity = {}
 local function enterFlight(mob)
     mob:setMobSkillAttack(1146)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
     mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.NO_TURN)))
     mob:setAnimationSub(1)
 end

@@ -14,8 +14,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.NEGATE_TERROR, 1, 0, 120)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.NEGATE_TERROR, { power = 1, duration = 120, origin = user })
 end
 
 return itemObject

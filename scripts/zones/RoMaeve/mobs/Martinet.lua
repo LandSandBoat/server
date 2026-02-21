@@ -24,7 +24,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:addImmunity(xi.immunity.TERROR)
-    mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 60, 0, 0)
+    mob:addStatusEffect(xi.effect.SHOCK_SPIKES, { power = 60, origin = mob })
     mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 
     xi.mob.updateNMSpawnPoint(mob)

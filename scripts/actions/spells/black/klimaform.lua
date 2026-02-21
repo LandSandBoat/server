@@ -10,7 +10,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    target:addStatusEffect(xi.effect.KLIMAFORM, 1, 0, 180)
+    target:addStatusEffect(xi.effect.KLIMAFORM, { power = 1, duration = 180, origin = caster })
 
     return xi.effect.KLIMAFORM
 end

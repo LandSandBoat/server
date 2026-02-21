@@ -117,7 +117,7 @@ local function corsairSetup(caster, ability, action, effect, job)
     local roll = math.random(1, 6)
 
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
-    caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE, xi.effect.DOUBLE_UP_CHANCE, roll, 0, 45, 0, effect, job, 0, xi.effectSourceType.CORSAIR_ROLL, ability:getID(), caster:getID(), true)
+    caster:addStatusEffect(xi.effect.DOUBLE_UP_CHANCE, { power = roll, duration = 45, origin = caster, subPower = effect, tier = job, sourceType = xi.effectSourceType.CORSAIR_ROLL, sourceTypeParam = ability:getID(), silent = true })
     caster:setLocalVar('corsairRollTotal', roll)
     caster:setLocalVar('corsairDuEffect', effect)
     action:info(caster:getID(), roll)

@@ -86,7 +86,7 @@ xi.combat.action.executeMobskillStatusEffect = function(actor, target, skill, ef
     local totalDuration = math.floor(params.duration * resistanceRate)
 
     -- Apply effect.
-    if target:addStatusEffect(params.effectId, params.power, params.tick, totalDuration, params.subType, params.subPower, params.tier) then
+    if target:addStatusEffect(params.effectId, { power = params.power, duration = totalDuration, origin = actor, tick = params.tick, subType = params.subType, subPower = params.subPower, tier = params.tier }) then
         return handleReturn(skill, setMessage, xi.msg.basic.SKILL_ENFEEB_IS, step.APPLICATION_SUCCESS)
     end
 
