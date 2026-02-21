@@ -7,7 +7,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user)
     local pelicanStacks = target:countEffect(xi.effect.ENCHANTMENT, xi.item.PELICAN_RING)
 
     if pelicanStacks >= 2 then
@@ -29,7 +29,7 @@ itemObject.onItemUse = function(target, user, item, action)
 
     -- Allow for duplicate effects, max 2
     if target:countEffect(effect, subType) < 2 then
-        target:addStatusEffectEx(effect, effect, power, tick, duration, subType, subPower, tier, flag)
+        target:addStatusEffect(effect, { power = power, duration = duration, origin = user, tick = tick, subType = subType, subPower = subPower, tier = tier, flag = flag })
     end
 end
 

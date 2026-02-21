@@ -92,7 +92,7 @@ xi.garrison.addLevelCap = function(entity, definedCap)
     end
 
     -- Note the level restriction does not wear on death.
-    entity:addStatusEffectEx(xi.effect.LEVEL_RESTRICTION, xi.effect.LEVEL_RESTRICTION, cap, 0, 0, 0, 0, 0, xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION)
+    entity:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = entity, flag = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION })
 end
 
 -----------------------------------

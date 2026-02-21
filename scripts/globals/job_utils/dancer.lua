@@ -131,7 +131,7 @@ local function setFinishingMoves(player, numMoves)
             finishingEffect:setDuration(2 * 60 * 60 * 1000)
         end
     else
-        player:addStatusEffectEx(xi.effect.FINISHING_MOVE_1, getFinishingMoveIcon(numMoves), numMoves, 0, 7200)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, { power = numMoves, duration = 7200, origin = player, icon = getFinishingMoveIcon(numMoves) })
     end
 end
 
@@ -303,7 +303,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         end
 
         if maxSteps >= origDebuffStacks then
-            target:addStatusEffect(stepEffect, debuffStacks, 0, debuffDuration)
+            target:addStatusEffect(stepEffect, { power = debuffStacks, duration = debuffDuration, origin = player })
         else
             ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         end
@@ -332,7 +332,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
 end
 
 xi.job_utils.dancer.usePrestoAbility = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.PRESTO, 19, 3, 30)
+    target:addStatusEffect(xi.effect.PRESTO, { power = 19, duration = 30, origin = player, tick = 3 })
 
     return xi.effect.PRESTO
 end
@@ -395,7 +395,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
             not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
             not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT, 0) and               -- Check conflicting effect.
             resistRate > 0.25 and                                                                  -- Check actual resistance.
-            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)                       -- Check effect power.
+            target:addStatusEffect(xi.effect.WEIGHT, { power = 50, duration = 60 * resistRate, origin = player })                       -- Check effect power.
         then
             ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
         else
@@ -454,7 +454,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0) and               -- check conflicting effect.
             xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistRate, 0)             -- Check actual resistance.
         then
-            target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 2, origin = player })
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
@@ -477,7 +477,7 @@ xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, abilit
     local availableMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
     local power          = utils.clamp(availableMoves, 0, 3)
 
-    player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
+    player:addStatusEffect(xi.effect.BUILDING_FLOURISH, { power = power, duration = 60, origin = player, subPower = flourishMerits })
     setFinishingMoves(player, availableMoves - power)
 end
 
@@ -491,7 +491,7 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
         not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
     then
         infoValue = actionInfo[ability:getID()][2]
-        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 1, 0, 10, 0, 1)
+        target:addStatusEffect(xi.effect.CHAINBOUND, { power = 1, duration = 10, origin = player, icon = 0, subPower = 1 })
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
@@ -504,7 +504,7 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
 end
 
 xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CONTRADANCE, 0, 0, 60)
+    player:addStatusEffect(xi.effect.CONTRADANCE, { duration = 60, origin = player })
 
     return xi.effect.CONTRADANCE
 end

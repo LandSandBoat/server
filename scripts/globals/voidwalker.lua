@@ -340,12 +340,12 @@ end
 local modByMobName =
 {
     ['Krabkatoa'] = function(mob)
-        mob:addStatusEffect(xi.effect.REGAIN, 10, 0, 0)
+        mob:addStatusEffect(xi.effect.REGAIN, { power = 10, origin = mob })
         mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
     end,
 
     ['Tammuz'] = function(mob)
-        mob:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
+        mob:addStatusEffect(xi.effect.MIGHTY_STRIKES, { power = 1, origin = mob })
     end,
 
     ['Erebus'] = function(mob)
@@ -415,7 +415,7 @@ local mixinByMobName =
             mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
             not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)
         then
-            mob:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 30)
+            mob:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, duration = 30, origin = mob })
         end
     end,
 

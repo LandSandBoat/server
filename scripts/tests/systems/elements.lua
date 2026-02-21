@@ -15,7 +15,7 @@ describe('Crystals', function()
 
     before_each(function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.EAST_SARUTABARUTA })
-        player:addStatusEffect(xi.effect.SIGNET, 0, 0, 0)
+        player:addStatusEffect(xi.effect.SIGNET, { origin = player })
     end)
 
     it('of matching element drop when monster killed', function()

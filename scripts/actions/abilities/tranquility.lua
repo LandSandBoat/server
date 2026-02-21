@@ -25,7 +25,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.TRANQUILITY, player:getMerit(xi.merit.TRANQUILITY), 0, 60)
+    player:addStatusEffect(xi.effect.TRANQUILITY, { power = player:getMerit(xi.merit.TRANQUILITY), duration = 60, origin = player })
 
     return xi.effect.TRANQUILITY
 end

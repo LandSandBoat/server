@@ -12,10 +12,14 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.REQUIEM)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
 
     mob:setMod(xi.mod.WIND_ABSORB, 100)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+    mob:setMod(xi.mod.ACC, 338)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -26,6 +30,7 @@ entity.onMobFight = function(mob, target)
     local currentTime = GetSystemTime()
     if mob:getLocalVar('boreas_mantle') <= currentTime then
         mob:useMobAbility(xi.mobSkill.BOREAS_MANTLE, mob)
+        mob:setTP(0)
         mob:setLocalVar('boreas_mantle', currentTime + math.random(60, 90))
     end
 end

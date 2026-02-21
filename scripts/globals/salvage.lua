@@ -24,14 +24,14 @@ end
 xi.salvage.onCellItemUse = function(target, effect, value, offset)
     local statusEffect = target:getStatusEffect(effect)
     local power        = statusEffect:getPower()
+    local duration     = math.floor(statusEffect:getTimeRemaining() / 1000)
     local newpower     = bit.band(power, bit.bnot(value))
     local pet          = target:getPet()
     local instance     = target:getInstance()
 
     target:delStatusEffectSilent(effect)
     if newpower > 0 then
-        local duration = math.floor(statusEffect:getTimeRemaining() / 1000)
-        target:addStatusEffectEx(effect, effect, newpower, 0, duration)
+        target:addStatusEffect(effect, { power = newpower, duration = duration, origin = target })
     end
 
     if
@@ -44,8 +44,7 @@ xi.salvage.onCellItemUse = function(target, effect, value, offset)
     then
         pet:delStatusEffectSilent(effect)
         if newpower > 0 then
-            local duration = math.floor(statusEffect:getTimeRemaining() / 1000)
-            pet:addStatusEffectEx(effect, effect, newpower, 0, duration)
+            pet:addStatusEffect(effect, { power = newpower, duration = duration, origin = target })
         end
     end
 
@@ -58,11 +57,11 @@ xi.salvage.instanceRegister = function(player, fireFlies)
         player:unequipItem(i)
     end
 
-    player:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, 65535, 0, 6000)
-    player:addStatusEffectEx(xi.effect.OBLIVISCENCE, xi.effect.OBLIVISCENCE, 1, 0, 6000)
-    player:addStatusEffectEx(xi.effect.OMERTA, xi.effect.OMERTA, 63, 0, 6000)
-    player:addStatusEffectEx(xi.effect.IMPAIRMENT, xi.effect.IMPAIRMENT, 3, 0, 6000)
-    player:addStatusEffectEx(xi.effect.DEBILITATION, xi.effect.DEBILITATION, 511, 0, 6000)
+    player:addStatusEffect(xi.effect.ENCUMBRANCE_I, { power = 65535, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.OBLIVISCENCE, { power = 1, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.OMERTA, { power = 63, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.IMPAIRMENT, { power = 3, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.DEBILITATION, { power = 511, duration = 6000, origin = player })
     player:addTempItem(fireFlies)
     player:delKeyItem(xi.ki.REMNANTS_PERMIT)
 end

@@ -16,7 +16,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.IMMANENCE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.IMMANENCE, { power = 1, duration = 60, origin = player })
 
     return xi.effect.IMMANENCE
 end

@@ -14,9 +14,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     end
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:getCampaignAllegiance() > 0 then
-        target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 3)
+        target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.RETRACE, duration = 3, origin = user, icon = 0 })
     end
 end
 

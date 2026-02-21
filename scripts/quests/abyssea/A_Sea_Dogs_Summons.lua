@@ -6,9 +6,6 @@
 -- Zone into the Hall of the Gods between 18:00 and 5:00. Flags Death and Rebirth upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_SEA_DOGS_SUMMONS)
 
 quest.reward = {}

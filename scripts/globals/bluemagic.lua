@@ -209,7 +209,7 @@ local function calculateNukeWallFactor(target, spellElement, finalDamage)
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect without messages.
-    target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
+    target:addStatusEffect(xi.effect.NUKE_WALL, { power = finalPotency, duration = 5, origin = target, icon = 0, subPower = spellElement })
 
     -----------------------------------
     -- We return JUST the factor based on previous nuke. This nuke only affects the next one.
@@ -738,7 +738,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
         return effect
     end
 
-    if target:addStatusEffect(effect, params.power, params.tick, math.floor(params.duration * resist)) then
+    if target:addStatusEffect(effect, { power = params.power, duration = math.floor(params.duration * resist), origin = caster, tick = params.tick }) then
         -- Add "Magic Burst!" message
         local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
@@ -813,7 +813,7 @@ xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effe
             not xi.data.statusEffect.isTargetResistant(caster, target, effect) and -- Target didn't trigger a job trait resistance.
             not xi.data.statusEffect.isEffectNullified(target, effect, 0)          -- Target doesn't have an status effect that nullifies current. TODO: Tier.
         then
-            target:addStatusEffect(effect, power, tick, math.floor(duration * resist))
+            target:addStatusEffect(effect, { power = power, duration = math.floor(duration * resist), origin = caster, tick = tick })
         end
     end
 end

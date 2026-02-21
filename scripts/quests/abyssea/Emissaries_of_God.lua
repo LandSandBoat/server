@@ -14,10 +14,6 @@
 -- Obtain all 6 caturae titles, then talk to Joachim for CS and Abyssite of Discernment. Zone into the Hall of the Gods between 18:00 and 5:00. Flags Beneath a Blood-red Sky upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.EMISSARIES_OF_GOD)
 
 quest.reward = {} -- Key item given in first cutscene, not on quest complete

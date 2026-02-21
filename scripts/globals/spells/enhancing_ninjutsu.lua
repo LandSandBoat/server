@@ -100,7 +100,7 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, power, paramThree, duration, 0, subPower)
+        target:addStatusEffect(spellEffect, { power = power, duration = duration, origin = caster, tick = paramThree, subPower = subPower })
 
     -- Utsusemi exception.
     elseif not alwaysOverwrite and spellEffect == xi.effect.COPY_IMAGE then
@@ -114,14 +114,14 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
         paramThree = pTable[spellId][column.EFFECT_POWER] - 2
 
         if targetEffect == nil or targetEffect:getPower() <= paramThree then
-            target:addStatusEffectEx(xi.effect.COPY_IMAGE, subPower, paramThree, duration, 900, 0, power) -- Not a mistake.
+            target:addStatusEffect(xi.effect.COPY_IMAGE, { power = paramThree, duration = 900, origin = caster, tick = duration, icon = subPower, subPower = power }) -- Not a mistake.
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
 
     else
-        if target:addStatusEffect(spellEffect, power, paramThree, duration, 0, subPower) then
+        if target:addStatusEffect(spellEffect, { power = power, duration = duration, origin = caster, tick = paramThree, subPower = subPower }) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

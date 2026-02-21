@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- When server restarts, reset timer
 
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
-    mob:addStatusEffect(xi.effect.ICE_SPIKES, 50, 0, 0)
+    mob:addStatusEffect(xi.effect.ICE_SPIKES, { power = 50, origin = mob })
     mob:getStatusEffect(xi.effect.ICE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 

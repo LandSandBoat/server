@@ -22,13 +22,13 @@ end
 -- Ability Use Functions
 -----------------------------------
 xi.job_utils.black_mage.useCascade = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CASCADE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.CASCADE, { power = 1, duration = 60, origin = player })
 
     return xi.effect.CASCADE
 end
 
 xi.job_utils.black_mage.useElementalSeal = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ELEMENTAL_SEAL, 1, 0, 60)
+    player:addStatusEffect(xi.effect.ELEMENTAL_SEAL, { power = 1, duration = 60, origin = player })
 
     return xi.effect.ELEMENTAL_SEAL
 end
@@ -41,25 +41,25 @@ xi.job_utils.black_mage.useEnmityDouse = function(player, target, ability)
 end
 
 xi.job_utils.black_mage.useManafont = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 60)
+    player:addStatusEffect(xi.effect.MANAFONT, { power = 1, duration = 60, origin = player })
 
     return xi.effect.MANAFONT
 end
 
 xi.job_utils.black_mage.useManaWall = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MANA_WALL, 1, 0, 300)
+    player:addStatusEffect(xi.effect.MANA_WALL, { power = 1, duration = 300, origin = player })
 
     return xi.effect.MANA_WALL
 end
 
 xi.job_utils.black_mage.useManawell = function(player, target, ability)
-    target:addStatusEffect(xi.effect.MANAWELL, 1, 0, 60)
+    target:addStatusEffect(xi.effect.MANAWELL, { power = 1, duration = 60, origin = player })
 
     return xi.effect.MANAWELL
 end
 
 xi.job_utils.black_mage.useSubtleSorcery = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SUBTLE_SORCERY, 1, 0, 60)
+    player:addStatusEffect(xi.effect.SUBTLE_SORCERY, { power = 1, duration = 60, origin = player })
 
     return xi.effect.SUBTLE_SORCERY
 end

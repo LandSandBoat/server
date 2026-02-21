@@ -31,7 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         damage = xi.spells.blue.applySpellDamage(caster, target, spell, damage, params)
         caster:setHP(1)
         caster:delStatusEffectSilent(xi.effect.WEAKNESS)
-        caster:addStatusEffect(xi.effect.WEAKNESS, 1, 0, 300)
+        caster:addStatusEffect(xi.effect.WEAKNESS, { power = 1, duration = 300, origin = caster })
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end

@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, target)
                     targ:delStatusEffectSilent(0)
                     targ:setCharVar('Immortal', 0)
                 else
-                    targ:addStatusEffectEx(0, xi.effect.TRANSCENDENCY, 0, 0, 0)
+                    targ:addStatusEffect(xi.effect.NONE, { origin = player, icon = xi.effect.TRANSCENDENCY })
                     targ:setCharVar('Immortal', 1)
                     immortal = true
                 end

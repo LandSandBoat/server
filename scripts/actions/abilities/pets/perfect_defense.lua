@@ -31,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     local subPower = math.floor(98 * power / 9000)
 
     target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
-    target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration, 0, subPower)
+    target:addStatusEffect(xi.effect.PERFECT_DEFENSE, { power = power, duration = duration, origin = pet, tick = 3, subPower = subPower })
 
     -- Despawn Alexander after 6 seconds.
     pet:timer(6000, function()

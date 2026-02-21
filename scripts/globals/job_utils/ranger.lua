@@ -188,14 +188,14 @@ xi.job_utils.ranger.useEagleEyeShot = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useVelocityShot = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.VELOCITY_SHOT, 1, 0, 7200)
+    player:addStatusEffect(xi.effect.VELOCITY_SHOT, { power = 1, duration = 7200, origin = player })
 
     return xi.effect.VELOCITY_SHOT
 end
 
 xi.job_utils.ranger.useSharpshot = function(player, target, ability, action)
     local power = 40 + player:getMod(xi.mod.SHARPSHOT)
-    player:addStatusEffect(xi.effect.SHARPSHOT, power, 0, 60)
+    player:addStatusEffect(xi.effect.SHARPSHOT, { power = power, duration = 60, origin = player })
 
     return xi.effect.SHARPSHOT
 end
@@ -235,13 +235,13 @@ end
 
 xi.job_utils.ranger.useCamouflage = function(player, target, ability, action)
     local duration = math.random(30, 300) * (1 + 0.01 * player:getMod(xi.mod.CAMOUFLAGE_DURATION))
-    player:addStatusEffect(xi.effect.CAMOUFLAGE, 1, 0, math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
+    player:addStatusEffect(xi.effect.CAMOUFLAGE, { power = 1, duration = math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER), origin = player })
 
     return xi.effect.CAMOUFLAGE
 end
 
 xi.job_utils.ranger.useBarrage = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.BARRAGE, 0, 0, 60)
+    player:addStatusEffect(xi.effect.BARRAGE, { duration = 60, origin = player })
 
     return xi.effect.BARRAGE
 end
@@ -258,7 +258,7 @@ xi.job_utils.ranger.useShadowbind = function(player, target, ability, action)
         math.random(0, 99) >= target:getMod(xi.mod.BIND_MEVA) and
         not target:hasStatusEffect(xi.effect.BIND)
     then
-        target:addStatusEffect(xi.effect.BIND, 0, 0, duration)
+        target:addStatusEffect(xi.effect.BIND, { duration = duration, origin = player })
         ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
     else
         ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
@@ -272,26 +272,26 @@ xi.job_utils.ranger.useShadowbind = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useUnlimitedShot = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.UNLIMITED_SHOT, 1, 0, 60)
+    player:addStatusEffect(xi.effect.UNLIMITED_SHOT, { power = 1, duration = 60, origin = player })
 
     return xi.effect.UNLIMITED_SHOT
 end
 
 xi.job_utils.ranger.useFlashyShot = function(player, target, ability, action)
     -- TODO: Flashy Shot should add "D" damage to the next ranged attack
-    player:addStatusEffect(xi.effect.FLASHY_SHOT, 1, 0, 60)
+    player:addStatusEffect(xi.effect.FLASHY_SHOT, { power = 1, duration = 60, origin = player })
 
     return xi.effect.FLASHY_SHOT
 end
 
 xi.job_utils.ranger.useStealthShot = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.STEALTH_SHOT, 1, 0, 60)
+    player:addStatusEffect(xi.effect.STEALTH_SHOT, { power = 1, duration = 60, origin = player })
 
     return xi.effect.STEALTH_SHOT
 end
 
 xi.job_utils.ranger.useDoubleShot = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.DOUBLE_SHOT, 40, 0, 90)
+    player:addStatusEffect(xi.effect.DOUBLE_SHOT, { power = 40, duration = 90, origin = player })
 
     return xi.effect.DOUBLE_SHOT
 end
@@ -367,7 +367,7 @@ xi.job_utils.ranger.useBountyShot = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useDecoyShot = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.DECOY_SHOT, 11, 1, 30)
+    target:addStatusEffect(xi.effect.DECOY_SHOT, { power = 11, duration = 30, origin = player, tick = 1 })
 
     return xi.effect.DECOY_SHOT
 end
@@ -377,7 +377,7 @@ xi.job_utils.ranger.useHoverShot = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useOverkill = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.OVERKILL, 11, 1, 60)
+    player:addStatusEffect(xi.effect.OVERKILL, { power = 11, duration = 60, origin = player, tick = 1 })
 
     return xi.effect.OVERKILL
 end

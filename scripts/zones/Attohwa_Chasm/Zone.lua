@@ -71,7 +71,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             gasponia:openDoor(3)
 
             if not player:hasStatusEffect(xi.effect.POISON) then
-                player:addStatusEffect(xi.effect.POISON, 15, 0, math.random(30, 60))
+                player:addStatusEffect(xi.effect.POISON, { power = 15, duration = math.random(30, 60), origin = player })
                 player:messageSpecial(ID.text.GASPONIA_POISON)
             end
         end

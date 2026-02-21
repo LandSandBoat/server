@@ -19,10 +19,10 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local pet = target:getPet()
     if target:hasEquipped(xi.item.BAG_OF_WYVERN_FEED) and pet ~= nil then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.BAG_OF_WYVERN_FEED)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.BAG_OF_WYVERN_FEED })
     end
 end
 

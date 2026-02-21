@@ -19,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
             -- only add it to me if I don't have it
             if not caster:hasStatusEffect(effect) then
-                caster:addStatusEffect(effect, statusEffect:getPower(), statusEffect:getTick(), statusEffect:getDuration())
+                caster:addStatusEffect(effect, { power = statusEffect:getPower(), duration = statusEffect:getDuration(), origin = caster, tick = statusEffect:getTick() })
             end
 
             target:delStatusEffect(effect)

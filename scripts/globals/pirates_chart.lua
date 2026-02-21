@@ -320,7 +320,7 @@ xi.piratesChart.onEventUpdate = function(player, csid, option, npc)
         member:delStatusEffectsByFlag(xi.effectFlag.DISPELABLE)
         member:delStatusEffect(xi.effect.RERAISE)
         member:delContainerItems(xi.inv.TEMPITEMS)
-        member:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 20, 0, 0, 0, 0)
+        member:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 20, origin = player })
     end
 end
 

@@ -26,7 +26,7 @@ end
 
 local function fly(mob)
     mob:setAnimationSub(allFlightPhaseAnimationSub)
-    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
     mob:setMobSkillAttack(731)
     setNextPhaseTriggers(mob, subsequentPhaseDuration)
 end

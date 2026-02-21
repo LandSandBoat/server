@@ -1039,7 +1039,7 @@ local function addGovProwessBonusEffect(player)
         end
 
         -- set effect
-        player:addStatusEffectEx(p.effect, 0, power, 0, 0)
+        player:addStatusEffect(p.effect, { power = power, origin = player, icon = 0 })
         player:messageBasic(p.effect - 168)
     end
 end
@@ -1188,43 +1188,43 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['REPATRIATION'] = function()
-                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1)
+                player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.HOME_NATION, duration = 1, origin = player, icon = 0 })
             end,
 
             ['CIRCUMSPECTION'] = function()
                 player:delStatusEffectSilent(xi.effect.SNEAK)
-                player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                player:addStatusEffect(xi.effect.SNEAK, { duration = 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER, origin = player, tick = 10 })
                 player:delStatusEffectSilent(xi.effect.INVISIBLE)
-                player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                player:addStatusEffect(xi.effect.INVISIBLE, { duration = 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER, origin = player, tick = 10 })
             end,
 
             ['HOMING_INSTINCT'] = function()
-                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 3)
+                player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.WARP, duration = 3, origin = player, icon = 0 })
             end,
 
             ['RERAISE'] = function()
                 player:delStatusEffectSilent(xi.effect.RERAISE)
-                player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
+                player:addStatusEffect(xi.effect.RERAISE, { power = 1, duration = 7200, origin = player })
             end,
 
             ['RERAISE_II'] = function()
                 player:delStatusEffectSilent(xi.effect.RERAISE)
-                player:addStatusEffect(xi.effect.RERAISE, 2, 0, 7200)
+                player:addStatusEffect(xi.effect.RERAISE, { power = 2, duration = 7200, origin = player })
             end,
 
             ['RERAISE_III'] = function()
                 player:delStatusEffectSilent(xi.effect.RERAISE)
-                player:addStatusEffect(xi.effect.RERAISE, 3, 0, 7200)
+                player:addStatusEffect(xi.effect.RERAISE, { power = 3, duration = 7200, origin = player })
             end,
 
             ['REGEN'] = function()
                 player:delStatusEffectSilent(xi.effect.REGEN)
-                player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+                player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
             ['REFRESH'] = function()
                 player:delStatusEffectSilent(xi.effect.REFRESH)
-                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600) -- Does indeed get overwriten by regular refresh.
+                player:addStatusEffect(xi.effect.REFRESH, { power = 1, duration = 3600, origin = player, tick = 3 }) -- Does indeed get overwriten by regular refresh.
             end,
 
             ['PROTECT'] = function()
@@ -1253,7 +1253,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
                 power = power + (bonus * tier)
                 player:delStatusEffectSilent(xi.effect.PROTECT)
-                player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
+                player:addStatusEffect(xi.effect.PROTECT, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
             ['SHELL'] = function()
@@ -1284,36 +1284,36 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
                 power = power + (bonus * tier)
                 player:delStatusEffectSilent(xi.effect.SHELL)
-                player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
+                player:addStatusEffect(xi.effect.SHELL, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
             ['HASTE'] = function()
                 player:delStatusEffectSilent(xi.effect.HASTE)
-                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+                player:addStatusEffect(xi.effect.HASTE, { power = 1000, duration = 600, origin = player })
             end,
 
             ['DRIED_MEAT'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 1, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 1, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['SALTED_FISH'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 2, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 2, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['HARD_COOKIE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 3, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 3, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['INSTANT_NOODLES'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 4, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 4, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['DRIED_AGARICUS'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 5, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 5, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['INSTANT_RICE'] = function()
-                player:addStatusEffect(xi.effect.FOOD, 6, 0, 1800, 0, 0, 0, xi.effectSourceType.FOOD, 0, player:getID())
+                player:addStatusEffect(xi.effect.FOOD, { power = 6, duration = 1800, origin = player, sourceType = xi.effectSourceType.FOOD })
             end,
 
             ['CIPHER_SAKURA'] = function()
@@ -1461,11 +1461,11 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
             -- increment clears
             player:delStatusEffectSilent(xi.effect.PROWESS)
-            player:addStatusEffect(xi.effect.PROWESS, govClears + 1, 0, 0)
+            player:addStatusEffect(xi.effect.PROWESS, { power = govClears + 1, origin = player })
 
         else
             -- keep track of number of clears
-            player:addStatusEffect(xi.effect.PROWESS, 1, 0, 0)
+            player:addStatusEffect(xi.effect.PROWESS, { power = 1, origin = player })
         end
     end
 

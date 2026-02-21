@@ -48,7 +48,7 @@ local packets =
         test = function(player, mob)
             player:changeJob(xi.job.RUN)
             player:setLevel(99)
-            player:addStatusEffect(xi.effect.IGNIS, 1, 0, 300)
+            player:addStatusEffect(xi.effect.IGNIS, { power = 1, duration = 300, origin = player })
             player.actions:useAbility(player, xi.jobAbility.VALLATION)
         end,
 
@@ -89,7 +89,7 @@ local packets =
         test = function(player, mob)
             player:changeJob(xi.job.RUN)
             player:setLevel(99)
-            player:addStatusEffect(xi.effect.IGNIS, 1, 0, 300)
+            player:addStatusEffect(xi.effect.IGNIS, { power = 1, duration = 300, origin = player })
             player.actions:useAbility(player, xi.jobAbility.LIEMENT)
         end,
 
@@ -133,7 +133,7 @@ local packets =
             player:addItem(xi.item.CHAOSBRINGER)
             player:equipItem(xi.item.CHAOSBRINGER)
             player.actions:engage(mob)
-            player:addStatusEffect(xi.effect.SULPOR, 1, 0, 300)
+            player:addStatusEffect(xi.effect.SULPOR, { power = 1, duration = 300, origin = player })
             player.actions:useAbility(mob, xi.jobAbility.SWIPE)
         end,
 
@@ -177,7 +177,7 @@ local packets =
             player:addItem(xi.item.CHAOSBRINGER)
             player:equipItem(xi.item.CHAOSBRINGER)
             player.actions:engage(mob)
-            player:addStatusEffect(xi.effect.SULPOR, 1, 0, 300)
+            player:addStatusEffect(xi.effect.SULPOR, { power = 1, duration = 300, origin = player })
             player.actions:useAbility(mob, xi.jobAbility.LUNGE)
         end,
 
@@ -221,7 +221,7 @@ local packets =
             player:addItem(xi.item.CHAOSBRINGER)
             player:equipItem(xi.item.CHAOSBRINGER)
             player.actions:engage(mob)
-            player:addStatusEffect(xi.effect.SULPOR, 1, 0, 300)
+            player:addStatusEffect(xi.effect.SULPOR, { power = 1, duration = 300, origin = player })
             player.actions:useAbility(mob, xi.jobAbility.GAMBIT)
         end,
 

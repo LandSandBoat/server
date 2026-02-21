@@ -15,11 +15,11 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.RANDOM_RING) then
         local power = math.random(1, 8)
 
-        target:addStatusEffect(xi.effect.ENCHANTMENT, power, 0, 3600, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.RANDOM_RING)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { power = power, duration = 3600, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.RANDOM_RING })
     end
 end
 

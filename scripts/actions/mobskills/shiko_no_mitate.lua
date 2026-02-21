@@ -15,8 +15,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Extra stuff for Trust: Gessho
     if mob:getObjType() == xi.objType.TRUST then
-        mob:addStatusEffect(xi.effect.ISSEKIGAN, 25, 0, 300)
-        mob:addStatusEffect(xi.effect.STONESKIN, 300, 0, 300)
+        mob:addStatusEffect(xi.effect.ISSEKIGAN, { power = 25, duration = 300, origin = mob })
+        mob:addStatusEffect(xi.effect.STONESKIN, { power = 300, duration = 300, origin = mob })
     end
 
     return xi.effect.DEFENSE_BOOST

@@ -494,7 +494,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- STEP 6: Final Operations.
     ------------------------------
-    if target:addStatusEffect(spellEffect, potency, tick, duration, 0, subpotency, tier) then
+    if target:addStatusEffect(spellEffect, { power = potency, duration = duration, origin = caster, tick = tick, subPower = subpotency, tier = tier }) then
         -- Delete Stymie effect
         if
             skillType == xi.skill.ENFEEBLING_MAGIC and

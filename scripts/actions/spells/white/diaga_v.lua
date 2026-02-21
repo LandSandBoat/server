@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delStatusEffect(xi.effect.BIO)
         local power = 5 + caster:getMod(xi.mod.DIA_DOT)
 
-        target:addStatusEffect(xi.effect.DIA, power, 3, 180, 0, 30, tier)
+        target:addStatusEffect(xi.effect.DIA, { power = power, duration = 180, origin = caster, tick = 3, subPower = 30, tier = tier })
     end
 
     return damage

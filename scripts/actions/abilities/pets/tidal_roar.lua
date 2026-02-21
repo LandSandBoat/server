@@ -12,7 +12,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     if not target:getStatusEffect(xi.effect.ATTACK_DOWN) then
-        target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 0, 60)
+        target:addStatusEffect(xi.effect.ATTACK_DOWN, { power = 25, duration = 60, origin = pet })
 
         -- The status effect requires the NO_LOSS_MESSAGE flag to be set
         local statusEffect = target:getStatusEffect(xi.effect.ATTACK_DOWN)

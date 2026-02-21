@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.SPELL_SPITTER_SPILUSPOK)
     mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.SPELL_SPITTER_SPILUSPOK + 2)
     mob:setMod(xi.mod.REFRESH, 5)
-    mob:addStatusEffectEx(xi.effect.STUN, xi.effect.STUN, 0, 0, 1, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true) -- Holds the mob so the player can zone in before they "ambush" the player
+    mob:addStatusEffect(xi.effect.STUN, { duration = 1, origin = mob, flag = xi.effectFlag.NO_LOSS_MESSAGE, silent = true }) -- Holds the mob so the player can zone in before they "ambush" the player
 
     -- Adds a listener for when the WHM loses silence since WHM doesn't have built in standback
     mob:addListener('EFFECT_LOSE', 'CCC_SILENCE', function(mobArg, effect)

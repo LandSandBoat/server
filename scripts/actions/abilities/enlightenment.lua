@@ -18,7 +18,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local merit = (player:getMerit(xi.merit.ENLIGHTENMENT) - 5)
-    player:addStatusEffect(xi.effect.ENLIGHTENMENT, merit, 0, 60)
+    player:addStatusEffect(xi.effect.ENLIGHTENMENT, { power = merit, duration = 60, origin = player })
 
     return xi.effect.ENLIGHTENMENT
 end

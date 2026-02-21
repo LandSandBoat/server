@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local ID = zones[target:getZoneID()]
 
     if
@@ -19,7 +19,7 @@ itemObject.onItemUse = function(target)
         target:getID() == ID.mob.ATORI_TUTORI + 1 or
         target:getID() == ID.mob.ATORI_TUTORI + 2)
     then
-        target:addStatusEffect(xi.effect.TERROR, 1, 3, 90)
+        target:addStatusEffect(xi.effect.TERROR, { power = 1, duration = 90, origin = user, tick = 3 })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -22,127 +22,211 @@
 
 #pragma once
 
-//
-// You can choose an RNG by commenting/uncommenting one of the lines below.
-// The default is Mersenne Twister in 64 bit.
-//
-
-// TODO: Make these selectable with #ifdef build flags
-
-// #include "rng/null.h"
-// #include "rng/mersennetwister.h"
-#include "rng/mersennetwister64.h"
-// #include "rng/pcg.h"
-// #include "rng/pcg64.h"
-
-// RNG template is as follows:
-// The RNG must comply with the CPP standard UniformRandomBitGenerator ( see https://en.cppreference.com/w/cpp/named_req/UniformRandomBitGenerator )
-//
-// The RNG must return a static thread local instance of the RNG with "rng()" as the accessor, such as:
-// static std::mt19937& rng()
-//
-// The RNG must have a seed function declared as follows:
-//
-// static void seed()
-//
-// The RNG must have the following boilerplate templated function declarations
-/*
-    template <typename T>
-    static inline typename std::enable_if<std::is_integral<T>::value, T>::type GetRandomNumber(T min, T max);
-
-    template <typename T>
-    static inline typename std::enable_if<std::is_floating_point<T>::value, T>::type GetRandomNumber(T min, T max);
-
-    template <typename T>
-    static inline T GetRandomNumber(T max);
-
-    template <typename T>
-    static inline typename T::value_type GetRandomElement(T* container);
-
-    template <typename T>
-    static inline typename T::value_type GetRandomElement(T& container);
-
-    template <typename T>
-    static inline T GetRandomElement(std::initializer_list<T> list);
-*/
-// See the latest revision of src/common/RNG/mersennetwister.h for an example.
+#include <algorithm>
+#include <concepts>
+#include <initializer_list>
+#include <iterator>
+#include <map>
+#include <random>
+#include <ranges>
+#include <span>
+#include <stdexcept>
+#include <type_traits>
+#include <vector>
 
 //
-// The following functions are not meant to be edited by the end user. Change at your own risk -- you will receive no support.
+// @brief Random Engine Selection
+//
+// Define one of the following macros to select a specific RNG engine.
+// If none are defined, XIRAND_MT64 (std::mt19937_64) is used by default.
+//
+// - XIRAND_PCG64
+// - XIRAND_PCG32
+// - XIRAND_MT32
+// - XIRAND_MT64
+// - XIRAND_SQUIRREL5
+// - XIRAND_NULL
 //
 
-// Generates a random number in the half-open interval [min, max)
-// @param min
-// @param max
-// @returns result
-//
-// Do note that max is subtracted by one as per an inconsistency in the standard, see
-// https://bugs.llvm.org/show_bug.cgi?id=18767#c1
-// this change results in both real and integer templates having the same min/max range
-template <typename T>
-inline typename std::enable_if<std::is_integral<T>::value, T>::type xirand::GetRandomNumber(T min, T max)
+#if defined(XIRAND_PCG64)
+#include <pcg_random.hpp>
+using SelectedRandomEngine = pcg64;
+#elif defined(XIRAND_PCG32)
+#include <pcg_random.hpp>
+using SelectedRandomEngine = pcg32;
+#elif defined(XIRAND_MT32)
+using SelectedRandomEngine = std::mt19937;
+#elif defined(XIRAND_SQUIRREL5)
+#include "rng/squirrel5.h"
+using SelectedRandomEngine = Squirrel5;
+#elif defined(XIRAND_NULL)
+#include "rng/null.h"
+using SelectedRandomEngine = NullRandomEngine;
+#else
+using SelectedRandomEngine = std::mt19937_64;
+#endif
+
+static_assert(std::uniform_random_bit_generator<SelectedRandomEngine>, "SelectedRandomEngine must satisfy the UniformRandomBitGenerator concept");
+static_assert(std::is_default_constructible_v<SelectedRandomEngine>, "SelectedRandomEngine must be default constructible");
+
+/// @brief Cross-platform implementation of secure random numbers for seeding.
+auto sysrandom(void* dst, size_t dstlen) -> size_t;
+
+namespace xirand
 {
-    if (min == max - 1 || max == min || min > max)
-    {
-        return min;
-    }
-    std::uniform_int_distribution<T> dist(min, max - 1);
-    return dist(rng());
-}
+/// @brief Accessor for the thread-local engine. It is guaranteed to be correctly seeded.
+[[nodiscard]] auto rng() -> SelectedRandomEngine&;
 
+/// @brief Manually seed the thread-local RNG.
+/// @note Calls to rng() will automatically call seed(). You don't need to do this manually.
+///       We _do_ manually call this in xi_test to force different seeds.
+void seed();
+
+/// @brief Generates a random number in the half-open interval [min, max).
+/// @tparam T Integer type.
+/// @param min Minimum value (inclusive).
+/// @param max Maximum value (exclusive).
+/// @return Random value in [min, max).
+/// @note max is subtracted by one as per an inconsistency in the standard, see
+///       https://bugs.llvm.org/show_bug.cgi?id=18767#c1
+///       This change results in both real and integer templates having the same min/max range.
+template <std::integral T>
+[[nodiscard]] inline auto GetRandomNumber(T min, T max) -> T;
+
+template <std::floating_point T>
+[[nodiscard]] inline auto GetRandomNumber(T min, T max) -> T;
+
+/// @brief Generates a random number in the half-open interval [0, max).
+/// @tparam T Number type.
+/// @param max Maximum value (exclusive).
+/// @return Random value in [0, max).
 template <typename T>
-inline typename std::enable_if<std::is_floating_point<T>::value, T>::type xirand::GetRandomNumber(T min, T max)
+[[nodiscard]] inline auto GetRandomNumber(T max) -> T;
+
+/// @brief Gets a random element from the given random_access_range (e.g. vector, array, deque).
+/// @tparam R Random access range type.
+/// @param range The container or range.
+/// @return Copy of the randomly selected element (or value-initialized T if empty).
+/// @throws std::out_of_range if the range is empty and T is not default constructible.
+template <std::ranges::random_access_range R>
+[[nodiscard]] inline auto GetRandomElement(R&& range) -> std::ranges::range_value_t<R>;
+
+/// @brief Returns a random index based on weights.
+/// @param weights Span of weights.
+/// @return Index of the selected weight.
+[[nodiscard]] inline auto GetWeightedIndex(std::span<const double> weights) -> size_t;
+
+/// @brief Returns a random index based on weights.
+/// @param weights Initializer list of weights.
+/// @return Index of the selected weight.
+/// @example GetWeightedIndex({70, 20, 10}) has a 70% chance to return 0.
+[[nodiscard]] inline auto GetWeightedIndex(std::initializer_list<double> weights) -> size_t;
+
+/// @brief Returns a random element from a map of <Element, Weight>.
+/// @tparam Container Map-like container type.
+/// @param table Map of elements to weights.
+/// @return Key of the selected element.
+/// @example GetWeightedElement(std::map<std::string, double>{{"Common", 70}, {"Rare", 30}})
+/// @throws std::out_of_range if the table is empty and key_type is not default constructible.
+template <typename Container>
+[[nodiscard]] inline auto GetWeightedElement(Container const& table) -> typename Container::key_type;
+} // namespace xirand
+
+//
+// inline impls
+//
+
+template <std::integral T>
+[[nodiscard]] inline auto xirand::GetRandomNumber(T min, T max) -> T
 {
     if (min >= max)
     {
         return min;
     }
+
+    std::uniform_int_distribution<T> dist(min, max - 1);
+    return dist(rng());
+}
+
+template <std::floating_point T>
+[[nodiscard]] inline auto xirand::GetRandomNumber(T min, T max) -> T
+{
+    if (min >= max)
+    {
+        return min;
+    }
+
     std::uniform_real_distribution<T> dist(min, max);
     return dist(rng());
 }
 
-// Generates a random number in the half-open interval [0, max)
-// @param min
-// @param max
-// @returns result
-//
-// Do note that max is subtracted by one as per an inconsistency in the standard, see
-// https://bugs.llvm.org/show_bug.cgi?id=18767#c1
-// this change results in both real and integer templates having the same min/max range
 template <typename T>
-inline T xirand::GetRandomNumber(T max)
+[[nodiscard]] inline auto xirand::GetRandomNumber(T max) -> T
 {
     return GetRandomNumber<T>(0, max);
 }
 
-// Gets a random element from the given stl-like container (container must have members: at() and size()).
-// @param container
-// @returns result
-template <typename T>
-inline typename T::value_type xirand::GetRandomElement(T* container)
+template <std::ranges::random_access_range R>
+[[nodiscard]] inline auto xirand::GetRandomElement(R&& range) -> std::ranges::range_value_t<R>
 {
-    // NOTE: the specialisation for integral types uses: dist(min, max - 1), so no need to offset container->size()
-    return container->at(GetRandomNumber<std::size_t>(0U, container->size()));
+    if (std::ranges::empty(range))
+    {
+        if constexpr (std::is_default_constructible_v<std::ranges::range_value_t<R>>)
+        {
+            return {};
+        }
+        else
+        {
+            throw std::out_of_range("GetRandomElement called on empty container with non-default-constructible type");
+        }
+    }
+
+    auto index = GetRandomNumber<std::ranges::range_size_t<R>>(0, std::ranges::size(range));
+    return range[index];
 }
 
-// Gets a random element from the given stl-like container (container must have members: at() and size()).
-// @param container
-// @returns result
-template <typename T>
-inline typename T::value_type xirand::GetRandomElement(T& container)
+[[nodiscard]] inline auto xirand::GetWeightedIndex(std::span<const double> weights) -> size_t
 {
-    return GetRandomElement(&container);
+    if (weights.empty())
+    {
+        return 0;
+    }
+
+    std::discrete_distribution<size_t> dist(weights.begin(), weights.end());
+    return dist(rng());
 }
 
-// Gets a random element from the given initializer_list.
-// @param initializer_list
-// @returns result
-template <typename T>
-inline T xirand::GetRandomElement(std::initializer_list<T> list)
+[[nodiscard]] inline auto xirand::GetWeightedIndex(std::initializer_list<double> weights) -> size_t
 {
-    std::vector<T> container(list);
-    return GetRandomElement(container);
+    return GetWeightedIndex(std::span<const double>(weights));
 }
 
-// Get secure random numbers
-size_t sysrandom(void* dst, size_t dstlen);
+template <typename Container>
+[[nodiscard]] inline auto xirand::GetWeightedElement(Container const& table) -> typename Container::key_type
+{
+    if (table.empty())
+    {
+        if constexpr (std::is_default_constructible_v<typename Container::key_type>)
+        {
+            return {};
+        }
+        else
+        {
+            throw std::out_of_range("GetWeightedElement called on empty container with non-default-constructible type");
+        }
+    }
+
+    std::vector<double>                       weights;
+    std::vector<typename Container::key_type> elements;
+    weights.reserve(table.size());
+    elements.reserve(table.size());
+
+    for (auto const& [item, weight] : table)
+    {
+        elements.push_back(item);
+        weights.push_back(static_cast<double>(weight));
+    }
+
+    std::discrete_distribution<size_t> dist(weights.begin(), weights.end());
+    return elements[dist(rng())];
+}

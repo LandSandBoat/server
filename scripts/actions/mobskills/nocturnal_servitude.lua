@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, 0, 3, 60)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
-        target:addStatusEffect(xi.effect.COSTUME, 256, 0, 60) -- bat costume
+        target:addStatusEffect(xi.effect.COSTUME, { power = 256, duration = 60, origin = mob }) -- bat costume
     end
 
     skill:setMsg(msg)

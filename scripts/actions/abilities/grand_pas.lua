@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.GRAND_PAS, 19, 1, 30)
+    target:addStatusEffect(xi.effect.GRAND_PAS, { power = 19, duration = 30, origin = player, tick = 1 })
 end
 
 return abilityObject

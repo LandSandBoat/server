@@ -25,7 +25,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ALTRUISM, player:getMerit(xi.merit.ALTRUISM), 0, 60)
+    player:addStatusEffect(xi.effect.ALTRUISM, { power = player:getMerit(xi.merit.ALTRUISM), duration = 60, origin = player })
 
     return xi.effect.ALTRUISM
 end

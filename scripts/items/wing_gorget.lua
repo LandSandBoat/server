@@ -10,12 +10,12 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.WING_GORGET) then
         if target:hasStatusEffect(xi.effect.REGAIN) then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
-            target:addStatusEffect(xi.effect.REGAIN, 5, 3, 30, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.WING_GORGET)
+            target:addStatusEffect(xi.effect.REGAIN, { power = 5, duration = 30, origin = user, tick = 3, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.WING_GORGET })
         end
     end
 end

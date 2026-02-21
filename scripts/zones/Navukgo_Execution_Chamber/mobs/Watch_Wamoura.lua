@@ -8,7 +8,7 @@ local entity = {}
 local function curl(mob)
     mob:setBaseSpeed(20)
     mob:setMod(xi.mod.DMG, -9500)
-    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, 100, 0, 0)
+    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, { power = 100, origin = mob })
     mob:setAnimationSub(5)
     mob:setLocalVar('stretchTime', GetSystemTime() + math.random(65, 80))
 end

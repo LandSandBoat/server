@@ -64,7 +64,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             if not player:hasStatusEffect(xi.effect.SILENCE) then
                 GetNPCByID(ID.npc.AFFLICTOR_BASE + (triggerArea:getTriggerAreaID() -1)):entityAnimationPacket('main', player)
                 player:setLocalVar('inRegion', time + 11) -- Start timer. We set it here to prevent double message.
-                player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
+                player:addStatusEffect(xi.effect.CURSE_I, { power = 75, duration = 120, origin = player })
                 player:messageSpecial(ID.text.FEEL_NUMB)
             elseif player:getLocalVar('inRegion1') <= time then
                 player:messageSpecial(ID.text.LIGHT_HEADED)

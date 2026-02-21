@@ -70,7 +70,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         power    = power * 1.5
         subpower = subpower * 1.5
         target:delStatusEffectSilent(effectId)
-        target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
+        target:addStatusEffect(effectId, { power = power, duration = duration, origin = player, tick = tick, subType = subId, subPower = subpower, tier = tier })
         local newEffect = target:getStatusEffect(effectId)
 
         if newEffect then

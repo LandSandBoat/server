@@ -27,8 +27,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.DEFENSE_DOWN, 0)
     if resist >= resistThreshold then
 
-        local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 0, duration * resist)
-        local actionTwo = target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 8, 0, duration * resist)
+        local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, { power = 10, duration = duration * resist, origin = caster })
+        local actionTwo = target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, { power = 8, duration = duration * resist, origin = caster })
 
         -- If at least one of effects got applied, set the message type
         if actionOne or actionTwo then

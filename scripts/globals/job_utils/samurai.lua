@@ -82,14 +82,14 @@ end
 -----------------------------------
 
 xi.job_utils.samurai.useMeikyoShisui = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MEIKYO_SHISUI, 1, 0, 30)
+    player:addStatusEffect(xi.effect.MEIKYO_SHISUI, { power = 1, duration = 30, origin = player })
     player:addTP(3000)
 
     return 0
 end
 
 xi.job_utils.samurai.useYaegasumi = function(player, target, ability)
-    player:addStatusEffect(xi.effect.YAEGASUMI, 12, 0, 45)
+    player:addStatusEffect(xi.effect.YAEGASUMI, { power = 12, duration = 45, origin = player })
 
     return xi.effect.YAEGASUMI
 end
@@ -109,7 +109,7 @@ xi.job_utils.samurai.useWardingCircle = function(player, target, ability)
         ability:setMsg(xi.msg.basic.FORTIFIED_DEMONS)
     end
 
-    target:addStatusEffect(xi.effect.WARDING_CIRCLE, power, 0, duration)
+    target:addStatusEffect(xi.effect.WARDING_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.WARDING_CIRCLE
 end
@@ -122,7 +122,7 @@ xi.job_utils.samurai.useThirdEye = function(player, target, ability)
         -- Returns "no effect" message when Copy Image is active when Third Eye is used.
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     else
-        player:addStatusEffect(xi.effect.THIRD_EYE, 0, 0, 30) -- Power keeps track of procs
+        player:addStatusEffect(xi.effect.THIRD_EYE, { duration = 30, origin = player }) -- Power keeps track of procs
     end
 
     return xi.effect.THIRD_EYE
@@ -140,7 +140,7 @@ xi.job_utils.samurai.useHasso = function(player, target, ability)
     if strboost > 0 then
         target:delStatusEffect(xi.effect.HASSO)
         target:delStatusEffect(xi.effect.SEIGAN)
-        target:addStatusEffect(xi.effect.HASSO, strboost, 0, 300)
+        target:addStatusEffect(xi.effect.HASSO, { power = strboost, duration = 300, origin = player })
     end
 
     return xi.effect.HASSO
@@ -154,7 +154,7 @@ xi.job_utils.samurai.useMeditate = function(player, target, ability)
         amount = 20 + player:getJobPointLevel(xi.jp.MEDITATE_EFFECT) * 5
     end
 
-    player:addStatusEffectEx(xi.effect.MEDITATE, 0, amount, 3, duration)
+    player:addStatusEffect(xi.effect.MEDITATE, { power = amount, duration = duration, origin = player, tick = 3, icon = 0 })
 
     return xi.effect.MEDITATE
 end
@@ -163,7 +163,7 @@ xi.job_utils.samurai.useSeigan = function(player, target, ability)
     if target:isWeaponTwoHanded() then
         target:delStatusEffect(xi.effect.HASSO)
         target:delStatusEffect(xi.effect.SEIGAN)
-        target:addStatusEffect(xi.effect.SEIGAN, 0, 0, 300)
+        target:addStatusEffect(xi.effect.SEIGAN, { duration = 300, origin = player })
     end
 
     return xi.effect.SEIGAN
@@ -171,7 +171,7 @@ end
 
 xi.job_utils.samurai.useSekkanoki = function(player, target, ability)
     target:delStatusEffect(xi.effect.SEKKANOKI)
-    target:addStatusEffect(xi.effect.SEKKANOKI, 1, 0, 60)
+    target:addStatusEffect(xi.effect.SEKKANOKI, { power = 1, duration = 60, origin = player })
 
     return xi.effect.SEKKANOKI
 end
@@ -189,7 +189,7 @@ xi.job_utils.samurai.useKonzenIttai = function(player, target, ability, action)
         not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
     then
         infoValue = params.hit
-        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 10, 0, 1)
+        target:addStatusEffect(xi.effect.CHAINBOUND, { power = 2, duration = 10, origin = player, icon = 0, subPower = 1 })
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
@@ -227,7 +227,7 @@ xi.job_utils.samurai.useBladeBash = function(player, target, ability, action)
     then
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
-            target:addStatusEffect(xi.effect.STUN, 1, 0, 6 * resistanceRate)
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 6 * resistanceRate, origin = player })
         end
     end
 
@@ -240,7 +240,7 @@ xi.job_utils.samurai.useBladeBash = function(player, target, ability, action)
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.FIRE, xi.mod.INT, xi.effect.PLAGUE, 0)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.PLAGUE, resistanceRate, 0) then
             local duration = (15 + player:getMerit(xi.merit.BLADE_BASH)) * resistanceRate
-            target:addStatusEffect(xi.effect.PLAGUE, 5, 0, duration)
+            target:addStatusEffect(xi.effect.PLAGUE, { power = 5, duration = duration, origin = player })
         end
     end
 
@@ -276,7 +276,7 @@ xi.job_utils.samurai.useShikikoyo = function(player, target, ability, action)
 end
 
 xi.job_utils.samurai.useSengikori = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SENGIKORI, 25, 0, 60)
+    player:addStatusEffect(xi.effect.SENGIKORI, { power = 25, duration = 60, origin = player })
 
     return xi.effect.SENGIKORI
 end
@@ -284,14 +284,14 @@ end
 xi.job_utils.samurai.useHamanoha = function(player, target, ability)
     local jpValue = target:getJobPointLevel(xi.jp.HAMANOHA_DURATION)
 
-    target:addStatusEffect(xi.effect.HAMANOHA, 12, 0, 180 + jpValue)
+    target:addStatusEffect(xi.effect.HAMANOHA, { power = 12, duration = 180 + jpValue, origin = player })
 
     return xi.effect.HAMANOHA
 end
 
 xi.job_utils.samurai.useHagakure = function(player, target, ability)
     player:delStatusEffect(xi.effect.HAGAKURE)
-    player:addStatusEffect(xi.effect.HAGAKURE, 400, 0, 60, 0, 1000)
+    player:addStatusEffect(xi.effect.HAGAKURE, { power = 400, duration = 60, origin = player, subPower = 1000 })
 
     return xi.effect.HAGAKURE
 end

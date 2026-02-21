@@ -14,9 +14,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     target:addHP(110 * xi.settings.main.ITEM_POWER)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 300)
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 300, origin = user })
 end
 
 return itemObject

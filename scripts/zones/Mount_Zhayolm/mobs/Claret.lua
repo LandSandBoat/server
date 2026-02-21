@@ -26,11 +26,11 @@ end
 entity.onMobFight = function(mob, target)
     if mob:checkDistance(target) < 3 then
         if not target:hasStatusEffect(xi.effect.POISON) then
-            target:addStatusEffect(xi.effect.POISON, 100, 3, math.random(3, 6) * 3) -- Poison for 3-6 ticks.
+            target:addStatusEffect(xi.effect.POISON, { power = 100, duration = math.random(3, 6) * 3, origin = mob, tick = 3 }) -- Poison for 3-6 ticks.
         else
             if target:getStatusEffect(xi.effect.POISON):getPower() < 100 then
                 target:delStatusEffect(xi.effect.POISON)
-                target:addStatusEffect(xi.effect.POISON, 100, 3, math.random(3, 6) * 3) -- Poison for 3-6 ticks.
+                target:addStatusEffect(xi.effect.POISON, { power = 100, duration = math.random(3, 6) * 3, origin = mob, tick = 3 }) -- Poison for 3-6 ticks.
             end
         end
     end

@@ -24,8 +24,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 90)
     local returnEffect = xi.effect.MAGIC_ATK_BOOST
 
-    local actionOne = target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 10, 0, duration)
-    local actionTwo = target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 10, 0, duration)
+    local actionOne = target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { power = 10, duration = duration, origin = caster })
+    local actionTwo = target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, { power = 10, duration = duration, origin = caster })
 
     if not actionOne and not actionTwo then -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

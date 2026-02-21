@@ -17,7 +17,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local typeEffect = xi.effect.ICE_SPIKES
     target:delStatusEffect(typeEffect)
 
-    if target:addStatusEffect(typeEffect, 15, 0, duration) then
+    if target:addStatusEffect(typeEffect, { power = 15, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else

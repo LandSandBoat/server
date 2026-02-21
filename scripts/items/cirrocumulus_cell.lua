@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return -1
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     if not encumbrance then
         return
@@ -28,7 +28,7 @@ itemObject.onItemUse = function(target)
     local newpower = bit.band(power, bit.bnot(0x8400))
     target:delStatusEffectSilent(xi.effect.ENCUMBRANCE_I)
     if newpower > 0 then
-        target:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, newpower, 0, 0)
+        target:addStatusEffect(xi.effect.ENCUMBRANCE_I, { power = newpower, origin = user })
     end
 
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 5)

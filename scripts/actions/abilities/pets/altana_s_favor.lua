@@ -20,7 +20,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     if target:isDead() then
         target:sendRaise(4) -- arise
-    elseif target:addStatusEffect(xi.effect.RERAISE, 3, 0, 0) then -- Infinite duration http://wiki.ffo.jp/html/30976.html
+    elseif target:addStatusEffect(xi.effect.RERAISE, { power = 3, origin = pet }) then -- Infinite duration http://wiki.ffo.jp/html/30976.html
         petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         return xi.effect.RERAISE
     else

@@ -29,7 +29,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     duration       = duration * (100 + player:getMod(xi.mod.SAMBA_PDURATION)) / 100
     player:delStatusEffect(xi.effect.DRAIN_SAMBA)
     player:delStatusEffect(xi.effect.ASPIR_SAMBA)
-    player:addStatusEffect(xi.effect.HASTE_SAMBA, 500 + player:getMerit(xi.merit.HASTE_SAMBA_EFFECT), 0, duration)
+    player:addStatusEffect(xi.effect.HASTE_SAMBA, { power = 500 + player:getMerit(xi.merit.HASTE_SAMBA_EFFECT), duration = duration, origin = player })
 
     return xi.effect.HASTE_SAMBA
 end

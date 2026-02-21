@@ -196,7 +196,7 @@ entity.closeDoor = function(mob)
 end
 
 entity.onMobInitialize = function(mob)
-    -- mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
+    -- mob:addStatusEffect(xi.effect.NO_REST, { power = 1, origin = mob })
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_DESPAWN, 1)
     mob:setAutoAttackEnabled(false)

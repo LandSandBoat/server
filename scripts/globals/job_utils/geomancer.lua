@@ -290,7 +290,7 @@ end
 -----------------------------------
 xi.job_utils.geomancer.bolster = function(player, target, ability)
     local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
-    player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+    player:addStatusEffect(xi.effect.BOLSTER, { duration = 240 + bonusTime, origin = player, tick = 3 })
 
     return xi.effect.BOLSTER
 end
@@ -368,7 +368,7 @@ xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability, act
 end
 
 xi.job_utils.geomancer.collimatedFervor = function(player, target, ability)
-    target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, 0, 0, 60)
+    target:addStatusEffect(xi.effect.COLLIMATED_FERVOR, { duration = 60, origin = player })
 
     return xi.effect.COLLIMATED_FERVOR
 end
@@ -395,7 +395,7 @@ xi.job_utils.geomancer.lifeCycle = function(player, target, ability, action)
 end
 
 xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
+    player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, { duration = 60, origin = player, tick = 3 })
 
     return xi.effect.BLAZE_OF_GLORY
 end
@@ -403,7 +403,7 @@ end
 xi.job_utils.geomancer.dematerialize = function(player, target, ability, action)
     local luopan = getLuopan(player)
     if luopan then
-        luopan:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+        luopan:addStatusEffect(xi.effect.DEMATERIALIZE, { duration = 60, origin = player, tick = 3 })
         -- Self-cast ability but reports effect on Luopan
         action:ID(player:getID(), luopan:getID())
     end
@@ -412,13 +412,13 @@ xi.job_utils.geomancer.dematerialize = function(player, target, ability, action)
 end
 
 xi.job_utils.geomancer.theurgicFocus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.THEURGIC_FOCUS, 1, 0, 60)
+    player:addStatusEffect(xi.effect.THEURGIC_FOCUS, { power = 1, duration = 60, origin = player })
 
     return xi.effect.THEURGIC_FOCUS
 end
 
 xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
-    player:addStatusEffect(xi.effect.WIDENED_COMPASS, 0, 3, 60)
+    player:addStatusEffect(xi.effect.WIDENED_COMPASS, { duration = 60, origin = player, tick = 3 })
 
     return xi.effect.WIDENED_COMPASS
 end
@@ -461,7 +461,7 @@ end
 --             xi.auraTarget.ALLIES or xi.auraTarget.ENEMIES
 -----------------------------------
 xi.job_utils.geomancer.addAura = function(target, duration, tickEffect, tickPower, targetType)
-    target:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 0, 3, duration, tickEffect, tickPower, targetType, xi.effectFlag.AURA)
+    target:addStatusEffect(xi.effect.COLURE_ACTIVE, { duration = duration, origin = target, tick = 3, subType = tickEffect, subPower = tickPower, tier = targetType, flag = xi.effectFlag.AURA })
 end
 
 -----------------------------------
@@ -484,7 +484,7 @@ xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
 
     windenedCompassCheck(caster)
 
-    target:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, visualEffect, 3, duration, effect, potency, targetType, xi.effectFlag.AURA)
+    target:addStatusEffect(xi.effect.COLURE_ACTIVE, { power = visualEffect, duration = duration, origin = caster, tick = 3, subType = effect, subPower = potency, tier = targetType, flag = xi.effectFlag.AURA })
 
     if caster:hasStatusEffect(xi.effect.ENTRUST) then
         caster:delStatusEffectSilent(xi.effect.ENTRUST)

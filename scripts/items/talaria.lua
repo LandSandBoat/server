@@ -12,9 +12,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if not target:hasStatusEffect(xi.effect.ENCHANTMENT) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 3600, 11403)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 3600, origin = user, subType = 11403 })
     end
 end
 

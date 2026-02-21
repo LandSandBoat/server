@@ -37,7 +37,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local duration = math.floor(90 * resistRate)
 
     petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
-    target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration)
+    target:addStatusEffect(xi.effect.SLEEP_I, { power = 1, duration = duration, origin = pet })
 
     return xi.effect.SLEEP_I
 end

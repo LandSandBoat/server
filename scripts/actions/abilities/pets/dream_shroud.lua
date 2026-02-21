@@ -16,8 +16,8 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local buffvalue = math.abs(12 - hour) + 1
     target:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
     target:delStatusEffect(xi.effect.MAGIC_DEF_BOOST)
-    target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 14 - buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { power = buffvalue, duration = duration, origin = pet })
+    target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, { power = 14 - buffvalue, duration = duration, origin = pet })
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.JA_RECEIVES_MAB_MDB)

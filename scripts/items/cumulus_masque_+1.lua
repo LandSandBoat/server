@@ -15,8 +15,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.CUMULUS_MASQUE, 0, 8)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.CUMULUS_MASQUE, duration = 8, origin = user, icon = 0 })
 end
 
 return itemObject

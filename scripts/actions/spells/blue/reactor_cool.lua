@@ -32,8 +32,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delStatusEffectSilent(xi.effect.ICE_SPIKES)
     end
 
-    target:addStatusEffect(xi.effect.DEFENSE_BOOST, 12, 0, duration)
-    target:addStatusEffect(xi.effect.ICE_SPIKES, 5, 0, duration)
+    target:addStatusEffect(xi.effect.DEFENSE_BOOST, { power = 12, duration = duration, origin = caster })
+    target:addStatusEffect(xi.effect.ICE_SPIKES, { power = 5, duration = duration, origin = caster })
     spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
 
     return xi.effect.DEFENSE_BOOST

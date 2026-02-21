@@ -27,7 +27,7 @@ spellObject.onMobSpawn = function(mob)
         tick_amount = 1
     end
 
-    mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.GEO_REFRESH, tick_amount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
+    mob:addStatusEffect(xi.effect.COLURE_ACTIVE, { power = 6, origin = mob, tick = 3, subType = xi.effect.GEO_REFRESH, subPower = tick_amount, tier = xi.auraTarget.ALLIES, flag = xi.effectFlag.AURA })
     mob:setAutoAttackEnabled(false)
 end
 

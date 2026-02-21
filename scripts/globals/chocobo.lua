@@ -244,7 +244,7 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
             end
         end
 
-        player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
+        player:addStatusEffect(xi.effect.MOUNTED, { duration = duration, origin = player, silent = true })
 
         -- Renting a chocobo force despawns every type of pets
         -- Note: This does not honor cooldown reductions offered otherwise when dismissing pets with full life.

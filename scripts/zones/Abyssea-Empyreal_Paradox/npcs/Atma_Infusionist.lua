@@ -1,0 +1,25 @@
+-----------------------------------
+-- Zone: Abyssea - Empyreal Paradox
+--  NPC: Atma Infusionist
+-- !pos 545.000 -500.500 -584.000 255
+-----------------------------------
+---@type TNpcEntity
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+    xi.atma.onTrade(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    xi.atma.onTrigger(player, npc)
+end
+
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.atma.onEventUpdate(player, csid, option, npc)
+end
+
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.atma.onEventFinish(player, csid, option, npc)
+end
+
+return entity

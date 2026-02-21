@@ -16,8 +16,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FISHING_IMAGERY, 2, 0, 120 * 60)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.FISHING_IMAGERY, { power = 2, duration = 120 * 60, origin = user })
 end
 
 return itemObject

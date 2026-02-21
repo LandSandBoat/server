@@ -557,6 +557,18 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             petutils::DetachPet(PChar);
         }
 
+        // Remove Battlefield effect from Trusts
+        if (!PChar->PTrusts.empty())
+        {
+            for (auto* PTrust : PChar->PTrusts)
+            {
+                if (PTrust && PTrust->StatusEffectContainer)
+                {
+                    PTrust->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, EffectNotice::Silent);
+                }
+            }
+        }
+
         m_Zone->updateCharLevelRestriction(PChar);
 
         if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))

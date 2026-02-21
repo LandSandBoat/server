@@ -26,7 +26,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    target:addStatusEffect(effectId, effectPower, 0, 90)
+    target:addStatusEffect(effectId, { power = effectPower, duration = 90, origin = pet })
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
