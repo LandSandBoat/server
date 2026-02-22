@@ -307,7 +307,19 @@ void MapEngine::do_init()
     // for entrances (Assault/Salvage/Nyzul/etc.) to function.
     instanceutils::LoadInstanceList(mapIPP);
 
-    if (!engineConfig_.lazyZones)
+    if (engineConfig_.lazyZones)
+    {
+        // Keep transport zones loaded under --lazy so airships/boats continue to advance.
+        const auto transportZoneIds = CTransportHandler::getInstance()->GetRequiredTransportZoneIds(mapIPP);
+        if (!transportZoneIds.empty())
+        {
+            zoneutils::LoadZones(std::vector<uint16>(transportZoneIds.begin(), transportZoneIds.end()));
+            ShowInfoFmt("Preloaded {} transport zones for --lazy", transportZoneIds.size());
+        }
+
+        CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+    }
+    else
     {
         CTransportHandler::getInstance()->InitializeTransport(mapIPP);
     }

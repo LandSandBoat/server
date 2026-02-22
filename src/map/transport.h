@@ -28,6 +28,7 @@
 
 #include "entities/npcentity.h"
 
+#include <set>
 #include <vector>
 
 enum TRANSPORTSTATE
@@ -131,6 +132,7 @@ public:
     Elevator_t* getElevator(uint8 elevatorID);
 
     void InitializeTransport(IPP mapIPP);
+    auto GetRequiredTransportZoneIds(IPP mapIPP) -> std::set<uint16>;
 
 protected:
     CTransportHandler() = default;

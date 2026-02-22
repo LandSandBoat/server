@@ -26,6 +26,7 @@
 #include "map_engine.h"
 
 #include <cstdlib>
+#include <set>
 
 #include "entities/charentity.h"
 #include "packets/entity_update.h"
@@ -122,6 +123,39 @@ void Elevator_t::closeDoor(CNpcEntity* npc) const
  *  Loads transportation from the database table transport               *
  *                                                                       *
  ************************************************************************/
+
+auto CTransportHandler::GetRequiredTransportZoneIds(IPP mapIPP) -> std::set<uint16>
+{
+    std::set<uint16> zoneIds;
+
+    auto rset = db::preparedStmt("SELECT DISTINCT ((transport >> 12) & 0x0FFF) AS zoneid "
+                                 "FROM transport "
+                                 "LEFT JOIN zone_settings ON ((transport >> 12) & 0xFFF) = zoneid "
+                                 "WHERE ((transport >> 12) & 0x0FFF) > 0 "
+                                 "AND IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)",
+                                 mapIPP.getIP(),
+                                 mapIPP.getIPString(),
+                                 mapIPP.getPort());
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        zoneIds.insert(rset->get<uint16>("zoneid"));
+    }
+
+    rset = db::preparedStmt("SELECT DISTINCT zone "
+                            "FROM transport "
+                            "LEFT JOIN zone_settings ON zone = zoneid "
+                            "WHERE zone > 0 "
+                            "AND IF(? <> 0, ? = zoneip AND ? = zoneport, TRUE)",
+                            mapIPP.getIP(),
+                            mapIPP.getIPString(),
+                            mapIPP.getPort());
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        zoneIds.insert(rset->get<uint16>("zone"));
+    }
+
+    return zoneIds;
+}
 
 void CTransportHandler::InitializeTransport(IPP mapIPP)
 {
