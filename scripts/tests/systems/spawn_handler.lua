@@ -336,8 +336,8 @@ describe('Spawn Handler', function()
             -- Kill King Arthro
             player:claimAndKillMob(kingArthro)
 
-            -- Skip 24 hours
-            xi.test.world:skipTime(86400)
+            -- Skip past max respawn window (24h 10m)
+            xi.test.world:skipTime(87000)
             xi.test.world:tick(xi.tick.SPAWN)
 
             -- Knight Crabs should now be respawned
