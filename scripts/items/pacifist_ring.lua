@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.PACIFIST_RING) then
-        target:addStatusEffect(xi.effect.ENMITY_DOWN, 12, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PACIFIST_RING)
+        target:addStatusEffect(xi.effect.ENMITY_DOWN, { power = 12, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.PACIFIST_RING })
     end
 end
 

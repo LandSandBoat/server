@@ -365,7 +365,7 @@ xi.campaign.sigilOnEventFinish = function(player, csid, option, npc)
             -- 3: EXP Loss Reduction
 
             player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
-            player:addStatusEffect(xi.effect.SIGIL, selectedEffects, 0, duration, 0, subPower, 0)
+            player:addStatusEffect(xi.effect.SIGIL, { power = selectedEffects, duration = duration, origin = player, subPower = subPower })
             player:messageSpecial(zones[zoneId].text.ALLIED_SIGIL)
 
             if bonusCost > 0 then

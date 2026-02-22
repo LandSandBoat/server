@@ -16,9 +16,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(250 * xi.settings.main.ITEM_POWER))
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 900, origin = user })
 end
 
 return itemObject

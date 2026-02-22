@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.SACRED_WAND) then
         local effect = xi.effect.ENLIGHT
         local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
@@ -29,7 +29,7 @@ itemObject.onItemUse = function(target)
 
         potency = utils.clamp(potency, 3, 25)
 
-        target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.SACRED_WAND)
+        target:addStatusEffect(effect, { power = potency, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.SACRED_WAND })
     end
 end
 

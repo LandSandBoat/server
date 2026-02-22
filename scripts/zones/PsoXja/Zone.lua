@@ -57,7 +57,7 @@ zoneObject.afterZoneIn = function(player)
         local lvlCap = player:getCharVar('PSOXJA_RESTRICTION_LVL')
 
         if lvlCap > 0 then -- LV cap depends on entrance
-            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, lvlCap, 0, 0)
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = lvlCap, origin = player })
         end
     end
 end

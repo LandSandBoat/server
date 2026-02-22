@@ -8,9 +8,6 @@
 -- Click ??? in La Theine Plateau between 18:00 and 5:00, then return to Joachim. Flags Champions of Abyssea upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.TENUOUS_EXISTENCE)
 
 quest.reward = {}

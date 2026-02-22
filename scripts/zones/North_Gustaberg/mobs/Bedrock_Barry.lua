@@ -65,7 +65,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.STONESKIN, math.random(30, 40), 0, 300)
+    mob:addStatusEffect(xi.effect.STONESKIN, { power = math.random(30, 40), duration = 300, origin = mob })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

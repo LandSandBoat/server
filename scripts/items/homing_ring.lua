@@ -20,9 +20,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local region = target:getCurrentRegion()
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 4, 0, region)
+    target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.OUTPOST, duration = 4, origin = user, icon = 0, subPower = region })
 end
 
 return itemObject

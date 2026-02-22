@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local power     = 15
     local duration  = 180
 
@@ -27,7 +27,7 @@ itemObject.onItemUse = function(target)
     }
 
     for _, effect in ipairs(effects) do
-        target:addStatusEffect(effect, power, 0, duration)
+        target:addStatusEffect(effect, { power = power, duration = duration, origin = user })
     end
 end
 

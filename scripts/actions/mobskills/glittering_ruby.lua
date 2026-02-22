@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local effectId    = utils.randomEntry(effects)
     local effectPower = math.random(12, 14)
 
-    target:addStatusEffect(effectId, effectPower, 0, 90)
+    target:addStatusEffect(effectId, { power = effectPower, duration = 90, origin = mob })
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
 
     return effectId

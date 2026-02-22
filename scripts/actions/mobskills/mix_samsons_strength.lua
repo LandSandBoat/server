@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     for _, effect in pairs(statii) do
         if not target:hasStatusEffect(effect) then
-            target:addStatusEffect(effect, 10, 0, 60)
+            target:addStatusEffect(effect, { power = 10, duration = 60, origin = mob })
         end
     end
 

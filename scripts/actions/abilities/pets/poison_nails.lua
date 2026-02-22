@@ -25,7 +25,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         xi.summon.avatarPhysicalHit(petskill, totaldamage) and
         not target:hasStatusEffect(xi.effect.POISON)
     then
-        target:addStatusEffect(xi.effect.POISON, 1, 3, 60)
+        target:addStatusEffect(xi.effect.POISON, { power = 1, duration = 60, origin = pet, tick = 3 })
     end
 
     return totaldamage

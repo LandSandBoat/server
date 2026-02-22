@@ -14,7 +14,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local duration = 300
     local shadows = 1 + maneuvers -- math.floor(maneuvers * 3.5) currently on retail
 
-    if target:addStatusEffect(xi.effect.BLINK, shadows, 0, duration) then
+    if target:addStatusEffect(xi.effect.BLINK, { power = shadows, duration = duration, origin = automaton }) then
         skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
         for i = 1, maneuvers do
             master:delStatusEffectSilent(xi.effect.WIND_MANEUVER)

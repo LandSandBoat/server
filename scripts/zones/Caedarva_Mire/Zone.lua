@@ -88,7 +88,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             local random = math.random(1000)
             for i = 1, 6 do
                 if random <= effectTable[i][1] then
-                    player:addStatusEffect(effectTable[i][2], effectTable[i][3], 0, math.random(effectTable[i][4], effectTable[i][5]))
+                    player:addStatusEffect(effectTable[i][2], { power = effectTable[i][3], duration = math.random(effectTable[i][4], effectTable[i][5]), origin = player })
                     player:messageSpecial(effectTable[i][6])
                     break
                 end

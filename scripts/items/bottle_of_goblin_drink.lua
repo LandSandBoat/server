@@ -10,9 +10,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if not target:hasStatusEffect(xi.effect.FOOD) then
-        target:addStatusEffect(xi.effect.FOOD, 1, 3, 10800, 4541)
+        target:addStatusEffect(xi.effect.FOOD, { power = 1, duration = 10800, origin = user, tick = 3, subType = 4541 })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

@@ -33,7 +33,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         xi.summon.avatarPhysicalHit(petskill, totaldamage) and
         not target:hasStatusEffect(xi.effect.WEIGHT)
     then
-        target:addStatusEffect(xi.effect.WEIGHT, 50, 0, duration)
+        target:addStatusEffect(xi.effect.WEIGHT, { power = 50, duration = duration, origin = pet })
     end
 
     return totaldamage

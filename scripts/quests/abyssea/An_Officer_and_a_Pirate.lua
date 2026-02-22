@@ -7,9 +7,6 @@
 -- Flags Heart of Madness upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.AN_OFFICER_AND_A_PIRATE)
 
 quest.reward = {}

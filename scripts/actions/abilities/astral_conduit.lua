@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ASTRAL_CONDUIT, 15, 1, 30)
+    player:addStatusEffect(xi.effect.ASTRAL_CONDUIT, { power = 15, duration = 30, origin = player, tick = 1 })
 end
 
 return abilityObject

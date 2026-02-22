@@ -100,12 +100,12 @@ end
 local doHealing = function(mob)
     mob:setLocalVar('isHealing', 1)
     mob:setAutoAttackEnabled(false) -- Stops the NM from attacking until it is fully re-engaged with the player
-    mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 0, 0, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true) -- Will bind the NM to stop it from moving for a set time.
+    mob:addStatusEffect(xi.effect.BIND, { duration = 5, origin = mob, flag = xi.effectFlag.NO_LOSS_MESSAGE, silent = true }) -- Will bind the NM to stop it from moving for a set time.
     if
         mob:getHPP() < 85 and
         not mob:hasStatusEffect(xi.effect.REGEN)
     then
-        mob:addStatusEffectEx(xi.effect.REGEN, xi.effect.REGEN, 264, 5, 100, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
+        mob:addStatusEffect(xi.effect.REGEN, { power = 264, duration = 100, origin = mob, tick = 5, tier = xi.effectFlag.NO_LOSS_MESSAGE, silent = true })
     end
 end
 
@@ -114,7 +114,7 @@ local spawnDance = function(mob)
     mob:pathTo(pathNodes[paths.SPAWN][2].x, pathNodes[paths.SPAWN][2].y, pathNodes[paths.SPAWN][2].z, xi.path.flag.SCRIPT)
 
     if mob:checkDistance(pathNodes[paths.SPAWN][2].x, pathNodes[paths.SPAWN][2].y, pathNodes[paths.SPAWN][2].z) < 1 then
-        mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 0, 0, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
+        mob:addStatusEffect(xi.effect.BIND, { duration = 5, origin = mob, flag = xi.effectFlag.NO_LOSS_MESSAGE, silent = true })
         mob:setLocalVar('justSpawned', 0)
     end
 end
@@ -150,7 +150,7 @@ entity.onMobFight = function(mob, target)
         hpp <= 75 and
         not mob:hasStatusEffect(xi.effect.INTIMIDATE)
     then
-        mob:addStatusEffectEx(xi.effect.INTIMIDATE, xi.effect.NONE, 20, 0, 0xFFFF, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
+        mob:addStatusEffect(xi.effect.INTIMIDATE, { power = 20, duration = 0xFFFF, origin = mob, icon = xi.effect.NONE, flag = xi.effectFlag.NO_LOSS_MESSAGE, silent = true })
     elseif hpp > 75 then
         mob:delStatusEffect(xi.effect.INTIMIDATE)
     end

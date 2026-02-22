@@ -7,9 +7,6 @@
 -- Zone into Abyssea - Empyreal Paradox. Flag The Wyrm God upon completion.
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.BENEATH_A_BLOOD_RED_SKY)
 
 quest.reward = {}

@@ -14,10 +14,10 @@ itemObject.onItemUnequip = function(target, item)
     target:delStatusEffect(xi.effect.HASTE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.HASTE_BELT) then
         -- TODO: Haste applied by the belt should a separate buff from Spell Haste and stacks. Currently overwrites.
-        target:addStatusEffect(xi.effect.HASTE, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HASTE_BELT)
+        target:addStatusEffect(xi.effect.HASTE, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.HASTE_BELT })
     end
 end
 

@@ -570,7 +570,7 @@ local regionControl = function(player, npc, trade)
             -- Beastmen controlled
             if owner == 3 then
                 local costume = beastCostumes[math.random(#beastCostumes)]
-                player:addStatusEffect(xi.effect.COSTUME, costume, 0, utils.minutes(60))
+                player:addStatusEffect(xi.effect.COSTUME, { power = costume, duration = utils.minutes(60), origin = player })
                 player:confirmTrade()
 
                 return

@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local power = 1
     local legs = target:getEquipID(xi.slot.LEGS)
     if legs == 11966 or legs == 11968 then -- Dream Trousers +1 & Dream Pants +1
@@ -18,7 +18,7 @@ itemObject.onItemUse = function(target)
     end
 
     if not target:hasStatusEffect(xi.effect.REFRESH) then
-        target:addStatusEffect(xi.effect.REFRESH, power, 3, 90)
+        target:addStatusEffect(xi.effect.REFRESH, { power = power, duration = 90, origin = user, tick = 3 })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

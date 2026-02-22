@@ -18,7 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 454 then
-        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 3)
+        player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.RETRACE, duration = 3, origin = player, icon = 0 })
         player:delCurrency('allied_notes', 30)
     end
 end

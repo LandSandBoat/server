@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUse = function(target, user, item, action)
-    if target:addStatusEffect(xi.effect.STONESKIN, 200, 0, 60) then
+    if target:addStatusEffect(xi.effect.STONESKIN, { power = 200, duration = 60, origin = user }) then
         action:messageID(target:getID(), xi.msg.basic.ITEM_RECEIVES_EFFECT)
 
         return xi.effect.STONESKIN

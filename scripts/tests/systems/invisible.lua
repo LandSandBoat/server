@@ -15,7 +15,7 @@ describe('Invisible', function()
 
     for sName, sId in pairs(invisibleStatus) do
         it(string.format('breaks on item use (%s)', sName), function()
-            player:addStatusEffect(sId, 0, 10, 60)
+            player:addStatusEffect(sId, { duration = 60, origin = player, tick = 10 })
             player:addItem(xi.item.MEAT_MITHKABOB)
             local kabob = player:findItem(xi.item.MEAT_MITHKABOB)
             assert(kabob)

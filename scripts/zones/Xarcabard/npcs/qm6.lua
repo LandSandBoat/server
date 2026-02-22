@@ -4,6 +4,8 @@
 -- Involved in Quests: RNG AF3 - Unbridled Passion
 -- !pos -254.883 -17.003 -150.818 112
 -----------------------------------
+local ID = zones[xi.zone.XARCABARD]
+-----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -14,6 +16,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(6, 0, 13360)
     elseif unbridledPassionCS == 6 then
         player:startEvent(7)
+    else
+        player:messageSpecial(ID.text.CAVERN_CONTINUES)
     end
 end
 

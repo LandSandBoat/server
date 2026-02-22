@@ -44,7 +44,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     amount = amount + math.floor(bonus)
 
-    if target:addStatusEffect(xi.effect.STONESKIN, amount, 0, duration, 0, 0, 4) then
+    if target:addStatusEffect(xi.effect.STONESKIN, { power = amount, duration = duration, origin = automaton, tier = 4 }) then
         skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)

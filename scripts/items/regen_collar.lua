@@ -14,9 +14,9 @@ itemObject.onItemUnequip = function(target, item)
     target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.REGEN_COLLAR)
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.REGEN_COLLAR) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 120, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.REGEN_COLLAR)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 120, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.REGEN_COLLAR })
     end
 end
 

@@ -14,9 +14,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.VIT_BOOST, 5, 0, 900)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 3600)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.VIT_BOOST, { power = 5, duration = 900, origin = user })
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 3600, origin = user })
 end
 
 return itemObject

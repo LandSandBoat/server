@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local power = 20
     local tier = 1
     local bonus = 0
@@ -20,7 +20,7 @@ itemObject.onItemUse = function(target)
 
     power = power + (bonus * tier)
 
-    if target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier) then
+    if target:addStatusEffect(xi.effect.PROTECT, { power = power, duration = 1800, origin = user, tier = tier }) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PROTECT)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

@@ -46,7 +46,7 @@ end
 zoneObject.afterZoneIn = function(player)
     -- ZONE WIDE LEVEL RESTRICTION
     if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 30, 0, 0)
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 30, origin = player })
     end
 end
 

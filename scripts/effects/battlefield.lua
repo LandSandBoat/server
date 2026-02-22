@@ -10,7 +10,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     if target:getPet() then
-        target:getPet():addStatusEffect(effect)
+        target:getPet():copyStatusEffect(effect)
     end
 
     if target:getObjType() == xi.objType.PC then

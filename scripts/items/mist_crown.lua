@@ -14,10 +14,10 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.MIST_CROWN) then
         if not target:hasStatusEffect(xi.effect.EVASION_BOOST) then
-            target:addStatusEffect(xi.effect.EVASION_BOOST, 0, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MIST_CROWN)
+            target:addStatusEffect(xi.effect.EVASION_BOOST, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.MIST_CROWN })
         else
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         end

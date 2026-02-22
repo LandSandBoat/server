@@ -473,7 +473,7 @@ local addEffectStatus = function(mob, target, ae, params)
 
         duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
 
-        target:addStatusEffect(ae.eff, power, tick, duration)
+        target:addStatusEffect(ae.eff, { power = power, duration = duration, origin = mob, tick = tick })
 
         if params.code then
             params.code(mob, target, power)

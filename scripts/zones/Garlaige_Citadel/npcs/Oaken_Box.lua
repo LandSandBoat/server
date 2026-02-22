@@ -19,15 +19,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
+    if GetMobByID(ID.mob.GUARDIAN_STATUE):isAlive() then
+        player:messageSpecial(ID.text.FEELS_WRONG)
+    elseif
+        player:hasItem(xi.item.NAIL_PULLER) and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == xi.questStatus.QUEST_ACCEPTED
+    then
+        player:messageSpecial(ID.text.BOXES_SCATTERED, xi.item.NAIL_PULLER)
+    elseif
         player:getCharVar('peaceForTheSpiritCS') == 4 and
         not player:hasItem(xi.item.NAIL_PULLER) and
         not GetMobByID(ID.mob.GUARDIAN_STATUE):isSpawned()
     then
-        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.GUARDIAN_STATUE):updateClaim(player)
     else
-        player:messageSpecial(ID.text.YOU_FIND_NOTHING)
+        player:messageSpecial(ID.text.BOXES_HERE)
     end
 end
 

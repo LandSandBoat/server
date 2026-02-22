@@ -21,6 +21,12 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    if not player:hasStatusEffect(xi.effect.VISITANT) then
+        player:addStatusEffect(xi.effect.VISITANT, { icon = xi.effect.VISITANT, origin = player })
+    end
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 

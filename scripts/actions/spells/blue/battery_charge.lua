@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 3 + caster:getMod(xi.mod.ENHANCES_REFRESH)
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)
 
-    if not target:addStatusEffect(xi.effect.REFRESH, power, 0, duration) then
+    if not target:addStatusEffect(xi.effect.REFRESH, { power = power, duration = duration, origin = caster }) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

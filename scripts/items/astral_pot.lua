@@ -18,10 +18,10 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local pet = target:getPet()
     if target:hasEquipped(xi.item.ASTRAL_POT) and pet ~= nil then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 300, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ASTRAL_POT)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 300, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.ASTRAL_POT })
     end
 end
 

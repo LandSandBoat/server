@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if dmg > 0 then
         -- Cannot be resisted
         target:setAnimationSub(3)
-        target:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+        target:addStatusEffect(xi.effect.TERROR, { duration = 30, origin = mob })
     end
 
     return dmg

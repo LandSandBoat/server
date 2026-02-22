@@ -22,9 +22,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MDEF, 50)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
-    mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
-    mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
-    mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+    mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, { power = 1, origin = mob, icon = 0 })
+    mob:addStatusEffect(xi.effect.ARROW_SHIELD, { power = 1, origin = mob, icon = 0 })
+    mob:addStatusEffect(xi.effect.MAGIC_SHIELD, { power = 1, origin = mob, icon = 0 })
     mob:setMagicCastingEnabled(false)
 end
 

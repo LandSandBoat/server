@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         -- Calculate DoT effect (rough, though fairly accurate)
         local power = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
 
-        target:addStatusEffect(xi.effect.BIO, power, 3, 180, 0, 25, tier)
+        target:addStatusEffect(xi.effect.BIO, { power = power, duration = 180, origin = caster, tick = 3, subPower = 25, tier = tier })
     end
 
     return damage

@@ -10,9 +10,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if not target:hasStatusEffect(xi.effect.REGEN) then
-        target:addStatusEffect(xi.effect.REGEN, 2, 3, 120)
+        target:addStatusEffect(xi.effect.REGEN, { power = 2, duration = 120, origin = user, tick = 3 })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

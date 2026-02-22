@@ -146,7 +146,7 @@ xi.job_utils.thief.useAssassinsCharge = function(player, target, ability, action
         crit = merits / 5
     end
 
-    player:addStatusEffect(xi.effect.ASSASSINS_CHARGE, merits - 5, 0, 60, 0, crit)
+    player:addStatusEffect(xi.effect.ASSASSINS_CHARGE, { power = merits - 5, duration = 60, origin = player, subPower = crit })
 
     return xi.effect.ASSASSINS_CHARGE
 end
@@ -154,7 +154,7 @@ end
 xi.job_utils.thief.useBully = function(player, target, ability)
     local jpValue = player:getJobPointLevel(xi.jp.BULLY_EFFECT)
 
-    target:addStatusEffectEx(xi.effect.DOUBT, xi.effect.INTIMIDATE, 15 + jpValue, 0, 30)
+    target:addStatusEffect(xi.effect.DOUBT, { power = 15 + jpValue, duration = 30, origin = player, icon = xi.effect.INTIMIDATE })
 
     return xi.effect.INTIMIDATE
 end
@@ -191,7 +191,7 @@ xi.job_utils.thief.useConspirator = function(player, target, ability)
         end
     end
 
-    target:addStatusEffect(xi.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
+    target:addStatusEffect(xi.effect.CONSPIRATOR, { power = subtleBlow * scale, duration = 60, origin = player, subPower = accuracy * scale })
 
     return xi.effect.CONSPIRATOR
 end
@@ -241,7 +241,7 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
 
         local power = processDebuff(player, target, ability, debuff) -- Also sets ability message
 
-        target:addStatusEffect(debuff, power, 0, 90)
+        target:addStatusEffect(debuff, { power = power, duration = 90, origin = player })
     else
         action:setAnimation(target:getID(), 182)
         ability:setMsg(xi.msg.basic.STEAL_FAIL) -- Failed
@@ -254,7 +254,7 @@ xi.job_utils.thief.useFeint = function(player, target, ability, action)
     local bonus = player:getMod(xi.mod.AUGMENTS_FEINT) * player:getMerit(xi.merit.FEINT) / 25 -- Divide by the merit value (feint is 25) to get the number of merit points
 
     -- Subpower is the proc rate bonus for TH procs
-    player:addStatusEffect(xi.effect.FEINT, 150 + bonus, 0, 60, 0, player:getMerit(xi.merit.FEINT) - 25) -- -150 Evasion base, 0% base TREASURE_HUNTER_PROC, every merit past 1 gives 25%
+    player:addStatusEffect(xi.effect.FEINT, { power = 150 + bonus, duration = 60, origin = player, subPower = player:getMerit(xi.merit.FEINT) - 25 }) -- -150 Evasion base, 0% base TREASURE_HUNTER_PROC, every merit past 1 gives 25%
 end
 
 xi.job_utils.thief.useFlee = function(player, target, ability)
@@ -265,7 +265,7 @@ xi.job_utils.thief.useFlee = function(player, target, ability)
         player:delStatusEffect(xi.effect.WEIGHT)
     end
 
-    player:addStatusEffect(xi.effect.FLEE, 10000, 0, duration)
+    player:addStatusEffect(xi.effect.FLEE, { power = 10000, duration = duration, origin = player })
 
     return xi.effect.FLEE
 end
@@ -275,7 +275,7 @@ xi.job_utils.thief.useHide = function(player, target, ability)
 
     duration = duration * (1 + player:getMod(xi.mod.HIDE_DURATION) / 100)
 
-    player:addStatusEffect(xi.effect.HIDE, 1, 0, math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
+    player:addStatusEffect(xi.effect.HIDE, { power = 1, duration = math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER), origin = player })
 
     return xi.effect.HIDE
 end
@@ -314,7 +314,7 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         local newTier     = effectStolen:getTier()
         local newFlags    = effectStolen:getEffectFlags()
 
-        player:addStatusEffectEx(newID, newIcon, newPower, newTick, newDuration, newSubType, newSubPower, newTier, newFlags)
+        player:addStatusEffect(newID, { power = newPower, duration = newDuration, origin = player, tick = newTick, icon = newIcon, subType = newSubType, subPower = newSubPower, tier = newTier, flag = newFlags })
         target:delStatusEffect(newID)
 
         effectID = newID
@@ -392,13 +392,13 @@ end
 xi.job_utils.thief.usePerfectDodge = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
 
-    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
+    player:addStatusEffect(xi.effect.PERFECT_DODGE, { power = 1, duration = duration, origin = player })
 
     return xi.effect.PERFECT_DODGE
 end
 
 xi.job_utils.thief.useSneakAttack = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.SNEAK_ATTACK, { power = 1, duration = 60, origin = player })
 
     return xi.effect.SNEAK_ATTACK
 end
@@ -472,7 +472,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
 end
 
 xi.job_utils.thief.useTrickAttack = function(player, target, ability)
-    player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.TRICK_ATTACK, { power = 1, duration = 60, origin = player })
 
     return xi.effect.TRICK_ATTACK
 end

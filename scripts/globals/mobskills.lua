@@ -1077,7 +1077,7 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
     local results = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
     if results == xi.msg.basic.SKILL_ENFEEB_IS then
-        mob:addStatusEffect(drainEffectCorrelation[typeEffect], power, tick, duration)
+        mob:addStatusEffect(drainEffectCorrelation[typeEffect], { power = power, duration = duration, origin = mob, tick = tick })
 
         return xi.msg.basic.ATTR_DRAINED
     end
@@ -1122,7 +1122,7 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
         local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, typeEffect, 0)
         if resistRate >= 0.25 then
             local totalDuration = math.floor(duration * resistRate)
-            target:addStatusEffect(typeEffect, power, tick, totalDuration, subType, subPower, tier)
+            target:addStatusEffect(typeEffect, { power = power, duration = totalDuration, origin = mob, tick = tick, subType = subType, subPower = subPower, tier = tier })
 
             return xi.msg.basic.SKILL_ENFEEB_IS
         end
@@ -1155,7 +1155,7 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
 end
 
 xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration, subType, subPower)
-    if mob:addStatusEffect(typeEffect, power, tick, duration, subType, subPower) then
+    if mob:addStatusEffect(typeEffect, { power = power, duration = duration, origin = mob, tick = tick, subType = subType, subPower = subPower }) then
         return xi.msg.basic.SKILL_GAIN_EFFECT
     end
 

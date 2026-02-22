@@ -22,14 +22,14 @@ end
 -- Ability Use Functions
 -----------------------------------
 xi.job_utils.red_mage.useChainspell = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 60)
+    player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, duration = 60, origin = player })
 
     return xi.effect.CHAINSPELL
 end
 
 xi.job_utils.red_mage.useComposure = function(player, target, ability)
     player:delStatusEffect(xi.effect.COMPOSURE)
-    player:addStatusEffect(xi.effect.COMPOSURE, 1, 0, 7200)
+    player:addStatusEffect(xi.effect.COMPOSURE, { power = 1, duration = 7200, origin = player })
 
     return xi.effect.COMPOSURE
 end
@@ -54,19 +54,19 @@ xi.job_utils.red_mage.useConvert = function(player, target, ability)
 end
 
 xi.job_utils.red_mage.useSaboteur = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SABOTEUR, 1, 0, 60)
+    player:addStatusEffect(xi.effect.SABOTEUR, { power = 1, duration = 60, origin = player })
 
     return xi.effect.SABOTEUR
 end
 
 xi.job_utils.red_mage.useSpontaneity = function(player, target, ability)
-    target:addStatusEffect(xi.effect.SPONTANEITY, 1, 0, 60)
+    target:addStatusEffect(xi.effect.SPONTANEITY, { power = 1, duration = 60, origin = player })
 
     return xi.effect.SPONTANEITY
 end
 
 xi.job_utils.red_mage.useStymie = function(player, target, ability)
-    target:addStatusEffect(xi.effect.STYMIE, 1, 0, 60)
+    target:addStatusEffect(xi.effect.STYMIE, { power = 1, duration = 60, origin = player })
 
     return xi.effect.STYMIE
 end

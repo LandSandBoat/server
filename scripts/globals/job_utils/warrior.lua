@@ -34,7 +34,7 @@ end
 xi.job_utils.warrior.useAggressor = function(player, target, ability)
     local merits = player:getMerit(xi.merit.AGGRESSIVE_AIM)
 
-    player:addStatusEffect(xi.effect.AGGRESSOR, merits, 0, 180 + player:getMod(xi.mod.AGGRESSOR_DURATION))
+    player:addStatusEffect(xi.effect.AGGRESSOR, { power = merits, duration = 180 + player:getMod(xi.mod.AGGRESSOR_DURATION), origin = player })
 
     return xi.effect.AGGRESSOR
 end
@@ -48,7 +48,7 @@ xi.job_utils.warrior.useBerserk = function(player, target, ability)
     local power    = 25 + player:getMod(xi.mod.BERSERK_POTENCY) + utils.clamp(levelScale, 0, 10)
     local duration = 180 + player:getMod(xi.mod.BERSERK_DURATION)
 
-    player:addStatusEffect(xi.effect.BERSERK, power, 0, duration)
+    player:addStatusEffect(xi.effect.BERSERK, { power = power, duration = duration, origin = player })
 
     return xi.effect.BERSERK
 end
@@ -57,7 +57,7 @@ xi.job_utils.warrior.useBloodRage = function(player, target, ability)
     local power    = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
     local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_RAGE)
 
-    target:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
+    target:addStatusEffect(xi.effect.BLOOD_RAGE, { power = power, duration = duration, origin = player })
 
     if player:getID() ~= target:getID() then
         ability:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
@@ -67,7 +67,7 @@ xi.job_utils.warrior.useBloodRage = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BRAZEN_RUSH, 100, 3, 30)
+    player:addStatusEffect(xi.effect.BRAZEN_RUSH, { power = 100, duration = 30, origin = player, tick = 3 })
 
     return xi.effect.BRAZEN_RUSH
 end
@@ -81,25 +81,25 @@ xi.job_utils.warrior.useDefender = function(player, target, ability)
     local power    = 25 + utils.clamp(levelScale, 0, 10)
     local duration = 180 + player:getMod(xi.mod.DEFENDER_DURATION)
 
-    player:addStatusEffect(xi.effect.DEFENDER, power, 0, duration)
+    player:addStatusEffect(xi.effect.DEFENDER, { power = power, duration = duration, origin = player })
 
     return xi.effect.DEFENDER
 end
 
 xi.job_utils.warrior.useMightyStrikes = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 45)
+    player:addStatusEffect(xi.effect.MIGHTY_STRIKES, { power = 1, duration = 45, origin = player })
 
     return xi.effect.MIGHTY_STRIKES
 end
 
 xi.job_utils.warrior.useRestraint = function(player, target, ability)
-    player:addStatusEffect(xi.effect.RESTRAINT, 0, 0, 300)
+    player:addStatusEffect(xi.effect.RESTRAINT, { duration = 300, origin = player })
 
     return xi.effect.RESTRAINT
 end
 
 xi.job_utils.warrior.useRetaliation = function(player, target, ability)
-    player:addStatusEffect(xi.effect.RETALIATION, 1, 0, 180)
+    player:addStatusEffect(xi.effect.RETALIATION, { power = 1, duration = 180, origin = player })
 
     return xi.effect.RETALIATION
 end
@@ -108,7 +108,7 @@ xi.job_utils.warrior.useTomahawk = function(player, target, ability)
     local merits   = player:getMerit(xi.merit.TOMAHAWK) - 15
     local duration = 30 + merits
 
-    target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
+    target:addStatusEffect(xi.effect.TOMAHAWK, { power = 25, duration = duration, origin = player, tick = 3, icon = 0 })
     player:removeAmmo(1)
 end
 
@@ -120,7 +120,7 @@ xi.job_utils.warrior.useWarcry = function(player, target, ability)
 
     duration = duration + player:getMod(xi.mod.WARCRY_DURATION)
 
-    target:addStatusEffect(xi.effect.WARCRY, power, 0, duration, 0, merit)
+    target:addStatusEffect(xi.effect.WARCRY, { power = power, duration = duration, origin = player, subPower = merit })
 
     if player:getID() ~= target:getID() then
         ability:setMsg(xi.msg.basic.JA_ATK_ENHANCED)
@@ -132,7 +132,7 @@ end
 xi.job_utils.warrior.useWarriorsCharge = function(player, target, ability, action)
     local merits = player:getMerit(xi.merit.WARRIORS_CHARGE)
 
-    player:addStatusEffect(xi.effect.WARRIORS_CHARGE, merits - 5, 0, 60)
+    player:addStatusEffect(xi.effect.WARRIORS_CHARGE, { power = merits - 5, duration = 60, origin = player })
 
     return xi.effect.WARRIORS_CHARGE
 end

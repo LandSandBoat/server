@@ -19,8 +19,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    if target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 5320) then
+itemObject.onItemUse = function(target, user)
+    if target:addStatusEffect(xi.effect.MEDICINE, { duration = 180, origin = user, subType = 5320 }) then
         local pet = target:getPet()
         if not pet then
             return

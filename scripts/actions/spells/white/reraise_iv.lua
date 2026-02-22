@@ -11,7 +11,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     --duration = 1800
     target:delStatusEffect(xi.effect.RERAISE)
-    target:addStatusEffect(xi.effect.RERAISE, 4, 0, 3600) --reraise 3, 30min duration
+    target:addStatusEffect(xi.effect.RERAISE, { power = 4, duration = 3600, origin = caster }) --reraise 3, 30min duration
 
     return xi.effect.RERAISE
 end

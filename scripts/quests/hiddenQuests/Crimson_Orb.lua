@@ -65,7 +65,7 @@ local pondEventFinish = function(player, csid, option, npc)
     player:addKeyItem(xi.ki.WHITE_ORB + numPonds + 1)
 
     if numPonds == 3 then
-        player:addStatusEffect(xi.effect.CURSE_I, 50, 0, 900)
+        player:addStatusEffect(xi.effect.CURSE_I, { power = 50, duration = 900, origin = player })
         player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET + 5)
         quest:setVar(player, 'Prog', 3)
     end

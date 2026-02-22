@@ -15,11 +15,11 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     target:setHP(target:getMaxHP())
     target:setMP(target:getMaxMP())
     target:setTP(3000)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 7200)
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 7200, origin = user })
 end
 
 return itemObject

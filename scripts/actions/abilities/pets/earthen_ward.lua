@@ -15,7 +15,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local typeEffect = xi.effect.STONESKIN
-    if target:addStatusEffect(typeEffect, amount, 0, 900, 0, 0, 3) then
+    if target:addStatusEffect(typeEffect, { power = amount, duration = 900, origin = pet, tier = 3 }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else

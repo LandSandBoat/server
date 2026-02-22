@@ -177,7 +177,7 @@ local packets =
         test = function(player, mob)
             player:changeJob(xi.job.DNC)
             player:setLevel(99)
-            player:addStatusEffectEx(xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_6, 6, 0, 7200)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, { power = 6, duration = 7200, origin = player, icon = xi.effect.FINISHING_MOVE_6 })
             player.actions:useAbility(mob, xi.jobAbility.ANIMATED_FLOURISH)
             xi.test.world:tickEntity(player)
         end,
@@ -219,7 +219,7 @@ local packets =
         test = function(player, mob)
             player:changeJob(xi.job.DNC)
             player:setLevel(99)
-            player:addStatusEffectEx(xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_6, 6, 0, 7200)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, { power = 6, duration = 7200, origin = player, icon = xi.effect.FINISHING_MOVE_6 })
             player.actions:useAbility(player, xi.jobAbility.REVERSE_FLOURISH)
         end,
 
@@ -328,7 +328,7 @@ local packets =
             player:setLevel(99)
             player:addItem(xi.item.TERPSICHORE_99)
             player:equipItem(xi.item.TERPSICHORE_99, nil, xi.slot.MAIN)
-            player:addStatusEffectEx(xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_6, 6, 0, 7200)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, { power = 6, duration = 7200, origin = player, icon = xi.effect.FINISHING_MOVE_6 })
             player.actions:engage(mob)
             player.actions:useAbility(mob, xi.jobAbility.VIOLENT_FLOURISH)
             xi.test.world:skipTime(1)

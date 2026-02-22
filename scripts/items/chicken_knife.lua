@@ -17,7 +17,7 @@ itemObject.onItemEquip = function(player, item)
                     effect:resetStartTime()
                     effect:setIcon(xi.effect.FLEE)
                 else
-                    player:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+                    player:addStatusEffect(xi.effect.FLEE, { power = 100, duration = 30, origin = player })
                 end
             end
         end

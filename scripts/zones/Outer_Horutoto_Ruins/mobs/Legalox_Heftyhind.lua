@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.STONESKIN, 100, 0, 300) -- "Spawns with the effect of Stoneskin."
+    mob:addStatusEffect(xi.effect.STONESKIN, { power = 100, duration = 300, origin = mob }) -- "Spawns with the effect of Stoneskin."
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

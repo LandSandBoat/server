@@ -19,10 +19,10 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     -- Base duration 30 min, in seconds.
     local duration = 1800 + (target:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
-    target:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, xi.mount.CHOCOBO, 0, duration, 0, 64, true)
+    target:addStatusEffect(xi.effect.MOUNTED, { power = xi.mount.CHOCOBO, duration = duration, origin = user, subPower = 64, silent = true })
 end
 
 return itemObject

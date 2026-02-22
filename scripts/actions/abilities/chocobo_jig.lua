@@ -23,7 +23,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         player:delStatusEffect(xi.effect.WEIGHT)
     end
 
-    player:addStatusEffect(xi.effect.QUICKENING, 10, 0, finalDuration)
+    player:addStatusEffect(xi.effect.QUICKENING, { power = 10, duration = finalDuration, origin = player })
 
     return xi.effect.QUICKENING
 end
