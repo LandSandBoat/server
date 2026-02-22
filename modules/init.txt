@@ -38,4 +38,3 @@
 
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
-era/lua/base/combat/era_tp_gain.lua
