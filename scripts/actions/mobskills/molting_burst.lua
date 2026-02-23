@@ -1,11 +1,8 @@
 -----------------------------------
---  Molting Burst
---
---  Description: Deals Light damage and drains HP. Transfers any negative status effects to the target.
---  Type: Magical
---  Utsusemi/Blink absorb: Unknown
---  Range: Unknown
---  Notes: Used by Limules affiliated with light element.
+-- Molting Burst
+-- Family: Limules
+-- Description: Deals Light damage to . Restores HP of mob. Transfers any negative status effects on the mob to the target.
+-- Notes: Used by Limules affiliated with Light element.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,15 +11,30 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 5
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 5, 5, 5 } -- TODO: capture fTPs
+    params.element        = xi.element.LIGHT
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.LIGHT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Might want to make a new binding to tranfer status effects to other targets based on effect flags.
+        -- TODO: This skill also transfers debuffs on the mob to the target.
+    end
+
+    return info.damage
+end
+
+mobskillObject.onMobSkillFinalize = function(mob, skill)
+    xi.mobskills.mobHealMove(mob, mob:getMaxHP() * 0.10) -- TODO: Capture heal power
 end
 
 return mobskillObject

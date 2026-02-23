@@ -168,11 +168,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_Misc',45,853);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_Misc',45,854);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_Misc',45,855);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_Misc',45,856);
--- INSERT INTO `mob_skill_lists` VALUES ('Bat',46,256);
-INSERT INTO `mob_skill_lists` VALUES ('Bat',46,392);
-INSERT INTO `mob_skill_lists` VALUES ('Bat',46,394);
-INSERT INTO `mob_skill_lists` VALUES ('Bat',46,1155);
-INSERT INTO `mob_skill_lists` VALUES ('Bat',46,1156);
+INSERT INTO `mob_skill_lists` VALUES ('Bat',46,392); -- ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Bat',46,394); -- blood drain
 INSERT INTO `mob_skill_lists` VALUES ('Bats',47,393);
 INSERT INTO `mob_skill_lists` VALUES ('Bats',47,395);
 INSERT INTO `mob_skill_lists` VALUES ('Bee',48,334);
@@ -959,7 +956,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Seether',220,1258);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',221,255);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',222,255);
 INSERT INTO `mob_skill_lists` VALUES ('Shadow',223,255);
--- 224 free
+INSERT INTO `mob_skill_lists` VALUES ('Bat_COP+',224,392);  -- ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Bat_COP+',224,394);  -- blood drain
+INSERT INTO `mob_skill_lists` VALUES ('Bat_COP+',224,1155); -- subsonics
+INSERT INTO `mob_skill_lists` VALUES ('Bat_COP+',224,1156); -- marrow drain
 -- 225 free
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,260);
 INSERT INTO `mob_skill_lists` VALUES ('Sheep',226,261);
@@ -3897,10 +3897,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,394); -- blood_drain
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1155); -- subsonics
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1156); -- marrow_drain
 
-INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,395); -- jetstream
-INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,393); -- sonic_boom
-INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1157); -- slipstream
-INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1158); -- turbulence
+INSERT INTO `mob_skill_lists` VALUES ('Bats_CoP',2015,395);  -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('Bats_CoP',2015,393);  -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('Bats_CoP',2015,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('Bats_CoP',2015,1158); -- turbulence
 
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',2016,524); -- mind_drain
 

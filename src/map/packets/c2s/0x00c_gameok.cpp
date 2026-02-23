@@ -22,6 +22,7 @@
 #include "0x00c_gameok.h"
 
 #include "entities/charentity.h"
+#include "gmcall_container.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x008_enterzone.h"
@@ -81,6 +82,7 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     PChar->pushPacket<GP_SERV_COMMAND_MERIT>(PChar);
     charutils::SendInventory(PChar);
     blacklistutils::SendBlacklist(PChar);
+    PChar->gmCallContainer().sendPendingResponse(PChar);
 
     // TODO: While in mog house; treasure pool is not created.
     if (PChar->PTreasurePool != nullptr)

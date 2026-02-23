@@ -46,8 +46,6 @@ quest.sections =
                         player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
                     then
                         return quest:progressEvent(231)
-                    else
-                        return quest:event(230)
                     end
                 end,
             },

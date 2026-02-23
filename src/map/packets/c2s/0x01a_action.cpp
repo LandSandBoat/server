@@ -209,10 +209,16 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            const CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB);
-
+            CBaseEntity* PNpc = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_MOB | TYPE_TRUST);
             if (!PNpc)
             {
+                return;
+            }
+
+            // Releasing a trust
+            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PNpc))
+            {
+                PChar->RemoveTrust(PTrust);
                 return;
             }
 
@@ -231,12 +237,6 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             {
                 PNpc->PAI->Trigger(PChar);
                 PChar->m_charHistory.npcInteractions++;
-            }
-
-            // Releasing a trust
-            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PChar->GetEntity(this->ActIndex, TYPE_TRUST)))
-            {
-                PChar->RemoveTrust(PTrust);
             }
 
             if (!PChar->isNpcLocked())

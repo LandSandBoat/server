@@ -20,7 +20,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- some kind of strange timing/race condition with interactions
         -- TODO: fix in core?
         player:timer(100, function(playerArg)
-            playerArg:addStatusEffect(xi.effect.ILLUSION, 1600, 0,  900, 0, 28)
+            playerArg:addStatusEffect(xi.effect.ILLUSION, { power = 1600, duration = 900, origin = player, subPower = 28 })
         end)
 
         player:messageText(player, ID.text.PECULIAR_SENSATION)

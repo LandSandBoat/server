@@ -17,7 +17,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.APOGEE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.APOGEE, { power = 1, duration = 60, origin = player })
 
     return xi.effect.APOGEE
 end

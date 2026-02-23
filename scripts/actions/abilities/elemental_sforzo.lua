@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, 1, 0, 30)
+    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, { power = 1, duration = 30, origin = player })
 
     return xi.effect.ELEMENTAL_SFORZO
 end

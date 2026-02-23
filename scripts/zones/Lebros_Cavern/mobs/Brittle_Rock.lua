@@ -21,9 +21,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.CURSE_MEVA, 9999)
     mob:setMod(xi.mod.EVA, 0)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-    mob:addListener('WEAPONSKILL_TAKE', 'BRITTLE_ROCK_WEAPONSKILL_TAKE', function(mobArg, user, wsid)
-        if wsid == 1838 then
-            mobArg:setHP(0)
+    mob:addListener('WEAPONSKILL_TAKE', 'BRITTLE_ROCK_WEAPONSKILL_TAKE', function(user, target, skillId, tp, action)
+        if skillId == 1838 then
+            target:setHP(0)
         end
     end)
 end

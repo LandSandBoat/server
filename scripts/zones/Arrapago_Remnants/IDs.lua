@@ -19,15 +19,15 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CELL_OFFSET                   = 7227, -- Main Weapon/Sub-Weapon restriction removed.
-        SALVAGE_START                 = 7250, -- You feel an incredible pressure bearing down on you. This area appears to be blanketed in some sort of intense psionic field...
-        TIME_TO_COMPLETE              = 7457, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED                = 7458, -- The mission has failed. Leaving area.
-        TIME_REMAINING_MINUTES        = 7462, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS        = 7463, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN                  = 7465, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
-        DOOR_IS_SEALED                = 7476, -- The door is sealed...
-        DOOR_IS_SEALED_MYSTERIOUS     = 7479, -- The door is sealed by some mysterious force...
+        CELL_OFFSET                   = 7228, -- Main Weapon/Sub-Weapon restriction removed.
+        SALVAGE_START                 = 7251, -- You feel an incredible pressure bearing down on you. This area appears to be blanketed in some sort of intense psionic field...
+        TIME_TO_COMPLETE              = 7458, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED                = 7459, -- The mission has failed. Leaving area.
+        TIME_REMAINING_MINUTES        = 7463, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS        = 7464, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN                  = 7466, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        DOOR_IS_SEALED                = 7477, -- The door is sealed...
+        DOOR_IS_SEALED_MYSTERIOUS     = 7480, -- The door is sealed by some mysterious force...
     },
     mob =
     {

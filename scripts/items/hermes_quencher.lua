@@ -14,11 +14,11 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     target:delStatusEffect(xi.effect.FLEE)
-    target:addStatusEffect(xi.effect.FLEE, 8750, 0, 30)
+    target:addStatusEffect(xi.effect.FLEE, { power = 8750, duration = 30, origin = user })
     target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.FLEE)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 900, origin = user })
 end
 
 return itemObject

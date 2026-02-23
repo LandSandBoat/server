@@ -215,7 +215,7 @@ xi.besieged.onEventFinish = function(player, csid, option, npc)
 
         player:delCurrency('imperial_standing', 100)
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
-        player:addStatusEffect(xi.effect.SANCTION, option / 16, 0, duration, subPower)
+        player:addStatusEffect(xi.effect.SANCTION, { power = option / 16, duration = duration, origin = player, subType = subPower })
         player:messageSpecial(ID.text.SANCTION)
 
     -- Player bought a map

@@ -16,15 +16,15 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7068, -- Tallying conquest results...
-        COME_CLOSER                   = 7249, -- H0000! C0mE cL0SEr! C0mE cL0SEr! CAn'T TrAdE fr0m S0 fAr AwAy!
-        MINING_IS_POSSIBLE_HERE       = 7257, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                = 7272, -- You unlock the chest!
-        COLLECTOR_SPAWN               = 7281, -- You gently place the <item> on the ground. Suddenly, you hear the clanging sound of armor approaching. It looks like someone is interested in the <item>...
-        SHOWMAN_DECLINE               = 7283, -- ... Me no want that. Thing me want not here! It not being here!!!
-        SHOWMAN_TRIGGER               = 7284, -- Hey, you there! Muscles nice. You want fight strong one? It cost you. Give me nice item.
-        SHOWMAN_ACCEPT                = 7285, -- Fhungaaa!!! The freshyness, the flavoryness! This very nice item! Good luck, then. Try not die. One...two...four...FIIIIIIGHT!!!
-        HOMEPOINT_SET                 = 7288, -- Home point set!
+        CONQUEST_BASE                 = 7069, -- Tallying conquest results...
+        COME_CLOSER                   = 7250, -- H0000! C0mE cL0SEr! C0mE cL0SEr! CAn'T TrAdE fr0m S0 fAr AwAy!
+        MINING_IS_POSSIBLE_HERE       = 7258, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                = 7273, -- You unlock the chest!
+        COLLECTOR_SPAWN               = 7282, -- You gently place the <item> on the ground. Suddenly, you hear the clanging sound of armor approaching. It looks like someone is interested in the <item>...
+        SHOWMAN_DECLINE               = 7284, -- ... Me no want that. Thing me want not here! It not being here!!!
+        SHOWMAN_TRIGGER               = 7285, -- Hey, you there! Muscles nice. You want fight strong one? It cost you. Give me nice item.
+        SHOWMAN_ACCEPT                = 7286, -- Fhungaaa!!! The freshyness, the flavoryness! This very nice item! Good luck, then. Try not die. One...two...four...FIIIIIIGHT!!!
+        HOMEPOINT_SET                 = 7289, -- Home point set!
     },
     mob =
     {

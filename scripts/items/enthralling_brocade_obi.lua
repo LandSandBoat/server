@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.ENTHRALLING_BROCADE_OBI) then
-        target:addStatusEffect(xi.effect.CHR_BOOST, 10, 0, 180, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ENTHRALLING_BROCADE_OBI)
+        target:addStatusEffect(xi.effect.CHR_BOOST, { power = 10, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.ENTHRALLING_BROCADE_OBI })
     end
 end
 

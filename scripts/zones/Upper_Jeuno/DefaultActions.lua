@@ -9,6 +9,7 @@ return {
     ['Artush']          = { event = 42 },
     ['Balkehr']         = { event = 39 },
     ['Baudin']          = { event = 173 },
+    ['Bheem']           = { event = 157 },
     ['Bozz']            = { event = 35 },
     ['Brutus']          = { event = 66 },
     ['Chiphraix']       = { event = 153 },

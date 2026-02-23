@@ -44,7 +44,7 @@ return {
     ['qm1']              = { text = ID.text.OLD_BOX },
     ['Rachocho']         = { event = 47 },
     ['Ramicharaux']      = { event = 60 },
-    ['Red_Ghost']        = { event = 320 },
+    ['Red_Ghost']        = { event = 34 },
     ['Rinzei']           = { event = 56 },
     ['Roupatour']        = { event = 54 },
     ['Sanosuke']         = { event = 303 },

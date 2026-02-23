@@ -85,27 +85,39 @@ local outOfShell = function(mob)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setAnimationSub(2)
+    mob:setTP(3000) -- Immediately TPs coming out of shell
+end
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
 
-    outOfShell(mob) -- Ensure out of shell mods are set on spawn
+    mob:setMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setAnimationSub(0)
 
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
-    mob:setLocalVar('dmgToChange', mob:getHP() - 1000)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addMod(xi.mod.DOUBLE_ATTACK, 20)
-    mob:setMod(xi.mod.UDMGMAGIC, -3000)
-    mob:setMod(xi.mod.CURSERES, 100)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 45) -- 130 total weapon damage
-    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
     mob:setMod(xi.mod.DEF, 702)
     mob:setMod(xi.mod.ATT, 395)
     mob:setMod(xi.mod.EVA, 310)
-    mob:setAnimationSub(0)
+    mob:setMod(xi.mod.REGEN, 0)
+    mob:setMod(xi.mod.UDMGRANGE, 0)
+    mob:setMod(xi.mod.UDMGPHYS, 0)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.UDMGMAGIC, -3000)
+    mob:setMod(xi.mod.CURSERES, 100)
+
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 45) -- 130 total weapon damage
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
+    mob:setLocalVar('dmgToChange', mob:getHP() - 1000)
 end
 
 entity.onMobFight = function(mob, target)
@@ -119,8 +131,6 @@ entity.onMobFight = function(mob, target)
         mob:getHPP() == 100)
     then
         outOfShell(mob)
-        mob:setAnimationSub(2)
-        mob:setTP(3000) -- Immediately TPs coming out of shell
     end
 
     if
@@ -131,8 +141,6 @@ entity.onMobFight = function(mob, target)
 
         if mob:getAnimationSub() == 1 then
             outOfShell(mob)
-            mob:setAnimationSub(2)
-            mob:setTP(3000) -- Immediately TPs coming out of shell
         elseif
             mob:getAnimationSub() == 2 or
             mob:getAnimationSub() == 0
@@ -148,7 +156,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
+    if player then
+        player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

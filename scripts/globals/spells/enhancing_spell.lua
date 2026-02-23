@@ -593,9 +593,9 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, subPower, tier)
+        target:addStatusEffect(spellEffect, { power = finalPower, duration = duration, origin = caster, tick = tickTime, subPower = subPower, tier = tier })
     else
-        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, subPower, tier) then
+        if target:addStatusEffect(spellEffect, { power = finalPower, duration = duration, origin = caster, tick = tickTime, subPower = subPower, tier = tier }) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

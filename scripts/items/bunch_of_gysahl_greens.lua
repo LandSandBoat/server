@@ -17,7 +17,7 @@ end
 
 itemObject.onItemUse = function(target, user, item, action)
     local chocoboShirt = target:getMod(xi.mod.APPRECIATE_GYSAHL_GREENS)
-    target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
+    target:addStatusEffect(xi.effect.FOOD, { power = chocoboShirt, duration = 300, origin = user, subType = 4545 })
 end
 
 itemObject.onEffectGain = function(target, effect)

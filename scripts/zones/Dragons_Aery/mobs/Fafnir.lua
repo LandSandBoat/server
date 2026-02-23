@@ -98,7 +98,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.FAFNIR_SLAYER)
+    if player then
+        player:addTitle(xi.title.FAFNIR_SLAYER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -14,7 +14,7 @@ entity.phList =
     [ID.mob.COUNT_BIFRONS - 1] = ID.mob.COUNT_BIFRONS, -- -204.000 -52.125 -95.000
 }
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -22,8 +22,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 355)
-    player:addTitle(xi.title.HELLSBANE)
+    if player then
+        player:addTitle(xi.title.HELLSBANE)
+        xi.hunts.checkHunt(mob, player, 355)
+    end
 end
 
 return entity

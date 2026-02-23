@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SNAKE_EYE, (player:getMerit(xi.merit.SNAKE_EYE) - 10), 0, 60)
+    player:addStatusEffect(xi.effect.SNAKE_EYE, { power = (player:getMerit(xi.merit.SNAKE_EYE) - 10), duration = 60, origin = player })
 
     return xi.effect.SNAKE_EYE
 end

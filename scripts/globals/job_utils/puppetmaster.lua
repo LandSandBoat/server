@@ -57,7 +57,7 @@ end
 
 -- On Ability Use Overdrive
 xi.job_utils.puppetmaster.onAbilityUseOverdrive = function(player, target, ability)
-    player:addStatusEffect(xi.effect.OVERDRIVE, 0, 0, 60)
+    player:addStatusEffect(xi.effect.OVERDRIVE, { duration = 60, origin = player })
 
     return xi.effect.OVERDRIVE
 end
@@ -199,7 +199,7 @@ xi.job_utils.puppetmaster.onAbilityUseRepair = function(player, target, ability,
     pet:wakeUp()
 
     pet:delStatusEffect(xi.effect.REGEN)
-    pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
+    pet:addStatusEffect(xi.effect.REGEN, { power = regenAmount, duration = regenTime, origin = player, tick = 3 }) -- 3 = tick, each 3 seconds.
     player:removeAmmo(1)
     return totalHealing
 end
@@ -331,7 +331,7 @@ end
 
 -- On Ability Use Tactical Switch
 xi.job_utils.puppetmaster.onAbilityUseTacticalSwitch = function(player, target, ability)
-    -- target:addStatusEffect(xi.effect.TACTICAL_SWITCH, 18, 1, 1) -- TODO: implement xi.effect.TACTICAL_SWITCH
+    -- target:addStatusEffect(xi.effect.TACTICAL_SWITCH, { power = 18, duration = 1, origin = player, tick = 1 }) -- TODO: implement xi.effect.TACTICAL_SWITCH
 end
 
 -- On Ability Check Cooldown
@@ -367,7 +367,7 @@ end
 
 -- On Ability Use Heady Artiface
 xi.job_utils.puppetmaster.onAbilityUseHeadyArtiface = function(player, target, ability)
-    -- target:addStatusEffect(xi.effect.HEADY_ARTIFICE, 18, 1, 1) -- TODO: implement xi.effect.HEADY_ARTIFICE
+    -- target:addStatusEffect(xi.effect.HEADY_ARTIFICE, { power = 18, duration = 1, origin = player, tick = 1 }) -- TODO: implement xi.effect.HEADY_ARTIFICE
 end
 
 -- On Ability Check Deploy

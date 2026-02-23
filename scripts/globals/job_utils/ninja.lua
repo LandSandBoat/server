@@ -64,7 +64,7 @@ end
 xi.job_utils.ninja.useYonin = function(player, target, ability, action)
     target:delStatusEffect(xi.effect.INNIN)
     target:delStatusEffect(xi.effect.YONIN)
-    target:addStatusEffect(xi.effect.YONIN, 30, 15, 300, 0, 0)
+    target:addStatusEffect(xi.effect.YONIN, { power = 30, duration = 300, origin = player, tick = 15 })
 
     return xi.effect.YONIN
 end
@@ -72,32 +72,32 @@ end
 xi.job_utils.ninja.useInnin = function(player, target, ability, action)
     target:delStatusEffect(xi.effect.INNIN)
     target:delStatusEffect(xi.effect.YONIN)
-    target:addStatusEffect(xi.effect.INNIN, 30, 15, 300, 0, 20)
+    target:addStatusEffect(xi.effect.INNIN, { power = 30, duration = 300, origin = player, tick = 15, subPower = 20 })
 
     return xi.effect.INNIN
 end
 
 xi.job_utils.ninja.useSange = function(player, target, ability, action)
     local potency = player:getMerit(xi.merit.SANGE)-1
-    player:addStatusEffect(xi.effect.SANGE, potency * 25, 0, 60)
+    player:addStatusEffect(xi.effect.SANGE, { power = potency * 25, duration = 60, origin = player })
 
     return xi.effect.SANGE
 end
 
 xi.job_utils.ninja.useFutae = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.FUTAE, 0, 0, 60)
+    target:addStatusEffect(xi.effect.FUTAE, { duration = 60, origin = player })
 
     return xi.effect.FUTAE
 end
 
 xi.job_utils.ninja.useIssekigan = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.ISSEKIGAN, 25, 0, 60)
+    target:addStatusEffect(xi.effect.ISSEKIGAN, { power = 25, duration = 60, origin = player })
 
     return xi.effect.ISSEKIGAN
 end
 
 xi.job_utils.ninja.useMikage = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.MIKAGE, 0, 0, 45)
+    target:addStatusEffect(xi.effect.MIKAGE, { duration = 45, origin = player })
 
     return xi.effect.MIKAGE
 end

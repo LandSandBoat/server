@@ -1,9 +1,7 @@
 -----------------------------------
 -- Drain Whip
+-- Family: Morbols
 -- Description: Drains HP, MP, or TP from the target.
--- Type: Magical
--- Utsusemi/Blink absorb: ignores shadows
--- Range: Melee
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,16 +10,37 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage     = mob:getWeaponDmg() * 3
-    local drainTable = { xi.mobskills.drainType.HP, xi.mobskills.drainType.MP, xi.mobskills.drainType.TP }
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local drainType = math.random(xi.mobskills.drainType.HP, xi.mobskills.drainType.TP)
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, drainTable[math.random(1, 3)], damage))
+    -- TODO: Is this magical or physical? Need captures
+    -- TODO: Are the fTPs the same for each drain type?
+    params.baseDamage         = mob:getMainLvl() + 2
+    params.fTP                = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.element            = xi.element.NONE
+    params.attackType         = xi.attackType.MAGICAL
+    params.damageType         = xi.damageType.NONE
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipMagicBonusDiff = true
 
-    return damage
+    if
+        drainType == xi.mobskills.drainType.MP or
+        drainType == xi.mobskills.drainType.TP
+    then
+        params.skipDamageAdjustment = true
+        params.skipMagicBonusDiff   = true
+        params.skipStoneSkin        = true
+    end
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, drainType, info.damage))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

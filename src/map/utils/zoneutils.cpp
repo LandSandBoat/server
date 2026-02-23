@@ -686,6 +686,10 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                     // Skip mobs already registered via setRespawnTime in onMobInitialize - let SpawnHandler handle them
                     if (PZone->spawnHandler()->isRegistered(PMob))
                     {
+                        if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                        {
+                            PMob->m_AllowRespawn = true;
+                        }
                         return;
                     }
 

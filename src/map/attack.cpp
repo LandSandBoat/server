@@ -460,7 +460,7 @@ bool CAttack::CheckCounter()
 
     uint16 seiganChance = 0;
 
-    if (m_victim->objtype == TYPE_PC && m_victim->GetMJob() == JOB_SAM)
+    if (m_victim->objtype == TYPE_PC && m_victim->getMod(Mod::SEIGAN_COUNTER_BONUS) > 0)
     {
         // counter check (rate AND your hit rate makes it land, else its just a regular hit)
         // having seigan active gives chance to counter at 25% of the zanshin proc rate

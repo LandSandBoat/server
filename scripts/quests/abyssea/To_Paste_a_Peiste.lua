@@ -2,6 +2,8 @@
 -- To Paste a Peiste
 -----------------------------------
 -- !addquest 8 164
+-- Cavernous Maw    : !pos 95.344 -69.080 -580.008 108
+-- Kukulkan         : !spawnmob 16838872
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.TO_PASTE_A_PEISTE)

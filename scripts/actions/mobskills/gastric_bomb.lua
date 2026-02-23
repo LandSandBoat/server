@@ -1,9 +1,7 @@
 -----------------------------------
 -- Gastric Bomb
--- Deals Water damage with a long-range acid bomb. Additional effect: Attack Down
--- Range: Long range
--- Notes: Attack Down effect is 50%.
--- Duration: Three minutes
+-- Family: Worms
+-- Description: Deals Water damage with a long-range acid bomb. Additional Effect: Attack Down
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,16 +10,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WATER, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 2.0, 2.0, 2.0 }
+    params.element         = xi.element.WATER
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.WATER
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier = 1
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 50, 0, 180)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Dreamland Dynamis Nightmare Worm ATTP power.
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 50, 0, 180)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

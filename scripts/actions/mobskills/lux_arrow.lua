@@ -1,7 +1,7 @@
 -----------------------------------
 -- Lux Arrow
 -- Trust: Semih Lafihna
--- Fragmentation/Distortion skillchain properties
+-- Notes: Fragmentation/Distortion skillchain properties
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,15 +10,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * 2.5)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, 1)
+    -- TODO: Is this physical or magical?
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 2.50, 2.50, 2.50 }   -- TODO: Capture fTPs
+    params.element        = xi.element.LIGHT       -- TODO: Capture element
+    params.attackType     = xi.attackType.RANGED   -- TODO: Capture attackType
+    params.damageType     = xi.damageType.PIERCING -- TODO: Capture damageType
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
-    target:takeDamage(damage, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

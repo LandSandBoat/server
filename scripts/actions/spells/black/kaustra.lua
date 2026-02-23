@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local power       = math.floor(damage / 4)
         local duration    = math.floor(3 * (1 + casterSkill / 11))
 
-        target:addStatusEffect(xi.effect.KAUSTRA, power, 3, duration)
+        target:addStatusEffect(xi.effect.KAUSTRA, { power = power, duration = duration, origin = caster, tick = 3 })
     end
 
     return damage

@@ -1,8 +1,7 @@
 -----------------------------------
---  Stun_Cannon
---  Description: 20'(?) cone ~300 magic damage and Paralysis, ignores Utsusemi
---  Type: Magical
---  Range: 20 yalms
+-- Stun Cannon
+-- Family: Omega
+-- Description: Deals Thunder? damage to targets in front of mob. Additional Effect: Paralysis
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,16 +14,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, 1.5, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    -- TODO: Capture if Magical or Physical
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4.50, 4.50, 4.50 } -- TODO: Capture fTPs
+    params.element        = xi.element.THUNDER
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.THUNDER
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    -- TODO: Capture AoE type
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 120)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 120) -- TODO: Capture power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

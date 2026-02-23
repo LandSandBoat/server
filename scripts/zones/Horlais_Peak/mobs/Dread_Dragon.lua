@@ -13,7 +13,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.DREAD_DRAGON_SLAYER)
+    if player then
+        player:addTitle(xi.title.DREAD_DRAGON_SLAYER)
+    end
 end
 
 return entity

@@ -24,6 +24,7 @@
 
 #include "aman.h"
 #include "event_info.h"
+#include "gmcall_container.h"
 #include "inventory_sync_state.h"
 #include "item_container.h"
 #include "map_session.h"
@@ -541,6 +542,8 @@ public:
     // The character is in ANY Mog House (their own or someone else's)
     auto inMogHouse() const -> bool;
 
+    auto gmCallContainer() -> GMCallContainer&;
+
     CharHistory_t m_charHistory{};
 
     int8  getShieldSize();
@@ -678,6 +681,7 @@ protected:
 private:
     // Lazily initialized AMAN data
     xi::optional<CAMANContainer> m_AMAN;
+    GMCallContainer              gmCallContainer_;
 
     std::unique_ptr<CItemContainer> m_Inventory;
     std::unique_ptr<CItemContainer> m_Mogsafe;

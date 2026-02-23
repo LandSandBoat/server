@@ -23,8 +23,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return result
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.AMNESIA, 1, 0, 60)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.AMNESIA, { power = 1, duration = 60, origin = user })
 end
 
 return itemObject

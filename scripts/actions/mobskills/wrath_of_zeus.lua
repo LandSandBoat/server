@@ -1,8 +1,7 @@
 -----------------------------------
---  Wrath of Zeus
---
---  Description: Area of Effect lightning damage around Ixion (400-1000) and Silence.
---  Type: Magical
+-- Wrath of Zeus
+-- Family: Monoceros (Dark Ixion)
+-- Description: Area of Effect Thunder damage around Ixion (400-1000). Additional Effect: Silence
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,26 +10,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- parameters for AE
-    local typeEffect = xi.effect.SILENCE
-    local power      = 1
-    local duration   = xi.mobskills.calculateDuration(30, 60)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    -- perform magical attack
-    local damage = mob:getWeaponDmg()
-    local dmgmod = 4.5 -- unbuffed hit for ~700
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4.50, 4.50, 4.50 } -- TODO: Capture fTPs
+    params.element        = xi.element.THUNDER
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.THUNDER
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    if damage > 0 then
-        target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, xi.mobskills.calculateDuration(30, 60))
     end
 
-    return damage
+    return info.damage
 end
 
 return mobskillObject

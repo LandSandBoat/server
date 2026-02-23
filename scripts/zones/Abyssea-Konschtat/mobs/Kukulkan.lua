@@ -8,7 +8,9 @@ mixins = { require('scripts/mixins/families/peiste') }
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.KUKULKAN_DEFANGER)
+    if player then
+        player:addTitle(xi.title.KUKULKAN_DEFANGER)
+    end
 end
 
 return entity

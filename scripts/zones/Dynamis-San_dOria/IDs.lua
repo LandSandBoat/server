@@ -16,13 +16,13 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7074, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN            = 7233, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND           = 7234, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1         = 7235, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2         = 7236, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED          = 7238, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE              = 7250, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        CONQUEST_BASE                 = 7075, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN            = 7234, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND           = 7235, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1         = 7236, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2         = 7237, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED          = 7239, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE              = 7251, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {

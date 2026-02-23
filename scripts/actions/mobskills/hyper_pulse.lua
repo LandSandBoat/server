@@ -1,8 +1,7 @@
 -----------------------------------
---  Hyper_Pulse
---
---  Description:  300 magic damage, Gravity and short Bind, wipes Utsusemi
---  Type: Physical
+-- Hyper Pulse
+-- Family: Omega
+-- Description: Deals damage. Additional Effect: Bind, Gravity
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

@@ -27,7 +27,7 @@ local function applyRuneEnhancement(effectType, player)
 
     -- see https://www.bg-wiki.com/ffxi/Category:Rune
     local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus + jobPointBonus
-    player:addStatusEffect(effectType, power, 0, 300)
+    player:addStatusEffect(effectType, { power = power, duration = 300, origin = player })
 end
 
 local function enforceRuneCounts(target)
@@ -290,7 +290,7 @@ local function getAnimationEffusion(weaponSkillType, offset) -- verified via ret
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
-    local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+    local effectAdded = target:addStatusEffect(effect, { power = power, duration = duration, origin = target })
 
     if effectAdded then
         local newEffect = target:getStatusEffect(effect)
@@ -302,7 +302,7 @@ local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, du
 end
 
 local function applyGambitSDTMods(target, SDTTypes, power, effect, duration) -- Gambit can apply up to N where N is total rune different elemental resistance decreases, or power*N for singular element, or any combination thereof.
-    local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+    local effectAdded = target:addStatusEffect(effect, { power = power, duration = duration, origin = target })
 
     if effectAdded then
         local newEffect = target:getStatusEffect(effect)
@@ -327,7 +327,7 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     local subPower = player:getMerit(xi.merit.MERIT_SLEIGHT_OF_SWORD)                            -- Each merit adds 5 "Subtle Blow".
     subPower       = subPower + (subPower / 5) * player:getMod(xi.mod.AUGMENTS_SLEIGHT_OF_SWORD) -- Add augment effect IF player has augment.
 
-    player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, subPower, 0)
+    player:addStatusEffect(xi.effect.SWORDPLAY, { power = power, duration = 120, origin = player, tick = 3, subPower = subPower })
 
     return xi.effect.SWORDPLAY
 end
@@ -448,7 +448,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
                 applyVallationValianceSDTMods(member, sdtTypes, sdtPower, xi.effect.VALIANCE, duration)
 
                 if inspirationFCBonus > 0 then -- Inspiration FC is not applied unless Valiance is applied, tested on retail with 2 RUN in a party
-                    member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+                    member:addStatusEffect(xi.effect.FAST_CAST, { power = inspirationFCBonus, duration = duration, origin = player })
                 end
             elseif member:getID() == player:getID() then    -- caster has Vallation, set no effect message.
                 ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
@@ -464,7 +464,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
 
             if inspirationFCBonus > 0 then
-                target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+                target:addStatusEffect(xi.effect.FAST_CAST, { power = inspirationFCBonus, duration = duration, origin = player })
             end
 
             return xi.effect.VALLATION
@@ -493,7 +493,7 @@ xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
     local highestRune = target:getHighestRuneEffect()
     action:info(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation.
 
-    target:addStatusEffect(xi.effect.BATTUTA, inquartataPower, 0, 90, 0, math.floor(spikesPower * modBonus), 0)
+    target:addStatusEffect(xi.effect.BATTUTA, { power = inquartataPower, duration = 90, origin = player, subPower = math.floor(spikesPower * modBonus) })
 
     return xi.effect.BATTUTA
 end
@@ -523,7 +523,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.SDT                 = xi.combat.damage.magicalElementSDT(target, element)
     multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, element, 0, 0, bonusMacc)
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, element, false)
-    multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element)
+    multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element, 0)
     multipliers.TMDA                = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
     multipliers.absorb              = xi.spells.damage.calculateAbsorption(target, element, true)
     multipliers.nullify             = xi.spells.damage.calculateNullification(target, element, true, false)
@@ -728,7 +728,7 @@ xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
 
     action:info(target:getID(), getSpecEffectElementWard(highestRune))
 
-    player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
+    player:addStatusEffect(xi.effect.PFLUG, { power = baseStrength, duration = 120, origin = player, subPower = meritBonus })
 
     return xi.effect.PFLUG
 end
@@ -777,7 +777,7 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     action:info(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon
 
-    local effectAdded = target:addStatusEffect(xi.effect.RAYKE, 0, 0, duration + modDuration)
+    local effectAdded = target:addStatusEffect(xi.effect.RAYKE, { duration = duration + modDuration, origin = player })
 
     if effectAdded then
         local effect        = target:getStatusEffect(xi.effect.RAYKE)
@@ -820,11 +820,11 @@ xi.job_utils.rune_fencer.useOneForAll = function(player, target, ability, action
 
     for _, member in pairs(party) do
         member:delStatusEffectSilent(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
-        member:addStatusEffect(xi.effect.ONE_FOR_ALL, power, 0, duration)
+        member:addStatusEffect(xi.effect.ONE_FOR_ALL, { power = power, duration = duration, origin = player })
     end
 end
 
-local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
+local function applyLiementEffect(target, absorbTypes, absorbPower, duration, caster)
     local absorbBits = 0
     local i          = 0
 
@@ -841,7 +841,7 @@ local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
     target:delStatusEffectSilent(xi.effect.VALIANCE)  -- Liement overwrites Valiance
     target:delStatusEffectSilent(xi.effect.LIEMENT)   -- Remove Liement if it's already up. The new one will overwrite regardless of strength.
 
-    target:addStatusEffect(xi.effect.LIEMENT, absorbPower, 0, duration, 0, absorbBits)
+    target:addStatusEffect(xi.effect.LIEMENT, { power = absorbPower, duration = duration, origin = caster, subPower = absorbBits })
 
     return xi.effect.LIEMENT
 end
@@ -872,10 +872,10 @@ xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
         local party = player:getParty()
 
         for _, member in pairs(party) do
-            applyLiementEffect(member, absorbTypes, absorbPower, duration)
+            applyLiementEffect(member, absorbTypes, absorbPower, duration, player)
         end
     else -- apply effects to self only
-        applyLiementEffect(target, absorbTypes, absorbPower, duration)
+        applyLiementEffect(target, absorbTypes, absorbPower, duration, player)
     end
 
     return xi.effect.LIEMENT

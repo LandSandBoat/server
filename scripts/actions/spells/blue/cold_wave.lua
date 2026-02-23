@@ -45,7 +45,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local dot = utils.clamp(math.floor((agiDown - 3) / 2), 0, 23)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
-        if target:addStatusEffect(params.effect, dot, tick, duration * resist) then
+        if target:addStatusEffect(params.effect, { power = dot, duration = duration * resist, origin = caster, tick = tick }) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         end
     else

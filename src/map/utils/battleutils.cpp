@@ -3073,8 +3073,8 @@ uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon)
         num += 1;
     }
 
-    // hasso occasionally triggers Zanshin after landing a normal attack, only active while Samurai is set as Main
-    if (PEntity->GetMJob() == JOB_SAM)
+    // Hasso Zanshin bonus: requires HASSO_ZANSHIN_BONUS mod (applied by Hasso effect when SAM is main job)
+    if (PEntity->getMod(Mod::HASSO_ZANSHIN_BONUS) > 0)
     {
         if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO))
         {

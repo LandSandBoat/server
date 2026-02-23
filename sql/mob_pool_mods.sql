@@ -57,9 +57,6 @@ INSERT INTO `mob_pool_mods` VALUES (370,28,5,1); -- EXP_BONUS: 5
 -- Biast
 INSERT INTO `mob_pool_mods` VALUES (410,236,20,0); -- HUMANOID_KILLER: 20
 
--- Bladmall
-INSERT INTO `mob_pool_mods` VALUES (444,23,23,1); -- IMMUNITY: 23
-
 -- Bloodlapper
 INSERT INTO `mob_pool_mods` VALUES (459,23,50,0);  -- ATT: 50
 INSERT INTO `mob_pool_mods` VALUES (459,73,25,0);  -- STORETP: 25

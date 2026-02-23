@@ -738,6 +738,11 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     local levelDifFactor = 0
 
+    -- Mod-based bypass for ranged level correction
+    if actor:isPC() and actor:getMod(xi.mod.RA_IGNORE_LVL_DIFF) > 0 then
+        applyLevelCorrection = false
+    end
+
     if applyLevelCorrection then
         levelDifFactor = (actor:getMainLvl() - target:getMainLvl()) * 0.025
     end

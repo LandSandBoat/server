@@ -19,16 +19,16 @@ zones[xi.zone.RANGUEMONT_PASS] =
         LOGIN_NUMBER                  = 7004,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7013,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7068,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7227,  -- You can't fish here.
-        WATERS_OF_OBLIVION            = 7369,  -- You behold the Waters of Oblivion.
-        REGIME_REGISTERED             = 9537,  -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 10589, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 10590, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 10591, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 10592, -- You already possess that temporary item.
-        NO_COMBINATION                = 10597, -- You were unable to enter a combination.
-        COMMON_SENSE_SURVIVAL         = 10688, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7069,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7228,  -- You can't fish here.
+        WATERS_OF_OBLIVION            = 7370,  -- You behold the Waters of Oblivion.
+        REGIME_REGISTERED             = 9538,  -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 10590, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 10591, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 10592, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 10593, -- You already possess that temporary item.
+        NO_COMBINATION                = 10598, -- You were unable to enter a combination.
+        COMMON_SENSE_SURVIVAL         = 10689, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

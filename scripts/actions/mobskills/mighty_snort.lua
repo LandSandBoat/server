@@ -1,10 +1,7 @@
 -----------------------------------
---  Mighty Snort
---
---  Deals Wind damage to targets in a fan-shaped area of effect. Additional effect: Hate reset
---  Type: Magical (Wind)
---  Only used by certain Buffalo NMs
---
+-- Mighty Snort
+-- Family: Buffalo
+-- Description: Deals Wind damage to targets in a fan-shaped area of effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,16 +10,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 2
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 4.00, 4.00, 4.00 }
+    params.element         = xi.element.WIND
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.WIND
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier = 1
+    -- TODO: Capture Knockback
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-    mob:resetEnmity(target)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: NM: Audumbla reportedly has hate reset on this skill.
+    end
+
+    return info.damage
 end
 
 return mobskillObject

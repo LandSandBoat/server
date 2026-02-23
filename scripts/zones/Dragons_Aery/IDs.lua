@@ -18,9 +18,9 @@ zones[xi.zone.DRAGONS_AERY] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7068, -- You can't fish here.
-        CONQUEST_BASE                 = 7170, -- Tallying conquest results...
-        COMMON_SENSE_SURVIVAL         = 7514, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
+        CONQUEST_BASE                 = 7171, -- Tallying conquest results...
+        COMMON_SENSE_SURVIVAL         = 7515, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

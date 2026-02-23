@@ -112,7 +112,9 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.SERKET_BREAKER)
+    if player then
+        player:addTitle(xi.title.SERKET_BREAKER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

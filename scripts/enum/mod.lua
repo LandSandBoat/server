@@ -523,7 +523,10 @@ xi.mod =
     SHIELD_BARRIER                  = 1082, -- Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     -- Ranger
-    BOUNTY_SHOT_TH_BONUS            = 826, -- Boosts base TH level of bounty shot
+    BOUNTY_SHOT_TH_BONUS            = 826,  -- Boosts base TH level of bounty shot
+    RETAIN_CAMOUFLAGE               = 1189, -- Camouflage may be retained after ranged attacks
+    RETAIN_UNLIMITED_SHOT           = 1190, -- Unlimited Shot is retained if the ranged attack misses
+    RA_IGNORE_LVL_DIFF              = 1191, -- Ranged attacks ignore pDIF level correction penalty
 
     -- Dark Knight
     ARCANE_CIRCLE_DURATION          = 858,  -- Arcane Circle extended duration in seconds
@@ -555,10 +558,14 @@ xi.mod =
     SENGIKORI_SC_DMG_DEBUFF         = 1088, -- % Increase to closing skillchain damage. Applied to defender.
     SENGIKORI_MB_DMG_DEBUFF         = 1089, -- % Increase to magic burst damage. Applied to defender.
     SENGIKORI_BONUS                 = 1090, -- additive % increase to Sengikori
+    HASSO_ZANSHIN_BONUS             = 1187, -- Enables Hasso to occasionally trigger Zanshin after landing normal attacks
+    SEIGAN_COUNTER_BONUS            = 1188, -- Enables Seigan counter bonus based on Zanshin rate
 
     -- Ninja
     ENHANCES_SANGE                  = 1091, -- 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
     ENHANCES_FUTAE                  = 1148, -- Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
+    YONIN_UTSUSEMI_ENMITY           = 1192, -- Enables extra enmity from Utsusemi spells while under Yonin
+    SANGE_MULTI_HIT                 = 1193, -- Sange uses shadow-based multi-hit ranged attack instead of Daken boost
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)

@@ -16,16 +16,16 @@ zones[xi.zone.QULUN_DOME] =
         LOGIN_CAMPAIGN_UNDERWAY                 = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                            = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED           = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                           = 7068, -- Tallying conquest results...
-        IT_SEEMS_TO_BE_LOCKED_BY_POWERFUL_MAGIC = 7227, -- A door... It seems to be locked by powerful magic.
-        THE_3_ITEMS_GLOW_FAINTLY                = 7228, -- The <item>, <item>, and <item> glow faintly.
-        CANNOT_BE_OPENED_FROM_THIS_SIDE         = 7232, -- It cannot be opened from this side!
-        THE_MAGICITE_GLOWS_OMINOUSLY            = 7270, -- The magicite glows ominously.
-        YOU_FIND_NOTHING                        = 7271, -- You find nothing.
-        DIAMOND_QUADAV_ENGAGE                   = 7272, -- Gwa-ha-ha, puny peoples! Ou-ur king never forge-ets a gru-udge. He'll gri-ind you into pa-aste!
-        DIAMOND_QUADAV_DEATH                    = 7273, -- Glo-ory to the Adamantking!
-        QUADAV_KING_ENGAGE                      = 7274, -- Childre-en of Altana? I will ba-athe in your blood as I did at the Ba-attle of Jeuno!
-        QUADAV_KING_DEATH                       = 7275, -- I a-am fini-ished. Hear me, wa-arriors of the Quadav! The throne of the Adamantking and the line of Za'Dha pa-asses to my bro-other...
+        CONQUEST_BASE                           = 7069, -- Tallying conquest results...
+        IT_SEEMS_TO_BE_LOCKED_BY_POWERFUL_MAGIC = 7228, -- A door... It seems to be locked by powerful magic.
+        THE_3_ITEMS_GLOW_FAINTLY                = 7229, -- The <item>, <item>, and <item> glow faintly.
+        CANNOT_BE_OPENED_FROM_THIS_SIDE         = 7233, -- It cannot be opened from this side!
+        THE_MAGICITE_GLOWS_OMINOUSLY            = 7271, -- The magicite glows ominously.
+        YOU_FIND_NOTHING                        = 7272, -- You find nothing.
+        DIAMOND_QUADAV_ENGAGE                   = 7273, -- Gwa-ha-ha, puny peoples! Ou-ur king never forge-ets a gru-udge. He'll gri-ind you into pa-aste!
+        DIAMOND_QUADAV_DEATH                    = 7274, -- Glo-ory to the Adamantking!
+        QUADAV_KING_ENGAGE                      = 7275, -- Childre-en of Altana? I will ba-athe in your blood as I did at the Ba-attle of Jeuno!
+        QUADAV_KING_DEATH                       = 7276, -- I a-am fini-ished. Hear me, wa-arriors of the Quadav! The throne of the Adamantking and the line of Za'Dha pa-asses to my bro-other...
     },
     mob =
     {

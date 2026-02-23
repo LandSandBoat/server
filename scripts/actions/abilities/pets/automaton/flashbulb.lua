@@ -26,7 +26,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local duration = 12 * resist
 
     if resist > 0.0625 then
-        if target:addStatusEffect(xi.effect.FLASH, 0, 0, duration) then -- power handled in hit rate calculations
+        if target:addStatusEffect(xi.effect.FLASH, { duration = duration, origin = automaton }) then -- power handled in hit rate calculations
             skill:setMsg(xi.msg.basic.SKILL_ENFEEB)
         else
             skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)

@@ -118,11 +118,11 @@ instanceObject.afterInstanceRegister = function(player)
         player:unequipItem(i)
     end
 
-    player:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, 0xFFFF, 0, 6000)
-    player:addStatusEffectEx(xi.effect.OBLIVISCENCE, xi.effect.OBLIVISCENCE, 1, 0, 6000)
-    player:addStatusEffectEx(xi.effect.OMERTA, xi.effect.OMERTA, 0x3F, 0, 6000)
-    player:addStatusEffectEx(xi.effect.IMPAIRMENT, xi.effect.IMPAIRMENT, 3, 0, 6000)
-    player:addStatusEffectEx(xi.effect.DEBILITATION, xi.effect.DEBILITATION, 0x1FF, 0, 6000)
+    player:addStatusEffect(xi.effect.ENCUMBRANCE_I, { power = 0xFFFF, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.OBLIVISCENCE, { power = 1, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.OMERTA, { power = 0x3F, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.IMPAIRMENT, { power = 3, duration = 6000, origin = player })
+    player:addStatusEffect(xi.effect.DEBILITATION, { power = 0x1FF, duration = 6000, origin = player })
     player:addTempItem(xi.item.CAGE_OF_B_REMNANTS_FIREFLIES)
     player:delKeyItem(xi.ki.REMNANTS_PERMIT)
 end

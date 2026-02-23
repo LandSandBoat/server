@@ -29,6 +29,7 @@
 #include "map/enums/msg_std.h"
 #include "map/enums/party_kind.h"
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -314,6 +315,27 @@ struct AssistChannelEvent
     uint32 senderId{};
     uint32 receiverId{};
     uint8  action{}; // GP_CLI_COMMAND_ASSIST_CHANNEL_KIND
+};
+
+struct GMCallRequest
+{
+    uint32                             callId{};
+    uint32                             charId{};
+    std::string                        charName{};
+    uint32                             accId{};
+    uint16                             zoneId{};
+    float                              posX{};
+    float                              posY{};
+    float                              posZ{};
+    std::string                        message{};
+    std::map<std::string, std::string> parameters{};
+};
+
+struct GMCallResponse
+{
+    uint32      callId{};
+    uint32      charId{};
+    std::string message{}; // Up to 1024 characters
 };
 
 } // namespace ipc

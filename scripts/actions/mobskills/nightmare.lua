@@ -43,7 +43,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Handle special Bio
     target:delStatusEffectSilent(xi.effect.DIA)
     target:delStatusEffectSilent(xi.effect.BIO)
-    target:addStatusEffect(xi.effect.BIO, bioPower, 3, duration, 0, 10, effectTier)
+    target:addStatusEffect(xi.effect.BIO, { power = bioPower, duration = duration, origin = mob, tick = 3, subPower = 10, tier = effectTier })
 
     return xi.effect.SLEEP_I
 end

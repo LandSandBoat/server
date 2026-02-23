@@ -14,8 +14,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.COSTUME, 644, 0, 3600)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.COSTUME, { power = 644, duration = 3600, origin = user })
 end
 
 return itemObject

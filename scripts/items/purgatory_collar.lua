@@ -7,7 +7,7 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user)
     if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PURGATORY_COLLAR) ~= nil then
         target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PURGATORY_COLLAR)
     end
@@ -15,9 +15,9 @@ itemObject.onItemCheck = function(target)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.PURGATORY_COLLAR) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 45, 0, 0, 0, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PURGATORY_COLLAR)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 45, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.PURGATORY_COLLAR })
     end
 end
 

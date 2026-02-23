@@ -1,6 +1,7 @@
 -----------------------------------
 -- Soul Accretion
--- Attempts to absorb one buff from a single target.
+-- Family: Big Bat (Single Bat)
+-- Description: Attempts to absorb one buff from a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.TRANCE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.TRANCE, { power = 1, duration = 60, origin = player })
     player:addTP(100 * player:getJobPointLevel(xi.jp.TRANCE_EFFECT))
 end
 

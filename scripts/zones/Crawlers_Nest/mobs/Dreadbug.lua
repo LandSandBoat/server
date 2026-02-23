@@ -11,7 +11,9 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.STORETP, 125) -- 6 hits to 1ktp
 end
 
 return entity

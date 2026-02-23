@@ -8,13 +8,11 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(200)
+    xi.abyssea.exitMawOnTrigger(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 200 and option == 1 then
-        player:setPos(241, 0.001, 11, 42, 104)
-    end
+    xi.abyssea.exitMawOnEventFinish(player, csid, option, npc)
 end
 
 return entity

@@ -21,6 +21,20 @@
 
 #include "fellowentity.h"
 
+namespace
+{
+const std::map<CharRace, std::vector<std::string>> fellowNames = {
+    { CharRace::HumeMale, { "Feliz", "Ferdinand", "Gunnar", "Massimo", "Oldrich", "Siegward", "Theobald", "Zenji" } },
+    { CharRace::HumeFemale, { "Amerita", "Beatrice", "Henrietta", "Jesimae", "Karyn", "Nanako", "Sharlene", "Sieghilde" } },
+    { CharRace::ElvaanMale, { "Chanandit", "Deulmaeux", "Demresinaux", "Ephealgaux", "Gauldeval", "Grauffemart", "Migaifongut", "Romidiant" } },
+    { CharRace::ElvaanFemale, { "Armittie", "Cadepure", "Clearite", "Epilleve", "Liabelle", "Nauthima", "Radille", "Vimechue" } },
+    { CharRace::TarutaruMale, { "Balu-Falu", "Burg-Ladarg", "Ehgo-Ryuhgo", "Kolui-Pelui", "Nokum-Akkum", "Savul-Kivul", "Vinja-Kanja", "Yarga-Umiga" } },
+    { CharRace::TarutaruFemale, { "Cupapa", "Jajuju", "Kalokoko", "Mahoyaya", "Pakurara", "Ripokeke", "Yawawa", "Yufafa" } },
+    { CharRace::Mithra, { "Fhig Lahrv", "Khuma Tagyawhan", "Pimy Kettihl", "Raka Maimhov", "Sahyu Banjyao", "Sufhi Uchnouma", "Tsuim Nhomango", "Yoli Kohlpaka" } },
+    { CharRace::Galka, { "Durib", "Dzapiwa", "Jugowa", "Mugido", "Voldai", "Wagwei", "Zayag", "Zoldof" } },
+};
+}
+
 CFellowEntity::CFellowEntity(CCharEntity* PChar)
 : CMobEntity()
 {

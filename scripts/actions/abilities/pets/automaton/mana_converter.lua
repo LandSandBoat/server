@@ -19,7 +19,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     target:addMP(difference) -- To prevent possible loss of MP from flooring the refresh
     target:setHP(math.floor(hp / 2))
     target:delStatusEffect(xi.effect.REFRESH)
-    target:addStatusEffect(xi.effect.REFRESH, amount, 3, duration)
+    target:addStatusEffect(xi.effect.REFRESH, { power = amount, duration = duration, origin = automaton, tick = 3 })
 
     return xi.effect.REFRESH
 end

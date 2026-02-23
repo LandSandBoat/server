@@ -372,11 +372,6 @@ INSERT INTO `mob_family_mods` VALUES (140,3,50,1);  -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (140,36,55,1); -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (140,51,2,1);  -- ROAM_TURNS: 2
 
--- Hippogryph-High Res
-INSERT INTO `mob_family_mods` VALUES (141,3,50,1);  -- MP_BASE: 50
-INSERT INTO `mob_family_mods` VALUES (141,36,55,1); -- ROAM_COOL: 55
-INSERT INTO `mob_family_mods` VALUES (141,51,2,1);  -- ROAM_TURNS: 2
-
 -- Hound
 INSERT INTO `mob_family_mods` VALUES (142,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (142,51,3,1);    -- ROAM_TURNS: 3

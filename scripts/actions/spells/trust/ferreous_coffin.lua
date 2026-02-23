@@ -54,7 +54,7 @@ spellObject.onMobSpawn = function(mob)
                 xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
 
-            mob:addStatusEffect(xi.effect.ACCURACY_BOOST, 20, 0, 20) -- Cheat in Relic AM ACC
+            mob:addStatusEffect(xi.effect.ACCURACY_BOOST, { power = 20, duration = 20, origin = mob }) -- Cheat in Relic AM ACC
             -- TODO: Expand Relic (Mjollnir) Handling (Occ. Double Damage, etc)
         end
     end)

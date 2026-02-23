@@ -51,20 +51,10 @@ quest.sections =
             ['Hide_Flap_2'] =
             {
                 onTrigger = function(player, npc)
-                    player:messageSpecial(davoiID.text.FIND_ORC_TENT)
-
-                    if
-                        player:checkDistance(npc) > 1 and
-                        player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)
-                    then
-                        return quest:messageSpecial(davoiID.text.CLOSER_TO_SEARCH)
-                    elseif
-                        not GetMobByID(davoiID.mob.BILOPDOP):isAlive() and
-                        not GetMobByID(davoiID.mob.DELOKNOK):isAlive()
-                    then
+                    if player:checkDistance(npc) <= 1 then
                         return quest:progressEvent(108)
                     else
-                        return quest:noAction()
+                        return quest:messageSpecial(davoiID.text.CLOSER_TO_SEARCH)
                     end
                 end,
             },
@@ -77,23 +67,19 @@ quest.sections =
                     end
 
                     if player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
-                        player:messageSpecial(davoiID.text.FIND_NOTHING)
-                        return
-                    end
-
-                    if quest:getLocalVar(player, 'nmKilled') == 3 then
+                        player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
+                    elseif quest:getLocalVar(player, 'nmKilled') == 3 then
                         npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
-                        return
-                    end
-
-                    if
+                    elseif
+                        player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK) and
                         not GetMobByID(davoiID.mob.BILOPDOP):isSpawned() and
                         not GetMobByID(davoiID.mob.DELOKNOK):isSpawned()
                     then
-                        player:messageSpecial(davoiID.text.FIND_NOTHING)
+                        player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
                         SpawnMob(davoiID.mob.BILOPDOP):updateClaim(player)
                         SpawnMob(davoiID.mob.DELOKNOK):updateEnmity(player)
-                        return
+                    else
+                        player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
                     end
                 end,
             },

@@ -26,7 +26,7 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     for move = xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_5 do
         player:delStatusEffect(move)
-        player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, 3, 0, 60) -- TODO: player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT) This was here and maybe it refered to FLOURISH_III job points?
+        player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, { power = 3, duration = 60, origin = player }) -- TODO: player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT) This was here and maybe it refered to FLOURISH_III job points?
     end
 end
 

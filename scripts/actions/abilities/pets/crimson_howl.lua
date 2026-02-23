@@ -15,7 +15,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local typeEffect = xi.effect.WARCRY
-    if target:addStatusEffect(typeEffect, 9, 0, duration) then
+    if target:addStatusEffect(typeEffect, { power = 9, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else

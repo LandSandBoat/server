@@ -84,7 +84,7 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4, arg5, arg6)
     end
 
     -- add effect
-    if targ:addStatusEffect(id, power, 3, duration, subId, subPower) then
+    if targ:addStatusEffect(id, { power = power, duration = duration, origin = player, tick = 3, subType = subId, subPower = subPower }) then
         targ:messagePublic(280, targ, id, id)
     else
         targ:messagePublic(283, targ, id)

@@ -1,30 +1,38 @@
 -----------------------------------
 -- Vulcan Shot
---
+-- Family: Fomor
 -- Description: Fires an explosive bullet at targets in an area of effect.
--- Type: Magical
--- Can be dispelled: N/A
--- Utsusemi/Blink absorb: Wipes shadows?
--- Range: 14' radial
+-- Notes: Used by Ashu Talif Captain, possibly others.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 254)
+    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 254) -- TODO: Needed?
 
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 4
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.FIRE, 8, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    -- TODO: Verify if magical or physical skill
+    -- TODO: Capture AoE Type or Single hit.
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 32.00, 32.00, 32.00 } -- TODO: Capture fTPs (Original code was Weapon Damage * 4 * 8)
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior
+    -- TODO: Need animation ID capture
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

@@ -1,11 +1,8 @@
 -----------------------------------
---  Flame Blast Regular Attack
---
---  Description: Deals single target fire damage to target.
---  Type: Magical
---  Utsusemi/Blink absorb: Ignores shadows
---  Range: 18'
---  Notes: Used only by KS99 Wyrm in while flying as regular attack. Only use in a dedicated flying attack skill set.
+-- Flame Blast Regular Attack
+-- Family: Wyrms
+-- Description: Deals single target Fire damage to target.
+-- Notes: Used only by KS99 Wyrm in while flying as regular auto attack. Only use in a dedicated flying attack skill set.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,14 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.FIRE, 4, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    skill:setMsg(xi.msg.basic.HIT_DMG)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4, 4, 4 }
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.primaryMessage = xi.msg.basic.HIT_DMG
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

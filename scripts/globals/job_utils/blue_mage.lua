@@ -58,45 +58,45 @@ end
 -----------------------------------
 
 xi.job_utils.blue_mage.useAzureLore = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.AZURE_LORE, 1, 0, 30)
+    player:addStatusEffect(xi.effect.AZURE_LORE, { power = 1, duration = 30, origin = player })
 
     return xi.effect.AZURE_LORE
 end
 
 xi.job_utils.blue_mage.useBurstAffinity = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.BURST_AFFINITY, 1, 0, 30)
+    player:addStatusEffect(xi.effect.BURST_AFFINITY, { power = 1, duration = 30, origin = player })
     return xi.effect.BURST_AFFINITY
 end
 
 xi.job_utils.blue_mage.useChainAffinity = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.CHAIN_AFFINITY, 1, 0, 30)
+    player:addStatusEffect(xi.effect.CHAIN_AFFINITY, { power = 1, duration = 30, origin = player })
     return xi.effect.CHAIN_AFFINITY
 end
 
 xi.job_utils.blue_mage.useDiffusion = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.DIFFUSION, 1, 0, 60)
+    player:addStatusEffect(xi.effect.DIFFUSION, { power = 1, duration = 60, origin = player })
     return xi.effect.DIFFUSION
 end
 
 xi.job_utils.blue_mage.useConvergence = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.CONVERGENCE, 1, 0, 60)
+    player:addStatusEffect(xi.effect.CONVERGENCE, { power = 1, duration = 60, origin = player })
     return xi.effect.CONVERGENCE
 end
 
 xi.job_utils.blue_mage.useEfflux = function(player, target, ability, action)
-    player:addStatusEffect(xi.effect.EFFLUX, 16, 1, 60)
+    player:addStatusEffect(xi.effect.EFFLUX, { power = 16, duration = 60, origin = player, tick = 1 })
 
     return xi.effect.EFFLUX
 end
 
 xi.job_utils.blue_mage.useUnbridledWisdom = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.UNBRIDLED_WISDOM, 16, 1, 30)
+    target:addStatusEffect(xi.effect.UNBRIDLED_WISDOM, { power = 16, duration = 30, origin = player, tick = 1 })
 
     return xi.effect.UNBRIDLED_WISDOM
 end
 
 xi.job_utils.blue_mage.useUnbridledLearning = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.UNBRIDLED_LEARNING, 16, 1, 60)
+    target:addStatusEffect(xi.effect.UNBRIDLED_LEARNING, { power = 16, duration = 60, origin = player, tick = 1 })
 
     return xi.effect.UNBRIDLED_LEARNING
 end

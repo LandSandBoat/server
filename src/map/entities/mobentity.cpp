@@ -517,11 +517,6 @@ void CMobEntity::resetMobMod(uint16 type)
     m_mobModStat[type] = m_mobModStatSave[type];
 }
 
-int32 CMobEntity::getBigMobMod(uint16 type)
-{
-    return getMobMod(type) * 1000;
-}
-
 void CMobEntity::saveMobModifiers()
 {
     m_mobModStatSave = m_mobModStat;

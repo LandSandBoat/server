@@ -76,7 +76,10 @@ entity.onMobWeaponSkill = function(mob, target, skill)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.BOROKA_BELEAGUERER)
+    if player then
+        player:addTitle(xi.title.BOROKA_BELEAGUERER)
+    end
+
     mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hour respawn
 end
 

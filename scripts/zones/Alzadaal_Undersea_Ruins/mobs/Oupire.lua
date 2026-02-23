@@ -14,8 +14,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 478)
-    player:addTitle(xi.title.OUPIRE_IMPALER)
+    if player then
+        player:addTitle(xi.title.OUPIRE_IMPALER)
+        xi.hunts.checkHunt(mob, player, 478)
+    end
 end
 
 entity.onMobDespawn = function(mob)

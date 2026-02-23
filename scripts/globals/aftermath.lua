@@ -602,21 +602,21 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
     {
         -- Relic
         [1] = function(x)
-            player:addStatusEffect(xi.effect.AFTERMATH, id, 0, aftermath.duration(tp), 0, tp, aftermathType)
+            player:addStatusEffect(xi.effect.AFTERMATH, { power = id, duration = aftermath.duration(tp), origin = player, subPower = tp, tier = aftermathType })
         end,
 
         -- Mythic
         [2] = function(x)
             local tier = math.floor(tp / 1000)
             local icon = xi.effect['AFTERMATH_LV'..tier]
-            player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
+            player:addStatusEffect(xi.effect.AFTERMATH, { power = id, duration = aftermath.duration[tier], origin = player, icon = icon, subPower = tp, tier = aftermathType })
         end,
 
         -- Empyrean
         [3] = function(x)
             local tier = math.floor(tp / 1000)
             local icon = xi.effect['AFTERMATH_LV'..tier]
-            player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
+            player:addStatusEffect(xi.effect.AFTERMATH, { power = id, duration = aftermath.duration[tier], origin = player, icon = icon, subPower = tp, tier = aftermathType })
         end
     }
 end
@@ -639,7 +639,7 @@ xi.aftermath.onEffectGain = function(target, effect)
             then
                 -- pets gain same mods as the player, so give them the effect without a loss message
                 pet:delStatusEffectSilent(xi.effect.AFTERMATH)
-                pet:addStatusEffect(xi.effect.AFTERMATH, effect:getPower(), 0, effect:getDuration() / 1000, 0, effect:getSubPower(), effect:getTier())
+                pet:addStatusEffect(xi.effect.AFTERMATH, { power = effect:getPower(), duration = effect:getDuration() / 1000, origin = target, subPower = effect:getSubPower(), tier = effect:getTier() })
                 pet:getStatusEffect(xi.effect.AFTERMATH):addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
             end
 
@@ -656,7 +656,7 @@ xi.aftermath.onEffectGain = function(target, effect)
             if pet then
                 -- pets gain same mods as the player, so give them the effect without a loss message
                 pet:delStatusEffectSilent(xi.effect.AFTERMATH)
-                pet:addStatusEffect(xi.effect.AFTERMATH, effect:getPower(), 0, effect:getDuration() / 1000, 0, effect:getSubPower(), effect:getTier())
+                pet:addStatusEffect(xi.effect.AFTERMATH, { power = effect:getPower(), duration = effect:getDuration() / 1000, origin = target, subPower = effect:getSubPower(), tier = effect:getTier() })
                 pet:getStatusEffect(xi.effect.AFTERMATH):addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
             end
 

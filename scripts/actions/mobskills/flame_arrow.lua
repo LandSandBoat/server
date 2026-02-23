@@ -1,6 +1,8 @@
 -----------------------------------
--- Fire Arrow
--- Deals Fire damage.
+-- Flame Arrow
+-- Family: Orc Warmachines
+-- Description: Deals Fire damage to a target.
+-- Note: Wikis call it "Fire Arrow" but the actual ingame name for EN client is "Flame Arrow".
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,17 +11,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 2.5
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.element        = xi.element.FIRE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.FIRE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
 
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

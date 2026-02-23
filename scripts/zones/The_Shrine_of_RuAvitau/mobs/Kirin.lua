@@ -85,8 +85,10 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.KIRIN_CAPTIVATOR)
-    player:showText(mob, ID.text.KIRIN_OFFSET + 1)
+    if player then
+        player:addTitle(xi.title.KIRIN_CAPTIVATOR)
+        player:showText(mob, ID.text.KIRIN_OFFSET + 1)
+    end
 end
 
 return entity

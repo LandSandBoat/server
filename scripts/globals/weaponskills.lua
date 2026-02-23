@@ -152,6 +152,7 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
     -- check shadows
     if
         not calcParams.guaranteedHit and
+        not wsParams.ignoreShadows and
         shadowAbsorb(target)
     then
         -- shadow absorb logic
@@ -778,6 +779,8 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
+    attacker:delStatusEffect(xi.effect.FLASHY_SHOT)
+    attacker:delStatusEffect(xi.effect.STEALTH_SHOT)
 
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
@@ -1079,6 +1082,6 @@ xi.weaponskills.handleWeaponskillEffect = function(actor, target, effectId, acti
         not xi.data.statusEffect.isTargetResistant(actor, target, effectId) and
         not xi.data.statusEffect.isEffectNullified(target, effectId, 0)
     then
-        target:addStatusEffect(effectId, power, 0, duration)
+        target:addStatusEffect(effectId, { power = power, duration = duration, origin = actor })
     end
 end

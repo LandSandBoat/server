@@ -221,6 +221,12 @@ public:
     auto isNotMounted(const CCharEntity* PChar) -> PacketValidator&;
     // Character must be engaged in combat
     auto isEngaged(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be engaged in combat
+    auto isNotEngaged(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be in an event
+    auto isNotInEvent(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must not be jailed
+    auto isNotJailed(const CCharEntity* PChar) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>

@@ -54,7 +54,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.HYDRA_HEADHUNTER)
+    if player then
+        player:addTitle(xi.title.HYDRA_HEADHUNTER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -7,9 +7,9 @@ local entity = {}
 
 local jobGearTable =
 {
-    -- [job ID]     = { Weapon,             Head,                  Body,                    Hands,                     Legs,                     Feet                      },
-    -- [xi.job.WAR] = { xi.item.RAZOR_AXE,  xi.item.FIGHTERS_MASK, xi.item.FIGHTERS_LORICA, xi.item.FIGHTERS_MUFFLERS, xi.item.FIGHTERS_CUISSES, xi.item.FIGHTERS_CALLIGAE },
-    -- [xi.job.MNK] = { xi.item.BEAT_CESTI, xi.item.TEMPLE_CROWN,  xi.item.TEMPLE_CYCLAS,   xi.item.TEMPLE_GLOVES,     xi.item.TEMPLE_HOSE,      xi.item.TEMPLE_GAITERS    },
+    -- [job ID]  = { Weapon,             Head,                  Body,                    Hands,                     Legs,                     Feet                      },
+    [xi.job.WAR] = { xi.item.RAZOR_AXE,  xi.item.FIGHTERS_MASK, xi.item.FIGHTERS_LORICA, xi.item.FIGHTERS_MUFFLERS, xi.item.FIGHTERS_CUISSES, xi.item.FIGHTERS_CALLIGAE },
+    [xi.job.MNK] = { xi.item.BEAT_CESTI, xi.item.TEMPLE_CROWN,  xi.item.TEMPLE_CYCLAS,   xi.item.TEMPLE_GLOVES,     xi.item.TEMPLE_HOSE,      xi.item.TEMPLE_GAITERS    },
     -- [xi.job.WHM] = {  },
     -- [xi.job.BLM] = {  },
     -- [xi.job.RDM] = {  },
@@ -178,20 +178,49 @@ local jobQuestsTable =
     },
 }
 
+local jobCofferTable =
+{
+    [xi.job.WAR] = { '[AF]ZilartCoffer',  1,  2 },
+    [xi.job.MNK] = { '[AF]ZilartCoffer',  3,  4 },
+    [xi.job.WHM] = { '[AF]ZilartCoffer',  5,  6 },
+    [xi.job.BLM] = { '[AF]ZilartCoffer',  7,  8 },
+    [xi.job.RDM] = { '[AF]ZilartCoffer',  9, 10 },
+    [xi.job.THF] = { '[AF]ZilartCoffer', 11, 12 },
+    [xi.job.PLD] = { '[AF]ZilartCoffer', 13, 14 },
+    [xi.job.DRK] = { '[AF]ZilartCoffer', 15, 16 },
+    [xi.job.BST] = { '[AF]ZilartCoffer', 17, 18 },
+    [xi.job.BRD] = { '[AF]ZilartCoffer', 19, 20 },
+    [xi.job.RNG] = { '[AF]ZilartCoffer', 21, 22 },
+    [xi.job.SAM] = { '[AF]ZilartCoffer', 23, 24 },
+    [xi.job.NIN] = { '[AF]ZilartCoffer', 25, 26 },
+    [xi.job.DRG] = { '[AF]ZilartCoffer', 27, 28 },
+    [xi.job.SMN] = { '[AF]ZilartCoffer', 29, 30 },
+}
+
 local function isJobResetingEligible(player, jobId)
     -- Check for gear table job entry existence.
-    if jobGearTable[jobId] == nil then
+    if not jobGearTable[jobId] then
         return false
     end
 
     -- Check for quest table job entry existence.
-    if jobQuestsTable[jobId] == nil then
+    if not jobQuestsTable[jobId] then
         return false
     end
 
     -- Check if player still has any of the job AF pieces.
     for gearPiece = 1, #jobGearTable[jobId] do
         if player:hasItem(jobGearTable[jobId][gearPiece]) then
+            return false
+        end
+    end
+
+    -- Check if Job has AF pieces from chest and if player has gotten them.
+    if jobCofferTable[jobId] then
+        if
+            not utils.mask.getBit(player:getCharVar(jobCofferTable[jobId][1]), jobCofferTable[jobId][2]) or
+            not utils.mask.getBit(player:getCharVar(jobCofferTable[jobId][1]), jobCofferTable[jobId][3])
+        then
             return false
         end
     end
@@ -204,18 +233,6 @@ local function isJobResetingEligible(player, jobId)
     end
 
     return true
-end
-
-local function performJobResetting(player, jobId)
-    -- Safety check.
-    if not isJobResetingEligible(player, jobId) then
-        return
-    end
-
-    -- Delete all quests.
-    for questEntry = 1, #jobQuestsTable[jobId] do
-        player:delQuest(jobQuestsTable[jobId][questEntry][1], jobQuestsTable[jobId][questEntry][2])
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -233,13 +250,37 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if
-        csid == 10034 and
-        option >= xi.job.WAR and
-        option <= xi.job.RUN and
-        player:getGil() >= 10000 -- Safety check.
-    then
-        performJobResetting(player, option)
+    if csid ~= 10034 then
+        return
+    end
+
+    if option < xi.job.WAR or option > xi.job.RUN then
+        return
+    end
+
+    if not isJobResetingEligible(player, option) then
+        return
+    end
+
+    if player:getGil() < 10000 then
+        return
+    end
+
+    -- Delete gil.
+    player:delGil(10000)
+
+    -- Delete all quests.
+    for questEntry = 1, #jobQuestsTable[option] do
+        player:delQuest(jobQuestsTable[option][questEntry][1], jobQuestsTable[option][questEntry][2])
+    end
+
+    -- Delete coffer var.
+    if jobCofferTable[option] then
+        local afBitmaskName = jobCofferTable[option][1]
+        local bitOneValue   = 2 ^ jobCofferTable[option][2]
+        local bitTwoValue   = 2 ^ jobCofferTable[option][3]
+
+        player:setCharVar(afBitmaskName, player:getCharVar(afBitmaskName) - bitOneValue - bitTwoValue)
     end
 end
 

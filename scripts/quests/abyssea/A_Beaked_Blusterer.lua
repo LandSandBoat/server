@@ -2,6 +2,8 @@
 -- A_Beaked_Blusterer
 -----------------------------------
 -- !addquest 8 176
+-- Cavernous Maw    : !pos 340.000 -0.500 -680.000 107
+-- Bennu            : !spawnmob 17670554
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)

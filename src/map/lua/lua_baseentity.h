@@ -176,7 +176,7 @@ public:
     auto sendGuild(uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool; // Sends guild shop menu
     void openSendBox() const;                                                             // Opens send box (to deliver items)
     void leaveGame();
-    void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const;
+    void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const;
 
     // Location and Positioning
     int16 getWorldAngle(sol::variadic_args va);                                                // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
@@ -677,8 +677,8 @@ public:
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
-    bool  addStatusEffect(sol::variadic_args va);
-    auto  addStatusEffectEx(sol::variadic_args va) -> bool;
+    auto  addStatusEffect(EFFECT effectId, sol::table params) const -> bool;
+    auto  copyStatusEffect(const CLuaStatusEffect* PStatusEffect) const -> bool;
     auto  getStatusEffect(uint16 StatusID, const sol::object& SubType, const sol::object& SourceType, const sol::object& SourceTypeParam) -> CStatusEffect*;
     auto  getStatusEffectBySource(uint16 StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> CStatusEffect*;
     auto  getStatusEffects() -> sol::table;
@@ -852,12 +852,12 @@ public:
 
     void setNpcFlags(uint32 flags);
 
-    void   spawn(const sol::object& despawnSec, const sol::object& respawnSec);
-    bool   isSpawned();
-    auto   getSpawnPos() -> sol::table;
-    void   setSpawn(float x, float y, float z, const sol::object& rot);
-    uint32 getRespawnTime();
-    void   setRespawnTime(uint32 seconds) const;
+    void spawn(const sol::object& despawnSec, const sol::object& respawnSec);
+    bool isSpawned();
+    auto getSpawnPos() -> sol::table;
+    void setSpawn(float x, float y, float z, const sol::object& rot);
+    auto getRespawnTime() const -> uint32;
+    void setRespawnTime(uint32 seconds) const;
 
     void instantiateMob(uint32 groupID);
 

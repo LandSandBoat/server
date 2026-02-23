@@ -1,5 +1,6 @@
 -----------------------------------
 -- Sonic Buffet
+-- Family: Avatar (Siren)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -8,19 +9,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * 2.5)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 2.50, 2.50, 2.50 } -- TODO: Capture fTPs
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    for i = 1, math.random(2, 3) do
-        target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        for i = 1, math.random(2, 3) do
+            target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+        end
     end
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-
-    return damage
+    return info.damage
 end
 
 return mobskillObject

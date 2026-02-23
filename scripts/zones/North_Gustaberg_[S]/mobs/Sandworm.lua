@@ -11,7 +11,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.SANDWORM_WRANGLER)
+    if player then
+        player:addTitle(xi.title.SANDWORM_WRANGLER)
+    end
 end
 
 return entity

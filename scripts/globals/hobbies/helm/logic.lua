@@ -169,9 +169,10 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         -- Cutscene plays the emote in all zones but Adoulin.
         -- Adoulin uses emote packets.
         if csid then
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION, true) -- true to send emote to other players only
             player:startEvent(csid, itemID, broke, full)
         else
-            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION, false) -- False to send emote to everyone
         end
 
         -- WotG : The Price of Valor; Success does not award an item, but only KI.

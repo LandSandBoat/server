@@ -20,16 +20,16 @@ zones[xi.zone.LEBROS_CAVERN] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        TEMP_ITEM                     = 7225, -- Obtained temporary item: <item>!
-        PLAYER_OBTAINS_ITEM           = 7226, -- <name> obtains <item>!
-        ASSAULT_START_OFFSET          = 7361, -- Max MP Down removed for <name>.
-        TIME_TO_COMPLETE              = 7422, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED                = 7423, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS             = 7424, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        ASSAULT_POINTS_OBTAINED       = 7426, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES        = 7427, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS        = 7428, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN                  = 7430, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        TEMP_ITEM                     = 7226, -- Obtained temporary item: <item>!
+        PLAYER_OBTAINS_ITEM           = 7227, -- <name> obtains <item>!
+        ASSAULT_START_OFFSET          = 7362, -- Max MP Down removed for <name>.
+        TIME_TO_COMPLETE              = 7423, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED                = 7424, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS             = 7425, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        ASSAULT_POINTS_OBTAINED       = 7427, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES        = 7428, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS        = 7429, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN                  = 7431, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
     },
 
     mob =

@@ -17,12 +17,12 @@ zones[xi.zone.PROMYVION_VAHZL] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        OVERFLOWING_MEMORIES          = 7230, -- It appears to be a barrier woven from the energy of overflowing memories...
-        ON_NM_SPAWN                   = 7234, -- You sense a dark, empty presence...
-        EERIE_GREEN_GLOW              = 7236, -- The sphere is emitting an eerie green glow.
-        AMULET_RETURNED               = 7279, -- The <item> has been returned to you.
-        LIGHT_OF_VAHZL                = 7280, -- You cannot remember when exactly, but you have obtained <item>!
-        POPPED_NM_OFFSET              = 7316, -- Remnants of a cerebrator lie scattered about the area.
+        OVERFLOWING_MEMORIES          = 7231, -- It appears to be a barrier woven from the energy of overflowing memories...
+        ON_NM_SPAWN                   = 7235, -- You sense a dark, empty presence...
+        EERIE_GREEN_GLOW              = 7237, -- The sphere is emitting an eerie green glow.
+        AMULET_RETURNED               = 7280, -- The <item> has been returned to you.
+        LIGHT_OF_VAHZL                = 7281, -- You cannot remember when exactly, but you have obtained <item>!
+        POPPED_NM_OFFSET              = 7317, -- Remnants of a cerebrator lie scattered about the area.
     },
     mob =
     {

@@ -25,9 +25,11 @@ entity.onMobDespawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.RUTHVEN_ENTOMBER)
-    xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.BLACK_ABYSSITE)
-    xi.hunts.checkHunt(mob, player, 556)
+    if player then
+        player:addTitle(xi.title.RUTHVEN_ENTOMBER)
+        xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.BLACK_ABYSSITE)
+        xi.hunts.checkHunt(mob, player, 556)
+    end
 end
 
 return entity

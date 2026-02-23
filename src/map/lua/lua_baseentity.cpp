@@ -211,7 +211,7 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, const so
     bool   showName = (p4 != sol::lua_nil) ? p4.as<bool>() : false; // ShowName is false in GP_SERV_COMMAND_TALKNUMWORK Constructor, so mimic the same default.
     bool   turn     = (p5 != sol::lua_nil) ? p5.as<bool>() : true;  // Turn to player, default behavior is true
 
-    if (turn && PBaseEntity->objtype == TYPE_NPC)
+    if (turn && PBaseEntity->objtype == TYPE_NPC && PBaseEntity->loc.zone)
     {
         PBaseEntity->m_TargID       = m_PBaseEntity->targid;
         PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
@@ -223,7 +223,7 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, const so
     {
         static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param2, param3, showName);
     }
-    else
+    else if (m_PBaseEntity->loc.zone)
     {
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param3, showName));
     }
@@ -358,6 +358,11 @@ void CLuaBaseEntity::printToArea(const std::string& message, const sol::object& 
     std::string       name         = (arg3 == sol::lua_nil) ? "" : arg3.as<std::string>();
     bool              skipSender   = (arg4 == sol::lua_nil) ? false : arg4.as<bool>();
 
+    if (!PChar->loc.zone)
+    {
+        return;
+    }
+
     if (messageRange == ChatMessageArea::System)
     {
         message::send(ipc::ChatMessageServerMessage{
@@ -460,7 +465,7 @@ void CLuaBaseEntity::messageBasic(uint16 messageID, const sol::object& p0, const
     {
         static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MsgBasic>(messageID));
     }
-    else
+    else if (m_PBaseEntity->loc.zone)
     {
         // Broadcast in range
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MsgBasic>(messageID)));
@@ -490,7 +495,7 @@ void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, co
     {
         PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, messageID, PNameEntity, param0, param1, param2, param3, chatType);
     }
-    else
+    else if (m_PBaseEntity->loc.zone)
     {
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(m_PBaseEntity, messageID, PNameEntity, param0, param1, param2, param3, chatType));
     }
@@ -508,7 +513,7 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, const CLuaBaseEntity* PEnti
     uint32 param0 = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
     uint32 param1 = (arg3 != sol::lua_nil) ? arg3.as<uint32>() : 0;
 
-    if (PEntity != nullptr)
+    if (PEntity != nullptr && m_PBaseEntity->loc.zone)
     {
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PEntity->GetBaseEntity(), param0, param1, static_cast<MsgBasic>(messageID)));
     }
@@ -935,7 +940,10 @@ void CLuaBaseEntity::injectActionPacket(const uint32 inTargetID, uint16 inCatego
         },
     };
 
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(Action));
+    if (m_PBaseEntity->loc.zone)
+    {
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(Action));
+    }
 }
 
 /************************************************************************
@@ -989,7 +997,7 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command, const sol::objec
     {
         static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_SCHEDULOR>(m_PBaseEntity, PTarget, command);
     }
-    else
+    else if (m_PBaseEntity->loc.zone)
     {
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(m_PBaseEntity, PTarget, command));
     }
@@ -1863,7 +1871,10 @@ void CLuaBaseEntity::facePlayer(CLuaBaseEntity* PLuaBaseEntity, const sol::objec
 void CLuaBaseEntity::clearTargID()
 {
     m_PBaseEntity->m_TargID = 0;
-    m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
+    if (m_PBaseEntity->loc.zone)
+    {
+        m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
+    }
 }
 
 /************************************************************************
@@ -2189,6 +2200,11 @@ void CLuaBaseEntity::openDoor(const sol::object& seconds)
         return;
     }
 
+    if (!m_PBaseEntity->loc.zone)
+    {
+        return;
+    }
+
     if (m_PBaseEntity->animation == ANIMATION_CLOSE_DOOR)
     {
         uint32 OpenTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 7000;
@@ -2201,7 +2217,10 @@ void CLuaBaseEntity::openDoor(const sol::object& seconds)
         [](CBaseEntity* PNpc)
         {
             PNpc->animation = ANIMATION_CLOSE_DOOR;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            if (PNpc->loc.zone)
+            {
+                PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            }
         }));
         // clang-format on
     }
@@ -2220,7 +2239,10 @@ void CLuaBaseEntity::closeDoor(const sol::object& seconds)
         ShowWarning("CLuaBaseEntity::closeDoor() - Non-NPC passed to function.");
         return;
     }
-
+    if (!m_PBaseEntity->loc.zone)
+    {
+        return;
+    }
     if (m_PBaseEntity->animation == ANIMATION_OPEN_DOOR)
     {
         uint32 CloseTime         = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 7000;
@@ -2231,7 +2253,10 @@ void CLuaBaseEntity::closeDoor(const sol::object& seconds)
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(CloseTime), false, [](CBaseEntity* PNpc)
         {
             PNpc->animation = ANIMATION_OPEN_DOOR;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            if (PNpc->loc.zone)
+            {
+                PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            }
         }));
         // clang-format on
     }
@@ -2277,7 +2302,14 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     elevator.movetime = xi::vanadiel_clock::minutes(3);
     elevator.interval = xi::vanadiel_clock::minutes(8);
 
-    elevator.zoneID = m_PBaseEntity->loc.zone->GetID();
+    if (m_PBaseEntity->loc.zone)
+    {
+        elevator.zoneID = m_PBaseEntity->loc.zone->GetID();
+    }
+    else
+    {
+        ShowError("setElevator failed! Entity does not have loc.zone assigned!");
+    }
 
     CTransportHandler::getInstance()->insertElevator(elevator);
 }
@@ -2334,6 +2366,11 @@ void CLuaBaseEntity::showNPC(const sol::object& seconds)
         return;
     }
 
+    if (!m_PBaseEntity->loc.zone)
+    {
+        return;
+    }
+
     uint32 showTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
     m_PBaseEntity->status = STATUS_TYPE::NORMAL;
@@ -2343,7 +2380,10 @@ void CLuaBaseEntity::showNPC(const sol::object& seconds)
     m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc)
     {
         PNpc->status = STATUS_TYPE::DISAPPEAR;
-        PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE);
+        if (PNpc->loc.zone)
+        {
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE);
+        }
     }));
     // clang-format on
 }
@@ -2363,6 +2403,11 @@ void CLuaBaseEntity::hideNPC(const sol::object& seconds)
         return;
     }
 
+    if (!m_PBaseEntity->loc.zone)
+    {
+        return;
+    }
+
     if (m_PBaseEntity->status == STATUS_TYPE::NORMAL)
     {
         uint32 hideTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
@@ -2374,7 +2419,10 @@ void CLuaBaseEntity::hideNPC(const sol::object& seconds)
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
         {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            if (PNpc->loc.zone)
+            {
+                PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            }
         }));
         // clang-format on
     }
@@ -2403,7 +2451,10 @@ void CLuaBaseEntity::updateNPCHideTime(const sol::object& seconds)
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
         {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            if (PNpc->loc.zone)
+            {
+                PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+            }
         }));
         // clang-format on
     }
@@ -2589,17 +2640,17 @@ void CLuaBaseEntity::leaveGame()
 /************************************************************************
  *  Function: sendEmote()
  *  Purpose : Makes a player or NPC entity emit an emote.
- *  Example : npc:sendEmote(npc2, xi.emote.HURRAY, xi.emoteMode.MOTION)
+ *  Example : npc:sendEmote(npc2, xi.emote.HURRAY, xi.emoteMode.MOTION, false)
  *  Notes   : Target is optional.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode) const
+void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const
 {
     const auto* PTarget   = target ? target->GetBaseEntity() : nullptr;
     const auto  emoteID   = static_cast<Emote>(emID);
     const auto  emoteMode = static_cast<EmoteMode>(emMode);
 
-    if (auto* PEntity = dynamic_cast<CNpcEntity*>(m_PBaseEntity))
+    if (auto* PEntity = dynamic_cast<CNpcEntity*>(m_PBaseEntity); PEntity && PEntity->loc.zone)
     {
         auto targetId     = PTarget ? PTarget->id : PEntity->id;
         auto targetTargId = PTarget ? PTarget->targid : PEntity->targid;
@@ -2610,12 +2661,13 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
         return;
     }
 
-    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity); PChar && PChar->loc.zone)
     {
         auto targetId     = PTarget ? PTarget->id : PChar->id;
         auto targetTargId = PTarget ? PTarget->targid : PChar->targid;
+        auto messageArea  = othersOnly ? CHAR_INRANGE : CHAR_INRANGE_SELF; // Everyone around the player or everyone around the player and the player
         PChar->loc.zone->PushPacket(PChar,
-                                    CHAR_INRANGE_SELF,
+                                    messageArea,
                                     std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
 
         return;
@@ -2895,6 +2947,13 @@ uint8 CLuaBaseEntity::getCurrentRegion()
 
 uint8 CLuaBaseEntity::getContinentID()
 {
+    if (!m_PBaseEntity->loc.zone)
+    {
+        ShowError("Attempting to get Continent ID when entity's zone is null.");
+
+        return 255;
+    }
+
     return static_cast<uint8>(m_PBaseEntity->loc.zone->GetContinentID());
 }
 
@@ -3015,7 +3074,10 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, const s
         PNpc->SetLocalVar("TransportTimestamp", earth_time::vanadiel_timestamp());
     }
 
-    PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT, true);
+    if (PNpc->loc.zone)
+    {
+        PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT, true);
+    }
 }
 
 // Sends an arbitrary entity update to a specific player only
@@ -3179,7 +3241,10 @@ void CLuaBaseEntity::positionSpecial(std::map<std::string, float> pos, POSMODE m
         static_cast<uint8>(pos["rot"]),
     };
 
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(m_PBaseEntity, newPos, mode));
+    if (m_PBaseEntity->loc.zone)
+    {
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(m_PBaseEntity, newPos, mode));
+    }
 }
 
 /************************************************************************
@@ -3341,8 +3406,11 @@ void CLuaBaseEntity::teleport(std::map<std::string, float> pos, const sol::objec
         newPos.rotation                = worldAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
     }
 
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(m_PBaseEntity, newPos));
-    m_PBaseEntity->updatemask |= UPDATE_POS;
+    if (m_PBaseEntity->loc.zone)
+    {
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(m_PBaseEntity, newPos));
+        m_PBaseEntity->updatemask |= UPDATE_POS;
+    }
 }
 
 /************************************************************************
@@ -5924,7 +5992,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub, const sol::object& send
                 PChar->pushPacket<CCharStatusPacket>(PChar);
             }
         }
-        else if (sendPacket)
+        else if (sendPacket && m_PBaseEntity->loc.zone)
         {
             m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
         }
@@ -6489,7 +6557,7 @@ void CLuaBaseEntity::setBaseSpeed(uint8 speedVal)
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
             PChar->pushPacket<CCharStatusPacket>(PChar);
         }
-        else
+        else if (m_PBaseEntity->loc.zone)
         {
             m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
         }
@@ -6516,7 +6584,7 @@ void CLuaBaseEntity::setAnimationSpeed(uint8 speedVal)
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
             PChar->pushPacket<CCharStatusPacket>(PChar);
         }
-        else
+        else if (m_PBaseEntity->loc.zone)
         {
             m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
         }
@@ -11683,7 +11751,10 @@ void CLuaBaseEntity::disableLevelSync()
         }
     }
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
+    if (PChar->loc.zone)
+    {
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
+    }
 }
 
 /************************************************************************
@@ -12011,6 +12082,12 @@ auto CLuaBaseEntity::registerBattlefield(const sol::object& arg0, const sol::obj
 
 auto CLuaBaseEntity::battlefieldAtCapacity(const int battlefieldID) const -> bool
 {
+    if (!m_PBaseEntity->loc.zone)
+    {
+        ShowError("battlefieldAtCapacity: loc.zone was null for %s", m_PBaseEntity->getName());
+        return true;
+    }
+
     if (m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("m_BattlefieldHandler was null for %s.", m_PBaseEntity->getName());
@@ -12050,6 +12127,12 @@ auto CLuaBaseEntity::battlefieldAtCapacity(const int battlefieldID) const -> boo
 
 auto CLuaBaseEntity::enterBattlefield(const sol::object& area) const -> bool
 {
+    if (m_PBaseEntity->loc.zone == nullptr)
+    {
+        ShowError("CLuaBaseEntity::enterBattlefield() - loc.zone was null for %s", m_PBaseEntity->getName());
+        return false;
+    }
+
     if (m_PBaseEntity->objtype != TYPE_PC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("CLuaBaseEntity::enterBattlefield() - Non-PC calling function, or Battlefield Handler is null.");
@@ -12078,6 +12161,12 @@ auto CLuaBaseEntity::enterBattlefield(const sol::object& area) const -> bool
 
 auto CLuaBaseEntity::leaveBattlefield(const uint8 leavecode) const -> bool
 {
+    if (m_PBaseEntity->loc.zone == nullptr)
+    {
+        ShowError("CLuaBaseEntity::leaveBattlefield() - loc.zone was null for %s", m_PBaseEntity->getName());
+        return false;
+    }
+
     if (m_PBaseEntity->objtype == TYPE_NPC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("CLuaBaseEntity::leaveBattlefield() - NPC calling function, or Battlefield Handler is null.");
@@ -12505,7 +12594,10 @@ void CLuaBaseEntity::enableEntities(const sol::object& obj)
  ************************************************************************/
 void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MAGICSCHEDULOR>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, static_cast<GP_SERV_COMMAND_MAGICSCHEDULOR_TYPE>(mode)));
+    if (m_PBaseEntity->loc.zone)
+    {
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MAGICSCHEDULOR>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, static_cast<GP_SERV_COMMAND_MAGICSCHEDULOR_TYPE>(mode)));
+    }
 }
 
 /************************************************************************
@@ -13539,13 +13631,17 @@ void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
 }
 
 /************************************************************************
- *  Function: addStatusEffect(effect, power, tick, duration, subtype, subpower, tier, sourceType, sourceTypeParam, originID)
- *  Purpose : Adds a specified Status Effect to the Entity
- *  Example : target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 3, 60)
+ *  Function: addStatusEffect(effectId, params)
+ *  Purpose : Adds a Status Effect
+ *  Example : target:addStatusEffect(xi.effect.ACCURACY_DOWN, {
+ *                power    = 20,
+ *                tick     = 3,
+ *                duration = 60,
+ *                origin   = caster,
+ *            })
  *  Notes   :
  ************************************************************************/
-
-bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
+auto CLuaBaseEntity::addStatusEffect(const EFFECT effectId, sol::table params) const -> bool
 {
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
@@ -13553,127 +13649,91 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         return false;
     }
 
-    if (va[0].is<CLuaStatusEffect>())
-    {
-        auto PStatusEffect = va[0].as<CLuaStatusEffect>();
-        return PBattleEntity->StatusEffectContainer->AddStatusEffect(new CStatusEffect(*PStatusEffect.GetStatusEffect()));
-    }
-    else
-    {
-        if (va.size() < 4)
-        {
-            return false;
-        }
+    // Required parameters
+    auto originEntity = params["origin"].get<CLuaBaseEntity>();
 
-        // Mandatory
-        auto effectID   = va[0].as<EFFECT>();                      // The same
-        auto effectIcon = va[0].as<uint16>();                      // The same
-        auto power      = static_cast<uint16>(va[1].as<double>()); // Can come in as a lua_number, capture as double and truncate
-        auto tick       = static_cast<uint32>(va[2].as<double>());
-        auto duration   = va[3].as<double>();
+    // Optional parameters
+    const auto duration        = params["duration"].get_or(0.0);
+    const auto power           = static_cast<uint16>(params["power"].get_or(0.0));
+    const auto tick            = static_cast<uint32>(params["tick"].get_or(0.0));
+    const auto icon            = params["icon"].get_or(static_cast<uint16>(effectId));
+    const auto subType         = params["subType"].get_or(0u);
+    const auto subPower        = static_cast<uint16>(params["subPower"].get_or(0.0));
+    const auto tier            = params["tier"].get_or<uint16>(0);
+    const auto flag            = params["flag"].get_or(0u);
+    const auto sourceType      = params["sourceType"].get_or<uint16>(0);
+    const auto sourceTypeParam = params["sourceTypeParam"].get_or(0u);
+    const auto silent          = params["silent"].get_or(false);
 
-        // Optional
-        auto subType         = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
-        auto subPower        = va[5].is<double>() ? static_cast<uint16>(va[5].as<double>()) : 0;
-        auto tier            = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
-        auto sourceType      = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
-        auto sourceTypeParam = va[8].is<uint32>() ? va[8].as<uint32>() : 0;
-        auto originID        = va[9].is<uint32>() ? va[9].as<uint32>() : 0;
-
-        CStatusEffect* PEffect = new CStatusEffect(effectID,
-                                                   effectIcon,
-                                                   power,
-                                                   std::chrono::seconds(tick),
-                                                   std::chrono::milliseconds(static_cast<uint64_t>(duration * 1000)),
-                                                   subType,
-                                                   subPower,
-                                                   tier);
-
-        if (sourceType != EffectSourceType::SOURCE_NONE && sourceTypeParam > 0)
-        {
-            PEffect->SetSource(sourceType, sourceTypeParam);
-        }
-
-        // Set the originID. This is the original source of the effect(Usually an entity)
-        PEffect->SetOriginID(originID);
-
-        if (PEffect->GetStatusID() == EFFECT_FOOD)
-        {
-            int16 durationModifier = PBattleEntity->getMod(Mod::FOOD_DURATION);
-            if (durationModifier)
-            {
-                PEffect->SetDuration(PEffect->GetDuration() + std::chrono::floor<std::chrono::milliseconds>(PEffect->GetDuration() * (durationModifier / 100.0f)));
-            }
-        }
-
-        return PBattleEntity->StatusEffectContainer->AddStatusEffect(PEffect);
-    }
-}
-
-/************************************************************************
- *  Function: addStatusEffectEx()
- *  Purpose : Adds an instance (or 'battle') Status Effect to the Entity
- *  Example : target:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, 900, true)
- *  Notes   : For instance, Chocobo status, Fireflights, Teleport
- ************************************************************************/
-
-auto CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va) -> bool
-{
-    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    if (!PBattleEntity)
-    {
-        return false;
-    }
-
-    if (va.size() < 5)
-    {
-        return false;
-    }
-
-    bool silent = false;
-    if (va[va.size() - 1].is<bool>()) // Is last argument a bool?
-    {
-        silent = va[va.size() - 1].as<bool>();
-    }
-
-    // Mandatory
-    auto effectID   = va[0].as<EFFECT>();
-    auto effectIcon = va[1].as<uint16>();
-    auto power      = static_cast<uint16>(va[2].as<double>()); // Can come in as a lua_number, capture as double and truncate
-    auto tick       = static_cast<uint32>(va[3].as<double>());
-    auto duration   = va[4].as<double>();
-
-    // Optional
-    auto subType         = va[5].is<uint32>() ? va[5].as<uint32>() : 0;
-    auto subPower        = va[6].is<double>() ? static_cast<uint16>(va[6].as<double>()) : 0;
-    auto tier            = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
-    auto effectFlag      = va[8].is<uint32>() ? va[8].as<uint32>() : 0;
-    auto sourceType      = va[9].is<uint16>() ? va[9].as<uint16>() : 0;
-    auto sourceTypeParam = va[10].is<uint32>() ? va[10].as<uint32>() : 0;
-    auto originID        = va[11].is<uint32>() ? va[11].as<uint32>() : 0;
-
-    CStatusEffect* PEffect =
-        new CStatusEffect(effectID,
-                          effectIcon,
-                          power,
-                          std::chrono::seconds(tick),
-                          std::chrono::milliseconds(static_cast<uint64_t>(duration * 1000)),
-                          subType,
-                          subPower,
-                          tier,
-                          effectFlag); // Effect Flag (i.e in lua xi.effectFlag.AURA will make this an aura effect)
-
-    auto addNotice = silent ? EffectNotice::Silent : EffectNotice::ShowMessage;
+    auto* PEffect = new CStatusEffect(
+        effectId,
+        icon,
+        power,
+        std::chrono::seconds(tick),
+        std::chrono::milliseconds(static_cast<uint64>(duration * 1000)),
+        subType,
+        subPower,
+        tier,
+        flag);
 
     if (sourceType != EffectSourceType::SOURCE_NONE && sourceTypeParam > 0)
     {
         PEffect->SetSource(sourceType, sourceTypeParam);
     }
 
-    // Set the originID. This is the original source of the effect(Usually an entity)
-    PEffect->SetOriginID(originID);
+    PEffect->SetOriginID(originEntity.getID());
 
-    return ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, addNotice);
+    if (effectId == EFFECT_FOOD)
+    {
+        if (const auto durationModifier = PBattleEntity->getMod(Mod::FOOD_DURATION))
+        {
+            PEffect->SetDuration(PEffect->GetDuration() + std::chrono::floor<std::chrono::milliseconds>(PEffect->GetDuration() * (durationModifier / 100.0f)));
+        }
+    }
+
+    return PBattleEntity->StatusEffectContainer->AddStatusEffect(PEffect, silent ? EffectNotice::Silent : EffectNotice::ShowMessage);
+}
+
+/************************************************************************
+ *  Function: copyStatusEffect(effect)
+ *  Purpose : Copies a Status Effect to this entity
+ *  Example : target:getPet():copyStatusEffect(effect)
+ *  Notes   :
+ ************************************************************************/
+auto CLuaBaseEntity::copyStatusEffect(const CLuaStatusEffect* PStatusEffect) const -> bool
+{
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity || !PStatusEffect)
+    {
+        return false;
+    }
+
+    auto* POriginal = PStatusEffect->GetStatusEffect();
+
+    // Calculate remaining duration
+    auto remainingDuration = 0s;
+    if (POriginal->GetDuration() > 0s)
+    {
+        const auto duration = POriginal->GetStartTime() - timer::now() + POriginal->GetDuration();
+        remainingDuration   = std::chrono::duration_cast<std::chrono::seconds>(duration);
+        remainingDuration   = std::max(remainingDuration, 0s);
+    }
+
+    auto* PNewEffect = new CStatusEffect(
+        POriginal->GetStatusID(),
+        POriginal->GetIcon(),
+        POriginal->GetPower(),
+        POriginal->GetTickTime(),
+        remainingDuration,
+        POriginal->GetSubID(),
+        POriginal->GetSubPower(),
+        POriginal->GetTier(),
+        POriginal->GetEffectFlags(),
+        POriginal->GetSourceType(),
+        POriginal->GetSourceTypeParam(),
+        POriginal->GetOriginID());
+
+    return PBattleEntity->StatusEffectContainer->AddStatusEffect(PNewEffect);
 }
 
 /************************************************************************
@@ -17415,7 +17475,7 @@ void CLuaBaseEntity::setSpawn(float x, float y, float z, const sol::object& rot)
  *  Notes   : Used in mobs.lua...and directly in Charybdis
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getRespawnTime()
+auto CLuaBaseEntity::getRespawnTime() const -> uint32
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
@@ -17423,11 +17483,12 @@ uint32 CLuaBaseEntity::getRespawnTime()
         return 0;
     }
 
-    CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
-
-    if (PMob->m_AllowRespawn)
+    if (auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity); PMob->loc.zone)
     {
-        return static_cast<uint32>(timer::count_seconds(PMob->m_RespawnTime));
+        if (const auto remaining = PMob->loc.zone->spawnHandler()->getRemainingRespawnTime(PMob))
+        {
+            return static_cast<uint32>(timer::count_seconds(*remaining));
+        }
     }
 
     return 0;
@@ -17437,13 +17498,7 @@ uint32 CLuaBaseEntity::getRespawnTime()
  *  Function: setRespawnTime()
  *  Purpose : Setting the respawn time for a Mob
  *  Example : mob:setRespawnTime(math.random(3600, 7200))
- *  Notes   : Haven't seen the second argument option being used
- *
- * Note: Removed optional (and unused) parameter 2:
- *      if (!lua_isnil(L, 2) && lua_isboolean(L, 2) && lua_toboolean(L, 2))
-        { // set optional parameter to true to only modify the timer
-            return 0;
-        }
+ *  Notes   : 0 disables respawn.
  ************************************************************************/
 
 void CLuaBaseEntity::setRespawnTime(const uint32 seconds) const
@@ -17455,6 +17510,18 @@ void CLuaBaseEntity::setRespawnTime(const uint32 seconds) const
     }
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+    if (seconds == 0)
+    {
+        PMob->m_RespawnTime  = 0s;
+        PMob->m_AllowRespawn = false;
+
+        if (PMob->loc.zone != nullptr)
+        {
+            PMob->loc.zone->spawnHandler()->unregister(PMob);
+        }
+
+        return;
+    }
 
     PMob->m_RespawnTime  = std::chrono::seconds(seconds);
     PMob->m_AllowRespawn = true;
@@ -18654,7 +18721,10 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
                 },
             };
 
-            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE2>(Action));
+            if (PTarget->loc.zone)
+            {
+                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE2>(Action));
+            }
         }
     }
 }
@@ -20153,7 +20223,7 @@ void CLuaBaseEntity::Register()
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
-    SOL_REGISTER("addStatusEffectEx", CLuaBaseEntity::addStatusEffectEx);
+    SOL_REGISTER("copyStatusEffect", CLuaBaseEntity::copyStatusEffect);
     SOL_REGISTER("getStatusEffect", CLuaBaseEntity::getStatusEffect);
     SOL_REGISTER("getStatusEffectBySource", CLuaBaseEntity::getStatusEffectBySource);
     SOL_REGISTER("getStatusEffects", CLuaBaseEntity::getStatusEffects);

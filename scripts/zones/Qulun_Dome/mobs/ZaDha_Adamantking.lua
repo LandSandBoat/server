@@ -11,20 +11,20 @@ local entity = {}
 
 entity.spawnPoints =
 {
-    { x =  281.000, y =  43.000, z =  96.000 }
+    { x = 281.000, y = 43.000, z = 96.000 }
 }
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 11)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 8)
     mob:setMod(xi.mod.SLOW_RES_RANK, 8)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
-end
-
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -36,7 +36,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.ADAMANTKING_USURPER)
+    if player then
+        player:addTitle(xi.title.ADAMANTKING_USURPER)
+    end
+
     if optParams.isKiller then
         mob:showText(mob, ID.text.QUADAV_KING_DEATH)
     end

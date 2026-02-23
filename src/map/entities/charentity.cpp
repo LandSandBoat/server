@@ -799,6 +799,11 @@ auto CCharEntity::inMogHouse() const -> bool
     return m_moghouseID != 0;
 }
 
+auto CCharEntity::gmCallContainer() -> GMCallContainer&
+{
+    return gmCallContainer_;
+}
+
 int8 CCharEntity::getShieldSize()
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);
@@ -2007,11 +2012,25 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  hitOccured   = false; // track if player hit mob at all
     bool  wasCritical  = false; // track if any hit was critical
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
+    bool  isSange      = StatusEffectContainer->HasStatusEffect(EFFECT_SANGE) && getMod(Mod::SANGE_MULTI_HIT) > 0; // Pre-SoA Sange logic check, applied in SoA module
 
     // if barrage is detected, getBarrageShotCount also checks for ammo count
     if (!ammoThrowing && !rangedThrowing && isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
+    }
+    else if (ammoThrowing && isSange)
+    {
+        uint8 shadows = static_cast<uint8>(getMod(Mod::UTSUSEMI));
+        StatusEffectContainer->DelStatusEffect(EFFECT_COPY_IMAGE);
+
+        hitCount += shadows;
+
+        // Clamp to available ammo
+        if (PAmmo && PAmmo->getQuantity() < hitCount)
+        {
+            hitCount = PAmmo->getQuantity();
+        }
     }
     else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBLE_SHOT) && xirand::GetRandomNumber(100) < (40 + this->getMod(Mod::DOUBLE_SHOT_RATE)))
     {
@@ -2086,12 +2105,16 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             // Never consume ammo with Unlimited Shot active
             recycleChance = 100;
-            // Only remove unlimited shot on hit
-            if (hitOccured)
+            // Remove unlimited shot unless retained on miss via RETAIN_UNLIMITED_SHOT mod
+            if (hitOccured || this->getMod(Mod::RETAIN_UNLIMITED_SHOT) <= 0)
             {
                 StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
             }
         }
+
+        // Flashy Shot / Stealth Shot: Consumed after the next ranged attack
+        StatusEffectContainer->DelStatusEffect(EFFECT_FLASHY_SHOT);
+        StatusEffectContainer->DelStatusEffect(EFFECT_STEALTH_SHOT);
 
         if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
         {
@@ -2138,8 +2161,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             }
         }
 
-        // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
-        if (actionResult.resolution != ActionResolution::Hit && StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE))
+        // any misses with barrage/sange cause remaining shots to miss, meaning we must check Action.reaction
+        if (actionResult.resolution != ActionResolution::Hit && (isBarrage || isSange))
         {
             actionResult.resolution = ActionResolution::Hit;
         }
@@ -2187,17 +2210,35 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         actionResult.param      = shadowsTaken;
     }
 
-    // remove barrage effect if present
-    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0))
+    // Barrage/Sange: override message to display as ability
+    if (isBarrage || isSange)
     {
-        StatusEffectContainer->DelStatusEffect(EFFECT_BARRAGE, 0);
+        if (hitOccured)
+        {
+            actionResult.messageID = isSange ? MsgBasic::USES_SANGE_TAKES_DAMAGE : MsgBasic::USES_BARRAGE_TAKES_DAMAGE;
+        }
+        else if (shadowsTaken == 0)
+        {
+            actionResult.messageID = MsgBasic::ABILITY_MISSES;
+        }
+    }
+
+    // Remove barrage/sange effects after firing
+    if (isBarrage)
+    {
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_BARRAGE);
+    }
+
+    if (isSange)
+    {
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_SANGE);
     }
 
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
 
     // Handle Camouflage effects
-    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
+    if (getMod(Mod::RETAIN_CAMOUFLAGE) > 0)
     {
         int16 retainChance     = 40; // Estimate base ~40% chance to keep Camouflage on a ranged attack
         uint8 rotAllowance     = 25; // Allow for some slight variance in direction faced to be "behind" or "beside" the mob

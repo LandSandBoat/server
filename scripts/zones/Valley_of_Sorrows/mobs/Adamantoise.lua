@@ -67,21 +67,28 @@ entity.spawnPoints =
     { x = -24.813, y = -0.148, z = -14.807 }
 }
 
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 1800) -- 30 minutes
+entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:setMod(xi.mod.DMGMAGIC, -3500)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 36) -- 108 total weapon damage
-    mob:setMod(xi.mod.DEF, 4112)
-    mob:setMod(xi.mod.ATT, 450)
+end
 
+entity.onMobSpawn = function(mob)
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
+
+    mob:setMod(xi.mod.DEF, 4112)
+    mob:setMod(xi.mod.ATT, 450)
+    mob:setMod(xi.mod.DMGMAGIC, -3500)
+
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 36) -- 108 total weapon damage
+
+    mob:setLocalVar('[rage]timer', 1800) -- 30 minutes
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.TORTOISE_TORTURER)
+    if player then
+        player:addTitle(xi.title.TORTOISE_TORTURER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

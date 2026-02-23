@@ -66,6 +66,7 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
@@ -73,7 +74,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 8)
     mob:setMod(xi.mod.SLOW_RES_RANK, 8)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
-    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -93,7 +93,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.DEITY_DEBUNKER)
+    if player then
+        player:addTitle(xi.title.DEITY_DEBUNKER)
+    end
+
     if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.YAGUDO_KING_DEATH)
     end

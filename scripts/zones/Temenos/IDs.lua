@@ -16,7 +16,7 @@ zones[xi.zone.TEMENOS] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CHIP_TRADE_T                  = 7031, -- What do you wish to do? Show me the cutscene again. Skip the cutscene and continue.
-        CONQUEST_BASE                 = 7068, -- Tallying conquest results...
+        CONQUEST_BASE                 = 7069, -- Tallying conquest results...
     },
     mob =
     {

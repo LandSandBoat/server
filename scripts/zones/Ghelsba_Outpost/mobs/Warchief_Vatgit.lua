@@ -7,7 +7,9 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.WARCHIEF_WRECKER)
+    if player then
+        player:addTitle(xi.title.WARCHIEF_WRECKER)
+    end
 end
 
 return entity

@@ -209,7 +209,7 @@ local function calculateNukeWallFactor(target, spellElement, finalDamage)
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect without messages.
-    target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
+    target:addStatusEffect(xi.effect.NUKE_WALL, { power = finalPotency, duration = 5, origin = target, icon = 0, subPower = spellElement })
 
     -----------------------------------
     -- We return JUST the factor based on previous nuke. This nuke only affects the next one.
@@ -421,7 +421,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
         caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
@@ -478,7 +478,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
-    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement))
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
         caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
@@ -566,7 +566,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local additionalResistTier        = xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement)
     local elementalSDT                = xi.combat.damage.magicalElementSDT(target, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, false)
-    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, xi.skill.BLUE_MAGIC, spellElement)
+    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, xi.skill.BLUE_MAGIC, spellElement, 0)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(xi.skill.BLUE_MAGIC)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, xi.skill.BLUE_MAGIC)
     local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, xi.skill.BLUE_MAGIC)
@@ -738,7 +738,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
         return effect
     end
 
-    if target:addStatusEffect(effect, params.power, params.tick, math.floor(params.duration * resist)) then
+    if target:addStatusEffect(effect, { power = params.power, duration = math.floor(params.duration * resist), origin = caster, tick = params.tick }) then
         -- Add "Magic Burst!" message
         local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
 
@@ -813,7 +813,7 @@ xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effe
             not xi.data.statusEffect.isTargetResistant(caster, target, effect) and -- Target didn't trigger a job trait resistance.
             not xi.data.statusEffect.isEffectNullified(target, effect, 0)          -- Target doesn't have an status effect that nullifies current. TODO: Tier.
         then
-            target:addStatusEffect(effect, power, tick, math.floor(duration * resist))
+            target:addStatusEffect(effect, { power = power, duration = math.floor(duration * resist), origin = caster, tick = tick })
         end
     end
 end

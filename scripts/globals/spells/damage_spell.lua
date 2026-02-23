@@ -588,10 +588,10 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellElement, alwaysA
 end
 
 -- Magic Attack Bonus VS Magic Defense Bonus
-xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, skillType, spellElement)
+xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, skillType, spellElement, bonusMATT)
     local magicBonusDiff = 1 -- The variable we want to calculate
     local casterJob      = caster:getMainJob()
-    local mab            = caster:getMod(xi.mod.MATT) + cardinalChantBonus(caster, target, xi.direction.EAST, spellId, skillType)
+    local mab            = caster:getMod(xi.mod.MATT) + cardinalChantBonus(caster, target, xi.direction.EAST, spellId, skillType) + bonusMATT
     local mabCritChance  = caster:getMod(xi.mod.MAGIC_CRITHITRATE) + cardinalChantBonus(caster, target, xi.direction.NORTH, spellId, skillType)
     local mDefBarBonus   = 0
 
@@ -1051,7 +1051,7 @@ local function calculateNukeWallFactor(target, spellElement, finalDamage)
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect without messages.
-    target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
+    target:addStatusEffect(xi.effect.NUKE_WALL, { power = finalPotency, duration = 5, origin = target, icon = 0, subPower = spellElement })
 
     -----------------------------------
     -- We return JUST the factor based on previous nuke. This nuke only affects the next one.
@@ -1130,7 +1130,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local additionalResistTier      = xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement)
     local sdt                       = xi.combat.damage.magicalElementSDT(target, spellElement)
     local dayAndWeather             = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeatherBonus)
-    local magicBonusDiff            = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
+    local magicBonusDiff            = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0)
     local criticalDamageMultiplier  = xi.spells.damage.calculateMagicCriticalMultiplier(caster)
     local divineSealMultiplier      = xi.spells.damage.calculateDivineSealMultiplier(caster, target, skillType)
     local divineEmblemMultiplier    = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)

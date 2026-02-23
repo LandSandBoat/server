@@ -17,10 +17,10 @@ zones[xi.zone.RALA_WATERWAYS] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED                = 7008, -- You have obtained <number> bayld!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        NOTHING_HAPPENS               = 8083, -- Nothing happens.
-        PERHAPS_THE_WISEST            = 8084, -- Perhaps the wisest approach would be to search for <keyitem> with which to open the decrepit sluice gate.
-        A_QUICK_GLANCE_REVEALS        = 8706, -- A quick glance reveals spoiled water trickling from upstream, likely caused by effluvium from the recent destruction.
-        THREE_BLOOD_SIGILS_PULSE      = 8930, -- The three blood sigils begin to pulse a violent crimson!
+        NOTHING_HAPPENS               = 8084, -- Nothing happens.
+        PERHAPS_THE_WISEST            = 8085, -- Perhaps the wisest approach would be to search for <keyitem> with which to open the decrepit sluice gate.
+        A_QUICK_GLANCE_REVEALS        = 8707, -- A quick glance reveals spoiled water trickling from upstream, likely caused by effluvium from the recent destruction.
+        THREE_BLOOD_SIGILS_PULSE      = 8931, -- The three blood sigils begin to pulse a violent crimson!
     },
     mob =
     {

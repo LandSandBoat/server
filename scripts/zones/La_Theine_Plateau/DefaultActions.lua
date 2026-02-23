@@ -1,6 +1,7 @@
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 
 return {
+    ['qm3']                 = { messageSpecial = ID.text.STRANGE_ENERGY },
     ['Augevinne']           = { text = ID.text.RESCUE_DRILL + 33 },
     ['Cermet_Headstone']    = { messageSpecial = ID.text.CANNOT_REMOVE_FRAG },
     ['Chocobo_Tracks']      = { messageSpecial = ID.text.CHOCOBO_TRACKS },

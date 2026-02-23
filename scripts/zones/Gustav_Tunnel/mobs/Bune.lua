@@ -76,6 +76,21 @@ entity.onMobSpawn = function(mob)
     mob:setMaxMP(0)
 end
 
+entity.onMobFight = function(mob, target)
+    local drawInTable =
+    {
+        conditions =
+        {
+            target:checkDistance(mob) > mob:getMeleeRange(target),
+        },
+        position = mob:getPos(),
+        offset = 3,
+        degrees = 90,
+        wait = 10,
+    }
+    utils.drawIn(target, drawInTable)
+end
+
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hours

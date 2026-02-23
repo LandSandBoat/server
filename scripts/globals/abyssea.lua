@@ -689,7 +689,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, 
 
         if enhanceData[2] <= cruorTotal then
             for _, v in ipairs(enhanceData[1]) do
-                player:addStatusEffectEx(v[1], v[2], v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5], 0, 0)
+                player:addStatusEffect(v[1], { power = v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5], origin = player, icon = v[2] })
 
                 if v[1] == xi.effect.ABYSSEA_HP then
                     player:addHP(v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
@@ -866,7 +866,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             end
 
             mob:weaknessTrigger(2)
-            mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+            mob:addStatusEffect(xi.effect.TERROR, { duration = 30, origin = player })
         elseif triggerType == xi.abyssea.triggerType.YELLOW then
             if mob:getLocalVar('[AbysseaYellowProc]') == 0 then
                 mob:setLocalVar('[AbysseaYellowProc]', 1)
@@ -875,7 +875,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             end
 
             mob:weaknessTrigger(1)
-            mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+            mob:addStatusEffect(xi.effect.TERROR, { duration = 30, origin = player })
         elseif triggerType == xi.abyssea.triggerType.BLUE then
             if mob:getLocalVar('[AbysseaBlueProc]') == 0 then
                 mob:setLocalVar('[AbysseaBlueProc]', 1)
@@ -884,7 +884,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             end
 
             mob:weaknessTrigger(0)
-            mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+            mob:addStatusEffect(xi.effect.TERROR, { duration = 30, origin = player })
         end
     end
 end
@@ -1154,7 +1154,7 @@ end
 xi.abyssea.onZoneIn = function(player)
     -- If the player is a GM, and has GM toggled active, give them permanent visitant status.
     if player:getGMLevel() > 0 and player:getVisibleGMLevel() >= 3 then
-        player:addStatusEffectEx(xi.effect.VISITANT, xi.effect.VISITANT, 0, 0, 0)
+        player:addStatusEffect(xi.effect.VISITANT, { origin = player })
     end
 end
 
@@ -1174,7 +1174,7 @@ xi.abyssea.afterZoneIn = function(player)
     -- the countdown timer for visitant status reach 0 before actually running out of time on
     -- the effect.
     if not player:hasStatusEffect(xi.effect.VISITANT) then
-        player:addStatusEffectEx(xi.effect.VISITANT, 0, 0, 3, 304)
+        player:addStatusEffect(xi.effect.VISITANT, { duration = 304, origin = player, tick = 3, icon = 0 })
     end
 
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
@@ -1232,6 +1232,85 @@ end
 
 xi.abyssea.onWardTriggerAreaEnter = function(player)
     player:setLocalVar('tetherTimer', 0)
+end
+
+-----------------------------------
+-- Abyssea Cavernous Maw Entrance Functions
+-- TODO: Use retail capture data for more precise entrance coords
+-----------------------------------
+local abysseaEntranceMawData =
+{
+    [xi.zone.LA_THEINE_PLATEAU]   = { warpCsid = 218, dest = { -480,   0,  794,  62, xi.zone.ABYSSEA_LA_THEINE  } },
+    [xi.zone.KONSCHTAT_HIGHLANDS] = { warpCsid = 107, dest = {  153, -72, -840, 140, xi.zone.ABYSSEA_KONSCHTAT  } },
+    [xi.zone.TAHRONGI_CANYON]     = { warpCsid = 100, dest = {  -24,  44, -678, 240, xi.zone.ABYSSEA_TAHRONGI   } },
+    [xi.zone.JUGNER_FOREST]       = { warpCsid =  47, dest = { -351, -46,  699,  10, xi.zone.ABYSSEA_VUNKERL    } },
+    [xi.zone.VALKURM_DUNES]       = { warpCsid =  55, dest = {  670, -15,  318, 119, xi.zone.ABYSSEA_MISAREAUX  } },
+    [xi.zone.BUBURIMU_PENINSULA]  = { warpCsid =  61, dest = { -140,  20, -181, 131, xi.zone.ABYSSEA_ATTOHWA    } },
+    [xi.zone.SOUTH_GUSTABERG]     = { warpCsid = 914, dest = {  432,   0,  321, 125, xi.zone.ABYSSEA_ALTEPA     } },
+    [xi.zone.XARCABARD]           = { warpCsid = 204, dest = { -240, -40, -520, 251, xi.zone.ABYSSEA_ULEGUERAND } },
+    [xi.zone.NORTH_GUSTABERG]     = { warpCsid = 908, dest = { -555,  31, -760,   0, xi.zone.ABYSSEA_GRAUBERG   } },
+}
+
+xi.abyssea.entranceMawOnTrigger = function(player, npc)
+    local zoneId = player:getZoneID()
+    local ID = zones[zoneId]
+
+    if xi.settings.main.ENABLE_ABYSSEA == 0 then
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
+        return
+    end
+
+    if player:getMainLvl() < 30 then
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
+        return
+    end
+
+    local maw = abysseaEntranceMawData[zoneId]
+    if not maw then
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
+        return
+    end
+
+    player:startEvent(maw.warpCsid, 0, 1)
+end
+
+xi.abyssea.entranceMawOnEventFinish = function(player, csid, option, npc)
+    local maw = abysseaEntranceMawData[player:getZoneID()]
+    if maw and csid == maw.warpCsid and option == 1 then
+        player:setPos(unpack(maw.dest))
+    end
+end
+
+-----------------------------------
+-- Abyssea Cavernous Maw Exit Functions
+-- TODO: Use retail capture data for more precise exit coords
+-----------------------------------
+local abysseaExitMawData =
+{
+    [xi.zone.ABYSSEA_LA_THEINE         ] = { exitCsid = 200, dest = { -561.837,   0.000,  641.772, 158, xi.zone.LA_THEINE_PLATEAU     } },
+    [xi.zone.ABYSSEA_KONSCHTAT         ] = { exitCsid = 200, dest = {       91,     -68,     -582, 237, xi.zone.KONSCHTAT_HIGHLANDS   } },
+    [xi.zone.ABYSSEA_TAHRONGI          ] = { exitCsid = 200, dest = {  -28.597,  46.166, -680.254, 192, xi.zone.TAHRONGI_CANYON       } },
+    [xi.zone.ABYSSEA_VUNKERL           ] = { exitCsid = 200, dest = {  242.979,   0.235,    8.721, 157, xi.zone.JUGNER_FOREST         } },
+    [xi.zone.ABYSSEA_MISAREAUX         ] = { exitCsid = 200, dest = {      362,   0.001,     -119,   4, xi.zone.VALKURM_DUNES         } },
+    [xi.zone.ABYSSEA_ATTOHWA           ] = { exitCsid = 200, dest = { -339.979, -23.372,   48.493,  31, xi.zone.BUBURIMU_PENINSULA    } },
+    [xi.zone.ABYSSEA_ALTEPA            ] = { exitCsid = 200, dest = {      343,       0,     -679, 199, xi.zone.SOUTH_GUSTABERG       } },
+    [xi.zone.ABYSSEA_ULEGUERAND        ] = { exitCsid = 200, dest = {      269,      -7,      -75, 192, xi.zone.XARCABARD             } },
+    [xi.zone.ABYSSEA_GRAUBERG          ] = { exitCsid = 200, dest = {  -72.890,   0.057,  600.131, 122, xi.zone.NORTH_GUSTABERG       } },
+    [xi.zone.ABYSSEA_EMPYREAL_PARADOX  ] = { exitCsid = 200, dest = {  -256.128, -20.000, 225.053, 218, xi.zone.QUFIM_ISLAND          } },
+}
+
+xi.abyssea.exitMawOnTrigger = function(player, npc)
+    local exitMaw = abysseaExitMawData[player:getZoneID()]
+    if exitMaw then
+        player:startEvent(exitMaw.exitCsid)
+    end
+end
+
+xi.abyssea.exitMawOnEventFinish = function(player, csid, option, npc)
+    local exitMaw = abysseaExitMawData[player:getZoneID()]
+    if exitMaw and csid == exitMaw.exitCsid and option == 1 then
+        player:setPos(unpack(exitMaw.dest))
+    end
 end
 
 -----------------------------------

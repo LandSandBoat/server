@@ -1,32 +1,34 @@
 -----------------------------------
---  Ill Wind
---  Description: Deals Wind damage to enemies within an area of effect. Additional effect: Dispel
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes Shadows
---  Range: Unknown radial
---  Notes: Only used by Puks in Mamook, Besieged, and the following Notorious Monsters: Vulpangue, Nis Puk, Nguruvilu, Seps , Phantom Puk and Waugyl. Dispels one xi.effect.
+-- Ill Wind
+-- Family: Puks
+-- Description: Deals Wind damage to enemies within an area of effect. Additional Effect: Dispel (1 Effect)
+-- Notes: Used by Puks in Mamook, Besieged, and the following Notorious Monsters: Vulpangue, Nis Puk, Nguruvilu, Seps , Phantom Puk and Waugyl.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 and mob:getModelId() == 1746 then
-        return 0
-    else
-        return 1
-    end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * 2.5)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3.5, 3.5, 3.5 }
+    params.element        = xi.element.WIND
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    target:dispelStatusEffect()
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        target:dispelStatusEffect()
+    end
+
+    return info.damage
 end
 
 return mobskillObject

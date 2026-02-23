@@ -78,9 +78,17 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setCarefulPathing(true)
-    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
     xi.mob.updateNMSpawnPoint(mob)
+
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
+
+    mob:setCarefulPathing(true)
     mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
@@ -103,12 +111,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 5)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 148) -- 245 total weapon damage
-    mob:addImmunity(xi.immunity.BIND)
-    mob:addImmunity(xi.immunity.BLIND)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
-    mob:addImmunity(xi.immunity.PLAGUE)
-    mob:addImmunity(xi.immunity.PETRIFY)
-    mob:addImmunity(xi.immunity.TERROR)
 end
 
 entity.onMobRoam = function(mob)

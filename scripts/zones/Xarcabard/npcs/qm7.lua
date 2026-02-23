@@ -10,16 +10,23 @@ local ID = zones[xi.zone.XARCABARD]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if
+    if player:getCharVar('unbridledPassion') == 5 then
+        player:messageSpecial(ID.text.NOTHING_MORE)
+    elseif GetMobByID(ID.mob.KOENIGSTIGER):isAlive() then
+        player:messageSpecial(ID.text.PRESENCE_IN_CAVE)
+    elseif
         player:getCharVar('unbridledPassion') == 4 and
         not GetMobByID(ID.mob.KOENIGSTIGER):isSpawned()
     then
         player:startEvent(8)
+    else
+        player:messageSpecial(ID.text.CAVERN_CONTINUES)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 8 then
+        player:messageSpecial(ID.text.MONSTER_APPEARS)
         SpawnMob(ID.mob.KOENIGSTIGER):updateClaim(player)
     end
 end

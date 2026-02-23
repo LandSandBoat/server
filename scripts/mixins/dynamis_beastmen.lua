@@ -1,8 +1,9 @@
+-----------------------------------
 -- Dynamis procs mixin
-
+-----------------------------------
 require('scripts/globals/mixins')
 require('scripts/globals/dynamis')
-
+-----------------------------------
 g_mixins = g_mixins or {}
 
 g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
@@ -22,7 +23,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
         [xi.job.SAM] = 'ws',
         [xi.job.NIN] = 'ja',
         [xi.job.DRG] = 'ws',
-        [xi.job.SMN] = 'ma'
+        [xi.job.SMN] = 'ma',
     }
 
     local familyCurrency =
@@ -47,75 +48,69 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     dynamisBeastmenMob:addListener('MAGIC_TAKE', 'DYNAMIS_MAGIC_PROC_CHECK', function(target, caster, spell)
         if
             procjobs[target:getMainJob()] == 'ma' and
-            math.random(0, 99) < 8 and
+            math.random(1, 100) <= 8 and
             target:getLocalVar('dynamis_proc') == 0
         then
             xi.dynamis.procMonster(target, caster)
         end
     end)
 
-    dynamisBeastmenMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(target, user, wsid)
+    dynamisBeastmenMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, skillId, tp, action)
         if
             procjobs[target:getMainJob()] == 'ws' and
-            math.random(0, 99) < 25 and
+            math.random(1, 100) <= 25 and
             target:getLocalVar('dynamis_proc') == 0
         then
             xi.dynamis.procMonster(target, user)
         end
     end)
 
-    dynamisBeastmenMob:addListener('ABILITY_TAKE', 'DYNAMIS_ABILITY_PROC_CHECK', function(mob, user, ability, action)
+    dynamisBeastmenMob:addListener('ABILITY_TAKE', 'DYNAMIS_ABILITY_PROC_CHECK', function(user, target, skill, action)
         if
-            procjobs[mob:getMainJob()] == 'ja' and
-            math.random(0, 99) < 20 and
-            mob:getLocalVar('dynamis_proc') == 0
+            procjobs[target:getMainJob()] == 'ja' and
+            math.random(1, 100) <= 20 and
+            target:getLocalVar('dynamis_proc') == 0
         then
-            xi.dynamis.procMonster(mob, user)
+            xi.dynamis.procMonster(target, user)
         end
     end)
 
     dynamisBeastmenMob:addListener('DEATH', 'DYNAMIS_ITEM_DISTRIBUTION', function(mob, killer)
-        if killer then
-            local th = thCurrency[math.min(mob:getTHlevel(), 4)]
-            local family = mob:getFamily()
-            local currency = familyCurrency[family]
-            if currency == nil then
-                currency = 1449 + math.random(0, 2) * 3
-            end
-
-            local singleChance = th.single
-            local hundredChance = th.hundred
-            if mob:getMainLvl() > 90 then
-                singleChance = math.floor(singleChance * 1.5)
-            end
-
-            -- White (special) adds 100% hundred slot
-            if mob:getLocalVar('dynamis_proc') >= 4 then
-                killer:addTreasure(currency + 1, mob)
-            end
-
-            -- Base hundred slot
-            if mob:isNM() then
-                killer:addTreasure(currency + 1, mob, hundredChance)
-            end
-
-            -- red (high) adds 100% single slot
-            if mob:getLocalVar('dynamis_proc') >= 3 then
-                killer:addTreasure(currency, mob)
-            end
-
-            -- yellow (medium) adds single slot
-            if mob:getLocalVar('dynamis_proc') >= 2 then
-                killer:addTreasure(currency, mob, singleChance)
-            end
-
-            -- blue (low) adds single slot
-            if mob:getLocalVar('dynamis_proc') >= 1 then
-                killer:addTreasure(currency, mob, singleChance)
-            end
-
-            killer:addTreasure(currency, mob, singleChance) -- base single slot
+        if not killer then
+            return
         end
+
+        local th            = thCurrency[math.min(mob:getTHlevel(), 4)]
+        local currency      = familyCurrency[mob:getFamily()] or xi.item.TUKUKU_WHITESHELL + math.random(0, 2) * 3
+        local singleChance  = mob:getMainLvl() > 90 and math.floor(th.single * 1.5) or th.single
+        local hundredChance = th.hundred
+
+        -- White (special) adds 100% hundred slot
+        if mob:getLocalVar('dynamis_proc') >= 4 then
+            killer:addTreasure(currency + 1, mob)
+        end
+
+        -- Base hundred slot
+        if mob:isNM() then
+            killer:addTreasure(currency + 1, mob, hundredChance)
+        end
+
+        -- red (high) adds 100% single slot
+        if mob:getLocalVar('dynamis_proc') >= 3 then
+            killer:addTreasure(currency, mob)
+        end
+
+        -- yellow (medium) adds single slot
+        if mob:getLocalVar('dynamis_proc') >= 2 then
+            killer:addTreasure(currency, mob, singleChance)
+        end
+
+        -- blue (low) adds single slot
+        if mob:getLocalVar('dynamis_proc') >= 1 then
+            killer:addTreasure(currency, mob, singleChance)
+        end
+
+        killer:addTreasure(currency, mob, singleChance) -- base single slot
     end)
 end
 

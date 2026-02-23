@@ -67,7 +67,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.MORBOLBANE)
+    if player then
+        player:addTitle(xi.title.MORBOLBANE)
+    end
 end
 
 entity.onMobDespawn = function(mob)

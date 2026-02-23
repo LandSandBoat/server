@@ -124,3 +124,66 @@ UPDATE abilities SET recastTime = 900 WHERE name = 'killer_instinct';
 
 -- Killer Instinct merit: Revert value to 150 seconds per level
 UPDATE merits SET value = 150 WHERE name = 'killer_instinct';
+
+------------------------------------
+-- Samurai
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+------------------------------------
+
+-- Warding Circle: Revert recast from 5 to 10 minutes
+UPDATE abilities SET recastTime = 600 WHERE name = 'warding_circle';
+
+-- Warding Circle merit: Revert value to 20 seconds per level
+UPDATE merits SET value = 20 WHERE name = 'warding_circle_recast';
+
+-- Sekkanoki: Adjust level requirement from 40 to 60
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(06/21/2010)
+UPDATE abilities SET level = 60 WHERE name = 'sekkanoki';
+
+-- Blade Bash: Revert recast from 5 to 15 minutes
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
+UPDATE abilities SET recastTime = 900 WHERE name = 'blade_bash';
+
+-- Blade Bash merit: Revert value to 150 seconds per level
+UPDATE merits SET value = 150 WHERE name = 'blade_bash';
+
+-- Shikikoyo: Revert recast from 5 to 15 minutes
+UPDATE abilities SET recastTime = 900 WHERE name = 'shikikoyo';
+
+-- Shikikoyo merit: Revert value to 150 seconds per level
+UPDATE merits SET value = 150 WHERE name = 'shikikoyo';
+
+------------------------------------
+-- Ranger
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
+------------------------------------
+
+-- Eagle Eye Shot: Revert range from 20 to 15 yalms
+UPDATE abilities SET `range` = 15 WHERE name = 'eagle_eye_shot';
+
+-- Shadowbind: Revert range from 20 to 10 yalms
+UPDATE abilities SET `range` = 10 WHERE name = 'shadowbind';
+
+-- Flashy Shot: revert recast from 10 to 20 minutes
+UPDATE abilities SET recastTime = 1200 WHERE name = 'flashy_shot';
+
+-- Flashy Shot merit: Revert value to 150 seconds per level
+UPDATE merits SET value = 150 WHERE name = 'flashy_shot';
+
+-----------------------------------
+-- Ninja
+-----------------------------------
+
+-- Yonin: Revert recast from 3 minutes to 5 minutes and add shared cooldown with Innin
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/11/2011)
+UPDATE abilities SET recastTime = 300 WHERE name = 'yonin';
+
+-- Innin: Revert recast from 3 minutes to 5 minutes and add shared cooldown with Yonin
+UPDATE abilities SET recastTime = 300, recastId = 146 WHERE name = 'innin';
+
+-- Tonko: Ichi: Revert cast time from 1.5 to 4 seconds
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+UPDATE spell_list SET castTime = 4000 WHERE name = 'tonko_ichi';
+
+-- Monomi: Ichi: Revert cast time from 1.5 to 4 seconds
+UPDATE spell_list SET castTime = 4000 WHERE name = 'monomi_ichi';

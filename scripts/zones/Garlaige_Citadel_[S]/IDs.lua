@@ -15,9 +15,9 @@ zones[xi.zone.GARLAIGE_CITADEL_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        LYCOPODIUM_ENTRANCED          = 7075, -- The lycopodium is entranced by a sparkling light...
-        CAMPAIGN_RESULTS_TALLIED      = 7537, -- Campaign results tallied.
-        COMMON_SENSE_SURVIVAL         = 8898, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        LYCOPODIUM_ENTRANCED          = 7076, -- The lycopodium is entranced by a sparkling light...
+        CAMPAIGN_RESULTS_TALLIED      = 7538, -- Campaign results tallied.
+        COMMON_SENSE_SURVIVAL         = 8899, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

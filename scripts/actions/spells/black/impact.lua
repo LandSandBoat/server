@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if not target:hasStatusEffect(effectId) then
             local power    = math.floor(target:getStat(effectTable[i][2]) / 5)
             local duration = math.floor(180 * resist)
-            target:addStatusEffect(effectId, power, 0, duration)
+            target:addStatusEffect(effectId, { power = power, duration = duration, origin = caster })
         end
     end
 

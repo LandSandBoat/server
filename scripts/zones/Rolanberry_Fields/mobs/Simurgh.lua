@@ -93,13 +93,15 @@ entity.onMobFight = function(mob, target)
         position = mob:getPos(),
         offset = 5,
         degrees = 180,
-        wait = 3,
+        wait = 10,
     }
     utils.drawIn(target, drawInTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.SIMURGH_POACHER)
+    if player then
+        player:addTitle(xi.title.SIMURGH_POACHER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

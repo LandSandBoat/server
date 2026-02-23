@@ -6,7 +6,9 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.LICH_BANISHER)
+    if player then
+        player:addTitle(xi.title.LICH_BANISHER)
+    end
 end
 
 return entity

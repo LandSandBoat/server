@@ -1,6 +1,7 @@
 -----------------------------------
 -- Ice Break
--- Deals ice damage to enemies within range. Additional Effect: "Bind."
+-- Family: Golems
+-- Description: Deals Ice damage to enemies within range. Additional Effect: Bind
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,15 +10,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    --  TODO: Damage should be 1 + dINT
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.ICE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE, { breakBind = false })
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, math.random(120, 180))
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 2.00, 2.00, 2.00 }
+    params.element         = xi.element.ICE
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.ICE
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier = 1
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, xi.mobskills.calculateDuration(skill:getTP(), 120, 180))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

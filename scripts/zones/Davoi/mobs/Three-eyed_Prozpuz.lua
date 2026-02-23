@@ -7,14 +7,18 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEP_MEVA, 90)
-    mob:addMod(xi.mod.LULLABY_MEVA, 90)
-end
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 9)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 9)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
 
-entity.onMobDeath = function(mob, player, optParams)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+    mob:setMod(xi.mod.STORETP, 60) -- 8 hits to 1000 TP
+    mob:setMod(xi.mod.ATT, 240)
+    mob:setMod(xi.mod.RATT, 170)
 end
 
 return entity

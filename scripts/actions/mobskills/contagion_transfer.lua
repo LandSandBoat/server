@@ -38,16 +38,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for i = 1, #availableEffects do
         local effectId = availableEffects[i]
         local effect = target:getStatusEffect(effectId)
-        if effect and target:delStatusEffect(effectId) then
-            mob:addStatusEffect(
-                effectId,
-                effect:getPower(),
-                effect:getTick(),
-                math.ceil(effect:getTimeRemaining() / 1000), -- Gets the effects remaining time and converts it from milliseconds to seconds
-                effect:getSubType(),
-                effect:getSubPower(),
-                effect:getTier()
-            )
+        if effect then
+            mob:copyStatusEffect(effect)
+            target:delStatusEffect(effectId)
             numEffectsTransferred = numEffectsTransferred + 1
         end
     end

@@ -1,9 +1,7 @@
 -----------------------------------
--- Drainkiss
--- Deals dark damage to a single target. Additional effect: TP Drain
--- Type: Magical
--- Utsusemi/Blink absorb: 1 shadow
--- Range: Melee
+-- TP Drainkiss
+-- Family: Leech
+-- Description: Steals a targets TP. TP stolen varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,15 +10,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = math.floor(mob:getWeaponDmg() * 2.6)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
+    params.baseDamage           = target:getTP()
+    params.fTP                  = { 0.500, 0.666, 0.833 } -- TODO: Need more capture samples
+    -- Note: This has been observed to absorb less than 50% TP(1400~ @ Player: 3000TP, Mob 1000 TP)
+    -- Also seen to absorb 2000+ TP at Player: 3000% TP, Mob 3000% TP. Interpolating the 2000 TP anchor linearly for now.
+    params.element              = xi.element.NONE
+    params.attackType           = xi.attackType.MAGICAL
+    params.damageType           = xi.damageType.NONE
+    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipDamageAdjustment = true
+    params.skipMagicBonusDiff   = true
+    params.skipStoneSkin        = true
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.TP, damage))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.TP, info.damage))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

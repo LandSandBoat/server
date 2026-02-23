@@ -28,7 +28,7 @@ entity.onMobDespawn = function(mob)
     local ph = GetMobByID(mob:getID() - 1)
     if ph then
         DisallowRespawn(ph:getID(), false)
-        ph:setRespawnTime(ph:getRespawnTime())
+        ph:setRespawnTime(GetMobRespawnTime(ph:getID()))
     end
 end
 

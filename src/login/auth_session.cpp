@@ -108,7 +108,7 @@ void auth_session::read_func()
         do_write(jsonStringSize);
     };
 
-    const auto sendLoginResult = [&](const login_result errorCode, const uint8 len)
+    const auto sendLoginResult = [&](const login_result errorCode)
     {
         json loginErrorCodeReply;
         loginErrorCodeReply["result"] = errorCode; // "old style" backwards compatible error code
@@ -146,12 +146,14 @@ void auth_session::read_func()
         return;
     }
 
-    int8                   code             = loginHelpers::jsonGet<int8>(jsonBuffer, "command").value_or(0);
-    std::string            username         = loginHelpers::jsonGet<std::string>(jsonBuffer, "username").value_or("");
-    std::string            password         = loginHelpers::jsonGet<std::string>(jsonBuffer, "password").value_or("");
-    std::string            updated_password = loginHelpers::jsonGet<std::string>(jsonBuffer, "new_password").value_or("");
-    std::string            otp              = loginHelpers::jsonGet<std::string>(jsonBuffer, "otp").value_or("");
-    std::array<uint8_t, 3> version          = loginHelpers::jsonGet<uint8, 3>(jsonBuffer, "version").value_or(std::array<uint8_t, 3>{ 0, 0, 0 });
+    int8                   code                = loginHelpers::jsonGet<int8>(jsonBuffer, "command").value_or(0);
+    std::string            username            = loginHelpers::jsonGet<std::string>(jsonBuffer, "username").value_or("");
+    std::string            password            = loginHelpers::jsonGet<std::string>(jsonBuffer, "password").value_or("");
+    std::string            updated_password    = loginHelpers::jsonGet<std::string>(jsonBuffer, "new_password").value_or("");
+    std::string            otp                 = loginHelpers::jsonGet<std::string>(jsonBuffer, "otp").value_or("");
+    std::string            trust_token         = loginHelpers::jsonGet<std::string>(jsonBuffer, "trust_token").value_or("");
+    bool                   trust_this_computer = loginHelpers::jsonGet<bool>(jsonBuffer, "trust_this_computer").value_or(false);
+    std::array<uint8_t, 3> version             = loginHelpers::jsonGet<uint8, 3>(jsonBuffer, "version").value_or(std::array<uint8_t, 3>{ 0, 0, 0 });
 
     // Check major.minor but ignore trivial
     if (version[0] != SupportedXiloaderVersion[0] || version[1] != SupportedXiloaderVersion[1])
@@ -188,102 +190,131 @@ void auth_session::read_func()
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
             // Look up and validate account password
-            if (!validatePassword(username, password))
+            auto accountInfo = validatePassword(username, password);
+            if (!accountInfo)
             {
-                sendLoginResult(login_result::LOGIN_ERROR, 1);
+                sendLoginResult(login_result::LOGIN_ERROR);
                 return;
             }
 
-            bool usedOTP = false;
+            auto [accountID, status] = *accountInfo;
 
-            if (otpHelpers::doesAccountNeedOTP(username, "TOTP"))
+            // Reject banned/non-normal accounts before processing OTP or trust tokens
+            if (!(status & ACCOUNT_STATUS_CODE::NORMAL))
             {
-                if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
+                // Purge any lingering trust tokens for banned accounts
+                if (status & ACCOUNT_STATUS_CODE::BANNED)
                 {
-                    sendLoginResult(login_result::LOGIN_ERROR, 1);
-                    return;
+                    otpHelpers::removeAllTrustTokens(accountID);
                 }
-
-                usedOTP = true;
+                sendLoginResult(login_result::LOGIN_FAIL);
+                return;
             }
 
-            // We've validated the password by this point, get account info
-            const auto rset = db::preparedStmt("SELECT accounts.id, accounts.status FROM accounts WHERE accounts.login = ?", username);
-            if (rset && rset->rowsCount() != 0 && rset->next())
+            bool otpVerified = false;
+
+            if (otpHelpers::doesAccountNeedOTP(accountID, "TOTP"))
             {
-                uint32 accountID = rset->get<uint32>("id");
-                uint32 status    = rset->get<uint32>("status");
+                bool trustedByToken = false;
 
-                if (status & ACCOUNT_STATUS_CODE::NORMAL)
+                // Try trust token first
+                if (!trust_token.empty())
                 {
-                    db::preparedStmt("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = ?", accountID);
+                    trustedByToken = otpHelpers::validateTrustToken(accountID, trust_token);
+                }
 
-                    const auto payload = ipc::toBytesWithHeader(ipc::AccountLogin{
-                        .accountId = accountID,
-                    });
-
-                    zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
-
-                    // set Satchel to the same size as inventory on all chars on their account if character has OTP
-                    // Note: Upgrades happen in-game with gobbiebag
-                    if (usedOTP)
+                // Fall back to OTP code if trust token invalid/missing
+                if (!trustedByToken)
+                {
+                    if (otp.empty() && !trust_token.empty())
                     {
-                        db::preparedStmt("UPDATE char_storage a JOIN char_storage b ON a.charid = b.charid "
-                                         "SET a.satchel = b.inventory "
-                                         "WHERE a.charid IN (SELECT charid FROM chars WHERE accid = ?)",
-                                         accountID);
-                    }
-                    // TODO: Lock out same account logging in multiple times. Can check data/view session existence on same IP/account?
-                    // Not a real problem because the account is locked out when a character is logged in.
-
-                    /*
-                    const auto rset = db::preparedStmt("SELECT charid "
-                            "FROM accounts_sessions "
-                            "WHERE accid = ? LIMIT 1", accountID);
-                    if (rset && rset->rowsCount() != 0 && rset->next())
-                    {
-                        // TODO: kick player out of map server if already logged in
-                        // uint32 charid = rset->get<uint32>("charid");
-
-                        // This error message doesn't work when sent this way. Unknown how to transmit "1039" error message to a client already logged in.
-                        // session_t& authenticatedSession = get_authenticated_session(socket_, session.sentAccountID);
-                        // if (auto data = authenticatedSession.buffer_.data()session)
-                        // {
-                        //  generateErrorMessage(data->buffer_.data(), 139);
-                        //  data->do_write(0x24);
-                        //  return;
-                        //}
-                        ref<uint8>(buffer_.data(), 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
-                        do_write(1);
+                        // Trust token was provided but invalid, and no OTP to fall back to
+                        sendLoginResult(login_result::LOGIN_ERROR_TRUST_TOKEN_INVALID);
                         return;
                     }
-                    */
 
-                    // Success
-                    unsigned char hash[16];
-                    uint32        hashData = earth_time::timestamp() ^ getpid();
-                    md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
-
-                    json loginSuccessReply;
-                    loginSuccessReply["result"]       = static_cast<uint8>(login_result::LOGIN_SUCCESS);
-                    loginSuccessReply["account_id"]   = accountID;
-                    loginSuccessReply["session_hash"] = hash; // This has to be sent as an array, json.dump() tries to convert to UTF which fails
-
-                    sendJsonAsBuffer(loginSuccessReply);
-
-                    auto& session          = loginHelpers::get_authenticated_session(ipAddress, asStringFromUntrustedSource(hash, sizeof(hash)));
-                    session.accountID      = accountID;
-                    session.authorizedTime = timer::now();
+                    if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
+                    {
+                        sendLoginResult(login_result::LOGIN_ERROR);
+                        return;
+                    }
                 }
-                else if (status & ACCOUNT_STATUS_CODE::BANNED)
-                {
-                    sendLoginResult(login_result::LOGIN_FAIL, 33);
-                }
+
+                otpVerified = true;
             }
-            else // No account match
+
+            db::preparedStmt("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = ?", accountID);
+
+            const auto payload = ipc::toBytesWithHeader(ipc::AccountLogin{
+                .accountId = accountID,
+            });
+
+            zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
+
+            // set Satchel to the same size as inventory on all chars on their account if character has OTP
+            // Note: Upgrades happen in-game with gobbiebag
+            if (otpVerified)
             {
-                sendLoginResult(login_result::LOGIN_FAIL, 1);
+                db::preparedStmt("UPDATE char_storage a JOIN char_storage b ON a.charid = b.charid "
+                                 "SET a.satchel = b.inventory "
+                                 "WHERE a.charid IN (SELECT charid FROM chars WHERE accid = ?)",
+                                 accountID);
             }
+            // TODO: Lock out same account logging in multiple times. Can check data/view session existence on same IP/account?
+            // Not a real problem because the account is locked out when a character is logged in.
+
+            /*
+            const auto rset = db::preparedStmt("SELECT charid "
+                    "FROM accounts_sessions "
+                    "WHERE accid = ? LIMIT 1", accountID);
+            if (rset && rset->rowsCount() != 0 && rset->next())
+            {
+                // TODO: kick player out of map server if already logged in
+                // uint32 charid = rset->get<uint32>("charid");
+
+                // This error message doesn't work when sent this way. Unknown how to transmit "1039" error message to a client already logged in.
+                // session_t& authenticatedSession = get_authenticated_session(socket_, session.sentAccountID);
+                // if (auto data = authenticatedSession.buffer_.data()session)
+                // {
+                //  generateErrorMessage(data->buffer_.data(), 139);
+                //  data->do_write(0x24);
+                //  return;
+                //}
+                ref<uint8>(buffer_.data(), 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
+                do_write(1);
+                return;
+            }
+            */
+
+            // Success
+            unsigned char hash[16];
+            uint32        hashData = earth_time::timestamp() ^ getpid();
+            md5(reinterpret_cast<uint8*>(&hashData), hash, sizeof(hashData));
+
+            json loginSuccessReply;
+            loginSuccessReply["result"]       = static_cast<uint8>(login_result::LOGIN_SUCCESS);
+            loginSuccessReply["account_id"]   = accountID;
+            loginSuccessReply["session_hash"] = hash; // This has to be sent as an array, json.dump() tries to convert to UTF which fails
+
+            if (trust_this_computer && otpVerified)
+            {
+                try
+                {
+                    auto newToken = otpHelpers::generateTrustToken();
+                    otpHelpers::saveTrustToken(accountID, newToken);
+                    loginSuccessReply["trust_token"] = newToken;
+                }
+                catch (const std::runtime_error& e)
+                {
+                    ShowError(fmt::format("Failed to generate trust token: {}", e.what()));
+                }
+            }
+
+            sendJsonAsBuffer(loginSuccessReply);
+
+            auto& session          = loginHelpers::get_authenticated_session(ipAddress, asStringFromUntrustedSource(hash, sizeof(hash)));
+            session.accountID      = accountID;
+            session.authorizedTime = timer::now();
         }
         break;
         case login_cmd::LOGIN_CREATE:
@@ -295,7 +326,7 @@ void auth_session::read_func()
             {
                 ShowWarningFmt("login_parse: New account attempt <{}> but is disabled in settings.",
                                username);
-                sendLoginResult(login_result::LOGIN_ERROR_CREATE_DISABLED, 1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE_DISABLED);
                 return;
             }
 
@@ -303,7 +334,7 @@ void auth_session::read_func()
             const auto rset = db::preparedStmt("SELECT accounts.id FROM accounts WHERE accounts.login = ?", username);
             if (!rset)
             {
-                sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE);
                 return;
             }
 
@@ -319,7 +350,7 @@ void auth_session::read_func()
                 }
                 else
                 {
-                    sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CREATE);
                     return;
                 }
 
@@ -343,16 +374,16 @@ void auth_session::read_func()
 
                 if (!rset2)
                 {
-                    sendLoginResult(login_result::LOGIN_ERROR_CREATE, 1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CREATE);
                     return;
                 }
 
-                sendLoginResult(login_result::LOGIN_SUCCESS_CREATE, 1);
+                sendLoginResult(login_result::LOGIN_SUCCESS_CREATE);
                 return;
             }
             else
             {
-                sendLoginResult(login_result::LOGIN_ERROR_CREATE_TAKEN, 1);
+                sendLoginResult(login_result::LOGIN_ERROR_CREATE_TAKEN);
                 return;
             }
             break;
@@ -360,44 +391,29 @@ void auth_session::read_func()
         case login_cmd::LOGIN_CHANGE_PASSWORD:
         {
             // Look up and validate account password
-            if (!validatePassword(username, password))
+            auto accountInfo = validatePassword(username, password);
+            if (!accountInfo)
             {
-                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
                 return;
             }
+
+            auto [accid, status] = *accountInfo;
 
             if (otpHelpers::doesAccountNeedOTP(username, "TOTP"))
             {
                 if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
                 {
-                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
                     return;
                 }
             }
-
-            // Is this check redundant?
-            const auto rset = db::preparedStmt("SELECT accounts.id, accounts.status "
-                                               "FROM accounts "
-                                               "WHERE accounts.login = ?",
-                                               username);
-            if (rset == nullptr || rset->rowsCount() == 0)
-            {
-                ShowWarningFmt("login_parse: user <{}> could not be found using the provided information. Aborting.", username);
-
-                sendLoginResult(login_result::LOGIN_ERROR, 1);
-                return;
-            }
-
-            rset->next();
-
-            uint32 accid  = rset->get<uint32>("id");
-            uint8  status = rset->get<uint8>("status");
 
             if (status & ACCOUNT_STATUS_CODE::BANNED)
             {
                 ShowInfoFmt("login_parse: banned user <{}> detected. Aborting.", username);
 
-                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
             }
 
             if (status & ACCOUNT_STATUS_CODE::NORMAL)
@@ -406,7 +422,7 @@ void auth_session::read_func()
                 if (updated_password == "")
                 {
                     ShowWarningFmt("login_parse: Empty password: Could not update password for user <{}>.", username);
-                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
                     return;
                 }
 
@@ -420,9 +436,11 @@ void auth_session::read_func()
                 if (!rset2)
                 {
                     ShowWarningFmt("login_parse: Error trying to update password in database for user <{}>.", username);
-                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD, 1);
+                    sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
                     return;
                 }
+
+                otpHelpers::removeAllTrustTokens(accid);
 
                 json loginErrorChangePasswordReply;
                 loginErrorChangePasswordReply["result"]       = login_result::LOGIN_SUCCESS_CHANGE_PASSWORD;
@@ -481,7 +499,10 @@ void auth_session::read_func()
             if (otpHelpers::validateTOTP(otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
             {
                 // validated
-                const auto rset = db::preparedStmt("DELETE FROM accounts_totp WHERE accounts_totp.accid = ? LIMIT 1", loginHelpers::getAccountId(username));
+                uint32     accid = loginHelpers::getAccountId(username);
+                const auto rset  = db::preparedStmt("DELETE FROM accounts_totp WHERE accounts_totp.accid = ? LIMIT 1", accid);
+
+                otpHelpers::removeAllTrustTokens(accid);
 
                 json sendSuccess;
                 sendSuccess["result"] = login_result::LOGIN_SUCCESS_REMOVE_TOTP;
@@ -578,13 +599,18 @@ void auth_session::do_write(std::size_t length)
         });
 }
 
-bool auth_session::validatePassword(std::string username, std::string password)
+std::optional<std::pair<uint32, uint32>> auth_session::validatePassword(std::string username, std::string password)
 {
+    uint32 accountID = 0;
+    uint32 status    = 0;
+
     auto passHash = [&]() -> std::string
     {
-        const auto rset = db::preparedStmt("SELECT accounts.password FROM accounts WHERE accounts.login = ?", username);
+        const auto rset = db::preparedStmt("SELECT accounts.id, accounts.status, accounts.password FROM accounts WHERE accounts.login = ?", username);
         if (rset && rset->rowsCount() != 0 && rset->next())
         {
+            accountID = rset->get<uint32>("id");
+            status    = rset->get<uint32>("status");
             return rset->get<std::string>("password");
         }
         return "";
@@ -595,7 +621,7 @@ bool auth_session::validatePassword(std::string username, std::string password)
         // It's a BCrypt hash, so we can validate it.
         if (!BCrypt::validatePassword(password, passHash))
         {
-            return false;
+            return std::nullopt;
         }
     }
     else
@@ -607,16 +633,16 @@ bool auth_session::validatePassword(std::string username, std::string password)
         {
             if (rset->get<std::string>(0) != passHash)
             {
-                return false;
+                return std::nullopt;
             }
 
             passHash = BCrypt::generateHash(password);
             db::preparedStmt("UPDATE accounts SET accounts.password = ? WHERE accounts.login = ?", passHash, username);
             if (!BCrypt::validatePassword(password, passHash))
             {
-                return false;
+                return std::nullopt;
             }
         }
     }
-    return true;
+    return std::make_pair(accountID, status);
 }

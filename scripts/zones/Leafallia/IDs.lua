@@ -18,8 +18,8 @@ zones[xi.zone.LEAFALLIA] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7204, -- Tallying conquest results...
-        RINGS_TOO_NUMEROUS            = 7414, -- The rings on this stump are too numerous to count.
+        CONQUEST_BASE                 = 7205, -- Tallying conquest results...
+        RINGS_TOO_NUMEROUS            = 7415, -- The rings on this stump are too numerous to count.
     },
     mob =
     {

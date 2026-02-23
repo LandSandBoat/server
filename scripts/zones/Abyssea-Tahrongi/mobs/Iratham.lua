@@ -18,7 +18,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.IRATHAM_CAPTURER)
+    if player then
+        player:addTitle(xi.title.IRATHAM_CAPTURER)
+    end
 end
 
 return entity

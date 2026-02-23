@@ -11,7 +11,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.MAGIC_ATK_BOOST, 25, 0, 300))
-    target:addStatusEffect(xi.effect.ELEMENTAL_SEAL, 1, 0, 60)
+    target:addStatusEffect(xi.effect.ELEMENTAL_SEAL, { power = 1, duration = 60, origin = mob })
 
     return xi.effect.MAGIC_ATK_BOOST
 end

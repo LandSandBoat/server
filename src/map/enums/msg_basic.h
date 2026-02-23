@@ -76,6 +76,7 @@ enum class MsgBasic : uint16_t
     CANNOT_PERFORM_ACTION          = 71,  // You cannot perform that action on the specified target.
     MAGIC_NO_EFFECT                = 75,  // <caster>'s <spell> has no effect on <target>.
     NO_TARG_IN_AOE                 = 76,  // No valid target within area of effect.
+    USES_SANGE_TAKES_DAMAGE        = 77,  // <user> uses Sange. <target> takes <amount> points of damage.
     TOO_FAR_AWAY                   = 78,  // <target> is too far away.
     DEBUG_DBLATK_PROC              = 79,  // Debug: <target> uses Double Attack (..%)
     DEBUG_TRPATK_PROC              = 80,  // Debug: <target> uses Triple Attack (..%)
@@ -100,6 +101,7 @@ enum class MsgBasic : uint16_t
     USES_ABILITY_FORTIFIED_DRAGONS = 150, // <user> uses <ability>. <target> is fortified against dragons.
     TARGET_FORTIFIED_DRAGONS       = 151, // <target> is fortified against dragons.
     CANNOT_ON_THAT_TARG            = 155, // You cannot perform that action on the specified target.
+    USES_BARRAGE_TAKES_DAMAGE      = 157, // <user> uses Barrage. <target> takes <amount> points of damage.
     ABILITY_MISSES                 = 158, // <user> uses <ability>, but misses.
     ADD_EFFECT_HP_DRAINED          = 161, // Additional effect: <amount> HP drained from <target>.
     ADD_EFFECT_MP_DRAINED          = 162, // Additional effect: <amount> MP drained from <target>.

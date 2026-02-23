@@ -10,13 +10,9 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 end
 
-entity.onMobRoam = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-end
-
 entity.onMobFight = function(mob, target)
     local targetPos = target:getPos()
-    local spawnPos = mob:getSpawnPos()
+    local spawnPos  = mob:getSpawnPos()
     local arenaBoundaries =
     {
         { { 335, -92 }, { 332, -94 } },
@@ -62,8 +58,14 @@ entity.onMobFight = function(mob, target)
     end
 end
 
+entity.onMobDisengage = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.CERBERUS_MUZZLER)
+    if player then
+        player:addTitle(xi.title.CERBERUS_MUZZLER)
+    end
 end
 
 entity.onMobDespawn = function(mob)

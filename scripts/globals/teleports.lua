@@ -264,17 +264,6 @@ xi.teleport.toCampaign = function(player, option)
     end
 end
 
-    -- TODO: Abyessa Maws:
-    -- Tahrongi Canyon (H-12)
-    -- Konschtat Highlands (I-12)
-    -- La Theine Plateau (E-4)
-    -- Valkurm Dunes (I-9)
-    -- Jugner Forest (J-8)
-    -- Buburimu Peninsula (F-7)
-    -- South Gustaberg (J-10)
-    -- North Gustaberg (G-6)
-    -- Xarcabard (H-8)
-
 -----------------------------------
 -- TELEPORT TO REGIONAL OUTPOST
 -----------------------------------

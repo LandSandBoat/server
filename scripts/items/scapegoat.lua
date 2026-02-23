@@ -9,7 +9,7 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     local power = 1
     local duration = 1800
 
@@ -25,10 +25,10 @@ itemObject.onItemUse = function(target)
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
             target:delStatusEffect(xi.effect.RERAISE)
-            target:addStatusEffect(xi.effect.RERAISE, power, 0, duration)
+            target:addStatusEffect(xi.effect.RERAISE, { power = power, duration = duration, origin = user })
         end
     else
-        target:addStatusEffect(xi.effect.RERAISE, power, 0, duration)
+        target:addStatusEffect(xi.effect.RERAISE, { power = power, duration = duration, origin = user })
     end
 end
 

@@ -56,8 +56,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.THE_HORNSPLITTER)
-    xi.tutorial.onMobDeath(player)
+    if player then
+        player:addTitle(xi.title.THE_HORNSPLITTER)
+        xi.tutorial.onMobDeath(player)
+    end
 end
 
 return entity

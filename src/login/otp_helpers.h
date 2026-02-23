@@ -23,6 +23,7 @@
 #include <cctype>
 #include <chrono>
 #include <openssl/hmac.h>
+#include <openssl/rand.h>
 #include <openssl/sha.h>
 #include <stdexcept>
 #include <string>
@@ -158,11 +159,10 @@ inline std::string getNewBase32Secret()
     return newSecret;
 }
 
-inline bool doesAccountNeedOTP(const std::string& account, const std::string& secretType)
+inline bool doesAccountNeedOTP(uint32 accid, const std::string& secretType)
 {
     if (secretType == "TOTP")
     {
-        const auto accid = loginHelpers::getAccountId(account);
         if (accid != 0)
         {
             const auto rset = db::preparedStmt("SELECT validated FROM accounts_totp where accid = ?", accid);
@@ -182,6 +182,11 @@ inline bool doesAccountNeedOTP(const std::string& account, const std::string& se
         }
     }
     return false;
+}
+
+inline bool doesAccountNeedOTP(const std::string& account, const std::string& secretType)
+{
+    return doesAccountNeedOTP(loginHelpers::getAccountId(account), secretType);
 }
 
 inline std::string createAccountSecret(const std::string& account, const std::string& secretType)
@@ -268,6 +273,85 @@ inline std::string getAccountRecoveryCode(const std::string& account, const std:
         }
     }
     return "";
+}
+
+inline std::string toHexString(const unsigned char* data, size_t len)
+{
+    static const char hexChars[] = "0123456789abcdef";
+    std::string       result;
+    result.reserve(len * 2);
+    for (size_t i = 0; i < len; ++i)
+    {
+        result += hexChars[(data[i] >> 4) & 0x0F];
+        result += hexChars[data[i] & 0x0F];
+    }
+    return result;
+}
+
+inline bool isValidTrustTokenFormat(const std::string& token)
+{
+    if (token.size() != 64)
+    {
+        return false;
+    }
+    for (char c : token)
+    {
+        if (!std::isxdigit(static_cast<unsigned char>(c)))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+inline std::string hashTrustToken(const std::string& token)
+{
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256(reinterpret_cast<const unsigned char*>(token.data()), token.size(), hash);
+    return toHexString(hash, SHA256_DIGEST_LENGTH);
+}
+
+inline std::string generateTrustToken()
+{
+    unsigned char bytes[32];
+    if (RAND_bytes(bytes, sizeof(bytes)) != 1)
+    {
+        throw std::runtime_error("Failed to generate random bytes for trust token");
+    }
+    return toHexString(bytes, sizeof(bytes));
+}
+
+inline void saveTrustToken(uint32 accid, const std::string& token)
+{
+    // Delete expired tokens for this account first
+    db::preparedStmt("DELETE FROM accounts_trust_tokens WHERE accid = ? AND expires <= NOW()", accid);
+
+    // Insert new token with 30 day expiry (store hashed)
+    db::preparedStmt("INSERT INTO accounts_trust_tokens (token, accid, expires) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 30 DAY))", hashTrustToken(token), accid);
+}
+
+inline bool validateTrustToken(uint32 accid, const std::string& token)
+{
+    if (!isValidTrustTokenFormat(token))
+    {
+        return false;
+    }
+
+    // Delete expired tokens for this account
+    db::preparedStmt("DELETE FROM accounts_trust_tokens WHERE accid = ? AND expires <= NOW()", accid);
+
+    // Check for valid token (compare hashed)
+    const auto rset = db::preparedStmt("SELECT token FROM accounts_trust_tokens WHERE token = ? AND accid = ? AND expires > NOW()", hashTrustToken(token), accid);
+    if (rset && rset->rowsCount() != 0 && rset->next())
+    {
+        return true;
+    }
+    return false;
+}
+
+inline void removeAllTrustTokens(uint32 accid)
+{
+    db::preparedStmt("DELETE FROM accounts_trust_tokens WHERE accid = ?", accid);
 }
 
 } // namespace otpHelpers

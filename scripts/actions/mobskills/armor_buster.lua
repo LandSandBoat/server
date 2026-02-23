@@ -1,30 +1,38 @@
 -----------------------------------
--- Armor_Buster
--- Description:
--- Type: Magical
--- additional effect: WEIGHT
+-- Armor Buster
+-- Family: Ultima
+-- Description: Deals Light damage to players in an area of effect. Additional Effect: Weight
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getLocalVar('citadelBuster') == 0 then
+    if mob:getLocalVar('citadelBuster') == 0 then -- TODO: Handle in mobscript?
         return 0
     end
 
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.WATER, 2.5, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 7.5, 7.5, 7.5 } -- TODO: Capture fTPs
+    params.element        = xi.element.LIGHT
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.LIGHT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 20, 3, 45)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 20, 0, 45) -- TODO: Capture power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

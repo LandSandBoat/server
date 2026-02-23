@@ -20,16 +20,16 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7068,  -- Tallying conquest results...
-        SOMETHING_BURRIED             = 7327,  -- It looks like something was buried here.
-        PLAYER_OBTAINS_ITEM           = 7517,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7518,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7519,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7520,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7525,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7587,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9703,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 10822, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7069,  -- Tallying conquest results...
+        SOMETHING_BURRIED             = 7328,  -- It looks like something was buried here.
+        PLAYER_OBTAINS_ITEM           = 7518,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7519,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7520,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7521,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7526,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7588,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9704,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 10823, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

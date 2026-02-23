@@ -3,6 +3,8 @@
 -----------------------------------
 -- !addquest 8 175
 -- Joachim : !pos -52.844 0 -9.978 246
+-- Flag when any of A Fluttery Fiend, The Beast of Bastore, A Delectable Demon started.
+-- Complete when all three are completed and player talks to Joachim again.
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.SCARS_OF_ABYSSEA)

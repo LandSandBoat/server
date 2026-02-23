@@ -15,9 +15,9 @@ zones[xi.zone.HALL_OF_TRANSFERENCE] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        NO_RESPONSE_OFFSET            = 7263, -- There is no response.
-        DOOR_FIRMLY_SHUT              = 7264, -- The door is firmly shut.
-        YOU_MUST_MOVE_CLOSER          = 7265, -- You must move closer to inspect the device.
+        NO_RESPONSE_OFFSET            = 7264, -- There is no response.
+        DOOR_FIRMLY_SHUT              = 7265, -- The door is firmly shut.
+        YOU_MUST_MOVE_CLOSER          = 7266, -- You must move closer to inspect the device.
     },
     mob =
     {

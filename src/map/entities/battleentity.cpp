@@ -2654,7 +2654,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         {
             damage = luautils::OnMobWeaponSkill(PTargetFound, this, PSkill, &action);
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTargetFound, PSkill->getID(), state.GetSpentTP(), &action, damage);
-            PTargetFound->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTargetFound, this, PSkill->getID(), state.GetSpentTP(), &action);
+            PTargetFound->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", this, PTargetFound, PSkill->getID(), state.GetSpentTP(), &action);
         }
 
         if (msg == MsgBasic::NONE)
@@ -3121,7 +3121,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             const bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == ActionReactKind::Counter;
             const bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
 
-            const bool isSamWithHasso   = GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
+            const bool isSamWithHasso   = this->getMod(Mod::HASSO_ZANSHIN_BONUS) > 0 && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
             const bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
 
             if (normalZanshinProc || hassoZanshinProc)

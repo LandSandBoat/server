@@ -48,7 +48,9 @@ public:
 
     void Tick(timer::time_point now);
     void registerForRespawn(CMobEntity* PMob, std::optional<timer::duration> respawnTime = std::nullopt);
+    void unregister(CMobEntity* PMob);
     auto isRegistered(CMobEntity* PMob) const -> bool;
+    auto getRemainingRespawnTime(CMobEntity* PMob) const -> std::optional<timer::duration>;
     void onTOTDChange(vanadiel_time::TOTD totd) const;
     void onWeatherChange(Weather weather) const;
     auto canSpawnNow(const CMobEntity* PMob) const -> bool;

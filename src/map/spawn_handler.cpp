@@ -21,6 +21,8 @@
 
 #include "spawn_handler.h"
 
+#include <vector>
+
 #include "common/timer.h"
 #include "common/vana_time.h"
 #include "entities/mobentity.h"
@@ -58,6 +60,23 @@ void SpawnHandler::registerForRespawn(CMobEntity* PMob, const std::optional<time
     }
 }
 
+void SpawnHandler::unregister(CMobEntity* PMob)
+{
+    if (!PMob)
+    {
+        return;
+    }
+
+    if (SpawnSlot* slot = PMob->GetSpawnSlot())
+    {
+        pendingSlotRespawns_.erase(slot);
+    }
+    else
+    {
+        pendingRespawns_.erase(PMob->id);
+    }
+}
+
 auto SpawnHandler::isRegistered(CMobEntity* PMob) const -> bool
 {
     if (!PMob)
@@ -73,6 +92,35 @@ auto SpawnHandler::isRegistered(CMobEntity* PMob) const -> bool
     return pendingRespawns_.contains(PMob->id);
 }
 
+auto SpawnHandler::getRemainingRespawnTime(CMobEntity* PMob) const -> std::optional<timer::duration>
+{
+    if (!PMob)
+    {
+        return std::nullopt;
+    }
+
+    const auto now = timer::now();
+
+    if (SpawnSlot* slot = PMob->GetSpawnSlot())
+    {
+        if (auto it = pendingSlotRespawns_.find(slot); it != pendingSlotRespawns_.end())
+        {
+            const auto remaining = it->second.respawnAt - now;
+            return remaining > timer::duration::zero() ? remaining : timer::duration::zero();
+        }
+    }
+    else
+    {
+        if (auto it = pendingRespawns_.find(PMob->id); it != pendingRespawns_.end())
+        {
+            const auto remaining = it->second - now;
+            return remaining > timer::duration::zero() ? remaining : timer::duration::zero();
+        }
+    }
+
+    return std::nullopt;
+}
+
 // Every 30 seconds, attempt to spawn any mob pending respawn.
 // Mobs are respawned if:
 // - Their respawn timer is due within the next 15s (half interval)
@@ -82,6 +130,8 @@ auto SpawnHandler::isRegistered(CMobEntity* PMob) const -> bool
 void SpawnHandler::Tick(const timer::time_point now)
 {
     const timer::time_point spawnThreshold = now + spawnWindow_;
+
+    std::vector<CMobEntity*> mobsToSpawn;
 
     // Process non-slotted mobs
     std::erase_if(pendingRespawns_, [&](const auto& pair)
@@ -104,9 +154,14 @@ void SpawnHandler::Tick(const timer::time_point now)
                           return false;
                       }
 
-                      PMob->Spawn();
+                      mobsToSpawn.push_back(PMob);
                       return true;
                   });
+
+    for (auto* PMob : mobsToSpawn)
+    {
+        PMob->Spawn();
+    }
 
     // Process slotted spawns
     std::erase_if(pendingSlotRespawns_, [&](const auto& pair)

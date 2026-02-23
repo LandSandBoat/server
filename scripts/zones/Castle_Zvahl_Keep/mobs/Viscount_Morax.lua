@@ -16,9 +16,6 @@ entity.phList =
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Demons_Elemental')
-end
-
-entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -26,8 +23,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 356)
-    player:addTitle(xi.title.HELLSBANE)
+    if player then
+        player:addTitle(xi.title.HELLSBANE)
+        xi.hunts.checkHunt(mob, player, 356)
+    end
 end
 
 return entity

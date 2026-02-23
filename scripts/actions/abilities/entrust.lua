@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ENTRUST, 1, 0, 60)
+    player:addStatusEffect(xi.effect.ENTRUST, { power = 1, duration = 60, origin = player })
 end
 
 return abilityObject

@@ -15,12 +15,12 @@ zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7068, -- You can't fish here.
-        ON_WAY_TO_AL_ZAHBI            = 7327, -- We are on our way to Al Zahbi. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
-        DOCKING_IN_AL_ZAHBI           = 7328, -- We are now docking in Al Zahbi.
-        NEARING_AL_ZAHBI              = 7329, -- We are nearing Al Zahbi.
-        CEHN_TEYOHNGO_SHOP_DIALOG     = 7331, -- If you're looking for fishing gear, you've come to the right place!
-        ARRIVING_SOON_AL_ZAHBI        = 7332, -- We are on our way to Al Zahbi. We will be arriving soon.
+        FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
+        ON_WAY_TO_AL_ZAHBI            = 7328, -- We are on our way to Al Zahbi. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
+        DOCKING_IN_AL_ZAHBI           = 7329, -- We are now docking in Al Zahbi.
+        NEARING_AL_ZAHBI              = 7330, -- We are nearing Al Zahbi.
+        CEHN_TEYOHNGO_SHOP_DIALOG     = 7332, -- If you're looking for fishing gear, you've come to the right place!
+        ARRIVING_SOON_AL_ZAHBI        = 7333, -- We are on our way to Al Zahbi. We will be arriving soon.
     },
     mob =
     {

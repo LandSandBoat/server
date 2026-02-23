@@ -8,6 +8,10 @@ local ID = zones[xi.zone.ULEGUERAND_RANGE]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 33)
     mob:setMod(xi.mod.STORETP, 30)

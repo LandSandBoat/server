@@ -611,7 +611,7 @@ void CStatusEffectContainer::DeleteStatusEffects()
     }
 }
 
-void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, EffectNotice notice)
+void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, const EffectNotice notice)
 {
     if (!PStatusEffect->deleted)
     {
@@ -622,26 +622,44 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, Ef
         m_POwner->delModifiers(&PStatusEffect->modList);
         if (m_POwner->objtype == TYPE_PC)
         {
-            CCharEntity* PChar = (CCharEntity*)m_POwner;
+            auto* PChar = static_cast<CCharEntity*>(m_POwner);
 
-            if (PStatusEffect->GetIcon() != 0)
+            if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
             {
-                if (notice != EffectNotice::Silent && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
+                // Notify owner that they lost their buff.
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+
+                // Notify origin entity if they are in the same zone, and we are in their spawn list.
+                const auto originId = PStatusEffect->GetOriginID();
+                if (originId != 0 && originId != PChar->id && m_POwner->loc.zone)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                    auto* POriginEntity = m_POwner->loc.zone->GetCharByID(originId);
+                    if (POriginEntity && charutils::hasEntitySpawned(POriginEntity, PChar))
+                    {
+                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                    }
                 }
             }
 
             if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER)
             {
-                puppetutils::CheckAttachmentsForManeuver((CCharEntity*)m_POwner, PStatusEffect->GetStatusID(), false);
+                puppetutils::CheckAttachmentsForManeuver(static_cast<CCharEntity*>(m_POwner), PStatusEffect->GetStatusID(), false);
             }
         }
         else
         {
-            if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && (!(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE))) && !m_POwner->isDead())
+            if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)) && !m_POwner->isDead())
             {
-                m_POwner->loc.zone->PushPacket(m_POwner, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff));
+                // Notify origin entity if they are in the same zone, and we are in their spawn list.
+                const auto originId = PStatusEffect->GetOriginID();
+                if (originId != 0 && m_POwner->loc.zone)
+                {
+                    auto* POriginEntity = m_POwner->loc.zone->GetCharByID(originId);
+                    if (POriginEntity && charutils::hasEntitySpawned(POriginEntity, m_POwner))
+                    {
+                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                    }
+                }
             }
         }
     }

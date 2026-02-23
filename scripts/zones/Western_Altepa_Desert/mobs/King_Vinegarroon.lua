@@ -145,7 +145,9 @@ entity.onMobSkillTarget = function(target, mob, mobskill)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.VINEGAR_EVAPORATOR)
+    if player then
+        player:addTitle(xi.title.VINEGAR_EVAPORATOR)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -3,6 +3,7 @@
 -----------------------------------
 -- !addquest 8 161
 -- Joachim : !pos -52.844 0 -9.978 246
+-- Flagged on completion of A Journey Begins. Flags Dawn of Death upon completion.
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
@@ -15,7 +16,6 @@ end
 
 quest.sections =
 {
-    -- This quest is flagged on completion of A Journey Begins.
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED

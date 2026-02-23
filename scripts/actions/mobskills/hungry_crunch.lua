@@ -1,6 +1,8 @@
 -----------------------------------
 -- Hungry Crunch
--- Steals an enemy's HP. Additional effects: TP Reset, Meal Steal.
+-- Family: Bugard
+-- Description: Steals an enemy's HP. Additional effects: TP Reset, Meal Steal.
+-- Notes: Used by Boggelmann.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,18 +11,29 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.DARK, 2, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, damage))
+    -- TODO: Capture if magic or physical skill.
+    params.baseDamage         = mob:getMainLvl() + 2
+    params.fTP                = { 2.0, 2.0, 2.0 }
+    params.element            = xi.element.NONE
+    params.attackType         = xi.attackType.MAGICAL
+    params.damageType         = xi.damageType.NONE
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipMagicBonusDiff = true -- Other drain skills tested skipped MDB checks so adding this till we test physical/magical.
 
-    if damage > 0 then
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))
+
         target:setTP(0)
-        target:delStatusEffectSilent(xi.effect.FOOD)
+        target:delStatusEffectSilent(xi.effect.FOOD) -- TODO: Does it only delete the food effect or does it steal the buff?
     end
 
-    return damage
+    return info.damage
 end
 
 return mobskillObject

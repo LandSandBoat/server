@@ -101,7 +101,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.BEHEMOTHS_BANE)
+    if player then
+        player:addTitle(xi.title.BEHEMOTHS_BANE)
+    end
 end
 
 entity.onMobDespawn = function(mob)

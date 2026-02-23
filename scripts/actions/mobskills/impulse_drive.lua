@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         local resist = applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
         if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
             local duration = (5 + 5) * resist
-            target:addStatusEffect(xi.effect.BIND, 1, 0, duration)
+            target:addStatusEffect(xi.effect.BIND, { power = 1, duration = duration, origin = mob })
         end
     end
 

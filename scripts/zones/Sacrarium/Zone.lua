@@ -6,12 +6,34 @@ local ID = zones[xi.zone.SACRARIUM]
 ---@type TZone
 local zoneObject = {}
 
+local changeLabyrinthDoors = function()
+    -- change 18 labyrinth doors depending on in-game day (0 = open, 1 = closed)
+    local labyrinthDoorsByDay =
+    {
+        [xi.day.FIRESDAY]     = { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0 },
+        [xi.day.EARTHSDAY]    = { 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0 },
+        [xi.day.WATERSDAY]    = { 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
+        [xi.day.WINDSDAY]     = { 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
+        [xi.day.ICEDAY]       = { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0 },
+        [xi.day.LIGHTNINGDAY] = { 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0 },
+        [xi.day.LIGHTSDAY]    = { 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
+        [xi.day.DARKSDAY]     = { 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
+    }
+
+    local doors = labyrinthDoorsByDay[VanadielDayOfTheWeek()]
+    for i = 0, 17 do
+        GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(xi.anim.OPEN_DOOR + doors[i + 1])
+    end
+end
+
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
     GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0) -- QM moves every 10 minutes
 
     xi.treasure.initZone(zone)
+
+    changeLabyrinthDoors() -- Change to correct door settings on load
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,7 +53,7 @@ end
 zoneObject.afterZoneIn = function(player)
     -- ZONE WIDE LEVEL RESTRICTION
     if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 50, origin = player })
     end
 end
 
@@ -43,23 +65,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameDay = function()
-    -- change 18 labyrinth doors depending on in-game day (0 = open, 1 = closed)
-    local labyrinthDoorsByDay =
-    {
-        [xi.day.FIRESDAY]     = { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0 },
-        [xi.day.EARTHSDAY]    = { 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0 },
-        [xi.day.WATERSDAY]    = { 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
-        [xi.day.WINDSDAY]     = { 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
-        [xi.day.ICEDAY]       = { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0 },
-        [xi.day.LIGHTNINGDAY] = { 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0 },
-        [xi.day.LIGHTSDAY]    = { 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
-        [xi.day.DARKSDAY]     = { 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
-    }
-
-    local doors = labyrinthDoorsByDay[VanadielDayOfTheWeek()]
-    for i = 0, 17 do
-        GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(xi.anim.OPEN_DOOR + doors[i + 1])
-    end
+    changeLabyrinthDoors()
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

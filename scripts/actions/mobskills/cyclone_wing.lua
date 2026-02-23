@@ -1,7 +1,7 @@
 -----------------------------------
 -- Cyclone Wing
---
--- Description: Deals darkness damage to enemies within a very wide area of effect. Additional effect: Sleep
+-- Family: Wyrm (Vrtra)
+-- Description: Deals darkness damage to enemies within a very wide area of effect. Additional Effect: Sleep
 -- Type: Magical
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 30' radial.
@@ -21,14 +21,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.DARK, 4, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 60)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 4, 4, 4 }
+    params.element        = xi.element.DARK
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

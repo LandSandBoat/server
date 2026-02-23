@@ -11,12 +11,12 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
+itemObject.onItemUse = function(target, user)
     if
         target:getMod(xi.mod.DRINK_DISTILLED) == 1 and
         not target:hasStatusEffect(xi.effect.REGEN)
     then
-        target:addStatusEffect(xi.effect.REGEN, 1, 3, 300)
+        target:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 300, origin = user, tick = 3 })
     else
         -- Retail will consume the item while doing nothing but telling you there was no effect.
         target:messageBasic(xi.msg.basic.NO_EFFECT)

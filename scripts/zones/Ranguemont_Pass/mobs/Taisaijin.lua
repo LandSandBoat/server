@@ -21,7 +21,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.BYE_BYE_TAISAI)
+    if player then
+        player:addTitle(xi.title.BYE_BYE_TAISAI)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -7,7 +7,7 @@ local ID = zones[xi.zone.ROMAEVE]
 local zoneObject = {}
 
 local function handleFullMoon()
-    local shouldDoorsOpen = (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON and VanadielHour() >= 18 and VanadielHour() < 6)
+    local shouldDoorsOpen = (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON and (VanadielHour() >= 18 or VanadielHour() < 6))
 
     -- Set targetable status.
     local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)

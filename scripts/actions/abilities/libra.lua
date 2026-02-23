@@ -12,7 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- player:addStatusEffect(xi.effect.LIBRA, 20, 1, 1) -- TODO: implement xi.effect.LIBRA
+    -- player:addStatusEffect(xi.effect.LIBRA, { power = 20, duration = 1, origin = player, tick = 1 }) -- TODO: implement xi.effect.LIBRA
 end
 
 return abilityObject

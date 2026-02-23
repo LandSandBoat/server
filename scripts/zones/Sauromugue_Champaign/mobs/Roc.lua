@@ -29,8 +29,6 @@ entity.spawnPoints =
     { x =  188.566, y = -1.168, z = -296.794 },
     { x =  215.711, y =  0.404, z = -312.421 },
     { x =  212.596, y = -0.216, z = -249.303 },
-    { x =  189.023, y =  0.348, z = -196.885 },
-    { x =  195.192, y = -0.067, z = -194.328 },
     { x =  199.956, y =  0.000, z = -278.615 },
     { x =  191.796, y =  0.263, z = -250.968 }
 }
@@ -61,15 +59,17 @@ entity.onMobFight = function(mob, target)
             target:checkDistance(mob) > mob:getMeleeRange(target),
         },
         position = mob:getPos(),
-        offset = 10,
+        offset = 5,
         degrees = 180,
-        wait = 15,
+        wait = 10,
     }
     utils.drawIn(target, drawInTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.ROC_STAR)
+    if player then
+        player:addTitle(xi.title.ROC_STAR)
+    end
 end
 
 entity.onMobDespawn = function(mob)

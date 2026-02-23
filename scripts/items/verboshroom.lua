@@ -12,9 +12,9 @@ itemObject.onItemCheck = function(target, item, param, caster)
 end
 
 itemObject.onItemUse = function(target, user, item, action)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 0, 0, 0, xi.effectSourceType.FOOD, item:getID(), user:getID())
+    target:addStatusEffect(xi.effect.FOOD, { duration = 180, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
     if not target:hasStatusEffect(xi.effect.POISON) then
-        target:addStatusEffect(xi.effect.POISON, 2, 3, 180)
+        target:addStatusEffect(xi.effect.POISON, { power = 2, duration = 180, origin = user, tick = 3 })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

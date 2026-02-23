@@ -18,15 +18,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getWeaponDmg() * 3
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1.3, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    -- TODO: This is a physical skill. Will fix in mobPhysicalMove() PR
+    params.baseDamage     = mob:getWeaponDmg()
+    params.fTP            = { 2.00, 2.00, 2.00 }
+    params.element        = xi.element.DARK
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, damage))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, info.damage))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

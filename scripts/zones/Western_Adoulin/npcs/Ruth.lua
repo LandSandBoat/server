@@ -23,7 +23,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2523 then
         -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
-        player:addStatusEffect(xi.effect.IONIS, 0, 0, 9000)
+        player:addStatusEffect(xi.effect.IONIS, { duration = 9000, origin = player })
     end
 end
 

@@ -47,6 +47,12 @@ local function magicAccuracyFromSkill(actor, params)
     if params.skillType > 0 then
         magicAcc = actor:getSkillLevel(params.skillType)
 
+        -- If a mob is casting something its main/sub jobs cannot (i.e. JoL casting black magic) this is _exceptional_
+        -- So give them A+ rank base magic accuracy
+        if magicAcc == 0 and actor:isMob() then
+            magicAcc = xi.data.skillLevel.getSkillCap(actor:getMainLvl(), xi.skillRank.A_PLUS)
+        end
+
         if params.skillType == xi.skill.SINGING then
             if actor:isPC() then
                 -- Add ranged skill level ONLY if it's an instrument.
@@ -510,12 +516,6 @@ local function calculateResistanceFactor(actor, target, params)
             maxResistTier = 1
         elseif playerElementalEvasion == 0 then
             maxResistTier = 2
-        end
-
-    -- Non-players: Affected by resistance rank.
-    else
-        if params.resistanceRank <= -3 then
-            maxResistTier = 1
         end
     end
 

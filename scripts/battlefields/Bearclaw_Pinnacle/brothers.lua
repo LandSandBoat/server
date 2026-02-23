@@ -20,61 +20,29 @@ local content = Battlefield:new({
     grantXP          = 3500,
 })
 
-content.groups =
-{
-    {
-        mobs = { 'Eldertaur' },
-        mods =
-        {
-            [xi.mod.DMGMAGIC  ] = -1000,
-            [xi.mod.SLEEP_MEVA] = 75,
-        },
-
-        mobMods =
-        {
-            [xi.mobMod.SIGHT_RANGE] = 30,
-        },
-    },
-    {
-        mobs = { 'Mindertaur' },
-        mods =
-        {
-            [xi.mod.DMGMAGIC    ] = -1000,
-            [xi.mod.SILENCE_MEVA] = 75,
-            [xi.mod.SLEEP_MEVA  ] = 50,
-        },
-
-        mobMods =
-        {
-            [xi.mobMod.SIGHT_RANGE] = 30,
-        }
-    },
-}
-
 content:addEssentialMobs({ 'Eldertaur', 'Mindertaur' })
 
 content.loot =
 {
     {
-        { itemId = xi.item.NONE,                     weight = xi.loot.weight.VERY_LOW },
-        { itemId = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL   },
-        { itemId = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = xi.loot.weight.NORMAL   },
-        { itemId = xi.item.DRAGON_BONE,              weight = xi.loot.weight.NORMAL   },
+        { itemId = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = 3750 },
+        { itemId = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = 2500 },
+        { itemId = xi.item.DRAGON_BONE,              weight = 3750 },
     },
 
     {
-        { itemId = xi.item.NONE,         weight = xi.loot.weight.EXTREMELY_HIGH },
-        { itemId = xi.item.CLOUD_EVOKER, weight = xi.loot.weight.LOW            },
+        { itemId = xi.item.NONE,                     weight = 9500 },
+        { itemId = xi.item.CLOUD_EVOKER,             weight =  500 },
     },
 
     {
         quantity = 2,
-        { itemId = xi.item.NONE,                weight = xi.loot.weight.HIGH },
-        { itemId = xi.item.SCOUTERS_ROPE,       weight = xi.loot.weight.LOW  },
-        { itemId = xi.item.HEDGEHOG_BOMB,       weight = xi.loot.weight.LOW  },
-        { itemId = xi.item.MARTIAL_ANELACE,     weight = xi.loot.weight.LOW  },
-        { itemId = xi.item.MARTIAL_LANCE,       weight = xi.loot.weight.LOW  },
-        { itemId = xi.item.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
+        { itemId = xi.item.NONE,                     weight = 5500 },
+        { itemId = xi.item.SCOUTERS_ROPE,            weight =  700 },
+        { itemId = xi.item.HEDGEHOG_BOMB,            weight =  800 },
+        { itemId = xi.item.MARTIAL_ANELACE,          weight =  800 },
+        { itemId = xi.item.MARTIAL_LANCE,            weight =  800 },
+        { itemId = xi.item.SCROLL_OF_RAISE_III,      weight = 1400 },
     },
 }
 

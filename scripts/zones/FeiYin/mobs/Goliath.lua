@@ -18,7 +18,9 @@ entity.phList =
 }
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.GOLIATH_KILLER)
+    if player then
+        player:addTitle(xi.title.GOLIATH_KILLER)
+    end
 end
 
 return entity

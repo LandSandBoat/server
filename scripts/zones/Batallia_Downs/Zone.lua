@@ -48,10 +48,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     if player:getCharVar('[QUEST]FullSpeedAhead') == 1 then -- Normal Mode
-        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 0, 3, xi.fsa.duration)
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, { duration = xi.fsa.duration, origin = player, tick = 3 })
         return -1
     elseif player:getCharVar('[QUEST]FullSpeedAhead') == 2 then -- Easy Mode
-        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 1, 3, xi.fsa.duration)
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, { power = 1, duration = xi.fsa.duration, origin = player, tick = 3 })
         return -1
     end
 

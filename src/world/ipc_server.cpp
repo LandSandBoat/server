@@ -712,6 +712,41 @@ void IPCServer::handleMessage_AssistChannelEvent(const IPP& ipp, const ipc::Assi
     rerouteMessageToCharId(message.receiverId, message);
 }
 
+void IPCServer::handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallRequest& message)
+{
+    TracyZoneScoped;
+
+    ShowInfoFmt("GM Call #{} from {} (charId: {}, accId: {}, zone: {}): {}",
+                message.callId,
+                message.charName,
+                message.charId,
+                message.accId,
+                message.zoneId,
+                message.message);
+
+    // TODO: Route this to external clients
+}
+
+void IPCServer::handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallResponse& message)
+{
+    TracyZoneScoped;
+
+    // Client can only read up to 1024 characters, drop any extra characters now.
+    auto truncatedMessage    = message;
+    truncatedMessage.message = truncatedMessage.message.substr(0, 1024);
+
+    db::preparedStmt("UPDATE help_desk "
+                     "SET response = ?, responded_at = NOW() "
+                     "WHERE id = ?",
+                     truncatedMessage.message,
+                     truncatedMessage.callId);
+
+    if (const auto maybeCharIPP = getIPPForCharId(truncatedMessage.charId))
+    {
+        sendMessage(*maybeCharIPP, truncatedMessage);
+    }
+}
+
 void IPCServer::handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message)
 {
     TracyZoneScoped;

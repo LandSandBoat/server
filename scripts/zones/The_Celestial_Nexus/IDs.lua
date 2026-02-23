@@ -15,13 +15,13 @@ zones[xi.zone.THE_CELESTIAL_NEXUS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7068, -- Tallying conquest results...
-        MEMBERS_OF_YOUR_PARTY         = 7538, -- Currently, <number> members of your party (including yourself) have clearance to enter the battlefield.
-        MEMBERS_OF_YOUR_ALLIANCE      = 7539, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
-        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7541, -- The time limit for this battle is <number> minutes.
-        PARTY_MEMBERS_HAVE_FALLEN     = 7577, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7584, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        ENTERING_THE_BATTLEFIELD_FOR  = 7605, -- Entering the battlefield for [The Celestial Nexus/The Celestial Nexus/Crystal Paradise]!
+        CONQUEST_BASE                 = 7069, -- Tallying conquest results...
+        MEMBERS_OF_YOUR_PARTY         = 7539, -- Currently, <number> members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7540, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7542, -- The time limit for this battle is <number> minutes.
+        PARTY_MEMBERS_HAVE_FALLEN     = 7578, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7585, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7606, -- Entering the battlefield for [The Celestial Nexus/The Celestial Nexus/Crystal Paradise]!
     },
     mob =
     {

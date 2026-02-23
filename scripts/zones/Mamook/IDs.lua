@@ -16,16 +16,16 @@ zones[xi.zone.MAMOOK] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7064, -- You can't fish here.
-        LOGGING_IS_POSSIBLE_HERE      = 7549, -- Logging is possible here if you have <item>.
-        PARTY_MEMBERS_HAVE_FALLEN     = 7906, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7913, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        IMPENDING_BATTLE              = 8074, -- You feel the rush of impending battle!
-        PECULIAR_SENSATION            = 8132, -- % is overcome by a peculiar sensation.
-        NUMEROUS_STRANDS              = 8679, -- Numerous strands of hair are scattered all over...
-        SICKLY_SWEET                  = 8681, -- A sickly sweet fragrance pervades the air...
-        DRAWS_NEAR                    = 8703, -- Something draws near!
-        COMMON_SENSE_SURVIVAL         = 9574, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET        = 7065, -- You can't fish here.
+        LOGGING_IS_POSSIBLE_HERE      = 7550, -- Logging is possible here if you have <item>.
+        PARTY_MEMBERS_HAVE_FALLEN     = 7907, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7914, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        IMPENDING_BATTLE              = 8075, -- You feel the rush of impending battle!
+        PECULIAR_SENSATION            = 8133, -- % is overcome by a peculiar sensation.
+        NUMEROUS_STRANDS              = 8680, -- Numerous strands of hair are scattered all over...
+        SICKLY_SWEET                  = 8682, -- A sickly sweet fragrance pervades the air...
+        DRAWS_NEAR                    = 8704, -- Something draws near!
+        COMMON_SENSE_SURVIVAL         = 9575, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

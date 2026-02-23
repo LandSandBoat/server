@@ -15,14 +15,14 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7003, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
-        LAYTON_SHOP_DIALOG            = 7122, -- Might you be a student of the same field as I? If that is the case, I might be able to provide you with the proper grimoires...at a price, of course.
-        CAMPAIGN_RESULTS_TALLIED      = 7517, -- Campaign results tallied.
-        SARCOPHAGUS_SEALED            = 7616, -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
-        NAMES_CARVED_ON_STONE         = 7617, -- The names of the deceased in this area are carved upon the stone.
-        YOU_CAN_NOW_BECOME_A_SCHOLAR  = 7731, -- You can now become a scholar!
-        YOU_LEARN_EMBRAVA_AND_KAUSTRA = 7915, -- <name> learns Embrava and Kaustra!
-        ITEM_DELIVERY_DIALOG          = 7921, -- Have something to send?
-        COMMON_SENSE_SURVIVAL         = 8948, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        LAYTON_SHOP_DIALOG            = 7123, -- Might you be a student of the same field as I? If that is the case, I might be able to provide you with the proper grimoires...at a price, of course.
+        CAMPAIGN_RESULTS_TALLIED      = 7518, -- Campaign results tallied.
+        SARCOPHAGUS_SEALED            = 7617, -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
+        NAMES_CARVED_ON_STONE         = 7618, -- The names of the deceased in this area are carved upon the stone.
+        YOU_CAN_NOW_BECOME_A_SCHOLAR  = 7732, -- You can now become a scholar!
+        YOU_LEARN_EMBRAVA_AND_KAUSTRA = 7916, -- <name> learns Embrava and Kaustra!
+        ITEM_DELIVERY_DIALOG          = 7922, -- Have something to send?
+        COMMON_SENSE_SURVIVAL         = 8949, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

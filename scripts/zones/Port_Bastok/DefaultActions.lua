@@ -35,6 +35,7 @@ return {
     ['Mustafa']          = { text = ID.text.ARRIVING_PASSENGER_DIALOG },
     ['Nicadio']          = { event = 32 },
     ['Odyssean_Passage'] = { messageSpecial = ID.text.NOTHING_HAPPENS },
+    ['Oggbi']            = { event = 230 },
     ['Otto']             = { event = 20 },
     ['Panana']           = { event = 43 },
     ['Patient_Wheel']    = { event = 325 },

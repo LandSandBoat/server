@@ -59,7 +59,7 @@ class HXIClient:
         json_data.update({"password": self.password})
         json_data.update({"otp": 0})
         json_data.update({"new_password": ""})
-        json_data.update({"version": [2, 0, 0]})
+        json_data.update({"version": [2, 1, 0]})
         json_data.update({"command": LOGIN_ATTEMPT})
 
         json_string = json.dumps(json_data)

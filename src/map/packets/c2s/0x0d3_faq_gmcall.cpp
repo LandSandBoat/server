@@ -25,17 +25,37 @@
 
 auto GP_CLI_COMMAND_FAQ_GMCALL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Not implemented.
-    return PacketValidator();
+    return PacketValidator()
+        .oneOf<GP_CLI_COMMAND_FAQ_GMCALL_TYPE>(this->type)
+        .mustEqual(this->vers, 0, "vers not equal to 0")
+        .range("eos", this->eos, 0, 1);
 }
 
 void GP_CLI_COMMAND_FAQ_GMCALL::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->m_charHistory.gmCalls++;
-    ShowDebugFmt("GP_CLI_COMMAND_FAQ_GMCALL: Not implemented. type: {}, pktId: {}, seq: {}, eos: {}, blkNum: {}",
-                 type,
-                 pktId,
-                 seq,
-                 eos,
-                 blkNum);
+    switch (static_cast<GP_CLI_COMMAND_FAQ_GMCALL_TYPE>(this->type))
+    {
+        case GP_CLI_COMMAND_FAQ_GMCALL_TYPE::AddHistory:
+        {
+            // Client sent extra information after acknowledging a response.
+            // Contains several blocks, none of which are worth collecting at this point.
+            break;
+        }
+        case GP_CLI_COMMAND_FAQ_GMCALL_TYPE::GMCall:
+        {
+            // User submitted a GM call. There can be many packets, but they should not be processed until eos == 1
+            if (PChar->gmCallContainer().addPacket(*this))
+            {
+                // Received eos 1 - store in DB and send to ZMQ
+                PChar->gmCallContainer().processCall(PChar);
+                PChar->m_charHistory.gmCalls++;
+            }
+            break;
+        }
+        case GP_CLI_COMMAND_FAQ_GMCALL_TYPE::GMNotice:
+        {
+            // Unknown usage.
+            break;
+        }
+    }
 }

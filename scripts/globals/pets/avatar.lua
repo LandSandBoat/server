@@ -6,24 +6,11 @@ require('scripts/globals/summon')
 
 xi = xi or {}
 xi.pets = xi.pets or {}
-xi.pets.avatar = {}
-
-local buffModeVar          = 'AVATAR_BUFF_MODE_OFF'
-local lastCastTimeVar      = 'AVATAR_LAST_CASTINGTIME'
-local lastCastTimeStampVar = 'AVATAR_LAST_CAST_TIMESTAMP'
-local playerListenerVar    = 'SMN_SPIRIT_CAST_DELAY'
-local dummySpell           = xi.magic.spell.INDI_REGEN -- used to trigger a "valid" spell in TryCastSpell but not actually cast anything
-
-local printDebug = function(pet, textToPrint)
-    -- prints to map server if pet has local var
-    if pet:getLocalVar('debug') == 1 then
-        print(textToPrint)
-    end
-end
+xi.pets.avatar = xi.pets.avatar or {}
 
 -- will determine, in seconds, the spirit's casting cooldown
 -- Called every tick for player to adjust magic casting delay in real-time
-local setMagicCastCooldown = function(pet)
+local function setMagicCastCooldown(pet)
     local castingCooldown = 45
     local master = pet:getMaster()
 
@@ -68,14 +55,14 @@ local setMagicCastCooldown = function(pet)
     end
 
     -- "Buff mode" is enabled for first cast after spawn and after casting any enhancing magic
-    if pet:getLocalVar(buffModeVar) ~= 1 then
+    if pet:getLocalVar('AVATAR_BUFF_MODE_OFF') ~= 1 then
         castingCooldown = math.floor(castingCooldown / 2)
     end
 
     -- cast delay is ~1s past the finish of last spell, so we add casting time (or time since spell interrupt) to the castingCooldown
     -- this is done by simply tracking the elapsed time since action is no longer xi.action.category.MAGIC_CASTING
-    local lastCastTime = pet:getLocalVar(lastCastTimeVar)
-    local lastCastTimeStamp = pet:getLocalVar(lastCastTimeStampVar)
+    local lastCastTime = pet:getLocalVar('AVATAR_LAST_CASTINGTIME')
+    local lastCastTimeStamp = pet:getLocalVar('AVATAR_LAST_CAST_TIMESTAMP')
     if
         lastCastTimeStamp > 0 and
         GetSystemTime() - lastCastTimeStamp > lastCastTime
@@ -87,8 +74,8 @@ local setMagicCastCooldown = function(pet)
         lastCastTime > 0 and
         pet:getCurrentAction() ~= xi.action.category.MAGIC_CASTING
     then
-        pet:setLocalVar(lastCastTimeStampVar, 0)
-        pet:setLocalVar(lastCastTimeVar, lastCastTime)
+        pet:setLocalVar('AVATAR_LAST_CAST_TIMESTAMP', 0)
+        pet:setLocalVar('AVATAR_LAST_CASTINGTIME', lastCastTime)
     end
 
     pet:setMobMod(xi.mobMod.MAGIC_COOL, lastCastTime + math.max(castingCooldown, 0))
@@ -96,55 +83,57 @@ end
 
 xi.pets.avatar.onMobSpawn = function(pet)
     local master = pet:getMaster()
-    if
-        not master or
-        master:getObjType() ~= xi.objType.PC
-    then
+    if not master then
         return
     end
 
-    -- add listener to player to fine-tune spirit pact cast delays in realtime
-    if
-        pet:getPetID() <= xi.petId.DARK_SPIRIT
-    then
-        -- stops the pet from immediately casting a spell on spawn and respecting the cooldowns by exiting early if MAGIC_COOL is 1
-        pet:setMobMod(xi.mobMod.MAGIC_COOL, 1)
-        pet:setMod(xi.mod.MPP, 500)
-        pet:updateHealth()
-        pet:setMP(pet:getMaxMP())
-
-        master:addListener('TICK', playerListenerVar, function(playerArg)
-            local petArg = playerArg:getPet()
-
-            if petArg and petArg:getMobMod(xi.mobMod.MAGIC_COOL) > 1 then
-                setMagicCastCooldown(petArg)
-            end
-        end)
-
-        master:addListener('ABILITY_USE', playerListenerVar .. 'ABILITY', function(playerArg, target, ability, action)
-            local petArg = playerArg:getPet()
-            local abilityID = ability:getID()
-
-            if
-                petArg and
-                (abilityID == xi.jobAbility.ASSAULT or
-                abilityID == xi.jobAbility.RETREAT)
-            then
-                printDebug(petArg, 'resetting cast cooldown')
-                -- reset cast cooldown via same method as fresh spawn
-                petArg:setMobMod(xi.mobMod.MAGIC_COOL, 1)
-                petArg:setLocalVar(buffModeVar, 1)
-            end
-        end)
+    if master:getObjType() ~= xi.objType.PC then
+        return
     end
+
+    if pet:getPetID() > xi.petId.DARK_SPIRIT then
+        return
+    end
+
+    -- Stop pet from immediately casting a spell on spawn and respecting the cooldowns by exiting early if MAGIC_COOL is 1
+    pet:setMobMod(xi.mobMod.MAGIC_COOL, 1)
+    pet:setMod(xi.mod.MPP, 500)
+    pet:updateHealth()
+    pet:setMP(pet:getMaxMP())
+
+    -- Add listener to player to fine-tune spirit pact cast delays in realtime
+    master:addListener('TICK', 'SMN_SPIRIT_CAST_DELAY', function(masterArg)
+        local petArg = masterArg:getPet()
+
+        if petArg and petArg:getMobMod(xi.mobMod.MAGIC_COOL) > 1 then
+            setMagicCastCooldown(petArg)
+        end
+    end)
+
+    master:addListener('ABILITY_USE', 'SMN_SPIRIT_CAST_DELAY' .. 'ABILITY', function(masterArg, target, skill, action)
+        local petArg  = masterArg:getPet()
+        if not petArg then
+            return
+        end
+
+        local skillId = skill:getID()
+        if
+            skillId == xi.jobAbility.ASSAULT or
+            skillId == xi.jobAbility.RETREAT
+        then
+            -- Reset cast cooldown via same method as fresh spawn
+            petArg:setMobMod(xi.mobMod.MAGIC_COOL, 1)
+            petArg:setLocalVar('AVATAR_BUFF_MODE_OFF', 1)
+        end
+    end)
 end
 
 xi.pets.avatar.onMobDeath = function(pet)
     local master = pet:getMaster()
 
     if master and master:getObjType() == xi.objType.PC then
-        master:removeListener(playerListenerVar)
-        master:removeListener(playerListenerVar .. 'ABILITY')
+        master:removeListener('SMN_SPIRIT_CAST_DELAY')
+        master:removeListener('SMN_SPIRIT_CAST_DELAY' .. 'ABILITY')
     end
 end
 
@@ -163,18 +152,18 @@ xi.pets.avatar.onMobSpellChoose = function(pet)
     end
 
     -- meta checks for fresh pet, etc
-    pet:setLocalVar(lastCastTimeVar, 0)
-    pet:setLocalVar(lastCastTimeStampVar, GetSystemTime())
+    pet:setLocalVar('AVATAR_LAST_CASTINGTIME', 0)
+    pet:setLocalVar('AVATAR_LAST_CAST_TIMESTAMP', GetSystemTime())
 
     -- early exit from casting a spell to prevent immediately casting a spell after being summoned
     if pet:getMobMod(xi.mobMod.MAGIC_COOL) == 1 then
         setMagicCastCooldown(pet)
 
-        return dummySpell
+        return xi.magic.spell.INDI_REGEN
     end
 
     -- ensures magic casting delay is no longer halved
-    pet:setLocalVar(buffModeVar, 1)
+    pet:setLocalVar('AVATAR_BUFF_MODE_OFF', 1)
 
     -- Core functionality to decide which spell to use
     local spellID, spellTarget = xi.pets.avatar.getSpiritSpell(pet)
@@ -184,13 +173,13 @@ xi.pets.avatar.onMobSpellChoose = function(pet)
     if spell then
         if spell:getSkillType() == xi.skill.ENHANCING_MAGIC then
             -- half casting delay
-            pet:setLocalVar(buffModeVar, 0)
+            pet:setLocalVar('AVATAR_BUFF_MODE_OFF', 0)
         end
 
         pet:castSpell(spellID, spellTarget or pet)
         setMagicCastCooldown(pet)
 
-        return dummySpell
+        return xi.magic.spell.INDI_REGEN
     end
 
     return 0

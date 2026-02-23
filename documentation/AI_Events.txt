@@ -43,16 +43,16 @@ ATTACKED - Defender, attacker, action
 RANGE_START - Entity, action
 RANGE_STATE_EXIT - Entity, Target, action
 
-ABILITY_START - Entity, Ability
-ABILITY_USE - Entity, Target, Ability, action
-ABILITY_TAKE - Target, Entity, Ability, action
-ABILITY_STATE_EXIT - Entity, Ability
+ABILITY_START      - userEntity, skillObject
+ABILITY_USE        - userEntity, targetEntity, skillObject, action
+ABILITY_TAKE       - userEntity, targetEntity, skillObject, action
+ABILITY_STATE_EXIT - userEntity, skillObject
 
-WEAPONSKILL_STATE_ENTER - Entity, Skillid
-WEAPONSKILL_BEFORE_USE - Entity, Skillid
-WEAPONSKILL_USE - Entity, Target, Skillid, TP, action
-WEAPONSKILL_TAKE - Target, Entity, Skillid, TP, action
-WEAPONSKILL_STATE_EXIT - Entity, Skillid
+WEAPONSKILL_STATE_ENTER - userEntity, skillId
+WEAPONSKILL_BEFORE_USE  - userEntity, skillId
+WEAPONSKILL_USE         - userEntity, targetEntity, skillId, tp, action
+WEAPONSKILL_TAKE        - userEntity, targetEntity, skillId, tp, action
+WEAPONSKILL_STATE_EXIT  - userEntity, skillId
 
 MAGIC_START       - Entity, Spell, action
 MAGIC_USE         - Entity, Target, Spell, action

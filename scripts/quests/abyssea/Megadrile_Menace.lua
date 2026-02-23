@@ -2,8 +2,10 @@
 -- Megadrile Menace
 -----------------------------------
 -- !addquest 8 165
+-- Cavernous Maw    : !pos -28.000 46.000 -685.000 117
+-- Glavoid          : !spawnmob 16961930
 -----------------------------------
-local tahrongiID = zones[xi.zone.TAHRONGI_CANYON]
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE)
@@ -19,7 +21,7 @@ quest.sections =
                 player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED
         end,
 
-        [xi.zone.LA_THEINE_PLATEAU] =
+        [xi.zone.TAHRONGI_CANYON] =
         {
             ['Cavernous_Maw'] =
             {
@@ -33,7 +35,7 @@ quest.sections =
                 [38] = function(player, csid, option, npc)
                     quest:begin(player)
                     player:addCurrency('cruor', 50)
-                    player:messageSpecial(tahrongiID.text.CRUOR_OBTAINED, 50, player:getCurrency('cruor'))
+                    player:messageSpecial(ID.text.CRUOR_TOTAL, 50, player:getCurrency('cruor'))
                 end,
             },
         },
@@ -44,7 +46,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED and player:hasTitle(xi.title.GLAVOID_STAMPEDER)
         end,
 
-        [xi.zone.LA_THEINE_PLATEAU] =
+        [xi.zone.TAHRONGI_CANYON] =
         {
             onZoneIn = function(player, prevZone)
                 return 39

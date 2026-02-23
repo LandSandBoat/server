@@ -39,7 +39,7 @@ xi.job_utils.monk.useBoost = function(player, target, ability)
         effect:setPower(effect:getPower() + power) -- Store updated power in boost for zoning
         effect:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
+        player:addStatusEffect(xi.effect.BOOST, { power = power, duration = 180, origin = player })
     end
 end
 
@@ -69,7 +69,7 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
             player:delStatusEffect(xi.effect.REGEN)
         end
 
-        player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
+        player:addStatusEffect(xi.effect.REGEN, { power = 10, duration = merits, origin = player, tier = 1 })
     end
 
     return recoveryAmount
@@ -79,7 +79,7 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
     local penanceMerits = player:getMerit(xi.merit.PENANCE) -- 20/40/60/80/100
     if penanceMerits > 0 then
         target:delStatusEffectSilent(xi.effect.INHIBIT_TP)
-        target:addStatusEffect(xi.effect.INHIBIT_TP, 25, 0, penanceMerits)
+        target:addStatusEffect(xi.effect.INHIBIT_TP, { power = 25, duration = penanceMerits, origin = player })
     end
 
     local boost = player:getStatusEffect(xi.effect.BOOST)
@@ -102,7 +102,7 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
     local power = 45 + player:getMod(xi.mod.COUNTERSTANCE_EFFECT)
 
     target:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
-    target:addStatusEffect(xi.effect.COUNTERSTANCE, power, 0, 300)
+    target:addStatusEffect(xi.effect.COUNTERSTANCE, { power = power, duration = 300, origin = player })
 
     return xi.effect.COUNTERSTANCE
 end
@@ -110,7 +110,7 @@ end
 xi.job_utils.monk.useDodge = function(player, target, ability)
     local jpLevel  = target:getJobPointLevel(xi.jp.DODGE_EFFECT)
     local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
-    player:addStatusEffect(xi.effect.DODGE, jpLevel + dodgeMod, 0, 30)
+    player:addStatusEffect(xi.effect.DODGE, { power = jpLevel + dodgeMod, duration = 30, origin = player })
 
     return xi.effect.DODGE
 end
@@ -118,7 +118,7 @@ end
 xi.job_utils.monk.useFocus = function(player, target, ability)
     local jpLevel  = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
     local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
-    player:addStatusEffect(xi.effect.FOCUS, jpLevel + focusMod, 0, 30)
+    player:addStatusEffect(xi.effect.FOCUS, { power = jpLevel + focusMod, duration = 30, origin = player })
 
     return xi.effect.FOCUS
 end
@@ -127,19 +127,19 @@ xi.job_utils.monk.useFootwork = function(player, target, ability)
     local kickDmg = 20 + player:getWeaponDmg()
     local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
 
-    player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 60, 0, kickAttPercent)
+    player:addStatusEffect(xi.effect.FOOTWORK, { power = kickDmg, duration = 60, origin = player, subPower = kickAttPercent })
 
     return xi.effect.FOOTWORK
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)
-    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
+    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, { power = 1, duration = 180, origin = player })
 
     return xi.effect.FORMLESS_STRIKES
 end
 
 xi.job_utils.monk.useHundredFists = function(player, target, ability)
-    player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 45)
+    player:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, duration = 45, origin = player })
 
     return xi.effect.HUNDRED_FISTS
 end
@@ -195,13 +195,13 @@ xi.job_utils.monk.impetusHitListener = function(attacker, victim, attack)
 end
 
 xi.job_utils.monk.useImpetus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.IMPETUS, 0, 0, 180)
+    player:addStatusEffect(xi.effect.IMPETUS, { duration = 180, origin = player })
 
     return xi.effect.IMPETUS
 end
 
 xi.job_utils.monk.useInnerStrength = function(player, target, ability)
-    player:addStatusEffect(xi.effect.INNER_STRENGTH, 2, 0, 30)
+    player:addStatusEffect(xi.effect.INNER_STRENGTH, { power = 2, duration = 30, origin = player })
 
     return xi.effect.INNER_STRENGTH
 end
@@ -210,13 +210,13 @@ xi.job_utils.monk.useMantra = function(player, target, ability)
     local merits = player:getMerit(xi.merit.MANTRA)
 
     target:delStatusEffect(xi.effect.MAX_HP_BOOST) -- TODO: confirm which versions of HP boost mantra can overwrite
-    target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = merits, duration = 180, origin = player })
 
     return 0 -- xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
 end
 
 xi.job_utils.monk.usePerfectCounter = function(player, target, ability)
-    player:addStatusEffect(xi.effect.PERFECT_COUNTER, 2, 0, 30)
+    player:addStatusEffect(xi.effect.PERFECT_COUNTER, { power = 2, duration = 30, origin = player })
 
     return xi.effect.PERFECT_COUNTER
 end

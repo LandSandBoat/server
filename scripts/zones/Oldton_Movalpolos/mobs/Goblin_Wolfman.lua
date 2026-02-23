@@ -9,19 +9,25 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-    mob:addMod(xi.mod.ACC, 70) -- Very accurate
-    mob:setLocalVar('weaponOn', 0)
+
+    mob:addListener('EFFECT_LOSE', 'BLOOD_WEAPON_EFFECT_LOSE', function(mobArg, effect)
+        if effect:getEffectType() == xi.effect.BLOOD_WEAPON then
+            mobArg:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+            mobArg:setMod(xi.mod.DELAYP, 0)
+        end
+    end)
 end
 
-entity.onMobFight = function(mob, target)
-    local weaponOn = mob:getLocalVar('weaponOn')
-    if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and weaponOn == 0 then
-        mob:addMod(xi.mod.DELAY, -1500)
-        mob:addMod(xi.mod.ATTP, 160)
-        mob:setLocalVar('weaponOn', 1)
-    elseif not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and weaponOn == 1 then
-        mob:delMod(xi.mod.DELAY, -1500)
-        mob:delMod(xi.mod.ATTP, 160)
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+    mob:setMod(xi.mod.DELAYP, 0)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 75) -- Can cast Stun every minute
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    if skill:getID() == xi.mobSkill.BLOOD_WEAPON_1 then
+        mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+        mob:setMod(xi.mod.DELAYP, -25)
     end
 end
 

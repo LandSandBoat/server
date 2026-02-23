@@ -38,16 +38,9 @@ itemObject.onItemUse = function(target, user, item, action)
         local effectId = availableEffects[1]
         local effect = target:getStatusEffect(effectId)
 
-        if effect and target:delStatusEffect(effectId) then
-            user:addStatusEffect(
-                effectId,
-                effect:getPower(),
-                effect:getTick(),
-                math.ceil(effect:getTimeRemaining() / 1000), -- Gets the remaining time and converts milliseconds to seconds
-                effect:getSubType(),
-                effect:getSubPower(),
-                effect:getTier()
-            )
+        if effect then
+            user:copyStatusEffect(effect)
+            target:delStatusEffect(effectId)
             numEffectsTransferred = 1
         end
     end

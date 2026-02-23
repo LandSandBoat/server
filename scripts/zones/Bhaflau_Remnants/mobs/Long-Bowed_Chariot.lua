@@ -35,7 +35,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.COMET_CHARIOTEER)
+    if player then
+        player:addTitle(xi.title.COMET_CHARIOTEER)
+    end
+
     if optParams.isKiller or optParams.noKiller then
         mob:getInstance():complete()
     end

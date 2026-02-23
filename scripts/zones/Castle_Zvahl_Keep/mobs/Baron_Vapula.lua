@@ -15,7 +15,7 @@ entity.phList =
     [ID.mob.BARON_VAPULA - 1] = ID.mob.BARON_VAPULA, -- -227.007 -52.125 83.768
 }
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -23,8 +23,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 354)
-    player:addTitle(xi.title.HELLSBANE)
+    if player then
+        player:addTitle(xi.title.HELLSBANE)
+        xi.hunts.checkHunt(mob, player, 354)
+    end
 end
 
 return entity

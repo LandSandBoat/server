@@ -2,31 +2,40 @@
 -- Hex Palm
 -- Family: Qutrub
 -- Description: Steals HP from targets in front.
--- Type: Magical
--- Utsusemi/Blink absorb: Wipes shadows
--- Range: Front cone
 -- Notes: Used only when wielding no weapon.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 1 or mob:getAnimationSub() == 3 then
+    if
+        mob:getAnimationSub() == 1 or -- Main weapon broken, sub weapon sheathed
+        mob:getAnimationSub() == 3    -- Both weapons broken
+    then
         return 0
     else
         return 1
     end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local damage = mob:getMainLvl() * 2
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.element.DARK, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    params.baseDamage         = mob:getMainLvl()
+    params.fTP                = { 2, 2, 2 }
+    params.element            = xi.element.NONE
+    params.attackType         = xi.attackType.MAGICAL
+    params.damageType         = xi.damageType.NONE
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.skipMagicBonusDiff = true
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, damage))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

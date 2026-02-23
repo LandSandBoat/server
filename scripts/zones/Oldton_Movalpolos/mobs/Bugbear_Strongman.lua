@@ -18,6 +18,10 @@ entity.phList =
     [ID.mob.BUGBEAR_STRONGMAN[2] - 1] = ID.mob.BUGBEAR_STRONGMAN[2], -- 58.013, 15.5, -121.928 (east)
 }
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 244)
     xi.magian.onMobDeath(mob, player, optParams, set{ 5, 515, 894 })

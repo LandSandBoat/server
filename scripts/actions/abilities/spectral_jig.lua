@@ -19,8 +19,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     local finalDuration      = math.floor(baseDuration * durationMultiplier * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
 
     if not player:hasStatusEffect(xi.effect.SNEAK) then
-        player:addStatusEffect(xi.effect.SNEAK, 0, 10, finalDuration)
-        player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, finalDuration)
+        player:addStatusEffect(xi.effect.SNEAK, { duration = finalDuration, origin = player, tick = 10 })
+        player:addStatusEffect(xi.effect.INVISIBLE, { duration = finalDuration, origin = player, tick = 10 })
         ability:setMsg(xi.msg.basic.SPECTRAL_JIG) -- Gains the effect of sneak and invisible
     else
         ability:setMsg(xi.msg.basic.NO_EFFECT) -- no effect on player.

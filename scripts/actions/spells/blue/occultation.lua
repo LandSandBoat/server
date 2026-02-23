@@ -41,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if not target:addStatusEffect(xi.effect.BLINK, power, 0, duration) then
+    if not target:addStatusEffect(xi.effect.BLINK, { power = power, duration = duration, origin = caster }) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

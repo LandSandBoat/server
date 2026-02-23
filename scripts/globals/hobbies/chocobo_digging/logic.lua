@@ -305,17 +305,11 @@ xi.chocoboDig.start = function(player)
     local text          = zones[zoneId].text
     local todayDigCount = xi.chocoboDig.fetchFatigue(player)
     local currentX      = player:getXPos()
+    local currentY      = player:getYPos()
     local currentZ      = player:getZPos()
-    local currentXSign  = 0
-    local currentZSign  = 0
-
-    if currentX < 0 then
-        currentXSign = 2
-    end
-
-    if currentZ < 0 then
-        currentZSign = 2
-    end
+    local currentXSign  = currentX < 0 and 2 or 0
+    local currentYSign  = currentY < 0 and 2 or 0
+    local currentZSign  = currentZ < 0 and 2 or 0
 
     -----------------------------------
     -- Early returns and exceptions
@@ -351,12 +345,10 @@ xi.chocoboDig.start = function(player)
 
     -- Handle auto-fail from position.
     local lastX = player:getLocalVar('[DIG]LastXPos') * (1 - player:getLocalVar('[DIG]LastXPosSign'))
+    local lastY = player:getLocalVar('[DIG]LastYPos') * (1 - player:getLocalVar('[DIG]LastYPosSign'))
     local lastZ = player:getLocalVar('[DIG]LastZPos') * (1 - player:getLocalVar('[DIG]LastZPosSign'))
 
-    if
-        currentX >= lastX - 5 and currentX <= lastX + 5 and -- Check current X axis to see if you are too close to your last X.
-        currentZ >= lastZ - 5 and currentZ <= lastZ + 5     -- Check current Z axis to see if you are too close to your last Z.
-    then
+    if player:checkDistance(lastX, lastY, lastZ) < 5 then
         player:messageText(player, text.FIND_NOTHING)
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
@@ -369,8 +361,10 @@ xi.chocoboDig.start = function(player)
 
     -- Set player variables, no matter the result.
     player:setLocalVar('[DIG]LastXPos', math.abs(currentX))
+    player:setLocalVar('[DIG]LastYPos', math.abs(currentY))
     player:setLocalVar('[DIG]LastZPos', math.abs(currentZ))
     player:setLocalVar('[DIG]LastXPosSign', currentXSign)
+    player:setLocalVar('[DIG]LastYPosSign', currentYSign)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 

@@ -1,5 +1,6 @@
 -----------------------------------
--- Fire 2
+-- Fire II
+-- Family: Ifrit (Player Pet)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -11,16 +12,28 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local damage = math.floor(45 + 0.025 * pet:getTP() + (pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) * 1.5)
+    local params = {}
 
-    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    info.damage = xi.mobskills.mobAddBonuses(pet, target, info.damage, xi.element.FIRE, petskill)
-    damage = xi.summon.avatarFinalAdjustments(info, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, 1)
+    params.baseDamage      = pet:getMainLvl() + 2
+    params.fTP             = { 1.500, 2.750, 3.125 }
+    params.int_wSC         = 0.30
+    params.element         = xi.element.FIRE
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.FIRE
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier = 1.5
+    params.canMagicBurst   = true
+    params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.FIRE)
-    target:updateEnmityFromDamage(pet, damage)
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+    end
+
+    print('skillID', petskill:getID())
+
+    return info.damage
 end
 
 return abilityObject

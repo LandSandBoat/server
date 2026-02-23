@@ -87,7 +87,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local multiplierDayWeather         = xi.spells.damage.calculateDayAndWeather(actor, params.magicalElement, false)
 
     -- Calculate optional multipliers.
-    local multiplierMagicDiff          = params.canMAB and xi.spells.damage.calculateMagicBonusDiff(actor, params.aeTarget, 0, 0, params.magicalElement) or 1
+    local multiplierMagicDiff          = params.canMAB and xi.spells.damage.calculateMagicBonusDiff(actor, params.aeTarget, 0, 0, params.magicalElement, 0) or 1
     local multiplierResist             = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.magicalElement, params.actorStat, 0, 0) or 1
     local multiplierForcedResistTier   = params.canResist and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
 

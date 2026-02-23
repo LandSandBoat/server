@@ -14,8 +14,8 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.AZOUPH, 0, 1)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.AZOUPH, duration = 1, origin = user, icon = 0 })
 end
 
 itemObject.onItemDrop = function(target, item)

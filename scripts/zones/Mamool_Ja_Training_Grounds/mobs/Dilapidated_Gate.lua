@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     mob:hideName(true)
     mob:setAutoAttackEnabled(false)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:addListener('WEAPONSKILL_TAKE', 'DILAPIDATED_GATE_WEAPONSKILL_TAKE', function(target, attacker, skillId, tp, action)
+    mob:addListener('WEAPONSKILL_TAKE', 'DILAPIDATED_GATE_WEAPONSKILL_TAKE', function(user, target, skillId, tp, action)
         if skillId == 1733 or skillId == 1923 then -- firespit
             target:setLocalVar('hits', target:getLocalVar('hits') + 1)
         elseif skillId == 1736 or skillId == 1925 then --Axe Throw or Stave Toss

@@ -211,7 +211,7 @@ bool CAbilityState::Update(timer::time_point tick)
             }
             if (auto* target = GetTarget())
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
+                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", m_PEntity, target, m_PAbility.get(), &action);
             }
         }
 

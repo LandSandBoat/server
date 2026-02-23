@@ -256,7 +256,7 @@ INSERT INTO `merits` VALUES (2630,'adventurers_dirge',5,10,512,7,40);
 INSERT INTO `merits` VALUES (2632,'con_anima',5,1,512,7,40);
 INSERT INTO `merits` VALUES (2634,'con_brio',5,1,512,7,40);
 INSERT INTO `merits` VALUES (2688,'stealth_shot',5,10,1024,7,41);
-INSERT INTO `merits` VALUES (2690,'flashy_shot',5,1,1024,7,41);
+INSERT INTO `merits` VALUES (2690,'flashy_shot',5,5,1024,7,41);
 INSERT INTO `merits` VALUES (2692,'snapshot',5,2,1024,7,41);
 INSERT INTO `merits` VALUES (2694,'recycle',5,5,1024,7,41);
 INSERT INTO `merits` VALUES (2752,'shikikoyo',5,12,2048,7,42);

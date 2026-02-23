@@ -194,7 +194,9 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.CACTROT_DESACELERADOR)
+    if player then
+        player:addTitle(xi.title.CACTROT_DESACELERADOR)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -1,9 +1,7 @@
 -----------------------------------
---  Ion Shower
---  Description: Calls forth an ion storm, dealing Lightning damage to all nearby targets. Additional effect: Stun
---  Type: Magical
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: Unknown radial
+-- Ion Shower
+-- Family: Yovra
+-- Description: Calls forth an ion storm, dealing Thunder damage to all nearby targets. Additional Effect: Stun
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,14 +10,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.element.THUNDER, 2, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+    local params = {}
 
-    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 5)
+    params.baseDamage      = mob:getMainLvl() + 2
+    params.fTP             = { 2, 2, 2 }
+    params.element         = xi.element.THUNDER
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.THUNDER
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier = 1
 
-    return damage
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 5)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

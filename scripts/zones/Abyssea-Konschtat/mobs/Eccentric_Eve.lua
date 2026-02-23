@@ -6,7 +6,9 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.ECCENTRICITY_EXPUNGER)
+    if player then
+        player:addTitle(xi.title.ECCENTRICITY_EXPUNGER)
+    end
 end
 
 return entity

@@ -5,12 +5,12 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target)
+itemObject.onItemCheck = function(target, user)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.COSTUME, 0, 0, 10000, 6189)
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.COSTUME, { duration = 10000, origin = user, subType = 6189 })
 end
 
 itemObject.onEffectGain = function(target, effect)
