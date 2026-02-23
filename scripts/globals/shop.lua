@@ -66,6 +66,7 @@ xi.shop.curioVendorMoogle = function(player, stock)
             count = count + 1
         end
     end
+
     player:createShop(count, log)
     --player:createShop(#stock / 3, log)
 
