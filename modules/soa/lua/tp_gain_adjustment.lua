@@ -1,5 +1,5 @@
 -----------------------------------
--- Era TP Gain Formula (Module Override)
+-- TP Gain Adjustment (Module Override)
 --
 -- Overrides:
 --   xi.combat.tp.calculateTPReturn(gainee, delay)
@@ -31,7 +31,7 @@
 require('modules/module_utils')
 require('scripts/globals/combat/tp')
 
-local m = Module:new('era_tp_gain')
+local m = Module:new('tp_gain_adjustment')
 m:addOverride('xi.combat.tp.calculateTPReturn', function(_, delay)
     local tpReturn = 0
     -- PCs + Pets + Mobs
