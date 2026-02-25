@@ -90,6 +90,7 @@ xi.shop.curio =
     ['foodStuffs']      = 4,
     ['scrolls']         = 5,
     ['keys']            = 6,
+    ['equipment']       = 7
     -- keyitems not implemented yet
 }
 
@@ -605,6 +606,73 @@ xi.shop.curioVendorMoogleStock =
         { xi.item.NEWTON_COFFER_KEY,     5000, xi.ki.RHAPSODY_IN_UMBER },
         { xi.item.PSOXJA_CHEST_KEY,      2500, xi.ki.RHAPSODY_IN_WHITE },
     },
+
+    [xi.shop.curio.equipment] =
+    {
+        { xi.item.ENIF_CORAZZA,         30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ADHARA_MANTEEL,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.MURZIM_CORAZZA,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SHEDIR_MANTEEL,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SORTIARIUS_EARRING,   30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ENIF_MANOPOLAS,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ADHARA_GAGES,         30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.MURZIM_MANOPOLAS,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SHEDIR_GAGES,         30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ENIF_COSCIALES,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ADHARA_SERAWEELS,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.MURZIM_COSCIALES,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SHEDIR_SERAWEELS,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ENIF_GAMBIERAS,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ADHARA_CRACKOWS,      30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.MURZIM_GAMBIERAS,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SHEDIR_CRACKOWS,      30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ENIF_ZUCCHETTO,       30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.ADHARA_TURBAN,        30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.MURZIM_ZUCCHETTO,     30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.SHEDIR_TURBAN,        30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.PATENTIA_SASH,        30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.PRODIGIOUS_MANTLE,    30000, xi.ki.RHAPSODY_IN_UMBER },
+        { xi.item.CUSTOM_VEST,         100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_F_GLOVES,     100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_PANTS,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_F_GLOVES,     100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_TUNIC,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_M_GLOVES,     100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_SLACKS,       100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.CUSTOM_M_BOOTS,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_BODICE,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_GLOVES,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_F_CHAUSSES,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_F_LEDELSENS,   100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_JERKIN,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_GAUNTLETS,     100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_M_CHAUSSES,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.MAGNA_M_LEDELSENS,   100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.WONDER_KAFTAN,       100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.WONDER_MITTS,        100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.WONDER_BRACCAE,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.WONDER_CLOMPS,       100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.SAVAGE_SEPARATES,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.SAVAGE_GAUNTLETS,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.SAVAGE_LOINCLOTH,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.SAVAGE_GAITERS,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.ELDERS_SURCOAT,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.ELDERS_BRACERS,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.ELDERS_BRAGUETTE,    100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.ELDERS_SANDALS,      100000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.HOMAM_CORAZZA,        10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.NASHIRA_MANTEEL,      10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.HOMAM_MANOPOLAS,      10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.NASHIRA_GAGES,        10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.HOMAM_ZUCCHETTO,      10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.NASHIRA_TURBAN,       10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.HOMAM_COSCIALES,      10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.NASHIRA_SERAWEELS,    10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.HOMAM_GAMBIERAS,      10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.NASHIRA_CRACKOWS,     10000, xi.ki.RHAPSODY_IN_WHITE }
+        { xi.item.PSILOMENE,            30000, xi.ki.RHAPSODY_IN_UMBER }
+        { xi.item.POTENS_GRIP,            30000, xi.ki.RHAPSODY_IN_UMBER }
+    }
 }
 
 -----------------------------------
