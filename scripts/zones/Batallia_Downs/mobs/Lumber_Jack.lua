@@ -32,10 +32,18 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     if mob:hasStatusEffect(xi.effect.ENSTONE) then
         return 0, 0, 0
-    else
-        -- TODO: This does NOT emit a message/animation.
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
     end
+
+    local pTable =
+    {
+        chance    = 20,
+        effectId  = xi.effect.STUN,
+        duration  = 10,
+        animation = 0,
+        message   = 0,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
