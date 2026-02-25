@@ -5919,7 +5919,7 @@ INSERT INTO `mob_groups` VALUES (42,6240,89,'Brass_Quadav',300,0,349,0,0,0,NULL)
 INSERT INTO `mob_groups` VALUES (43,6239,89,'Veteran_Quadav',300,0,1233,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (44,6237,89,'Greater_Quadav',300,0,1233,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (45,6503,89,'Blood_Soul',300,1,311,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (46,3148,89,'Pixie',300,0,2000,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (46,3148,89,'Pixie',600,0,2000,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (47,1698,89,'Goblin_Pioneer',300,0,1136,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (48,1688,89,'Goblin_Mine',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (49,2654,89,'Migratory_Hippogryph',0,128,0,2000,0,0,NULL);

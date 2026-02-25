@@ -37,6 +37,18 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        xi.magic.spell.FIRE_III,
+        xi.magic.spell.FIRAGA_III,
+        xi.magic.spell.FLARE,
+        xi.magic.spell.BURN,
+    }
+
+    return spellList[math.random(1, #spellList)]
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 502)
 end
