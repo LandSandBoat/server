@@ -10823,48 +10823,48 @@ INSERT INTO `mob_groups` VALUES (70,0,146,'Naji',0,128,0,0,0,0,NULL);
 -- Beadeaux (Zone 147)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2965,147,'Old_Quadav',300,0,1850,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,791,147,'Copper_Quadav',300,0,513,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,2373,147,'Land_Pugil',960,0,975,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (4,525,147,'Brass_Quadav',300,0,353,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,2965,147,'Old_Quadav',600,0,1850,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,791,147,'Copper_Quadav',600,0,513,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,2373,147,'Land_Pugil',600,0,975,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (4,525,147,'Brass_Quadav',600,0,353,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,427,147,'BiGho_Headtaker',0,32,2851,1050,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (6,2987,147,'Ooze',300,0,1867,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (7,3628,147,'Silver_Quadav',960,0,2252,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,1472,147,'Garnet_Quadav',960,0,936,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,2987,147,'Ooze',600,0,1867,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (7,3628,147,'Silver_Quadav',720,0,2252,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,1472,147,'Garnet_Quadav',720,0,936,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,4506,147,'Zircon_Quadav',720,0,2803,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (10,538,147,'Bronze_Quadav',960,0,362,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,659,147,'Caterpillar',960,0,256,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (10,538,147,'Bronze_Quadav',720,0,362,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,659,147,'Caterpillar',600,0,256,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (12,928,147,'DaDha_Hundredmask',0,32,2841,1530,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,1509,147,'GeDha_Evileye',0,32,2842,1400,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (14,696,147,'Charging_Sheep',300,0,454,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (14,696,147,'Charging_Sheep',600,0,454,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,3912,147,'Thunder_Elemental',960,4,2410,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (16,4309,147,'Water_Elemental',960,4,2629,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (17,1778,147,'GoBhu_Gascon',960,0,2817,1500,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (17,1778,147,'GoBhu_Gascon',300,0,2817,1500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (18,4522,147,'ZoKhu_Blackcloud',0,32,2850,2000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (19,1192,147,'Elder_Quadav',960,0,753,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (20,2102,147,'Iron_Quadav',960,0,753,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (21,3731,147,'Spinel_Quadav',960,0,2306,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (22,1207,147,'Emerald_Quadav',960,0,762,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (19,1192,147,'Elder_Quadav',840,0,753,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (20,2102,147,'Iron_Quadav',840,0,753,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (21,3731,147,'Spinel_Quadav',840,0,2306,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (22,1207,147,'Emerald_Quadav',840,0,762,0,0,0,NULL); -- ?
 INSERT INTO `mob_groups` VALUES (23,1023,147,'DeVyu_Headhunter',300,0,2818,1870,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (24,539,147,'Broo',960,0,363,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (24,539,147,'Broo',840,0,363,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (25,1482,147,'GaBhu_Unvanquished',0,32,2849,3500,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (26,1624,147,'Gloop',960,0,1007,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (26,1624,147,'Gloop',840,0,1007,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (27,3769,147,'Steel_Quadav',960,0,3329,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (28,2795,147,'Mythril_Quadav',960,0,1768,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (29,1753,147,'Gold_Quadav',960,0,1194,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (30,3974,147,'Topaz_Quadav',960,0,2451,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (31,7309,147,'Big_Jaw',960,0,279,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (31,7309,147,'Big_Jaw',720,0,279,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,125,147,'Ancient_Quadav',960,0,88,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,907,147,'Darksteel_Quadav',960,0,566,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (34,3156,147,'Platinum_Quadav',960,0,2915,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (35,3463,147,'Sapphire_Quadav',960,0,2158,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (36,2377,147,'Larva',960,0,256,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (36,2377,147,'Larva',720,0,256,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (37,2664,147,'Mimic',0,128,1677,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (38,7089,147,'Magnes_Quadav_NM',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (39,7090,147,'Nickel_Quadav_NM',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (40,7182,147,'Land_Pugil',960,0,975,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (41,7183,147,'Gloop',960,0,1007,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (42,7184,147,'Big_Jaw',960,0,279,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (40,7182,147,'Land_Pugil',600,0,975,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (41,7183,147,'Gloop',840,0,1007,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (42,7184,147,'Big_Jaw',720,0,279,0,0,0,NULL);
 
 -- ------------------------------------------------------------
 -- Qulun_Dome (Zone 148)
