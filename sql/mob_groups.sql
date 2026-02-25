@@ -11050,33 +11050,33 @@ INSERT INTO `mob_groups` VALUES (2,6768,153,'Stygian_Pugil_fished',0,128,2355,0,
 INSERT INTO `mob_groups` VALUES (3,6782,153,'Bouncing_Ball_fished',0,128,342,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,6783,153,'Demonic_Pugil_fished',0,128,147,0,0,0,NULL);
 
-INSERT INTO `mob_groups` VALUES (5,343,153,'Bark_Spider',960,0,227,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (6,937,153,'Death_Cap',960,0,582,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (5,343,153,'Bark_Spider',300,0,227,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,937,153,'Death_Cap',300,0,582,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,1201,153,'Ellyllon',0,32,2890,3600,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,2762,153,'Mourioche',960,0,1746,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (9,2754,153,'Moss_Eater',960,0,1742,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (10,2272,153,'Knight_Crawler',960,0,1456,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,2962,153,'Old_Goobbue',960,0,3228,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (12,3375,153,'Robber_Crab',960,0,2109,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,2762,153,'Mourioche',300,0,1746,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,2754,153,'Moss_Eater',300,0,1742,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (10,2272,153,'Knight_Crawler',300,0,1456,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,2962,153,'Old_Goobbue',300,0,3228,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,3375,153,'Robber_Crab',300,0,2109,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,4309,153,'Water_Elemental',960,4,2629,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,206,153,'Aquarius',0,32,149,6100,3000,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,3912,153,'Thunder_Elemental',960,4,2410,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (16,4103,153,'Unut',0,32,2524,7400,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (17,2745,153,'Morbol_Menace',960,0,1738,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (18,1191,153,'Elder_Goobbue',960,0,3012,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (19,2282,153,'Korrigan',960,0,3229,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (20,3649,153,'Skimmer',960,0,571,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (21,3768,153,'Steelshell',960,0,2330,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (22,3200,153,'Processionaire',960,0,2022,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (23,920,153,'Darter',960,0,571,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (24,469,153,'Blood_Ball',960,0,0,0,0,0,NULL); -- Removed drop pool, FFXIDB shows zero drops for mob (http://ffxidb.com/zones/153/blood-ball)
+INSERT INTO `mob_groups` VALUES (17,2745,153,'Morbol_Menace',300,0,1738,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (18,1191,153,'Elder_Goobbue',300,0,3012,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (19,2282,153,'Korrigan',300,0,3229,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (20,3649,153,'Skimmer',300,0,571,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (21,3768,153,'Steelshell',300,0,2330,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (22,3200,153,'Processionaire',300,0,2022,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (23,920,153,'Darter',300,0,571,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (24,469,153,'Blood_Ball',300,0,0,0,0,0,NULL); -- Removed drop pool, FFXIDB shows zero drops for mob (http://ffxidb.com/zones/153/blood-ball)
 INSERT INTO `mob_groups` VALUES (25,4578,153,'Mourning_Crawler',300,0,3007,0,0,0,'ABYSSEA');
 INSERT INTO `mob_groups` VALUES (26,4577,153,'Snaggletooth_Peapuk',300,0,2814,0,0,0,'ABYSSEA');
 INSERT INTO `mob_groups` VALUES (27,6369,153,'Viseclaw',300,0,3197,0,0,0,'ABYSSEA');
 INSERT INTO `mob_groups` VALUES (28,123,153,'Ancient_Goobbue',86400,0,3141,15000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (29,515,153,'Boyahda_Sapling',960,0,2912,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (30,344,153,'Bark_Tarantula',960,0,228,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (31,978,153,'Demonic_Rose',960,0,609,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (29,515,153,'Boyahda_Sapling',300,0,2912,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (30,344,153,'Bark_Tarantula',300,0,228,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (31,978,153,'Demonic_Rose',300,0,609,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,2393,153,'Leshonki',0,32,3039,5000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,4253,153,'Voluptuous_Vivian',0,32,2831,13000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (34,2664,153,'Mimic',0,128,1680,0,0,0,NULL);
@@ -11089,6 +11089,7 @@ INSERT INTO `mob_groups` VALUES (40,6877,153,'Hidhaegg',0,128,0,0,0,0,NULL);
 
 -- Star Onion Fortune
 INSERT INTO `mob_groups` VALUES (41,0,153,'Templar_Crawler',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (42,3768,153,'Steelshell',1200,0,2330,0,0,0,NULL); -- 20 min respawn near Cloister
 
 -- ------------------------------------------------------------
 -- Dragons_Aery (Zone 154)
