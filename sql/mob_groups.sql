@@ -10946,10 +10946,10 @@ INSERT INTO `mob_groups` VALUES (50,1930,149,'Hematic_Cyst',0,128,0,2400,0,0,NUL
 -- Monastic_Cavern (Zone 150)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2997,150,'Orcish_Bowshooter',960,0,1876,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,3014,150,'Orcish_Footsoldier',960,0,1906,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,3015,150,'Orcish_Gladiator',960,0,1911,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (4,3039,150,'Orcish_Trooper',960,0,1945,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,2997,150,'Orcish_Bowshooter',840,0,1876,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,3014,150,'Orcish_Footsoldier',840,0,1906,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,3015,150,'Orcish_Gladiator',840,0,1911,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (4,3039,150,'Orcish_Trooper',840,0,1945,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,3041,150,'Orcish_Veteran',960,0,1948,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,3029,150,'Orcish_Predator',960,0,1933,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,3046,150,'Orcish_Zerker',960,0,1955,0,0,0,NULL);
