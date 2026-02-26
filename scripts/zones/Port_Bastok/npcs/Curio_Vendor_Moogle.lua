@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    print(string.format("DEUBG: csid: %d, option: %d", csid, option))
+    print(string.format('DEUBG: csid: %d, option: %d', csid, option))
     if csid == 9601 then
         if xi.shop.curioVendorMoogleStock[option] then
             xi.shop.curioVendorMoogle(player, xi.shop.curioVendorMoogleStock[option])
