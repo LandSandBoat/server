@@ -37,6 +37,9 @@ xi.settings.login =
     -- Allow character creation through the lobby (true/false)
     CHARACTER_CREATION = true,
 
+    -- Announce Player Login (true/false)
+    LOGIN_ANNOUNCE = false,
+
     -- Number of simultaneous game sessions per IP (0 for no limit)
     LOGIN_LIMIT = 0,
 
