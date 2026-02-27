@@ -224,13 +224,15 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     if player:getCharVar('GMHidden') == 1 then
         player:setGMHidden(true)
     end
-	
+
     -- Announces player login after 2500ms delay if LOGIN_ANNOUNCE = true in login.lua
-    if player:getLocalVar('gameLogin') == 1 and
-        xi.settings.login.LOGIN_ANNOUNCE == true then
-            player:timer(2500, function(player, msg, area)
-            player:printToArea(string.format('%s logged in!', player:getName()), xi.msg.channel.SYSTEM_3, 0, '') 
-        end)
+    if
+        player:getLocalVar('gameLogin') == 1 and
+        xi.settings.login.LOGIN_ANNOUNCE == true
+            then
+                player:timer(2500, function(player, msg, area)
+                player:printToArea(string.format('%s logged in!', player:getName()), xi.msg.channel.SYSTEM_3, 0, '')
+            end)
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
