@@ -18,6 +18,7 @@ zones[xi.zone.GRAUBERG_S] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
+        GATE_IS_LOCKED                = 7215,  -- The gate is locked.
         A_SHIVER_RUNS_DOWN            = 7439, -- A shiver runs down your spine...
         ATTEND_TO_MORE_PRESSING       = 7440, -- Perhaps you should first attend to more pressing matters...
         CAMPAIGN_RESULTS_TALLIED      = 7606, -- Campaign results tallied.

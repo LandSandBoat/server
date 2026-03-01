@@ -73,7 +73,7 @@ struct HookContext
 class TestEngine final : public Engine
 {
 public:
-    TestEngine(asio::io_context& io_context, TestConfig testConfig);
+    TestEngine(Scheduler& scheduler, TestConfig testConfig);
     ~TestEngine() override;
 
     DISALLOW_COPY_AND_MOVE(TestEngine);
@@ -87,6 +87,7 @@ private:
     auto runBeforeHooks(const HookContext& context, const std::string& testName) const -> std::optional<std::string>;
     void runAfterHooks(const HookContext& context, const std::string& testName) const;
 
+    Scheduler&                          scheduler_;
     std::unique_ptr<MapEngine>          mapEngine_;
     std::unique_ptr<WorldEngine>        worldEngine_;
     std::unique_ptr<MockManager>        mockManager_;

@@ -48,9 +48,9 @@ local function handleQuestCompletion(player, csid, option, npc)
             player:delKeyItem(questData[2])
         end
 
-        xi.wotg.helpers.checkMemoryFragments(player)
-
-        quest:complete(player)
+        if quest:complete(player) then
+            xi.wotg.helpers.checkMemoryFragments(player)
+        end
     end
 end
 

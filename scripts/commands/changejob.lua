@@ -56,6 +56,12 @@ commandObj.onTrigger = function(player, jobId, level, master)
         jobNameByNum[v] = k
     end
 
+    -- if the player has a pet despawn it, clean up pet.
+    local pet = player:getPet()
+    if pet then
+        player:despawnPet()
+    end
+
     -- output new job to player
     local masterStr = masterJob and ' (Mastered)' or ''
     player:printToPlayer(string.format('You are now a %s%i/%s%i%s.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl(), masterStr))

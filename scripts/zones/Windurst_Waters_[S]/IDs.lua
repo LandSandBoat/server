@@ -15,6 +15,7 @@ zones[xi.zone.WINDURST_WATERS_S] =
         KEYITEM_LOST                  = 6395,  -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL           = 6396,  -- You do not have enough gil.
         ITEMS_OBTAINED                = 6400,  -- You obtain <number> <item>!
+        REPORT_TO_CAIT_SITH           = 6993,  -- You have obtained all of Lilisette's memory fragments. Make haste and report to Cait Sith.
         CARRIED_OVER_POINTS           = 7002,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7003,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7004,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.

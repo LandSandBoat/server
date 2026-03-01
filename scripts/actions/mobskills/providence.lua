@@ -27,7 +27,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.USES)
 
     -- Listener will reset Poroggo to regular state on first cast.
-    mob:addListener('MAGIC_START', 'PROVIDENCE_MAGIC_START', function(mobArg, spell, action)
+    mob:addListener('MAGIC_START', 'PROVIDENCE_MAGIC_START', function(mobArg, targetArg, spell, action)
         -- Reset Poroggo to former spell list or default to generic BLM list
         local postProvidenceSpellListId = mobArg:getLocalVar('[providence]spellListId') or 2
         local postProvidenceMagicCool = mobArg:getLocalVar('[providence]magicCool') or 35

@@ -66,43 +66,17 @@ namespace effects
 // Default effect of statuses are overwrite if equal or higher
 struct EffectParams_t
 {
-    uint32      Flag;
-    std::string Name;
-    // type will erase all other effects that match
-    // example: en- spells, spikes
-    uint16 Type;
-    // Negative means the new effect can only land if the negative id is weaker
-    // example: haste, slow
-    EFFECT NegativeId;
-    // only overwrite its self if the new effect is equal or higher / higher than current
-    // example: protect, blind
-    EFFECTOVERWRITE Overwrite;
-    // If this status effect is on the user, it will not take effect
-    // example: lullaby will not take effect with sleep I
-    EFFECT BlockId;
-    // Will always remove this effect when landing
-    EFFECT RemoveId;
-    // status effect element, used in resistances
-    uint8 Element;
-
-    // minimum duration. IE: stun cannot last less than 1 second
-    timer::duration MinDuration;
-
-    // Order in which the status effect should be displayed for the player
-    uint16 SortKey;
-
-    EffectParams_t()
-    : Flag(0)
-    , Type(0)
-    , NegativeId((EFFECT)0)
-    , Overwrite(EFFECTOVERWRITE::EQUAL_HIGHER)
-    , BlockId((EFFECT)0)
-    , RemoveId((EFFECT)0)
-    , Element(0)
-    , MinDuration(0s)
-    , SortKey(0)
-    {
-    }
+    uint32          Flag{ 0 };
+    std::string     Name{};
+    uint16          Type{ 0 };                                  // type will erase all other effects that match. Examples: En- spells, Spikes.
+    EFFECT          NegativeId{ 0 };                            // Negative means the new effect can only land if the negative id is weaker. Example: Haste, Slow
+    EFFECTOVERWRITE Overwrite{ EFFECTOVERWRITE::EQUAL_HIGHER }; // only overwrite its self if the new effect is equal or higher / higher than current. Example: Protect, Blind
+    EFFECT          BlockId{ 0 };                               // If this status effect is on the user, it will not take effect. Example: lullaby will not take effect with sleep I
+    EFFECT          RemoveId{ 0 };                              // Will always remove this effect when landing
+    uint8           Element{ 0 };                               // status effect element, used in resistances
+    timer::duration MinDuration{ 0s };                          // minimum duration. IE: stun cannot last less than 1 second
+    uint16          SortKey{ 0 };                               // Order in which the status effect should be displayed for the player
+    MsgStd          WearOffMessageId{ MsgStd::EffectWearsOff }; // Message ID for when effect wears off
 };
 
 std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
@@ -116,7 +90,7 @@ void LoadEffectsParameters()
 
     const auto rset = db::preparedStmt("SELECT id, name, flags, type, "
                                        "negative_id, overwrite, block_id, remove_id, "
-                                       "element, min_duration, sort_key "
+                                       "element, min_duration, sort_key, wear_off_message_id "
                                        "FROM status_effects "
                                        "WHERE id < ?",
                                        MAX_EFFECTID);
@@ -124,19 +98,18 @@ void LoadEffectsParameters()
     {
         const auto EffectID = rset->get<uint16>("id");
 
-        EffectsParams[EffectID].Name       = rset->get<std::string>("name");
-        EffectsParams[EffectID].Flag       = rset->get<uint32>("flags");
-        EffectsParams[EffectID].Type       = rset->get<uint16>("type");
-        EffectsParams[EffectID].NegativeId = rset->get<EFFECT>("negative_id");
-        EffectsParams[EffectID].Overwrite  = rset->get<EFFECTOVERWRITE>("overwrite");
-        EffectsParams[EffectID].BlockId    = rset->get<EFFECT>("block_id");
-        EffectsParams[EffectID].RemoveId   = rset->get<EFFECT>("remove_id");
-
-        EffectsParams[EffectID].Element     = rset->get<uint16>("element");
-        EffectsParams[EffectID].MinDuration = std::chrono::seconds(rset->get<uint32>("min_duration"));
-
-        const auto sortKey              = rset->get<uint16>("sort_key");
-        EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
+        EffectsParams[EffectID].Name             = rset->get<std::string>("name");
+        EffectsParams[EffectID].Flag             = rset->get<uint32>("flags");
+        EffectsParams[EffectID].Type             = rset->get<uint16>("type");
+        EffectsParams[EffectID].NegativeId       = rset->get<EFFECT>("negative_id");
+        EffectsParams[EffectID].Overwrite        = rset->get<EFFECTOVERWRITE>("overwrite");
+        EffectsParams[EffectID].BlockId          = rset->get<EFFECT>("block_id");
+        EffectsParams[EffectID].RemoveId         = rset->get<EFFECT>("remove_id");
+        EffectsParams[EffectID].Element          = rset->get<uint16>("element");
+        EffectsParams[EffectID].MinDuration      = std::chrono::seconds(rset->get<uint32>("min_duration"));
+        const auto sortKey                       = rset->get<uint16>("sort_key");
+        EffectsParams[EffectID].SortKey          = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
+        EffectsParams[EffectID].WearOffMessageId = rset->getOrDefault<MsgStd>("wear_off_message_id", MsgStd::EffectWearsOff);
 
         auto filename = fmt::format("./scripts/effects/{}.lua", EffectsParams[EffectID].Name);
         luautils::CacheLuaObjectFromFile(filename);
@@ -626,8 +599,11 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, co
 
             if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)))
             {
+                const auto effectId  = PStatusEffect->GetStatusID();
+                const auto messageId = effectId < MAX_EFFECTID ? effects::EffectsParams[effectId].WearOffMessageId : MsgStd::EffectWearsOff;
+
                 // Notify owner that they lost their buff.
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, messageId);
 
                 // Notify origin entity if they are in the same zone, and we are in their spawn list.
                 const auto originId = PStatusEffect->GetOriginID();
@@ -636,7 +612,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, co
                     auto* POriginEntity = m_POwner->loc.zone->GetCharByID(originId);
                     if (POriginEntity && charutils::hasEntitySpawned(POriginEntity, PChar))
                     {
-                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(POriginEntity, PChar, PStatusEffect->GetIcon(), 0, messageId);
                     }
                 }
             }
@@ -650,6 +626,9 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, co
         {
             if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && !(PStatusEffect->HasEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE)) && !m_POwner->isDead())
             {
+                const auto effectId  = PStatusEffect->GetStatusID();
+                const auto messageId = effectId < MAX_EFFECTID ? effects::EffectsParams[effectId].WearOffMessageId : MsgStd::EffectWearsOff;
+
                 // Notify origin entity if they are in the same zone, and we are in their spawn list.
                 const auto originId = PStatusEffect->GetOriginID();
                 if (originId != 0 && m_POwner->loc.zone)
@@ -657,7 +636,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, co
                     auto* POriginEntity = m_POwner->loc.zone->GetCharByID(originId);
                     if (POriginEntity && charutils::hasEntitySpawned(POriginEntity, m_POwner))
                     {
-                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_POwner, m_POwner, PStatusEffect->GetIcon(), 0, MsgStd::EffectWearsOff);
+                        POriginEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(POriginEntity, m_POwner, PStatusEffect->GetIcon(), 0, messageId);
                     }
                 }
             }

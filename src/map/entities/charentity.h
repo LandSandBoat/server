@@ -25,6 +25,7 @@
 #include "aman.h"
 #include "event_info.h"
 #include "gmcall_container.h"
+#include "inventory_sync_state.h"
 #include "item_container.h"
 #include "map_session.h"
 #include "monstrosity.h"
@@ -36,6 +37,7 @@
 #include <bitset>
 #include <deque>
 #include <map>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -553,13 +555,12 @@ public:
     bool getBlockingAid() const;
     void setBlockingAid(bool isBlockingAid);
 
-    // Send updates about dirty containers in post tick
-    std::map<CONTAINER_ID, bool> dirtyInventoryContainers;
-
-    bool              m_EquipSwap; // true if equipment was recently changed
     bool              m_EffectsChanged;
     timer::time_point m_LastSynthTime{};
     timer::time_point m_LastRangedAttackTime{};
+
+    void flushEquipChanges();
+    auto inventorySyncState() -> InventorySyncState&;
 
     CHAR_SUBSTATE m_Substate;
 
@@ -704,6 +705,8 @@ private:
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
+
+    InventorySyncState inventorySyncState_;
 
     mutable std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
     std::unordered_set<std::string>                                   charVarChanges;

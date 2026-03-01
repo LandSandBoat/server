@@ -242,7 +242,7 @@ xi.einherjar.getArmouryCrateRewards = function(bossId, chamberId)
 
     -- 3. Wing specific abjuration (5% chance)
     if math.random(1, 100) <= 5 then
-        local selectedAbjuration = math.random(1, #abjurations[tier])
+        local selectedAbjuration = abjurations[tier][math.random(1, #abjurations[tier])]
         table.insert(rewards, selectedAbjuration)
         -- Captures show it is possible to get 2x of the same abjuration, even without Heitrun.
         -- TODO: Rate of secondary roll is likely between 5 and 10%.

@@ -24,6 +24,7 @@
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
+#include "common/scheduler.h"
 
 #include "map_constants.h"
 
@@ -37,7 +38,7 @@ class MapSocket
 public:
     using ReceiveFn = std::function<void(const std::error_code&, std::span<uint8>, IPP)>;
 
-    MapSocket(asio::io_context& io_context, uint16 port, ReceiveFn onReceiveFn); // TODO: Move passing in onReceiveFn to recvFor
+    MapSocket(Scheduler& scheduler, uint16 port, ReceiveFn onReceiveFn);
     ~MapSocket();
 
     void recvFor(timer::duration duration);
@@ -48,12 +49,12 @@ public:
 private:
     void startReceive();
 
+    Scheduler&              scheduler_;
     uint16                  port_;
-    asio::io_context&       io_context_;
     asio::ip::udp::socket   socket_;
     NetworkBuffer           buffer_; // TODO: Pass in the global buffer, or only use this one
     asio::ip::udp::endpoint remote_endpoint_;
-    bool                    isRunning;
+    bool                    isRunning_{ true };
 
     ReceiveFn onReceiveFn_;
 };

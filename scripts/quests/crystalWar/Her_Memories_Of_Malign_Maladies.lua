@@ -155,9 +155,8 @@ quest.sections =
             onEventFinish =
             {
                 [169] = function(player, csid, option, npc)
-                    xi.wotg.helpers.checkMemoryFragments(player)
-
                     if quest:complete(player) then
+                        xi.wotg.helpers.checkMemoryFragments(player)
                         player:delKeyItem(xi.ki.FEY_STONE)
                     end
                 end,

@@ -647,6 +647,7 @@ enum class Mod
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
     WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
     WYVERN_ATTRIBUTE_DA        = 1056, // Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    WYVERN_SHOW_READYING       = 1195, // Pet shows readying animation instead of suppressing it (e.g., wyvern breath)
     DRAGOON_BREATH_RECAST      = 1057, // Restoring/Smithing Breath Recast Reduction (seconds)
     ENHANCE_DEEP_BREATHING     = 283,  // Add 5/256 to deep breathing bonus per merit level when calculating healing breath
     UNCAPPED_WYVERN_BREATH     = 284,  // Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
@@ -990,7 +991,7 @@ enum class Mod
     NO_SPELL_MP_DEPLETION     = 530,  // % to not deplete MP on spellcast.
     STONESKIN_BONUS_HP        = 539,  // Bonus "HP" granted to Stoneskin spell.
     DAY_NUKE_BONUS            = 565,  // Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
-    DAY_WEATHER_PROC_BONUS    = 1787, // Bonus damage from Twilight cape which works with both day OR weather procs.
+    DAY_WEATHER_PROC_BONUS    = 1194, // Bonus damage from Twilight cape which works with both day OR weather procs.
     IRIDESCENCE               = 566,  // Iridescence trait (additional weather damage/penalty)
     BARSPELL_AMOUNT           = 567,  // Additional elemental resistance granted by bar- spells
     BARSPELL_MDEF_BONUS       = 827,  // Extra magic defense bonus granted to the bar- spell effect
@@ -1148,7 +1149,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1195 and onward
+    // SPARE IDs: 1196 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

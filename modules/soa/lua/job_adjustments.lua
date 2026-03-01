@@ -123,4 +123,62 @@ end)
 --   Tonko Ni:    600 seconds -> 300 seconds
 --   Monomi Ichi: 420 seconds -> 180 seconds
 
+-----------------------------------
+-- Dragoon
+-----------------------------------
+
+-- Spirit Surge: Removes ATK and DEF bonuses
+-- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+m:addOverride('xi.effects.spirit_surge.onEffectGain', function(target, effect)
+    effect:addMod(xi.mod.HP, effect:getPower())
+    target:updateHealth()
+
+    effect:addMod(xi.mod.STR, effect:getSubPower())
+    effect:addMod(xi.mod.ACC, 50)
+    effect:addMod(xi.mod.HASTE_ABILITY, 2500)
+    effect:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
+end)
+
+-- Wyvern Breath: Show readying animation to match the reverted 3-second prepare time
+-- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+m:addOverride('xi.pets.wyvern.onMobSpawn', function(mob)
+    super(mob)
+
+    mob:addMod(xi.mod.WYVERN_SHOW_READYING, 1)
+end)
+
+-- Wyvern Levelup: Remove player stat transfers from wyvern levelups
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
+m:addOverride('xi.job_utils.dragoon.addWyvernExp', function(player, exp)
+    local wyvern      = player:getPet()
+    local prevExp     = wyvern:getLocalVar('wyvern_exp')
+    local numLevelUps = 0
+
+    if prevExp < 1000 then
+        -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
+        local currentExp = exp
+        if prevExp + currentExp > 1000 then
+            currentExp = 1000 - prevExp
+        end
+
+        numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
+
+        if numLevelUps ~= 0 then
+            wyvern:addMod(xi.mod.ACC, 6 * numLevelUps)
+            wyvern:addMod(xi.mod.HPP, 6 * numLevelUps)
+            wyvern:addMod(xi.mod.ATTP, 5 * numLevelUps)
+
+            wyvern:updateHealth()
+            wyvern:setHP(wyvern:getMaxHP())
+
+            player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
+        end
+
+        wyvern:setLocalVar('wyvern_exp', prevExp + exp)
+        wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
+    end
+
+    return numLevelUps
+end)
+
 return m

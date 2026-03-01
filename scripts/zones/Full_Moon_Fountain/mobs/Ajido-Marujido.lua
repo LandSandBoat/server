@@ -56,71 +56,75 @@ local helperConfig =
     end,
 }
 
+entity.onMobInitialize = function(mob)
+    -- Teleport when taking damage
+    mob:addListener('TAKE_DAMAGE', 'AJIDO_TAKE_DAMAGE', function(mobArg, damage, attacker, attackType, damageType)
+        if damage <= 30 then
+            return
+        end
+
+        if GetSystemTime() <= mobArg:getLocalVar('teleportTime') then
+            return
+        end
+
+        mobArg:setMagicCastingEnabled(false)
+        mobArg:setLocalVar('warpInProgress', 1)
+        mobArg:useMobAbility(xi.mobSkill.AJIDO_WARP_OUT, nil, 0)
+    end)
+
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(mobArg, skillId)
+        if skillId == xi.mobSkill.AJIDO_WARP_OUT then
+            local config         = teleportConfig[mobArg:getBattlefield():getArea()]
+            local targetPosition = utils.randomEntry(config.positions)
+
+            mobArg:setPos(targetPosition.x, targetPosition.y, targetPosition.z, mobArg:getRotPos())
+            mobArg:queue(0, function(mobArgArg)
+                mobArgArg:useMobAbility(xi.mobSkill.AJIDO_WARP_IN, nil, 0)
+            end)
+        elseif skillId == xi.mobSkill.AJIDO_WARP_IN then
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setLocalVar('warpInProgress', 0)
+            mobArg:setLocalVar('teleportTime', GetSystemTime() + 5)
+        end
+    end)
+end
+
 entity.onMobSpawn = function(mob)
     xi.mix.helperNpc.config(mob, helperConfig)
     mob:setMagicCastingEnabled(false)
-
-    mob:addListener('MAGIC_START', 'MAGIC_MSG', function(ajidoMob, spell, action)
-        local spellId = spell:getID()
-        if spellId == xi.magic.spell.BURST then
-            ajidoMob:showText(ajidoMob, ID.text.PLAY_TIME_IS_OVER)
-        elseif spellId == xi.magic.spell.FLOOD then
-            ajidoMob:showText(ajidoMob, ID.text.YOU_SHOULD_BE_THANKFUL)
-        end
-    end)
-
-    -- Teleport when taking damage
-    mob:addListener('TAKE_DAMAGE', 'AJIDO_TAKE_DAMAGE', function(ajidoMob, damage, attacker, attackType, damageType)
-        if damage > 30 and GetSystemTime() > ajidoMob:getLocalVar('teleportTime') then
-            ajidoMob:setMagicCastingEnabled(false)
-            ajidoMob:setLocalVar('warpInProgress', 1)
-            ajidoMob:useMobAbility(xi.mobSkill.AJIDO_WARP_OUT, nil, 0)
-        end
-    end)
-
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(ajidoMob, skillId)
-        if skillId == xi.mobSkill.AJIDO_WARP_OUT then
-            local battlefieldArea = ajidoMob:getBattlefield():getArea()
-            local config = teleportConfig[battlefieldArea]
-
-            if config and config.positions then
-                -- Select a random position from available teleport locations
-                local targetPosition = utils.randomEntry(config.positions)
-
-                if targetPosition then
-                    ajidoMob:setPos(targetPosition.x, targetPosition.y, targetPosition.z, ajidoMob:getRotPos())
-                    ajidoMob:queue(0, function(mobArg)
-                        mobArg:useMobAbility(xi.mobSkill.AJIDO_WARP_IN, nil, 0)
-                    end)
-                end
-            end
-        elseif skillId == xi.mobSkill.AJIDO_WARP_IN then
-            local currentTime = GetSystemTime()
-            ajidoMob:setMagicCastingEnabled(true)
-            ajidoMob:setLocalVar('warpInProgress', 0)
-            ajidoMob:setLocalVar('teleportTime', currentTime + 5)
-        end
-    end)
 end
 
 entity.onMobEngage = function(mob, target)
-    local currentTime = GetSystemTime()
-    mob:setLocalVar('magicWait', currentTime + 30)
+    mob:setLocalVar('magicWait', GetSystemTime() + 30)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 50 and mob:getLocalVar('saidMessage') == 0 then
-        mob:showText(mob, ID.text.DONT_GIVE_UP)
-        mob:setLocalVar('saidMessage', 1)
+    if mob:getLocalVar('warpInProgress') == 1 then
+        return
     end
 
     -- Wait 30 seconds to start casting (but only if not in warp process)
-    if mob:getLocalVar('warpInProgress') == 0 then
-        local currentTime = GetSystemTime()
-        local magicWait = mob:getLocalVar('magicWait')
-        if currentTime > magicWait then
-            mob:setMagicCastingEnabled(true)
-        end
+    if GetSystemTime() > mob:getLocalVar('magicWait') then
+        mob:setMagicCastingEnabled(true)
+    end
+
+    if mob:getLocalVar('saidMessage') == 1 then
+        return
+    end
+
+    if mob:getHPP() < 50 then
+        mob:showText(mob, ID.text.DONT_GIVE_UP)
+        mob:setLocalVar('saidMessage', 1)
+    end
+end
+
+entity.onSpellCastStart = function(mob, target, spell)
+    local spellId = spell:getID()
+
+    if spellId == xi.magic.spell.BURST then
+        mob:showText(mob, ID.text.PLAY_TIME_IS_OVER)
+    elseif spellId == xi.magic.spell.FLOOD then
+        mob:showText(mob, ID.text.YOU_SHOULD_BE_THANKFUL)
     end
 end
 

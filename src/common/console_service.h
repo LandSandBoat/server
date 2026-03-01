@@ -30,6 +30,8 @@
 #include <thread>
 #include <unordered_map>
 
+#include <common/scheduler.h>
+
 class Application;
 
 class ConsoleService final
@@ -55,13 +57,10 @@ public:
 private:
     void registerDefaultCommands();
     void run();
+    auto consoleLoop() -> Task<void>;
 
     Application& application_;
 
-    std::mutex              m_consoleInputBottleneck;
-    std::atomic<bool>       m_consoleThreadRun;
-    std::jthread            m_consoleInputThread;
-    std::condition_variable m_consoleStopCondition;
-
+    std::mutex                                      m_consoleInputBottleneck;
     std::unordered_map<std::string, ConsoleCommand> m_commands;
 };

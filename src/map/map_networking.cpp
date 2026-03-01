@@ -66,8 +66,9 @@ uint32 TotalPacketsDelayedPerTick = 0U;
 
 } // namespace
 
-MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapConfig, asio::io_context& io_context)
-: mapStatistics_(mapStatistics)
+MapNetworking::MapNetworking(Scheduler& scheduler, MapStatistics& mapStatistics, const MapConfig& mapConfig)
+: scheduler_(scheduler)
+, mapStatistics_(mapStatistics)
 , mapIPP_(mapConfig.ipp)
 {
     TracyZoneScoped;
@@ -82,7 +83,7 @@ MapNetworking::MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapC
     try
     {
         const auto udpPort = mapIPP_.getPort() == 0 ? settings::get<uint16>("network.MAP_PORT") : mapIPP_.getPort();
-        mapSocket_         = std::make_unique<MapSocket>(io_context, udpPort, std::bind(&MapNetworking::handle_incoming_packet, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+        mapSocket_         = std::make_unique<MapSocket>(scheduler_, udpPort, std::bind(&MapNetworking::handle_incoming_packet, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
     catch (const std::exception& e)
     {
@@ -546,6 +547,9 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
         }
         PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
+
+    // Flush any batched equip changes after processing all incoming packets
+    PChar->flushEquipChanges();
 
     map_session_data->client_packet_id = SmallPD_Code;
 

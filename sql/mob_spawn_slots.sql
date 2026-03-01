@@ -110,7 +110,24 @@ INSERT INTO `mob_spawn_slots` VALUES (103,55,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,56,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,57,0);
 
--- Behemoth's Dominion  
+-- Qufim Island
+INSERT INTO `mob_spawn_slots` VALUES (126,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (126,15,0);
+
+-- Behemoth's Dominion
 INSERT INTO `mob_spawn_slots` VALUES (127,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (127,2,0);
 INSERT INTO `mob_spawn_slots` VALUES (127,3,0);
@@ -134,7 +151,7 @@ INSERT INTO `mob_spawn_slots` VALUES (130,15,0);
 INSERT INTO `mob_spawn_slots` VALUES (130,16,0);
 INSERT INTO `mob_spawn_slots` VALUES (130,17,0);
 
--- Ghelsba Outpost (Zone 140)
+-- Ghelsba Outpost
 INSERT INTO `mob_spawn_slots` VALUES (140,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,2,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,3,0);
@@ -198,7 +215,7 @@ INSERT INTO `mob_spawn_slots` VALUES (140,60,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,61,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,62,0);
 
--- Fort Ghelsba (Zone 141)
+-- Fort Ghelsba
 INSERT INTO `mob_spawn_slots` VALUES (141,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (141,2,0);
 INSERT INTO `mob_spawn_slots` VALUES (141,3,0);
@@ -745,5 +762,25 @@ INSERT INTO `mob_spawn_slots` VALUES (212,8,0);
 INSERT INTO `mob_spawn_slots` VALUES (212,9,0);
 INSERT INTO `mob_spawn_slots` VALUES (212,10,0);
 INSERT INTO `mob_spawn_slots` VALUES (212,11,0);
+
+-- Labyrinth of Onzozo
+INSERT INTO `mob_spawn_slots` VALUES (213,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (213,18,0);
 
 UNLOCK TABLES;

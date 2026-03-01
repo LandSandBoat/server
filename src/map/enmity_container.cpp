@@ -122,7 +122,7 @@ void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
     {
         return;
     }
-    m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, false });
+    m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, true });
     PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
 

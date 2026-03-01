@@ -450,7 +450,8 @@ INSERT INTO `mob_resistances` VALUES (408,'Quadav-Seed',0,2500,0,0,0,0,0,0,0,0,0
 INSERT INTO `mob_resistances` VALUES (409,'Yagudo-Seed',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,-3,0,0,-2,-2,-2,-2,-3,-3,0,0,-2,-2,-2,-2);
 INSERT INTO `mob_resistances` VALUES (410,'Goblin-Seed',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,-2,-2,-2,-2,-2,-3,0,-2,-2,-2,-2,-2,-3,0,0);
 INSERT INTO `mob_resistances` VALUES (411,'Pet-Siren',0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,11,11,4,4,11,2,2,2,11,11,4,11,2,2);
--- 412 to 434 free
+INSERT INTO `mob_resistances` VALUES (412,'Pet-Atomos',0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,5,7,5,7,4,11,7,7,5,7,7,4,11,11);
+-- 413 to 434 free
 INSERT INTO `mob_resistances` VALUES (435,'Giant_Gnat',0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,3,0,0,0,-2,4,0,0,3,0,0,-2,4,4);
 INSERT INTO `mob_resistances` VALUES (436,'Gnat-Bloodlapper',0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,3,0,0,0,-2,4,0,0,3,0,0,-2,4,4);
 INSERT INTO `mob_resistances` VALUES (437,'Sapling-Ghillie_Dhu',0,0,0,0,0,0,0,0,0,0,0,0,0,-3,-2,-2,0,-2,0,0,-3,-2,-2,-2,0,0,0,-3,-3);

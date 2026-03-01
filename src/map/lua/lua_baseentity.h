@@ -308,6 +308,7 @@ public:
     uint16 getModelId();
     void   setModelId(uint16 modelId, const sol::object& slotObj);
     void   setLook(const sol::table& look);
+    auto   getEquipmentModelIds() -> sol::table;
     uint16 getCostume();
     void   setCostume(uint16 costume);
     uint16 getCostume2();

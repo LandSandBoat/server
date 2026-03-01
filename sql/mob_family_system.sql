@@ -533,8 +533,8 @@ INSERT INTO `mob_family_system` VALUES (506,'Meeble',190,'Meeble',7,'Beastmen',4
 INSERT INTO `mob_family_system` VALUES (507,'Quasilumin',15,'Luminian',0,'Unclassified',25,100,100,5,5,5,5,5,5,5,5,5,5,5,0.0,2,0);
 
 INSERT INTO `mob_family_system` VALUES (411,'Pet-Siren',16,'Siren',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
-
--- Family IDs 10,22,50,96,317-318,405,412-434,439-443 available for use
+INSERT INTO `mob_family_system` VALUES (412,'Pet-Atomos',11,'Atomos',5,'Avatar',40,100,120,3,3,3,3,6,6,3,1,3,1,3,0.0,41,0);
+-- Family IDs 10,22,50,96,317-318,405,413-434,439-443 available for use
 
 /*!40000 ALTER TABLE `mob_family_system` ENABLE KEYS */;
 UNLOCK TABLES;

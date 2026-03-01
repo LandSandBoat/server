@@ -41,6 +41,14 @@ mission.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [3028] = function(player, csid, option, npc)
+                    local param1 = option == 2 and 0 or 2 -- Hides "It's a prince" option after selecting it.
+                    player:updateEvent(param1, 1, 0, 0, 0, 0, 0, 0, 0)
+                end,
+            },
+
             onEventFinish =
             {
                 [3027] = function(player, csid, option, npc)

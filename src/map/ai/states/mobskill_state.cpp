@@ -157,6 +157,9 @@ void CMobSkillState::SpendCost()
 
 bool CMobSkillState::Update(timer::time_point tick)
 {
+    // Reset the state for the current skill attempt
+    m_skillSuccess = false;
+
     // Rotate towards target during ability // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
     {
@@ -189,6 +192,7 @@ bool CMobSkillState::Update(timer::time_point tick)
         // Only send packet if action was populated (e.g. interrupts return early)
         if (!action.targets.empty())
         {
+            m_skillSuccess = true;
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
         }
 
@@ -205,9 +209,10 @@ bool CMobSkillState::Update(timer::time_point tick)
     if (IsCompleted() && tick > m_finishTime)
     {
         auto* PTarget = GetTarget();
-        if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
+        if (m_skillSuccess && PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
-            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
+            bool withMaster = m_PEntity->objtype == TYPE_PET || (m_PEntity->objtype == TYPE_MOB && m_PEntity->isCharmed);
+            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0, withMaster);
         }
 
         if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))

@@ -187,3 +187,41 @@ UPDATE spell_list SET castTime = 4000 WHERE name = 'tonko_ichi';
 
 -- Monomi: Ichi: Revert cast time from 1.5 to 4 seconds
 UPDATE spell_list SET castTime = 4000 WHERE name = 'monomi_ichi';
+
+-----------------------------------
+-- Dragoon
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+-----------------------------------
+
+-- Jump: Revert recast from 1 minute to 1.5 minutes
+UPDATE abilities SET recastTime = 90 WHERE name = 'jump';
+
+-- Jump merit: Revert value from 2 seconds per level to 3 seconds per level
+UPDATE merits SET value = 3 WHERE name = 'jump_recast';
+
+-- High Jump: Revert recast from 2 minutes to 3 minutes
+UPDATE abilities SET recastTime = 180 WHERE name = 'high_jump';
+
+-- High Jump merit: Revert value from 4 seconds per level to 6 seconds per level
+UPDATE merits SET value = 6 WHERE name = 'high_jump_recast';
+
+-- Super Jump: Revert range from 12.5 to 9.5 yalms
+UPDATE abilities SET `range` = 9.5 WHERE name = 'super_jump';
+
+-- Spirit Link: Revert recast from 1.5 minutes to 3 minutes
+UPDATE abilities SET recastTime = 180 WHERE name = 'spirit_link';
+
+-- Spirit Link merit: Revert value from 4 seconds per level to 6 seconds per level
+UPDATE merits SET value = 6 WHERE name = 'spirit_link_recast';
+
+-- Ancient Circle: Revert recast from 5 to 10 minutes
+UPDATE abilities SET recastTime = 600 WHERE name = 'ancient_circle';
+
+-- Ancient Circle merit: Revert value from 10 to 20 seconds per level
+UPDATE merits SET value = 20 WHERE name = 'ancient_circle_recast';
+
+-- Deep Breathing: Revert recast from 5 to 15 minutes
+UPDATE abilities SET recastTime = 900 WHERE name = 'deep_breathing';
+
+-- Deep Breathing merit: Revert value to 150 seconds per level
+UPDATE merits SET value = 150 WHERE name = 'deep_breathing';

@@ -7,7 +7,7 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.mobskills.mobPhysicalMove', { damage = 1, hitslanded = 1, isCritical = false })
-            local pmob = player.entities:moveTo('Giant_Hunter')
+            local pmob = player.entities:moveTo('Clipper')
             player:changeJob(xi.job.BST)
             player:spawnPet(xi.petId.COLDBLOOD_COMO)
             local pet = player:getPet()

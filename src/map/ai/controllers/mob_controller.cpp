@@ -189,7 +189,7 @@ void CMobController::TryLink()
 
     // handle pet behavior on the targets behalf (faster than in ai_pet_dummy)
     // Avatars defend masters by attacking mobs if the avatar isn't attacking anything currently (bodyguard behavior)
-    // Alexander and Odin are passive and do not protect the master.
+    // Alexander, Odin and Atomos are passive and do not protect the master.
     if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
     {
         if (PTarget->PPet->objtype == TYPE_PET)
@@ -197,7 +197,8 @@ void CMobController::TryLink()
             const auto PPetEntity = static_cast<CPetEntity*>(PTarget->PPet);
             if (PPetEntity->getPetType() == PET_TYPE::AVATAR &&
                 PPetEntity->m_PetID != PETID_ALEXANDER &&
-                PPetEntity->m_PetID != PETID_ODIN)
+                PPetEntity->m_PetID != PETID_ODIN &&
+                PPetEntity->m_PetID != PETID_ATOMOS)
             {
                 if (PTarget->objtype == TYPE_PC)
                 {

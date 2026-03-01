@@ -117,7 +117,7 @@ xi.wotg.helpers.checkMemoryFragments = function(player)
         end
     end
 
-    if numFragments == 3 then
+    if numFragments == 4 then
         player:messageName(ID.text.REPORT_TO_CAIT_SITH, nil)
 
         player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.HER_MEMORIES)

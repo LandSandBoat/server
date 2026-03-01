@@ -2,6 +2,7 @@
 -- Antimatter
 -- Family: Ultima
 -- Description: Deals Light damage to a single target.
+-- TODO: Figure out damage values for Ultima/Omega Master Trial
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,7 +14,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
     local params = {}
 
-    params.baseDamage     = 750
+    params.baseDamage     = mob:getMainLvl() < 65 and 750 or 1500
     params.fTP            = { 1, 1, 1 }
     params.element        = xi.element.LIGHT
     params.attackType     = xi.attackType.MAGICAL

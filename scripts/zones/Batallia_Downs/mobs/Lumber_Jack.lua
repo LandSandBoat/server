@@ -18,6 +18,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.SLOW)
     mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    -- TODO: BIND or ICE resistance rank
 end
 
 entity.onMobSpawn = function(mob)
@@ -28,11 +30,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    if mob:hasStatusEffect(xi.effect.ENSTONE) then
-        return 0, 0, 0
-    else
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
-    end
+    local pTable =
+    {
+        chance    = 20,
+        effectId  = xi.effect.STUN,
+        duration  = 10,
+        animation = 0,
+        message   = 0,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

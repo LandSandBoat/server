@@ -4364,7 +4364,7 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, const sol::object& c
     if (SlotID != ERROR_SLOTID)
     {
         charutils::UpdateItem(PChar, location, SlotID, -quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         return true;
     }
@@ -4396,7 +4396,7 @@ bool CLuaBaseEntity::delItemAt(const uint16 itemID, const int32 quantity, uint8 
     if (const auto* PItem = PChar->getStorage(containerId)->GetItem(slotId); PItem && PItem->getID() == itemID)
     {
         charutils::UpdateItem(PChar, containerId, slotId, -quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         return true;
     }
@@ -4454,7 +4454,7 @@ bool CLuaBaseEntity::delContainerItems(const sol::object& containerID)
         }
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     return true;
 }
 
@@ -5074,7 +5074,7 @@ bool CLuaBaseEntity::addLinkpearl(const std::string& lsname, bool equip)
                     charutils::SaveCharEquip(PChar);
                     PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, PItemLinkPearl->GetLSID());
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID());
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                     charutils::LoadInventory(PChar);
                 }
                 return true;
@@ -5102,7 +5102,7 @@ auto CLuaBaseEntity::addSoulPlate(const std::string& name, uint32 interestData, 
         // Deduct Blank Plate
         battleutils::RemoveAmmo(PChar);
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         // Used Soul Plate
         CItem* PItem = itemutils::GetItem(ITEMID::SOUL_PLATE);
@@ -5235,7 +5235,7 @@ void CLuaBaseEntity::confirmTrade() const
         }
     }
     PChar->TradeContainer->Clean();
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 /************************************************************************
@@ -5275,7 +5275,7 @@ void CLuaBaseEntity::tradeComplete() const
         }
     }
     PChar->TradeContainer->Clean();
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 auto CLuaBaseEntity::getTrade() -> CTradeContainer*
@@ -6026,6 +6026,34 @@ void CLuaBaseEntity::setLook(const sol::table& look)
     }
 
     ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+}
+
+/************************************************************************
+ *  Function: getEquipmentModelIds()
+ *  Purpose : Returns the player's visible equipment model IDs
+ *  Example : local equip = player:getEquipmentModelIds()
+ *  Note    : Returns table with keys: head, body, hands, main, sub
+ ************************************************************************/
+auto CLuaBaseEntity::getEquipmentModelIds() -> sol::table
+{
+    auto table = lua.create_table();
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("getEquipmentModelIds: caller is not a player (%s).", m_PBaseEntity->getName());
+        table["head"]  = 0;
+        table["body"]  = 0;
+        table["hands"] = 0;
+        table["main"]  = 0;
+        table["sub"]   = 0;
+        return table;
+    }
+    auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
+    table["head"]  = PChar->look.head;
+    table["body"]  = PChar->look.body;
+    table["hands"] = PChar->look.hands;
+    table["main"]  = PChar->look.main;
+    table["sub"]   = PChar->look.sub;
+    return table;
 }
 
 /************************************************************************
@@ -20041,6 +20069,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
     SOL_REGISTER("setLook", CLuaBaseEntity::setLook);
+    SOL_REGISTER("getEquipmentModelIds", CLuaBaseEntity::getEquipmentModelIds);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
     SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);

@@ -4278,6 +4278,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,438); -- Hex Eye
 INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,439); -- Catharsis
 INSERT INTO `mob_skill_lists` VALUES ('Hecteyes_Expansion',2091,440); -- Petro Gaze
 
+INSERT INTO `mob_skill_lists` VALUES ('Pet-Atomos',2092,668); -- Deconstruction
+INSERT INTO `mob_skill_lists` VALUES ('Pet-Atomos',2092,669); -- Chronoshift
+
 -- Next ID : 2092
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

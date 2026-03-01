@@ -32,9 +32,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDispel(mob, target, pTable)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-end
-
 entity.onMobDespawn = function(mob)
     GetNPCByID(ID.npc.OLLAS_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end

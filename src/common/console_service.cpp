@@ -108,23 +108,16 @@ bool getLine(std::string& line)
 
 ConsoleService::ConsoleService(Application& application)
 : application_(application)
-, m_consoleThreadRun(true)
 {
     registerDefaultCommands();
 
-    if (application_.isRunningInCI())
+    if (!application_.isRunningInCI())
     {
-        return;
+        run();
     }
-
-    run();
 }
 
-ConsoleService::~ConsoleService()
-{
-    m_consoleThreadRun = false;
-    m_consoleStopCondition.notify_all();
-}
+ConsoleService::~ConsoleService() = default;
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
@@ -192,23 +185,30 @@ void ConsoleService::registerDefaultCommands()
 
                 auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
 
-                // TODO: Make sure to execute on the main thread
                 lua.safe_script(input);
             }
         });
 
     registerCommand(
-        "crash", "Crash the process", [](std::vector<std::string>& inputs)
+        "crash", "Crash the process (main thread)", [](std::vector<std::string>& inputs)
         {
-            // TODO: Make sure to execute on the main thread
             crash();
+        });
+
+    registerCommand(
+        "crash_worker", "Crash the process (worker thread)", [&](std::vector<std::string>& inputs)
+        {
+            application_.scheduler().postToWorkerThread(
+                []
+                {
+                    crash();
+                });
         });
 
     registerCommand(
         "throw", "Throw an exception", [](std::vector<std::string>& inputs)
         {
-            // TODO: Make sure to execute on the main thread
-            throw std::runtime_error("Exception thrown from console command");
+            throw std::runtime_error("Exception thrown from console command (on main thread)");
         });
 
     registerCommand(
@@ -221,62 +221,80 @@ void ConsoleService::registerDefaultCommands()
 
 void ConsoleService::run()
 {
-    bool attached = isatty(0);
-    if (attached)
+    if (isatty(0))
     {
-        m_consoleInputThread = std::jthread(
-            [&]()
+        application_.scheduler().postToWorkerThread(consoleLoop());
+    }
+}
+
+auto ConsoleService::consoleLoop() -> Task<void>
+{
+    auto& scheduler = application_.scheduler();
+
+    std::string line;
+
+    while (!scheduler.closeRequested())
+    {
+        // If there is data, process as much as possible before yielding.
+        // This removes the 50ms delay between every single keystroke.
+        bool hasLine = false;
+        while (stdinHasData())
+        {
+            if (getLine(line))
             {
-                std::string line;
+                hasLine = true;
+                break; // We have a full command to process
+            }
+        }
 
-                const auto predicate = [&]
+        if (hasLine)
+        {
+            std::istringstream       stream(line);
+            std::string              part;
+            std::vector<std::string> inputs;
+
+            while (stream >> part)
+            {
+                for (auto& s : split(part))
                 {
-                    return !m_consoleThreadRun;
-                };
-
-                while (!predicate())
-                {
-                    std::unique_lock<std::mutex> lock(m_consoleInputBottleneck);
-
-                    // https://en.cppreference.com/w/cpp/thread/condition_variable/wait_for
-                    if (!m_consoleStopCondition.wait_for(lock, 50ms, predicate))
-                    {
-                        if (!getLine(line))
-                        {
-                            continue;
-                        }
-
-                        std::istringstream stream(line);
-                        std::string        input;
-
-                        std::vector<std::string> inputs;
-                        while (stream >> input)
-                        {
-                            for (auto& part : split(input))
-                            {
-                                inputs.emplace_back(part);
-                            }
-                        }
-
-                        if (!inputs.empty())
-                        {
-                            TracyZoneScoped;
-
-                            auto entry = m_commands.find(inputs[0]);
-                            if (entry != m_commands.end())
-                            {
-                                // TODO: Execute this on the main thread, not the worker thread
-                                entry->second.func(inputs);
-                            }
-                            else
-                            {
-                                fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
-                            }
-                        }
-
-                        line = std::string();
-                    }
+                    inputs.emplace_back(s);
                 }
-            });
+            }
+
+            if (!inputs.empty())
+            {
+                TracyZoneScoped;
+
+                auto it = m_commands.find(inputs[0]);
+                if (it != m_commands.end())
+                {
+                    // Dispatch to main thread
+                    scheduler.postToMainThread(
+                        [cmd = it->second.func, args = std::move(inputs)]() mutable
+                        {
+                            try
+                            {
+                                cmd(args);
+                            }
+                            catch (const std::exception& e)
+                            {
+                                fmt::print(stderr, "> Command error: {}\n", e.what());
+                            }
+                        });
+                }
+                else
+                {
+                    fmt::print("> Unknown command: {}\n", inputs[0]);
+                }
+            }
+            line.clear();
+
+            // Immediately check for more input without yielding
+            // if we just processed a line.
+            continue;
+        }
+
+        // Yield only when there is no data to process.
+        co_await scheduler.yieldFor(100ms);
     }
 }

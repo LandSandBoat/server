@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2023 LandSandBoat Dev Teams
@@ -24,11 +24,14 @@
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <common/logging.h>
+#include <deque>
 #include <map>
 #include <unordered_set>
 
 #include "common/blowfish.h"
+#include "common/scheduler.h"
 #include "common/synchronized.h"
+
 #include "search.h"
 
 enum TCPREQUESTTYPE
@@ -43,31 +46,44 @@ enum TCPREQUESTTYPE
     TCP_AH_REQUEST        = 0x15,
 };
 
-class search_handler
-: public std::enable_shared_from_this<search_handler>
+class SearchHandler : public std::enable_shared_from_this<SearchHandler>
 {
 public:
-    search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist);
+    SearchHandler(Scheduler& scheduler, asio::ip::tcp::socket socket, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist);
+    ~SearchHandler();
+    auto run() -> Task<void>;
 
-    ~search_handler();
-
-    void start();
-
-    void do_read();
-
-    void handle_error(std::error_code ec, std::shared_ptr<search_handler> self);
-
-    void do_write();
-
+private:
     void read_func(uint16_t length);
 
-    std::string           ipAddress; // Store IP address in class -- once the file handle is invalid this can no longer be obtained from socket_
-    asio::ip::tcp::socket socket_;
+    uint16_t getNumSessionsInUse(const std::string& ipAddressStr);
+    void     addToUsedIPAddresses(const std::string& ipAddressStr);
+    void     removeFromUsedIPAddresses(const std::string& ipAddressStr);
 
+    bool validatePacket(uint16_t length);
+    void decrypt(uint16_t length);
+    void encrypt(uint16_t length);
+
+    void HandleSearchRequest();
+    void HandleGroupListRequest();
+    void HandleSearchComment();
+    void HandleAuctionHouseRequest();
+    void HandleAuctionHouseHistory();
+
+    auto _HandleSearchRequest() -> search_req;
+
+    Scheduler&               scheduler_;
+    blowfish_t               blowfish_;
+    std::deque<searchPacket> searchPackets_;
+
+    std::string             ipAddress_;
+    asio::ip::tcp::socket   socket_;
     std::array<uint8, 4096> buffer_;
 
-    // Blowfish key
+    SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUse_;
+    SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist_;
 
+    // Blowfish key
     uint8 key[24] = {
         0x30,
         0x73,
@@ -94,38 +110,4 @@ public:
         0x00,
         0x00,
     };
-
-private:
-    // A single IP should only have one request in flight at a time, so we are going to
-    // be tracking the IP addresses of incoming requests and if we haven't cleared the
-    // record for it - we block until it's done
-    SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUse_;
-
-    // NOTE: We're only using the read-lock for this
-    SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist_;
-
-    // Deadline timer to drop a read
-    asio::steady_timer deadline_;
-
-    void checkDeadline(const std::shared_ptr<search_handler>& self);
-
-    uint16_t getNumSessionsInUse(const std::string& ipAddressStr);
-    void     addToUsedIPAddresses(const std::string& ipAddressStr);
-    void     removeFromUsedIPAddresses(const std::string& ipAddressStr);
-
-    bool validatePacket(uint16_t length);
-    void decrypt(uint16_t length);
-    void encrypt(uint16_t length);
-
-    void HandleSearchRequest();
-    void HandleGroupListRequest();
-    void HandleSearchComment();
-    void HandleAuctionHouseRequest();
-    void HandleAuctionHouseHistory();
-
-    auto _HandleSearchRequest() -> search_req;
-
-    blowfish_t blowfish;
-
-    std::deque<searchPacket> searchPackets;
 };

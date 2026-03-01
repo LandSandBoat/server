@@ -1,6 +1,7 @@
--- local ID = zones[xi.zone.BASTOK_MARKETS_S]
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 
 return {
+    ['_2f0']             = { messageSpecial = ID.text.GATE_IS_LOCKED },
     ['Adelinde']         = { event = 103 },
     ['Angry_Bull']       = { event = 102 },
     ['Benjamin']         = { event = 146 },

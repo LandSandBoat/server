@@ -94,7 +94,7 @@ local function performWSJump(player, target, action, params, abilityID)
     return damage, totalHits
 end
 
-local function cutEmpathyEffectTable(validEffects, i, maxCount)
+xi.job_utils.dragoon.cutEmpathyEffectTable = function(validEffects, i, maxCount)
     local delindex = 1
 
     while maxCount < i do
@@ -223,6 +223,8 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
 
     power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
 
+    ability:setMsg(xi.msg.basic.USES_ABILITY_FORTIFIED_DRAGONS)
+
     target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.ANCIENT_CIRCLE
@@ -250,7 +252,7 @@ xi.job_utils.dragoon.useJump = function(player, target, ability, action)
     return damage
 end
 
-local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
+xi.job_utils.dragoon.checkForRemovableEffectsOnSpiritLink = function(player, wyvern)
     -- Removes all DoTs, all at once.
     -- Would this be better as an DoT effect flag?
     -- https://www.ffxiah.com/forum/topic/44396/sigurds-descendants-the-art-of-dragon-slaying/108/#3646578
@@ -318,15 +320,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     end
 end
 
-xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
-    local wyvern      = player:getPet()
-    local playerHP    = player:getHP()
-    local petTP       = wyvern:getTP()
-    local regenAmount = player:getMainLvl() / 3 -- level/3 tic regen
-
-    checkForRemovableEffectsOnSpiritLink(player, wyvern)
-
-    -- Empathy copying
+xi.job_utils.dragoon.applyEmpathyBonus = function(player, wyvern)
     local empathyTotal = player:getMerit(xi.merit.EMPATHY)
 
     -- Add wyvern levels to the tune of 200 per empathy merit
@@ -348,7 +342,7 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
         if i < empathyTotal then
             empathyTotal = i
         elseif i > empathyTotal then
-            validEffects = cutEmpathyEffectTable(validEffects, i, empathyTotal)
+            validEffects = xi.job_utils.dragoon.cutEmpathyEffectTable(validEffects, i, empathyTotal)
         end
 
         local copyEffect = nil
@@ -362,6 +356,18 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
             copyi = copyi + 1
         end
     end
+end
+
+xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
+    local wyvern      = player:getPet()
+    local playerHP    = player:getHP()
+    local petTP       = wyvern:getTP()
+    local regenAmount = player:getMainLvl() / 3 -- level/3 tic regen
+
+    xi.job_utils.dragoon.checkForRemovableEffectsOnSpiritLink(player, wyvern)
+
+    -- Empathy: copy status effects and grant wyvern EXP
+    xi.job_utils.dragoon.applyEmpathyBonus(player, wyvern)
 
     wyvern:addStatusEffect(xi.effect.REGEN, { power = regenAmount, duration = 90, origin = player, tick = 3 }) -- 90 seconds of regen
     player:addTP(petTP / 2) -- add half wyvern tp to you
@@ -460,7 +466,11 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:usePetAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 
-    -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
+    -- Handle Spirit Surge enmity reduction on super jump
+    xi.job_utils.dragoon.superJumpSurgeEffect(player, target)
+end
+
+xi.job_utils.dragoon.superJumpSurgeEffect = function(player, target)
     if player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
         local minDistance = 9999
         local closestPartyMember = nil
@@ -487,7 +497,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
             (player:checkDistance(target) < closestPartyMember:checkDistance(target)) -- Verify dragoon is closer than the party member that we want to reduce the enmity of
         then
             if target:isMob() then
-                target:lowerEnmity(closestPartyMember, 50)
+                target:lowerEnmity(closestPartyMember, 100)
             end
         end
     end
@@ -507,7 +517,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     return xi.effect.DEFENSE_DOWN
 end
 
-xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
+xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability, action)
     local wyvern = getWyvern(player)
 
     if wyvern then
@@ -598,6 +608,36 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
     end
 end
 
+xi.job_utils.dragoon.getDeepBreathingBonus = function(wyvern, master, isHealing)
+    local bonus = 0
+    local hadEffect = wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+
+    if hadEffect then
+        local deepBreathingMerits = master:getMerit(xi.merit.DEEP_BREATHING)
+        local enhanceDB = master:getMod(xi.mod.ENHANCE_DEEP_BREATHING)
+
+        if isHealing then
+            bonus = 37.5 + (12.5 * deepBreathingMerits)
+
+            -- add in augment power, +5 per merit level (including first)
+            if enhanceDB > 0 then
+                bonus = bonus + deepBreathingMerits * 5
+            end
+        else
+            bonus = 0.75 + (0.25 * deepBreathingMerits)
+
+            -- add in augment power, +0.1 per merit level (including first)
+            if enhanceDB > 0 then
+                bonus = bonus + deepBreathingMerits * 0.1
+            end
+        end
+
+        wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+    end
+
+    return bonus
+end
+
 -- Breath Formula: https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Healing_Breath
 xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     local healingBreathTable =
@@ -610,20 +650,7 @@ xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     }
 
     local master              = wyvern:getMaster()
-    local deepBreathingMerits = master:getMerit(xi.merit.DEEP_BREATHING)
-    local deepMult            = 0
-
-    if wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) then
-        deepMult = 37.5 + (12.5 * deepBreathingMerits)
-
-        -- add in augment power, +5 per merit level (including first)
-        if master:getMod(xi.mod.ENHANCE_DEEP_BREATHING) > 0 then
-            deepMult = deepMult + deepBreathingMerits * 5
-        end
-
-        wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-    end
-
+    local deepMult            = xi.job_utils.dragoon.getDeepBreathingBonus(wyvern, master, true)
     local jobPointBonus       = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
     local breathAugmentsBonus = 1 + master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
     local gear                = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
@@ -657,23 +684,10 @@ end
 -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
 xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, damageType)
     local master                  = wyvern:getMaster()
-    local deepBreathingMerits     = master:getMerit(xi.merit.DEEP_BREATHING)
-    local deepBreathingMultiplier = 0
-
-    if wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) then
-        deepBreathingMultiplier = 0.75 + (0.25 * deepBreathingMerits)
-
-        -- add in augment power, +0.1 per merit level (including first)
-        if master:getMod(xi.mod.ENHANCE_DEEP_BREATHING) > 0 then
-            deepBreathingMultiplier = deepBreathingMultiplier + deepBreathingMerits * 0.1
-        end
-
-        wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-    end
-
-    local jobPointBonus       = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
-    local breathAugmentsBonus = master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
-    local gearMultiplier      = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
+    local deepBreathingMultiplier = xi.job_utils.dragoon.getDeepBreathingBonus(wyvern, master, false)
+    local jobPointBonus           = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
+    local breathAugmentsBonus     = master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
+    local gearMultiplier          = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
 
     -- gear cap of 64/256 in multiplier
     gearMultiplier = 1.0 + (math.min(gearMultiplier, 64)) / 256

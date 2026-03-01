@@ -94,10 +94,10 @@
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
-MapEngine::MapEngine(asio::io_context& io_context, MapConfig& config)
-: ioContext_(io_context)
+MapEngine::MapEngine(Scheduler& scheduler, MapConfig& config)
+: scheduler_(scheduler)
 , mapStatistics_(std::make_unique<MapStatistics>())
-, networking_(std::make_unique<MapNetworking>(*mapStatistics_, config, ioContext_))
+, networking_(std::make_unique<MapNetworking>(scheduler_, *mapStatistics_, config))
 , engineConfig_(config)
 {
     do_init();
@@ -197,7 +197,6 @@ void MapEngine::gameLoop()
 
     if (tickDiffTime > 0ms)
     {
-        TracyZoneNamed(_sleep, "MapEngine Sleep");
         std::this_thread::sleep_for(tickDiffTime);
     }
     else if (tickDiffTime < -kMainLoopBacklogThreshold)

@@ -175,7 +175,7 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
     {
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PMannequin, static_cast<CONTAINER_ID>(Category1), ItemIndex1);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(Category1), ItemIndex1, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
     else
     {

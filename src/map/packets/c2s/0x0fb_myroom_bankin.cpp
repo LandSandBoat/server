@@ -119,7 +119,7 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
                 PChar->loc.zone->SpawnConditionalNPCs(PChar);
             }
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), PItem->getSlotID());
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
         else
         {

@@ -83,6 +83,7 @@ enum class MsgStd : uint16_t
     UnableToProcessRequest       = 183, // Unable to process request.
     ExpansionPackNotRegistered   = 184, // Unable to enter next area. Expansion pack not registered.
     ExpansionPackNotInstalled    = 185, // Unable to enter next area. Expansion pack not installed.
+    NoLongerAfflicted            = 204, // <Entity> is no longer <effect>.
     GainsEffect                  = 205, // Player Name gains the effect of <effect>.
     EffectWearsOff               = 206, // Player Name's <effect> wears off.
     CannotPerformPetra           = 209, // You cannot perform that action while holding a Petra.

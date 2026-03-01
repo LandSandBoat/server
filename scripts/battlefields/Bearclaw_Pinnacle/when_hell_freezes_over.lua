@@ -16,6 +16,12 @@ local content = Battlefield:new({
     exitNpc          = 'Wind_Pillar_Exit',
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = bearclawID.text.ZEPHYR_RIPS },
     grantXP          = 3000,
+    armouryCrates    =
+    {
+        bearclawID.mob.SNOW_DEVIL + 6,
+        bearclawID.mob.SNOW_DEVIL + 14,
+        bearclawID.mob.SNOW_DEVIL + 22,
+    },
 })
 
 -- Spawning function for this battlefield. Spawns a wave of 1-3 Snow Devils of either all BLM or all WAR
@@ -59,7 +65,35 @@ end
 content.groups =
 {
     {
-        mobs = { 'Snow_Devil_war', 'Snow_Devil_blm' },
+        mobIds =
+        {
+            {
+                bearclawID.mob.SNOW_DEVIL,
+                bearclawID.mob.SNOW_DEVIL + 1,
+                bearclawID.mob.SNOW_DEVIL + 2,
+                bearclawID.mob.SNOW_DEVIL + 3,
+                bearclawID.mob.SNOW_DEVIL + 4,
+                bearclawID.mob.SNOW_DEVIL + 5,
+            },
+
+            {
+                bearclawID.mob.SNOW_DEVIL + 8,
+                bearclawID.mob.SNOW_DEVIL + 9,
+                bearclawID.mob.SNOW_DEVIL + 10,
+                bearclawID.mob.SNOW_DEVIL + 11,
+                bearclawID.mob.SNOW_DEVIL + 12,
+                bearclawID.mob.SNOW_DEVIL + 13,
+            },
+
+            {
+                bearclawID.mob.SNOW_DEVIL + 16,
+                bearclawID.mob.SNOW_DEVIL + 17,
+                bearclawID.mob.SNOW_DEVIL + 18,
+                bearclawID.mob.SNOW_DEVIL + 19,
+                bearclawID.mob.SNOW_DEVIL + 20,
+                bearclawID.mob.SNOW_DEVIL + 21,
+            },
+        },
         spawned = false,
 
         allDeath = function(battlefield, mob)

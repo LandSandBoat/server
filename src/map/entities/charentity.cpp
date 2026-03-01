@@ -25,17 +25,20 @@
 
 #include <cstring>
 
+#include "enums/item_lockflg.h"
 #include "packets/basic.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
 #include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x032_event.h"
 #include "packets/s2c/0x033_eventstr.h"
 #include "packets/s2c/0x034_eventnum.h"
 #include "packets/s2c/0x036_talknum.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x053_systemmes.h"
@@ -69,6 +72,7 @@
 #include "enums/recast.h"
 #include "ipc_client.h"
 #include "item_container.h"
+#include "items/item_equipment.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
@@ -79,6 +83,7 @@
 #include "mobskill.h"
 #include "modifier.h"
 #include "notoriety_container.h"
+#include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_status_icons.h"
@@ -200,7 +205,6 @@ CCharEntity::CCharEntity()
     m_EquipFlag         = 0;
     m_EquipBlock        = 0;
     m_StatsDebilitation = 0;
-    m_EquipSwap         = false;
 
     MeritMode    = false;
     PMeritPoints = nullptr;
@@ -589,9 +593,9 @@ void CCharEntity::setPetZoningInfo()
             petZoningInfo.jugDuration  = PPetEntity->getJugDuration();
             [[fallthrough]];
         case PET_TYPE::AVATAR:
-            if (PPetEntity->m_PetID == PETID_ALEXANDER || PPetEntity->m_PetID == PETID_ODIN)
+            if (PPetEntity->m_PetID == PETID_ALEXANDER || PPetEntity->m_PetID == PETID_ODIN || PPetEntity->m_PetID == PETID_ATOMOS)
             {
-                // Alexander and Odin cannot persist through zoning.
+                // Alexander, Odin and Atomos cannot persist through zoning.
                 break;
             }
             [[fallthrough]];
@@ -1084,29 +1088,6 @@ void CCharEntity::PostTick()
 
     CBattleEntity::PostTick();
 
-    if (m_EquipSwap)
-    {
-        updatemask |= UPDATE_HP;
-        m_EquipSwap = false;
-        pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
-    }
-
-    // notify client containers are dirty and then no longer dirty
-    if (!dirtyInventoryContainers.empty())
-    {
-        // Notify client containers were dirty
-        // Note: Retail sends this in the same chunk as the inventory equip packets, but it doesnt seem to matter as long as it arrives
-        for (const auto& [container, dirty] : dirtyInventoryContainers)
-        {
-            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(container);
-        }
-
-        dirtyInventoryContainers.clear();
-
-        // Notify client containers are now ok
-        pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
-    }
-
     if (ReloadParty())
     {
         charutils::ReloadParty(this);
@@ -1161,6 +1142,64 @@ void CCharEntity::PostTick()
         sendServerStatus_ = false;
         updatemask        = 0;
     }
+}
+
+// Flush all pending equipment changes at end of network cycle after all SmallPackets have been processed
+void CCharEntity::flushEquipChanges()
+{
+    if (!inventorySyncState_.hasPendingEquipChanges())
+    {
+        return;
+    }
+
+    // EQUIP_LIST + GRAP_LIST pairs for each change
+    for (const auto& change : inventorySyncState_.pendingEquipChanges())
+    {
+        if (change.equipping)
+        {
+            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(change.containerSlotId, change.equipSlot, change.container);
+        }
+        else
+        {
+            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, change.equipSlot, LOC_INVENTORY);
+        }
+
+        pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
+    }
+
+    // For each dirty container: ITEM_LIST or ITEM_ATTR for items in that container, then ITEM_SAME pair
+    // Only send ITEM_SAME if the container has already been sent to the client during zone-in
+    for (const auto& container : inventorySyncState_.dirtyContainers())
+    {
+        for (const auto& change : inventorySyncState_.pendingEquipChanges())
+        {
+            if (static_cast<CONTAINER_ID>(change.item->getLocationID()) == container)
+            {
+                if (change.item->isSubType(ITEM_CHARGED))
+                {
+                    pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(change.item, container, change.item->getSlotID());
+                }
+                else
+                {
+                    pushPacket<GP_SERV_COMMAND_ITEM_LIST>(change.item, change.equipping ? ItemLockFlg::NoDrop : ItemLockFlg::Normal);
+                }
+            }
+        }
+
+        // Only send ITEM_SAME if container has been loaded - prevents sort reset during zone-in
+        if (inventorySyncState_.isSynced(container))
+        {
+            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(container, this);
+            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this);
+        }
+    }
+
+    inventorySyncState_.clearEquipChanges();
+}
+
+auto CCharEntity::inventorySyncState() -> InventorySyncState&
+{
+    return inventorySyncState_;
 }
 
 void CCharEntity::addTrait(CTrait* PTrait)

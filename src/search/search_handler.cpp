@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2023 LandSandBoat Dev Teams
@@ -37,142 +37,133 @@
 #include "packets/search_comment.h"
 #include "packets/search_list.h"
 
-search_handler::search_handler(asio::ip::tcp::socket socket, asio::io_context& io_context, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist)
-: socket_(std::move(socket))
+SearchHandler::SearchHandler(Scheduler& scheduler, asio::ip::tcp::socket socket, SynchronizedShared<std::map<std::string, uint16_t>>& IPAddressesInUseList, SynchronizedShared<std::unordered_set<std::string>>& IPAddressWhitelist)
+: scheduler_(scheduler)
+, socket_(std::move(socket))
 , buffer_{}
 , IPAddressesInUse_(IPAddressesInUseList)
 , IPAddressWhitelist_(IPAddressWhitelist)
-, deadline_(io_context)
 {
     DebugSocketsFmt("New connection from IP {}", socket_.lowest_layer().remote_endpoint().address().to_string());
 
     asio::error_code ec = {};
     socket_.lowest_layer().set_option(asio::socket_base::reuse_address(true));
-    ipAddress = socket_.lowest_layer().remote_endpoint(ec).address().to_string();
+    ipAddress_ = socket_.lowest_layer().remote_endpoint(ec).address().to_string();
 
     if (ec)
     {
-        ipAddress = "error";
+        ipAddress_ = "error";
         socket_.lowest_layer().close();
     }
     else
     {
-        addToUsedIPAddresses(ipAddress);
+        addToUsedIPAddresses(ipAddress_);
 
-        if (getNumSessionsInUse(ipAddress) > 5)
+        if (getNumSessionsInUse(ipAddress_) > 5)
         {
-            ShowErrorFmt("More than 5 simultaneous connections from {}. Closing socket.", ipAddress);
+            ShowErrorFmt("More than 5 simultaneous connections from {}. Closing socket.", ipAddress_);
             socket_.lowest_layer().close();
             return;
         }
     }
 }
 
-search_handler::~search_handler()
+SearchHandler::~SearchHandler()
 {
-    DebugSocketsFmt("Connection from IP {} closed", ipAddress);
-    removeFromUsedIPAddresses(ipAddress);
+    DebugSocketsFmt("Connection from IP {} closed", ipAddress_);
+    removeFromUsedIPAddresses(ipAddress_);
 }
 
-void search_handler::start()
+auto SearchHandler::run() -> Task<void>
 {
-    if (socket_.lowest_layer().is_open())
+    auto self = shared_from_this();
+
+    try
     {
-        deadline_.expires_after(10s); // AH searches can take quite a while
-        deadline_.async_wait(std::bind(&search_handler::checkDeadline, this, shared_from_this()));
+        while (socket_.lowest_layer().is_open() && !scheduler_.closeRequested())
+        {
+            std::memset(buffer_.data(), 0, buffer_.size());
 
-        do_read();
+            auto result = co_await scheduler_.withTimeout(
+                socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()), asio::use_awaitable),
+                10s);
+
+            if (!result.has_value()) // timed out
+            {
+                DebugSocketsFmt("Socket timed out from {}", ipAddress_);
+                break;
+            }
+
+            const auto length = result.value();
+            if (length == 0) // EOF
+            {
+                break;
+            }
+
+            DebugSocketsFmt("Received packet from IP {} ({} bytes)", ipAddress_, length);
+
+            read_func(static_cast<uint16_t>(length));
+
+            while (!searchPackets_.empty())
+            {
+                auto packet    = searchPackets_.front();
+                auto write_len = packet.getSize();
+
+                std::memset(buffer_.data(), 0, buffer_.size());
+                std::memcpy(buffer_.data(), packet.getData(), write_len);
+
+                searchPackets_.pop_front();
+
+                encrypt(write_len);
+
+                DebugSocketsFmt("Sending packet to IP {} ({} bytes)", ipAddress_, write_len);
+
+                co_await socket_.async_write_some(asio::buffer(buffer_.data(), write_len), asio::use_awaitable);
+            }
+        }
     }
+    catch (const std::exception& e)
+    {
+        DebugSocketsFmt("Socket error from IP {}: {}", ipAddress_, e.what());
+    }
+
+    asio::error_code ec;
+    socket_.lowest_layer().close(ec);
 }
 
-void search_handler::do_read()
+void SearchHandler::decrypt(uint16_t length)
 {
-    std::memset(buffer_.data(), 0, buffer_.size());
-
-    socket_.async_read_some(
-        asio::buffer(buffer_.data(), buffer_.size()),
-        [this, self = shared_from_this()](std::error_code ec, std::size_t length)
-        {
-            if (!ec)
-            {
-                DebugSocketsFmt("async_read_some: Received packet from IP {} ({} bytes)", ipAddress, length);
-                read_func(length);
-            }
-            else
-            {
-                // EOF when searchPackets is empty is normal. Any other state is a legitimate error.
-                if (!searchPackets.empty() || (searchPackets.empty() && ec.value() != asio::error::eof))
-                {
-                    DebugSocketsFmt("async_read_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
-                    handle_error(ec, self);
-                }
-            }
-        });
-}
-
-void search_handler::do_write()
-{
-    auto packet = searchPackets.front();
-    auto length = packet.getSize();
-
-    std::memset(buffer_.data(), 0, buffer_.size());
-    std::memcpy(buffer_.data(), packet.getData(), packet.getSize());
-
-    searchPackets.pop_front();
-
-    encrypt(length);
-
-    DebugSocketsFmt("async_write: Sending packet to IP {} ({} bytes)", ipAddress, length);
-    socket_.async_write_some(
-        asio::buffer(buffer_.data(), length),
-        [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
-        {
-            if (!ec)
-            {
-                // Apparently a reply is expected. Not sure what the reply contains exactly, but bad things happen if we don't wait for it.
-                do_read();
-            }
-            else
-            {
-                DebugSocketsFmt("async_write_some error in from IP {} ({}: {})", ipAddress, ec.value(), ec.message());
-                handle_error(ec, self);
-            }
-        });
-}
-
-void search_handler::decrypt(uint16_t length)
-{
-    DebugSocketsFmt("Decrypting packet from IP {} ({} bytes)", ipAddress, length);
+    DebugSocketsFmt("Decrypting packet from IP {} ({} bytes)", ipAddress_, length);
 
     // Get key from packet
     ref<uint32>(key, 16) = ref<uint32>(buffer_.data(), length - 4);
 
     // Decrypt packet
-    md5(reinterpret_cast<uint8*>(key), blowfish.hash, 20);
+    md5(reinterpret_cast<uint8*>(key), blowfish_.hash, 20);
 
-    blowfish_init(reinterpret_cast<int8*>(blowfish.hash), 16, blowfish.P, blowfish.S[0]);
+    blowfish_init(reinterpret_cast<int8*>(blowfish_.hash), 16, blowfish_.P, blowfish_.S[0]);
 
     uint16_t tmp = (length - 12) / 4;
     tmp -= tmp % 2;
 
     for (uint16_t i = 0; i < tmp; i += 2)
     {
-        blowfish_decipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish.P, blowfish.S[0]);
+        blowfish_decipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish_.P, blowfish_.S[0]);
     }
 
     ref<uint32>(key, 20) = ref<uint32>(buffer_.data(), length - 0x18);
 }
 
-void search_handler::encrypt(uint16_t length)
+void SearchHandler::encrypt(uint16_t length)
 {
-    DebugSocketsFmt("Encrypting packet for IP {} ({} bytes)", ipAddress, length);
+    DebugSocketsFmt("Encrypting packet for IP {} ({} bytes)", ipAddress_, length);
 
     ref<uint16>(buffer_.data(), 0x00) = length;     // packet size
     ref<uint32>(buffer_.data(), 0x04) = 0x46465849; // "IXFF"
 
-    md5(reinterpret_cast<uint8*>(key), blowfish.hash, 24);
+    md5(reinterpret_cast<uint8*>(key), blowfish_.hash, 24);
 
-    blowfish_init((int8*)blowfish.hash, 16, blowfish.P, blowfish.S[0]);
+    blowfish_init((int8*)blowfish_.hash, 16, blowfish_.P, blowfish_.S[0]);
 
     md5(buffer_.data() + 8, buffer_.data() + length - 0x18 + 0x04, length - 0x18 - 0x04);
 
@@ -181,15 +172,15 @@ void search_handler::encrypt(uint16_t length)
 
     for (uint8 i = 0; i < tmp; i += 2)
     {
-        blowfish_encipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish.P, blowfish.S[0]);
+        blowfish_encipher(reinterpret_cast<uint32*>(buffer_.data()) + i + 2, reinterpret_cast<uint32*>(buffer_.data()) + i + 3, blowfish_.P, blowfish_.S[0]);
     }
 
     memcpy(&buffer_[length] - 0x04, key + 16, 4);
 }
 
-bool search_handler::validatePacket(uint16_t length)
+bool SearchHandler::validatePacket(uint16_t length)
 {
-    DebugSocketsFmt("Validating packet from IP {} ({} bytes)", ipAddress, length);
+    DebugSocketsFmt("Validating packet from IP {} ({} bytes)", ipAddress_, length);
 
     // Check if packet is valid
     uint8 PacketHash[16]{};
@@ -239,29 +230,21 @@ inline std::string searchTypeToString(uint8 type)
     }
 }
 
-void search_handler::read_func(uint16_t length)
+void SearchHandler::read_func(uint16_t length)
 {
-    // if we already have a query in-flight...
-    if (!searchPackets.empty())
-    {
-        do_write();
-        return;
-    }
-
     if (length != ref<uint16>(buffer_.data(), 0x00) || length < 28)
     {
         ShowErrorFmt("Search packetsize wrong. Size {} should be {}.", length, ref<uint16>(buffer_.data(), 0x00));
         return;
     }
 
-    deadline_.cancel(); // If we read, don't abort the deadline in the future
     decrypt(length);
 
     if (validatePacket(length))
     {
         uint8 packetType = buffer_[0x0B];
 
-        ShowInfoFmt("Search Request: {} ({}), size: {}, ip: {}", searchTypeToString(packetType), packetType, length, ipAddress);
+        ShowInfoFmt("Search Request: {} ({}), size: {}, ip: {}", searchTypeToString(packetType), packetType, length, ipAddress_);
 
         switch (packetType)
         {
@@ -301,13 +284,6 @@ void search_handler::read_func(uint16_t length)
     }
 }
 
-void search_handler::handle_error(std::error_code ec, std::shared_ptr<search_handler> self)
-{
-    std::ignore = ec;
-
-    self = nullptr;
-}
-
 // Mostly copy-pasted DSP era code. It works, so why change it?
 /************************************************************************
  *                                                                       *
@@ -332,7 +308,6 @@ void DebugPrintPacket(char* data, uint16_t size)
         }
     }
 
-    // TODO: This can't be the Fmt variant because of constexpr things?
     ShowDebug(outStr);
 }
 
@@ -342,7 +317,7 @@ void DebugPrintPacket(char* data, uint16_t size)
  *                                                                       *
  ************************************************************************/
 
-void search_handler::HandleGroupListRequest()
+void SearchHandler::HandleGroupListRequest()
 {
     uint32 partyid      = ref<uint32>(buffer_.data(), 0x10);
     uint32 allianceid   = ref<uint32>(buffer_.data(), 0x14);
@@ -368,7 +343,7 @@ void search_handler::HandleGroupListRequest()
         uint16_t length = PPartyPacket.GetSize();
 
         DebugPrintPacket((char*)PPartyPacket.GetData(), length);
-        searchPackets.emplace_back(PPartyPacket.GetData(), length);
+        searchPackets_.emplace_back(PPartyPacket.GetData(), length);
     }
     else if (linkshellid1 != 0 || linkshellid2 != 0)
     {
@@ -406,18 +381,13 @@ void search_handler::HandleGroupListRequest()
             uint16_t length = PLinkshellPacket.GetSize();
 
             DebugPrintPacket((char*)PLinkshellPacket.GetData(), length);
-            searchPackets.emplace_back(PLinkshellPacket.GetData(), length);
+            searchPackets_.emplace_back(PLinkshellPacket.GetData(), length);
 
         } while (currentResult < totalResults);
     }
-
-    if (!searchPackets.empty())
-    {
-        do_write();
-    }
 }
 
-void search_handler::HandleSearchComment()
+void SearchHandler::HandleSearchComment()
 {
     uint32 playerId = ref<uint32>(buffer_.data(), 0x10);
 
@@ -433,12 +403,10 @@ void search_handler::HandleSearchComment()
     uint16_t length = commentPacket.GetSize();
 
     DebugPrintPacket((char*)commentPacket.GetData(), length);
-    searchPackets.emplace_back(commentPacket.GetData(), length);
-
-    do_write();
+    searchPackets_.emplace_back(commentPacket.GetData(), length);
 }
 
-void search_handler::HandleSearchRequest()
+void SearchHandler::HandleSearchRequest()
 {
     const search_req sr = _HandleSearchRequest();
 
@@ -478,17 +446,12 @@ void search_handler::HandleSearchRequest()
         uint16_t length = PSearchPacket.GetSize();
 
         DebugPrintPacket((char*)PSearchPacket.GetData(), length);
-        searchPackets.emplace_back(PSearchPacket.GetData(), length);
+        searchPackets_.emplace_back(PSearchPacket.GetData(), length);
 
     } while (currentResult < totalResults);
-
-    if (!searchPackets.empty())
-    {
-        do_write();
-    }
 }
 
-void search_handler::HandleAuctionHouseRequest()
+void SearchHandler::HandleAuctionHouseRequest()
 {
     uint8 AHCatID = ref<uint8>(buffer_.data(), 0x16);
 
@@ -546,16 +509,11 @@ void search_handler::HandleAuctionHouseRequest()
         uint16_t length = PAHPacket.GetSize();
         DebugPrintPacket((char*)PAHPacket.GetData(), length);
 
-        searchPackets.emplace_back(PAHPacket.GetData(), length);
-    }
-
-    if (!searchPackets.empty())
-    {
-        do_write();
+        searchPackets_.emplace_back(PAHPacket.GetData(), length);
     }
 }
 
-void search_handler::HandleAuctionHouseHistory()
+void SearchHandler::HandleAuctionHouseHistory()
 {
     uint16 ItemID = ref<uint16>(buffer_.data(), 0x12);
     uint8  stack  = ref<uint8>(buffer_.data(), 0x15);
@@ -574,12 +532,10 @@ void search_handler::HandleAuctionHouseHistory()
     uint16_t length = PAHPacket.GetSize();
 
     DebugPrintPacket((char*)PAHPacket.GetData(), length);
-    searchPackets.emplace_back(PAHPacket.GetData(), length);
-
-    do_write();
+    searchPackets_.emplace_back(PAHPacket.GetData(), length);
 }
 
-search_req search_handler::_HandleSearchRequest()
+search_req SearchHandler::_HandleSearchRequest()
 {
     // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
@@ -828,7 +784,7 @@ search_req search_handler::_HandleSearchRequest()
     // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
-uint16_t search_handler::getNumSessionsInUse(const std::string& ipAddressStr)
+uint16_t SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Checking if IP is in use: {}", ipAddressStr);
 
@@ -840,8 +796,6 @@ uint16_t search_handler::getNumSessionsInUse(const std::string& ipAddressStr)
     {
         return 0;
     }
-
-    // ShowInfoFmt("Checking if IP is in use: {}", ipAddressStr);
 
     return IPAddressesInUse_.read(
         [ipAddressStr](const auto& ipAddrsInUse) -> uint16_t
@@ -855,7 +809,7 @@ uint16_t search_handler::getNumSessionsInUse(const std::string& ipAddressStr)
         });
 }
 
-void search_handler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
+void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Removing IP from active set: {}", ipAddressStr);
 
@@ -867,8 +821,6 @@ void search_handler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
     {
         return;
     }
-
-    // ShowInfoFmt("Removing IP from set: {}", ipAddressStr);
 
     IPAddressesInUse_.write(
         [ipAddressStr](auto& ipAddrsInUse)
@@ -890,7 +842,7 @@ void search_handler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
         });
 }
 
-void search_handler::addToUsedIPAddresses(const std::string& ipAddressStr)
+void SearchHandler::addToUsedIPAddresses(const std::string& ipAddressStr)
 {
     DebugSocketsFmt("Adding IP to active set: {}", ipAddressStr);
 
@@ -902,8 +854,6 @@ void search_handler::addToUsedIPAddresses(const std::string& ipAddressStr)
     {
         return;
     }
-
-    // ShowInfoFmt("Adding IP to set: {}", ipAddressStr);
 
     IPAddressesInUse_.write(
         [ipAddressStr](auto& ipAddrsInUse)
@@ -917,13 +867,4 @@ void search_handler::addToUsedIPAddresses(const std::string& ipAddressStr)
                 ipAddrsInUse[ipAddressStr] += 1;
             }
         });
-}
-
-void search_handler::checkDeadline(const std::shared_ptr<search_handler>& self) // self to keep the object alive
-{
-    if (timer::now() > deadline_.expiry())
-    {
-        DebugSocketsFmt("Socket timed out from {}", ipAddress);
-        socket_.cancel();
-    }
 }

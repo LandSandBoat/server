@@ -60,11 +60,6 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
 
     power = power + player:getMod(xi.mod.ARCANE_CIRCLE_POTENCY)
 
-    -- Handle simplified message for other party memebers.
-    if player:getID() ~= target:getID() then
-        ability:setMsg(xi.msg.basic.FORTIFIED_ARCANA)
-    end
-
     target:addStatusEffect(xi.effect.ARCANE_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.ARCANE_CIRCLE

@@ -339,6 +339,7 @@ void  CheckForGearSet(CBaseEntity* PTarget);
 int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);
 int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
+void  OnSpellCastStart(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
 void  OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell);
 auto  OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::tuple<std::optional<SpellID>, std::optional<CBattleEntity*>>;
 void  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);

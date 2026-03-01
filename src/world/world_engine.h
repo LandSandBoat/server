@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/scheduler.h"
 #include "common/zmq_router_wrapper.h"
 
 #include "http_server.h"
@@ -40,8 +41,11 @@ class ColonizationSystem;
 class WorldEngine final : public Engine
 {
 public:
-    WorldEngine(asio::io_context& io_context);
+    WorldEngine(Scheduler& scheduler);
     ~WorldEngine() override;
+
+    // TODO: Make all of these members private
+    Scheduler& scheduler_;
 
     std::unique_ptr<IPCServer> ipcServer_;
 
@@ -55,9 +59,6 @@ public:
     std::unique_ptr<HTTPServer> httpServer_;
 
 private:
-    void timeServer(asio::error_code ec);
-    void pumpQueues(asio::error_code ec);
-
-    asio::steady_timer m_timeServerTimer;
-    asio::steady_timer m_queuePumpTimer;
+    auto timeServer() -> Task<void>;
+    auto pumpQueues() -> Task<void>;
 };

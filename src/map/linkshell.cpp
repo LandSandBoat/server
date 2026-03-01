@@ -247,7 +247,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                 charutils::SaveCharStats(PMember);
                 charutils::SaveCharEquip(PMember);
 
-                PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PMember);
                 PMember->pushPacket<CCharStatusPacket>(PMember);
                 return;
             }
@@ -323,7 +323,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
             charutils::SaveCharStats(PMember);
             charutils::SaveCharEquip(PMember);
 
-            PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PMember->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PMember);
             PMember->pushPacket<CCharStatusPacket>(PMember);
             if (breakLinkshell)
             {

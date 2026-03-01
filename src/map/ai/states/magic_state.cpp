@@ -114,7 +114,8 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     };
 
     // TODO: weaponskill lua object
-    m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", m_PEntity, m_PSpell.get(), &action);
+    luautils::OnSpellCastStart(m_PEntity, PTarget, m_PSpell.get());
+    m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", m_PEntity, PTarget, m_PSpell.get(), &action);
 
     // if spell:setFlag(xi.magic.spellFlag.NO_START_MSG) is called, don't give spell start packet
     if (GetSpell()->getFlag() & SPELLFLAG_NO_START_MSG)
@@ -520,11 +521,25 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
                     mob->m_DropItemTime = m_PSpell->getAnimationTime();
                 }
 
+                // Skip enmity generation for summoning magic
+                // Retail does not generate enmity for summoning pets on a target and does not claim.
+                if (m_PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
+                {
+                    return;
+                }
+
                 if (!(m_PSpell->isHeal()) || m_PSpell->tookEffect()) // can't claim mob with cure unless it does damage
                 {
+                    bool isMob = (m_PEntity->objtype == TYPE_MOB);
+
+                    if (isMob && !m_PEntity->isCharmed)
+                    {
+                        return;
+                    }
+
                     mob->PEnmityContainer->UpdateEnmity(m_PEntity, ce, ve);
                     enmityApplied = true;
-                    if (PTarget->isDead())
+                    if (PTarget->isDead() && (!isMob || (isMob && m_PEntity->isCharmed)))
                     { // claim mob only on death (for aoe)
                         battleutils::ClaimMob(PTarget, m_PEntity);
                     }

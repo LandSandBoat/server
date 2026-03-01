@@ -76,7 +76,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity));
             ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
             PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(this->ShopItemIndex, quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
     }
 }

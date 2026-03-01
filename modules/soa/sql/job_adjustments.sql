@@ -54,3 +54,34 @@ UPDATE abilities SET recastTime = 900 WHERE name = 'sange';
 
 -- Sange merit: Revert value from 25 ranged accuracy to 150 seconds recast reduction
 UPDATE merits SET value = 150 WHERE name = 'sange';
+
+------------------------------------
+-- Dragoon
+-- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+------------------------------------
+
+-- Strafe: Revert from level based trait to merit unlocked at 75
+UPDATE traits SET meritid = 2886, level = 75, value = 0 WHERE name = 'strafe';
+
+-- Strafe merit: Revert value from 10 to 5 per upgrade
+UPDATE merits SET value = 5 WHERE name = 'strafe_effect';
+
+-- Wyvern Breath: Revert activation time from 1 second to 3 seconds
+-- TODO: Revert skill prepare animation to display skill ready spikes
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name IN (
+    'healing_breath',
+    'healing_breath_ii',
+    'healing_breath_iii',
+    'healing_breath_iv',
+    'remove_poison',
+    'remove_blindness',
+    'remove_paralysis',
+    'remove_curse',
+    'remove_disease',
+    'flame_breath',
+    'frost_breath',
+    'gust_breath',
+    'sand_breath',
+    'lightning_breath',
+    'hydro_breath'
+);

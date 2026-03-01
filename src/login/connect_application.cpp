@@ -48,7 +48,7 @@ ConnectApplication::~ConnectApplication() = default;
 auto ConnectApplication::createEngine() -> std::unique_ptr<Engine>
 {
     certificateHelpers::generateSelfSignedCert();
-    return std::make_unique<ConnectEngine>(ioContext());
+    return std::make_unique<ConnectEngine>(scheduler_);
 }
 
 void ConnectApplication::registerCommands(ConsoleService& console)
@@ -73,5 +73,5 @@ void ConnectApplication::registerCommands(ConsoleService& console)
 void ConnectApplication::requestExit()
 {
     Application::requestExit();
-    io_context_.stop();
+    scheduler_.stop();
 }

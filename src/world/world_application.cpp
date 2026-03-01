@@ -49,11 +49,11 @@ WorldApplication::~WorldApplication() = default;
 
 auto WorldApplication::createEngine() -> std::unique_ptr<Engine>
 {
-    return std::make_unique<WorldEngine>(ioContext());
+    return std::make_unique<WorldEngine>(scheduler_);
 }
 
 void WorldApplication::requestExit()
 {
     Application::requestExit();
-    io_context_.stop();
+    scheduler_.stop();
 }

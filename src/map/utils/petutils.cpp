@@ -1815,6 +1815,12 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         // m_ActionOffsetPos is a combination of targets pos + action offset pos
         PPet->loc.p = static_cast<CCharEntity*>(PMaster)->m_ActionOffsetPos;
     }
+    else if (PetID == PETID_ALEXANDER || PetID == PETID_ODIN || PetID == PETID_ATOMOS)
+    {
+        // spawn at master's position
+        // nearPosition with 0 distance to ensure correct placement and avoid any potential issues with pet collision on spawn
+        PPet->loc.p = nearPosition(PMaster->loc.p, 0, PMaster->loc.p.rotation);
+    }
     else
     {
         // spawn me randomly around master

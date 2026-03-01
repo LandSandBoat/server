@@ -95,9 +95,13 @@ enum class MsgBasic : uint16_t
     SKILL_RECOVERS_HP              = 103, // The <player> uses .. <target> recovers .. HP.
     IS_INTIMIDATED                 = 106, // The <player> is intimidated by <target>'s presence.
     USES_ABILITY_TAKES_DAMAGE      = 110, // <user> uses <ability>. <target> takes <amount> points of damage.
+    USES_ABILITY_FORTIFIED_UNDEAD  = 131, // <user> uses <ability>. <target> is fortified against undead.
     SPIKES_EFFECT_HP_DRAIN         = 132, // <target>'s spikes drain <number> HP from the <attacker>.
+    USES_ABILITY_FORTIFIED_ARCANA  = 134, // <user> uses <ability>. <target> is fortified against arcana.
     CHARM_SUCCESS                  = 136, // The <player> uses .. <target> is now under the <player>'s control.
     CHARM_FAIL                     = 137, // The <player> uses .. The <player> fails to charm <target>.
+    USES_ABILITY_FORTIFIED_DEMONS  = 148, // <user> uses <ability>. <target> is fortified against demons.
+    TARGET_FORTIFIED_DEMONS        = 149, // <target> is fortified against demons.
     USES_ABILITY_FORTIFIED_DRAGONS = 150, // <user> uses <ability>. <target> is fortified against dragons.
     TARGET_FORTIFIED_DRAGONS       = 151, // <target> is fortified against dragons.
     CANNOT_ON_THAT_TARG            = 155, // You cannot perform that action on the specified target.
@@ -159,6 +163,8 @@ enum class MsgBasic : uint16_t
     TARGET_EVADES                  = 282, // <target> evades.
     TARGET_NO_EFFECT               = 283, // No effect on <target>.
     MAGIC_RESISTED_TARGET          = 284, // <target> resists the effects of the spell!
+    TARGET_FORTIFIED_UNDEAD        = 286, // <target> is fortified against undead.
+    TARGET_FORTIFIED_ARCANA        = 287, // <target> is fortified against arcana.
     USES_ITEM_RECOVERS_HP_AOE      = 306, // <user> uses <item>. <target> recovers <amount> HP.
     NEEDS_2H_WEAPON                = 307, // That action requires a two-handed weapon.
     SKILL_DROP                     = 310, // <target>'s <skill> skill drops X points!
@@ -167,6 +173,7 @@ enum class MsgBasic : uint16_t
     CANNOT_USE_IN_AREA             = 316, // That action cannot be used in this area.
     USES_JA_TAKE_DAMAGE            = 317, // The <player> uses .. <target> takes .. points of damage.
     USES_ITEM_RECOVERS_HP_AOE2     = 318, // <user> uses <item>. <target> recovers <amount> HP.
+    USES_ABILITY_GAINS_EFFECT      = 319, // <user> uses <ability>. <target> gains the effect of <status>.
     USES_BUT_MISSES                = 324, // The <player> uses .. but misses <target>.
     READIES_SKILL                  = 326, // <entity> readies <skill>.
     STARTS_CASTING_TARGET          = 327, // <entity> starts casting <spell> on <target>.
@@ -197,7 +204,7 @@ enum class MsgBasic : uint16_t
     TARGET_EFFECT_DRAINED          = 404, // <amount> status effects drained from <target>.
     LEARNS_SPELL                   = 419, // <target> learns (nullptr)!
     ROLL_MAIN                      = 420, // The <player> uses .. The total comes to ..! <target> receives the effect of ..
-    ROLL_SUB                       = 421, // <target> receives the effect of ..
+    RECEIVES_EFFECT_ABILITY        = 421, // <target> receives the effect of <ability>.
     ROLL_MAIN_FAIL                 = 422, // The <player> uses .. The total comes to ..! No effect on <target>.
     ROLL_SUB_FAIL                  = 423, // No effect on <target>.
     DOUBLEUP                       = 424, // The <player> uses Double-Up. The total for . increases to ..! <target> receives the effect of ..
@@ -213,6 +220,7 @@ enum class MsgBasic : uint16_t
     TARGET_RECHARGED_TP            = 438, // <target>'s abilities are recharged. <target>'s TP is increased.
     USES_ABILITY_RECHARGE_MP       = 439, // <user> uses <ability>! All of <target>'s abilities are recharged. <target> regains MP.
     TARGET_RECHARGED_MP            = 440, // All of <target>'s abilities are recharged. <target> regains MP.
+    USES_ABILITY_EFFECT            = 441, // <user> receives the effect of <ability>.
     LEARNS_NEW_ABILITY             = 442, // <target> learns a new ability!
     CANNOT_USE_ITEMS               = 445, // You cannot use items at this time.
     CANNOT_ATTACK_TARGET           = 446, // You cannot attack that target

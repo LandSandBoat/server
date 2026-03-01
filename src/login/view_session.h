@@ -27,6 +27,8 @@
 #include "handler_session.h"
 #include "login_helpers.h"
 
+#include "common/zmq_dealer_wrapper.h"
+
 // Main menu (Lobby), port 54001
 // A comment on the packets below, defined as macros.
 //   byte 0 - packet size
@@ -38,8 +40,9 @@
 class view_session : public handler_session
 {
 public:
-    view_session(asio::ssl::stream<asio::ip::tcp::socket> socket)
+    view_session(asio::ssl::stream<asio::ip::tcp::socket> socket, ZMQDealerWrapper& zmqDealerWrapper)
     : handler_session(std::move(socket))
+    , zmqDealerWrapper_(zmqDealerWrapper)
     {
         DebugSockets("view_session from IP %s", ipAddress);
     }
@@ -53,4 +56,7 @@ protected:
     }
 
     void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) override;
+
+private:
+    ZMQDealerWrapper& zmqDealerWrapper_;
 };

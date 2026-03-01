@@ -6,11 +6,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getLocalVar('citadelBuster') == 0 then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

@@ -2,6 +2,7 @@
 -- Turbofan
 -- Family: Ultima
 -- Description: Deals Wind damage to targets in front of mob. Additional Effect: Silence
+-- TODO: Figure out damage values for Ultima/Omega Master Trial
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
     local params = {}
 
     params.percentMultipier = 0.05
-    params.damageCap        = 490
+    params.damageCap        = mob:getMainLvl() < 65 and 490 or 750
     params.bonusDamage      = 0
     params.mAccuracyBonus   = { 0, 0, 0 }
     params.resistStat       = xi.mod.INT

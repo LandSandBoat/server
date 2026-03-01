@@ -173,6 +173,13 @@ bool definitelyLessThan(float a, float b);
 
 void crash();
 
+inline auto thread_id_to_string(std::thread::id id) -> std::string
+{
+    std::ostringstream oss;
+    oss << id;
+    return oss.str();
+}
+
 template <typename T>
 std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
 {

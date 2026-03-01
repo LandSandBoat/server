@@ -2024,7 +2024,11 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
         damage = -corrected;
     }
 
-    battleutils::ClaimMob(PDefender, PAttacker);
+    // Only claim a mob and if the allegiance is not PLAYER. This prevents mobs from calling ClaimMob on other mobs or themselves.
+    if (PDefender->objtype == TYPE_MOB && PDefender->allegiance != PAttacker->allegiance)
+    {
+        battleutils::ClaimMob(PDefender, PAttacker);
+    }
 
     if (damage > 0)
     {
@@ -3965,7 +3969,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
         {
             // Futae Takes 2 of Your Tools
             charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
         else
         {
@@ -3981,7 +3985,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
             if (ConsumeTool && xirand::GetRandomNumber(100) > chance)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             }
         }
     }
@@ -4490,10 +4494,13 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
 {
     TracyZoneScoped;
 
-    if (PDefender == nullptr ||
-        (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB) ||                                                   // Do not try to claim anything but mobs (trusts, pets, players don't count)
-        (PDefender && PDefender->objtype == ENTITYTYPE::TYPE_MOB && PDefender->allegiance == ALLEGIANCE_TYPE::PLAYER)) // Added mobs that are in allied with player
-    {
+    if (PDefender == nullptr || (PDefender && PDefender->objtype != TYPE_MOB))
+    { // Do not try to claim anything but mobs (trusts, pets, players don't count)
+        return;
+    }
+
+    if (PDefender && PDefender->objtype == TYPE_MOB && PDefender->allegiance == PAttacker->allegiance)
+    { // mobs that are allied with the attacker do not need to be claimed and will not update enmity
         return;
     }
 
@@ -6238,13 +6245,13 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
             charutils::UnequipItem(PChar, SLOT_AMMO);
             PChar->RequestPersist(CHAR_PERSIST::EQUIP);
             charutils::UpdateItem(PChar, loc, slot, -quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return true;
         }
         else
         {
             charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return false;
         }
     }

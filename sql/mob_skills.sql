@@ -1545,7 +1545,7 @@ INSERT INTO `mob_skills` VALUES (1510,1098,'revelation',0,0.0,20.0,2000,0,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (1518,1262,'goblin_dice',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1519,1263,'provoke',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1520,1264,'howling_moon',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1521,1081,'armor_buster',2,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1521,1081,'armor_buster',2,0.0,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1522,1082,'energy_screen',0,0.0,10.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1523,1083,'mana_screen',0,0.0,10.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1524,1084,'dissipation',2,0.0,20.0,2000,1500,4,0,0,0,0,0,0);

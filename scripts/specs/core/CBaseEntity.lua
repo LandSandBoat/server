@@ -1261,6 +1261,11 @@ function CBaseEntity:setLook(look)
 end
 
 ---@nodiscard
+---@return table
+function CBaseEntity:getEquipmentModelIds()
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getCostume()
 end

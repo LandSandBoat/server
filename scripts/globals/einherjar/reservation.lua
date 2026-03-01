@@ -58,7 +58,7 @@ xi.einherjar.meetsRequirementsForEntry = function(player, chamberId)
     -- since their lockout is applied at reservation
     if
         lockout ~= 0 and
-        (not chamberData.players[chamberData.leaderId] and player:getID() ~= chamberData.leaderId)
+        player:getID() ~= chamberData.leaderId
     then
         player:messageSpecial(texts.ENTRY_PROHIBITED, lockout)
         return false

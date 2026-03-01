@@ -103,6 +103,6 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
                          PItem->getSlotID());
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

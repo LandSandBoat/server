@@ -118,6 +118,24 @@ xi.pet.spawnPet = function(caster, petID, state, target)
         elseif petID == xi.petId.ODIN then
             if target then
                 caster:petAttack(target)
+                --pet:timer(5000, function()
+                --    pet:usePetAbility(xi.jobAbility.ZANTETSUKEN, target)
+                --end)
+            end
+        elseif petID == xi.petId.ATOMOS then
+            if target then
+                -- Use Deconstruction on the target 3 seconds after spawning.
+                local pet = caster:getPet()
+                if pet then
+                    -- Timed sequence after spawning, wait -> Deconstruction -> wait -> Chronoshift (despawn pet after complete)
+                    pet:timer(3000, function()
+                        pet:usePetAbility(xi.jobAbility.DECONSTRUCTION, target)
+                    end)
+
+                    pet:timer(10000, function()
+                        pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
+                    end)
+                end
             end
         end
     end

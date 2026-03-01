@@ -212,7 +212,7 @@ xi.job_utils.monk.useMantra = function(player, target, ability)
     target:delStatusEffect(xi.effect.MAX_HP_BOOST) -- TODO: confirm which versions of HP boost mantra can overwrite
     target:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = merits, duration = 180, origin = player })
 
-    return 0 -- xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
+    return xi.effect.MAX_HP_BOOST
 end
 
 xi.job_utils.monk.usePerfectCounter = function(player, target, ability)

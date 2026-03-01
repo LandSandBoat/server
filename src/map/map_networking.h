@@ -24,6 +24,7 @@
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
+#include "common/scheduler.h"
 
 #include "map_constants.h"
 #include "map_session.h"
@@ -40,7 +41,7 @@ class MapEngine;
 class MapNetworking
 {
 public:
-    MapNetworking(MapStatistics& mapStatistics, const MapConfig& mapConfig, asio::io_context& io_context);
+    MapNetworking(Scheduler& scheduler, MapStatistics& mapStatistics, const MapConfig& mapConfig);
 
     //
     // Networking
@@ -69,6 +70,7 @@ public:
     auto socket() -> MapSocket&;
 
 private:
+    Scheduler&                 scheduler_;
     MapStatistics&             mapStatistics_;
     IPP                        mapIPP_;
     MapSessionContainer        mapSessions_;

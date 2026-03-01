@@ -2455,9 +2455,25 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             battleutils::handleSecondaryTargetEnmity(this, PActionTarget);
         }
     }
+
     if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
     {
-        if (objtype != TYPE_PET)
+        // Current logic for magic claiming:
+        // Spell is not a heal.
+        // spell took effect (i.e. it wasn't fully resisted).
+        // The target is alive after the spell damage/effects are applied.
+        // Target must be a MOB.
+        // Allegiance must be different from the caster.
+        // Must NOT be Summoning Magic (Atomos and Odin are cast on a mob).
+        // If the caster is a PET, it must NOT be an AUTOMATON.
+        // No mobs should claim with magic not even charmed mobs.
+
+        bool isTargetValidMob = (PActionTarget->objtype == TYPE_MOB && PActionTarget->allegiance != this->allegiance);
+        bool isNotSummoning   = (PSpell->getSkillType() != SKILL_SUMMONING_MAGIC);
+        bool isAutomaton      = (this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON);
+        bool isMob            = (this->objtype == TYPE_MOB);
+
+        if (isTargetValidMob && !isMob && isNotSummoning && !isAutomaton)
         {
             battleutils::ClaimMob(PActionTarget, this);
         }
@@ -2791,9 +2807,15 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     if (PTarget)
     {
-        if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
+        if (PTarget->objtype == TYPE_MOB && this->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
-            battleutils::ClaimMob(PTarget, this);
+            bool isAvatar   = (this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR); // this is here to prevent other pet types from calling ClaimMob.
+            bool isKillShot = PTarget->isDead();
+
+            if (isAvatar || isKillShot)
+            {
+                battleutils::ClaimMob(PTarget, this);
+            }
         }
         battleutils::DirtyExp(PTarget, this);
     }

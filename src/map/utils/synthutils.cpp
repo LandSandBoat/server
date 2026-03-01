@@ -861,7 +861,7 @@ void handleSynthSuccess(CCharEntity* PChar)
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, invSlotID);
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
     // Use appropiate message (Regular or desynthesis)
     const auto message = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? SynthesisResult::SuccessDesynth : SynthesisResult::Success;

@@ -447,7 +447,7 @@ void CAttackRound::ProcFollowUpAttacks()
                                 }
 
                                 charutils::UpdateItem(PChar, loc, slot, -1);
-                                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+                                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                             }
                         }
                     }

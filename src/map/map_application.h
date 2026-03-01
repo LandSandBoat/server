@@ -48,6 +48,7 @@ public:
     auto createEngine() -> std::unique_ptr<Engine> override;
     void registerCommands(ConsoleService& console) override;
     void run() override;
+    void requestExit() override;
 
 private:
     MapConfig engineConfig_{};

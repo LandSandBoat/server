@@ -104,11 +104,6 @@ xi.job_utils.samurai.useWardingCircle = function(player, target, ability)
 
     power = power + player:getMod(xi.mod.WARDING_CIRCLE_POTENCY)
 
-    -- Handle simplified message for other party members.
-    if player:getID() ~= target:getID() then
-        ability:setMsg(xi.msg.basic.FORTIFIED_DEMONS)
-    end
-
     target:addStatusEffect(xi.effect.WARDING_CIRCLE, { power = power, duration = duration, origin = player })
 
     return xi.effect.WARDING_CIRCLE

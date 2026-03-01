@@ -38,14 +38,12 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission == mission.missionId and mission:getVar(player, 'Status') == 0
         end,
 
         [xi.zone.BATALLIA_DOWNS] =
         {
             ['Cavernous_Maw'] = mission:progressEvent(4, 0, 1, 2964, 1700, 43, 0, 0, 0),
-
-            onZoneIn = completeMissionOnZoneIn,
 
             onEventFinish =
             {
@@ -57,8 +55,6 @@ mission.sections =
         {
             ['Cavernous_Maw'] = mission:progressEvent(503, 1, 26, 0, 6912, 235686, 1205, 183377, 1),
 
-            onZoneIn = completeMissionOnZoneIn,
-
             onEventFinish =
             {
                 [503] = mawOnEventFinish,
@@ -68,8 +64,6 @@ mission.sections =
         [xi.zone.SAUROMUGUE_CHAMPAIGN] =
         {
             ['Cavernous_Maw'] = mission:progressEvent(503, 2, 0, 0, 0, 0, 651, 636808, 1),
-
-            onZoneIn = completeMissionOnZoneIn,
 
             onEventFinish =
             {
@@ -81,8 +75,6 @@ mission.sections =
         {
             ['Cavernous_Maw'] = mission:progressEvent(8, 0, 0, 0, 0, 0, 6553607, 0, 1),
 
-            onZoneIn = completeMissionOnZoneIn,
-
             onEventFinish =
             {
                 [8] = mawOnEventFinish,
@@ -92,8 +84,6 @@ mission.sections =
         [xi.zone.ROLANBERRY_FIELDS_S] =
         {
             ['Cavernous_Maw'] = mission:progressEvent(703, 1, 0, 0, 0, 0, 0, 3, 1),
-
-            onZoneIn = completeMissionOnZoneIn,
 
             onEventFinish =
             {
@@ -105,20 +95,22 @@ mission.sections =
         {
             ['Cavernous_Maw'] = mission:progressEvent(703, 2, 300, 200, 100, 0, 5439495, 0, 1),
 
-            onZoneIn = completeMissionOnZoneIn,
-
             onEventFinish =
             {
                 [703] = mawOnEventFinish,
             },
         },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and mission:getVar(player, 'Status') == 1
+        end,
 
         [xi.zone.GRAUBERG_S] =
         {
             onZoneIn = function(player, prevZone)
-                if mission:getVar(player, 'Status') == 1 then
-                    return 33
-                end
+                return 33
             end,
 
             onEventUpdate =
@@ -135,10 +127,23 @@ mission.sections =
                 [33] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 2)
 
-                    xi.maws.goToMaw(player, mission:getVar(player, 'Option'))
+                    xi.maws.goToMaw(player, xi.maws.pastMaws[mission:getVar(player, 'Option')])
                 end,
             },
         },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and mission:getVar(player, 'Status') == 2
+        end,
+
+        [xi.zone.BATALLIA_DOWNS]         = { onZoneIn = completeMissionOnZoneIn },
+        [xi.zone.ROLANBERRY_FIELDS]      = { onZoneIn = completeMissionOnZoneIn },
+        [xi.zone.SAUROMUGUE_CHAMPAIGN]   = { onZoneIn = completeMissionOnZoneIn },
+        [xi.zone.BATALLIA_DOWNS_S]       = { onZoneIn = completeMissionOnZoneIn },
+        [xi.zone.ROLANBERRY_FIELDS_S]    = { onZoneIn = completeMissionOnZoneIn },
+        [xi.zone.SAUROMUGUE_CHAMPAIGN_S] = { onZoneIn = completeMissionOnZoneIn },
     },
 }
 

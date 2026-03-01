@@ -51,4 +51,22 @@ m:addOverride('xi.job_utils.ninja.useMijinGakure', function(player, target, abil
     return dmg
 end)
 
+-----------------------------------
+-- Dragoon
+-----------------------------------
+
+-- Wyvern: Revert experience points Wyvern system
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/11/2008)
+m:addOverride('xi.job_utils.dragoon.addWyvernExp', function(player, exp)
+    return 0
+end)
+
+-- Wyvern Spawn: Remove EXPERIENCE_POINTS listener that feeds wyvern EXP system
+m:addOverride('xi.pets.wyvern.onMobSpawn', function(mob)
+    super(mob)
+
+    local master = mob:getMaster()
+    master:removeListener('PET_WYVERN_EXP')
+end)
+
 return m

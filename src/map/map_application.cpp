@@ -88,7 +88,7 @@ MapApplication::~MapApplication()
 
 auto MapApplication::createEngine() -> std::unique_ptr<Engine>
 {
-    return std::make_unique<MapEngine>(ioContext(), engineConfig_);
+    return std::make_unique<MapEngine>(scheduler_, engineConfig_);
 }
 
 void MapApplication::registerCommands(ConsoleService& console)
@@ -99,6 +99,12 @@ void MapApplication::registerCommands(ConsoleService& console)
     console.registerCommand("reload_recipes", "Reload crafting recipes", std::bind(&MapEngine::onReloadRecipes, mapEngine, std::placeholders::_1));
     console.registerCommand("stats", "Print runtime stats", std::bind(&MapEngine::onStats, mapEngine, std::placeholders::_1));
     console.registerCommand("backtrace", "Print backtrace", std::bind(&MapEngine::onBacktrace, mapEngine, std::placeholders::_1));
+}
+
+void MapApplication::requestExit()
+{
+    Application::requestExit();
+    scheduler_.stop();
 }
 
 void MapApplication::run()
@@ -122,7 +128,7 @@ void MapApplication::run()
 
     // MapEngine destructor must occur before Application destructor
     engine_.reset();
-    io_context_.stop();
+    scheduler_.stop();
 
     const auto taskManager = CTaskManager::getInstance();
     while (!taskManager->getTaskList().empty())

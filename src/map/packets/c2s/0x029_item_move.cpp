@@ -258,12 +258,12 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 }
             }
 
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
             ShowError("GP_CLI_COMMAND_ITEM_MOVE: Location %u Slot %u is full", Category2, ItemIndex2);
             return;
         }
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
