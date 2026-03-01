@@ -38,7 +38,7 @@
 #include <chrono>
 #include <concepts>
 #include <cstdio>
-#include <format>
+#include <fmt/format.h>
 #include <iostream>
 #include <iterator>
 #include <memory>
@@ -175,7 +175,7 @@ public:
     void workerLoop(std::size_t index)
     {
 #ifdef TRACY_ENABLE
-        const auto threadName = std::format("Worker Thread {}", index + 1);
+        const auto threadName = fmt::format("Worker Thread {}", index + 1);
         tracy::SetThreadName(threadName.c_str());
 #else
         std::ignore = index;
