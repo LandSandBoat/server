@@ -21,7 +21,7 @@
 
 #include "test_matcher.h"
 #include "common/logging.h"
-#include <format>
+#include <fmt/format.h>
 #include <regex>
 
 TestMatcher::TestMatcher(FilterConfig config)
@@ -124,5 +124,5 @@ auto TestMatcher::matchesAnyPattern(const std::string& text, const std::vector<s
 // Check if the test name contains the specified tag (formatted as #tag)
 auto TestMatcher::hasTag(const std::string& testName, const std::string& tag) const -> bool
 {
-    return testName.find(std::format("#{}", tag)) != std::string::npos;
+    return testName.find(fmt::format("#{}", tag)) != std::string::npos;
 }

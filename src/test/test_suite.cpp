@@ -21,7 +21,7 @@
 
 #include "test_suite.h"
 #include "common/logging.h"
-#include <format>
+#include <fmt/format.h>
 #include <utility>
 
 // Collection of test cases and child suites.
@@ -37,7 +37,7 @@ TestSuite::TestSuite(const std::string& name, const std::string& fullPath, TestS
 auto TestSuite::addChildSuite(const std::string& name) -> TestSuite&
 {
     // For root suite (no parent), don't add prefix
-    auto fullPath = parent_ ? std::format("{}::{}", fullPath_, name) : name;
+    auto fullPath = parent_ ? fmt::format("{}::{}", fullPath_, name) : name;
     childSuites_.emplace_back(name, fullPath, this);
     return childSuites_.back();
 }

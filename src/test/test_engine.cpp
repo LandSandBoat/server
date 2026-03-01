@@ -33,7 +33,7 @@
 #include "test_suite.h"
 
 #include <chrono>
-#include <format>
+#include <fmt/format.h>
 #include <sol/sol.hpp>
 #include <spdlog/spdlog.h>
 #include <utility>

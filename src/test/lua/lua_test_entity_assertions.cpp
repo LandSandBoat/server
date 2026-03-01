@@ -31,7 +31,7 @@
 #include "test_common.h"
 
 #include <algorithm>
-#include <format>
+#include <fmt/format.h>
 #include <sol/sol.hpp>
 #include <unordered_map>
 
@@ -180,8 +180,8 @@ auto CLuaTestEntityAssertions::inZone(const ZONEID expectedZone) -> CLuaTestEnti
     const auto actualZone = entity_->getZoneID();
 
     assertCondition(entity_->getZoneID() == expectedZone,
-                    std::format("Expected to be in zone {}, but was in zone {}", getEnumKey("xi.zone", expectedZone), getEnumKey("xi.zone", actualZone)),
-                    std::format("Expected to NOT be in zone {}", getEnumKey("xi.zone", expectedZone)));
+                    fmt::format("Expected to be in zone {}, but was in zone {}", getEnumKey("xi.zone", expectedZone), getEnumKey("xi.zone", actualZone)),
+                    fmt::format("Expected to NOT be in zone {}", getEnumKey("xi.zone", expectedZone)));
     return *this;
 }
 
@@ -197,8 +197,8 @@ auto CLuaTestEntityAssertions::hasLocalVar(const std::string& varName, uint32 ex
     auto actualValue = entity_->getLocalVar(varName);
 
     assertCondition(actualValue == expectedValue,
-                    std::format("Expected local var '{}' to be {}, but was {}", varName, expectedValue, actualValue),
-                    std::format("Expected local var '{}' NOT to be {}", varName, expectedValue));
+                    fmt::format("Expected local var '{}' to be {}, but was {}", varName, expectedValue, actualValue),
+                    fmt::format("Expected local var '{}' NOT to be {}", varName, expectedValue));
     return *this;
 }
 
@@ -212,8 +212,8 @@ auto CLuaTestEntityAssertions::hasLocalVar(const std::string& varName, uint32 ex
 auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->hasStatusEffect(effectId, sol::lua_nil),
-                    std::format("Expected entity to have status effect {}", getEnumKey("xi.effect", effectId)),
-                    std::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", effectId)));
+                    fmt::format("Expected entity to have status effect {}", getEnumKey("xi.effect", effectId)),
+                    fmt::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", effectId)));
     return *this;
 }
 
@@ -227,8 +227,8 @@ auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntit
 auto CLuaTestEntityAssertions::hasAnimation(const uint8 animation) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->getAnimation() == animation,
-                    std::format("Does not have animation {} set", getEnumKey("xi.animation", animation)),
-                    std::format("Does have animation {} set", getEnumKey("xi.animation", animation)));
+                    fmt::format("Does not have animation {} set", getEnumKey("xi.animation", animation)),
+                    fmt::format("Does have animation {} set", getEnumKey("xi.animation", animation)));
     return *this;
 }
 
@@ -250,8 +250,8 @@ auto CLuaTestEntityAssertions::hasNationRank(uint8 expectedRank) -> CLuaTestEnti
     auto actualRank = entity_->getRank(entity_->getNation());
 
     assertCondition(actualRank == expectedRank,
-                    std::format("Expected player to have nation rank {}, but had rank {}", expectedRank, actualRank),
-                    std::format("Expected player NOT to have nation rank {}", expectedRank));
+                    fmt::format("Expected player to have nation rank {}, but had rank {}", expectedRank, actualRank),
+                    fmt::format("Expected player NOT to have nation rank {}", expectedRank));
     return *this;
 }
 
@@ -271,8 +271,8 @@ auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAsserti
     }
 
     assertCondition(entity_->hasKeyItem(keyItemId),
-                    std::format("Expected player to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))),
-                    std::format("Expected player NOT to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))));
+                    fmt::format("Expected player to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))),
+                    fmt::format("Expected player NOT to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))));
     return *this;
 }
 
@@ -295,12 +295,12 @@ auto CLuaTestEntityAssertions::hasMission(const MissionLog logId, const uint16 e
     const auto logIdValue         = logId;
     const auto logIdStr           = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logIdValue));
     const auto missionArea        = missionLogIdMap.contains(static_cast<uint8_t>(logIdValue)) ? missionLogIdMap.at(static_cast<uint8_t>(logIdValue)) : std::to_string(static_cast<uint8_t>(logIdValue));
-    const auto expectedMissionStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), expectedMission);
-    const auto currentMissionStr  = getEnumKey(std::format("xi.mission.id.{}", missionArea), currentMission);
+    const auto expectedMissionStr = getEnumKey(fmt::format("xi.mission.id.{}", missionArea), expectedMission);
+    const auto currentMissionStr  = getEnumKey(fmt::format("xi.mission.id.{}", missionArea), currentMission);
 
     assertCondition(currentMission == expectedMission,
-                    std::format("Expected player to have mission {}::{}, but had mission {}", logIdStr, expectedMissionStr, currentMissionStr),
-                    std::format("Expected player NOT to have mission {}::{}", logIdStr, expectedMissionStr));
+                    fmt::format("Expected player to have mission {}::{}, but had mission {}", logIdStr, expectedMissionStr, currentMissionStr),
+                    fmt::format("Expected player NOT to have mission {}::{}", logIdStr, expectedMissionStr));
     return *this;
 }
 
@@ -321,11 +321,11 @@ auto CLuaTestEntityAssertions::hasCompletedMission(const MissionLog logId, const
 
     const auto logIdStr     = getEnumKey("xi.mission.log_id", static_cast<uint8_t>(logId));
     const auto missionArea  = missionLogIdMap.contains(static_cast<uint8_t>(logId)) ? missionLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
-    const auto missionIdStr = getEnumKey(std::format("xi.mission.id.{}", missionArea), missionId);
+    const auto missionIdStr = getEnumKey(fmt::format("xi.mission.id.{}", missionArea), missionId);
 
     assertCondition(entity_->hasCompletedMission(logId, missionId),
-                    std::format("Expected player to have completed mission {}::{}", logIdStr, missionIdStr),
-                    std::format("Expected player NOT to have completed mission {}::{}", logIdStr, missionIdStr));
+                    fmt::format("Expected player to have completed mission {}::{}", logIdStr, missionIdStr),
+                    fmt::format("Expected player NOT to have completed mission {}::{}", logIdStr, missionIdStr));
     return *this;
 }
 
@@ -345,8 +345,8 @@ auto CLuaTestEntityAssertions::hasItem(const uint16 itemId) -> CLuaTestEntityAss
     }
 
     assertCondition(entity_->hasItem(itemId, sol::lua_nil),
-                    std::format("Expected player to have item {}", getEnumKey("xi.item", itemId)),
-                    std::format("Expected player NOT to have item {}", getEnumKey("xi.item", itemId)));
+                    fmt::format("Expected player to have item {}", getEnumKey("xi.item", itemId)),
+                    fmt::format("Expected player NOT to have item {}", getEnumKey("xi.item", itemId)));
     return *this;
 }
 
@@ -362,8 +362,8 @@ auto CLuaTestEntityAssertions::hasModifier(const Mod modifierId, int32 expectedV
     auto actualValue = entity_->getMod(static_cast<uint16>(modifierId));
 
     assertCondition(actualValue == expectedValue,
-                    std::format("Modifier {} != {} (actual {})", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue, actualValue),
-                    std::format("Modifier {} == {}", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue));
+                    fmt::format("Modifier {} != {} (actual {})", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue, actualValue),
+                    fmt::format("Modifier {} == {}", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue));
     return *this;
 }
 
@@ -379,8 +379,8 @@ auto CLuaTestEntityAssertions::isSpawned() -> CLuaTestEntityAssertions&
     auto name = entity_->getName();
 
     assertCondition(entity_->isSpawned(),
-                    std::format("{} is not spawned", name),
-                    std::format("{} is spawned", name));
+                    fmt::format("{} is not spawned", name),
+                    fmt::format("{} is spawned", name));
     return *this;
 }
 
@@ -396,8 +396,8 @@ auto CLuaTestEntityAssertions::isAlive() -> CLuaTestEntityAssertions&
     auto name = entity_->getName();
 
     assertCondition(entity_->isAlive(),
-                    std::format("{} is not alive", name),
-                    std::format("{} is alive", name));
+                    fmt::format("{} is not alive", name),
+                    fmt::format("{} is alive", name));
     return *this;
 }
 
@@ -418,11 +418,11 @@ auto CLuaTestEntityAssertions::hasQuest(const QuestLog logId, const uint16 quest
 
     const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
     const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
-    const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
+    const auto questIdStr = getEnumKey(fmt::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->getQuestStatus(logId, questId) != 0,
-                    std::format("Expected player to have quest {}::{}", logIdStr, questIdStr),
-                    std::format("Expected player NOT to have quest {}::{}", logIdStr, questIdStr));
+                    fmt::format("Expected player to have quest {}::{}", logIdStr, questIdStr),
+                    fmt::format("Expected player NOT to have quest {}::{}", logIdStr, questIdStr));
     return *this;
 }
 
@@ -443,11 +443,11 @@ auto CLuaTestEntityAssertions::hasCompletedQuest(const QuestLog logId, const uin
 
     const auto logIdStr   = getEnumKey("xi.questLog", static_cast<uint8_t>(logId));
     const auto questArea  = questLogIdMap.contains(static_cast<uint8_t>(logId)) ? questLogIdMap.at(static_cast<uint8_t>(logId)) : std::to_string(static_cast<uint8_t>(logId));
-    const auto questIdStr = getEnumKey(std::format("xi.quest.id.{}", questArea), questId);
+    const auto questIdStr = getEnumKey(fmt::format("xi.quest.id.{}", questArea), questId);
 
     assertCondition(entity_->hasCompletedQuest(logId, questId),
-                    std::format("Expected player to have completed quest {}::{}", logIdStr, questIdStr),
-                    std::format("Expected player NOT to have completed quest {}::{}", logIdStr, questIdStr));
+                    fmt::format("Expected player to have completed quest {}::{}", logIdStr, questIdStr),
+                    fmt::format("Expected player NOT to have completed quest {}::{}", logIdStr, questIdStr));
     return *this;
 }
 
@@ -469,8 +469,8 @@ auto CLuaTestEntityAssertions::hasGil(const uint32 amount) -> CLuaTestEntityAsse
     const auto actualGil = entity_->getGil();
 
     assertCondition(actualGil >= amount,
-                    std::format("Expected player to have at least {} gil, but had {} gil", amount, actualGil),
-                    std::format("Expected player NOT to have {} gil", amount));
+                    fmt::format("Expected player to have at least {} gil, but had {} gil", amount, actualGil),
+                    fmt::format("Expected player NOT to have {} gil", amount));
     return *this;
 }
 

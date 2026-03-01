@@ -30,7 +30,7 @@
 #include "map/entities/charentity.h"
 #include "test_common.h"
 
-#include <format>
+#include <fmt/format.h>
 
 #include <bcrypt/BCrypt.hpp>
 
@@ -76,24 +76,24 @@ std::vector<std::string> charIdTables = {
 // Cleans the given character ID or all characters with IDs >= MinTestCharId.
 void TestChar::clean(uint32 charId /* = 0 */)
 {
-    std::string matchingCondition = std::format(">= {}", MinTestCharId);
+    std::string matchingCondition = fmt::format(">= {}", MinTestCharId);
     if (charId > 0)
     {
-        matchingCondition = std::format("= {}", charId);
+        matchingCondition = fmt::format("= {}", charId);
     }
 
     std::vector cleanupQueries = {
-        std::format("DELETE FROM accounts WHERE id {}", matchingCondition),
-        std::format("DELETE FROM auction_house WHERE seller {}", matchingCondition),
-        std::format("DELETE FROM delivery_box WHERE charid {} OR senderid {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_bazaar WHERE seller {} OR purchaser {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_trade WHERE sender {} OR receiver {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_vendor WHERE seller {}", matchingCondition),
+        fmt::format("DELETE FROM accounts WHERE id {}", matchingCondition),
+        fmt::format("DELETE FROM auction_house WHERE seller {}", matchingCondition),
+        fmt::format("DELETE FROM delivery_box WHERE charid {} OR senderid {}", matchingCondition, matchingCondition),
+        fmt::format("DELETE FROM audit_bazaar WHERE seller {} OR purchaser {}", matchingCondition, matchingCondition),
+        fmt::format("DELETE FROM audit_trade WHERE sender {} OR receiver {}", matchingCondition, matchingCondition),
+        fmt::format("DELETE FROM audit_vendor WHERE seller {}", matchingCondition),
     };
 
     for (auto& tableName : charIdTables)
     {
-        cleanupQueries.emplace_back(std::format("DELETE FROM {} WHERE charid {}", tableName, matchingCondition));
+        cleanupQueries.emplace_back(fmt::format("DELETE FROM {} WHERE charid {}", tableName, matchingCondition));
     }
 
     for (auto& query : cleanupQueries)
@@ -121,7 +121,7 @@ auto TestChar::create(const uint16_t zoneId) -> std::unique_ptr<TestChar>
         return nullptr;
     }
 
-    auto accountName = std::format("TEST_{}", accId);
+    auto accountName = fmt::format("TEST_{}", accId);
 
     rset = db::preparedStmt("INSERT INTO accounts (id, login, password) VALUES (?, ?, ?)",
                             accId,
@@ -144,7 +144,7 @@ auto TestChar::create(const uint16_t zoneId) -> std::unique_ptr<TestChar>
         return nullptr;
     }
 
-    const auto charName = std::format("T{}", charId);
+    const auto charName = fmt::format("T{}", charId);
 
     char_mini mini = {
         .m_name   = {},

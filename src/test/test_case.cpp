@@ -22,7 +22,7 @@
 #include "test_case.h"
 #include <utility>
 
-#include <format>
+#include <fmt/format.h>
 
 TestCase::TestCase(std::string name, std::optional<sol::protected_function> func, std::string parentPath)
 : name_(std::move(name))
@@ -33,7 +33,7 @@ TestCase::TestCase(std::string name, std::optional<sol::protected_function> func
 
 auto TestCase::fullName() const -> std::string
 {
-    return parentPath_.empty() ? name_ : std::format("{} > {}", parentPath_, name_);
+    return parentPath_.empty() ? name_ : fmt::format("{} > {}", parentPath_, name_);
 }
 
 auto TestCase::name() const -> const std::string&

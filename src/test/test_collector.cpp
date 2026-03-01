@@ -26,7 +26,7 @@
 #include "reporters/reporter_container.h"
 #include <algorithm>
 #include <chrono>
-#include <format>
+#include <fmt/format.h>
 
 using namespace std::chrono_literals;
 
@@ -217,7 +217,7 @@ void TestCollector::registerTestFramework()
             auto& testCase = currentSuite_->addTestCase(name, testFunc);
 
             // Check if this test should be skipped based on filters
-            if (matcher_.shouldSkipTest(std::format("{}::{}", currentSuite_->fullName(), name)))
+            if (matcher_.shouldSkipTest(fmt::format("{}::{}", currentSuite_->fullName(), name)))
             {
                 testCase.markAsSkipped();
             }
