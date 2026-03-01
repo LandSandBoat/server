@@ -180,8 +180,8 @@ auto CLuaTestEntityAssertions::inZone(const ZONEID expectedZone) -> CLuaTestEnti
     const auto actualZone = entity_->getZoneID();
 
     assertCondition(entity_->getZoneID() == expectedZone,
-                    fmt::format("Expected to be in zone {}, but was in zone {}", getEnumKey("xi.zone", expectedZone), getEnumKey("xi.zone", actualZone)),
-                    fmt::format("Expected to NOT be in zone {}", getEnumKey("xi.zone", expectedZone)));
+                    fmt::format("Expected to be in zone {}, but was in zone {}", getEnumKey("xi.zone", fmt::underlying(expectedZone)), getEnumKey("xi.zone", fmt::underlying(actualZone))),
+                    fmt::format("Expected to NOT be in zone {}", getEnumKey("xi.zone", fmt::underlying(expectedZone))));
     return *this;
 }
 
@@ -212,8 +212,8 @@ auto CLuaTestEntityAssertions::hasLocalVar(const std::string& varName, uint32 ex
 auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->hasStatusEffect(effectId, sol::lua_nil),
-                    fmt::format("Expected entity to have status effect {}", getEnumKey("xi.effect", effectId)),
-                    fmt::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", effectId)));
+                    fmt::format("Expected entity to have status effect {}", getEnumKey("xi.effect", fmt::underlying(effectId))),
+                    fmt::format("Expected entity to NOT have status effect {}", getEnumKey("xi.effect", fmt::underlying(effectId))));
     return *this;
 }
 
@@ -227,8 +227,8 @@ auto CLuaTestEntityAssertions::hasEffect(const EFFECT effectId) -> CLuaTestEntit
 auto CLuaTestEntityAssertions::hasAnimation(const uint8 animation) -> CLuaTestEntityAssertions&
 {
     assertCondition(entity_->getAnimation() == animation,
-                    fmt::format("Does not have animation {} set", getEnumKey("xi.animation", animation)),
-                    fmt::format("Does have animation {} set", getEnumKey("xi.animation", animation)));
+                    fmt::format("Does not have animation {} set", getEnumKey("xi.animation", fmt::underlying(animation))),
+                    fmt::format("Does have animation {} set", getEnumKey("xi.animation", fmt::underlying(animation))));
     return *this;
 }
 
@@ -271,8 +271,8 @@ auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAsserti
     }
 
     assertCondition(entity_->hasKeyItem(keyItemId),
-                    fmt::format("Expected player to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))),
-                    fmt::format("Expected player NOT to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))));
+                    fmt::format("Expected player to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(fmt::underlying(keyItemId)))),
+                    fmt::format("Expected player NOT to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(fmt::underlying(keyItemId)))));
     return *this;
 }
 
@@ -362,8 +362,8 @@ auto CLuaTestEntityAssertions::hasModifier(const Mod modifierId, int32 expectedV
     auto actualValue = entity_->getMod(static_cast<uint16>(modifierId));
 
     assertCondition(actualValue == expectedValue,
-                    fmt::format("Modifier {} != {} (actual {})", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue, actualValue),
-                    fmt::format("Modifier {} == {}", getEnumKey("xi.mod", static_cast<uint32>(modifierId)), expectedValue));
+                    fmt::format("Modifier {} != {} (actual {})", getEnumKey("xi.mod", static_cast<uint32>(fmt::underlying(modifierId))), expectedValue, actualValue),
+                    fmt::format("Modifier {} == {}", getEnumKey("xi.mod", static_cast<uint32>(fmt::underlying(modifierId))), expectedValue));
     return *this;
 }
 
