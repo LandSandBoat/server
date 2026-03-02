@@ -22,6 +22,8 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/scheduler.h"
+
 #include "validation.h"
 
 // https://github.com/atom0s/XiPackets/blob/main/world/Header.md
@@ -32,18 +34,18 @@ struct GP_CLI_HEADER
     uint16_t sync;
 };
 
-#define GP_CLI_PACKET(PacketName, ...)                                                                        \
-    struct MapSession;                                                                                        \
-    class CCharEntity;                                                                                        \
-    struct PacketName                                                                                         \
-    {                                                                                                         \
-        GP_CLI_HEADER header;                                                                                 \
-        __VA_ARGS__                                                                                           \
-                                                                                                              \
-        auto        validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult; \
-        void        process(MapSession* PSession, CCharEntity* PChar) const;                                  \
-        inline auto getName() const -> std::string_view                                                       \
-        {                                                                                                     \
-            return #PacketName;                                                                               \
-        }                                                                                                     \
+#define GP_CLI_PACKET(PacketName, ...)                                                                                              \
+    struct MapSession;                                                                                                              \
+    class CCharEntity;                                                                                                              \
+    struct PacketName                                                                                                               \
+    {                                                                                                                               \
+        GP_CLI_HEADER header;                                                                                                       \
+        __VA_ARGS__                                                                                                                 \
+                                                                                                                                    \
+        auto        validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult; \
+        void        process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const;                                  \
+        inline auto getName() const -> std::string_view                                                                             \
+        {                                                                                                                           \
+            return #PacketName;                                                                                                     \
+        }                                                                                                                           \
     }

@@ -38,8 +38,9 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
-CLuaClientEntityPairPackets::CLuaClientEntityPairPackets(CLuaClientEntityPair* parent)
+CLuaClientEntityPairPackets::CLuaClientEntityPairPackets(CLuaClientEntityPair* parent, Scheduler& scheduler)
 : parent_(parent)
+, scheduler_(scheduler)
 {
 }
 
@@ -57,7 +58,7 @@ void CLuaClientEntityPairPackets::sendBasicPacket(CBasicPacket& packet) const
 {
     const auto testChar = parent_->testChar();
     DebugTestFmt("C2S 0x{:03X} {}", packet.getType(), magic_enum::enum_name(static_cast<PacketC2S>(packet.getType())));
-    PacketParser[packet.getType()](testChar->session(), testChar->entity(), packet);
+    PacketParser[packet.getType()](scheduler_, testChar->session(), testChar->entity(), packet);
 }
 
 /************************************************************************

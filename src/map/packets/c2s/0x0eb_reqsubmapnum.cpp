@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x10e_reqsubmapnum.h"
 
-auto GP_CLI_COMMAND_REQSUBMAPNUM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_REQSUBMAPNUM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_REQSUBMAPNUM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_REQSUBMAPNUM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // TODO: Highly doubt that's the correct implementation.
     if (!PChar->isNpcLocked())

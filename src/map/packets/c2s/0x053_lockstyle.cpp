@@ -40,14 +40,14 @@ const auto updateClientAppearance = [](CCharEntity* PChar)
 
 } // namespace
 
-auto GP_CLI_COMMAND_LOCKSTYLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_LOCKSTYLE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_LOCKSTYLE_MODE>(Mode)
         .range("Count", Count, 0, 16);
 }
 
-void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_LOCKSTYLE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (static_cast<GP_CLI_COMMAND_LOCKSTYLE_MODE>(Mode))
     {

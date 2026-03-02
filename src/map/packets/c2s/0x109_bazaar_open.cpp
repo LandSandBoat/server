@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_BAZAAR_OPEN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_OPEN::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(PChar->isSettingBazaarPrices, true, "isSettingBazaarPrices not true");
 }
 
-void GP_CLI_COMMAND_BAZAAR_OPEN::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_OPEN::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->isSettingBazaarPrices = false;
     PChar->updatemask |= UPDATE_HP;

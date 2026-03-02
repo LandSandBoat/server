@@ -24,12 +24,12 @@
 #include "entities/charentity.h"
 #include "gmcall_container.h"
 
-auto GP_CLI_COMMAND_ACK_GMMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ACK_GMMSG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_ACK_GMMSG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ACK_GMMSG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->gmCallContainer().acknowledgeOldestResponse(PChar);
 }

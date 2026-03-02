@@ -30,13 +30,13 @@
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
 
-auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(Res);
 }
 
-void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.id, PChar->InvitePending.targid); PInviter != nullptr)
     {

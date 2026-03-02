@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "status_effect_container.h"
 
-auto GP_CLI_COMMAND_BUFFCANCEL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BUFFCANCEL::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Build a list of known cancellable buffs
     return PacketValidator()
         .range("BuffNo", BuffNo, 0, MAX_EFFECTID);
 }
 
-void GP_CLI_COMMAND_BUFFCANCEL::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BUFFCANCEL::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->StatusEffectContainer->DelStatusEffectsByIcon(BuffNo);
 }

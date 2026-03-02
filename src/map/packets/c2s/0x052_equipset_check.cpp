@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x116_equipset_valid.h"
 
-auto GP_CLI_COMMAND_EQUIPSET_CHECK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EQUIPSET_CHECK::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_EQUIPSET_CHECK::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EQUIPSET_CHECK::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Im guessing this is here to check if you can use A Item, as it seems useless to have this sent to server
     // as It will check requirements when it goes to equip the items anyway

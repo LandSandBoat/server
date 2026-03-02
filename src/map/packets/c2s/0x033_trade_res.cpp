@@ -37,7 +37,7 @@ const auto cleanTradeTargets = [](CCharEntity* PChar, CCharEntity* PTarget)
 
 } // namespace
 
-auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRADE_RES::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_TRADE_RES_KIND>(Kind)
@@ -45,7 +45,7 @@ auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity*
         .isNotMonstrosity(PChar);
 }
 
-void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRADE_RES::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
 

@@ -21,7 +21,6 @@
 
 #include "map_engine.h"
 
-#include "common/async.h"
 #include "common/blowfish.h"
 #include "common/console_service.h"
 #include "common/database.h"
@@ -100,7 +99,7 @@ MapEngine::MapEngine(Scheduler& scheduler, MapConfig& config)
 , networking_(std::make_unique<MapNetworking>(scheduler_, *mapStatistics_, config))
 , engineConfig_(config)
 {
-    do_init();
+    scheduler_.postToMainThread(init());
 }
 
 MapEngine::~MapEngine()
@@ -108,7 +107,7 @@ MapEngine::~MapEngine()
     do_final();
 }
 
-void MapEngine::prepareWatchdog()
+auto MapEngine::prepareWatchdog() -> Task<void>
 {
     auto period = settings::get<uint32>("main.INACTIVITY_WATCHDOG_PERIOD");
 
@@ -120,15 +119,23 @@ void MapEngine::prepareWatchdog()
 
     const auto periodMs = (period > 0) ? std::chrono::milliseconds(period) : 2000ms;
 
-    watchdog_ = std::make_unique<Watchdog>(
-        periodMs,
-        [period]()
+    watchdogLastUpdate_ = std::chrono::duration_cast<std::chrono::milliseconds>(timer::now().time_since_epoch()).count();
+
+    while (!scheduler_.closeRequested())
+    {
+        co_await scheduler_.yieldFor(periodMs);
+
+        auto nowMs        = std::chrono::duration_cast<std::chrono::milliseconds>(timer::now().time_since_epoch()).count();
+        auto lastUpdateMs = watchdogLastUpdate_.load();
+
+        if (nowMs - lastUpdateMs >= static_cast<uint64_t>(periodMs.count()))
         {
             if (debug::isRunningUnderDebugger())
             {
                 ShowCritical("!!! INACTIVITY WATCHDOG HAS TRIGGERED !!!");
                 ShowCriticalFmt("Process main tick has taken {}ms or more.", period);
                 ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
+                break;
             }
             else if (!settings::get<bool>("main.DISABLE_INACTIVITY_WATCHDOG"))
             {
@@ -152,60 +159,11 @@ void MapEngine::prepareWatchdog()
 
                 throw std::runtime_error("Watchdog thread time exceeded. Killing process.");
             }
-        });
-}
-
-void MapEngine::gameLoop()
-{
-    TracyZoneNamed(_tasks, "MapEngine Main Loop");
-
-    timer::duration tasksDuration;
-    timer::duration networkDuration;
-    timer::duration tickDuration;
-
-    const auto tickStart = timer::now();
-    {
-        TracyZoneNamed(_tasks, "MapEngine Tasks");
-        tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
-    }
-    {
-        TracyZoneNamed(_networking, "MapEngine Networking");
-        // Use tick remainder for networking with a maximum to ensure that the network phase
-        // doesn't starve and a minimum to prevent bumping up against the time limit.
-        networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
-    }
-    tickDuration = timer::now() - tickStart;
-
-    const auto tickDiffTime = kMainLoopInterval - tickDuration;
-
-    mapStatistics_->set(MapStatistics::Key::TasksTickTime, timer::count_milliseconds(tasksDuration));
-    mapStatistics_->set(MapStatistics::Key::NetworkTickTime, timer::count_milliseconds(networkDuration));
-    mapStatistics_->set(MapStatistics::Key::TotalTickTime, timer::count_milliseconds(tickDuration));
-    mapStatistics_->set(MapStatistics::Key::TickDiffTime, timer::count_milliseconds(tickDiffTime));
-    mapStatistics_->flush();
-
-    DebugPerformanceFmt("Tasks: {}ms, Network: {}ms, Total: {}ms, Diff/Sleep: {}ms",
-                        timer::count_milliseconds(tasksDuration),
-                        timer::count_milliseconds(networkDuration),
-                        timer::count_milliseconds(tickDuration),
-                        timer::count_milliseconds(tickDiffTime));
-
-    if (watchdog_)
-    {
-        watchdog_->update();
-    }
-
-    if (tickDiffTime > 0ms)
-    {
-        std::this_thread::sleep_for(tickDiffTime);
-    }
-    else if (tickDiffTime < -kMainLoopBacklogThreshold)
-    {
-        RATE_LIMIT(15s, ShowWarningFmt("Main loop is running {}ms behind, performance is degraded!", -timer::count_milliseconds(tickDiffTime)));
+        }
     }
 }
 
-void MapEngine::do_init()
+auto MapEngine::init() -> Task<void>
 {
     TracyZoneScoped;
 
@@ -300,7 +258,7 @@ void MapEngine::do_init()
         ShowInfo("./losmeshes/ directory isn't present or is empty");
     }
 
-    zoneutils::Initialize(mapIPP, engineConfig_.lazyZones, !engineConfig_.isTestServer);
+    co_await zoneutils::Initialize(scheduler_, mapIPP, engineConfig_.lazyZones, !engineConfig_.isTestServer);
 
     if (!engineConfig_.lazyZones)
     {
@@ -348,15 +306,70 @@ void MapEngine::do_init()
 
     if (!engineConfig_.isTestServer)
     {
-        prepareWatchdog();
+        co_await prepareWatchdog();
     }
 
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
 #endif // TRACY_ENABLE
+
+    scheduler_.postToMainThread(gameLoop());
 }
 
-void MapEngine::do_final() const
+
+auto MapEngine::run() -> Task<void>
+{
+    while (!scheduler_.closeRequested())
+    {
+        TracyZoneNamed(_tasks, "MapEngine Main Loop");
+    
+        timer::duration tasksDuration;
+        timer::duration networkDuration;
+        timer::duration tickDuration;
+    
+        const auto tickStart = timer::now();
+        {
+            TracyZoneNamed(_tasks, "MapEngine Tasks");
+            tasksDuration = CTaskManager::getInstance()->doExpiredTasks(tickStart);
+        }
+        {
+            TracyZoneNamed(_networking, "MapEngine Networking");
+            // Use tick remainder for networking with a maximum to ensure that the network phase
+            // doesn't starve and a minimum to prevent bumping up against the time limit.
+            networkDuration = networking_->doSocketsBlocking(kMainLoopInterval - std::clamp<timer::duration>(tasksDuration, 50ms, 150ms));
+        }
+        tickDuration = timer::now() - tickStart;
+    
+        const auto tickDiffTime = kMainLoopInterval - tickDuration;
+    
+        mapStatistics_->set(MapStatistics::Key::TasksTickTime, timer::count_milliseconds(tasksDuration));
+        mapStatistics_->set(MapStatistics::Key::NetworkTickTime, timer::count_milliseconds(networkDuration));
+        mapStatistics_->set(MapStatistics::Key::TotalTickTime, timer::count_milliseconds(tickDuration));
+        mapStatistics_->set(MapStatistics::Key::TickDiffTime, timer::count_milliseconds(tickDiffTime));
+        mapStatistics_->flush();
+    
+        DebugPerformanceFmt("Tasks: {}ms, Network: {}ms, Total: {}ms, Diff/Sleep: {}ms",
+                            timer::count_milliseconds(tasksDuration),
+                            timer::count_milliseconds(networkDuration),
+                            timer::count_milliseconds(tickDuration),
+                            timer::count_milliseconds(tickDiffTime));
+    
+        watchdogLastUpdate_ = std::chrono::duration_cast<std::chrono::milliseconds>(timer::now().time_since_epoch()).count();
+    
+        if (tickDiffTime > 0ms)
+        {
+            co_await scheduler_.yieldFor(tickDiffTime);
+        }
+        else if (tickDiffTime < -kMainLoopBacklogThreshold)
+        {
+            RATE_LIMIT(15s, ShowWarningFmt("Main loop is running {}ms behind, performance is degraded!", -timer::count_milliseconds(tickDiffTime)));
+        }
+    }
+
+    scheduler_.postToMainThread(cleanup());
+}
+
+auto MapEngine::cleanup() -> Task<void>
 {
     TracyZoneScoped;
 
@@ -373,7 +386,6 @@ void MapEngine::do_final() const
     zoneutils::FreeZoneList();
 
     CTaskManager::delInstance();
-    Async::delInstance();
 
     luautils::cleanup();
 }

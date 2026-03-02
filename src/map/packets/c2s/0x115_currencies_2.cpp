@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x118_currencies_2.h"
 
-auto GP_CLI_COMMAND_CURRENCIES_2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CURRENCIES_2::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_CURRENCIES_2::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CURRENCIES_2::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->pushPacket<GP_SERV_COMMAND_CURRENCIES_2>(PChar);
 }

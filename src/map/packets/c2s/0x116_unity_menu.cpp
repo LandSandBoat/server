@@ -25,13 +25,13 @@
 #include "packets/s2c/0x110_unity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_UNITY_MENU::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_UNITY_MENU::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .range("Kind", Kind, 0x0, 0x1); // Kind 0 = First set of 32 packets, Kind 1 = Second set of 32 packets
 }
 
-void GP_CLI_COMMAND_UNITY_MENU::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_UNITY_MENU::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // TODO: Incomplete implementation.
     // This stub only handles the needed RoE updates.

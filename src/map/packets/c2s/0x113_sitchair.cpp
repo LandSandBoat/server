@@ -26,7 +26,7 @@
 #include "utils/charutils.h"
 #include "validation.h"
 
-auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SITCHAIR::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotCrafting(PChar)
@@ -36,7 +36,7 @@ auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* 
         .range("ChairId", ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
 }
 
-void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SITCHAIR::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Retail accurate: Can inject /sitchair while healing/logging out, but it cancels the effect.
     PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_HEALING);

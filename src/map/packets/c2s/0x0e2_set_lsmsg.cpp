@@ -26,7 +26,7 @@
 #include "items/item_linkshell.h"
 #include "linkshell.h"
 
-auto GP_CLI_COMMAND_SET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SET_LSMSG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Short-circuit the null check so we can check the permission level here
     auto pv = PacketValidator()
@@ -36,7 +36,7 @@ auto GP_CLI_COMMAND_SET_LSMSG::validate(MapSession* PSession, const CCharEntity*
     return pv;
 }
 
-void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SET_LSMSG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto canEditLsMes = [&](CItemLinkshell* PItemLinkshell) -> bool
     {

@@ -27,14 +27,14 @@
 #include "packets/s2c/0x050_equip_list.h"
 #include "utils/zoneutils.h"
 
-auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(unknown00, 2, "unknown00 not 2")
         .mustEqual(unknown01, 0, "unknown01 not 0");
 }
 
-void GP_CLI_COMMAND_ZONE_TRANSITION::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ZONE_TRANSITION::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // All this packet does on retail is respond with Kupowers messages.
     // Retail will respond exactly once to it.

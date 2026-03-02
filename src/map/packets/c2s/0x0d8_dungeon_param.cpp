@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_DUNGEON_PARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_DUNGEON_PARAM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator()
@@ -31,7 +31,7 @@ auto GP_CLI_COMMAND_DUNGEON_PARAM::validate(MapSession* PSession, const CCharEnt
         .mustEqual(PChar->targid, ActIndex, "Targid mismatch");
 }
 
-void GP_CLI_COMMAND_DUNGEON_PARAM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_DUNGEON_PARAM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_DUNGEON_PARAM: Not implemented. ActIndex: {}, Param1: {}, Param2: {}, UniqueNo: {}",
                  ActIndex,

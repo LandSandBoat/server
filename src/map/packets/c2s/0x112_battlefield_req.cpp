@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_BATTLEFIELD_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BATTLEFIELD_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_BATTLEFIELD_REQ_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_BATTLEFIELD_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BATTLEFIELD_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_BATTLEFIELD_REQ: Not implemented. Kind: {}", Kind);
 }

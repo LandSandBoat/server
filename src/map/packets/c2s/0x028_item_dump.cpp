@@ -54,14 +54,14 @@ const std::set validContainers = {
 
 } // namespace
 
-auto GP_CLI_COMMAND_ITEM_DUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEM_DUMP::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers)
         .range("ItemNum", ItemNum, 0, 99); // Retail honors 0 quantity.
 }
 
-void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEM_DUMP::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Gil cannot be dropped.
     if (Category == LOC_INVENTORY && ItemIndex == 0)

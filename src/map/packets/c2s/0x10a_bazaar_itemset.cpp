@@ -25,14 +25,14 @@
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 
-auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Need PV to support short-circuiting so we can nest null checks and move the PStorage/PItem checks here
     return PacketValidator()
         .range("Price", Price, 0, 99999999); // Bazaar max sell price is 99,999,999 gil
 }
 
-void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto* PStorage = PChar->getStorage(LOC_INVENTORY);
     if (PStorage == nullptr)

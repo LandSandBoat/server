@@ -26,14 +26,14 @@
 #include "packets/s2c/0x063_miscdata_job_points.h"
 #include "packets/s2c/0x08d_job_points.h"
 
-auto GP_CLI_COMMAND_JOB_POINTS_SPEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_JOB_POINTS_SPEND::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(PChar->inMogHouse(), true, "Character not in a mog house.") // Has been verified to work in ANY Mog House.
         .mustEqual(PChar->PJobPoints && PChar->PJobPoints->IsJobPointExist(static_cast<JOBPOINT_TYPE>(Index)), true, "Job point does not exist.");
 }
 
-void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto jpType = static_cast<JOBPOINT_TYPE>(Index);
     PChar->PJobPoints->RaiseJobPoint(jpType);

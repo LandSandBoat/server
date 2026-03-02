@@ -178,7 +178,7 @@ const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinksh
 
 } // namespace
 
-auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .range("r", r, 0, 15)
@@ -189,7 +189,7 @@ auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(MapSession* PSession, const C
         .oneOf<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_LINKSHELLID>(LinkshellId);
 }
 
-void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PItemLinkshell = static_cast<CItemLinkshell*>(PChar->getStorage(Category)->GetItem(ItemIndex));
 

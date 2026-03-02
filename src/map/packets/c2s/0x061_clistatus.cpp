@@ -25,13 +25,13 @@
 #include "packets/s2c/0x061_clistatus.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CLISTATUS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .range("unknown00", unknown00, 0, 1);
 }
 
-void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CLISTATUS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     charutils::SendLocalPlayerPackets(PChar);
 }

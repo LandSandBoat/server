@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x107_bazaar_close.h"
 
-auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(AllListClearFlg, 0, "AllListClearFlg not 0"); // Always 0
 }
 
-void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_CLOSE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     for (std::size_t i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {

@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
+#include "common/scheduler.h"
 
 #include "zone.h"
 
@@ -37,6 +38,7 @@ namespace detail
 
 struct LazyLoadState
 {
+    Scheduler*         scheduler{ nullptr };
     bool               enabled{ false };
     bool               asyncMode{ false };
     std::set<uint16>   managedZones{};
@@ -45,9 +47,10 @@ struct LazyLoadState
 
 } // namespace detail
 
-void LoadZones(const std::vector<uint16>& zoneIds);
+auto LoadZones(const std::vector<uint16>& zoneIds) -> Task<void>;
+auto LoadZones(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>;
 void LoadZoneList(IPP mapIPP);
-void Initialize(IPP mapIPP, bool lazyLoading, bool asyncMode);
+auto Initialize(Scheduler& scheduler, IPP mapIPP, bool lazyLoading, bool asyncMode) -> Task<void>;
 void ProcessLoadQueue();
 auto IsLazyLoadingEnabled() -> bool;
 auto IsZoneReady(uint16 zoneId) -> bool;
@@ -56,6 +59,9 @@ void FreeZoneList();
 void InitializeWeather();
 void TOTDChange(vanadiel_time::TOTD TOTD);
 void SavePlayTime();
+
+auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>;
+auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>;
 
 auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
 auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;

@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x063_miscdata_homepoints.h"
 
-auto GP_CLI_COMMAND_MAP_MARKERS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MAP_MARKERS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_MAP_MARKERS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MAP_MARKERS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
 }

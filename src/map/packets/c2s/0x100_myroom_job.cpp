@@ -41,7 +41,7 @@
 #include "utils/charutils.h"
 #include "utils/puppetutils.h"
 
-auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_JOB::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .mustEqual(PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id, true, "Player not in MH or zone with Moogle.");
@@ -61,7 +61,7 @@ auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity
     return pv;
 }
 
-void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_JOB::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if ((MainJobIndex > 0x00) && (MainJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << MainJobIndex)))
     {

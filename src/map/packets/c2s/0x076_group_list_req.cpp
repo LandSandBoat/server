@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x0c8_group_tbl.h"
 
-auto GP_CLI_COMMAND_GROUP_LIST_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_LIST_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(Kind, 0, "Kind not 0");
 }
 
-void GP_CLI_COMMAND_GROUP_LIST_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_LIST_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (PChar->PParty)
     {

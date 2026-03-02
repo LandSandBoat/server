@@ -51,7 +51,7 @@ const auto actionToStr = [](const GP_CLI_COMMAND_ACTION_ACTIONID actionIn)
 
 } // namespace
 
-auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ACTION::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_ACTION_ACTIONID>(this->ActionID)
@@ -159,7 +159,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                 });
 }
 
-void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ACTION::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto actionStr = fmt::format("Player Action: {}: {} -> ActIndex: {}", PChar->getName(), actionToStr(static_cast<GP_CLI_COMMAND_ACTION_ACTIONID>(ActionID)), ActIndex);
     ShowTrace(actionStr);

@@ -28,13 +28,13 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-auto GP_CLI_COMMAND_SHOP_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SHOP_BUY::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(this->PropertyItemIndex, 0, "PropertyItemIndex not 0");
 }
 
-void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SHOP_BUY::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto quantity = this->ItemNum;
 

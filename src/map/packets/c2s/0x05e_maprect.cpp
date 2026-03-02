@@ -49,14 +49,14 @@ const auto denyZone = [](CCharEntity* PChar)
 
 } // namespace
 
-auto GP_CLI_COMMAND_MAPRECT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MAPRECT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT>(this->MyRoomExitBit)
         .oneOf<GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE>(this->MyRoomExitMode);
 }
 
-void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MAPRECT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint16_t startingZone = PChar->getZone();
     auto     startingPos  = PChar->loc.p;

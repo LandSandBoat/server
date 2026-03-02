@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x0a0_map_group.h"
 
-auto GP_CLI_COMMAND_MAP_GROUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MAP_GROUP::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(ZoneNo, PChar->getZone(), "ZoneNo does not match character zone");
 }
 
-void GP_CLI_COMMAND_MAP_GROUP::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MAP_GROUP::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // clang-format off
     PChar->ForAlliance([PChar](CBattleEntity* PPartyMember)

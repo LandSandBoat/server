@@ -21,13 +21,13 @@
 
 #include "0x00d_netend.h"
 
-auto GP_CLI_COMMAND_NETEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_NETEND::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Packet explicitly ignored.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_NETEND::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_NETEND::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Do nothing.
 }

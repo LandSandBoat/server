@@ -74,9 +74,10 @@ auto durationToVanaTime = [](const uint8 vanaHour, const uint8 vanaMinute) -> ea
 
 } // namespace
 
-CLuaSimulation::CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink)
+CLuaSimulation::CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink, Scheduler& scheduler)
 : engine_{ _mapServer }
 , sink_{ _sink }
+, scheduler_(scheduler)
 {
 }
 
@@ -521,7 +522,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
 
     // Create client wrapper and track setup context
     ClientInfo info{
-        .client = std::make_unique<CLuaClientEntityPair>(std::move(testChar), this, engine_),
+        .client = std::make_unique<CLuaClientEntityPair>(std::move(testChar), this, engine_, scheduler_),
         .scope  = inSetupContext_ ? ClientScope::Suite : ClientScope::TestCase
     };
     clients_.push_back(std::move(info));

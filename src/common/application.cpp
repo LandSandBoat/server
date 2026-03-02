@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -230,7 +230,6 @@ void Application::markLoaded()
     ShowInfoFmt("The {}-server is ready to work...", serverName_);
     ShowInfoFmt("Type 'help' for a list of available commands.");
     ShowInfoFmt("=======================================================================");
-    gIsRunning = true;
 
     if (Application::isRunningInCI())
     {
@@ -241,12 +240,12 @@ void Application::markLoaded()
 
 auto Application::isRunning() const -> bool
 {
-    return gIsRunning;
+    return !scheduler_.closeRequested();
 }
 
 void Application::requestExit()
 {
-    gIsRunning = false;
+    scheduler_.stop();
 }
 
 auto Application::isRunningInCI() const -> bool
@@ -256,9 +255,7 @@ auto Application::isRunningInCI() const -> bool
 
 void Application::run()
 {
-    ShowInfo("Creating engine");
     engine_ = createEngine();
-
     if (engine_)
     {
         ShowInfo("Initializing engine");
@@ -267,8 +264,6 @@ void Application::run()
         // Register specialized commands
         registerCommands(console());
     }
-
-    markLoaded();
 
     try
     {

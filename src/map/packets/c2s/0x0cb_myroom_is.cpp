@@ -51,7 +51,7 @@ const auto isRentARoom = [](const CCharEntity* PChar)
 
 } // namespace
 
-auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_IS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
@@ -59,7 +59,7 @@ auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity*
         .oneOf<GP_CLI_COMMAND_MYROOM_IS_PARAM2>(Param2);
 }
 
-void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_IS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Note: If you're in a Rent-a-Room, these commands are not available to the client.
     // However, retail will honor each of them if injected.

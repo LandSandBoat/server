@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_GMCOMMAND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GMCOMMAND::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_GMCOMMAND::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GMCOMMAND::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto commandStr = asStringFromUntrustedSource(Command, sizeof(Command));
     ShowDebugFmt("GP_CLI_COMMAND_GMCOMMAND: Not implemented. GMUniqueNo: {}, Command: '{}'",

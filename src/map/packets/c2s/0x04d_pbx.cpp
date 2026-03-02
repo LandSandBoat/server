@@ -27,7 +27,7 @@
 #include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
-auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_PBX::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .oneOf<GP_CLI_COMMAND_PBX_COMMAND>(Command)
@@ -180,7 +180,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
     return pv;
 }
 
-void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_PBX::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto charName = PChar->getName();
 
@@ -221,7 +221,7 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Recv:
         {
-            dboxutils::SendNewItems(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::SendNewItems(scheduler, PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Confirm:

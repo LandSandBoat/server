@@ -25,13 +25,13 @@
 #include "packets/s2c/0x03d_shop_sell.h"
 #include "trade_container.h"
 
-auto GP_CLI_COMMAND_SHOP_SELL_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SHOP_SELL_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotCrafting(PChar);
 }
 
-void GP_CLI_COMMAND_SHOP_SELL_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SHOP_SELL_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint32 quantity = this->ItemNum;
 

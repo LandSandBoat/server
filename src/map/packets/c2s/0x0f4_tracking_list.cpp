@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_TRACKING_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRACKING_LIST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(SendFlg, 1, "SendFlg not equal to 1");
 }
 
-void GP_CLI_COMMAND_TRACKING_LIST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRACKING_LIST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->loc.zone->WideScan(PChar, charutils::getWideScanRange(PChar));
 }

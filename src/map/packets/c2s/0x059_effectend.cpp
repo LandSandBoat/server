@@ -21,13 +21,13 @@
 
 #include "0x059_effectend.h"
 
-auto GP_CLI_COMMAND_EFFECTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EFFECTEND::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Packet explicitly ignored.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_EFFECTEND::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EFFECTEND::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Do nothing. This is handled in synth state.
 }

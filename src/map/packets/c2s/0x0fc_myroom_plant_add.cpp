@@ -39,7 +39,7 @@ const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 
 }
 
-auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
@@ -48,7 +48,7 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CChar
         .oneOf("MyroomAddCategory", MyroomAddCategory, validPlantCategories);
 }
 
-void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CItemContainer* PPotItemContainer = PChar->getStorage(MyroomPlantCategory);
     auto*           PPotItem          = static_cast<CItemFlowerpot*>(PPotItemContainer->GetItem(MyroomPlantItemIndex));

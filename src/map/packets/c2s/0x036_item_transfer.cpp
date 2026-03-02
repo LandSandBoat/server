@@ -21,7 +21,6 @@
 
 #include "0x036_item_transfer.h"
 
-#include "common/async.h"
 #include "entities/charentity.h"
 #include "enums/msg_std.h"
 #include "lua/luautils.h"
@@ -33,7 +32,7 @@
 namespace
 {
 
-const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
+const auto auditTrade = [](Scheduler& scheduler, CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemId, uint8_t quantity)
 {
     if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
     {
@@ -42,30 +41,29 @@ const auto auditTrade = [](CCharEntity* PChar, CBaseEntity* PNpc, uint32_t itemI
         const auto receiver     = PNpc->id;
         const auto receiverName = PNpc->getName();
 
-        // clang-format off
-            Async::getInstance()->submit([itemId, quantity, sender, senderName, receiver, receiverName]()
+        scheduler.postToWorkerThread(
+            [itemId, quantity, sender, senderName, receiver, receiverName]()
             {
-                const auto tradeDate    = earth_time::timestamp();
-                const auto query        = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                const auto tradeDate = earth_time::timestamp();
+                const auto query     = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 if (!db::preparedStmt(query, itemId, quantity, sender, senderName, receiver, receiverName, tradeDate))
                 {
                     ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, tradeDate);
                 }
             });
-        // clang-format on
     }
 };
 
 } // namespace
 
-auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotMonstrosity(PChar)
         .range("ItemNum", this->ItemNum, 1, 9);
 }
 
-void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEM_TRANSFER::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // If PChar is invisible don't allow the trade
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
@@ -117,7 +115,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
             return;
         }
 
-        auditTrade(PChar, PNpc, PItem->getID(), quantity);
+        auditTrade(scheduler, PChar, PNpc, PItem->getID(), quantity);
 
         PItem->setReserve(quantity);
         PChar->TradeContainer->setItem(slotId, PItem->getID(), invSlotId, quantity, PItem);

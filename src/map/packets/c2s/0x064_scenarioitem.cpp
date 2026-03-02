@@ -24,7 +24,7 @@
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_SCENARIOITEM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SCENARIOITEM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(UniqueNo, PChar->id, "Character ID mismatch")
@@ -32,7 +32,7 @@ auto GP_CLI_COMMAND_SCENARIOITEM::validate(MapSession* PSession, const CCharEnti
         .range("TableIndex", TableIndex, 0, PChar->keys.tables.size());
 }
 
-void GP_CLI_COMMAND_SCENARIOITEM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SCENARIOITEM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     for (int i = 0; i < 16; i++)
     {

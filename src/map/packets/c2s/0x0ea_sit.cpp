@@ -25,7 +25,7 @@
 #include "entities/petentity.h"
 #include "status_effect_container.h"
 
-auto GP_CLI_COMMAND_SIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SIT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotCrafting(PChar)
@@ -34,7 +34,7 @@ auto GP_CLI_COMMAND_SIT::validate(MapSession* PSession, const CCharEntity* PChar
         .oneOf<GP_CLI_COMMAND_SIT_MODE>(Mode);
 }
 
-void GP_CLI_COMMAND_SIT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SIT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Retail accurate: Can inject /sit while healing/logging out, but it cancels the effect.
     PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_HEALING);

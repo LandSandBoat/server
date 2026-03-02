@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_CHARREQ2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CHARREQ2::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_CHARREQ2::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CHARREQ2::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowWarning("GP_CLI_COMMAND_CHARREQ2: Incorrect NPC(%u,%u) type(%u)", ActIndex, UniqueNo2, Flg);
 }

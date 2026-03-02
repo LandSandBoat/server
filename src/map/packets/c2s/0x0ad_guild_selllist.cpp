@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x085_guild_selllist.h"
 
-auto GP_CLI_COMMAND_GUILD_SELLLIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GUILD_SELLLIST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->PGuildShop, nullptr, "Character does not have a guild shop");
 }
 
-void GP_CLI_COMMAND_GUILD_SELLLIST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GUILD_SELLLIST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELLLIST>(PChar, PChar->PGuildShop);
 }

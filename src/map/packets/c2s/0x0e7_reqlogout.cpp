@@ -25,7 +25,7 @@
 #include "status_effect_container.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_REQLOGOUT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotCrafting(PChar)
@@ -35,7 +35,7 @@ auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity*
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_REQLOGOUT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_REQLOGOUT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* existingEffect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEAVEGAME);
 

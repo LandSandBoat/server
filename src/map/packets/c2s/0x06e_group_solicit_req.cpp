@@ -33,7 +33,7 @@
 #include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
-auto GP_CLI_COMMAND_GROUP_SOLICIT_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_SOLICIT_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .oneOf<PartyKind>(Kind)
@@ -43,7 +43,7 @@ auto GP_CLI_COMMAND_GROUP_SOLICIT_REQ::validate(MapSession* PSession, const CCha
     return pv;
 }
 
-void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PInviter = PChar;
 

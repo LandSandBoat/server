@@ -27,14 +27,14 @@
 #include "ipc_client.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_ASSIST_CHANNEL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ASSIST_CHANNEL::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_ASSIST_CHANNEL_KIND>(Kind)
         .mustEqual(settings::get<bool>("main.ASSIST_CHANNEL_ENABLED"), true, "Assist Channel is not enabled");
 }
 
-void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ASSIST_CHANNEL::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto safeName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
 

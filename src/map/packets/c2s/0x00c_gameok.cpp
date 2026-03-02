@@ -43,14 +43,14 @@
 #include "utils/charutils.h"
 #include "utils/petutils.h"
 
-auto GP_CLI_COMMAND_GAMEOK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GAMEOK::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(ClientState, 0, "ClientState not 0")
         .mustEqual(DebugClientFlg, 0, "DebugClientFlg not 0");
 }
 
-void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GAMEOK::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // This is one of the first packets sent when zoning in and causes the server
     // to start rapidly sending a lot of information to initialize the client.

@@ -39,7 +39,7 @@ class MapEngine;
 class CLuaClientEntityPair : public CLuaTestEntity
 {
 public:
-    CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, CLuaSimulation* simulation, MapEngine* mapServer);
+    CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, CLuaSimulation* simulation, MapEngine* mapServer, Scheduler& scheduler);
     ~CLuaClientEntityPair() override;
 
     void tick();
@@ -64,4 +64,5 @@ private:
     std::unique_ptr<TestChar> testChar_;
     CLuaSimulation*           simulation_;
     MapEngine*                engine_;
+    Scheduler&                scheduler_;
 };

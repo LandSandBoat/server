@@ -34,13 +34,13 @@
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
 
-auto GP_CLI_COMMAND_EQUIP_INSPECT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EQUIP_INSPECT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_EQUIP_INSPECT_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EQUIP_INSPECT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (jailutils::InPrison(PChar))
     {

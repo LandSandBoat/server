@@ -26,7 +26,7 @@
 #include "packets/s2c/0x0b4_config.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_CONFIG_LANGUAGE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CONFIG_LANGUAGE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_CONFIG_LANGUAGE_KIND>(Kind)
@@ -34,7 +34,7 @@ auto GP_CLI_COMMAND_CONFIG_LANGUAGE::validate(MapSession* PSession, const CCharE
         .mustEqual(unknown01, 0, "unknown00 must be 0");
 }
 
-void GP_CLI_COMMAND_CONFIG_LANGUAGE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CONFIG_LANGUAGE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint32_t oldPlayerConfig = {};
     uint32_t oldChatFilter1  = {};

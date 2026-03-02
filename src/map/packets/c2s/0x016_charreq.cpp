@@ -26,12 +26,12 @@
 #include "packets/char_status.h"
 #include "utils/zoneutils.h"
 
-auto GP_CLI_COMMAND_CHARREQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CHARREQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CHARREQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (ActIndex == PChar->targid)
     {

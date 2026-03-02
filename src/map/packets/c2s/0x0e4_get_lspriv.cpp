@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_GET_LSPRIV::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GET_LSPRIV::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate as it is not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_GET_LSPRIV::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GET_LSPRIV::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // /lsmes level
     // According to XiPackets, the following fields are set:

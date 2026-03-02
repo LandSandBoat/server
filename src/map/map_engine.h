@@ -25,7 +25,7 @@
 
 #include "common/application.h"
 #include "common/timer.h"
-#include "common/watchdog.h"
+#include <atomic>
 
 #include "common/ipp.h"
 #include "zone.h"
@@ -60,16 +60,15 @@ public:
     MapEngine(Scheduler& scheduler, MapConfig& config);
     ~MapEngine() override;
 
-    void gameLoop();
-
     //
-    // Init
+    // Tasks
     //
-
-    void prepareWatchdog();
-
-    void do_init();
-    void do_final() const;
+    
+    auto prepareWatchdog() -> Task<void>;
+    
+    auto init() -> Task<void>;
+    auto run() -> Task<void>;
+    auto cleanup() -> Task<void>;
 
     //
     // Maintenance
@@ -102,6 +101,6 @@ private:
     Scheduler&                     scheduler_;
     std::unique_ptr<MapStatistics> mapStatistics_;
     std::unique_ptr<MapNetworking> networking_;
-    std::unique_ptr<Watchdog>      watchdog_;
+    std::atomic<uint64_t>          watchdogLastUpdate_{ 0 };
     MapConfig&                     engineConfig_;
 };

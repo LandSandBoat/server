@@ -36,13 +36,13 @@ const auto sendFailPacket = [](CCharEntity* PChar)
 
 } // namespace
 
-auto GP_CLI_COMMAND_BLACK_EDIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BLACK_EDIT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_BLACK_EDIT_MODE>(Mode);
 }
 
-void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BLACK_EDIT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto name = db::escapeString(asStringFromUntrustedSource(Data.Name, 15));
 

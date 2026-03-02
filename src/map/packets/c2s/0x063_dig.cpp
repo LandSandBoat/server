@@ -21,13 +21,13 @@
 
 #include "0x063_dig.h"
 
-auto GP_CLI_COMMAND_DIG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_DIG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Packet explicitly ignored.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_DIG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_DIG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Do nothing.
 }

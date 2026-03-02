@@ -55,22 +55,23 @@ public:
         TracyZoneScoped;
         TracyZoneString(eventname);
 
+        auto it = eventListeners.find(eventname);
+        if (it == eventListeners.end() || it->second.empty())
+        {
+            return;
+        }
+
         // Mark this Event Handler as currently triggering listeners,
         // this is to prevent removal of listeners during this loop.
         isTriggeringListeners = true;
 
-        // If we have registered listeners for this event, trigger them.
-        if (eventListeners.count(eventname))
+        for (const auto& event : it->second)
         {
-            for (const auto& event : eventListeners.at(eventname))
+            auto result = event.lua_func(std::forward<Args&&>(args)...);
+            if (!result.valid())
             {
-                auto result = event.lua_func(std::forward<Args&&>(args)...);
-                if (!result.valid())
-                {
-                    sol::error err = result;
-                    ShowError("Error in listener event %s: %s", eventname, err.what());
-                    isTriggeringListeners = false;
-                }
+                sol::error err = result;
+                ShowError("Error in listener event %s: %s", eventname, err.what());
             }
         }
 
@@ -78,11 +79,14 @@ public:
         // We've accumulated any possible removals in eventsToRemove, so we can now
         // safely remove them from the eventListeners map without invalidating the
         // inner iterator.
-        for (const auto& identifier : eventsToRemove)
+        if (!eventsToRemove.empty())
         {
-            removeFromAllListeners(identifier);
+            for (const auto& identifier : eventsToRemove)
+            {
+                removeFromAllListeners(identifier);
+            }
+            eventsToRemove.clear();
         }
-        eventsToRemove.clear();
 
         isTriggeringListeners = false;
     }

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/scheduler.h"
 
 #include "packets/basic.h"
 
@@ -36,7 +37,7 @@ void AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t
 void SendConfirmation(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
 void CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
 void SendClientNewItemCount(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
-void SendNewItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
+void SendNewItems(Scheduler& scheduler, CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
 void RemoveDeliveredItemFromSendingBox(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
 void UpdateDeliveryCellBeforeRemoving(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);
 void ReturnToSender(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo);

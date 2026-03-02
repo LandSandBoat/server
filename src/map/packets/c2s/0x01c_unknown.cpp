@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_UNKNOWN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_UNKNOWN::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_UNKNOWN::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_UNKNOWN::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Purpose of this packet is currently unknown
     ShowDebug("GP_CLI_COMMAND_UNKNOWN: unknown00=%u padding00=%u unknown01=%u", unknown00, padding00, unknown01);

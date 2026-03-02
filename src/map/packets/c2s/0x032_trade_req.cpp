@@ -31,14 +31,14 @@
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
 
-auto GP_CLI_COMMAND_TRADE_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRADE_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->id, UniqueNo, "Character trading with itself")
         .isNotMonstrosity(PChar);
 }
 
-void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRADE_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(ActIndex, TYPE_PC));
     if (!PTarget || PTarget->id != UniqueNo)

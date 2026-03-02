@@ -25,13 +25,13 @@
 #include "packets/s2c/0x110_unity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_UNITY_QUEST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_UNITY_QUEST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(Kind, 0x0, "Kind not 0x0"); // Client always sends 0x0 despite possibly supporting 0x1, 0x2
 }
 
-void GP_CLI_COMMAND_UNITY_QUEST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_UNITY_QUEST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // TODO: Incomplete implementation.
     // This stub only handles the needed RoE updates.

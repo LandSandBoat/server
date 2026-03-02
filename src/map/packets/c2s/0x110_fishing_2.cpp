@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_FISHING_2::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(settings::get<bool>("map.FISHING_ENABLE"), true, "Fishing is disabled")
@@ -74,7 +74,7 @@ auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity*
                 });
 }
 
-void GP_CLI_COMMAND_FISHING_2::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_FISHING_2::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     fishingutils::FishingAction(PChar, static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(mode), para, para2);
 }

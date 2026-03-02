@@ -21,7 +21,6 @@
 
 #include "http_server.h"
 
-#include "common/async.h"
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
@@ -33,8 +32,9 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-HTTPServer::HTTPServer()
-: m_apiDataCache(APIDataCache{})
+HTTPServer::HTTPServer(Scheduler& scheduler)
+: scheduler_(scheduler)
+, apiDataCache_(APIDataCache{})
 {
     if (!settings::get<bool>("network.ENABLE_HTTP"))
     {
@@ -51,34 +51,35 @@ HTTPServer::HTTPServer()
 
     ShowInfoFmt("Starting HTTP Server on http://{}:{}/api", host, port);
 
-    Async::getInstance()->submit(
+    scheduler.postToWorkerThread(
         [this, host, port]()
         {
-            m_httpServer.Get(
+            httpServer_.Get(
                 "/api",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
                     res.set_content("Hello LSB API", "text/plain");
                 });
 
-            m_httpServer.Get(
+            httpServer_.Get(
                 "/api/sessions",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
                     LockingUpdate();
-                    m_apiDataCache.read([&](const auto& apiDataCache)
+                    apiDataCache_.read(
+                        [&](const auto& apiDataCache)
                                         {
                                             json j = apiDataCache.activeSessionCount;
                                             res.set_content(j.dump(), "application/json");
                                         });
                 });
 
-            m_httpServer.Get(
+            httpServer_.Get(
                 "/api/ips",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
                     LockingUpdate();
-                    m_apiDataCache.read(
+                    apiDataCache_.read(
                         [&](const auto& apiDataCache)
                         {
                             json j = apiDataCache.activeUniqueIPCount;
@@ -86,12 +87,12 @@ HTTPServer::HTTPServer()
                         });
                 });
 
-            m_httpServer.Get(
+            httpServer_.Get(
                 "/api/zones",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
                     LockingUpdate();
-                    m_apiDataCache.read(
+                    apiDataCache_.read(
                         [&](const auto& apiDataCache)
                         {
                             json j = apiDataCache.zonePlayerCounts;
@@ -99,7 +100,7 @@ HTTPServer::HTTPServer()
                         });
                 });
 
-            m_httpServer.Get(
+            httpServer_.Get(
                 R"(/api/zones/(\d+))",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
@@ -108,7 +109,7 @@ HTTPServer::HTTPServer()
                     if (zoneId && zoneId < ZONEID::MAX_ZONEID)
                     {
                         LockingUpdate();
-                        m_apiDataCache.read(
+                        apiDataCache_.read(
                             [&](const auto& apiDataCache)
                             {
                                 json j = apiDataCache.zonePlayerCounts[zoneId];
@@ -121,7 +122,7 @@ HTTPServer::HTTPServer()
                     }
                 });
 
-            m_httpServer.Get(
+            httpServer_.Get(
                 "/api/settings",
                 [&](const httplib::Request& req, httplib::Response& res)
                 {
@@ -169,7 +170,7 @@ HTTPServer::HTTPServer()
                     res.set_content(j.dump(), "application/json");
                 });
 
-            m_httpServer.set_error_handler(
+            httpServer_.set_error_handler(
                 [](const httplib::Request& /*req*/, httplib::Response& res)
                 {
                     auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>",
@@ -184,7 +185,7 @@ HTTPServer::HTTPServer()
                     res.set_content(str, "text/html");
                 });
 
-            m_httpServer.set_logger(
+            httpServer_.set_logger(
                 [](const httplib::Request& req, const httplib::Response& res)
                 {
                     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
@@ -200,24 +201,24 @@ HTTPServer::HTTPServer()
                     }
                 });
 
-            m_httpServer.listen(host, port);
+            httpServer_.listen(host, port); // blocks
         });
 }
 
 HTTPServer::~HTTPServer()
 {
-    m_httpServer.stop();
+    httpServer_.stop();
 }
 
 void HTTPServer::LockingUpdate()
 {
     auto now = timer::now();
-    if (now < (m_lastUpdate.load() + 60s))
+    if (now < (lastUpdate_.load() + 60s))
     {
         return;
     }
 
-    m_apiDataCache.write(
+    apiDataCache_.write(
         [&](auto& apiDataCache)
         {
             ShowInfoFmt("API data is stale. Updating...");
@@ -259,6 +260,6 @@ void HTTPServer::LockingUpdate()
                 }
             }
 
-            m_lastUpdate.store(now);
+            lastUpdate_.store(now);
         });
 }

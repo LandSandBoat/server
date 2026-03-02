@@ -21,7 +21,6 @@
 
 #include "0x0b6_chat_name.h"
 
-#include "common/async.h"
 #include "common/database.h"
 #include "common/ipc_structs.h"
 #include "common/settings.h"
@@ -34,15 +33,15 @@
 namespace
 {
 
-const auto auditTell = [](CCharEntity* PChar, const std::string& recipientName, const std::string& rawMessage)
+const auto auditTell = [](Scheduler& scheduler, CCharEntity* PChar, const std::string& recipientName, const std::string& rawMessage)
 {
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
         const auto& name   = PChar->getName();
         const auto  zoneId = PChar->getZone();
 
-        // clang-format off
-            Async::getInstance()->submit([name, zoneId, recipientName, rawMessage]()
+        scheduler.postToWorkerThread(
+            [name, zoneId, recipientName, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())";
                 if (!db::preparedStmt(query, name, zoneId, recipientName, rawMessage))
@@ -50,20 +49,19 @@ const auto auditTell = [](CCharEntity* PChar, const std::string& recipientName, 
                     ShowError("Failed to insert TELL audit_chat record for player '%s'", name);
                 }
             });
-        // clang-format on
     }
 };
 
 } // namespace
 
-auto GP_CLI_COMMAND_CHAT_NAME::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CHAT_NAME::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(unknown00, 3, "unknown00 not 3")
         .mustEqual(unknown01, 0, "unknown01 not 0");
 }
 
-void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CHAT_NAME::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (jailutils::InPrison(PChar))
     {
@@ -94,5 +92,5 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
         .gmLevel       = PChar->m_GMlevel,
     });
 
-    auditTell(PChar, recipientName, rawMessage);
+    auditTell(scheduler, PChar, recipientName, rawMessage);
 }

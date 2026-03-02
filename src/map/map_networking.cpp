@@ -527,7 +527,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* map_sessio
                 //     : instead of creating a new packet here.
                 auto basicPacket = CBasicPacket::createFromBuffer(reinterpret_cast<uint8*>(SmallPD_ptr));
                 ShowTraceFmt("map::parse: Char: {} ({}): {}", PChar->getName(), PChar->id, hex16ToString(basicPacket->getType()));
-                PacketParser[SmallPD_Type](map_session_data, PChar, *basicPacket);
+                PacketParser[SmallPD_Type](scheduler_, map_session_data, PChar, *basicPacket);
             }
         }
         else

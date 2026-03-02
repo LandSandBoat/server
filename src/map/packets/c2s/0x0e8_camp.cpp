@@ -26,7 +26,7 @@
 #include "entities/charentity.h"
 #include "status_effect_container.h"
 
-auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CAMP::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNormalStatus(PChar)
@@ -46,7 +46,7 @@ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PCha
             "Requested stop healing when not healing");
 }
 
-void GP_CLI_COMMAND_CAMP::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CAMP::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto enableHealing = [&]()
     {

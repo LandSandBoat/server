@@ -23,15 +23,17 @@
 #define _PACKETSYSTEM_H
 
 #include "common/cbasetypes.h"
-#include "packets/basic.h"
+#include "common/scheduler.h"
 
 #include "entities/charentity.h"
+
+#include "packets/basic.h"
 
 struct MapSession;
 
 extern uint8 PacketSize[512];
 
-extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+extern std::function<void(Scheduler&, MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 void PrintPacket(CBasicPacket& data);
 void PacketParserInitialize();

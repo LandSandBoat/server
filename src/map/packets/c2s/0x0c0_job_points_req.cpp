@@ -25,13 +25,13 @@
 #include "packets/s2c/0x08d_job_points.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_JOB_POINTS_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_JOB_POINTS_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate for this packet
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_JOB_POINTS_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_JOB_POINTS_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Move this check to the validate function once hasKeyItem becomes const
     if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))

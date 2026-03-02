@@ -27,7 +27,7 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-auto GP_CLI_COMMAND_GROUP_COMLINK_MAKE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_COMLINK_MAKE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(State, 0, "State not 0")
@@ -35,7 +35,7 @@ auto GP_CLI_COMMAND_GROUP_COMLINK_MAKE::validate(MapSession* PSession, const CCh
         .hasLinkshellRank(PChar, LinkshellId, LSTYPE_PEARLSACK);
 }
 
-void GP_CLI_COMMAND_GROUP_COMLINK_MAKE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_COMLINK_MAKE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const CItemLinkshell* PItemLinkshell = nullptr;
 

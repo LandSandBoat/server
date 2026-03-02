@@ -38,14 +38,14 @@ const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 
 }
 
-auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
         .oneOf("MyroomPlantCategory", MyroomPlantCategory, validPlantCategories);
 }
 
-void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CItemContainer* PItemContainer = PChar->getStorage(MyroomPlantCategory);
     CItemFlowerpot* PItem          = static_cast<CItemFlowerpot*>(PItemContainer->GetItem(MyroomPlantItemIndex));

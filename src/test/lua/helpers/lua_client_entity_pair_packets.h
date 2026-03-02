@@ -22,6 +22,8 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/scheduler.h"
+
 #include <memory>
 #include <sol/sol.hpp>
 
@@ -31,7 +33,7 @@ class CLuaClientEntityPair;
 class CLuaClientEntityPairPackets
 {
 public:
-    CLuaClientEntityPairPackets(CLuaClientEntityPair* parent);
+    CLuaClientEntityPairPackets(CLuaClientEntityPair* parent, Scheduler& scheduler);
     ~CLuaClientEntityPairPackets() = default;
 
     auto createPacket(PacketC2S packetType) -> std::unique_ptr<CBasicPacket>;
@@ -48,5 +50,6 @@ public:
 
 private:
     CLuaClientEntityPair* parent_;
+    Scheduler&            scheduler_;
     uint8                 sequenceNum_{ 0 };
 };

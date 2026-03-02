@@ -26,14 +26,14 @@
 #include "lua/luautils.h"
 #include "packets/s2c/0x052_eventucoff.h"
 
-auto GP_CLI_COMMAND_EVENTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EVENTEND::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_EVENTEND_MODE>(Mode)
         .isInEvent(PChar, EventPara);
 }
 
-void GP_CLI_COMMAND_EVENTEND::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EVENTEND::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto       result  = EndPara;
     const auto eventId = EventPara;

@@ -34,14 +34,14 @@
 #include "packets/s2c/0x119_abil_recast.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_MERITS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MERITS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_MERITS_KIND>(Kind)
         .oneOf<GP_CLI_COMMAND_MERITS_PARAM1>(Param1);
 }
 
-void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MERITS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (static_cast<GP_CLI_COMMAND_MERITS_KIND>(Kind))
     {

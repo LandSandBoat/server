@@ -23,14 +23,14 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_ITEMSEARCH::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEMSEARCH::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_ITEMSEARCH_LANGUAGE>(Language);
 }
 
-void GP_CLI_COMMAND_ITEMSEARCH::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEMSEARCH::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_ITEMSEARCH: Not implemented. Language: {}, Name: {}",
                  Language,

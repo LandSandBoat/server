@@ -75,7 +75,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 
 } // namespace
 
-auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EQUIPSET_SET::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     const auto allowedContainers = validContainers(PChar);
 
@@ -97,7 +97,7 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
     return pv;
 }
 
-void GP_CLI_COMMAND_EQUIPSET_SET::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EQUIPSET_SET::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     for (uint8 i = 0; i < Count; i++)
     {

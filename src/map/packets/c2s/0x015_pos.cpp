@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x0f5_tracking_pos.h"
 
-auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_POS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->status, STATUS_TYPE::DISAPPEAR, "Character is disappearing")
         .mustNotEqual(PChar->status, STATUS_TYPE::SHUTDOWN, "Character is shutting down");
 }
 
-void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_POS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (PChar->pendingPositionUpdate)
     {

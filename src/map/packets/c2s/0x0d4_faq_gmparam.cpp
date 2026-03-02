@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x0b5_faq_gmparam.h"
 
-auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(this->Option, 0, "Option not 0");
 }
 
-void GP_CLI_COMMAND_FAQ_GMPARAM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_FAQ_GMPARAM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Respond to the player opening the Help Desk menu
     // The client mostly ignores the response.

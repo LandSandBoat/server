@@ -30,7 +30,7 @@
 #include "packets/s2c/0x0fa_myroom_operation.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // There's a handful more checks that could be moved up here, but the handler needs a proper refactor first.
     return PacketValidator()
@@ -39,7 +39,7 @@ auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEnt
         .range("y", y, 0x0, 0x15);                     // Y grid position
 }
 
-void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_LAYOUT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (MyroomItemNo == 0)
     {

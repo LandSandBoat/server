@@ -25,13 +25,13 @@
 #include "unitychat.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_UNITY_TOGGLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_UNITY_TOGGLE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_UNITY_TOGGLE_MODE>(Mode);
 }
 
-void GP_CLI_COMMAND_UNITY_TOGGLE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_UNITY_TOGGLE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (PChar->PUnityChat)
     {

@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_SWITCH_VOTE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SWITCH_VOTE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_SWITCH_VOTE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SWITCH_VOTE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto name = asStringFromUntrustedSource(Name, sizeof(Name));
     ShowDebugFmt("GP_CLI_COMMAND_SWITCH_VOTE: Not implemented. Index: {}, Name: {}", Index, name);

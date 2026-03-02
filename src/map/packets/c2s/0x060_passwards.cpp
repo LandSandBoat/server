@@ -26,13 +26,13 @@
 #include "lua/luautils.h"
 #include "packets/s2c/0x052_eventucoff.h"
 
-auto GP_CLI_COMMAND_PASSWARDS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_PASSWARDS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isInEvent(PChar);
 }
 
-void GP_CLI_COMMAND_PASSWARDS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_PASSWARDS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // !cs 199 in zone 245
     const auto updateString = asStringFromUntrustedSource(String);

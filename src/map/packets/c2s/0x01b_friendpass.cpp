@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x059_friendpass.h"
 
-auto GP_CLI_COMMAND_FRIENDPASS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_FRIENDPASS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_FRIENDPASS_PARA>(Para);
 }
 
-void GP_CLI_COMMAND_FRIENDPASS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_FRIENDPASS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (static_cast<GP_CLI_COMMAND_FRIENDPASS_PARA>(Para))
     {

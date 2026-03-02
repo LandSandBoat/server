@@ -25,13 +25,13 @@
 #include "enums/msg_std.h"
 #include "packets/s2c/0x009_message.h"
 
-auto GP_CLI_COMMAND_DICE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_DICE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_DICE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_DICE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint16 diceRoll = xirand::GetRandomNumber(1000);
 

@@ -25,7 +25,7 @@
 #include "utils/auctionutils.h"
 #include "utils/jailutils.h"
 
-auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_AUC::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .hasZoneMiscFlag(PChar, MISC_AH)
@@ -86,7 +86,7 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
     return pv;
 }
 
-void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_AUC::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto playerName = PChar->getName();
 

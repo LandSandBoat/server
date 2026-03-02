@@ -72,7 +72,7 @@ TestEngine::TestEngine(Scheduler& scheduler, TestConfig testConfig)
     luaEnvironment_ = std::make_unique<TestLuaEnvironment>(mockManager_.get());
 
     // Create simulation instance
-    simulation_ = std::make_unique<CLuaSimulation>(mapEngine_.get(), testConfig_.loggerSink);
+    simulation_ = std::make_unique<CLuaSimulation>(mapEngine_.get(), testConfig_.loggerSink, scheduler);
 
     // Assign simulation to xi.test.world
     lua["xi"]["test"]          = lua.create_table();

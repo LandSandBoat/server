@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_FAQ_GMCALL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_FAQ_GMCALL::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_FAQ_GMCALL_TYPE>(this->type)
@@ -31,7 +31,7 @@ auto GP_CLI_COMMAND_FAQ_GMCALL::validate(MapSession* PSession, const CCharEntity
         .range("eos", this->eos, 0, 1);
 }
 
-void GP_CLI_COMMAND_FAQ_GMCALL::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_FAQ_GMCALL::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (static_cast<GP_CLI_COMMAND_FAQ_GMCALL_TYPE>(this->type))
     {

@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x108_bazaar_shopping.h"
 
-auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_BAZAAR_EXIT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_EXIT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PEntity = PChar->GetEntity(PChar->BazaarID.targid, TYPE_PC);
     if (!PEntity)

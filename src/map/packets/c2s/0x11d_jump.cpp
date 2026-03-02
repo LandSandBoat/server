@@ -26,14 +26,14 @@
 #include "packets/s2c/0x11e_jump.h"
 #include "utils/jailutils.h"
 
-auto GP_CLI_COMMAND_JUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_JUMP::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(UniqueNo, PChar->id, "Character ID mismatch")
         .mustEqual(ActIndex, PChar->targid, "Target ID mismatch");
 }
 
-void GP_CLI_COMMAND_JUMP::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_JUMP::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (jailutils::InPrison(PChar))
     {

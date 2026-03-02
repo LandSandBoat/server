@@ -49,7 +49,7 @@ WorldEngine::WorldEngine(Scheduler& scheduler)
 , besiegedSystem_(std::make_unique<BesiegedSystem>(*this))
 , campaignSystem_(std::make_unique<CampaignSystem>(*this))
 , colonizationSystem_(std::make_unique<ColonizationSystem>(*this))
-, httpServer_(std::make_unique<HTTPServer>())
+, httpServer_(std::make_unique<HTTPServer>(scheduler_))
 {
     scheduler_.postToMainThread(timeServer());
 

@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "enums/party_kind.h"
 
-auto GP_CLI_COMMAND_GROUP_LEAVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_LEAVE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<PartyKind>(Kind)
         .mustNotEqual(PChar->PParty, nullptr, "Character is not in a party");
 }
 
-void GP_CLI_COMMAND_GROUP_LEAVE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_LEAVE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (Kind)
     {

@@ -25,7 +25,7 @@
 #include "entities/charentity.h"
 #include "linkshell.h"
 
-auto GP_CLI_COMMAND_GET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GET_LSMSG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .oneOf<LinkshellSlot>(LinkshellId);
@@ -43,7 +43,7 @@ auto GP_CLI_COMMAND_GET_LSMSG::validate(MapSession* PSession, const CCharEntity*
     return pv;
 }
 
-void GP_CLI_COMMAND_GET_LSMSG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GET_LSMSG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     switch (static_cast<LinkshellSlot>(LinkshellId))
     {

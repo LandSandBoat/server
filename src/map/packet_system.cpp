@@ -19,7 +19,6 @@
 ===========================================================================
 */
 
-#include "common/async.h"
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -170,7 +169,7 @@
 
 uint8 PacketSize[512];
 
-std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+std::function<void(Scheduler&, MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
 
 /************************************************************************
  *                                                                       *
@@ -208,19 +207,19 @@ void PrintPacket(CBasicPacket& packet)
  *                                                                       *
  ************************************************************************/
 
-void SmallPacket0x000(MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+void SmallPacket0x000(Scheduler& scheduler, MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     ShowWarning("parse: Unhandled game packet %03hX from user: %s", (data.ref<uint16>(0) & 0x1FF), PChar->getName());
 }
 
 template <typename T>
-void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+void ValidatedPacketHandler(Scheduler& scheduler, MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
 
     const T* packet = data.as<T>();
 
-    if (const auto result = packet->validate(PSession, PChar); result.valid())
+    if (const auto result = packet->validate(scheduler, PSession, PChar); result.valid())
     {
         // Modules can optionally block processing of packets by returning true from OnIncomingPacket
         if (moduleutils::OnIncomingPacket(PSession, PChar, data))
@@ -228,7 +227,7 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
             return;
         }
 
-        packet->process(PSession, PChar);
+        packet->process(scheduler, PSession, PChar);
     }
     else
     {

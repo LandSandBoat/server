@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "packets/basic.h"
 
-auto GP_CLI_COMMAND_CHOCOBO_RACE_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CHOCOBO_RACE_REQ::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_CHOCOBO_RACE_REQ_PARAM>(Param)
         .oneOf<GP_CLI_COMMAND_CHOCOBO_RACE_REQ_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_CHOCOBO_RACE_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CHOCOBO_RACE_REQ::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_CHOCOBO_RACE_REQ: Not fully implemented. Param: {}, Kind: {}", Param, Kind);
 

@@ -23,7 +23,6 @@
 
 #include <limits>
 
-#include "common/async.h"
 #include "entities/charentity.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
@@ -35,14 +34,14 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-auto GP_CLI_COMMAND_BAZAAR_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_BUY::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Short-circuit PV so we can bring all the other checks into this function
     return PacketValidator()
         .range("BuyNum", this->BuyNum, 1, 99);
 }
 
-void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_BUY::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PEntity = PChar->GetEntity(PChar->BazaarID.targid, TYPE_PC);
     if (!PEntity)
@@ -136,7 +135,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
         if (settings::get<bool>("map.AUDIT_PLAYER_BAZAAR"))
         {
-            Async::getInstance()->submit(
+            scheduler.postToWorkerThread(
                 [itemID        = PItem->getID(),
                  quantity      = this->BuyNum,
                  sellerID      = PTarget->id,

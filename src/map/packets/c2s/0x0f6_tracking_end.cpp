@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_TRACKING_END::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRACKING_END::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_TRACKING_END::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRACKING_END::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->WideScanTarget = std::nullopt;
 }

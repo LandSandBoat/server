@@ -32,13 +32,13 @@
 #include "packets/s2c/0x0b4_config.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_CONFIG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CONFIG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_CONFIG_SETFLG>(SetFlg);
 }
 
-void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CONFIG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const bool value = SetFlg == static_cast<uint8_t>(GP_CLI_COMMAND_CONFIG_SETFLG::On);
 

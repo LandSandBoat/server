@@ -23,13 +23,13 @@
 
 #include "utils/blacklistutils.h"
 
-auto GP_CLI_COMMAND_BLACK_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BLACK_LIST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_BLACK_LIST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BLACK_LIST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     blacklistutils::SendBlacklist(PChar);
 }

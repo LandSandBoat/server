@@ -21,7 +21,6 @@
 
 #include "0x034_trade_list.h"
 
-#include "common/async.h"
 #include "entities/charentity.h"
 #include "enums/msg_std.h"
 #include "items/item_linkshell.h"
@@ -32,11 +31,11 @@
 namespace
 {
 
-const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
+const auto auditTrade = [](Scheduler& scheduler, CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
 {
     if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
     {
-        Async::getInstance()->submit(
+        scheduler.postToWorkerThread(
             [itemID        = PItem->getID(),
              quantity      = ItemNum,
              sender        = PChar->id,
@@ -56,7 +55,7 @@ const auto auditTrade = [](CCharEntity* PChar, CCharEntity* PTarget, const CItem
 
 } // namespace
 
-auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRADE_LIST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->TradePending.id, 0, "No trade target")
@@ -64,7 +63,7 @@ auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity
         .isNotMonstrosity(PChar);
 }
 
-void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRADE_LIST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
 
@@ -142,7 +141,7 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         PChar->UContainer->SetItem(TradeIndex, PItem);
     }
 
-    auditTrade(PChar, PTarget, PItem, ItemNum);
+    auditTrade(scheduler, PChar, PTarget, PItem, ItemNum);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PChar->getName());
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_MYLIST>(PItem, TradeIndex);

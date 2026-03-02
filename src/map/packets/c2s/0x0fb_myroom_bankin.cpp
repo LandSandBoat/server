@@ -39,14 +39,14 @@ const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 
 }
 
-auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(MyroomItemNo, 0, "MyroomItemNo must not equal 0")
         .oneOf("MyroomCategory", MyroomCategory, validContainers);
 }
 
-void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MYROOM_BANKIN::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CItemContainer*  PItemContainer = PChar->getStorage(MyroomCategory);
     CItemFurnishing* PItem          = static_cast<CItemFurnishing*>(PItemContainer->GetItem(MyroomItemIndex));

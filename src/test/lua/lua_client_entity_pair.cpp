@@ -42,11 +42,12 @@
 
 // A test player that combines client and player entity functionality
 // Common test patterns are exposed as properties
-CLuaClientEntityPair::CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, CLuaSimulation* simulation, MapEngine* mapServer)
+CLuaClientEntityPair::CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, CLuaSimulation* simulation, MapEngine* mapServer, Scheduler& scheduler)
 : CLuaTestEntity(testChar->entity())
 , testChar_(std::move(testChar))
 , simulation_(simulation)
 , engine_(mapServer)
+, scheduler_(scheduler)
 {
 }
 
@@ -320,7 +321,7 @@ auto CLuaClientEntityPair::entities() -> CLuaClientEntityPairEntities
 
 auto CLuaClientEntityPair::packets() -> CLuaClientEntityPairPackets
 {
-    return CLuaClientEntityPairPackets(this);
+    return CLuaClientEntityPairPackets(this, scheduler_);
 }
 
 auto CLuaClientEntityPair::testChar() const -> TestChar*

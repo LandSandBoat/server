@@ -23,7 +23,6 @@
 
 #include "aman.h"
 #include "command_handler.h"
-#include "common/async.h"
 #include "common/database.h"
 #include "common/ipc_structs.h"
 #include "common/settings.h"
@@ -40,7 +39,7 @@
 namespace
 {
 
-const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const std::string& rawMessage)
+const auto auditChat = [](Scheduler& scheduler, CCharEntity* PChar, const std::string& chatType, const std::string& rawMessage)
 {
     const std::string auditConfigKey = std::format("map.AUDIT_{}", chatType);
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>(auditConfigKey))
@@ -48,8 +47,8 @@ const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const
         const auto& name   = PChar->getName();
         const auto  zoneId = PChar->getZone();
 
-        // clang-format off
-            Async::getInstance()->submit([name, chatType, zoneId, rawMessage]()
+        scheduler.postToWorkerThread(
+            [name, chatType, zoneId, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, message, datetime) VALUES(?, ?, ?, ?, current_timestamp())";
                 if (!db::preparedStmt(query, name, chatType, zoneId, rawMessage))
@@ -57,11 +56,10 @@ const auto auditChat = [](CCharEntity* PChar, const std::string& chatType, const
                     ShowErrorFmt("Failed to insert {} audit_chat record for player '{}'", chatType, name);
                 }
             });
-        // clang-format on
     }
 };
 
-const auto auditUnity = [](CCharEntity* PChar, const std::string& rawMessage)
+const auto auditUnity = [](Scheduler& scheduler, CCharEntity* PChar, const std::string& rawMessage)
 {
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
     {
@@ -69,8 +67,8 @@ const auto auditUnity = [](CCharEntity* PChar, const std::string& rawMessage)
         const auto zoneId      = PChar->getZone();
         const auto unityLeader = PChar->PUnityChat->getLeader();
 
-        // clang-format off
-            Async::getInstance()->submit([name, zoneId, unityLeader, rawMessage]()
+        scheduler.postToWorkerThread(
+            [name, zoneId, unityLeader, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, unity, message, datetime) VALUES(?, 'UNITY', ?, ?, ?, current_timestamp())";
                 if (!db::preparedStmt(query, name, zoneId, unityLeader, rawMessage))
@@ -78,11 +76,10 @@ const auto auditUnity = [](CCharEntity* PChar, const std::string& rawMessage)
                     ShowError("Failed to insert UNITY audit_chat record for player '%s'", name.c_str());
                 }
             });
-        // clang-format on
     }
 };
 
-const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const std::string& rawMessage)
+const auto auditLinkshell = [](Scheduler& scheduler, CCharEntity* PChar, CLinkshell* PLinkshell, const std::string& rawMessage)
 {
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
     {
@@ -91,8 +88,8 @@ const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const
         char        decodedLinkshellName[DecodeStringLength];
         DecodeStringLinkshell(PLinkshell->getName(), decodedLinkshellName);
 
-        // clang-format off
-            Async::getInstance()->submit([name, zoneId, decodedLinkshellName, rawMessage]()
+        scheduler.postToWorkerThread(
+            [name, zoneId, decodedLinkshellName, rawMessage]()
             {
                 const auto query = "INSERT INTO audit_chat (speaker, type, lsName, zoneid, message, datetime) VALUES(?, 'LINKSHELL', ?, ?, ?, current_timestamp())";
                 if (!db::preparedStmt(query, name, decodedLinkshellName, zoneId, rawMessage))
@@ -100,19 +97,18 @@ const auto auditLinkshell = [](CCharEntity* PChar, CLinkshell* PLinkshell, const
                     ShowError("Failed to insert LINKSHELL audit_chat record for player '%s'", name);
                 }
             });
-        // clang-format on
     }
 };
 
 } // namespace
 
-auto GP_CLI_COMMAND_CHAT_STD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CHAT_STD::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_CHAT_STD_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CHAT_STD::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Extremely important to figure out the message length here.
     // Depending on alignment, the message may not be NULL-terminated.
@@ -125,7 +121,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     // Handle possible !commands
     if (firstChar == '!' && !jailutils::InPrison(PChar))
     {
-        if (CCommandHandler::call(lua, PChar, rawMessageWithoutFirstChar) == 0 || PChar->m_GMlevel > 0)
+        if (CCommandHandler::call(scheduler, lua, PChar, rawMessageWithoutFirstChar) == 0 || PChar->m_GMlevel > 0)
         {
             // A command was handled OR a GM may have mistyped.
             return;
@@ -151,7 +147,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     {
         if (Kind == static_cast<uint8_t>(GP_CLI_COMMAND_CHAT_STD_KIND::Say))
         {
-            auditChat(PChar, "SAY", rawMessage);
+            auditChat(scheduler, PChar, "SAY", rawMessage);
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SAY, rawMessage));
         }
         else
@@ -167,7 +163,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     {
         case GP_CLI_COMMAND_CHAT_STD_KIND::Say:
         {
-            auditChat(PChar, "SAY", rawMessage);
+            auditChat(scheduler, PChar, "SAY", rawMessage);
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SAY, rawMessage));
         }
         break;
@@ -178,7 +174,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::Shout:
         {
-            auditChat(PChar, "SHOUT", rawMessage);
+            auditChat(scheduler, PChar, "SHOUT", rawMessage);
             PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SHOUT, rawMessage));
         }
         break;
@@ -195,7 +191,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                     .gmLevel     = PChar->m_GMlevel,
                 });
 
-                auditLinkshell(PChar, PChar->PLinkshell1, rawMessage);
+                auditLinkshell(scheduler, PChar, PChar->PLinkshell1, rawMessage);
             }
         }
         break;
@@ -212,7 +208,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                     .gmLevel     = PChar->m_GMlevel,
                 });
 
-                auditLinkshell(PChar, PChar->PLinkshell2, rawMessage);
+                auditLinkshell(scheduler, PChar, PChar->PLinkshell2, rawMessage);
             }
         }
         break;
@@ -243,7 +239,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                     });
                 }
 
-                auditChat(PChar, "PARTY", rawMessage);
+                auditChat(scheduler, PChar, "PARTY", rawMessage);
             }
         }
         break;
@@ -272,7 +268,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                         .gmLevel    = PChar->m_GMlevel,
                     });
 
-                    auditChat(PChar, "YELL", rawMessage);
+                    auditChat(scheduler, PChar, "YELL", rawMessage);
                 }
                 else
                 {
@@ -304,13 +300,13 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
 
             roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", rawMessage));
 
-            auditUnity(PChar, rawMessage);
+            auditUnity(scheduler, PChar, rawMessage);
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::LinkshellPvp:
         {
             // Not implemented
-            auditChat(PChar, "BALLISTA", rawMessage);
+            auditChat(scheduler, PChar, "BALLISTA", rawMessage);
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::AssistJ:
@@ -335,7 +331,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                 .messageType = MESSAGE_JP_ASSIST,
             });
 
-            auditChat(PChar, "ASSISTJ", rawMessage);
+            auditChat(scheduler, PChar, "ASSISTJ", rawMessage);
         }
         break;
         case GP_CLI_COMMAND_CHAT_STD_KIND::AssistE:
@@ -360,7 +356,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
                 .messageType = MESSAGE_NA_ASSIST,
             });
 
-            auditChat(PChar, "ASSISTE", rawMessage);
+            auditChat(scheduler, PChar, "ASSISTE", rawMessage);
         }
         break;
     }

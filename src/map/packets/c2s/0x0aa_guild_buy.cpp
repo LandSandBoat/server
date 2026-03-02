@@ -29,7 +29,7 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-auto GP_CLI_COMMAND_GUILD_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GUILD_BUY::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->PGuildShop, nullptr, "Character does not have a guild shop")
@@ -37,7 +37,7 @@ auto GP_CLI_COMMAND_GUILD_BUY::validate(MapSession* PSession, const CCharEntity*
         .mustEqual(PropertyItemIndex, 0, "PropertyItemIndex not 0");
 }
 
-void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GUILD_BUY::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint8 quantity = ItemNum;
 

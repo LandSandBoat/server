@@ -118,12 +118,13 @@ void MapApplication::run()
         registerCommands(console());
     }
 
-    markLoaded();
-    auto* mapEngine = dynamic_cast<MapEngine*>(engine_.get());
-
-    while (Application::isRunning())
+    try
     {
-        mapEngine->gameLoop();
+        scheduler_.run();
+    }
+    catch (std::exception& e)
+    {
+        ShowErrorFmt("Exception: {}", e.what());
     }
 
     // MapEngine destructor must occur before Application destructor

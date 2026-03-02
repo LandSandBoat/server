@@ -25,14 +25,14 @@
 #include "packets/s2c/0x113_currencies_1.h"
 #include "roe.h"
 
-auto GP_CLI_COMMAND_ROE_CLAIM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ROE_CLAIM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(settings::get<bool>("main.ENABLE_ROE"), true, "RoE is disabled")
         .range("ObjectiveId", ObjectiveId, 0, 4096);
 }
 
-void GP_CLI_COMMAND_ROE_CLAIM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ROE_CLAIM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     roeutils::onRecordClaim(PChar, ObjectiveId);
     PChar->pushPacket<GP_SERV_COMMAND_CURRENCIES_1>(PChar);

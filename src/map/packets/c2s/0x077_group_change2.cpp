@@ -38,7 +38,7 @@ const std::set validLinkshellOperations = {
 
 } // namespace
 
-auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .oneOf<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(Kind)
@@ -77,7 +77,7 @@ auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEnt
     return pv;
 }
 
-void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_CHANGE2::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto memberName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
     switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(Kind))

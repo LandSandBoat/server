@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_TRANSLATE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRANSLATE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator()
@@ -31,7 +31,7 @@ auto GP_CLI_COMMAND_TRANSLATE::validate(MapSession* PSession, const CCharEntity*
         .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(ToIndex);
 }
 
-void GP_CLI_COMMAND_TRANSLATE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRANSLATE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_TRANSLATE: Not implemented. FromIndex: {}, ToIndex: {}, Name: {}",
                  FromIndex,

@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/char_status.h"
 
-auto GP_CLI_COMMAND_SET_USERMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SET_USERMSG::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_SET_USERMSG_MSGTYPE>(msgType);
 }
 
-void GP_CLI_COMMAND_SET_USERMSG::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SET_USERMSG::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // NOTE: As with the bazaar message, we aren't going to escape this because we need the
     //     : exact message to be stored to be displayed correctly. We're storing through a prepared statement so

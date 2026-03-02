@@ -24,14 +24,14 @@
 #include "entities/charentity.h"
 #include "treasure_pool.h"
 
-auto GP_CLI_COMMAND_TROPHY_ABSENCE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TROPHY_ABSENCE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustNotEqual(PChar->PTreasurePool, nullptr, "Character does not have a treasure pool")
         .range("TrophyItemIndex", TrophyItemIndex, 0, TREASUREPOOL_SIZE - 1);
 }
 
-void GP_CLI_COMMAND_TROPHY_ABSENCE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TROPHY_ABSENCE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (!PChar->PTreasurePool->hasPassedItem(PChar, TrophyItemIndex))
     {

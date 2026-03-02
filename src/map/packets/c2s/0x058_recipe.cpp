@@ -25,7 +25,7 @@
 #include "packets/s2c/0x031_recipe.h"
 #include "validation.h"
 
-auto GP_CLI_COMMAND_RECIPE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_RECIPE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .range("skill", skill, 0x01, 0x08) // Fishing 0x00 to Digging 0x0A. 0x00, 0x09, and 0x0A are not implemented
@@ -54,7 +54,7 @@ auto GP_CLI_COMMAND_RECIPE::validate(MapSession* PSession, const CCharEntity* PC
                 });
 }
 
-void GP_CLI_COMMAND_RECIPE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_RECIPE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     uint16 skillRank           = 0;
     uint16 pagination          = 0;

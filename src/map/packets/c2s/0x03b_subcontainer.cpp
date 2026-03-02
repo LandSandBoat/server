@@ -89,7 +89,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 
 } // namespace
 
-auto GP_CLI_COMMAND_SUBCONTAINER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SUBCONTAINER::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
@@ -98,7 +98,7 @@ auto GP_CLI_COMMAND_SUBCONTAINER::validate(MapSession* PSession, const CCharEnti
         .oneOf("Category1", static_cast<CONTAINER_ID>(Category1), validContainers(PChar));
 }
 
-void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SUBCONTAINER::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PMannequin = PChar->getStorage(Category1)->GetItem(ItemIndex1);
     if (PMannequin == nullptr)

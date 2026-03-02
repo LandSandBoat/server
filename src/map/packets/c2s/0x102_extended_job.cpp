@@ -31,7 +31,7 @@
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
 
-auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EXTENDED_JOB::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator();
 
@@ -91,7 +91,7 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
     return pv;
 }
 
-void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EXTENDED_JOB::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && Data.bluData.JobIndex == JOB_BLU)
     {

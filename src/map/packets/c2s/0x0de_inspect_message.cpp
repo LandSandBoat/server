@@ -23,13 +23,13 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_INSPECT_MESSAGE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_INSPECT_MESSAGE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_INSPECT_MESSAGE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_INSPECT_MESSAGE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Packet contains 123 bytes but the message is limited to 120 bytes.
     //

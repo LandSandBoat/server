@@ -25,13 +25,13 @@
 #include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_ITEM_STACK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEM_STACK::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<CONTAINER_ID>(Category); // Retail honors _every_ container, even if you don't presently have access.
 }
 
-void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEM_STACK::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CItemContainer* PItemContainer = PChar->getStorage(Category);
 

@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_TRACKING_START::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_TRACKING_START::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .range("ActIndex", ActIndex, 0x1, 0x1000); // 1 to 4096
 }
 
-void GP_CLI_COMMAND_TRACKING_START::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRACKING_START::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CBaseEntity* target = PChar->GetEntity(ActIndex, TYPE_MOB | TYPE_NPC);
     if (target == nullptr)

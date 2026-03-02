@@ -30,13 +30,13 @@
 #include "packets/s2c/0x04d_fragments_fishranking.h"
 #include "packets/s2c/0x04d_fragments_servmes.h"
 
-auto GP_CLI_COMMAND_FRAGMENTS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_FRAGMENTS::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Document field values and validate.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_FRAGMENTS::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // TODO: Verify all of this
     uint8       msgChunk    = Command; // The current chunk of the message to send (1 = start, 2 = rest of message)

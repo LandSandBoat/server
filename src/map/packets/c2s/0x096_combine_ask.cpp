@@ -64,7 +64,7 @@ const std::set validCrystals = {
 
 }
 
-auto GP_CLI_COMMAND_COMBINE_ASK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_COMBINE_ASK::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf("Crystal", static_cast<ITEMID>(this->Crystal), validCrystals)
@@ -75,7 +75,7 @@ auto GP_CLI_COMMAND_COMBINE_ASK::validate(MapSession* PSession, const CCharEntit
         .isNotCrafting(PChar);
 }
 
-void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_COMBINE_ASK::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (jailutils::InPrison(PChar))
     {

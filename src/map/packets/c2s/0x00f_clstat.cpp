@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_CLSTAT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_CLSTAT::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_CLSTAT::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_CLSTAT::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // No direct response to this packet in regular conditions.
     // It is theorized it may be used by the client to report its current state

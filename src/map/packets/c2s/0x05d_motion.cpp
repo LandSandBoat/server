@@ -40,14 +40,14 @@ const std::set validBells = {
 
 } // namespace
 
-auto GP_CLI_COMMAND_MOTION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MOTION::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<EmoteMode>(Mode)
         .range("Number", Number, Emote::Point, Emote::Aim);
 }
 
-void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MOTION::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (jailutils::InPrison(PChar))
     {

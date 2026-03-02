@@ -30,14 +30,14 @@
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x065_wpos2.h"
 
-auto GP_CLI_COMMAND_EVENTENDXZY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EVENTENDXZY::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(Mode, 1, "Mode not 1")
         .isInEvent(PChar, EventPara);
 }
 
-void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EVENTENDXZY::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto result  = EndPara;
     const auto eventId = EventPara;

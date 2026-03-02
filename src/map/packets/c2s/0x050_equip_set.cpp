@@ -75,7 +75,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 
 } // namespace
 
-auto GP_CLI_COMMAND_EQUIP_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_EQUIP_SET::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNormalStatus(PChar)
@@ -83,7 +83,7 @@ auto GP_CLI_COMMAND_EQUIP_SET::validate(MapSession* PSession, const CCharEntity*
         .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers(PChar));
 }
 
-void GP_CLI_COMMAND_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_EQUIP_SET::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     charutils::EquipItem(PChar, PropertyItemIndex, EquipKind, Category);
     PChar->RequestPersist(CHAR_PERSIST::EQUIP);

@@ -44,7 +44,7 @@ const std::set validContainers = {
 
 }
 
-auto GP_CLI_COMMAND_ITEM_USE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEM_USE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .isNotMonstrosity(PChar)
@@ -53,7 +53,7 @@ auto GP_CLI_COMMAND_ITEM_USE::validate(MapSession* PSession, const CCharEntity* 
         .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers);
 }
 
-void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEM_USE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto* PEntity = PChar->GetEntity(this->ActIndex);
     if (!PEntity)

@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "lua/luautils.h"
 
-auto GP_CLI_COMMAND_GM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GM::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_GM::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GM::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     // Note: This packet effect is unknown. It is triggered by using /vol
 

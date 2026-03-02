@@ -23,14 +23,14 @@
 
 #include "entities/charentity.h"
 
-auto GP_CLI_COMMAND_SWITCH_PROPOSAL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SWITCH_PROPOSAL::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_SWITCH_PROPOSAL_KIND>(Kind);
 }
 
-void GP_CLI_COMMAND_SWITCH_PROPOSAL::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SWITCH_PROPOSAL::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     auto str = asStringFromUntrustedSource(Str, sizeof(Str));
     ShowDebugFmt("GP_CLI_COMMAND_SWITCH_PROPOSAL: Not implemented. Kind: {}, Str: {}", Kind, str);

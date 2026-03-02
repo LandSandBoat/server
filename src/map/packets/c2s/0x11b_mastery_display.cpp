@@ -26,13 +26,13 @@
 #include "packets/char_sync.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_MASTERY_DISPLAY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_MASTERY_DISPLAY::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .oneOf<GP_CLI_COMMAND_MASTERY_DISPLAY_MODE>(Mode);
 }
 
-void GP_CLI_COMMAND_MASTERY_DISPLAY::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_MASTERY_DISPLAY::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     if (PChar->m_jobMasterDisplay != static_cast<bool>(Mode))
     {

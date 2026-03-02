@@ -22,7 +22,6 @@
 #include "command_handler.h"
 
 #include "autotranslate.h"
-#include "common/async.h"
 #include "common/database.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
@@ -146,7 +145,7 @@ std::vector<CommandArg> splitToArgs(std::string const& input)
 }
 */
 
-int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::string& commandline)
+int32 CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* PChar, const std::string& commandline)
 {
     TracyZoneScoped;
 
@@ -214,7 +213,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
             std::string name       = PChar->name;
             std::string cmdlinestr = autotranslate::replaceBytes(commandline);
 
-            Async::getInstance()->submit(
+            scheduler.postToWorkerThread(
                 [name, cmdname, cmdlinestr]()
                 {
                     const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";

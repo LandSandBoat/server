@@ -24,7 +24,7 @@
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_SUBMAPCHANGE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_SUBMAPCHANGE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: List of valid submap numbers per zone
     auto pv = PacketValidator()
@@ -38,7 +38,7 @@ auto GP_CLI_COMMAND_SUBMAPCHANGE::validate(MapSession* PSession, const CCharEnti
     return pv;
 }
 
-void GP_CLI_COMMAND_SUBMAPCHANGE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_SUBMAPCHANGE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->loc.boundary = SubMapNumber;
 

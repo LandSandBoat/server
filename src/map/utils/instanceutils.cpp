@@ -84,9 +84,16 @@ void LoadInstanceList(IPP mapIPP)
             data.battlemulti = rset->get<uint16>("battlemulti");
         }
 
+        auto PZone         = zoneutils::GetZone(data.instance_zone);
+        auto PEntranceZone = zoneutils::GetZone(data.entrance_zone);
+        if (!PZone || !PEntranceZone)
+        {
+            continue;
+        }
+
         // Meta data
-        data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->getName();
-        data.entrance_zone_name = rset->get<std::string>("zone_name");
+        data.instance_zone_name = PZone->getName();
+        data.entrance_zone_name = PEntranceZone->getName();
         data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
         // Add to data cache

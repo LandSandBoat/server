@@ -146,7 +146,7 @@ const auto isValidMovement = [](const CCharEntity* PChar, const CONTAINER_ID fro
 
 } // namespace
 
-auto GP_CLI_COMMAND_ITEM_MOVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_ITEM_MOVE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     const auto validContainersForChar = validContainers(PChar);
 
@@ -161,7 +161,7 @@ auto GP_CLI_COMMAND_ITEM_MOVE::validate(MapSession* PSession, const CCharEntity*
                    "Illegal movement");
 }
 
-void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_ITEM_MOVE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CItem* PItem = PChar->getStorage(Category1)->GetItem(ItemIndex1);
 

@@ -31,7 +31,7 @@
 #include "party.h"
 #include "utils/charutils.h"
 
-auto GP_CLI_COMMAND_GROUP_STRIKE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_STRIKE::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     auto pv = PacketValidator()
                   .oneOf<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(Kind)
@@ -61,7 +61,7 @@ auto GP_CLI_COMMAND_GROUP_STRIKE::validate(MapSession* PSession, const CCharEnti
     return pv;
 }
 
-void GP_CLI_COMMAND_GROUP_STRIKE::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_STRIKE::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     const auto victimName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
 

@@ -51,7 +51,7 @@ struct ClientInfo
 class CLuaSimulation
 {
 public:
-    CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink);
+    CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink, Scheduler& scheduler);
 
     CLuaSimulation(const CLuaSimulation&)            = delete;
     CLuaSimulation& operator=(const CLuaSimulation&) = delete;
@@ -80,4 +80,5 @@ private:
     bool                          inSetupContext_{ false };
     MapEngine*                    engine_{ nullptr };
     std::shared_ptr<InMemorySink> sink_{ nullptr };
+    Scheduler&                    scheduler_;
 };

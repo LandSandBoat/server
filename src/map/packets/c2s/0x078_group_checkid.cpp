@@ -24,13 +24,13 @@
 #include "entities/charentity.h"
 #include "packets/s2c/0x0e1_group_checkid.h"
 
-auto GP_CLI_COMMAND_GROUP_CHECKID::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_GROUP_CHECKID::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate.
     return PacketValidator();
 }
 
-void GP_CLI_COMMAND_GROUP_CHECKID::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_GROUP_CHECKID::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     PChar->pushPacket<GP_SERV_COMMAND_GROUP_CHECKID>(PChar);
 }

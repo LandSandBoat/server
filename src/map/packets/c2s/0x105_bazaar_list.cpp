@@ -25,14 +25,14 @@
 #include "packets/s2c/0x105_bazaar_list.h"
 #include "packets/s2c/0x108_bazaar_shopping.h"
 
-auto GP_CLI_COMMAND_BAZAAR_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+auto GP_CLI_COMMAND_BAZAAR_LIST::validate(Scheduler& scheduler, MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
         .mustEqual(PChar->BazaarID.id, 0, "Character already has a Bazaar ID")
         .mustEqual(PChar->BazaarID.targid, 0, "Character already has a Bazaar Target ID");
 }
 
-void GP_CLI_COMMAND_BAZAAR_LIST::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_BAZAAR_LIST::process(Scheduler& scheduler, MapSession* PSession, CCharEntity* PChar) const
 {
     CCharEntity* PTarget = UniqueNo != 0 ? PChar->loc.zone->GetCharByID(UniqueNo) : static_cast<CCharEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_PC));
 

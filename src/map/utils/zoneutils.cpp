@@ -25,7 +25,6 @@
 #include "aman.h"
 #include "battlefield.h"
 #include "campaign_system.h"
-#include "common/async.h"
 #include "common/logging.h"
 #include "conquest_system.h"
 #include "entities/mobentity.h"
@@ -271,14 +270,16 @@ auto IsZoneAssignedToThisProcess(const IPP mapIPP, const ZONEID zoneId) -> bool
  *                                                                       *
  ************************************************************************/
 
-void LoadNPCList(const std::vector<uint16>& zoneIds)
+auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
     ShowInfo("Loading NPCs");
 
+    std::vector<Task<void>> tasks;
+    tasks.reserve(zoneIds.size());
     for (const auto zoneId : zoneIds)
     {
-        Async::getInstance()->submit(
+        tasks.emplace_back(scheduler.onWorkerThread(
             [zoneId]()
             {
                 TracyZoneScoped;
@@ -360,10 +361,10 @@ void LoadNPCList(const std::vector<uint16>& zoneIds)
                         }
                     }
                 }
-            });
+            }));
     }
 
-    Async::getInstance()->wait();
+    co_await All(std::move(tasks));
 
     ShowInfo("Loading NPC scripts");
     // handle npc spawn functions after they're all done loading
@@ -394,7 +395,7 @@ void LoadNPCList(const std::vector<uint16>& zoneIds)
  *                                                                       *
  ************************************************************************/
 
-void LoadMOBList(const std::vector<uint16>& zoneIds)
+auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
     ShowInfo("Loading Mobs");
@@ -402,9 +403,11 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
     const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
     const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
+    std::vector<Task<void>> tasks;
+    tasks.reserve(zoneIds.size());
     for (const auto zoneId : zoneIds)
     {
-        Async::getInstance()->submit(
+        tasks.emplace_back(scheduler.onWorkerThread(
             [normalLevelRangeMin, normalLevelRangeMax, zoneId]()
             {
                 TracyZoneScoped;
@@ -634,10 +637,10 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                         }
                     }
                 }
-            });
+            }));
     }
 
-    Async::getInstance()->wait();
+    co_await All(std::move(tasks));
 
     ShowInfo("Loading Mob scripts");
     // handle mob Initialize functions after they're all loaded
@@ -749,7 +752,7 @@ auto CreateZone(uint16 ZoneID) -> CZone*
  *                                                                       *
  ************************************************************************/
 
-void LoadZones(const std::vector<uint16>& zoneIds)
+auto LoadZones(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -763,8 +766,6 @@ void LoadZones(const std::vector<uint16>& zoneIds)
         }
     }
 
-    Async::getInstance()->setThreadpoolSize(std::max<std::size_t>(std::thread::hardware_concurrency() - 1, 1));
-
     if (g_PTrigger == nullptr)
     {
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
@@ -773,7 +774,7 @@ void LoadZones(const std::vector<uint16>& zoneIds)
     if (zonesToLoad.empty())
     {
         // Requested zones are already loaded.
-        return;
+        co_return;
     }
 
     ShowInfo(fmt::format("Loading {} zones", zonesToLoad.size()));
@@ -790,32 +791,26 @@ void LoadZones(const std::vector<uint16>& zoneIds)
         g_PZoneList[0] = CreateZone(0);
     }
 
-#ifdef ENV32BIT
-    ShowInfo("NOTE: LOS meshes wont be loaded on the 32-bit build. They take up enough memory to crash to process.");
-#endif // ENV32BIT
-
+    std::vector<Task<void>> tasks;
+    tasks.reserve(zoneIds.size() * 2);
     for (const auto zoneId : zonesToLoad)
     {
-        Async::getInstance()->submit(
+        tasks.emplace_back(scheduler.onWorkerThread(
             [zoneId]()
             {
                 // NOTE: It is not safe to use SQL in this parallel loop!
                 g_PZoneList[zoneId]->LoadNavMesh();
-            });
-#ifndef ENV32BIT
-        // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
-        // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
-        // TODO: Find a sane way around this
-        Async::getInstance()->submit(
+            }));
+
+        tasks.emplace_back(scheduler.onWorkerThread(
             [zoneId]()
             {
                 // NOTE: It is not safe to use SQL in this parallel loop!
                 g_PZoneList[zoneId]->LoadZoneLos();
-            });
-#endif // !ENV32BIT
+            }));
     }
 
-    Async::getInstance()->wait();
+    co_await All(std::move(tasks));
 
     // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
     for (const auto zoneId : zonesToLoad)
@@ -823,8 +818,8 @@ void LoadZones(const std::vector<uint16>& zoneIds)
         luautils::PopulateIDLookupsByZone(zoneId);
     }
 
-    LoadNPCList(zonesToLoad);
-    LoadMOBList(zonesToLoad);
+    co_await LoadNPCList(scheduler, zonesToLoad);
+    co_await LoadMOBList(scheduler, zonesToLoad);
 
     campaign::LoadState();
     campaign::LoadNations();
@@ -836,32 +831,34 @@ void LoadZones(const std::vector<uint16>& zoneIds)
             luautils::OnZoneInitialize(g_PZoneList[zoneId]->GetID());
         }
     }
-
-    Async::getInstance()->setThreadpoolSize(1U);
 }
 
-void LoadZoneList(const IPP mapIPP)
+auto LoadZones(const std::vector<uint16>& zoneIds) -> Task<void>
 {
-    TracyZoneScoped;
-
-    const auto zoneIds = GetZonesAssignedToThisProcess(mapIPP);
-    if (zoneIds.empty())
+    if (lazyLoad.scheduler)
     {
-        ShowCritical("Unable to load any zones! Check IP and port params");
-        std::exit(1);
+        co_await LoadZones(*lazyLoad.scheduler, zoneIds);
     }
-
-    LoadZones(zoneIds);
-    luautils::InitInteractionGlobal();
 }
 
 // Initialize zone loading: immediate (load all now) or lazy (load on-demand)
-void Initialize(const IPP mapIPP, bool lazyLoading, bool asyncMode)
+auto Initialize(Scheduler& scheduler, const IPP mapIPP, bool lazyLoading, bool asyncMode) -> Task<void>
 {
+    lazyLoad.scheduler = &scheduler;
+
     if (!lazyLoading)
     {
-        LoadZoneList(mapIPP);
-        return;
+        const auto zoneIds = GetZonesAssignedToThisProcess(mapIPP);
+        if (zoneIds.empty())
+        {
+            ShowCritical("Unable to load any zones! Check IP and port params");
+            std::exit(1);
+        }
+
+        co_await LoadZones(scheduler, zoneIds);
+
+        luautils::InitInteractionGlobal();
+        co_return;
     }
 
     lazyLoad.enabled   = true;
@@ -877,11 +874,11 @@ void ProcessLoadQueue()
 {
     TracyZoneScoped;
 
-    if (!lazyLoad.loadQueue.empty())
+    if (!lazyLoad.loadQueue.empty() && lazyLoad.scheduler)
     {
         auto zoneId = lazyLoad.loadQueue.front();
         lazyLoad.loadQueue.pop();
-        LoadZones({ zoneId });
+        lazyLoad.scheduler->postToMainThread(LoadZones({ zoneId }));
     }
 }
 
@@ -935,9 +932,9 @@ auto IsZoneReady(uint16 zoneId) -> bool
     }
 
     // Sync mode: load now
-    if (!lazyLoad.asyncMode)
+    if (!lazyLoad.asyncMode && lazyLoad.scheduler)
     {
-        LoadZones({ zoneId });
+        lazyLoad.scheduler->postToMainThread(LoadZones({ zoneId }));
         return true;
     }
 
