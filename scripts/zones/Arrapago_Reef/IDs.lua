@@ -33,6 +33,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         THE_PARTY_WILL_BE_REMOVED     = 7907, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_NO_REQS                   = 7911, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         YOUR_IMPERIAL_STANDING        = 7927, -- Your Imperial Standing has increased!
+        YOU_MUST_BRING                = 8387, -- You must bring %.
         SPINE_CHILL                   = 8399, -- You feel a chill run down your spine!
         PILE_OF_DISCARDED_MATERIALS   = 8430, -- There is a pile of discarded materials here.
         HAND_OVER_TO_IMMORTAL         = 8457, -- You hand over the % to the Immortal.

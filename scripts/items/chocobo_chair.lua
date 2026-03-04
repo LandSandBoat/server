@@ -18,7 +18,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:addKeyItem(keyItemId)
-    target:messageBasic(xi.basic.OBTAINED_KEY_ITEM, 6411, keyItemId)
+    target:messageBasic(xi.msg.basic.OBTAINED_KEY_ITEM, xi.item.CHOCOBO_CHAIR, keyItemId)
 end
 
 return itemObject

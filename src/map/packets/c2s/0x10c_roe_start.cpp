@@ -46,6 +46,6 @@ void GP_CLI_COMMAND_ROE_START::process(MapSession* PSession, CCharEntity* PChar)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->ObjectiveId, 0, MsgBasic::ROE_UNABLE);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->ObjectiveId, 0, MsgBasic::ROEUnable);
     }
 }

@@ -71,11 +71,11 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     {
                         case GP_CLI_COMMAND_MERITS_PARAM1::Lower:
                             PChar->PMeritPoints->LowerMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MERIT_DECREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MeritDecrease);
                             break;
                         case GP_CLI_COMMAND_MERITS_PARAM1::Raise:
                             PChar->PMeritPoints->RaiseMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MERIT_INCREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MeritIncrease);
                             break;
                     }
 

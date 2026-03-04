@@ -26,7 +26,7 @@
 MapSocket::MapSocket(Scheduler& scheduler, const uint16 port, ReceiveFn onReceiveFn)
 : scheduler_(scheduler)
 , port_(port)
-, socket_(scheduler_.ioContext())
+, socket_(scheduler_.mainContext())
 , buffer_{}
 , onReceiveFn_(std::move(onReceiveFn))
 {
@@ -82,14 +82,14 @@ void MapSocket::recvFor(timer::duration duration)
     TracyZoneScoped;
 
     // Blocks until the duration is up
-    scheduler_.ioContext().run_for(duration);
+    scheduler_.mainContext().run_for(duration);
 
     // Once run_for() or run() return the io_context enters a stopped state,
     // even if there are still pending asynchronous operations. You need to
     // call restart() to clear that state before you can run it again.
     if (isRunning_)
     {
-        scheduler_.ioContext().restart();
+        scheduler_.mainContext().restart();
     }
 }
 

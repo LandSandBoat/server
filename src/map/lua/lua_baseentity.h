@@ -68,7 +68,7 @@ public:
     void messagePublic(uint16 messageID, const CLuaBaseEntity* PEntity, const sol::object& arg2, const sol::object& arg3);
     void messageSpecial(uint16 messageID, sol::variadic_args va);
     void messageSystem(MsgStd messageID, const sol::object& p0, const sol::object& p1);
-    void messageCombat(const sol::object& speaker, int32 p0, int32 p1, int16 message);
+    void messageCombat(const sol::object& speaker, int32 p0, int32 p1, MsgBasic message) const;
     void messageStandard(uint16 messageID);
 
     void customMenu(const sol::object& obj);
@@ -780,7 +780,7 @@ public:
     auto   spawnTrust(uint16 trustId) -> CBaseEntity*;
     void   clearTrusts();
     uint32 getTrustID();
-    void   trustPartyMessage(uint32 message_id);
+    void   trustPartyMessage(uint32 message_id) const;
     auto   addGambit(uint16 targ, const sol::table& predicates, const sol::table& reactions, const sol::object& retry) -> std::string;
     void   removeGambit(const std::string& id);
     void   removeAllGambits();

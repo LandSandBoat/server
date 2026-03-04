@@ -18,7 +18,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:addKeyItem(keyItemId)
-    target:messageBasic(xi.basic.OBTAINED_KEY_ITEM, 6409, keyItemId)
+    target:messageBasic(xi.msg.basic.OBTAINED_KEY_ITEM, xi.item.EPHRAMADIAN_THRONE, keyItemId)
 end
 
 return itemObject

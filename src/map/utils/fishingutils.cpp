@@ -1882,7 +1882,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
         if (skillAmount > 0)
         {
             PChar->RealSkills.skill[SKILL_FISHING] += skillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, MsgBasic::SKILL_GAIN);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, MsgBasic::SkillGain);
 
             if ((charSkill / 10) < (charSkill + skillAmount) / 10)
             {
@@ -1894,7 +1894,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, MsgBasic::SkillLevelUp);
             }
 
             charutils::SaveCharSkills(PChar, SKILL_FISHING);

@@ -38,61 +38,70 @@ def print_help():
     print('python3 .\\announce.py "Here is a message from python!"')
 
 
-def build_chat_packet(gm_flag, zone, sender, msg):
-    buff_size = min(236, len(sender) + len(msg) + 10)
-    buffer = bytearray(buff_size)
+def encode_varint(value):
+    # Implements Alpaca's Base-128 variable-length encoding (Varint)
+    # used for serializing integers and container lengths.
+    bytes_list = bytearray()
+    while value > 127:
+        bytes_list.append((value & 127) | 128)
+        value >>= 7
+    bytes_list.append(value & 127)
+    return bytes_list
 
+
+def build_chat_packet(gm_flag, zone, sender, msg):
     if sender is None:
         sender = ""
 
     # alpaca encoding for:
     #
-    # ChatMessageServerMessage = 11;
+    # server/src/common/ipc_structs.h:
     #
     # struct ChatMessageServerMessage
     # {
-    #     uint32      senderId{};
-    #     std::string senderName{};
-    #     std::string message{};
-    #     uint16      zoneId{};
-    #     uint8       gmLevel{};
+    #     uint32            senderId{};
+    #     std::string       senderName{};
+    #     std::string       message{};
+    #     uint16            zoneId{};
+    #     uint8             gmLevel{};
+    #     CHAT_MESSAGE_TYPE messageType{ MESSAGE_SYSTEM_1 };
+    #     bool              skipSender{};
     # };
 
-    idx = 0
+    buffer = bytearray()
 
-    # ChatMessageServerMessage
-    buffer[idx] = 11
-    idx += 1
+    # ChatMessageServerMessage (ipc message type)
+    # server/tools/build/generated/ipc_stubs.h
+    #     ChatMessageServerMessage  = 12,
+    buffer.append(12)
 
     # senderId
-    buffer[idx] = 0
-    idx += 1
+    buffer.extend(encode_varint(0))
 
-    # len(senderName)
-    buffer[idx] = len(sender)
-    idx += 1
+    # senderName length
+    buffer.extend(encode_varint(len(sender)))
 
-    # senderName
-    for i, c in enumerate(sender):
-        buffer[idx] = ord(c)
-        idx += 1
+    # senderName string
+    buffer.extend(sender.encode("utf-8"))
 
-    # len(message)
-    buffer[idx] = len(msg)
-    idx += 1
+    # message length
+    buffer.extend(encode_varint(len(msg)))
 
-    # message
-    for i, c in enumerate(msg):
-        buffer[idx] = ord(c)
-        idx += 1
+    # message string
+    buffer.extend(msg.encode("utf-8"))
 
-    # zoneId
-    buffer[idx] = zone
-    idx += 1
+    # zoneId (uint16 native endianness, assuming little-endian x86/x64)
+    buffer.extend(struct.pack("<H", zone))
 
     # gmLevel
-    buffer[idx] = gm_flag
-    idx += 1
+    buffer.append(gm_flag)
+
+    # messageType (MESSAGE_SYSTEM_1 = 6)
+    # server/src/map/enums/chat_message_type.h
+    buffer.append(6)
+
+    # skipSender
+    buffer.append(0)
 
     return buffer
 

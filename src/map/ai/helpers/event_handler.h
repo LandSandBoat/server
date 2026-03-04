@@ -19,81 +19,82 @@
 ===========================================================================
 */
 
-#ifndef _EVENT_HANDLER
-#define _EVENT_HANDLER
+#pragma once
 
 #include <functional>
 #include <unordered_map>
 #include <vector>
 
-#include "common/cbasetypes.h"
-#include "lua/luautils.h"
+#include <common/cbasetypes.h>
 
-struct ai_event_t
-{
-    std::string   identifier;
-    sol::function lua_func;
-
-    ai_event_t(const std::string& _ident, sol::function _lua_func)
-    : identifier(_ident)
-    , lua_func(_lua_func)
-    {
-    }
-};
+#include <map/lua/luautils.h>
 
 class CAIEventHandler
 {
-public:
-    void addListener(const std::string& eventname, const sol::function& lua_func, const std::string& identifier);
-    void removeListener(const std::string& identifier);
-    bool hasListener(const std::string& eventName);
-
-    // calls event from core
-    template <class... Args>
-    void triggerListener(const std::string& eventname, Args&&... args)
+    struct AIEvent
     {
-        TracyZoneScoped;
-        TracyZoneString(eventname);
+        std::string   identifier_;
+        sol::function luaFunc_;
 
-        // Mark this Event Handler as currently triggering listeners,
-        // this is to prevent removal of listeners during this loop.
-        isTriggeringListeners = true;
-
-        // If we have registered listeners for this event, trigger them.
-        if (eventListeners.count(eventname))
+        AIEvent(const std::string& identifier, sol::function luaFunc)
+        : identifier_(identifier)
+        , luaFunc_(luaFunc)
         {
-            for (const auto& event : eventListeners.at(eventname))
+        }
+    };
+
+public:
+    void addListener(const std::string& eventName, const sol::function& luaFunc, const std::string& identifier);
+    void removeListener(const std::string& identifier);
+    bool hasListener(const std::string& eventName) const;
+
+    template <class... Args>
+    void triggerListener(const std::string& eventName, Args&&... args) noexcept
+    {
+        // No events or events with this name? Bail out
+        auto it = eventListeners_.find(eventName);
+        if (it == eventListeners_.end())
+        {
+            return;
+        }
+
+        // Only report triggers we're actually going to fire
+        TracyZoneScoped;
+        TracyZoneString(eventName);
+
+        // Prevent modification while iterating
+        ++triggerDepth_;
+        {
+            auto& listeners = it->second;
+            for (auto& event : listeners)
             {
-                auto result = event.lua_func(std::forward<Args&&>(args)...);
+                auto result = event.luaFunc_(std::forward<Args>(args)...);
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    ShowError("Error in listener event %s: %s", eventname, err.what());
-                    isTriggeringListeners = false;
+                    ShowErrorFmt("Error in listener event {}: {}", eventName, err.what());
                 }
             }
         }
+        --triggerDepth_;
 
-        // removeListener may have been called during the lua_func inside the loop.
-        // We've accumulated any possible removals in eventsToRemove, so we can now
-        // safely remove them from the eventListeners map without invalidating the
-        // inner iterator.
-        for (const auto& identifier : eventsToRemove)
+        // Process deferred removals
+        if (!eventsToRemove_.empty())
         {
-            removeFromAllListeners(identifier);
+            for (const auto& identifier : eventsToRemove_)
+            {
+                removeFromAllListeners(identifier);
+            }
+            eventsToRemove_.clear();
         }
-        eventsToRemove.clear();
-
-        isTriggeringListeners = false;
     }
 
 private:
     void removeFromAllListeners(const std::string& identifier);
 
-    bool isTriggeringListeners = false;
+    uint32 triggerDepth_ = 0;
 
-    std::unordered_map<std::string, std::vector<ai_event_t>> eventListeners;
-    std::vector<std::string>                                 eventsToRemove;
+    // TODO: Use string_view and is_transparent unordered_map + string_hash, etc.
+    std::unordered_map<std::string, std::vector<AIEvent>> eventListeners_;
+    std::vector<std::string>                              eventsToRemove_;
 };
-
-#endif

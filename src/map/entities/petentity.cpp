@@ -334,9 +334,9 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
             actionResult.messageID = PAbility->getMessage();
         }
 
-        if (actionResult.messageID == MsgBasic::NONE)
+        if (actionResult.messageID == MsgBasic::None)
         {
-            actionResult.messageID = MsgBasic::USES_JA;
+            actionResult.messageID = MsgBasic::UsesJobAbility;
         }
 
         actionResult.param = value;
@@ -370,7 +370,7 @@ bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
         auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
         if (PChar && !PChar->IsMobOwner(PTarget))
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::ALREADY_CLAIMED);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
             PAI->Disengage();
             return false;
         }
@@ -492,7 +492,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     PSkill->setHP(health.hp);
     PSkill->setHPP(GetHPP());
 
-    MsgBasic msg            = MsgBasic::NONE;
+    MsgBasic msg            = MsgBasic::None;
     MsgBasic defaultMessage = PSkill->getMsg();
 
     bool first{ true };
@@ -519,7 +519,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         }
 
         // primary target will have msg == 0
-        if (msg == MsgBasic::NONE)
+        if (msg == MsgBasic::None)
         {
             msg = PSkill->getMsg();
         }
@@ -533,8 +533,8 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         if (damage < 0)
         {
             // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            //       furthermore, this likely needs to be PSkill->setMsg(MsgBasic::SKILL_RECOVERS_HP) and happen before the above code
-            msg = MsgBasic::SKILL_RECOVERS_HP;
+            //       furthermore, this likely needs to be PSkill->setMsg(MsgBasic::SkillRecoversHP) and happen before the above code
+            msg = MsgBasic::SkillRecoversHP;
             actionResult.recordDamage(attack_outcome_t{
                 .atkType = ATTACK_TYPE::PHYSICAL,
                 .damage  = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp),

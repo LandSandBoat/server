@@ -235,7 +235,7 @@ void LoadMobSkillsList()
         PMobSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PMobSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PMobSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
-        PMobSkill->setMsg(MsgBasic::USES_SKILL_TAKES_DAMAGE); // standard damage message. Scripters will change this.
+        PMobSkill->setMsg(MsgBasic::UsesSkillTakesDamage); // standard damage message. Scripters will change this.
         g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
         auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
@@ -838,7 +838,7 @@ int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, a
 
     if (damage < 0) // apply heal message
     {
-        Action->spikesMessage = MsgBasic::SPIKES_EFFECT_HEAL;
+        Action->spikesMessage = MsgBasic::SpikesEffectHeal;
     }
 
     return damage;
@@ -847,7 +847,7 @@ int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, a
 auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, const int32 damage) -> bool
 {
     Action->spikesEffect  = static_cast<ActionReactKind>(PDefender->getMod(Mod::SPIKES));
-    Action->spikesMessage = MsgBasic::SPIKES_EFFECT_DMG;
+    Action->spikesMessage = MsgBasic::SpikesEffectDmg;
     Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::SPIKES_DMG), 0);
 
     // Handle Retaliation
@@ -863,7 +863,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
 
         if (battleutils::IsAbsorbByShadow(PAttacker, PDefender)) // Struck a shadow
         {
-            Action->spikesMessage = MsgBasic::RETALIATE_SHADOW_ABSORBS;
+            Action->spikesMessage = MsgBasic::RetaliateShadowAbsorbs;
         }
         else // Struck the target
         {
@@ -895,7 +895,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
             dmg                     = dmg + bonus;
 
             // TP and stoneskin are handled inside TakePhysicalDamage
-            Action->spikesMessage = MsgBasic::RETALIATE_DAMAGE;
+            Action->spikesMessage = MsgBasic::RetaliateDamage;
             Action->spikesParam =
                 battleutils::TakePhysicalDamage(PDefender, PAttacker, PHYSICAL_ATTACK_TYPE::NORMAL, dmg, false, SLOT_MAIN, 1, nullptr, true, true, true);
         }
@@ -969,7 +969,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
 
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
-                                Action->spikesMessage = MsgBasic::SPIKES_EFFECT_HP_DRAIN;
+                                Action->spikesMessage = MsgBasic::SpikesEffectHPDrain;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -1044,7 +1044,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
     else if (Action->spikesEffect == ActionReactKind::None)
     {
         Action->spikesParam   = 0;
-        Action->spikesMessage = MsgBasic::NONE;
+        Action->spikesMessage = MsgBasic::None;
     }
     return false;
 }
@@ -1052,7 +1052,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
 auto HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, const int32 damage) -> bool
 {
     Action->spikesEffect  = static_cast<ActionReactKind>(PDefender->getMod(Mod::PARRY_SPIKES));
-    Action->spikesMessage = MsgBasic::SPIKES_EFFECT_DMG;
+    Action->spikesMessage = MsgBasic::SpikesEffectDmg;
     Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::PARRY_SPIKES_DMG), 0);
 
     if (Action->spikesEffect != ActionReactKind::None)
@@ -1096,13 +1096,13 @@ auto HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actio
     {
         if (spikesType == ActionReactKind::CurseSpikes)
         {
-            Action->spikesMessage = MsgBasic::STATUS_SPIKES;
+            Action->spikesMessage = MsgBasic::StatusSpikes;
             Action->spikesParam   = EFFECT_CURSE;
         }
         /* Todo: wire this up fully.
         else if (spikesType == SUBEFFECT_DEATH_SPIKES)
         {
-            Action->spikesMessage = MsgBasic::STATUS_SPIKES;
+            Action->spikesMessage = MsgBasic::StatusSpikes;
             Action->spikesParam   = EFFECT_KO;
             PDefender->setHP(0);
         }
@@ -1142,7 +1142,7 @@ auto HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actio
         // However, it wasn't worth the effort when the whole thing is going to be eventually burned down to make way for fully scripted spikes
         Action->spikesEffect  = ActionReactKind::None;
         Action->spikesParam   = 0;
-        Action->spikesMessage = MsgBasic::NONE;
+        Action->spikesMessage = MsgBasic::None;
     }
 
     return false;
@@ -1274,7 +1274,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
     }
 
     Action->additionalEffect = ActionProcAddEffect::None;
-    Action->addEffectMessage = MsgBasic::NONE;
+    Action->addEffectMessage = MsgBasic::None;
     Action->addEffectParam   = 0;
 
     EFFECT previous_daze       = EFFECT_NONE;
@@ -1356,18 +1356,18 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
             if (hasGlobalAdditionalEffect && luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
             {
-                if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+                if (Action->addEffectMessage == MsgBasic::AddEffectDamage && Action->addEffectParam < 0)
                 {
-                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                    Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
                 }
                 return true;
             }
 
             if (hasItemScriptAdditionalEffect && luautils::OnItemAdditionalEffect(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
             {
-                if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+                if (Action->addEffectMessage == MsgBasic::AddEffectDamage && Action->addEffectParam < 0)
                 {
-                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                    Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
                 }
                 return true;
             }
@@ -1409,7 +1409,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
         if (enspell == ENSPELL_BLOOD_WEAPON && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
         {
             Action->additionalEffect = ActionProcAddEffect::HPDrain;
-            Action->addEffectMessage = MsgBasic::ADD_EFFECT_HP_DRAINED;
+            Action->addEffectMessage = MsgBasic::AddEffectHPDrained;
 
             // Increase HP Absorbed by 2% per JP
             int32 absorbed = Action->param;
@@ -1453,11 +1453,11 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             if (Action->addEffectParam < 0)
             {
                 Action->addEffectParam   = -Action->addEffectParam;
-                Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
             }
             else
             {
-                Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
+                Action->addEffectMessage = MsgBasic::AddEffectAdditionalDamage;
             }
 
             PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, damageType);
@@ -1465,13 +1465,13 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
         else if (enspell == ENSPELL_AUSPICE && isFirstSwing)
         {
             Action->additionalEffect = ActionProcAddEffect::LightDamage;
-            Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
+            Action->addEffectMessage = MsgBasic::AddEffectAdditionalDamage;
             Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7, weapon);
 
             if (Action->addEffectParam < 0)
             {
                 Action->addEffectParam   = -Action->addEffectParam;
-                Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
             }
 
             PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -1502,11 +1502,11 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 if (Action->addEffectParam < 0)
                 {
                     Action->addEffectParam   = -Action->addEffectParam;
-                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                    Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
                 }
                 else
                 {
-                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_ADDITIONAL_DAMAGE;
+                    Action->addEffectMessage = MsgBasic::AddEffectAdditionalDamage;
                 }
 
                 PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -1525,17 +1525,17 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
              luautils::additionalEffectAttack(PAttacker, PDefender, static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB)), Action, finaldamage) == 0 &&
              Action->hasAdditionalEffect())
     {
-        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+        if (Action->addEffectMessage == MsgBasic::AddEffectDamage && Action->addEffectParam < 0)
         {
-            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+            Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
         }
     }
     else if (PAttacker->objtype == TYPE_MOB && ((CMobEntity*)PAttacker)->getMobMod(MOBMOD_ADD_EFFECT) > 0)
     {
         luautils::OnAdditionalEffect(PAttacker, PDefender, Action, finaldamage);
-        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+        if (Action->addEffectMessage == MsgBasic::AddEffectDamage && Action->addEffectParam < 0)
         {
-            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+            Action->addEffectMessage = MsgBasic::AddEffectRecoversHP;
         }
     }
     else
@@ -1636,7 +1636,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 }
 
                 Action->additionalEffect = ActionProcAddEffect::HPDrain;
-                Action->addEffectMessage = MsgBasic::ADD_EFFECT_HP_DRAINED;
+                Action->addEffectMessage = MsgBasic::AddEffectHPDrained;
                 Action->addEffectParam   = Samba;
 
                 PAttacker->addHP(Samba); // does not do any additional damage to targets HP, only heals the attacker
@@ -1665,7 +1665,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 }
 
                 Action->additionalEffect = ActionProcAddEffect::MPDrain;
-                Action->addEffectMessage = MsgBasic::ADD_EFFECT_MP_DRAINED;
+                Action->addEffectMessage = MsgBasic::AddEffectMPDrained;
 
                 int16 mpDrained = PDefender->addMP(-Samba);
 
@@ -5403,7 +5403,7 @@ void DrawIn(CBattleEntity* PTarget, const position_t pos, const float offset, co
         {
             // draw in!
             PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_WPOS>(PTarget, nearEntity));
-            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, 0, MsgBasic::DRAWN_IN));
+            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PTarget, PTarget, 0, 0, MsgBasic::DrawnIn));
         }
     }
 }

@@ -33,7 +33,7 @@ CPetSkill::CPetSkill(uint16 id)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
 , m_ValidTarget(0)
-, m_Message(MsgBasic::NONE)
+, m_Message(MsgBasic::None)
 , m_Flag(0)
 , m_Param(0)
 , m_SkillFinishCategory(0)
@@ -51,12 +51,12 @@ CPetSkill::CPetSkill(uint16 id)
 
 bool CPetSkill::hasMissMsg() const
 {
-    return m_Message == MsgBasic::USES_BUT_MISSES ||
-           m_Message == MsgBasic::ABILITY_MISSES ||
-           m_Message == MsgBasic::USES_SKILL_MISSES ||
-           m_Message == MsgBasic::USES_SKILL_NO_EFFECT ||
-           m_Message == MsgBasic::SHADOW_ABSORB ||
-           m_Message == MsgBasic::TARGET_ANTICIPATES;
+    return m_Message == MsgBasic::UsesButMisses ||
+           m_Message == MsgBasic::AbilityMisses ||
+           m_Message == MsgBasic::UsesSkillMisses ||
+           m_Message == MsgBasic::UsesSkillNoEffect ||
+           m_Message == MsgBasic::ShadowAbsorb ||
+           m_Message == MsgBasic::TargetAnticipates;
 }
 
 bool CPetSkill::isAoE() const
@@ -291,14 +291,14 @@ auto CPetSkill::getKnockback() const -> Knockback
 
 bool CPetSkill::isDamageMsg() const
 {
-    return m_Message == MsgBasic::USES_ABILITY_TAKES_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_TAKES_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_HP_DRAINED ||
-           m_Message == MsgBasic::USES_ABILITY_RESISTS_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_MP_DRAINED ||
-           m_Message == MsgBasic::USES_SKILL_TP_DRAINED ||
-           m_Message == MsgBasic::TARGET_TAKES_DAMAGE ||
-           m_Message == MsgBasic::USES_JA_TAKE_DAMAGE;
+    return m_Message == MsgBasic::UsesAbilityTakesDamage ||
+           m_Message == MsgBasic::UsesSkillTakesDamage ||
+           m_Message == MsgBasic::UsesSkillHPDrained ||
+           m_Message == MsgBasic::UsesAbilityResistsDamage ||
+           m_Message == MsgBasic::UsesSkillMPDrained ||
+           m_Message == MsgBasic::UsesSkillTPDrained ||
+           m_Message == MsgBasic::TargetTakesDamage ||
+           m_Message == MsgBasic::UsesJobAbilityTakeDamage;
 }
 
 void CPetSkill::setParam(int16 value)

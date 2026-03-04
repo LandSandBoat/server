@@ -21,11 +21,12 @@
 
 #pragma once
 
-#include "cbasetypes.h"
-#include "logging.h"
-#include "synchronized.h"
-#include "tracy.h"
-#include "xi.h"
+#include <common/cbasetypes.h>
+#include <common/logging.h>
+#include <common/scheduler.h>
+#include <common/synchronized.h>
+#include <common/tracy.h>
+#include <common/xi.h>
 
 #include <array>
 #include <bitset>
@@ -727,6 +728,16 @@ auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_pt
             ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
             std::this_thread::sleep_for(1s);
             std::terminate();
+        });
+}
+
+template <typename... Args>
+auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<db::detail::ResultSetWrapper>>
+{
+    co_return scheduler.onWorkerThread(
+        [rawQuery, ... capturedArgs = std::forward<Args>(args)]() mutable
+        {
+            return db::preparedStmt(rawQuery, std::forward<Args>(capturedArgs)...);
         });
 }
 

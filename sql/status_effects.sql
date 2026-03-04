@@ -224,7 +224,7 @@ INSERT INTO `status_effects` VALUES (153,'damage_spikes',@FLAG_DISPELABLE | @FLA
 INSERT INTO `status_effects` VALUES (154,'shining_ruby',@FLAG_DISPELABLE | @FLAG_EMPATHY | @FLAG_DEATH | @FLAG_ON_ZONE,0,0,0,0,0,0,0,0,NULL);
 INSERT INTO `status_effects` VALUES (155,'medicine',0,0,0,0,0,0,0,0,0,204);
 INSERT INTO `status_effects` VALUES (156,'flash',@FLAG_ERASABLE | @FLAG_DEATH | @FLAG_ON_ZONE | @FLAG_WALTZABLE | @FLAG_NO_CANCEL,0,0,1,0,0,7,0,0,204);
-INSERT INTO `status_effects` VALUES (157,'sj_restriction',@FLAG_ON_ZONE | @FLAG_NO_CANCEL,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (157,'sj_restriction',@FLAG_ON_ZONE | @FLAG_NO_CANCEL | @FLAG_NO_LOSS_MESSAGE,0,0,0,0,0,0,0,0,NULL);
 INSERT INTO `status_effects` VALUES (158,'provoke',@FLAG_DEATH,0,0,0,0,0,0,0,0,204);
 INSERT INTO `status_effects` VALUES (159,'penalty',@FLAG_DEATH,0,0,0,0,0,0,0,0,204);
 INSERT INTO `status_effects` VALUES (160,'preparations',@FLAG_DEATH,0,0,0,0,0,0,0,0,204);

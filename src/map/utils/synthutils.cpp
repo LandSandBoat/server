@@ -319,13 +319,21 @@ auto isRightRecipe(CCharEntity* PChar) -> bool
 
     const auto possibleRecipeKey = SynthRecipe::ingredientKey(crystal, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, ingredient8);
 
-    if (synthRecipes.find(possibleRecipeKey) != synthRecipes.end())
+    if (synthRecipes.contains(possibleRecipeKey))
     {
         const auto& recipe = synthRecipes[possibleRecipeKey];
 
         if (!luautils::IsContentEnabled(recipe.ContentTag))
         {
             PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
+            return false;
+        }
+
+        // Check if recipe result is rare and player already owns a copy.
+        const CItem* PItem = itemutils::GetItemPointer(recipe.Result);
+        if (PItem && PItem->getFlag() & ITEM_FLAG_RARE && charutils::HasItem(PChar, recipe.Result))
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelRareItem);
             return false;
         }
 
@@ -578,6 +586,10 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
         if (xirand::GetRandomNumber(0.0f, 100.f) <= 25.0f) // 25% Chance to upgrade HQ
         {
             upgradeHQ = upgradeHQ + 1;
+        }
+        else
+        {
+            break;
         }
     }
 
@@ -1135,7 +1147,7 @@ void doSynthSkillUp(CCharEntity* PChar)
 
         // Skill Up addition:
         PChar->RealSkills.skill[skillID] += skillUpAmount;
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, skillUpAmount, MsgBasic::SKILL_GAIN);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, skillUpAmount, MsgBasic::SkillGain);
 
         if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
         {
@@ -1147,7 +1159,7 @@ void doSynthSkillUp(CCharEntity* PChar)
             }
 
             PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, MsgBasic::SkillLevelUp);
         }
 
         charutils::SaveCharSkills(PChar, skillID);
@@ -1156,13 +1168,13 @@ void doSynthSkillUp(CCharEntity* PChar)
         if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
         {
             PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, skillUpAmount, MsgBasic::SKILL_DROP);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, skillUpAmount, MsgBasic::SkillDrop);
 
             if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
             {
                 PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, MsgBasic::SkillLevelUp);
             }
 
             charutils::SaveCharSkills(PChar, skillHighest);

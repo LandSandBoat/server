@@ -19,19 +19,19 @@
 ===========================================================================
 */
 
-#include "event_handler.h"
+#include <map/ai/helpers/event_handler.h>
 
-void CAIEventHandler::addListener(const std::string& eventname, const sol::function& lua_func, const std::string& identifier)
+void CAIEventHandler::addListener(const std::string& eventName, const sol::function& luaFunc, const std::string& identifier)
 {
     TracyZoneScoped;
-    TracyZoneString(eventname);
+    TracyZoneString(eventName);
     TracyZoneString(identifier);
 
-    // Remove entries with same identifier (if they exist).
+    // Remove entries with same identifier (if they exist)
     removeFromAllListeners(identifier);
 
-    // Add the new listener.
-    eventListeners[eventname].emplace_back(identifier, lua_func);
+    // Add the new listener
+    eventListeners_[eventName].emplace_back(identifier, luaFunc);
 }
 
 void CAIEventHandler::removeListener(const std::string& identifier)
@@ -40,21 +40,21 @@ void CAIEventHandler::removeListener(const std::string& identifier)
     TracyZoneString(identifier);
 
     // If we're currently triggering listeners, it isn't safe to remove
-    // the listener from the list, so we'll mark it for lazy removal later.
-    if (isTriggeringListeners)
+    // the listener from the list, so we'll mark it for lazy removal later
+    if (triggerDepth_ > 0)
     {
-        eventsToRemove.push_back(identifier);
+        eventsToRemove_.push_back(identifier);
         return;
     }
 
-    // Otherwise, we can remove the listener immediately.
+    // Otherwise, we can remove the listener immediately
     removeFromAllListeners(identifier);
 }
 
-bool CAIEventHandler::hasListener(const std::string& eventName)
+bool CAIEventHandler::hasListener(const std::string& eventName) const
 {
-    const auto& listeners = eventListeners.find(eventName);
-    return listeners != eventListeners.end() && !listeners->second.empty();
+    const auto& listeners = eventListeners_.find(eventName);
+    return listeners != eventListeners_.end() && !listeners->second.empty();
 }
 
 void CAIEventHandler::removeFromAllListeners(const std::string& identifier)
@@ -62,17 +62,17 @@ void CAIEventHandler::removeFromAllListeners(const std::string& identifier)
     TracyZoneScoped;
     TracyZoneString(identifier);
 
-    const auto isSameIdentifier = [&identifier](const ai_event_t& event)
+    const auto isSameIdentifier = [&identifier](const AIEvent& event)
     {
-        return identifier == event.identifier;
+        return identifier == event.identifier_;
     };
 
-    for (auto& [_, listeners] : eventListeners)
+    for (auto& [_, listeners] : eventListeners_)
     {
-        // Partition the vector so that all elements that match the identifier are at the end.
+        // Partition the vector so that all elements that match the identifier are at the end
         auto it = std::remove_if(listeners.begin(), listeners.end(), isSameIdentifier);
 
-        // Erase the partitioned elements.
+        // Erase the partitioned elements
         listeners.erase(it, listeners.end());
     }
 }

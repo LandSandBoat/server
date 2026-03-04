@@ -3544,7 +3544,7 @@ INSERT INTO `mob_groups` VALUES (39,3060,66,'Orochi',0,128,0,25000,0,0,NULL);
 
 INSERT INTO `mob_groups` VALUES (1,2712,67,'Mocking_Colibri',0,128,0,8000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,3128,67,'Phantom_Puk',0,128,0,14000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,3327,67,'Raubahn',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,3327,67,'Raubahn',0,128,0,2275,4000,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,3567,67,'Shadowhand_Kajeel_Ja',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,430,67,'Blacktattoo_Vedool_Ja',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,4332,67,'Whitetattoo_Rahool_Ja',0,128,0,0,0,0,NULL);
@@ -13486,7 +13486,7 @@ INSERT INTO `mob_groups` VALUES (38,228,198,'Argus',0,128,165,3700,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (39,2386,198,'Leech_King',0,128,1505,1960,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (40,4386,198,'Wyrmfly',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (41,5533,198,'Dark_Elemental',0,128,568,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (42,4675,198,'Lost_Soul_NM',0,128,0,3500,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (42,4675,198,'Lost_Soul_NM',0,128,0,5650,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (43,5161,198,'Ogbunabali',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (44,250,198,'Aroma_Crawler',0,128,0,3410,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (45,6570,198,'Wight_blm',300,0,2654,0,0,0,NULL);

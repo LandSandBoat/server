@@ -133,6 +133,8 @@ struct ChatMessageAssist
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_NA_ASSIST };
 };
 
+// NOTE: Remember some external tools like announce.py rely on this struct layout.
+// If you change it, please update the tools too.
 struct ChatMessageServerMessage
 {
     uint32            senderId{};

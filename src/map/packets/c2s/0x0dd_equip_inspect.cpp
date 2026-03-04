@@ -44,7 +44,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CANNOT_USE_IN_AREA);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
         return;
     }
 
@@ -79,7 +79,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 // /check on a mob
                 if (PMobTarget->m_Type & MOBTYPE_NOTORIOUS || PMobTarget->m_Type & MOBTYPE_BATTLEFIELD || PMobTarget->getMobMod(MOBMOD_CHECK_AS_NM) > 0)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, MsgBasic::CHECK_ITG);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, MsgBasic::CheckImpossibleToGauge);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                     const uint16 mobDef  = PMobTarget->DEF();
 
                     // Calculate +/- message
-                    auto MessageID = static_cast<uint16_t>(MsgBasic::CHECK_DEFAULT);
+                    auto MessageID = static_cast<uint16_t>(MsgBasic::CheckDefault);
 
                     // Offsetting the message ID by a certain amount for each stat gives us the correct message
                     // Defense is +/- 1
@@ -151,64 +151,64 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
             {
                 // /checkparam on self
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CHECKPARAM_NAME);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CHECKPARAM_ILVL);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(SLOT_MAIN), MsgBasic::CHECKPARAM_PRIMARY);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamName);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamIlvl);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(SLOT_MAIN), MsgBasic::CheckparamPrimary);
 
                 if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(SLOT_SUB), MsgBasic::CHECKPARAM_AUXILIARY);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(SLOT_SUB), MsgBasic::CheckparamAuxiliary);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CHECKPARAM_AUXILIARY);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamAuxiliary);
                 }
 
                 if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MsgBasic::CheckparamRange);
                 }
                 else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MsgBasic::CheckparamRange);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamRange);
                 }
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->EVA(), PChar->DEF(), MsgBasic::CHECKPARAM_DEFENSE);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->EVA(), PChar->DEF(), MsgBasic::CheckparamDefense);
             }
             else if (PChar->PPet && PChar->PPet->id == UniqueNo)
             {
                 // /checkparam on pet
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CHECKPARAM_NAME);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CHECKPARAM_PRIMARY);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamName);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CheckparamPrimary);
                 if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CHECKPARAM_AUXILIARY);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CheckparamAuxiliary);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CHECKPARAM_AUXILIARY);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamAuxiliary);
                 }
                 if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
                 {
                     const int skill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED))->getSkillType();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MsgBasic::CheckparamRange);
                 }
                 else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
                 {
                     const int skill = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO))->getSkillType();
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(skill), MsgBasic::CheckparamRange);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CHECKPARAM_RANGE);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamRange);
                 }
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->EVA(), PChar->PPet->DEF(), MsgBasic::CHECKPARAM_DEFENSE);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->EVA(), PChar->PPet->DEF(), MsgBasic::CheckparamDefense);
             }
 
             break;

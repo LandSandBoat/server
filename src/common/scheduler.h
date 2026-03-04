@@ -28,6 +28,7 @@
 #include <asio/detached.hpp>
 #include <asio/executor_work_guard.hpp>
 #include <asio/experimental/awaitable_operators.hpp>
+#include <asio/experimental/parallel_group.hpp>
 #include <asio/io_context.hpp>
 #include <asio/post.hpp>
 #include <asio/steady_timer.hpp>
@@ -121,6 +122,46 @@ auto One(Tasks&&... tasks)
 {
     using namespace asio::experimental::awaitable_operators;
     return (std::forward<Tasks>(tasks) || ...);
+}
+
+//
+// All (vector)
+//   Await multiple tasks in parallel and return their results as a vector.
+//
+template <typename T>
+auto All(std::vector<Task<T>> tasks) -> Task<std::conditional_t<std::is_void_v<T>, void, std::vector<T>>>
+{
+    if (tasks.empty())
+    {
+        if constexpr (std::is_void_v<T>)
+        {
+            co_return;
+        }
+        else
+        {
+            co_return std::vector<T>{};
+        }
+    }
+
+    auto executor = co_await asio::this_coro::executor;
+
+    std::vector<decltype(asio::co_spawn(executor, std::declval<Task<T>>(), asio::deferred))> ops;
+    ops.reserve(tasks.size());
+    for (auto& task : tasks)
+    {
+        ops.push_back(asio::co_spawn(executor, std::move(task), asio::deferred));
+    }
+
+    auto group = asio::experimental::make_parallel_group(std::move(ops));
+    if constexpr (std::is_void_v<T>)
+    {
+        co_await group.async_wait(asio::experimental::wait_for_all(), asio::use_awaitable);
+    }
+    else
+    {
+        auto [order, results] = co_await group.async_wait(asio::experimental::wait_for_all(), asio::use_awaitable);
+        co_return results;
+    }
 }
 
 //
@@ -367,12 +408,18 @@ public:
         co_return std::nullopt;
     }
 
-    // ioContext
+    // mainContext
     //   Return the main io_context.
-    //   TODO: We should be trying to get rid of this accessor as soon as possible!
-    [[nodiscard]] auto ioContext() -> asio::io_context&
+    [[nodiscard]] auto mainContext() -> asio::io_context&
     {
         return mainContext_;
+    }
+
+    // workerContext
+    //   Return the worker io_context.
+    [[nodiscard]] auto workerContext() -> asio::io_context&
+    {
+        return workerContext_;
     }
 
 private:

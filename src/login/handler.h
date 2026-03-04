@@ -38,7 +38,7 @@ class handler
 public:
     handler(Scheduler& scheduler, unsigned int port, ZMQDealerWrapper& zmqDealerWrapper)
     : scheduler_(scheduler)
-    , acceptor_(scheduler_.ioContext(), asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
+    , acceptor_(scheduler_.mainContext(), asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
     , sslContext_(asio::ssl::context::tls_server)
     , zmqDealerWrapper_(zmqDealerWrapper)
     {

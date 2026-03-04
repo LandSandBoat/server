@@ -2105,6 +2105,9 @@ INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- Attack+18 while TP <
 INSERT INTO `item_latents` VALUES (16976,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (16976,287,6,6,1000);  -- DMG+6 while TP <100%
 
+-- Living Rod
+INSERT INTO `item_latents` VALUES (17070,370,1,52,6);    -- Regen Effect +1/tick in Water weather
+
 -- Mistilteinn
 INSERT INTO `item_latents` VALUES (17073,369,1,7,2);     -- Adds Refresh 1MP per tick
 INSERT INTO `item_latents` VALUES (17073,406,30,7,2);    -- Drains 30TP if TP >= 30

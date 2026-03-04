@@ -328,7 +328,7 @@ auto AddEminenceRecord(CCharEntity* PChar, uint16 recordID) -> bool
             PChar->m_eminenceCache.activemap.set(recordID);
 
             PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROE_START);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROEStart);
             charutils::SaveEminenceData(PChar);
             return true;
         }
@@ -534,7 +534,7 @@ void AddActiveTimedRecord(CCharEntity* PChar)
 
     if (timedRecordID)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, timedRecordID, 0, MsgBasic::ROE_TIMED);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, timedRecordID, 0, MsgBasic::ROETimed);
         SetEminenceRecordCompletion(PChar, timedRecordID, false);
     }
 }

@@ -186,6 +186,10 @@ auto PacketValidator::isAllianceLeader(const CCharEntity* PChar) -> PacketValida
     {
         result_.addError("Not in an alliance.");
     }
+    else if (PChar->PParty->m_PAlliance->getMainParty() == nullptr)
+    {
+        result_.addError("No alliance main party.");
+    }
     else if (PChar->PParty->m_PAlliance->getMainParty()->GetLeader() != PChar)
     {
         result_.addError("Not the alliance leader.");

@@ -23,6 +23,7 @@
 
 #include "base.h"
 
+enum class MsgBasic : uint16_t;
 class CBaseEntity;
 
 enum MESSAGE_COMBAT : uint16
@@ -45,10 +46,10 @@ public:
         uint16_t ActIndexTar; // PS2: ActIndexTar
         uint32_t Data;        // PS2: Data
         uint32_t Data2;       // PS2: Data2
-        uint16_t MessageNum;  // PS2: MessageNum
+        MsgBasic MessageNum;  // PS2: MessageNum
         uint8_t  Type;        // PS2: Type
         uint8_t  padding1B;   // PS2: dummy
     };
 
-    GP_SERV_COMMAND_BATTLE_MESSAGE2(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID);
+    GP_SERV_COMMAND_BATTLE_MESSAGE2(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param0, int32 param1, MsgBasic messageID);
 };

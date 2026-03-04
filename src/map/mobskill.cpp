@@ -40,7 +40,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_ValidTarget(0)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
-, m_Message(MsgBasic::NONE)
+, m_Message(MsgBasic::None)
 , m_TP(0)
 , m_HP(0)
 , m_HPP(0)
@@ -53,12 +53,12 @@ CMobSkill::CMobSkill(uint16 id)
 
 bool CMobSkill::hasMissMsg() const
 {
-    return m_Message == MsgBasic::ABILITY_MISSES ||
-           m_Message == MsgBasic::USES_SKILL_MISSES ||
-           m_Message == MsgBasic::USES_SKILL_NO_EFFECT ||
-           m_Message == MsgBasic::SHADOW_ABSORB ||
-           m_Message == MsgBasic::TARGET_ANTICIPATES ||
-           m_Message == MsgBasic::RANGED_ATTACK_MISS;
+    return m_Message == MsgBasic::AbilityMisses ||
+           m_Message == MsgBasic::UsesSkillMisses ||
+           m_Message == MsgBasic::UsesSkillNoEffect ||
+           m_Message == MsgBasic::ShadowAbsorb ||
+           m_Message == MsgBasic::TargetAnticipates ||
+           m_Message == MsgBasic::RangedAttackMiss;
 }
 
 bool CMobSkill::isAoE() const
@@ -303,13 +303,13 @@ auto CMobSkill::getKnockback() const -> Knockback
 
 bool CMobSkill::isDamageMsg() const
 {
-    return m_Message == MsgBasic::USES_ABILITY_TAKES_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_TAKES_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_HP_DRAINED ||
-           m_Message == MsgBasic::USES_ABILITY_RESISTS_DAMAGE ||
-           m_Message == MsgBasic::USES_SKILL_MP_DRAINED ||
-           m_Message == MsgBasic::USES_SKILL_TP_DRAINED ||
-           m_Message == MsgBasic::TARGET_TAKES_DAMAGE;
+    return m_Message == MsgBasic::UsesAbilityTakesDamage ||
+           m_Message == MsgBasic::UsesSkillTakesDamage ||
+           m_Message == MsgBasic::UsesSkillHPDrained ||
+           m_Message == MsgBasic::UsesAbilityResistsDamage ||
+           m_Message == MsgBasic::UsesSkillMPDrained ||
+           m_Message == MsgBasic::UsesSkillTPDrained ||
+           m_Message == MsgBasic::TargetTakesDamage;
 }
 
 void CMobSkill::setParam(int16 value)

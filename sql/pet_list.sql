@@ -79,26 +79,26 @@ INSERT INTO `pet_list` VALUES (45,'PanzerGalahad',4607,63,75,3600,0,3);
 INSERT INTO `pet_list` VALUES (46,'ChopsueyChucky',4626,63,85,3600,0,3);
 INSERT INTO `pet_list` VALUES (47,'AmigoSabotender',4618,75,85,1800,0,3);
 INSERT INTO `pet_list` VALUES (48,'Wyvern',5551,1,99,0,0,2);
-INSERT INTO `pet_list` VALUES (49,'Crafty Clyvonne',4608,76,90,7200,0,2);
-INSERT INTO `pet_list` VALUES (50,'Bloodclaw Shasr',4609,90,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (51,'Lucky Lulush',4612,76,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (52,'Fatso Fargann',4613,81,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (53,'Discreet Louise',4615,79,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (54,'Swift Sieghard',4617,86,94,7200,0,2);
-INSERT INTO `pet_list` VALUES (55,'Dipper Yuly',4627,76,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (56,'Flowerpot Merle',4628,76,99,10800,0,3);
-INSERT INTO `pet_list` VALUES (57,'Nursery Nazuna',4629,76,86,7200,0,2);
-INSERT INTO `pet_list` VALUES (58,'Mailbuster Ceta',4630,85,95,7200,0,2);
-INSERT INTO `pet_list` VALUES (59,'Audacious Anna',4631,85,95,7200,0,2);
-INSERT INTO `pet_list` VALUES (60,'Presto Julio',4632,83,93,7200,0,2);
-INSERT INTO `pet_list` VALUES (61,'Bugeyed Broncha',4633,90,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (62,'Gooey Gerard',4634,95,99,5400,0,2);
-INSERT INTO `pet_list` VALUES (63,'Gorefang Hobs',4635,93,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (64,'Faithful Falcor',4636,86,99,7200,0,2);
-INSERT INTO `pet_list` VALUES (65,'Crude Raphie',4637,96,99,5400,0,2);
-INSERT INTO `pet_list` VALUES (66,'Dapper Mac',4638,76,99,7200,0,3);
-INSERT INTO `pet_list` VALUES (67,'Slippery Silas',4639,23,99,1800,0,2);
-INSERT INTO `pet_list` VALUES (68,'Turbid Toloi',4640,75,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (49,'CraftyClyvonne',4608,76,90,7200,0,2);
+INSERT INTO `pet_list` VALUES (50,'BloodclawShasr',4609,90,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (51,'LuckyLulush',4612,76,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (52,'FatsoFargann',4613,81,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (53,'DiscreetLouise',4615,79,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (54,'SwiftSieghard',4617,86,94,7200,0,2);
+INSERT INTO `pet_list` VALUES (55,'DipperYuly',4627,76,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (56,'FlowerpotMerle',4628,76,99,10800,0,3);
+INSERT INTO `pet_list` VALUES (57,'NurseryNazuna',4629,76,86,7200,0,2);
+INSERT INTO `pet_list` VALUES (58,'MailbusterCeta',4630,85,95,7200,0,2);
+INSERT INTO `pet_list` VALUES (59,'AudaciousAnna',4631,85,95,7200,0,2);
+INSERT INTO `pet_list` VALUES (60,'PrestoJulio',4632,83,93,7200,0,2);
+INSERT INTO `pet_list` VALUES (61,'BugeyedBroncha',4633,90,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (62,'GooeyGerard',4634,95,99,5400,0,2);
+INSERT INTO `pet_list` VALUES (63,'GorefangHobs',4635,93,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (64,'FaithfulFalcor',4636,86,99,7200,0,2);
+INSERT INTO `pet_list` VALUES (65,'CrudeRaphie',4637,96,99,5400,0,2);
+INSERT INTO `pet_list` VALUES (66,'DapperMac',4638,76,99,7200,0,3);
+INSERT INTO `pet_list` VALUES (67,'SlipperySilas',4639,23,99,1800,0,2);
+INSERT INTO `pet_list` VALUES (68,'TurbidToloi',4640,75,99,7200,0,2);
 INSERT INTO `pet_list` VALUES (69,'HarlequinFrame',5124,1,99,0,0,3);
 INSERT INTO `pet_list` VALUES (70,'ValoredgeFrame',5125,1,99,0,0,2);
 INSERT INTO `pet_list` VALUES (71,'SharpshotFrame',5126,1,99,0,0,3);
@@ -108,57 +108,53 @@ INSERT INTO `pet_list` VALUES (72,'StormwakerFrame',5127,1,99,0,0,3);
 INSERT INTO `pet_list` VALUES (75,'Luopan',6040,1,99,0,0,0);
 INSERT INTO `pet_list` VALUES (76,'Siren',7047,1,99,0,0,2);
 INSERT INTO `pet_list` VALUES (77,'SweetCaroline',7500,99,119,7200,0,3);
-
--- TODO: Lv. 99 + Jug Pets not currently implemented.
--- Need to input values here as well as assign the petid to subskill of corresponding jug item in item_weapons.sql
-
--- INSERT INTO `pet_list` VALUES (78,'Amiable Roche',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (79,'Headbreaker Ken',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (80,'Anklebiter Jedd',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (81,'Cursed Annabelle',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (82,'Brainy Waluis',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (83,'Slime Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (84,'Sultry Patrice',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (85,'Generous Arthur',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (86,'Redolent Candi',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (87,'Alluring Honey',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (88,'Lynx Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (89,'Vivacious Gaston',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (90,'Caring Kiyomaro',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (91,'Vivacious Vickie',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (92,'Suspicious Alice',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (93,'Surging Storm',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (94,'Submerged Iyo',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (95,'Warlike Patrick',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (96,'Rhyming Shizuna',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (97,'Blackbeard Randy',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (98,'Threestar Lynn',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (99,'Hurler Percival',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (100,'Acuex Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (101,'Fluffy Bredo',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (102,'Weevil Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (103,'Stalwart Angelina',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (104,'Fleet Reinhard',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (105,'Sharpwit Hermes',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (106,'Porter Crab Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (107,'Jovial Edwin',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (108,'Attentive Ibuki',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (109,'Swooping Zhivago',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (110,'Sunburst Malfik',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (111,'Aged Angus',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (112,'Scissorleg Xerin',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (113,'Bouncing Bertha',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (114,'Spider Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (115,'Gussy Hachirobe',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (116,'Colibri Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (117,'Choral Leera',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (118,'Droopy Dortwin',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (119,'Pondering Peter',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (120,'Herald Henry',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (121,'Hippogryph Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (122,'Daring Roland',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (123,'Mosquito Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (124,'Left-Handed Yoko',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (125,'Brave Hero Glenn',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (126,'Yellow Beetle Familiar',poolID,minLevel,maxLevel,time,element,damageType);
--- INSERT INTO `pet_list` VALUES (127,'Energized Sefina',poolID,minLevel,maxLevel,time,element,damageType);
+INSERT INTO `pet_list` VALUES (78,'AmiableRoche',7501,99,110,7200,0,2);      -- nat max 110, merit max 110
+INSERT INTO `pet_list` VALUES (79,'HeadbreakerKen',7502,99,115,7200,0,2);    -- nat max 115, merit max 115
+INSERT INTO `pet_list` VALUES (80,'AnklebiterJedd',7503,99,116,7200,0,2);    -- nat max 116, merit max 116
+INSERT INTO `pet_list` VALUES (81,'CursedAnnabelle',7504,99,118,7200,0,2);   -- nat max 118, merit max 118
+INSERT INTO `pet_list` VALUES (82,'BrainyWaluis',7505,99,113,7200,0,2);      -- nat max 113, merit max 113
+INSERT INTO `pet_list` VALUES (83,'SlimeFamiliar',7506,99,119,7200,0,2);     -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (84,'SultryPatrice',7507,99,119,7200,0,2);     -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (85,'GenerousArthur',7508,99,119,7200,0,2);    -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (86,'RedolentCandi',7509,99,115,7200,0,2);     -- nat max 115, merit max 119
+INSERT INTO `pet_list` VALUES (87,'AlluringHoney',7510,99,115,7200,0,2);     -- nat max 115, merit max 119
+INSERT INTO `pet_list` VALUES (88,'LynxFamiliar',7511,99,119,7200,0,2);      -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (89,'VivaciousGaston',7512,99,119,7200,0,2);   -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (90,'CaringKiyomaro',7513,99,116,7200,0,3);    -- nat max 116, merit max 119
+INSERT INTO `pet_list` VALUES (91,'VivaciousVickie',7514,99,116,7200,0,3);   -- nat max 116, merit max 119
+INSERT INTO `pet_list` VALUES (92,'SuspiciousAlice',7515,99,113,7200,0,2);   -- nat max 113, merit max 113
+INSERT INTO `pet_list` VALUES (93,'SurgingStorm',7516,99,118,7200,0,3);      -- nat max 118, merit max 119
+INSERT INTO `pet_list` VALUES (94,'SubmergedIyo',7517,99,118,7200,0,3);      -- nat max 118, merit max 119
+INSERT INTO `pet_list` VALUES (95,'WarlikePatrick',7518,99,104,7200,0,2);    -- nat max 104, merit max 104
+INSERT INTO `pet_list` VALUES (96,'RhymingShizuna',7519,99,107,7200,0,2);    -- nat max 107, merit max 107
+INSERT INTO `pet_list` VALUES (97,'BlackbeardRandy',7520,99,117,7200,0,2);   -- nat max 117, merit max 117
+INSERT INTO `pet_list` VALUES (98,'ThreestarLynn',7521,99,119,7200,0,2);     -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (99,'HurlerPercival',7522,99,116,7200,0,2);    -- nat max 116, merit max 116
+INSERT INTO `pet_list` VALUES (100,'AcuexFamiliar',7523,99,119,7200,0,2);    -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (101,'FluffyBredo',7524,99,119,7200,0,2);      -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (102,'WeevilFamiliar',7525,99,119,7200,0,2);   -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (103,'StalwartAngelina',7526,99,119,7200,0,2); -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (104,'FleetReinhard',7527,99,117,7200,0,2);    -- nat max 117, merit max 117
+INSERT INTO `pet_list` VALUES (105,'SharpwitHermes',7528,99,119,7200,0,3);   -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (106,'P.CrabFamiliar',7529,99,119,7200,0,2);   -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (107,'JovialEdwin',7530,99,119,7200,0,2);      -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (108,'AttentiveIbuki',7531,99,109,7200,0,2);   -- nat max 109, merit max 119
+INSERT INTO `pet_list` VALUES (109,'SwoopingZhivago',7532,99,119,7200,0,2);  -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (110,'SunburstMalfik',7533,99,104,7200,0,2);   -- nat max 104, merit max 119
+INSERT INTO `pet_list` VALUES (111,'AgedAngus',7534,99,104,7200,0,2);        -- nat max 104, merit max 119
+INSERT INTO `pet_list` VALUES (112,'ScissorlegXerin',7535,99,105,7200,0,2);  -- nat max 105, merit max 119
+INSERT INTO `pet_list` VALUES (113,'BouncingBertha',7536,99,105,7200,0,2);   -- nat max 105, merit max 119
+INSERT INTO `pet_list` VALUES (114,'SpiderFamiliar',7537,99,118,7200,0,2);   -- nat max 118, merit max 119
+INSERT INTO `pet_list` VALUES (115,'GussyHachirobe',7538,99,118,7200,0,2);   -- nat max 118, merit max 119
+INSERT INTO `pet_list` VALUES (116,'ColibriFamiliar',7539,99,117,7200,0,2);  -- nat max 117, merit max 119
+INSERT INTO `pet_list` VALUES (117,'ChoralLeera',7540,99,119,7200,0,2);      -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (118,'DroopyDortwin',7541,99,103,7200,0,2);    -- nat max 103, merit max 119
+INSERT INTO `pet_list` VALUES (119,'PonderingPeter',7542,99,103,7200,0,2);   -- nat max 103, merit max 119
+INSERT INTO `pet_list` VALUES (120,'HeraldHenry',7543,99,113,7200,0,2);      -- nat max 113, merit max 113
+INSERT INTO `pet_list` VALUES (121,'Hip.Familiar',7544,99,119,7200,0,2);     -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (122,'DaringRoland',7545,99,119,7200,0,2);     -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (123,'MosquitoFamiliar',7546,99,119,7200,0,2); -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (124,'Left-HandedYoko',7547,99,119,7200,0,2);  -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (125,'BraveHeroGlenn',7548,99,119,7200,0,2);   -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (126,'Y.BeetleFamiliar',7549,99,119,7200,0,2); -- nat max 119, merit max 119
+INSERT INTO `pet_list` VALUES (127,'EnergizedSefina',7550,99,119,7200,0,2);  -- nat max 119, merit max 119

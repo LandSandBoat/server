@@ -594,7 +594,7 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
             }
 
             PChar->RealSkills.skill[SkillID] += SkillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, SkillAmount, MsgBasic::SKILL_GAIN);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, SkillAmount, MsgBasic::SkillGain);
 
             if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
             {
@@ -612,7 +612,7 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
                 }
 
                 charutils::SendExtendedJobPackets(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, MsgBasic::SKILL_LEVEL_UP);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, MsgBasic::SkillLevelUp);
             }
             charutils::SaveCharSkills(PChar, SkillID);
         }

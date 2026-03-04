@@ -33,10 +33,12 @@ zones[xi.zone.TALACCA_COVE] =
         YOU_CAN_NOW_BECOME_A_CORSAIR  = 7804, -- You can now become a corsair!
         NOBODY_COMES_TO_HELP          = 7855, -- Nobody comes to help. The Imp Bandsman looks dejected.
         HELP_HAS_ARRIVED              = 7856, -- Help has arrived!
+        YOUR_LEVEL_LIMIT_IS_NOW_75    = 7874, -- Your level limit is now 75.
     },
     mob =
     {
-        GESSHO = GetFirstID('Gessho'),
+        GESSHO  = GetFirstID('Gessho'),
+        QULTADA = GetFirstID('Qultada'),
     },
     npc =
     {

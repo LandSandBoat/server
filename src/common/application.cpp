@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -86,7 +86,7 @@ unsigned long prevQuickEditMode;
 
 Application::Application(const ApplicationConfig& appConfig, int argc, char** argv)
 : scheduler_()
-, signals_(scheduler_.ioContext())
+, signals_(scheduler_.mainContext())
 , serverName_(appConfig.serverName)
 , args_(std::make_unique<Arguments>(appConfig, argc, argv))
 {
@@ -272,11 +272,11 @@ void Application::run()
 
     try
     {
-        // NOTE: ioContext_.run() takes over and blocks this thread. Anything after this point will only fire
-        // if ioContext_ finishes!
+        // NOTE: scheduler_.run() takes over and blocks this thread. Anything after this point will only fire
+        // if scheduler_ finishes!
         //
-        // This busy loop looks nasty, however --
-        // https://think-async.com/Asio/asio-1.24.0/doc/asio/reference/io_service.html
+        // This busy loop looks nasty, however:
+        // https://think-async.com/asio/asio-1.24.0/doc/asio/reference/io_service.html
         //
         // If an exception is thrown from a handler, the exception is allowed to propagate through the throwing thread's invocation of
         // run(), run_one(), run_for(), run_until(), poll() or poll_one(). No other threads that are calling any of these functions are affected.

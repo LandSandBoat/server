@@ -41,5 +41,5 @@ void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(MapSession* PSession, CCharEntity*
 
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar, jpType);
-    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Index, newLevel, MsgBasic::JOB_POINTS_INCREASE);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Index, newLevel, MsgBasic::JobPointsIncrease);
 }

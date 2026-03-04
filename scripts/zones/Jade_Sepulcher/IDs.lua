@@ -29,10 +29,22 @@ zones[xi.zone.JADE_SEPULCHER] =
         THE_PARTY_WILL_BE_REMOVED     = 7685, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         IMPERIAL_ORDER_BREAKS         = 7693, -- The <item> breaks!
         ENTERING_THE_BATTLEFIELD_FOR  = 7706, -- Entering the battlefield for [Making a Mockery/Shadows of the Mind/The Beast Within/Moment of Truth/Puppet in Peril/Puppet in Peril/Tateeya's Worries/An Imperial Heist]!
+        RAUBAHN_COME_SURRENDER        = 7750, -- Come, surrender your strength to me and serve the Empire in death!
+        RAUBAHN_YOUR_SOUL             = 7751, -- Your soul will be devoured by the power you seek... Serve the Empire to the last by joining your strength to mine!
+        RAUBAHN_BEAST_OF_AMBITION     = 7752, -- The beast of ambition has slain you... Rest now in eternal slumber.
+        RAUBAHN_STRENGTH_FAILED_ME    = 7753, -- My strength ha failed me...
+        RAUBAHN_OUR_ARSENAL           = 7754, -- Blue magic is but one part of our arsenal. A fact you will soon learn.
+        RAUBAHN_SHOW_ME               = 7755, -- Show me! Show me the power that lurks within you!
+        RAUBAHN_BE_BURIED             = 7756, -- You will be buried in the shadow of forgotten history!
+        RAUBAHN_AZURE_SAVEGERY        = 7757, -- Now you will bear the full torrent of my azure savagery!
+        RAUBAHN_IT_IS_OVER            = 7758, -- It is over. You have no strength left to resist me. Surrender to your fate!
+        RAUBAHN_GREATER_POWER         = 7759, -- Hahaha... The greater the power you wield, the greater my strength will be when I devour your essence...!
+        YOUR_LEVEL_LIMIT_IS_NOW_75    = 7760, -- Your level limit is now 75.
     },
     mob =
     {
         LANCELORD_GAHEEL_JA = GetFirstID('Lancelord_Gaheel_Ja'),
+        RAUBAHN             = GetFirstID('Raubahn'),
     },
     npc =
     {

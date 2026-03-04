@@ -9,6 +9,17 @@ xi.mobSkill =
     SHARK_BITE                    =   24,
     EVISCERATION                  =   25,
 
+    FAST_BLADE_1                  =   32,
+
+    RED_LOTUS_BLADE_1             =   34,
+    FLAT_BLADE_1                  =   35,
+
+    SERAPH_BLADE_1                =   37,
+
+    SPIRITS_WITHIN_1              =   39,
+
+    SAVAGE_BLADE_1                =   42,
+
     HARD_SLASH_1                  =   48,
     POWER_SLASH_1                 =   49,
     FROSTBITE_1                   =   50,

@@ -461,10 +461,6 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
 
     if player:getCharVar('Dynamis_Entry') == 1 or player:getGMLevel() > 0 then
         if player:getCharVar('Dynamis_subjob') == 1 then
-            player:timer(5000, function(playerArg)
-                playerArg:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ)
-            end)
-
             player:addStatusEffect(xi.effect.SJ_RESTRICTION, { origin = player })
         end
 
