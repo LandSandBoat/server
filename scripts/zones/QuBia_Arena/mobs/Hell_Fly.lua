@@ -8,6 +8,8 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mobMod.CURE_POTENCY_RCVD, 100) -- Double healing recieved.
+
     mob:setMobMod(xi.mobMod.CHARMABLE, 1)
 end
 
