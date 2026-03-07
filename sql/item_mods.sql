@@ -84965,6 +84965,22 @@ INSERT INTO `item_mods` VALUES (27629,163,-2500); -- DMGMAGIC: -2500
 INSERT INTO `item_mods` VALUES (27629,161,-1000); -- DMGPHYS: -1000
 INSERT INTO `item_mods` VALUES (27629,164,-1000); -- DMGRANGE: -1000
 
+-- Dija Sword
+INSERT INTO `item_mods` VALUES (20723,23,23);       -- ATK: 23
+INSERT INTO `item_mods` VALUES (20723,25,5);        -- ACC: 5
+INSERT INTO `item_mods` VALUES (20723,82,203);      -- SWORD: 203
+INSERT INTO `item_mods` VALUES (20723,110,203);     -- PARRY: 203
+INSERT INTO `item_mods` VALUES (20723,30,167);      -- MACC: 167
+INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+
+-- Dija Sword +1
+INSERT INTO `item_mods` VALUES (20723,23,25);       -- ATK: 25
+INSERT INTO `item_mods` VALUES (20723,25,6);        -- ACC: 6
+INSERT INTO `item_mods` VALUES (20723,82,215);      -- SWORD: 215
+INSERT INTO `item_mods` VALUES (20723,110,215);     -- PARRY: 215
+INSERT INTO `item_mods` VALUES (20723,30,177);      -- MACC: 177
+INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
