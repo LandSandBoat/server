@@ -84974,12 +84974,12 @@ INSERT INTO `item_mods` VALUES (20723,30,167);      -- MACC: 167
 INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
 
 -- Dija Sword +1
-INSERT INTO `item_mods` VALUES (20723,23,25);       -- ATK: 25
-INSERT INTO `item_mods` VALUES (20723,25,6);        -- ACC: 6
-INSERT INTO `item_mods` VALUES (20723,82,215);      -- SWORD: 215
-INSERT INTO `item_mods` VALUES (20723,110,215);     -- PARRY: 215
-INSERT INTO `item_mods` VALUES (20723,30,177);      -- MACC: 177
-INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+INSERT INTO `item_mods` VALUES (20724,23,25);       -- ATK: 25
+INSERT INTO `item_mods` VALUES (20724,25,6);        -- ACC: 6
+INSERT INTO `item_mods` VALUES (20724,82,215);      -- SWORD: 215
+INSERT INTO `item_mods` VALUES (20724,110,215);     -- PARRY: 215
+INSERT INTO `item_mods` VALUES (20724,30,177);      -- MACC: 177
+INSERT INTO `item_mods` VALUES (20724,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
 
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
