@@ -42766,8 +42766,11 @@ INSERT INTO `item_mods` VALUES (20722,25,4); -- ACC: 4
 INSERT INTO `item_mods` VALUES (20722,29,1); -- MDEF: 1
 
 -- Eminent Scimitar
-INSERT INTO `item_mods` VALUES (20726,23,10); -- ATT: 10
-INSERT INTO `item_mods` VALUES (20726,25,15); -- ACC: 15
+INSERT INTO `item_mods` VALUES (20726,23,10);   -- ATT: 10
+INSERT INTO `item_mods` VALUES (20726,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (20726,82,215);  -- SWORD: 215
+INSERT INTO `item_mods` VALUES (20726,110,215); -- PARRY: 215
+INSERT INTO `item_mods` VALUES (20726,30,167);  -- MACC: 167
 
 -- Kheshig Blade
 INSERT INTO `item_mods` VALUES (20728,82,108);      -- SWORD: 108
@@ -84980,6 +84983,11 @@ INSERT INTO `item_mods` VALUES (20724,82,215);      -- SWORD: 215
 INSERT INTO `item_mods` VALUES (20724,110,215);     -- PARRY: 215
 INSERT INTO `item_mods` VALUES (20724,30,177);      -- MACC: 177
 INSERT INTO `item_mods` VALUES (20724,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+
+-- Voluspa Sword
+INSERT INTO `item_mods` VALUES (21622,82,215);  -- SWORD: 215
+INSERT INTO `item_mods` VALUES (21622,110,215); -- SWORD: 215
+INSERT INTO `item_mods` VALUES (21622,30,215);  -- MACC: 215
 
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
