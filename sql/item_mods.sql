@@ -42773,9 +42773,6 @@ INSERT INTO `item_mods` VALUES (20726,110,215); -- PARRY: 215
 INSERT INTO `item_mods` VALUES (20726,30,167);  -- MACC: 167
 
 -- Kheshig Blade
-INSERT INTO `item_mods` VALUES (20728,82,108);      -- SWORD: 108
-INSERT INTO `item_mods` VALUES (20728,110,108);	    -- PARRY: 108
-INSERT INTO `item_mods` VALUES (20728,30,84);       -- MACC: 84
 INSERT INTO `item_mods` VALUES (20728,161,-800);    -- DMGPHYS: -800
 INSERT INTO `item_mods` VALUES (20728,164,-800);    -- DMGRANGE: -800
 INSERT INTO `item_mods` VALUES (20728,967,8);       -- COVER_DURATION: 8
@@ -45186,6 +45183,7 @@ INSERT INTO `item_mods` VALUES (21620,30,35);   -- MACC: 35
 INSERT INTO `item_mods` VALUES (21620,311,217); -- MAGIC_DAMAGE: 217
 INSERT INTO `item_mods` VALUES (21620,82,242);  -- SWORD: 242
 INSERT INTO `item_mods` VALUES (21620,110,242); -- PARRY: 242
+INSERT INTO `item_mods` VALUES (21620,30,242);  -- MACC: 242
 
 -- Naegling
 INSERT INTO `item_mods` VALUES (21621,9,15);    -- DEX: 15
@@ -84973,23 +84971,13 @@ INSERT INTO `item_mods` VALUES (27629,164,-1000); -- DMGRANGE: -1000
 -- Dija Sword
 INSERT INTO `item_mods` VALUES (20723,23,23);       -- ATK: 23
 INSERT INTO `item_mods` VALUES (20723,25,5);        -- ACC: 5
-INSERT INTO `item_mods` VALUES (20723,82,203);      -- SWORD: 203
-INSERT INTO `item_mods` VALUES (20723,110,203);     -- PARRY: 203
-INSERT INTO `item_mods` VALUES (20723,30,167);      -- MACC: 167
 INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
 
 -- Dija Sword +1
 INSERT INTO `item_mods` VALUES (20724,23,25);       -- ATK: 25
 INSERT INTO `item_mods` VALUES (20724,25,6);        -- ACC: 6
-INSERT INTO `item_mods` VALUES (20724,82,215);      -- SWORD: 215
-INSERT INTO `item_mods` VALUES (20724,110,215);     -- PARRY: 215
-INSERT INTO `item_mods` VALUES (20724,30,177);      -- MACC: 177
 INSERT INTO `item_mods` VALUES (20724,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
 
--- Voluspa Sword
-INSERT INTO `item_mods` VALUES (21622,82,215);  -- SWORD: 215
-INSERT INTO `item_mods` VALUES (21622,110,215); -- PARRY: 215
-INSERT INTO `item_mods` VALUES (21622,30,215);  -- MACC: 215
 
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
