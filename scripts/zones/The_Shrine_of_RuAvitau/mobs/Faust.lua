@@ -76,7 +76,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- Typhoons twice above 50%, three times below 50%
     local typhoonCount = mob:getLocalVar('TyphoonCount')
     local maxTyphoons = mob:getHPP() < 50 and 2 or 1

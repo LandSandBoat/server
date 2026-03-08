@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.IMMORTAL_SHIELD then
         mob:setMagicCastingEnabled(true)
         mob:setDelay(10 * 1000)

@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- https://docs.google.com/spreadsheets/d/1TnrBzUAQ0hyuFVIjf5OLviIfhGw4vxN1x_4zv9gG4N4/edit?gid=368168805#gid=368168805&range=H32
     if mob:getPool() == xi.mobPool.PHOEDME then
         local numEffectsStolen = 0

@@ -41,7 +41,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpMoves[math.random(1, #tpMoves)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId     = skill:getID()
     local totd        = VanadielTOTD()
     local repeatCount = mob:getLocalVar('repeatSkillCount')

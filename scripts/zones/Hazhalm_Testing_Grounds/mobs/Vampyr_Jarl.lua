@@ -182,7 +182,7 @@ end
 entity.onMobFight = checkReappear
 entity.onMobRoam  = checkReappear
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- If Nocturnal Servitude and timer is up, spawn a random set of adds
     if
         skill:getID() == xi.mobSkill.NOCTURNAL_SERVITUDE and

@@ -11,27 +11,21 @@ entity.onMobSpawn = function(mob)
     -- His attack also becomes notably higher at this point.
     mob:setMod(xi.mod.REGAIN, 400)
 
-    mob:addListener('WEAPONSKILL_USE', 'TRIPLE_JUMP', function(mobArg, target, wsid, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'TRIPLE_JUMP', function(mobArg, target, skill, tp, action, damage)
         local mobHPP        = mobArg:getHPP()
         local longJump      = 1064
         local reuseMobskill = mobArg:getLocalVar('reuseMobskill')
 
-        if wsid == longJump then
+        if skill:getID() == longJump then
             mobArg:setLocalVar('reuseMobskill', 0)
         else
             if
-                mobHPP > 50 and
-                reuseMobskill < 1 or
-                mobHPP < 50 and
-                reuseMobskill < 5 or
-                mobHPP < 40 and
-                reuseMobskill < 6 or
-                mobHPP < 30 and
-                reuseMobskill < 7 or
-                mobHPP < 20 and
-                reuseMobskill < 8 or
-                mobHPP < 10 and
-                reuseMobskill < 9
+                mobHPP > 50 and reuseMobskill < 1 or
+                mobHPP < 50 and reuseMobskill < 5 or
+                mobHPP < 40 and reuseMobskill < 6 or
+                mobHPP < 30 and reuseMobskill < 7 or
+                mobHPP < 20 and reuseMobskill < 8 or
+                mobHPP < 10 and reuseMobskill < 9
             then
                 mobArg:setTP(3000)
             else

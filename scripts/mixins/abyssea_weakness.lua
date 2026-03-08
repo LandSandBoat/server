@@ -36,8 +36,9 @@ g_mixins.abyssea_weakness = function(mob)
             end
         end)
 
-        mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_PROC_CHECK', function(user, target, skillId, tp, action)
+        mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_PROC_CHECK', function(user, target, skill, tp, action)
             if target:canChangeState() then
+                local skillId = skill:getID()
                 if skillId == target:getLocalVar('[RedWeakness]') then
                     xi.abyssea.procMonster(target, user, xi.abyssea.triggerType.RED)
                 elseif skillId == target:getLocalVar('[BlueWeakness]') then

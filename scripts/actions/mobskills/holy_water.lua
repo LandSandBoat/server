@@ -15,7 +15,7 @@ local statii =
     xi.effect.DOOM,
 }
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     for _, effect in pairs(statii) do
         target:delStatusEffect(effect)
     end

@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: JPWiki states messaging priority is Amnesia > Silence > Bind.
     -- If this is true, we need a way to have a fall back to the next effect for skills that apply multiple effects.
 

@@ -23,7 +23,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local realDmg = 50 * target:getCharVar('EVERYONES_GRUDGE_KILLS')
 
     -- TODO: Verify if this is accurate

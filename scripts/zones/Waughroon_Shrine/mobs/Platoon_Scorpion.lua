@@ -93,7 +93,7 @@ entity.onMobFight = function(mob)
     battlefield:setLocalVar('mimicLeader', 0)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local battlefield = mob:getBattlefield()
 
     if not battlefield then

@@ -208,7 +208,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpTable[math.random(1, #tpTable)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill, action)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     local skillMessage =

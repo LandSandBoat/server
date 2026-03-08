@@ -100,7 +100,7 @@ local registerRandomChocobo = function(player, npc)
     player:registerChocobo(color, traits)
 
     -- Mount the registered chocobo
-    player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, xi.mount.CHOCOBO, 0, 1800, 0, 64, true)
+    player:addStatusEffect(xi.effect.MOUNTED, { power = xi.mount.CHOCOBO, duration = 1800, origin = player, subPower = 64, silent = true })
 
     --
     -- Debug output

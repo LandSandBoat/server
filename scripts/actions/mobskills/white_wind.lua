@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return mob:getLocalVar('UsedWhiteWind')
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
     return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP() / 7) * 2)
 end

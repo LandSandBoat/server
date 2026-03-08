@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: Capture possible scaling
     -- Jimmayus spreadsheet states 14-15HP/tick. Might scale with level.
     -- local power  = mob:getMainLvl() / 5 * 0.6 + 6

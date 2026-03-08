@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:hasStatusEffect(xi.effect.FOOD) then
         -- 99% sure retail doesn't do this. Uncomment if you want it to happen.
         -- local foodID = target:getStatusEffect(xi.effect.FOOD):getSourceTypeParam()

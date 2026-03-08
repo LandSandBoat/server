@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 -- TODO: what does no effect messaging look like?
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:getID() == mob:getID() then
         skill:setMsg(194) -- Monberaux uses {mix} -- Monberaux gains the effect of {ID}
     else

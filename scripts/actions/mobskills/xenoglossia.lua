@@ -12,10 +12,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: Remove this. This is horrible.
     mob:addMod(xi.mod.UFASTCAST, 150)
-    mob:addListener('MAGIC_START', 'XENOGLOSSIA_MAGIC_START', function(mobArg, targetArg, spell, action)
+    mob:addListener('MAGIC_START', 'XENOGLOSSIA_MAGIC_START', function(mobArg, targetArg, spell, actionArg)
         mobArg:delMod(xi.mod.UFASTCAST, 150)
         mobArg:removeListener('XENOGLOSSIA_MAGIC_START')
     end)

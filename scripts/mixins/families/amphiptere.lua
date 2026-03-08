@@ -24,9 +24,9 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         mob:setAnimationSub(1)
     end)
 
-    amphiptereMob:addListener('WEAPONSKILL_USE', 'REAVING_WIND_AURA', function(mobArg, target, actionId, tp, action)
+    amphiptereMob:addListener('WEAPONSKILL_USE', 'REAVING_WIND_AURA', function(mobArg, target, skill, tp, action, damage)
         -- Amphipteres gain a temporary aura following the use of reaving wind.
-        if actionId == xi.mobSkill.REAVING_WIND then
+        if skill:getID() == xi.mobSkill.REAVING_WIND then
             mobArg:setAnimationSub(2)
             -- Zirnitra spams a knockback while aura is active
             mobArg:setLocalVar('auraEndTime', GetSystemTime() + 20)

@@ -23,7 +23,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local numToDrain = math.random(2, 4)
     local shuffled = utils.shuffle(attributesDown)
     local drained = 0

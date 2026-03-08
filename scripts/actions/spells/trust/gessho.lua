@@ -18,8 +18,8 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ABQUHBAH] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
-    mob:addListener('WEAPONSKILL_USE', 'GESSHO_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == 3257 then -- Shibaraku
+    mob:addListener('WEAPONSKILL_USE', 'GESSHO_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 3257 then -- Shibaraku
             -- You have left me no choice. Prepare yourself!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end

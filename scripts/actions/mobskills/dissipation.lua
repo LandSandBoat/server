@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 10)
 
     local count = target:dispelAllStatusEffect()

@@ -33,7 +33,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return 316 -- Impale
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill, action)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if mob:getLocalVar('impaleCount') > 0 then
         mob:setLocalVar('impaleCount', mob:getLocalVar('impaleCount') - 1)
         mob:useMobAbility(skill:getID())

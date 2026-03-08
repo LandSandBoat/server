@@ -8,7 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- Saw no math at any online source describing mob version, only player version..
     -- Someone needs to go figure out what the retail math is.
 end

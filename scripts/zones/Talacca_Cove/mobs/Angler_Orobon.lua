@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.HYPNIC_LAMP then
         mob:useMobAbility(xi.mobSkill.DEATHGNASH)
     end

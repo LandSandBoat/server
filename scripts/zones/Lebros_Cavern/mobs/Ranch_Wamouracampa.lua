@@ -26,7 +26,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == 1970 then
         mob:setLocalVar('usedEclosion', 1)
     end

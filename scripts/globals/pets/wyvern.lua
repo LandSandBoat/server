@@ -128,7 +128,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     local wyvernType = wyvernTypes[master:getSubJob()]
 
     if wyvernType == wyvernCapabilities.DEFENSIVE then
-        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skillid)
+        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skill, tp, action, damage)
             if not doStatusBreath(player, player) then
                 local party = player:getParty()
                 for _, member in pairs(party) do
@@ -152,7 +152,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
         wyvernType == wyvernCapabilities.OFFENSIVE or
         wyvernType == wyvernCapabilities.MULTI
     then
-        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skillid)
+        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skill, tp, action, damage)
             xi.job_utils.dragoon.pickAndUseDamageBreath(player, target)
         end)
     end

@@ -29,6 +29,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         THE_PARTY_WILL_BE_REMOVED     = 7585, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         IMPERIAL_ORDER_BREAKS         = 7593, -- The <item> breaks!
         ENTERING_THE_BATTLEFIELD_FOR  = 7606, -- Entering the battlefield for [Tough Nut to Crack/Happy Caster/Omens/Achieving True Power/Shield of Diplomacy/An Imperial Heist]!
+        YOUR_LEVEL_LIMIT_IS_NOW_75    = 7646, -- Your level limit is now 75.
         KARABABA_ENOUGH               = 7651, -- That's quite enough...
         KARABABA_ROUGH                = 7652, -- Time for me to start playing rough!
         KARABARA_FIRE                 = 7653, -- Fuel for the fire! It doesn't pay to invoke my ire!
@@ -43,6 +44,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     {
         KHIMAIRA_13   = GetFirstID('Khimaira_13'),
         IMMORTAL_FLAN = GetFirstID('Immortal_Flan'),
+        SHAMARHAAN    = GetFirstID('Shamarhaan'),
     },
     npc =
     {

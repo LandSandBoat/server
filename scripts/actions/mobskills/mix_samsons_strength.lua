@@ -19,7 +19,7 @@ local statii =
     xi.effect.CHR_BOOST,
 }
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:getID() == mob:getID() then
         skill:setMsg(762) -- Monberaux uses Mix: {ID} -- All of Monberaux's status parameters are boosted.
     else

@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local typeEffect = nil
     -- SubPower 1 marks this slow as overwritable by haste despite high power
     local slowed     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 8500, 0, 90, 0, 1)

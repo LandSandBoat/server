@@ -963,9 +963,9 @@ xi.magian.onItemEquip = function(player, itemObj)
         end)
 
     elseif trialData.useWeaponskill then
-        player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, weaponskillId, tpSpent, action, damage)
+        player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, skill, tpSpent, action, damage)
             if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
-                local conditionResult = checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId, weaponskillDamage = damage })
+                local conditionResult = checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = skill:getID(), weaponskillDamage = damage })
 
                 if conditionResult then
                     progressPlayerTrial(playerObj, itemTrialId, conditionResult)

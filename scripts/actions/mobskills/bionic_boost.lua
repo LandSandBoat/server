@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local typeEffect = xi.effect.COUNTERSTANCE
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 15, 1, 60))

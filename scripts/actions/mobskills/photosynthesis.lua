@@ -23,7 +23,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = math.floor(mob:getMainLvl() / 10)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 0, 120))

@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- Not much info on how much haste this gives. Supposed to be "high". Went with Magic Haste Cap
     xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 4375, 0, 180)
     xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, 100, 0, 180)

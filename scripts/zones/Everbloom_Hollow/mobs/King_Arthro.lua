@@ -41,7 +41,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     return spellList[math.random(1, #spellList)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: Spawns a Knight Crab (up to 12) on Bubble Shower
 end
 

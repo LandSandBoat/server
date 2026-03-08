@@ -62,7 +62,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 -- If Mijin Gakure is used, the Winter tree (Gola Tlugvi) attacks.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
     local battlefield = mob:getBattlefield()
 

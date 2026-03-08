@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:addStatusEffect(xi.effect.MAGIC_SHIELD, { power = 1, origin = mob })
     skill:setFinalAnimationSub(2)
 

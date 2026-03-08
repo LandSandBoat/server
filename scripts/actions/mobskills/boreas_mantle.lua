@@ -10,14 +10,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local mobID = mob:getID()
-    local player = mob:getTarget()
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local mobId   = mob:getID()
+    local player  = mob:getTarget()
     local clonehp = 500
-    local hpp = mob:getHPP() / 100.0
-    local maxhp = math.ceil(clonehp / hpp)
-    for cloneID = mobID + 1, mobID + 4 do
-        local clone = SpawnMob(cloneID)
+    local hpp     = mob:getHPP() / 100
+    local maxhp   = math.ceil(clonehp / hpp)
+
+    for cloneId = mobId + 1, mobId + 4 do
+        local clone = SpawnMob(cloneId)
         if clone then
             clone:setMaxHP(maxhp)
             clone:setHP(clonehp)
@@ -30,13 +31,19 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     mob:timer(30000, function(mobArg)
-        for cloneID = mobID + 1, mobID + 4 do
-            local clone = GetMobByID(cloneID)
+        for cloneId = mobId + 1, mobId + 4 do
+            local clone = GetMobByID(cloneId)
             if clone then
-                local action = clone:getCurrentAction()
-                if action ~= xi.action.category.NONE and action ~= xi.action.category.DEATH then
-                    DespawnMob(cloneID)
+                local cloneAction = clone:getCurrentAction()
+                if cloneAction == xi.action.category.NONE then
+                    return
                 end
+
+                if cloneAction == xi.action.category.DEATH then
+                    return
+                end
+
+                DespawnMob(cloneId)
             end
         end
     end)

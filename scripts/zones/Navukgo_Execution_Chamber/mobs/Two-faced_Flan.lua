@@ -42,7 +42,7 @@ entity.onMobSpawn = function(mob)
     smooth(mob)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.XENOGLOSSIA then
         smooth(mob)
     end

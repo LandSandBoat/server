@@ -173,7 +173,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- Don't lose TP from charm 2hr
     if skill:getID() == 710 then
         mob:addTP(mob:getLocalVar('skill_tp'))

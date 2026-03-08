@@ -539,7 +539,7 @@ xi.abyssea.AddDeathListeners = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_DEATH_CHECK', function(user, target, skillId, tp, action)
+    mob:addListener('WEAPONSKILL_TAKE', 'ABYSSEA_WS_DEATH_CHECK', function(user, target, skill, tp, action)
         -- TODO: Make this human-readable, and break out from the listener
         local magicalWS =
         {
@@ -555,7 +555,7 @@ xi.abyssea.AddDeathListeners = function(mob)
             target:getDeathType() == xi.abyssea.deathType.NONE
         then
             for i = 1, #magicalWS do
-                if skillId == magicalWS[i] then
+                if skill:getID() == magicalWS[i] then
                     wsType = xi.abyssea.deathType.WS_MAGICAL
                     break
                 end

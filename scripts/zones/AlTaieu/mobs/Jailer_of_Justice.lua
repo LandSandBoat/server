@@ -67,7 +67,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- Manually apply Familiar to all pets except first one
     if skill:getID() == xi.mobSkill.FAMILIAR_1 then
         for _, petId in ipairs(pets) do

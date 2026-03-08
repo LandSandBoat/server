@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:timer(4000, function(mobArg)
         mobArg:setStatus(xi.status.INVISIBLE)
         local mobID = mobArg:getID()

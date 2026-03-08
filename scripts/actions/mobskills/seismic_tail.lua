@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local numhits = 3
     local ftp    = 2
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, 1, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)

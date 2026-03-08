@@ -43,7 +43,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local chamberData = xi.einherjar.getChamber(mob:getLocalVar('[ein]chamber'))
 
     local freeIds = utils.filterArray(DJIGGAS, function(_, mobId)

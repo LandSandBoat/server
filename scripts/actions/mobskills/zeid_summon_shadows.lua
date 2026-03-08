@@ -8,7 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local zeidId = mob:getID()
     local shadowOne = GetMobByID(zeidId + 1)
     local shadowTwo = GetMobByID(zeidId + 2)

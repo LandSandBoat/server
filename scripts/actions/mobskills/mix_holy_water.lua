@@ -15,7 +15,7 @@ local statii =
     xi.effect.BANE,
 }
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 33 + target:getMod(xi.mod.ENHANCES_HOLYWATER)
     local lastEffect = 0
 

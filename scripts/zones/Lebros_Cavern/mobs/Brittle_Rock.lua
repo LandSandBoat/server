@@ -8,6 +8,14 @@ local ID = zones[xi.zone.LEBROS_CAVERN]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addListener('WEAPONSKILL_TAKE', 'BRITTLE_ROCK_WEAPONSKILL_TAKE', function(user, target, skill, tp, action)
+        if skill:getID() == 1838 then
+            target:setHP(0)
+        end
+    end)
+end
+
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
     mob:setMobMod(xi.mobMod.NO_REST, 0)
@@ -21,31 +29,25 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.CURSE_MEVA, 9999)
     mob:setMod(xi.mod.EVA, 0)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-    mob:addListener('WEAPONSKILL_TAKE', 'BRITTLE_ROCK_WEAPONSKILL_TAKE', function(user, target, skillId, tp, action)
-        if skillId == 1838 then
-            target:setHP(0)
-        end
-    end)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar('dead') == 0 then
-        mob:setLocalVar('dead', 1)
-        local mobID    = mob:getID()
+    if optParams.isKiller or optParams.noKiller then
         local instance = mob:getInstance()
         if not instance then
             return
         end
 
-        if mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK1 then
+        local mobId = mob:getID()
+        if mobId == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK1 then
             GetNPCByID(ID.npc._1rx, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK2 then
+        elseif mobId == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK2 then
             GetNPCByID(ID.npc._1ry, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK3 then
+        elseif mobId == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK3 then
             GetNPCByID(ID.npc._1rz, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK4 then
+        elseif mobId == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK4 then
             GetNPCByID(ID.npc._jr0, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK5 then
+        elseif mobId == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK5 then
             GetNPCByID(ID.npc._jr1, instance):setAnimation(xi.animation.OPEN_DOOR)
         end
 

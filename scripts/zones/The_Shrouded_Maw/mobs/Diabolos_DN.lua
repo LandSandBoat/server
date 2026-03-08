@@ -181,7 +181,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.NOCTOSHIELD_1
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     if

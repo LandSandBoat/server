@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return target:countEffectWithFlag(xi.effectFlag.DISPELABLE) > 0 and 0 or 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     -- TODO: This is a physical skill. Will fix in mobPhysicalMove() PR

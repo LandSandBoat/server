@@ -187,7 +187,7 @@ end
 -----------------------------------
 -- Skill messages.
 -----------------------------------
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
 
     if skillID == xi.mobSkill.BLOOD_WEAPON_1 then

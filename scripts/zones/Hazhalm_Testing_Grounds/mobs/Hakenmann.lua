@@ -40,7 +40,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return mob:getLocalVar('tpMove')
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: If one move is stunned, the sequence is stopped
     local tpMoveCount = mob:getLocalVar('tpMoveCount')
     if tpMoveCount - 1 > 0 then

@@ -107,7 +107,7 @@ m:addOverride('xi.job_utils.ninja.useSange', function(player, target, ability, a
     ability:setRecast(math.max(0, ability:getRecast() - meritReduction))
 
     -- Apply Sange effect (shadows are consumed when the ranged attack fires)
-    player:addStatusEffect(xi.effect.SANGE, 0, 0, 60)
+    player:addStatusEffect(xi.effect.SANGE, { duration = 60, origin = player })
 
     return xi.effect.SANGE
 end)

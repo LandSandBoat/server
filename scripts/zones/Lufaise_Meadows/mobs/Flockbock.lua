@@ -18,11 +18,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    local petribreath = 269
-
     -- Petribreath resets hate on use
-    mob:addListener('WEAPONSKILL_USE', 'PETRIBREATH_HATE_RESET', function(mobArg, target, wsid, tp, action)
-        if wsid == petribreath then
+    mob:addListener('WEAPONSKILL_USE', 'PETRIBREATH_HATE_RESET', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 269 then
             mob:resetEnmity(target)
         end
     end)

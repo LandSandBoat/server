@@ -110,7 +110,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpList[math.random(#tpList)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return

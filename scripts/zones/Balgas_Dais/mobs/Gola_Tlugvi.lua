@@ -52,7 +52,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 -- If Blood Weapon is used, the Spring tree (Gilagoge Tlugvi) attacks.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
     local battlefield = mob:getBattlefield()
 

@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power       = mob:getMaxHP()
     local skillTP     = utils.clamp(skill:getTP() - 1000, 0, 2000)
     local skillFactor = 172 / 1024

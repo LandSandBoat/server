@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_SHIELD, 1, 0, 10)
 
     skill:setMsg(xi.msg.basic.USES)

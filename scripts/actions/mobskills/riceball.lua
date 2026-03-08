@@ -8,7 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:addMod(xi.mod.ATT, 50)
     mob:addMod(xi.mod.DEF, 30)
     mob:addMod(xi.mod.DEX, 4)

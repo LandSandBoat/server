@@ -77,7 +77,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
     if skillId == xi.mobSkill.PLASMA_CHARGE then -- Set spell list for Burst2/Thundaga3 upon using Plasma Charge. Allow for 60 seconds.
         mob:setSpellList(140)

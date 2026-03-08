@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.msg.basic.NONE)
     target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.ESCAPE, duration = 3, origin = mob, icon = 0 })
 end

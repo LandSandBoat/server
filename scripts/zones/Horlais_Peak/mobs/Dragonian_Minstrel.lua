@@ -45,7 +45,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return skills[math.random(1, #skills)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
 
     if skillID == xi.mobSkill.SOUL_VOICE_1 then

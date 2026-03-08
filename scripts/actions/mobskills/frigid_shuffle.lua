@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return xi.apkallu.canUseAbility(mob, 30)
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if not target:isFacing(mob) then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return

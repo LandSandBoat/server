@@ -44,8 +44,8 @@ local gazeEffects =
 }
 
 g_mixins.families.peiste = function(peisteMob)
-    peisteMob:addListener('WEAPONSKILL_USE', 'PEISTE_MIXIN_WS_USE', function(mob, target, skillID)
-        local gazeAnimSub = gazeAnimationSubs[skillID]
+    peisteMob:addListener('WEAPONSKILL_USE', 'PEISTE_MIXIN_WS_USE', function(mob, target, skill, tp, action, damage)
+        local gazeAnimSub = gazeAnimationSubs[skill:getID()]
         if gazeAnimSub and not mob:getStatusEffect(xi.effect.BLINDNESS) then
             -- could be moved to mobskill luas with skill:setFinalAnimationSub(), but leaving here due to reliance on the mapping table
             -- Sets glowy eyes, which triggers the combat tick aura gaze

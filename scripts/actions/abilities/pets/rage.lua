@@ -13,7 +13,7 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
     -- TODO: Either the mobskill below is wrong or the Ready move is customized.
     -- Should grant a stackable BERSERK effect of 50%/-50% for 4 to 9 minutes depending on TP.
-    local result = xi.actions.mobskills[skillName].onMobWeaponSkill(target, pet, petskill)
+    local result = xi.actions.mobskills[skillName].onMobWeaponSkill(pet, target, petskill, action)
 
     return result
 end

@@ -47,7 +47,7 @@ entity.onMobFight = function(mob, target)
 end
 
 -- Note: This mobskills aren't in any skill list, and shouldn't be. Their use is 100% scripted.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     -- First phase end.

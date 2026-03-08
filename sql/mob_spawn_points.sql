@@ -13016,9 +13016,9 @@ INSERT INTO `mob_spawn_points` VALUES (17010715,0,'Angler_Orobon','Angler Orobon
 INSERT INTO `mob_spawn_points` VALUES (17010717,0,'Angler_Orobon','Angler Orobon',8,80,80,220,-40.5,185,65);
 
 -- Quest: Puppetmaster Blues
-INSERT INTO `mob_spawn_points` VALUES (17010719,0,'Valkeng','Valkeng',16,60,60,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17010720,0,'Valkeng','Valkeng',9,60,60,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17010721,0,'Valkeng','Valkeng',9,60,60,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17010719,0,'Valkeng','Valkeng',16,66,66,-180,39.5,185,65);
+INSERT INTO `mob_spawn_points` VALUES (17010720,0,'Valkeng','Valkeng',9,66,66,20,-0.5,185,65);
+INSERT INTO `mob_spawn_points` VALUES (17010721,0,'Valkeng','Valkeng',9,66,66,220,-40.5,185,65);
 
 -- Quest: Breaking the Bonds of Fate
 INSERT INTO `mob_spawn_points` VALUES (17010722,0,'Qultada','Qultada',10,70,70,-180,39.5,185,65);
@@ -14384,12 +14384,12 @@ INSERT INTO `mob_spawn_points` VALUES (17039392,0,'Immortal_Flan','Immortal Flan
 INSERT INTO `mob_spawn_points` VALUES (17039393,0,'Immortal_Flan','Immortal Flan',4,53,53,378.269,83.596,-434.301,128);
 
 -- Quest: Achieving True Power
-INSERT INTO `mob_spawn_points` VALUES (17039394,0,'Shamarhaan','Shamarhaan',5,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17039395,0,'Valkeng','Valkeng',6,60,60,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17039396,0,'Shamarhaan','Shamarhaan',5,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17039397,0,'Valkeng','Valkeng',6,60,60,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17039398,0,'Shamarhaan','Shamarhaan',5,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17039399,0,'Valkeng','Valkeng',6,60,60,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17039394,0,'Shamarhaan','Shamarhaan',5,70,70,382.000,-116.000,381.500,128);
+INSERT INTO `mob_spawn_points` VALUES (17039395,0,'Valkeng','Valkeng',6,67,67,382.000,-116.000,378.500,128);
+INSERT INTO `mob_spawn_points` VALUES (17039396,0,'Shamarhaan','Shamarhaan',5,70,70,-22.000,-16.000,-21.125,128);
+INSERT INTO `mob_spawn_points` VALUES (17039397,0,'Valkeng','Valkeng',6,67,67,-22.000,-16.000,-18.125,128);
+INSERT INTO `mob_spawn_points` VALUES (17039398,0,'Shamarhaan','Shamarhaan',5,70,70,382.000,84.000,-421.125,128);
+INSERT INTO `mob_spawn_points` VALUES (17039399,0,'Valkeng','Valkeng',6,67,67,382.000,84.000,-418.125,128);
 
 -- ToAU 22: Shield of Diplomacy
 INSERT INTO `mob_spawn_points` VALUES (17039400,0,'Khimaira_13','Khimaira 13',7,70,70,383.144,-116.500,381.355,128);

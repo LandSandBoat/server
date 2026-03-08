@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:delStatusEffectsByFlag(xi.effectFlag.WALTZABLE, false)
     mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE, false)
     skill:setMsg(xi.msg.basic.SELF_HEAL_NOHP)

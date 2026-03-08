@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- list of effects to give in AoE
     local effects = { xi.effect.POISON, xi.effect.PARALYSIS, xi.effect.BLINDNESS, xi.effect.SILENCE,
         xi.effect.WEIGHT, xi.effect.SLOW, xi.effect.ADDLE, xi.effect.DIA, xi.effect.BIO, xi.effect.BURN,

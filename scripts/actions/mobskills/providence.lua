@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- Ensure Poroggo can't use Providence twice in between casts.
     mob:setLocalVar('providence', 1)
 
@@ -27,10 +27,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.USES)
 
     -- Listener will reset Poroggo to regular state on first cast.
-    mob:addListener('MAGIC_START', 'PROVIDENCE_MAGIC_START', function(mobArg, targetArg, spell, action)
+    mob:addListener('MAGIC_START', 'PROVIDENCE_MAGIC_START', function(mobArg, targetArg, spell, actionArg)
         -- Reset Poroggo to former spell list or default to generic BLM list
         local postProvidenceSpellListId = mobArg:getLocalVar('[providence]spellListId') or 2
-        local postProvidenceMagicCool = mobArg:getLocalVar('[providence]magicCool') or 35
+        local postProvidenceMagicCool   = mobArg:getLocalVar('[providence]magicCool') or 35
 
         mobArg:setMobMod(xi.mobMod.MAGIC_COOL, postProvidenceMagicCool)
         mobArg:setSpellList(postProvidenceSpellListId)

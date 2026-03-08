@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addListener('WEAPONSKILL_USE', 'ALL_MOBSKILL_CHECK', function(mobArg, target, skillID, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'ALL_MOBSKILL_CHECK', function(mobArg, target, skill, tp, action, damage)
         local effectsRemoved = removeSpecificDebuffs(mob)
         if effectsRemoved > 0 then
             for _, hateEntity in ipairs(mob:getEnmityList()) do

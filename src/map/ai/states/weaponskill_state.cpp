@@ -157,8 +157,8 @@ bool CWeaponSkillState::Update(timer::time_point tick)
                 uint32 weaponskillVar    = PTarget->GetLocalVar("weaponskillHit");
                 uint32 weaponskillDamage = weaponskillVar & 0xFFFFFF;
 
-                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", m_PEntity, PTarget, m_PSkill->getID(), m_spent, &action, weaponskillDamage);
-                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", m_PEntity, PTarget, m_PSkill->getID(), m_spent, &action);
+                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", m_PEntity, PTarget, m_PSkill.get(), m_spent, &action, weaponskillDamage);
+                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", m_PEntity, PTarget, m_PSkill.get(), m_spent, &action);
 
                 if (m_PEntity->objtype == TYPE_PC)
                 {

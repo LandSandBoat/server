@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == 624 then -- blue: High ATK, double and triple attack. High magic immunity
         mob:setMod(xi.mod.DOUBLE_ATTACK, 35)
         mob:setMod(xi.mod.TRIPLE_ATTACK, 35)

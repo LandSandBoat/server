@@ -42,7 +42,17 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REGAIN, 100)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('engaged', 0)
+end
+
 entity.onMobEngage = function(mob, target)
+    if mob:getLocalVar('engaged') ~= 0 then
+        return
+    end
+
+    mob:setLocalVar('engaged', 1)
+
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return

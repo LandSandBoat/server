@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local typeEffect = xi.effect.NONE
     local stun       = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 15)
     local poison     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 20, 0, 120)

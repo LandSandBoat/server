@@ -36,7 +36,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 -- Alternates between Giga Scream and Dread Dive
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     if skillId == xi.mobSkill.GIGA_SCREAM_1 then

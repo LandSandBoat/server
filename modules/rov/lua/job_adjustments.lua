@@ -29,7 +29,7 @@ end)
 -- Focus: Revert duration from 30 to 120 seconds
 m:addOverride('xi.job_utils.monk.useFocus', function(player, target, ability)
     local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
-    player:addStatusEffect(xi.effect.FOCUS, focusMod, 0, 120)
+    player:addStatusEffect(xi.effect.FOCUS, { power = focusMod, duration = 120, origin = player })
 
     return xi.effect.FOCUS
 end)
@@ -37,7 +37,7 @@ end)
 -- Dodge: Revert duration from 30 to 120 seconds
 m:addOverride('xi.job_utils.monk.useDodge', function(player, target, ability)
     local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
-    player:addStatusEffect(xi.effect.DODGE, dodgeMod, 0, 120)
+    player:addStatusEffect(xi.effect.DODGE, { power = dodgeMod, duration = 120, origin = player })
 
     return xi.effect.DODGE
 end)
@@ -74,7 +74,7 @@ m:addOverride('xi.job_utils.monk.useChakra', function(player, target, ability)
             player:delStatusEffect(xi.effect.REGEN)
         end
 
-        player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
+        player:addStatusEffect(xi.effect.REGEN, { power = 10, duration = merits, origin = player, tier = 1 })
     end
 
     return recoveryAmount
@@ -93,7 +93,7 @@ end)
 --     local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
 
 --     -- Duration changed from 60 seconds to 300 seconds (5 minutes)
---     player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 300, 0, kickAttPercent)
+--     player:addStatusEffect(xi.effect.FOOTWORK, { power = kickDmg, duration = 300, origin = player, subPower = kickAttPercent })
 
 --     return xi.effect.FOOTWORK
 -- end)

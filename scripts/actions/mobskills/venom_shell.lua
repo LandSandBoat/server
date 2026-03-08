@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = math.floor(mob:getMainLvl() / 2) - 2
     power = math.max(power, 16) -- Floor of 16 damage per tick
 

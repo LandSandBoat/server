@@ -69,7 +69,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 end
 
 -- Follows up every weapon skill with Hoof Volley
-entity.onMobWeaponSkill = function(mob, target, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() ~= xi.mobSkill.HOOF_VOLLEY then
         mob:setLocalVar('hoofVolley', 1)
     end

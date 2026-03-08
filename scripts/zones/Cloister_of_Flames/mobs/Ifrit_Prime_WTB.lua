@@ -53,7 +53,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- if not all four elementals are alive then respawn one after using level 75 BP
     if skill:getID() == 847 then
         local pos = target:getPos()

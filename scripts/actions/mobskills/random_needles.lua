@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         -- from http://ffxiclopedia.wikia.com/wiki/%3F%3F%3F_Needles
         -- "Seen totals ranging from 15, 000 to 55, 000 needles."
     if mob:getID() == zones[xi.zone.ABYSSEA_ALTEPA].mob.CUIJATENDER then

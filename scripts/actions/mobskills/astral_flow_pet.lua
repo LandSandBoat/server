@@ -43,7 +43,7 @@ local petAstralFlowAbility =
     [xi.mobSkill.SEARING_LIGHT_1] = { 34, 379 }, -- Carbuncle (Searing Light)
 }
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local pet = mob:getPet()
     if not pet then
         return

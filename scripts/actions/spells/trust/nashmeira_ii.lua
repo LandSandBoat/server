@@ -37,8 +37,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF, { ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ERASE })
     mob:addGambit(ai.t.PARTY, { ai.c.STATUS_FLAG, xi.effectFlag.ERASABLE }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ERASE })
 
-    mob:addListener('WEAPONSKILL_USE', 'NASHMEIRA_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == 3243 then -- Imperial Authority
+    mob:addListener('WEAPONSKILL_USE', 'NASHMEIRA_II_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 3243 then -- Imperial Authority
             -- No! Stand back!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end

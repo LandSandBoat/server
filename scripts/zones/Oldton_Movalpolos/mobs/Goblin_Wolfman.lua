@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 75) -- Can cast Stun every minute
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.BLOOD_WEAPON_1 then
         mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
         mob:setMod(xi.mod.DELAYP, -25)

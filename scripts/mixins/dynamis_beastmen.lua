@@ -55,7 +55,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
         end
     end)
 
-    dynamisBeastmenMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, skillId, tp, action)
+    dynamisBeastmenMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, skill, tp, action)
         if
             procjobs[target:getMainJob()] == 'ws' and
             math.random(1, 100) <= 25 and

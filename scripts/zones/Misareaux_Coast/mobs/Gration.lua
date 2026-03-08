@@ -62,7 +62,7 @@ entity.onMobSkillReadyTime = function(mob, target, skill)
 end
 
 -- If Gration was spawned with a Picaroon's Shield, Power Attack repeats 2 additional times, otherwise only 1 additional time.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local allowedRepeats = 1
     if mob:getLocalVar('shieldType') == xi.item.PICAROONS_SHIELD then
         allowedRepeats = 2

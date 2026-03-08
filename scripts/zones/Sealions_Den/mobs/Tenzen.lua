@@ -194,7 +194,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return skill
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     -- Track last time Tenzen did a mobskill. Dont Meikyo Shisui immediately after.

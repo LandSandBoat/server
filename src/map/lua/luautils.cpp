@@ -3860,7 +3860,7 @@ uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 c
     return 0;
 }
 
-int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
+int32 OnMobWeaponSkill(CBaseEntity* PMob, CBaseEntity* PTarget, CMobSkill* PMobSkill, action_t* action)
 {
     TracyZoneScoped;
 
@@ -3872,7 +3872,7 @@ int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobS
         auto onMobWeaponSkill = lua["xi"]["zones"][zone]["mobs"][name]["onMobWeaponSkill"];
         if (onMobWeaponSkill.valid())
         {
-            auto result = onMobWeaponSkill(PTarget, PMob, PMobSkill, action);
+            auto result = onMobWeaponSkill(PMob, PTarget, PMobSkill, action);
             if (!result.valid())
             {
                 sol::error err = result;
@@ -3891,7 +3891,7 @@ int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobS
         return 0;
     }
 
-    auto result = onMobWeaponSkill(PTarget, PMob, PMobSkill, action);
+    auto result = onMobWeaponSkill(PMob, PTarget, PMobSkill, action);
     if (!result.valid())
     {
         sol::error err = result;

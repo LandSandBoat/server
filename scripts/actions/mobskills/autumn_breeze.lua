@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     --[[
     https://youtu.be/r7ogGoabgH0?t=1m58s
     https://youtu.be/a0Tqdl8_SY4?t=2m29s

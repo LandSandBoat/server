@@ -56,8 +56,8 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_USE', 'KARAHA-BARUHA_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == 3336 then -- Howling Moon
+    mob:addListener('WEAPONSKILL_USE', 'KARAHA-BARUHA_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 3336 then -- Howling Moon
         -- The light shall never fade!
             if math.random(1, 100) <= 25 then
                 xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)

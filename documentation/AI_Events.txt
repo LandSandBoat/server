@@ -50,8 +50,8 @@ ABILITY_STATE_EXIT - userEntity, skillObject
 
 WEAPONSKILL_STATE_ENTER - userEntity, skillId
 WEAPONSKILL_BEFORE_USE  - userEntity, skillId
-WEAPONSKILL_USE         - userEntity, targetEntity, skillId, tp, action
-WEAPONSKILL_TAKE        - userEntity, targetEntity, skillId, tp, action
+WEAPONSKILL_USE         - userEntity, targetEntity, skill, tp, action, damage
+WEAPONSKILL_TAKE        - userEntity, targetEntity, skill, tp, action
 WEAPONSKILL_STATE_EXIT  - userEntity, skillId
 
 MAGIC_START       - Entity, Target, Spell, action

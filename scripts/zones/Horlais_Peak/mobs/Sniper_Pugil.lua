@@ -15,7 +15,7 @@ end
 
 -- Mimics the "shared hate" behavior observed in captures. Archer Pugils assist the Sniper Pugil and seem to change targets after Sniper Pugil attacks.
 -- Archer Pugils are fairly easy to pull back off of the target after this happens, so I believe it's tied to a small amount of volatile enmity gain.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local sniperID = mob:getID()
     local archerOneID = sniperID + 1
     local archerTwoID = sniperID + 2

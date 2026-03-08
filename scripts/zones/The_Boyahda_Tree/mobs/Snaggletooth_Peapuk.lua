@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == 1724 then
         mob:setLocalVar('UsedWhiteWind', 1)
     end

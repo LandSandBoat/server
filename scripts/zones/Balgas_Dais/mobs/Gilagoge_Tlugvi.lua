@@ -58,7 +58,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 -- If Benediction is used, the Monk tree (Goga Tlugvi) attacks.
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
     local battlefield = mob:getBattlefield()
 

@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power    = math.floor(mob:getMainLvl() / 5 + 3) -- TODO: Capture power at different levels to verify.
     local duration = 180
 

@@ -17,8 +17,8 @@ entity.onMobSpawn = function(mob)
     mob:addMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobAbilityEnabled(false)
 
-    mob:addListener('WEAPONSKILL_USE', 'SHIKAREE_Z_WS', function(mobArg, targetArg, skillid, spentTP, action)
-        if skillid == xi.mobSkill.JUMP_1 then
+    mob:addListener('WEAPONSKILL_USE', 'SHIKAREE_Z_WS', function(mobArg, targetArg, skill, tp, action, damage)
+        if skill:getID() == xi.mobSkill.JUMP_1 then
             action:setCategory(xi.action.category.WEAPONSKILL_FINISH)
         end
     end)
@@ -84,7 +84,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpMoves[math.random(1, #tpMoves)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID     = skill:getID()
     local battlefield = mob:getBattlefield()
 

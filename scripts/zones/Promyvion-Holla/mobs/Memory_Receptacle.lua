@@ -25,7 +25,7 @@ entity.onMobFight = function(mob, target)
     xi.promyvion.receptacleOnMobFight(mob, target)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     xi.promyvion.receptacleOnMobWeaponSkill(mob)
 end
 

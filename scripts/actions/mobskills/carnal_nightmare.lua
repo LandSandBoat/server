@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local reset = 0
     if target:getTP() == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect

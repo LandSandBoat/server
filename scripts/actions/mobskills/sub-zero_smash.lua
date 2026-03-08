@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local numhits = 1  -- Hits once, despite the animation looking like it hits twice.
     local ftp    = 1
     local accmod = 1 -- fTP and fTP scaling unknown. TODO: capture ftp

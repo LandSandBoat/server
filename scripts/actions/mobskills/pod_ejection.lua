@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
             local gunpod = GetMobByID(mobArg:getID() + 1)

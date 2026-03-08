@@ -98,7 +98,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local stormwindCounter = mob:getLocalVar('stormwindCounter')
     if
         skill:getID() == 926 and

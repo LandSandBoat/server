@@ -28,8 +28,8 @@ xi.mix.tauri.canUseRay = function(mob)
 end
 
 g_mixins.families.tauri = function(tauriMob)
-    tauriMob:addListener('WEAPONSKILL_USE', 'TAURI_NM_WEAPONSKILL_USE', function(mob, target, skillid, tp, action)
-        if skillid == xi.mobSkill.MORTAL_RAY_1 then
+    tauriMob:addListener('WEAPONSKILL_USE', 'TAURI_NM_WEAPONSKILL_USE', function(mob, target, skill, tp, action, damage)
+        if skill:getID() == xi.mobSkill.MORTAL_RAY_1 then
             mob:setLocalVar('mortalRayUsed', 1)
         end
     end)

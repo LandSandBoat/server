@@ -17,7 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:eraseAllStatusEffect()
     local count = target:dispelAllStatusEffect()
     count = count + target:eraseAllStatusEffect()

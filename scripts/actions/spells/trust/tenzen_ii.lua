@@ -27,8 +27,8 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.PRISHE] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
-    mob:addListener('WEAPONSKILL_USE', 'TENZEN_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == 3542 then -- Oisoya
+    mob:addListener('WEAPONSKILL_USE', 'TENZEN_II_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 3542 then -- Oisoya
             -- Epehemeral, fleeting, fading. You are but a memory
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end

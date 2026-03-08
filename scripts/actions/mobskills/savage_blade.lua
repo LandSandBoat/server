@@ -17,7 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if mob:getPool() == xi.mobPool.QUBIA_ARENA_TRION then -- Trion@QuBia_Arena only
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.SAVAGE_LAND)
     end

@@ -170,7 +170,7 @@ end
 -----------------------------------
 -- Handle local variables upon weaponskill use.
 -----------------------------------
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillID = skill:getID()
     local doubleAbilityCount = mob:getLocalVar('doubleAbilityCount')
 

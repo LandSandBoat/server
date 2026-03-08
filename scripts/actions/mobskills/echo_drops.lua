@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 -- TODO: verify no effect messaging
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:hasStatusEffect(xi.effect.SILENCE) then
         target:delStatusEffect(xi.effect.SILENCE)
         return xi.effect.SILENCE

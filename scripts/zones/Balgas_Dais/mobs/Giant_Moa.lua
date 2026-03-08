@@ -45,7 +45,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 -- Follows up Contagion Transfer with Contamination to spread all negative ailments to nearby enemies
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.CONTAGION_TRANSFER then
         mob:useMobAbility(xi.mobSkill.CONTAMINATION)
     end

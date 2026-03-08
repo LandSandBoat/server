@@ -52,7 +52,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local gohSequence = mob:getLocalVar('gohSequence')
     if gohSequence ~= 0 then
         if gohSequence > 1 and skill:getID() == xi.mobSkill.LAVA_SPIT then

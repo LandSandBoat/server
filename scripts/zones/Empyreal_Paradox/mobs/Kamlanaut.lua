@@ -60,7 +60,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpList[math.random(1, #tpList)]
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
     local absorbId = skillToAbsorb[skillId]
 

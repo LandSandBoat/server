@@ -169,7 +169,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- only reset change vars if actually perform touchdown mobskill
     if skill:getID() == 1302 then
         setNextPhaseTriggers(mob, subsequentPhaseDuration)

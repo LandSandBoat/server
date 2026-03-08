@@ -17,7 +17,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, owner, action)
-    local result = xi.actions.mobskills[skillName].onMobWeaponSkill(target, pet, petskill)
+    local result = xi.actions.mobskills[skillName].onMobWeaponSkill(pet, target, petskill, action)
 
     return result
 end

@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:setLocalVar('nuclearWaste', 1)
     local resist = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, xi.effect.ELEMENTALRES_DOWN, 0)
     if resist >= 0.25 then

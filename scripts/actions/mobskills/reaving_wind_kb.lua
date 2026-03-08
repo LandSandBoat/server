@@ -7,7 +7,7 @@
 ---@type TMobSkill
 local mobskillObject = {}
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill, action)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.msg.basic.NONE)
 
     -- > 24% movement speed reduction in gear negates knockback

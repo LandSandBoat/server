@@ -24,8 +24,8 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ULMIA] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
-    mob:addListener('WEAPONSKILL_USE', 'MILDAURION_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
-        if wsid == xi.mobSkill.LIGHT_BLADE_3 then
+    mob:addListener('WEAPONSKILL_USE', 'MILDAURION_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == xi.mobSkill.LIGHT_BLADE_3 then
             --  For Vana'diel!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end

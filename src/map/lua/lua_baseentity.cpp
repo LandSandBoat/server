@@ -16776,14 +16776,19 @@ auto CLuaBaseEntity::getAutomatonName() -> std::string
 
 uint8 CLuaBaseEntity::getAutomatonFrame()
 {
-    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
-        return 0;
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        return static_cast<uint8>(PChar->getAutomatonFrame());
+    }
+    else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
+        return static_cast<uint8>(PAutomaton->getFrame());
     }
 
-    auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
-    return static_cast<uint8>(PAutomaton->getFrame());
+    ShowWarning("CLuaBaseEntity::getAutomatonFrame() - Entity is not a PC or an Automaton");
+    return 0;
 }
 
 /************************************************************************
@@ -16817,14 +16822,19 @@ void CLuaBaseEntity::setAutomatonFrame(uint8 frameItemID)
 
 uint8 CLuaBaseEntity::getAutomatonHead()
 {
-    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
-        return 0;
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        return static_cast<uint8>(PChar->getAutomatonHead());
+    }
+    else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
+        return static_cast<uint8>(PAutomaton->getHead());
     }
 
-    auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
-    return static_cast<uint8>(PAutomaton->getHead());
+    ShowWarning("CLuaBaseEntity::getAutomatonFrame() - Entity is not a PC or an Automaton");
+    return 0;
 }
 
 /************************************************************************

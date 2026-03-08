@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 60)
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 10, 3, xi.mobskills.calculateDuration(skill:getTP(), 15, 45)))

@@ -72,7 +72,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     getNewWeakness(mob)
 end
 

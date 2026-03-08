@@ -17,7 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local tpFactor = utils.clamp(3 * (skill:getTP() - 1000) / 1000, 0, 6)
     local power    = 5 + tpFactor
 

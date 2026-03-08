@@ -20,7 +20,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:eraseAllStatusEffect()
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, 40, 3, 30))

@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local zoneId = mob:getZoneID()
     local mobId = mob:getID()
     if zones[zoneId].pet and zones[zoneId].pet[mobId] then

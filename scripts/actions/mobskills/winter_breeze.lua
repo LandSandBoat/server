@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local DISPEL = target:dispelStatusEffect()
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 2)

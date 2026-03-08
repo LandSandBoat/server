@@ -96,17 +96,18 @@ g_mixins.families.maat = function(maatMob)
         mob:messageText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
     end)
 
-    maatMob:addListener('WEAPONSKILL_TAKE', 'MAAT_WEAPONSKILL_TAKE', function(user, target, skillId, tp, action)
+    maatMob:addListener('WEAPONSKILL_TAKE', 'MAAT_WEAPONSKILL_TAKE', function(user, target, skill, tp, action)
         target:messageText(target, zones[target:getZoneID()].text.THAT_LL_HURT_IN_THE_MORNING)
     end)
 
-    maatMob:addListener('WEAPONSKILL_USE', 'MAAT_WEAPONSKILL_USE', function(mob, target, wsid, tp, action)
-        local ID = zones[mob:getZoneID()]
-        if wsid == 1028 then -- Tackle
+    maatMob:addListener('WEAPONSKILL_USE', 'MAAT_WEAPONSKILL_USE', function(mob, target, skill, tp, action, damage)
+        local ID       = zones[mob:getZoneID()]
+        local actionId = skill:getID()
+        if actionId == 1028 then -- Tackle
             mob:messageText(mob, ID.text.TAKE_THAT_YOU_WHIPPERSNAPPER)
-        elseif wsid == 1033 then -- Dragon Kick
+        elseif actionId == 1033 then -- Dragon Kick
             mob:messageText(mob, ID.text.TEACH_YOU_TO_RESPECT_ELDERS)
-        elseif wsid == 1034 then -- Asuran Fists
+        elseif actionId == 1034 then -- Asuran Fists
             mob:messageText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
         end
     end)

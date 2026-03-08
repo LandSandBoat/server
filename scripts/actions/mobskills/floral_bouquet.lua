@@ -8,7 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:getAllegiance() == mob:getAllegiance() then
         if target:getEcosystem() == xi.ecosystem.VERMIN then
             local mobTarget = mob:getTarget()

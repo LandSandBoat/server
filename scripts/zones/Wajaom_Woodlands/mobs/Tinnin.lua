@@ -120,7 +120,7 @@ entity.onMobFight = function(mob, target)
     mob:useMobAbility(xi.mobSkill.BAROFIELD)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillId = skill:getID()
 
     -- Barofield -> Polar Blast -> Pyric Blast chain.

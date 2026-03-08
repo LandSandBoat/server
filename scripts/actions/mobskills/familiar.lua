@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     xi.pet.applyFamiliarBuffs(mob, mob:getPet())
 
     skill:setMsg(xi.msg.basic.FAMILIAR_MOB)

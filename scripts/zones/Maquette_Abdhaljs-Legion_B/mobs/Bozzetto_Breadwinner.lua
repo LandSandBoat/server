@@ -63,7 +63,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

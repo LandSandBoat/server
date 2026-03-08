@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     target:addHP(target:getMaxHP())
     target:addMP(target:getMaxMP())
     skill:setMsg(xi.msg.basic.RECOVERS_HP_AND_MP)

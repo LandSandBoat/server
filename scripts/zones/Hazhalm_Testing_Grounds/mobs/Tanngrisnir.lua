@@ -31,7 +31,7 @@ entity.onMobInitialize = function(mob)
     xi.einherjar.onBossInitialize(mob)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local requeueCount = mob:getLocalVar('requeue')
     if requeueCount ~= 0 then -- continue the current sequence
         mob:setLocalVar('requeue', requeueCount - 1)

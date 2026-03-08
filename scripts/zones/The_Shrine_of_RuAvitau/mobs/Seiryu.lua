@@ -33,7 +33,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.jsa.HUNDRED_FISTS then
         mob:setMagicCastingEnabled(false)
         mob:setMobAbilityEnabled(false)

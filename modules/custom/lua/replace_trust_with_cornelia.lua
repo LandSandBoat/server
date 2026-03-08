@@ -30,9 +30,9 @@ m:addOverride(string.format('xi.actions.spells.trust.%s.onSpellCast', trustToRep
     trust:renameEntity('Cornelia')
 
     local boostAmount = math.ceil((30 / 99) * caster:getMainLvl())
-    trust:addStatusEffectEx(xi.effect.GEO_HASTE, xi.effect.GEO_HASTE, 6, 3, 0, xi.effect.GEO_HASTE, boostAmount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
-    trust:addStatusEffectEx(xi.effect.GEO_ACCURACY_BOOST, xi.effect.GEO_ACCURACY_BOOST, 6, 3, 0, xi.effect.GEO_ACCURACY_BOOST, boostAmount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
-    trust:addStatusEffectEx(xi.effect.GEO_MAGIC_ACC_BOOST, xi.effect.GEO_MAGIC_ACC_BOOST, 6, 3, 0, xi.effect.GEO_MAGIC_ACC_BOOST, boostAmount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
+    trust:addStatusEffect(xi.effect.GEO_HASTE, { power = 6, tick = 3, origin = trust, subType = xi.effect.GEO_HASTE, subPower = boostAmount, tier = xi.auraTarget.ALLIES, flag = xi.effectFlag.AURA })
+    trust:addStatusEffect(xi.effect.GEO_ACCURACY_BOOST, { power = 6, tick = 3, origin = trust, subType = xi.effect.GEO_ACCURACY_BOOST, subPower = boostAmount, tier = xi.auraTarget.ALLIES, flag = xi.effectFlag.AURA })
+    trust:addStatusEffect(xi.effect.GEO_MAGIC_ACC_BOOST, { power = 6, tick = 3, origin = trust, subType = xi.effect.GEO_MAGIC_ACC_BOOST, subPower = boostAmount, tier = xi.auraTarget.ALLIES, flag = xi.effectFlag.AURA })
     -- TODO: Ranged accuracy boost
 
     trust:setAutoAttackEnabled(false)

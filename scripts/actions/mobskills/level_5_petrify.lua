@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:getMainLvl() % 5 == 0 then
         local duration = xi.mobskills.calculateDuration(mob:getTP(), 15, 60)
 

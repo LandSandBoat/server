@@ -44,7 +44,7 @@ local statii =
 }
 
 -- TODO: verify messaging
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local lastEffect = 0
     for _, effect in pairs(statii) do
         if target:delStatusEffect(effect) then

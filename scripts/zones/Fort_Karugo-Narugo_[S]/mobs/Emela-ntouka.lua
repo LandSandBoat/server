@@ -14,13 +14,13 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Mob uses blockhead exclusively, twice, back-to-back
-    mob:addListener('WEAPONSKILL_USE', 'DOUBLE_BLOCKHEAD', function(mobArg, target, wsid, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'DOUBLE_BLOCKHEAD', function(mobArg, target, skill, tp, action, damage)
         local reuseMobskill = mob:getLocalVar('reuseMobskill')
 
         if reuseMobskill == 0 then
             mob:setLocalVar('reuseMobskill', 1)
             mob:setTP(3000)
-            mob:useMobAbility(wsid)
+            mob:useMobAbility(skill:getID())
         else
             mob:setLocalVar('reuseMobskill', 0)
         end

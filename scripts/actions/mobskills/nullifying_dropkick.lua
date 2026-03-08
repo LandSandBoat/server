@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     target:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
     target:delStatusEffect(xi.effect.MAGIC_SHIELD)
 

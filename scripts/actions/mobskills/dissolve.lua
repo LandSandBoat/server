@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:isMob() then
         for _, targ in pairs(target:getEnmityList()) do
             mob:addEnmity(targ.entity, targ.ce, targ.ve)

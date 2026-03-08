@@ -9,7 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- This is a special case where the defense boost prevents damage
     -- while the attacker is in front of the defender at the given subpower angle
     local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 90)

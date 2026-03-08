@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if not target:isPC() then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return xi.effect.CHARM_I

@@ -82,7 +82,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return xi.mobSkill.ACTINIC_BURST
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     local currentForm = mob:getAnimationSub()
 
     if skill:getID() == formConfig[currentForm][1] then

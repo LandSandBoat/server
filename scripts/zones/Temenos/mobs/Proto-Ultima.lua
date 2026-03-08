@@ -132,7 +132,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
+entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- After using Nuclear Waste use a random elemental conal attack
     if skill:getID() == 1268 then
         mob:timer(4000, function(mobArg)

@@ -64,7 +64,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         end
     end)
 
-    dynamisDreamlandMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, skillId, tp, action)
+    dynamisDreamlandMob:addListener('WEAPONSKILL_TAKE', 'DYNAMIS_WS_PROC_CHECK', function(user, target, skill, tp, action)
         if math.random(1, 100) > 25 then
             return
         end
