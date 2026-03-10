@@ -63589,6 +63589,31 @@ INSERT INTO `item_mods` VALUES (26710,9,27);  -- DEX: 27
 INSERT INTO `item_mods` VALUES (26710,11,27); -- AGI: 27
 INSERT INTO `item_mods` VALUES (26710,68,70); -- EVA: 70
 
+-- Perle Salade +1
+INSERT INTO `item_mods` VALUES (26711,1,39);    -- DEF: 39
+INSERT INTO `item_mods` VALUES (26711,8,9);     -- STR: 9
+INSERT INTO `item_mods` VALUES (26711,10,9);    -- VIT: 9
+INSERT INTO `item_mods` VALUES (26711,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (26711,25,10);   -- ACC: 10
+INSERT INTO `item_mods` VALUES (26711,384,300); -- HASTE_GEAR: 300
+
+-- Aurore Beret +1
+INSERT INTO `item_mods` VALUES (26712,1,37);    -- DEF: 37
+INSERT INTO `item_mods` VALUES (26712,9,8);     -- DEX: 8
+INSERT INTO `item_mods` VALUES (26712,11,8);    -- AGI: 8
+INSERT INTO `item_mods` VALUES (26712,25,7);    -- ACC: 7
+INSERT INTO `item_mods` VALUES (26712,365,5);   -- SNAPSHOT: 5
+INSERT INTO `item_mods` VALUES (26712,384,400); -- HASTE_GEAR: 400
+
+-- Teal Chapeau +1
+INSERT INTO `item_mods` VALUES (26713,1,32);   -- DEF: 32
+INSERT INTO `item_mods` VALUES (26713,2,25);   -- HP: 25
+INSERT INTO `item_mods` VALUES (26713,5,25);   -- MP: 25
+INSERT INTO `item_mods` VALUES (26713,12,9);   -- INT: 9
+INSERT INTO `item_mods` VALUES (26713,13,9);   -- MND: 9
+INSERT INTO `item_mods` VALUES (26713,27,-4);  -- ENMITY: -4
+INSERT INTO `item_mods` VALUES (26713,30,5);   -- MACC: 5
+
 -- Adorned Helm
 INSERT INTO `item_mods` VALUES (26714,2,38);     -- HP: 38
 INSERT INTO `item_mods` VALUES (26714,8,23);     -- STR: 23
@@ -76586,6 +76611,36 @@ INSERT INTO `item_mods` VALUES (27850,384,400); -- HASTE_GEAR: 400
 INSERT INTO `item_mods` VALUES (27850,369,2);   -- REFRESH: 2
 INSERT INTO `item_mods` VALUES (27850,1010,15); -- VALIANCE_VALLATION_DURATION: 15
 
+-- Perle Hauberk +1
+INSERT INTO `item_mods` VALUES (27851,1,69);    -- DEF: 69
+INSERT INTO `item_mods` VALUES (27851,8,9);     -- STR: 9
+INSERT INTO `item_mods` VALUES (27851,9,9);     -- DEX: 9
+INSERT INTO `item_mods` VALUES (27851,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (27851,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (27851,165,3);   -- CRITHITRATE: 3
+INSERT INTO `item_mods` VALUES (27851,288,2);   -- DOUBLE_ATTACK: 2
+
+-- Aurore Doublet +1
+INSERT INTO `item_mods` VALUES (27852,1,62);   -- DEF: 62
+INSERT INTO `item_mods` VALUES (27852,8,9);    -- STR: 9
+INSERT INTO `item_mods` VALUES (27852,9,9);    -- DEX: 9
+INSERT INTO `item_mods` VALUES (27852,11,9);   -- AGI: 9
+INSERT INTO `item_mods` VALUES (27852,25,13);  -- ACC: 13
+INSERT INTO `item_mods` VALUES (27852,26,13);  -- RACC: 13
+INSERT INTO `item_mods` VALUES (27852,68,13);  -- EVA: 13
+INSERT INTO `item_mods` VALUES (27852,288,3);  -- DOUBLE_ATTACK: 3
+
+-- Teal Saio +1
+INSERT INTO `item_mods` VALUES (27853,1,53);  -- DEF: 53
+INSERT INTO `item_mods` VALUES (27853,2,40);  -- HP: 40
+INSERT INTO `item_mods` VALUES (27853,5,40);  -- MP: 40
+INSERT INTO `item_mods` VALUES (27853,12,13); -- INT: 13
+INSERT INTO `item_mods` VALUES (27853,13,13); -- MND: 13
+INSERT INTO `item_mods` VALUES (27853,14,13); -- CHR: 13
+INSERT INTO `item_mods` VALUES (27853,28,9);  -- MATT: 9
+INSERT INTO `item_mods` VALUES (27853,30,9);  -- MACC: 9
+INSERT INTO `item_mods` VALUES (27853,369,2); -- REFRESH: 2
+
 -- Mekosuchinae Harness
 INSERT INTO `item_mods` VALUES (27856,1,133);   -- DEF: 133
 INSERT INTO `item_mods` VALUES (27856,2,59);    -- HP: 59
@@ -78490,6 +78545,30 @@ INSERT INTO `item_mods` VALUES (27996,29,1);    -- MDEF: 1
 INSERT INTO `item_mods` VALUES (27996,31,26);   -- MEVA: 26
 INSERT INTO `item_mods` VALUES (27996,68,22);   -- EVA: 22
 INSERT INTO `item_mods` VALUES (27996,384,500); -- HASTE_GEAR: 500
+
+-- Perle Moufles +1
+INSERT INTO `item_mods` VALUES (27997,1,33);    -- DEF: 33
+INSERT INTO `item_mods` VALUES (27997,8,10);    -- STR: 10
+INSERT INTO `item_mods` VALUES (27997,9,5);     -- DEX: 5
+INSERT INTO `item_mods` VALUES (27997,23,13);   -- ATT: 13
+INSERT INTO `item_mods` VALUES (27997,384,200); -- HASTE_GEAR: 200
+
+-- Aurore Gloves +1
+INSERT INTO `item_mods` VALUES (27998,1,27);    -- DEF: 27
+INSERT INTO `item_mods` VALUES (27998,8,9);     -- STR: 9
+INSERT INTO `item_mods` VALUES (27998,11,9);    -- AGI: 9
+INSERT INTO `item_mods` VALUES (27998,23,6);    -- ATT: 6
+INSERT INTO `item_mods` VALUES (27998,25,6);    -- ACC: 6
+INSERT INTO `item_mods` VALUES (27998,384,300); -- HASTE_GEAR: 300
+
+-- Teal Cuffs +1
+INSERT INTO `item_mods` VALUES (27999,1,23);   -- DEF: 23
+INSERT INTO `item_mods` VALUES (27999,2,20);   -- HP: 20
+INSERT INTO `item_mods` VALUES (27999,5,20);   -- MP: 20
+INSERT INTO `item_mods` VALUES (27999,13,8);   -- MND: 8
+INSERT INTO `item_mods` VALUES (27999,14,8);   -- CHR: 8
+INSERT INTO `item_mods` VALUES (27999,27,-4);  -- ENMITY: -4
+INSERT INTO `item_mods` VALUES (27999,30,10);  -- MACC: 10
 
 -- Alrunas Gloves +1
 INSERT INTO `item_mods` VALUES (28005,1,88);    -- DEF: 88
