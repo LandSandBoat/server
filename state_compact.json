@@ -1,0 +1,274 @@
+{
+  "ワークフロー状態": {
+    "工程": "complete",
+    "状態": "completed",
+    "結果": "PASS",
+    "現在ステップ": "complete",
+    "次ステップ": "none",
+    "手動確認待ち": false,
+    "再実行可否": false,
+    "失敗分類": "none",
+    "最終判定理由": "テンプレート整備完了",
+    "戻し先": "",
+    "ブロッカー": []
+  },
+  "テンプレート情報": {
+    "テンプレート版": "2026-03-09",
+    "コピー後初期化要否": true
+  },
+  "実行管理": {
+    "プロジェクトID": "_templates",
+    "最新実行ID": "",
+    "試行回数": 0,
+    "最大試行回数": 3,
+    "最終更新者": "Codex"
+  },
+  "現在の担当エージェント": "Human",
+  "次のアクション": "各プロジェクトへコピーする際は、PROJECT.md の初期化ルールに従って state を初期化し、初回は --dry-run で確認する",
+  "成果物": {
+    "research": {
+      "パス": "docs/RESEARCH.yaml",
+      "存在": false,
+      "最終更新": ""
+    },
+    "design": {
+      "パス": "docs/DESIGN.md",
+      "存在": false,
+      "最終更新": ""
+    },
+    "patch": {
+      "パス": "docs/PATCH.yaml",
+      "存在": false,
+      "最終更新": ""
+    },
+    "verify": {
+      "パス": "docs/VERIFY.md",
+      "存在": false,
+      "最終更新": ""
+    }
+  },
+  "承認": {
+    "設計承認": false,
+    "実装承認": false,
+    "検証確認": false,
+    "本番反映承認": false
+  },
+  "automation": {
+    "enabled": true,
+    "dry_run": false,
+    "max_step_count": 10,
+    "adapters": {
+      "codex": {
+        "enabled": true,
+        "description": "Codex CLI に PATCH.md 作成を依頼する",
+        "command": [
+          "codex",
+          "exec",
+          "-C",
+          "{project_root}",
+          "{codex_prompt}"
+        ]
+      },
+      "claude": {
+        "enabled": true,
+        "description": "Claude CLI に検証ドキュメント作成を依頼する",
+        "command": [
+          "claude",
+          "-p",
+          "{claude_prompt}"
+        ]
+      }
+    }
+  },
+  "フローバック方針": {
+    "verify_fail_default": "Codex",
+    "design_issue": "Claude",
+    "implementation_issue": "Codex",
+    "environment_issue": "Human",
+    "unknown_issue": "Human"
+  },
+  "ルール": {
+    "入口ファイル": "PROJECT.md",
+    "調査書": "docs/RESEARCH.yaml",
+    "設計書": "docs/DESIGN.md",
+    "実装書": "docs/PATCH.yaml",
+    "実装検証書": "docs/VERIFY.md",
+    "秘密情報ファイル": "SECRETS_LOCAL.md",
+    "アクセス方針ファイル": "ACCESS_POLICY.md",
+    "実行前提": [
+      "AIはまず PROJECT.md を読む",
+      "次に RULES.md を読む",
+      "次に state_compact.json を読む",
+      "Gemini は RESEARCH.yaml を作成する",
+      "Claude は RESEARCH.yaml を読んで DESIGN.md を作成する",
+      "Codex は DESIGN.md を読んで PATCH.yaml を作成する",
+      "Claude Code は DESIGN.md と PATCH.yaml を読んで VERIFY.md を作成する",
+      "Claude Code は原則として実装修正を行わず、検証と修正提案に専念する",
+      "秘密情報の実値を AGENTS.md や docs/*.md に書かない",
+      "本番反映は Human 承認があるまで行わない"
+    ]
+  },
+  "未解決事項": [
+    "必要なら ACCESS_POLICY.md の機械検査を orchestrator.py に追加する"
+  ],
+  "メモ": [
+    "標準フローは RESEARCH.yaml（Gemini）→ DESIGN.md（Claude）→ PATCH.yaml（Codex）→ VERIFY.md（Claude Code）の順で運用する",
+    "設計完了後は Human が必要な承認項目を更新する",
+    "最初は dry_run=true でコマンド確認するのが安全"
+  ],
+  "履歴": [
+    {
+      "timestamp": "2026-03-07T12:41:40+09:00",
+      "event": "orchestrator_template_fix_completed",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "_templates/orchestrator.py"
+        ],
+        "修正内容": [
+          "雛形の docs/DESIGN.md, docs/PATCH.md, docs/VERIFY.md を未完成成果物として扱う判定を追加",
+          "VERIFY.md の PASS / FAIL 判定を見出し本文だけ見る方式に修正",
+          "dry-run で成果物未生成でも失敗せず、PATCH/VERIFY 両コマンドを確認できるように修正"
+        ],
+        "検証結果": [
+          "コピー直後の雛形ケースは DESIGN.md 未準備として停止",
+          "dry-run ケースは PATCH/VERIFY の両コマンドを表示して正常終了",
+          "スタブCLI ケースは PATCH/VERIFY 生成後に PASS で正常終了"
+        ],
+        "ファイル反映確認": {
+          "_templates/orchestrator.py": "更新済み"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-07T12:58:10+09:00",
+      "event": "workflow_contract_hardening_completed",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "_templates/orchestrator.py",
+          "_templates/state_compact.json",
+          "_templates/PROJECT.md",
+          "_templates/RULES.md",
+          "_templates/docs/DESIGN.md",
+          "_templates/docs/PATCH.md",
+          "_templates/docs/VERIFY.md"
+        ],
+        "修正内容": [
+          "state_compact.json に 現在ステップ / 次ステップ / 失敗分類 / 再実行可否 / 実行管理 を追加",
+          "DESIGN/PATCH/VERIFY テンプレートに管理情報セクションを追加",
+          "PROJECT.md にテンプレ複製直後の初期化ルールと dry-run 手順を追加",
+          "RULES.md に FAIL分類と再実行ルールを追加",
+          "orchestrator.py に run_id 管理、試行回数上限制御、current_status 自動更新、VERIFY 管理情報解析を追加"
+        ],
+        "検証結果": [
+          "雛形ケースは DESIGN 未準備として停止",
+          "dry-run ケースは PATCH/VERIFY の両コマンド確認後に正常終了",
+          "PASS ケースは VERIFY 管理情報を読み取り complete/PASS で終了",
+          "FAIL ケースは 失敗分類=implementation / 戻し先=Codex を state に反映",
+          "試行回数超過ケースは Human review へ停止"
+        ],
+        "ファイル反映確認": {
+          "_templates/orchestrator.py": "更新済み",
+          "_templates/state_compact.json": "更新済み",
+          "_templates/PROJECT.md": "更新済み",
+          "_templates/RULES.md": "更新済み",
+          "_templates/docs/DESIGN.md": "更新済み",
+          "_templates/docs/PATCH.md": "更新済み",
+          "_templates/docs/VERIFY.md": "更新済み"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-07T13:11:45+09:00",
+      "event": "create_project_script_completed",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "create_project.py"
+        ],
+        "修正内容": [
+          "_templates から新規プロジェクトを複製する create_project.py を追加",
+          "コピー時に logs / __pycache__ などの生成物を除外",
+          "コピー先の state_compact.json / current_status.md / work_journal.md / CHANGELOG_LOCAL.md を初期化"
+        ],
+        "検証結果": [
+          "一時ディレクトリに sample_project を生成できた",
+          "生成先の state_compact.json は design/pending で初期化された",
+          "生成先に logs は作成されず、current_status.md と work_journal.md も初期状態に書き換わった"
+        ],
+        "ファイル反映確認": {
+          "create_project.py": "新規作成済み"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-07T13:15:00+09:00",
+      "event": "create_project_usage_documented",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "_templates/PROJECT.md"
+        ],
+        "修正内容": [
+          "PROJECT.md に create_project.py の実行方法と生成後の更新手順を追記"
+        ],
+        "ファイル反映確認": {
+          "_templates/PROJECT.md": "更新済み"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-07T13:25:37+09:00",
+      "event": "create_project_reworked_for_manual_copy",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "create_project.py",
+          "_templates/PROJECT.md",
+          "_templates/current_status.md",
+          "_templates/CHANGELOG_LOCAL.md"
+        ],
+        "修正内容": [
+          "create_project.py のテンプレ複製機能を削除し、手動コピー済みプロジェクトの初期化専用に変更",
+          "PROJECT.md の手順を手動コピー後に create_project.py --project-root を実行する案内へ変更",
+          "current_status.md と CHANGELOG_LOCAL.md の説明を手動コピー前提へ更新"
+        ],
+        "検証結果": [
+          "手動コピー相当の一時ディレクトリに対して create_project.py --project-root を実行し、state/current_status/work_journal/changelog の初期化を確認"
+        ],
+        "ファイル反映確認": {
+          "create_project.py": "更新済み",
+          "_templates/PROJECT.md": "更新済み",
+          "_templates/current_status.md": "更新済み",
+          "_templates/CHANGELOG_LOCAL.md": "更新済み"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-07T13:28:00+09:00",
+      "event": "initialize_bat_added",
+      "detail": {
+        "プラン提示済み": true,
+        "ユーザー許可済み": true,
+        "変更ファイル": [
+          "_templates/initialize_project.bat",
+          "_templates/PROJECT.md"
+        ],
+        "修正内容": [
+          "コピー先でダブルクリック実行できる initialize_project.bat を追加",
+          "PROJECT.md に initialize_project.bat の利用案内を追記"
+        ],
+        "ファイル反映確認": {
+          "_templates/initialize_project.bat": "新規作成済み",
+          "_templates/PROJECT.md": "更新済み"
+        }
+      }
+    }
+  ]
+}

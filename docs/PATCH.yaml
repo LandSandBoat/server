@@ -1,0 +1,14 @@
+# Codex が作成。Claude Code が読む。AI間受け渡し専用（人間レビュー不要）。
+design_id: ""
+result: success  # success | partial | blocked
+reason: none  # none | spec_gap | env_blocker | approval_wait | other
+summary: ""
+changed_files:
+  - ""
+changes:
+  - ""
+steps:
+  - ""
+impact: ""
+unresolved: []
+verify_request: ""

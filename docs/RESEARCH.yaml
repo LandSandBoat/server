@@ -1,0 +1,11 @@
+# Gemini が作成。Claude が読む。AI間受け渡し専用（人間レビュー不要）。
+research_id: ""
+status: draft  # draft | reviewed | fixed
+purpose: ""
+facts:
+  - ""
+unresolved:
+  - ""
+design_handoff:
+  - ""
+refs: []
