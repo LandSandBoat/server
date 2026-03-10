@@ -32,6 +32,15 @@ CREATE TABLE `item_mods` (
 
 LOCK TABLES `item_mods` WRITE;
 /*!40000 ALTER TABLE `item_mods` DISABLE KEYS */;
+
+-- List of Mod IDs from base LSB Repo
+-- Figure out which modId to use for the piece of equipment stat / skill mods using these:
+    -- https://github.com/LandSandBoat/server/blob/88cb1abdd64fc9a38ccd688139fdcaef0048b00e/scripts/enum/mod.lua
+    -- https://github.com/LandSandBoat/server/blob/88cb1abdd64fc9a38ccd688139fdcaef0048b00e/documentation/mods_by_id.txt
+
+-- How to structure these inserts, from Darkstar wiki:
+    -- http://wiki.dspt.info/index.php/How_to_Add_Item_Mods
+
 -- Moogle Suit
 INSERT INTO `item_mods` VALUES (10250,1,1); -- DEF: 1
 
@@ -42757,11 +42766,13 @@ INSERT INTO `item_mods` VALUES (20722,25,4); -- ACC: 4
 INSERT INTO `item_mods` VALUES (20722,29,1); -- MDEF: 1
 
 -- Eminent Scimitar
-INSERT INTO `item_mods` VALUES (20726,23,10); -- ATT: 10
-INSERT INTO `item_mods` VALUES (20726,25,15); -- ACC: 15
+INSERT INTO `item_mods` VALUES (20726,23,10);   -- ATT: 10
+INSERT INTO `item_mods` VALUES (20726,25,15);   -- ACC: 15
 
 -- Kheshig Blade
-INSERT INTO `item_mods` VALUES (20728,967,8); -- COVER_DURATION: 8
+INSERT INTO `item_mods` VALUES (20728,161,-800);    -- DMGPHYS: -800
+INSERT INTO `item_mods` VALUES (20728,164,-800);    -- DMGRANGE: -800
+INSERT INTO `item_mods` VALUES (20728,967,8);       -- COVER_DURATION: 8
 
 -- Anahera Saber
 INSERT INTO `item_mods` VALUES (20733,8,10);   -- STR: 10
@@ -84766,7 +84777,14 @@ INSERT INTO `item_mods` VALUES (28664,161,-700); -- DMGPHYS: -700
 INSERT INTO `item_mods` VALUES (28664,164,-700); -- DMGRANGE: -700
 
 -- Killedar Shield +1
-INSERT INTO `item_mods` VALUES (28665,1,61);     -- DEF: 61
+	-- Unsure whether the DB is re-created from scratch each time or not, so we will do an "upsert"
+	-- If the row doesn't exist, the row will be inserted with the proper DEF value
+    -- else "update" the row to the proper value
+INSERT INTO `item_mods`
+(`itemId`, `modId`, `value`) 
+VALUES (28665,1,118)                             -- DEF: 118
+ON DUPLICATE KEY UPDATE 
+  `value` = VALUES(`value`);
 INSERT INTO `item_mods` VALUES (28665,2,85);     -- HP: 85
 INSERT INTO `item_mods` VALUES (28665,10,11);    -- VIT: 11
 INSERT INTO `item_mods` VALUES (28665,29,6);     -- MDEF: 6
@@ -84904,6 +84922,56 @@ INSERT INTO `item_mods` VALUES (23770, 165, 6);    -- CRITHITRATE: 6
 INSERT INTO `item_mods` VALUES (23770, 368, 2);    -- REGAIN: 2
 INSERT INTO `item_mods` VALUES (23770, 384, 300);  -- HASTE_GEAR: 3%
 INSERT INTO `item_mods` VALUES (23770, 1081, 7);   -- DAMAGE_LIMITP: 7
+
+-- Perle Salade +1
+INSERT INTO `item_mods` VALUES (26711,1,39);    -- DEF: 39
+INSERT INTO `item_mods` VALUES (26711,8,9);     -- STR: 9
+INSERT INTO `item_mods` VALUES (26711,10,9);    -- VIT: 9
+INSERT INTO `item_mods` VALUES (26711,23,15);	-- ATT: 15
+INSERT INTO `item_mods` VALUES (26711,25,10);  	-- ACC: 10
+INSERT INTO `item_mods` VALUES (26711,384,300); -- HASTE_GEAR: 300
+
+-- Perle Hauberk +1
+INSERT INTO `item_mods` VALUES (27851,1,69);  -- DEF: 69
+INSERT INTO `item_mods` VALUES (27851,8,9);   -- STR: 9
+INSERT INTO `item_mods` VALUES (27851,9,9);   -- DEX: 9
+INSERT INTO `item_mods` VALUES (27851,23,15); -- ATT: 15
+INSERT INTO `item_mods` VALUES (27851,25,15); -- ACC: 15
+INSERT INTO `item_mods` VALUES (27851,165,3); -- CRITHITRATE: 3
+INSERT INTO `item_mods` VALUES (27851,288,2); -- DOUBLE_ATTACK: 2
+
+-- Perle Moufles +1
+INSERT INTO `item_mods` VALUES (27997,1,33);    -- DEF: 33
+INSERT INTO `item_mods` VALUES (27997,8,10);    -- STR: 10
+INSERT INTO `item_mods` VALUES (27997,9,5);     -- DEX: 5
+INSERT INTO `item_mods` VALUES (27997,23,13);   -- ATT: 13
+INSERT INTO `item_mods` VALUES (27997,384,200); -- HASTE_GEAR: 200
+
+-- Weathering Shield +1 (Weather. Shield +1)
+INSERT INTO `item_mods` VALUES (27629,1,36);      -- DEF: 74
+INSERT INTO `item_mods` VALUES (27629,15,-10);    -- FIRE_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,16,-10);    -- ICE_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,17,-10);    -- WIND_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,18,-10);    -- EARTH_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,19,-10);    -- THUNDER_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,20,-10);    -- WATER_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,21,-10);    -- LIGHT_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,22,-10);    -- DARK_MEVA: -10
+INSERT INTO `item_mods` VALUES (27629,109,106);	  -- SHIELD: 106
+INSERT INTO `item_mods` VALUES (27629,163,-2500); -- DMGMAGIC: -2500
+INSERT INTO `item_mods` VALUES (27629,161,-1000); -- DMGPHYS: -1000
+INSERT INTO `item_mods` VALUES (27629,164,-1000); -- DMGRANGE: -1000
+
+-- Dija Sword
+INSERT INTO `item_mods` VALUES (20723,23,23);       -- ATK: 23
+INSERT INTO `item_mods` VALUES (20723,25,5);        -- ACC: 5
+INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+
+-- Dija Sword +1
+INSERT INTO `item_mods` VALUES (20724,23,25);       -- ATK: 25
+INSERT INTO `item_mods` VALUES (20724,25,6);        -- ACC: 6
+INSERT INTO `item_mods` VALUES (20724,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
+
 
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
