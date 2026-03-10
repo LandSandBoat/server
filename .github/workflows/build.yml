@@ -65,24 +65,7 @@ jobs:
             clang_format_version: 20
             tracy: false
             build_modules: false
-            save_cache: false
-            publish: true
-          # - build_type: Debug
-          #   os: ubuntu
-          #   compiler: gcc
-          #   compiler_version: 14
-          #   tracy: false
-          #   build_modules: false
-          #   save_cache: true
-          #   publish: false
-          - build_type: Release
-            os: alpine
-            compiler: clang
-            compiler_version: 20
-            clang_format_version: 20
-            tracy: false
-            build_modules: false
-            save_cache: false
+            save_cache: true
             publish: true
     uses: ./.github/workflows/docker_build.yml
     with:

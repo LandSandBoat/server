@@ -165,7 +165,7 @@ jobs:
           context: .
           file: ${{ format('./docker/{0}.Dockerfile', inputs.os) }}
           target: devtools
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           build-args: |
             LLVM_VERSION=${{ inputs.clang_format_version }}
           push: true
@@ -180,7 +180,7 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
           annotations: ${{ steps.docker-meta.outputs.annotations }}
-          platforms: linux/amd64${{ (inputs.publish && vars.PUBLISH_DOCKER != '') && ',linux/arm64,linux/arm/v7' || '' }}
+          platforms: linux/amd64${{ (inputs.publish && vars.PUBLISH_DOCKER != '') && ',linux/arm64' || '' }}
           build-args: |
             COMPILER=${{ inputs.compiler }}
             ${{ format('{0}={1}', startsWith(inputs.compiler, 'gcc') && 'GCC_VERSION' || 'LLVM_VERSION', inputs.compiler_version) }}

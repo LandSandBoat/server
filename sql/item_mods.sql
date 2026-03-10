@@ -84999,30 +84999,6 @@ INSERT INTO `item_mods` VALUES (23770, 368, 2);    -- REGAIN: 2
 INSERT INTO `item_mods` VALUES (23770, 384, 300);  -- HASTE_GEAR: 3%
 INSERT INTO `item_mods` VALUES (23770, 1081, 7);   -- DAMAGE_LIMITP: 7
 
--- Perle Salade +1
-INSERT INTO `item_mods` VALUES (26711,1,39);    -- DEF: 39
-INSERT INTO `item_mods` VALUES (26711,8,9);     -- STR: 9
-INSERT INTO `item_mods` VALUES (26711,10,9);    -- VIT: 9
-INSERT INTO `item_mods` VALUES (26711,23,15);   -- ATT: 15
-INSERT INTO `item_mods` VALUES (26711,25,10);   -- ACC: 10
-INSERT INTO `item_mods` VALUES (26711,384,300); -- HASTE_GEAR: 300
-
--- Perle Hauberk +1
-INSERT INTO `item_mods` VALUES (27851,1,69);  -- DEF: 69
-INSERT INTO `item_mods` VALUES (27851,8,9);   -- STR: 9
-INSERT INTO `item_mods` VALUES (27851,9,9);   -- DEX: 9
-INSERT INTO `item_mods` VALUES (27851,23,15); -- ATT: 15
-INSERT INTO `item_mods` VALUES (27851,25,15); -- ACC: 15
-INSERT INTO `item_mods` VALUES (27851,165,3); -- CRITHITRATE: 3
-INSERT INTO `item_mods` VALUES (27851,288,2); -- DOUBLE_ATTACK: 2
-
--- Perle Moufles +1
-INSERT INTO `item_mods` VALUES (27997,1,33);    -- DEF: 33
-INSERT INTO `item_mods` VALUES (27997,8,10);    -- STR: 10
-INSERT INTO `item_mods` VALUES (27997,9,5);     -- DEX: 5
-INSERT INTO `item_mods` VALUES (27997,23,13);   -- ATT: 13
-INSERT INTO `item_mods` VALUES (27997,384,200); -- HASTE_GEAR: 200
-
 -- Weathering Shield +1 (Weather. Shield +1)
 INSERT INTO `item_mods` VALUES (27629,1,36);      -- DEF: 74
 INSERT INTO `item_mods` VALUES (27629,15,-10);    -- FIRE_MEVA: -10

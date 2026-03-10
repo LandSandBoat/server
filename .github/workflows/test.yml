@@ -27,7 +27,7 @@ jobs:
       - run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Run checks
         run: ./tools/ci/sanity_checks.sh
@@ -49,7 +49,7 @@ jobs:
       - run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Run Lua Language Server
         id: run_lls
@@ -91,7 +91,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, alpine]
+        os: [ubuntu]
     uses: ./.github/workflows/docker_test.yml
     with:
       os: ${{ matrix.os }}
