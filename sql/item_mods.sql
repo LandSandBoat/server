@@ -84856,9 +84856,6 @@ INSERT INTO `item_mods` VALUES (28664,161,-700); -- DMGPHYS: -700
 INSERT INTO `item_mods` VALUES (28664,164,-700); -- DMGRANGE: -700
 
 -- Killedar Shield +1
-	-- Unsure whether the DB is re-created from scratch each time or not, so we will do an "upsert"
-	-- If the row doesn't exist, the row will be inserted with the proper DEF value
-    -- else "update" the row to the proper value
 INSERT INTO `item_mods`
 (`itemId`, `modId`, `value`) 
 VALUES (28665,1,118)                             -- DEF: 118
@@ -85006,8 +85003,8 @@ INSERT INTO `item_mods` VALUES (23770, 1081, 7);   -- DAMAGE_LIMITP: 7
 INSERT INTO `item_mods` VALUES (26711,1,39);    -- DEF: 39
 INSERT INTO `item_mods` VALUES (26711,8,9);     -- STR: 9
 INSERT INTO `item_mods` VALUES (26711,10,9);    -- VIT: 9
-INSERT INTO `item_mods` VALUES (26711,23,15);	-- ATT: 15
-INSERT INTO `item_mods` VALUES (26711,25,10);  	-- ACC: 10
+INSERT INTO `item_mods` VALUES (26711,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (26711,25,10);   -- ACC: 10
 INSERT INTO `item_mods` VALUES (26711,384,300); -- HASTE_GEAR: 300
 
 -- Perle Hauberk +1
@@ -85036,7 +85033,7 @@ INSERT INTO `item_mods` VALUES (27629,19,-10);    -- THUNDER_MEVA: -10
 INSERT INTO `item_mods` VALUES (27629,20,-10);    -- WATER_MEVA: -10
 INSERT INTO `item_mods` VALUES (27629,21,-10);    -- LIGHT_MEVA: -10
 INSERT INTO `item_mods` VALUES (27629,22,-10);    -- DARK_MEVA: -10
-INSERT INTO `item_mods` VALUES (27629,109,106);	  -- SHIELD: 106
+INSERT INTO `item_mods` VALUES (27629,109,106);   -- SHIELD: 106
 INSERT INTO `item_mods` VALUES (27629,163,-2500); -- DMGMAGIC: -2500
 INSERT INTO `item_mods` VALUES (27629,161,-1000); -- DMGPHYS: -1000
 INSERT INTO `item_mods` VALUES (27629,164,-1000); -- DMGRANGE: -1000
@@ -85050,7 +85047,6 @@ INSERT INTO `item_mods` VALUES (20723,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_D
 INSERT INTO `item_mods` VALUES (20724,23,25);       -- ATK: 25
 INSERT INTO `item_mods` VALUES (20724,25,6);        -- ACC: 6
 INSERT INTO `item_mods` VALUES (20724,431,7);       -- ITEM_ADDEFFECT_TYPE: TP_DRAIN (https://github.com/LandSandBoat/server/blob/base/scripts/globals/additional_effects.lua#L195)
-
 
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;

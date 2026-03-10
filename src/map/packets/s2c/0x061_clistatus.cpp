@@ -84,9 +84,6 @@ GP_SERV_COMMAND_CLISTATUS::GP_SERV_COMMAND_CLISTATUS(CCharEntity* PChar)
     packet.statusdata.ilvl_mhand   = charutils::getMainhandItemLevel(PChar);
     packet.statusdata.ilvl_ranged  = charutils::getRangedItemLevel(PChar);
 
-    // NOTE: Force rank 1 (first place) so all unity warps are available to all players.
-    // On a small private server, ranking-based warp restrictions are not practical.
-    // Original: roeutils::RoeSystem.unityLeaderRank[PChar->profile.unity_leader - 1]
     packet.statusdata.unity_info.Faction    = PChar->profile.unity_leader;
     packet.statusdata.unity_info.Unknown    = PChar->profile.unity_leader > 0 ? 1 : 0;
     packet.statusdata.unity_info.Points     = charutils::GetPoints(PChar, "unity_accolades");
