@@ -33,8 +33,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local bioPower   = 15
-    local duration   = math.random(20, 30)
+    local bioPower   = math.floor(mob:getMainLvl() / 2)
+    local duration   = 90
     local effectTier = 11
 
     -- Handle unbreakable sleep

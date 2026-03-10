@@ -20,10 +20,11 @@ entity.onTrigger = function(player, npc)
         if player:getCharVar('TheWaywardAutomatonNM') >= 1 then
             player:startEvent(14)-- Event ID 14 for CS after toad
         elseif not GetMobByID(ID.mob.CAEDARVA_TOAD):isSpawned() then
+            player:messageSpecial(ID.text.HIDEOUS_BEAST_EMERGES)
             SpawnMob(ID.mob.CAEDARVA_TOAD):updateClaim(player) --Caedarva toad
         end
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+        player:messageSpecial(ID.text.SOMEONE_SLIPPED)
     end
 end
 

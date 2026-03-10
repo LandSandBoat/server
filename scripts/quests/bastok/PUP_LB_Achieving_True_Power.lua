@@ -28,7 +28,7 @@ quest.sections =
             ['Shamarhaan'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(441, 1983, 0, 0, 100000, 0, 8389012, 8, 4095) -- TODO: Params need to fetch your currently equipped automaton head and body.  This is currently hardcoded to Valoredge.
+                    return quest:progressEvent(441, xi.automaton.getModelId(player))
                 end,
             },
 

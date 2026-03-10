@@ -22,6 +22,7 @@ xi.mobPool =
     GULOOL_JA_JA           = 1846, -- Gulool Ja Ja skill check
     HADAL_SATIATOR         = 1869, -- Fission (Number of Adds)
     INGESTER               = 2080, -- Fission (Number of Adds)
+    INGURGITATOR           = 2081, -- Fission (Number of Adds)
     KING_VINEGARROON       = 2262, -- KV poison on Wild Rage
     KREUTZET               = 2287, -- Mobskill: "Stormwind" fTPs based on successive uses.
     NIDHOGG                = 2840, -- Nidhogg's stronger hurricane wing

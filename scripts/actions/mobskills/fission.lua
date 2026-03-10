@@ -11,20 +11,21 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local mobID = mob:getID()
+    local mobID   = mob:getID()
     local numAdds = mob:getLocalVar('fissionAdds')
+    local offset  = mob:getLocalVar('fissionOffset')
     local pets = {}
     for i = 1, numAdds do
-        table.insert(pets, mobID + i)
+        table.insert(pets, mobID + offset + i)
     end
 
     local petParams =
     {
-        maxSpawns = 1,
-        noAnimation = true,
+        maxSpawns    = 1,
+        noAnimation  = true,
         dieWithOwner = true,
-        superlink = true,
-        ignoreBusy = true,
+        superlink    = true,
+        ignoreBusy   = true,
     }
     xi.mob.callPets(mob, pets, petParams)
     skill:setMsg(xi.msg.basic.NONE)

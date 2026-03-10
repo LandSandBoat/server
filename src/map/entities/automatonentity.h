@@ -19,34 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _CAUTOMATONENTITY_H
-#define _CAUTOMATONENTITY_H
+#pragma once
 
+#include "enums/automaton.h"
 #include "petentity.h"
+
 #include <array>
-
-enum AUTOFRAMETYPE
-{
-    FRAME_HARLEQUIN  = 0x20,
-    FRAME_VALOREDGE  = 0x21,
-    FRAME_SHARPSHOT  = 0x22,
-    FRAME_STORMWAKER = 0x23
-};
-
-enum AUTOHEADTYPE
-{
-    HEAD_HARLEQUIN    = 0x01,
-    HEAD_VALOREDGE    = 0x02,
-    HEAD_SHARPSHOT    = 0x03,
-    HEAD_STORMWAKER   = 0x04,
-    HEAD_SOULSOOTHER  = 0x05,
-    HEAD_SPIRITREAVER = 0x06
-};
 
 struct automaton_equip_t
 {
-    uint8                 Frame;
-    uint8                 Head;
+    AutomatonFrame        Frame;
+    AutomatonHead         Head;
     std::array<uint8, 12> Attachments;
 };
 
@@ -62,27 +45,27 @@ public:
     std::array<uint8, 8> m_ElementMax{};
     std::array<uint8, 8> m_ElementEquip{};
 
-    AUTOFRAMETYPE getFrame() const;
-    AUTOHEADTYPE  getHead() const;
-    uint8         getAttachment(uint8 slot);
-    bool          hasAttachment(uint8 attachment);
+    auto getFrame() const -> AutomatonFrame;
+    auto getHead() const -> AutomatonHead;
+    auto getAttachment(uint8 slotid) const -> uint8;
+    auto hasAttachment(uint8 attachment) const -> bool;
 
-    uint8 getElementMax(uint8 element);
-    uint8 getElementCapacity(uint8 element);
+    auto getElementMax(uint8 element) const -> uint8;
+    auto getElementCapacity(uint8 element) const -> uint8;
 
-    void  burdenTick();
-    auto  getBurden() -> std::array<uint8, 8>;
-    void  setAllBurden(uint8 burden);
-    void  setBurdenArray(std::array<uint8, 8> burdenArray);
-    uint8 addBurden(uint8 element, int8 burden);
-    uint8 getOverloadChance(uint8 element);
+    void burdenTick();
+    auto getBurden() const -> std::array<uint8, 8>;
+    void setAllBurden(uint8 burden);
+    void setBurdenArray(std::array<uint8, 8> burdenArray);
+    auto addBurden(uint8 element, int8 burden) -> uint8;
+    auto getOverloadChance(uint8 element) const -> uint8;
 
     void PostTick() override;
 
     virtual void Spawn() override;
     virtual void Die() override;
 
-    virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
+    virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
 
     virtual void OnMobSkillFinished(CMobSkillState&, action_t&) override;
     virtual void OnCastFinished(CMagicState&, action_t&) override;
@@ -90,5 +73,3 @@ public:
 private:
     std::array<uint8, 8> m_Burden{};
 };
-
-#endif

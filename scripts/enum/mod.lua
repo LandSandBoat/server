@@ -37,6 +37,8 @@ xi.mod =
     FOOD_HP                         = 1130, -- Food HP (this is added after curse)
     FOOD_MP                         = 1131, -- Food MP (this is added after curse)
 
+    EXP_LVL_MOD                     = 1196, -- Modifies level during /check, exp calculation and certain packets only
+
     TWOHAND_STR                     = 218, -- Same as STR, but only active when using a two handed weapon (e.g. Hasso)
 
     -- Magic Evasion versus elements

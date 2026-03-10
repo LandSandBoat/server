@@ -19,13 +19,14 @@ xi.mix.gorger = xi.mix.gorger or {}
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-local fissionAdds =
+local fissionData =
 {
-    [xi.mobPool.HADAL_SATIATOR] = 3,
-    [xi.mobPool.INGESTER      ] = 4,
-    [xi.mobPool.PROCREATOR    ] = 4,
-    [xi.mobPool.PROGENERATOR  ] = 4,
-    [xi.mobPool.PROPAGATOR    ] = 2,
+    [xi.mobPool.HADAL_SATIATOR] = { count = 3, offset = 0 },
+    [xi.mobPool.INGESTER      ] = { count = 4, offset = 0 },
+    [xi.mobPool.INGURGITATOR  ] = { count = 2, offset = 1 },
+    [xi.mobPool.PROCREATOR    ] = { count = 4, offset = 0 },
+    [xi.mobPool.PROGENERATOR  ] = { count = 4, offset = 0 },
+    [xi.mobPool.PROPAGATOR    ] = { count = 2, offset = 0 },
 }
 
 xi.mix.gorger.canUseFission = function(mob)
@@ -35,9 +36,10 @@ xi.mix.gorger.canUseFission = function(mob)
         return false
     end
 
-    local mobID = mob:getID()
+    local mobID  = mob:getID()
+    local offset = mob:getLocalVar('fissionOffset')
     for i = 1, numAdds do
-        local pet = GetMobByID(mobID + i)
+        local pet = GetMobByID(mobID + offset + i)
         if pet and not pet:isSpawned() then
             return true
         end
@@ -49,10 +51,11 @@ end
 
 g_mixins.families.gorger_nm = function(gorgerMob)
     gorgerMob:addListener('SPAWN', 'GORGER_NM_SPAWN', function(mob)
-        -- Store the number of adds for this mob pool
-        local numAdds = fissionAdds[mob:getPool()]
-        if numAdds then
-            mob:setLocalVar('fissionAdds', numAdds)
+        -- Store the number of adds and ID offset for this mob pool
+        local data = fissionData[mob:getPool()]
+        if data then
+            mob:setLocalVar('fissionAdds', data.count)
+            mob:setLocalVar('fissionOffset', data.offset)
         end
     end)
 end

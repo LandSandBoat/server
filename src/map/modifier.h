@@ -38,6 +38,8 @@ enum class Mod
     FOOD_HP      = 1130, // Food HP (this is added after curse)
     FOOD_MP      = 1131, // Food MP (this is added after curse)
 
+    EXP_LVL_MOD = 1196, // Modifies level during /check, exp calculation and certain packets only
+
     STR = 8,  // Strength
     DEX = 9,  // Dexterity
     VIT = 10, // Vitality
@@ -1150,7 +1152,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1196 and onward
+    // SPARE IDs: 1197 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

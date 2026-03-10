@@ -42,7 +42,7 @@ local arenaBoxes =
     [3] = {  270,  290,  35,  52, -286, -266 }, -- Area 3
 }
 
-local isPlayerInArenaBox = function(player, area)
+local function isPlayerInArenaBox(player, area)
     local playerX = player:getXPos()
     local playerY = player:getYPos()
     local playerZ = player:getZPos()
@@ -53,7 +53,7 @@ local isPlayerInArenaBox = function(player, area)
     return xCheck and yCheck and zCheck
 end
 
-local handleDiremiteEnmityReset = function(diremite, battlefield)
+local function handleDiremiteEnmityReset(diremite, battlefield)
     if not diremite:isAlive() or not diremite:isEngaged() then
         return
     end
@@ -88,7 +88,7 @@ local handleDiremiteEnmityReset = function(diremite, battlefield)
 end
 
 -- Diremites respawn 10 seconds after death
-local handleDiremiteRespawn = function(diremite)
+local function handleDiremiteRespawn(diremite)
     if not diremite:isAlive() then
         local deathTime = diremite:getLocalVar('deathTime')
 

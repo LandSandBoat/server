@@ -29,6 +29,7 @@
 #include "common/tracy.h"
 #include "common/utils.h"
 #include "enmity_container.h"
+#include "enums/automaton.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/mobutils.h"
@@ -46,22 +47,22 @@ CAutomatonEntity::~CAutomatonEntity()
     TracyZoneScoped;
 }
 
-AUTOFRAMETYPE CAutomatonEntity::getFrame() const
+auto CAutomatonEntity::getFrame() const -> AutomatonFrame
 {
-    return (AUTOFRAMETYPE)m_Equip.Frame;
+    return m_Equip.Frame;
 }
 
-AUTOHEADTYPE CAutomatonEntity::getHead() const
+auto CAutomatonEntity::getHead() const -> AutomatonHead
 {
-    return (AUTOHEADTYPE)m_Equip.Head;
+    return m_Equip.Head;
 }
 
-uint8 CAutomatonEntity::getAttachment(uint8 slotid)
+uint8 CAutomatonEntity::getAttachment(const uint8 slotid) const
 {
     return m_Equip.Attachments[slotid];
 }
 
-bool CAutomatonEntity::hasAttachment(uint8 attachment)
+auto CAutomatonEntity::hasAttachment(const uint8 attachment) const -> bool
 {
     for (auto&& attachmentid : m_Equip.Attachments)
     {
@@ -73,12 +74,12 @@ bool CAutomatonEntity::hasAttachment(uint8 attachment)
     return false;
 }
 
-uint8 CAutomatonEntity::getElementMax(uint8 element)
+auto CAutomatonEntity::getElementMax(const uint8 element) const -> uint8
 {
     return m_ElementMax[element];
 }
 
-uint8 CAutomatonEntity::getElementCapacity(uint8 element)
+auto CAutomatonEntity::getElementCapacity(const uint8 element) const -> uint8
 {
     return m_ElementEquip[element];
 }
@@ -94,22 +95,22 @@ void CAutomatonEntity::burdenTick()
     }
 }
 
-auto CAutomatonEntity::getBurden() -> std::array<uint8, 8>
+auto CAutomatonEntity::getBurden() const -> std::array<uint8, 8>
 {
     return m_Burden;
 }
 
-void CAutomatonEntity::setAllBurden(uint8 burden)
+void CAutomatonEntity::setAllBurden(const uint8 burden)
 {
     m_Burden.fill(burden);
 }
 
-void CAutomatonEntity::setBurdenArray(std::array<uint8, 8> burdenArray)
+void CAutomatonEntity::setBurdenArray(const std::array<uint8, 8> burdenArray)
 {
     m_Burden = burdenArray;
 }
 
-uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
+auto CAutomatonEntity::addBurden(const uint8 element, int8 burden) -> uint8
 {
     // Handle Kenkonken Suppress Overload
     if (PMaster->getMod(Mod::SUPPRESS_OVERLOAD) > 0)
@@ -123,7 +124,7 @@ uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
     if (burden > 0)
     {
         // check for overload
-        int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+        const int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
         if (m_Burden[element] > thresh)
         {
             if (xirand::GetRandomNumber(100) < (m_Burden[element] - thresh + 5))
@@ -136,9 +137,9 @@ uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
     return 0;
 }
 
-uint8 CAutomatonEntity::getOverloadChance(uint8 element)
+auto CAutomatonEntity::getOverloadChance(const uint8 element) const -> uint8
 {
-    int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+    const int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
 
     return std::clamp(m_Burden[element] - thresh + 5, 0, 255);
 }

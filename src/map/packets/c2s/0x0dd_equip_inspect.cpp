@@ -83,8 +83,8 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 }
                 else
                 {
-                    uint8          mobLvl   = PMobTarget->GetMLevel();
-                    EMobDifficulty mobCheck = charutils::CheckMob(PChar->GetMLevel(), mobLvl);
+                    int32          mobLvl   = PMobTarget->GetMLevel() + PMobTarget->getMod(Mod::EXP_LVL_MOD);
+                    EMobDifficulty mobCheck = charutils::CheckMob(PChar->GetMLevel(), PMobTarget);
 
                     // Calculate main /check message (64 is Too Weak)
                     int32 MessageValue = 64 + static_cast<uint8>(mobCheck);

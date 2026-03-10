@@ -4486,8 +4486,10 @@ void LoadExpTable()
  *                                                                       *
  ************************************************************************/
 
-EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
+EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
 {
+    auto moblvl = PMob ? PMob->GetMLevel() + PMob->getMod(Mod::EXP_LVL_MOD) : -1;
+
     uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
     if (baseExp >= 400)
@@ -4528,7 +4530,7 @@ EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
  *                                                                       *
  ************************************************************************/
 
-uint32 GetBaseExp(uint8 charlvl, uint8 moblvl)
+uint32 GetBaseExp(uint8 charlvl, int16 moblvl)
 {
     const int32 levelDif = moblvl - charlvl + 44;
 
@@ -4787,11 +4789,11 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 
             bool chainactive = false;
 
-            const uint8 moblevel    = PMob->GetMLevel();
+            const int16 moblevel    = PMob->GetMLevel() + PMob->getMod(Mod::EXP_LVL_MOD);
             const uint8 memberlevel = PMember->GetMLevel();
 
-            EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
-            float          exp      = (float)GetBaseExp(maxlevel, moblevel);
+            EMobDifficulty mobCheck = CheckMob(maxlevel, PMob);
+            float          exp      = static_cast<float>(GetBaseExp(maxlevel, moblevel));
 
             if (mobCheck > EMobDifficulty::TooWeak)
             {

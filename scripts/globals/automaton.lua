@@ -2,7 +2,7 @@
 --  Automaton Global
 -----------------------------------
 xi = xi or {}
-xi.automaton = {}
+xi.automaton = xi.automaton or {}
 
 xi.automaton.abilities =
 {
@@ -31,6 +31,47 @@ xi.automaton.abilities =
     HEAT_CAPACITOR  = 2745,
     BARRAGE_TURBINE = 2746,
     DISRUPTOR       = 2747,
+}
+
+-- [FRAME][HEAD] = Model ID
+local automatonModels =
+{
+    [xi.automaton.frame.HARLEQUIN] =
+    {
+        [xi.automaton.head.HARLEQUIN]    = 0x07B9,
+        [xi.automaton.head.VALOREDGE]    = 0x07BA,
+        [xi.automaton.head.SHARPSHOT]    = 0x07BC,
+        [xi.automaton.head.STORMWAKER]   = 0x07BB,
+        [xi.automaton.head.SOULSOOTHER]  = 0x07D3,
+        [xi.automaton.head.SPIRITREAVER] = 0x07D7,
+    },
+    [xi.automaton.frame.VALOREDGE] =
+    {
+        [xi.automaton.head.HARLEQUIN]    = 0x07BE,
+        [xi.automaton.head.VALOREDGE]    = 0x07BF,
+        [xi.automaton.head.SHARPSHOT]    = 0x07C1,
+        [xi.automaton.head.STORMWAKER]   = 0x07C0,
+        [xi.automaton.head.SOULSOOTHER]  = 0x07D4,
+        [xi.automaton.head.SPIRITREAVER] = 0x07D8,
+    },
+    [xi.automaton.frame.SHARPSHOT] =
+    {
+        [xi.automaton.head.HARLEQUIN]    = 0x07C3,
+        [xi.automaton.head.VALOREDGE]    = 0x07C4,
+        [xi.automaton.head.SHARPSHOT]    = 0x07C6,
+        [xi.automaton.head.STORMWAKER]   = 0x07C5,
+        [xi.automaton.head.SOULSOOTHER]  = 0x07D5,
+        [xi.automaton.head.SPIRITREAVER] = 0x07D9,
+    },
+    [xi.automaton.frame.STORMWAKER] =
+    {
+        [xi.automaton.head.HARLEQUIN]    = 0x07C8,
+        [xi.automaton.head.VALOREDGE]    = 0x07C9,
+        [xi.automaton.head.SHARPSHOT]    = 0x07CB,
+        [xi.automaton.head.STORMWAKER]   = 0x07CA,
+        [xi.automaton.head.SOULSOOTHER]  = 0x07D6,
+        [xi.automaton.head.SPIRITREAVER] = 0x07DA,
+    },
 }
 
 local maneuverList =
@@ -377,4 +418,24 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
     end
 
     return target:getOverloadChance(maneuverInfo[2] - 1)
+end
+
+---Retrieve model ID of the automaton for cutscene purposes
+---@param player CBaseEntity
+---@return integer
+xi.automaton.getModelId = function(player)
+    local frame          = player:getAutomatonFrame()
+    local head           = player:getAutomatonHead()
+    local defaultModelId = automatonModels[xi.automaton.frame.HARLEQUIN][xi.automaton.head.HARLEQUIN]
+
+    if not frame or not head then
+        return defaultModelId
+    end
+
+    local frameTable = automatonModels[frame]
+    if not frameTable then
+        return defaultModelId
+    end
+
+    return frameTable[head] or defaultModelId
 end

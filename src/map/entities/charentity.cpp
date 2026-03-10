@@ -652,31 +652,31 @@ auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
-void CCharEntity::setAutomatonFrame(AUTOFRAMETYPE frame)
+void CCharEntity::setAutomatonFrame(const AutomatonFrame frame)
 {
     automatonInfo.m_Equip.Frame = frame;
 }
 
-void CCharEntity::setAutomatonHead(AUTOHEADTYPE head)
+void CCharEntity::setAutomatonHead(const AutomatonHead head)
 {
     automatonInfo.m_Equip.Head = head;
 }
 
-void CCharEntity::setAutomatonAttachment(uint8 slotid, uint8 id)
+void CCharEntity::setAutomatonAttachment(const uint8 slotid, const uint8 id)
 {
     automatonInfo.m_Equip.Attachments[slotid] = id;
 }
 
-void CCharEntity::setAutomatonElementMax(uint8 element, uint8 max)
+void CCharEntity::setAutomatonElementMax(const uint8 element, const uint8 max)
 {
     automatonInfo.m_ElementMax[element] = max;
 }
-void CCharEntity::addAutomatonElementCapacity(uint8 element, int8 value)
+void CCharEntity::addAutomatonElementCapacity(const uint8 element, const int8 value)
 {
     automatonInfo.m_ElementEquip[element] += value;
 }
 
-void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
+void CCharEntity::setAutomatonElementalCapacityBonus(const uint8 bonus)
 {
     if (bonus == automatonInfo.m_elementalCapacityBonus)
     {
@@ -692,22 +692,22 @@ void CCharEntity::setAutomatonElementalCapacityBonus(uint8 bonus)
     automatonInfo.m_elementalCapacityBonus = bonus;
 }
 
-AUTOFRAMETYPE CCharEntity::getAutomatonFrame() const
+auto CCharEntity::getAutomatonFrame() const -> AutomatonFrame
 {
-    return static_cast<AUTOFRAMETYPE>(automatonInfo.m_Equip.Frame);
+    return automatonInfo.m_Equip.Frame;
 }
 
-AUTOHEADTYPE CCharEntity::getAutomatonHead() const
+auto CCharEntity::getAutomatonHead() const -> AutomatonHead
 {
-    return static_cast<AUTOHEADTYPE>(automatonInfo.m_Equip.Head);
+    return automatonInfo.m_Equip.Head;
 }
 
-uint8 CCharEntity::getAutomatonAttachment(uint8 slotid)
+auto CCharEntity::getAutomatonAttachment(const uint8 slotid) const -> uint8
 {
     return automatonInfo.m_Equip.Attachments[slotid];
 }
 
-bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
+auto CCharEntity::hasAutomatonAttachment(const uint8 attachment) const -> bool
 {
     for (auto&& attachmentid : automatonInfo.m_Equip.Attachments)
     {
@@ -719,12 +719,12 @@ bool CCharEntity::hasAutomatonAttachment(uint8 attachment)
     return false;
 }
 
-uint8 CCharEntity::getAutomatonElementMax(uint8 element)
+auto CCharEntity::getAutomatonElementMax(const uint8 element) const -> uint8
 {
     return automatonInfo.m_ElementMax[element];
 }
 
-uint8 CCharEntity::getAutomatonElementCapacity(uint8 element)
+auto CCharEntity::getAutomatonElementCapacity(const uint8 element) const -> uint8
 {
     return automatonInfo.m_ElementEquip[element];
 }
@@ -1650,7 +1650,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     // The following exceptions apply:
                     // - PC targeted weaponskills always give WSP
                     // - A handful of content: Besieged, DI
-                    if (charutils::CheckMob(this->GetMLevel(), PTarget->GetMLevel()) > EMobDifficulty::TooWeak)
+                    if (charutils::CheckMob(this->GetMLevel(), PTarget) > EMobDifficulty::TooWeak)
                     {
                         charutils::AddWeaponSkillPoints(this, damslot, wspoints);
                     }
