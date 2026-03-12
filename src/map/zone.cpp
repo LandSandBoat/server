@@ -280,6 +280,11 @@ uint32 CZone::GetLocalVar(const char* var)
     return m_LocalVars[var];
 }
 
+std::unordered_map<std::string, uint32>& CZone::GetLocalVars()
+{
+    return m_LocalVars;
+}
+
 void CZone::SetLocalVar(const char* var, uint32 val)
 {
     m_LocalVars[var] = val;

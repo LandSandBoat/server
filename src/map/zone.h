@@ -593,9 +593,10 @@ public:
 
     auto queryEntitiesByName(const std::string& pattern) -> const QueryByNameResult_t&;
 
-    uint32 GetLocalVar(const char* var);
-    void   SetLocalVar(const char* var, uint32 val);
-    void   ResetLocalVars();
+    uint32                                   GetLocalVar(const char* var);
+    std::unordered_map<std::string, uint32>& GetLocalVars();
+    void                                     SetLocalVar(const char* var, uint32 val);
+    void                                     ResetLocalVars();
 
     virtual CCharEntity* GetCharByName(const std::string& name);
     virtual CCharEntity* GetCharByID(uint32 id);

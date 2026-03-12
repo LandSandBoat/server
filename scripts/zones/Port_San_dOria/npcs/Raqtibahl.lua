@@ -3,8 +3,6 @@
 --  NPC: Raqtibahl
 -- (Corsair's Frac) !pos -59 -4 -39 232
 -----------------------------------
-local ID = zones[xi.zone.PORT_SAN_DORIA]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -65,9 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('LeleroonsLetterRed', 4)
         player:setCharVar('corAfSubmitDay', VanadielUniqueDay())
     elseif csid == 756 then
-        player:setCharVar('LeleroonsLetterRed', 5)
-        player:addItem(xi.item.CORSAIRS_FRAC)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CORSAIRS_FRAC)
+        if npcUtil.giveItem(player, xi.item.CORSAIRS_FRAC) then
+            player:setCharVar('LeleroonsLetterRed', 5)
+        end
     end
 end
 

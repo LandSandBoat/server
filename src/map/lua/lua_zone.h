@@ -42,6 +42,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
 
     auto getLocalVar(const char* key);
+    auto getLocalVars() -> sol::table;
     void setLocalVar(const char* key, uint32 value);
     void resetLocalVars();
 

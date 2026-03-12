@@ -45,8 +45,8 @@ CLuaZone::CLuaZone(CZone* PZone)
 
 /************************************************************************
  *  Function: getLocalVar()
- *  Purpose : Returns a variable assigned locally to an entity
- *  Example : if (KingArthro:getLocalVar("[POP]King_Arthro") > 0) then
+ *  Purpose : Returns a variable assigned locally to a zone
+ *  Example : if (zone:getLocalVar("[POP]King_Arthro") > 0) then
  *  Notes   :
  ************************************************************************/
 
@@ -56,9 +56,30 @@ auto CLuaZone::getLocalVar(const char* key)
 }
 
 /************************************************************************
+ *  Function: getLocalVars()
+ *  Purpose : Returns all local variables assigned to the zone as a table
+ *  Example : local vars = zone:getLocalVars()
+ *  Notes   :
+ ************************************************************************/
+auto CLuaZone::getLocalVars() -> sol::table
+{
+    auto  table     = lua.create_table();
+    auto& localVars = m_pLuaZone->GetLocalVars();
+
+    for (const auto& [varName, value] : localVars)
+    {
+        auto subtable       = lua.create_table();
+        subtable["varname"] = varName;
+        subtable["value"]   = value;
+        table.add(subtable);
+    }
+    return table;
+}
+
+/************************************************************************
  *  Function: setLocalVar()
- *  Purpose : Assigns a local variable to an entity
- *  Example : mob:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
+ *  Purpose : Assigns a local variable to a zone
+ *  Example : zone:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
  *  Notes   :
  ************************************************************************/
 
@@ -306,6 +327,7 @@ void CLuaZone::Register()
     SOL_USERTYPE("CZone", CLuaZone);
 
     SOL_REGISTER("getLocalVar", CLuaZone::getLocalVar);
+    SOL_REGISTER("getLocalVars", CLuaZone::getLocalVars);
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 

@@ -18,15 +18,22 @@ quest.reward =
 quest.sections =
 {
     {
+        -- Section 1: Player receives key item to begin quest at battlefield
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                quest:getVar(player, 'Prog') == 0 and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Despachiaire'] = quest:progressEvent(576),
+            ['Despachiaire'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(576)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
@@ -37,12 +44,30 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.BONEYARD_GULLY] =
+        {
+            onEventFinish =
+            {
+                [32000] = function(player, csid, option, npc)
+                    local battlefield = player:getBattlefield()
+                    if not battlefield then
+                        return
+                    end
+
+                    if battlefield:getID() == xi.battlefield.id.TANGO_WITH_A_TRACKER then
+                        quest:begin(player)
+                    end
+                end,
+            },
+        },
     },
 
     {
+        -- Section 2: Can speak with Despachiaire to receive letter again if failed after next conquest tally\
+        -- Complete quest on battlefield win
         check = function(player, status, vars)
-            return vars.Prog == 1 and
-                status == xi.questStatus.QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -72,10 +97,6 @@ quest.sections =
         {
             onEventFinish =
             {
-                [32000] = function(player, csid, option, npc)
-                    quest:begin(player)
-                end,
-
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.TANGO_WITH_A_TRACKER then
                         quest:complete(player)

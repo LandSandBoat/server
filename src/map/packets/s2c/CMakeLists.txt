@@ -188,6 +188,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08c_merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_alter_ego_points.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_alter_ego_points.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x096_myroom_enter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x097_myroom_exit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.h

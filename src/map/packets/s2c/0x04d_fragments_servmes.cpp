@@ -34,14 +34,15 @@ GP_SERV_COMMAND_FRAGMENTS::SERVMES::SERVMES(const std::string& message, int8 lan
     // Ensure we have a message and the requested offset is not outside the bounds
     if (message.length() > 0 && message.length() > message_offset)
     {
-        const auto sndLength = message.length() - message_offset > 236 ? 236 : message.length() - message_offset;
+        const auto msgSize   = message.length() + 1;
+        const auto sndLength = (msgSize - message_offset) > 236 ? 236 : (msgSize - message_offset);
 
-        packet.size_total     = static_cast<int32_t>(message.length()); // Message Length (Total)
-        packet.offset         = message_offset;                         // Message Offset
-        packet.data_size      = static_cast<int32_t>(sndLength);        // Message Length
+        packet.size_total     = static_cast<int32_t>(msgSize);   // Message Length (Total)
+        packet.offset         = message_offset;                  // Message Offset
+        packet.data_size      = static_cast<int32_t>(sndLength); // Message Length
         const auto packetSize = sizeof(GP_SERV_HEADER) + sizeof(PacketData) - sizeof(packet.data) + packet.data_size;
         this->setSize(roundUpToNearestFour(packetSize));
 
-        std::memcpy(packet.data, message.c_str() + message_offset, std::min(sndLength, message.length() - message_offset));
+        std::memcpy(packet.data, message.c_str() + message_offset, sndLength);
     }
 }

@@ -199,6 +199,7 @@ CCharEntity::CCharEntity()
     m_hasArise           = false;
     m_LevelRestriction   = 0;
     m_lastBcnmTimePrompt = 0;
+    servmesLastOffset_   = std::nullopt;
     m_AHHistoryTimestamp = timer::time_point::min();
     m_DeathTimestamp     = timer::time_point::min();
 

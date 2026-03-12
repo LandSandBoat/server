@@ -28,6 +28,7 @@
 #include <set>
 
 enum LSTYPE : std::uint8_t;
+enum class KeyItem : uint16_t;
 class CCharEntity;
 class PacketValidationResult
 {
@@ -228,6 +229,10 @@ public:
     auto isNotInEvent(const CCharEntity* PChar) -> PacketValidator&;
     // Character must not be jailed
     auto isNotJailed(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must be in Mog House
+    auto isInMogHouse(const CCharEntity* PChar) -> PacketValidator&;
+    // Character must have a specific key item
+    auto hasKeyItem(const CCharEntity* PChar, KeyItem keyItemId) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>

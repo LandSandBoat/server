@@ -82,4 +82,5 @@ enum class KeyItem : uint16_t
     JOB_GESTURE_RUNE_FENCER      = 2964,
     MOG_PATIO_DESIGN_DOCUMENT    = 3051,
     CHOCOBO_COMPANION            = 3072,
+    CIPHER_BRACELET              = 3361,
 };

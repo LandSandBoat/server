@@ -26,6 +26,7 @@
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
+#include "utils/charutils.h"
 #include "utils/jailutils.h"
 
 auto PacketValidator::isNotResting(const CCharEntity* PChar) -> PacketValidator&
@@ -274,6 +275,26 @@ auto PacketValidator::isNotJailed(const CCharEntity* PChar) -> PacketValidator&
     if (jailutils::InPrison(PChar))
     {
         result_.addError("Character is jailed.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isInMogHouse(const CCharEntity* PChar) -> PacketValidator&
+{
+    if (!PChar->inMogHouse())
+    {
+        result_.addError("Character is not in Mog House.");
+    }
+
+    return *this;
+}
+
+auto PacketValidator::hasKeyItem(const CCharEntity* PChar, const KeyItem keyItemId) -> PacketValidator&
+{
+    if (!charutils::hasKeyItem(PChar, keyItemId))
+    {
+        result_.addError(std::format("Missing Key Item {}.", static_cast<uint16_t>(keyItemId)));
     }
 
     return *this;

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Boneyard_Gully
---  Mob: Shikaree X
+--  Mob: Shikaree X (Tango With A Tracker / Requiem of Sin)
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.BONEYARD_GULLY]
@@ -10,7 +10,6 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DUAL_WIELD, 1)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.PLAGUE)
@@ -18,6 +17,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.BIND_RES_RANK, 8)
     -- TODO: Needs gravity res rank
@@ -70,6 +70,7 @@ entity.onMobFight = function(mob, target)
         not GetMobByID(mob:getID() + 2):isSpawned()
     then
         xi.mob.callPets(mob, mob:getID() + 2, { inactiveTime = 3000 })
+        mob:messageText(mob, ID.text.DINNER_TIME_ADVENTURER_STEAK)
     end
 end
 
