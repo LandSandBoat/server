@@ -230,7 +230,7 @@ void CMobController::TryLink()
             auto* PPartyMember = dynamic_cast<CMobEntity*>(member);
             // Note if the mob to link with this one is a pet then do not link
             // Pets only link with their masters
-            if (!PPartyMember || PPartyMember->PMaster)
+            if (!PPartyMember || PPartyMember->PMaster || PPartyMember->isDead())
             {
                 continue;
             }

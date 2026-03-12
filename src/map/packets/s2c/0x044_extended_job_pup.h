@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 
 #include "base.h"
+#include "enums/automaton.h"
 
 class CCharEntity;
 
@@ -37,45 +38,45 @@ class PUP final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EXTENDED_JOB,
 public:
     struct PacketData
     {
-        uint8_t  Job;      // PS2: Job
-        uint8_t  IsSubJob; // PS2: IsSubJob
-        uint8_t  padding00[2];
-        uint8_t  Head;
-        uint8_t  Frame;
-        uint8_t  Attachments[12];
-        uint8_t  unknown00[2];
-        uint32_t UnlockedHeads;
-        uint32_t UnlockedFrames;
-        uint8_t  padding01[24];
-        uint32_t UnlockedAttachments[8];
-        char     Name[16]; // assumed to be 16, longest name is 14 chars.
-        uint16_t HP;
-        uint16_t MaxHP;
-        uint16_t MP;
-        uint16_t MaxMP;
-        uint16_t MeleeSkill;
-        uint16_t MeleeSkillCap;
-        uint16_t RangedSkill;
-        uint16_t RangedSkillCap;
-        uint16_t MagicSkill;
-        uint16_t MagicSkillCap;
-        uint8_t  padding03[4];
-        uint16_t STR;
-        uint16_t BonusSTR;
-        uint16_t DEX;
-        uint16_t BonusDEX;
-        uint16_t VIT;
-        uint16_t BonusVIT;
-        uint16_t AGI;
-        uint16_t BonusAGI;
-        uint16_t INT;
-        uint16_t BonusINT;
-        uint16_t MND;
-        uint16_t BonusMND;
-        uint16_t CHR;
-        uint16_t BonusCHR;
-        uint8_t  BonusElementalCapacity;
-        uint8_t  padding04[3];
+        uint8_t        Job;      // PS2: Job
+        uint8_t        IsSubJob; // PS2: IsSubJob
+        uint8_t        padding00[2];
+        AutomatonHead  Head;
+        AutomatonFrame Frame;
+        uint8_t        Attachments[12];
+        uint8_t        unknown00[2];
+        uint32_t       UnlockedHeads;
+        uint32_t       UnlockedFrames;
+        uint8_t        padding01[24];
+        uint32_t       UnlockedAttachments[8];
+        char           Name[16]; // assumed to be 16, longest name is 14 chars.
+        uint16_t       HP;
+        uint16_t       MaxHP;
+        uint16_t       MP;
+        uint16_t       MaxMP;
+        uint16_t       MeleeSkill;
+        uint16_t       MeleeSkillCap;
+        uint16_t       RangedSkill;
+        uint16_t       RangedSkillCap;
+        uint16_t       MagicSkill;
+        uint16_t       MagicSkillCap;
+        uint8_t        padding03[4];
+        uint16_t       STR;
+        uint16_t       BonusSTR;
+        uint16_t       DEX;
+        uint16_t       BonusDEX;
+        uint16_t       VIT;
+        uint16_t       BonusVIT;
+        uint16_t       AGI;
+        uint16_t       BonusAGI;
+        uint16_t       INT;
+        uint16_t       BonusINT;
+        uint16_t       MND;
+        uint16_t       BonusMND;
+        uint16_t       CHR;
+        uint16_t       BonusCHR;
+        uint8_t        BonusElementalCapacity;
+        uint8_t        padding04[3];
     };
 
     PUP(CCharEntity* PChar, bool mjob);

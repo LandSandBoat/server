@@ -82,7 +82,7 @@ quest.sections =
 
                     -- Before Quest: Asks you to check on others.
                     else
-                        return quest:progressEvent(312)
+                        return quest:event(312)
                     end
                 end,
             },

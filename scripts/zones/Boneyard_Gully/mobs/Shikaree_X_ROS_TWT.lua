@@ -1,206 +1,160 @@
 -----------------------------------
 -- Area: Boneyard_Gully
 --  Mob: Shikaree X
--- TODO: Rework based off of Head Wind changes
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Add sleep resistance.
--- TODO: Add gravity resistance.
--- TODO: Adjust ninjutsu weights.
--- TODO: Ninjutsu and Song immunities.
-
-local boneyardID = zones[xi.zone.BONEYARD_GULLY]
-local skillList  = 1165
-
--- Indexed by step in the skillchain.
-local weaponskills =
-{
-    [ 1 ] = xi.weaponskill.EVISCERATION,
-    [ 2 ] = xi.weaponskill.SHADOWSTITCH,
-}
-
-local messages =
-{
-    ENGAGE           = 0,
-    TP_READY         = boneyardID.text.READY_TO_RUMBLE,
-    BEGIN_SKILLCHAIN = boneyardID.text.TIME_TO_HUNT,
-    CLOSE_SKILLCHAIN = boneyardID.text.MY_TURN,
-    SOLO_WEAPONSKILL = boneyardID.text.YOURE_MINE,
-    USE_TWO_HOUR     = boneyardID.text.SHIKAREE_X_2HR,
-    CALL_BEAST       = boneyardID.text.DINNER_TIME_ADVENTURER_STEAK,
-    DEATH            = boneyardID.text.EVEN_AT_MY_BEST,
-}
-
------------------------------------
--- Reset the skillchain variables.
------------------------------------
-local skillchainReset = function(mob)
-    mob:setLocalVar('hasTP', 0)
-    mob:setLocalVar('scStep', 0)
-    mob:setLocalVar('wsTime', 0)
-    mob:setLocalVar('chatBlock', 0)
-    mob:setLocalVar('wsBlock', 0)
-end
-
------------------------------------
--- Are the conditions set that a skillchain is plausible?
--- 1. Skillchain partner is alive
--- 2. Skillchain partner is attacking the same mob.
--- 3. We have TP.
------------------------------------
-local isPrimedForSkillchain = function(mob, target, scPartner)
-    if
-        not scPartner:isAlive() or
-        target:getID() ~= scPartner:getTarget():getID()
-    then
-        mob:setMobMod(xi.mobMod.SKILL_LIST, skillList)
-        skillchainReset(mob)
-        return false
-
-    elseif mob:getTP() < 1000 then
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        return false
-    end
-
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
-
-    return true
-end
-
------------------------------------
--- Handle skillchain logistics: who is the lead and when will the weaponskills go off?
--- Disabled spell casts temporarily during the skillchain to prevent spell casts from ruining it.
------------------------------------
-local skillchainHandler = function(mob, scPartner, scStep)
-    mob:setLocalVar('hasTP', 1)
-
-    -- Skillchain in progress.
-    if scPartner:getLocalVar('wsTime') > 0 or mob:getLocalVar('wsTime') > 0 then
-        return
-    end
-
-    -- We are the first one to get TP. Wait for skillchain partner.
-    if scPartner:getLocalVar('scStep') ~= 1 and scStep == 0 then
-        mob:setLocalVar('scStep', 1)
-        mob:messageText(mob, messages.TP_READY)
-
-    -- We were waiting for the skillchain partner to get TP and now she has it. Start skillchain.
-    elseif scPartner:getLocalVar('hasTP') > 0 and scStep == 1 then
-        local now           = GetSystemTime()
-        local firstWsDelay  = math.random(1, 2)
-        local secondWsDelay = math.random(7, 8)
-
-        mob:setMagicCastingEnabled(false)
-        mob:setLocalVar('wsTime', now + firstWsDelay)
-
-        scPartner:setMagicCastingEnabled(false)
-        scPartner:setLocalVar('scStep', 2)
-        scPartner:setLocalVar('wsTime', now + secondWsDelay)
-    end
-end
-
------------------------------------
--- Primary battle loop.
------------------------------------
-local battleController = function(mob, target, scPartner)
-    -- Solo weaponskill behavior.
-    if not isPrimedForSkillchain(mob, target, scPartner) then
-        mob:setMagicCastingEnabled(true)
-        return
-    end
-
-    local wsTime = mob:getLocalVar('wsTime')
-    local scStep = mob:getLocalVar('scStep')
-    local now    = GetSystemTime()
-
-    -- Prepare skillchain logistics.
-    if wsTime == 0 then
-        skillchainHandler(mob, scPartner, scStep)
-        return
-    end
-
-    -- Try to execute a weaponskill if the skillchain has been decided.
-    -- Add blocks to avoid weaponskill / chat spam.
-    -- Weaponskill chat will be sent even if action is blocked (like sleeping).
-    if now >= wsTime then
-        if mob:getLocalVar('chatBlock') == 0 then
-            mob:setLocalVar('chatBlock', 1)
-
-            if scStep == 1 then
-                mob:messageText(mob, messages.BEGIN_SKILLCHAIN)
-            elseif scStep == 2 then
-                mob:messageText(mob, messages.CLOSE_SKILLCHAIN)
-            end
-        end
-
-        if mob:getLocalVar('wsBlock') == 0 then
-            if mob:canUseAbilities() then
-                mob:setLocalVar('wsBlock', 1)
-                mob:useMobAbility(weaponskills[scStep], target)
-            end
-        end
-    end
-end
-
------------------------------------
--- Sets initial mob-specific immunities.
--- Zero the skill list to prevent solo weaponskilling while another Shikaree is able to skillchain.
------------------------------------
 entity.onMobInitialize = function(mob)
-    xi.pet.setMobPet(mob, 2, 'Shikaree_Xs_Rabbit')
-    -- Regain from mob_pool_mods.sql
+    mob:setMobMod(xi.mobMod.DUAL_WIELD, 1)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.TERROR)
 end
 
------------------------------------
--- Initialize local mob variables.
------------------------------------
 entity.onMobSpawn = function(mob)
-    skillchainReset(mob)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
+    mob:setMod(xi.mod.BIND_RES_RANK, 8)
+    -- TODO: Needs gravity res rank
+
+    mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.REGAIN, 55)
+    mob:setMobAbilityEnabled(false)
+    xi.mob.callPets(mob, mob:getID() + 2, { inactiveTime = 3000 })
 end
 
------------------------------------
--- Primary battle controller.
------------------------------------
 entity.onMobFight = function(mob, target)
-    local scPartner = GetMobByID(mob:getID() - 1)
-    battleController(mob, target, scPartner)
+    -- Handle "Blackened Siredon" timer and effect.
+    local siredonTimer = mob:getLocalVar('siredonTimer')
+    if siredonTimer > 0 and GetSystemTime() >= siredonTimer then
+        mob:setLocalVar('siredonTimer', 0)
+        mob:setMod(xi.mod.REGAIN, 55)
+    end
+
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    -- Lock target during skillchain execution (scState 2=STARTING, 3=EXECUTING)
+    local scState = battlefield:getLocalVar('scState')
+    if scState == 2 or scState == 3 then
+        local scLeaderID = battlefield:getLocalVar('scLeader')
+        local scLeader = scLeaderID > 0 and GetMobByID(scLeaderID) or nil
+        if scLeader and scLeader:isAlive() then
+            local leaderTarget = scLeader:getTarget()
+            if leaderTarget and leaderTarget:getID() ~= target:getID() then
+                mob:updateEnmity(leaderTarget)
+            end
+        end
+
+    -- Shikaree use TP at 1000 when solo
+    elseif scState == 4 and mob:getTP() >= 1000 then
+        mob:useMobAbility()
+    end
+
+    -- Handle pet respawn
+    local petTimer = mob:getLocalVar('petTimer')
+    if
+        GetSystemTime() >= petTimer and
+        not GetMobByID(mob:getID() + 2):isSpawned()
+    then
+        xi.mob.callPets(mob, mob:getID() + 2, { inactiveTime = 3000 })
+    end
 end
 
------------------------------------
--- Solo weaponskill messages.
------------------------------------
 entity.onMobMobskillChoose = function(mob, target, skillId)
-    if mob:getLocalVar('scStep') == 0 then
-        mob:messageText(mob, messages.SOLO_WEAPONSKILL)
-    end
+    local tpMoves =
+    {
+        xi.mobSkill.DANCING_EDGE,
+        xi.mobSkill.EVISCERATION,
+        xi.mobSkill.SHADOWSTITCH,
+        xi.mobSkill.SHARK_BITE,
+    }
+
+    return tpMoves[math.random(1, #tpMoves)]
 end
 
------------------------------------
--- Skill messages.
------------------------------------
 entity.onMobWeaponSkill = function(mob, target, skill, action)
-    local skillID = skill:getID()
+    local skillID     = skill:getID()
+    local battlefield = mob:getBattlefield()
 
+    if not battlefield then
+        return
+    end
+
+    -- 2-Hour message.
     if skillID == xi.mobSkill.FAMILIAR_1 then
-        mob:messageText(mob, messages.USE_TWO_HOUR)
-    elseif skillID == xi.mobSkill.CALL_BEAST then
-        mob:messageText(mob, messages.CALL_BEAST)
-    else
-        skillchainReset(mob)
+        mob:messageText(mob, ID.text.SHIKAREE_X_2HR)
+        return
+    end
+
+    -- Solo skill message when only one Shikaree is alive (scState 4 = SOLO)
+    if battlefield:getLocalVar('scState') == 4 then
+        mob:messageText(mob, ID.text.SHIKAREE_X_OFFSET + 4)
+        return
+    end
+
+    -- Handle skillchain progression
+    local scSkill  = mob:getLocalVar('scSkill')
+    local scNextID = mob:getLocalVar('scNextID')
+
+    if skillID == scSkill then
+        -- Transition from STARTING to EXECUTING when leader's skill fires
+        if battlefield:getLocalVar('scState') == 2 then
+            battlefield:setLocalVar('scState', 3)
+        end
+
+        -- Pull message for either starting SC or using skill mid SC
+        local scMessage = mob:getLocalVar('scMessage')
+        if scMessage > 0 then
+            mob:messageText(mob, scMessage)
+        end
+
+        -- Clear this mob's skill tracking
+        mob:setLocalVar('scSkill', 0)
+        mob:setLocalVar('scPendingTime', 0)
+
+        -- Trigger next mob in chain
+        if scNextID > 0 then
+            local nextMob = GetMobByID(scNextID)
+            if nextMob and nextMob:isAlive() then
+                nextMob:setLocalVar('scPendingTime', GetSystemTime() + 3)
+            end
+        end
     end
 end
 
------------------------------------
--- Death message.
------------------------------------
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [ 1] = { xi.magic.spell.DOTON_ICHI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 2] = { xi.magic.spell.KATON_ICHI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 3] = { xi.magic.spell.HYOTON_ICHI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 4] = { xi.magic.spell.HUTON_ICHI,    target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 5] = { xi.magic.spell.RAITON_ICHI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 6] = { xi.magic.spell.SUITON_ICHI,   target, false, xi.action.type.DAMAGE_TARGET,     nil,                  0, 100 },
+        [ 7] = { xi.magic.spell.HOJO_ICHI,     target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,       3, 100 },
+        [ 8] = { xi.magic.spell.KURAYAMI_ICHI, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BLINDNESS,  0, 100 },
+        [ 9] = { xi.magic.spell.DOKUMORI_ICHI, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.POISON,     0, 100 },
+        [10] = { xi.magic.spell.UTSUSEMI_ICHI, mob,    false, xi.action.type.ENHANCING_TARGET,  xi.effect.COPY_IMAGE, 0, 100 },
+    }
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
-    mob:messageText(mob, messages.DEATH)
+    mob:messageText(mob, ID.text.SHIKAREE_X_OFFSET)
 end
 
 return entity

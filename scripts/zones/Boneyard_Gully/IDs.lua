@@ -27,6 +27,7 @@ zones[xi.zone.BONEYARD_GULLY] =
         THE_PARTY_WILL_BE_REMOVED     = 7426, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7443, -- Tallying conquest results...
         ENTERING_THE_BATTLEFIELD_FOR  = 7606, -- Entering the battlefield for [Head Wind/Like the Wind/Sheep in Antlion's Clothing/Shell We Dance?/Totentanz/Tango with a Tracker/Requiem of Sin/Antagonistic Ambuscade/Head Wind]!
+        SHIKAREE_Y_ENGAGE             = 7616, -- I'll get your blood rrracing!
         SHIKAREE_ENGAGE               = 7726, -- We are the Mithran Trackers! You will answer for your sins!
         SHIKAREE_Z_OFFSET             = 7727, -- H-how...is this possible...?
         FOLLOW_LEAD                   = 7729, -- Follow my lead!
@@ -51,12 +52,14 @@ zones[xi.zone.BONEYARD_GULLY] =
 
     mob =
     {
-        PARATA         = GetFirstID('Parata'),
-        SHIKAREE_Z_HW  = GetFirstID('Shikaree_Z_HW'),
-        SHIKAREE_Y_HW  = GetFirstID('Shikaree_Y_HW'),
-        SHIKAREE_X_HW  = GetFirstID('Shikaree_X_HW'),
-        SHIKAREE_Z_ROS = GetFirstID('Shikaree_Z_ROS'),
-        TUCHULCHA      = GetFirstID('Tuchulcha'),
+        PARATA             = GetFirstID('Parata'),
+        SHIKAREE_Z_HW      = GetFirstID('Shikaree_Z_HW'),
+        SHIKAREE_Y_HW      = GetFirstID('Shikaree_Y_HW'),
+        SHIKAREE_X_HW      = GetFirstID('Shikaree_X_HW'),
+        SHIKAREE_Z_ROS     = GetFirstID('Shikaree_Z_ROS'),
+        SHIKAREE_Y_ROS_TWT = GetFirstID('Shikaree_Y_ROS_TWT'),
+        SHIKAREE_X_ROS_TWT = GetFirstID('Shikaree_X_ROS_TWT'),
+        TUCHULCHA          = GetFirstID('Tuchulcha'),
     },
 
     npc =

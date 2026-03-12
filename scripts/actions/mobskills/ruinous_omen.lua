@@ -18,9 +18,8 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    -- TODO: Capture mechanics of this skill. Currently using default astral flow values.
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 9, 9, 9 }
+    params.fTP            = { 10, 10, 10 }
     params.element        = xi.element.DARK
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.DARK

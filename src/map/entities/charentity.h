@@ -370,19 +370,19 @@ public:
     };
     automatonInfo_t automatonInfo{};
 
-    uint8 getAutomatonAttachment(uint8 slot);
-    bool  hasAutomatonAttachment(uint8 attachment);
+    auto getAutomatonAttachment(uint8 slotid) const -> uint8;
+    auto hasAutomatonAttachment(uint8 attachment) const -> bool;
 
-    uint8 getAutomatonElementMax(uint8 element);
-    uint8 getAutomatonElementCapacity(uint8 element);
+    auto getAutomatonElementMax(uint8 element) const -> uint8;
+    auto getAutomatonElementCapacity(uint8 element) const -> uint8;
 
-    AUTOFRAMETYPE getAutomatonFrame() const;
-    AUTOHEADTYPE  getAutomatonHead() const;
+    auto getAutomatonFrame() const -> AutomatonFrame;
+    auto getAutomatonHead() const -> AutomatonHead;
 
-    void setAutomatonFrame(AUTOFRAMETYPE frame);
-    void setAutomatonHead(AUTOHEADTYPE head);
+    void setAutomatonFrame(AutomatonFrame frame);
+    void setAutomatonHead(AutomatonHead head);
 
-    void setAutomatonAttachment(uint8 slot, uint8 id);
+    void setAutomatonAttachment(uint8 slotid, uint8 id);
 
     void setAutomatonElementMax(uint8 element, uint8 max);
     void addAutomatonElementCapacity(uint8 element, int8 value);

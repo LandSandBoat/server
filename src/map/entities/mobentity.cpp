@@ -1024,7 +1024,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     bool      validZone = !(this->m_Type & MOBTYPE_BATTLEFIELD) && !(zoneType & ZONE_TYPE::DYNAMIS);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
-    if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)
+    if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)
     {
         // Check for seal drops
         // Only one type of seal can drop per mob

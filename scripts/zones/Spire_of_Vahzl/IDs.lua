@@ -25,11 +25,14 @@ zones[xi.zone.SPIRE_OF_VAHZL] =
         A_CRACK_HAS_FORMED            = 7385, -- A crack has formed on the <item>, and the beast inside has been unleashed!
         PARTY_MEMBERS_HAVE_FALLEN     = 7419, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7426, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        FADES_INTO_NOTHINGNESS        = 7434, -- The % fades into nothingness...
         ENTERING_THE_BATTLEFIELD_FOR  = 7625, -- Entering the battlefield for [Desires of Emptiness/Pulling the Plug/Empty Aspirations]!
     },
     mob =
     {
-        AGONIZER = GetFirstID('Agonizer'),
+        AGONIZER                 = GetFirstID('Agonizer'),
+        MEMORY_RECEPTACLE_RED    = GetFirstID('Memory_Receptacle_Red'),
+        MEMORY_RECEPTACLE_SHIELD = GetFirstID('Memory_Receptacle_Shield'),
     },
     npc =
     {

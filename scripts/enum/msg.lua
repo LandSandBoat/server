@@ -286,6 +286,7 @@ xi.msg.basic =
     ITEM_NO_TARGET                  = 410, -- No target available. Unable to use item.
     JA_RECEIVES_MAB_MDB_2           = 414, -- <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
     JA_RECEIVES_MAB_MDB             = 415, -- <user> uses <ability>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+    SKILL_RECEIVES_MAB_MDB          = 416, -- <user> uses <skill>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
     PROVOKE_SWITCH                  = 418, -- The <actor> uses <action> on <target>. The <target> switches to <actor>!
     LEARNS_SPELL                    = 419, -- <target> learns (NULL)!
     ROLL_MAIN                       = 420, -- The <player> uses .. The total comes to ..! <target> receives the effect of ..

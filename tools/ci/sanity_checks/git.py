@@ -25,7 +25,7 @@ def get_commit_messages():
 
     for hash in get_commit_hashes():
         result = subprocess.run(
-            ["git", "log", "--format=%B", hash, "-n", "1"],
+            ["git", "log", "--format=%B", "--no-merges", hash, "-n", "1"],
             capture_output=True,
             text=True,
         )

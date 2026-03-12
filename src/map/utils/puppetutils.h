@@ -19,32 +19,28 @@
 ===========================================================================
 */
 
-#ifndef _PUPUTILS_H
-#define _PUPUTILS_H
+#pragma once
 
 #include "entities/charentity.h"
-#include "items/item_puppet.h"
 #include "status_effect.h"
 
 namespace puppetutils
 {
 
-void   LoadAutomaton(CCharEntity* PChar);
-void   SaveAttachments(CCharEntity* PChar);
-void   SaveAutomaton(CCharEntity* PChar);
-bool   UnlockAttachment(CCharEntity* PChar, CItem* PItem);
-bool   HasAttachment(CCharEntity* PChar, CItem* PItem);
-void   setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
-void   setFrame(CCharEntity* PChar, uint8 frame);
-void   setHead(CCharEntity* PChar, uint8 head);
-uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level);
-void   TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
-void   CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
-void   EquipAttachments(CAutomatonEntity* PAutomaton);
-void   UpdateAttachments(CCharEntity* PChar);
-void   PreLevelRestriction(CCharEntity* PChar);
-void   PostLevelRestriction(CCharEntity* PChar);
+void LoadAutomaton(CCharEntity* PChar);
+void SaveAttachments(CCharEntity* PChar);
+void SaveAutomaton(CCharEntity* PChar);
+auto UnlockAttachment(CCharEntity* PChar, CItem* PItem) -> bool;
+auto HasAttachment(const CCharEntity* PChar, CItem* PItem) -> bool;
+void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
+void setFrame(CCharEntity* PChar, AutomatonFrame frame);
+void setHead(CCharEntity* PChar, AutomatonHead head);
+auto getSkillCap(const CCharEntity* PChar, SKILLTYPE skill, uint8 level) -> uint16;
+void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
+void CheckAttachmentsForManeuver(const CCharEntity* PChar, EFFECT maneuver, bool gain);
+void EquipAttachments(CAutomatonEntity* PAutomaton);
+void UpdateAttachments(const CCharEntity* PChar);
+void PreLevelRestriction(const CCharEntity* PChar);
+void PostLevelRestriction(const CCharEntity* PChar);
 
 }; // namespace puppetutils
-
-#endif
