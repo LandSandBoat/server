@@ -128,7 +128,12 @@ xi.maws.onEventFinish = function(player, csid, option, npc)
 
     if csid == maw.cs.warp and option == 1 then
         xi.maws.goToMaw(player, maw) -- Known to have maw, no need to check
-    elseif csid == maw.cs.warp and option == 2 and walkOfEchoesZones[zoneId] and player:hasKeyItem(xi.ki.LIGHTSWORM) then
+    elseif
+        csid == maw.cs.warp and
+        option == 2 and
+        walkOfEchoesZones[zoneId] and
+        player:hasKeyItem(xi.ki.LIGHTSWORM)
+    then
         -- Walk of Echoes entry from Jeuno-area Cavernous Maws (requires Lightsworm KI)
         printf('[WoE_Maw] Warping player to Walk of Echoes!')
         player:setPos(unpack(walkOfEchoesDest))
