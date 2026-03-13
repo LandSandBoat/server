@@ -11,47 +11,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  Clang_Tidy:
-    name: Clang Tidy
-    uses: ./.github/workflows/runner_build.yml
-    with:
-      runner: ubuntu-24.04
-      compiler: clang
-      compiler_version: 20
-      build_type: Debug
-      tracy: false
-      build_modules: false
-      save_cache: true
-      upload_artifact: false
-      clang_tidy: true
-
-  Runner_Build:
-    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - build_type: Debug
-            runner: ubuntu-24.04
-            compiler: gcc
-            compiler_version: 14
-            tracy: false
-            build_modules: false
-            save_cache: true
-            upload_artifact: false
-            clang_tidy: false
-    uses: ./.github/workflows/runner_build.yml
-    with:
-      runner: ${{ matrix.runner }}
-      compiler: ${{ matrix.compiler }}
-      compiler_version: ${{ matrix.compiler_version }}
-      build_type: ${{ matrix.build_type }}
-      build_modules: ${{ matrix.build_modules }}
-      tracy: ${{ matrix.tracy }}
-      save_cache: ${{ matrix.save_cache }}
-      upload_artifact: ${{ matrix.upload_artifact }}
-      clang_tidy: ${{ matrix.clang_tidy }}
-
   Docker_Build:
     name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
     strategy:

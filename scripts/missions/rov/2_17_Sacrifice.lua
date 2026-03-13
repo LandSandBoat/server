@@ -3,7 +3,7 @@
 -- Rhapsodies of Vana'diel Mission 2-17
 -----------------------------------
 -- !addmission 13 83
--- Ornate Door (_521) : !pos -700 -20.25 -303.398 89
+-- Ornate Door (_521) : !pos -700 -20.25 -305.398 182
 -----------------------------------
 local walkOfEchoesID = zones[xi.zone.WALK_OF_ECHOES]
 -----------------------------------

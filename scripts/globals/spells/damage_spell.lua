@@ -1146,6 +1146,12 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local areaOfEffectResistance    = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
     local actionTypeMultiplier      = xi.spells.damage.calculateSpellActionTypeMultiplier(caster)
 
+    -- DEBUG: Log all damage multipliers to find alternating damage issue
+    printf("[SPELL_DEBUG] Spell:%d Base:%d MTDR:%.3f Staff:%.3f Affinity:%.3f SDT:%.3f Resist:%.3f AddResist:%.3f DayWeath:%.3f MAB/MDB:%.3f MCrit:%.3f TMDA:%.3f Absorb:%.3f MB:%.3f",
+        spellId, spellDamage, multipleTargetReduction, elementalStaffBonus, elementalAffinityBonus,
+        sdt, resistTier, additionalResistTier, dayAndWeather, magicBonusDiff,
+        criticalDamageMultiplier, targetMagicDamageAdjustment, absorb, magicBurst)
+
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
     finalDamage = math.floor(finalDamage * elementalStaffBonus)

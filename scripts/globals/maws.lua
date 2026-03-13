@@ -32,6 +32,17 @@ local pastMaws =
 }
 xi.maws.pastMaws = pastMaws
 
+-- Walk of Echoes entry zones (Jeuno-area maws that offer WoE warp when player has Lightsworm KI)
+local walkOfEchoesZones =
+{
+    [xi.zone.BATALLIA_DOWNS]       = true,
+    [xi.zone.ROLANBERRY_FIELDS]    = true,
+    [xi.zone.SAUROMUGUE_CHAMPAIGN] = true,
+}
+
+-- Walk of Echoes entry coordinates (from WotG mission scripts)
+local walkOfEchoesDest = { -700.042, 0.399, -441.301, 192, xi.zone.WALK_OF_ECHOES }
+
 xi.maws.goToMaw = function(player, maw)
     player:setPos(unpack(maw.dest))
 end
@@ -105,10 +116,22 @@ xi.maws.onTrigger = function(player, npc)
 end
 
 xi.maws.onEventFinish = function(player, csid, option, npc)
-    local maw = xi.maws.pastMaws[player:getZoneID()]
+    local zoneId = player:getZoneID()
+    local maw = xi.maws.pastMaws[zoneId]
+
+    if walkOfEchoesZones[zoneId] then
+        printf('[WoE_Maw] Zone: %d, csid: %d, option: %d, hasLightsworm: %s, warpEvent: %d',
+            zoneId, csid, option,
+            tostring(player:hasKeyItem(xi.ki.LIGHTSWORM)),
+            maw.cs.warp)
+    end
 
     if csid == maw.cs.warp and option == 1 then
         xi.maws.goToMaw(player, maw) -- Known to have maw, no need to check
+    elseif csid == maw.cs.warp and option == 2 and walkOfEchoesZones[zoneId] and player:hasKeyItem(xi.ki.LIGHTSWORM) then
+        -- Walk of Echoes entry from Jeuno-area Cavernous Maws (requires Lightsworm KI)
+        printf('[WoE_Maw] Warping player to Walk of Echoes!')
+        player:setPos(unpack(walkOfEchoesDest))
     elseif maw.cs.add and csid == maw.cs.add and option == 1 then
         xi.maws.addMaw(player, maw)
     end
