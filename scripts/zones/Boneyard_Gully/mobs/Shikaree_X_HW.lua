@@ -64,6 +64,7 @@ entity.onMobFight = function(mob, target)
         not GetMobByID(mob:getID() + 2):isSpawned()
     then
         xi.mob.callPets(mob, mob:getID() + 2, { inactiveTime = 3000 })
+        mob:messageText(mob, ID.text.DINNER_TIME_ADVENTURER_STEAK)
     end
 end
 

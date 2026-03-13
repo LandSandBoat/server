@@ -7,7 +7,6 @@ return {
     ['Balakaf']            = { event = 515 },
     ['Bujahwa']            = { event = 683 },
     ['Cacaroon']           = { event = 248 },
-    ['Dhima_Polevhia']     = { event = 788 },
     ['Ekhu_Pesshyadha']    = { event = 532 },
     ['Fari-Wari']          = { event = 831 },
     ['Galzweesh']          = { event = 658 },

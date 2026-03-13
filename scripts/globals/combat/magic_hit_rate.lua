@@ -525,6 +525,8 @@ local function calculateResistanceFactor(actor, target, params)
     for i = 1, maxResistTier do
         if math.random() > params.magicHitRate then
             resistTier = resistTier + 1
+        else
+            break
         end
     end
 

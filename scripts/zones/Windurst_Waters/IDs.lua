@@ -66,6 +66,7 @@ zones[xi.zone.WINDURST_WATERS] =
         CHEF_IN_TRAINING              = 10701, -- I'm a chef-in-training, don'taru you know? One day I'll be as famous-wamous as that Rycharde character in Mhaura.
         NESSRUGETOMALL_SHOP_DIALOG    = 11504, -- Welcome to the Rarab Tail Hostelry.
         DIABOLOS_UNLOCKED             = 11933, -- You are now able to summon Diabolos!
+        DOOR_FIRMLY_SHUT              = 12341, -- The door is firmly shut...
     },
 
     mob =

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Boneyard_Gully
---  Mob: Shikaree Y
+--  Mob: Shikaree Y (Tango With A Tracker / Requiem of Sin)
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.BONEYARD_GULLY]
@@ -9,7 +9,6 @@ local ID = zones[xi.zone.BONEYARD_GULLY]
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.PLAGUE)
@@ -17,6 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.BIND_RES_RANK, 8)
     -- TODO: Needs gravity res rank
@@ -33,7 +33,7 @@ entity.onMobEngage = function(mob, target)
         battlefield and
         battlefield:getID() == xi.battlefield.id.TANGO_WITH_A_TRACKER
     then
-        mob:messageText(mob, ID.text.SHIKAREE_Y_ENGAGE)
+        mob:messageText(mob, ID.text.GET_YOUR_BLOOD_RACING)
     end
 end
 
@@ -156,9 +156,14 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [18] = { xi.magic.spell.ABSORB_MND, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.MND_DOWN, 0, 100 },
         [19] = { xi.magic.spell.DRAIN,      target, false, xi.action.type.DAMAGE_TARGET,     nil,                0, 100 },
         [20] = { xi.magic.spell.ASPIR,      target, false, xi.action.type.DAMAGE_TARGET,     nil,                0, 100 },
+        [21] = { xi.magic.spell.STUN,       target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.STUN,     0, 100 },
     }
 
     return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
+entity.onMobDisengage = function(mob)
+    mob:messageText(mob, ID.text.SHIKAREE_PARTY_WIPE)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

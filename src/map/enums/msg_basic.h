@@ -280,4 +280,5 @@ enum class MsgBasic : uint16_t
     ROEUnable                       = 742, // You are currently unable to undertake this objective.
     AutoExceedsCapacity             = 745, // Your automaton exceeds one or more elemental capacity values and cannot be activated.
     MountRequiredLevel              = 773, // You are unable to call forth your mount because your main job level is not at least <level>.
+    AlterEgoUpgrade                 = 828, // <category> attribute increased to #.
 };

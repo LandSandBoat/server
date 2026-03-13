@@ -51,6 +51,8 @@ entity.onTrigger = function(player, npc)
             else
                 player:startEvent(945) -- patience. need to wait for vana'diel day
             end
+        else
+            player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
         end
     end
 end
@@ -67,9 +69,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('LeleroonsLetterGreen', 4)
         player:setCharVar('corAfSubmitDay', VanadielUniqueDay())
     elseif csid == 944 then
-        player:setCharVar('LeleroonsLetterGreen', 5)
-        player:addItem(xi.item.CORSAIRS_GANTS) -- corsair's gants
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CORSAIRS_GANTS)
+        if npcUtil.giveItem(player, xi.item.CORSAIRS_GANTS) then
+            player:setCharVar('LeleroonsLetterGreen', 5)
+        end
     end
 end
 

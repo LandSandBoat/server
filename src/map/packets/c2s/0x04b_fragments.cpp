@@ -45,19 +45,22 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
 
     if (msgType == 1) // Standard Server Message
     {
-        std::string loginMessage = luautils::GetServerMessage(msgLanguage);
-
-        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::SERVMES>(loginMessage, msgLanguage, timestamp, offset);
-        PChar->pushPacket<CCharSyncPacket>(PChar);
-
-        // TODO: kill player til theyre dead and bsod
-        const auto rset = db::preparedStmt("SELECT version_mismatch FROM accounts_sessions WHERE charid = (?)", PChar->id);
-        if (rset && rset->rowsCount() > 0 && rset->next())
+        // Deduplicate fragment retries caused by slow zone-in response times.
+        if (PChar->servmesLastOffset_ == offset)
         {
-            if (rset->get<bool>("version_mismatch"))
-            {
-                PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Server does not support this client version.");
-            }
+            return;
+        }
+
+        std::string loginMessage = luautils::GetServerMessage(msgLanguage);
+        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::SERVMES>(loginMessage, msgLanguage, timestamp, offset);
+        PChar->servmesLastOffset_ = offset;
+
+        // Reset tracking after the final fragment so /servmes works later
+        const auto msgSize   = loginMessage.length() + 1;
+        const auto sndLength = msgSize - offset > 236 ? 236 : (msgSize - offset);
+        if (offset + sndLength >= msgSize)
+        {
+            PChar->servmesLastOffset_ = std::nullopt;
         }
     }
     else if (msgType == 2) // Fish Ranking Packet

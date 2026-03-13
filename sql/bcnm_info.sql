@@ -207,7 +207,7 @@ INSERT INTO `bcnm_records` VALUES (674,8,'sheep_in_antlions_clothing','nobody',0
 INSERT INTO `bcnm_records` VALUES (675,8,'shell_we_dance','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (676,8,'totentanz','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (677,8,'tango_with_a_tracker','nobody',0,1800);
-INSERT INTO `bcnm_records` VALUES (678,8,'requiem_of_a_sin','nobody',0,1800);
+INSERT INTO `bcnm_records` VALUES (678,8,'requiem_of_sin','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (679,8,'antagonistic_ambuscade','nobody',0,900);
 INSERT INTO `bcnm_records` VALUES (704,10,'darkness_named','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (705,10,'test_your_mite','nobody',0,1800);

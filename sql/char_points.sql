@@ -203,6 +203,7 @@ CREATE TABLE `char_points` (
   `is_accolades` smallint(5) unsigned NOT NULL DEFAULT 0,
   `temenos_units` int(10) unsigned NOT NULL DEFAULT 0,
   `apollyon_units` int(10) unsigned NOT NULL DEFAULT 0,
+  `alter_ego_points` smallint(5) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

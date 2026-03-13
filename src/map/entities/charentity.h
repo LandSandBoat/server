@@ -460,8 +460,9 @@ public:
     void   erasePackets(uint8 num); // Erase num elements from front of packet list
     bool   isPacketFiltered(std::unique_ptr<CBasicPacket>& packet);
 
-    bool pendingPositionUpdate;
-    bool sendServerStatus_ = false;
+    bool                 pendingPositionUpdate;
+    bool                 sendServerStatus_ = false;
+    std::optional<int32> servmesLastOffset_; // Last /servmes fragment offset we responded to
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 

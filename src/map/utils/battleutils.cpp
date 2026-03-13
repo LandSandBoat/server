@@ -3838,7 +3838,7 @@ int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
         PDefender->setModifier(Mod::SENGIKORI_SC_DMG_DEBUFF, 0); // Consume the effect
     }
 
-    float damageReductionMult = (10000.0f - static_cast<float>(resistance)) / 10000.0f;
+    float damageReductionMult = (10000.0f + static_cast<float>(resistance)) / 10000.0f;
 
     damage = std::floor(static_cast<float>(damage) * damageReductionMult);
     damage = MagicDmgTaken(PDefender, damage, appliedEle);
