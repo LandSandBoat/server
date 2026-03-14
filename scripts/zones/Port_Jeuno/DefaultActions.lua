@@ -24,8 +24,6 @@ return {
     ['Inesh']            = { text = ID.text.ARRIVAL_NPC },
     ['Jaha_Amariyo']     = { event = 57 },
     ['Jhuo_Halmanzoh']   = { event = 53 },
-    ['Joachim']          = { text = ID.text.WOULD_YE_MIND },
-    ['Horst']            = { event = 339 },
     ['Karl']             = { event = 58 },
     ['Khumo_Daramasteh'] = { event = 19 },
     ['Kuya-Moya']        = { event = 55 },

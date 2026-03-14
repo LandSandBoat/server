@@ -21,7 +21,6 @@ return {
     ['Diradour']             = { event = 10000 },
     ['Elevator_Button']      = { event = 75 },
     ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
-    ['Fabien']               = { text = ID.text.NOT_ACQUAINTED },
     ['Falreze']              = { event = 121 },
     ['Harith']               = { event = 111 },
     ['High_Wind']            = { event = 164 },
@@ -50,6 +49,5 @@ return {
     ['Taillegeas']           = { event = 10061 },
     ['Tillecoe']             = { event = 70 },
     ['Tsugumi']              = { event = 163 },
-    ['Vincent']              = { event = 10185 },
     ['Yavoraile']            = { event = 118 },
 }

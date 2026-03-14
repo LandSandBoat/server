@@ -101,7 +101,8 @@ effectObject.onEffectLose = function(target, effect)
 
     if
         target:getLocalVar('gameLogin') == 0 and
-        xi.abyssea.isInAbysseaZone(target)
+        xi.abyssea.isInAbysseaZone(target) and
+        zoneID ~= xi.zone.ABYSSEA_EMPYREAL_PARADOX
     then
         target:setLocalVar('finalCountdown', 0)
         target:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
