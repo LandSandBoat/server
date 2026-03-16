@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Pre-push hook: prevents direct pushes to protected branches.
+# Both devs should install this via: git config core.hooksPath .githooks
+#
+
+PROTECTED_BRANCHES="base"
+
+current_branch=$(git symbolic-ref HEAD 2>/dev/null | sed 's|refs/heads/||')
+
+while read local_ref local_sha remote_ref remote_sha; do
+    remote_branch=$(echo "$remote_ref" | sed 's|refs/heads/||')
+
+    for protected in $PROTECTED_BRANCHES; do
+        if [ "$remote_branch" = "$protected" ]; then
+            echo ""
+            echo "  BLOCKED: Direct push to '$protected' is not allowed."
+            echo ""
+            echo "  Create a PR from your branch into '$protected' instead:"
+            echo "    gh pr create --base $protected"
+            echo ""
+            echo "  If this is a merge from develop after PR approval:"
+            echo "    git checkout $protected && git merge develop && git push"
+            echo "    (remove the hook temporarily with: git push --no-verify)"
+            echo ""
+            exit 1
+        fi
+    done
+done
+
+exit 0
