@@ -18,7 +18,8 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission == mission.missionId and
+                player:hasKeyItem(xi.ki.RHAPSODY_IN_OCHRE)
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
