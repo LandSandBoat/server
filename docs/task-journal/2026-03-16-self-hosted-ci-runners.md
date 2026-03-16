@@ -25,7 +25,6 @@ Add a self-hosted Actions Runner Controller configuration in the homelab repo fo
 - No runner scale set existed yet for `https://github.com/CalamityFFXI/game-server`.
 - The existing runner pattern uses a GitHub App secret from 1Password, `gha-runner-scale-set`, and Flux-managed `HelmRelease` resources.
 - The `cxi_minimal_alpine_image.yml` workflow uses `docker/setup-buildx-action` and `docker/build-push-action`, which require Docker daemon access from the runner.
-- The BuildKit release tarball ships `buildctl` and `buildkitd`, but not the `buildctl-daemonless.sh` helper script.
 
 ### Inferred
 
@@ -50,8 +49,6 @@ Add a second ARC runner scale set in the homelab repo for `CalamityFFXI/game-ser
 - Confirmed the new runner set is included in the runners kustomization and Flux health checks.
 - Bound `.github/workflows/cxi_minimal_alpine_image.yml` to the explicit ARC scale-set label `calamityxi-game-server-runners`.
 - Confirmed the runner-set fix for the observed Buildx failure is changing the scale set from ARC `kubernetes` mode to ARC `dind` mode.
-- Added manual-only `.github/workflows/cxi_minimal_alpine_image_buildkit_experiment.yml` so daemonless BuildKit can be tested on the same self-hosted runner label before changing runner mode again.
-- Patched the BuildKit experiment workflow to download `buildctl-daemonless.sh` from the matching BuildKit git tag instead of assuming it exists in the release tarball.
 
 ## Risks
 
@@ -59,7 +56,6 @@ Add a second ARC runner scale set in the homelab repo for `CalamityFFXI/game-ser
 - ARC runner permissions are currently broad because the repo mirrors the existing cluster-admin runner pattern; this is functional but not least-privilege.
 - ARC `dind` mode is more privileged than ARC `kubernetes` mode, so it should stay limited to trusted private-repo workloads.
 - Workflows still need explicit self-hosted `cxi_` entrypoints before this runner set is actually used.
-- The BuildKit experiment is intentionally not the default path yet because rootless or daemonless BuildKit behavior depends on the runner image and container security model.
 
 ## Rollback Notes
 
@@ -73,5 +69,4 @@ Add a second ARC runner scale set in the homelab repo for `CalamityFFXI/game-ser
 - Ensure the GitHub App is installed for `CalamityFFXI/game-server`.
 - Reconcile the updated ARC `dind` runner-set manifest in the homelab repo.
 - Validate `.github/workflows/cxi_minimal_alpine_image.yml` on the updated self-hosted runner set.
-- Manually run `.github/workflows/cxi_minimal_alpine_image_buildkit_experiment.yml` to test whether daemonless BuildKit works on the current runner image without further runner changes.
 - Add additional Linux-only `cxi_` workflows in the game-server repo that target the new self-hosted runner set.
