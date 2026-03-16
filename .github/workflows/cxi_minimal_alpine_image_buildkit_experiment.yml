@@ -1,0 +1,103 @@
+name: CXI Minimal Alpine Image (BuildKit Experiment)
+
+# CalamityXI fork-specific workflow.
+# Manual-only experiment for daemonless BuildKit on the self-hosted ARC runner set.
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Alpine Service Image With BuildKit
+    runs-on: calamityxi-game-server-runners
+    timeout-minutes: 90
+    permissions:
+      contents: read
+      packages: write
+    env:
+      BUILDKIT_VERSION: v0.26.3
+      BUILDKITD_FLAGS: --oci-worker-no-process-sandbox
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Lowercase repository metadata
+        id: meta
+        run: |
+          repo="${GITHUB_REPOSITORY,,}"
+          sha_tag="buildkit-sha-${GITHUB_SHA::12}"
+          tags="ghcr.io/${repo}:${sha_tag}"
+          if [ "${GITHUB_REF_NAME}" = "base" ]; then
+            tags="${tags},ghcr.io/${repo}:buildkit-experiment"
+          fi
+          echo "repo=${repo}" >> "$GITHUB_OUTPUT"
+          echo "tags=${tags}" >> "$GITHUB_OUTPUT"
+          echo "cache_ref=ghcr.io/${repo}:buildkit-cache-alpine-service" >> "$GITHUB_OUTPUT"
+
+      - name: Install BuildKit
+        run: |
+          set -euo pipefail
+          arch="$(uname -m)"
+          case "$arch" in
+            x86_64) arch=amd64 ;;
+            aarch64) arch=arm64 ;;
+            *)
+              echo "Unsupported architecture: ${arch}"
+              exit 1
+              ;;
+          esac
+          archive="buildkit-${BUILDKIT_VERSION}.linux-${arch}.tar.gz"
+          url="https://github.com/moby/buildkit/releases/download/${BUILDKIT_VERSION}/${archive}"
+          curl -fsSL "$url" -o "$RUNNER_TEMP/${archive}"
+          mkdir -p "$RUNNER_TEMP/buildkit"
+          tar -xzf "$RUNNER_TEMP/${archive}" -C "$RUNNER_TEMP/buildkit"
+          echo "$RUNNER_TEMP/buildkit/bin" >> "$GITHUB_PATH"
+
+      - name: Configure GHCR auth for BuildKit
+        run: |
+          set -euo pipefail
+          export DOCKER_CONFIG="$RUNNER_TEMP/docker-config"
+          mkdir -p "$DOCKER_CONFIG"
+          auth="$(printf '%s:%s' "${GITHUB_REPOSITORY_OWNER}" "${{ secrets.GITHUB_TOKEN }}" | base64 | tr -d '\n')"
+          cat > "$DOCKER_CONFIG/config.json" <<EOF
+          {
+            "auths": {
+              "ghcr.io": {
+                "auth": "${auth}"
+              }
+            }
+          }
+          EOF
+          echo "DOCKER_CONFIG=$DOCKER_CONFIG" >> "$GITHUB_ENV"
+
+      - name: Build and push service image with daemonless BuildKit
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+          CACHE_REF: ${{ steps.meta.outputs.cache_ref }}
+        run: |
+          set -euo pipefail
+          export XDG_RUNTIME_DIR="$RUNNER_TEMP/buildkit-runtime"
+          mkdir -p "$XDG_RUNTIME_DIR"
+
+          buildctl-daemonless.sh build \
+            --frontend dockerfile.v0 \
+            --local context=. \
+            --local dockerfile=. \
+            --opt filename=docker/alpine.Dockerfile \
+            --opt target=service \
+            --opt build-arg:COMPILER=clang \
+            --opt build-arg:LLVM_VERSION=20 \
+            --opt build-arg:CMAKE_BUILD_TYPE=Release \
+            --opt build-arg:TRACY_ENABLE=OFF \
+            --opt build-arg:PCH_ENABLE=ON \
+            --opt build-arg:WARNINGS_AS_ERRORS=TRUE \
+            --opt build-arg:REPO_URL=${{ github.server_url }}/${{ github.repository }}.git \
+            --opt build-arg:COMMIT_SHA=${{ github.sha }} \
+            --import-cache type=registry,ref="${CACHE_REF}" \
+            --export-cache type=registry,ref="${CACHE_REF}",mode=max \
+            --output type=image,name="${TAGS}",push=true

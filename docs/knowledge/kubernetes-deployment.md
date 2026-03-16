@@ -124,6 +124,7 @@ Useful checks:
   - `minRunners: 0`
   - `maxRunners: 2`
 - The runner scale set name is explicitly `calamityxi-game-server-runners`, and ARC runner scale sets use that single name as the `runs-on` target for workflows.
+- The current runner set is configured for ARC `dind` mode rather than ARC `kubernetes` mode because the existing `cxi_` image-build workflow uses Docker/Buildx and requires a local Docker daemon socket.
 - The runner auth material should come from a dedicated 1Password item named `calamityxi-game-server-runners`, not from the `homelab` runner secret, because the GitHub App installation ID must match the `CalamityFFXI/game-server` installation scope.
 - This runner set only prepares cluster-side capacity. GitHub workflow files still need explicit `cxi_` self-hosted workflows before PR checks or builds will use it.
 
