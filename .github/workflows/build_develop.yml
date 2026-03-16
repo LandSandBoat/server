@@ -1,0 +1,40 @@
+name: Develop Builds
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  Docker_Build:
+    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build_type: Release
+            os: ubuntu
+            compiler: gcc
+            compiler_version: 14
+            clang_format_version: 20
+            tracy: false
+            build_modules: false
+            save_cache: true
+            publish: true
+    uses: ./.github/workflows/docker_build.yml
+    with:
+      os: ${{ matrix.os }}
+      compiler: ${{ matrix.compiler }}
+      compiler_version: ${{ matrix.compiler_version }}
+      clang_format_version: ${{ matrix.clang_format_version }}
+      build_type: ${{ matrix.build_type }}
+      save_cache: ${{ matrix.save_cache }}
+      build_modules: ${{ matrix.build_modules }}
+      tracy: ${{ matrix.tracy }}
+      upload_artifact: false
+      publish: ${{ matrix.publish }}
