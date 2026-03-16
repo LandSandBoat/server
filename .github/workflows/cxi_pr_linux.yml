@@ -1,0 +1,187 @@
+name: CXI PR Linux
+
+# CalamityXI fork-specific workflow.
+# Keep upstream workflows mergeable; add fork automation in separate cxi_* files.
+
+on:
+  pull_request:
+    branches:
+      - base
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  Sanity_Checks:
+    name: Sanity Checks
+    runs-on: calamityxi-game-server-runners
+    container:
+      image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
+
+      - name: Run checks
+        run: ./tools/ci/sanity_checks.sh origin/${{ github.event.pull_request.base.ref }}
+
+      - name: Add sanity checks report to summary
+        if: ${{ always() }}
+        run: tr -d '\r' < sanity_checks_summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload changed files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: changed-files
+          path: changed-files.txt
+        continue-on-error: true
+
+  Lua_Language_Server:
+    name: Lua Language Server
+    needs: Sanity_Checks
+    runs-on: calamityxi-game-server-runners
+    container:
+      image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Download Changed Files
+        uses: actions/download-artifact@v4
+        with:
+          name: changed-files
+
+      - name: Check For Changed Lua Files
+        id: check-changes
+        run: |
+          mapfile -t changed_files < changed-files.txt
+          lua_changes=false
+          for changed_file in ${changed_files[@]}; do
+              if [[ $changed_file == scripts/**/*.lua || $changed_file == modules/**/*.lua ]]; then
+                lua_changes=true
+                break
+              fi
+          done
+          echo "lua_changes=$lua_changes" >> $GITHUB_OUTPUT
+
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - uses: actions/checkout@v4
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        with:
+          fetch-depth: 0
+
+      - name: Install Python dependencies
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade -r ./tools/requirements.txt
+
+      - name: Run Lua Language Server
+        id: run_lls
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: python ./tools/ci/lua_lang_server.py
+
+      - name: Summarize run
+        id: summarize_run
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' }}
+        run: |
+          found_issues=false
+          check_file=lua_lang_errors.txt
+          if [[ -f "$check_file" && -s "$check_file" ]]; then
+              found_issues=true
+              echo "## :x: Run Failed" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              tr -d '\r' < "$check_file" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [[ "$found_issues" == "false" ]]; then
+              if [[ "${{ steps.run_lls.outcome }}" == "success" ]]; then
+                  echo "## :heavy_check_mark: All checks passed." >> $GITHUB_STEP_SUMMARY
+              else
+                  echo "## :x: Lua Language Server had errors, but no specific output was found." >> $GITHUB_STEP_SUMMARY
+                  echo "Check the logs step for details." >> $GITHUB_STEP_SUMMARY
+                  found_issues=true
+              fi
+          fi
+          echo "issues_found=$found_issues" >> $GITHUB_OUTPUT
+
+      - name: Fail Workflow if Checks Failed
+        if: ${{ steps.check-changes.outputs.lua_changes == 'true' && (steps.run_lls.outcome == 'failure' || steps.summarize_run.outputs.issues_found == 'true') }}
+        run: |
+          echo "Lua Language Server failed. See summary for details."
+          exit 1
+
+  Clang_Tidy:
+    needs: Sanity_Checks
+    name: Clang Tidy
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: calamityxi-game-server-runners
+      compiler: clang
+      compiler_version: 20
+      build_type: Debug
+      build_modules: false
+      tracy: false
+      upload_artifact: false
+      clang_tidy: true
+      optional_build: true
+
+  Build:
+    needs: Sanity_Checks
+    name: Build
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: calamityxi-game-server-runners
+      compiler: gcc
+      compiler_version: 14
+      build_type: Debug
+      build_modules: false
+      upload_artifact: true
+
+  Test:
+    needs: Build
+    if: ${{ !cancelled() && needs.Build.result == 'success' }}
+    name: Test
+    uses: ./.github/workflows/runner_test.yml
+    with:
+      runner: calamityxi-game-server-runners
+      test_modules: false
+      multi_process: false
+      xi_test: true
+      startup_checks: true
+
+  Success:
+    name: CXI PR Linux Success
+    if: ${{ !cancelled() }}
+    needs:
+      - Sanity_Checks
+      - Lua_Language_Server
+      - Clang_Tidy
+      - Build
+      - Test
+    runs-on: calamityxi-game-server-runners
+    steps:
+      - name: Any jobs failed?
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
+
+      - name: All jobs passed or skipped?
+        if: ${{ !(contains(needs.*.result, 'failure')) }}
+        run: echo "All jobs passed or skipped" && echo "${{ toJSON(needs.*.result) }}"

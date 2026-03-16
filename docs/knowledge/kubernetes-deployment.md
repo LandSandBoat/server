@@ -126,7 +126,11 @@ Useful checks:
 - The runner scale set name is explicitly `calamityxi-game-server-runners`, and ARC runner scale sets use that single name as the `runs-on` target for workflows.
 - The current runner set is configured for ARC `dind` mode rather than ARC `kubernetes` mode because the existing `cxi_` image-build workflow uses Docker/Buildx and requires a local Docker daemon socket.
 - The runner auth material should come from a dedicated 1Password item named `calamityxi-game-server-runners`, not from the `homelab` runner secret, because the GitHub App installation ID must match the `CalamityFFXI/game-server` installation scope.
-- This runner set only prepares cluster-side capacity. GitHub workflow files still need explicit `cxi_` self-hosted workflows before PR checks or builds will use it.
+- The runner set is currently used by:
+  - `.github/workflows/cxi_minimal_alpine_image.yml`
+  - `.github/workflows/cxi_pr_linux.yml`
+- The fork PR validation path is intentionally Linux-only and self-hosted. Cross-platform upstream PR workflows remain upstream-owned and can be disabled in GitHub if the fork does not want them.
+- The branch-protection target for the fork PR workflow should be the unique final gate check `CXI PR Linux Success`, not a generic name like `Success`.
 
 ## Risks
 

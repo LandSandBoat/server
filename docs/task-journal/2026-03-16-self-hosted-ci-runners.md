@@ -49,6 +49,8 @@ Add a second ARC runner scale set in the homelab repo for `CalamityFFXI/game-ser
 - Confirmed the new runner set is included in the runners kustomization and Flux health checks.
 - Bound `.github/workflows/cxi_minimal_alpine_image.yml` to the explicit ARC scale-set label `calamityxi-game-server-runners`.
 - Confirmed the runner-set fix for the observed Buildx failure is changing the scale set from ARC `kubernetes` mode to ARC `dind` mode.
+- Added `.github/workflows/cxi_pr_linux.yml` as the fork-owned Linux-only PR validation path on the same self-hosted runner label.
+- Renamed the final PR gate job to `CXI PR Linux Success` so GitHub branch protection can require a unique check name without colliding with generic upstream-style `Success` jobs.
 
 ## Risks
 
@@ -69,4 +71,5 @@ Add a second ARC runner scale set in the homelab repo for `CalamityFFXI/game-ser
 - Ensure the GitHub App is installed for `CalamityFFXI/game-server`.
 - Reconcile the updated ARC `dind` runner-set manifest in the homelab repo.
 - Validate `.github/workflows/cxi_minimal_alpine_image.yml` on the updated self-hosted runner set.
+- Validate `.github/workflows/cxi_pr_linux.yml` on an opened or updated PR.
 - Add additional Linux-only `cxi_` workflows in the game-server repo that target the new self-hosted runner set.
