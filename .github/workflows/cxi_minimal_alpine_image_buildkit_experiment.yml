@@ -56,6 +56,9 @@ jobs:
           curl -fsSL "$url" -o "$RUNNER_TEMP/${archive}"
           mkdir -p "$RUNNER_TEMP/buildkit"
           tar -xzf "$RUNNER_TEMP/${archive}" -C "$RUNNER_TEMP/buildkit"
+          curl -fsSL "https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/examples/buildctl-daemonless/buildctl-daemonless.sh" \
+            -o "$RUNNER_TEMP/buildkit/bin/buildctl-daemonless.sh"
+          chmod +x "$RUNNER_TEMP/buildkit/bin/buildctl-daemonless.sh"
           echo "$RUNNER_TEMP/buildkit/bin" >> "$GITHUB_PATH"
 
       - name: Configure GHCR auth for BuildKit
