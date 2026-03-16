@@ -43,6 +43,7 @@
 #include "lua_trade_container.h"
 #include "lua_treasure_pool.h"
 #include "lua_trigger_area.h"
+#include "lua_weaponskill.h"
 #include "lua_zone.h"
 
 #include "ai/ai_container.h"
@@ -350,6 +351,7 @@ void init(IPP mapIPP, bool isRunningInCI)
         CLuaLootContainer::Register();
         CLuaMobSkill::Register();
         CLuaPetSkill::Register();
+        CLuaWeaponSkill::Register();
         CLuaTriggerArea::Register();
         CLuaSpell::Register();
         CLuaStatusEffect::Register();

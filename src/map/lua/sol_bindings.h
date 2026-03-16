@@ -146,6 +146,10 @@ class CLuaPetSkill;
 class CPetSkill;
 SOL_BIND_DEC(CLuaPetSkill, CPetSkill);
 
+class CLuaWeaponSkillSkill;
+class CWeaponSkill;
+SOL_BIND_DEC(CLuaWeaponSkill, CWeaponSkill);
+
 class CLuaSpell;
 class CSpell;
 SOL_BIND_DEC(CLuaSpell, CSpell);

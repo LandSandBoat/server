@@ -102,6 +102,10 @@ SOL_BIND_DEF(CLuaMobSkill, CMobSkill);
 #include "lua_petskill.h"
 SOL_BIND_DEF(CLuaPetSkill, CPetSkill);
 
+#include "weapon_skill.h"
+#include "lua_weaponskill.h"
+SOL_BIND_DEF(CLuaWeaponSkill, CWeaponSkill);
+
 #include "spell.h"
 #include "lua_spell.h"
 SOL_BIND_DEF(CLuaSpell, CSpell);

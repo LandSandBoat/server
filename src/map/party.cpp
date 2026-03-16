@@ -684,8 +684,8 @@ void CParty::AddMember(CBattleEntity* PEntity)
             if (PChar->getZone() == m_PSyncTarget->getZone())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), MsgStd::LevelSyncActivated);
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, m_PSyncTarget->GetMLevel(), 0s, 0s), EffectNotice::Silent);
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
+                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, m_PSyncTarget->GetMLevel(), 0s, 0s), EffectNotice::Silent);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
             }
         }
@@ -1159,8 +1159,8 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
                     if (member->status != STATUS_TYPE::DISAPPEAR && member->getZone() == PChar->getZone())
                     {
                         member->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar->GetMLevel(), 0, 0, 0, message);
-                        member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0s, 0s), EffectNotice::Silent);
                         member->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
+                        member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0s, 0s), EffectNotice::Silent);
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(member));
                     }
                 }
