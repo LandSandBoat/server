@@ -1,0 +1,7 @@
+interface:
+  display_name: "LandSandBoat Principal Engineer"
+  short_description: "Principal LSB/FFXI repo owner"
+  default_prompt: "Use $landsandboat-principal-engineer to investigate, implement, and document a safe LandSandBoat or FFXI server change in this repository."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,87 @@
+name: CXI Minimal Alpine Image
+
+# CalamityXI fork-specific workflow.
+# Keep upstream workflows mergeable; add fork automation in separate cxi_* files.
+
+on:
+  push:
+    branches:
+      - base
+    paths:
+      - ".github/workflows/cxi_minimal_alpine_image.yml"
+      - "docker/alpine.Dockerfile"
+      - "docker/entrypoint.sh"
+      - "CMakeLists.txt"
+      - "cmake/**"
+      - "ext/**"
+      - "res/**"
+      - "settings/**"
+      - "src/**"
+      - "scripts/**"
+      - "sql/**"
+      - "tools/**"
+      - "modules/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Alpine Service Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Lowercase repository metadata
+        id: meta
+        run: |
+          repo="${GITHUB_REPOSITORY,,}"
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          sha_tag="sha-${GITHUB_SHA::12}"
+          tags="ghcr.io/${repo}:${sha_tag}"
+          if [ "${GITHUB_REF_NAME}" = "base" ]; then
+            tags="${tags},ghcr.io/${repo}:base"
+          fi
+          echo "repo=${repo}" >> "$GITHUB_OUTPUT"
+          echo "owner=${owner}" >> "$GITHUB_OUTPUT"
+          echo "tags=${tags}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push service image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./docker/alpine.Dockerfile
+          target: service
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            COMPILER=clang
+            LLVM_VERSION=20
+            CMAKE_BUILD_TYPE=Release
+            TRACY_ENABLE=OFF
+            PCH_ENABLE=ON
+            WARNINGS_AS_ERRORS=TRUE
+            REPO_URL=${{ github.server_url }}/${{ github.repository }}.git
+            COMMIT_SHA=${{ github.sha }}
