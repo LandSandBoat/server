@@ -117,6 +117,16 @@ Useful checks:
   - Request handling is closer to stateless than `connect` or `world`, but it still has in-process IP session counting and periodic AH expiration work.
   - Replicas are only worth revisiting if cleanup is split out and the changed connection-limit semantics are acceptable.
 
+## Self-Hosted CI
+
+- The homelab repo now has a separate ARC runner scale set intended for `https://github.com/CalamityFFXI/game-server`, distinct from the existing `carldanley/homelab` runner set.
+- The initial runner target is operationally conservative:
+  - `minRunners: 0`
+  - `maxRunners: 2`
+- The runner scale set name is explicitly `calamityxi-game-server-runners`, and ARC runner scale sets use that single name as the `runs-on` target for workflows.
+- The runner auth material should come from a dedicated 1Password item named `calamityxi-game-server-runners`, not from the `homelab` runner secret, because the GitHub App installation ID must match the `CalamityFFXI/game-server` installation scope.
+- This runner set only prepares cluster-side capacity. GitHub workflow files still need explicit `cxi_` self-hosted workflows before PR checks or builds will use it.
+
 ## Risks
 
 - Sharding by mostly-zonetype buckets with hand-tuned hub exceptions is a safe first pass, but not necessarily the final optimum for player load or event locality.

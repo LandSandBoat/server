@@ -30,7 +30,7 @@ concurrency:
 jobs:
   build:
     name: Build Alpine Service Image
-    runs-on: ubuntu-latest
+    runs-on: calamityxi-game-server-runners
     permissions:
       contents: read
       packages: write
