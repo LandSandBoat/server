@@ -29,7 +29,8 @@
     "research": {
       "パス": "docs/RESEARCH.yaml",
       "存在": false,
-      "最終更新": ""
+      "最終更新": "",
+      "必要時のみ作成": true
     },
     "design": {
       "パス": "docs/DESIGN.md",
@@ -77,15 +78,26 @@
           "-p",
           "{claude_prompt}"
         ]
+      },
+      "gemini": {
+        "enabled": true,
+        "description": "Gemini は Web リサーチが必要な場合のみ利用する",
+        "command": [
+          "gemini",
+          "{gemini_prompt}"
+        ]
       }
-    }
+    },
+    "preferred_mode": "codex_dynamic_routing"
   },
   "フローバック方針": {
     "verify_fail_default": "Codex",
     "design_issue": "Claude",
     "implementation_issue": "Codex",
     "environment_issue": "Human",
-    "unknown_issue": "Human"
+    "unknown_issue": "Human",
+    "research_issue": "Gemini",
+    "device_issue": "Codex または Human"
   },
   "ルール": {
     "入口ファイル": "PROJECT.md",
@@ -270,5 +282,55 @@
         }
       }
     }
-  ]
+  ],
+  "タスク分類": {
+    "タスク重量": "重い",
+    "合計点": 8,
+    "判定理由": [
+      "変更対象がテンプレート全体にまたがる",
+      "運用方針、状態管理、成果物契約を同時に揃える必要がある",
+      "全プロジェクト向けテンプレートのため影響範囲が広い"
+    ],
+    "軸別点数": {
+      "変更範囲": 2,
+      "不確実性": 1,
+      "外部依存": 1,
+      "実行リスク": 2,
+      "検証コスト": 2
+    }
+  },
+  "ルーティング": {
+    "research_required": false,
+    "research_reason": "今回の変更は既存テンプレート文言の再設計が中心であり、外部仕様の最新調査は不要",
+    "使用予定AI": [
+      "Codex"
+    ],
+    "使用AI一覧": [
+      "Codex"
+    ],
+    "選定理由": [
+      "テンプレート本文の再構成と整合性確認が主作業",
+      "必要なら将来の案件で Gemini や Claude を呼べるよう契約だけ整備する"
+    ],
+    "動的ルーティング結果": "Codexが分類、本文更新、状態更新、整合性確認を担当する"
+  },
+  "検証": {
+    "現在の検証段階": "環境検証完了",
+    "静的検証": {
+      "状態": "not_requested",
+      "担当": "Claude",
+      "メモ": "今回のテンプレート更新では Codex による文言整合性確認を優先し、Claude への追加依頼は未実施"
+    },
+    "環境検証": {
+      "状態": "passed",
+      "担当": "Codex",
+      "メモ": "残存表現検索と state_compact.json の JSON 読み込み確認を実施済み"
+    },
+    "実機検証": {
+      "要否": false,
+      "状態": "not_required",
+      "担当": "Codex",
+      "メモ": "今回のテンプレート更新では実機導入を伴わない"
+    }
+  }
 }
