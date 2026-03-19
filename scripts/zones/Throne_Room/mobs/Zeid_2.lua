@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
 
     -- 50% chance to immediately TP move again (but only once per chain)
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'ZEID_TP_CHAIN', function(mobEntity, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'ZEID_TP_CHAIN', function(mobEntity, skillId, wasExecuted)
         local justChained = mobEntity:getLocalVar('justChained')
 
         -- Only allow chaining if this wasn't already a chained TP move

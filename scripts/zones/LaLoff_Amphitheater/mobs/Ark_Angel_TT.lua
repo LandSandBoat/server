@@ -74,7 +74,7 @@ entity.onMobSpawn = function(mob)
         })
 
     -- Set up warp behavior listeners
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(ttMob, skillId)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(ttMob, skillId, wasExecuted)
         if skillId == xi.mobSkill.ARKANGEL_TT_WARP_OUT then
             local config = teleportConfig[ttMob:getBattlefield():getArea()]
             if config then

@@ -75,7 +75,7 @@ g_mixins.families.avatar = function(avatarMob)
         end
 
         -- avatar dies as soon as AF ability completes
-        mob:addListener('WEAPONSKILL_STATE_EXIT', 'AVATAR_MOBSKILL_FINISHED', function(mobArg)
+        mob:addListener('WEAPONSKILL_STATE_EXIT', 'AVATAR_MOBSKILL_FINISHED', function(mobArg, skillId, wasExecuted)
             mobArg:setUnkillable(false)
             mobArg:setHP(0)
         end)

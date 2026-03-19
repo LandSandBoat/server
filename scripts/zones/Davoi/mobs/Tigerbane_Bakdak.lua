@@ -16,8 +16,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.TIGERBANE_BAKDAK - 4] = ID.mob.TIGERBANE_BAKDAK, -- 158 -0.662 -18
-    [ID.mob.TIGERBANE_BAKDAK - 3] = ID.mob.TIGERBANE_BAKDAK, -- 153.880 -0.769 -18.092
+    [ID.mob.TIGERBANE_BAKDAK - 1] = ID.mob.TIGERBANE_BAKDAK, -- Confirmed on retail
 }
 
 entity.onMobDeath = function(mob, player, optParams)

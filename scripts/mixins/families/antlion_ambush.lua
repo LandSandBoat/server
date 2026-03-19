@@ -25,7 +25,7 @@ g_mixins.families.antlion_ambush = function(antlion)
         mob:useMobAbility(xi.mobSkill.PIT_AMBUSH_1)
     end)
 
-    antlion:addListener('WEAPONSKILL_STATE_EXIT', 'ANTLION_AMBUSH_FINISH', function(mob, skillId)
+    antlion:addListener('WEAPONSKILL_STATE_EXIT', 'ANTLION_AMBUSH_FINISH', function(mob, skillId, wasExecuted)
         if skillId == xi.mobSkill.PIT_AMBUSH_1 then
             mob:hideName(false)
             mob:setUntargetable(false)

@@ -75,9 +75,9 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('instance', inst)
     mob:setLocalVar('nightmarePercent', math.random(25, 75))
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillId, wasExecuted)
         if
-            skillID == xi.mobSkill.NIGHTMARE_1 and
+            skillId == xi.mobSkill.NIGHTMARE_1 and
             mobArg:getLocalVar('specialNightmare') == 1
         then
             mobArg:setLocalVar('specialNightmare', 0)

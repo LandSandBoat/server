@@ -39,6 +39,7 @@
 #include "ai/controllers/trust_controller.h"
 #include "weapon_skill.h"
 
+#include <algorithm>
 #include <ranges>
 
 namespace gambits
@@ -362,6 +363,43 @@ void CGambitsContainer::Tick(timer::time_point tick)
                         controller->Cast(target->targid, spell_id.value());
                     }
                 }
+                else if (action.select == G_SELECT::DEF_BAR_ELEMENT)
+                {
+                    auto maybeSpellId = POwner->SpellContainer->GetAvailable(SpellID::Barfire);
+                    auto element      = POwner->GetLocalVar("[Gambit]CastElement");
+
+                    if (element != 0)
+                    {
+                        switch (element)
+                        {
+                            case ELEMENT_FIRE:
+                                maybeSpellId = SpellID::Barfire;
+                                break;
+                            case ELEMENT_ICE:
+                                maybeSpellId = SpellID::Barblizzard;
+                                break;
+                            case ELEMENT_WIND:
+                                maybeSpellId = SpellID::Baraero;
+                                break;
+                            case ELEMENT_EARTH:
+                                maybeSpellId = SpellID::Barstone;
+                                break;
+                            case ELEMENT_THUNDER:
+                                maybeSpellId = SpellID::Barthunder;
+                                break;
+                            case ELEMENT_WATER:
+                                maybeSpellId = SpellID::Barwater;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (maybeSpellId.has_value())
+                        {
+                            controller->Cast(target->targid, maybeSpellId.value());
+                        }
+                    }
+                }
                 else if (action.select == G_SELECT::STORM_DAY)
                 {
                     auto spell_id = POwner->SpellContainer->GetStormDay();
@@ -605,6 +643,49 @@ void CGambitsContainer::Tick(timer::time_point tick)
                         controller->Ability(target->targid, PAbility->getID());
                     }
                 }
+                else if (action.select == G_SELECT::RUNE_DAY)
+                {
+                    uint32 localVarElement = POwner->GetLocalVar("[Gambit]CastElement");
+                    uint32 element         = battleutils::GetDayElement();
+                    auto   ability         = ABILITY_IGNIS;
+
+                    if (localVarElement > 0)
+                    {
+                        element = localVarElement;
+                    }
+
+                    switch (element)
+                    {
+                        case ELEMENT_FIRE:
+                            ability = ABILITY_UNDA;
+                            break;
+                        case ELEMENT_ICE:
+                            ability = ABILITY_IGNIS;
+                            break;
+                        case ELEMENT_WIND:
+                            ability = ABILITY_GELUS;
+                            break;
+                        case ELEMENT_EARTH:
+                            ability = ABILITY_FLABRA;
+                            break;
+                        case ELEMENT_THUNDER:
+                            ability = ABILITY_TELLUS;
+                            break;
+                        case ELEMENT_WATER:
+                            ability = ABILITY_SULPOR;
+                            break;
+                        case ELEMENT_LIGHT:
+                            ability = ABILITY_TENEBRAE;
+                            break;
+                        case ELEMENT_DARK:
+                            ability = ABILITY_LUX;
+                            break;
+                        default:
+                            ability = ABILITY_IGNIS;
+                            break;
+                    }
+                    controller->Ability(target->targid, ability);
+                }
             }
             else if (action.reaction == G_REACTION::MS)
             {
@@ -655,6 +736,11 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(triggerTarget->GetMPP() < predicate.condition_arg);
                 continue;
             }
+            case G_CONDITION::MPP_GTE:
+            {
+                predicateResults.push_back(triggerTarget->GetMPP() >= predicate.condition_arg);
+                continue;
+            }
             case G_CONDITION::TP_LT:
             {
                 predicateResults.push_back(triggerTarget->health.tp < (int16)predicate.condition_arg);
@@ -673,6 +759,37 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::NOT_STATUS:
             {
                 predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                continue;
+            }
+            case G_CONDITION::HAS_RUNES:
+            {
+                bool hasRunes = !triggerTarget->StatusEffectContainer->GetAllRuneEffects().empty();
+                predicateResults.push_back(hasRunes);
+                continue;
+            }
+            case G_CONDITION::NO_MAX_RUNE:
+            {
+                auto maxRuneEffect = 1;
+                bool canUseRunes   = true;
+
+                if (POwner->GetMJob() == JOB_RUN)
+                {
+                    if (POwner->GetMLevel() >= 65)
+                    {
+                        maxRuneEffect = 3;
+                    }
+                    else if (POwner->GetMLevel() >= 35)
+                    {
+                        maxRuneEffect = 2;
+                    }
+                }
+
+                if (triggerTarget->StatusEffectContainer->GetAllRuneEffects().size() >= maxRuneEffect)
+                {
+                    canUseRunes = false;
+                }
+
+                predicateResults.push_back(canUseRunes);
                 continue;
             }
             case G_CONDITION::NO_SAMBA:
@@ -759,6 +876,55 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now() && PSCEffect->GetTier() > 0);
                 continue;
             }
+            case G_CONDITION::LUNGE_MB_AVAILABLE:
+            {
+                auto* PSCEffect     = triggerTarget->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                bool  maybeUseLunge = false;
+
+                if (PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now() && PSCEffect->GetTier() > 0)
+                {
+                    SKILLCHAIN_ELEMENT sc = static_cast<SKILLCHAIN_ELEMENT>(PSCEffect->GetPower());
+
+                    if (sc != SC_NONE)
+                    {
+                        // Only consider tier 3 or 4 skillchains (Light/Dark are tier 3/4)
+                        const auto tier = battleutils::GetSkillchainTier(sc);
+                        if (tier >= 3)
+                        {
+                            // Match Light/Dark enums (covers Light, Light II, Darkness, Darkness II)
+                            if (sc == SC_LIGHT || sc == SC_LIGHT_II)
+                            {
+                                if (POwner->StatusEffectContainer->HasStatusEffect(
+                                        {
+                                            EFFECT_LUX,
+                                            EFFECT_IGNIS,
+                                            EFFECT_FLABRA,
+                                            EFFECT_SULPOR,
+                                        }))
+                                {
+                                    maybeUseLunge = true;
+                                }
+                            }
+                            else if (sc == SC_DARKNESS || sc == SC_DARKNESS_II)
+                            {
+                                if (POwner->StatusEffectContainer->HasStatusEffect(
+                                        {
+                                            EFFECT_TENEBRAE,
+                                            EFFECT_TELLUS,
+                                            EFFECT_UNDA,
+                                            EFFECT_GELUS,
+                                        }))
+                                {
+                                    maybeUseLunge = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                predicateResults.push_back(maybeUseLunge);
+                continue;
+            }
             case G_CONDITION::READYING_WS:
             {
                 predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CWeaponSkillState>());
@@ -777,6 +943,100 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::CASTING_MA:
             {
                 predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMagicState>());
+                continue;
+            }
+            case G_CONDITION::CASTING_ELE_MA_AOE:
+            {
+                bool isAOE = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto spellFamily = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell()->getSpellFamily();
+                    if (spellFamily >= SPELLFAMILY::SPELLFAMILY_FIRAGA && spellFamily <= SPELLFAMILY::SPELLFAMILY_WATERGA)
+                    {
+                        isAOE = true;
+                    }
+                }
+                predicateResults.push_back(isAOE);
+                continue;
+            }
+            case G_CONDITION::CASTING_ELEMENT_MA:
+            {
+                bool isElementalMA = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto spellFamily = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell()->getSpellFamily();
+                    isElementalMA    = spellFamily >= SPELLFAMILY::SPELLFAMILY_FIRE && spellFamily <= SPELLFAMILY::SPELLFAMILY_FLOOD;
+                }
+                predicateResults.push_back(isElementalMA);
+                continue;
+            }
+            case G_CONDITION::CAST_ELE_MA_SELF:
+            {
+                bool isElementalMAOnSelf = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto spellFamily   = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell()->getSpellFamily();
+                    auto targetID      = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetTarget()->id;
+                    bool isElementalMA = spellFamily >= SPELLFAMILY::SPELLFAMILY_FIRE && spellFamily <= SPELLFAMILY::SPELLFAMILY_FLOOD;
+                    if (targetID == POwner->id && isElementalMA)
+                    {
+                        isElementalMAOnSelf = true;
+                    }
+                }
+                predicateResults.push_back(isElementalMAOnSelf);
+                continue;
+            }
+            case G_CONDITION::NEED_ELE_BAREFFECT:
+            {
+                bool needBarEffect = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto   spellFamily = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell()->getSpellFamily();
+                    auto   targetID    = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetTarget()->id;
+                    uint32 element     = 0;
+                    if (targetID == POwner->id && (spellFamily >= SPELLFAMILY::SPELLFAMILY_FIRE && spellFamily <= SPELLFAMILY::SPELLFAMILY_FLOOD))
+                    {
+                        switch (spellFamily)
+                        {
+                            case SPELLFAMILY::SPELLFAMILY_FIRE:
+                            case SPELLFAMILY::SPELLFAMILY_FLARE:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARFIRE);
+                                element       = ELEMENT_FIRE;
+                                break;
+                            case SPELLFAMILY::SPELLFAMILY_BLIZZARD:
+                            case SPELLFAMILY::SPELLFAMILY_FREEZE:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARBLIZZARD);
+                                element       = ELEMENT_ICE;
+                                break;
+                            case SPELLFAMILY::SPELLFAMILY_AERO:
+                            case SPELLFAMILY::SPELLFAMILY_TORNADO:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARAERO);
+                                element       = ELEMENT_WIND;
+                                break;
+                            case SPELLFAMILY::SPELLFAMILY_STONE:
+                            case SPELLFAMILY::SPELLFAMILY_QUAKE:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARSTONE);
+                                element       = ELEMENT_EARTH;
+                                break;
+                            case SPELLFAMILY::SPELLFAMILY_THUNDER:
+                            case SPELLFAMILY::SPELLFAMILY_BURST:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARTHUNDER);
+                                element       = ELEMENT_THUNDER;
+                                break;
+                            case SPELLFAMILY::SPELLFAMILY_WATER:
+                            case SPELLFAMILY::SPELLFAMILY_FLOOD:
+                                needBarEffect = !POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BARWATER);
+                                element       = ELEMENT_WATER;
+                                break;
+                            default:
+                                needBarEffect = false;
+                                element       = battleutils::GetDayElement();
+                                break;
+                        }
+                        POwner->SetLocalVar("[Gambit]CastElement", element);
+                    }
+                }
+                predicateResults.push_back(needBarEffect);
                 continue;
             }
             case G_CONDITION::IS_ECOSYSTEM:
@@ -832,6 +1092,11 @@ bool CGambitsContainer::TryTrustSkill()
     TracyZoneScoped;
 
     auto* target = POwner->GetBattleTarget();
+
+    if (!target)
+    {
+        return false;
+    }
 
     auto checkTPTrigger = [&]() -> bool
     {

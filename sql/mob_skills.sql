@@ -100,7 +100,7 @@ INSERT INTO `mob_skills` VALUES (56,114,'ground_strike',0,0.0,10.0,2000,500,4,0,
 -- INSERT INTO `mob_skills` VALUES (58,??,'herculean_slash'
 -- INSERT INTO `mob_skills` VALUES (59,??,'torcleaver'
 -- INSERT INTO `mob_skills` VALUES (60,??,'resolution'
--- INSERT INTO `mob_skills` VALUES (61,??,'dimidiation'
+INSERT INTO `mob_skills` VALUES (61,119,'dimidiation',0,0.0,10.0,2000,0,4,0,0,0,13,12,0);
 -- INSERT INTO `mob_skills` VALUES (62,??,'fimbulvetr'
 -- INSERT INTO `mob_skills` VALUES (64,??,'raging_axe'
 -- INSERT INTO `mob_skills` VALUES (65,??,'smash_axe'

@@ -395,6 +395,14 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
         mainWeapon->setDamage(finalDamage);
         mainWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
         mainWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+        // Compute DPS so rune/enchantment calculations that rely on getDPS() return meaningful values for trusts.
+        // Use damage per second: damage / (delay_seconds). Delay is stored in ms.
+        if (mainWeapon->getDelay() > 0)
+        {
+            double dps = static_cast<double>(mainWeapon->getDamage()) / (static_cast<double>(mainWeapon->getDelay()) / 1000.0);
+            mainWeapon->setDPS(dps);
+        }
     }
 
     if (auto* subWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_SUB]))
@@ -402,6 +410,12 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
         subWeapon->setDamage(finalDamage);
         subWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
         subWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+        if (subWeapon->getDelay() > 0)
+        {
+            double dps = static_cast<double>(subWeapon->getDamage()) / (static_cast<double>(subWeapon->getDelay()) / 1000.0);
+            subWeapon->setDPS(dps);
+        }
     }
 
     if (auto* rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))
@@ -409,6 +423,12 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
         rangedWeapon->setDamage(finalDamage);
         rangedWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
         rangedWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+        if (rangedWeapon->getDelay() > 0)
+        {
+            double dps = static_cast<double>(rangedWeapon->getDamage()) / (static_cast<double>(rangedWeapon->getDelay()) / 1000.0);
+            rangedWeapon->setDPS(dps);
+        }
     }
 
     if (auto* ammoWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))
@@ -416,6 +436,12 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
         ammoWeapon->setDamage(finalDamage);
         ammoWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
         ammoWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+        if (ammoWeapon->getDelay() > 0)
+        {
+            double dps = static_cast<double>(ammoWeapon->getDamage()) / (static_cast<double>(ammoWeapon->getDelay()) / 1000.0);
+            ammoWeapon->setDPS(dps);
+        }
     }
 
     // NOTE: Trusts don't really have weapons, and they don't really have combat skills. They only have

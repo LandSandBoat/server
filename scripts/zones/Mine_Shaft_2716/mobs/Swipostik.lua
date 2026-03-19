@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(false)
 
     -- Add listener for bomb reactions from other Moblins
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'SWIPOSTIK_BOMB_TOSS', function(mobArg, skillId)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'SWIPOSTIK_BOMB_TOSS', function(mobArg, skillId, wasExecuted)
         if skillId ~= xi.mobSkill.BOMB_TOSS_1 then
             return
         end

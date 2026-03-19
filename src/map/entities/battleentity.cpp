@@ -2700,9 +2700,11 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             damage = luautils::OnMobWeaponSkill(this, PTargetFound, PSkill, &action);
-            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTargetFound, PSkill, state.GetSpentTP(), &action, damage);
-            PTargetFound->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", this, PTargetFound, PSkill, state.GetSpentTP(), &action);
         }
+
+        // Call USE and TAKE listeners, no matter what.
+        this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTargetFound, PSkill, state.GetSpentTP(), &action, damage);
+        PTargetFound->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", this, PTargetFound, PSkill, state.GetSpentTP(), &action);
 
         if (msg == MsgBasic::None)
         {

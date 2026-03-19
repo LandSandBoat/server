@@ -14,8 +14,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'FINAL_METEOR_DEATH', function(mobArg, skillID)
-        if skillID == xi.mobSkill.FINAL_METEOR then
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'FINAL_METEOR_DEATH', function(mobArg, skillId, wasExecuted)
+        if skillId == xi.mobSkill.FINAL_METEOR then
             if mobArg:getAnimationSub() ~= 1 then
                 mobArg:setAnimationSub(1)
             end

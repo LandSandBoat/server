@@ -146,7 +146,6 @@ bool CPetSkillState::Update(timer::time_point tick)
             bool withMaster = m_PEntity->objtype == TYPE_PET;
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0, withMaster);
         }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
 
         if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {
@@ -180,14 +179,32 @@ bool CPetSkillState::Update(timer::time_point tick)
 
 void CPetSkillState::Cleanup(timer::time_point tick)
 {
-    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
+    if (!m_PEntity)
+    {
+        return;
+    }
+
+    // Interrupted.
+    if (!IsCompleted())
     {
         ActionInterrupts::AbilityInterrupt(m_PEntity);
     }
 
-    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+    // Not interrupted.
+    else
     {
-        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
-        m_PEntity->updatemask |= UPDATE_COMBAT;
+        if (m_PEntity->isAlive() && m_PSkill->getFinalAnimationSub().has_value())
+        {
+            m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+            m_PEntity->updatemask |= UPDATE_COMBAT;
+        }
+
+        // luautils::OnMobSkillFinalize(m_PEntity, m_PSkill.get());
+    }
+
+    // Call listener. Feed skill result.
+    if (m_PEntity->isAlive())
+    {
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID(), IsCompleted());
     }
 }

@@ -75,9 +75,9 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillId, wasExecuted)
         if
-            skillID == xi.mobSkill.NIGHTMARE_1 and
+            skillId == xi.mobSkill.NIGHTMARE_1 and
             mobArg:getLocalVar('specialNightmare') == 1
         then
             mobArg:setLocalVar('specialNightmare', 0)

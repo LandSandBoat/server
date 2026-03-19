@@ -11,7 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.VISCOUNT_MORAX - 2] = ID.mob.VISCOUNT_MORAX, -- -365.684 -52.125 -136.540
+    [ID.mob.VISCOUNT_MORAX - 2] = ID.mob.VISCOUNT_MORAX, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

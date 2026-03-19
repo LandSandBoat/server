@@ -72,7 +72,7 @@ entity.onMobInitialize = function(mob)
         mobArg:useMobAbility(xi.mobSkill.AJIDO_WARP_OUT, nil, 0)
     end)
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(mobArg, skillId)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(mobArg, skillId, wasExecuted)
         if skillId == xi.mobSkill.AJIDO_WARP_OUT then
             local config         = teleportConfig[mobArg:getBattlefield():getArea()]
             local targetPosition = utils.randomEntry(config.positions)

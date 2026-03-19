@@ -11,7 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.COUNT_BIFRONS - 1] = ID.mob.COUNT_BIFRONS, -- -204.000 -52.125 -95.000
+    [ID.mob.COUNT_BIFRONS - 1] = ID.mob.COUNT_BIFRONS, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

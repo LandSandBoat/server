@@ -11,8 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.BARONET_ROMWE - 2] = ID.mob.BARONET_ROMWE, -- -317.070 -52.125 14.052
-    [ID.mob.BARONET_ROMWE - 1] = ID.mob.BARONET_ROMWE, -- -335.444 -52.125 15.148
+    [ID.mob.BARONET_ROMWE - 1] = ID.mob.BARONET_ROMWE, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

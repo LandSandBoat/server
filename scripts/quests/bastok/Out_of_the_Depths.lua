@@ -17,7 +17,7 @@ quest.reward =
     fame     = 80,
     fameArea = xi.fameArea.BASTOK,
     gil      = 1200,
-    title    = xi.title.TAVNAZIAN_SQUIRE,
+    title    = xi.title.TRASH_COLLECTOR,
 }
 
 local kiCheck = function(player)

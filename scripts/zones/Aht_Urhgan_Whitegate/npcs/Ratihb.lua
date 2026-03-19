@@ -14,16 +14,16 @@ entity.onTrigger = function(player, npc)
             player:getCharVar('AgainstAllOddsTimer') == 0
         )
     then
-        player:startEvent(604) -- reacquire life float, account for chars on quest previously without a var
+        player:startEvent(798) -- reacquire life float, account for chars on quest previously without a var
     else
         player:startEvent(603)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 604 then
+    if csid == 798 then
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
-        player:setCharVar('AgainstTimer', JstMidnight())
+        player:setCharVar('AgainstAllOddsTimer', JstMidnight())
     end
 end
 

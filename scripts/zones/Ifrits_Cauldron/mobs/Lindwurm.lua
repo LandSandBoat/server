@@ -19,11 +19,9 @@ entity.spawnPoints =
 entity.phList =
 {
     [ID.mob.LINDWURM - 6]  = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM - 5]  = ID.mob.LINDWURM,
+    [ID.mob.LINDWURM - 5]  = ID.mob.LINDWURM, -- Confirmed on retail
     [ID.mob.LINDWURM - 2]  = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM - 1]  = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM + 18] = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM + 19] = ID.mob.LINDWURM,
+    [ID.mob.LINDWURM - 1]  = ID.mob.LINDWURM, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

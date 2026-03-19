@@ -39,7 +39,7 @@ attachmentObject.onEquip = function(automaton)
         pet:setLocalVar('flameholder', amount)
     end)
 
-    automaton:addListener('WEAPONSKILL_STATE_EXIT', 'AUTO_FLAME_HOLDER_END', function(pet, skill)
+    automaton:addListener('WEAPONSKILL_STATE_EXIT', 'AUTO_FLAME_HOLDER_END', function(pet, skillId, wasExecuted)
         local master = pet:getMaster()
         local toremove = pet:getLocalVar('flameholdermaneuvers')
         if toremove == 0 then

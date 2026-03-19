@@ -153,10 +153,10 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PRISHE_DAEDALUS', function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PRISHE_DAEDALUS', function(mobArg, skillId, wasExecuted)
         -- Handle Daedulus Wing TP restoration
         if
-            skillID == xi.mobSkill.ITEM_1_PRISHE and
+            skillId == xi.mobSkill.ITEM_1_PRISHE and
             mobArg:getLocalVar('daedulus') == 1
         then
             mobArg:setTP(3000)
@@ -164,7 +164,7 @@ entity.onMobSpawn = function(mob)
         end
 
         -- Reset animation sub after Nullifying Dropkick completes
-        if skillID == xi.mobSkill.NULLIFYING_DROPKICK_1 then
+        if skillId == xi.mobSkill.NULLIFYING_DROPKICK_1 then
             local target = mobArg:getTarget()
             if target then
                 target:setAnimationSub(0)

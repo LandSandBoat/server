@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(false)
 
     -- Add listener for dice reset reactions from other Moblins
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'CHEKOCHUK_DICE_RESET', function(mobArg, skillId)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'CHEKOCHUK_DICE_RESET', function(mobArg, skillId, wasExecuted)
         if skillId ~= xi.mobSkill.GOBLIN_DICE_RESET then
             return
         end

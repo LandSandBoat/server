@@ -11,7 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.TUMBLING_TRUFFLE - 3] = ID.mob.TUMBLING_TRUFFLE, -- 450.472 70.657 238.237
+    [ID.mob.TUMBLING_TRUFFLE - 1] = ID.mob.TUMBLING_TRUFFLE, -- Confirmed pop on retail
 }
 
 entity.spawnPoints =

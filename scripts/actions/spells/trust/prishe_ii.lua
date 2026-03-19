@@ -42,13 +42,13 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'ANIMA_USED', function(mobArg, wsid)
-        if wsid == psychoAnima then
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'ANIMA_USED', function(mobArg, skillId, wasExecuted)
+        if skillId == psychoAnima then
             mobArg:removeGambit(itemOneGambit)
         end
 
         --[[
-        if wsid == hysteroAnima then
+        if skillId == hysteroAnima then
             mobArg:removeGambit(itemTwoGambit)
         end
         ]]--

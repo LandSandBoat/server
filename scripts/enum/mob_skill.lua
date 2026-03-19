@@ -10,13 +10,14 @@ xi.mobSkill =
     EVISCERATION                  =   25,
 
     FAST_BLADE_1                  =   32,
-
+    BURNING_BLADE_1               =   33,
     RED_LOTUS_BLADE_1             =   34,
     FLAT_BLADE_1                  =   35,
-
+    SHINING_BLADE_1               =   36,
     SERAPH_BLADE_1                =   37,
-
+    CIRCLE_BLADE_1                =   38,
     SPIRITS_WITHIN_1              =   39,
+    VORPAL_BLADE_1                =   40,
 
     SAVAGE_BLADE_1                =   42,
 

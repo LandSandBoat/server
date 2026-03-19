@@ -235,16 +235,22 @@ bool CMobSkillState::Update(timer::time_point tick)
 
 void CMobSkillState::Cleanup(timer::time_point tick)
 {
-    if (m_PEntity && !IsCompleted())
+    if (!m_PEntity)
+    {
+        return;
+    }
+
+    // Interrupted.
+    if (!IsCompleted())
     {
         ActionInterrupts::AbilityInterrupt(m_PEntity);
         reduceTpOnInterrupt();
     }
 
-    // Call finalizer if skill completed (not interrupted) and set any final animationsub
-    if (m_PEntity && IsCompleted())
+    // Not interrupted.
+    else
     {
-        if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+        if (m_PEntity->isAlive() && m_PSkill->getFinalAnimationSub().has_value())
         {
             m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
             m_PEntity->updatemask |= UPDATE_COMBAT;
@@ -253,9 +259,10 @@ void CMobSkillState::Cleanup(timer::time_point tick)
         luautils::OnMobSkillFinalize(m_PEntity, m_PSkill.get());
     }
 
-    if (m_PEntity)
+    // Call listener. Feed skill result.
+    if (m_PEntity->isAlive())
     {
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID(), IsCompleted());
     }
 }
 

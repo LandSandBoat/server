@@ -182,7 +182,6 @@ bool CWeaponSkillState::Update(timer::time_point tick)
             CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
             PChar->m_charHistory.wsUsed++;
         }
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
         return true;
     }
     return false;
@@ -190,5 +189,24 @@ bool CWeaponSkillState::Update(timer::time_point tick)
 
 void CWeaponSkillState::Cleanup(timer::time_point tick)
 {
-    // TODO: interrupt an in progress ws
+    if (!m_PEntity)
+    {
+        return;
+    }
+
+    // Interrupted.
+    if (!IsCompleted())
+    {
+    }
+
+    // Not interrupted.
+    else
+    {
+    }
+
+    // Call listener. Feed skill result.
+    if (m_PEntity->isAlive())
+    {
+        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID(), IsCompleted());
+    }
 }

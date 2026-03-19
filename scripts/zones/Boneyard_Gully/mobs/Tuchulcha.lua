@@ -72,9 +72,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('sandpitsUsed', 0)
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'TUCHULCHA_SANDPIT', function(tuchulcha, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'TUCHULCHA_SANDPIT', function(tuchulcha, skillId, wasExecuted)
         if
-            skillID == xi.mobSkill.SANDPIT_1 and
+            skillId == xi.mobSkill.SANDPIT_1 and
             tuchulcha:getLocalVar('sandpitTriggered') == 1
         then
             -- Prevent further teleports until the next triggered Sandpit.

@@ -33,7 +33,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_RANGE, 40)
 
     -- When the final self destruct is triggered, all players get kicked out of the battlefield immediately
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'FINAL_SELF_DESTRUCT', function(mobArg, skillId)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'FINAL_SELF_DESTRUCT', function(mobArg, skillId, wasExecuted)
         if skillId ~= xi.mobSkill.SELF_DESTRUCT_CLUSTER_RAZON then
             return
         end
