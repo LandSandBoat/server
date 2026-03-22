@@ -614,6 +614,16 @@ void init(IPP mapIPP, bool isRunningInCI)
             {
                 return cached_func;
             }
+
+            // Fallback to family script
+            const auto& familyName = static_cast<CMobEntity*>(PEntity)->m_FamilyName;
+            if (!familyName.empty())
+            {
+                if (auto family_func = lua["xi"]["families"][familyName][funcName]; family_func.valid())
+                {
+                    return family_func;
+                }
+            }
         }
         else if (PEntity->objtype == TYPE_PET)
         {
@@ -777,9 +787,28 @@ void init(IPP mapIPP, bool isRunningInCI)
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Handle Family scripts: cache at xi.families[familyName]
+        if (parts.size() >= 2 && parts[0] == "globals" && parts[1] == "families")
+        {
+            if (!std::filesystem::exists(filename))
+            {
+                return;
+            }
+
+            auto result = lua.safe_script_file(filename);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load error: %s: %s", filename, err.what());
+                return;
+            }
+
+            lua["xi"]["families"].get_or_create<sol::table>()[parts.back()] = result;
+            return;
+        }
         // Handle Globals then return
         // Globals need to be nil'd before they're reloaded
-        if (parts[0] == "globals" && path.extension() == ".lua")
+        else if (parts[0] == "globals" && path.extension() == ".lua")
         {
             std::string requireName("scripts/globals");
 
@@ -980,6 +1009,17 @@ void OnEntityLoad(CBaseEntity* PEntity)
             const auto zoneName = PEntity->loc.zone->getName();
             const auto name     = PEntity->getName();
             CacheLuaObjectFromFile(fmt::format("./scripts/zones/{}/mobs/{}.lua", zoneName, name));
+
+            // Load family script if not already cached
+            const auto& familyName = static_cast<CMobEntity*>(PEntity)->m_FamilyName;
+            if (!familyName.empty())
+            {
+                auto familyTable = lua["xi"]["families"][familyName];
+                if (!familyTable.valid() || familyTable.get_type() != sol::type::table)
+                {
+                    CacheLuaObjectFromFile(fmt::format("./scripts/globals/families/{}.lua", familyName));
+                }
+            }
         }
         break;
         case TYPE_PET:

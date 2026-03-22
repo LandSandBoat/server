@@ -419,7 +419,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
                                            "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
-                                           "Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
+                                           "Element, mob_pools.familyid, mob_family_system.superFamilyID, mob_family_system.family, name_prefix, entityFlags, animationsub, "
                                            "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
                                            "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                            "mob_family_system.charmable, mob_groups.content_tag, "
@@ -549,6 +549,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_Element     = rset->get<uint8>("Element");
                                     PMob->m_Family      = rset->get<uint16>("familyid");
                                     PMob->m_SuperFamily = rset->get<uint16>("superFamilyID");
+                                    PMob->m_FamilyName  = rset->get<std::string>("family");
                                     PMob->m_name_prefix = rset->get<uint8>("name_prefix");
                                     PMob->m_flags       = rset->get<uint32>("entityFlags");
 

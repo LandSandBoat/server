@@ -1440,11 +1440,11 @@ INSERT INTO `mob_skill_lists` VALUES ('TrollGurfurlur',326,1804);
 INSERT INTO `mob_skill_lists` VALUES ('TrollGurfurlur',326,1805);
 INSERT INTO `mob_skill_lists` VALUES ('TrollGurfurlur',326,1806);
 INSERT INTO `mob_skill_lists` VALUES ('TrollGurfurlur',326,1807);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin',327,590);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin',327,591);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin',327,1082);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin',327,1084);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin',327,1086);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin-Dynamis',327,590);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin-Dynamis',327,591);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin-Dynamis',327,1082);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin-Dynamis',327,1084);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin-Dynamis',327,1086);
 -- 328: Cottus
 INSERT INTO `mob_skill_lists` VALUES ('AbsoluteVirtue',329,1378);
 INSERT INTO `mob_skill_lists` VALUES ('AbsoluteVirtue',329,1379);

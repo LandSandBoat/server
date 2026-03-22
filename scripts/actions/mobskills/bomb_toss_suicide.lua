@@ -2,19 +2,12 @@
 -- Bomb Toss - Suicide
 -- Family: Goblins
 -- Description: Bomb toss back fires, killing the mob as well as dealing Fire damage around it based on it's remaining HP.
+-- TODO: Mob should be uninteractable (cannot attack, cast on, or use abilities on) while animating the bomb toss
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- Notorious monsters and mobs in Dynamis shouldn't explode.
-    if
-        mob:isMobType(xi.mobType.NOTORIOUS) or
-        mob:isInDynamis()
-    then
-        return 1
-    end
-
     return 0
 end
 

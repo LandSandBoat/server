@@ -7,7 +7,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- TODO: Bomb Toss suicide skill list weighting.
     return 0
 end
 

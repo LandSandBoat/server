@@ -239,8 +239,9 @@ xi.mobSkill =
 
     BLANK_GAZE                    =  586,
 
+    GOBLIN_RUSH_1                 =  590,
     BOMB_TOSS_1                   =  591,
-
+    BOMB_TOSS_SUICIDE             =  592,
     BERSERK_BOMB_BIG              =  593, -- Big Bomb / Friars Lantern
     VULCANIAN_IMPACT              =  594, -- Big Bomb / Friars Lantern
     HEAT_WAVE                     =  595, -- Big Bomb / Friars Lantern
@@ -477,6 +478,9 @@ xi.mobSkill =
 
     FRYPAN_1                      = 1081,
     SMOKEBOMB_1                   = 1082,
+
+    CRISPY_CANDLE_1               = 1084,
+    PARALYSIS_SHOWER_1            = 1085,
 
     -- EES_?                         = 1091,
 

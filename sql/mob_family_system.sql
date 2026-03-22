@@ -377,7 +377,7 @@ INSERT INTO `mob_family_system` VALUES (323,'Avatar-Leviathan',19,'Leviathan',5,
 INSERT INTO `mob_family_system` VALUES (324,'Avatar-Garuda',16,'Garuda',5,'Avatar',40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (325,'Avatar-Fenrir',15,'Fenrir',5,'Avatar',84,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 INSERT INTO `mob_family_system` VALUES (326,'Troll-Gurfurlur',140,'Troll',7,'Beastmen',40,120,120,1,2,2,5,3,3,3,1,2,1,3,1.0,272,0);
-INSERT INTO `mob_family_system` VALUES (327,'Goblin',77,'Goblin',7,'Beastmen',40,91,120,2,3,5,3,3,3,1,1,3,1,3,1.0,1,0);
+INSERT INTO `mob_family_system` VALUES (327,'Goblin-Dynamis',77,'Goblin',7,'Beastmen',40,91,120,2,3,5,3,3,3,1,1,3,1,3,1.0,1,0);
 -- 328 Free
 INSERT INTO `mob_family_system` VALUES (329,'AbsoluteVirtue',3,'Aern',15,'Luminian',40,120,140,4,2,3,2,4,1,1,1,3,1,3,0.0,3,0);
 INSERT INTO `mob_family_system` VALUES (330,'Adamantoise-PetGenbu',2,'Adamantoise',14,'Lizard',30,120,90,2,4,1,4,1,1,1,1,2,1,3,6.0,2,0);
@@ -423,7 +423,7 @@ INSERT INTO `mob_family_system` VALUES (369,'Leech',95,'Leech',1,'Amorph',40,90,
 INSERT INTO `mob_family_system` VALUES (371,'Marid',101,'Marid',6,'Beast',40,150,90,3,5,1,6,3,3,4,1,3,1,3,4.0,257,0);
 -- 372 Free
 INSERT INTO `mob_family_system` VALUES (373,'Goblin-Armored',77,'Goblin',7,'Beastmen',40,91,120,1,3,5,3,4,4,4,1,3,1,3,5.0,1,0);
--- 374 Free
+INSERT INTO `mob_family_system` VALUES (374,'Goblin-Armored-Dynamis',77,'Goblin',7,'Beastmen',40,91,120,1,3,5,3,4,4,4,1,3,1,3,5.0,1,0);
 -- 375 Free
 -- 376 Free
 -- 377 Free

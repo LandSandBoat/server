@@ -75,7 +75,7 @@ CInstance* CInstanceLoader::LoadInstance() const
                                  "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                                  "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
                                  "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
-                                 "Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, "
+                                 "Element, mob_pools.familyid, mob_family_system.family, name_prefix, entityFlags, animationsub, "
                                  "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, mob_groups.poolid, "
                                  "allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, "
                                  "mob_family_system.charmable, mob_pools.modelSize, mob_pools.modelHitboxSize "
@@ -184,6 +184,7 @@ CInstance* CInstanceLoader::LoadInstance() const
 
             PMob->m_Element     = rset->get<uint8>("Element");
             PMob->m_Family      = rset->get<uint16>("familyid");
+            PMob->m_FamilyName  = rset->get<std::string>("family");
             PMob->m_name_prefix = rset->get<uint8>("name_prefix");
             PMob->m_flags       = rset->get<uint32>("entityFlags");
 
