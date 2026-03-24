@@ -435,10 +435,10 @@ zoneObject.onInitialize = function(zone)
         rotation = 194,
         widescan = 1,
         onTrade = function(player, npc, trade)
-            Battlefield.onEntryTrade(player, npc, trade)
+            return Battlefield.onEntryTrade(player, npc, trade)
         end,
         onTrigger = function(player, npc)
-            Battlefield.onEntryTrigger(player, npc)
+            return Battlefield.onEntryTrigger(player, npc)
         end,
     })
 
@@ -455,7 +455,7 @@ zoneObject.onInitialize = function(zone)
         widescan = 0,
         onTrigger = function(player, npc)
             if player:getBattlefield() then
-                Battlefield.onExitTrigger(player, npc)
+                return Battlefield.onExitTrigger(player, npc)
             end
         end,
     })

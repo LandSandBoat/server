@@ -47,9 +47,9 @@ content.loot =
     {
         quantity = 1,
         { itemId = xi.item.NONE,                   weight = 5000 },
-        { itemId = xi.item.SHELL_POWDER,            weight = 1500 },
+        { itemId = xi.item.PONZE_OF_SHELL_POWDER,   weight = 1500 },
         { itemId = xi.item.CRAB_SHELL,              weight = 1500 },
-        { itemId = xi.item.ROCK_SALT,               weight = 1000 },
+        { itemId = xi.item.CHUNK_OF_ROCK_SALT,      weight = 1000 },
         { itemId = xi.item.HANDFUL_OF_FISH_SCALES,  weight = 1000 },
     },
 }
