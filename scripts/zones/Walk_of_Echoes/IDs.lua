@@ -22,9 +22,22 @@ zones[xi.zone.WALK_OF_ECHOES] =
         THE_PARTY_WILL_BE_REMOVED     = 7666, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         GATHERED_DAWNDROPS_LIGHT      = 7979, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 7980, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
+
+        -- Battlefield system (universal message IDs)
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 164,  -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 179,  -- The battlefield where your party members are engaged in combat is locked.
+        MEMBERS_OF_YOUR_PARTY         = 470,  -- Currently, # members of your party have clearance to enter.
+        MEMBERS_OF_YOUR_ALLIANCE      = 471,  -- Currently, # members of your alliance have clearance to enter.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 473,  -- The time limit for this battle is <number> minutes.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7666, -- Reuse existing string (placeholder for retail string).
+        NO_BATTLEFIELD_ENTRY          = 6405, -- Reuse NOTHING_OUT_OF_ORDINARY when no battlefields available.
     },
     mob =
     {
+        -- First Walk battlefield mobs (groupids match mob_groups zone 182)
+        CALDERA_CRAB = 17522689, -- Boss crab (groupid 1, slot 0)
+        CYANIC_CRAB  = 17522692, -- Regular crab (groupid 2, slot 0)
+        DAMASK_CRAB  = 17522695, -- Regular crab (groupid 3, slot 0)
     },
     npc =
     {

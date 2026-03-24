@@ -354,6 +354,7 @@ xi.battlefield.id =
     CENTRAL_TEMENOS_4TH_FLOOR                  = 1306, -- Converted
     CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307, -- Converted
     PURPLE_THE_NEW_BLACK                       = 2721, -- Converted
+    FIRST_WALK                                 = 3000, -- Custom: Walk of Echoes First Walk
 }
 
 xi.battlefield.itemUses =

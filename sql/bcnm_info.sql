@@ -146,6 +146,7 @@ INSERT INTO `bcnm_records` VALUES (352,156,'fiat_lux','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (353,156,'darkness_descends','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (354,156,'bonds_of_mythril','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (385,182,'maiden_of_the_dusk','nobody',0,1800);
+INSERT INTO `bcnm_records` VALUES (3000,182,'first_walk','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (416,201,'trial_by_wind','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (417,201,'carbuncle_debacle','nobody',0,1800);
 INSERT INTO `bcnm_records` VALUES (418,201,'trial-size_trial_by_wind','nobody',0,900);
