@@ -288,7 +288,7 @@ xi.settings.main =
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
-    ENABLE_LOGIN_CAMPAIGN = 0,
+    ENABLE_LOGIN_CAMPAIGN = 1,
 
     -- FISH RANKING CONTEST
     -- Set to false to require manual progression of contest
