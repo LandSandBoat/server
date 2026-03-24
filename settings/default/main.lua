@@ -170,8 +170,8 @@ xi.settings.main =
     ENABLE_TRUST_QUESTS            = 1,
     ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
 
-    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA          = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
-    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA          = 3, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE = 1, -- 0 = disabled, 1 = add announcement to player login
     ENABLE_TRUST_ALTER_EGO_EXPO                  = 0, -- 0 = disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
     ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE         = 0, -- 0 = disabled, 1 = add announcement to player login
 
