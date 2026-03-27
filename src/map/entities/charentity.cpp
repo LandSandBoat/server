@@ -79,6 +79,7 @@
 #include "mobskill.h"
 #include "modifier.h"
 #include "notoriety_container.h"
+#include "roe.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_status_icons.h"
@@ -2501,6 +2502,8 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
         charutils::UpdateItem(this, PItem->getLocationID(), PItem->getSlotID(), -1, true);
     }
+
+    roeutils::event(ROE_ITEM_USE, this, RoeDatagram("itemid", static_cast<uint32>(PItem->getID())));
 }
 
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)

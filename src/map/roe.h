@@ -52,6 +52,10 @@ enum ROE_EVENT
     ROE_MAGICBURST          = 16,
     ROE_HEAL_UNITYALLY      = 17,
     ROE_TALK_NPC            = 18,
+    ROE_SPELL_CAST_ON_MOB   = 19,
+    ROE_ITEM_USE            = 20,
+    ROE_FISH_CATCH          = 21,
+    ROE_SKILLCHAIN          = 22,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 

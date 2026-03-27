@@ -85,6 +85,18 @@ local checks =
     skillType = function(self, player, params) -- Generic numeric check, used for synthSuccess and helmSuccess
         return params.skillType == self.reqs.skillType and true or false
     end,
+
+    spellGroup = function(self, player, params) -- Spell group (white magic, black magic, etc.)
+        return (params.spellGroup and params.spellGroup == self.reqs.spellGroup) and true or false
+    end,
+
+    spellSkillType = function(self, player, params) -- Spell skill type (healing, enfeebling, etc.)
+        return (params.skillType and params.skillType == self.reqs.spellSkillType) and true or false
+    end,
+
+    chainElement = function(self, player, params) -- Skillchain element
+        return (params.skillchain and self.reqs.chainElement[params.skillchain]) and true or false
+    end,
 }
 
 -- Main general check function for all-purpose use.

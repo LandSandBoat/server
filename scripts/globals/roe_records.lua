@@ -1885,6 +1885,78 @@ xi.roe.records =
         reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
     },
 
+    [1417] =
+    { -- Rhapsodies of Vana'diel 2-2
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.REUNITED } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1418] =
+    { -- Rhapsodies of Vana'diel 2-3
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.OF_LIGHT_AND_DARKNESS } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1419] =
+    { -- Rhapsodies of Vana'diel 2-4
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.UNCERTAIN_FUTURES } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1420] =
+    { -- Rhapsodies of Vana'diel 3-1
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.DARKNESS_BECKONS } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1421] =
+    { -- Rhapsodies of Vana'diel 3-2
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.BECOME_SOMETHING_MORE } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1422] =
+    { -- Rhapsodies of Vana'diel 3-3
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.WAY_TO_DIVINITY } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1423] =
+    { -- Rhapsodies of Vana'diel 3-4
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.AN_UNENDING_SONG } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1424] =
+    { -- Rhapsodies of Vana'diel 3-5
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.ABSOLUTE_TRUST } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, exp = 500 },
+    },
+
+    [1425] =
+    { -- Rhapsodies of Vana'diel Complete
+        trigger = xi.roeTrigger.COMPLETE_MISSION,
+        reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.A_RHAPSODY_FOR_THE_AGES } },
+        flags = set { 'retro' },
+        reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 5 } }, sparks = 500, exp = 1000 },
+    },
+
     -----------------------------------
     -- Tutorial -> Missions (Zilart)
     -----------------------------------
@@ -9303,16 +9375,14 @@ xi.roe.records =
         reward = { sparks = 100, exp = 500, accolades = 300 },
     },
 
-    --[[
     [3690] =
     { -- Vanquish Acuex (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set{ ??? }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
-        flags = set{ 'unity' },
+        reqs = { mobFamily = set { 345 }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
+        flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
---]]
 
     [3691] =
     { -- Subjugation: Intulo (UC)
@@ -9471,8 +9541,235 @@ xi.roe.records =
     -- Vana'versary - 15th Vana'versary I
     -----------------------------------
 
+    [3361] =
+    { -- The Star of Tenshodo (W)
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3362] =
+    { -- Claret Carp (W)
+        trigger = xi.roeTrigger.FISH_CATCH,
+        goal = 10,
+        reqs = { itemID = set { 4401 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3363] =
+    { -- Gastro-revolution (W)
+        trigger = xi.roeTrigger.ITEM_USE,
+        reqs = { itemID = set { xi.item.HARD_BOILED_EGG, xi.item.BUNCH_OF_SAN_DORIAN_GRAPES } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3364] =
+    { -- Cure for What Ails You (W)
+        trigger = xi.roeTrigger.SPELL_CAST_ON_MOB,
+        goal = 10,
+        reqs = { spellSkillType = xi.skill.HEALING_MAGIC, mobSystem = set { xi.eco.UNDEAD } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3365] =
+    { -- Jinx (W)
+        trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
+        goal = 10,
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3366] =
+    { -- Stop Right There! (W)
+        trigger = xi.roeTrigger.SPELL_CAST_ON_MOB,
+        goal = 10,
+        reqs = { spellSkillType = xi.skill.ENFEEBLING_MAGIC },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
     [3367] =
     { -- Signet, brb (W)
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    -----------------------------------
+    -- Vana'versary - 15th Vana'versary II
+    -----------------------------------
+
+    [2044] =
+    { -- Selbinary
+        trigger = xi.roeTrigger.LOOT_ITEM,
+        reqs = { itemID = set { xi.item.MAGICKED_SKULL } },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3369] =
+    { -- Mhauranian (W)
+        trigger = xi.roeTrigger.LOOT_ITEM,
+        reqs = { itemID = set { xi.item.BLOODY_ROBE } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3370] =
+    { -- Sunsand Rush (W)
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.STARDUST } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3371] =
+    { -- Gastro-revolution 2 (W)
+        trigger = xi.roeTrigger.ITEM_USE,
+        reqs = { itemID = set { xi.item.MEAT_MITHKABOB, xi.item.APPLE_PIE } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3372] =
+    { -- Crustacean Infusion (W)
+        trigger = xi.roeTrigger.SKILLCHAIN,
+        goal = 10,
+        reqs = { chainElement = set { xi.skillchainType.FUSION }, mobFamily = set { 77 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3375] =
+    { -- No Time to Be Sheepish (W)
+        trigger = xi.roeTrigger.DEFEAT_MOB,
+        reqs = { mobID = set { 17195143, 17195316 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    -----------------------------------
+    -- Vana'versary - 15th Vana'versary III
+    -----------------------------------
+
+    [2045] =
+    { -- Papyrus Pursuer
+        trigger = xi.roeTrigger.LOOT_ITEM,
+        reqs = { itemID = set { xi.item.PIECE_OF_ANCIENT_PAPYRUS } },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3377] =
+    { -- Hide-and-Go-Seek (W)
+        trigger = xi.roeTrigger.SUCCESSFUL_SYNTHESIS,
+        reqs = { itemID = set { xi.item.SQUARE_OF_DHALMEL_LEATHER } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3378] =
+    { -- Full Deck (W)
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3379] =
+    { -- Unwavering Protector (W)
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.ESCORT_FOR_HIRE } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3381] =
+    { -- Gastro-Revolution 3 (W)
+        trigger = xi.roeTrigger.ITEM_USE,
+        reqs = { itemID = set { 5148, xi.item.ROAST_MUSHROOM } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3382] =
+    { -- It's All a Blur (W)
+        trigger = xi.roeTrigger.SKILLCHAIN,
+        goal = 10,
+        reqs = { chainElement = set { xi.skillchainType.DISTORTION }, mobFamily = set { 49 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3383] =
+    { -- All That Glitters... (W)
+        trigger = xi.roeTrigger.FISH_CATCH,
+        goal = 10,
+        reqs = { itemID = set { xi.item.CRYSTAL_BASS } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    -----------------------------------
+    -- Vana'versary - 15th Vana'versary IV
+    -----------------------------------
+
+    [2046] =
+    { -- Miratete 1
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SPICE_GALS } },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3385] =
+    { -- Miratete 2 (W)
+        trigger = xi.roeTrigger.COMPLETE_QUEST,
+        reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.SECRETS_OF_OVENS_LOST } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3390] =
+    { -- Gastro-Revolution 4 (W)
+        trigger = xi.roeTrigger.ITEM_USE,
+        reqs = { itemID = set { xi.item.SERVING_OF_YELLOW_CURRY, xi.item.GINGER_COOKIE } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3387] =
+    { -- Red Rover (W)
+        trigger = xi.roeTrigger.LOOT_ITEM,
+        reqs = { itemID = set { xi.item.CARBUNCLES_RUBY } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3391] =
+    { -- Crustacean King (W)
+        trigger = xi.roeTrigger.DEFEAT_MOB,
+        reqs = { mobID = set { 17293331, 17293332, 17293333, 17293334, 17293355, 17293356, 17293357, 17293358 }, zone = set { 126 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    -----------------------------------
+    -- Vana'versary - 15th Vana'versary V
+    -----------------------------------
+
+    [3397] =
+    { -- Star (W)
+        trigger = xi.roeTrigger.DEFEAT_MOB,
+        reqs = { mobID = set { 17375257, 17375258, 17375259, 17375260, 17375261, 17375262, 17375263, 17375265, 17375267 } },
+        flags = set { 'weekly' },
+        reward = { sparks = 50, exp = 1115 },
+    },
+
+    [3398] =
+    { -- Gukumatz (W)
+        trigger = xi.roeTrigger.DEFEAT_MOB,
+        reqs = { mobID = set { 17662491 } },
         flags = set { 'weekly' },
         reward = { sparks = 50, exp = 1115 },
     },

@@ -21,4 +21,8 @@ xi.roeTrigger =
     MAGIC_BURST          = 16, -- Player performs a Magic Burst
     HEAL_UNITY_ALLY      = 17, -- Player heals someone in their party/alliance with the same Unity
     TRIGGER_NPC          = 18, -- Player talk to RoE - TODO: Make this generic and utilize for other NPCs
+    SPELL_CAST_ON_MOB    = 19, -- Player casts a spell on a mob (cure on undead, bind, etc.)
+    ITEM_USE             = 20, -- Player uses a consumable item (food, medicine)
+    FISH_CATCH           = 21, -- Player catches a fish/item while fishing
+    SKILLCHAIN           = 22, -- Player closes a skillchain on a mob
 }

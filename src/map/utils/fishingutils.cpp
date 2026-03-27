@@ -22,6 +22,7 @@
 #include "fishingutils.h"
 
 #include "common/database.h"
+#include "roe.h"
 #include "common/logging.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
@@ -2051,14 +2052,17 @@ void ReelInCatch(CCharEntity* PChar)
             case FISHINGCATCHTYPE_SMALLFISH:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHSMALL;
                 CatchFish(PChar, PChar->hookedFish->catchid, BigFish::No, 0, 0, PChar->hookedFish->count);
+                roeutils::event(ROE_FISH_CATCH, PChar, RoeDatagram("itemid", static_cast<uint32>(PChar->hookedFish->catchid)));
                 break;
             case FISHINGCATCHTYPE_BIGFISH:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHLARGE;
                 CatchFish(PChar, PChar->hookedFish->catchid, BigFish::Yes, PChar->hookedFish->length, PChar->hookedFish->weight, PChar->hookedFish->count);
+                roeutils::event(ROE_FISH_CATCH, PChar, RoeDatagram("itemid", static_cast<uint32>(PChar->hookedFish->catchid)));
                 break;
             case FISHINGCATCHTYPE_ITEM:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHITEM;
                 CatchItem(PChar, PChar->hookedFish->catchid, PChar->hookedFish->count);
+                roeutils::event(ROE_FISH_CATCH, PChar, RoeDatagram("itemid", static_cast<uint32>(PChar->hookedFish->catchid)));
                 break;
             case FISHINGCATCHTYPE_MOB:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHMOB;

@@ -91,22 +91,26 @@ Kill counter logic is implemented but mobs may not be spawning in-game.
 
 ## Missing Event IDs
 
-These missions auto-complete without cutscenes. Event data not found in KnowOne134 CSID dumps.
+Event data extracted via xi-tinkerer from `FFXI_DATS_Decoded/raw_data/events/`. Probable CSIDs identified below — need in-game testing to confirm exact mappings.
 
 ### Eastern Adoulin Missions (ROV events mixed into SoA event infrastructure)
-- **3-5 Forward Thinking** — Eastern Adoulin zone-in
-- **3-7 What He Left Behind** — Eastern Adoulin zone-in
-- **3-10 Solemnity** — Eastern Adoulin zone-in
+Events 1547-1552 are large ensemble cutscenes (15-20+ NPCs including Arciela, Melvien, Ploh Trishbahk). Zone-in trigger entities: 17830025, 17830026.
+- **3-5 Forward Thinking** — Eastern Adoulin zone-in — probable CSID: **1547, 1549, or 1551**
+- **3-7 What He Left Behind** — Eastern Adoulin zone-in — probable CSID: **1547, 1549, or 1551**
+- **3-10 Solemnity** — Eastern Adoulin zone-in — probable CSID: **1547, 1549, or 1551**
+- **TODO**: Test these 3 CSIDs in-game to determine which maps to which mission
 
-### Walk of Echoes Missions (only event 28 found for Cait Sith/Lilisette)
-- **3-15 What Remains of Hope** — Walk of Echoes zone-in
-- **3-18 Sin** — Walk of Echoes zone-in
-- **3-19 Penance** — Walk of Echoes zone-in (awards Rhapsody in Puce KI)
-- **3-27 Calm After the Storm** — Walk of Echoes zone-in
+### Walk of Echoes Missions
+Zone-in trigger: 17523287. Cait Sith: 17523288. Lilisette: 17523300. Event 28 = ROV 3-14 (confirmed).
+- **3-15 What Remains of Hope** — Walk of Echoes — probable CSID: **29 or 30**
+- **3-18 Sin** — Walk of Echoes — probable CSID: **5 or 8**
+- **3-19 Penance** — Walk of Echoes (awards Rhapsody in Puce) — probable CSID: **9** (large cutscene on zone-in + Cait Sith + both Lilisettes)
+- **3-27 Calm After the Storm** — Walk of Echoes — probable CSID: **31** (entity 17523350)
 
-### Reisenjima Missions (events 4, 5 unassigned)
-- **3-21 The Lifestream of Reisenjima** — Reisenjima zone-in
-- **3-23 Good Things Come in Threes** — Reisenjima zone-in
+### Reisenjima Missions
+Zone-in triggers: 17969923, 17969924. Iroha: 17969928. Known: event 2=3-1, 6=3-3, 7=3-20, 9=3-30.
+- **3-21 The Lifestream of Reisenjima** — probable CSID: **3** (on zone-in entity + Iroha, sequential between events 2 and 6)
+- **3-23 Good Things Come in Threes** — probable CSID: **8** (on Iroha + Tenzen + secondary trigger)
 
 ### Chapter 2 Missions (various zones)
 - **2-26 Where Divinities Collide** — Shattered Telepoint (3 Crags)
@@ -122,6 +126,12 @@ These missions auto-complete without cutscenes. Event data not found in KnowOne1
 ### Nation Zone-In Missions (no zone-specific events found)
 - **2-41 Uncertain Futures** — nation zone-in (10 zones)
 - **3-29 An Unending Song** — nation zone-in (10 zones)
+
+### Boss Battle Event Data (from decoded DATs)
+- **Empyreal Paradox**: Event 32000 on Transcendental Radiance (16924740-43). Cutscenes: events 9-17 on entity 16924799+ (Iroha 16924801, Selh'teus 16924802, Volto Oscuro 16924803)
+- **Desuetia-EP (Sempurne)**: Event 32000 = battlefield entry. Event 2 = Sempurne dialogue. Cait Sith (17965081) has events 1-8
+- **Reisenjima Sanctorium (CoD)**: Event 32000 on Ramblix (17977507). Events 12-13 = pre-CoD (Iroha 17977517 + Selh'teus 17977518). Event 11 = major ensemble (all allies)
+- **Escha-Ru'Aun (Balamor)**: Events 6/7 confirmed on Selh'teus (17961692) + Balamor (17961693). Event 4 = confrontation (Iroha, Volto Oscuro, Kagero, Tenzen, Siren)
 
 ---
 
@@ -141,6 +151,7 @@ See `scripts/battlefields/Empyreal_Paradox/dawn.lua` for a complete example of:
 - Event 32001 victory detection → mission completion chain
 
 ### Event ID Sources
-- **KnowOne134/FFXI_Events** — Dialogue text organized by actor
+- **xi-tinkerer decoded DATs** — `FFXI_DATS_Decoded/raw_data/events/<Zone>.yml` (definitive, from client `30251101_1`)
+- **KnowOne134/FFXI_Events** — Dialogue text organized by actor (predates Voidwatch)
 - **KnowOne134/DSP-Shared_Collection/Event CSID Dump** — CSID-to-dialogue mappings with actor IDs
-- Client DAT files — definitive source for event IDs (requires DAT mining tools)
+- **UpdateExtractor output** — `~/Code/Lua/Personal/UpdateExtractor/output/dialog-table-<zoneID>.xml` (verified text IDs)

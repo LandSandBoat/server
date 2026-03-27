@@ -22,6 +22,7 @@
 #include "battleutils.h"
 
 #include "common/database.h"
+#include "roe.h"
 #include "common/logging.h"
 #include "common/timer.h"
 #include "common/utils.h"
@@ -3809,6 +3810,16 @@ int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
         {
             break;
         }
+    }
+
+    if (PDefender->objtype == TYPE_MOB && PAttacker->objtype == TYPE_PC)
+    {
+        roeutils::event(ROE_SKILLCHAIN, static_cast<CCharEntity*>(PAttacker),
+            RoeDatagramList{
+                RoeDatagram("mob", static_cast<CMobEntity*>(PDefender)),
+                RoeDatagram("skillchain", static_cast<uint32>(skillchain)),
+                RoeDatagram("chainLevel", static_cast<uint32>(chainLevel)),
+            });
     }
 
     return damage;
