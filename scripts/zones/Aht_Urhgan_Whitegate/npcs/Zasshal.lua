@@ -8,28 +8,31 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- local nextPermit = player:getCharVar('LAST_PERMIT')
-    -- if nextPermit ~= 0 then
-    --     if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
-    --         nextPermit = nextPermit + xi.vanaTime.DAY
-    --     else
-    --         nextPermit = nextPermit + (24 * 60 * 60)
-    --     end
-    -- end
-    -- local a1 = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
-    -- local a2 = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
-    -- local a3 = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
-    -- local a4 = player:getAssaultPoint(PERIQIA_ASSAULT_POINT)
-    -- local a5 = player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
+    local nextPermit = player:getCharVar('LAST_PERMIT')
+    if nextPermit ~= 0 then
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+            nextPermit = nextPermit + xi.vanaTime.DAY
+        else
+            nextPermit = nextPermit + (24 * 60 * 60)
+        end
+    end
+
+    local a1 = player:getAssaultPoint(xi.assault.assaultArea.LEUJAOAM_SANCTUM)
+    local a2 = player:getAssaultPoint(xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS)
+    local a3 = player:getAssaultPoint(xi.assault.assaultArea.LEBROS_CAVERN)
+    local a4 = player:getAssaultPoint(xi.assault.assaultArea.PERIQIA)
+    local a5 = player:getAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL)
 
     if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         player:startEvent(821)
---[[    elseif player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getMainLvl() >= 65 then
+    elseif player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getMainLvl() >= 65 then
         if nextPermit == 0 then
             player:startEvent(818, a1, a2, a3, a4, a5)
         elseif nextPermit <= GetSystemTime() then
             player:startEvent(820, a1, a2, a3, a4, a5)
-        end]]
+        else
+            player:startEvent(817)
+        end
     else
         player:startEvent(817)
     end

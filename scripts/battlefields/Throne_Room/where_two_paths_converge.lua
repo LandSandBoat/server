@@ -13,6 +13,7 @@ local content = BattlefieldMission:new({
     maxPlayers    = 6,
     levelCap      = 75,
     timeLimit     = utils.minutes(30),
+    allowTrusts   = true,
     index         = 1,
     entryNpc      = '_4l1',
     exitNpcs      = { '_4l2', '_4l3', '_4l4' },

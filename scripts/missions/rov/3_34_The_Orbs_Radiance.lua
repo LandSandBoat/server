@@ -11,6 +11,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_ORBS_RA
 
 mission.reward =
 {
+    keyItem     = xi.ki.SCINTILLATING_RHAPSODY,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.A_RHAPSODY_FOR_THE_AGES },
 }
 
