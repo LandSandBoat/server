@@ -1,0 +1,13 @@
+[Unit]
+Description=FFXI zone_settings zoneip 自動更新タイマー
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=10min
+AccuracySec=1min
+Persistent=true
+Unit=ffxi-zoneip-update.service
+
+[Install]
+WantedBy=timers.target
+

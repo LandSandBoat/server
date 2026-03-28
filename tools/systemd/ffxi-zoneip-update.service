@@ -1,0 +1,10 @@
+[Unit]
+Description=FFXI zone_settings zoneip 自動更新
+Wants=network-online.target
+After=network-online.target mariadb.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/toshiaki/ffxi_server
+ExecStart=/home/toshiaki/ffxi_server/scripts/update_zoneip.sh
+
