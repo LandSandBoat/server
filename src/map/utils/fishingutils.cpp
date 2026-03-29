@@ -22,10 +22,10 @@
 #include "fishingutils.h"
 
 #include "common/database.h"
-#include "roe.h"
 #include "common/logging.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
+#include "roe.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"

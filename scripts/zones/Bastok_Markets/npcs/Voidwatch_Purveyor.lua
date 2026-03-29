@@ -15,7 +15,7 @@ local csids =
 }
 
 entity.onTrigger = function(player, npc)
-    local points = player:getConquestPoints()
+    local points = player:getCP()
     printf('[VW_Purveyor_Bastok] onTrigger: conquestPoints=%d', points)
     player:startEvent(csids.SHOP_MENU, 0, points, xi.voidwatch.PURVEYOR_ITEM_COST, 0, 0, 0, 0)
 end

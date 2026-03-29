@@ -22598,7 +22598,7 @@ INSERT INTO `item_mods` VALUES (14504,1,46);   -- DEF: 46
 INSERT INTO `item_mods` VALUES (14504,5,30);   -- MP: 30
 INSERT INTO `item_mods` VALUES (14504,11,4);   -- AGI: 4
 INSERT INTO `item_mods` VALUES (14504,112,12); -- HEALING: 12
-INSERT INTO `item_mods` VALUES (14504,170,10); -- FASTCAST: 10
+INSERT INTO `item_mods` VALUES (14504,170,11); -- FASTCAST: 11
 
 -- Assassins Vest +1
 INSERT INTO `item_mods` VALUES (14505,1,46);  -- DEF: 46
@@ -83705,6 +83705,7 @@ INSERT INTO `item_mods` VALUES (28336,29,3);    -- MDEF: 3
 INSERT INTO `item_mods` VALUES (28336,31,86);   -- MEVA: 86
 INSERT INTO `item_mods` VALUES (28336,68,37);   -- EVA: 37
 INSERT INTO `item_mods` VALUES (28336,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (28336,992,25);  -- PET_MAB_MDB: 25
 
 -- Whirlpool Greaves
 INSERT INTO `item_mods` VALUES (28337,1,84);    -- DEF: 84

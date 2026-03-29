@@ -254,7 +254,7 @@ INSERT INTO `item_mods_pet` VALUES (14903,25,5,2); -- Wyvern - ACC: 5
 INSERT INTO `item_mods_pet` VALUES (14904,27,-2,1); -- Avatar - ENMITY: -2
 
 -- Summoners Bracers +1
-INSERT INTO `item_mods_pet` VALUES (14923,25,14,1); -- Avatar - ACC: 14
+INSERT INTO `item_mods_pet` VALUES (14923,25,7,1);  -- Avatar - ACC: 7
 
 -- Beast Bazubands
 INSERT INTO `item_mods_pet` VALUES (14958,63,5,0); -- All Pets - DEFP: 5
@@ -313,7 +313,7 @@ INSERT INTO `item_mods_pet` VALUES (15649,1,10,0); -- All Pets - DEF: 10
 INSERT INTO `item_mods_pet` VALUES (15661,2,50,2); -- Wyvern - HP: 50
 
 -- Summoners Pigaches +1
-INSERT INTO `item_mods_pet` VALUES (15679,23,10,1);  -- Avatar - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (15679,23,7,1);   -- Avatar - ATT: 7
 INSERT INTO `item_mods_pet` VALUES (15679,27,2,1);   -- Avatar - ENMITY: 2
 INSERT INTO `item_mods_pet` VALUES (15679,357,-2,1); -- Avatar - BP_DELAY: -2
 

@@ -26,7 +26,7 @@ xi.voidwatch.alignmentType =
     WHITE  = 5, -- Atmacite/periapt drop chance (0-100%)
 }
 
-local alignmentCaps =
+xi.voidwatch.alignmentCaps =
 {
     [xi.voidwatch.alignmentType.RED   ] = 550,
     [xi.voidwatch.alignmentType.BLUE  ] = 550,

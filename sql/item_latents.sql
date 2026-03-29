@@ -1683,7 +1683,7 @@ INSERT INTO `item_latents` VALUES (15808,370,1,58,0);    -- regen +1
 
 -- Jalzahns's Ring
 INSERT INTO `item_latents` VALUES (15809,11,6,58,0);     -- AGI +6
-INSERT INTO `item_latents` VALUES (15809,365,1,58,0);    -- Snapshot
+INSERT INTO `item_latents` VALUES (15809,365,5,58,0);    -- Snapshot
 
 -- Ladybug Ring / Ladybug Ring +1
 INSERT INTO `item_latents` VALUES (15815,2,20,26,0);     -- HP+20 during Daytime
