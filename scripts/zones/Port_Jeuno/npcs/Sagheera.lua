@@ -289,7 +289,7 @@ local function getCosmoCleanseTime(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
+    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_SAVAGE then
         return
     end
 
@@ -355,7 +355,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- Prevent interaction until player has progressed through COP enough
-    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
+    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_SAVAGE then
         player:showText(npc, ID.text.SAGHEERA_NO_LIMBUS_ACCESS)
 
         -- DEFAULT DIALOG (menu)

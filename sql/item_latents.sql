@@ -3233,9 +3233,9 @@ INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);      -- Acc+39 (24 norma
 INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);      -- Dmg+4  TP<1000
 
 -- Eminent Dagger
-INSERT INTO `item_latents` VALUES (20624,23,10,6,1000);  -- TP_UNDER: 1000 - ATT: 10
-INSERT INTO `item_latents` VALUES (20624,25,39,6,1000);  -- TP_UNDER: 1000 - ACC: 39
-INSERT INTO `item_latents` VALUES (20624,287,89,6,1000); -- TP_UNDER: 1000 - DMG_RATING: 89
+INSERT INTO `item_latents` VALUES (20624,23,10,6,1000);  -- Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20624,25,15,6,1000);  -- Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20624,287,4,6,1000);  -- Dmg+4 TP<1000
 
 -- Surcoufs Jambiya +1
 INSERT INTO `item_latents` VALUES (20628,287,85,56,0);  -- WEAPON_DRAWN_MP_OVER: 0 - DMG_RATING: 85
@@ -3245,6 +3245,39 @@ INSERT INTO `item_latents` VALUES (20628,369,-10,56,0); -- WEAPON_DRAWN_MP_OVER:
 INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
 INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
 INSERT INTO `item_latents` VALUES (20726,287,6,6,1000);      -- Dmg+6  TP>1000
+INSERT INTO `item_latents` VALUES (20766,287,4,6,1000);      -- eminent_sword Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (20766,25,15,6,1000);      -- eminent_sword Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20766,23,10,6,1000);      -- eminent_sword Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20817,287,5,6,1000);      -- eminent_axe Dmg+5 TP<1000
+INSERT INTO `item_latents` VALUES (20817,25,15,6,1000);      -- eminent_axe Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20817,23,10,6,1000);      -- eminent_axe Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20865,287,7,6,1000);      -- eminent_voulge Dmg+7 TP<1000
+INSERT INTO `item_latents` VALUES (20865,25,15,6,1000);      -- eminent_voulge Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20865,23,10,6,1000);      -- eminent_voulge Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20908,287,6,6,1000);      -- eminent_sickle Dmg+6 TP<1000
+INSERT INTO `item_latents` VALUES (20908,25,15,6,1000);      -- eminent_sickle Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20908,23,10,6,1000);      -- eminent_sickle Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (20954,287,6,6,1000);      -- eminent_lance Dmg+6 TP<1000
+INSERT INTO `item_latents` VALUES (20954,25,15,6,1000);      -- eminent_lance Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (20954,23,10,6,1000);      -- eminent_lance Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21119,287,3,6,1000);      -- eminent_wand Dmg+3 TP<1000
+INSERT INTO `item_latents` VALUES (21119,25,15,6,1000);      -- eminent_wand Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21119,23,10,6,1000);      -- eminent_wand Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21182,287,4,6,1000);      -- eminent_staff Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (21182,25,15,6,1000);      -- eminent_staff Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21182,23,10,6,1000);      -- eminent_staff Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21183,287,4,6,1000);      -- eminent_pole Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (21183,25,15,6,1000);      -- eminent_pole Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21183,23,10,6,1000);      -- eminent_pole Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21231,287,4,6,1000);      -- eminent_bow Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (21231,26,15,6,1000);      -- eminent_bow R.Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21231,24,10,6,1000);      -- eminent_bow R.Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21251,287,4,6,1000);      -- eminent_crossbow Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (21251,26,15,6,1000);      -- eminent_crossbow R.Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21251,24,10,6,1000);      -- eminent_crossbow R.Att+10 TP<1000
+INSERT INTO `item_latents` VALUES (21281,287,4,6,1000);      -- eminent_gun Dmg+4 TP<1000
+INSERT INTO `item_latents` VALUES (21281,26,15,6,1000);      -- eminent_gun R.Acc+15 TP<1000
+INSERT INTO `item_latents` VALUES (21281,24,10,6,1000);      -- eminent_gun R.Att+10 TP<1000
 
 -- Conqueror 119
 INSERT INTO `item_latents` VALUES (20837,165,14,13,56);  -- Crit Rate +14% if Berserk Active
