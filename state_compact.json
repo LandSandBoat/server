@@ -13,7 +13,7 @@
     "ブロッカー": []
   },
   "テンプレート情報": {
-    "テンプレート版": "2026-03-09",
+    "テンプレート版": "2026-03-29",
     "コピー後初期化要否": true
   },
   "実行管理": {
@@ -101,23 +101,17 @@
   },
   "ルール": {
     "入口ファイル": "PROJECT.md",
-    "調査書": "docs/RESEARCH.yaml",
-    "設計書": "docs/DESIGN.md",
-    "実装書": "docs/PATCH.yaml",
-    "実装検証書": "docs/VERIFY.md",
-    "秘密情報ファイル": "SECRETS_LOCAL.md",
-    "アクセス方針ファイル": "ACCESS_POLICY.md",
-    "実行前提": [
-      "AIはまず PROJECT.md を読む",
-      "次に RULES.md を読む",
-      "次に state_compact.json を読む",
-      "Gemini は RESEARCH.yaml を作成する",
-      "Claude は RESEARCH.yaml を読んで DESIGN.md を作成する",
-      "Codex は DESIGN.md を読んで PATCH.yaml を作成する",
-      "Claude Code は DESIGN.md と PATCH.yaml を読んで VERIFY.md を作成する",
-      "Claude Code は原則として実装修正を行わず、検証と修正提案に専念する",
-      "秘密情報の実値を AGENTS.md や docs/*.md に書かない",
-      "本番反映は Human 承認があるまで行わない"
+    "常駐コア": [
+      "SESSION_CORE.md",
+      "AGENTS.md",
+      "state_compact.json"
+    ],
+    "条件付き読込": [
+      "RULES.md",
+      "GLOBAL_ACTIVE.md",
+      "AGENTS_DETAIL.md",
+      "RULES_DETAIL.md",
+      "GLOBAL_CHANGES.md"
     ]
   },
   "未解決事項": [
@@ -312,7 +306,8 @@
       "テンプレート本文の再構成と整合性確認が主作業",
       "必要なら将来の案件で Gemini や Claude を呼べるよう契約だけ整備する"
     ],
-    "動的ルーティング結果": "Codexが分類、本文更新、状態更新、整合性確認を担当する"
+    "動的ルーティング結果": "Codexが分類、本文更新、状態更新、整合性確認を担当する",
+    "global_check_required": true
   },
   "検証": {
     "現在の検証段階": "環境検証完了",
@@ -332,5 +327,7 @@
       "担当": "Codex",
       "メモ": "今回のテンプレート更新では実機導入を伴わない"
     }
-  }
+  },
+  "overview_hash": "",
+  "概要変更検知": false
 }
