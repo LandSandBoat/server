@@ -2406,11 +2406,11 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         else if (PTarget->objtype == TYPE_MOB && PEminenceTarget->objtype == TYPE_PC && actionResult.resolution != ActionResolution::Miss)
         {
             roeutils::event(ROE_SPELL_CAST_ON_MOB, static_cast<CCharEntity*>(PEminenceTarget), RoeDatagramList{
-                                                                                                                                       RoeDatagram("mob", static_cast<CMobEntity*>(PTarget)),
-                                                                                                                                       RoeDatagram("spellID", static_cast<uint32>(PSpell->getID())),
-                                                                                                                                       RoeDatagram("spellGroup", static_cast<uint32>(PSpell->getSpellGroup())),
-                                                                                                                                       RoeDatagram("skillType", static_cast<uint32>(PSpell->getSkillType())),
-                                                                                                                                   });
+                                                                                                   RoeDatagram("mob", static_cast<CMobEntity*>(PTarget)),
+                                                                                                   RoeDatagram("spellID", static_cast<uint32>(PSpell->getID())),
+                                                                                                   RoeDatagram("spellGroup", static_cast<uint32>(PSpell->getSpellGroup())),
+                                                                                                   RoeDatagram("skillType", static_cast<uint32>(PSpell->getSkillType())),
+                                                                                               });
         }
 
         if (PActionTarget->id == PTarget->id)
