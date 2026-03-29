@@ -1,8 +1,9 @@
-# Bastok Quests -- Phase 2 Audit
+# Bastok Quests -- Phase 2 Audit (CORRECTED)
 
 **Date:** 2026-03-28
-**Source:** https://www.bg-wiki.com/ffxi/Category:Bastok_Quests
-**Script path:** `scripts/quests/bastok/`
+**Corrected:** 2026-03-28 -- Previous audit undercounted implemented quests. Used quests.lua enum as authoritative source. NPC-based (non-converted) quests were missed.
+**Source of truth:** `scripts/globals/quests.lua` lines 124-219 (xi.questLog.BASTOK enum)
+**Script path:** `scripts/quests/bastok/` (converted quests) + `scripts/zones/*/npcs/` (NPC-based quests)
 
 ---
 
@@ -10,209 +11,228 @@
 
 | Metric | Count |
 |--------|-------|
-| Total quests on bg-wiki | 94 |
-| Quest scripts present | 78 |
-| Quests missing scripts | 16 |
-| Implementation rate | **83%** |
+| Total quests in enum | 93 |
+| Converted quest scripts (Quest:new) | 78 |
+| NPC-based quest scripts (zone NPCs) | 2 |
+| Total implemented | 80 |
+| Partially implemented | 1 |
+| Quests missing | 12 |
+| Implementation rate | **86%** |
 
-All 78 existing scripts use the modern `Quest:new()` framework with proper `quest.reward`, `quest.sections`, `check` functions, `onTrigger`/`onTrade`/`onEventFinish` handlers, and `quest:complete()` calls. Spot-checks confirm they are fully functional (not stubs).
+### Correction Notes
+
+The previous audit reported 94 total / 78 implemented / 16 missing. Errors:
+1. **Eco-Warrior (ID 65)** -- marked "+" in quests.lua, fully implemented via NPC scripts (Raifa, Degga, qm5, Pudding mobs). Was listed as MISSING.
+2. **Too Many Chefs (ID 86)** -- marked "+" in quests.lua, has NPC scripts (Ferghus, Leonhardt, Raginmund, Umberto) but Red Oven Mitt has no drop source. Reclassified as PARTIAL.
+3. **A Chocobo Riding Game** -- was listed as missing but does not exist in the quest enum. Removed from count.
+4. Total quests corrected from 94 to 93 (the enum has IDs 0-92).
 
 ---
 
-## Quests WITH Scripts (78 total)
+## Quests WITH Scripts -- Converted (78 total)
+
+All 78 use the modern `Quest:new()` framework with proper `quest.reward`, `quest.sections`, `check` functions, `onTrigger`/`onTrade`/`onEventFinish` handlers, and `quest:complete()` calls. Deep audit (bastok_quests_deep.md) confirmed all are fully functional with no stubs.
 
 ### Starter Quests (low fame, early game)
 
-| # | Quest | Script | Status |
-|---|-------|--------|--------|
-| 1 | Welcome to Bastok | `Welcome_to_Bastok.lua` | IMPLEMENTED -- Powhatan in Port Bastok, equip Shell Shield for Bartolomeo. Reward: Spatha, title. |
-| 2 | The Siren's Tear | `The_Sirens_Tear.lua` | IMPLEMENTED -- Wahid in Bastok Mines, multi-zone fetch quest. Reward: 150 gil, title. |
-| 3 | Beauty and the Galka | `Beauty_and_the_Galka.lua` | IMPLEMENTED |
-| 4 | Guest of Hauteur | `Guest_of_Hauteur.lua` | IMPLEMENTED |
-| 5 | The Quadav's Curse | `The_Quadavs_Curse.lua` | IMPLEMENTED |
-| 6 | Out of One's Shell | `Out_of_Ones_Shell.lua` | IMPLEMENTED |
-| 7 | Hearts of Mythril | `Hearts_of_Mythril.lua` | IMPLEMENTED |
-| 8 | The Eleventh's Hour | `The_Elevenths_Hour.lua` | IMPLEMENTED |
-| 9 | Stamp Hunt | `Stamp_Hunt.lua` | IMPLEMENTED |
-| 10 | The Gustaberg Tour | `The_Gustaberg_Tour.lua` | IMPLEMENTED |
-| 11 | Groceries | `Groceries.lua` | IMPLEMENTED -- Tami in Bastok Mines, deliver note to Zelman, bring back jerky. Reward: Rabbit Mantle. |
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 1 | The Siren's Tear | 0 | `The_Sirens_Tear.lua` | WORKS -- Wahid in Bastok Mines, multi-zone fetch. Reward: 150 gil, title. |
+| 2 | Beauty and the Galka | 1 | `Beauty_and_the_Galka.lua` | WORKS |
+| 3 | Welcome to Bastok | 2 | `Welcome_to_Bastok.lua` | WORKS -- Powhatan in Port Bastok. Reward: Spatha, title. |
+| 4 | Guest of Hauteur | 3 | `Guest_of_Hauteur.lua` | WORKS |
+| 5 | The Quadav's Curse | 4 | `The_Quadavs_Curse.lua` | WORKS |
+| 6 | Out of One's Shell | 5 | `Out_of_Ones_Shell.lua` | WORKS |
+| 7 | Hearts of Mythril | 6 | `Hearts_of_Mythril.lua` | WORKS |
+| 8 | The Eleventh's Hour | 7 | `The_Elevenths_Hour.lua` | WORKS |
+| 9 | Stamp Hunt | 16 | `Stamp_Hunt.lua` | WORKS |
+| 10 | The Gustaberg Tour | 45 | `The_Gustaberg_Tour.lua` | WORKS |
+| 11 | Groceries | 37 | `Groceries.lua` | WORKS -- Tami in Bastok Mines. Reward: Rabbit Mantle. |
 
 ### Fame / Repeatable Quests
 
-| # | Quest | Script | Status |
-|---|-------|--------|--------|
-| 12 | Gourmet | `Gourmet.lua` | IMPLEMENTED -- Salimah in Bastok Markets, trade food items at correct times. Repeatable fame. |
-| 13 | Breaking Stones | `Breaking_Stones.lua` | IMPLEMENTED |
-| 14 | The Cold Light of Day | `The_Cold_Light_of_Day.lua` | IMPLEMENTED |
-| 15 | The Elvaan Goldsmith | `The_Elvaan_Goldsmith.lua` | IMPLEMENTED |
-| 16 | A Flash in the Pan | `A_Flash_in_the_Pan.lua` | IMPLEMENTED |
-| 17 | Shady Business | `Shady_Business.lua` | IMPLEMENTED |
-| 18 | A Foreman's Best Friend | `A_Foremans_Best_Friend.lua` | IMPLEMENTED |
-| 19 | Smoke on the Mountain | `Smoke_on_the_Mountain.lua` | IMPLEMENTED |
-| 20 | Buckets of Gold | `Buckets_of_Gold.lua` | IMPLEMENTED |
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 12 | Shady Business | 8 | `Shady_Business.lua` | WORKS |
+| 13 | A Foreman's Best Friend | 9 | `A_Foremans_Best_Friend.lua` | WORKS |
+| 14 | Breaking Stones | 10 | `Breaking_Stones.lua` | WORKS |
+| 15 | The Cold Light of Day | 11 | `The_Cold_Light_of_Day.lua` | WORKS |
+| 16 | Gourmet | 12 | `Gourmet.lua` | WORKS -- Time-of-day trade mechanic. |
+| 17 | The Elvaan Goldsmith | 13 | `The_Elvaan_Goldsmith.lua` | WORKS |
+| 18 | A Flash in the Pan | 14 | `A_Flash_in_the_Pan.lua` | WORKS |
+| 19 | Smoke on the Mountain | 15 | `Smoke_on_the_Mountain.lua` | WORKS |
+| 20 | Buckets of Gold | 41 | `Buckets_of_Gold.lua` | WORKS |
 
 ### Story / Chain Quests
 
-| # | Quest | Script | Status |
-|---|-------|--------|--------|
-| 21 | Forever to Hold | `Forever_to_Hold.lua` | IMPLEMENTED |
-| 22 | Till Death Do Us Part | `Till_Death_Do_Us_Part.lua` | IMPLEMENTED |
-| 23 | Fallen Comrades | `Fallen_Comrades.lua` | IMPLEMENTED |
-| 24 | Rivals | `Rivals.lua` | IMPLEMENTED |
-| 25 | Mom, the Adventurer? | `Mom_the_Adventurer.lua` | IMPLEMENTED |
-| 26 | The Signpost Marks the Spot | `The_Signpost_Marks_the_Spot.lua` | IMPLEMENTED |
-| 27 | Past Perfect | `Past_Perfect.lua` | IMPLEMENTED |
-| 28 | Stardust | `Stardust.lua` | IMPLEMENTED |
-| 29 | Mean Machine | `Mean_Machine.lua` | IMPLEMENTED |
-| 30 | Cid's Secret | `Cids_Secret.lua` | IMPLEMENTED |
-| 31 | The Usual | `The_Usual.lua` | IMPLEMENTED |
-| 32 | Blade of Darkness | `Blade_of_Darkness.lua` | IMPLEMENTED |
-| 33 | Father Figure | `Father_Figure.lua` | IMPLEMENTED |
-| 34 | The Return of the Adventurer | `The_Return_of_the_Adventurer.lua` | IMPLEMENTED |
-| 35 | Drachenfall | `Drachenfall.lua` | IMPLEMENTED |
-| 36 | Vengeful Wrath | `Vengeful_Wrath.lua` | IMPLEMENTED |
-| 37 | Beadeaux Smog | `Beadeaux_Smog.lua` | IMPLEMENTED |
-| 38 | The Curse Collector | `The_Curse_Collector.lua` | IMPLEMENTED |
-| 39 | Fear of Flying | `Fear_of_Flying.lua` | IMPLEMENTED |
-| 40 | The Wisdom of Elders | `The_Wisdom_of_Elders.lua` | IMPLEMENTED |
-| 41 | The Bare Bones | `The_Bare_Bones.lua` | IMPLEMENTED |
-| 42 | Minesweeper | `Minesweeper.lua` | IMPLEMENTED |
-| 43 | The Darksmith | `The_Darksmith.lua` | IMPLEMENTED |
-| 44 | The Stars of Ifrit | `The_Stars_of_Ifrit.lua` | IMPLEMENTED |
-| 45 | Love and Ice | `Love_and_Ice.lua` | IMPLEMENTED |
-| 46 | Brygid the Stylist | `Brygid_the_Stylist.lua` | IMPLEMENTED |
-| 47 | Bite the Dust | `Bite_the_Dust.lua` | IMPLEMENTED |
-| 48 | Blade of Death | `Blade_of_Death.lua` | IMPLEMENTED |
-| 49 | Silence of the Rams | `Silence_of_the_Rams.lua` | IMPLEMENTED |
-| 50 | Altana's Sorrow | `Altanas_Sorrow.lua` | IMPLEMENTED |
-| 51 | A Lady's Heart | `A_Ladys_Heart.lua` | IMPLEMENTED |
-| 52 | Ayame and Kaede | `Ayame_and_Kaede.lua` | IMPLEMENTED |
-| 53 | A Test of True Love | `A_Test_of_True_Love.lua` | IMPLEMENTED |
-| 54 | Lovers in the Dusk | `Lovers_in_the_Dusk.lua` | IMPLEMENTED |
-| 55 | Wish Upon a Star | `Wish_Upon_a_Star.lua` | IMPLEMENTED |
-| 56 | Shoot First, Ask Questions Later | `Shoot_First_Ask_Questions_Later.lua` | IMPLEMENTED |
-| 57 | Inheritance | `Inheritance.lua` | IMPLEMENTED |
-| 58 | The Walls of Your Mind | `The_Walls_of_Your_Mind.lua` | IMPLEMENTED |
-| 59 | Faded Promises | `Faded_Promises.lua` | IMPLEMENTED |
-| 60 | Brygid the Stylist Returns | `Brygid_the_Stylist_Returns.lua` | IMPLEMENTED |
-| 61 | Out of the Depths | `Out_of_the_Depths.lua` | IMPLEMENTED |
-| 62 | A Question of Faith | `A_Question_of_Faith.lua` | IMPLEMENTED |
-| 63 | Teak Me to the Stars | `Teak_Me_to_the_Stars.lua` | IMPLEMENTED |
-| 64 | Chips | `Chips.lua` | IMPLEMENTED |
-| 65 | The Weight of Your Limits | `The_Weight_of_Your_Limits.lua` | IMPLEMENTED |
-| 66 | Lure of the Wildcat (Bastok) | `Lure_of_the_Wildcat_Bastok.lua` | IMPLEMENTED |
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 21 | Forever to Hold | 17 | `Forever_to_Hold.lua` | WORKS |
+| 22 | Till Death Do Us Part | 18 | `Till_Death_Do_Us_Part.lua` | WORKS |
+| 23 | Fallen Comrades | 19 | `Fallen_Comrades.lua` | WORKS |
+| 24 | Rivals | 20 | `Rivals.lua` | WORKS |
+| 25 | Mom, the Adventurer? | 21 | `Mom_the_Adventurer.lua` | WORKS |
+| 26 | The Signpost Marks the Spot | 22 | `The_Signpost_Marks_the_Spot.lua` | WORKS |
+| 27 | Past Perfect | 23 | `Past_Perfect.lua` | WORKS |
+| 28 | Stardust | 24 | `Stardust.lua` | WORKS |
+| 29 | Mean Machine | 25 | `Mean_Machine.lua` | WORKS |
+| 30 | Cid's Secret | 26 | `Cids_Secret.lua` | WORKS |
+| 31 | The Usual | 27 | `The_Usual.lua` | WORKS |
+| 32 | Blade of Darkness | 28 | `Blade_of_Darkness.lua` | WORKS |
+| 33 | Father Figure | 29 | `Father_Figure.lua` | WORKS |
+| 34 | The Return of the Adventurer | 30 | `The_Return_of_the_Adventurer.lua` | WORKS |
+| 35 | Drachenfall | 31 | `Drachenfall.lua` | WORKS |
+| 36 | Vengeful Wrath | 32 | `Vengeful_Wrath.lua` | WORKS |
+| 37 | Beadeaux Smog | 33 | `Beadeaux_Smog.lua` | WORKS |
+| 38 | The Curse Collector | 34 | `The_Curse_Collector.lua` | WORKS |
+| 39 | Fear of Flying | 35 | `Fear_of_Flying.lua` | WORKS |
+| 40 | The Wisdom of Elders | 36 | `The_Wisdom_of_Elders.lua` | WORKS |
+| 41 | The Bare Bones | 38 | `The_Bare_Bones.lua` | WORKS |
+| 42 | Minesweeper | 39 | `Minesweeper.lua` | WORKS |
+| 43 | The Darksmith | 40 | `The_Darksmith.lua` | WORKS |
+| 44 | The Stars of Ifrit | 42 | `The_Stars_of_Ifrit.lua` | WORKS |
+| 45 | Love and Ice | 43 | `Love_and_Ice.lua` | WORKS |
+| 46 | Brygid the Stylist | 44 | `Brygid_the_Stylist.lua` | WORKS |
+| 47 | Bite the Dust | 46 | `Bite_the_Dust.lua` | WORKS |
+| 48 | Blade of Death | 47 | `Blade_of_Death.lua` | WORKS |
+| 49 | Silence of the Rams | 48 | `Silence_of_the_Rams.lua` | WORKS |
+| 50 | Altana's Sorrow | 49 | `Altanas_Sorrow.lua` | WORKS |
+| 51 | A Lady's Heart | 50 | `A_Ladys_Heart.lua` | WORKS |
+| 52 | Ayame and Kaede | 60 | `Ayame_and_Kaede.lua` | WORKS -- NIN unlock quest. |
+| 53 | A Test of True Love | 62 | `A_Test_of_True_Love.lua` | WORKS |
+| 54 | Lovers in the Dusk | 63 | `Lovers_in_the_Dusk.lua` | WORKS |
+| 55 | Wish Upon a Star | 64 | `Wish_Upon_a_Star.lua` | WORKS |
+| 56 | Faded Promises | 73 | `Faded_Promises.lua` | WORKS -- NIN-specific quest. |
+| 57 | Brygid the Stylist Returns | 74 | `Brygid_the_Stylist_Returns.lua` | WORKS |
+| 58 | Out of the Depths | 75 | `Out_of_the_Depths.lua` | WORKS |
+| 59 | A Question of Faith | 77 | `A_Question_of_Faith.lua` | WORKS |
+| 60 | Teak Me to the Stars | 79 | `Teak_Me_to_the_Stars.lua` | WORKS |
+| 61 | Chips | 82 | `Chips.lua` | WORKS |
+
+### Weaponskill Unlock Quests
+
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 62 | The Weight of Your Limits | 66 | `The_Weight_of_Your_Limits.lua` | WORKS -- Steel Cyclone (Great Axe 240+). |
+| 63 | Shoot First, Ask Questions Later | 67 | `Shoot_First_Ask_Questions_Later.lua` | WORKS -- Detonator (Marksmanship 250+). |
+| 64 | Inheritance | 68 | `Inheritance.lua` | WORKS -- Ground Strike (GS 250+). |
+| 65 | The Walls of Your Mind | 69 | `The_Walls_of_Your_Mind.lua` | WORKS -- Asuran Fists (H2H 250+). |
 
 ### Artifact (AF) Quests
 
-| # | Quest | Script | Status |
-|---|-------|--------|--------|
-| 67 | MNK AF1: Ghosts of the Past | `MNK_AF1_Ghosts_of_the_Past.lua` | IMPLEMENTED -- Level check, multi-zone chain. |
-| 68 | MNK AF2: The First Meeting | `MNK_AF2_The_First_Meeting.lua` | IMPLEMENTED |
-| 69 | MNK AF3: True Strength | `MNK_AF3_True_Strength.lua` | IMPLEMENTED |
-| 70 | WAR AF1: The Doorman | `WAR_AF1_The_Doorman.lua` | IMPLEMENTED -- Job/level gated, Davoi NM fight, key item chain to Naji. Reward: Razor Axe. |
-| 71 | WAR AF2: The Talekeeper's Truth | `WAR_AF2_The_Talekeepers_Truth.lua` | IMPLEMENTED |
-| 72 | WAR AF3: The Talekeeper's Gift | `WAR_AF3_The_Talekeepers_Gift.lua` | IMPLEMENTED |
-| 73 | DRK AF1: Dark Legacy | `DRK_AF1_Dark_Legacy.lua` | IMPLEMENTED -- Job/level gated, Giddeus NM fight. Reward: Raven Scythe. |
-| 74 | DRK AF2: Dark Puppet | `DRK_AF2_Dark_Puppet.lua` | IMPLEMENTED |
-| 75 | DRK AF3: Blade of Evil | `DRK_AF3_Blade_of_Evil.lua` | IMPLEMENTED |
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 66 | MNK AF1: Ghosts of the Past | 51 | `MNK_AF1_Ghosts_of_the_Past.lua` | WORKS |
+| 67 | MNK AF2: The First Meeting | 52 | `MNK_AF2_The_First_Meeting.lua` | WORKS |
+| 68 | MNK AF3: True Strength | 53 | `MNK_AF3_True_Strength.lua` | WORKS |
+| 69 | WAR AF1: The Doorman | 54 | `WAR_AF1_The_Doorman.lua` | WORKS |
+| 70 | WAR AF2: The Talekeeper's Truth | 55 | `WAR_AF2_The_Talekeepers_Truth.lua` | WORKS |
+| 71 | WAR AF3: The Talekeeper's Gift | 56 | `WAR_AF3_The_Talekeepers_Gift.lua` | WORKS |
+| 72 | DRK AF1: Dark Legacy | 57 | `DRK_AF1_Dark_Legacy.lua` | WORKS |
+| 73 | DRK AF2: Dark Puppet | 58 | `DRK_AF2_Dark_Puppet.lua` | WORKS |
+| 74 | DRK AF3: Blade of Evil | 59 | `DRK_AF3_Blade_of_Evil.lua` | WORKS |
 
 ### Special / System Quests
 
-| # | Quest | Script | Status |
-|---|-------|--------|--------|
-| 76 | Trial-Size Trial by Earth | `Trial_Size_Trial_by_Earth.lua` | IMPLEMENTED -- Avatar mini-fight. |
-| 77 | Trial by Earth | `Trial_by_Earth.lua` | IMPLEMENTED -- Full avatar fight. |
-| 78 | Trust: Bastok | `Trust_Bastok.lua` | IMPLEMENTED -- Grants Naji trust, then Ayame/Volker/Iron Eater. Full memory system. |
+| # | Quest | Enum ID | Script | Status |
+|---|-------|---------|--------|--------|
+| 75 | Trial by Earth | 61 | `Trial_by_Earth.lua` | WORKS -- Full Titan prime fight. |
+| 76 | Trial-Size Trial by Earth | 72 | `Trial_Size_Trial_by_Earth.lua` | WORKS -- SMN avatar mini-fight. |
+| 77 | Lure of the Wildcat (Bastok) | 84 | `Lure_of_the_Wildcat_Bastok.lua` | WORKS -- TOAU prerequisite. |
+| 78 | Trust: Bastok | 92 | `Trust_Bastok.lua` | WORKS -- Grants Naji trust, then Ayame/Volker/Iron Eater. |
 
 ---
 
-## Quests WITHOUT Scripts (16 total)
+## Quests WITH Scripts -- NPC-Based (2 total)
+
+These quests are marked "+" (not "Converted") in quests.lua. They are implemented via zone NPC scripts rather than dedicated quest scripts in `scripts/quests/bastok/`.
+
+### Eco-Warrior (Bastok) -- WORKS
+
+| Enum ID | 65 |
+|---|---|
+| Status | WORKS |
+| Quest Start | Raifa in Port Bastok (`scripts/zones/Port_Bastok/npcs/Raifa.lua`) |
+| Flow | Raifa (event 278) -> accept -> Degga in Gusgen Mines -> apply ointment (lv25 restriction) -> trigger qm5 to spawn 2 Pudding NMs -> kill both -> interact with qm5 for Indigested Ore KI -> return to Degga -> return to Raifa (event 282) -> complete |
+| Reward | 5000 gil, Dragon Chronicles (item 4198), title Cerulean Soldier, 80 fame |
+| NPCs/Mobs | `Raifa.lua`, `Degga.lua`, `qm5.lua` (Gusgen Mines), `Pudding.lua` (Gusgen Mines) |
+| Notes | Uses shared EcoStatus charvar system (101-103 for Bastok). Properly handles addQuest/completeQuest. Conquest tally timer prevents repeat. Level restriction mechanic works. |
+
+### Too Many Chefs -- PARTIAL
+
+| Enum ID | 86 |
+|---|---|
+| Status | PARTIAL -- NPC flow exists but required item (Red Oven Mitt) has no drop source |
+| Quest Start | Ferghus in Metalworks (`scripts/zones/Metalworks/npcs/Ferghus.lua`) |
+| Flow | Ferghus (event 946, requires WotG + fame 5) -> Leonhardt (event 948) -> Raginmund in Bastok Markets [S] (event 112) -> obtain Red Oven Mitt from Quadavs in Grauberg [S] -> trade to Leonhardt (event 950) -> Ferghus (event 947) -> Umberto (event 473, gives Aileen's Delight) |
+| Reward | Aileen's Delight (item), 30 fame |
+| Bug | Red Oven Mitt (item 2527) exists in item_basic.sql but has NO entry in mob_droplist.sql. On retail it drops from Quadav mobs in Grauberg [S], but this zone has no Quadav mobs spawned. Quest cannot be completed. |
+| NPCs | `Ferghus.lua`, `Leonhardt.lua` (Metalworks), `Raginmund.lua` (Bastok Markets [S]), `Umberto.lua` (Bastok Markets) |
+
+---
+
+## Quests WITHOUT Scripts (12 total)
 
 ### Missing -- High Priority (affect gameplay)
 
-| # | Quest | Quest ID | What It Does | Impact |
-|---|-------|----------|--------------|--------|
-| 1 | Eco-Warrior (Bastok) | 65 | Raifa in Port Bastok sends you to Gusgen Mines to kill Pudding NMs. Reward: 5000 gil, Dragon Chronicles. | Medium -- unique reward item, but not blocking. |
-| 2 | Escort for Hire (Bastok) | 70 | Trilok in Port Bastok, escort Olavia through Crawlers' Nest. Reward: Page from Miratete's Memoirs, 10000 gil. | Medium -- escort quest with unique reward. |
-| 3 | Return to the Depths | 78 | Ayame in Metalworks, find Moblin translator, defeat Twilotak. Reward: Bowyer Ring, 3000 gil. | Medium -- continues Out of the Depths story. |
-| 4 | Hyper Active | 80 | Raibaht in Metalworks, get hyper altimeter from Lower Delkfutt's Tower. Reward: 3000 gil. | Low-Medium. |
-| 5 | Achieving True Power | 85 | PUP limit break quest (lv66+). Fight Shamarhaan in Navukgo Execution Chamber. Raises PUP cap to 75. | HIGH if playing PUP -- blocks leveling past 70. |
+| # | Quest | Enum ID | What It Does | Impact |
+|---|-------|---------|--------------|--------|
+| 1 | Achieving True Power | 85 | PUP limit break quest (lv66+). Fight Shamarhaan in Navukgo Execution Chamber. Raises PUP cap to 75. Battlefield ID 1123 exists in battlefield.lua but NOT marked Converted -- no battlefield script exists. | HIGH if playing PUP -- blocks leveling past 70. |
 
 ### Missing -- Medium Priority
 
-| # | Quest | Quest ID | What It Does | Impact |
-|---|-------|----------|--------------|--------|
-| 6 | A Discerning Eye (Bastok) | 71 | Grin in Port Bastok, identify NPC on airship. Reward: 500 gil. | Low -- flavor quest. |
-| 7 | All by Myself | 76 | Marin in Bastok Markets, escort Ken through Dangruf Wadi stealth-style. Reward: 1500 gil + key item. | Low-Medium -- unique escort mechanic. |
-| 8 | The Naming Game | 81 | Raibaht in Metalworks (Fame 5 required), trade Ordrynite. Reward: 3600 gil, title. | Low -- high fame repeatable. |
-| 9 | Bait and Switch | 83 | Salim in Metalworks, puzzle quest with switches near Temple of the Goddess. Reward: various items. | Low -- puzzle quest. |
-| 10 | Too Many Chefs | 86 | Ferghus in Metalworks, retrieve Red Oven Mitt from Quadavs in Grauberg (S). Reward: Aileen's Delight. | Low -- WotG content. |
-| 11 | A Proper Burial | 87 | Offa in Bastok Markets, recover letters from time capsule (past/present Bastok). Reward: Rolanberry. | Low -- WotG content. |
+| # | Quest | Enum ID | What It Does | Impact |
+|---|-------|---------|--------------|--------|
+| 2 | Escort for Hire (Bastok) | 70 | Trilok in Port Bastok, escort NPC through Crawlers' Nest. Reward: Page from Miratete's Memoirs, 10000 gil. Only referenced in roe_records.lua and goblinfootprint.lua (San d'Oria/Windurst versions), no Bastok NPC scripts. | Medium -- unique reward. |
+| 3 | Return to the Depths | 78 | Ayame in Metalworks, find Moblin translator, defeat Twilotak. Reward: Bowyer Ring, 3000 gil. Continues Out of the Depths story. No NPC references found anywhere. | Medium -- story continuation. |
+| 4 | Hyper Active | 80 | Raibaht in Metalworks, get hyper altimeter from Lower Delkfutt's Tower. Reward: 3000 gil. Note: Teak Me to the Stars sets mustZone flag for this quest upon completion, so the prerequisite link exists but the quest itself does not. | Low-Medium. |
 
-### Missing -- Low Priority (deprecated / niche systems)
+### Missing -- Low Priority
 
-| # | Quest | Quest ID | What It Does | Impact |
-|---|-------|----------|--------------|--------|
-| 12 | Fully Mental Alchemist | 88 | Titus in Bastok Mines, collect gold dust in Grauberg (S) via prospecting. Reward: Trainee Sword. | Very Low -- WotG/Synergy era content. |
-| 13 | Synergistic Pursuits | 89 | Hildolf in Metalworks, gather materials to unlock Synergy. DEPRECATED on retail. | None -- no longer obtainable on retail. |
-| 14 | The Wondrous Whatchamacallit | 90 | Selliste in Bastok Mines, gather 6 elemental stones, synergize into Astral Matter. Reward: Portafurnace. | Very Low -- requires Synergy skill 5+. |
-| 15 | Synergistic Support | 91 | Hildolf in Metalworks, trade Slime Oil to receive Fewell. | Very Low -- Synergy system support quest. |
-| 16 | A Chocobo Riding Game (Bastok) | N/A | Bastok Mines chocobo stables, deliver chocobo to distant stable within time limit. | Very Low -- not even in quest enum. Chocobo system quest. |
+| # | Quest | Enum ID | What It Does | Impact |
+|---|-------|---------|--------------|--------|
+| 5 | A Discerning Eye (Bastok) | 71 | Grin in Port Bastok, identify NPC on airship. Reward: 500 gil. No NPC references found. | Low -- flavor quest. |
+| 6 | All by Myself | 76 | Marin in Bastok Markets, escort Ken through Dangruf Wadi. Reward: 1500 gil + key item. Lamepaue replay NPC has it commented out ("Need the correct csid"). | Low-Medium -- escort mechanic. |
+| 7 | The Naming Game | 81 | Raibaht in Metalworks (Fame 5 required), trade Ordrynite. Reward: 3600 gil, title. No NPC references found. | Low. |
+| 8 | Bait and Switch | 83 | Salim in Metalworks, puzzle quest. Reward: various items. No NPC references found. | Low. |
+| 9 | A Proper Burial | 87 | Offa in Bastok Markets, recover letters from time capsule. Reward: Rolanberry. Lamepaue replay NPC has cutscene replay code ready but quest itself has no implementation. | Low -- WotG content. |
+
+### Missing -- Skip (deprecated / niche systems)
+
+| # | Quest | Enum ID | What It Does | Impact |
+|---|-------|---------|--------------|--------|
+| 10 | Fully Mental Alchemist | 88 | Titus in Bastok Mines, collect gold dust via Grauberg [S] prospecting. Reward: Trainee Sword. | Very Low -- WotG/Synergy era. |
+| 11 | Synergistic Pursuits | 89 | Hildolf in Metalworks, gather materials to unlock Synergy. DEPRECATED on retail. | None -- deprecated. |
+| 12 | The Wondrous Whatchamacallit | 90 | Selliste in Bastok Mines, synergize Astral Matter. Reward: Portafurnace. | Very Low -- Synergy system. |
+| 13 | Synergistic Support | 91 | Hildolf in Metalworks, trade Slime Oil for Fewell. | Very Low -- Synergy system. |
 
 ---
 
-## Spot-Check Results
+## Deep Audit Re-Verification
 
-Five scripts were read in full to verify quality:
+The deep audit (bastok_quests_deep.md) checked all 78 converted scripts and found them fully functional. However, it only examined converted scripts. This corrected audit adds:
 
-### Welcome to Bastok
-- **Structure:** Modern Quest:new() framework. Two sections (available / accepted).
-- **Flow:** Powhatan (event 50) -> equip Shell Shield -> Bartolomeo (event 52) -> return to Powhatan (event 53) -> complete.
-- **Reward:** Spatha, 80 fame, title "Bastok Welcoming Committee".
-- **Verdict:** Fully functional.
+1. **Eco-Warrior (NPC-based)** -- Verified WORKS. Full quest flow: Raifa -> Degga -> lv25 restriction -> spawn/kill 2 Pudding NMs -> get KI -> complete. All NPCs, mobs, QM, and KI properly wired. Uses npcUtil.completeQuest with proper rewards.
 
-### The Siren's Tear
-- **Structure:** Four sections (available / accepted / completed / accepted-or-completed).
-- **Flow:** Wahid -> Otto -> Carmelo -> obtain Siren's Tear from QM -> trade back to Wahid.
-- **Reward:** 150 gil, 120 fame, title "Tearjerker".
-- **Verdict:** Fully functional. Handles repeat completion and item loss.
+2. **Too Many Chefs (NPC-based)** -- Verified PARTIAL. The deep audit missed this entirely. The NPC flow (Ferghus -> Leonhardt -> Raginmund -> Leonhardt -> Ferghus -> Umberto) is fully scripted with addQuest/completeQuest calls and proper charvar progression (steps 1-5). However, the Red Oven Mitt (item 2527) required at step 3->4 has no drop source in mob_droplist.sql and Grauberg [S] has no Quadav mobs spawned. This is a data gap, not a script gap.
 
-### WAR AF1: The Doorman
-- **Structure:** Two sections. Job gate (WAR) + level gate (AF1_QUEST_LEVEL setting).
-- **Flow:** Phara -> Davoi Hide Flap -> kill Gavotvut + Barakbok -> get Sword Grip Material -> Phara (wait a day) -> get Yasin's Sword -> Naji.
-- **Reward:** Razor Axe, 30 fame.
-- **Verdict:** Fully functional. Proper NM spawn/claim, key item chain, timer mechanic.
-
-### Gourmet (repeatable fame)
-- **Structure:** Two sections. Time-of-day based trade rewards.
-- **Flow:** Salimah -> trade Sleepshroom/Treant Bulb/Wild Onion at correct Vanadiel hour.
-- **Reward:** Variable gil (100-350) + fame. Must-zone between repeats.
-- **Verdict:** Fully functional. Correct time window logic.
-
-### Trust: Bastok
-- **Structure:** Three sections (available / accepted / completed).
-- **Flow:** Clarion Star -> Naji -> learn trust spells (Naji, Ayame, Volker, Iron Eater).
-- **Memory system:** Tracks mission/quest completion for memory cutscene parameters.
-- **Reward:** Bastok Trust Permit key item, multiple trust spells.
-- **Note:** Iron Eater memory function is TODO (commented out), but spell grant works.
-- **Verdict:** Functional with minor cosmetic gap (Iron Eater memories always 0).
+3. **TODOs from deep audit remain accurate** -- 5 cosmetic TODOs in converted scripts (Blade of Darkness verification, A Test of True Love KI removal, Rivals sallet return, Curse Collector reminder, Iron Eater trust memories). None are functional blockers.
 
 ---
 
 ## Key Observations
 
-1. **Core quests are solid.** All starter, fame, story chain, AF, and trust quests are implemented with the modern Quest:new() framework. No stubs found.
+1. **Core quests are solid.** All 78 converted + 1 NPC-based quest are fully functional. 86% implementation rate.
 
-2. **Missing quests are mostly niche content:**
-   - 4 are WotG/Campaign-era (Too Many Chefs, A Proper Burial, Fully Mental Alchemist, Chocobo Riding Game)
-   - 3 are Synergy system (deprecated/very niche)
-   - The rest are flavor/side quests with no progression impact
+2. **One quest is partially broken:** Too Many Chefs has complete NPC scripts but the required Red Oven Mitt item cannot be obtained (no Quadav mobs in Grauberg [S], no drop list entry). This was missed by the previous audit which listed it as entirely missing.
 
-3. **One gameplay blocker:** Achieving True Power (PUP lv70 cap quest) is missing. If anyone levels PUP, they cannot break the lv70 cap without this quest. Not relevant unless a player chooses PUP.
+3. **One gameplay blocker:** Achieving True Power (PUP lv70 cap quest) is missing entirely -- no quest script, no battlefield script (despite battlefield ID 1123 existing in battlefield.lua). Blocks PUP past lv70.
 
-4. **Minor gap:** Trust: Bastok has Iron Eater's memory function as TODO (returns 0). This only affects the trust cutscene flavor text, not the spell grant itself.
+4. **Prerequisite wiring exists for missing quests:** Teak Me to the Stars correctly sets mustZone for Hyper Active, and Lamepaue (replay NPC) has completion-check code ready for several missing quests (Achieving True Power, Too Many Chefs, A Proper Burial). This means some quest infrastructure anticipates future implementation.
 
 5. **All 3 AF job sets (WAR/MNK/DRK) fully implemented** with proper AF1/AF2/AF3 chains, level gates, NM fights, and key item progression.
+
+6. **Trust: Bastok** has Iron Eater's memory function as TODO (returns 0). Cosmetic only.
 
 ---
 
@@ -220,6 +240,7 @@ Five scripts were read in full to verify quality:
 
 | Priority | Action |
 |----------|--------|
-| HIGH (if PUP used) | Implement Achieving True Power -- PUP limit break quest |
-| LOW | Implement Eco-Warrior, Escort for Hire, Return to the Depths for completionists |
-| SKIP | Synergy quests (deprecated), WotG quests (niche), Chocobo Riding (not in enum) |
+| HIGH (if PUP used) | Implement Achieving True Power -- PUP limit break quest. Needs quest script + battlefield script (ID 1123). |
+| MEDIUM | Fix Too Many Chefs -- add Red Oven Mitt to Quadav mob droplists or add Quadav mobs to Grauberg [S]. |
+| LOW | Implement Escort for Hire, Return to the Depths, Hyper Active for completionists. |
+| SKIP | Synergy quests (deprecated), Fully Mental Alchemist (WotG/Synergy niche). |

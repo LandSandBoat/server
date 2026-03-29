@@ -1,370 +1,385 @@
-# Expansion-Specific Side Quests (ToAU, WotG, Adoulin)
+# Expansion-Specific Quests (ToAU, WotG, Abyssea, Adoulin, Coalition) -- Phase 2 Audit (CORRECTED)
 
-## Source
-- bg-wiki: https://www.bg-wiki.com/ffxi/Category:Aht_Urhgan_Quests
-- bg-wiki: https://www.bg-wiki.com/ffxi/Wings_of_the_Goddess_Quests
-- bg-wiki: https://www.bg-wiki.com/ffxi/Category:Adoulin_Quests
-- Codebase: `scripts/quests/ahtUrhgan/`, `scripts/quests/crystalWar/`, `scripts/quests/adoulin/`
-- Quest registry: `scripts/globals/quests.lua`
+**CORRECTION NOTE:** Previous audit undercounted quests. This file is corrected using the definitive source: `scripts/globals/quests.lua` markers (`+` = implemented, `Converted` = Interaction Framework). Previous audit counted scripts in quest folders only; this audit counts implementation markers which also cover quests implemented in zone NPC scripts.
 
-## Summary
-Aht Urhgan is the strongest expansion at 61.3% implemented. Crystal War is at 30.6% with many quest chains incomplete. Adoulin is the weakest at 14.6% with almost no story quests, no RUN/GEO AF quests, no coalition assignments, and a stub Mog Garden.
+**Date:** 2026-03-28 (corrected)
+**Source:** `scripts/globals/quests.lua` quest ID definitions and implementation markers
 
 ---
 
-## 1. Aht Urhgan Quests (ToAU)
+## Overall Summary
 
-**Retail total: 75 quests** (per bg-wiki) | **Registered in quests.lua: 62 entries** | **Script files: 46** | **Converted (full impl): 42**
+| Expansion | Defined in quests.lua | Implemented (+/Converted) | Coverage | Change from Previous |
+|-----------|----------------------|--------------------------|----------|---------------------|
+| Aht Urhgan (ToAU) | 72 | 50 | **69.4%** | was 61.3% (46/75) |
+| Crystal War (WotG) | 95 | 37 | **38.9%** | was 30.6% (30/98) |
+| Abyssea | 192 | 49 | **25.5%** | was 31.6% (49/155) |
+| Adoulin (SoA) | 97 | 18 | **18.6%** | was 14.6% (14/96) |
+| Coalition | 95 | 0 | **0.0%** | unchanged |
+| **TOTAL** | **551** | **154** | **28.0%** | |
 
-### Overall: 46/75 = 61.3%
+> **Note on Abyssea coverage drop:** The raw percentage dropped from 31.6% to 25.5% because the previous audit only counted 155 defined quests. The correct count is 192 (including zone maintenance quests like Ward Warden, Desert Rain, Crimson Carpet, Refuel & Replenish, Mightier Martello). The 49 implemented quests are unchanged.
 
-### Checklist - Implemented (46 scripts, 42 fully converted)
+> **Note on Adoulin increase:** 4 additional quests found with `+` markers (Exotic Delicacies, A Pioneer's Best Imaginary Friend, The Old Man and the Harpoon, Always More Quoth the Ravenous) that were not counted previously because they have no dedicated quest script files.
 
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Keeping Notes | WORKS | Converted |
-| Arts and Crafts | WORKS | Converted |
-| Olduum | WORKS | Converted |
-| Got It All | WORKS | Converted |
-| An Empty Vessel | WORKS | Converted |
-| Luck of the Draw | WORKS | Converted |
-| No Strings Attached | WORKS | Converted |
-| Give Peace a Chance | WORKS | Converted |
-| A Taste of Honey | WORKS | Converted |
-| Such Sweet Sorrow | WORKS | Converted |
-| Fear of the Dark II | WORKS | Converted |
-| Cook-a-roon? | WORKS | Converted |
-| The Die Is Cast | WORKS | Converted |
-| Two Horn the Savage | WORKS | Converted |
-| What Friends Are For | WORKS | Converted |
-| Rock Bottom | WORKS | Converted |
-| Three Men and a Closet | WORKS | Converted |
-| Saga of the Skyserpent | WORKS | Converted |
-| Ode to the Serpents | WORKS | Converted |
-| When the Bow Breaks | WORKS | Converted |
-| Fist of the People | WORKS | Converted |
-| Soothing Waters | WORKS | Converted |
-| Embers of His Past | WORKS | Converted |
-| The Prankster | WORKS | Converted |
-| Delivering the Goods | WORKS | Converted |
-| Vanishing Act | WORKS | Converted |
-| Striking a Balance | WORKS | Converted |
-| Not Meant to Be | WORKS | Converted |
-| Led Astray | WORKS | Converted |
-| Rat Race | WORKS | Converted |
-| The Prince and the Hopper | WORKS | Converted |
-| Waking the Colossus | WORKS | Converted |
-| Divine Interference | WORKS | Converted |
-| **BLU AF: Beginnings** | WORKS | Converted (BLU_AF1) |
-| **BLU AF: Omens** | WORKS | Converted (BLU_AF2) |
-| **BLU AF: Transformations** | WORKS | Converted (BLU_AF3) |
-| **COR AF: Equipped for All Occasions** | WORKS | Converted (COR_AF1) |
-| **Promotion: Private First Class** | WORKS | Converted |
-| **Promotion: Superior Private** | WORKS | Converted |
-| **Promotion: Lance Corporal** | WORKS | Converted |
-| **Promotion: Corporal** | WORKS | Converted |
-| **Promotion: Sergeant** | WORKS | Converted |
-| **Promotion: Sergeant Major** | WORKS | Converted |
-| **Promotion: Chief Sergeant** | WORKS | Converted |
-| **Promotion: Second Lieutenant** | WORKS | Converted |
-| **Promotion: First Lieutenant** | WORKS | Converted |
+---
 
-### Checklist - Registered but NOT Implemented (16 entries, no script)
+## 1. Aht Urhgan Quests (ToAU) -- 50/72 (69.4%)
 
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Get the Picture | MISSING | Registered only (id=4) |
-| Finding Faults | MISSING | Registered only (id=8) |
-| The Art of War | MISSING | Registered only (id=10) |
-| Totoroon's Treasure Hunt | MISSING | Registered only (id=18) |
-| Navigating the Unfriendly Seas | PARTIAL | Marked "+" but no dedicated script; COR AF2 |
-| Against All Odds | PARTIAL | Marked "+" but no dedicated script; COR AF3 |
-| The Wayward Automaton | PARTIAL | Marked "+" but no dedicated script; PUP AF1 |
-| Operation Teatime | PARTIAL | Marked "+" but no dedicated script; PUP AF2 |
-| Puppetmaster Blues | MISSING | PUP AF3 - not marked as implemented |
-| Moment of Truth | MISSING | Registered only (id=30) |
-| Five Seconds of Fame | MISSING | Registered only (id=32) |
-| The Beast Within | MISSING | Related to SMN quest |
-| Breaking the Bonds of Fate | MISSING | Related to SMN quest |
-| **Promotion: Captain** | MISSING | Final mercenary rank - not implemented |
-| VW Op. 050: Aht Urhgan Assault | MISSING | Voidwatch quest |
-| VW Op. 068: Subterranean Skirmish | MISSING | Voidwatch quest |
+### Implemented Quests (50)
 
-### Checklist - Not Even Registered (13 bg-wiki quests with no entry)
+| Quest | ID | Marker | Notes |
+|-------|-----|--------|-------|
+| Keeping Notes | 0 | Converted | |
+| Arts and Crafts | 1 | Converted | |
+| Olduum | 2 | Converted | |
+| Got It All | 3 | Converted | |
+| An Empty Vessel | 5 | Converted | BLU unlock |
+| Luck of the Draw | 6 | Converted | COR unlock |
+| No Strings Attached | 7 | Converted | PUP unlock |
+| Give Peace a Chance | 9 | Converted | Besieged-related |
+| A Taste of Honey | 12 | Converted | |
+| Such Sweet Sorrow | 13 | Converted | |
+| Fear of the Dark II | 14 | Converted | |
+| Cook-a-roon? | 15 | Converted | |
+| The Die Is Cast | 16 | Converted | |
+| Two Horn the Savage | 17 | Converted | |
+| What Friends Are For | 19 | Converted | |
+| Rock Bottom | 20 | Converted | |
+| Beginnings | 21 | Converted | BLU AF1 |
+| Omens | 22 | Converted | BLU AF2 |
+| Transformations | 23 | Converted | BLU AF3 |
+| Equipped for All Occasions | 24 | Converted | COR AF1 |
+| Navigating the Unfriendly Seas | 25 | + | COR AF2 (zone NPC script) |
+| Against All Odds | 26 | + | COR AF3 (zone NPC script) |
+| The Wayward Automaton | 27 | + | PUP AF1 (zone NPC script) |
+| Operation Teatime | 28 | + | PUP AF2 (zone NPC script) |
+| Three Men and a Closet | 31 | Converted | |
+| Saga of the Skyserpent | 43 | Converted | |
+| Ode to the Serpents | 44 | Converted | |
+| When the Bow Breaks | 45 | Converted | |
+| Fist of the People | 46 | Converted | Besieged-related |
+| Soothing Waters | 47 | Converted | |
+| Embers of His Past | 48 | Converted | |
+| The Prankster | 60 | Converted | |
+| Delivering the Goods | 61 | Converted | |
+| Vanishing Act | 62 | Converted | |
+| Striking a Balance | 63 | Converted | |
+| Not Meant to Be | 64 | Converted | |
+| Led Astray | 65 | Converted | |
+| Rat Race | 66 | Converted | |
+| The Prince and the Hopper | 67 | Converted | |
+| Waking the Colossus | 74 | Converted | |
+| Divine Interference | 75 | Converted | |
+| Promotion: Private First Class | 90 | Converted | Assault rank |
+| Promotion: Superior Private | 91 | Converted | Assault rank |
+| Promotion: Lance Corporal | 92 | Converted | Assault rank |
+| Promotion: Corporal | 93 | Converted | Assault rank |
+| Promotion: Sergeant | 94 | Converted | Assault rank |
+| Promotion: Sergeant Major | 95 | Converted | Assault rank |
+| Promotion: Chief Sergeant | 96 | Converted | Assault rank |
+| Promotion: Second Lieutenant | 97 | Converted | Assault rank |
+| Promotion: First Lieutenant | 98 | Converted | Assault rank |
 
-| Quest | Status | Notes |
-|-------|--------|-------|
-| A Stygian Pact | MISSING | Registered as id=78, no script |
-| An Imperial Heist | MISSING | Registered as id=70, no script |
-| Duties, Tasks, and Deeds | MISSING | Registered as id=71, no script |
-| Forging a New Myth | MISSING | Registered as id=72, no script |
-| Coming Full Circle | MISSING | Registered as id=73, no script |
-| The Rider Cometh | MISSING | Registered as id=76, no script |
-| Unwavering Resolve | MISSING | Registered as id=77, no script |
-| Scouting the Ashu Talif | MISSING | Registered as id=101, no script |
-| Royal Painter Escort | MISSING | Registered as id=102, no script |
-| Targeting the Captain | MISSING | Registered as id=103, no script |
-| Lure of the Wildcat | MISSING | Not in quests.lua at all |
-| Five Seconds of Fame | MISSING | Registered but no script |
-| Get the Picture | MISSING | Registered but no script |
+### Missing Quests (22)
 
-### Key Missing Quests (Gameplay Impact)
+| Quest | ID | Impact |
+|-------|-----|--------|
+| Get the Picture | 4 | Minor quest |
+| Finding Faults | 8 | Minor quest |
+| The Art of War | 10 | Minor quest |
+| Totoroon's Treasure Hunt | 18 | Minor quest |
+| Puppetmaster Blues | 29 | PUP AF3 -- PUP artifact armor chain incomplete |
+| Moment of Truth | 30 | Minor quest |
+| Five Seconds of Fame | 32 | Minor quest |
+| The Beast Within | 40 | SMN-related storyline |
+| Breaking the Bonds of Fate | 41 | SMN-related storyline |
+| VW Op. 050: Aht Urhgan Assault | 68 | Voidwatch (low priority) |
+| VW Op. 068: Subterranean Skirmish | 69 | Voidwatch (low priority) |
+| An Imperial Heist | 70 | Minor quest |
+| Duties, Tasks, and Deeds | 71 | Minor quest |
+| Forging a New Myth | 72 | Mythic weapon quest |
+| Coming Full Circle | 73 | Mythic weapon quest |
+| The Rider Cometh | 76 | SMN-related |
+| Unwavering Resolve | 77 | SMN-related |
+| A Stygian Pact | 78 | SMN-related |
+| Promotion: Captain | 99 | Final mercenary rank -- gates content |
+| Scouting the Ashu Talif | 101 | Assault mission |
+| Royal Painter Escort | 102 | Assault mission |
+| Targeting the Captain | 103 | Assault mission |
+
+### Key Missing (Gameplay Impact)
 
 | Quest | Impact | Notes |
 |-------|--------|-------|
 | **Promotion: Captain** | HIGH | Final mercenary rank, gates content |
-| **Puppetmaster Blues** | MEDIUM | PUP AF3 quest - PUP job incomplete AF chain |
-| **COR AF2-3 (Navigating/Against All Odds)** | MEDIUM | Marked "+" in quests.lua but no script files found |
-| **PUP AF1-2 (Wayward Automaton/Teatime)** | MEDIUM | Marked "+" but no script files; may be handled by NPC scripts |
-| **Soultrapper system** | WORKS | Item scripts exist (`scripts/items/soultrapper.lua`), ZNM system present |
+| **Puppetmaster Blues** | MEDIUM | PUP AF3 -- incomplete AF chain (AF1-2 work via NPC scripts) |
+| **Mythic weapon quests** | MEDIUM | Forging a New Myth / Coming Full Circle |
+| **SMN quests** | LOW | Beast Within / Rider Cometh chain |
 
 ---
 
-## 2. Crystal War Quests (WotG)
+## 2. Crystal War Quests (WotG) -- 37/95 (38.9%)
 
-**Retail total: ~98 quests** (per bg-wiki) | **Registered in quests.lua: 98 entries** | **Script files: 30** | **Converted (full impl): 28**
+### Implemented Quests (37)
 
-### Overall: 30/98 = 30.6%
+| Quest | ID | Marker | Notes |
+|-------|-----|--------|-------|
+| Lost in Translocation | 0 | Converted | Sandy [S] |
+| Message on the Winds | 1 | Converted | Sandy [S] |
+| The Weekly Adventurer | 2 | Converted | Sandy [S] |
+| The Dawn of Delectability | 5 | Converted | Sandy [S] |
+| A Little Knowledge | 6 | Converted | SCH unlock |
+| The Fighting Fourth | 7 | Converted | Bastok [S] |
+| Snake on the Plains | 8 | + | Windy [S] |
+| Steamed Rams | 9 | Converted | Bastok [S] |
+| Seeing Spots | 10 | Converted | Sandy [S] |
+| The Flipside of Things | 11 | Converted | Sandy [S] |
+| Hammering Hearts | 14 | Converted | Sandy [S] |
+| Gifts of the Griffon | 15 | Converted | Bastok [S] Griffon chain |
+| Claws of the Griffon | 16 | Converted | Bastok [S] Griffon chain |
+| The Tigress Stirs | 17 | + | Bastok [S] (zone NPC script) |
+| Light in the Darkness | 19 | Converted | Sandy [S] |
+| Boy and the Beast | 24 | Converted | Sandy [S] |
+| Wrath of the Griffon | 25 | Converted | Bastok [S] Griffon chain |
+| The Lost Book | 26 | Converted | Sandy [S] |
+| Beans Ahoy | 29 | + | |
+| On Sabbatical | 32 | Converted | SCH AF1 |
+| Downward Helix | 33 | Converted | SCH AF2 |
+| Perils of the Griffon | 37 | Converted | Bastok [S] Griffon chain |
+| In a Haze of Glory | 38 | Converted | Bastok [S] |
+| Say It with a Handbag | 41 | + | DNC AF (reward latent NOT implemented) |
+| The Price of Valor | 44 | Converted | |
+| Bonds That Never Die | 45 | Converted | |
+| Songbirds in a Snowstorm | 51 | Converted | Windy [S] |
+| Blood of Heroes | 52 | Converted | Windy [S] |
+| Chasing Shadows | 60 | Converted | |
+| Face of the Future | 61 | Converted | |
+| Her Memories: Homecoming Queen | 64 | Converted | Cait Sith chain |
+| Her Memories: Old Bean | 65 | Converted | Cait Sith chain |
+| Her Memories: The Faux Pas | 66 | Converted | Cait Sith chain |
+| Her Memories: The Grave Resolve | 67 | Converted | Cait Sith chain |
+| Her Memories: Operation Cupid | 68 | Converted | Cait Sith chain |
+| Her Memories: Carnelian Footfalls | 69 | Converted | Cait Sith chain |
+| Her Memories: Of Malign Maladies | 72 | Converted | Cait Sith chain |
 
-### Implemented Quest Chains
+### Missing Quests (58)
 
-#### Bastok [S] Chain (Griffon series)
-| Quest | Status | Notes |
-|-------|--------|-------|
-| The Fighting Fourth | WORKS | Converted (WOTG_BAS_0) |
-| Steamed Rams | WORKS | Converted |
-| Claws of the Griffon | WORKS | Converted |
-| Gifts of the Griffon | WORKS | Converted |
-| Perils of the Griffon | WORKS | Converted |
-| Wrath of the Griffon | WORKS | Converted |
-| In a Haze of Glory | WORKS | Converted |
-| **The Tigress Stirs** | MISSING | Marked "+" but no script |
-| **The Tigress Strikes** | MISSING | No script |
+| Quest | ID | Impact |
+|-------|-----|--------|
+| Healing Herbs | 3 | Windy [S] early quest |
+| Redeeming Rocks | 4 | Windy [S] early quest |
+| Better Part of Valor | 12 | Bastok [S] |
+| Fires of Discontent | 13 | Bastok [S] |
+| The Tigress Strikes | 18 | Bastok [S] |
+| Burden of Suspicion | 20 | Sandy [S] |
+| Evil at the Inlet | 21 | Sandy [S] |
+| The Fumbling Friar | 22 | Sandy [S] |
+| Requiem for the Departed | 23 | Sandy [S] |
+| Knot Quite There | 27 | |
+| A Manifest Problem | 28 | |
+| Beast from the East | 30 | |
+| The Swarm | 31 | Windy [S] |
+| Seeing Blood-red | 34 | DNC AF |
+| Storm on the Horizon | 35 | |
+| Fire in the Hole | 36 | |
+| When One Man Is Not Enough | 39 | |
+| A Feast for Gnats | 40 | Windy [S] |
+| Quelling the Storm | 42 | |
+| Honor Under Fire | 43 | |
+| The Long March North | 46 | |
+| The Forbidden Path | 47 | |
+| A Jeweler's Lament | 48 | |
+| Beneath the Mask | 49 | |
+| What Price Loyalty | 50 | |
+| Sins of the Mothers | 53 | Windy [S] |
+| Howl from the Heavens | 54 | |
+| Succor to the Sidhe | 55 | |
+| The Young and the Threadless | 56 | |
+| Son and Father | 57 | |
+| The Truth Lies Hid | 58 | |
+| Bonds of Mythril | 59 | |
+| Manifest Destiny | 62 | WotG finale |
+| At Journey's End | 63 | WotG finale |
+| Her Memories: Azure Footfalls | 70 | Cait Sith chain |
+| Her Memories: Verdure Footfalls | 71 | Cait Sith chain |
+| Champion of the Dawn | 73 | WotG finale |
+| The Dawn Also Rises | 74 | WotG finale |
+| A Forbidden Reunion | 75 | WotG finale |
+| Guardian of the Void | 80 | Voidwatch |
+| Drafted by the Duchy | 81 | Voidwatch |
+| Battle on a New Front | 82 | Voidwatch |
+| Voidwalker Op. 126 | 83 | Voidwatch |
+| A Cait Calls | 84 | Voidwatch |
+| The Truth Is Out There | 85 | Voidwatch |
+| Redrafted by the Duchy | 86 | Voidwatch |
+| A New Menace | 87 | Voidwatch |
+| No Rest for the Weary | 88 | Voidwatch |
+| A World in Flux | 89 | Voidwatch |
+| Between a Rock and Rift | 90 | Voidwatch |
+| A Farewell to Felines | 91 | Voidwatch |
+| Third Tour of Duchy | 92 | Voidwatch |
+| Glimmer of Hope | 93 | Voidwatch |
+| Brace for the Unknown | 94 | Voidwatch |
+| Provenance | 95 | Voidwatch |
+| Crystal Guardian | 96 | Cait Sith endgame |
+| Endings and Beginnings | 97 | Cait Sith endgame |
+| Ad Infinitum | 98 | Cait Sith endgame |
 
-#### San d'Oria [S] Chain
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Lost in Translocation | WORKS | Converted |
-| Message on the Winds | WORKS | Converted |
-| The Weekly Adventurer | WORKS | Converted |
-| A Little Knowledge | WORKS | Converted |
-| Light in the Darkness | WORKS | Converted |
-| Seeing Spots | WORKS | Converted |
-| The Flipside of Things | WORKS | Converted |
-| Boy and the Beast | WORKS | Converted |
-| The Lost Book | WORKS | Converted |
-| Hammering Hearts | WORKS | Converted |
-| The Dawn of Delectability | WORKS | Converted |
-
-#### Windurst [S] Chain
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Songbirds in a Snowstorm | WORKS | Converted |
-| Blood of Heroes | WORKS | Converted |
-
-#### Her Memories Chain (Cait Sith storyline)
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Her Memories: Homecoming Queen | WORKS | Converted |
-| Her Memories: Operation Cupid | WORKS | Converted |
-| Her Memories: Carnelian Footfalls | WORKS | Converted |
-| Her Memories: Of Malign Maladies | WORKS | Converted |
-| Her Memories: Old Bean | PARTIAL | Marked "+" in quests.lua, no dedicated script found |
-| Her Memories: The Faux Pas | PARTIAL | Marked "+" in quests.lua, no dedicated script found |
-| Her Memories: Grave Resolve | PARTIAL | Marked "+" in quests.lua, no dedicated script found |
-| Her Memories: Azure Footfalls | MISSING | Not implemented |
-| Her Memories: Verdure Footfalls | MISSING | Not implemented |
-
-#### Other Implemented
-| Quest | Status | Notes |
-|-------|--------|-------|
-| SCH AF: On Sabbatical | WORKS | Converted (SCH_AF1) |
-| SCH AF: Downward Helix | WORKS | Converted (SCH_AF2) |
-| Chasing Shadows | WORKS | Converted |
-| Face of the Future | WORKS | Converted |
-| Bonds That Never Die | WORKS | Converted |
-| The Price of Valor | WORKS | Converted |
-
-### Major Missing Quest Chains
-
-#### San d'Oria [S] - Missing Later Quests
-| Quest | Status |
-|-------|--------|
-| Burden of Suspicion | MISSING |
-| Evil at the Inlet | MISSING |
-| The Fumbling Friar | MISSING |
-| Requiem for the Departed | MISSING |
-| The Forbidden Path | MISSING |
-| Beneath the Mask | MISSING |
-| A Jeweler's Lament | MISSING |
-
-#### Bastok [S] - Missing Later Quests
-| Quest | Status |
-|-------|--------|
-| The Tigress Stirs | MISSING |
-| The Tigress Strikes | MISSING |
-| Better Part of Valor | MISSING |
-| Fires of Discontent | MISSING |
-| Storm on the Horizon | MISSING |
-| Fire in the Hole | MISSING |
-| When One Man Is Not Enough | MISSING |
-| Honor Under Fire | MISSING |
-
-#### Windurst [S] - Almost Entirely Missing
-| Quest | Status |
-|-------|--------|
-| Healing Herbs | MISSING |
-| Redeeming Rocks | MISSING |
-| Snake on the Plains | MISSING |
-| A Feast for Gnats | MISSING |
-| Quelling the Storm | MISSING |
-| Sins of the Mothers | MISSING |
-| Howl from the Heavens | MISSING |
-| The Swarm | MISSING |
-| Son and Father | MISSING |
-| The Truth Lies Hid | MISSING |
-| Bonds of Mythril | MISSING |
-
-#### DNC AF Chain - MISSING
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Seeing Blood-red | MISSING | DNC AF quests not in crystalWar folder |
-| Say It with a Handbag | PARTIAL | Noted in quests.lua: "Can be completed, but reward latent not implemented" |
-
-#### Voidwatch/Walk of Echoes Chain - MISSING
-| Quest | Status |
-|-------|--------|
-| Guardian of the Void | MISSING |
-| Drafted by the Duchy | MISSING |
-| Battle on a New Front | MISSING |
-| All Voidwatch/WoE quests | MISSING |
-
-#### Cait Sith Endgame Chain - MISSING
-| Quest | Status |
-|-------|--------|
-| Champion of the Dawn | MISSING |
-| The Dawn Also Rises | MISSING |
-| A Forbidden Reunion | MISSING |
-| Crystal Guardian | MISSING |
-| Endings and Beginnings | MISSING |
-| Ad Infinitum | MISSING |
-
-### Key Missing Quests (Gameplay Impact)
-
-| Quest | Impact | Notes |
-|-------|--------|-------|
-| **DNC AF chain** | HIGH | Dancer artifact armor quests not implemented |
-| **SCH AF3** | MEDIUM | Only AF1-AF2 present (On Sabbatical, Downward Helix) |
-| **Windurst [S] chain** | HIGH | Only 2 of ~13 quests implemented; gates WotG mission progression |
-| **Cait Sith endgame** | HIGH | Final story quests missing (Champion of Dawn through Ad Infinitum) |
-| **Later Sandy/Bastok [S]** | MEDIUM | Chains cut off partway through |
-
----
-
-## 3. Adoulin Quests (SoA)
-
-**Retail total: ~96 quests** (per bg-wiki) | **Registered in quests.lua: ~80 entries** | **Script files: 14** | **Coalition assignments registered: 96 entries (separate log)**
-
-### Overall Side Quests: 14/96 = 14.6%
-
-### Implemented Quests (14 scripts)
-
-| Quest | Status | Notes |
-|-------|--------|-------|
-| A Certain Substitute Patrolman | WORKS | Converted |
-| A Good Pair of Crocs | WORKS | Converted |
-| A Shot in the Dark | WORKS | Converted |
-| A Stone's Throw Away | WORKS | Converted |
-| Breaking the Ice | WORKS | Converted |
-| Flavors of Our Lives | WORKS | Converted |
-| Hide and Go Peak | WORKS | Converted |
-| Hunger Strikes | WORKS | Converted |
-| I'm on a Boat | WORKS | Converted |
-| It Sets My Heart Aflutter | WORKS | Converted |
-| Lerene's Lament | WORKS | Converted |
-| The Longest Way Round | WORKS | Converted |
-| The Starving | WORKS | Converted |
-| Transporting | WORKS | Converted |
-
-### Major Missing Systems
-
-#### RUN Artifact Quests - ALL MISSING
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Children of the Rune | MISSING | Registered in quests.lua (id=119), no script |
-| Endeavoring to Awaken | MISSING | Registered (id=22), no script |
-| Forging New Bonds | MISSING | Registered (id=23), no script |
-| Rune Fencing the Night Away | MISSING | Registered (id=135), no script |
-| Legacies Lost and Found | MISSING | Registered (id=24), no script |
-| Destiny's Device | MISSING | Registered (id=25), no script |
-| Epiphany | MISSING | Registered (id=143), no script |
-| Quiescence | MISSING | Registered (id=132), no script |
-
-#### GEO Artifact Quests - ALL MISSING
-| Quest | Status | Notes |
-|-------|--------|-------|
-| Dances with Luopans | MISSING | Registered (id=118), no script |
-| Elementary, My Dear Sylvie | MISSING | Registered (id=35), no script |
-| For Whom the Bell Tolls | MISSING | Registered (id=36), no script |
-| Geomancerrific | MISSING | Registered (id=134), no script |
-| The Bloodline of Zacariah | MISSING | Registered (id=37), no script |
-| The Communion | MISSING | Registered (id=38), no script |
-| Treasures of the Earth | MISSING | Registered (id=142), no script |
-| Saved by the Bell | MISSING | Registered (id=131), no script |
-
-#### Coalition Assignments
-| System | Status | Notes |
-|--------|--------|-------|
-| Coalition quest log | PARTIAL | 96 entries registered in quests.lua (Procure, Clear, Provide, Deliver, Support, Gather, Survey, Analyze, Preserve, Patrol, Recover, Research, Boost) |
-| Coalition NPC scripts | PARTIAL | NPCs exist in Eastern/Western Adoulin but no assignment script files found |
-| Actual assignment gameplay | MISSING | No quest scripts in a coalition folder; system is not functional |
-
-#### Mog Garden
-| System | Status | Notes |
-|--------|--------|-------|
-| Zone accessible | PARTIAL | `scripts/globals/mog_garden.lua` exists but is mostly TODO stubs |
-| Green Thumb Moogle | PARTIAL | NPC script exists, hides all NPCs by default |
-| Gardening/Fishing/Etc | MISSING | No gameplay systems implemented |
-
-#### Story/Side Quest Chains - MISSING
-| Quest Chain | Status | Notes |
-|-------------|--------|-------|
-| Vegetable Vegetable series (4 quests) | MISSING | Registered, no scripts |
-| A Thirst series (4 quests) | MISSING | Registered, no scripts |
-| Weatherspoon series (2 quests) | MISSING | Registered, no scripts |
-| Waypoint quests (Western/Wes-Eastern/Wayward) | MISSING | Registered, no scripts |
-| Melvien investigation chain | MISSING | Registered, no scripts |
-| Velkkovert Operations | MISSING | Registered, no scripts |
-
-### Key Missing Quests (Gameplay Impact)
+### Key Missing (Gameplay Impact)
 
 | Quest/System | Impact | Notes |
 |-------------|--------|-------|
-| **RUN AF chain (8 quests)** | CRITICAL | Rune Fencer has no artifact armor quests at all |
-| **GEO AF chain (8 quests)** | CRITICAL | Geomancer has no artifact armor quests at all |
-| **Coalition assignments** | HIGH | Core Adoulin progression system; 96 assignments registered but none functional |
-| **Mog Garden** | MEDIUM | Zone exists but completely non-functional |
-| **Waypoint expansion quests** | MEDIUM | Western/Eastern waypoint unlock quests missing |
+| **DNC AF chain** | HIGH | Seeing Blood-red (34) missing; Say It with a Handbag works but reward latent broken |
+| **SCH AF3** | MEDIUM | Only AF1-AF2 present (On Sabbatical, Downward Helix) |
+| **Windurst [S] chain** | HIGH | Only 3 of ~13 quests (Snake on Plains, Songbirds, Blood of Heroes) |
+| **Cait Sith endgame** | HIGH | 7 of 9 Her Memories present, but Champion of Dawn through Ad Infinitum missing |
+| **Voidwatch** | MEDIUM | All 16 Voidwatch quests missing |
+| **WotG finale** | HIGH | Manifest Destiny, At Journey's End, Dawn Also Rises missing |
 
 ---
 
-## Overall Expansion Quest Summary
+## 3. Abyssea Quests -- 49/192 (25.5%)
 
-| Expansion | Retail Quests | Implemented | Percentage | Key Gaps |
-|-----------|--------------|-------------|------------|----------|
-| **Aht Urhgan (ToAU)** | 75 | 46 | **61.3%** | Captain promo, PUP AF3, a few side quests |
-| **Crystal War (WotG)** | 98 | 30 | **30.6%** | DNC AF, Windy [S] chain, Cait Sith endgame, most side quests |
-| **Adoulin (SoA)** | 96 | 14 | **14.6%** | RUN AF, GEO AF, all coalitions, Mog Garden, most quests |
-| **Combined** | 269 | 90 | **33.5%** | |
+### Implemented Quests (49)
+
+#### Dominion Ops (42 quests, all Converted)
+| Quest Range | Zone | Count |
+|-------------|------|-------|
+| Dominion Op 01-14 Altepa | Abyssea - Altepa | 14 |
+| Dominion Op 01-14 Uleguerand | Abyssea - Uleguerand | 14 |
+| Dominion Op 01-14 Grauberg | Abyssea - Grauberg | 14 |
+
+#### Story/Entry Quests (7 quests)
+| Quest | ID | Marker | Notes |
+|-------|-----|--------|-------|
+| A Journey Begins | 160 | Converted | Abyssea entry |
+| The Truth Beckons | 161 | Converted | Abyssea entry |
+| A Goldstruck Gigas | 163 | Converted | Story quest |
+| To Paste a Peiste | 164 | Converted | Story quest |
+| Megadrile Menace | 165 | Converted | Story quest |
+| Scars of Abyssea | 175 | Converted | Story quest |
+| A Beaked Blusterer | 176 | Converted | Story quest |
+
+### Missing Quests (143)
+
+| Category | ID Range | Count | Impact |
+|----------|----------|-------|--------|
+| Zone side quests (Attohwa/Misareaux/Vunkerl) | 0-49 | 50 | NPC-given side quests |
+| Zone side quests (La Theine/Konschtat/Tahrongi) | 50-69 | 20 | NPC-given side quests |
+| Zone side quests (Altepa/Uleguerand/Grauberg) | 70-86 | 17 | NPC-given side quests |
+| Ward Warden (I & II, 3 zones) | 124-129 | 6 | Zone maintenance repeatable |
+| Desert Rain (I & II, 3 zones) | 130-135 | 6 | Zone maintenance repeatable |
+| Crimson Carpet (I & II, 3 zones) | 136-141 | 6 | Zone maintenance repeatable |
+| Refuel and Replenish (9 zones) | 142-150 | 9 | Zone maintenance repeatable |
+| A Mightier Martello (9 zones) | 151-159 | 9 | Zone maintenance repeatable |
+| Story quests (Dawn of Death through Moonlight Requite) | 162, 166-186 | 20 | Abyssea storyline progression |
+
+### Key Notes
+- **Core gameplay loop works:** Abyssea entry (A Journey Begins + The Truth Beckons) is functional, and all 42 Dominion Ops (the primary repeatable content) are fully implemented.
+- **Zone maintenance quests** (36 total: Ward Warden, Desert Rain, Crimson Carpet, Refuel, Martello) are all missing -- these are repeatable zone buff quests.
+- **87 NPC side quests** (IDs 0-86) are all missing -- these cover a wide range of zone-specific content.
+- **20 story quests** missing -- Dawn of Death through Moonlight Requite; gates storyline progression.
+
+---
+
+## 4. Adoulin Quests (SoA) -- 18/97 (18.6%)
+
+### Implemented Quests (18)
+
+| Quest | ID | Marker | Notes |
+|-------|-----|--------|-------|
+| Flavors of Our Lives | 46 | Converted | Colonization task |
+| Breaking the Ice | 54 | Converted | Colonization task |
+| I'm on a Boat | 55 | Converted | |
+| A Stone's Throw Away | 56 | Converted | |
+| Hide and Go Peak | 57 | Converted | |
+| Exotic Delicacies | 74 | + | Zone NPC script |
+| A Pioneer's Best Imaginary Friend | 75 | + | Zone NPC script |
+| Hunger Strikes | 76 | Converted | |
+| The Old Man and the Harpoon | 77 | + | Zone NPC script |
+| A Certain Substitute Patrolman | 78 | Converted | |
+| It Sets My Heart Aflutter | 79 | Converted | |
+| Transporting | 82 | Converted | |
+| The Starving | 84 | Converted | |
+| Always More Quoth the Ravenous | 88 | + | Zone NPC script |
+| The Longest Way Round | 91 | Converted | |
+| A Good Pair of Crocs | 93 | Converted | |
+| A Shot in the Dark | 96 | Converted | |
+| Lerene's Lament | 126 | Converted | |
+
+### Missing Quests (79)
+
+| Category | Examples | Count | Impact |
+|----------|----------|-------|--------|
+| Pioneer Coalition colonization tasks | Twitherym Dust (0), To Catch a Predator (1), Empty Nest (2), etc. | 10 | Early Adoulin progression |
+| Waypoint quests | Western Waypoints Ho (50), Weseastern Waypoints Ho (51) | 2 | Waypoint unlocks |
+| Side quests (general) | Grind to Sawdust (53), The Whole Place Is Abuzz (58), etc. | 18 | Various side content |
+| Leafallia story quests | Don't Ever Leaf Me (70), Keep Your Bloomers On (71), etc. | 4 | SoA storyline |
+| GEO artifact quests | Elementary My Dear Sylvie (35), For Whom the Bell Tolls (36), etc. | 6 | GEO AF chain |
+| GEO advancement | Geomancerrific (134), Saved by the Bell (131), Treasures of the Earth (142) | 3 | GEO progression |
+| RUN artifact quests | Endeavoring to Awaken (22), Forging New Bonds (23), etc. | 4 | RUN AF chain |
+| RUN advancement | Rune Fencing the Night Away (135), Quiescence (132), Epiphany (143) | 3 | RUN progression |
+| Vegetable Vegetable series | Revolution (108), Evolution (109), Crisis (110), Frustration (111) | 4 | Quest chain |
+| A Thirst series | Ages (114), Eons (115), Eternity (116), Before Time (117) | 4 | Quest chain |
+| Weatherspoon/Melvien chain | Weatherspoon Inquisition (136), Eye of the Beholder (137), etc. | 6 | Investigation chain |
+| Comedy/misc quests | No Laughing Matter (102), To Laugh Is to Love (104), etc. | 4 | Side content |
+| Other missing | Flowers for Svenja (120), Velkkovert Operations (123), etc. | 11 | Various |
+
+> **Critical note:** GEO unlock (Dances with Luopans, ID 118) and RUN unlock (Children of the Rune, ID 119) are registered in quests.lua but have NO `+` marker in quests.lua. However, they ARE fully implemented in zone NPC scripts (`scripts/zones/Western_Adoulin/npcs/Sylvie.lua` and `scripts/zones/Eastern_Adoulin/npcs/Octavien.lua`). Both call `player:unlockJob()` correctly. They appear as "missing" by the quests.lua marker methodology but are functional.
+
+### Key Missing (Gameplay Impact)
+
+| Quest/System | Impact | Notes |
+|-------------|--------|-------|
+| **RUN AF chain (7 quests)** | CRITICAL | Rune Fencer has no artifact armor quests |
+| **GEO AF chain (9 quests)** | CRITICAL | Geomancer has no artifact armor quests |
+| **Waypoint expansion** | MEDIUM | Western/Eastern waypoint unlock quests missing |
+| **Mog Garden** | MEDIUM | Zone exists but non-functional (separate system) |
+
+---
+
+## 5. Coalition Assignments -- 0/95 (0.0%)
+
+### Status: NOT IMPLEMENTED
+
+All 95 coalition assignment quest IDs are registered in quests.lua but none have any implementation marker. These cover:
+
+| Type | Zones | Count |
+|------|-------|-------|
+| Procure | 8 zones | 8 |
+| Clear | 8 zones | 8 |
+| Provide | 5 zones | 5 |
+| Deliver | 5 zones | 5 |
+| Support | 6 zones | 6 |
+| Gather | 16 zones | 16 |
+| Survey | 9 zones | 9 |
+| Analyze | 7 zones | 7 |
+| Preserve | 9 zones | 9 |
+| Patrol | 7 zones | 7 |
+| Recover | 6 zones | 6 |
+| Research | 7 zones | 7 |
+| Boost | 3 zones | 3 |
+| **Total** | | **95** (1 blank entry excluded) |
+
+The coalition system is the core repeatable content loop for Adoulin. All 95 assignments are registered but have zero implementation.
+
+---
 
 ## Blockers
-- **RUN/GEO jobs**: No artifact armor questlines at all - players must use alternative gear or GM intervention
-- **DNC job**: AF quests not in crystalWar folder; may need to check other locations or are simply missing
-- **Coalition system**: Infrastructure registered but no functional quest scripts
-- **Mog Garden**: Zone stub only, no gameplay
-- **WotG mission progression**: Some Crystal War side quests gate mission progression; missing chains may block story advancement
+
+- **RUN/GEO jobs**: Unlock quests work (via NPC scripts), but no artifact armor questlines -- players must use alternative gear or GM intervention
+- **DNC AF**: Say It with a Handbag (41) completable but reward latent not implemented; Seeing Blood-red (34) entirely missing
+- **Coalition system**: All 95 assignments registered but none functional -- core Adoulin progression blocked
+- **WotG mission progression**: Missing Crystal War side quests may block story advancement
+- **Cait Sith endgame**: Final story quests (Champion of Dawn through Ad Infinitum) missing
 
 ## Fix Difficulty
-- **ToAU gaps**: Easy-Medium (mostly missing a few quests; PUP/COR AF may be partially handled by NPC zone scripts)
-- **WotG gaps**: Hard (68 quests missing, multiple interconnected chains)
-- **Adoulin gaps**: Massive (82 quests missing, two full AF chains, entire coalition system, Mog Garden)
+
+| Area | Difficulty | Notes |
+|------|-----------|-------|
+| ToAU gaps | Easy-Medium | 22 quests missing; PUP AF3 and Captain promo most important |
+| Crystal War gaps | Hard | 58 quests missing; multiple interconnected chains |
+| Abyssea gaps | Hard | 143 quests missing; 87 side quests + 36 maintenance + 20 story |
+| Adoulin gaps | Massive | 79 quests missing; two full AF chains, most side content |
+| Coalition | Massive | 95 assignments; entire system needs building |

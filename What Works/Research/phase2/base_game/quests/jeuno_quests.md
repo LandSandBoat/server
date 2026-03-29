@@ -1,311 +1,294 @@
-# Jeuno Quests -- Phase 2 Audit
+# Jeuno Quests -- Full Audit (CORRECTED)
 
-**Date:** 2026-03-28
-**Source:** https://www.bg-wiki.com/ffxi/Category:Jeuno_Quests
-**Script path:** `scripts/quests/jeuno/`
+> **CORRECTED 2026-03-28.** Previous audit used bg-wiki as source and undercounted by listing 14 quests as MISSING that are actually marked "+" (NPC-implemented) in quests.lua. This corrected version uses quests.lua as the authoritative source.
+> Source: `scripts/globals/quests.lua` lines 321-471 (xi.questLog.JEUNO)
+> Script path: `scripts/quests/jeuno/`
+> Date: 2026-03-28
 
 ---
 
 ## Summary
 
 | Metric | Count |
-|---|---|
-| Total quests on bg-wiki | 159 |
-| Unique quests (excluding 19 "Unlocking a Myth" job redirects) | 140 |
-| Quest scripts present | 100 (excluding helpers.lua) |
-| Quests MISSING scripts | 40 |
-| **Coverage** | **71.4%** (100/140) |
+|--------|-------|
+| Quests registered in quests.lua (JEUNO) | 145 |
+| Quests marked "+ Converted" (dedicated script file) | 81 |
+| Quests marked "+" only (NPC-based, old-style) | 14 |
+| Quests with script files but no + mark (Unlocking a Myth x20) | 20 |
+| Quests with NO mark and NO script (not implemented) | 30 |
+| **Total implemented** | **115 / 145 (79.3%)** |
 
-> **Note:** bg-wiki lists 159 entries but 19 of those are per-job redirects for "Unlocking a Myth (Job Name)" which all point to the single quest "Unlocking a Myth". The server has 20 individual `Unlocking_A_Myth_<JOB>.lua` files (one per job including GEO is not listed but 20 standard jobs are covered), which is the correct implementation. For counting purposes we treat "Unlocking a Myth" as 1 quest with 20 script variants = covered.
+### Previous Audit Errors
+The previous audit compared against bg-wiki (159 entries) rather than quests.lua (145 entries). It listed the following 14 quests as MISSING even though they are marked "+" in quests.lua and implemented via NPC scripts:
+
+| Quest | ID | quests.lua Mark |
+|-------|-----|----------------|
+| The Wonder Magic Set | 7 | + |
+| The Kind Cardian | 8 | + |
+| Collect Tarut Cards | 10 | + |
+| Rubbish Day | 13 | + |
+| Never to Return | 14 | + |
+| Cook's Pride | 16 | + |
+| The Lost Cardian | 18 | + |
+| Fistful of Fury | 41 | + |
+| A New Dawn | 62 | + |
+| The Requiem | 64 | + |
+| The Circle of Time | 65 | + |
+| Beat Around the Bushin | 67 | + |
+| Mirror, Mirror | 79 | + |
+| Full Speed Ahead | 179 | + |
+
+### Implementation Legend (from scripts/globals/quests.lua)
+- **"+ Converted"** = Modern quest framework (`Quest:new()` in `scripts/quests/jeuno/`). Best quality.
+- **"+"** = Implemented via NPC scripts in zone directories (old-style). Functional but harder to maintain.
+- **No marker** = Not implemented or only stub references exist.
+- **Script file (no mark)** = Has a dedicated script file but quests.lua entry lacks + mark (Unlocking a Myth).
 
 ---
 
-## Scripts That EXIST (100 files)
+## Converted Quests (81 entries marked "+ Converted")
 
-### Limit Break Quests (LB1-LB10) -- ALL PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| In Defiant Challenge (LB1, lv50->55) | `LB01_In_Defiant_Challenge.lua` | PRESENT -- uses QM triggers in Crawlers/Garlaige/Eldieme, key item fusion logic, Maat NPC |
-| Atop the Highest Mountains (LB2, lv55->60) | `LB02_Atop_the_Highest_Mountains.lua` | PRESENT |
-| Whence Blows the Wind (LB3, lv60->65) | `LB03_Whence_Blows_the_wind.lua` | PRESENT |
-| Riding on the Clouds (LB4, lv65->70) | `LB04_Riding_on_the_clouds.lua` | PRESENT |
-| Shattering Stars (LB5, lv70->75) | `LB05_1_Shattering_Stars.lua` | PRESENT |
-| Beyond the Sun (LB5 alt) | `LB05_2_Beyond_the_Sun.lua` | PRESENT |
-| New Worlds Await (LB6, lv75->80) | `LB06_New_Worlds_Await.lua` | PRESENT -- uses Nomad Moogle, event 10045, checks MAX_LEVEL setting |
-| Expanding Horizons (LB7, lv80->85) | `LB07_Expanding_Horizons.lua` | PRESENT |
-| Beyond the Stars (LB8, lv85->90) | `LB08_Beyond_the_Stars.lua` | PRESENT |
-| Dormant Powers Dislodged (LB9, lv90->95) | `LB09_1_Dormant_Powers_Dislodged.lua` | PRESENT |
-| Prelude to Puissance (LB9 alt) | `LB09_2_Prelude_to_Puissance.lua` | PRESENT |
-| Beyond Infinity (LB10, lv95->99) | `LB10_Beyond_Infinity.lua` | PRESENT -- battlefield system with 4 zones, proper reward handling |
+### Limit Break Quests (LB1-LB10 + Prelude) -- ALL PRESENT
+| Quest | ID | Script |
+|-------|-----|--------|
+| In Defiant Challenge (LB1) | 128 | LB01_In_Defiant_Challenge.lua |
+| Atop the Highest Mountains (LB2) | 129 | LB02_Atop_the_Highest_Mountains.lua |
+| Whence Blows the Wind (LB3) | 130 | LB03_Whence_Blows_the_wind.lua |
+| Riding on the Clouds (LB4) | 131 | LB04_Riding_on_the_clouds.lua |
+| Shattering Stars (LB5) | 132 | LB05_1_Shattering_Stars.lua |
+| New Worlds Await (LB6) | 133 | LB06_New_Worlds_Await.lua |
+| Expanding Horizons (LB7) | 134 | LB07_Expanding_Horizons.lua |
+| Beyond the Stars (LB8) | 135 | LB08_Beyond_the_Stars.lua |
+| Dormant Powers Dislodged (LB9) | 136 | LB09_1_Dormant_Powers_Dislodged.lua |
+| Beyond Infinity (LB10) | 137 | LB10_Beyond_Infinity.lua |
+| Beyond the Sun (LB5 alt) | 76 | LB05_2_Beyond_the_Sun.lua |
+| Prelude to Puissance (LB9 alt) | 170 | LB09_2_Prelude_to_Puissance.lua |
 
-### Chocobo License Chain -- ALL PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| Chocobo's Wounds | `Chocobos_Wounds.lua` | PRESENT -- grants xi.ki.CHOCOBO_LICENSE, uses feeding stages with Osker/Chocobo NPCs, lv20 req |
-| Chocobo on the Loose! | `Chocobo_on_the_Loose.lua` | PRESENT |
-| A Chocobo's Tale | `A_Chocobos_Tale.lua` | PRESENT |
+### Gobbiebag Quests (I-X) -- ALL PRESENT
+| Quest | ID | Script |
+|-------|-----|--------|
+| The Gobbiebag Part I | 27 | The_Gobbiebag_Part_I.lua |
+| The Gobbiebag Part II | 28 | The_Gobbiebag_Part_II.lua |
+| The Gobbiebag Part III | 29 | The_Gobbiebag_Part_III.lua |
+| The Gobbiebag Part IV | 30 | The_Gobbiebag_Part_IV.lua |
+| The Gobbiebag Part V | 74 | The_Gobbiebag_Part_V.lua |
+| The Gobbiebag Part VI | 75 | The_Gobbiebag_Part_VI.lua |
+| The Gobbiebag Part VII | 93 | The_Gobbiebag_Part_VII.lua |
+| The Gobbiebag Part VIII | 94 | The_Gobbiebag_Part_VIII.lua |
+| The Gobbiebag Part IX | 123 | The_Gobbiebag_Part_IX.lua |
+| The Gobbiebag Part X | 124 | The_Gobbiebag_Part_X.lua |
 
-### Airship Pass / Tenshodo Chain -- ALL PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| Save My Son (BST unlock prereq) | `Save_My_Son.lua` | PRESENT -- requires Chocobo's Wounds complete, grants Beast Whistle + 2100 gil |
-| Save My Sister | `Save_My_Sister.lua` | PRESENT |
-| Deal with Tenshodo | `Deal_with_Tenshodo.lua` | PRESENT |
-| Tenshodo Membership | `Tenshodo_Membership.lua` | PRESENT |
+### Borghertz's Hands (15 jobs) -- ALL PRESENT
+| Quest | ID | Script |
+|-------|-----|--------|
+| Borghertz's Warring Hands (WAR) | 44 | Borghertzs_Warring_Hands.lua |
+| Borghertz's Striking Hands (MNK) | 45 | Borghertzs_Striking_Hands.lua |
+| Borghertz's Healing Hands (WHM) | 46 | Borghertzs_Healing_Hands.lua |
+| Borghertz's Sorcerous Hands (BLM) | 47 | Borghertzs_Sorcerous_Hands.lua |
+| Borghertz's Vermillion Hands (RDM) | 48 | Borghertzs_Vermillion_Hands.lua |
+| Borghertz's Sneaky Hands (RNG) | 49 | Borghertzs_Sneaky_Hands.lua |
+| Borghertz's Stalwart Hands (WAR) | 50 | Borghertzs_Stalwart_Hands.lua |
+| Borghertz's Shadowy Hands (DRK) | 51 | Borghertzs_Shadowy_Hands.lua |
+| Borghertz's Wild Hands (BST) | 52 | Borghertzs_Wild_Hands.lua |
+| Borghertz's Harmonious Hands (BRD) | 53 | Borghertzs_Harmonious_Hands.lua |
+| Borghertz's Chasing Hands (THF) | 54 | Borghertzs_Chasing_Hands.lua |
+| Borghertz's Loyal Hands (PLD) | 55 | Borghertzs_Loyal_Hands.lua |
+| Borghertz's Lurking Hands (NIN) | 56 | Borghertzs_Lurking_Hands.lua |
+| Borghertz's Dragon Hands (DRG) | 57 | Borghertzs_Dragon_Hands.lua |
+| Borghertz's Calling Hands (SMN) | 58 | Borghertzs_Calling_Hands.lua |
+
+### Chocobo / Transport Chain -- ALL PRESENT
+| Quest | ID | Script |
+|-------|-----|--------|
+| Chocobo's Wounds | 4 | Chocobos_Wounds.lua |
+| A Chocobo's Tale | 72 | A_Chocobos_Tale.lua |
+| Chocobo on the Loose | 92 | Chocobo_on_the_Loose.lua |
+
+### Tenshodo / Access Chain -- ALL PRESENT
+| Quest | ID | Script |
+|-------|-----|--------|
+| Save My Sister | 1 | Save_My_Sister.lua |
+| Save My Son | 5 | Save_My_Son.lua |
+| Deal with Tenshodo | 26 | Deal_with_Tenshodo.lua |
+| Tenshodo Membership | 17 | Tenshodo_Membership.lua |
 
 ### Job Unlock Quests -- ALL PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| Path of the Beastmaster (BST) | `Path_of_the_Beastmaster.lua` | PRESENT -- calls player:unlockJob(xi.job.BST), requires Save My Son + ADVANCED_JOB_LEVEL |
-| A Minstrel in Despair (BRD prereq) | `A_Minstrel_In_Despair.lua` | PRESENT |
-| Path of the Bard (BRD) | `Path_of_the_Bard.lua` | PRESENT -- calls player:unlockJob(xi.job.BRD) via Song Runes in Valkurm Dunes |
+| Quest | ID | Script |
+|-------|-----|--------|
+| Path of the Beastmaster | 19 | Path_of_the_Beastmaster.lua |
+| A Minstrel in Despair | 12 | A_Minstrel_In_Despair.lua |
+| Path of the Bard | 20 | Path_of_the_Bard.lua |
 
 ### DNC AF Quests -- ALL PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| The Unfinished Waltz (DNC AF1) | `DNC_AF1_The_Unfinished_Waltz.lua` | PRESENT |
-| The Road to Divadom (DNC AF2) | `DNC_AF2_The_Road_to_Divadom.lua` | PRESENT |
-| Comeback Queen (DNC AF3) | `DNC_AF3_Comeback_Queen.lua` | PRESENT |
+| Quest | ID | Script |
+|-------|-----|--------|
+| The Unfinished Waltz (DNC AF1) | 96 | DNC_AF1_The_Unfinished_Waltz.lua |
+| The Road to Divadom (DNC AF2) | 97 | DNC_AF2_The_Road_to_Divadom.lua |
+| Comeback Queen (DNC AF3) | 98 | DNC_AF3_Comeback_Queen.lua |
 
-### Gobbiebag Quests (Inventory Expansion) -- ALL 10 PRESENT
-| Quest | Script | Status |
-|---|---|---|
-| The Gobbiebag Part I | `The_Gobbiebag_Part_I.lua` | PRESENT -- uses shared GobbiebagQuest helper class, trades items + stew |
-| The Gobbiebag Part II | `The_Gobbiebag_Part_II.lua` | PRESENT |
-| The Gobbiebag Part III | `The_Gobbiebag_Part_III.lua` | PRESENT |
-| The Gobbiebag Part IV | `The_Gobbiebag_Part_IV.lua` | PRESENT |
-| The Gobbiebag Part V | `The_Gobbiebag_Part_V.lua` | PRESENT |
-| The Gobbiebag Part VI | `The_Gobbiebag_Part_VI.lua` | PRESENT |
-| The Gobbiebag Part VII | `The_Gobbiebag_Part_VII.lua` | PRESENT |
-| The Gobbiebag Part VIII | `The_Gobbiebag_Part_VIII.lua` | PRESENT |
-| The Gobbiebag Part IX | `The_Gobbiebag_Part_IX.lua` | PRESENT |
-| The Gobbiebag Part X | `The_Gobbiebag_Part_X.lua` | PRESENT |
-
-### Borghertz's Hands (AF Hands quests, 15 jobs) -- ALL PRESENT
-| Quest | Script |
-|---|---|
-| Borghertz's Calling Hands (SMN) | `Borghertzs_Calling_Hands.lua` |
-| Borghertz's Chasing Hands (THF) | `Borghertzs_Chasing_Hands.lua` |
-| Borghertz's Dragon Hands (DRG) | `Borghertzs_Dragon_Hands.lua` |
-| Borghertz's Harmonious Hands (BRD) | `Borghertzs_Harmonious_Hands.lua` |
-| Borghertz's Healing Hands (WHM) | `Borghertzs_Healing_Hands.lua` |
-| Borghertz's Loyal Hands (PLD) | `Borghertzs_Loyal_Hands.lua` |
-| Borghertz's Lurking Hands (NIN) | `Borghertzs_Lurking_Hands.lua` |
-| Borghertz's Shadowy Hands (DRK) | `Borghertzs_Shadowy_Hands.lua` |
-| Borghertz's Sneaky Hands (RNG) | `Borghertzs_Sneaky_Hands.lua` |
-| Borghertz's Sorcerous Hands (BLM) | `Borghertzs_Sorcerous_Hands.lua` |
-| Borghertz's Stalwart Hands (WAR) | `Borghertzs_Stalwart_Hands.lua` |
-| Borghertz's Striking Hands (MNK) | `Borghertzs_Striking_Hands.lua` |
-| Borghertz's Vermillion Hands (RDM) | `Borghertzs_Vermillion_Hands.lua` |
-| Borghertz's Warring Hands (SAM) | `Borghertzs_Warring_Hands.lua` |
-| Borghertz's Wild Hands (BST) | `Borghertzs_Wild_Hands.lua` |
-
-### Unlocking a Myth (Mythic WS prereqs) -- ALL 20 JOBS PRESENT
-Scripts: `Unlocking_A_Myth_BLM.lua` through `Unlocking_A_Myth_WHM.lua` (20 files for WAR, MNK, WHM, BLM, RDM, THF, PLD, DRK, BST, BRD, RNG, SAM, NIN, DRG, SMN, BLU, COR, PUP, DNC, SCH)
-
-### Other Present Quests
-| Quest | Script | Notes |
-|---|---|---|
-| A Candlelight Vigil | `A_Candlelight_Vigil.lua` | |
-| A Clock Most Delicate | `A_Clock_Most_Delicate.lua` | |
-| Apocalypse Nigh | `Apocalypse_Nigh.lua` | Post-CoP/ZM quest |
-| Axe the Competition | `Axe_the_Competition.lua` | |
-| Candle-making | `Candle_Making.lua` | |
-| Child's Play | `Childs_Play.lua` | |
-| Community Service | `Community_Service.lua` | |
-| Crest of Davoi (Quest) | `Crest_of_Davoi.lua` | |
-| Ducal Hospitality | `Ducal_Hospitality.lua` | |
-| Empty Memories | `Empty_Memories.lua` | |
-| Hook, Line, and Sinker | `Hook_Line_and_Sinker.lua` | |
-| In the Mood for Love | `In_the_Mood_for_Love.lua` | |
-| Lakeside Minuet | `Lakeside_Minuet.lua` | |
-| Lure of the Wildcat (Jeuno) | `Lure_of_the_Wildcat_Jeuno.lua` | WotG quest |
-| Martial Mastery | `Martial_Mastery.lua` | |
-| Mysteries of Beadeaux I | `Mysteries_of_Beadeaux_I.lua` | |
-| Mysteries of Beadeaux II | `Mysteries_of_Beadeaux_II.lua` | |
-| Northward | `Northward.lua` | |
-| Painful Memory | `Painful_Memory.lua` | |
-| Pretty Little Things | `Pretty_Little_Things.lua` | |
-| Scattered Into Shadow | `Scattered_into_Shadow.lua` | |
-| Shadows of the Departed | `Shadows_of_the_Departed.lua` | |
-| Save the Clock Tower | `Save_the_Clock_Tower.lua` | |
-| Storms of Fate | `Storms_of_Fate.lua` | Post-COP quest |
-| The Antique Collector | `The_Antique_Collector.lua` | |
-| The Clockmaster | `The_Clockmaster.lua` | |
-| The Goblin Tailor | `The_Goblin_Tailor.lua` | |
-| The Old Monument | `The_Old_Monument.lua` | |
-| The Road to Aht Urhgan | `The_Road_to_Aht_Urhgan.lua` | ToAU access quest -- uses trade lists for beginner/intermediate/advanced |
-| Wings of Gold | `Wings_of_Gold.lua` | BST AF quest |
-| Your Crystal Ball | `Your_Crystal_Ball.lua` | |
+### Other Converted Quests
+| Quest | ID | Script |
+|-------|-----|--------|
+| Crest of Davoi | 0 | Crest_of_Davoi.lua |
+| A Clock Most Delicate | 2 | A_Clock_Most_Delicate.lua |
+| Save the Clock Tower | 3 | Save_the_Clock_Tower.lua |
+| A Candlelight Vigil | 6 | A_Candlelight_Vigil.lua |
+| Your Crystal Ball | 9 | Your_Crystal_Ball.lua |
+| The Old Monument | 11 | The_Old_Monument.lua |
+| Community Service | 15 | Community_Service.lua |
+| The Clockmaster | 21 | The_Clockmaster.lua |
+| Candle Making | 22 | Candle_Making.lua |
+| Child's Play | 23 | Childs_Play.lua |
+| Northward | 24 | Northward.lua |
+| The Antique Collector | 25 | The_Antique_Collector.lua |
+| Mysteries of Beadeaux I | 31 | Mysteries_of_Beadeaux_I.lua |
+| Mysteries of Beadeaux II | 32 | Mysteries_of_Beadeaux_II.lua |
+| The Goblin Tailor | 42 | The_Goblin_Tailor.lua |
+| Pretty Little Things | 43 | Pretty_Little_Things.lua |
+| Axe the Competition | 59 | Axe_the_Competition.lua |
+| Wings of Gold | 60 | Wings_of_Gold.lua |
+| Scattered into Shadow | 61 | Scattered_into_Shadow.lua |
+| Painful Memory | 63 | Painful_Memory.lua |
+| Ducal Hospitality | 68 | Ducal_Hospitality.lua |
+| In the Mood for Love | 69 | In_the_Mood_for_Love.lua |
+| Empty Memories | 70 | Empty_Memories.lua |
+| Hook, Line, and Sinker | 71 | Hook_Line_and_Sinker.lua |
+| Storms of Fate | 86 | Storms_of_Fate.lua |
+| Shadows of the Departed | 88 | Shadows_of_the_Departed.lua |
+| Apocalypse Nigh | 89 | Apocalypse_Nigh.lua |
+| Lure of the Wildcat (Jeuno) | 90 | Lure_of_the_Wildcat_Jeuno.lua |
+| The Road to Aht Urhgan | 91 | The_Road_to_Aht_Urhgan.lua |
+| Lakeside Minuet | 95 | Lakeside_Minuet.lua |
+| Martial Mastery | 167 | Martial_Mastery.lua |
 
 ---
 
-## Scripts MISSING (40 quests from bg-wiki with no script)
+## NPC-Based Quests (14 entries marked "+" only)
 
-### High Priority (commonly encountered quests)
-| Quest | bg-wiki Name | Impact |
-|---|---|---|
-| A Furious Finale | A Furious Finale | Part of Maat fight chain |
-| A New Dawn | A New Dawn | Story quest |
-| Blessed Radiance | Blessed Radiance | Story quest |
-| Blighted Gloom | Blighted Gloom | Story quest |
-| Clash of the Comrades | Clash of the Comrades | Story quest |
-| Cook's Pride | Cook's Pride | Cooking-related quest |
-| Disappointment Valley | Disappointment Valley | Story quest |
-| Full Speed Ahead! | Full Speed Ahead! | Chocobo racing related |
-| Golden Rule | Golden Rule | |
-| The Circle of Time | The Circle of Time | ZM-related quest reward |
-| The Flying Machine of Eld | The Flying Machine of Eld | |
-| The Kind Cardian | The Kind Cardian | |
-| The Lost Cardian | The Lost Cardian | |
-| The Miraculous Dale | The Miraculous Dale | |
-| The Requiem | The Requiem | BRD story quest |
-| The Wonder Magic Set | The Wonder Magic Set | |
-| To Kill Mocking Birds | To Kill Mocking Birds | |
-| Unlisted Qualities | Unlisted Qualities | |
+These were INCORRECTLY listed as MISSING in the previous audit.
 
-### Medium Priority (later game / niche content)
-| Quest | bg-wiki Name | Impact |
-|---|---|---|
-| A Quaternary Trial in Tandem | A Quaternary Trial in Tandem | Trial content |
-| A Reputation in Ruins | A Reputation in Ruins | |
-| A Thousand Cuts | A Thousand Cuts | |
-| A Trial in Tandem | A Trial in Tandem | Trial content |
-| A Trial in Tandem Revisited | A Trial in Tandem Revisited | Trial content |
-| A Trial in Tandem, Redux | A Trial in Tandem, Redux | Trial content |
-| All in the Cards | All in the Cards | Cardian quest |
-| Beam Me Up...No, Not There! | Beam Me Up...No, Not There! | |
-| Beat Around the Bushin | Beat Around the Bushin | |
-| Chameleon Capers | Chameleon Capers | |
-| Collect Tarut Cards | Collect Tarut Cards | Cardian quest |
-| Fistful of Fury | Fistful of Fury | |
-| Further Founts | Further Founts | |
-| Girl in the Looking Glass | Girl in the Looking Glass | |
-| Go With the Flow | Go With the Flow | |
-| Impermanence | Impermanence | |
-| Leonine Excruciation | Leonine Excruciation | |
-| Middle Lands Investigation | Middle Lands Investigation | |
-| Minnow Wrangler | Minnow Wrangler | Fishing quest |
-| Mirror Images | Mirror Images | |
-| Mirror, Mirror | Mirror, Mirror | |
-| Mixed Signals | Mixed Signals | |
-| Never to Return | Never to Return | |
-| Now Recording... | Now Recording... | |
-| Over Ninety-Thousand | Over Ninety-Thousand | |
-| Panta Rhei | Panta Rhei | |
-| Past Reflections | Past Reflections | |
-| Petals of Recollection | Petals of Recollection | |
-| Regaining Trust | Regaining Trust | |
-| Remembrance of Flowers Past | Remembrance of Flowers Past | |
-| Researchers from the West | Researchers from the West | |
-| Rubbish Day | Rubbish Day | |
-| Searching for the Right Words | Searching for the Right Words | |
-| Shifty Shades of Prey | Shifty Shades of Prey | |
-| Shiver Me Timbers | Shiver Me Timbers | |
-| Teleports by Twilight | Teleports by Twilight | |
-
-### Low Priority (Voidwatch ops)
-| Quest | bg-wiki Name | Impact |
-|---|---|---|
-| VW Op. 115: Valkurm Duster | VW Op. 115: Valkurm Duster | Voidwatch content |
-| VW Op. 118: Buburimu Squall | VW Op. 118: Buburimu Squall | Voidwatch content |
-
-### Not counted (redirects only on bg-wiki)
-The 19 per-job "Unlocking a Myth (Job Name)" entries are redirects to the base quest page. The server correctly implements these as 20 separate script files.
+| # | Quest Name | ID |
+|---|-----------|-----|
+| 1 | The Wonder Magic Set | 7 |
+| 2 | The Kind Cardian | 8 |
+| 3 | Collect Tarut Cards | 10 |
+| 4 | Rubbish Day | 13 |
+| 5 | Never to Return | 14 |
+| 6 | Cook's Pride | 16 |
+| 7 | The Lost Cardian | 18 |
+| 8 | Fistful of Fury | 41 |
+| 9 | A New Dawn | 62 |
+| 10 | The Requiem | 64 |
+| 11 | The Circle of Time | 65 |
+| 12 | Beat Around the Bushin | 67 |
+| 13 | Mirror, Mirror | 79 |
+| 14 | Full Speed Ahead | 179 |
 
 ---
 
-## Spot-Check Results on Key Quests
+## Unlocking a Myth (20 entries -- script files exist, no + mark in quests.lua)
 
-### Chocobo's Wounds (Chocobo License)
-- **File:** `scripts/quests/jeuno/Chocobos_Wounds.lua`
-- **Reward:** `xi.ki.CHOCOBO_LICENSE`, title `CHOCOBO_TRAINER`, 30 fame
-- **Level req:** 20 (matches wiki)
-- **NPCs:** Brutus (Upper Jeuno), Chocobo, Osker, _6t2 door (Lower Jeuno) -- all present
-- **Mechanics:** Multi-stage feeding system with stage variable, feed triggers, trade handlers
-- **Verdict:** LOOKS CORRECT -- full quest flow implemented with proper NPC interactions
+All 20 job variants have dedicated script files in `scripts/quests/jeuno/`:
 
-### Save My Son (leads to BST unlock)
-- **File:** `scripts/quests/jeuno/Save_My_Son.lua`
-- **Prereq:** Chocobo's Wounds complete + ADVANCED_JOB_LEVEL
-- **Reward:** Beast Whistle item, 2100 gil, title `LIFE_SAVER`, 30 fame
-- **Flow:** Talk to _6t2 door -> go to Buburimu (Nightflowers NPC) -> return
-- **Verdict:** LOOKS CORRECT -- proper quest progression with Prog variable
+| Quest | ID | Script |
+|-------|-----|--------|
+| Unlocking A Myth (WAR) | 102 | Unlocking_A_Myth_WAR.lua |
+| Unlocking A Myth (MNK) | 103 | Unlocking_A_Myth_MNK.lua |
+| Unlocking A Myth (WHM) | 104 | Unlocking_A_Myth_WHM.lua |
+| Unlocking A Myth (BLM) | 105 | Unlocking_A_Myth_BLM.lua |
+| Unlocking A Myth (RDM) | 106 | Unlocking_A_Myth_RDM.lua |
+| Unlocking A Myth (THF) | 107 | Unlocking_A_Myth_THF.lua |
+| Unlocking A Myth (PLD) | 108 | Unlocking_A_Myth_PLD.lua |
+| Unlocking A Myth (DRK) | 109 | Unlocking_A_Myth_DRK.lua |
+| Unlocking A Myth (BST) | 110 | Unlocking_A_Myth_BST.lua |
+| Unlocking A Myth (BRD) | 111 | Unlocking_A_Myth_BRD.lua |
+| Unlocking A Myth (RNG) | 112 | Unlocking_A_Myth_RNG.lua |
+| Unlocking A Myth (SAM) | 113 | Unlocking_A_Myth_SAM.lua |
+| Unlocking A Myth (NIN) | 114 | Unlocking_A_Myth_NIN.lua |
+| Unlocking A Myth (DRG) | 115 | Unlocking_A_Myth_DRG.lua |
+| Unlocking A Myth (SMN) | 116 | Unlocking_A_Myth_SMN.lua |
+| Unlocking A Myth (BLU) | 117 | Unlocking_A_Myth_BLU.lua |
+| Unlocking A Myth (COR) | 118 | Unlocking_A_Myth_COR.lua |
+| Unlocking A Myth (PUP) | 119 | Unlocking_A_Myth_PUP.lua |
+| Unlocking A Myth (DNC) | 120 | Unlocking_A_Myth_DNC.lua |
+| Unlocking A Myth (SCH) | 121 | Unlocking_A_Myth_SCH.lua |
 
-### Path of the Beastmaster (BST unlock)
-- **File:** `scripts/quests/jeuno/Path_of_the_Beastmaster.lua`
-- **Prereq:** Save My Son complete + ADVANCED_JOB_LEVEL
-- **Reward:** `xi.ki.JOB_GESTURE_BEASTMASTER`, title `ANIMAL_TRAINER`
-- **Action:** `player:unlockJob(xi.job.BST)` -- called in onEventFinish
-- **Verdict:** LOOKS CORRECT -- simple talk-to-Brutus quest, immediate unlock
+---
 
-### Path of the Bard (BRD unlock)
-- **File:** `scripts/quests/jeuno/Path_of_the_Bard.lua`
-- **Prereq:** A Minstrel in Despair complete
-- **Reward:** 3000 gil, `xi.ki.JOB_GESTURE_BARD`, title `WANDERING_MINSTREL`
-- **Action:** `player:unlockJob(xi.job.BRD)` at Song Runes in Valkurm Dunes
-- **Note:** Wiki-accurate -- all dialogue is optional, player can go straight to Song Runes
-- **Verdict:** LOOKS CORRECT
+## NOT Implemented (30 quests -- no mark in quests.lua, no script files)
 
-### The Gobbiebag Part I (Inventory +5)
-- **File:** `scripts/quests/jeuno/The_Gobbiebag_Part_I.lua`
-- **Uses:** Shared `GobbiebagQuest` helper class from `helpers.lua`
-- **Trade items:** Dhalmel Leather, Steel Ingot, Linen Cloth, Peridot + Goblin Stew 880
-- **Start inventory:** 30 (correct -- default is 30, expands to 35)
-- **Fame req:** 1 (correct for Part I)
-- **Verdict:** LOOKS CORRECT -- helper class handles trade validation, inventory expansion, all 10 parts use same pattern
+### Mystery Quests (8 -- elemental orb quests)
+| Quest | ID |
+|-------|-----|
+| Mystery of Fire | 33 |
+| Mystery of Water | 34 |
+| Mystery of Earth | 35 |
+| Mystery of Wind | 36 |
+| Mystery of Ice | 37 |
+| Mystery of Lightning | 38 |
+| Mystery of Light | 39 |
+| Mystery of Darkness | 40 |
 
-### LB1: In Defiant Challenge (lv50->55)
-- **File:** `scripts/quests/jeuno/LB01_In_Defiant_Challenge.lua`
-- **NPCs:** Maat in Ru'Lude Gardens, QMs in Crawlers Nest / Garlaige Citadel / Eldieme Necropolis
-- **Mechanics:** Key item crumb collection (3 per zone), fusion into trade items, era mode support via `OLDSCHOOL_G1`
-- **Verdict:** LOOKS CORRECT -- detailed implementation with proper zone/KI handling
+### Story / Side Quests (11)
+| Quest | ID |
+|-------|-----|
+| Searching for the Right Words | 66 |
+| A Reputation in Ruins | 73 |
+| Unlisted Qualities | 77 |
+| Girl in the Looking Glass | 78 |
+| Past Reflections | 80 |
+| Blighted Gloom | 81 |
+| Blessed Radiance | 82 |
+| Mirror Images | 83 |
+| Chameleon Capers | 84 |
+| Regaining Trust | 85 |
+| Mixed Signals | 87 |
 
-### LB6: New Worlds Await (lv75->80)
-- **File:** `scripts/quests/jeuno/LB06_New_Worlds_Await.lua`
-- **NPC:** Nomad Moogle in Ru'Lude Gardens
-- **Checks:** MAX_LEVEL > 75, player at lv75, has Limit Breaker KI
-- **Uses shared event 10045** for LB6-10 chain
-- **Verdict:** LOOKS CORRECT
+### Late-Game / Event Quests (3)
+| Quest | ID |
+|-------|-----|
+| A Furious Finale | 99 |
+| The Miraculous Dale | 100 |
+| Clash of the Comrades | 101 |
 
-### LB10: Beyond Infinity (lv95->99)
-- **File:** `scripts/quests/jeuno/LB10_Beyond_Infinity.lua`
-- **Prereq:** Prelude to Puissance complete
-- **Mechanics:** Battlefield system across 4 BCNM zones (Balga's Dais, Horlais Peak, Qu'Bia Arena, Waughroon Shrine)
-- **Reward:** title `BUSHIN_ASPIRANT`, Scroll of Instant Warp from battlefield win
-- **Verdict:** LOOKS CORRECT
+### Trial in Tandem Series (5)
+| Quest | ID |
+|-------|-----|
+| A Trial in Tandem | 160 |
+| A Trial in Tandem, Redux | 161 |
+| Yet Another Trial in Tandem | 162 |
+| A Quaternary Trial in Tandem | 163 |
+| A Trial in Tandem Revisited | 164 |
 
-### The Road to Aht Urhgan (ToAU access)
-- **File:** `scripts/quests/jeuno/The_Road_to_Aht_Urhgan.lua`
-- **NPC:** Faursel in Lower Jeuno
-- **Mechanics:** Multiple trade tiers (beginner/intermediate/advanced) with item lists
-- **Verdict:** LOOKS CORRECT -- proper trade-based progression
+### Other (3)
+| Quest | ID |
+|-------|-----|
+| All in the Cards | 166 |
+| VW Op. 115: Valkurm Duster | 168 |
+| VW Op. 118: Buburimu Squall | 169 |
 
 ---
 
 ## Key Findings
 
-1. **All critical progression quests are present:** Limit breaks 1-10, chocobo license, BST/BRD job unlocks, Gobbiebag I-X, Tenshodo access, Road to Aht Urhgan, all Borghertz AF hands, all Unlocking a Myth variants.
+1. **All critical progression quests are present:** Limit Breaks 1-10, Chocobo License, BST/BRD job unlocks, Gobbiebag I-X, Tenshodo access, Road to Aht Urhgan, all 15 Borghertz AF Hands, all 20 Unlocking a Myth variants, DNC AF chain.
 
-2. **71.4% coverage** (100 of 140 unique quests). The missing 40 quests are primarily:
-   - Side stories / flavor quests (Cardian quests, mirror quests, flower quests)
-   - Trial in Tandem series (4 quests -- trial/battlefield content)
-   - Voidwatch operations (2 quests)
-   - A few notable gaps: The Requiem (BRD story), The Circle of Time (ZM-related), Cook's Pride
+2. **79.3% coverage** (115 of 145 quests registered in quests.lua). The 30 missing quests are:
+   - 8 Mystery elemental orb quests (ID 33-40)
+   - 11 story/side quests (mirror chain, Cardian quests, misc)
+   - 5 Trial in Tandem series
+   - 3 late-game/event quests
+   - 3 other (All in the Cards, 2 Voidwatch ops)
 
-3. **No blocking issues found** in spot-checked scripts. The quest framework is well-structured with proper:
-   - Prerequisite checking (completed quests, level, fame)
-   - Job unlock calls (`player:unlockJob()`)
-   - Reward granting (items, gil, key items, titles, fame)
-   - Multi-step progression variables
-   - Shared helper classes (Gobbiebag)
+3. **No blocking issues** for core gameplay. All progression-critical quests work.
 
-4. **DNC AF quests** are present as `DNC_AF1/AF2/AF3` prefixed files, which is non-standard naming but functional.
+4. **14 quests were incorrectly listed as MISSING in the previous audit.** These are all marked "+" in quests.lua and implemented via NPC zone scripts. Notable recoveries include The Requiem (BRD story), The Circle of Time (ZM-related), and Cook's Pride.
 
 ---
 
-## Recommendations
+## File Locations
 
-- **No action needed** for core gameplay. All progression-critical quests work.
-- The 40 missing quests are almost entirely optional side content that would not block any player from progressing through the game.
-- If any specific missing quest is desired, it would need to be implemented from scratch or pulled from upstream LSB if available.
+- Quest scripts: `scripts/quests/jeuno/` (95+ .lua files on disk)
+- Quest enum: `scripts/globals/quests.lua` (lines 321-471)
+- Quest framework: `scripts/globals/interaction/quest.lua`
+- Gobbiebag helper: `scripts/quests/jeuno/helpers.lua`

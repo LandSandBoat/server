@@ -5747,8 +5747,8 @@ INSERT INTO `mob_droplist` VALUES (656,4,0,1000,896,0);         -- Scorpion Shel
 INSERT INTO `mob_droplist` VALUES (656,4,0,1000,897,0);         -- Scorpion Claw (Despoil)
 
 -- ZoneID:   9 - Diremite
-INSERT INTO `mob_droplist` VALUES (657,0,0,1000,2013,@VCOMMON);  -- Vial Of Lizard Blood (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (657,0,0,1000,2013,@VCOMMON);  -- Vial Of Lizard Blood (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (657,0,0,1000,924,@VCOMMON);   -- Vial Of Fiend Blood (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (657,0,0,1000,924,@VCOMMON);   -- Vial Of Fiend Blood (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (657,0,0,1000,1782,@COMMON);   -- Florid Stone (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (657,0,0,1000,1694,@UNCOMMON); -- Gray Chip (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (657,0,0,1000,1626,@RARE);     -- Bottle Of Avatar Blood (Rare, 5%)

@@ -13,15 +13,32 @@ This audit will be done in small batches across multiple sessions. Any agent pic
 
 Each research batch should cover ONE small topic (e.g., "Bastok Rank 1-3 missions" or "Rune Fencer unlock"). Never try to research more than 2-3 files in a single batch.
 
+## CRITICAL RULE: VERIFY NOT TRUST
+
+**NEVER trust surface-level checks.** A file existing does NOT mean it works. Code looking right does NOT mean it executes. Previous audits failed badly by:
+- Counting files in scripts/quests/ and missing 120+ quests implemented in zone NPC scripts
+- Reporting Dynamis "fully implemented" when 3 zones had ALL QM trade data commented out
+- Reporting Limbus "WORKS" when the entry script was entirely commented out
+- Confusing mob pool IDs with droplist IDs
+
+**For every "WORKS" claim, you MUST verify:**
+1. The actual handler code runs (not just that a file exists)
+2. Data tables are populated (not commented out)
+3. Rewards/items are actually granted (completeQuest/addKeyItem calls exist)
+4. For quests: search ALL scripts (including scripts/zones/*/npcs/) not just scripts/quests/
+5. Use quests.lua markers (+/±/Converted) as the source of truth for implementation status
+
 ## Methodology
 For each item, check the codebase AND cross-reference with bg-wiki.com to confirm retail behavior.
 
 **Codebase checks:**
-- Script exists? (`scripts/missions/`, `scripts/quests/`, `scripts/zones/*/npcs/`)
+- Script exists? Search ALL of: `scripts/missions/`, `scripts/quests/`, AND `scripts/zones/*/npcs/`
+- Quest implemented? Check quests.lua for +/±/Converted markers, AND grep for addQuest/completeQuest calls
 - NPC exists in DB? (`sql/npc_list.sql`)
 - Zone accessible? (`sql/zone_settings.sql`, transport scripts)
 - Items/KIs defined? (`scripts/enum/key_item.lua`, `scripts/enum/item.lua`)
 - Mob data exists? (`sql/mob_pools.sql`, `sql/mob_spawn_points.sql`)
+- **Data tables populated?** Check that IDs.lua tables, QM data, drop lists are NOT commented out
 
 **bg-wiki cross-reference:**
 - What should this quest/system do on retail?
