@@ -34,6 +34,7 @@ GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(const CCharEntity* PC
     packet.UniqueNo = PChar->id;
     packet.ActIndex = PChar->targid;
     packet.MesNum   = messageID + 0x8000;
+    packet.Type     = 4;
     packet.Num1[0]  = param0;
     packet.Num1[1]  = count;
 
