@@ -1,5 +1,5 @@
 -----------------------------------
---  August Melee - Axe
+-- No Quarter
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,17 +9,16 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 10
-    local dmgmod  = 2
+    skill:setFinalAnimationSub(0)
+    local numhits = 3
+    local accmod  = 3
+    local dmgmod  = mob:getWeaponDmg() * 0.35
     local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
     local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    skill:setMsg(xi.msg.basic.HIT_DMG)
 
-    if info.hitslanded == 0 then
-        skill:setMsg(xi.msg.basic.HIT_MISS)
-    end
+    mob:setMod(xi.mod.DMGPHYS, 0) -- Remove the Phyisical damage taken effect
+    mob:setLocalVar("DaybreakEndTime", os.time())
 
     return dmg
 end

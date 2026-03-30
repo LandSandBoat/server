@@ -1,5 +1,5 @@
 -----------------------------------
---  August Melee - Axe
+-- Noble Frenzy
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,17 +9,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 10
-    local dmgmod  = 2
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
+    local numhits = 5
+    local accmod  = 2
+    local dmgmod  = 3.5
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5625, 1.875, 2.50)
     local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    skill:setMsg(xi.msg.basic.HIT_DMG)
-
-    if info.hitslanded == 0 then
-        skill:setMsg(xi.msg.basic.HIT_MISS)
-    end
 
     return dmg
 end
