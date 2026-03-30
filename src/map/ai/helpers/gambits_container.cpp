@@ -37,7 +37,6 @@
 
 #include "ai/controllers/player_controller.h"
 #include "ai/controllers/trust_controller.h"
-#include "weapon_skill.h"
 
 #include <algorithm>
 #include <ranges>
@@ -100,7 +99,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
     auto* controller      = static_cast<CTrustController*>(POwner->PAI->GetController());
     uint8 currentPartyPos = controller->GetPartyPosition();
-    auto  position_offset = static_cast<std::chrono::milliseconds>(currentPartyPos * 10);
+    auto  position_offset = static_cast<std::chrono::milliseconds>(currentPartyPos * 100);
 
     if ((tick + position_offset) < m_lastAction)
     {
@@ -116,7 +115,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
         co_return;
     }
 
-    auto random_offset = static_cast<std::chrono::milliseconds>(xirand::GetRandomNumber(1000, 2500));
+    auto random_offset = static_cast<std::chrono::milliseconds>(xirand::GetRandomNumber(2000, 3000));
     m_lastAction       = tick + random_offset;
 
     // Deal with TP skills before any gambits
@@ -152,6 +151,15 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
             potentialTargets.push_back(POwner);
         }
         else if (targetType == G_TARGET::TARGET)
+        {
+            auto* mob = POwner->GetBattleTarget();
+            potentialTargets.push_back(mob);
+        }
+        else if (targetType == G_TARGET::TRIGGER_SELF_ACTION_TARGET)
+        {
+            potentialTargets.push_back(POwner);
+        }
+        else if (targetType == G_TARGET::TRIGGER_TARGET_ACTION_SELF)
         {
             auto* mob = POwner->GetBattleTarget();
             potentialTargets.push_back(mob);
@@ -287,6 +295,16 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
             if (targetMatchAllPredicates)
             {
+                if (gambit.target_selector == G_TARGET::TRIGGER_SELF_ACTION_TARGET)
+                {
+                    target = POwner->GetBattleTarget(); // switch back to target before action for correct target selection in actions
+                    break;
+                }
+                else if (gambit.target_selector == G_TARGET::TRIGGER_TARGET_ACTION_SELF)
+                {
+                    target = POwner; // switch to self before action for correct target selection in actions
+                    break;
+                }
                 target = potentialTarget;
                 break;
             }
@@ -766,6 +784,16 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
                 continue;
             }
+            case G_CONDITION::LVL_LT:
+            {
+                predicateResults.push_back(triggerTarget->GetMLevel() < predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::LVL_GTE:
+            {
+                predicateResults.push_back(triggerTarget->GetMLevel() >= predicate.condition_arg);
+                continue;
+            }
             case G_CONDITION::HAS_RUNES:
             {
                 bool hasRunes = !triggerTarget->StatusEffectContainer->GetAllRuneEffects().empty();
@@ -1045,6 +1073,11 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back((triggerTarget->health.maxhp - triggerTarget->health.hp) >= (int16)predicate.condition_arg);
                 continue;
             }
+            case G_CONDITION::SUB_ANIMATION:
+            {
+                predicateResults.push_back(triggerTarget->animationsub == predicate.condition_arg);
+                continue;
+            }
             default:
             {
                 predicateResults.push_back(false);
@@ -1268,6 +1301,74 @@ bool CGambitsContainer::TryTrustSkill()
                 {
                     chosen_skill = tp_skills.at(tp_skills.size() - 1);
                 }
+
+                break;
+            }
+            case G_SELECT::SPECIAL_AUGUST:
+            {
+                static const uint32                     NO_QUARTER  = 3658;
+                static const std::unordered_set<uint32> daybreak_ws = { 3656, 3657 };
+                static const std::unordered_set<uint32> regular_ws  = { 3653, 3654, 3655 };
+
+                bool   maybeDaybreakActive = POwner->animationsub == 5; // Daybreak active is sub animation 5, retail does the same thing.
+                uint32 lastSkillUsed       = POwner->GetLocalVar("[Gambit]LastDaybreakSkill");
+
+                std::vector<TrustSkill_t> candidates;
+
+                if (maybeDaybreakActive)
+                {
+                    // Only trigger No Quarter if the last skill used was ACTUALLY a Daybreak opener
+                    if (daybreak_ws.count(lastSkillUsed))
+                    {
+                        for (auto const& tskill : tp_skills)
+                        {
+                            if (tskill.skill_id == NO_QUARTER)
+                            {
+                                chosen_skill = tskill;
+                                break;
+                            }
+                        }
+                    }
+
+                    // If we didn't pick No Quarter (either lastSkill was 0 or a regular skill)
+                    if (!chosen_skill)
+                    {
+                        for (auto const& tskill : tp_skills)
+                        {
+                            if (daybreak_ws.count(tskill.skill_id))
+                            {
+                                candidates.push_back(tskill);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Normal state: use standard rotation
+                    for (auto const& tskill : tp_skills)
+                    {
+                        if (regular_ws.count(tskill.skill_id))
+                        {
+                            candidates.push_back(tskill);
+                        }
+                    }
+                    // Clear the localVar so the next Daybreak starts fresh
+                    if (lastSkillUsed != 0)
+                    {
+                        POwner->SetLocalVar("[Gambit]LastDaybreakSkill", 0);
+                    }
+                }
+
+                if (!candidates.empty() && !chosen_skill)
+                {
+                    chosen_skill = xirand::GetRandomElement(candidates);
+                }
+
+                // Only update the localVar if actually picked a skill
+                applyTo(chosen_skill, [&](const TrustSkill_t& skill)
+                        {
+                            POwner->SetLocalVar("[Gambit]LastDaybreakSkill", skill.skill_id);
+                        });
 
                 break;
             }
