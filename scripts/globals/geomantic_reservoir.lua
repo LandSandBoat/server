@@ -80,28 +80,27 @@ local indiSpellMap =
 }
 
 xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
-    -- TODO: According to BG-Wiki there is a sequence here that a player can proc '!!' and achieve a Geomancy skill-up.
-    -- TODO: is there different messaging if you don't know the indi spell vs already having the geo spell?
-    -- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
-    local procEffectTime = math.random(230, 300)
+    local ID = zones[player:getZoneID()]
     local indiSpell = indiSpellMap[geoSpell]
 
-    if
-        player:getMainJob() == xi.job.GEO and
-        not player:hasSpell(geoSpell) and
-        indiSpell and
-        player:hasSpell(indiSpell)
-    then
-        player:startEvent(15000,  procEffectTime)
-        -- TODO add skillup logic if player clicks at the time the proc happens
-    else
-        player:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
+    if player:getMainJob() ~= xi.job.GEO then
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+        return
     end
+
+    if not indiSpell or not player:hasSpell(indiSpell) then
+        player:printToPlayer('You must first learn the corresponding Indicolure spell.', xi.msg.channel.SYSTEM_3)
+        return
+    end
+
+    if player:hasSpell(geoSpell) then
+        player:printToPlayer('You have already learned this Geocolure spell.', xi.msg.channel.SYSTEM_3)
+        return
+    end
+
+    player:addSpell(geoSpell, { silentLog = true })
+    player:messageSpecial(ID.text.LEARNS_SPELL, geoSpellTable[geoSpell][1])
 end
 
 xi.geomanticReservoir.onEventFinish = function(player, csid, geoSpell)
-    if csid == 15000 then
-        player:addSpell(geoSpell, { silentLog = true })
-        player:messageSpecial(zones[player:getZoneID()].text.LEARNS_SPELL, geoSpellTable[geoSpell][1])
-    end
 end

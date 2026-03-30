@@ -3604,7 +3604,7 @@ INSERT INTO `mob_droplist` VALUES (387,4,0,1000,4370,0);        -- Pot Of Honey 
 -- ZoneID: 115 - Bumblebee
 -- ZoneID: 116 - Bumblebee
 INSERT INTO `mob_droplist` VALUES (388,0,0,1000,846,@UNCOMMON);  -- Insect Wing (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (388,0,0,1000,4444,@UNCOMMON); -- Rarab Tail (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (388,0,0,1000,912,@UNCOMMON);  -- Beehive Chip (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (388,0,0,1000,4370,@RARE);     -- Pot Of Honey (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (388,2,0,1000,4370,0);         -- Pot Of Honey (Steal)
 INSERT INTO `mob_droplist` VALUES (388,4,0,1000,912,0);          -- Beehive Chip (Despoil)

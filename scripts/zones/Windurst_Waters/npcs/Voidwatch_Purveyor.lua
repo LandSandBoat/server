@@ -14,28 +14,52 @@ local csids =
     SHOP_MENU = 1034,
 }
 
+-- Item mapping: index -> item ID
+local shopItems =
+{
+    [1] = xi.item.COBALT_CELL,
+    [2] = xi.item.RUBICUND_CELL,
+    [3] = xi.item.XANTHOUS_CELL,
+    [4] = xi.item.JADE_CELL,
+    [5] = xi.item.POUCH_OF_VOIDDUST,
+}
+
+local COST_PER_ITEM = 2000
+
 entity.onTrigger = function(player, npc)
     local points = player:getCP()
-    printf('[VW_Purveyor] onTrigger: conquestPoints=%d', points)
-    player:startEvent(csids.SHOP_MENU, 0, points, xi.voidwatch.PURVEYOR_ITEM_COST, 0, 0, 0, 0)
+    player:startEvent(csids.SHOP_MENU, 0, points, COST_PER_ITEM, 0, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    printf('[VW_Purveyor] onEventUpdate: csid=%d option=%d (0x%08X)', csid, option, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    printf('[VW_Purveyor] onEventFinish: csid=%d option=%d (0x%08X)', csid, option, option)
-
     if option == 0 or option == 0xFFFFFFFF then
         return
     end
 
-    local selection = bit.band(option, 0xFF)
-    local quantity = bit.band(bit.rshift(option, 8), 0xFF)
-    local param3 = bit.band(bit.rshift(option, 16), 0xFF)
-    local param4 = bit.band(bit.rshift(option, 24), 0xFF)
-    printf('[VW_Purveyor]   parsed: sel=%d qty=%d p3=%d p4=%d', selection, quantity, param3, param4)
+    -- option byte 3 (bits 16-23) encodes item + quantity
+    -- low 6 bits = item index, high 2 bits = quantity
+    local packed = bit.band(bit.rshift(option, 16), 0xFF)
+    local itemIndex = bit.band(packed, 0x3F)
+    local quantity = bit.rshift(packed, 6)
+
+    local itemId = shopItems[itemIndex]
+    if not itemId or quantity < 1 then
+        return
+    end
+
+    local totalCost = COST_PER_ITEM * quantity
+
+    if player:getCP() < totalCost then
+        return
+    end
+
+    if player:addItem(itemId, quantity) then
+        player:delCP(totalCost)
+        player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
+    end
 end
 
 return entity

@@ -76214,6 +76214,40 @@ INSERT INTO `item_mods` VALUES (27786,115,15);  -- ELEM: 15
 INSERT INTO `item_mods` VALUES (27786,384,500); -- HASTE_GEAR: 500
 INSERT INTO `item_mods` VALUES (27786,1132,25); -- CARDINAL_CHANT_BONUS: 25
 
+-- Runeist Bandeau +1
+INSERT INTO `item_mods` VALUES (27787,1,82);    -- DEF: 82
+INSERT INTO `item_mods` VALUES (27787,2,47);    -- HP: 47
+INSERT INTO `item_mods` VALUES (27787,5,49);    -- MP: 49
+INSERT INTO `item_mods` VALUES (27787,8,15);    -- STR: 15
+INSERT INTO `item_mods` VALUES (27787,9,18);    -- DEX: 18
+INSERT INTO `item_mods` VALUES (27787,10,15);   -- VIT: 15
+INSERT INTO `item_mods` VALUES (27787,11,18);   -- AGI: 18
+INSERT INTO `item_mods` VALUES (27787,12,15);   -- INT: 15
+INSERT INTO `item_mods` VALUES (27787,13,15);   -- MND: 15
+INSERT INTO `item_mods` VALUES (27787,14,16);   -- CHR: 16
+INSERT INTO `item_mods` VALUES (27787,29,1);    -- MDEF: 1
+INSERT INTO `item_mods` VALUES (27787,31,36);   -- MEVA: 36
+INSERT INTO `item_mods` VALUES (27787,68,20);   -- EVA: 20
+INSERT INTO `item_mods` VALUES (27787,384,700); -- HASTE_GEAR: 700
+
+-- Runeist Mitons +1
+INSERT INTO `item_mods` VALUES (28067,1,74);    -- DEF: 74
+INSERT INTO `item_mods` VALUES (28067,2,36);    -- HP: 36
+INSERT INTO `item_mods` VALUES (28067,5,25);    -- MP: 25
+INSERT INTO `item_mods` VALUES (28067,8,7);     -- STR: 7
+INSERT INTO `item_mods` VALUES (28067,9,22);    -- DEX: 22
+INSERT INTO `item_mods` VALUES (28067,10,20);   -- VIT: 20
+INSERT INTO `item_mods` VALUES (28067,11,3);    -- AGI: 3
+INSERT INTO `item_mods` VALUES (28067,12,8);    -- INT: 8
+INSERT INTO `item_mods` VALUES (28067,13,19);   -- MND: 19
+INSERT INTO `item_mods` VALUES (28067,14,11);   -- CHR: 11
+INSERT INTO `item_mods` VALUES (28067,29,1);    -- MDEF: 1
+INSERT INTO `item_mods` VALUES (28067,31,25);   -- MEVA: 25
+INSERT INTO `item_mods` VALUES (28067,68,11);   -- EVA: 11
+INSERT INTO `item_mods` VALUES (28067,116,15);  -- ENHANCING_MAGIC: 15
+INSERT INTO `item_mods` VALUES (28067,161,-200); -- PHYSICAL_DMG_TAKEN: -2%
+INSERT INTO `item_mods` VALUES (28067,384,400); -- HASTE_GEAR: 400
+
 -- Ares Cuirass +1
 INSERT INTO `item_mods` VALUES (27788,1,81);  -- DEF: 81
 INSERT INTO `item_mods` VALUES (27788,3,5);   -- HPP: 5

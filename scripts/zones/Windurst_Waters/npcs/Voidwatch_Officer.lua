@@ -9,43 +9,35 @@ require('scripts/globals/voidwatch')
 ---@type TNpcEntity
 local entity = {}
 
--- Event CSIDs for this zone (from xi-tinkerer DAT decode)
--- 1035 = main menu (present nation: What will you do?)
--- 1036 = main menu (past nation variant)
--- 1037 = ops briefing / stratum abyssite issuance
--- 1039-1043 = sub-menus (questions, ops details, voidstone, rewards, etc.)
--- 1024 = shared/atmacite related
+-- Event CSIDs (from xi-tinkerer DAT decode + in-game verification)
+-- 1024 = main menu ("What will you do?" with ops/questions/rewards)
+--        param1 = nation (0=Sandy, 1=debug?, 2=Windurst, 3=debug?)
+--        param2 = cruor
+--        params 3-7 = TBD (voidstones, stratum data, etc.)
+-- 1035 = dispatch/recruitment dialogue (no alarum)
+-- 1036-1037 = jurisdiction-specific ops briefings
+-- 1039-1043 = jurisdiction sub-menus
 local csids =
 {
-    MAIN_MENU        = 1035,
-    MAIN_MENU_PAST   = 1036,
-    OPS_BRIEFING     = 1037,
-    SUB_MENU_1       = 1039,
-    SUB_MENU_2       = 1040,
-    SUB_MENU_3       = 1041,
-    SUB_MENU_4       = 1042,
-    SUB_MENU_5       = 1043,
-    SHARED           = 1024,
+    MAIN_MENU = 1024,
+    DISPATCH  = 1035,
 }
 
 entity.onTrigger = function(player, npc)
     local hasAlarum = xi.voidwatch.hasAlarum(player)
     local cruor = player:getCurrency('cruor')
-    local voidstones = xi.voidwatch.getVoidstoneCount(player)
-    local capacity = xi.voidwatch.getVoidstoneCapacity(player)
+    local nation = player:getNation()
 
-    local stratumBits = 0
-    for path = 1, 8 do
-        local tier = xi.voidwatch.getPathTier(player, path)
-        if tier > 0 then
-            stratumBits = bit.bor(stratumBits, bit.lshift(tier, (path - 1) * 4))
-        end
+    printf('[VW_Officer] onTrigger: hasAlarum=%s nation=%d cruor=%d',
+        tostring(hasAlarum), nation, cruor)
+
+    if not hasAlarum then
+        player:startEvent(csids.DISPATCH, 0, 0, 0, 0, 0, 0, 0)
+    else
+        -- param1: jurisdiction flag (6=Sandy/Crimson, 10=Bastok/Indigo, 14=Windurst/Jade)
+        local jurisdictionFlag = 14
+        player:startEvent(csids.MAIN_MENU, jurisdictionFlag, cruor, 0, 0, 0, 0, 0)
     end
-
-    printf('[VW_Officer] onTrigger: hasAlarum=%s cruor=%d voidstones=%d capacity=%d stratumBits=%d',
-        tostring(hasAlarum), cruor, voidstones, capacity, stratumBits)
-
-    player:startEvent(csids.MAIN_MENU, cruor, voidstones, capacity, stratumBits, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
