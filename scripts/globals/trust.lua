@@ -406,6 +406,21 @@ xi.trust.spawn = function(caster, spell)
     return 0
 end
 
+-- Exponent curves
+-- Curve | lvl for val > 0 | lvl for 1/2 full value | lvl for full val
+-- 2.0     30                71                       99
+-- 1.5     20                63                       99
+-- 1.2     13                56                       99
+-- 1.0     10                50                       99
+xi.trust.modGrowthValMax = function(mob, maxVal)
+    local lvl   = math.max(mob:getMainLvl(), 1) -- Ensure lvl is at least 1
+    local curve = 1.5 -- Gentle curve: starts increasing around lvl 20, this needs testing more, but seems to work well at this value.
+    local progress = (lvl - 1) / 98 -- Normalize level to 0.0 - 1.0 range (98 is the span between 1 and 99)
+    local exponentGrowth = math.pow(progress, curve)
+
+    return math.floor(maxVal * exponentGrowth)
+end
+
 -- pageOffset is: (summon_message_id - 1) / 100
 -- Example: Shantotto II summon message ID: 11201
 -- pageOffset: (11201 - 1) / 100 = 112
