@@ -3676,14 +3676,15 @@ INSERT INTO `mob_skills` VALUES (3647,82,'merciless_strike',0,0.0,7.0,2000,1500,
 INSERT INTO `mob_skills` VALUES (3648,2457,'august_melee_sword',0,0.0,7.0,2000,0,4,4,0,0,0,0,0); -- Capture shows 409. Adding 2048 for it to work properly.
 INSERT INTO `mob_skills` VALUES (3649,2458,'august_melee_axe',0,0.0,7.0,2000,0,4,4,0,0,0,0,0);   -- Capture shows 410. Adding 2048 for it to work properly.
 INSERT INTO `mob_skills` VALUES (3650,2459,'august_melee_h2h',0,0.0,7.0,2000,0,4,4,0,0,0,0,0);   -- Capture shows 411. Adding 2048 for it to work properly.
-INSERT INTO `mob_skills` VALUES (3651,2460,'august_melee_bow',0,0.0,7.0,2000,0,4,4,0,0,0,0,0);   -- Capture shows 412. Adding 2048 for it to work properly.
-INSERT INTO `mob_skills` VALUES (3652,413,'daybreak',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3653,414,'tartaric_sigil',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3654,415,'null_field',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3655,416,'alabaster_burst',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3656,417,'noble_frenzy',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3657,418,'fulminous_fury',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3658,419,'no_quarter',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3651,2460,'august_melee_bow',0,0.0,21.0,2000,0,4,4,0,0,0,0,0);   -- Capture shows 412. Adding 2048 for it to work properly.
+INSERT INTO `mob_skills` VALUES (3652,2461,'daybreak',0,0.0,7.0,7000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3653,2462,'tartaric_sigil',0,0.0,7.0,3500,0,4,0,0,0,2,4,0);
+INSERT INTO `mob_skills` VALUES (3654,2463,'null_field',0,0.0,7.0,4500,0,4,0,0,0,11,1,0);
+INSERT INTO `mob_skills` VALUES (3655,2464,'alabaster_burst',0,0.0,7.0,4500,0,4,0,0,0,10,6,0);
+INSERT INTO `mob_skills` VALUES (3656,2465,'noble_frenzy',0,0.0,7.0,4500,0,4,0,0,0,9,4,0);
+INSERT INTO `mob_skills` VALUES (3657,2466,'fulminous_fury',0,0.0,7.0,5000,0,4,0,0,0,12,4,0);
+INSERT INTO `mob_skills` VALUES (3658,2467,'no_quarter',0,0.0,7.0,7000,0,4,0,0,0,13,10,0);
+
 INSERT INTO `mob_skills` VALUES (3659,387,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3660,388,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3661,389,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

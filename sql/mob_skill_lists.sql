@@ -3576,7 +3576,12 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,1); -- Combo
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,4); -- Backhand Blow
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,3541); -- Salaheem Spirit
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3653); -- Tartaric Sigil
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3654); -- Null Field
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3655); -- Alabaster Burst
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3656); -- Noble Frenzy
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3657); -- Fulminous Fury
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3658); -- No Quarter
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,0);
@@ -3847,7 +3852,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3651); -- august
 
 INSERT INTO `mob_skill_lists` VALUES ('Fahrafahr_the_Bloodied',1198,2083); -- drop_hammer
 
-INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1099,368); -- blockhead
+INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1199,368); -- blockhead
 
 INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
 
