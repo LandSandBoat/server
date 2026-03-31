@@ -24,11 +24,11 @@ local shopItems =
     [5] = xi.item.POUCH_OF_VOIDDUST,
 }
 
-local COST_PER_ITEM = 2000
+local costPerItem = 2000
 
 entity.onTrigger = function(player, npc)
     local points = player:getCP()
-    player:startEvent(csids.SHOP_MENU, 0, points, COST_PER_ITEM, 0, 0, 0, 0)
+    player:startEvent(csids.SHOP_MENU, 0, points, costPerItem, 0, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         return
     end
 
-    local totalCost = COST_PER_ITEM * quantity
+    local totalCost = costPerItem * quantity
 
     if player:getCP() < totalCost then
         return
