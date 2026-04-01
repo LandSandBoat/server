@@ -70,18 +70,18 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    -- local triggerAreaID = triggerArea:getTriggerAreaID()
-    -- local cs
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+    local cs
 
-    -- if GetNPCByID(ID.TEMENOS_NORTHERN_TOWER.npc.PORTAL[1] + (triggerAreaID - 1)):getAnimation() == xi.animation.OPEN_DOOR then
-    --     if triggerAreaID > 20 then
-    --         cs = 120
-    --     else
-    --         cs = triggerAreaID + 99
-    --     end
+    if GetNPCByID(ID.TEMENOS_NORTHERN_TOWER.npc.PORTAL[1] + (triggerAreaID - 1)):getAnimation() == xi.animation.OPEN_DOOR then
+        if triggerAreaID > 20 then
+            cs = 120
+        else
+            cs = triggerAreaID + 99
+        end
 
-    --     player:startOptionalCutscene(cs)
-    -- end
+        player:startOptionalCutscene(cs)
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
