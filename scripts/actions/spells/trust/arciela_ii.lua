@@ -17,20 +17,19 @@ spellObject.onMobSpawn = function(mob)
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.HIGHEST, 1000)
 
-    -- Haste on party members who don't have it
+    -- Haste on party members (one-time per member, high priority)
     mob:addGambit(ai.t.PARTY, { ai.c.NOT_STATUS, xi.effect.HASTE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE })
 
-    -- Refresh on party members who don't have it
+    -- Refresh on party members (one-time per member)
     mob:addGambit(ai.t.PARTY, { ai.c.NOT_STATUS, xi.effect.REFRESH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH })
 
-    -- Slow on target if not already slowed
+    -- Slow on target (one-time per target)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.SLOW }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW })
 
-    -- Paralyze on target if not already paralyzed
+    -- Paralyze on target (one-time per target)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.PARALYSIS }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PARALYZE })
 
-    -- Nuke with highest available elemental
-    mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.MA, ai.s.BEST_AGAINST_TARGET, xi.magic.spell.FIRE })
+    -- No continuous nuking — conserve MP for buffs/debuffs, rely on melee + WS for damage
 end
 
 spellObject.onMobDespawn = function(mob)
