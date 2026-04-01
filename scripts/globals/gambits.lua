@@ -80,6 +80,17 @@ ai.condition =
     NOT_PT_HAS_TANK    = 22,
     IS_ECOSYSTEM       = 23,
     HP_MISSING         = 24,
+    MPP_GTE            = 25,
+    TARGET_HPP_LT      = 26,
+    TARGET_CASTING     = 27,
+    TARGET_READYING    = 28,
+    DISTANCE_GT        = 29,
+    NOT_ENGAGED        = 30,
+    PARTY_HPP_LT       = 31,
+    MP_LT              = 32,
+    MP_GTE             = 33,
+    HP_LT              = 34,
+    HP_GTE             = 35,
 }
 ai.c = ai.condition
 
@@ -114,6 +125,7 @@ ai.select =
     EN_MOB_WEAKNESS     = 13,
     STORM_MOB_WEAKNESS  = 14,
     HELIX_MOB_WEAKNESS  = 15,
+    MP_SCALED           = 16,
 }
 ai.s = ai.select
 

@@ -44,6 +44,112 @@
 namespace gambits
 {
 
+namespace
+{
+    const char* TargetToString(G_TARGET t)
+    {
+        switch (t)
+        {
+            case G_TARGET::SELF:        return "SELF";
+            case G_TARGET::PARTY:       return "PARTY";
+            case G_TARGET::TARGET:      return "TARGET";
+            case G_TARGET::MASTER:      return "MASTER";
+            case G_TARGET::TANK:        return "TANK";
+            case G_TARGET::MELEE:       return "MELEE";
+            case G_TARGET::RANGED:      return "RANGED";
+            case G_TARGET::CASTER:      return "CASTER";
+            case G_TARGET::TOP_ENMITY:  return "TOP_ENMITY";
+            case G_TARGET::CURILLA:     return "CURILLA";
+            case G_TARGET::PARTY_DEAD:  return "PARTY_DEAD";
+            case G_TARGET::PARTY_MULTI: return "PARTY_MULTI";
+            default:                    return "UNKNOWN";
+        }
+    }
+
+    const char* ConditionToString(G_CONDITION c)
+    {
+        switch (c)
+        {
+            case G_CONDITION::ALWAYS:             return "ALWAYS";
+            case G_CONDITION::HPP_LT:             return "HPP_LT";
+            case G_CONDITION::HPP_GTE:            return "HPP_GTE";
+            case G_CONDITION::MPP_LT:             return "MPP_LT";
+            case G_CONDITION::TP_LT:              return "TP_LT";
+            case G_CONDITION::TP_GTE:             return "TP_GTE";
+            case G_CONDITION::STATUS:             return "STATUS";
+            case G_CONDITION::NOT_STATUS:         return "NOT_STATUS";
+            case G_CONDITION::STATUS_FLAG:        return "STATUS_FLAG";
+            case G_CONDITION::HAS_TOP_ENMITY:     return "HAS_TOP_ENMITY";
+            case G_CONDITION::NOT_HAS_TOP_ENMITY: return "NOT_HAS_TOP_ENMITY";
+            case G_CONDITION::SC_AVAILABLE:       return "SC_AVAILABLE";
+            case G_CONDITION::NOT_SC_AVAILABLE:   return "NOT_SC_AVAILABLE";
+            case G_CONDITION::MB_AVAILABLE:       return "MB_AVAILABLE";
+            case G_CONDITION::READYING_WS:        return "READYING_WS";
+            case G_CONDITION::READYING_MS:        return "READYING_MS";
+            case G_CONDITION::READYING_JA:        return "READYING_JA";
+            case G_CONDITION::CASTING_MA:         return "CASTING_MA";
+            case G_CONDITION::RANDOM:             return "RANDOM";
+            case G_CONDITION::NO_SAMBA:           return "NO_SAMBA";
+            case G_CONDITION::NO_STORM:           return "NO_STORM";
+            case G_CONDITION::PT_HAS_TANK:        return "PT_HAS_TANK";
+            case G_CONDITION::NOT_PT_HAS_TANK:    return "NOT_PT_HAS_TANK";
+            case G_CONDITION::IS_ECOSYSTEM:       return "IS_ECOSYSTEM";
+            case G_CONDITION::HP_MISSING:         return "HP_MISSING";
+            case G_CONDITION::MPP_GTE:            return "MPP_GTE";
+            case G_CONDITION::TARGET_HPP_LT:      return "TARGET_HPP_LT";
+            case G_CONDITION::TARGET_CASTING:     return "TARGET_CASTING";
+            case G_CONDITION::TARGET_READYING:    return "TARGET_READYING";
+            case G_CONDITION::DISTANCE_GT:        return "DISTANCE_GT";
+            case G_CONDITION::NOT_ENGAGED:        return "NOT_ENGAGED";
+            case G_CONDITION::PARTY_HPP_LT:       return "PARTY_HPP_LT";
+            case G_CONDITION::MP_LT:              return "MP_LT";
+            case G_CONDITION::MP_GTE:             return "MP_GTE";
+            case G_CONDITION::HP_LT:              return "HP_LT";
+            case G_CONDITION::HP_GTE:             return "HP_GTE";
+            default:                              return "UNKNOWN";
+        }
+    }
+
+    const char* ReactionToString(G_REACTION r)
+    {
+        switch (r)
+        {
+            case G_REACTION::ATTACK:  return "ATTACK";
+            case G_REACTION::RATTACK: return "RATTACK";
+            case G_REACTION::MA:      return "MA";
+            case G_REACTION::JA:      return "JA";
+            case G_REACTION::WS:      return "WS";
+            case G_REACTION::MS:      return "MS";
+            default:                  return "UNKNOWN";
+        }
+    }
+
+    const char* SelectToString(G_SELECT s)
+    {
+        switch (s)
+        {
+            case G_SELECT::HIGHEST:             return "HIGHEST";
+            case G_SELECT::LOWEST:              return "LOWEST";
+            case G_SELECT::SPECIFIC:            return "SPECIFIC";
+            case G_SELECT::RANDOM:              return "RANDOM";
+            case G_SELECT::MB_ELEMENT:          return "MB_ELEMENT";
+            case G_SELECT::SPECIAL_AYAME:       return "SPECIAL_AYAME";
+            case G_SELECT::BEST_AGAINST_TARGET: return "BEST_AGAINST_TARGET";
+            case G_SELECT::BEST_SAMBA:          return "BEST_SAMBA";
+            case G_SELECT::HIGHEST_WALTZ:       return "HIGHEST_WALTZ";
+            case G_SELECT::ENTRUSTED:           return "ENTRUSTED";
+            case G_SELECT::BEST_INDI:           return "BEST_INDI";
+            case G_SELECT::STORM_DAY:           return "STORM_DAY";
+            case G_SELECT::HELIX_DAY:           return "HELIX_DAY";
+            case G_SELECT::EN_MOB_WEAKNESS:     return "EN_MOB_WEAKNESS";
+            case G_SELECT::STORM_MOB_WEAKNESS:  return "STORM_MOB_WEAKNESS";
+            case G_SELECT::HELIX_MOB_WEAKNESS:  return "HELIX_MOB_WEAKNESS";
+            case G_SELECT::MP_SCALED:           return "MP_SCALED";
+            default:                            return "UNKNOWN";
+        }
+    }
+} // anonymous namespace
+
 // Return a new unique identifier for a gambit
 auto CGambitsContainer::NewGambitIdentifier(const Gambit_t& gambit) const -> std::string
 {
@@ -70,7 +176,28 @@ std::string CGambitsContainer::AddGambit(const Gambit_t& gambit)
     if (available)
     {
         gambits.emplace_back(gambit);
+        if (!gambit.actions.empty())
+        {
+            const auto& action = gambit.actions[0];
+            DebugTrusts("[Trust:%s] Added gambit #%zu: target=%s reaction=%s select=%s arg=%u",
+                        POwner->name.c_str(),
+                        gambits.size(),
+                        TargetToString(gambit.target_selector),
+                        ReactionToString(action.reaction),
+                        SelectToString(action.select),
+                        action.select_arg);
+        }
         return gambit.identifier;
+    }
+
+    if (!gambit.actions.empty())
+    {
+        const auto& action = gambit.actions[0];
+        DebugTrusts("[Trust:%s] Gambit REJECTED (spell unavailable): reaction=%s select=%s arg=%u",
+                    POwner->name.c_str(),
+                    ReactionToString(action.reaction),
+                    SelectToString(action.select),
+                    action.select_arg);
     }
     return "";
 }
@@ -106,12 +233,12 @@ void CGambitsContainer::Tick(timer::time_point tick)
         return;
     }
 
-    // TODO: Is this necessary?
     // Not already doing something
     if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CRangeState>() || POwner->PAI->IsCurrentState<CMagicState>() ||
         POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>() ||
         POwner->PAI->IsCurrentState<CPetSkillState>())
     {
+        DebugTrusts("[Trust:%s] Tick: BUSY (already in action state)", POwner->name.c_str());
         return;
     }
 
@@ -122,14 +249,33 @@ void CGambitsContainer::Tick(timer::time_point tick)
     // TODO: Should this be its own special gambit?
     if (POwner->health.tp >= 1000 && TryTrustSkill())
     {
+        DebugTrusts("[Trust:%s] Used TP skill (TP=%d)", POwner->name.c_str(), POwner->health.tp);
         return;
     }
 
+    DebugTrusts("[Trust:%s] Tick: evaluating %zu gambits (HP:%d/%d MP:%d/%d TP:%d)",
+                POwner->name.c_str(),
+                gambits.size(),
+                POwner->health.hp, POwner->health.maxhp,
+                POwner->health.mp, POwner->health.maxmp,
+                POwner->health.tp);
+
     // Didn't WS/MS, go for other Gambits
+    uint16 gambitIndex = 0;
     for (auto& gambit : gambits)
     {
+        gambitIndex++;
         if (tick < gambit.last_used + std::chrono::seconds(gambit.retry_delay))
         {
+            if (!gambit.actions.empty())
+            {
+                DebugTrusts("[Trust:%s] Gambit #%u SKIP (retry delay): %s %s(%u)",
+                            POwner->name.c_str(),
+                            gambitIndex,
+                            ReactionToString(gambit.actions[0].reaction),
+                            SelectToString(gambit.actions[0].select),
+                            gambit.actions[0].select_arg);
+            }
             continue;
         }
 
@@ -271,6 +417,21 @@ void CGambitsContainer::Tick(timer::time_point tick)
             // clang-format on
         }
 
+        if (potentialTargets.empty())
+        {
+            if (!gambit.actions.empty())
+            {
+                DebugTrusts("[Trust:%s] Gambit #%u NO TARGETS: target=%s %s %s(%u)",
+                            POwner->name.c_str(),
+                            gambitIndex,
+                            TargetToString(targetType),
+                            ReactionToString(gambit.actions[0].reaction),
+                            SelectToString(gambit.actions[0].select),
+                            gambit.actions[0].select_arg);
+            }
+            continue;
+        }
+
         // For each potential target, check if the predicates resolves
         for (auto& potentialTarget : potentialTargets)
         {
@@ -294,8 +455,24 @@ void CGambitsContainer::Tick(timer::time_point tick)
         // No target matched, continue to next gambit
         if (!target)
         {
+            if (!gambit.actions.empty())
+            {
+                DebugTrusts("[Trust:%s] Gambit #%u PREDICATE FAIL: target=%s %s %s(%u)",
+                            POwner->name.c_str(),
+                            gambitIndex,
+                            TargetToString(targetType),
+                            ReactionToString(gambit.actions[0].reaction),
+                            SelectToString(gambit.actions[0].select),
+                            gambit.actions[0].select_arg);
+            }
             continue;
         }
+
+        DebugTrusts("[Trust:%s] Gambit #%u EXECUTING: target=%s -> %s",
+                    POwner->name.c_str(),
+                    gambitIndex,
+                    TargetToString(targetType),
+                    target->name.c_str());
 
         // Execute all actions defined on the Gambit
         // TODO: When multiple actions are defined:
@@ -305,6 +482,7 @@ void CGambitsContainer::Tick(timer::time_point tick)
         {
             if (action.reaction == G_REACTION::RATTACK)
             {
+                DebugTrusts("[Trust:%s] -> RATTACK on %s", POwner->name.c_str(), target->name.c_str());
                 controller->RangedAttack(target->targid);
             }
             else if (action.reaction == G_REACTION::MA)
@@ -314,7 +492,17 @@ void CGambitsContainer::Tick(timer::time_point tick)
                     auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.select_arg));
                     if (spell_id.has_value())
                     {
+                        DebugTrusts("[Trust:%s] -> MA SPECIFIC: spell=%u on %s",
+                                    POwner->name.c_str(),
+                                    static_cast<uint16>(spell_id.value()),
+                                    target->name.c_str());
                         controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        DebugTrusts("[Trust:%s] -> MA SPECIFIC: spell=%u NOT AVAILABLE (recast/mp/level)",
+                                    POwner->name.c_str(),
+                                    action.select_arg);
                     }
                 }
                 else if (action.select == G_SELECT::HIGHEST)
@@ -322,17 +510,58 @@ void CGambitsContainer::Tick(timer::time_point tick)
                     auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
                     if (spell_id.has_value())
                     {
+                        DebugTrusts("[Trust:%s] -> MA HIGHEST: family=%u resolved spell=%u on %s",
+                                    POwner->name.c_str(),
+                                    action.select_arg,
+                                    static_cast<uint16>(spell_id.value()),
+                                    target->name.c_str());
                         controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        DebugTrusts("[Trust:%s] -> MA HIGHEST: family=%u NO SPELL AVAILABLE",
+                                    POwner->name.c_str(),
+                                    action.select_arg);
                     }
                 }
                 else if (action.select == G_SELECT::LOWEST)
                 {
-                    // TODO
-                    // auto spell_id = POwner->SpellContainer->GetWorstAvailable(static_cast<SPELLFAMILY>(gambit.action.select_arg));
-                    // if (spell_id.has_value())
-                    //{
-                    //    controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
-                    //}
+                    auto spell_id = POwner->SpellContainer->GetLowestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
+                    if (spell_id.has_value())
+                    {
+                        DebugTrusts("[Trust:%s] -> MA LOWEST: family=%u resolved spell=%u on %s",
+                                    POwner->name.c_str(),
+                                    action.select_arg,
+                                    static_cast<uint16>(spell_id.value()),
+                                    target->name.c_str());
+                        controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        DebugTrusts("[Trust:%s] -> MA LOWEST: family=%u NO SPELL AVAILABLE",
+                                    POwner->name.c_str(),
+                                    action.select_arg);
+                    }
+                }
+                else if (action.select == G_SELECT::MP_SCALED)
+                {
+                    auto spell_id = POwner->SpellContainer->GetMPScaledAvailable(static_cast<SPELLFAMILY>(action.select_arg));
+                    if (spell_id.has_value())
+                    {
+                        DebugTrusts("[Trust:%s] -> MA MP_SCALED: family=%u MPP=%u%% resolved spell=%u on %s",
+                                    POwner->name.c_str(),
+                                    action.select_arg,
+                                    POwner->GetMPP(),
+                                    static_cast<uint16>(spell_id.value()),
+                                    target->name.c_str());
+                        controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        DebugTrusts("[Trust:%s] -> MA MP_SCALED: family=%u NO SPELL AVAILABLE",
+                                    POwner->name.c_str(),
+                                    action.select_arg);
+                    }
                 }
                 else if (action.select == G_SELECT::BEST_INDI)
                 {
@@ -359,7 +588,18 @@ void CGambitsContainer::Tick(timer::time_point tick)
                     auto spell_id      = POwner->SpellContainer->GetBestAgainstTargetWeakness(target, spell_to_cast);
                     if (spell_id.has_value())
                     {
+                        DebugTrusts("[Trust:%s] -> MA BEST_AGAINST_TARGET: arg=%u resolved spell=%u on %s",
+                                    POwner->name.c_str(),
+                                    action.select_arg,
+                                    static_cast<uint16>(spell_id.value()),
+                                    target->name.c_str());
                         controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        DebugTrusts("[Trust:%s] -> MA BEST_AGAINST_TARGET: arg=%u NO SPELL AVAILABLE",
+                                    POwner->name.c_str(),
+                                    action.select_arg);
                     }
                 }
                 else if (action.select == G_SELECT::STORM_DAY)
@@ -460,6 +700,7 @@ void CGambitsContainer::Tick(timer::time_point tick)
                 auto* PAbility = ability::GetAbility(action.select_arg);
                 if (PAbility == nullptr)
                 {
+                    DebugTrusts("[Trust:%s] -> JA: ability=%u NOT FOUND", POwner->name.c_str(), action.select_arg);
                     return;
                 }
 
@@ -534,6 +775,11 @@ void CGambitsContainer::Tick(timer::time_point tick)
 
                 if (action.select == G_SELECT::SPECIFIC)
                 {
+                    DebugTrusts("[Trust:%s] -> JA SPECIFIC: ability=%u (%s) on %s",
+                                POwner->name.c_str(),
+                                PAbility->getID(),
+                                PAbility->getName().c_str(),
+                                target ? target->name.c_str() : "null");
                     controller->Ability(target->targid, PAbility->getID());
                 }
 
@@ -794,6 +1040,118 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back((triggerTarget->health.maxhp - triggerTarget->health.hp) >= (int16)predicate.condition_arg);
                 continue;
             }
+            case G_CONDITION::MPP_GTE:
+            {
+                auto result = triggerTarget->GetMPP() >= predicate.condition_arg;
+                DebugTrusts("[Trust:%s] MPP_GTE: %s MPP=%u >= %u = %s",
+                            POwner->name.c_str(),
+                            triggerTarget->name.c_str(),
+                            triggerTarget->GetMPP(),
+                            predicate.condition_arg,
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::TARGET_HPP_LT:
+            {
+                auto* battleTarget = POwner->GetBattleTarget();
+                bool  result       = battleTarget && battleTarget->GetHPP() < predicate.condition_arg;
+                DebugTrusts("[Trust:%s] TARGET_HPP_LT: target=%s HPP=%u < %u = %s",
+                            POwner->name.c_str(),
+                            battleTarget ? battleTarget->name.c_str() : "null",
+                            battleTarget ? battleTarget->GetHPP() : 0,
+                            predicate.condition_arg,
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::TARGET_CASTING:
+            {
+                auto* battleTarget = POwner->GetBattleTarget();
+                bool  result       = battleTarget && battleTarget->PAI->IsCurrentState<CMagicState>();
+                DebugTrusts("[Trust:%s] TARGET_CASTING: %s = %s",
+                            POwner->name.c_str(),
+                            battleTarget ? battleTarget->name.c_str() : "null",
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::TARGET_READYING:
+            {
+                auto* battleTarget = POwner->GetBattleTarget();
+                bool  result       = battleTarget &&
+                    (battleTarget->PAI->IsCurrentState<CWeaponSkillState>() ||
+                     battleTarget->PAI->IsCurrentState<CMobSkillState>());
+                DebugTrusts("[Trust:%s] TARGET_READYING: %s = %s",
+                            POwner->name.c_str(),
+                            battleTarget ? battleTarget->name.c_str() : "null",
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::DISTANCE_GT:
+            {
+                auto* battleTarget = POwner->GetBattleTarget();
+                bool  result       = false;
+                float dist         = 0.0f;
+                if (battleTarget)
+                {
+                    dist   = distance(POwner->loc.p, battleTarget->loc.p);
+                    result = dist > static_cast<float>(predicate.condition_arg);
+                }
+                DebugTrusts("[Trust:%s] DISTANCE_GT: dist=%.1f > %u = %s",
+                            POwner->name.c_str(),
+                            dist,
+                            predicate.condition_arg,
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::NOT_ENGAGED:
+            {
+                bool result = POwner->GetBattleTarget() == nullptr;
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::PARTY_HPP_LT:
+            {
+                bool result = false;
+                // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
+                        if (PMember->isAlive() && PMember->GetHPP() < predicate.condition_arg)
+                        {
+                            result = true;
+                        }
+                    });
+                // clang-format on
+                DebugTrusts("[Trust:%s] PARTY_HPP_LT(%u): %s",
+                            POwner->name.c_str(),
+                            predicate.condition_arg,
+                            result ? "true" : "false");
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::MP_LT:
+            {
+                predicateResults.push_back(triggerTarget->health.mp < (int32)predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::MP_GTE:
+            {
+                predicateResults.push_back(triggerTarget->health.mp >= (int32)predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::HP_LT:
+            {
+                predicateResults.push_back(triggerTarget->health.hp < (int32)predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::HP_GTE:
+            {
+                predicateResults.push_back(triggerTarget->health.hp >= (int32)predicate.condition_arg);
+                continue;
+            }
             default:
             {
                 predicateResults.push_back(false);
@@ -802,29 +1160,49 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
     }
 
     // Evaluate the group of predicates
+    bool finalResult = false;
     switch (predicateGroup.logic)
     {
         case G_LOGIC::AND:
         {
-            return std::ranges::all_of(
+            finalResult = std::ranges::all_of(
                 predicateResults,
                 [](const bool result)
                 {
                     return result;
                 });
+            break;
         }
         case G_LOGIC::OR:
         {
-            return std::ranges::any_of(
+            finalResult = std::ranges::any_of(
                 predicateResults,
                 [](const bool result)
                 {
                     return result;
                 });
+            break;
         }
         default:
-            return false;
+            finalResult = false;
+            break;
     }
+
+    if (!finalResult && !predicateGroup.predicates.empty())
+    {
+        for (size_t i = 0; i < predicateGroup.predicates.size(); ++i)
+        {
+            auto& pred = predicateGroup.predicates[i];
+            DebugTrusts("[Trust:%s] CheckTrigger on %s: %s(%u) = %s",
+                        POwner->name.c_str(),
+                        triggerTarget->name.c_str(),
+                        ConditionToString(pred.condition),
+                        pred.condition_arg,
+                        (i < predicateResults.size() && predicateResults[i]) ? "true" : "false");
+        }
+    }
+
+    return finalResult;
 }
 
 bool CGambitsContainer::TryTrustSkill()

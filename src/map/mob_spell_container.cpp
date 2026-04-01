@@ -139,6 +139,17 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
 
     bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellId));
 
+    if (!isNotInRecast || !enoughMP)
+    {
+        DebugTrusts("[Trust:%s] GetAvailable(spell=%u): UNAVAILABLE recast=%s mp=%s (cost=%u have=%d)",
+                    m_PMob->name.c_str(),
+                    static_cast<uint16>(spellId),
+                    isNotInRecast ? "ready" : "BLOCKED",
+                    enoughMP ? "ok" : "LOW",
+                    spell->getMPCost(),
+                    m_PMob->health.mp);
+    }
+
     return (isNotInRecast && enoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
 }
 
@@ -184,7 +195,133 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
 
     // Assume the highest ID is the best (back of the vector)
     // TODO: These will need to be organised by family, then merged
-    return (!matches.empty()) ? std::optional<SpellID>{ matches.back() } : std::nullopt;
+    if (!matches.empty())
+    {
+        DebugTrusts("[Trust:%s] GetBestAvailable(family=%u): %zu matches, selected spell=%u (MP=%d/%d)",
+                    m_PMob->name.c_str(),
+                    static_cast<uint16>(family),
+                    matches.size(),
+                    static_cast<uint16>(matches.back()),
+                    m_PMob->health.mp,
+                    m_PMob->health.maxmp);
+        return std::optional<SpellID>{ matches.back() };
+    }
+
+    DebugTrusts("[Trust:%s] GetBestAvailable(family=%u): NO MATCHES (MP=%d/%d)",
+                m_PMob->name.c_str(),
+                static_cast<uint16>(family),
+                m_PMob->health.mp,
+                m_PMob->health.maxmp);
+    return std::nullopt;
+}
+
+// Returns the LOWEST tier spell available in a family (MP-efficient selection)
+std::optional<SpellID> CMobSpellContainer::GetLowestAvailable(SPELLFAMILY family)
+{
+    std::vector<SpellID> matches;
+    auto                 searchInList = [&](std::vector<SpellID>& list)
+    {
+        for (auto id : list)
+        {
+            auto* spell      = spell::GetSpell(id);
+            bool  sameFamily = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
+            bool  enoughMP   = spell->getMPCost() <= m_PMob->health.mp ||
+                            spell->getSkillType() == SKILL_NINJUTSU ||
+                            spell->getSkillType() == SKILL_SINGING ||
+                            spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
+                            spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
+                            spell->getSkillType() == SKILL_GEOMANCY;
+            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(id));
+            if (sameFamily && enoughMP && isNotInRecast)
+            {
+                matches.emplace_back(id);
+            }
+        };
+    };
+
+    searchInList(m_gaList);
+    searchInList(m_damageList);
+    searchInList(m_buffList);
+    searchInList(m_debuffList);
+    searchInList(m_healList);
+    searchInList(m_naList);
+    searchInList(m_raiseList);
+
+    if (!matches.empty())
+    {
+        DebugTrusts("[Trust:%s] GetLowestAvailable(family=%u): %zu matches, selected spell=%u (MP=%d/%d)",
+                    m_PMob->name.c_str(),
+                    static_cast<uint16>(family),
+                    matches.size(),
+                    static_cast<uint16>(matches.front()),
+                    m_PMob->health.mp,
+                    m_PMob->health.maxmp);
+        return std::optional<SpellID>{ matches.front() };
+    }
+
+    DebugTrusts("[Trust:%s] GetLowestAvailable(family=%u): NO MATCHES (MP=%d/%d)",
+                m_PMob->name.c_str(),
+                static_cast<uint16>(family),
+                m_PMob->health.mp,
+                m_PMob->health.maxmp);
+    return std::nullopt;
+}
+
+// Returns a spell tier scaled to current MP percentage
+// High MP = high tier, low MP = low tier (preserves MP for emergencies)
+std::optional<SpellID> CMobSpellContainer::GetMPScaledAvailable(SPELLFAMILY family)
+{
+    std::vector<SpellID> matches;
+    auto                 searchInList = [&](std::vector<SpellID>& list)
+    {
+        for (auto id : list)
+        {
+            auto* spell      = spell::GetSpell(id);
+            bool  sameFamily = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
+            bool  enoughMP   = spell->getMPCost() <= m_PMob->health.mp ||
+                            spell->getSkillType() == SKILL_NINJUTSU ||
+                            spell->getSkillType() == SKILL_SINGING ||
+                            spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
+                            spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
+                            spell->getSkillType() == SKILL_GEOMANCY;
+            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(id));
+            if (sameFamily && enoughMP && isNotInRecast)
+            {
+                matches.emplace_back(id);
+            }
+        };
+    };
+
+    searchInList(m_gaList);
+    searchInList(m_damageList);
+    searchInList(m_buffList);
+    searchInList(m_debuffList);
+    searchInList(m_healList);
+    searchInList(m_naList);
+    searchInList(m_raiseList);
+
+    if (!matches.empty())
+    {
+        // Scale index by MP percentage: 100% MP = best spell, 0% MP = worst spell
+        auto   mpp   = m_PMob->GetMPP();
+        size_t index  = (matches.size() - 1) * mpp / 100;
+
+        DebugTrusts("[Trust:%s] GetMPScaledAvailable(family=%u): %zu matches, MPP=%u%%, index=%zu, spell=%u",
+                    m_PMob->name.c_str(),
+                    static_cast<uint16>(family),
+                    matches.size(),
+                    mpp,
+                    index,
+                    static_cast<uint16>(matches[index]));
+        return std::optional<SpellID>{ matches[index] };
+    }
+
+    DebugTrusts("[Trust:%s] GetMPScaledAvailable(family=%u): NO MATCHES (MP=%d/%d)",
+                m_PMob->name.c_str(),
+                static_cast<uint16>(family),
+                m_PMob->health.mp,
+                m_PMob->health.maxmp);
+    return std::nullopt;
 }
 
 std::optional<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)

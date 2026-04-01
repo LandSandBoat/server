@@ -85,6 +85,19 @@ enum class G_CONDITION : uint16
     NOT_PT_HAS_TANK    = 22,
     IS_ECOSYSTEM       = 23,
     HP_MISSING         = 24,
+
+    // Custom conditions
+    MPP_GTE            = 25, // MP percentage >= arg
+    TARGET_HPP_LT      = 26, // Battle target HP% < arg (for finishing moves)
+    TARGET_CASTING     = 27, // Battle target is casting (for interrupts)
+    TARGET_READYING    = 28, // Battle target is readying WS/MS (for stuns)
+    DISTANCE_GT        = 29, // Distance to battle target > arg (detect out of melee)
+    NOT_ENGAGED        = 30, // Not currently engaged with a target
+    PARTY_HPP_LT       = 31, // Any party member HP% < arg (emergency heals)
+    MP_LT              = 32, // Raw MP < arg (not percentage)
+    MP_GTE             = 33, // Raw MP >= arg
+    HP_LT              = 34, // Raw HP < arg (not percentage)
+    HP_GTE             = 35, // Raw HP >= arg
 };
 
 enum class G_REACTION : uint16
@@ -115,6 +128,9 @@ enum class G_SELECT : uint16
     EN_MOB_WEAKNESS     = 13,
     STORM_MOB_WEAKNESS  = 14,
     HELIX_MOB_WEAKNESS  = 15,
+
+    // Custom selectors
+    MP_SCALED           = 16, // Pick spell tier scaled to current MP% (smart resource management)
 };
 
 enum class G_TP_TRIGGER : uint16

@@ -19,17 +19,11 @@ spellObject.onMobSpawn = function(mob)
 
     -- Haste on party members (one-time per member, high priority)
     mob:addGambit(ai.t.PARTY, { ai.c.NOT_STATUS, xi.effect.HASTE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE })
-
-    -- Refresh on party members (one-time per member)
     mob:addGambit(ai.t.PARTY, { ai.c.NOT_STATUS, xi.effect.REFRESH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH })
-
-    -- Slow on target (one-time per target)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.SLOW }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW })
-
-    -- Paralyze on target (one-time per target)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.PARALYSIS }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PARALYZE })
-
-    -- No continuous nuking — conserve MP for buffs/debuffs, rely on melee + WS for damage
+    mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 50 }, { ai.r.MA, ai.s.MP_SCALED, xi.magic.spellFamily.CURE })
+    mob:addGambit(ai.t.TARGET, { ai.c.TARGET_CASTING, 0 }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.SILENCE })
 end
 
 spellObject.onMobDespawn = function(mob)
