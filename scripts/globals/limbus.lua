@@ -74,17 +74,17 @@ Limbus.serverVar = ''
 --  - exitLocation: Where to boot the player out. This is specifically used for Apollyon areas.
 --  - timeExtension: How much time to grant when openning a time Armoury Crate.
 ---@diagnostic disable-next-line: duplicate-set-field
-function Limbus:new(data)
-    data.createsWornItem = false
-    data.showTimer       = false
+function Limbus:new(data) ---@diagnostic disable-line: inject-field, undefined-field
+    data.createsWornItem = false ---@diagnostic disable-line: inject-field
+    data.showTimer       = false ---@diagnostic disable-line: inject-field
     local obj            = Battlefield:new(data)
 
     setmetatable(obj, self)
-    obj.name          = data.name
+    obj.name          = data.name ---@diagnostic disable-line: undefined-field
     obj.ID            = zones[obj.zoneId][obj.name]
     obj.serverVar     = '[' .. obj.name .. ']Time'
-    obj.exitLocation  = data.exitLocation or 0
-    obj.timeExtension = data.timeExtension or 0
+    obj.exitLocation  = data.exitLocation or 0 ---@diagnostic disable-line: undefined-field
+    obj.timeExtension = data.timeExtension or 0 ---@diagnostic disable-line: undefined-field
 
     return obj
 end

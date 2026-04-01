@@ -9,7 +9,7 @@
 local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 
-local content = Limbus:new({
+local content = Limbus:new({ ---@diagnostic disable-line: param-type-mismatch
     zoneId           = xi.zone.TEMENOS,
     battlefieldId    = xi.battlefield.id.CENTRAL_TEMENOS_1ST_FLOOR,
     maxPlayers       = 18,

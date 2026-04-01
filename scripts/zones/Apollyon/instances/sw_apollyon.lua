@@ -8,7 +8,7 @@
 local ID = zones[xi.zone.APOLLYON]
 -----------------------------------
 
-local content = Limbus:new({
+local content = Limbus:new({ ---@diagnostic disable-line: param-type-mismatch
     zoneId           = xi.zone.APOLLYON,
     battlefieldId    = xi.battlefield.id.SW_APOLLYON,
     maxPlayers       = 18,
