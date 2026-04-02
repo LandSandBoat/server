@@ -34,6 +34,10 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MPP, 100)
 
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.RANDOM)
+
+    mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
+    mob:addGambit(ai.t.SELF, { ai.c.HPP_LT, 50 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
+    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.RAMPART }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART })
 end
 
 spellObject.onMobDespawn = function(mob)

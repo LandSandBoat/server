@@ -493,6 +493,13 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     std::size_t            weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
     std::optional<SpellID> choice           = std::nullopt;
     auto                   Weakness_Element = weakestIndex + 1;
+
+    DebugTrusts("[Trust:%s] GetBestAgainstTargetWeakness: target=%s weakElement=%zu resists=[F:%d I:%d W:%d E:%d T:%d Wa:%d L:%d D:%d]",
+                m_PMob->name.c_str(),
+                PTarget->name.c_str(),
+                Weakness_Element,
+                resistances[0], resistances[1], resistances[2], resistances[3],
+                resistances[4], resistances[5], resistances[6], resistances[7]);
     if (spell::GetSpell(spellId) != nullptr)
     {
         auto Spell_Element = spell::GetSpell(spellId)->getElement();
@@ -545,7 +552,19 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
         }
     }
     // If all else fails, just cast the best you have!
-    return !choice ? GetBestAvailable(SPELLFAMILY_NONE) : choice;
+    if (!choice)
+    {
+        DebugTrusts("[Trust:%s] GetBestAgainstTargetWeakness: no spell for element %zu, falling back to NONE",
+                    m_PMob->name.c_str(),
+                    Weakness_Element);
+        return GetBestAvailable(SPELLFAMILY_NONE);
+    }
+
+    DebugTrusts("[Trust:%s] GetBestAgainstTargetWeakness: chose spell=%u for element %zu",
+                m_PMob->name.c_str(),
+                static_cast<uint16>(choice.value()),
+                Weakness_Element);
+    return choice;
 }
 
 std::optional<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* PTarget)
