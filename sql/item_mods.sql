@@ -85635,3 +85635,235 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- -------------------------------------------------------
+-- RUN Futhark +1 (Relic) and Erilaz (Empyrean) armor mods
+-- Added by trust/AF overhaul session
+-- -------------------------------------------------------
+
+-- Futhark Bandeau +1 (26667) - RUN Relic Head
+INSERT INTO `item_mods` VALUES (26667,1,104);
+INSERT INTO `item_mods` VALUES (26667,2,36);
+INSERT INTO `item_mods` VALUES (26667,5,68);
+INSERT INTO `item_mods` VALUES (26667,8,13);
+INSERT INTO `item_mods` VALUES (26667,9,17);
+INSERT INTO `item_mods` VALUES (26667,10,20);
+INSERT INTO `item_mods` VALUES (26667,11,24);
+INSERT INTO `item_mods` VALUES (26667,12,13);
+INSERT INTO `item_mods` VALUES (26667,13,13);
+INSERT INTO `item_mods` VALUES (26667,14,14);
+INSERT INTO `item_mods` VALUES (26667,29,2);
+INSERT INTO `item_mods` VALUES (26667,31,53);
+INSERT INTO `item_mods` VALUES (26667,68,44);
+INSERT INTO `item_mods` VALUES (26667,160,-4);
+INSERT INTO `item_mods` VALUES (26667,384,800);
+
+-- Futhark Coat +1 (26843) - RUN Relic Body
+INSERT INTO `item_mods` VALUES (26843,1,136);
+INSERT INTO `item_mods` VALUES (26843,2,99);
+INSERT INTO `item_mods` VALUES (26843,5,84);
+INSERT INTO `item_mods` VALUES (26843,8,24);
+INSERT INTO `item_mods` VALUES (26843,9,29);
+INSERT INTO `item_mods` VALUES (26843,10,24);
+INSERT INTO `item_mods` VALUES (26843,11,28);
+INSERT INTO `item_mods` VALUES (26843,12,23);
+INSERT INTO `item_mods` VALUES (26843,13,23);
+INSERT INTO `item_mods` VALUES (26843,14,23);
+INSERT INTO `item_mods` VALUES (26843,29,6);
+INSERT INTO `item_mods` VALUES (26843,31,64);
+INSERT INTO `item_mods` VALUES (26843,68,49);
+INSERT INTO `item_mods` VALUES (26843,160,-7);
+INSERT INTO `item_mods` VALUES (26843,369,3);
+INSERT INTO `item_mods` VALUES (26843,384,400);
+
+-- Futhark Mitons +1 (27019) - RUN Relic Hands
+INSERT INTO `item_mods` VALUES (27019,1,92);
+INSERT INTO `item_mods` VALUES (27019,2,25);
+INSERT INTO `item_mods` VALUES (27019,8,11);
+INSERT INTO `item_mods` VALUES (27019,9,35);
+INSERT INTO `item_mods` VALUES (27019,10,32);
+INSERT INTO `item_mods` VALUES (27019,11,5);
+INSERT INTO `item_mods` VALUES (27019,12,12);
+INSERT INTO `item_mods` VALUES (27019,13,30);
+INSERT INTO `item_mods` VALUES (27019,14,17);
+INSERT INTO `item_mods` VALUES (27019,23,18);
+INSERT INTO `item_mods` VALUES (27019,27,4);
+INSERT INTO `item_mods` VALUES (27019,29,6);
+INSERT INTO `item_mods` VALUES (27019,31,37);
+INSERT INTO `item_mods` VALUES (27019,68,24);
+INSERT INTO `item_mods` VALUES (27019,384,500);
+
+-- Futhark Trousers +1 (27195) - RUN Relic Legs
+INSERT INTO `item_mods` VALUES (27195,1,119);
+INSERT INTO `item_mods` VALUES (27195,2,87);
+INSERT INTO `item_mods` VALUES (27195,8,29);
+INSERT INTO `item_mods` VALUES (27195,10,16);
+INSERT INTO `item_mods` VALUES (27195,11,20);
+INSERT INTO `item_mods` VALUES (27195,12,30);
+INSERT INTO `item_mods` VALUES (27195,13,17);
+INSERT INTO `item_mods` VALUES (27195,14,11);
+INSERT INTO `item_mods` VALUES (27195,29,5);
+INSERT INTO `item_mods` VALUES (27195,31,69);
+INSERT INTO `item_mods` VALUES (27195,68,38);
+INSERT INTO `item_mods` VALUES (27195,384,600);
+
+-- Futhark Boots +1 (27371) - RUN Relic Feet
+INSERT INTO `item_mods` VALUES (27371,1,75);
+INSERT INTO `item_mods` VALUES (27371,2,13);
+INSERT INTO `item_mods` VALUES (27371,5,30);
+INSERT INTO `item_mods` VALUES (27371,8,12);
+INSERT INTO `item_mods` VALUES (27371,9,24);
+INSERT INTO `item_mods` VALUES (27371,10,12);
+INSERT INTO `item_mods` VALUES (27371,11,37);
+INSERT INTO `item_mods` VALUES (27371,13,12);
+INSERT INTO `item_mods` VALUES (27371,14,30);
+INSERT INTO `item_mods` VALUES (27371,25,18);
+INSERT INTO `item_mods` VALUES (27371,29,5);
+INSERT INTO `item_mods` VALUES (27371,31,69);
+INSERT INTO `item_mods` VALUES (27371,68,72);
+INSERT INTO `item_mods` VALUES (27371,384,400);
+
+-- Erilaz Galea (26782) - RUN Empyrean Head
+INSERT INTO `item_mods` VALUES (26782,1,83);
+INSERT INTO `item_mods` VALUES (26782,2,69);
+INSERT INTO `item_mods` VALUES (26782,5,29);
+INSERT INTO `item_mods` VALUES (26782,8,12);
+INSERT INTO `item_mods` VALUES (26782,9,12);
+INSERT INTO `item_mods` VALUES (26782,10,8);
+INSERT INTO `item_mods` VALUES (26782,11,12);
+INSERT INTO `item_mods` VALUES (26782,12,12);
+INSERT INTO `item_mods` VALUES (26782,13,10);
+INSERT INTO `item_mods` VALUES (26782,14,11);
+INSERT INTO `item_mods` VALUES (26782,29,2);
+INSERT INTO `item_mods` VALUES (26782,31,47);
+INSERT INTO `item_mods` VALUES (26782,68,21);
+INSERT INTO `item_mods` VALUES (26782,369,1);
+INSERT INTO `item_mods` VALUES (26782,384,700);
+
+-- Erilaz Surcoat (26940) - RUN Empyrean Body
+INSERT INTO `item_mods` VALUES (26940,1,105);
+INSERT INTO `item_mods` VALUES (26940,2,90);
+INSERT INTO `item_mods` VALUES (26940,5,51);
+INSERT INTO `item_mods` VALUES (26940,8,17);
+INSERT INTO `item_mods` VALUES (26940,9,19);
+INSERT INTO `item_mods` VALUES (26940,10,14);
+INSERT INTO `item_mods` VALUES (26940,11,18);
+INSERT INTO `item_mods` VALUES (26940,12,16);
+INSERT INTO `item_mods` VALUES (26940,13,15);
+INSERT INTO `item_mods` VALUES (26940,14,15);
+INSERT INTO `item_mods` VALUES (26940,23,18);
+INSERT INTO `item_mods` VALUES (26940,25,18);
+INSERT INTO `item_mods` VALUES (26940,27,11);
+INSERT INTO `item_mods` VALUES (26940,29,3);
+INSERT INTO `item_mods` VALUES (26940,31,54);
+INSERT INTO `item_mods` VALUES (26940,68,24);
+INSERT INTO `item_mods` VALUES (26940,384,400);
+
+-- Erilaz Gauntlets (27094) - RUN Empyrean Hands
+INSERT INTO `item_mods` VALUES (27094,1,74);
+INSERT INTO `item_mods` VALUES (27094,2,14);
+INSERT INTO `item_mods` VALUES (27094,5,14);
+INSERT INTO `item_mods` VALUES (27094,8,12);
+INSERT INTO `item_mods` VALUES (27094,9,28);
+INSERT INTO `item_mods` VALUES (27094,10,19);
+INSERT INTO `item_mods` VALUES (27094,11,4);
+INSERT INTO `item_mods` VALUES (27094,12,10);
+INSERT INTO `item_mods` VALUES (27094,13,19);
+INSERT INTO `item_mods` VALUES (27094,14,12);
+INSERT INTO `item_mods` VALUES (27094,29,1);
+INSERT INTO `item_mods` VALUES (27094,31,25);
+INSERT INTO `item_mods` VALUES (27094,68,15);
+INSERT INTO `item_mods` VALUES (27094,384,400);
+
+-- Erilaz Leg Guards (27279) - RUN Empyrean Legs
+INSERT INTO `item_mods` VALUES (27279,1,93);
+INSERT INTO `item_mods` VALUES (27279,2,53);
+INSERT INTO `item_mods` VALUES (27279,5,66);
+INSERT INTO `item_mods` VALUES (27279,8,21);
+INSERT INTO `item_mods` VALUES (27279,10,9);
+INSERT INTO `item_mods` VALUES (27279,11,13);
+INSERT INTO `item_mods` VALUES (27279,12,21);
+INSERT INTO `item_mods` VALUES (27279,13,11);
+INSERT INTO `item_mods` VALUES (27279,14,8);
+INSERT INTO `item_mods` VALUES (27279,27,10);
+INSERT INTO `item_mods` VALUES (27279,29,3);
+INSERT INTO `item_mods` VALUES (27279,31,73);
+INSERT INTO `item_mods` VALUES (27279,68,20);
+INSERT INTO `item_mods` VALUES (27279,160,-6);
+INSERT INTO `item_mods` VALUES (27279,384,600);
+
+-- -------------------------------------------------------
+-- Omodaka (SAM Empyrean), Valorous, Lustratio zero-mod fixes
+-- -------------------------------------------------------
+
+-- Omodaka Somen (27655) - SAM Empyrean Head
+INSERT INTO `item_mods` VALUES (27655,1,37);
+INSERT INTO `item_mods` VALUES (27655,9,7);
+INSERT INTO `item_mods` VALUES (27655,11,7);
+INSERT INTO `item_mods` VALUES (27655,23,9);
+INSERT INTO `item_mods` VALUES (27655,73,6);
+
+-- Omodaka Haramaki (27795) - SAM Empyrean Body
+INSERT INTO `item_mods` VALUES (27795,1,70);
+INSERT INTO `item_mods` VALUES (27795,8,11);
+INSERT INTO `item_mods` VALUES (27795,9,11);
+INSERT INTO `item_mods` VALUES (27795,10,11);
+INSERT INTO `item_mods` VALUES (27795,23,20);
+
+-- Omodaka Gote (27935) - SAM Empyrean Hands
+INSERT INTO `item_mods` VALUES (27935,1,31);
+INSERT INTO `item_mods` VALUES (27935,9,6);
+INSERT INTO `item_mods` VALUES (27935,11,6);
+INSERT INTO `item_mods` VALUES (27935,25,13);
+INSERT INTO `item_mods` VALUES (27935,26,13);
+INSERT INTO `item_mods` VALUES (27935,68,8);
+INSERT INTO `item_mods` VALUES (27935,384,400);
+
+-- Omodaka Hizayoroi (28078) - SAM Empyrean Legs
+INSERT INTO `item_mods` VALUES (28078,1,47);
+INSERT INTO `item_mods` VALUES (28078,8,6);
+INSERT INTO `item_mods` VALUES (28078,9,6);
+INSERT INTO `item_mods` VALUES (28078,11,6);
+INSERT INTO `item_mods` VALUES (28078,384,600);
+
+-- Valorous Mitts (27139) - WAR/PLD/DRK Hands
+INSERT INTO `item_mods` VALUES (27139,1,102);
+INSERT INTO `item_mods` VALUES (27139,2,22);
+INSERT INTO `item_mods` VALUES (27139,8,13);
+INSERT INTO `item_mods` VALUES (27139,9,33);
+INSERT INTO `item_mods` VALUES (27139,10,33);
+INSERT INTO `item_mods` VALUES (27139,11,8);
+INSERT INTO `item_mods` VALUES (27139,12,7);
+INSERT INTO `item_mods` VALUES (27139,13,24);
+INSERT INTO `item_mods` VALUES (27139,14,17);
+INSERT INTO `item_mods` VALUES (27139,23,10);
+INSERT INTO `item_mods` VALUES (27139,25,10);
+INSERT INTO `item_mods` VALUES (27139,29,1);
+INSERT INTO `item_mods` VALUES (27139,31,32);
+INSERT INTO `item_mods` VALUES (27139,68,24);
+INSERT INTO `item_mods` VALUES (27139,384,400);
+
+-- Valorous Greaves (27495) - WAR/PLD/DRK Feet
+INSERT INTO `item_mods` VALUES (27495,1,84);
+INSERT INTO `item_mods` VALUES (27495,2,11);
+INSERT INTO `item_mods` VALUES (27495,8,17);
+INSERT INTO `item_mods` VALUES (27495,9,20);
+INSERT INTO `item_mods` VALUES (27495,10,17);
+INSERT INTO `item_mods` VALUES (27495,11,26);
+INSERT INTO `item_mods` VALUES (27495,13,6);
+INSERT INTO `item_mods` VALUES (27495,14,20);
+INSERT INTO `item_mods` VALUES (27495,23,12);
+INSERT INTO `item_mods` VALUES (27495,25,12);
+INSERT INTO `item_mods` VALUES (27495,29,2);
+INSERT INTO `item_mods` VALUES (27495,31,80);
+INSERT INTO `item_mods` VALUES (27495,68,55);
+INSERT INTO `item_mods` VALUES (27495,73,5);
+INSERT INTO `item_mods` VALUES (27495,160,-2);
+INSERT INTO `item_mods` VALUES (27495,165,4);
+INSERT INTO `item_mods` VALUES (27495,384,300);
+
+-- Lustratio Harness (26844) - All Jobs Body
+INSERT INTO `item_mods` VALUES (26844,1,140);
+INSERT INTO `item_mods` VALUES (26844,2,34);
+INSERT INTO `item_mods` VALUES (26844,8,38);
+INSERT INTO `item_mods` VALUES (26844,25,37);

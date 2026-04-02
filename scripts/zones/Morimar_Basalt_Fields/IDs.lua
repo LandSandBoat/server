@@ -32,7 +32,9 @@ zones[xi.zone.MORIMAR_BASALT_FIELDS] =
     },
     mob =
     {
-        REIVE_MOB_OFFSET = GetFirstID('Bedrock_Crag'),
+        REIVE_MOB_OFFSET  = GetFirstID('Bedrock_Crag'),
+        BURGEONING_FLAMES = GetFirstID('Burgeoning_Flames'),
+        DERANGED_AMERETAT = GetFirstID('Deranged_Ameretat'),
     },
     npc =
     {

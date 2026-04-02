@@ -32,7 +32,7 @@ return {
     ['Marnie']           = { event = 51 },
     ['Mewk_Chorosap']    = { event = 414 },
     ['Moulloie']         = { event = 46 },
-    ['Monisette']        = { event = 384 },
+    -- ['Monisette'] handled by scripts/zones/Port_Jeuno/npcs/Monisette.lua
     ['Naravime']         = { text = ID.text.ARRIVAL_NPC },
     ['Naurmaire']        = { event = 7 },
     ['Nikki']            = { event = 52 },

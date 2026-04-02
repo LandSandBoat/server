@@ -19,6 +19,7 @@ zones[xi.zone.MOH_GATES] =
     mob =
     {
         REIVE_MOB_OFFSET = GetFirstID('Knotted_Root'),
+        STAUMARTH        = GetFirstID('Staumarth'),
     },
     npc =
     {

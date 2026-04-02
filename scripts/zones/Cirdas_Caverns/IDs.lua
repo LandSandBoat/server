@@ -19,6 +19,7 @@ zones[xi.zone.CIRDAS_CAVERNS] =
     mob =
     {
         REIVE_MOB_OFFSET = GetFirstID('Knotted_Root'),
+        ANCESTRAL_RAGE   = GetFirstID('Ancestral_Rage'),
     },
     npc =
     {

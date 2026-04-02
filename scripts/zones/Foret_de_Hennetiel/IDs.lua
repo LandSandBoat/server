@@ -34,6 +34,7 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
     mob =
     {
         REIVE_MOB_OFFSET = GetFirstID('Broadleaf_Palm'),
+        INSIDIO          = GetFirstID('Insidio'),
     },
     npc =
     {

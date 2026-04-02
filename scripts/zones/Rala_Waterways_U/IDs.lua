@@ -18,7 +18,8 @@ zones[xi.zone.RALA_WATERWAYS_U] =
     },
     mob =
     {
-        ARCIELA_BTS = GetFirstID('Arciela'), -- Behind the Sluices
+        ARCIELA_BTS    = GetFirstID('Arciela'), -- Behind the Sluices
+        ZURKO_BAZURKO  = GetFirstID('Zurko-Bazurko'),
     },
     npc =
     {

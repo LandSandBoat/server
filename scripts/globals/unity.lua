@@ -91,6 +91,7 @@ local unityOptions =
         [10] = { xi.item.LITTLE_LUGWORM,              0, 99, 10    },
         [11] = { xi.item.TRAINING_MANUAL,             0, 99, 10    },
         [12] = { xi.item.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
+        [13] = { 8974,                                0, 12, 500   }, -- Harold's Ore
     },
 }
 
@@ -113,7 +114,49 @@ local function getChangeUnityCost(player, selection)
     return changeCost
 end
 
-xi.unity.onTrade = function(player, npc, trade, eventid)
+local HAROLDS_ORE = 8974
+local UPGRADE_ACCOLADE_COST = 1000
+
+local unityGearUpgrades =
+{
+    [11503] = 26711, -- Perle Salade -> +1
+    [13759] = 27851, -- Perle Hauberk -> +1
+    [12745] = 27997, -- Perle Moufles -> +1
+    [14210] = 28138, -- Perle Brayettes -> +1
+    [11413] = 28277, -- Perle Sollerets -> +1
+    [11504] = 26712, -- Aurore Beret -> +1
+    [13760] = 27852, -- Aurore Doublet -> +1
+    [12746] = 27998, -- Aurore Gloves -> +1
+    [14257] = 28139, -- Aurore Brais -> +1
+    [11414] = 28278, -- Aurore Gaiters -> +1
+    [11505] = 26713, -- Teal Chapeau -> +1
+    [13778] = 27853, -- Teal Saio -> +1
+    [12747] = 27999, -- Teal Cuffs -> +1
+    [14258] = 28140, -- Teal Slops -> +1
+    [11415] = 28279, -- Teal Pigaches -> +1
+}
+
+xi.unity.onTrade = function(player, npc, trade)
+    for baseId, upgradedId in pairs(unityGearUpgrades) do
+        if
+            trade:hasItemQty(baseId, 1) and
+            trade:hasItemQty(HAROLDS_ORE, 3) and
+            trade:getItemCount() == 4
+        then
+            local accolades = player:getCurrency('unity_accolades')
+            if accolades < UPGRADE_ACCOLADE_COST then
+                player:printToPlayer('You need at least 1,000 Unity Accolades to upgrade this equipment.', xi.msg.channel.SYSTEM_3)
+                return
+            end
+
+            if npcUtil.giveItem(player, upgradedId) then
+                player:confirmTrade()
+                player:delCurrency('unity_accolades', UPGRADE_ACCOLADE_COST)
+                player:printToPlayer('Your equipment has been upgraded!', xi.msg.channel.SYSTEM_3)
+            end
+            return
+        end
+    end
 end
 
 xi.unity.onTrigger = function(player, npc)
