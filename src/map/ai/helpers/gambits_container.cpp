@@ -46,108 +46,183 @@ namespace gambits
 
 namespace
 {
-    const char* TargetToString(G_TARGET t)
+const char* TargetToString(G_TARGET t)
+{
+    switch (t)
     {
-        switch (t)
-        {
-            case G_TARGET::SELF:        return "SELF";
-            case G_TARGET::PARTY:       return "PARTY";
-            case G_TARGET::TARGET:      return "TARGET";
-            case G_TARGET::MASTER:      return "MASTER";
-            case G_TARGET::TANK:        return "TANK";
-            case G_TARGET::MELEE:       return "MELEE";
-            case G_TARGET::RANGED:      return "RANGED";
-            case G_TARGET::CASTER:      return "CASTER";
-            case G_TARGET::TOP_ENMITY:  return "TOP_ENMITY";
-            case G_TARGET::CURILLA:     return "CURILLA";
-            case G_TARGET::PARTY_DEAD:  return "PARTY_DEAD";
-            case G_TARGET::PARTY_MULTI: return "PARTY_MULTI";
-            default:                    return "UNKNOWN";
-        }
+        case G_TARGET::SELF:
+            return "SELF";
+        case G_TARGET::PARTY:
+            return "PARTY";
+        case G_TARGET::TARGET:
+            return "TARGET";
+        case G_TARGET::MASTER:
+            return "MASTER";
+        case G_TARGET::TANK:
+            return "TANK";
+        case G_TARGET::MELEE:
+            return "MELEE";
+        case G_TARGET::RANGED:
+            return "RANGED";
+        case G_TARGET::CASTER:
+            return "CASTER";
+        case G_TARGET::TOP_ENMITY:
+            return "TOP_ENMITY";
+        case G_TARGET::CURILLA:
+            return "CURILLA";
+        case G_TARGET::PARTY_DEAD:
+            return "PARTY_DEAD";
+        case G_TARGET::PARTY_MULTI:
+            return "PARTY_MULTI";
+        default:
+            return "UNKNOWN";
     }
+}
 
-    const char* ConditionToString(G_CONDITION c)
+const char* ConditionToString(G_CONDITION c)
+{
+    switch (c)
     {
-        switch (c)
-        {
-            case G_CONDITION::ALWAYS:             return "ALWAYS";
-            case G_CONDITION::HPP_LT:             return "HPP_LT";
-            case G_CONDITION::HPP_GTE:            return "HPP_GTE";
-            case G_CONDITION::MPP_LT:             return "MPP_LT";
-            case G_CONDITION::TP_LT:              return "TP_LT";
-            case G_CONDITION::TP_GTE:             return "TP_GTE";
-            case G_CONDITION::STATUS:             return "STATUS";
-            case G_CONDITION::NOT_STATUS:         return "NOT_STATUS";
-            case G_CONDITION::STATUS_FLAG:        return "STATUS_FLAG";
-            case G_CONDITION::HAS_TOP_ENMITY:     return "HAS_TOP_ENMITY";
-            case G_CONDITION::NOT_HAS_TOP_ENMITY: return "NOT_HAS_TOP_ENMITY";
-            case G_CONDITION::SC_AVAILABLE:       return "SC_AVAILABLE";
-            case G_CONDITION::NOT_SC_AVAILABLE:   return "NOT_SC_AVAILABLE";
-            case G_CONDITION::MB_AVAILABLE:       return "MB_AVAILABLE";
-            case G_CONDITION::READYING_WS:        return "READYING_WS";
-            case G_CONDITION::READYING_MS:        return "READYING_MS";
-            case G_CONDITION::READYING_JA:        return "READYING_JA";
-            case G_CONDITION::CASTING_MA:         return "CASTING_MA";
-            case G_CONDITION::RANDOM:             return "RANDOM";
-            case G_CONDITION::NO_SAMBA:           return "NO_SAMBA";
-            case G_CONDITION::NO_STORM:           return "NO_STORM";
-            case G_CONDITION::PT_HAS_TANK:        return "PT_HAS_TANK";
-            case G_CONDITION::NOT_PT_HAS_TANK:    return "NOT_PT_HAS_TANK";
-            case G_CONDITION::IS_ECOSYSTEM:       return "IS_ECOSYSTEM";
-            case G_CONDITION::HP_MISSING:         return "HP_MISSING";
-            case G_CONDITION::MPP_GTE:            return "MPP_GTE";
-            case G_CONDITION::TARGET_HPP_LT:      return "TARGET_HPP_LT";
-            case G_CONDITION::TARGET_CASTING:     return "TARGET_CASTING";
-            case G_CONDITION::TARGET_READYING:    return "TARGET_READYING";
-            case G_CONDITION::DISTANCE_GT:        return "DISTANCE_GT";
-            case G_CONDITION::NOT_ENGAGED:        return "NOT_ENGAGED";
-            case G_CONDITION::PARTY_HPP_LT:       return "PARTY_HPP_LT";
-            case G_CONDITION::MP_LT:              return "MP_LT";
-            case G_CONDITION::MP_GTE:             return "MP_GTE";
-            case G_CONDITION::HP_LT:              return "HP_LT";
-            case G_CONDITION::HP_GTE:             return "HP_GTE";
-            default:                              return "UNKNOWN";
-        }
+        case G_CONDITION::ALWAYS:
+            return "ALWAYS";
+        case G_CONDITION::HPP_LT:
+            return "HPP_LT";
+        case G_CONDITION::HPP_GTE:
+            return "HPP_GTE";
+        case G_CONDITION::MPP_LT:
+            return "MPP_LT";
+        case G_CONDITION::TP_LT:
+            return "TP_LT";
+        case G_CONDITION::TP_GTE:
+            return "TP_GTE";
+        case G_CONDITION::STATUS:
+            return "STATUS";
+        case G_CONDITION::NOT_STATUS:
+            return "NOT_STATUS";
+        case G_CONDITION::STATUS_FLAG:
+            return "STATUS_FLAG";
+        case G_CONDITION::HAS_TOP_ENMITY:
+            return "HAS_TOP_ENMITY";
+        case G_CONDITION::NOT_HAS_TOP_ENMITY:
+            return "NOT_HAS_TOP_ENMITY";
+        case G_CONDITION::SC_AVAILABLE:
+            return "SC_AVAILABLE";
+        case G_CONDITION::NOT_SC_AVAILABLE:
+            return "NOT_SC_AVAILABLE";
+        case G_CONDITION::MB_AVAILABLE:
+            return "MB_AVAILABLE";
+        case G_CONDITION::READYING_WS:
+            return "READYING_WS";
+        case G_CONDITION::READYING_MS:
+            return "READYING_MS";
+        case G_CONDITION::READYING_JA:
+            return "READYING_JA";
+        case G_CONDITION::CASTING_MA:
+            return "CASTING_MA";
+        case G_CONDITION::RANDOM:
+            return "RANDOM";
+        case G_CONDITION::NO_SAMBA:
+            return "NO_SAMBA";
+        case G_CONDITION::NO_STORM:
+            return "NO_STORM";
+        case G_CONDITION::PT_HAS_TANK:
+            return "PT_HAS_TANK";
+        case G_CONDITION::NOT_PT_HAS_TANK:
+            return "NOT_PT_HAS_TANK";
+        case G_CONDITION::IS_ECOSYSTEM:
+            return "IS_ECOSYSTEM";
+        case G_CONDITION::HP_MISSING:
+            return "HP_MISSING";
+        case G_CONDITION::MPP_GTE:
+            return "MPP_GTE";
+        case G_CONDITION::TARGET_HPP_LT:
+            return "TARGET_HPP_LT";
+        case G_CONDITION::TARGET_CASTING:
+            return "TARGET_CASTING";
+        case G_CONDITION::TARGET_READYING:
+            return "TARGET_READYING";
+        case G_CONDITION::DISTANCE_GT:
+            return "DISTANCE_GT";
+        case G_CONDITION::NOT_ENGAGED:
+            return "NOT_ENGAGED";
+        case G_CONDITION::PARTY_HPP_LT:
+            return "PARTY_HPP_LT";
+        case G_CONDITION::MP_LT:
+            return "MP_LT";
+        case G_CONDITION::MP_GTE:
+            return "MP_GTE";
+        case G_CONDITION::HP_LT:
+            return "HP_LT";
+        case G_CONDITION::HP_GTE:
+            return "HP_GTE";
+        default:
+            return "UNKNOWN";
     }
+}
 
-    const char* ReactionToString(G_REACTION r)
+const char* ReactionToString(G_REACTION r)
+{
+    switch (r)
     {
-        switch (r)
-        {
-            case G_REACTION::ATTACK:  return "ATTACK";
-            case G_REACTION::RATTACK: return "RATTACK";
-            case G_REACTION::MA:      return "MA";
-            case G_REACTION::JA:      return "JA";
-            case G_REACTION::WS:      return "WS";
-            case G_REACTION::MS:      return "MS";
-            default:                  return "UNKNOWN";
-        }
+        case G_REACTION::ATTACK:
+            return "ATTACK";
+        case G_REACTION::RATTACK:
+            return "RATTACK";
+        case G_REACTION::MA:
+            return "MA";
+        case G_REACTION::JA:
+            return "JA";
+        case G_REACTION::WS:
+            return "WS";
+        case G_REACTION::MS:
+            return "MS";
+        default:
+            return "UNKNOWN";
     }
+}
 
-    const char* SelectToString(G_SELECT s)
+const char* SelectToString(G_SELECT s)
+{
+    switch (s)
     {
-        switch (s)
-        {
-            case G_SELECT::HIGHEST:             return "HIGHEST";
-            case G_SELECT::LOWEST:              return "LOWEST";
-            case G_SELECT::SPECIFIC:            return "SPECIFIC";
-            case G_SELECT::RANDOM:              return "RANDOM";
-            case G_SELECT::MB_ELEMENT:          return "MB_ELEMENT";
-            case G_SELECT::SPECIAL_AYAME:       return "SPECIAL_AYAME";
-            case G_SELECT::BEST_AGAINST_TARGET: return "BEST_AGAINST_TARGET";
-            case G_SELECT::BEST_SAMBA:          return "BEST_SAMBA";
-            case G_SELECT::HIGHEST_WALTZ:       return "HIGHEST_WALTZ";
-            case G_SELECT::ENTRUSTED:           return "ENTRUSTED";
-            case G_SELECT::BEST_INDI:           return "BEST_INDI";
-            case G_SELECT::STORM_DAY:           return "STORM_DAY";
-            case G_SELECT::HELIX_DAY:           return "HELIX_DAY";
-            case G_SELECT::EN_MOB_WEAKNESS:     return "EN_MOB_WEAKNESS";
-            case G_SELECT::STORM_MOB_WEAKNESS:  return "STORM_MOB_WEAKNESS";
-            case G_SELECT::HELIX_MOB_WEAKNESS:  return "HELIX_MOB_WEAKNESS";
-            case G_SELECT::MP_SCALED:           return "MP_SCALED";
-            default:                            return "UNKNOWN";
-        }
+        case G_SELECT::HIGHEST:
+            return "HIGHEST";
+        case G_SELECT::LOWEST:
+            return "LOWEST";
+        case G_SELECT::SPECIFIC:
+            return "SPECIFIC";
+        case G_SELECT::RANDOM:
+            return "RANDOM";
+        case G_SELECT::MB_ELEMENT:
+            return "MB_ELEMENT";
+        case G_SELECT::SPECIAL_AYAME:
+            return "SPECIAL_AYAME";
+        case G_SELECT::BEST_AGAINST_TARGET:
+            return "BEST_AGAINST_TARGET";
+        case G_SELECT::BEST_SAMBA:
+            return "BEST_SAMBA";
+        case G_SELECT::HIGHEST_WALTZ:
+            return "HIGHEST_WALTZ";
+        case G_SELECT::ENTRUSTED:
+            return "ENTRUSTED";
+        case G_SELECT::BEST_INDI:
+            return "BEST_INDI";
+        case G_SELECT::STORM_DAY:
+            return "STORM_DAY";
+        case G_SELECT::HELIX_DAY:
+            return "HELIX_DAY";
+        case G_SELECT::EN_MOB_WEAKNESS:
+            return "EN_MOB_WEAKNESS";
+        case G_SELECT::STORM_MOB_WEAKNESS:
+            return "STORM_MOB_WEAKNESS";
+        case G_SELECT::HELIX_MOB_WEAKNESS:
+            return "HELIX_MOB_WEAKNESS";
+        case G_SELECT::MP_SCALED:
+            return "MP_SCALED";
+        default:
+            return "UNKNOWN";
     }
+}
 } // anonymous namespace
 
 // Return a new unique identifier for a gambit
@@ -256,8 +331,10 @@ void CGambitsContainer::Tick(timer::time_point tick)
     DebugTrusts("[Trust:%s] Tick: evaluating %zu gambits (HP:%d/%d MP:%d/%d TP:%d)",
                 POwner->name.c_str(),
                 gambits.size(),
-                POwner->health.hp, POwner->health.maxhp,
-                POwner->health.mp, POwner->health.maxmp,
+                POwner->health.hp,
+                POwner->health.maxhp,
+                POwner->health.mp,
+                POwner->health.maxmp,
                 POwner->health.tp);
 
     // Didn't WS/MS, go for other Gambits
@@ -1080,8 +1157,8 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             {
                 auto* battleTarget = POwner->GetBattleTarget();
                 bool  result       = battleTarget &&
-                    (battleTarget->PAI->IsCurrentState<CWeaponSkillState>() ||
-                     battleTarget->PAI->IsCurrentState<CMobSkillState>());
+                              (battleTarget->PAI->IsCurrentState<CWeaponSkillState>() ||
+                               battleTarget->PAI->IsCurrentState<CMobSkillState>());
                 DebugTrusts("[Trust:%s] TARGET_READYING: %s = %s",
                             POwner->name.c_str(),
                             battleTarget ? battleTarget->name.c_str() : "null",

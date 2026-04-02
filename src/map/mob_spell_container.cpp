@@ -304,7 +304,7 @@ std::optional<SpellID> CMobSpellContainer::GetMPScaledAvailable(SPELLFAMILY fami
     {
         // Scale index by MP percentage: 100% MP = best spell, 0% MP = worst spell
         auto   mpp   = m_PMob->GetMPP();
-        size_t index  = (matches.size() - 1) * mpp / 100;
+        size_t index = (matches.size() - 1) * mpp / 100;
 
         DebugTrusts("[Trust:%s] GetMPScaledAvailable(family=%u): %zu matches, MPP=%u%%, index=%zu, spell=%u",
                     m_PMob->name.c_str(),
