@@ -820,6 +820,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
+        ['hitsLanded']      = 1,
         ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
         ['bonusTP']         = wsParams.bonusTP or 0,
