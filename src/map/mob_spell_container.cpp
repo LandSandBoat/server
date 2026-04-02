@@ -498,8 +498,14 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
                 m_PMob->name.c_str(),
                 PTarget->name.c_str(),
                 Weakness_Element,
-                resistances[0], resistances[1], resistances[2], resistances[3],
-                resistances[4], resistances[5], resistances[6], resistances[7]);
+                resistances[0],
+                resistances[1],
+                resistances[2],
+                resistances[3],
+                resistances[4],
+                resistances[5],
+                resistances[6],
+                resistances[7]);
     if (spell::GetSpell(spellId) != nullptr)
     {
         auto Spell_Element = spell::GetSpell(spellId)->getElement();
