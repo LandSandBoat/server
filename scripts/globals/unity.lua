@@ -114,8 +114,8 @@ local function getChangeUnityCost(player, selection)
     return changeCost
 end
 
-local HAROLDS_ORE = 8974
-local UPGRADE_ACCOLADE_COST = 1000
+local haroldsOre = 8974
+local upgradeAccoladeCost = 1000
 
 local unityGearUpgrades =
 {
@@ -140,20 +140,21 @@ xi.unity.onTrade = function(player, npc, trade)
     for baseId, upgradedId in pairs(unityGearUpgrades) do
         if
             trade:hasItemQty(baseId, 1) and
-            trade:hasItemQty(HAROLDS_ORE, 3) and
+            trade:hasItemQty(haroldsOre, 3) and
             trade:getItemCount() == 4
         then
             local accolades = player:getCurrency('unity_accolades')
-            if accolades < UPGRADE_ACCOLADE_COST then
+            if accolades < upgradeAccoladeCost then
                 player:printToPlayer('You need at least 1,000 Unity Accolades to upgrade this equipment.', xi.msg.channel.SYSTEM_3)
                 return
             end
 
             if npcUtil.giveItem(player, upgradedId) then
                 player:confirmTrade()
-                player:delCurrency('unity_accolades', UPGRADE_ACCOLADE_COST)
+                player:delCurrency('unity_accolades', upgradeAccoladeCost)
                 player:printToPlayer('Your equipment has been upgraded!', xi.msg.channel.SYSTEM_3)
             end
+
             return
         end
     end

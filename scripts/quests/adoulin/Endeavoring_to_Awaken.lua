@@ -8,7 +8,6 @@
 -- NOTE: Sverdheid NM does not exist in mob_spawn_points yet.
 --       Quest simplified to single NM fight (Zurko-Bazurko) until Sverdheid is added.
 -----------------------------------
-local ralaID = zones[xi.zone.RALA_WATERWAYS_U]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN)

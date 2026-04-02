@@ -29,7 +29,7 @@ local slotMaterials =
     [5] = xi.item.PIECE_OF_OXBLOOD,
 }
 
-local REMS_QTY = 10
+local remsQty = 10
 
 -- Reforge map: P1 input ID -> { P2 output ID, chapter number }
 local reforgeMap =
@@ -466,14 +466,15 @@ entity.onTrade = function(player, npc, trade)
 
         if
             trade:hasItemQty(p1Id, 1) and
-            trade:hasItemQty(remsItem, REMS_QTY) and
+            trade:hasItemQty(remsItem, remsQty) and
             trade:hasItemQty(slotMat, 1) and
-            trade:getItemCount() == 1 + REMS_QTY + 1
+            trade:getItemCount() == 1 + remsQty + 1
         then
             if npcUtil.giveItem(player, p2Id) then
                 player:confirmTrade()
                 player:printToPlayer('Monisette: Your armor has been reforged to its full potential!', xi.msg.channel.NS_SAY)
             end
+
             return
         end
     end

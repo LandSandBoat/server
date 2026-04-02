@@ -6,7 +6,6 @@
 -- Staumarth : !pos 396.500 29.520 -167.240 269 (Moh Gates)
 -- Reward: Beorc Sword + unlocks Jerra Ndala commissions
 -----------------------------------
-local mohID = zones[xi.zone.MOH_GATES]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS)

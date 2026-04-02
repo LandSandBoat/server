@@ -49,6 +49,7 @@ entity.onTrade = function(player, npc, trade)
             else
                 player:printToPlayer('Octavien: You need ' .. commission.cost .. ' Bayld. You only have ' .. bayld .. '.', xi.msg.channel.NS_SAY)
             end
+
             return
         end
     end

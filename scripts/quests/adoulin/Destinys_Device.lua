@@ -6,7 +6,6 @@
 -- Insidio  : !pos 465.138 -1.813 -356.476 262 (Foret de Hennetiel)
 -- Reward: Runeist Coat
 -----------------------------------
-local foretID = zones[xi.zone.FORET_DE_HENNETIEL]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE)
