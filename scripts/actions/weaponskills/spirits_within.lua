@@ -30,6 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     {
         wsID = wsID, -- need 'calcParams.wsID' passed to global
         criticalHit = false,
+        hitsLanded = 1,
         tpHitsLanded = 0,
         extraHitsLanded = 0,
         shadowsAbsorbed = 0,
