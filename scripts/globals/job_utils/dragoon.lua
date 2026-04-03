@@ -354,10 +354,13 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
         local copyEffect = nil
         while copyi < empathyTotal do
             copyEffect = validEffects[copyi + 1]
+            ---@diagnostic disable-next-line: need-check-nil, undefined-field
             if wyvern:hasStatusEffect(copyEffect:getEffectType()) then
+                ---@diagnostic disable-next-line: need-check-nil, undefined-field
                 wyvern:delStatusEffectSilent(copyEffect:getEffectType())
             end
 
+            ---@diagnostic disable-next-line: need-check-nil, undefined-field
             wyvern:addStatusEffect(copyEffect:getEffectType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining()) / 1000)) -- id, power, tick, duration(convert ms to s)
             copyi = copyi + 1
         end
