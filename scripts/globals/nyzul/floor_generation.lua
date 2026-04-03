@@ -1323,6 +1323,7 @@ xi.nyzul.prepareMobs = function(instance)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
+            ---@diagnostic disable-next-line: undefined-field
             GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
             SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET, instance)
 
@@ -1340,6 +1341,7 @@ xi.nyzul.prepareMobs = function(instance)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
+            ---@diagnostic disable-next-line: undefined-field
             GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
             SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance)
 
@@ -1359,6 +1361,7 @@ xi.nyzul.prepareMobs = function(instance)
                 spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                 -- Spawn Mob.
+                ---@diagnostic disable-next-line: undefined-field
                 GetMobByID(i, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
                 SpawnMob(i, instance)
 
@@ -1434,6 +1437,7 @@ xi.nyzul.prepareMobs = function(instance)
             spawnPoint        = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
+            ---@diagnostic disable-next-line: undefined-field
             GetMobByID(mobID, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
             SpawnMob(mobID, instance)
 
