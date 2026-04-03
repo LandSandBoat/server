@@ -49,7 +49,7 @@ quest.sections =
             ['Sylvie'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.ACUEX_ORE, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { 4042, 3 } }) then -- Acuex Ore x3
                         player:confirmTrade()
                         player:printToPlayer('Sylvie: Thank you! Now please visit the Overgrown Grave in Cirdas Caverns.', xi.msg.channel.NS_SAY)
                         quest:setVar(player, 'Prog', 1)
