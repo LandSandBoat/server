@@ -135,13 +135,10 @@ void view_session::read_func()
             }
 
             // Perform character deletion.
-            // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
+            // Instead of performing an actual character deletion, we simply set accid to 0 and name to "deleted".
             // This allows character recovery.
 
-            db::preparedStmt("UPDATE chars SET accid = 0, original_accid = ? WHERE charid = ? AND accid = ?",
-                             session.accountID,
-                             charID,
-                             session.accountID);
+            db::preparedStmt("UPDATE chars SET accid = 0, charname = '' WHERE charid = ? AND accid = ?", charID, session.accountID);
         }
         break;
         case 0x21: // 33: Registering character name onto the lobby server
