@@ -49,7 +49,7 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 ## What Partially Works (usable but gaps)
 
 - ~~**Trusts** — 49/120 have AI, rest auto-attack only~~ FIXED: All 120 have AI
-- **Abyssea** — NMs spawn but most lack custom AI, many atma give no stats
+- **Abyssea** — NMs spawn but most lack custom AI. Atma: 39 more filled (2026-04-04), only 3 conditional-only remain empty
 - **ROV** — completable but 5 boss fights auto-complete
 - **WotG missions** — ~8 need battlefield wiring
 - **Assault** — only 9 of 50 scenarios
@@ -126,19 +126,21 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 ### Gear/Upgrade Pipeline
 - Sagheera, Switchstix, Magian Trials: WORKS
 - Monisette (iLvl 109/119 armor): IMPLEMENTED (2026-04-02) — 421 mappings, all 22 jobs
-- Oboro (REMA weapons to 119): MISSING
-- 71 AF/Relic/Empyrean +3 pieces have zero mods
+- Oboro (REMA weapons to 119): IMPLEMENTED (2026-04-04) — 48 weapons across Relic/Mythic/Empyrean
+- 71 AF/Relic/Empyrean +3 pieces: 35 now have full mods (2026-04-04), 36 need item_equipment.sql implementation first
 - 1,105 iLvl 119 items missing mods (upstream gap)
 
 ### Key Broken Systems (Phase 1 corrections)
-- Limbus: BROKEN (Swirling Vortex entry commented out) — Phase 1 said WORKS, was wrong
+- ~~Limbus: BROKEN~~ — Re-investigated 2026-04-04: entry script EXISTS and is functional. Phase 1 finding was wrong, Phase 2 correction was also wrong. Limbus WORKS.
 
 ## Recommendations for a 4-Player Server
 
 1. ~~**#1 Priority**: Implement Monisette~~ DONE (2026-04-02)
-2. **#1 Priority**: Implement Oboro — unlocks REMA weapon upgrades to 119
-3. **High value**: Fill 69 empty atma mods, wire up WotG battlefields
-4. **Medium value**: Fix Limbus entry, add PUP AF quests, fix 71 +3 armor mods
+2. ~~**#1 Priority**: Implement Oboro~~ DONE (2026-04-04) — 48 weapons (14 Relic + 20 Mythic + 14 Empyrean)
+3. ~~**High value**: Fill empty atma mods~~ DONE (2026-04-04) — 39/42 filled (3 conditional-only left empty)
+4. ~~**Medium value**: Fix Limbus entry~~ NOT BROKEN (audit was wrong, entry script exists and works)
+5. ~~**Medium value**: Fix AF+3 zero-mod pieces~~ DONE (2026-04-04) — 35 items got full stat blocks (670 mod entries)
+6. **Medium value**: Add PUP AF quests, wire up WotG battlefields
 5. **Continue**: Voidwatch (in progress), ROV boss battles
 6. **Don't worry about**: Campaign, Besieged, Odyssey, Master Levels — designed for large populations
 7. **Consider**: `UNLOCK_OUTPOST_WARPS=1`, increase Mog Sack slots, seed AH with common items

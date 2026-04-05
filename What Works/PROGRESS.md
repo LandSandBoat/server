@@ -245,11 +245,11 @@ Track cross-cutting issues here so they don't get lost:
 - **Silent fail QOL pattern** -- Some NPC scripts silently fail on position checks with no player feedback. Example: Phomiuna Aqueducts _ir9.lua (fixed). May exist elsewhere. (from manual QA)
 - **Snipper droplist 3913 missing** -- FALSE ALARM: Snippers use droplists 482/483/2281, all exist. Agent confused pool ID 3913 (Thunder_Fiend) with a droplist. (verified 2026-03-28)
 - ~~**Monisette has no script**~~ -- FIXED (2026-04-02): Monisette implemented with 421 reforge mappings, proper Rem's Tale + slot material requirements for all 22 jobs. (from gear audit)
-- **Oboro has no script** -- REMA weapon reforging to iLvl 119 is non-functional. (from gear audit)
+- ~~**Oboro has no script**~~ -- FIXED (2026-04-04): Oboro implemented with 48 weapon reforges (14 Relic + 20 Mythic + 14 Empyrean), lv90 + 300 materials → iLvl 119. (from gear audit)
 - **Curio Vendor gated behind ROV KI** -- Retail-accurate but harsh for new players on small server. (from phase2 lv1-10)
 - **Maiden of the Dusk (WotG 51) Lilith battlefield MISSING** -- No battlefield script, no Walk_of_Echoes battlefield dir. Blocks WotG story but not level caps. (from phase2 lv75-99)
 - **SoA imprimaturGate BLOCKS at mission 1-6** -- FIXED: function now returns true. (from phase2 soa)
-- **Limbus entry BROKEN** -- Swirling Vortex script entirely commented out, xi.limbus module doesn't exist. NOT a quick fix. Phase 1 "WORKS" was wrong. (from battlefield_access audit)
+- ~~**Limbus entry BROKEN**~~ -- FALSE ALARM (2026-04-04): Re-investigated — AlTaieu/npcs/Swirling_Vortex.lua EXISTS and is functional, xi.limbus module EXISTS at scripts/globals/limbus.lua. Both Temenos and Apollyon instances work. Phase 1 "WORKS" was correct after all.
 - **Einherjar disabled by default** -- FIXED: added EINHERJAR_ENABLED=true to settings/default/main.lua (from battlefield_access audit)
 - **toau module enabled** -- FIXED: added to modules/init.txt for pre-RMT drops (from NM audit)
 - **Salvage Remnants Permit commented out** -- FIXED: uncommented Zasshal trigger logic (from expansion zone paths)

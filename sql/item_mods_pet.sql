@@ -990,6 +990,20 @@ INSERT INTO `item_mods_pet` VALUES (23392,369,2,3);   -- Automaton - REFRESH: 2
 INSERT INTO `item_mods_pet` VALUES (23392,370,6,3);   -- Automaton - REGEN: 6
 INSERT INTO `item_mods_pet` VALUES (23392,384,700,3); -- Automaton - HASTE_GEAR: 700
 
+-- Ankusa Helm +3
+INSERT INTO `item_mods_pet` VALUES (23406,384,600,0); -- All Pets - HASTE_GEAR: 600
+
+-- Glyphic Horn +3
+INSERT INTO `item_mods_pet` VALUES (23412,23,62,1); -- Avatar - ATT: 62
+
+-- Pitre Taj +3
+INSERT INTO `item_mods_pet` VALUES (23415,23,57,3);  -- Automaton - ATT: 57
+INSERT INTO `item_mods_pet` VALUES (23415,24,57,3);  -- Automaton - RATT: 57
+INSERT INTO `item_mods_pet` VALUES (23415,25,37,3);  -- Automaton - ACC: 37
+INSERT INTO `item_mods_pet` VALUES (23415,26,37,3);  -- Automaton - RACC: 37
+INSERT INTO `item_mods_pet` VALUES (23415,369,5,3);  -- Automaton - REFRESH: 5
+INSERT INTO `item_mods_pet` VALUES (23415,370,5,3);  -- Automaton - REGEN: 5
+
 -- Bagua Galero +3
 INSERT INTO `item_mods_pet` VALUES (23418,2,600,8); -- Luopan - HP: 600
 
@@ -1005,6 +1019,21 @@ INSERT INTO `item_mods_pet` VALUES (23456,126,16,1); -- Avatar - BP_DAMAGE: 16
 INSERT INTO `item_mods_pet` VALUES (23459,2,220,3);   -- Automaton - HP: 220
 INSERT INTO `item_mods_pet` VALUES (23459,5,220,3);   -- Automaton - MP: 220
 INSERT INTO `item_mods_pet` VALUES (23459,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Ankusa Jackcoat +3
+INSERT INTO `item_mods_pet` VALUES (23473,288,5,0);   -- All Pets - DOUBLE_ATTACK: 5
+INSERT INTO `item_mods_pet` VALUES (23473,384,700,0);  -- All Pets - HASTE_GEAR: 700
+
+-- Glyphic Doublet +3
+INSERT INTO `item_mods_pet` VALUES (23479,165,20,1);  -- Avatar - CRITHITRATE: 20
+INSERT INTO `item_mods_pet` VALUES (23479,288,15,1);  -- Avatar - DOUBLE_ATTACK: 15
+
+-- Pitre Tobe +3
+INSERT INTO `item_mods_pet` VALUES (23482,23,60,3);   -- Automaton - ATT: 60
+INSERT INTO `item_mods_pet` VALUES (23482,24,60,3);   -- Automaton - RATT: 60
+INSERT INTO `item_mods_pet` VALUES (23482,25,50,3);   -- Automaton - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23482,26,50,3);   -- Automaton - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23482,73,15,3);   -- Automaton - STORETP: 15
 
 -- Foire Dastanas +3
 INSERT INTO `item_mods_pet` VALUES (23526,25,42,3);   -- Automaton - ACC: 42
