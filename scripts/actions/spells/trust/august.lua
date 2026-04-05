@@ -60,7 +60,9 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DMG, -10)
     mob:addMod(xi.mod.UFASTCAST, 50) -- August casts stupid fast
     mob:setMod(xi.mod.SHIELDBLOCKRATE, xi.trust.modGrowthValMax(mob, 35)) -- around 35% max block rate at 99 from testing
-
+    mob:addMod(xi.mod.HPP, 10)
+    mob:addMod(xi.mod.ENMITY, 25)
+    
     -- Founders gear mods: August gets all effects from founders gear
     -- see xi.trust.modGrowthVal in trust.lua for current curve value
     mob:addMod(xi.mod.MDEF, xi.trust.modGrowthValMax(mob, 12))            -- Founders gear: MDEF + 12
@@ -73,26 +75,6 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MEVA, xi.trust.modGrowthValMax(mob, 299))           -- Founders gear: MEVA + 299
     mob:addMod(xi.mod.MATT, xi.trust.modGrowthValMax(mob, 60))            -- Founders gear: MATT + 60
     -- there is a few more, but these make the most sense for now.
-
-    --[[ 
-    -- [DEBUGGING] Remove comments when finished
-    local modList =
-    {
-        {xi.mod.MDEF,'MDEF:'},
-        {xi.mod.SPELLINTERRUPT, 'SIRD:'},
-        {xi.mod.HASTE_GEAR, 'HASTE_GEAR:'},
-        {xi.mod.ACC, 'ACC:'},
-        {xi.mod.ATT, 'ATT:'},
-        {xi.mod.MACC, 'ACC:'},
-        {xi.mod.EVA, 'EVA:'},
-        {xi.mod.MEVA, 'MEVA:'},
-        {xi.mod.MATT, 'MATT'},
-    }
-
-    for i = 1, #modList do
-        print(modList[i][2]..' ['..mob:getMod(modList[i][1])..']')
-    end
-    ]]
 
     mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
@@ -132,10 +114,15 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.SENTINEL      }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.SENTINEL            })
     mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.REPRISAL      }, { ai.r.MA, ai.s.SPECIFIC,    xi.magic.spell.REPRISAL   })
     mob:addGambit(ai.t.PARTY,                      { ai.c.HPP_LT,             50                      }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.CURE })
-    mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.DIVINE_EMBLEM }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.DIVINE_EMBLEM       })
     mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.PALISADE      }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.PALISADE            })
-    -- Only uses Holy when daybreak active
-    mob:addGambit(ai.t.TRIGGER_SELF_ACTION_TARGET, { ai.c.SUB_ANIMATION,      5                       }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.HOLY }, 45)
+
+    -- Only uses Divine Emblen and Holy when daybreak active (subAnimation 5)
+    mob:addGambit(ai.t.SELF, { 
+        { ai.c.SUB_ANIMATION,      5                       }, 
+        { ai.c.NOT_STATUS,         xi.effect.DIVINE_EMBLEM },                                         }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.DIVINE_EMBLEM       })
+    mob:addGambit(ai.t.TRIGGER_SELF_ACTION_TARGET, {
+        { ai.c.SUB_ANIMATION,      5                       },
+        { ai.c.STATUS,             xi.effect.DIVINE_EMBLEM },                                         }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.HOLY })
 
     mob:setMobSkillAttack(1197)
 
