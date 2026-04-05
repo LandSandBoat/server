@@ -22,6 +22,9 @@ spellObject.onMobSpawn = function(mob)
 
     mob:setMobSkillAttack(1197)
 
+    -- Base melee damage boost for tank trusts (1.5x)
+    mob:addMod(xi.mod.ATT, math.floor(mob:getMainLvl() * 1.5))
+
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.HIGHEST, 1000)
 
     mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 40 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })

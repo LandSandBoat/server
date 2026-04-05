@@ -9,7 +9,7 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 | **Core Combat** | WORKS | All 15 subsystems, 208 WS, 342 abilities, 588 effects |
 | **Core Transport** | WORKS | All 16 methods functional |
 | **Core Jobs (22)** | WORKS/PARTIAL | All unlock quests work. PLD SP2 missing, GEO missing 4 abilities |
-| **Trusts** | PARTIAL | 120 scripts, only 49 have AI. No iLvl scaling |
+| **Trusts** | WORKS | All 120 have AI gambits. Tank trusts have 1.5x ATT boost. No iLvl scaling |
 | **Mog House** | PARTIAL | Mog Garden STUB, Mog Sack 0 slots |
 | **San d'Oria Missions** | WORKS | All ranks 1-10, all BCNMs |
 | **Bastok Missions** | WORKS | All ranks 1-10 (9-2 trusts fixed) |
@@ -48,7 +48,7 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 
 ## What Partially Works (usable but gaps)
 
-- **Trusts** — 49/120 have AI, rest auto-attack only
+- ~~**Trusts** — 49/120 have AI, rest auto-attack only~~ FIXED: All 120 have AI
 - **Abyssea** — NMs spawn but most lack custom AI, many atma give no stats
 - **ROV** — completable but 5 boss fights auto-complete
 - **WotG missions** — ~8 need battlefield wiring
@@ -116,7 +116,7 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 ### AF Armor by Job
 - 11 jobs fully complete (WAR/MNK/WHM/RDM/THF/DRK/BST/SAM/NIN/BLU/DNC)
 - 8 jobs partial (BLM/PLD/RNG/DRG/BRD/SMN/COR/SCH — missing 1-2 quests)
-- 3 jobs completely missing (PUP/RUN/GEO)
+- 1 job completely missing (PUP). RUN/GEO IMPLEMENTED (2026-04-02) with quests 2-5 + commission NPCs
 
 ### Zone Accessibility
 - All base game zones reachable without GM commands
@@ -125,7 +125,7 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 
 ### Gear/Upgrade Pipeline
 - Sagheera, Switchstix, Magian Trials: WORKS
-- Monisette (iLvl 109/119 armor): MISSING — **#1 priority fix**
+- Monisette (iLvl 109/119 armor): IMPLEMENTED (2026-04-02) — 421 mappings, all 22 jobs
 - Oboro (REMA weapons to 119): MISSING
 - 71 AF/Relic/Empyrean +3 pieces have zero mods
 - 1,105 iLvl 119 items missing mods (upstream gap)
@@ -135,10 +135,10 @@ Phase 1 completed 2026-03-27 (22 files). Phase 2 completed 2026-03-28 (25 files)
 
 ## Recommendations for a 4-Player Server
 
-1. **#1 Priority**: Implement Monisette — unlocks iLvl 109/119 armor for all 22 jobs
-2. **#2 Priority**: Implement Oboro — unlocks REMA weapon upgrades to 119
-3. **High value**: Fill 69 empty atma mods, add AI to key trusts, wire up WotG battlefields
-4. **Medium value**: Fix Limbus entry, add RUN/GEO/PUP AF quests, fix 71 +3 armor mods
+1. ~~**#1 Priority**: Implement Monisette~~ DONE (2026-04-02)
+2. **#1 Priority**: Implement Oboro — unlocks REMA weapon upgrades to 119
+3. **High value**: Fill 69 empty atma mods, wire up WotG battlefields
+4. **Medium value**: Fix Limbus entry, add PUP AF quests, fix 71 +3 armor mods
 5. **Continue**: Voidwatch (in progress), ROV boss battles
 6. **Don't worry about**: Campaign, Besieged, Odyssey, Master Levels — designed for large populations
 7. **Consider**: `UNLOCK_OUTPOST_WARPS=1`, increase Mog Sack slots, seed AH with common items

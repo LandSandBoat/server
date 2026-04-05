@@ -20,6 +20,9 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.HALVER] = xi.trust.messageOffset.TEAMWORK_4,
     })
 
+    -- Base melee damage boost for tank trusts (1.5x)
+    mob:addMod(xi.mod.ATT, math.floor(mob:getMainLvl() * 1.5))
+
     mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
 
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH })

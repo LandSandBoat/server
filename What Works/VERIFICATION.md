@@ -142,5 +142,5 @@ The gaps are in Abyssea (25.5%), Adoulin (18.6%), and Coalition (0%).
 | PLD, BLM, DRG, RNG, NIN, SMN, BRD, RDM, BST, COR | 5/5 or 3/3 | Complete (many via NPC scripts) |
 | SCH | 2/3 | Missing Seeing Blood Red (head) |
 | PUP | 2/3 | Missing Puppetmaster Blues (AF3) |
-| GEO | 0/5 | Adoulin content not implemented |
-| RUN | 0/5 | Adoulin content not implemented |
+| GEO | 5/5 | IMPLEMENTED (2026-04-02): quests 2-5 + Wescolina commissions |
+| RUN | 5/5 | IMPLEMENTED (2026-04-02): quests 2-5 + Octavien commissions |

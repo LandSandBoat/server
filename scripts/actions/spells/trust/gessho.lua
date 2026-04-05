@@ -25,6 +25,9 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
+    -- Base melee damage boost for tank trusts (1.5x)
+    mob:addMod(xi.mod.ATT, math.floor(mob:getMainLvl() * 1.5))
+
     -- Shadows are represented by xi.effect.COPY_IMAGE, but with different icons depending on the tier
     mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.COPY_IMAGE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.UTSUSEMI })
 

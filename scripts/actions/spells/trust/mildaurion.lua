@@ -31,6 +31,9 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
+    -- Base melee damage boost for tank trusts (1.5x)
+    mob:addMod(xi.mod.ATT, math.floor(mob:getMainLvl() * 1.5))
+
     mob:addMod(xi.mod.MPP, 100)
 
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.RANDOM)

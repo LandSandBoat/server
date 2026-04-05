@@ -227,7 +227,7 @@ Track cross-cutting issues here so they don't get lost:
 
 - **Mog Garden is a stub** -- Zone loads, Green Thumb Moogle opens mog menu + seed shop, but no gathering NPCs, no tutorial quests, no monster rearing. Massive effort to implement. (from mog_house.md)
 - **Mog Sack defaults to 0 slots** -- No unlock quest/mechanism found. Retail unlocked via PlayOnline service. Needs GM command or DB default change. (from mog_house.md)
-- **71/120 trusts have no AI** -- Auto-attack only, no spells/abilities/WS. Includes Iroha, Iroha II, D.Shantotto, August, Zeid, Lilisette, all 5 Ark Angels. (from trusts.md)
+- ~~**71/120 trusts have no AI**~~ -- FIXED (2026-04-02): All 120 trusts now have AI gambits. Tank trusts also have 1.5x ATT boost (2026-04-04).
 - **No trust iLvl scaling** -- Trusts capped at player level stats, weak in endgame. (from trusts.md)
 - **Alter Ego Extravaganza disabled** -- Hard-coded to return NONE regardless of settings. (from trusts.md)
 - **PLD SP2 (Guardian) missing** -- No ability script found. (from advanced_jobs.md)
@@ -244,7 +244,7 @@ Track cross-cutting issues here so they don't get lost:
 - **Atma Fabricant STUB** -- Can't craft atma. (from abyssea)
 - **Silent fail QOL pattern** -- Some NPC scripts silently fail on position checks with no player feedback. Example: Phomiuna Aqueducts _ir9.lua (fixed). May exist elsewhere. (from manual QA)
 - **Snipper droplist 3913 missing** -- FALSE ALARM: Snippers use droplists 482/483/2281, all exist. Agent confused pool ID 3913 (Thunder_Fiend) with a droplist. (verified 2026-03-28)
-- **Monisette has no script** -- AF/Relic/Empyrean armor reforging to iLvl 109/119 is non-functional. (from gear audit)
+- ~~**Monisette has no script**~~ -- FIXED (2026-04-02): Monisette implemented with 421 reforge mappings, proper Rem's Tale + slot material requirements for all 22 jobs. (from gear audit)
 - **Oboro has no script** -- REMA weapon reforging to iLvl 119 is non-functional. (from gear audit)
 - **Curio Vendor gated behind ROV KI** -- Retail-accurate but harsh for new players on small server. (from phase2 lv1-10)
 - **Maiden of the Dusk (WotG 51) Lilith battlefield MISSING** -- No battlefield script, no Walk_of_Echoes battlefield dir. Blocks WotG story but not level caps. (from phase2 lv75-99)
@@ -259,8 +259,14 @@ Track cross-cutting issues here so they don't get lost:
 - **Scintillating Rhapsody KI never awarded** -- FIXED: added to 3-34 mission reward (from phase2 rov)
 - **ROV 2-28 wrong event ID** -- reuses 2-19 Norg event, duplicate dialogue (from phase2 rov)
 - **RUN base AF armor has zero mods** -- FIXED: added 78 mods for all 5 Futhark pieces (from AF audit)
+- **RUN +1 AF armor has zero mods** -- FIXED (2026-04-02): added mods for all 5 Futhark +1 pieces + all 5 Erilaz pieces
+- **SAM Omodaka set has zero mods** -- FIXED (2026-04-02): added mods for 4 Omodaka pieces
+- **Valorous Mitts/Greaves zero mods** -- FIXED (2026-04-02): added mods
+- **Lustratio Harness zero mods** -- FIXED (2026-04-02): added mods
+- **Unity gear upgrade (Perle/Aurore/Teal +1)** -- FIXED (2026-04-02): trade handler in unity.lua, Harold's Ore added to shop
 - **8 jobs missing AF quest scripts** -- BLM/PLD/RNG/DRG (body+legs), BRD/SMN (legs), COR/SCH (coffer pieces) (from AF audit)
-- **3 jobs have NO AF quests at all** -- PUP, RUN, GEO (from AF audit)
+- ~~**RUN and GEO have NO AF quests**~~ -- FIXED (2026-04-02): RUN quests 2-5 + Octavien commissions, GEO quests 2-5 + Wescolina commissions. All 5 AF pieces obtainable for both jobs.
+- **PUP has NO AF quests** -- Still missing AF3 (Puppetmaster Blues) + commission NPC for body/hands/feet. (from AF audit)
 - **Adoulin quests 19.2% coverage** -- lowest of any area (from other areas)
 
 ---

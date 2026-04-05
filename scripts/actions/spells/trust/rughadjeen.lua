@@ -27,6 +27,9 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.MIHLI_ALIAPOH] = xi.trust.messageOffset.TEAMWORK_5
     })
 
+    -- Base melee damage boost for tank trusts (1.5x)
+    mob:addMod(xi.mod.ATT, math.floor(mob:getMainLvl() * 1.5))
+
     -- TODO: Load/Apply MODs from mob_pool_mods instead
     mob:addMod(xi.mod.FASTCAST, 30)
     mob:addMod(xi.mod.CURE_POTENCY_RCVD, 30)

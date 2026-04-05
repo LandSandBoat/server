@@ -39,19 +39,15 @@
   - [ ] Talacca_Cove/IDs.lua (add Valkeng reference)
 - **Note**: Even with AF3, PUP only gets 3/5 AF. Body/hands/feet need commission system.
 
-### RUN AF Quests 2-5
-- **Research**: Complete (see Research/phase2/base_game/quests/run_geo_af_scope.md)
-- **Quests**: 4 quests across Adoulin/Ulbuka zones
-- **Needs**: 4 quest scripts + 3-4 NMs + NPC scripts
-- **No SoA mission prereqs** — only Adoulin Fame 1 + prior quest
+### ~~RUN AF Quests 2-5~~ COMPLETED (2026-04-02)
+- All 4 quests implemented: Endeavoring to Awaken, Forging New Bonds, Legacies Lost and Found, Destiny's Device
+- Octavien NPC expanded with commission system for all 5 AF pieces (crystal trade + Bayld)
+- Futhark +1 and Erilaz armor mods added to item_mods.sql
 
-### GEO AF Quests 2-5
-- **Research**: Complete (see Research/phase2/base_game/quests/run_geo_af_scope.md)
-- **Quests**: 4 quests across Adoulin/Ulbuka zones
-- **Needs**: 4 quest scripts + 3 NMs + NPC scripts
-- **Potential blocker**: Cirdas Caverns access may need Colonization Reive
+### ~~GEO AF Quests 2-5~~ COMPLETED (2026-04-02)
+- All 4 quests implemented: Elementary My Dear Sylvie, For Whom the Bell Tolls, The Bloodline of Zacariah, The Communion
+- Wescolina NPC created with commission system for all 5 AF pieces (crystal trade + Bayld)
 
 ### PUP Commission System (Dhima Polevhia)
 - **Needed for**: PUP body/hands/feet AF pieces
-- **Also used by**: RUN + GEO for their remaining 3 AF pieces each
-- **Shared framework**: Commission NPC that crafts AF for materials + time
+- **Status**: Still TODO — RUN/GEO now have their own commission NPCs (Octavien/Wescolina)
