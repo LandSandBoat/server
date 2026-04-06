@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMAST
 
 quest.reward =
 {
-    fameArea = xi.fameArea.AHT_URHGAN,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.PUPPETRY_TAJ,
     title    = xi.title.PARAGON_OF_PUPPETMASTER_EXCELLENCE,
     fame     = 30,
