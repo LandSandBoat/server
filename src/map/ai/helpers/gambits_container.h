@@ -131,7 +131,6 @@ enum class G_SELECT : uint16
     HELIX_MOB_WEAKNESS  = 16,
     DEF_BAR_ELEMENT     = 17,
     RUNE_DAY            = 18,
-    
 };
 
 enum class G_TP_TRIGGER : uint16
