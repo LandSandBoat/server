@@ -12,15 +12,6 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    if prevZone == xi.zone.EAST_RONFAURE_S then
-        if
-            player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == xi.questStatus.QUEST_ACCEPTED and
-            player:getCharVar('KnotQuiteThere') == 2
-        then
-            return 62
-        end
-    end
-
     return xi.moghouse.onMoghouseZoneEvent(player, prevZone)
 end
 
@@ -31,9 +22,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 62 then
-        player:setCharVar('KnotQuiteThere', 3)
-    end
 end
 
 return zoneObject
