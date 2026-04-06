@@ -4,7 +4,6 @@
 -- !addkeyitem VALKENGS_MEMORY_CHIP
 -- !addkeyitem TOGGLE_SWITCH
 -----------------------------------
-local ID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 
 local content = Battlefield:new({
