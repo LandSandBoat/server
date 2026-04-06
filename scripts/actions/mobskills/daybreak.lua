@@ -1,7 +1,7 @@
 -----------------------------------
 -- Daybreak
 -- Description: 1 min 30 sec duration, 1 min 30 sec cooldown after either No quater used or daybreak wears off
--- When August's HP drops below 66%, he uses Daybreak if it's available which partially restores some HP and MP, 
+-- When August's HP drops below 66%, he uses Daybreak if it's available which partially restores some HP and MP,
 -- resets his TP, and activates an aura with wings of light
 -- Daybreak is a -50% PDT effect, full Erase
 -- Daybreak is removed after the use of No Quarter.

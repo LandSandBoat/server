@@ -62,7 +62,7 @@ spellObject.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SHIELDBLOCKRATE, xi.trust.modGrowthValMax(mob, 35)) -- around 35% max block rate at 99 from testing
     mob:addMod(xi.mod.HPP, 10)
     mob:addMod(xi.mod.ENMITY, 25)
-    
+
     -- Founders gear mods: August gets all effects from founders gear
     -- see xi.trust.modGrowthVal in trust.lua for current curve value
     mob:addMod(xi.mod.MDEF, xi.trust.modGrowthValMax(mob, 12))            -- Founders gear: MDEF + 12
@@ -85,21 +85,19 @@ spellObject.onMobSpawn = function(mob)
 
     local daybreakUsed = false
 
-    mob:addListener('COMBAT_TICK', 'AUGUST_CTICK', function(mob)
+    mob:addListener('COMBAT_TICK', 'AUGUST_CTICK', function(mobArg)
         local daybreakRecast  = 180 -- 3 minutes
-        local daybreakActive  = false
-        local daybreakEndTime = mob:getLocalVar("DaybreakEndTime")
-        local daybreakReady   = false
-        local hppLow          = mob:getHPP() <= 66
-        local now             = os.time()
+        local daybreakEndTime = mobArg:getLocalVar('DaybreakEndTime')
+        local hppLow          = mobArg:getHPP() <= 66
+        local now             = GetSystemTime()
         if
-            mob:getMainLvl() >= 51 and
-            mob:getAnimationSub() == 0 and
+            mobArg:getMainLvl() >= 51 and
+            mobArg:getAnimationSub() == 0 and
             (daybreakEndTime == 0 or now >= daybreakEndTime + daybreakRecast) and
             hppLow and
             not daybreakUsed
         then
-            mob:useMobAbility(3652)
+            mobArg:useMobAbility(3652)
             daybreakUsed = true
         end
     end)
@@ -117,8 +115,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.PALISADE      }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.PALISADE            })
 
     -- Only uses Divine Emblen and Holy when daybreak active (subAnimation 5)
-    mob:addGambit(ai.t.SELF, { 
-        { ai.c.SUB_ANIMATION,      5                       }, 
+    mob:addGambit(ai.t.SELF, {
+        { ai.c.SUB_ANIMATION,      5                       },
         { ai.c.NOT_STATUS,         xi.effect.DIVINE_EMBLEM },                                         }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.DIVINE_EMBLEM       })
     mob:addGambit(ai.t.TRIGGER_SELF_ACTION_TARGET, {
         { ai.c.SUB_ANIMATION,      5                       },
@@ -131,15 +129,14 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener('WEAPONSKILL_USE', 'AUGUST_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action)
         if skill:getID() == 3652 then -- Daybreak
             mob:timer(2000, function()
-                mob:entityAnimationPacket("ids1") -- Wings on
+                mob:entityAnimationPacket('ids1') -- Wings on
             end)
-            mob:entityAnimationPacket("ids1")
         elseif skill:getID() == 3658 then -- No Quarter
             -- Come! Show me your finest form!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             daybreakUsed = false
             mob:timer(1000, function()
-                mob:entityAnimationPacket("ids2") -- Wings off
+                mob:entityAnimationPacket('ids2') -- Wings off
             end)
         end
     end)

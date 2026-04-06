@@ -26,6 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         if duration < 2 then
             duration = 2
         end
+
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, duration)
     end
 

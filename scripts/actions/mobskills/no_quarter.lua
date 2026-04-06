@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     mob:setMod(xi.mod.DMGPHYS, 0) -- Remove the Phyisical damage taken effect
-    mob:setLocalVar("DaybreakEndTime", os.time())
+    mob:setLocalVar('DaybreakEndTime', GetSystemTime())
 
     return dmg
 end
