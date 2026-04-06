@@ -11565,28 +11565,28 @@ INSERT INTO `item_equipment` VALUES (23416,'horos_tiara_+3',99,119,262144,304,0,
 INSERT INTO `item_equipment` VALUES (23417,'peda._m.board_+3',99,119,524288,215,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23418,'bagua_galero_+3',99,119,1048576,310,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23419,'fu._bandeau_+3',99,119,2097152,339,0,0,16,0,0,0);
-INSERT INTO `item_equipment` VALUES (23420,'boii_mask_+3',99,0,0,0,0,0,32,0,0,0);          -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23421,'bhikku_crown_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23422,'ebers_cap_+3',99,0,0,0,0,0,32,0,0,0);          -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23423,'wicce_petasos_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23424,'lethargy_chappel_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23425,'skulkers_bonnet_+3',99,0,0,0,0,0,32,0,0,0);    -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23426,'chevaliers_armet_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23427,'heathens_burgeonet_+3',99,0,0,0,0,0,32,0,0,0); -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23428,'nukumi_cabasset_+3',99,0,0,0,0,0,32,0,0,0);    -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23429,'fili_calot_+3',99,0,0,0,0,0,32,0,0,0);         -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23430,'amini_gapette_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23431,'kasuga_kabuto_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23432,'hattori_zukin_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23433,'peltasts_mezail_+3',99,0,0,0,0,0,32,0,0,0);    -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23434,'beckoners_horn_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23435,'hashishin_kavuk_+3',99,0,0,0,0,0,32,0,0,0);    -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23436,'chasseurs_tricorne_+3',99,0,0,0,0,0,32,0,0,0); -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23437,'karagoz_cappello_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23438,'maculele_tiara_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23439,'arbatel_bonnet_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23440,'azimuth_hood_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23441,'erilaz_galea_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
+INSERT INTO `item_equipment` VALUES (23420,'boii_mask_+3',99,119,1,282,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23421,'bhikku_crown_+3',99,119,2,283,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23422,'ebers_cap_+3',99,119,4,284,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23423,'wicce_petasos_+3',99,119,8,285,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23424,'lethargy_chappel_+3',99,119,16,286,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23425,'skulkers_bonnet_+3',99,119,32,287,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23426,'chevaliers_armet_+3',99,119,64,288,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23427,'heathens_burgeonet_+3',99,119,128,289,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23428,'nukumi_cabasset_+3',99,119,256,290,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23429,'fili_calot_+3',99,119,512,291,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23430,'amini_gapette_+3',99,119,1024,292,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23431,'kasuga_kabuto_+3',99,119,2048,293,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23432,'hattori_zukin_+3',99,119,4096,294,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23433,'peltasts_mezail_+3',99,119,8192,295,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23434,'beckoners_horn_+3',99,119,16384,296,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23435,'hashishin_kavuk_+3',99,119,32768,297,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23436,'chasseurs_tricorne_+3',99,119,65536,298,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23437,'karagoz_cappello_+3',99,119,131072,299,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23438,'maculele_tiara_+3',99,119,262144,305,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23439,'arbatel_bonnet_+3',99,119,524288,306,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23440,'azimuth_hood_+3',99,119,1048576,341,0,0,16,0,0,0);
+INSERT INTO `item_equipment` VALUES (23441,'erilaz_galea_+3',99,119,2097152,371,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (23442,'pumm._lorica_+3',99,119,1,64,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23443,'anch._cyclas_+3',99,119,2,66,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23444,'theo._bliaut_+3',99,119,4,68,0,0,32,0,0,0);
@@ -11632,28 +11632,28 @@ INSERT INTO `item_equipment` VALUES (23483,'horos_casaque_+3',99,119,262144,304,
 INSERT INTO `item_equipment` VALUES (23484,'peda._gown_+3',99,119,524288,217,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23485,'bagua_tunic_+3',99,119,1048576,310,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23486,'futhark_coat_+3',99,119,2097152,339,0,0,32,0,0,0);
-INSERT INTO `item_equipment` VALUES (23487,'boii_lorica_+3',99,0,0,0,0,0,32,0,0,0);        -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23488,'bhikku_cyclas_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23489,'ebers_bliaut_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23490,'wicce_coat_+3',99,0,0,0,0,0,32,0,0,0);         -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23491,'lethargy_sayon_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23492,'skulkers_vest_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23493,'chevaliers_cuirass_+3',99,0,0,0,0,0,32,0,0,0); -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23494,'heathens_cuirass_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23495,'nukumi_gausape_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23496,'fili_hongreline_+3',99,0,0,0,0,0,32,0,0,0);    -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23497,'amini_caban_+3',99,0,0,0,0,0,32,0,0,0);        -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23498,'kasuga_domaru_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23499,'hattori_ningi_+3',99,0,0,0,0,0,32,0,0,0);      -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23500,'peltasts_plackart_+3',99,0,0,0,0,0,32,0,0,0);  -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23501,'beckoners_doublet_+3',99,0,0,0,0,0,32,0,0,0);  -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23502,'hashishin_mintan_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23503,'chasseurs_frac_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23504,'karagoz_farsetto_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23505,'maculele_casaque_+3',99,0,0,0,0,0,32,0,0,0);   -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23506,'arbatel_gown_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23507,'azimuth_coat_+3',99,0,0,0,0,0,32,0,0,0);       -- TODO: Not implemented
-INSERT INTO `item_equipment` VALUES (23508,'erilaz_surcoat_+3',99,0,0,0,0,0,32,0,0,0);     -- TODO: Not implemented
+INSERT INTO `item_equipment` VALUES (23487,'boii_lorica_+3',99,119,1,282,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23488,'bhikku_cyclas_+3',99,119,2,283,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23489,'ebers_bliaut_+3',99,119,4,284,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23490,'wicce_coat_+3',99,119,8,285,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23491,'lethargy_sayon_+3',99,119,16,286,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23492,'skulkers_vest_+3',99,119,32,287,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23493,'chevaliers_cuirass_+3',99,119,64,288,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23494,'heathens_cuirass_+3',99,119,128,289,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23495,'nukumi_gausape_+3',99,119,256,290,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23496,'fili_hongreline_+3',99,119,512,291,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23497,'amini_caban_+3',99,119,1024,292,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23498,'kasuga_domaru_+3',99,119,2048,293,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23499,'hattori_ningi_+3',99,119,4096,294,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23500,'peltasts_plackart_+3',99,119,8192,295,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23501,'beckoners_doublet_+3',99,119,16384,296,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23502,'hashishin_mintan_+3',99,119,32768,297,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23503,'chasseurs_frac_+3',99,119,65536,298,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23504,'karagoz_farsetto_+3',99,119,131072,299,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23505,'maculele_casaque_+3',99,119,262144,305,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23506,'arbatel_gown_+3',99,119,524288,306,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23507,'azimuth_coat_+3',99,119,1048576,341,0,0,32,0,0,0);
+INSERT INTO `item_equipment` VALUES (23508,'erilaz_surcoat_+3',99,119,2097152,371,0,0,32,0,0,0);
 INSERT INTO `item_equipment` VALUES (23509,'pumm._mufflers_+3',99,119,1,64,0,0,64,0,0,0);
 INSERT INTO `item_equipment` VALUES (23510,'anchor._gloves_+3',99,119,2,66,0,0,64,0,0,0);
 INSERT INTO `item_equipment` VALUES (23511,'theophany_mitts_+3',99,119,4,68,0,0,64,0,0,0);

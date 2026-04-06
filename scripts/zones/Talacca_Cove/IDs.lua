@@ -36,7 +36,8 @@ zones[xi.zone.TALACCA_COVE] =
     },
     mob =
     {
-        GESSHO = GetFirstID('Gessho'),
+        GESSHO  = GetFirstID('Gessho'),
+        VALKENG = GetFirstID('Valkeng'),
     },
     npc =
     {

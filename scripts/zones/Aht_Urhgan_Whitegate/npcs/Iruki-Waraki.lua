@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Iruki-Waraki
---  Involved in quest: No Strings Attached
+--  Involved in quest: No Strings Attached, Puppetmaster Blues
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------
 ---@type TNpcEntity
@@ -80,7 +80,10 @@ entity.onTrigger = function(player, npc)
         operationTeaTimeProgress == 2
     then
         player:startEvent(781) -- Reminds you to get items
-    elseif operationTeaTime == xi.questStatus.QUEST_COMPLETED then
+    elseif
+        operationTeaTime == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES) == xi.questStatus.QUEST_COMPLETED
+    then
         player:startEvent(777)
     end
 end
