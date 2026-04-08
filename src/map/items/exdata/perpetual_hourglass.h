@@ -32,8 +32,8 @@ struct PerpetualHourglass
     uint8_t  Flags : 3;
     uint8_t  padding01 : 5;
     uint8_t  padding02[5];
-    uint32_t StartTime;
     uint32_t EndTime;
+    uint32_t StartTime;
     uint16_t ZoneId;
     uint8_t  padding03[6];
 
