@@ -922,6 +922,14 @@ xi.mobSkill =
     -- AZURE_LORE                    = 3481,
     BOLSTER                       = 3482,
 
+    DAYBREAK                      = 3652, -- August Trust
+    TARTARIC_SIGIL                = 3653, -- August Trust
+    NULL_FIELD                    = 3654, -- August Trust
+    ALABASTER_BURST               = 3655, -- August Trust
+    NOBLE_FRENZY                  = 3656, -- August Trust
+    FULMINOUS_FURY                = 3657, -- August Trust
+    NO_QUARTER                    = 3658, -- August Trust
+
     CROSS_REAVER_3                = 3706, -- Ark Angel HM Trust
 
     ARROGANCE_INCARNATE_2         = 3710, -- Ark Angel EV Trust

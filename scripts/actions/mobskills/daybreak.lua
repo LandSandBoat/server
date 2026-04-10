@@ -38,6 +38,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:addMP(mpHeal) -- restore mp
     mob:setMod(xi.mod.DMGPHYS, -5000) -- Phyisical damage taken -50%
     mob:setTP(0) -- daybreak uses all tp, so set to 0
+    mob:setLocalVar('DaybreakUsed', 1)
 
     return info.damage
 end

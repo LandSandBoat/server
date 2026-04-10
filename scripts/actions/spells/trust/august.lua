@@ -83,11 +83,10 @@ spellObject.onMobSpawn = function(mob)
 
     -- mob:addImmunity(xi.immunity.TERROR) -- this is wrong but we currently have no TERRORRES mod and no way to use one
 
-    local daybreakUsed = false
-
     mob:addListener('COMBAT_TICK', 'AUGUST_CTICK', function(mobArg)
         local daybreakRecast  = 180 -- 3 minutes
         local daybreakEndTime = mobArg:getLocalVar('DaybreakEndTime')
+        local daybreakUsed    = mobArg:getLocalVar('DaybreakUsed')
         local hppLow          = mobArg:getHPP() <= 66
         local now             = GetSystemTime()
         if
@@ -95,10 +94,10 @@ spellObject.onMobSpawn = function(mob)
             mobArg:getAnimationSub() == 0 and
             (daybreakEndTime == 0 or now >= daybreakEndTime + daybreakRecast) and
             hppLow and
-            not daybreakUsed
+            daybreakUsed ~= 1
         then
-            mobArg:useMobAbility(3652)
-            daybreakUsed = true
+            mobArg:useMobAbility(xi.mobSkill.DAYBREAK)
+            daybreakUsed = 1
         end
     end)
 
@@ -127,14 +126,14 @@ spellObject.onMobSpawn = function(mob)
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AUGUST)
 
     mob:addListener('WEAPONSKILL_USE', 'AUGUST_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action)
-        if skill:getID() == 3652 then -- Daybreak
+        if skill:getID() == xi.mobSkill.DAYBREAK then -- Daybreak
             mob:timer(2000, function()
                 mob:entityAnimationPacket('ids1') -- Wings on
             end)
-        elseif skill:getID() == 3658 then -- No Quarter
+        elseif skill:getID() == xi.mobSkill.NO_QUARTER then -- No Quarter
             -- Come! Show me your finest form!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
-            daybreakUsed = false
+            mobArg:setLocalVar('DaybreakUsed', 0)
             mob:timer(1000, function()
                 mob:entityAnimationPacket('ids2') -- Wings off
             end)
