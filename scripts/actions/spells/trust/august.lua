@@ -96,7 +96,7 @@ spellObject.onMobSpawn = function(mob)
             hppLow and
             daybreakUsed ~= 1
         then
-            mobArg:useMobAbility(xi.mobSkill.DAYBREAK)
+            mobArg:useMobAbility(xi.mobSkill.DAYBREAK_TRUST)
             daybreakUsed = 1
         end
     end)
@@ -126,11 +126,11 @@ spellObject.onMobSpawn = function(mob)
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AUGUST)
 
     mob:addListener('WEAPONSKILL_USE', 'AUGUST_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action)
-        if skill:getID() == xi.mobSkill.DAYBREAK then -- Daybreak
+        if skill:getID() == xi.mobSkill.DAYBREAK_TRUST then -- Daybreak
             mob:timer(2000, function()
                 mob:entityAnimationPacket('ids1') -- Wings on
             end)
-        elseif skill:getID() == xi.mobSkill.NO_QUARTER then -- No Quarter
+        elseif skill:getID() == xi.mobSkill.NO_QUARTER_TRUST then -- No Quarter
             -- Come! Show me your finest form!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             mobArg:setLocalVar('DaybreakUsed', 0)
