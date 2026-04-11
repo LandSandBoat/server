@@ -152,7 +152,6 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
             // MIDNIGHT -> NEWDAY -> DAWN -> DAY -> DUSK -> EVENING -> NIGHT
             TracyZoneScoped;
             zoneutils::TOTDChange(vanaTotd);
-            fishingutils::RestockFishingAreas();
 
             zoneutils::ForEachZone(
                 [](CZone* PZone)

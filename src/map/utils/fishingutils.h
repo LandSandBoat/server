@@ -916,11 +916,6 @@ using BigFish                 = xi::Flag<struct BigFishTag>;
 using CancelOnMobLoadFailBait = xi::Flag<struct CancelOnMobLoadFailBaitTag>;
 using Lost                    = xi::Flag<struct LostTag>;
 
-// Catch Pools
-void ReduceFishPool(uint16 zoneId, uint8 areaId, uint16 fishId);
-void RestockFishingAreas();
-void CreateFishingPools();
-
 // Calculations
 uint8               GetMoonPhase();
 uint8               GetHookTime(CCharEntity* PChar);
