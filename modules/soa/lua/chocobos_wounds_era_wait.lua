@@ -78,6 +78,8 @@ m:addOverride('xi.server.onServerStart', function()
         end
                 
     end)
+        
 end)
+
 -- The final event [64] does not need to set a new timer as the quest is already complete at that point
 return m
