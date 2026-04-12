@@ -16,10 +16,10 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7250, -- You can't fish here.
-        ON_WAY_TO_MHAURA              = 7351, -- We're on our way to Mhaura. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (<number> [minute/minutes] in Earth time).
-        LOKHONG_SHOP_DIALOG           = 7356, -- There's nothing like fishing to pass the time!
-        CHHAYA_SHOP_DIALOG            = 7357, -- May I offer you items to help you on your journey?
-        ARRIVING_SOON_MHAURA          = 7358, -- We are on our way to Mhaura. We will be arriving soon.
+        ON_WAY_TO_MHAURA              = 7352, -- We're on our way to Mhaura. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (<number> [minute/minutes] in Earth time).
+        LOKHONG_SHOP_DIALOG           = 7357, -- There's nothing like fishing to pass the time!
+        CHHAYA_SHOP_DIALOG            = 7358, -- May I offer you items to help you on your journey?
+        ARRIVING_SOON_MHAURA          = 7359, -- We are on our way to Mhaura. We will be arriving soon.
     },
     mob =
     {

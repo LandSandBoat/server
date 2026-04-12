@@ -21,12 +21,12 @@ zones[xi.zone.PALBOROUGH_MINES] =
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                      = 7069, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET             = 7228, -- You can't fish here.
-        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7388, -- The machine seems to be working, but you cannot discern its purpose.
-        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7391, -- Something falls out of the machine!
-        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7394, -- There seems to be more left in the machine, but you can't carry any more items.
-        MINING_IS_POSSIBLE_HERE            = 7415, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                     = 7430, -- You unlock the chest!
-        HOMEPOINT_SET                      = 7477, -- Home point set!
+        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7389, -- The machine seems to be working, but you cannot discern its purpose.
+        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7392, -- Something falls out of the machine!
+        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7395, -- There seems to be more left in the machine, but you can't carry any more items.
+        MINING_IS_POSSIBLE_HERE            = 7416, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                     = 7431, -- You unlock the chest!
+        HOMEPOINT_SET                      = 7478, -- Home point set!
     },
     mob =
     {

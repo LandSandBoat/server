@@ -42,13 +42,13 @@ zones[xi.zone.BONEYARD_GULLY] =
         YOURE_MINE                    = 7753, -- You're mine!
         TUCHULCHA_SANDPIT             = 7762, -- Tuchulcha retreats beneath the soil!
         BURSTS_INTO_FLAMES            = 7767, -- The <keyitem> suddenly bursts into flames, the blackened remains borne away by the wind...
+        SHIKAREE_PARTY_WIPE           = 7809, -- Have you been slacking off since you saved the world, sweetheart? Looks like your sense of justice needs a little dusting off.
         GET_YOUR_BLOOD_RACING         = 7817, -- I'll get your blood rrracing!
         SHIKAREE_Y_2HR                = 7819, -- Ah, the scent of frrresh blood!
         EVEN_AT_MY_BEST               = 7821, -- Even at my best...
         SHIKAREE_X_2HR                = 7822, -- Time to end the hunt! Go for the jugular!
         DINNER_TIME_ADVENTURER_STEAK  = 7823, -- Dinner time! Tonight we're having Adventurer Steak!
-        SHIKAREE_ROS_ENGAGE           = 7824, -- "Justice" is the diamond that shines even after being shattered!
-        SHIKAREE_PARTY_WIPE           = 7827, -- Have you been slacking off since you saved the world, sweetheart? Looks like your sense of "justice" needs a little dusting off.
+        SHIKAREE_ROS_ENGAGE           = 7824, -- Justice is the diamond that shines even after being shattered!
     },
 
     mob =

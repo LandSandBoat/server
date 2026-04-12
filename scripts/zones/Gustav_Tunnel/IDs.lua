@@ -20,16 +20,16 @@ zones[xi.zone.GUSTAV_TUNNEL] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7228,  -- You can't fish here.
-        BAD_FEELING_ABOUT_PLACE       = 7328,  -- You have a bad feeling about this place.
-        SENSE_OMINOUS_PRESENCE        = 7330,  -- You sense an ominous presence...
-        UNITY_WANTED_BATTLE_INTERACT  = 7451,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9598,  -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 10650, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 10651, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 10652, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 10653, -- You already possess that temporary item.
-        NO_COMBINATION                = 10658, -- You were unable to enter a combination.
-        COMMON_SENSE_SURVIVAL         = 10682, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        BAD_FEELING_ABOUT_PLACE       = 7329,  -- You have a bad feeling about this place.
+        SENSE_OMINOUS_PRESENCE        = 7331,  -- You sense an ominous presence...
+        UNITY_WANTED_BATTLE_INTERACT  = 7452,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9599,  -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 10651, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 10652, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 10653, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 10654, -- You already possess that temporary item.
+        NO_COMBINATION                = 10659, -- You were unable to enter a combination.
+        COMMON_SENSE_SURVIVAL         = 10683, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

@@ -19,16 +19,16 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7588, -- You can't fish here.
-        MINING_IS_POSSIBLE_HERE       = 7719, -- Mining is possible here if you have <item>.
-        NO_FIRES_NO_BOMBS             = 7726, -- This place being for garbage. No fires. No bombs.
-        KILLING_BOMBS                 = 7731, -- Killing bombs. Bringing <item>.
-        REFUSES_TO_GIVE_ANOTHER       = 7739, -- When Brakobrik realizes that you already possess the item he is trying to give you, he refuses to give you another one.
-        RAKOROK_DIALOGUE              = 7743, -- Nsy pipul. Gattohre! I bisynw!
-        ALTANA_DIE                    = 7745, -- Aaaltaaanaaa... Diiieee!!!
-        WAS_TAKEN_FROM_YOU            = 7757, -- The <keyitem> was taken from you...
-        MONSTER_APPEARED              = 7758, -- A monster has appeared!
-        CHEST_UNLOCKED                = 7767, -- You unlock the chest!
-        COMMON_SENSE_SURVIVAL         = 8125, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        MINING_IS_POSSIBLE_HERE       = 7720, -- Mining is possible here if you have <item>.
+        NO_FIRES_NO_BOMBS             = 7727, -- This place being for garbage. No fires. No bombs.
+        KILLING_BOMBS                 = 7732, -- Killing bombs. Bringing <item>.
+        REFUSES_TO_GIVE_ANOTHER       = 7740, -- When Brakobrik realizes that you already possess the item he is trying to give you, he refuses to give you another one.
+        RAKOROK_DIALOGUE              = 7744, -- Nsy pipul. Gattohre! I bisynw!
+        ALTANA_DIE                    = 7746, -- Aaaltaaanaaa... Diiieee!!!
+        WAS_TAKEN_FROM_YOU            = 7758, -- The <keyitem> was taken from you...
+        MONSTER_APPEARED              = 7759, -- A monster has appeared!
+        CHEST_UNLOCKED                = 7768, -- You unlock the chest!
+        COMMON_SENSE_SURVIVAL         = 8126, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

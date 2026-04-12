@@ -17,16 +17,16 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
         LOGIN_NUMBER                  = 7004,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7069,  -- You can't fish here.
-        CONQUEST_BASE                 = 7169,  -- Tallying conquest results...
-        SMALL_HOLE_HERE               = 7356,  -- There is a small hole here. It appears to be damp inside...
-        KIRIN_OFFSET                  = 7367,  -- I am Kirin, master of the Shijin. The one who stands above all. You, who have risen above your mortal status to contend with the gods... It is time to reap your reward.
-        REGIME_REGISTERED             = 10359, -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 11411, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 11412, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 11413, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 11414, -- You already possess that temporary item.
-        NO_COMBINATION                = 11419, -- You were unable to enter a combination.
-        HOMEPOINT_SET                 = 11445, -- Home point set!
+        CONQUEST_BASE                 = 7170,  -- Tallying conquest results...
+        SMALL_HOLE_HERE               = 7357,  -- There is a small hole here. It appears to be damp inside...
+        KIRIN_OFFSET                  = 7368,  -- I am Kirin, master of the Shijin. The one who stands above all. You, who have risen above your mortal status to contend with the gods... It is time to reap your reward.
+        REGIME_REGISTERED             = 10360, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 11412, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 11413, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 11414, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 11415, -- You already possess that temporary item.
+        NO_COMBINATION                = 11420, -- You were unable to enter a combination.
+        HOMEPOINT_SET                 = 11446, -- Home point set!
     },
     mob =
     {

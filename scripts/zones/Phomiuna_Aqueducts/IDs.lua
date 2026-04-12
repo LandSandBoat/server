@@ -24,7 +24,7 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
         ITEM_BREAKS                   = 7235, -- The <item> breaks!
         LAMP_OFFSET                   = 7239, -- A symbol for fire is engraved on the base of the lamp...
         FISHING_MESSAGE_OFFSET        = 7252, -- You can't fish here.
-        COMMON_SENSE_SURVIVAL         = 7428, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 7429, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

@@ -19,9 +19,9 @@ zones[xi.zone.MOG_GARDEN] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7228, -- You can't fish here.
-        STARS_ON_KEYITEM              = 7516, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
-        MOGLOCKER_MESSAGE_OFFSET      = 7532, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
-        RETRIEVE_DIALOG_ID            = 8583, -- You retrieve <item> from the porter moogle's care.
+        STARS_ON_KEYITEM              = 7517, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
+        MOGLOCKER_MESSAGE_OFFSET      = 7533, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
+        RETRIEVE_DIALOG_ID            = 8584, -- You retrieve <item> from the porter moogle's care.
     },
     mob =
     {

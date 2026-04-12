@@ -20,15 +20,15 @@ zones[xi.zone.TORAIMARAI_CANAL] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7070,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7115,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7274,  -- You can't fish here.
-        CHEST_UNLOCKED                = 7382,  -- You unlock the chest!
-        PLAYER_OBTAINS_ITEM           = 7551,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7552,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7553,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7554,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7559,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 9637,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 10685, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        HOMEPOINT_SET                 = 10713, -- Home point set!
+        CHEST_UNLOCKED                = 7383,  -- You unlock the chest!
+        PLAYER_OBTAINS_ITEM           = 7552,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7553,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7554,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7555,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7560,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 9638,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 10686, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        HOMEPOINT_SET                 = 10714, -- Home point set!
     },
     mob =
     {

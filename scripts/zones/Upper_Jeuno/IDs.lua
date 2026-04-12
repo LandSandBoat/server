@@ -41,7 +41,7 @@ zones[xi.zone.UPPER_JEUNO] =
         DECIMATION_LEARNED               = 8219,  -- You have learned the weapon skill Decimation!
         LEND_PRISHE_AMULET               = 8356,  -- You lend the <item> to Prishe.
         YOU_OBTAIN_ITEM                  = 11200, -- You obtain <item>!
-        UNLOCK_DANCER                    = 11850, -- You can now become a dancer!
+        UNLOCK_DANCER                    = 11859, -- You can now become a dancer!
     },
     mob =
     {

@@ -32,7 +32,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         TRIKOTRAK_DIALOGUE            = 7840, -- Bg! Pnch! Kck!
         SWIPOSTIK_DIALOGUE            = 7848, -- Bug's! Smash's up's this's one's!
         BUGBBY_DIALOGUE               = 7855, -- Ugh.
-        HO_HO                         = 7866, -- Ho-Ho, ho-ho! Time for goodebyongo!
+        HO_HO                         = 7866, -- Ho-ho, ho-ho! Time for goodebyongo!
     },
     mob =
     {

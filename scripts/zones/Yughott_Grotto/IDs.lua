@@ -19,9 +19,9 @@ zones[xi.zone.YUGHOTT_GROTTO] =
         GEOMAGNETRON_ATTUNED          = 7172, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7183, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7228, -- You can't fish here.
-        CHEST_UNLOCKED                = 7354, -- You unlock the chest!
-        MINING_IS_POSSIBLE_HERE       = 7362, -- Mining is possible here if you have <item>.
-        HOMEPOINT_SET                 = 7462, -- Home point set!
+        CHEST_UNLOCKED                = 7355, -- You unlock the chest!
+        MINING_IS_POSSIBLE_HERE       = 7363, -- Mining is possible here if you have <item>.
+        HOMEPOINT_SET                 = 7463, -- Home point set!
     },
     mob =
     {

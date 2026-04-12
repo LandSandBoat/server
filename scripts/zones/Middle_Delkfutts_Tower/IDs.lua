@@ -20,14 +20,14 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
         LOGIN_NUMBER                  = 7167, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7187, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7232, -- You can't fish here.
-        CHEST_UNLOCKED                = 7340, -- You unlock the chest!
-        SENSE_A_FOUL_PRESENCE         = 7349, -- You sense a foul presence.
-        PLAYER_OBTAINS_ITEM           = 7388, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7389, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7390, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7391, -- You already possess that temporary item.
-        NO_COMBINATION                = 7396, -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 9474, -- New training regime registered!
+        CHEST_UNLOCKED                = 7341, -- You unlock the chest!
+        SENSE_A_FOUL_PRESENCE         = 7350, -- You sense a foul presence.
+        PLAYER_OBTAINS_ITEM           = 7389, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7390, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7391, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7392, -- You already possess that temporary item.
+        NO_COMBINATION                = 7397, -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 9475, -- New training regime registered!
     },
     mob =
     {

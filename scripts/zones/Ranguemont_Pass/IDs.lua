@@ -21,14 +21,14 @@ zones[xi.zone.RANGUEMONT_PASS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7228,  -- You can't fish here.
-        WATERS_OF_OBLIVION            = 7370,  -- You behold the Waters of Oblivion.
-        REGIME_REGISTERED             = 9538,  -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 10590, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 10591, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 10592, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 10593, -- You already possess that temporary item.
-        NO_COMBINATION                = 10598, -- You were unable to enter a combination.
-        COMMON_SENSE_SURVIVAL         = 10689, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        WATERS_OF_OBLIVION            = 7371,  -- You behold the Waters of Oblivion.
+        REGIME_REGISTERED             = 9539,  -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 10591, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 10592, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 10593, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 10594, -- You already possess that temporary item.
+        NO_COMBINATION                = 10599, -- You were unable to enter a combination.
+        COMMON_SENSE_SURVIVAL         = 10690, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

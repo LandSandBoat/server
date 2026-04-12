@@ -17,7 +17,7 @@ zones[xi.zone.MANACLIPPER] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7239, -- You can't fish here.
-        KHOTS_CHALAHKO_OFFSET         = 7412, -- Ahhh... Isn't it grrreat out here on the open sea!?
+        KHOTS_CHALAHKO_OFFSET         = 7413, -- Ahhh... Isn't it grrreat out here on the open sea!?
     },
     mob =
     {

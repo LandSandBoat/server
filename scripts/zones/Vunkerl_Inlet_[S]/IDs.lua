@@ -18,8 +18,8 @@ zones[xi.zone.VUNKERL_INLET_S] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
-        CAMPAIGN_RESULTS_TALLIED      = 7606, -- Campaign results tallied.
-        COMMON_SENSE_SURVIVAL         = 9038, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CAMPAIGN_RESULTS_TALLIED      = 7607, -- Campaign results tallied.
+        COMMON_SENSE_SURVIVAL         = 9039, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

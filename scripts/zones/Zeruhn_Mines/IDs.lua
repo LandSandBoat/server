@@ -18,16 +18,16 @@ zones[xi.zone.ZERUHN_MINES] =
         LOGIN_NUMBER                  = 7163,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7183,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7228,  -- You can't fish here.
-        MAKARIM_DIALOG_I              = 7335,  -- Be careful on your way out. Remember, you should give my report to Naji, one of the Mythril Musketeers on post at the President's Office.
-        ZELMAN_CANT_RUN_AROUND        = 7360,  -- I can't run around doing everything she tells me to--I have my dignity to uphold!
-        MINING_IS_POSSIBLE_HERE       = 7367,  -- Mining is possible here if you have <item>.
-        PLAYER_OBTAINS_ITEM           = 7424,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7425,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7426,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7427,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7432,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 9510,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 10558, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        MAKARIM_DIALOG_I              = 7336,  -- Be careful on your way out. Remember, you should give my report to Naji, one of the Mythril Musketeers on post at the President's Office.
+        ZELMAN_CANT_RUN_AROUND        = 7361,  -- I can't run around doing everything she tells me to--I have my dignity to uphold!
+        MINING_IS_POSSIBLE_HERE       = 7368,  -- Mining is possible here if you have <item>.
+        PLAYER_OBTAINS_ITEM           = 7425,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7426,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7427,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7428,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7433,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 9511,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 10559, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

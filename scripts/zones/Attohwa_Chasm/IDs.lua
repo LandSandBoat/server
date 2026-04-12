@@ -20,12 +20,12 @@ zones[xi.zone.ATTOHWA_CHASM] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069, -- Tallying conquest results...
         MINING_IS_POSSIBLE_HERE       = 7228, -- Mining is possible here if you have <item>.
-        MIMEO_JEWEL_OFFSET            = 7336, -- The light from the <keyitem> is beginning to fade.
-        MUST_MOVE_CLOSER              = 7346, -- You must move a little closer to examine the area.
-        GASPONIA_POISON               = 7348, -- The poison of the Gasponia has begun to spread through your body.
-        OCCASIONAL_LUMPS              = 7363, -- Occasionally lumps arise in the ground here, then settle down again. It seems that there is something beneath the earth.
-        HOMEPOINT_SET                 = 8250, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 8308, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        MIMEO_JEWEL_OFFSET            = 7337, -- The light from the <keyitem> is beginning to fade.
+        MUST_MOVE_CLOSER              = 7347, -- You must move a little closer to examine the area.
+        GASPONIA_POISON               = 7349, -- The poison of the Gasponia has begun to spread through your body.
+        OCCASIONAL_LUMPS              = 7364, -- Occasionally lumps arise in the ground here, then settle down again. It seems that there is something beneath the earth.
+        HOMEPOINT_SET                 = 8251, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8309, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

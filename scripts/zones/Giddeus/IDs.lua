@@ -20,12 +20,12 @@ zones[xi.zone.GIDDEUS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7069, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7228, -- You can't fish here.
-        OFFERED_UP_KEY_ITEM           = 7353, -- Offered up key item: <keyitem>!
-        SPRING_FILL_UP                = 7374, -- You fill your flask with water.
-        SPRING_DEFAULT                = 7375, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
-        CHEST_UNLOCKED                = 7425, -- You unlock the chest!
-        HARVESTING_IS_POSSIBLE_HERE   = 7433, -- Harvesting is possible here if you have <item>.
-        HOMEPOINT_SET                 = 7461, -- Home point set!
+        OFFERED_UP_KEY_ITEM           = 7354, -- Offered up key item: <keyitem>!
+        SPRING_FILL_UP                = 7375, -- You fill your flask with water.
+        SPRING_DEFAULT                = 7376, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
+        CHEST_UNLOCKED                = 7426, -- You unlock the chest!
+        HARVESTING_IS_POSSIBLE_HERE   = 7434, -- Harvesting is possible here if you have <item>.
+        HOMEPOINT_SET                 = 7462, -- Home point set!
     },
     mob =
     {

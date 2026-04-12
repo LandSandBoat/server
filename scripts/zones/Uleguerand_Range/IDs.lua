@@ -19,13 +19,13 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         LOGIN_NUMBER                  = 7017, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7037, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7082, -- Tallying conquest results...
-        SOMETHING_GLITTERING          = 7353, -- You see something glittering beneath the surface of the ice.
-        WHAT_LIES_BENEATH             = 7354, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
-        SOMETHING_GLITTERING_BUT      = 7355, -- You see something glittering below the surface here, but the ice encases it completely.
+        SOMETHING_GLITTERING          = 7354, -- You see something glittering beneath the surface of the ice.
+        WHAT_LIES_BENEATH             = 7355, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
+        SOMETHING_GLITTERING_BUT      = 7356, -- You see something glittering below the surface here, but the ice encases it completely.
         GEUSH_COUNTER                 = 7411, -- Geush Urvan uses Counterstance!
-        FRESH_RABBIT_TRACKS           = 7412, -- There are fresh rabbit tracks here. The creature must still be in the vicinity.
-        HOMEPOINT_SET                 = 8347, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 8405, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        FRESH_RABBIT_TRACKS           = 7413, -- There are fresh rabbit tracks here. The creature must still be in the vicinity.
+        HOMEPOINT_SET                 = 8348, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8406, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

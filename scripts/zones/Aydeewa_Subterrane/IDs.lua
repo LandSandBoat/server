@@ -19,14 +19,14 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         LOGIN_NUMBER                  = 7004, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7024, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7065, -- You can't fish here.
-        MINING_IS_POSSIBLE_HERE       = 7336, -- Mining is possible here if you have <item>.
-        NO_MORE_SPROUTS               = 7722, -- However, you cannot carry any more sprouts.
-        PW_WHO_DARES                  = 7980, -- Who dares disturb these gates? Pathetic mortal, what foolishness has brought you here? No matter, your fate is now irrevocably sealed. Come now, do not fear. Embrace your death!
-        SENSE_OMINOUS_PRESENCE        = 8023, -- You sense an ominous presence...
-        BLOOD_STAINS                  = 8029, -- The ground is smeared with bloodstains...
-        DRAWS_NEAR                    = 8054, -- Something draws near!
-        COMMON_SENSE_SURVIVAL         = 8926, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        UNITY_WANTED_BATTLE_INTERACT  = 8990, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        MINING_IS_POSSIBLE_HERE       = 7337, -- Mining is possible here if you have <item>.
+        NO_MORE_SPROUTS               = 7723, -- However, you cannot carry any more sprouts.
+        PW_WHO_DARES                  = 7981, -- Who dares disturb these gates? Pathetic mortal, what foolishness has brought you here? No matter, your fate is now irrevocably sealed. Come now, do not fear. Embrace your death!
+        SENSE_OMINOUS_PRESENCE        = 8024, -- You sense an ominous presence...
+        BLOOD_STAINS                  = 8030, -- The ground is smeared with bloodstains...
+        DRAWS_NEAR                    = 8055, -- Something draws near!
+        COMMON_SENSE_SURVIVAL         = 8927, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8991, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

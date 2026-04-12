@@ -41,16 +41,16 @@ zones[xi.zone.METALWORKS] =
         NOGGA_SHOP_DIALOG             = 8025,  -- I've got some items you won't find elsewhere!
         TOMASA_SHOP_DIALOG            = 8026,  -- This is the Craftsmen's Eatery. Make room for the next customer when you're done, all right?
         FISHING_MESSAGE_OFFSET        = 8027,  -- You can't fish here.
-        CONQUEST                      = 8228,  -- You've earned conquest points!
-        GLAROCIQUET_DIALOG            = 8230,  -- I am , a Temple Knight. I am one of the guards charged with overseeing San d'Oria's conquest campaign.
-        LEXUN_MARIXUN_DIALOG          = 8232,  -- I am , a War Warlock. I am one of the guards charged with overseeing Windurst's conquest campaign.
-        EXTENDED_MISSION_OFFSET       = 8618,  -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
-        STEEL_CYCLONE_LEARNED         = 9036,  -- You have learned the weapon skill Steel Cyclone!
-        DETONATOR_LEARNED             = 9061,  -- You have learned the weapon skill Detonator!
-        TAKIYAH_CLOSED_DIALOG         = 10002, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
-        TAKIYAH_OPEN_DIALOG           = 10003, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
-        CELEBRATORY_GOODS             = 10850, -- An assortment of celebratory goods is available for purchase.
-        HOMEPOINT_SET                 = 11038, -- Home point set!
+        CONQUEST                      = 8229,  -- You've earned conquest points!
+        GLAROCIQUET_DIALOG            = 8231,  -- I am , a Temple Knight. I am one of the guards charged with overseeing San d'Oria's conquest campaign.
+        LEXUN_MARIXUN_DIALOG          = 8233,  -- I am , a War Warlock. I am one of the guards charged with overseeing Windurst's conquest campaign.
+        EXTENDED_MISSION_OFFSET       = 8619,  -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
+        STEEL_CYCLONE_LEARNED         = 9037,  -- You have learned the weapon skill Steel Cyclone!
+        DETONATOR_LEARNED             = 9062,  -- You have learned the weapon skill Detonator!
+        TAKIYAH_CLOSED_DIALOG         = 10003, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
+        TAKIYAH_OPEN_DIALOG           = 10004, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
+        CELEBRATORY_GOODS             = 10851, -- An assortment of celebratory goods is available for purchase.
+        HOMEPOINT_SET                 = 11039, -- Home point set!
     },
     mob =
     {
