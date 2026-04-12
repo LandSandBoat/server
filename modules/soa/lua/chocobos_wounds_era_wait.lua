@@ -76,9 +76,9 @@ m:addOverride('xi.server.onServerStart', function()
             quest:setVar(player, 'Timer', VanadielUniqueDay())
             quest:setVar(player, 'Prog', 6)
         end
-                
+
     end)
-        
+
 end)
 
 return m
