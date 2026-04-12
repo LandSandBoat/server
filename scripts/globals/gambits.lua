@@ -130,6 +130,7 @@ ai.select =
     HELIX_MOB_WEAKNESS  = 16,
     DEF_BAR_ELEMENT     = 17,
     RUNE_DAY            = 18,
+    WEIGHTED_WS         = 19,
 }
 ai.s = ai.select
 

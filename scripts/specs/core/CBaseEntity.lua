@@ -3384,6 +3384,11 @@ end
 function CBaseEntity:setTrustTPSkillSettings(trigger, select, value)
 end
 
+---@param weights table<integer, integer>
+---@return nil
+function CBaseEntity:setTrustTPWeaponSkillWeights(weights)
+end
+
 ---@nodiscard
 ---@return boolean
 function CBaseEntity:hasPet()
@@ -3930,6 +3935,13 @@ end
 ---@param pet CBaseEntity?
 ---@return nil
 function CBaseEntity:useJobAbility(skillID, pet)
+end
+
+---@param skillID integer
+---@param target CBaseEntity?
+---@param syncBattleId boolean?
+---@return nil
+function CBaseEntity:useWeaponSkill(skillID, target, syncBattleId)
 end
 
 ---@param skillID integer

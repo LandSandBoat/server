@@ -783,6 +783,7 @@ public:
     void   removeGambit(const std::string& id);
     void   removeAllGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, const sol::object& value);
+    void   setTrustTPWeaponSkillWeights(const sol::table& weights);
 
     bool   hasPet();
     bool   hasJugPet();
@@ -909,6 +910,7 @@ public:
 
     void castSpell(const sol::object& spell, const sol::object& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, const sol::object& pet);          // forces a job ability use (players/pets only)
+    void useWeaponSkill(sol::variadic_args va);                          // forces a trust/mob/pet/player to use a specific weapon skill
     void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
     void usePetAbility(uint16 skillId, const sol::object& target) const; // forces a pet to use a pet ability
     auto getAbilityDistance(uint16 skillID) -> float;                    // Returns the specified distance for mob skill

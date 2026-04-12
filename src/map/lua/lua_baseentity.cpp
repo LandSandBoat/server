@@ -15954,6 +15954,53 @@ void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select, cons
 }
 
 /************************************************************************
+ *  Function: setTrustTPWeaponSkillWeights(weights)
+ *  Purpose : Sets weighted preferences by weapon skill ID for trust TP skill usage.
+ *  Example : mob:setTrustTPWeaponSkillWeights({ [238] = 8, [42] = 2 })
+ *  Notes   : Missing IDs default to weight 1. IDs set to 0 are ignored.
+ ************************************************************************/
+
+void CLuaBaseEntity::setTrustTPWeaponSkillWeights(const sol::table& weights)
+{
+    if (m_PBaseEntity->objtype != TYPE_TRUST)
+    {
+        ShowWarning("Invalid Entity calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->tp_skill_weights.clear();
+
+    for (const auto& [key, value] : weights)
+    {
+        if (!key.is<int>() || !value.is<int>())
+        {
+            continue;
+        }
+
+        const auto skillIdRaw = key.as<int>();
+        const auto weightRaw  = value.as<int>();
+
+        if (skillIdRaw < 0 || skillIdRaw > std::numeric_limits<uint16>::max() || weightRaw < 0 || weightRaw > std::numeric_limits<uint16>::max())
+        {
+            continue;
+        }
+
+        const auto skillId = static_cast<uint16>(skillIdRaw);
+        const auto weight  = static_cast<uint16>(weightRaw);
+
+        if (weight == 0)
+        {
+            continue;
+        }
+
+        controller->m_GambitsContainer->tp_skill_weights[skillId] = weight;
+    }
+}
+
+/************************************************************************
  *  Function: despawnPet()
  *  Purpose : Despawns a Pet Entity
  *  Example : target:despawnPet()
@@ -18352,6 +18399,66 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, const sol::object& pet)
 }
 
 /************************************************************************
+ *  Function: useWeaponSkill()
+ *  Purpose : Forces an entity to use a specific weapon skill
+ *  Example : mob:useWeaponSkill(238, target)
+ ************************************************************************/
+
+void CLuaBaseEntity::useWeaponSkill(sol::variadic_args va)
+{
+    if (va.size() == 0)
+    {
+        ShowWarning("CLuaBaseEntity::useWeaponSkill - Missing weaponskill ID");
+        return;
+    }
+
+    auto           skillid{ va.get<uint16>(0) };
+    CBattleEntity* PTarget{ nullptr };
+    bool           syncBattleId{ true };
+
+    if (va.size() >= 2)
+    {
+        CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(1);
+        PTarget                        = PLuaBaseEntity ? dynamic_cast<CBattleEntity*>(PLuaBaseEntity->m_PBaseEntity) : nullptr;
+    }
+
+    if (va.size() >= 3 && va.get_type(2) == sol::type::boolean)
+    {
+        syncBattleId = va.get<bool>(2);
+    }
+
+    // clang-format off
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, syncBattleId](auto PEntity)
+    {
+        auto* battleEntity = dynamic_cast<CBattleEntity*>(PEntity);
+        if (!battleEntity)
+        {
+            return;
+        }
+
+        if (PTarget)
+        {
+            if (syncBattleId && battleEntity->getBattleID() != PTarget->getBattleID())
+            {
+                battleEntity->setBattleID(PTarget->getBattleID());
+            }
+            PEntity->PAI->WeaponSkill(PTarget->targid, skillid);
+        }
+        else
+        {
+            auto* battleTarget = battleEntity->GetBattleTarget();
+            if (battleTarget)
+            {
+                PEntity->PAI->WeaponSkill(battleTarget->targid, skillid);
+            }
+        }
+    }));
+    // clang-format on
+
+    m_PBaseEntity->PAI->checkQueueImmediately();
+}
+
+/************************************************************************
  *  Function: useMobAbility()
  *  Purpose : Uses a specified Mob Ability or the next one ready in the que
  *  Example : automation:useMobAbility(2132, automation) --Specifying pet
@@ -20339,6 +20446,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("removeGambit", CLuaBaseEntity::removeGambit);
     SOL_REGISTER("removeAllGambits", CLuaBaseEntity::removeAllGambits);
     SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
+    SOL_REGISTER("setTrustTPWeaponSkillWeights", CLuaBaseEntity::setTrustTPWeaponSkillWeights);
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
@@ -20414,6 +20522,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("castSpell", CLuaBaseEntity::castSpell);
     SOL_REGISTER("useJobAbility", CLuaBaseEntity::useJobAbility);
+    SOL_REGISTER("useWeaponSkill", CLuaBaseEntity::useWeaponSkill);
     SOL_REGISTER("useMobAbility", CLuaBaseEntity::useMobAbility);
     SOL_REGISTER("usePetAbility", CLuaBaseEntity::usePetAbility);
     SOL_REGISTER("getAbilityDistance", CLuaBaseEntity::getAbilityDistance);

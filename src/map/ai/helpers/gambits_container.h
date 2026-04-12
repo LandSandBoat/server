@@ -31,6 +31,7 @@
 #include "status_effect_container.h"
 
 #include <set>
+#include <unordered_map>
 #include <utility>
 
 namespace gambits
@@ -131,6 +132,7 @@ enum class G_SELECT : uint16
     HELIX_MOB_WEAKNESS  = 16,
     DEF_BAR_ELEMENT     = 17,
     RUNE_DAY            = 18,
+    WEIGHTED_WS         = 19,
 };
 
 enum class G_TP_TRIGGER : uint16
@@ -295,10 +297,11 @@ public:
     auto Tick(timer::time_point tick) -> Task<void>;
 
     // TODO: make private
-    std::vector<TrustSkill_t> tp_skills;
-    G_TP_TRIGGER              tp_trigger;
-    G_SELECT                  tp_select;
-    uint16                    tp_value;
+    std::vector<TrustSkill_t>          tp_skills;
+    G_TP_TRIGGER                       tp_trigger;
+    G_SELECT                           tp_select;
+    uint16                             tp_value;
+    std::unordered_map<uint16, uint16> tp_skill_weights;
 
 private:
     bool CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup);

@@ -1600,6 +1600,98 @@ bool CGambitsContainer::TryTrustSkill()
 
                 break;
             }
+            case G_SELECT::WEIGHTED_WS:
+            {
+                auto getWeight = [this](uint16 skillId) -> uint16
+                {
+                    if (const auto it = tp_skill_weights.find(skillId); it != tp_skill_weights.end())
+                    {
+                        return it->second;
+                    }
+
+                    return 1;
+                };
+
+                auto weighted_pick = [&](const std::vector<TrustSkill_t>& candidates) -> Maybe<TrustSkill_t>
+                {
+                    if (candidates.empty())
+                    {
+                        return {};
+                    }
+
+                    uint32 total_weight = 0;
+                    for (const auto& skill : candidates)
+                    {
+                        const auto weight = getWeight(static_cast<uint16>(skill.skill_id));
+                        total_weight += static_cast<uint32>(weight);
+                    }
+
+                    if (total_weight == 0)
+                    {
+                        return {};
+                    }
+
+                    uint32 roll = xirand::GetRandomNumber<uint32>(1, total_weight);
+                    for (const auto& skill : candidates)
+                    {
+                        const auto weight = getWeight(static_cast<uint16>(skill.skill_id));
+
+                        if (weight == 0)
+                        {
+                            continue;
+                        }
+
+                        if (roll <= weight)
+                        {
+                            return skill;
+                        }
+
+                        roll -= weight;
+                    }
+
+                    return {};
+                };
+
+                auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+
+                if (!PSCEffect)
+                {
+                    chosen_skill = weighted_pick(tp_skills);
+                    break;
+                }
+
+                std::vector<TrustSkill_t> closing_skills;
+                for (auto& skill : tp_skills)
+                {
+                    std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
+                    if (uint16 power = PSCEffect->GetPower())
+                    {
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power & 0xF));
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power >> 4 & 0xF));
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power >> 8));
+                    }
+
+                    std::list<SKILLCHAIN_ELEMENT> skillProperties;
+                    skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(skill.primary));
+                    skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(skill.secondary));
+                    skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(skill.tertiary));
+                    if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
+                        possible_skillchain != SC_NONE)
+                    {
+                        closing_skills.emplace_back(skill);
+                    }
+                }
+
+                if (!closing_skills.empty())
+                {
+                    chosen_skill = weighted_pick(closing_skills);
+                }
+                else
+                {
+                    chosen_skill = weighted_pick(tp_skills);
+                }
+                break;
+            }
             default:
             {
                 break;
@@ -1646,7 +1738,7 @@ bool CGambitsContainer::TryTrustSkill()
     return false;
 }
 
-// currently only used for Uka Totlihn to determin what samba to use.
+// currently only used for Uka Totlihn to determine what samba to use.
 bool CGambitsContainer::PartyHasHealer()
 {
     bool hasHealer = false;
