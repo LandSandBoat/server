@@ -30,6 +30,7 @@ m:addOverride('xi.server.onServerStart', function()
                 end
             end
         end
+                
         -- TODO: needs capture for retail event data to determine how the trades are completed.
         -- Retail doesn't print the gausebit grass obtained by player after each "too soon" trade.
         -- Suggests the event may be giving the item back or zoning player.
@@ -55,6 +56,7 @@ m:addOverride('xi.server.onServerStart', function()
             quest:setVar(player, 'Timer', VanadielUniqueDay())
             quest:setVar(player, 'Prog', 3)
         end
+                
         -- 3rd and later feed attempts, Chocobo is ready events do not give the item back and sets a new timer for next attempt
         quest.sections[2][xi.zone.UPPER_JEUNO].onEventFinish[59] = function(player, csid, option, npc)
             player:confirmTrade()
@@ -74,6 +76,7 @@ m:addOverride('xi.server.onServerStart', function()
             quest:setVar(player, 'Timer', VanadielUniqueDay())
             quest:setVar(player, 'Prog', 6)
         end
+                
     end)
 end)
 -- The final event [64] does not need to set a new timer as the quest is already complete at that point
