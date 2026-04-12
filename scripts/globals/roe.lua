@@ -14,7 +14,7 @@ xi.roe = xi.roe or {}
 
 local checks =
 {
-    mobID = function(self, player, params)    -- Mob ID check
+    mobID = function(self, player, params) -- Mob ID check
         return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
     end,
 
@@ -22,51 +22,55 @@ local checks =
         return (params.mob and self.reqs.mobName[params.mob:getName()]) and true or false
     end,
 
-    mobXP = function(self, player, params)    -- Mob yields xp
+    mobXP = function(self, player, params) -- Mob yields xp
         return (params.mob and player:checkKillCredit(params.mob)) and true or false
     end,
 
-    mobFamily = function(self, player, params)   -- Mob family in set
+    mobFamily = function(self, player, params) -- Mob family in set
         return (params.mob and self.reqs.mobFamily[params.mob:getFamily()]) and true or false
     end,
 
-    mobSystem = function(self, player, params)   -- Mob system in set
+    mobSuperFamily = function(self, player, params) -- Mob super family in set
+        return (params.mob and self.reqs.mobSuperFamily[params.mob:getSuperFamily()]) and true or false
+    end,
+
+    mobSystem = function(self, player, params) -- Mob system in set
         return (params.mob and self.reqs.mobSystem[params.mob:getEcosystem()]) and true or false
     end,
 
-    dmgMin = function(self, player, params)  -- Minimum Dmg Dealt/Taken
+    dmgMin = function(self, player, params) -- Minimum Dmg Dealt/Taken
         return (params.dmg and params.dmg >= self.reqs.dmgMin) and true or false
     end,
 
-    dmgMax = function(self, player, params)  -- Maximum Dmg Dealt/Taken
+    dmgMax = function(self, player, params) -- Maximum Dmg Dealt/Taken
         return (params.dmg and params.dmg <= self.reqs.dmgMax) and true or false
     end,
 
-    atkType = function(self, player, params)  -- Dmg Type is
+    atkType = function(self, player, params) -- Dmg Type is
         return (params.atkType == self.reqs.atkType) and true or false
     end,
 
-    healMin = function(self, player, params)  -- Minimum Amount healed
+    healMin = function(self, player, params) -- Minimum Amount healed
         return (params.heal and params.heal >= self.reqs.healMin) and true or false
     end,
 
-    zone = function(self, player, params)  -- Player in Zone
+    zone = function(self, player, params) -- Player in Zone
         return (self.reqs.zone[player:getZoneID()]) and true or false
     end,
 
-    zoneNot = function(self, player, params)  -- Player not in Zone
+    zoneNot = function(self, player, params) -- Player not in Zone
         return (not self.reqs.zoneNot[player:getZoneID()]) and true or false
     end,
 
-    itemID = function(self, player, params)  -- itemid in set
+    itemID = function(self, player, params) -- itemid in set
         return (params.itemid and self.reqs.itemID[params.itemid]) and true or false
     end,
 
-    levelSync = function(self, player, params)  -- Player is Level Sync'd
+    levelSync = function(self, player, params) -- Player is Level Sync'd
         return self.reqs.levelSync and player:hasStatusEffect(xi.effect.LEVEL_SYNC) and true or false
     end,
 
-    jobLvl = function(self, player, params)  -- Player has job at minimum level X
+    jobLvl = function(self, player, params) -- Player has job at minimum level X
         return player:getJobLevel(self.reqs.jobLvl[1]) >= self.reqs.jobLvl[2] and true or false
     end,
 
