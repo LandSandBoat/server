@@ -45867,6 +45867,7 @@ INSERT INTO `mob_spawn_points` VALUES (17305782,0,'Bloodwing_Maimer','Bloodwing 
 INSERT INTO `mob_spawn_points` VALUES (17305783,0,'Bloodwing_Deathrainer','Bloodwing Deathrainer',21,75,75,450.000,0.001,438.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17305784,0,'Bloodwing_Deathrainer','Bloodwing Deathrainer',21,75,75,466.000,0.500,438.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17305785,0,'Excenmille','Excenmille',22,75,75,458.000,-0.006,416.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17305786,0,'Lambton_Worm','Lambton Worm',23,99,99,-34.200,-16.000,58.000,32);
 
 -- ------------------------------------------------------------
 -- Ru'Aun Gardens (Zone 130)
@@ -69710,7 +69711,6 @@ INSERT INTO `mob_spawn_points` VALUES (17613142,0,'Carousing_Celine','Carousing 
 INSERT INTO `mob_spawn_points` VALUES (17613143,0,'Carousing_Celine','Carousing Celine',44,128,128,136.968,-24.499,60.558,31);
 INSERT INTO `mob_spawn_points` VALUES (17613144,0,'Carousing_Celine','Carousing Celine',44,128,128,-148.490,-16.356,-69.940,0);
 INSERT INTO `mob_spawn_points` VALUES (17613145,0,'Arcus_Blades','Arcus Blades',45,125,125,-109.000,-16.100,221.000,60);
-INSERT INTO `mob_spawn_points` VALUES (17613146,0,'Lambton_Worm','Lambton Worm',46,99,99,-34.200,-16.000,58.000,32);
 
 -- ------------------------------------------------------------
 -- Ifrit's Cauldron (Zone 205)
