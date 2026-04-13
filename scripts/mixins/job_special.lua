@@ -136,11 +136,7 @@ local familyEES =
     [221] = xi.mobSkill.EES_SHADE,   -- Shadow
     [246] = xi.mobSkill.EES_TROLL,   -- Troll
     [270] = xi.mobSkill.EES_YAGUDO,  -- Yagudo
-    [327] = xi.mobSkill.EES_GOBLIN,  -- Goblin
-    [328] = xi.mobSkill.EES_GIGAS,   -- Gigas
     [335] = xi.mobSkill.EES_MAAT,    -- Maat
-    [358] = xi.mobSkill.EES_KINDRED, -- Kindred
-    [359] = xi.mobSkill.EES_SHADE,   -- Fomor
     [373] = xi.mobSkill.EES_GOBLIN,  -- Goblin_Armored
 }
 

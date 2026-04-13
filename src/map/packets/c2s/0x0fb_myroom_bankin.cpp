@@ -43,90 +43,108 @@ const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator()
-        .mustNotEqual(MyroomItemNo, 0, "MyroomItemNo must not equal 0")
-        .oneOf("MyroomCategory", MyroomCategory, validContainers);
+        .mustNotEqual(this->MyroomItemNo, 0, "MyroomItemNo must not equal 0")
+        .oneOf("MyroomCategory", this->MyroomCategory, validContainers);
 }
 
 void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer*  PItemContainer = PChar->getStorage(MyroomCategory);
-    CItemFurnishing* PItem          = static_cast<CItemFurnishing*>(PItemContainer->GetItem(MyroomItemIndex));
-
-    if (PItem != nullptr && PItem->getID() == MyroomItemNo && PItem->isType(ITEM_FURNISHING))
+    const CItemContainer* PItemContainer = PChar->getStorage(this->MyroomCategory);
+    if (this->MyroomItemIndex > PItemContainer->GetSize())
     {
-        PItemContainer = PChar->getStorage(LOC_STORAGE);
+        ShowErrorFmt("Invalid slot requested: {}", PChar->getName());
+        return;
+    }
 
-        uint8 RemovedSize = PItemContainer->GetSize() - std::min<uint8>(PItemContainer->GetSize(), PItemContainer->GetBuff() - PItem->getStorage());
+    CItem* PItem = PItemContainer->GetItem(this->MyroomItemIndex);
+    if (PItem == nullptr || !PItem->isType(ITEM_FURNISHING))
+    {
+        return;
+    }
 
-        if (PItemContainer->GetFreeSlotsCount() >= RemovedSize)
+    auto* PFurnishing = static_cast<CItemFurnishing*>(PItem);
+
+    if (PFurnishing->getID() != this->MyroomItemNo)
+    {
+        ShowErrorFmt("Bankin item id mismatch: {}", PChar->getName());
+        return;
+    }
+
+    if (!PFurnishing->isInstalled())
+    {
+        ShowErrorFmt("Bankin requested for an uninstalled item: {}", PChar->getName());
+        return;
+    }
+
+    PItemContainer          = PChar->getStorage(LOC_STORAGE);
+    const uint8 RemovedSize = PItemContainer->GetSize() - std::min<uint8>(PItemContainer->GetSize(), PItemContainer->GetBuff() - PFurnishing->getStorage());
+    if (PItemContainer->GetFreeSlotsCount() < RemovedSize)
+    {
+        ShowError("GP_CLI_COMMAND_MYROOM_BANKIN: furnishing can't be removed");
+        return;
+    }
+
+    PFurnishing->setInstalled(false);
+    PFurnishing->setCol(0);
+    PFurnishing->setRow(0);
+    PFurnishing->setLevel(0);
+    PFurnishing->setRotation(0);
+
+    PFurnishing->setSubType(ITEM_UNLOCKED);
+
+    // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
+    if (PFurnishing->isMannequin())
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
+        auto&    mannequin = PFurnishing->exdata<Exdata::Mannequin>();
+        uint8_t* slots[]   = { &mannequin.EquipMain, &mannequin.EquipSub, &mannequin.EquipRanged, &mannequin.EquipHead, &mannequin.EquipBody, &mannequin.EquipHands, &mannequin.EquipLegs, &mannequin.EquipFeet };
+        for (auto* slot : slots)
         {
-            PItem->setInstalled(false);
-            PItem->setCol(0);
-            PItem->setRow(0);
-            PItem->setLevel(0);
-            PItem->setRotation(0);
-
-            PItem->setSubType(ITEM_UNLOCKED);
-
-            // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
-            if (PItem->isMannequin())
+            if (*slot > 0)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
-                auto&    mannequin = PItem->exdata<Exdata::Mannequin>();
-                uint8_t* slots[]   = { &mannequin.EquipMain, &mannequin.EquipSub, &mannequin.EquipRanged, &mannequin.EquipHead, &mannequin.EquipBody, &mannequin.EquipHands, &mannequin.EquipLegs, &mannequin.EquipFeet };
-                for (auto* slot : slots)
+                auto* PEquippedItem = PChar->getStorage(LOC_STORAGE)->GetItem(*slot);
+                if (PEquippedItem != nullptr)
                 {
-                    if (*slot > 0)
-                    {
-                        auto* PEquippedItem = PChar->getStorage(LOC_STORAGE)->GetItem(*slot);
-                        if (PEquippedItem != nullptr)
-                        {
-                            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PEquippedItem, ItemLockFlg::Normal);
-                        }
-
-                        *slot = 0;
-                    }
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PEquippedItem, ItemLockFlg::Normal);
                 }
+
+                *slot = 0;
             }
-
-            const auto rset = db::preparedStmt("UPDATE char_inventory "
-                                               "SET "
-                                               "extra = ? "
-                                               "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
-                                               PItem->m_extra,
-                                               MyroomCategory,
-                                               MyroomItemIndex,
-                                               PChar->id);
-
-            if (rset && rset->rowsAffected())
-            {
-                uint8 NewSize = PItemContainer->GetSize() - RemovedSize;
-                for (uint8 SlotID = PItemContainer->GetSize(); SlotID > NewSize; --SlotID)
-                {
-                    if (PItemContainer->GetItem(SlotID) != nullptr)
-                    {
-                        charutils::MoveItem(PChar, LOC_STORAGE, SlotID, ERROR_SLOTID);
-                    }
-                }
-
-                // Storage mods only apply on the 1st floor
-                if (!PItem->getOn2ndFloor())
-                {
-                    PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
-                }
-
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
-
-                luautils::OnFurnitureRemoved(PChar, PItem);
-
-                PChar->loc.zone->SpawnConditionalNPCs(PChar);
-            }
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), PItem->getSlotID());
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-        }
-        else
-        {
-            ShowError("GP_CLI_COMMAND_MYROOM_BANKIN: furnishing can't be removed");
         }
     }
+
+    const auto rset = db::preparedStmt("UPDATE char_inventory "
+                                       "SET "
+                                       "extra = ? "
+                                       "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
+                                       PFurnishing->m_extra,
+                                       this->MyroomCategory,
+                                       this->MyroomItemIndex,
+                                       PChar->id);
+
+    if (rset && rset->rowsAffected())
+    {
+        const uint8 NewSize = PItemContainer->GetSize() - RemovedSize;
+        for (uint8 SlotID = PItemContainer->GetSize(); SlotID > NewSize; --SlotID)
+        {
+            if (PItemContainer->GetItem(SlotID) != nullptr)
+            {
+                charutils::MoveItem(PChar, LOC_STORAGE, SlotID, ERROR_SLOTID);
+            }
+        }
+
+        // Storage mods only apply on the 1st floor
+        if (!PFurnishing->getOn2ndFloor())
+        {
+            PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PFurnishing->getStorage());
+        }
+
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
+
+        luautils::OnFurnitureRemoved(PChar, PFurnishing);
+
+        PChar->loc.zone->SpawnConditionalNPCs(PChar);
+    }
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PFurnishing, static_cast<CONTAINER_ID>(this->MyroomCategory), PFurnishing->getSlotID());
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

@@ -25,6 +25,7 @@
 #include "common/cbasetypes.h"
 
 #include "item.h"
+#include "map/enums/furnishing_placement.h"
 
 // List of Moghancements
 
@@ -110,6 +111,9 @@ public:
     uint16 getMoghancement() const;
     uint8  getElement() const;
     uint8  getAura() const;
+    auto   size() const -> std::pair<uint8, uint8>;
+    auto   height() const -> uint16;
+    auto   placement() const -> FurnishingPlacement;
 
     bool  isInstalled();
     uint8 getCol();
@@ -123,6 +127,9 @@ public:
     void setMoghancement(uint16 moghancement);
     void setElement(uint8 element);
     void setAura(uint8 aura);
+    void setSize(uint8 size_x, uint8 size_y);
+    void setHeight(uint16 height);
+    void setPlacement(FurnishingPlacement placement);
 
     void setCol(uint8 col);
     void setRow(uint8 row);
@@ -144,10 +151,13 @@ public:
     bool isGardeningPot() const;
 
 private:
-    uint8  m_storage;
-    uint16 m_moghancement;
-    uint8  m_element;
-    uint8  m_aura;
+    uint8                   m_storage;
+    uint16                  m_moghancement;
+    uint8                   m_element;
+    uint8                   m_aura;
+    std::pair<uint8, uint8> size_{ 1, 1 };
+    uint16                  height_{};
+    FurnishingPlacement     placement_{ FurnishingPlacement::Floor };
 };
 
 #endif

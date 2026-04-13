@@ -747,6 +747,18 @@ xi.mobSkill =
 
     CITADEL_BUSTER                = 1540,
 
+    TRAMPLE_BAHAMUT               = 1542,
+    TEMPEST_WING                  = 1543,
+    TOUCHDOWN_BAHAMUT             = 1544,
+    SWEEPING_FLAIL                = 1545,
+    PRODIGIOUS_SPIKE              = 1546,
+    IMPULSION                     = 1547,
+    ABSOLUTE_TERROR_BAHAMUT       = 1548,
+    HORRIBLE_ROAR_BAHAMUT         = 1549,
+
+    MEGAFLARE                     = 1551,
+    GIGAFLARE                     = 1552,
+
     CAMISADO_2                    = 1554,
 
     -- EES_?                         = 1557,

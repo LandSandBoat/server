@@ -24,80 +24,266 @@
 #include "entities/charentity.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
+#include "map/enums/furnishing_placement.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
-#include "utils/charutils.h"
+
+namespace
+{
+// MH1F: 20x24 grid with a 8x18 unusable rectangle (x 6..13, z 0..17)
+// MH2F: 20x26 grid, no exclusions.
+auto isValidFloorCell(const uint8 cx, const uint8 cz, const bool is2F) -> bool
+{
+    if (is2F)
+    {
+        return cx <= 19 && cz <= 25;
+    }
+
+    if (cz > 23)
+    {
+        return false;
+    }
+
+    if (cx <= 5 || (cx >= 14 && cx <= 19))
+    {
+        return true;
+    }
+
+    return cx >= 6 && cx <= 13 && cz >= 18;
+}
+
+// 1F has 5 wall slots (0..4); 2F has 92 (0..91).
+auto isValidWallSlot(const uint8 slot, const bool is2F) -> bool
+{
+    return slot <= (is2F ? 91 : 4);
+}
+
+// 90/270 degree rotations swap the item's width and depth.
+auto rotatedSize(const CItemFurnishing* PItem, const uint8 v) -> std::pair<uint8, uint8>
+{
+    const auto [sx, sy] = PItem->size();
+    return v == 1 || v == 3 ? std::pair{ sy, sx } : std::pair{ sx, sy };
+}
+
+// Given packet anchor point for furniture and server-side dimensions, ensure the whole footprint fits in legitimate cells.
+auto footprintInGrid(const uint8 ax, const uint8 az, const uint8 sx, const uint8 sz, const bool is2F) -> bool
+{
+    for (uint8 cx = ax; cx < ax + sx; ++cx)
+    {
+        for (uint8 cz = az; cz < az + sz; ++cz)
+        {
+            if (!isValidFloorCell(cx, cz, is2F))
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+// Does 'other' occupy a floor cell that overlaps the rectangle at (x, z, width, depth)?
+auto collidesOnFloor(CItemFurnishing* other, const uint8 x, const uint8 z, const uint8 width, const uint8 depth, const bool is2F) -> bool
+{
+    if (other->getOn2ndFloor() != is2F)
+    {
+        return false;
+    }
+
+    const auto op = other->placement();
+    if (op == FurnishingPlacement::Wall)
+    {
+        return false;
+    }
+
+    // Stacked OnTable items live above the floor and don't conflict.
+    if (op == FurnishingPlacement::OnTable && other->getLevel() != 0)
+    {
+        return false;
+    }
+
+    const auto [otherWidth, otherDepth] = rotatedSize(other, other->getRotation());
+    const uint8 otherX                  = other->getCol();
+    const uint8 otherZ                  = other->getRow();
+    return x < otherX + otherWidth && otherX < x + width &&
+           z < otherZ + otherDepth && otherZ < z + depth;
+}
+
+// Walks every installed furnishing in both mog safes (skipping the
+// self entry) and returns true if pred matches one.
+auto anyInstalledFurnishing(CCharEntity* PChar, const uint8 selfCat, const uint8 selfSlot, auto&& pred) -> bool
+{
+    for (const auto cat : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    {
+        const auto* container = PChar->getStorage(cat);
+        for (int slot = 1; slot <= container->GetSize(); ++slot)
+        {
+            if (cat == selfCat && slot == selfSlot)
+            {
+                continue;
+            }
+
+            if (auto* PFurn = dynamic_cast<CItemFurnishing*>(container->GetItem(slot)); PFurn && PFurn->isInstalled() && pred(PFurn))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+} // namespace
 
 auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // There's a handful more checks that could be moved up here, but the handler needs a proper refactor first.
     return PacketValidator()
-        .range("MyroomFloorFlg", MyroomFloorFlg, 0, 1) // Flag indicating if 2nd floor
-        .range("v", v, 0x0, 0x03)                      // Rotation of the item (0-3)
-        .range("y", y, 0x0, 0x15);                     // Y grid position
+        .range("MyroomFloorFlg", this->MyroomFloorFlg, 0, 1) // Flag indicating if 2nd floor
+        .range("v", this->v, 0, 3)                           // Rotation of the item (0-3)
+        .range("y", this->y, 0, 25);                         // Stacking elevation (parent height / 10)
 }
 
 void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (MyroomItemNo == 0)
+    if (this->MyroomItemNo == 0)
     {
         // No item sent means the client has finished placing furniture
         PChar->UpdateMoghancement();
         return;
     }
 
-    // TODO: Should we be responding with inventory update/finish if we reject the client's request?
-
-    if (MyroomCategory != LOC_MOGSAFE && MyroomCategory != LOC_MOGSAFE2)
+    if (this->MyroomCategory != LOC_MOGSAFE && this->MyroomCategory != LOC_MOGSAFE2)
     {
         RATE_LIMIT(30s, ShowErrorFmt("Invalid container requested: {}", PChar->getName()));
         return;
     }
 
-    auto* PContainer = PChar->getStorage(MyroomCategory);
-    if (PContainer == nullptr)
-    {
-        RATE_LIMIT(30s, ShowErrorFmt("Invalid storage requested: {}", PChar->getName()));
-        return;
-    }
+    auto* PContainer = PChar->getStorage(this->MyroomCategory);
 
-    if (MyroomItemIndex > PContainer->GetSize()) // TODO: Is this off-by-one?
+    // Reject out of bounds item index
+    if (this->MyroomItemIndex > PContainer->GetSize())
     {
         RATE_LIMIT(30s, ShowErrorFmt("Invalid slot requested: {}", PChar->getName()));
         return;
     }
 
-    // NOTE: Items hanging on walls count as their own z/x entries, rather than y changes.
-    //     : The multiple options on MH2F mean the x limit is higher.
-
-    // NOTE: These are all unsigned, so <0 is handled
-    bool lowerArea0 = z <= 23 && x <= 5;
-    bool lowerArea1 = z >= 18 && z <= 23 && x >= 6 && x <= 13;
-    bool lowerArea2 = z <= 23 && x >= 14 && x <= 19;
-    bool upperArea0 = z <= 25 && x <= 91;
-
-    if (MyroomFloorFlg && !upperArea0)
+    // Reject MH2F placements without MH2F unlocked
+    const bool is2F = this->MyroomFloorFlg != 0;
+    if (is2F && !(PChar->profile.mhflag & 0x20))
     {
-        RATE_LIMIT(30s, ShowErrorFmt("Invalid z/x requested: {}", PChar->getName()));
-        return;
-    }
-    else if (!MyroomFloorFlg && !lowerArea0 && !lowerArea1 && !lowerArea2)
-    {
-        RATE_LIMIT(30s, ShowErrorFmt("Invalid z/x requested: {}", PChar->getName()));
+        ShowErrorFmt("MH2F placement without 2F unlocked: {}", PChar->getName());
         return;
     }
 
-    // Get item
-    auto* PItem = dynamic_cast<CItemFurnishing*>(PContainer->GetItem(MyroomItemIndex));
-    if (PItem == nullptr)
+    // Reject missing or wrong type items
+    CItem* PSlotItem = PContainer->GetItem(this->MyroomItemIndex);
+    if (!PSlotItem || !PSlotItem->isType(ITEM_FURNISHING))
     {
         return;
+    }
+
+    auto* PItem = static_cast<CItemFurnishing*>(PSlotItem);
+
+    // Reject item ID not matching packet value.
+    if (PItem->getID() != this->MyroomItemNo)
+    {
+        ShowErrorFmt("Layout item id mismatch: {}", PChar->getName());
+        return;
+    }
+
+    const auto placement              = PItem->placement();
+    const auto [itemWidth, itemDepth] = rotatedSize(PItem, this->v);
+
+    switch (placement)
+    {
+        case FurnishingPlacement::Floor:
+        case FurnishingPlacement::Surface:
+        case FurnishingPlacement::OnTable:
+        {
+            // Every cell of the footprint must land on a valid floor tile.
+            if (!footprintInGrid(this->x, this->z, itemWidth, itemDepth, is2F))
+            {
+                ShowErrorFmt("Invalid placement footprint: {}", PChar->getName());
+                return;
+            }
+
+            // Items on the floor (y=0) must not overlap other floor furniture.
+            // Stacked items (y>0) skip this because the client sends them before
+            // the parent when repositioning, so the parent isn't at its new spot yet.
+            if (this->y == 0 && anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+                                                       {
+                                                           return collidesOnFloor(other, this->x, this->z, itemWidth, itemDepth, is2F);
+                                                       }))
+            {
+                ShowErrorFmt("Placement collides with installed furniture: {}", PChar->getName());
+                return;
+            }
+
+            // Fresh OnTable placement (not a move): verify a Surface parent exists
+            // at (x, z) with matching height. Moves skip this because the client
+            // sends the child packet before the parent's.
+            if (placement == FurnishingPlacement::OnTable && this->y > 0 && !PItem->isInstalled())
+            {
+                const bool hasParent = anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+                                                              {
+                                                                  if (other->placement() != FurnishingPlacement::Surface || other->getOn2ndFloor() != is2F)
+                                                                  {
+                                                                      return false;
+                                                                  }
+
+                                                                  if (other->height() / 10 != this->y)
+                                                                  {
+                                                                      return false;
+                                                                  }
+
+                                                                  const auto [pw, pd] = rotatedSize(other, other->getRotation());
+                                                                  const uint8 px      = other->getCol();
+                                                                  const uint8 pz      = other->getRow();
+                                                                  return this->x >= px && this->x < px + pw &&
+                                                                         this->z >= pz && this->z < pz + pd;
+                                                              });
+                if (!hasParent)
+                {
+                    ShowErrorFmt("OnTable placement with no matching Surface parent: {}", PChar->getName());
+                    return;
+                }
+            }
+
+            break;
+        }
+        case FurnishingPlacement::Wall:
+        {
+            if (this->y != 0 || this->z != 0)
+            {
+                ShowErrorFmt("Wall placement with non-zero y/z: {}", PChar->getName());
+                return;
+            }
+
+            if (!isValidWallSlot(this->x, is2F))
+            {
+                ShowErrorFmt("Invalid wall slot requested: {}", PChar->getName());
+                return;
+            }
+
+            const bool occupied = anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+                                                         {
+                                                             return other->placement() == FurnishingPlacement::Wall &&
+                                                                    other->getOn2ndFloor() == is2F &&
+                                                                    other->getCol() == this->x;
+                                                         });
+            if (occupied)
+            {
+                ShowErrorFmt("Wall slot already occupied: {}", PChar->getName());
+                return;
+            }
+
+            break;
+        }
     }
 
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
-    if (MyroomFloorFlg && PItem->isGardeningPot())
+    if (this->MyroomFloorFlg && PItem->isGardeningPot())
     {
         RATE_LIMIT(
             30s,
@@ -110,17 +296,15 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
     }
 
     // Continue with regular usage
-    if (PItem->getID() == MyroomItemNo && PItem->isType(ITEM_FURNISHING))
+    if (PItem->getID() == this->MyroomItemNo && PItem->isType(ITEM_FURNISHING))
     {
-        auto tempV = v;
-
         bool wasInstalled = PItem->isInstalled();
         PItem->setInstalled(true);
-        PItem->setOn2ndFloor(MyroomFloorFlg);
-        PItem->setCol(x);
-        PItem->setRow(z);
-        PItem->setLevel(y);
-        PItem->setRotation(tempV);
+        PItem->setOn2ndFloor(this->MyroomFloorFlg);
+        PItem->setCol(this->x);
+        PItem->setRow(this->z);
+        PItem->setLevel(this->y);
+        PItem->setRotation(this->v);
 
         constexpr auto maxContainerSize = MAX_CONTAINER_SIZE * 2;
 
@@ -132,7 +316,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             CItemContainer* PContainer = PChar->getStorage(safeMyroomCategory);
             for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
             {
-                if (MyroomItemIndex == slotIndex && MyroomCategory == safeMyroomCategory)
+                if (this->MyroomItemIndex == slotIndex && this->MyroomCategory == safeMyroomCategory)
                 {
                     continue;
                 }
@@ -164,15 +348,15 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
 
         PItem->setSubType(ITEM_LOCKED);
 
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory "
                                            "SET "
                                            "extra = ? "
                                            "WHERE location = ? AND slot = ? AND charid = ? LIMIT 1",
                                            PItem->m_extra,
-                                           MyroomCategory,
-                                           MyroomItemIndex,
+                                           this->MyroomCategory,
+                                           this->MyroomItemIndex,
                                            PChar->id);
 
         if (rset && rset->rowsAffected() && !wasInstalled)
@@ -190,7 +374,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             PChar->loc.zone->SpawnConditionalNPCs(PChar);
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomCategory), MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

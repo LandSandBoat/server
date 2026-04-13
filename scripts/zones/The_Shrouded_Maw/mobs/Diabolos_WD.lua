@@ -79,6 +79,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setMod(xi.mod.REGAIN, 55)
+    mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SIGHT)
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillId, wasExecuted)
         if

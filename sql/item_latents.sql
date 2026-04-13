@@ -1235,6 +1235,12 @@ INSERT INTO `item_latents` VALUES (14757,68,1,64,60); -- Evasion +1 during Garri
 INSERT INTO `item_latents` VALUES (14757,68,1,64,70); -- Evasion +1 during Garrison, level 70+ (6 Eva)
 INSERT INTO `item_latents` VALUES (14757,68,1,64,75); -- Evasion +1 during Garrison, level 75+ (7 Eva)
 
+-- Minuet Earring
+INSERT INTO `item_latents` VALUES (14764,25,3,13,198); -- While effected by Minuet : Accuracy +3
+
+-- Titanis Earring
+INSERT INTO `item_latents` VALUES (14765,27,4,13,197); -- While effected by Minne : Enmity +4
+
 -- Vampire Earring
 INSERT INTO `item_latents` VALUES (14783,8,4,26,1);      -- STR+4 during Nighttime
 INSERT INTO `item_latents` VALUES (14783,10,4,26,1);     -- VIT+4 during Nighttime

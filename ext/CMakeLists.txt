@@ -262,6 +262,7 @@ set(SHARED_EXTERNAL_LIBS
     asio
     alpaca
     magic_enum
+    utf8cpp
 )
 
 if(WIN32)

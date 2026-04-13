@@ -21,11 +21,13 @@
 
 #pragma once
 
+#include <optional>
 #include <vector>
 
 #include "items/item.h"
 #include "items/item_currency.h"
 #include "items/item_weapon.h"
+#include "packets/c2s/0x02b_translate.h"
 
 #define MAX_ITEMID        32768
 #define MAX_DROPID        5000
@@ -108,5 +110,7 @@ CItemWeapon* GetUnarmedItem();
 CItemWeapon* GetUnarmedH2HItem();
 
 DropList_t* GetDropList(uint16 DropID);
+
+auto TranslateItemName(GP_CLI_COMMAND_TRANSLATE_INDEX fromLang, GP_CLI_COMMAND_TRANSLATE_INDEX toLang, const std::string& name) -> std::optional<std::pair<uint16, std::string>>;
 
 }; // namespace itemutils

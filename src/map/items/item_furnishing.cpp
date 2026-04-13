@@ -26,13 +26,15 @@
 
 CItemFurnishing::CItemFurnishing(uint16 id)
 : CItem(id)
+, m_storage(0)
+, m_moghancement(0)
+, m_element(0)
+, m_aura(0)
+, size_{ 1, 1 }
+, height_(0)
+, placement_(FurnishingPlacement::Floor)
 {
     setType(ITEM_FURNISHING);
-
-    m_storage      = 0;
-    m_moghancement = 0;
-    m_element      = 0;
-    m_aura         = 0;
 }
 
 CItemFurnishing::~CItemFurnishing() = default;
@@ -85,6 +87,36 @@ void CItemFurnishing::setAura(uint8 aura)
 uint8 CItemFurnishing::getAura() const
 {
     return m_aura;
+}
+
+void CItemFurnishing::setSize(uint8 size_x, uint8 size_y)
+{
+    size_ = { size_x, size_y };
+}
+
+auto CItemFurnishing::size() const -> std::pair<uint8, uint8>
+{
+    return size_;
+}
+
+void CItemFurnishing::setHeight(uint16 height)
+{
+    height_ = height;
+}
+
+auto CItemFurnishing::height() const -> uint16
+{
+    return height_;
+}
+
+void CItemFurnishing::setPlacement(FurnishingPlacement placement)
+{
+    placement_ = placement;
+}
+
+auto CItemFurnishing::placement() const -> FurnishingPlacement
+{
+    return placement_;
 }
 
 void CItemFurnishing::setCol(uint8 col)

@@ -23,11 +23,15 @@
 
 #include "map_engine.h"
 
+#include <algorithm>
 #include <array>
 #include <cstring>
+#include <map>
+#include <unordered_map>
 
 #include "common/database.h"
 #include "common/logging.h"
+#include "common/sjis.h"
 
 #include "entities/battleentity.h"
 #include "enums/item_types.h"
@@ -36,10 +40,14 @@
 #include "items/item_linkshell.h"
 #include "items/item_puppet.h"
 #include "lua/luautils.h"
+#include "packets/c2s/0x02b_translate.h"
 
 std::array<CItem*, MAX_ITEMID>      g_pItemList; // global array of pointers to game items
 std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster droplist items
 std::array<LootList_t*, MAX_LOOTID> g_pLootList; // global array of BCNM lootlist items
+
+// Translation lookup: language -> (name -> {item id, translated name})
+std::map<GP_CLI_COMMAND_TRANSLATE_INDEX, std::unordered_map<std::string, std::pair<uint16, std::string>>> g_TranslateMap;
 
 CItemWeapon* PUnarmedItem;
 CItemWeapon* PUnarmedH2HItem;
@@ -290,7 +298,7 @@ DropList_t* GetDropList(uint16 DropID)
 void LoadItemList()
 {
     auto rset = db::preparedStmt("SELECT "
-                                 "b.itemId,b.name,b.type,b.stackSize,b.flags,"
+                                 "b.itemId,b.name,b.sortname,b.name_jp,b.type,b.stackSize,b.flags,"
                                  "b.aH,b.BaseSell,b.subid,"
                                  "u.validTargets,u.activation,u.animation,u.animationTime,"
                                  "u.maxCharges,u.useDelay,u.reuseDelay,u.aoe,"
@@ -300,7 +308,7 @@ void LoadItemList()
                                  "w.skill,w.subskill,w.ilvl_skill,w.ilvl_parry,"
                                  "w.ilvl_macc,w.delay,w.dmg,w.dmgType,"
                                  "w.hit,w.unlock_points,"
-                                 "f.storage,f.moghancement,f.element,f.aura,"
+                                 "f.storage,f.moghancement,f.element,f.aura,f.placement AS furn_placement,f.size_x,f.size_y,f.height AS furn_height,"
                                  "p.slot AS pup_slot,p.element AS pup_element "
                                  "FROM item_basic AS b "
                                  "LEFT JOIN item_usable AS u USING (itemId) "
@@ -416,13 +424,35 @@ void LoadItemList()
 
             if (PItem->isType(ITEM_FURNISHING))
             {
-                static_cast<CItemFurnishing*>(PItem)->setStorage(rset->get<uint8>("storage"));
-                static_cast<CItemFurnishing*>(PItem)->setMoghancement(rset->get<uint16>("moghancement"));
-                static_cast<CItemFurnishing*>(PItem)->setElement(rset->get<uint8>("element"));
-                static_cast<CItemFurnishing*>(PItem)->setAura(rset->get<uint8>("aura"));
+                auto* PFurnishing = static_cast<CItemFurnishing*>(PItem);
+                PFurnishing->setStorage(rset->get<uint8>("storage"));
+                PFurnishing->setMoghancement(rset->get<uint16>("moghancement"));
+                PFurnishing->setElement(rset->get<uint8>("element"));
+                PFurnishing->setAura(rset->get<uint8>("aura"));
+                PFurnishing->setSize(rset->get<uint8>("size_x"), rset->get<uint8>("size_y"));
+                PFurnishing->setHeight(rset->get<uint16>("furn_height"));
+                PFurnishing->setPlacement(rset->get<FurnishingPlacement>("furn_placement"));
             }
 
             g_pItemList[PItem->getID()] = PItem;
+
+            // Build translation maps. English uses sortname (the short display name) with spaces to match what the client sends.
+            // Apply lowercase and replace underscores with spaces.
+            auto sortname = rset->get<std::string>("sortname");
+            std::ranges::transform(sortname, sortname.begin(), ::tolower);
+            std::ranges::replace(sortname, '_', ' ');
+            auto       jpNameUtf8 = rset->get<std::string>("name_jp");
+            auto       jpNameSjis = encoding::utf8ToShiftJis(jpNameUtf8); // Pre-compute the Shift-JIS equivalent
+            const auto id         = PItem->getID();
+            if (!sortname.empty())
+            {
+                g_TranslateMap[GP_CLI_COMMAND_TRANSLATE_INDEX::English][sortname] = { id, jpNameSjis };
+            }
+
+            if (!jpNameSjis.empty())
+            {
+                g_TranslateMap[GP_CLI_COMMAND_TRANSLATE_INDEX::Japanese][jpNameSjis] = { id, sortname };
+            }
 
             auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
             luautils::CacheLuaObjectFromFile(filename);
@@ -594,6 +624,28 @@ void FreeItemList()
         destroy(g_pDropList[DropID]);
         g_pDropList[DropID] = nullptr;
     }
+}
+
+auto TranslateItemName(GP_CLI_COMMAND_TRANSLATE_INDEX fromLang, GP_CLI_COMMAND_TRANSLATE_INDEX toLang, const std::string& name)
+    -> std::optional<std::pair<uint16, std::string>>
+{
+    std::ignore = toLang; // With only EN/JP, the "from" map already stores the other language's translation.
+
+    // Lowercase english names to match any requested capitalization
+    std::string lookupName = name;
+    if (fromLang == GP_CLI_COMMAND_TRANSLATE_INDEX::English)
+    {
+        std::ranges::transform(lookupName, lookupName.begin(), ::tolower);
+    }
+
+    const auto& fromMap = g_TranslateMap[fromLang];
+    const auto  it      = fromMap.find(lookupName);
+    if (it == fromMap.end())
+    {
+        return std::nullopt;
+    }
+
+    return it->second;
 }
 
 }; // namespace itemutils

@@ -19,7 +19,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('CureTime', GetSystemTime() + math.random(45, 90))
     mob:setMobMod(xi.mobMod.SKIP_ALLEGIANCE_CHECK, 1)
     mob:setMod(xi.mod.STORETP, 125)
     mob:setMod(xi.mod.SPELLINTERRUPT, 100)
@@ -27,14 +26,32 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(true)
     mob:setMagicCastingEnabled(true)
     mob:setMobAbilityEnabled(true)
+
+    mob:setLocalVar('FinalPhase', 0)
+    mob:setLocalVar('CuresCasted', 0)
+    mob:setLocalVar('CureTime', GetSystemTime() + math.random(45, 90))
 end
 
 entity.onMobFight = function(mob, target)
-    -- Evaluate battle phase.
+    -- Early return: Mob is busy.
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    -- Final phase behavior: Cast Fire II on itself.
     local finalPhase = mob:getLocalVar('FinalPhase')
+    if finalPhase == 1 then
+        mob:castSpell(xi.magic.spell.FIRE_II, mob)
+        return
+    end
+
+    -- Evaluate battle phase and change if applicable.
+    local currentTime = GetSystemTime()
+    local isCureTime  = mob:getLocalVar('CureTime') <= currentTime
+    local curesCasted = mob:getLocalVar('CuresCasted')
     if
-        finalPhase ~= 1 and
-        (mob:getHPP() < 25 or mob:getLocalVar('CuresCasted') >= 3)
+        mob:getHPP() < 25 or
+        (curesCasted >= 3 and isCureTime)
     then
         mob:setLocalVar('FinalPhase', 1)
         mob:messageText(mob, ID.text.LARGE_DROPS_OF_OIL, false)
@@ -42,23 +59,14 @@ entity.onMobFight = function(mob, target)
         mob:setAutoAttackEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setMobAbilityEnabled(false)
-    end
-
-    if xi.combat.behavior.isEntityBusy(mob) then
-        return
-    end
-
-    -- Final phase behavior: Cast Fire II on itself.
-    if finalPhase == 1 then
-        mob:castSpell(xi.magic.spell.FIRE_II, mob)
         return
     end
 
     -- Regular behavior: Occasionally cast Cure III on oponent.
-    if mob:getLocalVar('CureTime') <= GetSystemTime() then
+    if isCureTime then
         mob:messageText(mob, ID.text.DROP_OF_OIL, false)
         mob:setLocalVar('CureTime', GetSystemTime() + math.random(30, 90))
-        mob:setLocalVar('CuresCasted', mob:getLocalVar('CuresCasted') + 1)
+        mob:setLocalVar('CuresCasted', curesCasted + 1)
         mob:castSpell(xi.magic.spell.CURE_III, target)
     end
 end

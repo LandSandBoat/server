@@ -22,6 +22,7 @@
 #pragma once
 
 #include "base.h"
+#include "packets/c2s/0x02b_translate.h"
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0047
 // This packet is sent by the server to respond to a clients /translate command request.
@@ -30,13 +31,12 @@ class GP_SERV_COMMAND_TRANSLATE final : public GP_SERV_PACKET<PacketS2C::GP_SERV
 public:
     struct PacketData
     {
-        uint16_t ItemNo;         // PS2: ItemNo
-        uint8_t  FromIndex;      // PS2: FromIndex
-        uint8_t  ToIndex;        // PS2: ToIndex
-        uint8_t  FromString[64]; // PS2: FromString
-        uint8_t  ToString[64];   // PS2: ToString
+        uint16_t                       ItemNo;         // PS2: ItemNo
+        GP_CLI_COMMAND_TRANSLATE_INDEX FromIndex;      // PS2: FromIndex
+        GP_CLI_COMMAND_TRANSLATE_INDEX ToIndex;        // PS2: ToIndex
+        uint8_t                        FromString[64]; // PS2: FromString
+        uint8_t                        ToString[64];   // PS2: ToString
     };
 
-    // TODO: Unimplemented
-    GP_SERV_COMMAND_TRANSLATE() = default;
+    GP_SERV_COMMAND_TRANSLATE(uint16 itemId, GP_CLI_COMMAND_TRANSLATE_INDEX fromIndex, GP_CLI_COMMAND_TRANSLATE_INDEX toIndex, const std::string& fromString, const std::string& toString);
 };

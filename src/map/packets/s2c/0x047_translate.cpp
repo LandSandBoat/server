@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,16 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x047_translate.h"
 
-#include "base.h"
-
-enum class GP_CLI_COMMAND_TRANSLATE_INDEX : uint8_t
+GP_SERV_COMMAND_TRANSLATE::GP_SERV_COMMAND_TRANSLATE(uint16 itemId, GP_CLI_COMMAND_TRANSLATE_INDEX fromIndex, GP_CLI_COMMAND_TRANSLATE_INDEX toIndex, const std::string& fromString, const std::string& toString)
 {
-    Japanese = 0,
-    English  = 1,
-};
+    auto& packet = this->data();
 
-// https://github.com/atom0s/XiPackets/tree/main/world/client/0x002B
-// This packet is sent by the client when using the /translate command.
-GP_CLI_PACKET(GP_CLI_COMMAND_TRANSLATE,
-              GP_CLI_COMMAND_TRANSLATE_INDEX FromIndex;
-              GP_CLI_COMMAND_TRANSLATE_INDEX ToIndex;
-              uint16_t                       padding00;
-              uint8_t                        Name[64]; // Variable length
-);
+    packet.ItemNo    = itemId;
+    packet.FromIndex = fromIndex;
+    packet.ToIndex   = toIndex;
+
+    std::memcpy(packet.FromString, fromString.data(), std::min(fromString.size(), sizeof(packet.FromString)));
+    std::memcpy(packet.ToString, toString.data(), std::min(toString.size(), sizeof(packet.ToString)));
+}

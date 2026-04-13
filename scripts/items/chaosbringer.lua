@@ -5,8 +5,10 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemDrop = function(target, item)
-    target:setCharVar('ChaosbringerKills', 0)
+itemObject.onItemDrop = function(target, item, recycleBin)
+    if not recycleBin then
+        target:setCharVar('ChaosbringerKills', 0)
+    end
 end
 
 itemObject.onItemEquip = function(target, item)

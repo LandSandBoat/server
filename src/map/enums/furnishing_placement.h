@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,19 +21,15 @@
 
 #pragma once
 
-#include "base.h"
+#include "common/cbasetypes.h"
 
-enum class GP_CLI_COMMAND_TRANSLATE_INDEX : uint8_t
+// Furnishing placement kind.
+// How a piece of furniture is placed in the mog house.
+// Exactly one per item; these are not flags.
+enum class FurnishingPlacement : uint8
 {
-    Japanese = 0,
-    English  = 1,
+    Floor   = 0, // Sits on the floor
+    Surface = 1, // Sits on the floor and other items can be placed on top (tables, desks)
+    Wall    = 2, // Hung on a wall slot
+    OnTable = 3, // Placed on top of a Surface item (vases, statues, flowerpots)
 };
-
-// https://github.com/atom0s/XiPackets/tree/main/world/client/0x002B
-// This packet is sent by the client when using the /translate command.
-GP_CLI_PACKET(GP_CLI_COMMAND_TRANSLATE,
-              GP_CLI_COMMAND_TRANSLATE_INDEX FromIndex;
-              GP_CLI_COMMAND_TRANSLATE_INDEX ToIndex;
-              uint16_t                       padding00;
-              uint8_t                        Name[64]; // Variable length
-);

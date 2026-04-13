@@ -82,6 +82,12 @@ if(ZLIB_ADDED)
     add_library(ZLIB::ZLIB ALIAS zlibstatic)
 endif()
 
+CPMAddPackage(
+    NAME utfcpp
+    GITHUB_REPOSITORY nemtrif/utfcpp
+    GIT_TAG v4.0.8
+)
+
 # Find Python (defines ${Python_EXECUTABLE})
 find_package(Python REQUIRED)
 message(STATUS "Python_EXECUTABLE: ${Python_EXECUTABLE}")

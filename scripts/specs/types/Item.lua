@@ -6,7 +6,7 @@
 ---@field onItemUnequip? fun(PUser: CBaseEntity, PItem: CItem): nil
 ---@field onItemEquip? fun(PUser: CBaseEntity, PItem: CItem): nil
 ---@field onItemAdditionalEffect? fun(attacker: CBaseEntity, target: CBaseEntity, baseAttackDamage: integer, item: CItem): (integer, integer, integer)
----@field onItemDrop? fun(PUser: CBaseEntity, PItem: CItem): nil
+---@field onItemDrop? fun(PUser: CBaseEntity, PItem: CItem, recycleBin: boolean): nil
 ---@field onEffectGain? fun(target: CBaseEntity, effect: CStatusEffect): nil
 ---@field onEffectLose? fun(target: CBaseEntity, effect: CStatusEffect): nil
 ---@field onEffectTick? fun(target: CBaseEntity, effect: CStatusEffect): nil

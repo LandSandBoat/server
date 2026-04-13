@@ -22,19 +22,35 @@
 #include "0x02b_translate.h"
 
 #include "entities/charentity.h"
+#include "packets/s2c/0x047_translate.h"
+#include "utils/itemutils.h"
 
 auto GP_CLI_COMMAND_TRANSLATE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Not implemented.
     return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(FromIndex)
-        .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(ToIndex);
+        .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(this->FromIndex)
+        .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(this->ToIndex);
 }
 
 void GP_CLI_COMMAND_TRANSLATE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    ShowDebugFmt("GP_CLI_COMMAND_TRANSLATE: Not implemented. FromIndex: {}, ToIndex: {}, Name: {}",
-                 FromIndex,
-                 ToIndex,
-                 asStringFromUntrustedSource(Name, sizeof(Name)));
+    auto inputName = asStringFromUntrustedSource(this->Name, sizeof(this->Name));
+    auto result    = itemutils::TranslateItemName(this->FromIndex, this->ToIndex, inputName);
+    if (result.has_value())
+    {
+        auto [itemId, translated] = result.value();
+        PChar->pushPacket<GP_SERV_COMMAND_TRANSLATE>(itemId,
+                                                     this->FromIndex,
+                                                     this->ToIndex,
+                                                     inputName,
+                                                     translated);
+    }
+    else
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_TRANSLATE>(0,
+                                                     this->FromIndex,
+                                                     this->ToIndex,
+                                                     inputName,
+                                                     "");
+    }
 }
