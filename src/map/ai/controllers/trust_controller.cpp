@@ -49,11 +49,15 @@ enum TRUST_MOVEMENT_TYPE : int8
     //     :     mob:setMobMod(xi.mobMod.TRUST_DISTANCE, 20)
     //     : Will set the combat distance the trust tries to stick to to 20'
     // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
-    NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
-    MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
-    MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
-    LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
+    SONG_ROTATION = -2, // BRD: alternates between melee range (for March/Madrigal) and caster range (for Ballad) every 30s
+    NO_MOVE       = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+    MELEE         = 0,  // Default: will continually reposition to stay within melee range of the target
+    MID_RANGE     = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
+    LONG_RANGE    = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
 };
+
+constexpr float  SONG_CASTER_DISTANCE = 15.0f; // Distance from mob to stand when buffing casters
+constexpr auto   SONG_PHASE_DURATION  = 30s;   // Time spent at each position before switching
 
 } // namespace
 
@@ -63,6 +67,8 @@ CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 , m_LastTopEnmity(nullptr)
 , m_failedRepositionAttempts(0)
 , m_InTransit(false)
+, m_SongPhaseStart(timer::time_point::min())
+, m_SongNearMelee(true)
 {
 }
 
@@ -157,6 +163,34 @@ void CTrustController::DoCombatTick(timer::time_point tick)
 
             switch (movementDistance)
             {
+                case TRUST_MOVEMENT_TYPE::SONG_ROTATION:
+                {
+                    // BRD song rotation: alternate between melee and caster positions
+                    if (m_Tick - m_SongPhaseStart > SONG_PHASE_DURATION)
+                    {
+                        m_SongPhaseStart = m_Tick;
+                        m_SongNearMelee  = !m_SongNearMelee;
+                    }
+
+                    if (m_SongNearMelee)
+                    {
+                        // Stay near melee/mob for March/Madrigal
+                        std::unique_ptr<CBasicPacket> err;
+                        if (!POwner->CanAttack(PTarget, err) && POwner->GetSpeed() > 0)
+                        {
+                            if (currentDistanceToTarget > RoamDistance)
+                            {
+                                POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Run to caster side for Ballad — position on master's side of mob
+                        PathOutToDistance(PTarget, SONG_CASTER_DISTANCE, true);
+                    }
+                    break;
+                }
                 case TRUST_MOVEMENT_TYPE::NO_MOVE:
                 {
                     if (currentDistanceToMaster > CastingDistance)
@@ -195,7 +229,7 @@ void CTrustController::DoCombatTick(timer::time_point tick)
                     [[fallthrough]];
                 default: // Using the positive-non-zero movementDistance mobMod value
                 {
-                    PathOutToDistance(PTarget, static_cast<float>(movementDistance));
+                    PathOutToDistance(PTarget, static_cast<float>(movementDistance), true);
                     break;
                 }
             }
@@ -344,7 +378,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     }
 }
 
-void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
+void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount, bool groupWithMaster)
 {
     TracyZoneScoped;
 
@@ -365,17 +399,40 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         m_Tick - m_LastRepositionTime > 3s && !m_InTransit)
     {
         std::vector<position_t> positions(5);
-        for (auto& position : positions)
+
+        if (groupWithMaster && POwner->PMaster)
         {
-            int        random_angle       = xirand::GetRandomNumber(256);
-            position_t potential_position = {
-                PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
-                PTarget->loc.p.y,
-                PTarget->loc.p.z + (sinf(rotationToRadian(random_angle)) * amount),
-                0,
-                0,
-            };
-            position = potential_position;
+            // Position on master's side of the mob — all ranged trusts group together
+            auto masterAngle = worldAngle(PTarget->loc.p, POwner->PMaster->loc.p);
+            for (std::size_t i = 0; i < positions.size(); ++i)
+            {
+                // Small spread around the master's angle (+/- 16 out of 256)
+                int        spread             = static_cast<int>(i) * 8 - 16;
+                int        angle              = (masterAngle + spread) & 0xFF;
+                position_t potential_position  = {
+                    PTarget->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
+                    PTarget->loc.p.y,
+                    PTarget->loc.p.z + (sinf(rotationToRadian(angle)) * amount),
+                    0,
+                    0,
+                };
+                positions[i] = potential_position;
+            }
+        }
+        else
+        {
+            for (auto& position : positions)
+            {
+                int        random_angle       = xirand::GetRandomNumber(256);
+                position_t potential_position  = {
+                    PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
+                    PTarget->loc.p.y,
+                    PTarget->loc.p.z + (sinf(rotationToRadian(random_angle)) * amount),
+                    0,
+                    0,
+                };
+                position = potential_position;
+            }
         }
 
         bool position_found = false;

@@ -187,7 +187,7 @@ xi.instance.lookup =
         { 9300, {   3, 0, 0, 19 }, {   3, 4 }, {   4, 1 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
         { 9301, { 203, 0, 0, 36 }, { 203, 4 }, { 201, 1 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
         -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
-        -- { 0, { 0, 23,  0 } }, -- Distorter of Time
+        { 9302, { 203, 0, 0, 23 }, { 203, 4 }, { 201, 1 } }, -- Distorter of Time (WotG Mission 24)
         -- Campaign Ops:
         -- Brave Dawn I (Bastok)
         -- Brave Dawn II (Bastok)

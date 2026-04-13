@@ -18,6 +18,7 @@ zones[xi.zone.GHOYUS_REVERIE] =
     },
     mob =
     {
+        LAMBTON_WORM = GetFirstID('Lambton_Worm'),
     },
     npc =
     {

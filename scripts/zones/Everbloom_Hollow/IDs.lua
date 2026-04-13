@@ -18,6 +18,7 @@ zones[xi.zone.EVERBLOOM_HOLLOW] =
     },
     mob =
     {
+        LAMBTON_WORM = GetFirstID('Lambton_Worm'),
     },
     npc =
     {

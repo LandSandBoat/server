@@ -18,6 +18,7 @@ zones[xi.zone.RUHOTZ_SILVERMINES] =
     },
     mob =
     {
+        LAMBTON_WORM             = GetFirstID('Lambton_Worm'),
         SAPPHIRINE_QUADAV_OFFSET = GetFirstID('Sapphirine_Quadav'),
     },
     npc =

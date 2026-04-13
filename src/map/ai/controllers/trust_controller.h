@@ -66,13 +66,17 @@ private:
     void DoRoamTick(timer::time_point tick) override;
 
     void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
-    void PathOutToDistance(CBattleEntity* PTarget, float amount);
+    void PathOutToDistance(CBattleEntity* PTarget, float amount, bool groupWithMaster = false);
 
     CBattleEntity* m_LastTopEnmity;
 
     timer::time_point m_LastRepositionTime;
     uint8             m_failedRepositionAttempts;
     bool              m_InTransit;
+
+    // BRD song rotation state
+    timer::time_point m_SongPhaseStart;
+    bool              m_SongNearMelee{ true };
 
     timer::time_point                 m_CombatEndTime;
     timer::time_point                 m_LastHealTickTime;

@@ -24876,6 +24876,10 @@ INSERT INTO `mob_spawn_points` VALUES (17129620,0,'Excenmille','Excenmille',0,0,
 INSERT INTO `mob_spawn_points` VALUES (17129621,0,'Maxcimille','Maxcimille',0,0,0,404.540,-0.500,410.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17129622,0,'Bostillette','Bostillette',0,0,0,439.313,-0.513,394.134,135);
 
+-- doomvoid
+INSERT INTO `mob_spawn_points` VALUES (17129623,0,'Lambton_Worm','Lambton Worm',0,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17129624,0,'King_Arthro','King Arthro',0,0,0,0.000,0.000,0.000,0);
+
 -- ------------------------------------------------------------
 -- Bastok Markets [S] (Zone 87)
 -- ------------------------------------------------------------
@@ -28808,6 +28812,9 @@ INSERT INTO `mob_spawn_points` VALUES (17158198,0,'Sapphirine_Quadav','Sapphirin
 INSERT INTO `mob_spawn_points` VALUES (17158199,0,'Sapphirine_Quadav','Sapphirine Quadav',4653,60,60,-9.359,0.618,44.141,250);
 INSERT INTO `mob_spawn_points` VALUES (17158200,0,'Sapphirine_Quadav','Sapphirine Quadav',4653,60,60,-1.472,0.500,36.907,107);
 INSERT INTO `mob_spawn_points` VALUES (17158201,0,'Sapphire_Quadav','Sapphire Quadav',4652,60,60,-7.613,0.455,35.833,249);
+
+-- Doomvoid (Distorter of Time - WotG Mission 24)
+INSERT INTO `mob_spawn_points` VALUES (17158202,0,'Lambton_Worm','Lambton Worm',4643,0,0,382.000,0.000,-191.000,74);
 
 -- Fire in the hole
 INSERT INTO `mob_spawn_points` VALUES (17158219,0,'Adelheid','Adelheid',0,0,0,166.000,-0.500,-60.000,128);
@@ -69703,6 +69710,7 @@ INSERT INTO `mob_spawn_points` VALUES (17613142,0,'Carousing_Celine','Carousing 
 INSERT INTO `mob_spawn_points` VALUES (17613143,0,'Carousing_Celine','Carousing Celine',44,128,128,136.968,-24.499,60.558,31);
 INSERT INTO `mob_spawn_points` VALUES (17613144,0,'Carousing_Celine','Carousing Celine',44,128,128,-148.490,-16.356,-69.940,0);
 INSERT INTO `mob_spawn_points` VALUES (17613145,0,'Arcus_Blades','Arcus Blades',45,125,125,-109.000,-16.100,221.000,60);
+INSERT INTO `mob_spawn_points` VALUES (17613146,0,'Lambton_Worm','Lambton Worm',46,99,99,-34.200,-16.000,58.000,32);
 
 -- ------------------------------------------------------------
 -- Ifrit's Cauldron (Zone 205)
