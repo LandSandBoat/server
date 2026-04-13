@@ -56,8 +56,8 @@ enum TRUST_MOVEMENT_TYPE : int8
     LONG_RANGE    = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
 };
 
-constexpr float  SONG_CASTER_DISTANCE = 15.0f; // Distance from mob to stand when buffing casters
-constexpr auto   SONG_PHASE_DURATION  = 30s;   // Time spent at each position before switching
+constexpr float SONG_CASTER_DISTANCE = 15.0f; // Distance from mob to stand when buffing casters
+constexpr auto  SONG_PHASE_DURATION  = 30s;   // Time spent at each position before switching
 
 } // namespace
 
@@ -409,7 +409,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount, b
                 // Small spread around the master's angle (+/- 16 out of 256)
                 int        spread             = static_cast<int>(i) * 8 - 16;
                 int        angle              = (masterAngle + spread) & 0xFF;
-                position_t potential_position  = {
+                position_t potential_position = {
                     PTarget->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
                     PTarget->loc.p.y,
                     PTarget->loc.p.z + (sinf(rotationToRadian(angle)) * amount),
@@ -424,7 +424,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount, b
             for (auto& position : positions)
             {
                 int        random_angle       = xirand::GetRandomNumber(256);
-                position_t potential_position  = {
+                position_t potential_position = {
                     PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
                     PTarget->loc.p.y,
                     PTarget->loc.p.z + (sinf(rotationToRadian(random_angle)) * amount),
