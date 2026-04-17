@@ -9,6 +9,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
 end

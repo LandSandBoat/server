@@ -6170,7 +6170,7 @@ INSERT INTO `mob_spawn_points` VALUES (16896103,0,'Nimbus_Hippogryph','Nimbus Hi
 INSERT INTO `mob_spawn_points` VALUES (16896104,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,642.049,20.000,653.150,158);
 INSERT INTO `mob_spawn_points` VALUES (16896105,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,677.079,19.668,647.065,244);
 INSERT INTO `mob_spawn_points` VALUES (16896106,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,685.626,20.592,686.651,27);
-INSERT INTO `mob_spawn_points` VALUES (16896107,0,'Imdugud','Imdugud',11,56,60,655.263,20.664,651.320,0);
+INSERT INTO `mob_spawn_points` VALUES (16896107,0,'Imdugud','Imdugud',11,60,60,655.263,20.664,651.320,0);
 INSERT INTO `mob_spawn_points` VALUES (16896108,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,465.956,39.729,795.003,0);
 INSERT INTO `mob_spawn_points` VALUES (16896109,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,466.661,41.263,808.644,191);
 INSERT INTO `mob_spawn_points` VALUES (16896110,0,'Nimbus_Hippogryph','Nimbus Hippogryph',3,49,52,473.229,40.482,804.938,231);
@@ -6194,7 +6194,7 @@ INSERT INTO `mob_spawn_points` VALUES (16896127,0,'Lunantishee','Lunantishee',6,
 INSERT INTO `mob_spawn_points` VALUES (16896128,0,'Lunantishee','Lunantishee',6,55,58,-224.062,32.349,690.891,156);
 INSERT INTO `mob_spawn_points` VALUES (16896129,0,'Lunantishee','Lunantishee',6,55,58,-252.875,32.281,720.177,135);
 INSERT INTO `mob_spawn_points` VALUES (16896130,0,'Lunantishee','Lunantishee',6,55,58,-286.212,32.645,765.466,212);
-INSERT INTO `mob_spawn_points` VALUES (16896131,0,'Boroka','Boroka',12,56,60,-365.921,-31.255,486.367,161);
+INSERT INTO `mob_spawn_points` VALUES (16896131,0,'Boroka','Boroka',12,58,60,-365.921,-31.255,486.367,161);
 INSERT INTO `mob_spawn_points` VALUES (16896132,0,'Ignidrake','Ignidrake',7,57,59,-514.442,-20.293,549.121,119);
 INSERT INTO `mob_spawn_points` VALUES (16896133,0,'Lunantishee','Lunantishee',6,55,58,-518.859,-19.841,537.571,216);
 INSERT INTO `mob_spawn_points` VALUES (16896134,0,'Air_Elemental','Air Elemental',10,57,64,-586.808,1.079,689.897,193);
