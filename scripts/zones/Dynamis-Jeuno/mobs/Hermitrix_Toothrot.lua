@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.HERMITRIX_TOOTHROT - 1] = ID.mob.HERMITRIX_TOOTHROT, -- Vanguard_Enchanter    31.808   -0.566  -25.768
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

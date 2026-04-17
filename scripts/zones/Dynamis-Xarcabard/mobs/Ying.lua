@@ -11,6 +11,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
 
     if

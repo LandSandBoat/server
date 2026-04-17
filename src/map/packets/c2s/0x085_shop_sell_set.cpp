@@ -24,6 +24,7 @@
 #include "common/settings.h"
 #include "entities/charentity.h"
 #include "enums/msg_std.h"
+#include "enums/packet_c2s.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "trade_container.h"
@@ -54,8 +55,9 @@ const auto auditSale = [](Scheduler& scheduler, CCharEntity* PChar, uint32_t ite
 
 auto GP_CLI_COMMAND_SHOP_SELL_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isNotCrafting(PChar)
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Crafting })
+        .requiresPriorPacket(PacketC2S::GP_CLI_COMMAND_SHOP_SELL_REQ)
         .mustEqual(this->SellFlag, 1, "SellFlag not 1");
 }
 

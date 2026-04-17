@@ -1,41 +1,39 @@
 -----------------------------------
---  Final Sting
---  Description: Deals damage proportional to HP. Reduces HP to 1 after use. Damage varies with TP.
---  Type: Physical (Slashing)
+-- Final Sting
+-- Family: Bee
+-- Description: Deals unaspected damage proportional to mob's current HP.
+-- Notes: Mob dies after use.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local param = skill:getParam()
-    if param == 0 then
-        param = 50
-    end
-
-    if mob:getHPP() <= param then
+    if mob:getHPP() <= 50 then
         return 0
     end
 
     return 1
 end
 
--- TODO: this is totally wrong, see https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 1
+    local params = {}
 
-    local hpMod   = skill:getMobHPP() / 100
-    ftp           = ftp + hpMod * 14 + math.random(2, 6)
+    params.baseDamage           = skill:getMobHP()
+    params.fTP                  = { 0.5, 0.5, 0.5 }
+    params.element              = xi.element.NONE
+    params.attackType           = xi.attackType.MAGICAL
+    params.damageType           = xi.damageType.NONE
+    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipDamageAdjustment = true
+    params.skipMagicBonusDiff   = true
 
-    if mob:isMobType(xi.mobType.NOTORIOUS) then
-        ftp = ftp * 5
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    return info.damage
 end
 
 mobskillObject.onMobSkillFinalize = function(mob, skill)

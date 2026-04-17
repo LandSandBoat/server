@@ -28,12 +28,10 @@
 
 auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isNotCrafting(PChar)
-        .isNormalStatus(PChar)
-        .isNotPreventedAction(PChar)
-        .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(Mode)
-        .range("ChairId", ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
+        .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(this->Mode)
+        .range("ChairId", this->ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
 }
 
 void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) const
@@ -41,14 +39,14 @@ void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) 
     // Retail accurate: Can inject /sitchair while healing/logging out, but it cancels the effect.
     PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_HEALING);
 
-    if (Mode == static_cast<uint8>(GP_CLI_COMMAND_SITCHAIR_MODE::Off))
+    if (this->Mode == static_cast<uint8>(GP_CLI_COMMAND_SITCHAIR_MODE::Off))
     {
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
         return;
     }
 
-    uint8 chairId = ChairId + ANIMATION_SITCHAIR_0;
+    uint8 chairId = this->ChairId + ANIMATION_SITCHAIR_0;
 
     // Validate key item ownership for 64 through 83
     if (chairId != ANIMATION_SITCHAIR_0 && !charutils::hasKeyItem(PChar, static_cast<KeyItem>(chairId + 0xACA)))

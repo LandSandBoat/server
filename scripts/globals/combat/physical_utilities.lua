@@ -876,6 +876,17 @@ xi.combat.physical.criticalRateFromStatDiff = function(actor, target)
     return statBonus
 end
 
+-- dStat: Ranged critical hit rate bonus from AGI vs AGI difference.
+xi.combat.physical.criticalRateFromAGIDiff = function(actor, target)
+    local statBonus = 0
+
+    local dAgi = math.max(0, actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI))
+    statBonus = math.floor(dAgi / 10)
+    statBonus = statBonus / 100
+
+    return statBonus
+end
+
 -- Innin: Critical hit rate bonus when actor is behind target.
 xi.combat.physical.criticalRateFromInnin = function(actor, target)
     local inninBonus = 0
@@ -951,6 +962,38 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, actorTP,
     local finalCriticalRate     = 0
     local baseCriticalRate      = 0.05
     local statBonus             = xi.combat.physical.criticalRateFromStatDiff(actor, target)
+    local inninBonus            = xi.combat.physical.criticalRateFromInnin(actor, target)
+    local fencerBonus           = xi.combat.physical.criticalRateFromFencer(actor)
+    local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)
+    local weaponSlotBonus       = xi.combat.physical.criticalRateFromWeaponSlot(actor, slot)
+    local modifierBonus         = actor:getMod(xi.mod.CRITHITRATE) / 100
+    local meritBonus            = actor:getMerit(xi.merit.CRIT_HIT_RATE) / 100
+    local targetCriticalEvasion = target:getMod(xi.mod.CRITICAL_HIT_EVASION) / 100
+    local targetMeritPenalty    = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+    local tpFactor              = 0
+
+    -- For weaponskills.
+    if optCritModTable then
+        tpFactor = xi.combat.physical.calculateTPfactor(actorTP, optCritModTable)
+    end
+
+    -- Add all different bonuses and clamp.
+    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + weaponSlotBonus + modifierBonus + meritBonus - targetCriticalEvasion - targetMeritPenalty + tpFactor
+
+    return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
+end
+
+---@param actor CBaseEntity
+---@param target CBaseEntity
+---@param actorTP number
+---@param slot xi.slot
+---@param optCritModTable table?
+---@return integer
+xi.combat.physical.calculateRangedCriticalRate = function(actor, target, actorTP, slot, optCritModTable)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local finalCriticalRate     = 0
+    local baseCriticalRate      = 0.05
+    local statBonus             = xi.combat.physical.criticalRateFromAGIDiff(actor, target)
     local inninBonus            = xi.combat.physical.criticalRateFromInnin(actor, target)
     local fencerBonus           = xi.combat.physical.criticalRateFromFencer(actor)
     local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)

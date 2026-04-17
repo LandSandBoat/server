@@ -1,9 +1,8 @@
 -----------------------------------
---  Tortoise Stomp
---  Description: Single target Defense Down xi.effect.
---  Type: Physical
---  Utsusemi/Blink absorb:&nbsp??
---  Range: Varying Area of Effect
+-- Tortoise Stomp
+-- Family: Adamantoise
+-- Description: Deals physical damage. Additional Effect: Defense Down
+-- Note: AoE type may vary depending on NM
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,17 +12,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    local params = {}
 
-    local duration = math.random(120, 180)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, 25, 0, duration)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    -- Note: ShadowBehavior may vary depending on AoE Type(May vary between NMs)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Random, resisted, or scales with TP?
+        local duration = math.random(120, 180)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 25, 0, duration)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

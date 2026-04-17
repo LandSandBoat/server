@@ -6,6 +6,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
     xi.dynamis.refillStatueOnSpawn(mob)
 end
 

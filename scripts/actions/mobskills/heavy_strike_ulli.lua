@@ -1,7 +1,7 @@
 -----------------------------------
 -- Heavy Strike (Ullikummi)
--- Damage varies with TP. Resets enmity if damage is dealt. Always knocks back players even if it misses.
--- 0% TP: 2.25 / 150% TP: 3.50 / 300% TP: 4.75
+-- Family: Golem
+-- Description: Damage varies with TP. Resets enmity if damage is dealt. Always knocks back players even if it misses.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,19 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    -- TODO: Knockback always applies even if missed/evaded. (May need adjustments to logic in core)
 
-    if dmg > 0 then
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
         mob:resetEnmity(target)
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

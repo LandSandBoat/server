@@ -1,7 +1,9 @@
 -----------------------------------
--- Trample: Charges forward, dealing high damage to,(400-1000) and lowering the MP (10-30%) of, anyone in his path.
--- No message is displayed in the chat log.
--- Video showing 25% mp lost on hit: https://youtu.be/Jj9pWfSr1c0?t=26
+-- Auto Attack: Trample
+-- Family: Monoceros
+-- Description: Charges forward, dealing high damage to,(400-1000) and lowering the MP (10-30%) of, anyone in its path.
+-- Notes: No message is displayed in the chat log.
+--        Video showing 25% mp lost on hit: https://youtu.be/Jj9pWfSr1c0?t=26
 --
 -- This move is triggered during onMobFight and is only advertised by the fact that DI runs towards random players in range and has dust under his feet
 --
@@ -19,26 +21,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- perform physical attack
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 3
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    -- if skill hit, apply dmg and reduce MP
-    if not skill:hasMissMsg() then
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.primaryMessage = xi.msg.basic.HIT_DMG
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
         local remainingMPP = 1 - math.random(10, 30) / 100
-
-        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
         target:setMP(target:getMP() * remainingMPP)
-        skill:setMsg(xi.msg.basic.HIT_DMG)
-    elseif dmg == 0 then
-        -- basic miss (not shadows or anticipation)
-        skill:setMsg(xi.msg.basic.EVADES)
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.DROPRIX_GRANITEPALMS - 2] = ID.mob.DROPRIX_GRANITEPALMS, -- Vanguard_Pitfighter
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

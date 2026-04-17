@@ -27,6 +27,10 @@ entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Vanguards_Slime')
 end
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

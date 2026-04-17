@@ -1,6 +1,7 @@
 -----------------------------------
---  1000 Needles
---  Description: Shoots multiple needles at enemies within range.
+-- 1000 Needles
+-- Family: Cactuar
+-- Description: Shoots multiple needles at enemies within range. Damage is distributed even among all targets hit.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,16 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local needles = 1000 / skill:getTotalTargets()
-    local info    =
-    {
-        damage = needles
-    }
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.LIGHT)
+    params.baseDamage         = 1000 / skill:getTotalTargets()
+    params.numHits            = 1
+    params.fTP                = { 1.0, 1.0, 1.0 }
+    params.attackType         = xi.attackType.PHYSICAL
+    params.damageType         = xi.damageType.PIERCING
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.guaranteedFirstHit = true
+    params.skipPDIF           = true
 
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

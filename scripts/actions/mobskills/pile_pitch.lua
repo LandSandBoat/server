@@ -13,20 +13,22 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    -- TODO: Jimmayus spreadsheet says this is a physical skill. Fix in mobPhysicalMove() pass.
-    params.baseDamage           = target:getHP() * 0.90 -- TODO: Need captures of fTPs/damage.
-    params.fTP                  = { 1, 1, 1 }
-    params.element              = xi.element.NONE
-    params.attackType           = xi.attackType.MAGICAL
-    params.damageType           = xi.damageType.NONE
-    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-    params.skipDamageAdjustment = true
-    params.skipMagicBonusDiff   = true
+    params.baseDamage     = target:getHP()
+    params.numHits        = 1
+    params.fTP            = { 0.90, 0.90, 0.90 } -- TODO: Capture % of current HP this does.
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipFSTR       = true
+    params.skipPDIF       = true
+    params.skipParry      = true -- TODO: Confirm this can't be parried, guarded or blocked.
+    params.skipGuard      = true
+    params.skipBlock      = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
-        target:takeDamage(info.damage, mob, xi.attackType.MAGICAL, xi.damageType.NONE, { breakBind = false })
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
         mob:resetEnmity(target) -- TODO: Check hate reset type (Aggro pause vs full enmity reset.)

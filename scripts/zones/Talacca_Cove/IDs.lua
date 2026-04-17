@@ -33,7 +33,24 @@ zones[xi.zone.TALACCA_COVE] =
         YOU_CAN_NOW_BECOME_A_CORSAIR  = 7804, -- You can now become a corsair!
         NOBODY_COMES_TO_HELP          = 7855, -- Nobody comes to help. The Imp Bandsman looks dejected.
         HELP_HAS_ARRIVED              = 7856, -- Help has arrived!
-        YOUR_LEVEL_LIMIT_IS_NOW_75    = 7874, -- Your level limit is now 75.
+        QULTADA_CARDS_DEALT           = 7858, -- The cards have been dealt. Now let us begin our little gamble of luck and skill.
+        QULTADA_GO_EASY               = 7859, -- You need not go easy on me... I certainly will not go easy on you.
+        QULTADA_QUICK_START           = 7860, -- Oho... That was a quick start.
+        QULTADA_BETTER_LUCK           = 7861, -- You could not put a dent in my tricorne with attacks like that. Better luck next time.
+        QULTADA_NOT_BAD               = 7862, -- Not bad...
+        QULTADA_ANTE_UP               = 7863, -- Ante up!
+        QULTADA_TRY_YOUR_LUCK         = 7864, -- Let's try your luck!
+        QULTADA_GET_AWAY              = 7865, -- Think you can get away?
+        QULTADA_BEHOLD                = 7866, -- Behold my trump card... Time for you to fold!
+        QULTADA_TOO_BAD               = 7867, -- Too bad. I was hoping for a bit more excitement.
+        QULTADA_LADY_DESTINY          = 7868, -- Does Lady Destiny smile upon you today? Or is it merely Fate's mocking grin? Now is the time to offer your prayers!
+        QULTADA_LUCK_OF_CORSAIR       = 7869, -- The luck of the corsair is a wonderful thing!
+        QULTADA_FIVE_ROLL             = 7870, -- Ha! Lady Luck, stay with me!
+        QULTADA_AS_LUCK               = 7871, -- As luck would have it...
+        QULTADA_DO_NOT_FAIL           = 7872, -- Luck, do not fail me again...
+        QULTADA_CHIPS_ARE_DOWN        = 7873, -- Sometimes the chips are down...
+        QULTADA_HEAT_UP               = 7874, -- Looks like things are beginning to heat up!
+        YOUR_LEVEL_LIMIT_IS_NOW_75    = 7875, -- Your level limit is now 75.
     },
     mob =
     {

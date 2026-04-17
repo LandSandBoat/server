@@ -37,7 +37,8 @@
 auto GP_CLI_COMMAND_BAZAAR_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Short-circuit PV so we can bring all the other checks into this function
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .range("BuyNum", this->BuyNum, 1, 99);
 }
 

@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.FOO_PEKU_THE_BLOODCLOAK - 2] = ID.mob.FOO_PEKU_THE_BLOODCLOAK, -- Vanguard_Skirmisher
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

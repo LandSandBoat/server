@@ -1,9 +1,7 @@
 -----------------------------------
---  Onslaught
---
---  Description: Lowers target's accuracy. Guttler/Ogre Killer: Temporarily increases Attack.
---  Type: Physical
---  Range: Melee
+-- Onslaught
+-- Family: Humanoid Axe Weaponskill
+-- Description: Lowers target's accuracy. Guttler/Ogre Killer: Temporarily increases Attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,21 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2.5 -- fTP and fTP scaling unknown. TODO: capture ftp
+    local params = {}
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
-    local duration = 60
-    local power = 30
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.ACCURACY_DOWN, power, 0, duration)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-    -- About 300-400 to a DD.
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+        -- TODO: Capture power/duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, 30, 0, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

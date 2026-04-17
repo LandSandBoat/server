@@ -22,6 +22,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         local currentEffect = mob:getStatusEffect(effect)
 
         if currentEffect then
+            -- TODO: Bio needs subPower copied over as well for the ATTP reduction.
             xi.mobskills.mobStatusEffectMove(mob, target, effect, currentEffect:getPower(), currentEffect:getTick(), currentEffect:getTimeRemaining() / 1000)
             mob:delStatusEffect(effect)
         end

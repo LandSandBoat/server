@@ -26,13 +26,14 @@
 auto GP_CLI_COMMAND_GMCOMMAND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_GMCOMMAND::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto commandStr = asStringFromUntrustedSource(Command, sizeof(Command));
+    auto commandStr = asStringFromUntrustedSource(this->Command, sizeof(this->Command));
     ShowDebugFmt("GP_CLI_COMMAND_GMCOMMAND: Not implemented. GMUniqueNo: {}, Command: '{}'",
-                 GMUniqueNo,
+                 this->GMUniqueNo,
                  commandStr);
 }

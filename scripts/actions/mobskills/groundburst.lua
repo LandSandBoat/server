@@ -1,11 +1,7 @@
 -----------------------------------
---  Groundburst
---
---  Description: Expels a fireball on targets in an area of effect.
---  Type: Physical
---  Utsusemi/Blink absorb: Wipes shadows
---  Range: Unknown radial
---  Notes: Only used by notorious monsters, and from any Mamool Ja in besieged.
+-- Groundburst
+-- Family: Mamool Ja
+-- Description: Expels a fireball on targets in an area of effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,13 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    local params = {}
+
+    -- TODO: Capture if magical or physical
+    -- No data on this skill.
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

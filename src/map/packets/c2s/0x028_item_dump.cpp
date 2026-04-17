@@ -56,31 +56,32 @@ const std::set validContainers = {
 
 auto GP_CLI_COMMAND_ITEM_DUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers)
-        .range("ItemNum", ItemNum, 0, 99); // Retail honors 0 quantity.
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers)
+        .range("ItemNum", this->ItemNum, 0, 99); // Retail honors 0 quantity.
 }
 
 void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Gil cannot be dropped.
-    if (Category == LOC_INVENTORY && ItemIndex == 0)
+    if (this->Category == LOC_INVENTORY && this->ItemIndex == 0)
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(ITEMID::GIL, MsgStd::UnableToThrowAway);
         return;
     }
 
-    CItem* PItem = PChar->getStorage(Category)->GetItem(ItemIndex);
+    CItem* PItem = PChar->getStorage(this->Category)->GetItem(this->ItemIndex);
 
     if (!PItem || PItem->isSubType(ITEM_LOCKED))
     {
-        ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Attempt of removal of invalid item from slot %u", ItemIndex);
+        ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Attempt of removal of invalid item from slot %u", this->ItemIndex);
         return;
     }
 
-    if (PItem->getQuantity() - PItem->getReserve() < ItemNum)
+    if (PItem->getQuantity() - PItem->getReserve() < this->ItemNum)
     {
-        ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Trying to drop too much quantity from location %u slot %u", Category, ItemIndex);
+        ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Trying to drop too much quantity from location %u slot %u", this->Category, this->ItemIndex);
         return;
     }
 
@@ -118,13 +119,13 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
     // Retail accurate: Any item dropped from a container other than inventory skips the recycle bin.
     // Items with the NoRecycle flag bypass the recycle bin entirely (e.g. linkshells).
-    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || Category != CONTAINER_ID::LOC_INVENTORY || PItem->hasFlag(ItemFlag::NoRecycle))
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || this->Category != CONTAINER_ID::LOC_INVENTORY || PItem->hasFlag(ItemFlag::NoRecycle))
     {
-        charutils::DropItem(PChar, Category, ItemIndex, ItemNum, PItem->getID());
+        charutils::DropItem(PChar, this->Category, this->ItemIndex, this->ItemNum, PItem->getID());
         return;
     }
 
     // Otherwise, to the recycle bin!
     // Note: AddItemToRecycleBin moves the whole item without using ItemNum which is not retail accurate.
-    charutils::AddItemToRecycleBin(PChar, Category, ItemIndex, ItemNum);
+    charutils::AddItemToRecycleBin(PChar, this->Category, this->ItemIndex, this->ItemNum);
 }

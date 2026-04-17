@@ -27,7 +27,8 @@
 auto GP_CLI_COMMAND_EMOTE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No input validation is needed for this packet.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_EMOTE_LIST::process(MapSession* PSession, CCharEntity* PChar) const

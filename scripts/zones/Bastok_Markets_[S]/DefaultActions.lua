@@ -8,5 +8,8 @@ return {
     ['Bottomless_Gorge'] = { event = 150 },
     ['Christoph']        = { event = 157 },
     ['Clemens']          = { event = 149 },
+    ['Engelhart']        = { event = 104 },
+    ['Gentle_Tiger']     = { event = 109 },
     ['Heumila']          = { event = 0 },
+    ['Pagdako']          = { event = 106 },
 }

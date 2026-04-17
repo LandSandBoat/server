@@ -28,11 +28,11 @@
 auto GP_CLI_COMMAND_ALTER_EGO_POINTS::validate(MapSession* PSession, const CCharEntity* PChar) const
     -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus })
         .oneOf<AlterEgoCategory>(this->CategoryIndex)
-        .isNormalStatus(PChar)
-        .isInMogHouse(PChar)
-        .hasKeyItem(PChar, KeyItem::CIPHER_BRACELET)
+        .isInMogHouse()
+        .hasKeyItem(KeyItem::CIPHER_BRACELET)
         .custom([&](PacketValidator& v)
                 {
                     if (PChar->GetMLevel() < 99)

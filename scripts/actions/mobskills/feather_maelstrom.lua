@@ -1,7 +1,7 @@
 -----------------------------------
 -- Feather Maelstrom
--- Sends a storm of feathers to a single target.
--- Additional effect: Bio & Amnesia
+-- Family: Yagudo
+-- Description: Deals physical damage to a single target. Additional Effect: Amnesia, Bio
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,17 +11,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 2
-    local ftp    = 2.8 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIO, 6, 3, 60)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.AMNESIA, 1, 0, 60)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    -- TODO: Physical or Ranged PDIF?
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.8, 2.8, 2.8 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture power/duration of effects
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 6, 3, 60, 0, 15) -- TODO: Capture subPower (ATTP Modifier). Using Bio II value for now (15%)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 60) -- Note: Power matters for things that attempt to remove Amnesia.
+    end
+
+    return info.damage
 end
 
 return mobskillObject

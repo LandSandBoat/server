@@ -1,31 +1,38 @@
 -----------------------------------
---  Tourbillion
---
---  Description: Delivers an area attack. Additional effect duration varies with TP. Additional effect: Weakens defense.
---  Type: Physical
---  Shadow per hit
---  Range: Unknown range
---  Note: Can only be used with wings up
+-- Tourbillion
+-- Family: Khimaira
+-- Description: Delivers an area attack. Additional Effect: Defense Down
+-- Note: Can only be used with wings up
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return mob:getAnimationSub() == 0 and 0 or 1 -- wings up
+    return mob:getAnimationSub() == 0 and 0 or 1 -- Wings up
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 3
-    local accmod = 1
-    local ftp    = 1.5
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    local duration = 20 * (skill:getTP() / 1000)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, 20, 0, duration)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3 -- TODO: Capture numHits
+    params.fTP            = { 1.5, 1.5, 1.5 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+    -- TODO: Confirm AoE type (On mob vs on target. Radial or conal)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture power/duration
+        local duration = xi.mobskills.calculateDuration(mob:getTP(), 20, 60)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 20, 0, duration)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

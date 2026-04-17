@@ -40,11 +40,12 @@ const std::set validLinkshellOperations = {
 
 auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(Kind)
-                  .oneOf<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(ChangeKind);
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(this->Kind)
+                  .oneOf<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(this->ChangeKind);
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(ChangeKind))
+    switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(this->ChangeKind))
     {
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::SetPartyLeader:
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::SetQuartermaster:
@@ -53,23 +54,23 @@ auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEnt
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::DisableLevelSync:
         {
             pv
-                .mustEqual(Kind, GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party, "Invalid operation")
-                .isPartyLeader(PChar);
+                .mustEqual(this->Kind, GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party, "Invalid operation")
+                .isPartyLeader();
         }
         break;
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::PearlToSack:
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::SackToPearl:
         {
             pv
-                .oneOf("Kind", static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(Kind), validLinkshellOperations)
-                .hasLinkshellRank(PChar, Kind, LSTYPE_LINKSHELL);
+                .oneOf("Kind", static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(this->Kind), validLinkshellOperations)
+                .hasLinkshellRank(this->Kind, LSTYPE_LINKSHELL);
         }
         break;
         case GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::SetAllianceLeader:
         {
             pv
-                .mustEqual(Kind, GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Alliance, "Invalid operation")
-                .isAllianceLeader(PChar);
+                .mustEqual(this->Kind, GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Alliance, "Invalid operation")
+                .isAllianceLeader();
         }
         break;
     }
@@ -79,13 +80,13 @@ auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto memberName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
-    switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(Kind))
+    const auto memberName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party:
         {
-            ShowDebug(fmt::format("(Party) Altering permissions of {} to {}", memberName, ChangeKind));
-            PChar->PParty->AssignPartyRole(memberName, static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(ChangeKind));
+            ShowDebug(fmt::format("(Party) Altering permissions of {} to {}", memberName, this->ChangeKind));
+            PChar->PParty->AssignPartyRole(memberName, static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(this->ChangeKind));
         }
         break;
         case GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Linkshell1:
@@ -93,7 +94,7 @@ void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PC
         {
             CItemLinkshell*   PItemLinkshell = nullptr;
             const CLinkshell* PLinkshell     = nullptr;
-            switch (Kind)
+            switch (this->Kind)
             {
                 case 1:
                 {
@@ -119,7 +120,7 @@ void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PC
                     .requesterRank = PItemLinkshell->GetLSType(),
                     .memberName    = memberName,
                     .linkshellId   = PLinkshell->getID(),
-                    .newRank       = ChangeKind,
+                    .newRank       = this->ChangeKind,
                 });
             }
         }

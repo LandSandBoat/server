@@ -27,10 +27,11 @@
 
 auto GP_CLI_COMMAND_GET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<LinkshellSlot>(LinkshellId);
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<LinkshellSlot>(this->LinkshellId);
 
-    switch (static_cast<LinkshellSlot>(LinkshellId))
+    switch (static_cast<LinkshellSlot>(this->LinkshellId))
     {
         case LinkshellSlot::LS1:
             pv.mustNotEqual(PChar->PLinkshell1, nullptr, "Character does not have Linkshell 1");
@@ -45,7 +46,7 @@ auto GP_CLI_COMMAND_GET_LSMSG::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_GET_LSMSG::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<LinkshellSlot>(LinkshellId))
+    switch (static_cast<LinkshellSlot>(this->LinkshellId))
     {
         case LinkshellSlot::LS1:
             PChar->PLinkshell1->PushLinkshellMessage(PChar, LinkshellSlot::LS1);

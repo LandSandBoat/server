@@ -17,7 +17,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local typeEffect = nil
     local blinded    = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120)
-    local bio        = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 39, 0, 120)
+    local bio        = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 39, 0, 120) -- TODO: Capture ATTP reduction
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.COUNT_ZAEBOS - 1] = ID.mob.COUNT_ZAEBOS, -- Kindred_Warrior
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

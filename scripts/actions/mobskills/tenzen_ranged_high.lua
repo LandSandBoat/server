@@ -1,7 +1,8 @@
 -----------------------------------
 -- Tenzed Ranged Attack Alt
--- Only Used when in Bow Mode
--- Deals a ranged attack to a single target.
+-- Family: Humanoid (Tenzen)
+-- Description: Deals a ranged attack to a single target.
+-- Notes: Only Used when in Bow Mode
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,27 +12,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 1.5
+    local params = {}
 
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
-    local msg = skill:getMsg()
-    if
-        dmg > 0 and
-        msg ~= xi.msg.basic.SHADOW_ABSORB
-    then
-        target:addTP(20)
-        mob:addTP(80)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.5, 1.5, 1.5 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.primaryMessage = xi.msg.basic.RANGED_ATTACK_HIT
+    params.skipParry      = true
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    if msg ~= xi.msg.basic.SHADOW_ABSORB then
-        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-    end
-
-    skill:setMsg(352) -- fixes incorrect messages on ranged attacks
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

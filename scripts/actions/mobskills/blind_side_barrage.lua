@@ -1,10 +1,8 @@
 -----------------------------------
 -- Blindside Barrage
--- Description: Deals physical damage to a single target. Additional Effect: MND,INT Down - Can critically strike.
--- Notorious Monster/Nightmare version deals damage in a 10 yalm area of effect around target.
--- Type: Physical (Blunt)
--- Utsusemi/Blink absorb: 1 shadow
--- Range: Melee
+-- Family: Lesser Bird
+-- Description: Deals physical damage to a single target. Additional Effect: INT Down, MND Down
+-- Notes: Notorious Monster/Nightmare version deals damage in a 10 yalm area of effect around target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,19 +12,32 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 2.0
-    local power   = 3 + math.floor(mob:getMainLvl() / 5)
-    local params  = { canCrit = true }
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0, params)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.MND_DOWN, power, 0, 120) -- Does not decay
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.INT_DOWN, power, 0, 120)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.canCrit        = true
+    params.criticalChance = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    -- TODO: AOE Version may take more shadows since it is AoE
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local power = 3 + math.floor(mob:getMainLvl() / 5)
+
+        -- Note: Status effects do not decay.
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MND_DOWN, power, 0, 120)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.INT_DOWN, power, 0, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

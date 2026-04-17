@@ -6,6 +6,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.NIGHTMARE_AWAKENER)

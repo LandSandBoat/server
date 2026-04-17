@@ -1,10 +1,8 @@
 -----------------------------------
 -- Critical Bite
---
+-- Family: Scorpion
 -- Description: Deals damage to a single target. Additional Effect : Knockback (7)
--- Type: Physical
--- Utsusemi/Blink absorb: 1 shadow
--- Range: Melee, used by Nightmare Scorpions, KV, Serket
+-- Notes: Used by Nightmare Scorpions, King Vinegarroon, Serket
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,15 +12,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 2
-    local params  = { canCrit = true }
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ATK_VARIES, 1.5, 1.5, 1.5, params)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-    return dmg
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 1
+    params.fTP              = { 2.0, 2.0, 2.0 }
+    params.attackType       = xi.attackType.PHYSICAL
+    params.damageType       = xi.damageType.PIERCING
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.attackMultiplier = { 1.5, 1.5, 1.5 }
+    params.canCrit          = true
+    params.criticalChance = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

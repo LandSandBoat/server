@@ -27,8 +27,8 @@
 
 auto GP_CLI_COMMAND_CLISTATUS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .range("unknown00", unknown00, 0, 1);
+    return PacketValidator(PChar)
+        .range("unknown00", this->unknown00, 0, 1);
 }
 
 void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar) const

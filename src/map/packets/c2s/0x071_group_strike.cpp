@@ -33,27 +33,28 @@
 
 auto GP_CLI_COMMAND_GROUP_STRIKE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(Kind)
-                  .mustEqual(ActIndex, 0, "ActIndex not 0")
-                  .mustEqual(UniqueNo, 0, "UniqueNo not 0");
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(this->Kind)
+                  .mustEqual(this->ActIndex, 0, "ActIndex not 0")
+                  .mustEqual(this->UniqueNo, 0, "UniqueNo not 0");
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_GROUP_STRIKE_KIND::Party:
         {
-            pv.isPartyLeader(PChar);
+            pv.isPartyLeader();
         }
         break;
         case GP_CLI_COMMAND_GROUP_STRIKE_KIND::Linkshell1:
         case GP_CLI_COMMAND_GROUP_STRIKE_KIND::Linkshell2:
         {
-            pv.hasLinkshellRank(PChar, Kind, LSTYPE_PEARLSACK);
+            pv.hasLinkshellRank(this->Kind, LSTYPE_PEARLSACK);
         }
         break;
         case GP_CLI_COMMAND_GROUP_STRIKE_KIND::Alliance:
         {
-            pv.isAllianceLeader(PChar);
+            pv.isAllianceLeader();
         }
         break;
     }
@@ -63,9 +64,9 @@ auto GP_CLI_COMMAND_GROUP_STRIKE::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_GROUP_STRIKE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto victimName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
+    const auto victimName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_GROUP_STRIKE_KIND::Party:
         {

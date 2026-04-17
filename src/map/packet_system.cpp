@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,22 +19,13 @@
 ===========================================================================
 */
 
-#include "common/database.h"
-#include "common/logging.h"
-#include "common/mmo.h"
-#include "common/timer.h"
-#include "common/utils.h"
-
-#include <cstring>
-#include <utility>
-
-#include "ipc_client.h"
-#include "map_networking.h"
-#include "map_session.h"
 #include "packet_system.h"
 
-#include "entities/charentity.h"
+#include "common/logging.h"
+#include "common/tracy.h"
 
+#include "entities/charentity.h"
+#include "map_session.h"
 #include "packets/basic.h"
 #include "packets/c2s/0x00a_login.h"
 #include "packets/c2s/0x00c_gameok.h"
@@ -44,6 +35,7 @@
 #include "packets/c2s/0x015_pos.h"
 #include "packets/c2s/0x016_charreq.h"
 #include "packets/c2s/0x017_charreq2.h"
+#include "packets/c2s/0x01a_action.h"
 #include "packets/c2s/0x01b_friendpass.h"
 #include "packets/c2s/0x01c_unknown.h"
 #include "packets/c2s/0x01e_gm.h"
@@ -167,49 +159,22 @@
 #include "packets/c2s/0x11d_jump.h"
 #include "utils/moduleutils.h"
 
-uint8 PacketSize[512];
-
-std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
-
-/************************************************************************
- *                                                                       *
- *  Display the contents of the incoming packet to the console.          *
- *                                                                       *
- ************************************************************************/
-
-void PrintPacket(CBasicPacket& packet)
+namespace
 {
-    std::string message;
 
-    for (std::size_t idx = 0U; idx < packet.getSize(); idx++)
-    {
-        uint8 byte = *packet[idx];
-        message.append(fmt::format("{:02x} ", byte));
+using PacketHandler = void (*)(MapSession* const, CCharEntity* const, CBasicPacket&);
 
-        if (((idx + 1U) % 16U) == 0U)
-        {
-            message += "\n";
-            ShowDebug(message.c_str());
-            message.clear();
-        }
-    }
-
-    if (!message.empty())
-    {
-        message += "\n";
-        ShowDebug(message.c_str());
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Unknown Packet                                                       *
- *                                                                       *
- ************************************************************************/
-
-void SmallPacket0x000(MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+template <typename T>
+constexpr auto packetSizeRange() -> std::pair<std::size_t, std::size_t>
 {
-    ShowWarning("parse: Unhandled game packet %03hX from user: %s", (data.ref<uint16>(0) & 0x1FF), PChar->getName());
+    if constexpr (requires { T::getMinSize(); })
+    {
+        return { T::getMinSize(), sizeof(T) };
+    }
+    else
+    {
+        return { sizeof(T), sizeof(T) };
+    }
 }
 
 template <typename T>
@@ -217,10 +182,30 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
 {
     TracyZoneScoped;
 
+    constexpr auto packetId   = static_cast<uint16>(T::packetId);
+    constexpr auto sizeRange  = packetSizeRange<T>();
+    constexpr auto minSize    = sizeRange.first;
+    constexpr auto maxSize    = sizeRange.second;
+    const auto     actualSize = data.getSize();
+
+    if (actualSize < minSize || actualSize > maxSize)
+    {
+        ShowWarningFmt("Bad packet size for {} ({:#05x}) from {}: got {}, expected [{}, {}]",
+                       T::name,
+                       packetId,
+                       PChar->getName(),
+                       actualSize,
+                       minSize,
+                       maxSize);
+        return;
+    }
+
     const T* packet = data.as<T>();
 
     if (const auto result = packet->validate(PSession, PChar); result.valid())
     {
+        PChar->m_LastPacketType = packetId;
+
         // Modules can optionally block processing of packets by returning true from OnIncomingPacket
         if (moduleutils::OnIncomingPacket(PSession, PChar, data))
         {
@@ -231,156 +216,175 @@ void ValidatedPacketHandler(MapSession* const PSession, CCharEntity* const PChar
     }
     else
     {
-        ShowWarningFmt("Invalid {} packet from {}: {} ", packet->getName(), PChar->name, result.errorString());
+        ShowWarningFmt("Invalid {} packet from {}: {} ", T::name, PChar->getName(), result.errorString());
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  Packet Array Initialization                                          *
- *                                                                       *
- ************************************************************************/
-
-void PacketParserInitialize()
+template <typename T>
+constexpr void registerPacket(std::array<PacketHandler, 512>& handlers)
 {
-    TracyZoneScoped;
+    handlers[static_cast<uint16>(T::packetId)] = &ValidatedPacketHandler<T>;
+}
 
-    for (uint16 i = 0; i < 512; ++i)
+consteval auto buildPacketHandlers() -> std::array<PacketHandler, 512>
+{
+    std::array<PacketHandler, 512> handlers{};
+
+    registerPacket<GP_CLI_COMMAND_LOGIN>(handlers);
+    registerPacket<GP_CLI_COMMAND_GAMEOK>(handlers);
+    registerPacket<GP_CLI_COMMAND_NETEND>(handlers);
+    registerPacket<GP_CLI_COMMAND_CLSTAT>(handlers);
+    registerPacket<GP_CLI_COMMAND_ZONE_TRANSITION>(handlers);
+    registerPacket<GP_CLI_COMMAND_POS>(handlers);
+    registerPacket<GP_CLI_COMMAND_CHARREQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_CHARREQ2>(handlers);
+    registerPacket<GP_CLI_COMMAND_ACTION>(handlers);
+    registerPacket<GP_CLI_COMMAND_FRIENDPASS>(handlers);
+    registerPacket<GP_CLI_COMMAND_UNKNOWN>(handlers);
+    registerPacket<GP_CLI_COMMAND_GM>(handlers);
+    registerPacket<GP_CLI_COMMAND_GMCOMMAND>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEM_DUMP>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEM_MOVE>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRANSLATE>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEMSEARCH>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRADE_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRADE_RES>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRADE_LIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEM_TRANSFER>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEM_USE>(handlers);
+    registerPacket<GP_CLI_COMMAND_ITEM_STACK>(handlers);
+    registerPacket<GP_CLI_COMMAND_SUBCONTAINER>(handlers);
+    registerPacket<GP_CLI_COMMAND_BLACK_LIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_BLACK_EDIT>(handlers);
+    registerPacket<GP_CLI_COMMAND_TROPHY_ENTRY>(handlers);
+    registerPacket<GP_CLI_COMMAND_TROPHY_ABSENCE>(handlers);
+    registerPacket<GP_CLI_COMMAND_FRAGMENTS>(handlers);
+    registerPacket<GP_CLI_COMMAND_PBX>(handlers);
+    registerPacket<GP_CLI_COMMAND_AUC>(handlers);
+    registerPacket<GP_CLI_COMMAND_EQUIP_SET>(handlers);
+    registerPacket<GP_CLI_COMMAND_EQUIPSET_SET>(handlers);
+    registerPacket<GP_CLI_COMMAND_EQUIPSET_CHECK>(handlers);
+    registerPacket<GP_CLI_COMMAND_LOCKSTYLE>(handlers);
+    registerPacket<GP_CLI_COMMAND_RECIPE>(handlers);
+    registerPacket<GP_CLI_COMMAND_EFFECTEND>(handlers);
+    registerPacket<GP_CLI_COMMAND_REQCONQUEST>(handlers);
+    registerPacket<GP_CLI_COMMAND_EVENTEND>(handlers);
+    registerPacket<GP_CLI_COMMAND_EVENTENDXZY>(handlers);
+    registerPacket<GP_CLI_COMMAND_MOTION>(handlers);
+    registerPacket<GP_CLI_COMMAND_MAPRECT>(handlers);
+    registerPacket<GP_CLI_COMMAND_PASSWARDS>(handlers);
+    registerPacket<GP_CLI_COMMAND_CLISTATUS>(handlers);
+    registerPacket<GP_CLI_COMMAND_DIG>(handlers);
+    registerPacket<GP_CLI_COMMAND_SCENARIOITEM>(handlers);
+    registerPacket<GP_CLI_COMMAND_FISHING>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_SOLICIT_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_LEAVE>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_BREAKUP>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_STRIKE>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_SOLICIT_RES>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_LIST_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_CHANGE2>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_CHECKID>(handlers);
+    registerPacket<GP_CLI_COMMAND_SHOP_BUY>(handlers);
+    registerPacket<GP_CLI_COMMAND_SHOP_SELL_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_SHOP_SELL_SET>(handlers);
+    registerPacket<GP_CLI_COMMAND_COMBINE_ASK>(handlers);
+    registerPacket<GP_CLI_COMMAND_CHOCOBO_RACE_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_SWITCH_PROPOSAL>(handlers);
+    registerPacket<GP_CLI_COMMAND_SWITCH_VOTE>(handlers);
+    registerPacket<GP_CLI_COMMAND_DICE>(handlers);
+    registerPacket<GP_CLI_COMMAND_GUILD_BUY>(handlers);
+    registerPacket<GP_CLI_COMMAND_GUILD_BUYLIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_GUILD_SELL>(handlers);
+    registerPacket<GP_CLI_COMMAND_GUILD_SELLLIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_CHAT_STD>(handlers);
+    registerPacket<GP_CLI_COMMAND_CHAT_NAME>(handlers);
+    registerPacket<GP_CLI_COMMAND_ASSIST_CHANNEL>(handlers);
+    registerPacket<GP_CLI_COMMAND_MERITS>(handlers);
+    registerPacket<GP_CLI_COMMAND_JOB_POINTS_SPEND>(handlers);
+    registerPacket<GP_CLI_COMMAND_JOB_POINTS_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_ALTER_EGO_POINTS>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_COMLINK_MAKE>(handlers);
+    registerPacket<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_IS>(handlers);
+    registerPacket<GP_CLI_COMMAND_MAP_GROUP>(handlers);
+    registerPacket<GP_CLI_COMMAND_FAQ_GMCALL>(handlers);
+    registerPacket<GP_CLI_COMMAND_FAQ_GMPARAM>(handlers);
+    registerPacket<GP_CLI_COMMAND_ACK_GMMSG>(handlers);
+    registerPacket<GP_CLI_COMMAND_DUNGEON_PARAM>(handlers);
+    registerPacket<GP_CLI_COMMAND_CONFIG_LANGUAGE>(handlers);
+    registerPacket<GP_CLI_COMMAND_CONFIG>(handlers);
+    registerPacket<GP_CLI_COMMAND_EQUIP_INSPECT>(handlers);
+    registerPacket<GP_CLI_COMMAND_INSPECT_MESSAGE>(handlers);
+    registerPacket<GP_CLI_COMMAND_SET_USERMSG>(handlers);
+    registerPacket<GP_CLI_COMMAND_GET_LSMSG>(handlers);
+    registerPacket<GP_CLI_COMMAND_SET_LSMSG>(handlers);
+    registerPacket<GP_CLI_COMMAND_GET_LSPRIV>(handlers);
+    registerPacket<GP_CLI_COMMAND_REQLOGOUT>(handlers);
+    registerPacket<GP_CLI_COMMAND_CAMP>(handlers);
+    registerPacket<GP_CLI_COMMAND_SIT>(handlers);
+    registerPacket<GP_CLI_COMMAND_REQSUBMAPNUM>(handlers);
+    registerPacket<GP_CLI_COMMAND_RESCUE>(handlers);
+    registerPacket<GP_CLI_COMMAND_BUFFCANCEL>(handlers);
+    registerPacket<GP_CLI_COMMAND_SUBMAPCHANGE>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRACKING_LIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRACKING_START>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRACKING_END>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_LAYOUT>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_BANKIN>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_PLANT_ADD>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_PLANT_CHECK>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_PLANT_CROP>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_PLANT_STOP>(handlers);
+    registerPacket<GP_CLI_COMMAND_MYROOM_JOB>(handlers);
+    registerPacket<GP_CLI_COMMAND_EXTENDED_JOB>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_EXIT>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_LIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_BUY>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_OPEN>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_ITEMSET>(handlers);
+    registerPacket<GP_CLI_COMMAND_BAZAAR_CLOSE>(handlers);
+    registerPacket<GP_CLI_COMMAND_ROE_START>(handlers);
+    registerPacket<GP_CLI_COMMAND_ROE_REMOVE>(handlers);
+    registerPacket<GP_CLI_COMMAND_ROE_CLAIM>(handlers);
+    registerPacket<GP_CLI_COMMAND_CURRENCIES_1>(handlers);
+    registerPacket<GP_CLI_COMMAND_FISHING_2>(handlers);
+    registerPacket<GP_CLI_COMMAND_BATTLEFIELD_REQ>(handlers);
+    registerPacket<GP_CLI_COMMAND_SITCHAIR>(handlers);
+    registerPacket<GP_CLI_COMMAND_MAP_MARKERS>(handlers);
+    registerPacket<GP_CLI_COMMAND_CURRENCIES_2>(handlers);
+    registerPacket<GP_CLI_COMMAND_UNITY_MENU>(handlers);
+    registerPacket<GP_CLI_COMMAND_UNITY_QUEST>(handlers);
+    registerPacket<GP_CLI_COMMAND_UNITY_TOGGLE>(handlers);
+    registerPacket<GP_CLI_COMMAND_EMOTE_LIST>(handlers);
+    registerPacket<GP_CLI_COMMAND_MASTERY_DISPLAY>(handlers);
+    registerPacket<GP_CLI_COMMAND_PARTY_REQUEST>(handlers);
+    registerPacket<GP_CLI_COMMAND_JUMP>(handlers);
+
+    return handlers;
+}
+
+constexpr auto packetHandlers_ = buildPacketHandlers();
+
+} // namespace
+
+void PacketSystem::dispatch(uint16 packetId, MapSession* PSession, CCharEntity* PChar, CBasicPacket& data)
+{
+    if (const auto handler = packetHandlers_[packetId])
     {
-        PacketSize[i]   = 0;
-        PacketParser[i] = &SmallPacket0x000;
-    }
+        if (rateLimiter_.isLimited(PChar, packetId))
+        {
+            ShowWarningFmt("Rate-limiting packet {} ({:#05x}) from {}",
+                           magic_enum::enum_name(static_cast<PacketC2S>(packetId)),
+                           packetId,
+                           PChar->getName());
+            return;
+        }
 
-    // clang-format off
-    PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &ValidatedPacketHandler<GP_CLI_COMMAND_LOGIN>;
-    PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &ValidatedPacketHandler<GP_CLI_COMMAND_GAMEOK>;
-    PacketSize[0x00D] = 0x04; PacketParser[0x00D] = &ValidatedPacketHandler<GP_CLI_COMMAND_NETEND>;
-    PacketSize[0x00F] = 0x00; PacketParser[0x00F] = &ValidatedPacketHandler<GP_CLI_COMMAND_CLSTAT>;
-    PacketSize[0x011] = 0x00; PacketParser[0x011] = &ValidatedPacketHandler<GP_CLI_COMMAND_ZONE_TRANSITION>;
-    PacketSize[0x015] = 0x10; PacketParser[0x015] = &ValidatedPacketHandler<GP_CLI_COMMAND_POS>;
-    PacketSize[0x016] = 0x04; PacketParser[0x016] = &ValidatedPacketHandler<GP_CLI_COMMAND_CHARREQ>;
-    PacketSize[0x017] = 0x00; PacketParser[0x017] = &ValidatedPacketHandler<GP_CLI_COMMAND_CHARREQ2>;
-    PacketSize[0x01A] = 0x0E; PacketParser[0x01A] = &ValidatedPacketHandler<GP_CLI_COMMAND_ACTION>;
-    PacketSize[0x01B] = 0x00; PacketParser[0x01B] = &ValidatedPacketHandler<GP_CLI_COMMAND_FRIENDPASS>;
-    PacketSize[0x01C] = 0x00; PacketParser[0x01C] = &ValidatedPacketHandler<GP_CLI_COMMAND_UNKNOWN>;
-    PacketSize[0x01E] = 0x00; PacketParser[0x01E] = &ValidatedPacketHandler<GP_CLI_COMMAND_GM>;
-    PacketSize[0x01F] = 0x00; PacketParser[0x01F] = &ValidatedPacketHandler<GP_CLI_COMMAND_GMCOMMAND>;
-    PacketSize[0x028] = 0x06; PacketParser[0x028] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEM_DUMP>;
-    PacketSize[0x029] = 0x06; PacketParser[0x029] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEM_MOVE>;
-    PacketSize[0x02B] = 0x00; PacketParser[0x02B] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRANSLATE>;
-    PacketSize[0x02C] = 0x00; PacketParser[0x02C] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEMSEARCH>;
-    PacketSize[0x032] = 0x06; PacketParser[0x032] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRADE_REQ>;
-    PacketSize[0x033] = 0x06; PacketParser[0x033] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRADE_RES>;
-    PacketSize[0x034] = 0x06; PacketParser[0x034] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRADE_LIST>;
-    PacketSize[0x036] = 0x20; PacketParser[0x036] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEM_TRANSFER>;
-    PacketSize[0x037] = 0x0A; PacketParser[0x037] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEM_USE>;
-    PacketSize[0x03A] = 0x04; PacketParser[0x03A] = &ValidatedPacketHandler<GP_CLI_COMMAND_ITEM_STACK>;
-    PacketSize[0x03B] = 0x10; PacketParser[0x03B] = &ValidatedPacketHandler<GP_CLI_COMMAND_SUBCONTAINER>;
-    PacketSize[0x03C] = 0x00; PacketParser[0x03C] = &ValidatedPacketHandler<GP_CLI_COMMAND_BLACK_LIST>;
-    PacketSize[0x03D] = 0x00; PacketParser[0x03D] = &ValidatedPacketHandler<GP_CLI_COMMAND_BLACK_EDIT>;
-    PacketSize[0x041] = 0x00; PacketParser[0x041] = &ValidatedPacketHandler<GP_CLI_COMMAND_TROPHY_ENTRY>;
-    PacketSize[0x042] = 0x00; PacketParser[0x042] = &ValidatedPacketHandler<GP_CLI_COMMAND_TROPHY_ABSENCE>;
-    PacketSize[0x04B] = 0x00; PacketParser[0x04B] = &ValidatedPacketHandler<GP_CLI_COMMAND_FRAGMENTS>;
-    PacketSize[0x04D] = 0x00; PacketParser[0x04D] = &ValidatedPacketHandler<GP_CLI_COMMAND_PBX>;
-    PacketSize[0x04E] = 0x1E; PacketParser[0x04E] = &ValidatedPacketHandler<GP_CLI_COMMAND_AUC>;
-    PacketSize[0x050] = 0x04; PacketParser[0x050] = &ValidatedPacketHandler<GP_CLI_COMMAND_EQUIP_SET>;
-    PacketSize[0x051] = 0x24; PacketParser[0x051] = &ValidatedPacketHandler<GP_CLI_COMMAND_EQUIPSET_SET>;
-    PacketSize[0x052] = 0x26; PacketParser[0x052] = &ValidatedPacketHandler<GP_CLI_COMMAND_EQUIPSET_CHECK>;
-    PacketSize[0x053] = 0x44; PacketParser[0x053] = &ValidatedPacketHandler<GP_CLI_COMMAND_LOCKSTYLE>;
-    PacketSize[0x058] = 0x0A; PacketParser[0x058] = &ValidatedPacketHandler<GP_CLI_COMMAND_RECIPE>;
-    PacketSize[0x059] = 0x00; PacketParser[0x059] = &ValidatedPacketHandler<GP_CLI_COMMAND_EFFECTEND>;
-    PacketSize[0x05A] = 0x02; PacketParser[0x05A] = &ValidatedPacketHandler<GP_CLI_COMMAND_REQCONQUEST>;
-    PacketSize[0x05B] = 0x0A; PacketParser[0x05B] = &ValidatedPacketHandler<GP_CLI_COMMAND_EVENTEND>;
-    PacketSize[0x05C] = 0x00; PacketParser[0x05C] = &ValidatedPacketHandler<GP_CLI_COMMAND_EVENTENDXZY>;
-    PacketSize[0x05D] = 0x08; PacketParser[0x05D] = &ValidatedPacketHandler<GP_CLI_COMMAND_MOTION>;
-    PacketSize[0x05E] = 0x0C; PacketParser[0x05E] = &ValidatedPacketHandler<GP_CLI_COMMAND_MAPRECT>;
-    PacketSize[0x060] = 0x00; PacketParser[0x060] = &ValidatedPacketHandler<GP_CLI_COMMAND_PASSWARDS>;
-    PacketSize[0x061] = 0x04; PacketParser[0x061] = &ValidatedPacketHandler<GP_CLI_COMMAND_CLISTATUS>;
-    PacketSize[0x063] = 0x00; PacketParser[0x063] = &ValidatedPacketHandler<GP_CLI_COMMAND_DIG>;
-    PacketSize[0x064] = 0x26; PacketParser[0x064] = &ValidatedPacketHandler<GP_CLI_COMMAND_SCENARIOITEM>;
-    PacketSize[0x066] = 0x0A; PacketParser[0x066] = &ValidatedPacketHandler<GP_CLI_COMMAND_FISHING>;
-    PacketSize[0x06E] = 0x06; PacketParser[0x06E] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_SOLICIT_REQ>;
-    PacketSize[0x06F] = 0x00; PacketParser[0x06F] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_LEAVE>;
-    PacketSize[0x070] = 0x00; PacketParser[0x070] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_BREAKUP>;
-    PacketSize[0x071] = 0x00; PacketParser[0x071] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_STRIKE>;
-    PacketSize[0x074] = 0x00; PacketParser[0x074] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_SOLICIT_RES>;
-    PacketSize[0x076] = 0x00; PacketParser[0x076] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_LIST_REQ>;
-    PacketSize[0x077] = 0x00; PacketParser[0x077] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_CHANGE2>;
-    PacketSize[0x078] = 0x00; PacketParser[0x078] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_CHECKID>;
-    PacketSize[0x083] = 0x08; PacketParser[0x083] = &ValidatedPacketHandler<GP_CLI_COMMAND_SHOP_BUY>;
-    PacketSize[0x084] = 0x06; PacketParser[0x084] = &ValidatedPacketHandler<GP_CLI_COMMAND_SHOP_SELL_REQ>;
-    PacketSize[0x085] = 0x04; PacketParser[0x085] = &ValidatedPacketHandler<GP_CLI_COMMAND_SHOP_SELL_SET>;
-    PacketSize[0x096] = 0x12; PacketParser[0x096] = &ValidatedPacketHandler<GP_CLI_COMMAND_COMBINE_ASK>;
-    PacketSize[0x09B] = 0x00; PacketParser[0x09B] = &ValidatedPacketHandler<GP_CLI_COMMAND_CHOCOBO_RACE_REQ>;
-    PacketSize[0x0A0] = 0x00; PacketParser[0x0A0] = &ValidatedPacketHandler<GP_CLI_COMMAND_SWITCH_PROPOSAL>;
-    PacketSize[0x0A1] = 0x00; PacketParser[0x0A1] = &ValidatedPacketHandler<GP_CLI_COMMAND_SWITCH_VOTE>;
-    PacketSize[0x0A2] = 0x00; PacketParser[0x0A2] = &ValidatedPacketHandler<GP_CLI_COMMAND_DICE>;
-    PacketSize[0x0AA] = 0x00; PacketParser[0x0AA] = &ValidatedPacketHandler<GP_CLI_COMMAND_GUILD_BUY>;
-    PacketSize[0x0AB] = 0x00; PacketParser[0x0AB] = &ValidatedPacketHandler<GP_CLI_COMMAND_GUILD_BUYLIST>;
-    PacketSize[0x0AC] = 0x00; PacketParser[0x0AC] = &ValidatedPacketHandler<GP_CLI_COMMAND_GUILD_SELL>;
-    PacketSize[0x0AD] = 0x00; PacketParser[0x0AD] = &ValidatedPacketHandler<GP_CLI_COMMAND_GUILD_SELLLIST>;
-    PacketSize[0x0B5] = 0x00; PacketParser[0x0B5] = &ValidatedPacketHandler<GP_CLI_COMMAND_CHAT_STD>;
-    PacketSize[0x0B6] = 0x00; PacketParser[0x0B6] = &ValidatedPacketHandler<GP_CLI_COMMAND_CHAT_NAME>;
-    PacketSize[0x0B7] = 0x00; PacketParser[0x0B7] = &ValidatedPacketHandler<GP_CLI_COMMAND_ASSIST_CHANNEL>;
-    PacketSize[0x0BE] = 0x00; PacketParser[0x0BE] = &ValidatedPacketHandler<GP_CLI_COMMAND_MERITS>;
-    PacketSize[0x0BF] = 0x04; PacketParser[0x0BF] = &ValidatedPacketHandler<GP_CLI_COMMAND_JOB_POINTS_SPEND>;
-    PacketSize[0x0C0] = 0x00; PacketParser[0x0C0] = &ValidatedPacketHandler<GP_CLI_COMMAND_JOB_POINTS_REQ>;
-    PacketSize[0x0C1] = 0x04; PacketParser[0x0C1] = &ValidatedPacketHandler<GP_CLI_COMMAND_ALTER_EGO_POINTS>;
-    PacketSize[0x0C3] = 0x00; PacketParser[0x0C3] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_COMLINK_MAKE>;
-    PacketSize[0x0C4] = 0x0E; PacketParser[0x0C4] = &ValidatedPacketHandler<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE>;
-    PacketSize[0x0CB] = 0x04; PacketParser[0x0CB] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_IS>;
-    PacketSize[0x0D2] = 0x04; PacketParser[0x0D2] = &ValidatedPacketHandler<GP_CLI_COMMAND_MAP_GROUP>;
-    PacketSize[0x0D3] = 0x00; PacketParser[0x0D3] = &ValidatedPacketHandler<GP_CLI_COMMAND_FAQ_GMCALL>;
-    PacketSize[0x0D4] = 0x04; PacketParser[0x0D4] = &ValidatedPacketHandler<GP_CLI_COMMAND_FAQ_GMPARAM>;
-    PacketSize[0x0D5] = 0x06; PacketParser[0x0D5] = &ValidatedPacketHandler<GP_CLI_COMMAND_ACK_GMMSG>;
-    PacketSize[0x0D8] = 0x00; PacketParser[0x0D8] = &ValidatedPacketHandler<GP_CLI_COMMAND_DUNGEON_PARAM>;
-    PacketSize[0x0DB] = 0x00; PacketParser[0x0DB] = &ValidatedPacketHandler<GP_CLI_COMMAND_CONFIG_LANGUAGE>;
-    PacketSize[0x0DC] = 0x0A; PacketParser[0x0DC] = &ValidatedPacketHandler<GP_CLI_COMMAND_CONFIG>;
-    PacketSize[0x0DD] = 0x08; PacketParser[0x0DD] = &ValidatedPacketHandler<GP_CLI_COMMAND_EQUIP_INSPECT>;
-    PacketSize[0x0DE] = 0x40; PacketParser[0x0DE] = &ValidatedPacketHandler<GP_CLI_COMMAND_INSPECT_MESSAGE>;
-    PacketSize[0x0E0] = 0x00; PacketParser[0x0E0] = &ValidatedPacketHandler<GP_CLI_COMMAND_SET_USERMSG>;
-    PacketSize[0x0E1] = 0x00; PacketParser[0x0E1] = &ValidatedPacketHandler<GP_CLI_COMMAND_GET_LSMSG>;
-    PacketSize[0x0E2] = 0x00; PacketParser[0x0E2] = &ValidatedPacketHandler<GP_CLI_COMMAND_SET_LSMSG>;
-    PacketSize[0x0E4] = 0x00; PacketParser[0x0E4] = &ValidatedPacketHandler<GP_CLI_COMMAND_GET_LSPRIV>;
-    PacketSize[0x0E7] = 0x04; PacketParser[0x0E7] = &ValidatedPacketHandler<GP_CLI_COMMAND_REQLOGOUT>;
-    PacketSize[0x0E8] = 0x04; PacketParser[0x0E8] = &ValidatedPacketHandler<GP_CLI_COMMAND_CAMP>;
-    PacketSize[0x0EA] = 0x04; PacketParser[0x0EA] = &ValidatedPacketHandler<GP_CLI_COMMAND_SIT>;
-    PacketSize[0x0EB] = 0x00; PacketParser[0x0EB] = &ValidatedPacketHandler<GP_CLI_COMMAND_REQSUBMAPNUM>;
-    PacketSize[0x0F0] = 0x04; PacketParser[0x0F0] = &ValidatedPacketHandler<GP_CLI_COMMAND_RESCUE>;
-    PacketSize[0x0F1] = 0x04; PacketParser[0x0F1] = &ValidatedPacketHandler<GP_CLI_COMMAND_BUFFCANCEL>;
-    PacketSize[0x0F2] = 0x04; PacketParser[0x0F2] = &ValidatedPacketHandler<GP_CLI_COMMAND_SUBMAPCHANGE>;
-    PacketSize[0x0F4] = 0x04; PacketParser[0x0F4] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRACKING_LIST>;
-    PacketSize[0x0F5] = 0x00; PacketParser[0x0F5] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRACKING_START>;
-    PacketSize[0x0F6] = 0x00; PacketParser[0x0F6] = &ValidatedPacketHandler<GP_CLI_COMMAND_TRACKING_END>;
-    PacketSize[0x0FA] = 0x00; PacketParser[0x0FA] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_LAYOUT>;
-    PacketSize[0x0FB] = 0x00; PacketParser[0x0FB] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_BANKIN>;
-    PacketSize[0x0FC] = 0x00; PacketParser[0x0FC] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_PLANT_ADD>;
-    PacketSize[0x0FD] = 0x00; PacketParser[0x0FD] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_PLANT_CHECK>;
-    PacketSize[0x0FE] = 0x00; PacketParser[0x0FE] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_PLANT_CROP>;
-    PacketSize[0x0FF] = 0x00; PacketParser[0x0FF] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_PLANT_STOP>;
-    PacketSize[0x100] = 0x04; PacketParser[0x100] = &ValidatedPacketHandler<GP_CLI_COMMAND_MYROOM_JOB>;
-    PacketSize[0x102] = 0x52; PacketParser[0x102] = &ValidatedPacketHandler<GP_CLI_COMMAND_EXTENDED_JOB>;
-    PacketSize[0x104] = 0x02; PacketParser[0x104] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_EXIT>;
-    PacketSize[0x105] = 0x06; PacketParser[0x105] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_LIST>;
-    PacketSize[0x106] = 0x06; PacketParser[0x106] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_BUY>;
-    PacketSize[0x109] = 0x00; PacketParser[0x109] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_OPEN>;
-    PacketSize[0x10A] = 0x06; PacketParser[0x10A] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_ITEMSET>;
-    PacketSize[0x10B] = 0x00; PacketParser[0x10B] = &ValidatedPacketHandler<GP_CLI_COMMAND_BAZAAR_CLOSE>;
-    PacketSize[0x10C] = 0x04; PacketParser[0x10C] = &ValidatedPacketHandler<GP_CLI_COMMAND_ROE_START>;
-    PacketSize[0x10D] = 0x04; PacketParser[0x10D] = &ValidatedPacketHandler<GP_CLI_COMMAND_ROE_REMOVE>;
-    PacketSize[0x10E] = 0x04; PacketParser[0x10E] = &ValidatedPacketHandler<GP_CLI_COMMAND_ROE_CLAIM>;
-    PacketSize[0x10F] = 0x02; PacketParser[0x10F] = &ValidatedPacketHandler<GP_CLI_COMMAND_CURRENCIES_1>;
-    PacketSize[0x110] = 0x0A; PacketParser[0x110] = &ValidatedPacketHandler<GP_CLI_COMMAND_FISHING_2>;
-    PacketSize[0x112] = 0x00; PacketParser[0x112] = &ValidatedPacketHandler<GP_CLI_COMMAND_BATTLEFIELD_REQ>;
-    PacketSize[0x113] = 0x06; PacketParser[0x113] = &ValidatedPacketHandler<GP_CLI_COMMAND_SITCHAIR>;
-    PacketSize[0x114] = 0x00; PacketParser[0x114] = &ValidatedPacketHandler<GP_CLI_COMMAND_MAP_MARKERS>;
-    PacketSize[0x115] = 0x02; PacketParser[0x115] = &ValidatedPacketHandler<GP_CLI_COMMAND_CURRENCIES_2>;
-    PacketSize[0x116] = 0x00; PacketParser[0x116] = &ValidatedPacketHandler<GP_CLI_COMMAND_UNITY_MENU>;
-    PacketSize[0x117] = 0x00; PacketParser[0x117] = &ValidatedPacketHandler<GP_CLI_COMMAND_UNITY_QUEST>;
-    PacketSize[0x118] = 0x00; PacketParser[0x118] = &ValidatedPacketHandler<GP_CLI_COMMAND_UNITY_TOGGLE>;
-    PacketSize[0x119] = 0x00; PacketParser[0x119] = &ValidatedPacketHandler<GP_CLI_COMMAND_EMOTE_LIST>;
-    PacketSize[0x11B] = 0x00; PacketParser[0x11B] = &ValidatedPacketHandler<GP_CLI_COMMAND_MASTERY_DISPLAY>;
-    PacketSize[0x11C] = 0x08; PacketParser[0x11C] = &ValidatedPacketHandler<GP_CLI_COMMAND_PARTY_REQUEST>;
-    PacketSize[0x11D] = 0x00; PacketParser[0x11D] = &ValidatedPacketHandler<GP_CLI_COMMAND_JUMP>;
-    // clang-format on
+        handler(PSession, PChar, data);
+    }
+    else
+    {
+        ShowWarningFmt("parse: Unhandled game packet {:#05x} from user: {}", packetId, PChar->getName());
+    }
 }

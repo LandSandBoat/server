@@ -95,7 +95,7 @@ local packets =
         test = function(player, mob)
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             local thfMob = player.entities:moveTo('Vanguard_Pillager')
-            thfMob:useMobAbility(xi.mobSkill.PERFECT_DODGE_1)
+            thfMob:useMobAbility(xi.mobSkill.PERFECT_DODGE_1, thfMob)
             xi.test.world:tickEntity(thfMob)
         end,
 

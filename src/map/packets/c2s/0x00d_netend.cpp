@@ -24,7 +24,7 @@
 auto GP_CLI_COMMAND_NETEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Packet explicitly ignored.
-    return PacketValidator();
+    return PacketValidator(PChar);
 }
 
 void GP_CLI_COMMAND_NETEND::process(MapSession* PSession, CCharEntity* PChar) const

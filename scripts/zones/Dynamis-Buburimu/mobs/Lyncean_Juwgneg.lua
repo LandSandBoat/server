@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.LYNCEAN_JUWGNEG - 7] = ID.mob.LYNCEAN_JUWGNEG, -- Vanguard_Predator
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

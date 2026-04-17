@@ -1,10 +1,8 @@
 -----------------------------------
---  Great Wheel
---
---  Description: Damages enemies in an area of effect. Additional effect: Enmity Reset
---  Type: Physical
---  Wipes Shadows
---  Range: Melee range radial
+-- Great Wheel
+-- Family: Humanoid (Kam'lanaught / Trust: Mildaurion)
+-- Description: Damages enemies in an area of effect. Additional Effect: Enmity Reset
+-- Note: Skill used by "Trust: Mildaurion" also inflicts knockback.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,19 +12,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    if not target:isTrust() then
-        mob:resetEnmity(target)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        if not target:isTrust() then
+            mob:resetEnmity(target)
+        end
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

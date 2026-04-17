@@ -101,6 +101,8 @@ xi.summon.getSummoningSkillOverCap = function(avatar)
     return math.max(summoningSkill - maxSkill, 0)
 end
 
+---@alias physicalAvatarSkillRetVal { damage: number, hitslanded: number, isCritical: boolean}
+
 ---@param avatar CBaseEntity
 ---@param target CBaseEntity
 ---@param skill CPetSkill|CMobSkill
@@ -112,7 +114,7 @@ end
 ---@param mtp100 number
 ---@param mtp200 number
 ---@param mtp300 number
----@return physicalMobSkillRetVal
+---@return physicalAvatarSkillRetVal
 xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
     local returninfo = {}
 
@@ -260,7 +262,7 @@ local attackTypeShields =
     [xi.attackType.MAGICAL ] = xi.effect.MAGIC_SHIELD,
 }
 
----@param info magicalMobSkillRetVal|physicalMobSkillRetVal
+---@param info magicalMobSkillRetVal|physicalAvatarSkillRetVal
 ---@param mob CBaseEntity
 ---@param skill CPetSkill|CMobSkill
 ---@param target CBaseEntity

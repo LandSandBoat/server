@@ -26,8 +26,9 @@
 
 auto GP_CLI_COMMAND_TRACKING_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(SendFlg, 1, "SendFlg not equal to 1");
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustEqual(this->SendFlg, 1, "SendFlg not equal to 1");
 }
 
 void GP_CLI_COMMAND_TRACKING_LIST::process(MapSession* PSession, CCharEntity* PChar) const

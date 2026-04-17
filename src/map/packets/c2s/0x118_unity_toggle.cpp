@@ -27,8 +27,8 @@
 
 auto GP_CLI_COMMAND_UNITY_TOGGLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_UNITY_TOGGLE_MODE>(Mode);
+    return PacketValidator(PChar)
+        .oneOf<GP_CLI_COMMAND_UNITY_TOGGLE_MODE>(this->Mode);
 }
 
 void GP_CLI_COMMAND_UNITY_TOGGLE::process(MapSession* PSession, CCharEntity* PChar) const
@@ -38,7 +38,7 @@ void GP_CLI_COMMAND_UNITY_TOGGLE::process(MapSession* PSession, CCharEntity* PCh
         unitychat::DelOnlineMember(PChar, PChar->PUnityChat->getLeader());
     }
 
-    if (Mode == static_cast<uint8>(GP_CLI_COMMAND_UNITY_TOGGLE_MODE::Active))
+    if (this->Mode == static_cast<uint8>(GP_CLI_COMMAND_UNITY_TOGGLE_MODE::Active))
     {
         unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
     }

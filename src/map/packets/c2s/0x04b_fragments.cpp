@@ -33,32 +33,32 @@
 auto GP_CLI_COMMAND_FRAGMENTS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Document field values and validate.
-    return PacketValidator();
+    return PacketValidator(PChar);
 }
 
 void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // TODO: Verify all of this
-    uint8       msgChunk    = Command; // The current chunk of the message to send (1 = start, 2 = rest of message)
-    const uint8 msgType     = value1;  // 1 = Server message, 2 = Fishing Rank
-    uint8       msgLanguage = value2;  // Language request id (2 = English, 4 = French)
+    uint8       msgChunk    = this->Command; // The current chunk of the message to send (1 = start, 2 = rest of message)
+    const uint8 msgType     = this->value1;  // 1 = Server message, 2 = Fishing Rank
+    uint8       msgLanguage = this->value2;  // Language request id (2 = English, 4 = French)
 
     if (msgType == 1) // Standard Server Message
     {
         // Deduplicate fragment retries caused by slow zone-in response times.
-        if (PChar->servmesLastOffset_ == offset)
+        if (PChar->servmesLastOffset_ == this->offset)
         {
             return;
         }
 
         std::string loginMessage = luautils::GetServerMessage(msgLanguage);
-        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::SERVMES>(loginMessage, msgLanguage, timestamp, offset);
-        PChar->servmesLastOffset_ = offset;
+        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::SERVMES>(loginMessage, msgLanguage, this->timestamp, this->offset);
+        PChar->servmesLastOffset_ = this->offset;
 
         // Reset tracking after the final fragment so /servmes works later
         const auto msgSize   = loginMessage.length() + 1;
-        const auto sndLength = msgSize - offset > 236 ? 236 : (msgSize - offset);
-        if (offset + sndLength >= msgSize)
+        const auto sndLength = msgSize - this->offset > 236 ? 236 : (msgSize - this->offset);
+        if (this->offset + sndLength >= msgSize)
         {
             PChar->servmesLastOffset_ = std::nullopt;
         }
@@ -131,11 +131,11 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
         // Add the next five blocks until we are out of entries
         if (msgChunk == 1 || msgChunk == 2)
         {
-            while (entries.size() <= (data_size / blockSize))
+            while (entries.size() <= (this->data_size / blockSize))
             {
                 // Create a copy of the ranking entry and hold it in the local entry vector
                 // This vector is cleared once the packets are sent
-                const uint8          position    = offset / blockSize + entryVal++;
+                const uint8          position    = this->offset / blockSize + entryVal++;
                 FishingContestEntry* packetEntry = fishingcontest::GetFishRankEntry(position);
                 if (packetEntry != nullptr)
                 {
@@ -149,7 +149,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
             }
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::FISHRANKING>(entries, msgLanguage, timestamp, offset, totalEntries, msgChunk);
+        PChar->pushPacket<GP_SERV_COMMAND_FRAGMENTS::FISHRANKING>(entries, msgLanguage, this->timestamp, this->offset, totalEntries, msgChunk);
         entries.clear();
     }
 }

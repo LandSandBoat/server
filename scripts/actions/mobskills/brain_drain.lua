@@ -1,6 +1,7 @@
 -----------------------------------
 -- Brain Drain
--- Deals damage to a single target. Additional effect: INT Down
+-- Family Leech
+-- Description: Deals Dark damage to a single target. Additional Effect: INT Down
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,17 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.INT_DOWN, 10, 3, 120)
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.element        = xi.element.DARK
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture effect power/duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.INT_DOWN, 10, 9, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

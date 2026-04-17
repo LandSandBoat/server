@@ -36,8 +36,9 @@
 
 auto GP_CLI_COMMAND_EQUIP_INSPECT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_EQUIP_INSPECT_KIND>(Kind);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<GP_CLI_COMMAND_EQUIP_INSPECT_KIND>(this->Kind);
 }
 
 void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PChar) const
@@ -48,7 +49,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    CBaseEntity* PEntity     = PChar->GetEntity(ActIndex, TYPE_MOB | TYPE_PC);
+    CBaseEntity* PEntity     = PChar->GetEntity(this->ActIndex, TYPE_MOB | TYPE_PC);
     auto*        PMobTarget  = dynamic_cast<CMobEntity*>(PEntity);
     auto*        PCharTarget = dynamic_cast<CCharEntity*>(PEntity);
 
@@ -65,11 +66,11 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
         ShowWarning("GP_CLI_COMMAND_EQUIP_INSPECT: {} checking mob {} from too far away", PChar->getName(), PMobTarget->getName());
     }
 
-    switch (static_cast<GP_CLI_COMMAND_EQUIP_INSPECT_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_EQUIP_INSPECT_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_EQUIP_INSPECT_KIND::Check:
         {
-            if (!PEntity || PEntity->id != UniqueNo)
+            if (!PEntity || PEntity->id != this->UniqueNo)
             {
                 return;
             }
@@ -147,7 +148,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
         break;
         case GP_CLI_COMMAND_EQUIP_INSPECT_KIND::CheckParam:
         {
-            if (PChar->id == UniqueNo)
+            if (PChar->id == this->UniqueNo)
             {
                 // /checkparam on self
 
@@ -179,7 +180,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
 
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->EVA(), PChar->DEF(), MsgBasic::CheckparamDefense);
             }
-            else if (PChar->PPet && PChar->PPet->id == UniqueNo)
+            else if (PChar->PPet && PChar->PPet->id == this->UniqueNo)
             {
                 // /checkparam on pet
 

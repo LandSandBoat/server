@@ -31,8 +31,8 @@ enum class GP_CLI_COMMAND_ITEMSEARCH_LANGUAGE : uint8_t
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x002C
 // This packet is sent by the client when using the /itemsearch command.
-GP_CLI_PACKET(GP_CLI_COMMAND_ITEMSEARCH,
-              uint8_t Language;
-              uint8_t padding00[3];
-              uint8_t Name[64]; // Variable length
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_ITEMSEARCH, Name,
+                  uint8_t Language;
+                  uint8_t padding00[3];
+                  uint8_t Name[64]; // Variable length
 );

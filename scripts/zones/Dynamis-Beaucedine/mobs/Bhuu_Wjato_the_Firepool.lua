@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.BHUU_WJATO_THE_FIREPOOL - 2] = ID.mob.BHUU_WJATO_THE_FIREPOOL, -- Vanguard_Prelate
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

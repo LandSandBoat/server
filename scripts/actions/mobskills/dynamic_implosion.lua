@@ -1,9 +1,8 @@
 -----------------------------------
---  Dynamic Implosion
---  Description: Deals damage to players within an area of effect. Additional effect: Stun (Status Effect)
---  Type: Physical
---  Utsusemi/Blink absorb: Unknown
---  Range: Unknown radial
+-- Dynamic Implosion
+-- Family: Shadow Lord
+-- Description: Deals damage to players within an area of effect. Additional Effect: Stun
+-- Notes: Used by Dynamis Lord
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,17 +12,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2.5 -- fTP and fTP scaling unknown. TODO: capture ftp
+    local params = {}
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 7)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 7) -- TODO: Capture stun duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

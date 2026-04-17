@@ -1,5 +1,6 @@
 -----------------------------------
 -- Fulminous Fury
+-- Family: Humanoid (August)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -28,10 +29,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         end
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, duration)
-    end
 
-    if info.damage > 0 then
-        mob:addTP(134)
+        -- mob:addTP(134) -- TODO: Is this set TP gain or linked to August's delay?
     end
 
     return info.damage

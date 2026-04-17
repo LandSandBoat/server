@@ -13117,9 +13117,10 @@ uint16 CLuaBaseEntity::getBaseRangedDelay()
     }
     else if (PBattleEntity)
     {
-        baseDelay = 260; // TODO: There does not seem to be a real way to get the delay of a ranged attack of a non-PC.
-                         // 260 delay is derived from a Goblin Hunter using a ranged attack, using Dark Seal Absorb TP to reverse the delay.
-                         // The cast gave back 40 TP, which is half of 80 TP due to 50% dAGI penalty being maxed out.
+        baseDelay = 360; // Tested using Fatso Fargann's TP Drainkiss @ 3000 TP after a mob landed a ranged attack.
+                         // TP Drainkiss is unaspected and is not affected by MDB or multipliers like shell.
+                         // Fatso's TP Drainkiss fTPs are 0.625~ @1000TP and 1.0~ @3000TP
+                         // TP Drained at 1.0 fTP was 93 on every normal non NM ranged mob no matter the family.
     }
 
     return baseDelay;

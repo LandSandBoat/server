@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.LOCKBUSTER_ZAPDJIPP - 2] = ID.mob.LOCKBUSTER_ZAPDJIPP, -- Vanguard_Pillager
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

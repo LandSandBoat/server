@@ -28,11 +28,12 @@
 
 auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<PartyKind>(Kind)
-                  .isPartyLeader(PChar);
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<PartyKind>(this->Kind)
+                  .isPartyLeader();
 
-    switch (Kind)
+    switch (this->Kind)
     {
         case PartyKind::Party:
         {
@@ -41,7 +42,7 @@ auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEnt
         break;
         case PartyKind::Alliance:
         {
-            pv.isAllianceLeader(PChar);
+            pv.isAllianceLeader();
         }
         break;
     }
@@ -51,7 +52,7 @@ auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GROUP_BREAKUP::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (Kind)
+    switch (this->Kind)
     {
         case PartyKind::Party:
         {

@@ -1,5 +1,6 @@
 -----------------------------------
 -- Alabaster Burst
+-- Family: Humanoid (August)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,21 +10,30 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 2
-    local accmod  = 3
-    local dmgmod  = 4
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    local params = {}
 
-    local duration = (skill:getTP() / 100) / 6 -- 2 sec min, 5 sec max
-    if duration < 2 then
-        duration = 2
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 2
+    params.fTP            = { 4.0, 4.0, 4.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local duration = (skill:getTP() / 100) / 6 -- 2 sec min, 5 sec max
+
+        if duration < 2 then
+            duration = 2
+        end
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 1, 0, duration)
     end
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 1, 0, duration)
-
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

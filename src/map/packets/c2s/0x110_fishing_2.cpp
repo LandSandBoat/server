@@ -25,21 +25,22 @@
 
 auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustEqual(settings::get<bool>("map.FISHING_ENABLE"), true, "Fishing is disabled")
         .mustEqual(PChar->GetMLevel() >= settings::get<uint8>("map.FISHING_MIN_LEVEL"), true, "Character below fishing minimum level")
-        .mustEqual(UniqueNo, PChar->id, "Character id mismatch")
-        .mustEqual(ActIndex, PChar->targid, "Character targid mismatch")
-        .oneOf<GP_CLI_COMMAND_FISHING_2_MODE>(mode)
+        .mustEqual(this->UniqueNo, PChar->id, "Character id mismatch")
+        .mustEqual(this->ActIndex, PChar->targid, "Character targid mismatch")
+        .oneOf<GP_CLI_COMMAND_FISHING_2_MODE>(this->mode)
         .custom([&](PacketValidator& v)
                 {
                     // clang-format off
-                    switch (static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(mode))
+                    switch (static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(this->mode))
                     {
                         case GP_CLI_COMMAND_FISHING_2_MODE::RequestCheckHook:
                             // para and para2 are both 0 for RequestCheckHook
-                            v.mustEqual(para, 0, "para must be 0")
-                                .mustEqual(para2, 0, "para2 must be 0");
+                            v.mustEqual(this->para, 0, "para must be 0")
+                                .mustEqual(this->para2, 0, "para2 must be 0");
                             break;
                         case GP_CLI_COMMAND_FISHING_2_MODE::RequestEndMiniGame:
                             // para has various values depending on the reason
@@ -47,27 +48,27 @@ auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity*
                             // - Equals to 200 when client force exits the mini game
                             // - Equals to 0 when client successfully catches a fish
                             // - Else it is equal to the fish remaining stamina
-                            v.range("para", para, 0, 300);
+                            v.range("para", this->para, 0, 300);
 
                             // if para2 is non-zero, it must equal current hooked fish special
-                            if (para2 != 0)
+                            if (this->para2 != 0)
                             {
                                 if (PChar->hookedFish)
                                 {
-                                    v.mustEqual(para2, PChar->hookedFish->special, "para2 not equal to current hooked fish special");
+                                    v.mustEqual(this->para2, PChar->hookedFish->special, "para2 not equal to current hooked fish special");
                                 }
                             }
                             break;
                         case GP_CLI_COMMAND_FISHING_2_MODE::RequestRelease:
                             // para and para2 are both 0 for RequestRelease
-                            v.mustEqual(para, 0, "para must be 0")
-                                .mustEqual(para2, 0, "para2 must be 0");
+                            v.mustEqual(this->para, 0, "para must be 0")
+                                .mustEqual(this->para2, 0, "para2 must be 0");
                             break;
                         case GP_CLI_COMMAND_FISHING_2_MODE::RequestPotentialTimeout:
                             // para is set to time remaining, para2 is always 0
                             // todo: unknown actual range, this parameter is currently unused
-                            v.range("para", para, 0, 10)
-                                .mustEqual(para2, 0, "para2 must be 0");
+                            v.range("para", this->para, 0, 10)
+                                .mustEqual(this->para2, 0, "para2 must be 0");
                             break;
                     }
                     // clang-format on
@@ -76,5 +77,5 @@ auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_FISHING_2::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    fishingutils::FishingAction(PChar, static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(mode), para, para2);
+    fishingutils::FishingAction(PChar, static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(this->mode), this->para, this->para2);
 }

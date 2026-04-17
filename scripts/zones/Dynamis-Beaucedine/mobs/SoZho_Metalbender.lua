@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.SOZHO_METALBENDER - 1] = ID.mob.SOZHO_METALBENDER, -- Vanguard_Militant
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

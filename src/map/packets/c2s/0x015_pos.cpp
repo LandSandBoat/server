@@ -26,7 +26,7 @@
 
 auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
         .mustNotEqual(PChar->status, STATUS_TYPE::DISAPPEAR, "Character is disappearing")
         .mustNotEqual(PChar->status, STATUS_TYPE::SHUTDOWN, "Character is shutting down");
 }
@@ -38,11 +38,11 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
         return;
     }
 
-    const float  newX        = x;
-    const float  newY        = z; // Not a typo.
-    const float  newZ        = y; // Not a typo.
-    const uint16 newTargID   = facetarget;
-    const uint8  newRotation = dir;
+    const float  newX        = this->x;
+    const float  newY        = this->z; // Not a typo.
+    const float  newZ        = this->y; // Not a typo.
+    const uint16 newTargID   = this->facetarget;
+    const uint8  newRotation = this->dir;
 
     // clang-format off
     const bool moved =
@@ -62,7 +62,7 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
         PChar->loc.p.y = newY;
         PChar->loc.p.z = newZ;
 
-        PChar->loc.p.moving   = MoveFlame;
+        PChar->loc.p.moving   = this->MoveFlame;
         PChar->loc.p.rotation = newRotation;
 
         PChar->m_TargID = newTargID;

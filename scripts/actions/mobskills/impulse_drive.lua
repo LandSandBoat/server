@@ -1,8 +1,7 @@
 -----------------------------------
 -- Impulse Drive
--- Delivers a two-hit attack
--- Type: Physical
--- Range: Melee
+-- Family: Humanoid Polearm Weaponskill
+-- Description: Delivers a two-hit attack
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,23 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 2
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ATK_VARIES, 1, 1, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 2
+    params.fTP            = { 1.5, 1.5, 1.5 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
 
-    if dmg > 0 then
-        local resist = applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
-        if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
-            local duration = (5 + 5) * resist
-            target:addStatusEffect(xi.effect.BIND, { power = 1, duration = duration, origin = mob })
-        end
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 10) --
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Asuran Fists
+-- Family: Humanoid Hand to Hand Weaponskill
 -- Description: Delivers an eightfold attack. Accuracy varies with TP.
--- Type: Physical
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -16,15 +16,22 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 8
-    local accmod  = 1
-    local ftp     = 0.8
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.HTH, info.hitslanded)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.HTH)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 8
+    params.fTP            = { 0.8, 0.8, 0.8 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HTH
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_8
 
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

@@ -42,9 +42,10 @@ const std::set validBells = {
 
 auto GP_CLI_COMMAND_MOTION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<EmoteMode>(Mode)
-        .range("Number", Number, Emote::Point, Emote::Aim);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<EmoteMode>(this->Mode)
+        .range("Number", this->Number, Emote::Point, Emote::Aim);
 }
 
 void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) const
@@ -56,7 +57,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
     }
 
     // Attempting to use bell emote without a bell.
-    if (static_cast<Emote>(Number) == Emote::Bell)
+    if (static_cast<Emote>(this->Number) == Emote::Bell)
     {
         // This is the actual observed behavior. Even with a different weapon type equipped,
         // having a bell in the lockstyle is sufficient. On the other hand, if any other
@@ -78,19 +79,19 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
             return;
         }
 
-        if (Param < 0x06 || Param > 0x1e)
+        if (this->Param < 0x06 || this->Param > 0x1e)
         {
             // Invalid note.
             return;
         }
     }
     // Attempting to use locked job emote.
-    else if (static_cast<Emote>(Number) == Emote::Job && Param && !(PChar->jobs.unlocked & (1 << (Param - 0x1E))))
+    else if (static_cast<Emote>(this->Number) == Emote::Job && this->Param && !(PChar->jobs.unlocked & (1 << (this->Param - 0x1E))))
     {
         return;
     }
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, UniqueNo, ActIndex, static_cast<Emote>(Number), static_cast<EmoteMode>(Mode), Param));
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, this->UniqueNo, this->ActIndex, static_cast<Emote>(this->Number), static_cast<EmoteMode>(this->Mode), this->Param));
 
-    luautils::OnPlayerEmote(PChar, static_cast<Emote>(Number));
+    luautils::OnPlayerEmote(PChar, static_cast<Emote>(this->Number));
 }

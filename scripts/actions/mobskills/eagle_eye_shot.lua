@@ -9,22 +9,29 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 2
-    local dmgmod = 9 + math.random()
+    local params = {}
 
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 9.0, 9.0, 9.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipParry      = true
+    params.skipGuard      = true
+    params.skipBlock      = true
+    -- TODO: Possible accuracy modifier
 
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    -- https://wiki.ffo.jp/html/937.html
+    -- Note: shadowBehavior may vary depending on mob using skill
 
-    if dmg > 0 then
-        target:addTP(20)
-        mob:addTP(80)
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

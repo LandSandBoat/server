@@ -28,25 +28,25 @@
 
 auto GP_CLI_COMMAND_CHARREQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator();
+    return PacketValidator(PChar);
 }
 
 void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Requesting self-update
-    if (ActIndex == PChar->targid)
+    if (this->ActIndex == PChar->targid)
     {
         PChar->updateEntityPacket(PChar, ENTITY_SPAWN, UPDATE_ALL_CHAR);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         return;
     }
 
-    CBaseEntity* PEntity = PChar->GetEntity(ActIndex, TYPE_NPC | TYPE_PC);
+    CBaseEntity* PEntity = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_PC);
     if (!PEntity)
     {
-        const auto fullId = ((4096 + PChar->getZone()) << 12) + ActIndex;
+        const auto fullId = ((4096 + PChar->getZone()) << 12) + this->ActIndex;
         ShowWarningFmt("Could not look up entity <{}, {}> in zone <{} ({})>",
-                       ActIndex,
+                       this->ActIndex,
                        fullId,
                        zoneutils::GetZone(PChar->getZone())->getName(),
                        PChar->getZone());
@@ -60,7 +60,7 @@ void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) c
         {
             if (PCharEntity->m_isGMHidden)
             {
-                ShowErrorFmt("Player {} requested information about a hidden GM ({}) using targid {}", PChar->getName(), PCharEntity->getName(), ActIndex);
+                ShowErrorFmt("Player {} requested information about a hidden GM ({}) using targid {}", PChar->getName(), PCharEntity->getName(), this->ActIndex);
                 return;
             }
 

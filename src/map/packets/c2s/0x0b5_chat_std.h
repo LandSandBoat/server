@@ -40,8 +40,8 @@ enum class GP_CLI_COMMAND_CHAT_STD_KIND : uint8_t
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x00B5
 // This packet is sent by the client when sending chat messages.
-GP_CLI_PACKET(GP_CLI_COMMAND_CHAT_STD,
-              uint8_t Kind;      // Kind
-              uint8_t unknown00; // Dammy
-              uint8_t Str[128];  // Str
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_CHAT_STD, Str,
+                  uint8_t Kind;      // Kind
+                  uint8_t unknown00; // Dammy
+                  uint8_t Str[128];  // Str
 );

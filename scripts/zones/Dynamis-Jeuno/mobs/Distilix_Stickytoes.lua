@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.DISTILIX_STICKYTOES - 3] = ID.mob.DISTILIX_STICKYTOES, -- Vanguard_Alchemist    -2.164   2.5     106.255
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

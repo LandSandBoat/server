@@ -1,16 +1,13 @@
 -----------------------------------
 -- Savage Blade
---
+-- Family: Humanoid Sword Weaponskill
 -- Description: Delivers a twofold attack. Damage varies with TP.
--- Type: Physical
--- Utsusemi/Blink absorb: Shadow per hit
--- Range: Melee
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() ~= xi.mobPool.QUBIA_ARENA_TRION then
+    if mob:getPool() ~= xi.mobPool.QUBIA_ARENA_TRION then -- TODO: Should this be limited to Trion?
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 42)
     end
 
@@ -18,19 +15,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
     if mob:getPool() == xi.mobPool.QUBIA_ARENA_TRION then -- Trion@QuBia_Arena only
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.SAVAGE_LAND)
     end
 
-    local numhits = 2
-    local accmod = 1
-    local ftp    = 2.0 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-
-    -- AA EV: Approx 900 damage to 75 DRG/35 THF.  400 to a NIN/WAR in Arhat, but took shadows.
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

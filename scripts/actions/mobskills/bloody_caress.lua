@@ -1,12 +1,7 @@
 -----------------------------------
---  Bloody Caress
---
---  Delivers a threefold attack. Additional effect: Drain
---  Type: Physical
---  100% TP: ??? / 250% TP: ??? / 300% TP: ???
---  Note: There is not a whole lot of info about this spell available online,
---        so the initial implemention is just a basic version similar to
---        Goblin Rush, which is also a physical 3-hit spell.
+-- Bloody Caress
+-- Family: Rafflesia
+-- Description: Delivers a threefold attack. Additional Effect: Drain
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -16,18 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 3
-    local accmod = 1
-    local ftp    = 1
+    local params = {}
 
-    -- TODO: Once `Floral Bouquet` TP move is implemented, this skill is eligible to target
-    -- the charmed monsters.
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ACC_VARIES, 1, 2, 3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))
+    end
+
+    -- TODO: The Rafflesia should be able to target charmed vermin with this skill. Might be best handled in a mixin or mob script.
+
+    return info.damage
 end
 
 return mobskillObject

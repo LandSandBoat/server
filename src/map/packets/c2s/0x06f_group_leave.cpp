@@ -26,14 +26,15 @@
 
 auto GP_CLI_COMMAND_GROUP_LEAVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<PartyKind>(Kind)
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<PartyKind>(this->Kind)
         .mustNotEqual(PChar->PParty, nullptr, "Character is not in a party");
 }
 
 void GP_CLI_COMMAND_GROUP_LEAVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (Kind)
+    switch (this->Kind)
     {
         case PartyKind::Party:
         {

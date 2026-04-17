@@ -6,6 +6,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
     mob:setBaseSpeed(70)
     mob:setMobSkillAttack(2008) -- use mephitic spare as its auto attack
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

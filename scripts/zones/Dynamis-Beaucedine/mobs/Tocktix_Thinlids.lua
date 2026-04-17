@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.TOCKTIX_THINLIDS - 2] = ID.mob.TOCKTIX_THINLIDS, -- Vanguard_Tinkerer
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

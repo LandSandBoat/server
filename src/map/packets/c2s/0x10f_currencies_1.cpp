@@ -27,7 +27,8 @@
 auto GP_CLI_COMMAND_CURRENCIES_1::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameters to validate for this packet.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_CURRENCIES_1::process(MapSession* PSession, CCharEntity* PChar) const

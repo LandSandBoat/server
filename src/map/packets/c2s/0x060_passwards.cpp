@@ -28,14 +28,14 @@
 
 auto GP_CLI_COMMAND_PASSWARDS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isInEvent(PChar);
+    return PacketValidator(PChar)
+        .isInEvent();
 }
 
 void GP_CLI_COMMAND_PASSWARDS::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // !cs 199 in zone 245
-    const auto updateString = asStringFromUntrustedSource(String);
+    const auto updateString = asStringFromUntrustedSource(this->String);
     luautils::OnEventUpdate(PChar, updateString);
 
     PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::EventRecvPending);

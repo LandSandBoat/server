@@ -1,10 +1,8 @@
 -----------------------------------
 -- Nullsong
+-- Family: Dragon
 -- Description: Removes all beneficial effects from players in an area of effect. Deals darkness damage for each buff removed.
--- Type: Magical
--- Utsusemi/Blink absorb: Wipes Shadows
--- Range: 15' radial
--- NOTE: Only used if target has 3 or more effects to dispel
+-- Note: Only used if target has 3 or more effects to dispel
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -21,6 +19,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
     local count = target:dispelAllStatusEffect(xi.effectFlag.DISPELABLE)
 
     if count == 0 then
@@ -28,15 +28,22 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         return count
     end
 
-    local info =
-    {
-        damage = 117 * count
-    }
+    params.baseDamage           = 117
+    params.fTP                  = { count, count, count }
+    params.element              = xi.element.NONE
+    params.attackType           = xi.attackType.MAGICAL
+    params.damageType           = xi.damageType.NONE
+    params.shadowBehavior       = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipDamageAdjustment = true -- TODO: Affected by shell?
+    params.skipMagicBonusDiff   = true -- TODO: Affected by MDB?
 
-    local damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(damage, mob, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    return damage
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

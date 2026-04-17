@@ -42,14 +42,14 @@ const auto updateClientAppearance = [](CCharEntity* PChar)
 
 auto GP_CLI_COMMAND_LOCKSTYLE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_LOCKSTYLE_MODE>(Mode)
-        .range("Count", Count, 0, 16);
+    return PacketValidator(PChar)
+        .oneOf<GP_CLI_COMMAND_LOCKSTYLE_MODE>(this->Mode)
+        .range("Count", this->Count, 0, 16);
 }
 
 void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<GP_CLI_COMMAND_LOCKSTYLE_MODE>(Mode))
+    switch (static_cast<GP_CLI_COMMAND_LOCKSTYLE_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_LOCKSTYLE_MODE::Disable:
         {
@@ -78,9 +78,9 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
             charutils::SetStyleLock(PChar, true);
 
             // Build new lockstyle
-            for (int i = 0; i < Count; i++)
+            for (int i = 0; i < this->Count; i++)
             {
-                const auto& item   = Items[i];
+                const auto& item   = this->Items[i];
                 uint16_t    itemId = item.ItemNo;
 
                 // Skip non-visible items

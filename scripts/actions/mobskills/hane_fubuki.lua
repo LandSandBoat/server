@@ -1,7 +1,8 @@
 -----------------------------------
 -- Hane Fubuki
--- Description: Additional effect: Poison. Chance of effect varies with TP.
--- Type: Physical (Piercing)
+-- Family: Yagudo
+-- Description: Deals physical damage to a target. Additional Effect: Poison
+-- Notes: Similar to "Feather Storm" skill
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,16 +12,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 2
-    local ftp    = 3 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, mob:getMainLvl() / 7, 3, 120)
+    -- TODO: Physical or Ranged?
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    -- TODO: "Feather Storm" scales with distance. Check if this does as well.
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture effect power/duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 7, 3, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

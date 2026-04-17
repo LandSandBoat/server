@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.ELVAANLOPPER_GROKDOK - 1] = ID.mob.ELVAANLOPPER_GROKDOK, -- Vanguard_Gutslasher
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

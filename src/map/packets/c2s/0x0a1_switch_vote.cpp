@@ -26,11 +26,12 @@
 auto GP_CLI_COMMAND_SWITCH_VOTE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_SWITCH_VOTE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto name = asStringFromUntrustedSource(Name, sizeof(Name));
-    ShowDebugFmt("GP_CLI_COMMAND_SWITCH_VOTE: Not implemented. Index: {}, Name: {}", Index, name);
+    auto name = asStringFromUntrustedSource(this->Name, sizeof(this->Name));
+    ShowDebugFmt("GP_CLI_COMMAND_SWITCH_VOTE: Not implemented. Index: {}, Name: {}", this->Index, name);
 }

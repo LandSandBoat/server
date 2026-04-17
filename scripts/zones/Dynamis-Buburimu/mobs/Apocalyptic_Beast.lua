@@ -7,6 +7,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
 end
 

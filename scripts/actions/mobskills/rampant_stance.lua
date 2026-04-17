@@ -1,7 +1,7 @@
 -----------------------------------
 -- Rampant Stance
--- Physical area of effect damage that inflicts stun.
--- Utsusemi/Blink absorb: 1-4 shadows, wipes Third Eye
+-- Family: Monoceros
+-- Description: Deals physical AoE damage to targets in range. Additional Effect: Stun
 -- Range: 7.0 (add 0.1-4 depending on terrain elevation)
 -- Notes: Takes roughly three seconds to charge the TP move up, enough time for anyone within range to easily back out and run back in directly after the animation begins.
 -----------------------------------
@@ -13,26 +13,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- parameters for AE
-    local typeEffect = xi.effect.STUN
-    local power      = 1
-    local duration   = xi.mobskills.calculateDuration(3, 5)
+    local params = {}
 
-    -- perform physical attack
-    local numhits    = 3
-    local accmod     = 2
-    local ftp        = 1
-    local info       = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg        = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
 
-    -- if skill hit, apply dmg and AE
-    if not skill:hasMissMsg() then
-        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.BLUNT)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 0, duration)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 5) -- TODO: Capture stun duration
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Roller Chain
 -- Family: Ramparts
--- Description: Deals Physical damage to a target. Additional Effect: Bind.
+-- Description: Deals physical damage to a target. Additional Effect: Bind
 -- Notes: Only used by Ramparts when its door is closed.
 -----------------------------------
 
@@ -19,15 +19,14 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    -- TODO: This is a physical skill. Will revisit in mobPhysicalMove() PR
     params.baseDamage     = mob:getWeaponDmg()
-    params.fTP            = { 2, 2, 2 } -- TODO: Capture fTPs
-    params.element        = xi.element.DARK
-    params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.DARK
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)

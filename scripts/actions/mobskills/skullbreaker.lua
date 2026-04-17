@@ -1,10 +1,7 @@
 -----------------------------------
 -- Skullbreaker
---
--- Description: Lowers enemy's INT. Chance of lowering INT varies with TP.
--- Type: Physical
--- Utsusemi/Blink absorb: 1 Shadow
--- Range: Melee
+-- Family: Humanoid Club Weaponskill
+-- Description: Deals physical damage to a single target. Additional Effect: INT Down
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,18 +12,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2.0
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 1.1, 1.2, 1.3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    local params = {}
 
-    if math.random(1, 100) < skill:getTP() / 3 then
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.INT_DOWN, 10, 3, 120)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture power/duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.INT_DOWN, 10, 9, 120)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

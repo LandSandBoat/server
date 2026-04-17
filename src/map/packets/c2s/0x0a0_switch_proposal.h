@@ -34,7 +34,7 @@ enum class GP_CLI_COMMAND_SWITCH_PROPOSAL_KIND : uint8_t
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x00A0
 // This packet is sent by the client when making a proposal. (via /nominate or /propose)
-GP_CLI_PACKET(GP_CLI_COMMAND_SWITCH_PROPOSAL,
-              uint8_t Kind;     // PS2: Kind
-              uint8_t Str[128]; // PS2: Str
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_SWITCH_PROPOSAL, Str,
+                  uint8_t Kind;     // PS2: Kind
+                  uint8_t Str[128]; // PS2: Str
 );

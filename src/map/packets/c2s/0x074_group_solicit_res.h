@@ -32,6 +32,6 @@ enum class GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES : uint8_t
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0074
 // This packet is sent by the client when responding to a party or alliance invite.
 GP_CLI_PACKET(GP_CLI_COMMAND_GROUP_SOLICIT_RES,
-              uint8_t Res;       // PS2: Res
-              uint8_t padding00; // PS2: (New; did not exist.)
+              uint8_t Res;          // PS2: Res
+              uint8_t padding00[3]; // Padding; unused.
 );

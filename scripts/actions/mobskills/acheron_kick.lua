@@ -1,11 +1,8 @@
 -----------------------------------
---  Acheron Kick
---
---  Description: Physical Cone Attack damage behind user.
---  Type: Physical
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: Back
---  Dark Ixion CAN turn around to use this move on anyone with hate, regardless of their original position or even distance.
+-- Acheron Kick
+-- Family: Monoceros
+-- Description: Deals physical damage in a cone behind the mob.
+-- Note: Dark Ixion CAN turn around to use this move on anyone with hate, regardless of their original position or even distance.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,19 +12,22 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- perform physical attack
-    local numhits = 3
-    local accmod  = 1
-    local ftp     = 1
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    local params = {}
 
-    -- if skill hit, apply dmg
-    if not skill:hasMissMsg() then
-        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3 -- TODO: Confirm if this is 3 hits
+    params.fTP            = { 1, 1, 1 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING -- TODO: Verify damageType
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

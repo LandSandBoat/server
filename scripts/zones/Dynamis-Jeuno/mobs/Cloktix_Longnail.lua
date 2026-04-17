@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.CLOKTIX_LONGNAIL - 2] = ID.mob.CLOKTIX_LONGNAIL, -- Vanguard_Armorer      -17.690  8.321   -51.944
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

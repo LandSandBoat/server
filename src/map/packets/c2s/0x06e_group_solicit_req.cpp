@@ -35,10 +35,11 @@
 
 auto GP_CLI_COMMAND_GROUP_SOLICIT_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<PartyKind>(Kind)
-                  .mustNotEqual(PChar->id, UniqueNo, "Cannot invite yourself")
-                  .mustEqual(blacklistutils::IsBlacklisted(UniqueNo, PChar->id), false, "Character has inviter blacklisted");
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<PartyKind>(this->Kind)
+                  .mustNotEqual(PChar->id, this->UniqueNo, "Cannot invite yourself")
+                  .mustEqual(blacklistutils::IsBlacklisted(this->UniqueNo, PChar->id), false, "Character has inviter blacklisted");
 
     return pv;
 }
@@ -47,8 +48,8 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
 {
     auto* PInviter = PChar;
 
-    const uint32 inviteeCharId = UniqueNo;
-    const uint16 inviteeTargId = ActIndex;
+    const uint32 inviteeCharId = this->UniqueNo;
+    const uint16 inviteeTargId = this->ActIndex;
 
     if (jailutils::InPrison(PInviter))
     {
@@ -57,7 +58,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
         return;
     }
 
-    switch (Kind)
+    switch (this->Kind)
     {
         case PartyKind::Party:
         {

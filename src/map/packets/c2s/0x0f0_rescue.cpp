@@ -30,13 +30,9 @@
 
 auto GP_CLI_COMMAND_RESCUE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(State, 0, "State not 0")
-        .isNotJailed(PChar)
-        .isNotEngaged(PChar)
-        .isNotInEvent(PChar)
-        .isNotFishing(PChar)
-        .isNotCrafting(PChar);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Crafting, BlockedState::Fishing, BlockedState::Jailed, BlockedState::Engaged })
+        .mustEqual(this->State, 0, "State not 0");
 }
 
 void GP_CLI_COMMAND_RESCUE::process(MapSession* PSession, CCharEntity* PChar) const

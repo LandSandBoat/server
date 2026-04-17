@@ -1,18 +1,15 @@
 -----------------------------------
---  Javelin Throw
---
---  Description: Ranged attack with the equipped weapon, which is lost.
---  Type: Ranged
---  Utsusemi/Blink absorb: 1 shadow
---  Range: 7.0
---  Notes: Only used by armed DRG Mamool Ja
+-- Javelin Throw
+-- Family: Mamool Ja
+-- Description: Ranged attack with the equipped weapon, which is lost.
+-- Notes: Used by armed DRG Mamool Ja
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- If animationSub is non-zero, mob has already lost the weapon.
-    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.DRG then
+    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.DRG then -- TODO: Set proper skill lists
         return 0
     end
 
@@ -20,14 +17,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipParry      = true
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
     skill:setFinalAnimationSub(2)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 1
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-    return dmg
+
+    return info.damage
 end
 
 return mobskillObject

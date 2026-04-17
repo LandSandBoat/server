@@ -1,10 +1,7 @@
 -----------------------------------
 -- Flat Blade
---
+-- Family: Humanoid Sword Weaponskill
 -- Description: Stuns enemy. Chance of stunning varies with TP.
--- Type: Physical
--- Utsusemi/Blink absorb: Shadow per hit
--- Range: Melee
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,23 +15,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.25, 1.25, 1.25 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Eventually, we will want to rework mobStatusEffectMove() to accept MACC modifiers based on TP instead of this.
+        if math.random(1, 100) < skill:getTP() / 3 then
+            xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4) -- TODO: Capture stun duration
+        end
+    end
+
     if mob:getPool() == xi.mobPool.QUBIA_ARENA_TRION then
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.FLAT_LAND)
     end
 
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 1.25
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-
-    if math.random(1, 100) < skill:getTP() / 3 then
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
-    end
-
-    -- AA EV: Approx 900 damage to 75 DRG/35 THF.  400 to a NIN/WAR in Arhat, but took shadows.
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

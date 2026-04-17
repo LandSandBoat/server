@@ -1,11 +1,8 @@
 -----------------------------------
---  Glacier Splitter
---
---  Description: Cleaves into targets in a fan-shaped area. Additional effect: Paralyze
---  Type: Physical
---  Utsusemi/Blink absorb: 1-3 shadows
---  Range: Unknown cone
---  Notes: Only used the Aern wielding a sword (RDM, DRK, and PLD).
+-- Glacier Splitter
+-- Family: Aern
+-- Description: Cleaves into targets in a fan-shaped area. Additional Effect: Paralyze
+-- Notes: Used the Aern wielding a sword (RDM, DRK, and PLD).
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,16 +12,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = math.random(1, 3)
-    local accmod = 1
-    local ftp    = 2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 15, 0, math.random(30, 60))
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Recapture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+    -- TODO: This might be a conal AoE skill. Need captures.
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 15, 0, math.random(30, 60))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

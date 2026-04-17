@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gnash
+-- Family: Orobon
 -- Description: Chews on a single target, reducing HP to one half.
--- Type: Physical
 -- Notes: Retail testing shows this is more like 45% to 55% of the targets current HP
 -----------------------------------
 ---@type TMobSkill
@@ -12,17 +12,33 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local damage = math.floor(target:getHP() * (math.random(45, 55) / 100))
-    local info   =
-    {
-        damage = damage
-    }
+    local params = {}
 
-    damage = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(damage, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-    mob:resetEnmity(target)
+    local fTP = (math.random(45, 55) / 100) -- TODO: Is it random or does something influence it?
 
-    return damage
+    params.baseDamage     = target:getHP()
+    params.numHits        = 1
+    params.fTP            = { fTP, fTP, fTP } -- TODO: Capture % of current HP this does.
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipFSTR       = true
+    params.skipPDIF       = true
+    params.skipParry      = true -- TODO: Confirm this can't be parried, guarded or blocked.
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture hate reset type (Enmity wipe vs enmity turned off)
+        -- See Antica skill "Sand Trap" for reference
+        mob:resetEnmity(target)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

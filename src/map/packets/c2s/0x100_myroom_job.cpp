@@ -43,19 +43,20 @@
 
 auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
                   .mustEqual(PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id, true, "Player not in MH or zone with Moogle.");
 
-    if (MainJobIndex)
+    if (this->MainJobIndex)
     {
-        pv.range("MainJobIndex", MainJobIndex, 0x01, MAX_JOBTYPE - 1)
-            .mustEqual((PChar->jobs.unlocked & (1 << MainJobIndex)) != 0, true, "Main job not unlocked");
+        pv.range("MainJobIndex", this->MainJobIndex, 0x01, MAX_JOBTYPE - 1)
+            .mustEqual((PChar->jobs.unlocked & (1 << this->MainJobIndex)) != 0, true, "Main job not unlocked");
     }
 
-    if (SupportJobIndex)
+    if (this->SupportJobIndex)
     {
-        pv.range("SupportJobIndex", SupportJobIndex, 0x00, MAX_JOBTYPE - 1)
-            .mustEqual((PChar->jobs.unlocked & (1 << SupportJobIndex)) != 0, true, "Support job not unlocked");
+        pv.range("SupportJobIndex", this->SupportJobIndex, 0x00, MAX_JOBTYPE - 1)
+            .mustEqual((PChar->jobs.unlocked & (1 << this->SupportJobIndex)) != 0, true, "Support job not unlocked");
     }
 
     return pv;
@@ -63,21 +64,21 @@ auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if ((MainJobIndex > 0x00) && (MainJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << MainJobIndex)))
+    if ((this->MainJobIndex > 0x00) && (this->MainJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << this->MainJobIndex)))
     {
         const JOBTYPE prevjob = PChar->GetMJob();
         PChar->resetPetZoningInfo();
 
         charutils::SaveJobChangeGear(PChar);
         charutils::RemoveAllEquipment(PChar);
-        PChar->SetMJob(MainJobIndex);
+        PChar->SetMJob(this->MainJobIndex);
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
         // If removing RemoveAllEquipment, please add a charutils::CheckUnarmedItem(PChar) if main hand is empty.
         puppetutils::LoadAutomaton(PChar);
 
-        if (MainJobIndex == JOB_BLU)
+        if (this->MainJobIndex == JOB_BLU)
         {
             blueutils::LoadSetSpells(PChar);
         }
@@ -96,18 +97,18 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
         }
     }
 
-    if ((SupportJobIndex > 0x00) && (SupportJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << SupportJobIndex)))
+    if ((this->SupportJobIndex > 0x00) && (this->SupportJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << this->SupportJobIndex)))
     {
         JOBTYPE prevsjob = PChar->GetSJob();
         PChar->resetPetZoningInfo();
 
-        PChar->SetSJob(SupportJobIndex);
+        PChar->SetSJob(this->SupportJobIndex);
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGESJOB, prevsjob);
         puppetutils::LoadAutomaton(PChar);
 
-        if (SupportJobIndex == JOB_BLU)
+        if (this->SupportJobIndex == JOB_BLU)
         {
             blueutils::LoadSetSpells(PChar);
         }

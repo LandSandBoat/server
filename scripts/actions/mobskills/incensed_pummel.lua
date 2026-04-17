@@ -1,5 +1,7 @@
 -----------------------------------
 -- Incensed Pummel
+-- Family: Yztarg (Red)
+-- Description: Deals a sixfold? attack. Additional Effect: Random Stat Attribute Down
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,18 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2.0
-    -- Random stat down
-    local typeEffect = 136 + math.random(0, 6) -- 136 is xi.effect.STR_DOWN add 0 to 6 for all 7 of the possible attribute reductions
+    local params = {}
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1 -- TODO: Capture numHits
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 3, 120)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local typeEffect = xi.effect.STR_DOWN + math.random(0, 6)
+        xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 9, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

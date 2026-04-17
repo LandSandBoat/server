@@ -1,9 +1,8 @@
 -----------------------------------
---  Gusting Gouge
---  Description: Deals Wind damage in a threefold attack to targets in a fan-shaped area of effect.
---  Type: Physical?
---  Utsusemi/Blink absorb: 3 shadows
---  Notes: Used only by Lamia equipped with a one-handed weapon. If they lost their weapon, they'll use Hysteric Barrage instead.
+-- Gusting Gouge
+-- Family: Lamia
+-- Description: Deals physical damage in a threefold attack to targets in a fan-shaped area of effect.
+-- Notes: Used by Lamia equipped with a one-handed weapon(Dagger). If they lost their weapon, they'll use Hysteric Barrage instead.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         mob:getAnimationSub() ~= 1 and
         (
-            mob:getMainJob() == xi.job.COR or
+            mob:getMainJob() == xi.job.COR or -- TODO: Set proper skill lists
             mob:getMainJob() == xi.job.BRD or
             mob:getMainJob() == xi.job.RDM
         )
@@ -24,13 +23,22 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 3
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    local params = {}
+
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3 -- TODO: Confirm numHits
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING -- TODO: Capture damageType
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

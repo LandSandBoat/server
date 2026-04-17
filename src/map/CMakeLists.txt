@@ -123,8 +123,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ximesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/notoriety_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/notoriety_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/packet_guard.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/packet_guard.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party.cpp

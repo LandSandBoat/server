@@ -1,10 +1,7 @@
 -----------------------------------
---  Ore Toss
---
---  Description: Deals high damage in a ranged attack.
---  Type: Ranged
---  Utsusemi/Blink absorb: Yes
---  Range: Unknown range
+-- Ore Toss
+-- Family: Quadav
+-- Description: Deals high damage in a ranged attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,22 +11,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 2
-    local info    = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
+    local params = {}
+
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipParry      = true
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 
     -- Distance-based damage scaling: 1x at 1 yalm, 3x at 10 yalms
     -- TODO: Determine max distance of skill
     local distance           = mob:checkDistance(target)
     local distanceMultiplier = utils.clamp(1 + (distance - 1) * 2 / 9, 1, 3)
+    info.damage = info.damage * distanceMultiplier
 
-    dmg = math.floor(dmg * distanceMultiplier)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.BLUNT)
-
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

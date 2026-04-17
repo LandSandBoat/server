@@ -26,15 +26,16 @@
 
 auto GP_CLI_COMMAND_TROPHY_ENTRY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustNotEqual(PChar->PTreasurePool, nullptr, "Character does not have a treasure pool")
-        .range("TrophyItemIndex", TrophyItemIndex, 0, TREASUREPOOL_SIZE - 1);
+        .range("TrophyItemIndex", this->TrophyItemIndex, 0, TREASUREPOOL_SIZE - 1);
 }
 
 void GP_CLI_COMMAND_TROPHY_ENTRY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (!PChar->PTreasurePool->hasLottedItem(PChar, TrophyItemIndex))
+    if (!PChar->PTreasurePool->hasLottedItem(PChar, this->TrophyItemIndex))
     {
-        PChar->PTreasurePool->lotItem(PChar, TrophyItemIndex, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
+        PChar->PTreasurePool->lotItem(PChar, this->TrophyItemIndex, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
     }
 }

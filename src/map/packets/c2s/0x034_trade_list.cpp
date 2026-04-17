@@ -57,10 +57,10 @@ const auto auditTrade = [](Scheduler& scheduler, CCharEntity* PChar, CCharEntity
 
 auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
         .mustNotEqual(PChar->TradePending.id, 0, "No trade target")
-        .range("TradeIndex", TradeIndex, 0, 8)
-        .isNotMonstrosity(PChar);
+        .range("TradeIndex", this->TradeIndex, 0, 8);
 }
 
 void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar) const
@@ -76,43 +76,43 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
     }
 
     // If updating a filled slot, remove the pending item.
-    if (!PChar->UContainer->IsSlotEmpty(TradeIndex))
+    if (!PChar->UContainer->IsSlotEmpty(this->TradeIndex))
     {
-        CItem* PCurrentSlotItem = PChar->UContainer->GetItem(TradeIndex);
-        if (ItemNum != 0)
+        CItem* PCurrentSlotItem = PChar->UContainer->GetItem(this->TradeIndex);
+        if (this->ItemNum != 0)
         {
             ShowError("GP_CLI_COMMAND_TRADE_LIST: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] ",
                       PChar->getName(),
                       PCurrentSlotItem->getID(),
-                      TradeIndex);
+                      this->TradeIndex);
         }
 
         PCurrentSlotItem->setReserve(0);
-        PChar->UContainer->ClearSlot(TradeIndex);
+        PChar->UContainer->ClearSlot(this->TradeIndex);
     }
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(ItemIndex);
+    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->ItemIndex);
 
     // Validate that the item exists in sufficient quantity, is not reserved, and is not an EX item.
     if (!PItem ||
-        PItem->getID() != ItemNo ||
+        PItem->getID() != this->ItemNo ||
         PItem->hasFlag(ItemFlag::Exclusive) ||
-        ItemNum + PItem->getReserve() > PItem->getQuantity() ||
+        this->ItemNum + PItem->getReserve() > PItem->getQuantity() ||
         PItem->isSubType(ITEM_LOCKED))
     {
         ShowErrorFmt("GP_CLI_COMMAND_TRADE_LIST: {} trying to add an invalid item/quantity [Item: {} | Trade Slot: {}] ",
                      PChar->getName(),
-                     ItemNo,
-                     TradeIndex);
+                     this->ItemNo,
+                     this->TradeIndex);
         return;
     }
 
     // If item count is zero remove from container
-    if (ItemNum == 0)
+    if (this->ItemNum == 0)
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName());
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->getName(), PTarget->getName(), this->TradeIndex, PItem->getName());
         PItem->setReserve(0);
-        PChar->UContainer->SetItem(TradeIndex, nullptr);
+        PChar->UContainer->SetItem(this->TradeIndex, nullptr);
     }
 
     if (PItem->isType(ITEM_LINKSHELL))
@@ -125,30 +125,30 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         {
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellEquipBeforeUsing);
             PItem->setReserve(0);
-            PChar->UContainer->SetItem(TradeIndex, nullptr);
+            PChar->UContainer->SetItem(this->TradeIndex, nullptr);
         }
         else
         {
-            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
-            PItem->setReserve(ItemNum + PItem->getReserve());
-            PChar->UContainer->SetItem(TradeIndex, PItem);
+            ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), this->TradeIndex, PItem->getName(), this->ItemNum);
+            PItem->setReserve(this->ItemNum + PItem->getReserve());
+            PChar->UContainer->SetItem(this->TradeIndex, PItem);
         }
     }
     else
     {
-        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), TradeIndex, PItem->getName(), ItemNum);
-        PItem->setReserve(ItemNum + PItem->getReserve());
-        PChar->UContainer->SetItem(TradeIndex, PItem);
+        ShowInfo("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->getName(), PTarget->getName(), this->TradeIndex, PItem->getName(), this->ItemNum);
+        PItem->setReserve(this->ItemNum + PItem->getReserve());
+        PChar->UContainer->SetItem(this->TradeIndex, PItem);
     }
 
     // TODO: Don't pass around Scheduler& through PSession
-    auditTrade(*PSession->scheduler, PChar, PTarget, PItem, ItemNum);
+    auditTrade(*PSession->scheduler, PChar, PTarget, PItem, this->ItemNum);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PChar->getName());
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_MYLIST>(PItem, TradeIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_MYLIST>(PItem, this->TradeIndex);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PTarget->getName());
-    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_LIST>(PItem, TradeIndex);
+    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_LIST>(PItem, this->TradeIndex);
 
     PChar->UContainer->UnLock();
     PTarget->UContainer->UnLock();

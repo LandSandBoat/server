@@ -1,6 +1,10 @@
 -----------------------------------
 -- Ranged Attack
--- Deals a ranged attack to a single target.
+-- Family: Humanoid/Beastman (Varies)
+-- Description: Deals a ranged attack to a single target.
+-- Note: Used by RNG and NIN mobs as their ranged attack.
+--       Gigas have their own ranged attack skill called "Catapult"
+--       Trolls have their own ranged attack skill called "Zarraqa"
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,37 +14,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local dmgmod  = 1.5
-    local params  = { canCrit = true }
+    local params = {}
 
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 0, params)
-    local dmg  = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.5, 1.5, 1.5 } -- TODO: Mobs get more base damage on their ranged weapon slot already. Do we need the 1.5 fTP?
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipParry      = true
+    params.skipGuard      = true
+    params.skipBlock      = true
 
-    if
-        skill:getMsg() ~= xi.msg.basic.SHADOW_ABSORB and
-        skill:getMsg() ~= xi.msg.basic.ANTICIPATE
-    then
-        if info.hitslanded > 0 then
-            if info.isCritical then
-                skill:setMsg(xi.msg.basic.RANGED_ATTACK_CRIT)
-            else
-                skill:setMsg(xi.msg.basic.RANGED_ATTACK_HIT)
-            end
+    -- Note: Normal mob ranged attacks that call this script can not critical hit.
+    --       Normal mobskill style ranged attacks do not display sweet spot messaging.
 
-            if dmg > 0 then
-                target:addTP(20)
-                mob:addTP(80)
-            end
-        else
-            skill:setMsg(xi.msg.basic.RANGED_ATTACK_MISS)
-        end
+    -- TODO: Fomor type mobs that should use the player style ranged attacks are currently use this script.
+    --       Their ranged attacks can crit.
 
-        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

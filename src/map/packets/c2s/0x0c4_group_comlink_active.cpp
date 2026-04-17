@@ -177,25 +177,26 @@ const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinksh
 
 auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .range("r", r, 0, 15)
-        .range("g", g, 0, 15)
-        .range("b", b, 0, 15)
-        .mustEqual(a, 15, "a not 15")
-        .oneOf<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG>(ActiveFlg)
-        .oneOf<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_LINKSHELLID>(LinkshellId);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .range("r", this->r, 0, 15)
+        .range("g", this->g, 0, 15)
+        .range("b", this->b, 0, 15)
+        .mustEqual(this->a, 15, "a not 15")
+        .oneOf<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG>(this->ActiveFlg)
+        .oneOf<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_LINKSHELLID>(this->LinkshellId);
 }
 
 void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PItemLinkshell = static_cast<CItemLinkshell*>(PChar->getStorage(Category)->GetItem(ItemIndex));
+    auto* PItemLinkshell = static_cast<CItemLinkshell*>(PChar->getStorage(this->Category)->GetItem(this->ItemIndex));
 
     if (!PItemLinkshell || !PItemLinkshell->isType(ITEM_LINKSHELL))
     {
         return;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG>(ActiveFlg))
+    switch (static_cast<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG>(this->ActiveFlg))
     {
         case GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG::EquipOrCreate:
         {

@@ -26,13 +26,14 @@
 auto GP_CLI_COMMAND_ITEMSEARCH::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_ITEMSEARCH_LANGUAGE>(Language);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<GP_CLI_COMMAND_ITEMSEARCH_LANGUAGE>(this->Language);
 }
 
 void GP_CLI_COMMAND_ITEMSEARCH::process(MapSession* PSession, CCharEntity* PChar) const
 {
     ShowDebugFmt("GP_CLI_COMMAND_ITEMSEARCH: Not implemented. Language: {}, Name: {}",
-                 Language,
-                 asStringFromUntrustedSource(Name, sizeof(Name)));
+                 this->Language,
+                 asStringFromUntrustedSource(this->Name, sizeof(this->Name)));
 }

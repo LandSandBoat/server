@@ -26,21 +26,22 @@
 
 auto GP_CLI_COMMAND_SCENARIOITEM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(UniqueNo, PChar->id, "Character ID mismatch")
-        .mustEqual(ActIndex, PChar->targid, "Character targid mismatch")
-        .range("TableIndex", TableIndex, 0, PChar->keys.tables.size());
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustEqual(this->UniqueNo, PChar->id, "Character ID mismatch")
+        .mustEqual(this->ActIndex, PChar->targid, "Character targid mismatch")
+        .range("TableIndex", this->TableIndex, 0, PChar->keys.tables.size());
 }
 
 void GP_CLI_COMMAND_SCENARIOITEM::process(MapSession* PSession, CCharEntity* PChar) const
 {
     for (int i = 0; i < 16; i++)
     {
-        const uint32_t flags = LookItemFlag[i];
+        const uint32_t flags = this->LookItemFlag[i];
 
         for (int bit = 0; bit < 32; bit++)
         {
-            const auto keyItemId = (TableIndex * 512) + (i * 32) + bit;
+            const auto keyItemId = (this->TableIndex * 512) + (i * 32) + bit;
 
             if ((flags >> bit) & 1)
             {

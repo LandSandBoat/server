@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.WRAITHDANCER_GIDBNOD - 2] = ID.mob.WRAITHDANCER_GIDBNOD, -- Vanguard_Amputator
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

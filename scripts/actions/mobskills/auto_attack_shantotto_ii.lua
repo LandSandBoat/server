@@ -18,6 +18,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.damageType     = xi.damageType.NONE
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
     params.primaryMessage = xi.msg.basic.HIT_DMG
+    -- Note: Element might be adaptive to target weakness.
+    -- Using Shantotto II vs ROV Siren, the auto attacks were healing the mob(Siren absorbs Wind element damage).
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

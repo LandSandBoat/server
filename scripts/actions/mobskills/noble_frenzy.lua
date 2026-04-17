@@ -1,5 +1,6 @@
 -----------------------------------
 -- Noble Frenzy
+-- Family: Humanoid (August)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,14 +10,22 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 5
-    local accmod  = 2
-    local dmgmod  = 3.5
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5625, 1.875, 2.50)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    local params = {}
 
-    return dmg
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 5
+    params.fTP            = { 5.46875, 6.56250, 8.75000 } -- TODO: Is this right? fTPs seem very excessive.
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_5
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

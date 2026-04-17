@@ -32,8 +32,9 @@
 
 auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(Res);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res);
 }
 
 void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
@@ -41,7 +42,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
     if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.id, PChar->InvitePending.targid); PInviter != nullptr)
     {
         // This switch statement only occurs when both the invitee and inviter are on the same process
-        switch (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(Res))
+        switch (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res))
         {
             case GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Decline:
             {
@@ -136,7 +137,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
             .inviteeTargId = PChar->targid,
             .inviterId     = PChar->InvitePending.id,
             .inviterTargId = PChar->InvitePending.targid,
-            .inviteAnswer  = Res,
+            .inviteAnswer  = this->Res,
         });
     }
 

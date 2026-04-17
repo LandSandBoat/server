@@ -2825,7 +2825,12 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         result.messageID = msg;
 
-        if (PSkill->hasMissMsg())
+        if (PSkill->getMsg() == MsgBasic::ShadowAbsorb) // Setting of shadow message is handled in mobskills.lua
+        {
+            result.resolution = ActionResolution::Miss;
+            result.param      = damage; // damage is the number of shadows consumed to display in chat log
+        }
+        else if (PSkill->hasMissMsg())
         {
             result.resolution = ActionResolution::Miss;
             result.param      = 0;

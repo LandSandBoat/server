@@ -33,4 +33,5 @@ GP_CLI_PACKET(GP_CLI_COMMAND_COMBINE_ASK,
               uint8_t  Items;      // PS2: Items
               uint16_t ItemNo[8];  // PS2: ItemNo
               uint8_t  TableNo[8]; // PS2: TableNo
+              uint16_t padding01;  // PS2: (New; did not exist.)
 );

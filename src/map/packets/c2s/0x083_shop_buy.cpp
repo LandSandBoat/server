@@ -30,7 +30,8 @@
 
 auto GP_CLI_COMMAND_SHOP_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustEqual(this->PropertyItemIndex, 0, "PropertyItemIndex not 0");
 }
 

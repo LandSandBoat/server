@@ -6,7 +6,7 @@ local packets =
     ['Jug Pet Ready'] =
     {
         test = function(player, mob)
-            stub('xi.mobskills.mobPhysicalMove', { damage = 1, hitslanded = 1, isCritical = false })
+            stub('xi.mobskills.mobPhysicalMove', { damage = 1, hitsLanded = 1, isCritical = false })
             local pmob = player.entities:moveTo('Clipper')
             player:changeJob(xi.job.BST)
             player:spawnPet(xi.petId.COLDBLOOD_COMO)

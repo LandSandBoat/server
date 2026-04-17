@@ -33,15 +33,16 @@
 
 auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator();
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent });
 
     // Packet is used for 3 different systems. Validation differs based on the job.
-    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && Data.bluData.JobIndex == JOB_BLU)
+    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && this->Data.bluData.JobIndex == JOB_BLU)
     {
         // Case 1: Blue Mage spells
         // TODO: Check if they own the spell they are trying to equip.
     }
-    else if (((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && Data.pupData.JobIndex == JOB_PUP))
+    else if (((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && this->Data.pupData.JobIndex == JOB_PUP))
     {
         // Case 2: Puppetmaster attachments
         pv.mustEqual(dynamic_cast<CAutomatonEntity*>(PChar->PPet), nullptr, "Player has a deployed automaton.");
@@ -50,37 +51,37 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
     else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
     {
         // Case 3: Monstrosity equipment change
-        if (Data.monData.Flags0.SpeciesFlag)
+        if (this->Data.monData.Flags0.SpeciesFlag)
         {
             // Player requesting a species change
             // TODO: Capture actual accepted IDs in a vector in a namespace
-            pv.range("SpeciesIndex", Data.monData.SpeciesIndex, 1, 511);
+            pv.range("SpeciesIndex", this->Data.monData.SpeciesIndex, 1, 511);
         }
 
-        if (Data.monData.Flags0.InstinctFlag)
+        if (this->Data.monData.Flags0.InstinctFlag)
         {
             // Player requesting an instinct change
             for (std::size_t idx = 0; idx < 12; ++idx)
             {
                 // Ignore instincts being unequipped or unset
-                if (Data.monData.Slots[idx] != 0xFFFF && Data.monData.Slots[idx] != 0x0)
+                if (this->Data.monData.Slots[idx] != 0xFFFF && this->Data.monData.Slots[idx] != 0x0)
                 {
                     // TODO: Capture actual range in a vector in a namespace
-                    pv.range("Slots", Data.monData.Slots[idx], 3, 799);
+                    pv.range("Slots", this->Data.monData.Slots[idx], 3, 799);
                 }
             }
         }
 
-        if (Data.monData.Flags0.Descriptor1Flag)
+        if (this->Data.monData.Flags0.Descriptor1Flag)
         {
             // 0 to unset. Last entry has ID 248.
-            pv.range("Descriptor1Index", Data.monData.Descriptor1Index, 0, 248);
+            pv.range("Descriptor1Index", this->Data.monData.Descriptor1Index, 0, 248);
         }
 
-        if (Data.monData.Flags0.Descriptor2Flag)
+        if (this->Data.monData.Flags0.Descriptor2Flag)
         {
             // 0 to unset. Last entry has ID 248.
-            pv.range("Descriptor2Index", Data.monData.Descriptor2Index, 0, 248);
+            pv.range("Descriptor2Index", this->Data.monData.Descriptor2Index, 0, 248);
         }
     }
     else
@@ -93,9 +94,9 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && Data.bluData.JobIndex == JOB_BLU)
+    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && this->Data.bluData.JobIndex == JOB_BLU)
     {
-        const auto bluData = Data.bluData;
+        const auto bluData = this->Data.bluData;
 
         // This may be a request to add or remove set spells, so lets check.
 
@@ -201,9 +202,9 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
             }
         }
     }
-    else if ((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && Data.pupData.JobIndex == JOB_PUP)
+    else if ((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && this->Data.pupData.JobIndex == JOB_PUP)
     {
-        const auto pupData = Data.pupData;
+        const auto pupData = this->Data.pupData;
 
         if (pupData.ItemId == 0x00)
         {
@@ -247,6 +248,6 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
     }
     else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
     {
-        monstrosity::HandleEquipChangePacket(PChar, Data.monData);
+        monstrosity::HandleEquipChangePacket(PChar, this->Data.monData);
     }
 }

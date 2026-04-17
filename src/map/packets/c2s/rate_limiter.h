@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -22,20 +22,18 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "packet_system.h"
-#include "packets/basic.h"
+#include "common/timer.h"
+
+#include <unordered_map>
 
 class CCharEntity;
 
-namespace PacketGuard
+class PacketRateLimiter
 {
+public:
+    PacketRateLimiter();
+    auto isLimited(CCharEntity* PChar, uint16 packetId) -> bool;
 
-void Init();
-bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type);
-bool IsRateLimitedPacket(CCharEntity* PChar, uint16 SmallPD_Type);
-bool PacketsArrivingInCorrectOrder(CCharEntity* PChar, uint16 SmallPD_Type);
-void PrintPacketList(CCharEntity* PChar);
-
-auto GetPacketAllowList() -> std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>>&;
-
-} // namespace PacketGuard
+private:
+    std::unordered_map<uint16, timer::duration> rateLimits_;
+};

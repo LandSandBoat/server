@@ -1,6 +1,7 @@
 -----------------------------------
--- Colossal_Blow
--- Deals damage to a single target.
+-- Colossal Blow
+-- Family: Omega
+-- Description: Deals near lethal damage to a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,24 +11,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local currentHP = target:getHP()
-    local damage    = currentHP
+    local params = {}
 
-    -- if we have more than 30% hp, reduce to 5%
-    if target:getHPP() > 30 then
-        damage = currentHP * .95
+    params.baseDamage     = target:getHP()
+    params.numHits        = 1
+    params.fTP            = { 0.95, 0.95, 0.95 } -- TODO: Capture % of current HP this does.
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipFSTR       = true
+    params.skipPDIF       = true
+    params.skipParry      = true -- TODO: Confirm this can't be parried, guarded or blocked.
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture hate reset type (Enmity wipe vs enmity turned off)
+        -- See Antica skill "Sand Trap" for reference
+        mob:resetEnmity(target)
     end
 
-    local info =
-    {
-        damage
-    }
-
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-    mob:resetEnmity(target)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

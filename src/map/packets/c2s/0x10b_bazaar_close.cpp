@@ -26,8 +26,9 @@
 
 auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(AllListClearFlg, 0, "AllListClearFlg not 0"); // Always 0
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustEqual(this->AllListClearFlg, 0, "AllListClearFlg not 0"); // Always 0
 }
 
 void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PChar) const

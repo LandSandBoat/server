@@ -1,7 +1,7 @@
 -----------------------------------
 -- Colossal Slam
--- Deals damage based off TP.
--- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
+-- Family: Gigas
+-- Description: Deals AoE physical damage to targets in range. Additional Effect: Curse II
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,17 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 3.0 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+    local params = {}
 
-    -- TODO: The duration needs verification from retail
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.CURSE_II, 0, 0, 30)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: The duration needs verification from retail
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_II, 0, 0, 30)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

@@ -26,11 +26,12 @@
 auto GP_CLI_COMMAND_UNKNOWN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // Not implemented.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_UNKNOWN::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Purpose of this packet is currently unknown
-    ShowDebug("GP_CLI_COMMAND_UNKNOWN: unknown00=%u padding00=%u unknown01=%u", unknown00, padding00, unknown01);
+    ShowDebug("GP_CLI_COMMAND_UNKNOWN: unknown00=%u padding00=%u unknown01=%u", this->unknown00, this->padding00, this->unknown01);
 }

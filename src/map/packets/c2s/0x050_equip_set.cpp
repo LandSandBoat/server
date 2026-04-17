@@ -77,15 +77,15 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 
 auto GP_CLI_COMMAND_EQUIP_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isNormalStatus(PChar)
-        .oneOf<SLOTTYPE>(EquipKind)
-        .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers(PChar));
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus })
+        .oneOf<SLOTTYPE>(this->EquipKind)
+        .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers(PChar));
 }
 
 void GP_CLI_COMMAND_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    charutils::EquipItem(PChar, PropertyItemIndex, EquipKind, Category);
+    charutils::EquipItem(PChar, this->PropertyItemIndex, this->EquipKind, this->Category);
     PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();

@@ -46,7 +46,7 @@
 
 auto GP_CLI_COMMAND_GAMEOK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
         .mustEqual(ClientState, 0, "ClientState not 0")
         .mustEqual(DebugClientFlg, 0, "DebugClientFlg not 0");
 }

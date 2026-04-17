@@ -40,15 +40,16 @@ const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustNotEqual(MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", MyroomPlantCategory, validPlantCategories);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
+        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(MyroomPlantCategory);
-    CItemFlowerpot* PItem          = static_cast<CItemFlowerpot*>(PItemContainer->GetItem(MyroomPlantItemIndex));
+    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    CItemFlowerpot* PItem          = static_cast<CItemFlowerpot*>(PItemContainer->GetItem(this->MyroomPlantItemIndex));
     if (PItem == nullptr)
     {
         return;
@@ -66,7 +67,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
 
     if (PItem->isPlanted())
     {
-        if (CancellFlg == 0 && PItem->getStage() == FLOWERPOT_STAGE_MATURE_PLANT)
+        if (this->CancellFlg == 0 && PItem->getStage() == FLOWERPOT_STAGE_MATURE_PLANT)
         {
             // Harvesting plant
             uint16 resultID                   = 0;
@@ -93,7 +94,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(resultID, totalQuantity, 134); // Your moogle <quantity> <item> from the plant!
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PItem->cleanPot();
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
@@ -102,7 +103,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
                          PItem->getLocationID(),
                          PItem->getSlotID());
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

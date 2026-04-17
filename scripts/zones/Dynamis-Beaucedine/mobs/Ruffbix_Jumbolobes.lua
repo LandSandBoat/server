@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.RUFFBIX_JUMBOLOBES - 2] = ID.mob.RUFFBIX_JUMBOLOBES, -- Vanguard_Armorer
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

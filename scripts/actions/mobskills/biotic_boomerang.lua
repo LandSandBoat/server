@@ -1,7 +1,7 @@
 -----------------------------------
 --  Biotic Boomerang
---  Aern (BST & WAR)
---  Blinkable 2-3 hit, addtional effect plague on hit.
+--  Family: Aern (BST & WAR)
+--  Description: Deals physical damage to a targets near mob. Addtional Effect: Plague
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,18 +11,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = math.random(2, 3)
-    local accmod = 1
-    local ftp    = 2
+    local params = {}
 
-    -- TODO: Need crit scaling captures
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    params.canCrit        = true
+    params.criticalChance = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PLAGUE, 18, 3, math.random(30, 60))
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, math.random(30, 60))
+    end
+
+    return info.damage
 end
 
 return mobskillObject

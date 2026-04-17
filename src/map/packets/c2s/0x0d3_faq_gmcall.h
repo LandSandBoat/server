@@ -93,12 +93,12 @@ struct FFGpGMReportLobbyStruct
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x00D3
 // This packet is sent by the client when interacting with the Help Desk system. More specifically, when selecting an option that will send a request to the server.
-GP_CLI_PACKET(GP_CLI_COMMAND_FAQ_GMCALL,
-              uint16_t type : 4;   // PS2: type
-              uint16_t vers : 4;   // PS2: vers
-              uint16_t pktId : 8;  // PS2: pktId
-              uint16_t seq : 7;    // PS2: seq
-              uint16_t eos : 1;    // PS2: eos
-              uint16_t blkNum : 8; // PS2: blkNum -- 9 max observed
-              uint8_t  Data[256];  // PS2: (Non-specific structured data.) - Unknown max size
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_FAQ_GMCALL, Data,
+                  uint16_t type : 4;   // PS2: type
+                  uint16_t vers : 4;   // PS2: vers
+                  uint16_t pktId : 8;  // PS2: pktId
+                  uint16_t seq : 7;    // PS2: seq
+                  uint16_t eos : 1;    // PS2: eos
+                  uint16_t blkNum : 8; // PS2: blkNum -- 9 max observed
+                  uint8_t  Data[256];  // PS2: (Non-specific structured data.) - Unknown max size
 );

@@ -26,6 +26,7 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0011
 // This packet is sent by the client when it has successfully entered the requested zone, confirming it has entered the new area.
 GP_CLI_PACKET(GP_CLI_COMMAND_ZONE_TRANSITION,
-              uint8_t unknown00; // PS2: (New; did not exist.)
-              uint8_t unknown01; // PS2: (New; did not exist.)
+              uint8_t  unknown00; // PS2: (New; did not exist.)
+              uint8_t  unknown01; // PS2: (New; did not exist.)
+              uint16_t padding00; // PS2: (New; did not exist.)
 );

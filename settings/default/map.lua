@@ -29,10 +29,6 @@ xi.settings.map =
     -- Game settings
     -- --------------------------------
 
-    -- PacketGuard will block and report any packets that aren't in the allow-list for a
-    -- player's current state.
-    PACKETGUARD_ENABLED = true,
-
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 

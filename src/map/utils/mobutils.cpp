@@ -1019,10 +1019,6 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     {
         SetupBattlefieldMob(PMob);
     }
-    else if (zoneType & ZONE_TYPE::DYNAMIS)
-    {
-        SetupDynamisMob(PMob);
-    }
 
     if (PMob->m_Type & MOBTYPE_NOTORIOUS)
     {
@@ -1306,31 +1302,6 @@ uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob)
 
     return 3; // Give them C rank as a fallback.
 };
-
-void SetupDynamisMob(CMobEntity* PMob)
-{
-    // no gil drop and no mugging!
-    PMob->setMobMod(MOBMOD_GIL_MAX, -1);
-    PMob->setMobMod(MOBMOD_MUG_GIL, -1);
-
-    // boost dynamis mobs weapon damage
-    PMob->setMobMod(MOBMOD_WEAPON_BONUS, 30); // Add approximately 30 flat damage until proven otherwise (In-line with the 35% added previously)
-    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
-    ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
-
-    // job resist traits are much more powerful in dynamis
-    // according to wiki
-    for (auto&& PTrait : PMob->TraitList)
-    {
-        Mod type = PTrait->getMod();
-
-        if (type >= Mod::SLEEPRES && type <= Mod::DEATHRES)
-        {
-            // give mob a total of x4 the regular rate
-            PMob->addModifier(type, PTrait->getValue() * 3);
-        }
-    }
-}
 
 void SetupBattlefieldMob(CMobEntity* PMob)
 {

@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.KNII_HOQO_THE_BISECTOR - 1] = ID.mob.KNII_HOQO_THE_BISECTOR, -- Vanguard_Persecutor
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

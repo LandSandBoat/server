@@ -105,33 +105,24 @@ quest.sections =
                         return quest:event(73)
                     end
 
-                    local questProgress = quest:getVar(player, 'Prog')
-                    switch(questProgress): caseof
+                    local eventTable =
                     {
-                        [1] = function()
-                            return quest:progressEvent(57)
-                        end,
-
-                        [2] = function()
-                            return quest:progressEvent(58)
-                        end,
-
-                        [3] = function()
-                            return quest:progressEvent(99)
-                        end,
-
-                        [4] = function()
-                            return quest:progressEvent(59)
-                        end,
-
-                        [5] = function()
-                            return quest:progressEvent(60)
-                        end,
-
-                        [6] = function()
-                            return quest:progressEvent(64)
-                        end,
+                        [1] = 57,
+                        [2] = 58,
+                        [3] = 99,
+                        [4] = 59,
+                        [5] = 60,
+                        [6] = 64,
                     }
+
+                    local questProgress = quest:getVar(player, 'Prog')
+                    if questProgress <= 2 then
+                        return quest:progressEvent(eventTable[questProgress])
+                    end
+
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS) then
+                        return quest:progressEvent(eventTable[questProgress])
+                    end
                 end,
 
                 onTrigger = function(player, npc)
@@ -146,33 +137,17 @@ quest.sections =
             ['Osker'] =
             {
                 onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-                    switch(questProgress): caseof
+                    local eventTable =
                     {
-                        [1] = function()
-                            return quest:event(103)
-                        end,
-
-                        [2] = function()
-                            return quest:event(51)
-                        end,
-
-                        [3] = function()
-                            return quest:event(52)
-                        end,
-
-                        [4] = function()
-                            return quest:event(49)
-                        end,
-
-                        [5] = function()
-                            return quest:event(46)
-                        end,
-
-                        [6] = function()
-                            return quest:event(47)
-                        end,
+                        [1] = 103,
+                        [2] = 51,
+                        [3] = 52,
+                        [4] = 49,
+                        [5] = 46,
+                        [6] = 47,
                     }
+
+                    return quest:event(eventTable[quest:getVar(player, 'Prog')])
                 end,
             },
 

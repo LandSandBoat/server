@@ -7,6 +7,10 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobEngage = function(mob, target)
     target:showText(mob, ID.text.ANIMATED_DAGGER_DIALOG)
 end

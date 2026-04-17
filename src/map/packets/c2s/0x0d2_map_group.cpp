@@ -26,8 +26,9 @@
 
 auto GP_CLI_COMMAND_MAP_GROUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(ZoneNo, PChar->getZone(), "ZoneNo does not match character zone");
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustEqual(this->ZoneNo, PChar->getZone(), "ZoneNo does not match character zone");
 }
 
 void GP_CLI_COMMAND_MAP_GROUP::process(MapSession* PSession, CCharEntity* PChar) const

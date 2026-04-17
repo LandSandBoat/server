@@ -1,11 +1,8 @@
 -----------------------------------
---  Feral Peck
---    Mob Ability: 2429
---  Description: Deals a set amount of heavy damage (seems like ~90% of target's current HP) to a single target.
---  Type: Physical
---  Utsusemi/Blink absorb: Needs retail verification
---  Range: Melee
---  Notes: Used only by Zirnitra and Turul
+-- Feral Peck
+-- Family: Amphiptere
+-- Description: Deals a set amount of heavy damage (seems like ~90% of target's current HP) to a single target.
+-- Notes: Used by Zirnitra and Turul
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,23 +12,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local damage    = target:getHP()
+    local params = {}
 
-    -- If we have more than 30% HP, then reduce by 10%
-    if target:getHPP() > 30 then
-        damage = damage * 0.9
+    params.baseDamage     = target:getHP()
+    params.numHits        = 1
+    params.fTP            = { 0.90, 0.90, 0.90 } -- TODO: Capture % of current HP this does.
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipFSTR       = true
+    params.skipPDIF       = true
+    params.skipParry      = true -- TODO: Confirm this can't be parried, guarded or blocked.
+    params.skipGuard      = true
+    params.skipBlock      = true
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    local info =
-    {
-        damage = damage
-    }
-
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

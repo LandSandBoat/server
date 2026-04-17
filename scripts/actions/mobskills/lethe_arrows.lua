@@ -1,9 +1,7 @@
 -----------------------------------
 -- Lethe Arrows
--- Description: Deals a ranged attack to target. Additional effect: Knockback, Bind, and Amnesia
--- Type: Ranged
--- Utsusemi/Blink absorb: Ignores Utsusemi
--- Range: Unknown
+-- Family: Pixie
+-- Description: Deals a ranged attack to target. Additional Effect: Amnesia, Bind, Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,17 +11,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 3
-    local ftp    = 4 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 120)
+    -- TODO: Ranged or physical?
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 4.0, 4.0, 4.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING, { breakBind = false })
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
+
+        -- TODO: Capture effect power/durations
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

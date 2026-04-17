@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.PRINCE_SEERE - 1] = ID.mob.PRINCE_SEERE, -- Kindred_White_Mage
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

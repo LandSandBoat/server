@@ -1,10 +1,7 @@
 -----------------------------------
---  Oisoya
---  Description:
---  Type: Weaponskill
---  Utsusemi/Blink absorb:
---  Range: Ranged Attack
---  Notes: Unique ranged weaponskill used by Tenzen during The Warrior's Path. Also used by Trust: Tenzen II.
+-- Oisoya
+-- Family: Humanoid (Tenzen)
+-- Description: Unique ranged weaponskill used by Tenzen during The Warrior's Path. Also used by Trust: Tenzen II.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         (mob:getAnimationSub() == 5 or
         mob:getAnimationSub() == 6) and
-        mob:getLocalVar('[Tenzen]ShouldOisoya') == 1
+        mob:getLocalVar('[Tenzen]ShouldOisoya') == 1 -- TODO: Move to mob script
     then -- if tenzen is in bow mode
         return 0
     end
@@ -22,15 +19,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 0.8
-    local ftp    = 5.5
+    local params = {}
 
-    local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.ATK_VARIES, 2.75, 2.75, 2.75)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 1
+    params.fTP              = { 5.5, 5.5, 5.5 }
+    params.attackType       = xi.attackType.PHYSICAL
+    params.damageType       = xi.damageType.PIERCING
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.attackMultiplier = { 2.75, 2.75, 2.75 }
+    params.skipParry        = true
+    params.skipGuard        = true
+    params.skipBlock        = true
+    -- TODO: Accuracy modifier
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-    return dmg
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

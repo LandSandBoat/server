@@ -1,7 +1,8 @@
 -----------------------------------
 -- Dark Ixion basic melee attack with horn
--- Note: Has basic autoattack-style messages, consumes no TP, and applies BIND effect
--- normal tp gain is applied since the skill is used in place of an autoattack
+-- Family: Monoceros
+-- Notes: Has basic autoattack-style messages, consumes no TP, and applies Bind effect
+--        Normal tp gain is applied since the skill is used in place of an autoattack
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,30 +12,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- parameters for AE
-    local typeEffect = xi.effect.BIND
-    local power      = 1
-    local duration   = math.random(3, 15)
+    local params = {}
 
-    -- perform physical attack
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 1
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 1.0, 1.0, 1.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.primaryMessage = xi.msg.basic.HIT_DMG
 
-    -- if skill hit, apply dmg and AE
-    if not skill:hasMissMsg() then
-        skill:setMsg(xi.msg.basic.HIT_DMG)
-        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 0, duration)
-    elseif dmg == 0 then
-        -- basic miss (not shadows or anticipation)
-        skill:setMsg(xi.msg.basic.EVADES)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, math.random(3, 15)) -- TODO: Capture power
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

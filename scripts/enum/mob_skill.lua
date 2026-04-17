@@ -36,6 +36,8 @@ xi.mobSkill =
 
     SPIRAL_HELL                   =  104,
 
+    RAIDEN_THRUST_1               =  114,
+
     PENTA_THRUST                  =  116,
 
     SKEWER                        =  118,
@@ -50,6 +52,14 @@ xi.mobSkill =
     TRUE_STRIKE_1                =   166,
 
     RANDGRITH_1                   =  170,
+
+    HOT_SHOT_1                    =  208,
+    SPLIT_SHOT_1                  =  209,
+    SNIPER_SHOT_1                 =  210,
+
+    SLUG_SHOT_1                   =  212,
+
+    DETONATOR_1                   =  215,
 
     NETHERSPIKES_1                =  241,
     CARNAL_NIGHTMARE_1            =  242,
@@ -837,8 +847,16 @@ xi.mobSkill =
 
     REWARD                        = 2005,
     AZURE_LORE_RAUBAHN            = 2006,
-    -- WILD_CARD                     = 2007,
+    WILD_CARD_QULTADA             = 2007,
     -- OVERDRIVE                     = 2008,
+    FIRE_SHOT                     = 2009,
+    ICE_SHOT                      = 2010,
+    WIND_SHOT                     = 2011,
+    EARTH_SHOT                    = 2012,
+    THUNDER_SHOT                  = 2013,
+    WATER_SHOT                    = 2014,
+    LIGHT_SHOT                    = 2015,
+    DARK_SHOT                     = 2016,
 
     -- HUNDRED_FISTS                 = 2020,
 

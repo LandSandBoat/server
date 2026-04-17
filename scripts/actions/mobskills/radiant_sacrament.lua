@@ -1,13 +1,11 @@
 -----------------------------------
 -- Radiant Sacrament
+-- Family: Avatar (Alexander)
 -- Description: Used at regular intervals as a ranged attack when target is out of melee range.
--- Type: Physical
--- Can be dispelled: N/A
--- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 20' maximum distance, unknown smaller radial (around target)
--- Notes: Alexander generally uses this on targets out of his melee range. Accompanied by text
--- "Offer thy worship...
--- I shall burn away...thy transgressions..."
+-- Notes: Alexander generally uses this on targets out of his melee range. Accompanied by text:
+--        "Offer thy worship...
+--        I shall burn away...thy transgressions..."
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -17,16 +15,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 5
-    local ftp    = 2 -- fTP and fTP scaling unknown. TODO: capture ftp
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 20, 0, 60) -- Needs adjusted to retail values for power/duration
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 20, 0, 60) -- TODO: Capture power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

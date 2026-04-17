@@ -28,22 +28,22 @@
 
 auto GP_CLI_COMMAND_EVENTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_EVENTEND_MODE>(Mode)
-        .isInEvent(PChar, EventPara);
+    return PacketValidator(PChar)
+        .oneOf<GP_CLI_COMMAND_EVENTEND_MODE>(this->Mode)
+        .isInEvent(this->EventPara);
 }
 
 void GP_CLI_COMMAND_EVENTEND::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto       result  = EndPara;
-    const auto eventId = EventPara;
+    auto       result  = this->EndPara;
+    const auto eventId = this->EventPara;
 
     if (PChar->currentEvent->option != 0)
     {
         result = PChar->currentEvent->option;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_EVENTEND_MODE>(Mode))
+    switch (static_cast<GP_CLI_COMMAND_EVENTEND_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_EVENTEND_MODE::UpdatePending:
         {

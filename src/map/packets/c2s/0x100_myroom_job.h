@@ -25,6 +25,7 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0100
 // This packet is sent by the client when requesting to change jobs.
 GP_CLI_PACKET(GP_CLI_COMMAND_MYROOM_JOB,
-              uint8_t MainJobIndex;    // PS2: MainJobIndex
-              uint8_t SupportJobIndex; // PS2: SupportJobIndex
+              uint8_t  MainJobIndex;    // PS2: MainJobIndex
+              uint8_t  SupportJobIndex; // PS2: SupportJobIndex
+              uint16_t padding00;       // Padding; unused.
 );

@@ -1,11 +1,8 @@
 -----------------------------------
---  Cross Reaver
---
---  Description: Deals high damage to players in a fan-shaped area. Additional effect: Stun
---  Type: Physical
---  ? ? ? (No data offered)
---  Range: Melee
--- Special weaponskill unique to Ark Angel HM. Deals ~500-900 damage.
+-- Cross Reaver
+-- Family: Humanoid (Ark Angel HM)
+-- Description: Deals high damage to players in a fan-shaped area. Additional Effect: Stun
+-- Notes: Special weaponskill unique to Ark Angel HM. Deals ~500-900 damage.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,18 +12,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
     -- TODO: Can skillchain?  Unknown property.
 
-    local numhits = 2
-    local accmod = 1
-    local ftp    = 4
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 2
+    params.fTP            = { 4.0, 4.0, 4.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2 -- TODO: Capture shadowBehavior
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4) -- TODO: Capture stun duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

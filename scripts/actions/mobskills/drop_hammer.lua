@@ -1,11 +1,8 @@
 -----------------------------------
---  Drop Hammer
---
---  Description: Drops the hammer. Additional effect: Bind
---  Type: Physical
---  Utsusemi/Blink absorb: 2-3 shadows?
---  Range: Melee
---  Notes: Only used by "destroyers" (carrying massive warhammers).
+-- Drop Hammer
+-- Family: Troll
+-- Description: Deals AoE physical damage to targets in range. Additional Effect: Bind
+-- Notes: Only used by "destroyers" (carrying massive warhammers).
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,21 +12,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2.4
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded * math.random(2, 3))
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIND, 1, 0, 60)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.4, 2.4, 2.4 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    if mob:getPool() == xi.mobPool.FAHRAFAHR_THE_BLOODIED then  -- Fahrafahr the Bloodied
-        mob:resetEnmity(target)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 60)
+
+        if mob:getPool() == xi.mobPool.FAHRAFAHR_THE_BLOODIED then
+            mob:resetEnmity(target)
+        end
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

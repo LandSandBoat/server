@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.WHISTRIX_TOADTHROAT - 1] = ID.mob.WHISTRIX_TOADTHROAT, -- Vanguard_Maestro
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

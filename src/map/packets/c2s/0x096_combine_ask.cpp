@@ -66,13 +66,10 @@ const std::set validCrystals = {
 
 auto GP_CLI_COMMAND_COMBINE_ASK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Monstrosity })
         .oneOf("Crystal", static_cast<ITEMID>(this->Crystal), validCrystals)
-        .range("Items", this->Items, 1, 8)
-        .isNotMonstrosity(PChar)
-        .isNotPreventedAction(PChar)
-        .isNormalStatus(PChar)
-        .isNotCrafting(PChar);
+        .range("Items", this->Items, 1, 8);
 }
 
 void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PChar) const

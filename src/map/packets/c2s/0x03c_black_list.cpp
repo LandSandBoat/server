@@ -26,7 +26,8 @@
 auto GP_CLI_COMMAND_BLACK_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_BLACK_LIST::process(MapSession* PSession, CCharEntity* PChar) const

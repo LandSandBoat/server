@@ -6,6 +6,10 @@
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 2 do

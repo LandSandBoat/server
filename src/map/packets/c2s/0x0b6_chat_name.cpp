@@ -56,9 +56,9 @@ const auto auditTell = [](Scheduler& scheduler, CCharEntity* PChar, const std::s
 
 auto GP_CLI_COMMAND_CHAT_NAME::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(unknown00, 3, "unknown00 not 3")
-        .mustEqual(unknown01, 0, "unknown01 not 0");
+    return PacketValidator(PChar)
+        .mustEqual(this->unknown00, 3, "unknown00 not 3")
+        .mustEqual(this->unknown01, 0, "unknown01 not 0");
 }
 
 void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar) const
@@ -72,9 +72,9 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
     // Extremely important to figure out the message length here.
     // Depending on alignment, the message may not be NULL-terminated.
     // Start with reported size and skip the first 21 bytes (4x header + 2x unknown + 15x name).
-    const auto messageLength = std::min<std::size_t>((header.size * 4) - 0x15, sizeof(Mes));
-    const auto recipientName = db::escapeString(asStringFromUntrustedSource(sName, sizeof(sName)));
-    const auto rawMessage    = asStringFromUntrustedSource(Mes, messageLength);
+    const auto messageLength = std::min<std::size_t>((header.size * 4) - 0x15, sizeof(this->Mes));
+    const auto recipientName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto rawMessage    = asStringFromUntrustedSource(this->Mes, messageLength);
 
     if (strcmp(recipientName.c_str(), "_CUSTOM_MENU") == 0 &&
         luautils::HasCustomMenuContext(PChar))

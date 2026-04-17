@@ -1,9 +1,7 @@
 -----------------------------------
---  Drill Branch (NM Variant)
---  Description: Deals physical damage to enemies in a fan-shaped area. Additional effect: Blindness.
---  Type: Physical
---  Utsusemi/Blink absorb: 2-3 shadows
---  Range: 15' fan-shaped area
+-- Drill Branch (NM Variant)
+-- Family: Treant
+-- Description: Deals conal AoE physical damage to targets in front of mob. Additional Effect: Blindness.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,16 +11,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 1
-    local ftp     = 2.5
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded * math.random(2, 3))
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BLINDNESS, 50, 0, 45)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.5, 2.5, 2.5 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 50, 0, 45)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

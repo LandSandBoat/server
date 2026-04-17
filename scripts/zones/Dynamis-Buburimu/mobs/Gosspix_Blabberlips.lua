@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.GOSSPIX_BLABBERLIPS - 8] = ID.mob.GOSSPIX_BLABBERLIPS, -- Vanguard_Enchanter
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.SLINKIX_TRUFFLESNIFF - 1] = ID.mob.SLINKIX_TRUFFLESNIFF, -- Vanguard_Ambusher
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

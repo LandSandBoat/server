@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.BORDOX_KITTYBACK - 2] = ID.mob.BORDOX_KITTYBACK, -- Vanguard_Welldigger
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -28,8 +28,9 @@
 auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Need PV to support short-circuiting so we can nest null checks and move the PStorage/PItem checks here
-    return PacketValidator()
-        .range("Price", Price, 0, 99999999); // Bazaar max sell price is 99,999,999 gil
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .range("Price", this->Price, 0, 99999999); // Bazaar max sell price is 99,999,999 gil
 }
 
 void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* PChar) const
@@ -40,7 +41,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         return;
     }
 
-    CItem* PItem = PStorage->GetItem(ItemIndex);
+    CItem* PItem = PStorage->GetItem(this->ItemIndex);
     if (PItem == nullptr)
     {
         return;
@@ -48,20 +49,20 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
 
     if (PItem->getReserve() > 0)
     {
-        ShowError("Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] ", PChar->getName(), PItem->getID(), ItemIndex);
+        ShowError("Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] ", PChar->getName(), PItem->getID(), this->ItemIndex);
         return;
     }
 
     if (!PItem->hasFlag(ItemFlag::Exclusive) && (!PItem->isSubType(ITEM_LOCKED) || PItem->getCharPrice() != 0))
     {
-        db::preparedStmt("UPDATE char_inventory SET bazaar = ? WHERE charid = ? AND location = 0 AND slot = ?", Price, PChar->id, ItemIndex);
+        db::preparedStmt("UPDATE char_inventory SET bazaar = ? WHERE charid = ? AND location = 0 AND slot = ?", this->Price, PChar->id, this->ItemIndex);
 
-        PItem->setCharPrice(Price);
-        PItem->setSubType((Price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));
+        PItem->setCharPrice(this->Price);
+        PItem->setSubType((this->Price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, ItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, this->ItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
-        DebugBazaarsFmt("Bazaar Interaction [Price Set] - Character: {}, Item: {}, Price: {}", PChar->name, PItem->getName(), Price);
+        DebugBazaarsFmt("Bazaar Interaction [Price Set] - Character: {}, Item: {}, Price: {}", PChar->name, PItem->getName(), this->Price);
     }
 }

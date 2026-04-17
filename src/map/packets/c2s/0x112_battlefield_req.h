@@ -33,6 +33,6 @@ enum class GP_CLI_COMMAND_BATTLEFIELD_REQ_KIND : uint8_t
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0112
 // This packet is sent by the client when requesting extra data about certain battlefield content.
 GP_CLI_PACKET(GP_CLI_COMMAND_BATTLEFIELD_REQ,
-              uint8_t Kind;      // The packet kind.
-              uint8_t padding00; // Padding; unused.
+              uint8_t Kind;         // The packet kind.
+              uint8_t padding00[3]; // Padding; unused.
 );

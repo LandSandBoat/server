@@ -1,29 +1,49 @@
 ---@class utils
 utils = utils or {}
 
--- A mechanic that will occasionaly reduce shadows consumed by 1 when hit by an AOE skill.
+-- A mechanic that will occasionaly reduce shadows consumed when hit by an AOE skill.
 ---@nodiscard
 ---@param actor CBaseEntity
----@param shadowsToRemove integer
+---@param attemptedRemovals integer
 ---@return integer
-function utils.attemptShadowMitigation(actor, shadowsToRemove)
-    -- TODO: Currently unknown what conditions/skills/stats might affect proc rate. Ninjutsu, AGI, EVA skills might come to mind.
-    -- TODO: Does this work with Blink or only Copy Images?
-    -- TODO: Do mobs utilize this mechanic for their shadows?
-    -- Note: This seems to work with NIN subjob as well.
-
-    local procChance = 60
-
-    if
-        (actor:getMainJob() == xi.job.NIN or actor:getSubJob() == xi.job.NIN) and
-        math.random(1, 100) <= procChance
-    then
-        shadowsToRemove = math.max(1, shadowsToRemove - 1)
+function utils.attemptShadowMitigation(actor, attemptedRemovals)
+    if attemptedRemovals <= 0 then
+        return 0
     end
 
-    return shadowsToRemove
+    -- TODO: Does this mechanic work on players who are not NIN main or sub? If so remove NIN requirement.
+    -- See Yagyu Darkblade: https://www.bg-wiki.com/ffxi/Yagyu_Darkblade
+    local isNIN       = actor:getMainJob() == xi.job.NIN or actor:getSubJob() == xi.job.NIN
+    local hasUtsusemi = actor:getMod(xi.mod.UTSUSEMI) > 0
+
+    if
+        not isNIN or
+        not hasUtsusemi -- Only works with Utsusemi
+    then
+        return 0
+    end
+
+    -- TODO: Currently unknown exactly what stats affect procChance and by how much. SE mentions Ninjutsu Skill affects this to some degree.
+    -- Note: 50% was calculated from data with a relatively low Ninjutsu skill (Between 50-110~ skill range vs Lv. 75+ Targets) so this will likely lean on the conservative side (Weighted against players).
+    local procChance = 50
+
+    local mitigated  = 0
+
+    -- Through research, a skill's shadowBehavior acts as a counter for how many shadow mitigation attempts are made(attemptedRemovals).
+    -- Example: An AoE skill that takes 4 shadows will attempt the mitgation step below 4 times. A shadow will only be mitigated if it passes the proc chance check.
+    for i = 1, attemptedRemovals do
+        if math.random(1, 100) <= procChance then
+            mitigated = mitigated + 1
+        end
+    end
+
+    local maxMitigatable = attemptedRemovals - 1
+
+    return math.min(mitigated, maxMitigatable)
 end
 
+-- TODO: Marked for retirement. See: utils.shadowAbsorb() below.
+--       Some abilities and skills still use this but will need to be slightly reworked to use utils.shadowAbsorb().
 -- Calculate shadow consumption/damage absorbtion.
 ---@param actor CBaseEntity
 ---@param damage integer
@@ -102,6 +122,53 @@ function utils.takeShadows(actor, damage, shadowsToRemove)
     end
 
     return damage, shadowsUsed
+end
+
+-- Calculate shadow consumption
+---@param target CBaseEntity
+---@param shadowsToRemove number
+---@return boolean, number
+function utils.shadowAbsorb(target, shadowsToRemove)
+    local shadowType    = xi.mod.UTSUSEMI
+    local targetShadows = target:getMod(xi.mod.UTSUSEMI)
+
+    if targetShadows == 0 then
+        if
+            target:getMod(xi.mod.BLINK) == 0 or
+            math.random(1, 100) > 80
+        then
+            return false, 0
+        end
+
+        shadowType    = xi.mod.BLINK
+        targetShadows = target:getMod(xi.mod.BLINK)
+    end
+
+    local actualConsumed   = math.min(targetShadows, shadowsToRemove)
+    local hadEnoughShadows = targetShadows >= shadowsToRemove
+
+    targetShadows = targetShadows - actualConsumed
+
+    if shadowType == xi.mod.UTSUSEMI then
+        local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+
+        if effect then
+            local icons = { xi.effect.COPY_IMAGE, xi.effect.COPY_IMAGE_2, xi.effect.COPY_IMAGE_3 }
+
+            if icons[targetShadows] then
+                effect:setIcon(icons[targetShadows])
+            end
+        end
+    end
+
+    target:setMod(shadowType, targetShadows)
+
+    if targetShadows == 0 then
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
+    end
+
+    return hadEnoughShadows, actualConsumed
 end
 
 -- Calculates Phalanx damage reduction.

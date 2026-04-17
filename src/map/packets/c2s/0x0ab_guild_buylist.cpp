@@ -26,7 +26,8 @@
 
 auto GP_CLI_COMMAND_GUILD_BUYLIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustNotEqual(PChar->PGuildShop, nullptr, "Character does not have a guild shop");
 }
 

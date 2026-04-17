@@ -24,6 +24,10 @@ entity.phList =
     [ID.mob.KOO_SAXU_THE_EVERFAST - 1] = ID.mob.KOO_SAXU_THE_EVERFAST, -- Vanguard_Priest
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

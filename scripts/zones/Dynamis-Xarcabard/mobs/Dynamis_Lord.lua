@@ -11,6 +11,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
     xi.mix.jobSpecial.config(mob, {
         between = 60,
         specials =

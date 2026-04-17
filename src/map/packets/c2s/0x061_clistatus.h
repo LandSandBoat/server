@@ -26,6 +26,7 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0061
 // This packet is sent by the client when requesting the current clients local player information.
 GP_CLI_PACKET(GP_CLI_COMMAND_CLISTATUS,
-              uint8_t unknown00; // PS2: (New; did not exist.)
-              uint8_t padding00; // PS2: (New; did not exist.)
+              uint8_t  unknown00; // PS2: (New; did not exist.)
+              uint8_t  padding00; // PS2: (New; did not exist.)
+              uint16_t padding01; // PS2: (New; did not exist.)
 );

@@ -1,10 +1,8 @@
 -----------------------------------
---  Haymaker
---  Description: Punches the daylights out of all targets in front. Additional effect: Amnesia
---  Type: Physical
---  Utsusemi/Blink absorb: Unknown
---  Range: Front cone
---  Notes: Only used by Gurfurlur the Menacing.
+-- Haymaker
+-- Family: Troll
+-- Description: Punches the daylights out of all targets in front. Additional Effect: Amnesia
+-- Notes: Used by Gurfurlur the Menacing.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,16 +12,24 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.HTH, info.hitslanded)
+    local params = {}
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.AMNESIA, 1, 0, 60)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HTH
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.HTH)
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 60) -- TODO: Capture effect power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

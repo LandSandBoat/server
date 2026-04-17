@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.PROWLOX_BARRELBELLY - 1] = ID.mob.PROWLOX_BARRELBELLY, -- Vanguard_Ambusher     7.509    2.500   118.109
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

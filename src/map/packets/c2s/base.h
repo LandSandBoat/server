@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "enums/packet_c2s.h"
 #include "validation.h"
 
 // https://github.com/atom0s/XiPackets/blob/main/world/Header.md
@@ -32,18 +33,36 @@ struct GP_CLI_HEADER
     uint16_t sync;
 };
 
-#define GP_CLI_PACKET(PacketName, ...)                                                                        \
-    struct MapSession;                                                                                        \
-    class CCharEntity;                                                                                        \
-    struct PacketName                                                                                         \
-    {                                                                                                         \
-        GP_CLI_HEADER header;                                                                                 \
-        __VA_ARGS__                                                                                           \
-                                                                                                              \
-        auto        validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult; \
-        void        process(MapSession* PSession, CCharEntity* PChar) const;                                  \
-        inline auto getName() const -> std::string_view                                                       \
-        {                                                                                                     \
-            return #PacketName;                                                                               \
-        }                                                                                                     \
+#define GP_CLI_PACKET(PacketName, ...)                                                                 \
+    struct MapSession;                                                                                 \
+    class CCharEntity;                                                                                 \
+    struct PacketName                                                                                  \
+    {                                                                                                  \
+        GP_CLI_HEADER header;                                                                          \
+        __VA_ARGS__                                                                                    \
+                                                                                                       \
+        static constexpr std::string_view name     = #PacketName;                                      \
+        static constexpr PacketC2S        packetId = PacketC2S::PacketName;                            \
+                                                                                                       \
+        auto validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult; \
+        void process(MapSession* PSession, CCharEntity* PChar) const;                                  \
+    }
+
+#define GP_CLI_PACKET_VLA(PacketName, VLAField, ...)                                                   \
+    struct MapSession;                                                                                 \
+    class CCharEntity;                                                                                 \
+    struct PacketName                                                                                  \
+    {                                                                                                  \
+        GP_CLI_HEADER header;                                                                          \
+        __VA_ARGS__                                                                                    \
+                                                                                                       \
+        static constexpr std::string_view name     = #PacketName;                                      \
+        static constexpr PacketC2S        packetId = PacketC2S::PacketName;                            \
+        static constexpr size_t           getMinSize()                                                 \
+        {                                                                                              \
+            return offsetof(PacketName, VLAField);                                                     \
+        }                                                                                              \
+                                                                                                       \
+        auto validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult; \
+        void process(MapSession* PSession, CCharEntity* PChar) const;                                  \
     }

@@ -38,4 +38,5 @@ GP_CLI_PACKET(GP_CLI_COMMAND_POS,
               uint8_t  unused : 5;     // PS2: dummy
               uint16_t facetarget;     // PS2: facetarget
               uint32_t TimeNow;        // PS2: TimeNow
+              uint32_t padding00;      // PS2: (padding)
 );

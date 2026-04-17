@@ -25,8 +25,8 @@
 
 auto GP_CLI_COMMAND_INSPECT_MESSAGE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // No parameters to validate for this packet.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_INSPECT_MESSAGE::process(MapSession* PSession, CCharEntity* PChar) const
@@ -36,7 +36,7 @@ void GP_CLI_COMMAND_INSPECT_MESSAGE::process(MapSession* PSession, CCharEntity* 
     // NOTE: We are NOT escaping this because the exact message needs to be stored to
     //     : be correctly displayed in the bazaar. We're storing through a prepared statement so
     //     : this is safe from injection.
-    const auto message = asStringFromUntrustedSource(sInspectMessage, sizeof(sInspectMessage) - 3);
+    const auto message = asStringFromUntrustedSource(this->sInspectMessage, sizeof(this->sInspectMessage) - 3);
 
     if (db::preparedStmt("UPDATE char_stats SET bazaar_message = ? WHERE charid = ? LIMIT 1", message, PChar->id))
     {

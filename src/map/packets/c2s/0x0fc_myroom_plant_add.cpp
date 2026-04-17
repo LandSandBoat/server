@@ -41,17 +41,18 @@ const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
 
 auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustNotEqual(MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
-        .mustNotEqual(MyroomAddItemNo, 0, "MyroomAddItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", MyroomPlantCategory, validPlantCategories)
-        .oneOf("MyroomAddCategory", MyroomAddCategory, validPlantCategories);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
+        .mustNotEqual(this->MyroomAddItemNo, 0, "MyroomAddItemNo must not be 0")
+        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories)
+        .oneOf("MyroomAddCategory", this->MyroomAddCategory, validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PPotItemContainer = PChar->getStorage(MyroomPlantCategory);
-    auto*           PPotItem          = static_cast<CItemFlowerpot*>(PPotItemContainer->GetItem(MyroomPlantItemIndex));
+    CItemContainer* PPotItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    auto*           PPotItem          = static_cast<CItemFlowerpot*>(PPotItemContainer->GetItem(this->MyroomPlantItemIndex));
     if (PPotItem == nullptr)
     {
         return;
@@ -66,8 +67,8 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    CItemContainer* PItemContainer = PChar->getStorage(MyroomAddCategory);
-    const CItem*    PItem          = PItemContainer->GetItem(MyroomAddItemIndex);
+    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomAddCategory);
+    const CItem*    PItem          = PItemContainer->GetItem(this->MyroomAddItemIndex);
     if (PItem == nullptr || PItem->getQuantity() < 1)
     {
         return;
@@ -75,29 +76,29 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
 
     bool updatedPot = false;
 
-    if (CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)
+    if (CItemFlowerpot::getPlantFromSeed(this->MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)
     {
         // Planting a seed in the flowerpot
-        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(this->MyroomAddItemNo, MsgStd::MooglePlantsSeeds);
         PPotItem->cleanPot();
-        PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(MyroomAddItemNo));
+        PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(this->MyroomAddItemNo));
         PPotItem->setPlantTimestamp(earth_time::vanadiel_timestamp());
         PPotItem->setStrength(xirand::GetRandomNumber(33));
         gardenutils::GrowToNextStage(PPotItem);
         updatedPot = true;
     }
-    else if (MyroomAddItemNo >= FIRE_CRYSTAL && MyroomAddItemNo <= DARK_CLUSTER)
+    else if (this->MyroomAddItemNo >= FIRE_CRYSTAL && this->MyroomAddItemNo <= DARK_CLUSTER)
     {
         // Feeding the plant a crystal
-        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(this->MyroomAddItemNo, MsgStd::MoogleUsesItemOnPLant);
         if (PPotItem->getStage() == FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL)
         {
-            PPotItem->setFirstCrystalFeed(CItemFlowerpot::getElementFromItem(MyroomAddItemNo));
+            PPotItem->setFirstCrystalFeed(CItemFlowerpot::getElementFromItem(this->MyroomAddItemNo));
             updatedPot = true;
         }
         else if (PPotItem->getStage() == FLOWERPOT_STAGE_SECOND_SPROUTS_CRYSTAL)
         {
-            PPotItem->setSecondCrystalFeed(CItemFlowerpot::getElementFromItem(MyroomAddItemNo));
+            PPotItem->setSecondCrystalFeed(CItemFlowerpot::getElementFromItem(this->MyroomAddItemNo));
             updatedPot = true;
         }
         if (updatedPot)
@@ -115,11 +116,11 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
                          PPotItem->getLocationID(),
                          PPotItem->getSlotID());
 
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(MyroomPlantCategory), MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 
-        charutils::UpdateItem(PChar, MyroomAddCategory, MyroomAddItemIndex, -1);
+        charutils::UpdateItem(PChar, this->MyroomAddCategory, this->MyroomAddItemIndex, -1);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

@@ -1,5 +1,6 @@
 -----------------------------------
 -- Null Field
+-- Family: Humanoid (August)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,8 +12,8 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getMainLvl() * 4.3
-    params.fTP            = { 1, 1, 1 }
+    params.baseDamage     = mob:getMainLvl()
+    params.fTP            = { 4.3, 4.3, 4.3 }
     params.element        = xi.element.FIRE
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.FIRE
@@ -22,10 +23,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
-    end
 
-    if info.damage > 0 then
-        mob:addTP(134)
+        -- mob:addTP(134) -- TODO: Is TP return a set amount or does August's delay influence this?
     end
 
     return info.damage

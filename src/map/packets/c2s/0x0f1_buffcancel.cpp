@@ -27,11 +27,12 @@
 auto GP_CLI_COMMAND_BUFFCANCEL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Build a list of known cancellable buffs
-    return PacketValidator()
-        .range("BuffNo", BuffNo, 0, MAX_EFFECTID);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .range("BuffNo", this->BuffNo, 0, MAX_EFFECTID);
 }
 
 void GP_CLI_COMMAND_BUFFCANCEL::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->StatusEffectContainer->DelStatusEffectsByIcon(BuffNo);
+    PChar->StatusEffectContainer->DelStatusEffectsByIcon(this->BuffNo);
 }

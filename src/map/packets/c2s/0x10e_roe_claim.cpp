@@ -27,13 +27,14 @@
 
 auto GP_CLI_COMMAND_ROE_CLAIM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustEqual(settings::get<bool>("main.ENABLE_ROE"), true, "RoE is disabled")
-        .range("ObjectiveId", ObjectiveId, 0, 4096);
+        .range("ObjectiveId", this->ObjectiveId, 0, 4096);
 }
 
 void GP_CLI_COMMAND_ROE_CLAIM::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    roeutils::onRecordClaim(PChar, ObjectiveId);
+    roeutils::onRecordClaim(PChar, this->ObjectiveId);
     PChar->pushPacket<GP_SERV_COMMAND_CURRENCIES_1>(PChar);
 }

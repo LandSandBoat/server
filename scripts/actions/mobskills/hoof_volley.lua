@@ -1,11 +1,7 @@
 -----------------------------------
---  Hoof Volley
---  Family: Hippogryph
---  Description: Deals critical damage to a single target. Resets hate and causes knockback.
---  Type: Physical
---  Utsusemi/Blink absorb: One shadow
---  Range: Melee
---  Notes: Easily stunnable
+-- Hoof Volley
+-- Family: Hippogryph
+-- Description: Deals critical damage to a single target. Additional Effect: Hate Reset, Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,19 +11,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 4
-    local params = { canCrit = true }
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT, 0, 0, 0, params)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    local params = {}
 
-    if mob:getObjType() == xi.objType.MOB then
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 4.0, 4.0, 4.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture hate reset type (Enmity wipe vs enmity turned off)
+        -- See Antica skill "Sand Trap" for reference
         mob:resetEnmity(target)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

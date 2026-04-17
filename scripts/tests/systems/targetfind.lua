@@ -44,7 +44,7 @@ describe('TargetFind', function()
         local m = stub('xi.mobskills.mobPhysicalMove',
             {
                 damage     = 100,
-                hitslanded = 3,
+                hitsLanded = 3,
                 isCritical = false,
             })
         -- All of them should go to Fafnir
@@ -86,7 +86,7 @@ describe('TargetFind', function()
         local m = stub('xi.mobskills.mobPhysicalMove',
             {
                 damage     = 100,
-                hitslanded = 3,
+                hitsLanded = 3,
                 isCritical = false,
             })
 

@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.DRAKEFEAST_WUBMFUB - 2] = ID.mob.DRAKEFEAST_WUBMFUB, -- Vanguard_Impaler
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

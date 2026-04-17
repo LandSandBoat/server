@@ -53,10 +53,11 @@ const auto isRentARoom = [](const CCharEntity* PChar)
 
 auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
-        .oneOf<GP_CLI_COMMAND_MYROOM_IS_KIND>(Kind)
-        .oneOf<GP_CLI_COMMAND_MYROOM_IS_PARAM2>(Param2);
+        .oneOf<GP_CLI_COMMAND_MYROOM_IS_KIND>(this->Kind)
+        .oneOf<GP_CLI_COMMAND_MYROOM_IS_PARAM2>(this->Param2);
 }
 
 void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar) const
@@ -68,7 +69,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
         ShowWarning(fmt::format("Player {} modifying Rent-a-Room state.", PChar->getName()));
     }
 
-    switch (static_cast<GP_CLI_COMMAND_MYROOM_IS_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_MYROOM_IS_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_MYROOM_IS_KIND::Open:
             // Not implemented
@@ -80,7 +81,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
             break;
         case GP_CLI_COMMAND_MYROOM_IS_KIND::Remodel:
         {
-            auto newStyle = Param2;
+            auto newStyle = this->Param2;
 
             // Retail forces you to nation default style on invalid Param2.
             auto default2fStyle = GP_CLI_COMMAND_MYROOM_IS_PARAM2::SandorianStyle;
@@ -94,7 +95,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
                 ShowWarning(fmt::format("Player {} remodeling MH2F without it unlocked.", PChar->getName()));
             }
 
-            if (Param2 == static_cast<uint16_t>(GP_CLI_COMMAND_MYROOM_IS_PARAM2::MogPatio) && !charutils::hasKeyItem(PChar, KeyItem::MOG_PATIO_DESIGN_DOCUMENT))
+            if (this->Param2 == static_cast<uint16_t>(GP_CLI_COMMAND_MYROOM_IS_PARAM2::MogPatio) && !charutils::hasKeyItem(PChar, KeyItem::MOG_PATIO_DESIGN_DOCUMENT))
             {
                 ShowWarning(fmt::format("Player {} remodeling MH2F to Patio without owning the KI to unlock it.", PChar->getName()));
                 newStyle = static_cast<uint16_t>(default2fStyle);
@@ -118,7 +119,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::SuccessfulRemodel);
 
             // If the model changes AND you're on MH2F; force a rezone so the model change can take effect.
-            if (Param2 != oldType && PChar->profile.mhflag & 0x0040)
+            if (this->Param2 != oldType && PChar->profile.mhflag & 0x0040)
             {
                 const auto zoneid = PChar->getZone();
 

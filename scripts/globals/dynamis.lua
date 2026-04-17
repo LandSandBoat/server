@@ -1121,3 +1121,10 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
         player:setLocalVar('hundredItemBought', 0)
     end
 end
+
+xi.dynamis.mobInfo = function(mob)
+    -- No gil, no mug, enhanced damage 1.5x
+    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+    mob:setMobMod(xi.mobMod.MUG_GIL, -1)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end

@@ -25,64 +25,44 @@
 #include "entities/charentity.h"
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
-#include "trade_container.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
 
-auto PacketValidator::isNotResting(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::blockedBy(const magic_enum::containers::bitset<BlockedState> states) -> PacketValidator&
 {
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_HEALING) ||
-        PChar->animation == ANIMATION_HEALING)
+    if (!result_.valid())
     {
-        result_.addError("Character is resting.");
+        return *this;
     }
+
+    // Checks do short-circuit, keep more expensive ones at the tail end
+    // clang-format off
+    CHECK_BLOCKED(BlockedState::Jailed,         jailutils::InPrison(PChar_))
+    CHECK_BLOCKED(BlockedState::Dead,           PChar_->isDead())
+    CHECK_BLOCKED(BlockedState::Crafting,       PChar_->isCrafting())
+    CHECK_BLOCKED(BlockedState::Fishing,        PChar_->isFishing())
+    CHECK_BLOCKED(BlockedState::Sitting,        PChar_->animation == ANIMATION_SIT || (PChar_->animation >= ANIMATION_SITCHAIR_0 && PChar_->animation <= ANIMATION_SITCHAIR_10))
+    CHECK_BLOCKED(BlockedState::Mounted,        PChar_->isMounted())
+    CHECK_BLOCKED(BlockedState::InEvent,        PChar_->isInEvent())
+    CHECK_BLOCKED(BlockedState::Engaged,        PChar_->PAI->IsEngaged())
+    CHECK_BLOCKED(BlockedState::AbnormalStatus, PChar_->status != STATUS_TYPE::NORMAL)
+    CHECK_BLOCKED(BlockedState::Monstrosity,    PChar_->m_PMonstrosity != nullptr)
+    CHECK_BLOCKED(BlockedState::Healing,        PChar_->StatusEffectContainer->HasStatusEffect(EFFECT_HEALING) || PChar_->animation == ANIMATION_HEALING)
+    CHECK_BLOCKED(BlockedState::Charmed,        PChar_->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }))
+    CHECK_BLOCKED(BlockedState::PreventAction,  PChar_->StatusEffectContainer->HasPreventActionEffect())
+    // clang-format on
 
     return *this;
 }
 
-auto PacketValidator::isNotCrafting(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::isInEvent(Maybe<uint16_t> eventId) -> PacketValidator&
 {
-    if (PChar->isCrafting())
+    if (!result_.valid())
     {
-        result_.addError("Character is crafting.");
+        return *this;
     }
 
-    return *this;
-}
-
-auto PacketValidator::isNormalStatus(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->status != STATUS_TYPE::NORMAL)
-    {
-        result_.addError("Character has abnormal status.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isNotPreventedAction(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->StatusEffectContainer->HasPreventActionEffect())
-    {
-        result_.addError("Character has prevent action effect.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isNotMonstrosity(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->m_PMonstrosity)
-    {
-        result_.addError("Character is a Monstrosity.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isInEvent(const CCharEntity* PChar, Maybe<uint16_t> eventId) -> PacketValidator&
-{
-    if (!PChar->isInEvent())
+    if (!PChar_->isInEvent())
     {
         result_.addError("Not in an event.");
     }
@@ -90,9 +70,9 @@ auto PacketValidator::isInEvent(const CCharEntity* PChar, Maybe<uint16_t> eventI
     {
         if (eventId.has_value())
         {
-            if (PChar->currentEvent->eventId != eventId.value())
+            if (PChar_->currentEvent->eventId != eventId.value())
             {
-                result_.addError(fmt::format("Event ID mismatch {} != {}.", PChar->currentEvent->eventId, eventId.value()));
+                result_.addError(std::format("Event ID mismatch {} != {}.", PChar_->currentEvent->eventId, eventId.value()));
             }
         }
     }
@@ -100,17 +80,22 @@ auto PacketValidator::isInEvent(const CCharEntity* PChar, Maybe<uint16_t> eventI
     return *this;
 }
 
-auto PacketValidator::hasLinkshellRank(const CCharEntity* PChar, const uint8_t slot, const LSTYPE rank) -> PacketValidator&
+auto PacketValidator::hasLinkshellRank(const uint8_t slot, const LSTYPE rank) -> PacketValidator&
 {
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
     CItemLinkshell* PItemLinkshell = nullptr;
 
     switch (slot)
     {
         case 1:
-            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
+            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar_->getEquip(SLOT_LINK1));
             break;
         case 2:
-            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK2));
+            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar_->getEquip(SLOT_LINK2));
             break;
         default:
             result_.addError("Invalid linkshell slot.");
@@ -153,23 +138,33 @@ auto PacketValidator::hasLinkshellRank(const CCharEntity* PChar, const uint8_t s
     return *this;
 }
 
-auto PacketValidator::hasZoneMiscFlag(const CCharEntity* PChar, const ZONEMISC flag) -> PacketValidator&
+auto PacketValidator::hasZoneMiscFlag(const ZONEMISC flag) -> PacketValidator&
 {
-    if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(flag))
+    if (!result_.valid())
     {
-        result_.addError(std::format("Zone {} does not allow misc flag {}.", PChar->loc.zone->getName(), static_cast<uint16_t>(flag)));
+        return *this;
+    }
+
+    if (PChar_->m_GMlevel == 0 && !PChar_->loc.zone->CanUseMisc(flag))
+    {
+        result_.addError(std::format("Zone {} does not allow misc flag {}.", PChar_->loc.zone->getName(), static_cast<uint16_t>(flag)));
     }
 
     return *this;
 }
 
-auto PacketValidator::isPartyLeader(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::isPartyLeader() -> PacketValidator&
 {
-    if (!PChar->PParty)
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
+    if (!PChar_->PParty)
     {
         result_.addError("Not in a party.");
     }
-    else if (PChar->PParty->GetLeader() != PChar)
+    else if (PChar_->PParty->GetLeader() != PChar_)
     {
         result_.addError("Not the party leader.");
     }
@@ -177,21 +172,26 @@ auto PacketValidator::isPartyLeader(const CCharEntity* PChar) -> PacketValidator
     return *this;
 }
 
-auto PacketValidator::isAllianceLeader(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::isAllianceLeader() -> PacketValidator&
 {
-    if (!PChar->PParty)
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
+    if (!PChar_->PParty)
     {
         result_.addError("Not in a party.");
     }
-    else if (!PChar->PParty->m_PAlliance)
+    else if (!PChar_->PParty->m_PAlliance)
     {
         result_.addError("Not in an alliance.");
     }
-    else if (PChar->PParty->m_PAlliance->getMainParty() == nullptr)
+    else if (PChar_->PParty->m_PAlliance->getMainParty() == nullptr)
     {
         result_.addError("No alliance main party.");
     }
-    else if (PChar->PParty->m_PAlliance->getMainParty()->GetLeader() != PChar)
+    else if (PChar_->PParty->m_PAlliance->getMainParty()->GetLeader() != PChar_)
     {
         result_.addError("Not the alliance leader.");
     }
@@ -199,50 +199,14 @@ auto PacketValidator::isAllianceLeader(const CCharEntity* PChar) -> PacketValida
     return *this;
 }
 
-auto PacketValidator::isNotFishing(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::isEngaged() -> PacketValidator&
 {
-    if (PChar->isFishing())
+    if (!result_.valid())
     {
-        result_.addError("Character is fishing.");
+        return *this;
     }
 
-    return *this;
-}
-
-auto PacketValidator::isNotSitting(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->animation == ANIMATION_SIT ||
-        (PChar->animation >= ANIMATION_SITCHAIR_0 && PChar->animation <= ANIMATION_SITCHAIR_10))
-    {
-        result_.addError("Character is sitting.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isNotCharmed(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }))
-    {
-        result_.addError("Character is charmed.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isNotMounted(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->isMounted())
-    {
-        result_.addError("Character is mounted.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isEngaged(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (!PChar->PAI->IsEngaged())
+    if (!PChar_->PAI->IsEngaged())
     {
         result_.addError("Character is not engaged.");
     }
@@ -250,39 +214,14 @@ auto PacketValidator::isEngaged(const CCharEntity* PChar) -> PacketValidator&
     return *this;
 }
 
-auto PacketValidator::isNotEngaged(const CCharEntity* PChar) -> PacketValidator&
+auto PacketValidator::isInMogHouse() -> PacketValidator&
 {
-    if (PChar->PAI->IsEngaged())
+    if (!result_.valid())
     {
-        result_.addError("Character is engaged.");
+        return *this;
     }
 
-    return *this;
-}
-
-auto PacketValidator::isNotInEvent(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (PChar->isInEvent())
-    {
-        result_.addError("Character is in an event.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isNotJailed(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (jailutils::InPrison(PChar))
-    {
-        result_.addError("Character is jailed.");
-    }
-
-    return *this;
-}
-
-auto PacketValidator::isInMogHouse(const CCharEntity* PChar) -> PacketValidator&
-{
-    if (!PChar->inMogHouse())
+    if (!PChar_->inMogHouse())
     {
         result_.addError("Character is not in Mog House.");
     }
@@ -290,11 +229,31 @@ auto PacketValidator::isInMogHouse(const CCharEntity* PChar) -> PacketValidator&
     return *this;
 }
 
-auto PacketValidator::hasKeyItem(const CCharEntity* PChar, const KeyItem keyItemId) -> PacketValidator&
+auto PacketValidator::hasKeyItem(const KeyItem keyItemId) -> PacketValidator&
 {
-    if (!charutils::hasKeyItem(PChar, keyItemId))
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
+    if (!charutils::hasKeyItem(PChar_, keyItemId))
     {
         result_.addError(std::format("Missing Key Item {}.", static_cast<uint16_t>(keyItemId)));
+    }
+
+    return *this;
+}
+
+auto PacketValidator::requiresPriorPacket(PacketC2S expectedPacketId) -> PacketValidator&
+{
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
+    if (PChar_->m_LastPacketType != static_cast<uint16>(expectedPacketId))
+    {
+        result_.addError(std::format("Expected prior packet {:#05x}, got {:#05x}.", static_cast<uint16>(expectedPacketId), PChar_->m_LastPacketType));
     }
 
     return *this;

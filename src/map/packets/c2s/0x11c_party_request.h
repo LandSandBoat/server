@@ -36,4 +36,5 @@ GP_CLI_PACKET(GP_CLI_COMMAND_PARTY_REQUEST,
               uint16_t ActIndex;  // The target index of the player whos party the client is requesting to join.
               uint8_t  Kind;      // The packet kind.
               uint8_t  padding00; // Padding; unused.
+              uint32_t padding01; // Padding; unused.
 );

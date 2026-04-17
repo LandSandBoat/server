@@ -29,8 +29,9 @@
 auto GP_CLI_COMMAND_SET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // TODO: Short-circuit the null check so we can check the permission level here
-    auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(writeLevel)
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .oneOf<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(this->writeLevel)
                   .mustNotEqual(PChar->PLinkshell1, nullptr, "Character does not have Linkshell 1");
 
     return pv;
@@ -62,23 +63,23 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
     auto* PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
     {
-        if (unknown02)
+        if (this->unknown02)
         {
             // This flag is set when changing the linkshell message access level.
             if (PItemLinkshell->GetLSType() == LSTYPE_LINKSHELL) // Only Linkshell owner can change the access level
             {
-                PChar->PLinkshell1->setPostRights(static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(writeLevel));
+                PChar->PLinkshell1->setPostRights(static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(this->writeLevel));
                 return;
             }
 
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoAccess);
         }
-        else if (unknown03)
+        else if (this->unknown03)
         {
             // This flag is set when changing the linkshell message.
             if (canEditLsMes(PItemLinkshell))
             {
-                const auto lsMessage = asStringFromUntrustedSource(sMessage, sizeof(sMessage));
+                const auto lsMessage = asStringFromUntrustedSource(this->sMessage, sizeof(this->sMessage));
                 PChar->PLinkshell1->setMessage(lsMessage, PChar->getName());
                 return;
             }

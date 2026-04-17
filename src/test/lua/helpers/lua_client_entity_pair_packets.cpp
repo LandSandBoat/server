@@ -30,7 +30,7 @@
 #include "lua/lua_simulation.h"
 #include "lua/sol_bindings.h"
 #include "map/map_engine.h"
-#include "map/packet_system.h"
+#include "map/map_networking.h"
 #include "map/packets/c2s/0x00a_login.h"
 #include "map/packets/s2c/0x028_battle2.h"
 #include "packets/c2s/0x011_zone_transition.h"
@@ -48,7 +48,6 @@ auto CLuaClientEntityPairPackets::createPacket(PacketC2S packetType) -> std::uni
 {
     auto packet = std::make_unique<CBasicPacket>();
     packet->setType(static_cast<uint16_t>(packetType));
-    packet->setSize(PacketSize[static_cast<uint16_t>(packetType)]);
     packet->setSequence(sequenceNum_++);
 
     return packet;
@@ -58,7 +57,7 @@ void CLuaClientEntityPairPackets::sendBasicPacket(CBasicPacket& packet) const
 {
     const auto testChar = parent_->testChar();
     DebugTestFmt("C2S 0x{:03X} {}", packet.getType(), magic_enum::enum_name(static_cast<PacketC2S>(packet.getType())));
-    PacketParser[packet.getType()](testChar->session(), testChar->entity(), packet);
+    parent_->engine()->networking().packetSystem().dispatch(packet.getType(), testChar->session(), testChar->entity(), packet);
 }
 
 /************************************************************************
@@ -120,13 +119,13 @@ void CLuaClientEntityPairPackets::sendZonePackets()
     parent_->setEntity(testChar->entity());
 
     // Send LOGIN packet to begin zone-in sequence
-    const auto loginPacket = createPacket(PacketC2S::GP_CLI_COMMAND_LOGIN);
+    const auto loginPacket = createPacket<GP_CLI_COMMAND_LOGIN>();
     auto*      login       = loginPacket->as<GP_CLI_COMMAND_LOGIN>();
     login->UniqueNo        = testChar->charId();
     sendBasicPacket(*loginPacket);
 
     // Send ZONE_TRANSITION packet to complete zone-in sequence
-    const auto transitionPacket = createPacket(PacketC2S::GP_CLI_COMMAND_ZONE_TRANSITION);
+    const auto transitionPacket = createPacket<GP_CLI_COMMAND_ZONE_TRANSITION>();
     auto*      transition       = transitionPacket->as<GP_CLI_COMMAND_ZONE_TRANSITION>();
     transition->unknown00       = 2;
     transition->unknown01       = 0;

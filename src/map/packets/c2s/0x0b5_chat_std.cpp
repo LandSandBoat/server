@@ -104,8 +104,8 @@ const auto auditLinkshell = [](Scheduler& scheduler, CCharEntity* PChar, CLinksh
 
 auto GP_CLI_COMMAND_CHAT_STD::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_CHAT_STD_KIND>(Kind);
+    return PacketValidator(PChar)
+        .oneOf<GP_CLI_COMMAND_CHAT_STD_KIND>(this->Kind);
 }
 
 void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) const
@@ -113,8 +113,8 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     // Extremely important to figure out the message length here.
     // Depending on alignment, the message may not be NULL-terminated.
     // Start with reported size and skip the first 6 bytes (4x header + 1x kind + 1x unknown).
-    const auto messageLength              = std::min<std::size_t>((header.size * 4) - 0x6, sizeof(Str));
-    const auto rawMessage                 = asStringFromUntrustedSource(Str, messageLength);
+    const auto messageLength              = std::min<std::size_t>((header.size * 4) - 0x6, sizeof(this->Str));
+    const auto rawMessage                 = asStringFromUntrustedSource(this->Str, messageLength);
     const auto firstChar                  = rawMessage[0];
     const auto rawMessageWithoutFirstChar = rawMessage.substr(1);
 
@@ -146,7 +146,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     // If you're jailed, you can only use /say
     if (jailutils::InPrison(PChar))
     {
-        if (Kind == static_cast<uint8_t>(GP_CLI_COMMAND_CHAT_STD_KIND::Say))
+        if (this->Kind == static_cast<uint8_t>(GP_CLI_COMMAND_CHAT_STD_KIND::Say))
         {
             // TODO: Don't pass around Scheduler& through PSession
             auditChat(*PSession->scheduler, PChar, "SAY", rawMessage);
@@ -161,7 +161,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     }
 
     // Now handle every other chat type
-    switch (static_cast<GP_CLI_COMMAND_CHAT_STD_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_CHAT_STD_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_CHAT_STD_KIND::Say:
         {

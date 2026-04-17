@@ -32,15 +32,15 @@
 
 auto GP_CLI_COMMAND_EVENTENDXZY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustEqual(Mode, 1, "Mode not 1")
-        .isInEvent(PChar, EventPara);
+    return PacketValidator(PChar)
+        .mustEqual(this->Mode, 1, "Mode not 1")
+        .isInEvent(this->EventPara);
 }
 
 void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto result  = EndPara;
-    const auto eventId = EventPara;
+    const auto result  = this->EndPara;
+    const auto eventId = this->EventPara;
 
     bool updatePosition = false;
 
@@ -58,11 +58,11 @@ void GP_CLI_COMMAND_EVENTENDXZY::process(MapSession* PSession, CCharEntity* PCha
     if (updatePosition)
     {
         newPos = {
-            x,
-            y,
-            z,
+            this->x,
+            this->y,
+            this->z,
             0,
-            static_cast<uint8_t>(dir),
+            static_cast<uint8_t>(this->dir),
         };
 
         PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, newPos, POSMODE::EVENT);

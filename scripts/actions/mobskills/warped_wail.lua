@@ -28,8 +28,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         -- TODO Capture power/duration of HP/MP Down.
         -- From found battle footage, it looks to be around 10-15%. (Hard to tell exact since player was gear swapping).
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.MAX_HP_DOWN, 50, 0, 300)
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.MAX_MP_DOWN, 50, 0, 300)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 50, 0, 300)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_MP_DOWN, 50, 0, 300)
     end
 
     return info.damage

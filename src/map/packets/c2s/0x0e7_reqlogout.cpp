@@ -27,12 +27,10 @@
 
 auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isNotCrafting(PChar)
-        .isNormalStatus(PChar)
-        .isNotPreventedAction(PChar)
-        .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(Mode)
-        .oneOf<GP_CLI_COMMAND_REQLOGOUT_KIND>(Kind);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
+        .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
+        .oneOf<GP_CLI_COMMAND_REQLOGOUT_KIND>(this->Kind);
 }
 
 void GP_CLI_COMMAND_REQLOGOUT::process(MapSession* PSession, CCharEntity* PChar) const
@@ -62,10 +60,10 @@ void GP_CLI_COMMAND_REQLOGOUT::process(MapSession* PSession, CCharEntity* PChar)
         }
     };
 
-    switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_REQLOGOUT_KIND::Logout:
-            switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_MODE>(Mode))
+            switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode))
             {
                 case GP_CLI_COMMAND_REQLOGOUT_MODE::Toggle:
                     if (existingEffect)
@@ -89,7 +87,7 @@ void GP_CLI_COMMAND_REQLOGOUT::process(MapSession* PSession, CCharEntity* PChar)
             }
             break;
         case GP_CLI_COMMAND_REQLOGOUT_KIND::Shutdown:
-            switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_MODE>(Mode))
+            switch (static_cast<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode))
             {
                 case GP_CLI_COMMAND_REQLOGOUT_MODE::Toggle:
                     if (existingEffect)

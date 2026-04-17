@@ -26,5 +26,6 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x0085
 // This packet is sent by the client when confirming the sale of an item to a shop.
 GP_CLI_PACKET(GP_CLI_COMMAND_SHOP_SELL_SET,
-              uint16_t SellFlag; // PS2: SellFlag
+              uint16_t SellFlag;  // PS2: SellFlag
+              uint16_t padding00; // PS2: (New; did not exist.)
 );

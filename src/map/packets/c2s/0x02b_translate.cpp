@@ -27,7 +27,8 @@
 
 auto GP_CLI_COMMAND_TRANSLATE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(this->FromIndex)
         .oneOf<GP_CLI_COMMAND_TRANSLATE_INDEX>(this->ToIndex);
 }

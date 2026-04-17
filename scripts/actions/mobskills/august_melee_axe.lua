@@ -1,5 +1,7 @@
 -----------------------------------
---  August Melee - Axe
+-- August Melee - Axe
+-- Family: Humanoid (August)
+-- Description: August's axe autoattack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -9,19 +11,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 1
-    local accmod  = 4
-    local dmgmod  = 2
-    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg     = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    skill:setMsg(xi.msg.basic.HIT_DMG)
+    local params = {}
 
-    if info.hitslanded == 0 then
-        skill:setMsg(xi.msg.basic.HIT_MISS)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.primaryMessage = xi.msg.basic.HIT_DMG
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

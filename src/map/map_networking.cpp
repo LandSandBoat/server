@@ -37,9 +37,8 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "map_engine.h"
+#include "map_session.h"
 #include "map_statistics.h"
-#include "packet_guard.h"
-#include "packet_system.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "transport.h"
@@ -423,67 +422,34 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
         SmallPD_Size = (ref<uint8>(SmallPD_ptr, 1) & 0x0FE);
         SmallPD_Type = (ref<uint16>(SmallPD_ptr, 0) & 0x1FF);
 
-        if (PacketSize[SmallPD_Type] == SmallPD_Size || PacketSize[SmallPD_Type] == 0) // Tests incoming packets for the correct size prior to processing
+        if ((ref<uint16>(SmallPD_ptr, 2) <= PSession->client_packet_id) || (ref<uint16>(SmallPD_ptr, 2) > SmallPD_Code))
         {
-            // Google Translate:
-            // if the code of the current package is less than or equal to the last received
-            // or more global then ignore the package
+            continue;
+        }
 
-            if ((ref<uint16>(SmallPD_ptr, 2) <= PSession->client_packet_id) || (ref<uint16>(SmallPD_ptr, 2) > SmallPD_Code))
-            {
-                continue;
-            }
+        if (SmallPD_Type != static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_POS))
+        {
+            DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
+                         SmallPD_Type,
+                         ref<uint16>(SmallPD_ptr, 2),
+                         ref<uint16>(buff, 2),
+                         SmallPD_Size,
+                         PChar->getName());
+        }
 
-            if (SmallPD_Type != 0x15)
+        if (PChar->loc.zone == nullptr && SmallPD_Type != static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_LOGIN))
+        {
+            // Packets aren't unexpected from the old key under BLOWFISH_PENDING_ZONE
+            if (PSession->blowfish.status != BLOWFISH_PENDING_ZONE)
             {
-                DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
-                             SmallPD_Type,
-                             ref<uint16>(SmallPD_ptr, 2),
-                             ref<uint16>(buff, 2),
-                             SmallPD_Size,
-                             PChar->getName());
-            }
-
-            if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
-            {
-                ShowWarning("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->getName(), SmallPD_Type);
-                continue; // skip this packet
-            }
-
-            if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
-            {
-                ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
-                            PChar->getName(),
-                            SmallPD_Type);
-                continue; // skip this packet
-            }
-
-            if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketsArrivingInCorrectOrder(PChar, SmallPD_Type))
-            {
-                ShowWarning("[PacketGuard] Caught out-of-order packet: Player: %s - Packet: %03hX", PChar->getName(), SmallPD_Type);
-                continue; // skip this packet
-            }
-
-            if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
-            {
-                // Packets aren't unexpected from the old key under BLOWFISH_PENDING_ZONE
-                if (PSession->blowfish.status != BLOWFISH_PENDING_ZONE)
-                {
-                    ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
-                }
-            }
-            else
-            {
-                // TODO: We should be passing a non-modifyable span of the packet data into the parser
-                //     : instead of creating a new packet here.
-                auto basicPacket = CBasicPacket::createFromBuffer(reinterpret_cast<uint8*>(SmallPD_ptr));
-                ShowTraceFmt("map::parse: Char: {} ({}): {}", PChar->getName(), PChar->id, hex16ToString(basicPacket->getType()));
-                PacketParser[SmallPD_Type](PSession, PChar, *basicPacket);
+                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
             }
         }
         else
         {
-            ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
+            auto basicPacket = CBasicPacket::createFromBuffer(SmallPD_ptr);
+            ShowTraceFmt("map::parse: Char: {} ({}): {}", PChar->getName(), PChar->id, hex16ToString(basicPacket->getType()));
+            packetSystem_.dispatch(SmallPD_Type, PSession, PChar, *basicPacket);
         }
     }
 
@@ -512,7 +478,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
     {
         // If the client and server have become out of sync, then caching takes place. However, caching
         // zone packets will result in the client never properly connecting. Ignore those specifically.
-        if (SmallPD_Type == 0x0A)
+        if (SmallPD_Type == static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_LOGIN))
         {
             return 0;
         }
@@ -553,10 +519,6 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
     bool   incrementKeyAfterEncrypt = false;
 
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsToSendPerTick, static_cast<uint32>(PChar->getPacketCount()));
-
-#ifdef LOG_OUTGOING_PACKETS
-    PacketGuard::PrintPacketList(PChar);
-#endif
 
     do
     {
@@ -812,4 +774,9 @@ auto MapNetworking::scheduler() -> Scheduler&
 auto MapNetworking::socket() -> MapSocket&
 {
     return *mapSocket_;
+}
+
+auto MapNetworking::packetSystem() -> PacketSystem&
+{
+    return packetSystem_;
 }

@@ -25,7 +25,7 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x011D
 // This packet is sent by the client when using the jump command.
 GP_CLI_PACKET(GP_CLI_COMMAND_JUMP,
-              uint32_t UniqueNo;
-              uint16_t ActIndex;
-              uint16_t padding00[2]; // Unused
+              uint32_t UniqueNo;  // PS2: UniqueNo
+              uint16_t ActIndex;  // PS2: ActIndex
+              uint16_t padding00; // Padding; unused.
 );

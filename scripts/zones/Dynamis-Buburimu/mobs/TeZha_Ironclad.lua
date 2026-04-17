@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.TEZHA_IRONCLAD - 8] = ID.mob.TEZHA_IRONCLAD, -- Vanguard_Defender
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

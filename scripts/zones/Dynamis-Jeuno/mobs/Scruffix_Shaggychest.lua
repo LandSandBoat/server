@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.SCRUFFIX_SHAGGYCHEST - 4] = ID.mob.SCRUFFIX_SHAGGYCHEST, -- Vanguard_Armorer      -0.428   2.599   117.675
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

@@ -21,72 +21,68 @@
 
 #pragma once
 
+#include "common/cbasetypes.h"
+#include "enums/blocked_state.h"
+#include "enums/packet_c2s.h"
 #include "magic_enum/magic_enum.hpp"
 #include "zone.h"
+#include <fmt/ranges.h>
 #include <format>
 #include <set>
 
 enum LSTYPE : std::uint8_t;
 enum class KeyItem : uint16_t;
 class CCharEntity;
+
 class PacketValidationResult
 {
 public:
     PacketValidationResult()
-    : m_Valid(true)
+    : valid_(true)
     {
     }
 
-    auto addError(const std::string& error) -> PacketValidationResult&
+    auto addError(std::string error) -> PacketValidationResult&
     {
-        m_Errors.push_back(error);
-        setValid(false);
+        errors_.push_back(std::move(error));
+        valid_ = false;
 
         return *this;
     }
 
     auto valid() const -> bool
     {
-        return m_Valid;
-    }
-
-    void setValid(const bool valid)
-    {
-        m_Valid = valid;
+        return valid_;
     }
 
     auto errorString() const -> std::string
     {
-        std::string errorMessages;
-        for (const auto& error : m_Errors)
-        {
-            if (!errorMessages.empty())
-            {
-                errorMessages += ", ";
-            }
-
-            errorMessages += error;
-        }
-
-        return errorMessages;
+        return fmt::format("{}", fmt::join(errors_, ", "));
     }
 
 private:
-    bool                     m_Valid;
-    std::vector<std::string> m_Errors;
+    bool                     valid_;
+    std::vector<std::string> errors_;
 };
 
 class PacketValidator
 {
 public:
-    PacketValidator() = default;
+    explicit PacketValidator(const CCharEntity* PChar)
+    : PChar_(PChar)
+    {
+    }
 
     // Left value must equal right value
     template <typename T1, typename T2>
     auto mustEqual(T1 left, T2 right, const std::string& errMsg) -> PacketValidator&
     {
-        const auto rightVal = static_cast<T1>(right);
-        if (left != rightVal)
+        if (!result_.valid())
+        {
+            return *this;
+        }
+
+        if (left != static_cast<T1>(right))
         {
             result_.addError(errMsg);
         }
@@ -98,8 +94,12 @@ public:
     template <typename T1, typename T2>
     auto mustNotEqual(T1 left, T2 right, const std::string& errMsg) -> PacketValidator&
     {
-        const auto rightVal = static_cast<T1>(right);
-        if (left == rightVal)
+        if (!result_.valid())
+        {
+            return *this;
+        }
+
+        if (left == static_cast<T1>(right))
         {
             result_.addError(errMsg);
         }
@@ -111,6 +111,10 @@ public:
     template <typename T, typename MinT, typename MaxT>
     auto range(const std::string& fieldName, T value, MinT min, MaxT max) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
         const auto val    = value;
         const auto minVal = static_cast<T>(min);
         const auto maxVal = static_cast<T>(max);
@@ -131,6 +135,10 @@ public:
     template <typename T, typename DivT>
     auto multipleOf(const std::string& fieldName, T value, DivT divisor) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
         const auto divVal = static_cast<T>(divisor);
         if (value % divVal != 0)
         {
@@ -144,6 +152,11 @@ public:
     template <typename T>
     auto oneOf(const std::string& fieldName, T value, const std::set<T>& container) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
+
         if (!container.contains(value))
         {
             if constexpr (std::is_enum_v<T>)
@@ -164,6 +177,10 @@ public:
     template <typename E>
     auto oneOf(const std::underlying_type_t<E> value) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
         static_assert(std::is_enum_v<E>, "Template parameter E must be an enum");
 
         if (!magic_enum::enum_contains<E>(value))
@@ -180,6 +197,10 @@ public:
     template <typename E>
     auto oneOf(const E value) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
         static_assert(std::is_enum_v<E>, "Template parameter E must be an enum");
 
         if (!magic_enum::enum_contains<E>(value))
@@ -192,51 +213,36 @@ public:
         return *this;
     }
 
-    // Character must not be resting
-    auto isNotResting(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be crafting
-    auto isNotCrafting(const CCharEntity* PChar) -> PacketValidator&;
-    // Character current status must be NORMAL
-    auto isNormalStatus(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not have any status effect preventing action (Sleep, Stun, Terror etc..)
-    auto isNotPreventedAction(const CCharEntity* PChar) -> PacketValidator&;
-    // Character is not assuming a Monstrosity form
-    auto isNotMonstrosity(const CCharEntity* PChar) -> PacketValidator&;
+    // Reject if the player is in any of the specified states
+    auto blockedBy(magic_enum::containers::bitset<BlockedState> states) -> PacketValidator&;
     // Character must be in a valid event state, with optional eventId check.
-    auto isInEvent(const CCharEntity* PChar, Maybe<uint16_t> eventId = std::nullopt) -> PacketValidator&;
+    auto isInEvent(Maybe<uint16_t> eventId = std::nullopt) -> PacketValidator&;
     // Character must have necessary rank in the linkshell in the given slot
-    auto hasLinkshellRank(const CCharEntity* PChar, uint8_t slot, LSTYPE rank) -> PacketValidator&;
+    auto hasLinkshellRank(uint8_t slot, LSTYPE rank) -> PacketValidator&;
     // Character zone must allow specified flag. GMs can bypass this check.
-    auto hasZoneMiscFlag(const CCharEntity* PChar, ZONEMISC flag) -> PacketValidator&;
+    auto hasZoneMiscFlag(ZONEMISC flag) -> PacketValidator&;
     // Character must be the party leader
-    auto isPartyLeader(const CCharEntity* PChar) -> PacketValidator&;
+    auto isPartyLeader() -> PacketValidator&;
     // Character must be the alliance leader
-    auto isAllianceLeader(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be fishing
-    auto isNotFishing(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be sitting
-    auto isNotSitting(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be charmed
-    auto isNotCharmed(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be mounted
-    auto isNotMounted(const CCharEntity* PChar) -> PacketValidator&;
+    auto isAllianceLeader() -> PacketValidator&;
     // Character must be engaged in combat
-    auto isEngaged(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be engaged in combat
-    auto isNotEngaged(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be in an event
-    auto isNotInEvent(const CCharEntity* PChar) -> PacketValidator&;
-    // Character must not be jailed
-    auto isNotJailed(const CCharEntity* PChar) -> PacketValidator&;
+    auto isEngaged() -> PacketValidator&;
     // Character must be in Mog House
-    auto isInMogHouse(const CCharEntity* PChar) -> PacketValidator&;
+    auto isInMogHouse() -> PacketValidator&;
     // Character must have a specific key item
-    auto hasKeyItem(const CCharEntity* PChar, KeyItem keyItemId) -> PacketValidator&;
+    auto hasKeyItem(KeyItem keyItemId) -> PacketValidator&;
+    // The previous packet received from this character must match the expected packet ID
+    auto requiresPriorPacket(PacketC2S expectedPacketId) -> PacketValidator&;
 
     // Custom validation function
     template <typename Func>
     auto custom(Func customValidation) -> PacketValidator&
     {
+        if (!result_.valid())
+        {
+            return *this;
+        }
+
         customValidation(*this);
         return *this;
     }
@@ -252,5 +258,13 @@ public:
     }
 
 private:
+    const CCharEntity*     PChar_;
     PacketValidationResult result_;
 };
+
+#define CHECK_BLOCKED(flag, condition)                                                   \
+    if (states.test(flag) && (condition))                                                \
+    {                                                                                    \
+        result_.addError(std::format("Invalid state: {}", magic_enum::enum_name(flag))); \
+        return *this;                                                                    \
+    }

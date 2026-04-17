@@ -79,15 +79,15 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
 {
     const auto allowedContainers = validContainers(PChar);
 
-    auto pv = PacketValidator()
-                  .isNormalStatus(PChar)
-                  .range("Count", Count, 1, 16);
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus })
+                  .range("Count", this->Count, 1, 16);
 
-    if (Count <= 16)
+    if (this->Count <= 16)
     {
-        for (uint8 i = 0; i < Count; i++)
+        for (uint8 i = 0; i < this->Count; i++)
         {
-            const auto& equipment = Equipment[i];
+            const auto& equipment = this->Equipment[i];
             pv
                 .oneOf<SLOTTYPE>(equipment.EquipKind)
                 .oneOf("equipment.Category", static_cast<CONTAINER_ID>(equipment.Category), allowedContainers);
@@ -99,9 +99,9 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_EQUIPSET_SET::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    for (uint8 i = 0; i < Count; i++)
+    for (uint8 i = 0; i < this->Count; i++)
     {
-        charutils::EquipItem(PChar, Equipment[i].ItemIndex, Equipment[i].EquipKind, Equipment[i].Category);
+        charutils::EquipItem(PChar, this->Equipment[i].ItemIndex, this->Equipment[i].EquipKind, this->Equipment[i].Category);
     }
 
     PChar->RequestPersist(CHAR_PERSIST::EQUIP);

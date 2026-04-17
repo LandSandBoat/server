@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.TERROR, 1, 0, 30) -- TODO: Capture duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 30) -- TODO: Capture duration
     end
 
     -- TODO: Temporary immunity to a single weapon damage type

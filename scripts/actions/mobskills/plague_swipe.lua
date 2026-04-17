@@ -1,16 +1,12 @@
 -----------------------------------
---  Plague Swipe
---
---  Description: Delivers a threefold attack in an cone effect behind user. Additional effect: Bio + Plague
---  Type: Physical
---  2-3 Shadows
---  Range: Backward Arc
+-- Plague Swipe
+-- Family: Khimaira
+-- Description: Delivers a threefold attack in an cone effect behind user. Additional Effect: Bio, Plague
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- TODO: Replace this when there's a better method than isFacingTheSameDirection() aka isBehind
     if not target:isBehind(mob) then
         return 1
     end
@@ -19,18 +15,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 3
-    local accmod = 1
-    local ftp    = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local params = {}
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3 -- TODO: Capture numHits
+    params.fTP            = { 1.0, 1.0, 1.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_4
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIO, 7, 3, 60)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PLAGUE, 5, 3, 60)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    return dmg
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        -- TODO: Capture effect powers/durations
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 7, 3, 60, 0, 15) -- TODO: Capture subPower(ATTP modifier, using Bio II value for now)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

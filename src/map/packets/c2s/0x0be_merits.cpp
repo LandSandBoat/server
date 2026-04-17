@@ -36,22 +36,23 @@
 
 auto GP_CLI_COMMAND_MERITS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_MERITS_KIND>(Kind)
-        .oneOf<GP_CLI_COMMAND_MERITS_PARAM1>(Param1);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<GP_CLI_COMMAND_MERITS_KIND>(this->Kind)
+        .oneOf<GP_CLI_COMMAND_MERITS_PARAM1>(this->Param1);
 }
 
 void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<GP_CLI_COMMAND_MERITS_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_MERITS_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_MERITS_KIND::ChangeMode:
         {
             // Note: While the client restricts the ability to change mode during besieged and when level restricted
             //     : Retail server will still honor an injected request and change the mode.
-            if (db::preparedStmt("UPDATE char_exp SET mode = ? WHERE charid = ? LIMIT 1", Param1, PChar->id))
+            if (db::preparedStmt("UPDATE char_exp SET mode = ? WHERE charid = ? LIMIT 1", this->Param1, PChar->id))
             {
-                PChar->MeritMode = Param1;
+                PChar->MeritMode = this->Param1;
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
@@ -63,19 +64,19 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
         {
             if (PChar->inMogHouse()) // Note: This has been verified as allowed in a shared mog house.
             {
-                if (const auto merit = static_cast<MERIT_TYPE>(Param2 << 1); PChar->PMeritPoints->IsMeritExist(merit))
+                if (const auto merit = static_cast<MERIT_TYPE>(this->Param2 << 1); PChar->PMeritPoints->IsMeritExist(merit))
                 {
                     const Merit_t* PMerit = PChar->PMeritPoints->GetMerit(merit);
 
-                    switch (static_cast<GP_CLI_COMMAND_MERITS_PARAM1>(Param1))
+                    switch (static_cast<GP_CLI_COMMAND_MERITS_PARAM1>(this->Param1))
                     {
                         case GP_CLI_COMMAND_MERITS_PARAM1::Lower:
                             PChar->PMeritPoints->LowerMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MeritDecrease);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, MsgBasic::MeritDecrease);
                             break;
                         case GP_CLI_COMMAND_MERITS_PARAM1::Raise:
                             PChar->PMeritPoints->RaiseMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MsgBasic::MeritIncrease);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, MsgBasic::MeritIncrease);
                             break;
                     }
 

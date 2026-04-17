@@ -28,7 +28,8 @@
 
 auto GP_CLI_COMMAND_ROE_START::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustEqual(settings::get<bool>("main.ENABLE_ROE"), true, "RoE is disabled")
         .range("ObjectiveId", this->ObjectiveId, 0, 4096)
         .mustEqual(roeutils::RoeSystem.TimedRecords.test(this->ObjectiveId), false, "Cannot start a timed record")

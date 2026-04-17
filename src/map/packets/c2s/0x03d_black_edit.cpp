@@ -38,13 +38,14 @@ const auto sendFailPacket = [](CCharEntity* PChar)
 
 auto GP_CLI_COMMAND_BLACK_EDIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_BLACK_EDIT_MODE>(Mode);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
+        .oneOf<GP_CLI_COMMAND_BLACK_EDIT_MODE>(this->Mode);
 }
 
 void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto name = db::escapeString(asStringFromUntrustedSource(Data.Name, 15));
+    const auto name = db::escapeString(asStringFromUntrustedSource(this->Data.Name, 15));
 
     const auto [charid, accid] = charutils::getCharIdAndAccountIdFromName(name);
     if (!charid)
@@ -53,7 +54,7 @@ void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_BLACK_EDIT_MODE>(Mode))
+    switch (static_cast<GP_CLI_COMMAND_BLACK_EDIT_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_BLACK_EDIT_MODE::Add:
         {

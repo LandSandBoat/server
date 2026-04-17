@@ -29,150 +29,148 @@
 
 auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .oneOf<GP_CLI_COMMAND_PBX_COMMAND>(Command)
-                  .isNotCrafting(PChar)
-                  .isNotFishing(PChar)
-                  .mustEqual(jailutils::InPrison(PChar), false, "Cannot use delivery box while jailed")
-                  .mustEqual(Result, 0, "Result not 0")
-                  .mustEqual(ResParam1, 0, "ResParam1 not 0")
-                  .mustEqual(ResParam2, 0, "ResParam2 not 0")
-                  .mustEqual(ResParam3, 0, "ResParam3 not 0");
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent, BlockedState::Crafting, BlockedState::Fishing, BlockedState::Jailed })
+                  .oneOf<GP_CLI_COMMAND_PBX_COMMAND>(this->Command)
+                  .mustEqual(this->Result, 0, "Result not 0")
+                  .mustEqual(this->ResParam1, 0, "ResParam1 not 0")
+                  .mustEqual(this->ResParam2, 0, "ResParam2 not 0")
+                  .mustEqual(this->ResParam3, 0, "ResParam3 not 0");
 
-    switch (static_cast<GP_CLI_COMMAND_PBX_COMMAND>(Command))
+    switch (static_cast<GP_CLI_COMMAND_PBX_COMMAND>(this->Command))
     {
         case GP_CLI_COMMAND_PBX_COMMAND::Work:
         {
             pv
-                .range("BoxNo", BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", PostWorkNo, -1, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
+                .range("PostWorkNo", this->PostWorkNo, -1, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Set:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .range("ItemStacks", ItemStacks, 0, 999999999);
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("ItemStacks", this->ItemStacks, 0, 999999999);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Send:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Cancel:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Check:
         {
             pv
-                .range("BoxNo", BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Recv:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, 1, "ItemWorkNo not 1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, 1, "ItemWorkNo not 1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Confirm:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Accept:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Reject:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Get:
         {
             pv
-                .range("BoxNo", BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Clear:
         {
             pv
-                .range("BoxNo", BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", PostWorkNo, 0, 8)
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
+                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Query:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::DeliOpen:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::PostOpen:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::PostClose:
         {
             pv
-                .mustEqual(BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
-                .mustEqual(PostWorkNo, -1, "PostWorkNo not -1")
-                .mustEqual(ItemWorkNo, -1, "ItemWorkNo not -1")
-                .mustEqual(ItemStacks, -1, "ItemStacks not -1");
+                .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::None, "BoxNo not None")
+                .mustEqual(this->PostWorkNo, -1, "PostWorkNo not -1")
+                .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
+                .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
         break;
     }
@@ -190,71 +188,71 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
         return;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_PBX_COMMAND>(Command))
+    switch (static_cast<GP_CLI_COMMAND_PBX_COMMAND>(this->Command))
     {
         case GP_CLI_COMMAND_PBX_COMMAND::Work:
         {
-            dboxutils::SendOldItems(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo));
+            dboxutils::SendOldItems(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo));
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Set:
         {
-            const auto receiverName = db::escapeString(asStringFromUntrustedSource(TargetName, 15));
+            const auto receiverName = db::escapeString(asStringFromUntrustedSource(this->TargetName, 15));
 
-            dboxutils::AddItemsToBeSent(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo, ItemWorkNo, ItemStacks, receiverName);
+            dboxutils::AddItemsToBeSent(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo, this->ItemWorkNo, this->ItemStacks, receiverName);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Send:
         {
-            dboxutils::SendConfirmation(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::SendConfirmation(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Cancel:
         {
-            dboxutils::CancelSendingItem(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::CancelSendingItem(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Check:
         {
-            dboxutils::SendClientNewItemCount(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::SendClientNewItemCount(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Recv:
         {
             // TODO: Don't pass around Scheduler& through PSession
-            dboxutils::SendNewItems(*PSession->scheduler, PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::SendNewItems(*PSession->scheduler, PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Confirm:
         {
-            dboxutils::RemoveDeliveredItemFromSendingBox(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::RemoveDeliveredItemFromSendingBox(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Accept:
         {
-            dboxutils::UpdateDeliveryCellBeforeRemoving(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::UpdateDeliveryCellBeforeRemoving(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Reject:
         {
-            dboxutils::ReturnToSender(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::ReturnToSender(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Get:
         {
-            dboxutils::TakeItemFromCell(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::TakeItemFromCell(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Clear:
         {
-            dboxutils::RemoveItemFromCell(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), PostWorkNo);
+            dboxutils::RemoveItemFromCell(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Query:
         {
-            const auto receiverName = db::escapeString(asStringFromUntrustedSource(TargetName, 15));
+            const auto receiverName = db::escapeString(asStringFromUntrustedSource(this->TargetName, 15));
 
-            dboxutils::ConfirmNameBeforeSending(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo), receiverName);
+            dboxutils::ConfirmNameBeforeSending(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), receiverName);
         }
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::DeliOpen:
@@ -269,7 +267,7 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::PostClose:
         {
-            dboxutils::CloseMailWindow(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(BoxNo));
+            dboxutils::CloseMailWindow(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo));
         }
         break;
     }

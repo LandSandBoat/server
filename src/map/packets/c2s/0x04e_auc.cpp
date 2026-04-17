@@ -27,20 +27,21 @@
 
 auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto pv = PacketValidator()
-                  .hasZoneMiscFlag(PChar, MISC_AH)
+    auto pv = PacketValidator(PChar)
+                  .blockedBy({ BlockedState::InEvent })
+                  .hasZoneMiscFlag(MISC_AH)
                   .mustEqual(jailutils::InPrison(PChar), false, "Character in jail")
-                  .oneOf<GP_CLI_COMMAND_AUC_COMMAND>(Command)
-                  .mustEqual(Result, 0, "Result not 0")
-                  .mustEqual(ResultStatus, 0, "Result status");
+                  .oneOf<GP_CLI_COMMAND_AUC_COMMAND>(this->Command)
+                  .mustEqual(this->Result, 0, "Result not 0")
+                  .mustEqual(this->ResultStatus, 0, "Result status");
 
-    switch (Command)
+    switch (this->Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
             pv
-                .range("Commission", Param.AskCommit.Commission, 1, 999999999)
-                .range("ItemStacks", Param.AskCommit.ItemStacks, 0, 1);
+                .range("Commission", this->Param.AskCommit.Commission, 1, 999999999)
+                .range("ItemStacks", this->Param.AskCommit.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Info:
@@ -50,33 +51,33 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::WorkCheck:
         {
-            pv.mustEqual(AucWorkIndex, -1, "AucWorkIndex not -1");
+            pv.mustEqual(this->AucWorkIndex, -1, "AucWorkIndex not -1");
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotIn:
         {
             pv
-                .range("AucWorkIndex", AucWorkIndex, 0, 6)
-                .range("LimitPrice", Param.LotIn.LimitPrice, 1, 999999999)
-                .range("ItemStacks", Param.LotIn.ItemStacks, 0, 1);
+                .range("AucWorkIndex", this->AucWorkIndex, 0, 6)
+                .range("LimitPrice", this->Param.LotIn.LimitPrice, 1, 999999999)
+                .range("ItemStacks", this->Param.LotIn.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Bid:
         {
             pv
-                .range("AucWorkIndex", AucWorkIndex, 0, 6)
-                .range("BidPrice", Param.Bid.BidPrice, 1, 999999999)
-                .range("ItemStacks", Param.Bid.ItemStacks, 0, 1);
+                .range("AucWorkIndex", this->AucWorkIndex, 0, 6)
+                .range("BidPrice", this->Param.Bid.BidPrice, 1, 999999999)
+                .range("ItemStacks", this->Param.Bid.ItemStacks, 0, 1);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCancel:
         {
-            pv.range("AucWorkIndex", AucWorkIndex, 0, 6);
+            pv.range("AucWorkIndex", this->AucWorkIndex, 0, 6);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCheck:
         {
-            pv.range("AucWorkIndex", AucWorkIndex, 0, 6);
+            pv.range("AucWorkIndex", this->AucWorkIndex, 0, 6);
         }
         break;
         default:
@@ -90,11 +91,11 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
 {
     const auto playerName = PChar->getName();
 
-    switch (Command)
+    switch (this->Command)
     {
         case GP_CLI_COMMAND_AUC_COMMAND::AskCommit:
         {
-            auctionutils::SellingItems(PChar, Param.AskCommit);
+            auctionutils::SellingItems(PChar, this->Param.AskCommit);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Info:
@@ -110,22 +111,22 @@ void GP_CLI_COMMAND_AUC::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotIn:
         {
-            auctionutils::ProofOfPurchase(PChar, Param.LotIn);
+            auctionutils::ProofOfPurchase(PChar, this->Param.LotIn);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::Bid:
         {
-            auctionutils::PurchasingItems(PChar, Param.Bid);
+            auctionutils::PurchasingItems(PChar, this->Param.Bid);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCancel:
         {
-            auctionutils::CancelSale(PChar, AucWorkIndex);
+            auctionutils::CancelSale(PChar, this->AucWorkIndex);
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCheck:
         {
-            auctionutils::UpdateSaleListByPlayer(PChar, AucWorkIndex);
+            auctionutils::UpdateSaleListByPlayer(PChar, this->AucWorkIndex);
         }
         break;
         default:

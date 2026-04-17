@@ -32,6 +32,7 @@
 #include "map_session_container.h"
 #include "map_socket.h"
 #include "map_statistics.h"
+#include "packet_system.h"
 
 class CBasicPacket;
 
@@ -93,6 +94,7 @@ public:
     auto sessions() -> MapSessionContainer&;
     auto scheduler() -> Scheduler&;
     auto socket() -> MapSocket&;
+    auto packetSystem() -> PacketSystem&;
 
 private:
     Scheduler&                 scheduler_;
@@ -108,4 +110,6 @@ private:
     NetworkBuffer PBuff;          // Global packet clipboard
     NetworkBuffer PBuffCopy;      // Copy of above, used to decrypt a second time if necessary.
     NetworkBuffer PScratchBuffer; // Temporary packet clipboard
+
+    PacketSystem packetSystem_;
 };

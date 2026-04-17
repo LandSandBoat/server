@@ -1,8 +1,7 @@
 -----------------------------------
 -- Choke Breath
 -- Family: Hippogryph
--- Description : Deals sonic damage to enemies within a fan-shaped area originating from caster. Additional effects: Paralysis, Silence.
--- Type: Physical
+-- Description : Deals sonic damage to enemies within a fan-shaped area originating from caster. Additional Effects: Paralysis, Silence.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,20 +11,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local chokeBreath = 100
-    local info =
-    {
-        damage = chokeBreath
-    }
+    local params = {}
 
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
+    params.baseDamage     = 100
+    params.numHits        = 1
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 25, 0, 30)
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SILENCE, 1, 0, 30)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-    return dmg
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 25, 0, 30)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 30)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

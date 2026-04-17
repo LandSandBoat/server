@@ -1,17 +1,13 @@
 -----------------------------------
 -- Bloody Claw
 -- Family: Gargouille
--- Description: Steals an enemy's HP. Additional effect: Reduces a random stat.
--- Type: Physical
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Melee
--- Notes: Despite the attack ignoring Utsusemi, it is physical, and therefore capable of missing entirely.
+-- Description: Steals an enemy's HP. Additional Effect: Reduces a random stat.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() ~= 4 then
+    if mob:getAnimationSub() ~= 4 then -- TODO: Standardize mob spawn anim sub
         return 1
     else
         return 0
@@ -19,19 +15,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local numhits = 3
-    local accmod = 1
-    local ftp    = 0.9
-    local typeEffect = 136 + math.random(0, 6) -- 136 is xi.effect.STR_DOWN add 0 to 6 for all 7 of the possible attribute reductions
+    local params = {}
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 3
+    params.fTP            = { 0.9, 0.9, 0.9 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 3, 120)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))
 
-    return dmg
+        -- Add 0 to 6 for all 7 of the possible attribute reductions
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN + math.random(0, 6), 20, 9, 120)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

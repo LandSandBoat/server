@@ -39,10 +39,10 @@ const auto cleanTradeTargets = [](CCharEntity* PChar, CCharEntity* PTarget)
 
 auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .oneOf<GP_CLI_COMMAND_TRADE_RES_KIND>(Kind)
-        .mustNotEqual(PChar->TradePending.targid, 0, "No pending trade target")
-        .isNotMonstrosity(PChar);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
+        .oneOf<GP_CLI_COMMAND_TRADE_RES_KIND>(this->Kind)
+        .mustNotEqual(PChar->TradePending.targid, 0, "No pending trade target");
 }
 
 void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar) const
@@ -57,7 +57,7 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
-    switch (static_cast<GP_CLI_COMMAND_TRADE_RES_KIND>(Kind))
+    switch (static_cast<GP_CLI_COMMAND_TRADE_RES_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_TRADE_RES_KIND::Start: // request accepted
         {
@@ -82,10 +82,10 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
             }
 
             PChar->UContainer->SetType(UCONTAINER_TRADE);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
 
             PTarget->UContainer->SetType(UCONTAINER_TRADE);
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
         }
         break;
         case GP_CLI_COMMAND_TRADE_RES_KIND::Cancell: // trade cancelled
@@ -104,7 +104,7 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
 
             cleanTradeTargets(PChar, PTarget);
             // TODO: Verify exact sequence of packets sent here.
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
         }
         break;
         case GP_CLI_COMMAND_TRADE_RES_KIND::Make: // trade accepted

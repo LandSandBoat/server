@@ -15,7 +15,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
-    if skill:getID() == xi.mobSkill.HYPNIC_LAMP then
+    if
+        target == mob:getTarget() and
+        skill:getID() == xi.mobSkill.HYPNIC_LAMP
+    then
         mob:useMobAbility(xi.mobSkill.DEATHGNASH)
     end
 end

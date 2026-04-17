@@ -27,7 +27,8 @@
 auto GP_CLI_COMMAND_GM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate for this packet.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_GM::process(MapSession* PSession, CCharEntity* PChar) const
@@ -37,8 +38,8 @@ void GP_CLI_COMMAND_GM::process(MapSession* PSession, CCharEntity* PChar) const
     // Extremely important to figure out the message length here.
     // Depending on alignment, the message may not be NULL-terminated.
     // Start with reported size and skip the first 4 bytes (header).
-    const auto messageLength = std::min<std::size_t>((header.size * 4) - 0x4, sizeof(Command));
-    const auto rawCommand    = asStringFromUntrustedSource(Command, messageLength);
+    const auto messageLength = std::min<std::size_t>((header.size * 4) - 0x4, sizeof(this->Command));
+    const auto rawCommand    = asStringFromUntrustedSource(this->Command, messageLength);
 
     luautils::OnPlayerVolunteer(PChar, rawCommand);
 }

@@ -46,7 +46,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 20, 0, 120)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 20, 0, 120)
     end
 
     return info.damage

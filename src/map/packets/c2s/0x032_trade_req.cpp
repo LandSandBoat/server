@@ -33,15 +33,15 @@
 
 auto GP_CLI_COMMAND_TRADE_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .mustNotEqual(PChar->id, UniqueNo, "Character trading with itself")
-        .isNotMonstrosity(PChar);
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
+        .mustNotEqual(PChar->id, this->UniqueNo, "Character trading with itself");
 }
 
 void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(ActIndex, TYPE_PC));
-    if (!PTarget || PTarget->id != UniqueNo)
+    auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(this->ActIndex, TYPE_PC));
+    if (!PTarget || PTarget->id != this->UniqueNo)
     {
         return;
     }
@@ -119,8 +119,8 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     }
 
     PChar->lastTradeInvite     = currentTime;
-    PChar->TradePending.id     = UniqueNo;
-    PChar->TradePending.targid = ActIndex;
+    PChar->TradePending.id     = this->UniqueNo;
+    PChar->TradePending.targid = this->ActIndex;
 
     PTarget->lastTradeInvite     = currentTime;
     PTarget->TradePending.id     = PChar->id;

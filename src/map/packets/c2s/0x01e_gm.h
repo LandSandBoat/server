@@ -27,6 +27,6 @@
 // This packet is sent by the client when using GM commands.
 // Note: The system to actually make use of this packet is no longer implemented in the retail client. However, the functions that send this packet still exist.
 // Note: /volunteer is what generates this packet.
-GP_CLI_PACKET(GP_CLI_COMMAND_GM,
-              uint8_t Command[115]; // PS2: Command
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_GM, Command,
+                  uint8_t Command[115]; // PS2: Command
 );

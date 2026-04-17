@@ -1,10 +1,8 @@
 -----------------------------------
---  Havoc Spiral
---  Description: Deals damage to players in an area of effect. Additional effect: Sleep
---  Type: Physical
---  2-3 Shadows
---  Range: Unknown
--- Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
+-- Havoc Spiral
+-- Family: Humanoid (Ark Angel MR)
+-- Description: Deals damage to players in an area of effect. Additional Effect: Sleep
+-- Notes: Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,18 +12,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- TODO: Can skillchain?  Unknown property.
+    local params = {}
 
-    local numhits = 1
-    local accmod = 1
-    local ftp    = 3
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, ftp, xi.mobskills.physicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
+    params.baseDamage     = mob:getWeaponDmg()
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2 -- TODO: Capture shadowBehavior
+    -- TODO: Can skillchain?  Unknown property
 
-    -- Witnessed 280 to a melee, 400 to a BRD, and 500 to a wyvern
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.random(30, 60))
-    return dmg
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.random(30, 60)) -- TODO: Capture effect power/duration
+    end
+
+    return info.damage
 end
 
 return mobskillObject

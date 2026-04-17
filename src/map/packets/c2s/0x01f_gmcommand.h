@@ -25,7 +25,7 @@
 
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x001F
 // This packet is sent by the client in response to a remote GM command execution request.
-GP_CLI_PACKET(GP_CLI_COMMAND_GMCOMMAND,
-              uint32_t GMUniqueNo;   // PS2: GMUniqueNo
-              uint8_t  Command[128]; // PS2: Command -- unknown max size
+GP_CLI_PACKET_VLA(GP_CLI_COMMAND_GMCOMMAND, Command,
+                  uint32_t GMUniqueNo;   // PS2: GMUniqueNo
+                  uint8_t  Command[128]; // PS2: Command -- unknown max size
 );

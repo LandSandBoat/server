@@ -31,28 +31,29 @@
 
 auto GP_CLI_COMMAND_GUILD_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .mustNotEqual(PChar->PGuildShop, nullptr, "Character does not have a guild shop")
-        .range("ItemNum", ItemNum, 1, 99)
-        .mustEqual(PropertyItemIndex, 0, "PropertyItemIndex not 0");
+        .range("ItemNum", this->ItemNum, 1, 99)
+        .mustEqual(this->PropertyItemIndex, 0, "PropertyItemIndex not 0");
 }
 
 void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    uint8 quantity = ItemNum;
+    uint8 quantity = this->ItemNum;
 
-    const CItem* PItem = itemutils::GetItemPointer(ItemNo);
+    const CItem* PItem = itemutils::GetItemPointer(this->ItemNo);
     if (!PItem)
     {
         ShowWarning("User '%s' attempting to buy an invalid item from guild vendor!", PChar->getName());
         return;
     }
 
-    const uint8 shopSlotId = PChar->PGuildShop->SearchItem(ItemNo);
+    const uint8 shopSlotId = PChar->PGuildShop->SearchItem(this->ItemNo);
 
     if (shopSlotId == ERROR_SLOTID)
     {
-        ShowWarning("User '%s' attempting to buy an item not in guild vendor: %u", PChar->getName(), ItemNo);
+        ShowWarning("User '%s' attempting to buy an item not in guild vendor: %u", PChar->getName(), this->ItemNo);
         return;
     }
 
@@ -74,12 +75,12 @@ void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar)
     {
         if (gil->getQuantity() > (item->getBasePrice() * quantity))
         {
-            if (charutils::AddItem(PChar, LOC_INVENTORY, ItemNo, quantity) != ERROR_SLOTID)
+            if (charutils::AddItem(PChar, LOC_INVENTORY, this->ItemNo, quantity) != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(item->getBasePrice() * quantity));
-                ShowInfo("GP_CLI_COMMAND_GUILD_BUY: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->getName(), quantity, ItemNo);
+                ShowInfo("GP_CLI_COMMAND_GUILD_BUY: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->getName(), quantity, this->ItemNo);
                 PChar->PGuildShop->GetItem(shopSlotId)->setQuantity(PChar->PGuildShop->GetItem(shopSlotId)->getQuantity() - quantity);
-                PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUY>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(ItemNo))->getQuantity(), ItemNo, quantity);
+                PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUY>(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(this->ItemNo))->getQuantity(), this->ItemNo, quantity);
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             }
         }

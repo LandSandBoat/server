@@ -34,6 +34,7 @@ for file in "${targets[@]}"; do
 
         cppcheck_output=$(cppcheck -v -j 4 --force --quiet --inconclusive --std=c++23 \
         --suppress=passedByValue:src/map/packet_system.cpp \
+        --suppress=templateRecursion:src/map/packet_system.cpp \
         --suppress=unmatchedSuppression \
         --suppress=missingIncludeSystem \
         --suppress=missingInclude \

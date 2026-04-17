@@ -17,16 +17,15 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    -- TODO: This is a physical skill. Will fix in mobPhysicalMove() PR
     params.baseDamage     = mob:getWeaponDmg()
-    params.fTP            = { 2.00, 2.00, 2.00 }
-    params.element        = xi.element.DARK
-    params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.DARK
-    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS -- TODO: Capture shadowBehavior
-    -- Note: Ignores PDIF
+    params.numHits        = 1
+    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipPDIF       = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))

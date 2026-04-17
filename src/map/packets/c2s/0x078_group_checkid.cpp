@@ -27,7 +27,8 @@
 auto GP_CLI_COMMAND_GROUP_CHECKID::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     // No parameter to validate.
-    return PacketValidator();
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
 }
 
 void GP_CLI_COMMAND_GROUP_CHECKID::process(MapSession* PSession, CCharEntity* PChar) const

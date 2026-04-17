@@ -23,6 +23,10 @@ entity.phList =
     [ID.mob.ULTRASONIC_ZEKNAJAK - 3] = ID.mob.ULTRASONIC_ZEKNAJAK, -- Vanguard_Bugler
 }
 
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

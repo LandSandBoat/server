@@ -58,8 +58,8 @@ const auto auditTrade = [](Scheduler& scheduler, CCharEntity* PChar, CBaseEntity
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    return PacketValidator()
-        .isNotMonstrosity(PChar)
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
         .range("ItemNum", this->ItemNum, 1, 9);
 }
 
