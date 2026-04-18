@@ -4917,7 +4917,8 @@ void HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttack
     {
         // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
         // JP is known to give 10 VE per point
-        uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
+        // Only give jpBonus if the defender is a player, as mobs don't have job points.
+        uint16 jpBonus = PDefender->objtype == TYPE_PC ? static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10 : 0;
         static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
     }
 }
