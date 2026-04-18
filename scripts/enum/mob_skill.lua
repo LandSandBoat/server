@@ -980,6 +980,10 @@ xi.mobSkill =
 
     LIGHT_BLADE_2                 = 3214,
 
+    SHIBARAKU_TRUST               = 3257, -- Gessho Trust
+    SHIKO_NO_MITATE_TRUST         = 3258, -- Gessho Trust
+    RINPYOTOSHA_TRUST             = 3260, -- Gessho Trust
+
     -- ELEMENTAL_SFORZO              = 3265,
 
     INFERNO_5                     = 3325, -- Unknown usage.
