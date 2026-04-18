@@ -26,7 +26,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MAIN_DMG_RATING, xi.trust.modGrowthValMax(mob, 35))
 
     mob:addListener('WEAPONSKILL_USE', 'GESSHO_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
-        if skill:getID() == SHIBARAKU_TRUST then -- Shibaraku
+        if skill:getID() == xi.mobSkill.SHIBARAKU_TRUST then -- Shibaraku
             -- You have left me no choice. Prepare yourself!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end
