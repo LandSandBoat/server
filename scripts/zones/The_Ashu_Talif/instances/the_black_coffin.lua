@@ -39,9 +39,11 @@ instanceObject.entryRequirements = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
+    instance:setProgress(0)
+    instance:setLocalVar('wave2Spawned', 0)
     SpawnMob(ID.mob.GESSHO, instance)
-    for i, mob in pairs(crewTable[1]) do
-        SpawnMob(mob, instance)
+    for _, mobId in pairs(crewTable[1]) do
+        SpawnMob(mobId, instance)
     end
 end
 
@@ -70,26 +72,72 @@ instanceObject.onInstanceFailure = function(instance)
 end
 
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
-    if progress == 5 then
-        for i, mob in pairs(crewTable[2]) do
-            SpawnMob(mob, instance)
-        end
-    elseif progress >= 10 and not instance:completed() then
-        local ally = GetMobByID(ID.mob.GESSHO, instance)
-        if ally and ally:isAlive() then
-            ally:setLocalVar('ready', 2)
+    -- 2nd Wave: Spawn all mobs and apply transition logic with a delay before mobs are targetable
+    if progress >= 5 and instance:getLocalVar('wave2Spawned') == 0 then
+        instance:setLocalVar('wave2Spawned', 1)
+
+        for _, mobId in pairs(crewTable[2]) do
+            SpawnMob(mobId, instance)
+
+            if mobId ~= ID.mob.ASHU_CAPTAIN_OFFSET then
+                local mob = GetMobByID(mobId, instance)
+                if mob then
+                    mob:setUntargetable(true)
+                    mob:hideName(true)
+                    mob:stun(5000)
+                    mob:timer(5000, function(m)
+                        m:setUntargetable(false)
+                        m:hideName(false)
+                    end)
+                end
+            end
         end
 
-        instance:complete()
+        -- Gessho automatically engages the 2nd wave if he is alive
+        local gessho = GetMobByID(ID.mob.GESSHO, instance)
+        if gessho and gessho:isAlive() then
+            gessho:timer(5000, function(gesshoMob)
+                gesshoMob:updateEnmity(GetMobByID(crewTable[2][2], instance))
+            end)
+        end
+
+        -- Captain jumps down after 10s (message + animation) then lands at 12s
+        local captain = GetMobByID(ID.mob.ASHU_CAPTAIN_OFFSET, instance)
+        if captain then
+            captain:timer(10000, function(m)
+                m:setLocalVar('jump', 1)
+                m:showText(m, ID.text.OVERPOWERED_CREW)
+                m:entityAnimationPacket(xi.animationString.JUMP_0)
+            end)
+
+            captain:timer(12000, function(m)
+                local pos = { x = 0, y = -22, z = 13, rot = 192 }
+                m:setLocalVar('jump', 2)
+                m:setPos(pos.x, pos.y, pos.z, pos.rot)
+                m:setSpawn(pos.x, pos.y, pos.z, pos.rot)
+                m:entityAnimationPacket(xi.animationString.JUMP_1)
+                m:showText(m, ID.text.TEST_YOUR_BLADES)
+                m:timer(2000, function(captainArg)
+                    captainArg:hideName(false)
+                    captainArg:setUntargetable(false)
+                    captainArg:setMobMod(xi.mobMod.NO_MOVE, 0)
+                end)
+            end)
+        end
     end
 end
 
 instanceObject.onInstanceComplete = function(instance)
     local players = instance:getChars()
 
-    DespawnMob(ID.mob.GESSHO, instance)
-    for i, mob in pairs(crewTable[2]) do
-        DespawnMob(mob, instance)
+    local gessho = GetMobByID(ID.mob.GESSHO, instance)
+    if gessho then
+        gessho:setBehavior(bit.band(gessho:getBehavior(), bit.bnot(xi.behavior.NO_DESPAWN)))
+        DespawnMob(ID.mob.GESSHO, instance)
+    end
+
+    for _, mobId in pairs(crewTable[2]) do
+        DespawnMob(mobId, instance)
     end
 
     for i, player in pairs(players) do

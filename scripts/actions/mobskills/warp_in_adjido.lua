@@ -1,6 +1,5 @@
 -----------------------------------
--- Warp
--- Ability used by Adjido Marujido to teleport
+-- Warp in (Adjido Marujido)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,6 +10,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.msg.basic.NONE)
+
     return 0
 end
 

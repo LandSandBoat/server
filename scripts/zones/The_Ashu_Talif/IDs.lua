@@ -50,7 +50,7 @@ zones[xi.zone.THE_ASHU_TALIF] =
     mob =
     {
         GESSHO              = GetFirstID('Gessho'),
-        ASHU_CREW_OFFSET    = GetFirstID('Ashu_Talif_Crew'),
+        ASHU_CREW_OFFSET    = GetFirstID('Ashu_Talif_Crew_mnk'),
         ASHU_CAPTAIN_OFFSET = GetFirstID('Ashu_Talif_Captain'),
         GOWAM               = GetFirstID('Gowam'),
         YAZQUHL             = GetFirstID('Yazquhl'),

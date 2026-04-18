@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: Physical or Ranged?
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.PIERCING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Capture effect power/duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 7, 3, 120)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 3, 3, 45)
     end
 
     return info.damage

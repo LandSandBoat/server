@@ -129,46 +129,75 @@ end
 ---@param shadowsToRemove number
 ---@return boolean, number
 function utils.shadowAbsorb(target, shadowsToRemove)
-    local shadowType    = xi.mod.UTSUSEMI
-    local targetShadows = target:getMod(xi.mod.UTSUSEMI)
+    local utsusemiMod = target:getMod(xi.mod.UTSUSEMI)
+    local blinkMod    = target:getMod(xi.mod.BLINK)
 
-    if targetShadows == 0 then
-        if
-            target:getMod(xi.mod.BLINK) == 0 or
-            math.random(1, 100) > 80
-        then
-            return false, 0
-        end
-
-        shadowType    = xi.mod.BLINK
-        targetShadows = target:getMod(xi.mod.BLINK)
+    -- Early return: Target has no shadows.
+    if
+        utsusemiMod == 0 and
+        blinkMod == 0
+    then
+        return false, 0
     end
 
-    local actualConsumed   = math.min(targetShadows, shadowsToRemove)
-    local hadEnoughShadows = targetShadows >= shadowsToRemove
+    local targetShadows   = 0
+    local shadowsConsumed = 0
+    local absorbHit       = false
 
-    targetShadows = targetShadows - actualConsumed
+    -- Utsusemi takes precedence over blink.
+    if utsusemiMod > 0 then
+        shadowsConsumed = utils.clamp(shadowsToRemove, 0, utsusemiMod) -- How many shadows were consumed (Used for SHADOW_ABSORB messaging later).
+        targetShadows   = utsusemiMod - shadowsConsumed                -- How many shadows left after the attack.
+        absorbHit       = utsusemiMod >= shadowsToRemove               -- Check to see if the target had enough shadows to block the attack.
 
-    if shadowType == xi.mod.UTSUSEMI then
         local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-
         if effect then
-            local icons = { xi.effect.COPY_IMAGE, xi.effect.COPY_IMAGE_2, xi.effect.COPY_IMAGE_3 }
-
-            if icons[targetShadows] then
-                effect:setIcon(icons[targetShadows])
+            if targetShadows == 0 then
+                target:delStatusEffect(xi.effect.COPY_IMAGE)
+            elseif targetShadows == 1 then
+                effect:setIcon(xi.effect.COPY_IMAGE)
+            elseif targetShadows == 2 then
+                effect:setIcon(xi.effect.COPY_IMAGE_2)
+            elseif targetShadows == 3 then
+                effect:setIcon(xi.effect.COPY_IMAGE_3)
+            else
+                effect:setIcon(xi.effect.COPY_IMAGE_4) -- 4 or more shadows active use the same "4+" icon.
             end
         end
+
+        target:setMod(xi.mod.UTSUSEMI, targetShadows)
+
+    -- Blink has a random chance of triggering when no utsusemi is present.
+    elseif blinkMod > 0 then
+        if math.random(1, 100) <= 20 then
+            absorbHit = false
+
+            return absorbHit, 0
+        end
+
+        shadowsConsumed = utils.clamp(shadowsToRemove, 0, blinkMod) -- How many shadows were consumed by the attack (Used for SHADOW_ABSORB messaging later)
+        targetShadows   = blinkMod - shadowsConsumed                -- How many shadows left over after the attack.
+        absorbHit       = blinkMod >= shadowsToRemove               -- Check to see if the target had enough shadows to fully block the attack.
+
+        if targetShadows == 0 then
+            target:delStatusEffect(xi.effect.BLINK)
+        end
+
+        target:setMod(xi.mod.BLINK, targetShadows)
+
+        -- Retail Testing Notes:
+        -- Tested with WHM spell Blink
+        -- 1 hit skills took 1 shadow.
+        -- TODO: When hit by a 2 hit skill, it was observed to consume 2 blink shadows, however the message returned was SKILL_MISS rather than SHADOW_ABSORB.
+        -- Did not block 3+ hit mob skills. (Player Weaponskills untested)
+        -- AOE skills delete Blink.
+
+        -- TODO: Test Zephyr Mantle proc rate.
+        -- TODO: Test player Weapon Skills on mob/players with Blink/Zephyr Mantle.
+        -- Note: JPWiki/FFXIPedia repeatedly mentions that Blink can block multi hit skills, but this was not observed in testing. Needs further testing.
     end
 
-    target:setMod(shadowType, targetShadows)
-
-    if targetShadows == 0 then
-        target:delStatusEffect(xi.effect.COPY_IMAGE)
-        target:delStatusEffect(xi.effect.BLINK)
-    end
-
-    return hadEnoughShadows, actualConsumed
+    return absorbHit, shadowsConsumed
 end
 
 -- Calculates Phalanx damage reduction.

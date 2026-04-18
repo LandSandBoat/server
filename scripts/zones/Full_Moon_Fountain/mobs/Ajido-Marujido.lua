@@ -69,19 +69,19 @@ entity.onMobInitialize = function(mob)
 
         mobArg:setMagicCastingEnabled(false)
         mobArg:setLocalVar('warpInProgress', 1)
-        mobArg:useMobAbility(xi.mobSkill.AJIDO_WARP_OUT, nil, 0)
+        mobArg:useMobAbility(xi.mobSkill.WARP_OUT_AJIDO, nil, 0)
     end)
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(mobArg, skillId, wasExecuted)
-        if skillId == xi.mobSkill.AJIDO_WARP_OUT then
+        if skillId == xi.mobSkill.WARP_OUT_AJIDO then
             local config         = teleportConfig[mobArg:getBattlefield():getArea()]
             local targetPosition = utils.randomEntry(config.positions)
 
             mobArg:setPos(targetPosition.x, targetPosition.y, targetPosition.z, mobArg:getRotPos())
             mobArg:queue(0, function(mobArgArg)
-                mobArgArg:useMobAbility(xi.mobSkill.AJIDO_WARP_IN, nil, 0)
+                mobArgArg:useMobAbility(xi.mobSkill.WARP_IN_AJIDO, nil, 0)
             end)
-        elseif skillId == xi.mobSkill.AJIDO_WARP_IN then
+        elseif skillId == xi.mobSkill.WARP_IN_AJIDO then
             mobArg:setMagicCastingEnabled(true)
             mobArg:setLocalVar('warpInProgress', 0)
             mobArg:setLocalVar('teleportTime', GetSystemTime() + 5)

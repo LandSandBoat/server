@@ -77,7 +77,7 @@ entity.onMobSpawn = function(mob)
 
     -- Set up warp behavior listeners
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'WARP_OUT_COMPLETE', function(ttMob, skillId, wasExecuted)
-        if skillId == xi.mobSkill.ARKANGEL_TT_WARP_OUT then
+        if skillId == xi.mobSkill.WARP_OUT_AATT then
             local config = teleportConfig[ttMob:getBattlefield():getArea()]
             if config then
                 local currentX = ttMob:getXPos()
@@ -92,11 +92,11 @@ entity.onMobSpawn = function(mob)
                 if targetPosition then
                     ttMob:setPos(targetPosition.x, targetPosition.y, targetPosition.z, ttMob:getRotPos())
                     ttMob:queue(0, function(mobArg)
-                        mobArg:useMobAbility(xi.mobSkill.ARKANGEL_TT_WARP_IN, nil, 0)
+                        mobArg:useMobAbility(xi.mobSkill.WARP_IN_AATT, nil, 0)
                     end)
                 end
             end
-        elseif skillId == xi.mobSkill.ARKANGEL_TT_WARP_IN then
+        elseif skillId == xi.mobSkill.WARP_IN_AATT then
             mob:setMagicCastingEnabled(true)
         end
     end)
@@ -150,7 +150,7 @@ entity.onMobFight = function(mob, target)
                     end
 
                     mob:setLocalVar('spellCastSinceWarp', 0)
-                    mob:useMobAbility(xi.mobSkill.ARKANGEL_TT_WARP_OUT, nil, 0)
+                    mob:useMobAbility(xi.mobSkill.WARP_OUT_AATT, nil, 0)
                     mob:setMagicCastingEnabled(false)
                 end
             end

@@ -1,6 +1,5 @@
 -----------------------------------
--- Ark Guardian: Tarutaru
--- Begin Ark Angel TT teleport
+-- Warp in (Ark Angel TT)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}

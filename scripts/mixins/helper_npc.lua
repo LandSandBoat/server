@@ -76,7 +76,7 @@ local function findAvailableTarget(mob)
     end
 
     for i = 1, #targetMobs do
-        local targetMob = GetMobByID(targetMobs[i])
+        local targetMob = GetMobByID(targetMobs[i], mob:getInstance())
         if targetMob and targetMob:isSpawned() and not targetMob:isDead() then
             return targetMob
         end
@@ -114,7 +114,7 @@ g_mixins.helper_npc = function(helperMob)
 
         if not shouldEngage then
             for _, targetMobId in ipairs(targetMobs) do
-                local targetMob = GetMobByID(targetMobId)
+                local targetMob = GetMobByID(targetMobId, mob:getInstance())
                 if targetMob and targetMob:isSpawned() and targetMob:isEngaged() then
                     shouldEngage = true
                     break

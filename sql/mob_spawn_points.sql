@@ -13497,16 +13497,16 @@ INSERT INTO `mob_spawn_points` VALUES (17022978,0,'Yazquhl','Yazquhl',2,67,67,7.
 
 -- black coffin Mission
 INSERT INTO `mob_spawn_points` VALUES (17022979,0,'Gessho','Gessho',3,68,68,0.001,-22.500,22.000,64);
-INSERT INTO `mob_spawn_points` VALUES (17022980,0,'Ashu_Talif_Crew','Ashu Talif Crew',4,60,60,0.001,-22.500,12.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022981,0,'Ashu_Talif_Crew','Ashu Talif Crew',5,60,60,2.000,-22.500,12.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022982,0,'Ashu_Talif_Crew','Ashu Talif Crew',5,60,60,-2.000,-22.500,12.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022983,0,'Ashu_Talif_Crew','Ashu Talif Crew',6,60,60,4.000,-22.500,12.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022984,0,'Ashu_Talif_Crew','Ashu Talif Crew',6,60,60,-4.000,-22.500,12.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022980,0,'Ashu_Talif_Crew_mnk','Ashu Talif Crew',4,60,60,0.001,-22.500,12.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022981,0,'Ashu_Talif_Crew_rdm','Ashu Talif Crew',5,60,60,2.000,-22.500,12.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022982,0,'Ashu_Talif_Crew_rdm','Ashu Talif Crew',5,60,60,-2.000,-22.500,12.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022983,0,'Ashu_Talif_Crew_rng','Ashu Talif Crew',6,60,60,4.000,-22.500,12.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022984,0,'Ashu_Talif_Crew_rng','Ashu Talif Crew',6,60,60,-4.000,-22.500,12.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17022985,0,'Ashu_Talif_Captain','Ashu Talif Captain',7,68,68,0.001,-28.551,8.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022986,0,'Ashu_Talif_Crew','Ashu Talif Crew',4,60,60,1.000,-22.500,15.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022987,0,'Ashu_Talif_Crew','Ashu Talif Crew',5,60,60,-1.000,-22.500,15.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022988,0,'Ashu_Talif_Crew','Ashu Talif Crew',6,60,60,3.000,-22.500,15.000,192);
-INSERT INTO `mob_spawn_points` VALUES (17022989,0,'Ashu_Talif_Crew','Ashu Talif Crew',6,60,60,-3.000,-22.500,15.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022986,0,'Ashu_Talif_Crew_mnk','Ashu Talif Crew',4,60,60,1.000,-22.500,15.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022987,0,'Ashu_Talif_Crew_rdm','Ashu Talif Crew',5,60,60,-1.000,-22.500,15.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022988,0,'Ashu_Talif_Crew_rng','Ashu Talif Crew',6,60,60,3.000,-22.500,15.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17022989,0,'Ashu_Talif_Crew_rng','Ashu Talif Crew',6,60,60,-3.000,-22.500,15.000,192);
 
 -- scouting the ashu talif
 INSERT INTO `mob_spawn_points` VALUES (17022990,0,'Ashu_Talif_Crew','Ashu Talif Crew',0,0,0,0.000,0.000,0.000,0);
