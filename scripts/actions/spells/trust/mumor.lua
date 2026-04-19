@@ -50,14 +50,7 @@ spellObject.onMobSpawn = function(mob)
     -- Sets stance
     mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SABER_DANCE }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SABER_DANCE })
 
-    -- Step usage: -DEF debuff and stuns
-    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.WEAKENED_DAZE_5 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.STUTTER_STEP })
-    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
-    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
-    mob:addGambit(ai.t.TARGET, { ai.c.READYING_JA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
-    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
-
-    -- Samba logic
+    -- Samba logic runs before TP-consuming steps so Drain/Haste Samba stays up
     -- Checks masters job, adjusts samba type if master has a healer main job.
     for i = 1, #healingJobs do
         local master  = mob:getMaster()
@@ -73,6 +66,18 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.TARGET, { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA })
     -- Else picks highest drain spell available
     mob:addGambit(ai.t.SELF, { ai.c.NO_SAMBA, 0 }, { ai.r.JA, ai.s.BEST_SAMBA, xi.ja.DRAIN_SAMBA })
+
+    -- Backup healing: spends TP on Waltzes instead of steps/WS when party needs it
+    mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 60 }, { ai.r.JA, ai.s.HIGHEST_WALTZ, xi.ja.CURING_WALTZ })
+
+    -- Step usage: -DEF debuff and stuns (retry_delay prevents TP starvation of WS)
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.WEAKENED_DAZE_5 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.STUTTER_STEP }, 20)
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_JA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_MA, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH })
+
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2000)
 end
 
 spellObject.onMobDespawn = function(mob)

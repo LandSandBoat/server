@@ -3524,7 +3524,8 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3490); -- Stell
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,170); -- Randgrith
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,25); -- Evisceration
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,30); -- Aeolian Edge
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,165); -- Skullbreaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,167); -- Judgement
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,0);
@@ -3550,8 +3551,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,3237); -- Victory 
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mayakov',1081,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,184); -- Retribution
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,181); -- Shell Crusher
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mayakov',1081,25);  -- Evisceration
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mayakov',1081,30);  -- Aeolian Edge
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,33);  -- Burning Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,42);  -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,210); -- Sniper Shot
@@ -3628,11 +3631,13 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3234); -- Nullifyin
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3235); -- Auroral Uppercut
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3236); -- Knuckle Sandwich
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,3243); -- Imperial Authority
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,25); -- Evisceration
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,30); -- Aeolian Edge
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,3542); -- Oisoya
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,184); -- Retribution
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,181); -- Shell Crusher
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3740); -- final_exam
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3741); -- doctors_orders
