@@ -18,7 +18,7 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ABQUHBAH] = xi.trust.messageOffset.TEAMWORK_2,
     })
 
-    mob:addMobMod(xi.mobMod.CAN_PARRY, 3)
+    mob:addMobMod(xi.mobMod.CAN_PARRY, 1)
     mob:addMod(xi.mod.ACC, xi.trust.modGrowthValMax(mob, 200))
     mob:addMod(xi.mod.EVA, xi.trust.modGrowthValMax(mob, 125))
     mob:addMod(xi.mod.FASTCAST, xi.trust.modGrowthValMax(mob, 30))
