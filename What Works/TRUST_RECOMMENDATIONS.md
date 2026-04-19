@@ -177,7 +177,7 @@ You need: Tank, DPS — you're self-sufficient on MP
 
 ## Geomancer (you support, you have Indi/Geo bubbles)
 
-You need: Tank, healer, DPS
+You need: Tank, healer, DPS — no second GEO (Sylvie UC's Entrust is gated on non-GEO master)
 
 | Slot | Trust | Why |
 |------|-------|-----|
@@ -199,6 +199,11 @@ You need: Tank, healer, DPS
 - **Mumor + Uka Totlihn** have synergy bonuses when both summoned (+10 samba duration / +10 waltz potency)
 - **Adelheid** is a proper SCH with Dark Arts/Addendum Black, day-matching Storm/Helix
 - **Maximilian** uses SA/TA constantly — pair with THF for double positional damage
+- **Sylvie UC** auto-Entrusts a second Indi bubble when master isn't GEO (2 bubbles active simultaneously)
+
+---
+
+> **Note:** The tier lists below only include trusts that appear in the per-job recommendations above. Roughly 45 of 120 trusts are tiered here. If a trust isn't listed, it either wasn't a top-5 pick for any player job, or is a niche/stub trust that hasn't been evaluated. Consult the per-job recommendations as the authoritative source — tier lists are a secondary reference.
 
 ## Tank Trust Tier List
 
@@ -230,6 +235,8 @@ You need: Tank, healer, DPS
 | B | **Arciela** | Cure <40%/<75%, Haste, Refresh, Protect/Shell, Slow/Paralyze — only healer with Refresh |
 | B | **Cherukiki** | Cure <25%/<75%, Regen +5/tick, Haste on master+melee, Protect/Shell, Paralyze/Slow/Silence |
 | B | **Nashmeira II** | Cure <75%, Curaga <50% (AoE), full status removal, Erase |
+| B | **Pieuje UC** | Cure <40%/<75%, Haste on melee, Protect/Shell, 5-type status removal (no Stona/Viruna/Erase) |
+| B | **Sylvie UC** | Cure <25%/<75%, Erase, Haste on master+melee, Indi bubble, Entrust — hybrid GEO healer |
 
 ## Support Trust Tier List
 
@@ -237,7 +244,8 @@ You need: Tank, healer, DPS
 |------|-------|-------------|
 | S | **Koru-Moru** | Convert, Protect/Shell, Haste on melee, Refresh on casters+tanks, Flurry on ranged, Phalanx II on tank, Dispel, Dia/Slow/Distract |
 | S | **King of Hearts** | Cure <50%, Protect/Shell, Haste on melee, Refresh on casters, Phalanx II on tank, Dispel, Dia, Firaga 40% |
-| A | **Arciela II** | Convert <20%, Haste/Refresh on party, Slow/Paralyze/Dispel, weakness nukes 60%, Stone 40% |
+| A | **Sylvie UC** | GEO bubble (BEST_INDI), Entrust on non-GEO master, Haste on master+melee, Erase, Cure <25%/<75%, +180s Indi duration, Regain 50 |
+| A | **Arciela II** | Convert <30%, Haste/Refresh on party, Slow/Paralyze/Dispel, MB on SC, nuke on 60s cooldown |
 | A | **Adelheid** | Dark Arts/Addendum Black, Stun on 4 triggers, day-matching Storm/Helix, cure tank <50%, cure party <33% |
 | B | **Qultada** | Corsair's Roll + Chaos Roll + ranged DPS |
 
