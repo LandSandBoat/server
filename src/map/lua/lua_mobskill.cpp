@@ -102,6 +102,11 @@ void CLuaMobSkill::setAnimationTime(uint32 newAnimationTime)
     m_PLuaMobSkill->setAnimationTime(std::chrono::milliseconds(newAnimationTime));
 }
 
+void CLuaMobSkill::setAoeRadius(float aoeRadius)
+{
+    m_PLuaMobSkill->setAoeRadius(aoeRadius);
+}
+
 auto CLuaMobSkill::getMsg() -> MsgBasic
 {
     return m_PLuaMobSkill->getMsg();
@@ -183,6 +188,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
     SOL_REGISTER("setFinalAnimationSub", CLuaMobSkill::setFinalAnimationSub);
     SOL_REGISTER("setAnimationTime", CLuaMobSkill::setAnimationTime);
+    SOL_REGISTER("setAoeRadius", CLuaMobSkill::setAoeRadius);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHP", CLuaMobSkill::getMobHP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);

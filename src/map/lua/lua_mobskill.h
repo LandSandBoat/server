@@ -57,6 +57,7 @@ public:
     uint32 getPrimaryTargetID();
     void   setFinalAnimationSub(uint8 newAnimationSub);
     void   setAnimationTime(uint32 newAnimationTime);
+    void   setAoeRadius(float aoeRadius);
     auto   getAttackType() const -> ATTACK_TYPE;
     void   setAttackType(ATTACK_TYPE attackType);
     auto   isCritical() -> bool;
