@@ -323,7 +323,7 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     end
 
     -- Players and Trusts
-    local weaponRank   = actor:getWeaponDmgRank()
+    local weaponRank   = actor:getRangedDmgRank()
     local statLowerCap = (7 + weaponRank * 2) * -2
     local statUpperCap = (14 + weaponRank * 2) * 2
 

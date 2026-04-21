@@ -23,6 +23,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    if tpHits + extraHits > 0 then
+        action:messageID(target:getID(), xi.msg.basic.MOTE_OF_PARADISE)
+    end
+
     return tpHits, extraHits, criticalHit, damage
 end
 

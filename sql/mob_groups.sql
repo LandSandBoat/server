@@ -1168,16 +1168,17 @@ INSERT INTO `mob_groups` VALUES (14,708,29,'Chemical_Cook_Chemachiq',0,128,0,0,0
 INSERT INTO `mob_groups` VALUES (15,503,29,'Book_Browser_Bokabraq',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (16,4102,29,'Unstable_Cluster',0,128,2523,10800,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (17,325,29,'Bahamut',0,128,0,26000,15000,0,NULL);
-INSERT INTO `mob_groups` VALUES (18,3070,29,'Ouryu',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (19,3916,29,'Tiamat',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (20,2156,29,'Jormungand',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (21,4261,29,'Vrtra',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (22,4507,29,'Ziryu',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (23,4309,29,'Water_Elemental',0,128,2629,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (24,1160,29,'Earth_Elemental',0,128,733,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (25,3124,29,'Pey',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (26,2105,29,'Iruci',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (27,70,29,'Airi',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (18,7554,29,'Ouryu_bv2',0,128,0,6000,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (19,7551,29,'Tiamat_bv2',0,128,0,6500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (20,7552,29,'Jormungand_bv2',0,128,0,6500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (21,7553,29,'Vrtra_bv2',0,128,0,5500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (22,4507,29,'Ziryu',0,128,0,2500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (23,4309,29,'Water_Elemental',0,128,2629,2500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (24,1160,29,'Earth_Elemental',0,128,733,2500,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (25,3124,29,'Pey',0,128,0,1900,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (26,2105,29,'Iruci',0,128,0,1800,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (27,70,29,'Airi',0,128,0,2000,15000,0,NULL);
+INSERT INTO `mob_groups` VALUES (28,325,29,'Bahamut_bv2',0,128,821,34000,20000,0,NULL);
 
 -- ------------------------------------------------------------
 -- Riverne-Site_A01 (Zone 30)

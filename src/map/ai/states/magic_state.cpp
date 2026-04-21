@@ -38,6 +38,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/zoneutils.h"
 
 CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags)
 : CState(PEntity, targid)
@@ -260,7 +261,14 @@ bool CMagicState::Update(timer::time_point tick)
         {
             m_PEntity->OnCastFinished(*this, action);
             m_PEntity->PAI->EventHandler.triggerListener("MAGIC_USE", m_PEntity, PTarget, m_PSpell.get(), &action);
-            PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
+            for (auto& actionTarget : action.targets)
+            {
+                auto* PActionTarget = dynamic_cast<CBattleEntity*>(zoneutils::GetEntity(actionTarget.actorId));
+                if (PActionTarget)
+                {
+                    PActionTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PActionTarget, m_PEntity, m_PSpell.get(), &action);
+                }
+            }
         }
 
         // Zero messageID so spells dont emit messages

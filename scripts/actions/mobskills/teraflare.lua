@@ -8,8 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- TODO: Mob mechanics where appropriate.
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
@@ -19,7 +18,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.fTP             = { 20, 20, 20 }
     params.element         = xi.element.FIRE
     params.dStatMultiplier = 1.5
-    -- TODO: Capture AoE type.
     params.attackType      = xi.attackType.MAGICAL
     params.damageType      = xi.damageType.FIRE
     params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Knights of Round
 -- Family: Humanoid Sword Weaponskill
--- Description: Deals physical damage to a target. Excalibur/Caliburn: Regen.
+-- Description: Deals physical damage to a target. Caliburn/Excalibur: Additional Effect: Regen
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPS
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    -- params.str_wSC        = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.mnd_wSC        = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1

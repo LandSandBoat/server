@@ -1790,22 +1790,22 @@ xi.mobskills.calculatePetMagicAccuracyBonus = function(mob, target, actionElemen
 end
 
 xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
-    local magicDamage = math.floor(physicalDamage * 2)
+    local magicDamage = math.floor(physicalDamage)
 
     -- Multipliers.
     local nullifyDamage         = xi.spells.damage.calculateNullification(target, element, true, false)
-    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element.hybridSkillElement, true)
+    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element, true)
     local sdt                   = 1
     local resist                = 1
     local magicDamageAdjustment = 1
-    local dayAndWeather         = xi.spells.damage.calculateDayAndWeather(mob, element.hybridSkillElement, false)
-    local magicBonusDiff        = xi.spells.damage.calculateMagicBonusDiff(mob, target, 0, 0, element.hybridSkillElement, 0)
-    local petAccBonus           = xi.mobskills.calculatePetMagicAccuracyBonus(mob, target, element.hybridSkillElement)
+    local dayAndWeather         = xi.spells.damage.calculateDayAndWeather(mob, element, false)
+    local magicBonusDiff        = xi.spells.damage.calculateMagicBonusDiff(mob, target, 0, 0, element, 0)
+    local petAccBonus           = xi.mobskills.calculatePetMagicAccuracyBonus(mob, target, element)
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
 
     if absorbDamage > 0 then
-        sdt                   = xi.combat.damage.magicalElementSDT(target, element.hybridSkillElement)
-        resist                = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element.hybridSkillElement, xi.mod.INT, 0, petAccBonus)
+        sdt                   = xi.combat.damage.magicalElementSDT(target, element)
+        resist                = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, 0, petAccBonus)
         magicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
     end
 
@@ -1817,8 +1817,9 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     magicDamage = math.floor(magicDamage * magicDamageAdjustment)
     magicDamage = math.floor(magicDamage * absorbDamage)
     magicDamage = math.floor(magicDamage * nullifyDamage)
-    magicDamage = utils.handleOneForAll(target, magicDamage)
+    magicDamage = math.floor(magicDamage * 0.5)
 
+    magicDamage = utils.handleOneForAll(target, magicDamage)
     magicDamage = utils.handleStoneskin(target, magicDamage)
 
     return magicDamage

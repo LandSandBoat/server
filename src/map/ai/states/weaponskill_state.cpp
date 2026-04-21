@@ -29,6 +29,7 @@
 #include "roe.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
 CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
@@ -158,7 +159,14 @@ bool CWeaponSkillState::Update(timer::time_point tick)
                 uint32 weaponskillDamage = weaponskillVar & 0xFFFFFF;
 
                 m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", m_PEntity, PTarget, m_PSkill.get(), m_spent, &action, weaponskillDamage);
-                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", m_PEntity, PTarget, m_PSkill.get(), m_spent, &action);
+                for (auto& actionTarget : action.targets)
+                {
+                    auto* PActionTarget = dynamic_cast<CBattleEntity*>(zoneutils::GetEntity(actionTarget.actorId));
+                    if (PActionTarget)
+                    {
+                        PActionTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", m_PEntity, PActionTarget, m_PSkill.get(), m_spent, &action);
+                    }
+                }
 
                 if (m_PEntity->objtype == TYPE_PC)
                 {

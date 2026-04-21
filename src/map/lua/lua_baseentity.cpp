@@ -19343,8 +19343,7 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table)
                         "weather_preference = ?, "
                         "hunger = ?, "
                         "care_plan = ?, "
-                        "held_item = ? "
-                        "LIMIT 1";
+                        "held_item = ? ";
 
     const auto rset = db::preparedStmt(Query,
                                        m_PBaseEntity->id,

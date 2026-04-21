@@ -2356,10 +2356,10 @@ INSERT INTO `mob_spawn_points` VALUES (16822327,0,'Stirge','Stirge',19,33,36,-26
 INSERT INTO `mob_spawn_points` VALUES (16822328,0,'Dark_Bats','Dark Bats',6,31,35,-259.999,6.778,-85.538,62);
 INSERT INTO `mob_spawn_points` VALUES (16822329,0,'Stirge','Stirge',19,33,36,-178.526,7.535,49.965,203);
 INSERT INTO `mob_spawn_points` VALUES (16822330,0,'Moblin_Ragman','Moblin Ragman',14,33,36,-175.243,7.529,53.367,222);
-INSERT INTO `mob_spawn_points` VALUES (16822331,2,'Ancient_Bomb','Ancient Bomb',20,40,45,-84.543,7.525,59.126,130);
+INSERT INTO `mob_spawn_points` VALUES (16822331,2,'Ancient_Bomb','Ancient Bomb',20,40,40,-84.543,7.525,59.126,130);
 INSERT INTO `mob_spawn_points` VALUES (16822332,0,'Moblin_Pickman','Moblin Pickman',9,33,36,-112.841,7.625,59.624,124);
 INSERT INTO `mob_spawn_points` VALUES (16822333,0,'Goblin_Hammerman','Goblin Hammerman',13,33,36,-120.653,7.525,58.990,0);
-INSERT INTO `mob_spawn_points` VALUES (16822334,2,'Ancient_Bomb','Ancient Bomb',20,40,45,-115.394,7.625,59.177,137);
+INSERT INTO `mob_spawn_points` VALUES (16822334,2,'Ancient_Bomb','Ancient Bomb',20,40,40,-115.394,7.625,59.177,137);
 INSERT INTO `mob_spawn_points` VALUES (16822335,0,'Moblin_Witchman','Moblin Witchman',12,33,36,-120.070,7.542,99.552,1);
 INSERT INTO `mob_spawn_points` VALUES (16822336,0,'Bugbear_Servingman','Bugbear Servingman',16,32,35,-138.147,7.525,109.234,54);
 INSERT INTO `mob_spawn_points` VALUES (16822337,0,'Moblin_Chapman','Moblin Chapman',15,33,36,-138.239,7.525,109.821,55);
@@ -2381,7 +2381,7 @@ INSERT INTO `mob_spawn_points` VALUES (16822352,0,'Earth_Elemental','Earth Eleme
 INSERT INTO `mob_spawn_points` VALUES (16822353,0,'Stirge','Stirge',19,33,36,-119.026,15.478,-140.465,1);
 INSERT INTO `mob_spawn_points` VALUES (16822354,0,'Stirge','Stirge',19,33,36,-129.872,13.817,-141.216,122);
 INSERT INTO `mob_spawn_points` VALUES (16822355,0,'Thunder_Elemental','Thunder Elemental',21,45,50,-134.458,12.887,-144.470,100);
-INSERT INTO `mob_spawn_points` VALUES (16822356,3,'Ancient_Bomb','Ancient Bomb',20,40,45,-108.047,15.524,-138.336,122);
+INSERT INTO `mob_spawn_points` VALUES (16822356,3,'Ancient_Bomb','Ancient Bomb',20,40,40,-108.047,15.524,-138.336,122);
 INSERT INTO `mob_spawn_points` VALUES (16822357,0,'Goblin_Hammerman','Goblin Hammerman',13,33,36,-139.690,7.391,-205.577,176);
 INSERT INTO `mob_spawn_points` VALUES (16822358,0,'Moblin_Chapman','Moblin Chapman',15,33,36,-134.841,7.314,-214.812,40);
 INSERT INTO `mob_spawn_points` VALUES (16822359,0,'Bugbear_Servingman','Bugbear Servingman',16,32,35,-101.177,7.397,-234.822,183);
@@ -2394,9 +2394,9 @@ INSERT INTO `mob_spawn_points` VALUES (16822365,0,'Goblin_Craftsman','Goblin Cra
 INSERT INTO `mob_spawn_points` VALUES (16822366,0,'Goblin_Leadman','Goblin Leadman',10,33,36,-53.170,7.525,-261.172,129);
 INSERT INTO `mob_spawn_points` VALUES (16822367,0,'Goblins_Bat','Goblin\'s Bat',11,28,30,-49.802,7.525,-261.022,129);
 INSERT INTO `mob_spawn_points` VALUES (16822368,0,'Stirge','Stirge',19,33,36,-42.805,7.525,-260.264,252);
-INSERT INTO `mob_spawn_points` VALUES (16822369,3,'Ancient_Bomb','Ancient Bomb',20,40,45,-28.193,7.525,-258.723,101);
+INSERT INTO `mob_spawn_points` VALUES (16822369,3,'Ancient_Bomb','Ancient Bomb',20,40,40,-28.193,7.525,-258.723,101);
 INSERT INTO `mob_spawn_points` VALUES (16822370,0,'Dark_Bats','Dark Bats',6,31,35,-193.521,7.525,-299.586,121);
-INSERT INTO `mob_spawn_points` VALUES (16822371,0,'Ancient_Bomb','Ancient Bomb',20,40,45,-199.902,7.525,-299.623,126);
+INSERT INTO `mob_spawn_points` VALUES (16822371,0,'Ancient_Bomb','Ancient Bomb',20,40,40,-199.902,7.525,-299.623,126);
 INSERT INTO `mob_spawn_points` VALUES (16822372,0,'Moblin_Ragman','Moblin Ragman',14,33,36,-213.007,7.491,-295.843,36);
 INSERT INTO `mob_spawn_points` VALUES (16822373,0,'Bugbear_Servingman','Bugbear Servingman',16,32,35,-226.146,11.256,-259.110,114);
 INSERT INTO `mob_spawn_points` VALUES (16822374,0,'Moblin_Pickman','Moblin Pickman',9,33,36,-264.859,8.062,-258.940,255);
@@ -2423,7 +2423,7 @@ INSERT INTO `mob_spawn_points` VALUES (16822394,8,'Goblin_Gutterman','Goblin Gut
 INSERT INTO `mob_spawn_points` VALUES (16822395,0,'Dark_Bats','Dark Bats',6,31,35,-27.674,11.525,-139.376,96);
 INSERT INTO `mob_spawn_points` VALUES (16822396,0,'Stirge','Stirge',19,33,36,-24.448,11.525,-136.313,225);
 INSERT INTO `mob_spawn_points` VALUES (16822397,0,'Earth_Elemental','Earth Elemental',17,45,50,-24.347,11.525,-136.066,228);
-INSERT INTO `mob_spawn_points` VALUES (16822398,0,'Ancient_Bomb','Ancient Bomb',20,40,45,-19.501,11.525,-129.167,68);
+INSERT INTO `mob_spawn_points` VALUES (16822398,0,'Ancient_Bomb','Ancient Bomb',20,40,40,-19.501,11.525,-129.167,68);
 INSERT INTO `mob_spawn_points` VALUES (16822399,0,'Bugbear_Bondman','Bugbear Bondman',23,42,44,-38.215,7.500,101.636,126);
 INSERT INTO `mob_spawn_points` VALUES (16822400,0,'Bugbear_Bondman','Bugbear Bondman',23,42,44,-38.805,7.494,98.486,121);
 INSERT INTO `mob_spawn_points` VALUES (16822401,0,'Goblin_Tollman','Goblin Tollman',24,42,44,-19.952,7.400,99.856,3);
@@ -2443,7 +2443,7 @@ INSERT INTO `mob_spawn_points` VALUES (16822414,10,'Bugbear_Bondman','Bugbear Bo
 INSERT INTO `mob_spawn_points` VALUES (16822415,10,'Bugbear_Bondman','Bugbear Bondman',23,42,44,19.058,7.240,110.204,240);
 INSERT INTO `mob_spawn_points` VALUES (16822416,0,'Bugbear_Bondman','Bugbear Bondman',23,42,44,26.784,7.298,95.528,83);
 INSERT INTO `mob_spawn_points` VALUES (16822417,0,'Dark_Bats','Dark Bats',6,31,35,18.698,7.570,4.266,190);
-INSERT INTO `mob_spawn_points` VALUES (16822418,0,'Ancient_Bomb','Ancient Bomb',20,40,45,18.736,7.567,4.048,191);
+INSERT INTO `mob_spawn_points` VALUES (16822418,0,'Ancient_Bomb','Ancient Bomb',20,45,45,18.736,7.567,4.048,191);
 INSERT INTO `mob_spawn_points` VALUES (16822419,0,'Goblin_Doorman','Goblin Doorman',28,42,44,15.600,7.399,-50.544,141);
 INSERT INTO `mob_spawn_points` VALUES (16822420,0,'Moblin_Repairman','Moblin Repairman',27,42,44,10.795,7.399,-53.417,102);
 INSERT INTO `mob_spawn_points` VALUES (16822421,0,'Bugbear_Bondman','Bugbear Bondman',23,42,44,-0.920,11.500,-98.408,132);
@@ -2468,7 +2468,7 @@ INSERT INTO `mob_spawn_points` VALUES (16822439,0,'Moblin_Coalman','Moblin Coalm
 INSERT INTO `mob_spawn_points` VALUES (16822440,0,'Moblin_Pikeman','Moblin Pikeman',30,42,44,24.548,9.440,-84.579,11);
 INSERT INTO `mob_spawn_points` VALUES (16822441,0,'Stirge','Stirge',19,33,36,113.721,11.525,-59.730,124);
 INSERT INTO `mob_spawn_points` VALUES (16822442,0,'Stirge','Stirge',19,33,36,125.026,11.525,-58.848,251);
-INSERT INTO `mob_spawn_points` VALUES (16822443,0,'Ancient_Bomb','Ancient Bomb',20,40,45,-138.559,7.525,108.943,36);
+INSERT INTO `mob_spawn_points` VALUES (16822443,0,'Ancient_Bomb','Ancient Bomb',20,45,45,-138.559,7.525,108.943,36);
 INSERT INTO `mob_spawn_points` VALUES (16822444,0,'Moblin_Gasman','Moblin Gasman',25,42,44,158.240,11.400,-58.642,147);
 INSERT INTO `mob_spawn_points` VALUES (16822445,0,'Moblin_Coalman','Moblin Coalman',26,42,44,164.045,11.399,-58.198,231);
 INSERT INTO `mob_spawn_points` VALUES (16822446,11,'Moblin_Pikeman','Moblin Pikeman',30,42,44,171.413,16.994,-76.517,9);
@@ -6224,23 +6224,23 @@ INSERT INTO `mob_spawn_points` VALUES (16896155,0,'Unstable_Cluster','Unstable C
 INSERT INTO `mob_spawn_points` VALUES (16896156,0,'Bahamut','Bahamut',17,85,85,-706.661,0.405,820.898,3);
 
 -- The Wyrmking Descends
-INSERT INTO `mob_spawn_points` VALUES (16896157,0,'Bahamut','Bahamut',17,85,85,-704.021,0.168,822.955,229);
-INSERT INTO `mob_spawn_points` VALUES (16896158,0,'Ouryu','Ouryu',18,75,75,-694.789,0.099,825.472,255);
-INSERT INTO `mob_spawn_points` VALUES (16896159,0,'Tiamat','Tiamat',19,75,75,-696.976,0.151,821.501,208);
-INSERT INTO `mob_spawn_points` VALUES (16896160,0,'Jormungand','Jormungand',20,75,75,-704.433,0.464,798.733,150);
-INSERT INTO `mob_spawn_points` VALUES (16896161,0,'Vrtra','Vrtra',21,75,75,-694.231,0.024,830.624,57);
-INSERT INTO `mob_spawn_points` VALUES (16896162,0,'Ziryu','Ziryu',22,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896163,0,'Ziryu','Ziryu',22,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896164,0,'Ziryu','Ziryu',22,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896165,0,'Ziryu','Ziryu',22,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896166,0,'Water_Elemental','Water Elemental',23,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896167,0,'Earth_Elemental','Earth Elemental',24,75,75,1.000,1.000,1.000,0);
-INSERT INTO `mob_spawn_points` VALUES (16896168,0,'Pey','Pey',25,75,75,-688.086,-0.043,836.809,113);
-INSERT INTO `mob_spawn_points` VALUES (16896169,0,'Pey','Pey',25,75,75,-684.670,0.217,824.265,181);
-INSERT INTO `mob_spawn_points` VALUES (16896170,0,'Iruci','Iruci',26,75,75,-699.758,0.285,802.629,104);
-INSERT INTO `mob_spawn_points` VALUES (16896171,0,'Iruci','Iruci',26,75,75,-686.287,0.157,828.709,165);
-INSERT INTO `mob_spawn_points` VALUES (16896172,0,'Airi','Airi',27,15,17,-701.484,0.481,802.338,96);
-INSERT INTO `mob_spawn_points` VALUES (16896173,0,'Airi','Airi',27,15,17,-709.580,0.302,827.196,94);
+INSERT INTO `mob_spawn_points` VALUES (16896157,0,'Bahamut_bv2','Bahamut',28,92,92,-706.971,0.208,828.373,41);
+INSERT INTO `mob_spawn_points` VALUES (16896158,0,'Ouryu_bv2','Ouryu',18,88,88,-700.194,0.49,841.407,67);
+INSERT INTO `mob_spawn_points` VALUES (16896159,0,'Tiamat_bv2','Tiamat',19,88,88,-678.588,0.776,819.903,126);
+INSERT INTO `mob_spawn_points` VALUES (16896160,0,'Jormungand_bv2','Jormungand',20,88,88,-701.959,0.869,797.652,156);
+INSERT INTO `mob_spawn_points` VALUES (16896161,0,'Vrtra_bv2','Vrtra',21,88,88,-721.731,0.456,818.535,23);
+INSERT INTO `mob_spawn_points` VALUES (16896162,0,'Ziryu','Ziryu',22,74,76,-687.889,0.321,791.656,0);
+INSERT INTO `mob_spawn_points` VALUES (16896163,0,'Ziryu','Ziryu',22,74,76,-697.289,1.902,788.694,0);
+INSERT INTO `mob_spawn_points` VALUES (16896164,0,'Ziryu','Ziryu',22,74,76,-716.0511,0.8159,813.272,0);
+INSERT INTO `mob_spawn_points` VALUES (16896165,0,'Ziryu','Ziryu',22,74,76,-693.144,0.284,816.515,0);
+INSERT INTO `mob_spawn_points` VALUES (16896166,0,'Water_Elemental','Water Elemental',23,74,76,-704.841,0.661,797.99,212);
+INSERT INTO `mob_spawn_points` VALUES (16896167,0,'Earth_Elemental','Earth Elemental',24,74,76,-696.848,0.353,805.876,198);
+INSERT INTO `mob_spawn_points` VALUES (16896168,0,'Pey','Pey',25,78,79,-688.086,-0.043,836.809,113);
+INSERT INTO `mob_spawn_points` VALUES (16896169,0,'Pey','Pey',25,78,79,-684.670,0.217,824.265,181);
+INSERT INTO `mob_spawn_points` VALUES (16896170,0,'Iruci','Iruci',26,78,79,-699.758,0.285,802.629,104);
+INSERT INTO `mob_spawn_points` VALUES (16896171,0,'Iruci','Iruci',26,78,79,-686.287,0.157,828.709,165);
+INSERT INTO `mob_spawn_points` VALUES (16896172,0,'Airi','Airi',27,78,79,-701.484,0.481,802.338,96);
+INSERT INTO `mob_spawn_points` VALUES (16896173,0,'Airi','Airi',27,78,79,-709.580,0.302,827.196,94);
 
 -- ------------------------------------------------------------
 -- Riverne - Site #A01 (Zone 30)

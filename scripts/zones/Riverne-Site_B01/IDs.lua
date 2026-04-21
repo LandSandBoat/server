@@ -37,6 +37,7 @@ zones[xi.zone.RIVERNE_SITE_B01] =
     mob =
     {
         BAHAMUT                 = GetFirstID('Bahamut'),
+        BAHAMUT_V2              = GetFirstID('Bahamut_bv2'),
         IMDUGUD                 = GetFirstID('Imdugud'),
         SPELL_SPITTER_SPILUSPOK = GetFirstID('Spell_Spitter_Spilospok'),
         UNSTABLE_CLUSTER        = GetFirstID('Unstable_Cluster'),

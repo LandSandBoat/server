@@ -1623,7 +1623,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 // On retail, weaponskills will contain 0x08, 0x10 (HIT, ABILITY) on hit and may include the following:
                 // 0x01, 0x02, 0x04 (MISS, GUARDED, BLOCK)
                 // TODO: refactor this so lua returns the number of hits so we don't have to check the reaction bits.
-                if (actionResult.resolution != ActionResolution::Miss)
+                bool isNegated = actionResult.resolution == ActionResolution::Miss || actionResult.resolution == ActionResolution::Parry;
+                if (!isNegated)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
 

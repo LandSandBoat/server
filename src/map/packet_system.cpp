@@ -167,13 +167,14 @@ using PacketHandler = void (*)(MapSession* const, CCharEntity* const, CBasicPack
 template <typename T>
 constexpr auto packetSizeRange() -> std::pair<std::size_t, std::size_t>
 {
+    constexpr auto maxSize = roundUpToNearestFour(static_cast<uint32>(sizeof(T)));
     if constexpr (requires { T::getMinSize(); })
     {
-        return { T::getMinSize(), sizeof(T) };
+        return { T::getMinSize(), maxSize };
     }
     else
     {
-        return { sizeof(T), sizeof(T) };
+        return { maxSize, maxSize };
     }
 }
 

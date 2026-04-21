@@ -55,7 +55,7 @@ local function executeMistmelt(mob)
     if mob:getAnimationSub() == 1 then
         local currentTime = GetSystemTime()
         mob:setLocalVar('phaseChangeTime', currentTime + 120)
-        mob:setLocalVar('phaseChangeHP', mob:getHP() - 6000)
+        mob:setLocalVar('phaseChangeHP', math.max(0, mob:getHP() - 6000))
         mob:injectActionPacket(mob:getID(), 11, 974, 0, 0x18, 0, 0, 0)
         mob:setAnimationSub(2)
         mob:delStatusEffect(xi.effect.ALL_MISS)
@@ -93,7 +93,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 
-    mob:setLocalVar('phaseChangeHP', mob:getHP() - 6000)
+    mob:setLocalVar('phaseChangeHP', math.max(0, mob:getHP() - 6000))
 
     -----------------------------------
     -- May use Invincible every 10 minutes starting at 85% HP
@@ -146,7 +146,7 @@ entity.onMobFight = function(mob, target)
         mob:getHP() <= mob:getLocalVar('phaseChangeHP')
     then
         mob:setLocalVar('phaseChangeTime', currentTime + 120)
-        mob:setLocalVar('phaseChangeHP', mob:getHP() - 6000)
+        mob:setLocalVar('phaseChangeHP', math.max(0, mob:getHP() - 6000))
         if mob:getAnimationSub() == 1 then
             exitFlight(mob)
         else
@@ -205,6 +205,7 @@ end
 
 entity.onMobDisengage = function(mob)
     if mob:getAnimationSub() == 1 then
+        mob:setMobSkillAttack(0)
         mob:injectActionPacket(mob:getID(), 11, 974, 0, 0x18, 0, 0, 0)
         mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))

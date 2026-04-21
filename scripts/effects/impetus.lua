@@ -5,44 +5,51 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addListener('MELEE_SWING_MISS', 'IMPETUS_MISS', xi.job_utils.monk.impetusMissListener)
-    target:addListener('MELEE_SWING_HIT', 'IMPETUS_HIT', xi.job_utils.monk.impetusHitListener)
+    target:addListener('MELEE_SWING_HIT', 'IMPETUS_HIT', function(actorArg, targetArg, attack)
+        local effectArg = actorArg:getStatusEffect(xi.effect.IMPETUS)
+        if not effectArg then
+            return
+        end
 
-    -- For reload from the DB (/logout, login), add the effect power
-    local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
-    local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
+        local mainPower = effectArg:getPower() + 1 -- Tracks stacks.
+        if mainPower > 50 then
+            return
+        end
 
-    if mainPower > 0 then
-        target:addMod(xi.mod.ATT, mainPower * 2)
-        target:addMod(xi.mod.CRITHITRATE, mainPower)
-    end
+        -- Handle Attack & Critical Hit Rate bonuses
+        effectArg:setPower(mainPower)
+        effectArg:setMod(xi.mod.ATT, 2 * mainPower)
+        effectArg:setMod(xi.mod.CRITHITRATE, mainPower)
 
-    if subPower > 0 then
-        target:addMod(xi.mod.ACC, subPower * 2)
-        target:addMod(xi.mod.CRIT_DMG_INCREASE, subPower)
-    end
+        -- Handle Critical Hit Damage & Accuracy bonuses
+        local subPower = effectArg:getSubPower() -- Subpower tracks if user had effect augment, and what quality, when effect was applied.
+        if subPower ~= 0 then
+            effectArg:setMod(xi.mod.ACC, 2 * mainPower)
+            effectArg:setMod(xi.mod.CRIT_DMG_INCREASE, math.floor(subPower / 2) * mainPower)
+        end
+    end)
+
+    target:addListener('MELEE_SWING_MISS', 'IMPETUS_MISS', function(actorArg, targetArg, attack)
+        local effectArg = actorArg:getStatusEffect(xi.effect.IMPETUS)
+        if not effectArg then
+            return
+        end
+
+        effectArg:setPower(0)
+
+        effectArg:setMod(xi.mod.ATT, 0)
+        effectArg:setMod(xi.mod.CRITHITRATE, 0)
+        effectArg:setMod(xi.mod.ACC, 0)
+        effectArg:setMod(xi.mod.CRIT_DMG_INCREASE, 0)
+    end)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:removeListener('MELEE_SWING_MISS')
-    target:removeListener('MELEE_SWING_HIT')
-
-    -- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
-    local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
-    local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
-
-    if mainPower > 0 then
-        target:delMod(xi.mod.ATT, mainPower * 2)
-        target:delMod(xi.mod.CRITHITRATE, mainPower)
-    end
-
-    if subPower > 0 then
-        target:delMod(xi.mod.ACC, subPower * 2)
-        target:delMod(xi.mod.CRIT_DMG_INCREASE, subPower)
-    end
+    target:removeListener('IMPETUS_MISS')
+    target:removeListener('IMPETUS_HIT')
 end
 
 return effectObject

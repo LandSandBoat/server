@@ -7004,7 +7004,21 @@ INSERT INTO `mob_droplist` VALUES (819,0,0,1000,2160,@RARE);    -- Troll Pauldro
 INSERT INTO `mob_droplist` VALUES (820,0,0,1000,17306,@VCOMMON); -- Snoll Arm (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (820,0,0,1000,15507,@COMMON);  -- Purgatory Collar (Common, 15%)
 
--- 821 Available
+-- ZoneID: 29 - Bahamut
+INSERT INTO `mob_droplist` VALUES (821,1,1,1000,17597,750);     -- Dragon Staff (75%)
+INSERT INTO `mob_droplist` VALUES (821,1,1,1000,17598,250);     -- Bahamut's Staff (25%)
+INSERT INTO `mob_droplist` VALUES (821,1,2,1000,15264,300);     -- Bahamut's Mask (30%)
+INSERT INTO `mob_droplist` VALUES (821,1,2,1000,18061,250);     -- Bahamut's Zaghnal (25%)
+INSERT INTO `mob_droplist` VALUES (821,1,2,1000,15599,450);     -- Bahamut's Hose (45%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,1704,@VCOMMON); -- Kunwu Iron (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,1703,@VCOMMON); -- Kunwu Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,647,@VCOMMON);  -- Molybdenum Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,647,@VCOMMON);  -- Molybdenum Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,1714,@COMMON);  -- Cashmere Cloth (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,1713,@COMMON);  -- Cashmere Thread (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (821,0,0,1000,1816,@VCOMMON); -- Wyrm Horn (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (821,1,3,1000,1313,@COMMON);  -- Siren's Hair (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (821,1,3,1000,722,@RARE);     -- Divine Log (Rare, 5%)
 
 -- ZoneID: 254 - Faunus Wyvern
 INSERT INTO `mob_droplist` VALUES (822,0,0,1000,3267,@UNCOMMON); -- Pursuers Wing (Uncommon, 10%)

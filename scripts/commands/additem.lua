@@ -79,7 +79,48 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
     -----------------------------------
     -- Give the GM the item
     -----------------------------------
-    local obtained = player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
+    local itemData =
+    {
+        id       = itemToGet,
+        quantity = quantity,
+    }
+
+    local hasExdata = false
+    local augments  = {}
+    local augmentPairs =
+    {
+        { aug0, aug0val },
+        { aug1, aug1val },
+        { aug2, aug2val },
+        { aug3, aug3val },
+    }
+
+    for _, augmentData in ipairs(augmentPairs) do
+        local augmentId = augmentData[1]
+        if augmentId ~= nil and augmentId > 0 then
+            hasExdata = true
+            table.insert(augments, { id = augmentId, value = augmentData[2] or 0 })
+        end
+    end
+
+    if hasExdata or (trialId ~= nil and trialId > 0) then
+        itemData.exdata =
+        {
+            augmentKind    = xi.augment.kind.HAS_AUGMENTS,
+            augmentSubKind = xi.augment.subKind.STANDARD,
+        }
+
+        if #augments > 0 then
+            itemData.exdata.augments = augments
+        end
+
+        if trialId ~= nil and trialId > 0 then
+            itemData.exdata.augmentSubKind = itemData.exdata.augmentSubKind + xi.augment.subKind.TRIAL
+            itemData.exdata.trial          = { id = trialId, completed = false }
+        end
+    end
+
+    local obtained = player:addItem(itemData)
 
     if obtained then
         if quantity and quantity > 1 then

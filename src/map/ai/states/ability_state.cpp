@@ -37,6 +37,7 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "utils/zoneutils.h"
 
 namespace
 {
@@ -209,9 +210,13 @@ bool CAbilityState::Update(timer::time_point tick)
             {
                 m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
             }
-            if (auto* target = GetTarget())
+            for (auto& actionTarget : action.targets)
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", m_PEntity, target, m_PAbility.get(), &action);
+                auto* PActionTarget = dynamic_cast<CBattleEntity*>(zoneutils::GetEntity(actionTarget.actorId));
+                if (PActionTarget)
+                {
+                    PActionTarget->PAI->EventHandler.triggerListener("ABILITY_TAKE", m_PEntity, PActionTarget, m_PAbility.get(), &action);
+                }
             }
         }
 

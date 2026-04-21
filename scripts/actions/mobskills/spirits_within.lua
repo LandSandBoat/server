@@ -1,10 +1,7 @@
 -----------------------------------
 -- Spirits Within
---
+-- Family: Humanoid Sword Weaponskill
 -- Description: Delivers an unavoidable attack. Damage varies with HP and TP.
--- Type: Magical/Breath
--- Utsusemi/Blink absorb: Ignores shadows and most damage reduction.
--- Range: Melee
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,45 +15,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- TODO: Rework this to use one of the mobMove functions at some point.
-    -- Maybe mobBreathMove() with support for fTP ranges.
     if mob:getPool() == xi.mobPool.THRONE_ROOM_VOLKER then -- Volker@Throne_Room only
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
-    -- Should produce 1000 - 3750 @ full HP using the player formula, assuming 8k HP for AA EV.
-    -- dmg * 2.5, as wiki claims ~2500 at 100% HP, until a better formula comes along.
-    local tp  = skill:getTP()
-    local hp  = mob:getHP()
-    local dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
-    if tp > 2000 then -- 2001 - 3000
-        dmg = math.floor(hp * (math.floor(0.072 * tp) - 96) / 256)
+    local params = {}
+
+    params.percentMultipier = xi.combat.physical.calculateTPfactor(skill:getTP(), { 0.0625, 0.1875, 0.46875 })
+    params.damageCap        = mob:getMaxHP()
+    params.element          = xi.element.NONE
+    params.resistStat       = xi.mod.INT
+    params.attackType       = xi.attackType.BREATH
+    params.damageType       = xi.damageType.ELEMENTAL
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+
+    local info = xi.mobskills.mobBreathMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
     end
 
-    dmg = math.floor(dmg * 2.5)
-
-    -- Believe it or not, it's been proven to be breath damage.
-    dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
-    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
-    dmg = math.floor(target:handleSevereDamage(dmg, false))
-
-    -- Handling phalanx
-    dmg = utils.handlePhalanx(target, dmg)
-
-    if dmg < 0 then
-        return 0
-    end
-
-    dmg = utils.handleStoneskin(target, dmg)
-
-    if dmg > 0 then
-        target:wakeUp()
-        target:updateEnmityFromDamage(mob, dmg)
-    end
-
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
-    return dmg
+    return info.damage
 end
 
 return mobskillObject

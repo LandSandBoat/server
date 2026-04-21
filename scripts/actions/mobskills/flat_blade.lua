@@ -19,7 +19,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 1.25, 1.25, 1.25 } -- TODO: Capture fTPs
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    -- params.str_wSC        = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -29,10 +30,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Eventually, we will want to rework mobStatusEffectMove() to accept MACC modifiers based on TP instead of this.
-        if math.random(1, 100) < skill:getTP() / 3 then
-            xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4) -- TODO: Capture stun duration
-        end
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4)
     end
 
     if mob:getPool() == xi.mobPool.QUBIA_ARENA_TRION then

@@ -2777,105 +2777,24 @@ float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool is
  *                                                                       *
  ************************************************************************/
 
-int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID)
+auto GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID) -> int32
 {
-    int32 rank = 0;
-    int32 fstr = 0;
-    float dif  = (float)(PAttacker->STR() - PDefender->VIT());
-
-    // does mob FSTR2 for ranged attack apply here?
-    if (PAttacker->objtype == TYPE_MOB || PAttacker->objtype == TYPE_PET)
-    {
-        fstr = (PAttacker->STR() - PDefender->VIT() + 4) / 4;
-
-        // Level -1 mobs are coded as level 1, but they have an fSTR of 1 always
-        if (PAttacker->objtype == TYPE_MOB && PAttacker->GetMLevel() == 1)
-        {
-            return 1;
-        }
-
-        return std::clamp(fstr, -20, 24);
-    }
-
-    if (dif >= 12)
-    {
-        fstr = static_cast<int32>((dif + 4) / 2);
-    }
-    else if (dif >= 6)
-    {
-        fstr = static_cast<int32>((dif + 6) / 2);
-    }
-    else if (dif >= 1)
-    {
-        fstr = static_cast<int32>((dif + 7) / 2);
-    }
-    else if (dif >= -2)
-    {
-        fstr = static_cast<int32>((dif + 8) / 2);
-    }
-    else if (dif >= -7)
-    {
-        fstr = static_cast<int32>((dif + 9) / 2);
-    }
-    else if (dif >= -15)
-    {
-        fstr = static_cast<int32>((dif + 10) / 2);
-    }
-    else if (dif >= -21)
-    {
-        fstr = static_cast<int32>((dif + 12) / 2);
-    }
-    else
-    {
-        fstr = static_cast<int32>((dif + 13) / 2);
-    }
+    int32 fSTR = 0;
 
     if (SlotID == SLOT_RANGED || SlotID == SLOT_AMMO)
     {
-        rank = PAttacker->GetRangedWeaponRank();
-        // Different caps than melee weapons
-        if (fstr <= (-rank * 2))
-        {
-            return (-rank * 2);
-        }
-
-        if ((fstr > (-rank * 2)) && (fstr <= (2 * (rank + 8))))
-        {
-            return fstr;
-        }
-        else
-        {
-            return 2 * (rank + 8);
-        }
+        fSTR = luautils::callGlobal<int32>("xi.combat.physical.calculateRangedStatFactor", PAttacker, PDefender);
+    }
+    else if (SlotID == SLOT_MAIN || SlotID == SLOT_SUB)
+    {
+        fSTR = luautils::callGlobal<int32>("xi.combat.physical.calculateMeleeStatFactor", PAttacker, PDefender);
     }
     else
     {
-        fstr /= 2;
-
-        if (SlotID == SLOT_MAIN)
-        {
-            rank = PAttacker->GetMainWeaponRank();
-        }
-        else if (SlotID == SLOT_SUB)
-        {
-            rank = PAttacker->GetSubWeaponRank();
-        }
-
-        // Everything else
-        if (fstr <= (-rank))
-        {
-            return (-rank);
-        }
-
-        if ((fstr > (-rank)) && (fstr <= rank + 8))
-        {
-            return fstr;
-        }
-        else
-        {
-            return rank + 8;
-        }
+        ShowError("battleutils::GetFSTR() failed to run lua calls");
     }
+
+    return fSTR;
 }
 
 /************************************************************************
@@ -4917,7 +4836,8 @@ void HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttack
     {
         // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
         // JP is known to give 10 VE per point
-        uint16 jpBonus = static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10;
+        // Only give jpBonus if the defender is a player, as mobs don't have job points.
+        uint16 jpBonus = PDefender->objtype == TYPE_PC ? static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10 : 0;
         static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
     }
 }

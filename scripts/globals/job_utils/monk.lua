@@ -99,124 +99,137 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
 end
 
 xi.job_utils.monk.useCounterstance = function(player, target, ability)
-    local power = 45 + player:getMod(xi.mod.COUNTERSTANCE_EFFECT)
+    target:delStatusEffect(xi.effect.COUNTERSTANCE)
 
-    target:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
-    target:addStatusEffect(xi.effect.COUNTERSTANCE, { power = power, duration = 300, origin = player })
+    local pTable =
+    {
+        power    = 45 + player:getMod(xi.mod.COUNTERSTANCE_EFFECT),
+        duration = 300,
+        origin   = player,
+    }
+
+    target:addStatusEffect(xi.effect.COUNTERSTANCE, pTable)
 
     return xi.effect.COUNTERSTANCE
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    local jpLevel  = target:getJobPointLevel(xi.jp.DODGE_EFFECT)
-    local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
-    player:addStatusEffect(xi.effect.DODGE, { power = jpLevel + dodgeMod, duration = 30, origin = player })
+    local pTable =
+    {
+        power    = target:getMod(xi.mod.DODGE_EFFECT) + target:getJobPointLevel(xi.jp.DODGE_EFFECT),
+        duration = 30,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.DODGE, pTable)
 
     return xi.effect.DODGE
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    local jpLevel  = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
-    local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
-    player:addStatusEffect(xi.effect.FOCUS, { power = jpLevel + focusMod, duration = 30, origin = player })
+    local pTable =
+    {
+        power    = target:getMod(xi.mod.FOCUS_EFFECT) + target:getJobPointLevel(xi.jp.FOCUS_EFFECT),
+        duration = 30,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.FOCUS, pTable)
 
     return xi.effect.FOCUS
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)
-    local kickDmg = 20 + player:getWeaponDmg()
-    local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
+    local pTable =
+    {
+        power    = 20 + player:getWeaponDmg(),
+        duration = 60,
+        subPower = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS),
+        origin   = player,
+    }
 
-    player:addStatusEffect(xi.effect.FOOTWORK, { power = kickDmg, duration = 60, origin = player, subPower = kickAttPercent })
+    player:addStatusEffect(xi.effect.FOOTWORK, pTable)
 
     return xi.effect.FOOTWORK
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)
-    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, { power = 1, duration = 180, origin = player })
+    local pTable =
+    {
+        power    = 1,
+        duration = 180,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, pTable)
 
     return xi.effect.FORMLESS_STRIKES
 end
 
 xi.job_utils.monk.useHundredFists = function(player, target, ability)
-    player:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, duration = 45, origin = player })
+    local pTable =
+    {
+        power    = 1,
+        duration = 45,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.HUNDRED_FISTS, pTable)
 
     return xi.effect.HUNDRED_FISTS
 end
 
--- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
--- Probably will be exceptionally jank, very low priority
-xi.job_utils.monk.impetusMissListener = function(attacker, victim, attack)
-    local effect = attacker:getStatusEffect(xi.effect.IMPETUS)
-
-    if effect then
-        local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
-        local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
-
-        if mainPower > 0 then
-            attacker:delMod(xi.mod.ATT, mainPower * 2)
-            attacker:delMod(xi.mod.CRITHITRATE, mainPower)
-
-            effect:setPower(0)
-        end
-
-        if subPower > 0 then
-            attacker:delMod(xi.mod.ACC, subPower * 2)
-            attacker:delMod(xi.mod.CRIT_DMG_INCREASE, subPower)
-
-            effect:setSubPower(0)
-        end
-    end
-end
-
--- TODO: Support Tantra Cyclas + 1 (does not give critical hit damage)
--- Probably will be exceptionally jank, very low priority
-xi.job_utils.monk.impetusHitListener = function(attacker, victim, attack)
-    local effect = attacker:getStatusEffect(xi.effect.IMPETUS)
-
-    if effect then
-        local mainPower = effect:getPower()    -- Stores Attack & Critical Hit Rate bonuses
-        local subPower  = effect:getSubPower() -- Stores Critical Hit Damage & Accuracy bonuses
-
-        if mainPower < 50 then
-            attacker:addMod(xi.mod.ATT, 2)
-            attacker:addMod(xi.mod.CRITHITRATE, 1)
-
-            effect:setPower(mainPower + 1)
-        end
-
-        if attacker:getMod(xi.mod.AUGMENTS_IMPETUS) > 0 and subPower < 50 then
-            attacker:addMod(xi.mod.ACC, 2)
-            attacker:addMod(xi.mod.CRIT_DMG_INCREASE, 1)
-
-            effect:setSubPower(subPower + 1)
-        end
-    end
-end
-
 xi.job_utils.monk.useImpetus = function(player, target, ability)
-    player:addStatusEffect(xi.effect.IMPETUS, { duration = 180, origin = player })
+    local pTable =
+    {
+        power    = 0,
+        subPower = player:getMod(xi.mod.AUGMENTS_IMPETUS), -- Determines what extra bonuses we get.
+        duration = 180,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.IMPETUS, pTable)
 
     return xi.effect.IMPETUS
 end
 
 xi.job_utils.monk.useInnerStrength = function(player, target, ability)
-    player:addStatusEffect(xi.effect.INNER_STRENGTH, { power = 2, duration = 30, origin = player })
+    local pTable =
+    {
+        power    = 2,
+        duration = 30,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.INNER_STRENGTH, pTable)
 
     return xi.effect.INNER_STRENGTH
 end
 
 xi.job_utils.monk.useMantra = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.MANTRA)
-
     target:delStatusEffect(xi.effect.MAX_HP_BOOST) -- TODO: confirm which versions of HP boost mantra can overwrite
-    target:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = merits, duration = 180, origin = player })
+
+    local pTable =
+    {
+        power    = player:getMerit(xi.merit.MANTRA),
+        duration = 180,
+        origin   = player,
+    }
+
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, pTable)
 
     return xi.effect.MAX_HP_BOOST
 end
 
 xi.job_utils.monk.usePerfectCounter = function(player, target, ability)
-    player:addStatusEffect(xi.effect.PERFECT_COUNTER, { power = 2, duration = 30, origin = player })
+    local pTable =
+    {
+        power    = 2,
+        duration = 30,
+        origin   = player,
+    }
+
+    player:addStatusEffect(xi.effect.PERFECT_COUNTER, pTable)
 
     return xi.effect.PERFECT_COUNTER
 end

@@ -32,7 +32,7 @@ end
 mobskillObject.onMobSkillFinalize = function(mob, skill)
     mob:delStatusEffect(xi.effect.ALL_MISS)
     mob:setMobSkillAttack(0)
-    skill:setFinalAnimationSub(2)
+    mob:setAnimationSub(2)
 end
 
 return mobskillObject

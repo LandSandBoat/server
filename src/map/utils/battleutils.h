@@ -144,7 +144,7 @@ bool IsParalyzed(CBattleEntity* PAttacker);
 bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
 bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 
-int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID);
+auto  GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID) -> int32;
 uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int16 offsetAccuracy);
 uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber);

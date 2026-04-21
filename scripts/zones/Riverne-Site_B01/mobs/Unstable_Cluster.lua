@@ -8,17 +8,23 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 100)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
-    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, { power = 50, origin = mob })
+    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, { power = 13, origin = mob })
     mob:getStatusEffect(xi.effect.BLAZE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'UNSTABLE_CLUSTER_EXPLOSION', function(mobEntity, skillId, wasExecuted)
-        if skillId == xi.mobSkill.SELF_DESTRUCT_CLUSTER_3 then
-            mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
-            mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
-        elseif skillId == xi.mobSkill.SELF_DESTRUCT_CLUSTER_2 then
-            mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
-            mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
-        end
-    end)
+end
+
+entity.onMobFight = function(mob, target)
+    if
+        mob:getAnimationSub() == 5 and
+        mob:getMod(xi.mod.TRIPLE_ATTACK) == 100
+    then
+        mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
+        mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
+    elseif
+        mob:getAnimationSub() == 6 and
+        mob:getMod(xi.mod.DOUBLE_ATTACK) == 100
+    then
+        mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
+    end
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
@@ -69,17 +75,31 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return tpList[math.random(1, #tpList)]
 end
 
-entity.onSpikesDamage = function(mob, target, damage)
-    local params = {}
-    params.bonusmab   = 0
-    params.includemab = false
+entity.onAdditionalEffect = function(mob, target, damage)
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.FIRE,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
 
-    local dmg = damage + mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    dmg       = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
-    dmg       = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
-    dmg       = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.FIRE, true))
-    dmg       = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.FIRE, true, false))
-    dmg       = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
+end
+
+entity.onSpikesDamage = function(mob, target, damage)
+    -- "damage" is the power of the status effect up in onMobSpawn.
+    local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    local dmg = damage + intDiff
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
+    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.FIRE, true))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.FIRE, true, false))
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
 
     if dmg < 0 then
         dmg = 0

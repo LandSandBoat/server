@@ -1,7 +1,7 @@
 -----------------------------------
 -- Shining Blade
 -- Family: Humanoid Sword Weaponskill
--- Description: Deals Light elemental damage. Damage varies with TP.
+-- Description: Deals Light elemental damage to enemy. Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,12 +14,14 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
-    params.element        = xi.element.LIGHT
-    params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.LIGHT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.baseDamage       = mob:getMainLvl() + 2
+    params.fTP              = { 1.0, 2.0, 2.5 }
+    -- params.str_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.mnd_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.element          = xi.element.LIGHT
+    params.attackType       = xi.attackType.MAGICAL
+    params.damageType       = xi.damageType.LIGHT
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

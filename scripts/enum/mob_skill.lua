@@ -622,6 +622,33 @@ xi.mobSkill =
     EMPTY_THRASH                  = 1275,
     PROMYVION_BRUME_2             = 1276,
 
+    INFERNO_BLAST_ATTACK          = 1278,
+    TEBBAD_WING_1                 = 1279,
+    SPIKE_FLAIL_3                 = 1280,
+    FIERY_BREATH_1                = 1281,
+    TOUCHDOWN_3                   = 1282,
+    INFERNO_BLAST                 = 1283,
+    TEBBAD_WING_2                 = 1284,
+    ABSOLUTE_TERROR_3             = 1285,
+    HORRID_ROAR_3                 = 1286,
+
+    SLEET_BLAST_ATTACK            = 1288,
+    GREGALE_WING_1                = 1289,
+    SPIKE_FLAIL_4                 = 1290,
+    GLACIAL_BREATH_1              = 1291,
+    TOUCHDOWN_4                   = 1292,
+    SLEET_BLAST                   = 1293,
+    GREGALE_WING_2                = 1294,
+    ABSOLUTE_TERROR_4             = 1295,
+    HORRID_ROAR_4                 = 1296,
+
+    CYCLONE_WING_1                = 1309,
+    SPIKE_FLAIL_6                 = 1310,
+    SABLE_BREATH_1                = 1311,
+
+    ABSOLUTE_TERROR_6             = 1315,
+    HORRID_ROAR_6                 = 1316,
+
     GERJIS_GRIP                   = 1322,
 
     -- EES_?                         = 1327,
@@ -767,9 +794,10 @@ xi.mobSkill =
     IMPULSION                     = 1547,
     ABSOLUTE_TERROR_BAHAMUT       = 1548,
     HORRIBLE_ROAR_BAHAMUT         = 1549,
-
+    CALL_OF_THE_WYRMKING          = 1550,
     MEGAFLARE                     = 1551,
     GIGAFLARE                     = 1552,
+    TERAFLARE                     = 1553,
 
     CAMISADO_2                    = 1554,
 
@@ -979,6 +1007,10 @@ xi.mobSkill =
     ARROGANCE_INCARNATE_1         = 3178,
 
     LIGHT_BLADE_2                 = 3214,
+
+    SHIBARAKU_TRUST               = 3257, -- Gessho Trust
+    SHIKO_NO_MITATE_TRUST         = 3258, -- Gessho Trust
+    RINPYOTOSHA_TRUST             = 3260, -- Gessho Trust
 
     -- ELEMENTAL_SFORZO              = 3265,
 

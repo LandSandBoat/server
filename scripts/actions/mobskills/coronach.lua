@@ -13,15 +13,18 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.PIERCING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.baseDamage      = mob:getWeaponDmg()
+    params.numHits         = 1
+    params.fTP             = { 3.0, 3.0, 3.0 }
+    -- params.dex_wSC         = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.agi_wSC         = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
     params.skipParry      = true
     params.skipGuard      = true
     params.skipBlock      = true
+    params.accuracyModifier = { 100, 100, 100 }
+    params.attackType      = xi.attackType.RANGED
+    params.damageType      = xi.damageType.PIERCING
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 

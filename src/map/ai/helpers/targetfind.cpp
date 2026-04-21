@@ -530,6 +530,15 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         }
     }
 
+    // check vertical range
+    // Retail caps at 8.5y for mob self-centered AoE, 8y for everything else.
+    const float yDelta = fabsf(PTarget->loc.p.y - m_PRadiusAround->y);
+    const float yCap   = m_selfCenteredAoE && m_PBattleEntity->objtype == TYPE_MOB ? 8.5f : 8.0f;
+    if (yDelta >= yCap)
+    {
+        return false;
+    }
+
     // this is first target, always add him first
     // Exception: for self-centered AoEs, all targets must pass radius validation
     // Conals always add the main target

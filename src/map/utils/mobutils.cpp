@@ -712,36 +712,43 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
     if (recover == true)
     {
-        // HP Calculations
-        mJobGrade = grade::GetJobGrade(mJob, 0);
-        sJobGrade = grade::GetJobGrade(sJob, 0);
-
-        // 1. Retrieve HP scaling values from job grades
-        // Index 0: Base HP
-        // Index 1: Job scaling
-        // Index 2: Modifier scale
-        uint8 BaseHP     = grade::GetMobHPScale(mJobGrade, 0);
-        uint8 JobScale   = grade::GetMobHPScale(mJobGrade, 1);
-        uint8 ScaleXHP   = grade::GetMobHPScale(mJobGrade, 2);
-        uint8 sjJobScale = grade::GetMobHPScale(sJobGrade, 1);
-        uint8 sjScaleXHP = grade::GetMobHPScale(sJobGrade, 2);
-
-        // 2. Calculate base HP from main job
-        uint32 baseMobHP = CalculateBaseMobHP(mLvl, BaseHP, JobScale, ScaleXHP);
-
-        // 3. Calculate subjob HP contribution scaled by level range
-        uint32 sjHP = CalculateSubjobHP(mLvl, sjJobScale, sjScaleXHP);
-
-        // 4. Final mob HP before traits/family modifiers
-        uint32 mobHP = baseMobHP + sjHP;
-
-        // 5. Apply pet multiplier (pets are 30% of base mob HP)
-        if (PMob->PMaster != nullptr)
+        if (PMob->HPmodifier == 0)
         {
-            mobHP = (uint32)(mobHP * 0.30f);
-        }
+            // HP Calculations
+            mJobGrade = grade::GetJobGrade(mJob, 0);
+            sJobGrade = grade::GetJobGrade(sJob, 0);
 
-        PMob->health.maxhp = (int16)(mobHP);
+            // 1. Retrieve HP scaling values from job grades
+            // Index 0: Base HP
+            // Index 1: Job scaling
+            // Index 2: Modifier scale
+            uint8 BaseHP     = grade::GetMobHPScale(mJobGrade, 0);
+            uint8 JobScale   = grade::GetMobHPScale(mJobGrade, 1);
+            uint8 ScaleXHP   = grade::GetMobHPScale(mJobGrade, 2);
+            uint8 sjJobScale = grade::GetMobHPScale(sJobGrade, 1);
+            uint8 sjScaleXHP = grade::GetMobHPScale(sJobGrade, 2);
+
+            // 2. Calculate base HP from main job
+            uint32 baseMobHP = CalculateBaseMobHP(mLvl, BaseHP, JobScale, ScaleXHP);
+
+            // 3. Calculate subjob HP contribution scaled by level range
+            uint32 sjHP = CalculateSubjobHP(mLvl, sjJobScale, sjScaleXHP);
+
+            // 4. Final mob HP before traits/family modifiers
+            uint32 mobHP = baseMobHP + sjHP;
+
+            // 5. Apply pet multiplier (pets are 30% of base mob HP)
+            if (PMob->PMaster != nullptr)
+            {
+                mobHP = (uint32)(mobHP * 0.30f);
+            }
+
+            PMob->health.maxhp = (int16)(mobHP);
+        }
+        else
+        {
+            PMob->health.maxhp = PMob->HPmodifier;
+        }
 
         // Apply NM/Mob HP multiplier from settings
         if (isNM)
@@ -1279,6 +1286,11 @@ uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob)
     uint8 mainEvasionSkillRank = battleutils::GetSkillRank(SKILL_EVASION, mjob);
     uint8 subEvasionSkillRank  = battleutils::GetSkillRank(SKILL_EVASION, sjob);
 
+    if (sjob == JOB_NON)
+    {
+        subEvasionSkillRank = mainEvasionSkillRank;
+    }
+
     switch (std::min(mainEvasionSkillRank, subEvasionSkillRank))
     {
         case 1:
@@ -1732,6 +1744,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
         PMob->m_DropID      = rset->get<uint32>("dropid");
 
+        PMob->HPmodifier = rset->get<uint32>("HP");
         PMob->MPmodifier = rset->get<uint32>("MP");
 
         PMob->m_minLevel = rset->get<uint8>("minLevel");
@@ -1904,6 +1917,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
         PMob->m_DropID      = rset->get<uint32>("dropid");
 
+        PMob->HPmodifier = rset->get<uint32>("HP");
         PMob->MPmodifier = rset->get<uint32>("MP");
 
         uint16 sqlModelID[10];

@@ -2847,18 +2847,22 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             result.resolution = ActionResolution::Hit;
         }
 
-        if (result.resolution != ActionResolution::Miss && result.resolution != ActionResolution::Parry)
+        if (first)
         {
-            if (first && PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
+            bool isNegated = result.resolution == ActionResolution::Miss || result.resolution == ActionResolution::Parry;
+            if (!isNegated)
             {
-                const auto effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(), PSkill->getTertiarySkillchain());
-                if (effect != ActionProcSkillChain::None)
+                if (PTargetFound->health.hp > 0 && PSkill->getPrimarySkillchain() != 0)
                 {
-                    result.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTargetFound, result.param, nullptr));
+                    const auto effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(), PSkill->getTertiarySkillchain());
+                    if (effect != ActionProcSkillChain::None)
+                    {
+                        result.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTargetFound, result.param, nullptr));
+                    }
                 }
-
-                first = false;
             }
+
+            first = false;
         }
 
         if (PSkill->getValidTargets() & TARGET_ENEMY)

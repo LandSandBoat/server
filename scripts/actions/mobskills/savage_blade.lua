@@ -1,7 +1,7 @@
 -----------------------------------
 -- Savage Blade
 -- Family: Humanoid Sword Weaponskill
--- Description: Delivers a twofold attack. Damage varies with TP.
+-- Description: Delivers an aerial attack comprised of two hits. Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -19,7 +19,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 2
-    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.fTP            = { 1.0, 1.75, 3.5 }
+    -- params.str_wSC        = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.mnd_wSC        = 0.5 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2

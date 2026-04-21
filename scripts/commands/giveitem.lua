@@ -31,7 +31,40 @@ commandObj.onTrigger = function(player, target, itemId, amount, aug0, aug0val, a
         targ:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemId)
         player:printToPlayer(string.format('Player \'%s\' does not have free space for that item!', target))
     else
-        targ:addItem(itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val)
+        local itemData =
+        {
+            id       = itemId,
+            quantity = amount,
+        }
+
+        local hasExdata = false
+        local augments  = {}
+        local augmentPairs =
+        {
+            { aug0, aug0val },
+            { aug1, aug1val },
+            { aug2, aug2val },
+            { aug3, aug3val },
+        }
+
+        for _, augmentData in ipairs(augmentPairs) do
+            local augmentId = augmentData[1]
+            if augmentId ~= nil and augmentId > 0 then
+                hasExdata = true
+                table.insert(augments, { id = augmentId, value = augmentData[2] or 0 })
+            end
+        end
+
+        if hasExdata then
+            itemData.exdata =
+            {
+                augmentKind    = xi.augment.kind.HAS_AUGMENTS,
+                augmentSubKind = xi.augment.subKind.STANDARD,
+                augments       = augments,
+            }
+        end
+
+        targ:addItem(itemData)
         if amount and amount > 1 then
             targ:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemId, amount)
         else

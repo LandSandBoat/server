@@ -2,7 +2,6 @@
 -- Chant du Cygne
 -- Family: Humanoid Sword Weaponskill
 -- Description: Delivers a threefold attack. Chance of critical hit varies with TP.
--- Stat Modifier: 80% DEX
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -17,6 +16,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 3
     params.fTP            = { 1.6328125, 1.6328125, 1.6328125 }
+    -- params.dex_wSC        = 0.8 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3

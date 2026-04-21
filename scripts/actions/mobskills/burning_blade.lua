@@ -14,12 +14,17 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
-    params.element        = xi.element.FIRE
-    params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.FIRE
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.baseDamage       = mob:getMainLvl() + 2
+    params.fTP              = { 1.0, 2.0, 2.5 }
+    -- params.str_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.int_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.element          = xi.element.FIRE
+    params.attackType       = xi.attackType.MAGICAL
+    params.damageType       = xi.damageType.FIRE
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier  = 1
+    params.dStatAttackerMod = xi.mod.INT
+    params.dStatDefenderMod = xi.mod.INT
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
