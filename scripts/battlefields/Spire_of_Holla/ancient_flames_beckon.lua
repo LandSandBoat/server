@@ -19,7 +19,6 @@ local content = Battlefield:new({
     entryNpc      = '_0h0',
     exitNpcs      = { '_0h1', '_0h2', '_0h3' },
 
-    grantXP = 1500,
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
