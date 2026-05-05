@@ -1012,6 +1012,12 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
                 continue;
             }
+            case G_CONDITION::JA_ON_COOLDOWN:
+            {
+                auto* PAbility = ability::GetAbility(static_cast<ABILITY>(predicate.condition_arg));
+                predicateResults.push_back(PAbility->getRecastTime() > 0s);
+                continue;
+            }
             case G_CONDITION::LVL_LT:
             {
                 predicateResults.push_back(triggerTarget->GetMLevel() < predicate.condition_arg);
@@ -1204,6 +1210,22 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::CASTING_MA:
             {
                 predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMagicState>());
+                continue;
+            }
+            case G_CONDITION::CASTING_DEBUFF:
+            {
+                // Check if the target is currently casting a debuff magic spell
+                bool isDebuff = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto spell = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell();
+
+                    if (spell->isDebuff())
+                    {
+                        isDebuff = true;
+                    }
+                }
+                predicateResults.push_back(isDebuff);
                 continue;
             }
             case G_CONDITION::CASTING_ELE_MA_AOE:

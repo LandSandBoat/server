@@ -124,6 +124,8 @@ xi.mobSkill =
 
     DETONATOR_1                   =  215,
 
+    URIEL_BLADE_1                 =  238,
+
     NETHERSPIKES_1                =  241,
     CARNAL_NIGHTMARE_1            =  242,
     AEGIS_SCHISM_1                =  243,
