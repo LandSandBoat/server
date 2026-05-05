@@ -109,6 +109,29 @@ xi.settings.main =
     -- recomended amount 0 - 100, some lights will cap at 255 while others are less, these are capped automatically
     ABYSSEA_BONUSLIGHT_AMOUNT = 0,
 
+    -- Abyssea cruor kill rewards enable toggle (true/1 = enabled or false/0 = disabled)
+    ABYSSEA_ENABLE_CRUOR_KILL_REWARDS = 1, -- Enable or disable cruor rewards in Abyssea zones
+    -- Base cruor implementation: reward = floor((base + chainBonus) * (silver effect * (ebon bonus)) * reaperBonus)
+    ABYSSEA_CRUOR_KILL_BASE_MIN         = 10,        -- Minimum of randomized base cruor reward
+    ABYSSEA_CRUOR_KILL_BASE_MAX         = 20,        -- Maximum of randomized base cruor reward
+    ABYSSEA_CRUOR_LEVEL_STEP            = 0,         -- Set > 0 only if your server wants explicit level-based scaling for cruor rewards
+    ABYSSEA_CRUOR_CHAIN_STEP            = 9,         -- This is the bonus earned each time a mob of a different family from the last is defeated
+    ABYSSEA_CRUOR_CHAIN_CAP             = 180,       -- This is the maximum chain bonus value
+    ABYSSEA_CRUOR_CHAIN_TIMEOUT_SEC     = 0,         -- 0 disables timeout; reverse-chain persists until same family/name kill or visitant loss (retail-like)
+    ABYSSEA_CRUOR_CHAIN_IDENTITY_MODE   = 'pool',    -- accepts pool|name for identifying valid targets to maintain the chain, default pool (retail-like)
+    ABYSSEA_CRUOR_REAPER_BONUS_STEP     = 0.1,       -- Multiplier at the end of the calculation; eg. 0.2 = 120% and 0.15 = 115%.  Default (0.1)
+    ABYSSEA_CRUOR_EPHEMERAL_MULTIPLIER  = 3.0,       -- Ephemeral mob cruor multiplier, multiplies the result of the randomized base before chain, lights, and atma bonuses
+
+    ABYSSEA_CRUOR_SILVER_CAP            = 200,       -- Maximum silver light; determines how rapidly you can reach the cap and effectiveness per light
+    ABYSSEA_CRUOR_EBON_CAP              = 200,       -- Maximum ebon light; determines how rapidly you can reach the cap and effectiveness per light
+    ABYSSEA_CRUOR_SILVER_MAX_BONUS      = 0.6,       -- Maximum bonus multiplier to base+chain cruor; 0.6 = 1.6 multiplier (160%)
+    ABYSSEA_CRUOR_EBON_SILVER_AMPLIFIER = 1.0,       -- Maximum bonus multiplier to silver light multiplier; 1.0 doubles silver effectiveness at cap (0.6 -> 1.2)
+    ABYSSEA_CRUOR_NM_BASE_T1            = 50,        -- Cruor base reward for T1 NM sizes (default 0-4, set by ABYSSEA_CRUOR_NM_SMALL_SIZE)
+    ABYSSEA_CRUOR_NM_BASE_T2            = 65,        -- Cruor base reward for T2 NM sizes (default 5-7, set by ABYSSEA_CRUOR_NM_MEDIUM_SIZE)
+    ABYSSEA_CRUOR_NM_BASE_T3            = 80,        -- Cruor base reward for T3 NM sizes (default 8+, will always be everything larger than ABYSSEA_CRUOR_NM_MEDIUM_SIZE)
+    ABYSSEA_CRUOR_NM_SMALL_SIZE         = 4,         -- Determines maximum small size threshold for NM rewards
+    ABYSSEA_CRUOR_NM_MEDIUM_SIZE        = 7,         -- Determines maximum medium size threshold for NM rewards
+
     -- CHARACTER CONFIG
     INITIAL_LEVEL_CAP              = 50, -- The initial level cap for new players.  There seems to be a hardcap of 255.
     MAX_LEVEL                      = 99, -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
