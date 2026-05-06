@@ -40,6 +40,7 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
+#include "blue_spell.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
@@ -2306,6 +2307,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     for (auto* PTarget : PAI->TargetFind->m_targets)
     {
+        // Reset the spell's message to prevent any state carryover between targets
         PSpell->setMessage(initialSpellMessage);
 
         action_target_t& actionTarget = action.addTarget(PTarget->id);
@@ -2361,7 +2363,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
             actionResult.param = damage;
 
-            // spell failed to apply
+            // Handle spell failed to apply
             if (!PSpell->tookEffect())
             {
                 actionResult.resolution = ActionResolution::Miss;
@@ -2405,6 +2407,32 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             msg != MsgBasic::ShadowAbsorb) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
             luautils::OnMagicHit(this, PTarget, PSpell);
+
+            // Process Blu Spell based Actions
+            if (PSpell->getSpellGroup() == SPELLGROUP_BLUE && PSpell->getMessage() != MsgBasic::MagicFail)
+            {
+                if (auto* PBlueSpell = dynamic_cast<CBlueSpell*>(PSpell))
+                {
+                    // Physical Blue Spells trigger HitDistortion - using the existence of a Primary Skillchain element as a physical indicator
+                    if (PBlueSpell->getPrimarySkillchain() != 0)
+                    {
+                        // This will set the Hit Distortion field
+                        actionResult.recordDamage(attack_outcome_t{
+                            .atkType    = ATTACK_TYPE::PHYSICAL,
+                            .damage     = damage,
+                            .target     = PTarget,
+                            .isCritical = false, // ToDo: Get Critical status from spell processing
+                        });
+                    }
+
+                    // Some Physical Blue Spells present with a knockback effect - using knockback on linked Mob Skill to determine which
+                    CMobSkill* mobSkillForBlueSpell = battleutils::GetMobSkill(PBlueSpell->getMonsterSkillId());
+                    if (mobSkillForBlueSpell)
+                    {
+                        actionResult.knockback = mobSkillForBlueSpell->getKnockback();
+                    }
+                }
+            }
         }
 
         // The entity under consideration for RoE objective credit
