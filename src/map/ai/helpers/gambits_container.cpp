@@ -30,11 +30,11 @@
 #include "ai/states/weaponskill_state.h"
 #include "enmity_container.h"
 #include "mobskill.h"
+#include "notoriety_container.h"
 #include "spell.h"
 #include "utils/battleutils.h"
 #include "utils/trustutils.h"
 #include "weapon_skill.h"
-#include "notoriety_container.h"
 
 #include "ai/controllers/player_controller.h"
 #include "ai/controllers/trust_controller.h"
@@ -1334,9 +1334,9 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             }
             case G_CONDITION::VAL_URIEL_CHECK:
             {
-                bool canUseUriel = false;
-                auto* PMaster    = dynamic_cast<CCharEntity*>(POwner->PMaster);
-                auto* PMob       = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
+                bool  canUseUriel = false;
+                auto* PMaster     = dynamic_cast<CCharEntity*>(POwner->PMaster);
+                auto* PMob        = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
 
                 if (PMob != nullptr && PMob->PEnmityContainer != nullptr)
                 {
