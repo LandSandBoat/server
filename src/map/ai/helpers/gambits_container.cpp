@@ -1360,7 +1360,7 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                                 continue;
                             }
 
-                            if (distance(PMaster->loc.p, PZoneMob->loc.p) > 10.0f)
+                            if (distance(POwner->loc.p, PZoneMob->loc.p) > 10.0f)
                             {
                                 continue;
                             }
