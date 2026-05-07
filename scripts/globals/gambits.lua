@@ -95,6 +95,7 @@ ai.condition =
     LUNGE_MB_AVAILABLE = 35,
     SUB_ANIMATION      = 36,
     JA_ON_COOLDOWN     = 37,
+    VAL_URIEL_CHECK    = 38,
 }
 ai.c = ai.condition
 

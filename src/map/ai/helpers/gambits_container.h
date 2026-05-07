@@ -100,6 +100,7 @@ enum class G_CONDITION : uint16
     LUNGE_MB_AVAILABLE = 35,
     SUB_ANIMATION      = 36,
     JA_ON_COOLDOWN     = 37,
+    VAL_URIEL_CHECK    = 38,
 };
 
 enum class G_REACTION : uint16

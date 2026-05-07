@@ -47,24 +47,24 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.HPP, 10)             -- HP+10%
     mob:addMod(xi.mod.MPP, 20)             -- MP+20%
 
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_HAS_TOP_ENMITY, 0                     }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.URIEL_BLADE_1    }, 30)
-    mob:addGambit(ai.t.SELF,   { ai.c.ALWAYS,             0                     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE                })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.MAJESTY     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.MAJESTY                })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.PROTECT     }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.PROTECT })
-    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,         xi.effect.FLASH       }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM          })
-    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,         xi.effect.FLASH       }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH         })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.SENTINEL    }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL               })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.REPRISAL    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REPRISAL      })
-    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,             50                    }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE    })
-    mob:addGambit(ai.t.SELF,   { ai.c.HPP_LT,             70                    }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE    })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.ENLIGHT     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENLIGHT       })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.PHALANX     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX       })
-    mob:addGambit(ai.t.PARTY,  { ai.c.STATUS,             xi.effect.SLEEP_I     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE          })
-    mob:addGambit(ai.t.PARTY,  { ai.c.STATUS,             xi.effect.SLEEP_II    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE          })
-    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.MANAFONT    }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                })
-    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.CHAINSPELL  }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                })
-    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.ASTRAL_FLOW }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                })
-    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_DEBUFF,     0                     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.FEALTY                 }) -- This needs more work to cover a multitude of triggers
+    mob:addGambit(ai.t.TARGET, { ai.c.VAL_URIEL_CHECK,    0                     }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.URIEL_BLADE_1     })
+    mob:addGambit(ai.t.SELF,   { ai.c.ALWAYS,             0                     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE                 })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.MAJESTY     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.MAJESTY                 })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.PROTECT     }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.PROTECT  })
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,         xi.effect.FLASH       }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM           })
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,         xi.effect.FLASH       }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH          })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.SENTINEL    }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL                })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.REPRISAL    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REPRISAL       })
+    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,             50                    }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE     })
+    mob:addGambit(ai.t.SELF,   { ai.c.HPP_LT,             70                    }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE     })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.ENLIGHT     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENLIGHT        })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.PHALANX     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX        })
+    mob:addGambit(ai.t.PARTY,  { ai.c.STATUS,             xi.effect.SLEEP_I     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE           })
+    mob:addGambit(ai.t.PARTY,  { ai.c.STATUS,             xi.effect.SLEEP_II    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE           })
+    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.MANAFONT    }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                 })
+    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.CHAINSPELL  }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                 })
+    mob:addGambit(ai.t.TARGET, { ai.c.STATUS,             xi.effect.ASTRAL_FLOW }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART                 })
+    mob:addGambit(ai.t.TARGET, { ai.c.CASTING_DEBUFF,     0                     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.FEALTY                  }) -- This needs more work to cover a multitude of triggers
 
     mob:addGambit(ai.t.SELF, {
         { ai.c.JA_ON_COOLDOWN, xi.ja.SENTINEL },
@@ -75,14 +75,15 @@ spellObject.onMobSpawn = function(mob)
         { ai.c.MPP_LT, 50   },
         { ai.c.TP_GTE, 1000 }, }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.CHIVALRY })
 
-    mob:setTrustTPSkillSettings(ai.tp.RANDOM, ai.s.RANDOM, 2000)
+    mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.RANDOM, 2000)
 
     mob:addListener('WEAPONSKILL_USE', 'VALAINERAL_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
         if skill:getID() == xi.mobSkill.URIEL_BLADE_1 then -- Uriel Blade
-        -- Let the Blade of the Conqueror once again bring glory to the Kingdom!
-            if math.random(1, 100) <= 33 then
+            -- Let the Blade of the Conqueror once again bring glory to the Kingdom!
+            if math.random(1, 100) <= 33 and target:getID() == skill:getPrimaryTargetID() then
                 xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
+            mobArg:setLocalVar('[Gambit]LastUrielTime', GetSystemTime())
         end
     end)
 end

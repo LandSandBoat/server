@@ -34,6 +34,7 @@
 #include "utils/battleutils.h"
 #include "utils/trustutils.h"
 #include "weapon_skill.h"
+#include "notoriety_container.h"
 
 #include "ai/controllers/player_controller.h"
 #include "ai/controllers/trust_controller.h"
@@ -814,8 +815,11 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
                 if (action.select == G_SELECT::SPECIFIC)
                 {
-                    controller->Ability(target->targid, PAbility->getID());
-                    executedAnyAction = true;
+                    if (target != nullptr)
+                    {
+                        controller->Ability(target->targid, PAbility->getID());
+                        executedAnyAction = true;
+                    }
                 }
 
                 if (action.select == G_SELECT::BEST_SAMBA)
@@ -1326,6 +1330,68 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::SUB_ANIMATION:
             {
                 predicateResults.push_back(triggerTarget->animationsub == predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::VAL_URIEL_CHECK:
+            {
+                bool canUseUriel = false;
+                auto* PMaster    = dynamic_cast<CCharEntity*>(POwner->PMaster);
+                auto* PMob       = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
+
+                if (PMob != nullptr && PMob->PEnmityContainer != nullptr)
+                {
+                    bool masterHasEnmity         = PMob->PEnmityContainer->HasID(PMaster->id);
+                    bool valHasEnmity            = PMob->PEnmityContainer->HasID(POwner->id);
+                    bool valHasTopEnmity         = (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false;
+                    bool masterHasOffTargetAggro = false;
+
+                    if (PMaster->PNotorietyContainer != nullptr && PMaster->PNotorietyContainer->hasEnmity())
+                    {
+                        for (auto it = PMaster->PNotorietyContainer->begin(); it != PMaster->PNotorietyContainer->end(); ++it)
+                        {
+                            if (masterHasOffTargetAggro)
+                            {
+                                break;
+                            }
+
+                            auto* PZoneMob = dynamic_cast<CMobEntity*>(*it);
+                            if (!PZoneMob || !PZoneMob->isAlive())
+                            {
+                                continue;
+                            }
+
+                            if (distance(PMaster->loc.p, PZoneMob->loc.p) > 10.0f)
+                            {
+                                continue;
+                            }
+
+                            const bool targetingMaster        = (PZoneMob->GetBattleTargetID() == PMaster->targid);
+                            const bool isMastersCurrentTarget = (PZoneMob->id == PMob->id);
+                            const bool hostile                = (PZoneMob->allegiance != PMaster->allegiance);
+
+                            if (targetingMaster && !isMastersCurrentTarget && hostile)
+                            {
+                                masterHasOffTargetAggro = true;
+                            }
+                        }
+                    }
+
+                    if ((masterHasEnmity && !valHasTopEnmity) || masterHasOffTargetAggro)
+                    {
+                        auto   timeNow          = std::chrono::system_clock::now();
+                        uint32 lastUrielTime    = POwner->GetLocalVar("[Gambit]LastUrielTime");
+                        auto   distanceToTarget = distance(POwner->loc.p, PMob->loc.p);
+
+                        auto lastTimePoint = std::chrono::time_point<std::chrono::system_clock>(std::chrono::seconds(lastUrielTime));
+                        auto timeDiff      = timeNow - lastTimePoint;
+                        bool longCooldown  = (timeDiff >= std::chrono::seconds(30)); // Standard Cooldown
+                        bool shortCooldown = (timeDiff >= std::chrono::seconds(5));  // New Target Cooldown
+
+                        canUseUriel = (distanceToTarget <= 10.0f) &&
+                                      ((valHasEnmity && longCooldown) || (!valHasEnmity && shortCooldown) || (masterHasOffTargetAggro && longCooldown));
+                    }
+                }
+                predicateResults.push_back(canUseUriel);
                 continue;
             }
             default:
