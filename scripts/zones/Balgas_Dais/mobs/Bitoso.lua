@@ -21,11 +21,11 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        xi.magic.spell.CURE_III,
-        xi.magic.spell.PARALYGA,
+        [1] = { spellId = xi.magic.spell.CURE_III },
+        [2] = { spellId = xi.magic.spell.PARALYGA },
     }
 
-    return spellList[math.random(1, #spellList)]
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, nil, nil)
 end
 
 return entity

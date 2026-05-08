@@ -1,11 +1,11 @@
 -----------------------------------
--- xi.effect.WINDSTORM
+-- xi.effect.HAILSTORM_II
 -----------------------------------
 ---@type TEffect
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.AGI, effect:getPower())
+    effect:addMod(xi.mod.INT, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)

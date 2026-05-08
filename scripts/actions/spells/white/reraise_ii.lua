@@ -9,9 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    --duration = 1800
-    target:delStatusEffect(xi.effect.RERAISE)
-    target:addStatusEffect(xi.effect.RERAISE, { power = 2, duration = 3600, origin = caster }) --reraise 2, 30min duration
+    target:addStatusEffect(xi.effect.RERAISE, { power = 2, duration = 3600, tier = 2, origin = caster })
 
     return xi.effect.RERAISE
 end

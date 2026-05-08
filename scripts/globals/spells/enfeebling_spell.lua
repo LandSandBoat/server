@@ -47,14 +47,14 @@ local pTable =
     [xi.magic.spell.FRAZZLE_III   ] = { xi.effect.MAGIC_EVASION_DOWN, 3, xi.mod.MND,    0,   0, 120, 0, true,  150 },
     [xi.magic.spell.FROST         ] = { xi.effect.FROST,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
     [xi.magic.spell.GRAVITY       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   26,   0, 120, 0, true,    0 },
-    [xi.magic.spell.GRAVITY_II    ] = { xi.effect.WEIGHT,             2, xi.mod.INT,   32,   0, 180, 0, true,    0 },
-    [xi.magic.spell.GRAVIGA       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   50,   0, 120, 0, true,    0 },
+    [xi.magic.spell.GRAVITY_II    ] = { xi.effect.WEIGHT,             3, xi.mod.INT,   32,   0, 180, 0, true,    0 },
+    [xi.magic.spell.GRAVIGA       ] = { xi.effect.WEIGHT,             2, xi.mod.INT,   50,   0, 120, 0, true,    0 },
     [xi.magic.spell.POISON        ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
     [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             2, xi.mod.INT,    0,   3, 120, 0, true,   30 },
     [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             3, xi.mod.INT,    0,   3, 150, 0, true,    0 },
     [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
-    [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 120, 0, true,    0 },
-    [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 150, 0, true,    0 },
+    [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             2, xi.mod.INT,    0,   3, 120, 0, true,    0 },
+    [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             3, xi.mod.INT,    0,   3, 150, 0, true,    0 },
     [xi.magic.spell.RASP          ] = { xi.effect.RASP,               1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
     [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
     [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,  60, 0, false,   0 },
@@ -83,7 +83,8 @@ local pTable =
     [xi.magic.spell.LUMINOHELIX_II] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
 
     -- White Magic
-    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              1, xi.mod.MND,   30,   0, 180, 0, true,    0 },
+    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              1, xi.mod.MND,   20,   0, 180, 0, false,  20 },
+    [xi.magic.spell.ADDLE_II      ] = { xi.effect.ADDLE,              2, xi.mod.MND,   50,   0, 180, 0, false,  20 },
     [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              1, xi.mod.MND,    0,   0,  12, 0, true,  512 },
     [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         1, xi.mod.MND,    1,   0, 300, 0, false,   0 },
     [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          1, xi.mod.MND,    0,   0, 120, 0, true,  -10 },
@@ -198,6 +199,11 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
     -- Calculate base potency for spells.
     switch (spellEffect) : caseof
     {
+        [xi.effect.ADDLE] = function()
+            statDiff = caster:getStat(statUsed) - target:getStat(statUsed)
+            potency  = potency + utils.clamp(math.floor(statDiff / 5), 0, 20)
+        end,
+
         [xi.effect.BLINDNESS] = function()
             statDiff = caster:getStat(statUsed) - target:getStat(xi.mod.MND)
 
@@ -465,7 +471,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
 
     -- Addle: Has sub-effect.
     elseif spellEffect == xi.effect.ADDLE then
-        subpotency = 20 + utils.clamp(math.floor((caster:getStat(statUsed) - target:getStat(statUsed)) / 5), 0, 20)
+        subpotency = 30
 
     -- Break: Player petrification sucks.
     elseif spellEffect == xi.effect.PETRIFICATION then

@@ -22,16 +22,16 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [1] = { xi.magic.spell.FOE_REQUIEM_V,     target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.REQUIEM, 0, 100 },
-        [2] = { xi.magic.spell.BATTLEFIELD_ELEGY, target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.ELEGY,   0, 100 },
-        [3] = { xi.magic.spell.QUICK_ETUDE,       mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ETUDE,   0, 100 },
-        [4] = { xi.magic.spell.DEXTROUS_ETUDE,    mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ETUDE,   0, 100 },
-        [5] = { xi.magic.spell.VALOR_MINUET_IV,   mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.MINUET,  0, 100 },
-        [6] = { xi.magic.spell.KNIGHTS_MINNE_IV,  mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.MINNE,   0, 100 },
-        [7] = { xi.magic.spell.VICTORY_MARCH,     mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.MARCH,   0, 100 },
+        [1] = { spellId = xi.magic.spell.FOE_REQUIEM_V     },
+        [2] = { spellId = xi.magic.spell.BATTLEFIELD_ELEGY },
+        [3] = { spellId = xi.magic.spell.QUICK_ETUDE       },
+        [4] = { spellId = xi.magic.spell.DEXTROUS_ETUDE    },
+        [5] = { spellId = xi.magic.spell.VALOR_MINUET_IV   },
+        [6] = { spellId = xi.magic.spell.KNIGHTS_MINNE_IV  },
+        [7] = { spellId = xi.magic.spell.VICTORY_MARCH     },
     }
 
-    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, nil, nil)
 end
 
 return entity

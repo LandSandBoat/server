@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.WINDSTORM
+-- xi.effect.WINDSTORM_II
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

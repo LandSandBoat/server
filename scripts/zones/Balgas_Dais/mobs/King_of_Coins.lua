@@ -46,45 +46,42 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [ 1] = { xi.magic.spell.FIRE_III,     target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 2] = { xi.magic.spell.BLIZZARD_III, target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 3] = { xi.magic.spell.AERO_III,     target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 4] = { xi.magic.spell.WATER_III,    target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 5] = { xi.magic.spell.THUNDER_III,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 6] = { xi.magic.spell.STONE_IV,     target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
-        [ 7] = { xi.magic.spell.BIO_III,      target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BIO,       6, 100 },
-        [ 8] = { xi.magic.spell.POISON_II,    target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.POISON,    0, 100 },
-        [ 9] = { xi.magic.spell.DIA_II,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DIA,       3, 100 },
-        [10] = { xi.magic.spell.DIAGA_II,     target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DIA,       3, 100 },
-        [11] = { xi.magic.spell.BIND,         target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BIND,      0, 100 },
-        [12] = { xi.magic.spell.GRAVITY,      target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.WEIGHT,    0, 100 },
-        [13] = { xi.magic.spell.SLEEP,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLEEP_I,   0,  50 },
-        [14] = { xi.magic.spell.SLEEP_II,     target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLEEP_II,  0,  50 },
-        [15] = { xi.magic.spell.SLOW,         target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLOW,      3, 100 },
-        [16] = { xi.magic.spell.PARALYZE,     target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.PARALYSIS, 0, 100 },
-        [17] = { xi.magic.spell.BLIND,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BLINDNESS, 0, 100 },
-        [18] = { xi.magic.spell.BLINK,        mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.BLINK,     0, 100 },
-        [19] = { xi.magic.spell.STONESKIN,    mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.STONESKIN, 0, 100 },
-        [20] = { xi.magic.spell.AQUAVEIL,     mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.AQUAVEIL,  0, 100 },
-        [21] = { xi.magic.spell.ENWATER,      mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ENWATER,   0, 100 },
-        [22] = { xi.magic.spell.PROTECT_IV,   mob,    true,  xi.action.type.ENHANCING_TARGET,     xi.effect.PROTECT,   0,  25 },
-        [23] = { xi.magic.spell.SHELL_IV,     mob,    true,  xi.action.type.ENHANCING_TARGET,     xi.effect.SHELL,     0,  25 },
-        [24] = { xi.magic.spell.HASTE,        mob,    true,  xi.action.type.ENHANCING_TARGET,     xi.effect.HASTE,     5, 100 },
-        [25] = { xi.magic.spell.REGEN,        mob,    true,  xi.action.type.ENHANCING_TARGET,     xi.effect.REGEN,     0, 100 },
-        [26] = { xi.magic.spell.CURE_IV,      mob,    true,  xi.action.type.HEALING_TARGET,       33,                  0, 100 },
+        [ 1] = { spellId = xi.magic.spell.FIRE_III                            },
+        [ 2] = { spellId = xi.magic.spell.BLIZZARD_III                        },
+        [ 3] = { spellId = xi.magic.spell.AERO_III                            },
+        [ 4] = { spellId = xi.magic.spell.WATER_III                           },
+        [ 5] = { spellId = xi.magic.spell.THUNDER_III                         },
+        [ 6] = { spellId = xi.magic.spell.STONE_IV                            },
+        [ 7] = { spellId = xi.magic.spell.BIO_III                             },
+        [ 8] = { spellId = xi.magic.spell.POISON_II                           },
+        [ 9] = { spellId = xi.magic.spell.DIA_II                              },
+        [10] = { spellId = xi.magic.spell.DIAGA_II                            },
+        [11] = { spellId = xi.magic.spell.BIND                                },
+        [12] = { spellId = xi.magic.spell.GRAVITY                             },
+        [13] = { spellId = xi.magic.spell.SLEEP                               },
+        [14] = { spellId = xi.magic.spell.SLEEP_II                            },
+        [15] = { spellId = xi.magic.spell.SLOW                                },
+        [16] = { spellId = xi.magic.spell.PARALYZE                            },
+        [17] = { spellId = xi.magic.spell.BLIND                               },
+        [18] = { spellId = xi.magic.spell.BLINK                               },
+        [19] = { spellId = xi.magic.spell.STONESKIN                           },
+        [20] = { spellId = xi.magic.spell.AQUAVEIL                            },
+        [21] = { spellId = xi.magic.spell.ENWATER                             },
+        [22] = { spellId = xi.magic.spell.PROTECT_IV                          },
+        [23] = { spellId = xi.magic.spell.SHELL_IV                            },
+        [24] = { spellId = xi.magic.spell.HASTE                               },
+        [25] = { spellId = xi.magic.spell.REGEN                               },
+        [26] = { spellId = xi.magic.spell.CURE_IV,      hpp = 33              },
+        [27] = { spellId = xi.magic.spell.DISPEL,       evaluateDispel = true },
     }
 
-    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
-        table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPEL, target, false, xi.action.type.NONE, nil, 100 })
-    end
-
-    local groupTable =
+    local allyList =
     {
         GetMobByID(mob:getID() + 1), -- Queen of Cups
         GetMobByID(mob:getID() + 2), -- Queen of Batons
     }
 
-    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, allyList, nil)
 end
 
 return entity
